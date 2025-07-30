@@ -3,7 +3,7 @@
   "content": "Delivery",
   "content_en_sha1_hash": "9631af52c66f1a5cd964380b009c74efdee01947",
   "created_at": "2025-05-19T21:30:49.687Z",
-  "updated_at": "2025-05-21T01:16:52.047Z",
+  "updated_at": "2025-05-24T02:30:37.678Z",
   "comment": {
     "text": "This translation key is used for displaying the title of a column in a table related to webhooks, specifically indicating \"Delivery\". It is likely used on a history table page where users view past webhook events.",
     "is_auto": true,
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '전송' (jeonsong) can mean 'transmission' or 'delivery', it doesn't perfectly capture the nuance of 'Delivery' in the context of webhooks. 'Delivery' implies the process of delivering data, which '전송' does, but might be too technical for some users. A more user-friendly translation might be '배송' (baesong) which directly implies the action of sending/delivering something.",
-          "suggestion": "Consider using '배송' (baesong) for a more user-friendly translation. Or if technical accuracy is paramount, keep '전송' but consider adding clarifying text elsewhere."
+          "description": "While \"전송\" (jeonsong) can mean 'delivery', in the context of webhooks, a more accurate and commonly used translation would be '전달' (jeondal) or '전송' (jeonsong) depending on the specific nuance desired.  '전달' implies conveying something, while '전송' refers to sending data.  '전송' is acceptable but '전달' might be more precise.",
+          "suggestion": "Consider '전달' (jeondal) or keeping '전송' (jeonsong) depending on context."
         }
       ],
       "approved_at": null
@@ -153,13 +153,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Отправка' is a valid translation, 'Доставка' might be a more accurate and common translation of 'Delivery' in the context of webhooks, which often refers to the delivery of data.",
-          "suggestion": "Доставка"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Đã gửi\" can mean 'sent', it doesn't fully capture the meaning of 'Delivery' in the context of webhooks. 'Delivery' refers to the successful transmission and receipt of data, not just the act of sending.",
-          "suggestion": "Consider \"Giao tiếp\" or \"Cung cấp\" depending on the specific nuances required.  For a more literal but potentially less clear option, \"Giao hàng\" could be considered, but it may mislead."
+          "description": "'Đã gửi' translates to 'Sent' or 'Dispatched,' which isn't a direct equivalent of 'Delivery'. 'Delivery' implies the process of delivering something, whereas 'Đã gửi' implies the action of sending something.  A more accurate translation might be 'Giao hàng' or 'Phân phối'.",
+          "suggestion": "Giao hàng"
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '传递' (chuan di) can mean 'delivery,' it's a broader term. In the context of webhooks, a more accurate and commonly used translation would be something that emphasizes the action of sending data.",
-          "suggestion": "考虑使用“交付” (jiaofu) or “推送” (tuisong), which better convey the meaning of 'delivery' in a webhook context."
+          "description": "While \"传递\" (chuan di) can mean delivery, it's a very general term. In the context of webhooks, a more accurate and commonly used translation would be \"交付\" (jiaofu) or \"推送\" (tuisong), which better convey the technical meaning of 'delivery' as in data delivery.",
+          "suggestion": "Consider using \"交付\" (jiaofu) or \"推送\" (tuisong) instead of \"传递\" (chuan di)."
         }
       ],
       "approved_at": null

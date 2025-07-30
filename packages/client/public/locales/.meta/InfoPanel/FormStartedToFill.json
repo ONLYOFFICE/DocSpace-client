@@ -3,7 +3,7 @@
   "content": "Started to fill.",
   "content_en_sha1_hash": "bab99848f56bf61cd12c948d2c1dfd7cd478d768",
   "created_at": "2025-05-19T21:30:54.865Z",
-  "updated_at": "2025-05-28T09:30:02.441Z",
+  "updated_at": "2025-06-30T12:20:31.357Z",
   "comment": {
     "text": "This translation key is used to display a status message indicating when a form starts being filled, likely on a button or submit action in an info panel. It is part of a larger context related to file custom filters and form states in a user interface. Translators should aim to convey the idea that the form has begun being populated with data.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 302,
-      "context": "return t(\"InfoPanel:FileCustomFilterEnabled\");\n case \"FileCustomFilterDisabled\":\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case \"FormStartedToFill\":\n return t(\"InfoPanel:FormStartedToFill\");\n \n case \"FormPartiallyFilled\":\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case \"FormCompletelyFilled\":",
+      "line_number": 315,
+      "context": "return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");\n \n case FeedActionKeys.FormPartiallyFilled:\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case FeedActionKeys.FormCompletelyFilled:",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تم البدء في تعبئة النموذج\" is a literal translation of 'Started to fill' but sounds unnatural in Saudi Arabic. A more natural phrasing would be 'بدأ الملء' or 'بدأ التعبئة'.",
-          "suggestion": "بدأ الملء"
+          "description": "The translation \"تم البدء في تعبئة النموذج\" is overly literal and formal for the context of 'Started to fill.' It translates to 'The beginning has been made in filling the form'. A more natural and concise translation would be better.",
+          "suggestion": "بدأ التعبئة"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doldurmağa başlanıldı' is grammatically correct but sounds overly formal and somewhat awkward in modern Azerbaijani. A more natural and common phrasing would be preferable.",
-          "suggestion": "Doldurmağa başlayıb."
+          "description": "The translation \"Doldurmağa başlanıldı.\" is not the most natural or accurate translation of \"Started to fill.\" While technically correct, it's a bit formal and uncommon in modern Azerbaijani. A more natural phrasing would be something like \"Formala doldurulmağa başlandı\" or \"Doldurmağa başlayıb.\" or simply \"Doldurmağa başladı\".",
+          "suggestion": "Formala doldurulmağa başlandı"
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Започна да се попълва.' while technically correct, is a bit wordy and doesn't convey the concise meaning of 'Started to fill.' A more natural translation might be 'Попълва се.'",
+          "suggestion": "Попълва се."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -66,8 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Begann sich zu füllen\" is a literal translation and doesn't convey the intended meaning of \"Started to fill.\" It sounds awkward and unnatural in this context.  It implies something is filling itself, not a form being filled by a user.",
-          "suggestion": "Füllung begonnen."
+          "description": "The German translation \"Begann sich zu füllen\" is a literal translation of \"Started to fill\" and doesn't convey the intended meaning of 'started filling out a form'. It sounds awkward and unnatural in German. The intended meaning likely refers to the user beginning to input data into a form.",
+          "suggestion": "Began filling out."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more natural and accurate translation would focus on the action of the user rather than the form itself.",
+          "suggestion": "Mit dem Ausfüllen begonnen."
         }
       ],
       "approved_at": null
@@ -78,13 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Έγινε έναρξη συμπλήρωσης.' is overly formal and verbose for a simple 'Started to fill.' It translates to 'A start of filling has been made.'",
+          "description": "The translation 'Έγινε έναρξη συμπλήρωσης.' is overly formal and literal. A more natural and concise translation would be better.",
           "suggestion": "Ξεκίνησε η συμπλήρωση."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The original English phrase 'Started to fill' implies an ongoing action. The current Greek translation conveys a more completed action, which might not be the intended meaning.",
-          "suggestion": "Ξεκινά η συμπλήρωση."
         }
       ],
       "approved_at": null
@@ -95,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While grammatically correct, 'Ha empezado a rellenar' is a bit literal and potentially unnatural for this context. 'Started to fill' implies initiation of a form, not necessarily the act of 'filling' it.",
-          "suggestion": "Comenzó a completar."
+          "description": "While 'Ha empezado a rellenar' is grammatically correct, it's a rather literal and somewhat awkward translation of 'Started to fill.' It implies a continuous action. A more natural translation would capture the sense of initiation.",
+          "suggestion": "Consider alternatives like 'Comenzó a completar' or 'Empezó a llenar' depending on the context."
         }
       ],
       "approved_at": null
@@ -113,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Remplissage commencé' is technically correct, but it sounds somewhat formal and less natural in many contexts. A more common and idiomatic translation would be 'Début de remplissage' or 'Remplissage débuté'.",
-          "suggestion": "Début de remplissage"
+          "description": "While \"Remplissage commencé\" is grammatically correct, it's a quite literal and slightly awkward translation of \"Started to fill.\" A more natural and idiomatic translation would be something like \"Début de remplissage\" or \"Remplissage en cours\".",
+          "suggestion": "Remplissage en cours"
         }
       ],
       "approved_at": null
@@ -128,13 +134,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Compilazione iniziata' is grammatically correct, it's a more formal and literal translation of 'Started to fill'. A more natural and user-friendly translation might be 'Iniziata a compilare' or 'Compilazione in corso'.",
-          "suggestion": "Iniziata a compilare"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -143,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation '記入を始めたフォーム' literally translates to 'Form that started to fill'. It doesn't accurately convey the meaning of 'Started to fill.' It implies a form started the filling action, rather than a person.",
-          "suggestion": "開始しました (Kaishi shimashita) - 'Started' or 記入を開始しました (Kyunyuu o kaishi shimashita) - 'Started filling'."
+          "description": "The Japanese translation \"記入を始めたフォーム。\" literally translates to \"Form that started to fill.\" It does not convey the meaning of \"Started to fill.\" which implies an action has begun.",
+          "suggestion": "記入を開始しました。(Kinyuu o kaishi shimashita.) - 'Started filling in.'"
         }
       ],
       "approved_at": null
@@ -152,13 +152,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '작성이 시작되었습니다' literally translates to 'Writing has started'. While close in meaning to 'Started to fill', it doesn't fully capture the nuance of the original English phrase, which implies an action in progress. A more suitable translation would better reflect the user filling out a form.",
-          "suggestion": "채우기 시작했습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -173,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Sāka aizpildīšanu\" sounds overly formal and less natural than other options for a UI element indicating a form has started being filled.  A more common and user-friendly translation would be 'Aizpildīšana iesākta' or 'Sācis/Sākusi aizpildīt'.",
-          "suggestion": "Aizpildīšana iesākta"
+          "description": "The Latvian translation 'Sāka aizpildīšanu.' is a literal translation of 'Started to fill' but sounds unnatural in Latvian. A more natural phrasing would be something like 'Aizpildīšana sākusies' or 'Sācis/Sākusi aizpildīt'.",
+          "suggestion": "Consider alternatives like 'Aizpildīšana sākusies' or 'Sācis/Sākusi aizpildīt' depending on the subject of the sentence."
         }
       ],
       "approved_at": null
@@ -185,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Begon met vullen\" (Started to fill) is literally 'Began with filling'. While understandable, it's not the most natural or idiomatic way to express 'Started to fill' in Dutch. It implies filling something, rather than the action of starting to fill out a form.",
-          "suggestion": "Gestart met invullen."
+          "description": "The translation \"Begon met vullen\" literally translates to \"Began with filling.\" While understandable, it's not the most natural or accurate translation of \"Started to fill.\" In this context, it implies actively filling something, whereas \"Started to fill\" suggests beginning the process of filling out a form.",
+          "suggestion": "A more appropriate translation would be \"Gestart met invullen\" which means 'Started to fill out'."
         }
       ],
       "approved_at": null
@@ -209,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Começou a encher\" literally translates to 'Started to fill' in the context of filling something up, which is not the intended meaning of 'Started to fill' in the UI element. It doesn't convey the action of beginning to complete a form.",
+          "description": "The translation \"Começou a encher\" literally translates to \"Started to fill\" but doesn't convey the intended meaning of 'Started to fill out a form'.  It implies filling something with liquid. A more appropriate translation would indicate the action of starting to complete a form.",
           "suggestion": "Começou a preencher."
         }
       ],
@@ -221,13 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Completarea s-a început.\" is too literal and doesn't convey the intended meaning of 'Started to fill.' It translates to 'The completion has begun.' A more natural and accurate translation would reflect the action of beginning to fill out a form.",
-          "suggestion": "Începeți completarea."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a period at the end, which may not be necessary depending on the context of the InfoPanel. Consider removing it if it's meant to be a brief status update.",
-          "suggestion": "Începeți completarea"
+          "description": "The translation 'Completarea s-a început. ' is a literal translation and sounds unnatural in Romanian. A more natural phrasing would be something like 'Începută completarea.' or 'S-a început completarea.'",
+          "suggestion": "Începută completarea."
         }
       ],
       "approved_at": null
@@ -244,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පිරීම ආරම්භ කළා' while technically conveying 'started to fill', might not be the most natural or idiomatic way to express it in Sinhala, especially within the context of a UI element like an info panel. It's a bit literal and doesn't quite capture the nuance of 'started to fill'.",
-          "suggestion": "Consider alternatives like 'පුරන්න පටන්ගත්ත' (puranna patchangatta) which is more commonly used and sounds more natural for 'started to fill' in a UI context. Or 'ගබඩුව පිරවන්නකොට' (gabaduwi pirawannakota) if the context relates to filling in a form."
+          "description": "The translation 'පිරීම ආරම්භ කළා.' while understandable, isn't the most natural or precise translation of 'Started to fill.'  'පිරීම' (perima) refers to the act of filling, but 'ආරම්භ කළා' implies the *action* of starting. A more accurate translation would convey the initiation of the filling process.",
+          "suggestion": "පිරවන්නම් ආරම්භ කළා."
         }
       ],
       "approved_at": null
@@ -256,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vyplňovanie bolo začaté' is overly formal and literal. It doesn't capture the simplicity of the English 'Started to fill.' A more natural Slovak equivalent would be 'Začaté vyplňovanie' or 'Začal/a som vyplňovať'.",
-          "suggestion": "Začaté vyplňovanie"
+          "description": "The translation 'Vyplňovanie bolo začaté' is too literal and formal. It doesn't convey the casual nature of 'Started to fill.' A more natural Slovak translation would be 'Začalo sa vyplňovať' or 'Spustilo sa vyplňovanie'.",
+          "suggestion": "Začalo sa vyplňovať"
         }
       ],
       "approved_at": null
@@ -265,7 +254,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Začel z izpolnjevanjem\" is grammatically correct, it's a bit verbose and formal for a simple status like \"Started to fill.\" A more natural and concise translation might be preferable.",
+          "suggestion": "Napolnil."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -283,7 +278,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Form doldurulmaya başlandı' is a literal translation of 'Started to fill' but sounds slightly awkward and formal in Turkish. A more natural and idiomatic translation would be 'Form doldurulmaya başlanıldı' or 'Form doldurulmaya başlandı'. While technically correct, it lacks the fluency of a native speaker.",
+          "suggestion": "Form doldurulmaya başlanıldı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -298,8 +299,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Bắt đầu điền\" is a literal translation, it's not the most natural phrasing in Vietnamese for conveying \"Started to fill.\" It sounds somewhat robotic.",
-          "suggestion": "Bắt đầu nhập liệu"
+          "description": "While \"Bắt đầu điền\" is understandable, a more natural and idiomatic translation of 'Started to fill' would be 'Đã bắt đầu điền' or 'Bắt đầu nhập'. 'Bắt đầu điền' sounds slightly awkward in this context.",
+          "suggestion": "Đã bắt đầu điền"
         }
       ],
       "approved_at": null

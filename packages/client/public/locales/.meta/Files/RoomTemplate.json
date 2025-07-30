@@ -3,7 +3,7 @@
   "content": "Room template",
   "content_en_sha1_hash": "fdbb1ce823b57a9b8c778f4202dca453bf47d748",
   "created_at": "2025-05-19T21:30:56.152Z",
-  "updated_at": "2025-05-28T09:30:02.420Z",
+  "updated_at": "2025-05-26T07:57:32.411Z",
   "comment": {
     "text": "Room template is a key used to translate the text \"Room template\" in the UI, which appears on a bar component (/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js, line 144), likely as part of a file management system.",
     "is_auto": true,
@@ -105,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ແມ່ແບບຫ້ອງ' is a literal translation of 'room template,' it might not be the most natural or idiomatic phrasing in Lao. 'ແມ່ແບບຫ້ອງ' translates directly as 'mother pattern room', which isn't quite right. A more suitable translation might be something that conveys the idea of a room design or a pre-made room layout.",
-          "suggestion": "Consider alternatives like 'ແບບແຜນຫ້ອງ' (bàep phɛɛn hɔ̂ng) which means 'room plan/layout' or 'ຮູບແບບຫ້ອງ' (rʉ̀up bàep hɔ̂ng) which means 'room format/design'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Șablon sală\" is understandable, a more accurate and natural Romanian translation for \"Room template\" would be \"Șablon de cameră\" or \"Model de cameră\". \"Șablon sală\" sounds slightly awkward as 'șablon' typically refers to a pattern or mold.",
+          "suggestion": "Șablon de cameră"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කොටස සැකිල්ල' while technically conveying 'template', the word 'කොටස' (kotasa) more accurately translates to 'frame' or 'border' and doesn't entirely capture the concept of a 'room template'. A more appropriate translation would reflect the structure or design aspect.",
-          "suggestion": "කාන් phòng න්މූනා (kaan phòng moonaa) - which means 'room plan/design' or 'පොඩියුම් කොටස (podium kotasa) - which means 'room structure template'"
+          "description": "The Sinhala translation \"කොටස සැකිල්ල\" (kotasa sekilla) while understandable, isn't the most natural or precise translation for \"Room template.\" 'Kotasa' often implies a more formal or structured template, while 'sekilla' is a common term for template. A more accurate and natural translation would use terms that convey the idea of a pre-designed room layout.",
+          "suggestion": "Consider alternatives like \"මාර්ගගත සැලසුම්\" (maaragatasa selanum) - which means pre-designed plan/layout, or \"කාර්යසැල මාධූරිය\" (kaaryasala maadhuriya) - which means room design template. The best choice will depend on the specific context."
         }
       ],
       "approved_at": null
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Шаблон собе\" is incomplete. It translates to \"Room Template\" but is missing the word for 'template'. It should be 'Шаблон просторије' or 'Шаблон собе'.",
+          "description": "The Serbian (Cyrillic) translation \"Шаблон собе\" is incomplete. It translates to \"Room template\" but only includes 'room'. The full phrase 'template' is missing.",
           "suggestion": "Шаблон просторије"
         }
       ],

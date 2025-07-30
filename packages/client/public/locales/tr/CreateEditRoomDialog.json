@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "aktivasyon gerekli",
   "AddStaticText": "Statik metin ekleme",
   "AddWatermarkElements": "Filigran öğeleri ekleyin",
   "AddWatermarksToDocuments": "Belgelere filigran ekleme",
@@ -33,7 +32,6 @@
   "StorageDescription": "Oda başına belirlenen depolama kotası. Bu değeri değiştirebilir veya depolama sınırını kapatabilirsiniz.",
   "TagsPlaceholder": "Etiket ekle",
   "ThirdPartyStorageComboBoxPlaceholder": "Depolama seç",
-  "ThirdPartyStorageDescription": "Bu oda için veri depolama olarak üçüncü taraf hizmetleri kullanın. Bu odanın verilerini depolamak için bağlı depolama alanında yeni bir klasör oluşturulacak.",
   "ThirdPartyStorageNoStorageAlert": "Öncesinde, \"Entegrasyon\" bölümünden ilgili hizmeti bağlamanız gerekir. Aksi durumda bağlantı mümkün olmayacaktır.",
   "ThirdPartyStoragePermanentSettingDescription": "Dosyalar, \"{{thirdpartyFolderName}}\" klasöründe bir üçüncü taraf olan {{thirdpartyTitle}} deposunda depolanır.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Bir üçüncü taraf depolama birimine bağlanmak için ilgili hizmeti {{productName}} ayarlarının Entegrasyon bölümünde eklemeniz gerekir. Entegrasyonu etkinleştirmek için {{productName}} sahibi veya yöneticisi ile iletişime geçin.",

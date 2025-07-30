@@ -3,7 +3,7 @@
   "content": "Select users",
   "content_en_sha1_hash": "8f2012e6097eda31bbf0f7e51ae403b08862e983",
   "created_at": "2025-05-19T21:30:52.552Z",
-  "updated_at": "2025-05-28T09:30:02.501Z",
+  "updated_at": "2025-06-30T12:20:31.403Z",
   "comment": {
     "text": "\"Select users\" is used to describe a step or action in data import processes within Google Workspace and OnlyOffice Workspaces. It appears on a settings page as part of a stepper component, guiding users through selecting specific files or users for import.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 61,
+      "line_number": 60,
       "context": "acceptedExtensions={[\".zip\"]}\n />\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 65,
+      "line_number": 64,
       "context": "acceptedExtensions={[\".gz\", \".tar\", \".tar.gz\"]}\n />\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,",
       "module": "/packages/client"
     },
@@ -89,8 +89,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Sélectionnez utilisateur' is grammatically incorrect and doesn't accurately reflect the meaning of 'Select users'. It uses the singular form 'utilisateur' instead of the plural 'utilisateurs'.",
+          "type": "grammar",
+          "description": "The French translation 'Sélectionnez utilisateur' uses the singular 'utilisateur' while the English 'Select users' implies a plural form. It should agree in number.",
           "suggestion": "Sélectionnez les utilisateurs"
         }
       ],
@@ -111,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ユーザーの選択\" is a literal translation of 'Select users', it sounds slightly unnatural in Japanese. A more natural phrasing would be \"ユーザーを選択する\" or \"ユーザーを選択してください\" depending on the context (imperative vs. general action).",
-          "suggestion": "ユーザーを選択する"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' is a less common and potentially incorrect spelling of 'පරිශ්‍රමකරුවන්' or 'භාවිතකරුවන්' which would be more appropriate for 'users' in this context.",
-          "suggestion": "පරිශ්‍රමකරුවන් or භාවිතකරුවන්"
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) appears to be a typo or an uncommon/archaic word for 'users'. The standard and more commonly understood term is 'භාවිතරයන්' (bhavitharakayan).",
+          "suggestion": "පරිශ්‍රීලකයින් -> භාවිතරයන්"
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Изабери кориснике' is grammatically correct, 'Select users' typically implies a selection from a list or group. 'Изабери кориснике' translates more directly to 'Choose users'. A more accurate translation reflecting the original meaning might be 'Одаберите кориснике' or 'Изаберите кориснике' depending on the preferred register.",
-          "suggestion": "Одаберите кориснике"
+          "description": "While 'Изабери кориснике' is grammatically correct, a more natural and commonly used translation for 'Select users' in Serbian (Cyrillic) would be 'Избери кориснике'. 'Изабери' implies a more formal or deliberate selection, while 'Избери' is more general and frequently used in UI contexts.",
+          "suggestion": "Избери кориснике"
         }
       ],
       "approved_at": null
@@ -222,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kullanıcıları seç' is a literal translation but sounds slightly awkward in Turkish. A more natural phrasing would be 'Kullanıcı seçin'.",
+          "description": "The translation 'Kullanıcıları seç' is too literal. A more natural and user-friendly translation would be 'Kullanıcı seçin'.",
           "suggestion": "Kullanıcı seçin"
         }
       ],

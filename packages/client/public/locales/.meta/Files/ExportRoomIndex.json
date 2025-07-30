@@ -3,7 +3,7 @@
   "content": "Export room index",
   "content_en_sha1_hash": "bf3c9b5fcad1b57dae60769b93292c53f2c2a644",
   "created_at": "2025-05-19T21:30:55.657Z",
-  "updated_at": "2025-06-03T20:59:42.295Z",
+  "updated_at": "2025-06-08T12:02:32.846Z",
   "comment": {
     "text": "This translation key is used to display a label for an option in a file export settings menu. The text will appear as \"Export room index\" and is intended to describe the purpose of exporting a specific room's data. It appears on a settings page or dialog related to file exports, and its content should be translated to support different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1960,
+      "line_number": 1963,
       "context": "...pinOptions,\n ...muteOptions,\n {\n id: \"option_export-room-index\",\n key: \"export-room-index\",\n label: t(\"Files:ExportRoomIndex\"),\n icon: ExportRoomIndexSvgUrl,\n onClick: () => this.onExportRoomIndex(t, item.id),\n disabled: !item.indexing || !item.security?.IndexExport,\n },\n {",
       "module": "/packages/client"
     }
@@ -39,13 +39,30 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Експортиране индекс на стая' is not the most natural or accurate translation of 'Export room index'. 'Експортиране' is correct, but 'индекс на стая' is a literal translation and doesn't quite convey the intended meaning. It implies 'index *of* a room', whereas 'Export room index' implies the index *for* the rooms.",
+          "suggestion": "Експортиране на индекс на стаи"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Index exportní místnosti' is not a natural or accurate translation of 'Export room index'. 'Exportní' implies something being exported *to* a location, while 'Export room index' refers to an index *of* rooms being exported. The phrase is also a bit clunky.",
+          "suggestion": "Záložní index místností (Backup index of rooms) or Export index místností (Export index of rooms) are more accurate, depending on the exact function."
+        },
+        {
+          "type": "formatting",
+          "description": "The word order could be improved for better readability in Czech. While not strictly incorrect, it's not ideal.",
+          "suggestion": "Index místností pro export (Index of rooms for export)"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Արտահանման սենյակի ինդեքս\" is a literal translation and doesn't convey the intended meaning of 'Export room index'.  'Export' typically implies creating a file or data set. A more accurate translation would focus on the action of exporting, rather than just stating 'Exported room index'.",
+          "suggestion": "Possible alternatives:  \"Սենյակների ցանկի արտահանում\" (Export of room list), \"Սենյակային ցուցանիշի արտահանում\" (Export of room index)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +116,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes an unnecessary space before 'エクスポートする'.",
+          "suggestion": "ルームインデックスをエクスポートする"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,7 +134,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ນໍາອອກຄໍາຊ້ອນຫ້ອງ\" translates to 'Export room index' but is a bit too literal. A more natural phrasing would convey the same meaning.",
+          "suggestion": "ນໍາອອກດຶກສຽງຫ້ອງ (nam ok dik siang hong)"
+        },
+        {
+          "type": "spelling",
+          "description": "While not strictly incorrect, 'ຄໍາຊ້ອນ' (kam son) is an older term. 'ດຶກສຽງ' (dik siang) is a more modern and common equivalent for 'index' in this context.",
+          "suggestion": "Use 'ດຶກສຽງ' instead of 'ຄໍາຊ້ອນ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +157,18 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The direct translation 'Exporteer kamer index' isn't ideal. 'Kamer' refers to a room.  'Index' can be confusing if the meaning is a list or directory. A better translation would convey the purpose of the export.",
+          "suggestion": "Exporteer kamers overzicht"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation follows English word order. While understandable, it's not the most natural Dutch sentence structure.",
+          "suggestion": "Exporteer een kamers overzicht"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +180,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Índice de salas de exportação\" literally translates to \"Export room index.\" While not entirely wrong, it's not the most natural or idiomatic Portuguese. It implies the index *is* being exported, rather than being *for* exporting rooms. A more natural translation would describe the index's purpose.",
+          "suggestion": "Índice para exportação de salas"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +210,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අංශ කාමර දර්ශනය අපනයනය කරන්න' is a literal translation that doesn't quite capture the intended meaning of 'Export room index'. 'අංශ' (angsha) translates to 'department' and 'කාමර' (kamara) to 'room', making it sound like exporting a room's view from a department. A more natural translation might emphasize the 'index' aspect.",
+          "suggestion": "Consider alternatives such as 'කාමර ලේඛන අපනයනය කරන්න' (kamara lekena apanyaya kanna) - 'Export room records' or 'කාමර ක්‍රමිකානුzeichnis අපනයනය කරන්න' (kamara kramikānudēṣa apanyaya kanna) - 'Export room index'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +234,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Извоз индекса собе\" is not an accurate translation of \"Export room index\". \"Извоз\" (Izvoz) generally means \"export\" in the sense of goods or data being sent out. \"Собе\" is incorrect. It should reflect \"rooms\".",
+          "suggestion": "Извоз списка собе (Izvoz spiska sobe)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izvoz indeksa sobe' is technically correct but not the most natural phrasing in Serbian. A more common and natural wording would be 'Izvoz liste soba' or 'Izvoz indeksa prostorija'. 'Soba' refers to a room, but 'prostorija' can be used interchangeably and might sound more professional in this context.",
+          "suggestion": "Izvoz liste soba"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

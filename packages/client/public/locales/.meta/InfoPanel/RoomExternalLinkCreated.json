@@ -3,7 +3,7 @@
   "content": "Link created.",
   "content_en_sha1_hash": "2c21fcb17481109dbc9b9cdcccd0ada3c185acb9",
   "created_at": "2025-05-19T21:30:54.912Z",
-  "updated_at": "2025-05-28T09:30:02.433Z",
+  "updated_at": "2025-06-30T12:20:31.347Z",
   "comment": {
     "text": "This translation key is used to display a message when an external link is created within a room. It appears in the UI related to updating room information and notifies users that a new link has been added. The key helps provide clarity and consistency across different languages for this specific user experience.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 179,
-      "context": "case \"RoomCoverChanged\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomLogoDeleted\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomExternalLinkCreated\":\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case \"RoomExternalLinkRenamed\":\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"",
+      "line_number": 188,
+      "context": "case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"",
       "module": "/packages/client"
     }
   ],
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Vytvořený odkaz\" is a passive construction and doesn't quite convey the meaning of 'Link created.' It literally translates to 'Created link.' A more natural and accurate translation would be something like 'Odkaz vytvořen' or 'Odkaz byl vytvořen.'",
+          "description": "The translation 'Vytvořený odkaz.' is a literal translation and doesn't accurately convey the meaning of 'Link created.' It sounds awkward in Czech. A more natural translation would be something like 'Odkaz vytvořen' or 'Vytvořeno'.",
           "suggestion": "Odkaz vytvořen"
         }
       ],
@@ -162,13 +162,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ලිංකිය සාදා ගන්නා ලදි.' is not a direct or natural translation of 'Link created.' It's more like 'A link is being created.' The meaning is close, but the phrasing is awkward and doesn't convey the sense of completion.",
-          "suggestion": "ලිංක ගණන්."
+          "description": "The translation \"ලිංකිය සාදා ගන්නා ලදි.\" is not the most natural or accurate rendering of \"Link created.\" It sounds somewhat verbose and awkward in Sinhala. A more natural translation would be something like \"ලිංක ගොඩනගින ලදි\" or simply \"ලිංක සාදා ඇත\".",
+          "suggestion": "ලිංක සාදා ඇත"
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'සාදා ගන්නා ලදි' is unnecessarily verbose and grammatically less concise for this type of notification.",
-          "suggestion": "සාදා ඇත."
+          "description": "The use of \"ගන්නා ලදි\" is slightly unusual in this context. It implies an ongoing action which is not necessary to convey the meaning of \"Link created\".",
+          "suggestion": "Remove 'ගන්නා' and use a more definitive tense marker."
         }
       ],
       "approved_at": null
@@ -191,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Линк креиран.\" is a literal translation of \"Link created.\" while a more natural and common phrasing in Serbian would be \"Креиран линк\" or \"Линк је креиран.\"",
-          "suggestion": "Креиран линк"
+          "description": "The translation 'Линк креиран.' is a literal translation of \"Link created.\" while a more natural and idiomatic Serbian (Cyrillic) translation would be \"Креиран линк.\" or \"Успјешно креиран линк.\". 'Линк креиран' sounds awkward in Serbian.",
+          "suggestion": "Креиран линк."
         }
       ],
       "approved_at": null
@@ -202,8 +202,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation 'Link kreiran.' is grammatically incomplete. It lacks a subject and doesn't fully convey the action of creating the link. It's more of a statement than a complete sentence.",
+          "type": "incorrect_translation",
+          "description": "The translation 'Link kreiran.' is grammatically incomplete. It needs a verb conjugation to be a complete sentence. While 'kreiran' is the past participle, it requires a helping verb like 'je' to form the past tense.",
           "suggestion": "Link je kreiran."
         }
       ],

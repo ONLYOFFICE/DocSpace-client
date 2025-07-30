@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 
 type CreateFileErrorProps = {
   error: Error;
@@ -62,4 +63,4 @@ const CreateFileError = ({
   return null;
 };
 
-export default CreateFileError;
+export default dynamic(() => Promise.resolve(CreateFileError), { ssr: false });

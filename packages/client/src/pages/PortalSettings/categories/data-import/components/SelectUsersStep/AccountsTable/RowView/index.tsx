@@ -209,6 +209,7 @@ const RowView = (props: RowViewProps) => {
           }
         />
       )}
+      <div />
     </StyledRowContainer>
   );
 };

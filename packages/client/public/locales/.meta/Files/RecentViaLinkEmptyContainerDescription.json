@@ -3,7 +3,7 @@
   "content": "Here you will find a list of the recently opened files shared with you via an external link.",
   "content_en_sha1_hash": "aa72cbced2dac026503fb91dde5060cca5b6b447",
   "created_at": "2025-05-19T21:30:56.026Z",
-  "updated_at": "2025-05-21T11:28:42.211Z",
+  "updated_at": "2025-06-02T10:20:51.017Z",
   "comment": {
     "text": "This translation key is used for a description that appears when users view an empty folder or container, indicating there are recently shared files available to access.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 105,
-      "context": "const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashEmptyDescription\");\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (\n <>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>",
+      "line_number": 107,
+      "context": "const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");\n \n const roomsDescription = isPublicRoom ? (\n <>\n <div>{t(\"Common:RoomEmptyAtTheMoment\")}</div>\n <div>{t(\"Common:FilesWillAppearHere\")}</div>",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'via an external link' is translated as 'xarici keçid vasitəsilə'. While technically correct, a more natural and idiomatic translation might be 'xarici bağlantı vasitəsilə' or 'xarici link vasitəsilə'.",
-          "suggestion": "Consider using 'xarici bağlantı vasitəsilə' or 'xarici link vasitəsilə'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -60,8 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'die über einen externen Link für Sie freigegeben wurden' is slightly awkward and doesn't quite capture the meaning of 'shared with you via an external link'. It literally translates to 'that were released for you via an external link'.",
-          "suggestion": "A more natural translation would be something like 'die Ihnen über einen externen Link zur Verfügung gestellt wurden' (that were made available to you via an external link) or 'die über einen externen Link mit Ihnen geteilt wurden' (that were shared with you via an external link)."
+          "description": "The phrase 'shared with you' is not perfectly captured by 'für Sie freigegeben wurden'. A more natural and accurate translation would emphasize that the files were 'sent' or 'provided' via the link.",
+          "suggestion": "Hier finden Sie eine Liste der zuletzt geöffneten Dateien, die Ihnen über einen externen Link zugesandt wurden."
+        },
+        {
+          "type": "formatting",
+          "description": "The German translation uses a formal 'Sie'. While acceptable, consider whether the application's tone allows for a less formal 'du' for broader accessibility and user preference.",
+          "suggestion": "Consider using 'du' if a less formal tone is appropriate (e.g., 'Hier findest du eine Liste...')."
         }
       ],
       "approved_at": null
@@ -78,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aquí encontrará una lista de los archivos abiertos recientemente y compartidos con usted a través de un enlace externo' is a literal translation and slightly awkward. A more natural Spanish phrasing would emphasize the receiving of the files via link.",
-          "suggestion": "Aquí encontrará una lista de los archivos abiertos recientemente que le han sido compartidos a través de un enlace externo."
+          "description": "The English phrase \"Recently opened\" is better translated as 'recientemente abiertos' rather than 'abiertos recientemente'. The word order changes the emphasis and flow.",
+          "suggestion": "Aquí encontrará una lista de los archivos abiertos recientemente y compartidos con usted a través de un enlace externo. -> Aquí encontrará una lista de los archivos recientemente abiertos y compartidos con usted a través de un enlace externo."
         }
       ],
       "approved_at": null
@@ -96,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Here you will find' is more literally translated as 'Ici vous trouverez'. The translation 'Vous y trouverez' is more idiomatic and generally preferred for UI text, but subtly shifts the focus from the user's perspective ('Here, *you* will find') to a more general statement.",
-          "suggestion": "Vous trouverez ici une liste des fichiers récemment ouverts qui ont été partagés avec vous via le lien externe."
+          "description": "The English phrase \"Recently opened\" is better translated as \"ouvertes/ouvertes récemment\" to maintain the order of adverbs and adjectives.  The current translation, while understandable, doesn't flow as naturally in French.",
+          "suggestion": "Vous y trouverez une liste des fichiers ouvertes/ouvertes récemment qui ont été partagés avec vous via le lien externe."
         }
       ],
       "approved_at": null
@@ -105,19 +104,19 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"որոնք ձեզ հետ կիսվել են արտաքին հղման միջոցով\" is a bit awkward. A more natural translation of \"shared with you via an external link\" would be something like \"որոնք ձեզ փոխանցվել են արտաքին հղմամբ\" or \"որոնք ձեզ ուղարկվել են արտաքին հղմամբ\".",
-          "suggestion": "Այստեղ դուք կգտնեք վերջերս բացված ֆայլերի ցանկը, որոնք ձեզ փոխանցվել են արտաքին հղմամբ:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'recently opened' is better translated as 'recientemente condivisi' to accurately reflect the context of files shared via a link.",
+          "suggestion": "Qui troverai un elenco dei file recentemente condivisi con te tramite un link esterno."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -132,13 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '여기에서는 외부 링크를 통해 공유된 최근에 열었던 파일 목록을 찾을 수 있습니다.' is a bit literal and clunky. A more natural Korean phrasing would convey the same meaning more smoothly.",
-          "suggestion": "여기서는 외부 링크를 통해 공유된 최근 파일 목록을 볼 수 있습니다."
+          "description": "The translation '여기에서는 외부 링크를 통해 공유된 최근에 열었던 파일 목록을 찾을 수 있습니다' is a bit wordy and could be more concise. While technically correct, it doesn't flow as naturally as it could in Korean. '열었던' (yeoldeon) implies 'previously opened' and might be unnecessarily specific.",
+          "suggestion": "여기에서는 외부 링크를 통해 공유된 최근 파일 목록을 찾을 수 있습니다."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase '최근에 열었던' (recent opened) is less common and more verbose than just '최근' (recent) in this context. It adds unnecessary complexity.",
-          "suggestion": "Using '최근' instead of '최근에 열었던' makes the sentence more concise and natural."
+          "description": "The original English phrase 'Recently opened' implies files opened recently, not necessarily opened *by* the user. The Korean translation could potentially imply the latter.",
+          "suggestion": "While not a major error, consider '최근에 공유된 파일 목록' (choegeun-e gongyu-doen pail mokljik) for clarity."
         }
       ],
       "approved_at": null
@@ -149,13 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ເຊື່ອມຕໍ່' (connection) could be more precisely translated as 'ລິ້ງ' (link) in this context. While 'ເຊື່ອມຕໍ່' is technically correct, 'ລິ້ງ' is more commonly used for external links.",
-          "suggestion": "ທີ່ນີ້ເຈົ້າຈະພົບເຫັນບັນຊີລາຍຊື່ຂອງໄຟລ໌ທີ່ເປີດບໍ່ດົນມານີ້ແບ່ງປັນກັບທ່ານໂດຍຜ່ານລິ້ງພາຍນອກ."
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, the phrase 'ກັບທ່ານ' (with you) feels slightly formal. In a user interface, a more conversational tone might be preferable.",
-          "suggestion": "ທີ່ນີ້ເຈົ້າຈະພົບເຫັນບັນຊີລາຍຊື່ຂອງໄຟລ໌ທີ່ເປີດບໍ່ດົນມານີ້ແບ່ງປັນໃຫ້ເຈົ້າໂດຍຜ່ານລິ້ງພາຍນອກ."
+          "description": "The word 'ເຊື່ອມຕໍ່' (cheuam to) is spelled correctly, but it might be more naturally phrased depending on the context. It translates to 'connection' or 'link' which isn't necessarily wrong, but 'ການແບ່ງປັນຜ່ານລິ້ງ' (gan baeng pan phan ling) or 'ການເຊື່ອມຕໍ່ພາຍນອກ' can sound more natural in this context.",
+          "suggestion": "Consider rephrasing to 'ການແບ່ງປັນຜ່ານລິ້ງ' or 'ການເຊື່ອມຕໍ່ພາຍນອກ' for better flow and clarity."
         }
       ],
       "approved_at": null
@@ -175,7 +169,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'udostępnionych' is misspelled. It should be 'udostępnionych'.",
+          "suggestion": "udostępnionych"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -196,13 +196,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The use of 'prin un link extern' is grammatically awkward. It should be 'prin intermediul unui link extern' or 'prin link extern'.",
-          "suggestion": "Aici veți găsi lista fișierelor deschise recent, care au fost partajate cu dvs. prin intermediul unui link extern."
+          "description": "The phrase 'care au fost partajate cu dvs' is grammatically awkward. 'Cu dvs' is a formal contraction of 'cu dumneavoastră' and might be overly formal for this context. A more natural phrasing would be 'care au fost partajate cu tine' (informal) or 'care au fost partajate cu dumneavoastră' (formal).",
+          "suggestion": "Aici veți găsi lista fișierelor deschise recent, care au fost partajate cu tine."
         },
         {
-          "type": "spelling",
-          "description": "While 'fișierelor' is technically correct, it's slightly less natural in this context. 'fișiere' is arguably more suitable.",
-          "suggestion": "Aici veți găsi lista fișiere deschise recent, care au fost partajate cu dvs. prin intermediul unui link extern."
+          "type": "formatting",
+          "description": "The word 'prin' should be 'prin'.",
+          "suggestion": "Aici veți găsi lista fișierelor deschise recent, care au fost partajate cu tine prin un link extern."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation contains 'prin un link extern'. A more natural and accurate phrasing would be 'prin intermediul unui link extern' or simply 'prin link extern'.",
+          "suggestion": "Aici veți găsi lista fișierelor deschise recent, care au fost partajate cu tine prin link extern."
         }
       ],
       "approved_at": null
@@ -213,8 +218,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared with you' is not accurately conveyed by 'которым вам предоставили доступ'. A more accurate translation would be 'отправленные вам' or 'переданные вам'.",
-          "suggestion": "Здесь вы найдете список недавно открытых файлов, отправленные вам по внешней ссылке."
+          "description": "The phrase 'shared with you' is not accurately reflected in the translation. 'Предоставили доступ' (provided access) is technically correct, but lacks the nuance of 'shared'.",
+          "suggestion": "Здесь вы найдете список недавно открытых файлов, которыми вам поделились по внешней ссылке."
         }
       ],
       "approved_at": null
@@ -225,13 +230,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'සබැඳියකින්' is a slightly awkward phrasing. It's technically correct but could be improved.",
-          "suggestion": "බාහිර සබැඳිය හරහා ඔබ සමඟ බෙදාගත්"
+          "description": "The word 'බාහිර' (bahira) is slightly awkward. While technically correct meaning 'external', 'තෙවන පාර්ශවයෙන්' (thavana parshavayena) or similar might be more natural in this context.",
+          "suggestion": "බාහිර වෙනුවට 'තෙවන පාර්ශවයෙන්' (bahira venawa tha 'thavana parshavayena')"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'මෙහි දිස් වනු ඇත' is passive and slightly less natural in Sinhala compared to a more active voice.  While not incorrect, it can be improved.",
-          "suggestion": "මෙම ස්ථානයේ ඔබට දැකිය හැකිය"
+          "description": "The sentence structure 'මෙහි දිස් වනු ඇත' (mehi dis vanu atha) is grammatically correct but a bit formal and slightly passive.  A more active and conversational phrasing would be better.",
+          "suggestion": "මෙහි ඔබට දැක ගත හැකිය"
         }
       ],
       "approved_at": null
@@ -248,8 +253,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'shared with you' is not accurately translated. 'V skupni rabi z vami' is a literal translation and sounds awkward. A more natural phrasing would better convey the intended meaning.",
-          "suggestion": "Consider using 'poslane vam' or 'deljene z vami' instead of 'v skupni rabi z vami'."
+          "description": "The phrase \"Files:RecentViaLinkEmptyContainerDescription\" implies a container/empty state. The translation doesn't convey this. \"Tukaj boste našli seznam nedavno odprtih datotek, ki so bile v skupni rabi z vami prek zunanje povezave.\" simply means 'Here you will find a list of recently opened files shared with you via an external link.' which isn't specific to an empty container.",
+          "suggestion": "Consider a translation that acknowledges the empty state, such as: \"Tukaj je seznam nedavno odprtih datotek, ki so bile v skupni rabi z vami prek zunanje povezave. Trenutno je seznam prazen.\" (Here is a list of recently opened files shared with you via an external link. The list is currently empty.)"
+        },
+        {
+          "type": "spelling",
+          "description": "While not strictly incorrect, 'v skupni rabi' could be more naturally phrased for this context.",
+          "suggestion": "Consider 'deljene' instead of 'v skupni rabi' to create a more idiomatic phrasing. E.g., 'deljene z vami'."
         }
       ],
       "approved_at": null
@@ -260,13 +270,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'датотека' is technically correct but sounds a bit formal and less natural in this context. 'Фaјл' or 'датотеке' would be more commonly used and understood.",
-          "suggestion": "Фaјл or Датотеке"
+          "description": "The word 'датотека' (datoteka) is technically correct for 'file', but 'фајл' (fajl) is much more common and natural in modern Serbian, especially in a technical context like file sharing.",
+          "suggestion": "Овде ћете пронаћи листу недавно отворених фајлова дељених са вама путем спољног линка."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'спољни линк' is understandable, 'спољна веза' is a more common and natural way to say 'external link' in Serbian.",
-          "suggestion": "спољна веза"
+          "type": "formatting",
+          "description": "While not strictly incorrect, using 'фајлова' (plural of fajl) is more natural than 'датотека' followed by a plural.",
+          "suggestion": "Овде ћете пронаћи листу недавно отворених фајлова дељених са вама путем спољног линка."
         }
       ],
       "approved_at": null
@@ -274,13 +284,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'linka' is a colloquial shortening of 'veza' and might be perceived as informal. While understandable, 'linka' is not the standard term for 'link'.",
-          "suggestion": "Ovde ćete pronaći listu nedavno otvorenih datoteka deljenih sa vama putem spoljnog linka/veze."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -295,13 +299,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"до яких вам надано доступ\" is overly literal and formal. A more natural and concise translation would better convey the meaning of 'shared with you'.",
-          "suggestion": "Тут ви знайдете список нещодавно відкритих файлів, якими з вами поділилися через зовнішнє посилання."
+          "description": "The translation 'до яких вам надано доступ через зовнішнє посилання' is a bit verbose and doesn't quite capture the natural flow of the English phrasing 'shared with you via an external link.' It implies a direct granting of access which might not be the intended meaning.",
+          "suggestion": "Тут ви знайдете список нещодавно відкритих файлів, якими поділилися з вами через зовнішнє посилання."
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'з вами поділилися' is slightly less common than a more colloquial phrasing.",
-          "suggestion": "Тут ви знайдете список нещодавно відкритих файлів, якими ви отримали через зовнішнє посилання."
+          "description": "The use of 'посилання' for 'link' is technically correct, but 'посилання' often refers to a webpage link.  For a file link, a slightly more descriptive term might improve clarity.",
+          "suggestion": "Тут ви знайдете список нещодавно відкритих файлів, якими поділилися з вами через зовнішній посиланням на файл."
         }
       ],
       "approved_at": null
@@ -312,8 +316,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"shared with you via an external link\" is a bit literal and could be more natural in Vietnamese. 'Through an external link' can sound awkward.",
-          "suggestion": "Tại đây, bạn sẽ tìm thấy danh sách các tập tin đã được mở gần đây được chia sẻ với bạn qua liên kết ngoài."
+          "description": "The translation 'được chia sẻ với bạn thông qua liên kết bên ngoài' is a bit verbose and not the most natural way to express 'shared with you via an external link' in Vietnamese. A more concise and idiomatic translation would be better.",
+          "suggestion": "chia sẻ với bạn qua liên kết bên ngoài"
         }
       ],
       "approved_at": null
@@ -323,9 +327,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase '通过外部链接与您共享的' is a bit lengthy and could be simplified for better readability in Chinese. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "您可以通过外部链接接收的文件列表"
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Here you will find\" is translated too literally as \"您可以在此处查看\". A more natural translation would be \"您可以在这里查看\" or \"这里可以查看\".",
+          "suggestion": "您可以在这里查看"
         }
       ],
       "approved_at": null

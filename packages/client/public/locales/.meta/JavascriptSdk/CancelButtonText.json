@@ -3,7 +3,7 @@
   "content": "Cancel button text",
   "content_en_sha1_hash": "619520053dee4d51223c942aa13fe5635deaa4f0",
   "created_at": "2025-05-19T21:30:54.379Z",
-  "updated_at": "2025-05-21T09:30:12.136Z",
+  "updated_at": "2025-05-24T09:42:24.938Z",
   "comment": {
     "text": "This translation key is used for the text displayed on a cancel button. It's intended to be translated and will appear as the label of a \"Cancel\" button in certain UI elements.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'إلغاء نص الزر' literally translates to 'Cancel text of the button'. While understandable, it's not the most natural or idiomatic way to express 'Cancel button text' in Arabic. It would be better to convey the meaning as 'نص زر الإلغاء' or 'نص زر الرجاء'.",
-          "suggestion": "نص زر الإلغاء"
+          "description": "The translation \"إلغاء نص الزر\" is a literal translation of 'Cancel button text' but doesn't convey the intended meaning. It translates to 'Cancel text of the button', which is not standard usage. The intended meaning is the text that should appear on a cancel button.",
+          "suggestion": "زر إلغاء"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Düymə mətnini ləğv edin\" is a literal translation of \"Cancel button text\" and doesn't convey the meaning of the text that should appear on a cancel button. It translates to 'Cancel button text'. The intended meaning is 'Cancel'.",
-          "suggestion": "Ləğv et"
+          "description": "The translation 'Düymə mətnini ləğv edin' literally translates to 'Cancel button text'. This doesn't convey the meaning of a button label. The Azerbaijani should be a label, not an action.",
+          "suggestion": "A more appropriate translation would be something like 'Ləğv et' or 'İmtina et' which means 'Cancel' or 'Reject'."
         }
       ],
       "approved_at": null
@@ -57,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Text tlačítka Zrušit\" is too literal. A more natural Czech translation for \"Cancel button text\" would be something like \"Text pro tlačítko Zrušit\" or simply \"Text tlačítka\".  The current translation includes 'text' twice, which is redundant.",
+          "suggestion": "Text tlačítka"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -66,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Text der Abbrechen-Schaltfläche' is a literal translation but not the most natural phrasing in German. A more idiomatic translation would be 'Abbrechen-Text' or 'Text für die Abbrechen-Schaltfläche'.",
+          "description": "The translation \"Text der Abbrechen-Schaltfläche\" is a literal translation of 'Cancel button text' but sounds unnatural in German. A more idiomatic translation would be something like 'Abbrechen-Text' or 'Text für die Abbrechen-Schaltfläche'.",
           "suggestion": "Abbrechen-Text"
         }
       ],
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cancelar el texto de botones' is a literal translation and doesn't accurately convey the meaning of 'Cancel button text'. It translates to 'Cancel the text of buttons'.",
-          "suggestion": "A more accurate translation would be 'Texto del botón Cancelar' or 'Texto para el botón Cancelar'."
+          "description": "The translation \"Cancelar el texto de botones\" is a literal translation and doesn't accurately convey the meaning of \"Cancel button text.\" It translates to 'Cancel the text of buttons' which is not what is intended. The intent is to provide the text that *should* be displayed on the cancel button.",
+          "suggestion": "Cancelar"
         }
       ],
       "approved_at": null
@@ -96,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Peruuta painikkeen teksti' is too literal. A more natural Finnish translation for 'Cancel button text' would be 'Peruuta' or 'Kumoaa'. Including 'painikkeen teksti' is redundant as it's implied.",
+          "description": "The translation \"Peruuta painikkeen teksti\" is too literal. A more natural Finnish translation for \"Cancel button text\" would be something like \"Peruuta\" or \"Kumoaa\".",
           "suggestion": "Peruuta"
         }
       ],
@@ -108,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Supprimer le texte du bouton' literally translates to 'Delete button text'. It doesn't accurately convey the meaning of 'Cancel button text', which implies the text that should appear on a cancel button. A more appropriate translation would be 'Texte du bouton Annuler' or 'Texte pour le bouton Annuler'.",
+          "description": "The French translation \"Supprimer le texte du bouton\" does not accurately convey the meaning of \"Cancel button text.\" \"Supprimer\" means \"to delete.\" The intended meaning is likely \"Cancel\" or \"Annuler,\" referring to the label displayed on a button.",
           "suggestion": "Texte du bouton Annuler"
         }
       ],
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Չեղարկել կոճակի տեքստը' literally translates to 'Cancel button text'. While technically correct, it's overly literal and reads awkwardly in Armenian. A more natural phrasing would be preferred.",
-          "suggestion": "Consider 'Չեղարկման գամմաժողվրդավարությունը' or 'Չեղարկելու գամմաժողվրդավարությունը'. Alternatively, a simplified 'Չեղարկել' might suffice, depending on the UI context."
+          "description": "The translation \"Չեղարկել կոճակի տեքստը\" (Chegarkel kochaki tekstը) literally translates to \"Cancel button text.\" While technically correct, it's a very literal and awkward phrasing in Armenian. A more natural translation would focus on just \"Cancel\" or something more concise.",
+          "suggestion": "Consider a simpler translation like \"Չեղարկել\" (Chegarkel - Cancel) or \"Հրաժարվել\" (Hrajarvel - Decline/Reject)."
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Annulla il testo del pulsante' literally translates to 'Cancel the button text'. This is not the intended meaning. The phrase refers to the text *on* the cancel button, not the act of canceling the text itself.",
-          "suggestion": "The correct translation should be something like 'Testo del pulsante Annulla' or 'Testo del pulsante di annullamento'."
+          "description": "The Italian translation 'Annulla il testo del pulsante' is a literal translation of 'Cancel button text' and doesn't convey the intended meaning. It translates to 'Cancel the button text', which is not what is meant.",
+          "suggestion": "A more appropriate translation would be 'Annulla' or 'Chiudi', depending on the context. Alternatively, 'Testo del pulsante Annulla' could be used if the original English phrase is truly meant to be used as a label."
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"버튼 텍스트 취소\" literally translates to \"button text cancel\". It doesn't accurately convey the meaning of \"Cancel button text\". It lacks the possessive element and the intended meaning is the text *on* the cancel button.",
-          "suggestion": "취소 버튼 텍스트 (Chwiso beoteun tekseuteu)"
+          "description": "The translation '버튼 텍스트 취소' doesn't accurately convey the meaning of 'Cancel button text'. It literally translates to 'Button text cancel'. The intended meaning is the text that appears on the cancel button.",
+          "suggestion": "취소 버튼 텍스트"
         }
       ],
       "approved_at": null
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ຍົກເລີກຂໍ້ຄວາມປຸ່ມ' literally translates to 'Cancel text button'. It's not the most natural or idiomatic way to express 'Cancel button text' in Lao. A more accurate and natural translation would be something like 'ຕົວຢ່າງຄຳນະຳປຸ່ມຍົກເລີກ' or 'ຂໍ້ຄວາມປຸ່ມຍົກເລີກ'.",
-          "suggestion": "Consider 'ຕົວຢ່າງຄຳນະຳປຸ່ມຍົກເລີກ' or 'ຂໍ້ຄວາມປຸ່ມຍົກເລີກ'."
+          "description": "The translation 'ຍົກເລີກຂໍ້ຄວາມປຸ່ມ' literally translates to 'Cancel text button'. It's not the most natural phrasing in Lao. While understandable, it could be improved to better reflect the meaning of 'Cancel button text'.",
+          "suggestion": "Consider 'ປ້າຍຊື່ປຸ່ມຍົກເລີກ' (Paay See Pum Yok Leek) which translates to 'Cancel button label' or 'ປ້າຍຄວາມໝາຍປຸ່ມຍົກເລີກ' (Paay Khwam Maay Pum Yok Leek) - 'Cancel button meaning/caption'."
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Annuleren knop tekst' is a literal translation of 'Cancel button text' but doesn't flow naturally in Dutch. A more idiomatic translation would be more appropriate.",
-          "suggestion": "Annuleerknop tekst"
+          "description": "The translation 'Annuleren knop tekst' is too literal and doesn't flow naturally in Dutch. 'Annuleren' is correct, but the phrase 'knop tekst' is awkward. A more natural phrasing would omit 'tekst'.",
+          "suggestion": "Annuleren"
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Anulare text buton' is not the best representation of 'Cancel button text'. A more natural Romanian translation would be 'Text buton Anulare' or 'Text pentru butonul Anulare'. The current translation is a literal translation, but sounds awkward in Romanian.",
-          "suggestion": "Text buton Anulare"
+          "description": "The Romanian translation 'Anulare text buton' is a literal translation and doesn't read naturally. It translates to 'Cancel text button' instead of a more idiomatic phrase for a cancel button label.",
+          "suggestion": "A more natural translation would be 'Anulare' or 'Renunță'."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අවලංගු බොත්තමේ පෙළ' literally translates to 'Invalid button text'. The correct meaning of 'Cancel button text' should convey a button used to cancel an action.",
-          "suggestion": "නීතිරෝගීකරණ බොත්තමේ පෙළ"
+          "description": "The translation \"අවලංගු බොත්තමේ පෙළ\" (awalangu bottamae pelaa) is a literal translation of 'Cancel button text'. While understandable, a more natural and idiomatic Sinhala translation would be something along the lines of 'අවලංගු කිරීමේ බොත්තම් පෙළ' (awalangu kirimee bottam pelaa) which translates to 'Cancel action button text', or simply 'අවලංගු බොත්තම් පාඨය' (awalangu bottam pathaya) which means 'Cancel button text' in a slightly more formal way.",
+          "suggestion": "අවලංගු කිරීමේ බොත්තම් පෙළ (awalangu kirimee bottam pelaa) or අවලංගු බොත්තම් පාඨය (awalangu bottam pathaya)"
         }
       ],
       "approved_at": null
@@ -240,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zrušiť text tlačidla' is a literal translation of 'Cancel button text' and is not idiomatic Slovak. It translates to 'Cancel text button'.",
-          "suggestion": "A more natural Slovak translation would be 'Text tlačidla zrušiť' or 'Text pre tlačidlo Zrušiť'."
+          "description": "The translation \"Zrušiť text tlačidla\" is too literal. While technically correct, it sounds awkward in Slovak. A more natural translation would focus on the action of cancelling, not literally including 'text'.",
+          "suggestion": "Zrušiť"
         }
       ],
       "approved_at": null
@@ -249,13 +255,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Besedilo gumba za preklic' is a very literal and slightly awkward translation. A more natural Slovenian phrasing would be preferred.",
-          "suggestion": "Preklicni gumb"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Откажи текст дугмета\" is not a natural or accurate translation of \"Cancel button text.\" It literally translates to \"Reject text button,\" which doesn't convey the intended meaning.",
-          "suggestion": "A better translation would be something like \"Текст за дугме 'Откажи'\" or \"Текст на дугме 'Откажи'\" (Text for 'Cancel' button / Text on 'Cancel' button)."
+          "description": "The translation 'Откажи текст дугмета' is not idiomatic Serbian. It literally translates to \"Cancel text button\". A more natural translation would focus on the button's function, not its text content.",
+          "suggestion": "Откази"
         }
       ],
       "approved_at": null
@@ -276,7 +276,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otkaži tekst dugmeta\" literally translates to \"Cancel text of the button.\" It doesn't accurately convey the meaning of \"Cancel button text.\" The intended meaning is the text that appears on the cancel button.",
+          "description": "The translation 'Otkaži tekst dugmeta' literally translates to 'Cancel text of button'. It doesn't accurately convey the meaning of 'Cancel button text', which refers to the text displayed *on* the cancel button.",
           "suggestion": "Otkaži"
         }
       ],
@@ -300,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Xóa chữ cho nút\" is not an accurate translation of \"Cancel button text\". It literally translates to \"Delete text for button\" which doesn't convey the meaning of a cancel button.",
-          "suggestion": "Hủy bỏ"
+          "description": "The Vietnamese translation \"Xóa chữ cho nút\" doesn't accurately convey the meaning of \"Cancel button text\". \"Xóa\" means 'delete' or 'erase', which is not the intended meaning. It should reflect the text that appears on a cancel button.",
+          "suggestion": "Văn bản trên nút Hủy"
         }
       ],
       "approved_at": null
@@ -312,7 +312,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '取消按钮文字' is too literal. While technically correct, it sounds awkward in Chinese.  '取消按钮文字' directly translates to 'Cancel button text,' which is redundant.  A more natural translation would focus on the *function* of the button, not its label.",
+          "description": "The translation \"取消按钮文字\" is too literal. While technically correct, it sounds unnatural in Chinese UI contexts. A more natural and concise translation would be \"取消\" or \"取消按钮\".",
           "suggestion": "取消"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "User limit exceeded. To proceed to the next step, please adjust the number of users or increase the {{productName}} user limit.",
   "content_en_sha1_hash": "ebc09c7dfe59adb8f84882feba3c75640d5d047b",
   "created_at": "2025-05-19T21:30:53.123Z",
-  "updated_at": "2025-05-28T09:30:02.528Z",
+  "updated_at": "2025-06-30T12:20:31.425Z",
   "comment": {
     "text": "This translation key is used to display a message when the number of users exceeds the licensed limit. It prompts the user to adjust the number of users or increase the product user limit to proceed. This text appears on a Users Info Block component in the Portal Settings page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/UsersInfoBlock.tsx",
-      "line_number": 49,
-      "context": "selectedUsers={totalUsedUsers}\n totalLicenceLimit={quota.max}\n >\n {totalUsedUsers > quota.max ? (\n <Text className=\"license-limit-warning\">\n {t(\"Settings:UserLimitExceeded\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}",
+      "line_number": 50,
+      "context": "selectedUsers={totalUsedUsers!}\n totalLicenceLimit={quota!.max}\n >\n {totalUsedUsers! > quota!.max ? (\n <Text className=\"license-limit-warning\">\n {t(\"Settings:UserLimitExceeded\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}",
       "module": "/packages/client"
     }
   ],
@@ -48,13 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'překročení uživatelského limitu' is a literal translation of 'User limit exceeded'. While understandable, a more natural and idiomatic Czech would be something like 'Dosažen maximální počet uživatelů' or 'Překročeno maximální povolený počet uživatelů'.",
-          "suggestion": "Dosažen maximální počet uživatelů."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrasing 'upravte počet uživatelů nebo zvyšte limit uživatelů {{productName}}' could be slightly improved for better flow. The repetition of 'uživatelů' is a bit clunky.",
-          "suggestion": "upravte počet uživatelů nebo zvyšte limit pro {{productName}}."
+          "description": "The phrase \"Chcete-li přejít k dalšímu kroku\" is a bit literal and clunky. A more natural phrasing would be something like \"Pro pokračování...\" or \"Abyste mohli pokračovat...\"",
+          "suggestion": "Abyste mohli pokračovat, upravte počet uživatelů nebo zvyšte limit uživatelů {{productName}}."
         }
       ],
       "approved_at": null
@@ -68,7 +63,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'adjust the number of users' is overly literal. A more natural Greek phrasing would be to suggest reducing the number of users.",
+          "suggestion": "Μειώστε τον αριθμό των χρηστών"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'αυξήστε το όριο χρηστών του {{productName}}' can be more elegantly phrased. It's a bit wordy.",
+          "suggestion": "αυξήστε το όριο χρηστών για το {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -82,14 +88,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Ole hyvä ja\" is overly formal and a bit clunky in this context. It's not incorrect, but it doesn't flow naturally.",
-          "suggestion": "Simply use 'Muokkaa' or 'Lisää' directly, like: 'Muokkaa käyttäjämäärää tai lisää...' "
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The construction 'jatkaaksesi seuraavaan vaiheeseen' (to proceed to the next step) is a bit verbose. It could be simplified.",
-          "suggestion": "Consider 'jatkaaksesi' or 'seuraavaan vaiheeseen' to make it more concise."
+          "type": "formatting",
+          "description": "The phrase \"Ole hyvä ja\" is a bit formal for this context. While grammatically correct, it makes the tone overly polite.",
+          "suggestion": "Simply use \"Muokkaa\" or \"Vaihda\" instead of \"Ole hyvä ja muokkaa\"."
         }
       ],
       "approved_at": null
@@ -97,25 +98,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'augmenter la limite d'utilisateurs de {{productName}}' is slightly awkward. While technically correct, it could be improved for clarity and naturalness.",
-          "suggestion": "augmenter la limite d'utilisateurs de {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'օգտատերերի' (ogtatereri) is repeated unnecessarily. It should be used consistently either as 'օգտատիրոջ' or 'օգտատերերի' depending on the intended meaning (singular possessive vs. plural).",
-          "suggestion": "Consider revising to either: 'Օգտատիրոջ սահմանաչափը գերազանցվել է: Հաջորդ քայլին անցնելու համար խնդրում ենք կարգավորել օգտատերերի թիվը կամ ավելացնել {{productName}}-ի օգտատերերի սահմանաչափը.' or 'Օգտատիրոջ սահմանաչափը գերազանցվել է: Հաջորդ քայլին անցնելու համար խնդրում ենք կարգավորել օգտատիրոջ թիվը կամ ավելացնել {{productName}}-ի օգտատերերի սահմանաչափը:'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -124,13 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"modificare il numero di utenti\" is a bit awkward. A more natural translation would be 'ridurre il numero di utenti' (reduce the number of users) or 'diminuire il numero di utenti' (decrease the number of users). 'Modificare' is too general and doesn't convey the necessary action.",
+          "description": "The phrase \"modificare il numero di utenti\" is a bit clunky. A more natural phrasing would be \"ridurre il numero di utenti\" (reduce the number of users) or \"diminuire il numero di utenti\" (decrease the number of users). While 'modificare' isn't wrong, it's less precise in this context.",
           "suggestion": "Ridurre il numero di utenti o diminuire il numero di utenti"
-        },
-        {
-          "type": "formatting",
-          "description": "The Italian translation retains the English variable {{productName}}. It is better to localize this variable, assuming a localized name exists for the product.",
-          "suggestion": "Consider localizing {{productName}} to the Italian equivalent of the product name. For example, if the product is 'AwesomeApp', the variable could become '{{nomeProdotto}}' and the translation would be 'aumentare il limite di utenti di {{nomeProdotto}}'."
         }
       ],
       "approved_at": null
@@ -152,9 +136,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Lao translation includes a space before the variable {{productName}}. It should be directly attached to the preceding word.",
-          "suggestion": "ເກີນຂີດຈຳກັດຜູ້ໃຊ້ແລ້ວ. ເພື່ອສືບຕໍ່ຂັ້ນຕອນຕໍ່ໄປ, ກະລຸນາປັບຈຳນວນຜູ້ໃຊ້ ຫຼືເພີ່ມຂີດຈຳກັດຜູ້ໃຊ້{{productName}}."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ເພີ່ມຂີດຈຳກັດຜູ້ໃຊ້ {{productName}}\" is a literal translation and could be improved to convey the meaning more naturally in Lao. A better phrasing would be something along the lines of \"ເພີ່ມຈຳນວນຜູ້ໃຊ້ທີ່ສາມາດໃຊ້ໄດ້ຂອງ {{productName}}\" or \"ເພີ່ມກຳນົດຈຳນວນຜູ້ໃຊ້ຂອງ {{productName}}\".",
+          "suggestion": "ເພີ່ມຈຳນວນຜູ້ໃຊ້ທີ່ສາມາດໃຊ້ໄດ້ຂອງ {{productName}}"
         }
       ],
       "approved_at": null
@@ -174,13 +158,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Polish translation includes '{{productName}}' which mirrors the English content. While not inherently incorrect, it's crucial to verify that '{{productName}}' will be correctly replaced with the product name within the application and that the surrounding punctuation is handled appropriately in the context of the UI.",
-          "suggestion": "Confirm that '{{productName}}' is correctly handled by the translation system and displays the product name properly. Consider if a space is needed before/after the variable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,13 +167,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To proceed to the next step' is a bit literal and clunky in Portuguese. A more natural phrasing would be 'Para continuar' or 'Para avançar'.",
+          "description": "The phrase 'To proceed to the next step' is overly literal and sounds awkward in Portuguese. A more natural phrasing would be 'Para continuar' or 'Para avançar'.",
           "suggestion": "Para continuar para a próxima etapa, ajuste o número de usuários ou aumente o limite de usuários do {{productName}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'aumente o limite de usuários do {{productName}}' is a bit verbose. A more concise and natural translation would be 'aumente o limite do {{productName}}'.",
-          "suggestion": "Limite de usuários excedido. Para continuar para a próxima etapa, ajuste o número de usuários ou aumente o limite do {{productName}}."
+          "description": "While 'aumente o limite de usuários do {{productName}}' is technically correct, it's a bit clunky. A more fluid option would be 'aumente o limite de usuários do {{productName}}' (remove 'do').",
+          "suggestion": "Para continuar para a próxima etapa, ajuste o número de usuários ou aumente o limite de usuários do {{productName}}."
         }
       ],
       "approved_at": null
@@ -206,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and a bit clunky. 'Para prosseguir para a próxima etapa' is not the most natural phrasing in Portuguese. A more natural way to say it would be 'Para continuar' or 'Para avançar'.",
-          "suggestion": "Para continuar ou Para avançar."
+          "description": "The phrase 'To proceed to the next step' is too literal. A more natural phrasing in Portuguese would be 'Para continuar' or 'Para avançar'.",
+          "suggestion": "Para continuar para a próxima etapa, ajuste o número de usuários ou aumente o limite de usuários do {{productName}}."
         }
       ],
       "approved_at": null
@@ -218,13 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'definiți numărul de utilizatori' is not the best translation for 'adjust the number of users'.  'definiți' implies definition, not adjustment.",
-          "suggestion": "Modificați numărul de utilizatori"
+          "description": "The phrase \"definiți numărul de utilizatori\" is awkward and doesn't accurately convey 'adjust the number of users'. It suggests defining rather than modifying.",
+          "suggestion": "Reduceți numărul de utilizatori sau creșteți limita de utilizatori {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "The space before '{{productName}}' is unnecessary.",
-          "suggestion": "creșteți limita de utilizatori {{productName}}."
+          "description": "The word order in the suggested correction could be improved for better flow.",
+          "suggestion": "Creșteți limita de utilizatori {{productName}} sau reduceți numărul de utilizatori."
         }
       ],
       "approved_at": null
@@ -235,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Превышен лимит пользователя\" is a literal translation of \"User limit exceeded.\" While understandable, a more natural phrasing in Russian might be \"Достигнут лимит пользователей\" or \"Превышен максимальное количество пользователей.\"  The first option emphasizes the limit has been reached, the second is closer to the original but slightly less idiomatic.",
+          "description": "The phrase \"Превышен лимит пользователя\" could be improved for clarity. While technically correct, it sounds a bit clunky. A more natural phrasing might be \"Достигнут лимит пользователей\" or \"Превышен максимальное количество пользователей.\"",
           "suggestion": "Достигнут лимит пользователей"
         },
         {
-          "type": "formatting",
-          "description": "The placement of {{productName}} is identical to the English version. While acceptable, consider if the placement is optimal for readability in the Russian context. It is not inherently wrong, but could be improved depending on the overall UI.",
-          "suggestion": "No change needed, but review for UI context."
+          "type": "incorrect_translation",
+          "description": "The phrase 'увеличьте лимит пользователей {{productName}}' is slightly repetitive. 'Увеличьте лимит {{productName}}' would be more concise and readable.",
+          "suggestion": "увеличьте лимит {{productName}}"
         }
       ],
       "approved_at": null
@@ -252,18 +230,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilekayin) seems to be a misspelling of 'පරිශ්‍රමකරුවන්' (parishramakaruwan) which means 'users' or 'workers'.",
-          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'පරිශ්‍රමකරුවන්'."
+          "description": "The word 'පරිශ්‍රීලකයින්' is repeated and potentially awkward. While technically correct, it's a bit redundant.",
+          "suggestion": "Consider rewording to something like 'පරිශ්‍රීලකයා' or 'භාවිතකරුවා' depending on the precise meaning. A more fluent phrasing is generally preferred."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ඊළඟ පියවරට යාමට' (ilagna piyavarta yamaata) is slightly awkward. A more natural phrasing would be 'ඊළඟ පියවර යාමට'.",
-          "suggestion": "Change 'ඊළඟ පියවරට යාමට' to 'ඊළඟ පියවර යාමට'."
+          "description": "The phrasing 'ඊළඟ පියවරට යාමට' is grammatically correct, but could be more concise and natural.",
+          "suggestion": "Consider 'ඊළඟ පියවරට යන්න' or a more direct construction depending on the overall tone."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'කරුණාකර' (karunakarada) translates to 'please', it's a bit formal for a user-facing message.  It may be unnecessarily stiff.",
-          "suggestion": "Consider removing 'කරුණාකර' for a more conversational tone, resulting in 'පරිශ්‍රමකරුවන් ගණන වෙනස් කරන්න'."
+          "type": "formatting",
+          "description": "The repetition of 'පරිශ්‍රීලකයින්' makes the sentence feel longer than necessary.",
+          "suggestion": "Restructure the sentence to avoid repetition where possible. Perhaps rephrase to 'සීමාව ඉක්මවා ඇති නිසා, පරිශ්‍රීලකයා ගණන වෙනස් කරන්න හෝ...'."
         }
       ],
       "approved_at": null
@@ -273,9 +251,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Slovak translation includes unnecessary spaces around the `{{productName}}` variable. It should be directly adjacent to the preceding word.",
-          "suggestion": "Limit používateľa prekročený. Ak chcete prejsť k ďalšiemu kroku, upravte počet používateľov alebo zvýšte limit používateľov{{productName}}."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Limit používateľa prekročený' is a technically correct translation of 'User limit exceeded,' but it sounds somewhat formal and less natural in Slovak. A more natural phrasing would be 'Prekročený je limit používateľov' or 'Dosiahli ste maximálny počet používateľov'.",
+          "suggestion": "Prekročený je limit používateľov."
         }
       ],
       "approved_at": null
@@ -286,13 +264,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'adjust the number of users' is a bit awkward in Slovenian. A more natural phrasing would be 'zmanjšajte število uporabnikov' (reduce the number of users). While 'prilagodite število uporabnikov' isn't wrong, it's less idiomatic.",
-          "suggestion": "zmanjšajte število uporabnikov"
+          "description": "The phrase \"Če želite nadaljevati na naslednji korak\" is a bit clunky in Slovenian. A more natural phrasing would be \"Za nadaljevanje na naslednji korak\" or \"Če želite nadaljevati z naslednjim korakom\".",
+          "suggestion": "Za nadaljevanje na naslednji korak"
         },
         {
           "type": "formatting",
-          "description": "The variable {{productName}} is correctly formatted, but it's important to ensure the surrounding spaces remain consistent with other instances of variable usage within the application. Consistent spacing is crucial for proper rendering.",
-          "suggestion": "Ensure consistent spacing around the {{productName}} variable aligns with existing style guides."
+          "description": "The variable {{productName}} is present in the English and Slovenian versions. Consistency in formatting should be maintained.",
+          "suggestion": "No change needed, but consistency ensured."
         }
       ],
       "approved_at": null
@@ -303,8 +281,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The possessive suffix '-а' is attached to '{{productName}}' which may not be the correct grammatical construction depending on the product name. It needs to align with the specific rules of Serbian grammar for possessive suffixes based on the gender of '{{productName}}'.",
-          "suggestion": "Review the possessive suffix based on the gender of '{{productName}}'. It might require adjustment to be grammatically correct."
+          "description": "The possessive suffix '-а' in '{{productName}}-а' is grammatically correct but might sound slightly awkward depending on the product name. Consider a more fluent phrasing.",
+          "suggestion": "Consider alternatives like '{{productName}}' directly, or rephrasing to avoid the possessive suffix if possible (e.g., 'повеца́јте ограничење за кориснике {{productName}}')."
         }
       ],
       "approved_at": null
@@ -314,14 +292,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'Da biste prešli na sledeći korak' is a bit clunky. A more natural phrasing would be 'Da biste mogli da pređete na sledeći korak' or 'Kako biste mogli da pređete na sledeći korak'.",
-          "suggestion": "Da biste mogli da pređete na sledeći korak."
+          "type": "formatting",
+          "description": "The possessive suffix '-a' is unnecessary and awkward after '{{productName}}'.",
+          "suggestion": "Korisnički limit prekoračen. Da biste prešli na sledeći korak, prilagodite broj korisnika ili povećajte korisnički limit {{productName}}."
         },
         {
-          "type": "formatting",
-          "description": "The possessive form '{{productName}}-a' is not ideal. A more standard and readable Serbian construction would be 'za {{productName}}'.",
-          "suggestion": "za {{productName}}"
+          "type": "grammar",
+          "description": "While 'Da biste prešli na sledeći korak' is grammatically correct, it's a bit formal and could be slightly improved for better flow.",
+          "suggestion": "Korisnički limit prekoračen. Da biste nastavili, prilagodite broj korisnika ili povećajte korisnički limit {{productName}}."
         }
       ],
       "approved_at": null
@@ -338,8 +316,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'простору {{productName}}' (space {{productName}}) feels awkward and isn't a direct or natural translation of the English '{{productName}} user limit'. It implies a physical space or container. The intention is to describe a user limit associated with the product.",
-          "suggestion": "Перевищено ліміт користувачів. Щоб перейти до наступного кроку, налаштуйте кількість користувачів або збільште ліміт користувачів для {{productName}}."
+          "description": "The phrase 'простору {{productName}}' (space {{productName}}) is awkward and doesn't accurately convey the intended meaning. It implies a physical space rather than a product's user limit.",
+          "suggestion": "Збільште ліміт користувачів для {{productName}}."
         }
       ],
       "approved_at": null

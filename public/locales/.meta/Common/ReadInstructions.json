@@ -3,7 +3,7 @@
   "content": "Read instructions",
   "content_en_sha1_hash": "1b4f6403ea7b35ba0ee20f4a34678cc048a6f917",
   "created_at": "2025-05-19T21:30:47.714Z",
-  "updated_at": "2025-05-28T09:30:02.611Z",
+  "updated_at": "2025-05-26T07:57:32.669Z",
   "comment": {
     "text": "This translation key is used to display instructions to read plugin SDK documentation. It appears as a button label in a UI component, prompting users to access further information about a specific plugin or SDK element.",
     "is_auto": true,
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '설명 보기' (Seolmyeong bowi) translates more accurately to 'View Explanation' or 'See Explanation' rather than 'Read Instructions'. While '설명' (Seolmyeong) can relate to instructions, '보기' (bowi) implies viewing or seeing, not necessarily reading.",
-          "suggestion": "Consider alternatives like '지시사항 읽기' (Jishisahang itgi) for 'Read Instructions' or '안내 읽기' (Annae itgi) for a more general 'Read Guidance'."
+          "description": "While '설명 보기' (Seolmyeong Bogi) is understandable, a more accurate and natural translation of 'Read instructions' would be something like '지침 읽기' (Jichim Ikgi) or '안내 읽기' (Annae Ikgi). '설명 보기' translates more to 'View explanation'.",
+          "suggestion": "지침 읽기 (Jichim Ikgi) or 안내 읽기 (Annae Ikgi)"
         }
       ],
       "approved_at": null
@@ -153,19 +153,19 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Читать руководства' is technically correct (it means 'Read manuals/guides'), but 'instructions' is more general.  'Читать инструкции' would be a more direct and accurate translation of 'Read instructions'.",
-          "suggestion": "Читать инструкции"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'උපදෙස් කියවන්න' while technically correct, could be more natural. 'උපදෙස්' means 'instructions' but 'කියවන්න' (to read) is a direct translation that might sound a bit stiff. A more natural phrasing might be 'උපදෙස් බලන්න' (to view/look at instructions).",
+          "suggestion": "උපදෙස් බලන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

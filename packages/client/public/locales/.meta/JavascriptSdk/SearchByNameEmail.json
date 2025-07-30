@@ -3,7 +3,7 @@
   "content": "Search by name or email",
   "content_en_sha1_hash": "db074aa7303ef0f4fa2c3a9e28864c681d517a0d",
   "created_at": "2025-05-19T21:30:54.655Z",
-  "updated_at": "2025-07-01T15:57:36.206Z",
+  "updated_at": "2025-05-24T08:53:06.419Z",
   "comment": {
     "text": "This translation key is used for the placeholder text \"SearchByNameEmail\" which is displayed as a hint in a search input field within the developer tools section of the Portal Settings page. It appears on a TextInput component and guides users to enter either a name or email address to perform a search.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 410,
+      "line_number": 405,
       "context": "<UserInputContainer>\n <UserInput ref={searchRef}>\n <TextInput\n scale\n onChange={onChangeAuthor}\n placeholder={t(\"SearchByNameEmail\")}\n value={author}\n onFocus={openInviteInputPanel}\n isAutoFocussed\n onKeyDown={onKeyDown}\n tabIndex={5}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 410,
+      "line_number": 405,
       "context": "<UserInputContainer>\n <UserInput ref={searchRef}>\n <TextInput\n scale\n onChange={onChangeAuthor}\n placeholder={t(\"SearchByNameEmail\")}\n value={author}\n onFocus={openInviteInputPanel}\n isAutoFocussed\n onKeyDown={onKeyDown}\n tabIndex={5}",
       "module": "/packages/client"
     }
@@ -90,13 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Որոնել անունով կամ էլ․հասցեով' is not a natural or accurate translation of 'Search by name or email'. The phrasing 'էլ․հասցեով' is awkward and doesn't convey 'email address' properly.",
-          "suggestion": "Որոնել անունով կամ էլ․լրատվամասի հասցեով (Voronel anunov kam el․lratvamasi hasceov) - Search by name or email address"
+          "description": "The translation 'Որոնել անունով կամ էլ․հասցեով' is not a perfect translation of 'Search by name or email'. While it conveys the general meaning, 'էլ․' is unnecessary and slightly awkward. The word 'հասցեով' should be 'էլեկտրոնային հասցեով' or 'համալսարանական հասցեով' to be more accurate depending on the context. Assuming email address is intended, 'էլեկտրոնային հասցեով' is more precise.",
+          "suggestion": "Որոնել անունով կամ էլեկտրոնային հասցեով"
         },
         {
           "type": "formatting",
-          "description": "The use of 'էլ․' feels clunky. It's unclear if it's intended as an abbreviation or a stylistic choice.  It disrupts the flow of the sentence.",
-          "suggestion": "Remove 'էլ․' or replace it with a more natural phrasing.  'կամ' already indicates an alternative."
+          "description": "The ellipsis 'էլ․' is visually jarring and not standard in Armenian. It should be avoided.",
+          "suggestion": "Remove the '․' after 'էլ'"
         }
       ],
       "approved_at": null
@@ -113,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '名前または電子メールによる検索' is technically correct but could be more natural in Japanese. 'による検索' sounds a bit formal and literal. A more common phrasing would be '名前またはメールでの検索'.",
-          "suggestion": "名前またはメールでの検索"
+          "description": "The translation '名前または電子メールによる検索' is technically correct but could be more natural-sounding in Japanese. It literally translates to 'Search by name or email'.",
+          "suggestion": "名前またはメールアドレスで検索 (Namae mata wa meeru adoresu de kenkou)"
         }
       ],
       "approved_at": null
@@ -149,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Szukaj według nazwy użytkownika lub adresu e-mail' is not a direct and natural equivalent of 'Search by name or email'. 'Nazwy użytkownika' (user's name) is more specific than just 'name'.",
-          "suggestion": "Szukaj według imienia i nazwiska lub adresu e-mail"
+          "description": "The English phrase \"Search by name or email\" is more naturally translated as \"Wyszukaj po nazwie lub adresie e-mail\" in Polish. \"Szukaj według nazwy użytkownika lub adresu e-mail\" is technically correct but a bit verbose and less common.",
+          "suggestion": "Wyszukaj po nazwie lub adresie e-mail"
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Search by name or email\" implies an action being performed. The Sinhala translation 'නම හෝ විද්‍යුත් ලිපිනයෙන් සොයන්න' literally translates to 'Search from name or email'. While understandable, it's slightly awkward. A more natural translation would emphasize the action of searching *using* a name or email.",
-          "suggestion": "නම හෝ විද්‍යුත් ලිපිනයෙන් සෙවීම (Nama hora vidyut lipinayan sevimata)"
+          "description": "The translation 'නම හෝ විද්‍යුත් ලිපිනයෙන් සොයන්න' is a literal translation, but it doesn't quite capture the natural flow of the English phrase 'Search by name or email'. A more natural Sinhala phrasing would improve clarity.",
+          "suggestion": "Consider 'නම ataupun විද්‍යුත් ලිපිනය භාවිතා කොට සොයන්න' or 'නම හෝ විද්‍යුත් ලිපිනය ඇසුරින් සොයන්න'."
         }
       ],
       "approved_at": null
@@ -209,13 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Претражи по имену или емаил-у\" is a literal translation but sounds unnatural in Serbian. The word 'email' is a direct borrowing from English and 'емаил-у' is not the standard way to use it in Serbian.  It's better to use a Serbian equivalent or adapt the English word correctly.",
-          "suggestion": "Претражи по имену или електронској пошти"
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in 'емаил-у' is not standard Serbian punctuation.",
-          "suggestion": "емаил"
+          "description": "The Serbian translation uses \"емаил-у\" which is a less common and slightly awkward construction. The more natural and standard term is \"е-маил\".",
+          "suggestion": "Претражи по имену или е-маил"
         }
       ],
       "approved_at": null
@@ -235,13 +230,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"адресою електронної пошти\" is a bit formal and lengthy for a user interface. A more natural and concise translation would be better.",
-          "suggestion": "Пошук за іменем або електронною поштою"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

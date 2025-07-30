@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 
 import { TableBody } from "@docspace/shared/components/table";
-import { Nullable } from "@docspace/shared/types";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
@@ -94,7 +93,7 @@ const Table = ({
   const location = useLocation();
 
   const [hideColumns, setHideColumns] = React.useState(false);
-  const ref = useRef<Nullable<React.ForwardedRef<HTMLDivElement>>>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const getEnabledColumns = (): TableColumns => {
     if (contactsTab === "people") {
@@ -134,7 +133,7 @@ const Table = ({
   return !isUsersEmptyView ? (
     <StyledTableContainer
       useReactWindow
-      forwardedRef={ref as React.ForwardedRef<HTMLDivElement>}
+      forwardedRef={ref as React.RefObject<HTMLDivElement>}
     >
       <TableHeader
         // rewrite to component did update
@@ -174,7 +173,7 @@ const Table = ({
             setCurrentGroup={setCurrentGroup}
             {...enabledColumns}
             infoPanelVisible={infoPanelVisible}
-            isGuests={contactsTab === "guests"}
+            contactsTab={contactsTab}
           />
         ))}
       </TableBody>

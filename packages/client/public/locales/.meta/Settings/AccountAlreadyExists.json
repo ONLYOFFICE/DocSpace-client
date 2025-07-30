@@ -3,7 +3,7 @@
   "content": "Account already exists",
   "content_en_sha1_hash": "452864f7552f18f86d1c9eca5504d52b5372c9d6",
   "created_at": "2025-05-19T21:30:50.295Z",
-  "updated_at": "2025-05-28T09:30:02.524Z",
+  "updated_at": "2025-05-26T07:57:32.541Z",
   "comment": {
     "text": "The \"AccountAlreadyExists\" translation key is used to display a message indicating that an account already exists when a user attempts to create or import it. This text appears in UI components where users interact with accounts, providing a clear indication of duplicate account scenarios. It is typically displayed as part of the error message in data-import and account settings pages.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Профилът вече съществува' translates to 'The profile already exists'. While close in meaning, the English phrase 'Account already exists' refers to an account in the system, not necessarily a personal profile. A more accurate translation might consider 'Съществува вече акаунт' (An account already exists) or similar.",
-          "suggestion": "Съществува вече акаунт"
+          "description": "The translation 'Профилът вече съществува' translates to 'The profile already exists'. While close in meaning, 'Account already exists' refers to an account, not necessarily a profile. A more accurate translation might be 'Съществува вече акаунт' or 'Вече има акаунт'.",
+          "suggestion": "Вече има акаунт"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Contul deja existent' is a literal translation and doesn't sound natural. A better translation would convey the meaning of 'Account already exists' in a more idiomatic way.",
+          "description": "The Romanian translation 'Contul deja existent' is not the most natural or accurate translation of 'Account already exists'. While technically correct, it sounds awkward. A more common and idiomatic translation would be 'Contul există deja' or 'Contul este deja înregistrat'.",
           "suggestion": "Contul există deja"
         }
       ],
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Налог већ постоји\" translates to \"Account already exists\" but uses the word \"Налог\" which means \"Log\" or \"Account (in a system)\", while the original English 'Account' refers to a user account. A more accurate translation would use 'Рачун' or 'Кориснички рачун'.",
+          "description": "The Serbian translation 'Налог већ постоји' translates to 'Account already exists'. However, the correct Serbian translation for 'Account already exists' should be 'Рачун већ постоји'. 'Налог' refers to a log or account in a different context than the intended meaning here.",
           "suggestion": "Рачун већ постоји"
         }
       ],

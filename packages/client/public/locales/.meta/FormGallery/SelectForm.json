@@ -3,7 +3,7 @@
   "content": "Select Form",
   "content_en_sha1_hash": "f358e420226cba6f6afe3bd22058a4083538cbef",
   "created_at": "2025-05-19T21:30:55.118Z",
-  "updated_at": "2025-05-28T09:30:02.304Z",
+  "updated_at": "2025-05-26T07:57:32.339Z",
   "comment": {
     "text": "The translation key \"SelectForm\" is used to display the text \"Select Form\" on a button within a modal dialog footer, inviting the user to choose a form. This text appears as part of a primary action button when a form gallery view is not available.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Изберете Формуляр' is technically correct, a more natural and commonly used translation for 'Select Form' would be 'Изберете Формата'. Using the definite article makes it sound more fluent in Bulgarian in this context.",
-          "suggestion": "Изберете Формата"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Seleccionar formulario' is understandable, a more natural and common Spanish translation for 'Select Form' would be 'Seleccione el formulario' or 'Elegir formulario'. 'Seleccionar' is a more formal term.",
-          "suggestion": "Seleccione el formulario"
+          "description": "The translation 'Seleccionar formulario' is not the most natural or idiomatic translation of 'Select Form'. A better translation would be 'Seleccione formulario' (formal) or 'Elige formulario' (informal).",
+          "suggestion": "Seleccione formulario"
         }
       ],
       "approved_at": null
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ընտրել Ձևը\" (Entrel Devo) literally translates to 'Select the form'. While understandable, a more natural and idiomatic translation for a UI element like a form selector might be \"Ֆորմ ընտրել\" (Form Entrel) or \"Ձև ընտրել\" (Dev Entrel). \"Ընտրել Ձևը\" is slightly less fluent.",
-          "suggestion": "Ֆորմ ընտրել (Form Entrel) or Ձև ընտրել (Dev Entrel)"
+          "description": "While \"Ընտրել Ձևը\" is a literal translation of 'Select Form', it sounds slightly awkward and not idiomatic in Armenian. A more natural translation would convey the action of choosing or picking a form.",
+          "suggestion": "Consider alternatives like \"Ձև ընտրել\" (Dev entrel - Form choose) or \"Ընտրեք ձևը\" (Entrek dev-y - Select the form)."
         }
       ],
       "approved_at": null
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Atlasiet\" means 'Select', and \"Veidlapa\" means 'Form', the phrasing \"Atlasiet Veidlapa\" is not the most natural or idiomatic way to say 'Select Form' in Latvian. A more natural translation would be something like \"Izvēlieties formu\" or \"Izvēlēties veidlapu\".",
-          "suggestion": "Izvēlieties formu"
+          "description": "While 'Atlasiet Veidlapa' is understandable, a more natural and accurate translation of 'Select Form' would be 'Izvēlieties veidlapu'. 'Atlasiet' implies choosing from a presented set, while 'Izvēlieties' is a more general 'select'.",
+          "suggestion": "Izvēlieties veidlapu"
         }
       ],
       "approved_at": null
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Selecteer Formulier' is a very literal translation. A more natural Dutch phrasing would be 'Kies een formulier' or 'Select een formulier'. The use of 'Formulier' directly mirrors the English 'Form' and sounds a bit stilted in Dutch.",
-          "suggestion": "Kies een formulier"
+          "description": "While 'Selecteer Formulier' is a literal translation, 'Formulier' is a more formal term. A more natural and commonly used translation for 'Form' in this context would be 'Form'.",
+          "suggestion": "Select Formulier"
         }
       ],
       "approved_at": null
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectare formular' is not the most natural or accurate translation of 'Select Form'. 'Selectare' implies a process of selecting, while 'formular' is a direct translation of 'form'.  A more idiomatic translation would be 'Alege formularul' or 'Selectează formularul'.",
-          "suggestion": "Alege formularul"
+          "description": "The Romanian translation 'Selectare formular' is not the most natural or accurate translation of 'Select Form'. 'Selectare' implies a process or action of selecting, whereas 'Select Form' refers to choosing a form from a list.",
+          "suggestion": "A better translation would be 'Alege formularul' or 'Formular selectat'."
         }
       ],
       "approved_at": null
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආකෘතිපත්‍රයක් තෝරන්න' (aakruthipatrayak thoranna) is a literal translation but not the most natural way to say 'Select Form' in Sinhala. While technically correct, it sounds somewhat clunky.",
-          "suggestion": "Consider a more natural phrasing like 'ආකෘතිය තෝරන්න' (aakruthya thoranna) or 'ආකෘති පත්‍රය තෝරන්න' (aakruthipathraya thoranna).  'ආකෘතිය' (aakruthya) is a more common term for 'form' in this context."
+          "description": "The translation 'ආකෘතිපත්‍රයක් තෝරන්න' is a literal translation of 'Select Form'. A more natural and idiomatic translation might be 'ආකෘතිය තෝරන්න' (Akruitiya Thoranna) or 'ආකෘති පත්‍රය තෝරන්න' (Akruitiya Patraya Thoranna).",
+          "suggestion": "ආකෘතිය තෝරන්න"
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Изабери Образац' translates to 'Choose Template' or 'Select Template,' but the English 'Select Form' refers to a form selection, not a template. 'Образац' typically means a document format or template.",
-          "suggestion": "Consider 'Изабери Форму' (Izaberi Formu) which directly translates to 'Select Form'."
+          "description": "The translation 'Изабери Образац' does not accurately convey the meaning of 'Select Form'. 'Образац' translates to 'paragraph' or 'section', not 'form'.",
+          "suggestion": "Избери Образац (Izberi Obrazac) - more closely translates to 'Choose Form', or Формулар (Formular) for the direct translation of 'Form'."
         }
       ],
       "approved_at": null

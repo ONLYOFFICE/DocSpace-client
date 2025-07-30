@@ -59,15 +59,15 @@ const TableView = (props: TableViewProps) => {
     setSearchValue,
   } = props as AddEmailTableProps;
   const [openedEmailKey, setOpenedEmailKey] = useState<string>("");
-  const tableRef = useRef(null);
+  const tableRef = useRef<HTMLDivElement | null>(null);
 
   const usersWithFilledEmails = users.withoutEmail.filter(
     (user) => user.email && user.email.length > 0,
   );
 
-  const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
     toggleAllAccounts(
-      e.target.checked,
+      e?.target.checked ?? false,
       usersWithFilledEmails,
       checkedAccountType,
     );
@@ -84,7 +84,10 @@ const TableView = (props: TableViewProps) => {
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
   return (
-    <StyledTableContainer forwardedRef={tableRef} useReactWindow>
+    <StyledTableContainer
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader
@@ -98,7 +101,7 @@ const TableView = (props: TableViewProps) => {
               usersWithFilledEmails.length > 0
                 ? checkedUsers.withoutEmail.length ===
                   usersWithFilledEmails.length
-                : null
+                : false
             }
             toggleAll={toggleAll}
           />
@@ -111,7 +114,7 @@ const TableView = (props: TableViewProps) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
+            fetchMoreFiles={async () => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow

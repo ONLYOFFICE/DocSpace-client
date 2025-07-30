@@ -64,7 +64,10 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     isLoading,
   } = props;
 
-  const [roomParams, setRoomParams] = useState({
+  const [roomParams, setRoomParams] = useState<
+    | (TRoom & { invitations?: { id: string; access: ShareAccessRights }[] })
+    | TSelectorItem[]
+  >({
     ...fetchedRoomParams,
   });
   const [inviteItems, setInviteItems] = useState([
@@ -87,11 +90,18 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
     }));
 
   const onCreateRoomTemplate = () => {
+    // Check if roomParams is a TRoom object (has a title property) and not an array
+    if (!roomParams || Array.isArray(roomParams) || !("title" in roomParams)) {
+      console.error("Room parameters are in an invalid format");
+      return;
+    }
+
     if (!roomParams.title.trim()) {
       setIsValidTitle(false);
       return;
     }
 
+    // Now TypeScript knows roomParams is a TRoom-like object
     onSave({ ...roomParams, isAvailable }, openCreatedIsChecked);
   };
 
@@ -140,13 +150,29 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   };
 
   const onSubmitItems = (users: TSelectorItem[]) => {
-    const items = [...inviteItems, ...users];
+    // Transform TSelectorItem objects to match the expected inviteItems format
+    const mappedUsers = users.map((user) => ({
+      ...user,
+      templateIsOwner: false,
+      avatarSmall: user.avatar || "",
+      profileUrl: "", // Add the required profileUrl property
+      displayName: user.displayName || "", // Ensure displayName is a string
+      hasAvatar: !!user.avatar,
+      templateAccess: 1, // Default access right (assuming 1 is ReadWrite)
+    }));
 
-    setInviteItems(items);
+    const items = [...inviteItems, ...mappedUsers];
+
+    // Use type assertion since we've ensured the structure matches
+    setInviteItems(items as typeof inviteItems);
     onCloseAddUsersPanel();
   };
 
-  const tagHandler = new TagHandler(roomParams.tags, setRoomTags, fetchedTags);
+  const tagHandler = new TagHandler(
+    !Array.isArray(roomParams) && "tags" in roomParams ? roomParams.tags : [],
+    setRoomTags,
+    fetchedTags,
+  );
 
   return (
     <ModalDialog

@@ -32,6 +32,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { downgradeUserType } from "@docspace/shared/api/people";
+import { TUser } from "@docspace/shared/api/people/types";
 
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
@@ -48,7 +49,6 @@ type ChangeUserTypeEventProps = {
   dialogData: TChangeUserTypeDialogData;
 
   onClose: VoidFunction;
-  personalUserFolderTitle?: string;
 };
 
 const ChangeUserTypeEvent = ({
@@ -60,7 +60,6 @@ const ChangeUserTypeEvent = ({
   getPeopleListItem,
 
   onClose,
-  personalUserFolderTitle,
 }: ChangeUserTypeEventProps) => {
   const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
 
@@ -99,7 +98,7 @@ const ChangeUserTypeEvent = ({
             : t("SuccessChangeUserType"),
         );
 
-        successCallback?.(users);
+        successCallback?.(users as TUser[]);
       })
       .catch(() => {
         toastr.error(
@@ -170,40 +169,37 @@ const ChangeUserTypeEvent = ({
     <ChangeUserTypeDialog
       visible
       isGuestsDialog={isGuestsDialog}
-      toType={toType}
       firstType={firstType ?? ""}
       secondType={secondType}
       onClose={onCloseAction}
       onChangeUserType={onChangeUserType}
       isRequestRunning={isRequestRunning}
-      personalUserFolderTitle={personalUserFolderTitle}
       isDowngradeType={isDowngradeType}
       isDowngradeToUser={isDowngradeToUser}
     />
   );
 };
 
-export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
+export default inject(({ peopleStore, infoPanelStore }: TStore) => {
   const { dialogStore, usersStore } = peopleStore;
 
   const { data: dialogData } = dialogStore!;
 
-  const { personalUserFolderTitle } = treeFoldersStore;
   const {
     updateUserType,
     getPeopleListItem,
     needResetUserSelection,
     setSelected,
   } = usersStore!;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
+
   return {
-    needResetUserSelection,
+    needResetUserSelection: !infoPanelVisible || needResetUserSelection,
 
     getPeopleListItem,
 
-    setSelected,
-
     dialogData,
     updateUserType,
-    personalUserFolderTitle,
+    setSelected,
   };
 })(observer(ChangeUserTypeEvent));

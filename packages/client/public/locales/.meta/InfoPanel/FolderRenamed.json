@@ -3,7 +3,7 @@
   "content": "Folder renamed.",
   "content_en_sha1_hash": "106f93b1f9c254b0d77c693dcc0bb3343f16fc1b",
   "created_at": "2025-05-19T21:30:54.858Z",
-  "updated_at": "2025-05-28T09:30:02.429Z",
+  "updated_at": "2025-06-30T12:20:31.340Z",
   "comment": {
     "text": "The translation key \"FolderRenamed\" is used to display a message indicating that a folder has been renamed. It appears in the UI when a user navigates to a folder's history or view, providing context for users who may need to locate a previously named folder.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 107,
-      "context": "case \"FolderIndexReordered\":\n return t(\"InfoPanel:FolderIndexReordered\");\n case \"FolderCreated\":\n return t(\"InfoPanel:FolderCreated\");\n case \"FolderRenamed\":\n return t(\"InfoPanel:FolderRenamed\");\n case \"FolderMoved\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });",
+      "line_number": 113,
+      "context": "case FeedActionKeys.FolderIndexReordered:\n return t(\"InfoPanel:FolderIndexReordered\");\n case FeedActionKeys.FolderCreated:\n return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:\n return t(\"InfoPanel:FolderRenamed\");\n case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content 'Folder renamed' implies a single folder. The Czech translation 'Složky přejmenovány' translates to 'Folders renamed' (plural). This is a potential mismatch in the scope of the message.",
-          "suggestion": "Consider translating to 'Složka přejmenována' to match the singular English content, if the context always refers to a single folder."
+          "description": "The English 'Folder renamed' implies a singular folder was renamed. The Czech translation 'Složky přejmenovány' translates to 'Folders renamed' (plural). This suggests a discrepancy in the intended meaning.",
+          "suggestion": "Consider 'Složka přejmenována.' to match the singular nature of the English original, or re-evaluate if a plural translation is actually desired."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao word 'ຖືກ' (thuk) is correctly used, but the use of 'ປ່ຽນຊື່' (pian suu) is a more common and natural way to say 'renamed' in Lao. While technically correct, 'ຖືກປ່ຽນຊື່' implies something *was done to* the folder, rather than the folder being actively renamed.",
-          "suggestion": "Consider 'ໂຟນເດີປ່ຽນຊື່.' (Folder renamed.) This more directly translates the meaning."
+          "description": "The word 'ຖືກ' (thuk) is correct, but it's followed by 'ປ່ຽນຊື່' (pian seui) which means 'renamed' which is grammatically correct. 'ໂຟນເດີ' (fon dei) is the Lao word for 'folder'.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -129,13 +129,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Map hernoemd\" is understandable, a more natural and accurate translation of \"Folder renamed\" in Dutch would be \"Map hernoemd\" or \"Folder hernoemd\". Using the English word 'Folder' isn't incorrect, and maintains clarity for users familiar with English terminology.",
-          "suggestion": "Map hernoemd"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nazwa katalogu została zmieniona.' is a literal translation but sounds slightly unnatural in Polish. A more common and idiomatic phrasing would be 'Katalog został przemianowany.'",
-          "suggestion": "Katalog został przemianowany."
+          "description": "The translation 'Nazwa katalogu została zmieniona.' is a literal translation and sounds somewhat formal and unnatural in this context. A more common and natural phrasing would be more concise.",
+          "suggestion": "Folder updated."
         }
       ],
       "approved_at": null
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩරය නැවත නම් කරන ලදී.' is a literal translation of 'renamed'. A more natural Sinhala phrasing would be something like 'ෆෝල්ඩරය పేరు बदल' (Folder-a pena badu).",
-          "suggestion": "ෆෝල්ඩරය పేరు बदल"
+          "description": "The translation \"ෆෝල්ඩරය නැවත නම් කරන ලදී.\" is a literal translation and can sound awkward in Sinhala. A more natural phrasing would be \"ෆෝල්ඩරය పేరు बदलりました\" or \"ෆෝල්ඩරය పేరు మార్చబడింది\".",
+          "suggestion": "ෆෝල්ඩරය పేరు बदलりました"
         }
       ],
       "approved_at": null

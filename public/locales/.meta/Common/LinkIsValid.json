@@ -3,7 +3,7 @@
   "content": "The link is valid for <1>{{date}}</1>",
   "content_en_sha1_hash": "963d9b3a0d59aabbefdcf5cad77bdbe0fa590621",
   "created_at": "2025-05-19T21:30:46.198Z",
-  "updated_at": "2025-05-28T09:30:02.953Z",
+  "updated_at": "2025-06-02T10:20:51.583Z",
   "comment": {
     "text": "This translation key is used to format a message indicating the validity period of a link. It will be displayed in various UI components, such as expired options dialog, likely informing users about the remaining time before a link expires or becomes invalid.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 312,
-      "context": "}\n const date = t(\"Common:Unlimited\").toLowerCase();\n return (\n <Trans\n t={t}\n i18nKey=\"LinkIsValid\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong /> }}\n />\n );",
+      "line_number": 311,
+      "context": "}\n const date = t(\"Common:Unlimited\").toLowerCase();\n return (\n <Trans\n t={t}\n i18nKey=\"LinkIsValid\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 312,
-      "context": "}\n const date = t(\"Common:Unlimited\").toLowerCase();\n return (\n <Trans\n t={t}\n i18nKey=\"LinkIsValid\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong /> }}\n />\n );",
+      "line_number": 311,
+      "context": "}\n const date = t(\"Common:Unlimited\").toLowerCase();\n return (\n <Trans\n t={t}\n i18nKey=\"LinkIsValid\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong key=\"strong-link-valid\" /> }}\n />\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 155,
-      "context": ");\n }\n const date = t(\"Common:Unlimited\").toLowerCase();\n \n return (\n <Trans t={t} i18nKey=\"LinkIsValid\" ns=\"Common\">\n The link is valid for\n <LinkWithDropdown\n className=\"expired-options\"\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
+      "line_number": 156,
+      "context": ");\n }\n const date = t(\"Common:Unlimited\").toLowerCase();\n \n return (\n <Trans t={t} i18nKey=\"LinkIsValid\" ns=\"Common\">\n The link is valid for\n <LinkWithDropdown\n className={styles.expiredOptions}\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
       "module": "/packages/shared"
     }
   ],
@@ -48,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Link <1>{{date}}</1> üçün etibarlıdır' doesn't accurately reflect the meaning of 'The link is valid for <1>{{date}}</1>'.  A more accurate translation would convey that the link's validity *expires* on the specified date, not that it's valid *for* that date.",
-          "suggestion": "Link <1>{{date}}</1>ədək etibarlıdır"
+          "description": "The English phrase \"The link is valid for\" is not accurately translated.  A more natural Azerbaijani translation would be something like \"Bu link <1>{{date}}</1> tarixinədək keçərli/işləyir\" (This link is valid/works until <1>{{date}}</1>). The current translation literally means \"The link is reliable for...\" which isn't the intended meaning.",
+          "suggestion": "Bu link <1>{{date}}</1> tarixinədək keçərli/işləyir"
         },
         {
           "type": "formatting",
-          "description": "The formatting with `<1>` and `</1>` appears to be preserved in the translation, which might not be desirable.  Consider removing or adapting them to match the target language's conventions for placeholders.",
-          "suggestion": "Remove or adapt the placeholders to align with Azerbaijani formatting conventions."
+          "description": "The Azerbaijani translation adds a space before the opening `<1>` tag. While not necessarily incorrect, it deviates from the English template.",
+          "suggestion": "Link<1>{{date}}</1> üçün etibarlıdır"
         }
       ],
       "approved_at": null
@@ -77,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The placement of 'gültig' (valid) is unnatural in German. It should follow the noun it modifies.",
-          "suggestion": "Der Link ist gültig bis <1>{{date}}</1>."
+          "description": "The English phrase \"The link is valid for\" is translated as \"Der Link ist ... gültig\". While technically correct, a more natural translation would be something like \"Der Link ist bis <1>{{date}}</1> gültig\" (The link is valid until).",
+          "suggestion": "Der Link ist bis <1>{{date}}</1> gültig."
         }
       ],
       "approved_at": null
@@ -98,7 +98,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'valid for' is better translated as 'voimassa' (valid until) rather than a more literal translation which might imply validity only up to a certain point.  'Saakka' is appropriate for 'until', ensuring the meaning of 'valid for' is conveyed as the date being the end of validity.",
+          "suggestion": "Linkki on voimassa <1>{{date}}</1> asti"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -125,8 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"valid for\" is translated as \"の間有効です\" which literally means \"valid within\". A more natural translation would be something like \"まで有効です\" (valid until) or \"に有効です\" (valid at).",
-          "suggestion": "リンクは<1>{{date}}</1>まで有効です。"
+          "description": "The English phrase 'valid for' is not accurately translated. '有効です' (yuusei desu) means 'is valid' but doesn't convey the idea of 'valid *for a duration*'. A more accurate translation would include a phrase indicating a timeframe or 'until'.",
+          "suggestion": "リンクは<1>{{date}}</1>まで有効です。(Rinku wa <1>{{date}}</1> made yuusei desu.) - 'The link is valid until <1>{{date}}</1>'"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags <1> and </1> are inconsistent with standard practice. While present, it's not clear if they are intended for rendering or something else. Consider aligning with the client's preferred formatting style.",
+          "suggestion": "Confirm the purpose and accepted format for the <1> and </1> tags with the client."
         }
       ],
       "approved_at": null
@@ -146,7 +157,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"The link is valid for\" is not accurately translated. A more natural translation in Latvian would be something like \"Saite ir derīga līdz\" or \"Saite ir derīga līdz <1>{{date}}</1>\"",
+          "suggestion": "Saite ir derīga līdz <1>{{date}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -191,13 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The link is valid for' is not accurately translated. ' වලංගු වේ' suggests 'is valid' but the entire phrase needs to convey 'valid until/for'. A more appropriate translation would convey the sense of duration or endpoint of the validity.",
-          "suggestion": "සබැඳිය <1>{{date}}</1> වලංගු තෙක්"
-        },
-        {
-          "type": "formatting",
-          "description": "The formatting tags <1> and </1> are identical in both the source and target, which is correct.",
-          "suggestion": null
+          "description": "The English phrase \"The link is valid for\" is not accurately translated into Sinhala. A more natural translation would be something like \"The link is valid until\" or \"The link expires on\". The current translation 'සබැඳිය දක්වා වලංගු වේ' implies 'until' but lacks the explicit action of validity.",
+          "suggestion": "Consider a translation such as 'සබැඳිය <1>{{date}}</1> දිනාවතක් දක්වා වලංගු වේ' or 'සබැඳිය <1>{{date}}</1> දිනාවතකට වලංගු වේ'."
         }
       ],
       "approved_at": null
@@ -214,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovenian translation has a space before the opening angle bracket '<' in 'Povezava je veljavna do<1>{{date}}</1>'.",
-          "suggestion": "Povezava je veljavna do<1>{{date}}</1>"
+          "description": "The Slovenian translation uses 'do' which implies 'until', but the English uses 'for'. This changes the meaning slightly and might be confusing.",
+          "suggestion": "Consider using a phrasing that conveys 'valid for' more directly, perhaps 'Povezava velja za' or 'Povezava je veljavna v obdobju'."
         }
       ],
       "approved_at": null
@@ -238,8 +250,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bağlantı <1>{{date}}</1> tarihi için geçerlidir\" is a literal translation but sounds unnatural in Turkish. A more natural phrasing would be \"Bağlantı <1>{{date}}</1>'e kadar geçerlidir\" or \"Bağlantı <1>{{date}}</1> tarihine kadar geçerlidir\".",
-          "suggestion": "Bağlantı <1>{{date}}</1>'e kadar geçerlidir"
+          "description": "The English phrase \"The link is valid for\" is not perfectly translated. A more natural Turkish translation would be \"Bağlantı, <1>{{date}}</1> tarihine kadar geçerlidir\" or \"Bağlantı <1>{{date}}</1> tarihine kadar kullanılabilir\". The current translation, while technically correct, sounds slightly awkward.",
+          "suggestion": "Bağlantı, <1>{{date}}</1> tarihine kadar geçerlidir"
+        },
+        {
+          "type": "formatting",
+          "description": "The format tags <1> and </1> are consistent between the English and Turkish versions, which is good.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -253,13 +270,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'Liên kết hợp lệ trong <1>{{date}} </1>' is a literal translation and sounds unnatural in Vietnamese. A more natural phrasing would be 'Liên kết có giá trị đến <1>{{date}} </1>' or 'Liên kết có hiệu lực đến <1>{{date}} </1>'.",
-          "suggestion": "Liên kết có giá trị đến <1>{{date}} </1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -268,8 +279,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"valid for\" implies a period of validity *up to and including* the date. The Chinese translation \"前有效\" (qián yǒuxiao) implies validity *before* the date, not including it. This alters the meaning.",
-          "suggestion": "Consider a translation like \"链接在 <1>{{date}}</1> 有效“ (liánjiē zài <1>{{date}}</1> yǒuxiao), which translates to \"The link is valid on <1>{{date}}</1>.\""
+          "description": "The translation \"链接在 <1>{{date}}</1>前有效\" doesn't perfectly capture the meaning of \"The link is valid for <1>{{date}}</1>\".  '前' implies 'before', suggesting the link is only valid *until* the date.  A more accurate translation would convey validity *through* the date. '有效直到' would be better, but a slightly more natural phrasing might be preferable.",
+          "suggestion": "链接在 <1>{{date}}</1> 有效 (Liánjiē zài <1>{{date}}</1> yǒu xiào) - This simply states \"The link is valid on <1>{{date}}</1>.\""
         }
       ],
       "approved_at": null

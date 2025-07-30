@@ -3,7 +3,7 @@
   "content": "Contact the {{productName}} administrator",
   "content_en_sha1_hash": "129d3661ec0a3e94ee8109f655b98845c854006e",
   "created_at": "2025-05-19T21:30:53.449Z",
-  "updated_at": "2025-05-28T09:30:02.812Z",
+  "updated_at": "2025-05-26T07:57:32.796Z",
   "comment": {
     "text": "The \"PortalUnavailable:ContactAdministrator\" translation key is used to display a message prompting users to contact the administrator of the {{productName}} product. This text appears as a button in the Portal Unavailable page, encouraging users to take action for further assistance.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalUnavailable/index.js",
       "line_number": 115,
-      "context": "textAlign=\"center\"\n themeId={ThemeId.Link}\n className=\"portal-unavailable_contact-text\"\n onClick={onClickToContact}\n >\n {t(\"PortalUnavailable:ContactAdministrator\", {\n productName: t(\"Common:ProductName\"),\n })}\n </ColorTheme>\n </StyledBodyContent>\n </ErrorContainer>",
+      "context": "textAlign=\"center\"\n className=\"portal-unavailable_contact-text\"\n onClick={onClickToContact}\n color=\"accent\"\n >\n {t(\"PortalUnavailable:ContactAdministrator\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Link>\n </StyledBodyContent>\n </ErrorContainer>",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"اتصل بمسؤول\" is a very literal translation. A more natural and idiomatic translation for 'Contact the administrator' would be something like \"تواصل مع مسؤول\" or \"يرجى الاتصال بالمسؤول\".  'اتصل ب' is quite direct and may not be the most appropriate tone depending on the context.",
+          "suggestion": "تواصل مع مسؤول"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Ota yhteyttä {{productName}}-järjestelmänvalvojaan\" is a bit clunky. A more natural Finnish phrasing would be \"Ota yhteyttä {{productName}}-hallinnoijaan\" or \"Ota yhteyttä {{productName}}-järjestelmän huoltajiin\". \"Järjestelmänvalvoja\" can imply a more technical role than might be intended.",
-          "suggestion": "Ota yhteyttä {{productName}}-hallinnoijaan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -179,9 +179,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'контактирајте' should have a hard sign (ъ) after the 'и'.",
-          "suggestion": "Контактирајте"
+          "type": "formatting",
+          "description": "The translation uses a formal 'contact' form (Контактирајте) which might be too formal depending on the overall tone of the product. Consider a less formal option like 'Контактирај' if appropriate.",
+          "suggestion": "Consider 'Контактирај' for a less formal tone, if suitable for the product's context."
         }
       ],
       "approved_at": null

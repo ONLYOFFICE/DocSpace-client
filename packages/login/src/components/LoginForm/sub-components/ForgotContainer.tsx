@@ -69,7 +69,7 @@ const ForgotContainer = ({
     <div className="login-forgot-wrapper">
       <div className="login-checkbox-wrapper">
         <div className="remember-wrapper">
-          {!cookieSettingsEnabled && (
+          {!cookieSettingsEnabled ? (
             <Checkbox
               id="login_remember"
               className="login-checkbox"
@@ -89,7 +89,7 @@ const ForgotContainer = ({
                 />
               }
             />
-          )}
+          ) : null}
         </div>
 
         <Link
@@ -104,13 +104,13 @@ const ForgotContainer = ({
         </Link>
       </div>
 
-      {isDialogVisible && (
+      {isDialogVisible ? (
         <ForgotPasswordModalDialog
           isVisible={isDialogVisible}
           userEmail={identifier}
           onDialogClose={onDialogClose}
         />
-      )}
+      ) : null}
     </div>
   );
 };

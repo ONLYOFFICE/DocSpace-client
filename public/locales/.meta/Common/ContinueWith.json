@@ -3,7 +3,7 @@
   "content": "Continue with",
   "content_en_sha1_hash": "6433fa548ad1a2cc4485d28f06039cc50f7d86ce",
   "created_at": "2025-05-19T21:30:43.701Z",
-  "updated_at": "2025-05-28T09:30:02.970Z",
+  "updated_at": "2025-05-26T07:57:32.942Z",
   "comment": {
     "text": "This translation key is used for a button or label that invites users to continue with a process. It appears in a modal dialog and provides the prompt \"Continue with\" when visible, prompting the user to proceed.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"ilə davam edin\" is a literal translation of \"with continue\" and isn't the most natural way to express \"Continue with\" in Azerbaijani. It implies continuing *with* something specific, which might not be the intended meaning.",
-          "suggestion": "A more appropriate translation would be \"Davam edin\" (Continue) or \"B davam et\" (Continue on)."
+          "description": "The Azerbaijani translation 'ilə davam edin' while meaning 'continue with', is overly formal and not the most natural phrasing for 'Continue with' in most contexts. A more common and natural translation would be 'davam et' or 'elə davam et'.",
+          "suggestion": "davam et"
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Συνέχιση με\" while containing correct words, doesn't accurately convey the meaning of \"Continue with\". \"Συνέχιση\" means 'continuation', but the addition of 'με' (with) is not idiomatic and alters the intended meaning.  It suggests 'continuation with something' rather than just 'continue with'.",
-          "suggestion": "A more accurate translation would be \"Συνέχεια\" or \"Συνεχίστε\" (imperative form, meaning 'continue').  The best option depends on the context (noun vs. verb)."
+          "description": "The Greek translation \"Συνέχιση με\" is a literal translation of \"Continue with\" and doesn't convey the natural meaning in Greek. It sounds awkward and doesn't flow well in most contexts.",
+          "suggestion": "Consider alternatives like \"συνέχεια\" (synécheia - continuation), \"συνεχίστε\" (synechíste - continue - imperative form), or a more context-specific phrasing. The best option would depend on the surrounding text."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"次の設定で進む\" literally translates to \"Proceed with the next settings\". While it conveys a similar idea to \"Continue with\", it's not the most natural or idiomatic translation. A more accurate and natural translation would depend on the context. '続ける' (tsuzukeru) is a closer equivalent to 'continue'.",
-          "suggestion": "Consider alternative translations like \"続ける\" (tsuzukeru) or \"そのまま進む\" (isona ma ni susumu) depending on the specific context."
+          "description": "The translation \"次の設定で進む\" (Tsugi no settei de susumu) translates to \"Proceed with the next settings\" or \"Continue with the next configuration.\" It's a functional translation, but doesn't directly convey the simple meaning of \"Continue with\". A more direct translation might be better depending on the context. It implies a configuration aspect that might not be present.",
+          "suggestion": "Consider translations like \"続ける\" (tsuzukeru - to continue), \"進める\" (susumeru - to proceed/move forward), or \"次に進む\" (tsugi ni susumu - to proceed to the next) depending on the specific context of \"Continue with\"."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'또는 다음을 이용:' does not accurately convey the meaning of 'Continue with'. 'Continue with' implies proceeding to the next step or action. '또는 다음을 이용:' translates to 'or use the following,' which suggests an alternative rather than continuation.",
-          "suggestion": "Consider alternatives like '계속 진행하려면:' (Gyeokjeun Jinhan-eun): 'To continue' or '다음 단계로:' (Daeum Dangjeuro): 'To the next step'."
+          "description": "The Korean translation \"또는 다음을 이용:\" does not accurately convey the meaning of \"Continue with\". It translates to \"or use the following:\". This implies an alternative action rather than continuation.",
+          "suggestion": "Consider translations like \"계속하기\", \"이어서\", or \"다음 단계로 진행하기\" depending on the specific context of the phrase. Without context, \"계속하기\" is a generally safe and accurate option."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Kontynuuj z' is a literal translation of 'Continue with', it doesn't always convey the intended meaning in Polish. 'Z' implies continuation *with* something, which isn't always appropriate. Depending on the context, a more natural translation might be 'Kontynuuj' (continue) or 'Dalej' (further/on).",
-          "suggestion": "Consider alternatives like 'Kontynuuj' or 'Dalej' depending on context. For example, if it means 'Continue with the process', 'Kontynuuj proces' would be more accurate."
+          "description": "While 'Kontynuuj z' is a literal translation of 'Continue with,' it's not the most natural or idiomatic Polish phrasing. It can sound awkward depending on the context.",
+          "suggestion": "Consider alternatives like 'Kontynuować' (if 'continue' is the main verb), or a phrase that better reflects the intended meaning depending on the surrounding text. For example, 'ciągnąć dalej' or 'dalej z' might be better in certain situations."
         }
       ],
       "approved_at": null
@@ -177,13 +177,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Продолжить с\" is a literal translation of \"Continue with\", it's not the most natural or idiomatic way to express this in Russian. It sounds slightly awkward.",
-          "suggestion": "Consider alternatives like \"Продолжить\" (Continue), \"Перейти к\" (Proceed to), or \"Продолжать\" depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"මෙය සමඟ ඉදිරියට\" doesn't accurately convey the meaning of \"Continue with.\" It literally translates to \"Continue with this.\" \"Continue with\" implies proceeding with a process or action, not necessarily with a specific 'this'.",
-          "suggestion": "A more accurate translation might be \"ඉදිරියට යන්න\" (idiriyata yanna - proceed) or \"සືගෙන යන්න\" (sugegana yanna - carry on/continue)."
+          "description": "The translation \"මෙය සමඟ ඉදිරියට\" doesn't accurately convey the meaning of \"Continue with\". It translates to something like \"Continue with this\", implying continuation of something specific. \"Continue with\" is often used more generally.",
+          "suggestion": "A better translation would be something like \"ගෙන යාමට\" (Gena yāmaṭa) or \"ඉදිරියට යාමට\" (idiriyata yāmaṭa), which more closely captures the general meaning of \"Continue with\"."
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Настави са\" is understandable, it's not the most natural or accurate translation of \"Continue with.\" It's a direct translation but lacks nuance. A better translation would depend on the context, but options like \"Наставити са\" or \"Процесирај са\" (if referring to a process) might be more appropriate.",
-          "suggestion": "Consider \"Наставити са\" or context-dependent alternatives like \"Процесирај са\"."
+          "description": "While 'Настави са' is understandable, it's not the most natural or accurate translation of 'Continue with'. It's a bit too informal and lacks the nuance of the English phrase. A better translation would depend on the context, but options like 'Наставите' (formal) or 'Настави' (slightly more natural, but still less common than alternatives) are preferable.",
+          "suggestion": "Consider 'Наставите' or 'Настави' depending on the desired level of formality and context."
         }
       ],
       "approved_at": null
@@ -234,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"ile devam et\" while literally meaning \"with continue,\" doesn't perfectly capture the nuance of \"Continue with.\" It sounds somewhat awkward in many contexts.",
-          "suggestion": "Consider alternatives like \"devam et\" (simply \"continue\") or \"devamla\" (a more concise option). The best choice depends on the surrounding context."
+          "description": "While \"ile devam et\" is a literal translation of \"with continue,\" it's not the most natural or idiomatic way to say \"Continue with\" in Turkish. It sounds a bit awkward.",
+          "suggestion": "Consider alternatives like \"devam et\" (simply \"continue\") or \"devamla\" (a more concise option). The best choice depends on the context, but these are generally more fluent."
         }
       ],
       "approved_at": null
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Продовжити з' is a literal translation of 'Continue with', it's not the most natural or idiomatic way to express this in Ukrainian. It can sound slightly awkward depending on the context. More natural options exist.",
-          "suggestion": "Consider alternatives like 'Продовжити' (Continue), 'Далі' (Next/Further), or a more context-specific phrasing."
+          "description": "While \"Продовжити з\" is a literal translation of \"Continue with,\" it isn't the most natural or idiomatic way to express this in Ukrainian. It implies continuing *with something* very specifically.  A more natural phrasing would depend on the context.",
+          "suggestion": "Consider alternatives such as \"Продовжити\" (Continue), \"Слідувати\" (Follow), or a more context-specific phrasing."
         }
       ],
       "approved_at": null
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '继续使用' (jìxù shǐyòng) while conveying a sense of continuation, doesn't perfectly capture the nuance of \"Continue with.\" It translates more literally to \"continue to use.\" Depending on the context, alternatives might be more appropriate.",
-          "suggestion": "Consider alternatives like '继续' (jìxù - continue), '继续进行' (jìxù jìnxíng - continue doing), or a more context-specific phrasing."
+          "description": "'继续使用' (jìxù shǐyòng) translates more accurately to 'continue to use' or 'continue using'. While it conveys a similar idea to 'Continue with', it doesn't perfectly capture the nuance of 'Continue with' which implies proceeding with a process or task.",
+          "suggestion": "Consider alternatives like '继续' (jìxù), '继续进行' (jìxù jìnxíng), or '继续操作' (jìxù cāozuò) depending on the context."
         }
       ],
       "approved_at": null

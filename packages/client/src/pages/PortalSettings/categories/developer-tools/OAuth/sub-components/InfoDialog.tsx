@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
-import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
+import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -149,6 +149,7 @@ const InfoDialog = ({
             <ContextMenuButton
               displayType={ContextMenuButtonDisplayType.dropdown}
               getData={getContextOptions}
+              testId="client_info_context_menu_button"
             />
           </div>
           {!isProfile ? (
@@ -214,6 +215,7 @@ const InfoDialog = ({
                   isHovered
                   onClick={() => setShowDescription((val) => !val)}
                   type={LinkType.action}
+                  dataTestId="client_info_description_link"
                 >
                   {showDescription ? "Hide" : "Show more"}
                 </Link>
@@ -238,6 +240,7 @@ const InfoDialog = ({
             href={client?.websiteUrl}
             type={LinkType.action}
             target={LinkTarget.blank}
+            dataTestId="client_info_website_link"
           >
             {client?.websiteUrl}
           </Link>
@@ -326,6 +329,7 @@ const InfoDialog = ({
               href={client?.policyUrl}
               type={LinkType.action}
               target={LinkTarget.blank}
+              dataTestId="client_info_policy_link"
             >
               {t("PrivacyPolicy")}
             </Link>
@@ -339,6 +343,7 @@ const InfoDialog = ({
               href={client?.termsUrl}
               type={LinkType.action}
               target={LinkTarget.blank}
+              dataTestId="client_info_terms_link"
             >
               {t("TermsOfService")}
             </Link>
@@ -352,6 +357,7 @@ const InfoDialog = ({
                 fontWeight="600"
                 noSelect
                 truncate
+                dataTestId="client_info_last_modified"
               >
                 {t("LastModified")}
               </Text>
@@ -362,6 +368,7 @@ const InfoDialog = ({
                 fontWeight="600"
                 noSelect
                 truncate
+                dataTestId="client_info_modified"
               >
                 {modifiedDate}
               </Text>

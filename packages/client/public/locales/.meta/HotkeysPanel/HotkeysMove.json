@@ -3,7 +3,7 @@
   "content": "Move between items",
   "content_en_sha1_hash": "dbd1ab23f2124a4ce62b46e43d9985055559b5c8",
   "created_at": "2025-05-19T21:30:55.058Z",
-  "updated_at": "2025-05-21T10:30:35.030Z",
+  "updated_at": "2025-05-24T10:40:28.725Z",
   "comment": {
     "text": "\"Used as a header for a section describing keyboard shortcuts to move between items in the application's panels.\"",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Elementlər arası hərəkət edin\" while literally meaning \"Move between elements,\" doesn't quite capture the intended meaning of \"Move between items\" in the context of hotkeys. It sounds more formal and less natural for this UI element. It would be better if it reflected the act of moving focus or selection.",
-          "suggestion": "Consider alternatives like \"Seçilmiş elementlərə keçid edin\" (Switch to selected elements) or \"Elementlərarası keçiş edin\" (Transition between elements) to better reflect the meaning of moving focus between selectable items."
+          "description": "The translation 'Elementlər arası hərəkət edin' while technically accurate, is a bit stiff and literal. 'Move between items' implies a functional movement, and a more natural Azerbaijani equivalent might focus on that. 'Elementlər arası keçid edin' or 'Elementlərin arasında gediş edin' would be better.",
+          "suggestion": "Elementlərin arasında gediş edin"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Տեղափոխել միավորների միջև\" (Teghepoxel miavorneri mijev) literally translates to 'Move between units/points'. While not entirely wrong, 'items' in the context of hotkeys panel likely refers to configurable actions or commands, not just generic units or points. A more accurate translation would convey the idea of moving between configurable options or assignments.",
-          "suggestion": "Consider \"Շարժել տարրերի միջև\" (Sharjel tarreteri mijev) which better conveys the meaning of moving between 'items' or 'elements' in a panel configuration."
+          "description": "The translation \"Տեղափոխել միավորների միջև\" (Teg hapoxel miavorneri mijev) literally translates to 'Move between units'. While 'items' and 'units' can sometimes be interchangeable, 'items' is likely the more accurate term in this context, suggesting selectable elements within a user interface.",
+          "suggestion": "Consider \"Շարժել ապրանքների միջև\" (Sharjel apranqneri mijev) which translates to 'Move between items'."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අථක අතර මාරුවීම\" doesn't accurately convey the meaning of \"Move between items.\" The word \"අථක\" (athaka) is not commonly used in this context and suggests something more specific than general items. It is also a slightly archaic word.",
-          "suggestion": "Possible suggestions include: \"අයිතමය අතර මාරුවීම\" (aimthamya athara maruvuim) - 'Switch between items', \"වියු අතර මාරුවීම\" (viyu athara maruvuim) - 'Move between views', or a more natural phrasing depending on the UI context.  Further context would be needed to provide the best suggestion."
+          "description": "The translation 'අථක අතර මාරුවීම' doesn't accurately convey the meaning of 'Move between items'. 'අථක' (athaka) typically refers to 'objects' or 'things' in a more tangible sense, whereas 'items' in this context likely refers to entries in a list or selectable options within a panel. 'මාරුවීම' (maruviṁ) means 'to change' or 'to switch'.",
+          "suggestion": "A more accurate translation would be something like 'ធាតុ අතර මාරුවීම' (dhaathu akar maruviṁ), where 'dhaathu' refers to 'elements' or 'items' in a more abstract sense, or 'අයිතමය අතර මාරුවීම' (aithamayama akar maruviṁ) using 'aithamayama' for 'items'."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Померај између ставки\" while understandable, isn't the most natural or precise translation of \"Move between items\". \"Померај\" implies movement, but \"међу ставкима\" is a bit less common than alternatives.",
-          "suggestion": "Помери се између ставки"
+          "description": "The translation 'Померај између ставки' is technically correct but could be improved for clarity and naturalness in a user interface context. 'Померај' is a little abrupt. A more idiomatic translation would convey the idea of moving focus or selection, not necessarily physical movement.",
+          "suggestion": "Изаберите следећу ставку"
         }
       ],
       "approved_at": null
@@ -204,13 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pomeraj između stavki' is too literal. 'Move between items' implies navigation or cycling through a list. A better translation would reflect this functionality.",
-          "suggestion": "Navigacija između stavki"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'stavki' might sound slightly awkward. A more natural phrasing could be considered.",
-          "suggestion": "Pomeraj između opcija"
+          "description": "The translation \"Pomeraj između stavki\" doesn't fully capture the nuance of 'Move between items'. It literally translates to 'Movement between items'. A better translation would convey the action of moving *to* the items.",
+          "suggestion": "Premesti između stavki"
         }
       ],
       "approved_at": null
@@ -221,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Öğeler arasında ilerle' while conveying a general sense of movement, isn't the most natural or accurate translation of 'Move between items' in the context of hotkeys. 'İlerle' implies progress or advancement, whereas 'Move between' suggests a simple shifting or selection.",
-          "suggestion": "Consider 'Öğeler arasında geçiş yap' or 'Öğeler arasında hareket et'."
+          "description": "The translation 'Öğeler arasında ilerle' is a bit literal and doesn't quite convey the nuance of 'Move between items' in a user interface context. It implies a progression or movement along a list, rather than selecting or navigating.",
+          "suggestion": "Consider alternatives like 'Madde geçişi' or 'Seçimler arasında geçiş yap' which better reflect the functionality of moving between selectable items."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "users",
   "content_en_sha1_hash": "5b7dcd14a4faa2cdd54cf6eb8d4bc35da31914a1",
   "created_at": "2025-05-19T21:30:51.482Z",
-  "updated_at": "2025-05-28T09:30:02.516Z",
+  "updated_at": "2025-05-26T07:57:32.524Z",
   "comment": {
     "text": "The translation key \"users\" is used to display a label for employee-related settings, likely appearing as a button or dropdown option in UI elements such as portal settings. The translated content will be displayed as an uppercase employee name (\"Settings:Employees\") followed by its original lowercased version, suggesting a reference to a specific type of employee or user category.",
     "is_auto": true,
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පරිශ්‍රීලකයින්' (parishreelakaiin) doesn't accurately convey the meaning of 'users'.  'පරිශ්‍රීලකයින්' translates closer to 'workers' or 'laborers'. 'users' in the context of 'Settings:Employees' likely refers to individuals who have accounts or access to a system.",
-          "suggestion": "A more appropriate translation for 'users' in this context might be 'භාවිතකරුවන්' (bhavitakarakaruwan) which means 'users' or 'those who use'."
+          "description": "The Sinhala translation 'පරිශ්‍රීලකයින්' (parishreekalakin) is a transliteration of 'personnel' or 'workers', not a direct translation of 'users'. 'Users' typically refers to individuals who interact with a system or application.",
+          "suggestion": "A more accurate translation for 'users' would be 'භාවිතකරන්නන්' (bhavitakarnaannan) or 'පරිශීලකයන්' (parishilakayan)."
         }
       ],
       "approved_at": null

@@ -1,4 +1,4 @@
-@import "./variables/index.scss";
+@use "variables";
 
 @mixin common-text-styles {
   font-family: var(--font-family);

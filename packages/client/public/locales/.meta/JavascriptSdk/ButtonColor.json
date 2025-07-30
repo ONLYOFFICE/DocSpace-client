@@ -3,7 +3,7 @@
   "content": "Button color",
   "content_en_sha1_hash": "d0cdbff25739c46a4c443605751b3e110270de7b",
   "created_at": "2025-05-19T21:30:54.370Z",
-  "updated_at": "2025-05-21T09:30:48.628Z",
+  "updated_at": "2025-05-24T09:43:00.861Z",
   "comment": {
     "text": "This translation key describes the color of a button. It is used in the Portal Settings page to display and update the current button color setting, likely found on buttons within developer tools or other UI components.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Color de botones\" is understandable, a more natural and common translation for \"Button color\" would be \"Color del botón\". \"Color de botones\" implies the color of multiple buttons.",
+          "suggestion": "Color del botón"
+        }
+      ],
       "approved_at": null
     },
     "fi": {

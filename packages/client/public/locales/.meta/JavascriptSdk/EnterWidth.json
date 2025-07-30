@@ -3,7 +3,7 @@
   "content": "Enter width",
   "content_en_sha1_hash": "b11870b5aaf02a2746e893393870b5196d610f17",
   "created_at": "2025-05-19T21:30:54.481Z",
-  "updated_at": "2025-05-21T09:10:16.077Z",
+  "updated_at": "2025-05-24T09:22:12.263Z",
   "comment": {
     "text": "Enter width is used as a placeholder text for a user input field in a Width Setter component, allowing users to enter a value for setting a width. It appears on a specific sub-component within a Portal Settings page.",
     "is_auto": true,
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Especificar ancho' is grammatically correct, a more natural and commonly used translation for 'Enter width' would be 'Introducir ancho'. 'Especificar' implies a more formal specification, while 'Introducir' is more aligned with the user action of entering data.",
-          "suggestion": "Introducir ancho"
+          "description": "While \"Especificar ancho\" is a valid translation, it's slightly formal for a UI label like \"Enter width\". A more common and user-friendly translation might be better.",
+          "suggestion": "Consider alternatives like \"Ingrese ancho\" or \"Introduzca ancho\" which are more conversational."
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Մուտքագրել լայնությունը\" is technically correct, a more natural and idiomatic translation of 'Enter width' in this context would be something like 'Նշեք լայնությունը' (Nsheq laynut'y) or 'Մուտքագրեք լայնությունը' (Mut'yagreq laynut'y). \"Մուտքագրել\" emphasizes typing, while the original English phrase is more general.",
+          "suggestion": "Նշեք լայնությունը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"너비 입력\" is a literal translation of \"Enter width\", it sounds a bit awkward in Korean. A more natural translation would be something like \"너비 입력하세요\" or \"너비 입력하기\".",
-          "suggestion": "너비 입력하세요"
+          "description": "While '너비 입력' is a literal translation of 'Enter width,' it's not the most natural or idiomatic way to express that in Korean for a UI label. A more common and user-friendly phrasing would be '너비 입력하기' or '너비 입력하세요'.",
+          "suggestion": "너비 입력하기"
         }
       ],
       "approved_at": null
@@ -117,13 +123,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ກວ້າງ' (gwang) is correctly spelled but a more natural phrasing might be 'ປ້ອນຄວາມກວ້າງ' (pon gwang) for input fields.",
-          "suggestion": "ປ້ອນຄວາມກວ້າງ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Voor breedte' is not the most natural or accurate translation of 'Enter width'. 'Voor' implies 'for' which isn't the intended meaning here. It should convey the action of entering a width value.",
-          "suggestion": "Enter width could be translated as 'Voer breedte in' or 'Breedte invoeren'."
+          "description": "The translation \"Voor breedte\" is not the most natural or accurate translation of \"Enter width\". While \"voor\" can mean 'for', in this context, it doesn't convey the intended meaning of providing or inputting a width value.",
+          "suggestion": "Vul breedte in"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පළල යොදන්න' while literally meaning 'enter width', sounds unnatural and not idiomatic for a user interface label. A more natural phrasing would convey the action of inputting the width.",
-          "suggestion": "පළල ඇතුළත් කරන්න"
+          "description": "The translation \"පළල යොදන්න\" while containing the word for 'width' (පළල), the verb 'යොදන්න' (yodannā) which means 'add' or 'introduce' is not an accurate translation of 'Enter width'. The English phrase implies inputting a width value.",
+          "suggestion": "A more accurate translation might be \"వెడల్పు నమోదు చేయండి\" (Wedalp namudam karanne) or \"వెడల్పు ඇතුළත් చేయండి\" (Wedalp aethulat karanne) – 'Enter width'."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Unesi širinu' doesn't accurately convey the meaning of 'Enter width'.  'Unesi' means 'enter' or 'input', but 'širinu' is the accusative singular form of 'širina' (width), suggesting 'enter the width'.  A more appropriate translation would convey the act of providing or specifying the width.",
-          "suggestion": "Unesite širinu"
+          "description": "The translation 'Unesi širinu' doesn't accurately convey the meaning of 'Enter width'. It literally translates to 'Enter width-accusative', which is grammatically incorrect and doesn't match the intended action.",
+          "suggestion": "Ulazi širinu"
         }
       ],
       "approved_at": null

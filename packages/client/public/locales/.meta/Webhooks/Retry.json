@@ -3,7 +3,7 @@
   "content": "Retry",
   "content_en_sha1_hash": "9f5cd8a2e8807d73efa02c844bfbca9fe552b283",
   "created_at": "2025-05-19T21:30:49.814Z",
-  "updated_at": "2025-05-28T09:30:02.617Z",
+  "updated_at": "2025-05-26T07:57:32.674Z",
   "comment": {
     "text": "The translation key \"Retry\" is used to display a button or action that allows users to re-attempt a failed operation. This text appears in the UI of the Webhook History Table and is linked to the \"retryWebhook\" API function. It is likely displayed on a button or similar UI element.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Yenidən cəhd elə' is a literal translation of 'Retry', it's not the most natural or concise way to express the concept in Azerbaijani for a UI element like a webhook retry setting. A more common and natural phrase would be 'Təkrar' or 'Yenidən'.",
-          "suggestion": "Təkrar"
+          "description": "While \"Yenidən cəhd elə\" is a valid translation, \"Retry\" often implies a more automated or technical process. A more fitting translation might be 'Təkrar et' or 'Təkrar cəhd et'.",
+          "suggestion": "Təkrar et"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Mēģināt vēlreiz\" is a literal translation of \"Try again\", \"Retry\" often implies an automated or system-level attempt, which might be better conveyed with a more technical term in a webhook context. A more precise translation might be \"Pirmsaprunāts mēģinājums\" (scheduled attempt) or \"Automātisks mēģinājums\" (automatic attempt), depending on the specific system.",
-          "suggestion": "Consider \"Pirmsaprunāts mēģinājums\" or \"Automātisks mēģinājums\" for better accuracy in a technical context."
+          "description": "While \"Mēģināt vēlreiz\" is a literal translation of \"Retry\", it's a bit verbose for a technical setting like a webhook configuration. A more concise and idiomatic translation would be better.",
+          "suggestion": "Izmēģināt"
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Poskusi ponovno\" is a literal translation of \"Retry\", it's not the most natural or commonly used term in Slovenian for a retry action in a technical context like webhooks. A more appropriate translation would be something like \"Ponovi\" or \"Ponovno pošlji\".",
+          "suggestion": "Ponovi"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Покушај поново\" is a possible translation of \"Retry\", it's a bit formal and wordy for a UI element like a retry button. A more common and natural translation would be \"Поново\" or \"Опет\". \"Покушај поново\" implies an attempt, which isn't necessarily what a 'retry' button does.",
-          "suggestion": "Поново or Опет"
+          "description": "The Serbian translation 'Покушај поново' while technically meaning 'Try again', isn't the most natural or idiomatic translation for 'Retry' in a technical context like webhooks. 'Retry' implies a repeated attempt after a failure, and a more accurate translation would better convey that nuance.",
+          "suggestion": "Понови покушај"
         }
       ],
       "approved_at": null
@@ -210,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Pokušaj ponovo' is a generally acceptable translation for 'Retry', it's somewhat literal. A more natural and idiomatic translation in a technical context might be 'Ponovo' or 'Ponovni pokušaj'. 'Pokušaj ponovo' sounds a bit clunky.",
+          "description": "While 'Pokušaj ponovo' is understandable, a more direct and common translation of 'Retry' in a technical context would be 'Ponovo'. 'Pokušaj ponovo' implies a deliberate attempt, whereas 'Retry' often refers to an automated process.",
           "suggestion": "Ponovo"
         }
       ],

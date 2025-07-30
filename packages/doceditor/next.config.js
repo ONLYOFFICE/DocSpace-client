@@ -35,14 +35,20 @@ const version = pkg.version;
 
 const nextConfig = {
   basePath: "/doceditor",
-  output: "standalone",
   typescript: {
-    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
+    ignoreBuildErrors: true,
   },
-  experimental: {
-    instrumentationHook: true,
-    serverComponentsExternalPackages: ["pino", "pino-pretty"],
+  eslint: {
+    ignoreDuringBuilds: true,
   },
+  serverExternalPackages: [
+    "nconf",
+    "date-and-time",
+    "winston",
+    "winston-cloudwatch",
+    "winston-daily-rotate-file",
+    "@aws-sdk/client-cloudwatch-logs",
+  ],
   compiler: {
     styledComponents: true,
   },
@@ -59,6 +65,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  devIndicators: false,
 };
 
 const getBuildDate = () => {
@@ -73,8 +80,21 @@ const getBuildYear = () => {
   return today.getFullYear();
 };
 
+if (process.env.DEPLOY) {
+  nextConfig.output = "standalone";
+}
+
 module.exports = {
   webpack(config) {
+    // Add resolve configuration for shared package
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        "@docspace/shared": path.resolve(__dirname, "../shared"),
+      },
+    };
+
     config.devtool = "source-map";
 
     if (config.mode === "production") {
@@ -145,7 +165,7 @@ module.exports = {
               {
                 name: "preset-default",
                 params: {
-                  overrides: { removeViewBox: false },
+                  overrides: { removeViewBox: false, cleanupIds: false },
                 },
               },
             ],

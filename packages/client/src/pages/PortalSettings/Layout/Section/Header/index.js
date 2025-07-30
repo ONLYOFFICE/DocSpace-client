@@ -184,7 +184,7 @@ const SectionHeaderContent = (props) => {
         return isCustomizationAvailable;
       case "DNSSettings":
         return isCustomizationAvailable;
-      case "RestoreBackup":
+      case "Common:RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "BrandName":
         return isCustomizationAvailable || standalone;

@@ -3,7 +3,7 @@
   "content": "Change link type",
   "content_en_sha1_hash": "85b52eccc3ad049741c44630c48bebcececce91a",
   "created_at": "2025-05-19T21:30:57.198Z",
-  "updated_at": "2025-05-28T09:30:02.865Z",
+  "updated_at": "2025-05-26T07:57:32.845Z",
   "comment": {
     "text": "The translation key \"Change link type\" is used to display a title for a dialog that allows users to change the link type. It appears as part of a modal dialog in the DocEditor application, providing context for the user's interaction.",
     "is_auto": true,
@@ -171,7 +171,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Промени тип везе' is a literal translation of 'Change link type' and while understandable, it's not the most natural phrasing in Serbian. A more idiomatic translation would be something like 'Измени тип везе' or 'Помени тип везе'. 'Промени' implies a complete change, which might not always be the intention.",
+          "suggestion": "Измени тип везе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

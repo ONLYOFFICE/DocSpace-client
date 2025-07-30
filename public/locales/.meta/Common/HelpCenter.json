@@ -3,7 +3,7 @@
   "content": "Help Center",
   "content_en_sha1_hash": "110158257eb2f2c817d5a9d691e7637cfd12a11a",
   "created_at": "2025-05-19T21:30:45.755Z",
-  "updated_at": "2025-06-18T07:34:15.210Z",
+  "updated_at": "2025-06-18T17:11:42.498Z",
   "comment": {
     "text": "The \"Help Center\" translation key is used to display a link to the help center, providing users with access to support resources. It appears in various UI elements, such as buttons and dropdowns, typically when the user needs assistance or has questions about a specific feature or process. Translators should ensure that the text accurately reflects local language equivalents of \"Help Center\".",
     "is_auto": true,
@@ -13,18 +13,18 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
       "line_number": 89,
-      "context": "tag=\"a\"\n isHovered={false}\n target=\"_blank\"\n href={storageManagementUrl}\n >\n {t(\"Common:HelpCenter\")}\n </ColorTheme>\n ) : null}\n </Text>\n \n <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />",
+      "context": "isHovered={false}\n target=\"_blank\"\n href={storageManagementUrl}\n color=\"accent\"\n >\n {t(\"Common:HelpCenter\")}\n </Link>\n ) : null}\n </Text>\n \n <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 431,
+      "line_number": 434,
       "context": "key: \"separator1\",\n },\n helpCenterEnabled && {\n key: \"user-menu-help-center\",\n icon: HelpCenterReactSvgUrl,\n label: t(\"Common:HelpCenter\"),\n onClick: this.onHelpCenterClick,\n url: this.settingsStore.helpCenterDomain || \"#\",\n preventNewTab: true,\n },\n /* videoGuidesEnabled && {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/management/src/categories/encrypt-data/index.tsx",
-      "line_number": 123,
+      "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
+      "line_number": 106,
       "context": "<Text>\n <Trans\n t={t}\n i18nKey=\"MoreDetails\"\n ns=\"Management\"\n values={{ link: t(\"Common:HelpCenter\") }}\n components={{\n 1: (\n <Link\n className=\"link\"\n color={currentColorScheme?.main?.accent}",
       "module": "/packages/management"
     }
@@ -66,13 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Hilfe-Center' is a direct transliteration of 'Help Center' and doesn't follow standard German phrasing. While understandable, it's not the most natural or idiomatic translation.",
-          "suggestion": "Consider 'Hilfecenter' or 'Hilfezentrum'."
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in 'Hilfe-Center' is not typical in German compound nouns and may be confusing.",
-          "suggestion": "Remove the hyphen; use 'Hilfecenter' or 'Hilfezentrum' instead."
+          "description": "The translation 'Hilfe-Center' is a direct transliteration of 'Help Center' and doesn't follow standard German naming conventions. While understandable, it's not idiomatic.",
+          "suggestion": "Hilfecenter or Hilfezentrum"
         }
       ],
       "approved_at": null
@@ -95,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation includes \"(englanniksi)\", which means \"(in English)\". This is redundant and unnecessary as the user would generally assume the English term is an English term.",
+          "description": "The translation includes \"(englanniksi)\", which means \"(in English)\". This is unnecessary and inaccurate for a localized Help Center. The core translation \"Ohjekeskus\" is correct, but the added phrase is redundant.",
           "suggestion": "Ohjekeskus"
         }
       ],
@@ -146,7 +141,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Help en ondersteuning\" is a reasonable translation of \"Help Center\", it's more literal and verbose. A more concise and commonly used translation would be \"Hulp\" or \"Help\". \"Help Center\" often implies a central hub for assistance, which \"Hulp en ondersteuning\" doesn't fully convey.",
+          "suggestion": "Hulp"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -173,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Centrum pomoci\" is understandable, a more natural and commonly used Romanian translation for \"Help Center\" would be \"Centrul de ajutor\" or \"Centrul de asistență\". \"Pomoci\" is more common in Slovak.",
-          "suggestion": "Centrul de ajutor"
+          "description": "While 'Centrum pomoci' is understandable, it's not the most natural Romanian translation for 'Help Center'. 'Centru de ajutor' would be more common and idiomatic.",
+          "suggestion": "Centru de ajutor"
         }
       ],
       "approved_at": null

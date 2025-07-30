@@ -2,17 +2,17 @@
   "key_path": "InvitationSettingsGuests",
   "content": "Allow inviting guests",
   "content_en_sha1_hash": "4a09c16f30591c146b613bc29c19cb5ea20bb65c",
-  "created_at": "2025-05-28T09:33:04.861Z",
-  "updated_at": "2025-05-28T09:38:47.029Z",
+  "created_at": "2025-05-26T07:15:51.094Z",
+  "updated_at": "2025-06-02T10:20:51.468Z",
   "comment": {
-    "text": "This translation key is used for the \"Allow inviting guests\" text that appears as a button label on the Invitation Settings page. The text indicates whether to enable or disable guest invitations, allowing users to customize their access control settings.",
+    "text": "This translation key controls the text displayed on a button that allows users to invite guests. The text is used in a portal settings page and changes depending on the user's preference. It appears as part of a styled text element with an onClick event listener, indicating its interactive function.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:38:47.029Z"
+    "updated_at": "2025-05-26T08:09:53.925Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 276,
+      "line_number": 278,
       "context": "fontSize=\"13px\"\n fontWeight=\"600\"\n lineHeight=\"20px\"\n onClick={onChangeGuests}\n >\n {t(\"InvitationSettingsGuests\")}\n </Text>\n </div>\n \n <Text\n fontSize=\"12px\"",
       "module": "/packages/client"
     }

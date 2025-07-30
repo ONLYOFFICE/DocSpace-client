@@ -3,7 +3,7 @@
   "content": "Please resize the window or enable full-screen mode",
   "content_en_sha1_hash": "2367a1df9cf710acc6f63945ba4e829c91aef4e1",
   "created_at": "2025-05-19T21:30:50.797Z",
-  "updated_at": "2025-05-21T04:57:10.554Z",
+  "updated_at": "2025-05-24T05:41:00.423Z",
   "comment": {
     "text": "This translation key is used for a warning message that advises users to resize their window or enable full-screen mode. It appears in a breakpoint warning component on mobile devices where only the small screen size is unavailable.",
     "is_auto": true,
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ole hyvä ja muuta ikkunan kokoa tai ota koko näytön tila käyttöön' is a bit too formal for a UI prompt. 'Ole hyvä' (please) isn't necessary and adds unnecessary politeness. It's more appropriate to be direct and concise in a UI context.",
-          "suggestion": "Muuta ikkunan kokoa tai ota koko näytön tila käyttöön"
+          "description": "The translation \"Ole hyvä ja muuta ikkunan kokoa tai ota koko näytön tila käyttöön\" is a bit formal and verbose for a UI element like a breakpoint warning. It directly translates \"Please resize the window or enable full-screen mode,\" but a more natural and concise Finnish phrasing would be preferred.",
+          "suggestion": "Muuta ikkunan kokoa tai ota koko näyttö käyttöön"
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word ' չափափոխել' (chapaphoxel) is a double repetition of 'ափոխել' (apoxel) - meaning 'resize'. It is unnecessarily verbose.",
-          "suggestion": "Խնդրում ենք փոփոխել պատուհանը կամ միացնել լիաէկրան ռեժիմը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -108,13 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ウィンドウを大きくするか、フルスクリーンモードに切り替えてください' while technically correct, sounds a bit formal and abrupt for a user-facing prompt. A more natural and user-friendly phrasing would improve the experience.",
-          "suggestion": "ウィンドウのサイズを変更するか、フルスクリーン表示にしてください"
+          "description": "The translation \"ウィンドウを大きくするか、フルスクリーンモードに切り替えてください\" is not a direct or natural translation of 'Please resize the window or enable full-screen mode'. While technically correct, it sounds somewhat awkward. '大きくするか' implies resizing to be bigger, which might not be the intended meaning. The prompt is more about adjusting the window size to fit the content.",
+          "suggestion": "ウィンドウのサイズを変更するか、フルスクリーンモードに切り替えてください"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the use of 'か' implies an either/or. It might be better to use a softer phrasing to guide the user towards a solution.",
-          "suggestion": "ウィンドウのサイズを変更するか、フルスクリーン表示を試してみてください"
+          "description": "The translation uses the polite form (です/ます) which is appropriate, but might be overly formal for a settings panel. A more casual tone could be considered.",
+          "suggestion": "ウィンドウのサイズを変更するか、フルスクリーンにしてください"
         }
       ],
       "approved_at": null
@@ -128,13 +122,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ເຕັມຈໍ' (tem chao) is technically correct (full screen), but 'ເຕັມໜ້າຈໍ' (tem na chao) might be more natural and clearer for Lao speakers, especially in a technical context. It emphasizes the whole screen.",
-          "suggestion": "ກະລຸນາປັບຂະໜາດໜ້າຈໍ ຫຼືເປີດໃຊ້ໂໝດເຕັມໜ້າຈໍ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -149,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vergroot het venster of schakel de volledig-scherm modus in.\" is not a direct or natural translation of 'Please resize the window or enable full-screen mode'. 'Vergroot' (enlarge) implies a specific action. A more accurate translation would use a word that suggests adjustment or change in size.",
-          "suggestion": "Pas de venstergrootte aan of schakel de volledig-scherm modus in."
+          "description": "The English phrase 'Please resize the window or enable full-screen mode' implies a polite request or instruction. The Dutch translation 'Vergroot het venster of schakel de volledig-scherm modus in' is more of a statement rather than a request. It lacks the politeness of 'Please'.",
+          "suggestion": "Vergroot het venster of schakel de volledig-scherm modus in alstublieft."
         }
       ],
       "approved_at": null
@@ -179,8 +167,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'comutare în mod ecran complet' is a literal translation of 'switch to full-screen mode' and isn't the most natural Romanian phrasing for 'enable full-screen mode'.",
+          "description": "The phrase 'enable full-screen mode' is not accurately translated. 'Comutare în mod ecran complet' literally translates to 'switch to full-screen mode' which implies a toggle action rather than enabling a setting.",
           "suggestion": "Activați modul ecran complet"
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation uses a semicolon where a conjunction might be more natural.",
+          "suggestion": "Redimensionați fereastra sau activați modul ecran complet."
         }
       ],
       "approved_at": null
@@ -197,13 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කවුළුව යළි ප්‍රමාණනය කරන්න හෝ පූර්ණ තිර ප්‍රකාරය සබල කරන්න' doesn't perfectly capture the meaning of 'Please resize the window or enable full-screen mode'. 'කවුළුව' translates to 'window' but the instruction implies resizing the application window, not literally the physical window. 'පූර්ණ තිර ප්‍රකාරය' is a bit literal and formal for 'full-screen mode'.",
-          "suggestion": "Consider a translation that emphasizes resizing the application window, such as 'වියූදු පත්‍රය ප්‍රමාණාත්මක කරන්න හෝ පුරාවෘත්ත තිර සැට්ටිය සක්‍රීය කරන්න' or 'වියූදු පත්‍රය විශාල කරන්න හෝ පුරාවෘත්ත තිර ක්‍රියාත්මක කරන්න'."
+          "description": "The translation 'කවුළුව යළි ප්‍රමාණනය කරන්න හෝ පූර්ණ තිර ප්‍රකාරය සබල කරන්න' is a literal translation and sounds unnatural in Sinhala. 'කවුළුව' refers to a window, which isn't the intended meaning. It should refer to the screen or view.",
+          "suggestion": "මොනවොත් නැවත ප්‍රමාණනය කරන්න හෝ සම්පූර්ණ තිර ක්‍රියාත්මක කරන්න"
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the translation lacks the 'Please' found in the original English content. Adding 'దయවන්න' (Dayawanna) to the beginning would be more polite and align better with typical phrasing.",
-          "suggestion": "దయවන්න, වියූදු පත්‍රය ප්‍රමාණාත්මක කරන්න හෝ පුරාවෘත්ත තිර සැට්ටිය සක්‍රීය කරන්න"
+          "type": "spelling",
+          "description": "While 'පූර්ණ තිර ප්‍රකාරය' isn't technically incorrect, it's a bit clunky. 'ප්‍රකාරය' isn't the most common term to use in this context.",
+          "suggestion": "පූර්ණ තිර ක්‍රියාත්මක කරන්න"
         }
       ],
       "approved_at": null
@@ -226,8 +219,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Промените величину прозора или омогуц́ите режим целог екрана' does not accurately convey the meaning of 'Please resize the window or enable full-screen mode'. 'Промените величину прозора' literally translates to 'Change the size of the window', which is more forceful than 'Please resize'.  'Омогуц́ите режим целог екрана' translates to 'Enable full screen mode,' but a more natural phrasing would be 'укључите режим целог екрана' or similar.",
-          "suggestion": "Молимо промените величину прозора или укључите режим целог екрана"
+          "description": "The Serbian translation 'Промените величину прозора или омогуц́ите режим целог екрана' is not a natural or accurate translation of 'Please resize the window or enable full-screen mode.' The word 'Промените' (Change) is too direct. A more natural phrasing would be 'Подесите величину прозора...' (Adjust the window size...).",
+          "suggestion": "Подесите величину прозора или омогуц́ите режим целог екрана"
         }
       ],
       "approved_at": null
@@ -238,7 +231,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'omogućite' has an incorrect diacritic. It should be 'omogući'.",
+          "description": "The word 'omogućite' is misspelled. The correct spelling is 'omogući'.",
           "suggestion": "omogući"
         }
       ],

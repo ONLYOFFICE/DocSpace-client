@@ -3,7 +3,7 @@
   "content": "Please use the desktop or tablet to access the <1>{{sectionName}}</1>.",
   "content_en_sha1_hash": "e02848140f969778622004016539527a0c8733f2",
   "created_at": "2025-05-19T21:30:50.782Z",
-  "updated_at": "2025-05-21T04:58:31.523Z",
+  "updated_at": "2025-05-24T05:42:20.981Z",
   "comment": {
     "text": "This translation key is used to display a warning message prompting users to access the \"<sectionName>\" settings on the desktop site instead of the mobile app. The text appears when accessing certain settings on a mobile device.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'الرجاء استخدام سطح المكتب أو الجهاز اللوحي للوصول إلى <1>{{sectionName}}</1>' is a literal translation and while grammatically correct, it lacks the natural flow expected in Arabic. A more natural phrasing would be 'يرجى استخدام الحاسوب أو الجهاز اللوحي للوصول إلى <1>{{sectionName}}</1>'. The verb 'يرجى' is more common and sounds more polite than 'الرجاء استخدام'.",
-          "suggestion": "يرجى استخدام الحاسوب أو الجهاز اللوحي للوصول إلى <1>{{sectionName}}</1>"
+          "description": "The translation 'الرجاء استخدام سطح المكتب أو الجهاز اللوحي للوصول إلى <1>{{sectionName}}</1>' is a literal translation and doesn't flow naturally in Arabic. A more natural phrasing would be something like 'يرجى استخدام جهاز الكمبيوتر أو الجهاز اللوحي للوصول إلى <1>{{sectionName}}</1>' or 'للوصول إلى <1>{{sectionName}}</1>، يرجى استخدام جهاز كمبيوتر أو جهاز لوحي'.",
+          "suggestion": "للوصول إلى <1>{{sectionName}}</1>، يرجى استخدام جهاز كمبيوتر أو جهاز لوحي."
         },
         {
           "type": "formatting",
-          "description": "The opening and closing tags <1> and </1> are present and appear consistent with the English content. However, it's important to confirm that this is the standard format used within the application or system for handling placeholders.",
-          "suggestion": "Confirm consistency of placeholder formatting with system standards."
+          "description": "The use of `<1>{{sectionName}}</1>` appears to be a placeholder and should be consistent across both the English and Arabic versions. Ensure that the placeholder is correctly implemented and renders properly in the target environment.",
+          "suggestion": "Verify the placeholder implementation and ensure it functions as intended in the user interface."
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"-ə daxil olmaq üçün\" is a bit awkward and less natural. It literally means 'to enter'. A more natural phrasing would convey 'to access' or 'to view'.",
-          "suggestion": "Consider using a more natural phrase like \"-i görmək üçün\" (to view) or \"-ə daxil olmaq üçün\" if the intended meaning is specific access."
+          "description": "The translation 'daxil olmaq üçün' (to enter) doesn't quite capture the meaning of 'access'. A more suitable phrase would be something along the lines of 'əldə etmək üçün' (to obtain/have access to).",
+          "suggestion": "<1>{{sectionName}}</1>-ə əldə etmək üçün masaüstü və ya planşetdən istifadə edin."
         },
         {
           "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are present in both the English and Azerbaijani content, which is good for consistency. No changes needed here.",
-          "suggestion": "N/A"
+          "description": "While the `<1>` tags are present, ensuring they are consistent with the application's markup language is important. This is not an error *per se*, but something to confirm.",
+          "suggestion": "Confirm the `<1>` tags align with the application's markup language."
         }
       ],
       "approved_at": null
@@ -70,8 +70,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation uses \"<1>{{sectionName}}</1>\" which exactly mirrors the English, implying the tags should be preserved. However, it's more likely the tags are placeholders for dynamic content and should be handled by the application, not directly translated.",
-          "suggestion": "If the tags are placeholders, the translation should be \"Pro přístup k {{sectionName}} použijte prosím stolní počítač nebo tablet.\""
+          "description": "The English content uses `<1>` and `</1>` to mark the variable. The Czech translation uses the same tags, which is consistent but worth noting for potential template integration considerations.",
+          "suggestion": "Ensure the template rendering engine correctly handles `<1>` and `</1>` tags in the Czech context."
         }
       ],
       "approved_at": null
@@ -85,13 +85,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Χρησιμοποιήστε τον σταθερό υπολογιστή σας\" (Use your desktop computer) could be misinterpreted. While 'σταθερός' implies fixed or desktop, it's not the most natural way to say it.  'Υπολογιστή' alone is sufficient and more common for general usage.",
-          "suggestion": "Χρησιμοποιήστε τον υπολογιστή σας ή το τάμπλετ σας για να αποκτήσετε πρόσβαση στο <1>{{sectionName}}</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -100,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'desktop' should be translated to 'ordenador de escritorio' or a similar equivalent in Spanish to maintain accuracy and clarity.",
-          "suggestion": "Por favor, utilice el ordenador de escritorio o la tableta para acceder a <1>{{sectionName}}</1>."
+          "description": "The translation of \"Please use the desktop or tablet\" is too literal. A more natural Spanish phrasing would be \"Utilice una computadora de escritorio o una tableta\".",
+          "suggestion": "Utilice una computadora de escritorio o una tableta para acceder a <1>{{sectionName}}</1>."
         }
       ],
       "approved_at": null
@@ -112,13 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ole hyvä ja käytä työpöytää tai tablettia käyttääksesi <1>{{sectionName}}</1>.' is a bit literal and not the most natural Finnish. A more idiomatic translation would convey the message more clearly.",
-          "suggestion": "Käytäthän työpöytää tai tablettia päästäksesi <1>{{sectionName}}</1>."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'käyttääksesi' followed by the section name is slightly clunky. It would be smoother to integrate the section name within a single phrase.",
-          "suggestion": "Käytäthän työpöytää tai tablettia päästäksesi <1>{{sectionName}}</1>."
+          "description": "The translation 'Ole hyvä ja käytä työpöytää tai tablettia käyttääksesi' is a bit clunky. A more natural Finnish phrasing would be 'Käytä työpöytää tai tablettia päästäksesi' or 'Ole hyvä ja käytä työpöytää tai tablettia päästäksesi'. 'Käyttääksesi' is grammatically correct, but less common in this context.",
+          "suggestion": "Käytä työpöytää tai tablettia päästäksesi"
         }
       ],
       "approved_at": null
@@ -126,7 +115,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please use the desktop or tablet' is translated as 'Veuillez utiliser un PC ou une tablette'. While not strictly wrong, 'ordinateur' would be a more general and commonly understood translation for 'desktop' in this context, especially given the mobile warning. 'PC' is quite specific.",
+          "suggestion": "Veuillez utiliser un ordinateur ou une tablette..."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -141,13 +136,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Please use' translates more naturally to Italian as something along the lines of 'Si prega di utilizzare' or a more conversational equivalent. 'Utilizza' is grammatically correct but lacks the polite tone of the original.",
-          "suggestion": "Si prega di utilizzare il desktop o il tablet per accedere alla sezione <1>{{sectionName}}</1>."
+          "description": "The English sentence implies a request or instruction to *use* desktop/tablet. The Italian translation, while technically correct, loses some of the polite and directive tone. A more appropriate translation might emphasize the necessity of using desktop/tablet.",
+          "suggestion": "Per accedere alla sezione <1>{{sectionName}}</1>, si prega di utilizzare il desktop o il tablet."
         },
         {
           "type": "formatting",
-          "description": "The formatting of the tags <1>{{sectionName}}</1> is consistent between the English and Italian versions. While not an error, it's good to ensure that the templating system handles this correctly.",
-          "suggestion": "No change needed. Ensure templating system renders tags correctly."
+          "description": "The formatting tags <1>...</1> are identical in both English and Italian. While this might be intentional, it's worth verifying if the Italian system uses the same tags and how they are intended to be handled.",
+          "suggestion": "Confirm if the <1> tags are intended to be identical and properly rendered in the Italian interface."
         }
       ],
       "approved_at": null
@@ -157,9 +152,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation \"デスクトップまたはタブレットで<1>{{sectionName}}</1>にアクセスしてください\" is a literal translation but sounds unnatural in Japanese. A more natural phrasing would be something along the lines of \"デスクトップまたはタブレットから<1>{{sectionName}}</1>にアクセスしてください\" or \"<1>{{sectionName}}</1>は、デスクトップまたはタブレットでご利用ください\". The phrase 'にアクセスしてください' is grammatically correct, but a more polite and natural wording would be preferable in this context.",
+          "suggestion": "<1>{{sectionName}}</1>は、デスクトップまたはタブレットでご利用ください。"
+        },
+        {
           "type": "formatting",
-          "description": "The tag `<1>{{sectionName}}</1>` is not properly closed in the Japanese translation. It should be `</1>`.  This likely indicates a copy/paste error or issue with the translation tool.",
-          "suggestion": "Replace `</1>` with `</1>`"
+          "description": "The bracketed variable <1>{{sectionName}}</1> appears identical in both the English and Japanese versions. While this isn't technically an error, it's worth considering whether the placement and styling of the variable are appropriate for Japanese UI conventions. It might benefit from a different bracket style.",
+          "suggestion": "Consider using a bracket style more common in Japanese UI, e.g., {sectionName} or (sectionName)."
         }
       ],
       "approved_at": null
@@ -169,9 +169,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Please use' isn't directly translated into Korean. While '사용하세요' (use) is present, the 'Please' softens the instruction in English and might be better conveyed with a more polite phrasing.  The current translation is accurate but could be more nuanced.",
-          "suggestion": "Consider adding a particle or phrase to soften the instruction, such as '번개' (beon-gae, roughly 'please' or 'kindly') at the beginning. For example: '번개 <1>{{sectionName}}</1>에 액세스하려면 데스크톱이나 태블릿을 사용하세요.'"
+          "type": "formatting",
+          "description": "The English content uses `<1>` and `</1>` tags around `{{sectionName}}`. The Korean translation also uses these tags. While technically correct, it's unusual to include the tags when presenting the message to the user.  Consider removing the tags in the final delivered text.",
+          "suggestion": "Remove the `<1>` and `</1>` tags from the Korean translation when displayed to the user: \"{{sectionName}}에 액세스하려면 데스크톱이나 태블릿을 사용하세요.\""
         }
       ],
       "approved_at": null
@@ -185,7 +185,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation retains the `<1>` tags, which are likely meant for dynamic content insertion and should be handled appropriately in the implementation, but are not ideal in the raw translation string.",
+          "suggestion": "Consider removing the `<1>` tags from the translation and let the application handle dynamic content insertion."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -199,9 +205,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Please use\" is missing from the Polish translation. The translation feels abrupt without the introductory polite request.",
-          "suggestion": "Proszę użyć komputera lub tabletu, aby uzyskać dostęp do sekcji <1>{{sectionName}}</1>."
+          "type": "formatting",
+          "description": "The Polish translation maintains the bracketed section name <1>{{sectionName}}</1> which is consistent with the English original. This indicates the formatting is correctly preserved.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -212,8 +218,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content uses \"Please\" while the Portuguese translation is more direct. While not strictly incorrect, the tone is different. A more polite translation would align better with the original intent.",
-          "suggestion": "Por favor, use o desktop ou tablet para acessar <1>{{sectionName}}</1>."
+          "description": "The English phrase \"Please use the desktop or tablet to access\" has been shortened to \"Use\". The polite request implied by \"Please\" is lost in translation. While technically accurate, it's less user-friendly.",
+          "suggestion": "Por favor, use o desktop ou tablet para acessar"
         }
       ],
       "approved_at": null
@@ -224,7 +230,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Please use' is missing from the Portuguese translation. The original English is a polite request, which is lost in the direct translation.",
+          "description": "The English phrase 'Please use...' is missing from the Portuguese translation. The instruction is more polite in English.",
           "suggestion": "Por favor, use o desktop ou tablet para acessar <1>{{sectionName}}</1>."
         }
       ],
@@ -235,9 +241,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Romanian translation uses the formal 'Utilizaţi', which might not be appropriate for all contexts. A less formal alternative could be considered.",
-          "suggestion": "Consider using 'Folosiţi' instead of 'Utilizaţi' for a more approachable tone."
+          "type": "incorrect_translation",
+          "description": "The translation \"Utilizaţi desktopul sau tabletă pentru a accesa <1>{{sectionName}}</1>.\" is a literal translation, but in Romanian, it's more natural to say 'Vă rugăm să utilizați...' (Please use...).",
+          "suggestion": "Vă rugăm să utilizați desktopul sau tableta pentru a accesa <1>{{sectionName}}</1>."
         }
       ],
       "approved_at": null
@@ -247,9 +253,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The brackets `<1>` and `</1>` are present in both the English and Russian translations. While this might be intentional to preserve formatting placeholders, it's important to verify the purpose and relevance within the context of the application.",
-          "suggestion": "Confirm the purpose of the brackets. If they are placeholders, ensure they are correctly utilized in the application. If they're unnecessary, remove them from the translation."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Please use the desktop or tablet\" is better translated as \"Пожалуйста, используйте компьютер или планшет\" rather than simply \"используйте компьютер или планшет\". The addition of 'Пожалуйста' adds politeness.",
+          "suggestion": "Пожалуйста, используйте компьютер или планшет."
         }
       ],
       "approved_at": null
@@ -260,13 +266,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'use the desktop or tablet' is translated as 'භාවිතයෙන්'. While technically correct, it sounds unnatural in Sinhala. A more natural phrasing would be 'දේශපතුවල හෝ ටැබ්ලට් වල' (desktop or tablets).",
-          "suggestion": "කරුණාකර දේශපතුවල හෝ ටැබ්ලට් වල <1>{{sectionName}}</1> වෙත පිවිසිය යුතුයි."
+          "description": "The phrase \"කරුණාකර\" is overly formal for a warning prompt. A more natural and user-friendly alternative would be \"ඔයා\".",
+          "suggestion": "ඔයා දේශපතුල හෝ ටැබ්ලට් භාවිතයෙන් <1>{{sectionName}}</1> වෙත පිවිසිය යුතුයි."
         },
         {
-          "type": "formatting",
-          "description": "The use of `<1>{{sectionName}}</1>` seems unnecessary in Sinhala. It's unclear what the intent of this tag is and it should either be removed or standardized based on existing convention.",
-          "suggestion": "Remove or standardize the tags.  For example, if the intent is to format the sectionName in bold, the Sinhala equivalent would need to be adapted. If not, just use the plain text:  `{{sectionName}}`"
+          "type": "spelling",
+          "description": "While generally correct, confirming 'දේශපතුල' is the most accurate spelling is recommended. It could potentially be 'දේශපටුල' or other minor variations, though 'දේශපතුල' is likely correct based on common usage.",
+          "suggestion": "Verify the spelling of 'දේශපතුල'.  If alternative spellings exist that are more common, use that instead."
         }
       ],
       "approved_at": null
@@ -277,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Na prístup k <1>{{sectionName}}</1> prosím použite počítač alebo tablet.\" doesn't fully convey the original meaning. The English sentence implies a warning or suggestion, whereas the Slovak translation reads more like a direct instruction. It lacks the polite request implied by 'Please'.",
-          "suggestion": "Na prístup k <1>{{sectionName}}</1> prosím používajte počítač alebo tablet."
+          "description": "The English content uses \"Please use the desktop or tablet to access...\" while the Slovak translation directly states \"To access... please use...\" This changes the tone and emphasis. A more natural Slovak translation would mirror the original structure more closely.",
+          "suggestion": "Prosím použite počítač alebo tablet na prístup k <1>{{sectionName}}</1>."
         },
         {
           "type": "formatting",
-          "description": "The Slovak translation uses a full stop at the end of the sentence, while the English original does not. This might affect consistency.",
-          "suggestion": "Consider removing the full stop at the end of the sentence for consistency with the English version: \"Na prístup k <1>{{sectionName}}</1> prosím používajte počítač alebo tablet\""
+          "description": "The tag <1>{{sectionName}}</1> is present in both English and Slovak. While not inherently wrong, it's worth noting as a potential point of inconsistency in how this element is handled across different languages if the tag's functionality or display is sensitive to locale.",
+          "suggestion": "No change needed, but review tag functionality across all locales."
         }
       ],
       "approved_at": null
@@ -294,13 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Za dostop do <1>{{sectionName}}</1> uporabite namizje ali tablico' is a literal translation, but sounds awkward in Slovenian. A more natural phrasing would be 'Prosim, uporabite namizni računalnik ali tablico za dostop do <1>{{sectionName}}</1>.' The original emphasizes *using* the device, which could be better conveyed.",
-          "suggestion": "Prosim, uporabite namizni računalnik ali tablico za dostop do <1>{{sectionName}}</1>."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'namizje' technically means 'desktop', in modern Slovenian usage, 'namizni računalnik' (desktop computer) is clearer.  The current translation could be interpreted as simply meaning 'desktop' as a surface.",
-          "suggestion": "Use 'namizni računalnik' instead of 'namizje'."
+          "description": "The English phrase \"Please use\" is missing from the Slovenian translation. The translation should imply a request or suggestion, similar to the English version.",
+          "suggestion": "Za dostop do <1>{{sectionName}}</1> prosim uporabite namizje ali tablico."
         }
       ],
       "approved_at": null
@@ -311,8 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation uses the word \"приступите\" which translates to \"to access\" but can sound a bit formal or technical in this context. A more natural and user-friendly option would be \"да видите\" (to see) or \"за приступ\" (for access).",
-          "suggestion": "Молимо користите десктоп или таблет да видите <1>{{sectionName}}</1>."
+          "description": "The English phrase 'access' is best translated as 'приступите' rather than 'приступите'. While 'приступите' can technically work, 'приступите' is more natural and idiomatic in this context.",
+          "suggestion": "Молимо користите десктоп или таблет да приступите <1>{{sectionName}}</1>."
         }
       ],
       "approved_at": null
@@ -323,8 +324,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Molimo koristite desktop ili tablet da pristupite' is overly literal. A more natural and idiomatic Serbian translation would be something like 'Molim vas, koristite desktop ili tablet da biste pristupili'. The inclusion of 'biste' makes it sound less abrupt and more polite.",
-          "suggestion": "Molim vas, koristite desktop ili tablet da biste pristupili"
+          "description": "The translation 'Molimo koristite desktop ili tablet da pristupite <1>{{sectionName}}</1>.' is a direct translation but doesn't flow naturally in Serbian. A more idiomatic translation would be preferable.",
+          "suggestion": "Molim vas, koristite desktop ili tablet za pristup <1>{{sectionName}}</1>."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of <1> tags is preserved. Verify this is the desired formatting in the target system.",
+          "suggestion": "No change needed, but confirm formatting requirements."
         }
       ],
       "approved_at": null
@@ -335,8 +341,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The original English uses angle brackets `<1>` and `</1>` which should be mirrored in the translation.  The Turkish translation lacks the opening bracket at the beginning of `sectionName`.",
-          "suggestion": "<1>{{sectionName}}</1> bölümüne erişmek için lütfen masaüstü veya tablet kullanın."
+          "description": "The English content has `<1>{{sectionName}}</1>` markup. The Turkish translation also includes `<1>{{sectionName}}</1>`. This should be verified that the markup is intended and consistent with the English.",
+          "suggestion": "Confirm whether the markup `<1>{{sectionName}}</1>` is necessary and consistent across both languages. If not, remove or adjust as needed."
         }
       ],
       "approved_at": null
@@ -347,8 +353,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The English content uses `<1>` and `</1>` tags, which are present in the Ukrainian translation. While technically correct, it's unclear if these tags are necessary or if the translation should consider a different formatting approach. This may be an indication that the tag is an artifact of the original string manipulation and not intended as part of the user-facing text.",
-          "suggestion": "Determine if the `<1>` and `</1>` tags are required. If not, remove them. If they are, ensure they are handled correctly in the application displaying the text."
+          "description": "The English content uses `<1>` and `</1>` as placeholders, and the Ukrainian translation also uses similar tags. Ensure these tags are consistent throughout the product and documentation.",
+          "suggestion": "Verify that `<1>` and `</1>` are the correct placeholder tags and are consistently applied across all locales."
         }
       ],
       "approved_at": null
@@ -356,13 +362,30 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are present in both the English and Vietnamese versions, which suggests they are placeholders for dynamic content. This is fine, but ensuring consistency in tag usage across all locales is recommended.",
+          "suggestion": "Confirm that the tags `<1>` and `</1>` are consistently used and handled correctly in the application for all locales."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is too literal and doesn't flow naturally in Chinese. While technically correct, it sounds somewhat robotic. A more natural phrasing would better suit the context of a user notification.",
+          "suggestion": "请使用电脑或平板设备访问<1>{{sectionName}}</1>。"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '桌面' (desktop) and '平板电脑' (tablet computer) might be slightly too formal for a user-facing notification. While not incorrect, '电脑' (computer) and '平板设备' (tablet device) are slightly more common and user-friendly.",
+          "suggestion": "请使用电脑或平板设备访问<1>{{sectionName}}</1>。"
+        }
+      ],
       "approved_at": null
     }
   }

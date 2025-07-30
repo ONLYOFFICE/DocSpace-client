@@ -3,7 +3,7 @@
   "content": "Room deleted",
   "content_en_sha1_hash": "65fee5daecf29b47c6ec9d434be65a53c5f1d509",
   "created_at": "2025-05-19T21:30:49.821Z",
-  "updated_at": "2025-05-21T00:59:33.747Z",
+  "updated_at": "2025-05-24T02:13:29.597Z",
   "comment": {
     "text": "This translation key is used to display the text \"Room deleted\" in various UI elements, such as tooltips or error messages, that occur after a room has been deleted. The exact location may vary depending on the implementation, but it's likely used for notifications or confirmation dialogs when a user attempts to delete a room.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Místnost vymazána\" is technically correct, it implies a forceful deletion. \"Room deleted\" is a neutral statement. A more appropriate translation that conveys the same neutrality would be \"Místnost smazána\".",
-          "suggestion": "Místnost smazána"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරය ඉවත් කරනු ලැබුව.' while conveying the general meaning of 'Room deleted', is a passive voice construction. A more natural and direct translation would be preferable for a webhook event.",
-          "suggestion": "කාමරය නිශ්චිත කරන ලදි (Kamara nischithakaran ladi) - Room finalized/removed"
+          "description": "The translation 'කාමරය ඉවත් කරනු ලැබුව' while understandable, is a passive voice construction. A more direct and natural translation for 'Room deleted' would be 'කාමරය නිදහස් කරන ලදි' or 'කාමරය මකා දමන ලදි'. 'ඉවත් කරනු ලැබුව' implies someone *did* the deleting, whereas the English phrase just states the fact of the room's deletion.",
+          "suggestion": "කාමරය නිදහස් කරන ලදි"
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба обрисана\" is not a correct translation of \"Room deleted.\" \"Обрисана\" means \"deleted\" but \"соба\" means \"room\". The correct translation should reflect the meaning of 'room deleted'.",
-          "suggestion": "Собија је избрисана"
+          "description": "The Serbian (Cyrillic) translation \"Соба обрисана\" is not an accurate translation of \"Room deleted\". \"Обрисана\" means 'deleted' but 'соба' means 'room' and has an incorrect gender.  The correct translation should indicate the subject being deleted is a room.",
+          "suggestion": "Соба је избрисана"
         }
       ],
       "approved_at": null

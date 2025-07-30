@@ -3,7 +3,7 @@
   "content": "To reactivate your subscription, please top up your wallet via Services. Once the payment is complete, your additional storage will become available again.",
   "content_en_sha1_hash": "2d9ad56d38fc068fdd379c4b00bda381ccb4e355",
   "created_at": "2025-06-24T16:31:06.928Z",
-  "updated_at": "2025-07-01T15:57:36.033Z",
+  "updated_at": "2025-06-30T12:20:31.270Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to top up their wallet via Services to reactivate their subscription and regain additional storage. It appears in a modal dialog footer when a user's storage tariff has been deactivated.",
     "is_auto": true,

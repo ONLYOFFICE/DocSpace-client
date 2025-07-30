@@ -25,38 +25,41 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import { TFunction } from "i18next";
 import { useNavigate } from "react-router";
 import { decode } from "he";
 import { inject, observer } from "mobx-react";
+import { Trans, useTranslation } from "react-i18next";
+import classNames from "classnames";
+
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Trans, withTranslation } from "react-i18next";
-import { TTranslation } from "@docspace/shared/types";
-import { TSetSelectedFolder } from "../../../../../../../store/SelectedFolderStore";
-import { Feed } from "./HistoryBlockContent.types";
+import { TFeedAction, TFeedData } from "@docspace/shared/api/rooms/types";
 
-import {
-  StyledHistoryBlockExpandLink,
-  StyledHistoryLink,
-} from "../../../styles/history";
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
+
+import styles from "../History.module.scss";
 
 const EXPANSION_THRESHOLD = 8;
 
 interface HistoryGroupListProps {
-  t: TTranslation;
-  feed: Feed;
+  feed: TFeedAction<TFeedData>;
+
   isVisitor?: boolean;
   isCollaborator?: boolean;
-  setPeopleSelection?: (newSelection: any[]) => void;
-  setPeopleBufferSelection?: (newBufferSelection: any) => void;
-  setFilesSelection?: (newSelection: any[]) => void;
-  setFilesBufferSelection?: (newBufferSelection: any) => void;
-  setSelectedFolder?: (selectedFolder: TSetSelectedFolder | null) => void;
+
+  setPeopleSelection?: UsersStore["setSelection"];
+  setPeopleBufferSelection?: UsersStore["setBufferSelection"];
+  setFilesSelection?: FilesStore["setSelection"];
+  setFilesBufferSelection?: FilesStore["setBufferSelection"];
+  setSelectedFolder?: SelectedFolderStore["setSelectedFolder"];
+
   withWrapping?: boolean;
 }
 
 const HistoryGroupList = ({
-  t,
   feed,
   isVisitor,
   isCollaborator,
@@ -67,6 +70,8 @@ const HistoryGroupList = ({
   setSelectedFolder,
   withWrapping,
 }: HistoryGroupListProps) => {
+  const { t } = useTranslation(["InfoPanel"]);
+
   const navigate = useNavigate();
 
   const [isExpanded, setIsExpanded] = useState(
@@ -76,11 +81,11 @@ const HistoryGroupList = ({
 
   const groupsData = [
     feed.data,
-    ...feed.related.map((relatedFeed: any) => relatedFeed.data),
+    ...feed.related.map((relatedFeed) => relatedFeed.data),
   ];
 
   const onGroupClick = (groupId: string) => {
-    setSelectedFolder?.(t, null);
+    setSelectedFolder?.(null);
     setPeopleSelection?.([]);
     setPeopleBufferSelection?.(null);
     setFilesSelection?.([]);
@@ -95,13 +100,15 @@ const HistoryGroupList = ({
         const withComma = !isExpanded
           ? i < EXPANSION_THRESHOLD - 1
           : i < groupsData.length - 1;
+
+        if (!group) return null;
+
         return (
-          <StyledHistoryLink
+          <div
+            className={styles.historyLink}
             key={group.id}
             style={
-              withWrapping
-                ? { display: "inline", wordBreak: "break-all" }
-                : null
+              withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
             }
           >
             {isVisitor || isCollaborator ? (
@@ -113,7 +120,7 @@ const HistoryGroupList = ({
                 className="text link"
                 onClick={() => onGroupClick(group.id)}
                 style={
-                  withWrapping ? { display: "inline", textWrap: "wrap" } : null
+                  withWrapping ? { display: "inline", textWrap: "wrap" } : {}
                 }
               >
                 {decode(group.name)}
@@ -122,23 +129,26 @@ const HistoryGroupList = ({
 
             {withComma ? "," : null}
             {feed.related.length > 0 ? <div className="space" /> : null}
-          </StyledHistoryLink>
+          </div>
         );
       })}
 
       {!isExpanded ? (
-        <StyledHistoryBlockExpandLink
-          className="user-list-expand-link"
+        <div
+          className={classNames(
+            styles.historyBlockExpandLink,
+            styles.userListExpandLink,
+          )}
           onClick={onExpand}
         >
           <Trans
-            t={t}
+            t={t as TFunction}
             ns="InfoPanel"
             i18nKey="AndMoreLabel"
             values={{ count: groupsData.length - EXPANSION_THRESHOLD }}
             components={{ 1: <strong /> }}
           />
-        </StyledHistoryBlockExpandLink>
+        </div>
       ) : null}
     </>
   );
@@ -147,8 +157,8 @@ const HistoryGroupList = ({
 export default inject<TStore>(
   ({ userStore, peopleStore, filesStore, selectedFolderStore }) => {
     return {
-      isVisitor: userStore.user.isVisitor,
-      isCollaborator: userStore.user.isCollaborator,
+      isVisitor: userStore.user!.isVisitor,
+      isCollaborator: userStore.user!.isCollaborator,
       setPeopleSelection: peopleStore.usersStore.setSelection,
       setPeopleBufferSelection: peopleStore.usersStore.setBufferSelection,
       setFilesSelection: filesStore.setSelection,
@@ -156,4 +166,4 @@ export default inject<TStore>(
       setSelectedFolder: selectedFolderStore.setSelectedFolder,
     };
   },
-)(withTranslation(["InfoPanel"])(observer(HistoryGroupList)));
+)(observer(HistoryGroupList));

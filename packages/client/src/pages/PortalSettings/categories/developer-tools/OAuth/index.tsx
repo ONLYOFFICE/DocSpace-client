@@ -73,6 +73,7 @@ const OAuth = ({
   const { t } = useTranslation(["OAuth"]);
 
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<null | Error>(null);
 
   const startLoadingRef = React.useRef<null | Date>(null);
 
@@ -80,15 +81,19 @@ const OAuth = ({
     if (startLoadingRef.current) return;
     const actions: Promise<void>[] = [];
 
-    if (!isInit) {
-      actions.push(fetchScopes());
+    try {
+      if (!isInit) {
+        actions.push(fetchScopes());
+      }
+
+      actions.push(fetchClients());
+
+      startLoadingRef.current = new Date();
+
+      await Promise.all(actions);
+    } catch (e) {
+      setError(e as Error);
     }
-
-    actions.push(fetchClients());
-
-    startLoadingRef.current = new Date();
-
-    await Promise.all(actions);
 
     if (startLoadingRef.current) {
       const currentDate = new Date();
@@ -139,9 +144,8 @@ const OAuth = ({
         apiOAuthLink={apiOAuthLink}
         logoText={logoText}
         isLoading={isLoading}
+        isError={!!error}
       />
-      {/* )} */}
-
       {infoDialogVisible ? <InfoDialog visible={infoDialogVisible} /> : null}
       {disableDialogVisible ? <DisableDialog /> : null}
       {previewDialogVisible ? (

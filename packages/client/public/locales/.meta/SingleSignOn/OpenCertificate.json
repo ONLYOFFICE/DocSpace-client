@@ -3,7 +3,7 @@
   "content": "Public Certificate",
   "content_en_sha1_hash": "aea63e2f05925daedf345ab7abde382b62df4287",
   "created_at": "2025-05-19T21:30:50.116Z",
-  "updated_at": "2025-05-21T02:03:53.752Z",
+  "updated_at": "2025-05-24T03:16:53.775Z",
   "comment": {
     "text": "The \"OpenCertificate\" translation key is used to display the label for a certificate-related button or dialog. It appears in the modal dialog headers and body, indicating that it corresponds to an open certificate. The translation should be displayed as \"Public Certificate\".",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '공인 인증서' is a valid term, it's a broader term meaning 'certified certificate' or 'official certificate'. 'Public Certificate' often refers to a specific type of certificate accessible to the public for verification, which might be better represented with a more precise term. The nuance of 'public' is lost.",
-          "suggestion": "Consider alternatives like '공개 인증서' (gonggae injeungseo) which more directly translates to 'public certificate' or '발급 인증서' (ballgyeup injeungseo) which means 'issued certificate' if the context emphasizes the issuance aspect."
+          "description": "While '공인 인증서' is a valid Korean term, it's a broader term meaning 'Certified Certificate.' 'Public Certificate' often refers to a specific type of certificate used for authentication, which might be better represented with a more precise term depending on the context. '공개 인증서' could be considered, but again, context is important.",
+          "suggestion": "Consider '공개 인증서' or a more specific term like '공용 인증서' (if the context dictates a certificate shared for multiple purposes) depending on the specific meaning of 'Public Certificate' within the SingleSignOn context."
         }
       ],
       "approved_at": null

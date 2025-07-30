@@ -69,7 +69,7 @@ const WalletRefilledModal = (props: WalletRefilledModalProps) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const formattedBalance = formatWalletCurrency();
+  const formattedBalance = formatWalletCurrency!();
 
   const onCloseDialog = () => {
     updatePreviousBalance!();

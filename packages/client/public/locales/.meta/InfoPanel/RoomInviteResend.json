@@ -3,7 +3,7 @@
   "content": "Invitations sent again:",
   "content_en_sha1_hash": "cbf7c99c124eac8971e3b2796ff08f71fe296890",
   "created_at": "2025-05-19T21:30:54.934Z",
-  "updated_at": "2025-05-28T09:30:02.435Z",
+  "updated_at": "2025-06-30T12:20:31.351Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that invitations have been resent again, likely found on a button or in a confirmation dialog in the room update access section of the InfoPanel.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 227,
-      "context": "case \"RoomUpdateAccessForUser\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomRemoveUser\":\n return t(\"InfoPanel:RoomRemoveUser\");\n case \"RoomInviteResend\":\n return t(\"InfoPanel:RoomInviteResend\");\n case \"RoomGroupAdded\":\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });",
+      "line_number": 236,
+      "context": "case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });",
       "module": "/packages/client"
     }
   ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Կրկին ուղարկված հրավերներ՝' while literally translating to 'Invitations resent:', doesn't quite convey the nuance of 'Invitations sent again:' It feels a bit clunky and formal.  A more natural phrasing might be preferred, depending on the surrounding context within the application.",
-          "suggestion": "Consider 'Վերահրավերներ՝' or 'Կրկնելով ուղարկված հրավերներ՝' for a more natural feel. The best choice will depend on the overall tone of the application."
+          "description": "The translation \"Կրկին ուղարկված հրավերներ:\" is a literal translation of \"Invitations sent again:\". While technically correct, it sounds slightly unnatural in Armenian. A more natural phrasing might be something like \"Ուղարկվեցին նոր հրավերներ:\" or \"Հրավերները կրկին ուղարկվեցին:\"",
+          "suggestion": "Հրավերները կրկին ուղարկվեցին:"
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Invitations sent again:' implies a confirmation that invitations have been resent. The Japanese translation '招待状を再度送信しました：' literally translates to 'We sent invitations again:' and while understandable, it lacks the direct confirmation implied in the English. A more accurate translation might emphasize the completion and confirmation of the resent action.",
-          "suggestion": "招待状を再送しました："
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -126,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Uzaicinājumi, kas ir nosūtīti vēlreiz:' is a bit literal and sounds slightly awkward in Latvian. A more natural phrasing would be something like 'Uzaicinājumi atkārtoti nosūtīti:' or 'Uzaicinājumi nosūtīti atkārtoti:'.",
+          "description": "The translation 'Uzaicinājumi, kas ir nosūtīti vēlreiz:' is too literal and sounds awkward in Latvian. A more natural translation would be 'Uzaicinājumi atkārtoti nosūtīti:' or 'Uzaicinājumi nosūtīti atkārtoti:'",
           "suggestion": "Uzaicinājumi atkārtoti nosūtīti:"
         }
       ],
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආරාධනා නැවත එවුව:' is a literal translation but sounds awkward in Sinhala. A more natural phrasing would be something like 'ආරාධනා නැවත යවනු ලැබුව:' or 'ආරාධනා නැවත පంపුව:'.",
-          "suggestion": "ආරාධනා නැවත යවනු ලැබුව:"
+          "description": "The translation 'ආරාධනා නැවත එවුව:' is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would be something like 'ආරාධනා නැවත යවා ඇත:' or 'ආරාධනා නැවත යවා ඇත්තෙමු:'",
+          "suggestion": "ආරාධනා නැවත යවා ඇත:"
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Invitations sent again:' implies a repetition of a previous sending action. The Serbian translation 'Позивнице поново послате:' is a literal translation of 'Invitations sent again:' and is technically correct, but it might sound slightly unnatural in Serbian. A more natural phrasing might emphasize the update or re-sending action.",
-          "suggestion": "Consider a phrasing like 'Позивнице поново послате' (Invitations resent) or 'Позивнице су поново послате' (Invitations have been resent again) depending on the intended nuance."
+          "description": "The translation 'Позивнице поново послате:' is a literal translation and sounds slightly unnatural in Serbian. A more natural phrasing would be something like 'Позивнице су поново послате' or 'Поново су послате позивнице'.",
+          "suggestion": "Позивнице су поново послате:"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "The image size is too large, please select another image.",
   "content_en_sha1_hash": "70aa576311994ef2eb1361f70f15d79707597c1f",
   "created_at": "2025-05-19T21:30:48.898Z",
-  "updated_at": "2025-05-28T09:30:02.244Z",
+  "updated_at": "2025-06-30T12:20:31.214Z",
   "comment": {
     "text": "The translation key \"SizeImageLarge\" is used to display an error message when an image file exceeds a certain size limit. This message is intended to inform users that their selected image is too large and should be replaced with a smaller one. It appears in various UI components, including dialog boxes and form fields, where image uploads are required.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 99,
+      "line_number": 100,
       "context": "const file =\n e.target.files && e.target.files?.length > 0 && e.target.files[0];\n \n if (file && file.type === \"image/svg+xml\") {\n if (file.size > ONE_MEGABYTE)\n return toastr.error(t(\"Common:SizeImageLarge\"));\n \n const reader = new FileReader();\n reader.onloadend = () => {\n if (reader.result && typeof reader.result === \"string\")\n changeValue(\"logo\", reader.result);",
       "module": "/packages/client"
     },
@@ -27,12 +27,6 @@
       "line_number": 205,
       "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n toastr.error(t(\"Common:NotSupportedFormat\"));\n }",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/components/image-editor/Dropzone/index.tsx",
-      "line_number": 70,
-      "context": ".catch((error) => {\n if (\n error instanceof Error &&\n error.message === \"recursion depth exceeded\"\n ) {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n // console.error(error);\n })\n .finally(() => {\n if (timer.current) {",
-      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -171,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'විශාලයි' (vishālai) is spelled correctly, but could be slightly more natural in this context. While grammatically correct, 'ඉතා විශාලයි' (itā vishālai) - 'very large' - might sound better.",
+          "suggestion": "රූපයේ ප්‍රමාණය ඉතා විශාලයි (Rūpaye pramāṇaya itā vishālai)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

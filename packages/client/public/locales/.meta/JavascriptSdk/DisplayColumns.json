@@ -3,7 +3,7 @@
   "content": "Displaying columns in a file row",
   "content_en_sha1_hash": "2e3f0667c14deaacf1dc19f11fea21952acfc281",
   "created_at": "2025-05-19T21:30:54.456Z",
-  "updated_at": "2025-05-21T09:15:05.481Z",
+  "updated_at": "2025-05-24T09:27:06.071Z",
   "comment": {
     "text": "This translation key is used to display the label \"DisplayColumns\" in a Radio Button Group for selecting column display options on a portal settings page. It appears as a header within the UI component, indicating the purpose of the radio button selection.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'عرض الأعمدة في صف الملف' is a literal translation but doesn't accurately convey the intended meaning of 'Displaying columns in a file row'. 'صف الملف' implies a specific row within a file, while the English phrase suggests a general display of columns within a file row.",
-          "suggestion": "عرض أعمدة البيانات في صف"
+          "description": "The translation 'عرض الأعمدة في صف الملف' literally translates to 'Displaying columns in a file row'. This doesn't accurately convey the meaning of 'Displaying columns in a file row', which implies showing columns within a data row of a file. The word 'row' is being misinterpreted as 'file row'.",
+          "suggestion": "عرض الأعمدة في سطر البيانات"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Fayl sətirində sütunların göstərilməsi' is a literal translation but doesn't quite capture the intended meaning of 'Displaying columns in a file row'. It's a bit clunky. A more natural phrasing would be needed.",
-          "suggestion": "Consider 'Fayl sıralarında sütun göstərmə' or 'Fayl sıralarında sütunlar göstərmə'."
+          "description": "The translation 'Fayl sətirində sütunların göstərilməsi' is too literal and doesn't flow naturally in Azerbaijani. It translates to 'Displaying columns in a file row' which is not idiomatic.",
+          "suggestion": "Consider a more natural phrasing like 'Bir faylın (or 'bir faylda') sütunlarının göstərilməsi' or 'Faylda sütunlar göstərilir'. Alternatively, 'Sütunların fayl sətirində göstərilməsi' could also work, but needs to be reviewed in context."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zobrazení sloupců v řádku souboru\" is not the most natural or accurate rendering of \"Displaying columns in a file row\".  'Řádek souboru' implies a row *of* a file, rather than a row *within* a file. The context likely refers to a table-like structure.",
-          "suggestion": "Zobrazení sloupců v záznamu souboru"
+          "description": "The translation 'Zobrazení sloupců v řádku souboru' is too literal and doesn't quite capture the intended meaning. 'Row' translates to 'řádek', which is correct, but the entire phrase sounds unnatural in Czech. The context likely refers to displaying columns *within* a file row, not just *in* a file row.",
+          "suggestion": "Zobrazení sloupců v řádku souboru. Alternatively: Zobrazení sloupců v řádku."
         }
       ],
       "approved_at": null
@@ -78,13 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Εμφάνιση στηλών σε μια σειρά αρχείων\" is too literal and doesn't accurately convey the meaning of \"Displaying columns in a file row\".  'Αρχείων' (files) is not necessary and makes the translation awkward. It implies multiple files instead of a single file.",
+          "description": "The translation 'Εμφάνιση στηλών σε μια σειρά αρχείων' translates to 'Displaying columns in a row of files.' This doesn't accurately reflect the original English 'Displaying columns in a file row.' The phrasing is slightly off.",
           "suggestion": "Εμφάνιση στηλών σε γραμμή αρχείου"
-        },
-        {
-          "type": "formatting",
-          "description": "The term 'γραμμή' (line) in the suggested correction may be more suitable than 'σειρά' (row) to reflect the context of file rows. While both can translate to 'row,' 'γραμμή' often applies to a row in a data structure.",
-          "suggestion": "Consider 'Εμφάνιση στηλών σε γραμμή αρχείου' for clearer communication."
         }
       ],
       "approved_at": null
@@ -95,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Displaying columns in a file row\" is a bit ambiguous. It's likely referring to displaying columns within a row of data in a file. The current translation, \"Mostrar columnas en una fila de archivo,\" is too literal and may not accurately convey this meaning. \"Fila de archivo\" doesn't naturally translate the concept of a row of data.",
-          "suggestion": "Consider a translation like \"Mostrar columnas en una fila de datos\" or \"Mostrar columnas en una fila del archivo\" to better reflect the intended meaning."
+          "description": "The translation 'Mostrar columnas en una fila de archivo' is not the most natural or accurate rendering of 'Displaying columns in a file row'. 'Archivo' implies a complete file, whereas the English phrase suggests a row *within* a file. The context implies data, not a whole file.",
+          "suggestion": "Mostrar columnas en una fila"
         }
       ],
       "approved_at": null
@@ -119,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Սյունակների ցուցադրում ֆայլի տողում' is a literal translation and doesn't quite convey the intended meaning. 'Displaying columns in a file row' suggests showing the columns within a row of data from a file. A more accurate translation would reflect this context.",
-          "suggestion": "Consider 'Ֆայլի տողում սյունակների ցուցադրում' or 'Տողային ֆայլում սյունակների ցուցադրում'.  Alternatively, more naturally: 'Ցուցադրվում են սյունակները ֆայլի տողերում' (Columns are displayed in the file rows)."
+          "description": "The translation \"Սյունակների ցուցադրում ֆայլի տողում\" literally translates to \"Displaying columns in a file row.\" While understandable, it's not the most natural way to express this concept in Armenian. A more appropriate phrasing might emphasize the concept of 'within a file row' or 'on a file row'.",
+          "suggestion": "Consider alternatives like \"Սյունակների ցուցադրում ֆայլի տողի վրա\" (Displaying columns on a file row) or \"Սյունակների ցուցադրում ֆայլի տողի մեջ\" (Displaying columns within a file row)."
         }
       ],
       "approved_at": null
@@ -131,7 +126,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Visualizzazione delle colonne in una riga di file' is not the most natural or accurate rendering of 'Displaying columns in a file row.' 'Riga di file' is awkward. 'Riga' alone is sufficient, as it implies a row within a file.",
+          "description": "The translation \"Visualizzazione delle colonne in una riga di file\" is not the most natural or accurate translation of \"Displaying columns in a file row\". \"Riga di file\" is awkward. It should be 'riga del file' or simply 'riga'.",
+          "suggestion": "Visualizzazione delle colonne in una riga del file"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the suggestion above improves the phrasing, 'riga del file' can still be verbose. A more direct and natural translation might be preferable.",
           "suggestion": "Visualizzazione delle colonne in una riga"
         }
       ],
@@ -143,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ファイル行の列の表示\" (Fairu gyō no rettsu no hyōji) literally translates to 'Display of columns in a file row.' It's a bit awkward and doesn't fully capture the meaning of 'Displaying columns in a file row.' A more natural phrasing might emphasize the action of displaying the columns.",
-          "suggestion": "ファイル行ごとの列表示 (Fairu gyō goto no rettsu hyōji) - 'Column display for each file row' or 列をファイル行で表示 (Retsu o fairu gyō de hyōji) - 'Display columns with a file row.'"
+          "description": "The translation \"ファイル行の列の表示\" while understandable, isn't the most natural or precise rendering of \"Displaying columns in a file row.\" It's quite literal. A more natural phrasing would convey the action of showing columns *within* a file row.",
+          "suggestion": "ファイル行の列表示 (Fairu-gyō no retsu hyōji) - This is more concise and reads better in Japanese.  Alternatively, ファイル行における列の表示 (Fairu-gyō ni okeru retsu no hyōji) - 'Display of columns within a file row' is more literal but still acceptable."
         }
       ],
       "approved_at": null
@@ -155,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"파일 행에 열 표시\" while technically understandable, doesn't accurately convey the nuance of 'Displaying columns in a file row'. It's a very literal translation. A more natural Korean phrasing would better represent the English meaning.",
-          "suggestion": "파일 행에서 열 표시하기"
+          "description": "The translation '파일 행에 열 표시' doesn't fully convey the meaning of 'Displaying columns in a file row'. A more accurate translation would imply the *action* of displaying, rather than just stating the existence of displayed columns.",
+          "suggestion": "파일 행에 열을 표시하다"
         }
       ],
       "approved_at": null
@@ -167,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຳລັງສະແດງຖັນໃນແຖວໄຟລ໌' doesn't perfectly convey the meaning of 'Displaying columns in a file row'. 'ຖັນ' typically refers to ribs or string, not columns. A more accurate translation would use a word that represents 'columns' or 'fields'.",
-          "suggestion": "Consider using 'ກຳລັງສະແດງລຳດັບໃນແຖວໄຟລ໌' (Showing columns in a file row) or 'ກຳລັງສະແດງຊຸດໃນແຖວໄຟລ໌' (Showing fields in a file row)."
+          "description": "The translation 'ກຳລັງສະແດງຖັນໃນແຖວໄຟລ໌' doesn't quite capture the meaning of 'Displaying columns in a file row'. 'ຖັນ' typically refers to a thread or filament, not a column in a data structure. It implies a physical thread, not a data column. A more accurate translation would focus on the 'columns' aspect.",
+          "suggestion": "Consider 'ສະແດງຊຸດລຳດັບຂໍ້ມູນໃນແຖວຂອງໄຟລ໌' or 'ສະແດງລຳດັບຄໍານຸໃນແຖວຂອງໄຟລ໌' (depending on the specific context; 'ລຳດັບ' and 'ຄໍານຸ' are potential alternatives for 'column')."
         }
       ],
       "approved_at": null
@@ -182,7 +182,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Kolommen weergeven in een bestandsrij' is not the most natural or accurate translation of 'Displaying columns in a file row'. 'Bestandsrij' translates literally to 'file row' but might be unclear. A more idiomatic translation would clarify the context.",
+          "suggestion": "Kolommen weergeven in een rij van een bestand"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -191,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wyświetlanie kolumn w wierszu pliku' is a literal translation and doesn't convey the intended meaning of displaying columns within a file row. It's somewhat awkward phrasing in Polish.",
-          "suggestion": "Wyświetlanie kolumn w wierszu pliku"
+          "description": "The translation 'Wyświetlanie kolumn w wierszu pliku' is a literal translation that doesn't convey the intended meaning. It suggests displaying columns *within* a file row, which isn't the purpose. The English phrase refers to which columns are displayed in a file row.",
+          "suggestion": "Wyświetlane kolumny w wierszu pliku"
         }
       ],
       "approved_at": null
@@ -203,7 +209,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Exibindo colunas em uma linha de arquivo' is not the most natural or accurate translation of 'Displaying columns in a file row'. 'Linha de arquivo' is a bit awkward. The intended meaning refers to the columns displayed in a row of data within a file.",
+          "description": "The translation 'Exibindo colunas em uma linha de arquivo' is not the most natural or accurate translation of 'Displaying columns in a file row'. While technically correct, it's overly literal. 'File row' implies a literal row within a file, which might not be the intended meaning. The phrasing is clunky and less fluid in Portuguese.",
           "suggestion": "Exibindo colunas em uma linha"
         }
       ],
@@ -215,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Exibindo colunas em uma linha de arquivo\" is a bit too literal. 'File row' isn't the most natural phrasing in Portuguese. It sounds like it's referring to a row *within* a file, rather than simply rows in a data display.",
-          "suggestion": "Exibindo colunas em uma linha"
+          "description": "The translation 'Exibindo colunas em uma linha de arquivo' is too literal and doesn't quite capture the meaning of 'Displaying columns in a file row'. 'File row' implies a row within a data file, not just any row.",
+          "suggestion": "Exibindo colunas em uma linha do arquivo"
         }
       ],
       "approved_at": null
@@ -227,8 +233,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Afișare coloane din rândul de fișier\" does not accurately convey the meaning of \"Displaying columns in a file row.\" The phrase \"rândul de fișier\" is awkward and doesn't properly translate 'file row'. It implies a row *of* a file, not a row within a file.",
-          "suggestion": "A more accurate translation would be something like \"Afișarea coloanelor dintr-un rând de fișier\" or \"Afișarea coloanelor într-un rând din fișier\" or \"Afișarea coloanelor pe un rând de fișier\"."
+          "description": "The translation 'Afișare coloane din rândul de fișier' doesn't accurately convey the meaning of 'Displaying columns in a file row'. 'rândul de fișier' is awkward and implies a row within a file itself, rather than a row of data.",
+          "suggestion": "Afișarea coloanelor dintr-un rând"
+        },
+        {
+          "type": "grammar",
+          "description": "While not incorrect, the translation could be more fluent. The direct translation 'Afișare coloane din...' is slightly clunky.",
+          "suggestion": "Afișarea coloanelor dintr-un rând"
         }
       ],
       "approved_at": null
@@ -245,13 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'තීරු' (teeru) is a less common word for 'column' in this context. 'පillar' (pillar) or 'ස්තරය' (stharaaya) might be more appropriate.",
-          "suggestion": "ගොනු පේළියක pillar පෙන්වීම"
+          "description": "The word 'තීරු‌' is a less common or potentially incorrect spelling for 'පෙළි'. While technically understandable, 'පෙළි' is more standard.",
+          "suggestion": "ගොනු පේළියක පෙළි පෙන්වීම"
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the sentence structure 'ගොනු පේළියක තීරු‌ පෙන්වීම' sounds slightly awkward. A more natural phrasing might improve readability.",
-          "suggestion": "ගොනු පේළියේ ඇති තීරු පෙන්වීම"
+          "description": "While understandable, the phrasing 'ගොනු පේළියක තීරු‌ පෙන්වීම' could be improved for more natural flow in Sinhala. A more fluent phrasing might be 'ගොනු පේළියේ තීරු පෙන්වීම'.",
+          "suggestion": "ගොනු පේළියේ තීරු පෙන්වීම"
         }
       ],
       "approved_at": null
@@ -262,8 +273,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zobrazenie stĺpcov v riadku súboru' is not an accurate representation of 'Displaying columns in a file row'. It literally translates to 'Displaying columns in a row of a file'. The English phrase implies a row *within* a file, not a row *of* a file.",
-          "suggestion": "Zobrazenie stĺpcov v riadku v súbore"
+          "description": "The translation 'Zobrazenie stĺpcov v riadku súboru' is a literal translation but doesn't fully capture the meaning of 'Displaying columns in a file row'. It sounds awkward in Slovak.  'Displaying columns' implies a presentation or arrangement, which isn't conveyed.",
+          "suggestion": "Consider 'Zobrazenie stĺpcov v riadku súboru' or 'Prezentácia stĺpcov v riadku súboru' to better convey the intended meaning.  A more natural phrasing might be 'Zobrazenie stĺpcov v každom riadku súboru'."
         }
       ],
       "approved_at": null
@@ -274,8 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prikaz stolpcev v vrstici datoteke' is too literal and doesn't quite capture the intended meaning of 'Displaying columns in a file row'. It sounds awkward in Slovenian.",
-          "suggestion": "Consider a more natural translation like 'Prikaz stolpcev v vrstici' or 'Prikaz stolpcev v datoteki' depending on the specific context.  'V vrstici datoteke' is redundant."
+          "description": "The translation 'Prikaz stolpcev v vrstici datoteke' is too literal and doesn't quite capture the nuance of 'Displaying columns in a file row'. 'Vrstici datoteke' could be interpreted as 'in a row of a file,' which is not the intended meaning. It implies showing columns within a particular row of a file, rather than the general concept of displaying columns in a data row.",
+          "suggestion": "Prikaz stolpcev v datoteki"
         }
       ],
       "approved_at": null
@@ -286,13 +297,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Приказивање колона у реду датотеке' is not the most natural or accurate translation of 'Displaying columns in a file row'.  'Реду датотеке' (in a file row) is a bit awkward. It implies a row *within* a file. The phrase 'Displaying columns in a file row' likely refers to displaying columns within a row of data presented as a file.",
+          "description": "The Serbian translation 'Приказивање колона у реду датотеке' translates literally to 'Displaying columns in a row of a file'. While understandable, it's not the most natural phrasing. 'Displaying columns in a file row' implies displaying columns *within* a row of data from a file. A better translation would focus on the data row context.",
           "suggestion": "Приказивање колона у реду података"
         },
         {
-          "type": "spelling",
-          "description": "While 'Приказивање' is correct, it might be more common to use the more informal 'Показ колона'.",
-          "suggestion": "Показ колона у реду података"
+          "type": "grammar",
+          "description": "While technically correct, the use of 'датотеке' (of a file) is slightly awkward.  It's more common in Serbian to omit this possessive construction when the context is clear.",
+          "suggestion": "Приказивање колона у реду"
         }
       ],
       "approved_at": null
@@ -303,8 +314,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prikazivanje kolona u redu datoteke' is not the most natural or accurate translation of 'Displaying columns in a file row'.  'Redu' implies a single row, while the English phrase is more general.  A better translation would reflect a list or set of rows.",
-          "suggestion": "Prikazivanje kolona u redovima datoteke"
+          "description": "The translation \"Prikazivanje kolona u redu datoteke\" is not the most natural or accurate translation of \"Displaying columns in a file row\". 'Redu' implies a specific row, while the English suggests a row within a file. A better translation would focus on 'unutar' (within) or 'u okviru' (within the scope of).",
+          "suggestion": "Prikazivanje kolona u redu fajla"
         }
       ],
       "approved_at": null
@@ -315,8 +326,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bir dosya satırındaki sütunları görüntüleme' is a literal translation and doesn't convey the intended meaning as naturally in Turkish. It sounds slightly awkward.",
-          "suggestion": "Consider a more natural phrasing like 'Dosya satırındaki sütunları gösterme' or 'Dosya satırında sütun gösterimi'."
+          "description": "The translation 'Bir dosya satırındaki sütunları görüntüleme' is too literal and doesn't flow naturally in Turkish. It suggests displaying columns *within* a row, rather than columns *of* a row.",
+          "suggestion": "Bir dosya satırının sütunlarını görüntüleme"
         }
       ],
       "approved_at": null
@@ -327,13 +338,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Відображення стовпців у рядку файлу' is not the most natural or accurate translation of 'Displaying columns in a file row'. While technically correct, it sounds a bit awkward in Ukrainian. 'Displaying columns in a file row' refers to the visual representation of columns within a row of data in a file. A better translation would emphasize the visual aspect or the context of a file's data representation.",
-          "suggestion": "Відображення стовпців у рядку даних файлу"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'рядку файлу' is slightly ambiguous. While it can mean 'file row', it's not the clearest way to convey the intended meaning in Ukrainian. It's preferable to be more specific.",
-          "suggestion": "рядку даних файлу"
+          "description": "The translation 'Відображення стовпців у рядку файлу' is too literal and doesn't quite capture the intended meaning of 'Displaying columns in a file row'. It implies that the columns are *within* a row, which is not the meaning. It would be better to convey the action of showing columns related to a file row.",
+          "suggestion": "Відображення стовпців для рядка файлу"
         }
       ],
       "approved_at": null
@@ -344,8 +350,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hiển thị các cột trong một hàng tập tin\" is not the most natural or accurate rendering of \"Displaying columns in a file row\". \"Hàng tập tin\" is awkward.  It implies a row within a file, rather than a file row.",
-          "suggestion": "Hiển thị các cột trong một dòng dữ liệu"
+          "description": "The translation 'Hiển thị các cột trong một hàng tập tin' is not entirely accurate. 'File row' is an awkward phrasing. It's likely referring to a row *within* a data file or spreadsheet. 'Tập tin' implies the entire file.",
+          "suggestion": "Hiển thị các cột trong một hàng dữ liệu"
+        },
+        {
+          "type": "grammatical",
+          "description": "While not strictly incorrect, the phrasing 'một hàng tập tin' sounds slightly unnatural in Vietnamese. It could be improved for better flow.",
+          "suggestion": "một dòng"
         }
       ],
       "approved_at": null
@@ -356,8 +367,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '显示文件行中的列' is overly literal and doesn't fully capture the nuance of 'Displaying columns in a file row'. It's not immediately clear what's being displayed *from* the file row.",
-          "suggestion": "Consider a translation like '文件行中显示的列' or '在文件行中显示列' which better reflects the action of displaying columns."
+          "description": "The translation '显示文件行中的列' while technically correct, doesn't fully capture the nuance of 'Displaying columns in a file row'. It implies displaying columns *within* a row, rather than the concept of a file's data being structured in rows and columns, and the display focusing on the columns.",
+          "suggestion": "文件行显示列"
         }
       ],
       "approved_at": null

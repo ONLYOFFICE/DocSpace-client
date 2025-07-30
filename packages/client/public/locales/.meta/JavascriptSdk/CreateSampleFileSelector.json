@@ -3,7 +3,7 @@
   "content": "Create sample File selector embed",
   "content_en_sha1_hash": "5ba48846ae9eaf4617845a4869d758bcbf6a1c50",
   "created_at": "2025-05-19T21:30:54.397Z",
-  "updated_at": "2025-07-01T15:57:36.194Z",
+  "updated_at": "2025-05-24T09:39:39.429Z",
   "comment": {
     "text": "This translation key describes the label for a preset in a file selector, which is used to select a sample file. It appears as a header in a UI component, likely a dropdown or dialog, guiding users through the selection process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 313,
+      "line_number": 309,
       "context": ");\n \n return (\n <PresetWrapper\n description={t(\"FileSelectorDescription\")}\n header={t(\"CreateSampleFileSelector\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"قم بإنشاء نموذج تضمين محدد الملف\" is a literal translation and doesn't convey the meaning of \"Create sample File selector embed\" effectively. 'Embed' implies something integrated, not just a selector.",
-          "suggestion": "قد يكون \"إنشاء أداة تحديد عينة ملف قابلة للتضمين\" أو \"إنشاء عنصر تحديد عينة ملف مدمج\" أكثر دقة، حسب السياق."
+          "description": "The translation \"قم بإنشاء نموذج تضمين محدد الملف\" doesn't fully capture the meaning of 'Create sample File selector embed'.  'Embed' suggests something integrated, which isn't directly conveyed.",
+          "suggestion": "قم بإنشاء محدد ملف تجريبي مُضمَّن (Qum bi insha' muhaddid malaff tajribi mudamman)"
         }
       ],
       "approved_at": null
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fayl seçici yerləşdirmə nümunəsi yaradın\" is a bit literal and could be improved for natural flow. 'Embed' implies integration, and 'nümunəsi yaradın' (create a sample) is redundant after 'nümunəsi'.",
-          "suggestion": "Fayl seçici inteqrasiya nümunəsi yaradın"
+          "description": "The translation 'Fayl seçici yerləşdirmə nümunəsi yaradın' is a bit literal and could be improved for better flow and naturalness in Azerbaijani.  'Embed' doesn't directly translate to 'yerləşdirmə'. It implies integration or inclusion.",
+          "suggestion": "Fayl seçici nümunəsinin inteqrasiyası"
+        },
+        {
+          "type": "formatting",
+          "description": "While not incorrect, the sentence could benefit from a more concise wording.",
+          "suggestion": "Fayl seçici nümunəsin yaradın"
         }
       ],
       "approved_at": null
@@ -54,13 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Създаване на примерен вграден селектор на Файлове' is a bit literal and could be improved for naturalness. 'Вграден' (embedded) isn't the most common way to describe this functionality in Bulgarian.  A more natural phrasing might focus on the selector being pre-configured or included.",
-          "suggestion": "Създаване на примерен селектор на файлове"
+          "description": "The translation 'Създаване на примерен вграден селектор на Файлове' is a very literal translation and doesn't flow naturally in Bulgarian. 'Embed' doesn't quite translate directly. It implies something being integrated, not just existing.",
+          "suggestion": "Consider a more natural phrasing like 'Създаване на примерен селектор за файлове' or 'Създаване на примерен инструмент за избор на файлове'."
         },
         {
           "type": "formatting",
-          "description": "The term 'Файлове' (Files) is capitalized. While not technically incorrect, it's more common to see 'файлове' in this context.",
-          "suggestion": "Създаване на примерен селектор на файлове"
+          "description": "The term 'Файлове' (Files) is capitalized. While sometimes done in technical contexts, consistency across all documentation is important.",
+          "suggestion": "Check the capitalization style used for the term 'files' in other Bulgarian documentation. It might be better to use lowercase 'файлове'."
         }
       ],
       "approved_at": null
@@ -71,8 +76,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vytvořit vzorové vložení selektoru souborů\" is not a direct and accurate translation of \"Create sample File selector embed\". \"Embed\" is not adequately conveyed.  It implies integrating something into another context. \"Vložení\" (insertion) is a possibility, but less precise.",
-          "suggestion": "Consider options like \"Vytvořit integrovaný vzorový selektor souborů\" (Create integrated sample file selector) or \"Vytvořit ukázkový selektor souborů pro vložení\" (Create sample file selector for embedding)."
+          "description": "The term 'embed' is not accurately translated. 'Vložení' implies insertion, but 'embed' suggests something more integrated. A better translation might consider 'integrovaný' (integrated) or rephrase the entire phrase.",
+          "suggestion": "Consider alternatives like 'Vytvořit integrovaný selektor souborů' or 'Vytvořit ukázkový selektor souborů pro integraci'."
         }
       ],
       "approved_at": null
@@ -89,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Δημιουργία δείγματος ενσωμάτωσης Επιλογέα αρχείων' is overly literal and doesn't accurately convey the meaning of 'Create sample File selector embed'. 'Embed' implies integration or inclusion, which isn't directly captured. The word order also feels unnatural in Greek.",
-          "suggestion": "Consider a more natural phrasing like 'Δημιουργία Επιλογέα αρχείων για δοκιμαστική ενσωμάτωση' or 'Δημιουργία δείγματος επιλογέα αρχείων για ενσωμάτωση'."
+          "description": "The translation \"Δημιουργία δείγματος ενσωμάτωσης Επιλογέα αρχείων\" doesn't fully capture the meaning of 'Create sample File selector embed'. 'Embed' is not directly translated, and the phrase is a bit clunky.",
+          "suggestion": "Consider a more direct translation like 'Δημιουργία ενσωματωμένου Επιλογέα αρχείων δείγματος' or 'Επιλογέας αρχείων δείγματος για ενσωμάτωση' depending on the desired emphasis.  A more natural phrasing might be 'Ενσωματωμένος Επιλογέας αρχείων δείγματος'."
         }
       ],
       "approved_at": null
@@ -101,13 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Crear ejemplo de la incrustación del selector de archivos' doesn't accurately reflect the meaning of 'Create sample File selector embed'. 'Incrustación' (embed) feels too literal and might not be the best choice. A more natural Spanish phrasing would be needed.",
-          "suggestion": "Consider alternatives like 'Crear selector de archivos de muestra' or 'Crear un selector de archivos de ejemplo'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is a complete sentence.  While not inherently wrong, it's less clear if the original English was intended as a label or shorter phrase.  The Spanish phrasing loses some of the conciseness.",
-          "suggestion": "If the original English is intended as a short label, the Spanish translation should be shorter and more concise, potentially removing 'Crear' or 'un'."
+          "description": "The translation 'Crear ejemplo de la incrustación del selector de archivos' is overly literal and doesn't flow naturally in Spanish. The English 'embed' refers to including something within something else, and the translation 'incrustación' doesn't fully capture this in the context of a file selector. It sounds technical and awkward.",
+          "suggestion": "Consider a more natural phrasing like 'Crear selector de archivos de ejemplo' or 'Generar un selector de archivos de ejemplo'."
         }
       ],
       "approved_at": null
@@ -118,13 +118,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"File selector embed\" is not accurately translated. \"Embed\" implies something being integrated or included within something else, which isn't directly conveyed by \"upotuksesta\". A better translation would consider the function and purpose of the selector. Perhaps \"tiedoston valitsin\" would suffice, depending on context.",
-          "suggestion": "Consider 'Luo tiedoston valitsin' or 'Luo tiedoston valitsin komponentti' depending on context."
+          "description": "The phrase \"File selector embed\" is not accurately translated. \"Upotuksesta\" implies an insertion or embedding, but \"Tiedoston valitsija\" (File selector) is a specific component. A more direct translation would be better.",
+          "suggestion": "Luo esimerkki tiedostovalitsin"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the hyphen in \"Tiedoston valitsija-upotuksesta\" looks a bit awkward.  Hyphens are used for compound nouns, but \"valitsija\" already acts as a noun.",
-          "suggestion": "Consider removing the hyphen: 'Luo esimerkki Tiedoston valitsija upotuksesta'."
+          "description": "The phrase 'Tiedoston valitsija-upotuksesta' is a compound phrase that's a bit clunky in Finnish. Separating the terms improves readability.",
+          "suggestion": "Luo esimerkki tiedoston valitsin"
         }
       ],
       "approved_at": null
@@ -141,8 +141,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ստեղծեք ֆայլի ընտրիչի ներկառուցման նմուշ\" is a literal translation and doesn't convey the intended meaning of \"Create sample File selector embed\". \"Embed\" implies integration or insertion, which is not clearly represented in the Armenian translation. A more natural phrasing would be needed to accurately reflect the English original.",
-          "suggestion": "Consider a phrasing like \"Ստեղծեք ֆայլի ընտրիչի մուտքի նմուշ\" (Create sample file selector insertion) or \"Ստեղծեք ֆայլի ընտրիչի դեպքի նմուշ\" (Create sample file selector case/example)."
+          "description": "The Armenian translation \"Ստեղծեք ֆայլի ընտրիչի ներկառուցման նմուշ\" is not a direct or natural translation of \"Create sample File selector embed\".  'Embed' is not adequately conveyed. A more accurate translation would focus on the creation of a file selector component, rather than specifically an 'embed'.",
+          "suggestion": "Consider alternatives like: \"Ստեղծեք ֆայլի ընտրիչի ստեղծման նմուշ\" (Create a sample of file selector creation) or \"Ստեղծեք ֆայլի ընտրիչի նմուշային տարր\" (Create a sample file selector element)."
         }
       ],
       "approved_at": null
@@ -153,13 +153,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Crea un campione di incorporamento del Selettore file\" doesn't accurately reflect the meaning of \"Create sample File selector embed\". \"Incorporamento\" translates to 'embedding' which isn't the intended meaning. The phrase 'File selector' implies a control or component for selecting files, not a visual embedding.",
-          "suggestion": "Crea un selettore di file di esempio"
+          "description": "The phrase \"incorporamento del Selettore file\" is a literal translation of \"embed File selector\" and doesn't accurately convey the meaning. \"Embed\" in this context likely refers to the action of integrating or including a file selector component.",
+          "suggestion": "Consider alternatives like \"integra un selettore file di esempio\" or \"inserisci un selettore file di esempio\" to better reflect the meaning of 'embed'."
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'Selettore file' could benefit from hyphenation in Italian: 'Selettore-file' to improve readability.",
-          "suggestion": "Crea un selettore-file di esempio"
+          "type": "grammar",
+          "description": "While grammatically correct, the translation sounds slightly awkward. The structure \"Crea un campione di incorporamento del Selettore file\" is less natural than other phrasing options.",
+          "suggestion": "Reconsider the sentence structure for better flow and readability.  Consider alternatives suggested above."
         }
       ],
       "approved_at": null
@@ -170,8 +170,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"埋め込みファイルセレクタのサンプルを作成する\" (Ume komi fairu selekuta no sanpuru o sakusei suru) is a bit too literal. A more natural translation would be something along the lines of \"Create a sample embedded file selector\" or \"Generate a sample file selector embed\".  The current translation emphasizes the creation aspect which is slightly less direct than the original.",
-          "suggestion": "サンプル埋め込みファイルセレクタを作成する (Sanpuru ume komi fairu selekuta o sakusei suru) or  埋め込みファイルセレクタのサンプル生成 (Ume komi fairu selekuta no sanpuru seisei)."
+          "description": "The translation \"埋め込みファイルセレクタのサンプルを作成する\" while technically correct, doesn't quite capture the essence of \"Create sample File selector embed\". 'Embed' implies something already exists and the sample selector is being added to it. The current translation focuses solely on creation.",
+          "suggestion": "Consider a translation like \"ファイルセレクタのサンプル埋め込みを作成する\" (Faisu Selektā no sanpuru umekomi o sakusei suru) - which translates to 'Create sample file selector embed'.  Or, a more natural phrasing would depend on the context of the embed. More context would allow for a more precise translation."
         }
       ],
       "approved_at": null
@@ -185,7 +185,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ສ້າງຕົວເລືອກໄຟລ໌ຕົວຢ່າງຝັງ' is a literal translation and might not convey the intended meaning of 'Create sample File selector embed'. 'Embed' specifically refers to integrating something into a larger context. A more natural translation might focus on that functionality.",
+          "suggestion": "Consider a translation that emphasizes the integration aspect, such as 'ສ້າງຕົວເລືອກໄຟລ໌ຕົວຢ່າງເພື່ອໃຊ້ໃນການເຊື່ອມໂຍງ' (Create sample file selector for integration)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -194,7 +200,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izveidot parauga faila atlasītāja iegulšanu\" is a bit too literal and doesn't quite capture the meaning of 'Create sample File selector embed'. 'Iegulšanu' implies a specific type of embed. A more natural translation might focus on creation and use.",
+          "description": "The translation \"Izveidot parauga faila atlasītāja iegulšanu\" is a bit literal and awkward. 'Embed' is not directly translated naturally in this context. A more natural translation for 'Create sample File selector embed' might be 'Izveidot parauga failu izvēlnes ievietošanu' or 'Izveidot parauga failu izvēles ievietošanu'.",
           "suggestion": "Izveidot parauga failu izvēlnes ievietošanu"
         }
       ],
@@ -206,13 +212,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Maak voorbeeld Bestand selectie insluiten' doesn't fully capture the meaning of 'Create sample File selector embed'. 'Insluiten' implies embedding, but 'Create' suggests more of a creation process. A more accurate translation would convey the action of creating and including/embedding.",
-          "suggestion": "Maak een voorbeeld Bestand selectie-embed"
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in 'selectie-embed' improves readability and indicates the combination of 'selectie' (selection) and 'embed'.",
-          "suggestion": "Maak een voorbeeld Bestand selectie-embed"
+          "description": "The translation 'Maak voorbeeld Bestand selectie insluiten' doesn't accurately convey the meaning of 'Create sample File selector embed'. 'Insluiten' means 'to embed' but the overall phrasing is awkward. A more natural translation for 'Create sample File selector embed' would be something like 'Maak een voorbeeld bestandselectie' or 'Creëer een voorbeeld bestandselectie'.",
+          "suggestion": "Maak een voorbeeld bestandselectie"
         }
       ],
       "approved_at": null
@@ -223,8 +224,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Utwórz próbne osadzenie Selektora plików' is not the most natural or accurate rendering of \"Create sample File selector embed\". \"Osadzenie\" implies an embedding or insertion, whereas the English suggests a selector component itself. The phrasing also sounds slightly awkward in Polish.",
-          "suggestion": "Utwórz przykładowy selektor plików"
+          "description": "The phrase \"embed\" is not accurately translated. \"Osadzenie\" doesn't fully convey the meaning of embed in this context, which implies integration or inclusion.",
+          "suggestion": "Utwórz próbny selektor plików do zintegrowania"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the Polish translation sounds slightly awkward. A more natural phrasing might improve readability.",
+          "suggestion": "Utwórz próbny selektor plików."
         }
       ],
       "approved_at": null
@@ -235,13 +241,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Criar exemplo de incorporação do seletor de arquivos' doesn't fully capture the meaning of 'Create sample File selector embed'. The word 'embed' is lost in translation. It implies a component or functionality.",
-          "suggestion": "Criar seletor de arquivos de exemplo embutido"
+          "description": "The English phrase \"Create sample File selector embed\" is not accurately translated. \"Embed\" in this context likely refers to a code snippet or widget that can be included in a larger system. The Portuguese translation 'incorporação' conveys more of a general inclusion rather than a specific code embedding.",
+          "suggestion": "Consider a translation like 'Criar seletor de arquivos de exemplo para incorporação (código)' or 'Criar seletor de arquivos de exemplo para integrar'."
         },
         {
           "type": "formatting",
-          "description": "The translation is a bit verbose and could be more concise. Using 'embutido' implies the embed functionality, reducing wordiness.",
-          "suggestion": "Criar seletor de arquivos de exemplo embutido"
+          "description": "The phrase reads somewhat awkwardly. The wording could be improved for better flow.",
+          "suggestion": "Consider rewording to something like 'Criar um seletor de arquivos de exemplo para incorporação.'"
         }
       ],
       "approved_at": null
@@ -252,13 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Criar exemplo de incorporação do seletor de arquivos\" doesn't accurately reflect the meaning of \"Create sample File selector embed\". \"Embed\" is not directly translated and the meaning of creating a *sample* selector is lost.",
-          "suggestion": "Criar seletor de arquivos de exemplo incorporado"
+          "description": "The phrase 'embed' is not accurately translated. 'Incorporação' implies a more complete integration rather than just creating a sample selector.",
+          "suggestion": "Criar seletor de arquivos de exemplo"
         },
         {
           "type": "formatting",
-          "description": "The phrase 'incorporação do seletor de arquivos' is a bit clunky. A more concise wording would improve readability.",
-          "suggestion": "incorporado ao seletor de arquivos"
+          "description": "The phrase is a bit long and could be more concise.",
+          "suggestion": "Seletor de arquivos de exemplo (criação)"
         }
       ],
       "approved_at": null
@@ -269,13 +275,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Creare exemplu Selector de fișiere pentru încorporare' is a literal translation and doesn't flow naturally in Romanian. 'Selector' is an English loanword, and a more natural Romanian phrasing would use a similar concept.",
-          "suggestion": "Creare selector de fișiere de exemplu pentru integrare"
+          "description": "The translation 'Creare exemplu Selector de fișiere pentru încorporare' is a bit literal and doesn't flow naturally in Romanian. 'Selector de fișiere' is technically correct, but 'selector de fișiere' or 'selectoare de fișiere' might be more common.",
+          "suggestion": "Creare selector de fișiere exemplu pentru încorporare"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'încorporare' (embedding) might be too technical for the target audience, depending on the context. It is better to use a more common and easily understood term.",
-          "suggestion": "Creare selector de fișiere de exemplu pentru integrare sau adăugare"
+          "description": "The term 'încorporare' can sometimes be replaced with a more accessible term depending on the target audience. It might be a technical term that isn't well understood.",
+          "suggestion": "Creare selector de fișiere exemplu pentru integrare"
         }
       ],
       "approved_at": null
@@ -286,8 +292,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Создать образец встраивания Селектора файлов' is not a direct or accurate translation of 'Create sample File selector embed'. 'Embed' doesn't have a direct equivalent that maintains the original meaning in this context. The term 'встраивания' suggests an insertion or embedding, but 'selector' is treated as a noun rather than as a descriptive part of the action.",
-          "suggestion": "Consider 'Создать селектор файлов образца' or 'Создать образец выбора файлов'. A more context-dependent suggestion would be ideal, but these are better approximations."
+          "description": "The translation 'Создать образец встраивания Селектора файлов' is too literal and doesn't quite convey the meaning of 'Create sample File selector embed'. 'Embed' refers to the integration of the selector into something else, which is not directly translated.",
+          "suggestion": "Создать пример селектора файлов для встраивания"
+        },
+        {
+          "type": "formatting",
+          "description": "The Russian translation uses a mix of 'Селектора файлов' (genitive case) and 'файлов' which is stylistically inconsistent. While technically correct, it's not ideal for a UI element.",
+          "suggestion": "Создать пример селектора файлов для встраивания (using genitive case consistently or using nominative: Создать пример селектора файлов для встраивания)."
         }
       ],
       "approved_at": null
@@ -298,13 +309,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාවද්දන ආදර්ශ ගොනු තෝරනය සාදන්න' doesn't accurately convey the meaning of 'Create sample File selector embed'. 'කාවද්දන' implies a sense of presenting or showing, which isn't the primary action of creation. 'තෝරනය' (thoranaya) is a formal word for 'selection', which is a bit too formal for a simple embed.",
-          "suggestion": "නිර්මාණවත් ආදර්ශ ගොනු තෝරනය සාදා ගන්න (nirmanawath aadarasha gonu thoranaya saada ganne)"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is a complete sentence. For a UI element like an embed, a shorter, more directive phrase might be more appropriate.",
-          "suggestion": "ආදර්ශ ගොනු තෝරනය සාදා ගන්න (aadarasha gonu thoranaya saada ganne)"
+          "description": "The translation 'කාවද්දන ආදර්ශ ගොනු තෝරනය සාදන්න' doesn't fully capture the meaning of 'Create sample File selector embed'. 'කාවද්දන' (kawaddana) implies 'presenting' or 'showcasing', which isn't the core action of 'creating'. The term 'embed' is also missing.",
+          "suggestion": "A more accurate translation might be 'ආදර්ශ ගොනු තෝරනය නිර්මාණය කරන්න' (aadarash gōnu thōranaya nirmaneya karanna) - 'Create a sample file selector'."
         }
       ],
       "approved_at": null
@@ -315,13 +321,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vytvoriť vzor vloženia pre Selektor súborov' doesn't accurately reflect the English meaning 'Create sample File selector embed'. 'Vloženia' (insertion) is not the right concept. The Slovak translation implies inserting something, while the English implies creating a sample selector.",
-          "suggestion": "Vytvoriť ukážkový výber súborov"
+          "description": "The phrase 'embed' is not accurately translated. 'Vloženie' implies insertion, but 'embed' in this context refers to creating a selectable component or selector, not just inserting something.",
+          "suggestion": "Consider alternatives like 'Vytvoriť výberový prvok pre súbory' or 'Vytvoriť prvok na výber súborov'."
         },
         {
           "type": "formatting",
-          "description": "The translation uses a direct translation of 'embed', which is not common usage in Slovak in this context. 'Výber súborov' is correct, but the overall phrasing is clunky.",
-          "suggestion": "Consider rephrasing to be more natural, such as 'Vytvoriť ukážkový výber súborov s možnosťou vloženia' if a specific embedding context is needed."
+          "description": "The phrase 'Selektor súborov' could be more naturally worded. While technically correct, it's a bit clunky.",
+          "suggestion": "Consider 'Výber súborov' or 'Vyberanie súborov'."
         }
       ],
       "approved_at": null
@@ -332,13 +338,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ustvari vzorec vdelave izbire datotek' is not an accurate representation of 'Create sample File selector embed'. 'Embed' implies something being inserted or integrated. The Slovenian translation lacks this nuance. A better translation would incorporate the concept of integration or inclusion.",
-          "suggestion": "Ustvari vdelano izbiro vzorčnih datotek"
-        },
-        {
-          "type": "formatting",
-          "description": "The terms 'sample' and 'file selector' are somewhat jumbled in the Slovenian translation. Maintaining a more natural word order would improve readability.",
-          "suggestion": "Ustvari vdelano izbiro vzorčnih datotek"
+          "description": "The translation 'Ustvari vzorec vdelave izbire datotek' is a bit literal and doesn't quite capture the nuance of 'Create sample File selector embed'. It translates 'embed' too directly.",
+          "suggestion": "Consider a more natural phrasing like 'Ustvari vdelano izbiro vzorčnih datotek' or 'Ustvari izbiro datotek za vzorec vdelave'."
         }
       ],
       "approved_at": null
@@ -349,13 +350,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Направи пример уградње Датотека селектора\" doesn't accurately convey the meaning of \"Create sample File selector embed\". 'Уградње' (embedding/insertion) isn't the best fit for 'embed' in this context.  A better translation would focus on creating a sample file selector.",
-          "suggestion": "Направи пример Датотека селектора"
-        },
-        {
-          "type": "formatting",
-          "description": "The Serbian translation lacks capitalization. Serbian generally capitalizes nouns.",
-          "suggestion": "Направи Пример Датотека Селектора"
+          "description": "The Serbian translation 'Направи пример уградње Датотека селектора' does not accurately convey the meaning of 'Create sample File selector embed'. 'Уградње' (installation) is not the best fit for 'embed'. A better translation for 'embed' would be 'утисак' or 'уграђивање'.",
+          "suggestion": "Направи пример уграђивања Датотека селектора"
         }
       ],
       "approved_at": null
@@ -366,13 +362,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Napravi primer ugradnje Datoteka selektora' doesn't accurately convey the meaning of 'Create sample File selector embed'. 'Embed' is not directly translated, and the overall phrasing is awkward. A more accurate translation would incorporate the concept of embedding.",
-          "suggestion": "Napravi primer ugradnje Datoteka selektora (umoćeno)"
+          "description": "The phrase 'embed' is not accurately conveyed in the Serbian translation. 'Ugradnja' refers to installation, but 'embed' implies something being integrated or included within something else. A better translation would reflect this.",
+          "suggestion": "Napravi primer integracije Datoteka selektora"
         },
         {
           "type": "formatting",
-          "description": "Datoteka is singular while 'File' is plural in the original English.  The translation should reflect that.",
-          "suggestion": "Napravi primer ugradnje Datoteka selektora (umoćeno)"
+          "description": "While technically correct, the sentence structure could be improved for better flow in Serbian. Putting 'primer' earlier makes the sentence read more naturally.",
+          "suggestion": "Napravi primer integracije Datoteka selektora"
         }
       ],
       "approved_at": null
@@ -383,13 +379,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Örnek Dosya seçici yerleştirmesi oluştur' is a bit literal and doesn't quite capture the nuance of 'Create sample File selector embed'. 'Embed' implies integration or insertion, which isn't clearly conveyed.",
-          "suggestion": "Örnek dosya seçici ekle (Create sample file selector add)"
+          "description": "The translation 'Örnek Dosya seçici yerleştirmesi oluştur' is too literal and doesn't flow naturally in Turkish. 'Yerleştirmesi' implies an integration or placement, which isn't the primary meaning of 'embed' in this context. It suggests a more technical implementation than intended.",
+          "suggestion": "A more natural translation would be something like 'Örnek dosya seçici oluştur' or 'Numune dosya seçici oluştur'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'yerleştirmesi oluştur' is grammatically correct, it feels overly formal and technical for what is likely a more user-facing function. 'Ekle' is a more common and understandable term.",
-          "suggestion": "Consider alternatives that are more natural and user-friendly, like 'Örnek dosya seçiciyi oluştur' or 'Örnek dosya seçici ekle'"
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation uses a passive voice. Turkish often prefers more active constructions, although both are acceptable.",
+          "suggestion": "Consider restructuring to an active voice if possible, although this is a stylistic preference."
         }
       ],
       "approved_at": null
@@ -400,13 +396,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Створити зразок вбудовування засобу вибору файлів\" is overly literal and doesn't quite capture the intended meaning of \"Create sample File selector embed\". The term 'embed' is awkwardly translated.",
-          "suggestion": "Consider alternatives like \"Створити демонстраційний вибірник файлів\" or \"Створити приклад засобу вибору файлів\" to better convey the functionality."
+          "description": "The translation \"Створити зразок вбудовування засобу вибору файлів\" is overly literal and doesn't convey the intended meaning of 'Create sample File selector embed' naturally in Ukrainian. The term 'embed' is a bit awkward in this context.",
+          "suggestion": "Consider alternatives like: \"Створити тестовий селектор файлів\" (Create test file selector) or \"Створити приклад вибору файлів\" (Create example file selector) or \"Створити демонстраційний селектор файлів\" (Create demo file selector). The best option depends on the specific context."
         },
         {
           "type": "formatting",
-          "description": "The phrase 'засобу вибору файлів' could be more concisely written.",
-          "suggestion": "Consider 'вибірник файлів' or simply 'вибору файлів' for a more natural flow."
+          "description": "The translation uses a compound sentence structure which might be slightly less readable. While grammatically correct, a simpler structure might improve clarity.",
+          "suggestion": "Break down the sentence, for example: \"Створити приклад селектора файлів для вбудовування\" (Create a file selector example for embedding)."
         }
       ],
       "approved_at": null
@@ -417,13 +413,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'embed' doesn't translate directly to a single word in Vietnamese that captures its meaning in this context. 'Nhúng' is a literal translation but might be confusing or not the best fit.  'Embed' in this case refers to the file selector being integrated or included.",
-          "suggestion": "Consider alternatives like 'tích hợp bộ chọn Tập tin' (integrate file selector) or 'bộ chọn Tập tin có thể nhúng' (embeddable file selector)."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the phrasing could be more natural. A smoother flow might be beneficial.",
-          "suggestion": "Consider rephrasing the entire phrase to prioritize clarity and natural Vietnamese flow. For example, 'Tạo bộ chọn Tập tin mẫu để tích hợp'."
+          "description": "The translation 'Tạo mẫu nhúng bộ chọn Tập tin' is not the best way to convey 'Create sample File selector embed'. 'Embed' doesn't have a direct equivalent that flows naturally in Vietnamese in this context. 'Sample' also isn't well represented. A more natural translation would convey the idea of a pre-configured or example file selector.",
+          "suggestion": "Tạo bộ chọn tập tin mẫu"
         }
       ],
       "approved_at": null
@@ -431,13 +422,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '创建示例文件选择器嵌入' while technically accurate, doesn't convey the meaning of 'embed' as it's intended in this context (likely referring to embedding a selector). A more natural translation would imply the integration or incorporation of the selector.",
-          "suggestion": "创建示例文件选择器并嵌入"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

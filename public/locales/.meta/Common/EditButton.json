@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2025-06-26T19:00:18.177Z",
+  "updated_at": "2025-06-30T12:20:31.328Z",
   "comment": {
     "text": "The translation key \"EditButton\" is used to display the label \"Edit\" in various UI elements such as buttons and toggle switches. It is intended to be used in situations where users need to make changes or edits, typically in contexts related to commenting, theme editing, or API key management.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 549,
+      "line_number": 551,
       "context": "const createFooter = (\n <>\n <Button\n key=\"OKButton\"\n label={isEdit ? t(\"Common:EditButton\") : t(\"Webhooks:Generate\")}\n size={ButtonSize.normal}\n primary\n onClick={onGenerate}\n scale\n isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}",
       "module": "/packages/client"
     },
@@ -43,7 +43,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPaymentInfo.tsx",
       "line_number": 81,
-      "context": "min: formatWalletCurrency(minBalance, 0),\n max: formatWalletCurrency(upToBalance, 0),\n })}{\" \"}\n {isPayer ? (\n <Link onClick={onOpen} textDecoration=\"underline\">\n {t(\"Common:EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
+      "context": "min: formatWalletCurrency!(minBalance, 0),\n max: formatWalletCurrency!(upToBalance, 0),\n })}{\" \"}\n {isPayer ? (\n <Link onClick={onOpen} textDecoration=\"underline\">\n {t(\"Common:EditButton\")}\n </Link>\n ) : null}\n </Text>\n </div>\n </div>",
       "module": "/packages/client"
     },
     {
@@ -54,26 +54,26 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1747,
+      "line_number": 1750,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1747,
+      "line_number": 1750,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-pdf\",\n key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 731,
+      "line_number": 733,
       "context": "}\n \n const editOption = {\n key: \"edit\",\n icon: PencilReactSvgUrl,\n label: t(\"Common:EditButton\"),\n onClick: () => this.editClient(clientId),\n };\n \n const authButtonOption = {\n key: \"auth-button\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 326,
-      "context": "styles.iconBadge,\n \"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n hoverColor={theme.filesBadges.hoverIconColor}\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n {item.viewAccessibility?.MustConvert &&\n security &&\n \"Convert\" in security &&",
+      "line_number": 329,
+      "context": "\"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n color=\"accent\"\n hoverColor=\"accent\"\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n {item.viewAccessibility?.MustConvert &&\n security &&\n \"Convert\" in security &&",
       "module": "/packages/shared"
     },
     {
@@ -83,9 +83,9 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/MultipleSpaces.tsx",
-      "line_number": 98,
-      "context": "</div>\n \n <Button\n className=\"spaces-button\"\n size={buttonSize}\n label={t(\"Common:EditButton\")}\n primary\n onClick={() => setChangeDomainDialogVisible(true)}\n />\n </div>\n </div>",
+      "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
+      "line_number": 83,
+      "context": "size={\n currentDeviceType === DeviceType.desktop\n ? ButtonSize.small\n : ButtonSize.normal\n }\n label={t(\"Common:EditButton\")}\n primary\n onClick={onEditButtonClick}\n scale={false}\n />\n </StyledDomainSettings>",
       "module": "/packages/management"
     }
   ],

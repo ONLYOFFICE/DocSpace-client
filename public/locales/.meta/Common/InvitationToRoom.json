@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "a562c988747a5f073b4f2c0e05a5d2508c3d523a",
   "created_at": "2025-05-19T21:30:45.954Z",
-  "updated_at": "2025-06-03T20:59:42.327Z",
+  "updated_at": "2025-06-30T12:20:31.672Z",
   "comment": {
     "text": "This translation key is used for a notification message that invites a user to join a secure collaboration room. It appears in a greeting component when a new user joins or creates an account, and it includes placeholders for the user's display name and the room's title. The purpose of this text is to inform the user about the invitation to collaborate on documents securely.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 71,
+      "line_number": 69,
       "context": "<div className=\"tooltip\">\n <Text fontSize=\"16px\">\n {roomData.title ? (\n <Trans\n t={t}\n i18nKey=\"InvitationToRoom\"\n ns=\"Common\"\n defaults={DEFAULT_ROOM_TEXT}\n values={{\n displayName,\n ...(roomData.title",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingLoginContainer.tsx",
-      "line_number": 87,
+      "line_number": 84,
       "context": "}, [loginData]);\n \n const { type, roomName, displayName, spaceAddress } = invitationLinkData;\n \n const keyProp = roomName\n ? { tKey: \"InvitationToRoom\" }\n : { tKey: \"InvitationToPortal\" };\n \n return (\n <>\n <img src={logoUrl} className=\"logo-wrapper\" alt=\"greeting-logo\" />",
       "module": "/packages/login"
     }
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses spaces before and after the <1> tags. This deviates from the English source and should be consistent.",
+          "suggestion": "Remove the spaces before and after the <1> tags: <1>{{displayName}}</1> becomes <1>{{displayName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -41,14 +47,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'dəvət' (invite) is potentially incorrect. In this context, 'qonaq edir' (is inviting) might be more natural and convey the intended meaning better.",
-          "suggestion": "<1>{{displayName}}</1> sizi təhlükəsiz sənəd əməkdaşlığı üçün <1>{{roomName}}</1> otağına qonaq edir."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure feels slightly awkward. Consider rephrasing for smoother flow.",
-          "suggestion": "<1>{{displayName}}</1> təhlükəsiz sənəd əməkdaşlığı üçün <1>{{roomName}}</1> otağına qoşulmağınıza dəvət edir."
+          "type": "incorrect_translation",
+          "description": "The phrase 'secure document collaboration' is not accurately conveyed. 'Təhlükəsiz sənəd əməkdaşlığı' translates literally to 'safe document collaboration,' which isn't as strong as 'secure document collaboration' in this context.",
+          "suggestion": "Consider using a phrase like 'məxususi sənəd işləməsi' (confidential document work) or 'qorunan sənəd işləməsi' (protected document work) to better convey the meaning of 'secure document collaboration'."
         }
       ],
       "approved_at": null
@@ -80,13 +81,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses 'le invita' which is a bit formal for this context. A more conversational and natural phrasing would be better. While grammatically correct, it doesn't perfectly match the tone of the English.",
-          "suggestion": "<1>{{displayName}}</1> te invita a unirte a la sala <1>{{roomName}}</1> para una colaboración segura en documentos."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -107,8 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The word 'սենյակին' (senyakin) is in the dative case, implying movement *to* the room. However, the English indicates simply *joining* the room. A more appropriate case would be the locative or nominative.",
-          "suggestion": "Consider changing 'սենյակին' to 'սենյակում' (senyakum - in the room) or 'սենյակը' (senyak-e - the room) to better reflect the intended meaning."
+          "description": "The sentence structure is slightly awkward. It's more natural to say \"[displayName] invites you to join the room [roomName] for...\" rather than \"[displayName] invites you to join *the room to* [roomName] for...\"",
+          "suggestion": "<1>{{displayName}}</1>-ը հրավիրում է ձեզ միանալ <1>{{roomName}}</1> սենյակին՝ փաստաթղթերի անվտանգ համագործակցության համար:"
+        },
+        {
+          "type": "formatting",
+          "description": "The word order could be improved for better flow. It's less common to place 'սենյակին' after the room name.",
+          "suggestion": "<1>{{displayName}}</1>-ը հրավիրում է ձեզ միանալ <1>{{roomName}}</1>-ին՝ փաստաթղթերի անվտանգ համագործակցության համար:"
         }
       ],
       "approved_at": null
@@ -119,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'secure document collaboration' is translated as 'collaborazione sicura sui documenti'. While technically correct, a more natural and idiomatic Italian translation would be 'condivisione sicura di documenti' or 'collaborazione sicura per la condivisione di documenti'.",
-          "suggestion": "condivisione sicura di documenti"
+          "description": "The phrase 'secure document collaboration' is not accurately translated. 'Collaboration sicura sui documenti' is a bit awkward. A more natural translation would be 'collaborazione sicura di documenti' or 'collaborazione sicura su documenti'.",
+          "suggestion": "ti invita a unirti alla stanza <1>{{roomName}}</1> per una collaborazione sicura di documenti."
         }
       ],
       "approved_at": null
@@ -131,18 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"安全なドキュメント共同作業をするように\" is a literal translation of \"for secure document collaboration\" and sounds unnatural in Japanese. A more natural phrasing would be something like \"安全なドキュメント共同作業のために\" or \"共同作業のため\".",
-          "suggestion": "安全なドキュメント共同作業のために"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The particle 'に' after ルーム is a bit awkward. While technically not incorrect, it's not the most natural way to express invitation to a room. ",
-          "suggestion": "ルーム<1>{{roomName}}</1>に参加するように招待しています"
+          "description": "The phrase \"安全なドキュメント共同作業をするように\" is a bit clunky and overly literal. A more natural way to convey \"secure document collaboration\" would be something like \"安全なドキュメント共有\" or \"安全な共同作業\".",
+          "suggestion": "安全なドキュメント共有をするように"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent with standard practices. While technically allowed, they aren't necessary and should be standardized or removed. Assuming standard HTML or Markdown is desired.",
-          "suggestion": "Remove the tags altogether, or use standard HTML tags like <span> or <div> if formatting is necessary."
+          "description": "The use of `<1>` tags is inconsistent with typical Japanese sentence structure and doesn't align with common practices. It's not necessary and makes the Japanese reading strange.",
+          "suggestion": "Remove the `<1>` tags. The translation should be: {{displayName}}さんは、安全なドキュメント共有をするように、あなたをルーム {{roomName}}に招待しています。"
         }
       ],
       "approved_at": null
@@ -153,13 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation uses \"귀하를\" which is very formal and sounds unnatural in this context. A more natural phrasing would be \"당신을\" or even omitting the explicit pronoun and simply saying \"<1>{{roomName}}</1> 방에 초대했습니다.\" The original English is an invitation, and a formal '귀하를' is not aligned with that tone.",
-          "suggestion": "<1>{{displayName}}</1>님이 안전한 문서 공동작업을 위해 <1>{{roomName}}</1> 방에 초대했습니다."
+          "description": "The phrase \"invites you to join the room\" is translated as \"귀하를 ... 방에 초대했습니다\". While technically correct, it's a bit formal and stiff for typical user communication. A more natural translation would be something like \"... 방에 참여해 주세요\" or \"... 방에 오세요\".",
+          "suggestion": "Consider translating \"invites you to join the room\" as \"... 방에 참여해 주세요\" or \"... 방에 오세요\"."
         },
         {
           "type": "formatting",
-          "description": "The Korean translation adds \"님이\" after the display name. While grammatically correct, it's slightly different from the English structure. It changes the flow and emphasis slightly. Consider aligning the formatting more closely to the English. This is a stylistic choice, not strictly an error.",
-          "suggestion": "<1>{{displayName}}</1> 가 안전한 문서 공동작업을 위해 <1>{{roomName}}</1> 방에 초대했습니다."
+          "description": "The Korean translation lacks the use of the Korean honorific particle '님' after the room name, which is common practice when referring to a room.  It is appropriate to add 님 after 방.",
+          "suggestion": "Add '님' after 방: ... <1>{{roomName}}</1> 방님"
         }
       ],
       "approved_at": null
@@ -167,13 +162,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'secure' is not directly translated. While 'ຢ່າງປອດໄພ' (yang pod sai) conveys safety/security, a more literal translation might be more appropriate depending on the desired tone.",
-          "suggestion": "Consider alternatives for 'ຢ່າງປອດໄພ' like 'ຄວາມປອດໄພ' if a more direct translation is preferred."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -224,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආරාධනා කර ඇත\" (aaradanaa karaa geta) is a bit formal and doesn't perfectly capture the inviting tone. A more natural phrasing would be something along the lines of \"අමමතායි\" (ammantāyī) or \"අයිති කරයි\" (āyithī karai).",
-          "suggestion": "Replace \"ආරාධනා කර ඇත\" with \"අමමතායි\" or \"අයිති කරයි\"."
+          "description": "The phrase 'ආරාධනා කර ඇත' (aaradhanaa karaa geta) translates to 'has invited'. A more natural and active phrasing for an invitation in Sinhala would be 'ඔබවයි ආරාධනා කරයි' (obaa-yai aaradhanaa karayae) which means 'invites you'.",
+          "suggestion": "<1>{{displayName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{roomName}}</1> කාමරයට <1>{{displayName}}</1> ඔබවයි ආරාධනා කරයි."
         },
         {
-          "type": "grammatical",
-          "description": "The sentence structure is slightly awkward.  It's a bit lengthy and could be broken down for better flow. While technically correct, it isn't the most elegant Sinhala.",
-          "suggestion": "Consider restructuring the sentence for better readability. For example, \"<1>{{displayName}}</1> ඔබට <1>{{roomName}}</1> කාමරයට ඇමමතායි, එහිදී ඔබට සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට හැකියාව ලැබේ.\" ({{displayName}} invites you to the room {{roomName}}, where you have the ability to collaborate on documents.)"
+          "type": "formatting",
+          "description": "The phrase 'ඔබවයි ආරාධනා කරයි' needs to be placed within the same <1> tags as the other text. Adding it this way avoids disjointed sentences.",
+          "suggestion": "<1>{{displayName}}</1> ඔබට ආරක්‍ෂිතව සහයෝගයෙන් ලේඛන වල වැඩ කිරීමට <1>{{roomName}}</1> කාමරයට <1>{{displayName}}</1> ඔබවයි ආරාධනා කරයි</1>."
         }
       ],
       "approved_at": null
@@ -253,8 +242,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'приступите' (pristupite) is not the most natural way to say 'join' in this context. 'Уђите' (udjite) or 'Улажите' (ulazite) would be more common and idiomatic for joining a room.",
-          "suggestion": "<1>{{displayName}}</1> вас позива да уђете/улазите соби <1>{{roomName}}</1> за сигурну документ сарадњу."
+          "description": "The word 'приступите' (pristupite) which translates to 'access' or 'approach' doesn't quite capture the meaning of 'join' in this context. A more accurate translation for 'join' would be 'уђете' (uđete).",
+          "suggestion": "<1>{{displayName}}</1> вас позива да уђете соби <1>{{roomName}}</1> за сигурну документ сарадњу."
         }
       ],
       "approved_at": null
@@ -265,8 +254,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'pripasti' (to belong) would be more natural than 'pristupite' (to access/approach) in this context. While 'pristupite' isn't *incorrect*, it's not the most idiomatic choice for inviting someone to join a room.",
-          "suggestion": "<1>{{displayName}}</1> vas poziva da se pridružite sobi <1>{{roomName}}</1> za sigurnu dokument saradnju."
+          "description": "The English phrase 'join the room' is not perfectly translated. 'pristupite sobi' translates to 'access the room' which is not equivalent to 'join the room'.",
+          "suggestion": "vas poziva da se pridružite sobi"
         }
       ],
       "approved_at": null
@@ -276,9 +265,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence structure 'Sizi katılmaya davet ediyor' is a bit awkward in Turkish. A more natural phrasing would be 'odasına katılmanız için davet ediyor' or 'katılmanız için davet ediyor'.",
-          "suggestion": "Sizi odasına katılmanız için davet ediyor."
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'davet ediyor' (invites) is slightly too formal for a typical invitation in this context. A more natural phrasing would be 'diyor' (says) or 'bekliyor' (welcomes).",
+          "suggestion": "<1>{{displayName}}</1> sizi güvenli belge iş birliği için <1>{{roomName}}</1> odasına katılmaya <1>{{roomName}}</1> diyor."
+        },
+        {
+          "type": "formatting",
+          "description": "The English content has <1>...</1> tags around the variables.  The Turkish translation also uses this, but the variables are inside the same tags.",
+          "suggestion": "Ensure consistent formatting.  The most natural way would be to mirror the English tag structure: <1>{{displayName}}</1> <1>{{roomName}}</1>"
         }
       ],
       "approved_at": null
@@ -295,13 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The space after the opening `<1>` tag is unnecessary and inconsistent with English content. It should be removed.",
-          "suggestion": "<1>{{displayName}}</1>"
-        },
-        {
-          "type": "formatting",
-          "description": "The space after the closing `<1>` tag is unnecessary and inconsistent with English content. It should be removed.",
-          "suggestion": "<1>{{roomName}}</1>"
+          "description": "The space after the opening tag <1> in the Vietnamese translation is unnecessary. It should match the English formatting.",
+          "suggestion": "<1>{{displayName}}</1> mời bạn tham gia phòng <1>{{roomName}}</1> để cùng làm việc trên tài liệu một cách an toàn."
         }
       ],
       "approved_at": null
@@ -312,8 +301,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'secure document collaboration' is translated as '安全地共同编辑处理文档'. While technically correct, '安全地共同编辑处理文档' is a bit verbose and awkward. A more natural and concise translation would be something like '安全协作文档' (anquan hezuo wenxian) or '共享安全文档' (gongxiang anquan wenxian).",
-          "suggestion": "安全协作文档"
+          "description": "The phrase \"安全地共同编辑处理文档\" (ānquán de gòngtóng biānjí chǔlǐ wéndàng) translates to 'safely co-edit and process documents'. A more natural and accurate translation for 'secure document collaboration' would be something like \"用于安全协作处理文档\" (yòng yú ānquán xiézuò chǔlǐ wéndàng) or \"用于安全文档协作\" (yòng yú ānquán wéndàng xiézuò).",
+          "suggestion": "用于安全协作处理文档"
         }
       ],
       "approved_at": null

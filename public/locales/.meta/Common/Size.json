@@ -3,7 +3,7 @@
   "content": "Size",
   "content_en_sha1_hash": "b7152342a267362add3c0d7f69f720f7a9c76c9e",
   "created_at": "2025-05-19T21:30:48.889Z",
-  "updated_at": "2025-07-01T15:57:36.081Z",
+  "updated_at": "2025-06-08T12:02:32.687Z",
   "comment": {
     "text": "This translation key is used to display the label \"Size\" in various UI elements, such as file extensions and table column headers, providing a clear and concise way to indicate size-related information.",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1196,
+      "line_number": 1174,
       "context": "default: true,\n };\n const size = {\n id: \"sort-by_size\",\n key: SortByFieldName.Size,\n label: t(\"Common:Size\"),\n default: true,\n };\n \n const roomType = {\n id: \"sort-by_room-type\",",
       "module": "/packages/client"
     },
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Величина\" can translate to \"Size\" in some contexts, it's a more formal and nuanced term.  For a common property like size, a more direct translation like \"Величина\" is not the best fit.  \"Величина\" refers more to magnitude or extent.  A more appropriate translation might depend on the specific context where 'Size' is being used.  Without further context, it's difficult to provide a perfect alternative.",
-          "suggestion": "Consider alternatives like 'Димензије' (Dimensions), 'Вeљина' (Size - more direct, though less common), or 'Повељина' (Surface area) depending on the specific context."
+          "description": "While 'Величина' (Velichina) can sometimes translate to 'Size', it's more accurately 'Magnitude' or 'Amount'. 'Size' often refers to dimensions (length, width, height) or scale, which 'Величина' doesn't always convey.",
+          "suggestion": "Consider 'Димензије' (Dimenziye) for dimensions or 'Величина' (Velichina) if referring to amount or magnitude, depending on the specific context. If the meaning is about physical dimensions, 'Времена' might be considered."
         }
       ],
       "approved_at": null
@@ -252,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"大小\" (dàxiǎo) generally means \"size\" or \"big and small\". While it can convey the concept of size, it's a broader term and not the most precise translation for just \"Size\". It implies both large and small dimensions rather than simply the measurement of size.",
-          "suggestion": "Consider using a more precise translation like \"尺寸\" (chǐcùn) which specifically refers to dimensions or size, or \"大小\" (dàxiǎo) if the context explicitly requires indicating both large and small sizes."
+          "description": "While '大小' (dàxiǎo) can translate to 'size', it more accurately means 'big and small' or 'height and width'. 'Size' in a general context might be better translated as '尺寸' (chǐcùn) or simply '大小' depending on the specific usage, but '大小' is less precise.",
+          "suggestion": "Consider '尺寸' (chǐcùn) or re-evaluate the context to determine the most appropriate translation.  '大小' is acceptable but lacks specificity."
         }
       ],
       "approved_at": null

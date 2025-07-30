@@ -36,7 +36,5 @@ type ThemeProviderProps = {
 export const ThemeContext = createContext<TTheme>("Base");
 
 export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
-  return (
-    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext value={theme}>{children}</ThemeContext>;
 };

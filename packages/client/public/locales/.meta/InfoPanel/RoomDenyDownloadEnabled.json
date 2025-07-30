@@ -3,7 +3,7 @@
   "content": "Downloading and copying restricted",
   "content_en_sha1_hash": "3148f9f57471d093da0d3b4c41a147bd2b0fa288",
   "created_at": "2025-05-19T21:30:54.910Z",
-  "updated_at": "2025-05-28T09:30:02.438Z",
+  "updated_at": "2025-06-30T12:20:31.355Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that downloading and copying restricted content is disabled. It appears in the UI on certain pages or components where file operations are involved, such as download buttons or information panels. Translators should adapt this phrase to fit local languages while maintaining its essential meaning.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 281,
-      "context": ");\n }\n case \"RoomLifeTimeDisabled\":\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case \"RoomDenyDownloadEnabled\":\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":",
+      "line_number": 290,
+      "context": ");\n }\n case FeedActionKeys.RoomLifeTimeDisabled:\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case FeedActionKeys.RoomDenyDownloadEnabled:\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies that the restriction is on downloading and copying. The Arabic translation 'التحميل والنسخ محظوران' literally translates to 'Downloading and copying are prohibited.' While conveying a similar meaning, it's a more forceful statement. A more accurate translation would depend on the specific nuance desired. Consider something like 'Downloading and copying are limited' or 'Restricted downloading and copying'.",
-          "suggestion": "Consider 'التحميل والنسخ مقيدان' (Downloading and copying are restricted) or 'التحميل والنسخ ممنوعان إلا بترخيص' (Downloading and copying are prohibited except with permission) to better reflect the original meaning."
+          "description": "The English phrase 'Downloading and copying restricted' implies a restriction on the actions themselves. The Arabic translation 'التحميل والنسخ محظوران' translates to 'Downloading and copying are prohibited'. While conveying a similar meaning, the nuance of 'restricted' is lost. A more accurate translation might consider alternatives that capture the sense of limitation rather than a direct prohibition.",
+          "suggestion": "Consider alternatives like 'التحميل والنسخ محدودان' (Downloading and copying are limited) or 'التحميل والنسخ يخضعان للقيود' (Downloading and copying are subject to restrictions)."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Yükləmə və nüsxələnmə məhdudlaşdırılıb\" is a literal translation and doesn't fully capture the meaning of 'restricted'. It implies a state of being restricted, rather than the action of restricting. A better translation would convey that downloading and copying are *not* allowed.",
-          "suggestion": "Yükləmə və nüsxələnmə qadağan edilib"
+          "description": "The translation 'Yükləmə və nüsxələnmə məhdudlaşdırılıb' doesn't fully capture the meaning of 'Downloading and copying restricted'. A more accurate translation might convey the sense that downloading and copying are 'prevented' or 'not allowed' rather than simply 'restricted'. 'Məhdudlaşdırılıb' implies a limitation, not necessarily a complete prohibition.",
+          "suggestion": "Consider alternatives like 'Yükləmə və nüsxələnmə qadağan edilib' (Downloading and copying are prohibited) or 'Yükləmə və nüsxələnmə imkanı ləğv edilib' (Downloading and copying are disabled)."
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies a restriction *on* downloading and copying. The Czech translation 'Stahování a kopírování s omezením' literally translates to 'Downloading and copying with a limitation,' which is less precise. A more accurate translation might convey that the downloading and copying are being restricted.",
-          "suggestion": "Stahování a kopírování omezené"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Downloading and copying restricted\" implies a limitation or restriction *on* downloading and copying. The German translation \"Herunterladen und Kopieren verboten\" translates to \"Downloading and copying prohibited.\" While similar in meaning, 'restricted' is a softer term than 'prohibited'. A more accurate translation that captures the nuance of 'restricted' could be 'Herunterladen und Kopieren eingeschränkt'.",
-          "suggestion": "Herunterladen und Kopieren eingeschränkt"
+          "description": "The English phrase 'Downloading and copying restricted' implies a limitation or restriction on downloading and copying. The German translation 'Herunterladen und Kopieren verboten' translates to 'Downloading and copying prohibited,' which is a stronger statement. While not necessarily wrong, it's more absolute than the original phrasing.",
+          "suggestion": "Consider a softer phrasing like 'Herunterladen und Kopieren eingeschränkt' (Downloading and copying restricted)."
         }
       ],
       "approved_at": null
@@ -81,7 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Downloading and copying restricted\" implies that the action is limited or not fully allowed. The Greek translation \"Λήψη και αντιγραφή περιορισμένη\" literally translates to 'Download and copy restricted,' which doesn't convey the intended meaning. A better translation would suggest a limitation or restriction on the action.",
+          "suggestion": "Consider a translation like \"Απαγορεύεται η λήψη και αντιγραφή\" (Downloading and copying are prohibited) or \"Περιορισμένη λήψη και αντιγραφή\" (Restricted download and copy)."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -105,13 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies a state of being restricted, not an action that has been performed. The Armenian translation, 'Ներբեռնումը և պատճենումը սահմանափակված են', literally translates to 'Downloading and copying are restricted.' This is not a direct equivalent and could be misinterpreted. A more accurate translation would convey that the download/copy functionality is disabled or not allowed.",
-          "suggestion": "Consider alternatives such as 'Downloading and copying are disabled' (Ներբեռնումը և պատճենումը արգելված են) or 'Restricted download and copy' (Սահմանափակ ներբեռնում և պատճենում)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,13 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Download e copia limitati' doesn't accurately convey the meaning of 'Downloading and copying restricted'. It translates to 'Downloads and copies limited,' implying a restriction on the items themselves, rather than the action of downloading and copying.",
+          "description": "The translation 'Download e copia limitati' is too literal and doesn't convey the intended meaning of 'restricted'. It sounds awkward in Italian.  A better translation would convey the sense of 'not allowed' or 'disabled'.",
           "suggestion": "Download e copia non consentiti"
         },
         {
           "type": "grammar",
-          "description": "The agreement of 'limitati' is incorrect. Because 'download' and 'copia' are masculine nouns, the adjective should be masculine plural.",
-          "suggestion": "Download e copia limitati (while grammatically correct, is still not the best translation)"
+          "description": "The plural form 'limitati' doesn't agree with the implied singular nature of the functionality being described (downloading and copying).",
+          "suggestion": "Download e copia limitata"
         }
       ],
       "approved_at": null
@@ -143,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies a state of being restricted, but the Korean translation '다운로드 및 복사가 제한되었습니다' translates to 'Downloading and copying are restricted.' While similar, the nuance is slightly different. The English suggests the action is restricted, while the Korean states that the actions *are* restricted. It's a subtle but important difference in how the message is perceived. '제한되어 있습니다' would be a closer equivalent, suggesting a state of being restricted.",
-          "suggestion": "다운로드 및 복사가 제한되어 있습니다"
+          "description": "The English phrase 'Downloading and copying restricted' implies a feature or setting is enabled, restricting downloads and copies. The Korean translation '다운로드 및 복사가 제한되었습니다' translates to 'Downloading and copying are restricted,' which implies the action is already restricted and not a setting to enable/disable. This doesn't align with the intended meaning of a feature flag.",
+          "suggestion": "Consider a translation that reflects the enabling of a restriction, such as '다운로드 및 복사 제한 기능 활성화' (Download and copy restriction feature enabled) or '다운로드 및 복사 제한 설정' (Download and copy restriction setting)."
         }
       ],
       "approved_at": null
@@ -155,13 +149,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ດາວໂຫຼດ ແລະ ກ໊ອບເຜີຍ ສ່ວນທີ່ຖືກຈຳກັດ' doesn't fully capture the meaning of 'Downloading and copying restricted'. 'Restricted' implies a limitation or prohibition, which isn't entirely conveyed. A more accurate translation should indicate that these actions are *not allowed* or *prohibited*.",
-          "suggestion": "ດາວໂຫຼດ ແລະ ກ໊ອບເຜີຍ ແມ່ນຫ້າມ"
+          "description": "The Lao translation 'ດາວໂຫຼດ ແລະ ກ໊ອບເຜີຍ ສ່ວນທີ່ຖືກຈຳກັດ' while containing the correct terms for 'download' and 'copy', isn't the most natural or accurate rendering of 'restricted' in this context. 'Restricted' implies limitations imposed on downloading and copying. A more accurate translation would convey this imposed limitation.",
+          "suggestion": "ດາວໂຫຼດ ແລະ ກ໊ອບເຜີຍ ແມ່ນຖືກຫ້າມ"
         },
         {
           "type": "spelling",
-          "description": "The word 'ກ໊ອບເຜີຍ' might not be the most common or preferred spelling for 'copying' in Lao. It might be perceived as informal or slightly incorrect.",
-          "suggestion": "ຖ່າຍເຜີຍ"
+          "description": "The word 'ກ໊ອບເຜີຍ' might be a non-standard transliteration of 'copy'. While understandable, using a more standard transliteration or a more formal term is recommended.",
+          "suggestion": "ກ໊ອບປີ້ or ສຳເນົາ"
         }
       ],
       "approved_at": null
@@ -172,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies that the action is limited or prohibited. 'Ierobežota lejupielāde un kopēšana' is a reasonable translation, but 'Ierobežota' can be interpreted as just 'limited' rather than 'restricted' which implies prohibition. A more accurate translation depending on the intended meaning could be 'Aizliegta lejupielāde un kopēšana' (Downloading and copying prohibited) or 'Pārbaudīta lejupielāde un kopēšana' (Downloading and copying controlled).",
-          "suggestion": "Consider 'Aizliegta lejupielāde un kopēšana' or 'Pārbaudīta lejupielāde un kopēšana' depending on the intended nuance."
+          "description": "The translation 'Ierobežota lejupielāde un kopēšana' is a generally acceptable translation of 'Downloading and copying restricted,' but could be more precise. 'Restricted' implies a prohibition or limitation, whereas 'Ierobežota' implies a limitation, but not necessarily a prohibition. A more accurate translation might consider emphasizing the 'restricted' aspect.",
+          "suggestion": "Aizliegta lejupielāde un kopēšana"
         }
       ],
       "approved_at": null
@@ -190,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pobieranie i kopiowanie są ograniczone\" doesn't perfectly capture the meaning of \"Downloading and copying restricted\". The English implies that the actions are *allowed* but with restrictions. The Polish implies they are forbidden. A more accurate translation would indicate restriction rather than prohibition.",
-          "suggestion": "Pobieranie i kopiowanie z ograniczeniami"
+          "description": "The English phrase \"Downloading and copying restricted\" implies that the *ability* to download and copy is limited. The Polish translation \"Pobieranie i kopiowanie są ograniczone\" translates literally to \"Downloading and copying are restricted,\" which is a passive construction and less natural. It implies that the downloads/copies themselves are restricted, not the action of downloading and copying.",
+          "suggestion": "Pobieranie i kopiowanie są niedostępne"
         }
       ],
       "approved_at": null
@@ -202,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Downloading and copying restricted\" implies a restriction on both actions. The Portuguese translation \"Download e cópia restritos\" is grammatically correct but lacks the nuance of implying a restriction *on* the downloading and copying. It reads as if the downloads and copies themselves are restricted.",
-          "suggestion": "Download e cópia não permitidos"
+          "description": "The English phrase 'Downloading and copying restricted' implies a state or permission. The Portuguese translation 'Download e cópia restritos' literally translates to 'Download and copy restricted,' which sounds awkward and doesn't convey the intended meaning. A more natural translation would indicate that downloads and copies are *not* allowed.",
+          "suggestion": "Consider 'Download e cópia não permitidos' or 'Download e cópia proibidos'."
         }
       ],
       "approved_at": null
@@ -214,7 +208,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Downloading and copying restricted\" implies a state of being restricted from downloading and copying. The Portuguese translation \"Download e cópia restritos\" translates to \"Downloads and copies restricted,\" which implies the downloads and copies themselves are restricted, rather than the action. A more accurate translation might be 'Download e cópia não permitidos' or 'Download e cópia proibidos'.",
+          "description": "The English phrase 'Downloading and copying restricted' implies a state of being (restricted from downloading and copying). The Portuguese translation 'Download e cópia restritos' is more accurately translated as 'Restricted downloads and copies'. While understandable, it shifts the emphasis slightly and might not fully convey the intended meaning. A more accurate translation might be 'Download e cópia não permitidos' or 'Download e cópia proibidos'.",
           "suggestion": "Download e cópia não permitidos"
         }
       ],
@@ -226,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies that downloading and copying *are* restricted. The Romanian translation 'Încărcarea și copierea sunt restricționate' also conveys this directly. However, a more natural translation that conveys restriction might be 'Downloading and copying are not allowed' or 'Restricted download and copy'.",
-          "suggestion": "Consider 'Descărcarea și copierea sunt interzise' or 'Descărcarea și copierea sunt limitate'"
+          "description": "The translation \"Încărcarea și copierea sunt restricționate\" doesn't fully capture the meaning of \"Downloading and copying restricted.\" 'Restricted' implies a limitation on the action, not that the actions themselves are restricted. A more accurate translation would convey the restriction *on* downloading and copying.",
+          "suggestion": "Descărcarea și copierea sunt interzise."
         }
       ],
       "approved_at": null
@@ -244,8 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'බාගැනීම සහ පිටපත් කිරීම සීමා කර ඇත' while understandable, doesn't fully capture the nuance of 'Downloading and copying restricted'. A more accurate translation might imply a specific restriction is in place.",
-          "suggestion": "බාගැනීම සහ පිටපත් කිරීම අවසර නැSuppressWarningsති"
+          "description": "The translation \"බාගැනීම සහ පිටපත් කිරීම සීමා කර ඇත\" is a literal translation but may not be the most natural or clear way to convey the meaning of \"Downloading and copying restricted\" in Sinhala. It implies restriction of the actions themselves, rather than the content being restricted from being downloaded or copied.",
+          "suggestion": "බාගතත්, පිටපත් කළත් බැරි"
         }
       ],
       "approved_at": null
@@ -256,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sťahovanie a kopírovanie je obmedzené' is a literal translation but doesn't convey the intended meaning of 'restricted.' It implies a general limitation, while the original suggests a prohibition. A more accurate translation would convey the concept of being denied the ability to download and copy.",
-          "suggestion": "Sťahovanie a kopírovanie je zakázané"
+          "description": "The English phrase 'Downloading and copying restricted' implies a state of being restricted. The Slovak translation 'Sťahovanie a kopírovanie je obmedzené' also conveys a similar meaning, but the nuance of 'restricted' isn't perfectly captured. A more accurate translation might consider phrasing that emphasizes the prohibition or inability to download/copy, rather than just stating it's limited.",
+          "suggestion": "Sťahovanie a kopírovanie nie je povolené."
         }
       ],
       "approved_at": null
@@ -265,13 +259,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies a limitation or prohibition on downloading and copying. The Slovenian translation 'Prenos in kopiranje omejeno' translates to 'Downloading and copying limited.' While close, 'omejeno' can suggest a softer restriction than 'restricted' intends. A stronger word reflecting 'restricted' might be more accurate, such as 'prepovedano' (prohibited) or 'zaščiteno' (protected).",
-          "suggestion": "Consider 'Prenos in kopiranje prepovedano' or 'Prenos in kopiranje zaščiteno' for a closer representation of 'restricted'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -280,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Преузимање и копирање ограничено' while technically correct, doesn't fully capture the nuance of 'Downloading and copying restricted'. A better translation might emphasize that the restriction is in place.",
-          "suggestion": "Преузимање и копирање су забрањени"
+          "description": "The English phrase \"Downloading and copying restricted\" implies that the action is limited or not fully allowed. The Serbian translation \"Преузимање и копирање ограничено\" accurately conveys this meaning, but a slightly more nuanced translation might be considered depending on the context. 'Ограничено' directly translates to 'restricted,' which might be too literal. A phrase implying 'not permitted' or 'prohibited' could be explored.",
+          "suggestion": "Consider alternatives like \"Преузимање и копирање забрањено\" (Downloading and copying prohibited) or \"Преузимање и копирање недозвољено\" (Downloading and copying unauthorized) for a slightly more natural feel. However, the current translation is acceptable and understandable."
         }
       ],
       "approved_at": null
@@ -289,7 +277,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Preuzimanje i kopiranje ograničeno' is a literal translation but doesn't fully capture the nuance of 'restricted' in the context of a download/copy restriction. It implies a limitation, but not necessarily a prohibition.",
+          "suggestion": "Preuzimanje i kopiranje zabranjeno"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -298,8 +292,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"İndirme ve kopyalama sınırlandırılmamıştır\" means 'Downloading and copying are not restricted'. This is the opposite of the English content \"Downloading and copying restricted\".",
-          "suggestion": "İndirme ve kopyalama kısıtlanmıştır"
+          "description": "The Turkish translation 'İndirme ve kopyalama sınırlandırılmamıştır' translates to 'Downloading and copying are not restricted'. This contradicts the English 'Downloading and copying restricted'. The translation should convey that downloading and copying *are* restricted.",
+          "suggestion": "İndirme ve kopyalama sınırlandırılmıştır"
         }
       ],
       "approved_at": null
@@ -316,8 +310,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Hạn chế tải xuống và sao chép' while technically correct, doesn't fully capture the meaning of 'restricted'. 'Restricted' implies a limitation or prohibition, while 'hạn chế' implies a limitation that might still allow some action. A stronger translation would convey the idea of being entirely prohibited.",
-          "suggestion": "Cấm tải xuống và sao chép"
+          "description": "The translation 'Hạn chế tải xuống và sao chép' doesn't fully capture the nuance of 'Downloading and copying restricted'. While 'Hạn chế' means 'restricted', the English implies that restricted actions are *being* performed, not that restriction is simply in place. A better translation would convey the act of downloading/copying being limited.",
+          "suggestion": "Tải xuống và sao chép bị hạn chế"
         }
       ],
       "approved_at": null
@@ -328,8 +322,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying restricted' implies a state of being limited, whereas the Chinese translation '已添加下载和复制限制' means 'Download and copy restrictions have been added.' This suggests an action being performed, not a state of restriction. The original meaning is lost.",
-          "suggestion": "Consider a translation that reflects the state of being restricted, such as '下载和复制受限' (Download and copy are restricted) or '下载和复制被禁止' (Downloading and copying are prohibited)."
+          "description": "The translation \"已添加下载和复制限制\" (Has added download and copy restrictions) doesn't accurately convey the meaning of \"Downloading and copying restricted\". The English phrase implies that restrictions are *already* in place, whereas the Chinese translation suggests that restrictions were *just* added. A better translation would convey that the restriction is active.",
+          "suggestion": "限制下载和复制 (Restricting download and copy)"
         }
       ],
       "approved_at": null

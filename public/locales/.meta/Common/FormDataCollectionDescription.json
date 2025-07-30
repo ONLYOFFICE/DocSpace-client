@@ -3,7 +3,7 @@
   "content": "Collect the completed form copies and data from them into XLSX for analyzing responses in Form Filling rooms.",
   "content_en_sha1_hash": "3b43aef8ad1149a97c567527e3f169f5362b0735",
   "created_at": "2025-05-19T21:30:45.493Z",
-  "updated_at": "2025-05-28T09:30:02.272Z",
+  "updated_at": "2025-06-30T12:20:31.243Z",
   "comment": {
     "text": "Collect completed form copies and data into XLSX for analysis in Form Filling rooms. This description is used in buttons to initiate file sharing in various UI components such as dialogs, share panels, and share form dialogs.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 166,
+      "line_number": 164,
       "context": "disabled: !file.canShare,\n },\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {",
       "module": "/packages/doceditor"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form Filling rooms\" is not directly equivalent to the English. While \"غرف ملء النماذج\" (rooms for filling forms) conveys the general idea, a more accurate translation might consider \"غرف معالجة النماذج\" (rooms for processing forms) or a more contextually appropriate phrase depending on the exact function of those rooms.",
-          "suggestion": "غرف معالجة النماذج (rooms for processing forms) or rephrase to fit the specific context."
+          "description": "The phrase \"ملء النماذج\" (filling forms) is not the most natural way to describe \"Form Filling rooms.\" A more accurate translation would convey the purpose of the rooms, like \"غرف معالجة النماذج\" (Form Processing rooms) or \"غرف فحص النماذج\" (Form Review rooms).",
+          "suggestion": "غرف معالجة النماذج"
         }
       ],
       "approved_at": null
@@ -54,13 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Collect\" is not ideal. \"Toplayın\" is correct for gathering, but a more natural phrasing might improve readability. \"Yığın\" (gather) or \"bir araya gətirin\" (bring together) could be considered.",
-          "suggestion": "Doldurma otaqlarında cavabları təhlil etmək üçün tamamlanmış forma nüsxələrini və onlardan məlumatları XLSX-ə yığın edin/bir araya gətirin."
+          "description": "The translation of \"Collect\" is too literal. A more natural phrasing in Azerbaijani would convey the action of gathering or compiling the data.",
+          "suggestion": "Doldurma otaqlarında cavabları təhlil etmək üçün tamamlanmış forma nüsxələrini və onlardan alınan məlumatları bir araya toplayın/kompilə edin."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a semicolon or conjunction might improve sentence flow. The current sentence feels a little long and choppy.",
-          "suggestion": "Doldurma otaqlarında cavabları təhlil etmək üçün tamamlanmış forma nüsxələrini toplayın və onlardan məlumatları XLSX-ə yükləyin."
+          "type": "incorrect_translation",
+          "description": "The phrase 'onlardan məlumatları' is a bit clunky. 'Onlardan alınan məlumatları' (the data obtained from them) is more fluent.",
+          "suggestion": "Doldurma otaqlarında cavabları təhlil etmək üçün tamamlanmış forma nüsxələrini və onlardan alınan məlumatları bir araya toplayın/kompilə edin."
         }
       ],
       "approved_at": null
@@ -74,18 +74,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Form Filling rooms\" is a bit literal and may not be the most natural way to express the concept in Czech. It implies rooms dedicated solely to filling forms.",
-          "suggestion": "Consider alternatives like \"místnostech pro zpracování vyplněných formulářů\" (rooms for processing completed forms) or \"v místnostech, kde se analyzují vyplněné formuláře\" (in rooms where completed forms are analyzed)."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'souboru' (file) might be better as 'soubor' because it is referring to a single XLSX file, not a collection of files.",
-          "suggestion": "Change 'do souboru XLSX' to 'do souboru XLSX'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -94,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form Filling rooms' is awkward in German. A more natural translation might be 'Räumen zur Formularausfüllung' or a simpler phrasing depending on the context (e.g., 'für die Auswertung der Formulare').",
-          "suggestion": "Räumen zur Formularausfüllung"
+          "description": "The phrase \"Formularausfüllräumen\" is not the most natural or idiomatic translation for \"Form Filling rooms.\" It's overly literal and sounds awkward.",
+          "suggestion": "Consider using a more natural phrasing like \"Räumen zur Bearbeitung von Formularen\" or simply \"Bearbeitungsräume\" if the context makes it clear what kind of rooms are being referred to."
         }
       ],
       "approved_at": null
@@ -103,13 +92,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a slightly passive voice ('Συλλέξτε...') which, while grammatically correct, could be more direct and action-oriented to match the English tone. Consider a more active phrasing.",
-          "suggestion": "Αποθηκεύστε τα συμπληρωμένα αντίγραφα της φόρμας και τα δεδομένα από αυτά σε μορφή XLSX για ανάλυση των απαντήσεων στους χώρους συμπλήρωσης φορμών."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -118,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Form Filling rooms\" is not idiomatic. \"Salas para rellenar formularios\" is literal and awkward. A more natural translation would be something like \"salas de procesamiento de formularios\" or \"salas de revisión de formularios\".",
-          "suggestion": "salas de procesamiento de formularios"
+          "description": "The phrase \"salas para rellenar formularios\" is not the most natural or accurate translation of \"Form Filling rooms\". It literally translates to \"rooms for filling out forms\". A more suitable translation would convey the intended meaning of a dedicated space for analyzing form responses.",
+          "suggestion": "Consider alternatives like \"salas de análisis de formularios\" or \"salas de revisión de formularios\" which more accurately describe the function of the rooms."
         }
       ],
       "approved_at": null
@@ -130,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses 'lomakkeiden täyttöhuoneissa' which is a bit clunky. While technically correct, a more natural phrasing might improve readability.",
-          "suggestion": "Kerää täytetyt lomakekopiot ja tiedot niistä XLSX-tiedostoon vastausten analysoimiseksi lomaketäyttöhuoneissa."
+          "description": "The phrase \"lomakkeiden täyttöhuoneissa\" is a bit wordy and could be more concise. While grammatically correct, it makes the sentence slightly awkward.",
+          "suggestion": "Kerää täytetyt lomakekopiot ja tiedot niistä XLSX-tiedostoon vastausten analysoimiseksi täyttöhuoneissa."
         }
       ],
       "approved_at": null
@@ -142,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form Filling rooms\" is a bit literal and awkward in French. \"Salles de remplissage de formulaires\" isn't the most natural phrasing.",
-          "suggestion": "Consider a more idiomatic translation, such as \"salles de saisie des formulaires\" or \"lieux de saisie des formulaires\", or a more general term like \"services de saisie\" if the context allows."
+          "description": "The phrase \"salles de remplissage de formulaires\" is an awkward and less natural way to express \"Form Filling rooms\". A more common and understandable translation would be \"salles de saisie de formulaires\" or \"pièces de remplissage de formulaires\".",
+          "suggestion": "Consider using \"salles de saisie de formulaires\" or \"pièces de remplissage de formulaires\"."
         }
       ],
       "approved_at": null
@@ -153,9 +136,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation includes 'XLSX-ում' which directly transliterates the English abbreviation. While understandable, it might be more professional to use the Armenian equivalent or a more descriptive term if applicable within the specific context of Form Filling rooms.",
-          "suggestion": "Consider replacing 'XLSX-ում' with a more descriptive phrase like 'эլեկտրոնային աղյուսակային ֆորմատով' (in electronic spreadsheet format) or a term commonly used in the Form Filling room environment."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ձևաթղթերի լրացման սենյակներում\" (devaqtxerí lrats'man senyak'nerum) translates to 'in form filling rooms' but could be more accurately translated as 'rooms where forms are filled' or 'form processing rooms' to better reflect the intended meaning. The current wording is somewhat literal and sounds slightly awkward in Armenian.",
+          "suggestion": "Հավաքեք ավարտված ձևի պատճենները և տվյալները XLSX-ում՝ ձևանմուշների մշակման սենյակներում (havageq avartvad deví patchennere yev tvalyanere XLSX-um - devanmusheni mshakman senyaknerum): This translates to 'Collect the completed form copies and data into XLSX for form processing rooms.'"
         }
       ],
       "approved_at": null
@@ -165,14 +148,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'stanze di Compilazione modulo' is not the most natural or clear translation of 'Form Filling rooms'. It's quite literal. A more idiomatic translation would be something like 'sale di compilazione moduli' or 'ambienti di compilazione moduli'.",
-          "suggestion": "Consider translating 'Form Filling rooms' as 'sale di compilazione moduli' or 'ambienti di compilazione moduli'."
+          "type": "grammar",
+          "description": "The phrase \"stanze di Compilazione modulo\" is grammatically awkward. \"Compilazione\" is a noun, and while understandable, it's not the most natural phrasing.",
+          "suggestion": "stanze dedicate alla compilazione dei moduli"
         },
         {
-          "type": "formatting",
-          "description": "The Italian translation starts with a space. It should be removed.",
-          "suggestion": "Remove the leading space from the translation."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Form Filling rooms\" implies a dedicated space where forms are being filled out. The Italian translation doesn't convey this. A more literal translation, but perhaps less accurate, would be 'stanze di compilazione moduli'.",
+          "suggestion": "stanze dedicate all'inserimento dei dati dei moduli"
         }
       ],
       "approved_at": null
@@ -182,9 +165,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Form Filling rooms\" is not accurately conveyed by \"フォーム記入ルーム\". A more natural translation would be something like \"フォーム入力スペース\" (Form Input Space) or \"フォーム記入スペース\" (Form Filling Space) to reflect a dedicated area for form filling.",
-          "suggestion": "Replace \"フォーム記入ルーム\" with \"フォーム入力スペース\" or \"フォーム記入スペース\"."
+          "type": "formatting",
+          "description": "The Japanese translation uses a slightly less formal tone than the English. 'フォーム記入ルーム' (Form Filling rooms) sounds a bit clunky. A more natural phrasing might be 'フォーム回答分析ルーム' or something similar depending on the specific room function.",
+          "suggestion": "Consider rephrasing 'フォーム記入ルーム' to something more natural like 'フォーム回答分析ルーム' or a more contextually appropriate term."
         }
       ],
       "approved_at": null
@@ -194,14 +177,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Form Filling rooms\" is awkwardly translated. It's not clear what \"Form Filling 룸\" refers to. A more accurate translation might clarify the purpose of these rooms.",
-          "suggestion": "완료된 서식 사본과 데이터를 XLSX 형식으로 수집하여 서식 작성 분석실에서 응답을 분석합니다."
-        },
-        {
           "type": "formatting",
-          "description": "The word '룸' (room) is in English letters within a Korean sentence. This is unusual and can be made more natural.",
-          "suggestion": "완료된 서식 사본과 데이터를 XLSX 형식으로 수집하여 서식 작성 분석실에서 응답을 분석합니다."
+          "description": "The Korean translation uses a full stop at the end of the sentence. While grammatically correct, it might be more appropriate to omit it for a more natural flow in technical documentation or instructions.",
+          "suggestion": "Remove the full stop at the end: 완료된 서식 사본과 데이터를 XLSX 형식으로 수집하여 Form Filling 룸에서 응답을 분석합니다"
         }
       ],
       "approved_at": null
@@ -211,14 +189,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ໄຟລ໌' (file) is used in the Lao translation. While technically correct, it might be more accurate and natural to use 'ເອກະສານ' (document) in this context.",
-          "suggestion": "ເກັບຮັກສາແບບຟອມທີ່ສໍາເລັດຮູບ ແລະ ຂໍ້ມູນຈາກມັນໃສ່ໃນເອກະສານ XLSX ເພື່ອສຶ້ອກວດວິເຄາະການຕອບສະໜອງໃນຫ້ອງຕື່ມແບບຟອມ."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ສຶ້ອກວດວິເຄາະ\" (seuk-gwaet-wi-keo) is a bit clunky and overly formal for describing analyzing responses. A more natural phrasing would be something along the lines of 'ວິເຄາະ' (wi-keo) or 'ກວດແກ້' (gwaet-gae).",
+          "suggestion": "ວິເຄາະການຕອບສະໜອງ"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the Lao translation could benefit from a slightly more flowing sentence structure. The phrase 'ຂໍ້ມູນຈາກມັນໃສ່ໃນ...' is somewhat clunky.",
-          "suggestion": "ເກັບຮັກສາແບບຟອມທີ່ສໍາເລັດຮູບ ແລະ ຂໍ້ມູນຈາກມັນໃສ່ໃນເອກະສານ XLSX ເພື່ອສຶ້ອກວດວິເຄາະການຕອບສະໜອງໃນຫ້ອງຕື່ມແບບຟອມ."
+          "description": "While technically correct, the word order might be improved for a more fluent Lao reading experience.",
+          "suggestion": "ເກັບຮັກສາແບບຟອມທີ່ສໍາເລັດຮູບ ແລະ ຂໍ້ມູນຈາກມັນໃສ່ໃນໄຟລ໌ XLSX ເພື່ອວິເຄາະການຕອບສະໜອງໃນຫ້ອງຕື່ມແບບຟອມ"
         }
       ],
       "approved_at": null
@@ -229,13 +207,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"no tām iegūto datu\" (data obtained from them) is a bit clunky and doesn't quite capture the concise nature of 'data from them' in the English original. It's technically correct, but could be improved.",
-          "suggestion": "Aizpildīto veidlapu kopiju un datu no tām apkopošana XLSX..."
+          "description": "The phrase \"veidlapu aizpildīšanas telpās\" is a bit awkward. It literally translates to 'form filling rooms'. A more natural translation for 'Form Filling rooms' in this context would be something like 'atbildžu apstrādes telpās' (response processing rooms) or simply 'telpās' (rooms).",
+          "suggestion": "Aizpildīto veidlapu kopiju un no tām iegūto datu apkopošana XLSX, lai analizētu atbildes atbildžu apstrādes telpās."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is a bit long and could be improved for readability. While not strictly incorrect, a more fluent translation might enhance comprehension.",
-          "suggestion": "Apkopojiet aizpildīto veidlapu kopijas un datus no tām XLSX formātā, lai analizētu atbildes veidlapu aizpildīšanas telpās."
+          "description": "While not strictly incorrect, adding a comma after 'XLSX' might improve readability.",
+          "suggestion": "Aizpildīto veidlapu kopiju un no tām iegūto datu apkopošana XLSX, , lai analizētu atbildes veidlapu aizpildīšanas telpās."
         }
       ],
       "approved_at": null
@@ -246,8 +224,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"geëxtraheerde gegevens\" (extracted data) is not the most natural way to express \"data from them.\" A more fluent translation would be 'de gegevens ervan' or 'de data'.",
-          "suggestion": "Verzamelen van kopieën van de ingevulde formulieren en de gegevens ervan in XLSX om de antwoorden in de formulierenkamers te analyseren."
+          "description": "The phrase \"geëxtraheerde gegevens\" (extracted data) is a bit stiff and not the most natural way to describe pulling data from forms. It implies a complex extraction process that may not be necessary.",
+          "suggestion": "Verzamelen van kopieën van de ingevulde formulieren en de gegevens uit deze formulieren in XLSX om de antwoorden in de formulierenkamers te analyseren."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, using 'uit deze formulieren' instead of 'uit de formulieren' improves flow and readability.",
+          "suggestion": "Verzamelen van kopieën van de ingevulde formulieren en de gegevens uit deze formulieren in XLSX om de antwoorden in de formulierenkamers te analyseren."
         }
       ],
       "approved_at": null
@@ -258,8 +241,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form Filling rooms\" is awkwardly translated. It implies rooms *dedicated* to filling out forms, which isn't necessarily the intent. A more accurate translation might focus on rooms where the data is analyzed.",
-          "suggestion": "Zbierz skopiowane formularze i dane z nich do formatu XLSX w celu analizy odpowiedzi w pomieszczeniach analitycznych."
+          "description": "The phrase \"form filling rooms\" is a somewhat literal translation and might not be the most natural way to describe the context in Polish. A more appropriate term might convey a space dedicated to processing and analyzing form data.",
+          "suggestion": "Consider using a term like \"pomieszczeniach do przetwarzania formularzy\" (rooms for processing forms) or \"stanowiskach analitycznych\" (analysis workstations)."
         }
       ],
       "approved_at": null
@@ -276,8 +259,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'salas de Preenchimento de Formulários' is a literal translation of 'Form Filling rooms' and could be improved for naturalness in Portuguese. A more common and understandable phrasing would be 'salas de preenchimento' or 'áreas de preenchimento'.",
-          "suggestion": "salas de preenchimento"
+          "description": "The phrase 'salas de Preenchimento de Formulários' is a literal translation of 'Form Filling rooms'. While understandable, a more natural phrasing in Brazilian Portuguese would improve readability. Consider using a more descriptive term or rephrasing the sentence.",
+          "suggestion": "salas de preenchimento de formulários or salas de análise de respostas (depending on the exact context)"
         }
       ],
       "approved_at": null
@@ -288,8 +271,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"în formularul XLSX\" is awkward. It translates to 'into the XLSX form', which doesn't make sense. The intended meaning is likely 'in XLSX format' or 'as an XLSX file'.",
-          "suggestion": "în format XLSX sau ca fișier XLSX"
+          "description": "The phrase \"în formularul XLSX\" is awkward and doesn't accurately convey the meaning of 'into XLSX'. It suggests saving the data *into* a form, rather than creating an XLSX file *from* the data.",
+          "suggestion": "în fișierul XLSX"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'formularul' is not the best translation for 'form'.  'Formular' is more appropriate in this context, referring to a physical form or document.",
+          "suggestion": "în fișierul XLSX pentru a analiza răspunsurile în săli de Completare a formularelor"
         }
       ],
       "approved_at": null
@@ -300,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Комнатах для заполнения форм' is a genitive plural, suggesting 'rooms for filling forms'. A more natural phrasing, depending on the context, might be nominative plural 'Комнаты для заполнения форм' (Rooms for filling forms) or a possessive 'Комнаты для работы с формами' (Rooms for working with forms).",
-          "suggestion": "Consider 'Комнаты для заполнения форм' or 'Комнаты для работы с формами' for better clarity."
+          "description": "The phrase 'Комнатах для заполнения форм' lacks an article. It should ideally have one to sound more natural in Russian.",
+          "suggestion": "Собирайте копии заполненных форм и данные из них в формате XLSX для анализа ответов в комнатах для заполнения форм."
         }
       ],
       "approved_at": null
@@ -312,13 +300,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form Filling rooms\" is translated literally as \"පෝම් ෆිලිං කුම\". It should be translated to reflect the intended meaning, which is likely referring to rooms where forms are processed or analyzed, not a literal rendering of 'form filling'.",
-          "suggestion": "පෝම් ෆිලිං කුම →  පෝම් ගබුලු / පෝම් ක්‍රියාවලිය සිදු කරන ස්ථානය / ක්‍රියාවලිය කරන ස්ථානය (depending on context and desired formality)"
+          "description": "The phrase 'Form Filling rooms' is awkwardly translated as 'පෝම් ෆිලිං කුම'. A more accurate translation would be 'පෝම් පුරවිං phòng' (Form Filling rooms) or a descriptive equivalent like 'පෝම් පුරවිං phòng වල' (in Form Filling rooms).",
+          "suggestion": "පෝම් පුරවිං phòng වල"
         },
         {
-          "type": "formatting",
-          "description": "The Sinhala translation uses a mix of Sinhala and English terms (XLSX). Maintaining consistency would improve readability.  While the audience might understand 'XLSX', a Sinhala equivalent would be preferable.",
-          "suggestion": "XLSX →  සමරි ගත හැකි ගණනක පත්‍රය / ස්ප්‍රෙඩ්ෂීට් (spreadsheet)"
+          "type": "spelling",
+          "description": "The word 'ෆයිල්‍යක්' (file) is not the most natural Sinhala phrasing for a file format. While understandable, 'ෆයිල්' would be more common.",
+          "suggestion": "ෆයිල්"
         }
       ],
       "approved_at": null
@@ -326,7 +314,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Form Filling rooms\" is not directly equivalent to \"miestnostiach na vyplňovanie formulárov\". While understandable, it's a bit clunky and literal. A more natural Slovak rendering might be \"miestnostiach pre vyplňovanie formulárov\" or simply \"pracovniach\".",
+          "suggestion": "miestnostiach pre vyplňovanie formulárov"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -341,13 +335,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Прикупите' (Prikuпиte) which translates to 'acquire' or 'gather' doesn't fit the intended meaning of 'Collect'. It implies an acquisition action rather than a gathering/collecting action. The English says 'Collect'.",
-          "suggestion": "Скупите (Skupite) - 'Collect' is a more appropriate translation for 'Collect'."
+          "description": "The word 'Прикупите' (Prikuпите) which translates to 'acquire' or 'collect', doesn't quite capture the meaning of 'Collect'. A more accurate translation would be something like 'Сада' (Sada) which means 'gather' or 'collect'.",
+          "suggestion": "Сада попуњене копије обрасца и податке из њих у XLSX формату за анализу одговора у просторијама за попуњавање образаца."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'у просторијама за попуњавање образаца' (u prostorijama za popunjavanje obrazaca) which translates to 'in rooms for filling out forms' is unnecessarily verbose and slightly awkward. It's not a direct and natural equivalent of 'in Form Filling rooms'.",
-          "suggestion": "у просторијама за попуњавање образаца (u prostorijama za popunjavanje obrazaca) could be shortened to 'у просторијама попуњавања образаца' (u prostorijama popunjavanja obrazaca) or even better, 'у просторијама за испитивање образаца' (u prostorijama za ispitivanje obrazaca), depending on the specific nuance required. The best option depends on the room's purpose."
+          "description": "The phrase 'просторијама за попуњавање образаца' (prostorijama za popunjavanje obrazaca) while technically correct, is a bit verbose and less common. A more natural phrasing would be 'у просторијама за попуњавање формулара' or 'у просторијама за попуњавање образаца'.",
+          "suggestion": "у просторијама за попуњавање образаца."
         }
       ],
       "approved_at": null
@@ -358,8 +352,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation uses 'u XLSX formatu'. While technically correct, it's more natural to say 'u XLSX datoteci' or 'u XLSX fajlu' for 'in XLSX file'.",
-          "suggestion": "Prikupite popunjene kopije obrasca i podatke iz njih u XLSX datoteci za analizu odgovora u prostorijama za popunjavanje obrazaca."
+          "description": "The phrase 'u XLSX formatu' could be improved for clarity and flow. While technically correct, it's a bit clunky.",
+          "suggestion": "u XLSX datoteci"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'prostorijama za popunjavanje obrazaca' translates to 'form filling rooms', it's a very literal and slightly awkward translation.  A more natural phrasing might be better.",
+          "suggestion": "u kancelarijama za obradu formulara"
         }
       ],
       "approved_at": null
@@ -370,18 +369,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Collect the completed form copies' is better translated as 'Doldurulmuş form kopyalarını biriktirin' or 'Doldurulmuş form kopyalarını toplayın.' 'Biriktirin' implies gathering/accumulating, which fits the context better than just 'toplayın'.",
-          "suggestion": "Doldurulmuş form kopyalarını biriktirin"
+          "description": "The English phrase \"Collect the completed form copies\" is not accurately reflected in the Turkish translation \"doldurulan form kopyalarını\". While \"doldurulan\" implies 'filled/completed', the action of 'collecting' is missing. A more accurate translation would include a verb for collecting.",
+          "suggestion": "Toplanan doldurulan form kopyalarını..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English 'and data from them' is awkwardly translated as 've verilerini'. It's implied that the data comes *from* the forms, so a more natural phrasing would improve readability. For example, 've onlardan elde edilen verileri'.",
-          "suggestion": "ve onlardan elde edilen verileri"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a severe error, the sentence could benefit from a slight restructuring for better flow in Turkish. A more natural word order is possible.",
-          "suggestion": "Form Doldurma odalarındaki yanıtları analiz etmek için doldurulmuş form kopyalarını ve onlardan elde edilen verileri XLSX'te biriktirin."
+          "description": "The phrase \"for analyzing responses\" is a bit clunky in Turkish. A more natural phrasing would improve readability.",
+          "suggestion": "yanıtları analiz etmek için"
         }
       ],
       "approved_at": null
@@ -398,13 +392,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form Filling rooms' is not a standard or easily understood term in Vietnamese in this context. It's a direct translation that doesn't convey the intended meaning. It should be something that describes where the data is analyzed.",
-          "suggestion": "Phòng Phân Tích Dữ Liệu (Data Analysis Room) or Phòng Xử Lý Dữ Liệu (Data Processing Room)"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a more formal connector like 'để' instead of 'vào' might improve flow and professionalism.",
-          "suggestion": "Thu thập các bản sao mẫu đã hoàn thành và dữ liệu từ chúng **để** đưa vào XLSX để phân tích các phản hồi trong Phòng Phân Tích Dữ Liệu."
+          "description": "The phrase 'Form Filling rooms' is translated as 'phòng Điền Mẫu'. While understandable, a more accurate and natural translation would be 'phòng điền đơn' or 'phòng làm mẫu'. The current translation feels somewhat literal and awkward.",
+          "suggestion": "phòng điền đơn"
         }
       ],
       "approved_at": null
@@ -415,8 +404,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"表单填写房间\" (biàn dān tiánxiě fángjiān) is a literal translation of \"Form Filling rooms\" but might be unnecessarily verbose or not the most natural phrasing in Chinese. A more natural wording for a space where forms are analyzed might be \"反馈分析室\" (fǎnkuì fēnxī shì) - 'feedback analysis room' or simply '分析室' (fēnxī shì) - 'analysis room'.",
-          "suggestion": "Consider using \"反馈分析室\" (fǎnkuì fēnxī shì) or \"分析室\" (fēnxī shì) instead of \"表单填写房间\"."
+          "description": "The phrase \"Form Filling rooms\" is translated as \"表单填写房间\". While technically correct, a more natural and common phrasing in Chinese might be \"问卷填写房间\" (wenjuan tiánxiě fángjiān) or \"调查问卷填写房间\" (diàochá wènjuàn tiánxiě fángjiān) as 'Form Filling' often refers to survey or questionnaire filling.",
+          "suggestion": "将“表单填写房间”改为“问卷填写房间”或“调查问卷填写房间”。"
         }
       ],
       "approved_at": null

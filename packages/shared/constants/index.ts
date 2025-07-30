@@ -193,7 +193,19 @@ export const SDK_SCRIPT_URL =
 export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
+export const ThirdPartyServicesUrlName = Object.freeze({
+  GoogleDrive: "google",
+  Box: "box",
+  Dropbox: "dropbox",
+  OneDrive: "skydrive",
+  Nextcloud: "nextcloud",
+  kDrive: "kdrive",
+  ownCloud: "owncloud",
+  WebDav: "webdav",
+});
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+export const FOLDER_FORM_VALIDATION = /[*+:"<>?|\\\/]/gim;
 
 export const FILLING_FORM_STATUS_COLORS = Object.freeze({
   [FileFillingFormStatus.None]: globalColors.mainRed,
@@ -227,4 +239,11 @@ export const thumbnailStatuses = {
   NOT_REQUIRED: 3,
 };
 
+export const THIRD_PARTY_SERVICES_URL =
+  "/portal-settings/integration/third-party-services?service=";
+
 export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
+
+// any unicode letters are allowed, characters are prohibited
+export const BRAND_NAME_REGEX =
+  /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;

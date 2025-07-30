@@ -3,7 +3,7 @@
   "content": "You can disable the Action and + buttons in the current section header to limit creation of files, folders, and rooms.",
   "content_en_sha1_hash": "bb33d3f8ee3517ef1541723ca2ffa566276259a2",
   "created_at": "2025-05-19T21:30:54.351Z",
-  "updated_at": "2025-05-21T09:33:42.440Z",
+  "updated_at": "2025-05-24T09:45:47.264Z",
   "comment": {
     "text": "This translation key is used to describe the Action and + buttons in a section header, guiding users on how disabling them limits file, folder, and room creation. It appears as part of a tooltip in UI elements.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation uses 'و' (wa) to connect 'الإجراء' (action) and 'الأزرار' (buttons). While grammatically correct, it's stylistically better to use a more specific connector indicating items in a list, such as 'و' followed by a pause or 'و بالإضافة إلى'.",
-          "suggestion": "يمكنك تعطيل الإجراء و بالإضافة إلى الأزرار في رأس القسم الحالي للحد من إنشاء الملفات والمجلدات والغرف."
+          "description": "The Arabic translation uses a space before the Arabic conjunction 'و' (wa). This is not standard practice and should be removed.",
+          "suggestion": "يمكنك تعطيل الإجراء والأزرار في رأس القسم الحالي للحد من إنشاء الملفات والمجلدات والغرف."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'الإجراء' is a valid translation for 'Action', it might not fully capture the nuance of an Action button's functionality. A more nuanced translation might be beneficial depending on the specific button's purpose.",
-          "suggestion": "يمكنك تعطيل زر الإجراء والأزرار..."
+          "description": "While technically correct, 'الإجراء' (al-ijraa') for 'Action' can sound a bit formal. A more natural translation might be 'زر الإجراء' (zir al-ijraa') or simply 'الإجراء' depending on context. The English is concise and ‘الإجراء’ is fine, but the more explicit option might read better depending on the platform.",
+          "suggestion": "يمكنك تعطيل زر الإجراء والأزرار في رأس القسم الحالي للحد من إنشاء الملفات والمجلدات والغرف."
         }
       ],
       "approved_at": null
@@ -47,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'söndürə' (to extinguish/turn off) is not the best fit for 'disable' in this context. It implies a more forceful or permanent action than intended.",
-          "suggestion": "Consider using 'lğvat etmək' (to deactivate/cancel) or 'bağlamazdan çıxarmıq' (to disconnect)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Fəaliyyət' is a very literal translation of 'Action' and might sound unnatural in Azerbaijani. It's better to use a more idiomatic equivalent.",
-          "suggestion": "Consider 'Tətbiq' or a more context-specific term depending on what the 'Action' button does."
+          "description": "The word 'söndürə' is used for 'disable'. While not incorrect, it carries a connotation of completely extinguishing something, which might not be the intended meaning of disabling a button. A more appropriate word would convey deactivation or turning off.",
+          "suggestion": "Fəaliyyət və + düymələrini dəfə edə bilərsiniz."
         }
       ],
       "approved_at": null
@@ -64,13 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Действие\" (Deystvie) is a literal translation of \"Action\" and may not be the most natural or clear term in Bulgarian in this context. A more user-friendly translation might be something along the lines of \"Операция\" (Operatsiya) or a more descriptive phrase depending on the specific functionality.",
-          "suggestion": "Consider using 'Операция' or a more descriptive phrase for 'Action', such as 'Създаване' (Creation) depending on the exact functionality."
+          "description": "The phrase '+ buttons' is not translated accurately. It should reflect the '+' symbol's purpose, which is to add something. A more accurate translation would be 'бутон за добавяне'.",
+          "suggestion": "Можете да деактивирате бутоните Действие и за добавяне (+), в заглавката на текущия раздел, за да ограничите създаването на файлове, папки и стаи."
         },
         {
           "type": "formatting",
-          "description": "The phrase \"в заглавката на текущия раздел\" is a bit long and could be restructured for better readability. Although grammatically correct, it feels slightly clunky.",
-          "suggestion": "Consider rephrasing to 'в заглавието на раздела' (in the section title) or a similar, more concise phrasing."
+          "description": "The '+' symbol is not included in the Bulgarian translation, which makes it less clear. It's essential to include it for proper understanding.",
+          "suggestion": "Можете да деактивирате бутоните Действие и за добавяне (+), в заглавката на текущия раздел, за да ограничите създаването на файлове, папки и стаи."
         }
       ],
       "approved_at": null
@@ -81,8 +76,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'disable the Action and + buttons' is not perfectly conveyed by 'vypnout tlačítka Akce a +'. While 'vypnout' can mean disable, it's a bit abrupt. A more nuanced translation might improve clarity.",
-          "suggestion": "Consider using a phrase like 'zakázat' or 'vypnout a zablokovat' for 'disable' to soften the tone and maintain accuracy."
+          "description": "The phrase \"limit creation\" is not perfectly conveyed by \"omezit tak vytváření\". While technically correct, it lacks the active feel of 'disable' that the English implies. A more natural translation would emphasize restriction of creation.",
+          "suggestion": "Tlačítka Akce a + v záhlaví aktuální sekce můžete vypnout a tím omezit tvorbu souborů, složek a místností."
         }
       ],
       "approved_at": null
@@ -99,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'Action' is translated as 'Ενέργεια'. While technically correct, 'Ενέργεια' can have a broader meaning in Greek. A more specific and contextually accurate translation for 'Action' in this context would be 'Λειτουργία' or possibly 'Επιλογή', depending on the precise functionality. 'Ενέργεια' implies more of a general activity or power.",
-          "suggestion": "Consider using 'Λειτουργία' or 'Επιλογή' instead of 'Ενέργεια'."
+          "description": "The English term 'Action' is translated as 'Ενέργεια'. While technically correct, 'Ενέργεια' can have a broader meaning. A more precise translation, depending on context, might be 'Λειτουργία' or 'Δράση'. 'Ενέργεια' can also imply 'energy' which is not the intended meaning.",
+          "suggestion": "Consider 'Λειτουργία' or 'Δράση' depending on the specific context of the action button."
         }
       ],
       "approved_at": null
@@ -111,8 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Action\" as \"Acción\" is technically correct, but in this context, a more user-friendly translation might be preferable. 'Action' often refers to a specific function or operation, and a direct translation can sound slightly awkward. Consider alternatives depending on the UI element's role.",
-          "suggestion": "Consider alternatives like 'Botón de Acción' or 'Botón de Operación' depending on context."
+          "description": "The English phrase 'Action button' is translated as 'botón Acción'. While understandable, a more natural Spanish translation would be 'botón de acción'.",
+          "suggestion": "botón de acción"
         }
       ],
       "approved_at": null
@@ -123,8 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Action\" is translated as \"Toiminta\". While technically correct, a more natural Finnish translation for the button label \"Action\" in this context might be \"Toiminto\" or possibly even retaining \"Action\" if the interface is meant to be in English.",
-          "suggestion": "Consider translating \"Action\" as \"Toiminto\" or keeping it as \"Action\" depending on the desired interface language."
+          "description": "The English phrase '+ buttons' is translated as '+ painikkeet'. While technically correct, it's more natural in Finnish to use a slightly different phrasing to sound more fluent. A better option would convey the idea of the '+' symbol acting as a button.",
+          "suggestion": "Voit ottaa pois käytöstä Toiminta ja + -kuvakkeen painikkeet nykyisen osion otsikosta rajoittaaksesi tiedostojen, kansioiden ja huoneiden luontia."
         }
       ],
       "approved_at": null
@@ -141,13 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes quotation marks around 'Action' and '+'. These aren't necessary and seem unnatural in Armenian in this context.",
-          "suggestion": "Remove the quotation marks around 'Action' and '+'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While generally accurate, 'Գործողություն' (Gorgoghutyun) is a very literal translation of 'Action'. A more natural phrasing might convey the intended functionality better. 'Action' in this context refers to a button's function.",
-          "suggestion": "Consider using a term that implies functionality, such as 'գործառույթ' (gorgaroyuth) or a more descriptive phrase that fits the user interface terminology."
+          "description": "The Armenian translation includes quotation marks around \"Գործողություն\" and \"+\". These quotation marks are unnecessary and break the natural flow of the sentence. They are not present in the English source.",
+          "suggestion": "Remove the quotation marks around \"Գործողություն\" and \"+\". The translation should read: Ֆայլերի, թղթապանակների և սենյակների ստեղծումը սահմանափակելու համար կարող եք անջատել Գործողություն և + կոճակները ընթացիկ բաժնի վերնագրում:"
         }
       ],
       "approved_at": null
@@ -164,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses katakana for \"+\" which is not standard. While understandable, using a full-width plus sign (＋) is more conventional.",
-          "suggestion": "Replace \"＋\" with \"＋\" (full-width plus sign)."
+          "description": "The Japanese translation includes quotation marks around the '+' button, which isn't standard in Japanese UI text. It makes the button seem like a literal string.",
+          "suggestion": "Remove the quotation marks around 「＋」. It should be just 「＋」 or just +."
         }
       ],
       "approved_at": null
@@ -179,41 +169,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ປິດ' (pid) is used, which generally means 'close'. In this context, 'disable' is more appropriate. It can be interpreted as physically closing a button rather than preventing its functionality.",
-          "suggestion": "ປິດການໃຊ້ງານ (pid kan chai ngan) - 'disable'"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the flow could be improved. 'ທ່ານ​ສາ​ມາດ​ປິດ​ການ​ທໍາ​ງານ​ແລະ​ປຸ່ມ +' is a bit clunky. A smoother phrasing would be more natural in Lao.",
-          "suggestion": "ທ່ານສາມາດປິດການໃຊ້ງານປຸ່ມແລະເຄື່ອງຫມາຍ +"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a conjunction 'un' (and) which isn't necessary. It can be removed for better flow.",
+          "suggestion": "Pašreizējās sadaļas galvenē varat atspējot pogas Darbība + lai ierobežotu failu, mapju un telpu izveidi."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Action' is translated as 'Actie'. While understandable, 'Actie' is less common than 'Acties' or a more descriptive term in this context.  'Actie' feels abrupt.",
-          "suggestion": "Consider alternatives like 'Acties' or 'Handelingen' to better convey the meaning of 'Action'."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure feels slightly awkward.  The direct translation is understandable but could be improved for better flow in Dutch.",
-          "suggestion": "Consider rephrasing to something like: 'U kunt de Actie- en + knoppen uitschakelen in de huidige sectiekop om het aanmaken van bestanden, mappen en kamers te beperken.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -222,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Działanie' is a literal translation of 'Action' and might not be the most natural or clear way to convey the meaning of the 'Action' button in this context. It could be misinterpreted.",
-          "suggestion": "Consider using a more contextually appropriate term like 'Akcja' or a phrase that describes the button's function, depending on the overall UI terminology."
+          "description": "The translation of \"Action\" as \"Działanie\" is technically correct but can be awkward in this context. It's better to use a more user-friendly term.",
+          "suggestion": "Consider using 'Akcja' instead of 'Działanie'. It's more commonly used for buttons or actions in user interfaces."
         }
       ],
       "approved_at": null
@@ -234,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'Action' button is translated as 'Ação', which is correct, but may not be immediately clear to the user. A more user-friendly translation might be 'Botão de Ação' or simply 'Ações'.",
-          "suggestion": "Consider translating 'Action' as 'Botão de Ação' or 'Ações' for better clarity."
+          "description": "The term 'Action' is translated as 'Ação'. While understandable, it's more natural to use 'Botão de Ação' for clarity, as 'Ação' alone can be ambiguous.",
+          "suggestion": "Botão de Ação"
         }
       ],
       "approved_at": null
@@ -246,7 +220,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Action button\" is translated as \"botão Ação\". While technically correct, \"botão de Ação\" would be more natural and common in Brazilian Portuguese.",
+          "description": "The English phrase \"Action button\" is translated as \"botão Ação\". While understandable, a more natural Portuguese translation would be \"botão de Ação\" or simply \"botão Ação\".",
           "suggestion": "botão de Ação"
         }
       ],
@@ -258,18 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Action button\" is translated as \"butoane Acțiune\". While technically correct, a more natural Romanian translation would be \"butonul Acțiune\" or \"butonul de Acțiune\".",
-          "suggestion": "butonul Acțiune"
+          "description": "The phrase '+ buttons' is awkward. '+' is a symbol and shouldn't be translated as a noun.",
+          "suggestion": "Puteți dezactiva butoanele Acțiune și simbolul '+' în antetul acestei secțiuni pentru a limita posibilitatea de a crea fișiere, foldere și săli."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English \"+ button\" is translated as \"buton +\".  A more idiomatic Romanian would be \"butonul +\".",
-          "suggestion": "butonul +"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"posibilitatea de a crea\" is a bit clunky. A more natural Romanian phrasing would be \"crearea\".",
-          "suggestion": "crearea"
+          "type": "grammar",
+          "description": "The word 'săli' is grammatically correct, but 'săli' might be more natural in this context.",
+          "suggestion": "Puteți dezactiva butoanele Acțiune și simbolul '+' în antetul acestei secțiuni pentru a limita posibilitatea de a crea fișiere, foldere și săli."
         }
       ],
       "approved_at": null
@@ -280,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Action' is directly translated as 'Действие'. While technically correct, it's more common and natural to use a more contextually relevant term like 'Операция' or simply omit the direct translation and rely on the '+' sign being understood.",
-          "suggestion": "Consider 'Вы можете отключить кнопки Операции и + в заголовке текущего раздела, чтобы ограничить создание файлов, папок и комнат.' or 'Вы можете отключить кнопки + и Действие в заголовке текущего раздела, чтобы ограничить создание файлов, папок и комнат.'"
+          "description": "The English phrase 'Action button' is translated as 'кнопка Действие'. 'Действие' directly translates to 'Action', but in this context, it would be more natural to use a more descriptive term like 'кнопка действия'.",
+          "suggestion": "кнопка действия"
         }
       ],
       "approved_at": null
@@ -292,13 +261,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ක්‍රියාමාර්ග සහ + බොත්තම් අබල කිරීමට හැකිය' doesn't quite capture the nuance of 'disable'. 'අබල කිරීමට' implies completely removing or destroying, while 'disable' means to temporarily prevent use. A more accurate translation would convey the temporary restriction.",
-          "suggestion": "ගොනු, බහාලුම් සහ කාමර සෑදීම සීමාවට වත්මන් කොටසේ ශ්‍රීර්ෂකයේ තිබෙන ක්‍රියාමාර්ග සහ + බොත්තම් භාවිතය අවහිර කිරීමට හැකිය."
+          "description": "The translation 'ක්‍රියාමාර්ග' is a general term for 'actions' and doesn't specifically convey 'Action' button as intended. It lacks the direct reference to a button.",
+          "suggestion": "Consider using a more specific term like ' ක්‍රියාබbotones' (Kriyaa Battachanata) which directly means 'action buttons' or rewording to convey the meaning more clearly, e.g., 'මෙම කොටසේ ශීර්ෂකයෙහි ඇති ක්‍රියාකාරී බොත්තම්'."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'වත්මන් කොටසේ ශ්‍රීර්ෂකයේ' is a bit awkward. While technically correct, it can be improved for flow.",
-          "suggestion": "වත්මන් කොටසෙහි ශ්‍රීර්ෂකයේ"
+          "type": "incorrect_translation",
+          "description": "The phrase 'අබල කිරීමට හැකිය' is grammatically correct but sounds somewhat formal and could be more natural in this context. It translates literally to 'ability to disable'.",
+          "suggestion": "Consider a more natural phrasing like 'අයින් කිරීමට හැකිය' (Ayn Karath Karaya) which means 'ability to remove' or a simpler 'අයින් කළ හැකිය' (Ayn Kala Yethi) - 'can remove'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be improved for better readability in Sinhala. The current structure, while understandable, is a bit convoluted.",
+          "suggestion": "Reorder the sentence to prioritize the action being performed.  For example: 'ගොනු, බහාලුම් සහ කාමර සෑදීම සීමා කිරීමට, වත්මන් කොටසේ ශ්‍රීර්ෂකයේ තිබෙන ක්‍රියාමාර්ග සහ + බොත්තම් අයින් කළ හැකිය.' "
         }
       ],
       "approved_at": null
@@ -308,9 +282,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Action button' is translated as 'tlačidlá Akcia'. While 'Akcia' is the Slovak word for 'Action', directly translating it like this is not idiomatic in this context.  It's better to use a more natural phrasing that conveys the intended meaning of an 'Action' button.",
+          "suggestion": "Consider translating 'Action button' as 'tlačidlo pre akciu' or 'tlačidlo s akciou', or rephrasing the entire sentence to avoid the direct translation."
+        },
+        {
           "type": "formatting",
-          "description": "The Slovak translation uses 'hornej lište' which translates to 'upper bar'. While technically correct, it might be more natural to use a more common term for header, like 'nadpise'.",
-          "suggestion": "Consider changing 'hornej lište' to 'nadpise' or similar term that better reflects a header."
+          "description": "The translation includes the word 'tlačidlá' (plural) which refers to both 'Action' and '+' buttons. It's unclear if both buttons need to be disabled or if this is a stylistic choice. It is better to clarify this. ",
+          "suggestion": "Consider whether to mention both buttons separately for clarity. Alternatively rephrase the sentence to better convey the intent."
         }
       ],
       "approved_at": null
@@ -321,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a comma (,) where a conjunction might flow better in Slovenian. While grammatically correct, it can feel slightly less natural.",
-          "suggestion": "Gumba Akcija in + v glavi trenutnega razdelka lahko onemogočite, da omejite ustvarjanje datotek, map in sob. -> Gumba Akcija in + v glavi trenutnega razdelka lahko onemogočite za omejitev ustvarjanja datotek, map in sob."
+          "description": "The Slovenian translation uses a comma (,) to separate the list of items that can be created. While grammatically correct, in Slovenian, a conjunction 'in' is often preferred before the last item. While not strictly incorrect, this makes the sentence sound less natural.",
+          "suggestion": "Gumba Akcija in + v glavi trenutnega razdelka lahko onemogočite, da omejite ustvarjanje datotek, map in sob."
         }
       ],
       "approved_at": null
@@ -333,13 +312,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation uses 'дугме Акција' which translates directly to 'button Action'. It's more natural to say 'дугме за Акцију' or simply 'Акција дугме' for a more idiomatic translation.",
-          "suggestion": "Можете да онемогуц́ите дугме за Акцију или Акција дугме у тренутном заглављу одељка..."
+          "description": "The Serbian translation uses 'дугме Акција'. 'Акција' is a direct transliteration of 'Action' and not a natural way to refer to it in Serbian.  A more natural wording would be something like 'дугме за акцију' or simply 'дугме Акција' (although 'акција' still feels slightly awkward).",
+          "suggestion": "Consider revising to 'дугме за акцију' or 'дугме Акција' for a more natural phrasing."
         },
         {
-          "type": "formatting",
-          "description": "The use of 'и' before '+' is grammatically correct, but it's slightly less common to see '+' represented directly. A more stylistically aligned approach might be preferable.",
-          "suggestion": "Можете да онемогуц́ите дугме Акција и плус у тренутном заглављу одељка..."
+          "type": "incorrect_translation",
+          "description": "The Serbian word 'фасцикли' translates to 'folders', but can be awkward. 'Mapе' is a more commonly used and natural translation for folders.",
+          "suggestion": "Replace 'фасцикли' with 'мапе'."
         }
       ],
       "approved_at": null
@@ -350,8 +329,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Action button' is translated as 'dugme Akcija'. While technically correct, 'dugme za akciju' would be a more natural and idiomatic translation in Serbian. 'Akcija' feels slightly abrupt and less user-friendly.",
-          "suggestion": "dugme za akciju"
+          "description": "The word 'Action' is directly translated as 'Akcija'. While understandable, it's more natural to use a more contextually appropriate Serbian term. 'Akcija' can also mean 'action' in a broader sense, potentially causing confusion. Considering the context of a Javascript SDK, 'Akcija' is not ideal.",
+          "suggestion": "Consider using a more descriptive term like 'Dugme za akciju' or rephrasing the sentence to avoid the direct translation of 'Action'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a Latin character 'đ' is present when Serbian Cyrillic is also an option. Maintain consistency in character usage across all translations within the product.",
+          "suggestion": "Review and ensure consistent character usage with the rest of the product's localization. If the product is predominantly using Serbian Cyrillic, consider translating 'Možete da onemogućite dugme Akcija i + u trenutnom zaglavlju odeljka da biste ograničili kreiranje datoteka, fascikli i soba.' into Cyrillic."
         }
       ],
       "approved_at": null
@@ -361,14 +345,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Action button' is not directly translated. 'Eylem' is the Turkish word for 'Action' but 'Action button' needs a more direct translation, like 'Eylem butonu'.",
-          "suggestion": "Eylem butonu"
-        },
-        {
           "type": "formatting",
-          "description": "While grammatically correct, the sentence could be slightly improved for flow. Starting with 'Dosya, klasör ve oda oluşturulmasını sınırlamak için...' feels a little clunky.",
-          "suggestion": "Geçerli bölüm başlığındaki Eylem ve + butonlarını devre dışı bırakarak dosya, klasör ve oda oluşturulmasını sınırlayabilirsiniz."
+          "description": "The Turkish translation uses a slightly less natural phrasing. While technically correct, it reads a bit stiff. Consider rephrasing for a more fluent Turkish sentence.",
+          "suggestion": "Dosya, klasör ve oda oluşturma işlemlerini sınırlamak için mevcut bölüm başlığındaki Eylem ve + butonlarını devre dışı bırakabilirsiniz."
         }
       ],
       "approved_at": null
@@ -385,8 +364,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Action' as 'Hành động' is technically correct but can sound slightly formal in this context. A more natural phrasing might be 'Nút Thao tác' or just 'Nút'.",
-          "suggestion": "Consider 'Nút Thao tác' or 'Nút' instead of 'Nút Hành động'."
+          "description": "The English phrase \"Action button\" is best translated as \"Nút Thao tác\" rather than \"Nút Hành động\". While \"Hành động\" can mean 'action,' it's less commonly used in this context for a button label.",
+          "suggestion": "Bạn có thể tắt các nút Thao tác và + trong tiêu đề phần hiện tại để giới hạn việc tạo tập tin, thư mục và phòng."
         }
       ],
       "approved_at": null
@@ -396,14 +375,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation of 'Action' as '操作' is accurate, but the context suggests a more descriptive translation might improve clarity for all users. 'Action' refers to the specific button to perform an action.",
-          "suggestion": "您可以停用当前部分顶栏中的“操作按钮”和“+”按钮，以限制创建文件、文件夹和房间。"
-        },
-        {
           "type": "formatting",
-          "description": "While not strictly incorrect, consistently using quotation marks around button names improves readability and visual clarity.",
-          "suggestion": "您可以停用当前部分顶栏中的“操作”和“+”按钮，以限制创建文件、文件夹和房间。"
+          "description": "The translation uses '顶栏' (ding lan) for 'header'. While understandable, '标题栏' (biaotilan) or simply '标题' (biaoti) might be more natural and commonly used in a user interface context.",
+          "suggestion": "Consider replacing '顶栏' with '标题栏' or '标题'."
         }
       ],
       "approved_at": null

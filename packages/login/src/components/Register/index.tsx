@@ -137,7 +137,7 @@ const Register = (props: RegisterProps) => {
         </Text>
       </StyledRegister>
 
-      {visible && (
+      {visible ? (
         <RegisterModalDialog
           visible={visible}
           loading={loading}
@@ -154,11 +154,9 @@ const Register = (props: RegisterProps) => {
           errorText={errorText}
           isShowError={isShowError}
         />
-      )}
+      ) : null}
     </>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default Register;

@@ -27,8 +27,6 @@
  */
 
 import type { TTranslation, TViewAs } from "../../types";
-import { type DeviceType } from "../../enums";
-import { TColorScheme } from "../../themes";
 import { type TRoom, TRoomLifetime } from "../../api/rooms/types";
 import { type TFile, type TFolder } from "../../api/files/types";
 
@@ -38,13 +36,10 @@ export type QuickButtonsProps = {
   t: TTranslation;
   item: TQuickButtonItem;
   viewAs: TViewAs;
-  currentDeviceType: DeviceType;
-  currentColorScheme?: TColorScheme;
   roomLifetime?: TRoomLifetime;
   expiredDate?: string | null;
 
   isDisabled?: boolean;
-  folderCategory?: boolean;
   isPublicRoom?: boolean;
   isPersonalRoom?: boolean;
   isArchiveFolder?: boolean;
@@ -52,7 +47,6 @@ export type QuickButtonsProps = {
   isIndexEditingMode?: boolean;
   showLifetimeIcon?: boolean;
 
-  onClickLock?: VoidFunction;
   onClickDownload?: VoidFunction;
   onCopyPrimaryLink?: VoidFunction;
   onClickShare?: VoidFunction;

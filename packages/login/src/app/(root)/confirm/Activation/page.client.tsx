@@ -104,6 +104,27 @@ const ActivateUserForm = ({
     setIsPasswordErrorShow(true);
   };
 
+  const activateConfirmUser = async ({
+    personalData,
+    loginData,
+    key,
+    userId,
+    activationStatus,
+  }: TActivateConfirmUser) => {
+    const changedData = {
+      id: userId,
+      FirstName: personalData.firstname,
+      LastName: personalData.lastname,
+    };
+
+    const { userName, passwordHash: ph } = loginData;
+
+    await changePassword(userId, ph, key);
+    await updateActivationStatus(activationStatus, userId, key);
+    await login(userName, ph);
+    await updateUser(changedData);
+  };
+
   const onSubmit = async () => {
     setIsLoading(true);
     if (!name?.trim()) setNameValid(false);
@@ -161,27 +182,6 @@ const ActivateUserForm = ({
     }
   };
 
-  const activateConfirmUser = async ({
-    personalData,
-    loginData,
-    key,
-    userId,
-    activationStatus,
-  }: TActivateConfirmUser) => {
-    const changedData = {
-      id: userId,
-      FirstName: personalData.firstname,
-      LastName: personalData.lastname,
-    };
-
-    const { userName, passwordHash } = loginData;
-
-    await changePassword(userId, passwordHash, key);
-    await updateActivationStatus(activationStatus, userId, key);
-    await login(userName, passwordHash);
-    await updateUser(changedData);
-  };
-
   const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === ButtonKeys.enter) {
       onSubmit();
@@ -198,7 +198,7 @@ const ActivateUserForm = ({
 
         <FieldContainer
           className="form-field"
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={!nameValid}
           errorMessage={t("Common:RequiredField")}
@@ -210,9 +210,9 @@ const ActivateUserForm = ({
             placeholder={t("Common:FirstName")}
             type={InputType.text}
             size={InputSize.large}
-            scale={true}
+            scale
             tabIndex={1}
-            isAutoFocussed={true}
+            isAutoFocussed
             autoComplete="given-name"
             onChange={onChangeName}
             onKeyDown={onKeyPress}
@@ -221,7 +221,7 @@ const ActivateUserForm = ({
 
         <FieldContainer
           className="form-field"
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={!surNameValid}
           errorMessage={t("Common:RequiredField")}
@@ -233,7 +233,7 @@ const ActivateUserForm = ({
             placeholder={t("Common:LastName")}
             type={InputType.text}
             size={InputSize.large}
-            scale={true}
+            scale
             tabIndex={2}
             autoComplete="family-name"
             onChange={onChangeSurName}
@@ -243,9 +243,9 @@ const ActivateUserForm = ({
 
         <FieldContainer
           className="form-field password-field"
-          isVertical={true}
+          isVertical
           labelVisible={false}
-          hasError={isPasswordErrorShow && !passwordValid}
+          hasError={isPasswordErrorShow ? !passwordValid : undefined}
           errorMessage={t("Common:IncorrectPassword")}
         >
           <PasswordInput
@@ -257,9 +257,9 @@ const ActivateUserForm = ({
             placeholder={t("Common:Password")}
             inputType={InputType.password}
             inputValue={password}
-            hasError={isPasswordErrorShow && !passwordValid}
+            hasError={isPasswordErrorShow ? !passwordValid : undefined}
             size={InputSize.large}
-            scale={true}
+            scale
             tabIndex={1}
             autoComplete="current-password"
             onChange={onChangePassword}

@@ -1,6 +1,5 @@
-@import "../../../styles/variables/devices.scss";
-@import "../../../styles/variables/colors.scss";
-@import "../../../styles/mixins.scss";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .container {
   z-index: 209;
@@ -11,7 +10,7 @@
   max-width: 251px;
   background-color: var(--catalog-profile-background);
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     min-width: 243px;
     max-width: 243px;
 
@@ -33,7 +32,7 @@
   border-inline-end: var(---catalog-profile-border-top);
   background-color: var(--catalog-profile-background);
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     padding: 16px 14px;
   }
 

@@ -38,7 +38,7 @@ import {
 import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
@@ -185,7 +185,11 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
-        badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        badgeTitle={
+          labelBadge
+            ? ""
+            : t("EmptySection", { sectionName: t("Common:TrashSection") })
+        }
         badgeComponent={
           <NewFilesBadge
             newFilesCount={labelBadge}
@@ -300,7 +304,9 @@ const Items = ({
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     deleteAction(translations);

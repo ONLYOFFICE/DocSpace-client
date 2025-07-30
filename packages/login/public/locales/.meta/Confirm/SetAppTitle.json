@@ -3,7 +3,7 @@
   "content": "Configure your authenticator application",
   "content_en_sha1_hash": "5a812c83be8c97b662816888e9f8955859f6b9d1",
   "created_at": "2025-05-19T21:30:57.392Z",
-  "updated_at": "2025-05-20T09:47:23.564Z",
+  "updated_at": "2025-06-30T12:20:31.662Z",
   "comment": {
     "text": "Configure a title that describes the authenticator application setup process. This text is used as the app title in a login confirmation page, guiding users through the configuration of their authenticator application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 162,
+      "line_number": 158,
       "context": "<>\n <div className=\"set-app-description\">\n <GreetingContainer />\n \n <Text isBold fontSize=\"14px\" className=\"set-app-title\">\n {t(\"SetAppTitle\")}\n </Text>\n \n <Trans\n t={t}\n i18nKey=\"SetAppDescription\"",
       "module": "/packages/login"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Doğrulama tətbiqini quraşdırın\" translates to \"Install the authentication application.\" The original English text is \"Configure your authenticator application,\" which implies setting up or adjusting the application, not just installing it.",
+          "suggestion": "Doğrulama tətbiqini təyin edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Nastavení aplikace autentizačního zařízení\" is a literal translation and a bit clunky. It's overly formal and doesn't quite capture the natural flow of the English phrase. While technically correct, it's not the most user-friendly option.",
+          "suggestion": "Zvažte \"Konfigurace aplikace pro dvoufaktorové ověření\" or \"Nastavení aplikace pro dvoufaktorové ověření\". The latter is more straightforward and common for authenticator apps."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Կարգավորեք Ձեր իսկորոշման հավելվածը' is not the most natural or accurate translation of 'Configure your authenticator application'. While technically correct, it sounds somewhat stiff and formal.",
+          "suggestion": "Մի քանի ավելի բարձրակարգ հնարքեր կարող են ավելի ճիշտ լինել: Օրինակ, 'Սահմանեք Ձեր ապրանքանիշի հավելվածը' կամ 'Ձեր հավելվածի էկրանները նախատոնելով'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,13 +171,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබගේ ද්වි සාධක යෙදුම සකසන්න' while literally meaning 'Configure your two-factor application', doesn't fully capture the nuance of 'Configure your authenticator application.' 'Authenticator application' is a broader term that can include two-factor apps. A better translation might be something that encompasses all authenticator apps.",
+          "suggestion": "ඔබගේ ආරක්ෂණ යෙදුම සකසන්න (Configure your security application)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Nakonfigurujte si aplikáciu autentifikátora' is not the most natural or accurate translation of 'Configure your authenticator application'. 'Nakonfigurujte' is a bit formal. 'Nastavte' or 'Priradte' would be more common.",
+          "suggestion": "Nastavte si aplikáciu autentifikátora"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -195,7 +225,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Thiết lập cấu hình ứng dụng xác thực của bạn\" is a bit literal and could be more natural-sounding. \"Thiết lập ứng dụng xác thực của bạn\" or \"Cài đặt ứng dụng xác thực của bạn\" would be more common phrasing.",
+          "suggestion": "Cài đặt ứng dụng xác thực của bạn"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

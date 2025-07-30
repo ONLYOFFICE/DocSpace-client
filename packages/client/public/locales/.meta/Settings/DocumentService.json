@@ -3,7 +3,7 @@
   "content": "Document Service",
   "content_en_sha1_hash": "56cd1da1e1b8ef8da631a87da2db26079d5a2586",
   "created_at": "2025-05-19T21:30:51.251Z",
-  "updated_at": "2025-07-02T07:49:19.834Z",
+  "updated_at": "2025-05-26T07:57:32.686Z",
   "comment": {
     "text": "The translation key \"DocumentService\" is used to display the name of a document service component, likely appearing on a settings page or integration wrapper. This text provides context for users navigating portal settings and configuring integration options.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 389,
+      "line_number": 382,
       "context": "{\n id: \"portal-settings_catalog-document-service\",\n key: \"4-4\",\n icon: \"\",\n link: \"document-service\",\n tKey: \"DocumentService\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-smtp-settings\",\n key: \"4-5\",",
       "module": "/packages/client"
     }
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Asiakirja palvelu' is a literal translation of 'Document Service' and while understandable, it's not the most natural or idiomatic Finnish phrasing. 'Asiakirja' means 'document' and 'palvelu' means 'service', which creates a slightly clunky combination.",
-          "suggestion": "Consider 'Dokumenttipalvelu' or 'Asiakirjapalvelu' for a more natural Finnish equivalent. 'Dokumentti' is a more common borrowing and often sounds better than 'Asiakirja' in this context. A review by a native Finnish speaker is recommended."
+          "description": "The translation 'Asiakirja palvelu' is a literal translation and not the most natural Finnish phrasing for 'Document Service'. While technically correct, it sounds somewhat clunky.",
+          "suggestion": "Consider 'Dokumenttipalvelu' or 'Asiakirjapalvelu' for a more natural Finnish term."
         }
       ],
       "approved_at": null
@@ -129,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Dokumentu apkalpošana\" is a valid translation, \"Dokumentu pakalpojums\" might be a more accurate and common translation for 'Document Service' in a technical context. 'Apkalpošana' often implies a service being *performed* on documents, while 'pakalpojums' is a more general term for a service provided.",
+          "suggestion": "Dokumentu pakalpojums"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Dutch translation 'Documentservice' lacks a space between 'Document' and 'service'. This makes it less readable and doesn't conform to typical Dutch capitalization conventions for compound nouns.",
-          "suggestion": "Document service"
+          "description": "The Dutch translation 'Documentservice' combines two words without a space.  While it's understandable, standard Dutch practice would separate them.",
+          "suggestion": "Documentenservice"
         }
       ],
       "approved_at": null
@@ -147,13 +153,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Usługi dokumentacyjne' is understandable, it's a somewhat literal translation of 'Document Service'. A more natural and commonly used Polish equivalent for a service named 'Document Service' could be 'Obsługa dokumentów' or 'Dział dokumentacji'.",
-          "suggestion": "Consider 'Obsługa dokumentów' or 'Dział dokumentacji' for a more idiomatic translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -174,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Serviciu Documente' is not the most natural or accurate translation of 'Document Service'. While technically correct, it lacks the flow of a proper Romanian phrase. 'Serviciul de Documente' would be more idiomatic.",
+          "description": "The Romanian translation 'Serviciu Documente' is not the most natural or accurate translation of 'Document Service'. It's a literal translation but lacks flow. A better option would consider the Romanian linguistic norms for service names.",
           "suggestion": "Serviciul de Documente"
         }
       ],
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically a literal translation, 'Документ сервис' sounds unnatural in Serbian. The term 'сервис' is often used, but a more natural phrasing would be 'Услуга за документе' or 'Документна услуга'.",
+          "description": "While 'Документ сервис' is understandable, a more natural and grammatically correct translation for 'Document Service' in Serbian (Cyrillic) would be 'Услуга за документе' or 'Сервис за документе'. 'Документ сервис' feels like a literal, word-for-word translation that lacks the flow of natural Serbian.",
           "suggestion": "Услуга за документе"
         }
       ],
@@ -222,8 +222,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dokument servis' is not a natural or accurate rendering of 'Document Service' in Serbian. 'Servis' is often used, but 'usluga' is more common and formal in this context.  'Dokument servis' is somewhat clunky.",
+          "description": "The Serbian translation 'Dokument servis' is a literal translation that doesn't quite fit the established terminology in Serbian. 'Servis' is often used but 'Usługa' (borrowed from Polish) is becoming increasingly common and 'Usluga' or a Serbian equivalent would be more natural in this context.",
           "suggestion": "Dokument usluga"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'servis' is understood, the word 'usluga' is preferred.",
+          "suggestion": "usluga"
         }
       ],
       "approved_at": null

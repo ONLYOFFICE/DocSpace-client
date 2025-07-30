@@ -3,7 +3,7 @@
   "content": "Search, Filter and Sort",
   "content_en_sha1_hash": "91f61a6bce664dc75ef905edbe12e85f759196d9",
   "created_at": "2025-05-19T21:30:54.658Z",
-  "updated_at": "2025-05-28T09:30:02.360Z",
+  "updated_at": "2025-06-30T12:20:31.286Z",
   "comment": {
     "text": "SearchFilterAndSort is used to display a toggle button that enables or disables filtering and sorting functionality. It appears as a label in UI components where users can customize their data viewing experience. The translation of this key affects the user interface's accessibility and visibility.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 514,
+      "line_number": 524,
       "context": "img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n description={t(",
       "module": "/packages/client"
     },
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Որոնել, զտել և տեսակավորել\" is a literal translation, \"Sort\" is often better translated as \"จัดเรียง\" (Jargyv) in UI contexts. \"Տեսակավորել\" can imply a more complex sorting process than simple UI sorting.",
+          "suggestion": "Consider \"Որոնել, զտել և դասակարգել\" or \"Որոնել, զտել և հասարակեցնել\" depending on the desired nuance."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses commas (、) to separate the terms, which is standard Japanese. However, consistency in formatting across all translations is crucial. Verify if other similar key names consistently use commas or a different separator (e.g., pipes).",
-          "suggestion": "Ensure consistent use of commas or another agreed-upon separator across all similar key translations."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The translation uses a comma after \"Претражуј\". Commas are generally not used in this type of imperative construction in Serbian.",
-          "suggestion": "Претражуј филтрирај и сортирај"
+          "description": "The Serbian translation uses commas (,) instead of periods (.) after each verb. This is grammatically incorrect in Serbian.",
+          "suggestion": "Претражуј, филтрирај и сортирај → Претражуј; филтрирај; сортирај"
         }
       ],
       "approved_at": null

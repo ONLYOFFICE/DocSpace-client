@@ -3,7 +3,7 @@
   "content": "API keys",
   "content_en_sha1_hash": "94fcf3c2dc0d96560fa470737eb39fb09d17ef08",
   "created_at": "2025-05-19T21:30:50.537Z",
-  "updated_at": "2025-07-02T07:49:19.812Z",
+  "updated_at": "2025-06-08T12:02:32.749Z",
   "comment": {
     "text": "The translation key \"ApiKeys\" refers to the label displayed on the API keys page, typically found in a developer tools section. It is used as the title of the page, and its content should reflect the purpose of this feature in the application. This text appears in the UI as part of the page header or title section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/index.tsx",
-      "line_number": 189,
+      "line_number": 206,
       "context": "getKeys();\n }, []);\n \n useEffect(() => {\n if (ready) {\n setDocumentTitle(t(\"Settings:ApiKeys\"));\n }\n }, [ready]);\n \n return (\n <StyledApiKeys>",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 556,
+      "line_number": 549,
       "context": "{\n id: \"portal-settings_catalog-api-keys\",\n key: \"7-5\",\n icon: \"\",\n link: \"api-keys\",\n tKey: \"Settings:ApiKeys\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'مفاتيح API' is a literal translation and doesn't convey the intended meaning of 'API keys' in a natural way for Arabic speakers. While it includes the English term 'API', it's not idiomatic.",
-          "suggestion": "مفاتيح واجهة برمجة التطبيقات (مفاتيح واجهة برمجة التطبيقات API) or مفاتيح برمجة التطبيقات API"
-        },
-        {
-          "type": "formatting",
-          "description": "The inclusion of 'API' in Arabic alongside the translated term might confuse users. If the English term is needed, it should be presented in a way that indicates it's the original term.",
-          "suggestion": "مفاتيح واجهة برمجة التطبيقات (API Keys)"
+          "description": "The translation 'مفاتيح \"API\"' is a literal transliteration of \"API keys\" rather than a natural Arabic equivalent. It includes the English term \"API\" within the Arabic text, which is not ideal.",
+          "suggestion": "Consider a more natural Arabic translation such as 'مفاتيح واجهة برمجة التطبيقات' (Mifateeh Waajihat Barmajat At-Tatbeeqat) or 'مفاتيح برمجة التطبيقات' (Mifateeh Barmajat At-Tatbeeqat) to convey 'API keys'."
         }
       ],
       "approved_at": null
@@ -89,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Claves de la la API' is grammatically incorrect and not the most natural way to say 'API keys' in Spanish. The repeated 'la' is redundant.",
+          "description": "The translation 'Claves de la la API' is grammatically incorrect and doesn't accurately convey the meaning of 'API keys'. The repeated 'la' is a significant error.",
           "suggestion": "Claves de la API"
         }
       ],
@@ -137,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ຄີ API\" is understandable, a more accurate and natural Lao translation of 'API keys' would be something like \"ລະຫັດ API\" (la-hat API) or \"ສາຫຼໍ້ API\" (sa-lo API).  'ຄີ' is a borrowing from English and while common, doesn't fully capture the meaning of 'key' in this context.",
+          "description": "While 'ຄີ API' is understandable, a more accurate and natural Lao translation of 'API keys' would be 'ລະຫັດ API' or 'ສາໍານານຸກຸນ API'. 'ຄີ' is borrowed from English and might not be universally understood or preferred.",
           "suggestion": "ລະຫັດ API"
         }
       ],
@@ -179,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chei API' is not a natural or accurate translation of 'API keys' in Romanian. It's a direct transliteration and doesn't convey the meaning correctly. 'Chei' means 'keys' in a literal sense, but 'API keys' refers to authentication keys for APIs.",
-          "suggestion": "Clite API"
+          "description": "The translation 'Chei API' is not an accurate translation of 'API keys'. 'Chei' is not a standard Romanian word and doesn't convey the meaning of 'keys' in this context. 'API' is correctly transliterated.",
+          "suggestion": "Clante API"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'Clite API' is better than 'Chei API,' it's still not a perfect translation. 'Clite' is a borrowing from English, and a more idiomatic translation might be preferred.",
-          "suggestion": "Chei de acces API"
+          "type": "spelling",
+          "description": "The word 'Chei' (in 'Chei API') is likely a misspelling of 'Clante'. While 'Chei' exists in Romanian, it doesn't fit the context of API keys.",
+          "suggestion": "Clante"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "No users found",
   "content_en_sha1_hash": "612eb3c64c413c645d13566a1cfa74199923df23",
   "created_at": "2025-05-19T21:30:46.927Z",
-  "updated_at": "2025-05-28T09:30:02.375Z",
+  "updated_at": "2025-06-30T12:20:31.302Z",
   "comment": {
     "text": "This translation key is used to display a message when users are not found or not imported. It appears in an empty screen component and serves as the header text of an empty table view, indicating that there are no users to select or import.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/index.tsx",
-      "line_number": 135,
+      "line_number": 138,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     },
@@ -36,19 +36,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/index.tsx",
-      "line_number": 130,
+      "line_number": 139,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/RowView/index.tsx",
-      "line_number": 198,
+      "line_number": 201,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/index.tsx",
-      "line_number": 198,
+      "line_number": 200,
       "context": "</>\n ) : (\n <EmptyScreenContainer\n imageSrc={EmptyScreenUserReactSvgUrl}\n imageAlt=\"Empty Screen user image\"\n headerText={t(\"Common:NotFoundUsers\")}\n descriptionText={t(\"Common:NotFoundUsersDescription\")}\n buttons={\n <div className=\"buttons-box\">\n <IconButton\n className=\"clear-icon\"",
       "module": "/packages/client"
     }
@@ -192,8 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is a less common and potentially inaccurate rendering of 'users'. The standard term for 'users' in Sinhala is 'භාවිතරයන්' (bhavitakarayan) or 'පරිශීලකයින්' (parishilakayin).",
-          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'භාවිතරයන්' or 'පරිශීලකයින්'."
+          "description": "The word 'පරිශ්‍රීලකයින්' is a less common and potentially incorrect spelling of 'පරිශ්‍රමකරුවන්'. While understandable, it's not the standard term for 'users'.",
+          "suggestion": "පරිශ්‍රමකරුවන්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'හමු නොවිණි' is grammatically correct and translates to 'not found', a more natural and common phrasing for 'No users found' in Sinhala would be 'නොමැත'.",
+          "suggestion": "නොමැත"
         }
       ],
       "approved_at": null
@@ -204,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Používatelia sa nenašli' is a literal translation and sounds unnatural. A more natural and idiomatic Slovak phrase would be 'Neboli nájdení používatelia' or 'Nenašli sa žiadni používatelia'.",
-          "suggestion": "Neboli nájdení používatelia"
+          "description": "The Slovak translation 'Používatelia sa nenašli' is a literal translation but sounds awkward and unnatural. A more idiomatic translation would be 'Neboli nájdení žiadni používatelia' or 'Nenájdení používatelia'.",
+          "suggestion": "Neboli nájdení žiadni používatelia"
         }
       ],
       "approved_at": null
@@ -222,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ниједан корисник пронађен\" is a literal translation and not the most natural way to say \"No users found\" in Serbian. It sounds awkward.",
-          "suggestion": "A more natural translation would be \"Нема корисника пронађено\" or \"Ништа корисници нису пронађени\"."
+          "description": "The translation 'Ниједан корисник пронађен' while technically grammatically correct, sounds awkward and unnatural in Serbian. A more idiomatic translation for 'No users found' would be 'Није пронађено корисника'.",
+          "suggestion": "Није пронађено корисника"
         }
       ],
       "approved_at": null
@@ -234,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nijedan korisnik pronađen' is a literal translation but sounds somewhat unnatural in Serbian. A more idiomatic and natural phrasing would be preferred.",
-          "suggestion": "Nema korisnika pronađenih"
+          "description": "The translation 'Nijedan korisnik pronađen' is a literal translation and sounds slightly unnatural in Serbian. A more natural phrasing would be 'Nisu pronađeni korisnici'.",
+          "suggestion": "Nisu pronađeni korisnici"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Use special characters",
   "content_en_sha1_hash": "4fd46a4ca880394c20ea7a80b64f2c6478a48924",
   "created_at": "2025-05-19T21:30:53.176Z",
-  "updated_at": "2025-06-18T07:34:15.197Z",
+  "updated_at": "2025-06-18T17:11:42.495Z",
   "comment": {
     "text": "This translation key is used to display a checkbox label that enables users to select \"Use special characters\" in password strength settings. The checkbox appears on a form in a portal settings page, allowing users to toggle this feature on or off.",
     "is_auto": true,
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sisällettävä erikoismerkkejä' doesn't accurately convey the meaning of 'Use special characters'. 'Sisällettävä' implies 'containing', which isn't the intended functionality. It should indicate the *usage* of special characters, not that the setting *contains* them.",
+          "description": "The translation 'Sisällettävä erikoismerkkejä' doesn't accurately convey the meaning of 'Use special characters'. It translates to something like 'Containing special characters'. The correct meaning should imply enabling the use of special characters, not just that they are present.",
           "suggestion": "Käytä erikoismerkkejä"
         }
       ],
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '특수 문자를 사용하여' (teuksu munjeul sayo해서) literally translates to 'Using special characters'. While understandable, a more natural and idiomatic translation for a settings option like 'Use special characters' would be something closer to '특수 문자 허용' (teuksu munja heoyong) meaning 'Allow special characters', or '특수 문자 사용' (teuksu munja sayong) meaning 'Use special characters'. The original translation sounds a bit awkward.",
-          "suggestion": "특수 문자 허용 (teuksu munja heoyong) or 특수 문자 사용 (teuksu munja sayong)"
+          "description": "The translation '특수 문자를 사용하여' is too literal and doesn't quite capture the natural flow of the English phrase 'Use special characters' in a UI setting. It implies *actively* using special characters, which isn't necessarily what the setting controls.",
+          "suggestion": "Consider a more concise and natural translation like '특수 문자 허용' or '특수 문자 사용' depending on the specific functionality."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໃຊ້ ພິເສດ ຕົວອັກສອນ\" doesn't fully capture the meaning of 'Use special characters'. 'ໃຊ້' means 'use', 'ພິເສດ' means 'special' and 'ຕົວອັກສອນ' means 'characters'. While technically correct, a more natural and common phrasing might be desired for user interface text. It sounds slightly robotic.",
-          "suggestion": "Consider alternatives like \"ອະນຸຍາດໃຊ້ຕົວອັກສອນພິເສດ\" (Allow use of special characters) or \"ໃຊ້ຕົວອັກສອນພິເສດໄດ້\" (Can use special characters)."
+          "description": "The Lao translation 'ໃຊ້ ພິເສດ ຕົວອັກສອນ' translates to 'Use special characters' literally, but might not convey the intended meaning of allowing or enabling the use of special characters in settings. A more natural translation might be 'ອະນຸຍາດໃຊ້ຕົວອັກສອນພິເສດ' or 'ເປີດໃຊ້ຕົວອັກສອນພິເສດ'.",
+          "suggestion": "ອະນຸຍາດໃຊ້ຕົວອັກສອນພິເສດ"
         }
       ],
       "approved_at": null
@@ -135,13 +135,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'karakters' is technically correct for 'characters', in the context of settings related to text input, 'tekens' would be a more natural and commonly used translation for 'characters' or 'special characters'. 'Karakters' is more often used for character roles in a play or book.",
-          "suggestion": "Gebruik speciale tekens"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -207,7 +201,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Özel karakterler kullan' is a literal translation but doesn't fully capture the nuance of 'Use special characters' in a settings context. It reads more like an instruction to use special characters generally, rather than enabling a feature that allows them.",
+          "suggestion": "Consider a more contextually appropriate translation like 'Özel karakterlere izin ver' (Allow special characters) or 'Özel karakter kullanımı' (Special character usage)."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '必须包含特殊字符' (bì xū bāo hán tè shuāng zì fù) translates to 'Must include special characters'. The original English 'Use special characters' implies allowing or enabling the use, not mandating inclusion. It's a more permissive statement than the translation suggests.",
-          "suggestion": "考虑使用更适当的翻译，例如 '允许使用特殊字符' (yǔnxǔ shǐyòng tèshuāng zìfù) - 'Allow the use of special characters' or '可以使用特殊字符' (kěyǐ shǐyòng tèshuāng zìfù) - 'Can use special characters'."
+          "description": "The translation \"必须包含特殊字符\" (bì xū bāo hán tè shū zì fù) translates to \"Must include special characters\", which is a more restrictive meaning than the original \"Use special characters\". The English phrase suggests the *option* to use special characters, whereas the Chinese translation implies it's a requirement.",
+          "suggestion": "考虑使用更合适的表达方式，例如 “使用特殊字符” (shǐ yòng tè shū zì fù), “允许使用特殊字符” (yǔn xǔ shǐ yòng tè shū zì fù), or “可使用特殊字符” (kě shǐ yòng tè shū zì fù) to more accurately convey the intended meaning of 'Use special characters'."
         }
       ],
       "approved_at": null

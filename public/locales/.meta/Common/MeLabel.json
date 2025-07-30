@@ -3,7 +3,7 @@
   "content": "Me",
   "content_en_sha1_hash": "94563ec383e29aa3743abd9b337b2e084fb199fb",
   "created_at": "2025-05-19T21:30:46.429Z",
-  "updated_at": "2025-07-01T15:57:35.870Z",
+  "updated_at": "2025-06-30T12:20:31.095Z",
   "comment": {
     "text": "This translation key \"MeLabel\" is used to display a user's name when they have ownership rights or are the current room owner in various UI components, such as dialogs and templates. The text appears next to the username in a bold font and indicates that the user has specific permissions or access.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 159,
+      "line_number": 161,
       "context": "/>\n <div className=\"template-access_display-name\">\n <Text fontWeight={600} fontSize=\"13px\">\n {userName}\n </Text>\n <Text className=\"me-label\">({t(\"Common:MeLabel\")})</Text>\n </div>\n </>\n ) : (\n <>\n <div className=\"access-avatar-container\">{avatarList}</div>",
       "module": "/packages/client"
     },
@@ -42,25 +42,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 512,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 512,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 512,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 515,
+      "line_number": 512,
       "context": "if (roomsFilter.subjectId) {\n const user = await getUser(roomsFilter.subjectId);\n const isMe = userId === roomsFilter.subjectId;\n \n const label = isMe ? t(\"Common:MeLabel\") : user.displayName;\n \n const subject = {\n key: isMe ? FilterKeys.me : roomsFilter.subjectId,\n group: FilterGroups.roomFilterSubject,\n label,",
       "module": "/packages/client"
     },

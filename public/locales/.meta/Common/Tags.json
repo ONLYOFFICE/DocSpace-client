@@ -3,7 +3,7 @@
   "content": "Tags",
   "content_en_sha1_hash": "848eed0fbd5429f556b2982dec3ea87136e33e44",
   "created_at": "2025-05-19T21:30:49.252Z",
-  "updated_at": "2025-07-01T15:57:35.981Z",
+  "updated_at": "2025-06-08T12:02:32.625Z",
   "comment": {
     "text": "This translation key is used to display the label \"Tags\" in various UI elements throughout the application, such as input fields and column headers. It appears in contexts like dialog components, info panels, and table headers, helping users understand what field or section they are interacting with. Translators should provide a clear and concise version of this text that accurately conveys its intended purpose.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1014,
+      "line_number": 998,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1014,
+      "line_number": 998,
       "context": "const isLast = connectedThirdParty.length === 0;\n \n filterOptions.push({\n key: FilterGroups.roomFilterTags,\n group: FilterGroups.roomFilterTags,\n label: t(\"Common:Tags\"),\n isHeader: true,\n isLast,\n });\n \n filterOptions.push(...tagsOptions);",
       "module": "/packages/client"
     },
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අනන්‍යන\" does not accurately convey the meaning of \"Tags\". \"අනන්‍යන\" translates to \"unique\" or \"distinctive\", which is not the intended meaning of \"Tags\" in this context (likely referring to keywords or labels).",
-          "suggestion": "Consider alternatives like \"ලේබල්\" (label), \"අනතුරු ඇමුණුම්\" (attachments), or \"විසඳුම්” (keywords). The best choice depends on the specific context."
+          "description": "The Sinhala translation \"අනන්‍යන\" does not accurately translate \"Tags\". \"අනන්‍යන\" means 'unique' or 'distinctive', which is not the intended meaning of \"Tags\".",
+          "suggestion": "A more appropriate translation for \"Tags\" could be \"ලේබල්\" (label), \"මාර්ක්\" (mark), or \"අනන්‍යගුණාංග\" (unique attributes), depending on the specific context."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Tag\" is a direct transliteration and doesn't fully capture the meaning of 'Tags' (plural). It should be a plural form or a more descriptive term depending on the context.",
-          "suggestion": "Consider alternatives like 'Thẻ' (if referring to labels) or a more descriptive phrase depending on how 'Tags' is used."
+          "description": "The singular form \"Tag\" is used for the English plural \"Tags\". This doesn't accurately reflect the meaning.",
+          "suggestion": "Tags"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Code verifier",
   "content_en_sha1_hash": "6759c875043759924123fb3399e7f60b0fd94fca",
   "created_at": "2025-05-19T21:30:53.842Z",
-  "updated_at": "2025-05-28T09:30:02.604Z",
+  "updated_at": "2025-05-26T07:57:32.666Z",
   "comment": {
     "text": "The \"CodeVerifier\" translation key is used to display a specific term in a portal settings category, indicating a developer tool for OAuth. It appears as a label within a preview dialog. Translators should provide a clear and concise equivalent phrase to maintain UI consistency.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Проверка на код\" while literally meaning \"Code Check\", doesn't accurately convey the meaning of \"Code verifier\". A 'Code verifier' is a string used during OAuth flows, and a more accurate translation would reflect that.",
-          "suggestion": "Код за проверка"
+          "description": "The translation 'Проверка на код' doesn't accurately convey the meaning of 'Code verifier'. 'Проверка на код' translates to 'Code check' or 'Verification of code'.  'Code verifier' refers to a specific string used in OAuth flows.",
+          "suggestion": "A more accurate translation would be something along the lines of 'Код за проверка' (Code for verification) or 'Проверител на код' (Code verifier)."
         }
       ],
       "approved_at": null
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Code-Prüfer' is technically correct, a more idiomatic and commonly used translation for 'Code verifier' in a technical context would be 'Code-Validierungsstring' or 'Validierungscode'. 'Code-Prüfer' sounds slightly awkward.",
+          "suggestion": "Consider using 'Code-Validierungsstring' or 'Validierungscode' instead."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Koodin varmentaja\" is a literal translation and doesn't quite capture the nuance of \"Code verifier\" in the OAuth context. \"Varmentaja\" implies a validator or authenticator.  A more accurate translation would convey the purpose of the code verifier, which is a random string used for generating a code challenge.",
-          "suggestion": "Consider alternatives like \"Koodin vahvistusmerkkijono\" or \"Koodin varmistuskoodi\" which better reflect the role of a code verifier."
+          "description": "The translation \"Koodin varmentaja\" is a literal translation and doesn't quite capture the meaning of \"Code verifier\" in the context of OAuth. It's more of a 'code validator' rather than the specific term used in the OAuth flow.",
+          "suggestion": "Consider \"Koodin tarkistusarvo\" or \"Koodin vahvistuskoodi\".  The best option would depend on the specific context and commonly accepted terminology in the Finnish OAuth community."
         }
       ],
       "approved_at": null
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ծածկագրի վերիֆիկատոր\" is a literal translation of 'Code Verifier' but doesn't fully capture the technical meaning in the context of OAuth. While 'վերիֆիկատոր' is correct for 'verifier', \"ծածկագրի\" (of code) feels slightly awkward. A more natural phrasing might be preferred.",
-          "suggestion": "Consider alternatives like \"կոդի վերիֆիկատոր\" or simply \"վերիֆիկատոր\" if the context is well understood."
+          "description": "While \"Ծածկագրի վերիֆիկատոր\" is a literal translation of \"Code verifier\", it might sound overly technical or unnatural in Armenian. \"Code verifier\" often refers to a code used for authentication, and a more natural phrasing could consider the context.",
+          "suggestion": "Consider alternatives like \"կոդի ստուգող\" (kod’i stegogh) – 'code checker' or a phrase that conveys the function of the verifier, depending on the specific usage. Consulting with a localization expert for this term would be beneficial."
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"コード検証者\" (kōdo kenshōsha) literally translates to \"code verifier (person)\".  It implies a person is doing the verification, not the code itself being verified. \"Code verifier\" refers to the code itself, not a person.",
-          "suggestion": "コード検証 (kōdo kenshō) - code verification; コードベリファイア (kōdo berifaiā) - code verifier (transliteration)"
+          "description": "The translation \"コード検証者\" (kōdo kenshōsha) literally translates to \"code verifier (person)\". While technically not wrong, it implies a person is performing the verification, which isn't the intended meaning. \"Code verifier\" refers to the string itself, not the entity verifying it.",
+          "suggestion": "コード検証 (kōdo kenshō) - This more accurately conveys the 'code verification' aspect, referring to the verification string itself rather than a person doing the verification."
         }
       ],
       "approved_at": null
@@ -123,13 +129,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation \"코드 검증자\" (code geomjeongja) is a literal translation but not the most natural or commonly used term in Korean for 'code verifier'. It's overly technical and sounds stiff. A more common and understandable translation would be something like '코드 확인자' (code hwaginja) or '검증 코드' (geomjeong kodeu, meaning 'verification code').",
-          "suggestion": "Consider '코드 확인자' (code hwaginja) or '검증 코드' (geomjeong kodeu)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Koda verificētājs\" is a literal translation of \"Code verifier,\" but it's not the most natural or common way to express this concept in Latvian within a technical context. A more accurate and idiomatic translation would be \"Koda apstiprinājums\" or \"Verifikācijas kods\". \"Koda verificētājs\" sounds awkward and emphasizes the act of verifying rather than the code itself.",
-          "suggestion": "Consider \"Koda apstiprinājums\" or \"Verifikācijas kods\"."
+          "description": "The translation 'Koda verificētājs' is a literal translation of 'Code verifier' but is not the standard or most natural way to express the term in Latvian. 'Code verifier' in this context, relating to OAuth, would typically be translated as 'koda verifikators' or 'apstiprinājuma kods'.",
+          "suggestion": "Consider using 'koda verifikators' or 'apstiprinājuma kods'."
         }
       ],
       "approved_at": null
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Verificare cod' is a literal translation that doesn't accurately convey the meaning of 'Code verifier'. 'Code verifier' refers to a string of random characters used in the OAuth 2.0 authorization code flow. A more accurate translation would be 'Cod de verificare' or 'Verificator de cod'.",
+          "description": "The translation \"Verificare cod\" is a literal translation of \"Code verification,\" not \"Code verifier.\" The correct translation should be closer to \"Verificator de cod\" or \"Cod de verificare\".",
           "suggestion": "Cod de verificare"
         }
       ],
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes the English term in parentheses after the Sinhala transliteration. While understandable, it's generally preferred to provide a fully translated term if possible.  It might be confusing to users unfamiliar with English.",
-          "suggestion": "Consider a fully translated Sinhala equivalent, if one exists. If not, maintaining the transliteration without the English term might be slightly cleaner."
+          "description": "The Sinhala translation includes the English term in parentheses after the Sinhala transliteration. While understandable, it's generally better to avoid this and prioritize a fully Sinhala translation if possible. The purpose is to provide clarity for Sinhala speakers, and including the English term may hinder that.",
+          "suggestion": "Consider a fully Sinhala translation that conveys the meaning of 'code verifier' without the English term in parentheses. For example, 'ලේඛණ සත්‍යාපනකය (lekahana satyapanakaya)' could be explored, though further research on appropriate terminology is recommended."
         }
       ],
       "approved_at": null
@@ -228,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Verifikator koda\" is understandable, a more accurate and commonly used translation of \"Code verifier\" in Serbian (Latin) would be \"Kôd verifikator\" or \"Verifikacioni kod\". \"Verifikator koda\" sounds a bit unnatural and literally translates to \"code verifier\" as a job title rather than a technical term.",
+          "description": "While \"Verifikator koda\" is understandable, a more accurate and common translation of \"Code verifier\" would be \"Kôd verifikator.\"  The current translation reverses the word order, which isn't standard practice in Serbian.",
           "suggestion": "Kôd verifikator"
         }
       ],
@@ -246,13 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Перевіряльник коду\" is a literal translation, it sounds awkward and unnatural in Ukrainian. \"Code verifier\" often refers to a string used for OAuth flows, and a more accurate and natural translation would better reflect that context.",
-          "suggestion": "Валідатор коду"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Перевіряльник коду\" suggests an active agent or a tool, rather than the string value itself. This might cause confusion in the context of OAuth.",
-          "suggestion": "Рядок перевірки коду"
+          "description": "The translation \"Перевіряльник коду\" is a literal translation and not the standard terminology used in Ukrainian for 'Code Verifier' in the context of OAuth. A more accurate translation would reflect the technical term, often used directly or adapted.",
+          "suggestion": "Consider using \"Код-верифікатор\" or \"Верифікатор коду\" (more conversational, but still understandable) as a more accurate translation, or adapting the English term directly."
         }
       ],
       "approved_at": null

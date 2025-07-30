@@ -5,22 +5,23 @@
     width: 100%;
   }
 
+  &.isFilled :global(svg path) {
+    fill: var(--search-input-filled-icon-fill) !important;
+  }
+
   :global {
     .input-block-icon {
-      border-radius: 0px;
-      border-start-end-radius: 3px;
-      border-end-end-radius: 3px;
+      border-radius: 0;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    .search-input-block > input {
+      font-weight: 600;
+    }
+
+    svg path {
+      fill: var(--search-input-default-icon-fill) !important;
     }
   }
-
-  input {
-    border-radius: 0px;
-    border-start-start-radius: 3px;
-    border-end-start-radius: 3px;
-  }
-}
-
-.searchInputBlock > input {
-  font-size: 14px;
-  font-weight: 600;
 }

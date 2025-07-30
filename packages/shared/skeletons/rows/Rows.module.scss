@@ -23,8 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
 
 .row {
   width: 100%;
@@ -37,7 +36,7 @@
   justify-items: center;
   align-items: center;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     grid-column-gap: 12px;
     margin-bottom: 26px;
   }
@@ -66,7 +65,7 @@
     }
   }
 
-  @include desktop {
+  @include mixins.desktop {
     padding-inline-end: 8px;
     grid-template-rows: 16px;
     grid-row-gap: 0;

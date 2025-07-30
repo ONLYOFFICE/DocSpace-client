@@ -27,6 +27,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 interface PageCountProps {
+  ref: React.RefObject<PageCountRef | null>;
   visible: boolean;
   isPanelOpen: boolean;
   className?: string;

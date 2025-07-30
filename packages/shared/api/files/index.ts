@@ -27,7 +27,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import moment from "moment";
 import {
   ConflictResolveType,
@@ -65,10 +65,12 @@ import {
   TSendEditorNotify,
   TSharedUsers,
   TThirdPartyCapabilities,
-  TTirdParties,
+  TThirdParties,
   TUploadOperation,
   TConnectingStorages,
+  SettingsThirdPartyType,
   TIndexItems,
+  TUploadBackup,
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
 } from "./types";
@@ -720,8 +722,8 @@ export function uploadFile(url: string, data: unknown) {
 }
 
 // TODO: Need update res type and remove unknown
-export function uploadBackup(url: string, data: unknown) {
-  return axios.post(url, data);
+export function uploadBackup(url: string, data?: unknown) {
+  return axios.post<unknown, AxiosResponse<TUploadBackup>>(url, data);
 }
 
 export async function downloadFiles(
@@ -1079,7 +1081,7 @@ export async function getThirdPartyList() {
   const res = (await request({
     method: "get",
     url: "files/thirdparty",
-  })) as TTirdParties;
+  })) as TThirdParties;
 
   return res;
 }
@@ -1111,7 +1113,7 @@ export function saveThirdParty(
   return request(
     { method: "post", url: "files/thirdparty", data },
     skipRedirect,
-  );
+  ) as Promise;
 }
 
 // TODO: Need update res type
@@ -1140,7 +1142,7 @@ export function saveSettingsThirdParty(
 
 // TODO: Need update res type
 export function getSettingsThirdParty() {
-  return request({
+  return request<SettingsThirdPartyType>({
     method: "get",
     url: "files/thirdparty/backup",
   });
@@ -1491,12 +1493,14 @@ export async function getExternalLinks(
   fileId: number | string,
   startIndex = 0,
   count = 50,
+  signal?: AbortSignal,
 ) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
 
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/links${linkParams}`,
+    signal,
   })) as { items: TFileLink[] };
 
   return res;
@@ -1548,7 +1552,7 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment,
+  expirationDate?: moment.Moment | null,
 ) {
   const res = (await request({
     method: "put",

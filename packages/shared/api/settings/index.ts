@@ -57,6 +57,7 @@ import {
   TMigrationData,
   TSendWelcomeEmailData,
   TPortalCultures,
+  TStorageBackup,
   TEncryptionSettings,
 } from "./types";
 
@@ -393,9 +394,10 @@ export function setCompanyInfoSettings(
   email,
   phone,
   site,
+  hideAbout,
 ) {
   const data = {
-    settings: { address, companyName, email, phone, site },
+    settings: { address, companyName, email, phone, site, hideAbout },
   };
 
   return request({
@@ -627,7 +629,7 @@ export async function getIsLicenseRequired() {
   return res;
 }
 
-export async function setLicense(confirmKey: string, data: FormData) {
+export async function setLicense(confirmKey: string | null, data: FormData) {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/settings/license`,
@@ -770,7 +772,7 @@ export function getBackupStorage(dump: boolean = false) {
       dump,
     },
   };
-  return request(options);
+  return request<TStorageBackup[]>(options);
 }
 
 export async function getBuildVersion(headers = null) {
@@ -1235,7 +1237,7 @@ export function setTenantQuotaSettings(data) {
     data,
   };
 
-  return request(options);
+  return request(options) as TPaymentQuota;
 }
 
 export function getLdapStatus() {

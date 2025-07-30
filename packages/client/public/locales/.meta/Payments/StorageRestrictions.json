@@ -3,7 +3,7 @@
   "content": "Without action, uploading, creating, and editing files and folders will be restricted until you free up space.",
   "content_en_sha1_hash": "ce05667055adced540e554d2692374783ad62225",
   "created_at": "2025-06-24T16:31:06.878Z",
-  "updated_at": "2025-07-01T15:57:36.034Z",
+  "updated_at": "2025-06-30T12:20:31.271Z",
   "comment": {
     "text": "This translation key is used to display a message that indicates storage restrictions due to space limitations when a user has not taken action. It appears in a modal dialog to inform users about the need to free up space to reactivate storage functionality.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Template info",
   "content_en_sha1_hash": "43dd4282d27fb26d5d480281f66d4ddc4c7f8607",
   "created_at": "2025-05-19T21:30:55.124Z",
-  "updated_at": "2025-06-03T20:59:42.288Z",
+  "updated_at": "2025-06-02T10:20:51.502Z",
   "comment": {
     "text": "This translation key is used to display a brief overview or details about templates in a form gallery. It is likely shown as a label on buttons or links that trigger the display of template information, such as \"Template info\" in the context of a form creation process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1231,
+      "line_number": 1233,
       "context": "label: t(\"Common:Create\"),\n onClick: () => this.onCreateOform(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),\n onClick: () => this.onShowOformTemplateInfo(item),\n },\n {\n key: \"separator\",\n isSeparator: true,",
       "module": "/packages/client"
     }
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sjabloon info' is not the most natural or accurate translation of 'Template info' in Dutch. While 'sjabloon' is a valid translation of 'template', the addition of 'info' feels awkward. A more natural phrasing would be 'Sjablooninformatie' or 'Informatie over sjablonen'.",
+          "description": "The Dutch translation 'Sjabloon info' is a literal translation and doesn't flow naturally in Dutch. 'Sjabloon' is a valid term, but 'info' is often translated as 'informatie'.",
           "suggestion": "Sjablooninformatie"
         }
       ],
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'අච්චුවේ තොරතුරු' is understandable, a more precise translation of 'Template info' would be 'නිම්බේ තොරතුරු' or 'ආකාරණාත්මක තොරතුරු'. 'අච්චුවේ' literally means 'in the mold', which isn't the intended meaning of 'template'.",
-          "suggestion": "නිම්බේ තොරතුරු"
+          "description": "While \"අච්චුවේ තොරතුරු\" (acchuve thorathuru) is a literal translation, it might not be the most natural or accurate rendering of \"Template info\" in Sinhala. \"Template\" can refer to a design or structure.  A more appropriate translation might consider alternatives that better convey the concept of a template.",
+          "suggestion": "Consider alternatives like \"ආකාරකය තොරතුරු\" (aakaraya thorathuru) or \"සැක යෙදුම පිළිබඳ තොරතුරු\" (saka yeduma pelita thorathuru) depending on the specific context of 'Template'."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Informacije o predlogi\" is understandable, a more accurate and natural translation of \"Template info\" would be \"Podatki o predlogi\" or \"Informacije o predlogi\" (used more generally). \"Predlogi\" suggests multiple templates, while \"predloga\" is singular. \"Template info\" refers to information *about* a template.",
-          "suggestion": "Podatki o predlogi"
+          "description": "While \"Informacije o predlogi\" is a literal translation, it's not the most natural or idiomatic way to express \"Template info\" in Slovenian. \"Predloga\" can refer to a template as in a document, or a proposition/suggestion. \"Informacije o predlogi\" leans towards the latter. A more suitable translation focusing on the template aspect would be \"Podrobnosti o predlogi\" or \"Informacije o predlogi (predloga)\"",
+          "suggestion": "Podrobnosti o predlogi"
         }
       ],
       "approved_at": null
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Инфо за шаблон' is understandable, a more accurate and natural translation of 'Template info' would be 'Информације о шаблону'. 'Инфо' is a borrowing from English and can sound less professional in some contexts.",
+          "description": "The translation 'Инфо за шаблон' is a literal translation of 'info for template'. While understandable, a more natural Serbian (Cyrillic) phrasing would be 'Информације о шаблону'. 'Инфо' is considered an Anglicism and less common in formal contexts.",
           "suggestion": "Информације о шаблону"
         }
       ],

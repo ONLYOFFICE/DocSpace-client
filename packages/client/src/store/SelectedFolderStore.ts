@@ -225,6 +225,8 @@ class SelectedFolderStore {
       watermark: this.watermark,
       passwordProtected: this.passwordProtected,
       external: this.external,
+      changeDocumentsTabs: this.changeDocumentsTabs,
+      isIndexedFolder: this.isIndexedFolder,
     };
   };
 

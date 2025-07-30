@@ -28,16 +28,13 @@ import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { isMobile } from "react-device-detect";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "../../checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { FolderTileProps } from "./FolderTile.types";
+} from "../../context-menu-button";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { FolderChildProps, FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 import { HeaderType } from "../../context-menu/ContextMenu.types";
@@ -82,18 +79,25 @@ export const FolderTile = ({
     contextOptions &&
     contextOptions?.length > 0;
 
-  const firstChild = childrenArray[0];
+  const firstChild = childrenArray[0] as React.ReactElement<FolderChildProps>;
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {
-          title: firstChild.props.item.title,
+          title: firstChild.props.item.title || "",
           icon: firstChild.props.item.icon,
-          original: firstChild.props.item.logo?.original,
-          large: firstChild.props.item.logo?.large,
-          medium: firstChild.props.item.logo?.medium,
-          small: firstChild.props.item.logo?.small,
+          original: firstChild.props.item.logo?.original || "",
+          large: firstChild.props.item.logo?.large || "",
+          medium: firstChild.props.item.logo?.medium || "",
+          small: firstChild.props.item.logo?.small || "",
           color: firstChild.props.item.logo?.color,
-          cover: firstChild.props.item.logo?.cover,
+          cover: firstChild.props.item.logo?.cover
+            ? typeof firstChild.props.item.logo.cover === "string"
+              ? {
+                  data: firstChild.props.item.logo.cover,
+                  id: "",
+                }
+              : firstChild.props.item.logo.cover
+            : undefined,
         }
       : undefined;
 

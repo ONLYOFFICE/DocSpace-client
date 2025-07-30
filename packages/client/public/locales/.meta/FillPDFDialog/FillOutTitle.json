@@ -3,7 +3,7 @@
   "content": "Fill out the form yourself",
   "content_en_sha1_hash": "d179132f94ff8d37a61af92182c4ddb7a2e22f4c",
   "created_at": "2025-05-19T21:30:55.166Z",
-  "updated_at": "2025-05-28T09:30:02.270Z",
+  "updated_at": "2025-05-26T07:57:32.307Z",
   "comment": {
     "text": "The translation key \"FillOutTitle\" is used to display a message that encourages users to fill out a form on their own. This text appears as the title of a dialog or component where users need to input information, such as a PDF editing interface. It serves to inform users to take responsibility for completing the form themselves.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Formular selbst ausfüllen\" is a bit literal and not the most natural phrasing in German. It sounds slightly awkward. A more natural translation would emphasize the user's responsibility.",
-          "suggestion": "Formular bitte selbst ausfüllen"
+          "description": "The translation \"Formular selbst ausfüllen\" is a literal translation and sounds a bit unnatural in German. A more natural and idiomatic phrasing would be something like \"Füllen Sie das Formular selbst aus\" or \"Bitte füllen Sie das Formular selbst aus\".",
+          "suggestion": "Füllen Sie das Formular selbst aus"
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, 'Συμπληρώστε μόνοι σας τη φόρμα' translates more literally to 'Fill out the form yourself'.  A more natural and user-friendly translation emphasizing user empowerment might be 'Γεμίστε τη φόρμα μόνοι σας' or 'Συμπληρώστε τη φόρμα εσείς'.",
+          "suggestion": "Γεμίστε τη φόρμα μόνοι σας"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '自分で記入する' while literally meaning 'fill in yourself,' is not the most natural or idiomatic way to convey 'Fill out the form yourself' in Japanese. It sounds a bit abrupt and instructional. A more natural phrasing would emphasize the user's responsibility and potentially offer guidance.",
-          "suggestion": "ご自身でご記入ください (Gojin de go-kijin kudasai) - Please fill out the form yourself. or フォームにご記入ください (Fōmu ni go-kijin kudasai) - Please fill out the form."
+          "description": "The translation \"自分で記入する\" is a literal translation, but it doesn't convey the meaning 'Fill out the form yourself' as naturally as possible in Japanese. It can sound slightly awkward or overly direct. A more natural phrasing would be 'ご自身でご記入ください' (go jishin de go kinyuu kudasai) or 'お客様ご自身でご記入ください' (Okyakusama jishin de go kinyuu kudasai).",
+          "suggestion": "ご自身でご記入ください (Go jishin de go kinyuu kudasai)"
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '직접 양식 작성' while understandable, isn't the most natural or idiomatic way to convey 'Fill out the form yourself' in Korean. It focuses on 'directly writing the form'.",
-          "suggestion": "Consider alternatives like '직접 작성하세요' (Jikjeop jaksyeong haseyo) - 'Please fill it out yourself', or '스스로 양식을 작성하세요' (Seuseuro yangsigeul jaksyeong haseyo) - 'Fill out the form yourself'."
+          "description": "The translation \"직접 양식 작성\" while understandable, doesn't fully capture the nuance of \"Fill out the form yourself.\" It's more literal and doesn't convey the implication of avoiding assistance.",
+          "suggestion": "Consider a translation like \"직접 양식에 기입하세요\" (Please fill out the form directly) or \"직접 작성해 주세요\" (Please fill it out yourself)."
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Latvian translation uses the informal \"pats (-i)\". Considering the context is a dialog instructing a user to fill out a form, a more formal or neutral phrasing might be more appropriate. The choice between \"pats\" and \"pati\" depends on the gender of the person being addressed, which isn't specified.",
-          "suggestion": "Consider a more formal or neutral phrasing like \"Aizpildiet veidlapu lūdzu\" (Please fill out the form) or \"Aizpildiet veidlapu pats/pati\" (Fill out the form yourself - masculine/feminine), if the gender is known. Otherwise, rephrasing to avoid the need for gender agreement is preferable."
+          "description": "The Latvian translation \"Aizpildiet veidlapu pats (-i)\" uses the imperative form which is grammatically correct, but might sound a bit abrupt depending on the overall tone of the UI. While accurate, a slightly softened phrasing might be more user-friendly. The parenthesis suggests both masculine and feminine forms are acceptable, which is good for inclusivity.",
+          "suggestion": "Consider a slightly softened phrasing like \"Lūdzu, aizpildiet veidlapu pats (-i)\" (Please fill out the form yourself) or \"Aizpildiet veidlapu, lūdzu\" (Please fill out the form)."
         }
       ],
       "approved_at": null
@@ -168,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Completați formularul de sine stătător' is a literal translation and doesn't convey the intended meaning of 'Fill out the form yourself.' It sounds awkward in Romanian.",
+          "description": "The Romanian translation 'Completați formularul de sine stătător' is a literal translation and doesn't convey the intended meaning of 'Fill out the form yourself'. It's awkward and not natural Romanian.",
           "suggestion": "Completați singur formularul"
         }
       ],
@@ -183,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබම ආකෘතිය පිරවන්න.' is a literal translation and while understandable, it doesn't convey the nuance of 'Fill out the form yourself'. A more natural and helpful translation might focus on user agency and responsibility.",
+          "suggestion": "Consider a phrasing like 'ඔබ විසින් ආකෘතිය පිරවන්න.' (You should fill out the form) or 'ආකෘතිය ඔබ විසින් පිරවන්න.' (The form should be filled by you)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -191,9 +203,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Vyplniť' is missing an accent mark. The correct spelling is 'Vyplňte'.",
-          "suggestion": "Vyplňte"
+          "type": "incorrect_translation",
+          "description": "The translation \"Vyplniť formulár samostatne\" is a literal translation but doesn't quite capture the nuance of 'Fill out the form yourself.' It sounds a bit formal and less natural in Slovak. A more natural translation would imply responsibility and agency.",
+          "suggestion": "Consider alternatives like \"Zaplňte formulár sami\" or \"Vyplňte formulár sám/sama\" (depending on context - singular or plural)."
         }
       ],
       "approved_at": null
@@ -204,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ponovno izpolni obrazec\" translates to \"Fill out the form again.\" The original English phrase 'Fill out the form yourself' implies the user should complete the form independently, not redo it. The nuance is lost.",
+          "description": "The translation 'Ponovno izpolni obrazec' translates more accurately to 'Fill out the form again'. It doesn't convey the original meaning of 'Fill out the form yourself', which implies doing it directly.",
           "suggestion": "Izpolni obrazec sam/a"
         }
       ],
@@ -216,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Попуни формулар сам\" doesn't accurately convey the meaning of \"Fill out the form yourself.\" \"Попуни\" is a verb in the imperative mood, but its usage here is awkward.  A more natural and accurate translation would emphasize the user's responsibility.",
-          "suggestion": "Исправи сам да попуниш образац"
+          "description": "The translation 'Попуни формулар сам' doesn't accurately convey the meaning of 'Fill out the form yourself'. 'Попуни' is a command form (imperative) that means 'fill in' or 'populate', which is not a perfect match. The 'сам' (sam) adds the meaning of 'yourself', but the core verb 'fill out' is not fully captured.  A more natural translation would emphasize the user taking action.",
+          "suggestion": "Испуни образац сам"
         }
       ],
       "approved_at": null
@@ -228,13 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Popuni formular sam' doesn't accurately convey the meaning of 'Fill out the form yourself.' 'Popuni' is correct for 'Fill out' but 'formular' is a misspelling of 'formularu'. The 'sam' at the end is also awkward and doesn't fit the meaning; 'sam' means 'myself' and is unnecessary here.",
-          "suggestion": "Popuni formularu sam. Although, a more natural translation might be 'Popuni formular ti sam' or simply 'Popuni formular ti'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'formular' is a misspelling. It should be 'formularu'.",
-          "suggestion": "Popuni formularu sam."
+          "description": "The Serbian translation \"Popuni formular sam\" is not the most natural or accurate translation of \"Fill out the form yourself\". \"Popuni formular sam\" literally translates to \"Fill the form myself\".",
+          "suggestion": "Popunite obrazac sami"
         }
       ],
       "approved_at": null
@@ -251,13 +258,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Ukrainian translation \"Заповнити форму самому(ій)\" is grammatically awkward. The reflexive particle 'самому(ій)' doesn't quite fit with the imperative 'Заповнити' in this context.  It implies doing it by oneself, but the original English encourages the user to do it themselves.",
-          "suggestion": "Consider alternatives like \"Заповніть форму самостійно\" (Fill out the form independently) or \"Заповніть форму особисто\" (Fill out the form personally)."
+          "description": "The Ukrainian translation 'Заповнити форму самому(ій)' is grammatically awkward. It implies the action is done by oneself and not clearly addresses the user being instructed to do it.",
+          "suggestion": "Заповніть форму самостійно"
         },
         {
           "type": "incorrect_translation",
-          "description": "The reflexive particle usage results in an interpretation slightly different from the original meaning. It emphasizes acting alone rather than encouraging the user to take action.",
-          "suggestion": "Re-evaluate the translation to better convey the encouragement to complete the form."
+          "description": "The literal translation doesn't fully capture the meaning of 'Fill out the form yourself'. It lacks the directive element.",
+          "suggestion": "Заповніть форму власноруч"
         }
       ],
       "approved_at": null

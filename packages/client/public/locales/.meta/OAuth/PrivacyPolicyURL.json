@@ -3,7 +3,7 @@
   "content": "Privacy policy URL",
   "content_en_sha1_hash": "52c701499a67f70c0e4d1871ad9613018818b5a8",
   "created_at": "2025-05-19T21:30:53.972Z",
-  "updated_at": "2025-05-21T07:06:38.754Z",
+  "updated_at": "2025-05-24T07:20:45.628Z",
   "comment": {
     "text": "This translation key is used to display the URL of a privacy policy. It is displayed as a label in an input field on a form, prompting users to enter their organization's privacy policy URL.",
     "is_auto": true,
@@ -47,9 +47,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Zásad' is missing a hyphen. It should be 'Zásad-ochrany'.",
-          "suggestion": "URL adresa Zásad-ochrany osobních údajů"
+          "type": "formatting",
+          "description": "The Czech translation uses a lowercase 'z' in 'zásad'. It should be capitalized as it's the beginning of a sentence fragment.",
+          "suggestion": "URL adresa Zásad ochrany osobních údajů"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Tietosuojakäytäntö URL\" is a very literal translation and sounds unnatural in Finnish. A more idiomatic translation would be something like \"Yksityisyyskäytäntö URL\" or \"Tietosuojapolitiikan URL\".",
-          "suggestion": "Yksityisyyskäytäntö URL"
+          "description": "The translation 'Tietosuojakäytäntö URL' is a literal translation and somewhat awkward in Finnish. 'Privacy policy' is often shortened to 'tietosuojakäytäntö'. The addition of 'URL' feels redundant as it's implied.",
+          "suggestion": "Tietosuojakäytäntö"
         }
       ],
       "approved_at": null
@@ -117,18 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term 'URL' is an abbreviation and should be spelled out at least once in formal writing to avoid ambiguity. While it's commonly understood, it's best to clarify.",
-          "suggestion": "ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ URL (URL - Uniform Resource Locator)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, a more natural Lao translation for 'Privacy policy URL' might be 'ເວັບໄຊ້ທ່ອງຖິ້ມນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ' or 'ລິ້ງກ໌ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ'. The current translation is a direct transliteration and might sound awkward.",
-          "suggestion": "ເວັບໄຊ້ທ່ອງຖິ້ມນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -137,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Konfidencialitātes politikas vietrādis URL' is not the most natural or idiomatic translation of 'Privacy policy URL'. While technically correct, it's a bit clunky.",
-          "suggestion": "A more natural translation would be 'Privātuma politikas URL' or 'Konfidencialitātes politikas adrese'."
+          "description": "The translation 'Konfidencialitātes politikas vietrādis URL' is overly literal and not the most natural phrasing in Latvian. 'Vietrādis' specifically means 'location' or 'address' and while technically correct, it's not commonly used in this context.",
+          "suggestion": "Konfidencialitātes politikas URL"
         }
       ],
       "approved_at": null
@@ -179,13 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"URL-адреса Политики конфиденциальности\" is a bit verbose and sounds unnatural. A more concise and common translation would be \"URL политики конфиденциальности\".",
-          "suggestion": "URL политики конфиденциальности"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a hyphenated word (\"URL-адреса\") which is not always preferred in Russian. While not technically incorrect, it can be improved for a smoother read.",
-          "suggestion": "URL адреса Политики конфиденциальности"
+          "description": "The translation \"URL-адреса Политики конфиденциальности\" is overly literal and slightly awkward. A more natural translation would be \"Адрес Политики конфиденциальности\" or \"URL Политики конфиденциальности\". The use of the plural 'адреса' (addresses) is not ideal for a single URL.",
+          "suggestion": "Адрес Политики конфиденциальности"
         }
       ],
       "approved_at": null
@@ -196,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නිශ්චිතතා ප්‍රතිපත්ති URL' is not the most natural or accurate rendering of 'Privacy policy URL' in Sinhala. 'නිශ්චිතතා' is closer to 'confidentiality' rather than 'privacy'.",
-          "suggestion": "දේශප්‍රතිපත්තිය URL (deshapratipathiya URL) - This is a more common and direct translation of 'Privacy policy URL' in Sinhala."
+          "description": "The translation 'නිශ්චිතතා ප්‍රතිපත්ති URL' is a literal transliteration of 'Privacy Policy URL' and doesn't accurately convey the meaning in Sinhala. It sounds awkward and unnatural. A more accurate and natural translation would be something like 'දේශපාලන රහස්යතාව URL' or 'රහස්යතා ප්‍රතිපත්ති ලිංකනය'.",
+          "suggestion": "දේශපාලන රහස්යතාව URL or රහස්යතා ප්‍රතිපත්ති ලිංකනය"
         }
       ],
       "approved_at": null
@@ -208,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a space before the colon. It's generally recommended to avoid this in technical contexts.",
-          "suggestion": "URL adresa zásad ochrany osobných údajov"
+          "description": "The translation includes an unnecessary space before 'Zásady'.",
+          "suggestion": "URL adresa pre Zásady ochrany osobných údajov"
         }
       ],
       "approved_at": null
@@ -223,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"URL политике приватности\" is a literal translation but sounds unnatural and isn't the idiomatic way to express \"Privacy policy URL\" in Serbian. It lacks a preposition connecting 'URL' and 'politike privatnosti'.",
-          "suggestion": "URL политике приватности / URL приватне политике (better flow)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

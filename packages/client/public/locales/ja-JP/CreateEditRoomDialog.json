@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "アクティベーションが必要です",
   "AddStaticText": "静的テキストの追加",
   "AddWatermarkElements": "透かし要素の追加",
   "AddWatermarksToDocuments": "文書に透かしの追加",
@@ -33,7 +32,6 @@
   "StorageDescription": "ルームごとに設定されたストレージ容量制限。この値を変更したり、ストレージの制限をオフにすることができます.",
   "TagsPlaceholder": "タグを付ける",
   "ThirdPartyStorageComboBoxPlaceholder": "ストレージの選択",
-  "ThirdPartyStorageDescription": "このルームのデータ保存先として、サードパーティーのサービスを利用します。接続されたストレージに、このルームのデータを保存するための新しいフォルダが作成されます。",
   "ThirdPartyStorageNoStorageAlert": "事前に、「統合」で対応するサービスを接続しておく必要があります。そうでない場合は、接続ができません。",
   "ThirdPartyStoragePermanentSettingDescription": "ファイルは、{{thirdpartyTitle}} サードパーティのストレージの「\"{{thirdpartyFolderName}}\"」フォルダーに保存されています。\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "サードパーティーのストレージを接続するには、{{productName}}設定の「統合」セクションに対応するサービスを追加する必要があります。統合を有効にするには、{{productName}}の所有者または管理者にご連絡ください。",

@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
-import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { SelectIconProps, ILogo } from "../RoomLogoCoverDialog.types";
 
 interface WithoutIconProps {
   isSelected?: boolean;
@@ -161,12 +161,12 @@ export const SelectIcon = ({
               }
               return (
                 <StyledIconContainer
-                  isSelected={coverId === icon.id ? !withoutIcon : null}
+                  isSelected={coverId === icon.id ? !withoutIcon : false}
                   $currentColorScheme={$currentColorScheme}
                   onClick={
                     coverId === icon.id
                       ? toggleWithoutIcon
-                      : () => onSelectIcon(icon)
+                      : () => onSelectIcon(icon as unknown as string)
                   }
                   key={icon.id}
                   id={`cover-icon-${icon?.id}`}

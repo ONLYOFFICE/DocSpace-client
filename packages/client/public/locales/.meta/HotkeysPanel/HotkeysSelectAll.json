@@ -3,7 +3,7 @@
   "content": "Select all visible folders and files",
   "content_en_sha1_hash": "c4590f28ac086a3a4600fb3c26cba40da425c029",
   "created_at": "2025-05-19T21:30:55.083Z",
-  "updated_at": "2025-05-21T10:25:43.585Z",
+  "updated_at": "2025-05-24T10:35:08.829Z",
   "comment": {
     "text": "The translation key \"HotkeysSelectAll\" is used to display a tooltip or label indicating that pressing the Ctrl + A hotkey will select all visible folders and files in a UI element, such as a HotkeysPanel component. This message appears on a button within a panel.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The German translation uses the subjunctive mood incorrectly. The action of selecting should be in the imperative mood.",
-          "suggestion": "Alle sichtbaren Ordner und Dateien auswählen."
+          "description": "The German translation uses the infinitive form 'auswählens' instead of the correct form for this context. It should be a participle in the active voice.",
+          "suggestion": "Alle sichtbaren Ordner und Dateien auswählen"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'folders and files' is a common pairing. While 'պանակները և ֆայլերը' is technically correct, 'ֆայլերը' might be better translated as 'ֆայլայինները' to match the formality and common usage within a software context.",
-          "suggestion": "Ընտրել բոլոր տեսանելի պանակները և ֆայլայինները"
+          "description": "The translation 'Ընտրել բոլոր տեսանելի պանակները և ֆայլերը' is a literal translation and doesn't quite capture the nuance of 'Select all visible folders and files.'  It could be interpreted as selecting *only* the selectable panels, rather than all visible items within them.",
+          "suggestion": "Ընտրել բոլոր տեսանելի թղթապանակները և ֆայլերը"
         }
       ],
       "approved_at": null
@@ -111,13 +111,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '표시되는 모든 폴더 및 파일 선택' while technically correct, doesn't quite capture the nuance of 'Select all visible folders and files'. A more natural Korean phrasing might better convey the intent. '보이는 모든 폴더와 파일을 모두 선택하세요' is more conversational and aligns better with the original English.",
-          "suggestion": "보이는 모든 폴더와 파일을 모두 선택하세요"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ເລືອກໂຟເດີ ແລະໄຟລ໌ທັງໝົດທີ່ເຫັນ\" directly translates to 'Select folders and files all that see'. It lacks the nuance of 'visible' and implies selecting everything that the user sees, which might not be what's intended.  It should convey the meaning of 'visible' or 'currently displayed'.",
-          "suggestion": "ເລືອກໂຟເດີ ແລະໄຟລ໌ທັງໝົດທີ່ສະແດງອອກ"
+          "description": "The translation \"ເລືອກໂຟເດີ ແລະໄຟລ໌ທັງໝົດທີ່ເຫັນ\" literally translates to 'Select folder and file all that see'. While understandable, it's not the most natural or idiomatic Lao. The English phrase 'visible' implies only the folders and files currently displayed or accessible, which isn't perfectly conveyed.",
+          "suggestion": "ເລືອກໂຟເດີ ແລະໄຟລ໌ທີ່ເຫັນທັງໝົດ"
         }
       ],
       "approved_at": null
@@ -180,13 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පෙනෙන සියළුම බහාලුම් හා ගොනු තෝරන්න' is a literal translation but sounds slightly unnatural in Sinhala. A more natural phrasing would emphasize selecting all visible items.",
-          "suggestion": "සියළු පෙනෙන ෆෝල්ඩර් හා ගොනු තෝරන්න"
-        },
-        {
-          "type": "formatting",
-          "description": "While 'ෆෝල්ඩර්' (folder) is acceptable due to English loanwords, using a more Sinhala equivalent might be preferable for broader accessibility. However, this is a judgement call based on the intended audience.",
-          "suggestion": "සියළු පෙනෙන තොග හා ගොනු තෝරන්න"
+          "description": "The translation \"පෙනෙන සියළුම බහාලුම් හා ගොනු තෝරන්න\" literally translates to \"Select all visible packages and files\". While 'folders' can be interpreted as 'packages' in some contexts, 'folders' (විfolderන්) is the more accurate translation and a common term for folders in Sinhala computing contexts. 'bahaalu' (packages) is less common.",
+          "suggestion": "පෙනෙන සියළුම ෆෝල්ඩරන් හා ගොනු තෝරන්න"
         }
       ],
       "approved_at": null
@@ -203,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Premakni vse vidne mape in datoteke' translates to 'Move all visible folders and files,' which doesn't match the intended meaning of 'Select all visible folders and files.'",
+          "description": "The translation 'Premakni vse vidne mape in datoteke' translates to 'Move all visible folders and files'. The original English text 'Select all visible folders and files' implies selection, not movement. This is a significant semantic error.",
           "suggestion": "Izberi vse vidne mape in datoteke"
         }
       ],
@@ -226,9 +215,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tüm görünür klasörleri ve dosyaları seç' while generally correct, could be slightly improved to better reflect the English 'Select all visible folders and files'. A more natural phrasing in Turkish would emphasize 'selection' more directly.",
-          "suggestion": "Tüm görünür klasör ve dosyaları seçin"
+          "type": "grammar",
+          "description": "The Turkish translation 'Tüm görünür klasörleri ve dosyaları seç' is grammatically correct but could be slightly improved for flow. While 'seç' is correct for 'select', using a more idiomatic phrasing like 'tüm görünür klasörleri ve dosyaları seçin' would sound more natural and consistent with UI conventions in Turkish.",
+          "suggestion": "Tüm görünür klasörleri ve dosyaları seçin"
         }
       ],
       "approved_at": null
@@ -245,13 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chọn tất cả các thư mục và tập tin có thể nhìn thấy' is a literal translation but doesn't quite convey the intended meaning of 'visible' in the context of a hotkey panel. It implies that only folders and files that are literally visible on screen are selected, which might not be the case. It's better to imply that all currently selected or active folders and files are included.",
-          "suggestion": "Chọn tất cả các thư mục và tập tin đang được chọn"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'tập tin' is a bit formal for a hotkey panel. A more conversational term would be more appropriate.",
-          "suggestion": "Chọn tất cả các thư mục và file đang được chọn"
+          "description": "The translation 'Chọn tất cả các thư mục và tập tin có thể nhìn thấy' is not the most natural or precise translation of 'Select all visible folders and files.'  'Có thể nhìn thấy' (can be seen) implies an ability to perceive, which isn't the core meaning. It's more about visibility in the current view or selection.",
+          "suggestion": "Chọn tất cả các thư mục và tệp hiển thị"
         }
       ],
       "approved_at": null

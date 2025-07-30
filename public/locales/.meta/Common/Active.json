@@ -3,7 +3,7 @@
   "content": "Active",
   "content_en_sha1_hash": "a733b809d2f1233496ab516eed0f3ef75cf3791a",
   "created_at": "2025-05-19T21:30:42.902Z",
-  "updated_at": "2025-05-28T09:30:02.380Z",
+  "updated_at": "2025-06-30T12:20:31.307Z",
   "comment": {
     "text": "This translation key is used to display the label \"Active\" in various UI contexts, typically on buttons or labels indicating a user's active status. It appears in the \"Info Panel\" section of the Home page and in the filter menu for contact selection.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 121,
+      "line_number": 125,
       "context": "label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;\n \n case EmployeeStatus.Active:\n default:\n label = t(\"Common:Active\");\n break;\n }\n \n setStatusLabel(label);\n }, [infoPanelSelection.status, t]);",
       "module": "/packages/client"
     },

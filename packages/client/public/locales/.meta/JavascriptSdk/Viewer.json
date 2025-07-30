@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:54.705Z",
-  "updated_at": "2025-07-02T07:49:19.815Z",
+  "updated_at": "2025-06-02T10:20:51.373Z",
   "comment": {
     "text": "The translation key \"Viewer\" is used to display the label for a viewer action or button, typically found in share-related UI elements. It appears in dialogues and interfaces where users can select a sharing permission level, such as \"ReadOnly\" access.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 516,
+      "line_number": 509,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"7-1-5\",\n icon: \"\",\n link: \"viewer\",\n tKey: \"JavascriptSdk:Viewer\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_portal\",\n key: \"7-1-6\",\n icon: \"\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 183,
+      "line_number": 182,
       "context": "},\n {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"JavascriptSdk:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n ];\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 183,
+      "line_number": 182,
       "context": "},\n {\n access: ShareAccessRights.ReadOnly,\n description: t(\"Common:RoleViewerDescription\"),\n key: \"viewing\",\n label: t(\"JavascriptSdk:Viewer\"),\n icon: EyeReactSvgUrl,\n },\n ];\n };",
       "module": "/packages/shared"
     }
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Πρόγραμμα προβολής\" is a possible translation, it's quite literal and a bit clunky for a product name like \"Viewer.\" It conveys \"viewing program\" rather than simply \"viewer.\" A more natural and concise translation might be better.",
-          "suggestion": "Consider alternatives like \"Προβολέας\" (Projector), \"Εμφάνιση\" (Display), or simply retaining the English term 'Viewer' depending on brand strategy and target audience."
+          "description": "While \"Πρόγραμμα προβολής\" is a literal translation, it's not the most natural or idiomatic translation for 'Viewer' in a software/SDK context. 'Viewer' often implies a specific role or function, and 'Πρόγραμμα προβολής' can sound overly formal or technical.",
+          "suggestion": "Consider alternatives like 'Προβολέας' (Provoleas) which is more commonly used in software contexts, or 'Δείτε' (Dite - 'View') if it fits the intended meaning."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Esikatselu' can sometimes refer to a preview, in the context of a Javascript SDK component named 'Viewer', it doesn't accurately convey the meaning of viewing or observing data. It's too generic and suggests a preview function rather than a viewer component.",
-          "suggestion": "Consider alternatives like 'Näkymä' (View), 'Katsoja' (Viewer - more literal), or 'Tarkastelija' (Inspector/Examiner). The best choice will depend on the specific functionality of the component."
+          "description": "While 'Esikatselu' can mean 'preview', it doesn't fully capture the meaning of 'Viewer' in the context of a Javascript SDK. 'Viewer' implies a tool or functionality that allows for *viewing* something, not just a preview.",
+          "suggestion": "Consider alternatives like 'Näkymä', 'Katsoja', or 'Selaimen näyttö'. The best option depends on the specific functionality of the Javascript SDK."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Przeglądarka' can mean 'browser', in the context of a Javascript SDK, 'Viewer' typically refers to a user interface component or a role related to viewing content, not a web browser. A more accurate translation might be 'Widok' or 'Oglądacz'.",
-          "suggestion": "Consider 'Widok' or 'Oglądacz' for a more contextually accurate translation."
+          "description": "While 'Przeglądarka' can mean 'Viewer', it more commonly translates to 'Browser' in Polish. 'Viewer' in the context of a Javascript SDK likely refers to someone who views data or content, not a web browser. A more accurate translation would depend on the specific function of the 'Viewer' in the SDK. Possible alternatives include 'Oglądacz', 'Widz', or a more descriptive phrase.",
+          "suggestion": "Consider 'Oglądacz' or 'Widz', or a more context-specific translation."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"නරඹනය\" (narambaṇaya) translates more closely to 'viewing' or 'watching' rather than 'viewer'. While it's related, it doesn't directly correspond to the English word 'Viewer'.",
-          "suggestion": "Consider \"ප්‍රේක්ෂක\" (prekshaka) which translates to 'spectator' or \"දර්ශක\" (darshaka) which translates to 'viewer' as a more accurate translation."
+          "description": "While \"නරඹනය\" (narambanaya) can mean 'viewing' or 'watching', in the context of a Javascript SDK key name (likely referring to a viewer component or feature), a more accurate and commonly used translation would be something closer to 'දර්ශක' (darshaka) or 'ප්‍රදර්ශනක' (pradarshanaka). \"නරඹනය\" implies an action of watching, not the viewer itself.",
+          "suggestion": "Consider using 'දර්ශක' (darshaka) or 'ප්‍රදර්ශනක' (pradarshanaka) instead."
         }
       ],
       "approved_at": null
@@ -213,13 +213,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Прегледач' can mean 'viewer', it more commonly translates to 'browser'. 'Viewer' in the context of a Javascript SDK likely refers to someone who is viewing content, not using a web browser.",
-          "suggestion": "Consider alternatives like 'Приказивач' (Prikazivač) which more directly translates to 'viewer' in the intended sense, or 'Посматрач' (Posmatrač) which suggests someone observing."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -243,13 +237,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Trình xem' is a possible translation for 'Viewer', it's quite literal and might not be the most natural or contextually appropriate term in a technical setting, particularly in relation to a Javascript SDK. Depending on the SDK's functionality, a more suitable translation might be 'Bộ phận xem' or 'Giao diện xem'.",
-          "suggestion": "Consider alternative translations like 'Bộ phận xem' or 'Giao diện xem' depending on the specific context of the Javascript SDK."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -258,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"仅查看\" while conveying 'view only', doesn't fully capture the nuance of 'Viewer'. 'Viewer' implies a role or capability to view content, whereas \"仅查看\" focuses solely on the action of viewing.",
-          "suggestion": "考虑使用更准确的翻译，例如 \"查看者\" 或 \"阅览者\"，以更好地反映 'Viewer' 的含义。"
+          "description": "The translation \"仅查看\" (jin chao kan) translates to \"View Only\". While functionally similar to 'Viewer,' it lacks the nuance and general applicability of the original English term. 'Viewer' can refer to a role, a process, or a component; \"仅查看\" is more restrictive.",
+          "suggestion": "Consider alternatives such as \"查看者\" (chao kan zhe) which directly translates to 'Viewer' or a more context-specific translation if the exact function is known."
         }
       ],
       "approved_at": null

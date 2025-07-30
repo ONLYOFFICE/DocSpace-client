@@ -3,7 +3,7 @@
   "content": "Embed a file selector to allow users to access any file from the list of the available ones.",
   "content_en_sha1_hash": "ebf79504392ba71c2020434596bead7b73d2608b",
   "created_at": "2025-05-19T21:30:54.503Z",
-  "updated_at": "2025-07-01T15:57:36.189Z",
+  "updated_at": "2025-05-24T09:20:45.168Z",
   "comment": {
     "text": "\"This translation key is used to describe a file selector component, allowing users to access any file from a list of available options. It appears in UI elements such as buttons and dialogues, where it provides context to help users understand the purpose of the file selection functionality.\"",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 312,
+      "line_number": 308,
       "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"FileSelectorDescription\")}\n header={t(\"CreateSampleFileSelector\")}\n >\n <Container>\n <PreviewBlock\n t={t}",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'قم بتضمين محدد الملفات للسماح للمستخدمين بالوصول إلى أي ملف من قائمة الملفات المتاحة' is a literal translation and can be improved for clarity and flow in Arabic. While technically correct, it sounds slightly clunky.",
-          "suggestion": "يمكنك تضمين أداة اختيار ملفات لتمكين المستخدمين من الوصول إلى أي ملف من قائمة الملفات المتاحة."
+          "description": "The translation 'قم بتضمين محدد الملفات للسماح للمستخدمين بالوصول إلى أي ملف من قائمة الملفات المتاحة.' is a literal translation but doesn't flow naturally in Arabic. A more natural phrasing would be more appropriate.",
+          "suggestion": "يمكنك إضافة محدد ملفات لتمكين المستخدمين من الوصول إلى أي ملف من قائمة الملفات المتاحة."
         }
       ],
       "approved_at": null
@@ -54,13 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Вградете селектор на файлове, за да позволите на потребителите да имат достъп до всеки файл от списъка с наличните' is a bit wordy and indirect. A more natural translation would convey the meaning more concisely.",
-          "suggestion": "Вградете селектор на файлове, за да могат потребителите да имат достъп до всеки от наличните файлове."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'да имат достъп' is grammatically correct but could be improved for flow and naturalness.",
-          "suggestion": "да получат достъп"
+          "description": "The translation \"Вградете селектор на файлове, за да позволите на потребителите да имат достъп до всеки файл от списъка с наличните\" is slightly verbose and not as concise as the English original.  'Имат достъп' (have access) is a bit awkward. A more natural phrasing would convey the meaning of 'allow users to access'.",
+          "suggestion": "Вградете селектор на файлове, за да позволите на потребителите да имат достъп до всеки файл от наличния списък."
         }
       ],
       "approved_at": null
@@ -71,13 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vložte selektor souborů' (Insert file selector) is too literal and doesn't quite capture the meaning of 'Embed'. A more natural phrasing would be 'Implementujte selektor souborů' or 'Zahrňte selektor souborů'.",
-          "suggestion": "Implementujte selektor souborů"
+          "description": "The translation 'Vložte selektor souborů' (Insert a file selector) is somewhat literal. A more natural phrasing would be 'Přidejte selektor souborů' (Add a file selector) or 'Implementujte selektor souborů' (Implement a file selector).",
+          "suggestion": "Přidejte selektor souborů"
         },
         {
           "type": "incorrect_translation",
-          "description": "While grammatically correct, 'který uživatelům umožní přístup k libovolnému souboru ze seznamu dostupných souborů' is a bit wordy. The phrase 'libovolnému souboru ze seznamu dostupných souborů' could be simplified.",
-          "suggestion": "který uživatelům umožní přístup k jakémukoli souboru ze seznamu."
+          "description": "The phrasing 'libovolnému souboru' (any file) is grammatically correct but could be slightly improved for clarity and flow. While not strictly incorrect, a more natural option exists.",
+          "suggestion": "jakémukoliv souboru"
         }
       ],
       "approved_at": null
@@ -88,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Betten Sie eine Dateiauswahl ein' is too literal and sounds unnatural in German. 'Einbetten' (embed) is often used in technical contexts, but a more natural phrasing would be 'Integrieren Sie eine Dateiauswahl...' or 'Fügen Sie eine Dateiauswahl hinzu...'",
-          "suggestion": "Integrieren Sie eine Dateiauswahl, um Benutzern den Zugriff auf jede Datei aus der Liste der verfügbaren Dateien zu ermöglichen."
+          "description": "The translation 'Betten Sie eine Dateiauswahl ein...' is overly formal and literal. A more natural phrasing would be something like 'Fügen Sie eine Dateiauswahl hinzu...' or 'Integrieren Sie eine Dateiauswahl...'",
+          "suggestion": "Fügen Sie eine Dateiauswahl hinzu, um Benutzern den Zugriff auf jede Datei aus der Liste der verfügbaren Dateien zu ermöglichen."
         },
         {
-          "type": "grammar",
-          "description": "While not strictly incorrect, the phrase 'jede Datei aus der Liste der verfügbaren Dateien' is a bit verbose. It can be shortened for better flow.",
-          "suggestion": "jede Datei aus der Liste zu ermöglichen."
+          "type": "spelling",
+          "description": "While 'Dateiauswahl' is correct, the repetition of 'Datei' could be improved for readability.",
+          "suggestion": "Fügen Sie eine Dateiauswahl hinzu, um Benutzern den Zugriff auf alle Dateien aus der Liste der verfügbaren Dateien zu ermöglichen."
         }
       ],
       "approved_at": null
@@ -102,19 +97,19 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ενσωματώστε έναν επιλογέα αρχείων για να επιτρέψετε στους χρήστες να έχουν πρόσβαση σε οποιοδήποτε αρχείο από τη λίστα των διαθέσιμων' is a bit literal and could be improved for natural flow in Greek. While technically correct, it doesn't read as elegantly.",
-          "suggestion": "Δώστε τη δυνατότητα στους χρήστες να επιλέγουν αρχεία από τη διαθέσιμη λίστα."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Incruste un selector de archivos para permitir a los usuarios acceder a cualquier archivo de la lista de disponibles' is a bit literal and could be improved for naturalness in Spanish.  'Embed' can have multiple nuances, and a more natural phrasing might be 'Incluya' or 'Añada' depending on the context.",
+          "suggestion": "Incluya un selector de archivos para permitir a los usuarios acceder a cualquier archivo de la lista disponible."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -123,18 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Upota tiedoston valitsija salliaksesi käyttäjien käyttää mitä tahansa tiedostoa käytettävissä olevien tiedostojen luettelosta\" is a very literal translation and sounds unnatural in Finnish. It's overly verbose and doesn't convey the intended meaning as smoothly.",
-          "suggestion": "Anna käyttäjien valita tiedosto käytettävissä olevasta listasta."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'mitä tahansa tiedostoa' (any file) is not the most natural wording. It can be shortened and simplified.",
-          "suggestion": "Any file can be replaced with a more concise phrasing, or simply omitted if the context makes it clear."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The repetition of 'tiedostojen' (files) makes the sentence clunky. It’s not necessary to repeat 'tiedostojen' after 'luettelosta'.",
-          "suggestion": "Remove the second instance of 'tiedostojen' for better flow."
+          "description": "The translation 'Upota tiedoston valitsija salliaksesi käyttäjien käyttää mitä tahansa tiedostoa käytettävissä olevien tiedostojen luettelosta' is a literal translation and sounds awkward in Finnish.  A more natural phrasing would be something like 'Lisää tiedostonvalitsin, jotta käyttäjät voivat valita minkä tahansa tiedoston käytettävissä olevasta listasta'.",
+          "suggestion": "Lisää tiedostonvalitsin, jotta käyttäjät voivat valita minkä tahansa tiedoston käytettävissä olevasta listasta."
         }
       ],
       "approved_at": null
@@ -142,7 +127,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Intégrez le sélecteur de fichiers pour permettre aux utilisateurs d'accéder à tout fichier à partir de la liste des fichiers disponibles' is somewhat literal and not as fluent as it could be. While technically correct, 'embed' implies more than just 'integrate'. The wording is a bit clunky.",
+          "suggestion": "Incorporez un sélecteur de fichiers pour permettre aux utilisateurs d'accéder à n'importe quel fichier de la liste disponible."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -151,13 +142,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"մուտք գործել\" (mut’k gor’el) is a bit formal and indirect for this context. A more natural phrasing would be \"մուտքագրել\" (mut’k agrell) or simply \"բացել\" (bac’el).",
-          "suggestion": "Replace \"մուտք գործել\" with \"մուտքագրել\" or \"բացել\"."
+          "description": "The phrase \"մուտք գործել\" (mut'k gor'el) is a bit formal and clunky in this context. A more natural phrasing would be \"ստանել\" (stanel) or \"տեսնել\" (tesnel).",
+          "suggestion": "Ներդրեք ֆայլերի ընտրիչ, որպեսզի օգտվողները կարողանան ստանել ցանկացած ֆայլ առկաների ցանկից:"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"առկաների\" (arkeneri) implies 'existing' or 'available', but a more appropriate term to convey 'list of available files' would be \"պահվողների ցանկից\" (pahvogneri ts’ank’ic’).",
-          "suggestion": "Replace \"առկաների ցանկից\" with \"պահվողների ցանկից\"."
+          "description": "While \"առկաների ցանկից\" (arkyaneri tsankits) technically translates to 'list of available ones', it's a bit stiff. A more fluent and understandable translation would be 'պահվողների ցանկից' (pahvogneri tsankits) meaning 'list of saved ones'.",
+          "suggestion": "Ներդրեք ֆայլերի ընտրիչ, որպեսզի օգտվողները կարողանան ստանել ցանկացած ֆայլ պահվողների ցանկից:"
         }
       ],
       "approved_at": null
@@ -165,13 +156,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Incorpora' (Incorpora) while technically correct, is a bit formal and doesn't perfectly convey the sense of 'Embed'. A more natural phrasing would be 'Aggiungi' (Add) or 'Integra' (Integrate).",
-          "suggestion": "Aggiungi un selettore di file per consentire agli utenti di accedere a qualsiasi file dall'elenco di quelli disponibili."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -179,9 +164,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Japanese translation ends with a direct verb '埋め込みます' (umekomimasu). While grammatically correct, it's more natural to add a particle or rephrase to soften the command, especially in user interface instructions. A particle like 'を' after 'ファイルセレクタ' would improve flow.",
-          "suggestion": "ユーザーが利用可能なファイルのリストから任意のファイルにアクセスできるように、ファイルセレクタを埋め込みますを配置します。"
+          "type": "spelling",
+          "description": "The term '埋め込みます' (umekomimasu) while technically correct, is a more formal and slightly stiff way to express 'embed'. A more natural and user-friendly phrasing would be preferable.",
+          "suggestion": "ファイルセレクタを表示します (Fairu seerekuuta o hyōji shimasu) - 'Display a file selector'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, '任意のファイル' (onna yō na fairu) is a bit too formal for a user-facing description. It translates literally to 'arbitrary file' which isn't the best wording.",
+          "suggestion": "好きなファイル (suki na fairu) - 'favorite file' or 'desired file' would be more approachable."
         }
       ],
       "approved_at": null
@@ -192,13 +182,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '파일 선택기를 임베드하세요' (File selector-eul imbedhaseyo) is a literal translation of 'Embed a file selector' which, while technically correct, sounds awkward in Korean. A more natural phrasing would convey the purpose of embedding the file selector.",
-          "suggestion": "사용자가 이용 가능한 파일 목록에서 파일을 선택할 수 있는 기능을 구현하세요."
+          "description": "The phrase '파일 선택기를 임베드하세요' (file selector-eul imbedhaseyo) is a literal translation of 'Embed a file selector'. While understandable, a more natural and idiomatic Korean phrasing would be preferable. It sounds slightly unnatural in this context.",
+          "suggestion": "사용자가 이용 가능한 파일 목록에서 파일을 선택할 수 있는 기능을 추가하세요."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase '모든 파일에 액세스할 수 있도록' (modoen file-e accesshal su itdorok) is a bit strong. It implies unrestricted access to all files. A more accurate translation should reflect that the user can access 'available' files.",
-          "suggestion": "이용 가능한 파일 목록에서 파일을 선택할 수 있도록"
+          "type": "formatting",
+          "description": "The passive voice ('...할 수 있도록') feels slightly awkward in Korean for this context. While technically correct, a more active voice would improve readability.",
+          "suggestion": "사용자가 이용 가능한 파일 목록에서 파일을 선택할 수 있는 기능을 추가하세요."
         }
       ],
       "approved_at": null
@@ -209,8 +199,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ບັນຊີລາຍຊື່' (ban-see-lai-see) is a bit formal and lengthy. While technically correct, it might be more natural to use a simpler term.",
-          "suggestion": "ບັນຊີລາຍການໄຟລ໌ (ban-see-lai-gaan file) or ລາຍການໄຟລ໌ (lai-gaan file)"
+          "description": "The word 'ບັນຊີລາຍຊື່' (bansi laisue) is a bit formal for this context. While technically correct, it might sound clunky.",
+          "suggestion": "ບັນຊີລາຍການໄຟລ໌ (bansi laiykan file) or just ລາຍການໄຟລ໌ (laiyan file)"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrasing 'ໄຟລ໌ໃດໆ' (file dai dai) is grammatically correct but can be improved for a more natural flow. While 'ໃດໆ' conveys 'any', it can sound slightly rigid.",
+          "suggestion": "ໄຟລ໌ທຸກລຸ້ນ (file thuk lun) - meaning 'all files' or ໄຟລ໌ທັງໝົດ (file thang mot) - meaning 'all files'"
         }
       ],
       "approved_at": null
@@ -218,7 +213,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ieguliet failu atlasītāju, lai ļautu lietotājiem piekļūt jebkuram failam no pieejamo failu saraksta.' while understandable, is a bit wordy and not the most natural-sounding Latvian. A more concise and idiomatic translation would improve the flow.",
+          "suggestion": "Ieguliet failu atlasītāju, lai lietotāji varētu piekļūt jebkuram failam no pieejamā failu saraksta."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -227,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'access any file' is translated as 'een willekeurig bestand kunnen openen' (can open a random file). While not strictly incorrect, 'toegang krijgen tot' (to gain access to) would be a more precise and accurate translation of 'access'.",
-          "suggestion": "Integreer bestand selectie zodat gebruikers toegang kunnen krijgen tot elk bestand uit de lijst met beschikbare bestanden."
+          "description": "The translation \"Integreer bestand selectie zodat gebruikers een willekeurig bestand uit de lijst met beschikbare bestanden kunnen openen\" is not a direct and accurate translation of \"Embed a file selector to allow users to access any file from the list of the available ones\". \"Embed\" implies more than just allowing access; it suggests including it within something else. \"Openen\" (open) doesn't convey the same nuance as 'access'.",
+          "suggestion": "Integreer een bestand selectie functie, zodat gebruikers toegang hebben tot elk bestand uit de lijst met beschikbare bestanden."
         }
       ],
       "approved_at": null
@@ -236,13 +237,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Osadź selektor plików, aby umożliwić użytkownikom dostęp do dowolnego pliku z listy dostępnych' is a bit literal and could be improved for naturalness. While technically correct, it's not the most idiomatic way to phrase it in Polish.  'Osadź' (embed) is accurate, but the rest could be more fluid.",
-          "suggestion": "Zintegruj selektor plików, aby użytkownicy mogli łatwo wybrać dowolny plik z dostępnej listy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -254,7 +249,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Incorpore um seletor de arquivos para permitir que os usuários acessem qualquer arquivo da lista de arquivos disponíveis.\" is a bit literal. A more natural phrasing in Portuguese would be \"Adicione um seletor de arquivos para permitir que os usuários acessem qualquer arquivo da lista disponível.\" or \"Inclua um seletor de arquivos para permitir que os usuários acessem qualquer arquivo da lista disponível.\"",
+          "suggestion": "Adicione um seletor de arquivos para permitir que os usuários acessem qualquer arquivo da lista disponível."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -269,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Встроить селектор файлов, чтобы пользователи могли получить доступ к любому файлу из списка доступных.\" is a bit literal and could be improved for flow and naturalness in Russian. 'Получить доступ' is correct but sounds slightly formal. A more natural phrasing would be 'чтобы пользователи могли выбрать любой файл из списка'.",
-          "suggestion": "Встроить селектор файлов, чтобы пользователи могли выбрать любой файл из списка доступных."
+          "description": "The translation \"Встроить селектор файлов, чтобы пользователи могли получить доступ к любому файлу из списка доступных.\" is a bit literal and slightly awkward. A more natural phrasing would focus on the *ability* to select files.",
+          "suggestion": "Предоставить селектор файлов, чтобы пользователи могли выбирать любые файлы из списка."
         }
       ],
       "approved_at": null
@@ -281,13 +282,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තිබෙන ගොනු ලැයිස්තුවේ ඕනෑම ගොනුවක් වෙත ප්‍රවේශය සඳහා පරිශ්‍රීලකයින්ට ඉඩ දීමට' is a rather literal and slightly awkward translation of 'to allow users to access any file from the list of the available ones'. It doesn't flow naturally in Sinhala.",
-          "suggestion": "පවතින ගොනු ලැයිස්තුවෙන් ගොනුවක් තෝරා ගැනීමට පරිශ්‍රමිකයින්ට හැකි වන පරිදි ගොනු තෝරනයක් ස්ථාපනය කරන්න."
+          "description": "The translation 'තිබෙන ගොනු ලැයිස්තුවේ ඕනෑම ගොනුවක් වෙත ප්‍රවේශය සඳහා පරිශ්‍රීලකයින්ට ඉඩ දීමට' is not a natural or accurate rendering of 'Embed a file selector to allow users to access any file from the list of the available ones.'. It's a bit wordy and doesn't capture the 'embed' aspect.",
+          "suggestion": "පරිශීලකයින්ට ලබාගත් ගොනු ලැයිස්තුවෙන් ඕනෑම ගොනුවක් තෝරාගැනීමට හැකි වන පරිදි ගොනු තෝරණයක් ඇතුළත් කරන්න."
         },
         {
-          "type": "formatting",
-          "description": "The term 'ගොනු තෝරනය' is used multiple times. While technically correct, it can be slightly repetitive. Consider using a shorter, more idiomatic term for 'file selector' where possible in longer texts.",
-          "suggestion": "Explore using a more common Sinhala term for 'file selector' if context allows for conciseness. A search for existing Sinhala IT terminology might be helpful."
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්ට' is likely a misspelling. It should be 'පරිශීලකයින්ට'.",
+          "suggestion": "පරිශීලකයින්ට"
         }
       ],
       "approved_at": null
@@ -304,18 +305,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vdelajte izbiranje datotek' isn't the most natural or precise way to express 'Embed a file selector'. A more accurate phrasing would convey the action of integrating or including the file selector.",
-          "suggestion": "Integrirajte izbirnik datotek"
+          "description": "The translation \"Vdelajte izbiranje datotek, da uporabnikom omogočite dostop do katere koli datoteke iz seznama razpoložljivih.\" is a bit literal and could be more natural. 'Vdelajte' implies embedding in a more technical sense. A more user-friendly phrasing would be better.",
+          "suggestion": "Omogočite izbiro datotek, da uporabnikom omogočite dostop do katere koli datoteke iz razpoložljivega seznama."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'izbiranje datotek' is technically correct, it can be improved to be more idiomatic. 'Izbirnik datotek' is a more common and concise term for 'file selector'.",
-          "suggestion": "Use 'izbirnik datotek' instead of 'izbiranje datotek'"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'razpoložljivih' is grammatically correct, but 'na voljo' sounds more natural and is commonly used in similar contexts.",
-          "suggestion": "Replace 'razpoložljivih' with 'na voljo'"
+          "type": "formatting",
+          "description": "The phrase 'razpoložljivih' is a bit clunky.  While grammatically correct, a slight change improves flow.",
+          "suggestion": "razpoložljivega seznama"
         }
       ],
       "approved_at": null
@@ -326,18 +322,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Уградите селектор датотека\" doesn't accurately convey \"Embed a file selector.\" \"Уградите\" implies installation or integration, while \"Embed\" suggests placing something within a larger context. A more accurate translation would be something like \"Унесите селектор датотека\" or \"Поставите селектор датотека\".",
-          "suggestion": "Унесите селектор датотека / Поставите селектор датотека"
+          "description": "The translation \"Уградите селектор датотека\" is not the most natural way to express \"Embed a file selector.\" A more accurate translation would be something like \"Уметните селектор датотека\" or \"Додајте селектор датотека\".  \"Уградите\" implies embedding something into something else.",
+          "suggestion": "Уметните селектор датотека"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrasing \"да бисте корисницима омогуц́или приступ било којој датотеци са листе доступних\" is a bit clunky.  While grammatically correct, it's not the most natural way to express 'to allow users to access any file from the list of the available ones.'",
-          "suggestion": "да бисте омогуц́или корисницима да приступе било којој датотеци са листе доступних."
+          "description": "The word 'omogućili' is grammatically correct but slightly formal for this context. A more conversational and common way to express \"to allow\" would be 'moglo da pristupi'.",
+          "suggestion": "moglo da pristupi"
         },
         {
-          "type": "spelling",
-          "description": "While likely a transcription error due to Cyrillic alphabet limitations, \"омогуц́или\" could potentially be a misspelling of \"омогућили\".",
-          "suggestion": "омогућили"
+          "type": "incorrect_translation",
+          "description": "The phrasing 'било којој датотеци' is correct but could be slightly improved for clarity. While technically correct, it's a bit stiff.",
+          "suggestion": "ба било којој датотеци"
         }
       ],
       "approved_at": null
@@ -348,13 +344,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ugradite selektor datoteka da biste korisnicima omogućili pristup bilo kojoj datoteci sa liste dostupnih' is a bit literal and doesn't quite capture the meaning of 'Embed'. A better translation would convey the idea of integrating or including the file selector.",
-          "suggestion": "Integrišite selektor datoteka da biste korisnicima omogućili pristup bilo kojoj datoteci sa liste dostupnih."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'omogućili' has an unusual character. It should be 'omogućili'.",
-          "suggestion": "Integrišite selektor datoteka da biste korisnicima omogućili pristup bilo kojoj datoteci sa liste dostupnih."
+          "description": "The translation 'Ugradite selektor datoteka da biste korisnicima omogućili pristup bilo kojoj datoteci sa liste dostupnih' is a bit literal and doesn't quite capture the nuance of 'Embed a file selector'. 'Ugradite' implies installation, while 'embed' suggests integration. A more natural translation would be something along the lines of 'Integrirajte selektor datoteka...'",
+          "suggestion": "Integrirajte selektor datoteka da biste korisnicima omogućili pristup bilo kojoj datoteci sa liste dostupnih."
         }
       ],
       "approved_at": null
@@ -365,13 +356,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'bir dosya seçici yerleştirin' is too literal and doesn't fully capture the meaning of 'Embed a file selector'. It implies physically placing something, rather than integrating a selector.",
-          "suggestion": "Bir dosya seçici entegre edin veya Kullanıcıların mevcut dosya listesinden dosya seçmelerini sağlayan bir araç ekleyin."
-        },
-        {
-          "type": "grammatical",
-          "description": "The phrase 'mevcut dosyalar listesinden herhangi bir dosyaya erişmesine izin vermek' is a bit clunky. It can be made more fluid.",
-          "suggestion": "Kullanıcıların mevcut dosya listesinden dosya seçebilmelerini sağlayın."
+          "description": "The translation 'Kullanıcıların mevcut dosyalar listesinden herhangi bir dosyaya erişmesine izin vermek için bir dosya seçici yerleştirin.' is a literal translation but could be improved for clarity and natural flow in Turkish. While technically correct, it sounds somewhat clunky.",
+          "suggestion": "Kullanıcıların erişebileceği dosya listesinden dosya seçmelerini sağlamak için bir dosya seçici ekleyin."
         }
       ],
       "approved_at": null
@@ -382,8 +368,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Вбудуйте засіб вибору файлів, щоб надати користувачам доступ до будь-якого файлу зі списку доступних\" is a bit literal and sounds slightly awkward in Ukrainian. A more natural phrasing would be to emphasize enabling the user to choose.",
-          "suggestion": "Додайте компонент вибору файлів, щоб користувачі могли обирати будь-який файл зі списку."
+          "description": "The translation 'Вбудуйте засіб вибору файлів, щоб надати користувачам доступ до будь-якого файлу зі списку доступних' is a bit literal and less natural in Ukrainian. A more fluent translation would emphasize the purpose of the file selector.",
+          "suggestion": "Розмістіть компонент вибору файлів, щоб користувачі могли легко обирати файли зі списку."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'доступних' is grammatically correct, but 'зі списку' is a little clunky. It implies a static list which might not always be the case.",
+          "suggestion": "Розмістіть компонент вибору файлів, щоб користувачі могли легко обирати файли зі списку."
         }
       ],
       "approved_at": null
@@ -391,18 +382,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"any file\" is a bit too literal. A more natural and idiomatic translation would be \"bất kỳ file nào\" or simply \"các file\".",
-          "suggestion": "Nhúng trình chọn tập tin để cho phép người dùng truy cập các file từ danh sách các tập tin có sẵn."
-        },
-        {
-          "type": "redundancy",
-          "description": "The phrase 'các tập tin có sẵn' is repeated. It makes the translation slightly clunky.",
-          "suggestion": "Nhúng trình chọn tập tin để cho phép người dùng truy cập các file có sẵn."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -411,8 +391,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"让用户能够访问允许列表中的文件\" isn't the best representation of \"allow users to access any file from the list of the available ones.\"  '允许列表' (allowed list) implies a pre-approved list, while the English suggests the user can access *any* available file.",
-          "suggestion": "嵌入文件选择器，允许用户访问可用的文件。"
+          "description": "The translation '让用户能够访问允许列表中的文件' is a bit literal and doesn't fully capture the intended meaning of 'allow users to access any file from the list of the available ones'. It implies a pre-approved or permitted list, rather than all available files.",
+          "suggestion": "嵌入文件选择器，以便用户可以访问可用的文件列表。"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase '让用户能够' can be slightly improved for conciseness.",
+          "suggestion": "让用户可以"
         }
       ],
       "approved_at": null

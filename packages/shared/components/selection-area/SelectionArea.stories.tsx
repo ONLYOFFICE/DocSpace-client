@@ -1,40 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
-import { Meta, Story } from "@storybook/react";
-import styled from "styled-components";
+import { Meta, StoryFn } from "@storybook/react";
 import { SelectionArea } from "./SelectionArea";
 import { SelectionAreaProps } from "./SelectionArea.types";
-
-const Container = styled.div`
-  width: 800px;
-  height: 600px;
-  position: relative;
-  padding: 20px;
-  overflow: auto;
-`;
-
-const ItemsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  padding: 16px;
-`;
-
-const Item = styled.div`
-  width: 150px;
-  height: 150px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  &.selected {
-    background-color: #e3f2fd;
-    border-color: #2196f3;
-  }
-`;
+import styles from "./SelectionArea.stories.module.scss";
 
 export default {
   title: "Layout components/SelectionArea",
@@ -49,14 +18,14 @@ export default {
   },
   decorators: [
     (S) => (
-      <Container>
+      <div id="sectionScroll" className={styles.container}>
         <S />
-      </Container>
+      </div>
     ),
   ],
 } as Meta;
 
-const Template: Story<SelectionAreaProps> = (args) => {
+const Template: StoryFn<SelectionAreaProps> = (args) => {
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
 
   const handleMove = ({
@@ -88,28 +57,25 @@ const Template: Story<SelectionAreaProps> = (args) => {
   };
 
   return (
-    <>
-      {" "}
-      <ItemsContainer className="items-container">
-        {Array.from({ length: 12 }).map((_, index) => (
-          <Item
-            key={`${index}test`}
-            data-id={`item-${index}`}
-            className={`selectable-item ${selectedItems.includes(`item-${index}`) ? "selected" : ""}`}
-          >
-            Item {index + 1}
-          </Item>
-        ))}
-        <SelectionArea
-          {...args}
-          onMove={handleMove}
-          containerClass="selection-container"
-          itemsContainerClass="items-container"
-          selectableClass="selectable-item"
-          scrollClass="scroll-container"
-        />
-      </ItemsContainer>
-    </>
+    <div className={`${styles.itemsContainer} items-container`}>
+      {Array.from({ length: 12 }).map((_, index) => (
+        <div
+          key={`${index}test`}
+          data-id={`item-${index}`}
+          className={`${styles.item} selectable-item ${selectedItems.includes(`item-${index}`) ? "selected" : ""}`}
+        >
+          Item {index + 1}
+        </div>
+      ))}
+      <SelectionArea
+        {...args}
+        onMove={handleMove}
+        containerClass="selection-container"
+        itemsContainerClass="items-container"
+        selectableClass="selectable-item"
+        scrollClass="scroll-container"
+      />
+    </div>
   );
 };
 

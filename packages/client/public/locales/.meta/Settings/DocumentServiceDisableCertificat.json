@@ -3,7 +3,7 @@
   "content": "Disable certificate verification (insecure)",
   "content_en_sha1_hash": "3b6c75c57f9e4bd00424d14d59eb15255dc55259",
   "created_at": "2025-05-19T21:30:51.361Z",
-  "updated_at": "2025-05-28T09:30:02.627Z",
+  "updated_at": "2025-05-26T07:57:32.687Z",
   "comment": {
     "text": "This translation key is used for a checkbox label that enables or disables certificate verification in the DocumentService settings. It appears as a label on a checkbox within a UI component. Translators should provide an equivalent phrase indicating that certificate verification is insecure.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sertifikat doğrulamasını deaktiv edin (təhlükəsiz deyil)\" is technically correct but could be improved for naturalness. 'Təhlükəsiz deyil' is a literal translation of 'insecure' and a more idiomatic phrase would be better.",
-          "suggestion": "Sertifikat yoxlanmasını bağlayın (riskli)"
+          "description": "The translation 'Sertifikat doğrulamasını deaktiv edin (təhlükəsiz deyil)' is a literal translation and could be improved for natural flow. 'Təhlükəsiz deyil' is a bit clunky. A better phrasing would convey the same meaning in a more idiomatic way.",
+          "suggestion": "Sertifikat yoxlanmasını bağlayın (təhlükəli)"
         }
       ],
       "approved_at": null
@@ -78,13 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ota varmenteen vahvistus (epävarma) pois käytöstä\" is a literal translation of 'Disable certificate verification (insecure)' but sounds unnatural in Finnish.  A more natural and idiomatic translation would be something along the lines of 'Poista varmenteiden tarkistus käytöstä (turvaton)'.",
-          "suggestion": "Poista varmenteiden tarkistus käytöstä (turvaton)"
+          "description": "The phrase 'Ota ... pois käytöstä' literally translates to 'Enable... out of use', which is the opposite of 'Disable'.  The correct translation should convey 'Disable'.",
+          "suggestion": "Poista varmenteen vahvistus käytöstä (epävarma)"
         },
         {
           "type": "formatting",
-          "description": "The parenthesis around 'epävarma' are unnecessary and break the flow of the sentence. In the suggested correction, the parenthetical explanation is integrated into the phrasing, 'turvaton'.",
-          "suggestion": "Remove the parentheses from the original translation or the suggested correction if it isn't incorporated into the phrase."
+          "description": "The parenthesis around 'epävarma' feel slightly awkward in Finnish. It's more natural to integrate it within the sentence.",
+          "suggestion": "Poista varmenteen vahvistus käytöstä (epävarmasti)"
         }
       ],
       "approved_at": null
@@ -113,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"メール認証を無効にする\" (meeru shoukai o mukyou ni suru) translates to \"Disable email authentication\". The English content refers to disabling certificate verification, which is a different concept. The translation doesn't convey the intended meaning.",
-          "suggestion": "証明書検証を無効にする (shoumeisho kenshou o mukyou ni suru) - This translates to 'Disable certificate verification'."
+          "description": "The Japanese translation \"メール認証を無効にする\" (meeru shounyuu o mukyou ni suru) translates to 'Disable email authentication'. The English content refers to disabling certificate verification, which is a different concept. The translation does not accurately convey the intended meaning.",
+          "suggestion": "A more accurate translation would be something like \"証明書の検証を無効にする\" (shoumeishou no kenshou o mukyou ni suru) or \"証明書検証を無効にする\" (shoumeishou kenshou o mukyou ni suru)."
         }
       ],
       "approved_at": null
@@ -125,13 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"인증서 인증 비활성화(안전하지 않습니다)\" is technically correct, but could be improved for clarity and naturalness. '인증' is used twice, which can be redundant.  A more natural phrasing would avoid repetition.",
-          "suggestion": "인증서 확인 비활성화(안전하지 않습니다)"
+          "description": "The translation '인증서 인증 비활성화(안전하지 않습니다)' is a bit verbose and literal. A more natural Korean translation would be '인증서 검증 해제 (불안전)' or '인증서 확인 중지 (보안되지 않음)'.",
+          "suggestion": "인증서 검증 해제 (불안전)"
         },
         {
           "type": "formatting",
-          "description": "The parenthesis placement could be improved for better readability.  While technically correct, it is not the most common way to format such a message.",
-          "suggestion": "인증서 확인을 비활성화합니다(안전하지 않습니다)"
+          "description": "The parenthesis around '안전하지 않습니다' is not as common in Korean technical interfaces.  The suggested revision improves readability in that context.",
+          "suggestion": "Use parentheses less frequently; prioritize concise phrasing."
         }
       ],
       "approved_at": null
@@ -139,33 +139,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ປິດ' (pit) is correctly spelled.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ການກວດກາ' (kaan gwat ga) is correctly spelled.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ໃບຢັ້ງຢືນ' (lai yang yang yuun) is correctly spelled.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ບໍ່ປອດໄພ' (bor bpor sai) is correctly spelled.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, the translation 'ປິດການກວດກາໃບຢັ້ງຢືນ (ບໍ່ປອດໄພ)' is a very literal translation and may not convey the nuance of 'Disable certificate verification (insecure)' effectively. A more natural or idiomatic Lao translation might be preferable.",
-          "suggestion": "Consider alternatives like 'ຢັ້ງຢືນບໍ່ໃຊ້ (ບໍ່ປອດໄພ)' or 'ເຊື່ອຖືໃບຢັ້ງຢືນแบบไม่ปลอดภัย' depending on the desired level of formality and target audience."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -216,8 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආරක්ෂාව නැත\" (aaraksawa nathe) literally translates to 'security is not there' which is an awkward phrasing. A more natural translation for 'insecure' in this context would be something like 'අනතුරු ඇත්තේ' (anadaru athte) - meaning 'there is danger' or 'vulnerable'.",
-          "suggestion": "පහත්පත්ර සත්‍යාපනය අක්‍රීය කරන්න (අනතුරු ඇත්තේ) / පහත්පත්ර සත්‍යාපනය අක්‍රීය කරන්න (ආතතියක් විය හැක)"
+          "description": "The translation \"පහත්පත්ර සත්‍යාපනය අක්‍රීය කරන්න (ආරක්ෂාව නැත)\" isn't the most natural or precise translation of \"Disable certificate verification (insecure)\". 'පහත්පත්ර' literally translates to 'certificate' but in this context, a more suitable term might be something closer to 'digital signature verification'. 'ආරක්ෂාව නැත' is a literal translation of 'insecure' but could be phrased more gracefully.",
+          "suggestion": "Consider alternatives like \"ඩිජිටල් අත්සන්‍ය සත්‍යාපනය අක්‍රීය කරන්න (අනතුරුදායක)\" or \"සත්‍යාපන ක්‍රියාවලිය අක්‍රීය කරන්න (ආරක්ෂිතභාවය අඩු)\""
+        },
+        {
+          "type": "formatting",
+          "description": "The parentheses are not consistently formatted. While technically correct, matching the English structure (using parentheses around the clarifying term) improves readability.",
+          "suggestion": "Ensure consistent use of parentheses. For example, if the first part of the translation includes parentheses, the second part should also."
         }
       ],
       "approved_at": null
@@ -246,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Onemogući verifikaciju sertifikata (nebezbedno)' is a technically correct translation, but 'nebezbedno' (unsafe) is a slightly less precise and less commonly used phrasing in this context. A more natural and accurate translation for 'insecure' in this context would be 'poverljivo' or 'nepouzdan'.",
-          "suggestion": "Onemogući verifikaciju sertifikata (poverljivo)"
+          "description": "The translation 'Onemogući verifikaciju sertifikata (nebezbedno)' while conveying the general meaning, could be improved for better clarity and natural flow in Serbian. \"Onemogući\" can sound a bit formal in this context. A more approachable alternative would be 'Isključi'. \"Nebezbedno\" is accurate but could be phrased as 'prikazuje sigurnosne rizike' or 'prikazuje potencijalne rizike' to better reflect the meaning of 'insecure'.",
+          "suggestion": "Isključi verifikaciju sertifikata (prikazuje sigurnosne rizike)"
         }
       ],
       "approved_at": null
@@ -258,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sertifika doğrulamasını devre dışı bırak (güvenli değil)' is a literal translation but could be improved for clarity and naturalness in Turkish. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Sertifika doğrulamasını kapat (riskli)"
+          "description": "The English phrase 'insecure' is not perfectly conveyed by 'güvenli değil'. While literally 'not secure', 'insecure' often implies a specific technical state. A more natural translation for this context would be 'risksiz' or 'daha az güvenli' (less secure). 'Güvenli değil' is a bit too literal and sounds slightly awkward.",
+          "suggestion": "Sertifika doğrulamasını devre dışı bırak (risksiz) or Sertifika doğrulamasını devre dışı bırak (daha az güvenli)"
         }
       ],
       "approved_at": null

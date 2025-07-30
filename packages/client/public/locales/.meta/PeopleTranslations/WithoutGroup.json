@@ -3,7 +3,7 @@
   "content": "Without group",
   "content_en_sha1_hash": "dc36e9d839743af09b6557e23bb0d67592f68ae5",
   "created_at": "2025-05-19T21:30:53.534Z",
-  "updated_at": "2025-05-28T09:30:02.469Z",
+  "updated_at": "2025-05-26T07:57:32.462Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Without group\" in a filter or dropdown list, likely within a contact filtering system. It appears on a filter option button or dialog, where it enables users to select contacts without any group affiliation.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation \"සමූහයක් නැතිව\" literally translates to \"without a group.\" While not entirely wrong, it's slightly awkward and less natural than other options. A more idiomatic translation might be \"විෂමතාවයකින්\" (Vishama thawakakin) or similar, depending on the precise intended meaning within the larger context.",
+          "suggestion": "Consider alternatives like \"විෂමතාවයකින්\" or a phrase that more naturally conveys 'without group' in Sinhala, based on context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Без групе\" is a literal translation of 'without group' but doesn't convey the intended meaning in Serbian. A more natural and accurate translation would be 'Без члана групе' or 'Изван групе'.",
-          "suggestion": "Изван групе"
+          "description": "The Serbian translation \"Без групе\" is a literal translation of 'Without group', but the more idiomatic and accurate translation for this context would be \"Без група\" (plural of group).",
+          "suggestion": "Без група"
         }
       ],
       "approved_at": null

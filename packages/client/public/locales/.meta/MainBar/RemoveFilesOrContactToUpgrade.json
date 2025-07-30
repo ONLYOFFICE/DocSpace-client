@@ -3,7 +3,7 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "9fd6bb65f7678c7fb00eb2a9266bacc48fe55e5b",
   "created_at": "2025-05-19T21:30:54.119Z",
-  "updated_at": "2025-07-01T15:57:35.913Z",
+  "updated_at": "2025-05-24T08:02:51.354Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to remove unnecessary files or contact an administrator to upgrade their tariff plan. It appears in a quota management interface and informs users of available options to modify their plans.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
       "line_number": 56,
-      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"TenantCustomQuotaDescription\"",
+      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans i18nKey=\"TenantCustomQuotaDescription\" t={t}>\n You can remove the unnecessary files or change quota in the\n <Link",
       "module": "/packages/client"
     }
   ],
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Arabic translation uses a full stop at the end of the first clause, which might be preferable to a conjunction. While grammatically correct, it might improve readability to separate the clauses more distinctly.",
-          "suggestion": "قم بإزالة الملفات غير الضرورية. أو اتصل بمسؤول {{productName}} لترقية خطة التعريف."
+          "type": "incorrect_translation",
+          "description": "The phrase 'ترقية خطة التعريف' (tariff plan upgrade) is not the most natural or common way to express 'upgrade the tariff plan' in Saudi Arabic.  'ترقية الباقة' (upgrade the package) would be more commonly used and understandable.",
+          "suggestion": "قم بإزالة الملفات غير الضرورية أو اتصل بمسؤول {{productName}} لترقية الباقة."
         }
       ],
       "approved_at": null
@@ -41,9 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Azerbaijani translation does not include the same formatting as the English. The English uses bolding to indicate the 'productName' variable, which should ideally be mirrored in the Azerbaijani translation.",
-          "suggestion": "Consider adding a placeholder or variable marker similar to {{productName}} in the Azerbaijani translation to indicate where the product name should be inserted."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Remove the unnecessary files\" is not accurately conveyed by \"Tarif planını təkmilləşdirmək üçün lazımsız faylları silin\". A more accurate translation might focus on freeing up space or removing items hindering the upgrade.",
+          "suggestion": "Tarif planını təkmilləşdirmək üçün yer azad etmək üçün faylları silin və ya..."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"tilauksesi\" (your subscription) isn't a direct and accurate translation of \"tariff plan.\" While it's close in meaning, 'tariff plan' refers to a specific pricing structure.",
-          "suggestion": "Consider a more precise translation such as 'hintasuunnitelmasi' or 'palvelupakettisi' depending on the exact product/service context. If a more general term is acceptable, 'sopimuksesi' (your agreement) could work."
+          "description": "The phrase \"päivittääksesi tilauksesi\" (to upgrade your subscription) doesn't precisely match the English \"to upgrade the tariff plan.\" While close in meaning, 'tariff plan' suggests a specific pricing tier, which 'tilauksesi' doesn't convey as strongly.",
+          "suggestion": "Consider a more precise translation for 'tariff plan' such as 'hintasuunnitelmasi' (your price plan) or 'palvelupakettisi' (your service package)."
         }
       ],
       "approved_at": null
@@ -105,7 +105,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'effettuare l'upgrade' is a slightly awkward and overly formal translation of 'upgrade'. A more natural phrasing would be simply 'aggiornare'.",
+          "suggestion": "Rimuovi i file non necessari o contatta l'amministratore di {{productName}} per aggiornare il piano tariffario."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation includes a period (។) at the end of the sentence. While not strictly incorrect, it's more common to omit periods in this type of instruction or notification text in Lao. Consider removing it for a more natural feel.",
-          "suggestion": "ລົບລ້າງເອກະສານທີ່ບໍ່ຈໍາເປັນ ຫຼືຕິດຕໍ່ຜູ້ບໍລິຫານ {{productName}} ເພື່ອຍົກລະດັບແຜນການຄ່າບໍລິການ"
+          "description": "The Lao translation uses a full stop (។) at the end of the sentence. While not strictly incorrect, it's more common in Lao to omit a full stop at the end of sentences in UI text. It breaks the flow and might feel slightly unnatural.",
+          "suggestion": "Remove the full stop (។) at the end of the sentence: \"ລົບລ້າງເອກະສານທີ່ບໍ່ຈໍາເປັນ ຫຼືຕິດຕໍ່ຜູ້ບໍລິຫານ {{productName}} ເພື່ອຍົກລະດັບແຜນການຄ່າບໍລິການ\""
         }
       ],
       "approved_at": null
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'upgrade the tariff plan' is translated as 'selecta un alt plan tarifar' which means 'select another tariff plan'. While close in meaning, 'upgrade' implies an improvement of the existing plan, which isn't necessarily conveyed by 'select another'. A more accurate translation would be something along the lines of 'actualizați planul tarifar'.",
-          "suggestion": "Actualizați planul tarifar."
+          "description": "The English phrase 'upgrade the tariff plan' is translated as 'selecta un alt plan tarifar' which means 'select another tariff plan'. While not entirely wrong, it doesn't convey the nuance of upgrading an existing one. 'Upgrade' implies an increase or improvement, which isn't necessarily reflected in 'select another'.",
+          "suggestion": "Consider a translation like 'actualizați planul tarifar' which means 'update the tariff plan'."
         }
       ],
       "approved_at": null
@@ -186,13 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ගාස්තු සැලැස්ම උත්ශ්‍රේණි කිරීම සඳහා\" (Gaasthu selasma uthsreniki karama daka) translates more accurately to 'to upgrade the tariff plan' rather than just 'for upgrading the tariff plan'. While not drastically wrong, the current phrasing is slightly less natural in Sinhala.",
-          "suggestion": "ගාස්තු සැලැස්ම උත්ශ්‍රේණි කරන්න"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of `{{productName}}` suggests it should be preserved in the Sinhala translation, as it is in the English. There doesn't seem to be any Sinhala equivalent provided. ",
-          "suggestion": "Keep the variable `{{productName}}` as is."
+          "description": "The phrase \"ගාස්තු සැලැස්ම උත්ශ්‍රේණි කිරීම සඳහා\" (Gaasthu selas'ma uthsreshni kirimata sarath) is a bit awkward. A more natural translation for 'upgrade the tariff plan' would be something like 'ගාස්තු සැලැස්මට වැඩිදියුණු කිරීම සඳහා' (Gaasthu selasma wadiyaenuu kirima sarath) or 'ගාස්තු සැලැස්ම වැඩිදියුණු කිරීමට' (Gaasthu selasma wadiyaenuu kirimata).",
+          "suggestion": "ගාස්තු සැලැස්ම වැඩිදියුණු කිරීමට"
         }
       ],
       "approved_at": null
@@ -214,9 +215,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'уклоните' (uklonite) is a somewhat formal and less common way to say 'remove' in this context. A more natural and common translation would be 'обришите' (obrisite).",
-          "suggestion": "Обришите непотребне датотеке"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Уклоните\" (Uklonite) translates to \"Remove\" but in this context, \"Обришите\" (Obrisite) or \"Избришите\" (Izbrisite) would be more natural and common for 'remove' in the context of files.",
+          "suggestion": "Обришите или Избришите непотребне датотеке..."
         }
       ],
       "approved_at": null
@@ -224,7 +225,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a space before 'da biste', which is not standard Serbian. It should be removed.",
+          "suggestion": "Uklonite nepotrebne datoteke ili kontaktirajte {{productName}} administratora da nadogradite tarifni plan."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -236,13 +243,25 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"to upgrade the tariff plan\" could be more accurately translated as \"to update the tariff plan\" or \"to change the tariff plan\" in Ukrainian.  'Підвищити' (pidvyshchyty) implies an increase in value, whereas 'update' or 'change' might be more appropriate for a tariff plan modification.",
+          "suggestion": "Видаліть непотрібні файли або зверніться до адміністратора {{productName}}, щоб оновити тарифний план."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'tariff plan' doesn't directly translate to a single Vietnamese term. 'Gói dịch vụ' (service package) is a more natural and common way to express it in this context.",
+          "suggestion": "Xóa các tập tin không cần thiết hoặc liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -251,13 +270,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"费用版本\" (feiyong banben) translates to \"tariff version\" which isn't the intended meaning of \"tariff plan\". It should convey the idea of upgrading the pricing tier or plan.",
-          "suggestion": "升级套餐 (shēngjí tàocān) - Upgrade the package/plan"
+          "description": "The translation of \"tariff plan\" as \"费用版本\" is not accurate. \"费用版本\" translates to \"fee version\", which doesn't convey the meaning of a tariff plan.",
+          "suggestion": "Consider using a more accurate translation for \"tariff plan\" such as \"套餐计划\" (tāocān jìhuà) or \"资费计划\" (zīfèi jìhuà)."
         },
         {
           "type": "formatting",
-          "description": "The translation retains the {{productName}} placeholder.  The English content uses this, and it's important to maintain consistency.",
-          "suggestion": "Keep the {{productName}} placeholder as is."
+          "description": "The variable {{productName}} is present in the English and Chinese versions, which is good. However, ensure this variable is correctly handled in the UI to dynamically insert the product name.",
+          "suggestion": "Confirm that the UI correctly substitutes the {{productName}} variable with the appropriate product name at runtime."
         }
       ],
       "approved_at": null

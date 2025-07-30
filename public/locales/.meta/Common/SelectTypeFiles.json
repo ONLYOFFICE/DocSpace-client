@@ -3,7 +3,7 @@
   "content": "Select {{type}}",
   "content_en_sha1_hash": "362dad28aa0bb6ca287f03d3b542c0aea7263bf8",
   "created_at": "2025-05-19T21:30:48.523Z",
-  "updated_at": "2025-05-28T09:30:03.005Z",
+  "updated_at": "2025-05-26T07:57:32.994Z",
   "comment": {
     "text": "The translation key \"Select {{type}}\" is used to display a prompt in user interfaces that asks users to select a file type. This text appears as a button label or dialog title, guiding users through the process of choosing a specific type of file. Translators should consider the context and conventions of their language when translating this text.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vyberte Select {{type}}' includes the English word 'Select' which is redundant and disrupts the flow. The intended meaning of 'Select' is already conveyed by 'Vyberte'.",
-          "suggestion": "Vyberte {{type}}"
+          "description": "The Czech translation includes the English word 'Select' which is unnecessary and confusing. It should be translated to a Czech equivalent.",
+          "suggestion": "Vyberte soubory {{type}}"
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation uses \"{{type}}\" just like the English, which may be unnecessary. It's generally preferred to avoid mirroring the formatting exactly.",
-          "suggestion": "\"Auswählen: {{type}}\" or simply \"{{type}} auswählen\" would be more natural."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -126,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Atlasīt {{type}}\" literally translates to \"Select {{type}}\". While understandable, it lacks the nuance of a natural Latvian phrasing for user interface elements. A more idiomatic translation would be something like \"Izvēlēties {{type}}\" or \"Izvēlites {{type}}\".",
+          "description": "The Latvian translation 'Atlasīt {{type}} ' translates to 'Select {{type}}' literally, but a more natural phrasing for a selection action would be 'Izvēlēties {{type}}'.  'Atlasīt' implies to pick out/choose from something already visible, whereas 'Izvēlēties' is a more general 'to select'.",
           "suggestion": "Izvēlēties {{type}}"
         }
       ],
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The direct translation of 'Select' is 'Selectează', not 'Selectare'. 'Selectare' implies the action of selecting, while 'Selectează' is the imperative form (select).",
-          "suggestion": "Selectează {{type}}"
+          "description": "The Romanian translation \"Selectare {{type}}\" is technically correct but a more natural and idiomatic translation would be \"Alege {{type}}\" or \"Selectați {{type}}\" (if addressing multiple users). \"Selectare\" sounds a bit formal and less common in this context.",
+          "suggestion": "Alege {{type}}"
         }
       ],
       "approved_at": null
@@ -179,9 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'type' is enclosed in double curly braces, suggesting a placeholder that might need to be handled differently in Sinhala based on the platform or rendering engine. It's possible the placeholder needs a different syntax to be properly interpreted.",
-          "suggestion": "Investigate how placeholders are handled in the target platform/environment. Consider alternative placeholder syntax like '[type]' or '{{type}}' depending on requirements."
+          "type": "incorrect_translation",
+          "description": "The translation '{{type}} තෝරන්න' is a literal translation of 'Select {{type}}'. A more natural Sinhala phrasing would be '{{type}} ප choisissez කරන්න' ({{type}} chọn) or '{{type}} තෝරා ගන්න' ({{type}} thora gana).",
+          "suggestion": "{{type}} තෝරා ගන්න"
         }
       ],
       "approved_at": null

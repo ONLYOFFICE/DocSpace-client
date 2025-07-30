@@ -1,0 +1,272 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+
+import { useTranslation } from "react-i18next";
+import React, { useMemo, useState } from "react";
+
+import { Text } from "../../../components/text";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TComboboxProps,
+} from "../../../components/combobox";
+import { DropDownItem } from "../../../components/drop-down-item";
+import { BackupStorageType, ThirdPartyStorages } from "../../../enums";
+import { getOptions } from "../../../utils/getThirdPartyStoragesOptions";
+import { getFromLocalStorage } from "../../../utils/getFromLocalStorage";
+import { IconButton } from "../../../components/icon-button";
+import { toastr } from "../../../components/toast";
+import { THIRD_PARTY_SERVICES_URL } from "../../../constants";
+import type { ButtonSize } from "../../../components/button";
+
+import type { SelectedStorageType, StorageRegionsType } from "../../../types";
+
+import { StyledManualBackup, StyledComboBoxItem } from "../ManualBackup.styled";
+
+import GoogleCloudStorage from "./storages/GoogleCloudStorage";
+import RackspaceStorage from "./storages/RackspaceStorage";
+import SelectelStorage from "./storages/SelectelStorage";
+import AmazonStorage from "./storages/AmazonStorage";
+
+const DefaultParameters = {
+  comboBoxOptions: [],
+  storagesInfo: {},
+  selectedStorageTitle: "",
+  selectedStorageId: "",
+};
+
+interface ThirdPartyStorageModuleProps {
+  isValidForm: boolean;
+  isNeedFilePath: boolean;
+  isMaxProgress: boolean;
+  buttonSize?: ButtonSize;
+  thirdPartyStorage: SelectedStorageType[];
+  formSettings: Record<string, string>;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  defaultRegion: string;
+  storageRegions: StorageRegionsType[];
+  isFormReady: () => boolean;
+  onMakeCopy: (
+    selectedFolder: string | number,
+    moduleName: string,
+    moduleType: string,
+    selectedStorageId?: string,
+    selectedStorageTitle?: string,
+  ) => Promise<void>;
+  deleteValueFormSetting: (key: string) => void;
+  setCompletedFormFields: (
+    values: Record<string, string>,
+    module?: string,
+  ) => void;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+}
+
+const ThirdPartyStorageModule = ({
+  buttonSize,
+  isValidForm,
+  formSettings,
+  storageRegions,
+  isMaxProgress,
+  defaultRegion,
+  isNeedFilePath,
+  thirdPartyStorage,
+  errorsFieldsBeforeSafe,
+  isFormReady,
+  onMakeCopy,
+  setCompletedFormFields,
+  addValueInFormSettings,
+  deleteValueFormSetting,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+}: ThirdPartyStorageModuleProps) => {
+  const { t } = useTranslation(["Common"]);
+
+  const { comboBoxOptions, storagesInfo, ...parameters } =
+    useMemo((): NonNullable<ReturnType<typeof getOptions>> => {
+      if (thirdPartyStorage && thirdPartyStorage.length > 0) {
+        return getOptions(thirdPartyStorage) ?? DefaultParameters;
+      }
+
+      return DefaultParameters;
+    }, [thirdPartyStorage]);
+
+  const [selectedStorageTitle, setSelectedStorageTitle] = useState<string>(
+    () => {
+      const storageTitle = getFromLocalStorage<string>(
+        "LocalCopyThirdPartyStorageType",
+      );
+
+      return storageTitle ?? parameters.selectedStorageTitle;
+    },
+  );
+
+  const [selectedId, setSelectedId] = useState<string>(() => {
+    const storageId = getFromLocalStorage<string>("LocalCopyStorage");
+    return storageId ?? parameters.selectedStorageId;
+  });
+
+  const [isStartCopy, setIsStartCopy] = useState(false);
+
+  const onSelect = (key: string) => {
+    const selectedStorage = storagesInfo[key];
+
+    if (!selectedStorage.isSet) {
+      return window.open(`${THIRD_PARTY_SERVICES_URL}${key}`, "_blank");
+    }
+
+    setSelectedId(selectedStorage.id);
+    setSelectedStorageTitle(selectedStorage.title);
+  };
+
+  const onMakeCopyIntoStorage = async () => {
+    if (!isFormReady()) return;
+
+    try {
+      setIsStartCopy(true);
+      await onMakeCopy(
+        "",
+        "ThirdPartyStorage",
+        `${BackupStorageType.StorageModuleType}`,
+        selectedId,
+        selectedStorageTitle,
+      );
+
+      setIsStartCopy(false);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as Error);
+    }
+  };
+
+  const commonProps = {
+    isLoadingData: !isMaxProgress || isStartCopy,
+    selectedStorage: storagesInfo[selectedId],
+    isMaxProgress,
+    selectedId,
+    buttonSize,
+    onMakeCopyIntoStorage,
+    t,
+    isValidForm,
+    isNeedFilePath,
+    formSettings,
+    errorsFieldsBeforeSafe,
+    setCompletedFormFields,
+    addValueInFormSettings,
+    setRequiredFormSettings,
+    setIsThirdStorageChanged,
+  };
+
+  const advancedOptions = comboBoxOptions?.map((item) => {
+    return (
+      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+        <DropDownItem
+          onClick={() => onSelect(item.key)}
+          // className={item.className}
+          data-third-party-key={item.key}
+          disabled={item.disabled}
+          isActive={selectedId === item.key}
+        >
+          <Text className="drop-down-item_text" fontWeight={600}>
+            {item.label}
+          </Text>
+
+          {!item.disabled && !item.connected ? (
+            <IconButton
+              isFill
+              size={16}
+              className="drop-down-item_icon"
+              onClick={() => onSelect(item.key)}
+              iconName={ExternalLinkReactSvgUrl}
+            />
+          ) : null}
+        </DropDownItem>
+      </StyledComboBoxItem>
+    );
+  });
+
+  return (
+    <StyledManualBackup>
+      <div className="manual-backup_storages-module">
+        <ComboBox
+          options={[]}
+          displayArrow
+          isDefaultMode
+          scaledOptions
+          noBorder={false}
+          showDisabledItems
+          directionY="both"
+          manualWidth="400px"
+          displaySelectedOption
+          hideMobileView={false}
+          forceCloseClickOutside
+          className="backup_combo"
+          size={ComboBoxSize.content}
+          advancedOptions={
+            advancedOptions as unknown as TComboboxProps["advancedOptions"]
+          }
+          selectedOption={{ key: 0, label: selectedStorageTitle }}
+          isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
+        />
+
+        {selectedId === ThirdPartyStorages.GoogleId ? (
+          <GoogleCloudStorage {...commonProps} />
+        ) : null}
+
+        {selectedId === ThirdPartyStorages.RackspaceId ? (
+          <RackspaceStorage {...commonProps} />
+        ) : null}
+
+        {selectedId === ThirdPartyStorages.SelectelId ? (
+          <SelectelStorage {...commonProps} />
+        ) : null}
+
+        {selectedId === ThirdPartyStorages.AmazonId ? (
+          <AmazonStorage
+            defaultRegion={defaultRegion}
+            storageRegions={storageRegions}
+            deleteValueFormSetting={deleteValueFormSetting}
+            {...commonProps}
+          />
+        ) : null}
+      </div>
+    </StyledManualBackup>
+  );
+};
+
+export default ThirdPartyStorageModule;
+
+// export default inject(({ backup }) => {
+//   const { thirdPartyStorage, isFormReady } = backup;
+
+//   return {
+//     thirdPartyStorage,
+//     isFormReady,
+//   };
+// })(observer(ThirdPartyStorageModule));

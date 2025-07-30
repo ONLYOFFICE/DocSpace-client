@@ -26,15 +26,17 @@
 
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
-import { useNavigate } from "react-router";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
-import { useState, useEffect } from "react";
+import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { withTranslation } from "react-i18next";
+
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
-import { withTranslation } from "react-i18next";
-import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
@@ -48,7 +50,7 @@ import {
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { StyledVersionRow } from "./StyledVersionHistory";
-import VersionBadge from "./VersionBadge";
+import VersionBadge from "./VersionBadge/VersionBadge";
 
 const VersionRow = (props) => {
   const {

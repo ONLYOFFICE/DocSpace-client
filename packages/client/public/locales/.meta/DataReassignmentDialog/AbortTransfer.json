@@ -3,7 +3,7 @@
   "content": "Abort transfer",
   "content_en_sha1_hash": "309717a4f34d5f39915141f686fada68cd473b70",
   "created_at": "2025-05-19T21:30:56.725Z",
-  "updated_at": "2025-05-28T09:30:02.252Z",
+  "updated_at": "2025-05-26T07:57:32.281Z",
   "comment": {
     "text": "This translation key is used to display the text \"Abort transfer\" on a button in a data reassignment dialog. The label changes depending on the transfer status, indicating whether to restart or confirm the action. It appears as part of the footer component of the dialog.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මාරුව නවතන්න' (maaruv navatanna) while technically meaning 'stop the transfer' or 'abort the transfer', isn't the most natural or commonly used phrasing for 'Abort transfer' in Sinhala. A more accurate and natural phrasing would be 'ලෙස අවසරය ඉල්ලන්න' (lesa avasaraya illanna) or 'අත්හැරන්න' (athheranna).",
+          "suggestion": "Consider 'ලෙස අවසරය ඉල්ලන්න' (lesa avasaraya illanna) or 'අත්හැරන්න' (athheranna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +183,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Prekini prenos\" is understandable, a more natural and accurate translation of \"Abort transfer\" would be \"Poništi prenos\" or \"Otkaži prenos\". \"Prekini\" implies stopping or interrupting, whereas \"Abort\" suggests a full cancellation.",
+          "suggestion": "Poništi prenos"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +201,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Перервати передавання' is technically correct, a more natural and commonly used translation for 'Abort transfer' in this context might be 'Скасувати передачу'. 'Перервати передавання' sounds somewhat formal and less intuitive for a user interface.",
+          "suggestion": "Скасувати передачу"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

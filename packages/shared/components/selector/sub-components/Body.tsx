@@ -27,7 +27,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 import styles from "../Selector.module.scss";
@@ -100,16 +100,16 @@ const Body = ({
   const [infoBarHeight, setInfoBarHeight] = useState(0);
   const [injectedElementHeight, setInjectedElementHeight] = useState(0);
 
-  const { withSearch } = React.useContext(SearchContext);
-  const isSearch = React.useContext(SearchValueContext);
-  const { withInfoBar } = React.useContext(InfoBarContext);
+  const { withSearch } = React.use(SearchContext);
+  const isSearch = React.use(SearchValueContext);
+  const { withInfoBar } = React.use(InfoBarContext);
 
   const { withBreadCrumbs, isBreadCrumbsLoading } =
     React.useContext(BreadCrumbsContext);
 
-  const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
+  const { withTabs, tabsData, activeTabId } = React.use(TabsContext);
 
-  const { withSelectAll } = React.useContext(SelectAllContext);
+  const { withSelectAll } = React.use(SelectAllContext);
 
   const [bodyHeight, setBodyHeight] = React.useState(0);
   const [savedInputValue, setSavedInputValue] =
@@ -267,6 +267,8 @@ const Body = ({
     return HEADER_HEIGHT + CONTAINER_PADDING;
   };
 
+  const cloneProps = { ref: injectedElementRef };
+
   return (
     <div
       ref={bodyRef}
@@ -295,9 +297,7 @@ const Body = ({
       />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {injectedElement
-        ? React.cloneElement(injectedElement, { ref: injectedElementRef })
-        : null}
+      {injectedElement ? React.cloneElement(injectedElement, cloneProps) : null}
 
       {withTabs && tabsData ? (
         <Tabs

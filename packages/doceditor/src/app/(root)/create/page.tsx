@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { permanentRedirect, redirect, RedirectType } from "next/navigation";
-import dynamic from "next/dynamic";
+import { redirect, RedirectType } from "next/navigation";
 import { headers } from "next/headers";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -33,15 +32,8 @@ import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
-
-const Editor = dynamic(() => import("@/components/Editor"), {
-  ssr: false,
-});
-const CreateFileError = dynamic(() => import("@/components/CreateFileError"), {
-  ssr: false,
-});
-
-const log = logger.child({ module: "Create page" });
+import Editor from "@/components/Editor";
+import CreateFileError from "@/components/CreateFileError";
 
 type TSearchParams = {
   parentId: string;
@@ -58,11 +50,13 @@ type TSearchParams = {
   toForm?: string;
 };
 
-async function Page({ searchParams }: { searchParams: TSearchParams }) {
-  const baseURL = getBaseUrl();
+async function Page(props: { searchParams: Promise<TSearchParams> }) {
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
+  const baseURL = await getBaseUrl();
 
   if (!searchParams) {
-    log.debug("Empty search params at create file");
+    logger.debug("Empty search params at create file");
     redirect(baseURL);
   }
 
@@ -76,7 +70,6 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     fromFile,
     templateId,
 
-    fromTemplate,
     formId,
     action,
     toForm,
@@ -96,30 +89,27 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     password,
   };
 
-  const hdrs = headers();
+  const hdrs = await headers();
 
   const hostname = hdrs.get("x-forwarded-host");
 
-  log.info(
-    { fileTitle, parentId, templateId, open, action, url: hostname },
-    "Create new file",
+  logger.info(
+    `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, url: ${hostname} Create new file`,
   );
 
-  let fileId = undefined;
-  let fileError: Error | undefined = undefined;
+  let fileId;
+  let fileError: Error | undefined;
 
   if (!templateId && fromFile) {
-    log.debug(
-      { fileTitle, parentId, templateId, open, action },
-      "Empty templateId for create file from other file",
+    logger.debug(
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, Empty templateId for create file from other fil`,
     );
 
     redirect(baseURL);
   }
 
-  log.debug(
-    { fileTitle, parentId, templateId, open, action },
-    "Start create file",
+  logger.debug(
+    `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, Start create file`,
   );
 
   const res =
@@ -135,9 +125,8 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       : await createFile(parentId, fileTitle, templateId, formId);
 
   if (!res) {
-    log.error(
-      { fileTitle, parentId, templateId, open, action },
-      "File create failed, open empty editor",
+    logger.error(
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, File create failed, open empty editor`,
     );
     const documentServerUrl = await getEditorUrl();
 
@@ -162,9 +151,8 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   ) {
     const documentServerUrl = await getEditorUrl();
 
-    log.debug(
-      { fileTitle, parentId, templateId, open, action, error },
-      "Open empty editor",
+    logger.debug(
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, templateId: ${templateId}, open: ${open}, action: ${action}, error: ${error}, Open empty editor`,
     );
 
     return (
@@ -176,30 +164,29 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   }
 
   if (fileId || !fileError) {
-    const searchParams = new URLSearchParams();
+    const newSearchParams = new URLSearchParams();
 
-    searchParams.append("fileId", fileId?.toString() ?? "");
+    newSearchParams.append("fileId", fileId?.toString() ?? "");
     if (action) {
-      searchParams.append("action", action);
+      newSearchParams.append("action", action);
     }
 
     if (share) {
-      searchParams.append("share", share);
+      newSearchParams.append("share", share);
     }
 
-    log.debug(
-      { fileTitle, parentId, fileId, searchParams },
+    logger.debug(
+      `fileTitle: ${fileTitle}, parentId: ${parentId}, fileId: ${fileId}, searchParams: ${newSearchParams}, File created success`,
       "File created success",
     );
 
-    const redirectURL = `/?${searchParams.toString()}`;
+    const redirectURL = `/?${newSearchParams.toString()}`;
 
     return redirect(redirectURL, RedirectType.replace);
   }
 
-  log.error(
-    { fileTitle, parentId, error: fileError, url: hostname },
-    "File created error",
+  logger.error(
+    `fileTitle: ${fileTitle}, parentId: ${parentId}, error: ${fileError}, url: ${hostname}, File created error`,
   );
 
   return (

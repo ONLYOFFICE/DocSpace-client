@@ -198,6 +198,7 @@ describe("Error Components", () => {
       profileUrl: "",
       hasAvatar: false,
       cultureName: "en",
+      isAnonim: false,
     };
 
     const mockColorScheme: TColorScheme = {

@@ -3,7 +3,7 @@
   "content": "Share room",
   "content_en_sha1_hash": "6b4b82e0d7f345d4b85db2c03f44214a284a7ba3",
   "created_at": "2025-05-19T21:30:56.199Z",
-  "updated_at": "2025-06-18T07:34:15.023Z",
+  "updated_at": "2025-06-18T17:11:42.428Z",
   "comment": {
     "text": "The \"ShareRoom\" translation key is used to display a tooltip label in a navigation button on a file management interface. It corresponds to the phrase \"Share room\". This translation appears when users have access to share room functionality and view the option to share files or folders.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 561,
+      "line_number": 563,
       "context": "const titleIcon = getTitleIcon();\n \n const titleIconTooltip = getTitleIconTooltip();\n \n const navigationButtonLabel = showNavigationButton\n ? t(\"Files:ShareRoom\")\n : null;\n \n const headerProps = isIndexEditingMode\n ? { headerLabel: t(\"Common:SortingIndex\") }\n : {};",
       "module": "/packages/client"
     }
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otağı paylaşın\" literally translates to \"Share the room\". While technically correct, it's an imperative and doesn't convey the meaning of a 'share room' as a designated space. A more appropriate translation would be something like \"Paylaşım otağı\" or \"Birgə istifadə otağı\".",
+          "description": "The translation \"Otağı paylaşın\" is a command (share the room!). The English \"Share room\" is more of a descriptor (a shared room, a room for sharing). A better translation would convey the idea of a shared room.",
           "suggestion": "Paylaşım otağı"
         }
       ],
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Raum freigeben' literally translates to 'release room'. While it might be understood, it's not the most accurate or natural translation for 'Share room' in the context of file sharing. A more suitable translation would convey the concept of sharing access to a room, not physically releasing a room.",
-          "suggestion": "Consider alternatives like 'Gemeinsamer Raum' (Shared room), 'Raum teilen' (Share room - action), or 'Zugriff auf Raum gewähren' (Grant access to room) depending on the intended meaning."
+          "description": "The translation \"Raum freigeben\" is a literal translation of 'share room' but doesn't quite convey the intended meaning. 'Share room' often implies a room that is *available* to be shared or a room *for* sharing. \"Raum freigeben\" suggests releasing or granting access to a room, which is not the typical meaning.",
+          "suggestion": "Consider alternatives like \"Gemeinschaftsraum\" (common room), \"Teilraum\" (shared space), or \"Raum zur Mitbenutzung\" (room for shared use) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -81,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Jaa huone\" is technically translatable, it doesn't fully capture the nuance of \"Share room\".  \"Share room\" implies a designated space for sharing, potentially including resources or activities. \"Jaa huone\" simply means \"share a room\". A more accurate translation might depend on the context of 'Share room'.",
+          "suggestion": "Consider alternatives like \"Yhteishuone\" (shared room), \"Jakohuone\" (distribution room - if applicable), or \"Tilavuokran huone\" (rental room) depending on the specific meaning of 'Share room'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Partager la salle\" is understandable, it's not the most natural or common translation for \"Share room\" in French. It implies sharing *the* room, as opposed to a shared room or a room for sharing. A better translation would depend on the context but 'Salle partagée' or 'Salle à partager' would be more appropriate.",
-          "suggestion": "Salle partagée"
+          "description": "The translation 'Partager la salle' is literally 'Share the room' and while understandable, it's not the most natural or idiomatic translation for 'Share room' in French. It lacks the nuance of a shared space or a room specifically intended for sharing.",
+          "suggestion": "Salle de partage"
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Կիսվեք սենյակով\" literally translates to 'Share with a room' or 'Share the room with someone'. The intended meaning of 'Share room' (as in, a shared room) is not accurately conveyed. A more appropriate translation would depend on the context, but something closer to 'ընդհանուր սենյակ' (endhanur senyak) – 'common room', or 'միասեռ սենյակ' (miaseer senyak) - 'shared room' would be better.",
-          "suggestion": "Consider 'ընդհանուր սենյակ' (endhanur senyak) or 'միասեռ սենյակ' (miaseer senyak) depending on the context."
+          "description": "The Armenian translation \"Կիսվեք սենյակով\" translates more literally to \"Share with a room\" or \"Share the room (with someone)\". It doesn't quite convey the meaning of 'Share room' which implies a shared room or a room for sharing.",
+          "suggestion": "A more accurate translation would be something like \"Ընդհանուր սենյակ\" (Endhanur senyak) which means 'Shared room', or \"Հետաշարժ սենյակ\" (Hetasharj senyak) which could imply a room for shared use or collaboration."
         }
       ],
       "approved_at": null
@@ -114,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Condividi stanza' is technically correct, it's not the most natural or idiomatic translation for 'Share room' in Italian, especially in the context of a room for sharing (like a coworking space or shared accommodation). It translates more directly to 'Share room' as a verb.",
-          "suggestion": "A more appropriate translation would depend on the context. Some options include: 'Sala condivisa', 'Stanza condivisa', or 'Spazio condiviso'."
+          "description": "The translation 'Condividi stanza' literally translates to 'Share room' but doesn't convey the intended meaning of a shared room or a room for sharing. It sounds like a command to share a room.",
+          "suggestion": "Consider 'Stanza condivisa' (shared room) or 'Sala condivisa' (shared hall/room) depending on the context."
         }
       ],
       "approved_at": null
@@ -135,7 +141,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ແບ່ງປັນຫ້ອງ\" literally translates to 'share room', it might not be the most natural or accurate translation of 'Share room' in the context of a room specifically designed for sharing, like a co-working space or a room for group activities. 'Share room' can imply a room *for* sharing. A more appropriate translation might depend on the specific context.",
+          "suggestion": "Consider 'ຫ້ອງແບ່ງປັນ' or 'ຫ້ອງກຸ່ມ' depending on the context. 'ຫ້ອງແບ່ງປັນ' directly translates to 'sharing room' and is potentially more accurate."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -168,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sala compartilhado' is grammatically incorrect. In Portuguese (Brazil), adjectives need to agree in number and gender with the noun they modify. 'Sala' is feminine, so the correct adjective form should be 'compartilhada'.",
+          "description": "The translation 'Sala compartilhado' is grammatically incorrect. 'Compartilhado' is an adjective and needs to agree with 'sala' in gender.  'Sala' is feminine, so the adjective should be 'compartilhada'.",
           "suggestion": "Sala compartilhada"
         }
       ],
@@ -180,13 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Partajare\" translates to \"Sharing\", \"sală\" refers to a room, but \"Share room\" typically implies a room *for sharing*, not simply a room. A more accurate translation would convey the shared aspect.",
-          "suggestion": "Spațiu de partajare"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'sală' refers to a hall or a room but doesn't capture the concept of a shared room for collaboration or meetings.",
-          "suggestion": "Sală de colaborare"
+          "description": "The translation 'Partajare sală' is not the most natural or accurate rendering of 'Share room' in Romanian. 'Partajare' implies sharing *something*, not a room itself. A more suitable translation would convey the action of using a shared room.",
+          "suggestion": "Consider 'Sală comună' or 'Sală de folosit împreună'."
         }
       ],
       "approved_at": null
@@ -197,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Предоставить доступ к комнате\" (Provide access to the room) is not a direct translation of \"Share room\". While it conveys a similar meaning, 'Share room' implies a room intended for shared use, which this translation doesn't fully capture. A more accurate translation would depend on the specific context.",
-          "suggestion": "Consider translations like \"Общая комната\" (Shared room), \"Комната для совместного использования\" (Room for shared use), or a more context-specific term."
+          "description": "The translation 'Предоставить доступ к комнате' (Provide access to the room) doesn't accurately convey the meaning of \"Share room.\" \"Share room\" implies a shared space, not necessarily granting access to it. A more accurate translation might be something like \"Общая комната\" (Common room) or \"Комната для общего пользования\" (Room for shared use).",
+          "suggestion": "Общая комната"
         }
       ],
       "approved_at": null
@@ -209,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'කාමරය බෙදාගන්න' literally translates to 'share the room' or 'take a room to share'. While understandable, a more accurate and natural translation for 'Share room' (as a named feature or space) would be something like 'සුදුසුරැම' (sudusrama - shared room) or 'එකතු කාමරය' (ekathu kamaraya - common room).",
-          "suggestion": "Consider 'සුදුසුරැම' (sudusrama) or 'එකතු කාමරය' (ekathu kamaraya)"
+          "description": "The Sinhala translation \"කාමරය බෙදාගන්න\" literally translates to 'share the room'. While understandable, it lacks the nuance of 'share room' which implies a room designated for sharing. A more accurate translation would convey the concept of a shared room or a room for sharing.",
+          "suggestion": "කාමරය බෙදා ගැනීම් (Kamara beda gatheem) - implying a sharing room. Or, බෙදාගන්න කාමරය (Bedagana kamaraya) - which is more akin to 'a room to share'."
         }
       ],
       "approved_at": null
@@ -233,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Дели собу\" translates to \"Share room\" literally but doesn't convey the intended meaning of a 'share room' as in a room designated for sharing. It's more akin to 'share a room'.",
-          "suggestion": "The best translation depends on the context. Possible alternatives include: 'Заједничка соба' (Shared room), 'Соба за дељење' (Room for sharing), or 'Сала за одмора' (Relaxation room, if it's more of a communal space)."
+          "description": "The Serbian (Cyrillic) translation \"Дели собу\" translates to \"Share room\" but isn't the most natural or accurate translation for \"Share room\" in a facility or space context. \"Soba\" refers to a room. \"Deljenje prostorije\" or \"Prostorija za deljenje\" would be more appropriate depending on the exact meaning intended.",
+          "suggestion": "Consider \"Дели просторија\" or \"Просторија за дељење\" for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -245,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Deli sobu\" is not the most natural or accurate translation of \"Share room.\" While \"Deli\" can mean \"sharing\", it's a somewhat awkward construction. A more common and accurate translation would be \"Zajednička soba\" or \"Soba za deljenje\".",
+          "description": "The translation \"Deli sobu\" doesn't accurately convey the meaning of \"Share room\". \"Deli\" means 'deliver' or 'give away', not 'share'. A more appropriate translation would convey the concept of a room intended for sharing or collaboration.",
           "suggestion": "Zajednička soba"
         }
       ],
@@ -257,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Odayı paylaş\" translates to \"Share the room\" or \"Share a room.\" While technically correct, it doesn't convey the meaning of a 'share room' as in a room designed for sharing, a shared workspace, or a communal space.  A more accurate translation would capture that concept.",
-          "suggestion": "Possible suggestions include: \"Paylaşımlı oda\", \"Ortak oda\", or \"Toplantı odası\" depending on the specific context of 'Share room'."
+          "description": "The translation 'Odayı paylaş' literally means 'Share the room'. While understandable, it doesn't capture the nuance of 'Share room' which typically refers to a room *for* sharing, or a shared room. It's an imperative sentence, while the original is a noun phrase.",
+          "suggestion": "Paylaşımlı oda"
         }
       ],
       "approved_at": null
@@ -269,7 +276,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Поділитися кімнатою\" literally translates to 'Share a room'. While not entirely wrong, it implies *giving* a room to someone. 'Share room' often implies a shared space.",
+          "description": "The translation 'Поділитися кімнатою' literally translates to 'Share a room', but 'Share room' (as in a room intended for sharing) is likely referring to a 'shared room'.  A more accurate translation might be 'Спільна кімната'.",
           "suggestion": "Спільна кімната"
         }
       ],

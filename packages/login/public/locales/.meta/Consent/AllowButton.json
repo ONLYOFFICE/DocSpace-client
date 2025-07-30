@@ -3,7 +3,7 @@
   "content": "Allow",
   "content_en_sha1_hash": "3ad0e3698278f45b2af94445396e9865f213f617",
   "created_at": "2025-05-19T21:30:57.315Z",
-  "updated_at": "2025-05-28T09:30:02.884Z",
+  "updated_at": "2025-05-26T07:57:32.868Z",
   "comment": {
     "text": "The translation key \"AllowButton\" is used to display the text \"Allow\", which appears as a button label on a consent page. Its purpose is to provide a positive affirmation option for users to confirm their acceptance of certain conditions or terms.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"السماح\" (al-samaah) is a valid Arabic word meaning 'permission' or 'allowing', it's a bit formal for a button label like 'Allow'. A more common and user-friendly translation for a button labeled 'Allow' would be something like 'موافق' (muwafiq) which means 'Agree' or 'Okay'.",
+          "suggestion": "موافق"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"İcazə verin\" is a possible translation, it is a more formal and directive phrase meaning \"Allow it/them.\" The context suggests a button label, where \"Allow\" is a more direct and user-friendly translation. A better translation would be something like \"Razılaşdır\" or \"Qəbul et\".",
+          "suggestion": "Consider \"Razılaşdır\" or \"Qəbul et\" for a more appropriate and user-friendly translation of 'Allow'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Να επιτρέπεται' is grammatically correct, but it's a formal and somewhat unnatural phrasing for a button label. It translates to 'To be allowed'. A more natural and user-friendly translation for a 'Allow' button would be something more direct.",
+          "suggestion": "Επιτρέψτε (Epitrepsete) - 'Allow' (imperative form) or Ναι (Ne) - 'Yes'"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Թույլատրել\" (T'uylatrel) is a valid word for 'Allow' but can sound overly formal or bureaucratic in this context. A more natural and user-friendly translation might be preferable depending on the overall tone of the application.",
+          "suggestion": "Consider alternatives like \"Պարտադրել\" (Partadrel) - if it conveys the intended meaning, which might be a more permissive or agreeable term, or a shorter, simpler term depending on the context. Context is critical here."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +147,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Zezwalaj\" is a valid Polish word, it's not the most natural or common translation for \"Allow\" in a consent context. \"Dozwol\" or \"Zgadzam się\" would be more appropriate, depending on the UI element's function (button label vs. confirmation text). \"Zezwalaj\" has a more formal and less user-friendly connotation in this scenario.",
+          "suggestion": "Consider \"Dozwol\" (for a button) or \"Zgadzam się\" (for confirmation)."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Se permite\" is a literal translation of \"is allowed\" and doesn't accurately convey the meaning of a button labeled 'Allow'. It's too formal and indirect for a user interface element.",
+          "suggestion": "Permite"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'අවසර දෙන්න' (awasar denna) literally translates to 'Give permission'. While functionally close to 'Allow', it's not the most natural or idiomatic translation for a button label. A more direct and commonly used translation would be 'අවසර' (awasar) which simply means 'Permission' or 'Allow'.",
+          "suggestion": "අවසර"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +213,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation 'Дозволи' is a grammatically correct plural form (Allow them/Allow it). The English content 'Allow' is a singular imperative. A more accurate singular translation would be 'Дозволи'.",
+          "suggestion": "Дозволи"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Dozvoli\" doesn't perfectly capture the nuance of \"Allow\". While it translates to \"Allow\" in a general sense, in the context of a button prompting user consent, a more fitting translation would be \"Prihvati\" or \"Odobri\". \"Dozvoli\" can sound a bit formal or overly permissive in this context.",
+          "suggestion": "Consider using \"Prihvati\" or \"Odobri\" for a more natural and contextually accurate translation."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"İzin ver\" is a literal translation of \"Allow,\" it's not the most natural or idiomatic way to phrase a consent button in Turkish. It sounds slightly formal and abrupt.",
+          "suggestion": "Consider alternatives like \"Tamam\" (Okay), \"Onayla\" (Approve), or \"Kabul Et\" (Accept), which are more common for user consent buttons. The best option will depend on the overall tone and context of the application."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

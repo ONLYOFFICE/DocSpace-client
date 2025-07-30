@@ -3,7 +3,7 @@
   "content": "Set lifetime of <1>{{data}}</1> for all files in room",
   "content_en_sha1_hash": "b4cc4d190d3dac05a992829399f697ba34a42807",
   "created_at": "2025-05-19T21:30:54.938Z",
-  "updated_at": "2025-05-21T09:48:51.006Z",
+  "updated_at": "2025-06-30T12:20:31.354Z",
   "comment": {
     "text": "This translation key is used to display a message about setting the lifetime of files in a room. It appears on a settings panel or configuration screen, likely as part of options for room-related functionality. Translators should focus on conveying a sense of duration and file management.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 246,
-      "context": "return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case \"RoomLifeTimeSet\": {\n const periodLifeTime = feed.data.lifeTime.period;\n const value = feed.data.lifeTime.value;\n const maxValue = 9999;\n const period =\n periodLifeTime === 0",
+      "line_number": 255,
+      "context": "return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = feed.data.lifeTime?.period;\n const value = feed.data.lifeTime?.value;\n const maxValue = 9999;\n const period =\n periodLifeTime === 0",
       "module": "/packages/client"
     }
   ],
@@ -30,12 +30,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تعيين مدة حياة <1>{{data}}</1> الجميع الملفات في الغرفة' does not accurately convey the meaning of \"Set lifetime of <1>{{data}}</1> for all files in room\". The phrase 'الجميع الملفات' is grammatically incorrect and doesn't mean \"all files\".",
+          "description": "The Arabic translation 'تعيين مدة حياة <1>{{data}}</1> الجميع الملفات في الغرفة' is not an accurate translation of 'Set lifetime of <1>{{data}}</1> for all files in room'. The phrase 'الجميع الملفات' is grammatically incorrect and doesn't convey the intended meaning of 'all files'.",
           "suggestion": "تعيين مدة حياة <1>{{data}}</1> لجميع الملفات في الغرفة"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'الجميع الملفات' is grammatically incorrect. The correct way to say \"all files\" in this context is 'جميع الملفات'.",
+          "description": "The phrase 'الجميع الملفات' is grammatically incorrect. It should be 'جميع الملفات'.",
           "suggestion": "جميع الملفات"
         }
       ],
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"lifetime\" is best translated as \"ömrü\" or \"muddəti\" in Azerbaijani, not directly as \"istifadə müddəti\" which emphasizes 'usage period'. While understandable, 'istifadə müddəti' subtly shifts the meaning. The current translation implies the duration of file usage, whereas the original refers to the overall lifespan.",
+          "description": "The phrase 'istifadə müddətini' (usage period) is a slightly awkward translation of 'lifetime'. A more natural phrasing would be 'ömrünü' or 'davamet etme muddetini'.",
           "suggestion": "Otaqdakı bütün faylların ömrünü <1>{{data}}</1> olaraq təyin edin"
         },
         {
           "type": "formatting",
-          "description": "The `<1>{{data}}</1>` tag seems unnecessary and could be simplified.",
-          "suggestion": "<1>{{data}}</1>"
+          "description": "The formatting tag '<1>{{data}}</1>' appears correctly in both the English and Azerbaijani versions, which is good.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -64,7 +64,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"lifetime\" is best translated as 'срок на валидност' or 'срок на живот' in this context, rather than just 'продължителност на живот'. While 'продължителност на живот' isn't *wrong*, it's less idiomatic for setting an expiry time.",
+          "description": "The term 'lifetime' is better translated as 'срок на валидност' or 'срок на съществуване' rather than 'продължителност на живот' in this technical context. While 'продължителност на живот' isn't strictly incorrect, it's less precise for file lifetimes.",
           "suggestion": "Задайте срок на валидност на <1>{{data}}</1> за всички файлове в стаята"
         }
       ],
@@ -73,36 +73,30 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'lifetime' doesn't have a direct, commonly used equivalent in Czech when referring to files. 'Životnost' is technically correct but sounds awkward in this context. A better translation would convey the duration or expiry time.",
-          "suggestion": "Nastavení doby platnosti <1>{{data}}</1> pro všechny soubory v místnosti"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'pro všechny soubory' (for all files) is grammatically correct, but depending on the intended nuance, a more concise phrasing might be better.  Consider 'pro soubory' or 'všechny soubory'.",
-          "suggestion": "Nastavení doby platnosti <1>{{data}}</1> pro soubory v místnosti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Set lifetime\" is better translated as \"Stellen Sie die Lebensdauer ein\" or \"Definieren Sie die Lebensdauer\" rather than \"Legen Sie die Lebensdauer von...fest\". The current translation is a bit clunky and doesn't quite capture the meaning of 'set'.",
-          "suggestion": "Stellen Sie die Lebensdauer von <1>{{data}}</1> für alle Dateien im Raum ein."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ορισμός διάρκειας ζωής\" is a bit literal and could be more natural. A better phrasing would capture the sense of 'setting' or 'assigning' a lifetime.",
+          "suggestion": "Ανάθεση διάρκειας ζωής"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"για όλα τα αρχεία στο δωμάτιο\" can be slightly more concise. It's a bit wordy for a UI element.",
+          "suggestion": "σε όλα τα αρχεία του δωματίου"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -117,13 +111,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Aseta <1>{{data}}</1> ikä kaikille huoneen tiedostoille' translates to 'Set <1>{{data}}</1> age for all room files'. The English implies setting a lifetime, not an age. 'Lifetime' translates to 'kesto' or 'elinkaari', not 'ikä'.",
-          "suggestion": "Aseta <1>{{data}}</1> kesto kaikille huoneen tiedostoille"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'elinkaari' is a more direct translation of 'lifetime', 'kesto' is more commonly used and understandable in this context. Using 'elinkaari' might sound overly formal or technical.",
-          "suggestion": "Aseta <1>{{data}}</1> kesto kaikille huoneen tiedostoille"
+          "description": "The Finnish translation 'Aseta <1>{{data}}</1> ikä kaikille huoneen tiedostoille' uses 'ikä' which translates to 'age'. The intended meaning is 'lifetime'.",
+          "suggestion": "Aseta <1>{{data}}</1> elinikä kaikille huoneen tiedostoille"
         }
       ],
       "approved_at": null
@@ -131,7 +120,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'lifetime' as 'durée de vie' is technically correct, but in the context of file management, 'durée de conservation' would be a more natural and common phrasing. 'Durée de vie' implies a living lifespan, which doesn't apply to files.",
+          "suggestion": "Définir la durée de conservation de <1>{{data}}</1> pour tous les fichiers de la salle"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -140,8 +135,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"ծառայության ժամկետը\" (service lifetime) doesn't quite capture the meaning of 'lifetime' in the context of files. It implies a service related to the file, not the file's existence or retention period.",
-          "suggestion": "Consider using something like \"ժամկետը\" (term), \"կյանքի տևողությունը\" (lifespan/duration), or \"պահպանման ժամկետը\" (retention period) depending on the intended meaning.  For example:  \"Սահմանեք <1>{{data}}</1> ֆայլերի պահպանման ժամկետը սենյակի բոլոր ֆայլերի համար\"."
+          "description": "The English term \"lifetime\" is best translated as \"մատվյան շրջանակ\" (matvyan shrjanak) or \"աշխատանքային ժամանակահատված\" (ashxatakanak zhamanakahatvad) rather than \"ծառայության ժամկետը\" (tsaruyutyun zhamkerti). While \"ծառայության ժամկետը\" can be used in some contexts, it implies a service duration, which isn't the primary meaning of \"lifetime\" in this case.  'ծառայության ժամկետը' suggests something providing a service.",
+          "suggestion": "Consider translating 'lifetime' as 'մատվյան շրջանակ' or 'աշխատանքային ժամանակահատված'."
         }
       ],
       "approved_at": null
@@ -149,13 +144,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"lifetime\" is better translated as \"validità\" or \"scadenza\" in the context of file retention or duration. 'Durata' is acceptable, but lacks the precision of the other options.",
-          "suggestion": "Imposta la validità di <1>{{data}}</1> per tutti i file nella stanza"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -164,13 +153,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Set lifetime of\" is not perfectly conveyed by \"有効期限を\".  While \"有効期限\" means expiration date/lifetime, \"設定する\" (to set) isn't the most natural way to express setting a lifetime. A more natural phrasing might be \"有効期限を～に設定する\" or simply \"～に設定する\".",
-          "suggestion": "ルーム内のすべてのファイルの有効期限を～に設定"
-        },
-        {
-          "type": "formatting",
-          "description": "The English content has `<1>{{data}}</1>`. The Japanese translation doesn't have the equivalent tagging for the variable. It should also include the same tags, or a matching tag convention, for consistency.",
-          "suggestion": "ルーム内のすべてのファイルの有効期限を <1>{{data}}</1> に設定"
+          "description": "The English phrase \"Set lifetime\" is better translated as \"期限を設定する (Kigen o setto suru)\" rather than just \"設定する (setto suru)\".  While 'setto suru' isn't *wrong*, it's less precise in this context.",
+          "suggestion": "ルーム内のすべてのファイルの有効期限を <1>{{data}}</1> に期限を設定"
         }
       ],
       "approved_at": null
@@ -181,13 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"룸에 있는 모든 파일에 대한 <1>{{data}}</1>의 수명 설정\" is a literal translation that doesn't quite capture the natural flow of the English phrase 'Set lifetime of <1>{{data}}</1> for all files in room'. It sounds a bit awkward in Korean.",
-          "suggestion": "룸 내 모든 파일의 <1>{{data}}</1> 수명 설정"
+          "description": "The phrase 'Set lifetime' is not accurately conveyed. '설정' (seong) implies a setting or configuration, but doesn't directly translate to 'setting the lifetime'. A more accurate translation would incorporate the action of setting.",
+          "suggestion": "룸에 있는 모든 파일에 대해 <1>{{data}}</1>의 유효 기간을 설정합니다."
         },
         {
           "type": "formatting",
-          "description": "The tags <1>{{data}}</1> are consistent in both English and Korean, which is good, but the Korean sentence structure might benefit from adjusting the placement of the tag for better readability.  It's currently positioned after '대한', which isn't ideal.",
-          "suggestion": "룸 내 모든 파일의 <1>{{data}}</1> 수명 설정"
+          "description": "The angle brackets `<1>{{data}}</1>` seem inconsistent in Korean. Korean typically uses more natural phrasing rather than mimicking the English tag structure. While maintaining the tag is possible, it might sound unnatural.",
+          "suggestion": "룸에 있는 모든 파일에 대해 <1>{{data}}</1>의 유효 기간을 설정합니다."
         }
       ],
       "approved_at": null
@@ -195,7 +179,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes angle brackets <1>{{data}}</1> which mirrors the English. These brackets are likely unnecessary in the Lao translation and should be removed.",
+          "suggestion": "ກຳນົດໄລຍະເວລາຂອງ {{data}} ສຳລັບເອກະສານທັງໝົດໃນຫ້ອງ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -204,8 +194,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"lifetime\" is better translated as \"darbības laiks\" or \"derīguma termiņš\" in this context, rather than \"kalpošanas laiks\". \"Kalpošanas laiks\" is more commonly used for durable goods.",
-          "suggestion": "Iestatiet <1>{{data}}</1> darbības laiku visiem telpā esošajiem failiem"
+          "description": "The term \"kalpošanas laiks\" (service life) isn't the most natural translation for \"lifetime\" in this context. \"Dzīves laiks\" is a more direct and commonly used equivalent when referring to the duration a file exists or is accessible.",
+          "suggestion": "Iestatiet <1>{{data}}</1> dzīves laiku visiem telpā esošajiem failiem"
         }
       ],
       "approved_at": null
@@ -219,13 +209,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'lifetime' is better translated as 'expiration date' or 'validity period' in this context. 'Okres ważności' is accurate, but lacks the nuance of 'lifetime' meaning a period of usability.",
-          "suggestion": "Ustaw datę ważności na <1>{{data}}</1> dla wszystkich plików w pokoju"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -234,7 +218,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'lifetime' is better translated as 'duração' or 'validade' in Portuguese, rather than a literal translation of 'tempo de vida'. 'Tempo de vida' can sound unnatural in this context.",
+          "description": "The English phrase 'lifetime' is best translated as 'duração' or 'prazo de validade' rather than 'tempo de vida' in this context. 'Tempo de vida' is too literal and doesn't convey the intended meaning of file retention.",
           "suggestion": "Defina a duração de <1>{{data}}</1> para todos os arquivos na sala"
         }
       ],
@@ -246,8 +230,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'life time' is translated as 'vida útil'. While technically correct, a more natural and idiomatic translation for 'lifetime' in this context (referring to data retention) would be 'tempo de vida'.",
-          "suggestion": "Definir o tempo de vida de <1>{{data}}</1> para todos os arquivos na sala"
+          "description": "The English phrase 'lifetime' is better translated as 'tempo de vida útil' in Portuguese to accurately convey the intended meaning. Simply translating it as 'vida útil' feels incomplete and may not be understood in context.",
+          "suggestion": "Definir o tempo de vida útil de <1>{{data}}</1> para todos os arquivos na sala"
         }
       ],
       "approved_at": null
@@ -258,18 +242,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Durata de viață de <1>{{data}}</1> pentru toate fișiere din sala' is not entirely accurate. 'Lifetime' implies a duration, but the Romanian phrasing directly translates it as 'life duration.' A more natural phrasing would convey the setting of a lifetime value.",
-          "suggestion": "Setează durata de viață de <1>{{data}}</1> pentru toate fișierele din sală"
+          "description": "The translation \"Durata de viață de <1>{{data}}</1> pentru toate fișiere din sala\" is not ideal. \"Durata de viață\" translates to \"lifetime\", but the phrasing sounds awkward in Romanian. A more natural phrasing would be \"Stabilește durata de viață\" or \"Setează durata de viață\".",
+          "suggestion": "Stabilește durata de viață de <1>{{data}}</1> pentru toate fișierele din sala"
         },
         {
           "type": "formatting",
-          "description": "The Romanian translation maintains the angle brackets '<1>' and '</1>'. While it's likely to preserve the formatting, it's crucial to confirm that this is intended and compatible with the Romanian interface.",
-          "suggestion": "Verify that the angle brackets are appropriate for the target interface and intended to be preserved. If not, remove them or adapt them to a suitable Romanian format."
-        },
-        {
-          "type": "grammar",
-          "description": "The word 'sala' is technically correct for 'room', but 'cameră' might be more common and sound more natural in this context. It depends on the specific register of language being used.",
-          "suggestion": "Consider using 'cameră' instead of 'sală' for a potentially more natural sounding translation, depending on the desired tone."
+          "description": "The word 'sala' should be 'sala' with an 'e' at the end. 'Sala' means room, but 'sale' is incorrect.",
+          "suggestion": "Stabilește durata de viață de <1>{{data}}</1> pentru toate fișierele din sala"
         }
       ],
       "approved_at": null
@@ -280,8 +259,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Установлен срок действия' (Srok deystviya is set) is passive and doesn't accurately reflect the active command 'Set lifetime'. A better translation would be more active, like 'Задать срок действия' (Zadat' srok deystviya) or 'Установить срок действия' (Ustanovit' srok deystviya) depending on the desired tone.",
-          "suggestion": "Задать срок действия <1>{{data}}</1> для всех файлов в комнате"
+          "description": "The translation 'Установлен срок действия' (Established term of validity) implies that the action has already been completed. The English phrase 'Set lifetime' indicates an action being performed. A more accurate translation would be 'Установите срок действия' (Set term of validity).",
+          "suggestion": "Установите срок действия <1>{{data}}</1> для всех файлов в комнате"
         }
       ],
       "approved_at": null
@@ -292,13 +271,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"සියලු ගොනු සඳහා <1>{{data}}</1> හි කාලායතනය සකසන්න\" is not the most natural or accurate translation of 'Set lifetime of <1>{{data}}</1> for all files in room'. A more accurate translation would emphasize the action being performed *on* the files.",
-          "suggestion": "සියලුම ගොනු වල <1>{{data}}</1> කාලායතනය සකසන්න"
+          "description": "The translation \"සියලු ගොනු සඳහා <1>{{data}}</1> හි කාලායතනය සකසන්න\" is not the most natural way to express 'Set lifetime of <1>{{data}}</1> for all files in room'. A more natural phrasing would be something like 'සියලුම ගොනු සඳහා <1>{{data}}</1>  සම කාලසීමාව සකසන්න' or 'සියලුම ගොනු සඳහා <1>{{data}}</1>  හි ක්‍රියාත්මන කාලය සකසන්න'.",
+          "suggestion": "Consider 'සියලුම ගොනු සඳහා <1>{{data}}</1>  සම කාලසීමාව සකසන්න' or 'සියලුම ගොනු සඳහා <1>{{data}}</1>  හි ක්‍රියාත්මන කාලය සකසන්න'"
         },
         {
           "type": "formatting",
-          "description": "The Sinhala translation uses a slightly different word order that changes the emphasis.  The English uses 'lifetime of <1>{{data}}</1> for all files', which implies that the lifetime is being assigned *to* the data. The Sinhala translation, as is, could be interpreted differently.",
-          "suggestion": "No direct correction possible; re-evaluate for semantic accuracy within the application context."
+          "description": "The `<1>` and `</1>` tags are not localized. They should be translated or removed if not relevant.",
+          "suggestion": "Evaluate whether `<1>` and `</1>` need localization. If so, translate them appropriately or remove them if they are placeholders that will be handled programmatically."
         }
       ],
       "approved_at": null
@@ -309,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Lifetime' is not accurately translated. 'Doba používania' implies a usage period, while 'lifetime' refers to the total duration something exists. A more accurate translation would be something like 'trvanie' or 'dĺžka životnosti'.",
-          "suggestion": "Consider replacing 'doba používania' with 'trvanie' or 'dĺžka životnosti'."
+          "description": "'Doba používania' is a literal translation of 'lifetime' but might not be the most natural phrasing in Slovak in this context. A more natural translation might be 'trvanlivosť' or 'životnosť'.",
+          "suggestion": "Nastaviť trvanlivosť <1>{{data}}</1> pre všetky súbory v miestnosti"
         }
       ],
       "approved_at": null
@@ -321,13 +300,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Set\" is awkward. \"Nastavitev\" implies a setting, not an action of setting.",
-          "suggestion": "Postavi življenjsko dobo <1>{{data}}</1> za vse datoteke v sobi"
+          "description": "The translation \"Nastavitev življenjske dobe\" is too literal and doesn't flow naturally. A more accurate and natural translation would be something like \"Določitev življenjske dobe\" or \"Nastavitev veljavnosti\".",
+          "suggestion": "Določitev življenjske dobe <1>{{data}}</1> za vse datoteke v sobi"
         },
         {
           "type": "formatting",
-          "description": "The angle brackets (<1> and </1>) are not standard Slovenian sentence structure and feel unnatural. While they preserve the original formatting, they may confuse users.",
-          "suggestion": "Consider removing the brackets and integrating the `{{data}}` variable directly into the sentence if possible or adapting the phrasing to naturally incorporate it."
+          "description": "The format tags `<1>` and `</1>` are identical in both the English and Slovenian, which is acceptable but might warrant review for consistency across all translations if those tags have a specific meaning/function.",
+          "suggestion": "No change needed, but review consistency of format tags across all translations."
         }
       ],
       "approved_at": null
@@ -338,13 +317,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Set lifetime\" is better translated as \"Postavi trajanje\" or \"Odredi trajanje\" in Serbian (Cyrillic). \"Postavi vreme trajanja\" is a bit too literal and not the most natural phrasing.",
-          "suggestion": "Postavi trajanje od <1>{{data}}</1> za sve fajlove u sobi"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'fajlove' is missing an accent mark. It should be 'фајлове'.",
-          "suggestion": "Постави трајање од <1>{{data}}</1> за све фајлове у соби"
+          "description": "The word 'фајлове' is technically correct, but 'датутеке' (datoteke) is more commonly used for 'files' in a technical context in Serbian. 'фајлове' feels like a direct transliteration and less natural.",
+          "suggestion": "Постави време трајања од <1>{{data}}</1> за све датутеке у соби"
         }
       ],
       "approved_at": null
@@ -355,13 +329,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Postavi' (meaning 'set' in the sense of placing or assigning) doesn't quite capture the intended meaning of 'Set' in this context. It implies an action, not a configuration setting. A more suitable translation would convey the idea of defining or configuring a lifetime.",
-          "suggestion": "Definiši vreme trajanja od <1>{{data}}</1> za sve fajlove u sobi"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, 'vreme trajanja' sounds a bit clunky. A more fluent phrasing could be used.",
-          "suggestion": "Vreme trajanja od <1>{{data}}</1> za sve fajlove u sobi"
+          "description": "The English phrase \"Set lifetime\" is better translated as \"Podesi vreme trajanja\" instead of \"Postavi vreme trajanja\". \"Postavi\" implies a more permanent setting, while \"podesi\" is more appropriate for a configurable lifetime.",
+          "suggestion": "Podesi vreme trajanja od <1>{{data}}</1> za sve fajlove u sobi"
         }
       ],
       "approved_at": null
@@ -372,7 +341,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"lifetime\" is better translated as \"geçerlilik süresi\" or \"saklama süresi\" in Turkish, as \"yaşam süresi\" literally translates to lifespan and might be misleading in this context.",
+          "description": "The English phrase \"lifetime\" is best translated as \"geçerlilik süresi\" or \"saklama süresi\" in this context, rather than literally translating it as \"yaşam süresi\". \"Yaşam süresi\" typically refers to a living organism's lifespan.",
           "suggestion": "Odadaki bütün dosyalar için <1>{{data}}</1> geçerlilik süresi ayarlayın"
         }
       ],
@@ -381,7 +350,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term \"lifetime\" is better translated as \"термін існування\" rather than just \"період існування\" for greater accuracy in a technical context.",
+          "suggestion": "Задати термін існування <1>{{data}}</1> для всіх файлів у кімнаті"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

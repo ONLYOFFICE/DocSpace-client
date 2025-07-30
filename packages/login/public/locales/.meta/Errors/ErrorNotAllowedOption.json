@@ -3,7 +3,7 @@
   "content": "Your pricing plan does not support this option",
   "content_en_sha1_hash": "300c26d4ea30766ea193fca2701f28e5f7e91156",
   "created_at": "2025-05-19T21:30:57.284Z",
-  "updated_at": "2025-05-28T09:30:02.896Z",
+  "updated_at": "2025-05-26T07:57:32.884Z",
   "comment": {
     "text": "This translation key displays an error message indicating that a specific option is not allowed on the user's pricing plan. It appears in a login process related to SSO settings and is displayed when an invalid or unsupported option is chosen. The goal is to inform users of their pricing limitations.",
     "is_auto": true,
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '귀하의 가격 계획은이 옵션을 지원하지 않습니다' is a literal translation and sounds unnatural in Korean. It doesn't convey the intended meaning of 'Your pricing plan does not support this option' in a fluent and professional way.",
+          "suggestion": "요금제에서 이 기능을 사용할 수 없습니다 (yogeumje-eseo i geon-eul sayonghal su eopseumnida)"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,7 +129,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Twój plan wycena nie obsługuje tej opcji' is not an accurate translation of 'Your pricing plan does not support this option.' 'Wycena' refers to 'pricing' or 'quotation' but doesn't fit the context of a 'pricing plan'.",
+          "suggestion": "Twój plan cenowy nie obsługuje tej opcji"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically not incorrect, 'Twój plan cenowy nie obsługuje tej opcji' flows better and is more natural Polish. 'Twój plan wycena nie obsługuje tej opcji' sounds awkward.",
+          "suggestion": "Twój plan cenowy nie obsługuje tej opcji"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,7 +158,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Planul tarifar al dvs nu include această opțiune' is not the most natural or idiomatic Romanian. While technically correct, it sounds somewhat formal and stiff. A more natural phrasing would be 'Planul dumneavoastră tarifar nu permite această opțiune' or 'Această opțiune nu este disponibilă în planul dumneavoastră tarifar'.",
+          "suggestion": "Această opțiune nu este disponibilă în planul dumneavoastră tarifar"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +194,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'podržava' is spelled incorrectly. The correct spelling is 'подржава'.",
+          "suggestion": "подржава"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +218,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'параметр' (parameter) is technically correct, 'опцію' (option) would be a more natural and user-friendly translation of 'option' in this context. 'Параметр' is more common in technical documentation.",
+          "suggestion": "Ваш тарифний план не підтримує цю опцію"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

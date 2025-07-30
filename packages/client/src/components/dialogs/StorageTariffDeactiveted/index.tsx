@@ -45,7 +45,7 @@ import styles from "./StorageTariff.module.scss";
 
 type StorageTariffDeactivetedProps = {
   visible: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   totalPrice?: number;
   previousStoragePlanSize?: number;
   usedTotalStorageSizeCount?: number;
@@ -72,7 +72,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
   const onCloseModal = () => {
     localStorage.setItem(STORAGE_TARIFF_DEACTIVATED, "true");
 
-    setIsShowTariffDeactivatedModal(false);
+    setIsShowTariffDeactivatedModal!(false);
 
     onClose && onClose();
   };
@@ -111,7 +111,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
             i18nKey="PreviousPlan"
             values={{
               amount: `${previousStoragePlanSize} ${t("Common:Gigabyte")}`,
-              price: formatWalletCurrency(totalPrice, 2),
+              price: formatWalletCurrency!(totalPrice!, 2),
             }}
             components={{
               1: <Text fontWeight={600} as="span" />,
@@ -125,7 +125,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
             ns="Payments"
             i18nKey="StorageUsed"
             values={{
-              amount: getConvertedSize(t, usedTotalStorageSizeCount),
+              amount: getConvertedSize(t, usedTotalStorageSizeCount!),
             }}
             components={{
               1: <Text fontWeight={600} as="span" />,
@@ -138,7 +138,7 @@ const StorageTariffDeactiveted: React.FC<StorageTariffDeactivetedProps> = ({
             ns="Payments"
             i18nKey="AvailableLimit"
             values={{
-              amount: getConvertedSize(t, maxTotalSizeByQuota),
+              amount: getConvertedSize(t, maxTotalSizeByQuota!),
             }}
             components={{
               1: <Text fontWeight={600} as="span" />,

@@ -3,7 +3,7 @@
   "content": "View and manage basic information about your profile",
   "content_en_sha1_hash": "0c9142e9010321bcd74878f1f389e9debb088cad",
   "created_at": "2025-05-19T21:30:47.055Z",
-  "updated_at": "2025-05-28T09:30:03.011Z",
+  "updated_at": "2025-05-26T07:57:32.999Z",
   "comment": {
     "text": "\"View and manage basic information about your profile.\" This translation key is used to display a tooltip or button label that allows users to view and edit their profile details in a OAuth accounts management interface.",
     "is_auto": true,
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"View and manage basic information about your profile\" is broader than the Japanese translation \"プロフィールに関する基本情報を表示して管理する\". The English implies the ability to *modify* basic profile information, while the Japanese only implies viewing and managing (likely referring to organization or display, not modification).",
-          "suggestion": "プロフィールに関する基本情報を表示して、必要に応じて管理および編集する"
+          "description": "The translation 'プロフィールに関する基本情報を表示して管理する' is technically correct but could be more natural and concise. '表示して管理する' is a bit verbose.",
+          "suggestion": "プロフィール基本情報を確認・管理する"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wyświetl podstawowe informacje o swoim profilu i zarządzaj nimi' is a bit too literal and could be improved for naturalness. 'Zarządzaj nimi' (manage them) refers back to 'informacje' (information), which isn't the intended meaning. The instruction is to manage the profile, not just the information about it.",
-          "suggestion": "Wyświetl i zarządzaj podstawowymi informacjami o swoim profilu"
+          "description": "The translation 'Wyświetl podstawowe informacje o swoim profilu i zarządzaj nimi' is a bit too literal and could be improved for natural flow. 'zarządzaj nimi' (manage them) is redundant as 'Wyświetl' implies viewing and potentially managing. It's better to imply management without explicitly stating it.",
+          "suggestion": "Wyświetl podstawowe informacje o swoim profilu."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content 'View and manage basic information about your profile' is broader than the Russian translation. 'Manage' is not explicitly mentioned in the Russian version. While 'управлять ей' implies management, it's less direct than the English.",
-          "suggestion": "Просмотреть и управлять основной информацией о вашем профиле"
+          "description": "The English phrase 'manage' isn't fully captured by 'управлять ей' in the Russian translation. 'Manage' implies more than just viewing and potentially editing, while the translation focuses solely on the act of managing. A more accurate translation would incorporate a broader sense of control or modification.",
+          "suggestion": "Просмотреть основную информацию о вашем профиле и иметь возможность ее редактировать"
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"View and manage basic information about your profile\" is more accurately translated as 'View and edit basic information about your profile'. The Sinhala translation 'පාලනය කරන්න' (paalanaya karanna) implies a broader range of control beyond just managing or editing.",
-          "suggestion": "ඔබේ පැතිකඩ පිළිබඳ මූලික තොරතුරු බලන්න සහ සංස්කරණය කරන්න"
+          "description": "The English phrase 'View and manage basic information about your profile' is not perfectly captured by the Sinhala translation. 'පාලනය කරන්න' (paalayana karanna) implies a more active management than 'manage.' A more accurate translation might focus on 'update' or 'edit' instead of 'manage,' depending on the intended functionality.",
+          "suggestion": "ඔබේ පැතිකඩ පිළිබඳ මූලික තොරතුරු බලන්න සහ යාවත්කාලීන කරන්න (obey pathikada pilibathumulika thorathuru balannata ha yawatkaalina karna)"
         }
       ],
       "approved_at": null
@@ -197,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation \"Прикажи и управљај основним информацијама о свом профилу\" translates more closely to \"Display and manage basic information about your profile.\" The English phrase \"View and manage\" implies a more active role. A better translation would convey the same active role.",
-          "suggestion": "Погледај и управљај основним информацијама о свом профилу"
+          "type": "spelling",
+          "description": "The word 'прикажи' is a slightly unusual choice. While grammatically correct, 'гледај' or 'погледај' would be more common and natural in this context.",
+          "suggestion": "гледај и управљај основним информацијама о свом профилу"
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Переглянути основну інформацію про свій профіль і керувати нею' is too literal and slightly awkward. A more natural phrasing would convey the meaning of 'view and manage'.",
-          "suggestion": "Переглянути та керувати основною інформацією про свій профіль"
+          "description": "The translation \"Переглянути основну інформацію про свій профіль і керувати нею\" is too literal and less natural. The English 'manage' implies more than just viewing and managing - it suggests editing or control. 'Керувати нею' sounds slightly awkward in this context.",
+          "suggestion": "Переглянути та редагувати основну інформацію про свій профіль"
         }
       ],
       "approved_at": null
@@ -237,7 +237,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"查看和管理您个人资料的基础信息\" is a literal translation that doesn't quite capture the nuance of 'View and manage basic information about your profile'. It's a bit clunky and less natural-sounding in Chinese.",
+          "suggestion": "查看和管理您的个人资料信息"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2025-06-03T20:59:41.970Z",
+  "updated_at": "2025-06-30T12:20:31.299Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is successfully copied to the clipboard, typically in a button or link copy action. It appears as an alert or notification in UI components such as ExternalLinks and MetadataUrlField, and is used to provide a positive feedback to users after they have copied a link.",
     "is_auto": true,
@@ -66,13 +66,13 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 113,
+      "line_number": 114,
       "context": "const origin = window.location.origin;\n \n const url = `${origin}/doceditor?fileId=${completedForm.id}`;\n \n await copyShareLink(url);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleDownload = () => {\n window.open(completedForm.viewUrl, \"_self\");\n };",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 180,
+      "line_number": 181,
       "context": "window.location.assign(fileURL);\n };\n \n const copyLinkFile = async () => {\n await copyShareLink(fileURL);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleClickFile = () => {\n if (isYournTurn) handleFillForm();\n else handleViewForm();",
       "module": "/packages/doceditor"
     }
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'buferə' is not the standard word for 'clipboard' in Azerbaijani. While it's understandable, 'keçirildi' (copied) is correctly translated, but the word 'buferə' can be misinterpreted.",
-          "suggestion": "Link məclisinə (Link meclisina) suruldu"
+          "description": "The translation 'Link buferə köçürüldü' is not the most accurate or natural translation of 'Link has been copied to the clipboard'. 'Bufer' is a direct translation of 'buffer' and while understandable, 'keçirildi' is also a somewhat literal rendering of 'copied'.  A more natural translation would use a word like 'məclis' (clipboard) or a more idiomatic expression.",
+          "suggestion": "Link məclisə köçürüldü"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Presse-papiers' is technically correct but may be less familiar to some French speakers. 'Clipboar' would be more common and understandable.",
-          "suggestion": "Le lien a été copié dans le presse-papiers (or Le lien a été copié dans le clipboar)"
+          "description": "“Presse-papiers” should be “le presse-papiers” for proper grammatical correctness.",
+          "suggestion": "Le lien a été copié dans le presse-papiers"
         }
       ],
       "approved_at": null
@@ -153,7 +153,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'սեղմատախտակին' (slegmatakhtakin) is the genitive case of 'սեղմատախտակ' (slegmatakhtak) and might sound slightly unnatural or overly formal in this context. A more natural and common phrasing might be preferred.",
+          "suggestion": "Consider using a more common phrasing, such as 'բաժանորդագրային ցանկին' (bajanordragrayn tsankin - to the clipboard) or simply 'ցանկին' (tsankin - to the list)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -179,14 +185,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'clipboard' is transliterated but not fully integrated into Lao. The correct Lao word for clipboard should be used.",
-          "suggestion": "ລິ້ງໄດ້ຖືກສໍາເນົາໄປບ່ອນຕິດເຄື່ອງ"
+          "type": "incorrect_translation",
+          "description": "The term \"clipboard\" is transliterated directly. While understandable, a more natural Lao equivalent for 'clipboard' would improve readability. The word 'clipboard' is often used directly in Lao as is, but clarifying it might be helpful.",
+          "suggestion": "ລິ້ງໄດ້ຖືກສໍາເນົາໄປໃສ່ເຂດບັນທຶກ (or ໃສ່ບ່ອນບັນທຶກໂອນຂໍ້ມູນ)"
         },
         {
-          "type": "grammar",
-          "description": "While understandable, the sentence structure could be improved for a more natural flow in Lao. Using 'ສຳເນົາ' directly alongside 'ລິ້ງ' might sound slightly awkward.",
-          "suggestion": "ລິ້ງຖືກສຳເນົາໃສ່ clipboard"
+          "type": "formatting",
+          "description": "While not strictly incorrect, using the Lao word for 'to' might improve flow.  'ໄປ' is fine but consider alternatives.",
+          "suggestion": "ລິ້ງໄດ້ຖືກສໍາເນົາໃສ່ເຂດບັນທຶກ"
         }
       ],
       "approved_at": null
@@ -203,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'klembord' is an older term for clipboard and less common than 'knipbord' in modern Dutch.  'Knipbord' is the standard term.",
-          "suggestion": "Link is gekopieerd naar het knipbord"
+          "description": "While technically correct, 'klembord' is an older term for clipboard. The more common and modern Dutch term is 'knipplaats'.",
+          "suggestion": "Link is gekopieerd naar de knipplaats"
         }
       ],
       "approved_at": null
@@ -218,7 +224,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"A ligação foi copiada para a área de transferência\" is a very literal translation and sounds unnatural in Portuguese. 'Ligação' usually refers to a phone connection. A more natural translation for a link would be 'o link'.",
+          "suggestion": "O link foi copiado para a área de transferência"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -227,7 +239,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Link foi copiado para a área de trabalho' is not the most accurate translation of 'Link has been copied to the clipboard'. 'Área de trabalho' translates to 'desktop' or 'work area', not 'clipboard'.",
+          "description": "'Área de trabalho' translates to 'desktop' or 'workspace' and not 'clipboard'. The English phrase 'Link has been copied to the clipboard' refers to the system clipboard.",
           "suggestion": "Link foi copiado para a área de transferência"
         }
       ],
@@ -240,7 +252,7 @@
         {
           "type": "incorrect_translation",
           "description": "The Romanian translation 'Încărcarea fișierului media eșuată' translates to 'Media file upload failed'. This is not an accurate translation of 'Link has been copied to the clipboard'.",
-          "suggestion": "A correct translation could be 'Link-ul a fost copiat în clipboard' or 'Legătura a fost copiată în clipboard'."
+          "suggestion": "The correct translation should convey the action of copying a link to the clipboard. A possible suggestion is: 'Link-ul a fost copiat în clipboard'."
         }
       ],
       "approved_at": null
@@ -257,13 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සබැඳිය පසුරුපුවරුවට පිටපත් විය' while literally meaning 'Link copied to the clipboard,' sounds unnatural and overly formal in Sinhala. A more natural phrasing would be preferred.",
-          "suggestion": "Consider using a phrasing like 'සබැඳිය ක්ලිප්බෝඩ් වෙත පිටපත් කරන ලදි' or 'සබැඳිය ක්ලිප්බෝඩ් වලට එක් කරන ලදි'."
-        },
-        {
-          "type": "formatting",
-          "description": "The term ' පසුරුපුවරුව' (backpaper) is a less common and potentially confusing term for clipboard. Using a more common equivalent will improve clarity.",
-          "suggestion": "Replace ' පසුරුපුවරුව' with a more common term for clipboard. It may be best to omit it entirely as the context clearly indicates what happened."
+          "description": "The translation 'සබැඳිය පසුරුපුවරුවට පිටපත් විය' while containing the correct words, doesn't quite capture the natural flow of the English sentence. A more natural phrasing would be 'සබැඳිය ක්ලිප්බෝඩ් වෙත පිටපත් කරන ලදි.'",
+          "suggestion": "සබැඳිය ක්ලිප්බෝඩ් වෙත පිටපත් කරන ලදි"
         }
       ],
       "approved_at": null
@@ -286,13 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Линк је копиран на привремену меморију\" is not the most natural or accurate translation of \"Link has been copied to the clipboard\". \"Привремену меморију\" literally translates to 'temporary memory', which is not how 'clipboard' is typically understood in Serbian. While technically correct, it is not user-friendly.",
-          "suggestion": "Линк је копиран у клипборд"
-        },
-        {
-          "type": "formatting",
-          "description": "The term 'клипборд' is an English loanword and should ideally be transliterated or adapted to Serbian orthography for consistency.",
-          "suggestion": "Линк је копиран у лепборд"
+          "description": "The translation 'Линк је копиран на привремену меморију' is not the most natural or accurate translation of 'Link has been copied to the clipboard.' 'Привремену меморију' translates to 'temporary memory,' which is not the standard term for a clipboard.",
+          "suggestion": "Линк је копиран у међускладиште (Link copied to the clipboard)"
         }
       ],
       "approved_at": null
@@ -303,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Link je kopiran na privremenu memoriju' is technically correct but 'privremena memorija' literally translates to 'temporary memory', which is not commonly used in this context. The preferred term would be 'sistemski isečak' (system clipboard) or simply 'isečak' (clipboard).",
-          "suggestion": "Link je kopiran u isečak."
+          "description": "The Serbian translation 'Link je kopiran na privremenu memoriju' is a literal translation of 'Link has been copied to the clipboard'. While technically correct, a more natural and idiomatic translation would be 'Link je kopiran u međumemoriju' or 'Link je prekopiran u privremenu memoriju'. 'Međumemorija' is more commonly used for clipboard.",
+          "suggestion": "Link je kopiran u međumemoriju"
         }
       ],
       "approved_at": null
@@ -324,7 +326,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'bộ nhớ tạm' (temporary memory) is not the most natural or user-friendly translation for 'clipboard' in this context. 'Clipboard' is commonly understood as 'khay nhớ' in Vietnamese, especially in software and digital contexts.",
+          "suggestion": "Liên kết đã được sao chép vào khay nhớ"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

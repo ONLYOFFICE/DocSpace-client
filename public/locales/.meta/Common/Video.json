@@ -3,7 +3,7 @@
   "content": "Video",
   "content_en_sha1_hash": "bc17c1f0179a888f2a7e8389f67d4f2cf5cf4531",
   "created_at": "2025-05-19T21:30:49.512Z",
-  "updated_at": "2025-05-28T09:30:02.458Z",
+  "updated_at": "2025-05-26T07:57:32.453Z",
   "comment": {
     "text": "This translation key is used to display the type of a file. It appears as \"Video\" on files categorized as videos in a UI component.",
     "is_auto": true,
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'දෘශ්‍යකය' (dṛṣyaka) can be used to refer to 'visual' or 'image,' it's not the most common or direct translation of 'Video.' 'වීඩියෝ' (vīdiyō) is a transliteration of 'Video' and would be more widely understood.",
-          "suggestion": "වීඩියෝ (vīdiyō)"
+          "description": "The Sinhala translation \"දෘශ්‍යකය\" (drusyakaya) is a literal translation of 'visual' and while not entirely incorrect, it's not the most natural or common translation for 'Video' in Sinhala. It feels overly formal and technical. A more natural and common translation would be 'වීඩියෝ' (videyo), which is the transliteration of the English word.",
+          "suggestion": "වීඩියෝ (videyo)"
         }
       ],
       "approved_at": null

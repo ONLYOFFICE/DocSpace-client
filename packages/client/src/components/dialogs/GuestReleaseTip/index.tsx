@@ -36,11 +36,10 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Text } from "@docspace/shared/components/text";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TUser } from "@docspace/shared/api/people/types";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import NextStepSvg from "PUBLIC_DIR/images/next_step.react.svg";
 import ChangeTypeTipSvgUrl from "PUBLIC_DIR/images/change_type.tip.svg?url";
@@ -131,14 +130,16 @@ const GuestReleaseTip = ({
               <Trans
                 t={t}
                 ns="Translations"
-                i18nKey="GuestReleaseTipDescripton"
-                values={{ productName: t("Common:ProductName") }}
+                i18nKey="GuestConversionNote"
+                values={{
+                  productName: t("Common:ProductName"),
+                  sectionName: t("Common:Contacts"),
+                }}
               />
             </Text>
             {accessRightsLink ? (
-              <ColorTheme
+              <Link
                 tag="a"
-                themeId={ThemeId.Link}
                 fontSize="12px"
                 fontWeight={400}
                 lineHeight="16px"
@@ -146,13 +147,14 @@ const GuestReleaseTip = ({
                 target={LinkTarget.blank}
                 type={LinkType.page}
                 isHovered
+                color="accent"
               >
                 {t("Translations:GuestReleaseTipLink")}
-              </ColorTheme>
+              </Link>
             ) : null}
           </StyledBody>
 
-          <ReactSVG src={icon} alt="tip" />
+          <ReactSVG src={icon} />
 
           <Button
             primary

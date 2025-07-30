@@ -3,7 +3,7 @@
   "content": "There will be two different files in the folder.",
   "content_en_sha1_hash": "f5a9a4d6d05f3820e3d7543868c93f4b514a48f4",
   "created_at": "2025-05-19T21:30:43.866Z",
-  "updated_at": "2025-05-28T09:30:02.218Z",
+  "updated_at": "2025-06-30T12:20:31.194Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that two files will be copied. It appears in a conflict resolution dialog and provides context for users when choosing how to proceed with conflicting file names.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 64,
+      "line_number": 65,
       "context": "}\n selectActionText={t(\"ConflictResolveSelectAction\")}\n overwriteTitle={t(\"OverwriteTitle\")}\n overwriteDescription={t(\"OverwriteDescription\")}\n duplicateTitle={t(\"Common:CreateFileCopy\")}\n duplicateDescription={t(\"CreateDescription\")}\n skipTitle={t(\"SkipTitle\")}\n skipDescription={t(\"SkipDescription\")}\n headerLabel={t(\"ActionRequired\")}\n />\n );",
       "module": "/packages/doceditor"
     }
@@ -60,8 +60,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly formal and verbose. A more natural German phrasing would be more appropriate.",
-          "suggestion": "Es werden zwei verschiedene Dateien im Ordner sein."
+          "description": "The translation 'Es werden zwei verschiedene Dateien in dem Ordner vorhanden sein' is overly formal and verbose. A more natural translation would be 'Es gibt zwei verschiedene Dateien im Ordner.' or 'In dem Ordner befinden sich zwei verschiedene Dateien.'",
+          "suggestion": "Es gibt zwei verschiedene Dateien im Ordner."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'vorhanden sein' is grammatically correct but sounds unnecessarily formal and clunky in this context. It's better to use a more direct construction.",
+          "suggestion": "Removed 'vorhanden sein' and restructured the sentence"
         }
       ],
       "approved_at": null
@@ -114,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '폴더에 두 개의 다른 파일이 저장됩니다' implies the files are being stored, not just that they exist in the folder. The original sentence simply states their presence.",
-          "suggestion": "폴더에 두 개의 다른 파일이 있습니다."
+          "description": "The Korean translation '폴더에 두 개의 다른 파일이 저장됩니다' implies that the files are being saved into the folder. The English sentence only states they exist within the folder, not that they are being saved.",
+          "suggestion": "폴더 안에 두 개의 다른 파일이 있습니다."
         }
       ],
       "approved_at": null
@@ -126,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ໃນໂຟນເດີ້ຈະມີ 2 ໄຟລ໌ແຕກຕ່າງກັນ\" is not a perfect translation of \"There will be two different files in the folder.\" While it conveys the general meaning, 'ແຕກຕ່າງກັນ' (taek taang gan) can be a bit strong, suggesting significantly different files. A more accurate translation might focus on the fact that they are *separate* files.",
-          "suggestion": "ໃນໂຟນເດີ້ຈະມີໄຟລ໌ສອງສິບ."
+          "description": "The Lao translation \"ໃນໂຟນເດີ້ຈະມີ 2 ໄຟລ໌ແຕກຕ່າງກັນ.\" while conveying the general meaning, is slightly awkward. A more natural translation would emphasize the distinct nature of the files.",
+          "suggestion": "ໃນໂຟນເດີ້ຈະມີໄຟລ໌ສອງຢ່າງທີ່ແຕກຕ່າງກັນ."
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Două fișiere diferite vor fi salvate în dosarul' implies that the files will be *saved* in the folder. The original English sentence simply states that they *exist* in the folder. It's a difference in active vs. passive voice and introduces an action not present in the original.",
-          "suggestion": "Două fișiere diferite vor exista în dosar."
+          "description": "The Romanian translation 'Două fișiere diferite vor fi salvate în dosarul' implies that the files *will be saved* in the folder. The English sentence simply states their existence *in* the folder. The Romanian translation adds an action that isn't present in the original.",
+          "suggestion": "Două fișiere diferite vor fi în dosar."
         }
       ],
       "approved_at": null
@@ -186,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'බහාලුමෙහි වෙනස් ගොනු දෙකක් ඇත.' is a literal translation but doesn't flow naturally in Sinhala. 'බහාලුමෙහි' (bahalumehi) refers specifically to a basket or container, which may not be the intended meaning of 'folder'. A more natural phrasing is needed to convey the concept of a folder.",
-          "suggestion": "තfolder එකෙහි වෙනස් ගොනු දෙකක් ඇත. (thfolder ekha wense gnu dekak atha.) This translates to 'There are two different files in the folder.'"
+          "description": "The translation 'බහාලුමෙහි වෙනස් ගොනු දෙකක් ඇත' while conveying the general meaning, is not the most natural or accurate translation of 'There will be two different files in the folder.' A more appropriate translation would use a word for 'folder' that is more commonly used in this context. 'බහාලුම' can mean a basket or container, but a more direct equivalent of 'folder' would enhance clarity.",
+          "suggestion": "There are several options. Consider 'සමූහයෙහි වෙනස් ගොනු දෙකක් ඇත' (samūhayehi venaś gōnu dekak athā) where 'සමූහය' (samūhaya) translates closer to 'group' or 'collection' which is a better equivalent for 'folder' in this context. Alternatively, 'ලේඛන සාමග්‍රහියේ වෙනස් ගොනු දෙකක් ඇත' (lēkhana sāmāgrahīye venaś gōnu dekak athā) is also possible with 'ලේඛන සාමග්‍රහිය' meaning 'document repository' which can be used for a folder."
         }
       ],
       "approved_at": null
@@ -210,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The word 'folder' is transliterated as 'фолдеру' which is an Anglicism. While understandable, it's more natural to use the Serbian equivalent.",
-          "suggestion": "Биће две различите датотеке у директорију."
+          "description": "The word 'folder' is transliterated as 'фолдеру'. While understandable, using the Serbian equivalent 'фасцикула' would be more natural and culturally appropriate.",
+          "suggestion": "Биће две различите датотеке у фасцикула."
         }
       ],
       "approved_at": null
@@ -219,13 +224,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Biće dve različite datoteke u folderu.\" is not the most natural or preferred phrasing in Serbian. While technically correct, \"datoteke\" is a more formal term than is typically used in everyday language. A more common phrasing would be 'Biće dve različite fajlove u folderu.'",
-          "suggestion": "Biće dve različite fajlove u folderu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

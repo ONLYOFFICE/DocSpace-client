@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/variables/colors";
+@use "../../styles/mixins";
 
 :global(.light) {
   :local {
@@ -38,7 +38,7 @@
         ) !important;
       }
       circle {
-        fill: $white;
+        fill: variables.$white;
       }
     }
   }
@@ -61,9 +61,9 @@
   -webkit-appearance: none;
   align-items: start;
   outline: none;
-  -webkit-tap-highlight-color: $tap-highlight;
+  -webkit-tap-highlight-color: variables.$tap-highlight;
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 
   display: grid;
   grid-template-columns: min-content auto;

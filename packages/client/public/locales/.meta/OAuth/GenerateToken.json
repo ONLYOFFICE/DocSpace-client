@@ -3,7 +3,7 @@
   "content": "Generate token",
   "content_en_sha1_hash": "20edbffdb526a9bd74f7c85608a305a7ff7444fb",
   "created_at": "2025-05-19T21:30:53.892Z",
-  "updated_at": "2025-05-28T09:30:02.600Z",
+  "updated_at": "2025-06-08T12:02:32.771Z",
   "comment": {
     "text": "This translation key is used for the label of a button or option that generates an OAuth developer token, appearing in a modal dialog for portal settings.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 760,
+      "line_number": 762,
       "context": "};\n \n const generateDeveloperTokenOption = {\n key: \"generate-token\",\n icon: GenerateIconUrl,\n label: t(\"OAuth:GenerateToken\"),\n onClick: onGenerateDeveloperToken,\n disabled: !item.enabled,\n };\n \n const revokeDeveloperTokenOption = {",
       "module": "/packages/client"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Token yaradın\" is a literal translation of 'Generate token' but doesn't quite capture the intended meaning in context. 'Yaradın' implies creation by a person. A more accurate translation would convey the action of generating a token by a system or application.",
+          "description": "The translation 'Token yaradın' is a less formal and somewhat ambiguous translation of 'Generate token'. It literally translates to 'Token created' or 'You created a token'. A more accurate translation would convey the action of generating.",
           "suggestion": "Token hasil edin"
         }
       ],
@@ -57,7 +57,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Generování tokenu' is technically correct, it's a more formal and less common phrasing. A more natural and user-friendly translation would be 'Vytvořit token'.",
+          "suggestion": "Vytvořit token"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Luo tunnus' is understandable, a more accurate and idiomatic translation of 'Generate token' in this context would be 'Generoi tunnus' or 'Tuota tunnus'. 'Luo' generally means 'create' rather than specifically 'generate'.",
-          "suggestion": "Generoi tunnus"
+          "description": "While \"Luo tunnus\" is understandable, a more precise translation of \"Generate token\" would be something like \"Luo pääsylippu\" or \"Generoi tunnus\". \"Luo tunnus\" is a bit too literal and might not convey the intended meaning in a technical context.",
+          "suggestion": "Luo pääsylippu"
         }
       ],
       "approved_at": null
@@ -102,13 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Գեներացնել token-ը' is a literal translation and not the most natural way to say 'Generate token' in Armenian. While understandable, it lacks fluency.",
-          "suggestion": "Consider a more idiomatic translation such as 'Ստեղծել token-ը' (Stegtsel token-ը) or 'Համարձրել token-ը' (Hamardzel token-ը)."
+          "description": "The Armenian translation 'Գեներացնել token-ը' is a literal translation and not the most natural way to express 'Generate token' in Armenian. While understandable, it lacks fluency.",
+          "suggestion": "Consider alternatives like 'Ստեղծել token-ը' (Steghcel token-ը - Create token) or 'արածել token-ը' (Aracel token-ը - Produce token)."
         },
         {
           "type": "formatting",
-          "description": "The inclusion of 'token-ը' (token-ը) is a direct transliteration and while common in technical contexts, consider whether 'token' could be replaced with a more fully translated word depending on the target audience’s familiarity with the English term.",
-          "suggestion": "Evaluate whether keeping 'token' as is or attempting to find a suitable Armenian equivalent is appropriate for the context. For example, you might use a term like 'գրանցման շտրիխը' (granzman shrikhi) for a registration code if that's what 'token' represents."
+          "description": "The word 'token' is in English within the Armenian sentence. It might be preferable to transliterate or find an Armenian equivalent if one exists or if the context requires it.",
+          "suggestion": "Investigate if an Armenian equivalent for 'token' exists and is appropriate in this context. Alternatively, consider transliterating 'token' to a more phonetic Armenian spelling if the English term is commonly used."
         }
       ],
       "approved_at": null
@@ -119,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Genera token' is not grammatically correct Italian. 'Genera' is the informal imperative form. It should be the formal imperative 'Generi' to match the professional context of OAuth.",
-          "suggestion": "Generi token"
+          "description": "The Italian translation 'Genera token' lacks proper verb conjugation. 'Genera' is the informal 'you' form. The appropriate form depends on the context. A more accurate and formal translation would be 'Generare token' (infinitive) or 'Generi un token' (formal/polite 'you' form).",
+          "suggestion": "Generare token"
         }
       ],
       "approved_at": null
@@ -131,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'トークンの生成' while technically correct, is a very literal translation of 'Generate token'. A more natural and common phrasing for a button or action label would be 'トークン発行' (Token Hassho).",
-          "suggestion": "トークン発行"
+          "description": "While \"トークンの生成\" is technically correct, a more natural and common translation for 'Generate token' in a user interface or technical context would be \"トークンを生成する\" (Token o seisei suru).  \"トークンの生成\" feels more like a noun phrase describing the act of token generation, rather than an instruction to generate one.",
+          "suggestion": "トークンを生成する"
         }
       ],
       "approved_at": null
@@ -149,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao word 'ຜະລິດ' (phalit) is correct for 'generate' or 'produce'. The rest of the word 'ໂຕ໊ກຽນ' (to kian) appears to be a transliteration of 'token' and is acceptable but could benefit from a more idiomatic Lao equivalent, if available within the context of OAuth.",
-          "suggestion": "Consider if a more culturally appropriate/idiomatic Lao term exists for 'token' in the context of OAuth. If not, 'ໂຕ໊ກຽນ' is understandable."
+          "description": "The Lao word 'ຜະລິດ' (phalit) is generally used for 'produce' or 'manufacture'. While it can be used in the context of generating, 'ສ້າງ' (sang) or 'ຕັ້ງ' (tang) might be more suitable for 'generate' in this context.",
+          "suggestion": "Consider using 'ສ້າງໂຕ໊ກຽນ' or 'ຕັ້ງໂຕ໊ກຽນ' instead of 'ຜະລິດໂຕ໊ກຽນ'."
         }
       ],
       "approved_at": null
@@ -158,7 +164,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ģenerēt marķieri\" is a literal translation, \"ģenerēt atslēgu\" would be a more natural and accurate translation of 'Generate token' in the context of OAuth tokens. 'Marķieri' can refer to markers or tags, not necessarily authentication tokens.",
+          "suggestion": "Ģenerēt atslēgu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -203,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රතෝකනය ජනනය කරන්න' while understandable, isn't the most natural or preferred way to say 'Generate token' in Sinhala. 'ප්‍රතෝකනය' is a direct transliteration and while acceptable, it's more common to use a more idiomatic phrasing.",
-          "suggestion": "Consider alternatives like 'ප්‍රථෝකන ඵලනය කරන්න' (prathōkana phalayanā karanna) or simply 'ප්‍රථෝකන ලබා ගන්න' (prathōkana labā ganna) depending on the context.  'Generate' can also sometimes be expressed as 'ස້າງන්න' (sāngānna)."
+          "description": "While \"ප්‍රතෝකනය ජනනය කරන්න\" is a literal translation, a more natural and commonly used phrasing in Sinhala for \"Generate token\" would be something like \"ප්‍රතෝකනය ලබා ගන්න\" (prathokanya laba ganne). \"ජනනය කරන්න\" (jananya karanne) is closer to 'create' or 'produce' rather than 'generate' in this context.",
+          "suggestion": "ප්‍රතෝකනය ලබා ගන්න"
         }
       ],
       "approved_at": null
@@ -224,7 +236,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Генериши токен' is understandable, a more accurate and formal translation of 'Generate token' in a technical context would be 'Креирај токен'. 'Генериши' implies a more complex generation process, whereas 'Креирај' is more aligned with creating a token based on provided credentials.",
+          "suggestion": "Креирај токен"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -233,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Generiši token' is understandable, a more accurate and common translation of 'Generate token' in Serbian would be 'Kreiraj token' or 'Izgeneriši token'. 'Generiši' feels less natural in this context.",
-          "suggestion": "Kreiraj token"
+          "description": "The translation 'Generiši token' is not the most natural or common way to say 'Generate token' in Serbian. While understandable, a better translation would be 'Izgeneriši token' or 'Kreiraj token'.",
+          "suggestion": "Izgeneriši token"
         }
       ],
       "approved_at": null

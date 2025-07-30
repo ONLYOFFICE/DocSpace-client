@@ -55,31 +55,31 @@ const getInitialState = (sortedFiles: TSortedFiles) => {
     documents: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.documents,
     },
     spreadsheets: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.spreadsheets,
     },
     presentations: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.presentations,
     },
     masterForms: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.masterForms,
     },
     pdfForms: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.pdfForms,
     },
     diagrams: {
@@ -91,7 +91,7 @@ const getInitialState = (sortedFiles: TSortedFiles) => {
     other: {
       isChecked: true,
       isIndeterminate: false,
-      format: null,
+      format: null as string | null,
       files: sortedFiles.other,
     },
   };

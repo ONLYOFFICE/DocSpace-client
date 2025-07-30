@@ -3,7 +3,7 @@
   "content": "Starting the form filling process",
   "content_en_sha1_hash": "6ee9c62e2fdb707a20025b9ce66b0fa659b90f7a",
   "created_at": "2025-05-19T21:30:55.139Z",
-  "updated_at": "2025-05-21T10:46:37.600Z",
+  "updated_at": "2025-05-24T10:56:24.740Z",
   "comment": {
     "text": "This translation key is used to display a message starting the form filling process. It appears as the header of a guidance tip dialog in the application, providing a descriptive text for users to understand the next step in the form filling process.",
     "is_auto": true,
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Стартиране процеса по попълване на формуляр' is a literal translation and could be improved for naturalness. 'Starting the form filling process' often implies initiation or beginning, which isn't fully captured.",
+          "description": "The translation 'Стартиране процеса по попълване на формуляр' is somewhat literal and could be improved for naturalness in Bulgarian. 'Starting the form filling process' implies an initial action. A more natural phrasing would emphasize the beginning of the process.",
           "suggestion": "Започване на попълване на формуляр"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'процеса по попълване' is a little clunky. A more concise phrasing would improve readability.",
-          "suggestion": "попълването на формуляр"
         }
       ],
       "approved_at": null
@@ -62,18 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Formularausfüllvorgangs' is a very long and somewhat awkward compound word. While technically correct, it might be improved for readability.",
-          "suggestion": "Starten des Formularausfüllens"
-        },
-        {
-          "type": "formatting",
-          "description": "The compound word 'Formularausfüllvorgangs' is a single word and should be treated as such in any display formatting (e.g., capitalization).",
-          "suggestion": "No change needed, but ensure correct capitalization in the UI."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -121,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"양식 작성 프로세스 시작\" is a literal translation and could be improved for naturalness. While technically correct, it sounds somewhat stiff in Korean. A more natural phrasing might be preferred depending on the tone of the overall dialog.",
-          "suggestion": "Consider alternatives like \"양식 작성 시작\" or \"양식 작성 단계 시작\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -172,13 +150,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Demararea completării a formularului' is a bit literal and sounds unnatural in Romanian. 'Demarare' implies a complex or official start. A more natural phrasing would focus on 'beginning' or 'starting'.",
+          "description": "The Romanian translation 'Demararea completării a formularului' is a bit awkward. 'Demararea' implies initiation, but 'completării a formularului' sounds too literal and cumbersome. A more natural phrasing would be needed.",
           "suggestion": "Începerea completării formularului"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, 'a formularului' is a bit clunky. The article 'a' is unnecessary here.",
-          "suggestion": "Începerea completării formularului"
+          "type": "formatting",
+          "description": "While not strictly wrong, the Romanian translation uses genitive case ('a formularului'). Using nominative ('formularul') would be more common and natural.",
+          "suggestion": "Începerea completării formularul"
         }
       ],
       "approved_at": null
@@ -195,13 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පුරවීමේ' (puravimē) is slightly awkward. While technically correct, it's a more formal/verbose way of saying 'puravā' (to fill).",
-          "suggestion": "පෝරම පුරවන්නී ක්‍රියාවලිය ආරම්භ කරයි"
+          "description": "The word 'ආරම්භ කරයි' (aarambakarei) is not the best choice. It literally translates to 'starts'. A more natural phrasing would convey 'beginning' or 'commencing'.",
+          "suggestion": "පෝරම පුරවීමේ ක්‍රියාවලිය ආරම්භ වේ"
         },
         {
-          "type": "grammar",
-          "description": "While not strictly incorrect, the sentence structure 'පෝරම පුරවන්නී ක්‍රියාවලිය ආරම්භ කරයි' can be slightly improved for better flow.  It's a bit passive.",
-          "suggestion": "පෝරම පුරවන්නී ක්‍රියාවලිය ආරම්භ වේ"
+          "type": "grammatical",
+          "description": "While grammatically correct, the current translation sounds a bit too literal and stilted. It could be improved for better flow.",
+          "suggestion": "පෝරම පුරවීමේ ක්‍රියාවලිය ආරම්භ වේ"
         }
       ],
       "approved_at": null
@@ -254,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"开始填写表单进程\" is not the most natural or idiomatic way to express \"Starting the form filling process.\"  While technically correct, it sounds a little stiff.",
-          "suggestion": "开始填写表单"
+          "description": "The translation \"开始填写表单进程\" is not the most natural or accurate rendering of \"Starting the form filling process.\"  \"进程\" (jìnchéng) typically refers to a process in a more technical or system-level sense. For this context, a more natural phrasing is needed.",
+          "suggestion": "开始填写表格"
         }
       ],
       "approved_at": null

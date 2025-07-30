@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
+import { i18n as i18nType } from "i18next";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TUser } from "@docspace/shared/api/people/types";
 
@@ -41,8 +41,8 @@ const useI18N = ({ settings, user, locale }: UseI18NProps) => {
   const lng = locale || user?.cultureName || settings?.culture || "en";
   const portalLng = settings?.culture || "en";
 
-  const [i18n, setI18N] = React.useState<i18n>(
-    () => getI18NInstance(lng, portalLng) ?? ({} as i18n),
+  const [i18n, setI18N] = React.useState<i18nType>(
+    () => getI18NInstance(lng ?? portalLng) ?? ({} as i18nType),
   );
 
   const isInit = React.useRef(false);
@@ -55,7 +55,7 @@ const useI18N = ({ settings, user, locale }: UseI18NProps) => {
   React.useEffect(() => {
     isInit.current = true;
 
-    const instance = getI18NInstance(lng, portalLng);
+    const instance = getI18NInstance(lng ?? portalLng);
 
     if (instance) setI18N(instance);
   }, [lng, portalLng]);

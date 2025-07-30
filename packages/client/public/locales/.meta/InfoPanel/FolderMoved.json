@@ -3,7 +3,7 @@
   "content": "Folders moved.",
   "content_en_sha1_hash": "95d3399265d8232c4895fbd790a035ba8ae0057d",
   "created_at": "2025-05-19T21:30:54.849Z",
-  "updated_at": "2025-05-28T09:30:02.430Z",
+  "updated_at": "2025-06-30T12:20:31.341Z",
   "comment": {
     "text": "This translation key displays a message indicating that a folder has been moved, likely appearing as a notification or confirmation in the user interface.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 110,
-      "context": "return t(\"InfoPanel:FolderCreated\");\n case \"FolderRenamed\":\n return t(\"InfoPanel:FolderRenamed\");\n case \"FolderMoved\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case \"FolderMovedToTrash\":\n if (hasRelatedItems)",
+      "line_number": 116,
+      "context": "return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:\n return t(\"InfoPanel:FolderRenamed\");\n case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)",
       "module": "/packages/client"
     },
     {
@@ -69,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Carpetas movidas\" is grammatically correct, it doesn't perfectly capture the nuance of \"Folders moved.\" \"Carpetas movidas\" translates more literally to \"Folders moved\" (past participle). A more natural translation might be \"Carpetas trasladadas\" or \"Carpetas cambiadas\", depending on the context of the movement.",
-          "suggestion": "Carpetas trasladadas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໄຟລ໌ຖືກຍ້າຍແລ້ວ\" literally translates to \"Files have been moved.\" The English source says \"Folders moved.\" This is a semantic mismatch.",
-          "suggestion": "ໄຟລ໌ໂຟນເດີຖືກຍ້າຍແລ້ວ."
+          "description": "The Lao translation 'ໄຟລ໌ຖືກຍ້າຍແລ້ວ' literally translates to 'Files have been moved'. The English phrase 'Folders moved' refers to a plural collection of folders, not individual files. The translation doesn't accurately convey the meaning.",
+          "suggestion": "ໄຟລ໌ໂຟນເດີຖືກຍ້າຍແລ້ວ (File folders have been moved)"
         }
       ],
       "approved_at": null
@@ -174,13 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩර්ස් ගෙනයන ලදි.' doesn't accurately convey the meaning of 'Folders moved.' It translates to 'Folders were being moved.' The original implies a completed action.",
-          "suggestion": "ෆෝල්ඩර්ස් යටා chuyểnවා ඇත."
-        },
-        {
-          "type": "grammar",
-          "description": "The passive voice 'ගෙනයන ලදි' (being moved) might not be the most natural or concise way to express the action in Sinhala. A more direct phrasing is preferable.",
-          "suggestion": "ෆෝල්ඩර්ස් යටා chuyểnවා ඇත."
+          "description": "The translation 'ෆෝල්ඩර්ස් ගෙනයන ලදි.' does not accurately convey the meaning of \"Folders moved.\"  'ගෙනයන ලදි' implies 'being moved' or 'in the process of being moved'. The English phrase indicates a completed action.",
+          "suggestion": "ෆෝල්ඩර්ස් යටාහකි."
         }
       ],
       "approved_at": null
@@ -191,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Priečinky presunuté' is grammatically correct but sounds unnatural. A more natural translation would be 'Presunuté priečinky' or 'Priečinky boli presunuté'.",
-          "suggestion": "Presunuté priečinky"
+          "description": "The Slovak translation 'Priečinky presunuté' is grammatically correct but doesn't fully convey the nuance of 'Folders moved.' It translates to 'Folders moved' as a statement, not an action completed. A more appropriate translation might be 'Preložili sme priečinky.' (We moved the folders) or 'Priečinky boli presunuté.' (Folders were moved).",
+          "suggestion": "Priečinky boli presunuté."
         }
       ],
       "approved_at": null
@@ -209,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Фолдери су померени\" is a literal translation and doesn't flow naturally in Serbian. A more idiomatic translation would be something like \"Премештени фасцикле\" or \"Премештени фолдери\".",
+          "description": "The translation 'Фолдери су померени' while understandable, is a direct transliteration and not the most natural Serbian (Cyrillic) phrasing. A more natural translation would be 'Премештени фасцикле'.",
           "suggestion": "Премештени фасцикле"
         }
       ],
@@ -221,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation 'Folderi su pomereni' uses the plural form 'Folderi' (folders) while the English refers to a general action of moving folders. A singular form, 'Folder je pomeren,' might be more accurate depending on the context, although 'Folderi su pomereni' isn't necessarily *incorrect*.",
-          "suggestion": "Consider 'Folder je pomeren.' or leave as 'Folderi su pomereni.'"
+          "description": "The Serbian translation 'Folderi su pomereni' uses the plural form 'Folderi' (folders) while the English says 'Folders moved', which implies a single folder in some contexts. While grammatically correct, it might be more accurate to reflect the singular form in Serbian.",
+          "suggestion": "Moguće je razmotriti alternativu: 'Folder je pomeren.' (A folder was moved.) - depending on context.  If it is definitively about multiple folders, the current translation is acceptable."
         }
       ],
       "approved_at": null
@@ -239,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The translation \"Папки переміщено.\" uses the neuter plural past tense, which doesn't quite match the English \"Folders moved.\" The English is a general statement, so a more appropriate translation would use the neuter plural past passive voice, but in the general statement form.",
-          "suggestion": "Папки було переміщено."
+          "description": "The Ukrainian translation \"Папки переміщено.\" uses the neuter plural past tense, implying the folders were moved *by something*. The message should convey that the folders *were* moved (action taken).",
+          "suggestion": "Папки переміщено (або Папки було переміщено)."
         }
       ],
       "approved_at": null
@@ -251,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đã di chuyển các thư mục' is technically correct but a more natural and concise translation would be preferable. 'Đã di chuyển thư mục' is better suited for this context.",
-          "suggestion": "Đã di chuyển thư mục."
+          "description": "The translation 'Đã di chuyểncác thư mục' is not the most natural or common way to express 'Folders moved' in Vietnamese. While technically correct, it sounds slightly awkward. A better translation would prioritize flow and clarity.",
+          "suggestion": "Các thư mục đã được di chuyển."
         }
       ],
       "approved_at": null

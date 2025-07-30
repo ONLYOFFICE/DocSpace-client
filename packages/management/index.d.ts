@@ -24,5 +24,85 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-declare module "@docspace/*";
-declare module "client/*";
+import type { TColorScheme, TTheme } from "@docspace/shared/themes";
+
+declare global {
+  declare module "styled-components" {
+    export interface DefaultTheme extends TTheme {
+      currentColorScheme?: TColorScheme;
+    }
+  }
+
+  declare module "resize-image" {
+    type ImageFormat = "png" | "gif" | "bmp" | "jpeg" | "webp";
+
+    type ImageTypes = {
+      [P in Uppercase<ImageFormat>]: Lowercase<P>;
+    };
+
+    interface ResizeImage extends ImageTypes {
+      resize2Canvas: (
+        img: HTMLImageElement | ImageBitmap,
+        width: number,
+        height: number,
+      ) => HTMLCanvasElement;
+      resize: (
+        img: HTMLImageElement | HTMLCanvasElement,
+        width: number,
+        height: number,
+        type?: ImageFormat,
+      ) => string;
+    }
+
+    const value: ResizeImage;
+    export default value;
+  }
+  declare module "csvjson-json_beautifier" {
+    export default function jsonBeautifier(
+      json: string,
+      options?: unknown,
+    ): string;
+  }
+  declare module "*.svg?url" {
+    const content: string;
+    export default content;
+  }
+
+  declare module "*.svg" {
+    import React from "react";
+
+    const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+    export default SVG;
+  }
+
+  declare module "*.ico" {
+    const content: string;
+    export default content;
+  }
+
+  declare module "*.ico?url" {
+    const content: string;
+    export default content;
+  }
+
+  type TDocSpaceConfig = {
+    management?: {
+      checkDomain?: boolean;
+    };
+  };
+
+  type TNewPortalData = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    portalName: string;
+  };
+
+  type TNewPortalResponse = {
+    tenant: TPortals;
+  };
+
+  interface Window {
+    DocSpaceConfig?: TDocSpaceConfig;
+  }
+}

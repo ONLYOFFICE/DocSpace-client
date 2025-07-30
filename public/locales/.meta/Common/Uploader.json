@@ -3,7 +3,7 @@
   "content": "Uploader",
   "content_en_sha1_hash": "d1c7310f3bc833ce522db3329fe0f4f539e9c27d",
   "created_at": "2025-05-19T21:30:49.434Z",
-  "updated_at": "2025-05-28T09:30:02.297Z",
+  "updated_at": "2025-05-26T07:57:32.333Z",
   "comment": {
     "text": "This translation key is used to display the \"Uploader\" label in a settings plugin dialog. It appears as part of a UI component that displays information about file uploads, likely on a button or similar interactive element.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تم التحميل بواسطة\" literally translates to \"Uploaded by\". While understandable in context, it's not a direct equivalent to \"Uploader\" which implies the *role* or *person* uploading. A more accurate translation capturing the meaning of 'Uploader' as a title or function would be required.",
-          "suggestion": "مرفِع (Murafi’) - meaning 'uploader' or 'raiser', or مسؤول الرفع (Mas'ool ar-Raf') - 'Upload Manager/Responsible'."
+          "description": "The Arabic translation \"تم التحميل بواسطة\" (Tam al-tahmil bi wasita) literally translates to 'Uploaded by'. While understandable, it's a more verbose and less direct translation of 'Uploader'. A more concise and functionally equivalent translation would be 'مرفِع' (Murafi').",
+          "suggestion": "مرفِع (Murafi')"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Качващо устройство\" (literally 'uploading device') doesn't accurately convey the meaning of 'Uploader' in the context of a person or role who uploads content. It describes a device, not a person.",
-          "suggestion": "Consider alternatives like \"Качващ\" (uploader - masculine), \"Качваща\" (uploader - feminine), or a more descriptive phrase like \"Човек, който качва\" (person who uploads)."
+          "description": "The translation \"Качващо устройство\" is too literal and doesn't accurately reflect the meaning of \"Uploader.\" It translates to 'Uploading device' which is more specific than the general term 'Uploader'.",
+          "suggestion": "A more appropriate translation could be something like \"Качващ\" (Kachvash - uploading), \"Качило\" (Kachilo - uploader), or a more descriptive phrase depending on the context, such as \"Лице, което качва\" (Person who uploads)."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nahrál/a\" is a verb meaning 'uploaded' rather than a noun meaning 'Uploader'. It doesn't directly translate the meaning of the English word.",
-          "suggestion": "Consider using \"Nahrávač\" (masculine) or \"Nahrávačka\" (feminine) which are nouns meaning 'Uploader'.  The best choice depends on the context."
+          "description": "While \"Nahrál/a\" is a possible translation for \"Uploader\", it's a verb form (past tense) and not a noun. \"Uploader\" refers to the person or entity uploading something. A more accurate noun translation would be something like \"Nahrávač\" or \"Uživatelské rozhraní pro nahrávání\" (User interface for uploading), depending on the context.",
+          "suggestion": "Consider alternatives like \"Nahrávač\" or a more descriptive noun phrase appropriate for the specific context."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Hochgeladen von\" literally translates to \"Uploaded by.\" While related, it doesn't directly convey the meaning of \"Uploader\" as a role or function. A more accurate translation would depend on the context. Possible alternatives include \"Dateiuploader\" or \"Hochlader\".",
-          "suggestion": "Consider \"Dateiuploader\" or \"Hochlader\" depending on the context of \"Uploader\"."
+          "description": "The German translation \"Hochgeladen von\" literally translates to \"Uploaded by.\" While it conveys a related concept, it doesn't accurately reflect the English word \"Uploader,\" which refers to the person or system doing the uploading. A more accurate translation would be something like \"Uploadmanager\" or \"Hochlader\".",
+          "suggestion": "Consider \"Uploadmanager\" or \"Hochlader\" for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Πρόγραμμα μεταφόρτωσης' translates to 'Uploading Program' which is a descriptive term rather than the direct translation of 'Uploader'. While it conveys a similar function, it's not the precise equivalent.",
-          "suggestion": "Consider 'Αναρτητής' (Anartitis) which more closely aligns with 'Uploader' as a user who uploads content."
+          "description": "The Greek translation \"Πρόγραμμα μεταφόρτωσης\" translates to \"Uploading program\" which is a description of a tool, not the role or person performing the upload. \"Uploader\" refers to the person or entity uploading content.",
+          "suggestion": "Δημοσιοποιούμενος"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"アップロードした人\" (Appurōdo shita hito) is a literal translation of \"uploader\" and while understandable, it's not the most natural or concise way to express the concept in Japanese. It translates to 'the person who uploaded'.",
-          "suggestion": "Consider alternatives like: \n- アップローダー (Appurōdā) - Direct transliteration of 'uploader', commonly used.\n- 投稿者 (Tōkōsha) - 'Poster' or 'Contributor', a more general term that could work depending on context."
+          "description": "The Japanese translation \"アップロードした人\" (Appurodo shita hito) literally translates to \"the person who uploaded.\" While functionally close, \"Uploader\" often refers to the role or function, not necessarily the specific person. A more natural and concise translation might be 'アップローダー' (Appuroodaa), which is a direct transliteration and commonly used.",
+          "suggestion": "アップローダー (Appuroodaa)"
         }
       ],
       "approved_at": null
@@ -144,13 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຕົວໂຫລດອັບ\" is a transliteration and not a true translation of \"Uploader.\" It combines Lao script with the English word 'upload'. A more appropriate translation would convey the concept of someone who uploads content.",
-          "suggestion": "Consider alternatives like \"ຜູ້ໂຫລດຂໍ້ມູນ\" (phu loht khomun) meaning 'data uploader' or a more descriptive phrase depending on the context."
-        },
-        {
-          "type": "formatting",
-          "description": "The combined Lao and English words in \"ຕົວໂຫລດອັບ\" creates a formatting inconsistency.",
-          "suggestion": "Maintain consistency in using either Lao script or transliteration/English words."
+          "description": "The Lao translation \"ຕົວໂຫລດອັບ\" is a transliteration of the English word 'Uploader' rather than a true translation. It doesn't convey the meaning in a natural Lao way.",
+          "suggestion": "Consider alternatives like \"ຜູ້ໂຫລດ“ (phu lod) which means 'one who uploads' or a more descriptive phrase depending on the context."
         }
       ],
       "approved_at": null
@@ -173,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Wgrywający' is a valid word, it's not the most natural or common translation for 'Uploader' in Polish. It describes the *action* of uploading, not the person or system doing the uploading.  A better translation would depend on the specific context. Possible alternatives include 'Przesyłacz' (transmitter/sender), 'Uploader' (using the English term directly, which is increasingly common), or a more descriptive phrase.",
-          "suggestion": "Consider 'Przesyłacz', 'Uploader', or a context-specific descriptive phrase (e.g., 'Osoba wgrywającą' if referring to a person)."
+          "description": "While \"Wgrywający\" is a valid Polish word, it's a participle form and might not be the most natural or idiomatic translation of \"Uploader\" in this context. It suggests someone actively uploading, whereas \"Uploader\" can refer to a role or system.",
+          "suggestion": "Consider alternatives like \"Przesyłający\" (more common for active uploading) or, depending on the precise meaning, a more descriptive term like \"Osoba przesyłająca\" (person uploading) or a more conceptual equivalent if the context allows (e.g., a system component)."
         }
       ],
       "approved_at": null
@@ -191,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Carregado\" doesn't accurately convey the meaning of \"Uploader\". \"Carregado\" means 'loaded' or 'uploaded' as a verb. \"Uploader\" refers to the person or system that uploads.",
-          "suggestion": "Consider \"Enviador\" or \"Responsável pelo envio\" depending on the context."
+          "description": "The translation \"Carregado\" does not accurately convey the meaning of \"Uploader.\" \"Carregado\" means \"uploaded\" or \"loaded,\" while \"Uploader\" refers to the person or entity uploading content.",
+          "suggestion": "Consider using a more accurate translation such as \"Enviador\", \"Responsável pelo envio\", or \"Upload maker\" depending on the context. A more context-specific alternative would be best."
         }
       ],
       "approved_at": null
@@ -209,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Средство загрузки\" (Sredstvo zagruzki) while literally meaning 'uploading tool' or 'loading tool', doesn't fully capture the meaning of \"Uploader\" in the context of a user who uploads content. It's too technical. A better translation would convey the person performing the upload.",
-          "suggestion": "Consider alternatives like \"Загрузчик\" (Zagruzchik) - which directly translates to 'uploader,' or a phrase that implies the person uploading, such as \"Пользователь, загружающий файлы\" (Polzovatel', zagruzhayushchiy fayly) - 'user uploading files'."
+          "description": "The translation \"Средство загрузки\" is too literal and doesn't accurately convey the meaning of 'Uploader' in a software or platform context. 'Uploader' generally refers to the person or role responsible for uploading files, not the tool itself. \"Средство загрузки\" implies the tool used for uploading.",
+          "suggestion": "Consider alternatives like \"Загрузчик\" (Zagruzchik) which is more aligned with the meaning of 'Uploader' as a user or process, or \"Определитель загрузки\" (Opredelitel' zagruzki) which describes the role, depending on context."
         }
       ],
       "approved_at": null
@@ -221,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පුද්ගලයා\" (purugyalāyā) translates to \"person\" or \"individual\", not \"uploader\". \"Uploader\" refers to someone who uploads files or data, which is a specific role.",
-          "suggestion": "Consider translations like \"දියුණු කරන්නා\" (diyanu karannā - one who uploads) or a more descriptive phrase depending on the context. A more literal translation might require a longer explanation."
+          "description": "The Sinhala translation \"පුද්ගලයා\" (puggdalanaya) translates to \"person\" or \"individual.\" It doesn't accurately convey the meaning of \"Uploader,\" which refers to someone who uploads files or content.",
+          "suggestion": "A more appropriate translation might be something like \"ආප්ලෝඩර්\" (aploadar - transliteration) or a descriptive phrase like \"ගොනුව උඩුගත කරන්නා\" (gonuwa udhugath kannana - file uploader)."
         }
       ],
       "approved_at": null
@@ -245,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Особа која је отпремила\" (Person who uploaded) is overly verbose and doesn't convey the same conciseness as the English 'Uploader'. It's not a direct equivalent.",
-          "suggestion": "Consider a more concise translation like \"Упутник\" (Uptnik) or \"Преносилац\" (Prenosilac), which better captures the function of an uploader."
+          "description": "The Serbian translation \"Особа која је отпремила\" (Person who uploaded) is overly verbose and doesn't convey the conciseness of \"Uploader\". It's a literal translation rather than a functionally equivalent one.  'Uploader' typically refers to the role or function, not a specific person.",
+          "suggestion": "Consider a more concise translation like \"Уплоадер\" (transliteration) or \"Отпремач\" (uploader)."
         }
       ],
       "approved_at": null
@@ -257,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Osoba koja je otpremila\" is a very literal and verbose translation of \"Uploader.\" While technically correct, it's not idiomatic Serbian. A more natural translation would be something like \"Uploaider\" (borrowing the English term), \"Davalac\" (uploader/provider), or \"Kreirac\" (creator, if applicable to the context).",
-          "suggestion": "Consider using \"Uploaider\", \"Davalac\", or \"Kreirac\" depending on the specific context."
+          "description": "The Serbian translation \"Osoba koja je otpremila\" is too literal and verbose for the English term \"Uploader.\" It translates to \"Person who uploaded.\" A more natural and concise translation would be more appropriate.",
+          "suggestion": "Consider alternatives like \"Uploader\", \"Kreirajor\", or \"Punijač\" depending on the specific context and target audience. \"Kreirajor\" might be a better fit, as it's a more direct equivalent that is also used in Serbian in a technological context."
         }
       ],
       "approved_at": null
@@ -275,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Хто вивантажив\" translates to \"Who uploaded\" or \"Who dumped\". It's a question, not a noun representing the uploader role. 'Uploader' as a role should be translated in a more suitable noun form.",
-          "suggestion": "Consider alternatives like \"Завантажувач\" (Zavantazhuvach - Uploader), \"Вивантажувач\" (Vyvantagevach - Loader), or a more descriptive phrase depending on the context."
+          "description": "The Ukrainian translation \"Хто вивантажив\" literally translates to \"Who uploaded\" or \"Who unloaded.\" It's a question, not a noun representing the uploader. The English term \"Uploader\" functions as a noun, referring to the person or entity that uploads.",
+          "suggestion": "Consider alternatives like \"Завантажувач\" (Zavantazhuvach - Uploader), \"Автоматичний завантажувач\" (Avtomatichnyi zavantazhuvach - Automatic Uploader), or a more descriptive phrase depending on the context."
         }
       ],
       "approved_at": null

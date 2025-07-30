@@ -32,7 +32,8 @@ import isEqual from "lodash/isEqual";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import pkg from "PACKAGE_FILE";
-
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { TFunction } from "i18next";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
@@ -52,9 +53,9 @@ import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
-import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
+import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
@@ -162,6 +163,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
     init: true,
+    showTitle: false,
+    showFilter: false,
   };
 
   const roomConfig = {
@@ -267,14 +270,21 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   };
 
   const onEditLink = () => {
-    setLinkParams({ ...linkParams, isEdit: true, link: selectedLink ?? link });
+    setLinkParams({
+      ...linkParams,
+      isEdit: true,
+      link: selectedLink ?? link,
+    } as LinkParamsType);
     setEditLinkPanelIsVisible(true);
   };
 
-  const onChangeSharedLink = (item: TOptionType) => {
-    setSelectedLink(item);
+  const onChangeSharedLink = (item: TOption) => {
+    setSelectedLink(item as TOptionType);
     setEmbeddingConfig((config) => {
-      return { ...config, requestToken: item?.sharedTo?.requestToken };
+      return {
+        ...config,
+        requestToken: (item as TOptionType)?.sharedTo?.requestToken,
+      };
     });
   };
 
@@ -337,7 +347,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   }, [itemId, getLinks]);
 
   const usePrevious = (value: LinkParamsLinkType | null) => {
-    const ref = useRef<LinkParamsLinkType | null>();
+    const ref = useRef<LinkParamsLinkType | null>(undefined);
     useEffect(() => {
       ref.current = value;
     });
@@ -404,7 +414,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               <Text fontSize="12px" fontWeight={400}>
                 {isAdmin ? (
                   <Trans
-                    t={t}
+                    t={t as TFunction}
                     ns="EmbeddingPanel"
                     i18nKey="EmbeddingBarAllowList"
                     components={{
@@ -583,8 +593,8 @@ export default inject<TStore>(
       theme,
       currentColorScheme,
       visible: embeddingPanelData.visible,
-      itemId: embeddingPanelData.item?.id,
-      isRoom: embeddingPanelData.item?.isRoom,
+      itemId: (embeddingPanelData.item as unknown as TRoom)?.id,
+      isRoom: (embeddingPanelData.item as unknown as TRoom)?.isRoom,
       setEmbeddingPanelData,
       setEditLinkPanelIsVisible,
       linkParams,

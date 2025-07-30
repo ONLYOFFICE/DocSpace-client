@@ -3,7 +3,7 @@
   "content": "go to the Stripe customer portal",
   "content_en_sha1_hash": "57a05d723768ad8e0ee1140bb6eb2934cc9dd4ab",
   "created_at": "2025-05-19T21:30:53.734Z",
-  "updated_at": "2025-07-01T15:57:36.283Z",
+  "updated_at": "2025-06-08T12:02:32.812Z",
   "comment": {
     "text": "This translation key is used to translate a link that directs users to the Stripe customer portal. It appears as an account link on the Payer Information Container in Portal Settings. The translator should provide a neutral description that can be used by users of different languages and regions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
-      "line_number": 177,
-      "context": "tag=\"a\"\n themeId={ThemeId.Link}\n target=\"_blank\"\n onClick={goToStripePortal}\n >\n {t(\"StripeCustomerPortal\")}\n </ColorTheme>\n ) : (\n <ColorTheme\n fontWeight={600}\n href={`mailto:${email}`}",
+      "line_number": 170,
+      "context": "className=\"payer-info_account-link\"\n tag=\"a\"\n target=\"_blank\"\n color=\"accent\"\n >\n {t(\"StripeCustomerPortal\")}\n </Link>\n ) : (\n <Link fontWeight={600} href={`mailto:${email}`} tag=\"a\" color=\"accent\">\n {email}\n </Link>",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"отидете на Stripe портала за клиенти\" is a literal translation but could be improved for naturalness. \"Stripe портала за клиенти\" is a bit clunky. A better phrasing might focus on accessing the portal, rather than specifying it's 'for clients'.",
-          "suggestion": "отидете в Stripe клиентски портал"
+          "description": "The translation 'отидете на Stripe портала за клиенти' is a literal translation but sounds unnatural in Bulgarian. A more natural phrasing would be 'достъп до Stripe портала за клиенти' or 'въведете Stripe портала за клиенти'.",
+          "suggestion": "достъп до Stripe портала за клиенти"
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"μεταβείτε στην πύλη πελατών της Stripe\" is a literal translation of 'go to the Stripe customer portal'. While technically correct, it sounds overly formal and unnatural in Greek. 'Πύλη' (portal) is often used, but the phrasing could be improved for better flow.",
-          "suggestion": "μεταβείτε στον λογαριασμό σας στην Stripe"
+          "description": "The phrase 'go to' is not accurately translated. 'μεταβείτε' implies a formal movement or transition, which might be too formal for a customer portal link. 'Πήγαινε' or 'Επισκέψου' would be more natural.",
+          "suggestion": "μεταβείτε -> πήγαινε στην πύλη πελατών της Stripe"
         }
       ],
       "approved_at": null
@@ -75,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'vaya al portal de cliente de Stripe' is not the most natural or accurate translation of 'go to the Stripe customer portal.' A more common and accurate translation would be 'vaya al portal del cliente de Stripe' or 'acceda al portal del cliente de Stripe'. The use of 'de cliente' is less idiomatic than 'del cliente'.",
-          "suggestion": "vaya al portal del cliente de Stripe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'գնալ Stripe հաճախորդների պորտալ' is a literal translation but doesn't convey the intended meaning naturally in Armenian. It reads somewhat clunky. A more natural phrasing would be closer to 'տեղափոխվել Stripe հաճախորդների պորտալ' or 'ներմուծել Stripe հաճախորդների պորտալ'.",
-          "suggestion": "տեղափոխվել Stripe հաճախորդների պորտալ"
+          "description": "The translation \"գնալ Stripe հաճախորդների պորտալ\" is a literal translation and may not be the most natural way to say 'go to the Stripe customer portal' in Armenian.  It could sound slightly awkward.",
+          "suggestion": "Consider a more idiomatic translation like \"բացել Stripe հաճախորդների պորտալը\" (open the Stripe customer portal) or \"մուտք գործել Stripe հաճախորդների պորտալ\" (access the Stripe customer portal)."
         }
       ],
       "approved_at": null
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ໄປທີ່ແຜງບໍລິການລູກຄ້າ Stripe\" while understandable, is not the most natural or accurate translation of 'go to the Stripe customer portal.'  'ແຜງບໍລິການ' (panel of services) is a bit too literal and technical. A more idiomatic translation would convey the 'portal' aspect better.",
-          "suggestion": "ໄປທີ່ເວັບໄຊ້ Stripe ຂອງລູກຄ້າ"
+          "description": "The translation \"ໄປທີ່ແຜງບໍລິການລູກຄ້າ Stripe\" while conveying a similar idea, doesn't directly translate 'go to'. 'ແຜງບໍລິການລູກຄ້າ' is 'customer service panel', not 'customer portal'. A more accurate translation would incorporate the meaning of 'portal'.",
+          "suggestion": "Consider alternatives like \"ໄປທີ່ເວັບໄຊ້ບໍລິການລູກຄ້າ Stripe\" (go to the Stripe customer website/portal) or \"ເຂົ້າສູ່ລະບົບໃນເວັບໄຊ້ບໍລິການລູກຄ້າ Stripe\" (log in to the Stripe customer website/portal)."
         }
       ],
       "approved_at": null
@@ -174,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'salt la portalul de client Stripe' doesn't accurately convey the meaning of 'go to the Stripe customer portal'. 'Salt' means 'to jump' or 'to leap'. The correct verb to use here would be 'mergi la'.",
+          "description": "The translation 'salt la portalul de client Stripe' is not the most accurate or natural translation of \"go to the Stripe customer portal\". 'Salt' means 'jumps' or 'leaps'. A more appropriate translation would involve a verb indicating navigation or access.",
           "suggestion": "mergi la portalul de client Stripe"
         }
       ],
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'customer' is transliterated as 'පාරිභෝගික'. While understandable, a more commonly used and potentially more accurate transliteration of 'customer' in this context would be 'ඉල්ලුම්කාර'.",
-          "suggestion": "ස්ට්‍රයිප් ඉල්ලුම්කාර ද්වාරයට යන්න"
+          "description": "The word 'customer' is transliterated as 'පාරිභෝගික'. While understandable, 'පාරිශ්‍රමික' might be a more common and accurate translation in this context, as it refers to a client or consumer.",
+          "suggestion": "ස්ට්‍රයිප් පාරිශ්‍රමික ද්වාරයට යන්න"
         }
       ],
       "approved_at": null
@@ -216,8 +210,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"идите на Stripe портал за купце\" doesn't accurately convey the meaning of 'go to the Stripe customer portal'. 'идите' implies a direct command and 'за купце' doesn't accurately represent 'customer'.",
-          "suggestion": "A more accurate translation would be something like \"идите на Stripe портал за клијенте\" (go to the Stripe portal for clients) or \"пређите на Stripe портал за клијенте\" (navigate to the Stripe portal for clients)."
+          "description": "The phrase \"идите на Stripe портал за купце\" is not an accurate translation of \"go to the Stripe customer portal.\"  'Идите' (idite) means 'go' (imperative, informal, plural/polite singular), but it's not appropriate here. 'За купце' (za kupce) translates to 'for customers,' but 'customer' has a more specific meaning. The term 'клијентски портал' (klijentski portal) is more accurate for 'customer portal'.",
+          "suggestion": "идите на Stripe клијентски портал"
+        },
+        {
+          "type": "grammar",
+          "description": "While not a severe error, using the imperative form 'идите' is less formal than generally preferred in user interface copy. A more formal and generally preferred form would be 'пређите на Stripe клијентски портал'.",
+          "suggestion": "пређите на Stripe клијентски портал"
         }
       ],
       "approved_at": null
@@ -228,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'idite na Stripe portal za kupce' doesn't fully capture the meaning of 'go to the Stripe customer portal'. 'idite na' is correct for 'go to', but 'portal za kupce' is a more literal translation of 'customer portal' and might not be the most natural phrasing in Serbian. A more accurate and natural translation would be something like 'Stripe kupčevi portal' or 'Stripe portal za korisnike'.",
-          "suggestion": "Stripe kupčevi portal"
+          "description": "The translation 'idite na Stripe portal za kupce' is not the most natural or accurate translation of 'go to the Stripe customer portal.' While technically correct, it's a bit literal. A more idiomatic translation would convey the meaning better.",
+          "suggestion": "Consider 'povežite se sa Stripe portalom za kupce' or 'odlazak na Stripe portal za kupce' or 'idite na Stripe portal'"
         }
       ],
       "approved_at": null

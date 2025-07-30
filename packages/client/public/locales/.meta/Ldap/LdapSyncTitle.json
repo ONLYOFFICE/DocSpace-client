@@ -3,7 +3,7 @@
   "content": "Sync LDAP data",
   "content_en_sha1_hash": "eacc43f7e59fe313e63f3f6f031fcc75dac16efb",
   "created_at": "2025-05-19T21:30:54.316Z",
-  "updated_at": "2025-07-02T07:49:19.791Z",
+  "updated_at": "2025-06-30T12:20:31.388Z",
   "comment": {
     "text": "This translation key is used for the title \"Sync LDAP data\" and appears as a page title in the Portal Settings. It provides context for users navigating to the synchronization settings within LDAP integration.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 225,
-      "context": "case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"RestoreBackup\":\n return t(\"RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":",
+      "context": "case \"ManagementCategoryDataManagement\":\n return t(\"ManagementCategoryDataManagement\");\n case \"LdapSettings\":\n return t(\"Ldap:LdapSettings\");\n case \"LdapSyncTitle\":\n return t(\"Ldap:LdapSyncTitle\");\n case \"Common:RestoreBackup\":\n return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":",
       "module": "/packages/client"
     },
     {
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 340,
+      "line_number": 333,
       "context": "{\n id: \"portal-settings_catalog-ldap-sync-data\",\n key: \"4-0-1\",\n icon: \"\",\n link: \"sync-data\",\n tKey: \"Ldap:LdapSyncTitle\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-third-party-services\",",
       "module": "/packages/client"
     }

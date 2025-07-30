@@ -3,7 +3,7 @@
   "content": "User quota has been successfully enabled.",
   "content_en_sha1_hash": "54f6f93690a1ebe93c7db897adb749e9da5be3c2",
   "created_at": "2025-05-19T21:30:53.138Z",
-  "updated_at": "2025-06-03T20:59:42.367Z",
+  "updated_at": "2025-06-30T12:20:31.739Z",
   "comment": {
     "text": "The \"UserQuotaEnabled\" translation key is used to display a success message when user quota has been successfully enabled. It is typically displayed as a toast notification in an application, providing confirmation to users that their quotas have been set up correctly after enabling it.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 454,
+      "line_number": 456,
       "context": "const isEnable = +quota !== -1;\n \n try {\n await setDefaultUserQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"UserQuotaEnabled\")\n : t(\"UserQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);",
       "module": "/packages/shared"
     }
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກວ່ານິຍົມຂອງຜູ້ໃຊ້ໄດ້ຖືກເປີດໃຊ້ງານຢ່າງສໍາເລັດແລ້ວ' is a literal translation and sounds unnatural in Lao. 'ກວ່ານິຍົມ' (Kuan Niyom) translates to 'quota' or 'limit', but using it this way is stilted.  A more natural phrasing would focus on the action of enabling.",
-          "suggestion": "Consider a phrasing like 'ການກຳນົດກໍານົນຂອງຜູ້ໃຊ້ສາມາດເຮັດໄດ້ແລ້ວ' (Kan kamnod goranon khong phou sai samat het dai laeo) - which translates to 'User limits/restrictions are now enabled'."
+          "description": "The translation 'ກວ່ານິຍົມຂອງຜູ້ໃຊ້ໄດ້ຖືກເປີດໃຊ້ງານຢ່າງສໍາເລັດແລ້ວ' is a literal translation and doesn't flow naturally in Lao. While technically correct, it sounds overly formal and complex for a simple confirmation message.",
+          "suggestion": "Consider a more natural phrasing such as 'ໄດ້ເປີດໃຊ້ງານກຳນົດການໃຊ້ງານຂອງຜູ້ໃຊ້ແລ້ວ' or 'ກຳນົດການໃຊ້ງານຂອງຜູ້ໃຊ້ໄດ້ຖືກເປີດໃຊ້ງານແລ້ວ.'"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Limit użytkowników został włączony' translates to 'User limit has been enabled'. While related, it doesn't precisely match the English 'User quota has been successfully enabled.' 'Quota' implies a defined amount or allowance, which isn't conveyed by 'limit'.",
-          "suggestion": "Limit przydziału użytkowników został włączony."
+          "description": "The translation \"Limit użytkowników został włączony.\" doesn't accurately convey the meaning of \"User quota has been successfully enabled.\" \"Limit użytkowników\" translates to 'user limit,' whereas 'quota' implies a specific allowance or allocation.",
+          "suggestion": "Ustawienie limitu użytkowników zostało włączone."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, \"Cotă de stocare pentru utilizator\" is a bit verbose. A more natural and concise translation for 'User quota' would be 'Cota de utilizator'.",
-          "suggestion": "Cota de utilizator a fost activată cu succes."
+          "description": "While the translation is understandable, 'Cotă de stocare pentru utilizator' is a bit verbose and less natural than alternatives. 'Cotă utilizator' or 'Limita de stocare pentru utilizator' would be more concise and commonly used.",
+          "suggestion": "Cotă utilizator a fost activată cu succes."
         }
       ],
       "approved_at": null
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'enabled' doesn't directly translate to 'подключена' (connected) in Russian when referring to a quota setting. 'Включена' (included/enabled) would be a more accurate translation.",
+          "description": "The translation \"Квота пользователя успешно подключена\" uses the verb 'подключена' (podkluchena) which implies 'connected'.  'Enabled' in this context means activated or turned on, not connected. A more accurate translation would use a verb implying activation.",
           "suggestion": "Квота пользователя успешно включена."
         }
       ],
@@ -177,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පරිශීලක කෝටාව සාර්ථකව ක්‍රියාත්මක කර ඇත' translates more literally as 'User quota has been successfully activated'. While not entirely wrong, 'enabled' is a more accurate translation of 'enabled' in this context. 'ක්‍රියාත්මක කර ඇත' implies more of an active process than 'enabled'.",
-          "suggestion": "පරිශීලක කෝටාව සාර්ථකව සක්‍රීය කර ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

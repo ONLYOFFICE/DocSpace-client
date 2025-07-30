@@ -157,7 +157,7 @@ class ImportAccountsStore {
   }
 
   get quota() {
-    return parseQuota(this.currentQuotaStore?.quotaCharacteristics[1]);
+    return parseQuota(this.currentQuotaStore!.quotaCharacteristics[1]);
   }
 
   get totalUsedUsers() {
@@ -398,7 +398,7 @@ class ImportAccountsStore {
   uploadFiles = async (
     filesData: File | File[],
     setProgress: (progress: number) => void,
-    isAbort: React.MutableRefObject<boolean>,
+    isAbort: React.RefObject<boolean>,
     setChunk: React.Dispatch<React.SetStateAction<number>>,
     startChunk: number,
     setChunkSize: React.Dispatch<React.SetStateAction<number>>,

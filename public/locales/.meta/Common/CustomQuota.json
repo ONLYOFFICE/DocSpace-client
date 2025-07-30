@@ -3,7 +3,7 @@
   "content": "Custom quota",
   "content_en_sha1_hash": "b3c9bba8cb387eb569cf5f593876c1e621a96de3",
   "created_at": "2025-05-19T21:30:44.345Z",
-  "updated_at": "2025-07-01T15:57:36.126Z",
+  "updated_at": "2025-06-08T12:02:32.716Z",
   "comment": {
     "text": "The \"CustomQuota\" translation key is used to display a custom quota label in the filter section of the Home page. It is displayed when a user selects the \"Custom Quota\" option, indicating that they want to set their own quota threshold. The text appears on a dropdown or filter menu element.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 555,
+      "line_number": 552,
       "context": "if (roomsFilter.quotaFilter) {\n const key = roomsFilter.quotaFilter;\n \n const label =\n key === FilterKeys.customQuota\n ? t(\"Common:CustomQuota\")\n : t(\"Common:DefaultQuota\");\n \n filterValues.push({\n key: roomsFilter.quotaFilter,\n label,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 555,
+      "line_number": 552,
       "context": "if (roomsFilter.quotaFilter) {\n const key = roomsFilter.quotaFilter;\n \n const label =\n key === FilterKeys.customQuota\n ? t(\"Common:CustomQuota\")\n : t(\"Common:DefaultQuota\");\n \n filterValues.push({\n key: roomsFilter.quotaFilter,\n label,",
       "module": "/packages/client"
     },
@@ -39,13 +39,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'الحصص المخصصة' is a possible translation, it's a bit literal and might not be the most natural way to convey \"Custom quota\" in a technical context. A more common and clearer translation might be something like 'حصص مخصصة' (with the 'ال' removed) or possibly a phrase that incorporates the concept of customization more directly depending on the context.",
-          "suggestion": "Consider 'حصص مخصصة' or a phrase that better captures the 'custom' aspect depending on the specific application of the quota."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հատուկ քվոտայով\" translates more closely to \"with a custom quota\" or \"by a custom quota.\" It doesn't directly translate \"Custom quota.\" A more accurate translation would be something like \"տարանջատ քվոտա\" (taranjat kvota) which more closely aligns with the meaning of 'Custom quota'.",
-          "suggestion": "տարանջատ քվոտա (taranjat kvota)"
+          "description": "The Armenian translation \"Հատուկ քվոտայով\" translates to \"with a special quota\" rather than \"custom quota.\" While not entirely wrong, it's not the most accurate representation of the English term. A more literal and accurate translation would be needed.",
+          "suggestion": "Consider \"Պատվորվող քվոտա\" (Patvorvogh Kvota) or \"Մարժային քվոտա\" (Marzhayin Kvota) which more closely align with \"custom quota\" depending on the specific context."
         }
       ],
       "approved_at": null
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"カスタムな容量制限\" while containing relevant words, doesn't perfectly capture the meaning of 'Custom quota'. 'カスタム' (custom) implies a level of customization, which '容量制限' (capacity limit) doesn't fully convey. A more accurate translation might emphasize that the quota is *configurable* or *user-defined*.",
-          "suggestion": "カスタム設定可能な容量制限"
+          "description": "The translation \"カスタムな容量制限\" (kustomo na ryouri gen) is not the most natural or precise translation of \"Custom quota.\" While technically correct, it sounds somewhat awkward in Japanese. \"カスタムクォータ\" (kustomo kwo-ta) is a more common and direct transliteration/translation.",
+          "suggestion": "カスタムクォータ (kustomo kwo-ta)"
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"අභිරුචි\" (abiruchi) can mean custom or personalized, \"සලාකය\" (salakaya) translates more closely to 'salary' or 'allowance'.  'Quota' in this context refers to a limit or allowance, and a more accurate translation would capture that meaning.  A better term to convey 'quota' would be something along the lines of 'කොටා' (kota) or 'අනුපාන සීමාව' (anupaana seemaawa).",
-          "suggestion": "Consider 'කොටා' (kota) or 'අනුපාන සීමාව' (anupaana seemaawa) for a more accurate translation of 'quota'."
+          "description": "The translation 'අභිරුචි සලාකය' while containing relevant terms, doesn't perfectly capture the meaning of 'Custom quota'. 'අභිරුචි' (abiruchi) means 'taste' or 'preference,' which doesn't directly relate to a quota. 'සලාකය' (salakaya) means 'slice' or 'portion'. A more accurate translation would convey the concept of a quota being tailored or personalized.",
+          "suggestion": "Consider using a translation like 'අභිරුචිගත ප්‍රමාණය' (abiruchigat pramanya) which translates to 'customized amount' or 'tailored quota'."
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Poljubna kvota\" while literally meaning 'any quota' doesn't accurately convey the meaning of 'Custom quota'. 'Custom quota' refers to a quota that is specifically defined or tailored, not just any quota.",
-          "suggestion": "A more accurate translation might be 'Določena kvota' (defined quota) or 'Prilagojena kvota' (adapted/tailored quota)."
+          "description": "While \"Poljubna kvota\" is technically correct, it implies 'any quota' or 'arbitrary quota'. 'Custom quota' typically refers to a quota that is specifically tailored or defined by a user or organization, not just any quota. A better translation would reflect this specificity.",
+          "suggestion": "Posebna kvota"
         }
       ],
       "approved_at": null

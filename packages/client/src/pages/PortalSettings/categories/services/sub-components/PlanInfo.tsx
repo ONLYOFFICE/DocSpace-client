@@ -60,8 +60,8 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
   nextStoragePlanSize,
   currentStoragePlanSize,
   hasScheduledStorageChange,
-  storageSizeIncrement,
-  storagePriceIncrement,
+  storageSizeIncrement = 1,
+  storagePriceIncrement = 1,
   isUpgradeStoragePlan,
   formatWalletCurrency,
 }) => {
@@ -138,7 +138,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
         <div className={styles.planInfoPrice}>
           <Text fontWeight="600" fontSize="14px" className={styles.totalPrice}>
             {t("CurrencyPerMonth", {
-              currency: formatWalletCurrency(totalPrice, 2),
+              currency: formatWalletCurrency!(totalPrice, 2),
             })}
           </Text>
           <Text
@@ -147,7 +147,7 @@ const PlanInfo: React.FC<PlanInfoProps> = ({
             className={styles.priceForEach}
           >
             {t("PriceForEach", {
-              currency: formatWalletCurrency(storagePriceIncrement, 2),
+              currency: formatWalletCurrency!(storagePriceIncrement, 2),
               amount: getConvertedSize(t, storageSizeIncrement),
             })}
           </Text>

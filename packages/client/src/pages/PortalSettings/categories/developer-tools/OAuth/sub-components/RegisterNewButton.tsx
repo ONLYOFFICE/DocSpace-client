@@ -33,9 +33,13 @@ import { DeviceType } from "@docspace/shared/enums";
 
 export interface RegisterNewButtonProps {
   currentDeviceType?: DeviceType;
+  isDisabled?: boolean;
 }
 
-const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
+const RegisterNewButton = ({
+  currentDeviceType,
+  isDisabled,
+}: RegisterNewButtonProps) => {
   const { t } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
@@ -53,6 +57,8 @@ const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
       label={t("RegisterNewApp")}
       primary
       onClick={onClick}
+      isDisabled={isDisabled}
+      testId="register_new_app_button"
     />
   );
 };

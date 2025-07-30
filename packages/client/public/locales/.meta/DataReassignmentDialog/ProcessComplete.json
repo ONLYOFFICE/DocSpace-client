@@ -3,7 +3,7 @@
   "content": "You can close this page. When the process is completed, the responsible administrator will be notified by email.",
   "content_en_sha1_hash": "f948c2151d1a668d61233bde490bc86add9d5495",
   "created_at": "2025-05-19T21:30:56.747Z",
-  "updated_at": "2025-05-28T09:30:02.251Z",
+  "updated_at": "2025-05-26T07:57:32.281Z",
   "comment": {
     "text": "This translation key is used to display a notification indicating that a process has completed and an administrator will be notified via email. It appears in a progress indicator within a data reassignment dialog, providing a brief message to inform users of the outcome.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"responsible administrator\" is not adequately conveyed by \"المشرف\". While \"المشرف\" can mean supervisor or administrator, it lacks the nuance of responsibility implied in the English.",
+          "suggestion": "Consider using a more specific term like \"المسؤول\" (al-mas'ool) which means 'the responsible person' or 'the accountable person'.  Alternatively, rephrasing the sentence to clarify the administrator's role would be helpful. For example, \"سيتم إعلام المسؤول عن العملية...\" (The person responsible for the process will be notified...)."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase \"رسالة بريد الكتروني\" is somewhat verbose. While technically correct, it can be shortened for better readability.",
+          "suggestion": "Replace \"رسالة بريد الكتروني\" with \"بريد الكتروني\" or simply \"بريد\" (email)."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -69,7 +80,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'toiminto' (action/function) isn't the best fit for 'process' in this context. 'Prosessi' would be a more accurate translation of 'process'.",
+          "suggestion": "Voit sulkea tämän sivun. Kun prosessi on suoritettu, vastuullinen järjestelmänvalvoja saa siitä sähköpostin."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +98,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses <b> tags around \"Երբ գործընթացը ավարտվի...\" which isn't standard practice and may not be intended.  It's likely an artifact from the translation process.",
+          "suggestion": "Remove the <b> tags. Consider using a different formatting approach if emphasis is needed."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -153,7 +176,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'responsible administrator' is not accurately translated. 'වගකිවයුතු පරිපාලකයා' translates more literally to 'responsible administrator' which doesn't fully capture the nuance. A more suitable translation might consider someone who handles or oversees the data reassignment.",
+          "suggestion": "Consider a phrasing like 'දත්ත නැවත පත් කිරීමේ ක්‍රියාවලියේදී කටයුතු භාර ගන්නා පරිපාලකයා' (The administrator who handles the data reassignment process)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala sentence is quite long and might be difficult to read and understand. Consider breaking it into two shorter sentences.",
+          "suggestion": "Split the sentence into: 'ඔබට මෙම පිටුව වැසීමට හැකිය. ක්‍රියාවලිය අවසන් වූ විට, දත්ත නැවත පත් කිරීමේ ක්‍රියාවලියේදී කටයුතු භාර ගන්නා පරිපාලකයාට වි-තැපෑලෙන් දැනුම් දෙනු ලැබේ.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +205,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'email' is transliterated as 'емаил-а'. The more common and natural Serbian term for email would be 'e-mail'.",
+          "suggestion": "Када се процес заврши, одговорни администратор ће бити обавештен путем е-маила."
+        },
+        {
+          "type": "grammar",
+          "description": "The future tense marker 'ц́е' is a less common and slightly archaic form. The more common and natural marker is 'ће'.",
+          "suggestion": "Када се процес заврши, одговорни администратор ће бити обавештен путем е-маила."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

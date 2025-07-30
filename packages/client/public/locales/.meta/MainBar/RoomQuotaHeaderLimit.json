@@ -3,7 +3,7 @@
   "content": "The limit is reached for the number of rooms: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "92ee655fca7d5cbaec0dc1b204f7697fedb8d2fc",
   "created_at": "2025-05-19T21:30:54.129Z",
-  "updated_at": "2025-07-01T15:57:35.916Z",
+  "updated_at": "2025-06-30T12:20:31.147Z",
   "comment": {
     "text": "This translation key is used to display a message indicating when the room quota limit has been reached, showing the current value and maximum allowed value. It appears in a quotas bar component, specifically on the Rooms Tariff Limit section.",
     "is_auto": true,
@@ -27,7 +27,38 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'الغرف' (rooms) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'الحد' (limit) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'الأقصى' (maximum) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'تم الوصول إلى الحد الأقصى لعدد الغرف' is grammatically correct and flows naturally in Arabic.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the translation is somewhat literal. A more natural phrasing in Saudi Arabic might be 'تم استنفاد الحد الأقصى لعدد الغرف' (The maximum number of rooms has been exhausted). However, the current translation isn't technically wrong.",
+          "suggestion": "تم استنفاد الحد الأقصى لعدد الغرف"
+        },
+        {
+          "type": "formatting",
+          "description": "The variables {{currentValue}} and {{maxValue}} are correctly positioned within the Arabic sentence.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -99,13 +130,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' is better translated as '최대 허용량에 도달했습니다' or '최대 개수에 도달했습니다' rather than '한도에 도달했습니다'. '한도' is often used for financial limits, while '최대 허용량' or '최대 개수' is more appropriate for a room quota.",
-          "suggestion": "룸 수가 최대 허용량에 도달했습니다: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -114,8 +139,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຈຳນວນຫ້ອງເຕັມແລ້ວ: {{currentValue}} / {{maxValue}}\" literally translates to \"Number of rooms is full: {{currentValue}} / {{maxValue}}\". While understandable, a more natural phrasing would emphasize the limit being reached.  A better translation would convey the sense of 'Quota reached' or 'Limit reached'.",
-          "suggestion": "ເຕືອນ ຈຳນວນຫ້ອງເຕັມຕາມກຳນົດ: {{currentValue}} / {{maxValue}}"
+          "description": "The translation 'ຈຳນວນຫ້ອງເຕັມແລ້ວ' directly translates to 'Number of rooms is full'. While conveying the general meaning, it lacks the nuance of 'The limit is reached for the number of rooms'. A more accurate translation would reflect the 'limit' aspect.",
+          "suggestion": "ຈຳນວນຫ້ອງບັນລຸຂີດສຸດທີ່ຮຽກຮ້ອງໄດ້: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -123,13 +148,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The colon after 'ierobežojums' should have a space after it.",
-          "suggestion": "Ir sasniegts telpu skaita ierobežojums:  {{currentValue}}/{{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -162,8 +181,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limita maximă permisă de săli a fost atinsă' is a bit verbose and less natural than a simpler phrasing. While technically correct, it could be improved for better user experience.",
-          "suggestion": "Limita a fost atinsă pentru numărul de camere: {{currentValue}} / {{maxValue}}"
+          "description": "The translation \"Limita maximă permisă de săli a fost atinsă\" is a bit verbose and not the most natural way to say it in Romanian. A more direct and common translation would be \"S-a atins limita maximă de săli\" or \"S-a ajuns la limita maximă de săli\".",
+          "suggestion": "S-a atins limita maximă de săli"
         }
       ],
       "approved_at": null
@@ -180,8 +199,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කෙටිහන් ගණන සඳහා සීමාව ඉක්මවා ඇත' doesn't accurately convey the meaning of 'The limit is reached for the number of rooms'.  'කෙටිහන්' (ketihăn) translates to 'shorts' or 'briefs', not 'rooms'.",
-          "suggestion": "A more accurate translation would be something like 'මාබිමේ ගණන සඳහා සීමාව ඉක්මවා ඇත' (mābimē ganaṇā samā darā sēmiwā ikmavā atā) - 'The limit is reached for the number of rooms'."
+          "description": "The translation 'කෙටිහන් ගණන සඳහා සීමාව ඉක්මවා ඇත' is not the most natural or accurate rendering of 'The limit is reached for the number of rooms'.  'කෙටිහන්' primarily means 'shorts' or 'briefs'. While 'rooms' could be loosely interpreted, it's misleading. A more accurate translation would convey the idea of reaching a quota or maximum.",
+          "suggestion": "A better translation might be something like: 'මාර්ග ඉඩ ප්‍රමාණය සඳහා සීමාව ඉක්මවා ඇත: {{currentValue}} / {{maxValue}}' (Maarga ida pramaṇaya sæpara sæmava ikmava ætha: {{currentValue}} / {{maxValue}})"
+        },
+        {
+          "type": "formatting",
+          "description": "The double curly braces {{ }} used for variables in the English content should ideally be replicated in the Sinhala translation to maintain consistency and clarity for developers.",
+          "suggestion": "Ensure the variables are consistently represented with double curly braces: 'මාර්ග ඉඩ ප්‍රමාණය සඳහා සීමාව ඉක්මවා ඇත: {{currentValue}} / {{maxValue}}'"
         }
       ],
       "approved_at": null
@@ -192,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Limit počtu miestností je dosiahnutý' doesn't accurately convey the meaning of 'The limit is reached...'. A more appropriate translation would be 'Dosiahnutý je limit počtu miestností' or 'Bol dosiahnutý limit počtu miestností'.",
-          "suggestion": "Dosiahnutý je limit počtu miestností"
+          "description": "The Slovak translation 'Limit počtu miestností je dosiahnutý' directly translates to 'The limit of the number of rooms is reached'. It implies that the limit has been met, but the English implies the limit *is* reached, meaning it's the current state.  A more accurate translation would convey this current state.",
+          "suggestion": "Limit počtu miestností je: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -201,31 +225,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"The limit is reached\" is better translated as something more active or indicative of the limit being hit. \"Dosežena je omejitev\" is a bit passive.",
-          "suggestion": "Preko dovoljene meje za število sob: {{currentValue}} / {{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, 'Достигнут је лимит за број просторија' is a bit literal and less natural-sounding. A more idiomatic translation would be 'Прекоречен је лимит за број просторија' or 'Достигнут је максимални број просторија'.",
-          "suggestion": "Прекоречен је лимит за број просторија"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Dostignut' (Reached) isn't the most natural or common way to express reaching a limit in this context. A more natural phrasing would be something like 'Prekoračen je limit...' (The limit has been exceeded...) or 'Limit je dostignut...' (The limit has been reached...).",
+          "suggestion": "Prekoračen je limit za broj prostorija: {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

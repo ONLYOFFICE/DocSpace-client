@@ -3,7 +3,7 @@
   "content": "Creator",
   "content_en_sha1_hash": "817b79b0af2db11da9523bd5738397ebf823132b",
   "created_at": "2025-05-19T21:30:53.844Z",
-  "updated_at": "2025-05-21T07:22:47.640Z",
+  "updated_at": "2025-05-24T07:37:07.777Z",
   "comment": {
     "text": "This translation key is used for the display name \"Creator\" in a portal settings category and its corresponding avatar component. It appears as a text label and an icon within a developer tools OAuth section of the application.",
     "is_auto": true,
@@ -117,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Sagatavotājs\" can be a valid translation depending on the context, \"Creator\" in the context of OAuth typically refers to the individual or entity that created a resource or account.  A more accurate translation might be \"Izveidotājs\" or \"Radītājs\". \"Sagatavotājs\" leans towards preparer or facilitator, which isn't the core meaning here.",
+          "suggestion": "Consider \"Izveidotājs\" or \"Radītājs\" for a more accurate translation of 'Creator' in an OAuth context."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Aanmaker\" doesn't accurately convey the meaning of \"Creator\" in the context of OAuth. \"Aanmaker\" translates more to 'maker' or 'producer', but lacks the sense of origin or authorship implied by 'Creator'.",
-          "suggestion": "Consider alternatives like \"Maker\", \"Ontwikkelaar\", \"Initiator\", or \"Eigenaar\" depending on the specific nuance required."
+          "description": "While 'Aanmaker' can have the meaning of 'creator,' it's not the most common or natural translation of 'Creator' in the context of OAuth and user accounts. It might be misinterpreted to mean 'maker' or 'initiator' rather than someone who creates content or owns a profile.",
+          "suggestion": "Consider 'Maker', 'Ontwikkelaar', or 'Initiator' as alternatives, depending on the precise context of OAuth and the meaning intended. 'Maker' is often used in tech contexts."
         }
       ],
       "approved_at": null

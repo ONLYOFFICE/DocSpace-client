@@ -3,7 +3,7 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2025-05-28T09:30:02.495Z",
+  "updated_at": "2025-05-26T07:57:32.483Z",
   "comment": {
     "text": "This translation key is used to display the \"Standard\" theme name in a portal settings category. It appears as part of the \"Appearance\" section and is displayed below a button that toggles its visibility.",
     "is_auto": true,
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Standardno' is an adverb, while the English 'Standard' is a noun. This is not an accurate translation in most contexts.",
-          "suggestion": "Consider 'Standard' (if referring to the standard itself) or 'Norma' (if a general standard is meant)."
+          "description": "The Slovenian translation 'Standardno' is an adverbial form, while the English word 'Standard' is a noun. A more accurate noun translation would be 'Standard'.",
+          "suggestion": "Standard"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Go to service",
   "content_en_sha1_hash": "200befc35fcfc552c218e3f4166e067b196bc0c2",
   "created_at": "2025-06-24T16:31:06.722Z",
-  "updated_at": "2025-07-01T15:57:36.034Z",
+  "updated_at": "2025-06-30T12:20:31.271Z",
   "comment": {
     "text": "The translation key \"GoToService\" is used to translate the phrase \"Go to service\" which is displayed on a button in a modal dialog. The button prompts the user to take action, likely to access a service or view more information.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "HTTPS required",
   "content_en_sha1_hash": "61b83d2d44a85c0926a570851f3a01e8ab6c10aa",
   "created_at": "2025-05-19T21:30:54.424Z",
-  "updated_at": "2025-05-28T09:30:02.586Z",
+  "updated_at": "2025-06-08T12:02:32.765Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that HTTPS is required. It appears as a header in a UI component related to content security policies (CSP) and is used to notify users about this specific requirement.",
     "is_auto": true,
@@ -159,7 +159,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vyžaduje sa protokol HTTPS' is a literal translation and slightly awkward in Slovak. While technically correct, it lacks natural flow.",
+          "suggestion": "Consider a more idiomatic translation like 'Je vyžadovaný HTTPS' or 'Použite HTTPS' depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'HTTPS потребан' is a literal translation but doesn't convey the intended meaning naturally in Serbian. It would be more idiomatic to say something like 'Потребан је HTTPS' or 'HTTPS је обавезан'.",
-          "suggestion": "HTTPS је обавезан"
+          "description": "The Serbian translation 'HTTPS потребан' is a literal translation of 'HTTPS required'. While understandable, it sounds awkward and unnatural in Serbian. A more idiomatic translation would convey the meaning of a requirement for HTTPS.",
+          "suggestion": "HTTPS је обавезно"
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yêu cầu HTTPS ' is technically correct but lacks the nuance of a full sentence. It reads more like a label than a complete message. A more natural translation would incorporate a verb.",
-          "suggestion": "Yêu cầu phải sử dụng HTTPS"
+          "description": "The translation 'Yêu cầu HTTPS ' is technically correct but lacks the natural flow and context typically used in Vietnamese for a UI element like this. It's a very literal translation and can sound awkward.",
+          "suggestion": "Yêu cầu sử dụng HTTPS"
         }
       ],
       "approved_at": null

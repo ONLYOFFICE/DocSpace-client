@@ -3,7 +3,7 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2025-07-02T07:49:19.855Z",
+  "updated_at": "2025-06-18T17:11:42.492Z",
   "comment": {
     "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 83,
+      "line_number": 84,
       "context": "}\n url=\"/portal-settings/security/access-portal/trusted-mail\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"DeveloperToolsAccess\")}\n subtitle={\n <Trans\n i18nKey=\"DeveloperToolsAccessMobileDescription\"\n ns=\"Settings\"\n t={t}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 196,
+      "line_number": 189,
       "context": "{\n id: \"portal-settings_catalog-access-dev-tools\",\n key: \"1-0-3\",\n icon: \"\",\n link: \"access-dev-tools\",\n tKey: \"DeveloperToolsAccess\",\n },\n {\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'وصول محدود إلى أدوات المطورين' translates to 'Limited access to developer tools'. While not entirely incorrect, it doesn't directly convey 'Developer Tools section'. It emphasizes access rather than the section itself. A more accurate translation would be something closer to 'قسم أدوات المطورين' (Developer Tools Section).",
+          "description": "The translation 'وصول محدود إلى أدوات المطورين' (Limited access to developer tools) doesn't fully capture the meaning of 'Developer Tools section'. It emphasizes access restriction rather than the section itself. A more accurate translation might focus on the 'section' aspect.",
           "suggestion": "قسم أدوات المطورين"
         }
       ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Məhdud Tərtibatçı alətlərinə giriş\" is too literal and doesn't accurately convey the meaning of \"Developer Tools section.\"  'Məhdud' means 'limited' which isn't the intended meaning. 'Tərtibatçı' is a more general term for 'developer' or 'engineer,' whereas 'Developer Tools' refers to a specific set of tools. 'Giriş' means 'access', but a more natural phrasing would imply the section itself, not just access to it.",
-          "suggestion": "A better translation would be something like \"Proqram Tərtibatçı Alətləri Bölməsi\" or \"Proqram Tərtibatçı Alətləri Seksi\"."
+          "description": "The translation \"Məhdud Tərtibatçı alətlərinə giriş\" is too literal and doesn't accurately convey the meaning of \"Developer Tools section.\" \"Məhdud\" means \"limited\" and isn't appropriate here. It implies restricted access, which isn't the intended meaning.",
+          "suggestion": "A better translation would be something like \"Proqram Tərtibatçı Alətləri bölməsi\" or \"Tərtibatçı Alətləri hissəsi\" to more accurately reflect the English phrase."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ограничен достъп до Програмни инструменти\" doesn't accurately convey the meaning of \"Developer Tools section\". It translates to \"Restricted access to Programming Tools\". The original phrase refers to a *section* within a settings menu, not restricted access.",
-          "suggestion": "A more accurate translation would be something along the lines of \"Раздел с инструменти за разработчици\" or \"Секция инструменти за разработчици\"."
+          "description": "The translation \"Ограничен достъп до Програмни инструменти\" translates to \"Restricted access to Programming Tools\". While not entirely wrong, it doesn't accurately reflect the meaning of \"Developer Tools section\". It implies a restriction rather than a section within a settings menu. \"Developer Tools section\" refers to a UI element.",
+          "suggestion": "Раздел 'Инструменти за разработчици' or 'Секция 'Инструменти за разработчици'"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Omezený přístup k nástrojům pro vývojáře\" (Restricted access to developer tools) doesn't accurately reflect \"Developer Tools section\". It implies limited access, whereas the English phrase simply refers to the location of the developer tools within a settings menu.",
-          "suggestion": "Možnosti pro vývojáře"
+          "description": "The Czech translation \"Omezený přístup k nástrojům pro vývojáře\" translates to \"Restricted access to developer tools.\" While technically correct, it doesn't match the original English \"Developer Tools section\". It implies a restriction that might not be the intended meaning. A more accurate translation would better reflect the original meaning of 'section'.",
+          "suggestion": "Možné návrhy: \"Sekce nástrojů pro vývojáře\", \"Nástroje pro vývojáře\""
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Eingeschränkter Zugriff auf Entwicklertools' (Restricted Access to Developer Tools) doesn't accurately reflect 'Developer Tools section'. It implies limited access, while the original refers to the section itself.",
-          "suggestion": "Entwickler-Werkzeuge-Bereich"
+          "description": "The translation 'Eingeschränkter Zugriff auf Entwicklertools' (Restricted access to developer tools) doesn't accurately reflect the meaning of 'Developer Tools section'. It implies access is limited, whereas the English refers to the section itself, not necessarily access.",
+          "suggestion": "Entwickler-Werkzeugbereich"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Περιορισμένη πρόσβαση στα εργαλεία προγραμματιστών\" translates to \"Restricted access to developer tools\". While not entirely wrong, it's more restrictive than the English \"Developer Tools section\" which simply refers to the location of the developer tools. It implies access is limited, whereas the English doesn't.",
-          "suggestion": "Εργαλεία προγραμματιστών"
+          "description": "The translation \"Περιορισμένη πρόσβαση στα εργαλεία προγραμματιστών\" translates to \"Restricted access to developer tools.\"  While related, it doesn't accurately reflect the English phrase \"Developer Tools section\". A more accurate translation would convey the idea of a specific *section* or *area*.",
+          "suggestion": "Ενότητα εργαλείων προγραμματιστών"
         }
       ],
       "approved_at": null
@@ -120,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Rajatut kehittäjän työkalut-oikeudet' is too literal and doesn't accurately convey the meaning of 'Developer Tools section'. 'Rajatut' implies restricted, which isn't the core meaning. The translation is overly formal and complex.",
-          "suggestion": "Kehittäjän työkalut"
+          "description": "The translation \"Rajatut kehittäjän työkalut-oikeudet\" doesn't accurately convey the meaning of \"Developer Tools section.\" \"Rajatut\" implies restricted or limited, which isn't the primary meaning. It's a section, not a set of permissions.",
+          "suggestion": "Kehittäjän työkalut-osio"
         },
         {
           "type": "formatting",
-          "description": "The hyphenated word 'työkalut-oikeudet' creates a disjointed feel.  It is likely unnecessary and confusing.",
-          "suggestion": "Kehittäjän työkalut"
+          "description": "While not strictly incorrect, the hyphenated phrasing 'työkalut-osio' could be improved for readability.",
+          "suggestion": "Kehittäjän työkalujen osio"
         }
       ],
       "approved_at": null
@@ -137,7 +137,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Accès limité aux outils de développement\" doesn't accurately reflect the English phrase \"Developer Tools section\". It translates to \"Limited access to development tools\" which is more restrictive than a mere section.",
+          "description": "The translation \"Accès limité aux outils de développement\" doesn't accurately reflect the English \"Developer Tools section\". It implies restricted access, whereas the original simply refers to the section itself.  A more accurate translation would convey the concept of a section or area.",
           "suggestion": "Section des outils de développement"
         }
       ],
@@ -149,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ծրագրավորողի գործիքների սահմանափակ հասանելիություն' translates to 'Limited access to developer tools'. The English content 'Developer Tools section' refers to the specific area within an application or system. The Armenian translation implies a restriction or limitation which isn't conveyed in the original English.",
-          "suggestion": "Ըստ էության, մոտենալու ավելի ստույգ թարգմանությունը կարող է լինել «ծրագրավորողի գործիքներ բաժին» (T'srgravori gorts'niki bajeen) or simply «ծրագրավորողի գործիքներ» (T'srgravori gorts'kner)."
+          "description": "The translation \"Ծրագրավորողի գործիքների սահմանափակ հասանելիություն\" (Tseragravorogi gorznikneri sahamanapak hasaneliut'yun) literally translates to \"Limited access to developer tools\". The English phrase \"Developer Tools section\" refers to a specific area or part of a larger system. The Armenian translation implies a restriction on access, which isn't the intended meaning. A more accurate translation would focus on the 'section' aspect.",
+          "suggestion": "A better translation would be something like \"Ծրագրավորողի գործիքների բաժին\" (Tseragravorogi gorznikneri bazin) which translates to \"Developer Tools Section\" or \"Developer Tools Area\"."
         }
       ],
       "approved_at": null
@@ -161,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Accesso limitato agli strumenti per sviluppatori' is a bit too literal and doesn't quite convey the meaning of 'Developer Tools section' accurately. It translates to 'Limited access to developer tools'. While technically correct, it's not the most natural phrasing in Italian for a UI element label.",
-          "suggestion": "Consider a more natural phrasing like 'Strumenti per sviluppatori' or 'Sezione strumenti sviluppatori'."
+          "description": "The Italian translation \"Accesso limitato agli strumenti per sviluppatori\" doesn't directly translate \"Developer Tools section\". It translates to something like \"Restricted access to developer tools.\" While conveying a similar concept, it's not a direct translation of the English phrase. A more accurate translation, preserving the 'section' aspect, could be something like \"Sezione strumenti per sviluppatori\".",
+          "suggestion": "Sezione strumenti per sviluppatori"
         }
       ],
       "approved_at": null
@@ -173,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '制限された開発者ツールへのアクセス' (Restrictions on access to developer tools) is too literal and doesn't accurately convey the meaning of 'Developer Tools section'. It implies access restriction, not simply the location of the tools.",
-          "suggestion": "開発者ツールセクション (Kaihatsusha Tsu-ru Sekushon) - This uses a katakana transliteration for 'section' which is common for UI elements and maintains a more accurate representation of the English meaning."
+          "description": "The translation '制限された開発者ツールへのアクセス' (Restrictions on access to developer tools) is too literal and doesn't accurately reflect the meaning of 'Developer Tools section'. It suggests restricted access rather than simply referring to the section itself.",
+          "suggestion": "開発者ツールセクション (Kaihatsusha Tsūru Sekushon) - a more direct translation using katakana for 'section'."
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '제한된 개발자 도구 액세스' translates to 'Restricted Developer Tools Access'. This isn't a direct or accurate translation of 'Developer Tools section'. It implies a restriction, which might not be the intended meaning. The section itself may not be restricted, but simply contain developer tools.",
-          "suggestion": "Consider alternatives like '개발자 도구 섹션' (Developer Tools Section) or '개발자 도구' (Developer Tools) depending on the context of its usage."
+          "description": "The Korean translation \"제한된 개발자 도구 액세스\" translates to \"Restricted Developer Tools Access\". While related, it doesn't accurately reflect the English \"Developer Tools section\". It implies restriction, which may not be the intended meaning. \"Developer Tools section\" simply refers to a specific area or part of a larger application or system.",
+          "suggestion": "Consider a translation more closely aligned with 'Developer Tools section', such as \"개발자 도구 섹션\" (Gae-bal-ja Do-gu Sek-seon) or \"개발자 도구 부분\" (Gae-bal-ja Do-gu Bubun)."
         }
       ],
       "approved_at": null
@@ -197,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຄື່ອງມືຂອງນັກພັດທະນາ\" translates to \"Tools of the developer\". While not entirely wrong, it's a more literal translation and doesn't capture the nuance of a 'section' within settings. A more accurate translation would be closer to \"Developer Tools\" or \"Developer Tools Section\".",
-          "suggestion": "Consider \"ເຄື່ອງມືຂອງນັກພັດທະນາ\" (if 'Tools' is acceptable) or \"ພາກສ່ວນເຄື່ອງມືຂອງນັກພັດທະນາ\" (Developer Tools Section)."
+          "description": "The Lao translation \"ເຄື່ອງມືຂອງນັກພັດທະນາ\" (keun mue khong nak phat tha na) translates to 'tools of the developer,' which is not the same as 'Developer Tools section'. It misses the 'section' part and slightly changes the meaning.",
+          "suggestion": "ອຸປະກອນການພັດທະນາ (upakon kan phat tha na) - This is a more literal and acceptable translation, closer in meaning to \"Developer Tools\"."
         }
       ],
       "approved_at": null
@@ -209,7 +209,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Ierobežota piekļuve Izstrādātāja rīkiem\" translates to \"Restricted access to Developer Tools\". While not entirely wrong, it implies a limitation, whereas the English \"Developer Tools section\" simply refers to the location of those tools. A more accurate translation would convey the concept of a section or area, not restricted access.",
+          "description": "The translation 'Ierobežota piekļuve Izstrādātāja rīkiem' (Restricted access to Developer Tools) doesn't accurately convey the meaning of 'Developer Tools section'. It implies restricted access, while the original refers to a section *containing* developer tools.",
           "suggestion": "Izstrādātāja rīku sadaļa"
         }
       ],
@@ -227,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Ograniczony dostęp do narzędzi dla programistów' translates to 'Restricted access to developer tools'. While not entirely wrong, it's more verbose and less direct than 'Developer Tools section'.  'Sekcja narzędzi dla programistów' or 'Narzędzia dla programistów' would be more accurate and concise.",
-          "suggestion": "Sekcja narzędzi dla programistów"
+          "description": "The Polish translation 'Ograniczony dostęp do narzędzi dla programistów' translates to 'Restricted access to developer tools'. While not entirely wrong, it doesn't accurately convey the meaning of 'Developer Tools section'. It implies restriction rather than simply referring to the section itself.",
+          "suggestion": "Sekcja Narzędzi Programistycznych"
         }
       ],
       "approved_at": null
@@ -239,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Acesso Limitado às Ferramentas do Programador\" is too literal and doesn't convey the meaning of \"Developer Tools section\" accurately. It implies restricted access, while the original refers to the presence of a section.",
-          "suggestion": "Consider a more natural phrasing like \"Seção de Ferramentas do Desenvolvedor\" or \"Ferramentas para Desenvolvedor\"."
+          "description": "The translation 'Acesso Limitado às Ferramentas do Programador' is too literal and doesn't convey the same meaning as 'Developer Tools section'. It implies restricted access, which may not be the intended meaning. A more accurate translation should focus on the 'Developer Tools' functionality.",
+          "suggestion": "Ferramentas do Desenvolvedor"
         }
       ],
       "approved_at": null
@@ -251,13 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Acesso limitado às ferramentas do desenvolvedor\" is too literal and doesn't accurately convey the meaning of \"Developer Tools section\". It implies restricted access, whereas the original refers to the location of the tools.",
-          "suggestion": "Ferramentas do Desenvolvedor"
-        },
-        {
-          "type": "formatting",
-          "description": "The suggested translation should ideally match the casing of 'Ferramentas do Desenvolvedor' in the UI (e.g., title case).",
-          "suggestion": "Ferramentas do Desenvolvedor"
+          "description": "The translation \"Acesso limitado às ferramentas do desenvolvedor\" (Limited access to developer tools) doesn't accurately convey the meaning of \"Developer Tools section.\" It implies restriction rather than just referring to the section itself. A more accurate translation would be something along the lines of \"Seção de Ferramentas do Desenvolvedor\" or \"Ferramentas do Desenvolvedor\".",
+          "suggestion": "Seção de Ferramentas do Desenvolvedor"
         }
       ],
       "approved_at": null
@@ -268,7 +263,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Acces limitat la Instrumente pentru dezvoltatori' is a bit too literal and doesn't quite capture the intended meaning of 'Developer Tools section'. 'Acces limitat' implies restricted access, while the English phrase refers to the presence of a dedicated section. It's not necessarily about restricted access.",
+          "description": "The translation 'Acces limitat la Instrumente pentru dezvoltatori' is not the most natural or accurate translation of 'Developer Tools section'. 'Acces limitat' implies restricted access, whereas the English phrase refers to a specific section within settings. A more accurate translation would be closer to 'Secțiunea Instrumente pentru dezvoltatori' or 'Secțiune Instrumente pentru dezvoltatori'.",
           "suggestion": "Secțiunea Instrumente pentru dezvoltatori"
         }
       ],
@@ -280,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ограниченный доступ к инструментам разработчика' (Restricted access to developer tools) doesn't accurately reflect the meaning of 'Developer Tools section'. It implies a restriction, whereas the English phrase refers to a specific location or area.",
-          "suggestion": "Раздeл 'Инструменты разработчика' or 'Инструменты для разработчиков' would be more accurate."
+          "description": "The translation 'Ограниченный доступ к инструментам разработчика' (Limited access to developer tools) doesn't accurately reflect the meaning of 'Developer Tools section'. It implies a restricted access, whereas the original refers to the section itself.",
+          "suggestion": "Раздел инструментов разработчика"
         }
       ],
       "approved_at": null
@@ -289,13 +284,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සංවර්ධක මෙවලම් අංශය' while generally accurate, could be more directly translated as 'Developer Tools' or 'Developer Tools section' to maintain consistency with the original English phrase. 'අංශය' (ashaya) implies a department or division, which might be too specific.",
-          "suggestion": "නිර්මාණකරුවන්ගේ මෙවලම් (Nirmanakaruwan Ge Mewalam) or නිර්මාණකරුවන්ගේ මෙවලම් කොටස (Nirmanakaruwan Ge Mewalam Kotas)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -304,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Obmedzený prístup k nástrojom pre vývojárov' (Restricted access to developer tools) is too literal and doesn't accurately convey the meaning of 'Developer Tools section'. It implies a restriction, while the English phrase simply refers to a specific part of the settings.",
-          "suggestion": "Záložka nástrojov pre vývojárov"
+          "description": "The Slovak translation \"Obmedzený prístup k nástrojom pre vývojárov\" translates to \"Restricted access to developer tools\". While not entirely wrong, it's more restrictive than the English \"Developer Tools section\", which implies a section within a larger application or system.  It doesn't convey the sense of a *section*.",
+          "suggestion": "V sekcii nástrojov pre vývojárov"
         }
       ],
       "approved_at": null
@@ -316,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Omejen dostop do orodij za razvijalce' translates to 'Restricted access to developer tools'. While technically correct, it doesn't quite capture the nuance of 'Developer Tools section'. It implies a restriction, whereas the original phrase simply refers to a section within a larger system. A more accurate translation might focus on the 'section' aspect.",
-          "suggestion": "Razdelilnik razvijalskih orodij"
+          "description": "The translation \"Omejen dostop do orodij za razvijalce\" (Restricted access to developer tools) is too literal and doesn't accurately convey the meaning of \"Developer Tools section\". It implies a restriction, whereas the English refers to a section within settings.",
+          "suggestion": "Razdelilnik za razvojna orodja"
         }
       ],
       "approved_at": null
@@ -328,13 +317,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ограничен приступ алаткама за програмере\" does not accurately reflect the meaning of \"Developer Tools section\". It translates to something like \"Restricted access to developer tools\". The original phrase refers to a section within settings, not restricted access.",
-          "suggestion": "Подељак алатки за програмере"
+          "description": "The Serbian translation \"Ограничен приступ алаткама за програмере\" translates to \"Restricted access to developer tools.\" While not entirely wrong, it implies a restriction is in place, whereas the English \"Developer Tools section\" simply refers to the location of the tools. It's not a restriction, but a label for a section.",
+          "suggestion": "Подешавања: Алаткама за програмере"
         },
         {
-          "type": "spelling",
-          "description": "The word \"алаткама\" is technically correct but slightly awkward in this context. It's the dative plural of \"алatка\" (tool). A more natural phrasing might avoid the dative case.",
-          "suggestion": "алатки за програмере"
+          "type": "formatting",
+          "description": "The translation uses a colon, which isn't present in the English. It is important that the translation maintains the formatting of the original.",
+          "suggestion": "Подешавања: Алаткама за програмере"
         }
       ],
       "approved_at": null
@@ -345,8 +334,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ograničen pristup alatkama za programere' (Restricted access to developer tools) doesn't accurately reflect the English phrase 'Developer Tools section'. It implies access restriction, while the original refers to a section within a larger interface. A more appropriate translation would focus on the 'section' aspect.",
-          "suggestion": "Developer alatke - sekcija"
+          "description": "The Serbian translation \"Ograničen pristup alatkama za programere\" translates to \"Restricted access to developer tools.\" While conveying a similar concept, it doesn't accurately reflect the English \"Developer Tools section.\"  It implies a restriction, which isn't necessarily the meaning of the English phrase.",
+          "suggestion": "Alternativni prevodi koji bi bolje odgovarali originalnom značenju uključuju: \"Odsek za alate za programere\", \"Sekcija za alate za programere\", ili \"Alati za programere - odeljak/sekcija\"."
         }
       ],
       "approved_at": null
@@ -357,7 +346,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Sınırlı Geliştirici Araçları erişimi\" translates to \"Limited Developer Tools access\". While not entirely wrong, it implies a restriction, whereas the English \"Developer Tools section\" simply refers to the location of the tools. It's more of a descriptive label, not a restricted access designation.",
+          "description": "The Turkish translation 'Sınırlı Geliştirici Araçları erişimi' translates to 'Limited Developer Tools access'. The English content 'Developer Tools section' implies a location or area, not necessarily a limitation.  'Geliştirici Araçları bölümü' would be a more accurate translation of 'Developer Tools section'.",
           "suggestion": "Geliştirici Araçları bölümü"
         }
       ],
@@ -369,8 +358,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Обмежений доступ до інструментів розробника\" (Restricted access to developer tools) doesn't accurately convey the meaning of \"Developer Tools section.\" It implies restricted access, whereas the original refers to a section or area within a larger interface.",
-          "suggestion": "Розділ інструментів розробника"
+          "description": "The translation 'Обмежений доступ до інструментів розробника' (Restricted access to developer tools) doesn't accurately reflect the English phrase 'Developer Tools section'. It implies restricted access, whereas the English phrase simply refers to the location of a section.",
+          "suggestion": "Розділ 'Інструменти розробника'"
         }
       ],
       "approved_at": null
@@ -381,13 +370,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation \"Quyền truy cập công cụ dành cho Nnhà Phát Triển có giới hạn\" is an overly literal and slightly awkward translation of \"Developer Tools section.\" It emphasizes 'limited access' which isn't inherent to the English phrase. \"Nhà Phát Triển\" is also missing a vowel at the beginning (should be \"Nhà Phát Triển\")",
-          "suggestion": "Phần công cụ dành cho nhà phát triển"
+          "description": "The translation \"Quyền truy cập công cụ dành cho Nnhà Phát Triển có giới hạn\" is not an accurate translation of \"Developer Tools section\". It translates to \"Limited access for Developers' tools\". It introduces the concept of 'limited access' which isn't present in the original English.",
+          "suggestion": "A more accurate translation would be \"Phần Công cụ dành cho nhà phát triển\" or \"Phần Công cụ phát triển\"."
         },
         {
           "type": "spelling",
-          "description": "The Vietnamese phrase \"Nnhà Phát Triển\" contains a typo. It should be \"Nhà Phát Triển\".",
-          "suggestion": "Nhà Phát Triển"
+          "description": "The Vietnamese text contains a typo. The word \"Nnhà\" should be \"Nhà\".",
+          "suggestion": "Correct \"Nnhà\" to \"Nhà\"."
         }
       ],
       "approved_at": null
@@ -398,8 +387,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '受限的开发者工具访问' (Shòu xiàn de kāi fā zhě gōng jù fǎng wèn) translates to 'Restricted developer tools access'. This doesn't accurately reflect the English phrase 'Developer Tools section'. The English refers to a section within an application or system, whereas the translation implies a restriction.",
-          "suggestion": "开发者工具区 (Kāi fā zhě gōng jù qū) - Developer Tools area/section"
+          "description": "The translation \"受限的开发者工具访问\" (Shòu xiàn de kāi fā zhě gōng jù fǎng wèn) translates to 'Restricted Developer Tools Access.' The English phrase 'Developer Tools section' refers to a specific part of a software application, not necessarily limited access. The current translation implies a restriction that isn't inherently conveyed by the original English.",
+          "suggestion": "开发者工具区域 (Kāi fā zhě gōng jù qū yù) - 'Developer Tools area/section'"
         }
       ],
       "approved_at": null

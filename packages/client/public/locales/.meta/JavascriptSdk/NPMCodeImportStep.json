@@ -3,7 +3,7 @@
   "content": "Import the package in your project:",
   "content_en_sha1_hash": "5fe6d0342268dd7609b0f79d4c0aec73f4fede5c",
   "created_at": "2025-05-19T21:30:54.601Z",
-  "updated_at": "2025-05-28T09:30:02.575Z",
+  "updated_at": "2025-05-26T07:57:32.599Z",
   "comment": {
     "text": "\"Import the package in your project. This translation is used in a UI component that prompts users to enter an import statement.\"",
     "is_auto": true,
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'قوموا باستيراد الحزمة في مشروعكم:' while understandable, is overly formal for the context of a Javascript SDK import instruction. 'قوموا' implies a strong instruction and a more casual phrasing would be more appropriate for developer documentation.",
-          "suggestion": "استوردوا الحزمة في مشروعكم:"
+          "description": "The translation \"قوموا باستيراد الحزمة في مشروعكم:\" is a bit formal and could be improved for better user experience. While technically correct, it's not the most natural phrasing. A more common and approachable phrasing could be considered.",
+          "suggestion": "استوردوا الحزمة في مشروعكم"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon (:) at the end of the Arabic sentence is common but may feel slightly abrupt in a UI context. Consider removing it or replacing it with a more subtle visual cue if the platform allows.",
+          "suggestion": "استوردوا الحزمة في مشروعكم"
         }
       ],
       "approved_at": null
@@ -42,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'layihənizə' is spelled incorrectly. The correct spelling is 'layihənizə'.",
-          "suggestion": "layihənizə"
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, 'Paketi layihənizə idxal edin:' could be slightly more natural-sounding in Azerbaijani. A more common phrasing might involve a slightly different word order.",
-          "suggestion": "Layihənizə paketi idxal edin:"
+          "description": "The word 'layihənizə' is slightly unnatural in this context. While technically correct, 'proyektinizə' would be more common and idiomatic when referring to a software project.",
+          "suggestion": "Paketi proyektinizə idxal edin:"
         }
       ],
       "approved_at": null
@@ -98,13 +98,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ներմուծել փաթեթը ձեր նախագծում՝\" is technically correct but sounds a bit clunky in Armenian. A more natural phrasing would be something like \"ներմուծեք փաթեթը ձեր նախագծի մեջ\" or \"ներմուծեք փաթեթը ձեր հրամանագրի մեջ\". The addition of 'մեջ' makes it flow better.",
-          "suggestion": "ներմուծեք փաթեթը ձեր նախագծի մեջ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -122,13 +116,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '프로젝트에서 패키지 가져오기: ' is technically correct but could be more natural. '가져오기' can sound a bit formal or technical in this context. A more conversational and common phrasing would be better.",
-          "suggestion": "프로젝트에 패키지 추가하기:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -184,9 +172,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'ඔබේ ව්‍යාපෘතියට පැකේජය ආනයනය කරන්න:' while understandable, is a bit literal and doesn't flow naturally in Sinhala. A more idiomatic translation would better convey the intended meaning.",
-          "suggestion": "ඔබේ ව්‍යාපෘතියේ පැකේජය එකතු කරන්න:"
+          "type": "spelling",
+          "description": "The word 'පැකේජය' (package) is spelled correctly. However, ensure it's the preferred terminology in Sinhala for software packages in this context.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is grammatically correct, but could be slightly more natural. While 'ඔබේ ව්‍යාපෘතියට පැකේජය ආනයනය කරන්න:' is understandable, a more common phrasing might be 'ඔබේ ව්‍යාපෘතියේ පැකේජය ආගෙන එන්න' (Import the package into your project) or 'ඔබේ ව්‍යාපෘතියේ පැකේජය එකතු කරන්න' (Add the package to your project).",
+          "suggestion": "ඔබේ ව්‍යාපෘතියේ පැකේජය ආගෙන එන්න"
         }
       ],
       "approved_at": null
@@ -209,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Увези пакет у свој пројекат:' is a literal translation of 'Import', which doesn't convey the intended meaning in this context. 'Import' in software development usually refers to including a dependency or module, not physically moving something.",
-          "suggestion": "Укључи пакет у свој пројекат:"
+          "description": "The Serbian translation \"Увези пакет у свој пројекат:\" literally translates to 'Bring the package into your project'.  'Import' is the correct technical term for this action in a programming context. 'Uvezi' implies physical transport, not code inclusion.",
+          "suggestion": "Убаци пакет у свој пројекат:"
         }
       ],
       "approved_at": null
@@ -224,13 +217,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Paketi projenize aktarın\" is understandable, a more natural and accurate translation of \"Import the package in your project\" would be \"Paketi projenize dahil edin\" or \"Paketi projenize ekleyin\". \"Aktarın\" implies transferring data, while \"import\" in this context means including the package's code into the project's code base.",
-          "suggestion": "Paketi projenize dahil edin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -245,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nhập gói trong dự án của bạn:\" is a literal translation and doesn't convey the intended meaning of 'Import the package in your project:' in a natural Vietnamese way. It implies physically entering a package, not importing a software package.",
-          "suggestion": "Cài đặt gói trong dự án của bạn:"
+          "description": "The translation \"Nhập gói trong dự án của bạn:\" is not the most natural or accurate translation of \"Import the package in your project:\". \"Nhập\" can imply physically importing something. A more appropriate translation would convey the meaning of including the package using a javascript import statement.",
+          "suggestion": "Thêm gói vào dự án của bạn:"
         }
       ],
       "approved_at": null

@@ -39,28 +39,34 @@ import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import CustomFilter12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/custom-filter.react.svg?url";
 import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
+import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
+import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
-import {
-  classNames,
-  getFillingStatusLabel,
-  getFillingStatusTitle,
-} from "@docspace/shared/utils";
+import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { Link, LinkTarget, LinkType } from "../link";
 import { Badge } from "../badge";
-import { ColorTheme, ThemeId } from "../color-theme";
 
 import { RoomsType, ShareAccessRights } from "../../enums";
+import { globalColors } from "../../themes";
 
-import { IconSizeType, isDesktop, isTablet, size } from "../../utils";
+import {
+  classNames,
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+  IconSizeType,
+  isDesktop,
+  isTablet,
+  size,
+} from "../../utils";
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
+import { IconButton } from "../icon-button";
 
 const BadgeWrapper = ({
   onClick,
@@ -79,7 +85,9 @@ const BadgeWrapper = ({
     setIsHovered(false);
   };
 
-  const newBadge = React.cloneElement(badge, { isHovered });
+  const badgeProps = { isHovered };
+
+  const newBadge = React.cloneElement(badge, badgeProps);
 
   return (
     <div
@@ -119,6 +127,7 @@ const Badges = ({
   className,
   isExtsCustomFilter,
   customFilterExternalLink,
+  onClickLock,
 }: BadgesProps) => {
   const {
     id,
@@ -133,6 +142,8 @@ const Badges = ({
     new: newCount,
     hasDraft,
     security,
+    lockedBy,
+    locked,
     // startFilling,
   } = item;
 
@@ -159,6 +170,7 @@ const Badges = ({
   const iconEdit = <FileActionsConvertEditDocReactSvg />;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
+  const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
 
   const iconPin = UnpinReactSvgUrl;
   const iconMute =
@@ -217,6 +229,10 @@ const Badges = ({
     !isArchiveFolder &&
     !isTile;
 
+  const lockedByUser = lockedBy ?? "";
+
+  const canLock = security && "Lock" in security ? security.Lock : undefined;
+
   const onDraftClick = () => {
     if (!isTrashFolder) openLocationFile?.();
   };
@@ -256,6 +272,20 @@ const Badges = ({
     [styles.tileView]: viewAs === "tile",
   });
 
+  const getLockTooltip = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {t("Common:LockedBy", { userName: lockedByUser })}
+    </Text>
+  );
+
+  const onIconLockClick = () => {
+    if (!canLock) {
+      return;
+    }
+
+    if (onClickLock) onClickLock();
+  };
+
   return fileExst ? (
     <div
       className={classNames(
@@ -264,14 +294,12 @@ const Badges = ({
       )}
     >
       {/* {startFilling && (
-        <ColorTheme
-          isEditing
+        <IconButton
           size={sizeBadge}
           iconName={iconForm}
           onClick={onFilesClick}
-          themeId={ThemeId.IconButton}
           title={t("Common:ReadyToFillOut")}
-          hoverColor={theme.filesBadges.hoverIconColor}
+          hoverColor={accent}
           className="badge icons-group is-editing tablet-badge tablet-edit"
         />
       )} */}
@@ -313,34 +341,61 @@ const Badges = ({
       ) : null}
 
       {isEditing && !(isRecentTab && !canEditing) ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
-          isEditing={isEditing}
+        <IconButton
           iconNode={iconEdit}
           className={classNames(
             styles.iconBadge,
             "badge icons-group is-editing tablet-badge tablet-edit",
           )}
           onClick={onFilesClick}
-          hoverColor={theme.filesBadges.hoverIconColor}
+          color="accent"
+          hoverColor="accent"
           title={t("Common:EditButton")}
         />
       ) : null}
+
+      {locked ? (
+        <>
+          <IconButton
+            iconName={iconLock}
+            className={classNames(
+              styles.iconBadge,
+              "badge tablet-badge icons-group",
+            )}
+            data-id={id}
+            data-locked={!!locked}
+            onClick={onIconLockClick}
+            color={theme.filesQuickButtons.sharedColor}
+            hoverColor="accent"
+            title={t("Common:UnblockFile")}
+            data-tooltip-id={`lockTooltip${item.id}`}
+          />
+          {lockedByUser && !canLock ? (
+            <Tooltip
+              id={`lockTooltip${item.id}`}
+              place="bottom"
+              getContent={getLockTooltip}
+              maxWidth="300px"
+              openOnClick
+            />
+          ) : null}
+        </>
+      ) : null}
+
       {item.viewAccessibility?.MustConvert &&
       security &&
       "Convert" in security &&
       security?.Convert &&
       !isTrashFolder &&
       !isArchiveFolderRoot ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           onClick={setConvertDialogVisible}
           iconName={iconRefresh}
           className={classNames(
             styles.iconBadge,
             "badge tablet-badge icons-group can-convert",
           )}
-          hoverColor={theme.filesBadges.hoverIconColor}
+          hoverColor="accent"
         />
       ) : null}
       {versionGroup && versionGroup > 1 ? (
@@ -362,6 +417,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       ) : null}
+
       {showNew ? (
         <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>
           <Badge
@@ -385,13 +441,14 @@ const Badges = ({
 
       {customFilterEnabled && !isRoom && isExtsCustomFilter ? (
         <>
-          <ColorTheme
+          <IconButton
             id="customFilterTooltip"
-            themeId={ThemeId.IconButtonCustomFilter}
             iconName={iconCustomFilter}
             size={sizeBadge}
             data-tooltip-id="customFilterTooltip"
             className="badge is-custom-filter tablet-badge"
+            color={globalColors.mainGreen}
+            hoverColor={globalColors.mainGreen}
           />
 
           <Tooltip
@@ -414,8 +471,7 @@ const Badges = ({
       })}
     >
       {showCopyLinkIcon ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           iconName={LinkReactSvgUrl}
           className={classNames(
             styles.iconBadge,
@@ -423,12 +479,12 @@ const Badges = ({
           )}
           onClick={onCopyPrimaryLink}
           title={t("Common:CopySharedLink")}
+          hoverColor="accent"
         />
       ) : null}
 
       {showCopyLinkIcon ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           iconName={TabletLinkReactSvgUrl}
           className={classNames(
             styles.iconBadge,
@@ -436,27 +492,28 @@ const Badges = ({
           )}
           onClick={onCopyPrimaryLink}
           title={t("Common:CopySharedLink")}
+          hoverColor="accent"
         />
       ) : null}
 
       {isRoom && mute && !isTile ? (
-        <ColorTheme
-          themeId={ThemeId.IconButtonMute}
+        <IconButton
           onClick={onUnmuteClick}
           iconName={iconMute}
           className={classNames(
             styles.iconBadge,
+            styles.muteBadge,
             "badge  is-mute tablet-badge",
           )}
           {...unmuteIconProps}
         />
       ) : null}
       {isRoom && pinned ? (
-        <ColorTheme
-          themeId={ThemeId.IconButtonPin}
+        <IconButton
           onClick={onUnpinClick}
           className={classNames(
             styles.iconBadge,
+            styles.pinBadge,
             "badge icons-group is-pinned tablet-badge tablet-pinned",
           )}
           iconName={iconPin}
@@ -464,8 +521,7 @@ const Badges = ({
         />
       ) : null}
       {isTemplatesFolder && isTile ? (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
+        <IconButton
           iconName={CreateRoomReactSvgUrl}
           className={classNames(
             styles.iconBadge,
@@ -474,6 +530,7 @@ const Badges = ({
           size={IconSizeType.medium}
           onClick={onCreateRoom}
           title={t("Common:CreateRoom")}
+          hoverColor="accent"
         />
       ) : null}
       {showNew && !isTile && isRoom ? newFilesBadge : null}

@@ -3,7 +3,7 @@
   "content": "Registration date",
   "content_en_sha1_hash": "c498221a5aad95b5674daf56badfb16892c6ed05",
   "created_at": "2025-05-19T21:30:53.492Z",
-  "updated_at": "2025-05-28T09:30:02.453Z",
+  "updated_at": "2025-06-30T12:20:31.370Z",
   "comment": {
     "text": "This translation key is used to display the registration date of a user in the application. It appears as a label on an info panel and is rendered when the user's status is active. Translators should provide a human-readable version of this date in their respective language.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 266,
+      "line_number": 267,
       "context": "{infoPanelSelection.status === EmployeeStatus.Active ? (\n <>\n <Text\n className=\"info_field\"\n noSelect\n title={t(\"PeopleTranslations:RegistrationDate\")}\n >\n {t(\"PeopleTranslations:RegistrationDate\")}\n </Text>\n <Text\n className=\"info_data first-row\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 266,
+      "line_number": 267,
       "context": "{infoPanelSelection.status === EmployeeStatus.Active ? (\n <>\n <Text\n className=\"info_field\"\n noSelect\n title={t(\"PeopleTranslations:RegistrationDate\")}\n >\n {t(\"PeopleTranslations:RegistrationDate\")}\n </Text>\n <Text\n className=\"info_data first-row\"",
       "module": "/packages/client"
     },
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Înregistrat la data de\" is a literal translation that doesn't quite capture the meaning of 'Registration date' in a user interface context. It sounds a bit formal and awkward.",
-          "suggestion": "Consider alternatives like \"Data înregistrării\" or \"Dată înregistrare\" which are more common and natural for this type of label."
+          "description": "The Romanian translation \"Înregistrat la data de\" is not the most accurate or natural translation of \"Registration date\". It literally translates to \"Registered on the date of\". A more accurate and natural translation would be \"Data înregistrării\" or \"Data înscrierii\".",
+          "suggestion": "Consider using \"Data înregistrării\" or \"Data înscrierii\"."
         }
       ],
       "approved_at": null
@@ -174,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පහregister කිරීමේ දිනය\" is not an accurate translation of \"Registration date\". The word \"පහ\" is unnecessary and disrupts the flow of the translation. It's unclear what it's intended to convey.",
-          "suggestion": "නි ලේඛන දිනය (Niyama Lekhana Dinaya) or ලේඛන දිනය (Lekhana Dinaya)"
+          "description": "The Sinhala translation 'පහregister කිරීමේ දිනය' is not an accurate translation of 'Registration date'. It seems to be a direct transliteration and incorrect combination of English and Sinhala words. The word 'register' shouldn't be used in this context in Sinhala.",
+          "suggestion": "නි ලියාපදිංචි කිරීමේ දිනය (ni liyāpadiñci kirimē dinaya) - which translates to 'date of registration'"
         },
         {
           "type": "spelling",
-          "description": "While 'register' is borrowed from English and acceptable in some contexts, a more natural Sinhala equivalent might be preferred.",
-          "suggestion": "Consider using a more established Sinhala term for 'registration' if possible. 'පහregister' is a direct transliteration and might not be immediately understood by all readers."
+          "description": "Although 'register' is not a Sinhala word, it is transliterated, and this transliteration is not standardized, potentially leading to confusion for readers.",
+          "suggestion": "Avoid direct transliterations. Use appropriate Sinhala vocabulary."
         }
       ],
       "approved_at": null

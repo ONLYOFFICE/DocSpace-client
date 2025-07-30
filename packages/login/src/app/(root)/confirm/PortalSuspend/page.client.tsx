@@ -53,7 +53,7 @@ const DeactivatePortalForm = ({
 
   const [isDeactivate, setIsDeactivate] = useState(false);
 
-  const url = siteUrl ? siteUrl : onlyofficeUrl;
+  const url = siteUrl || onlyofficeUrl;
 
   const onDeactivateClick = async () => {
     try {
@@ -80,47 +80,43 @@ const DeactivatePortalForm = ({
   };
 
   const onCancelClick = () => {
-    location.href = "/";
+    window.location.href = "/";
   };
 
-  return (
+  return isDeactivate ? (
+    <Text>
+      <Trans t={t} i18nKey="SuccessDeactivate" ns="Confirm">
+        Your account has been successfully deactivated. In 10 seconds you will
+        be redirected to the
+        <Link isHovered href={url}>
+          site
+        </Link>
+      </Trans>
+    </Text>
+  ) : (
     <>
-      {isDeactivate ? (
-        <Text>
-          <Trans t={t} i18nKey="SuccessDeactivate" ns="Confirm">
-            Your account has been successfully deactivated. In 10 seconds you
-            will be redirected to the
-            <Link isHovered href={url}>
-              site
-            </Link>
-          </Trans>
-        </Text>
-      ) : (
-        <>
-          <Text className="subtitle">
-            {t("PortalDeactivateTitle", {
-              productName: t("Common:ProductName"),
-            })}
-          </Text>
-          <ButtonsWrapper>
-            <Button
-              scale
-              primary
-              size={ButtonSize.medium}
-              label={t("Common:Deactivate")}
-              tabIndex={1}
-              onClick={onDeactivateClick}
-            />
-            <Button
-              scale
-              size={ButtonSize.medium}
-              label={t("Common:CancelButton")}
-              tabIndex={1}
-              onClick={onCancelClick}
-            />
-          </ButtonsWrapper>
-        </>
-      )}
+      <Text className="subtitle">
+        {t("PortalDeactivateTitle", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <ButtonsWrapper>
+        <Button
+          scale
+          primary
+          size={ButtonSize.medium}
+          label={t("Common:Deactivate")}
+          tabIndex={1}
+          onClick={onDeactivateClick}
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:CancelButton")}
+          tabIndex={1}
+          onClick={onCancelClick}
+        />
+      </ButtonsWrapper>
     </>
   );
 };

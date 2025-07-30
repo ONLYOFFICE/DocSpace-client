@@ -128,7 +128,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
       setShowReminder(false);
       saveToSessionStorage("defaultConfigureDeepLink", type);
       saveToSessionStorage("currentConfigureDeepLink", type);
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e!);
     } finally {
@@ -156,6 +156,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
         className="radio-button-group"
         fontSize="13px"
         fontWeight={400}
+        dataTestId="configure_deep_link_radio-button"
         orientation="vertical"
         spacing="8px"
         options={[
@@ -163,16 +164,19 @@ const ConfigureDeepLinkComponent = (props: Props) => {
             id: "provide-a-choice",
             label: t("ProvideChoice"),
             value: 0,
+            dataTestId: "deep_link_provide-a-choice",
           },
           {
             id: "by-web",
             label: t("OpenInWebOnly"),
             value: 1,
+            dataTestId: "deep_link_by-web",
           },
           {
             id: "by-app",
             label: t("OpenInAppOnly"),
             value: 2,
+            dataTestId: "deep_link_by-app",
           },
         ]}
         selected={type}
@@ -183,12 +187,14 @@ const ConfigureDeepLinkComponent = (props: Props) => {
         onSaveClick={onSave}
         onCancelClick={onCancel}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
+        saveButtonDataTestId="configure_deep_link_save_button"
+        cancelButtonDataTestId="configure_deep_link_cancel_button"
       />
     </StyledWrapper>
   );

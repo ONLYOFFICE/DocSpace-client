@@ -3,7 +3,7 @@
   "content": "File renamed.",
   "content_en_sha1_hash": "d161ba5e979b2ce7b737df41fd08388f7fc79240",
   "created_at": "2025-05-19T21:30:54.823Z",
-  "updated_at": "2025-05-28T09:30:02.424Z",
+  "updated_at": "2025-06-30T12:20:31.336Z",
   "comment": {
     "text": "This translation key is used to display the message \"File renamed.\" when a user's file has been updated on their feed. It appears in a UI component where user file updates are listed, likely as part of an info panel or history view.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 54,
-      "context": "case \"UserFileUpdated\":\n return t(\"InfoPanel:UserFileUpdated\");\n case \"FileConverted\":\n return t(\"InfoPanel:FileConverted\");\n case \"FileRenamed\":\n return t(\"InfoPanel:FileRenamed\");\n case \"FileMoved\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });",
+      "line_number": 57,
+      "context": "case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamed\");\n case FeedActionKeys.FileMoved:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Faylın adı dəyişdirildi' literally translates to 'The file's name has been changed.' While not entirely wrong, a more natural and concise translation of 'File renamed.' would be 'Faylın adı dəyişmişdir.' or 'Fayl yenidən adlandırıldı.'",
-          "suggestion": "Fayl yenidən adlandırıldı."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -48,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content 'File renamed' refers to a single file. The Bulgarian translation 'Преименувани файлове' translates to 'Files renamed' which is plural. This is an inaccurate translation of the singular English text.",
+          "description": "The English content 'File renamed.' refers to a single file. The Bulgarian translation 'Преименувани файлове.' translates to 'Files renamed.' which is plural. This is an incorrect translation of the singular English content.",
           "suggestion": "Преименуван файл."
         }
       ],
@@ -60,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'File renamed' refers to a single file. The Czech translation 'Soubory přejmenovány' translates to 'Files renamed,' implying multiple files. This is a discrepancy in number.",
+          "description": "The English phrase 'File renamed' refers to a singular file. The Czech translation 'Soubory přejmenovány' means 'Files renamed' which is plural. This suggests the translation is too general and doesn't accurately reflect the original meaning.",
           "suggestion": "Soubor přejmenován"
         }
       ],
@@ -78,13 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Το αρχείου μετονομάστηκε.' is not accurate. It literally translates to 'The file was renamed' but the English 'File renamed' implies a more concise and direct statement.",
-          "suggestion": "Μετονομάστηκε το αρχείο."
+          "description": "The translation \"Το αρχείου μετονομάστηκε.\" is not the most natural or accurate translation of \"File renamed.\" It literally translates to \"The file was renamed.\" A more natural translation would use a passive construction with 'έχει μετονομαστεί'.",
+          "suggestion": "Το αρχείο μετονομάστηκε."
         },
         {
           "type": "grammar",
-          "description": "The Greek translation 'Το αρχείου μετονομάστηκε.' uses the genitive case ('αρχείου') which is grammatically incorrect in this context. The nominative case should be used.",
-          "suggestion": "Μετονομάστηκε το αρχείο."
+          "description": "The word 'αρχείου' (archiou) is in the genitive case, which is grammatically incorrect in this context.  It should be in the nominative case.",
+          "suggestion": "Replace 'αρχείου' with 'αρχείο'."
         }
       ],
       "approved_at": null
@@ -101,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'File renamed' refers to a single file. The Finnish translation 'Tiedostot nimetty uudelleen' translates to 'Files renamed,' which is plural. This suggests a difference in the intended meaning.",
-          "suggestion": "Consider translating as 'Tiedosto nimetty uudelleen' to match the singular nature of the English content."
+          "description": "The English \"File renamed\" refers to a single file. The Finnish translation \"Tiedostot nimetty uudelleen\" translates to \"Files renamed\", implying multiple files. This is a potential mismatch in scope.",
+          "suggestion": "Consider using \"Tiedosto nimetty uudelleen\" to accurately reflect the singular nature of the English original."
         }
       ],
       "approved_at": null
@@ -146,7 +140,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Fails ir pārdēvēts' is a literal translation and while understandable, it's not the most natural phrasing in Latvian. A more common and natural way to say 'File renamed' would be 'Datums ir pārdēvēts' or 'Faila nosaukums ir mainīts'.",
+          "suggestion": "Datums ir pārdēvēts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -179,7 +179,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Fişier a fost redenumit' is a passive voice construction. While grammatically correct, a more natural and concise translation might be preferable, especially for a short UI message.  'Fișierul a fost redenumit' would be slightly more accurate as it includes the definite article.",
+          "description": "The translation \"Fişier a fost redenumit\" is a literal translation of 'File was renamed'. A more natural Romanian phrasing would be 'Fișierul a fost redenumit' or 'Fișierul a fost redenumit.'. The definite article 'Fișierul' is generally preferred in this context.",
           "suggestion": "Fișierul a fost redenumit."
         }
       ],
@@ -196,9 +196,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'ගොනුව නැවත නම් කරන ලදී.' is a literal translation of 'File renamed' but it sounds unnatural and overly formal in Sinhala. A more natural and common phrasing would be something like 'ගොනුව పేరు बदलයි' (Gonuwe pera badalai) or 'ගොනුව වෙනුවත් කළේය' (Gonuwe venuwath kalei).",
-          "suggestion": "ගොනුව పేరు बदलයි (Gonuwe pera badalai) or ගොනුව වෙනුවත් කළේය (Gonuwe venuwath kalei)"
+          "type": "spelling",
+          "description": "The word 'නම්' is spelled incorrectly. The correct spelling is 'නම්'.",
+          "suggestion": "නම්"
         }
       ],
       "approved_at": null
@@ -221,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Датотека' (Datoteka) is a correct spelling for 'File' in Serbian. However, it might be more common to use 'Фајл' (Fajl), which is a transliteration of the English word 'File'.",
-          "suggestion": "Consider using 'Фајл је преименован.'"
+          "description": "The word 'Датотека' is a more formal term. A more common and natural word for 'File' in this context would be 'Фајл'.",
+          "suggestion": "Фајл је преименован."
         }
       ],
       "approved_at": null

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+
 import { useCallback } from "react";
 
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -42,7 +43,7 @@ type useItemListProps = {
 };
 
 export default function useItemList({ shareKey, getIcon }: useItemListProps) {
-  const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({});
+  const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu();
 
   const convertFileToItem = useCallback(
     (file: TFile) => {
@@ -93,7 +94,7 @@ export default function useItemList({ shareKey, getIcon }: useItemListProps) {
 
       const icon = getIcon();
 
-      const contextOptions = getFoldersContextMenu(folder);
+      const contextOptions = getFoldersContextMenu();
 
       return { ...folder, isFolder, folderUrl, icon, contextOptions };
     },

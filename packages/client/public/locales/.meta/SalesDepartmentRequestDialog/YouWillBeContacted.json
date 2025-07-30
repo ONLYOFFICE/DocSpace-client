@@ -3,7 +3,7 @@
   "content": "The sales team will contact you after creating the request.",
   "content_en_sha1_hash": "4268b91ebf92921eaa139f9b54281c0a0b68f201",
   "created_at": "2025-05-19T21:30:53.286Z",
-  "updated_at": "2025-06-18T07:34:14.909Z",
+  "updated_at": "2025-06-18T17:11:42.381Z",
   "comment": {
     "text": "The translation key \"YouWillBeContacted\" is used to display a message indicating that the sales team will contact the user after creating a request. It appears in the body of a sales department request dialog and serves as a notification to inform the user about the next steps.",
     "is_auto": true,
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'request' is translated as 'pedido', which is more accurately 'order'. 'Request' implies a formal inquiry, while 'pedido' can be a general order.",
-          "suggestion": "Consider using 'solicitação' which is a more accurate translation of 'request' in this context."
+          "description": "The English phrase 'request' is translated as 'pedido'. While 'pedido' can mean request in some contexts, in this case, 'solicitação' would be a more accurate and natural translation for 'request' in the context of a sales department.",
+          "suggestion": "A equipe de vendas entrará em contato com você após a criação da solicitação."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Po vytvorení požiadavky vás bude kontaktovať predajný tím.' is a literal translation but sounds slightly unnatural in Slovak. A more natural phrasing would emphasize the future contact.",
-          "suggestion": "Po vytvorení požiadavky vás predajný tím kontaktuje."
+          "description": "The translation 'Po vytvorení požiadavky vás bude kontaktovať predajný tím' is a literal translation but sounds unnatural in Slovak. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Po vytvorení žiadosti vás kontaktuje predajný tím."
         }
       ],
       "approved_at": null
@@ -207,13 +207,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'creating the request' is better translated as 'khi bạn tạo yêu cầu' rather than 'sau khi bạn gửi yêu cầu'. 'Creating' implies the action of initiating the request, while 'gửi' implies submitting a pre-existing request.",
-          "suggestion": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi bạn tạo yêu cầu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

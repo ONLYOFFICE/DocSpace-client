@@ -31,19 +31,23 @@ import { PlayerFullScreen } from "./index";
 
 // Mock SVG components
 jest.mock("PUBLIC_DIR/images/videoplayer.exit.react.svg", () => {
-  const DummyExitFullScreen = React.forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement>
-  >((props, ref) => <div {...props} ref={ref} />);
+  const DummyExitFullScreen = ({
+    ref,
+    ...props
+  }: React.HTMLAttributes<HTMLDivElement> & {
+    ref: React.RefObject<HTMLDivElement>;
+  }) => <div {...props} ref={ref} />;
   DummyExitFullScreen.displayName = "IconExitFullScreen";
   return DummyExitFullScreen;
 });
 
 jest.mock("PUBLIC_DIR/images/videoplayer.full.react.svg", () => {
-  const DummyFullScreen = React.forwardRef<
-    HTMLDivElement,
-    React.HTMLAttributes<HTMLDivElement>
-  >((props, ref) => <div {...props} ref={ref} />);
+  const DummyFullScreen = ({
+    ref,
+    ...props
+  }: React.HTMLAttributes<HTMLDivElement> & {
+    ref: React.RefObject<HTMLDivElement>;
+  }) => <div {...props} ref={ref} />;
   DummyFullScreen.displayName = "IconFullScreen";
   return DummyFullScreen;
 });

@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2025-07-01T15:57:35.879Z",
+  "updated_at": "2025-06-02T10:20:51.003Z",
   "comment": {
     "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
     "is_auto": true,
@@ -30,20 +30,20 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 88,
+      "line_number": 87,
       "context": "{\n label: t(\"Document\"),\n value: \".docx\",\n },\n {\n label: t(\"Spreadsheet\"),\n value: \".xlsx\",\n },\n ];\n \n const isXML = convertItem?.fileExst?.includes(\".xml\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/sub-components/TypeCell.js",
       "line_number": 49,
-      "context": "case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.Diagram:",
+      "context": "case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n return t(\"Common:Document\");\n case FileType.OForm:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
       "line_number": 18,
-      "context": "case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.Document:",
+      "context": "case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:",
       "module": "/packages/shared"
     }
   ],
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Աղյուսակաթերթ\" (Aghyusakatherth) is a possible translation for 'Spreadsheet', it is quite literal and less common. A more natural and widely understood translation would be \"Տախտակաթերթ\" (Takhdakaatherth) or simply \"Ցուցակ\" (Tsutsak).",
-          "suggestion": "Consider using \"Տախտակաթերթ\" (Takhdakaatherth) or \"Ցուցակ\" (Tsutsak)."
+          "description": "The Armenian translation \"Աղյուսակաթերթ\" is a compound word that combines \"աղյուսակ\" (small sheet) and \"թերթ\" (sheet/page), essentially meaning 'small sheet' or 'sheet page'. While understandable, it's not the standard or most accurate translation of 'Spreadsheet'. The more common and accurate translation would be something along the lines of 'մարզածաշխարհ' (marzadsxar'h).",
+          "suggestion": "Consider using \"մարզածաշխարհ\" (marzadsxar'h) which is the standard Armenian term for 'Spreadsheet'."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄຳນວນ' (kham-nuan) means 'calculate' or 'compute,' not 'spreadsheet.' A more accurate translation would be something like 'ແຜ່ນກາານ' (phaen gaan) or 'ຕາຕະລາງ' (ta-talaang).",
-          "suggestion": "ແຜ່ນກາານ (phaen gaan) or ຕາຕະລາງ (ta-talaang)"
+          "description": "The Lao translation 'ຄຳນວນ' (kham nuan) means 'calculate' or 'compute,' which is not an accurate translation of 'Spreadsheet.' A spreadsheet is a document used to organize data, not necessarily to perform calculations.",
+          "suggestion": "A more accurate translation might be something like 'ໃບບັນຊີ' (bai ban see), which means 'worksheet' or 'spreadsheet,' or a more descriptive phrase depending on the context."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Прорачунска табела\" while technically meaning 'calculation table', is not the standard or most natural translation for 'Spreadsheet'. A more common and accurate translation would be 'Табела' or 'Рачунска табела'.",
-          "suggestion": "Табела"
+          "description": "The Serbian (Cyrillic) translation 'Прорачунска табела' while conveying the general idea of 'spreadsheet', isn't the most accurate or commonly used term. 'Рачунска табела' is a more direct and widely accepted translation.",
+          "suggestion": "Рачунска табела"
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Elektronik tablo' is a literal translation of 'spreadsheet' and while technically correct, it's not the most common or natural way a Turkish speaker would refer to a spreadsheet. A more idiomatic translation would be 'Excel tablosu' (referring to the Excel software) or simply 'tablo' depending on context.",
-          "suggestion": "Consider 'Excel tablosu' or 'tablo' as a more natural alternative depending on the context."
+          "description": "While 'Elektronik tablo' is a possible translation for 'Spreadsheet', it's a more literal and technical translation. A more common and natural translation would be 'Excel tablosu' (referring to Microsoft Excel) or simply 'tablo' depending on the context.",
+          "suggestion": "Consider 'Excel tablosu' or 'tablo' as alternatives."
         }
       ],
       "approved_at": null

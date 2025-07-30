@@ -27,6 +27,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -34,14 +35,6 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-
-import {
-  StyledPage,
-  StyledContent,
-  StyledBody,
-  StyledSimpleNav,
-} from "./FilePassword.styled";
-import { FilePasswordProps } from "./FilePassword.types";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
@@ -54,6 +47,13 @@ import { useTheme } from "styled-components";
 import { ValidationStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import Image from "next/image";
+import { FilePasswordProps } from "./FilePassword.types";
+import {
+  StyledPage,
+  StyledContent,
+  StyledBody,
+  StyledSimpleNav,
+} from "./FilePassword.styled";
 
 const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const { t } = useTranslation(["Common"]);
@@ -70,11 +70,6 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     !passwordValid && setPasswordValid(true);
-  };
-  const onKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      onSubmit();
-    }
   };
 
   const onSubmit = async () => {
@@ -102,11 +97,16 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
 
       if (res?.status === ValidationStatus.InvalidPassword) {
         setErrorMessage(t("Common:IncorrectPassword"));
-        return;
       }
     } catch (error) {
       toastr.error(error as TData);
       setIsLoading(false);
+    }
+  };
+
+  const onKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      onSubmit();
     }
   };
 
@@ -153,7 +153,9 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
                       ns="Common"
                       i18nKey="EnterPasswordDescription"
                       values={{ fileName: entryTitle }}
-                      components={{ 1: <span className="bold" /> }}
+                      components={{
+                        1: <span key="component_key" className="bold" />,
+                      }}
                     />
                   </Text>
                   <div className="public-room-name">
@@ -168,7 +170,7 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
                   </div>
 
                   <FieldContainer
-                    isVertical={true}
+                    isVertical
                     labelVisible={false}
                     hasError={!!errorMessage}
                     errorMessage={errorMessage}
@@ -213,4 +215,4 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   );
 };
 
-export default FilePassword;
+export default dynamic(() => Promise.resolve(FilePassword), { ssr: false });

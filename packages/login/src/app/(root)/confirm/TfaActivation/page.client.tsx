@@ -24,13 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -44,8 +41,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { checkConfirmLink } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import { ButtonKeys } from "@docspace/shared/enums";
@@ -63,19 +59,11 @@ import { useSearchParams } from "next/navigation";
 type TfaActivationFormProps = {
   secretKey: string;
   qrCode: string;
-  passwordHash: TPasswordHash;
-  userName?: string;
 };
 
-const TfaActivationForm = ({
-  secretKey,
-  qrCode,
-  passwordHash,
-  userName,
-}: TfaActivationFormProps) => {
+const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
-  const theme = useTheme();
 
   const searchParams = useSearchParams();
 
@@ -99,11 +87,7 @@ const TfaActivationForm = ({
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      await validateTfaCode(code, confirmHeader);
 
       let confirmData = "";
       try {
@@ -120,8 +104,8 @@ const TfaActivationForm = ({
 
       sessionStorage.setItem(OPEN_BACKUP_CODES_DIALOG, "true");
       window.location.href = proxyBaseUrl.current;
-    } catch (error) {
-      const knownError = error as TError;
+    } catch (e) {
+      const knownError = e as TError;
       let errorMessage: string;
 
       if (typeof knownError === "object") {
@@ -170,34 +154,35 @@ const TfaActivationForm = ({
           components={{
             1: (
               <Link
-                color={theme.currentColorScheme?.main?.accent}
+                color="accent"
                 href={TFA_ANDROID_APP_URL}
                 target={LinkTarget.blank}
               />
             ),
             4: (
               <Link
-                color={theme.currentColorScheme?.main?.accent}
+                color="accent"
                 href={TFA_IOS_APP_URL}
                 target={LinkTarget.blank}
               />
             ),
             8: (
               <Link
-                color={theme.currentColorScheme?.main?.accent}
+                color="accent"
                 href={TFA_WIN_APP_URL}
                 target={LinkTarget.blank}
               />
             ),
           }}
         />
-
         <Text className="set-app-text">
           <Trans
             t={t}
             i18nKey="SetAppInstallDescription"
             ns="Confirm"
-            values={{ secretKey }}
+            values={{
+              secretKey,
+            }}
             components={{
               1: <strong />,
             }}
@@ -212,7 +197,7 @@ const TfaActivationForm = ({
           <div className="app-code-input">
             <FieldContainer
               labelVisible={false}
-              hasError={error ? true : false}
+              hasError={!!error}
               errorMessage={error}
             >
               <TextInput
@@ -228,7 +213,7 @@ const TfaActivationForm = ({
                 maxLength={6}
                 onChange={onChangeInput}
                 value={code}
-                hasError={error ? true : false}
+                hasError={!!error}
                 onKeyDown={onKeyPress}
               />
             </FieldContainer>

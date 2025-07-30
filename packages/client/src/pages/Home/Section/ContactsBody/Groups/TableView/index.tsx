@@ -91,7 +91,7 @@ const GroupsTableView = ({
   columnStorageName,
   columnInfoPanelStorageName,
 }: GroupsTableViewProps) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -105,7 +105,10 @@ const GroupsTableView = ({
   });
 
   return groups?.length ? (
-    <GroupsTableContainer useReactWindow forwardedRef={ref}>
+    <GroupsTableContainer
+      useReactWindow
+      forwardedRef={ref as React.RefObject<HTMLDivElement>}
+    >
       <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}

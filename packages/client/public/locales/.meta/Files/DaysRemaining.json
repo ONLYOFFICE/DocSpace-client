@@ -3,7 +3,7 @@
   "content": "Days remaining: {{daysRemaining}}",
   "content_en_sha1_hash": "0e94f2f4c0003d4ac110575e4374ddbe1195c476",
   "created_at": "2025-05-19T21:30:55.420Z",
-  "updated_at": "2025-06-18T07:34:15.013Z",
+  "updated_at": "2025-06-18T17:11:42.423Z",
   "comment": {
     "text": "This translation key displays the number of days remaining before a file expires or is due for update, typically found in UI elements showing expiration dates. It appears in various contexts, such as files rows and table views, to inform users about time-sensitive information.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Armenian translation uses the singular form \"Մնացած օր\" (Remaining day) instead of the plural form, which is more appropriate given that it refers to the remaining days.  It should be \"Մնացած օրեր\" (Remaining days).",
+          "suggestion": "Մնացած օրեր: {{daysRemaining}}"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pozostało dni' is grammatically incorrect. 'Dni' is plural, but the sentence should agree with the singular 'Days remaining'. It should be 'Pozostało dzień'.",
+          "suggestion": "Pozostało dzień"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -159,7 +171,33 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඉතිරි' (ithiri) is spelled correctly and means 'remaining'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'දවස්' (davas) is spelled correctly and means 'days'.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ගණන' (ganana) is spelled correctly and means 'count'. While technically correct, in this context, a more natural phrasing might be considered.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, 'ඉතිරි දවස් ගණන' is a somewhat literal translation. A more natural phrasing in Sinhala might prioritize readability. Consider 'ඔබට ඉතිරි දවස්' (Obata ithiri davas) - 'Days remaining for you'.  However, the original is understandable.",
+          "suggestion": "ඔබට ඉතිරි දවස්"
+        },
+        {
+          "type": "formatting",
+          "description": "The variable placeholder '{{daysRemaining}}' is correctly preserved.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -27,23 +27,19 @@
 import React, { useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "../../checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { Link, LinkType } from "@docspace/shared/components/link";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import classNames from "classnames";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { isMobile } from "@docspace/shared/utils";
+} from "../../context-menu-button";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { HeaderType } from "../../context-menu/ContextMenu.types";
+import { Link, LinkType } from "../../link";
+import { Loader, LoaderTypes } from "../../loader";
+import { hasOwnProperty } from "../../../utils/object";
+import { isMobile, classNames } from "../../../utils";
 
-import { FileTileProps } from "./FileTile.types";
+import { FileChildProps, FileTileProps } from "./FileTile.types";
 
 import styles from "./FileTile.module.scss";
 
@@ -94,18 +90,25 @@ const FileTile = ({
     contextOptions &&
     contextOptions.length > 0;
 
-  const firstChild = childrenArray[0];
+  const firstChild = childrenArray[0] as React.ReactElement<FileChildProps>;
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {
-          title: firstChild.props.item.title,
+          title: firstChild.props.item.title || "",
           icon: firstChild.props.item.icon,
-          original: firstChild.props.item.logo?.original,
-          large: firstChild.props.item.logo?.large,
-          medium: firstChild.props.item.logo?.medium,
-          small: firstChild.props.item.logo?.small,
+          original: firstChild.props.item.logo?.original || "",
+          large: firstChild.props.item.logo?.large || "",
+          medium: firstChild.props.item.logo?.medium || "",
+          small: firstChild.props.item.logo?.small || "",
           color: firstChild.props.item.logo?.color,
-          cover: firstChild.props.item.logo?.cover,
+          cover: firstChild.props.item.logo?.cover
+            ? typeof firstChild.props.item.logo.cover === "string"
+              ? {
+                  data: firstChild.props.item.logo.cover,
+                  id: "",
+                }
+              : firstChild.props.item.logo.cover
+            : undefined,
         }
       : undefined;
 

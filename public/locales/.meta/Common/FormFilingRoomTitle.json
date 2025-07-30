@@ -3,7 +3,7 @@
   "content": "Form Filling Room",
   "content_en_sha1_hash": "ce16b03553997eee69758275d881c1e1971387c2",
   "created_at": "2025-05-19T21:30:45.511Z",
-  "updated_at": "2025-06-03T20:59:42.126Z",
+  "updated_at": "2025-06-08T12:02:32.759Z",
   "comment": {
     "text": "This translation key is used to display the title \"Form Filling Room\" in various UI elements. It is typically displayed on a room type selection filter or as a label in developer tools, and its purpose is to provide a clear indication of the form-filling function.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'غرفة تعبئة النموذج' is a literal translation, it's not the most natural or common way to describe a 'Form Filling Room' in Saudi Arabia. It sounds slightly awkward.",
-          "suggestion": "Consider alternatives like 'قاعة ملء النماذج' (Qaa'at Mal' al-Namathij) or 'غرفة ملء الاستمارات' (Ghurfat Mal' al-Istimarat).  'قاعة' (Qaa'at) implies a larger room/hall and might be more appropriate depending on the space's size and use."
+          "description": "While \"غرفة تعبئة النموذج\" is a literal translation, it's not the most natural or common way to describe a 'Form Filling Room' in Saudi Arabia. It sounds somewhat technical and less user-friendly.",
+          "suggestion": "Consider alternatives like \"مكتب معالجة النماذج\" (office for processing forms) or \"غرفة ملء النماذج\" (room for filling forms), which are more commonly used and sound more natural."
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Räume zum Formularausfüllen\" is technically correct, it's a bit clunky and not the most natural phrasing in German. A more common and idiomatic translation would be \"Formularausfüllraum\" (singular) or \"Formularausfüllräume\" (plural, if referring to multiple rooms).",
-          "suggestion": "Formularausfüllraum (singular) or Formularausfüllräume (plural)"
+          "description": "The translation \"Räume zum Formularausfüllen\" is a literal translation but not the most natural phrasing in German. While technically correct, it sounds somewhat clunky.",
+          "suggestion": "Consider a more idiomatic translation such as \"Formularausfüllraum\" (Form Filling Room) or \"Formularzimmer\" (Form Room) depending on the context.  A slightly more descriptive option could be \"Raum für die Formularausfüllung\"."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Stanza per la compilazione moduli\" is understandable, a more natural and precise translation for \"Form Filling Room\" would be \"Sala per la compilazione di moduli\" or \"Ufficio per la compilazione di moduli\". \"Stanza\" often implies a smaller, less formal room.",
-          "suggestion": "Sala per la compilazione di moduli"
+          "description": "While \"Stanza per la compilazione moduli\" is understandable, a more natural and accurate translation of 'Form Filling Room' would be 'Sala per la compilazione moduli' or 'Ufficio per la compilazione moduli'. 'Stanza' can imply a smaller, less formal space.",
+          "suggestion": "Sala per la compilazione moduli"
         }
       ],
       "approved_at": null
@@ -132,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"양식 작성 룸에서\" translates to \"In the form writing room.\" While technically correct, it's not a natural or idiomatic way to express \"Form Filling Room.\" It sounds overly literal and clunky.",
-          "suggestion": "Consider alternatives like \"양식 작성실\" (Yangsik Jaksil - Form Writing Room) or \"서식 작성실\" (Seosik Jaksil - Form Processing Room). A more general translation like \"서류 작성실\" (Seoryu Jaksil - Document Processing Room) might also be appropriate depending on the context."
+          "description": "The Korean translation '양식 작성 룸에서' translates to 'In the form writing room'. While not strictly incorrect, it's a very literal and slightly awkward translation. A more natural and common Korean phrasing would be better.",
+          "suggestion": "Consider '양식 작성실' (Yangshik Jaksil) for 'Form Filling Room'. It's a more concise and natural term."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes the particle '에서' which implies a location. While not always wrong, it might be better to consider if the context demands a location indicator or just a title.",
+          "suggestion": "Evaluate if '양식 작성실' (Yangshik Jaksil) or '양식 작성 룸' (Yangshik Jaksil Room) is more appropriate for the context. If it's a title, removing '에서' might be preferable."
         }
       ],
       "approved_at": null
@@ -180,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Sală Completare formular' is understandable, it's a rather literal and somewhat awkward translation. A more natural Romanian title would be 'Camera de Completare Formulare' or 'Birou Completare Formulare'.",
-          "suggestion": "Camera de Completare Formulare"
+          "description": "While 'Sală Completare formular' is understandable, a more natural Romanian translation for 'Form Filling Room' would be 'Camera de completare formulare' or 'Sala de completare formulare'. 'Completare formular' sounds a bit literal and not idiomatic.",
+          "suggestion": "Sala de completare formulare"
         }
       ],
       "approved_at": null
@@ -216,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Просторија за попуњавање формулара\" is a bit clunky and not the most natural Serbian phrasing. A more common and idiomatic translation would be \"Соба за попуњавање образаца\" or \"Шијење образаца\"",
-          "suggestion": "Соба за попуњавање образаца"
+          "description": "While \"Просторија за попуњавање формулара\" is understandable, it's a bit verbose and not the most natural-sounding translation. A more concise and common translation would be preferred.",
+          "suggestion": "Просторија за попуњавање образаца"
         }
       ],
       "approved_at": null
@@ -246,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Phòng Điền Biểu mẫu\" while containing the correct words, doesn't accurately convey the meaning of 'Form Filling Room'. \"Điền\" primarily means 'to fill in' but feels awkward in this context. A more natural phrasing would be something that describes a room *for* form filling.",
-          "suggestion": "Phòng Lấp Biểu Mẫu or Phòng Xử Lý Biểu Mẫu"
+          "description": "While technically correct, \"Phòng Điền Biểu mẫu\" is not the most natural or idiomatic translation of 'Form Filling Room'. 'Điền' means 'to fill', which is redundant since 'Biểu mẫu' already implies filling. A more common and clear translation would be 'Phòng Nhập Liệu Mẫu' or 'Phòng Xử Lý Mẫu'.",
+          "suggestion": "Phòng Nhập Liệu Mẫu"
         }
       ],
       "approved_at": null

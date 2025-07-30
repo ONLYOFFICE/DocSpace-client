@@ -1,6 +1,6 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/colors.scss";
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
 
 .row {
   width: 100%;
@@ -26,7 +26,7 @@
     height: 32px;
   }
 
-  @include desktop {
+  @include mixins.desktop {
     .rectangleContent {
       width: 22px;
       height: 22px;
@@ -47,7 +47,7 @@
     width: 80%;
   }
 
-  @include desktop {
+  @include mixins.desktop {
     grid-template-rows: 16px;
     grid-row-gap: 0;
 

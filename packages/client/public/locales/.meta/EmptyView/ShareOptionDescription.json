@@ -3,7 +3,7 @@
   "content": "Copy a public access link or invite other users to the room to start the form filling process.",
   "content_en_sha1_hash": "58e7ccaf4b51464f86563643fab9cf74773027c1",
   "created_at": "2025-05-19T21:30:56.534Z",
-  "updated_at": "2025-05-28T09:30:02.116Z",
+  "updated_at": "2025-05-26T07:57:32.157Z",
   "comment": {
     "text": "The \"ShareOptionDescription\" translation key provides a text that explains how to start the form filling process in a room. This text is used as a description for a share option on an empty view container, guiding users on how to initiate the sharing process.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'start the form filling process' is a bit clunky in Czech. A more natural phrasing would be 'začít s vyplňováním formuláře'.",
+          "suggestion": "Zkopírujte odkaz pro veřejný přístup nebo pozvěte do místnosti další uživatele a začněte s vyplňováním formuláře."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'rellemado' is incorrect. The correct Spanish word for 'filling' in this context is 'completar' or 'llenar'.",
+          "suggestion": "Copie un enlace de acceso público o invite a otros usuarios a la sala para iniciar el proceso de completar/llenar formularios."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,31 +93,81 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'սենյակ՝ ձևաթղթերի լրացման գործընթացը սկսելու համար' is a bit lengthy and could be more concise. It sounds a little awkward. Consider rephrasing.",
+          "suggestion": "Պատճենեք հանրային մուտքի հղումը կամ հրավիրեք այլ օգտվողների՝ ձևանմուշը լրացնելու համար:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'սենյակ' (room) is a bit vague. It's not clear *what* the users are being invited to. The English 'room' is likely referring to the form itself or a dedicated space for form completion, not just a physical room.",
+          "suggestion": "Պատճենեք հանրային մուտքի հղումը կամ հրավիրեք այլ օգտվողների՝ ձևանմուշը լրացնելու համար:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'to start the form filling process' is not ideally translated. While 'per avviare il processo di compilazione del modulo' is understandable, it's a bit literal and could be more natural. A better phrasing would convey the intention of allowing others to access and fill out the form.",
+          "suggestion": "Copia un link di accesso pubblico o invita altri utenti nella stanza per consentire loro di compilare il modulo."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"invite other users to the room\" is translated too literally. A more natural Japanese phrasing would be something like \"ルームへの招待リンクを共有する\" or \"ルームへの参加者を招待する\". The current translation reads a bit awkward.",
+          "suggestion": "ルームへの参加者を招待する"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better flow. While technically correct, it could be more natural to rearrange the order of elements.",
+          "suggestion": "フォーム記入プロセスを開始するために、公開アクセスリンクをコピーするか、ルームへの参加者を招待できます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"액세스 링크를 복사하거나 다른 사용자를 룸에 초대하여 양식 작성 프로세스를 시작하세요\" is a bit literal and could be more natural. \"룸에 초대\" sounds slightly awkward. A more natural phrasing would be something like \"다른 사용자를 룸에 초대하여 양식을 작성하도록 하세요\" or \"룸에 참여하도록 초대하여 양식 작성을 시작하세요\".",
+          "suggestion": "다른 사용자를 룸에 참여하도록 초대하여 양식 작성을 시작하세요."
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses a more active voice (\"Copy...or invite...\"). While not strictly incorrect, the Korean translation could also benefit from a more active voice to better match the original tone. This relates to the incorrect translation point as well.",
+          "suggestion": "액세스 링크를 복사하거나 다른 사용자를 룸에 초대하여 양식 작성을 시작할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຢ່າງເປັນທາງການ\" (yang pen thangkan) which translates to \"officially\" doesn't quite fit the context. It implies a formal process which isn't necessarily the intention of the English phrase.",
+          "suggestion": "Consider a more neutral phrasing like \"ເລີ່ມຕົ້ນການຕື່ມແບບຟອມ\" (roem ton kan toem baep form) which translates to 'start filling out the form'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“ກ໊ອບເບິ່ງ” (kop beung) is overly literal for “copy”. It’s better to use a more standard Lao equivalent.",
+          "suggestion": "Replace “ກ໊ອບເບິ່ງ” with “ຜະລິດລິ້ງ” (phalit ling) meaning 'generate link'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +203,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"start the form filling process\" is not ideal. \"Procedați la completarea formularului\" is technically correct, but sounds a bit formal and less natural in this context. A more natural phrasing would convey the idea of *beginning* the form filling.",
+          "suggestion": "Copiați linkul public sau invitați alți utilizatori în sala pentru a începe completarea formularului."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +221,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"invite other users to the room\" is not accurately translated. 'ආමන්ත්‍රණය කරන්න' (aamantranaya karanna) implies a formal invitation, which isn't the intended meaning. A more natural translation would be something along the lines of 'අන් අයව ඇමතීමට' (an ayawa amathime), which means 'to call other people'.",
+          "suggestion": "පොදු ප්‍රවේශ සම්බන්ධතාවයක් පිටපත් කරන්න හෝ ආකෘතිය පිරවීම ආරම්භ කිරීමට අනෙකුත් පරිශීලකයින්ව කාමරයට ඇමතීමට."
+        },
+        {
+          "type": "spelling",
+          "description": "There is an inconsistency in the transliteration of 'users'. 'පරිශීලකයින්ව' (parishilakayinwa) is a valid term for users but the English 'users' might be better rendered as 'භාවිතකරුවන්' (bhavitakarawan) in this context.",
+          "suggestion": "පොදු ප්‍රවේශ සම්බන්ධතාවයක් පිටපත් කරන්න හෝ ආකෘතිය පිරවීම ආරම්භ කිරීමට අනෙකුත් භාවිතකරුවන්ව කාමරයට ඇමතීමට."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +250,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'просторију' is slightly awkward in this context. While grammatically correct, 'собу' or 'простор' would flow better.",
+          "suggestion": "Копирајте јавни приступни линк или позовите друге кориснике у собу/простор да започнете процес попуњавања формулара."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

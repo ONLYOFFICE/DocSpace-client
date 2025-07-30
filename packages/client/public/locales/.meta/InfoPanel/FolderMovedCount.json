@@ -3,7 +3,7 @@
   "content": "Folders moved ({{count}}).",
   "content_en_sha1_hash": "f8c4a3c73824a040d9a4b13d426ba00de13be350",
   "created_at": "2025-05-19T21:30:54.852Z",
-  "updated_at": "2025-05-28T09:30:02.429Z",
+  "updated_at": "2025-06-30T12:20:31.341Z",
   "comment": {
     "text": "This translation key displays a message indicating the number of folders moved, typically used to provide feedback or confirmation after a folder has been relocated. It appears in the UI when navigating history or tracking changes, such as when moving a file between different locations.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 110,
-      "context": "return t(\"InfoPanel:FolderCreated\");\n case \"FolderRenamed\":\n return t(\"InfoPanel:FolderRenamed\");\n case \"FolderMoved\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case \"FolderMovedToTrash\":\n if (hasRelatedItems)",
+      "line_number": 116,
+      "context": "return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:\n return t(\"InfoPanel:FolderRenamed\");\n case FeedActionKeys.FolderMoved:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderMoved\");\n case FeedActionKeys.FolderMovedToTrash:\n if (hasRelatedItems)",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Qovluqlar köçürüldü' is technically correct (folders moved), a more natural and commonly used phrasing would be 'Qovluqlar silindi' which translates to 'Folders deleted'. Given the context of a folder move, 'silindi' (deleted) is often used as a euphemism for moved or relocated in Azerbaijani.",
+          "suggestion": "Qovluqlar silindi ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Carpetas' translates to 'Folders' in English. While it's understandable, 'Carpetas' refers to floor coverings (carpets). A more accurate translation would be 'Carpetas' or 'Directorios'.",
-          "suggestion": "Carpetas movidas ({{count}})."
+          "description": "The English term 'Folders' translates more accurately to 'Carpetas' in Spanish, but 'Carpetas movidas' sounds slightly unnatural. A more common and natural translation would be 'Carpetas trasladadas'.",
+          "suggestion": "Carpetas trasladadas ({{count}})."
         }
       ],
       "approved_at": null
@@ -90,8 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Թղթապանակները տեղափոխվել են ({{count}}):' is overly literal and doesn't flow naturally in Armenian. It translates to 'The folders have been moved ({{count}}):'. A more natural phrasing would be 'տեղափոխված թղթապանակների քանակը ({{count}})' which means 'The number of folders moved ({{count}})', or 'տեղափոխվեցին {{count}} թղթապանակ' which means '{{count}} folders were moved'.",
-          "suggestion": "Consider 'տեղափոխված թղթապանակների քանակը ({{count}})' or 'տեղափոխվեցին {{count}} թղթապանակ'."
+          "description": "The translation \"Թղթապանակները տեղափոխվել են ({{count}}):\" implies a completed action, while the English 'Folders moved ({{count}})' indicates a current or ongoing process. A more accurate translation would convey a sense of a count of folders that have been moved.",
+          "suggestion": "Թղթապանակների քանակը տեղափոխվել է ({{count}}):"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the Armenian translation creates an unnatural sentence structure. It’s better to omit it unless it is necessary to add emphasis or a new sentence begins immediately after.",
+          "suggestion": "Թղթապանակների քանակը տեղափոխվել է ({{count}})"
         }
       ],
       "approved_at": null
@@ -102,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Le cartelle sono state spostate ({{count}}).' is a passive construction. A more natural Italian phrasing would be '{{count}} cartelle spostate.' or 'Sono state spostate {{count}} cartelle.' while still retaining the meaning.",
-          "suggestion": "{{count}} cartelle spostate."
+          "description": "The translation 'Le cartelle sono state spostate ({{count}}).' is a literal translation and sounds slightly unnatural in Italian. A more natural phrasing would be 'Cartelle spostate ({{count}}).' or 'Sono state spostate {{count}} cartelle'.",
+          "suggestion": "Cartelle spostate ({{count}})."
         }
       ],
       "approved_at": null
@@ -111,13 +122,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'フォルダが移動されました ({{count}})。' is too formal. A more natural and appropriate phrasing for a UI element like this would be something closer to 'フォルダを {{count}} 個移動しました。' or 'フォルダを {{count}} 個移動'.",
-          "suggestion": "フォルダを {{count}} 個移動しました。 or フォルダを {{count}} 個移動"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -131,9 +136,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'ໂຟນເດີຖືກຍ້າຍ ({{count}}).' is a literal translation of 'Folders moved ({{count}})' but lacks nuance. A more natural phrasing in Lao might emphasize the action of moving, or use a slightly different wording for a better flow. While technically correct, it might sound a bit awkward.",
-          "suggestion": "Consider alternatives like 'ຖືກຍ້າຍໂຟນເດີ {{count}} ສະບັບ' ({{count}} folders have been moved) or 'ໂຟນເດີຍ້າຍ {{count}} ສະບັບ' ({{count}} folders moved) depending on the desired emphasis."
+          "type": "spelling",
+          "description": "The Lao word for \"moved\" is likely incorrect. \"ຍ້າຍ\" (yai) often implies a transfer or relocation, but in this context, \"ຍ້າຍ” may not perfectly capture the nuance of folders being moved within a system.",
+          "suggestion": "Consider using a more precise term for \"moved\" in the context of folders, potentially researching common Lao terminology used in software or file management."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the sentence structure could be improved for natural flow in Lao. Adding a preposition or restructuring might be preferable.",
+          "suggestion": "Consider alternatives like \"ໂຟນເດີຖືກຍ້າຍຈຳນວນ ({{count}}).\" (Folders, a number moved)."
         }
       ],
       "approved_at": null
@@ -153,7 +163,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'przeniesione' is correctly spelled but might be slightly more formal than necessary. A more conversational option might be better depending on the overall tone of the application.",
+          "suggestion": "Consider 'przesunięte' for a more conversational tone, but this depends on the context."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -174,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Foldere au fost mutate ({{count}}).' is not the most natural Romanian phrasing. While technically correct, it sounds slightly awkward. A more natural translation would be 'Dosare mutate ({{count}})' or 'A fost mutate ({{count}}), dosare'.",
-          "suggestion": "Dosare mutate ({{count}})"
+          "description": "The Romanian translation 'Foldere au fost mutate ({{count}}).' is not the most natural phrasing. While technically correct, it's a bit stiff. A more natural translation would be 'Dosare mutate ({{count}})' or 'S-au mutat ({{count}} dosare).'",
+          "suggestion": "Dosare mutate ({{count}})."
         }
       ],
       "approved_at": null
@@ -189,30 +205,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Sinhala translation 'ෆෝල්ඩර් {{count}} ක් ගෙනයන ලදි.' is grammatically awkward. The verb 'ගෙනයන ලදි' (genayana ladida) implies an ongoing action and suggests the folders are *currently* being moved. The English suggests they *have been* moved.",
-          "suggestion": "ෆෝල්ඩර් {{count}} ක් මවෙන ලදි. (Folder {{count}} kmawen ladi.) - This suggests 'moved' more accurately as a completed action, similar to the English context."
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'ක්' (.k) after the count is grammatically correct but might sound slightly formal for a UI element. Consider a more conversational tone.",
-          "suggestion": "ෆෝල්ඩර් {{count}} ක් මවිනි. (Folder {{count}} kmawenini) - Removes the continuous tense and is slightly more conversational. Alternatively, if a more formal tone is desired, 'ෆෝල්ඩර් {{count}} ක් මවිනි.' is acceptable."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Priečinky presunuté ({{count}})' is not the most natural or accurate rendering of 'Folders moved ({{count}}).' A more appropriate translation would be 'Presunuté priečinky ({{count}})' or 'Priečinky boli presunuté ({{count}}).'",
-          "suggestion": "Presunuté priečinky ({{count}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -224,7 +223,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Фолдери' is a direct transliteration of 'Folders' and while understandable, a more natural Serbian (Cyrillic) term would be 'Папке' (Papke).",
+          "suggestion": "Папке су померени ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -233,7 +238,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation 'Folderi su pomereni ({{count}}).' uses the plural form 'Folderi' (Folders). However, the English original 'Folders moved ({{count}}).' refers to the total number of folders moved, not multiple folders. It should be singular.",
+          "description": "The Serbian translation 'Folderi su pomereni ({{count}}).' should be 'Folder je pomeren ({{count}}).' because 'folder' is singular. 'Folderi' implies multiple folders.",
           "suggestion": "Folder je pomeren ({{count}})."
         }
       ],

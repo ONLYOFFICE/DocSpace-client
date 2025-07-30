@@ -60,11 +60,15 @@ const TableView = (props: TableViewProps) => {
   } = props as SelectUserTableProps;
   const tableRef = useRef<HTMLDivElement>(null);
 
-  const toggleAll = (e: React.ChangeEvent<HTMLInputElement>) =>
-    toggleAllAccounts(e.target.checked, withEmailUsers, checkedAccountType);
+  const toggleAll = (e?: React.ChangeEvent<HTMLInputElement>) =>
+    toggleAllAccounts(
+      e?.target?.checked ?? false,
+      withEmailUsers,
+      checkedAccountType,
+    );
 
   const handleToggle = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.MouseEvent<Element> | React.ChangeEvent<HTMLInputElement>,
     user: TEnhancedMigrationUser,
   ) => {
     e.stopPropagation();
@@ -83,7 +87,10 @@ const TableView = (props: TableViewProps) => {
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return (
-    <StyledTableContainer forwardedRef={tableRef} useReactWindow>
+    <StyledTableContainer
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       {accountsData.length > 0 ? (
         <>
           <UsersTableHeader
@@ -106,7 +113,7 @@ const TableView = (props: TableViewProps) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
+            fetchMoreFiles={async () => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow
@@ -116,9 +123,11 @@ const TableView = (props: TableViewProps) => {
                 email={data.email}
                 isDuplicate={data.isDuplicate}
                 isChecked={isAccountChecked(data.key, checkedAccountType)}
-                toggleAccount={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleToggle(e, data)
-                }
+                toggleAccount={(
+                  e:
+                    | React.MouseEvent<Element>
+                    | React.ChangeEvent<HTMLInputElement>,
+                ) => handleToggle(e, data)}
               />
             ))}
           </TableBody>

@@ -3,7 +3,7 @@
   "content": "{{productName}} permanently deleted",
   "content_en_sha1_hash": "79bdd7e44727b2bf3012fe6919fc00e93a071c23",
   "created_at": "2025-05-19T21:30:57.463Z",
-  "updated_at": "2025-05-20T09:47:54.917Z",
+  "updated_at": "2025-06-30T12:20:31.762Z",
   "comment": {
     "text": "The \"PortalDeleted\" translation key is used to display a success message after deleting a portal, indicating that the operation was successful. It appears in a dialog box when the user confirms the deletion of a portal.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
-      "line_number": 78,
-      "context": "const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n await getAllPortals();\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") })\n );\n } else {\n toastr.success(\n <Trans\n i18nKey=\"DeleteRequestSuccess\"",
+      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
+      "line_number": 73,
+      "context": "setIsLoading(true);\n const res = await deletePortal({ portalName: domain });\n \n if (res?.removed) {\n toastr.success(\n t(\"PortalDeleted\", { productName: t(\"Common:ProductName\") }),\n );\n router.refresh();\n } else {\n toastr.success(\n <Trans",
       "module": "/packages/management"
     }
   ],
@@ -87,13 +87,25 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'eliminato definitivamente' conveys the meaning of 'permanently deleted', a more natural and common Italian phrasing for a product deletion notification would be 'eliminato in modo permanente' or 'cancellato definitivamente'. 'Eliminato definitivamente' sounds slightly formal and less idiomatic in this context.",
+          "suggestion": "Consider '{{productName}} cancellato definitivamente' or '{{productName}} eliminato in modo permanente'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Japanese translation uses the passive form '削除されました' without a clear subject. It sounds unnatural in this context. It implies something deleted *something* else, which is not intended.",
+          "suggestion": "{{productName}} は完全に削除されました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -177,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'trajno obrisan' translates to 'permanently deleted', but 'trajno' carries a stronger connotation of 'final' or 'irrevocably'. While technically correct, it's a slightly unnatural phrasing in this context. A more natural translation would be 'konačno obrisan' or 'obrisan zauvek'.",
+          "suggestion": "konačno obrisan"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation lacks a period at the end of the sentence. It is common practice to include punctuation in Vietnamese.",
+          "suggestion": "Đã xóa vĩnh viễn {{productName}}. "
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

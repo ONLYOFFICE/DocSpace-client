@@ -24,10 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/devices";
-@import "../../styles/mixins";
-@import "../../styles/variables/colors";
-
 .comboBox {
   width: 41px !important;
   height: 32px !important;
@@ -36,11 +32,11 @@
 
   :global {
     .combo-button {
-      padding: 7px;
+      padding: 7px !important;
     }
 
     .combo-button_selected-icon-container {
-      margin-inline-end: 0px;
+      margin-inline-end: 0;
     }
 
     .combo-buttons_arrow-icon {

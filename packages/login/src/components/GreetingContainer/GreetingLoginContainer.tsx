@@ -24,15 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
-import { useSearchParams } from "next/navigation";
 import { Text } from "@docspace/shared/components/text";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
@@ -52,7 +49,7 @@ export const GreetingLoginContainer = ({
 
   const logoUrl = getLogoUrl(
     WhiteLabelLogoType.LoginPage,
-    !theme.isBase,
+    !theme?.isBase,
     false,
     culture,
   );
@@ -90,7 +87,7 @@ export const GreetingLoginContainer = ({
   return (
     <>
       <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
-      {type !== "invitation" && (
+      {type !== "invitation" ? (
         <Text
           fontSize="23px"
           fontWeight={700}
@@ -101,9 +98,9 @@ export const GreetingLoginContainer = ({
             ? t("TenantList:ChoosePortal")
             : greetingSettings}
         </Text>
-      )}
+      ) : null}
 
-      {type === "invitation" && (
+      {type === "invitation" ? (
         <div className="greeting-container">
           <Text fontSize="16px">
             <Trans
@@ -117,12 +114,19 @@ export const GreetingLoginContainer = ({
                 ...(roomName ? { roomName } : { spaceAddress }),
               }}
               components={{
-                1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                1: (
+                  <Text
+                    key="component_key"
+                    fontWeight={600}
+                    as="strong"
+                    fontSize="16px"
+                  />
+                ),
               }}
             />
           </Text>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

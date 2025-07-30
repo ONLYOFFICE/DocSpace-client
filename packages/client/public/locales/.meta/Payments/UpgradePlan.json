@@ -3,7 +3,7 @@
   "content": "Upgrade plan",
   "content_en_sha1_hash": "e80fe7c8f56aeba1c9594500c8faf418c36a8fe5",
   "created_at": "2025-05-19T21:30:53.743Z",
-  "updated_at": "2025-05-21T06:26:45.055Z",
+  "updated_at": "2025-05-24T06:41:03.462Z",
   "comment": {
     "text": "This translation key \"UpgradePlan\" is used to describe an upgrade plan option in a UI dialogue. It appears as a button label and prompts the user to initiate an upgrade process.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"قم بالترقية إلى خطة جديدة\" (Qum bil-tarqiya ila khittah jadeeda) is a literal translation, but a more natural and common phrasing for 'Upgrade plan' in a Saudi Arabian context would be something like \"ترقية الخطة\" (Tarqiyat al-khutta) or \"تحديث الخطة\" (Tahdeeth al-khutta). \"قم بالترقية إلى خطة جديدة\" is a bit too verbose and formal.",
-          "suggestion": "ترقية الخطة (Tarqiyat al-khutta) or تحديث الخطة (Tahdeeth al-khutta)"
+          "description": "The translation \"قم بالترقية إلى خطة جديدة\" (qim bil-tarqiyyah ila khuttah jadeedah) is a literal translation of \"Upgrade plan\". While understandable, it's not the most natural or common phrasing in Saudi Arabic for describing a plan upgrade. It sounds a bit formal and clunky.",
+          "suggestion": "Consider alternatives like \"ترقية الخطة\" (tarqiyat al-khuttah) which is a more concise and common way to express 'plan upgrade' or \"تحديث الخطة\" (tahdeeth al-khuttah) which conveys 'plan update'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Planı yeniləyin' translates to 'Update the plan' or 'Renew the plan', not simply 'Upgrade plan'. It implies an action rather than a description.",
-          "suggestion": "Consider 'Yüksəlmiş plan' or 'Premium plan' for a more accurate translation of 'Upgrade plan' as a noun."
+          "description": "The Azerbaijani translation \"Planı yeniləyin\" translates to \"Update the plan\" rather than \"Upgrade plan\". While similar, \"upgrade\" implies a move to a higher tier or level, which \"update\" doesn't necessarily convey.",
+          "suggestion": "Consider alternatives like \"Planı yüksəldin\" (Upgrade the plan), \"Premium plana keçid edin\" (Switch to the premium plan), or \"Təkmil plan\" (Advanced plan), depending on the specific context."
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Надграждане на абонамента' is understandable, a more accurate and natural translation of 'Upgrade plan' would be 'Подобрен план' or 'Обновен план'. 'Надграждане' implies a technical upgrade, which might not be the intended meaning.",
+          "suggestion": "Подобрен план"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -66,13 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Plan upgraden\" is not idiomatic German. \"Upgraden\" is a direct borrowing from English and sounds awkward. A more natural translation would use German phrasing.",
-          "suggestion": "Plan aktualisieren"
+          "description": "The translation \"Plan upgraden\" is not a natural or grammatically correct way to say \"Upgrade plan\" in German. \"Upgraden\" is an Anglicism and sounds awkward.",
+          "suggestion": "A more accurate and natural translation would be \"Abonnement aktualisieren\" or \"Abo upgraden\" (using the colloquial 'Abo' for subscription)."
         },
         {
           "type": "formatting",
-          "description": "\"Plan upgraden\" uses a verb-second construction that isn't standard in many German contexts. Although not strictly incorrect, it sounds less professional.",
-          "suggestion": "Aktualisierter Plan"
+          "description": "The translation uses a verb-first structure which might not be standard in all contexts. While acceptable, it deviates from a typical noun-first construction for titles/labels.",
+          "suggestion": "Consider rephrasing to a noun-first structure if appropriate for the context (e.g., \"Plan-Upgrade\")."
         }
       ],
       "approved_at": null
@@ -95,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Päivitä ohjelma' is grammatically correct, it translates to 'Update program' rather than 'Upgrade plan'. 'Upgrade' has a slightly different connotation than 'Update'.",
-          "suggestion": "Consider 'Tilaa päivitys' or 'Päivitä tilaus' to better reflect 'Upgrade plan'."
+          "description": "While 'Päivitä ohjelma' is grammatically correct, it's a more literal translation of 'Update program'. 'Upgrade plan' implies a move to a higher tier or package, which 'Päivitä ohjelma' doesn't fully convey. A better translation would capture the concept of an upgrade.",
+          "suggestion": "Consider 'Tilaa päivitys' (Order an upgrade) or 'Päivitä tilaus' (Upgrade subscription) depending on the context. If 'program' refers to a software plan, 'Tilaa parempi ohjelma' (Order a better program) could also work."
         }
       ],
       "approved_at": null
@@ -161,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Aumentar o plano\" is a literal translation of \"Upgrade plan\", it doesn't fully capture the nuance of an upgrade in a subscription or service context. It sounds a bit awkward.",
-          "suggestion": "Consider alternatives like \"Atualizar o plano\" or \"Melhorar o plano\" which are more commonly used for upgrades in a service context."
+          "description": "While \"Aumentar o plano\" is understandable, a more natural and commonly used translation for \"Upgrade plan\" in Portuguese would be \"Atualizar o plano\" or \"Melhorar o plano\". \"Aumentar\" implies increasing the size or quantity, rather than upgrading the features or level.",
+          "suggestion": "Atualizar o plano"
         }
       ],
       "approved_at": null
@@ -191,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සැලසුම උත්ශ්‍රේණි කරන්න' while literally meaning 'upgrade the plan', isn't the most natural or common way to express 'Upgrade plan' in Sinhala. A more natural phrasing would be something like 'වැඩසිටුවනය උත්ශ්‍රේණි කිරීම' or 'වැඩසිටුවනය වැඩිදියුණු කිරීම'.",
-          "suggestion": "වැඩසිටුවනය උත්ශ්‍රේණි කිරීම"
+          "description": "The translation 'සැලසුම උත්ශ්‍රේණි කරන්න' is a literal translation of 'Upgrade plan' but doesn't convey the meaning naturally in Sinhala. It translates to 'To upgrade the plan'. A more idiomatic translation would be something like 'වැඩසිටුවන ලද සැලසුම' (Waedasetuwenwa selesuma) - 'Enhanced plan' or 'නගවාදියුණු වැඩසිටුවීම' (Nagawadiyaenu Waedasetuwa) - 'Upgraded work/plan'.",
+          "suggestion": "නගවාදියුණු වැඩසිටුවීම (Nagawadiyaenu Waedasetuwa) orවැඩසිටුවන ලද සැලසුම (Waedasetuwenwa selesuma)"
         }
       ],
       "approved_at": null
@@ -203,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Aktualizovať plán\" is a possible translation, \"Upgrade plan\" often implies a shift to a higher tier or more comprehensive service. \"Aktualizovať\" simply means to update. A more accurate translation might be something like \"Vylepšený plán\" or \"Plán na vyššiu úroveň\".",
-          "suggestion": "Vylepšený plán"
+          "description": "While 'Aktualizovať plán' is understandable, 'Upgrade plan' often implies a more significant enhancement or new features beyond just an update. A more accurate translation might consider alternatives like 'Vylepšený plán' or 'Prémiový plán', depending on the specific meaning of 'Upgrade'. 'Aktualizovať' is more akin to 'Update'.",
+          "suggestion": "Consider 'Vylepšený plán' or 'Prémiový plán' depending on the context."
         }
       ],
       "approved_at": null
@@ -221,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'План надоградње' is not the most natural or commonly used translation for 'Upgrade plan'. A more common and accurate translation would be 'План за надоградњу' or 'Надградни план'. 'Надоградње' feels slightly awkward in this context.",
-          "suggestion": "План за надоградњу"
+          "description": "The translation \"План надоградње\" is not the most natural or common translation for \"Upgrade plan\". While technically correct, a better translation would be \"План за унапређење\" or \"Надградни план\". \"Надоградње\" is less frequently used in this context.",
+          "suggestion": "План за унапређење"
         }
       ],
       "approved_at": null
@@ -245,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Підвищити план' doesn't fully capture the nuance of 'Upgrade plan'. 'Підвищити' implies raising something, while 'Upgrade' suggests an improvement or advancement of a plan. A more accurate translation would focus on the improvement aspect.",
-          "suggestion": "Розширений план"
+          "description": "The translation \"Підвищити план\" while technically meaning 'upgrade plan', sounds unnatural and awkward in Ukrainian. A more idiomatic translation would be something like \"Оновити план\" or \"Перейти на вищий план\".",
+          "suggestion": "Оновити план"
         }
       ],
       "approved_at": null
@@ -263,8 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"升级版本\" (shēngjí bǎnběn) can mean \"upgrade version\", it doesn't directly translate \"Upgrade plan\" which implies a plan to upgrade, not just the version itself. A more accurate translation would convey the aspect of a plan or scheme.",
-          "suggestion": "Consider alternatives like \"升级方案\" (shēngjí fāng'àn - upgrade scheme/plan) or \"升级计划\" (shēngjí jìhuà - upgrade plan)."
+          "description": "“升级版本” (shēngjí bǎnběn) generally translates to 'upgrade version' or 'new version', not directly 'upgrade plan'. While 'upgrade' is implied, it doesn't convey the full meaning of 'upgrade plan' which implies a structured plan for upgrading.",
+          "suggestion": "Consider alternatives like \"升级方案\" (shēngjí fāng'àn - upgrade plan/scheme), \"升级计划\" (shēngjí jìhuà - upgrade plan/schedule) or \"升级套餐\" (shēngjí tàocān - upgrade package) depending on the specific context."
         }
       ],
       "approved_at": null

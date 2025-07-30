@@ -3,7 +3,7 @@
   "content": "Filling was stopped by <1>{{userName}}</1>",
   "content_en_sha1_hash": "093cefe1472a16419b884b4d52a6896fc3d841fb",
   "created_at": "2025-05-19T21:30:45.782Z",
-  "updated_at": "2025-05-28T09:30:02.938Z",
+  "updated_at": "2025-05-26T07:57:32.907Z",
   "comment": {
     "text": "This translation key is used to display a message indicating when filling was stopped by a user. It typically appears in a UI element related to filling or process management, such as a history summary or report. The exact appearance depends on the surrounding context and usage in the application.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Formanın' (Form's) doesn't quite convey the meaning of 'Filling'. It implies ownership rather than the action of filling.",
-          "suggestion": "Doldurulması (doldurulması) means 'the filling' or 'the process of filling', which is more accurate, but could potentially be rephrased to be more natural sounding. Alternatives like 'Xidmət' or 'Prosedur' may be considered depending on context."
+          "description": "The word \"Formanın\" (of the form) doesn't quite fit the context of 'Filling'. It implies possession, but 'Filling' refers to the action of filling something out. A better translation would be something like 'Doldurulması' (the filling of) or 'Önəmlərin doldurulması' (the filling of the fields).",
+          "suggestion": "Doldurulması"
         },
         {
           "type": "grammatical",
-          "description": "While grammatically correct, the sentence structure 'Formanın doldurulması ... tərəfindən dayandırıldı' is somewhat clunky in Azerbaijani. It's a direct translation that doesn't flow as naturally.",
-          "suggestion": "Consider restructuring the sentence to be more fluent. A better alternative might be '{{userName}} tərəfindən formanın doldurulması dayandırıldı' or even rephrasing to avoid passive voice if possible."
+          "description": "While grammatically correct, the sentence structure is slightly awkward. A more natural phrasing would place the subject closer to the verb.",
+          "suggestion": " <1>{{userName}}</1> tərəfindən formanın doldurulması dayandırıldı"
         }
       ],
       "approved_at": null
@@ -94,14 +94,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Լրացումը դադարեցվել է <1>{{userName}}</1>-ի կողմից\" is a bit literal and could be improved for naturalness in Armenian. A more natural phrasing would express that the filling was stopped *by* the user, not simply that it was done *to* the user. ",
-          "suggestion": "Լրացումը դադարեցրեց <1>{{userName}}</1>"
-        },
-        {
-          "type": "formatting",
-          "description": "The Armenian translation preserves the `<1>{{userName}}</1>` tags. While technically correct, it is unusual to reproduce these tags directly unless there's a specific reason.  Consider if these tags need to be rendered specially on the Armenian side and adjust accordingly.",
-          "suggestion": "Consider removing or adapting the tags depending on the rendering requirements."
+          "type": "spelling",
+          "description": "The word \"կողմից\" is technically correct but sounds slightly formal for this context. A more natural phrasing might be preferred depending on the overall tone.",
+          "suggestion": "Consider alternatives like \"մասին\" or a more colloquial phrasing if appropriate for the application."
         }
       ],
       "approved_at": null
@@ -118,13 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Filling was stopped\" is not accurately translated. \"Filling\" in this context likely refers to data entry or form completion.  A more accurate translation would convey that meaning.",
-          "suggestion": "記入は<1>{{userName}}</1>によって中断されました"
-        },
-        {
-          "type": "grammatical",
-          "description": "While grammatically correct, the translation sounds slightly formal and stiff.  Depending on the context and desired tone, a more natural phrasing might be preferable.",
-          "suggestion": "記入は<1>{{userName}}</1>によって停止されました is acceptable, but consider alternatives for a more conversational tone. Alternatives depend on the broader context."
+          "description": "The translation '記入は<1>{{userName}}</1>によって停止されました' while generally conveying the meaning, is a bit formal and passive. A more natural and direct translation might be preferable depending on the desired tone. '記入は<1>{{userName}}</1>によって停止' would be more concise and common.",
+          "suggestion": "記入は<1>{{userName}}</1>によって停止"
         }
       ],
       "approved_at": null
@@ -135,8 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"작성을 중지했습니다\" (jakseureul jungjihaetseumnida) literally translates to 'stopped the writing'. While understandable, a more natural and direct translation of 'Filling was stopped' would be something like '채우는 것을 중지했습니다' (chaeuneun geoseul jungjihaetseumnida) or even better, '작업을 중지했습니다'(jag-eob-eul jungjihaetseumnida) which means 'stopped the work'.",
-          "suggestion": "채우는 것을 중지했습니다"
+          "description": "The English phrase \"Filling\" is not accurately translated. \"Filling\" in this context likely refers to the process of writing or adding information, not a physical filling. A more accurate translation would be something like \"작업\" (gwaek-up) which means \"work\" or \"task\".",
+          "suggestion": "<1>{{userName}}</1>님이 작업을 중지했습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <1>{{userName}}</1> are consistent between the English and Korean versions, which is good. No formatting issues detected beyond this.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -195,13 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation ' විසින් පිරවීම නතර කරන ලදී' is a bit literal and sounds awkward in Sinhala. A more natural phrasing would convey the meaning of 'stopped filling'.",
+          "description": "The translation ' විසින් පිරවීම නතර කරන ලදී' is a bit clunky and doesn't flow naturally. While technically correct, it's not the most idiomatic way to express 'Filling was stopped by'.",
           "suggestion": "පිරවීම <1>{{userName}}</1> විසින් නතර කරන ලදී"
         },
         {
           "type": "incorrect_translation",
-          "description": "While grammatically correct, ' විසින්' can often be omitted for more concise and natural language. The sentence becomes smoother without it.",
-          "suggestion": "<1>{{userName}}</1> පිරවීම නතර කරන ලදී"
+          "description": "A more natural and common way to express the English sentence would be something like: '<1>{{userName}}</1> පිරවීම නවතා දැමීය'.",
+          "suggestion": "<1>{{userName}}</1> පිරවීම නවතා දැමීය"
         }
       ],
       "approved_at": null
@@ -245,7 +240,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Vietnamese translation retains the XML-like tags `<1>` and `</1>` which are unnecessary and should be removed.",
+          "suggestion": "Remove the tags `<1>` and `</1>` from the translation. The translation should be 'Việc điền thông tin đã bị dừng bởi {{userName}}'"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
@@ -254,8 +255,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"填写已被<1>{{userName}}</1>停止\" is not the most natural or accurate translation of \"Filling was stopped by <1>{{userName}}</1>\".  '填写' (filling) implies the action of writing or filling out a form, not the filling process itself. A more accurate translation would convey the action being stopped.",
-          "suggestion": "操作已被<1>{{userName}}</1>停止"
+          "description": "The translation \"填写已被<1>{{userName}}</1>停止\" doesn't accurately convey the meaning of \"Filling was stopped by <1>{{userName}}</1>\". The word \"填写\" (filling, as in the act of filling something out) is not the correct nuance. It should more accurately convey the concept of the filling process being halted.",
+          "suggestion": "停止了<1>{{userName}}</1>停止了填充"
         }
       ],
       "approved_at": null

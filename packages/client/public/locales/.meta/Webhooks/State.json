@@ -3,7 +3,7 @@
   "content": "State",
   "content_en_sha1_hash": "a72502067518684f9deeec70cf119fd26326cd33",
   "created_at": "2025-05-19T21:30:49.847Z",
-  "updated_at": "2025-05-28T09:30:02.555Z",
+  "updated_at": "2025-05-26T07:57:32.561Z",
   "comment": {
     "text": "This translation key represents the label for a table header column that displays information about API keys or webhooks in a developer tool. The key is used to render the English word \"State\" as displayed on-screen in various UI components.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech word 'Stát' translates to 'State' or 'Country' in English, not 'State' (referring to the status or condition of a webhook). This translation is inaccurate in the context of webhooks.",
-          "suggestion": "Consider using 'Stav' for 'State' in the context of webhook status or condition. A more accurate translation would depend on the precise meaning intended within the broader documentation."
+          "description": "The Czech word 'Stát' translates to 'State' or 'Country' in English, not 'State' in the context of a webhook state (e.g., 'pending', 'success', 'failed'). A more appropriate translation would depend on the specific meaning of 'State' in the original English.",
+          "suggestion": "Consider alternatives like 'Stav' (condition), 'Status' (borrowed word), or a more descriptive phrase based on the specific states being represented."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Պետություն\" (Petut'yun) is a valid Armenian word meaning 'state' or 'country', in the context of \"Webhooks:State\", it implies a technical state (e.g., 'enabled', 'disabled', 'pending'). A more appropriate translation would be something like \"Ցուցման վիճակ\" (Tsughanayin vichak) or \"Վիճակ\" (Vichak) to align with the technical meaning.",
-          "suggestion": "Consider \"Ցուցման վիճակ\" (Tsughanayin vichak) or \"Վիճակ\" (Vichak)"
+          "description": "The Armenian translation \"Պետություն\" (Petut'yun) typically refers to a nation-state or country, not the technical term 'State' as in 'Webhooks:State' which likely refers to a status or condition.  A more appropriate translation would depend on the precise context of 'State' in webhooks, but it's likely something along the lines of 'չափավարություն' (chaph'avarut'yun - status/condition) or 'վիճակ' (vichak - state/condition).",
+          "suggestion": "Consider 'չափավարություն' or 'վիճակ' based on the context of 'Webhooks:State'."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Valsts' typically refers to 'state' in a political or national sense (e.g., the state of Latvia). The English term 'State' in this context (Webhooks:State) likely refers to the status or condition of a webhook, such as 'enabled', 'disabled', 'pending', etc. 'Valsts' is therefore an inaccurate translation.",
-          "suggestion": "Consider translations like 'Stāvoklis', 'Status', or 'Nosacījums' depending on the specific technical context. 'Status' is a common loanword and might be appropriate."
+          "description": "The Latvian translation 'Valsts' generally translates to 'State' in the political or national sense, not the technical 'State' as in the context of a webhook's state (e.g., pending, active, failed).",
+          "suggestion": "Consider alternatives like 'Stāvoklis' (status/condition) or 'Situācija' (situation) which better capture the technical meaning of 'State' in a webhook context."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Województwo\" translates to 'Province' or 'Voivodeship' which is not an accurate translation of 'State' in the context of webhooks. 'State' here likely refers to the status or condition of a webhook (e.g., active, inactive, pending).",
-          "suggestion": "Consider translations like \"Status\", \"Stan\", or \"Pozycja\" depending on the specific nuance required."
+          "description": "The Polish translation \"Województwo\" translates to \"Province\" or \"Voivodeship,\" which doesn't accurately reflect the English term \"State\" in the context of webhooks. \"State\" in this context likely refers to the status or condition of a webhook (e.g., active, inactive, pending).",
+          "suggestion": "A more appropriate translation might be \"Stan\" (which can mean 'state' or 'condition') or \"Status\" (borrowed directly, and commonly used in Polish IT contexts)."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'තත්‍වය' (tathvaya) translates to 'reality' or 'essence', not 'state'. The English word 'State' in the context of webhooks likely refers to a status or condition (e.g., 'pending', 'delivered', 'failed').",
-          "suggestion": "Consider alternatives such as 'స్థితి' (sithivu) for 'state', 'වියත්' (viyath) for 'condition', or 'තත්වය' (tathvathvaya) if a closer semantic match is needed but acknowledge potential ambiguity."
+          "description": "The Sinhala translation \"තත්‍වය\" (thathwaya) primarily means \"truth\" or \"reality.\" While it can have a sense of verification or state in certain contexts, it's not the most accurate translation for \"State\" in the context of Webhooks. \"State\" here likely refers to the status or condition of a webhook, such as 'pending', 'active', or 'failed'.",
+          "suggestion": "Consider alternatives like \"స్థితి\" (sthithi - in some contexts, although needs proper context validation) or a descriptive phrase depending on the desired nuance. A more accurate translation requires deeper understanding of the webhook's 'State' meaning in this specific application."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Država\" translates to \"Country\" or \"State\" (as in a nation) in English, not the technical meaning of \"State\" as in the status or condition of a webhook. This is likely an inaccurate translation.",
-          "suggestion": "Consider alternatives like \"Stanje\", \"Status\", or \"Način\" depending on the specific context of the webhook functionality. Further context is needed to determine the best option."
+          "description": "The translation \"Država\" (State/Country) doesn't accurately reflect the English term \"State\" in the context of webhooks. \"State\" in this context refers to the status or condition of a webhook (e.g., active, inactive, pending).",
+          "suggestion": "A more appropriate translation would be \"Stanje\" which means 'status' or 'condition'."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Storage quota per user exceeded",
   "content_en_sha1_hash": "5edf8dd36f8d473f47c03d870d79181565095a87",
   "created_at": "2025-05-19T21:30:54.112Z",
-  "updated_at": "2025-05-21T07:51:42.244Z",
+  "updated_at": "2025-05-24T08:05:57.795Z",
   "comment": {
     "text": "This translation key is used to display a message when an admin user's personal storage quota has been exceeded. It will appear in a UI component that manages quotas, likely on a settings page or update notice. The exact appearance depends on the specific context of the \"isAdmin\" variable.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İstifadəçiyə düşən yaddaş kvotasını keçib' is a bit literal and doesn't flow naturally in Azerbaijani. It translates to 'The memory quota falling to the user has been exceeded'. A more natural translation would convey the meaning that the user has exceeded their allocated storage quota.",
-          "suggestion": "Consider a more natural phrasing like 'İstifadəçinin yaddaş kvotasını aşdı' or 'İstifadəçi yaddaş kvotasını doldurdu'."
+          "description": "The translation \"İstifadəçiyə düşən yaddaş kvotasını keçib\" is a literal translation but doesn't convey the full meaning of \"Storage quota per user exceeded.\" It implies the quota *belongs* to the user, whereas it's a limit applied *to* the user.",
+          "suggestion": "Consider \"Hər istifadəçi üçün yaddaş kvotasının həddini aşdı\" or \"İstifadəçinin yaddaş kvotasını keçdi\" to better reflect the original meaning."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Muistikiintiö per käyttäjä ylitetty' is a literal translation but sounds unnatural in Finnish. 'Per käyttäjä' is not the best phrasing. A more natural phrasing would use a preposition like 'per' or 'kohtaan'.",
-          "suggestion": "Muistikiintiö käyttäjää kohden ylitetty"
+          "description": "The translation 'Muistikiintiö per käyttäjä ylitetty' is a literal translation and doesn't flow naturally in Finnish. 'per käyttäjä' is a bit clunky.",
+          "suggestion": "Consider a more natural phrasing like 'Käyttäjäkohtainen tallennustila ylittynyt' or 'Tallennustila ylittynyt käyttäjää kohden'."
         }
       ],
       "approved_at": null
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Մեկ օգտատիրոջ համար պահեստի չափը գերազանցվել է' literally translates to 'The storage size for one user has been exceeded'. While understandable, it's less natural and not as concise as it could be. A more accurate and natural translation would convey that the 'per user' quota has been exceeded.",
-          "suggestion": "Մեկ օգտատիրոջ համար սահմանված պահեստի չափը գերազանցվել է"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ເກີນກຳນົດການໃຊ້ເອກະລາດສໍາລັບຜູ້ໃຊ້ແລ້ວ\" doesn't perfectly capture the meaning of \"Storage quota per user exceeded\". It translates to 'Independent usage limit exceeded for users'. While close, it lacks the specific mention of 'storage'.",
-          "suggestion": "ເກີນກຳນົດການໃຊ້ເອກະລາດສໍາລັບການເກັບຂໍ້ມູນຂອງຜູ້ໃຊ້ແລ້ວ"
+          "description": "The Lao translation 'ເກີນກຳນົດການໃຊ້ເອກະລາດສໍາລັບຜູ້ໃຊ້ແລ້ວ' translates to 'Quota usage limit exceeded for users'. While not entirely wrong, it's not a direct and accurate translation of 'Storage quota per user exceeded'.  It's more general.",
+          "suggestion": "ເກີນກຳນົດການເກັບຮັກສາຂໍ້ມູນຂອງຜູ້ໃຊ້ແຕ່ລະຄົນ"
         }
       ],
       "approved_at": null
@@ -137,9 +131,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'lietotājam' should be checked. While technically correct, it is slightly formal. A more common and natural phrasing might be preferable.",
-          "suggestion": "Consider 'lietotājs'"
+          "type": "incorrect_translation",
+          "description": "The translation 'Ir pārsniegta krātuves kvota vienam lietotājam' is a literal translation but lacks nuance. A more natural and accurate translation would convey that the quota is exceeded *for each user*. The current translation implies a single user's quota is exceeded.",
+          "suggestion": "Ir pārsniegta krātuves kvota lietotājiem"
         }
       ],
       "approved_at": null
@@ -156,13 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Limit pamięci na użytkownika przekroczył\" is not the most natural or accurate translation of \"Storage quota per user exceeded.\"  \"Limit pamięci\" literally translates to 'memory limit,' while 'storage quota' refers to the allocated space. The phrase \"przekroczył\" (exceeded) is technically correct, but the overall phrasing is clunky.",
-          "suggestion": "Przekroczono limit przestrzeni dyskowej na użytkownika"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the wording \"Przekroczono limit przestrzeni dyskowej na użytkownika\" is a bit long. Consider shorter alternatives if possible depending on UI constraints.",
-          "suggestion": "Przekroczono limit przestrzeni na użytkownika"
+          "description": "The translation \"Limit pamięci na użytkownika przekroczył\" is not the most natural or accurate translation of \"Storage quota per user exceeded.\" \"Limit\" translates to 'limit' but in this context 'quota' is better conveyed. Also, the verb tense is awkward.",
+          "suggestion": "Przekroczono limit pamięci dla użytkownika"
         }
       ],
       "approved_at": null
@@ -185,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't quite capture the natural phrasing in Romanian. 'Depășit limita permisă' is a bit clunky. A more natural phrasing would be 'a fost depășită' or simply 'depășită'.",
-          "suggestion": "Cota spațiului de stocare per utilizator a fost depășită"
+          "description": "The translation 'Cota spațiului de stocare per utilizator a depășit limita permisă' is a bit verbose and doesn't directly convey 'exceeded'. A more concise and accurate translation would be more effective.",
+          "suggestion": "Cota de stocare per utilizator depășită"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Cota spațiului de stocare per utilizator' is a bit verbose. A shorter, more concise translation would be better.",
-          "suggestion": "Cota de stocare per utilizator a fost depășită"
+          "type": "formatting",
+          "description": "The phrase 'per utilizator' is grammatically correct but slightly less common than alternatives.",
+          "suggestion": "pe utilizator"
         }
       ],
       "approved_at": null
@@ -202,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Превышена квота хранилища на пользователя' is too literal and doesn't quite convey the intended meaning in a natural Russian way. It translates to 'Storage quota per user exceeded'. A more natural phrasing would be 'Превышена лимита хранилища на пользователя' or 'Превышен лимит хранения на пользователя'.",
-          "suggestion": "Превышен лимит хранения на пользователя"
+          "description": "The translation 'Превышена квота хранилища на пользователя' is a bit literal and doesn't flow naturally in Russian. While technically correct, it's not the most idiomatic way to express this.",
+          "suggestion": "Consider alternatives like 'Превышен лимит хранения на пользователя' or 'Достигнут лимит хранения для пользователя'."
         }
       ],
       "approved_at": null
@@ -213,9 +202,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'පරිශීලකයෙකු සඳහා ගබඩා කෝටාව ඉක්මවා ගියේය.' is a literal translation and sounds unnatural in Sinhala. A more natural phrasing would be something like 'පරිශීලකයාගේ ගබඩා කෝටාව ඉක්මවා ඇත' or 'ගබඩා කෝටාව පරිශීලකයෙකු ඉක්මවා ඇත'.",
-          "suggestion": "ගබඩා කෝටාව පරිශීලකයෙකු ඉක්මවා ඇත"
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයෙකු' (parishilakayekun) is a formal and somewhat uncommon way to say 'user'. A more common and natural term would be 'භාවිතරයා' (bhavitakaraya) or simply 'භාවිතකරු' (bhavitakaru).",
+          "suggestion": "Replace 'පරිශීලකයෙකු' with 'භාවිතරයා' or 'භාවිතකරු'."
+        },
+        {
+          "type": "grammar",
+          "description": "While not strictly incorrect, the sentence structure could be more natural.  The word order could be adjusted for better flow in Sinhala.",
+          "suggestion": "Consider reordering the sentence to be 'ගබඩා කෝටාව එක් පරිශීලකයෙකු ඉක්මවා ගියේය.' (gabada kotava ek parishilakayekun ikmavva giye.) - This places the emphasis on the storage quota exceeding."
         }
       ],
       "approved_at": null
@@ -238,7 +232,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Складишна' is likely a misspelling. It should be 'Прекомерна'.",
+          "description": "The word 'Складишна' appears to be a misspelling. It seems like it is intended to be 'Прекомерна'.",
           "suggestion": "Прекомерна"
         }
       ],
@@ -262,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Перевищено квоту пам'яті на користувача\" while technically correct, is a bit literal and could be improved for clarity and flow. It translates to \"Storage quota per user exceeded\", but feels slightly awkward in Ukrainian. A more natural phrasing would emphasize the exceeding of the limit.",
-          "suggestion": "Перевищено ліміт пам'яті на користувача"
+          "description": "The translation 'Перевищено квоту пам'яті на користувача' literally translates to 'Storage quota per user exceeded', but 'пам'яті' (memory) might be too specific. It's better to use a more general term for 'storage'.",
+          "suggestion": "Перевищено ліміт сховища для користувача"
         }
       ],
       "approved_at": null
@@ -280,13 +274,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '已超出每个用户的存储配额' is a literal translation but lacks the directness and urgency of 'Storage quota per user exceeded'. It's more descriptive than impactful.",
-          "suggestion": "用户存储配额已达上限"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '每个用户的' (each user's) is redundant. The context implies it's per user.",
-          "suggestion": "用户存储配额已达上限"
+          "description": "The translation '已超出每个用户的存储配额' while technically correct, is a bit formal and literal for a user-facing message. It lacks the immediacy and clarity of the English original, which is a simple declaration of an exceeded quota.",
+          "suggestion": "Consider a more concise and user-friendly translation like '用户存储配额已满' (User storage quota is full) or '存储配额已达到上限' (Storage quota has reached the limit)."
         }
       ],
       "approved_at": null

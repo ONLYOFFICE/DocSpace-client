@@ -3,7 +3,7 @@
   "content": "Select the {{organizationName}} Workspace backup file to start the data import. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "content_en_sha1_hash": "bdde3f6d56a3539ec12a7c7d7fd049522a92d9fb",
   "created_at": "2025-05-19T21:30:52.536Z",
-  "updated_at": "2025-05-28T09:30:02.509Z",
+  "updated_at": "2025-06-30T12:20:31.410Z",
   "comment": {
     "text": "This translation key is used to provide a description for a user interface element that prompts users to select an OnlyOffice Workspace backup file. The description appears in a UI dialog and explains the next step in the data import process after successful upload and analysis.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 51,
+      "line_number": 50,
       "context": "logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectFileStep",
       "module": "/packages/client"
     },
@@ -35,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"مساحة عمل\" (masahat 'amal) for 'Workspace' is technically correct but sounds less natural. 'مساحة العمل' (masahat al-'amal) is a more idiomatic and common translation for 'Workspace' in this context.",
-          "suggestion": "حدد ملف النسخ الاحتياطي مساحة العمل {{organizationName}} لبدء استيراد البيانات."
+          "type": "formatting",
+          "description": "The Arabic translation includes a space before the curly braces `{{organizationName}}`. While not strictly incorrect, it's best to remove the space for consistency and clarity.",
+          "suggestion": "حدد ملف النسخ الاحتياطي مساحة عمل{{organizationName}} لبدء استيراد البيانات."
         }
       ],
       "approved_at": null
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Azerbaijani translation maintains the English use of double curly braces `{{organizationName}}`. While technically correct, it's more common to use single curly braces `{organizationName}` in Azerbaijani to denote variables or placeholders.",
-          "suggestion": "Replace `{{organizationName}}` with `{organizationName}`"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -60,13 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'входирането' (vhodiraneto) is not a standard or accurate translation of 'import' in this context. It implies a more complex 'entry' or 'input' rather than a simple import.",
-          "suggestion": "Изберете архивния файл на {{organizationName}} Workspace, за да започнете импортирането на данни."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'архивния' (arhivniya) is correct, but consider ensuring consistency with other similar phrases throughout the application.",
-          "suggestion": "No change needed, but review consistency."
+          "description": "The word 'входирането' is not the standard or most accurate translation of 'import' in this context. It sounds awkward and uncommon.  A better translation for 'import' would be 'внос'.",
+          "suggestion": "Изберете архивния файл на {{organizationName}} Workspace, за да започнете вноса на данни."
         }
       ],
       "approved_at": null
@@ -76,9 +65,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'spusťte import dat' (start data import) is slightly awkward. A more natural phrasing would be 'importujte data' (import data).",
+          "suggestion": "Vyberte soubor zálohy pracovního prostoru {{organizationName}} a importujte data. Po dokončení nahrávání a analýzy dat se automaticky spustí další krok."
+        },
+        {
           "type": "formatting",
-          "description": "The Czech translation lacks the double curly braces around `organizationName` similar to the English version. This might cause rendering issues in the UI.",
-          "suggestion": "Change \"{{organizationName}}\" to \"{{organizationName}}\" to match the English formatting."
+          "description": "The Czech sentence is a bit long and could be split for better readability. While grammatically correct, shorter sentences often read better in UI text.",
+          "suggestion": "Vyberte soubor zálohy pracovního prostoru {{organizationName}}. Importujte data. Po dokončení nahrávání a analýzy dat se automaticky spustí další krok."
         }
       ],
       "approved_at": null
@@ -107,13 +101,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"aloittaaksesi tietojen siirto\" (to start data transfer) is not as accurate as \"aloittaaksesi datan tuonnin\" or \"aloittaaksesi tietojen tuonnin.\" \"Siirto\" generally refers to transferring files, while \"tuonti\" (import) is more appropriate in this context.",
-          "suggestion": "Valitse {{organizationName}} Workspace-varmuuskopiotiedosto aloittaaksesi datan tuonnin."
+          "description": "The phrase 'to start the data import' is translated as 'aloittaaksesi tietojen siirto'. While technically correct, 'tietojen tuonti' would be a more natural and common phrasing for 'data import' in a technical context.",
+          "suggestion": "Valitse {{organizationName}} Workspace-varmuuskopiotiedosto aloittaaksesi tietojen tuonnin."
         },
         {
           "type": "missing_content",
-          "description": "The English content includes a note about selecting only one file. This information is missing from the Finnish translation.",
-          "suggestion": "Valitse {{organizationName}} Workspace-varmuuskopiotiedosto aloittaaksesi datan tuonnin. Vain yksi tiedosto voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty."
+          "description": "The English content specifies that only one file can be selected. This information is missing from the Finnish translation.",
+          "suggestion": "Valitse {{organizationName}} Workspace-varmuuskopiotiedosto aloittaaksesi tietojen tuonnin. Vain yksi tiedosto voidaan valita. Seuraava vaihe aloitetaan automaattisesti, kun tietojen lataus ja analysointi on tehty."
         }
       ],
       "approved_at": null
@@ -124,13 +118,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The verb 'lancé' should agree with the subject. It should be 'lancée' to match 'étape'.",
-          "suggestion": "Sélectionnez les fichier de sauvegarde d'{{organizationName}} Workspace pour lancer l'importation. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est **lancée** automatiquement."
+          "description": "The verb 'lancé' should agree with the subject 'étape' (step). It needs to be 'lancée'.",
+          "suggestion": "Sélectionnez les fichier de sauvegarde d'{{organizationName}} Workspace pour lancer l'importation. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancée automatiquement."
         },
         {
           "type": "spelling",
           "description": "The word 'fichier' is misspelled. It should be 'fichiers'.",
-          "suggestion": "Sélectionnez les **fichiers** de sauvegarde d'{{organizationName}} Workspace pour lancer l'importation. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancée automatiquement."
+          "suggestion": "Sélectionnez les fichiers de sauvegarde d'{{organizationName}} Workspace pour lancer l'importation. Une fois le téléchargement et l'analyse de données terminés, l'étape suivante est lancée automatiquement."
         }
       ],
       "approved_at": null
@@ -140,9 +134,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation lacks the double curly braces `{{...}}` around `organizationName` as present in the English source.",
-          "suggestion": "Ընտրեք {{organizationName}} Workspace պահեստային ֆայլը՝ տվյալների ներմուծումը սկսելու համար: Տվյալների վերբեռնման և վերլուծության ավարտից հետո հաջորդ քայլը կսկսվի ավտոմատ կերպով:"
+          "type": "spelling",
+          "description": "The word 'պահեստային' (pahves tayin) could be slightly ambiguous. While it generally means 'backup', it might be more precise to use a term that specifically denotes a workspace backup file, if one exists in Armenian. Consider 'աշխատասեղանի պաշտպանության ֆայլ' (ashxataselani pashtpanut'yan fayl) for 'workspace protection file', but this depends on context and established terminology.",
+          "suggestion": "Investigate if a more specific Armenian term exists for 'Workspace backup file'. If not, 'պահեստային' is acceptable, but note the possible ambiguity."
         }
       ],
       "approved_at": null
@@ -171,13 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໄຟລ໌' (file) is used repeatedly. While technically correct, it might be more natural to use a broader term like 'ຂໍ້ມູນ' (data) in some instances to avoid repetition.",
-          "suggestion": "Consider replacing the second instance of 'ໄຟລ໌' with 'ຂໍ້ມູນ' for better flow. Example: 'ເລືອກໄຟລ໌ສຳຮອງພື້ນທີ່ເຮັດວຽກ {{organizationName}} ເພື່ອເລີ່ມການນໍາເຂ້ານິ້ມູນຂໍ້ມູນ. '"
+          "description": "The word 'ໄຟລ໌' (file) is repeated unnecessarily. It should appear only once.",
+          "suggestion": "ເລືອກໄຟລ໌ສຳຮອງພື້ນທີ່ເຮັດວຽກ {{organizationName}} ເພື່ອເລີ່ມການນໍາເຂົ້າຂໍ້ມູນ."
         },
         {
-          "type": "formatting",
-          "description": "The term '{{organizationName}}' is directly inserted without a space before and after. This can look awkward.",
-          "suggestion": "Add spaces around the placeholder: 'ເລືອກໄຟລ໌ສຳຮອງພື້ນທີ່ເຮັດວຽກ {{ organizationName }} ເພື່ອເລີ່ມການນໍາເຂົ້າຂໍ້ມູນ.'"
+          "type": "grammar",
+          "description": "The phrase 'ເມື່ອການອັບໂຫລດຂໍ້ມູນ ແລະການວິເຄາະສຳເລັດແລ້ວ' could be more fluent.  'ເມື່ອການອັບໂຫລດຂໍ້ມູນ ແລະການວິເຄາະສຳເລັດ' is more concise and natural.",
+          "suggestion": "ເມື່ອການອັບໂຫລດຂໍ້ມູນ ແລະການວິເຄາະສຳເລັດ"
         }
       ],
       "approved_at": null
@@ -197,7 +191,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses a comma (,) instead of a colon (:) after 'Workspace'. While a comma is sometimes used in Polish for similar constructions, a colon is more grammatically precise and improves readability in this context, reflecting the English structure.",
+          "suggestion": "Wybierz plik kopii zapasowej {{organizationName}} Workspace: aby rozpocząć import danych."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -217,8 +217,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses the plural 'fișierele' (files) when the English says 'file'. It should be singular.",
+          "type": "formatting",
+          "description": "The phrase 'fișierele de rezervă' is grammatically correct but slightly awkward. It translates to 'backup files'. It would be more natural to use a single file.",
           "suggestion": "Selectați fișierul de rezervă {{organizationName}} Workspace pentru a demara importul de date."
         }
       ],
@@ -235,14 +235,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Sinhala translation retains the double curly braces '{{organizationName}}'. These should be removed if they's not intended to be rendered literally.",
-          "suggestion": "Remove the double curly braces around 'organizationName'."
-        },
-        {
           "type": "spelling",
-          "description": "While technically correct, 'ආනයනය' (aanaya) can sound a bit formal. 'තියන්වා' (thiyanwa) might sound more natural in this context, especially for a user interface.",
-          "suggestion": "Consider replacing 'ආනයනය' with 'තියන්වා'."
+          "description": "The word 'ඉලඟ' (ilanga) is archaic and less common. A more natural and modern alternative would be 'ඊළඟ' (eelaga).",
+          "suggestion": "Replace 'ඉලඟ' with 'ඊළඟ'"
         }
       ],
       "approved_at": null
@@ -253,8 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'spustite import údajov' is a bit awkward. A more natural translation would be 'začnite import údajov' or simply 'importujte údaje'.",
-          "suggestion": "Vyberte záložný súbor služby {{organizationName}} Workspace a importujte údaje."
+          "description": "The phrase 'spustite import údajov' (start the data import) is slightly awkward. A more natural Slovak phrasing would be 'začnite import údajov' or 'začnite s importom údajov'.",
+          "suggestion": "Vyberte záložný súbor služby {{organizationName}} Workspace a začnite import údajov."
+        },
+        {
+          "type": "formatting",
+          "description": "The Slovak translation uses 'služby' which might be a little formal for this context. While not incorrect, it could be softened to 'pre' or removed depending on the tone.",
+          "suggestion": "Vyberte záložný súbor {{organizationName}} Workspace a spustite import údajov."
         }
       ],
       "approved_at": null
@@ -270,9 +270,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"датотеку за резервну копију\" is a bit verbose and could be simplified. A more natural Serbian translation would use a shorter phrasing for \"backup file\".",
+          "suggestion": "Изаберите {{organizationName}} Workspace датотеку резервне копије или Изаберите {{organizationName}} Workspace резервну датотеку."
+        },
+        {
           "type": "formatting",
-          "description": "The Serbian translation uses a comma after \"датотеку за резервну копију\". This is stylistically unusual and should likely be removed to match standard Serbian sentence structure.",
-          "suggestion": "Изаберите {{organizationName}} Workspace датотеку за резервну копију како бисте започели увоз података."
+          "description": "While not strictly incorrect, the use of 'ће' can sometimes sound overly formal. Depending on the overall tone, it might be preferable to use a more colloquial alternative.",
+          "suggestion": "Изаберите {{organizationName}} Workspace датотеку резервне копије како бисте започели увоз података. Након завршетка отпремања и анализе података, следећи корак ће се аутоматски покренути. (Alternative: Након што се заврши отпремање и анализа података, следећи корак ће се аутоматски покренути.)"
         }
       ],
       "approved_at": null
@@ -282,9 +287,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation uses a colon after \"Workspace datoteku za rezervnu kopiju\" which isn't present in the English version. While not strictly incorrect, it deviates from the English structure and could be simplified.",
-          "suggestion": "Izaberite {{organizationName}} Workspace datoteku za rezervnu kopiju kako biste započeli uvoz podataka."
+          "type": "incorrect_translation",
+          "description": "The phrase \"datoteku za rezervnu kopiju\" (file for backup) is slightly awkward. It would be more natural to say \"datoteku za arhivu\" (archive file) or simply \"arhivu\" (archive).",
+          "suggestion": "Izaberite {{organizationName}} Workspace arhivu kako biste započeli uvoz podataka."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"sledeći korak će se automatski pokrenuti\" is a bit literal. A more natural translation would use a verb that implies progression or continuation.",
+          "suggestion": "Nakon što se završi otpremanje i analiza podataka, automatski će se preći na sledeći korak."
         }
       ],
       "approved_at": null
@@ -301,13 +311,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content specifies selecting *one* backup file, while the Ukrainian translation says \"Виберіть файли резервної копії...\" (select *files* of backup...). This implies multiple files can be selected, which contradicts the original instruction.",
-          "suggestion": "Виберіть файл резервної копії {{organizationName}} Workspace, щоб почати імпорт даних."
+          "description": "The Ukrainian translation \"Виберіть файли резервної копії {{organizationName}} Workspace\" is slightly awkward. 'Файли' (files) is redundant because 'резервної копії' already implies files. A more natural translation would be 'Виберіть файл резервної копії {{organizationName}} Workspace' or 'Виберіть файли для резервної копії {{organizationName}} Workspace'.",
+          "suggestion": "Виберіть файл резервної копії {{organizationName}} Workspace"
         },
         {
-          "type": "formatting",
-          "description": "The Ukrainian translation adds \"Можна вибрати декілька файлів.\" which isn't present in the English content. This changes the tone and implication of the sentence. It's best to keep formatting consistent with the source text.",
-          "suggestion": "Remove \"Можна вибрати декілька файлів.\""
+          "type": "incorrect_translation",
+          "description": "The phrase \"Можна вибрати декілька файлів\" (You can select several files) isn't explicitly stated in the English content. While it's a reasonable addition for user clarity, it's technically missing information from the original.",
+          "suggestion": "Consider removing if strict adherence to the original is required. Otherwise, retain as it improves clarity."
         }
       ],
       "approved_at": null
@@ -324,8 +334,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"系统会自动启动下一步\" (xìtǒng huì zìdòng qǐdòng xià yī bù) translates to 'The system will automatically start the next step.' While technically correct, it's a bit clunky and doesn't capture the intended flow as smoothly as a more natural phrasing. The original English emphasizes 'initiated automatically'.",
-          "suggestion": "选择 {{organizationName}} 工作区备份文件，开始数据导入。数据上传和分析完成后，会自动进入下一步。"
+          "description": "The phrase \"系统会自动启动下一步\" is a somewhat literal translation of \"the next step will be initiated automatically.\" It lacks the natural flow of a user-facing message in Chinese. A more natural phrasing would emphasize the process continuing seamlessly.",
+          "suggestion": "数据上传和分析完成后，流程将自动进入下一步。"
         }
       ],
       "approved_at": null

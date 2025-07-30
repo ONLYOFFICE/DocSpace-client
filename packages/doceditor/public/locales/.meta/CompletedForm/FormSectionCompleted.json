@@ -3,7 +3,7 @@
   "content": "Form Section Completed",
   "content_en_sha1_hash": "48b6af71d7abdd814d10f4a7d93a2bf85013fb95",
   "created_at": "2025-05-19T21:30:57.173Z",
-  "updated_at": "2025-05-28T09:30:02.870Z",
+  "updated_at": "2025-06-30T12:20:31.648Z",
   "comment": {
     "text": "This translation key \"FormSectionCompleted\" is used to display the text \"Form Section Completed\" in a form section completion indicator. It is likely displayed on a button or dialog related to submitting or finalizing a form, and its purpose is to provide feedback to the user that their form has been completed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 148,
+      "line_number": 149,
       "context": "return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");\n }\n \n if (completed) return t(\"CompletedForm:FormFinalized\");\n \n return t(\"CompletedForm:FormSectionCompleted\");\n }, [t, isStartFilling, completed]);\n \n const headerDescription = useMemo(() => {\n if (isStartFilling) {\n return isYournTurn",
       "module": "/packages/doceditor"
     }
@@ -27,43 +27,90 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"اكتمل قسم من النموذج\" while technically correct, is a bit literal and doesn't flow naturally in Arabic. A more natural phrasing would convey the same meaning in a more idiomatic way.",
+          "suggestion": "تم إكمال جزء من النموذج"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'Bölməsi' (its part) is less natural than 'Bölgəsi' (region/section). 'Bölgəsi' would be a more accurate and idiomatic translation of 'Section' in this context.",
+          "suggestion": "Forma Bölgəsi Tamamlandı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Разделът за формуляри е завършен' is a literal translation of 'Form Section Completed' but isn't the most natural or concise way to express the concept in Bulgarian. A more idiomatic translation might be 'Завършен раздел от формуляра' or 'Запълнен раздел на формуляра'.",
+          "suggestion": "Consider 'Завършен раздел от формуляра' or 'Запълнен раздел на формуляра'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Vyplněná část formuláře' is a literal translation of 'Completed Form Section' and while understandable, it doesn't quite capture the meaning of 'Form Section Completed'. It implies a section *has been filled in*, not that the completion event has occurred. A more accurate translation emphasizing completion might be 'Dokončená část formuláře' or 'Vyplněná sekce formuláře' (although the latter is more direct).",
+          "suggestion": "Dokončená část formuláře"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Formularabschnitt ausgefüllt' is technically correct, a more natural and idiomatic translation would be 'Abschnitt des Formulars ausgefüllt' or 'Ausgefüllter Formularabschnitt'. The current phrasing is a bit clunky.",
+          "suggestion": "Abschnitt des Formulars ausgefüllt"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ολοκληρώθηκε το τμήμα της φόρμας' is a literal translation that sounds slightly awkward in Greek. A more natural phrasing would be preferred.",
+          "suggestion": "Ολοκληρώθηκε η ενότητα της φόρμας"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sección de formularios Completado' is not the most natural or accurate translation of 'Form Section Completed.' 'Formularios' implies multiple forms, while 'Form Section' usually refers to a part of a single form. A better translation would reflect this.",
+          "suggestion": "Sección del formulario completada"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'Sección de formularios Completado' is slightly awkward in Spanish. The adjective should generally precede the noun in more natural constructions.",
+          "suggestion": "Sección del formulario completada"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,7 +128,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ձևաթղթի բաժինն ավարտված է\" literally translates to 'The form section is completed'. While understandable, a more natural translation of 'Form Section Completed' might be 'Լրացված է ձևի բաժին' or 'Ձևի բաժինը լրացվել է'.",
+          "suggestion": "Consider 'Լրացված է ձևի բաժին' or 'Ձևի բաժինը լրացվել է'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +146,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"フォームセクションが完了\" is a literal translation but doesn't quite capture the natural flow of the English phrase \"Form Section Completed.\" It sounds a bit stiff and formal in Japanese. A more natural phrasing would convey the completion of the section, rather than simply stating that it *is* completed.",
+          "suggestion": "フォームセクション完了 (Fōmu sekushon kanryō) - This is a more concise and natural way to express the completion of the form section."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,7 +176,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Formulier Sectie Voltooid\" is understandable, a more natural and idiomatic translation of \"Form Section Completed\" would be \"Formuliersectie voltooid\" or \"Voltooide formuliersectie\". Using a single word to describe both \"form\" and \"section\" is a more common structure in Dutch.",
+          "suggestion": "Formuliersectie voltooid"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +194,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Secção do Formulário Preenchido' is understandable, a more natural and accurate translation of 'Form Section Completed' would be 'Secção do Formulário Concluída'. 'Preenchido' implies 'filled', while 'Concluída' implies completion.",
+          "suggestion": "Secção do Formulário Concluída"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,13 +230,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Časť formulára vyplnená\" is understandable, it's a more literal translation of 'Form Section Filled'. 'Completed' implies a final state. A more accurate and natural Slovak translation would convey that the section is finished or done.",
+          "suggestion": "Dokončená časť formulára"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Razdelek obrazca izpolnjen\" is understandable, a more natural and commonly used translation for 'Form Section Completed' in Slovenian would be 'Dokončan razdelek obrazca' or 'Zaprt razdelek obrazca'. 'Razdelek obrazca izpolnjen' sounds slightly awkward.",
+          "suggestion": "Dokončan razdelek obrazca"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,7 +260,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Sekcija obrasca je završena' is a bit literal and clunky. A more natural and concise translation would be preferred.",
+          "suggestion": "Kompletiran/Popunjen odeljak obrasca"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +284,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Phần Biểu Mẫu Đã Được Hoàn Thành\" is a bit verbose and formal for a user interface label. It's a literal translation and doesn't convey the meaning as concisely as possible.",
+          "suggestion": "Đã Hoàn Thành Phần (or simply Hoàn Thành Phần)"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase is a complete sentence, which isn't ideal for a label.  Labels should ideally be short and descriptive.",
+          "suggestion": "Consider a shorter phrase like \"Hoàn Thành\" or \"Đã Hoàn Thành\" if context allows."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

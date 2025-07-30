@@ -43,11 +43,11 @@ import api from "@docspace/shared/api";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Link } from "@docspace/shared/components/link";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -68,7 +68,6 @@ const InvitePanel = ({
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
@@ -115,6 +114,10 @@ const InvitePanel = ({
       defaultAccess: 1,
     });
     setInviteItems([]);
+  };
+
+  const onBackClick = () => {
+    if (!hideSelector && addUsersPanelVisible) setAddUsersPanelVisible(false);
   };
 
   const onCheckHeight = () => {
@@ -291,11 +294,11 @@ const InvitePanel = ({
         ns="Common"
         components={{
           1: (
-            <ColorTheme
+            <Link
               tag="a"
-              themeId={ThemeId.Link}
               onClick={onClickPayments}
               target="_blank"
+              color="accent"
             />
           ),
         }}
@@ -354,9 +357,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -519,6 +520,7 @@ const InvitePanel = ({
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
+      onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}
@@ -605,7 +607,6 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -638,7 +639,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

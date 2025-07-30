@@ -30,7 +30,7 @@ import React, {
   useCallback,
   useState,
   useMemo,
-  useContext,
+  use,
 } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -52,7 +52,7 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
   const [thumbSize, setThumbSize] = useState(null);
   const [columnCount, setColumnCount] = useState(null);
 
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   const { t } = useTranslation(["Translations"]);
 

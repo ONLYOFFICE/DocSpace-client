@@ -45,15 +45,15 @@ const EmailActivationHandler = () => {
   useEffect(() => {
     async function changeActivationStatus() {
       try {
-        const res = await updateActivationStatus(
+        await updateActivationStatus(
           EmployeeActivationStatus.Activated,
           uid,
           confirmHeader,
         );
 
         window.location.replace(`/login?confirmedEmail=${email}`);
-      } catch (error) {
-        const knownError = error as TError;
+      } catch (e) {
+        const knownError = e as TError;
         let errorMessage: string;
 
         if (typeof knownError === "object") {

@@ -3,7 +3,7 @@
   "content": "Users invited",
   "content_en_sha1_hash": "72c2af47b22442f2b4c2dd3ce416b620691f6ca7",
   "created_at": "2025-05-19T21:30:49.475Z",
-  "updated_at": "2025-06-18T07:34:14.937Z",
+  "updated_at": "2025-06-18T17:11:42.393Z",
   "comment": {
     "text": "The \"UsersInvited\" translation key is used to display a success message when a user is invited. It is typically displayed after an invite button is clicked and the invitation is processed, providing feedback to the user that they have been successfully invited.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"İstifadəçilər dəvət edildi\" literally translates to \"Users were invited.\" The English phrase \"Users invited\" implies a current count or status, not a completed action. A more accurate translation would reflect this.",
-          "suggestion": "İstifadəçilər dəvət olundu"
+          "description": "The translation 'İstifadəçilər dəvət edildi' literally translates to 'Users were invited'. The intended meaning is 'Users invited', which implies a count or list. The passive voice is not ideal.",
+          "suggestion": "İstifadəçilər dəvət"
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Οι χρήστες προσκλήθηκαν' (Oi chrístes prosklíthikan) translates to 'The users were invited'. While not entirely wrong, it's passive voice. 'Users invited' is a label or title, not an action. A more accurate translation would be 'Πρόσκλητοι χρήστες' (Proskléti chrístes) or 'Καλεσμένοι χρήστες' (Kalesménoi chrístes) which mean 'Invited users' or 'Guests invited'.",
-          "suggestion": "Πρόσκλητοι χρήστες"
+          "description": "The translation \"Οι χρήστες προσκλήθηκαν\" (Oi chrístes prosklíthikan) translates to 'The users were invited', which implies a completed action. The English 'Users invited' is more of a label or description of a state, not an action. A more accurate translation would be something like 'Προσκεκλημένοι χρήστες' (Proskelimenoi chrístes) which means 'Invited users'.",
+          "suggestion": "Προσκεκλημένοι χρήστες (Proskelimenoi chrístes)"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"招待されたユーザー\" (Mōdai sareta yūzā) literally translates to 'Users who were invited.' While not entirely wrong, it's more formal than the English 'Users invited.' A more natural and concise translation would better reflect the original meaning.",
-          "suggestion": "ユーザーの招待 (Yūzā no shōtai)"
+          "description": "The translation \"招待されたユーザー\" (Mōdai sareta yūzā) literally translates to 'Users who were invited'. While understandable, it's a bit passive and less direct than a simple 'invited users'. A more natural and concise translation would be \"招待したユーザー\" (Mōdai shita yūzā) or just \"招待ユーザー\" (Mōdai yūzā).",
+          "suggestion": "招待したユーザー or 招待ユーザー"
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"초대된 사용자\" is a literal translation of \"users invited\", it doesn't quite capture the same nuance. It implies users who *have* been invited, rather than the *number* of users invited. A more accurate translation might convey the idea of 'invited users' as a quantity.",
+          "suggestion": "Consider '초대받은 사용자 수' (invited user count) or '초대 사용자' (invited users) depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຊີນຜູ້ໃຊ້' literally translates to 'invited users'. While technically correct, it lacks the article 'a' or 'some' which is implied in the English 'Users invited'. A more natural translation might include a quantifier.",
-          "suggestion": "Consider 'ຜູ້ໃຊ້ທີ່ເຊີນ' (Users who were invited) or 'ຜູ້ໃຊ້ຫຼາຍທ່ານທີ່ເຊີນ' (Many invited users)."
+          "description": "The Lao translation 'ເຊີນຜູ້ໃຊ້' literally translates to 'invited users'. While understandable, 'users invited' implies a count or description, not the act of inviting. A more accurate translation reflecting the English meaning might be 'ຜູ້ໃຊ້ທີ່ເຊີນ' (users who were invited) or 'ຜູ້ໃຊ້ຖືກເຊີນ' (invited users - passive voice).",
+          "suggestion": "ຜູ້ໃຊ້ທີ່ເຊີນ"
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආරාධිත පරිශ්‍රීලකයින්' (Aaradhitha parishiilakayin) is a literal translation of 'invited users' but sounds overly formal and slightly awkward in Sinhala. While technically correct, it doesn't capture the natural flow of the English phrase 'Users invited'.",
-          "suggestion": "A more natural translation would be 'ඇමතූ පරිශ්‍රීලකයින්' (Amathu parishiilakayin) or 'පරිශ්‍රීලකයින් ඇමතූ' (Parishiilakayin amathu) depending on context and desired emphasis."
+          "description": "The translation \"ආරාධිත පරිශ්‍රීලකයින්\" while conveying the general idea of 'invited users', is overly formal and doesn't quite capture the simplicity of \"Users invited.\" The term 'පරිශ්‍රීලකයින්' (parishreelakayin) is a highly formal term for 'users' or 'participants', not commonly used in this context. A more natural and accurate translation would be something more casual.",
+          "suggestion": "Consider alternatives like \"අමත ආරාධිතව සිටිනවා\" (amata aaraadhitha wa sitinaa - invited to join) or a more casual phrase indicating users who have been invited."
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation \"Používatelia boli pozvaní\" translates to \"Users were invited.\" While not entirely wrong, it doesn't directly correspond to the English phrase \"Users invited,\" which implies a count or state of being invited. A more accurate translation would reflect that, such as \"Počítadlo pozvaných používateľov\" or \"Pozvané používateľov\".",
-          "suggestion": "Pozvaní používatelia"
+          "description": "The Slovak translation \"Používatelia boli pozvaní\" translates literally to \"Users were invited.\" While not entirely wrong, it lacks the succinctness and directness of the English \"Users invited.\" It implies a completed action instead of a current state or listing.",
+          "suggestion": "Používatelia pozvaní"
         }
       ],
       "approved_at": null
@@ -204,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Uporabniki povabljeni' is technically correct but could be improved for naturalness and common usage. 'Povabljeni' implies they *were* invited, rather than just the fact that users *have* been invited.",
-          "suggestion": "Uporabniki povabljeni (more literal, but awkward) OR Uporabniki, ki so povabljeni (Users who are invited) OR better yet, consider rephrasing the English to better suit Slovenian phrasing if possible, perhaps 'Number of users invited'."
+          "description": "The translation 'Uporabniki povabljeni' is not the most natural or accurate translation of 'Users invited'. While technically correct, it's a bit literal and doesn't flow well in Slovenian.",
+          "suggestion": "A more natural translation would be 'Povabljeni uporabniki' or 'Vabljeni uporabniki'."
         }
       ],
       "approved_at": null
@@ -216,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Корисници позвани\" is understandable, a more accurate and natural translation of \"Users invited\" would be \"Позвани корисници\" or \"Корисници су позвани\". \"Корисници позвани\" is grammatically awkward in Serbian.",
+          "description": "While \"Корисници позвани\" is understandable, a more natural and accurate translation of 'Users invited' would be 'Позвани корисници' or 'Пријављени корисници'. The original translation reverses the typical word order in Serbian.",
           "suggestion": "Позвани корисници"
         }
       ],
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Kullanıcılar davet edildi\" translates to \"Users were invited.\" The English phrase \"Users invited\" implies a current or ongoing action, which \"Users were invited\" does not convey. A more accurate translation would reflect that the users are in the process of being invited.",
-          "suggestion": "Kullanıcılar davet ediliyor"
+          "description": "The translation \"Kullanıcılar davet edildi\" literally translates to \"Users were invited.\"  The English phrase \"Users invited\" implies a count or a state of being invited. \"Davet Edildi\" indicates an action that has already occurred.",
+          "suggestion": "A more accurate translation might be \"Davet edilen kullanıcılar\" (invited users) or \"Kullanıcı davetleri\" (user invitations), depending on the intended context."
         }
       ],
       "approved_at": null

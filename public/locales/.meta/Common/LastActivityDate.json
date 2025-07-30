@@ -3,7 +3,7 @@
   "content": "Last activity date",
   "content_en_sha1_hash": "7858db9eac1fd53a9a6e83786014f02e6d83aea2",
   "created_at": "2025-05-19T21:30:46.047Z",
-  "updated_at": "2025-07-01T15:57:36.132Z",
+  "updated_at": "2025-06-08T12:02:32.720Z",
   "comment": {
     "text": "The \"LastActivityDate\" translation key is used to display a date label in a filter section, likely on a sorting options page. It appears next to a button or similar UI element that allows users to sort by the last activity date of a file or item. This key should be translated for use in various file and item metadata descriptions.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1165,
+      "line_number": 1143,
       "context": "default: true,\n };\n const activityDate = {\n id: \"sort-by_activity\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastActivityDate\"),\n default: true,\n };\n const lastOpenedDate = {\n id: \"sort-by_last-opened\",\n key: SortByFieldName.LastOpened,",
       "module": "/packages/client"
     }
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"最終アクティビティ日\" is a very literal translation and sounds somewhat unnatural in Japanese. A more natural phrasing would convey the same meaning more effectively.",
+          "suggestion": "Consider alternatives like \"最終利用日\" (Saishuu riyoubi - last usage date) or \"最終更新日\" (Saishuu koushinbi - last update date), depending on the specific context of 'Last activity date'."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -144,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Data când a avut loc ultima activitate\" is a bit verbose and not the most natural Romanian phrasing for 'Last activity date'. It's literally 'Date when the last activity took place'.",
-          "suggestion": "Consider a more concise and idiomatic translation such as \"Data ultimei activități\" or \"Data activității recente\"."
+          "description": "The translation 'Data când a avut loc ultima activitate' is a bit verbose and not the most natural way to express 'Last activity date' in Romanian. While technically correct, it's less concise.",
+          "suggestion": "Consider 'Data ultimei activități' or 'Ultima dată de activitate'."
         }
       ],
       "approved_at": null
@@ -180,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Датум последње активности' is a literal translation of 'Last activity date' but sounds awkward and unnatural in Serbian. A more natural phrasing would be 'Datum poslednje aktivnosti' or 'Datum zadnje aktivnosti'.",
+          "description": "The Serbian translation \"Датум последње активности\" is a literal translation of \"Last activity date\" but doesn't quite flow naturally in Serbian. A more natural phrasing would be something like \"Datum poslednje aktivnosti\" or \"Datum poslednje radnje\".",
           "suggestion": "Datum poslednje aktivnosti"
         }
       ],
@@ -210,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ngày hoạt động cuối' while understandable, isn't the most natural or precise translation of 'Last activity date'. It literally translates to 'Last activity day'.",
+          "description": "The translation \"Ngày hoạt động cuối\" is not the most natural or accurate translation of \"Last activity date\". It literally translates to 'Last activity day'. A more appropriate translation would emphasize the date itself.",
           "suggestion": "Ngày hoạt động gần nhất"
         }
       ],

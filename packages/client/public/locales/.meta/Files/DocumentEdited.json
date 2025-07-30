@@ -3,7 +3,7 @@
   "content": "Cannot perform the action because the document is being edited.",
   "content_en_sha1_hash": "9be506c1a16ad8098b7a66bc532cf3279e05ab0f",
   "created_at": "2025-05-19T21:30:55.469Z",
-  "updated_at": "2025-06-03T20:59:42.287Z",
+  "updated_at": "2025-06-02T10:20:51.501Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user attempts to perform an action on a document that is currently being edited. It appears in the UI as an error toast notification. The key should be translated to convey a clear indication of what is preventing the action from being performed, such as \"Cannot edit document while it's being edited.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1102,
+      "line_number": 1104,
       "context": "onSelectItem({ id: item.id, isFolder: item.isFolder }, true, false);\n };\n \n onShowEditingToast = (t) => {\n toastr.error(t(\"Files:DocumentEdited\"));\n };\n \n onShowWaitOperationToast = (t) => {\n toastr.warning(t(\"Files:WaitOperation\"));\n };",
       "module": "/packages/client"
     }
@@ -153,7 +153,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ලේඛනය සංස්කරණය වෙමින් පවතින බැවින් මෙම ක්‍රියාමාර්ගයට ඉඩ නොදේ.' is a literal translation and sounds somewhat unnatural in Sinhala. A more natural phrasing would convey the same meaning.",
+          "suggestion": "ලේඛනය සංස්කරණය කිරීම නිසා මෙම ක්‍රියාව කළ නොහැකිය."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically not a *misspelling*, 'ක්‍රියාමාර්ගයට' could be more naturally expressed.  'ක්‍රියාව' or 'සිද්ධිය' might be more fitting depending on context, although 'ක්‍රියාව' is generally preferable here.",
+          "suggestion": "ක්‍රියාව"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +182,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Немогуће извршити радњу зато што се документ уређује.' is a literal translation that doesn't flow naturally in Serbian. A more natural phrasing would convey the meaning more clearly.",
+          "suggestion": "Не можете извршити ову радњу јер се документ уређује."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Nemoguće' is a colloquial and less formal way of saying 'impossible'. While understandable, it's not ideal for professional communication. A more appropriate word would be 'Nemoguće'.",
+          "suggestion": "Nemoguće"
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'zato što' is correct, but in this context, 'jer' might flow more naturally.",
+          "suggestion": "jer"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

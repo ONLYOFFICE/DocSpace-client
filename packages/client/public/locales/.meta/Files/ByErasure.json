@@ -3,7 +3,7 @@
   "content": "Erasure",
   "content_en_sha1_hash": "e5eaa5fb5b757374407ffad2c33964c599e1aee8",
   "created_at": "2025-05-19T21:30:55.314Z",
-  "updated_at": "2025-07-01T15:57:36.119Z",
+  "updated_at": "2025-06-08T12:02:32.712Z",
   "comment": {
     "text": "This translation key \"ByErasure\" is used to display a column header label in a table view, referring to an \"erasure\" category. It appears on the table header and is related to filtering or sorting data by date.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1184,
+      "line_number": 1162,
       "context": "default: true,\n };\n const erasure = {\n id: \"sort-by_erasure\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"ByErasure\"),\n default: true,\n };\n const tags = {\n id: \"sort-by_tags\",\n key: SortByFieldName.Tags,",
       "module": "/packages/client"
     }
@@ -39,13 +39,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'امسح' (imsah) translates to 'erase' or 'wipe'. While related to the English 'Erasure', it doesn't convey the concept of a period of time or a process of removal as 'Erasure' often implies. It's an action, not a noun.",
+          "suggestion": "A more accurate translation might be 'فترة المسح' (fatrat al-masḥ) - 'Erasure Period', or 'عملية المسح' (amaliyyat al-masḥ) - 'Erasure Process', depending on the intended context."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"Erasure\" implies a process of completely removing or deleting something. \"Təmizləmə\" primarily means \"cleaning\" or \"purification,\" which isn't a precise equivalent. While cleaning can be a part of erasure, it doesn't fully convey the meaning.",
+          "suggestion": "Consider alternatives like \"Silmə\" (deletion), \"Mahnəmə\" (annihilation), or \"Yox etmə\" (to eliminate), depending on the specific context of \"Files:ByErasure\".  \"Silmə\" is likely the best general-purpose option."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +75,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Löschen' translates to 'delete' or 'erase', 'Erasure' specifically refers to the action of erasing or the state of being erased. 'Löschvorgang' would be a more accurate translation conveying the action of erasure, or 'Radierung' to represent the result of erasure as in the act of removing something permanently.",
+          "suggestion": "Consider 'Löschvorgang' or 'Radierung' for a more nuanced translation of 'Erasure'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Διαγραφή' (Diagrafi) can mean 'deletion' or 'erasure', it doesn't fully capture the nuance of 'Erasure' in the context of data storage and resilience. 'Erasure' often implies a more complete and irreversible removal process. A more precise translation might be something like 'Απομάγευση' (Apomaguevsi) or 'Μόνιμη Διαγραφή' (Monimi Diagrafi).",
+          "suggestion": "Consider 'Απομάγευση' (Apomaguevsi) or 'Μόνιμη Διαγραφή' (Monimi Diagrafi)."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -93,7 +117,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ջնջում\" (Jnjum) translates to \"deletion\" or \"erasing,\" it doesn't fully capture the nuance of 'Erasure' which often refers to a process or state of being erased, not just the act of erasing. A more suitable translation might depend on the context of 'Files:ByErasure'.",
+          "suggestion": "Consider alternatives like \"Մաքրում\" (Makrum - cleaning/purging) or \"Դիտարկում\" (Ditarkum - consideration/act of erasure) if the context implies a more complex meaning. Without context, \"Ջնջում\" is passable, but potentially not the best fit."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,13 +141,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"삭제\" (sajeok) translates to 'deletion' or 'remove', not 'erasure'. While 'erasure' and 'deletion' are related concepts, they are not direct equivalents. 'Erasure' can imply a process of removing data, potentially leaving no trace, which is not necessarily conveyed by '삭제'. A more nuanced translation might be necessary depending on the context.",
+          "suggestion": "Consider alternatives like '말소' (malsosso - cancellation/removal) or a more descriptive phrase depending on the specific meaning of 'Erasure' in this context."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ລົບ\" (lop) typically means 'delete' or 'remove,' not 'erasure.' While deletion can involve erasure, the nuance is different. 'Erasure' implies a process of completely removing something, often leaving no trace, which 'ລົບ' doesn't always convey.",
+          "suggestion": "Consider alternatives like \"ລົບເຊົາ\" (lop sao) which more closely implies complete removal or obliteration, or \"ເຊົາລົບ\" (sao lop) to emphasize the complete removal aspect. The best option would depend on the specific context of 'Erasure'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -135,7 +177,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Kasowanie\" can mean erasure, it more commonly translates to \"deleting\" or \"removing.\" \"Erasure\" implies a more complete and permanent removal, potentially including data overwriting. \"Usunięcie\" or \"Wycofanie\" might be more accurate depending on the specific context of 'Files:ByErasure'.",
+          "suggestion": "Consider 'Usunięcie' or 'Wycofanie' depending on the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -183,7 +231,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"Erasure\" refers to the process of removing or deleting data. While \"Брисање\" means \"deletion\" or \"erasing\", it doesn't fully capture the nuance of the English term in the context of data management, where 'Erasure' can refer to a specific process or a standard. A more accurate translation might depend on the precise context.",
+          "suggestion": "Consider alternatives like 'Избрисавање' (Izbrisavanje) or a more descriptive phrase depending on the exact meaning of 'Erasure' in this context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -207,7 +261,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"Erasure\" refers to the process of removing or deleting something, often data or records. \"Xóa\" primarily means 'to delete' or 'to erase', but lacks the nuance of a more formal process like data erasure or record deletion. A more accurate translation might consider options like 'Quá trình xóa' or 'Xóa bỏ' depending on the context.",
+          "suggestion": "Consider 'Quá trình xóa' or 'Xóa bỏ' for a more nuanced translation, depending on the specific context of 'Files:ByErasure'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

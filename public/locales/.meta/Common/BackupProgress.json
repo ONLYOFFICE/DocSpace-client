@@ -1,0 +1,208 @@
+{
+  "key_path": "BackupProgress",
+  "content": "Backup: {{progress}}%",
+  "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
+  "created_at": "2025-05-26T07:15:40.772Z",
+  "updated_at": "2025-06-30T12:20:31.733Z",
+  "comment": {
+    "text": "This translation key displays the progress percentage and corresponding label (\"Backup\", \"Preparing Backup\" or a dynamic progress value) during an automated backup process. It appears in various UI elements, such as buttons and dialogues, to inform users about the status of the backup operation.",
+    "is_auto": true,
+    "updated_at": "2025-05-26T08:07:11.337Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
+      "line_number": 636,
+      "context": "{\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/manual-backup/index.tsx",
+      "line_number": 465,
+      "context": "label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),\n percent: downloadingProgress,\n operation: OPERATIONS_NAME.backup,\n alert: false,",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/restore-backup/sub-components/button-component/ButtonComponent.tsx",
+      "line_number": 60,
+      "context": "buttonSize,\n setTenantStatus,\n isFormReady,\n getStorageParams,\n uploadLocalFile,\n isBackupProgressVisible,\n setErrorInformation,\n setIsBackupProgressVisible,\n operationsAlert,\n } = props;",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

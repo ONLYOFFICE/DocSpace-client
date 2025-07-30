@@ -3,7 +3,7 @@
   "content": "Enter token",
   "content_en_sha1_hash": "8293c89bf4b9c4be1629063bd19ace32ceafc29a",
   "created_at": "2025-05-19T21:30:53.878Z",
-  "updated_at": "2025-05-28T09:30:02.607Z",
+  "updated_at": "2025-05-26T07:57:32.668Z",
   "comment": {
     "text": "This translation key is used for the \"Enter token\" placeholder text in a text input field, typically found in an OAuth revoke developer token dialog. It instructs users to enter their token to complete the action.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Εισαγωγή διακριτικού' is technically correct, a more natural and user-friendly translation for 'Enter token' would be 'Εισάγετε το διακριτικό' or 'Εισάγετε τον κωδικό'.  'Εισαγωγή διακριτικού' sounds a bit formal and technical.",
-          "suggestion": "Εισάγετε το διακριτικό"
+          "description": "While technically correct, \"Εισαγωγή διακριτικού\" is a rather formal and technical translation for \"Enter token\". A more user-friendly and natural translation would be more appropriate for a user interface.",
+          "suggestion": "Εισαγάγετε κωδικό"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Մուտքագրել նշանը\" while technically meaning 'Enter the sign/symbol,' is not the most natural or accurate translation of 'Enter token' in the context of OAuth. A more appropriate translation would convey the action of inputting an authentication token.",
-          "suggestion": "Մուտքագրել գրանցման ստեղնը (Mut'yagrel granatsman stegnë) - Enter the authentication key/token, or simply Մուտքագրել տոքենը (Mut'yagrel tokenë) - Enter token (using the English loanword)."
+          "description": "While \"Մուտքագրել նշանը\" is understandable, a more natural and accurate translation of \"Enter token\" would be something like \"Մուտքագրեք տոկենը\" or \"Տոկենը մուտքագրել\" . The word 'նշանը' (nshany) typically means 'sign' or 'symbol', not 'token'.",
+          "suggestion": "Մուտքագրեք տոկենը"
         }
       ],
       "approved_at": null
@@ -126,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ievadiet marķieri\" is a literal translation of 'Enter token', it's not the most natural or accurate phrasing in Latvian for a UI element. 'Marķieris' can refer to a marker or tag, not necessarily an OAuth token.",
+          "description": "While \"Ievadiet marķieri\" is technically a valid translation, 'marķieris' primarily means 'marker' (like a pen marker) rather than an 'OAuth token'. A more accurate translation would convey the concept of a 'token' used for authentication.",
           "suggestion": "Ievadiet atslēgu"
         }
       ],
@@ -144,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dodaj token' is not the most accurate translation of 'Enter token'. 'Dodaj' means 'Add', while 'Enter' implies inputting or providing.",
+          "description": "The English phrase \"Enter token\" implies inputting a token. \"Dodaj token\" translates to \"Add token,\" which has a slightly different meaning. While not entirely wrong, it's not the most accurate translation.",
           "suggestion": "Wprowadź token"
         }
       ],
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Token gir' is understandable, a more natural and grammatically correct Turkish translation would be 'Tokeninizi girin'.",
+          "description": "The translation 'Token gir' is a literal translation and while understandable, it lacks the natural flow of Turkish for user interfaces. A more natural translation would be 'Tokeninizi girin'.",
           "suggestion": "Tokeninizi girin"
         }
       ],

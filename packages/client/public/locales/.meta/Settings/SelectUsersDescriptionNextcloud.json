@@ -3,7 +3,7 @@
   "content": "Check users from the list to import into {{organizationName}} {{productName}}. Only users with emails can be selected. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "content_en_sha1_hash": "ad743c3b62e273a22ee36dfcfa2b2fa96612293d",
   "created_at": "2025-05-19T21:30:52.567Z",
-  "updated_at": "2025-05-28T09:30:02.507Z",
+  "updated_at": "2025-06-30T12:20:31.409Z",
   "comment": {
     "text": "This translation key is used for a tooltip or message that describes the selection process for importing users into Nextcloud, emphasizing the requirement for email addresses and highlighting existing users. It appears in a data import step of a portal settings page, guiding translators to focus on emails and distinguish between new and existing users.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 63,
+      "line_number": 62,
       "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsersWithEmail\"),\n description: t(\"Settings:SelectUsersDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />",
       "module": "/packages/client"
     }
@@ -30,18 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"لاستيرادها\" (li-istīrāduhā) implies importing 'them' (the users) which is slightly awkward. It would be more natural to say 'إلى' (ila) which means 'to'.",
-          "suggestion": "تحقق من المستخدمين من القائمة لاستيرادهم إلى {{organizationName}} {{productName}}."
+          "description": "The phrase \"لاستيرادها إلى\" is slightly awkward. A more natural phrasing would be \"لإضافتها إلى\" or \"لدمجها في\".",
+          "suggestion": "تحقق من المستخدمين من القائمة لإضافتها إلى {{organizationName}} {{productName}}."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"يتم تمييز\" (yutammiyz) is grammatically correct but sounds slightly formal and passive. A more natural phrasing could be \"يظهر\" (yadhhar) meaning 'appear' or 'are shown'.",
-          "suggestion": "يظهر المستخدمين الموجودين بالفعل في {{organizationName}} {{productName}} بلون أخضر."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ولا يتم التحقق منهم بشكل افتراضي' ('wa lā yutam al-taḥaqquq minhum bi-shakl iftiradiy) is a bit verbose and could be simplified. A better way to express 'not checked by default' would be 'غير محددة افتراضياً' ('ghair muhaddada iftiradiy').",
-          "suggestion": "يظهر المستخدمين الموجودين بالفعل في {{organizationName}} {{productName}} بلون أخضر وغير محددة افتراضياً."
+          "type": "grammar",
+          "description": "The word \"التحقق\" is repeated unnecessarily. It's more elegant to use a single term consistently.",
+          "suggestion": "تحقق من المستخدمين من القائمة لإضافتها إلى {{organizationName}} {{productName}}. يمكن تحديد المستخدمين الذين لديهم بريد إلكتروني فقط. يتم تمييز المستخدمين الموجودين بالفعل في {{organizationName}} {{productName}} بلون أخضر وليست مُحددة بشكل افتراضي."
         }
       ],
       "approved_at": null
@@ -51,14 +46,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"defolt olaraq qeyd olunmur\" is an awkward translation of \"not checked by default.\" A more natural phrasing would be something like \"varsayılan olaraq seçilmiş deyil\" or \"otomatik olaraq seçilməyib\".",
-          "suggestion": "varsayılan olaraq seçilmiş deyil"
+          "type": "formatting",
+          "description": "The phrase 'defolt olaraq' is not a standard Azerbaijani term. It's a transliteration of 'default'.",
+          "suggestion": "default olaraq"
         },
         {
-          "type": "formatting",
-          "description": "The consistency of the placeholders \"{{organizationName}} {{productName}}\" should be checked across all translations. While technically correct, the repetition could be improved.",
-          "suggestion": "Consider using variables or more concise placeholders if possible, depending on the overall UI/UX design."
+          "type": "incorrect_translation",
+          "description": "While 'vurğulanır' (highlighted) is technically correct, a more natural phrasing for this context would be 'göy rəngdə seçilir' or 'göy rənglə qeyd olunur'.  'Vurğulanır' implies emphasis rather than a visual indicator.",
+          "suggestion": "göy rəngdə seçilir"
         }
       ],
       "approved_at": null
@@ -69,13 +64,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'входирате' is not the most natural way to express 'import' in this context. It sounds slightly awkward.",
-          "suggestion": "Внесете"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'маркирани' might be too formal. A more conversational word could improve the flow.",
-          "suggestion": "оцветени"
+          "description": "The word \"входирате\" is not the correct translation for \"import\". A better translation would be \"импортирате\".",
+          "suggestion": "импортирате"
         }
       ],
       "approved_at": null
@@ -86,13 +76,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation uses \"aplikace\" before {{organizationName}} {{productName}}. While technically correct, it might be more natural to omit it or use a different phrasing depending on the overall tone of the UI. Consider if the product name already implies it's an application.",
-          "suggestion": "Consider removing \"aplikace\" or replacing it with a more natural phrasing (e.g., \"pro {{organizationName}} {{productName}}\")."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English uses 'highlighted', the Czech 'zvýrazněni'. While not incorrect, a slightly more natural phrasing for a UI element might be 'označeni' or 'viditelní'.",
-          "suggestion": "Consider replacing 'zvýrazněni' with 'označeni' or 'viditelní' for better readability in a UI context."
+          "description": "The Czech translation uses 'aplikace' before {{organizationName}} {{productName}}. While not strictly incorrect, in a user interface, it might be more natural to omit it and just use '{{organizationName}} {{productName}}' directly, similar to the English.",
+          "suggestion": "Zaškrtněte uživatele ze seznamu pro import do {{organizationName}} {{productName}}. Lze vybrat pouze uživatele s e-maily. Uživatelé již existující v {{organizationName}} {{productName}} jsou zvýrazněni zelenou barvou a ve výchozím nastavení nejsou zaškrtnuti."
         }
       ],
       "approved_at": null
@@ -103,7 +88,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'standardmäßig nicht markiert' is a less natural way to express 'are not checked by default'. A more fluent translation would be 'sind standardmäßig nicht ausgewählt'.",
+          "description": "The phrase \"standardmäßig nicht markiert\" is a slightly awkward translation of \"are not checked by default\". A more natural phrasing would be something like \"sind standardmäßig nicht ausgewählt\" or \"werden standardmäßig nicht aktiviert\".",
           "suggestion": "sind standardmäßig nicht ausgewählt"
         }
       ],
@@ -115,13 +100,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ελέγξτε τους χρήστες από τη λίστα για εισαγωγή στο\" is not the most natural way to phrase \"Check users from the list to import into\". A more natural translation would be something like \"Επιλέξτε χρήστες από τη λίστα για εισαγωγή στο\".",
-          "suggestion": "Επιλέξτε χρήστες από τη λίστα για εισαγωγή στο"
+          "description": "The phrase \"Ελέγξτε τους χρήστες από τη λίστα για εισαγωγή στο\" is a bit clunky and doesn't perfectly convey the English meaning. A more natural Greek phrasing would improve readability. The English 'Check users from the list to import into' is not directly equivalent to how someone would normally phrase that in Greek.",
+          "suggestion": "Επιλέξτε τους χρήστες από τη λίστα για εισαγωγή στο"
         },
         {
-          "type": "formatting",
-          "description": "The repetition of \"στο {{productName}} του {{organizationName}}\" is clunky.  It would be more natural to simplify this.  Consider using a single possessive construction, or removing one of the possessives depending on the desired emphasis.",
-          "suggestion": "στο {{organizationName}} {{productName}}"
+          "type": "incorrect_translation",
+          "description": "The phrase \"δεν ελέγχονται από προεπιλογή\" doesn't quite align with the English 'are not checked by default'. It translates more literally to 'are not checked by default'. It should reflect the action of *not being selected*.",
+          "suggestion": "δεν είναι επιλεγμένοι από προεπιλογή"
         }
       ],
       "approved_at": null
@@ -132,13 +117,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Marque los usuarios de la lista\" is a bit stiff. A more natural phrasing would be \"Seleccione los usuarios de la lista\". \"Marque\" implies a checkbox or marking something as completed, while \"seleccione\" is a more general term for choosing.",
+          "description": "The phrase 'Marque los usuarios de la lista' is a bit formal. 'Seleccione los usuarios de la lista' is a more natural and common phrasing in this context.",
           "suggestion": "Seleccione los usuarios de la lista"
         },
         {
-          "type": "formatting",
-          "description": "The phrase \"no están marcados de forma predeterminada\" is grammatically correct but a bit verbose.  A more concise phrasing would improve readability.",
-          "suggestion": "no están seleccionados por defecto."
+          "type": "incorrect_translation",
+          "description": "The sentence 'no están marcados de forma predeterminada' is grammatically correct but a bit wordy. A more concise and common way to express this is 'no están seleccionados por defecto'.",
+          "suggestion": "no están seleccionados por defecto"
         }
       ],
       "approved_at": null
@@ -149,7 +134,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Finnish word for 'green' is 'vihreä', not 'virheällä'. The sentence mentions highlighting users with 'green color'.",
+          "description": "The word 'virheällä' is a misspelling of 'vihreällä'.",
           "suggestion": "Valitse {{organizationName}} {{productName}}:n tuotavat käyttäjät listalta. Vain käyttäjät, joilla on sähköposti, voidaan valita. Jo {{organizationName}} {{productName}}-ssa olemassaolevat käyttäjät on korostettu vihreällä värillä ja niitä ei ole oletuksena valittu."
         }
       ],
@@ -160,9 +145,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'ne sont pas cochés par défaut' could be improved for clarity and flow. While technically correct, it's a bit clunky.",
-          "suggestion": "Les utilisateurs déjà présents dans {{organizationName}} {{productName}} sont mis en évidence en vert et ne sont pas sélectionnés par défaut."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Cochez les utilisateurs\" is a bit too literal and doesn't flow naturally in French. A more natural phrasing would be \"Sélectionnez les utilisateurs\" or \"Choisissez les utilisateurs\".",
+          "suggestion": "Sélectionnez les utilisateurs"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"mis en évidence par une couleur verte\" is technically correct, a more common and fluid way to express it is \"sont mis en surbrillance en vert\".",
+          "suggestion": "sont mis en surbrillance en vert"
         }
       ],
       "approved_at": null
@@ -173,8 +163,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation includes a colon after 'համար' (for). It should probably be removed or replaced with a period depending on the desired flow.",
-          "suggestion": "Replace ':' with '.' or remove it completely:  'Ստուգեք օգտվողներին ցանկից՝ {{organizationName}} {{productName}} ներմուծելու համար. Կարող են ընտրվել միայն էլփոստ ունեցող օգտվողները. {{organizationName}} {{productName}}-ում արդեն գոյություն ունեցող օգտատերերը ընդգծված են կանաչ գույնով և լռելյայն չեն ստուգվում:' becomes 'Ստուգեք օգտվողներին ցանկից `{{organizationName}} {{productName}} ներմուծելու համար։ Կարող են ընտրվել միայն էլփոստ ունեցող օգտվողները։ {{organizationName}} {{productName}}-ում արդեն գոյություն ունեցող օգտատերերը ընդգծված են կանաչ գույնով և լռելյայն չեն ստուգվում:' or 'Ստուգեք օգտվողներին ցանկից {{organizationName}} {{productName}} ներմուծելու համար։ Կարող են ընտրվել միայն էլփոստ ունեցող օգտվողները։ {{organizationName}} {{productName}}-ում արդեն գոյություն ունեցող օգտատերերը ընդգծված են կանաչ գույնով և լռելյայն չեն ստուգվում:'"
+          "description": "The Armenian translation uses a colon after 'համար' which might not be the standard practice. Consider removing it for consistency with the English original, which doesn't include a colon.",
+          "suggestion": "Ստուգեք օգտվողներին ցանկից ներմուծելու համար {{organizationName}} {{productName}}:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ընդգծված' (underlined) doesn't accurately convey the meaning of 'highlighted'. The English version implies a visual highlighting.",
+          "suggestion": "Ստուգեք օգտվողներին ցանկից ներմուծելու համար {{organizationName}} {{productName}}։ Կարող են ընտրվել միայն էլփոստ ունեցող օգտվողները։ {{organizationName}} {{productName}}-ում արդեն գոյություն ունեցող օգտատերերը լուսավորված են կանաչ գույնով և լռելյայն չեն ստուգվում:"
         }
       ],
       "approved_at": null
@@ -185,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Italian translation uses \"{{organizationName}} {{productName}}\" which replicates the English format.  It might be more natural to rephrase depending on how these variables are meant to be used in context. Consider if it would be better to use something like \"{{organizationName}} e {{productName}}\" or \"{{organizationName}} {{productName}}\" (if the space is intentional).",
-          "suggestion": "Review the intended use of the variables and rephrase accordingly. For example: 'in {{organizationName}} e {{productName}}' or 'in {{organizationName}} {{productName}}' "
+          "description": "The translation does not consistently apply the variable syntax. The English uses '{{organizationName}} {{productName}}' while the Italian uses a space between the variable tags.  Consistency is important for maintainability.",
+          "suggestion": "Maintain consistency in variable syntax. Ideally match the English format '{{organizationName}} {{productName}}'"
         }
       ],
       "approved_at": null
@@ -197,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The variable {{organizationName}} {{productName}} appears multiple times. It is recommended to use a more consistent formatting or consider separate variables for each part to improve readability.",
-          "suggestion": "Consider using separate variables like {{organizationName}} and {{productName}} or a combined variable {{organizationNameProduct}} for consistent formatting."
+          "description": "The double curly braces `{{...}}` are inconsistently handled. The English uses double curly braces for all variables, while the Japanese only uses them for `organizationName` and `productName`.",
+          "suggestion": "Maintain consistency.  Change 'すでに{{organizationName}} {{productName}}に存在するユーザ' to 'すでに{{organizationName}} {{productName}}に存在するユーザ' to match the English."
         }
       ],
       "approved_at": null
@@ -209,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '가져오기할' is awkward and doesn't perfectly convey the meaning of 'to import'. A more natural phrasing would be '가져올' or '등록할'.",
-          "suggestion": "목록에서 {{organizationName}} {{productName}}로 가져올 사용자를 선택하세요."
+          "description": "The phrase \"가져오기할\" is awkward. It literally translates to 'to import'. A more natural phrasing would be something like '추가할' (to add) or '등록할' (to register).",
+          "suggestion": "목록에서 {{organizationName}} {{productName}}로 추가할 사용자를 선택하세요."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The conjunction '및' (and) is a bit formal in this context. A more common and natural connector would be '는' or a simple omission.",
-          "suggestion": "이메일이 있는 사용자만 선택할 수 있습니다."
+          "type": "formatting",
+          "description": "The spacing around the double curly braces is inconsistent.  The English uses '{{organizationName}} {{productName}}', while the Korean uses '{{organizationName}}{{productName}}'. Maintaining the English structure would improve consistency.",
+          "suggestion": "목록에서 {{organizationName}} {{productName}}로 추가할 사용자를 선택하세요. 이메일이 있는 사용자만 선택할 수 있습니다. {{organizationName}} {{productName}}에 이미 존재하는 사용자는 초록색으로 하이라이트 표시되며 기본적으로 선택되어 있지 않습니다."
         }
       ],
       "approved_at": null
@@ -226,18 +221,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'ຖືກເນັ້ນໃສ່ດ້ວຍສີຂຽວ' sounds slightly awkward. It could be rephrased for better flow.",
-          "suggestion": "ຖືກສະແດງດ້ວຍສີຂຽວ"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ບໍ່ໄດ້ຖືກກວດສອບຕາມຄ່າເລີ່ມຕົ້ນ' is a bit clunky. 'ບໍ່ຖືກເລືອກໂດຍອັດຕະໂນມັດ' is a more natural phrasing.",
-          "suggestion": "ບໍ່ຖືກເລືອກໂດຍອັດຕະໂນມັດ"
+          "description": "The sentence \"ຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວຢູ່ໃນ {{organizationName}} {{productName}}.\" is grammatically awkward. It should be restructured to improve clarity.",
+          "suggestion": "ຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວໃນ {{organizationName}} {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "The period at the end of the second sentence feels abrupt, as it's immediately followed by the next sentence. Consider adding a conjunction or rephrasing.",
-          "suggestion": "ຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວຢູ່ໃນ {{organizationName}} {{productName}} ແລະຈະຖືກເນັ້ນໃສ່ດ້ວຍສີຂຽວ ແລະບໍ່ໄດ້ຖືກເລືອກໂດຍອັດຕະໂນມັດ."
+          "description": "The sentence \"ກວດເບິ່ງຜູ້ໃຊ້ຈາກລາຍຊື່ເພື່ອນໍາເຂົ້າເຂົ້າໄປໃນ {{organizationName}} {{productName}}.\" contains repetitive phrasing 'ເຂົ້າໄປໃນ'.",
+          "suggestion": "ກວດເບິ່ງຜູ້ໃຊ້ຈາກລາຍຊື່ເພື່ອສືບຕໍ່ນໍາເຂົ້ານໍາເຂົ້າມາໃນ {{organizationName}} {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'ກວດສອບ' is too formal for 'check'. A more conversational term is needed.",
+          "suggestion": "ເລືອກ"
         }
       ],
       "approved_at": null
@@ -248,8 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Var atlasīt tikai lietotājus ar e-pasta ziņojumiem\" is a literal translation of 'Only users with emails can be selected'. A more natural and accurate Latvian phrasing would be something like \"Var atlasīt tikai lietotājus, kuriem ir e-pasta adrese\" or \"Var atlasīt tikai lietotājus ar derīgu e-pasta adresi\".",
-          "suggestion": "Var atlasīt tikai lietotājus ar derīgu e-pasta adresi."
+          "description": "The phrase \"Var atlasīt tikai lietotājus ar e-pasta ziņojumiem\" is a literal translation of \"Only users with emails can be selected.\" While understandable, a more natural Latvian phrasing would be \"Var atlasīt tikai lietotājus ar e-pastiem\" or \"Atļauts atlasīt tikai lietotājus ar e-pastiem\".",
+          "suggestion": "Var atlasīt tikai lietotājus ar e-pastiem"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'ziņojumiem' instead of 'e-pastiem' after 'ar' makes the sentence slightly awkward. Using 'e-pastiem' would flow better with the rest of the sentence.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -259,14 +259,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Dutch translation uses \"Vink\" (check) instead of \"Selecteer\" (select). While \"Vink\" is understandable, \"Selecteer\" would be more consistent with the English term 'Select'.",
-          "suggestion": "Selecteer gebruikers aan uit de lijst om te importeren in {{organizationName}} {{productName}}."
-        },
-        {
           "type": "grammar",
-          "description": "The phrase \"zijn aangegeven met een groene kleur\" is grammatically correct but slightly verbose and less natural. A more fluent construction would be \"zijn gemarkeerd met een groene kleur\" or \"worden weergegeven met een groene kleur\".",
-          "suggestion": "Vink gebruikers aan uit de lijst om te importeren in {{organizationName}} {{productName}}. Alleen gebruikers met e-mail kunnen worden geselecteerd. Gebruikers die al bestaan in {{organizationName}} {{productName}} worden weergegeven met een groene kleur en zijn niet standaard aangevinkt."
+          "description": "The sentence 'Gebruikers die al bestaan in {{organizationName}} {{productName}} zijn aangegeven met een groene kleur en zijn niet standaard aangevinkt' is a bit long and could be restructured for better readability in Dutch. Specifically, the passive voice 'zijn aangegeven' could be improved.",
+          "suggestion": "Gebruikers die al bestaan in {{organizationName}} {{productName}}, zijn met een groene kleur gemarkeerd en zijn standaard niet aangevinkt."
         }
       ],
       "approved_at": null
@@ -277,8 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation uses a semicolon (;) at the end of the first sentence instead of a period (.). This is grammatically incorrect in Polish and breaks the flow.",
-          "suggestion": "Change ';' to '.' at the end of the first sentence: \"Wybierz z listy użytkowników, których chcesz zaimportować do {{organizationName}} {{productName}}.\" becomes \"Wybierz z listy użytkowników, których chcesz zaimportować do {{organizationName}} {{productName}}.\""
+          "description": "The Polish translation lacks the double curly braces {{ }} around the placeholders {{organizationName}} and {{productName}} as present in the English content.  This can cause rendering issues.",
+          "suggestion": "Replace '{{organizationName}} {{productName}}' with '{{organizationName}} {{productName}}' throughout the text to match the English format."
         }
       ],
       "approved_at": null
@@ -313,8 +308,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Russian translation uses '{{organizationName}} {{productName}}' which might be too literal. Consider a more natural phrasing if context allows, such as combining them into a single name or using a more descriptive term.",
-          "suggestion": "Consider rephrasing '{{organizationName}} {{productName}}' to a more natural Russian phrasing, depending on the specific context of the names. For example, 'в системе {{organizationName}}' or 'в {{productName}}'."
+          "description": "The phrase 'по умолчанию не проверяются' (not checked by default) could be improved for better readability. A more natural phrasing would be 'автоматически не выбраны' (automatically not selected).",
+          "suggestion": "Отметьте пользователей из списка для импорта в {{organizationName}} {{productName}}. Можно выбрать только пользователей с адресами электронной почты. Пользователи, уже существующие в {{organizationName}} {{productName}}, выделяются зеленым цветом и автоматически не выбраны."
         }
       ],
       "approved_at": null
@@ -324,19 +319,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ලැදිස්තයේ සිටින' (ladisthayē sitina) translates literally to 'being in a list' which doesn't quite capture the meaning of 'from the list'. A more accurate translation would be something like 'ලේඛනයෙන්' (lekhayanēn) which means 'from the document/list'.",
-          "suggestion": "පරිශීලකයින් ලේඛනයෙන් (parishīlakayin lekhayanēn) වෙතට ආනයනය කිරීමට..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'පෙරනිද්දීම පරීක්ෂා කරනු නොලැබේ' (peraniddaīma parīkṣā karanu nolabē) is a rather complex and slightly awkward phrasing. While technically correct, it could be simplified for better readability. It translates to 'are not checked by default'.",
-          "suggestion": "පෙරනිදහසින් තෝරාගත නොවේ (peranidahasa thōrāgata novē) - which translates to 'are not selected by default'"
-        },
-        {
           "type": "formatting",
-          "description": "The use of `{{organizationName}} {{productName}}` is consistent with the English, which is good. However, ensure that the platform using this translation will correctly handle these placeholders. Consistency is key.",
-          "suggestion": "No change needed, ensure placeholders are handled correctly on the target platform."
+          "description": "Inconsistent use of double curly braces for placeholders. '{{organizationName}} {{productName}}' appears multiple times. While technically not incorrect, consistency would improve readability. Suggest standardizing to either '{{organizationName}} {{productName}}' or something like '{{organization_name}} {{product_name}}' if that's the project standard.",
+          "suggestion": "Consider standardizing the placeholder formatting.  For example: '{{organizationName}} {{productName}}' throughout."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'පරිශීලකයින් පරීක්ෂා කරන්න' (parishīlakayin parīkshā karanna) literally translates to 'check users'. While technically correct, a more natural phrasing in Sinhala might be 'පරිශීලකයින් තෝරා ගන්න' (parishīlakayin thōrā gan'na) which translates to 'select users'.",
+          "suggestion": "Replace 'පරිශීලකයින් පරීක්ෂා කරන්න' with 'පරිශීලකයින් තෝරා ගන්න'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'පෙරනිද්දීම පරීක්ෂා කරනු නොලැබේ' (perniddaim parīkshā karanu nō labe) translates to 'are not checked by default'. A more natural phrasing could be 'පෙරනිදහයෙන් තෝරාගෙන නොමැත' (pernidahayan thōrāgena nō maetha) which translates to 'are not selected by default'.",
+          "suggestion": "Replace 'පෙරනිද්දීම පරීක්ෂා කරනු නොලැබේ' with 'පෙරනිදහයෙන් තෝරාගෙන නොමැත'."
         }
       ],
       "approved_at": null
@@ -347,18 +342,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Check users from the list\" as \"Označte v zozname používateľov\" is slightly awkward. A more natural translation might be \"Vyberte používateľov zo zoznamu\" or \"Zvoľte používateľov zo zoznamu\".",
+          "description": "The English phrase \"Check users from the list\" is not accurately translated to \"Označte v zozname používateľov.\"  'Označte' implies marking, but 'Check' implies selecting. A better translation would be something along the lines of 'Vyberte používateľov zo zoznamu'.",
           "suggestion": "Vyberte používateľov zo zoznamu"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ktoré majú zadaný e-mail' is grammatically correct but less fluent than alternatives. A more natural phrasing would convey the sense of having a valid email address.",
-          "suggestion": "ktorí majú platnú e-mailovú adresu"
+          "description": "The English phrase \"Only users with emails can be selected\" is not accurately translated to \"Vybrať môžete len používateľov, ktoré majú zadaný e-mail.\"  'ktoré majú zadaný e-mail' is grammatically incorrect and sounds unnatural.  A better translation would be 'len používateľov s e-mailovou adresou' or 'len používateľov, ktorí majú e-mail'.",
+          "suggestion": "len používateľov, ktorí majú e-mail"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The translation of \"are not checked by default\" as \"pôvodne nie sú označení\" is technically correct, but could be improved for clarity. A more direct translation would be clearer.",
-          "suggestion": "nie sú predvoliteľne zaškrtnutí"
+          "type": "spelling",
+          "description": "The word 'e-mail' should be consistently translated as 'e-mail' or 'e-mailová adresa'. Although 'e-mail' is acceptable in Slovak, it would be more consistent to use the fully Slovakized version 'e-mail'.",
+          "suggestion": "e-mail"
         }
       ],
       "approved_at": null
@@ -369,18 +364,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Check users from the list' is translated as 'Preverite uporabnike s seznama'. While technically correct, 'Preverite uporabnike iz seznama' would be a more natural and common phrasing in Slovenian. 'S seznama' implies users are from multiple lists, which isn't the intended meaning.",
-          "suggestion": "Preverite uporabnike iz seznama"
+          "description": "The phrase \"Izbrani so lahko samo uporabniki z e-mail naslovi\" is a somewhat awkward translation of \"Only users with emails can be selected.\" A more natural phrasing would be something like \"Samo uporabniki z e-poštnimi naslovi so lahko izbrani.\" or \"Na voljo so samo uporabniki z e-poštnimi naslovi za izbiro.\" or \"Izberite samo uporabnike z e-poštnimi naslovi\".",
+          "suggestion": "Samo uporabniki z e-poštnimi naslovi so lahko izbrani."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'are highlighted with a green color' is translated as 'so označeni z zeleno barvo'. A more natural phrasing would be 'so poudarjeni z zeleno barvo' or 'so obarvani zeleno'.",
-          "suggestion": "so poudarjeni z zeleno barvo"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'are not checked by default' is translated as 'privzeto niso označeni'. While technically correct, a more precise translation would be 'privzeto niso izbrani'. 'Označeni' implies marking, while 'izbrani' reflects the action of selecting.",
-          "suggestion": "privzeto niso izbrani"
+          "type": "formatting",
+          "description": "The phrase \"zeleno barvo in privzeto niso označeni\" could be improved for clarity.  The order is a bit jumbled. 'Privzeto niso označeni' sounds a little odd here.",
+          "suggestion": "so označeni z zeleno barvo in privzeto niso izbrani."
         }
       ],
       "approved_at": null
@@ -391,13 +381,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'email-ovima' should be 'e-mail adresama' for better readability and accuracy.",
-          "suggestion": "Проверите кориснике са листе које желите да увезете у {{organizationName}} {{productName}}. Само корисници са е-mail адресама ће бити одабрани. Корисници који већ постоје у {{organizationName}} {{productName}}-у су означени зеленом бојом и подразумевано нису означени."
+          "description": "The word 'емаил-овима' is a direct transliteration of 'emails'. While understandable, a more natural Serbian word would be 'email adrese'.",
+          "suggestion": "Проверите кориснике са листе које желите да увезете у {{organizationName}} {{productName}}. Само корисници са email адресама ће бити одабрани."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Су означени зеленом бојом и подразумевано нису означени' can be improved for smoother flow. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Проверите кориснике са листе које желите да увезете у {{organizationName}} {{productName}}. Само корисници са е-mail адресама ће бити одабрани. Корисници који већ постоје у {{organizationName}} {{productName}}-у су означени зеленом бојом и нису аутоматски одбрани."
+          "description": "The phrase 'нису означени' sounds slightly awkward. A more natural phrasing would be 'нису изабрани'.",
+          "suggestion": "Проверите кориснике са листе које желите да увезете у {{organizationName}} {{productName}}. Само корисници са email адресама ће бити одабрани. Корисници који већ постоје у {{organizationName}} {{productName}}-у су означени зеленом бојом и подразумевано нису изабрани."
         }
       ],
       "approved_at": null
@@ -408,18 +398,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Check users from the list' is translated as 'Proverite korisnike sa liste koje želite da uvezete'. While understandable, 'Proverite korisnike sa liste za uvoz' would be a more direct and natural translation.",
-          "suggestion": "Proverite korisnike sa liste za uvoz"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'are highlighted with a green color' is translated as 'su označeni zelenom bojom'. While technically correct, 'su obeleženi zelenom bojom' or 'ističu zelenom bojom' would be more natural-sounding in Serbian.",
-          "suggestion": "su obeleženi zelenom bojom"
+          "description": "The phrase \"Proverite korisnike sa liste koje želite da uvezete\" is a bit clunky. \"Koje želite da uvezete\" could be simplified.",
+          "suggestion": "Proverite korisnike sa liste za uvoz u..."
         },
         {
           "type": "formatting",
-          "description": "The dash in '{{organizationName}} {{productName}}-u' feels awkward. A space would be more appropriate.",
-          "suggestion": "{{organizationName}} {{productName}} "
+          "description": "The placement of the hyphen in '{{organizationName}} {{productName}}-u' is incorrect. It should likely be a possessive marker and only occur if necessary for sentence flow. It might be better to avoid it altogether.",
+          "suggestion": "Remove the hyphen or rephrase the sentence. For example: 'Korisnici koji već postoje u {{organizationName}} {{productName}}...' or 'Korisnici koji već postoje u {{organizationName}} i {{productName}}...' "
         }
       ],
       "approved_at": null
@@ -427,13 +412,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses double quotes for the organization and product names, while English uses single quotes for the template variable {{organizationName}} and {{productName}}. This creates a formatting mismatch.",
-          "suggestion": "Change all double quotes to single quotes to match the English template: '{{organizationName}} {{productName}}’"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -442,8 +421,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Будуть вибрані лише користувачі з адресами електронної пошти\" is awkward. A more natural translation would be something along the lines of \"Лише користувачі з адресами електронної пошти можуть бути вибрані\" or \"Можна вибрати лише користувачів з адресами електронної пошти\".",
-          "suggestion": "Можна вибрати лише користувачів з адресами електронної пошти."
+          "description": "The phrase 'Будуть вибрані лише користувачі з адресами електронної пошти' is a less natural translation of 'Only users with emails can be selected.' A more accurate and natural translation would be 'Тільки користувачі з електронною поштою можуть бути вибрані.'",
+          "suggestion": "Тільки користувачі з електронною поштою можуть бути вибрані."
         }
       ],
       "approved_at": null
@@ -451,18 +430,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The variable placeholders {{organizationName}} and {{productName}} are not consistently formatted throughout the translation. While they are present, ensuring consistent capitalization and punctuation (if any) is crucial for proper rendering.",
-          "suggestion": "Review and maintain consistent formatting for the placeholders {{organizationName}} and {{productName}} across the entire translation."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'tô sáng bằng màu xanh lá cây' translates to 'highlighted in green'. While understandable, a more natural and fluent translation might be 'được làm nổi bật bằng màu xanh lá cây'.",
-          "suggestion": "Replace 'tô sáng bằng màu xanh lá cây' with 'được làm nổi bật bằng màu xanh lá cây' for improved fluency."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -471,8 +439,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a full stop at the end of each sentence. While grammatically correct, the English original uses a period only at the very end of the paragraph. Maintaining consistency with the original format is preferable.",
-          "suggestion": "Remove the periods at the end of each sentence to match the original English format."
+          "description": "The translation includes double curly braces '{{...}}' which are likely intended to be replaced with variables at runtime, but are present in the translated text. This isn't a translation error *per se*, but impacts usability and clarity in the UI.",
+          "suggestion": "Remove the extra curly braces. E.g., '{{organizationName}}{{productName}}' becomes '{{organizationName}}{{productName}}'"
         }
       ],
       "approved_at": null

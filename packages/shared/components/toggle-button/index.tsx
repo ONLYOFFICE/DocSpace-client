@@ -63,7 +63,8 @@ const ToggleIcon = ({
             r: [5, 6, 6],
             transition: {
               r: {
-                yoyo: Infinity,
+                repeat: Infinity,
+                repeatType: "reverse",
                 duration: 0.6,
                 ease: "easeOut",
               },
@@ -98,13 +99,14 @@ const ToggleButton = ({
   name,
   fontWeight,
   fontSize,
+  dataTestId,
 }: ToggleButtonProps) => {
   return (
     <div
       id={id}
       className={classNames(styles.container, className)}
       style={style}
-      data-testid="toggle-button"
+      data-testid={dataTestId ?? "toggle-button"}
     >
       <label
         id={id}

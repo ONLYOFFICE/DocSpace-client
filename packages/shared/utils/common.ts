@@ -81,7 +81,11 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash, TTimeZone } from "../api/settings/types";
+import {
+  TDomainValidator,
+  TPasswordHash,
+  TTimeZone,
+} from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -186,24 +190,24 @@ export const parseDomain = (
 
 export const validatePortalName = (
   value: string,
-  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  nameValidator: TDomainValidator,
   setError: Function,
   t: TTranslation,
 ) => {
   const validName = new RegExp(nameValidator.regex);
   switch (true) {
     case value === "":
-      return setError(t("Settings:PortalNameEmpty"));
+      return setError(t("Common:PortalNameEmpty"));
     case value.length < nameValidator.minLength ||
       value.length > nameValidator.maxLength:
       return setError(
-        t("Settings:PortalNameLength", {
+        t("Common:PortalNameLength", {
           minLength: nameValidator.minLength.toString(),
           maxLength: nameValidator.maxLength.toString(),
         }),
       );
     case !validName.test(value):
-      return setError(t("Settings:PortalNameIncorrect"));
+      return setError(t("Common:PortalNameIncorrect"));
 
     default:
       setError(null);
@@ -868,7 +872,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     if (!item) return item;
 
     if ("updatedBy" in item) {
-      const updatedBy = item.updatedBy as {};
+      const updatedBy = item.updatedBy;
       if (
         updatedBy &&
         "displayName" in updatedBy &&
@@ -879,7 +883,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     }
 
     if ("createdBy" in item) {
-      const createdBy = item.createdBy as {};
+      const createdBy = item.createdBy;
       if (
         createdBy &&
         "displayName" in createdBy &&
@@ -1292,7 +1296,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
   const { width } = imageBitMap;
   const { height } = imageBitMap;
 
-  // @ts-expect-error imageBitMap
   const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
 
   async function resizeRecursiveAsync(
@@ -1301,7 +1304,6 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     depth = 0,
   ): Promise<unknown> {
     const data = resizeImage.resize(
-      // @ts-expect-error canvas
       canvas,
       img.width / compressionRatio,
       img.height / compressionRatio,
@@ -1368,7 +1370,7 @@ export const getBackupProgressInfo = (
       setLink(link);
     }
 
-    return { success: t("Settings:BackupCreatedSuccess") };
+    return { success: t("Common:BackupCreatedSuccess") };
   }
 };
 

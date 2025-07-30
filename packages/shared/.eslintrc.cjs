@@ -65,11 +65,8 @@ module.exports = {
       { exceptAfterSingleLine: true },
     ],
     "react/jsx-no-leaked-render": ["error", { validStrategies: ["ternary"] }],
-    "react/jsx-max-depth": ["error", { max: 7 }],
-    "react/function-component-definition": [
-      "warn",
-      { namedComponents: "arrow-function" },
-    ],
+    "react/jsx-max-depth": ["error", { max: 10 }],
+    "react/function-component-definition": "off",
     "react/jsx-key": [
       "error",
       {
@@ -97,6 +94,7 @@ module.exports = {
     "no-param-reassign": "off",
     "prefer-destructuring": "off",
     "@typescript-eslint/no-duplicate-enum-values": "off",
+    "@typescript-eslint/no-use-before-define": ["error", { functions: false }],
   },
   ignorePatterns: [
     "./tsconfig.json",

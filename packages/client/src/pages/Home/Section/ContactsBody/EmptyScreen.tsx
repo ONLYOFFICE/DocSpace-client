@@ -57,7 +57,7 @@ type EmptyScreenProps = {
   currentGroup?: GroupsStore["currentGroup"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
   deleteGroup?: GroupsStore["deleteGroup"];
-  getContactsModel: PeopleStore["contextOptionsStore"]["getContactsModel"];
+  getContactsModel?: PeopleStore["contextOptionsStore"]["getContactsModel"];
 };
 
 const EmptyScreen = ({
@@ -143,7 +143,7 @@ const EmptyScreen = ({
           description: t("EmptyView:SendInvitationLetter"),
           disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,
           icon: <InviteUserIcon />,
-          model: (getContactsModel(t, false) ?? []).filter(
+          model: (getContactsModel?.(t, false) ?? []).filter(
             (m) => typeof m !== "boolean",
           ) as ContextMenuModel[],
         },

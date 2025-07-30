@@ -26,7 +26,6 @@
 
 import styled, { css } from "styled-components";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { IconSizeType } from "@docspace/shared/utils";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
@@ -34,6 +33,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
 import { globalColors } from "@docspace/shared/themes";
 import moment from "moment-timezone";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 const StyledApiKeysLifetimeIcon = styled.div<{ isExpired: boolean }>`
   ${({ isExpired }) =>
@@ -76,8 +76,7 @@ export const ApiKeysLifetimeIcon = ({
 
   return showLifetimeIcon ? (
     <StyledApiKeysLifetimeIcon isExpired={isExpired}>
-      <ColorTheme
-        themeId={ThemeId.IconButton}
+      <IconButton
         iconName={LifetimeReactSvgUrl}
         className="api-keys_lifetime"
         size={IconSizeType.medium}

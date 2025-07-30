@@ -3,7 +3,7 @@
   "content": "IP Security",
   "content_en_sha1_hash": "6384288df2a9807354de1df765c871288d7c2492",
   "created_at": "2025-05-19T21:30:51.718Z",
-  "updated_at": "2025-07-02T07:49:19.855Z",
+  "updated_at": "2025-06-18T17:11:42.492Z",
   "comment": {
     "text": "The \"IPSecurity\" translation key is used to display the title and subtitle of the security category in the portal settings. It appears as a heading on mobile views and as part of the desktop layout, indicating access to IP-related security features.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 108,
+      "line_number": 109,
       "context": "}\n url=\"/portal-settings/security/access-portal/invitation-settings\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"IPSecurity\")}\n subtitle={\n <Trans i18nKey=\"IPSecurityMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 203,
+      "line_number": 196,
       "context": "{\n id: \"portal-settings_catalog-ip-security\",\n key: \"1-0-4\",\n icon: \"\",\n link: \"ip\",\n tKey: \"IPSecurity\",\n },\n {\n id: \"portal-settings_catalog-invitation-settings\",\n key: \"1-0-5\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"أمان بروتوكول الانترنت\" literally translates to \"Internet Protocol Security.\" While related, \"IP Security\" generally refers to a broader concept encompassing various security measures for IP networks, not solely the protocol itself. The Arabic translation is too specific.",
-          "suggestion": "Consider a more general term like \"حماية عنوان بروتوكول الإنترنت\" (Protection of Internet Protocol Address) or \"أمن الشبكات\" (Network Security), depending on the context and desired level of accuracy."
+          "description": "The translation \"أمان بروتوكول الانترنت\" translates to \"Internet Protocol Security\" which is not a direct equivalent to \"IP Security\". While \"أمان\" (security) and \"بروتوكول الانترنت\" (internet protocol) are present, the direct and common understanding of 'IP Security' is missing.",
+          "suggestion": "Consider a more literal translation like \"أمان IP\" or \"حماية IP\" (Hماية IP). Using the acronym \"IP\" is generally understood in technical contexts and keeps the meaning closer to the original."
         }
       ],
       "approved_at": null
@@ -174,8 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අ.ජා.කෙ. ආරක්‍ෂණය\" doesn't accurately convey the meaning of \"IP Security.\" It appears to be an abbreviation or acronym that isn't readily understandable to a Sinhala speaker without prior context. \"IP Security\" typically refers to security measures related to IP addresses and network traffic.",
-          "suggestion": "A more appropriate translation would be something like \"IP ලිපිනය ආරක්ෂණය\" (IP lipinaya arakshaya) which translates to 'IP address security'. Alternatively, \"IP ආරක්ෂණ සැකසුම්\" (IP arakshana sakasum) meaning 'IP security settings' could be suitable depending on the context."
+          "description": "The Sinhala translation \"අ.ජා.කෙ. ආරක්‍ෂණය\" is an abbreviation and doesn't directly translate to \"IP Security\". It likely represents \"IP Address Configuration Security\", but the direct translation is missing.",
+          "suggestion": "Consider a more direct translation like \"IP ආරක්ෂණය\" (IP Arakshaya) or \"IP ලිපිනය ආරක්ෂණය\" (IP Lipinaya Arakshaya) to better reflect the meaning of \"IP Security\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The abbreviation \"අ.ජා.කෙ.\" is not standard and could be confusing for users.  It should be clarified or expanded.",
+          "suggestion": "If abbreviations are necessary, ensure they are widely understood within the target audience. Consider expanding to the full term or avoiding abbreviations altogether."
         }
       ],
       "approved_at": null
@@ -198,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"IP безбедност\" is a literal transliteration of \"IP Security\" but \"bezbednost\" typically translates to \"security\" in a broader sense. A more accurate translation considering the context of settings would be \"IP sigurnost\".",
-          "suggestion": "IP sigurnost"
+          "description": "The Serbian (Cyrillic) translation \"IP безбедност\" is a valid translation of 'IP Security', but 'bezbednost' typically refers to overall safety or security, not specifically IP security. A more precise translation might be \"IP сигурност\" or \"Заштита IP адресе\".",
+          "suggestion": "Consider using \"IP сигурност\" or \"Заштита IP адресе\"."
         }
       ],
       "approved_at": null

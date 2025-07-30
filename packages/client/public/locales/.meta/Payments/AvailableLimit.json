@@ -3,7 +3,7 @@
   "content": "<1>Available limit under current plan:</1> {{amount}}",
   "content_en_sha1_hash": "af7ce86f804a4b2e0bd398705d8d726320d4a33a",
   "created_at": "2025-06-24T16:31:06.565Z",
-  "updated_at": "2025-07-01T15:57:36.033Z",
+  "updated_at": "2025-06-30T12:20:31.270Z",
   "comment": {
     "text": "This translation key is used to display the available data limit under a current plan. It is typically used in a storage tariff deactivation dialog, showing the user the amount of space they have left on their plan.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
       "line_number": 139,
-      "context": "</Text>\n <Text>\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"AvailableLimit\"\n values={{\n amount: getConvertedSize(t, maxTotalSizeByQuota),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,",
+      "context": "</Text>\n <Text>\n <Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"AvailableLimit\"\n values={{\n amount: getConvertedSize(t, maxTotalSizeByQuota!),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,",
       "module": "/packages/client"
     }
   ],

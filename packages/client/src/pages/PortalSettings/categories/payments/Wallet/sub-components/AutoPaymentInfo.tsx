@@ -73,8 +73,8 @@ const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
       <div className={styles.autoPaymentEditing}>
         <Text>
           {t("WhenBalanceDropsTo", {
-            min: formatWalletCurrency(minBalance, 0),
-            max: formatWalletCurrency(upToBalance, 0),
+            min: formatWalletCurrency!(minBalance, 0),
+            max: formatWalletCurrency!(upToBalance, 0),
           })}{" "}
           {isPayer ? (
             <Link onClick={onOpen} textDecoration="underline">

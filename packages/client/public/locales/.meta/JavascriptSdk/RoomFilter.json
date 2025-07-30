@@ -3,7 +3,7 @@
   "content": "Room Filter",
   "content_en_sha1_hash": "5355ac853f1f1ec5bb8bb293e0fe01435ebea810",
   "created_at": "2025-05-19T21:30:54.624Z",
-  "updated_at": "2025-07-01T15:57:36.206Z",
+  "updated_at": "2025-05-24T09:00:44.630Z",
   "comment": {
     "text": "This translation key is used to display the label for a toggle button that filters rooms. It appears as part of a UI component in the \"Common:Member\" section, and its purpose is to allow users to select or deselect room filtering options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 463,
+      "line_number": 458,
       "context": ")\n ) : null}\n </>\n ) : (\n <>\n <Label className=\"label\" text={t(\"RoomFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Member\")}\n onChange={toggleMembers}\n isChecked={isUserFilterSet}",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"تصفية الغرفة\" (Tasfiyat al-Ghurfa) is a literal translation of 'Room Filter', it doesn't quite convey the intended meaning. 'Filter' in this context refers to a mechanism for refining or selecting rooms, not simply 'filtering' a room itself. It is likely a direct translation without understanding the underlying concept.",
-          "suggestion": "Consider a more contextually accurate translation like \"مرشح الغرف\" (Murashshih al-Ghuraf), which means 'Room Filter' in the sense of a selection tool, or \"أدوات تصفية الغرف\" (Adawat Tasfiyat al-Ghuraf) meaning 'Room Filtering Tools'."
+          "description": "The translation 'تصفية الغرفة' literally translates to 'Room Filtering'. While understandable, it's not the most natural or common phrasing for 'Room Filter' in Arabic.  'مرشح الغرفة' would be a more accurate and idiomatic translation, reflecting the function of a filter.",
+          "suggestion": "مرشح الغرفة"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Սենյակի Զտիչ\" is a literal translation, \"Room Filter\" often implies a function or setting. A more accurate translation might convey that meaning.",
-          "suggestion": "Consider alternatives like \"Ժյամանակացույցի ֆիլտր\" (Time Filter) or a more descriptive phrase depending on the context of its use within the Javascript SDK."
+          "description": "While \"Սենյակի Զտիչ\" is a literal translation, it's not the most natural or idiomatic way to express 'Room Filter' in Armenian. It sounds somewhat technical and clunky.",
+          "suggestion": "Consider alternatives like \"Դրանքի ֆիլտր\" (Dranqi filtr) - 'Door Filter' which is a more commonly understood term for a room access filter, or rephrase the context to better define what the filter does."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫ້ອງກັ່ນ\" (hong gan) literally translates to 'room filter' but may not be the most natural or understandable term for 'Room Filter' in a software context. It might be perceived as too literal. A more contextually appropriate term might be needed, depending on the function of the 'Room Filter'.",
-          "suggestion": "Consider alternatives like \"ຕົວປ່ຽນແກ້ງຫ້ອງ\" (tua pian ngae hong - room adjuster/modifier), \"ຕົວຄັ່ນຫາຫ້ອງ\" (tua khahn ha hong - room searcher/finder), or consult with a Lao language expert familiar with software terminology."
+          "description": "The Lao translation \"ຫ້ອງກັ່ນ\" (hong gan) translates to 'room filter' literally, but in the context of a Javascript SDK, it might be better to convey the meaning of 'filter' as a selection tool or criteria. 'ຫ້ອງກັ່ນ' might sound too technical or have unintended connotations.",
+          "suggestion": "Consider a translation that conveys the meaning of 'filter' as a selection tool, such as 'ຕົວເລືອກຫ້ອງ' (tua leuak hong - room options/selection) or 'ການຄັ່ງເອົາຫ້ອງ' (gan khang ao hong - filtering rooms). The best option would depend on the specific functionality."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"කාමර පෙරහන\" is a literal translation of \"Room Filter,\" it might sound slightly awkward or less natural in Sinhala. \"කාමර පෙරහුම්\" (Kamara Peruhum) might be a more common and idiomatic way to express 'Room Filter' in certain contexts, particularly if it refers to a tool or system for filtering rooms.",
-          "suggestion": "Consider \"කාමර පෙරහුම්\" (Kamara Peruhum) as an alternative, depending on the specific context."
+          "description": "While \"කාමර පෙරහන\" is a literal translation, \"පෙරහන\" (perahana) typically refers to a filter for something like water or liquids. A more appropriate translation for 'Room Filter' in the context of a Javascript SDK might be something indicating a tool for selecting or refining rooms.",
+          "suggestion": "කාමර තෝරාදුන්න"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Filter sob\" is not a correct or natural translation of \"Room Filter.\" \"Sob\" means \"room\" but doesn't convey the concept of filtering rooms. It's a literal, but nonsensical, translation.",
-          "suggestion": "A more accurate translation would be something like \"Filter prostorov\" (Filter of spaces/rooms) or \"Prostorski filter\" (Room filter)."
+          "description": "The translation 'Filter sob' is not an accurate translation of 'Room Filter'. 'Sob' means 'about' or 'regarding'. It doesn't convey the meaning of a filter for rooms.",
+          "suggestion": "A more appropriate translation would be something like 'Filtri prostorov' or 'Kriteriji za prostore'."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Филтер Просторије\" is a literal translation of \"Room Filter\" but doesn't quite convey the intended meaning in a natural way. \"Prostorije\" refers to rooms in a building, while \"Room Filter\" typically refers to a filter used to search or narrow down options for rooms. A more accurate translation would consider the function of the filter.",
-          "suggestion": "A better translation might be something like \"Филтар простора\" (Filter of spaces) or potentially a more descriptive phrase depending on the specific context of its usage."
+          "description": "The translation \"Филтер Просторије\" while technically accurate, isn't the most natural or idiomatic translation of \"Room Filter\" in Serbian. \"Просторна Фитра\" or \"Филтрирање Просторија\" would be more common and flow better in context.",
+          "suggestion": "Consider \"Просторна Фитра\" or \"Филтрирање Просторија\" for a more natural translation."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Filter Prostorije\" is a literal translation, a more natural and idiomatic translation for 'Room Filter' in Serbian (Latin) would be \"Filtriranje Soba\" or \"Kriterijumi za Sobe\". \"Filter Prostorije\" sounds slightly awkward and might not be immediately understood by Serbian speakers.",
-          "suggestion": "Consider 'Filtriranje Soba' or 'Kriterijumi za Sobe'."
+          "description": "While 'Filter Prostorije' is a literal translation, 'Prostorije' refers to rooms in a building, not simply 'rooms' in a more general sense. 'Filter sobe' would be a more accurate translation depending on the context.",
+          "suggestion": "Filter sobe"
         }
       ],
       "approved_at": null

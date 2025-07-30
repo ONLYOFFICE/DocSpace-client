@@ -3,7 +3,7 @@
   "content": "Create sample Editor embed",
   "content_en_sha1_hash": "6275f4c2aaf8b2179793a98c49222a86f56c560e",
   "created_at": "2025-05-19T21:30:54.394Z",
-  "updated_at": "2025-05-21T09:28:31.899Z",
+  "updated_at": "2025-05-24T09:40:41.951Z",
   "comment": {
     "text": "This translation key is used for the header title \"Create Sample Editor\" in a JavaScript SDK preset editor. It appears as the main heading of an editor preset settings container, guiding users to create a sample editor embed.",
     "is_auto": true,
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Redaktor yerləşdirmə nümunəsi yaradın\" doesn't fully capture the meaning of 'Create sample Editor embed'. 'Embed' is missing a more precise equivalent. 'Yerləşdirmə' is closer to 'placement' or 'insertion', but 'embed' suggests integrating something into a larger context.",
-          "suggestion": "Redaktor nümunəsinin inteqrasiyası yaradın"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation reads a bit awkwardly. While grammatically correct, it could be phrased more naturally in Azerbaijani.",
-          "suggestion": "Nümunə redaktorunu inteqrasiya edin"
+          "description": "The translation \"Redaktor yerləşdirmə nümunəsi yaradın\" is a literal translation and doesn't convey the intended meaning of 'Create sample Editor embed' naturally in Azerbaijani. It sounds somewhat awkward.",
+          "suggestion": "Consider a more natural phrasing like \"Nümunə redaktor yerləşdirməsi yarat\". or \"Redaktor yerləşdirməsi üçün nümunə yaradın\"."
         }
       ],
       "approved_at": null
@@ -53,13 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Създайте примерен вграден Редактор\" is a literal translation and doesn't quite capture the intended meaning of 'Create sample Editor embed'. 'Embed' isn't directly translated, which can be confusing.",
-          "suggestion": "Създаване на примерен редактор за вграждане"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'Редактор' (Editor) might be better presented with a capital letter depending on the context of its use.",
-          "suggestion": "Създаване на примерен вграден Редактор"
+          "description": "The translation 'Създайте примерен вграден Редактор' is not the most natural or accurate translation of 'Create sample Editor embed'. While technically correct, it's a bit clunky. 'Вграден' directly translates to 'embedded', but in this context, it's better conveyed with a more natural phrasing.",
+          "suggestion": "Създайте примерен редактор за вграждане"
         }
       ],
       "approved_at": null
@@ -70,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Create sample Editor embed' doesn't directly translate to 'Vytvořit vzorové vložení editoru'. 'Embed' is a technical term and a more accurate translation might be 'vložení' or 'integraci'.  'Vzorové' accurately captures 'sample', but the overall flow feels slightly awkward.",
-          "suggestion": "Consider 'Vytvořit vzorový editor' or 'Vytvořit ukázkový editor' which might be more natural."
+          "description": "The term 'embed' isn't directly translated. 'Vložení' (insertion) is a reasonable substitute, but a more literal translation or a phrase that better conveys the idea of embedding (e.g., 'integrovat') might be preferable depending on the context of the JavascriptSdk.",
+          "suggestion": "Consider 'Vytvořit integrovaný editor' or 'Vytvořit ukázkový editor pro vložení'."
         }
       ],
       "approved_at": null
@@ -79,7 +69,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Editor embed' isn't directly translated. 'Einbettung' is a correct translation for 'embed,' but the structure could be improved for better flow.",
+          "suggestion": "Beispiel-Editor erstellen"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the current translation feels slightly awkward. Adding an article ('einen') before 'Editor' could improve readability, but a more concise option is preferred.",
+          "suggestion": "Beispiel-Editor erstellen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -88,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Δημιουργία δείγματος ενσωμάτωσης Προγράμματος επεξεργασίας\" is a bit literal and could be improved for naturalness. 'Editor' is typically translated as 'Επεξεργαστής' rather than 'Πρόγραμμα επεξεργασίας'. 'Embed' isn't directly translated, but implied by the context.",
-          "suggestion": "Δημιουργία δείγματος Επεξεργαστή"
+          "description": "The translation 'Δημιουργία δείγματος ενσωμάτωσης Προγράμματος επεξεργασίας' is a literal translation and might not be the most natural way to express 'Create sample Editor embed' in Greek. 'Embed' is a technical term that might require a more specific translation.",
+          "suggestion": "Consider a more natural phrasing like 'Δημιουργία ενσωματωμένου δείγματος επεξεργαστή' or 'Δημιουργία δείγματος επεξεργαστή για ενσωμάτωση', depending on the desired emphasis and context."
         }
       ],
       "approved_at": null
@@ -100,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Crear ejemplo de la incrustación del editor' is a bit literal and doesn't flow naturally in Spanish. 'Incrustación' is not the most common term for 'embed' in this context.",
-          "suggestion": "Consider a more natural translation like 'Crear un editor de ejemplo' or 'Crear editor de muestra'."
+          "description": "The translation \"Crear ejemplo de la incrustación del editor\" is not the most natural or accurate rendering of \"Create sample Editor embed.\" The word 'incrustación' (embedding) is somewhat technical and not commonly used in this context. A more suitable translation would emphasize 'example' or 'demo'.",
+          "suggestion": "Crear editor de ejemplo"
         }
       ],
       "approved_at": null
@@ -112,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Luo esimerkki Editori-upotuksesta\" is not the most natural or accurate translation of \"Create sample Editor embed\". 'Editori' isn't typically used in this context. 'Editorin sisällön upotus' or 'Luo esimerkkitoimittajan upotus' would be more appropriate.",
-          "suggestion": "Luo esimerkkitoimittajan upotus"
+          "description": "The translation 'Luo esimerkki Editori-upotuksesta' is a literal translation but doesn't quite capture the meaning of 'Create sample Editor embed' in a natural Finnish way. 'Editori' is acceptable, but 'upotuksesta' isn't the most fluent option for 'embed' in this context. It translates more to 'from an embedding'.",
+          "suggestion": "Consider alternatives like 'Luo esimerkkitoimittajan upotus' (Create sample editor embedding) or 'Luo esimerkkitoimittajan sisällytys' (Create sample editor inclusion) depending on the desired nuance. A simpler option would be 'Luo esimerkkitoimittaja' if the 'embed' functionality isn't critical to convey."
         }
       ],
       "approved_at": null
@@ -124,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Créer un exemple d'intégration dans l'éditeur\" doesn't fully capture the meaning of \"Create sample Editor embed\". \"Embed\" implies inserting something into a larger context, which is not clearly conveyed. \"Intégration\" is close, but 'incorporation' or 'insertion' might be more precise depending on the desired nuance.",
-          "suggestion": "Créer un exemple d'éditeur inséré/incorporé"
+          "description": "The English phrase 'Create sample Editor embed' implies creating an embedded editor that serves as an example. The French translation 'Créer un exemple d'intégration dans l'éditeur' leans more towards creating an example *of* an editor integration, rather than creating the embedded example editor itself. 'Embed' doesn't have a direct and easily understood equivalent in this context.",
+          "suggestion": "Créer un éditeur exemple intégré"
         }
       ],
       "approved_at": null
@@ -136,13 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ստեղծել օրինակելի խմբագրիչի ներդրում' doesn't accurately convey the meaning of 'Create sample Editor embed'. 'Օրինակելի' implies 'exemplary' or 'typical' rather than 'sample'. 'Ներդրում' (contribution/investment) isn't the best fit for 'embed'.",
-          "suggestion": "Consider a translation closer to 'Ստեղծել օրինակ խմբագրիչի դրամարկետում' (Create sample editor embed) or 'Ստեղծել օրինակելի խմբագրիչի միացում' (Create sample editor connection/integration)."
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'միացում' or 'դրամարկետում' might be better stylistic choices depending on the desired level of formality.",
-          "suggestion": "Consider alternatives based on context, such as 'միացում' (connection) or 'դրամարկետում' (embedding)."
+          "description": "The Armenian translation 'Ստեղծել օրինակելի խմբագրիչի ներդրում' doesn't fully capture the meaning of 'Create sample Editor embed'. 'Ներդրում' translates to 'investment' or 'contribution', which isn't the correct term for an embed.  'Embed' implies a component or object integrated into another system, which isn't conveyed.",
+          "suggestion": "A more accurate translation would be something like 'Ստեղծել օրինակելի խմբագրիչի միավոր' (Stegtsel orinakeli xmbagrichi miavor) or 'Ստեղծել օրինակելի խմբագրիչի դրույթ' (Stegtsel orinakeli xmbagrichi drouyt). 'Միավոր' implies a unit or component and 'դրույթ' implies a placement or addition."
         }
       ],
       "approved_at": null
@@ -150,13 +146,25 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Crea un campione di incorporamento dell'Editor' is not the best rendering of 'Create sample Editor embed'. 'Incorporamento' (embedding) isn't the most natural way to describe the act of including or creating an editor in a page. A more direct translation would convey the intent better.",
+          "suggestion": "Consider alternatives like 'Crea editor di esempio' or 'Crea editor campione'."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"埋め込みエディタのサンプルを作成する\" (Ume komi editora no sanpuru o sakusei suru) is a bit literal and could be more naturally expressed. While technically correct, it sounds slightly awkward in Japanese. 'Create sample Editor embed' implies a tool creation, not just a sample.",
+          "suggestion": "Consider a more fluent phrasing like \"サンプルエディタの作成\" (Sanpuru editora no sakusei) or \"エディタのサンプル版を作成する\" (Editora no sanpuru ban o sakusei suru)."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '샘플 편집기 임베드 생성' is a literal translation of 'Create sample Editor embed' but doesn't fully capture the intended meaning in a natural Korean way. 'Embed' in this context implies integrating something into another application or website. A more natural translation might convey that process.",
-          "suggestion": "샘플 편집기 삽입 코드 생성"
+          "description": "The translation '샘플 편집기 임베드 생성' is a literal translation of 'Create sample Editor embed.' However, it doesn't convey the intended meaning as naturally in Korean. '임베드 생성' is a bit awkward; it suggests the *creation* of an embed rather than the embed itself.",
+          "suggestion": "샘플 편집기 삽입 (Sample Editor insertion) or 샘플 편집기 포함 (Sample Editor inclusion)."
         }
       ],
       "approved_at": null
@@ -174,7 +182,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ສ້າງຕົວຢ່າງຕົວແກ້ໄຂທີ່ຝັງ' is a literal translation and may not convey the intended meaning of 'Create sample Editor embed'.  'ຝັງ' implies embedding the editor itself, whereas the English suggests creating a sample editor.",
+          "suggestion": "Consider a translation that focuses on 'creating a sample editor,' such as 'ສ້າງຕົວຢ່າງຂອງຕົວແກ້ໄຂ' or 'ເຮັດຕົວຢ່າງຕົວແກ້ໄຂ'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -183,8 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izveidot parauga redaktora iegulšanu' is a bit literal and doesn't flow naturally in Latvian. 'iegulšanu' translates to 'embedding' which is accurate but could be phrased better for a more user-friendly feel.",
+          "description": "The translation 'Izveidot parauga redaktora iegulšanu' is a literal translation that doesn't quite convey the meaning of 'Create sample Editor embed'. 'Iegulšana' means 'embedding,' but the original phrase implies the creation of the editor itself. A more natural translation would focus on the creation aspect.",
           "suggestion": "Izveidot parauga redaktoru"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the translation is a bit long and could be more concise for a key name.",
+          "suggestion": "Parauga redaktora izveidošana"
         }
       ],
       "approved_at": null
@@ -192,7 +211,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Create sample Editor embed' is more accurately translated as 'Maak een voorbeeld Editor-inbedding' or 'Creëer een voorbeeld Editor-inbedding'. 'Insluiten maken' is a literal translation that doesn't quite capture the meaning of embedding something.",
+          "suggestion": "Maak een voorbeeld Editor-inbedding"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -207,13 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Criar incorporação de editor de amostra' doesn't fully capture the meaning of 'Create sample Editor embed'. 'Embed' refers to integrating something into a larger context. A more accurate translation would convey that.",
+          "description": "The translation \"Criar incorporação de editor de amostra\" doesn't perfectly capture the meaning of \"Create sample Editor embed.\" \"Incorporação\" implies embedding, but it's a bit formal. A more natural phrasing might be something like \"Criar editor de amostra incorporado\" or \"Criar um editor de amostra incorporado\".",
           "suggestion": "Criar editor de amostra incorporado"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'incorporação' can be slightly ambiguous. While technically correct, it might not be the most natural-sounding phrasing for a user who's trying to understand what this function does.",
-          "suggestion": "Criar editor de amostra integrado"
         }
       ],
       "approved_at": null
@@ -224,8 +244,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Criar incorporação de editor de amostra\" doesn't fully capture the meaning of 'Create sample Editor embed'. \"Incorporação\" implies embedding something *into* something else, whereas the original phrase suggests creating the editor itself.",
-          "suggestion": "Consider a more direct translation like \"Criar editor de amostra\" or \"Criar um editor de amostra\" (Create a sample editor)"
+          "description": "The translation 'Criar incorporação de editor de amostra' doesn't fully capture the meaning of 'Create sample Editor embed'. 'Incorporação' (embedding) is correct, but 'Create' is a bit awkward. A more natural phrasing would convey the action of generating or setting up the editor.",
+          "suggestion": "Criar editor de amostra incorporado"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'editor de amostra incorporado' could be split for better readability.",
+          "suggestion": "Criar editor de amostra e incorporá-lo"
         }
       ],
       "approved_at": null
@@ -236,13 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Create sample Editor embed\" implies creating an embedded editor as an example. \"Creare exemplu Editor pentru încorporare\" translates literally to 'Create example Editor for embedding,' which is a bit awkward and doesn't quite capture the intended meaning. A more natural translation would emphasize the 'example' aspect of the editor.",
-          "suggestion": "Creare editor exemplu pentru demonstrație"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the Romanian translation uses a full stop after 'Editor', which isn't standard.  It reads a bit stiff.",
-          "suggestion": "Creare exemplu Editor pentru încorporare"
+          "description": "The translation 'Creare exemplu Editor pentru încorporare' is a literal translation but doesn't flow naturally in Romanian. 'Editor' should be translated as 'editor' to maintain consistency with English technical terms. Also, 'pentru încorporare' is somewhat clunky. A more natural phrasing would be 'pentru integrare'.",
+          "suggestion": "Creare editor exemplu pentru integrare"
         }
       ],
       "approved_at": null
@@ -253,8 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Создать образец встраивания Редактора\" is not the most natural or accurate translation of 'Create sample Editor embed'. 'Встраивание' refers to embedding itself, not the creation of it. It also sounds a bit clunky.",
-          "suggestion": "Создать встроенный образец редактора"
+          "description": "The translation 'Создать образец встраивания Редактора' is not the most natural or accurate translation of 'Create sample Editor embed'. 'Встраивания' implies embedding something *into* something else, which isn't directly reflected in the English phrase. A more direct translation would focus on creating the editor itself.",
+          "suggestion": "Создать пример Редактора (Create example Editor)"
+        },
+        {
+          "type": "formatting",
+          "description": "The capitalization of 'Редактора' should be considered. While 'Редактор' is correct, using 'Редактора' in the genitive case might be overly formal or technically specific depending on the surrounding context. It suggests the creation of an *example of* an editor, rather than the editor itself.",
+          "suggestion": "Consider using 'Создать пример Редактора' instead if a less formal tone is preferred."
         }
       ],
       "approved_at": null
@@ -265,8 +290,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාවද්දන ආදර්ශ සංස්කරකය සාදන්න' while technically meaning 'Create a guiding sample editor,' doesn't accurately convey the meaning of 'Create sample Editor embed'. 'කාවද්දන' (guiding) introduces an element not present in the original. The focus should be on creating/generating a sample editor, not guiding one.",
-          "suggestion": "සාදන්න ආදර්ශ සංස්කරකය"
+          "description": "The translation 'කාවද්දන ආදර්ශ සංස්කරකය සාදන්න' doesn't fully capture the meaning of 'Create sample Editor embed'. 'කාවද්දන' implies something is being presented or displayed, whereas 'create' suggests generating something new. 'Embed' is also missing.",
+          "suggestion": "සාම්පල ආදර්ශ සංස්කරකය සාදන්න (Sample aadarsya sanskarakaa saaddanna) or ආදර්ශ සංස්කරකය ස්ථාපනය කරන්න (Aadarsya sanskarakaa sthaapana karanna - Install sample editor)"
         }
       ],
       "approved_at": null
@@ -277,13 +302,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vytvoriť vzor vloženia pre Editor\" doesn't quite capture the meaning of \"Create sample Editor embed.\" \"Vloženia\" (insertion) is not the best fit.  It suggests embedding something *into* an editor, rather than creating a sample editor itself.  The English implies creating a basic, example editor.",
-          "suggestion": "Vytvoriť ukážkový Editor"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a single word \"ukážkový\" for 'sample' flows better in Slovak in this context compared to 'vzor'.",
-          "suggestion": "Consider using 'ukážkový' instead of 'vzor'."
+          "description": "The translation 'Vytvoriť vzor vloženia pre Editor' doesn't fully capture the meaning of 'Create sample Editor embed'. 'Vloženia' implies insertion, but 'embed' suggests a more integrated component. A more accurate translation might convey the idea of creating a ready-to-use editor component.",
+          "suggestion": "Vytvoriť ukážkový editor na vloženie"
         }
       ],
       "approved_at": null
@@ -300,8 +320,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Направи пример уградње Уређивача\" doesn't accurately convey the meaning of \"Create sample Editor embed.\" \"Уградње\" (installation) is not the best fit for \"embed.\" It implies physically installing something, whereas \"embed\" refers to integrating into a webpage or application.",
-          "suggestion": "Направи пример уграђеног Уређивача"
+          "description": "The translation \"Направи пример уградње Уређивача\" doesn't accurately convey the meaning of \"Create sample Editor embed.\" \"Уградње\" (embedding/installation) is not the primary action being described. It implies the act of installing or embedding, rather than creating a sample.",
+          "suggestion": "Направи пример Уређивача"
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, \"Уређивача\" could be more consistently used as \"Уређивачa\" (genitive case). Although 'Уређивача' is acceptable in some contexts, using the more standard genitive would enhance readability and consistency.",
+          "suggestion": "Направи пример Уређивачa"
         }
       ],
       "approved_at": null
@@ -312,13 +337,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Napravi primer ugradnje Uređivača' is a literal translation but doesn't convey the meaning of 'Create sample Editor embed' effectively. 'Embed' implies integration or inclusion within something else. 'Primer ugradnje' focuses more on the example itself rather than the process of embedding it.",
-          "suggestion": "Kreiraj demo integracije Uređivača"
+          "description": "The translation \"Napravi primer ugradnje Uređivača\" doesn't perfectly capture the meaning of \"Create sample Editor embed\". 'Embed' implies integration into another system or webpage, which isn't explicitly conveyed. \"Primer integracije Uređivača\" would be more accurate.",
+          "suggestion": "Primer integracije Uređivača"
         },
         {
           "type": "formatting",
-          "description": "The translation uses lowercase 'uređivača'. Consistent capitalization (Uređivača) for proper nouns (like 'Editor' in English) is recommended.",
-          "suggestion": "Napravi primer ugradnje Uređivača"
+          "description": "The word 'Uređivača' (Editor) is not consistently capitalized. It's a proper noun and should be capitalized throughout.",
+          "suggestion": "Primer integracije Uređivača"
         }
       ],
       "approved_at": null
@@ -326,19 +351,19 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Örnek Editör yerleştirmesi oluştur' while generally understandable, doesn't fully capture the nuance of 'Create sample Editor embed'. 'Yerleştirmesi' implies a complete integration, whereas 'embed' can sometimes mean a simpler inclusion. A better translation would be closer to 'Örnek Editör gömme alanı oluştur' or 'Örnek Editör entegrasyonu oluştur'.",
+          "suggestion": "Consider 'Örnek Editör gömme alanı oluştur' or 'Örnek Editör entegrasyonu oluştur'"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Створити зразок вбудовування редактора\" is not the most natural or accurate translation of \"Create sample Editor embed\". \"Вбудовування\" (embedding) feels a bit formal and technical. A more common and understandable phrasing would be something like \"Створити демо-версію редактора\" or \"Створити приклад редактора\".",
-          "suggestion": "Створити демо-версію редактора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -347,7 +372,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tạo mẫu nhúng Trình chỉnh sửa\" is a bit literal and doesn't quite capture the nuance of \"Create sample Editor embed.\"  'Sample Editor' refers to a pre-built editor. A more natural translation might be something along the lines of 'Tạo trình chỉnh sửa mẫu' or 'Tạo trình chỉnh sửa ví dụ'.",
+          "description": "The translation \"Tạo mẫu nhúng Trình chỉnh sửa\" is not the best translation of \"Create sample Editor embed\". \"Mẫu\" implies a template, which isn't directly conveyed by \"sample\". A more accurate translation might emphasize creation or demonstration.",
           "suggestion": "Tạo trình chỉnh sửa mẫu"
         }
       ],

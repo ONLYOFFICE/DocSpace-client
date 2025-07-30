@@ -3,7 +3,7 @@
   "content": "Sign in",
   "content_en_sha1_hash": "ada2e9e96fa9ce85430225b412068b5b62b79800",
   "created_at": "2025-05-19T21:30:46.309Z",
-  "updated_at": "2025-06-18T07:34:15.025Z",
+  "updated_at": "2025-06-30T12:20:31.382Z",
   "comment": {
     "text": "The \"LoginButton\" translation key is used for the text \"Sign in\", which serves as a label for buttons that trigger user login actions. This text appears in various UI elements, including a header button on the Home page and within a public toast message, inviting users to sign in.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 704,
+      "line_number": 708,
       "context": "}\n />\n {showSignInButton ? (\n <Button\n className=\"header_sign-in-button\"\n label={t(\"Common:LoginButton\")}\n size={ButtonSize.small}\n onClick={onSignInClick}\n isDisabled={signInButtonIsDisabled}\n primary\n />",
       "module": "/packages/client"
     },
@@ -24,26 +24,26 @@
     },
     {
       "file_path": "/packages/login/src/components/ConsentInfo.tsx",
-      "line_number": 68,
-      "context": "className=\"row\"\n fontWeight={600}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n {t(\"Common:LoginButton\")}\n </Text>\n )}\n <img src={logo} className=\"client-logo\" alt=\"client-logo\" />\n <Text\n className=\"row\"",
+      "line_number": 93,
+      "context": "className=\"row\"\n fontWeight={600}\n fontSize=\"16px\"\n lineHeight=\"22px\"\n >\n {t(\"Common:LoginButton\")}\n </Text>\n ) : null}\n <img src={logo} className=\"client-logo\" alt=\"client-logo\" />\n <Text\n className=\"row\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 562,
-      "context": "return (\n <form className=\"auth-form-container\">\n {!emailFromInvitation && !client && (\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"sign-in-subtitle\">\n {t(\"Common:LoginButton\")}\n </Text>\n )}\n \n {client && (\n <OAuthClientInfo",
+      "line_number": 566,
+      "context": "return (\n <form className=\"auth-form-container\">\n {!emailFromInvitation && !client ? (\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"sign-in-subtitle\">\n {t(\"Common:LoginButton\")}\n </Text>\n ) : null}\n \n {client ? (\n <OAuthClientInfo",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 562,
-      "context": "return (\n <form className=\"auth-form-container\">\n {!emailFromInvitation && !client && (\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"sign-in-subtitle\">\n {t(\"Common:LoginButton\")}\n </Text>\n )}\n \n {client && (\n <OAuthClientInfo",
+      "line_number": 566,
+      "context": "return (\n <form className=\"auth-form-container\">\n {!emailFromInvitation && !client ? (\n <Text fontSize=\"16px\" fontWeight=\"600\" className=\"sign-in-subtitle\">\n {t(\"Common:LoginButton\")}\n </Text>\n ) : null}\n \n {client ? (\n <OAuthClientInfo",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
       "line_number": 92,
-      "context": "<Text fontWeight={600} onClick={onClickBack}>\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize={\"16px\"}>\n {t(\"Common:LoginButton\")}\n </Text>\n </div>\n <Text>\n <Trans\n t={t}",
+      "context": "<Text fontWeight={600} onClick={onClickBack}>\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>\n </div>\n <Text>\n <Trans\n t={t}",
       "module": "/packages/login"
     }
   ],
@@ -147,7 +147,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Aanmelden' can be used for signing up, but 'Sign in' typically refers to logging into an existing account. A more accurate translation would be 'Inloggen'.",
+          "suggestion": "Inloggen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -168,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Inscreva-se\" means \"Register\" or \"Subscribe\", not \"Sign in\". \"Sign in\" implies accessing an existing account.",
+          "description": "The translation 'Inscreva-se' typically means 'Register' or 'Subscribe', not 'Sign in'. 'Sign in' implies an existing account, while 'Inscreva-se' implies creating a new one.",
           "suggestion": "Entrar"
         }
       ],
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Autentificare' is a valid Romanian word, but it's a more formal translation of 'Sign in.'  'Autentificare' often implies a more complex authentication process. 'Logare' or 'Conectare' would be more common and natural equivalents for a simple 'Sign in' button.",
-          "suggestion": "Consider 'Logare' or 'Conectare' for a more common and natural translation."
+          "description": "While 'Autentificare' is a valid Romanian word, it's a more formal and less common translation of 'Sign in' in a user interface context. A more natural and user-friendly translation would be 'Conectează-te' or 'Intră'.",
+          "suggestion": "Conectează-te"
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'පිවිසෙන්න' (pivisenna) can mean 'enter' or 'access', it doesn't directly translate to 'Sign in' in the context of a login button. A more appropriate translation would convey the action of logging in.",
-          "suggestion": "Consider alternatives like 'ඇතුළු වන්න' (athuwalu vanna) which means 'enter' or 'log in', or 'පිහිටුවන්න' (pihatuvanna) which conveys the sense of authentication."
+          "description": "While \"පිවිසෙන්න\" (pivisenna) can mean 'enter' or 'sign in', it's not the most natural or common translation for 'Sign in' in a login context. It sounds slightly formal and less user-friendly. A more appropriate translation would be something like \"ලॉगින් වන්න\" (login vanna - literally 'log in') or \"පිහිටුවන්න\" (pihatuvanna - to activate/register/sign in).",
+          "suggestion": "Consider \"ලॉगින් වන්න\" (login vanna) or \"පිහිටුවන්න\" (pihatuvanna) as alternatives.  A more nuanced option might require understanding the specific UI context (e.g., if it's a registration form versus a login)."
         }
       ],
       "approved_at": null
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Пријави се\" is a valid translation of \"Sign in\", but it's more literally \"Apply yourself/Register\".  A more natural and commonly used translation for a login button would be something like \"Уloguj se\" (Uloguj se).",
-          "suggestion": "Уloguj se"
+          "description": "The Serbian (Cyrillic) translation 'Пријави се' is a correct translation of 'Sign in' but might be too literal and lacks nuance for a login button. A more user-friendly option might be 'Улазак' (Entrance/Access) or 'Повежи се' (Connect).",
+          "suggestion": "Consider 'Улазак' or 'Повежи се' for a more natural user experience."
         }
       ],
       "approved_at": null
@@ -240,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Oturum aç' is a literal translation of 'Sign in', but a more natural and common Turkish equivalent would be 'Giriş Yap'. 'Oturum aç' is used in some contexts, but 'Giriş Yap' is generally preferred for a login button.",
-          "suggestion": "Giriş Yap"
+          "description": "While \"Oturum aç\" is a valid translation for 'Sign in', it's not the most natural or common phrasing in Turkish. \"Giriş yap\" is the more widely used and idiomatic equivalent.",
+          "suggestion": "Giriş yap"
         }
       ],
       "approved_at": null

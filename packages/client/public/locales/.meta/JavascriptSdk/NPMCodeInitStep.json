@@ -3,7 +3,7 @@
   "content": "Initialize SDK:",
   "content_en_sha1_hash": "2bda9d083bb490db811118a2ad09a6ea50ce1058",
   "created_at": "2025-05-19T21:30:54.605Z",
-  "updated_at": "2025-05-28T09:30:02.576Z",
+  "updated_at": "2025-05-26T07:57:32.634Z",
   "comment": {
     "text": "This translation key is used to display a localized label for an SDK initialization step. It appears as part of the UI in a code snippet area and indicates where user input should be placed to initialize the SDK.",
     "is_auto": true,
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"قوموا بتهيئة الـ\"SDK\":\" doesn't fully convey the meaning of \"Initialize SDK:\". While 'قوموا بتهيئة' means 'perform initialization', it's a more formal and indirect way of saying 'Initialize'. It also lacks a colon at the end, which is present in the English.",
-          "suggestion": "تهيئة الـ SDK:"
+          "description": "The translation \"قوموا بتهيئة الـ\"SDK:\" is too literal and lacks natural flow in Arabic. \"تهيئة\" (Tah'ee'ah) is a bit formal and \"قوموا بـ\" is not the best way to phrase an instruction. It translates to \"Perform the initialization of the SDK:\" which sounds unnatural.",
+          "suggestion": "بدء تهيئة الـ SDK:"
         },
         {
           "type": "formatting",
-          "description": "The Arabic translation lacks the colon (:) present in the English 'Initialize SDK:'.",
-          "suggestion": "تهيئة الـ SDK:"
+          "description": "The colon at the end of the Arabic translation is not standard practice and might not be aesthetically pleasing.",
+          "suggestion": "بدء تهيئة الـ SDK"
         }
       ],
       "approved_at": null
@@ -44,7 +44,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'SDK-nı işə salın:' while understandable, is not the most natural or accurate translation of 'Initialize SDK:'. 'İşə salın' means 'turn on' or 'start up,' which isn't precisely initialization. A more accurate translation would imply setting up or configuring the SDK.",
+          "suggestion": "SDK-ni başlatın:"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -95,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Սկսել SDK-ն՝' translates literally to 'Start SDK-'. While understandable, a more natural translation would be something like 'Սկզբնավորել SDK-ն' (Initialize SDK) or 'Սկսելու SDK-ն' (To begin SDK). 'Սկսել' is a general 'start', whereas 'սկզբնավորել' specifically means 'initialize'.",
-          "suggestion": "Սկզբնավորել SDK-ն"
+          "description": "The translation \"Սկսել SDK-ն-\" while literally translating to 'Start SDK-', doesn't fully capture the meaning of 'Initialize SDK:'. 'Initialize' implies setting up or preparing something for use, rather than just starting it.",
+          "suggestion": "Consider a translation like \"Սկզբունքավորել SDK-ն\" (to initialize SDK) or \"Սարքել SDK-ն\" (to prepare SDK)."
         }
       ],
       "approved_at": null
@@ -170,7 +176,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'SDK ආරම්භ කරන්න:' is a literal translation of 'Initialize SDK:' which can be improved to convey the meaning more naturally in Sinhala. 'ආරම්භ කරන්න' implies 'to start' which is close, but 'initialize' often has a more specific technical meaning.",
+          "suggestion": "SDK ක්‍රියාත්මක කරන්න:"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -188,7 +200,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Иницијализијуј SDK:' is understandable, a more natural and accurate translation of 'Initialize SDK:' would be 'Подесите SDK:' or 'Иницијализујте SDK:'. 'Иницијализијуј' isn't the most common or idiomatic form.",
+          "suggestion": "Подесите SDK:"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -197,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Inicijalizijuj\" is a valid verb form, \"Inicijalizuj\" is more common and natural-sounding in Serbian when referring to initializing something like an SDK. The suffix '-ij' is less frequently used in this context.",
-          "suggestion": "Inicijalizuj SDK:"
+          "description": "While 'Inicijalizijuj' is technically a valid verb form, 'Inicializuj' is the more common and preferred translation of 'Initialize' in Serbian (Latin script). 'Inicijalizijuj' sounds awkward and less professional.",
+          "suggestion": "Inicializuj SDK:"
         }
       ],
       "approved_at": null

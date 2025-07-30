@@ -3,7 +3,7 @@
   "content": "You can later delete or enable the disabled guests if needed.",
   "content_en_sha1_hash": "67d26028f16e1fa6aeb7ee0d7cbceeb7c5d95f6d",
   "created_at": "2025-05-19T21:30:56.954Z",
-  "updated_at": "2025-05-20T09:37:46.530Z",
+  "updated_at": "2025-05-24T14:17:29.181Z",
   "comment": {
     "text": "This translation key is used for a message that explains how to later manage disabled guests. It appears in a change user status dialog when users can't be enabled as guests and allows administrators to delete or enable them if needed.",
     "is_auto": true,
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Lazım olarsa, deaktiv qonaqları silə və ya aktivləşdirə bilərsiniz' is a bit literal and not the most natural way to express the meaning. It emphasizes the ability to delete/enable, which isn't the main point. A more natural phrasing would focus on the possibility of later actions.",
+          "suggestion": "İstəyinizə uyğun olaraq, deaktiv edilmiş qonaqları sonra silə və ya aktivləşdirə bilərsiniz."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'və ya' (or) is grammatically correct but slightly less fluid than a different phrasing.",
+          "suggestion": "İstəyinizə uyğun olaraq, deaktiv edilmiş qonaqları sonra silə bilərsiniz, ehtiyac duyulsa aktivləşdirə də bilərsiniz."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +74,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'enable the disabled guests' doesn't directly translate to 'activar los invitados desactivados'. A more accurate translation would be 'reactivar los invitados desactivados' or 'volver a activar los invitados desactivados' to convey the idea of re-enabling them.",
+          "suggestion": "Si es necesario, más tarde puede eliminar o reactivar los invitados desactivados."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ottaa käyttöön\" while technically correct, is somewhat clunky and indirect. A more natural Finnish equivalent for 'enable' in this context would be 'aktivoida'.",
+          "suggestion": "Voit myöhemmin tarvittaessa poistaa tai aktivoida käytöstä poistetut vieraat."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +104,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"Disable Guests\" is translated as \"սահմանափակ հնարավորություններով հյուրերին\" which literally means \"guests with limited capabilities.\" While not incorrect, it's less direct and could be misinterpreted. A more direct translation focusing on the 'disabled' state would be clearer.",
+          "suggestion": "Consider translating \"Disable Guests\" as something like \"անգործակալ հյուրերին\" (inactive guests) or \"չեղարկված հյուրերին\" (cancelled guests), depending on the intended meaning of 'disabled' in this context."
+        },
+        {
+          "type": "spelling",
+          "description": "While unlikely a critical issue, the word \"չեղարկված\" (cancelled) could be improved to ensure consistency in terminology if \"disable\" inherently means 'inactive' rather than 'cancelled'.",
+          "suggestion": "Assess and confirm the correct term reflecting \"disabled\" status. If it's an inactive state, ensure consistent terminology is used throughout the application."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +127,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"enable the disabled guests\" doesn't translate perfectly to \"有効にしたり\" (yuukou ni shitari). A more accurate translation would convey the action of re-enabling or restoring the guests to their active state.  \"再有効化する\" (sa-yuukou-ka suru) or \"有効に戻す\" (yuukou ni modosu) would be better choices.",
+          "suggestion": "必要に応じて、無効にしたゲストを後で削除したり、再有効化したりすることができます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -105,13 +145,30 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"ພິການ\" (phikan) typically refers to disability. In this context, 'disabled guests' likely refers to guests who have been temporarily deactivated or hidden, not those with disabilities. This translation could be offensive or misleading.",
+          "suggestion": "Consider using a term like 'ຖືກປິດການໃຊ້ງານ' (thuk pit kan chai ngan) which translates to 'deactivated' or 'disabled (functionally)'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'guests with disabilities' ('viesus ar invaliditāti') is not the most natural or accurate translation of 'disabled guests'. It implies a specific disability, whereas the English refers to guests who have been temporarily disabled in the system.",
+          "suggestion": "Consider using a more neutral phrase like 'atspējotajos viesus' or 'viesus, kurus atspējojis' to indicate guests who have been temporarily disabled in the system."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'atspējotajos' (disabled) should be checked for proper capitalization in the context of UI text. It's possible it should be lowercase 'atspējotajos' to be consistent with other UI elements.",
+          "suggestion": "Check capitalization of 'atspējotajos' in the larger context of the user interface."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +186,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"com deficiência\" (with disability) is not the correct translation for \"disabled\" in this context. It implies a medical condition rather than simply being deactivated in the system. A more accurate translation would convey the concept of deactivated or inactive guests.",
+          "suggestion": "Mais tarde, você pode excluir ou ativar os hóspedes desativados, se necessário."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,13 +210,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"подключить\" (podklyuchit') is not the best translation for \"enable\" in this context. It implies physically connecting something.  \"Активировать\" (aktivirovat') or \"включить\" (vkluchit') would be more accurate for enabling a feature or status.",
+          "suggestion": "При необходимости вы сможете удалить или активировать/включить отключенных гостей позже."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අවශ්‍ය නම්, ඔබට පසුව අක්‍රිය කළ අමුත්තන් මකා දැමීමට හෝ සක්‍රීය කිරීමට හැකිය' is a bit literal and could be improved for natural flow in Sinhala. It directly translates 'if needed' and 'delete or enable'. A more natural phrasing might focus on 'You can later remove or reactivate the disabled guests'.",
+          "suggestion": "ඔබට පසුව අක්‍රිය කළ අමුත්තන් ඉවත් කිරීමට හෝ නැවත ක්‍රියාත්මක කිරීමට හැකිය."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'ඔබට පසුව අක්‍රිය කළ අමුත්තන් ඉවත් කිරීමට හෝ නැවත ක්‍රියාත්මක කිරීමට හැකිය' is a suggested improvement over the provided translation.",
+          "suggestion": "The entire translation is rephrased to offer better flow (See issue 1)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +251,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'обрисати' (obrisati) is technically correct for 'delete', but in the context of enabling/disabling guests, 'уклонити' (ukloniti) might be a more appropriate and common term. 'Обрисати' suggests a permanent deletion which isn't the intended meaning.",
+          "suggestion": "Касније можете уклонити или омогућити онемогућене госте по потреби."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'omogućiti onemogućene goste' is awkward. 'Omogućiti' means 'to enable' which is redundant after 'onemogućene' (disabled).",
+          "suggestion": "Kasnije možete obrisati ili ponovo uključiti onemogućene goste po potrebi."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +287,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'khách đã bị vô hiệu hóa' is a bit clunky and could be improved for naturalness. A more common phrase would be 'khách bị tắt' or 'khách đã tắt'.",
+          "suggestion": "Sau này bạn có thể xóa hoặc kích hoạt khách bị tắt nếu cần."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

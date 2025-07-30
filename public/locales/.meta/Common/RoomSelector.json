@@ -3,7 +3,7 @@
   "content": "Room selector",
   "content_en_sha1_hash": "19415158fe52171efbd6c6c03e13605aae21b7db",
   "created_at": "2025-05-19T21:30:48.245Z",
-  "updated_at": "2025-07-02T07:49:19.815Z",
+  "updated_at": "2025-05-26T07:57:32.564Z",
   "comment": {
     "text": "The \"RoomSelector\" translation key is used to describe a room selection component in the Portal Settings, likely appearing on buttons or labels within the UI. This description will help users understand the purpose of selecting a room in this context.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 495,
+      "line_number": 488,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_room-selector\",\n key: \"7-1-2\",\n icon: \"\",\n link: \"room-selector\",\n tKey: \"Common:RoomSelector\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_file-selector\",\n key: \"7-1-3\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -51,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Výběr místnosti' is understandable, it's a more literal translation of 'Room Selection'. 'Room selector' implies a tool or interface. A more natural translation capturing the intended meaning would be 'Volba pokoje' or 'Vyber pokoje'.",
-          "suggestion": "Volba pokoje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -93,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Սենյակի ընտրիչ\" is a literal translation, it's a bit clunky and not the most natural way to say \"room selector\" in Armenian. It reads very technically.",
+          "suggestion": "Consider a more natural phrasing like \"Ժամանման վայրի ընտրություն\" (Jamanman vrayri enqrut'yun) or a simplified \"Դրանի ընտրություն\" (Drani enqrut'yun) - depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ルームセレクタ' is a direct transliteration of \"Room selector\" and doesn't convey the intended meaning in a natural Japanese way. A more appropriate translation would consider the function of the selector.",
-          "suggestion": "部屋選択 (Heya Sentaku) - which means 'Room Selection'"
+          "description": "The translation 'ルームセレクタ' is a transliteration of 'room selector' and doesn't convey the meaning accurately in Japanese. A more natural and accurate translation would be something like '部屋選択' (heya sentaku) or '部屋選択機能' (heya sentaku kinou).",
+          "suggestion": "部屋選択 (heya sentaku) or 部屋選択機能 (heya sentaku kinou)"
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'Kamer selectie' is a literal translation and doesn't flow naturally in Dutch. A more natural translation would be 'Keuze van kamer' or 'Kamers selecteren'.",
-          "suggestion": "Keuze van kamer"
+          "description": "While 'Kamer selectie' is understandable, a more natural and idiomatic Dutch translation for \"Room selector\" would be \"Kamerskiezer\" or \"Keuzelijst voor kamers\". 'Kamer selectie' is a literal translation, and less common in this context.",
+          "suggestion": "Kamerskiezer"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Selector Sală\" is understandable, a more natural and accurate translation of \"Room selector\" in Romanian would be \"Selectoare de încăperi\" or \"Selector de camere\". \"Sală\" generally refers to a large room or hall, not a room in a house or building.  The use of 'Selector' is correct, but 'Sală' doesn't quite convey the intended meaning.",
-          "suggestion": "Selectoare de încăperi"
+          "description": "The translation \"Selector Sală\" is technically correct, but \"Selector de Săli\" would be more natural and idiomatic in Romanian when referring to a room selector.",
+          "suggestion": "Selector de Săli"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කාමර තෝරනය\" (kamara thoranaya) while literally meaning 'room selection', doesn't quite capture the nuance of 'room selector' which implies a component or tool. A more accurate translation might emphasize the function of selecting rooms.",
-          "suggestion": "කාමර තෝරා ගන්නනය (kamara thora gana naya) - 'Room selection tool/method' or කාමර තෝදන (kamara thodana) - 'Room selector' (more compact)"
+          "description": "While \"කාමර තෝරනය\" is understandable, it's a literal translation and not the most natural way to say \"room selector\" in Sinhala. A more idiomatic translation would be something like \"මාර්ගගත කාමර තෝරන්නැ\"",
+          "suggestion": "මාර්ගගත කාමර තෝරන්නැ"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Селектор собе' literally translates to 'Selector of room'. A more natural and accurate translation for 'Room selector' in Serbian (Cyrillic) would be 'Избор собе' or 'Бирач собе'.",
-          "suggestion": "Избор собе"
+          "description": "The translation 'Селектор собе' is inaccurate. 'Room' should be translated as 'Соба' (soba) or 'просторија' (prostorija) depending on the context. 'Селектор собе' literally translates to 'Room selector'.",
+          "suggestion": "Consider 'Селектор просторија' or 'Селектор соба'."
         }
       ],
       "approved_at": null
@@ -222,13 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Selektor sobe' is a literal translation but not the most natural way to express 'Room selector' in Serbian. It could be misinterpreted.",
-          "suggestion": "Selektor prostorija"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'sobe' is potentially a plural and a less precise term than 'prostorija'.",
-          "suggestion": "Consider if the context demands a plural. If not, 'prostorija' is better. If it means a list of rooms, 'sobe' could be acceptable but less precise."
+          "description": "The translation \"Selektor sobe\" is not a grammatically correct or accurate translation of \"Room selector.\" \"Soba\" means 'room' in the singular. The correct translation would require a plural form or a more descriptive term.",
+          "suggestion": "Selektor prostorija/Selektor soba (if referring to a specific type of room)/Selektor prostora"
         }
       ],
       "approved_at": null

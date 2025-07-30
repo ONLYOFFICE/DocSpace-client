@@ -3,7 +3,7 @@
   "content": "Embed an editor to allow users to edit a file from the corresponding room.",
   "content_en_sha1_hash": "32913a45c6a8b77e42aaaa77a1a61404b655b83b",
   "created_at": "2025-05-19T21:30:54.459Z",
-  "updated_at": "2025-05-21T09:14:09.522Z",
+  "updated_at": "2025-05-24T09:26:08.336Z",
   "comment": {
     "text": "This translation key is used to describe an editor feature that allows users to edit a file from a specific room. It will be displayed as a button or in a dialog, providing context for users when they interact with this functionality.",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"قم بتضمين محرر للسماح للمستخدمين بتحرير ملف من الغرفة المشابهة\" does not accurately convey the meaning of 'Embed an editor to allow users to edit a file from the corresponding room'. The phrase 'الغرفة المشابهة' (al-ghurfa al-mushabiha) means 'similar room', while the English implies the room specifically associated with the file.",
+          "description": "The phrase \"ال غرفة المشابهة\" (al-ghurfa al-mushabiha) translates to \"the similar room\" which doesn't accurately convey the meaning of \"corresponding room\" from the English content.  It suggests a room that *resembles* another, not the specific, related room.",
           "suggestion": "قم بتضمين محرر للسماح للمستخدمين بتحرير ملف من الغرفة المرتبطة."
         }
       ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İstifadəçilərə həmin otaqdan faylı redaktə etmək üçün redaktor əlavə edin' is a bit literal and doesn't flow naturally in Azerbaijani. A more idiomatic translation would convey the intended meaning more effectively.",
-          "suggestion": "Consider rephrasing to something like: 'İstifadəçilərə, müvafiq otaqda faylı redaktə etmək imkanı verin.' or 'Həmin otaqda fayl redaktəsi üçün bir redaktor yerləşdirin.'"
+          "description": "The translation \"İstifadəçilərə həmin otaqdan faylı redaktə etmək üçün redaktor əlavə edin\" is a bit literal and not the most natural way to phrase this in Azerbaijani. It focuses on *adding* an editor, rather than the editor enabling editing. A better translation would focus on the editor's functionality.",
+          "suggestion": "İstifadəçilərə müvafiq otaqda faylı redaktə etmə imkanı verən redaktor yerləşdirin."
         }
       ],
       "approved_at": null
@@ -66,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vložení editoru, který uživatelům umožní upravovat soubor z příslušné místnosti' is a literal translation and lacks nuance. It's a bit clunky and doesn't flow naturally in Czech. A more natural phrasing would convey the purpose more clearly.",
-          "suggestion": "Přidejte editor, který uživatelům umožní upravovat soubory přímo v dané místnosti."
+          "description": "The translation is a bit literal and could be more natural. 'Vložení editoru...' sounds slightly awkward.  A better flow would focus on the *purpose* of embedding the editor.",
+          "suggestion": "Povolte uživatelům upravovat soubory přímo v místnosti vložením editoru."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'místnosti' (room) is technically correct, but depending on the context of 'room' (is it a virtual room, a physical room?), it could be more accurately translated. Without more context, it's difficult to say.",
+          "suggestion": "Consider if 'prostor' (space) or a more specific term would be more appropriate for the context."
         }
       ],
       "approved_at": null
@@ -96,13 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Upota editori salliaksesi käyttäjien muokata tiedostoa vastaavasta huoneesta' isn't the most natural phrasing in Finnish. 'Vastaavasta huoneesta' sounds a bit clunky. A more idiomatic translation would imply that the editor is associated with a specific room.",
-          "suggestion": "Upota editori, jotta käyttäjät voivat muokata tiedostoa huoneessa."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'Upota' is a valid word, in the context of embedding a UI element, a more common and approachable term might be preferable. It sounds overly formal.",
-          "suggestion": "Lisää editori"
+          "description": "The phrase \"vastaavasta huoneesta\" (from the corresponding room) is somewhat awkward. While technically correct, it's not the most natural phrasing. A more natural translation would convey the idea of editing a file within a specific room or context.",
+          "suggestion": "Upota editori mahdollistaaksesi käyttäjien tiedostonmuokkauksen tietyssä huoneessa/kontekstissa."
         }
       ],
       "approved_at": null
@@ -119,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Տեղադրեք խմբագիր, որը թույլ կտա օգտվողներին խմբագրել ֆայլը համապատասխան սենյակից:\" is a bit literal and can be improved for natural flow in Armenian.  The phrase 'համապատասխան սենյակից' (from the corresponding room) sounds slightly awkward.",
-          "suggestion": "Տեղադրեք խմբագիր, որը թույլ կտա օգտվողներին խմբագրել ֆայլը տվյալ սենյակում:"
+          "description": "The translation \"Տեղադրեք խմբագիր, որը թույլ կտա օգտվողներին խմբագրել ֆայլը համապատասխան սենյակից:\" is a bit literal and could be more natural in Armenian. ' համապատասխան սենյակից' implies 'from the corresponding room', but might sound awkward. A more natural phrasing would be to describe the ability to edit within a room.",
+          "suggestion": "Տեղադրեք խմբագիր, որը թույլ կտա օգտվողներին խմբագրել ֆայլը սենյակում:"
         }
       ],
       "approved_at": null
@@ -128,7 +128,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'incorpora' (incorporate) isn't the best fit for 'embed' in this context. 'Incorpora' implies adding something *into* something else, whereas 'embed' suggests integrating it as a component.  'Integra' or 'aggiungi' would be more accurate alternatives.",
+          "suggestion": "Integra un editor per consentire agli utenti di modificare un file dalla stanza corrispondente."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -137,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"対応するルームからファイルを編集できるようにエディタを埋め込みます\" is technically correct, but it sounds slightly unnatural in Japanese. A more natural phrasing would emphasize the action of providing an editor.",
-          "suggestion": "対応するルームでファイル編集ができるエディタを提供します。"
+          "description": "The translation is technically correct but a bit stiff and less natural. '埋め込みます' (umekomimasu) sounds overly formal in this context. A more natural phrasing would better convey the intended meaning.",
+          "suggestion": "対応するルームからファイルを編集できるエディタを設置します。"
         }
       ],
       "approved_at": null
@@ -149,13 +155,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '임베드하세요' (imbed haseyo) is a transliteration of 'embed' and might not be the most natural way to express the concept in Korean. While understandable, a more idiomatic translation would improve clarity and flow.",
-          "suggestion": "사용자가 해당 방에서 파일을 편집할 수 있도록 편집 기능을 제공하세요."
+          "description": "The translation '임베드하세요' (imbeoduhaseyo) is a transliteration of 'embed' and doesn't convey the meaning naturally in Korean. A more appropriate phrasing would describe the action of adding/integrating an editor.",
+          "suggestion": "해당 방에서 사용자가 파일을 편집할 수 있는 편집기를 추가하거나 통합하세요."
         },
         {
-          "type": "formatting",
-          "description": "The verb '임베드하세요' (imbed haseyo) is imperative and might be a bit abrupt in some contexts. Consider softening it to a suggestion or recommendation depending on the overall tone of the documentation.",
-          "suggestion": "사용자가 해당 방에서 파일을 편집할 수 있도록 편집 기능을 넣어주세요."
+          "type": "grammar",
+          "description": "While grammatically not entirely incorrect, the sentence structure '해당 방에서 사용자가 파일을 편집할 수 있도록 편집기를 임베드하세요' sounds somewhat awkward. It can be improved for better flow.",
+          "suggestion": "해당 방에 파일을 편집할 수 있는 편집기를 추가하여 사용자가 편집할 수 있도록 하세요."
         }
       ],
       "approved_at": null
@@ -181,13 +187,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Osadź edytor, aby umożliwić użytkownikom edytowanie pliku z poziomu odpowiedniego pokoju' is a literal translation but lacks nuance. 'Osadź' (embed) is technically correct, but 'z poziomu' (from the level of) is slightly awkward. A more natural phrasing would be 'aby użytkownicy mogli edytować plik w danym pokoju' or 'aby użytkownicy mogli edytować plik w odpowiednim pokoju'.",
-          "suggestion": "aby użytkownicy mogli edytować plik w odpowiednim pokoju"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -208,13 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Incorporează editor' is a bit awkward. 'Embed' implies integration. A more natural translation would be 'Integrează un editor' or 'Adaugă un editor'.",
-          "suggestion": "Integrează un editor"
+          "description": "The translation 'Incorporează editor' is a bit clunky. 'Incorporează' implies a more forced inclusion rather than a straightforward embedding. A more natural phrasing would be 'Integrează editor' or 'Adaugă un editor'.",
+          "suggestion": "Integrează editor"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'anumită' translates to 'certain' or 'specific'. While not incorrect, 'dintr-o sală' is less precise than conveying the direct association with the room.",
-          "suggestion": "dintr-o cameră"
+          "description": "The phrase 'dintr-o anumită sală' (from a specific room) is too literal and doesn't fully capture the meaning of 'from the corresponding room'. It's somewhat awkward in Romanian.",
+          "suggestion": "din camera respectivă"
         }
       ],
       "approved_at": null
@@ -231,18 +231,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුවක් සංස්කරණය සඳහා ඉඩ දීමට සංස්කරකයක් කාවද්දන්න' doesn't accurately convey the meaning of 'Embed an editor to allow users to edit a file from the corresponding room'. The word 'කාවද්දන්න' (kaawaddan) implies presenting or offering, not embedding. It's also overly formal.",
-          "suggestion": "පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුව සංස්කරණය කිරීමට හැකි පරිදි සංස්කරකය ඇතුළත් කරන්න."
+          "description": "The translation \"පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුවක් සංස්කරණය සඳහා ඉඩ දීමට සංස්කරකයක් කාවද්දන්න\" is not a completely accurate translation of \"Embed an editor to allow users to edit a file from the corresponding room.\" The phrasing is a bit awkward and doesn't flow naturally in Sinhala.  'කාවද්දන්න' implies introducing or presenting, not embedding.",
+          "suggestion": "පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුවක් සංස්කරණය කිරීමට හැකිවන පරිදි සංස්කරකයක් ඇතුළත් කරන්න."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure is slightly awkward. The phrase 'සංස්කරණය කිරීමට හැකි පරිදි' is a bit clunky.",
-          "suggestion": "පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුව සංස්කරණය කිරීමට හැකි වන පරිදි සංස්කරකය ඇතුළත් කරන්න."
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, the lack of punctuation (e.g., a period at the end) makes the sentence feel incomplete.",
-          "suggestion": "පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුව සංස්කරණය කිරීමට හැකි වන පරිදි සංස්කරකය ඇතුළත් කරන්න."
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්ට' (parishreelayakanta) might be better as 'පරිශ්‍රමිකයන්ට' (parishramikayanta) depending on the precise meaning intended.  'පරිශ්‍රීලකයින්ට' seems to imply a devotee or follower, whereas 'පරිශ්‍රමිකයන්ට' refers to users or workers.",
+          "suggestion": "පරිශ්‍රමිකයන්ට"
         }
       ],
       "approved_at": null
@@ -253,8 +248,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vložte editor, aby ste používateľom umožnili upravovať súbor z príslušnej miestnosti.\" could be improved. While technically correct, it sounds a bit clunky and lacks the nuance of the original English. A more natural phrasing might be closer to 'Integrujte editor, aby používatelia mohli upravovať súbor v danej miestnosti.' or 'Zahrňte editor, vďaka ktorému môžu používatelia upravovať súbor z príslušnej miestnosti.'",
-          "suggestion": "Integrujte editor, aby používatelia mohli upravovať súbor v danej miestnosti."
+          "description": "The translation 'Vložte editor, aby ste používateľom umožnili upravovať súbor z príslušnej miestnosti' is a literal translation and doesn't quite convey the intended meaning of 'embed'. A better translation would incorporate the idea of integration or incorporation.",
+          "suggestion": "Integrujte editor, aby ste používateľom umožnili upravovať súbor v danej miestnosti."
         }
       ],
       "approved_at": null
@@ -265,7 +260,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vdelajte urejevalnik' is not the most natural or idiomatic way to express 'Embed an editor'. While technically correct, a more common phrasing would be 'Vstavite urejevalnik' or 'Uredite urejevalnik'. 'Vdelajte' implies embedding something deeply within, which isn't necessarily the intended meaning.",
+          "description": "The translation 'Vdelajte urejevalnik' is a literal and awkward translation of 'Embed an editor'. A more natural Slovenian phrasing would be 'Vstavite urejevalnik' or 'Integrirajte urejevalnik'.",
           "suggestion": "Vstavite urejevalnik"
         }
       ],
@@ -276,14 +271,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Уградите уређивач' is not the best equivalent for 'Embed an editor'. 'Уградите' implies installing or integrating, whereas 'Embed' refers to including something within a larger context. A better translation would be something like 'Унесите уређивач' (Insert an editor) or 'Убаците уређивач' (Place an editor).",
-          "suggestion": "Унесите уређивач / Убаците уређивач"
+          "type": "spelling",
+          "description": "The word 'Уградите' is likely a typo and doesn't accurately convey the intended meaning of 'Embed'.",
+          "suggestion": "Уградите should be Унесите or Уметните"
         },
         {
-          "type": "spelling",
-          "description": "The word 'одговарајуц́е' (odgovarajuće) is spelled correctly, but its usage might be slightly awkward. While technically correct, it sounds a bit formal in this context.",
-          "suggestion": "Consider alternatives like 'посебне' (special) or 'са одговарајућом' (with the appropriate)."
+          "type": "incorrect_translation",
+          "description": "'Уградите' doesn't accurately translate 'Embed'.  'Embed' suggests integrating or including something within a larger system. 'Уградите' implies installing or fitting.",
+          "suggestion": "Consider 'Унесите' (insert) or 'Уметните' (integrate) to better convey the meaning of 'Embed'."
         }
       ],
       "approved_at": null
@@ -294,13 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ugradite uređivač da biste omogućili korisnicima da uređuju datoteku iz odgovarajuće sobe' is not the most natural or accurate translation of 'Embed an editor to allow users to edit a file from the corresponding room'. 'Embed' doesn't have a single, perfect equivalent in Serbian.",
-          "suggestion": "Consider alternatives like 'Uključite uređivač...' or 'Integrirajte uređivač...' to better convey the meaning of 'embed'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'omogućili' has a diacritic mark. While technically correct, it's sometimes omitted in more informal contexts.  Consistency is key.",
-          "suggestion": "Consider whether the diacritic should be consistently applied across all translations. If not, consider removing it to match a broader style."
+          "description": "The translation 'Ugradite uređivač da biste omogućili korisnicima da uređuju datoteku iz odgovarajuće sobe' is a literal translation that doesn't fully capture the intended meaning. 'Embed' implies a deeper integration than just 'installing' (ugradite). A more natural translation would convey the sense of including the editor as a component.",
+          "suggestion": "Integrišite editor da bi korisnici mogli da uređuju datoteku u odgovarajućoj sobi."
         }
       ],
       "approved_at": null
@@ -311,13 +301,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kullanıcıların ilgili odadan bir dosyayı düzenlemelerine izin vermek için bir düzenleyici yerleştirin' is a literal translation but doesn't flow naturally in Turkish. It's overly verbose.",
-          "suggestion": "Kullanıcıların ilgili odadan dosya düzenlemesini sağlamak için bir düzenleyici yerleştirin."
+          "description": "The translation 'Kullanıcıların ilgili odadan bir dosyayı düzenlemelerine izin vermek için bir düzenleyici yerleştirin' is a bit literal and could be improved for naturalness in Turkish. It lacks a more concise and elegant phrasing. 'Yerleştirin' (place/embed) is a bit clunky in this context.",
+          "suggestion": "Kullanıcıların ilgili odadan dosyaları düzenleyebilecekleri bir düzenleyici ekleyin."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'yerleştirin' (place) isn't the most accurate term for embedding a Javascript SDK. It implies a physical placement.",
-          "suggestion": "Kullanıcıların ilgili odadan dosya düzenlemesini sağlamak için Javascript SDK'yı entegre edin."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the translation uses a passive voice construction ('...bir düzenleyici yerleştirin') which is less common and less direct than an active construction. While acceptable, a more active form would improve readability.",
+          "suggestion": "Kullanıcıların ilgili odadan dosyaları düzenleyebilecekleri bir düzenleyici ekleyin."
         }
       ],
       "approved_at": null
@@ -334,8 +324,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nhúng trình chỉnh sửa để cho phép người dùng chỉnh sửa tập tin từ phòng tương ứng' is a literal translation and could be more natural in Vietnamese. 'Tương ứng' can sound a bit formal in this context.",
-          "suggestion": "Nhúng trình chỉnh sửa để người dùng có thể chỉnh sửa tệp tin trong phòng đó."
+          "description": "The translation is technically correct but sounds awkward and not idiomatic Vietnamese. 'Nhúng' (embed) is not the most natural word choice in this context. A more natural phrasing would convey the action of providing an editor.",
+          "suggestion": "Cung cấp trình chỉnh sửa để cho phép người dùng chỉnh sửa tập tin từ phòng tương ứng."
         }
       ],
       "approved_at": null
@@ -346,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '嵌入编辑器，让用户能够从对应的房间编辑文件' is technically correct but slightly awkward and could be more natural. The phrase '让用户能够' is a bit verbose.",
-          "suggestion": "嵌入编辑器，允许用户从对应的房间编辑文件。"
+          "description": "The translation '嵌入编辑器，让用户能够从对应的房间编辑文件' is a bit literal and could be more natural. While technically correct, it doesn't flow as smoothly as it could in Chinese.",
+          "suggestion": "嵌入编辑器，允许用户从相应房间编辑文件。"
         }
       ],
       "approved_at": null

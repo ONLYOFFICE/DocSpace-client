@@ -3,7 +3,7 @@
   "content": "Select user types",
   "content_en_sha1_hash": "e927a3a263b9c357799a240f53e6fae4a0f1665a",
   "created_at": "2025-05-19T21:30:52.590Z",
-  "updated_at": "2025-05-28T09:30:02.502Z",
+  "updated_at": "2025-06-30T12:20:31.404Z",
   "comment": {
     "text": "\"Select user types\" is a label used to describe a step or option in a workflow that allows users to select different types of users. This translation key is used in UI elements such as buttons, dialog titles, and descriptions, where it appears in contexts like data import steps for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 69,
+      "line_number": 68,
       "context": "organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>\n {t(\"Settings:UsersAreRegistered\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 80,
+      "line_number": 79,
       "context": "organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,\n },\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 73,
+      "line_number": 72,
       "context": "organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },\n {\n title: t(\"Settings:SelectUserTypes\"),\n description: isTypeSelectEmpty ? (\n <>\n <b>{t(\"Settings:RolesAreSet\")}</b>\n <div>{t(\"Settings:UsersAreRegistered\")}</div>\n </>",
       "module": "/packages/client"
     },
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Selectare tip de utilizator' is not the most natural or accurate translation of 'Select user types'. While technically correct, it sounds somewhat formal and clunky. A more idiomatic translation would be 'Alege tipuri de utilizatori' or 'Selectează tipuri de utilizatori'.",
-          "suggestion": "Alege tipuri de utilizatori"
+          "description": "The Romanian translation 'Selectare tip de utilizator' is not the most natural or accurate translation of 'Select user types'. 'Selectare' implies a process of selecting, which isn't the direct meaning. 'Tip de utilizator' is correct for 'user type', but the overall phrasing feels awkward.",
+          "suggestion": "Selectați tipurile de utilizatori"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is a less common and slightly awkward way to say 'users'. A more common and natural translation would be 'පරිශ්‍රමකරුවන්' (parishramakarawan).",
-          "suggestion": "පරිශ්‍රමකරුවන්"
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishiilakayin) is a less common and potentially incorrect transliteration of 'users'. A more standard and understandable term would be 'භාවිතකරුවන්' (bhavitakaruwan).",
+          "suggestion": "Replace 'පරිශ්‍රීලකයින්' with 'භාවිතකරුවන්'."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Изабери типове корисника' doesn't fully capture the nuance of 'Select user types'. 'Изабери' means 'Choose' or 'Select', which is acceptable. However, 'типове корисника' translates literally to 'types of users'.  A more natural and accurate translation might be 'Избор типова корисника' which means 'Selection of user types' or 'Одредите типове корисника' which means 'Specify user types'.",
-          "suggestion": "Consider 'Избор типова корисника' or 'Одредите типове корисника'"
+          "description": "The translation 'Изабери типове корисника' while understandable, isn't the most natural or precise translation of 'Select user types'. A more common and idiomatic translation would be 'Избор типова корисника' or 'Одаберите типове корисника'.",
+          "suggestion": "Избор типова корисника"
         }
       ],
       "approved_at": null

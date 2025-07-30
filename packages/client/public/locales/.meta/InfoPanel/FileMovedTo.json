@@ -3,7 +3,7 @@
   "content": "File moved to «{{folderTitle}}»",
   "content_en_sha1_hash": "716a633c94e1d5dc15c4a0419d3856043260511c",
   "created_at": "2025-05-19T21:30:54.816Z",
-  "updated_at": "2025-05-28T09:30:02.425Z",
+  "updated_at": "2025-06-30T12:20:31.337Z",
   "comment": {
     "text": "The translation key \"FileMovedTo\" is used to display a message indicating that a file has been moved to a specific folder. It appears in the UI when a user interacts with an action related to file movement, providing context for translators.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 57,
-      "context": "return t(\"InfoPanel:FileConverted\");\n case \"FileRenamed\":\n return t(\"InfoPanel:FileRenamed\");\n case \"FileMoved\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedCount\", {",
+      "line_number": 60,
+      "context": "return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamed\");\n case FeedActionKeys.FileMoved:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedCount\", {",
       "module": "/packages/client"
     }
   ],
@@ -156,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ප්‍රමාණාර්ථය «{{folderTitle}}» වෙත ගෙනයන ලදී\" is not an accurate translation of \"File moved to «{{folderTitle}}». \"ප්‍රමාණාර්ථය\" (pramaṇārthaya) translates to 'meaning' or 'purpose', which is incorrect in this context. It should convey the action of moving a file.",
-          "suggestion": "A more accurate translation could be something like \"ගොනුව «{{folderTitle}}» වෙත යවා ඇත\" (gonuwa {{folderTitle}} veta yava ata) which translates to 'The file has been sent to {{folderTitle}}' or \"ගොනුව «{{folderTitle}}» වෙත මාරුවන ලදී\" (gonuwa {{folderTitle}} veta maruvan ladi) which means 'The file has been moved to {{folderTitle}}'."
+          "description": "The translation \"ප්‍රමාණාර්ථය «{{folderTitle}}» වෙත ගෙනයන ලදී\" doesn't accurately convey the meaning of \"File moved to «{{folderTitle}}». \"ප්‍රමාණාර්ථය\" (Pramaṇārthaya) means 'meaning' or 'purpose' and is not suitable here. It should convey movement or relocation.",
+          "suggestion": "File moved to «{{folderTitle}}» should be translated as something like «{{folderTitle}}» වෙත ගෙනයන ලදී or «{{folderTitle}}» වෙත යවා ඇත.  A more direct translation for 'moved' could use 'ගෙනයන' (geneya) or 'හරවා ඇත' (haravva ath).  Consider: «{{folderTitle}}» වෙත ගෙනයන ලදී"
         },
         {
           "type": "grammar",
-          "description": "The phrase \"වෙත ගෙනයන ලදී\" (veta gena yan ladi) is a bit awkward in Sinhala and could be phrased more naturally.  While grammatically correct, it doesn't read as fluent.",
-          "suggestion": "Consider rephrasing as \"වෙත යවා ඇත\" (veta yava ata) or \"වෙත මාරුවන ලදී\" (veta maruvan ladi) for a more natural flow."
+          "description": "While not a major error, the passive voice used in the translation (\"was moved\") might sound slightly awkward in Sinhala. While common, a more active construction might be preferred depending on the desired tone.",
+          "suggestion": "Consider a more active construction if appropriate. However, preserving the passive voice is acceptable in this context."
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Датотека премештена у «{{folderTitle}}»' is a literal translation but sounds awkward in Serbian. A more natural phrasing would be 'Фајл премештен у «{{folderTitle}}»' or 'Датотека је премештена у «{{folderTitle}}».",
-          "suggestion": "Фајл премештен у «{{folderTitle}}»"
+          "description": "The Serbian translation 'Датотека премештена у «{{folderTitle}}»' is a literal translation but not the most natural way to express 'File moved to' in Serbian. A more idiomatic translation would use 'премештена је у'.",
+          "suggestion": "Датотека је премештена у «{{folderTitle}}»"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "User quota",
   "content_en_sha1_hash": "e848c684e600a150cf50f9258ca8622add08c8f9",
   "created_at": "2025-05-19T21:30:54.255Z",
-  "updated_at": "2025-05-21T08:10:17.807Z",
+  "updated_at": "2025-05-24T08:24:00.731Z",
   "comment": {
     "text": "The \"User quota\" translation key is used to display a label in UI elements, such as field labels and tooltips. It provides a clear and concise description of the quota setting being configured or edited within the LDAP integration settings.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ποσοστό χρήστη\" while literally meaning \"User percentage\" doesn't fully capture the meaning of \"User quota\". A quota refers to a limit or allowance, not just a percentage. It's a slightly less accurate representation.",
-          "suggestion": "Χώρος χρήστη"
+          "description": "While 'Ποσοστό χρήστη' translates literally to 'User quota/percentage', it doesn't fully capture the meaning of 'quota' in an LDAP context, which refers to a limit or allowance.  'Ποσοστό χρήστη' implies a percentage, not necessarily a limit.",
+          "suggestion": "Consider alternatives like 'Όριο χρήστη' (User limit) or 'Χώρος χρήστη' (User space) depending on the specific LDAP feature being described. The best option would depend on the context of the feature."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ユーザーのストレージ容量\" (user no storage capacity) is a literal translation of 'storage capacity'. While related to 'user quota', it doesn't directly convey the meaning of a quota limit or entitlement. A quota is a defined limit, not just the amount of storage available.",
-          "suggestion": "ユーザーの割り当て容量 (user no allokate youryō) - This more accurately conveys the idea of a user's allocated or assigned capacity."
+          "description": "The translation \"ユーザーのストレージ容量\" (user no storage capacity) is a literal translation but doesn't quite capture the meaning of \"User quota\" in the LDAP context. A quota generally refers to a limit or allowance, not just the storage capacity itself.",
+          "suggestion": "Consider a translation like \"ユーザー割り当て容量\" (user allocated capacity) or \"ユーザーの利用制限\" (user usage limits) to more accurately convey the intended meaning of a quota."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກຳນົດສູງສຸດຂອງຜູ້ໃຊ້' translates to 'maximum limit of user'. While not entirely wrong, it's a bit literal and doesn't convey the meaning of 'user quota' as effectively. 'Quota' implies an allocated amount or limit, and 'ກຳນົດສູງສຸດ' emphasizes the upper bound, which isn't the core idea of a quota.",
-          "suggestion": "Consider a more idiomatic translation like 'ຈຳນວນທີ່ອະນຸຍາດໃຫ້ຜູ້ໃຊ້' (amount allowed for user) or 'ຂະໜາດກໍານົດຂອງຜູ້ໃຊ້' (defined size of user)."
+          "description": "The Lao translation 'ກຳນົດສູງສຸດຂອງຜູ້ໃຊ້' literally translates to 'maximum limit of user'. While understandable, it's not the most natural or idiomatic translation of 'User quota'. 'Quota' implies an allocated amount or limit, and a more direct translation would be preferable.",
+          "suggestion": "Consider alternatives like 'ກໍານົດຈຳນວນຜູ້ໃຊ້' (defined number of users) or 'ອັດຕະrašະຜູ້ໃຊ້' (user allowance/allocation)."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Limit użytkowników\" translates to \"User limit\" rather than \"User quota\". While related, 'quota' implies a specific, defined allowance, which 'limit' doesn't necessarily convey.",
-          "suggestion": "Limit zasobów użytkownika"
+          "description": "The Polish translation \"Limit użytkowników\" doesn't accurately convey the meaning of \"User quota\". While \"limit\" is related, \"quota\" implies a defined allocation or allowance, which \"limit użytkowników\" doesn't fully capture. It translates more to \"user limit\".",
+          "suggestion": "Consider \"Przydział użytkowników\" or \"Limity użytkowników\" to more closely reflect the concept of a user quota."
         }
       ],
       "approved_at": null
@@ -168,7 +168,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Cotă de utilizatori' literally translates to 'Quota of users'. While understandable, 'Cotă utilizator' (without 'de') would be more natural and accurate for describing a user quota in a technical context.  'Cotă utilizator' implies a quota *per user*.",
+          "description": "The Romanian translation \"Cotă de utilizatori \" is a literal translation but doesn't quite convey the intended meaning of 'User quota' in the context of LDAP. It suggests a quota *for* users, rather than a quota *per* user.",
+          "suggestion": "Cotă utilizator"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation has an unnecessary space before the quotation mark.",
           "suggestion": "Cotă utilizator"
         }
       ],
@@ -183,13 +188,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශීලක' (parashīlaka) is technically correct but might be perceived as overly formal or less common in everyday language when referring to 'user'. A more commonly understood term might be better.",
-          "suggestion": "Consider using 'ගොස්ඨි' (goshti) or 'භාවිතකරු' (bhavitakaru) for 'user' depending on the overall tone and context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

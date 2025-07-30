@@ -69,7 +69,7 @@ const SectionBodyContent = (props) => {
   const data = [
     {
       id: "login",
-      name: t("ConnectDialog:Login"),
+      name: t("Common:Login"),
       content: <LoginContent />,
     },
     {

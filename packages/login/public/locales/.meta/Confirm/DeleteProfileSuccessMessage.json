@@ -3,7 +3,7 @@
   "content": "Your account is disabled",
   "content_en_sha1_hash": "e5e587a0c2d54d58911d54b6bd44b8c707ee3d40",
   "created_at": "2025-05-19T21:30:57.352Z",
-  "updated_at": "2025-05-28T09:30:02.881Z",
+  "updated_at": "2025-05-26T07:57:32.863Z",
   "comment": {
     "text": "This translation key is used to display a message when an account has been successfully disabled. It appears as a confirmation message in a UI component where user actions have led to account deletion or deactivation.",
     "is_auto": true,
@@ -27,181 +27,361 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your account is disabled' translates to 'تم تعطيل حسابك' (Tam ta'til hisabak) rather than 'تم حذف حسابك بنجاح.' (Tam hazf hisabak binajaah - Your account was successfully deleted). 'Disabled' implies a temporary state, whereas 'deleted' suggests permanent removal. The current translation implies a successful deletion.",
+          "suggestion": "تم تعطيل حسابك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states \"Your account is disabled,\" while the Azerbaijani translation \"Hesabınız uğurla silinmişdir\" translates to \"Your account has been successfully deleted.\" The meaning is different; disabling and deleting are not the same.",
+          "suggestion": "Hesabınız deaktivləşdirilib."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Your profile was successfully deleted' is not accurate. 'Disabled' implies a temporary state, while 'deleted' implies permanent removal. The Bulgarian translation suggests successful deletion, which doesn't match the original meaning.",
+          "suggestion": "Consider a more accurate translation such as 'Вашият акаунт е деактивиран' (Your account is deactivated) or 'Вашият акаунт е ограничен' (Your account is restricted)."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Váš účet byl úspěšně smazán.' implies deletion, but the English states the account is disabled. This is a significant difference in meaning.",
+          "suggestion": "A more accurate translation for 'Your account is disabled' would be something like 'Váš účet byl deaktivován.' or 'Váš účet byl zablokován.'"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation \"Ihr Konto wurde erfolgreich gelöscht.\" translates to 'Your account has been successfully deleted.' This doesn't accurately reflect the English 'Your account is disabled'. 'Disabled' implies a temporary state, while 'deleted' implies a permanent one. The message should convey a disablement.",
+          "suggestion": "Ihr Konto wurde deaktiviert."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Ο λογαριασμός σας απενεργοποιήθηκε.' rather than 'Ο λογαριασμός σας διαγράφηκε επιτυχώς.' which means 'Your account was successfully deleted.' The current translation misrepresents the original meaning.",
+          "suggestion": "Ο λογαριασμός σας απενεργοποιήθηκε."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' has been translated as 'Su cuenta ha sido eliminada con éxito.' which means 'Your account has been successfully deleted.' The English phrase 'disabled' implies a temporary or reversible state, whereas 'deleted' indicates permanent removal. This translation is not an accurate representation of the original meaning.",
+          "suggestion": "Consider a more accurate translation such as 'Su cuenta ha sido desactivada' (Your account has been deactivated) or 'Su cuenta está inhabilitada' (Your account is disabled)."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' implies a restriction of access, while the Finnish translation 'Tilisi poistaminen onnistui' translates to 'Your account deletion was successful.' These are not equivalent meanings. 'Disabled' signifies a temporary or permanent restriction, whereas 'deletion' implies complete removal.",
+          "suggestion": "A more accurate Finnish translation would depend on the intended meaning. Options include: 'Tilisi on käytössäsi' (Your account is active/enabled), 'Tilisi on rajoitettu' (Your account is restricted), or 'Tilisi poistettiin' (Your account was deleted)."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states 'Your account is disabled', while the French translation states 'Your account has been successfully deleted'. The translation does not accurately reflect the original meaning.",
+          "suggestion": "Votre compte a été désactivé."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' is not accurately translated by 'Ձեր հաշիվը հաջողությամբ ջնջվել է'. The English means the account is deactivated, whereas the Armenian implies deletion. This is a significant semantic difference.",
+          "suggestion": "A more accurate translation might be something like 'Ձեր հաշիվը փակվել է' (Your account has been closed) or 'Ձեր հաշիվը անործանիր է' (Your account is inactive)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Il tuo account è stato disabilitato.' The provided Italian translation 'Il tuo account è stato eliminato con successo.' means 'Your account has been successfully deleted.' These are different actions.",
+          "suggestion": "Il tuo account è stato disabilitato."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' is not accurately translated by 'お客様のアカウントは正常に削除されました。'. 'Disabled' implies a temporary state, while the Japanese suggests a permanent deletion. A more accurate translation would convey 'Your account has been deleted' or similar.",
+          "suggestion": "お客様のアカウントは削除されました。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '계정이 성공적으로 삭제되었습니다.' translates to 'Your account has been successfully deleted,' not 'Your account is disabled'. The English content indicates a disabling, not a deletion.",
+          "suggestion": "계정이 비활성화되었습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ບັນຊີຂອງທ່ານຖືກລຶບອອກແລ້ວ.' translates to 'Your account has been deleted.' The English content 'Your account is disabled' has a slightly different meaning.",
+          "suggestion": "ບັນຊີຂອງທ່ານຖືກປິດງານແລ້ວ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Your account is deleted successfully' which isn't quite accurate. 'Disabled' implies a temporary state, while 'deleted' implies permanent removal. A more accurate translation considering the context of disabling an account might be 'Jūsu konts ir atspējots.'",
+          "suggestion": "Jūsu konts ir atspējots."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Your account is deleted successfully' which implies a deletion. The Dutch translation 'Uw account is met succes verwijderd' means 'Your account is successfully deleted'. The English states 'disabled', which means the account is no longer active but not permanently removed. The Dutch translation suggests permanent removal.",
+          "suggestion": "Uw account is uitgeschakeld."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' implies that the account is not completely removed, but temporarily unavailable. The Polish translation 'Twoje konto zostało pomyślnie usunięte' means 'Your account has been successfully deleted,' implying complete removal. These meanings are not equivalent.",
+          "suggestion": "Consider a translation that reflects 'Your account is disabled', such as 'Twoje konto zostało wyłączone' or 'Twoje konto jest nieaktywne.'"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'A sua conta foi desativada' in Portuguese, not 'A sua conta foi eliminada com êxito.' 'Eliminada' means 'deleted,' while 'disabled' implies a temporary state. 'Desativada' accurately reflects the meaning of 'disabled'.",
+          "suggestion": "A sua conta foi desativada."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content states 'Your account is disabled', while the Portuguese translation states 'Your account was successfully deleted'. These meanings are different. 'Disabled' implies a temporary restriction, while 'deleted' implies permanent removal.",
+          "suggestion": "Consider a more accurate translation reflecting the meaning of 'disabled', such as 'Sua conta foi desativada.'"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Contul dvs a fost șters cu succes' translates to 'Your account has been successfully deleted'. The English content 'Your account is disabled' has a different meaning. 'Disabled' implies a temporary state, while 'deleted' is permanent.",
+          "suggestion": "Contul dvs a fost dezactivat."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Your account is disabled' translates more accurately as 'Ваш аккаунт деактивирован.' 'Отключена' implies a disconnection, not a disabling.",
+          "suggestion": "Ваш аккаунт деактивирован."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Your account has been deleted', not 'Your account is successfully deleted'. The Sinhala translation implies successful deletion, which differs from the original meaning of being disabled.",
+          "suggestion": "ඔබගේ ගිණුම අයින් කර ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Váš účet bol úspešne odstránený' translates to 'Your account was successfully deleted.' The English content 'Your account is disabled' implies a temporary or reversible action, while the Slovak translation implies a permanent deletion. This is an incorrect translation of the intended meaning.",
+          "suggestion": "Váš účet bol zablokovaný."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Your account has been deleted' rather than 'Your account is disabled'. The Slovenian translation 'Vaš račun je bil uspešno izbrisan' translates to 'Your account has been successfully deleted'.",
+          "suggestion": "Vaš račun je onemogočen."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content \"Your account is disabled\" does not accurately translate to \"Ваш налог је успешно обрисан.\" (Your account has been successfully deleted). \"Disabled\" implies a temporary state, while \"deleted\" suggests permanent removal. A better translation would convey the meaning of account disabling.",
+          "suggestion": "Ваш рачун је деактивиран."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Vaš nalog je uspešno obrisan.' (Your account has been successfully deleted) is not accurate. 'Disabled' implies a temporary state, while 'obrisan' (deleted) implies permanent removal. The translation doesn't reflect the original meaning.",
+          "suggestion": "Vaš nalog je deaktiviran."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to 'Hesabınız devre dışı bırakıldı.' rather than 'Hesabınız başarıyla silindi.' The Turkish translation implies the account was deleted successfully, which isn't the same as being disabled.",
+          "suggestion": "Hesabınız devre dışı bırakıldı."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your account is disabled' translates to something closer to 'Your account has been deactivated' or 'Your account is no longer active' rather than 'Your account is successfully deleted'. The current translation implies deletion, which may not be the intended meaning.",
+          "suggestion": "Ваш обліковий запис деактивовано."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content \"Your account is disabled\" translates to \"Tài khoản của bạn đã được xóa thành công.\" is not accurate. \"Disabled\" implies a temporary state, while \"xóa thành công\" (deleted successfully) implies permanent removal.  A more accurate translation might be \"Tài khoản của bạn đã bị vô hiệu hóa.\" or \"Tài khoản của bạn đã bị tạm dừng.\" depending on the intended meaning.",
+          "suggestion": "Tài khoản của bạn đã bị vô hiệu hóa."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'Your account is disabled' translates to '您的账户已成功删除' as 'Your account has been successfully deleted'. The English implies a disabled state, while the Chinese implies complete deletion.",
+          "suggestion": "您的账户已被禁用 (Nín de zhànghù yǐ bèi zàijìn) - Your account has been disabled."
+        }
+      ],
       "approved_at": null
     }
   }

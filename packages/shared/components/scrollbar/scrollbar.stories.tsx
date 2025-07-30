@@ -43,12 +43,12 @@ const meta = {
     autoHide: {
       control: "boolean",
       description: "Automatically hide scrollbar when not in use",
-      table: { defaultValue: { summary: false } },
+      table: { defaultValue: { summary: "false" } },
     },
     fixedSize: {
       control: "boolean",
       description: "Keep scrollbar thumb size fixed",
-      table: { defaultValue: { summary: false } },
+      table: { defaultValue: { summary: "false" } },
     },
     paddingAfterLastItem: {
       control: "text",

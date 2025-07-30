@@ -25,25 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import ErrorContainer from "../../components/error-container/ErrorContainer";
-
-import { StyledPreparationPortal } from "./PreparationPortal.styled";
 import { Text } from "../../components/text";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
-import { ColorTheme, ThemeId } from "../../components/color-theme";
-import { IPreparationPortal } from "./PreparationPortal.types";
 import { getRestoreProgress } from "../../api/portal";
-import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
+import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
+
+import { clearLocalStorage, returnToPortal } from "./PreparationPortal.utils";
+import { IPreparationPortal } from "./PreparationPortal.types";
+import styles from "./PreparationPortal.module.scss";
 
 let requestsCount = 0;
 
 export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, isDialog, style } = props;
-
-  const theme = useTheme();
 
   const { t, ready } = useTranslation(["PreparationPortal", "Common"]);
 
@@ -54,7 +52,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
 
   const getRecoveryProgress = useCallback(async () => {
     const setMessage = (error?: unknown) => {
-      const errorText = error ?? errorInternalServer;
+      const errorText = (error as string) ?? errorInternalServer;
 
       setErrorMessage(errorText);
     };
@@ -139,34 +137,32 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     : t("Common:PreparationPortalTitle");
 
   const componentBody = errorMessage ? (
-    <Text className="preparation-portal_error">{`${errorMessage}`}</Text>
+    <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>
   ) : (
-    <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>
-      <div className="preparation-portal_progress">
-        <div className="preparation-portal_progress-bar">
-          <div className="preparation-portal_progress-line" />
-        </div>
-        <Text className="preparation-portal_percent">{`${percent} %`}</Text>
-      </div>
-      <Text className="preparation-portal_text">
-        {t("PreparationPortalDescription", {
-          productName: t("Common:ProductName"),
-        })}
-      </Text>
-    </ColorTheme>
+    <PreparationPortalProgress
+      text={t("PreparationPortalDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      percent={percent}
+    />
   );
   return (
-    <StyledPreparationPortal errorMessage={!!errorMessage} isDialog={isDialog}>
+    <div
+      className={classNames(styles.preparationPortal, {
+        [styles.isDialog]: isDialog,
+        [styles.errorMessage]: !!errorMessage,
+      })}
+    >
       <ErrorContainer
         {...(ready && { headerText: withoutHeader ? "" : headerText })}
         style={style}
-        className="restoring-portal"
+        className={styles.restoringPortal}
         hideLogo
       >
-        <div className="preparation-portal_body-wrapper">
+        <div className={styles.preparationPortalBodyWrapper}>
           {!ready ? <PreparationPortalLoader /> : componentBody}
         </div>
       </ErrorContainer>
-    </StyledPreparationPortal>
+    </div>
   );
 };

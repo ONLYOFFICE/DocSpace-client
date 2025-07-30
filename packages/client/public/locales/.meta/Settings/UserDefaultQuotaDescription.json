@@ -3,7 +3,7 @@
   "content": "Set the storage quota for users of this {{productName}}. User quota affects storage limit for the {{sectionName}} folder of each user.",
   "content_en_sha1_hash": "f458865eae0c8ae790107a81c760cf27584a9b51",
   "created_at": "2025-05-19T21:30:53.116Z",
-  "updated_at": "2025-05-21T02:32:04.136Z",
+  "updated_at": "2025-05-26T07:57:32.793Z",
   "comment": {
     "text": "This translation key is used for the default storage quota description displayed to users when setting their individual quotas on a specific product in the portal settings. It appears as a subtitle within a mobile categories component and can be toggled to show or hide the quota details.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 58,
+      "line_number": 59,
       "context": "/>\n <MobileCategoryWrapper\n title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n isDisabled={isDisabled}\n />",
       "module": "/packages/client"
     },
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation uses a non-standard spacing after the colon in \"اضبط حصة\". Standard Arabic typography prefers no space or a thin space.",
-          "suggestion": "اضبط حصة"
+          "description": "The Arabic translation uses a non-standard space before the first Arabic character in the first word \"اضبط\". This is usually avoided for better readability.",
+          "suggestion": "Remove the space before the first character of the word \"اضبط\"."
         }
       ],
       "approved_at": null
@@ -48,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of “ ” (non-breaking space) might not be ideal for readability in all contexts. Consider replacing with a regular space.",
-          "suggestion": "Bu {{productName}} istifadəçiləri üçün saxlama kvotasını təyin edin."
+          "description": "The use of 'Bu' at the beginning of the sentence feels abrupt and doesn't flow naturally in Azerbaijani. It's more common to begin with a verb or a more descriptive phrase.",
+          "suggestion": "Təyin edin bu {{productName}} istifadəçiləri üçün saxlama kvotasını."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'qovluğu' (folder) could be more naturally translated as 'qovluğu' or 'papka'. While both are valid, 'papka' might be more commonly understood.",
-          "suggestion": "Bu {{productName}} istifadəçiləri üçün saxlama kvotasını təyin edin. İstifadəçi kvotası hər bir istifadəçinin {{sectionName}} papkası üçün saxlanma limitinə təsir edir."
+          "description": "The word 'saxlanma' is used for both 'storage' and 'retention', leading to ambiguity. It should be replaced with a more specific term for 'storage'.",
+          "suggestion": "Təyin edin bu {{productName}} istifadəçiləri üçün saxlama kvotasını. İstifadəçi kvotası hər bir istifadəçinin {{sectionName}} qovluğu üçün yer limitinə təsir edir."
         }
       ],
       "approved_at": null
@@ -83,13 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of '{{productName}}' and '{{sectionName}}' placeholders is consistent with the English, but it's important to ensure these placeholders are correctly handled in the target system/application.",
-          "suggestion": "Confirm that the placeholders are correctly processed by the system displaying the translated text. If not, consider alternatives (e.g., variable substitution)."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the repetition of 'για χρήστες αυτού του {{productName}}' and 'κάθε χρήστη' might sound slightly clunky in Greek.  A more elegant phrasing could improve readability.",
-          "suggestion": "Consider rephrasing to something like 'για τους χρήστες του {{productName}}' and 'για τον φάκελο {{sectionName}} κάθε χρήστη' to reduce repetition."
+          "description": "The use of '{{productName}}' and '{{sectionName}}' in the English content is replicated in the Greek translation. While technically not an error, it's preferable to replace these with the localized product and section names, as they are placeholders.",
+          "suggestion": "Replace '{{productName}}' and '{{sectionName}}' with the localized names for the product and section respectively. For example, if '{{productName}}' is 'MyProduct' and '{{sectionName}}' is 'Documents', replace those placeholders with 'Μου Προϊόν' and 'Έγγραφα' respectively (or their equivalent localized terms)."
         }
       ],
       "approved_at": null
@@ -118,13 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Սահմանեք այս {{productName}}-ն օգտատերերի պահեստային տարածքը\" is not the most natural way to express \"Set the storage quota for users of this {{productName}}\". A more accurate and idiomatic translation would be something like \"Սահմանեք {{productName}}-ի համար օգտատերերի պահեստային քվոտան\" or \"Սահմանեք այս {{productName}}-ի օգտատերերի պահեստային քվոտան\".",
-          "suggestion": "Սահմանեք այս {{productName}}-ի համար օգտատերերի պահեստային քվոտան"
+          "description": "The Armenian translation \"Սահմանեք այս {{productName}}-ն օգտատերերի պահեստային տարածքը\" is not a direct and accurate translation of \"Set the storage quota for users of this {{productName}}\". A more accurate translation would be something like \"Սահմանեք պահեստային քվոտան այս {{productName}}-ի օգտատերերի համար:\" or \"Սահմանեք {{productName}}-ի օգտատերերի համար պահեստային քվոտան\".",
+          "suggestion": "Սահմանեք պահեստային քվոտան այս {{productName}}-ի օգտատերերի համար:"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"յուրաքանչյուր օգտատիրոջ {{sectionName}} թղթապանակի պահպանման սահմանաչափի վրա\" is a bit clunky. It translates to 'on the storage limit of each user's {{sectionName}} folder'.  A smoother phrasing would be 'յուրաքանչյուր օգտատիրոջ {{sectionName}} թղթապանակում պահպանվող տեղամասի չափը'.",
-          "suggestion": "յուրաքանչյուր օգտատիրոջ {{sectionName}} թղթապանակում պահպանվող տեղամասի չափը"
+          "description": "The phrase \"Օգտատիրոջ քվոտան ազդում է յուրաքանչյուր օգտատիրոջ {{sectionName}} թղթապանակի պահպանման սահմանաչափի վրա\" could be improved for clarity. The current phrasing is a bit convoluted. A more direct translation of 'User quota affects storage limit for the {{sectionName}} folder of each user' would be 'Օգտատիրոջ քվոտան ազդում է յուրաքանչյուր օգտատիրոջ {{sectionName}} թղթապանակի պահեստային սահմանաչափի վրա:' or 'Օգտատիրոջ քվոտան սահմանում է յուրաքանչյուր օգտատիրոջ {{sectionName}} թղթապանակում պահեստային սահմանաչափը.'",
+          "suggestion": "Օգտատիրոջ քվոտան սահմանում է յուրաքանչյուր օգտատիրոջ {{sectionName}} թղթապանակում պահեստային սահմանաչափը."
         }
       ],
       "approved_at": null
@@ -144,18 +139,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The colon after '이 {{productName}} 사용자' feels slightly awkward in Korean. While grammatically correct, it's not the most natural phrasing.",
-          "suggestion": "Consider rewording to '이 {{productName}} 에서 사용자에 대한...' or simply '이 {{productName}} 사용자에 대해...'"
-        },
-        {
-          "type": "formatting",
-          "description": "The space before '폴더' is unnecessary and disrupts the flow of the sentence.",
-          "suggestion": "Remove the space: 각 사용자의 {{sectionName}}폴더 저장 제한에 영향을 줍니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -164,18 +148,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'ຄູາມາປອດໄສ' is an unusual and potentially inaccurate translation of 'quota'. A more common and understandable Lao term for 'quota' in this context would be 'ກຳນົດຈຳນວນ' or 'ອັດບໍານເຕີ'.",
-          "suggestion": "Replace 'ຄູາມາປອດໄສ' with 'ກຳນົດຈຳນວນ' or 'ອັດບໍານເຕີ'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ເກັບຮັກສາ' is repeated and slightly awkward. While not incorrect, it could be improved for flow.",
-          "suggestion": "Consider rephrasing to avoid repetition, e.g., 'ການໃຊ້ເກັບຂໍ້ມູນ' or 'ການເກັບຂໍ້ມູນ'."
+          "description": "The term 'ຄູາມາປອດໄສ' is a somewhat awkward translation of 'storage quota'. A more natural phrasing would be 'ກຳນົດຂີດຈຳກັດການໃຊ້ທີ່ກິນ' or 'ກຳນົດຈຳນວນທີ່ສາມາດໃຊ້ໄດ້'.",
+          "suggestion": "ກຳນົດຂີດຈຳກັດການໃຊ້ທີ່ກິນ ສຳ ລັບຜູ້ໃຊ້ຂອງ {{productName}} ນີ້."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ມີຜົນກະທົບຕໍ່' is a literal translation of 'affects'. A more natural Lao phrasing for this relationship might use a different verb.",
-          "suggestion": "Consider replacing 'ມີຜົນກະທົບຕໍ່' with 'ຄວບຄຸ້ມ' or 'ຈຳກັດ'."
+          "description": "The phrase 'ມີຜົນກະທົບຕໍ່' is a direct translation of 'affects' and can be improved for flow and clarity. A better phrasing would be 'ສົ່ງຜົນກະທົບຕໍ່' or 'ກະທົບຕໍ່'.",
+          "suggestion": "ກະທົບຕໍ່ຂີດຈຳກັດການເກັບຮັກສາ ສຳ ລັບໂຟນເດີ {{sectionName}} ຂອງຜູ້ໃຊ້ແຕ່ລະຄົນ."
         }
       ],
       "approved_at": null
@@ -186,8 +165,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of non-breaking space ( ) is inconsistent and potentially unnecessary.",
-          "suggestion": "Replace all instances of the non-breaking space with a regular space."
+          "description": "The non-breaking space before 'lietotājiem' is unnecessary and may cause rendering issues. It should be removed.",
+          "suggestion": "Iestatiet krātuves kvotu šī {{productName}} lietotājiem."
         }
       ],
       "approved_at": null
@@ -204,8 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation uses a soft hyphen ' ' after 'Ustaw'. This might not be ideal for all contexts and can be removed.",
-          "suggestion": "Ustaw limit przechowywania..."
+          "description": "The word 'limit' is repeated unnecessarily. While not strictly incorrect, it can be improved for readability.",
+          "suggestion": "Ustaw limit przechowywania dla użytkowników tego {{productName}}. Limit użytkownika wpływa na pojemność folderu {{sectionName}} każdego użytkownika."
         }
       ],
       "approved_at": null
@@ -213,7 +192,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "Non-breaking space before 'para'. It should be a regular space.",
+          "suggestion": "Defina a cota de armazenamento para usuários deste {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -228,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Stabiliți' (Set) implies a direct action or instruction. In this context, 'Define' or 'Configure' might be more appropriate for describing the setting of a quota.",
-          "suggestion": "Definiți cotă de stocare pentru utilizatorii {{productName}}."
+          "description": "The word 'Stabiliți' (Set) is slightly formal and might not be the most natural choice. 'Define' or 'Configurați' might be more appropriate depending on the overall tone of the application.",
+          "suggestion": "Configurați sau Definiți"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'Cota de stocare pentru utilizator' is slightly awkward. It's clearer to say 'cota de stocare a utilizatorului'.",
-          "suggestion": "Cota de stocare a utilizatorului afectează limita de stocare pentru folderul {{sectionName}} a fiecărui utilizator."
+          "type": "grammatical",
+          "description": "The sentence structure 'Cota de stocare pentru utilizator afectează...' is a bit clunky. A more fluent construction would be preferable.",
+          "suggestion": "Cota de stocare a utilizatorului afectează..."
         }
       ],
       "approved_at": null
@@ -251,23 +236,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses the word 'Nastavite' which is Slovenian, not Sinhala. It should be in Sinhala.",
-          "suggestion": "This requires a full Sinhala translation of the entire sentence. A possible translation could be: \"මෙම {{productName}} හි පරිශීලකයන් සඳහා ගබඩා ප්‍රමාණය සකසන්න. පරිශීලක ප්‍රමාණය සෑම පරිශීලකෙකුගේ {{sectionName}} ෆෝල්ඩරය සඳහා වන ගබඩා මාපතට බලපායි.\" (This is a placeholder and needs review by a Sinhala language expert.)"
+          "description": "The translation uses 'Nastavite kvoto shranjevanja' which translates to 'Set storage quota'. However, it appears the target language should be Slovenian (not Sinhala, as implied by the name 'Sinhala Translation'). The English uses 'Set the storage quota'. Using 'Nastavite kvoto shranjevanja' is technically correct but not as natural-sounding as a more appropriate phrasing for Slovenian.",
+          "suggestion": "Consider rephrasing to something more natural in Slovenian, such as 'Določite kvoto shranjevanja za uporabnike tega {{productName}}' or 'Nastavite uporabniško kvoto shranjevanja za ta {{productName}}'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'Uporabniška' is Slovenian for 'user's' and should be translated into Sinhala.",
-          "suggestion": "Replace 'Uporabniška' with the correct Sinhala equivalent of 'user's'."
+          "description": "The phrase 'vpliva na omejitev shranjevanja' translates to 'affects the storage limit'.  While technically correct, a more fluent Slovenian might use a different phrasing. It's a bit stiff.",
+          "suggestion": "Consider rephrasing to 'vpliva na največjo dovoljeno količino prostora' or 'omejuje količino prostora'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'vpliva' is Slovenian for 'affects' and should be translated into Sinhala.",
-          "suggestion": "Replace 'vpliva' with the correct Sinhala equivalent of 'affects'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'mapo' is Slovenian for 'folder' and should be translated into Sinhala.",
-          "suggestion": "Replace 'mapo' with the correct Sinhala equivalent of 'folder'."
+          "type": "formatting",
+          "description": "The word 'Nastavite' has a stray nbsp; character.",
+          "suggestion": "Remove the nbsp; from 'Nastavite'."
         }
       ],
       "approved_at": null
@@ -278,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The non-breaking space character (&#x20;) is used instead of a regular space after \"Nastavte\". While not strictly an error, it can cause layout issues and is generally discouraged.",
-          "suggestion": "Replace &#x20; with a regular space."
+          "description": "The word \"Nastavte\" is followed by a non-breaking space, which is unnecessary.",
+          "suggestion": "Remove the non-breaking space after 'Nastavte'."
         }
       ],
       "approved_at": null
@@ -290,13 +270,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The term \"tega\" is joined to \"{{productName}}\" with a space. It should be a hyphenated word or joined more naturally.",
-          "suggestion": "Nastavite kvoto shranjevanja za uporabnike tega {{productName}}."
+          "description": "The word 'Nastavite' is followed by a non-breaking space before 'kvoto'. This should be a regular space.",
+          "suggestion": "Nastavite kvoto"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'vpliva na omejitev shranjevanja' is slightly clunky. It could be improved for flow.",
-          "suggestion": "vpliva na dovoljeno količino shranjevanja"
+          "type": "formatting",
+          "description": "The word 'mapo' is preceded by a non-breaking space. This should be a regular space.",
+          "suggestion": "mapo"
         }
       ],
       "approved_at": null
@@ -307,8 +287,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation uses Cyrillic script, which is appropriate for the target audience. However, it's crucial to maintain consistency with any existing documentation or platform interfaces that might use Latin script.",
-          "suggestion": "Confirm consistency with existing Serbian language materials. If necessary, consider providing a Latin script version as well."
+          "description": "The Serbian translation uses Cyrillic script, which is appropriate, but the English template variables `{{productName}}` and `{{sectionName}}` should remain as such, and not be translated. The Serbian translation doesn't seem to have adapted the template variables.",
+          "suggestion": "Ensure the template variables `{{productName}}` and `{{sectionName}}` remain as-is within the Serbian translation. Verify they function correctly in the target application."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'folder' is translated as 'фасциклу' (fasiklu). While accurate, 'фолдер' (folder) is a commonly used loanword in Serbian for 'folder' and might be more natural in this context.  'Фасцикла' is more aligned with a binder or file.",
+          "suggestion": "Consider using 'фолдер' instead of 'фасциклу' for better readability and consistency with common usage. However, assess the specific tone and technicality desired."
         }
       ],
       "approved_at": null
@@ -319,8 +304,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation maintains the double curly braces `{{productName}}` and `{{sectionName}}`. This suggests a template that expects these placeholders. While technically not incorrect, it should be checked to ensure they're handled properly in the final display.",
-          "suggestion": "Confirm whether `{{productName}}` and `{{sectionName}}` need to be replaced with actual values and if so, ensure the system using the translation correctly handles them. If they are not placeholders, they should be removed."
+          "description": "The translation uses 'proizvoda' which is a valid word but sounds slightly formal in this context. It might be softened to 'produktu' for better flow.",
+          "suggestion": "Podesite kvotu skladišta za korisnike ovog produktu {{productName}}. Korisnička kvota utiče na ograničenje skladišta za fasciklu {{sectionName}} svakog korisnika."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the repeated use of 'kvota' can feel clunky. Consider slightly rephrasing.",
+          "suggestion": "Podesite kvotu skladišta za korisnike ovog produktu {{productName}}. Količina skladišta koju korisnik koristi utiče na ograničenje za fasciklu {{sectionName}} svakog korisnika."
         }
       ],
       "approved_at": null
@@ -331,8 +321,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Turkish translation includes a non-breaking space before '{{productName}}'. This might cause rendering issues depending on the context and font.",
-          "suggestion": "Remove the non-breaking space before '{{productName}}'."
+          "description": "The Turkish translation includes unnecessary spacing before 'kullanıcıları' and 'klasörü'.",
+          "suggestion": "Bu {{productName}} kullanıcıları için depolama kotası ayarlayın. Kullanıcı kotası, her kullanıcının {{sectionName}} klasörü için depolama sınırını etkiler."
         }
       ],
       "approved_at": null
@@ -343,8 +333,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation uses a non-breaking space (represented as a sequence of unicode characters) between 'Встановіть' and 'обмеження'. While technically valid, it's generally preferred to use a regular space.",
-          "suggestion": "Replace the non-breaking space with a regular space: 'Встановіть обмеження сховища...'"
+          "description": "The use of \"-\" (em dash) is replaced with a space in the Ukrainian translation. This disrupts the flow and readability.",
+          "suggestion": "Replace the space after \"Встановіть\" with an em dash (—) to match the original English phrasing: \"Встановіть—обмеження сховища...\""
         }
       ],
       "approved_at": null
@@ -355,13 +345,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Vietnamese translation uses a non-standard space before '{{productName}}'. It should be a regular space.",
+          "description": "The translation uses a non-standard spacing after 'Đặt' and before 'hạn ngạch'.  It should be more consistent with standard Vietnamese sentence structure.",
           "suggestion": "Đặt hạn ngạch lưu trữ cho người dùng của {{productName}} này."
         },
         {
-          "type": "formatting",
-          "description": "The Vietnamese translation uses a non-standard space before '{{sectionName}}'. It should be a regular space.",
-          "suggestion": "Hạn ngạch người dùng ảnh hưởng đến giới hạn lưu trữ cho thư mục {{sectionName}} của mỗi người dùng."
+          "type": "spelling",
+          "description": "While technically correct, 'hạn ngạch' is somewhat formal and might be replaced with a more common term depending on the target audience. Consider alternatives like 'giới hạn' or 'dung lượng tối đa'.",
+          "suggestion": "Đặt giới hạn lưu trữ cho người dùng của {{productName}} này."
         }
       ],
       "approved_at": null
@@ -371,9 +361,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation maintains the English formatting of using double curly braces for variables ({{productName}}, {{sectionName}}). While technically correct, it is conventional in Chinese to sometimes omit the double curly braces if the context is clear, or use a different notation (e.g., [productName]).",
-          "suggestion": "Consider removing the double curly braces if context allows, or replacing them with a more Chinese-friendly format. Example: '为该[productName]的用户设置存储配额...'"
+          "type": "incorrect_translation",
+          "description": "The phrase 'User quota affects storage limit' is somewhat awkward in Chinese. A more natural phrasing would better convey the meaning.",
+          "suggestion": "用户配额会影响每个用户的{{sectionName}}文件夹的存储上限。"
         }
       ],
       "approved_at": null

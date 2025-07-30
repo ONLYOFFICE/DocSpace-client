@@ -29,7 +29,7 @@ import DeleteDialog from "./DeleteDialog";
 import DownloadDialog from "./DownloadDialog";
 import ConvertDialog from "./ConvertDialog";
 import DeleteThirdPartyDialog from "./DeleteThirdPartyDialog";
-import ConnectDialog from "./ConnectDialog";
+import ConnectDialog from "./ConnectDialog/ConnectDialogWrapper";
 import ConflictResolveDialog from "./ConflictResolveDialog";
 import ChangeEmailDialog from "./ChangeEmailDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog";
@@ -65,7 +65,6 @@ import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
-import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
@@ -119,7 +118,6 @@ export {
   ShareFolderDialog,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
-  ChangeStorageQuotaDialog,
   DeleteGroupDialog,
   RoomLogoCoverDialog,
   RemoveGuestDialog,

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import { MainButton } from ".";
@@ -90,7 +90,7 @@ const itemsModel = [
   },
 ];
 
-const Template: Story<MainButtonProps> = (args) => <MainButton {...args} />;
+const Template: StoryFn<MainButtonProps> = (args) => <MainButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

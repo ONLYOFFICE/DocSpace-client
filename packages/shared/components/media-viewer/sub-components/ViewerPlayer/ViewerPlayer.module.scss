@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 .containerPlayer {
   position: fixed;
@@ -94,7 +93,7 @@
     var(--viewer-player-controls-gradient-end) 100%
   );
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     background-color: var(--viewer-player-controls-tablet-bg);
     height: 80px;
   }
@@ -112,7 +111,7 @@
     justify-content: space-between;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-top: 8px;
 
     .playerRightControl {
@@ -126,11 +125,11 @@
   width: 100%;
   margin-top: 80px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-top: 0px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     padding: 0 15px;
   }
 }

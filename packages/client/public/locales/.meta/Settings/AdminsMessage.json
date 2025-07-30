@@ -3,7 +3,7 @@
   "content": "Administrator Message Settings",
   "content_en_sha1_hash": "accdf6092b6a057074bd1eada900a50effd27962",
   "created_at": "2025-05-19T21:30:50.388Z",
-  "updated_at": "2025-07-02T07:49:19.856Z",
+  "updated_at": "2025-06-18T17:11:42.493Z",
   "comment": {
     "text": "The translation key \"AdminsMessage\" is used to display a title for settings related to administrator messages, including descriptions and links within the Portal Settings UI. This key appears in various places, such as headings and category titles, providing context to administrators about message settings and their corresponding actions.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 122,
+      "line_number": 123,
       "context": "subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"AdminsMessage\")}\n subtitle={\n <Trans i18nKey=\"AdminsMessageMobileDescription\" ns=\"Settings\" t={t} />\n }\n url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 224,
+      "line_number": 217,
       "context": "{\n id: \"portal-settings_catalog-admin-message\",\n key: \"1-0-7\",\n icon: \"\",\n link: \"admin-message\",\n tKey: \"AdminsMessage\",\n },\n {\n id: \"portal-settings_catalog-session-life-time\",\n key: \"1-0-8\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Administrator Mesaj Parametrləri' is not the most natural or accurate rendering of 'Administrator Message Settings'. While 'Mesaj' correctly translates to 'Message', 'Parametrləri' (parameters) doesn't fully capture the meaning of 'Settings'. A more appropriate translation would convey the idea of configuration or options.",
-          "suggestion": "Administrator Çarğısı Tənzimləmələri"
+          "description": "While \"Mesaj\" translates to 'Message', \"Parametrləri\" is a more literal translation of 'Settings'. It doesn't quite convey the intended meaning of configuration options.",
+          "suggestion": "Administrator Tənzimləmələri"
         }
       ],
       "approved_at": null
@@ -72,13 +72,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Einstellungen von Nachrichten für Administrator' is not the most natural or accurate rendering of 'Administrator Message Settings'. It's overly literal and doesn't flow well in German.",
-          "suggestion": "A better translation would be 'Administratornachrichten-Einstellungen' or 'Einstellungen für Administratornachrichten'."
+          "description": "The translation 'Einstellungen von Nachrichten für Administrator' is not the most natural or accurate translation of 'Administrator Message Settings'. It's a literal translation but sounds awkward in German.",
+          "suggestion": "A more natural translation would be 'Administratoreinstellungen für Nachrichten' or 'Nachrichten-Einstellungen für Administratoren'."
         },
         {
           "type": "formatting",
-          "description": "The use of 'von' is grammatically correct, but results in an awkward flow. Combining 'Administrator' and 'Nachrichten' would create a more natural compound noun.",
-          "suggestion": "Consider combining 'Administrator' and 'Nachrichten' into a single word, where appropriate, to create a more concise and natural German term."
+          "description": "The translation uses a preposition 'von' which can make it sound clunky.  A better structure avoids this.",
+          "suggestion": "Consider restructuring to remove the 'von' preposition; for example, 'Administratoreinstellungen für Nachrichten'."
         }
       ],
       "approved_at": null
@@ -110,7 +110,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ադմինիստրատորի հաղորդագրության կարգավորումներ' is a literal translation of 'Administrator Message Settings' but doesn't quite capture the intended meaning. It implies 'settings *of* an administrator's message', rather than 'settings *for* administrator messages'.",
+          "suggestion": "Consider 'Համակարգչային հաղորդագրությունների կարգավորումներ' (System Message Settings) or 'Վարչական հաղորդագրությունների կարգավորումներ' (Administration Message Settings)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -137,13 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບ\" is a very literal translation and doesn't quite capture the concise meaning of \"Administrator Message Settings\". It's a bit clunky and long.",
-          "suggestion": "Consider a more natural-sounding translation such as \"ການຕັ້ງຄ່າຂໍ້ຄວາມຜູ້ເບິ່ງແຍງ\" or \"ການຕັ້ງຄ່າຂໍ້ຄວາມຈາກຜູ້ເບິ່ງແຍງ\" depending on the specific nuance required."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the length of the translated phrase might cause layout issues in the user interface. Shorter phrases are generally preferred.",
-          "suggestion": "Prioritize a shorter translation, even if it requires some loss of literal meaning."
+          "description": "The Lao translation \"ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບ\" is a very literal translation and sounds unnatural. It translates to 'Settings of Messages of System Overseer.' A more natural translation would be something like 'ການຕັ້ງຄ່າສາຍເລິກຂອງຜູ້ເບິ່ງແຍງ' (Settings for Administrator) or 'ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ປົກຄອງ' (Administrator Message Settings).",
+          "suggestion": "Consider 'ການຕັ້ງຄ່າສາຍເລິກຂອງຜູ້ເບິ່ງແຍງ' or 'ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ປົກຄອງ'."
         }
       ],
       "approved_at": null
@@ -160,7 +161,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Beheerder Bericht Instellingen' doesn't perfectly capture the meaning of 'Administrator Message Settings'. 'Bericht' translates to 'message', but 'Settings' requires a more accurate Dutch equivalent.",
+          "description": "The translation 'Beheerder Bericht Instellingen' is not the most natural or accurate translation of 'Administrator Message Settings'. 'Bericht' translates to 'message' or 'report', but 'Instellingen' is correct for 'Settings'. A more accurate translation would convey the idea of configurations or options.",
           "suggestion": "Beheerder Berichtinstellingen"
         }
       ],
@@ -175,13 +176,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Definições de Mensagens para Administrador\" is a bit clunky. A more natural Portuguese phrasing would improve readability. \"Configurações de Mensagens do Administrador\" or \"Configurações para Mensagens do Administrador\" are better alternatives.",
-          "suggestion": "Configurações de Mensagens do Administrador"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -202,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Настройки сообщений администратору' is a literal translation but doesn't fully convey the meaning of 'Administrator Message Settings.' It sounds more like 'Settings for messages to the administrator.' A more natural translation would be something like 'Настройки сообщений от администратора' (Settings for messages from the administrator) or 'Настройки административных сообщений' (Administrator Messages Settings).",
-          "suggestion": "Consider 'Настройки сообщений от администратора' or 'Настройки административных сообщений'."
+          "description": "The translation 'Настройки сообщений администратору' is a literal translation but might be misinterpreted. 'Администратору' implies messages *to* an administrator, rather than settings *for* administrator messages. A more accurate translation would emphasize the settings aspect.",
+          "suggestion": "Настройки сообщений для администратора"
         }
       ],
       "approved_at": null
@@ -211,13 +206,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'පරිපාලක පණිවිඩ සැකසුම්' while conveying a general meaning of 'Administrator Message Settings', doesn't perfectly capture the nuance of 'Settings'.  'පරිපාලක පණිවිඩ' translates to 'Administrator Message' and 'සැකසුම්' translates to 'Settings/Arrangements'. A more precise rendering of 'Settings' might incorporate a word indicating configuration or options.",
-          "suggestion": "Consider 'පරිපාලක පණිවිඩ සැකසුම්' could be improved to 'පරිපාලක පණිවිඩ කළමණාකරණය' (Administrator Message Management) or 'පරිපාලක පණිවිඩ විචකයන්' (Administrator Message Options), depending on the desired level of formality and technical accuracy."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -235,13 +224,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Подешавања порука администратора\" is a literal translation and could be improved for natural flow in Serbian. \"Settings\" often translates to something more concise and idiomatic.",
+          "suggestion": "Подешавања за поруке администратора"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Подешавања\" is a valid translation for \"Settings\", it may sound a bit formal. Depending on the overall tone of the application, a more colloquial or abbreviated term might be preferable. This is dependent on the specific application context.",
+          "suggestion": "Поруке администратора - подешавања"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Podešavanja poruka administratora' is technically correct but sounds a bit clunky and literal. A more natural phrasing might be preferred.",
+          "suggestion": "Administratorske poruke - Podešavanja"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -256,7 +262,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Параметри повідомлень адміністратору' is not the most natural or accurate translation of 'Administrator Message Settings'. It literally translates to 'Parameters of messages to the administrator'. A more appropriate translation would convey the idea of settings *for* administrator messages.",
+          "description": "The translation 'Параметри повідомлень адміністратору' is a literal translation but doesn't fully capture the meaning of 'Administrator Message Settings'. A more natural Ukrainian phrasing would convey that settings *for* administrator messages are being adjusted.",
           "suggestion": "Налаштування повідомлень адміністратора"
         }
       ],
@@ -268,8 +274,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Cài đặt Tin nhắn Quản trị viên\" while technically correct, is a bit literal and can be improved for natural flow. 'Cài đặt' means 'Settings/Installation' which is a bit clunky in this context. A more natural phrasing would be more aligned with just 'Thông báo quản trị viên' or 'Tin nhắn quản trị viên'.",
-          "suggestion": "Thông báo quản trị viên"
+          "description": "While technically correct, 'Cài đặt Tin nhắn Quản trị viên' is a bit clunky and overly literal. A more natural phrasing would be more appropriate.",
+          "suggestion": "Cài đặt thông báo quản trị"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses space instead of hyphens where it might be clearer to use hyphens, especially in a settings context. Although not a critical error, it could impact readability.",
+          "suggestion": "Cài đặt Tin nhắn-Quản trị viên"
         }
       ],
       "approved_at": null

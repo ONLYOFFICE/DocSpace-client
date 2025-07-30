@@ -3,7 +3,7 @@
   "content": "Continue",
   "content_en_sha1_hash": "2e02623966f9391facf6eaefc8b079ed5b630bee",
   "created_at": "2025-05-19T21:30:43.691Z",
-  "updated_at": "2025-07-01T15:57:35.961Z",
+  "updated_at": "2025-06-30T12:20:31.190Z",
   "comment": {
     "text": "This translation key is used as a label for a \"Continue\" button that appears in various dialogs and confirms user actions. It provides a clear and consistent text to be translated, allowing users to proceed after completing a task or operation.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 228,
+      "line_number": 227,
       "context": ") : null}\n </div>\n <div className=\"convert_dialog_buttons\">\n <Button\n key=\"ContinueButton\"\n label={t(\"Common:ContinueButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onConvert}\n />",
       "module": "/packages/client"
     },
@@ -48,31 +48,31 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/file-password/index.tsx",
-      "line_number": 202,
+      "line_number": 204,
       "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n onClick={onSubmit}\n isDisabled={isLoading}\n />\n </FormWrapper>",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 191,
+      "line_number": 187,
       "context": "size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 111,
-      "context": "id=\"email-continue\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale={true}\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onContinue}\n />",
+      "context": "id=\"email-continue\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onContinue}\n />",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
       "line_number": 547,
-      "context": "<Button\n size={ButtonSize.medium}\n scale={true}\n primary\n label={t(\"Common:ContinueButton\")}\n isLoading={isCreated}\n onClick={onContinueClick}\n />\n </WizardContainer>\n );",
+      "context": "<Button\n size={ButtonSize.medium}\n scale\n primary\n label={t(\"Common:ContinueButton\")}\n isLoading={isCreated}\n onClick={onContinueClick}\n />\n </WizardContainer>\n );",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 580,
+      "line_number": 563,
       "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
       "module": "/packages/shared"
     },
@@ -96,8 +96,8 @@
     },
     {
       "file_path": "/packages/shared/pages/PublicRoom/PublicRoomPasswordForm/index.tsx",
-      "line_number": 200,
-      "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n onClick={onSubmitAction}\n isDisabled={isLoading}\n isLoading={isLoading}\n />",
+      "line_number": 220,
+      "context": "<Button\n primary\n size={ButtonSize.medium}\n scale\n label={t(\"Common:ContinueButton\")}\n tabIndex={5}\n isLoading={isLoading}\n isDisabled={isLoading}\n onClick={onSubmitAction}\n />",
       "module": "/packages/shared"
     }
   ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"続ける\" (tsuzukeru) means \"to continue\" as a verb. While technically correct, it's not the most natural or common translation for a button labeled 'Continue'.  It implies an action *to* continue, rather than just 'Continue'.",
-          "suggestion": "考慮する (kouryo suru) - Consider, or 進む (susumu) - Proceed would be more natural for a button that progresses to the next step."
+          "description": "The Japanese translation \"続ける\" (tsuzukeru) literally means \"to continue\" or \"to proceed,\" but in the context of a button labeled \"Continue,\" a more natural and common translation would be \"次へ\" (tsugi e) which means \"Next\". \"続ける\" is grammatically correct but sounds unnatural in this UI element.",
+          "suggestion": "次へ"
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'ඉදිරියට' (idiriyata) translates to 'forward' or 'onward', not directly 'Continue'. While it conveys a similar meaning, it's not the most accurate translation for a 'Continue' button.",
-          "suggestion": "Consider 'ගෙනໄປන්න' (gena pinnna) or 'වැඩිහිට්ට' (waddehitto), or a more context-specific translation that accurately reflects the button's function."
+          "description": "While 'ඉදිරියට' (idiriyata) can mean 'forward' or 'onward,' it doesn't directly translate to 'Continue' in the context of a button. It can be understood, but a more accurate translation might be needed depending on the surrounding UI elements and overall functionality.",
+          "suggestion": "Consider using a translation that more closely aligns with the action of proceeding, such as 'కొనసాగించు' (Konasaaginu - if aiming for a more formal feel) or a phrase that emphasizes continuation."
         }
       ],
       "approved_at": null
@@ -270,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Настави\" is the imperative form (command) of the verb \"наставити\" (to continue). For a button labeled \"Continue\", a more appropriate translation would be a noun form, indicating the action of continuing. A better option is \"Наставити\" (Nastaviti), which is the infinitive.",
-          "suggestion": "Наставити"
+          "description": "The translation \"Настави\" is an imperative form of the verb \"наставити\" (to continue), but it doesn't agree in number or politeness with the implied subject (the button). It sounds abrupt and informal.  A more appropriate translation for a button label would be a noun or a more polite imperative.",
+          "suggestion": "Consider alternatives like \"Наставити\" (Nastaviti - infinitive form, more formal and neutral), \"Наставите\" (Nastavite - polite imperative form), or a noun like \"Настављање\" (Nastavljanje - continuation)."
         }
       ],
       "approved_at": null

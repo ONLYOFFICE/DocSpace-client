@@ -3,7 +3,7 @@
   "content": "Updating statistics can take a long time",
   "content_en_sha1_hash": "3cbb8c93aab7ed9542f98022d130f6dcc11292c9",
   "created_at": "2025-05-19T21:30:53.061Z",
-  "updated_at": "2025-05-21T02:34:28.990Z",
+  "updated_at": "2025-05-24T03:41:22.676Z",
   "comment": {
     "text": "UpdatingStatistics is used in a button component to display an English message indicating that updating statistics can take time. It appears on a Recalculate Button within the Portal Settings page and is displayed when the button is not currently recalculating statistics.",
     "is_auto": true,
@@ -165,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Slovenian translation 'Posodabljanje statistike lahko traja dalj časa' is grammatically awkward. The correct grammatical form would be 'Posodabljanje statističnih podatkov lahko traja dolgo časa' or 'Posodabljanje statistike lahko traja veliko časa'.",
-          "suggestion": "Posodabljanje statističnih podatkov lahko traja dolgo časa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -185,9 +179,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'može' is correctly spelled but could be improved for stylistic reasons. While not technically incorrect, 'može' is less commonly used in this context compared to 'može'.",
+          "suggestion": "može da potraje"
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ažuriranje statistika može potrajati duže vreme' while understandable, is not the most natural or idiomatic translation of 'Updating statistics can take a long time'. A more accurate and natural rendering would emphasize the potential duration.",
-          "suggestion": "Statistika ažuriranje može trajati neko vreme."
+          "description": "While understandable, the translation 'Ažuriranje statistika može potrajati duže vreme' is a rather literal translation. A more natural and common phrasing would prioritize readability and flow. The original 'Updating statistics can take a long time' has a certain conciseness that is lost in the translation.",
+          "suggestion": "Ažuriranje statistika može da traje malo duže"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Created",
   "content_en_sha1_hash": "accf40c89baa4fa88e6a7ff11e1f805beecafd3f",
   "created_at": "2025-05-19T21:30:55.310Z",
-  "updated_at": "2025-05-28T09:30:02.456Z",
+  "updated_at": "2025-05-26T07:57:32.451Z",
   "comment": {
     "text": "This translation key is used for the label that appears next to a column header, specifically the \"Created\" column in a table view. It's part of the UI element on the page /packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js. The translated text will be displayed as the title for this column.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'تم انشاءه' while literally translating to 'It was created', doesn't perfectly capture the nuance of 'Created' in the context of a file creation date. A more direct translation emphasizing the action of creating might be preferred. 'منشأ' or 'إنشاء' (depending on the specific desired emphasis and context) might be better alternatives.",
+          "suggestion": "Consider 'منشأ' or 'إنشاء' instead of 'تم انشاءه'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -135,7 +141,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'생성일' translates to 'Creation Date', not simply 'Created'. While related, it doesn't convey the same nuance of the English term in this context, which implies the act of creation.",
+          "suggestion": "Consider '생성됨' (Created) or '만듦' (Made) for a more direct translation, if context allows. If 'Creation Date' is the only acceptable term, clarify the intention of the key name with the client."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -177,7 +189,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'A fost creat la' translates to 'Was created at'. While technically correct, it's a more verbose translation than the concise English 'Created'. A more direct translation would be 'Creat'.",
+          "suggestion": "Creat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -189,7 +207,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"සෑදුවේ\" (saaduve) can mean 'created', it's a passive form. \"Created\" in this context (as a key name for file creation) likely requires an active form, indicating the creator or action of creation.",
+          "suggestion": "Consider \"ස້າງල\" (saangala) or \"උත්පාදනය\" (uthpaadanaya) for a more active voice and accurate representation of 'created' in the context of file creation."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -237,7 +261,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '创建日期' (chuàngjiàn rìqí) literally translates to 'creation date'. While related, it doesn't directly convey the meaning of 'Created' in this context (which likely refers to a creation *time* or a creation *timestamp*). It's too verbose.",
+          "suggestion": "创建时间"
+        }
+      ],
       "approved_at": null
     }
   }

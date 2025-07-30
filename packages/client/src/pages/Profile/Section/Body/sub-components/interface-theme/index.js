@@ -87,7 +87,7 @@ const StyledWrapper = styled.div`
 `;
 
 const InterfaceTheme = (props) => {
-  const { t } = useTranslation(["Profile", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const {
     theme,
     changeTheme,

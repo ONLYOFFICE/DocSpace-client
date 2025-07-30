@@ -3,7 +3,7 @@
   "content": "Set the default storage quota for rooms in this {{productName}}. It can later be adjusted for each room individually by the room admin.",
   "content_en_sha1_hash": "70a076e65a43bd6bbbe50850d4834ecd8ec75cad",
   "created_at": "2025-05-19T21:30:52.660Z",
-  "updated_at": "2025-05-21T03:06:49.776Z",
+  "updated_at": "2025-05-26T07:57:32.792Z",
   "comment": {
     "text": "\"This translation key controls the default storage quota setting displayed to users when adjusting room quotas. It can later be adjusted individually by room admins. Appears in the 'QuotaPerRoom' category.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 49,
+      "line_number": 50,
       "context": "<StyledBaseQuotaComponent>\n <MobileCategoryWrapper\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n isDisabled={isDisabled}\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     },
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'الحصة النسبية' (al-hissa al-nisbiyya) translates to 'relative quota'. While not strictly wrong, 'storage quota' is more accurate and common in this context.  'حصة تخزين' (hissa takhzeen) would be a more direct and natural translation for 'storage quota'.",
-          "suggestion": "قم بتعيين حصة تخزين افتراضية للغرف في {{productName}} هذا."
+          "description": "The phrase \"الحصة النسبية\" (al-hassa al-nisbiyya) translates to 'relative quota' which doesn't quite convey the intended meaning of 'storage quota.' A more accurate translation would be something like 'سعة التخزين' (sa'at al-takhzeen).",
+          "suggestion": "قم بتعيين سعة التخزين الافتراضية للغرف في {{productName}} هذا. (Qum bi-ta'yeen sa'at al-takhzeen al-iftiradiya lil-ghuraf fi {{productName}} hatha.)"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'قم بتعيين... هذا' sounds slightly awkward. While grammatically correct, it's not the most fluent way to express the idea. It translates to 'Set... this'.",
-          "suggestion": "قم بتعيين حصة تخزين افتراضية للغرف في {{productName}}."
+          "description": "The use of 'هذا' (hatha) which means 'this' is somewhat awkward in this context. It's unnecessary and makes the sentence a bit clumsy.",
+          "suggestion": "قم بتعيين سعة التخزين الافتراضية للغرف في {{productName}}. (Qum bi-ta'yeen sa'at al-takhzeen al-iftiradiya lil-ghuraf fi {{productName}}.)"
         }
       ],
       "approved_at": null
@@ -53,13 +53,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'default' is transliterated as 'defolt'. The correct transliteration should be 'standart' or a more appropriate Azerbaijani equivalent depending on the context (e.g., 'qüdümlü').",
-          "suggestion": "Bu {{productName}}-də otaqlar üçün standart yaddaş kvotasını təyin edin."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'Daha sonra otaq administratorları tərəfindən hər otaq üçün fərdi olaraq təyin edilə bilər' could be phrased more naturally. The word order could be improved.",
-          "suggestion": "Otaq administratorları daha sonra hər otaq üçün ayrı-ayrı yaddaş kvotasını təyin edə bilərlər."
+          "description": "The word 'default' is transliterated as 'defolt'.",
+          "suggestion": "Bu {{productName}}-də otaqlar üçün *default* yaddaş kvotasını təyin edin."
         }
       ],
       "approved_at": null
@@ -76,13 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'prostor' (space) is used instead of a more accurate translation for 'product'. While 'prostor' can sometimes be used in a broader sense, 'produkt' or a similar term like 'aplikace' would be more precise in this context, referring to the software or service.",
-          "suggestion": "Nastavení výchozí kvóty úložiště pro místnosti v tomto produktu {{productName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "The Czech translation preserves the {{productName}} placeholder, which is appropriate, but consistency should be ensured across all translations and UI elements.",
-          "suggestion": "No change needed, but verify consistency."
+          "description": "The phrase 'prostor' (space) doesn't quite capture the intended meaning of 'productName' in this context. It's too generic. It should reflect the specific product or platform.",
+          "suggestion": "Consider using a more precise term that reflects the product name, such as 'systému' (system) or something tailored to the specific product. For example, 'Nastavení výchozí kvóty úložiště pro místnosti v tomto systému {{productName}}'."
         }
       ],
       "approved_at": null
@@ -96,13 +86,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'αποθ. χώρου' is an abbreviation. While understandable, it's better to spell out 'αποθηκευτικού χώρου' for clarity and professionalism.",
-          "suggestion": "Ορίστε την προεπιλεγμένη ποσόστωση αποθηκευτικού χώρου για τα δωμάτια σε αυτό το {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +101,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"tämän {{productName}}-n huoneille\" is a bit awkward.  A more natural Finnish phrasing would be \"tämän {{productName}} -tuotteen huoneille\" or simply \"tälle {{productName}} -tuotteelle\". The addition of the possessive is unnecessary and slightly stilted.",
-          "suggestion": "Aseta oletustallennuskiintiö tälle {{productName}} -tuotteelle."
+          "description": "The phrase 'tämän {{productName}}-n huoneille' sounds awkward in Finnish. It's unnecessarily possessive and a more natural phrasing would be 'tässä {{productName}}-tilassa' or 'tässä {{productName}}-palvelussa' (depending on what 'productName' represents). 'Huoneille' is technically correct, but not ideal.",
+          "suggestion": "Aseta oletustallennuskiintiö tähän {{productName}}-tilaan."
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"room admin\" as \"Huoneen pääkäyttäjä\" is technically correct but a bit formal and potentially unfamiliar to some users. A more common term might be better depending on the specific context of the product.",
-          "suggestion": "Consider using a simpler term like 'Huoneen ylläpitäjä' or 'Huoneen hallinnoija' depending on the product's terminology.  It's crucial to match the product’s user experience."
+          "description": "The word 'pääkäyttäjä' (main user) isn't the most accurate translation of 'room admin'. 'Huoneen ylläpitäjä' or 'Huoneen hallinnoija' would be better translations, implying administrative control.",
+          "suggestion": "Huoneen ylläpitäjä voi myöhemmin muokata sitä jokaisen huoneen osalta erikseen."
         }
       ],
       "approved_at": null
@@ -134,13 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'It can later be adjusted for each room individually by the room admin' is not accurately translated. 'L'administrateur de salle peut configurer les quotas de stockage spécifiquement pour chaque salle plus tard' implies a configuration action rather than an adjustment.",
-          "suggestion": "Définissez les quotas de stockage par défaut pour les salles {{productName}}. L'administrateur de salle peut ultérieurement ajuster les quotas de stockage pour chaque salle."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'ultérieurement' is a more elegant replacement for 'plus tard' in this context.",
-          "suggestion": "Définissez les quotas de stockage par défaut pour les salles {{productName}}. L'administrateur de salle peut ultérieurement ajuster les quotas de stockage pour chaque salle."
+          "description": "The phrase \"configurer les quotas de stockage spécifiquement pour chaque salle\" is a bit clunky. A more natural translation for \"adjusted for each room individually\" would be something like \"modifier les quotas de stockage pour chaque salle\".",
+          "suggestion": "Définissez les quotas de stockage par défaut pour les salles {{productName}}. L'administrateur de salle peut modifier les quotas de stockage pour chaque salle plus tard."
         }
       ],
       "approved_at": null
@@ -148,7 +127,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a colon after 'չափաբաժինը' which isn't consistent with the English style. In the English content, there is no colon after 'quota'.",
+          "suggestion": "Remove the colon after 'չափաբաժինը'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -162,9 +147,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ストレージ容量制限' (storage capacity limit) is technically correct, but 'ストレージクォータ' (storage quota) would be a more direct and natural translation of 'storage quota'.",
+          "suggestion": "この{{productName}}ルームのデフォルトのストレージクォータを設定してください。"
+        },
+        {
           "type": "formatting",
-          "description": "The phrase 'この{{productName}}ルームの' could be more naturally phrased. Combining 'この' and 'ルームの' might be slightly awkward in Japanese. Consider rephrasing for better flow.",
-          "suggestion": "この{{productName}}内のルームの"
+          "description": "While not strictly incorrect, using a more natural phrasing like '各ルームごとにルーム管理者によって個別に調整可能です' would improve readability.",
+          "suggestion": "この{{productName}}ルームのデフォルトのストレージクォータを設定してください。容量制限は後でルーム管理者によって各ルームごとに個別に調整可能です。"
         }
       ],
       "approved_at": null
@@ -178,13 +168,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ເບິ່ງແຍງ' (berng yaeng) is a bit awkward in this context. It translates to 'oversee' or 'supervise,' but in the context of room administration, 'ຜູ້ປົກຄອງຫ້ອງ' (phou pokkhong hong) - 'room administrator' would be more appropriate.",
-          "suggestion": "ປ່ຽນ 'ຜູ້ເບິ່ງແຍງຫ້ອງ' ດ້ວຍ 'ຜູ້ປົກຄອງຫ້ອງ'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -202,13 +186,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'pamięci' is technically correct for memory, but in this context, 'przestrzeni' (space) would be more natural and accurately convey 'storage quota'. It sounds less technical.",
-          "suggestion": "Skonfiguruj domyślny limit przestrzeni dla pokoi w tym {{productName}}. Limit dla poszczególnych pokoi może zostać zmieniony później przez ich administratorów."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -220,13 +198,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'pode ser ajustado' sounds slightly unnatural in Brazilian Portuguese. A more natural phrasing would be 'pode ser ajustada' (agrees in gender with 'cota').",
-          "suggestion": "Defina a cota de armazenamento padrão para salas neste {{productName}}. Posteriormente, pode ser ajustada para cada sala individualmente pelo administrador da sala."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -235,18 +207,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Set the default storage quota\" as \"Stabilire cotă de stocare implicită\" is technically correct but could be more natural. \"Stabiliți cota de stocare implicită\" is a more common phrasing.",
-          "suggestion": "Stabiliți cota de stocare implicită"
+          "description": "The phrase \"Administrator de sală\" is not the most natural translation for \"room admin.\" It's too literal and formal. A more idiomatic translation would be \"administratorul sălii\" or simply \"administratorul\".",
+          "suggestion": "administratorul sălii"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Administrator de sală\" is correct but sounds a little formal. A more common phrasing would be \"Administratorul sălii\" or simply \"Administrator\".",
-          "suggestion": "Administratorul sălii"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"configure cote de stocare mai târziu individual pentru fiecare sală\" is a bit clunky. A more natural flow would be to convey the meaning of individual adjustments.",
-          "suggestion": "poate ajusta mai târziu individual cotele de stocare pentru fiecare sală."
+          "description": "The phrase \"poate configura cote de stocare mai târziu individual pentru fiecare sală\" is a bit clunky. A more fluent translation would be \"poate ajusta mai târziu cotele de stocare pentru fiecare sală individual\" or \"poate modifica ulterior cotele de stocare pentru fiecare sală\".",
+          "suggestion": "poate ajusta mai târziu cotele de stocare pentru fiecare sală individual"
         }
       ],
       "approved_at": null
@@ -263,13 +230,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"ආචයන සලාකය\" (aachayana salaakaya) is a very literal and awkward translation for \"storage quota\". It doesn't convey the intended meaning clearly in Sinhala. It's closer to \"storage slate\" or \"storage plate\" which isn't accurate.",
-          "suggestion": "Consider using a more common and understandable term for \"storage quota\" like \"ගබඩා ඉඩපහසු\" (gabada idapahasu) or \"ගබඩා ප්‍රමාණය\" (gabada pramāṇa)."
+          "description": "The term 'ආචයන සලාකය' (aachayana salaakaya) is an unusual and potentially inaccurate translation for 'storage quota'. It doesn't convey the intended meaning clearly. 'භාරකිරීම් සීමාව' (bhaarakarim simevaa) or 'ගබඩාවේ සීමාව' (gabadaavae simevaa) would be more appropriate.",
+          "suggestion": "මෙම {{productName}} හි කාමර සඳහා පෙරනිමි භාරකිරීම් සීමාව සකසන්න. or මෙම {{productName}} හි කාමර සඳහා පෙරනිමි ගබඩාවේ සීමාව සකසන්න."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow and naturalness. The current phrasing is slightly stilted.",
-          "suggestion": "Instead of \"මෙම {{productName}} හි කාමර සඳහා පෙරනිමි ආචයන සලාකය සකසන්න. පසුව කාමර පරිපාලකයාට එක් එක් කාමරය සඳහා වෙනම සකස් කිරීමට හැකිය.\" consider: \"මෙම {{productName}} හි කාමරවලට පෙරනිමි ගබඩා ඉඩපහසු සකසන්න. පසුව කාමර පරිපාලකයාට එක් එක් කාමරය සඳහා වෙනම සකස් කළ හැකිය.\" "
+          "type": "formatting",
+          "description": "The Sinhala translation maintains the English variable {{productName}}. While technically correct, it's generally better to either translate the variable or remove it if the product name will be inserted separately in the Sinhala version.",
+          "suggestion": "Consider translating the variable or ensuring it's handled appropriately in the Sinhala implementation."
         }
       ],
       "approved_at": null
@@ -280,13 +247,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'priestore' (space) doesn't quite capture the intended meaning of '{{productName}}'. It's implying a physical space, while {{productName}} likely refers to a digital platform or service. A more accurate translation would be something that reflects the platform's nature.",
-          "suggestion": "Consider replacing 'priestore' with a term more specific to the context of {{productName}}. For example, if it's a cloud storage service, 'aplikácii' (application) or 'systéme' (system) might be better."
+          "description": "The word 'priestore' (space) doesn't quite capture the meaning of 'in this {{productName}}'. It's a bit too generic. It should reflect the specific product or platform.",
+          "suggestion": "Nastavte predvolenú kvótu úložiska pre miestnosti v tomto {{productName}}."
         },
         {
-          "type": "formatting",
-          "description": "The double curly braces around {{productName}} in the Slovak translation indicate a placeholder that requires explanation to the translator.",
-          "suggestion": "Ensure the translator understands the purpose and usage of {{productName}} and how to handle the placeholder appropriately within the Slovak text. If the value is to be inserted programmatically, that information needs to be communicated."
+          "type": "incorrect_translation",
+          "description": "The phrase 'administrátor miestnosti' is somewhat awkward. A more natural phrasing for 'room admin' in Slovak would be 'správca miestnosti'.",
+          "suggestion": "Nastavte predvolenú kvótu úložiska pre miestnosti v tomto {{productName}}. Neskôr ju môže pre každú miestnosť individuálne upraviť správca miestnosti."
         }
       ],
       "approved_at": null
@@ -297,18 +264,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'prostor' is used instead of 'izdelku' or a more appropriate term like 'platformi' or 'sistemu' to match the 'productName' context. 'Prostor' means 'room' which is confusing because it references the product itself.",
-          "suggestion": "Nastavite privzeto kvoto prostora za shranjevanje v tem izdelku {{productName}}."
+          "description": "The phrase \"v tem prostoru\" is awkward and doesn't quite capture the meaning of 'in this {{productName}}'. It seems to be translating 'in' as 'in the space' instead of 'within this product/system'.",
+          "suggestion": "Nastavite privzeto kvoto prostora za shranjevanje v tem {{productName}}."
         },
         {
-          "type": "grammatical",
-          "description": "The sentence 'Kasneje se lahko prilagodi za vsako sobo posebej s strani skrbnika. sobe.' is grammatically incorrect and redundant. The repetition of 'sobe' is unnecessary and awkward.",
-          "suggestion": "Kasneje se jo lahko prilagodi za vsako sobo posebej s strani skrbnika."
-        },
-        {
-          "type": "formatting",
-          "description": "The repetition of 'sobe' at the end of the sentence makes the sentence awkward.",
-          "suggestion": "Remove the second 'sobe' at the end of the sentence."
+          "type": "grammar",
+          "description": "The final \"sobe.\" is unnecessary and grammatically incorrect. It's a repetition of the preceding noun.",
+          "suggestion": "Remove the trailing \"sobe.\""
         }
       ],
       "approved_at": null
@@ -318,14 +280,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The hyphen in 'productName'-у is unnecessary and stylistically incorrect. The possessive suffix should be attached directly.",
-          "suggestion": "productName-у should be productName-у"
+          "type": "incorrect_translation",
+          "description": "The word 'подразумевану' (podrazumevanu) which translates to 'implied' or 'assumed' doesn't quite capture the meaning of 'default' in this context. 'Default' implies a pre-set value, not necessarily one that is implied or assumed.",
+          "suggestion": "Поставите подразумевану или унутрашњу складишну квоту за собе у овом {{productName}}-у. (Postavite podrazumevanu ili unutrasnju skladishnu kvotu za sobe u ovom {{productName}}-u.) - Uses 'унутрашњу' which translates to 'internal' and is closer to default in meaning."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'подешено' is technically correct, 'исправљено' or 'промењено' might be more natural and align better with the concept of adjustment or modification of a setting.",
-          "suggestion": "Replace 'подешено' with 'исправљено' or 'промењено'."
+          "type": "formatting",
+          "description": "The use of the genitive suffix '-у' on 'productName' seems unnecessarily informal. While acceptable in conversational Serbian, a more formal register is preferable for a setting description.",
+          "suggestion": "Поставите подразумевану складишну квоту за собе у овом {{productName}}."
         }
       ],
       "approved_at": null
@@ -335,14 +297,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"postavite\" is an imperative form and doesn't fit the context of a setting description. It implies the user is being instructed to do something. A more appropriate phrasing would be a descriptive term like 'Odredite' (Set) or 'Podesite' (Adjust).",
+          "suggestion": "Odredite podrazumevanu skladišnu kvotu za sobe u ovom {{productName}}-u."
+        },
+        {
           "type": "formatting",
-          "description": "The hyphen in 'productName'-u' is unnecessary and makes the sentence slightly awkward. The Serbian language doesn't typically require a hyphen like that when incorporating a foreign word into a sentence.",
-          "suggestion": "Postavite podrazumevanu skladišnu kvotu za sobe u ovom {{productName}}. Kasnije može biti podešeno za svaku sobu individualno od strane admina sobe."
+          "description": "The use of hyphenation with \"-u\" at the end of 'productName' might be incorrect depending on the specific Serbian grammatical rules. It may require further context to confirm.",
+          "suggestion": "Consider whether the hyphenation is necessary or if it's more appropriate to omit it based on the specific naming convention."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'admina sobe' is understandable, 'admin sobe' or 'administrator sobe' would be more natural and idiomatic in Serbian. 'Admina sobe' implies possession ('of the room admin') rather than just referring to the room administrator.",
-          "suggestion": "Postavite podrazumevanu skladišnu kvotu za sobe u ovom {{productName}}. Kasnije može biti podešeno za svaku sobu individualno od strane admina sobe ili administratora sobe."
+          "description": "“admina sobe” is a slightly awkward phrasing. A more natural Serbian equivalent would be 'administrator sobe' or simply 'admin'.",
+          "suggestion": "Odredite podrazumevanu skladišnu kvotu za sobe u ovom {{productName}}-u. Kasnije može biti podešeno za svaku sobu individualno od strane administratora sobe ili admina."
         }
       ],
       "approved_at": null
@@ -359,18 +326,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"storage quota\" is too literal. \"Квота сховища\" (quota of storage) isn't as natural as alternatives.",
-          "suggestion": "Consider 'обмеження сховища' (storage limitation) or 'обсяг сховища' (storage volume)."
+          "description": "The term \"просторі\" (prostori) translates more to 'space' rather than the intended meaning of 'product' or 'platform'. It's unclear and might confuse the user.",
+          "suggestion": "Установіть квоту сховища за замовчуванням для кімнат у цьому продукті {{productName}}. (Use 'продукті' for product)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"просторі {{productName}}\" (in this space {{productName}}) feels slightly awkward. It's not entirely incorrect, but could be improved for flow.",
-          "suggestion": "Consider 'в цьому продукті {{productName}}' (in this product {{productName}}) or 'для цього {{productName}}' (for this {{productName}})."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'адміністратор кожної кімнати зможе налаштувати квоту окремо для своєї кімнати' (the admin of each room will be able to configure the quota separately for their room) is a bit verbose. It repeats the idea of 'separateness'.",
-          "suggestion": "Consider 'адміністратор кожної кімнати зможе налаштувати квоту окремо' (the admin of each room can adjust the quota separately)."
+          "description": "The phrase \"адміністратор кожної кімнати зможе налаштувати квоту окремо для своєї кімнати\" is a bit wordy.  It can be simplified without losing meaning.",
+          "suggestion": "Адміністратор кожної кімнати зможе пізніше налаштувати квоту окремо. (Administrator of each room can adjust the quota later.)"
         }
       ],
       "approved_at": null

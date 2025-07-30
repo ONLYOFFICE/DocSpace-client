@@ -169,22 +169,14 @@ const InviteInput = ({
   };
 
   const getItemContent = useCallback(
-    (item) => {
-      const {
-        avatar,
-        displayName,
-        name: groupName,
-        email,
-        id,
-        shared,
-        isGroup = false,
-      } = item;
+    (item: TUser | TGroup) => {
+      const { id, shared } = item;
 
       const addUser = () => {
         if (shared) {
           toastr.warning(t("UsersAlreadyAdded"));
         } else {
-          setInviteItems([item, ...inviteItems]);
+          setInviteItems([item, ...inviteItems] as TSelectorItem[]);
         }
 
         setInputValue("");
@@ -203,18 +195,18 @@ const InviteInput = ({
           <Avatar
             size={AvatarSize.min}
             role={AvatarRole.user}
-            source={avatar}
-            userName={groupName}
-            isGroup={isGroup}
+            source={(item as TUser).avatar}
+            userName={(item as TGroup).name}
+            isGroup={(item as TGroup).isGroup}
           />
 
           <div className="list-item_content">
             <div className="list-item_content-box">
               <SearchItemText $primary disabled={shared}>
-                {displayName || groupName}
+                {"displayName" in item ? item.displayName : item.name}
               </SearchItemText>
             </div>
-            <SearchItemText>{email}</SearchItemText>
+            <SearchItemText>{(item as TUser).email}</SearchItemText>
           </div>
           {shared ? (
             <SearchItemText $info>{t("Common:Invited")}</SearchItemText>

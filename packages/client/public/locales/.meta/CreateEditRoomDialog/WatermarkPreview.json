@@ -3,7 +3,7 @@
   "content": "Watermark Preview",
   "content_en_sha1_hash": "dbfb9b8a63ad0c23b973116c08bce722f4620ccf",
   "created_at": "2025-05-19T21:30:56.860Z",
-  "updated_at": "2025-05-20T09:37:59.709Z",
+  "updated_at": "2025-05-24T13:38:54.747Z",
   "comment": {
     "text": "This translation key is used to display a watermark preview in an image editing component. It appears as a textual overlay on the image and provides a brief explanation of its purpose. Translators should focus on providing a clear and concise description that is suitable for the context where this text will be displayed.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຕົວຢ່າງໝຶກໄມ້' (tua yang muk mai) literally translates to 'wood stain example'. It doesn't accurately convey the meaning of 'Watermark Preview', which implies a preview of a watermark.",
+          "suggestion": "Consider a translation that conveys the concept of a preview or demonstration of a watermark. Possible suggestions include: 'ຕົວຢ່າງໝຶກນ້ຳ' (tua yang muk nam - water mark example) or 'ຄະນະສະແດງໝຶກນ້ຳ' (kana sadaeng muk nam - watermark display/presentation)."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Voorbeeld Watermerk\" is a very literal translation. A more natural Dutch phrasing would be \"Watermerkvoorbeeld\". The current translation sounds a bit clunky.",
+          "suggestion": "Watermerkvoorbeeld"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Previzualizare incripționare' doesn't accurately convey the meaning of 'Watermark Preview'. 'Incripționare' means 'encryption', while 'watermark' refers to a visual overlay or identifier. It's a semantic mismatch.",
+          "suggestion": "A more accurate translation would be something like 'Previzualizare filigran' or 'Vizualizare filigran'. 'Filigran' is the Romanian word for 'watermark'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +189,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'жига' is a less common and potentially incorrect term for 'watermark'. A more standard term would be 'водани знак'.",
+          "suggestion": "Преглед воденог знака"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Pregled vodenog žiga\" is not the most natural or idiomatic way to say \"Watermark Preview\" in Serbian. While technically correct, it sounds somewhat literal.",
+          "suggestion": "A more natural translation would be \"Vizualizacija vodenog žiga\" or \"Prikaz vodenog žiga\"."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

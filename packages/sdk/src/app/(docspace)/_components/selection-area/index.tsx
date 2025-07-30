@@ -25,6 +25,7 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+
 "use client";
 
 import { observer } from "mobx-react";
@@ -42,16 +43,17 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 const SelectionArea = observer(() => {
   const [countTilesInRow, setCountTilesInRow] = useState(0);
+  const [isSSR, setIsSSR] = useState(true);
 
   const { setSelections } = useFilesSelection();
   const { filesViewAs } = useSettingsStore();
   const { items } = useFilesListStore();
 
-  let foldersLength = useMemo(
+  const foldersLength = useMemo(
     () => items.filter((item) => item.isFolder).length,
     [items],
   );
-  let filesLength = items.length - foldersLength;
+  const filesLength = items.length - foldersLength;
 
   const getCountOfMissingFilesTiles = (itemsLength: number) => {
     const division = itemsLength % countTilesInRow;
@@ -97,7 +99,11 @@ const SelectionArea = observer(() => {
     };
   }, [countTilesInRow]);
 
-  return checkIsSSR() ? null : (
+  useLayoutEffect(() => {
+    setIsSSR(checkIsSSR());
+  }, []);
+
+  return isSSR ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
       selectableClass={selectableClass}

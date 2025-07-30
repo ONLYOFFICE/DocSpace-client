@@ -49,22 +49,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import {
-  StyledPreparationPortal,
-  StyledRectangleSkeleton1,
-  StyledRectangleSkeleton2,
-  StyledRectangleSkeleton3,
-  StyledRectangleSkeleton4,
-} from "./PreparaionPortal.styled";
+
+import { RectangleSkeleton } from "../rectangle";
+
+import styles from "./PreparationPortal.module.scss";
 
 const PreparationPortalLoader = () => {
   return (
-    <StyledPreparationPortal>
-      <StyledRectangleSkeleton1 width="100%" height="28" />
-      <StyledRectangleSkeleton2 width="100%" height="24" />
-      <StyledRectangleSkeleton3 width="100%" height="20" />
-      <StyledRectangleSkeleton4 width="100%" height="20" />
-    </StyledPreparationPortal>
+    <div className={styles.preparationPortal}>
+      <RectangleSkeleton
+        className={styles.rectangleSkeleton1}
+        width="100%"
+        height="28"
+      />
+      <RectangleSkeleton
+        className={styles.rectangleSkeleton2}
+        width="100%"
+        height="24"
+      />
+      <RectangleSkeleton
+        className={styles.rectangleSkeleton3}
+        width="100%"
+        height="20"
+      />
+      <RectangleSkeleton
+        className={styles.rectangleSkeleton4}
+        width="100%"
+        height="20"
+      />
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "Audit Trail",
   "content_en_sha1_hash": "e01eacc119b7bc154d3fc47e8d5dca2a54b1af3f",
   "created_at": "2025-05-19T21:30:50.600Z",
-  "updated_at": "2025-07-02T07:49:19.858Z",
+  "updated_at": "2025-05-26T07:57:32.787Z",
   "comment": {
     "text": "This translation key is used as a title for an audit trail section within the Portal Settings. It appears in the security category of the portal settings page and is also referenced when initializing the audit trail functionality. Translators should provide a clear and concise title that reflects the purpose of this section in English.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 264,
+      "line_number": 257,
       "context": "{\n id: \"portal-settings_catalog-audit-trail\",\n key: \"1-3\",\n icon: \"\",\n link: \"audit-trail\",\n tKey: \"AuditTrailNav\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Audit izi\" is a literal translation of 'Audit Trail', it doesn't convey the same meaning in Azerbaijani. \"Audit Trail\" typically refers to a log of user actions and system changes, and \"Audit izi\" translates to 'Audit track' or 'Audit trace' which isn't quite the same.",
-          "suggestion": "Consider alternatives like \"Yoxlama Siyahısı\" (Verification List), \"Yoxlama Qeydləri\" (Verification Notes), or \"Əməliyyat Qeydləri\" (Operation Notes) depending on the specific context."
+          "description": "While \"Audit izi\" is a literal translation of \"Audit Trail,\" it may not be the most natural or commonly used term in Azerbaijani. A more idiomatic translation might be preferred depending on the context and audience.",
+          "suggestion": "Consider alternatives like \"Yoxlama Sığortası\" or \"Auditin İzləri\" - these might be more readily understood and accepted within a professional or technical context."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Одитна пътека\" translates literally to \"Audit Trail,\" \"Пътека\" (path, trail) doesn't fully capture the meaning of an audit trail. It implies a physical route rather than a record of actions.",
-          "suggestion": "Consider alternatives like \"Одитен запис\" (Audit Record) or \"История на одита\" (Audit History) which are more commonly used for audit trails in Bulgarian IT contexts.  A more nuanced translation might require understanding the specific application of the term."
+          "description": "While \"Одитна пътека\" is a literal translation of \"Audit Trail,\" it doesn't convey the intended meaning in a user interface context. \"Audit Trail\" typically refers to a log or record of activities. \"Пътека\" (path/trail) might be misleading.",
+          "suggestion": "Consider a translation like \"Проследяване на дейности\" (Activity Tracking) or \"История на промените\" (Change History), depending on the specific functionality."
         }
       ],
       "approved_at": null
@@ -77,9 +77,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Audit-Trail' is a direct transliteration of the English term, rather than a proper German equivalent. While understandable, it's not idiomatic. A more appropriate translation would be 'Prüfpfad' or 'Kontrollpfad'.",
-          "suggestion": "Prüfpfad"
+          "type": "formatting",
+          "description": "The German translation uses a hyphenated term 'Audit-Trail' which doesn't follow typical German capitalization and formatting for compound nouns. While technically understandable, it's not idiomatic.",
+          "suggestion": "Consider using 'Prüfprotokoll' or 'Absichtsprotokoll' as a more natural German translation, or if 'Audit Trail' must be retained, capitalize it: 'Audit Trail'."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Παρακολούθηση ελέγχου\" is a literal translation and doesn't fully capture the meaning of \"Audit Trail\" in a software context. \"Audit Trail\" typically refers to a record of actions and changes, not just a 'control monitoring'.",
-          "suggestion": "Έλεγχος δραστηριοτήτων"
+          "description": "The Greek translation \"Παρακολούθηση ελέγχου\" while literally meaning 'Control Monitoring' doesn't fully capture the meaning of 'Audit Trail'. An audit trail implies a record of actions and changes, not just monitoring a control.",
+          "suggestion": "Ίχνος Ελέγχου"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ստուգման հետք\" is a literal translation of \"Audit Trail\", it's not the standard or most natural way to express it in Armenian. \"Audit Trail\" typically refers to a record of actions taken within a system.",
-          "suggestion": "Consider using a more idiomatic Armenian equivalent that conveys the meaning of a record of actions, such as \"Աուդիտային արձանագրություն\" (Audit Record) or \"Գործողությունների պատմություն\" (History of Actions)."
+          "description": "The translation 'Ստուգման հետք' while technically meaning 'Examination Trace', isn't the standard or most natural translation for 'Audit Trail' in Armenian. 'Աուդիտ հետք' or 'Տեսչական հետք' would be more accurate and recognizable.",
+          "suggestion": "Consider 'Աուդիտ հետք' or 'Տեսչական հետք'."
         }
       ],
       "approved_at": null
@@ -153,7 +153,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Audita žurnāls' is a literal translation of 'Audit Trail', it might not be the most natural or commonly used term in Latvian. 'Audita darbi' or 'Audita vēsture' might be more appropriate depending on the specific context of the application's audit trail functionality.",
+          "suggestion": "Consider 'Audita darbi' or 'Audita vēsture' as alternatives. Research common Latvian terminology for audit trails within software applications."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -165,13 +171,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Szlak audytu' is a literal translation of 'Audit Trail,' it doesn't fully convey the meaning in a Polish context. 'Audit Trail' refers to a log of actions and changes, not necessarily a 'path' or 'route'.",
-          "suggestion": "Consider alternatives like 'Rejestr audytu', 'Historia audytu', or 'Dziennik audytu'. 'Rejestr audytu' is likely the most common and accurate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Auditar o Rastro' is a literal translation of 'Audit Trail' and doesn't convey the intended meaning naturally in Portuguese. 'Audit Trail' refers to a log of system activity. A more accurate and idiomatic translation would be 'Registro de Auditoria' or 'Histórico de Auditoria'.",
-          "suggestion": "Registro de Auditoria"
+          "description": "The translation 'Auditar o Rastro' is not the most natural or accurate translation of 'Audit Trail'. While 'Auditar' is correct for 'Audit,' 'o Rastro' is a literal translation of 'Trail' and lacks the professional connotation of an audit trail. A more common and appropriate translation would be 'Registo de Auditoria' or 'Rasto de Auditoria'.",
+          "suggestion": "Registo de Auditoria"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Lanţ de audit\" is a literal translation of \"Audit Trail\", it's not the standard or most natural term used in Romanian business or technical contexts. A more common and easily understood translation would be \"Jurnal de audit\" or \"Urmărire audit\". \"Lanţ\" implies a chain, which isn't the core concept of an audit trail.",
-          "suggestion": "Consider using \"Jurnal de audit\" or \"Urmărire audit\"."
+          "description": "While 'Lanţ de audit' is a literal translation of 'Audit Trail', it's not the standard or most natural way to refer to an audit trail in Romanian. 'Jurnal de audit' or 'Urmărire audit' are more commonly used and understood.",
+          "suggestion": "Consider 'Jurnal de audit' or 'Urmărire audit'."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"විගණන මඟ\" (vigaṇan maag) translates more literally to 'calculation path' or 'counting route', which doesn't accurately convey the meaning of 'Audit Trail'. An audit trail refers to a record of system activity, not necessarily a calculation or counting process.",
-          "suggestion": "A more appropriate translation would convey the meaning of a record of actions or a log. Possible suggestions include: \"ගිණුම් පථය\" (giṇum pathaya) - which means 'account path/record', or \"පරීක්ෂණ වාර්තාව\" (pērikṣaṇa vārtāva) - which means 'audit report/record'."
+          "description": "The translation 'විගණන මඟ' (viganana maga) literally translates to 'calculation path' or 'counting path'. While it might be understood in context, it's not a direct or commonly used translation for 'Audit Trail'. An audit trail refers to a record of actions and events, not necessarily involving calculations.",
+          "suggestion": "Consider alternatives like 'ගණන්කාරී ලේඛාව' (ganakari lekava - accounting record), 'පරීක්ෂණ වාර්තාව' (perikshana vartava - inspection report), or 'ක්‍රියාකාරීත්ව වාර්තාව' (kriyakaritha vartava - activity report). The best option depends on the specific context of the audit trail."
         }
       ],
       "approved_at": null
@@ -225,13 +225,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Auditné záznamy\" is technically correct, \"Audit Trail\" often translates more naturally and concisely as \"Auditovanie\" or \"Záznamy auditu\". \"Auditné záznamy\" is a bit literal and less idiomatic.",
-          "suggestion": "Consider using \"Auditovanie\" or \"Záznamy auditu\" for a more natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Ревизорска стаза\" is technically understandable, it's not the most natural or commonly used translation for \"Audit Trail.\" \"Ревизиони траг\" or \"Евиденција контроле\" would be more accurate and idiomatic.",
-          "suggestion": "Consider \"Ревизиони траг\" or \"Евиденција контроле\"."
+          "description": "While \"Ревизорска стаза\" is understandable, it's not the most natural or commonly used Serbian (Cyrillic) translation for \"Audit Trail.\" \"Ревизиони траг\" or \"Траг ревизије\" would be more accurate and idiomatic.",
+          "suggestion": "Ревизиони траг"
         }
       ],
       "approved_at": null
@@ -258,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Revizorska staza' is understandable, it doesn't perfectly convey the meaning of 'Audit Trail'. 'Audit Trail' implies a chronological record of actions, whereas 'Revizorska staza' emphasizes a path of auditors. A more accurate translation would emphasize the record aspect.",
-          "suggestion": "Prethodna evidencija' or 'Evidencija revizija'"
+          "description": "While \"Revizorska staza\" is a possible translation, \"Audit Trail\" often refers to a log or record of actions. A more accurate translation might be \"Trag revizije\" or \"Evidencija revizije\". \"Revizorska staza\" implies a path taken by an auditor, which isn't necessarily the meaning.",
+          "suggestion": "Trag revizije"
         }
       ],
       "approved_at": null
@@ -276,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Перевірка аудиту\" translates to \"Audit Check\" rather than \"Audit Trail.\" While related, it doesn't convey the exact meaning of the English term. \"Audit Trail\" implies a chronological record, which \"Перевірка аудиту\" does not.",
-          "suggestion": "Розслідування аудиту"
+          "description": "The translation 'Перевірка аудиту' is a literal translation of 'Audit Check' rather than the more common and accurate Ukrainian equivalent of 'Audit Trail'. 'Audit Trail' refers to a record of actions, and a more appropriate translation would convey that meaning.",
+          "suggestion": "Журнал аудиту"
         }
       ],
       "approved_at": null
@@ -288,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Kiểm tra\" can mean 'check' or 'audit', in the context of an audit trail navigation element, a more accurate translation would emphasize the tracking or tracing aspect. \"Kiểm tra Truy nguyên\" is a bit clunky and doesn't fully capture the meaning of 'Audit Trail'.",
-          "suggestion": "Consider \"Lịch sử kiểm toán\" or \"Truy xuất nhật ký\" as alternatives. \"Lịch sử kiểm toán\" directly translates to \"Audit History\" which is a common term. \"Truy xuất nhật ký\" implies tracing a log."
+          "description": "While \"Kiểm tra\" can mean 'check' or 'audit', and \"Truy nguyên\" means 'trace' or 'track', the combined phrase \"Kiểm tra Truy nguyên\" doesn't perfectly capture the meaning of 'Audit Trail'. An 'Audit Trail' implies a record of actions and changes. A more accurate translation might emphasize this aspect.",
+          "suggestion": "Consider alternatives like \"Hồ sơ Kiểm toán\" (Audit Record), \"Lịch sử Kiểm toán\" (Audit History), or \"Nhật ký Kiểm toán\" (Audit Log)."
         }
       ],
       "approved_at": null
@@ -297,13 +291,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"审计追踪\" (shěn jì zhuī zōng) is a possible translation, \"审计跟踪\" (shěn jì gēn zōng) is a more common and natural translation for 'Audit Trail' in Chinese. '跟踪' (gēn zōng) implies following or tracing, which aligns better with the concept of an audit trail.",
-          "suggestion": "审计跟踪"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

@@ -99,8 +99,9 @@ const InputBlock = React.memo(
     // Other props
     children,
     forwardedRef,
+    testId,
   }: InputBlockProps) => {
-    const [isFocus, setIsFocus] = useState(false);
+    const [isFocus, setIsFocus] = useState(isAutoFocussed);
     const iconButtonSize = useIconSize(size, iconSize);
 
     const handleChange = useCallback(
@@ -131,8 +132,8 @@ const InputBlock = React.memo(
 
     const inputProps = {
       id,
-      name,
       type,
+      name,
       value,
       placeholder,
       maxLength,
@@ -154,6 +155,7 @@ const InputBlock = React.memo(
       onKeyDown,
       tabIndex,
       onChange: handleChange,
+      testId,
     };
 
     const inputGroupClassName = classNames(styles.inputGroup, className, {

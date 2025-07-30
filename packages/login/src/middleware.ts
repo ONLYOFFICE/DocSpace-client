@@ -34,16 +34,11 @@ export function middleware(request: NextRequest) {
 
   const host = request.headers.get("x-forwarded-host");
 
-  console.log("HOST", host);
   const proto = request.headers.get("x-forwarded-proto");
-  console.log("PROTO", proto);
 
   const redirectUrl = `${proto}://${host}`;
-  console.log("REDIRECT_URL", redirectUrl);
 
   if (request.nextUrl.pathname === "/health") {
-    console.log("Get login health check for portal: ", redirectUrl);
-
     requestHeaders.set("x-health-check", "true");
 
     return NextResponse.json(
@@ -53,15 +48,12 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.includes("confirm")) {
-    console.log("CONFIRM PATHNAME", request.nextUrl.pathname);
     const searchParams = new URLSearchParams(request.nextUrl.searchParams);
     const queryType = searchParams.get("type") ?? "";
     const posSeparator = request.nextUrl.pathname.lastIndexOf("/");
-    console.log("POS_SEPARATOR", posSeparator);
-    const type = !!posSeparator
+    const type = posSeparator
       ? request.nextUrl.pathname?.slice(posSeparator + 1)
       : queryType;
-    console.log("TYPE", type);
 
     let queryString: string;
     if (queryType) {
@@ -75,35 +67,26 @@ export function middleware(request: NextRequest) {
     requestHeaders.set("x-confirm-query", searchParams.toString());
 
     const confirmUrl = `${request.nextUrl.origin}/login/confirm/${type}?${queryString}`;
-    console.log("CONFIRM URL", confirmUrl);
     if (request.nextUrl.toString() == confirmUrl) {
-      console.log("Rewrite to confirm");
       return NextResponse.rewrite(confirmUrl, { headers: requestHeaders });
     }
 
-    console.log("Redirect to confirm");
     return NextResponse.redirect(
       `${request.nextUrl.origin}/confirm/${type}?${queryString}`,
     );
   }
 
-  console.log("Check auth");
   const isAuth = !!request.cookies.get("asc_auth_key")?.value;
-  console.log("IS_AUTH", isAuth);
 
   const isOAuth = request.nextUrl.searchParams.get("type") === "oauth2";
-  console.log("IS_OAUTH", isOAuth);
   const oauthClientId =
     request.nextUrl.searchParams.get("client_id") ??
     request.nextUrl.searchParams.get("clientId");
-  console.log("OAUTH_CLIENT_ID", oauthClientId);
   if (isOAuth || oauthClientId) {
-    console.log("Check oauth");
     if (oauthClientId === "error")
       return NextResponse.redirect(`${redirectUrl}/login/error`);
 
     const error = request.nextUrl.searchParams.get("error");
-    console.log("ERROR", error);
     if (error && error !== OAuth2ErrorKey.missing_asc_cookie_error) {
       return NextResponse.redirect(
         `${redirectUrl}/login/error?oauthMessageKey=${error}`,
@@ -111,16 +94,13 @@ export function middleware(request: NextRequest) {
     }
 
     if (isAuth && !request.nextUrl.pathname.includes("consent")) {
-      console.log("Redirect to consent");
       return NextResponse.redirect(
         `${redirectUrl}/login/consent${request.nextUrl.search}`,
       );
     }
   } else {
-    console.log("Check redirect");
     const url = request.nextUrl.clone();
     url.pathname = "/";
-    const searchParams = new URLSearchParams(request.nextUrl.searchParams);
 
     if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
   }

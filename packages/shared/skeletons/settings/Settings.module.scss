@@ -23,8 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/mixins";
-@import "../../styles/variables/devices";
+@use "../../styles/mixins";
 
 .smtpContent {
   .rectangle-loader_description {
@@ -56,7 +55,7 @@
     grid-template-columns: 86px 1fr 1fr;
     gap: 8px;
 
-    @include mobile {
+    @include mixins.mobile {
       grid-template-columns: 1fr;
     }
   }
@@ -84,7 +83,7 @@
         width: 350px;
       }
 
-      @include mobile {
+      @include mixins.mobile {
         .rectangle-loader_input {
           width: 100%;
         }
@@ -105,7 +104,7 @@
       grid-template-columns: 86px 86px 1fr;
       gap: 8px;
 
-      @include mobile {
+      @include mixins.mobile {
         grid-template-columns: 1fr;
       }
     }
@@ -124,14 +123,14 @@
       height: 40px;
       margin-bottom: 24px;
 
-      @include mobile {
+      @include mixins.mobile {
         height: 68px;
       }
     }
 
     svg:last-child {
       max-width: 123px;
-      @include mobile {
+      @include mixins.mobile {
         max-width: 100%;
       }
     }
@@ -156,7 +155,7 @@
         minmax(50px, 158px) minmax(70px, 130px) minmax(40px, 100px)
         minmax(60px, 120px);
 
-      @include mobile {
+      @include mixins.mobile {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, 20px);
         grid-gap: 8px;

@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Изберете от списъка",
-  "ConnectingAccount": "Свързване на профил",
-  "DeleteFromTrash": "Избраните елементи бяха успешно изтрити от Кошчето",
   "FileLocked": "Файлът е заключен",
   "FileProtected": "Файлът е защитен с парола",
   "FileUnlocked": "Файлът е отключен",
@@ -14,7 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive директория",
   "FolderTitleWebDav": "WebDAV директория",
   "FolderTitleYandex": "Yandex директория",
-  "GuestReleaseTipDescripton": "Всички добавени предварително потребители станаха Гости и вече присъстват в списъка с Контакти само на администраторите на {{productName}}. Гостите вече не са част от никакви групи. Винаги можете да промените вида им и да ги добавите към група, ако е необходимо.",
   "GuestReleaseTipLink": "Научете повече за потребителските видове",
   "LinkHasExpiredAndHasBeenDisabled": "Линкът изтече и беше деактивиран",
   "LinkValidTime": "Този линк е валиден само за {{days_count}} дни.",
@@ -28,14 +25,5 @@
   "ThirdPartyInfo": "Смени информацията от трето лице",
   "ThirdPartyTitle": "Услуги на трети страни",
   "TitleShowActions": "Покажи действията за файлове",
-  "TitleShowFolderActions": "Покажи действията за папки",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Покажи действията за папки"
 }

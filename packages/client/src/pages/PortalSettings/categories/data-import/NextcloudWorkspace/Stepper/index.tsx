@@ -30,6 +30,7 @@ import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
+import type { TFunction } from "i18next";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import AddEmailsStep from "../../components/AddEmailsStep";
@@ -38,10 +39,8 @@ import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
 
-import { TFunciton } from "../../types";
-
 export const getStepsData = (
-  t: TFunciton,
+  t: TFunction,
   isTypeSelectEmpty: boolean,
   logoText: string,
 ) => {

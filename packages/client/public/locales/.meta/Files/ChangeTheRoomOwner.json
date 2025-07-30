@@ -3,7 +3,7 @@
   "content": "Change the Room Owner",
   "content_en_sha1_hash": "02a0f3d75f6449e5611f36f91216cb8be76a6efe",
   "created_at": "2025-05-19T21:30:55.324Z",
-  "updated_at": "2025-06-03T20:59:41.949Z",
+  "updated_at": "2025-06-08T12:02:32.659Z",
   "comment": {
     "text": "This translation key is used to display the label \"Change the Room Owner\" in a UI element. It will appear as a button or header in a panel, prompting users to update the room owner. Translators should focus on conveying the action of changing the room's ownership.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2161,
+      "line_number": 2164,
       "context": "disabled: false,\n },\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: t(\"Files:ChangeTheRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: this.onChangeRoomOwner,\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
@@ -123,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'De Eigenaar Van De Kamer Wijzigen' is a literal translation but sounds slightly awkward in Dutch. A more natural phrasing would be preferred.",
+          "suggestion": "De Kamer Eigenaar Wijzigen"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -147,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Schimbați proprietarul sălii\" sounds somewhat formal. A more natural and common phrasing would be \"Modificați proprietarul sălii\" or \"Schimbă proprietarul sălii\". \"Schimbă\" is more conversational.",
+          "suggestion": "Modificați proprietarul sălii"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Промени Власника собе' is a literal translation but doesn't fully capture the nuance of 'Change the Room Owner' in a software/application context. It sounds more like a general instruction rather than a user interface label.",
+          "suggestion": "Пребаци власника собе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -207,7 +225,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"更改房间所有者\" is technically correct, it's a bit formal and not the most natural phrasing for a user interface label. A more user-friendly option would be preferred.",
+          "suggestion": "考虑使用更友好的说法，例如 \"更改房间负责人\" 或 \"转移房间所有权\"。"
+        }
+      ],
       "approved_at": null
     }
   }

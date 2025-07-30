@@ -3,7 +3,7 @@
   "content": "You can disable the title of the current section/room/folder.",
   "content_en_sha1_hash": "00ed880701df7a8b7348244ff15b59cb86042775",
   "created_at": "2025-05-19T21:30:54.573Z",
-  "updated_at": "2025-05-21T08:56:34.677Z",
+  "updated_at": "2025-05-24T09:09:03.478Z",
   "comment": {
     "text": "The \"ManagerTitleDescription\" translation key is used to describe the tooltip content that appears next to a button or label in certain UI elements, explaining the purpose of disabling section/folder titles. It appears in developer tools and room settings pages, where users can toggle this feature on/off. Translators should provide an equivalent description for users in other languages.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"section/room/folder\" is translated as \"القسم/الغرفة/المجلد\". While technically correct, it might be more natural and user-friendly in Arabic to use a more encompassing term for 'section' depending on the context. The translation could be improved by considering a term like 'الجزء' (al-juz') or 'المنطقة' (al-mintaqa) for 'section' if it fits the overall application’s terminology.",
+          "suggestion": "Consider revising the term for 'section' to something like 'الجزء' or 'المنطقة' if appropriate for the application context. Alternatively, confirm with the content owner if 'القسم' accurately represents the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -42,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"disable\" is better translated as \"bağlamaq\" or \"dayandırmaq\" rather than \"söndürmək\". \"Söndürmək\" implies extinguishing or turning off completely, which might not be the intended meaning of disabling a title.",
-          "suggestion": "Cari bölmə/otaq/qovluğun başlığını bağlaya bilərsiniz."
+          "description": "The translation 'söndürə bilərsiniz' (can extinguish) doesn't accurately convey the meaning of 'disable' in this context. 'Disable' implies a temporary deactivation or hiding, not a complete extinguishing.",
+          "suggestion": "Cari bölmə/otaq/qovluğun başlığını gizləyə bilərsiniz."
         }
       ],
       "approved_at": null
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Можете да деактивирате заглавието на текущия раздел/стая/папка\" is a literal translation but may not be the most natural or clear way to express the original meaning in Bulgarian. 'Deactivate' can sound a bit technical or abrupt in this context.",
-          "suggestion": "Consider a more user-friendly phrasing like \"Можете да скриете заглавието на текущия раздел/стая/папка.\" or \"Можете да премахнете заглавието на текущия раздел/стая/папка.\""
+          "description": "The translation 'Можете да деактивирате заглавието на текущия раздел/стая/папка' is a literal translation and might not be the most natural phrasing in Bulgarian. 'Деактивирате' (deactivate) is a bit formal and 'заглавие' (title) might be better expressed as 'име' (name) in this context.",
+          "suggestion": "Можете да изключите името на текущия раздел/стая/папка."
         }
       ],
       "approved_at": null
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'vypnout' implies 'to turn off' or 'disable'. While functionally similar to 'disable' in this context, it carries a slightly different connotation. A more precise translation might be 'zakázat' (to prohibit/disable) or 'vypnout zobrazení' (turn off the display).",
-          "suggestion": "Název aktuální sekce/místnosti/složky můžete zakázat."
+          "description": "The translation \"Název aktuální sekce/místnosti/složky můžete vypnout\" literally translates to 'You can disable the name of the current section/room/folder'. The English says 'You can disable the title...', which implies disabling the title display or heading, not disabling the name itself.  'Vypnout' (disable) is a suitable verb, but needs to be applied to the title, not the name.",
+          "suggestion": "Název aktuální sekce/místnosti/složky můžete skrýt."
         }
       ],
       "approved_at": null
@@ -87,7 +93,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"section/room/folder\" is somewhat vague. \"Sala\" typically implies a room. While it can work for folder, the Spanish translation could be more precise depending on the context. Consider alternatives for a more accurate representation of all three terms.",
+          "suggestion": "Consider revising to something like: 'Puede desactivar el título de la sección, sala o carpeta actual.' or a more context-specific alternative."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -102,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'la salle/le dossier' is a literal translation of 'section/room/folder' and might sound awkward in French.  It doesn't convey the nuance of what a 'room' or 'folder' represents in a digital context.",
-          "suggestion": "Vous pouvez désactiver le titre de la section, de l'espace ou du dossier actuel."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, using 'de la section/de l'espace/du dossier' is slightly more formal than necessary. A more conversational tone might be preferable.",
-          "suggestion": "Vous pouvez désactiver le titre de la section, de l'espace ou du dossier actuel."
+          "description": "The phrase 'section/room/folder' is not accurately translated. 'Salle' typically refers to a room, and while it can sometimes mean 'hall,' 'section' and 'folder' need more nuanced translations. Using 'section/salle/dossier' is somewhat clunky.",
+          "suggestion": "Consider a rephrasing to improve flow and accuracy. Options include: 'Vous pouvez désactiver le titre de la section, de la salle ou du dossier actuel' or 'Vous pouvez désactiver le titre de la section courante, de la salle ou du dossier.'"
         }
       ],
       "approved_at": null
@@ -118,9 +125,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Դուք կարող եք անջատել ընթացիկ բաժնի/սենյակի/թղթապանակի վերնագիրը:' is a literal translation and sounds slightly awkward in Armenian. A more natural phrasing would better convey the meaning.",
-          "suggestion": "Consider rephrasing to something like: \"Մեկ կտիվ բաժանելու/սենյակի/ֆայլի վերնագիրը\" or \"Դուք կարող եք հեռացնել ընթացիկ բաժնի/սենյակի/ֆայլի վերնագիրը:\""
+          "type": "spelling",
+          "description": "The word 'վերնագիրը' (vernagiry) which means 'title' is correct, but might be more formally 'նշանակումը' (nshanakumy) which means 'the designation' or 'the name'.  While 'վերնագիրը' is acceptable, 'նշանակումը' might be slightly better in a more technical context.",
+          "suggestion": "Consider using 'նշանակումը' instead of 'վերնագիրը' for a more technical feel."
         }
       ],
       "approved_at": null
@@ -134,13 +141,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"現在のセクション/ルーム/フォルダのタイトルを無効にすることができます\" is technically correct but sounds slightly unnatural and overly formal for a user-facing description. \"無効にする\" (mukyou ni suru) is a more technical term. A more natural phrasing would be something like \"現在のセクション/ルーム/フォルダのタイトルを非表示にすることができます\" or \"現在のセクション/ルーム/フォルダのタイトルを消すことができます\".",
-          "suggestion": "現在のセクション/ルーム/フォルダのタイトルを非表示にすることができます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -155,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ປິດການທໍາງານ\" (pid gan tham ngan) literally translates to \"disable the function.\" While understandable, a more natural translation for \"disable the title\" might be \"ເຊົາໃຊ້ຫົວຂໍ້\" (sao sai hua kho) or similar, depending on the desired nuance. \"ປິດການທໍາງານ\" is more commonly used for functions or services.",
-          "suggestion": "ທ່ານສາມາດເຊົາໃຊ້ຫົວຂໍ້ຂອງພາກສ່ວນ / ຫ້ອງ / folder ປະຈຸບັນ."
+          "description": "The translation 'ປິດການທໍາງານຫົວຂໍ້' is too literal and doesn't convey the intended meaning of 'disable the title'. A more natural translation would be something like 'ເຊົາໃຊ້ຫົວຂໍ້' or 'ບໍ່ໃຊ້ຫົວຂໍ້'.",
+          "suggestion": "ເຊົາໃຊ້ຫົວຂໍ້"
         },
         {
-          "type": "formatting",
-          "description": "The slash '/' is used consistently between 'ພາກສ່ວນ', 'ຫ້ອງ', and 'folder'. Consider whether this is the intended style or if a different separator (e.g., comma) would be more appropriate based on Lao language conventions.",
-          "suggestion": "No suggestion - Style choice, but review consistency."
+          "type": "grammar",
+          "description": "The phrase 'ພາກສ່ວນ / ຫ້ອງ / folder ປະຈຸບັນ' could be improved for better flow. While technically correct, it reads a little awkwardly.",
+          "suggestion": "ພາກສ່ວນ, ຫ້ອງ ຫຼື folder ປະຈຸບັນ"
         }
       ],
       "approved_at": null
@@ -171,14 +172,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'mapes' is a possible misspelling. It should be 'mapes'",
-          "suggestion": "mapes"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be slightly improved for better flow in Latvian. While grammatically correct, it feels a bit clunky.",
-          "suggestion": "Jūs varat izslēgt pašreizējās sadaļas, telpas vai mapes nosaukumu."
+          "type": "incorrect_translation",
+          "description": "The translation 'Jūs varat atspējot pašreizējās sadaļas/telpas/mapes nosaukumu' is a literal translation but doesn't quite convey the meaning of 'disable the title'. A more natural translation would imply removing or hiding the title.",
+          "suggestion": "Jūs varat paslēpt/noņemt pašreizējās sadaļas/telpas/mapes nosaukumu."
         }
       ],
       "approved_at": null
@@ -201,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Você pode desativar o título da seção/sala/pasta atual' is a literal translation that doesn't fully capture the nuance of 'disable'. A more natural translation would convey the ability to hide or remove the title.",
+          "description": "The translation 'Você pode desativar o título da seção/sala/pasta atual' is technically correct but could be more natural sounding. 'Desativar' implies a complete disabling. A more appropriate term might convey a less restrictive action.",
           "suggestion": "Você pode ocultar o título da seção/sala/pasta atual."
         }
       ],
@@ -218,9 +214,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The use of 'Puteţi' (formal 'you') might be too formal for a user interface.  'Poţi' (informal 'you') might be more appropriate depending on the overall tone of the application.",
-          "suggestion": "Poţi dezactiva titlul secțiunei/sălii/folderului actual."
+          "type": "spelling",
+          "description": "The word 'folderului' is missing an accent. It should be 'folderului'.",
+          "suggestion": "folderului"
         }
       ],
       "approved_at": null
@@ -237,8 +233,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඔබට වත්මන් කොටසේ/කාමරයේ/බහාලුමේ සිරැසිය අබල කිරීමට හැකිය.\" is not the most natural or accurate translation of \"You can disable the title of the current section/room/folder.\" The word 'සිරැසිය' (siriya) typically refers to 'restriction' or 'detention,' not 'title.'",
-          "suggestion": "A more accurate translation could be: \"ඔබට වත්මන් කොටසේ/කාමරයේ/බහාලුමේ හිගිලි අබල කිරීමට හැකිය.\" (Obata watman kotase/kamaranaye/bahalume higil abala kirimata kayathiya.)  or \"ඔබට වත්මන් කොටසේ/කාමරයේ/බහාලුමේ නම අබල කිරීමට හැකිය.\" (Obata watman kotase/kamaranaye/bahalume nama abala kirimata kayathiya.)"
+          "description": "The translation 'ඔබට වත්මන් කොටසේ/කාමරයේ/බහාලුමේ සිරැසිය අබල කිරීමට හැකිය' is not the most natural or accurate translation of 'You can disable the title of the current section/room/folder.'.  'සිරැසිය' translates to 'constraint' or 'restriction', not 'title'.",
+          "suggestion": "ඔබට වත්මන් කොටස/කාමරය/බහාලුමේ හිසව නිශ්චල කිරීමට හැකිය."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'නිශ්චල' is a valid word, in this context 'අයින්' or 'ತೆಗೆශීමට' would be more appropriate.",
+          "suggestion": "ඔබට වත්මන් කොටස/කාමරය/බහාලුමේ හිසව අයින් කිරීමට හැකිය."
         }
       ],
       "approved_at": null
@@ -246,19 +247,19 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Môžete deaktivovať názov aktuálnej sekcie/miestnosti/priečinka' is a literal translation but could be improved for clarity and naturalness in Slovak. 'Deaktivovať názov' isn't the most common way to express disabling a title. It's understandable, but sounds a bit clunky.",
-          "suggestion": "Môžete vypnúť názov aktuálnej sekcie/miestnosti/priečinka."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Naslov trenutnega razdelka/sobe/mape lahko onemogočite' is a literal translation and sounds slightly awkward in Slovenian. A more natural phrasing would convey the meaning of disabling the title.",
+          "suggestion": "Naslova trenutnega razdelka/sobe/mape je mogoče onemogočiti."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -267,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'онемогуц́ите' is a valid word, but a more natural and common phrasing would be 'искључите'.",
-          "suggestion": "искључите"
+          "description": "The word 'онемогуц́ите' appears to be misspelled. The correct spelling should be 'онемогућите'.",
+          "suggestion": "онемогућите"
         }
       ],
       "approved_at": null
@@ -279,7 +280,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'fascikle' is a less common and potentially unclear word choice. While technically correct, 'datoteke' or 'foldera' might be more understandable to a wider audience.",
+          "description": "The word 'fascikle' is likely a typo and should be 'datoteke' or 'maper' for better clarity in context. 'Fascikle' isn't a standard term for folders in Serbian.",
           "suggestion": "Možete da onemogućite naslov trenutnog odeljka/sobe/datoteke."
         }
       ],
@@ -291,13 +292,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Geçerli bölümün/odanın/klasörün başlığını devre dışı bırakabilirsiniz' is a bit literal and could be improved for naturalness. While technically correct, it doesn't flow as naturally as it could in Turkish. 'You can disable...' sounds slightly clunky.",
-          "suggestion": "Mevcut bölümün/odanın/klasörün başlığını kapatabilirsiniz."
-        },
-        {
-          "type": "formatting",
-          "description": "While the use of slashes is acceptable, using a more fluid connective word might improve readability for a Turkish speaker.",
-          "suggestion": "Mevcut bölüm, oda veya klasörün başlığını kapatabilirsiniz."
+          "description": "The Turkish translation 'Geçerli bölümün/odanın/klasörün başlığını devre dışı bırakabilirsiniz' is a bit literal and could be more natural. 'Geçerli' (current) feels slightly formal in this context. While not incorrect, a more natural phrasing could improve readability.",
+          "suggestion": "Mevcut bölümün/odanın/klasörün başlığını devre dışı bırakabilirsiniz."
         }
       ],
       "approved_at": null
@@ -314,8 +310,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"vô hiệu hóa\" (disable) is technically correct but sounds somewhat formal and clunky in this context. A more natural phrasing would convey the meaning of 'turning off' or 'hiding'.",
-          "suggestion": "Bạn có thể tắt/ẩn tiêu đề của phần/phòng/thư mục hiện tại."
+          "description": "The word 'vô hiệu hóa' can be perceived as overly technical or negative. While technically correct, a more natural and user-friendly translation might be preferred.",
+          "suggestion": "Bạn có thể tắt tiêu đề của phần/phòng/thư mục hiện tại."
         }
       ],
       "approved_at": null

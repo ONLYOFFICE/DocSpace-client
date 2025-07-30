@@ -3,7 +3,7 @@
   "content": "Hex code",
   "content_en_sha1_hash": "fdf317062cec5878e5420593d4d888eb99d49e5a",
   "created_at": "2025-05-19T21:30:51.604Z",
-  "updated_at": "2025-05-28T09:30:02.494Z",
+  "updated_at": "2025-05-26T07:57:32.482Z",
   "comment": {
     "text": "HexCode is used to display a color code in the Portal Settings modal dialog, appearing as a label next to an apply button. It is translated from \"Hex code\" to facilitate internationalization. Translators should ensure this phrase accurately represents the intended concept within their language.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'رمز سداسي عشري' is a literal translation of 'Hex code', it's not the most common or natural way to refer to a hexadecimal code in Saudi Arabian Arabic. A more idiomatic translation would be something like 'كود سداسي عشري' or 'كود هيكس'.",
-          "suggestion": "كود سداسي عشري"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Κωδικός Hex\" is understandable, a more accurate and natural-sounding translation of \"Hex code\" in Greek would be \"Εξαδικός κώδικας\" or \"Κώδικας εξά.\"  \"Κωδικός Hex\" literally translates to \"Code Hex\", which isn't quite the intended meaning.",
-          "suggestion": "Εξαδικός κώδικας"
+          "description": "While \"Κωδικός Hex\" is understandable, a more natural and idiomatic translation of \"Hex code\" in Greek would be \"Εξαγωνικός κώδικας\" or \"Κωδικός εξάγωνος\". \"Κωδικός Hex\" directly transliterates \"Hex,\" which might not be immediately clear to all Greek speakers.",
+          "suggestion": "Εξαγωνικός κώδικας"
         }
       ],
       "approved_at": null
@@ -93,25 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The French translation 'Code hexadécimal' has a space after the word 'Code' that should be removed to match typical French style for this type of terminology.",
-          "suggestion": "Code hexadécimal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Հեքս կոդը\" is a literal translation, it might not be the most natural or idiomatic way to refer to \"Hex code\" in Armenian. A more standard translation might be \"Հեքսազանյութի կոդ\" or \"Հեքս ծածկագիր\".",
-          "suggestion": "Consider alternatives like \"Հեքսազանյութի կոդ\" or \"Հեքս ծածկագիր\" for a more natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -138,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation uses a space between 'ລະຫັດ' and 'Hex', which might be more natural without the space.",
-          "suggestion": "ລະຫັດHex"
+          "description": "The Lao translation 'ລະຫັດ Hex' uses Lao script for 'ລະຫັດ' but retains the English word 'Hex'. While understandable, it's generally preferred to translate all terms consistently into Lao if possible. Consider translating 'Hex' as well, if a suitable Lao equivalent exists within the context of settings.",
+          "suggestion": "Investigate and potentially translate 'Hex' to a Lao equivalent. If no appropriate term exists, consider retaining 'Hex' but evaluate consistency with other translated terms."
         }
       ],
       "approved_at": null
@@ -156,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Hexcode\" is a shortening of \"Hex code\", it's not the typical or most understandable Dutch translation. \"Hexcode\" doesn't convey the same meaning clearly to a Dutch speaker who may not be familiar with the abbreviation. A more accurate and understandable translation would be \"Hexadecimale code\" or \"Hexadecimale waarde\".",
+          "description": "The Dutch translation \"Hexcode\" is a concatenation of \"Hex\" and \"code\", but it's a less common and potentially less understandable term for Dutch speakers. A more natural translation would be 'Hexadecimale code' or 'Hexcode'.",
           "suggestion": "Hexadecimale code"
         }
       ],
@@ -216,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Hex код\" is understandable, the standard and more accurate translation for \"Hex code\" in Serbian (Cyrillic) would be \"Хеxадецимални код\" or, more commonly, \"Хеx код\". Using \"код\" directly, without the full term, is less descriptive and might not be universally understood by all users.",
-          "suggestion": "Хеx код"
+          "description": "While 'Hex код' is understandable, a more accurate and common Serbian (Cyrillic) translation of 'Hex code' would be 'Шех код'. 'Hex' is often transliterated as 'Шех' rather than directly translated with 'Hex'.",
+          "suggestion": "Шех код"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Domain settings",
   "content_en_sha1_hash": "af4c66f0fd56174dbc835c4ad3c24fa3e2f84c7e",
   "created_at": "2025-05-19T21:30:57.440Z",
-  "updated_at": "2025-05-20T09:47:58.191Z",
+  "updated_at": "2025-06-30T12:20:31.758Z",
   "comment": {
     "text": "The \"DomainSettings\" translation key is used to display a title and label on a domain settings interface, typically in a modal dialog or sub-component. It appears as \"Domain settings\" in English and is translated accordingly for user interfaces.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/MultipleSpaces.tsx",
-      "line_number": 74,
-      "context": "onClick={() => setCreatePortalDialogVisible(true)}\n />\n <SpacesRowContainer portals={portals} />\n <div className=\"domain-settings-wrapper\">\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"DomainSettings\")}\n </Text>\n \n <div className=\"spaces-input-block\">\n <Text\n fontSize=\"13px\"",
+      "file_path": "/packages/management/src/app/spaces/multiple/domain-settings.tsx",
+      "line_number": 42,
+      "context": "import { Button, ButtonSize } from \"@docspace/shared/components/button\";\n \n import useDeviceType from \"@/hooks/useDeviceType\";\n import { useStores } from \"@/hooks/useStores\";\n \n import { StyledDomainSettings } from \"./multiple.styled\";\n \n interface IProps {\n baseDomain: string;\n }",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/ChangeDomainDialog/index.tsx",
-      "line_number": 116,
-      "context": "visible={visible}\n isLarge\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"DomainSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent>\n <Text noSelect fontSize=\"13px\">\n {t(\"ChangeDomainDescription\")}\n </Text>",
+      "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
+      "line_number": 112,
+      "context": "visible={visible}\n isLarge\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"DomainSettings\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect fontSize=\"13px\">\n {t(\"ChangeDomainDescription\")}\n </Text>\n <div className=\"create-portal-input-block\">",
       "module": "/packages/management"
     }
   ],
@@ -159,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ප්‍රදේශය සැකසුම්\" is a literal translation and might not be the most natural or accurate rendering of \"Domain settings\" in Sinhala. \"Domain\" in this context refers to a network domain, not necessarily a geographical area. A more appropriate translation might focus on the concept of configuration or control.",
+          "suggestion": "Consider alternatives like \"డొమెయిన్ සැකසුම්\" (domain säkesum, transliteration), \"డొమెయిన్ පරිපාලన\" (domain paripaalana - domain administration/management), or similar options that reflect the technical meaning of 'domain'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian (Cyrillic) translation \"Домен подешавања\" while understandable, isn't the most natural or commonly used translation for \"Domain settings.\" \"Домен поставке\" is a more standard and widely accepted translation.",
+          "suggestion": "Домен поставке"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -189,7 +201,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation includes \"(Domain)\" which is redundant and unnecessary. 'Alan' already implies 'Domain'.",
+          "suggestion": "Alan ayarları"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,13 +219,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Cài đặt tên miền\" is a literal translation, it's not the most natural or commonly used term in Vietnamese for 'Domain settings'. A more idiomatic translation would be 'Thiết lập tên miền'.",
+          "suggestion": "Thiết lập tên miền"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"网域设置\" is a technically correct translation, \"域名设置\" (y míng yīn shè zhì) is the more common and natural translation for \"Domain settings\" in the context of system administration or online services. \"网域\" (wǎng yù) can refer to a broader network domain.",
+          "suggestion": "域名设置"
+        }
+      ],
       "approved_at": null
     }
   }

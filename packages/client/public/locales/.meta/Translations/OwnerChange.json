@@ -3,7 +3,7 @@
   "content": "Change owner",
   "content_en_sha1_hash": "d3ce16a8468e0f2ba0a9f24ec0a093b0af39492e",
   "created_at": "2025-05-19T21:30:49.999Z",
-  "updated_at": "2025-06-03T20:59:41.857Z",
+  "updated_at": "2025-06-08T12:02:32.611Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Change owner\" in various places throughout the application, including a dialog header and a button. Its purpose is to inform users that they can change the ownership of something. It appears on a \"Delete Owner Profile Dialog\" and a \"Change Portal Owner Dialog\".",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1977,
+      "line_number": 1980,
       "context": "disabled: !item.security?.Create || item.providerKey,\n },\n {\n id: \"option_owner-change\",\n key: \"owner-change\",\n label: t(\"Translations:OwnerChange\"),\n icon: FileActionsOwnerReactSvgUrl,\n onClick: this.onOwnerChange,\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sahibi dəyiş' is a literal translation but sounds unnatural in Azerbaijani. A more natural phrasing would be 'Sahibi et' or 'Yeni sahibi ol'.",
-          "suggestion": "Sahibi et"
+          "description": "The translation 'Sahibi dəyiş' is a literal translation and doesn't fully capture the nuance of 'Change owner'. It implies a change *of* the owner, rather than a change *to* a new owner.",
+          "suggestion": "Malikini dəyiş"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Փոխել տնօրինողին\" literally translates to \"Change the manager/director.\" While functionally close, \"owner\" has a slightly different nuance than manager or director. A more accurate translation might be \"ափահարել սեփականատիրոջը\" or a more casual alternative depending on the context.",
-          "suggestion": "ափահարել սեփականատիրոջը"
+          "description": "The translation \"Փոխել տնօրինողին\" (Poxel tnorinorin) while technically meaning 'Change the owner', doesn't quite capture the nuance of 'Change owner' in the context of user interface elements. It sounds overly formal and literal. A more natural translation would emphasize the action of transferring ownership rather than a direct change of the 'owner' as a person.",
+          "suggestion": "Consider alternatives like \"Լրագրավել սեփականատիրոջը\" (Lragravel sepakanatiroj) - 'Transfer ownership', or \"Սեփականատիրոջ փոփոխություն\" (Sepakanatiroj popoxutyun) - 'Ownership change'."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'හිමිකරු සංශෝධනය' while technically meaning 'owner modification', is not the most natural or idiomatic way to express 'Change owner' in Sinhala. It sounds overly formal and technical.",
-          "suggestion": "හිමිකාරි වෙනස් කරන්න (Himikari venas karanna) - meaning 'Change ownership' or වෙනස් කරන්න හිමිකාරි (Venás karanna himikari) - meaning 'Change the owner' are more natural and common phrases."
+          "description": "While \"හිමිකරු සංශෝධනය\" is understandable, it's a very literal and somewhat formal translation of \"Change owner\". A more natural and common translation would be something like \"හිමිකාරිත්වය වෙනස් කරන්න\" or \"හිමිකාරිත්වයෙන් ඉවත් කරන්න\". The current phrasing sounds awkward in Sinhala.",
+          "suggestion": "හිමිකාරිත්වය වෙනස් කරන්න"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Промени власника' is a literal translation of 'Change owner' but sounds unnatural in Serbian. A more natural phrasing would be 'Помени власника' or 'Смени власника'.",
-          "suggestion": "Помени власника"
+          "description": "The Serbian (Cyrillic) translation 'Промени власника' is a literal translation of 'Change owner' but sounds unnatural in Serbian. A more idiomatic translation would be 'Смени власника'.",
+          "suggestion": "Смени власника"
         }
       ],
       "approved_at": null

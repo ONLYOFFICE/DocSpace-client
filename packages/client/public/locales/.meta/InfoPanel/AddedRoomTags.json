@@ -3,7 +3,7 @@
   "content": "Tags added.",
   "content_en_sha1_hash": "9268951cda48e29cf15ce3ff94de3b2879f6f601",
   "created_at": "2025-05-19T21:30:54.747Z",
-  "updated_at": "2025-05-28T09:30:02.432Z",
+  "updated_at": "2025-06-30T12:20:31.345Z",
   "comment": {
     "text": "This translation key is used to display a brief message indicating that tags have been added in the Info Panel. It appears as a notification or confirmation on the History page, suggesting that a new set of tags has been applied to a room.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 169,
-      "context": "2: <HistoryText title={feed.data.newTitle} />,\n }}\n />\n );\n case \"AddedRoomTags\":\n return t(\"InfoPanel:AddedRoomTags\");\n case \"DeletedRoomTags\":\n return t(\"InfoPanel:DeletedRoomTags\");\n case \"RoomLogoCreated\":\n case \"RoomColorChanged\":\n case \"RoomCoverChanged\":",
+      "line_number": 178,
+      "context": "2: <HistoryText title={feed.data.newTitle!} />,\n }}\n />\n );\n case FeedActionKeys.AddedRoomTags:\n return t(\"InfoPanel:AddedRoomTags\");\n case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:",
       "module": "/packages/client"
     }
   ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tag aggiunti' is grammatically correct but doesn't fully convey the meaning of 'Tags added.' It implies the tags were added to a single item, while 'Tags added' is more general. A better translation would be 'Tag inseriti' or 'Tag aggiunte'.",
-          "suggestion": "Tag inseriti."
+          "description": "The English \"Tags added.\" refers to a plural, but the Italian \"Tag aggiunti.\" uses the singular form of 'tag'. While grammatically correct, it's not the most accurate translation given the context of adding multiple tags.",
+          "suggestion": "Tag aggiunti."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄຳ ແນະ ນຳ ໃສ່ ຕິດ ເພີ່ມ' doesn't accurately convey the meaning of 'Tags added.'. 'ຄຳ ແນະ ນຳ' translates to 'suggestions' or 'recommendations,' which is not the intended meaning. 'ຕິດ' and 'ເພີ່ມ' add to the confusion.",
-          "suggestion": "A more accurate translation would be something like 'ເພີ່ມເຕີມ ບັງຄັບຊື່' (phิ่ม tิ่ม bǎng kóp sʉ̀ʉ) which translates to 'Added Tags' or 'Tags Added.'"
+          "description": "The Lao translation 'ຄຳ ແນະ ນຳ ໃສ່ ຕິດ ເພີ່ມ' doesn't accurately convey the meaning of 'Tags added.' 'ຄຳ ແນະ ນຳ' means 'recommendations' or 'guidelines,' which isn't the intended meaning. 'ຕິດ ເພີ່ມ' is a bit awkward. The translation needs to reflect the addition of tags.",
+          "suggestion": "Consider 'ເພີ່ມ ໂທ໊ກ' (pheem tok) which directly translates to 'added tags'. Or 'ໃສ່ ໂທ໊ກ ເພີ່ມ' (sai tok pheem) which means 'added tags'."
         }
       ],
       "approved_at": null
@@ -168,8 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ටැග් එකතු කරන ලදි.' is not the most natural or accurate translation of 'Tags added.'. While it literally means 'tags added', a more common and fluent translation would be 'ටැග්​ එකෝ එකතු කළා.'",
-          "suggestion": "ටැග්​ එකෝ එකතු කළා."
+          "description": "The translation 'ටැග් එකතු කරන ලදි' is not the most natural or accurate translation of 'Tags added.'.  'එකතු කරන ලදි' implies a process of gathering or adding something over time, which isn't necessarily what 'Tags added' means in this context. A more direct translation would be better.",
+          "suggestion": "ටැග්​ එක එක්​ කරන ලදි."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically understandable, the sentence could be phrased more smoothly. The structure might be slightly awkward for native Sinhala speakers.",
+          "suggestion": "ටැග්​ එක එක්​ කෙරුණා."
         }
       ],
       "approved_at": null
@@ -177,13 +182,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Slovak translation 'Tagy pridané' is grammatically correct, but could be improved for clarity and natural flow. 'Pridané tagy' would be more idiomatic.",
-          "suggestion": "Pridané tagy"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -198,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Тагови додати.' is a literal translation of 'Tags added.' but sounds unnatural in Serbian. A more natural phrasing would convey the action of adding tags.",
-          "suggestion": "Додатани су тагови."
+          "description": "The translation 'Тагови додати.' is a literal translation and doesn't convey the intended meaning of 'Tags added.' It sounds unnatural in Serbian. A more natural translation would indicate successful addition.",
+          "suggestion": "Додататежни."
         }
       ],
       "approved_at": null
@@ -225,7 +224,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đã thêm thẻ' is technically correct but lacks the nuance and flow of the English 'Tags added.'. It feels slightly abrupt and doesn't convey the same level of confirmation.",
+          "suggestion": "Consider a more natural translation like 'Đã thêm nhãn' or 'Thêm nhãn thành công' for a more seamless user experience.  The best option depends on the surrounding context and overall tone of the application."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

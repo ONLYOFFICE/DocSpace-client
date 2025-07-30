@@ -29,8 +29,8 @@ import { useTranslation, Trans } from "react-i18next";
 import classNames from "classnames";
 import { ReactSVG } from "react-svg";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
 
@@ -77,23 +77,22 @@ const WalletInfo = (props: WalletInfoProps) => {
               1: isBalanceInsufficient ? (
                 <Text as="span" fontWeight={600} />
               ) : (
-                <ColorTheme themeId={ThemeId.Text} fontWeight={600} isInline />
+                <Text fontWeight={600} isInline />
               ),
             }}
           />
         </div>
       </div>
       {onTopUp ? (
-        <ColorTheme
+        <Link
           className={styles.walletInfoTopUp}
-          themeId={ThemeId.Link}
           fontSize="13px"
           fontWeight="600"
           onClick={onTopUp}
-          $isUnderline
+          textDecoration="underline"
         >
           {t("TopUp")}
-        </ColorTheme>
+        </Link>
       ) : null}
     </div>
   );

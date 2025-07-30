@@ -26,11 +26,10 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 
 import ErrorContainer from "../../components/error-container/ErrorContainer";
 import { Text } from "../../components/text";
-import { ColorTheme, ThemeId } from "../../components/color-theme";
+import { PreparationPortalProgress } from "../../components/preparation-portal-progress";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
 import SocketHelper, { SocketEvents } from "../../utils/socket";
@@ -42,8 +41,6 @@ import { StyledEncryptionPortal } from "./EncryptionPortal.styled";
 let requestsCount = 0;
 
 export const EncryptionPortal = () => {
-  const theme = useTheme();
-
   const { t, ready } = useTranslation("Common");
 
   const errorInternalServer = t("Common:ErrorInternalServer");
@@ -53,7 +50,7 @@ export const EncryptionPortal = () => {
 
   const getProgress = useCallback(async () => {
     const setMessage = (error?: unknown) => {
-      const errorText = error ?? errorInternalServer;
+      const errorText = (error as string) ?? errorInternalServer;
 
       setErrorMessage(errorText);
     };
@@ -130,17 +127,10 @@ export const EncryptionPortal = () => {
   const componentBody = errorMessage ? (
     <Text className="encryption-portal_error">{`${errorMessage}`}</Text>
   ) : (
-    <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>
-      <div className="preparation-portal_progress">
-        <div className="preparation-portal_progress-bar">
-          <div className="preparation-portal_progress-line" />
-        </div>
-        <Text className="preparation-portal_percent">{`${percent} %`}</Text>
-      </div>
-      <Text className="preparation-portal_text">
-        {t("EncryptionPortalSubtitle")}
-      </Text>
-    </ColorTheme>
+    <PreparationPortalProgress
+      text={t("EncryptionPortalSubtitle")}
+      percent={percent}
+    />
   );
 
   return (

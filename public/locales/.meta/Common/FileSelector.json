@@ -3,7 +3,7 @@
   "content": "File selector",
   "content_en_sha1_hash": "d86ad107658234e861093d3a97e9558fcb7339b0",
   "created_at": "2025-05-19T21:30:45.306Z",
-  "updated_at": "2025-07-02T07:49:19.816Z",
+  "updated_at": "2025-05-26T07:57:32.565Z",
   "comment": {
     "text": "The \"FileSelector\" translation key is used to display a label for a file selection component in the UI. It appears as a button or dialog title and is used to provide users with an option to select files. Translators should focus on conveying a sense of choosing files in this context.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 502,
+      "line_number": 495,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_file-selector\",\n key: \"7-1-3\",\n icon: \"\",\n link: \"file-selector\",\n tKey: \"Common:FileSelector\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_editor\",\n key: \"7-1-4\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term \"File selector\" implies a component or interface for selecting files, whereas \"Výběr souborů\" literally translates to \"File selection.\" While not entirely wrong, it lacks the nuance of a *selector*.",
-          "suggestion": "Consider \"Volba souboru\" or \"Výběr souborů (prvek)\" to more accurately reflect the English term, depending on the context."
+          "description": "The English term \"File selector\" refers to a UI element that allows users to select one or more files. \"Výběr souborů\" translates literally to \"File selection,\" which is a broader concept than the UI element being described. A more accurate translation would be something like \"Volba souboru\" or \"Výběr souboru\" (using the more common term, but acknowledging it's a broader meaning).",
+          "suggestion": "Volba souboru"
         }
       ],
       "approved_at": null
@@ -129,7 +129,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Bestand selectie' is understandable, a more accurate and common Dutch translation of 'File selector' would be 'Bestandskeuze'. 'Selectie' implies a selection *from* a larger group, whereas 'keuze' is more neutral and directly translates to 'choice'.",
+          "suggestion": "Bestandskeuze"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ගොනු තෝරනය\" (gonu thoranaya) is a literal translation that isn't idiomatic. While understandable, it's not the most natural way to say \"File selector\" in Sinhala. A more common and accurate translation would focus on the function of the selector.",
-          "suggestion": "Consider alternatives like \"ගොනු තෝරාකන්නැන්\" (gonu thoraakannnen - file picker) or \"ගොනු තෝරාගන්නැන්\" (gonu thoraagannnen - file selection tool), or a more descriptive phrase depending on the context."
+          "description": "While \"ගොනු තෝරනය\" (Gonu Thoranaya) is understandable, a more accurate and common translation of \"File selector\" would be \"ගොනු තෝරන්නා\" (Gonu Thoran-naa). \"Gonu Thoranaya\" sounds a bit unnatural.",
+          "suggestion": "ගොනු තෝරන්නා"
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izbira datot\" is not a complete or accurate translation of \"File selector.\" \"Datot\" is the genitive form of \"datoteka\" (file), but the correct translation should reflect the action of selecting a file.",
-          "suggestion": "Možni popravki: 'Izbira datotek', 'Izbirnik datotek', 'Preiskava datotek'."
+          "description": "The translation \"Izbira datot\" is a literal translation that doesn't quite capture the nuance of \"File selector.\" \"Datot\" is the genitive singular of \"datoteka\" (file), so the phrase implies 'selection of files'. A more accurate and natural Slovenian translation would be \"Izbira datotek\" or \"Izbirnik datotek\".",
+          "suggestion": "Izbira datotek"
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Селектор датотеке\" is a literal translation but not the most natural way to express \"file selector\" in Serbian. While understandable, it sounds slightly awkward.",
-          "suggestion": "A more natural and idiomatic translation would be \"Избор датотеке\" (Izbor datoteke) or possibly \"Налазивач датотеке\" (Nalazivac datoteke) depending on the specific context. 'Izbor' is the most common term for 'selection'. \"Nalazivac\" would imply a mechanism for *finding* files."
+          "description": "The translation \"Селектор датотеке\" is not the most natural or accurate translation of \"File selector\". While technically correct, a more common and idiomatic translation would be \"Избор датотеке\" or \"Бирач датотека\". \"Селектор датотеке\" sounds somewhat literal and less fluent.",
+          "suggestion": "Избор датотеке"
         }
       ],
       "approved_at": null
@@ -207,13 +213,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Selektor datoteke' is understandable, a more natural and common translation of 'File selector' in Serbian (Latin) would be 'Birac datoteka'. 'Selektor' is often used for more complex selection tools or functions.",
-          "suggestion": "Birac datoteke"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

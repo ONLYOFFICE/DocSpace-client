@@ -47,8 +47,8 @@ export default async function DocspaceLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
-  const cookieStore = cookies();
+  const hdrs = await headers();
+  const cookieStore = await cookies();
 
   const filter = hdrs.get(FILTER_HEADER);
   const shareKey = hdrs.get(SHARE_KEY_HEADER);
@@ -89,7 +89,7 @@ export default async function DocspaceLayout({
             sectionHeaderContent={<Header {...navigationProps} />}
             sectionFilterContent={<Filter {...filterProps} />}
             sectionBodyContent={children}
-            isEmptyPage={folders.length === 0 && files.length === 0}
+            isEmptyPage={folders.length === 0 ? files.length === 0 : false}
             filesFilter={filter!}
           />
           <SelectionArea />

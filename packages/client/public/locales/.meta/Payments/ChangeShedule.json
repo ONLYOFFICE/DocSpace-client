@@ -3,7 +3,7 @@
   "content": "Change scheduled",
   "content_en_sha1_hash": "1e9b5cbe7b9f524d1cec8d09c12e7c0472706f50",
   "created_at": "2025-05-29T12:12:54.397Z",
-  "updated_at": "2025-06-26T19:00:18.267Z",
+  "updated_at": "2025-06-30T12:20:31.590Z",
   "comment": {
     "text": "The \"ChangeShedule\" translation key is used to display the text \"Change scheduled\" in the PortalSettings page. It appears as a tooltip when hovering over a specific icon. Translators should update this text to reflect any changes made to the schedule or subscription of storage services.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 214,
+      "line_number": 223,
       "context": "})}\n data-tooltip-id=\"serviceTooltip\"\n >\n <InfoIcon />\n <Text fontWeight={600} fontSize=\"12px\">\n {t(\"ChangeShedule\")}\n </Text>\n \n <Tooltip\n id=\"serviceTooltip\"\n place=\"bottom\"",
       "module": "/packages/client"
     },

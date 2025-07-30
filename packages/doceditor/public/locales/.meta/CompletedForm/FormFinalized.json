@@ -3,7 +3,7 @@
   "content": "Form Finalized",
   "content_en_sha1_hash": "7aeacfbbcf22d3c00d1d10f7dcb449748be00879",
   "created_at": "2025-05-19T21:30:57.167Z",
-  "updated_at": "2025-05-28T09:30:02.870Z",
+  "updated_at": "2025-06-30T12:20:31.648Z",
   "comment": {
     "text": "The translation key \"FormFinalized\" is used to display the message \"Form Finalized\" when a form is successfully completed. This text appears in the UI as a confirmation header on a form that has been finalized, likely on a button or dialog prompt.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 146,
+      "line_number": 147,
       "context": "const header = useMemo(() => {\n if (isStartFilling) {\n return t(\"CompletedForm:FormVDRConfirmationOfStartTitle\");\n }\n \n if (completed) return t(\"CompletedForm:FormFinalized\");\n \n return t(\"CompletedForm:FormSectionCompleted\");\n }, [t, isStartFilling, completed]);\n \n const headerDescription = useMemo(() => {",
       "module": "/packages/doceditor"
     }
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'تم اعتماد النموذج' translates to 'The form has been approved/validated', not 'Form Finalized'. While 'Finalized' can imply approval, it's not the best equivalent.",
+          "suggestion": "Consider alternatives like 'تم إغلاق النموذج' (Form Closed) or 'النموذج نهائي' (Form is Final) for a more accurate representation of 'Form Finalized'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Forma yekunlaşdırıldı' while conveying a general meaning, isn't the most natural or precise translation of 'Form Finalized'. 'Finalized' implies a process of completing or confirming, which isn't entirely captured.",
+          "suggestion": "Consider a more accurate translation like 'Forma tamamlandı' (Form completed) or 'Forma təsdiqləndi' (Form confirmed) depending on the exact nuance required."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +63,30 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Formular abgeschlossen' is understandable, it's not the most natural or precise translation of 'Form Finalized'. 'Finalized' implies a process completion and official status. 'Abgeschlossen' simply means 'completed'.",
+          "suggestion": "Formular abgeschlossen und freigegeben"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Έγινε οριστικοποίηση φόρμας' while technically correct, is overly formal and verbose for a UI element like 'Form Finalized'. A more natural and concise translation would be preferred.",
+          "suggestion": "Φόρμα Ολοκληρώθηκε"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a complex sentence structure, which might not be ideal for UI labels where brevity is important. While grammatically correct, it's not as user-friendly.",
+          "suggestion": "Consider a simpler, more direct phrasing for better UI clarity."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +98,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Lomake valmis\" is understandable, it's a very literal translation of \"Form Finalized.\" A more natural and idiomatic Finnish equivalent would convey the sense of finalization more effectively. \"Lomake on valmis\" is a better option.",
+          "suggestion": "Lomake on valmis"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +116,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ձևաթոիղթը հաստատված է\" is not a natural or accurate translation of \"Form Finalized.\" It's overly literal and technically correct but sounds awkward.",
+          "suggestion": "A more natural translation would be something like \"Ֆորմը ավարտվել է\" (Form is complete) or \"Ֆորմը հաստատվել է\" (Form is confirmed)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +134,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'フォームが確定済み' is technically correct, but a more natural and idiomatic translation of \"Form Finalized\" would be something like 'フォーム完了' or 'フォーム完了しました'.  '確定済み' implies a confirmation process that may not be directly relevant.",
+          "suggestion": "フォーム完了"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"양식이 완료되었습니다\" is a valid translation, it's a bit formal for a user-facing confirmation message like 'Form Finalized'. It translates to 'The form has been completed'. A more natural and concise option would be preferred for user experience.",
+          "suggestion": "Consider \"양식 완료\" or \"양식 마침\" for a more conversational and concise translation."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,7 +164,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Veidlapa pabeigta' is understandable, it's a literal translation. A more natural and accurate translation of 'Form Finalized' in a user interface context would be something like 'Veidlapas apstiprināšana' or 'Veidlapa noformēta'. 'Pabeigta' implies completion of a task, whereas 'Finalized' implies a more formal completion and approval.",
+          "suggestion": "Veidlapas apstiprināšana"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,31 +212,61 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'පෝරමය අවසන් කරන ලදී' while understandable, is a bit literal. A more natural translation of 'Form Finalized' would be something like 'පෝරමය සම්පූර්ණ කරන ලදී' or 'පෝරමය අවසානයේ දී'.",
+          "suggestion": "පෝරමය සම්පූර්ණ කරන ලදී"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Formulár bol dokončený' is technically correct (Form was completed), it doesn't fully capture the nuance of 'Form Finalized'. 'Finalized' implies a state of being ready and complete, often signifying approval or a specific stage in a process. 'Dokončený' is more general.",
+          "suggestion": "Consider 'Formulár bol definitívne dokončený' (Form was definitively completed) or 'Formulár je finálny' (Form is final)."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Obracec zaključen' is technically correct, a more natural and idiomatic translation of 'Form Finalized' would be 'Končni obrazec' or 'Obrazec dokončan'. 'Zaključen' implies a more formal closure, whereas 'Finalized' is often used in a workflow context.",
+          "suggestion": "Končni obrazec"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Образац је финализован' translates to 'The form is finalized' and doesn't accurately convey the meaning of 'Form Finalized'. It implies a passive voice where the original is more declarative. 'Form Finalized' is a state, not an action.",
+          "suggestion": "Потврђен образац"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Obrazac je finalizovan\" is not the most natural or accurate translation of \"Form Finalized.\" While understandable, it's a bit literal. A more common and idiomatic translation would be something like \"Popunjen obrazac\" (Completed form) or \"Forma je završena\" (Form is finished).",
+          "suggestion": "Popunjen obrazac"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,13 +284,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Biểu Mẫu Đã Được Hoàn Thành' is understandable, a more natural and concise translation of 'Form Finalized' would be 'Biểu mẫu hoàn thành'. The 'Đã Được' adds unnecessary words and can sound slightly formal in this context.",
+          "suggestion": "Biểu mẫu hoàn thành"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"表单最终化\" is not a natural or accurate translation of \"Form Finalized.\" It uses a less common and slightly awkward phrasing of 'finalized'.",
+          "suggestion": "表单已完成 (Biǎo dān yǐ wán chéng) - This translates to 'Form Completed' and is a more common and understandable way to convey the meaning.  Alternatively, 表单已最终确定 (Biǎo dān yǐ zuì zhōng què dìng) is more literal but still sounds more natural than '表单最终化'."
+        }
+      ],
       "approved_at": null
     }
   }

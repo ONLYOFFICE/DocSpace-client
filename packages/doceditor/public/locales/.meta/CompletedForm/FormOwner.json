@@ -3,7 +3,7 @@
   "content": "Form owner",
   "content_en_sha1_hash": "7022aa4d3edf4428c9fb1db5c36d5affdb524284",
   "created_at": "2025-05-19T21:30:57.171Z",
-  "updated_at": "2025-05-28T09:30:02.868Z",
+  "updated_at": "2025-06-30T12:20:31.646Z",
   "comment": {
     "text": "This translation key is used to display the label \"Form owner\" in a specific part of a completed form. It appears next to an avatar representing the form owner's user account within the form details.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 184,
+      "line_number": 185,
       "context": "{formNumber}\n </Text>\n </Box>\n </FormNumberWrapper>\n <ManagerWrapper>\n <span className=\"label\">{t(\"CompletedForm:FormOwner\")}</span>\n <Box>\n <Avatar\n className=\"manager__avatar\"\n size={AvatarSize.medium}\n role={AvatarRole.manager}",
       "module": "/packages/doceditor"
     }
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Formularinhaber\" is technically correct, it's a rather formal and uncommon term. A more natural and commonly used translation would be something like \"Form Eigentümer\" or simply \"Eigentümer des Formulars\". \"Formularinhaber\" sounds awkward in most contexts.",
+          "suggestion": "Form Eigentümer"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -99,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'양식' typically translates to 'form' or 'application,' not 'owner.' 'Form owner' refers to the person who owns or controls the form. A more accurate translation would emphasize ownership or control.",
+          "suggestion": "가능한 번역: '양식 관리자', '양식 책임자', '양식 소유자 (less ideal but acceptable)'"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -171,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Власник формулара\" is a literal translation of \"Form owner\" but may not be the most natural or common way to express this concept in Serbian. While technically correct, it might sound slightly awkward depending on the context. A more natural phrasing could be \"Гаји власник формулара\" or \"Ко је власник формулара?\" or a simpler phrasing like \"Власник обрасца\" (Form owner).",
+          "suggestion": "Consider alternatives like \"Гаји власник формулара\", \"Ко је власник формулара?\", or \"Власник обрасца\"."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

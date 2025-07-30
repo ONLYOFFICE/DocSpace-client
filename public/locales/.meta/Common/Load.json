@@ -3,7 +3,7 @@
   "content": "Load",
   "content_en_sha1_hash": "ddcb77ff769ea54ca622848f6bedd4004fa4f4fa",
   "created_at": "2025-05-19T21:30:46.262Z",
-  "updated_at": "2025-05-28T09:30:02.986Z",
+  "updated_at": "2025-05-26T07:57:32.977Z",
   "comment": {
     "text": "This translation key is used to display the label for a loading action button in a snackbar component. It appears on a button that triggers an action when clicked. The phrase \"Load\" should be translated into the target language to reflect this UI element's purpose.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Yükləyin\" is a command form (imperative) of \"load.\" The key 'Common:Load' likely refers to the noun 'load' (as in cargo, weight, or the action of loading). A more appropriate translation would be the noun form, which is likely 'Yük'.",
-          "suggestion": "Yük"
+          "description": "The translation \"Yükləyin\" is the imperative form (command) of \"load\" in Azerbaijani. The English \"Load\" is a noun, often used as a key name. The translation should reflect this, potentially using a noun form or a more general term.",
+          "suggestion": "Consider alternatives like \"Yük\" (load - noun), \"Daşınma\" (transportation/loading), or a more context-specific term depending on the function of 'Load' in this context."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Ielādē\" is an imperative form (command) of \"load\".  For a key named \"Common:Load\", a noun or a more general term might be more appropriate, depending on the context. \"Ielādē\" implies an action of loading.",
-          "suggestion": "Consider alternatives like \"Lādi\" (infinitive), \"Slodze\" (load - noun), or \"Ielādes\" (the loading process) based on the intended meaning of 'Load' in the application."
+          "description": "The Latvian translation \"Ielādē\" is an imperative form (command) of \"to load.\" The English word \"Load\" in this context (likely referring to a setting, feature, or element) requires a noun or a more neutral translation.",
+          "suggestion": "Consider alternatives like \"Slodze\" (noun for load) or \"Iestatījums\" (setting) depending on the exact context. Without context, it's difficult to provide a definitive correction."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation 'Załaduj' is an imperative form (command) meaning 'Load!' or 'Load it!'. The English 'Load' can be a noun (the act of loading) or a verb in the infinitive form. 'Załaduj' doesn't reflect either of those possibilities. A more accurate translation would depend on the context. Possible alternatives: 'ładowanie' (gerund), 'ładować' (infinitive).",
-          "suggestion": "Consider alternatives like 'ładowanie' or 'ładować' depending on the context of 'Load'."
+          "description": "The Polish translation \"Załaduj\" is an imperative form (\"Load!\" or \"You load!\"). The English \"Load\" can be a noun or verb in a more general sense. A more appropriate translation would depend on the context. Without knowing the context, \"Załadunek\" (noun - loading) or \"Ładowanie\" (gerund - loading) might be better alternatives. 'Załaduj' implies an action being requested.",
+          "suggestion": "Consider alternatives like 'Załadunek' or 'Ładowanie' depending on context."
         }
       ],
       "approved_at": null
@@ -165,13 +165,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Загрузить\" is a valid translation for \"Load\", it can have different nuances depending on the context. \"Load\" can also mean 'to carry' or 'to place on'. 'Загрузить' primarily means 'to upload' or 'to load onto a vehicle'. A more contextually appropriate translation might be needed depending on the specific use case.",
-          "suggestion": "Consider alternative translations like 'Поместить' (to place), 'Перенести' (to carry), or 'Загрузка' (loading, if referring to a process) based on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පූරණය' (puranaya) generally means 'filling' or 'filling up,' not 'load' in the context of something being loaded (e.g., loading a website, a truck, etc.). A more accurate translation might depend on the specific context where 'Load' is used. Without context, a more appropriate translation could be 'බාගත' (bagahata) meaning 'download' or 'load'.",
-          "suggestion": "Consider 'බාගත' (bagahata) or a context-specific alternative."
+          "description": "The Sinhala translation \"පූරණය\" (pooranaya) primarily means \"filling\" or \"fulfillment,\" not \"load.\" While 'load' can sometimes imply filling, it's not the best translation in most contexts. A more accurate translation might depend on the specific context where 'Load' is used. Considering the context is 'Common:Load,' a more direct translation reflecting the concept of a weight or burden might be preferable.",
+          "suggestion": "Consider alternatives like \"බර\" (bara - weight), \"ආහාර\" (ahaara - cargo/supply, if referring to a physical load), or a more nuanced term depending on the context."
         }
       ],
       "approved_at": null
@@ -201,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Оптерећење' is a valid Serbian (Cyrillic) word, it doesn't directly translate to 'Load' in this context. 'Load' often refers to a weight, cargo, or a program being loaded. 'Оптерећење' more closely means 'burden' or 'stress'. A more accurate translation would depend on the specific context of 'Load'.",
+          "suggestion": "Consider alternatives like 'Терет' (weight/cargo), 'Учитавање' (loading - a process), or 'Постављање' (installation, if referring to software) based on the context."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Yükle\" can mean \"Load\", it's more accurately translated as \"Upload\" or \"Install\" in a software or technical context. \"Load\" can have multiple meanings (cargo, electrical load, etc.), and \"Yükle\" doesn't perfectly capture all of them. The best translation depends on the specific meaning of \"Load\" in the original context.",
-          "suggestion": "Consider alternatives like \"Yük\" (for cargo), or further context is needed to determine the best translation. If referring to software or data, \"Yükle\" may be acceptable, but explore alternatives."
+          "description": "While \"Yükle\" can mean \"Load\", it is more commonly used for \"Upload\" or \"Install\" in a digital context. \"Load\" in the general sense (e.g., loading cargo) would be better translated as \"Yük\" or \"İndir\".",
+          "suggestion": "Consider \"Yük\" or \"İndir\" depending on the intended meaning of 'Load'."
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Завантажити\" (Zavantazhyty) typically refers to the action of *uploading* or *downloading*, not the noun 'Load'. 'Load' in English can refer to a weight, a task, or a burden. A more appropriate translation would depend on the specific context.",
-          "suggestion": "Consider alternatives like 'Навантаження' (Navantazhennya - load as weight/burden), 'Завантаження' (Zavantazhennya - load as data, could be misleading), or a more context-specific term."
+          "description": "The Ukrainian translation 'Завантажити' (Zavantazhyty) means 'to download' or 'to upload', which isn't a direct translation of 'Load' in all contexts. 'Load' can mean to place items onto a vehicle, to load a program, or to apply pressure. A more appropriate translation would depend on the context. A possible alternative could be 'Навантажити' (Navantazhyty) or a more general term depending on the context.",
+          "suggestion": "Consider 'Навантажити' (Navantazhyty) or a context-specific translation. Further context is needed to determine the best translation."
         }
       ],
       "approved_at": null

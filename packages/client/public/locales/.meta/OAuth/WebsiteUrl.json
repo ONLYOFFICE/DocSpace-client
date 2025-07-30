@@ -3,7 +3,7 @@
   "content": "Website URL",
   "content_en_sha1_hash": "b32233ad8219cf70bb8e31b57e67aa6d45b197d0",
   "created_at": "2025-05-19T21:30:54.067Z",
-  "updated_at": "2025-05-21T06:49:15.414Z",
+  "updated_at": "2025-06-30T12:20:31.465Z",
   "comment": {
     "text": "This translation key \"WebsiteUrl\" is used to display the label for a form input field that requires users to enter a website URL. It appears on a form component in a UI context where users are prompted to provide a valid URL.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 150,
+      "line_number": 151,
       "context": "isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />\n <InputGroup\n label={t(\"WebsiteUrl\")}\n name=\"website_url\"\n placeholder={t(\"EnterURL\")}\n value={websiteUrlValue}\n error={\n isWebsiteError",
       "module": "/packages/client"
     }
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation 'Website-URL' uses a hyphen to combine two words. While common, it's less formal. A space would be more standard.",
+          "suggestion": "Website URL"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -60,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'URL ιστότοπου' is understandable, a more natural and accurate translation of 'Website URL' in Greek would be 'Διεύθυνση Ιστοσελίδας' or 'Ιστότοπος Διεύθυνση'. 'URL ιστότοπου' is a bit literal and might sound slightly unnatural to a Greek speaker.",
-          "suggestion": "Διεύθυνση Ιστοσελίδας"
+          "description": "While \"URL ιστότοπου\" is understandable, a more natural and accurate translation of \"Website URL\" in Greek would be \"Διεύθυνση Ιστότοπου\" or \"Ιστότοπος Διεύθυνση\". \"URL ιστότοπου\" is a literal translation that might sound slightly technical and less user-friendly.",
+          "suggestion": "Διεύθυνση Ιστότοπου"
         }
       ],
       "approved_at": null
@@ -120,13 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tīmekļa vietnes vietrādis URL\" is overly literal and not idiomatic Latvian. \"Vietrādis\" specifically refers to a geographical coordinate or a landmark, not a URL. A more natural translation would convey the meaning of 'Website URL' without this technical jargon.",
-          "suggestion": "Tīmekļa vietnes adrese URL"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the inclusion of 'URL' at the end feels redundant. In Latvian, it's often understood that 'vietrādis' or 'adrese' refers to a URL in this context.",
-          "suggestion": "Tīmekļa vietnes adrese"
+          "description": "The translation 'Tīmekļa vietnes vietrādis URL' is overly literal and not idiomatic Latvian. 'Vietrādis' refers to a rudder or a website address, not the URL itself. The correct translation should be more concise and natural.",
+          "suggestion": "Tīmekļa vietnes URL"
         }
       ],
       "approved_at": null
@@ -140,13 +141,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Adres URL witryny internetowej' is a bit verbose and not the most natural-sounding translation for 'Website URL'. A more common and concise translation would be 'URL strony internetowej' or simply 'URL witryny'.",
-          "suggestion": "URL strony internetowej"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -179,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වෙබ් අඩවිය URL' is too literal. A more natural translation would be 'වෙබ් අඩවි ලිපිනය' or 'වෙබ් ලිපිනය'.",
-          "suggestion": "වෙබ් අඩවි ලිපිනය"
+          "description": "The Sinhala translation 'වෙබ් අඩවිය URL' is a literal translation and not idiomatic. While understandable, it's not the most natural way to express 'Website URL' in Sinhala. 'වෙබ් අඩවිය' already implies a URL.",
+          "suggestion": "වෙබ් අඩවි ලිපිනය (Web Adavi Lipinaya) or කෙටි ලිපිනය (Keti Lipinaya - Short URL)"
         }
       ],
       "approved_at": null
@@ -191,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL adresa webových stránok \" is not the most natural or precise translation of 'Website URL'. 'Webová stránka' is a more common term for website than 'webových stránok'.",
-          "suggestion": "URL webovej stránky"
+          "description": "The translation 'URL adresa webových stránok' is not the most natural or concise way to translate 'Website URL' in Slovak. While technically correct, it's a bit verbose. A more common and fluent translation would be 'Webová adresa' or 'Adresa webovej stránky'.",
+          "suggestion": "Webová adresa"
         },
         {
           "type": "formatting",
-          "description": "The translation includes an unnecessary space after the colon.",
-          "suggestion": "URL webovej stránky"
+          "description": "The translation includes a space after the colon, which might not be consistent with other translations or the overall style guide.",
+          "suggestion": "Remove the space after the colon if it's not part of the defined style."
         }
       ],
       "approved_at": null
@@ -214,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'URL сајта' is understandable, a more natural and precise translation of 'Website URL' in Serbian (Cyrillic) would be 'Адреса веб сајта' or 'Веб адреса'. 'URL сајта' is overly literal and sounds slightly awkward.",
-          "suggestion": "Адреса веб сајта"
+          "description": "The translation 'URL сајта' is a literal translation of 'Website URL'. While understandable, a more natural Serbian (Cyrillic) translation would be 'Adresa veb sajta' or 'URL veb sajta'.",
+          "suggestion": "Adresa veb sajta"
         }
       ],
       "approved_at": null
@@ -226,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL sajta\" while understandable, isn't the most natural or idiomatic Serbian translation of \"Website URL.\" \"URL veb sajta\" or \"URL lokacije\" would be more commonly used.",
-          "suggestion": "URL veb sajta"
+          "description": "The translation 'URL sajta' is a literal translation of 'Website URL'. While understandable, a more natural and idiomatic Serbian translation would be something like 'Adresa veb sajta' or 'Internet adresa sajta'. 'URL sajta' feels clunky.",
+          "suggestion": "Adresa veb sajta"
         }
       ],
       "approved_at": null

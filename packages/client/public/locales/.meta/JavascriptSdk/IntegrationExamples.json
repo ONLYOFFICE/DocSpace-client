@@ -3,7 +3,7 @@
   "content": "Integration examples",
   "content_en_sha1_hash": "60297aa2a3ac5f89baf109d372361add038feaa4",
   "created_at": "2025-05-19T21:30:54.533Z",
-  "updated_at": "2025-05-21T09:02:44.438Z",
+  "updated_at": "2025-05-24T09:14:53.273Z",
   "comment": {
     "text": "This translation key is used to display the title \"Integration Examples\" in a category header within a developer tool component, likely in a portal settings page. It appears as a heading and provides context about the content that follows.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"統合の例\" while technically correct, lacks the nuance of 'Integration examples'. '統合の例' translates to 'Examples of integration' which is a bit more formal and less descriptive of what the key likely refers to (e.g., code snippets, usage guides). A more natural and flexible translation might consider options like '連携例' or '組み込み例', depending on the context of the 'integration'.",
+          "suggestion": "Consider '連携例' or '組み込み例' as alternatives, depending on the specific context of the integration."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"통합 예\" is a literal translation of \"Integration examples\" but lacks the full meaning. It translates to \"Integration example(s)\" which is incomplete. A better translation would convey the meaning of multiple examples.",
-          "suggestion": "통합 예제들 (Tonghap yeje-deul) - This translates to \"Integration examples\" and is more accurate."
+          "description": "The Korean translation \"통합 예\" is a literal translation of \"integration examples\" but lacks completeness. It only translates \"examples\" and misses the \"integration\" part. A more accurate and complete translation would be something like \"통합 예제\" or \"통합 사례\".",
+          "suggestion": "통합 예제"
         }
       ],
       "approved_at": null
@@ -113,24 +119,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'ຕົວຢ່າງ' (tua yang) is correctly spelled, meaning 'example'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The term 'ການເຊື່ອມໂຊ້' (kan seum so) is correctly spelled, meaning 'integration'.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'ຕົວຢ່າງການເຊື່ອມໂຊ້' is grammatically sound in Lao, accurately conveying 'integration examples'.",
-          "suggestion": null
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While the translation is technically accurate, it's important to consider whether a more natural-sounding or commonly used phrase exists in Lao for 'integration examples' in a technical context. A more contextualized translation might be preferable.",
-          "suggestion": "Consider alternatives like 'ຕົວຢ່າງການເຊື່ອມຈອດ' (tua yang kan seum jor) - which emphasizes 'connecting' instead of just 'integrating'."
+          "description": "The Lao translation 'ຕົວຢ່າງການເຊື່ອມໂຊ້' is a literal translation of 'integration examples' but might not be the most natural or idiomatic way to express it in Lao. While technically correct, it sounds somewhat formal and could be improved for better flow and readability depending on the target audience and context. A more natural phrasing might consider alternatives like 'ຕົວຢ່າງການນໍາໃຊ້' (examples of use) or 'ຕົວຢ່າງການເຊື່ອມຕໍ່' (examples of connection), but this depends on the nuances of the integration being described.",
+          "suggestion": "Consider alternative phrasing like 'ຕົວຢ່າງການນໍາໃຊ້' or 'ຕົວຢ່າງການເຊື່ອມຕໍ່' if appropriate for the specific context."
         }
       ],
       "approved_at": null
@@ -180,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ඒකායෝජන' (ekāyōjana) translates to 'integration', 'උදාහරණ' (udaharana) is the correct term for 'examples'. The term 'ඒකායාචිත උදාහරණ' would be a more precise translation of 'Integration examples' but is less common. Using 'ඒකායෝජන උදාහරණ' is acceptable, as 'ඒකායෝජන' conveys the meaning of 'integration'.",
+          "suggestion": "Consider using 'ඒකායාචිත උදාහරණ' for a more technically accurate translation, but 'ඒකායෝජන උදාහරණ' is also acceptable."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Примери интеграција\" is a reasonable translation, but \"Примерi интeгрaциjа\" would be more accurate and natural. \"Примери\" is plural, while the English is a general \"examples\".",
-          "suggestion": "Пример интеграције"
+          "description": "The Serbian Cyrillic translation \"Примери интеграција\" is a literal translation and doesn't quite capture the nuance of 'Integration examples' in a technical context. It's understandable, but not ideal.",
+          "suggestion": "Consider \"Примери за интеграцију\" or \"Пример интеграције\" which flow better and are more commonly used in technical documentation."
         }
       ],
       "approved_at": null

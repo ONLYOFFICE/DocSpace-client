@@ -26,11 +26,10 @@
 
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import styled from "styled-components";
 
 import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
-import { IconSizeType, commonIconsStyles } from "../../../utils";
+import { IconSizeType } from "../../../utils";
 
 import { Row } from "../row";
 import { RowContent } from "../row-content";
@@ -42,25 +41,7 @@ import { RowContainer } from ".";
 import { RowContainerProps } from "./RowContainer.types";
 import { globalColors } from "../../../themes";
 
-const SendClockIcon = styled(SendClockReactSvg)`
-  ${commonIconsStyles}
-`;
-
-const CatalogSpamIcon = styled(CatalogSpamReactSvg)`
-  ${commonIconsStyles}
-`;
-
-const meta = {
-  title: "Components/RowContainer",
-  component: RowContainer,
-  // subcomponents: { Row, RowContent },
-  parameters: {
-    docs: { description: { component: "Container for Row component" } },
-  },
-} satisfies Meta<typeof RowContainer>;
-type Story = StoryObj<typeof meta>;
-
-export default meta;
+import styles from "./RowContainer.stories.module.scss";
 
 const fakeNames = [
   "Ella Green",
@@ -129,6 +110,18 @@ const fillFakeData = (n: number) => {
 
 const fakeData = fillFakeData(20);
 
+const meta = {
+  title: "Components/RowContainer",
+  component: RowContainer,
+  // subcomponents: { Row, RowContent },
+  parameters: {
+    docs: { description: { component: "Container for Row component" } },
+  },
+} satisfies Meta<typeof RowContainer>;
+type Story = StoryObj<typeof meta>;
+
+export default meta;
+
 const Template = (args: RowContainerProps) => {
   return (
     <RowContainer
@@ -175,14 +168,16 @@ const Template = (args: RowContainerProps) => {
               </Link>
               <>
                 {user.status === "pending" ? (
-                  <SendClockIcon
-                    size={IconSizeType.small}
+                  <SendClockReactSvg
+                    className={styles.sendClockIcon}
+                    data-size={IconSizeType.small}
                     color={globalColors.lightIcons}
                   />
                 ) : null}
                 {user.status === "disabled" ? (
-                  <CatalogSpamIcon
-                    size={IconSizeType.small}
+                  <CatalogSpamReactSvg
+                    className={styles.catalogSpamIcon}
+                    data-size={IconSizeType.small}
                     color={globalColors.lightIcons}
                   />
                 ) : null}

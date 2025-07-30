@@ -89,7 +89,7 @@ const ToggleAutoSync = ({
       if (!e.target.checked) {
         saveCronLdap()
           .then(() =>
-            toastr.success(t("Settings:SuccessfullySaveSettingsMessage")),
+            toastr.success(t("Common:SuccessfullySaveSettingsMessage")),
           )
           .catch((err) => toastr.error(err));
       }

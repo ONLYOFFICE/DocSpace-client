@@ -34,7 +34,7 @@ export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TBaseOption = {
   key: string | number;
-  icon?: string | React.ReactElement | React.ElementType;
+  icon?: string | React.ElementType | React.ReactElement;
   label?: string;
   color?: string;
   backgroundColor?: string;
@@ -50,8 +50,11 @@ export type TBaseOption = {
   access?: ShareAccessRights;
   className?: string;
   title?: string;
+  dataTestId?: string;
   action?: unknown;
   onClick?: (opt: TContextMenuValueTypeOnClick) => void;
+  pageNumber?: number;
+  count?: number;
 };
 
 export type TRegularOption = TBaseOption & {
@@ -67,7 +70,7 @@ export type TOption = TRegularOption | TSeparatorOption;
 
 export type TComboboxProps = {
   /** Displays advanced options */
-  advancedOptions?: React.ReactNode;
+  advancedOptions?: React.ReactElement<{ children?: React.ReactNode }>;
   /** Number of advanced options */
   advancedOptionsCount?: number;
   /** Children elements */
@@ -96,6 +99,8 @@ export type TComboboxProps = {
   displayArrow?: boolean;
   /** Height of Dropdown */
   dropDownMaxHeight?: number;
+  /** Test id for dropdown */
+  dropDownTestId?: string;
   /** Shows disabled items when displayType !== toggle */
   showDisabledItems?: boolean;
   /** Fill icon */
@@ -166,6 +171,8 @@ export type TComboboxProps = {
   title?: string;
   /** Top space */
   topSpace?: number;
+  /** Test id */
+  testId?: string;
   /** Type */
   type?: TCombobox;
   /** Use portal backdrop */
@@ -195,6 +202,8 @@ export type TComboboxProps = {
 
   /** Indicates if the backdrop should be shown */
   shouldShowBackdrop?: boolean;
+  /** Data test id */
+  dataTestId?: string;
 };
 
 export type TComboButtonProps = {

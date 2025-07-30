@@ -23,9 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../../styles/mixins.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/variables/devices.scss";
+@use "../../../styles/mixins";
+@use "../../../styles/variables/colors";
 
 .usersLoader {
   width: 100%;
@@ -56,7 +55,7 @@
       max-width: 100%;
       margin: auto 0;
 
-      @include truncate;
+      @include mixins.truncate;
     }
   }
 }
@@ -90,7 +89,7 @@
       max-width: 100%;
       margin: auto 0;
 
-      @include truncate;
+      @include mixins.truncate;
     }
   }
 }
@@ -124,7 +123,7 @@
       max-width: 100%;
       margin: auto 0;
 
-      @include truncate;
+      @include mixins.truncate;
     }
   }
 }

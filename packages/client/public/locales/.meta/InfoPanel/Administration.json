@@ -3,7 +3,7 @@
   "content": "Administration",
   "content_en_sha1_hash": "b8be3d1264310c3b8c848d4b90d5206179a40cc4",
   "created_at": "2025-05-19T21:30:54.760Z",
-  "updated_at": "2025-06-18T07:34:15.278Z",
+  "updated_at": "2025-06-18T17:11:42.522Z",
   "comment": {
     "text": "This translation key is used to display the title \"Administration\" in a UI component, likely an InfoPanel, indicating access or management of administrative settings. It appears on a file at /packages/client/src/store/InfoPanelStore.js, suggesting it may be part of a larger admin interface.",
     "is_auto": true,

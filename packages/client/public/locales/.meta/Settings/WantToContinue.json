@@ -3,7 +3,7 @@
   "content": "Do you want to continue or change the user storage quota?",
   "content_en_sha1_hash": "bb81bad85ffdab817ea09c10a3fd06ef7e43aa50",
   "created_at": "2025-05-19T21:30:53.207Z",
-  "updated_at": "2025-05-28T09:30:02.307Z",
+  "updated_at": "2025-05-26T07:57:32.341Z",
   "comment": {
     "text": "This translation key is used to display a message asking users whether they want to continue or change their user storage quota. It appears in a modal dialog, specifically on a footer button that likely triggers a confirmation or cancellation action when clicked.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?' directly translates 'continue' as 'davam etdirmək', which is not the intended meaning. 'Continue' in this context refers to keeping the existing quota.  A more appropriate translation for 'continue' would imply preserving or keeping.",
-          "suggestion": "İstifadəçi yaddaşı kvotasını saxlamaq və ya dəyişmək istəyirsiniz?"
+          "description": "The translation \"İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?\" is a literal translation that doesn't quite capture the nuance of the English phrase. 'Davam etdirmək' (to continue) implies maintaining the current state. The English question offers a choice between continuing with the current quota and changing it.  A more natural Azerbaijani phrasing would be needed.",
+          "suggestion": "Consider a phrasing like: \"İstifadəçi yaddaşı kvotasını eyni saxlamaq istəyirsiniz, ya da dəyişmək?\" or \"İstifadəçi yaddaşı kvotasını dəyişmək və ya saxlamaq istəyirsiniz?\" which translates closer to 'Do you want to keep the user storage quota as is or change it?'"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'user storage quota' is not accurately reflected. 'Muistin kiintiötä' translates more literally to 'memory quotas' rather than the broader concept of storage quota which could include disk space, cloud storage, etc. A more accurate translation would consider the context and potential types of storage.",
-          "suggestion": "Haluatko jatkaa vai muuttaa käyttäjien tallennustilan kiintiötä?"
+          "description": "The English phrase \"user storage quota\" is not perfectly conveyed by \"käyttäjien muistin kiintiötä\". While understandable, 'muistin kiintiötä' is very literal and sounds somewhat technical. A more natural phrasing might consider alternatives.",
+          "suggestion": "Consider alternatives like 'käyttäjien tallennustilan rajoituksia' or 'käyttäjien tilan rajoituksia' to sound more natural."
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation, \"Ցանկանու՞մ եք շարունակել, թե փոխել օգտատերերի պահեստի քվոտան:\" directly translates to \"Do you want to continue or change the user storage quota?\" which is functionally correct, but could be improved for a more natural-sounding Armenian. The question mark at the end of the question is appropriate for Armenian grammar and phrasing.",
+          "suggestion": "Ցանկանու՞ք շարունակել, թե փոխել օգտատերերի պահեստի քվոտան?"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,13 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Do you want to continue or change...' is not directly reflected in the Japanese translation. '継続または変更しますか？' implies 'Do you want to continue or modify?', but it's more natural to phrase it as a question asking about the *setting* itself. The nuance of 'quota' isn't fully captured either.",
-          "suggestion": "ユーザーストレージ容量制限の設定を継続しますか？変更しますか？ (User storage quota settings: Do you want to continue? Do you want to change?)"
+          "description": "The translation is a bit literal and doesn't flow naturally in Japanese. '継続または変更しますか？' sounds stiff. A more natural phrasing would be something like '変更しますか？' or '変更をご希望ですか？' depending on the desired level of formality.",
+          "suggestion": "ユーザーストレージ容量制限を変更しますか？"
         },
         {
           "type": "formatting",
-          "description": "The Japanese translation is a single, long sentence. Breaking it into two separate questions would improve readability and flow.",
-          "suggestion": "ユーザーストレージ容量制限を継続しますか？それとも変更しますか？ (User storage quota settings: Do you want to continue? Or do you want to change?)"
+          "description": "The question mark at the end of the Japanese translation is acceptable but a more natural question marker would often be a 'か' attached to the verb.",
+          "suggestion": "ユーザーストレージ容量制限を変更しますか？"
         }
       ],
       "approved_at": null
@@ -131,8 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ປ່ຽນກໍານົດຈຳນວນທີ່ກໍານົດໄວ້ຂອງການເກັບຂໍ້ມູນຜູ້ໃຊ້ບໍ?' is a bit verbose and could be simplified. 'ປ່ຽນກໍານົດຈຳນວນຂອງການເກັບຂໍ້ມູນຜູ້ໃຊ້ບໍ?' would be more natural.",
-          "suggestion": "ປ່ຽນກໍານົດຈຳນວນຂອງການເກັບຂໍ້ມູນຜູ້ໃຊ້ບໍ?"
+          "description": "The term 'user storage quota' is not accurately reflected. 'ກໍານົດຈຳນວນທີ່ກໍານົດໄວ້ຂອງການເກັບຂໍ້ມູນຜູ້ໃຊ້' is overly verbose and doesn't directly convey 'quota'. A simpler translation would be better.",
+          "suggestion": "ທ່ານຕ້ອງການສືບຕໍ່ຫຼືປ່ຽນກໍານົດການເກັບຂໍ້ມູນຜູ້ໃຊ້ບໍ?"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses a formal tone. While appropriate, consider if a more conversational tone aligns better with the app's overall style.",
+          "suggestion": "No specific correction, consider adjusting tone if appropriate."
         }
       ],
       "approved_at": null
@@ -173,13 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?' is a literal translation that doesn't flow naturally in Romanian. 'User storage quota' is clunky. A more natural phrasing would be 'cota de stocare a utilizatorilor' or 'spațiul de stocare pentru utilizatori'.",
-          "suggestion": "Doriți să continuați sau să modificați cota de stocare a utilizatorilor?"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'utilizatori' is grammatically correct but can be improved for a more polished feel.  Consider adding an article.",
-          "suggestion": "Doriți să continuați sau să modificați cota de stocare a utilizatorilor?"
+          "description": "The translation 'Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?' is slightly awkward. 'Modificați' implies a more significant change than 'change' might suggest in this context. A more natural phrasing might be 'sau să schimbați'.",
+          "suggestion": "Doriți să continuați sau să schimbați cota de stocare pentru utilizatori?"
         }
       ],
       "approved_at": null
@@ -196,13 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a bit too literal and sounds unnatural in Sinhala. 'කරගෙන යාමට කැමතිද' (karagena yamathu) literally translates to 'do you want to continue carrying/doing'. A more natural phrasing would be closer to 'ඉගෙනීමක් කරගෙන යාමට කැමතිද?' or 'ඉගෙනීමක් අවශ්‍යද?'",
-          "suggestion": "ඔබ පරිශීලක ගබඩා කෝටාව ඉගෙනීමක් අවශ්‍යද නැතිනම් වෙනස් කිරීමට කැමතිද?"
+          "description": "The translation 'ඔබ පරිශීලක ගබඩා කෝටාව දිගටම කරගෙන යාමට කැමතිද නැතිනම් වෙනස් කිරීමට කැමතිද?' is a bit verbose and doesn't fully capture the succinctness of the English sentence. 'කරගෙන යාමට' (karagenaa yamu) implies continuing an already established action, which might not be the intended meaning.  It should be revised to be more direct.",
+          "suggestion": "ඔබ පරිශීලක ගබඩා කෝටාව ಮುසcontinue කරන්නේද, නැතිනම් වෙනස් කරන්නේද?"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the sentence structure is somewhat long and could benefit from a slight rephrasing for better readability. Breaking it into two sentences might improve comprehension.",
-          "suggestion": "ඔබ පරිශීලක ගබඩා කෝටාව දිගටම කරගෙන යාමට කැමතිද? නැතිනම් වෙනස් කිරීමට කැමතිද?"
+          "description": "While not strictly incorrect, the sentence uses a slightly formal tone ('කැමතිද'). Considering the context (settings), a slightly more conversational tone might be preferable.",
+          "suggestion": "ඔබ පරිශීලක ගබඩා කෝටාව ಮುසcontinue කරන්නේද, නැතිනම් වෙනස් කරන්නේද?"
         }
       ],
       "approved_at": null
@@ -228,25 +234,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'skladište' could be more accurately translated as 'prostor za skladištenje' or 'kaota za skladištenje' to better convey the meaning of 'storage quota'.",
-          "suggestion": "Da li želite da nastavite ili da promenite korisničku kvotu za prostor za skladištenje?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Do you want to continue or change' doesn't quite map directly to 'Devam etmek mi yoksa...'. It implies a continuation of a process. A more accurate translation reflecting the choice between continuing or changing a setting would be something like 'Devam etmek mi istersiniz, yoksa kullanıcı kotasını değiştirmek mi?' or 'Kullanıcı kotasını devam ettirmek mi yoksa değiştirmek mi istiyorsunuz?'",
-          "suggestion": "Kullanıcı kotasını devam ettirmek mi yoksa değiştirmek mi istiyorsunuz?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

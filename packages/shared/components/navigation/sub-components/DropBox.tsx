@@ -40,134 +40,123 @@ import ArrowButton from "./ArrowBtn";
 import ControlButtons from "./ControlBtn";
 import Row from "./Row";
 
-const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
-  (
-    {
-      sectionHeight,
+const DropBox = ({
+  ref,
+  sectionHeight,
+  dropBoxWidth,
+  isRootFolder,
+  onBackToParentFolder,
+  canCreate,
+  navigationItems,
+  getContextOptionsFolder,
+  getContextOptionsPlus,
+  toggleDropBox,
+  toggleInfoPanel,
+  onClickAvailable,
+  isInfoPanelVisible,
+  isDesktop,
+  isDesktopClient,
+  withLogo,
+  burgerLogo,
+  isFrame,
+  currentDeviceType,
+  navigationTitleContainerNode,
+  onCloseDropBox,
+  isContextButtonVisible,
+  isPublicRoom,
+  isPlusButtonVisible,
+}: TDropBoxProps) => {
+  const [dropBoxHeight, setDropBoxHeight] = React.useState(0);
+  const countItems = navigationItems.length;
 
-      dropBoxWidth,
-      isRootFolder,
-      onBackToParentFolder,
-
-      canCreate,
-      navigationItems,
-      getContextOptionsFolder,
-      getContextOptionsPlus,
-      toggleDropBox,
-      toggleInfoPanel,
-      onClickAvailable,
-      isInfoPanelVisible,
-
-      isDesktop,
-      isDesktopClient,
-
-      withLogo,
-      burgerLogo,
-
-      isFrame,
-
-      currentDeviceType,
-      navigationTitleContainerNode,
-      onCloseDropBox,
-
-      isContextButtonVisible,
-      isPublicRoom,
-      isPlusButtonVisible,
+  const getItemSize = useCallback(
+    (index: number): number => {
+      if (index === countItems - 1) return 51;
+      return currentDeviceType !== DeviceType.desktop ? 36 : 30;
     },
-    ref,
-  ) => {
-    const [dropBoxHeight, setDropBoxHeight] = React.useState(0);
-    const countItems = navigationItems.length;
+    [countItems, currentDeviceType],
+  );
 
-    const getItemSize = useCallback(
-      (index: number): number => {
-        if (index === countItems - 1) return 51;
-        return currentDeviceType !== DeviceType.desktop ? 36 : 30;
-      },
-      [countItems, currentDeviceType],
+  const { interfaceDirection } = useTheme();
+  React.useEffect(() => {
+    const itemsHeight = navigationItems.map((item, index) =>
+      getItemSize(index),
     );
 
-    const { interfaceDirection } = useTheme();
-    React.useEffect(() => {
-      const itemsHeight = navigationItems.map((item, index) =>
-        getItemSize(index),
-      );
+    const currentHeight = itemsHeight.reduce((a, b) => a + b);
 
-      const currentHeight = itemsHeight.reduce((a, b) => a + b);
+    let navHeight = 41;
 
-      let navHeight = 41;
+    if (currentDeviceType === DeviceType.tablet) {
+      navHeight = 49;
+    }
 
-      if (currentDeviceType === DeviceType.tablet) {
-        navHeight = 49;
+    if (currentDeviceType === DeviceType.mobile) {
+      navHeight = 45;
+    }
+
+    setDropBoxHeight(
+      currentHeight + navHeight > sectionHeight
+        ? sectionHeight - navHeight - 20
+        : currentHeight,
+    );
+  }, [sectionHeight, currentDeviceType, navigationItems, getItemSize]);
+
+  const isTabletView = currentDeviceType === DeviceType.tablet;
+
+  return (
+    <div
+      ref={ref}
+      className={styles.box}
+      data-with-logo={withLogo ? "true" : "false"}
+      data-is-frame={isFrame ? "true" : "false"}
+      style={
+        {
+          "--drop-box-width": `${dropBoxWidth}px`,
+          "--drop-box-height":
+            sectionHeight < dropBoxHeight ? `${sectionHeight}px` : null,
+        } as React.CSSProperties
       }
-
-      if (currentDeviceType === DeviceType.mobile) {
-        navHeight = 45;
-      }
-
-      setDropBoxHeight(
-        currentHeight + navHeight > sectionHeight
-          ? sectionHeight - navHeight - 20
-          : currentHeight,
-      );
-    }, [sectionHeight, currentDeviceType, navigationItems, getItemSize]);
-
-    const isTabletView = currentDeviceType === DeviceType.tablet;
-
-    return (
+    >
       <div
-        ref={ref}
-        className={styles.box}
-        data-with-logo={withLogo ? "true" : "false"}
+        className={styles.container}
+        data-is-drop-box-component="true"
+        data-is-desktop-client={isDesktopClient ? "true" : "false"}
+        data-with-logo={!!withLogo && isTabletView ? "true" : "false"}
+        data-is-desktop={isDesktop ? "true" : "false"}
         data-is-frame={isFrame ? "true" : "false"}
-        style={
-          {
-            "--drop-box-width": `${dropBoxWidth}px`,
-            "--drop-box-height":
-              sectionHeight < dropBoxHeight ? `${sectionHeight}px` : null,
-          } as React.CSSProperties
-        }
+        data-is-frame-logo={isFrame && withLogo ? "true" : "false"}
+        data-is-root-folder={isRootFolder ? "true" : "false"}
       >
-        <div
-          className={styles.container}
-          data-is-drop-box-component="true"
-          data-is-desktop-client={isDesktopClient ? "true" : "false"}
-          data-with-logo={!!withLogo && isTabletView ? "true" : "false"}
-          data-is-desktop={isDesktop ? "true" : "false"}
-          data-is-frame={isFrame ? "true" : "false"}
-          data-is-frame-logo={isFrame && withLogo ? "true" : "false"}
-          data-is-root-folder={isRootFolder ? "true" : "false"}
-        >
-          {withLogo ? (
-            <NavigationLogo
-              burgerLogo={burgerLogo}
-              className="navigation-logo drop-box-logo"
-            />
-          ) : null}
-          <ArrowButton
-            isRootFolder={isRootFolder}
-            onBackToParentFolder={onBackToParentFolder}
+        {withLogo ? (
+          <NavigationLogo
+            burgerLogo={burgerLogo}
+            className="navigation-logo drop-box-logo"
           />
+        ) : null}
+        <ArrowButton
+          isRootFolder={isRootFolder}
+          onBackToParentFolder={onBackToParentFolder}
+        />
 
-          {navigationTitleContainerNode}
+        {navigationTitleContainerNode}
 
-          <ControlButtons
-            isDesktop={isDesktop}
-            isMobile={currentDeviceType !== DeviceType.desktop}
-            isRootFolder={isRootFolder}
-            canCreate={canCreate}
-            getContextOptionsFolder={getContextOptionsFolder}
-            getContextOptionsPlus={getContextOptionsPlus}
-            toggleInfoPanel={toggleInfoPanel}
-            toggleDropBox={toggleDropBox}
-            isInfoPanelVisible={isInfoPanelVisible}
-            onCloseDropBox={onCloseDropBox}
-            showTitle
-            isContextButtonVisible={isContextButtonVisible}
-            isPublicRoom={isPublicRoom}
-            isPlusButtonVisible={isPlusButtonVisible}
-          />
-        </div>
+        <ControlButtons
+          isDesktop={isDesktop}
+          isMobile={currentDeviceType !== DeviceType.desktop}
+          isRootFolder={isRootFolder}
+          canCreate={canCreate}
+          getContextOptionsFolder={getContextOptionsFolder}
+          getContextOptionsPlus={getContextOptionsPlus}
+          toggleInfoPanel={toggleInfoPanel}
+          toggleDropBox={toggleDropBox}
+          isInfoPanelVisible={isInfoPanelVisible}
+          onCloseDropBox={onCloseDropBox}
+          showTitle
+          isContextButtonVisible={isContextButtonVisible}
+          isPublicRoom={isPublicRoom}
+          isPlusButtonVisible={isPlusButtonVisible}
+        />
 
         <VariableSizeList
           direction={interfaceDirection as Direction}
@@ -185,9 +174,25 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
           {Row}
         </VariableSizeList>
       </div>
-    );
-  },
-);
+
+      <VariableSizeList
+        direction={interfaceDirection as Direction}
+        height={dropBoxHeight}
+        width="auto"
+        itemCount={countItems}
+        itemSize={getItemSize}
+        itemData={[
+          navigationItems,
+          onClickAvailable,
+          { withLogo: !!withLogo, currentDeviceType },
+        ]}
+        outerElementType={CustomScrollbarsVirtualList}
+      >
+        {Row}
+      </VariableSizeList>
+    </div>
+  );
+};
 
 DropBox.displayName = "DropBox";
 

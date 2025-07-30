@@ -3,7 +3,7 @@
   "content": "The limit is reached for storage space and the number of rooms",
   "content_en_sha1_hash": "d0fc2840d1e29090eb882183eb642d70a82180eb",
   "created_at": "2025-05-19T21:30:54.133Z",
-  "updated_at": "2025-07-01T15:57:35.918Z",
+  "updated_at": "2025-06-30T12:20:31.150Z",
   "comment": {
     "text": "This translation key is used to display a message when the user's storage space and room limit have reached their maximum capacity. It appears as a header in a quota bar component, likely on a dashboard or settings page, and informs the user of the limit that has been reached.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' is not accurately conveyed by 'limitinə çatıldı'. A more accurate translation would be 'limitə çatıb' or 'maksimuma çatdır'.  'Limitinə çatıldı' implies the limit has *been* reached and remains so, whereas the English suggests a state change.",
-          "suggestion": "Yaddaş sahəsi və otaq sayı limitə çatıb"
+          "description": "The English phrase 'The limit is reached' is better conveyed in Azerbaijani as 'limitə çatdırılıb' or 'limitə doldu'. 'Yaddaş sahəsi və otaq sayı limitinə çatıldı' translates more literally to 'Storage space and the number of rooms have reached the limit,' which isn't as natural as simply stating the limit has been reached.",
+          "suggestion": "Consider rephrasing to something like 'Yaddaş sahəsi və otaq sayı limiti doldu' or 'Yaddaş sahəsi və otaq sayı limitinə dolub.'"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the current translation uses a passive voice ('has been reached') which may not be the most concise or preferred style depending on the overall tone of the application.  A more direct, active voice might improve readability. ",
+          "suggestion": "Evaluate if a more active phrasing like 'Yaddaş sahəsi və otaq sayı limitini doldurub' would be more appropriate."
         }
       ],
       "approved_at": null
@@ -87,13 +92,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' is better conveyed as 'has been reached' or 'is exhausted' in Armenian to accurately reflect the passive sense of the original.  The current translation, 'սպառվել է' (sparel e), is grammatically correct but might imply a more active depletion rather than a passive reaching of a limit.",
-          "suggestion": "Պահեստային տարածքի և սենյակների քանակի սահմանաչափը լրացվել է (Pahisti tarazdgi ev senyakneri qanaki sahamachapn lratcel e) or Պահեստային տարածքի և սենյակների քանակի սահմանաչափը սպառվել է (Pahisti tarazdgi ev senyakneri qanaki sahamachapn sparel e) - the latter is acceptable, but the former offers better nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,13 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເກືອບເຕັມຂີດສຸດສາລີ' (geuap tem khit sut sali) translates to 'almost full limit' instead of 'reached the limit'. The English text indicates the limit *has* been reached, not just that it's near the limit.",
-          "suggestion": "ເກືອບເຕັມສູງສຸດສໍາລັບເນື້ອທີ່ເກັບຮັກສາ ແລະ ຈຳນວນຫ້ອງ"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ຫ້ອງ' (room) is spelled correctly, but its usage could be improved for clarity depending on the specific context. Consider if 'ຫ້ອງພັກ' (rooms for staying) is more appropriate.",
-          "suggestion": "Consider 'ຫ້ອງພັກ' if referring to rooms for living/staying. Otherwise, 'ຫ້ອງ' is acceptable."
+          "description": "The phrase 'The limit is reached' is not accurately reflected by 'ເກືອບເຕັມຂີດສຸດສາລີ'.  'ເກືອບເຕັມຂີດສຸດສາລີ' means 'almost full limit'. It implies that the limit isn't fully reached, but close to it. The English implies the limit has been met.",
+          "suggestion": "Consider a translation that more directly reflects 'the limit is reached', such as 'ເຕັມຂີດສຸດສາລີ' (full limit) or 'ເກີນຂີດສຸດສາລີ' (exceeded the limit)."
         }
       ],
       "approved_at": null
@@ -146,7 +140,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"storage space\" is not directly translated. \"Pamięć\" translates more to memory or storage (as in computer memory). A more accurate translation for storage space in this context would be \"przestrzeń magazynowa\" or similar.",
+          "suggestion": "Consider revising to \"Osiągnięto limit przestrzeni magazynowej i liczby pokoi\" or \"Osiągnięto limit miejsca do przechowywania i liczby pokoi\"."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -155,7 +155,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'rooms' is translated as 'divisões'. While 'divisões' can mean rooms, in this context referring to game progress, 'quartos' would be a more natural and common translation. 'Divisões' is more commonly used for partitions or divisions within a larger space.",
+          "description": "The translation \"É atingido o limite do espaço de armazenamento e do número de divisões\" is not the most natural or idiomatic way to express the English content. While technically correct, it sounds somewhat formal and awkward in Portuguese. 'Divisões' is a valid translation for rooms, but in this context, 'quartos' might be more common and easily understood.",
           "suggestion": "É atingido o limite do espaço de armazenamento e do número de quartos"
         }
       ],
@@ -173,13 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Limita maximă permisă de stocare și de săli a fost atinsă\" is a bit too formal and wordy. A more natural and concise translation would better reflect the original meaning.",
-          "suggestion": "Limita de stocare și de camere a fost atinsă."
+          "description": "The translation 'Limita maximă permisă de stocare și de săli a fost atinsă' is a bit too literal and formal. A more natural Romanian phrasing would be preferable.",
+          "suggestion": "Limita de stocare și număr de camere a fost atinsă."
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'sali' is less common than 'camere' in this context referring to rooms/spaces.",
-          "suggestion": "camere"
+          "type": "incorrect_translation",
+          "description": "The word 'sali' (sali) is grammatically incorrect. It should be 'camere'.",
+          "suggestion": "Replace 'sali' with 'camere'."
         }
       ],
       "approved_at": null
@@ -196,13 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ධාරිතාව ඉකුත්වී ඇති අතර ගබඩා අවකාශය සහ කාමර සංඛ්‍යාව ද ඉකුත්වී ඇත.' is a bit verbose and could be more concise. A more natural translation might focus on the overall message of reaching a limit.",
-          "suggestion": "ධාරිතාව පිරී ඇති අතර, ගබඩා අවකාශය සහ කාමර සංඛ්‍යාවද."
+          "description": "The English phrase \"The limit is reached\" is better translated as \"maximum limit has been reached\" or \"maximum threshold has been reached\" to accurately convey the meaning in Sinhala. The current translation, while understandable, doesn't fully capture the severity or technical meaning of 'limit reached'.",
+          "suggestion": "ධාරිතාව ප්‍රමාණය ඉක්මවා ඇත (Dharitawa pramaṇaya ikmava ath)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The use of 'ද' (da) at the end of 'කාමර සංඛ්‍යාවද' while grammatically correct, adds unnecessary emphasis. Removing it would make the sentence flow better.",
-          "suggestion": "ධාරිතාව පිරී ඇති අතර, ගබඩා අවකාශය සහ කාමර සංඛ්‍යාව."
+          "description": "The word 'and' ('හා' - ha) isn't strictly necessary and could be omitted for a more natural sounding Sinhala sentence.",
+          "suggestion": "ධාරිතාව ප්‍රමාණය ඉක්මවා ඇත ගබඩා අවකාශය සහ කාමර සංඛ්‍යාවද ඉකුත්වී ඇත (Dharitawa pramaṇaya ikmava ath, gabada avasaya saha kamara sankhyavad ikumvee ath)"
         }
       ],
       "approved_at": null
@@ -213,8 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limit pre úložný priestor a počet miestností je dosiahnutý' is a literal translation but sounds unnatural in Slovak. A more natural phrasing would convey that the limit *has been reached*. The word 'dosiahnutý' implies achieving something, whereas 'reached' implies a boundary being hit.",
-          "suggestion": "Limit úložného priestoru a počtu miestností je prekročený."
+          "description": "The translation 'Limit pre úložný priestor a počet miestností je dosiahnutý' is a literal translation but sounds unnatural in Slovak. A more natural phrasing would imply that the limit *has* been reached, rather than stating it's reached.",
+          "suggestion": "Limit pre úložný priestor a počet miestností je prekročený."
         }
       ],
       "approved_at": null
@@ -237,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' translates more naturally to 'Postignut je limit' in Serbian (Latin). 'Dostignut je limit' implies achieving something, not reaching a limit.",
-          "suggestion": "Postignut je limit za skladišni prostor i broj prostorija"
+          "description": "The English phrase 'The limit is reached' is better translated as 'Prekomeren je limit' or 'Dostignut je maksimalni limit' in Serbian (Latin) to more accurately convey the meaning. 'Dostignut je limit' is grammatically correct but a bit less idiomatic.",
+          "suggestion": "Prekomeren je limit za skladišni prostor i broj prostorija"
         }
       ],
       "approved_at": null
@@ -246,13 +246,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' implies that the maximum has been attained. While 'sınıra ulaşıldı' can mean 'the limit has been reached', it doesn't capture the same sense of having fully exhausted the allowance. A better translation might be 'Dolu' (full) or 'Maksimum doluluk' (maximum capacity).",
-          "suggestion": "Depolama alanı ve oda sayısı maksimuma ulaşıldı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

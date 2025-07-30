@@ -3,7 +3,7 @@
   "content": "Define quota per user",
   "content_en_sha1_hash": "54ca6fb58935294675995a1c935f243a11c5b624",
   "created_at": "2025-05-19T21:30:51.104Z",
-  "updated_at": "2025-05-21T04:36:50.610Z",
+  "updated_at": "2025-05-24T05:21:51.837Z",
   "comment": {
     "text": "The \"DefineQuotaPerUser\" translation key is used to display a label that indicates a button or toggle that allows users to set their own quota. It appears in UI elements related to storage management, and its purpose is to guide users through the process of defining their individual quota limits.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Quote pro Benutzer definieren' is not an accurate translation of 'Define quota per user'. 'Quote' (in the sense of quotation marks) does not align with the meaning of 'quota'.",
-          "suggestion": "Benutzerkontingent definieren"
+          "description": "The translation \"Quote pro Benutzer definieren\" is not an accurate translation of \"Define quota per user.\" \"Quote\" refers to a quotation and doesn't convey the meaning of a data quota. \"Quota\" needs to be translated to its German equivalent.",
+          "suggestion": "Festlegen des Benutzerkontingents"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Սահմանել քվոտա մեկ օգտվողի համար' is a literal translation and can be improved for natural Armenian phrasing. While technically correct, it sounds slightly awkward. A more natural phrasing would imply setting a quota *for each* user.",
-          "suggestion": "Consider 'Սահմանել քվոտա յուրաքանչյեն օգտվողի համար' or 'Սահմանել օգտվողների համար քվոտաներ' depending on the intended nuance."
+          "description": "The translation 'Սահմանել քվոտա մեկ օգտվողի համար' is a literal translation, but sounds slightly awkward. A more natural phrasing would be 'Սահմանել օգտագործողի համար քվոտա'.",
+          "suggestion": "Սահմանել օգտագործողի համար քվոտա"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"ユーザーごとの容量制限を定義する\" is a bit formal and lengthy for a settings label. A more natural and concise phrasing might be better depending on the overall tone of the application.",
-          "suggestion": "ユーザーごとの制限を設定する"
+          "description": "The translation \"ユーザーごとの容量制限を定義する \" (User to capacity restriction to define) is somewhat literal and could be improved for naturalness. While technically correct, it sounds a bit clunky in Japanese. A more natural phrasing would convey the meaning of setting a quota.",
+          "suggestion": "ユーザーごとの割り当て量を設定する (User to allocation amount to set)"
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zdefiniuj limit na użytkownika' while understandable, doesn't perfectly capture the nuance of 'Define quota per user'. 'Quota' implies a specific amount or allowance. 'Limit' is a broader term. A more accurate translation might incorporate a word suggesting a measurable amount.",
-          "suggestion": "Zdefiniuj pulę limitów na użytkownika"
+          "description": "While 'Zdefiniuj limit na użytkownika' is understandable, a more accurate and natural translation of 'Define quota per user' would be 'Ustaw limit dla użytkownika' or 'Określ limit dla użytkownika'. 'Zdefiniuj' implies a formal definition, which might be too strong for a settings option.",
+          "suggestion": "Ustaw limit dla użytkownika"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Stabilire cotă per utilizator\" is understandable, a more natural and accurate translation of \"Define quota per user\" in Romanian would be something like \"Setare cotă per utilizator\" or \"Definire cotă per utilizator\". 'Stabilire' implies a more formal or complex establishment process than 'define' typically suggests in a settings context.",
-          "suggestion": "Setare cotă per utilizator"
+          "description": "While 'Stabilire' (Establish) is technically correct, 'Define' implies setting a limit, so a more accurate translation would be something like 'Setează cotă per utilizator' or 'Stabilește cotă per utilizator'. 'Stabilire' sounds a bit formal for a settings menu.",
+          "suggestion": "Setează cotă per utilizator"
         }
       ],
       "approved_at": null
@@ -186,13 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පරිශ්‍රීලකයෙක්ට සලාකය දක්වන්න' doesn't accurately convey the meaning of 'Define quota per user'. 'සලාකය' translates to 'salary' or 'allowance', which isn't related to a quota. It seems like a misunderstanding of the original meaning.",
-          "suggestion": "A more accurate translation would be something like 'පරිශ්‍රමිකරුවාට හිշිය තීරණය කරන්න' (parishramikaruwata hishiya thiradanya karna) - meaning 'Define user quota', or 'භාවිතා කලට හිշිය සීමාව තීරණය කරන්න' (bhavithakala karta hishiya seemaawa thiradanya karna) - meaning 'Define quota limit per user'."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයෙක්ට' (parishreelayaketha) is technically correct but 'පරිශ්‍රමිකරුවාට' (parishramikaruwata) is more common and natural when referring to a user.",
-          "suggestion": "Replace 'පරිශ්‍රීලකයෙක්ට' with 'පරිශ්‍රමිකරුවාට'."
+          "description": "The translation \"පරිශ්‍රීලකයෙක්ට සලාකය දක්වන්න\" does not accurately convey the meaning of \"Define quota per user\". \"සලාකය\" translates to 'salary' or 'allowance,' which is not the intended meaning of 'quota'.",
+          "suggestion": "A more accurate translation would focus on specifying a limit or allowance for each user. Something like \"පරිශ්‍රීස්ට වෙන් වූ ප්‍රමාණය දක්වන්න\" (parishiستا ven-nuvá pramaṇaya dakkavannā) which translates to 'Define the allocated amount per user' might be better, or \"පරිශ්‍රීස්ට හිමි ප්‍රමාණය සකසන්න\" (parishiستا hime pramaṇaya sakasannā) - 'Set the amount allocated to each user'."
         }
       ],
       "approved_at": null
@@ -215,13 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Дефиниши квоту по кориснику' isn't the most natural or precise translation of 'Define quota per user'. While understandable, it's a bit literal and lacks fluency.",
-          "suggestion": "Одредите/Подесите квоту по кориснику"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'кориснику' is correct, consider if 'корисник' (in the nominative case) would be more suitable depending on the broader context.  It might sound slightly more formal and appropriate for a settings menu.",
-          "suggestion": "This suggestion is context dependent and may not always apply."
+          "description": "The translation 'Дефиниши квоту по кориснику' while understandable, is not the most natural or accurate translation of 'Define quota per user'. 'Define' can imply setting a limit or establishing a rule, and 'по кориснику' is a somewhat literal translation of 'per user'.",
+          "suggestion": "Определи квоту по кориснику"
         }
       ],
       "approved_at": null
@@ -241,13 +231,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Визначити квоту на користувача\" literally translates to 'Define quota on user'. A more natural and accurate translation would be 'Set quota per user' or 'Establish quota per user'.",
-          "suggestion": "Встановити квоту на користувача"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

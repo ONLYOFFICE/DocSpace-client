@@ -33,15 +33,17 @@ import { useTheme } from "styled-components";
 import classNames from "classnames";
 
 import {
-  StyledWrapper,
-  StyledSimpleFilesRow,
-} from "@docspace/shared/styles/FilesRow.styled";
+  FilesRow,
+  FilesRowWrapper,
+} from "@docspace/shared/components/files-row";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
+import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { generateFilesItemValue } from "../../../_utils";
 
@@ -49,8 +51,6 @@ import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
 
 import styles from "../RowView.module.scss";
-import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
-import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const Row = observer(
   ({
@@ -105,7 +105,7 @@ const Row = observer(
     const value = generateFilesItemValue(item, false, index);
 
     return (
-      <StyledWrapper
+      <FilesRowWrapper
         isActive={false}
         isFirstElem={index === 0}
         checked={isChecked}
@@ -121,14 +121,12 @@ const Row = observer(
           className="files-item"
           value={value}
         >
-          <StyledSimpleFilesRow
+          <FilesRow
             key={item.id}
             checked={isChecked}
             mode="modern"
             isIndexEditingMode={false}
-            onChangeIndex={() => {}}
-            sectionWidth={0}
-            folderCategory={null}
+            folderCategory={false}
             isActive={false}
             isIndexUpdated={false}
             isDragging={false}
@@ -152,9 +150,9 @@ const Row = observer(
               displayFileExtension={displayFileExtension}
               badgesComponent={badgesComponent}
             />
-          </StyledSimpleFilesRow>
+          </FilesRow>
         </DragAndDrop>
-      </StyledWrapper>
+      </FilesRowWrapper>
     );
   },
 );

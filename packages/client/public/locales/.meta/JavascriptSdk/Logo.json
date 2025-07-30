@@ -3,7 +3,7 @@
   "content": "Logo",
   "content_en_sha1_hash": "83fce8327410848c9eb609acb21732c7c0fec96a",
   "created_at": "2025-05-19T21:30:54.562Z",
-  "updated_at": "2025-05-21T08:57:20.407Z",
+  "updated_at": "2025-05-24T09:09:49.806Z",
   "comment": {
     "text": "The \"Logo\" translation key is used to display the label for a button or element that toggles the visibility of a logo in the UI. It appears in a dialog related to developer tools and is used to provide a clear and concise user interface. The translation will be applied to this label.",
     "is_auto": true,
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Logotips' while containing the root 'logo', is a plural form and a more general term for 'logos' or 'logotypes'. The original English term 'Logo' refers to a specific logo image. A more accurate translation would be 'Logo' or potentially a more descriptive term depending on the specific context where this key is used.",
-          "suggestion": "Consider 'Logo' or a more contextually appropriate term like 'Uzņēmuma logotips' (Company Logo)."
+          "description": "While 'Logotips' is a valid Latvian word, it's a plural form. The English 'Logo' is singular. A more accurate singular translation would be 'Logotips'.",
+          "suggestion": "Logotips"
         }
       ],
       "approved_at": null
@@ -177,13 +177,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Логотип' is a valid Serbian (Cyrillic) word for 'Logo', it's a more formal or complete translation. In this context, given the key 'JavascriptSdk:Logo', simply 'Лого' might be more appropriate to maintain brevity and consistency with the English source.",
+          "suggestion": "Consider using 'Лого' as a potentially more concise and contextually fitting translation."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Logotip\" is a valid Serbian word for \"Logo\", it's a more formal and technical term. Depending on the context, a more common or colloquial translation might be preferred.  \"Logo\" is often used directly in Serbian, particularly in digital environments.",
+          "suggestion": "Consider whether \"Logo\" (as is) or a more colloquial alternative might be more appropriate based on the brand's voice and target audience."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

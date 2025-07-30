@@ -3,7 +3,7 @@
   "content": "Groups added ({{count}}).",
   "content_en_sha1_hash": "cb7ab7bb6fa0e53d6c5b716aea922f323488eec3",
   "created_at": "2025-05-19T21:30:54.923Z",
-  "updated_at": "2025-05-28T09:30:02.435Z",
+  "updated_at": "2025-06-30T12:20:31.351Z",
   "comment": {
     "text": "This translation key displays the number of groups added to a room, typically shown on an info panel or in a history view. It is used when displaying recent activity related to adding group members, such as a \"Groups added\" count.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 230,
-      "context": "return t(\"InfoPanel:RoomRemoveUser\");\n case \"RoomInviteResend\":\n return t(\"InfoPanel:RoomInviteResend\");\n case \"RoomGroupAdded\":\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });\n return t(\"InfoPanel:RoomGroupAdded\");\n case \"RoomUpdateAccessForGroup\":\n return t(\"InfoPanel:RoomUpdateAccess\");",
+      "line_number": 239,
+      "context": "return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomGroupAddedCount\", {\n count,\n });\n return t(\"InfoPanel:RoomGroupAdded\");\n case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");",
       "module": "/packages/client"
     }
   ],
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Групи добавени ({{count}}).' is not grammatically correct. It needs a verb form indicating action. It should be in the past tense as it describes groups that *were* added.",
+          "suggestion": "Групи бяха добавени ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -105,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ຖືກ' is used. While grammatically acceptable, 'ຖືກ' can imply a passive action.  It might be more natural to omit it depending on the intended nuance. While acceptable, consider a more active phrasing.",
-          "suggestion": "ກຸ່ມເພີ່ມເຂົ້າແລ້ວ ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -147,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Grupuri au fost adăugate ({{count}}).\" is technically correct but sounds awkward and less natural in Romanian. A more natural phrasing would be 'Grupuri adăugate ({{count}}).' or 'S-au adăugat {{count}} grupuri.'",
+          "suggestion": "Grupuri adăugate ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -162,8 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කණ්ඩායම් එකතු කරන ලදි ({{count}}).\" is not the most natural way to say 'Groups added ({{count}}).' A more accurate and natural phrasing would be something like 'කණ්ඩායම් ඇමුණුන ({{count}}).' or 'කණ්ඩායම් යොදාගත්ත ({{count}}).'",
-          "suggestion": "කණ්ඩායම් ඇමුණුන ({{count}})."
+          "description": "The translation 'කණ්ඩායම් එකතු කරන ලදි ({{count}}).' doesn't perfectly convey the meaning of \"Groups added ({{count}}).\". While 'කණ්ඩායම්' correctly translates to 'Groups', 'එකතු කරන ලදි' implies 'were added' or 'are being added'. A more accurate translation would emphasize the completed action of adding groups.",
+          "suggestion": "කණ්ඩායම් යොදා ඇත ({{count}})."
+        },
+        {
+          "type": "formatting",
+          "description": "The placeholder `{{count}}` is correctly placed, but it's crucial to ensure consistency with other translations using the same placeholder format throughout the application.",
+          "suggestion": "No change needed, but ensure consistent placeholder usage."
         }
       ],
       "approved_at": null
@@ -186,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Групе додате ({{count}}).' translates to 'Groups added' but grammatically implies that the groups were added *to* something. The correct phrasing would indicate that groups were *added*.",
-          "suggestion": "Додатате групе ({{count}})."
+          "description": "The translation 'Групе додате ({{count}}).' implies 'Groups added to [something]'. The English 'Groups added' implies a count of groups added, not groups added *to* something. A more accurate translation would be 'Додате групе ({{count}}).' or 'Додата група ({{count}}).' depending on whether the count is singular or plural.",
+          "suggestion": "Додате групе ({{count}})."
         }
       ],
       "approved_at": null
@@ -198,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian word for 'Groups' is 'Grupe', but the plural form should be correctly declined. 'Grupe dodate' is not grammatically correct. The correct form would be 'Grupe dodane'.",
-          "suggestion": "Grupe dodane ({{count}})."
+          "description": "The Serbian word 'Grupe' is plural. The English 'Groups' is also plural, so the translation is technically correct. However, 'Grupe dodate' sounds slightly awkward. A more natural phrasing would be 'Dodate grupe'.",
+          "suggestion": "Dodate grupe ({{count}})."
         }
       ],
       "approved_at": null

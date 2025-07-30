@@ -3,7 +3,7 @@
   "content": "Filled out form.",
   "content_en_sha1_hash": "7bca2db1de3a072d3eeedb75b8cf908cc141eb18",
   "created_at": "2025-05-19T21:30:54.834Z",
-  "updated_at": "2025-06-18T07:34:15.005Z",
+  "updated_at": "2025-06-30T12:20:31.356Z",
   "comment": {
     "text": "The translation key \"FilledOutForm\" is used to display a message when a form has been submitted successfully. It likely appears on a confirmation button or dialog, indicating that a form has been completed and validated. This context provides translators with guidance on how to translate this specific phrase in the UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 293,
-      "context": "case \"RoomIndexExportSaved\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":\n return t(\"InfoPanel:FilledOutForm\");\n case \"FormOpenedForFilling\":\n return t(\"InfoPanel:StartedFillingItOut\");\n case \"FileCustomFilterEnabled\":\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case \"FileCustomFilterDisabled\":",
+      "line_number": 306,
+      "context": "case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Doldurulmuş forma' is technically correct, it sounds slightly awkward. A more natural phrasing would be 'Doldurulmuş form'. 'Forma' is less common and less preferred than 'form' in modern Azerbaijani.",
+          "suggestion": "Doldurulmuş form"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -108,8 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ແບບຟອມຖືກຕື່ນຂໍ້ມູນແລ້ວ' while literally meaning 'Form is filled with information', is not the most natural or common way to express 'Filled out form' in Lao. A more direct and common translation would be 'ແບບຟອມເຕີມຂໍ້ມູນແລ້ວ'.",
+          "description": "The translation 'ແບບຟອມຖືກຕື່ນຂໍ້ມູນແລ້ວ' while literally meaning 'form is filled with information', is a bit wordy and not the most natural way to say 'Filled out form' in Lao. It implies more than just filling it out, suggesting data entry.",
           "suggestion": "ແບບຟອມເຕີມຂໍ້ມູນແລ້ວ"
+        },
+        {
+          "type": "spelling",
+          "description": "While not strictly incorrect, 'ເຕີມ' (to fill) is more common and natural in this context than 'ຕື່ນ' which implies waking something up.",
+          "suggestion": "Consider using 'ເຕີມ' instead of 'ຕື່ນ'."
         }
       ],
       "approved_at": null
@@ -132,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Wypełnił(ła) formularz' literally means 'Filled out the form (male/female)'. While technically correct, it lacks the definiteness of the English 'Filled out form.' A more accurate translation, considering the context of an infopanel, would be 'Formularz wypełniony' or 'Wypełniony formularz'.",
-          "suggestion": "Formularz wypełniony"
+          "description": "The translation 'Wypełnił(ła) formularz' implies an active completion by a specific person. The English 'Filled out form' is more descriptive, stating the form has been completed, without specifying who did it. It's a passive description.",
+          "suggestion": "Consider 'Uzupełniony formularz' or 'Formularz wypełniony' for a more accurate passive translation."
         }
       ],
       "approved_at": null
@@ -165,7 +176,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'පිරවුණු ආකෘතිය' is understandable, a more natural and precise translation of 'Filled out form' would be 'පිරවූ ආකෘතිය' or 'පිරවූ පත්‍රය'. 'පිරවුණු' implies something that *is* filled, rather than the action of filling it out.",
+          "suggestion": "පිරවූ ආකෘතිය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -210,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Điền vào biểu mẫu' while literally meaning 'Fill in the form', doesn't perfectly capture the meaning of 'Filled out form.' It implies the action of filling, rather than the state of being filled.",
-          "suggestion": "Đã điền vào biểu mẫu"
+          "description": "The English phrase \"Filled out form\" implies a form has been completed, not necessarily that someone is in the process of filling it out. \"Điền vào biểu mẫu\" translates to \"Fill in the form\", which suggests an action in progress, not a completed action. A more accurate translation would be 'Biểu mẫu đã điền đầy đủ' or 'Đã điền biểu mẫu'.",
+          "suggestion": "Biểu mẫu đã điền đầy đủ"
         }
       ],
       "approved_at": null

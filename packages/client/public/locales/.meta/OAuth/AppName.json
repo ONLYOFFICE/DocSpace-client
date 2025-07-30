@@ -3,7 +3,7 @@
   "content": "App name",
   "content_en_sha1_hash": "c877cbb0e805c856b7e4763b53e5cb1196debd88",
   "created_at": "2025-05-19T21:30:53.812Z",
-  "updated_at": "2025-05-21T07:27:58.741Z",
+  "updated_at": "2025-06-30T12:20:31.464Z",
   "comment": {
     "text": "The translation key \"AppName\" is used to display the application name in various input fields. It appears as a label and placeholder text for user input, such as entering a new app name or existing one.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 139,
+      "line_number": 140,
       "context": "return (\n <StyledBlock>\n <BlockHeader header={t(\"BasicInfo\")} />\n <StyledInputBlock>\n <InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}",
       "module": "/packages/client"
     }
@@ -51,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation 'App-Name' is missing a space after the hyphen.",
-          "suggestion": "App Name"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -87,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Հավելվածի անվանումը\" literally translates to \"The name of the application.\" While not technically incorrect, it's more natural and concise to simply use \"Ապլիկացիայի անունը\" or \"Հավելվածի անունը\" for \"App name\".",
+          "suggestion": "Consider using \"Ապլիկացիայի անունը\" or \"Հավելվածի անունը\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຊື່ອຸບປະກອນ\" while technically meaning 'application name', isn't the most natural or commonly used phrasing for 'App name' in a technical context. It sounds a bit formal and clunky.",
-          "suggestion": "Consider alternatives like \"ຊື່ແອັບຯ\" (chue app) or \"ຊື່ໂອນິສຳານຸສານ\" (chue onisamanusan) which is more common for 'App name'."
+          "description": "The Lao translation \"ຊື່ອຸບປະກອນ\" (chue upprakon) literally translates to 'equipment name'. While it's understandable in context, it's not the most accurate translation of 'App name'.  A more direct translation would be something closer to 'ຊື່ແອບພຶເຄັດຊັນ' (chue app application) or 'ຊື່ໂອນຳ' (chue onam).",
+          "suggestion": "Consider using 'ຊື່ແອບພຶເຄັດຊັນ' (chue app application) or 'ຊື່ໂອນຳ' (chue onam) for a more precise translation."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'App naam' is a direct transliteration of 'App name' and doesn't convey the intended meaning. 'App' is already commonly used in Dutch, so 'App name' should ideally be 'App-naam' or simply 'App naam' with a hyphen for better readability, although the latter is more common.",
-          "suggestion": "App-naam"
+          "description": "The Dutch translation 'App naam' is a literal translation of 'App name' and while understandable, it's not idiomatic Dutch.  'App' is already an English loanword in Dutch, so 'App naam' is redundant.  A more natural translation would be simply 'Naam'.",
+          "suggestion": "Naam"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Назив апликације' is a literal translation of 'Name of application' instead of simply 'App name'. While not incorrect, it's more verbose than the English original and might not be the best choice for a key name or a concise UI element.",
-          "suggestion": "Consider a shorter, more direct translation like 'Назив апликације' or even simply 'Апликација'."
+          "description": "The translation 'Назив апликације' is a bit literal. A more natural Serbian (Cyrillic) translation of 'App name' would be 'Име апликације'. While 'Назив' is correct, 'Име' sounds more idiomatic in this context.",
+          "suggestion": "Име апликације"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Reorder",
   "content_en_sha1_hash": "33d9978c44777f5262fb2dbe921b919fa3fad96c",
   "created_at": "2025-05-19T21:30:56.040Z",
-  "updated_at": "2025-06-18T07:34:14.905Z",
+  "updated_at": "2025-06-18T17:11:42.379Z",
   "comment": {
     "text": "This translation key \"Reorder\" is used to display a button label in the header section of a file page, which triggers reordering functionality when clicked. It appears on the \"Home\" page and also within a reorder index dialog for editing files.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 456,
+      "line_number": 458,
       "context": "const headerMenu = isIndexEditingMode\n ? [\n {\n id: \"reorder-index\",\n label: t(\"Files:Reorder\"),\n onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",",
       "module": "/packages/client"
     }
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නවතින්නට සකස් කරන්න' while conveying a sense of arrangement, doesn't perfectly capture the simple meaning of 'Reorder'. It implies a more complex action of preparing for reordering.",
-          "suggestion": "Consider a more direct translation such as 'ලිපි නැවත සැකසීම' (Lipi nawath sata seima) or 'වියපත් කිරීම' (Viyapat karima), which more closely aligns with the meaning of 'Reorder'."
+          "description": "'නවතින්නට සකස් කරන්න' is a rather verbose and potentially awkward translation of 'Reorder'. It implies 'to prepare to reorder' rather than simply 'reorder'.",
+          "suggestion": "A more accurate and concise translation could be 'අයථා පත්‍රිකාවලින් ප්‍රතිසංවිධානය කරන්න' or simply 'පිළිසිටුවන්න'."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Preuredi\" doesn't accurately convey the meaning of \"Reorder\" in the context of file management. \"Preuredi\" generally means 'to rearrange' or 'to organize,' which isn't quite the same as 'reorder'. A more accurate translation would be \"Ponovo poredi\" or \"Premesti\" depending on the specific function.",
-          "suggestion": "Consider \"Ponovo poredi\" or \"Premesti\"."
+          "description": "The Serbian translation \"Preuredi\" doesn't accurately convey the meaning of \"Reorder\". \"Reorder\" implies arranging items in a different sequence, but \"Preuredi\" often refers to organizing or rearranging in a more general sense. A more accurate translation would depend on the context.",
+          "suggestion": "Consider alternatives like \"Ponovo poredi\", \"Poredaj ponovo\", or a more context-specific translation. Without further context, it's difficult to provide a perfect suggestion."
         }
       ],
       "approved_at": null
@@ -213,7 +213,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Sắp xếp lại\" is a valid translation, it might be a bit too literal for this context. \"Reorder\" often implies a rearrangement of items in a specific order, and a simpler, more natural translation might be preferable.",
+          "suggestion": "Consider alternatives like \"Sắp xếp\" or \"Thứ tự lại\" depending on the precise meaning intended by 'Reorder'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

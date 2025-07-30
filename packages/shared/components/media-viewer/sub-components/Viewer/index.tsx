@@ -77,7 +77,7 @@ export const Viewer = (props: ViewerProps) => {
     generateContextMenu,
   } = props;
 
-  const timerIDRef = useRef<NodeJS.Timeout>();
+  const timerIDRef = useRef<NodeJS.Timeout>(undefined);
 
   const [isPDFSidebarOpen, setIsPDFSidebarOpen] = useState<boolean>(false);
   const [panelVisible, setPanelVisible] = useState<boolean>(true);

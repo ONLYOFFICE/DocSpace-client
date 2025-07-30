@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import styled from "styled-components";
 
 import SendClockReactSvg from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 
-import { IconSizeType, commonIconsStyles } from "../../../utils";
+import { IconSizeType } from "../../../utils";
 import { Link, LinkType } from "../../link";
 import { Checkbox } from "../../checkbox";
 
@@ -38,17 +37,12 @@ import { RowContent } from ".";
 import { RowContentProps } from "./RowContent.types";
 import { globalColors } from "../../../themes";
 
+import styles from "./RowContent.stories.module.scss";
+
 export default {
   title: "Components/RowContent",
   component: RowContent,
 };
-
-const SendClockIcon = styled(SendClockReactSvg)`
-  ${commonIconsStyles}
-`;
-const CatalogSpamIcon = styled(CatalogSpamReactSvg)`
-  ${commonIconsStyles}
-`;
 
 const Template = (args: RowContentProps) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -61,12 +55,14 @@ const Template = (args: RowContentProps) => {
           Demo
         </Link>
         <>
-          <SendClockIcon
-            size={IconSizeType.small}
+          <SendClockReactSvg
+            className={styles.sendClockIcon}
+            data-size={IconSizeType.small}
             color={globalColors.lightIcons}
           />
-          <CatalogSpamIcon
-            size={IconSizeType.small}
+          <CatalogSpamReactSvg
+            className={styles.catalogSpamIcon}
+            data-size={IconSizeType.small}
             color={globalColors.lightIcons}
           />
         </>
@@ -110,8 +106,9 @@ const Template = (args: RowContentProps) => {
           Demo Demo
         </Link>
 
-        <CatalogSpamIcon
-          size={IconSizeType.small}
+        <CatalogSpamReactSvg
+          className={styles.catalogSpamIcon}
+          data-size={IconSizeType.small}
           color={globalColors.lightIcons}
         />
 
@@ -189,8 +186,9 @@ const Template = (args: RowContentProps) => {
           Demo Demo Demo Demo
         </Link>
 
-        <SendClockIcon
-          size={IconSizeType.small}
+        <SendClockReactSvg
+          className={styles.sendClockIcon}
+          data-size={IconSizeType.small}
           color={globalColors.lightIcons}
         />
 

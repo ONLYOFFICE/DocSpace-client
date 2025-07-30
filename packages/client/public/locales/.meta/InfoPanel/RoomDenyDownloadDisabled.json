@@ -3,7 +3,7 @@
   "content": "Downloading and copying unrestricted",
   "content_en_sha1_hash": "9e8a817fcbaa95bf1b658a33183cf17250c1fd2d",
   "created_at": "2025-05-19T21:30:54.907Z",
-  "updated_at": "2025-06-18T07:34:15.003Z",
+  "updated_at": "2025-06-30T12:20:31.355Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that downloading and copying are restricted. It appears in a UI context where room management settings are being shown or applied, likely on a page related to room history or permissions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 283,
-      "context": "case \"RoomLifeTimeDisabled\":\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case \"RoomDenyDownloadEnabled\":\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case \"RoomDenyDownloadDisabled\":\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportSaved\":",
+      "line_number": 292,
+      "context": "case FeedActionKeys.RoomLifeTimeDisabled:\n return t(\"InfoPanel:RoomLifeTimeDisabled\");\n case FeedActionKeys.RoomDenyDownloadEnabled:\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying unrestricted' implies a lack of limitations. The Arabic translation 'التحميل والنسخ مسموحان' translates to 'Downloading and copying are allowed,' which doesn't convey the same sense of unrestricted access. It simply states permission, not a lack of limitations.",
-          "suggestion": "Consider a translation that more closely reflects the original meaning, such as 'التحميل والنسخ غير مقيد' (Downloading and copying are unrestricted)."
+          "description": "The English phrase \"Downloading and copying unrestricted\" implies that downloads and copies are not restricted. The Arabic translation \"التحميل والنسخ مسموحان\" translates to \"Downloading and copying are permitted,\" which conveys the same meaning but is a slightly less direct rendering of 'unrestricted'. A more accurate translation might capture the idea of freedom from limitations more explicitly.",
+          "suggestion": "Consider alternatives that more closely convey 'unrestricted,' such as \"التحميل والنسخ بدون قيود\" (Downloading and copying without restrictions) or \"التحميل والنسخ بحرية\" (Downloading and copying freely)."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying unrestricted' implies freedom from limitations or restrictions. The Azerbaijani translation 'Yükləmə və nüsxələnmə limitsizdir' literally means 'Downloading and copying are limitless.' While close, 'unrestricted' carries a slightly more nuanced meaning of absence of limitations rather than just being limitless. A more accurate translation might consider phrasing that emphasizes the lack of restrictions.",
-          "suggestion": "Yükləmə və nüsxələnmə heç bir məhdudiyyətə malik deyil"
+          "description": "The translation \"Yükləmə və nüsxələnmə limitsizdir\" while technically correct, doesn't fully capture the nuance of \"Downloading and copying unrestricted.\" A better translation would convey the idea of being free from restrictions, not just that it's limitless.  'Limitsizdir' can imply a quantity, not a freedom.",
+          "suggestion": "Yükləmə və nüsxələnmə heç bir məhdudiyyətə malikdir"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Lataaminen ja kopiointi rajoittamaton\" translates to \"Downloading and copying unrestricted\". This doesn't convey the intended meaning of 'disabled' or 'not allowed'. A more appropriate translation would imply that downloading and copying are *not* restricted, but the context indicates they *are* disabled. This is a mismatch in meaning.",
-          "suggestion": "Lataaminen ja kopiointi estetty"
+          "description": "The translation 'Lataaminen ja kopiointi rajoittamaton' literally translates to 'Downloading and copying unrestricted'. However, the original English 'Downloading and copying unrestricted' likely means 'Downloading and copying without restrictions'. The Finnish translation implies something different, potentially suggesting the act itself is unrestricted, rather than the ability to download and copy.",
+          "suggestion": "Lataaminen ja kopiointi ilman rajoituksia"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ներբեռնումը և պատճենումը անսահմանափակ են\" translates to 'Downloading and copying are unlimited'. The English content \"Downloading and copying unrestricted\" implies that downloading and copying *can* happen without restrictions, not that they *are* unlimited.",
-          "suggestion": "Consider a phrasing like \"Ներբեռնումն ու պատճենումը առանց սահմանափակումների է\" (Downloading and copying without restrictions) or \"Ներբեռնումն ու պատճենումը ազատ են\" (Downloading and copying are free)."
+          "description": "The English phrase 'Downloading and copying unrestricted' implies freedom or permission to download and copy. The Armenian translation 'Ներբեռնումը և պատճենումը անսահմանափակ են' translates to 'Downloading and copying are unlimited.' While close, 'unlimited' doesn't convey the same sense of permission or lack of restriction. A more accurate translation would convey the idea that the user *is* allowed to download and copy.",
+          "suggestion": "Consider a translation that more directly implies permission or freedom, such as 'Մուտքագրումն ու պատճենումը թույլատրված են' (Downloading and copying are permitted) or 'Ներբեռնումն ու պատճենումը կարելի է ազատ' (Downloading and copying are freely allowed)."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Downloading and copying unrestricted\" implies freedom or lack of restrictions *on* the downloading and copying. The Japanese translation, \"無制限のダウンロードとコピー\" (Mugen-seki no download to copy), translates to \"Unlimited download and copy.\" While close, it lacks the nuance of freedom *from* restrictions. A better translation would convey that restriction is absent.",
-          "suggestion": "検討: 制限のないダウンロードとコピー (Seigen no download to copy) - 'Downloading and copying without restriction'."
+          "description": "The English phrase \"Downloading and copying unrestricted\" implies a lack of restrictions. The Japanese translation \"無制限のダウンロードとコピー\" (Mugen-sei no download to copy) accurately conveys 'unrestricted download and copy,' but the nuance might be slightly different depending on the context.  It might be more appropriate to phrase it to emphasize that downloads/copies *are* permitted, rather than just stating they are unrestricted. This is particularly important if the original English text is meant to reassure the user that they *can* download/copy.",
+          "suggestion": "Consider phrasing closer to \"許可されたダウンロードとコピー\" (Kyoka sareta download to copy) which translates to \"Permitted downloads and copies\" if the goal is to reassure the user.  However, without further context, the current translation isn't *incorrect*, just potentially less optimal."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"다운로드 및 복사가 제한되지 않습니다\" (Download and copy are not restricted) is too literal and doesn't capture the intended meaning of \"Downloading and copying unrestricted.\" It implies the absence of restrictions, but a better phrasing would convey the freedom or allowance of these actions.",
-          "suggestion": "다운로드 및 복사가 자유롭습니다 (Downloads and copies are free) or 다운로드 및 복사가 가능합니다 (Downloads and copies are possible)."
+          "description": "The English phrase \"Downloading and copying unrestricted\" implies a state of freedom or permission. The Korean translation \"다운로드 및 복사가 제한되지 않습니다\" literally translates to \"Downloading and copying are not restricted,\" which is functionally correct but lacks the positive affirmation of permission implied by the English. A more natural translation might emphasize the allowance, like '다운로드 및 복사가 가능합니다' (Downloading and copying are possible) or '다운로드 및 복사가 자유롭습니다' (Downloading and copying are free).",
+          "suggestion": "다운로드 및 복사가 가능합니다"
         }
       ],
       "approved_at": null
@@ -143,9 +143,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ກ໊ອບີ້' is a transliteration of 'copy' and while understandable, 'ສໍາເນົາ' would be a more appropriate and common Lao word for 'copy'.",
-          "suggestion": "ດາວໂຫຼດ ແລະ ສໍາເນົາແບບບໍ່ຈຳກັດ"
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ດາວໂຫຼດ ແລະ ກ໊ອບີ້ແບບບໍ່ຈຳກັດ\" is a literal translation but doesn't fully capture the nuance of 'unrestricted'. It implies simply 'download and copy without limits', which might not be the intended meaning. The English phrase likely means 'downloading and copying is allowed' or 'downloading and copying is enabled'.",
+          "suggestion": "Consider a translation like \"ສາມາດດາວໂຫຼດ ແລະ ກ໊ອບີ້ໄດ້\" (meaning 'able to download and copy') or \"ອະນຸຍາດໃຫ້ດາວໂຫຼດ ແລະ ກ໊ອບີ້\" (meaning 'permitted to download and copy'). The best option depends on the exact context."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pobieranie i kopiowanie nie są ograniczone' is a literal translation but doesn't fully capture the nuance of \"Downloading and copying unrestricted.\" A more natural translation would convey the idea of unrestricted access or freedom.",
-          "suggestion": "Pobieranie i kopiowanie są dozwolone / Pobieranie i kopiowanie bez ograniczeń"
+          "description": "The English phrase \"Downloading and copying unrestricted\" implies freedom from restrictions. The Polish translation \"Pobieranie i kopiowanie nie są ograniczone\" is a literal translation that conveys the same meaning but sounds slightly awkward and less natural in Polish. A more fluent and idiomatic translation would better reflect the intended meaning.",
+          "suggestion": "Pobieranie i kopiowanie bez ograniczeń"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying unrestricted' implies a state of being allowed or permitted. The Portuguese translation 'Download e cópia irrestritos' translates to 'Unrestricted download and copy', which is a descriptor, not a state. It doesn't convey the original meaning of *allowed* downloading and copying.",
-          "suggestion": "Consider \"Download e cópia permitidos\" or \"Download e cópia sem restrições permitidos\" to more accurately reflect the original meaning."
+          "description": "The translation \"Download e cópia irrestritos\" doesn't quite capture the nuance of \"Downloading and copying unrestricted.\" It reads more like \"unrestricted downloads and copies.\" A more accurate translation would convey the action is unrestricted, not the downloads/copies themselves.  A better translation might be 'Download e cópia sem restrições'.",
+          "suggestion": "Download e cópia sem restrições"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Încărcarea și copierea nu sunt restricționate\" doesn't accurately convey the meaning of \"Downloading and copying unrestricted\".  'Unrestricted' implies permission, while the Romanian translation implies that the actions simply *lack* restrictions, which isn't the same.",
-          "suggestion": "Permiterea încărcării și copierea"
+          "description": "The translation \"Încărcarea și copierea nu sunt restricționate\" doesn't fully capture the meaning of \"Downloading and copying unrestricted\". \"Unrestricted\" implies permission, whereas the translation states that they are simply *not* restricted, which is a subtle but important difference. A better translation would convey the explicit permission aspect.",
+          "suggestion": "Încărcarea și copierea sunt permise"
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"බාගත කිරීම සහ කොපිරී කිරීම අවරෝධයකින් තොරව\" doesn't accurately convey the meaning of \"Downloading and copying unrestricted.\" The English phrase implies a lack of restrictions, while the Sinhala translation literally means 'Downloading and copying without restriction.' This creates a contradiction.",
-          "suggestion": "බාගත කිරීම සහ කොපිරී ගැනීම සඳහා අවරෝධයක් లేదు (Baḍagat kiraṁ saha kopirī kirimata satha avarodayak dēnu) - This translates to 'Downloading and copying without restriction' in a way that aligns with the original meaning, or 'බාගත කිරීම සහ කොපිරී ගැනීම සඳහා බාධාවක් లేదు' (Baḍagat kiraṁ saha kopirī kirimata satha bādhavak dēnu) - This translates as 'Downloading and copying without obstacle.'"
+          "description": "The translation \"බාගත කිරීම සහ කොපිරී කිරීම අවරෝධයකින් තොරව\" literally translates to 'Downloading and copying without restriction'. The English content 'Downloading and copying unrestricted' implies that the action is permitted, whereas the Sinhala translation focuses on the *absence* of restriction. While not strictly incorrect, it shifts the emphasis and might be misleading depending on the context. A more direct translation conveying permission might be more appropriate.",
+          "suggestion": "බාගත කිරීම සහ කොපිරී ගැනීම නිදහසින් (Bagathakama saha kopiriyakama nidahasin)"
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sťahovanie a kopírovanie nie je obmedzené' doesn't accurately convey the meaning of 'Downloading and copying unrestricted.' It translates to 'Downloading and copying are not restricted.' The original implies permission or freedom to download and copy, while the translation states a lack of restriction, which isn't quite the same.",
-          "suggestion": "Sťahovanie a kopírovanie je povolené / Sťahovanie a kopírovanie je voľné"
+          "description": "The Slovak translation \"Sťahovanie a kopírovanie nie je obmedzené\" translates to 'Downloading and copying is not restricted'. The English \"Downloading and copying unrestricted\" implies a permissive state, not merely an absence of restriction. A better translation would convey a sense of freedom or allowance.",
+          "suggestion": "Sťahovanie a kopírovanie je voľné/umožnené."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Downloading and copying unrestricted\" implies a permission or state of being allowed to download and copy. The Slovenian translation \"Prenos in kopiranje neomejeno\" translates to \"Download and copy unlimited.\" While close, 'unrestricted' has a slightly different nuance of being permitted, not just unlimited.  A more accurate translation might be 'Prenos in kopiranje brez omejitev' (Download and copy without restrictions).",
-          "suggestion": "Prenos in kopiranje brez omejitev"
+          "description": "The English phrase 'Downloading and copying unrestricted' implies a permission or allowance. The Slovenian translation 'Prenos in kopiranje neomejeno' translates to 'Downloading and copying unlimited'. While close, it doesn't convey the same sense of permission or being enabled. A more accurate translation might consider phrasing that explicitly states the user *can* download and copy.",
+          "suggestion": "Consider alternatives like 'Prenos in kopiranje dovoljeno' (Downloading and copying allowed) or 'Možen je prenos in kopiranje' (Downloading and copying is possible)."
         }
       ],
       "approved_at": null
@@ -252,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Downloading and copying unrestricted\" implies a permission or state of being allowed to download and copy. The Serbian translation \"Преузимање и копирање без ограничења\" literally translates to \"Downloading and copying without limitations.\" While close, it doesn't fully capture the original meaning. A more accurate translation might emphasize permission or the lack of a restriction.",
-          "suggestion": "Consider \"Преузимање и копирање са дозволом\" (Downloading and copying with permission) or \"Преузимање и копирање је дозвољено\" (Downloading and copying is allowed)."
+          "description": "The English phrase 'Downloading and copying unrestricted' implies the ability to download and copy without limitations. The Serbian translation 'Преузимање и копирање без ограничења' literally translates to 'Downloading and copying without limitations', which is accurate but potentially lacks the nuance of the original. Depending on the context, a more accurate translation might be 'Преузимање и копирање неограничено' or 'Преузимање и копирање слободно'.",
+          "suggestion": "Consider 'Преузимање и копирање неограничено' or 'Преузимање и копирање слободно' for potentially better nuance."
         }
       ],
       "approved_at": null
@@ -270,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying unrestricted' implies the action is *not* limited. The Turkish translation 'İndirme ve kopyalama sınırlandırılmıştır' means 'Downloading and copying are restricted/limited.' This is a direct contradiction.",
-          "suggestion": "Consider a translation that reflects the 'unrestricted' nature, such as 'İndirme ve kopyalamada kısıtlama yoktur' (There are no restrictions on downloading and copying) or 'Serbestçe indirme ve kopyalama' (Free downloading and copying)."
+          "description": "The English phrase \"Downloading and copying unrestricted\" implies freedom and lack of limitations. The Turkish translation \"İndirme ve kopyalama sınırlandırılmıştır\" means \"Downloading and copying are restricted.\" This is the opposite of the intended meaning. A more accurate translation would convey the unrestricted nature, perhaps using phrases like 'sınırsız indirme ve kopyalama' or 'her türlü indirme ve kopyalama'.",
+          "suggestion": "Sınırsız indirme ve kopyalama"
         }
       ],
       "approved_at": null
@@ -282,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Завантаження та копіювання не обмежено' doesn't fully capture the nuance of 'Downloading and copying unrestricted'. 'Unrestricted' implies freedom and ability, whereas the translation implies the actions are simply *not* restricted, which is slightly different. A more accurate translation would convey the freedom to download and copy.",
-          "suggestion": "Завантаження та копіювання вільно"
+          "description": "The English phrase 'Downloading and copying unrestricted' implies a permission or state of being allowed. The Ukrainian translation 'Завантаження та копіювання не обмежено' literally translates to 'Downloading and copying are not restricted'. While technically correct, it lacks the positive affirmation of permission or allowance that the English suggests. A more accurate translation would convey that users *can* download and copy freely.",
+          "suggestion": "Consider alternatives such as 'Завантаження та копіювання дозволено' (Downloading and copying are permitted) or 'Можна завантажувати та копіювати' (You can download and copy)."
         }
       ],
       "approved_at": null
@@ -294,8 +294,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Downloading and copying unrestricted' implies a permission or status that allows downloads and copies. The Vietnamese translation 'Không hạn chế tải xuống và sao chép' literally means 'No restrictions on downloading and copying'. While not entirely wrong, it doesn't fully capture the nuance of the original. A more accurate translation might emphasize the *ability* or *permission* to download and copy.",
-          "suggestion": "Cấp phép tải xuống và sao chép"
+          "description": "The translation \"Không hạn chế tải xuống và sao chép\" doesn't fully capture the nuance of \"Downloading and copying unrestricted.\"  'Unrestricted' implies freedom *from* limitations, whereas the Vietnamese translation simply states 'no restrictions'. While not incorrect, it's a slightly less accurate reflection of the original meaning.",
+          "suggestion": "Tải xuống và sao chép tự do"
         }
       ],
       "approved_at": null
@@ -306,8 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content 'Downloading and copying unrestricted' implies a state of being *allowed* to download and copy. The Chinese translation '已解除下载和复制限制' (yi jiechu download he fuzhi xianzhi) translates to 'Download and copy restrictions have been lifted'. While not entirely wrong, it doesn't convey the same meaning of permission. A more accurate translation would emphasize the allowance.",
-          "suggestion": "允许下载和复制 (yǔnxǔ download hé fuzhi)"
+          "description": "The translation \"已解除下载和复制限制\" (yi jie chu xia zai he fu zhi xian zhi) translates to 'Download and copy restrictions have been lifted'.  The English 'Downloading and copying unrestricted' implies the ability to download and copy without limitations, not that the restrictions were previously present and removed.  The nuance is lost.",
+          "suggestion": "Consider \"可下载和复制\" (ke xia zai he fu zhi) which means 'able to download and copy', or \"允许下载和复制\" (yun xue xia zai he fu zhi) which means 'allows download and copy'."
         }
       ],
       "approved_at": null

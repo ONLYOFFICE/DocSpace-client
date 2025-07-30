@@ -3,7 +3,7 @@
   "content": "Add emails to incomplete accounts",
   "content_en_sha1_hash": "ab85e01a86fcd93b7f8ff463ad6151d45e207b1e",
   "created_at": "2025-05-19T21:30:50.326Z",
-  "updated_at": "2025-05-28T09:30:02.508Z",
+  "updated_at": "2025-06-30T12:20:31.409Z",
   "comment": {
     "text": "This translation key is used to display a title for a setting that allows users to add emails to incomplete accounts. It appears in a UI component related to portal settings and data import, likely on a button or dialog window. Translators should focus on conveying a sense of enabling users to complete account information.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 72,
+      "line_number": 71,
       "context": "component: (\n <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />\n ),\n },\n {\n title: t(\"Settings:AddEmails\"),\n description: t(\"Settings:AddEmailsDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <AddEmailsStep t={t} />,",
       "module": "/packages/client"
     }
@@ -78,8 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ajouter les adresses e-mail aux profils incomplets' is not the most natural or precise translation of 'Add emails to incomplete accounts'. 'Profils incomplets' translates to 'incomplete profiles', while the original implies accounts that are missing email addresses. A more appropriate translation would focus on the email addresses themselves.",
-          "suggestion": "Ajouter les adresses e-mail aux comptes incomplets"
+          "description": "The translation 'Ajouter les adresses e-mail aux profils incomplets' is a bit too literal and doesn't quite capture the nuance of 'Add emails to incomplete accounts'. 'Profils' implies user profiles, whereas the English suggests a more general concept of accounts that are not fully completed.",
+          "suggestion": "Ajouter des adresses e-mail aux comptes non finalisés"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'adresses' is correct, for clarity and naturalness in this context, it might be better to avoid the plural and use singular form 'adresse'.",
+          "suggestion": "Ajouter une adresse e-mail aux comptes non finalisés"
         }
       ],
       "approved_at": null
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ավելացրեք նամակներ անավարտ հաշիվներին' is a literal translation and doesn't convey the intended meaning of 'Add emails to incomplete accounts' naturally in Armenian.  It sounds somewhat awkward. A more natural phrasing would be needed.",
-          "suggestion": "Հավելեք էլ. փոստային հասցեներ անավարտ հաշիվներին (Havelq el. postayin hasce rer anavarht hashivnerin)"
+          "description": "The translation \"Ավելացրեք նամակներ անավարտ հաշիվներին\" is a literal translation and doesn't quite capture the intended meaning of 'Add emails to incomplete accounts'. It sounds slightly awkward in Armenian.",
+          "suggestion": "Consider a more natural phrasing like \"Ավելացրեք էլեկտրոնային հասցեներ անավարտ հաշիվներին\" (Add email addresses to incomplete accounts) or \"Նամակներ ավելացրեք անավարտ հաշիվներին\" (Add emails to incomplete accounts - slightly reordered for better flow)."
         }
       ],
       "approved_at": null
@@ -126,13 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'E-pasta ziņojumu pievienošana nepilnīgiem kontiem' is a literal translation and doesn't quite capture the meaning of 'Add emails to incomplete accounts' in a natural-sounding way in Latvian.  It emphasizes 'adding' rather than the purpose, which is to send emails.",
-          "suggestion": "Pievienot e-pastus kontiem, kuri nav apstiprināti"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'nepilnīgiem kontiem' ('incomplete accounts') could be interpreted as accounts that are simply unfinished, rather than accounts that require email verification. A more precise translation is needed.",
-          "suggestion": "kontiem, kuri nav apstiprināti"
+          "description": "The translation \"E-pasta ziņojumu pievienošana nepilnīgiem kontiem\" is a literal translation that doesn't quite capture the intended meaning of 'Add emails to incomplete accounts'.  It sounds awkward in Latvian. A more natural translation would emphasize the action of sending emails.",
+          "suggestion": "Pievienot e-pastus kontiem, kuriem nepieciešama papildināšana"
         }
       ],
       "approved_at": null
@@ -143,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"E-mails toevoegen aan onvolledige accounts\" is a literal translation and doesn't quite convey the intended meaning of 'Add emails to incomplete accounts'. It sounds somewhat awkward in Dutch. A more natural phrasing would be something like 'E-mailadressen toevoegen aan onvolledige accounts' or 'E-mails toevoegen aan gebruikers met een onvolledig account'.",
-          "suggestion": "E-mailadressen toevoegen aan onvolledige accounts"
+          "description": "The translation 'E-mails toevoegen aan onvolledige accounts' is a literal translation and doesn't quite capture the intended meaning. It lacks a crucial article before 'E-mails'. A more natural Dutch phrasing would include 'de'.",
+          "suggestion": "De e-mails toevoegen aan onvolledige accounts"
         }
       ],
       "approved_at": null
@@ -173,13 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adăugați adrese de e-mail la conturi cu date de profil necompletate' is too literal and somewhat awkward. While technically correct, it doesn't convey the intended meaning as smoothly as it could. 'Incomplete accounts' implies a lack of profile data, but the translation is overly verbose about it.",
+          "description": "The translation 'Adăugați adrese de e-mail la conturi cu date de profil necompletate' is too literal and slightly awkward. 'Incomplete accounts' implies a broader issue than just missing profile data. A more natural Romanian phrasing would be needed.",
           "suggestion": "Adăugați adrese de e-mail la conturi incomplete."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses the imperative mood ('Adăugați'). Depending on the overall tone of the interface, a more passive voice might be preferred (e.g., 'Se vor adăuga adrese de e-mail...'). This requires context about the UI.",
-          "suggestion": "Consider using a passive voice if the UI consistently does so."
         }
       ],
       "approved_at": null
@@ -196,13 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අසම්පූර්ණ ගිණුම් වලට වි-තැපැල් එක් කරන්න' while generally understandable, isn't the most natural or precise translation of 'Add emails to incomplete accounts'. 'අසම්පූර්ණ' is correct for incomplete, 'වලට' can be improved for better flow, and 'වි-තැපැල්' is a direct transliteration. A more accurate and natural phrasing would be preferable.",
-          "suggestion": "අපූර්ණ නොවු ගිණුම් වලට විද්‍යුත් ලිපි එක් කරන්න"
-        },
-        {
-          "type": "formatting",
-          "description": "The term 'වි-තැපැල්' is a direct transliteration of 'email.' It's generally better to use the more established Sinhala term for email.",
-          "suggestion": "විද්‍යුත් ලිපි"
+          "description": "The translation 'අසම්පූර්ණ ගිණුම් වලට වි-තැපැල් එක් කරන්න' is a literal translation but doesn't quite capture the intended meaning of 'Add emails to incomplete accounts'. A more natural and idiomatic Sinhala translation would be better.  'Add emails *for* incomplete accounts' would be closer.",
+          "suggestion": "Consider a phrasing like: 'අසම්පූර්ණ ගිණුම් සඳහා වි-තැපැල් එක් කරන්න' (Asampurna ginnum satha vi-tampel ek karna)"
         }
       ],
       "approved_at": null
@@ -224,14 +214,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'емаил-ове' is a somewhat informal and potentially incorrect transliteration of 'emails'. It's a combination of English and Serbian, and doesn't strictly adhere to standard Serbian orthography.",
+          "suggestion": "е-маил адресе"
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Додај емаил-ове непотпуним налозима\" is a literal translation and doesn't flow naturally in Serbian.  'Email-ove' is awkward.  A more natural translation would convey the meaning 'Add emails to accounts that are not complete' or 'Add emails to unfinished accounts'.",
-          "suggestion": "Додајте емаил адресе непотпуним налозима"
+          "description": "While understandable, 'Додај емаил-ове непотпуним налозима' isn't the most natural or precise translation of 'Add emails to incomplete accounts'. The word order is a bit awkward.",
+          "suggestion": "Додајте е-маил адресе непотпуним налозима"
         },
         {
           "type": "formatting",
-          "description": "The use of a hyphen in \"емаил-ове\" is not standard Serbian orthography. Email is generally used without a hyphen.",
-          "suggestion": "емаил-ове should be емаил-ове."
+          "description": "The use of a hyphen in 'емаил-ове' is not standard in Serbian.",
+          "suggestion": "Remove the hyphen: емаилове"
         }
       ],
       "approved_at": null
@@ -242,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'email-ove' is not standard Serbian. It's a mix of English and Serbian. The correct Serbian word for 'emails' in this context would be 'e-mail adrese'.",
-          "suggestion": "Dodaj e-mail adrese nepotpunim nalozima"
+          "description": "The word 'email-ove' is not the standard way to pluralize 'email' in Serbian. The correct pluralization would be 'email adrese'.",
+          "suggestion": "Dodaj email adrese nepotpunim nalozima"
         }
       ],
       "approved_at": null
@@ -269,7 +264,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"将电子邮件添加至不完整的账号\" is a literal translation and sounds unnatural in Chinese. While technically correct, it's not how a native speaker would phrase this.",
+          "suggestion": "Consider a more natural phrasing such as \"为未完成的帐户添加电子邮件\" or \"向未完成的帐户添加电子邮件\"."
+        }
+      ],
       "approved_at": null
     }
   }

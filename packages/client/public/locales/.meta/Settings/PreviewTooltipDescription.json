@@ -3,7 +3,7 @@
   "content": "Preview the interface with the selected color applied",
   "content_en_sha1_hash": "ee3c7ae56f3025dbadbb15a8246faddd52503ee7",
   "created_at": "2025-05-19T21:30:52.316Z",
-  "updated_at": "2025-05-28T09:30:02.496Z",
+  "updated_at": "2025-05-26T07:57:32.484Z",
   "comment": {
     "text": "This translation key is used for the tooltip content that appears when users click on a help button to preview the interface with a selected color applied. It provides a brief description of what the user will see in the preview.",
     "is_auto": true,
@@ -36,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tətbiq edilmiş seçilmiş rənglə interfeysə əvvəlcədən baxın' is a bit literal and doesn't flow naturally in Azerbaijani. While technically correct, it sounds awkward. A more natural phrasing would convey the same meaning more elegantly.",
-          "suggestion": "Seçilmiş rənglə interfeysin önə baxışı"
-        },
-        {
-          "type": "formatting",
-          "description": "The word order could be improved for better readability in Azerbaijani.",
-          "suggestion": "Seçilmiş rənglə interfeysin önə baxışı"
+          "description": "The translation 'Tətbiq edilmiş seçilmiş rənglə interfeysə əvvəlcədən baxın' is a bit clunky and doesn't quite capture the conciseness of the English original. While technically correct, it's overly literal.",
+          "suggestion": "Consider a more natural phrasing like 'Seçilmiş rənglə interfeysin önizləməsinə baxın' or 'Seçilmiş rənglə interfeysin nümayişinə baxın'."
         }
       ],
       "approved_at": null
@@ -53,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Визуализирайте интерфейса с приложен избран цвят' doesn't fully capture the meaning of 'Preview the interface with the selected color applied'. 'Визуализирайте' (Visualize) is too literal and doesn't convey the idea of a preview. A better translation would emphasize the preview aspect.",
-          "suggestion": "Предварителен преглед на интерфейса с избран цвят"
+          "description": "The translation 'Визуализирайте интерфейса с приложен избран цвят' doesn't perfectly convey the meaning of 'Preview the interface with the selected color applied'. 'Визуализирайте' (Visualize) is a bit too literal. A more natural phrasing would emphasize a preview or demonstration.",
+          "suggestion": "Предварите интерфейса с приложен избран цвят"
         }
       ],
       "approved_at": null
@@ -65,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Náhled rozhraní s vybranou barvou\" is too literal and doesn't convey the meaning of 'Preview the interface with the selected color applied' effectively. It translates to 'Preview of the interface with the selected color'. A more natural phrasing would be needed.",
-          "suggestion": "Náhled rozhraní s použitou barvou"
+          "description": "The translation 'Náhled rozhraní s vybranou barvou' doesn't fully convey the meaning of 'Preview the interface with the selected color applied.' It's a literal translation but lacks the nuance of 'previewing'.",
+          "suggestion": "Náhled rozhraní s aplikovanou vybranou barvou"
         }
       ],
       "approved_at": null
@@ -77,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vorschau der Benutzeroberfläche mit der ausgewählten Farbe' is a literal translation but slightly awkward. 'Preview' implies a more dynamic or interactive experience, which 'Vorschau' doesn't quite capture. A more natural phrasing would better convey the meaning.",
-          "suggestion": "Vorschau der Oberfläche mit der ausgewählten Farbe"
+          "description": "The translation is somewhat literal and lacks natural flow in German. \"Ausgewählten Farbe\" sounds a bit clunky. A more natural phrasing would convey the meaning more effectively.",
+          "suggestion": "Vorschau der Benutzeroberfläche mit der gewählten Farbe"
         }
       ],
       "approved_at": null
@@ -101,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Esikatsele käyttöliittymä valitun värin kanssa' is a literal translation that doesn't flow naturally in Finnish. While technically correct, it sounds awkward. A more idiomatic translation would be better.",
+          "description": "The translation 'Esikatsele käyttöliittymä valitun värin kanssa' is a literal translation that sounds slightly awkward in Finnish. While technically correct, it could be more natural.",
           "suggestion": "Esikatsele käyttöliittymää valitulla värillä."
         }
       ],
@@ -113,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Prévisualisation de l'interface avec la couleur sélectionnée' is a literal translation and not the most natural way to express the meaning in French. 'Prévisualisation' is acceptable but a more fluent option would be 'Aperçu'. The phrasing 'avec la couleur sélectionnée' is also a bit clunky.",
-          "suggestion": "Aperçu de l'interface avec la couleur choisie"
+          "description": "The translation 'Prévisualisation de l'interface avec la couleur sélectionnée' is a literal translation that doesn't quite capture the natural flow of the English phrase 'Preview the interface with the selected color applied'. It's technically correct but could be improved for better readability in French.",
+          "suggestion": "A more natural translation might be: 'Aperçu de l'interface avec la couleur choisie' or 'Visualisation de l'interface avec la couleur sélectionnée'."
         }
       ],
       "approved_at": null
@@ -125,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Դիտել միջերեսը ընտրված գույնով' while literally meaning 'View the interface with the selected color', doesn't fully convey the nuance of 'Preview'. 'Preview' suggests a temporary display or test, whereas 'View' is a more permanent action. It lacks the idea of a test or temporary application of the color.",
-          "suggestion": "Կիցում ընտրված գույնը դիտարկեք միջերեսում (Kit'um enqrrvach goy'n'i ditarek mijeresum)"
+          "description": "The translation 'Դիտել միջերեսը ընտրված գույնով' is a literal translation and doesn't fully convey the meaning of 'Preview the interface with the selected color applied'. It lacks the nuance of 'previewing'. A more accurate translation would convey that the user is seeing a demonstration or a temporary application of the color.",
+          "suggestion": "Consider a translation like: 'Դիտել միջերեսը ընտրված գույնի կիրառությամբ' or 'Դիտել միջերեսի գույնի նախադիտումը'"
         }
       ],
       "approved_at": null
@@ -137,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Anteprima dell’interfaccia con il colore selezionato applicato' is a literal translation that sounds awkward in Italian. A more natural phrasing would be 'Visualizza un'anteprima dell'interfaccia con il colore selezionato' or 'Anteprima dell'interfaccia con il colore scelto'.",
-          "suggestion": "Visualizza un'anteprima dell'interfaccia con il colore selezionato"
+          "description": "The translation 'Anteprima dell’interfaccia con il colore selezionato applicato' is a literal translation that sounds unnatural in Italian. A more idiomatic translation would be better.",
+          "suggestion": "Anteprima dell'interfaccia con il colore scelto."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'applicato' after 'selezionato' is slightly redundant and awkward in Italian. The sentence can be more concise.",
+          "suggestion": "Remove 'applicato'."
         }
       ],
       "approved_at": null
@@ -155,7 +155,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation lacks a period at the end of the sentence, which is standard Korean punctuation.",
+          "description": "The Korean translation lacks a period at the end of the sentence, which is standard for complete sentences in Korean.",
           "suggestion": "선택한 색상이 적용된 인터페이스 미리 보기."
         }
       ],
@@ -167,13 +167,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກວດກາລຸ່ມໜ້າດ້ວຍສີທີ່ເລືອກໃຊ້.' doesn't accurately convey the meaning of 'Preview the interface with the selected color applied'.  'ກວດກາ' (gvet-ga) means 'check' or 'inspect', which is not the intent of a preview.  'ໃຊ້' (chai) means 'use', but it implies application rather than a visual representation.",
-          "suggestion": "ຕົວຢ່າງ: ມອງຕົວຢ່າງຂອງໜ້າຈໍດ້ວຍສີທີ່ເລືອກ"
+          "description": "The translation 'ກວດກາລຸ່ມໜ້າດ້ວຍສີທີ່ເລືອກໃຊ້' doesn't fully capture the meaning of 'Preview the interface with the selected color applied.' 'ກວດກາ' implies inspection or checking, while 'preview' suggests a visual representation.  It could be misinterpreted.",
+          "suggestion": "ສະແດງຕົວຢ່າງຂອງໜ້າຈໍດ້ວຍສີທີ່ເລືອກ"
         },
         {
-          "type": "grammar",
-          "description": "While not strictly incorrect, the sentence structure 'ກວດກາລຸ່ມໜ້າດ້ວຍສີທີ່ເລືອກໃຊ້' is slightly awkward. The use of 'ດ້ວຍ' can be a bit clunky here.",
-          "suggestion": "Consider restructuring to improve flow, although the impact is minor."
+          "type": "grammatical",
+          "description": "While understandable, the phrase 'ດ້ວຍສີທີ່ເລືອກໃຊ້' could be smoother.",
+          "suggestion": "ດ້ວຍສີທີ່ເລືອກ"
         }
       ],
       "approved_at": null
@@ -196,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podgląd interfejsu z zastosowanym wybranym kolorem' is a bit literal and could be improved for naturalness in Polish. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Zapoznaj się z interfejsem z wybranym kolorem."
+          "description": "The translation 'Podgląd interfejsu z zastosowanym wybranym kolorem' is a literal translation that doesn't flow naturally in Polish. It could be improved to sound more idiomatic.",
+          "suggestion": "Przejrzyj interfejs z zastosowanym kolorem"
         }
       ],
       "approved_at": null
@@ -208,8 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pré-visualize a interface com a cor selecionada aplicada' is not the most natural or accurate rendering of 'Preview the interface with the selected color applied.' 'Pré-visualize' is a valid translation of preview but is less common than alternatives. The use of 'a' before 'interface' is grammatically correct but stylistically less preferable to omitting it. 'Aplicada' is redundant.",
-          "suggestion": "Visualizar a interface com a cor selecionada."
+          "description": "The translation 'Pré-visualize a interface com a cor selecionada aplicada' is a literal translation and sounds unnatural in Portuguese. 'Pré-visualize' is less common than alternatives. The phrase 'com a cor selecionada aplicada' is also awkward.",
+          "suggestion": "Visualize a interface com a cor selecionada aplicada"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the use of 'a' before 'interface' is a stylistic choice and could be improved for a more natural flow. Depending on the context, it could be omitted.",
+          "suggestion": "Visualize a interface com a cor selecionada aplicada"
         }
       ],
       "approved_at": null
@@ -220,8 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Visualizar a interface com a cor selecionada aplicada' is a literal translation but sounds awkward in Portuguese. 'Visualizar' is correct, but the rest is overly verbose. A more natural phrasing would emphasize the effect of applying the color.",
-          "suggestion": "Pré-visualizar a interface com a cor selecionada."
+          "description": "The translation 'Visualizar a interface com a cor selecionada aplicada' is not the most natural or accurate translation of 'Preview the interface with the selected color applied'. 'Visualizar' implies viewing, whereas 'Preview' suggests a more interactive or simulated experience. The use of 'aplicada' is also slightly awkward in this context.",
+          "suggestion": "Consider 'Visualizar a interface com a cor selecionada' or 'Pré-visualizar a interface com a cor selecionada'."
         }
       ],
       "approved_at": null
@@ -238,8 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is slightly awkward and could be improved for naturalness. While technically correct, it's not the most common or elegant way to express the meaning.",
-          "suggestion": "Предварительный просмотр интерфейса с выбранным цветом"
+          "description": "The translation \"Предварительный просмотр интерфейса с примененным выбранным цветом\" is overly literal and slightly awkward. While technically correct, it doesn't read naturally in Russian. The emphasis on 'chosen color' is unnecessary and makes the sentence clunky.",
+          "suggestion": "Предварительный просмотр интерфейса с выбранной цветовой схемой"
         }
       ],
       "approved_at": null
@@ -250,13 +255,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පහතින් තෝරාගත් වර්ණය යෙදූ අතුරු මුහුණත පෙරදසුන් කරන්න.' is a literal translation and sounds awkward.  'පහතින්' (beneath) isn't the correct preposition to use here. A more natural phrasing would imply 'preview the interface *with* the selected color applied, but this needs more nuance.",
-          "suggestion": "පහතින් තෝරාගත් වර්ණය යෙදීමෙන් අතුරු මුහුණත පෙරදසුන් කරන්න."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The sentence structure could be improved for better flow. 'අතුරු මුහුණත පෙරදසුන් කරන්න' can be simplified.",
-          "suggestion": "තෝරාගත් වර්ණය යෙදූ අතුරු මුහුණත පෙරදසුන් බලන්න."
+          "description": "The translation 'පහතින් තෝරාගත් වර්ණය යෙදූ අතුරු මුහුණත පෙරදසුන් කරන්න.' is a bit literal and doesn't flow naturally in Sinhala. While technically correct, it sounds clunky. A more natural phrasing would convey the same meaning.",
+          "suggestion": "තෝරාගත් වර්ණය භාවිතයෙන් අතුරුමුහුණත පෙරදසුන් කරන්න."
         }
       ],
       "approved_at": null
@@ -267,13 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Náhľad rozhrania s aplikovaním vybranej farby' is not a natural or accurate rendering of 'Preview the interface with the selected color applied'. It's overly literal and clunky.",
-          "suggestion": "Predbehnite vzhľad rozhrania s vybranou farbou."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically grammatically correct, 's aplikovaním vybranej farby' is awkward. The sentence structure could be improved.",
-          "suggestion": "Eliminate 's aplikovaním' or restructure the sentence for better flow."
+          "description": "The translation 'Náhľad rozhrania s aplikovaním vybranej farby' is not a natural or idiomatic rendering of 'Preview the interface with the selected color applied'. It's technically correct but sounds awkward.",
+          "suggestion": "Zobraziť náhľad rozhrania s použitou farbou."
         }
       ],
       "approved_at": null
@@ -284,8 +279,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Predoglejte si vmesnik z uporabljeno izbrano barvo' is not the most natural or accurate translation of 'Preview the interface with the selected color applied'. It's grammatically correct, but the wording could be improved.",
-          "suggestion": "Predoglejte vmesnik z izbrano barvo."
+          "description": "The translation 'Predoglejte si vmesnik z uporabljeno izbrano barvo' is not the most natural or precise translation of 'Preview the interface with the selected color applied.'  'Uporabljeno' implies the color is *already* used, whereas the English suggests applying the color for a preview.",
+          "suggestion": "Predoglejte si vmesnik z uporabljenim izbran barvo"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase 'Predoglejte si' is a bit formal for a tooltip. Using a more direct phrasing might be better for usability.",
+          "suggestion": "Poglejte predogled vmesnika z izbrano barvo"
         }
       ],
       "approved_at": null
@@ -296,8 +296,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Преглед интерфејса са изабраном бојом\" is a literal translation but doesn't quite capture the meaning of 'Preview the interface'. A more natural Serbian (Cyrillic) translation would convey the idea of seeing a sample or demonstration of the interface.",
-          "suggestion": "Погледајте пример интерфејса са изабраном бојом"
+          "description": "The translation 'Преглед интерфејса са изабраном бојом' is a literal translation but doesn't quite capture the nuance of 'Preview the interface'. A more natural Serbian (Cyrillic) translation would be something like 'Прикажи преглед интерфејса са изабраном бојом' or 'Покажи преглед интерфејса са изабраном бојом'.",
+          "suggestion": "Прикажи преглед интерфејса са изабраном бојом"
         }
       ],
       "approved_at": null
@@ -308,8 +308,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pregled interfejsa sa izabranom bojom\" doesn't fully capture the nuance of 'Preview the interface with the selected color applied'. It translates to 'Preview the interface with the chosen color'. While understandable, it lacks the 'applied' aspect.",
-          "suggestion": "Pregled interfejsa sa primenjenom izabranom bojom"
+          "description": "The translation \"Pregled interfejsa sa izabranom bojom\" is a literal translation but doesn't quite capture the nuance of 'Preview the interface with the selected color applied'. A more natural-sounding translation might be 'Prikaz interfejsa sa primenjenom izabranom bojom' or 'Vidite interfejs sa primenjenom bojom'.",
+          "suggestion": "Prikaz interfejsa sa primenjenom izabranom bojom"
         }
       ],
       "approved_at": null
@@ -319,9 +319,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Seçilen renkle uygulanmış arayüz ön izlemesini görüntüleyin' is a bit literal and could be improved for naturalness in Turkish. 'Görüntüleyin' (view) isn't the most common or natural way to express 'preview' in this context.",
-          "suggestion": "Seçilen renkle arayüzün önizlemesini görün"
+          "type": "formatting",
+          "description": "The translation sounds slightly awkward. While grammatically correct, it's a bit lengthy and formal for a tooltip.",
+          "suggestion": "Seçilen renkle arayüzü önizleyin"
         }
       ],
       "approved_at": null

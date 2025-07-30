@@ -29,5 +29,5 @@ export default async function FilesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

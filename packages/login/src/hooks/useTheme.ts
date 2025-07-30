@@ -1,4 +1,3 @@
-import { i18n } from "i18next";
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -26,7 +25,6 @@ import { i18n } from "i18next";
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { match, P } from "ts-pattern";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getEditorTheme, getSystemTheme } from "@docspace/shared/utils";
@@ -43,17 +41,10 @@ export interface UseThemeProps {
   user?: TUser;
   colorTheme?: TGetColorTheme;
   systemTheme?: ThemeKeys;
-  i18n: i18n;
   lang?: string;
 }
 
-const useTheme = ({
-  user,
-  colorTheme,
-  systemTheme,
-  i18n,
-  lang,
-}: UseThemeProps) => {
+const useTheme = ({ user, colorTheme, systemTheme, lang }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>(() => {
       if (!colorTheme) return {} as TColorScheme;
@@ -68,7 +59,7 @@ const useTheme = ({
     const interfaceDirection = getDirectionByLanguage(lang || "en");
 
     const currColorTheme = colorTheme
-      ? (colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
+      ? (colorTheme.themes.find((t) => t.id === colorTheme.selected) ??
         ({} as TColorScheme))
       : ({} as TColorScheme);
 
@@ -112,7 +103,7 @@ const useTheme = ({
   const getCurrentColorTheme = React.useCallback(async () => {
     if (isRequestRunning.current) return;
     isRequestRunning.current = true;
-    const colorThemes = colorTheme ? colorTheme : await getAppearanceTheme();
+    const colorThemes = colorTheme || (await getAppearanceTheme());
 
     const currColorTheme = colorThemes.themes.find(
       (t) => t.id === colorThemes.selected,
@@ -125,12 +116,12 @@ const useTheme = ({
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = user?.theme ?? SYSTEM_THEME;
+    let curTheme = user?.theme ?? SYSTEM_THEME;
     const interfaceDirection = getDirectionByLanguage(lang || "en");
 
-    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    if (user?.theme === ThemeKeys.SystemStr) curTheme = SYSTEM_THEME;
 
-    const isBaseTheme = theme === ThemeKeys.BaseStr;
+    const isBaseTheme = curTheme === ThemeKeys.BaseStr;
 
     setTheme({
       ...(isBaseTheme ? Base : Dark),

@@ -3,7 +3,7 @@
   "content": "Check period (sec)",
   "content_en_sha1_hash": "2f27bf98f858795f1e0a25310a2844495f181541",
   "created_at": "2025-05-19T21:30:50.889Z",
-  "updated_at": "2025-05-21T04:51:00.006Z",
+  "updated_at": "2025-05-24T05:35:03.069Z",
   "comment": {
     "text": "The \"Check period (sec)\" translation key is used to display the duration of time allowed for a check or validation process. In the Portal Settings category's security access-portal component, it appears as part of the brute force protection settings and indicates how often checks should be performed on user login attempts.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nəzarət vaxtı (san)\" while literally meaning \"Control time (sec)\", doesn't quite capture the intended meaning of 'Check period'. A more accurate translation would convey the time interval over which checks are performed.",
-          "suggestion": "Yoxlama dövrü (san)"
+          "description": "While \"Nəzarət vaxtı\" translates to \"Check time,\" \"san\" is the correct unit for seconds. A more accurate translation would be \"Yoxlama dövrəsi (s)\" or \"Təftiş dövrəsi (s)\".",
+          "suggestion": "Yoxlama dövrəsi (s)"
         }
       ],
       "approved_at": null
@@ -89,9 +89,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'վրկ' (vrk) is a loanword from Russian ('sekunda') and while understood, 'անվրկ' (anvrk) or more accurately, a direct Armenian equivalent would be preferable for consistency and clarity.",
-          "suggestion": "Consider using 'անվրկ' or 'անվայրկան' which more accurately translates to 'seconds'."
+          "type": "formatting",
+          "description": "The unit 'sec' is not translated into Armenian. It should be included in the Armenian translation for clarity.",
+          "suggestion": "Ստուգման ժամանակահատվածը (վրկ)"
         }
       ],
       "approved_at": null
@@ -168,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අවේක්‍ෂණ කාලය (තත්.)' is not the most natural or accurate translation of 'Check period (sec)'. 'අවේක්‍ෂණ' implies a more thorough or detailed observation, whereas 'Check' usually implies a simpler verification.  '(තත්.)' is a literal translation of 'sec' which is acceptable but could be improved for clarity. A more natural translation would focus on the 'checking' aspect.",
+          "description": "The translation 'අවේක්‍ෂණ කාලය (තත්.)' doesn't perfectly capture the meaning of 'Check period (sec)'. 'අවේක්‍ෂණ' implies a more thorough or detailed observation than a simple 'check'. The literal translation of 'Check' would be something more akin to 'පරීක්ෂණ කාලය'.",
           "suggestion": "පරීක්ෂණ කාලය (තත්.)"
         },
         {
           "type": "formatting",
-          "description": "While acceptable, the use of parentheses around 'තත්.' could be adjusted for better readability in the UI, potentially using a hyphen or a separate line.",
-          "suggestion": "පරීක්ෂණ කාලය - තත්."
+          "description": "While the use of parentheses is correct, consider adding a space before and after the ' (sec)' portion for better readability.",
+          "suggestion": "පරීක්ෂණ කාලය ( තත්.)"
         }
       ],
       "approved_at": null
@@ -185,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Čas overovania (s.)' while understandable, isn't the most natural or precise translation of 'Check period (sec)'. 'Overovanie' implies a verification process, but 'Check period' refers to the time interval. A more accurate translation would convey the meaning of a time interval for checking.",
-          "suggestion": "Doba kontroly (s)"
+          "description": "The translation 'Čas overovania (s.)' is a literal translation of 'Check period (sec)' but may not be the most natural or clear phrasing in Slovak. 'Čas overovania' can be understood, but it lacks the context of a recurring check. A more idiomatic translation might convey the idea of an interval or cycle.",
+          "suggestion": "Consider alternatives like 'Kontrolný interval (s.)' or 'Doba kontroly (s.)'"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the abbreviation '(s.)' is slightly less common in Slovak compared to just '(s)' when referring to seconds. It would feel a bit more natural to omit the full stop.",
-          "suggestion": "Doba kontroly (s)"
+          "description": "The abbreviation '(s.)' for seconds is correct, but consider if a more localized abbreviation or full word would be preferred based on the target audience and context.  While (s.) is understandable, it's somewhat formal.",
+          "suggestion": "Explore alternatives such as '(s)' or 'sekúnd'"
         }
       ],
       "approved_at": null
@@ -199,13 +199,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovenian translation uses 's' for seconds, which is consistent with English. However, in some Slovenian contexts, 'sekund' is preferred. Maintaining consistency with the English 'sec' is acceptable, but consider whether 'sekund' might be more natural in the application's overall terminology.",
-          "suggestion": "Consider using 'sekund' instead of 's' for better consistency with Slovenian terminology, if appropriate for the application's style."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -214,7 +208,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Провери период (сек)' is a literal translation but not idiomatic. 'Check period' implies a duration. A more natural translation would convey the idea of a duration or interval.",
+          "description": "The Serbian translation 'Провери период (сек)' is a literal translation of 'Check period (sec)' but doesn't convey the intended meaning naturally in Serbian. 'Check' in this context implies a recurring check or interval. A more accurate translation would indicate a recurring interval.",
           "suggestion": "Време провере (сек)"
         }
       ],
@@ -226,13 +220,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Proveri period (sek)' is not an accurate translation of 'Check period (sec)'. 'Proveri' means 'Check' but in a more active sense, like 'Verify'. 'Period' is correctly translated. However, the overall meaning is slightly off. A more appropriate translation would emphasize the duration or interval of checking.",
-          "suggestion": "Period provere (sek)"
+          "description": "The translation \"Proveri period (sek)\" doesn't accurately convey the meaning of \"Check period (sec)\". \"Proveri\" means \"Check\" in imperative form. The context suggests a setting, implying a description, not an instruction. A better translation would be something like \"Period provere (sek)\" or \"Vreme provere (sek)\" depending on the desired nuance.",
+          "suggestion": "Vreme provere (sek)"
         },
         {
           "type": "formatting",
-          "description": "The inclusion of '(sek)' after 'Proveri period' is redundant, as 'sek' already means seconds. The original English contains '(sec)' which clarifies that the unit is seconds, but the Serbian translation is already using the abbreviation 'sek'.",
-          "suggestion": "Period provere (sek) should be just 'Period provere'."
+          "description": "The use of parentheses for \"sec\" is replicated in the Serbian translation. While acceptable, it might benefit from more consistency with other settings labels.",
+          "suggestion": "Period provere (sek)"
         }
       ],
       "approved_at": null
@@ -240,13 +234,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Kontrol süresi\" is a valid translation for \"Check period\", it lacks the specificity of the original phrase, which indicates a time duration. \"Kontrol periyodu (sn)\" would be a more accurate translation.",
-          "suggestion": "Kontrol periyodu (sn)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

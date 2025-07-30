@@ -3,7 +3,7 @@
   "content": "Guest",
   "content_en_sha1_hash": "face83ee3014bdc8f98203cc94e2e89222452e90",
   "created_at": "2025-05-19T21:30:45.686Z",
-  "updated_at": "2025-05-28T09:30:02.264Z",
+  "updated_at": "2025-06-30T12:20:31.235Z",
   "comment": {
     "text": "The translation key \"Common:Guest\" is used to display a text indicating that the user being referred to is a guest. This text is typically displayed in a dialog or UI element, such as an icon badge, to provide context for users.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 67,
+      "line_number": 68,
       "context": "});\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 67,
+      "line_number": 68,
       "context": "});\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 116,
+      "line_number": 115,
       "context": "lineHeight=\"22px\"\n noSelect\n truncate\n className=\"accent-text\"\n >\n {t(\"Common:Guest\")}\n </Text>\n <Badge label={t(\"Common:New\")} noHover />\n </div>\n \n <IconButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 51,
+      "line_number": 50,
       "context": "<Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"\n values={{\n userType: t(\"Common:Guest\"),\n productName: t(\"Common:ProductName\"),\n adminName,\n }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />",
       "module": "/packages/client"
     },
@@ -42,13 +42,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 328,
+      "line_number": 332,
       "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 328,
+      "line_number": 332,
       "context": "return t(\"Common:RoomAdmin\");\n case EmployeeType.User:\n return t(\"Common:User\");\n case EmployeeType.Guest:\n default:\n return t(\"Common:Guest\");\n }\n };\n \n export function clickBackdrop() {\n const elms = document.getElementsByClassName(",
       "module": "/packages/shared"
     }
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"Host\" does not accurately convey the meaning of \"Guest\". \"Guest\" refers to someone who is visiting or being entertained, while \"Host\" refers to the person doing the entertaining.",
-          "suggestion": "Consider \"Ubytovaný\" (lodging guest), \"Návštěvník\" (visitor), or \"Host\" if the context is specifically about someone hosting an event."
+          "description": "The Czech translation \"Host\" is not the most accurate translation of \"Guest\". While \"Host\" can sometimes be a suitable translation, \"Guest\" more commonly translates to \"Host\" (as in the person receiving guests) or \"Návštěvník\" (visitor).",
+          "suggestion": "Consider \"Návštěvník\" or \"Host\" (depending on context)."
         }
       ],
       "approved_at": null

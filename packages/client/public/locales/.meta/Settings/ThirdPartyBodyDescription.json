@@ -3,7 +3,7 @@
   "content": "Detailed instructions in our <2>Help Center.</2>",
   "content_en_sha1_hash": "da5b51706c22d9a2ca72b7fb29ea0f882301180f",
   "created_at": "2025-05-19T21:30:52.880Z",
-  "updated_at": "2025-05-21T02:52:33.898Z",
+  "updated_at": "2025-05-24T03:57:37.146Z",
   "comment": {
     "text": "This translation key provides a description that will be displayed when users need help or instructions. It references a link to the company's Help Center with detailed instructions, likely used in a consumer modal dialog box for setting up third-party services integration.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Help Center\" is rendered as \"مركز المساعدة\". While \"مركز المساعدة\" is a valid translation for \"Help Center\", it doesn't fully capture the same connotation of a self-service resource.  A more nuanced translation might consider using something closer to \"دليل المستخدم\" (User Guide) or a more direct translation that accurately reflects a place where users can find help.",
-          "suggestion": "Consider alternative translations like \"دليل المستخدم\" or researching more specific terminology for \"Help Center\" within the target audience."
-        },
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<2>` are preserved in the Arabic translation. This is generally undesirable and indicates an issue with the translation process. The tags should be removed or converted to the appropriate Arabic-compatible equivalent.",
-          "suggestion": "Remove the `<2>` tags or replace them with the appropriate equivalent for HTML or Markdown formatting if needed."
+          "description": "The English phrase \"Help Center\" is translated as \"مركز المساعدة\". While technically correct, \"مركز المساعدة\" can sound a bit formal. A more natural and user-friendly translation might be \"دعم العملاء\" (Customer Support) or \"قسم المساعدة\" (Help Section).",
+          "suggestion": "Consider translating \"Help Center\" as \"دعم العملاء\" or \"قسم المساعدة\"."
         }
       ],
       "approved_at": null
@@ -47,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ətraflı təlimatlar <2>Məlumat Mərkəzində</2> əks olunmuşdur.\" doesn't perfectly capture the meaning of \"Detailed instructions in our <2>Help Center.</2>\"  'Məlumat Mərkəzində' translates to 'in the Information Center,' which isn't as direct as 'Help Center.' A more accurate translation would reflect the purpose of a 'Help Center'.",
-          "suggestion": "Ətraflı təlimatlar bizim <2>Kömək Mərkəzində</2> göstərilir."
+          "description": "The translation \"Ətraflı təlimatlar <2>Məlumat Mərkəzində</2> əks olunmuşdur.\" doesn't fully capture the meaning of \"Detailed instructions in our Help Center.\" The word 'əks olunmuşdur' (reflected) isn't the best fit. It implies the instructions are mirrored rather than located there.",
+          "suggestion": "Ətraflı təlimatlar <2>Kömək Mərkəzimizdə</2> tapıla bilər. (Detailed instructions can be found in our Help Center.) or Ətraflı təlimatlar <2>Kömək Mərkəzimizdə</2> yerləşdirilib. (Detailed instructions are located in our Help Center.)"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and should be verified against the platform’s requirements. It’s likely they should be a specific HTML tag used for emphasizing/linking, not just `<2>`.  The format of the tag needs to be consistent with other instances of this text if there are any.",
-          "suggestion": "Verify and correct the HTML tags according to the platform's requirements.  It's likely a specific tag like <a> or <strong> is needed."
+          "description": "The HTML tags `<2>...</2>` were not translated. Although, it is likely the tags are to be preserved, the content within needs to be formatted appropriately in the target language.",
+          "suggestion": "Ensure the HTML tags `<2>...</2>` are preserved, and the content within them are treated correctly for the Azerbaijani language in terms of font, size and alignment."
         }
       ],
       "approved_at": null
@@ -61,7 +56,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <2> and </2> are preserved in the Bulgarian translation. These should be removed or adapted to the Bulgarian equivalent of HTML tags if necessary.",
+          "suggestion": "Remove the HTML tags. The content should be displayed as plain text: \"Подробни инструкции в нашия Център за помощ.\""
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -70,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` were not properly translated. They should be preserved.",
-          "suggestion": "Podrobné informace ve <2>Středisku nápovědy</2>."
+          "description": "The HTML tags `<2>` and `</2>` are inconsistent with the English content. The English uses `<2>` and `</2>`, while the Czech translation uses `<2>` and `</2>`.",
+          "suggestion": "Ensure consistent HTML tag usage. Match the tags used in the English content."
         }
       ],
       "approved_at": null
@@ -82,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tag `<2>` is not standard and likely an error. It seems intended to represent a link or styled text, but the tag itself is incorrect. The German translation maintains this non-standard tag.",
-          "suggestion": "Investigate the intended formatting and replace `<2>` with the appropriate HTML tag (e.g., `<a>`, `<strong>`, or similar). If the intent is a link, use `<a>` with `href` attribute."
+          "description": "The HTML tag `<2>` is not consistently used. In the English content it's `<2>Help Center</2>`, but in the German translation it's `<2>Hilfe-Center</2>`. The tag itself is the problem, as it's likely a placeholder that doesn't render correctly.",
+          "suggestion": "Verify the expected format for the HTML tag. It may be `<HelpCenter>` or a similar tag recognized by the system."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Hilfe-Center' is understandable, the more standard and idiomatic translation of 'Help Center' would be 'Hilfecenter' or 'Hilfezentrum'. 'Hilfe-Center' creates a hyphenated word which is not the common form.",
-          "suggestion": "Change 'Hilfe-Center' to 'Hilfecenter' or 'Hilfezentrum'."
+          "description": "While 'Hilfe-Center' is understandable, a more natural and common translation for 'Help Center' would be 'Hilfecenter' or 'Hilfezentrum'.  'Hilfe-Center' creates a hyphenated compound that isn't standard.",
+          "suggestion": "Consider using 'Hilfecenter' or 'Hilfezentrum' as a more idiomatic translation of 'Help Center'."
         }
       ],
       "approved_at": null
@@ -102,13 +103,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <2> and </2> are replicated in both the English and Spanish versions. This may be unnecessary or represent an error in the content management system. It's likely they should be standardized or removed.",
-          "suggestion": "Review the purpose of the <2> and </2> tags. If they are intended to represent a specific formatting style (e.g., bold, italics), ensure this is consistently applied across all languages. If they are simply markers for a CMS, investigate why they are present in both the source and translation and consider removing them."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -117,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` do not match the original English content. The English uses `<2>` while the Finnish uses `<2>`.",
-          "suggestion": "Ensure the HTML tags are consistent with the source content. Should be `<2>`."
+          "description": "The HTML tags `<2>` are present in both the English and Finnish content, but the tag closing is incorrect. The English uses `</2>` while the Finnish uses `</2>`. This inconsistency should be resolved to maintain consistent formatting.",
+          "suggestion": "Ensure consistency in HTML tag closing.  Change `</2>` to `</2>` in the Finnish translation."
         }
       ],
       "approved_at": null
@@ -129,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and should be consistent with the original English. It's unclear what they signify. Assuming it's meant to denote a hyperlink or special formatting, the French translation should replicate this structure.",
-          "suggestion": "Review the intended meaning of the `<2>` tags and replicate the corresponding HTML/formatting in the French translation.  If it's a link, use `<a>` tags. If it's bolding or italicization, use `<b>` or `<i>` respectively. Example: If `<2>Help Center</2>` means bold, use `<2>Centre d'aide</2>."
+          "description": "The HTML tag `<2>` is inconsistent between the English and French versions. English uses `<2>`, while French uses `<2>`. This should be standardized.",
+          "suggestion": "Standardize the HTML tag to either `<2>` or `<2>` throughout all translations."
         }
       ],
       "approved_at": null
@@ -147,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not properly closed or correspond to the English content's HTML. It seems like they are intended to signify a link or highlighted text, but the closing tag is missing and doesn't match.",
-          "suggestion": "Verify the intended purpose of the `<2>` tags and ensure they are correctly formatted to create a link or highlight the text appropriately. For example, `<a href=\"link_to_help_center\">Centro Assistenza</a>` if intended as a link."
+          "description": "The HTML tags `<2>` are not standard and may not render correctly. The Italian translation also uses `<2>` which is inconsistent with standard HTML usage. It's likely intended to denote a specific styling or hierarchy. However, without more context, it's best to assume standard HTML is preferred.",
+          "suggestion": "Consider using standard HTML tags such as `<a>` or `<p>` depending on the desired effect. For example, if it's a link: `<a href=\"[link to Help Center]\">Centro Assistenza</a>` or if it's a paragraph: `<p>Centro Assistenza</p>`."
         }
       ],
       "approved_at": null
@@ -156,7 +151,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<2>` do not seem to have a closing tag in the Japanese translation. This will cause rendering issues.",
+          "suggestion": "Ensure the tags have proper closing tags, potentially `<2>ヘルプセンター</2>."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,8 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags (<2> and </2>) are inconsistent between the English and Korean versions. The English version uses '<2>' while the Korean uses '<2>'.",
-          "suggestion": "Ensure consistency in HTML tags.  Ideally, match the English tags: '<2>지원 센터</2>에서 자세한 방법을 확인하세요."
+          "description": "The HTML tags `<2>` are not consistently used. The English uses `<2>Help Center.</2>`, while the Korean uses `<2>지원 센터</2>.  This inconsistency could affect rendering.",
+          "suggestion": "Maintain consistent HTML tags.  Consider using `<2>지원 센터</2> to match the English formatting."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While '지원 센터' (jiwon senteo) translates to 'Help Center,' the phrase '자세한 방법을 확인하세요' (jasehan bangbeobeul hwagin하세요) translates to 'check the detailed method'. A more natural and direct translation of 'Detailed instructions' might be '자세한 안내' (jasehan annayeo) or '상세한 안내' (sangsehan annayeo).",
+          "suggestion": "Consider using '지원 센터에서 자세한 안내를 확인하세요' or '지원 센터에서 상세한 안내를 확인하세요' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -177,8 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not correctly rendered in the Lao translation. They should be consistent with the English original.",
-          "suggestion": "Ensure the HTML tags `<2>` are consistently applied in the Lao translation to maintain the intended formatting. For example: `<2> ສູນຊ່ວຍເຫຼືອ </2>."
+          "description": "The Lao translation retains the HTML tags '<2>' and '</2>'. These tags should ideally be removed or replaced with the appropriate formatting for the target language/platform.",
+          "suggestion": "Remove the HTML tags. Consider using Lao formatting for links or bolding if necessary."
         }
       ],
       "approved_at": null
@@ -198,31 +204,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags '<2>' are not consistently applied in the Polish translation. They appear as '<2>' in the English, which suggests they represent a specific formatting element (e.g., a link or emphasis). The Polish translation uses the same tags but might need adjustment to match the intended visual representation.",
+          "suggestion": "Investigate the intended formatting of the '<2>' tags in the English version and replicate it accurately in the Polish version. For example, if they represent links, ensure the Polish translation includes a proper link using <a> tags."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <2> and </2> are present in both the English and Portuguese versions, but should be verified against the actual implementation. They may represent a specific styling or highlighting applied to the text 'Help Center'.",
-          "suggestion": "Verify the intended styling/highlighting associated with the <2> tags and ensure the Portuguese version reflects this correctly.  If no styling is required, remove the tags."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <2> and </2> are present in both the English and Portuguese versions. While technically correct, these tags seem unusual for a simple text string and might be best removed for cleaner content. They don't appear to have a functional purpose.",
-          "suggestion": "Consider removing the <2> and </2> tags.  The content 'Centro de Ajuda' would then be simply 'Centro de Ajuda'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -237,8 +237,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and may not render correctly. They seem intended to signify a specific formatting style. The Russian translation also uses the same unusual HTML tags.",
-          "suggestion": "Investigate and replace `<2>` with the intended formatting element (e.g., `<help>`, `<span>`, or a specific style class).  If no specific formatting is needed, remove the tags entirely."
+          "description": "The HTML tags '<2>' are not standard and might not render correctly. They seem intended to represent a hyperlink, but the wrapping is unusual.",
+          "suggestion": "Consider using standard HTML for hyperlinks, like '<a href=\"link_to_help_center\">Справочный центр</a>'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation conveys the general meaning, 'Для получения подробных инструкций, пожалуйста, перейдите в наш' is a bit verbose and formal for a user interface. A more natural and concise translation might be preferable.",
+          "suggestion": "Consider a simpler phrasing like 'Подробные инструкции доступны в нашем <2>Справочном центре</2>.'"
         }
       ],
       "approved_at": null
@@ -249,8 +254,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Sinhala translation retains the HTML tags `<2>` and `</2>`, which are not standard in Sinhala text and should be removed or replaced with appropriate formatting (e.g., bolding, italics) if intended.",
-          "suggestion": "Remove the HTML tags. If bolding is intended, use appropriate Sinhala formatting for bold text."
+          "description": "The HTML tags `<2>` are not standard and may not render correctly in all systems. They seem intended to highlight the text, but a more common approach would be to use `<em>` or `<b>`.",
+          "suggestion": "Consider using `<em>` or `<b>` instead of `<2>` for highlighting. For example: `<em>`උපකාර මධ්‍යස්ථානයේ`</em>`"
         }
       ],
       "approved_at": null
@@ -258,19 +263,19 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tag `<2>` is not standard and may not render correctly. It's likely meant to indicate a link or styled text. The Slovak translation preserves this unusual tag.",
-          "suggestion": "Investigate the intended purpose of `<2>` in the English content and replace with the appropriate HTML tag for Slovak (e.g., `<a>` for a link, or apply CSS styling)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags '<2>' are not consistent with the English content. The English uses '<2>Help Center.</2>', while the Slovenian uses '<2>Centru za pomoč</2>'. The closing tag is incorrect.",
+          "suggestion": "Ensure the HTML tags and structure match the English original.  For example: '<2>Centru za pomoč</2>'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -279,8 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and might not render correctly. They seem intended to highlight the text but a more standard approach would be preferable (e.g., <i>, <b>, or a CSS class).",
-          "suggestion": "Consider replacing `<2>` with a standard HTML tag like `<i>` or `<b>`, or apply a CSS class for highlighting.  Example: `<i>Центру за помоћ</i>`"
+          "description": "The HTML tags <2> are preserved in the translation. These should ideally be removed or adapted to the Serbian HTML standard.",
+          "suggestion": "Remove the HTML tags or adapt them to the Serbian HTML standard (e.g., replace <2> with <strong> or <em>)."
         }
       ],
       "approved_at": null
@@ -291,8 +296,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and should be verified against the original design/implementation. They likely represent a placeholder for styling/formatting and might need adjustment.",
-          "suggestion": "Verify the purpose of `<2>` tags. If they are placeholders for bolding, italics, or other formatting, replace them with the appropriate HTML tags (e.g., `<b>`, `<i>`, `<strong/>`, `<em/>`).  If they are a specific framework's markup, ensure the translation reflects that framework."
+          "description": "The HTML tags `<2>` are present in both the English and Serbian translations. While the content is correctly translated, the surrounding tags should be verified to ensure they match the intended HTML structure in the application.",
+          "suggestion": "Verify that the surrounding HTML tags `<2>` are consistent with the application's intended HTML structure.  If these are placeholders, ensure the appropriate tag is used."
         }
       ],
       "approved_at": null
@@ -303,8 +308,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags '<2>' are inconsistent between the English and Turkish versions. The English version uses '<2>', while the Turkish uses '<2>'.",
-          "suggestion": "Ensure consistent HTML tag usage across both languages. If '<2>' represents a specific style or emphasis, ensure the Turkish version also uses the same tag."
+          "description": "The HTML tags '<2>' are present in both the English and Turkish versions, but their purpose isn't clear without further context. They may indicate a hyperlink or specific styling. The absence of a URL within the tags in the Turkish translation is an issue. Consider whether this should be a link and what URL should be used.",
+          "suggestion": "Verify the intended functionality of the <2> tags and add the appropriate URL if they are meant to be a hyperlink. If they are for styling, ensure consistent styling is applied."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Detailed instructions' is translated as 'ayrıntılı talimatlar'. While technically correct, a more natural and idiomatic translation might be 'kapsamlı talimatlar' or 'geniş kapsamlı talimatlar'. The level of detail implied by 'detailed' may be lost.",
+          "suggestion": "Consider 'kapsamlı talimatlar' or 'geniş kapsamlı talimatlar' for a more natural phrasing, depending on the precise meaning of 'detailed'."
         }
       ],
       "approved_at": null
@@ -312,13 +322,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and might cause rendering issues. They should be consistent with the platform's expected format for hyperlinks or other markup.  The platform should dictate the correct tag.",
-          "suggestion": "Confirm the expected HTML tag format for links/markup and adjust accordingly. For example, it might be `<a href=\"...\">` or another platform-specific tag."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -327,8 +331,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` are not standard and may not render correctly in all systems. They should be replaced with appropriate HTML tags or removed if plain text is intended.",
-          "suggestion": "Consider using `<a>` or other appropriate HTML tags if a link is intended. If not, remove the tags and leave just the text: 'Hướng dẫn chi tiết có trong Trung tâm trợ giúp của chúng tôi.'"
+          "description": "The HTML tags '<2> and </2>' are not consistent with the English content. The English uses `<2>Help Center.</2>` while the Vietnamese uses `<2>Trung tâm trợ giúp</2> của chúng tôi. The inclusion of 'của chúng tôi' ('of ours') changes the wording.  It should be more closely aligned with the original.",
+          "suggestion": "<2>Trung tâm trợ giúp</2>"
         }
       ],
       "approved_at": null
@@ -339,8 +343,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<2>` and `</2>` are not standard and may not render correctly. They seem intended to represent a link or some other emphasis.  The Chinese translation uses the same tags.",
-          "suggestion": "Investigate the original meaning of the `<2>` tags and replace them with appropriate HTML tags such as `<a href=\"...\">...</a>` or `<strong>...</strong>` if applicable.  If these tags are placeholders for a custom component, ensure the Chinese version also utilizes the same component or appropriate equivalent."
+          "description": "The HTML tag `<2>` is inconsistent. The English content uses `<2>`, while the Chinese translation uses `<2>`. This suggests a potential formatting error where the tags might not be rendered correctly across platforms.",
+          "suggestion": "Ensure consistency in HTML tags across both English and Chinese versions. Verify that `<2>` is the correct tag and if not, update both versions to use the same tag."
         }
       ],
       "approved_at": null

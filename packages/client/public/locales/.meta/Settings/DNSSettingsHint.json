@@ -3,7 +3,7 @@
   "content": "Enter domain name like this:",
   "content_en_sha1_hash": "ca975fa1b67c66cb5b4feebcdcf330bdab3ca160",
   "created_at": "2025-05-19T21:30:51.228Z",
-  "updated_at": "2025-05-28T09:30:02.487Z",
+  "updated_at": "2025-05-26T07:57:32.476Z",
   "comment": {
     "text": "This translation key is used to provide a hint about the expected format for a domain name input field in a DNS settings interface. It appears as a tooltip or label next to an input field where users can enter their domain name. The text helps clarify how the domain should be formatted, such as being entered without punctuation or special characters.",
     "is_auto": true,
@@ -66,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Intriduzca' is misspelled. It should be 'Introduzca'.",
+          "description": "The word 'Intriduzca' is a misspelling. It should be 'Introduzca'.",
           "suggestion": "Introduzca"
         }
       ],
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Syötä tämänkaltainen verkkotunnus:' is a bit literal and might not be the most natural way to express 'Enter domain name like this:' in Finnish. A more idiomatic translation would be something like 'Kirjoita verkkotunnus tähän malliin:' or 'Anna verkkotunnus tähän tyyliin:'.",
-          "suggestion": "Kirjoita verkkotunnus tähän malliin:"
+          "description": "The translation 'Syötä tämänkaltainen verkkotunnus:' is a literal translation that might not be the most natural or user-friendly way to phrase this in Finnish. A more idiomatic translation might be preferable, depending on the overall tone and context of the settings screen.",
+          "suggestion": "Consider 'Kirjoita verkkotunnus tähän muotoon:' or 'Esimerkki verkkotunnuksesta:' or 'Kirjoita verkkotunnus esimerkiksi:'"
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'տիրույթի' might be better rendered as 'դոմենի' for clarity and more modern usage, as 'տիրույթի' can be overly formal or archaic in this context.",
+          "suggestion": "Մուտքագրել դոմենի անունը այսպես՝"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,13 +111,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '次のようにドメイン名を入力してください： ' is a literal translation and somewhat unnatural in Japanese. A more natural phrasing would imply a helpful guide or example.",
-          "suggestion": "例："
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -159,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Introduceți nume de domeniu în acest mod:' is a literal translation but doesn't flow naturally in Romanian. A more natural phrasing would emphasize the example.",
-          "suggestion": "Introduceți numele domeniului, de exemplu:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙවැනි වසම් නාමයක් යොදන්න:' while understandable, is not the most natural or idiomatic way to convey \"Enter domain name like this:\". A more accurate and user-friendly translation might focus on providing an example.",
-          "suggestion": "වැනි ඩොමේන් නාමයකි: (Weni domaina mayeki: - Like this is a domain name:)"
+          "description": "The translation \"මෙවැනි වසම් නාමයක් යොදන්න:\" is a literal translation of 'Enter domain name like this:' but could be improved for naturalness. While technically correct, it sounds slightly awkward in Sinhala. A more natural phrasing might be closer to 'උදාහරණයක් ලෙස, මෙවැනි වසම් නාමය යොදන්න:' (as an example, enter a domain name like this).",
+          "suggestion": "උදාහරණයක් ලෙස, මෙවැනි වසම් නාමය යොදන්න:"
         }
       ],
       "approved_at": null
@@ -207,7 +201,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Unesi ime domena ovako:\" is a literal translation that doesn't quite capture the helpful/instructional tone of the English phrase. A more natural phrasing would be more suitable for a settings menu.",
+          "suggestion": "Please provide an example of a more user-friendly translation such as 'Upiši domenu u formatu...' or 'Unesite domen na ovaj način:'"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -215,8 +215,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation includes \"(domain)\". While \"domain\" is understandable in Turkish, it's redundant as \"alan\" already means domain. This adds unnecessary length and can sound unnatural.",
+          "type": "formatting",
+          "description": "The translation includes both the English word 'domain' and the Turkish word 'alan'. While understandable, it's redundant and less elegant. Using only 'alan' would be more natural in Turkish.",
           "suggestion": "Alan adını bu şekilde girin:"
         }
       ],
@@ -237,13 +237,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"输入域名，如下所示：\" is technically correct but somewhat stiff and unnatural for a user interface hint. It emphasizes 'as shown below' which isn't always necessary or helpful to the user.",
-          "suggestion": "输入域名，例如："
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

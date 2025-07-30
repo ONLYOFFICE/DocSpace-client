@@ -1,7 +1,7 @@
 import { zendeskAPI } from "./Zendesk.utils";
 
 describe("ZendeskAPI", () => {
-  let originalZE: unknown;
+  let originalZE: typeof window.zE;
 
   beforeEach(() => {
     // Store original zE if it exists
@@ -9,6 +9,7 @@ describe("ZendeskAPI", () => {
     // Clear any changes before each test
     zendeskAPI.clearChanges();
     // Reset window.zE
+    // @ts-expect-error Fix types
     delete window.zE;
   });
 

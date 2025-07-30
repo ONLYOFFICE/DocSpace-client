@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "se requiere activación",
   "AddStaticText": "Añadir texto estático",
   "AddWatermarkElements": "Añadir elementos de marca de agua",
   "AddWatermarksToDocuments": "Añadir marcas de agua a los documentos",
@@ -33,7 +32,6 @@
   "StorageDescription": "Cuota de almacenamiento establecida por sala. Puede cambiar este valor o desactivar el límite de almacenamiento.",
   "TagsPlaceholder": "Añada etiqueta",
   "ThirdPartyStorageComboBoxPlaceholder": "Seleccionar almacenamiento",
-  "ThirdPartyStorageDescription": "Utilice servicios de terceros como almacenamiento de datos para esta sala. Se creará una nueva carpeta para almacenar los datos de esta sala en el almacenamiento conectado.",
   "ThirdPartyStorageNoStorageAlert": "Sobre todo, debe conectar el servicio correspondiente en la sección \"Integración\". En caso contrario, la conexión no será posible.",
   "ThirdPartyStoragePermanentSettingDescription": "Los archivos se guardan en el almacenamiento de terceros {{thirdpartyTitle}} en la carpeta \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Para conectar un almacenamiento de terceros, debe añadir el servicio correspondiente en la sección Integración de la configuración de {{productName}}. Póngase en contacto con el propietario o administrador de {{productName}} para habilitar la integración.",

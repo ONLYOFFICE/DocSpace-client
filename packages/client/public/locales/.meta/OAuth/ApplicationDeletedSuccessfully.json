@@ -3,7 +3,7 @@
   "content": "Application deleted successfully",
   "content_en_sha1_hash": "2fa77e06ba609f0786cc0d64f1f83d575a6d9d14",
   "created_at": "2025-05-19T21:30:53.795Z",
-  "updated_at": "2025-05-28T09:30:02.595Z",
+  "updated_at": "2025-05-26T07:57:32.656Z",
   "comment": {
     "text": "This translation key is used to display a success message when an application is deleted successfully. It will appear as a toast notification in a delete confirmation dialog. The message should be used to inform users that their OAuth application has been removed from the system.",
     "is_auto": true,
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'vymazaná' technically means 'erased' or 'deleted,' 'aplikácia bola úspešne odstránená' would be a more natural and accurate translation of 'Application deleted successfully' in Slovak. 'Odstránená' implies a removal process more akin to 'deleted'.",
-          "suggestion": "Aplikácia bola úspešne odstránená"
+          "description": "While 'vymazaná' (deleted) is technically correct, 'zmazaná' is more commonly used in Slovak when referring to deleting an application or software. 'Vymazaná' more closely implies erasure.",
+          "suggestion": "Aplikácia bola úspešne zmazaná"
         }
       ],
       "approved_at": null

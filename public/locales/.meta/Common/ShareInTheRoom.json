@@ -3,7 +3,7 @@
   "content": "Share in the room",
   "content_en_sha1_hash": "0bc4be3bcb493239585642bc4f39bfd12f5c7c05",
   "created_at": "2025-05-19T21:30:48.670Z",
-  "updated_at": "2025-05-28T09:30:02.273Z",
+  "updated_at": "2025-06-30T12:20:31.243Z",
   "comment": {
     "text": "This translation key is used to display the text \"Share in the room\" as a button label on a form panel, indicating that the action will share the current form data. It appears in the \"/packages/client/src/components/panels/ShareFormPanel/index.js\" file and may also be displayed in dialog boxes related to form management.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 167,
+      "line_number": 165,
       "context": "},\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 167,
+      "line_number": 165,
       "context": "},\n {\n id: \"form-room\",\n title: t(\"Common:FormDataCollection\"),\n description: t(\"Common:FormDataCollectionDescription\"),\n buttonLabel: t(\"Common:ShareInTheRoom\"),\n onClick: onClickFormRoom,\n icon: <FormDataCollectionIcon />,\n },\n {\n id: \"virtual-data-room\",",
       "module": "/packages/doceditor"
     }
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otaqda paylaşın' while literally meaning 'Share in the room', doesn't convey the intended meaning of 'Share in the room' which often implies sharing something, like information or resources, within a shared space. It's too literal.",
-          "suggestion": "Consider a translation like 'Otaqda paylaşılan' (Shared in the room) or 'Otaqda bölüşün' (Share/Distribute in the room) depending on the specific context."
+          "description": "The translation 'Otaqda paylaşın' doesn't fully capture the nuance of 'Share in the room'. 'Paylaşın' implies sharing something tangible. 'Share in the room' could mean a shared experience or feeling, not necessarily a physical object. A more accurate translation would depend on the context.",
+          "suggestion": "Consider 'Otaqda iştirak edin' (Participate in the room) or 'Otaqda birgə olun' (Be together in the room) depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Im Raum teilen\" doesn't accurately convey the meaning of \"Share in the room.\" It literally translates to 'Share in the room' but implies sharing something *within* the room, rather than the act of sharing something that exists *within* the room. It doesn't reflect the intended nuance of collaborative sharing.",
-          "suggestion": "A more appropriate translation might be \"Teilen im Raum\" or \"Gemeinsam im Raum nutzen\" depending on the specific context. \"Teilen im Raum\" is a more direct and commonly used translation when referring to sharing something within a room."
+          "description": "The German translation \"Im Raum teilen\" is not an idiomatic or accurate translation of \"Share in the room.\" While it's literally \"Share in the room\", the intended meaning is likely sharing something *with* people in the room. \"Teilen\" implies dividing or distributing, which doesn't always capture the sharing concept.",
+          "suggestion": "Consider alternatives like \"Mit den Leuten im Raum teilen\" (share with the people in the room) or a more context-specific translation that accurately reflects the intended meaning of \"Share in the room\"."
         }
       ],
       "approved_at": null
@@ -123,13 +123,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Կիսվել սենյակում\" translates literally to 'Share in the room', it doesn't fully capture the nuance of the English phrase 'Share in the room'.  It lacks the implied sharing of something (e.g., a document, experience, etc.).",
-          "suggestion": "Consider a translation that implies sharing a resource or experience, such as \"Մասնակցել սենյակում\" (Participate in the room) or \"Բաժանվել սենյակում\" (Distribute/Share among in the room), depending on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ルームで共有する' (room de kyōyū suru) is a literal translation, it lacks nuance. 'Share in the room' implies a collaborative or participatory sharing. A more natural and contextually appropriate translation would convey that sense.",
-          "suggestion": "Consider alternatives like: '部屋で分かち合う' (heya de wakachiau - share/distribute in the room) or '部屋の中で共有' (heya no naka de kyōyū - sharing within the room), depending on the specific context."
+          "description": "The translation \"ルームで共有する\" (ruumu de kyouyuu suru) while literal, doesn't quite capture the nuance of \"Share in the room\". It translates to \"Share in the room (doing something)\". \"Share in the room\" implies a more passive sharing of something, like a document or information. It lacks the implicit context.",
+          "suggestion": "ルームで共有 (ruumu de kyouyuu) - This is a more concise and natural way to convey the concept of sharing something within a room, removing the verb and implying the action."
         }
       ],
       "approved_at": null
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"룸에서 공유\" is a literal translation, it doesn't convey the nuance of \"Share in the room\" which implies sharing something *within* the room, often a collaborative or communal action. \"룸에서 함께 사용하다\" or \"룸 안에서 공유하다\" would be more accurate.",
-          "suggestion": "룸에서 함께 사용하다"
+          "description": "While \"룸에서 공유\" is technically a translation of 'Share in the room', it's not the most natural or idiomatic Korean. It sounds a bit literal and awkward.",
+          "suggestion": "Consider a more natural phrasing like \"방에서 함께 사용하다\" (bang-eoseo hamkke sayonghada - share together in the room) or \"방 안에서 공유\" (bang an-eseo gongyu - share within the room)."
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Предоставить доступ в комнате\" doesn't fully capture the meaning of \"Share in the room.\" \"Share\" implies a more collaborative or participatory action, while \"Предоставить доступ\" focuses on granting access. It's more literal and less idiomatic.",
-          "suggestion": "Consider alternatives like \"Поделиться в комнате\" (Podelitsya v komnate) or \"Общий доступ в комнате\" (Obshiy dostup v komnate). \"Поделиться\" conveys sharing, while \"Общий доступ\" is closer to 'shared access'."
+          "description": "The translation \"Предоставить доступ в комнате\" doesn't quite capture the nuance of \"Share in the room.\" \"Share\" implies a more collaborative and less formal action than \"Предоставить доступ\" (provide access). It feels a bit too formal and suggests a more administrative action.",
+          "suggestion": "Consider alternatives like \"Поделиться в комнате\" (Podelitsya v komnate) which more closely reflects the meaning of 'share', or \"Открывать доступ в комнате\" (Otkryvat' dostup v komnate), which implies allowing others to participate."
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'කාමරයේ බෙදාගන්න' (Kamarayē badāganna) is a possible translation, it can be interpreted as 'share something within the room', which isn't always the intended meaning of 'Share in the room'.  A more contextually appropriate translation, depending on the intention, might be 'ගැණුම් බෙදාගන්න' (Gēnum badāganna) if referring to experiences or feelings.",
-          "suggestion": "Consider 'ගැණුම් බෙදාගන්න' (Gēnum badāganna) for experiences/feelings or evaluate the specific context to provide a more accurate translation. A more direct equivalent to 'share' might be required depending on what's being shared."
+          "description": "While \"කාමරයේ බෙදාගන්න\" (kamaraye bedaganna) is a literal translation, it might not be the most natural or accurate rendering of \"Share in the room\" depending on the context. It implies sharing something within the room, but the English phrase could also mean participating in an activity happening in the room. A more context-aware translation might be better.",
+          "suggestion": "Consider alternative translations such as \"කාමරයේ එක්වීම\" (kamaraye ekviwa) - meaning 'participation in the room' or a phrase that better reflects the intended meaning of 'share in the room' based on the surrounding text."
         }
       ],
       "approved_at": null
@@ -246,13 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Поделите у соби\" is not the most natural or accurate translation of \"Share in the room.\" While technically understandable, it's not idiomatic Serbian. \"Share in the room\" implies sharing something with people present.",
-          "suggestion": "A more accurate and natural translation would be something like \"Поделите у просторији\" (Podelite u prostoriji) or \"Поделите са свима у соби\" (Podelite sa svima u sobi)."
-        },
-        {
-          "type": "grammar",
-          "description": "The usage of \"у соби\" (u sobi) could be improved for clarity. While grammatically correct, it lacks a strong implication of sharing *with* other people.",
-          "suggestion": "Consider using a preposition that emphasizes sharing with others, such as \"са\" (sa)."
+          "description": "The Serbian translation \"Поделите у соби\" doesn't accurately convey the meaning of \"Share in the room.\" It literally translates to \"Share in the room\", but it's not idiomatic and may not be understood as intended. A more natural Serbian translation would depend on the specific context (e.g., sharing something tangible or sharing an experience).",
+          "suggestion": "Consider alternatives like \"Уделите простор\" (Share the space), \"Поделите са осталима у соби\" (Share with others in the room), or a more context-specific translation."
         }
       ],
       "approved_at": null
@@ -260,13 +249,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Podelite u sobi\" is grammatically correct, it doesn't fully capture the nuance of \"Share in the room.\" \"Share\" often implies a more collaborative or participatory action. \"Podelite\" translates more closely to 'distribute' or 'divide'. A more suitable translation might convey a sense of shared experience or contribution.",
-          "suggestion": "Consider alternatives like \"Delite iskustvo u sobi\" (Share the experience in the room) or \"Delite sadržaj u sobi\" (Share content in the room), depending on the intended meaning."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -275,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Odada paylaş\" is a literal translation of \"Share in the room,\" it doesn't fully capture the intended meaning. \"Share in the room\" often implies sharing something (e.g., files, ideas, experiences) within a room. \"Odada paylaş\" just means 'share in the room', which is less specific.",
-          "suggestion": "Consider a more contextually accurate translation, such as \"Odada paylaşmak\" (to share in the room) or a phrase that better conveys the sharing action, depending on the specific scenario."
+          "description": "The Turkish translation \"Odada paylaş\" while literally meaning \"Share in the room\", doesn't convey the intended meaning of 'sharing within a room' or 'sharing with people in the room' which is often associated with collaboration or access. It sounds more like an instruction to share something physically *in* the room.",
+          "suggestion": "Consider alternatives like \"Odada ortak kullanım\" (shared use in the room), \"Odada paylaşım\" (sharing in the room, more abstract), or a more context-specific translation depending on the intended use."
         }
       ],
       "approved_at": null
@@ -299,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"在房间中共享\" is technically correct, it's a bit formal and not the most natural way to express \"Share in the room.\" It lacks the casualness of the original English phrase.",
-          "suggestion": "Consider alternatives like \"在房间里分享\" or \"一起分享在房间里\" for a more natural feel, depending on the context."
+          "description": "While \"在房间中共享\" is technically correct, it's a very literal and slightly awkward translation of \"Share in the room.\" It lacks the natural flow and implied meaning of the English phrase. It implies sharing something physical within the room, but \"Share in the room\" could imply sharing an experience or feeling.",
+          "suggestion": "Consider a more nuanced translation depending on the context. Some options:  \"分享房间里的体验\" (Share the experience in the room), \"共享房间” (Share the room - a more concise option, common in certain contexts like co-working), or \"共享空间“ (Share the space)."
         }
       ],
       "approved_at": null

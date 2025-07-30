@@ -3,7 +3,7 @@
   "content": "He has full access to the room",
   "content_en_sha1_hash": "5539dff97c62fdc09da717399b225a9c3eeaa745",
   "created_at": "2025-05-19T21:30:45.734Z",
-  "updated_at": "2025-06-18T07:34:15.007Z",
+  "updated_at": "2025-06-18T17:11:42.414Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user has full access to a room. It appears in an info panel on the Home page and is part of a tooltip that shows permissions related to room ownership or admin status.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otağa tam giriş imkanı var' while conveying the general idea, isn't the most natural or direct translation of 'He has full access to the room'. 'Giriş imkanı var' (has the possibility of entry) is a bit verbose. A more accurate and fluent translation would be something like 'Otağa tam hüququ var' or 'Otağa sərbəst daxil ola bilir'.",
-          "suggestion": "Otağa tam hüququ var"
+          "description": "The translation 'Otağa tam giriş imkanı var' while conveying a similar meaning, isn't the most natural or precise translation of 'He has full access to the room'. 'Giriş imkanı' translates to 'opportunity to enter', which is slightly different than 'full access'.",
+          "suggestion": "A more accurate translation could be: 'Otağa tam hüququ var' or 'Otağa sərbəst girişə malikdir'."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"rajoittamaton pääsy\" translates to \"unrestricted access,\" the English phrase \"full access\" implies a complete and unrestricted allowance, but doesn't necessarily highlight the 'unrestricted' aspect. A more direct translation might be more appropriate depending on the nuance intended.",
-          "suggestion": "Consider 'Hänellä on täysi pääsy huoneeseen' which directly translates to 'He has full access to the room'."
+          "description": "The Finnish translation 'Hänellä on rajoittamaton pääsy huoneeseen' translates to 'He/She has unlimited access to the room'. While conveying a similar meaning to 'He has full access to the room', 'unlimited' is stronger than 'full'.  'Full access' implies complete access within defined parameters, while 'unlimited' suggests no restrictions at all. This could be a significant difference depending on the context of 'Common:HasFullAccess'.",
+          "suggestion": "Consider a more precise translation that reflects the scope of 'full access', such as 'Hänellä on täysi pääsy huoneeseen' (He/She has full access to the room) or 'Hänellä on kattava pääsy huoneeseen' (He/She has comprehensive access to the room)."
         }
       ],
       "approved_at": null
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the Armenian translation conveys the general meaning, 'լիարժեք մուտք դեպի սենյակ' is a somewhat literal and less natural way to express 'full access' in this context. A more natural phrasing would be 'ունի լիազորություն մուտք գործելու սենյակ' or 'ունի առանց սահմանափակման մուտք սենյակ' depending on the nuance desired.",
+          "suggestion": "Consider alternatives like 'ունի լիազորություն մուտք գործելու սենյակ' or 'ունի առանց սահմանափակման մուտք սենյակ'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ルームへのフルアクセスを持っています\" is a literal translation but sounds unnatural in Japanese. 'Has full access' implies permission or ability. A more natural translation would convey that sense.",
-          "suggestion": "ルームへのアクセス権を持っています (Room no access ken o motte imasu - I have access rights to the room) or ルームへのアクセスが可能です (Room e no access ga kanou desu - Access to the room is possible)."
+          "description": "The translation 'ルームへのフルアクセスを持っています' is technically correct but sounds overly formal and slightly unnatural in typical conversational Japanese. A more natural phrasing would be 'ルームにフルアクセスできます' or 'ルームにフルアクセス可能です'.",
+          "suggestion": "ルームにフルアクセスできます"
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '방에 대한 전체 액세스 권한이 있습니다' is a literal translation and sounds unnatural in Korean. It's overly formal and doesn't convey the intended meaning of 'full access' as smoothly as it could.",
-          "suggestion": "Consider a more natural phrasing like '방에 자유롭게 드나들 수 있습니다' (can freely enter and exit the room) or '방을 마음대로 사용할 수 있습니다' (can use the room freely)."
+          "description": "The translation \"방에 대한 전체 액세스 권한이 있습니다\" is a literal translation that sounds unnatural in Korean. A more natural phrasing would convey the meaning of 'full access'.",
+          "suggestion": "Consider \"방에 완전한 접근 권한을 가지고 있습니다\" or \"방에 자유롭게 드나들 수 있습니다\" or \"방을 자유롭게 사용할 수 있습니다\" depending on the intended nuance."
         }
       ],
       "approved_at": null
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ລາວມີການເຂົ້າເຖິງຫ້ອງຢ່າງເຕັມທີ່' is a literal translation of 'He has full access to the room'. While understandable, it's somewhat formal and less natural in Lao. A more natural phrasing would convey the same meaning.",
-          "suggestion": "ລາວສາມາດເຂົ້າຫ້ອງໄດ້ເຕັມທີ່ (Lao samart khao hong dai tem thi)"
+          "description": "The translation 'ລາວມີການເຂົ້າເຖິງຫ້ອງຢ່າງເຕັມທີ່' while conveying a similar meaning, is a bit wordy and formal for a simple statement like \"He has full access to the room.\" A more natural and concise translation would be better.",
+          "suggestion": "ລາວເຂົ້າຫ້ອງໄດ້ເຕັມສ່ວນ"
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Este acordat acces complet la sala' translates more literally to 'Access is granted to the room.' It doesn't accurately convey the 'He has' part of the original English sentence, which indicates possession or a direct attribute.",
-          "suggestion": "A more accurate translation could be 'El are acces complet la sala' (He has full access to the room) or 'Are acces complet la sala' (Has full access to the room)."
+          "description": "The translation 'Este acordat acces complet la sala' doesn't accurately convey the original meaning 'He has full access to the room'. It translates to 'Access is granted to the room', which changes the subject. The original sentence implies the person *possesses* the access.",
+          "suggestion": "El are acces complet la sală"
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"У него есть полный доступ в комнату\" is not the most natural or accurate translation of \"He has full access to the room.\" While literally translatable, it sounds awkward. A more idiomatic translation would use the preposition 'к'.",
-          "suggestion": "У него есть полный доступ к комнате"
+          "description": "The Russian translation 'У него есть полный доступ в комнату' translates to 'He has full access to the room'. However, it is slightly awkward. While not strictly incorrect, it's not the most natural way to express this in Russian.",
+          "suggestion": "У него полный доступ к комнате"
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔහුට/ඇයට කාමරය වෙත පූර්ණ ප්‍රවේශය ඇත' is a literal translation that doesn't quite capture the natural flow of the English sentence 'He has full access to the room'. While technically correct, it sounds somewhat stiff in Sinhala.",
-          "suggestion": "A more natural translation might be 'ඔහුට කාමරයට නිදහස් ප්‍රවේශය ඇත' or 'ඔහුට කාමරයට අවි බාධී ප්‍රවේශය ඇත'. (He has unrestricted access to the room)."
+          "description": "The translation 'ඔහුට/ඇයට කාමරය වෙත පූර්ණ ප්‍රවේශය ඇත' while conveying the general meaning, is slightly verbose and less natural. 'වෙත' (wetha) is redundant here. A more natural phrasing would be 'ඔහුට/ඇයට කාමරයට පූර්ණ ප්‍රවේශය ඇත' or 'ඔහුට/ඇයට කාමරයෙහි පූර්ණ ප්‍රවේශය ඇත'.",
+          "suggestion": "ඔහුට/ඇයට කාමරයට පූර්ණ ප්‍රවේශය ඇත"
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ima poln dostop do sobe' translates to 'He/She has full access to the room' but the sentence starts with 'Ima' (he/she has), which might be confusing. A more accurate translation maintaining the same meaning would be 'On ima poln dostop do sobe' (He has full access to the room) or 'Ona ima poln dostop do sobe' (She has full access to the room). The original sentence's pronoun is not specified.",
-          "suggestion": "Consider using 'On ima poln dostop do sobe' or 'Ona ima poln dostop do sobe' to be explicit about the subject."
+          "description": "The English sentence 'He has full access to the room' translates to 'Ima poln dostop do sobe' which uses 'Ima' (I have). The original sentence refers to a male subject ('He'), but the translation uses the first-person singular ('I'). This introduces an incorrect grammatical person.",
+          "suggestion": "The translation should use a pronoun that aligns with the male subject of the English sentence. A possible correction would be 'On ima poln dostop do sobe' (He has full access to the room)."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation conveys the general meaning, 'приступ' (pristup) typically implies 'access' in a more functional or permission-based sense, rather than the complete access implied by 'full access'. A more accurate translation would reflect the totality of the access.",
-          "suggestion": "Он има неограничен приступ соби"
+          "description": "The phrase 'full access' is better translated as 'punoprati pristup' rather than 'potpuni pristup'. While 'potpuni' is understandable, 'punoprati' more accurately reflects the English meaning in this context.",
+          "suggestion": "Он има пуноправан приступ соби"
         }
       ],
       "approved_at": null
@@ -258,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the Vietnamese translation is understandable, \"toàn quyền sử dụng\" is a more formal and less natural way to express \"full access.\" A more colloquial and accurate translation would convey the sense of being able to use the room freely and without restriction.",
-          "suggestion": "Người ấy có thể sử dụng phòng thoải mái"
+          "description": "While 'toàn quyền sử dụng' conveys a strong sense of access, a more natural and idiomatic translation of 'full access' in this context might be 'quyền truy cập đầy đủ' or 'quyền ra vào đầy đủ'. 'Toàn quyền' often implies a broader scope of authority beyond simple access.",
+          "suggestion": "Người ấy có quyền truy cập đầy đủ vào phòng"
         }
       ],
       "approved_at": null
@@ -270,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '有完整的房间访问权限' (yǒu wánzhěng de fángjiān fǎngwèn quánxiàn) is a literal and somewhat awkward translation of 'He has full access to the room.' It emphasizes 'complete room access permission' which isn't the natural way a Chinese speaker would express this. It lacks nuance and sounds overly formal.",
-          "suggestion": "A more natural and accurate translation would be something like: '他可以完全进入房间' (tā kěyǐ wánquán jìnrù fángjiān) – 'He can completely enter the room', or '他有权进入房间' (tā yǒu quánxiàn jìnrù fángjiān) - 'He has the right to enter the room'."
+          "description": "The translation \"有完整的房间访问权限\" doesn't accurately convey the meaning of \"He has full access to the room.\" It translates to \"He has complete room access permissions.\"  The focus is shifted to permissions rather than access.",
+          "suggestion": "有完全的房间访问权限 (Yǒu wánquán de fángjiān fǎngwèn quánxiàn) - This translates to 'He has complete room access' and better reflects the original meaning."
         }
       ],
       "approved_at": null

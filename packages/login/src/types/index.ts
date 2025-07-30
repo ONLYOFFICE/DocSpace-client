@@ -1,4 +1,3 @@
-import { isSeparator } from "@docspace/shared/utils/typeGuards";
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -73,12 +72,12 @@ export type TCulturesOption =
       isBeta?: boolean;
       key: string | number;
       label: string;
-      icon?: string | React.ReactElement | React.ElementType;
+      icon?: string | React.ElementType | React.ReactElement;
     }
   | {
       isBeta?: boolean;
       key: string | number;
-      icon?: string | React.ReactElement | React.ElementType;
+      icon?: string | React.ElementType | React.ReactElement;
     };
 
 export type TDataContext = {

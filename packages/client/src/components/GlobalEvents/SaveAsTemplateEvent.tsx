@@ -87,7 +87,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
     },
     isPrivate: false,
     icon: {
-      uploadedFile: item.logo.original,
+      uploadedFile: item?.logo?.original,
       tmpFile: "",
       x: 0.5,
       y: 0.5,
@@ -164,7 +164,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
       item={item}
       onClose={onCloseEvent}
       fetchedTags={fetchedTags}
-      fetchedRoomParams={fetchedRoomParams}
+      fetchedRoomParams={fetchedRoomParams as unknown as TRoom}
       onSave={onSave}
       isLoading={isLoading}
     />

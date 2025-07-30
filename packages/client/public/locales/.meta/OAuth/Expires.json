@@ -3,7 +3,7 @@
   "content": "Expires",
   "content_en_sha1_hash": "a99be3da0c9da2f3c64500b5ef8a8e48f503d127",
   "created_at": "2025-05-19T21:30:53.889Z",
-  "updated_at": "2025-05-21T07:14:37.841Z",
+  "updated_at": "2025-05-24T07:28:53.393Z",
   "comment": {
     "text": "This translation key \"Expires\" is used to display a label for the expiration date of an item in the user interface. It appears in a modal dialog body and is part of a specific UI component that displays information about created dates and expiration times.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"تنتهي صلاحية\" is a literal translation of \"expires\" meaning \"the validity ends.\" While understandable, a more natural and commonly used translation in a technical context like OAuth would be something like \"انتهاء الصلاحية\" (Intihā' al-ṣalāḥiyyah) or \"تاريخ انتهاء الصلاحية\" (Tarīkh Intihā' al-ṣalāḥiyyah) which directly translates to \"Expiration Date\".",
-          "suggestion": "انتهاء الصلاحية"
+          "description": "The Arabic translation 'تنتهي صلاحية' literally translates to 'loses validity' or 'expires'. While understandable, it's a more literal and less common way to express 'Expires' in a technical context like OAuth. A more idiomatic and concise translation would be more appropriate.",
+          "suggestion": "انتهائها (Intaha'aha)"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Müddəti bitir' is a literal translation of 'Expires' and doesn't fully convey the intended meaning in the context of OAuth. It implies something ending, but not necessarily a timed expiration.  A more suitable translation would convey a time limit or validity period.",
-          "suggestion": "Təqdirdən sonra (After expiration) or Başa çatan (Expired)"
+          "description": "The translation 'Müddəti bitir' doesn't accurately convey the meaning of 'Expires' in the context of OAuth. It translates to 'Time expires' or 'Terminates,' which is too literal and doesn't imply a validity period.",
+          "suggestion": "A more accurate translation would be 'Bitirəkə' or 'Etibarlılıq müddəti'."
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Изтича\" can mean 'expires', it's more commonly used for liquids or time running out. A more accurate translation for an OAuth expiration would be something along the lines of \"Срок на валидност\" or \"Валидно до\". \"Изтича\" implies something is being used up.",
-          "suggestion": "Срок на валидност"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -66,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Platnost končí na' (Expiration ends on) is too literal and not the idiomatic way to express 'Expires' in a technical context like OAuth. It's a descriptive phrase, not a concise label.",
-          "suggestion": "A better translation would be 'Expirace' or 'Datum expirace'."
+          "description": "The Czech translation \"Platnost končí na\" is too literal and verbose for a key name like 'Expires'. It translates to 'Validity ends on'.  A more concise and idiomatic translation would be better.",
+          "suggestion": "Vypršení platnosti"
         }
       ],
       "approved_at": null
@@ -75,7 +69,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Läuft ab' is understandable, it's a more literal translation meaning 'runs out'. A more idiomatic and accurate translation for 'Expires' in a technical context, particularly in relation to a time limit or validity period, would be 'Gültig bis' or 'Ablaufdatum'.",
+          "suggestion": "Gültig bis"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Vanhenee' translates to 'expires' or 'becomes obsolete', but in the context of OAuth, a more precise and standard translation would be 'Voimassaoloajan päättyminen' or 'Voimassa.' 'Vanhenee' implies a gradual process of becoming outdated, whereas the expiration of an OAuth token is a defined event.",
-          "suggestion": "Voimassaoloajan päättyminen"
+          "description": "While 'Vanhenee' technically means 'expires', it's not the most natural or commonly used translation for 'Expires' in the context of OAuth tokens. It implies an action of expiring rather than a state of expiration.",
+          "suggestion": "Voimassaoloaika"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Expire' is a verb form. 'OAuth:Expires' refers to a time or date when something ends. The correct noun form should be 'Expiration'.",
-          "suggestion": "Expiration"
+          "description": "The translation 'Expire' is grammatically correct but doesn't fully capture the meaning of 'Expires' in the context of OAuth. 'Expires' implies a state of being expired, whereas 'Expire' is the action of expiring. A better translation would be 'Date d'expiration' or 'Expiration'.",
+          "suggestion": "Date d'expiration"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ժամկետը լրանում է' (Jamketi lranum e) translates to 'The deadline expires'. While related to expiration, it doesn't directly convey the meaning of 'Expires' in the context of OAuth tokens. It suggests an action is happening *to* the deadline, rather than the deadline itself.",
-          "suggestion": "A more accurate translation for 'Expires' in an OAuth context would be something like 'Վավերականության Ժամկետ' (Vaverakanutyan Jamket), which means 'Expiration Date', or a more concise 'Վավերականության Ժամ' (Vaverakanutyan Jam) meaning 'Validity Time'."
+          "description": "The Armenian translation \"Ժամկետը լրանում է\" translates to \"The deadline expires.\" While close, it's not the direct equivalent of \"Expires.\" \"Expires\" implies a point in time when something becomes invalid, not necessarily a deadline.",
+          "suggestion": "Մարում է (Marum e)"
         }
       ],
       "approved_at": null
@@ -135,13 +135,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation \"有効期限:\" literally translates to 'Valid Expiration:'. While understandable, it's a more verbose translation of \"Expires\".  A more direct and common translation would be simply \"有効期限\" (Yuukou Kigen).",
-          "suggestion": "有効期限"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Traci ważność' while conveying a sense of expiry, doesn't perfectly match the meaning of 'Expires' in the context of OAuth tokens. A more precise translation would better reflect the technical meaning of expiration.",
-          "suggestion": "Wygasa"
+          "description": "While 'Traci ważność' is understandable, it doesn't directly translate 'Expires' in the context of OAuth tokens. A more accurate translation reflecting the meaning of token expiration would be 'Data wygaśnięcia' or 'Ważne do'. 'Traci ważność' implies something is losing validity rather than a defined expiration date.",
+          "suggestion": "Data wygaśnięcia"
         }
       ],
       "approved_at": null
@@ -198,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Expirare\" is a valid Romanian word, it's a verb meaning 'to expire'. The English \"Expires\" is a noun representing a date or time of expiration. A more suitable noun translation would be \"Data de expirare\" or simply \"Expiră\".",
+          "description": "While 'Expirare' is a valid Romanian word, it's more accurately a verb form (infinitive) meaning 'to expire.' 'Expires' is a noun describing a date or time. A more appropriate noun translation would be 'Data de expirare' or 'Valabilitate'.",
           "suggestion": "Data de expirare"
         }
       ],
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කල් ඉකුත් වේ\" (kal ikumath we) literally translates to \"time expires\". While understandable in context, a more accurate and common translation of \"Expires\" in this specific scenario (OAuth) would be something like \"පාය abgeschlossen\" (paya pahatāva) or \"පහසු කාලය\" (pahasu kalaya), which convey the sense of validity or expiry.",
-          "suggestion": "Consider \"පාය abgeschlossen\" (paya pahatāva) or \"පහසු කාලය\" (pahasu kalaya)"
+          "description": "While \"කල් ඉකුත් වේ\" (kal ikuth ve) is understandable, it literally translates to \"time expires.\" A more accurate and common translation for \"Expires\" in the context of OAuth would be \"පාත selesai\" (paatha selasa) or \"නැවත gültig\" (naetha valid). \"කල් ඉකුත් වේ\" is a broader term and might not convey the specific meaning of an expiry date associated with a token.",
+          "suggestion": "Consider using \"පාත selesai\" (paatha selasa) or \"නැවත gültig\" (naetha valid)."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Platnosť vyprší\" is understandable, it's a rather literal and slightly awkward translation of 'Expires' in the context of OAuth. A more natural and commonly used translation would be \"Doba platnosti\" or \"Záverečná platnosť\".",
-          "suggestion": "Doba platnosti"
+          "description": "While 'Platnosť vyprší' is understandable, it's a bit verbose and not the most natural translation for 'Expires' in the context of OAuth tokens. A more concise and commonly used translation would be 'Záverečný termín' or 'Dátum expirácie'.",
+          "suggestion": "Záverečný termín"
         }
       ],
       "approved_at": null
@@ -237,19 +231,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Poteče' can mean 'expires', in the context of OAuth and time limits, a more accurate and commonly used translation would be 'Veljavnost poteče' or 'Izteče'. 'Poteče' alone can have a more general meaning of 'flows' or 'runs out'.",
+          "suggestion": "Veljavnost poteče"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Истиче\" can mean \"expires\", in the context of OAuth, a more precise and commonly used translation would be \"Важи\" or \"Време трајања\". \"Истиче\" implies a specific expiration event, whereas OAuth often refers to the validity period.",
-          "suggestion": "Consider \"Важи\" or \"Време трајања\" for a more accurate translation within the OAuth context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -264,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Sona eriyor\" translates to \"is ending\" or \"is expiring\", which isn't the best equivalent for \"Expires\" in the context of OAuth. \"Expires\" typically refers to a fixed expiration time. A more accurate translation would convey a fixed date/time, not a process of ending.",
-          "suggestion": "Birkaç alternatif: \"Son kullanma tarihi\", \"Geçerlilik süresi\", \"Bitiş tarihi\""
+          "description": "The Turkish translation \"Sona eriyor\" translates to \"is ending\" or \"is expiring,\" which while related to \"Expires,\" isn't the most accurate or natural translation in this context (OAuth). A more suitable translation would convey the sense of a fixed expiration date.",
+          "suggestion": "Son kullanma tarihi"
         }
       ],
       "approved_at": null
@@ -276,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Строк дії закінчується\" is a descriptive phrase rather than a direct translation of \"Expires.\" It means \"The expiration date ends.\" While understandable, it's not the most concise or natural equivalent.",
-          "suggestion": "Завершення дії"
+          "description": "The Ukrainian translation 'Строк дії закінчується' is too literal and doesn't convey the meaning of 'Expires' in the context of OAuth. It translates to 'The period of validity ends'. A more appropriate translation would be 'Термін дії' or 'Загальний термін дії'.",
+          "suggestion": "Термін дії"
         }
       ],
       "approved_at": null
@@ -294,8 +288,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"过期\" (guòqí) can mean \"expires\", it's more commonly used for products or dates. For a technical term like \"Expires\" in an OAuth context, a more precise translation might be needed to reflect the time limit on a token.",
-          "suggestion": "Consider alternatives like \"到期\" (dàoqí) or \"有效期限\" (yǒuxiào qíxiàn) depending on the specific nuance desired. '到期' is more aligned with technical expiry, while '有效期限' is more descriptive."
+          "description": "While \"过期\" (guòqí) can mean \"expires,\" it's more commonly used for physical objects or food. For a technical term like \"Expires\" in an OAuth context, a more precise translation would be better.",
+          "suggestion": "考虑使用“到期” (dàoqí) 或 “失效” (shíxiào) 以更准确地表达“Expires” 的含义。"
         }
       ],
       "approved_at": null

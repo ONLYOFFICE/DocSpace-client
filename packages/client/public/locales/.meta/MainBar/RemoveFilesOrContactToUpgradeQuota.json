@@ -3,7 +3,7 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to increase the storage quota.",
   "content_en_sha1_hash": "09ed5b98a2721316678b9366deac8adabae0bf8a",
   "created_at": "2025-05-19T21:30:54.121Z",
-  "updated_at": "2025-07-01T15:57:35.910Z",
+  "updated_at": "2025-05-24T08:02:21.218Z",
   "comment": {
     "text": "This translation key is used to display a message when a user cannot be upgraded due to their storage quota. It informs the user that they can either remove unnecessary files or contact the {{productName}} administrator to increase the quota. This text appears as an error message in the QuotasBar component on a user's account page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
       "line_number": 56,
-      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"TenantCustomQuotaDescription\"",
+      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans i18nKey=\"TenantCustomQuotaDescription\" t={t}>\n You can remove the unnecessary files or change quota in the\n <Link",
       "module": "/packages/client"
     }
   ],
@@ -27,19 +27,24 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Remove the unnecessary files' is better translated as something more natural in Arabic. A direct translation sounds stiff. 'Remove the unnecessary files' is best translated to 'تخلص من الملفات غير الضرورية' which has a more natural flow.",
+          "suggestion": "تخلص من الملفات غير الضرورية"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of '{{productName}}' is consistent with the English, but it's important to ensure that the Arabic rendering of the variable (if any) aligns with the intended behavior of the application. If the product name is to be rendered as an Arabic string, it should be verified for correctness and consistency.",
+          "suggestion": "Ensure proper rendering of {{productName}} variable in the Arabic UI."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Azerbaijani translation uses 'yaddaş kvotasını' which translates to 'memory quota'. It's better to use a more general term for 'storage quota'.",
-          "suggestion": "Replace 'yaddaş kvotasını' with 'saxlama kvotasını'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"zvyšte úložnou kvótu\" (increase the storage quota) doesn't align perfectly with the original English instruction to 'increase the storage quota'. A more accurate translation would imply getting the quota increased *by* the administrator, rather than the user increasing it themselves. While not strictly incorrect, it could mislead the user.",
-          "suggestion": "Odstraňte nepotřebné soubory nebo kontaktujte administrátora {{productName}}, aby zvýšil úložnou kvótu."
+          "description": "The phrase 'zvyšte úložnou kvótu' literally translates to 'increase the storage quota', which while technically correct, is less natural in Czech. A more idiomatic phrasing would be 'zvýšit úložný limit'.",
+          "suggestion": "Odstraňte nepotřebné soubory nebo kontaktujte administrátora {{productName}} a zvyšte úložný limit."
         }
       ],
       "approved_at": null
@@ -65,8 +70,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The hyphenated word 'Speicherquo­te' is incorrectly formatted. It should be 'Speicherquote'.",
+          "type": "spelling",
+          "description": "The word 'Speicherquo­te' has a hyphenated typo. It should be 'Speicherquote'.",
           "suggestion": "Speicherquote"
         }
       ],
@@ -89,9 +94,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The verb 'lisätäksesi' (to increase) is slightly awkward in this context. A more natural phrasing would be 'nostaa' or 'kasvattaa'.",
-          "suggestion": "Poista tarpeettomat tiedostot tai ota yhteyttä {{productName}} nostaaksesi muistikiintiötä."
+          "type": "grammar",
+          "description": "The verb 'ottaa' (to take) is awkward in this context. It sounds unnatural to 'take contact' with someone. A more natural phrasing would be 'ota yhteyttä' (contact).",
+          "suggestion": "ota yhteyttä"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'lisätäksesi' (to increase) is grammatically correct, but 'ota yhteyttä {{productName}} lisätäksesi muistikiintiötä' feels a bit clunky. It might be more natural to rephrase the second part. Consider 'ota yhteyttä {{productName}} saadaksesi enemmän muistia' (contact {{productName}} to get more storage).",
+          "suggestion": "ota yhteyttä {{productName}} saadaksesi enemmän muistia"
         }
       ],
       "approved_at": null
@@ -105,7 +115,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation uses a colon (:) after 'ադմինիստրատորի հետ' which is not standard for this type of sentence structure in Armenian. It creates an awkward reading experience.",
+          "suggestion": "Remove the colon after 'ադմինիստրատորի հետ'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -120,8 +136,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ストレージ容量制限の増量を希望する場合は\" is a bit overly formal and verbose. A more natural translation of 'increase the storage quota' would be something like 'ストレージ容量の増加をご希望の場合は'.",
-          "suggestion": "不要なファイルを削除するか、ストレージ容量の増加をご希望の場合は、{{productName}}の管理者までご連絡ください。"
+          "description": "The phrase \"ストレージ容量制限の増量を希望する場合は\" is a bit formal and indirect. A more natural and direct translation of 'increase the storage quota' would be something like \"ストレージ容量の増量をご希望の場合は\" or \"ストレージ容量を増量したい場合は\".",
+          "suggestion": "不要なファイルを削除するか、ストレージ容量を増量したい場合は、{{productName}}の管理者までご連絡ください。"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a major issue, the sentence structure is slightly long. Consider breaking it into two shorter sentences for better readability.",
+          "suggestion": "不要なファイルを削除してください。ストレージ容量を増量したい場合は、{{productName}}の管理者までご連絡ください。"
         }
       ],
       "approved_at": null
@@ -129,7 +150,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses a polite imperative ending ('-세요'). While grammatically correct, it might be overly formal for a user interface element. Consider a slightly more casual tone depending on the product's overall voice.",
+          "suggestion": "Consider a less formal ending, potentially '-아/어 주세요' depending on the context and desired tone."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -138,13 +165,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'remove the unnecessary files' is not accurately reflected in the Lao translation. 'ລົບລ້າງ' (loblang) implies cancellation or repeal, which doesn't quite capture the meaning of removing files for the purpose of freeing up space.",
-          "suggestion": "Consider using a phrase like 'ລົບຖິ້ມ' (lobtim) which means 'to discard' or 'to delete', or 'ລົບອກ' (loboek) which means to remove."
+          "description": "The word 'remove' (ລົບ) is too strong. A more appropriate word would be 'delete' or 'eliminate'. However, a softer approach like 'reduce' might be even better depending on the context of the user action.",
+          "suggestion": "Consider using a less forceful word like 'reduce' (ຫຼຸດຜ່ອນ) or 'eliminate' (ລົບລ້າງ) instead of 'remove' (ລົບ)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'increase the storage quota' is a bit literal and might not flow naturally in Lao.  'ເພີ່ມກໍາລັງຄວາມຈໍາ' (pheum kamlang khwam jam) is understandable but could be improved for better flow.",
-          "suggestion": "Consider 'ເພີ່ມຂະໜາດຄວາມຈໍາ' (pheum khanasat khwam jam) which translates to 'increase storage capacity' or 'ເພີ່ມຈຳນວນຄວາມຈຳ' (pheum chamnuan khwam jam) which means 'increase the amount of memory'."
+          "description": "While 'ກໍາລັງຄວາມຈໍາ' (kamlang kwam jam) technically translates to 'storage capacity', a more natural and widely understood term in Lao for 'storage quota' would be 'ພື້ນທີ່ຈັດສັນ' (pheun tee jat san).",
+          "suggestion": "Replace 'ກໍາລັງຄວາມຈໍາ' with 'ພື້ນທີ່ຈັດສັນ'."
         }
       ],
       "approved_at": null
@@ -166,9 +193,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The variable {{productName}} is not properly formatted. While it's present, ensuring consistency with other variables is important.",
-          "suggestion": "Verify that {{productName}} is used consistently throughout the application and is correctly formatted in all contexts."
+          "type": "incorrect_translation",
+          "description": "The phrase \"limit pamięci\" (memory limit) doesn't precisely match \"storage quota\". It's a reasonable approximation, but 'przestrzeń dyskowa' or 'przestrzeń' would be more accurate.",
+          "suggestion": "Usuń niepotrzebne pliki lub skontaktuj się z administratorem {{productName}}, aby zwiększyć przestrzeń dyskową."
         }
       ],
       "approved_at": null
@@ -197,8 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The double curly braces `{{productName}}` are not necessary in the Russian translation. They should be replaced with the actual product name directly.",
-          "suggestion": "Удалите ненужные файлы или обратитесь к администратору [productName], чтобы увеличить квоту хранилища."
+          "description": "The use of \"квоту хранилища\" is somewhat redundant. \"квоту\" is sufficient to convey the meaning of storage quota.",
+          "suggestion": "Удалите ненужные файлы или обратитесь к администратору {{productName}}, чтобы увеличить квоту."
         }
       ],
       "approved_at": null
@@ -209,8 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'අමතන්න' (amathanna) might be better replaced with 'අමතන්න' (amathanna) in this context. 'අමතන්න' is a more common and appropriate phrasing for contacting someone.",
-          "suggestion": "අමතන්න"
+          "description": "The word 'ගබඩා' (gabada) is a good translation of 'storage', but a more common and natural word might be 'depa'.",
+          "suggestion": "depa කෝටාව (depa kotawa)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'හෝ {{productName}} පරිපාලක අමතන්න' (ho {{productName}} paripalaka amatanna) could be slightly improved for flow. 'හෝ {{productName}} පරිපාලකවරයාගෙන් අමතාන්න' is a more natural phrasing.",
+          "suggestion": "හෝ {{productName}} පරිපාලකවරයාගෙන් අමතාන්න"
         }
       ],
       "approved_at": null
@@ -230,13 +262,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation of 'Remove' is not quite accurate in this context. 'Уклоните' implies a forceful removal which may be too strong. A more suitable word would be 'Удалите' which means 'delete'.",
-          "suggestion": "Удалите непотребне датотеке или контактирајте {{productName}} администратора да бисте повећали складишну квоту."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -256,14 +282,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The variable {{productName}} is not consistently formatted.  It should be enclosed in double curly braces.",
-          "suggestion": "Replace \"{{productName}}\" with \"{{productName}}\""
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The phrase 'increase the storage quota' is better translated as something more natural in Ukrainian. 'підвищити квоту пам'яті' can sound awkward. Consider alternatives.",
-          "suggestion": "Consider alternatives such as 'збільште обсяг пам’яті' or 'збільште ліміт пам'яті'"
+          "description": "The phrase 'increase the storage quota' is translated as 'підвищити квоту пам'яті'. While technically correct, 'збільшити ліміт сховища' or 'збільшити обсяг сховища' might be more natural and user-friendly in Ukrainian, especially when referring to storage quota.",
+          "suggestion": "Збільште ліміт сховища"
         }
       ],
       "approved_at": null
@@ -279,9 +300,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'increase the storage quota' is not the most natural or accurate translation of 'increase the storage quota'. While technically correct, a more common and natural phrasing would be '提升存储配额'.",
-          "suggestion": "提升存储配额"
+          "type": "formatting",
+          "description": "The Chinese translation uses a full stop (。) at the end of the sentence. It might be more appropriate to use an ellipsis (...) to indicate a continuation or suggestion, aligning better with the English original's implied continuation of options.",
+          "suggestion": "删除不需要的文件或联系{{productName}}管理员增加存储配额..."
         }
       ],
       "approved_at": null

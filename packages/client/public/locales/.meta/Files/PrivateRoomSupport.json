@@ -3,7 +3,7 @@
   "content": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "content_en_sha1_hash": "e819786ec6afd5c83c2b4659d21c2a8e4f27e967",
   "created_at": "2025-05-19T21:30:56.000Z",
-  "updated_at": "2025-05-21T11:31:28.777Z",
+  "updated_at": "2025-06-02T10:20:51.021Z",
   "comment": {
     "text": "This translation key is used to display instructions on how to access the \"Work in Private Room\" feature via a desktop app. It provides context about the availability of this feature through a specific organization's app.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 160,
+      "line_number": 162,
       "context": "</div>\n ))}\n </Text>\n {!isDesktop ? (\n <Text fontSize=\"12px\">\n <Trans t={t} i18nKey=\"PrivateRoomSupport\" ns=\"Files\">\n Work in Private Room is available via{\" \"}\n {{ organizationName: logoText }} desktop app.\n <Link\n isBold\n isHovered",
       "module": "/packages/client"
     }
@@ -29,14 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Work in Private Room\" is not accurately translated. \"العمل في الغرفة الخاصة\" literally translates to 'Work in the private room', it would be better to convey the meaning as 'Private Room functionality' or similar, to match the English context of a feature.",
-          "suggestion": "العمل في الغرفة الخاصة could be replaced with something like \"دعم الغرف الخاصة\" (Private Room Support) or \"خاصية الغرف الخاصة\" (Private Room Feature)."
-        },
-        {
           "type": "formatting",
-          "description": "The heart emoji (<3>) and closing angle bracket are not standard Arabic punctuation and might not render correctly or appear natural to Arabic readers.  It's unclear why it was included and how it translates.",
-          "suggestion": "Remove the heart emoji and closing angle bracket. If the intention was to convey emotion, consider using a more culturally appropriate alternative (though often best to avoid altogether in technical documentation)."
+          "description": "The heart emoji (<3>) and instruction tags (<3> تعليمات </3>) are not correctly rendered or consistently formatted.  The Arabic tag uses a different closing tag.</br> Ideally the tags and emojis should be consistent across languages.",
+          "suggestion": "Ensure consistent formatting of HTML tags and emojis for all languages. Consider if the emojis and tags are necessary for the Arabic translation. If so, replace with equivalent Arabic emojis if possible and adjust tags to be consistent (e.g. <3> تعليمات </3> becomes <3> تعليمات </3>)."
         }
       ],
       "approved_at": null
@@ -47,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<3>` are not standard and may not render correctly in Azerbaijani contexts. Consider removing or replacing them with a more appropriate symbol or styling.",
-          "suggestion": "Remove `<3>` or replace with a more appropriate emoji or styling that is culturally acceptable in Azerbaijani."
+          "description": "The heart emoji (<3>) is not properly rendered in Azerbaijani. It may display as a box or other unexpected character.",
+          "suggestion": "Consider removing the emoji or using a more universally supported equivalent if visual representation is crucial. Alternatively, explore Azerbaijani equivalents if available."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Şəxsi Otaqda işləmək {{organizationName}} masa üstü tətbiqi ilə mümkündür' could be slightly improved for better flow. 'İlə' sounds a little abrupt. A more natural phrasing might use a connective word like 'vasitəsilə' or 'təqdim edilir'.",
+          "suggestion": "Şəxsi Otaqda işləmək {{organizationName}} masa üstü tətbiqi vasitəsilə mümkündür."
         }
       ],
       "approved_at": null
@@ -56,13 +56,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The heart emoji (<3>) is not properly rendered in the Bulgarian translation. It should be replaced with a culturally appropriate alternative if a similar visual cue is desired.",
-          "suggestion": "Consider replacing <3> with a suitable Bulgarian equivalent if visual cues are important, or removing it entirely."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -77,13 +71,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Work in Private Room\" is translated as \"Privaträume\". While \"Privaträume\" is technically correct, it's more accurately translated as \"Nutzung von Privaträumen\" or \"Arbeiten in Privaträumen\" to maintain the original meaning of performing work within a private room.",
-          "suggestion": "Nutzung von Privaträumen"
+          "description": "The English phrase \"Work in Private Room\" is translated as \"Privaträume\". While \"Privaträume\" is understandable, a more accurate translation reflecting the intended meaning of *working* in a private room might be \"Arbeiten in privaten Räumen\" or \"Die Arbeit in privaten Räumen\".",
+          "suggestion": "Arbeiten in privaten Räumen"
         },
         {
           "type": "formatting",
-          "description": "The English content uses \"<3>Instructions</3>\", which seems to be an attempt at an emoji and a header. The German translation uses \"<3>Informationen</3>\". While both attempt the same visual representation, 'Informationen' isn't a direct translation of 'Instructions' and the visual/formatting intent is likely lost in translation. A more appropriate approach might be to consider a direct translation or a culturally equivalent expression for 'Instructions'.",
-          "suggestion": "Anpassung der Formatierung, um die ursprüngliche Absicht beizubehalten, oder Verwendung einer direkten Übersetzung wie 'Anleitungen'."
+          "description": "The English content uses \"<3>Instructions</3>\", which translates to \"<3>Informationen</3>\". While the heart emoji is maintained, the word \"Instructions\" is better translated as \"Anleitungen\" or \"So funktioniert es\".",
+          "suggestion": "<3>So funktioniert es</3>"
         }
       ],
       "approved_at": null
@@ -94,13 +88,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The heart emoji (<3>) is present in both the English and Greek versions. Ensure this is the intended formatting and aligns with the overall style guide.",
-          "suggestion": "Verify the purpose and intended effect of the heart emoji in the context and ensure it is consistent with branding guidelines."
+          "description": "The heart symbol (<3>) is retained in the Greek translation. While not inherently wrong, it might not be culturally appropriate or visually appealing in all contexts. Consider whether it aligns with the overall brand tone and audience expectations.",
+          "suggestion": "Evaluate whether to keep the heart symbol. If not, remove it or replace it with a more suitable alternative (e.g., an emoticon, or simply remove it)."
         },
         {
-          "type": "translation",
-          "description": "While 'Η εργασία σε ιδιωτικό δωμάτιο' is generally correct, it could be slightly improved for flow and naturalness. 'Εργασία σε ιδιωτικό δωμάτιο' would be more common and reads more smoothly.",
-          "suggestion": "Consider changing 'Η εργασία σε ιδιωτικό δωμάτιο' to 'Εργασία σε ιδιωτικό δωμάτιο'."
+          "type": "spelling",
+          "description": "The word 'Desktop' isn't capitalized in the Greek translation, while it is in the English version. This creates an inconsistency.",
+          "suggestion": "Capitalize 'Desktop' in the Greek translation to match the original: \"Η εργασία σε ιδιωτικό δωμάτιο είναι διαθέσιμη μέσω της εφαρμογής Desktop {{organizationName}}. <3>Οδηγίες</3>\" "
         }
       ],
       "approved_at": null
@@ -111,8 +105,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Work in Private Room' is not perfectly translated. 'El trabajo en la sala privada' is a literal translation, but a more natural phrasing might be 'Trabajar en una sala privada' or 'Acceder a una sala privada'.",
-          "suggestion": "Trabajar en una sala privada"
+          "description": "The phrase 'Work in Private Room' is awkwardly translated as 'El trabajo en la sala privada'. A more natural translation would be 'Trabajar en una sala privada' or 'El trabajo en una sala privada es posible'.",
+          "suggestion": "Trabajar en una sala privada es posible a través de la aplicación de escritorio {{organizationName}}. <3>Instrucciones</3>"
         }
       ],
       "approved_at": null
@@ -123,13 +117,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Work in Private Room\" is not accurately translated. A more natural Finnish translation would be something like \"Työskentely erillisessä tilassa\" or \"Työskentely omassa tilassa\". \"Työskentely yksityishuoneessa\" implies a very specific, designated 'private room'.",
-          "suggestion": "Työskentely erillisessä tilassa"
+          "description": "The phrase \"Work in Private Room\" is not accurately translated. \"Työskentely yksityishuoneessa\" literally means 'working in a private room' but lacks the nuance of 'support for private rooms' or 'private room functionality'.",
+          "suggestion": "Consider a translation like \"Yksityishuoneen tuki\" (Private Room support) or \"Yksityishuoneen käytön tuki\" (Support for using private rooms)."
         },
         {
           "type": "formatting",
-          "description": "The emoticons (<3>) are not standard for Finnish text and might look out of place. While not strictly an error, they may detract from professionalism depending on the target audience.",
-          "suggestion": "Remove or replace the emoticons with a more culturally appropriate alternative or simply remove them."
+          "description": "The heart emoji '<3>' is not culturally appropriate or common in formal Finnish communication. It's unusual to see this in a professional context.",
+          "suggestion": "Remove the heart emoji entirely."
         }
       ],
       "approved_at": null
@@ -140,8 +134,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Work in Private Room\" is not ideally translated to \"Le travail dans la Salle Privée\". A more natural translation would be something like \"Travailler dans une salle privée\" or \"Possibilité de travailler dans une salle privée\".  'Salle Privée' is technically correct, but 'une salle privée' flows better in French.",
-          "suggestion": "Travailler dans une salle privée"
+          "description": "The term 'Private Room' is best translated as 'Pièce Privée' or 'Local Privé' depending on the context. 'Salle Privée' implies a room specifically designed for privacy, like a meeting room, which might not be the intended meaning. The best option depends on the specific type of 'Private Room' being referred to.",
+          "suggestion": "Consider 'Le travail dans la Pièce Privée est disponible via l'application de bureau {{organizationName}}. <3>Instructions</3> or Le travail dans le Local Privé est disponible via l'application de bureau {{organizationName}}. <3>Instructions</3> "
         }
       ],
       "approved_at": null
@@ -152,13 +146,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"desktop app\" is translated as \"սեղանի գործադիր\". While technically meaning 'desk executive', it's not the standard translation for a desktop application. A more accurate translation would be something like \"կոմպյութերային հավելված\" (computer application) or \"աշխատասեղանի ծրագիր\" (desktop program).",
-          "suggestion": "Մասնավոր սենյակում աշխատանքը հասանելի է {{organizationName}} կոմպյութերային հավելվածի/աշխատասեղանի ծրագրի միջոցով։"
+          "description": "The phrase \"desktop app\" is translated as \"սեղանի գործադիր\" which is not the standard or accurate translation. It's more accurately translated as 'desktops այլավելության ծրագիր' or 'աշխատասեղանի հավելյալ ծրագիր'.",
+          "suggestion": "Մասնավոր սենյակում աշխատանքը հասանելի է {{organizationName}} աշխատասեղանի հավելյալ ծրագիր:"
         },
         {
           "type": "formatting",
-          "description": "The <3> emoji is unusual in Armenian professional contexts. It might be better to replace it with a more neutral symbol or remove it entirely.",
-          "suggestion": "Remove the <3> emoji, or replace it with a more appropriate Armenian equivalent if needed."
+          "description": "The `<3>` emoji is retained in the Armenian translation, which might not be culturally appropriate or visually consistent.",
+          "suggestion": "Remove the `<3>` emoji or replace it with a culturally appropriate equivalent (if any)."
         }
       ],
       "approved_at": null
@@ -169,13 +163,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Work in Private Room\" is not accurately translated. A more natural Italian phrasing would be 'Lavorare nella stanza privata' or 'Possibilità di lavorare nella stanza privata'. The current translation, 'Il lavoro nella stanza privata' is grammatically correct, but sounds slightly unnatural and passive.",
+          "description": "The phrase 'Work in Private Room' is better translated as 'Lavorare nella stanza privata' or 'Possibilità di lavorare nella stanza privata'. 'Il lavoro nella stanza privata' is grammatically correct but sounds slightly awkward in Italian in this context.",
           "suggestion": "Lavorare nella stanza privata"
         },
         {
           "type": "incorrect_translation",
-          "description": "The preposition 'tramite' might not be the most natural choice for indicating availability via an application. 'Attraverso' or simply removing it would improve flow.",
-          "suggestion": "Il lavoro nella stanza privata è disponibile via {{organizationName}} applicazione desktop. <3>Istruzioni</3>"
+          "description": "The word 'tramite' is a bit formal and not the most natural choice here. 'via' is acceptable, but a more common and flowing option would be something like 'attraverso'.",
+          "suggestion": "attraverso"
         }
       ],
       "approved_at": null
@@ -186,8 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The English content includes a heart emoji (<3>), which is not reflected in the Japanese translation. The Japanese translation uses '操作方法' which is a direct translation of 'Instructions' but doesn't convey the same tone.",
-          "suggestion": "Consider adding an equivalent emoji or adjusting the tone of '操作方法' to better match the original English content's friendly feel. For example, something like '操作方法<3>'"
+          "description": "The English content uses '<3>' which is an informal representation of a heart. The Japanese translation uses '<3>操作方法</3>'. While '操作方法' (operating instructions) is a suitable translation for 'Instructions', the visual representation of the heart is lost and may seem out of place in a formal Japanese context.",
+          "suggestion": "Consider removing the heart emoji/symbol entirely or finding a culturally appropriate Japanese equivalent if a visual element is desired. For example, you could use a simple graphic or icon that signifies support or guidance."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"プライベートルームでの作業は、{{organizationName}}デスクトップアプリで可能です\" is technically correct, a more natural and fluent translation might use \"{{organizationName}}デスクトップアプリでプライベートルームでの作業ができます\" or \"{{organizationName}}デスクトップアプリを使用してプライベートルームで作業できます\". The original phrasing is slightly less common in Japanese.",
+          "suggestion": "プライベートルームでの作業は、{{organizationName}}デスクトップアプリを使用して可能です。(Private Room work is available through the {{organizationName}} desktop app.)"
         }
       ],
       "approved_at": null
@@ -197,9 +196,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Work in Private Room' is somewhat awkward. A more natural translation might be 'Private Room 사용' or 'Private Room에서 작업'. The current translation implies 'working' in the general sense rather than using the feature.",
+          "suggestion": "Private Room 사용을 통해 작업할 수 있습니다."
+        },
+        {
           "type": "formatting",
-          "description": "The Korean translation retains the original English emoticon `<3>`. While not inherently incorrect, it might appear unusual in a Korean context. Consider replacing it with a more culturally appropriate expression of affection or removing it entirely.",
-          "suggestion": "Consider replacing `<3>` with a Korean equivalent of affection (e.g., ♥) or removing it."
+          "description": "The English uses '<3>Instructions</3>'. The Korean translation uses '<3>설명</3>'. The symbols are different. While not inherently wrong, maintaining consistency is recommended.",
+          "suggestion": "Consider changing '<3>' to '<3>' to match the English original, or remove the symbol altogether."
         }
       ],
       "approved_at": null
@@ -210,13 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation uses `<3>` and `</3>` which are not standard Lao punctuation or formatting and likely do not convey the intended meaning. They seem to be mimicking the English version's use of an emoticon.",
-          "suggestion": "Remove the `<3>` and `</3>` or replace them with a more culturally appropriate Lao equivalent if a heart emoticon is desired (e.g., ❤️ or a brief descriptive phrase)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While the translation is generally accurate, 'ເຮັດວຽກຢູ່ໃນຫ້ອງສ່ວນຕົວ' (hed viak yoo hong suan tua) is a slightly verbose way to say \"Work in Private Room.\" A more concise translation might improve readability.",
-          "suggestion": "Consider a more concise phrasing like 'ເຮັດວຽກໃນຫ້ອງສ່ວນຕົວ' (hed viak nyu hong suan tua)."
+          "description": "The Lao translation retains the emoticons (<3) from the English content. While not inherently incorrect, it's best to review if these are culturally appropriate for the Lao audience and align with the overall brand voice.  They might be perceived as overly informal.",
+          "suggestion": "Consider removing or replacing the emoticon with a more culturally appropriate alternative, or removing it entirely."
         }
       ],
       "approved_at": null
@@ -224,30 +223,31 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The heart emoji (<3>) is not rendered correctly in the Latvian translation, or its meaning might be lost. Consider replacing with a culturally appropriate alternative or removing it.",
+          "suggestion": "Consider removing the heart emoji or replacing it with a more universally understood symbol in Latvian culture (e.g., a simple smiley face or a more formal punctuation mark)."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Private Room' is literally translated to 'Privé Kamer'. While understandable, 'Persoonlijke Ruimte' or 'Afgesloten Ruimte' might be more natural and idiomatic Dutch for a private workspace.",
-          "suggestion": "Consider translating 'Private Room' as 'Persoonlijke Ruimte' or 'Afgesloten Ruimte' depending on the context."
-        },
-        {
-          "type": "formatting",
-          "description": "The heart emoji (<3>) and the tag <3>Instructies</3> appear to have been copied verbatim from the English version. It is recommended to confirm the desired format for these elements in the Dutch version. They might require adaptation for cultural appropriateness or design consistency.",
-          "suggestion": "Review the intended visual representation of the heart emoji and the 'Instructions' tag within the Dutch application/interface. Consider localizing the tag if necessary (e.g., 'Instructies')."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The heart emoji (<3>) is not consistently rendered across all systems and may not display correctly for all users. Consider replacing with a text alternative or removing it.",
+          "suggestion": "Replace <3> with a textual equivalent like 'Miłość' or remove it entirely."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -256,7 +256,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Work in Private Room\" is a bit awkward. A more natural translation might be \"Trabalhar na Sala Privada\" or \"Realizar trabalho na Sala Privada\".",
+          "description": "The English phrase \"Work in Private Room\" is best translated as \"Trabalhar na Sala Privada\" or \"Realizar trabalho na Sala Privada\" to be more natural in Portuguese. \"O trabalho na Sala Privada\" is grammatically correct but less idiomatic.",
           "suggestion": "Trabalhar na Sala Privada"
         }
       ],
@@ -274,13 +274,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Work in Private Room' is not accurately reflected in the Romanian translation 'Sala Privată'.  'Sala Privată' simply means 'Private Room' and misses the 'Work in' aspect. A more accurate translation would incorporate the action of working.",
-          "suggestion": "Lucrul în Sala Privată este disponibil..."
+          "description": "The phrase \"Work in Private Room\" is translated as \"Sala Privată\". While technically correct, it doesn't fully capture the nuance of 'Work in'. A better translation might be \"Posibilitatea de a lucra în Sala Privată\" or a more concise \"Lucrul în Sala Privată\".",
+          "suggestion": "Lucrul în Sala Privată"
         },
         {
           "type": "formatting",
-          "description": "The `<3>` emoji is retained in the translation. While not inherently wrong, it might be stylistically inappropriate depending on the target audience and brand guidelines.",
-          "suggestion": "Consider removing the `<3>` or replacing it with a more suitable equivalent for Romanian culture if necessary."
+          "description": "The English content uses '<3>Instructions</3>'. The Romanian translation replicates this, but it's a stylistic choice. While acceptable, consider if a more standard Romanian format for instructions would be better.",
+          "suggestion": "Instrucțiuni"
         }
       ],
       "approved_at": null
@@ -291,8 +291,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Private Room\" is translated as \"Приватной комнате\". While technically correct, a more natural and commonly used translation would be \"Личная комната\" or \"Комната для переговоров\" depending on the specific context. \"Приватная комната\" sounds a bit awkward in Russian.",
-          "suggestion": "Consider using \"Личная комната\" or \"Комната для переговоров\" instead of \"Приватной комнате\"."
+          "description": "The phrase \"Private Room\" is translated as \"Приватной комнате\". While \"Приватная\" is acceptable, \"Личная комната\" or \"Засекреченная комната\" might be more appropriate depending on the intended meaning and the context of 'Private Room'. \"Приватная\" leans more towards something private, but not necessarily confidential or exclusive.",
+          "suggestion": "Consider translating \"Private Room\" as \"Личная комната\" or \"Засекреченная комната\" for better accuracy, if the meaning is meant to be a confidential or exclusive space."
+        },
+        {
+          "type": "formatting",
+          "description": "The heart emoji (<3>) is present in both the source and translated text. While acceptable, consider whether it aligns with the brand's tone and style in Russian-speaking contexts. It might be considered overly informal or unprofessional.",
+          "suggestion": "Evaluate whether the heart emoji is appropriate for the target audience and context. If not, remove it."
         }
       ],
       "approved_at": null
@@ -302,14 +307,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Work in Private Room' is translated as 'පෞද්ගලික කාමරයේ වැඩ කිරීමට'. A more accurate translation considering the context of a desktop app would be something along the lines of 'මාර්ගගත පෞද්ගලික කාමරයෙන් වැඩ කිරීම'.",
-          "suggestion": "මාර්ගගත පෞද්ගලික කාමරයෙන් වැඩ කිරීම"
+          "type": "formatting",
+          "description": "The heart emoji (<3>) is not rendered correctly in Sinhala. It should ideally be replaced with a culturally appropriate equivalent, or removed if it doesn't translate well.",
+          "suggestion": "Consider replacing <3> with a different symbol or removing it entirely. A simple ellipsis (...) could be a suitable alternative if the intention is to indicate additional information."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'is available via' is translated as 'හරහා'. While technically correct, it's not the most natural or idiomatic translation in this context. A better option would convey the meaning of 'can be done through' or 'accessible through'.",
-          "suggestion": "මැසිනි"
+          "description": "The English phrase 'Work in Private Room' is translated as 'පෞද්ගලික කාමරයේ වැඩ කිරීමට'. A more accurate translation might be 'පෞද්ගලික කාමරයේ වැඩ කිරීම' or 'පෞද්ගලික කාමරයෙන් වැඩ කිරීම'. The current phrasing can be interpreted as 'to work in the private room'.",
+          "suggestion": "Change 'පෞද්ගලික කාමරයේ වැඩ කිරීමට' to 'පෞද්ගලික කාමරයෙන් වැඩ කිරීම' or 'පෞද්ගලික කාමරයේ වැඩ කිරීම'."
         }
       ],
       "approved_at": null
@@ -317,13 +322,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The heart emoji (<3>) is not properly rendered in the Slovak translation. It needs to be replaced with a culturally appropriate alternative or removed.",
-          "suggestion": "Remove the heart emoji or replace it with a suitable alternative, such as a smiley face or a more formal indicator of further information."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -338,7 +337,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Рад' should be 'Рад у'.",
+          "description": "The word 'Рад' (Rad) should be 'Рад у' (Rad u) for correct grammatical structure in Serbian. It needs a preposition 'u' (in).",
           "suggestion": "Рад у Приватној cоби је доступан путем {{organizationName}} десктоп апликације. <3>Инструкције</3>"
         }
       ],
@@ -350,8 +349,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The heart emoji (<3>) is not standard in Serbian and might not render correctly or be understood as intended. It's likely best to remove it or replace it with a more culturally appropriate symbol if sentiment is desired.",
-          "suggestion": "Consider removing the heart emoji or replacing it with something more appropriate for the target audience."
+          "description": "The original English content uses angled brackets '<3>Instructions</3>' for a heart emoji and a heading. The Serbian translation mirrors this formatting exactly, which might not be standard or expected in Serbian. Consider if a more culturally appropriate alternative exists.",
+          "suggestion": "Consider replacing '<3>Instrukcije</3>' with a different format for the heart emoji and 'Instructions'. For example, a simple heart icon or a standard heading."
         }
       ],
       "approved_at": null
@@ -362,13 +361,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The heart emoji (<3>) is not consistently translated or adapted for the Turkish language.  It might appear as a foreign element and disrupt the reading flow.",
-          "suggestion": "Consider replacing the heart emoji with a culturally appropriate equivalent or removing it entirely. For example, you could replace it with a simple '!' or omit it."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English '<3>Instructions</3>' has been translated as '<3>Kullanma Talimatları</3>'. While 'Kullanma Talimatları' is accurate for 'Instructions,' the heart emoji is inconsistent and disrupts the intended tone.",
-          "suggestion": "Translate '<3>Instructions</3>' to '<Talimatlar>' or simply '<Talimat>' for a cleaner and more professional presentation. If visual styling is important, consider a different icon to represent instructions that is commonly used in Turkish interfaces."
+          "description": "The heart emoji (<3>) is present in the English content but is inconsistently applied in the Turkish translation. It should be included for consistency.",
+          "suggestion": "Include the heart emoji (<3>) after 'Özel Odada Çalışma' to match the original English content."
         }
       ],
       "approved_at": null
@@ -376,13 +370,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The heart emoji (<3>) is not properly rendered in Ukrainian and might display incorrectly or as a different character.  Consider replacing it with a more universally supported character or removing it.",
-          "suggestion": "Consider replacing <3> with a suitable Ukrainian equivalent of 'love' or removing it entirely."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -391,18 +379,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Work in Private Room\" is not accurately translated. \"Làm việc trong Phòng Riêng\" is a literal translation but doesn't convey the intended meaning of utilizing a private room feature.",
-          "suggestion": "Consider a translation that conveys the functionality, such as \"Sử dụng Phòng Riêng\" or \"Sử dụng tính năng Phòng Riêng\"."
+          "description": "The phrase 'Work in Private Room' is not accurately translated. 'Làm việc trong Phòng Riêng' is a literal translation but doesn't fully convey the meaning. A more natural translation would be something like 'Sử dụng Phòng Riêng' or 'Sử dụng tính năng Phòng Riêng'.",
+          "suggestion": "Sử dụng tính năng Phòng Riêng"
         },
         {
           "type": "formatting",
-          "description": "The English version uses `{{organizationName}}` which should be consistently applied in the Vietnamese translation. However, the Vietnamese version includes a space before the variable.",
-          "suggestion": "Remove the space before `{{organizationName}}` to match the English source: `ứng dụng máy tính{{organizationName}}`."
+          "description": "The English content uses `{{organizationName}}` and the Vietnamese translation does the same. It’s important to ensure this placeholder is consistently handled across languages.",
+          "suggestion": "Maintain the `{{organizationName}}` placeholder."
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'Máy tính' should be 'máy tính' (lowercase) for better readability and natural flow in Vietnamese.",
-          "suggestion": "Change 'Máy tính' to 'máy tính'."
+          "type": "grammar",
+          "description": "The sentence 'Làm việc trong Phòng Riêng có sẵn qua ứng dụng máy tính{{organizationName}} .' sounds slightly awkward. Adding a connector like 'thông qua' would improve flow.",
+          "suggestion": "Làm việc trong Phòng Riêng có sẵn thông qua ứng dụng máy tính{{organizationName}} ."
         }
       ],
       "approved_at": null
@@ -413,13 +401,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The English content uses '<3>' which is an emoticon. The Chinese translation doesn't include an equivalent emoticon. While not strictly an error, it changes the tone slightly.",
-          "suggestion": "Consider adding a Chinese equivalent of '<3>' if the original intent is to convey a friendly or affectionate tone. For example, you could use '❤' or '喜欢'."
+          "description": "The heart emoji (<3>) is not properly represented in the Chinese translation. It appears as literal characters.",
+          "suggestion": "Consider using a Chinese equivalent for the heart emoji or removing it if a direct translation isn't possible and the meaning isn't essential."
         },
         {
-          "type": "formatting",
-          "description": "The English content uses '</3>' as a closing tag. The Chinese translation uses '</3>操作指南'.  While technically not an error, the consistency of the closing tag should be reviewed. Is '</3>' the intended closing tag, or should a different tag be used?",
-          "suggestion": "Review and standardize the closing tag. If '</3>' is intended, make sure it’s consistently used."
+          "type": "incorrect_translation",
+          "description": "The original English phrase 'Work in Private Room' is translated as '您可在{{organizationName}}桌面应用中使用私密房间.' While understandable, a more natural translation might be '您可以通过{{organizationName}}桌面应用使用私密房间.'  The original wording implies 'Work' is something *being done* in the room, which is lost in the current translation. The corrected version better conveys the functionality.",
+          "suggestion": "您可以通过{{organizationName}}桌面应用使用私密房间。"
         }
       ],
       "approved_at": null

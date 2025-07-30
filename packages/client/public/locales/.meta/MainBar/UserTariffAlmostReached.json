@@ -3,7 +3,7 @@
   "content": "Once the limit is reached, all users will be added with User permissions only. To be able to add further admins, contact the {{productName}} administrator to upgrade the tariff plan.",
   "content_en_sha1_hash": "cda48bdc25989133f4955c0489449ec589848282",
   "created_at": "2025-05-19T21:30:54.146Z",
-  "updated_at": "2025-07-01T15:57:35.912Z",
+  "updated_at": "2025-05-24T07:55:40.361Z",
   "comment": {
     "text": "This translation key is used to display a message that informs users when their tariff plan almost reaches its limit, indicating that only user permissions will be available. It appears in the UI as a notification or alert. The message encourages users to contact an administrator for assistance in upgrading their tariff plan.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
-      "line_number": 78,
+      "line_number": 75,
       "context": ");\n };\n \n const getUserTariffAlmostLimit = () => {\n if (!isAdmin)\n return t(\"UserTariffAlmostReached\", {\n productName: t(\"Common:ProductName\"),\n });\n \n return (\n <Trans",
       "module": "/packages/client"
     }
@@ -35,14 +35,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'To be able to add further admins' is slightly awkward. A more natural phrasing would improve readability.",
-          "suggestion": "Daha çox administrator əlavə etmək üçün..."
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is awkwardly translated. A more natural Azerbaijani phrasing would be needed.",
+          "suggestion": "Daha çox administrator əlavə etmək üçün…"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'To upgrade the tariff plan' could be more accurately translated as 'tarif planını yüksəltmək'.",
-          "suggestion": "tarif planını yüksəltmək üçün"
+          "description": "The word \"təkmilləşdirmək\" (to improve) in the context of a tariff plan doesn't quite fit. It implies general improvement, not necessarily upgrading to a higher tier.",
+          "suggestion": "yüksəltmək"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'əlavə etmək' feels slightly clunky.",
+          "suggestion": "Daha çox administrator üçün tarif planını yüksəltmək üçün…"
         }
       ],
       "approved_at": null
@@ -59,13 +64,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Chcete-li mít možnost přidávat další administrátory\" is a bit clunky. A more natural translation would be \"Pro přidání dalších administrátorů\" or \"Abyste mohli přidat další administrátory\".",
-          "suggestion": "Pro přidání dalších administrátorů"
+          "description": "The phrase \"oprávněním User (Uživatel)\" is awkward and redundant. 'Uživatel' is the Czech word for 'User', so including it in parentheses is unnecessary and disrupts the flow.",
+          "suggestion": "oprávněním uživatele"
         },
         {
           "type": "incorrect_translation",
-          "description": "The parenthetical “(Uživatel)” feels unnecessary and disrupts the flow. The term 'User' is already clearly understood in context.",
-          "suggestion": "Po dosažení limitu budou všichni uživatelé přidáni pouze s oprávněním User. Pro přidání dalších administrátorů kontaktujte administrátora {{productName}}, který provede upgrade tarifního plánu."
+          "description": "The sentence \"Chcete-li mít možnost přidávat další administrátory\" is overly formal and slightly awkward. A more natural phrasing would improve readability.",
+          "suggestion": "Pro přidávání dalších administrátorů"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"který provede upgrade tarifního plánu\" is a bit literal translation. It's more natural to say something like 'prove že upgrade tarifního plánu'.",
+          "suggestion": "provede upgrade tarifního plánu"
         }
       ],
       "approved_at": null
@@ -79,7 +89,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase \"τιμολογιακό σας πρόγραμμα\" is a bit clunky. A more natural Greek phrasing might improve readability.",
+          "suggestion": "τιμολογιακό σας πακέτο"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -94,18 +110,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"To be able to add further admins\" is not accurately translated. \"Voidaksesi lisätä pääkäyttäjiä\" implies that the user is *trying* to add admins, which isn't the intended meaning. The original means it will happen automatically when the limit is reached.",
-          "suggestion": "Kun raja on saavutettu, pääkäyttäjiä lisätään automaattisesti."
+          "description": "The phrase \"Käyttäjäoikeudet\" is a literal translation of \"User permissions\" but sounds awkward in Finnish. It would be more natural to use a term like \"käyttäjän oikeudet\" or simply \"käyttäjät\".",
+          "suggestion": "Kaikille käyttäjille lisätään vain käyttäjän oikeudet, kun raja on saavutettu."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"contact the {{productName}} administrator to upgrade the tariff plan\" is a bit wordy. While technically correct, it can be more concise and natural in Finnish.",
-          "suggestion": "ota yhteyttä {{productName}}:n ylläpitäjään tilauksen päivittämiseksi."
+          "description": "“Pääkäyttäjään” is a more formal translation of administrator and sounds unnatural in this context. It’s better to use a simpler equivalent.",
+          "suggestion": "Kaikille käyttäjille lisätään vain käyttäjän oikeudet, kun raja on saavutettu. Voidaksesi lisätä lisää ylläpitäjiä, ota yhteyttä {{productName}}:n ylläpitäjään päivittääksesi tilauksesi."
         },
         {
-          "type": "formatting",
-          "description": "The colon in '{{productName}}:n' seems a bit awkward. While grammatically acceptable, it's not the most natural flow in Finnish.",
-          "suggestion": "ota yhteyttä {{productName}}-ylläpitäjään tilauksen päivittämiseksi."
+          "type": "incorrect_translation",
+          "description": "The phrase 'päivittääksesi tilauksesi' is a rather literal translation. A more natural Finnish phrase would convey 'to upgrade the plan'.",
+          "suggestion": "Kaikille käyttäjille lisätään vain käyttäjän oikeudet, kun raja on saavutettu. Voidaksesi lisätä lisää ylläpitäjiä, ota yhteyttä {{productName}}:n ylläpitäjään, jotta voit päivittää tilauksesi."
         }
       ],
       "approved_at": null
@@ -122,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"To be able to add further admins\" is translated as \"Այլ ադմիններ ավելացնելու համար\". While technically correct, it's a bit clunky. A more natural phrasing might be something like \"եւս ադմիններ ավելացնելու համար\" or \"վայելացնելու համար ավելին ադմիններ\".",
-          "suggestion": "եւս ադմիններ ավելացնելու համար"
+          "description": "The phrase \"To be able to add further admins\" is translated as \"Այլ ադմիններ ավելացնելու համար\". While technically correct, a more natural and idiomatic Armenian translation would be something like \"ևս ադմիններ ավելացնելու համար\" (and to add more admins).",
+          "suggestion": "Այլ ադմիններ ավելացնելու համար → ևս ադմիններ ավելացնելու համար"
         }
       ],
       "approved_at": null
@@ -140,18 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Once the limit is reached' is not directly translated. The Japanese translation doesn't convey the sense of 'once' or 'upon reaching' the limit.",
-          "suggestion": "制限に達すると (restrictions reach) is acceptable, but a more direct translation of 'once the limit is reached' could be '制限に達した場合' (seitai ni tassu baai)."
+          "description": "The phrase \"To be able to add further admins\" is not accurately translated. \"Further admins\" implies adding more admins beyond the current ones. The Japanese translation doesn't convey this nuance. A more accurate translation would focus on the ability to *initially* add admins, or restoring admin privileges if they were lost.",
+          "suggestion": "管理者を追加できるようにするには (To be able to add administrators) or 管理者権限を回復するには (To restore administrator privileges)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'permissions' isn't explicitly translated, leaving it as '権限' (ken'gen). While technically correct, it lacks the nuance of 'user permissions'.",
-          "suggestion": "ユーザー権限のみ (yuuzaa ken'gen nomi) - explicitly states 'user permissions only'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'To be able to add further admins' is translated too literally. It could be more natural.",
-          "suggestion": "さらに管理者を追加するには (sarani kanri-sha o tsuika suru ni wa) is better, although slightly longer."
+          "description": "The phrase 'User permissions only' isn't perfectly conveyed. While 'ユーザー権限のみで追加されます' is understandable, a more accurate translation that captures the restriction would benefit from a more specific term for 'permissions' in this context.",
+          "suggestion": "ユーザー権限のみが付与された状態で追加されます (Users will be added with only user permissions applied)."
         }
       ],
       "approved_at": null
@@ -165,23 +176,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ເມື່ອບັນຫາຂีดຈຳກັດຖືກບັນລຸແລ້ວ\" is a somewhat awkward translation of \"Once the limit is reached\". A more natural translation would be something like \"ເມື່ອເຕືອນຂีดຈຳກັດແລ້ວ\" or \"ເມື່ອບັນລຸຂີດຈຳກັດແລ້ວ\".",
-          "suggestion": "ເມື່ອເຕືອນຂີດຈຳກັດແລ້ວ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ສິດການໃຊ້ງານຜູ້ໃຊ້\" translates literally to \"user usage rights\" but a better equivalent of \"User permissions\" would be something like \"ສິດການເຂົ້າໃຊ້ຜູ້ໃຊ້\" or simply \"ສິດຜູ້ໃຊ້\"",
-          "suggestion": "ສິດຜູ້ໃຊ້"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'ຍົກລະດັບ' is the correct term for upgrading, but in a context of subscription/tariffs, a term like 'ເພີ່ມລະດັບ' might be considered more conversational and fitting.",
-          "suggestion": "ເພີ່ມລະດັບ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -205,18 +200,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Once the limit is reached' is translated as 'Quando o limite for atingido'. While technically correct, it lacks the immediacy and warning tone of the original. A more impactful translation might be 'Assim que o limite for atingido' or 'No momento em que o limite for atingido'.",
-          "suggestion": "Assim que o limite for atingido"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'User permissions only' is translated as 'permissões de Utilizador'.  While grammatically correct, it lacks the clarity of implying that all users will have a *limited* set of permissions. A more accurate translation might emphasize the restriction.",
-          "suggestion": "permissões de Utilizador apenas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -231,13 +215,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"permisiunea de Utilizator\" is awkward and doesn't accurately convey \"User permissions.\" A more natural translation would be something like \"permisiuni de utilizator\".",
-          "suggestion": "permisiuni de utilizator"
+          "description": "The phrase \"To be able to add further admins\" is translated as \"Pentru a adăuga administratori\". While technically correct, it lacks the nuance of 'further' or 'additional'. A more accurate translation might convey the concept of adding *more* administrators.",
+          "suggestion": "Pentru a adăuga *mai mulți* administratori"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"schimba\" (to change) is not the best fit for 'upgrade' in this context. 'Upgrade' implies moving to a higher tier, not just a simple change.",
-          "suggestion": "actualizați"
+          "description": "The phrase \"contact the {{productName}} administrator to upgrade the tariff plan\" is translated as \"contactați administratorul {{productName}}  pentru a schimba planul tarifar\".  'Upgrade' has a specific meaning (increasing the tier) that 'schimba' (change) doesn't fully capture. Using a word that implies an increase in plan level would be more accurate.",
+          "suggestion": "contactați administratorul {{productName}} pentru a *actualiza* planul tarifar."
         }
       ],
       "approved_at": null
@@ -254,23 +238,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"සියලු පරිශීලකයින් පරිශීලක අවසර සහිතව පමණක් එකතු කරනු ලැබේ\" is a somewhat awkward translation of 'all users will be added with User permissions only'. A more natural phrasing would be something like 'සියලු පරිශීලකයින් පමනක් පරිශීලක අවසරයෙන් එක්රැකිනු ලැබේ' or 'සියලු පරිශීලකයින් පමනක් පරිශීලක අවසරයෙන් එක්වනහ'.",
-          "suggestion": "සියලු පරිශීලකයින් පමනක් පරිශීලක අවසරයෙන් එක්රැකිනු ලැබේ"
+          "description": "The phrase \"සියලු පරිශීලකයින් පරිශීලක අවසර සහිතව පමණක් එකතු කරනු ලැබේ\" is not the most natural or accurate translation of \"all users will be added with User permissions only.\" A better translation might be something like \"සියලු පරිශීලකයින්ට පරිශීලක අවසරය පමණක් හිමි වනු ඇත.\" or \"සියලු පරිශීලකයින්ට පරිශීලක අවසරය හිමි වනු ඇත.“",
+          "suggestion": "සියලු පරිශීලකයින්ට පරිශීලක අවසරය පමණක් හිමි වනු ඇත."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"තවදුරටු පරිපාලකයන් එකතු කිරීමට\" is not the most natural way to say 'To be able to add further admins'. A more fluent phrasing would be 'තවදුරටු පරිපාලකයන් යෙදවීමට' or 'තවදුරටු පරිපාලකයින් යෙදවීමට'.",
-          "suggestion": "තවදුරටු පරිපාලකයින් යෙදවීමට"
+          "description": "The phrase \"තවදුරටු පරිපාලකයන් එකතු කිරීමට\" is not the most natural translation of \"to be able to add further admins.\" A more suitable translation would be something like \"තවදුරටු පරිපාලකයන් යෙදවීමට\".",
+          "suggestion": "තවදුරටු පරිපාලකයන් යෙදවීමට"
         },
         {
-          "type": "spelling",
-          "description": "The word 'පරිපාලකයාගෙන්' uses a possessive suffix unnecessarily.  While grammatically valid, in this context 'පරිපාලකයා' is more accurate.",
-          "suggestion": "පරිපාලකයා"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure can be improved for better readability. The connection between contacting the administrator and upgrading the tariff isn't immediately clear.",
-          "suggestion": "තවදුරටු පරිපාලකයින් යෙදවීමට, {{productName}} පරිපාලකයාගෙන් සම්බන්ධ වී ගාස්තුව වැඩි කර ගන්න."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ගාස්තුව වැඩි කර ගන්න\" is a bit colloquial for contacting the administrator to upgrade. A more formal and professional translation would be something like \"ගාස්තුව වැඩි කර ගැනීමට අමතරස්ථානයක් ලබා ගන්න“.",
+          "suggestion": "ගාස්තුව වැඩි කර ගැනීමට අමතරස්ථානයක් ලබා ගන්න"
         }
       ],
       "approved_at": null
@@ -278,19 +257,24 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'To be able to add further admins' is a bit awkward in Slovak. It's better to rephrase for better flow.",
+          "suggestion": "Ak chcete mať možnosť pridávať ďalších administrátorov"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Once the limit is reached' is translated as 'Po dosiahnutí limitu'. While technically correct, a more natural and clearer Slovak phrasing might be 'Keď bude limit dosiahnutý'.",
+          "suggestion": "Keď bude limit dosiahnutý"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovenian translation uses a full stop after 'načrta' which is incorrect in this context. It should be a comma.",
-          "suggestion": "Ko želite dodati nadaljnje skrbnike, se za nadgradnjo tarifnega načrta,"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -298,9 +282,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The use of bolding for 'Корисничким дозволама' is inconsistent with the English original. The English version doesn't have bolding.",
-          "suggestion": "Remove the bolding from 'Корисничким дозволама'."
+          "type": "spelling",
+          "description": "The word 'Корисничким' is a possessive form, but it's unclear if it's the best fit here. It should likely be 'Корисничких' to agree with the plural 'корисници'.",
+          "suggestion": "Када се достигне лимит, сви корисници ће бити додати са само Корисничких дозволама."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence 'сви корисници ће бити додати са само Корисничких дозволама' could be slightly improved for clarity. Consider rephrasing to emphasize the change in permissions.",
+          "suggestion": "Када се достигне лимит, сви корисници добијају само Корисничке дозволе."
         }
       ],
       "approved_at": null
@@ -310,14 +299,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Da biste mogli dalje da dodajete admine' is a bit awkward. While grammatically correct, it could be more natural in Serbian. The use of 'dalje' is slightly redundant.",
-          "suggestion": "Da biste mogli da dodajete admine..."
+          "type": "grammar",
+          "description": "The phrase 'Da biste mogli dalje da dodajete admine' is slightly awkward. A more natural phrasing would improve readability.",
+          "suggestion": "Da biste mogli da dodajete više administratora..."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Korisničkim dozvolama' is technically correct for 'User permissions', a more common and natural phrasing in this context would be 'Korisničkim pravima'. 'Dozvole' often refers to more specific permissions within a system.",
-          "suggestion": "Korisničkim pravima"
+          "description": "The English term 'User permissions' is translated as 'Korisničkim dozvolama'. While technically correct, 'Korisničke uloge' might be a more common and clearer term in this context.",
+          "suggestion": "Korisničke uloge"
         }
       ],
       "approved_at": null
@@ -333,9 +322,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Ukrainian translation includes the placeholder '{{productName}}'. This should be verified to ensure the correct product name is inserted during implementation.",
-          "suggestion": "Verify that '{{productName}}' is replaced with the appropriate product name during implementation.  Consider if a direct translation of 'productName' is needed or if the original English term is more appropriate for the target audience."
+          "type": "incorrect_translation",
+          "description": "The phrase \"To be able to add further admins\" is translated as \"Щоб мати можливість далі додавати адміністраторів\". While technically correct, it's a bit verbose and less natural in Ukrainian. A more natural phrasing would be \"Щоб мати змогу додавати адміністраторів...\"",
+          "suggestion": "Щоб мати змогу додавати адміністраторів..."
         }
       ],
       "approved_at": null
@@ -346,13 +335,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"To be able to add further admins\" is awkwardly translated as \"Để có thể thêm quản trị viên\". A more natural and clearer translation would be \"Để có thể thêm các quản trị viên khác\" or \"Để có thể thêm quản trị viên\".",
-          "suggestion": "Để có thể thêm các quản trị viên khác"
+          "description": "The phrase \"User permissions only\" is translated as \"Người dùng bình thường.\" While \"bình thường\" can imply a basic user, it loses the nuance of permissions. A more accurate translation would convey the restricted access or lack of admin privileges.",
+          "suggestion": "Người dùng với quyền hạn cơ bản"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"contact the {{productName}} administrator\" is rendered as \"hãy liên hệ với quản trị viên {{productName}}\". While technically correct, it can be more naturally phrased as \"liên hệ với bộ phận quản trị viên {{productName}}\" or \"liên hệ với người quản lý {{productName}}\".",
-          "suggestion": "liên hệ với bộ phận quản trị viên {{productName}}"
+          "type": "formatting",
+          "description": "The Vietnamese translation keeps the \"{{productName}}\" placeholder. It's unclear if this should be a dynamic variable or a literal string. Consistency with the English source is important.",
+          "suggestion": "Consider if the placeholder should be translated, kept as is, or replaced with a localized product name."
         }
       ],
       "approved_at": null
@@ -363,13 +352,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Once the limit is reached, all users will be added with User permissions only' is not entirely captured by '所有新添加用户将仅具有用户权限'. It implies that existing users are unaffected, while the English suggests all users, including potentially existing ones, will be affected when the limit is reached. A more accurate translation would clarify that *new* users will have User permissions only.",
-          "suggestion": "一旦达到限制，所有*新增*用户将仅具有用户权限。"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation retains the `{{productName}}` placeholder, consistent with the English content.  This is generally acceptable but requires review by the implementation team to ensure proper substitution.",
-          "suggestion": "No change needed, but confirm proper substitution of `{{productName}}`."
+          "description": "The English phrase \"Once the limit is reached, all users will be added with User permissions only\" is slightly awkward. The translation \"一旦达到限制，所有新添加用户将仅具有用户权限\" implies that only *newly added* users will have user permissions, which isn't precisely what the English means. It’s more about *all* users from that point forward.",
+          "suggestion": "一旦达到限制，所有用户将仅具有用户权限。"
         }
       ],
       "approved_at": null

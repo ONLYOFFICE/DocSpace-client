@@ -274,7 +274,14 @@ const withHotkeys = (Component) => {
     useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
-    useHotkeys("Backspace", onClickBack, hotkeysFilter);
+    useHotkeys(
+      "Backspace",
+      () => {
+        const someDialogIsOpen = checkDialogsOpen();
+        if (!someDialogIsOpen) onClickBack();
+      },
+      hotkeysFilter,
+    );
 
     // Change viewAs
     useHotkeys(
@@ -361,7 +368,9 @@ const withHotkeys = (Component) => {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
-              deleteFromTrash: t("Translations:DeleteFromTrash"),
+              deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+                sectionName: t("Common:TrashSection"),
+              }),
             };
             deleteAction(translations).catch((err) => toastr.error(err));
           }

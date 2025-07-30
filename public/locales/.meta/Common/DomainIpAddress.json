@@ -3,7 +3,7 @@
   "content": "Domains as IP addresses are not supported",
   "content_en_sha1_hash": "bf51d68a049b2ba8093c29b93ff3b61ca192aaa4",
   "created_at": "2025-05-19T21:30:44.599Z",
-  "updated_at": "2025-06-18T07:34:14.837Z",
+  "updated_at": "2025-06-18T17:11:42.324Z",
   "comment": {
     "text": "This translation key is used to display an error message indicating that domains are not supported as IP addresses. It is displayed in a dialog when the user attempts to enter a domain address that cannot be resolved as an IP address. Translators should consider the context of \"domains\" and how it may differ across languages and regions.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 165,
+      "line_number": 169,
       "context": "return t(\"Common:LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:",
       "module": "/packages/shared"
     }
@@ -41,9 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The phrase \"الأي بي\" (al-ay bi) is a transliteration of \"IP.\" While understood, it's more formal to use the full Arabic equivalent for internet protocol address: \"بروتوكول الإنترنت\".",
-          "suggestion": "النطاقات كعناوين بروتوكول الإنترنت غير مدعوم"
+          "type": "incorrect_translation",
+          "description": "The translation \"النطاقات كعناوين الأي بي غير مدعوم\" is a literal translation and lacks nuance. A more natural phrasing would convey the same meaning in a more fluent Arabic. 'IP addresses' are often understood as 'عناوين الإنترنت'.",
+          "suggestion": "النطاقات التي تُستخدم كعناوين IP غير مدعومة."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"지원되지 않는 도메인 IP 주소입니다\" translates to \"Unsupported domain IP address.\" While technically correct, it doesn't capture the nuance of the original English sentence 'Domains as IP addresses are not supported.' The translation feels a bit too direct and lacks the emphasis on the 'as' which indicates the way the domain is being used.",
-          "suggestion": "Consider a translation like \"도메인을 IP 주소로 사용하는 것은 지원되지 않습니다\" (Using domains as IP addresses is not supported) or \"IP 주소로 표현된 도메인은 지원되지 않습니다\" (Domains expressed as IP addresses are not supported)."
+          "description": "The translation \"지원되지 않는 도메인 IP 주소입니다\" is too literal and doesn't convey the original meaning effectively. It translates to \"Unsupported domain IP address.\" A more natural Korean phrasing would be needed to accurately reflect \"Domains as IP addresses are not supported\".",
+          "suggestion": "지원되는 도메인 IP 주소는 없습니다 (There are no supported domain IP addresses) or 도메인 IP 주소는 지원되지 않습니다 (Domain IP addresses are not supported)."
         }
       ],
       "approved_at": null
@@ -132,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ທີ່ຢູ່ IP ໂດເມນຍັງບໍ່ຮອງຮັບ\" is a literal translation and while understandable, it could be improved for natural Lao phrasing. 'ໂດເມນ' is transliterated from 'domain' and might not be the most readily understood term for the target audience. A more natural phrasing would convey the meaning 'IP addresses for domain names are not supported'.",
-          "suggestion": "Consider rephrasing to something like \"ທີ່ຢູ່ IP ຂອງໂດເມນຍັງບໍຮັບໃຊ້\" (IP addresses of domains are not supported) or \"ການໃຊ້ທີ່ຢູ່ IP ຂອງໂດເມນບໍ່ໄດ້ຮັບການສະຫນັບສະຫນູນ\" (Using IP addresses for domains is not supported)."
+          "description": "The Lao translation 'ທີ່ຢູ່ IP ໂດເມນຍັງບໍ່ຮອງຮັບ' is a literal translation but doesn't convey the intended meaning clearly. 'ໂດເມນ' (domain) is redundant as 'ທີ່ຢູ່ IP' already implies it. It's a somewhat awkward phrasing in Lao.",
+          "suggestion": "ອານຸຍາດບໍ່​ສາ​ມາດ​ໃຊ້​ທີ່ຢູ່​ IP ຂອງ​ໂດເມນໄດ້"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'ໂດເມນ' is a commonly used loanword, it might be helpful to check for an official Lao equivalent if one exists, although it's not strictly incorrect.",
+          "suggestion": "Consider checking for an official Lao equivalent of 'domain' if one exists."
         }
       ],
       "approved_at": null
@@ -156,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Domena i adres IP nie są obsługiwane' is a literal translation and doesn't fully capture the meaning of \"Domains as IP addresses are not supported.\" A more accurate translation would convey that using a domain name *as* an IP address is the problem, not just that domains and IP addresses exist.",
-          "suggestion": "Adresy IP nie mogą być używane jako domeny."
+          "description": "The translation \"Domena i adres IP nie są obsługiwane\" is a literal translation that doesn't fully convey the intended meaning of 'Domains as IP addresses are not supported'. It suggests that both domains and IP addresses themselves are unsupported, rather than the concept of *using* domains *as* IP addresses.",
+          "suggestion": "Consider a more nuanced translation such as \"Używanie domen jako adresów IP nie jest obsługiwane\" or \"Obsługiwane są tylko domeny, a nie adresy IP\"."
         }
       ],
       "approved_at": null
@@ -192,13 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අ.ජා.කෙ. ලිපින ලෙස වසම් සඳහා සහාය නොදක්වයි' is not an accurate translation of 'Domains as IP addresses are not supported'. The term 'අ.ජා.කෙ.' appears to be an abbreviation that is not understandable without context, and doesn't directly translate to 'Domains'. The overall phrasing is awkward and unnatural in Sinhala.",
-          "suggestion": "A more accurate translation could be 'IP ලිපිනයන් ලෙස ඩොමේනුවලට සහාය ලබාගත නොහැක' (IP lipinayan lesa domenuwala sahaaya labaagat naahaeka) or 'ඩොමේනුවල IP ලිපිනයන් භාවිත කිරීම් වලංගු නොවේ' (domenuwala IP lipinayan upayogakaram valangu novae)."
+          "description": "The translation 'අ.ජා.කෙ. ලිපින ලෙස වසම් සඳහා සහාය නොදක්වයි' doesn't accurately convey the meaning of \"Domains as IP addresses are not supported\". It appears to be a literal and potentially mistranslated interpretation. The 'අ.ජා.කෙ.' part is unclear and doesn't seem to have a clear equivalent in Sinhala in this context.",
+          "suggestion": "A more accurate translation might be: 'IP ලිපිනයන් ලෙස වසම් භාවිතා කිරීම් වලට සහාය නොමැත' (IP lipinayan lesa wasam utahana kirima valata sahaaya nemaetha) or 'වසම් IP ලිපිනයන් ලෙස භාවිතා කිරීමට వీබිණි නොමැත' (wasam IP lipinayan lesa utahana kirima veebini nemaetha)"
         },
         {
-          "type": "spelling",
-          "description": "While 'වසම්' (vasam) can be understood as 'domains', it's a less common and slightly imprecise term in this context. It might be confused with other meanings.",
-          "suggestion": "Consider using a more specific term for 'domains', if one exists and is widely understood in Sinhala within the context."
+          "type": "formatting",
+          "description": "The translation lacks appropriate sentence structure to sound natural in Sinhala. It feels somewhat robotic.",
+          "suggestion": "Review the sentence flow and natural phrasing in Sinhala. Consider breaking it down or rephrasing for better readability."
         }
       ],
       "approved_at": null
@@ -209,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovak translation 'Domény ako adresa IP nie sú podporované' is grammatically slightly awkward. While technically correct, a more natural phrasing would improve readability.",
-          "suggestion": "Domény s IP adresami nie sú podporované"
+          "description": "The Slovak translation 'Domény ako adresa IP nie sú podporované' is grammatically awkward. The phrase 'adresa IP' should be 'IP adresa' to maintain correct word order in Slovak.",
+          "suggestion": "Domény ako IP adresa nie sú podporované"
         }
       ],
       "approved_at": null

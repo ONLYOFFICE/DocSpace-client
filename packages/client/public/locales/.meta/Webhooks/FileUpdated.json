@@ -3,7 +3,7 @@
   "content": "File updated",
   "content_en_sha1_hash": "9550e8ec24af33e7a5898da2edb027d6e0b2b0de",
   "created_at": "2025-05-19T21:30:49.738Z",
-  "updated_at": "2025-05-21T01:10:50.340Z",
+  "updated_at": "2025-05-24T02:24:55.180Z",
   "comment": {
     "text": "This translation key \"FileUpdated\" is used to display the phrase \"File updated\" when a file has been successfully modified or saved in the Portal Settings categories. It appears as part of the UI's feedback or success message after the file operation is completed.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຟັ້ນຖືກປັບປຸງແລ້ວ\" translates more closely to \"File has been adjusted/modified\" rather than \"File updated.\" While not entirely wrong, it's not the most direct or common translation for 'updated'.",
-          "suggestion": "ເອກະສານຖືກປັບປຸງແລ້ວ (Ekkasann thuk papphung laeo) - 'Document has been updated'."
+          "description": "The Lao translation \"ເຟັ້ນຖືກປັບປຸງແລ້ວ\" translates more literally to \"File was adjusted/modified.\" While not entirely wrong, \"updated\" implies a more comprehensive change, and a more direct translation would be preferable. \"ເອກະສານຖືກປັບປຸງແລ້ວ\" would be a closer equivalent to 'File updated'.",
+          "suggestion": "ເອກະສານຖືກປັບປຸງແລ້ວ"
         }
       ],
       "approved_at": null
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Fails atjaunināts\" is a literal translation of \"File updated\", it's slightly awkward and not the most natural phrasing in Latvian. A more common and idiomatic translation would be \"Faila atjauninājums\" or \"Atjaunināts fails\".",
+          "description": "The translation 'Fails atjaunināts' while literally meaning 'File updated', doesn't fully capture the nuance of 'File updated' in a webhook context. It sounds a bit formal and might not be the most natural phrasing.",
           "suggestion": "Faila atjauninājums"
         }
       ],
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation 'Fișierul a fost actualizat ' has an extra space at the end.",
+          "description": "The Romanian translation has a trailing space.",
           "suggestion": "Fișierul a fost actualizat"
         }
       ],
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ප්‍රතිලේඛනය යාවත්කාලීන කරන ලදී\" (prathilēkhanaya yāvatkālinakaraṇa la dī) translates more closely to 'The file is updated' or 'The record is updated' rather than the intended 'File updated'. It is a passive construction and a bit more formal than necessary for a simple notification.",
-          "suggestion": "Consider a more direct and concise translation like \"ගොනුව යාවත්කාලීන කරන ලදී\" (gonuwa yāvatkālinakaraṇa la dī) or even shorter, \"ගොනුව යාවත්කාලීන විය\" (gonuwa yāvatkālinakaraṇa viya)."
+          "description": "The translation 'ප්‍රතිලේඛනය යාවත්කාලීන කරන ලදී' while technically meaning 'document updated', isn't the most natural or concise translation of 'File updated'. 'ගොනුව යාවත්කාලීන කරන ලදී' would be a more direct and common translation for 'File updated'.",
+          "suggestion": "ගොනුව යාවත්කාලීන කරන ලදී"
         }
       ],
       "approved_at": null

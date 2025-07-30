@@ -3,7 +3,7 @@
   "content": "Room quota has been successfully disabled.",
   "content_en_sha1_hash": "bc508edc6864a5a5ff719032d851c846cc501122",
   "created_at": "2025-05-19T21:30:52.442Z",
-  "updated_at": "2025-06-03T20:59:42.368Z",
+  "updated_at": "2025-06-30T12:20:31.740Z",
   "comment": {
     "text": "This translation key is used to display a success message when room quota has been successfully disabled. It is likely used in an UI element such as a button or dialog that triggers this functionality. The text appears after attempting to disable room quota, and its translation will be shown depending on the current room quota status.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/store/CurrentQuotaStore.ts",
-      "line_number": 470,
+      "line_number": 472,
       "context": "try {\n await setDefaultRoomQuota(isEnable, +quota);\n const toastrText = isEnable\n ? t(\"RoomQuotaEnabled\")\n : t(\"RoomQuotaDisabled\");\n \n toastr.success(toastrText);\n } catch (e: unknown) {\n toastr.error(e as TData);\n }",
       "module": "/packages/shared"
     }
@@ -35,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Otaq kvotası uğurla deaktiv edildi\" sounds slightly awkward in Azerbaijani. A more natural phrasing would be \"Otaq kvotası məcbusi ilə dayandırıldı\" or \"Otaq kvotası ləğv edildi\".",
-          "suggestion": "Otaq kvotası məcbusi ilə dayandırıldı"
+          "type": "spelling",
+          "description": "The word 'otaq' is a transliteration from 'room' and may not be the most natural-sounding word in Azerbaijani. While understandable, 'oax' or 'məkan' might be more idiomatic depending on context.",
+          "suggestion": "Consider using 'oax' or 'məkan' instead of 'otaq' if it fits the overall tone and context of the application."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Kvóty místností byly úspěšně zakázány' is a bit stiff and literal. A more natural and user-friendly translation might be preferable.",
-          "suggestion": "Kvóty místností jsou nyní vypnuty."
+          "description": "The English phrase 'Room quota' translates more accurately to 'Limit místností' or 'Místnostní limit' in Czech, rather than 'Kvóty místností'. 'Kvóty' implies a specific type of quota, which isn't necessarily the intended meaning.",
+          "suggestion": "Limit místností byl úspěšně zakázán."
         }
       ],
       "approved_at": null
@@ -120,12 +120,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ກວດກາຈຳນວນຫ້ອງຖືກປິດການໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ\" literally translates to \"Room number check has been correctly disabled.\" This doesn't accurately convey the meaning of 'Room quota has been successfully disabled.' The word 'ກວດກາ' (check/inspect) is misplaced and creates a confusing meaning.",
+          "description": "The Lao translation 'ກວດກາຈຳນວນຫ້ອງຖືກປິດການໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ' implies 'room number check' rather than 'room quota'. The focus should be on quota, not simply the number of rooms.",
           "suggestion": "ປິດການໃຊ້ງານຈຳນວນຫ້ອງຢ່າງຖືກຕ້ອງແລ້ວ"
         },
         {
           "type": "grammar",
-          "description": "While technically understandable, the flow of the suggested correction 'ປິດການໃຊ້ງານຈຳນວນຫ້ອງຢ່າງຖືກຕ້ອງແລ້ວ' could be improved for naturalness.",
+          "description": "The sentence structure is slightly awkward. 'ຖືກປິດການໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ' is grammatically correct, but could be improved for flow.",
           "suggestion": "ຈຳນວນຫ້ອງຖືກປິດການໃຊ້ງານຢ່າງຖືກຕ້ອງແລ້ວ"
         }
       ],
@@ -149,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Limit pokoi został wyłączony' is understandable, a more accurate and natural translation of 'Room quota has been successfully disabled' would be 'Ograniczenie liczby pokoi zostało wyłączone.' 'Limit' is often used for financial limits, not room quotas.",
-          "suggestion": "Ograniczenie liczby pokoi zostało wyłączone."
+          "description": "The translation 'Limit pokoi został wyłączony' while technically correct, doesn't fully convey the meaning of 'Room quota has been successfully disabled'. 'Quota' implies a defined limit, and 'disabled' suggests it's no longer enforced. A more accurate translation would reflect this.",
+          "suggestion": "Quota pokoi została wyłączona."
         }
       ],
       "approved_at": null
@@ -173,13 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cotă de stocare pentru sală a fost dezactivată cu succes' is a bit literal and clunky. 'Sală' translates to 'room,' but in this context, it's referring to a storage space or capacity associated with a room, not the room itself. It's not natural Romanian.",
+          "description": "The translation 'Cotă de stocare pentru sală a fost dezactivată cu succes' is overly literal and doesn't flow naturally in Romanian. 'Sală' (room) isn't the most natural word choice in this context. A more natural translation would imply storage space or storage limit.",
           "suggestion": "Cotă de stocare a fost dezactivată cu succes."
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, 'Cotă' can also be translated as 'Limita'. Using 'Limita' might be more commonly understood in this context, especially for a technical setting.",
-          "suggestion": "Limita de stocare a fost dezactivată cu succes."
+          "type": "formatting",
+          "description": "The Romanian translation includes an article ('a') before 'dezactivată'. While grammatically correct, it may be more common to omit it in this type of message for conciseness.",
+          "suggestion": "Cotă de stocare pentru sală a fost dezactivată cu succes."
         }
       ],
       "approved_at": null
@@ -196,8 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමර ප්‍රමාණය සක්‍රීය කර නැහැ' literally translates to 'Room quantity deactivated.' While conveying a similar meaning, 'disabled' implies a different action than 'deactivated'. It's more accurate to use a term that directly reflects 'disabled' in this context.",
-          "suggestion": "කාමර ප්‍රමාණය අයින් කරලයි."
+          "description": "The translation 'කාමර ප්‍රමාණය සක්‍රීය කර නැහැ' literally translates to 'Room quantity deactivated'. The English phrase 'Room quota has been successfully disabled' implies that a limit on the number of rooms has been removed, not necessarily deactivated. 'Disabled' has a slightly different nuance.",
+          "suggestion": "කාමර සංඛ්‍යාව සීමාව ඉවත් කර ඇත."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'කාමර' is correct for 'room', using 'සීමාව' (limit) instead of 'ප්‍රමාණය' (quantity) improves accuracy in conveying the intended meaning of 'quota'.",
+          "suggestion": "Use 'සීමාව' instead of 'ප්‍රමාණය' for greater accuracy."
         }
       ],
       "approved_at": null
@@ -220,7 +225,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Квота просторије је \" is incomplete. It seems to be cut off and doesn't convey the full meaning of \"Room quota has been successfully disabled.\" It's missing the words indicating success and completion.",
+          "description": "The translation \"Квота просторије је \" is incomplete. It lacks the concluding part of the sentence indicating the action was successful. It translates to \"Room quota is...\"",
           "suggestion": "Квота просторије је успешно деактивирана."
         }
       ],

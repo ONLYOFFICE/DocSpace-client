@@ -3,7 +3,7 @@
   "content": "Portal restoring is underway",
   "content_en_sha1_hash": "4d21b354c882fba5a868ff44f825eac2c9872eda",
   "created_at": "2025-05-19T21:30:47.439Z",
-  "updated_at": "2025-05-28T09:30:02.877Z",
+  "updated_at": "2025-06-02T10:20:51.536Z",
   "comment": {
     "text": "The \"Portal restoring is underway\" translation key is used to display a message indicating that the preparation portal is being restored, typically in a recovery or error context. This text appears in a dialog box and might be related to a button or a section header. It is part of the UI's recovery process.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 139,
-      "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className=\"preparation-portal_error\">{`${errorMessage}`}</Text>\n ) : (\n <ColorTheme theme={theme} themeId={ThemeId.Progress} percent={percent}>",
+      "line_number": 137,
+      "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress",
       "module": "/packages/shared"
     }
   ],
@@ -69,7 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Restauración de portal está en progreso' sounds somewhat awkward in Spanish. A more natural phrasing would be 'La restauración del portal está en curso' or 'El portal está siendo restaurado'. 'Portal' doesn't typically require the definite article 'el' or 'la' when used in this context.",
+          "suggestion": "La restauración del portal está en curso"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -114,13 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກໍາລັງດໍາເນີນການກູ້ຄືນພອດທັອນ' is a literal translation of 'Portal restoring is underway' but might not be the most natural or idiomatic way to express this in Lao. 'ກູ້ຄືນ' (kū khūn) implies retrieval or recovery, which is accurate, but 'ພອດທັອນ' (phord than) might be too technical for a general audience. A more natural phrasing might be better.",
-          "suggestion": "Consider a phrasing like 'ກໍາລັງສ້ອມແກ້ພອດທາດ' (kamlang sop gae phord thad - Portal is being repaired/fixed) or 'ພອດທາດກໍາລັງສ້ອມແກ້' (phord thad kamlang sop gae - The portal is being repaired)."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'ພອດທັອນ' (phord than) might be used, 'ພອດທາດ' (phord thad) is a more common and widely understood term for 'portal' in Lao.",
-          "suggestion": "Replace 'ພອດທັອນ' with 'ພອດທາດ'."
+          "description": "The Lao translation 'ກໍາລັງດໍາເນີນການກູ້ຄືນພອດທັອນ' translates to 'Portal retrieval is underway'. While close, 'restoring' implies a return to a previous state, which 'ກູ້ຄືນ' (retrieval) doesn't perfectly convey. A more accurate translation would emphasize the 'restoration' aspect.",
+          "suggestion": "Consider a translation that incorporates the concept of 'restoration' more directly, such as 'ກໍາລັງສືບສວນພອດທັອນ' (Portal reconstruction underway) or 'ກໍາລັງຟື້ນຟູພອດທັອນ' (Portal recovery underway)."
         }
       ],
       "approved_at": null
@@ -170,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ද්වාරය ප්‍රත්‍යර්පණය වෙමින්\" (dwaaraaya prathyaarpanaya vemin) literally translates to \"The door is being restored.\" While \"restoring\" can be implied, \"portal\" is a more accurate representation of the English content. A better translation would convey the meaning of a portal being restored, not a physical door.",
+          "suggestion": "Consider alternatives like \"ප්‍රවේශ දොර විවරණය වෙමින් පවතී\" (praveśa dora vivaranaya vemin pavatī) - 'The access portal is being opened' or \"ප්‍රතිසංස්කරණය වෙමින්” (pratisamskara vemin) - 'is being renovated/repaired' depending on the context and desired nuance."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -191,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Обнова портала је у току' translates to 'Portal renewal is underway'. While not entirely incorrect, 'restoring' implies a return to a previous state after a failure or issue. 'Обнова' suggests a refresh or update, which isn't quite the same. A more accurate translation, capturing the nuance of 'restoring', would be something like 'Враћање портала је у току' (Vraćanje portala je u toku).",
-          "suggestion": "Враћање портала је у току"
+          "description": "The English phrase \"Portal restoring is underway\" implies a restoration process. The Serbian translation \"Обнова портала је у току\" translates more accurately to \"Portal update is in progress\" or \"Portal refresh is underway.\" While not entirely wrong, it doesn't fully capture the nuance of 'restoring'.",
+          "suggestion": "Consider \"Портал се обнавља\" (Portal is being restored) or \"Обновљавање портала је у току\" (Portal restoration is underway)."
         }
       ],
       "approved_at": null
@@ -221,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Đang tiến hành khôi phục cổng.\" is a literal translation but doesn't quite convey the natural flow of \"Portal restoring is underway.\"  \"Tiến hành khôi phục\" feels a bit formal and doesn't flow as naturally as a more idiomatic expression.",
-          "suggestion": "Đang khôi phục cổng."
+          "description": "The translation \"Đang tiến hành khôi phục cổng.\" is a literal translation and doesn't convey the full meaning of 'Portal restoring is underway'. 'Khôi phục cổng' specifically refers to restoring the portal itself, which might not be the complete picture. It might imply an ongoing process.",
+          "suggestion": "Consider alternatives like \"Đang khôi phục cổng\" (Portal is being restored) or \"Cổng đang được khôi phục.\" (The portal is being restored)."
         }
       ],
       "approved_at": null

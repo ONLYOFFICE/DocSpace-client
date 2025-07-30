@@ -36,15 +36,8 @@ import {
 import { Link, LinkType } from "@docspace/shared/components/link";
 import styled from "styled-components";
 
-import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import { getChangeTypeKey } from "./getChangeTypeKey";
-
-interface TStore {
-  peopleStore: {
-    dialogStore: DialogStore;
-  };
-}
 
 const StyledBody = styled.div`
   .note-text {
@@ -74,10 +67,10 @@ type ChangeUserTypeDialogProps = {
   secondType: string;
   onClose: VoidFunction;
   onChangeUserType: VoidFunction;
-  personalUserFolderTitle?: string;
-  setDataReassignmentDialogVisible: (visible: boolean) => void;
-  setDialogData: (data: any) => void;
-  dialogData: TChangeUserTypeDialogData;
+
+  setDataReassignmentDialogVisible?: (visible: boolean) => void;
+  setDialogData?: (data: any) => void;
+  dialogData?: TChangeUserTypeDialogData;
   isDowngradeType: boolean;
   isDowngradeToUser: boolean;
   isCurrentUserOwner?: boolean;
@@ -91,7 +84,7 @@ const ChangeUserTypeDialog = ({
   secondType,
   onClose,
   onChangeUserType,
-  personalUserFolderTitle,
+
   setDataReassignmentDialogVisible,
   setDialogData,
   dialogData,
@@ -107,7 +100,7 @@ const ChangeUserTypeDialog = ({
     reassignUserData,
     cancelReassignment,
     needReassignData,
-  } = dialogData;
+  } = dialogData!;
 
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
@@ -127,7 +120,7 @@ const ChangeUserTypeDialog = ({
   );
 
   const onClickReassignData = (currentUserAsDefault?: boolean) => {
-    setDialogData({
+    setDialogData?.({
       user,
       getReassignmentProgress,
       reassignUserData,
@@ -137,7 +130,7 @@ const ChangeUserTypeDialog = ({
       noRoomFilesToMove: true,
     });
 
-    setDataReassignmentDialogVisible(true);
+    setDataReassignmentDialogVisible?.(true);
 
     onClose();
   };
@@ -174,7 +167,7 @@ const ChangeUserTypeDialog = ({
                 i18nKey="PersonalDataDeletion"
                 ns="ChangeUserTypeDialog"
                 t={t}
-                values={{ sectionName: personalUserFolderTitle }}
+                values={{ sectionName: t("Common:MyFilesSection") }}
                 components={{
                   1: <span style={{ fontWeight: 600 }} />,
                 }}
@@ -185,7 +178,7 @@ const ChangeUserTypeDialog = ({
                   i18nKey="DataReassignmentWithFilesDeletion"
                   ns="ChangeUserTypeDialog"
                   t={t}
-                  values={{ sectionName: personalUserFolderTitle }}
+                  values={{ sectionName: t("Common:MyFilesSection") }}
                   components={{
                     1: <span style={{ fontWeight: 600 }} />,
                   }}
@@ -288,13 +281,13 @@ export default inject(({ peopleStore, userStore }: TStore) => {
     setDataReassignmentDialogVisible,
     setDialogData,
     data: dialogData,
-  } = peopleStore.dialogStore;
+  } = peopleStore.dialogStore!;
   const { user } = userStore;
 
   return {
     setDataReassignmentDialogVisible,
     setDialogData,
     dialogData,
-    isCurrentUserOwner: user.isOwner,
+    isCurrentUserOwner: user!.isOwner,
   };
 })(observer(ChangeUserTypeDialog));

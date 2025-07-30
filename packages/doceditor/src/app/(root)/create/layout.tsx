@@ -29,5 +29,5 @@ export default function CreateLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

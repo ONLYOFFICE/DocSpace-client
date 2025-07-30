@@ -3,7 +3,7 @@
   "content": "You can only create 3 custom themes. To create a new one, you must delete one of the previous themes.",
   "content_en_sha1_hash": "35cb6c12e5c1bdbc4766bda91053aaafaeb7063a",
   "created_at": "2025-05-19T21:30:51.812Z",
-  "updated_at": "2025-05-28T09:30:02.495Z",
+  "updated_at": "2025-05-26T07:57:32.483Z",
   "comment": {
     "text": "This translation key is used to display a tooltip that informs users they have reached their limit of custom themes and provides instructions on how to create a new one. The tooltip appears in an appearance settings page, specifically related to portal settings, and helps users understand the restrictions on creating custom themes.",
     "is_auto": true,
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"You can only create 3 custom themes\" is not entirely conveyed accurately. While \"يمكنك فقط إنشاء 3 قوالب مخصصة\" is understandable, it lacks the nuance of 'only'. A more precise translation might emphasize the limitation more clearly.",
-          "suggestion": "يمكنك إنشاء 3 قوالب مخصصة فقط."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"To create a new one, you must delete one of the previous themes\" is somewhat literal. A more natural phrasing could be considered.",
-          "suggestion": "لإنشاء قالب جديد، يجب حذف قالب سابق."
+          "description": "The term 'قوالب' (qalab) is a more general term for 'molds' or 'patterns'. While technically acceptable, 'تصاميم' (tasameem) would be a more accurate and natural translation for 'themes' in this context.",
+          "suggestion": "يمكنك فقط إنشاء 3 تصاميم مخصصة. لإنشاء واحدة جديدة ، يجب عليك حذف أحد التصاميم السابقة."
         }
       ],
       "approved_at": null
@@ -44,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'fərdi' is used for 'custom'. While not incorrect, 'xüsusi' is a more common and natural translation for 'custom' in this context.",
-          "suggestion": "Siz yalnız 3 xüsusi mövzu yarada bilərsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -65,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'témata' (themes) in the translation could be misleading. 'Motiv' is a more accurate and common term for 'theme' in this context.",
-          "suggestion": "Můžete vytvořit pouze 3 vlastní motivy. Chcete-li vytvořit nové, musíte odstranit jeden z předchozích motivů."
+          "description": "The phrase 'Chcete-li vytvořit nové' is a bit awkward. A more natural translation of 'To create a new one' would be 'Pro vytvoření nového'.",
+          "suggestion": "Pro vytvoření nového"
         }
       ],
       "approved_at": null
@@ -107,13 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'custom' is not accurately conveyed. 'Հատուկ' (hatuk) translates to 'special' or 'unique' but not 'custom' in this context. 'Տարրվոր' (tarrvor) might be a more accurate translation for 'custom' depending on the specific nuance desired.",
-          "suggestion": "Consider using 'տարրվոր' (tarrvor) instead of 'հատուկ' (hatuk) to better reflect 'custom'."
+          "description": "The word 'themes' (թեմա) is used twice. The first instance refers to custom themes, while the second refers to previous themes. While technically correct, it's slightly clunky. Consider rephrasing for better flow. The word 'themes' could be translated as 'դիզայնային թեմաներ' in the first instance to specifically indicate custom themes.",
+          "suggestion": "Դուք կարող եք ստեղծել միայն 3 հատուկ դիզայնային թեմաներ: Նորը ստեղծելու համար դուք պետք է ջնջեք նախորդ դիզայնային թեմաներից մեկը:"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Նորը ստեղծելու համար' (Nore stegcdelu hamar) is a bit clunky and could be improved. A more natural phrasing might be 'Նոր թեմաներ ստեղծելու համար'.",
-          "suggestion": "Change 'Նորը ստեղծելու համար' to 'Նոր թեմաներ ստեղծելու համար'."
+          "type": "formatting",
+          "description": "While not strictly incorrect, consider adding a colon after 'Դուք կարող եք ստեղծել միայն 3 հատուկ թեմա:' to match the formatting of the English version.",
+          "suggestion": "Դուք կարող եք ստեղծել միայն 3 հատուկ թեմա::"
         }
       ],
       "approved_at": null
@@ -142,13 +131,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'custom' is not translated. It should be incorporated into the Lao translation to maintain accuracy.",
-          "suggestion": "ທ່ານພຽງແຕ່ສາມາດສ້າງ 3 ຮູບແບບທີ່ກຳມ້າງ (custom). ເພື່ອສ້າງອັນໃຫມ່, ທ່ານຕ້ອງລຶບຫນຶ່ງໃນຮູບແບບທີ່ຜ່ານມາ."
+          "description": "The term 'custom themes' is translated literally as 'ຮູບແບບ custom'. While understandable, a more natural Lao phrasing would be 'ຮູບແບບທີ່ກຳມ້າງ' or 'ແບບຢ່າງທີ່ຜູ້ໃຊ້ສ້າງ'.",
+          "suggestion": "ທ່ານພຽງແຕ່ສາມາດສ້າງ 3 ຮູບແບບທີ່ກຳມ້າງ. ເພື່ອສ້າງອັນໃຫມ່, ທ່ານຕ້ອງລຶບຫນຶ່ງໃນຮູບແບບທີ່ຜ່ານມາ."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ອັນໃຫມ່' is a bit awkward. It's better to use a more descriptive phrase.",
+          "suggestion": "ທ່ານພຽງແຕ່ສາມາດສ້າງ 3 ຮູບແບບທີ່ກຳມ້າງ. ເພື່ອສ້າງແບບຢ່າງໃໝ່, ທ່ານຕ້ອງລຶບຫນຶ່ງໃນຮູບແບບທີ່ຜ່ານມາ."
         },
         {
           "type": "spelling",
-          "description": "While not strictly incorrect, 'ອັນໃຫມ່' sounds slightly unnatural.  A more natural phrasing might be used.",
-          "suggestion": "ທ່ານຕ້ອງລຶບຫນຶ່ງໃນຮູບແບບທີ່ຜ່ານມາເພື່ອສ້າງແບບໃຫມ່"
+          "description": "The word 'ແບບຢ່າງໃໝ່' might benefit from reviewing if the best phrasing is desired. While correct, it's slightly formal.",
+          "suggestion": "Review alternative phrasing for 'ແບບຢ່າງໃໝ່' to maintain a more natural tone (e.g., ຮູບແບບໃໝ່)."
         }
       ],
       "approved_at": null
@@ -177,8 +171,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Só se podem criar' is a bit awkward and passive. A more natural phrasing would be 'Pode criar' or 'É possível criar'.",
-          "suggestion": "Pode criar 3 temas personalizados. Para criar um novo, é necessário eliminar um dos temas anteriores."
+          "description": "The phrase 'You can only create 3 custom themes' is not perfectly captured by 'Só se podem criar 3 temas personalizados.'. While the meaning is conveyed, the original phrasing emphasizes a limitation. A more accurate translation would better reflect that restriction. 'Apenas pode criar 3 temas personalizados' or 'Pode criar apenas 3 temas personalizados' are better alternatives.",
+          "suggestion": "Apenas pode criar 3 temas personalizados."
         }
       ],
       "approved_at": null
@@ -207,13 +201,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The number '3' in the English content is represented as '𑇣 (3)' in the Sinhala translation. The formatting is unusual and may not be the standard way to display a number in Sinhala. While technically the number is present, it's awkward.",
-          "suggestion": "Replace '𑇣 (3)' with '3' or 'තුන්' (thun - Sinhala for three), depending on the desired level of formality and visual style."
+          "description": "The number '3' is represented as '𑇣 (3)'. This looks awkward and disrupts the flow. It's better to integrate it into the Sinhala sentence naturally.",
+          "suggestion": "ඔබට අභිරුචි තේමා (3) ක් සෑදීමට හැකිය."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'theme' is translated as 'theme' (theme). While acceptable, a more natural and idiomatic Sinhala word might exist, especially given the context of customization.",
-          "suggestion": "Consider exploring more nuanced Sinhala terms for 'theme' that better convey the meaning of customized visual styles or designs. Researching common Sinhala terminology for user customization could reveal a more fitting alternative. This is context dependent and might require localization expertise."
+          "description": "The word 'delete' is rendered as 'මකා දැමිය යුතුය'. While technically correct, a more natural and user-friendly phrasing might be preferable. 'ඉක්මසා ගත යුතුය' or 'පාසදල යුතුය' could be considered.",
+          "suggestion": "ඔබට අභිරුචි තේමා (3) ක් සෑදීමට හැකිය. නව එකක් සෑදීමට, කලින් සෑදූ තේමාවක් ඉක්මසා ගත යුතුය."
         }
       ],
       "approved_at": null
@@ -227,7 +221,18 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You can only create 3 custom themes\" is somewhat stiffly translated. A more natural Slovenian phrasing would be better. 'Ustvarite lahko samo 3 teme po meri' is technically correct, but lacks the flow of the English.",
+          "suggestion": "Lahko ustvarite največ 3 teme po meri."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The use of 'prejšnjih tem' (previous themes) is grammatically correct but could be improved for clarity. While 'prejšnjih' implies the theme existed before, it's not as direct as implying you have to delete *an* existing theme.",
+          "suggestion": "Če želite ustvariti novo, morate izbrisati eno od že obstoječih tem."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -236,13 +241,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'прилагођене' is a valid word, but 'custom' generally translates to 'прилагођене' or 'оригиналне' depending on the context. 'Прилагођене' is more appropriate here, implying customization.",
-          "suggestion": "Consider 'оригиналне' if the themes are entirely user-created and not based on modifications."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence 'Да бисте креитрали нову, морате обрисати једну од претходних.' is grammatically correct, but a slightly more natural phrasing would be to reorder the clauses.",
-          "suggestion": "Да бисте креирали нову, морате обрисати једну од претходних тема."
+          "description": "The word 'прилагођене' is slightly awkward. A more natural phrasing would be 'корисничке'.",
+          "suggestion": "Можете само креирати 3 корисничке теме."
         }
       ],
       "approved_at": null
@@ -253,7 +253,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'kreitrali' is a misspelling of 'kreirati'.",
+          "description": "The word 'kreitrali' is a misspelling. It should be 'kreirati'.",
           "suggestion": "kreirati"
         }
       ],

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import classNames from "classnames";
 
 import { Portal } from ".";
@@ -24,7 +24,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<PortalProps> = (args) => {
+const Template: StoryFn<PortalProps> = (args) => {
   return (
     <div>
       <h3>Content outside portal</h3>
@@ -49,7 +49,7 @@ Default.parameters = {
   },
 };
 
-export const CustomContainer: Story<PortalProps> = () => {
+export const CustomContainer: StoryFn<PortalProps> = () => {
   const [container, setContainer] = React.useState<HTMLElement | null>(null);
 
   return (
@@ -57,7 +57,9 @@ export const CustomContainer: Story<PortalProps> = () => {
       <h3>Main content</h3>
       <div
         className={styles.customContainer}
-        ref={(node) => setContainer(node)}
+        ref={(node) => {
+          setContainer(node);
+        }}
       >
         <p>Custom container (portal target)</p>
         <Portal
@@ -79,7 +81,7 @@ CustomContainer.parameters = {
   },
 };
 
-export const MultiplePortals: Story<PortalProps> = () => (
+export const MultiplePortals: StoryFn<PortalProps> = () => (
   <div>
     <h3>Multiple portals example</h3>
     <Portal

@@ -3,7 +3,7 @@
   "content": "Storage period",
   "content_en_sha1_hash": "58eebe4d0ed34f94e0198cff2f9111c9ccc932b0",
   "created_at": "2025-05-19T21:30:52.796Z",
-  "updated_at": "2025-05-21T02:56:54.022Z",
+  "updated_at": "2025-05-24T04:00:45.150Z",
   "comment": {
     "text": "This translation key is used to display the \"Storage period\" label in various security settings pages. It will appear as a subheader or caption, indicating the duration of stored login history or audit trail data.",
     "is_auto": true,
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ආචයන පරාසය\" does not accurately convey the meaning of \"Storage period.\" \"ආචයන\" relates to attraction or allure, which is not relevant to storage duration. A more appropriate translation would focus on the concept of time or duration.",
-          "suggestion": "Consider alternatives like \"භදාරක කාලය\" (bhadaaraka kaalaya - storage time), \"සංරක්ෂණ කාලය\" (sanrakshana kaalaya - preservation time), or \"ගත කරන කාලය\" (gathakaraya kaalaya - elapsed time). The best choice will depend on the specific context."
+          "description": "The Sinhala translation \"ආචයන පරාසය\" does not accurately convey the meaning of \"Storage period.\" \"ආචයන\" relates to actions or occurrences, not storage. A more appropriate translation would relate to the duration of storage.",
+          "suggestion": "Possible suggestions include: నిల్వ කාලය (Nilva Kaalaya) - storage time, or සුරකින කාලය (Surakina Kaalaya) - period of keeping/saving."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Период складиштења\" while technically correct, doesn't perfectly capture the nuance of \"Storage period\" in the context of settings.  \"Storage period\" implies a duration for data retention. \"Период складиштења\" literally translates to \"storage period\" and could imply a physical storage space rather than a data retention timeframe.",
-          "suggestion": "Consider \"Време чувања\" or \"Рок чувања\" which translates to \"retention period\" or \"expiration period\" respectively and aligns better with the likely intended meaning within a settings context."
+          "description": "While \"Период складиштења\" is understandable, it's a somewhat literal and less natural translation of \"Storage period.\" \"Period čuvanja\" would be more commonly used and idiomatic in Serbian (Cyrillic) to describe a storage period in a settings context.",
+          "suggestion": "Period чувања"
         }
       ],
       "approved_at": null

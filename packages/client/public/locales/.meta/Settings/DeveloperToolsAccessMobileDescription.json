@@ -3,7 +3,7 @@
   "content": "This setting allows you to make the Developer Tools section visible to all users except guests.",
   "content_en_sha1_hash": "b8dbce88d97a0acc0406090da7489956d1f4bfe3",
   "created_at": "2025-05-19T21:30:51.181Z",
-  "updated_at": "2025-05-28T09:30:02.783Z",
+  "updated_at": "2025-06-08T12:02:32.827Z",
   "comment": {
     "text": "This translation key controls the visibility setting for the \"Developer Tools\" section on mobile devices, allowing users to decide who can see this content. The translated text appears in a category title and is used as a subtitle for a mobile-specific settings page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 86,
+      "line_number": 87,
       "context": "/>\n <MobileCategoryWrapper\n title={t(\"DeveloperToolsAccess\")}\n subtitle={\n <Trans\n i18nKey=\"DeveloperToolsAccessMobileDescription\"\n ns=\"Settings\"\n t={t}\n />\n }\n url=\"/portal-settings/security/access-portal/access-dev-tools\"",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bütün istifadəçilər üçün görünən etməyə imkan verir' is a bit awkward and doesn't fully capture the nuance of 'allows you to make...visible'. A more natural phrasing would be 'Bütün istifadəçilər üçün görünən hala gətirə bilməyə imkan verir' or 'Bütün istifadəçilər üçün görünə bilməsi üçün imkan verir'.",
-          "suggestion": "Bütün istifadəçilər üçün görünə bilməsi üçün imkan verir."
+          "description": "The translation 'etməyə imkan verir' is a bit awkward. A more natural phrasing would convey the meaning better. 'aktiv etməyə imkan verir' (allows to activate) or 'görünməsinə imkan verir' (allows to be visible) would be more idiomatic.",
+          "suggestion": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir. -> Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir və ya aktiv etməyə imkan verir."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a full stop at the end of the sentence. While grammatically correct, for UI text, a period is often omitted.",
-          "suggestion": "Remove the full stop at the end of the sentence."
+          "description": "The translation uses a lowercase 'ε' in 'Εργαλεία' which should ideally match the capitalization of 'Developer Tools' in the English content. While technically correct, consistent capitalization improves readability.",
+          "suggestion": "Εργαλεία (uppercase 'Ε')"
         }
       ],
       "approved_at": null
@@ -78,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"hacer que la sección\" is a slightly awkward phrasing in Spanish. It translates literally to 'make that the section,' which isn't the most natural way to express the intention. A more fluent translation would be to say 'mostrar' or 'dejar que la sección sea'.",
+          "description": "The translation \"hacer que la sección Herramientas de desarrollo sea visible\" is a bit awkward. A more natural phrasing would be \"mostrar la sección Herramientas de desarrollo\".",
           "suggestion": "Esta configuración le permite mostrar la sección Herramientas de desarrollo para todos los usuarios excepto los invitados."
         }
       ],
@@ -101,9 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Developer Tools\" is directly transliterated instead of being translated to its Armenian equivalent. While acceptable in some contexts, it might be more user-friendly to use an Armenian equivalent.",
-          "suggestion": "Consider translating 'Developer Tools' to something like 'ծրագրային գործիքների մեքենայություն' or a more colloquial equivalent depending on the target audience."
+          "type": "formatting",
+          "description": "The Armenian translation uses quotation marks around \"Developer Tools\" which may not be necessary or standard practice in Armenian. Consider removing them.",
+          "suggestion": "Remove the quotation marks around \"Developer Tools\"."
         }
       ],
       "approved_at": null
@@ -120,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"この設定により、ゲストを除くすべてのユーザーに「開発者ツール」セクションを表示することができます。\" is a bit literal and sounds unnatural in Japanese. A more natural phrasing would better convey the meaning of allowing visibility.",
-          "suggestion": "この設定により、ゲスト以外のすべてのユーザーで「開発者ツール」セクションを表示できるようになります。"
+          "description": "The translation 'この設定により、ゲストを除くすべてのユーザーに「開発者ツール」セクションを表示することができます' is a bit too formal and verbose for a settings description. It directly translates \"This setting allows you to make the Developer Tools section visible to all users except guests.\" but the tone is off.",
+          "suggestion": "この設定を有効にすると、開発者ツールセクションがゲスト以外のすべてのユーザーに表示されます。"
         },
         {
           "type": "formatting",
-          "description": "The use of quotation marks around \"開発者ツール\" feels slightly off. While technically correct, it's more common to omit them or use different styling in UI contexts.",
-          "suggestion": "この設定により、ゲスト以外のすべてのユーザーで「開発者ツール」セクションを表示できるようになります。"
+          "description": "The use of quotation marks around 「開発者ツール」 might be unnecessary and feel slightly unnatural in this context.",
+          "suggestion": "この設定を有効にすると、開発者ツールセクションがゲスト以外のすべてのユーザーに表示されます。"
         }
       ],
       "approved_at": null
@@ -137,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'make the Developer Tools section visible' could be more naturally expressed in Korean. While technically correct, it's a bit stiff.",
-          "suggestion": "이 설정을 사용하면 게스트를 제외한 모든 사용자에게 개발자 도구 섹션이 보이도록 설정할 수 있습니다."
+          "description": "The translation '이 설정을 사용하면 게스트를 제외한 모든 사용자에게 개발자 도구 섹션을 표시할 수 있습니다.' is a bit formal and verbose for a settings description. It's technically correct but could be more concise and user-friendly.  A more natural phrasing might convey the same meaning with fewer words.",
+          "suggestion": "이 설정을 사용하면 게스트를 제외하고 모든 사용자가 개발자 도구를 볼 수 있습니다."
         }
       ],
       "approved_at": null
@@ -149,13 +149,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ເຮັດໃຫ້ສ່ວນເຄື່ອງມືໃຫຍ່ສໍາລັບນັກພັດທະນາ\" is a literal translation that doesn't flow naturally in Lao. 'Developer Tools' is better translated as 'ເຄື່ອງມືພັດທະນາ'.",
-          "suggestion": "ການកំណត់ນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດເຮັດໃຫ້ສ່ວນເຄື່ອງມືພັດທະນາ (Developer Tools) ປາກົດຕົວໃຫ້ຜູ້ໃຊ້ທຸກຄົນເວັ້ນເສັ້ນຜູ້ເຂົ້າແອື້ (guests)."
+          "description": "The phrase 'ເຮັດໃຫ້ສ່ວນເຄື່ອງມືໃຫຍ່ສໍາລັບນັກພັດທະນາ' is a bit verbose and not the most natural way to express 'Developer Tools section'. It literally translates to 'make the large tool section for developers'.",
+          "suggestion": "ການកំណត់ນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດເຮັດໃຫ້ສ່ວນເຄື່ອງມືນັກພັດທະນາ (Developer Tools) ປາກົດຕົວ..."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'ຜູ້ເຂົ້າແອື້' is understandable, a more common and natural translation for 'guests' would be 'ຜູ້ໃຊ້ອາທິດິຕັ້ງຊົ່ວຄາວ' or simply 'ແຂກ'.",
-          "suggestion": "ການកំណត់ນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດເຮັດໃຫ້ສ່ວນເຄື່ອງມືພັດທະນາ (Developer Tools) ປາກົດຕົວໃຫ້ຜູ້ໃຊ້ທຸກຄົນເວັ້ນເສັ້ນແຂກ."
+          "description": "The word 'ເວັ້ນເສັ້ນ' is a less common way to express 'except'. While understandable, it might not be the most fluent.",
+          "suggestion": "ການកំណត់ນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດເຮັດໃຫ້ສ່ວນເຄື່ອງມືນັກພັດທະນາ (Developer Tools) ປາກົດຕົວໃຫ້ຜູ້ໃຊ້ທຸກຄົນເວັ້ນຜູ້ບໍ່ມີບັນຊີ (guests)."
         }
       ],
       "approved_at": null
@@ -178,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Narzędzia programistyczne' is a literal translation of 'Developer Tools' and might not be the most natural way to express it in Polish. It sounds a bit technical and clunky. A more user-friendly alternative might be 'Narzędzia deweloperskie'.",
-          "suggestion": "Narzędzia deweloperskie"
+          "description": "The translation 'Narzędzia programistyczne' is a literal translation of 'Developer Tools' and while understandable, a more natural phrasing in Polish might be 'Narzędzia deweloperskie' or 'Narzędzia dla programistów'.",
+          "suggestion": "Consider 'Narzędzia deweloperskie' or 'Narzędzia dla programistów' for a more fluent translation."
         }
       ],
       "approved_at": null
@@ -214,13 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආගන්තුකයින් හැර අනෙකුත් සියලු පරිශීලකයින්' (aganthukayin her anekunath piyasilakin) translates to 'all other users except guests'. While technically correct, it's more natural to say 'all users except guests' which would be ' සියලු පරිශීලකයින් හැර ආගන්තුකයින්' (siyalū pariyasilakin her aganthukayin).",
-          "suggestion": "සියලු පරිශීලකයින් හැර ආගන්තුකයින්"
+          "description": "The translation of \"Developer Tools\" is literal and could be improved for clarity and naturalness in Sinhala. A more common and understandable term might be used depending on the context. \"Developer Tools\" can be translated more contextually.",
+          "suggestion": "Consider using a more common Sinhala term for \"Developer Tools,\" perhaps something like \"අඩත්‍යා​වකාශ මෙවලම්” (Adyawasaya Mevalam) or a similar phrase that conveys the meaning of developer tools in Sinhala. This depends heavily on the target audience's familiarity with the English term."
         },
         {
-          "type": "formatting",
-          "description": "The word order 'මෙම සැකසුම ඔබට ඉඩ සලසයි' (mema sakasumu obā iba salasai) can be slightly improved for a more natural flow. It's slightly awkward.",
-          "suggestion": "මෙම සැකසුමෙන් ඔබට හැකිවේ"
+          "type": "incorrect_translation",
+          "description": "The phrasing 'ඉඩ සලසයි' (ida salasai) which translates to 'allows' is slightly awkward. While technically correct, it might be more natural to rephrase the sentence for better flow.",
+          "suggestion": "Consider rephrasing the sentence to a more natural Sinhala equivalent. Something like 'මෙම සැකසුම හරහා ඔබට...' (Mema sakasuma haratha obage...) which means 'Through this setting, you can...'"
         }
       ],
       "approved_at": null
@@ -228,7 +228,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'make the Developer Tools section visible' is not perfectly conveyed by 'sprístupniť sekciu Vývojárske nástroje'. While 'sprístupniť' (to make accessible) is close, 'zobraziť' (to display) or 'umiestniť' (to place/show) might be more accurate depending on the specific functionality. It implies making the section appear, not just generally making it accessible.",
+          "suggestion": "Consider 'Toto nastavenie vám umožňuje zobraziť sekciu Vývojárske nástroje všetkým používateľom okrem hostí.' or 'Toto nastavenie vám umožňuje umiestniť sekciu Vývojárske nástroje všetkým používateľom okrem hostí.'"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -243,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Алатке за програмере' is a literal translation of 'Developer Tools' which might not be the most natural phrasing in Serbian. A more common and understandable term might be 'Инструменти за програмере' or 'Средства за програмере'.",
-          "suggestion": "Consider using 'Инструменти за програмере' or 'Средства за програмере' instead of 'Алатке за програмере'."
+          "description": "The phrase \"Алатке за програмере\" is a literal translation of \"Developer Tools.\" A more natural and understandable translation for a Serbian user might be \"Инструменти за програмере\" or \"Средства за програмере\".",
+          "suggestion": "Инструменти за програмере"
         }
       ],
       "approved_at": null
@@ -255,13 +261,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ovo podešavanje vam omogućava\" is overly formal and slightly awkward for a user-facing setting description. A more natural phrasing would improve readability.",
-          "suggestion": "Ovo podešavanje omogućava..."
+          "description": "The term 'Developer Tools' is better translated as 'Alati za razvoj' rather than 'Alatke za programere'. While 'Alatke za programere' is understandable, it's not the standard terminology.",
+          "suggestion": "Alati za razvoj"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Odeljak Alatke za programere\" is a bit clunky. A more common and easily understood term would be preferable. Consider using a simpler equivalent.",
-          "suggestion": "Odjeljak za razvojne alate"
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'Ovo podešavanje vam omogućava da odeljak Alatke za razvoj učinite vidljivim svim korisnicima osim gostima.' is a bit verbose. A more concise translation would improve readability.",
+          "suggestion": "Ovo podešavanje omogućava prikaz odeljka Alati za razvoj svim korisnicima, osim gostima."
         }
       ],
       "approved_at": null
@@ -284,13 +290,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Công cụ dành cho nhà phát triển' is a literal translation of 'Developer Tools' and while understandable, a more natural Vietnamese phrasing might be 'Công cụ phát triển' or 'Bộ công cụ phát triển'.",
+          "description": "The phrase \"Công cụ dành cho nhà phát triển\" is a literal translation of \"Developer Tools\". While understandable, a more natural Vietnamese phrasing would be something like \"Công cụ phát triển\" or \"Công cụ lập trình\".",
           "suggestion": "Cài đặt này cho phép bạn hiển thị phần Công cụ phát triển cho tất cả người dùng, ngoại trừ khách."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ngoại trừ khách' is correct, it could be slightly improved for clarity and flow. 'ngoại trừ người dùng khách' is more formal and precise.",
-          "suggestion": "Cài đặt này cho phép bạn hiển thị phần Công cụ phát triển cho tất cả người dùng, ngoại trừ người dùng khách."
         }
       ],
       "approved_at": null
@@ -301,8 +302,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"此设置允许所有非访客用户查看开发者工具模块\" is technically correct, but could be more natural and closely aligned with the English meaning. \"非访客用户\" is a bit formal and clunky. A better phrasing would capture the exclusion of 'guests' more smoothly.",
-          "suggestion": "此设置允许除访客外的所有用户查看开发者工具模块。"
+          "description": "The English content implies that *only* non-guest users should see the developer tools. The current Chinese translation, \"此设置允许所有非访客用户查看开发者工具模块,\" can be interpreted as *all* non-guest users can see it, which doesn't capture the exclusion of guests.",
+          "suggestion": "此设置允许除了访客用户之外的所有用户查看开发者工具模块。"
         }
       ],
       "approved_at": null

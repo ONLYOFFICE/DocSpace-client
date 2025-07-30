@@ -3,7 +3,7 @@
   "content": "If you close the link settings menu right now, your changes will not be saved.",
   "content_en_sha1_hash": "664be2f693842e9d61109ed95c6d8038cb2c4188",
   "created_at": "2025-05-19T21:30:53.044Z",
-  "updated_at": "2025-05-28T09:30:02.304Z",
+  "updated_at": "2025-05-26T07:57:32.339Z",
   "comment": {
     "text": "\"If you close the link settings menu now, your changes will not be saved.\" This translation key is used to display a warning message in an unsaved changes dialog when the user attempts to close the link settings menu. It appears as part of the modal dialog's body, prompting users to save their changes before dismissing the dialog.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/UnsavedChangesDialog/index.js",
       "line_number": 77,
-      "context": ">\n <ModalDialog.Header>\n {t(\"Settings:YouHaveUnsavedChanges\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{t(\"Settings:UnsavedChangesBody\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Settings:CloseMenu\")}",
+      "context": ">\n <ModalDialog.Header>\n {t(\"Common:YouHaveUnsavedChanges\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{t(\"Settings:UnsavedChangesBody\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n key=\"OKButton\"\n label={t(\"Settings:CloseMenu\")}",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لن يتم حفظ التغييرات إذا قمت بإغلاق قائمة الإعدادات الآن\" is a literal translation but not the most natural way to express the intended meaning in Arabic. It sounds slightly clunky. A more natural phrasing would emphasize the consequence of closing the menu.",
-          "suggestion": "إذا أغلقت قائمة الإعدادات الآن، لن يتم حفظ التغييرات."
+          "description": "The translation 'لن يتم حفظ التغييرات إذا قمت بإغلاق قائمة الإعدادات الآن.' is a literal translation but lacks the natural flow of Arabic. It sounds somewhat clunky. A more natural way to convey the message would focus on the warning aspect and the potential loss of changes.",
+          "suggestion": "قد تفقد تغييراتك إذا أغلقت قائمة الإعدادات الآن."
         }
       ],
       "approved_at": null
@@ -69,30 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'usted,' which is formal. While grammatically correct, it might feel too formal for a settings menu. A more conversational and user-friendly approach would be preferable.",
-          "suggestion": "Si cierras el menú de configuración de enlaces en este momento, tus cambios no se guardarán."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'link settings menu' is not naturally translated as 'linkkiasetukset-menun'. A more natural translation would be 'linkkien asetusvalikko' or 'linkkien asetukset'.",
-          "suggestion": "linkkien asetusvalikko"
-        },
-        {
-          "type": "formatting",
-          "description": "The hyphen in 'linkkiasetukset-menun' appears overly literal and breaks up the flow of the Finnish sentence. It's better to avoid it or rephrase.",
-          "suggestion": "linkkien asetukset"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -167,13 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'link settings menu' is translated as 'meniul cu opțiuni de setare a link-ului'. A more natural Romanian translation would be 'meniul de setări al link-ului' or simply 'meniul de setări'.",
+          "description": "The phrase \"link settings menu\" is translated as \"meniul cu opțiuni de setare a link-ului\". While technically correct, it's a bit clunky. A more natural Romanian translation would be \"meniul de setări al link-ului\" or simply \"meniul de setări\".",
           "suggestion": "meniul de setări al link-ului"
-        },
-        {
-          "type": "grammar",
-          "description": "The possessive pronoun 'your' is translated as 'dvs'. While technically correct, 'tale' is more common and natural in Romanian for formal situations like this.",
-          "suggestion": "tale"
         }
       ],
       "approved_at": null
@@ -190,13 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a bit too literal and sounds unnatural in Sinhala. 'ඔබගේ වෙනස්කම් සුරැකෙන්නේ නැත' directly translates to 'Your changes will not be saved,' which is accurate but not idiomatic. A more natural phrasing would emphasize that changes will be lost.",
-          "suggestion": "ඔබ දැන් සබැඳි සැකසුම් වට්ටෝරුව වසා දැමුවහොත්, ඔබගේ වෙනස්කම් නැති වී යනු ඇත."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using a more concise phrasing improves readability.  The original Sinhala translation is slightly verbose.",
-          "suggestion": "Consider combining phrases for a more fluent feel."
+          "description": "The translation 'ඔබගේ වෙනස්කම් සුරැකෙන්නේ නැත' could be interpreted as 'your changes will not be saved at all' rather than 'will not be saved *if* you close the link settings menu right now'. A more accurate translation would reflect the conditional nature of the original English.",
+          "suggestion": "ඔබ දැන් සබැඳි සැකසුම් වට්ටෝරුව වසා දැමුවහොත්, ඔබගේ වෙනස්කම් සුරැකෙන්නේ නොවනු ඇත."
         }
       ],
       "approved_at": null
@@ -219,12 +192,12 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"подешавање\" (settings) is spelled correctly, but the context implies a plural form might be more appropriate given that it refers to link settings.",
+          "description": "The word 'подешавање' (setting) is a bit formal and could be replaced with a more common alternative for a user interface.",
           "suggestion": "Ако сада затворите мени за подешавања линкова..."
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the Serbian sentence is a bit wordy. A more natural phrasing might improve readability.",
+          "description": "While grammatically correct, 'ваше промене' (your changes) can be slightly improved for flow. A more natural phrasing exists.",
           "suggestion": "Ако сада затворите мени за подешавања линкова, промене неће бити сачуване."
         }
       ],
@@ -260,8 +233,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '您所做的更改可能不会被保存' is overly formal and slightly awkward. While technically correct, it doesn't flow naturally in modern Chinese. A more natural phrasing would better reflect the original's tone.",
-          "suggestion": "如果您现在关闭链接设置菜单，您的更改将不会保存。"
+          "description": "The translation '您所做的更改可能不会被保存' isn't the most natural or concise way to express \"your changes will not be saved.\" While technically correct, it's a bit verbose.",
+          "suggestion": "您所做的更改将不会保存 (Nín suǒ zuò de gēnggǎi jiāng bù huì bǎocún) or 您所做的更改不会保存 (Nín suǒ zuò de gēnggǎi bù huì bǎocún)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly wrong, repeating '您' (Nín) feels slightly formal and a bit clunky in this context. Using '你的' (Nǐ de) might be more conversational.",
+          "suggestion": "如果您现在关闭链接设置菜单，你的更改可能不会被保存。"
         }
       ],
       "approved_at": null

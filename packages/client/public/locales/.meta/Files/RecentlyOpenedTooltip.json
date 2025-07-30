@@ -3,7 +3,7 @@
   "content": "Recently opened via the link",
   "content_en_sha1_hash": "ba1b7dbd261f921af480d706c47f89b68942c829",
   "created_at": "2025-05-19T21:30:56.021Z",
-  "updated_at": "2025-06-18T07:34:14.987Z",
+  "updated_at": "2025-06-18T17:11:42.407Z",
   "comment": {
     "text": "This translation key is used for a tooltip that displays \"Recently opened via the link\" when a user interacts with an item in a file list or room details view. It appears as a tooltip when the selection has an external link and indicates the source of the recent open.",
     "is_auto": true,
@@ -48,13 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Yaxın zamanlarda link vasitəsilə açıldı\" is too literal and doesn't accurately convey the meaning of \"Recently opened via the link\". It implies the file *was* opened, not that it's recently accessed through a link. A more accurate translation should reflect recent access, not just opening.",
-          "suggestion": "Consider alternatives like \"Son zamanlar linklə açıldı\" (Recently opened with a link) or \"Link vasitəsilə son dəfə açıldı\" (Recently opened via link)."
-        },
-        {
-          "type": "grammar",
-          "description": "While understandable, \"link vasitəsilə\" could be improved. The use of 'vasitəsilə' isn't the most natural phrasing in Azerbaijani for this context.",
-          "suggestion": "Consider using a more direct phrase like \"linklə\" or \"link üzrə\"."
+          "description": "The translation 'Yaxın zamanlarda link vasitəsilə açıldı' doesn't fully capture the nuance of 'Recently opened via the link'. It translates to 'Opened recently via link'. A more accurate translation would reflect the 'Recently opened' part emphasizing the action of opening.",
+          "suggestion": "Son zamanlar link vasitəsilə açılmışdır"
         }
       ],
       "approved_at": null
@@ -80,25 +75,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ανοίχθηκαν πρόσφατα μέσω του συνδέσμου' is a literal translation and doesn't quite convey the intended meaning of 'Recently opened via the link' in a natural Greek way. While technically correct, it sounds a bit awkward.",
-          "suggestion": "Πρόσφατα ανοίχθηκαν μέσω συνδέσμου"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Abierto recientemente a través del enlace' doesn't perfectly capture the meaning of 'Recently opened via the link.' A more accurate translation would emphasize the action of opening, rather than simply stating it was opened. 'Abierto recientemente mediante el enlace' or 'Recientemente abierto a través del enlace' would be improvements.",
-          "suggestion": "Recientemente abierto a través del enlace"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -107,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Viimeaikoina avattu linkin kautta' while understandable, is not the most natural or accurate translation of 'Recently opened via the link'. A more natural translation would emphasize the 'recently opened' aspect more directly.",
-          "suggestion": "Avattu äskettäin linkin kautta"
+          "description": "The translation 'Viimeaikoina avattu linkin kautta' while understandable, doesn't perfectly capture the nuance of \"Recently opened via the link.\" A more precise translation would better reflect the original meaning. \"Recently opened via the link\" refers to documents or files accessed directly via a link.",
+          "suggestion": "Viimeksi avattu linkistä"
         }
       ],
       "approved_at": null
@@ -122,13 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հղումով վերջերս բացված\" literally translates to 'Recently opened via link'. While not entirely incorrect, it's a bit clunky. A more natural Armenian phrasing that conveys the same meaning would be preferable. The word order feels slightly unnatural.",
-          "suggestion": "Մեջբերված գրանցումները վերջերս բացվել են հղումով։ (The recently opened recordings were opened via link.) or Վերջերս բացված հղումներով (Recently opened with links)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -137,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aperto di recente tramite link' is not a perfect match for 'Recently opened via the link'. While 'Aperto di recente tramite link' is understandable, it lacks the nuance of 'via the link'. A more accurate translation would consider the context of a tooltip indicating the file was opened through a link.",
+          "description": "The translation \"Aperto di recente tramite link\" isn't the most natural or precise rendering of \"Recently opened via the link.\"  \"Tramite\" suggests a method or means, which isn't the best fit here.  A more common and natural phrasing would emphasize the fact that the file was recently opened, connected to the link.",
           "suggestion": "Aperto recentemente tramite collegamento"
         }
       ],
@@ -149,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '最近リンクで開いたファイル' (Saikin linku de aita fairu) literally translates to 'Files opened recently via link'. While conveying a similar meaning, it's a bit awkward in Japanese. A more natural translation would emphasize the 'recently opened' aspect.",
-          "suggestion": "最近開いたファイル (Saikin aita fairu) - 'Recently opened files'"
+          "description": "The translation \"最近リンクで開いたファイル\" literally translates to \"Files recently opened via link\". While understandable, it's slightly awkward and doesn't fully capture the nuance of the English \"Recently opened via the link.\" A more natural phrasing would be closer to indicating that the files were opened *through* a link.",
+          "suggestion": "最近リンク経由で開いたファイル (Saikin rinku keiyu de akaita fairu) - 'Files recently opened via link'"
         }
       ],
       "approved_at": null
@@ -158,7 +135,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '링크를 통해 최근 열렸습니다' is technically correct but sounds slightly unnatural in Korean. A more natural phrasing would convey the meaning of 'recently opened via the link' more effectively.",
+          "suggestion": "링크를 통해 최근에 열림"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -167,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ເປີດຕົວບໍ່ດົນີ້ຜ່ານລິ້ງ' doesn't perfectly capture the nuance of 'Recently opened via the link'. 'ເປີດຕົວ' (pert to) can mean 'opened self' or 'introduced', not 'opened' in the context of a file. It lacks a direct equivalent of 'opened' referring to the file itself. 'ບໍ່ດົນີ້' (bod doni) means 'not long ago' which is a good translation for 'recently'.",
-          "suggestion": "ເອກະສານທີ່ເປີດຫຼ້າສຸດຜ່ານລິ້ງ"
+          "description": "The translation \"ເປີດຕົວບໍ່ດົນີ້ຜ່ານລິ້ງ\" literally translates to 'Opened recently via link'. While understandable, it doesn't capture the nuance of 'Recently opened via the link'. A more accurate translation would convey that the *file* was recently opened.",
+          "suggestion": "ເອກະສານທີ່ເປີດບໍ່ດົນີ້ຜ່ານລິ້ງ (Dokment thi perdt borndti phan ling) - 'Document that was recently opened via link'."
         }
       ],
       "approved_at": null
@@ -179,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nesen atvērts, izmantojot saiti' doesn't perfectly capture the nuance of 'Recently opened via the link'. While technically correct, it could be more concisely translated to better reflect the original meaning.",
-          "suggestion": "Nesen atvērts saites formā"
+          "description": "The translation 'Nesen atvērts, izmantojot saiti' is a literal translation but doesn't quite capture the natural flow of English. 'Recently opened via the link' implies a direct access through a link. A more natural Latvian equivalent would focus on that direct access.",
+          "suggestion": "Nesen atvērts pa saiti"
         }
       ],
       "approved_at": null
@@ -197,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Niedawno otworzono przez link' is a passive construction and doesn't quite capture the meaning of 'Recently opened via the link' which implies the user opened the file. A more accurate translation would emphasize the user's action.",
-          "suggestion": "Niedawno otworzone przez link (Recently opened via link - passive, but closer) or Użytkownik ostatnio otworzył przez link (User recently opened via link - active)"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'otworzono' is a literary/formal past participle. A more common and natural phrasing might be preferred for user interface text.",
-          "suggestion": "Consider alternatives like 'otworzył' (more common past tense)."
+          "description": "The translation \"Niedawno otworzono przez link\" literally translates to \"Recently opened by link.\" While understandable, it's a passive construction and doesn't perfectly capture the meaning of 'Recently opened via the link.' A more natural and active phrasing would be preferred.",
+          "suggestion": "Niedawno otworzono za pomocą linku"
         }
       ],
       "approved_at": null
@@ -214,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Abriu recentemente através do link' implies an action performed *by* the user. The English 'Recently opened via the link' refers to a list of recently opened files presented to the user via a link, not an action they performed. A more accurate translation would indicate files accessible via a link.",
-          "suggestion": "Arquivos abertos recentemente através do link"
+          "description": "The translation 'Abriu recentemente através do link' is not the best equivalent for 'Recently opened via the link'. A more natural and accurate translation would be 'Aberto recentemente através do link'. The current translation uses the verb 'abrir' (to open) in the past tense, implying someone actively opened it. The English phrase describes something that happened passively, like a list of recently opened files.",
+          "suggestion": "Aberto recentemente através do link"
         }
       ],
       "approved_at": null
@@ -223,13 +201,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Recently opened via the link\" implies a direct action of opening a file through a link. The Portuguese translation \"Aberto recentemente através do link\" translates literally as 'Opened recently through the link'. While technically correct, it doesn't capture the nuance of the original English, which suggests the link *caused* the recent opening. A better translation would convey this causality.",
-          "suggestion": "Recentemente aberto por meio do link"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -238,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"A fost deschis recent prin link\" is a literal translation but doesn't quite capture the nuance of 'Recently opened via the link'. It's grammatically correct but sounds slightly awkward in Romanian.",
-          "suggestion": "Adeseori deschis prin link"
+          "description": "The translation 'A fost deschis recent prin link' is not the most natural or idiomatic way to convey 'Recently opened via the link' in Romanian. While technically correct, it sounds slightly awkward.",
+          "suggestion": "Deschis recent prin link"
         }
       ],
       "approved_at": null
@@ -250,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Недавно открыто с помощью ссылки\" is a literal translation and doesn't quite capture the natural flow of the English phrase \"Recently opened via the link.\" It sounds slightly awkward in Russian. A more natural translation would emphasize that the file was opened *through* a link, rather than that it was opened *with* a link.",
+          "description": "The translation 'Недавно открыто с помощью ссылки' is a passive construction that doesn't quite capture the active meaning of 'Recently opened via the link.' It implies something opened *by* the link, rather than being opened *through* the link.",
           "suggestion": "Недавно открыто по ссылке"
         }
       ],
@@ -262,13 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නවතීව ලින්ක් ඔස්සේ විවෘත කරන ලදී' doesn't quite capture the nuance of 'Recently opened via the link'. 'නවතීව' (navatīva) translates to 'newly' which isn't the primary meaning.  The emphasis should be on *recently*, not newness.",
-          "suggestion": "Consider a translation like 'පහුතුවේ ලින්ක් ඔස්සේ විවෘත කරන ලදී' (pahuṭuve link osse vivṛta karaṇ la dī) which uses 'පහුතුවේ' (pahuṭuve) meaning 'recently'."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'ලින්ක්' (link) is commonly used and understood in Sinhala, it's a transliteration.  It's acceptable but not ideal for formal contexts.",
-          "suggestion": "Although acceptable, for a more formal and accurate representation, consider 'සබැඳිය' (sabaṇadiya) which means 'link'."
+          "description": "The translation 'නවතීව ලින්ක් ඔස්සේ විවෘත කරන ලදී' is not the most natural or accurate translation of 'Recently opened via the link'. It's overly formal and clunky.",
+          "suggestion": "A better translation would be something like 'අවසම විවෘත වූයේ ඊයේ ළඟා වූ ඊයම' (awasama vivrutaavuye eeyi lagaaivu eeyi) or 'ඊයේ ළඟා වූ ඊයම' (eeyi lagaaivu eeyi), conveying 'recently opened via link' in a more colloquial and understandable way."
         }
       ],
       "approved_at": null
@@ -291,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Недавно отворено путем линка\" is not the most natural or accurate rendering of \"Recently opened via the link.\" While technically correct, it sounds somewhat clunky in Serbian. A more idiomatic translation would better convey the meaning.",
-          "suggestion": "Недавно отворено преко везе"
+          "description": "The translation \"Недавно отворено путем линка\" is not the most natural or accurate translation of \"Recently opened via the link\".  While technically correct, it sounds slightly awkward in Serbian. A more idiomatic translation would be something along the lines of \"Отврено преко везе\" or \"Отврено путем везе\".",
+          "suggestion": "Отврено путем везе"
         }
       ],
       "approved_at": null
@@ -309,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bağlantı üzerinden en son açılan' is a literal translation but doesn't quite capture the intended meaning of 'Recently opened via the link' in a natural Turkish way. It sounds slightly awkward.",
-          "suggestion": "Consider alternatives like 'Bağlantı yoluyla yakın zamanda açılan' or 'Bağlantıdan açılan en son dosyalar' or simply 'Bağlantı yoluyla açılan'."
+          "description": "The translation \"Bağlantı üzerinden en son açılan\" while literally meaning 'Recently opened via link' doesn't perfectly capture the intended meaning of 'Recently opened via the link'. It's a bit clunky and could be improved for better flow and naturalness.",
+          "suggestion": "Bağlantı yoluyla açılanlar"
         }
       ],
       "approved_at": null

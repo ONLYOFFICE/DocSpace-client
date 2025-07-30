@@ -3,7 +3,7 @@
   "content": "Sort order",
   "content_en_sha1_hash": "5601af90fba7fe38466b58c08c018711849b8855",
   "created_at": "2025-05-19T21:30:54.692Z",
-  "updated_at": "2025-05-21T08:33:47.100Z",
+  "updated_at": "2025-05-24T08:46:38.025Z",
   "comment": {
     "text": "This translation key is used to display the sort order options in a dropdown or list, allowing users to choose whether to sort by descending or ascending order. It appears on the page where sorting options are configured, typically in a dialog or settings panel for managing data or files. Translators should provide a clear and intuitive description that reflects the intended behavior of this feature.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"رتب الفرز\" is not the most accurate or natural way to express \"Sort order\" in Arabic (Saudi Arabia). While technically understandable, it's a bit awkward. \"ترتيب الفرز\" or \"ترتيب العناصر\" would be more common and clearer.",
-          "suggestion": "ترتيب الفرز"
+          "description": "The Arabic translation \"رتب الفرز\" is not the most natural or accurate translation of \"Sort order.\" While technically understandable, it's a bit clunky. \"رتب\" (rattib) means 'arrange' or 'order' and \"الفرز\" (al-farz) means 'sorting.' Combining them directly isn't idiomatic.",
+          "suggestion": "Consider \"ترتيب الفرز\" (tarteeb al-farz) or \"ترتيب حسب\" (tarteeb hasab - 'sort by').  A more context-dependent translation might also be preferable depending on the software being localized."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sıralamanı qaydaya salın\" doesn't accurately convey the meaning of \"Sort order\". It translates closer to \"Put your ranking in order\" or \"Organize your ranking.\" The correct translation should be closer to 'Sıralama sırası' or 'Sıralama düzəni'.",
-          "suggestion": "Sıralama sırası"
+          "description": "The translation 'Sıralamanı qaydaya salın' doesn't accurately convey the meaning of 'Sort order'. It translates more closely to 'Put your ranking in order' or 'Arrange your ranking'.  'Sort order' refers to the sequence in which items are sorted.",
+          "suggestion": "The correct translation for 'Sort order' would be something like 'Çərgə sıralaması' or 'Sıralama qaydası'."
         }
       ],
       "approved_at": null
@@ -69,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Σειρά ταξινόμησης\" is a literal translation, it's not the most natural or common way to say \"Sort order\" in Greek. It's a bit clunky.",
+          "suggestion": "Consider alternatives like \"Διάταξη\" (diatáxi) or \"Τακτική σειρά\" (taktikí seirá) which might be more idiomatic."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Criterio de ordenación\" is a possible translation, it's quite formal and not the most common or natural way to say \"sort order\" in Spanish. A more natural and common translation would be \"orden de clasificación\" or \"orden de ordenamiento\". \"Criterio de ordenación\" implies a 'criterion' or 'rule' for ordering, which isn't necessarily the intended meaning.",
-          "suggestion": "Consider \"orden de clasificación\" or \"orden de ordenamiento\" for a more natural and common translation."
+          "description": "While 'Criterio de ordenación' is a valid translation, it's a bit formal and technical for a Javascript SDK setting. 'Orden' or 'Ordenamiento' would be more common and understandable in most contexts.",
+          "suggestion": "Consider 'Orden' or 'Ordenamiento' as alternatives."
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Տեսակավորման կարգ\" literally translates to 'sorting order' or 'classification order', which isn't quite the same as \"sort order\". \"Sort order\" refers to the arrangement of items in a sorted list. A better translation would capture that meaning.",
-          "suggestion": "Տեղաշարժի կարգ (Tegsharchi karq) - meaning 'order of arrangement' or 'ordering' would be more accurate, or Դասավորման կարգ (Dasavor’mani karq) meaning 'arrangement order'."
+          "description": "While \"Տեսակավորման կարգ\" is technically correct, it's a rather formal and less common way to say \"sort order\" in Armenian. It implies a classification or categorization process rather than a simple ordering.",
+          "suggestion": "A more natural and common translation would be something like \"Դասավորման կարգ\" (Dasavor’man karg) or \"Համադասելության կարգ\" (Hamadaselyutyun karg).  \"Պարապեսելության կարգ\" (Parapeselyutyun karg) is another possibility. The best choice depends on the precise context."
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"並べ替え順序\" (nabekae junjo) is technically correct, it's overly formal and a bit clunky for a Javascript SDK setting. \"並べ順序\" (naberunjo) is a more natural and concise translation.",
-          "suggestion": "並べ順序"
+          "description": "While \"並べ替え順序\" (nabekae junjo) is technically correct, it's overly formal and verbose for a technical setting like a Javascript SDK key. A more natural and concise translation would be \"並び順\" (naribunjun) or \"ソート順\" (soutojun).",
+          "suggestion": "Consider \"並び順\" (naribunjun) or \"ソート順\" (soutojun)."
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අනුපිළිවෙළ\" (anupiliveḷa) while technically meaning 'order' or 'sequence,' is not the most natural or common translation for 'sort order' in a technical context like Javascript SDK. It lacks the specific nuance of 'sorting'.",
-          "suggestion": "Consider a more specific translation like \"අවsortBy කිරීමේ පිළිවෙල\" (avsortBy kirimin piliveḷa) or \"sort කිරීමේ අනුපිළිවෙල\" (sort kirimin anupiliveḷa). A simpler alternative, depending on the context, could be just \"sort පිළිවෙල\" (sort piliveḷa)."
+          "description": "The translation 'අනුපිළිවෙළ' while technically meaning 'order' or 'sequence', isn't the most natural or idiomatic translation of 'Sort order' in the context of a Javascript SDK. It's a bit too literal and doesn't fully capture the meaning of sorting.",
+          "suggestion": "Consider 'අවස්ථාවානුකූල පිළිවෙල' (awasthawaanukoola pilivele) which conveys 'sorted order' or 'order based on priority' or ' වර්ගීකරණය කල පිළිවෙල' (vargikaranaya kalaa pilivele) which means 'sorted order'."
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Zoradiť objednávku\" literally translates to \"To sort order.\" While understandable, it doesn't quite capture the meaning of \"Sort order\" which refers to the order in which items are sorted. A more accurate translation might be \"Poradie zoskupovania\" or \"Zoznam podľa poradia\".",
-          "suggestion": "Poradie zoskupovania"
+          "description": "The translation \"Zoradiť objednávku\" doesn't accurately reflect \"Sort order.\" It literally translates to \"To sort order,\" implying an action is being performed on an order. \"Sort order\" refers to the sequence or arrangement, not the act of sorting.",
+          "suggestion": "Poradie zoskupenia"
         }
       ],
       "approved_at": null
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Red sortiranja' is not the most natural or accurate translation of 'Sort order' in Serbian (Latin). While technically understandable, it's a bit clunky.",
-          "suggestion": "Consider 'Red osnutka' or 'Sortiranje' as more idiomatic translations."
+          "description": "The translation \"Red sortiranja\" is not the most natural or accurate translation of \"Sort order\". While technically correct, it's a bit literal and clunky. A more idiomatic translation would be \"Poredak sortiranja\" or \"Sortiranje po redu\".",
+          "suggestion": "Poredak sortiranja"
         }
       ],
       "approved_at": null
@@ -231,13 +237,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Sıralama düzeni\" is understandable, it's a bit literal and not the most natural Turkish translation for \"Sort order\". It translates to \"Sorting arrangement\" rather than \"Sort order\".",
-          "suggestion": "Sıralama sırası"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

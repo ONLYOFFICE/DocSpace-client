@@ -3,7 +3,7 @@
   "content": "Duplicate",
   "content_en_sha1_hash": "972d57379db3e5be76d4ead709fef1ad71ff03d6",
   "created_at": "2025-05-19T21:30:51.459Z",
-  "updated_at": "2025-05-28T09:30:02.524Z",
+  "updated_at": "2025-05-26T07:57:32.542Z",
   "comment": {
     "text": "This translation key is used for the label \"Duplicate\" in a data import component, likely appearing as an option on a select menu or in a table header. It will be displayed to users when importing accounts, and is controlled by the \"Settings:DuplicateNoun\" translation string.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"نسخة مزوجة\" (nuskha muzawwaja) doesn't accurately convey the meaning of \"Duplicate\". \"مُزَوَّجَة\" (muzawwaja) means 'married' or 'paired,' which is not the intended meaning of 'duplicate' in the context of settings.",
-          "suggestion": "A more appropriate translation for \"Duplicate\" would be something like \"مُضاعَفَة\" (muda'afa) which means 'doubled' or 'duplicated', or \"نسخة مكررة\" (nuskha mukarrara) meaning 'repeated copy'."
+          "description": "The translation 'نسخة مزوجة' (nuskha muzawwaja) literally translates to 'married copy' or 'duplicated copy' but doesn't convey the simple meaning of 'duplicate' in the context of settings.  It's too literal and sounds unnatural.",
+          "suggestion": "A more appropriate translation would be something like 'مكررة' (mukarrara) meaning 'repeated' or 'duplicate' or 'نسخة طبق الأصل' (nuskha taabiq al-asl) meaning 'exact copy'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Dublikat edin\" translates to \"Duplicate it\" in English. While technically correct, it's an imperative and may not fit the context of \"Duplicate\" which is often used as a noun (e.g., 'Create a duplicate'). A better translation would depend on the specific use case. Assuming it's referring to creating a duplicate object or file, a more fitting translation could be \"Dublikat\" or \"Eynisi\".",
-          "suggestion": "Consider \"Dublikat\" or \"Eynisi\" depending on the intended meaning. If it's strictly an action, \"Dublikat et\" could be acceptable."
+          "description": "The translation \"Dublikat edin\" is a command ('duplicate it'). The English word 'Duplicate' is a noun, not a verb. A more appropriate noun translation would be \"Dublikat\".",
+          "suggestion": "Dublikat"
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Kopioi' translates to 'Copy' in English, whereas the English content is 'Duplicate'. While related, they are not exact equivalents. 'Duplicate' implies creating an identical copy, whereas 'Kopioi' is a more general 'copy'.",
-          "suggestion": "Consider 'Kaksoiskappale' (meaning 'duplicate') or 'Toista' (meaning 'repeat/duplicate'), depending on the specific context."
+          "description": "While 'Kopioi' can mean 'copy', in the context of 'Settings:DuplicateNoun', 'duplicate' implies creating an exact copy, which 'Kopioi' doesn't always convey. A more suitable translation might be 'Kaksoiskappale' or 'Monista'.",
+          "suggestion": "Kaksoiskappale"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Duplica' is a valid Italian word, it's not the most natural or commonly used translation for 'Duplicate' in this context (likely referring to a setting or option). A more appropriate translation would depend on the specific context but 'Duplicato' or 'Copia' might be better.",
-          "suggestion": "Consider 'Duplicato' or 'Copia' depending on the surrounding text and intended meaning."
+          "description": "While 'Duplica' is a valid Italian word related to 'duplicate', it's more of a verb form. The English 'Duplicate' functions more as a noun in this context (likely referring to a duplicated item or setting). A more suitable noun translation would be 'Duplicato'.",
+          "suggestion": "Duplicato"
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'복제' (bokje) is a valid translation for 'duplicate' but it often carries a connotation of unauthorized copying or replication. Depending on the context in 'Settings', a more neutral term like '이중' (ee-joong) or '중복' (jung-bok) might be more appropriate. '복제' implies a copy, whereas '이중' implies a double or duplicated item, and '중복' implies redundancy.",
+          "suggestion": "Consider '이중' (ee-joong) or '중복' (jung-bok) for a more neutral translation. The best choice depends on the specific context of 'Settings'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຊໍ້າກັນ\" (chɔ́ɔ̯˨˩.kán) while meaning 'duplicate' or 'repeated', doesn't precisely convey the English meaning of 'Duplicate' in the context of settings. It implies repetition or something happening again. A more accurate translation might depend on the specific context within the settings. It could imply a copy or an identical copy.",
-          "suggestion": "Consider alternatives like \"ສ້າງຕ່າງໆຄືນ\" (sâang dtàang dtàang kʉ̀ʉn) - 'recreate', or \"ຖ່າຍທອດ\" (thàay thòt) - 'copy', or \"ແບບຢ່າງຄືນ\" (bàep yàang kʉ̀ʉn) - 'identical copy' depending on the setting's function. Without more context, it's difficult to provide the perfect suggestion."
+          "description": "'ຊໍ້າກັນ' while literally meaning 'duplicate' or 'repeated', doesn't fully capture the nuance of 'Duplicate' in this context, which refers to making a copy of something. It could be misinterpreted as something being accidentally repeated.",
+          "suggestion": "Consider using 'ສ້າງຕ່າງກຳ' (sang tang kam) which translates to 'create a copy' or 'make a duplicate', or 'ຜະລິດເອກະບົກ' (phalit ekabok) which means 'produce a duplicate'. The best choice depends on the specific meaning within the settings."
         }
       ],
       "approved_at": null
@@ -171,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Dublare' is a valid Romanian word, it doesn't directly translate 'Duplicate' in the context of settings. 'Duplicate' often implies creating a copy or replication. 'Dublare' implies a duplication process itself.",
+          "suggestion": "Consider 'Copiere' (copy) or 'Replicare' (replication) as alternatives, depending on the precise meaning intended within the settings. 'Dublură' could also be considered as 'duplicate item' or 'double'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -186,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'අනුපිටපතක්' while meaning 'copy' or 'duplicate' in some contexts, is not the best translation for 'Duplicate' in the context of Settings. It carries a more formal and specific connotation than generally implied by 'Duplicate'. A more suitable translation would be 'පිටපත්' or 'බරපතලිං'.",
-          "suggestion": "පිටපත් or බරපතලිං"
+          "description": "The translation \"අනුපිටපතක්\" while meaning 'copy' or 'duplicate' in a broader sense, doesn't precisely convey the meaning of 'Duplicate' in the context of settings. It suggests a physical copy rather than the functional duplication of an element.",
+          "suggestion": "Consider alternatives like \"පිටපත්\" (pitapat) which can be used to mean a copy or duplicate, or a more context-specific term depending on what is being duplicated (e.g., \"ද්විතීය\" (dviitiya) for a second or duplicate instance)."
         }
       ],
       "approved_at": null
@@ -210,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Дуплицирај' is a verb meaning 'duplicate' or 'copy'. While technically related, for a setting key named 'DuplicateNoun', a noun form would be more appropriate.  It's likely the intent was to have a noun representing a duplicate.",
-          "suggestion": "Consider alternatives like 'Дупликат' (Duplicate - Noun) or 'Копија' (Copy - Noun)."
+          "description": "While 'Дуплицирај' is a valid verb meaning 'to duplicate', it's an imperative form. The key 'Settings:DuplicateNoun' suggests a noun or a more general term for 'duplicate' is needed, not an action. A noun would be more appropriate here.",
+          "suggestion": "Consider using a noun form like 'Дупликат' (Duplicate - noun) or 'Копија' (Copy)."
         }
       ],
       "approved_at": null
@@ -228,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Yinelenen' means 'repeating' or 'recurring', 'Duplicate' implies an exact copy. 'Yinelenen' doesn't fully capture the nuance of 'Duplicate' in this context (Settings). A better translation might be 'Çift' or 'Tekrar'",
-          "suggestion": "Consider 'Çift' or 'Tekrar' for a more accurate translation."
+          "description": "While \"Yinelenen\" can mean \"duplicate,\" it's not the most natural or common translation for \"Duplicate\" in this context (likely referring to a setting or feature). It sounds a bit awkward.",
+          "suggestion": "Consider alternatives like \"Çift\" or \"Tekrar\" depending on the exact context of the setting. For example, if it's about creating copies, \"Çift\" might be better; if it's about repetition, \"Tekrar\" could work."
         }
       ],
       "approved_at": null

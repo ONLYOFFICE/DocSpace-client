@@ -3,7 +3,7 @@
   "content": "Add watermarks to documents",
   "content_en_sha1_hash": "22034bd673fd6d7cd91245241c5115556634de93",
   "created_at": "2025-05-19T21:30:54.353Z",
-  "updated_at": "2025-05-21T09:32:37.140Z",
+  "updated_at": "2025-05-24T09:44:44.680Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add watermarks\" in a UI category header. It appears as part of a larger settings page for developer tools and allows users to toggle adding watermarks to documents.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'nişanları' (watermarks) could be spelled as 'su işarələri' for more accuracy and common usage in Azerbaijani.",
+          "suggestion": "Sənədlərə su işarələri əlavə edin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -144,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Adăugare incripționare la documente' translates to 'Adding encryption to documents', which is not the intended meaning of 'Add watermarks to documents'. Watermarks are not encryption.",
+          "description": "The Romanian translation \"Adăugare incripționare la documente\" translates to 'Adding encryption to documents,' which is not the intended meaning of 'Add watermarks to documents.' Watermarks are not encryption.",
           "suggestion": "Adăugare filigran la documente"
         }
       ],
@@ -159,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ලේඛන' (lekhena) is a general term for documents. While technically correct, 'ලේඛනයන්ට' (lekhenayanta) would be slightly more grammatically precise and conveys the meaning 'to documents' more accurately.",
-          "suggestion": "ලේඛනයන්ට"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Додај жигове документима\" is understandable, a more accurate and natural-sounding translation of \"Add watermarks to documents\" in Serbian (Cyrillic) would be \"Додавање воденених знакова на документе\" or \"Додати водени знаци на документе\". \"Жигови\" typically refers to stamps or seals, not watermarks.",
-          "suggestion": "Додавање воденених знакова на документе"
+          "description": "The Serbian translation \"Додај жигове документима\" uses the word 'жигове' which translates to 'stamps' or 'brands'. While it conveys the general idea of a watermark, it's not the precise equivalent. 'Watermark' is often used in technical contexts and a closer translation would be needed.",
+          "suggestion": "Додај водене жигове на документе"
         }
       ],
       "approved_at": null
@@ -195,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'žigove' (žig = stamp, žigove = stamps) doesn't fully capture the intended meaning of 'watermarks'. While a stamp *can* be a form of watermark, it's a more specific and less general term. 'Vodeni žig' would be a more accurate translation of 'watermark'.",
+          "suggestion": "Dodaj vodene žigove dokumentima"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -215,14 +221,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The term 'watermark' is in English within a Vietnamese sentence. While understandable, it's preferable to use the fully translated term consistently.",
-          "suggestion": "Thêm hình mờ vào tài liệu"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'hình mờ' is a valid translation for watermark, it might be less commonly used in some contexts.  Consider alternatives depending on the target audience and style guide.",
-          "suggestion": "Consider 'dấu nước' or 'hình chìm' as alternatives, check style guide for preference."
+          "description": "While technically correct, \"hình mờ\" can sound slightly awkward or overly literal in this context. A more natural and commonly used term would be just \"watermark\".",
+          "suggestion": "Thêm watermark vào tài liệu"
         }
       ],
       "approved_at": null

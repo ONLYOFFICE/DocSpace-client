@@ -3,7 +3,7 @@
   "content": "Please use the desktop site to access <1>{{sectionName}}</1> settings.",
   "content_en_sha1_hash": "553dbb73cb74df69524855512bd08b96a32ea765",
   "created_at": "2025-05-19T21:30:50.812Z",
-  "updated_at": "2025-05-21T04:56:26.966Z",
+  "updated_at": "2025-05-24T05:40:20.147Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to switch to the desktop site to access settings, typically displayed on a mobile device. The exact wording may vary depending on the section being accessed (e.g., \"setting\" vs. \"settings\"). It appears in various mobile UI components, such as a warning message or alert dialog.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets '<1>' and '</1>' are not correctly rendered or understood within the Arabic text. They likely represent placeholders and should be handled consistently with the English version, potentially requiring more sophisticated localization tools to handle the dynamic content.",
-          "suggestion": "Ensure the localization system properly substitutes the {{sectionName}} variable within the Arabic string. The angle brackets may need specific handling depending on the platform."
+          "description": "The angle brackets <1> and </1> are not properly handled in the Arabic translation. They appear verbatim, disrupting the flow and likely not rendering correctly.",
+          "suggestion": "Remove or appropriately render the angle brackets. The translation should be: \"يرجى استخدام الموقع من خلال جهاز الحاسوب للوصول إلى إعدادات {{sectionName}}.\""
         }
       ],
       "approved_at": null
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are not properly translated. They should remain as is, as they seem to be placeholders for dynamic content.",
-          "suggestion": "Maintain the angle brackets as `<1>{{sectionName}}</1>."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, \"parametrlərinə daxil olmaq\" is a bit verbose. A more natural and concise translation for \"access\" would be \"keçid edin\" or similar.",
-          "suggestion": "Lütfən, <1>{{sectionName}}</1> keçidin edin masaüstü saytından."
+          "description": "The angle brackets around {{sectionName}} are present in both the English and Azerbaijani versions, which is good. However, consider ensuring consistent styling/formatting of these brackets across the entire application.",
+          "suggestion": "Ensure consistent styling/formatting of angle brackets across the application."
         }
       ],
       "approved_at": null
@@ -58,14 +53,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Bulgarian translation retains the angle brackets `<1>{{sectionName}}</1>` which are likely intended to be replaced by dynamic content. This is a formatting issue that needs to be addressed during implementation.",
-          "suggestion": "Remove the angle brackets `<1>` and `</1>` from the translation."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The word 'добиете' (dobiete) means 'to obtain' or 'to acquire'.  A more natural translation for 'access' in this context would be something like 'за достъп до' (za dostup do).",
-          "suggestion": "Replace 'добиете' with 'за достъп до'."
+          "description": "The phrase 'to access' is translated as 'да добиете достъп до', which is a bit verbose and not the most natural way to express it in Bulgarian. A more direct and common translation would be 'за да получите достъп до'.",
+          "suggestion": "Моля, използвайте десктоп сайтa, за да получите достъп до настройките на <1>{{sectionName}}</1>."
         }
       ],
       "approved_at": null
@@ -76,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation preserves the <1> and </1> tags. These tags are not needed in the Czech version and should be removed.",
-          "suggestion": "Pro přístup k nastavení {{sectionName}} použijte prosím desktopovou stránku."
+          "description": "The English and Czech versions have different punctuation. The English uses angle brackets `<1>{{sectionName}}</1>`, while the Czech uses `<1>{{sectionName}}</1>`. The opening tag is identical, but the closing tag could be inconsistent.",
+          "suggestion": "Ensure consistent angle bracket usage across all languages, or document the intentional difference."
         }
       ],
       "approved_at": null
@@ -85,13 +75,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1>{{sectionName}}</1> are duplicated in the German translation. It should be <1>{{sectionName}}</1>.",
-          "suggestion": "<1>{{sectionName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -100,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation maintains the `<1>{{sectionName}}</1>` tags which might not be appropriate for the context. It's likely these tags are intended for dynamic insertion and should be handled by the application, not directly rendered in the translated text.",
-          "suggestion": "Consider removing the tags `<1>{{sectionName}}</1>` from the translated text and let the application handle the dynamic insertion."
+          "description": "The Greek translation retains the HTML tags `<1>{{sectionName}}</1>` exactly as in the English source. While technically not an error, it's generally best to remove or adapt HTML tags in translations to fit the target language's natural flow and avoid unnecessary markup. In Greek, it's better to integrate the `sectionName` directly into the sentence.",
+          "suggestion": "Remove the HTML tags. The corrected sentence would be: 'Χρησιμοποιήστε τον ιστότοπο από επιτραπέζιο υπολογιστή για να αποκτήσετε πρόσβαση στις ρυθμίσεις {{sectionName}}.'"
         }
       ],
       "approved_at": null
@@ -109,13 +93,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Please use the desktop site' is translated as 'Por favor, utilice el sitio de escritorio'. While technically correct, a more natural and user-friendly translation might be 'Por favor, utilice la versión de escritorio' or 'Por favor, acceda a la versión de escritorio'. 'El sitio de escritorio' is a bit literal.",
-          "suggestion": "Por favor, utilice la versión de escritorio"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -124,18 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Ole hyvä ja käytä\" is a bit formal and doesn't quite convey the 'Please' in a natural way. A more common and user-friendly phrasing would be better.",
-          "suggestion": "Käytä ystävällisesti työpöytäversiota"
+          "description": "The phrase 'Ole hyvä ja käytä' is overly formal and doesn't flow naturally in this context. A more natural and user-friendly translation for 'Please use' would be 'Käytä' or 'Avaa'.",
+          "suggestion": "Käytä työpöytäsivustoa päästäksesi sisään <1>{{sectionName}}</1> asetukset."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'sisään päästäksesi' is overly verbose. 'Saadaksesi' or a more direct phrasing is preferable.",
-          "suggestion": "saadaksesi"
-        },
-        {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are not standard in Finnish and should be reviewed for consistency with the application’s tagging conventions. They need to be consistently handled and ensure they render correctly.",
-          "suggestion": "Review and potentially adjust the tags based on application standards."
+          "description": "The word 'päästäksesi sisään' is a bit clunky. A more direct and natural translation of 'to access' would be 'saadaksesi'.",
+          "suggestion": "Käytä työpöytäsivustoa saadaksesi <1>{{sectionName}}</1> asetukset."
         }
       ],
       "approved_at": null
@@ -146,8 +119,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"site version bureau\" is not the most natural way to say 'desktop site' in French. While technically correct, it sounds somewhat clunky.",
-          "suggestion": "Utilisez le site web pour ordinateur pour accéder aux paramètres de <1>{{sectionName}}</1>."
+          "description": "The phrase \"Please use the desktop site\" is better translated as \"Veuillez utiliser la version bureau du site\".  While \"site version bureau\" isn't *wrong*, it's less natural and precise in French.",
+          "suggestion": "Veuillez utiliser la version bureau du site"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML-like tags `<1>{{sectionName}}</1>` are not appropriate for French translation. While the content they enclose needs to be translated, the tags themselves should be removed and the content integrated seamlessly into the sentence.  The context suggests that `sectionName` is intended to be rendered dynamically.",
+          "suggestion": "Remove the tags. The content of `{{sectionName}}` should be directly incorporated within the sentence."
         }
       ],
       "approved_at": null
@@ -158,8 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation preserves the `<1>` and `</1>` tags, which are likely intended for dynamic content insertion. This is not an issue in itself, but should be noted for the development team to ensure the tags are handled correctly in the Armenian UI.",
-          "suggestion": "Verify the tags are correctly interpreted by the Armenian UI and dynamic content is inserted appropriately."
+          "description": "The Armenian translation includes a space before the opening angle bracket `<` in `<1>{{sectionName}}</1>`. This spacing isn't present in the English source.",
+          "suggestion": "Remove the space before the opening angle bracket: `<1>{{sectionName}}</1>`"
         }
       ],
       "approved_at": null
@@ -167,13 +145,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are present in both the English and Italian versions. While technically not an error, they indicate a formatting tag being carried over from the source content, which is usually undesirable in a final translation.",
-          "suggestion": "Remove the `<1>` and `</1>` tags from the Italian translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -182,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation includes a period at the end of the sentence. While grammatically correct, the original English doesn't have a period. This might be a stylistic choice, but consistency is important. It's unclear if the period is intended.",
-          "suggestion": "Consider removing the period at the end of the sentence unless it's a specific requirement for Japanese UI text."
+          "description": "The Japanese translation maintains the HTML-like tags `<1>{{sectionName}}</1>` from the English content. While technically correct, it's unusual and potentially unnecessary in a Japanese context. It's likely the intent was to simply include the section name, and the tags should be removed.",
+          "suggestion": "Replace `<1>{{sectionName}}</1>` with just `{{sectionName}}`."
         }
       ],
       "approved_at": null
@@ -194,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation retains the HTML-like tags `<1>{{sectionName}}</1>` which were present in the English source. These tags likely represent placeholders and should be removed or replaced with appropriate Korean phrasing if the intent is to present a normal sentence.",
-          "suggestion": "Replace `<1>{{sectionName}}</1>` with the actual section name or a more natural Korean phrase. For example, if `sectionName` represents 'Notifications', it could be replaced with '알림' or '알림 설정'."
+          "description": "The Korean translation preserves the HTML tags `<1>{{sectionName}}</1>` from the English content. While technically correct, these tags are likely unnecessary and may cause rendering issues depending on the context where the translation is used.  They should be removed unless specifically required.",
+          "suggestion": "Remove the HTML tags: \"{{sectionName}}\" 설정에 액세스하려면 데스크톱 사이트를 사용하세요."
         }
       ],
       "approved_at": null
@@ -206,13 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'desktop site' is not accurately translated. 'ເວັບໄຊເດັສທັອບ' is a transliteration, not a translation. A more appropriate translation would convey the meaning of accessing the full website version.",
-          "suggestion": "ກະລຸນາໃຊ້ເວີຊັນເຕັມຂອງເວັບໄຊ້ເພື່ອເຂົ້າເຖິງ..."
-        },
-        {
-          "type": "formatting",
-          "description": "The Laotian translation preserves the angle brackets <1>{{sectionName}}</1> exactly as they appear in the English. This is unusual and suggests a copy/paste error or misunderstanding of the tagging system.",
-          "suggestion": "Remove the angle brackets and the text inside them. The content intended to be dynamic will be handled by the application."
+          "description": "The term 'desktop site' is directly translated as 'ເວັບໄຊເດັສທັອບ'. While understandable, a more natural Lao phrasing might be 'ເວັບໄຊ້ລຸ່ມ' or 'ເວັບໄຊ້ຄອມພິວເຕີ້' (website for computers).",
+          "suggestion": "Consider using 'ເວັບໄຊ້ລຸ່ມ' or 'ເວັບໄຊ້ຄອມພິວເຕີ້' instead of 'ເວັບໄຊເດັສທັອບ'."
         }
       ],
       "approved_at": null
@@ -220,13 +187,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` appear to be included in the translation. These are likely tags and should not be part of the displayed text.",
-          "suggestion": "Remove the tags `<1>` and `</1>` from the translated text. The Latvian translation should read: 'Lūdzu, izmantojiet darbvirsmas vietni, lai piekļūtu {{sectionName}} iestatījumiem.'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -235,13 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Please use the desktop site...\" is overly formal for a settings warning. A more natural and user-friendly phrasing would be better.",
-          "suggestion": "Gebruik de desktopversie om toegang te krijgen tot de <1>{{sectionName}}</1> instellingen."
-        },
-        {
-          "type": "formatting",
-          "description": "The angle brackets and curly braces in the original English and the Dutch translation are unnecessary and potentially confusing for the user. While they may be used for technical reasons during translation, they shouldn't appear in the final product.",
-          "suggestion": "Gebruik de desktopversie om toegang te krijgen tot de {{sectionName}} instellingen."
+          "description": "The translated phrase \"om toegang te krijgen tot\" is overly literal and sounds unnatural in Dutch. A more natural phrasing would be \"voor\" or a restructuring of the sentence.",
+          "suggestion": "Gebruik de desktop site voor de <1>{{sectionName}}</1> instellingen."
         }
       ],
       "approved_at": null
@@ -252,13 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Aby uzyskać dostęp do ustawień <1>{{sectionName}}</1>, użyj strony klasycznej.\" is not a direct or natural translation of \"Please use the desktop site to access <1>{{sectionName}}</1> settings.\"  While understandable, it feels somewhat awkward and could be improved to better convey the original meaning.",
-          "suggestion": "Proszę użyć wersji komputerowej, aby uzyskać dostęp do ustawień <1>{{sectionName}}</1>."
+          "description": "The English phrase \"Please use the desktop site\" is best translated as something more direct, not a command. The current translation 'Aby uzyskać dostęp...' implies an obligation instead of a recommendation.",
+          "suggestion": "Użyj wersji komputerowej, aby uzyskać dostęp do..."
         },
         {
           "type": "formatting",
-          "description": "The Polish translation retains the HTML-like tags `<1>{{sectionName}}</1>` which are not stylistically appropriate for Polish user interface text.  These tags suggest they are meant to be replaced dynamically in the English version.",
-          "suggestion": "Remove the `<1>{{sectionName}}</1>` tags.  The dynamic replacement should be handled programmatically."
+          "description": "The `<1>{{sectionName}}</1>` tag structure is not standard.  It seems redundant and might indicate a copy/paste error from the English version. Polish typically uses more straightforward HTML-like tags.",
+          "suggestion": "<1>{{sectionName}}</1> could be simplified to just `{{sectionName}}` or `<{{sectionName}}>` depending on the intended markup."
         }
       ],
       "approved_at": null
@@ -269,13 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"aceder\" is a less common and slightly formal way to say \"access.\" A more natural and common phrasing would be \"acessar.\" While not incorrect, it's not ideal for user-facing text.",
-          "suggestion": "Por favor utilize a versão do site para computador para acessar às configurações de<1>{{sectionName}}</1>."
-        },
-        {
-          "type": "formatting",
-          "description": "The closing tag `<1>{{sectionName}}</1>` is duplicated. It should be `<1>{{sectionName}}</1>`. This can cause parsing or display issues.",
-          "suggestion": "Por favor utilize a versão do site para computador para acessar às configurações de<1>{{sectionName}}</1>."
+          "description": "The phrase \"aceder às configurações\" is a literal translation of \"access the settings.\" A more natural Portuguese phrasing would be \"acessar as configurações\".",
+          "suggestion": "Por favor utilize a versão do site para computador para acessar as configurações de<1>{{sectionName}}</1>."
         }
       ],
       "approved_at": null
@@ -286,13 +237,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Use o site para computador para acessar as configurações de <1>{{sectionName}}</1>' is a literal translation that could be improved for naturalness. A more natural phrasing would be something like 'Acesse as configurações de <1>{{sectionName}}</1> usando o site para desktop.'",
-          "suggestion": "Acesse as configurações de <1>{{sectionName}}</1> usando o site para desktop."
+          "description": "The English content uses 'Please use the desktop site...' while the Portuguese translation uses an imperative 'Use o site...'. The nuance of politeness is lost. A more appropriate translation would convey the same request politely.",
+          "suggestion": "Por favor, use o site para computador para acessar as configurações de <1>{{sectionName}}</1>."
         },
         {
           "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are carried over from the English version. While necessary, a note should be made that these tags are placeholders for dynamic content and are intended for backend processing, not necessarily for direct display to the user.",
-          "suggestion": "Note that `<1>` and `</1>` are placeholders and should be handled appropriately."
+          "description": "The formatting tags <1>{{sectionName}}</1> are identical in both English and Portuguese, which is generally acceptable, but it's worth noting for consistency across all translations.  No correction needed, just an observation.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -315,13 +266,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"access to\" is translated somewhat awkwardly. A more natural phrasing would be to directly state using the desktop site to access the settings.",
-          "suggestion": "පහේක්ෂකය්වෙනි භාවිතයෙන් <1>{{sectionName}}</1> සැකසුම් වෙත පිවිසිය."
+          "description": "The phrase \"Please use the desktop site\" is not accurately conveyed. While \"වැඩතල අඩවිය භාවිතා කරන්න\" (wēdathala adawiya upayogā karna) literally translates to 'use the desktop site', it lacks the politeness expected in this context. A more appropriate translation would incorporate a more polite request.",
+          "suggestion": "Please use the desktop site:  «1>{{sectionName}}</1> සැකසුම් වෙත ප්‍රවේශයට, දయකර වැඩතල අඩවිය භාවිතා කරන්න."
         },
         {
           "type": "formatting",
-          "description": "The `<1>` and `</1>` tags appear to be placeholders, but the Sinhala translation includes them. These should ideally be removed or translated correctly if they hold specific meaning. Assuming they are placeholders, they should be omitted.",
-          "suggestion": "<1>{{sectionName}}</1> සැකසුම් වෙත පිවිසිය."
+          "description": "The Sinhala translation includes punctuation that needs clarification. The presence of the ellipsis and comma after \"ප්‍රවේශයට\" is not standard and may impact readability.",
+          "suggestion": "Review punctuation usage. Consider removing the comma or ellipsis if they do not serve a specific purpose. If they do serve a purpose, verify the appropriateness of their placement."
         }
       ],
       "approved_at": null
@@ -332,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation doesn't accurately convey the original meaning. The English implies a warning or instruction related to accessing settings via the desktop site. The Slovak translation simply states 'use the desktop site.' It loses the warning/instruction aspect.",
-          "suggestion": "Na nastavenia <1>{{sectionName}}</1> odporúčame použiť stránku pre počítače."
+          "description": "The Slovak translation \"Na prístup k nastaveniam <1>{{sectionName}}</1> použite stránku pre počítače.\" doesn't accurately convey the meaning of \"Please use the desktop site to access <1>{{sectionName}}</1> settings.\" Specifically, the Slovak phrase is a direct translation, but it misses the 'please' and implies a requirement rather than a suggestion.",
+          "suggestion": "Prosím, použite stránku pre počítače na prístup k nastaveniam <1>{{sectionName}}</1>."
         },
         {
           "type": "formatting",
-          "description": "The formatting of the tags <1>{{sectionName}}</1> seems to be replicated in the Slovak translation. Although technically correct, it might be unnecessary and might not render properly depending on the application consuming the translation.",
-          "suggestion": "Consider removing the tags if the application automatically handles them or if their presence causes rendering issues."
+          "description": "The Slovak translation maintains the <1>{{sectionName}}</1> tags, which should be consistent with the English source. Verify if this formatting is appropriate for the Slovak UI.",
+          "suggestion": "Ensure the <1>{{sectionName}}</1> tags are correctly handled in the Slovak UI and maintain consistency with the English source."
         }
       ],
       "approved_at": null
@@ -349,13 +300,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Please use the desktop site' is not ideal. 'Uporabi namizno stran' is a literal translation that sounds awkward. A more natural and idiomatic Slovenian phrasing would be preferable.",
-          "suggestion": "Poskusite dostopati do <1>{{sectionName}}</1> nastavitev na namizni strani."
+          "description": "The translation 'Uporabi namizno stran za dostop so <1>{{sectionName}}</1> nastavitev' is not entirely accurate. The preposition 'so' is incorrect. It should be 'do' to indicate 'to'. The sentence structure could also be improved.",
+          "suggestion": "Uporabi namizno stran za dostop do <1>{{sectionName}}</1> nastavitev."
         },
         {
           "type": "formatting",
-          "description": "The bracketed HTML tags <1>{{sectionName}}</1> are present in the translation but might need to be reviewed in the context of the overall UI to ensure consistency with other similar tags.",
-          "suggestion": "Review tag usage for consistency across all localization strings."
+          "description": "The `<1>` and `</1>` tags are retained in the Slovenian translation. This should be consistent with the English version (if they are meant to be HTML tags).",
+          "suggestion": "Ensure the intended purpose of the tags is preserved. If meant to be HTML, confirm they are handled correctly in the final output."
         }
       ],
       "approved_at": null
@@ -366,8 +317,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets around 'sectionName' are not correctly closed. There's a closing angle bracket after the 'sectionName' but before the closing 1.",
-          "suggestion": "Ensure correct closing of the angle brackets:  \"Молим вас користите десктоп верзију за приступ <1>{{sectionName}}</1> подешавањима.\""
+          "description": "The angle brackets <1> and </1> are present in the Serbian translation, mirroring the English. While technically not incorrect, it's unusual for these to be translated and may indicate they should remain untranslated.",
+          "suggestion": "Consider leaving the angle brackets untranslated: \"Молим вас користите десктоп верзију за приступ <1>{{sectionName}}</1> подешавањима.\""
         }
       ],
       "approved_at": null
@@ -378,13 +329,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'podešavanjima' is a bit awkward. While technically correct for 'settings', it sounds less natural than alternatives.",
-          "suggestion": "Molim vas koristite desktop verziju za pristup <1>{{sectionName}}</1> podešavanjima ili opcijama."
+          "description": "The word 'podešavanjima' while technically meaning 'settings', is a dative plural and doesn't quite fit the context.  'Podešavanja' (nominative plural) would be more natural and accurate here.",
+          "suggestion": "Molim vas koristite desktop verziju za pristup <1>{{sectionName}}</1> podešavanjima."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'verziju' translates to 'version', 'sačuvajte' or 'prikazujte' would be a better fit depending on the intended functionality. 'verziju' implies a versioned product which isn't necessarily what's being conveyed.",
-          "suggestion": "Molim vas koristite desktop verziju za prikaz <1>{{sectionName}}</1> podešavanjima."
+          "type": "formatting",
+          "description": "The angle brackets <1> and </1> should be preserved as they appear in the source text.  They are part of the original formatting.",
+          "suggestion": "No change needed, preserve original formatting: <1>{{sectionName}}</1>"
         }
       ],
       "approved_at": null
@@ -392,13 +343,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are inconsistent with the English content. The English uses `<1>` at the start and `</1>` at the end, but the Turkish translation has a slightly different structure.  While not strictly incorrect, it deviates from the expected format.",
-          "suggestion": "Ensure tags match the English version: \"Lütfen <1>{{sectionName}}</1> ayarlarına erişmek için lütfen masaüstü sitesini kullanın.\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -406,14 +351,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Please use the desktop site...' is more appropriately translated as a direct instruction or suggestion. The current translation 'Щоб отримати доступ до...' is more like 'In order to access...'. It's not as direct.",
-          "suggestion": "Будь ласка, використовуйте версію сайту для настільних ПК, щоб отримати доступ до параметрів <1>{{sectionName}}</1>."
+          "type": "formatting",
+          "description": "The formatting within the Ukrainian translation doesn't perfectly match the English. The English uses `<1>{{sectionName}}</1>`, while the Ukrainian uses `<1>{{sectionName}}</1>`. The closing tag is slightly different.",
+          "suggestion": "Ensure consistent formatting.  Consider either using `<1>{{sectionName}}</1>` or `<1>{{sectionName}}</1>` throughout the project."
         },
         {
-          "type": "formatting",
-          "description": "The angle brackets `<1>{{sectionName}}</1>` are consistent between English and Ukrainian. While technically correct, consider if the Ukrainian version would benefit from a slight change for natural flow. Keeping the same structure is fine, but a review is warranted.",
-          "suggestion": "No change needed; maintaining consistency is acceptable."
+          "type": "incorrect_translation",
+          "description": "While understandable, the translation 'Щоб отримати доступ до параметрів <1>{{sectionName}}</1>, скористайтеся сайтом для настільних ПК' is a bit literal and could be more natural. 'Щоб отримати доступ до параметрів <1>{{sectionName}}</1>' is grammatically correct, but 'Для доступу до параметрів <1>{{sectionName}}</1>' or 'Щоб дістатися до параметрів <1>{{sectionName}}</1>' might flow better.",
+          "suggestion": "Consider a more idiomatic translation.  Examples: 'Для доступу до параметрів <1>{{sectionName}}</1>' or 'Щоб дістатися до параметрів <1>{{sectionName}}</1>'"
         }
       ],
       "approved_at": null
@@ -423,9 +368,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The angle brackets '<1>{{sectionName}}</1>' are not properly closed. The Vietnamese translation maintains this incorrect formatting.",
-          "suggestion": "Ensure the angle brackets are closed correctly in both the English and Vietnamese versions.  Example: `<1>{{sectionName}}</1>`"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Please use the desktop site\" is translated as \"Xin vui lòng sử dụng trang web trên máy tính\". While technically correct, it's more natural to say \"Xin vui lòng sử dụng phiên bản dành cho máy tính\" or \"Xin vui lòng sử dụng phiên bản máy tính\" to convey the intended meaning of accessing the desktop version.",
+          "suggestion": "Xin vui lòng sử dụng phiên bản dành cho máy tính"
         }
       ],
       "approved_at": null

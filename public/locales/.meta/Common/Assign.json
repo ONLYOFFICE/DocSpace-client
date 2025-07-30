@@ -3,7 +3,7 @@
   "content": "Assign",
   "content_en_sha1_hash": "2444928438f54ef4414cddff39193096c12629aa",
   "created_at": "2025-05-19T21:30:43.090Z",
-  "updated_at": "2025-05-28T09:30:02.963Z",
+  "updated_at": "2025-05-26T07:57:32.933Z",
   "comment": {
     "text": "This translation key is used to display a heading for a modal dialog that allows users to assign roles. The text \"Assign Roles\" appears in this dialog as part of its header and will be translated from the English content provided.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"නියමුවා\" (niyamuwa) doesn't perfectly capture the meaning of \"Assign\". While it can mean \"appointment\" or \"designation,\" it lacks the active sense of allocating or assigning something. A more accurate translation might consider \"හมอบදීම\" (hamobadima) for 'assigning' or \"නිassign කිරීම\" (niyma kirima) which is a transliteration and adaptation.",
-          "suggestion": "Consider \"හมอบදීම\" (hamobadima) or \"නිassign කිරීම\" (niyma kirima)."
+          "description": "The Sinhala translation \"නියමුවා\" (niyamuwa) generally means 'appointed' or 'established', not 'assign' in the sense of allocating a task or responsibility. While it can sometimes be used in a similar context, it's not the most accurate translation.",
+          "suggestion": "Consider alternatives like \"හුවාگذار\" (huvaagadar) for 'assign' in the context of tasks or responsibilities, or \"නීයාම\" (niyama) if referring to a rule or regulation."
         }
       ],
       "approved_at": null
@@ -177,13 +177,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Додели\" can mean \"distribute\" or \"allocate\", it doesn't perfectly capture the meaning of \"Assign\" in many contexts. \"Assign\" often implies a specific task or responsibility being given to someone. \"Додели\" lacks that nuance.",
+          "suggestion": "Consider alternatives like \"Доделити\", \"Доручити\", or \"Поделити\" depending on the specific context.  If the context is about assigning tasks, \"Доделити задатак\" would be more accurate."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Dodeli' can be a valid translation of 'Assign' in certain contexts, it doesn't fully capture the general meaning of 'Assign'. It implies a specific allocation or distribution. A more accurate and versatile translation would depend on the specific context in which 'Assign' is used.",
+          "suggestion": "Consider alternatives like 'pripisati', 'dodeljivati', 'namijeniti', or 'obavezati', depending on the context. Without context, it's difficult to provide a single best alternative."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

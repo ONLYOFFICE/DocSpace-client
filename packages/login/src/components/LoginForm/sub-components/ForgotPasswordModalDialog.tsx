@@ -38,7 +38,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { InputSize } from "@docspace/shared/components/text-input";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { ForgotPasswordModalDialogProps } from "@/types";
@@ -59,7 +59,7 @@ const ForgotPasswordModalDialog = ({
   const { t } = useTranslation(["Login", "Common"]);
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //console.log("onChangeEmail", event.target.value);
+    // console.log("onChangeEmail", event.target.value);
     setEmail(event.target.value);
     setEmailError(false);
     setIsShowError(false);
@@ -136,14 +136,14 @@ const ForgotPasswordModalDialog = ({
             className="email-reg-field"
             key="e-mail"
             isVertical
-            hasError={isShowError && emailError}
+            hasError={isShowError ? emailError : undefined}
             labelVisible={false}
             errorMessage={
               errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
             }
           >
             <EmailInput
-              hasError={isShowError && emailError}
+              hasError={isShowError ? emailError : undefined}
               placeholder={t("Common:RegistrationEmail")}
               isAutoFocussed
               id="forgot-password-modal_email"

@@ -3,7 +3,7 @@
   "content": "Create a new room",
   "content_en_sha1_hash": "7543118f67e8c1eeab8888123f4f7842772502be",
   "created_at": "2025-05-19T21:30:56.463Z",
-  "updated_at": "2025-05-28T09:30:02.119Z",
+  "updated_at": "2025-05-26T07:57:32.160Z",
   "comment": {
     "text": "This translation key is used to display a button title in an EmptyViewContainer component, inviting users to \"Create a new room\". The text appears on a button that triggers the creation of a new room.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yeni otaq yaradın' translates to 'You created a new room'. The English phrase 'Create a new room' is an imperative, instructing the user to create a room. The Azerbaijani translation implies that the user has already created a room. The correct translation should be an imperative.",
+          "suggestion": "Yeni otaq yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vytvoření nové místnosti\" is a literal translation of 'creation of a new room.' A more natural and idiomatic translation for 'Create a new room' would be something like 'Vytvořit novou místnost' or 'Novou místnost vytvořit'.",
+          "suggestion": "Vytvořit novou místnost"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -141,7 +153,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Crearea unei săli noi\" is a rather formal and less natural translation for \"Create a new room\". It emphasizes the *creation* of the room, whereas the English implies a simple action of making one.",
+          "suggestion": "Creare sală nouă"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a full sentence construction when a shorter, more concise option might be more appropriate, depending on the context of its usage (e.g., in a menu or button label).",
+          "suggestion": "Creare sală nouă"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +194,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Креирајте нову собу\" is technically correct but stylistically awkward for a user interface option. It uses the formal \"Ви\" form (\"Креирајте\") which might be too formal for a casual UI. A more natural and user-friendly option would be to use the informal form.",
+          "suggestion": "Креирај нову собу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

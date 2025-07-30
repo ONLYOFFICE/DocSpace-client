@@ -3,7 +3,7 @@
   "content": "You can open the document on the portal or in the mobile application",
   "content_en_sha1_hash": "56d7d86fe4eaefe22b74bf7fe71b0fb2c86ea739",
   "created_at": "2025-05-19T21:30:57.138Z",
-  "updated_at": "2025-07-01T15:57:36.365Z",
+  "updated_at": "2025-06-30T12:20:31.651Z",
   "comment": {
     "text": "This translation key is used to display a message explaining how to open a document. It appears on a file tile component and informs users about two possible ways to access the document.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'بواسطة' (bi wasitat) for 'by' doesn't quite capture the intended meaning of 'in' when referring to the mobile application. While not strictly wrong, it's less natural than alternatives.",
+          "suggestion": "يمكنك فتح المستند من خلال البوابة أو في تطبيق الهاتف."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Sənədi portalda və ya mobil proqramda aça bilərsiniz\" is a literal translation but doesn't quite capture the natural flow of the English sentence. A more natural phrasing would emphasize the ability to access the document, rather than just open it.",
+          "suggestion": "Sənədi portal vasitəsilə və ya mobil tətbiqdə açmaq/görmək olar."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'portal' is translated as 'ປະຕູ' which means 'door'. 'Portal' refers to an online gateway or platform, not a physical door. A more accurate translation would be something like 'ເວັບໄຊ້' (website) or 'ແพลັດຟອມ' (platform).",
+          "suggestion": "ທ່ານສາມາດເປີດເອກະສານຢູ່ໃນເວັບໄຊ້ຫຼືໃນແອັບພລິເຄຊັນມືຖື"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'doorway' (ද්වාරයෙහි) doesn't accurately convey 'portal' in this context. 'Portal' refers to a website or online platform. A better translation would be something like 'විද්යුත් පිටුවෙහි' (vidyut pituvahi) meaning 'on the electronic page'.",
+          "suggestion": "Replace 'ද්වාරයෙහි' with 'විද්යුත් පිටුවෙහි' or a more appropriate synonym for 'portal'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Icon changed",
   "content_en_sha1_hash": "46fa2dcaabe5f818483c85df00108c0fabde27f4",
   "created_at": "2025-05-19T21:30:54.941Z",
-  "updated_at": "2025-05-28T09:30:02.433Z",
+  "updated_at": "2025-06-30T12:20:31.346Z",
   "comment": {
     "text": "The \"RoomLogoChanged\" translation key is used to display a message when the room logo changes. This text will appear in the UI where updates are logged or notifications are shown, such as a history panel or activity feed, and provides context for the user when their room's icon has been updated.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 175,
-      "context": "case \"DeletedRoomTags\":\n return t(\"InfoPanel:DeletedRoomTags\");\n case \"RoomLogoCreated\":\n case \"RoomColorChanged\":\n case \"RoomCoverChanged\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomLogoDeleted\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomExternalLinkCreated\":\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case \"RoomExternalLinkRenamed\":",
+      "line_number": 184,
+      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 175,
-      "context": "case \"DeletedRoomTags\":\n return t(\"InfoPanel:DeletedRoomTags\");\n case \"RoomLogoCreated\":\n case \"RoomColorChanged\":\n case \"RoomCoverChanged\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomLogoDeleted\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomExternalLinkCreated\":\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case \"RoomExternalLinkRenamed\":",
+      "line_number": 184,
+      "context": "case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:",
       "module": "/packages/client"
     }
   ],
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"İşarə dəyişdi\" doesn't accurately convey the meaning of \"Icon changed.\" \"İşarə\" translates to \"sign\" or \"indication,\" while \"Icon\" refers to a visual representation. A more accurate translation would reflect that.",
+          "description": "The translation \"İşarə dəyişdi\" doesn't accurately convey the meaning of \"Icon changed.\" \"İşarə\" means \"sign\" or \"signal,\" while \"icon\" refers to a visual representation. A more accurate translation would relate to a visual element or image change.",
           "suggestion": "Simge dəyişdi"
         }
       ],
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Сменена иконка\" is understandable, a more natural and precise translation of \"Icon changed\" would be \"Променена икона\" or \"Нова икона\". \"Сменена\" implies the icon was replaced with something entirely different, while 'променена' (changed) is more general.",
-          "suggestion": "Променена икона"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -179,9 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"Ikonka zmenená\" is technically correct, it's not the most natural or idiomatic way to express \"Icon changed\" in Slovak. It sounds a bit literal. A more common and natural phrasing would be something like \"Zmenila sa ikona\" or \"Ikona bola zmenená\".",
-          "suggestion": "Zmenila sa ikona"
+          "type": "spelling",
+          "description": "The Slovak word 'Ikonka' is a diminutive form, which might not always be the most appropriate translation depending on the context. While not strictly incorrect, 'Ikona zmenená' might be a more neutral and possibly more accurate translation.",
+          "suggestion": "Ikona zmenená"
         }
       ],
       "approved_at": null

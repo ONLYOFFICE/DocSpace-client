@@ -3,7 +3,7 @@
   "content": "Folders removed ({{count}}).",
   "content_en_sha1_hash": "b1917811524b905cf7b4602e5054fcb75ba1de9c",
   "created_at": "2025-05-19T21:30:54.845Z",
-  "updated_at": "2025-05-28T09:30:02.431Z",
+  "updated_at": "2025-06-30T12:20:31.342Z",
   "comment": {
     "text": "This translation key is used to display a message indicating the number of folders deleted when viewing history. It appears in an InfoPanel component, likely on a page displaying file history or deletion logs, and is translated based on the count of deleted folders.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 128,
-      "context": "count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case \"FolderDeleted\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderDeleted\");\n case \"RoomCreated\":\n return (",
+      "line_number": 137,
+      "context": "count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderDeleted\");\n case FeedActionKeys.RoomCreated:\n return (",
       "module": "/packages/client"
     }
   ],
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Carpetas' translates to 'Folders' but implies something more like 'Carpets'. 'Carpetas' is an acceptable synonym, but 'Carpetas' has a slightly different connotation.",
-          "suggestion": "Carpeta(s) eliminada(s) ({{count}})."
+          "description": "The English term 'Folders' is better translated as 'Carpetas' in Spanish, but 'eliminadas' translates to 'deleted' rather than 'removed'. While both are acceptable, 'removidas' would be a more direct and potentially more natural translation in this context.",
+          "suggestion": "Carpetas removidas ({{count}})."
         }
       ],
       "approved_at": null
@@ -90,8 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Թղթապանակները հեռացվել են ({{count}}):' is a passive construction. A more natural and direct translation would be 'Հեռացված թղթապանակների քանակը ({{count}}):' or '{{count}} թղթապանակ է հեռացվել:'",
-          "suggestion": "Հեռացված թղթապանակների քանակը ({{count}}):"
+          "description": "The English phrase \"Folders removed\" is best translated as something more active and concise in Armenian. \"Թղթապանակները հեռացվել են\" (Tght'tapանակները հեռացվել են) literally translates to 'The folders have been removed' which is passive. A more natural translation might be something like 'Հեռացված թղթապանակներ' (Hērac'av tght'tapանակներ) meaning 'Removed folders'.",
+          "suggestion": "Հեռացված թղթապանակներ"
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the Armenian translation is not present in the original English version. While not a major error, consistency is preferable.",
+          "suggestion": "Consider removing the colon or adding it to the English version if it's intended to be consistently used."
         }
       ],
       "approved_at": null
@@ -105,13 +110,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'フォルダが削除されました ({{count}})。' is too formal for a UI element like an info panel. A more conversational and concise translation would be better.",
-          "suggestion": "フォルダを削除しました ({{count}})。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -126,13 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໂຟນເອກະຄັງ' is likely a transliteration and may not be the most natural or accurate Lao equivalent of 'Folders'.  While understandable, it lacks elegance.",
-          "suggestion": "Consider using a more idiomatic Lao term for 'folders', such as 'ເອກະສານໂຟນເອກະຄັງ' or 'ໂຟນເອກະຄັງເອກະສານ' depending on the specific context.  Further investigation into commonly used terminology would be beneficial."
+          "description": "The word 'ຖືກ' (tuk) is used, which implies a passive voice, but the context might be better served by a more active phrasing. While grammatically correct, it might not be the most natural phrasing in Lao in this context.",
+          "suggestion": "Consider using a more active phrasing. For example: \"ໂຟນເອກະຄັງລຶບອອກແລ້ວ ({{count}}).\" (Folder(s) deleted ({{count}}).)"
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the sentence structure 'ໂຟນເອກະຄັງຖືກລົບອອກແລ້ວ ({{count}}).' can feel slightly clunky.  A more fluent phrasing might improve readability.",
-          "suggestion": "Consider rephrasing to something like 'ລົບໂຟນເອກະຄັງ ({{count}}).' which is more direct and common in Lao."
+          "type": "formatting",
+          "description": "The parentheses around '{{count}}' are essential for placeholder functionality. Ensure the translation preserves this structure.",
+          "suggestion": "Ensure the placeholder '{{count}}' is enclosed in parentheses as in the English source: \"ໂຟນເອກະຄັງຖືກລົບອອກແລ້ວ ({{count}}).\""
         }
       ],
       "approved_at": null
@@ -152,7 +151,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Foldery usunięte ({{count}}).' is not the most natural or accurate translation of 'Folders removed ({{count}}).' A better translation would be 'Usunięto foldery ({{count}}).' or 'Liczba usuniętych folderów: {{count}}'.",
+          "suggestion": "Usunięto foldery ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -173,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'removed' is better translated as 'șterse' or 'eliminate' in this context, rather than just 'eliminate'. While 'eliminate' isn't *wrong*, 'șterse' is a more common and natural term for file deletion.",
-          "suggestion": "Foldere au fost șterse ({{count}})."
+          "description": "The English phrase 'Folders removed' translates more accurately to 'Dosare șterse' in Romanian. 'Foldere' is Romanian for 'folders' as physical items, whereas 'dosare' is more appropriate for a digital context like a file system.",
+          "suggestion": "Dosare șterse ({{count}})."
         }
       ],
       "approved_at": null
@@ -191,13 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩර් {{count}} ක් ඉවත් කරනු ලැබුවා.' literally translates to 'Folder {{count}} were removed'. A more natural and accurate translation would be 'ෆෝල්ඩර් {{count}} ක් ඉවත් කරන ලදී.' (Folder {{count}} were removed/deleted).",
-          "suggestion": "ෆෝල්ඩර් {{count}} ක් ඉවත් කරන ලදී."
+          "description": "The translation 'ෆෝල්ඩර් {{count}} ක් ඉවත් කරනු ලැබුවා.' is a bit literal and awkward. A more natural phrasing would convey the meaning of 'removed folders' more clearly in Sinhala.",
+          "suggestion": "ෆෝල්ඩර් {{count}} ක් ඉවත් කෙරුණා."
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a passive voice. While acceptable, considering the English 'Folders removed...', an active voice construction might be more appropriate and sound more direct.",
-          "suggestion": "ෆෝල්ඩර් {{count}} ක් ඉවත් කළා."
+          "type": "incorrect_translation",
+          "description": "The verb 'ඉවත් කරනු ලැබුවා' (iwat karanū labuwā) implies a passive voice, but a more direct/active voice might be preferred in this context, depending on the surrounding UI.",
+          "suggestion": "ෆෝල්ඩර් {{count}} ක් ඉවත් වුණා."
         }
       ],
       "approved_at": null
@@ -205,13 +210,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Priečinky odstránené ({{count}})' is technically correct, but a more natural and idiomatic phrasing would be 'Odstránené priečinky ({{count}})' or 'Vymazané priečinky ({{count}})' . The current phrasing emphasizes the action ('removed') more than the folders themselves, which isn't the intended meaning.",
-          "suggestion": "Odstránené priečinky ({{count}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -226,13 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Фолдери\" is a transliteration of 'Folders' and not a natural Serbian word for folders.  A more appropriate translation would be \"Mapе\" (Mape) or \"Чамац\" (Čamci) depending on the context (folders as in file folders or map folders).",
-          "suggestion": "Mapе уклоњене ({{count}})."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'уклоњени' is a passive voice construction that while grammatically correct, might not be the most natural phrasing. 'Удаљене' or 'брисане' would provide a more natural feel.",
-          "suggestion": "Mapе брисане ({{count}})."
+          "description": "The translation \"Фолдери су уклоњени ({{count}}).\" is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be something like \"Уклоњени фолдери ({{count}}).\" or \"Обрисани фолдери ({{count}}).\"",
+          "suggestion": "Уклоњени фолдери ({{count}})."
         }
       ],
       "approved_at": null
@@ -243,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation uses the plural form 'Folderi' while the English refers to a singular 'Folders'. Given the context, it is likely the count represents multiple folders, but the Serbian should agree in number with the variable 'count'.",
-          "suggestion": "Folderi uklonjeni ({{count}})."
+          "description": "The plural form of 'folder' is incorrect. 'Folderi' should be 'Foldera'.",
+          "suggestion": "Foldera su uklonjeni ({{count}})."
         }
       ],
       "approved_at": null

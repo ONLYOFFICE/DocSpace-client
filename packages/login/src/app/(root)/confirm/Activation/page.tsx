@@ -31,17 +31,22 @@ import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 
+import { logger } from "logger.mjs";
 import ActivateUserForm from "./page.client";
 
 type ActivationProps = {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 };
 
-async function Page({ searchParams }: ActivationProps) {
+async function Page(props: ActivationProps) {
+  logger.info("Activation page");
+
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const type = searchParams.type;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const headersList = headers();
+  const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
   const [settings, passwordSettings] = await Promise.all([
@@ -49,21 +54,17 @@ async function Page({ searchParams }: ActivationProps) {
     getPortalPasswordSettings(confirmKey),
   ]);
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCreateUserContainer type={type} hostName={hostName} />
-          <FormWrapper id="activation-form">
-            <ActivateUserForm
-              passwordHash={settings.passwordHash}
-              passwordSettings={passwordSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingCreateUserContainer type={type} hostName={hostName} />
+      <FormWrapper id="activation-form">
+        <ActivateUserForm
+          passwordHash={settings.passwordHash}
+          passwordSettings={passwordSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

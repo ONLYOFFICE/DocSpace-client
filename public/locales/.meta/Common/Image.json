@@ -3,7 +3,7 @@
   "content": "Image",
   "content_en_sha1_hash": "50e19fda0d5b4b74a4a1a1d584e56578693a4ea4",
   "created_at": "2025-05-19T21:30:45.827Z",
-  "updated_at": "2025-07-01T15:57:35.990Z",
+  "updated_at": "2025-05-26T07:57:32.273Z",
   "comment": {
     "text": "The translation key \"Common:Image\" is used to display the English label for an image file in various UI elements, such as dialog boxes and table views. It appears on buttons, labels, and other interactive components where an image needs to be identified or selected, providing a clear indication of its purpose.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
       "line_number": 16,
-      "context": "case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:",
+      "context": "case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Document:",
       "module": "/packages/shared"
     }
   ],
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Imagine\" does not accurately translate the English word \"Image\". \"Imagine\" means \"imagine\" in English. A more appropriate translation would be \"Imagine\" (if referring to the visual representation) or \"Poză\" (if referring to a photograph).",
-          "suggestion": "Consider using \"Imagine\" or \"Poză\" for a more accurate translation."
+          "description": "The Romanian translation 'Imagine' means 'Imagine' in English, not 'Image'. The correct translation should be 'Imagine' (meaning 'image' as in picture) or 'Imagine' (meaning 'photo').",
+          "suggestion": "Imagine"
         }
       ],
       "approved_at": null

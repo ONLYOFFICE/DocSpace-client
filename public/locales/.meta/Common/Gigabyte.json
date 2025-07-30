@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2025-07-01T15:57:35.921Z",
+  "updated_at": "2025-06-30T12:20:31.269Z",
   "comment": {
     "text": "This translation key is used to display the unit \"Gigabyte\" (GB) in a file quota form. It appears on a dropdown menu where users can select their preferred size unit for displaying and managing files. Translators should note that this term will be used as an option within a larger list of units, including Bytes, Kilobytes, Megabytes, Terabytes, Petabytes, Exabytes, and others.",
     "is_auto": true,
@@ -11,15 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/QuotaForm/index.js",
-      "line_number": 73,
-      "context": "const getOptions = (t) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];\n \n const getConvertedSize = (value, power) => {\n if (value.trim() === \"\") return \"\";",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
       "line_number": 113,
-      "context": "<Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"PreviousPlan\"\n values={{\n amount: `${previousStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
+      "context": "<Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"PreviousPlan\"\n values={{\n amount: `${previousStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency!(totalPrice!, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
       "module": "/packages/client"
     },
     {
@@ -55,7 +49,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/StoragePlanCancel.tsx",
       "line_number": 127,
-      "context": "<Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"YourCurrentPlan\"\n values={{\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency(totalPrice, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
+      "context": "<Trans\n t={t}\n ns=\"Payments\"\n i18nKey=\"YourCurrentPlan\"\n values={{\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n price: formatWalletCurrency!(totalPrice!, 2),\n }}\n components={{\n 1: <Text fontWeight={600} as=\"span\" />,\n 2: <Text className={styles.monthPayment} as=\"span\" />,",
       "module": "/packages/client"
     },
     {
@@ -102,25 +96,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/PlanUpgradePreview.tsx",
-      "line_number": 166,
-      "context": "<UpgradeWalletIcon />\n </div>\n <div className={styles.planInfoBody}>\n <Text fontWeight={600}>\n {t(\"AdditionalStorage\", {\n amount: `${calculateDifference(amount, currentStoragePlanSize)} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"11px\"",
+      "line_number": 165,
+      "context": "<UpgradeWalletIcon />\n </div>\n <div className={styles.planInfoBody}>\n <Text fontWeight={600}>\n {t(\"AdditionalStorage\", {\n amount: `${calculateDifference(amount, currentStoragePlanSize!)} ${t(\"Common:Gigabyte\")}`,\n })}\n </Text>\n <Text\n fontWeight=\"600\"\n fontSize=\"11px\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 139,
+      "line_number": 135,
       "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 139,
+      "line_number": 135,
       "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/sub-components/SelectionAmount.tsx",
-      "line_number": 139,
+      "line_number": 135,
       "context": "const amounts = [100, 200, 500, 1024];\n return amounts.map((item) => {\n const name =\n item > 800\n ? `1 ${t(\"Common:Terabyte\")}`\n : `${item} ${t(\"Common:Gigabyte\")}`;\n return { value: item, name };\n });\n };\n \n const getDirectionalText = (from: number, to: number) => {",
       "module": "/packages/client"
     },
@@ -135,10 +129,16 @@
       "line_number": 55,
       "context": "<InfoIcon />\n <Text fontWeight={600}>{t(\"Important\")}</Text>\n </div>\n <Text>\n {t(\"Warning\", {\n amount: `${currentStoragePlanSize} ${t(\"Common:Gigabyte\")}`,\n storageUnit: t(\"Common:Gigabyte\"),\n })}\n </Text>\n </div>\n );",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/components/quota-form/index.tsx",
+      "line_number": 81,
+      "context": "const getOptions = (t: TTranslation) => [\n { key: 0, label: t(\"Common:Bytes\") },\n { key: 1, label: t(\"Common:Kilobyte\") },\n { key: 2, label: t(\"Common:Megabyte\") },\n { key: 3, label: t(\"Common:Gigabyte\") },\n { key: 4, label: t(\"Common:Terabyte\") },\n ];\n \n const getConvertedSize = (value: string, power: number) => {\n if (value.trim() === \"\") return \"\";",
+      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 684,
+      "line_number": 688,
       "context": "const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),\n ];",
       "module": "/packages/shared"
     }

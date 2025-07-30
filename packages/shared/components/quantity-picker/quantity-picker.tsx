@@ -34,7 +34,7 @@ import { Text } from "../text";
 import { Slider } from "../slider";
 import { TextInput } from "../text-input";
 import { InputType } from "../text-input/TextInput.enums";
-import { Tabs, TabsTypes } from "../tabs";
+import { TabItem } from "../tab-item";
 
 import styles from "./quantity-picker.module.scss";
 
@@ -210,10 +210,15 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
     });
   };
 
-  const onSelectTab = (data) => {
-    onChange(value + data.value);
+  const onSelectTab = (e: React.MouseEvent<HTMLDivElement>) => {
+    const itemValue = Number(e.currentTarget.dataset.value);
+    if (itemValue === undefined) return;
+
+    onChange(value + itemValue);
     setError(false);
   };
+
+  const tabItems = createTabItems();
 
   return (
     <div className={containerClass}>
@@ -302,15 +307,17 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
 
       {items && items.length > 0 ? (
         <div className={styles.tabsWrapper}>
-          <Tabs
-            items={createTabItems()}
-            selectedItemId=""
-            onSelect={onSelectTab}
-            type={TabsTypes.Secondary}
-            allowNoSelection
-            withoutStickyIntend
-            isCentered
-          />
+          {tabItems.map((item) => {
+            return (
+              <TabItem
+                data-value={item.value}
+                key={item.id}
+                label={item.name}
+                onSelect={onSelectTab}
+                allowNoSelection
+              />
+            );
+          })}
         </div>
       ) : null}
     </div>

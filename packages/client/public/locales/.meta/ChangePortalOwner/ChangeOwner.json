@@ -3,7 +3,7 @@
   "content": "Change {{productName}} owner",
   "content_en_sha1_hash": "b3bac1aca6a46d00f19fb61e5298c3e7a5b510ac",
   "created_at": "2025-05-19T21:30:56.985Z",
-  "updated_at": "2025-05-28T09:30:02.196Z",
+  "updated_at": "2025-05-26T07:57:32.224Z",
   "comment": {
     "text": "\"Change the owner of a portal. This message is used in the 'ChangePortalOwner' dialog to prompt users to update the owner of a specific portal.\"",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Change {{productName}} owner\" implies a change in ownership. The Azerbaijani translation \"{{productName}} sahibini dəyişdirin\" literally translates to \"Change {{productName}}'s owner\". This could be misinterpreted. A more accurate translation, conveying the change of ownership, might be \"{{productName}}-in mülkiyyətini dəyişdirin\" or \"{{productName}}-in sahibi olaraq dəyişdirin\".",
+          "suggestion": "{{productName}}-in mülkiyyətini dəyişdirin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,19 +51,37 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Change {{productName}} owner' implies a change in ownership. The Czech translation 'Změna vlastníka prostoru {{productName}}' translates to 'Change of the owner of the space {{productName}}'. While not entirely wrong, it's less direct and less natural. A more accurate translation would convey the action of changing ownership.",
+          "suggestion": "Změnit vlastníka prostoru {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphen instead of a space after '{{productName}}'. While not strictly incorrect, it deviates from typical German sentence structure and might be less readable.",
+          "suggestion": "{{productName}} Besitzer ändern"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Αλλαγή ιδιοκτήτη {{productName}}' is too literal. A more natural Greek phrasing would be 'Αλλαγή κατόχου {{productName}}'. While 'ιδιοκτήτης' is technically correct, 'κάτοχος' is more commonly used when referring to ownership of a product or service.",
+          "suggestion": "Αλλαγή κατόχου {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +93,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Vaihda {{productName}}-omistaja\" is not the most natural way to say \"Change {{productName}} owner\" in Finnish. While technically correct, it's a bit clunky.",
+          "suggestion": "Vaihda {{productName}} omistaja"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -141,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Modificare proprietar {{productName}}' is not the most natural or idiomatic way to say 'Change {{productName}} owner' in Romanian. A more accurate and natural translation would be 'Schimbă proprietarul {{productName}}' or 'Modifică proprietarul {{productName}}' depending on the intended nuance.",
+          "suggestion": "Schimbă proprietarul {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +189,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{productName}} හිමිකරු සංශෝධනය' is not the most natural or accurate translation of 'Change {{productName}} owner'. 'Sanśōdhana' (සංශෝධනය) typically implies modification or amendment, not a change of ownership. A more accurate translation would convey the action of transferring ownership.",
+          "suggestion": "{{productName}} හි හිමිකම් වෙනස් කරන්න"
+        },
+        {
+          "type": "grammatical",
+          "description": "While not strictly incorrect, '{{productName}} හි හිමිකම් වෙනස් කරන්න' would flow better with a slight adjustment in wording to directly state 'ownership change'.",
+          "suggestion": "{{productName}} හි හිමිකම් මාරණය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +218,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Промени {{productName}} власника' literally translates to 'Change {{productName}} owner'. While understandable, a more natural and grammatically correct phrasing would be 'Помените власника на {{productName}}' or 'Промените власника на {{productName}}'. The use of 'Помените' or 'Промените' (formal 'you') is generally preferred in a product context.",
+          "suggestion": "Помените власника на {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Change owner\" is better translated as \"Promeni vlasništvo\" or \"Prebaci vlasnika\" in Serbian. \"Promeni vlasnika\" is not idiomatically correct. It translates to 'Change the owner' rather than 'Change ownership'.",
+          "suggestion": "Promeni vlasništvo"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

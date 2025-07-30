@@ -3,7 +3,7 @@
   "content": "Use this option to delete your space permanently.",
   "content_en_sha1_hash": "eda8701798195496d0dcc13393b3bf9f69ca3417",
   "created_at": "2025-05-19T21:30:52.208Z",
-  "updated_at": "2025-05-21T03:41:47.378Z",
+  "updated_at": "2025-05-24T04:35:21.282Z",
   "comment": {
     "text": "This translation key is used for a description that informs users about the permanent deletion of their space. It appears on a button in the Portal Settings page when the user has not activated their account.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"استخدم هذا الخيار لحذف إستضافتك بشكل دائم\" translates to \"Use this option to permanently delete your hosting.\"  The English refers to a 'space,' not 'hosting.'  'Space' is likely referring to a user's area or portal.",
+          "description": "The translation \"استخدم هذا الخيار لحذف إستضافتك بشكل دائم\" translates to \"Use this option to permanently delete your hosting.\" The English content refers to 'space', not 'hosting'. 'Space' needs to be accurately reflected in the Arabic translation.",
           "suggestion": "استخدم هذا الخيار لحذف مساحتك بشكل دائم."
         }
       ],
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Space' in the German translation is a direct transliteration from English and might not be the most natural or understandable term for a user. A more appropriate German equivalent for 'space' in this context (e.g., 'Bereich', 'Umgebung', 'Raum') should be considered.",
-          "suggestion": "Verwenden Sie diese Option, um Ihren Bereich endgültig zu löschen."
+          "description": "The translation 'endgültig zu löschen' is slightly awkward. While technically correct, it's more natural to say 'dauerhaft löschen' or 'vollständig löschen' for 'permanently delete' in this context.",
+          "suggestion": "Verwenden Sie diese Option, um Ihr Space dauerhaft zu löschen."
         }
       ],
       "approved_at": null
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'տարածքը' (taraspěqë) is spelled correctly, but depending on the specific context, 'տեղը' (teɣë) might be a better fit for 'space' in this scenario, implying a more allocated or dedicated area.",
-          "suggestion": "Consider using 'տեղը' (teɣë) instead of 'տարածքը' (taraspěqë) if the context is more about a dedicated area rather than a broad space."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'このオプションを使用すると、スペースを永久に削除することができます。' is overly formal and verbose for a settings description. A more natural and concise translation would be better.",
+          "suggestion": "このオプションで、スペースを完全に削除します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'portal' (портал) is used instead of 'space'. While 'portal' can sometimes refer to a space, in this context 'space' is a more accurate and understandable translation.",
+          "description": "The term 'portal' ('портал') is used instead of 'space'. While 'portal' can be a reasonable translation in some contexts, in this case, 'space' is more accurate given the English content refers to a user's personal area.",
           "suggestion": "Используйте эту опцию, чтобы удалить ваше пространство навсегда."
         }
       ],
@@ -198,8 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'обришеш' (obrišes) implies a more casual or informal command. A more formal and appropriate translation for a settings option would be 'да избришеш' (da izbrišes) or 'за брисање' (za brisanje).",
-          "suggestion": "Користи ову опцију да избришеш трајно свој простор."
+          "description": "The translation 'Користи ову опцију да обришеш трајно свој простор.' is a bit too informal. The verb 'обришеш' (obrišes) is in the 2nd person singular, informal imperative. A more formal and professional tone would be more appropriate for settings related to deletion.",
+          "suggestion": "Користите ову опцију да трајно избришете свој простор."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'простор' (prostor) translates to 'space' but may not be the best fit depending on the specific context of the setting. It's a general term.",
+          "suggestion": "Consider a more specific term if applicable, such as 'налог' (account), 'профил' (profile), or 'област' (area)."
         }
       ],
       "approved_at": null
@@ -209,9 +214,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation uses the informal 'obrišeš' which might not be appropriate for settings. A more formal 'obrišete' or 'izbrišete' would be more aligned with a settings context.",
-          "suggestion": "Koristi ovu opciju da izbrišete trajno svoj prostor."
+          "type": "incorrect_translation",
+          "description": "The translation 'Koristi ovu opciju da obrišeš trajno svoj prostor.' is a bit awkward. 'Obrisać' should be 'izbrisati'. Also, the sentence structure could be improved for better flow.",
+          "suggestion": "Koristi ovu opciju da trajno izbrišeš svoj prostor."
         }
       ],
       "approved_at": null
@@ -225,7 +230,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'permanently' is not accurately reflected by 'остаточного'. While 'остаточного' implies finality, 'permanently' suggests an irreversible action, which is better conveyed by a word like 'безповоротно' or 'назавжди'.",
+          "suggestion": "Використовуйте цей параметр для безповоротного видалення вашого простору."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

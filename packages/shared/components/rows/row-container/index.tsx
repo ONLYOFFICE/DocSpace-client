@@ -65,10 +65,10 @@ const RowContainer = (props: RowContainerProps) => {
         <InfiniteLoaderComponent
           className="List"
           viewAs="row"
-          hasMoreFiles={hasMoreFiles}
-          filesLength={filesLength}
-          itemCount={itemCount}
-          loadMoreItems={fetchMoreFiles}
+          hasMoreFiles={hasMoreFiles ?? false}
+          filesLength={filesLength ?? 0}
+          itemCount={itemCount ?? 0}
+          loadMoreItems={fetchMoreFiles ?? (() => Promise.resolve())}
           itemSize={itemHeight}
           onScroll={onScroll}
         >

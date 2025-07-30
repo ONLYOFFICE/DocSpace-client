@@ -26,9 +26,8 @@
 
 import React from "react";
 
-import { classNames } from "@docspace/shared/utils/classNames";
-
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { classNames } from "../../../utils";
 
 import {
   ContextMenuButton,
@@ -161,8 +160,8 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     isBreadCrumbsLoading,
     onSelectBreadCrumb,
     bodyIsLoading,
-  } = React.useContext(BreadCrumbsContext);
-  const setIsSearch = React.useContext(SearchDispatchContext);
+  } = React.use(BreadCrumbsContext);
+  const setIsSearch = React.use(SearchDispatchContext);
 
   const { isRTL } = useInterfaceDirection();
 

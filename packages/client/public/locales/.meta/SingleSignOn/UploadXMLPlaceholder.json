@@ -3,7 +3,7 @@
   "content": "URL to IdP Metadata XML",
   "content_en_sha1_hash": "8131093e63b5f58eca9b027abe15945f20663a3c",
   "created_at": "2025-05-19T21:30:50.197Z",
-  "updated_at": "2025-05-21T01:38:32.516Z",
+  "updated_at": "2025-05-24T02:52:11.863Z",
   "comment": {
     "text": "This translation key is used for the placeholder text in a form input field where users can enter a URL to upload IdP metadata XML. The text appears as a placeholder in a text input field and helps users understand what information is expected from them.",
     "is_auto": true,
@@ -30,18 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and complex. \"عنوان رابط للبيانات الوصفية لمزود الهوية بتنسيق لغة التوصيف الموسعة\" translates to \"Title of a link for identity provider metadata in Extensible Markup Language format.\" This is not a natural or user-friendly way to express the intended meaning.",
-          "suggestion": "عنوان رابط لملف البيانات الوصفية لمزود الهوية (IdP)"
+          "description": "The translation is overly literal and technically complex for the intended context (a UI label). The phrase 'لغة التوصيف الموسعة' (XML) is unnecessary and confusing. It should be simplified for a general user.",
+          "suggestion": "عنوان رابط لبيانات الهوية (XML)"
         },
         {
           "type": "formatting",
-          "description": "The translation uses a long, single sentence. It would be better to break it up for readability.",
-          "suggestion": "عنوان رابط لملف البيانات الوصفية لمزود الهوية (IdP)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'لغة التوصيف الموسعة' (Extensible Markup Language) is unnecessary and technically inaccurate in this context. It's not about the format of the XML itself, but the URL pointing to the XML document.",
-          "suggestion": "Removing the term 'لغة التوصيف الموسعة' simplifies the translation and improves accuracy."
+          "description": "The phrase 'بيانات الهوية' is missing a definite article ('ال').",
+          "suggestion": "عنوان رابط للبيانات الوصفية لمعرف الهوية (XML)"
         }
       ],
       "approved_at": null
@@ -52,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"IdP Metadata XML üçün URL\" is technically correct but slightly awkward. A more natural phrasing in Azerbaijani would be \"IdP Metadata XML faylı üçün URL\" or \"IdP Metadata XML məlumatları üçün URL\". The word 'faylı' (file) makes it clearer what the URL points to.",
-          "suggestion": "IdP Metadata XML faylı üçün URL"
+          "description": "The translation 'IdP Metadata XML üçün URL' is a literal translation and sounds slightly unnatural in Azerbaijani. A more natural phrasing would convey the purpose of the URL.",
+          "suggestion": "IdP Metadata XML faylı üçün keçid (URL)"
         }
       ],
       "approved_at": null
@@ -64,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is too literal and doesn't flow naturally in Bulgarian. 'URL към XML с метаданните на доставчика на идентичност' is grammatically correct but sounds awkward. A more natural translation would be something like 'URL на XML с метаданни за удостоверяващ доставчик' or 'URL към XML файл с метаданни за идентификационен доставчик'.",
-          "suggestion": "URL на XML с метаданни за удостоверяващ доставчик"
+          "description": "The translation \"URL към XML с метаданните на доставчика на идентичност\" is a bit too literal and verbose. A more natural translation would be something closer to \"URL to Identity Provider Metadata XML\" or \"URL към XML на метаданните на доставчика на самоличност\". The current translation includes unnecessary words and phrases that make it less readable.",
+          "suggestion": "URL към XML на метаданните на доставчика на самоличност"
         }
       ],
       "approved_at": null
@@ -100,8 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL:sta IdP:n metadata XML' is a literal translation and lacks clarity for a user. 'URL:sta' implies starting from the URL, which isn't the intended meaning.  It should specify the URL *of* the XML file.",
-          "suggestion": "URL IdP:n metatietojen XML-tiedostolle"
+          "description": "The translation 'URL:sta IdP:n metadata XML' is not a natural or accurate rendering of \"URL to IdP Metadata XML\" in Finnish. While it contains the correct terms, the structure is awkward.",
+          "suggestion": "URL IdP:n metadata XML -osoite"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks a clear indicator that this is a URL. Including a label like 'osoite' (address) improves clarity.",
+          "suggestion": "Consider adding 'osoite' or a similar term to specify it's a URL."
         }
       ],
       "approved_at": null
@@ -118,8 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL դեպի IdP Մետատվյալների XML' is a literal translation and might not be the most natural phrasing in Armenian.  'դեպի' (depi) means 'to' but may sound awkward here. A more fluent option would be something that conveys 'location of' or 'address of'.",
-          "suggestion": "Consider alternatives like 'IdP Մետատվյալների XML-ի հասցե' (Address of IdP Metadata XML) or 'IdP Մետատվյալների XML-ի URL' (URL of IdP Metadata XML)."
+          "description": "The translation 'URL դեպի IdP Մետատվյալների XML' is a literal translation and may not be the most natural way to express 'URL to IdP Metadata XML' in Armenian. It sounds somewhat clunky.",
+          "suggestion": "Consider alternatives like 'IdP մետատվյալների XML-ի URL' or 'XML մետատվյալների URL դեպի IdP' depending on the desired flow and emphasis.  Consulting with a native Armenian speaker experienced in technical terminology is recommended."
         }
       ],
       "approved_at": null
@@ -127,7 +127,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'URL a metadati IdP XML' is not idiomatic Italian. 'a' doesn't work well here. A more natural phrasing would be 'URL dei metadati IdP XML' or 'URL per i metadati IdP XML'.",
+          "suggestion": "URL dei metadati IdP XML"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -154,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"IdP metadatu XML vietrādis URL\" is not the most natural or accurate translation of \"URL to IdP Metadata XML.\" \"Vietrādis\" implies a placeholder, which isn't the intended meaning. A more appropriate translation would focus on 'URL for' or 'Address of'.",
-          "suggestion": "IdP metadatu XML adrese URL"
+          "description": "The translation 'IdP metadatu XML vietrādis URL' is not the most natural or accurate translation of 'URL to IdP Metadata XML'. While understandable, it's a bit literal and awkward in Latvian. 'Vietrādis' is often used for placeholders in programming contexts, which isn't relevant here. The term 'XML' also sounds a bit out of place directly after 'metadatu'.",
+          "suggestion": "A more natural translation would be 'URL uz IdP metadatu XML failu' or 'IdP metadatu XML faila URL'."
         }
       ],
       "approved_at": null
@@ -178,7 +184,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'URL para o XML com os metadados do IdP' is a bit literal and could be improved for naturalness. A more idiomatic translation would be 'URL do XML de metadados do IdP' or 'URL para o arquivo XML de metadados do IdP'.",
+          "description": "The translation 'URL para o XML com os metadados do IdP' is a literal translation but lacks the conciseness and common phrasing of the English source. A more natural Portuguese translation would be 'URL do XML de metadados do IdP' or 'URL para metadados XML do IdP'.",
           "suggestion": "URL do XML de metadados do IdP"
         }
       ],
@@ -196,13 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Adresa URL la fişierul de metadate XML al furnizorului ID\" is a bit verbose and less direct than the English \"URL to IdP Metadata XML\". \"Furnizorul ID\" could be shortened.",
+          "description": "The translation \"Adresa URL la fişierul de metadate XML al furnizorului ID\" is a bit verbose and could be simplified. While technically correct, it's not as concise as the English equivalent.",
           "suggestion": "Adresa URL la metadatele XML ale furnizorului ID"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the Romanian translation includes 'fișierul'. This is redundant as 'URL' implies a file location. Removing 'fișierul' makes it cleaner.",
-          "suggestion": "Adresa URL la metadatele XML ale furnizorului ID"
+          "description": "The use of 'furnizorului' may be stylistically less preferable in this context.  Consider a slightly more formal phrasing.",
+          "suggestion": "Adresa URL la metadatele XML ale furnizorului de identitate"
         }
       ],
       "approved_at": null
@@ -212,9 +218,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses a hyphenated word 'XML-файла' which might be better handled with a space or a more natural phrasing in Russian. While technically correct, it's slightly less fluid.",
-          "suggestion": "URL адрес XML файла метаданных"
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"URL адрес\" is a less natural phrasing in Russian. A more common and preferred term would be \"URL\". The original English uses 'URL,' which should be preserved in the Russian translation when possible.",
+          "suggestion": "URL файла XML метаданных"
         }
       ],
       "approved_at": null
@@ -225,13 +231,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'IdP පාරදත්ත XML වෙත ඒ.ස.නි.' doesn't accurately convey the meaning of 'URL to IdP Metadata XML'. 'ඒ.ස.නි.' (A.S.N.) doesn't directly translate to 'URL' or any relevant term. It appears to be an abbreviation that isn't readily understood in Sinhala in this context.",
-          "suggestion": "A more accurate translation would be something like 'IdP පාරදත්ත XML ගබඩාවල URL' (IdP Metadata XML repository URL) or 'IdP පාරදත්ත XML හි URL' (URL of IdP Metadata XML)."
-        },
-        {
-          "type": "formatting",
-          "description": "The abbreviation 'ඒ.ස.නි.' lacks context and might confuse users. It's better to use a more descriptive term.",
-          "suggestion": "Replace 'ඒ.ස.නි.' with a full explanation of what it represents, or ideally, use a more universally understood term like 'URL'."
+          "description": "The translation 'IdP පාරදත්ත XML වෙත ඒ.ස.නි.' is not an accurate translation of 'URL to IdP Metadata XML'. 'ඒ.ස.නි.' (A.S.N.) appears to be an abbreviation and doesn't convey the meaning of 'URL'.",
+          "suggestion": "A more accurate translation would include the word for 'URL' in Sinhala. For example, 'IdP පාරදත්ත XML හි URL' (IdP Metadata XML's URL) or 'IdP පාරදත්ත XML වෙත ඇති URL' (The URL to IdP Metadata XML)."
         }
       ],
       "approved_at": null
@@ -271,9 +272,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation 'URL-адреса XML-файлу метаданих постачальника посвідчень' is overly literal and could be improved for naturalness in Ukrainian. 'Постачальника посвідчень' is a bit clunky. A more fluent translation would use a term like 'ідентифікатора' or 'сервісу'.",
+          "suggestion": "URL-адреса XML-файлу метаданих ідентифікатора (or URL-адреса XML-файлу метаданих сервісу)"
+        },
+        {
           "type": "formatting",
-          "description": "The translation includes a hyphenated URL (\"URL-адреса\"). While not strictly incorrect, it's more common and readable to omit the hyphen and use a space. In Ukrainian, hyphenated URLs are less frequently seen.",
-          "suggestion": "URL адреса XML-файлу метаданих постачальника посвідчень"
+          "description": "While not strictly incorrect, the phrase 'URL-адреса' can be shortened to 'URL' in modern Ukrainian technical documentation, maintaining clarity.",
+          "suggestion": "URL XML-файлу метаданих ідентифікатора (or URL XML-файлу метаданих сервісу)"
         }
       ],
       "approved_at": null
@@ -281,18 +287,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Siêu dữ liệu XML IdP' is a very literal translation and could be improved for naturalness in Vietnamese. 'Siêu dữ liệu' is accurate for 'Metadata', but the phrasing as a whole feels slightly awkward.",
-          "suggestion": "URL tới tệp XML siêu dữ liệu của IdP"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes a direct transliteration of 'IdP'. While understood by some, using a more descriptive term or retaining the English abbreviation might be preferable depending on the target audience.",
-          "suggestion": "Consider clarifying what 'IdP' refers to, or leaving it as 'IdP' if the audience is familiar with the term."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

@@ -2,17 +2,17 @@
   "key_path": "InvitationSettingsGuestsDescription",
   "content": "Enable this option to allow all {{productName}} members to invite external guests to rooms.",
   "content_en_sha1_hash": "fd538e3b4365662acfad838486a8e1b6925b6d53",
-  "created_at": "2025-05-28T09:33:04.868Z",
-  "updated_at": "2025-05-28T09:38:42.519Z",
+  "created_at": "2025-05-26T07:15:51.100Z",
+  "updated_at": "2025-06-02T10:20:51.468Z",
   "comment": {
-    "text": "This translation key is used for a tooltip or description that explains the purpose of allowing external guests to be invited by {{productName}} members. It appears in an invitation settings page, providing context for users who want to enable this feature.",
+    "text": "Enable all {{productName}} members to invite external guests to rooms on a portal. This setting affects room invitation permissions and is displayed in Portal Settings.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:38:42.519Z"
+    "updated_at": "2025-05-26T08:09:50.482Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 286,
+      "line_number": 288,
       "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.checkboxDescription}\n >\n {t(\"InvitationSettingsGuestsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n </div>",
       "module": "/packages/client"
     }

@@ -3,42 +3,107 @@
   "version": "3.2.1",
   "private": true,
   "scripts": {
-    "build": "node ./scripts/buildTranslations.js && next build",
-    "start": "node ./scripts/buildTranslations.js && NODE_ENV=development node server.js",
-    "start-prod": "NODE_ENV=production node server.js",
-    "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
-    "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
-    "lint": "next lint --max-warnings=0",
+    "build:translations": "node ./scripts/buildTranslations.js",
+    "build": "next build",
+    "build:deploy": "cross-env DEPLOY=true next build",
+    "start": "cross-env NODE_ENV=development PORT=5013 node server.js",
+    "start-prod": "cross-env NODE_ENV=production node server.js",
+    "lint": "eslint ./src --max-warnings=0",
+    "lint:fix": "eslint ./src --fix",
+    "tsc": "tsc",
     "clean": "shx rm -rf .next",
-    "deploy": "node ./scripts/deploy.js"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx cp -r .next/standalone/* ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -r .next/static/* ../../../publish/web/editor/packages/doceditor/.next/static && shx cp -f server.prod.js ../../../publish/web/editor/server.js"
   },
   "dependencies": {
+    "@docspace/shared": "workspace:*",
     "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.2.tgz",
-    "@serdnam/pino-cloudwatch-transport": "1.0.4",
+    "classnames": "2.5.1",
+    "crypto-js": "4.2.0",
+    "date-and-time": "3.6.0",
     "framer-motion": "^12.0.3",
-    "i18next": "20.6.1",
+    "i18next": "23.7.19",
+    "lodash": "4.17.21",
     "moment": "2.30.1",
     "nconf": "0.12.1",
-    "next": "14.2.26",
-    "pino": "9.5.0",
-    "pino-pretty": "11.3.0",
-    "pino-roll": "2.2.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-i18next": "13.5.0",
+    "next": "15.3.2",
+    "react": "19.1.0",
+    "react-device-detect": "2.2.3",
+    "react-dom": "19.1.0",
+    "react-i18next": "14.0.1",
     "sass": "1.79.5",
-    "styled-components": "5.3.11"
+    "styled-components": "5.3.11",
+    "ts-pattern": "5.5.0",
+    "winston": "3.17.0",
+    "winston-cloudwatch": "6.3.0",
+    "winston-daily-rotate-file": "5.0.0",
+    "@aws-sdk/client-cloudwatch-logs": "3.816.0",
+    "he": "1.2.0"
   },
   "devDependencies": {
+    "@babel/core": "7.25.8",
     "@svgr/webpack": "8.1.0",
-    "@types/nconf": "0",
+    "@types/crypto-js": "4.2.2",
+    "@types/he": "1.2.3",
+    "@types/lodash": "4.17.10",
+    "@types/nconf": "0.10.7",
     "@types/node": "22.7.5",
-    "@types/react": "18.3.11",
-    "@types/react-dom": "18.3.1",
+    "@types/react": "19.1.4",
+    "@types/react-dom": "19.1.5",
+    "@types/styled-components": "5.1.34",
+    "cross-env": "^7.0.3",
     "eslint": "8.57.1",
-    "eslint-config-next": "14.2.26",
+    "eslint-config-next": "15.3.2",
+    "nconf": "0.12.1",
     "prettier": "3.3.3",
+    "sass": "1.79.5",
     "shx": "0.3.4",
+    "terser-webpack-plugin": "5.3.10",
     "typescript": "5.6.3"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "build:deploy": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start": {
+        "continuous": true,
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "start-prod": {
+        "continuous": true,
+        "dependsOn": [
+          "build"
+        ]
+      },
+      "lint": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "lint:fix": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "tsc": {
+        "dependsOn": [
+          "build:translations"
+        ]
+      },
+      "deploy": {
+        "dependsOn": [
+          "build:deploy"
+        ]
+      }
+    }
   }
 }

@@ -26,7 +26,6 @@
   "LdapGroupNameAttribute": "Atribut název skupiny",
   "LdapGroupNameAttributeTooltip": "Zadejte atribut objektu, který odpovídá názvu skupiny.",
   "LdapGroupUserAttributeTooltip": "Zadejte atribut objektu uživatele, který se používá k určení, zda je tento uživatel členem skupin.",
-  "LdapIntro": "Importujte uživatele a skupiny přes LDAP a povolte ověřování uživatelů pomocí přihlašovacích údajů/hesel uložených na LDAP serveru. Uživatelé budou importováni ihned po uložení nastavení. Později přidávaní uživatelé budou importováni při jejich prvním ověření. Pokud chcete poskytnout přístup pouze přes LDAP, deaktivujte možnost pozvat nové členy {{productName}} přes Kontakty: <1>{{link}}</1>",
   "LdapLoginAttribute": "Atribut přihlášení",
   "LdapLoginAttributeTooltip": "Zadejte atribut objektu odpovídající přihlášení uživatele.",
   "LdapLoginTooltip": "Zadejte prosím Přihlášení uživatele, který má práva ke čtení serveru LDAP.",

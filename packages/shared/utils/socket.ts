@@ -265,6 +265,12 @@ export type TListenEventCallbackMap = {
     isCompleted: boolean;
     error: string;
   }) => void;
+  [SocketEvents.BackupProgress]: (opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+  }) => void;
   [SocketEvents.EncryptionProgress]: (opt: {
     percentage: number;
     error: string;
@@ -678,7 +684,7 @@ class SocketHelper {
    */
   public off = <T extends SocketEvents>(
     eventName: T,
-    callback: TSocketListener<T>,
+    callback?: TSocketListener<T>,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       addLog(

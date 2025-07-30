@@ -1,0 +1,28 @@
+{
+  "key_path": "RoomToArchiveMove",
+  "content": "Room moved to {{sectionName}}",
+  "content_en_sha1_hash": "7cce0ba4d4b71ea8203ef1786a907cb0d8312c5f",
+  "created_at": "2025-06-02T10:19:22.235Z",
+  "updated_at": "2025-06-30T12:20:31.355Z",
+  "comment": {
+    "text": "This translation key is used to display a message indicating that a room has been moved to an archive section. It appears in a UI element likely related to room management or history, providing context for users on what action was taken. Translators should focus on conveying a clear and concise message about the room's status.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:54.203Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 294,
+      "context": "case FeedActionKeys.RoomDenyDownloadEnabled:\n return t(\"InfoPanel:RoomDenyDownloadEnabled\");\n case FeedActionKeys.RoomDenyDownloadDisabled:\n return t(\"InfoPanel:RoomDenyDownloadDisabled\");\n case FeedActionKeys.RoomArchived:\n return t(\"InfoPanel:RoomToArchiveMove\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

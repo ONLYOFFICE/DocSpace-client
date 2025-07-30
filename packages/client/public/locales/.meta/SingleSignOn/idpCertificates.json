@@ -3,7 +3,7 @@
   "content": "IdP Public Certificates",
   "content_en_sha1_hash": "679a32da5ca5df7ade6ce92aeed35c5f2dfdfa18",
   "created_at": "2025-05-19T21:30:50.093Z",
-  "updated_at": "2025-05-21T02:11:00.002Z",
+  "updated_at": "2025-05-24T03:24:00.961Z",
   "comment": {
     "text": "\"IdP Public Certificates\" describes a list of certificates related to identity provider authentication, used in single sign-on settings. This translation key appears in a UI component that manages certificate configurations for integration purposes.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'شهادات مزود الهوية العامة' while understandable, isn't the most accurate or natural rendering of 'IdP Public Certificates' in a technical Saudi Arabian context. 'مزود الهوية' (provider of identity) is a bit verbose. A more common and precise term for 'IdP' in a technical context would be 'هيئة التصديق' (authentication authority) or simply use the transliteration 'آي دي بي'.",
-          "suggestion": "Consider 'شهادات آي دي بي العامة' or 'شهادات هيئة التصديق العامة'."
+          "description": "The translation 'شهادات مزود الهوية العامة' is a literal translation but might not be the most natural or commonly used phrasing in Saudi Arabia for 'IdP Public Certificates'. It emphasizes 'مزود الهوية' (identity provider) which isn't always necessary.  A more fluent translation would consider the context of certificates related to Single Sign-On.",
+          "suggestion": "Consider 'شهادات عامة لموفري الهوية' or 'شهادات عامة لمزودي الخدمات الموحدة' depending on the specific context. A simpler and more common option could be 'شهادات عامة' if the context clearly implies it refers to IdP certificates."
         }
       ],
       "approved_at": null
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'İctimai Sertifikatlar' is a literal translation of 'Public Certificates', it might not be the most natural or commonly used term in Azerbaijani IT contexts. 'Publik Sertifikatlar' would likely be more readily understood.",
+          "suggestion": "IdP Publik Sertifikatlar"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Публични сертификати на доставчика на самоличност' while generally accurate, is a bit literal. A more natural and common phrasing in Bulgarian for 'IdP Public Certificates' would be 'Сертификати на удостоверяващ орган' or 'Публични сертификати на удостоверяващ орган'.  'Доставчик на самоличност' is correct, but the overall flow is slightly less idiomatic.",
-          "suggestion": "Сертификати на удостоверяващ орган"
+          "description": "While the translation is understandable, it's a bit literal and could be more concise and natural in Bulgarian. 'IdP Public Certificates' often refers to a set of certificates used for authentication.",
+          "suggestion": "Възможни алтернативи: 'Сертификати за удостоверяване' или 'Сертификати на IdP за удостоверяване'."
         }
       ],
       "approved_at": null
@@ -111,13 +117,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'IdP 공인 인증서' is a literal translation but doesn't fully convey the meaning of 'IdP Public Certificates' in a natural Korean way. 'Public Certificates' often implies a collection or list.",
-          "suggestion": "IdP 공개 인증서 목록 (IdP Public Certificate List) or IdP 공개 인증서 (IdP Public Certificates - slightly less descriptive but more concise)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ໃບຢັ້ງຢືນສາທາລະນະ IdP\" is a literal translation and might not be the most natural or clear way to express 'IdP Public Certificates' in Lao. 'ສາທາລະນະ' implies 'public' but the phrasing might sound awkward. A more idiomatic translation might be better.",
-          "suggestion": "Consider alternative phrasing like \"ໃບຮັບຮອງສາທາລະນະ IdP\" or \"ໃບຢັ້ງຢືນສາທາລະນະຂອງ IdP\" depending on context and desired emphasis.  Further context would help refine the suggestion."
+          "description": "The Lao translation 'ໃບຢັ້ງຢືນສາທາລະນະ IdP' is a literal translation and doesn't quite capture the intended meaning of 'IdP Public Certificates'.  'ສາທາລະນະ' (sathalana) generally means 'public' but in this context, 'Public Certificates' often refers to certificates that are publicly *available* and used for verification. A better translation would emphasize this accessibility and purpose.",
+          "suggestion": "ໃບຮັບຮອງສາທາລະນະ IdP (baip hop rong sathalana IdP) - This emphasizes the certificates being 'authorized' and publicly accessible. Alternatively, ໃບຢັ້ງຢືນສາທາລະນະທີ່ສາມາດເຂົ້າເຖິງໄດ້ຂອງ IdP (baip yang yun sathalana thi samat khao thing dai khong IdP) - 'Publicly accessible certificates of IdP' is more explicit but longer."
         }
       ],
       "approved_at": null
@@ -168,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Certificate Publice al furnizorului de identitate (IdP)' is overly literal and verbose. While technically correct, it's not the most natural Romanian phrasing. 'Certificate Publice ale furnizorului de identitate (IdP)' would be more idiomatic, using the plural 'ale' to agree with 'Certificate'.",
-          "suggestion": "Certificate Publice ale furnizorului de identitate (IdP)"
+          "description": "The translation \"Certificate Publice al furnizorului de identitate (IdP)\" is overly literal and somewhat awkward in Romanian. 'IdP Public Certificates' implies a collection of certificates, but the translation focuses on the provider.",
+          "suggestion": "Certificatelor IdP"
         },
         {
           "type": "formatting",
-          "description": "The inclusion of '(IdP)' in the translation might be unnecessary and break the flow for a Romanian speaker. It's an English acronym and its direct translation is not standard practice. Consider whether the target audience understands the acronym.",
-          "suggestion": "Certificate Publice ale furnizorului de identitate"
+          "description": "The inclusion of '(IdP)' in parentheses is unnecessary and disrupts the flow of the Romanian sentence. While 'IdP' might be a useful clarification for some audiences, it's better to integrate it more naturally.",
+          "suggestion": "Remove the parentheses around 'IdP'."
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Открытые сертификаты поставщика учетных записей: \" is overly literal and a bit clunky. While technically correct, it's not the most natural phrasing in Russian. The colon is also misplaced.",
-          "suggestion": "Сертификаты открытых ключей удостоверяющего центра (IdP)"
+          "description": "The translation 'Открытые сертификаты поставщика учетных записей: ' is overly literal and includes a colon which isn't present in the English source.  It also could be more concise and natural.",
+          "suggestion": "Открытые сертификаты IdP"
         }
       ],
       "approved_at": null
@@ -197,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'IdP ප්‍රසිද්ධ සහතික' while conveying the idea of 'public certificates', could be improved for more accurate and natural Sinhala phrasing. 'ප්‍රසිද්ධ' (prasiddha) can sometimes imply notoriety rather than simply 'public'.",
-          "suggestion": "IdP සාධාරණ සහතික (IdP sadharana sahathika) - ' සාධාරණ' (sadharana) translates to 'public' or 'general' in a more appropriate context."
+          "description": "The translation 'IdP ප්‍රසිද්ධ සහතික' is a literal translation but doesn't fully convey the meaning of 'Public Certificates' in the context of Single Sign-On. While 'ප්‍රසිද්ධ' means 'public,' the overall understanding of certificates being openly available and trusted is lost. It sounds more like individual certificates, not a collection.",
+          "suggestion": "Consider a translation like 'IdP පොදු සහතිකයන්' (IdP Podu Sahathikan) or 'IdP විදුහල් පොත' (IdP Viduhal Potha - more formal), which better conveys the meaning of a set of public certificates for verification purposes. More context would be helpful to provide a truly optimal translation."
         }
       ],
       "approved_at": null
@@ -227,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Javni sertifikati IdP-a' is understandable, a more accurate and natural-sounding translation for 'IdP Public Certificates' would be 'IdP-ovi javni sertifikati'. The current translation uses a genitive case ('IdP-a') which isn't the most common way to express this relationship in Serbian.",
-          "suggestion": "IdP-ovi javni sertifikati"
+          "description": "While technically correct, 'Javni sertifikati IdP-a' sounds slightly awkward in Serbian. A more natural phrasing would be 'IdP sertifikati' or 'Sertifikati IdP-a'. The possessive form is less common in this context.",
+          "suggestion": "Sertifikati IdP-a"
         }
       ],
       "approved_at": null
@@ -239,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"IdP Varlık Kimliği\" does not accurately convey the meaning of \"IdP Public Certificates\". \"Varlık Kimliği\" translates to \"Entity Identifier\", which is a different concept. The translation should reflect the \"Public Certificates\" aspect.",
-          "suggestion": "IdP Genel Sertifikaları"
+          "description": "The Turkish translation \"IdP Varlık Kimliği\" does not accurately convey the meaning of \"IdP Public Certificates.\" \"Varlık Kimliği\" translates to \"Entity Identity,\" which is related but not the same as public certificates. It misses the crucial aspect of 'public' and 'certificates'.",
+          "suggestion": "A more accurate translation would be something like \"IdP Genel Sertifikaları\" (IdP General Certificates) or \"IdP Kamu Sertifikaları\" (IdP Public Certificates)."
         }
       ],
       "approved_at": null
@@ -251,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Загальнодоступні сертифікати постачальника посвідчень\" is a literal translation and while technically correct, it's overly formal and not idiomatic for a technical context. 'Postavlyach postvidchen' translates to 'Identity Provider', but the 'postavlyach' part makes it sound very bureaucratic.  'IdP Public Certificates' usually refers to the certificates needed for authentication and isn't commonly referred to as publicly accessible.",
-          "suggestion": "Альтернативні варіанти перекладу, що були б більш зрозумілими та зручними для користувачів: 'Сертифікати Ідентифікатора' or 'Публічні сертифікати IdP' or 'Сертифікати IdP'."
+          "description": "While technically correct, \"Загальнодоступні сертифікати постачальника посвідчень\" is a very literal and somewhat awkward translation. \"Постачальник посвідчень\" (postachnyk posvidchen) directly translates to 'certificate provider' which isn't the most natural phrasing in Ukrainian when referring to an Identity Provider. A more natural translation might emphasize the role of an IdP.",
+          "suggestion": "Consider alternatives like \"Публічні сертифікати ідентифікатора\" (Publichni sertyfikaty identifikatora) or \"Сертифікати ідентифікатора\" (Sertyfikaty identifikatora) which are more common and idiomatic for 'IdP Certificates'."
         }
       ],
       "approved_at": null
@@ -263,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Chứng chỉ công khai IdP' sounds a bit clunky and less natural in Vietnamese. A more fluent translation would improve readability.",
-          "suggestion": "Chứng chỉ công khai của IdP"
+          "description": "While technically correct, \"Chứng chỉ công khai IdP\" is a very literal translation and sounds unnatural in Vietnamese. A more natural and understandable translation would use a phrasing that explains the purpose of the certificates.",
+          "suggestion": "Cấu trúc chứng chỉ công khai của IdP"
         }
       ],
       "approved_at": null

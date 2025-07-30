@@ -2,12 +2,12 @@
   "key_path": "InviteToRoomManuallyInfoGuest",
   "content": "Add existing {{productName}} contacts. Or invite new users personally via email. New users will be added to your Guests list.",
   "content_en_sha1_hash": "89d589fb8b32a29489de19a39a17f2e4722ee57f",
-  "created_at": "2025-05-28T09:33:07.788Z",
-  "updated_at": "2025-05-28T09:34:09.035Z",
+  "created_at": "2025-05-26T07:15:53.259Z",
+  "updated_at": "2025-05-26T08:09:33.257Z",
   "comment": {
-    "text": "This translation key is used for a message displayed when users can't invite guests, explaining an alternative action to add contacts or invite new users manually. It appears in the UI as a tooltip or prompt in the InvitePanel component.",
+    "text": "This translation key describes a message that appears when users can't invite guests directly and need to add existing contacts or invite new users via email. The message informs users about the alternative actions they can take. It is displayed in the InvitePanel component.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:34:09.035Z"
+    "updated_at": "2025-05-26T08:09:33.257Z"
   },
   "usage": [
     {

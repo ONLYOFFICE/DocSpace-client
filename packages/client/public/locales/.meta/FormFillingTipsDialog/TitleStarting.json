@@ -3,7 +3,7 @@
   "content": "When a form is opened for filling, an individual copy is automatically created for each responder and is saved to the In Progress folder. It means that the form has been started but has not been completed yet.",
   "content_en_sha1_hash": "b7be5997be79fa4d6fef5f2bf83822628863aa71",
   "created_at": "2025-05-19T21:30:55.147Z",
-  "updated_at": "2025-05-21T10:44:25.253Z",
+  "updated_at": "2025-05-24T10:54:13.477Z",
   "comment": {
     "text": "\"This text is used as a title for a guidance step that explains when a form starts being filled. It's likely to appear in a dialog or modal window that provides tips on how to begin filling out a form.\"",
     "is_auto": true,
@@ -36,18 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"an individual copy\" is not accurately translated. \"Ayrıca nüsxə\" could be interpreted as a separate or distinct copy, which isn't the intended meaning of 'individual'.",
-          "suggestion": "Forma doldurulduqda, hər bir respondent üçün fərdi bir nüsxə yaradılır…"
+          "description": "The phrase \"TitleStarting\" suggests this refers to the title/heading of a dialog box or screen. The translation doesn't reflect this context, as it describes the form's behavior. The phrasing \"Davam edən qovluğunda saxlanılır\" (saved in the In Progress folder) is accurate but doesn't necessarily convey the purpose of the title.",
+          "suggestion": "Consider a title that indicates the purpose of the explanation, such as \"Form Filling: Important Information\" or \"Form Filling Process\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'işə salınıb' (started) is not the most natural way to express 'opened for filling' or 'started'. It implies something being activated rather than being opened or commenced.",
-          "suggestion": "Forma doldurmağa başlananda…"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a bit clunky. It could be more fluid.",
-          "suggestion": "Forma doldurmağa başlananda, hər bir respondent üçün fərdi bir nüsxə yaradılır və Davam edən qovluğunda saxlanılır. Bu, formanın doldurmağa başlanması, lakin tamamlanmaması deməkdir."
+          "description": "The word 'işə salınıb' (lit. 'turned on' or 'started') doesn't quite capture the meaning of 'started' in the context of a form. It implies something is activated, rather than a process beginning.",
+          "suggestion": "Replace 'işə salınıb' with a more appropriate verb like 'başlanıb' (begun) or 'hazırlanmayıb' (prepared)."
         }
       ],
       "approved_at": null
@@ -64,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'In Progress (Probíhající)' is a direct translation and parenthetical addition. While understandable, it's slightly awkward. A more natural phrasing might be better, depending on the overall tone of the application.",
-          "suggestion": "Consider replacing 'In Progress (Probíhající)' with just 'Probíhající' or 'Do dokončení', if 'Probíhající' isn't standard terminology for the folder."
+          "description": "The Czech translation includes \"(Probíhající)\" after \"In Progress\". While acceptable, it's redundant as 'In Progress' is understandable in Czech, especially in a technical context.  Consider removing the Czech equivalent.",
+          "suggestion": "Remove '(Probíhající)' from the translation.  The sentence should read: \"Po otevření formuláře k vyplnění se automaticky vytvoří individuální kopie pro každého respondenta a uloží se do složky In Progress. To znamená, že formulář byl zahájen, ale ještě nebyl dokončen.\""
         }
       ],
       "approved_at": null
@@ -79,13 +74,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation uses quotation marks (“Σε εξέλιξη”) around the folder name. It might be preferable to use a different format, like italics or parentheses, to indicate it's a folder name, as the quotation marks are visually disruptive in Greek.",
-          "suggestion": "Consider using italics (Σε εξέλιξη) or parentheses ((Σε εξέλιξη)) instead of quotation marks."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -94,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'formularios' is misspelled. The correct word is 'formulario'.",
+          "description": "The word 'formularios' is misspelled. The correct form is 'formulario'.",
           "suggestion": "formulario"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'para su rellenado' sounds a bit formal and slightly awkward. A more natural phrasing would be 'para completar' or 'para llenar'.",
-          "suggestion": "para completar"
+          "description": "The phrase 'Para su rellenado' sounds slightly awkward in Spanish. A more natural phrasing would be 'para completarlo'.",
+          "suggestion": "para completarlo"
         }
       ],
       "approved_at": null
@@ -132,42 +121,19 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation lacks a period (full stop) at the end of the sentence.",
-          "suggestion": "Add a period at the end: 「フォームが記入のために開かれると、各回答者のために自動的に個別のコピーが作成され、進行中フォルダに保存されます。これは、フォームが開始されたがまだ完了していないことを意味します。」"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The sentence structure is slightly awkward. While grammatically correct, it's not the most natural Korean phrasing.",
-          "suggestion": "양식 작성을 위해 양식을 열면 각 응답자별로 자동 개별 사본이 생성되어 '진행 중' 폴더에 저장됩니다. 이는 양식 작성이 시작되었지만 아직 완료되지 않았음을 나타냅니다."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“Individual copy” is translated as “개별 사본” which is accurate but a bit formal. It can be slightly improved for better flow.",
-          "suggestion": "개별 사본 instead of ‘개별 사본’"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Lao translation uses \"ໂຟນເດີ“ກຳລັງເຮັດວຽກ\" which lacks proper Lao quotation marks. It should use ‘...’ instead.",
-          "suggestion": "‘ກຳລັງເຮັດວຽກ’"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -176,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"Procesā\" is likely intended to represent \"In Progress\". While it's understandable, it's not standard terminology and could confuse users. It's preferable to use a more direct translation or the English term if possible.",
-          "suggestion": "Consider using a more standard translation of 'In Progress', such as 'Norisinājumā' or 'Darbnīcā', or maintaining the English term 'In Progress' if consistent with the rest of the application's terminology."
+          "description": "The phrase \"Procesā\" in the Latvian translation is a direct translation of \"In Progress\". While understandable, it might be more natural in Latvian to use a more common phrasing for an ongoing or active state, such as 'Darbībā' or 'Atrodas darbībā'.",
+          "suggestion": "Consider replacing 'Procesā' with 'Darbībā' or 'Atrodas darbībā' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -188,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'In Progress' is translated as 'In Behandeling'. While 'In Behandeling' can mean 'in progress', in this context, a more accurate translation reflecting a folder name would be 'In Werk'. 'In Behandeling' implies the form is being processed, not merely that it's in progress.",
-          "suggestion": "Als een formulier wordt geopend om te worden ingevuld, wordt automatisch een individuele kopie gemaakt voor elke respondent en opgeslagen in de map In Werk. Dit betekent dat het formulier is gestart, maar nog niet is voltooid."
+          "description": "The phrase 'In Progress' is translated as 'In Behandeling'. While 'In Behandeling' can mean 'in progress', in the context of a folder structure for forms, 'In behandeling' implies 'under processing' which is not the intended meaning. 'In behandeling' suggests the forms are being actively handled by someone, not simply that they are being filled out.",
+          "suggestion": "Consider using 'In Werk' or 'In Vulling' or retaining the English term 'In Progress' (if the user interface uses English terms)."
         }
       ],
       "approved_at": null
@@ -197,7 +163,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'Po otwarciu formularza do wypełnienia' is a bit long and could be slightly more concise. While grammatically correct, it might be improved for readability.",
+          "suggestion": "Po otwarciu formularza lub podczas wypełniania"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -215,7 +187,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrasing 'completarea formularului s-a început' is grammatically awkward in Romanian. It's passive and less natural.",
+          "suggestion": "completarea formularului a început"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -230,18 +208,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ප්‍රගතියේ' is misspelled. The correct spelling is 'ප්‍රගතිය'.",
-          "suggestion": "ප්‍රගතිය"
+          "description": "The word 'ෆෝල්ඩරයට' (folder) is missing a diacritic mark. It should be 'ෆෝල්ඩරයට'",
+          "suggestion": "ෆෝල්ඩරයට"
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'ප්‍රගතියේ පවතී ෆෝල්ඩරයට' is slightly awkward. It would read better if restructured.",
-          "suggestion": "ප්‍රගතියේ ෆෝල්ඩරයට"
+          "description": "The phrase 'එක් එක් ප්‍රතිචාර දක්වන්නා සඳහා' can be simplified for better flow.  It literally translates to 'for each responder'.",
+          "suggestion": "ප්‍රතිචාරකරුවන් සඳහා"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'In Progress folder' isn't perfectly captured by 'ප්‍රගතියේ ෆෝල්ඩරයට'.  A more direct translation or explanation would be better suited.",
-          "suggestion": "ដំណើរකිරීම් ෆෝල්ඩරයට (Dainanakrimiya Folderaya) or වෙනත් වැඩ අවසානයේ ෆෝල්ඩරයට (Venath Wēda Avāsānē Folderaya)"
+          "description": "The phrase 'ප්‍රගතියේ පවතී ෆෝල්ඩරයට' is a somewhat literal and awkward translation of 'saved to the In Progress folder'. It's better to convey the meaning of 'in progress' more naturally.",
+          "suggestion": "ප්‍රගතියේ ෆෝල්ඩරයට සුරකිනු ලැබේ"
         }
       ],
       "approved_at": null
@@ -257,9 +235,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'mapo' is missing an accent. It should be 'mapö'.",
-          "suggestion": "mapö"
+          "type": "incorrect_translation",
+          "description": "The phrase 'an individual copy' is not accurately translated. 'Individualna kopija' while technically correct, can be improved to better reflect the meaning of a dedicated form instance.",
+          "suggestion": "Ko se obrazec odpre za izpolnjevanje, za vsakega uporabnika se samodejno ustvari ločena kopija..."
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'responders' is translated as 'izpolnjevalca'. While understandable, 'uporabniki' might be a slightly more natural and common term in this context, as it encompasses the broader meaning of form users.",
+          "suggestion": "za vsakega uporabnika"
         }
       ],
       "approved_at": null
@@ -270,13 +253,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'фолдеру' is a misspelling. It should be 'фолдери'.",
-          "suggestion": "фолдери"
+          "description": "The word 'испитаника' is a less common and slightly formal way of saying 'respondent'. While not incorrect, 'однорци' or 'корисници' might be more natural in this context.",
+          "suggestion": "Consider using 'однорци' or 'корисници' instead of 'испитаника'."
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, 'То значи да је формулар започет, али није завршен.' can be improved for better flow and readability.  'То значи да је формулар почети, али га још није завршен.' is more natural.",
-          "suggestion": "То значи да је формулар почети, али га још није завршен."
+          "type": "formatting",
+          "description": "The Serbian translation uses a capitalized 'Фолдеру'. While grammatically correct, lowercasing 'фолдеру' would match the style of the English text more closely.",
+          "suggestion": "Change 'Фолдеру' to 'фолдеру'."
         }
       ],
       "approved_at": null
@@ -292,13 +275,13 @@
         },
         {
           "type": "spelling",
-          "description": "The word 'ispitanika' is a misspelling. It should be 'ispunjača'.",
-          "suggestion": "ispunjača"
+          "description": "The word 'ispitanika' should be 'ispunjavanja'.",
+          "suggestion": "ispunjavanja"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'responder' is best translated as 'ispunjač' in this context, rather than 'ispitanika'. 'Ispitanika' implies someone being tested or questioned, while 'ispunjač' refers to someone filling out a form.",
-          "suggestion": "ispunjača"
+          "type": "grammar",
+          "description": "The sentence 'Kada se formular otvori za popunjavanje, automatski se kreira individualna kopija za svakog ispitanika i čuva se u folderu U toku.' is a bit clunky. A more natural flow might be achieved with a slight rephrasing. ",
+          "suggestion": "Kada se formular otvori za popunjavanje, za svakog korisnika se automatski kreira individualna kopija koja se čuva u folderu 'U toku'."
         }
       ],
       "approved_at": null
@@ -306,41 +289,30 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"an individual copy\" is not accurately translated. \"Bireysel bir kopya\" is a literal translation but might sound unnatural in Turkish. A more natural phrasing would convey the idea of a personalized or unique copy for each responder.",
+          "suggestion": "Bir yanıtlayıcı için özel bir kopya"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better readability in Turkish. The current structure feels a bit clunky.",
+          "suggestion": "Bir form açıldığında, doldurulması için her yanıtlayıcıya özel bir kopya otomatik olarak oluşturulur ve 'Devam Ediyor' klasörüne kaydedilir. Bu, formun başlatıldığını ancak henüz tamamlanmadığını gösterir."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'респондента' is technically correct but might sound a bit formal in this context. Consider a more common synonym.",
-          "suggestion": "респондента -> учасника"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'У процесі' is in Ukrainian but should be consistently formatted to align with existing conventions.  If the English uses quotes, the Ukrainian should too.",
-          "suggestion": "«У процесі»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'an individual copy' is awkwardly translated as 'một bản sao riêng lẻ'. While technically correct, it's not the most natural phrasing in Vietnamese. It can be improved for better flow.",
-          "suggestion": "một bản sao cá nhân"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'responder' is translated as 'người trả lời'. While accurate, it's a bit formal and stiff. A more conversational term might be better depending on the context.",
-          "suggestion": "người dùng"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

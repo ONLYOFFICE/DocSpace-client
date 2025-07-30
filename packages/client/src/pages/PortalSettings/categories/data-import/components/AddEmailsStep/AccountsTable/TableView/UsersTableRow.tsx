@@ -41,7 +41,6 @@ import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { globalColors } from "@docspace/shared/themes";
 
-import { InputType } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import {
   AddEmailTableRowProps,
@@ -128,14 +127,19 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
     }
   };
 
-  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAccountToggle = (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
+  ) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (
       isPrevEmailValid &&
-      !(emailInputRef.current && emailInputRef.current.contains(e.target)) &&
-      !emailTextRef.current?.contains(e.target)
+      !(
+        emailInputRef.current &&
+        emailInputRef.current.contains(e.target as Node)
+      ) &&
+      !emailTextRef.current?.contains(e.target as Node)
     ) {
       toggleAccount();
     }
@@ -180,10 +184,7 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
   if (!ready) return;
 
   return (
-    <StyledTableRow
-      onClick={handleAccountToggle}
-      isDisabled={!isPrevEmailValid}
-    >
+    <StyledTableRow onClick={handleAccountToggle}>
       <TableCell className="checkboxWrapper">
         <Checkbox
           onChange={handleAccountToggle}
@@ -203,7 +204,6 @@ const UsersTableRow = (props: AddEmailTableRowProps) => {
               className="import-email-input"
               value={tempEmail}
               onChange={handleEmailChange}
-              type={InputType.email}
               onValidateInput={onValidateEmail}
               onKeyDown={handleKeyDown}
               hasError={hasError}

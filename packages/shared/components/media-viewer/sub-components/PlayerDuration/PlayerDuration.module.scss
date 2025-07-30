@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/variables/devices";
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 .wrapper {
   width: 102px;
@@ -35,7 +34,7 @@
   font-weight: 700;
   margin-inline-start: 10px;
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: 0;
   }
 }

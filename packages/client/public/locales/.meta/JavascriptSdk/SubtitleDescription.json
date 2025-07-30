@@ -3,7 +3,7 @@
   "content": "Subtitle with additional comments or descriptions for the current directory.",
   "content_en_sha1_hash": "9046b4a5b638c7549e8ae0bb284653c19d93c2e2",
   "created_at": "2025-05-19T21:30:54.700Z",
-  "updated_at": "2025-07-01T15:57:36.195Z",
+  "updated_at": "2025-05-24T08:45:38.400Z",
   "comment": {
     "text": "This translation key is used to provide a subtitle for a tooltip that displays additional information about a file selection option. It appears in a file selector UI component and serves as a descriptive title for the tooltip's content.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 378,
+      "line_number": 374,
       "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Subtitle\")}\n description={t(\"SubtitleDescription\")}\n img={theme.isBase ? SubtitleUrl : SubtitleUrlDark}\n />\n }\n />\n </LabelGroup>",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'إضافة ترجمة مع تعليقات إضافية أو وصف للدليل الحالي' doesn't fully capture the meaning of 'Subtitle with additional comments or descriptions for the current directory.' The word 'Subtitle' is missing. It translates to 'Adding a translation with additional comments or description for the current directory'.",
-          "suggestion": "ترجمة مع تعليقات أو وصف إضافي للدليل الحالي"
+          "description": "The translation 'إضافة ترجمة مع تعليقات إضافية أو وصف للدليل الحالي' is a literal translation and doesn't fully capture the meaning of 'Subtitle with additional comments or descriptions for the current directory'. It implies adding a translation itself, rather than a description *of* a subtitle. A more accurate translation would focus on the descriptive aspect.",
+          "suggestion": "وصف تفصيلي للترجمة الصوتية للمجلد الحالي."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation could benefit from rephrasing for better flow in Arabic. The current phrasing feels somewhat disjointed.",
+          "suggestion": "وصف تفصيلي للترجمة الصوتية للمجلد الحالي."
         }
       ],
       "approved_at": null
@@ -42,13 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Cari kataloq üçün əlavə şərhlər və ya təsvirləri ehtiva edən alt başlıq\" is a literal translation that doesn't quite capture the meaning of 'Subtitle with additional comments or descriptions for the current directory.' The phrase 'for the current directory' is awkward in Azerbaijani and the overall phrasing is less natural.",
-          "suggestion": "Consider a more idiomatic translation like: \"Bu qovluq üçün əlavə məlumatlar və şərhləri olan başlıq\". (Subtitle with additional information and comments for this folder.)"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'alt başlıq' (subtitle) is acceptable, but using 'başlıq' (heading/title) might be more appropriate depending on the precise technical context and the intended user.",
-          "suggestion": "Evaluate whether 'başlıq' is a better fit for 'subtitle' in the specific application."
+          "description": "The translation \"Cari kataloq üçün əlavə şərhlər və ya təsvirləri ehtiva edən alt başlıq.\" is a bit too literal and doesn't quite capture the nuance of 'Subtitle with additional comments or descriptions for the current directory.' It sounds slightly awkward in Azerbaijani.  'Subtitle' is translated as 'alt başlıq', which is correct, but the rest is clunky.",
+          "suggestion": "Consider a more natural phrasing like: 'Mövcud qovluq üçün əlavə izahatları və təsvirləri olan başlıq.' or 'Hazırkı qovluq üçün əlavə məzmun və təsvirləri olan alt başlıq.'"
         }
       ],
       "approved_at": null
@@ -62,7 +62,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Subtitle' is better translated as 'Titulek' in this context, as it refers to a title or heading. 'Podnadpis' implies something that is *underneath* a title, which doesn't match the intended meaning.",
+          "suggestion": "Titulek s dalšími komentáři nebo popisy pro aktuální adresář."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -77,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"directory\" is translated as \"λίστα\" (lista), which means 'list'. 'Directory' implies a folder structure, not just a list. A more accurate translation would be something like \"φάκελος\" (fakelos) or \"κατάλογος\" (katalogos).",
-          "suggestion": "Υπότιτλος με πρόσθετα σχόλια ή περιγραφές για τον τρέχοντα φάκελο."
+          "description": "The term 'directory' is translated as 'λίστα' (lista), which means 'list'. 'Directory' implies a folder or a collection of files, while 'lista' is a generic list. A more accurate translation might be 'φάκελος' (fakelos) or 'κατάλογος' (katalogos).",
+          "suggestion": "Consider using 'φάκελος' (fakelos) or 'κατάλογος' (katalogos) instead of 'λίστα' to better represent 'directory'."
         }
       ],
       "approved_at": null
@@ -92,7 +98,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Tekstitys lisäkommenteilla tai kuvauksilla nykyiselle hakemistolle' doesn't fully capture the meaning of 'Subtitle with additional comments or descriptions for the current directory.' 'Subtitle' is more specific than just 'Tekstitys'. A more accurate translation would include the concept of a subtitle file, not just any text.",
+          "suggestion": "Tekstitystiedosto, jossa on lisäkommentteja tai kuvauksia nykyiselle hakemistolle."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -107,8 +119,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ենթագրեր ընթացիկ գրացուցակի լրացուցիչ մեկնաբանություններով կամ նկարագրություններով:\" is a literal translation that doesn't quite capture the nuance of 'Subtitle with additional comments or descriptions for the current directory'. It sounds somewhat awkward in Armenian. A more natural phrasing would convey the idea of subtitles providing extra information about the current directory.",
-          "suggestion": "Consider a phrasing like: \"Ենթագրեր ընթացիկ գրացուցակի մասին լրացուցիչ տեղեկություններով և նկարագրություններով:\" or \"Ենթագրեր, որոնք ընթացիկ գրացուցակի մասին տրամադրում են լրացուցիչ մեկնաբանություններ և նկարագրություններ:\""
+          "description": "The Armenian translation \"Ենթագրեր ընթացիկ գրացուցակի լրացուցիչ մեկնաբանություններով կամ նկարագրություններով:\" is a very literal translation and doesn't flow naturally in Armenian. The phrase 'գրացուցակի' (directory's) feels awkward in this context.",
+          "suggestion": "Consider a more natural phrasing, such as: \"Ենթագրեր լրացուցիչ մեկնաբանություններով կամ նկարագրություններով ընթացիկ թեմայի համար:\" (Subtitles with additional comments or descriptions for the current topic)."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon at the end of the Armenian sentence feels slightly unnatural in typical Armenian usage for UI text.",
+          "suggestion": "Remove the colon at the end of the sentence."
         }
       ],
       "approved_at": null
@@ -125,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"現在のディレクトリに関するコメントや説明を追加したサブタイトル。\" is a literal translation that doesn't fully capture the nuance of \"Subtitle with additional comments or descriptions for the current directory.\" It's technically correct, but a more natural phrasing in Japanese would be preferable for user experience.",
-          "suggestion": "現在のディレクトリの解説や補足情報を記載したサブタイトル。"
+          "description": "The translation, \"現在のディレクトリに関するコメントや説明を追加したサブタイトル,\" while understandable, isn't the most natural or concise way to express \"Subtitle with additional comments or descriptions for the current directory.\" The use of '追加した' (added) is a bit clunky. A more natural phrasing would avoid it.",
+          "suggestion": "現在のディレクトリのコメントや説明を含むサブタイトル。"
         }
       ],
       "approved_at": null
@@ -137,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"현재 디렉토리에 대한 추가 코멘트나 설명이 포함된 부제를 달으세요.\" (current directory's additional comments or descriptions included subtitle, please attach) is overly literal and awkward. The word '달으세요' (please attach) isn't natural in this context.  It implies the user should manually add a subtitle.",
-          "suggestion": "A more natural translation would be something like \"현재 디렉터리에 대한 추가 설명이나 코멘트가 포함된 자막.\" (Subtitle containing additional descriptions or comments for the current directory.) or \"현재 디렉터리에 대한 설명 또는 코멘트가 포함된 부제목.\" (Subtitle containing descriptions or comments for the current directory.)"
+          "description": "The translation '현재 디렉토리에 대한 추가 코멘트나 설명이 포함된 부제를 달으세요' is too literal and commands the user. The English phrase 'Subtitle with additional comments or descriptions for the current directory' implies that a subtitle *exists* and contains these comments. The Korean translation implies a task to *add* a subtitle. A more accurate translation would express that the subtitle *contains* the comments/descriptions.",
+          "suggestion": "현재 디렉토리에 대한 추가 코멘트나 설명이 포함된 부제."
         }
       ],
       "approved_at": null
@@ -149,13 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ໄດເລກະທໍລີ' is slightly awkward. While technically correct (directory), it doesn't flow as naturally as alternatives.",
-          "suggestion": "ໄດເລກະທໍරි ຫຼື ໂຟນເດີ"
+          "description": "The word 'ໄດເລກະທໍລີ' is potentially a misspelling or unconventional transliteration of 'directory'.",
+          "suggestion": "ໄດເລກະທໍරි"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'ສໍາລັບໄດເລກະທໍລີປະຈຸບັນ' is a bit literal translation. A more natural phrasing would improve readability.",
-          "suggestion": "ສໍາລັບໄດເລກະທໍລີນີ້"
+          "description": "The phrasing 'ສໍາລັບໄດເລກະທໍລີປະຈຸບັນ' could be more naturally expressed in Lao. While technically correct, it might sound slightly awkward.",
+          "suggestion": "ສໍາລັບໂຟນເດີປະຈຸບັນ"
         }
       ],
       "approved_at": null
@@ -163,7 +180,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'direktorijam' is misspelled. The correct spelling is 'direktorijai'.",
+          "suggestion": "direktorijai"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -196,13 +219,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'repertoriul actual' doesn't accurately convey the meaning of 'current directory' in the context of subtitles and software development. 'repertoriu' implies a collection or catalog, which isn't the intended meaning. It should refer to the current location or folder.",
-          "suggestion": "Subtitlu cu comentarii sau descrierea suplimentară pentru directorul curent."
+          "description": "The term 'repertoriul' doesn't accurately convey the meaning of 'directory' in this context. 'Director' or 'dosar' might be more appropriate.",
+          "suggestion": "Subtitlu cu comentarii sau descrierea suplimentară pentru directorul actual."
         },
         {
-          "type": "spelling",
-          "description": "While 'directorul' is technically correct, 'dosarul' might be a more natural and commonly used word in this context, depending on the specific software being referenced.",
-          "suggestion": "Subtitlu cu comentarii sau descrierea suplimentară pentru dosarul curent."
+          "type": "incorrect_translation",
+          "description": "The word 'suplimentară' adds unnecessary redundancy. 'Descriere' already implies additional information.",
+          "suggestion": "Subtitlu cu comentarii sau descriere pentru directorul actual."
         }
       ],
       "approved_at": null
@@ -219,8 +242,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වත්මන් නාමාවලිය සඳහා අමතර අදහස් හෝ විස්තර සහිත උපසිරැසි' doesn't perfectly capture the meaning of 'Subtitle with additional comments or descriptions for the current directory.' 'නාමාවලිය' (namaawaliya) translates to 'list' or 'directory' but the English phrase implies the subtitles pertain to a directory.  It's a bit too literal.",
-          "suggestion": "Perhaps: 'වත්මන් ෆෝල්ඩරය සඳහා අමතර අදහස් හෝ විස්තර සහිත උපසිරැසි' (vathman folderaya samaaranamathra adahas hora visthara samitha upasirasee) - replacing 'නාමාවලිය' with 'ෆෝල්ඩරය' (folder)."
+          "description": "The translation 'වත්මන් නාමාවලිය සඳහා අමතර අදහස් හෝ විස්තර සහිත උපසිරැසි' is not a perfect translation of 'Subtitle with additional comments or descriptions for the current directory.' 'නාමාවලිය' (directory) is a bit too literal. A more natural translation would focus on the concept of the 'current location' or 'current context'.",
+          "suggestion": "වත්මන් ස්ථානය සඳහා අමතර අදහස් හෝ විස්තර සහිත උපසිරැසි."
         }
       ],
       "approved_at": null
@@ -240,7 +263,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'директоријум' is technically correct, but 'фасцикла' (fascicle) might be more appropriate in a software context to describe a directory. While 'директоријум' is widely understood, 'фасцикла' could convey a more specific meaning.",
+          "suggestion": "Consider using 'фасцикла' instead of 'директоријум' depending on the intended nuance."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -249,8 +278,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Podnaslov sa dodatnim komentarima ili opisima za trenutni direktorijum' while understandable, doesn't fully capture the nuance of 'Subtitle with additional comments or descriptions for the current directory.' A more accurate translation might emphasize the purpose or function of the subtitle.",
-          "suggestion": "Podnaslov koji sadrži dodatne komentare ili opise za ovu mapu."
+          "description": "The translation \"Podnaslov sa dodatnim komentarima ili opisima za trenutni direktorijum\" is a bit literal and could be improved for clarity and naturalness in Serbian. 'Directory' in this context likely refers to a collection of files, and a more accurate term could be used.",
+          "suggestion": "Podnaslov sa dodatnim komentarima ili opisima za datu kolekciju fajlova."
         }
       ],
       "approved_at": null
@@ -261,8 +290,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Geçerli dizin için ek yorumlar veya açıklamalar içeren altyazı' is a literal translation but doesn't fully capture the nuance of 'Subtitle with additional comments or descriptions for the current directory.' It implies the subtitle *contains* the comments, rather than being *about* the directory's comments. A more accurate translation might emphasize the purpose or nature of the subtitle.",
-          "suggestion": "Consider 'Mevcut dizine ait ek açıklamalar içeren altyazı' or 'Mevcut dizinle ilgili ek bilgiler içeren altyazı.'"
+          "description": "The translation 'Geçerli dizin için ek yorumlar veya açıklamalar içeren altyazı' is a literal translation but loses some nuance. 'Subtitle with additional comments or descriptions' implies a subtitle that *describes* the directory. A more accurate translation would emphasize this descriptive function.",
+          "suggestion": "Mevcut dizini açıklayan ek yorumlar veya açıklamalar içeren altyazı."
         }
       ],
       "approved_at": null
@@ -276,13 +305,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"additional comments or descriptions\" is not perfectly captured by \"nhận xét hoặc mô tả bổ sung.\" \"Bổ sung\" implies addition, but \"nhận xét\" is more accurately translated as 'remarks' or 'notes' rather than 'comments'.",
-          "suggestion": "Phụ đề với nhận xét hoặc mô tả thêm cho thư mục hiện tại."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -291,13 +314,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '包含当前目录的附加注释或描述的副标题' is a bit literal and not the most natural phrasing in Chinese. It emphasizes 'includes' which isn't the core meaning. A more idiomatic translation would convey the purpose of the subtitle.",
-          "suggestion": "考虑使用更简洁自然的表达，例如“当前目录的附加说明” (Current directory's supplementary notes) or “当前目录的补充说明” (Supplementary notes for the current directory)."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing '附加注释或描述' (additional comments or descriptions) can be slightly improved for flow. It's a bit clunky in Chinese.",
-          "suggestion": "Consider combining '注释' and '描述' into a single term for better readability, such as “附加说明” (supplementary notes) or “补充说明” (supplementary notes)."
+          "description": "The translation \"包含当前目录的附加注释或描述的副标题\" is a bit literal and could be improved for naturalness in Chinese. The phrase \"包含...的副标题\" (baokuo...de fuzhaoti) sounds awkward in this context. A more natural phrasing would emphasize the subtitle's purpose.",
+          "suggestion": "副标题，包含对当前目录的附加注释或描述。"
         }
       ],
       "approved_at": null

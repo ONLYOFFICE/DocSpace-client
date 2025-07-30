@@ -2,6 +2,9 @@
 // @ts-nocheck
 // eslint-disable @typescript-eslint/no-unused-vars
 
+import { TextDecoder, TextEncoder } from "util";
+import React from "react";
+
 class MockDOMRect {
   static fromRect(other?: DOMRectInit): DOMRect {
     const rect = other || { x: 0, y: 0, width: 0, height: 0 };
@@ -51,3 +54,28 @@ class MockDOMRect {
 
 // Mock DOMRect globally
 global.DOMRect = MockDOMRect;
+
+interface TransProps {
+  t: (key: string, values?: Record<string, unknown>) => string;
+  i18nKey: string;
+  values?: Record<string, unknown>;
+  components?: Record<string, React.ReactElement>;
+  ns?: string;
+  children?: React.ReactNode;
+}
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: {
+      changeLanguage: () => new Promise(() => {}),
+    },
+    ready: true,
+  }),
+  Trans: ({ t, i18nKey, values }: TransProps) => {
+    return t(i18nKey, { ...values });
+  },
+}));
+
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;

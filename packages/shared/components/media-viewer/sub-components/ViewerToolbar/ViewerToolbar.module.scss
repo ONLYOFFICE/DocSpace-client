@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../styles/mixins";
+@use "../../../../styles/mixins";
 
 .toolbarWrapper {
   height: 48px;
@@ -78,7 +78,7 @@
 
     width: auto;
     color: var(--viewer-toolbar-percent-color);
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   svg {

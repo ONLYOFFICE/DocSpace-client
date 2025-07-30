@@ -176,7 +176,9 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importSharedFolders}
         onChange={(e) => onChange(e, "importSharedFolders")}
         sectionName={t("Settings:SharedFolders")}
-        description={t("Settings:SharedFoldersDescription")}
+        description={t("Settings:FolderToRoomImportNote", {
+          sectionName: t("Common:Rooms"),
+        })}
         exportSection={{
           sectionName: sharedFoldersExportDetails.name,
           workspace: serviceName,

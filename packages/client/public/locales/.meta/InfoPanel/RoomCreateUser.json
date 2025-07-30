@@ -3,7 +3,7 @@
   "content": "Users added.",
   "content_en_sha1_hash": "a878f78eb9713716912f998404ed3dca2a7b8005",
   "created_at": "2025-05-19T21:30:54.903Z",
-  "updated_at": "2025-05-28T09:30:02.434Z",
+  "updated_at": "2025-06-30T12:20:31.350Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that users have been added to a room. It appears in an info panel on the Home page and is likely displayed after users are successfully created in a room context.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 220,
-      "context": "1: <strong title={feed.data.title || feed.data.sharedTo?.title} />,\n }}\n />\n );\n case \"RoomCreateUser\":\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case \"RoomUpdateAccessForUser\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomRemoveUser\":\n return t(\"InfoPanel:RoomRemoveUser\");",
+      "line_number": 229,
+      "context": "1: <strong title={feed.data.title || feed.data.sharedTo?.title} />,\n }}\n />\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");",
       "module": "/packages/client"
     }
   ],
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຜູ້ໃຊ້ເພີ່ມເຕີມ' literally translates to 'added users'. While not entirely wrong, it lacks the nuance of the English 'Users added.' It sounds slightly passive and less natural in Lao for this context. A more natural phrasing would emphasize the action of adding.",
-          "suggestion": "Consider 'ເພີ່ມຜູ້ໃຊ້' (Peem phuu sai) which translates to 'Added users' or 'Added a user' but is more conversational and accurate for the UI element's purpose. Alternatively, 'ຜູ້ໃຊ້ຖືກເພີ່ມ' (Phuu sai thuk peem) - 'Users were added' is a viable option but a bit more formal."
+          "description": "The Lao translation \"ຜູ້ໃຊ້ເພີ່ມເຕີມ\" literally translates to 'users added'. While understandable, it doesn't convey the same nuance as 'Users added.' A more natural Lao translation would be something like \"ເພີ່ມຜູ້ໃຊ້ແລ້ວ\" (Users added already) or \"ຜູ້ໃຊ້ຖືກເພີ່ມເຕີມ\" (Users have been added).",
+          "suggestion": "ເພີ່ມຜູ້ໃຊ້ແລ້ວ"
         }
       ],
       "approved_at": null
@@ -150,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Utilizatorul a fost adăugat.\" translates to \"The user was added.\" while the English \"Users added.\" implies multiple users were added. The translation doesn't accurately reflect the plural form.",
+          "description": "The translation 'Utilizatorul a fost adăugat' translates to 'The user was added' which is singular. The English content 'Users added' implies multiple users were added. The Romanian translation should reflect the plural.",
           "suggestion": "Utilizatorii au fost adăugați."
         }
       ],
@@ -167,9 +167,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'පරිශීලකයින් එකතු කරන ලදි' is a literal translation of 'Users added' but doesn't convey the intended meaning naturally in Sinhala. It's a bit clunky. A more natural phrasing would indicate that users have been added to a room or group.",
-          "suggestion": "Possible alternatives include: 'පරිශීලකයින් එක් කරන ලදි' (Users were added), 'පරිශීලකයින් ඇතුළත් කරන ලදි' (Users included/integrated), or a more context-specific phrase depending on the specific functionality."
+          "type": "spelling",
+          "description": "The word 'පරිශීලකයින්' (parishilakayin) is technically correct for 'users' in a formal context but can sound overly technical in this UI. A more common and natural term for 'users' in a UI context might be 'භාවිතකරුවෝ' (bhavitakaruwo).",
+          "suggestion": "පරිශීලකයින් → භාවිතකරුවෝ"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrase 'එකතු කරන ලදි' (ekathukarana ladi) which translates to 'were added' is somewhat passive. A more active and direct translation could improve clarity and conciseness.",
+          "suggestion": "එකතු කරන ලදි → చేర్చින"
         }
       ],
       "approved_at": null
@@ -180,7 +185,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovak translation \"Používatelia pridaní.\" is grammatically incorrect. The verb agrees with 'users' in plural, but the sentence structure is unusual. A more natural and grammatically correct phrasing is needed.",
+          "description": "The Slovak translation \"Používatelia pridaní.\" is grammatically incorrect. It's a passive participle phrase without a verb. It should be in the past tense or use a different construction to convey the meaning of 'Users added'.",
           "suggestion": "Používatelia boli pridaní."
         }
       ],
@@ -195,13 +200,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Корисници додати.\" is literally \"Users added.\" while a more natural and grammatically correct Serbian (Cyrillic) phrasing would be \"Додати корисници.\" or \"Корисници су додати.\"",
+          "suggestion": "Додати корисници."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Korisnici dodati' is a literal translation and doesn't convey the intended meaning of 'Users added.' It sounds unnatural in Serbian. A more natural phrasing would be 'Dodati korisnici' or 'Korisnici su dodati'.",
+          "suggestion": "Dodati korisnici."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

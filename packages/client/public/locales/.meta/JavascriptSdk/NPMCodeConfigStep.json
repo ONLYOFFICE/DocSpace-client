@@ -3,7 +3,7 @@
   "content": "Create config object with required parameters:",
   "content_en_sha1_hash": "52212a696c6564a4944c6c9b41e7ded8ec80a8bc",
   "created_at": "2025-05-19T21:30:54.589Z",
-  "updated_at": "2025-05-28T09:30:02.576Z",
+  "updated_at": "2025-05-26T07:57:32.632Z",
   "comment": {
     "text": "This translation key is used to display a brief instruction on how to create a config object with required parameters. It appears as part of the UI in the \"Code To Insert\" component, guiding users to input necessary data to complete the configuration process.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation includes parentheses around 'Config Object'. While technically correct, it disrupts the flow and might be perceived as awkward. Consider removing the parentheses.",
-          "suggestion": "أنشئوا كائن إعدادات يحتوي على المعلمات المطلوبة:"
+          "description": "The term 'Config Object' is in English within the Arabic translation. While understandable, it's preferable to have a consistent Arabic term or transliteration for technical terms to maintain consistency.",
+          "suggestion": "Consider using a consistent Arabic transliteration for 'Config Object' throughout the documentation, or defining it with an initial Arabic equivalent and then using the English term in parentheses. For example: \"أنشئوا كائن إعدادات (كائن تكوين) يحتوي على المعلمات المطلوبة:\""
         }
       ],
       "approved_at": null
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'предмет' (predmet) translates to 'object' or 'item' in English, but in this context, 'object' is a more accurate term for a JavaScript object. 'Item' doesn't fit the meaning.",
+          "suggestion": "Създайте конфигурационен обект с необходимите параметри:"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -87,18 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"օբյեկտ\" (object) is spelled correctly, but consider if a more common or preferred term exists in Armenian technical documentation. It's important to maintain consistency across your project.",
-          "suggestion": null
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase \"Ստեղծել կոնֆիգ օբյեկտ պահանջվող պարամետրերով-\" could be slightly improved for smoother reading. While technically correct, it could benefit from a minor adjustment to enhance clarity for Armenian speakers.",
-          "suggestion": "Ստեղծեք կոնֆիգուրացիայի օբյեկտ պահանջվող պարամետրերով"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -113,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"必要なパラメータでコンフィグオブジェクトを作成:\" is technically correct but could be improved for clarity and naturalness.  '必要なパラメータで' literally translates to 'with necessary parameters'. A more natural phrasing would be '必要なパラメータを含むコンフィグオブジェクトを作成:' (create a config object including necessary parameters) or '必要なパラメータを設定したコンフィグオブジェクトを作成:' (create a config object with necessary parameters set).",
-          "suggestion": "必要なパラメータを含むコンフィグオブジェクトを作成:"
+          "description": "The translation '必要なパラメータでコンフィグオブジェクトを作成：' could be improved for clarity and naturalness. While technically correct, it reads a bit stiffly. A more natural phrasing might better convey the intended meaning.",
+          "suggestion": "必要なパラメータを含むコンフィグオブジェクトを作成する："
         }
       ],
       "approved_at": null
@@ -122,13 +117,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Korean word '매개 변수' is sometimes written as '매개변수'. While both are technically acceptable, '매개 변수' is more common and readable.",
-          "suggestion": "필수 매개변수를 사용하여 구성 개체를 생성하세요:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -137,8 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ສ້າງຕົວແກ້ໄຂການຕັ້ງຄ່າດ້ວຍຕົວຊ່ວຍການຕັ້ງຄ່າທີ່ຕ້ອງການ:\" doesn't accurately convey the meaning of \"Create config object with required parameters:\"  'ຕົວແກ້ໄຂການຕັ້ງຄ່າ' (config editor) and 'ຕົວຊ່ວຍການຕັ້ງຄ່າ' (config assistant) are not appropriate for describing a configuration object.  The word 'object' isn't translated.",
-          "suggestion": "ສ້າງອົງການຕັ້ງຄ່າດ້ວຍຕົວແກ້ໄຂການຕັ້ງຄ່າທີ່ຕ້ອງການ:"
+          "description": "The Lao translation 'ສ້າງຕົວແກ້ໄຂການຕັ້ງຄ່າດ້ວຍຕົວຊ່ວຍການຕັ້ງຄ່າທີ່ຕ້ອງການ:' doesn't accurately reflect the English meaning 'Create config object with required parameters:'. 'ຕົວແກ້ໄຂການຕັ້ງຄ່າ' (config editor) and 'ຕົວຊ່ວຍການຕັ້ງຄ່າ' (config helper) are not the correct terms to use in this context.  It implies a tool or editor rather than the creation of a configuration object itself.",
+          "suggestion": "ສ້າງອົງການຕັ້ງຄ່າດ້ວຍຕົວຕ່າງຂອງການຕັ້ງຄ່າທີ່ຕ້ອງການ:"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'ຕົວຕ່າງຂອງການຕັ້ງຄ່າ' is a potential suggestion, it might still be slightly awkward. Consider if a more direct translation of 'parameters' is possible and natural in Lao in this technical context. The goal is clarity and accuracy.",
+          "suggestion": "Requires review of Lao technical terminology for 'parameters' to ensure the most natural and accurate translation."
         }
       ],
       "approved_at": null
@@ -176,13 +170,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Creați un obiect de configurare cu parametre necesare:' is understandable, a more natural Romanian translation of 'Create config object with required parameters:' would be 'Creați un obiect de configurare cu parametrii necesari:' or 'Creați un obiect de configurare cu parametrele necesare:'. The difference is subtle, but 'parametrii' or 'parametrele' is preferred when referring to the parameters themselves, rather than just stating they are 'necesare'.",
-          "suggestion": "Creați un obiect de configurare cu parametrii necesari:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -197,13 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'වින්‍යාස' (vinyasa) could be improved. While technically correct, it might be perceived as overly formal or technical. A simpler alternative like 'අ සැකසීමේ' (a sakasime) - meaning 'a configuration' or 'settings' might be more approachable for a Javascript SDK context.",
-          "suggestion": "අ සැකසීමේ වස්තුවක් සාදන්න:"
-        },
-        {
-          "type": "grammar",
-          "description": "While 'අවශ්‍ය පරාමිතීන් සහිත' (avasya paramithinan sathita) is grammatically correct, it can be made more fluent.  The phrasing might be improved by reordering for a more natural flow in Sinhala.",
-          "suggestion": "අවශ්‍ය පරාමිතීන් ඇතුළත් වස්තුවක් සාදන්න:"
+          "description": "The word 'වින්‍යාස' (vinyasa) is a valid word but in this context 'අවශ්‍යතා' (avashyata) – meaning 'requirements' or 'necessities' – might be more appropriate, leading to a more natural flow. While 'विन‍යාස' isn't wrong, it might suggest a more complex configuration than the English implies.",
+          "suggestion": "අවශ්‍යතා සහිත වස්තුවක් සාදන්න:"
         }
       ],
       "approved_at": null
@@ -226,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Направи' is a less formal way of saying 'Create'. While understandable, a more formal and accurate translation would be 'Креирај'.",
-          "suggestion": "Креирај објекат конфигурације са потребним параметрима:"
+          "description": "The word 'објектат' is a typo. It should be 'објекат'.",
+          "suggestion": "објекат"
         }
       ],
       "approved_at": null
@@ -244,7 +227,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Gerekli parametrelerle config nesneleri oluşturun:  \" is not the best rendering of \"Create config object with required parameters:\". It literally translates to 'Create config objects with required parameters:'. The singular 'object' is more appropriate in this context. Also, the command is missing a full stop.",
+          "description": "The translation \"Gerekli parametrelerle config nesneleri oluşturun:  \" is a literal translation that doesn't quite capture the intended meaning of \"Create config object with required parameters:\". It implies creating multiple config objects, whereas the original implies creating one.",
           "suggestion": "Gerekli parametrelerle bir config nesnesi oluşturun: "
         }
       ],

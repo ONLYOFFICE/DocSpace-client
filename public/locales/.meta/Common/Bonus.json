@@ -3,7 +3,7 @@
   "content": "Bonus",
   "content_en_sha1_hash": "4d963cfab70d8c850b1221649bcc7b4d96d558d3",
   "created_at": "2025-05-19T21:30:43.309Z",
-  "updated_at": "2025-07-02T07:49:19.702Z",
+  "updated_at": "2025-06-30T12:20:31.104Z",
   "comment": {
     "text": "This translation key is used to display the text \"Bonus\" in various parts of the UI, such as article titles and settings pages. It appears in interactive elements like buttons and dialogues, indicating a reward or special feature within the application.",
     "is_auto": true,
@@ -19,19 +19,25 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 232,
-      "context": "return t(\"RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
+      "context": "return t(\"Common:RestoreBackup\");\n case \"PortalDeletion\":\n return t(\"PortalDeletion\", { productName: t(\"Common:ProductName\") });\n case \"Common:DeveloperTools\":\n return t(\"Common:DeveloperTools\");\n case \"Common:Bonus\":\n return t(\"Common:Bonus\");\n case \"Common:FreeAccessToLicensedVersion\":\n return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 634,
+      "line_number": 627,
       "context": "{\n id: \"portal-settings_catalog-bonus\",\n key: \"11\",\n type: PageType.bonus,\n link: \"bonus\",\n tKey: \"Common:Bonus\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-portal-bonus\",\n key: \"11-0\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 151,
-      "context": "{\n id: \"management-settings_catalog-bonus\",\n key: \"3\",\n icon: CatalogSettingsGiftReactSvgUrl,\n link: \"bonus\",\n tKey: \"Common:Bonus\",\n isHeader: true,\n isArticle: true,\n },\n ];",
+      "file_path": "/packages/management/src/components/article/index.tsx",
+      "line_number": 118,
+      "context": "linkData={{ path: \"/payments\", state: {} }}\n />\n ) : (\n <ArticleItem\n key=\"bonus\"\n text={t(\"Common:Bonus\")}\n iconNode={<GiftReactSvg />}\n showText={showText}\n onClick={() => onItemClick(\"bonus\")}\n isActive={pathname === \"/bonus\"}\n folderId=\"management_catalog-bonus\"",
+      "module": "/packages/management"
+    },
+    {
+      "file_path": "/packages/management/src/lib/index.ts",
+      "line_number": 69,
+      "context": "case \"additional-resources\":\n return { key: t(\"Common:AdditionalResources\"), isSubPage: true };\n case \"brand-name\":\n return { key: t(\"Common:BrandName\"), isSubPage: true };\n case \"bonus\":\n return { key: t(\"Common:Bonus\"), isSubPage: false };\n default:\n return { key: t(\"Common:Spaces\"), isSubPage: false };\n }\n };",
       "module": "/packages/management"
     }
   ],

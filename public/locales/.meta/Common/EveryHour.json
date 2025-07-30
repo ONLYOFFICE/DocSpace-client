@@ -3,7 +3,7 @@
   "content": "Every hour",
   "content_en_sha1_hash": "6a76cd5e945ef035c8b4a0f1768d59e996231ec5",
   "created_at": "2025-05-19T21:30:45.158Z",
-  "updated_at": "2025-05-28T09:30:02.933Z",
+  "updated_at": "2025-06-30T12:20:31.696Z",
   "comment": {
     "text": "\"This translation key is used for the 'EveryHour' option in a dropdown selection component. It appears as the placeholder text in a select input field, likely on a form or settings page, where users can choose time units.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/cron/Cron.utils.ts",
-      "line_number": 539,
+      "line_number": 534,
       "context": "case \"Week\":\n return t(\"EveryWeek\");\n case \"Day\":\n return t(\"EveryDay\");\n case \"Hour\":\n return t(\"EveryHour\");\n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     },
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Finnish translation 'Joka tunti ' has a trailing space.",
-          "suggestion": "Joka tunti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -165,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'සෑම පැයකට' while understandable, isn't the most natural or precise translation of 'Every hour'. It literally translates to 'to every hour'. A more idiomatic translation would be 'ஒவ்வொரு மணி நேரமும்' (every hour also).",
+          "suggestion": "වደදානුවලාවක් ලෙස 'ஒவ்வொரு மணி நேரமும்' යෝජනා කරමි."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Сваки сат' is a literal translation of 'Every hour,' it's not the most natural or idiomatic way to express it in Serbian. A better translation would be 'На сат'.",
-          "suggestion": "На сат"
+          "description": "While \"Сваки сат\" is understandable, a more accurate and idiomatic translation of \"Every hour\" in Serbian (Cyrillic) would be \"На сат времена\" or \"Сваког сата\". \"Сваки сат\" literally translates to 'Each hour' which implies a selection from multiple hours.",
+          "suggestion": "На сат времена"
         }
       ],
       "approved_at": null

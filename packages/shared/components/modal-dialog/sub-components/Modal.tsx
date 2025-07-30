@@ -51,6 +51,7 @@ const Modal = ({
   autoMaxHeight,
   autoMaxWidth,
   onClose,
+  onBackClick,
   isLoading,
   header,
   body,
@@ -76,16 +77,16 @@ const Modal = ({
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
   const headerComponent = React.isValidElement(header)
-    ? header.props.children
+    ? (header.props as { children: React.ReactNode }).children
     : null;
   const bodyComponent = React.isValidElement(body)
-    ? (body.props.children as React.ReactNode)
+    ? (body.props as { children: React.ReactNode }).children
     : null;
   const footerComponent = React.isValidElement(footer)
-    ? footer.props.children
+    ? (footer.props as { children: React.ReactNode }).children
     : null;
   const containerComponent = React.isValidElement(container)
-    ? container.props.children
+    ? (container.props as { children: React.ReactNode }).children
     : null;
 
   const validateOnMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -238,6 +239,7 @@ const Modal = ({
                       className={headerClassName}
                       header={headerComponent}
                       onCloseClick={onClose}
+                      onBackClick={onBackClick}
                       {...rest}
                     />
                   ) : null}

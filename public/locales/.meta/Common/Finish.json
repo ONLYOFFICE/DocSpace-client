@@ -3,7 +3,7 @@
   "content": "Finish",
   "content_en_sha1_hash": "b74bdee9c34f37b6b9b0d20a8ca8a9bf6797f6e1",
   "created_at": "2025-05-19T21:30:45.397Z",
-  "updated_at": "2025-05-28T09:30:02.515Z",
+  "updated_at": "2025-05-26T07:57:32.523Z",
   "comment": {
     "text": "This translation key is used for the label on a save button, indicating completion or finalization of an action. It appears in a UI component, specifically a \"Save/Cancel\" buttons section, where it prompts the user to finish and confirm their changes.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Dokončení\" is a valid Czech word, it translates more accurately to \"Completion\" rather than \"Finish.\" \"Finish\" can also be translated as \"Ukončení\" or \"Zakončení,\" depending on the specific context. \"Dokončení\" implies something is already complete.",
+          "suggestion": "Consider \"Ukončení\" or \"Zakončení\" as alternatives, depending on the specific context of 'Finish'."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -60,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ολοκλήρωση' (Oloklironi) is a valid Greek word, it generally translates to 'Completion' or 'Finalization' rather than the simple 'Finish'. Depending on the context, a more direct translation might be preferable.",
-          "suggestion": "Consider 'Τέλος' (Telos) for a more direct translation of 'Finish', or 'Ολοκληρωμένο' (Oloκληρωμένο) for 'Finished'."
+          "description": "While 'Ολοκλήρωση' (Oloklírōsi) is a valid Greek word and can mean 'completion' or 'finish', it's a more formal term. A more common and direct translation of 'Finish' (as in, to complete an action) would be 'τελείωσα' (teleiōsa) or a similar verb form depending on the context (e.g., 'τελειώνω' - teleiōnō). 'Ολοκλήρωση' describes the *state* of being finished, not the action of finishing.",
+          "suggestion": "Consider 'τελείωσα' (teleiōsa) or 'τελειώνω' (teleiōnō) depending on the grammatical context."
         }
       ],
       "approved_at": null
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Lopeta' can mean 'stop', 'Finish' implies completion or ending a task or process. 'Lopeta' is more general and suggests halting an action. A more accurate translation for 'Finish' would depend on the context. Possible alternatives include 'Valmis', 'Viimeistele', or 'Päätä'.",
-          "suggestion": "Consider 'Valmis' (ready/finished), 'Viimeistele' (complete), or 'Päätä' (end) depending on the specific context."
+          "description": "While \"Lopeta\" can mean \"stop,\" it doesn't directly convey the meaning of \"Finish\" in the context of completing something. \"Finish\" implies completion, while \"Lopeta\" implies halting an action. Depending on the context, a more accurate translation might be 'Valmis' or 'Viimeistele'.",
+          "suggestion": "Consider 'Valmis' or 'Viimeistele' for a more accurate translation depending on the specific context."
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation \"Finisci\" is the imperative form of the verb \"finire\" (to finish) directed towards a singular, informal 'you'. The English word \"Finish\" refers to the act of completing something and can be used as a noun or a verb.  A more appropriate translation would depend on the context.",
-          "suggestion": "Consider 'Fine' (as a noun, meaning 'end' or 'completion') or 'Completa' (verb, meaning 'complete') depending on the intended meaning."
+          "description": "The Italian translation 'Finisci' is the imperative form ('you finish'). The English word 'Finish' is a noun or a verb in the infinitive form. It needs to be translated more contextually depending on the intended meaning (e.g., 'fine', 'conclusione', 'finire'). Without more context, 'Finisci' is not an appropriate translation.",
+          "suggestion": "Requires context to determine correct translation. Possible suggestions: 'fine' (noun), 'conclusione' (noun), 'finire' (verb - infinitive)"
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຮັດຄອງ' (hat khong) typically means 'control,' 'manage,' or 'govern,' not 'finish.' It doesn't accurately convey the meaning of 'Finish' in this context.",
-          "suggestion": "The Lao translation should be something like 'ຮັດສິ້ນ' (hat sin) or 'ຈົບ' (chop), which both better convey the meaning of 'finish'."
+          "description": "'ຮັດຄອງ' translates to 'control' or 'manage', not 'finish'. It doesn't accurately convey the meaning of 'finish'.",
+          "suggestion": "Consider using a more appropriate Lao translation for 'finish,' such as 'ຮັດ' (hat), 'ສິ້ນສຸດ' (sin sut), or 'ຈົບ' (job), depending on the context."
         }
       ],
       "approved_at": null

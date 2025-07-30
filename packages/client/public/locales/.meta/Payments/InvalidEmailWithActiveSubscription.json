@@ -3,7 +3,7 @@
   "content": "Your subscription remains active, but we recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "56ba8d49065a3fd83f9914a4525a568901e02a68",
   "created_at": "2025-05-19T21:30:53.693Z",
-  "updated_at": "2025-07-01T15:57:36.281Z",
+  "updated_at": "2025-06-08T12:02:32.811Z",
   "comment": {
     "text": "This translation key is used to display a message when an invalid email address is linked to an active subscription in the Payer Information container. The message informs the user that their subscription remains active but recommends choosing a new Payer for access to subscription settings in {{productName}}. It appears on a specific page related to payment settings, likely as part of the user interface for configuring payment details.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
-      "line_number": 122,
+      "line_number": 115,
       "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithActiveSubscriptionForAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'طريقة دفع جديد' (new payment method) isn't the most accurate translation for 'Payer' in this context. 'Payer' refers to the person or entity managing the subscription payment details, not just a new payment method itself. It's more about account responsibility.",
-          "suggestion": "اشتراكك ما زال نشطًا، ولكن نوصي باختيار مسؤول دفع جديد يحصل على وصول إلى إعدادات الاشتراك في {{productName}}."
+          "description": "The phrase \"طريقة دفع جديد\" (tariqa daf' jadeed) translates to 'new payment method' rather than 'new Payer'. The English text refers to a person or account with access to subscription settings, not a general payment method.",
+          "suggestion": "اشتراكك ما زال نشطًا، ولكن نوصي باختيار جهة دفع جديدة (jihat daf' jadeeda) يحصل على وصول إلى إعدادات الاشتراك في {{productName}}."
         }
       ],
       "approved_at": null
@@ -41,14 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Ödəyici\" (Odeyici) is a literal translation of 'Payer' and might not be the most natural or clear term in Azerbaijani in this context. A more appropriate term for 'Payer' here might be 'ödəmə vasitəsi' (payment method) or 'abonə hesabı' (subscription account), depending on the precise meaning intended.",
-          "suggestion": "Consider using 'ödəmə vasitəsi' or 'abonə hesabı' instead of 'Ödəyici'."
-        },
-        {
           "type": "formatting",
-          "description": "The use of '{{productName}}' is correct, but ensure that the placeholder is correctly rendered in the final output.",
-          "suggestion": "Verify the correct rendering of the {{productName}} placeholder."
+          "description": "The variable {{productName}} is present in the English and Azerbaijani translations, ensuring consistency. However, confirm that the rendering engine correctly handles this variable in the Azerbaijani context.",
+          "suggestion": "Verify the rendering of {{productName}} within the Azerbaijani application environment."
         }
       ],
       "approved_at": null
@@ -71,13 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Zahler\" is a less common and potentially confusing term for 'Payer' in this context. 'Bezahler' would be a more natural and understandable translation.",
-          "suggestion": "Change 'Zahler' to 'Bezahler'."
+          "description": "The term 'Zahler' is an uncommon and potentially confusing translation for 'Payer'. 'Payer' refers to the entity making the payments for the subscription. A more accurate translation would be 'Bezahler' or 'Rechnungsempfänger'.",
+          "suggestion": "Change 'Zahler' to 'Bezahler' or 'Rechnungsempfänger'."
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'erhält' sounds a little formal and less conversational. A more natural phrasing would be more appropriate for a user-facing message.",
-          "suggestion": "Consider changing 'erhält' to 'hat' or 'bekommt'."
+          "description": "While grammatically correct, the phrasing 'der Zugang zu den Abonnementeinstellungen...erhält' is a bit clunky in German. A more natural phrasing would improve readability.",
+          "suggestion": "Consider 'der Zugang zu den Abonnement-Einstellungen in {{productName}} hat' or 'der Zugriff auf die Abonnement-Einstellungen in {{productName}} hat'."
         }
       ],
       "approved_at": null
@@ -88,13 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Payer' is not directly translatable and requires adaptation for clarity in Greek. 'Payer' implies someone who makes payments, but in this context, it refers to a designated account/person with access to subscription settings. A better translation would be something that conveys the idea of a designated account or administrator.",
-          "suggestion": "Consider translating 'Payer' as 'υπεύθυνος λογαριασμού' (responsible account) or 'διοικητής συνδρομής' (subscription administrator)."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence structure feels a bit formal and could be improved for better flow in Greek. Specifically, 'ο οποίος αποκτά πρόσβαση' is a slightly awkward construction.",
-          "suggestion": "Rephrase to something like 'ο οποίος θα έχει πρόσβαση' or 'με πρόσβαση'."
+          "description": "The word 'payer' doesn't have a direct equivalent in Greek that captures the nuance of a person responsible for making payments for a subscription. 'Πληρωτής' (plirotis) simply means 'payer'. A more appropriate translation might consider 'υπεύθυνος πληρωμών' (ypevthynos plirovon), meaning 'person responsible for payments', or a more descriptive phrase depending on the overall context.",
+          "suggestion": "Consider alternatives like 'υπεύθυνος πληρωμών' or a descriptive phrase reflecting the role of the Payer."
         }
       ],
       "approved_at": null
@@ -105,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Payer' is not the most natural translation of 'Payer' in this context. While 'Pagador' is a valid word, it's more commonly associated with someone who makes payments, not necessarily someone managing subscription settings.",
-          "suggestion": "Consider 'Administrador de la suscripción' or 'Responsable de la suscripción' to better convey the meaning of someone with access to subscription settings."
+          "description": "The term 'Payer' doesn't have a direct equivalent in Spanish that perfectly captures its meaning in this context (the entity responsible for managing payments and subscription settings). 'Pagador' is a reasonable approximation, but could be confusing to users unfamiliar with the English term's nuance. A more suitable alternative might be 'Administrador de la cuenta' or 'Responsable de la suscripción', depending on the desired level of formality and user understanding.",
+          "suggestion": "Consider alternatives like 'Administrador de la cuenta' or 'Responsable de la suscripción' to more accurately convey the intended meaning."
         }
       ],
       "approved_at": null
@@ -117,13 +107,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Payer' is not directly translated. 'Maksaja' is a valid translation but may not be immediately clear to all users. It's a more technical term.",
-          "suggestion": "Consider using a more user-friendly term for 'Payer,' such as 'tilihenkilö' (account contact) or rephrasing the sentence to explain the role of the person accessing subscription settings."
+          "description": "The term 'Payer' doesn't have a direct equivalent in Finnish in this context. 'Maksaja' is a general term for 'payer' but doesn't convey the specific role of someone managing subscription settings.  A more accurate translation would consider the role (e.g., 'tilauksen hallinnoija' or 'tilaajan yhteyshenkilö').",
+          "suggestion": "Consider using 'tilauksen hallinnoija' or 'tilaajan yhteyshenkilö' to better reflect the role of the 'Payer'."
         },
         {
           "type": "formatting",
-          "description": "The placement of 'ssa' after '{{productName}}' feels slightly awkward. While grammatically correct, it could improve the flow.",
-          "suggestion": "Consider rephrasing to avoid the awkward placement of 'ssa'. For example, '{{productName}}-palvelussa' or a restructuring of the sentence altogether."
+          "description": "The placement of '{{productName}}-ssa' is a bit awkward in Finnish. The suffix '-ssa' indicates location and doesn't quite fit the phrasing here.",
+          "suggestion": "Rephrase to avoid the unnecessary location suffix. Consider '{{productName}} palvelussa' or a complete restructuring of the sentence."
         }
       ],
       "approved_at": null
@@ -140,13 +130,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"վճարող, ով հասանելի կլինի\" (payer who will be available) is an awkward translation of 'Payer who gets access'. It implies a future availability rather than current access. A more accurate translation would focus on the 'access' element.",
-          "suggestion": "վճարող, ով մուտք կունենա (payer who has access)"
+          "description": "The phrase \"վճարող, ով հասանելի կլինի\" is awkward and doesn't accurately convey the meaning of \"who gets access.\" A more natural phrasing would be something along the lines of \"ով կունենա մուտք\".",
+          "suggestion": "Ձեր բաժանորդագրությունը մնում է ակտիվ, սակայն խորհուրդ ենք տալիս ընտրել նոր վճարող, ով կունենա մուտք {{productName}}-ում բաժանորդագրության կարգավորումներին:"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'վճարող' (payer) could be more accurately translated as 'կազմակերպող' (organizer) or 'անձ, ով վճարում է' (person who pays) depending on the context of 'Payer' in the original English. 'վճարող' is technically correct but might not fully convey the intended meaning.",
-          "suggestion": "Consider alternatives to 'վճարող' based on the context of 'Payer'. For example, 'կազմակերպող' or 'անձ, ով վճարում է'."
+          "type": "formatting",
+          "description": "While technically correct, it might be beneficial to add a comma after \"վճարող\" for better readability.",
+          "suggestion": "Ձեր բաժանորդագրությունը մնում է ակտիվ, սակայն խորհուրդ ենք տալիս ընտրել նոր վճարող, ով կունենա մուտք {{productName}}-ում բաժանորդագրության կարգավորումներին:"
         }
       ],
       "approved_at": null
@@ -163,8 +153,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"支払人\" (shiharinin) for \"Payer\" is not the most natural or common way to refer to a payment provider or account holder in Japanese in this context. It sounds overly formal and technical. A more suitable term would depend on the specific nuance intended, but options like \"支払い方法\" (shiharai houhou - payment method) or simply referring to the user \"ユーザー\" (yuuzaa) might be better.",
-          "suggestion": "Consider replacing \"支払人\" with a more natural term like \"支払い方法\" or referring to the user directly, depending on the specific meaning intended."
+          "description": "The term \"支払人\" (shiharinin) for 'payer' is overly formal and technical for this context. It might confuse users. A more natural and understandable translation would be something along the lines of '支払い方法' (shiharimata - payment method) or '決済方法' (kessai mata - payment method) depending on the precise nuance desired.  '決済プロバイダー' (kessai purobaidā - payment provider) might also be suitable.",
+          "suggestion": "Consider using a more accessible term for 'payer,' such as '支払い方法' or '決済方法' or '決済プロバイダー'."
         }
       ],
       "approved_at": null
@@ -175,8 +165,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase '추천드립니다' is a bit formal and might not be the best fit for a user-facing message. It can sound stiff.",
-          "suggestion": "Consider a more casual and friendly phrasing like '새로운 지불자를 선택하시는 것을 권장합니다' (We recommend choosing a new payer) or simply '새로운 지불자를 선택해 주세요' (Please choose a new payer)."
+          "description": "The phrase '추천드립니다' sounds overly formal for this type of notification. A more conversational and friendly tone would be more appropriate.",
+          "suggestion": "구독 설정에 액세스할 새로운 지불자를 선택하는 것을 권장합니다."
         }
       ],
       "approved_at": null
@@ -187,13 +177,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຜູ້ຈ່າຍເງິນໃໝ່\" (phuai ngern mai) translates to 'new payer'. While technically correct, it might be better to use a term that implies a manager or administrator of the subscription, depending on the nuance intended. 'ຜູ້ບໍລິຫານການຈ່າຍເງິນ' (phu borihan kan jai ngern) could be a more appropriate alternative.",
-          "suggestion": "Consider using 'ຜູ້ບໍລິຫານການຈ່າຍເງິນ' (phu borihan kan jai ngern) or a similar term that better conveys the role of the person managing the subscription settings."
+          "description": "The phrase \"ຜູ້ຈ່າຍເງິນໃໝ່\" (phuay pen nai) literally translates to 'new payer' and while understandable, it's not the most natural way to describe someone who manages subscription settings. A more accurate translation would convey the role of an administrator or manager.",
+          "suggestion": "Consider using a term like 'ຜູ້ປົກຄອງການສະໝັກໃຊ້' (phu pok khong kan samak sai) which translates to 'subscription manager' or 'subscription administrator'."
         },
         {
-          "type": "spelling",
-          "description": "The Lao text uses a space before the opening parenthesis in '{{productName}}'. This is visually incorrect and disrupts the flow of the text. The space should be removed.",
-          "suggestion": "Remove the space before the opening parenthesis: {{productName}}"
+          "type": "grammatical",
+          "description": "While not a major error, the phrasing \"ເຮົາແນະນໍາ\" (rao nae nam) feels slightly formal. A more conversational tone might improve readability.",
+          "suggestion": "Consider changing it to \"ພວກເຂົາແນະນໍາ\" (phuak khao nae nam) or simply \"ແນະນໍາວ່າ\" (nae nam wa)."
         }
       ],
       "approved_at": null
@@ -201,13 +191,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"Payer\" is translated as \"maksātāju\". While technically correct, it implies a general payer, not specifically a payment account holder or billing contact. A more suitable translation might convey the concept of a billing contact or account administrator.",
-          "suggestion": "Consider a translation like \"rēķina saņēmējs\" or \"apmaksas kontaktpersona\" to better reflect the intended meaning of \"Payer\" in this context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -228,8 +212,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Payer\" is translated as \"Pagador\". While technically correct, it's less common and can be confusing in a subscription context. A more natural and widely understood translation for 'Payer' in this context would be 'Titular da Assinatura' or 'Responsável pela Assinatura'.",
-          "suggestion": "Consider translating 'Payer' as 'Titular da Assinatura' or 'Responsável pela Assinatura'."
+          "description": "The term 'Payer' is translated as 'Pagador'. While technically correct, in the context of subscriptions and access rights, 'Responsável' or 'Gestor' would be more natural and understandable for a Portuguese-speaking user.",
+          "suggestion": "Consider translating 'Payer' as 'Responsável' or 'Gestor'. For example: '...recomendamos escolher um novo Responsável que tenha acesso...'"
         }
       ],
       "approved_at": null
@@ -240,8 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Pagador' isn't the most natural or accurate translation for 'Payer' in this context. 'Payer' refers to the entity making the payment, and a better translation would be something like 'quem efetua o pagamento' or a more concise term like 'pagante'.",
-          "suggestion": "Sua assinatura permanece ativa, mas recomendamos escolher um novo pagante que tenha acesso às configurações de assinatura no {{productName}}."
+          "description": "The word 'Payer' is not a standard term in Portuguese (Brazil) related to subscriptions or payment processors. A more appropriate term would be 'meio de pagamento' (payment method) or 'forma de pagamento' (payment form). 'Pagador' literally translates to 'payer' as in someone who pays, which is not the intended meaning in this context.",
+          "suggestion": "Sua assinatura permanece ativa, mas recomendamos escolher um novo meio de pagamento que tenha acesso às configurações de assinatura no {{productName}}."
         }
       ],
       "approved_at": null
@@ -252,13 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Payer' is translated as 'Plătitor'. While technically correct, it's not the standard Romanian term used in a subscription context. 'Plătitor' is more general for 'payer' and 'subscriber' would be more appropriate.",
-          "suggestion": "Consider using 'Abonat' or 'Utilizator' instead of 'Plătitor'. For example: 'Abonamentul dvs rămâne activ, dar vă recomandăm să alegeți un Abonat nou, care va avea acces la setările de abonament în spațiul {{productName}}.'"
+          "description": "The term 'Payer' doesn't have a direct equivalent in Romanian and its translation as 'Plătitor' is awkward and potentially confusing in this context. 'Payer' refers to the entity responsible for making payments, which might be a person or a company. A better translation would consider this nuance.",
+          "suggestion": "Consider alternatives like 'administratorul plăţilor,' 'persoana responsabilă de plăţi,' or 'contabil,' depending on the specific context.  The best option would need further context on what 'Payer' refers to."
         },
         {
           "type": "formatting",
-          "description": "The phrasing 'în spațiul {{productName}}' sounds slightly awkward. While grammatically correct, it could be improved for better flow.",
-          "suggestion": "Consider rephrasing to 'în {{productName}}' or 'în platforma {{productName}}' for a more natural sound."
+          "description": "The spacing before and after the 'în' in 'în spațiul {{productName}}' feels slightly unnatural in Romanian. It's more typical to omit the spacing.",
+          "suggestion": "Change 'în spațiul {{productName}}' to 'în spațiul {{productName}}'."
         }
       ],
       "approved_at": null
@@ -293,13 +277,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Cyrillic translation includes an unnecessary hyphenated suffix '-у' at the end of '{{productName}}-у'.  This is grammatically incorrect in this context.",
-          "suggestion": "Remove the '-у' suffix: '{{productName}}'."
+          "description": "The Serbian translation uses a hyphenated possessive ({{productName}}-у) which might not be the most natural or preferred style in Serbian. A more common construction would be using 'u' without the hyphen.",
+          "suggestion": "Ваша претплата остаје активна, али препоручујемо да одаберете новог Платиоца који има приступ подешавањима претплате у {{productName}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Платиоца' (Platioca) is technically a correct translation of 'Payer', it's less common and might sound slightly awkward in this context.  'Корисника' (Korisinika) or 'Управника' (Upravnika) might be more natural alternatives.",
-          "suggestion": "Consider using 'Корисника' (Korisinika) or 'Управника' (Upravnika) instead of 'Платиоца'."
+          "description": "While 'Platioac' is a literal translation of 'Payer', it's less common and might be confusing for Serbian users. 'Обавезник плаћања' or 'Носиоц плаћања' might be more suitable depending on the context.",
+          "suggestion": "Ваша претплата остаје активна, али препоручујемо да одаберете новог Обавезника плаћања који има приступ подешавањима претплате у {{productName}}."
         }
       ],
       "approved_at": null
@@ -310,7 +294,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes an unnecessary hyphen before 'u' at the end of the sentence ('u'). It should be removed.",
+          "description": "The word 'productName' is followed by '-u'. This is an unnecessary grammatical marker and should be removed for consistency with English.",
           "suggestion": "Vaša pretplata ostaje aktivna, ali preporučujemo da odaberete novog Platioca koji ima pristup podešavanjima pretplate u {{productName}}."
         }
       ],
@@ -322,13 +306,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Payer' is not a commonly used or easily understood term in Turkish related to payment subscriptions. 'Ödeme Yapan kişi' is too literal and clunky.",
-          "suggestion": "Consider alternatives like 'ödeme sorumlusu', 'ödeme yöneticisi', or 'fatura ödeyecek kişi' to better convey the intended meaning of someone responsible for payments and subscription settings."
+          "description": "The phrase 'Payer' doesn't have a direct equivalent in Turkish that accurately conveys the intended meaning of someone who manages payments/subscription settings. 'Payer' refers to a person or entity responsible for making payments, and in this context, it implies someone who has permission to manage subscription details.",
+          "suggestion": "Consider alternatives like 'ödeme yöneticisi' (payment manager) or 'abonelik sorumlusu' (subscription responsible) depending on the desired level of formality and context. 'Aboneliğin ayarlarını yönetebilecek bir kişi' (a person who can manage the subscription settings) is a more descriptive, albeit longer, option."
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the translation could benefit from slightly more natural Turkish phrasing. The sentence structure feels a little stiff.",
-          "suggestion": "A more natural phrasing could be: 'Aboneliğiniz aktif olarak devam ediyor, ancak {{productName}}'deki abonelik ayarlarını yönetebilecek yeni bir kişi seçmenizi öneririz.'"
+          "description": "The placement of the variable '{{productName}}' appears correct, but needs to be verified that the variable is properly rendered in the target platform.",
+          "suggestion": "Ensure '{{productName}}' is correctly processed and replaced with the product name in the Turkish version."
         }
       ],
       "approved_at": null
@@ -345,13 +329,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Payer' is not commonly understood in the context of subscriptions in Vietnamese. A more appropriate term would be 'người thanh toán' (payer) or 'tài khoản thanh toán' (payment account), depending on the intended nuance.",
-          "suggestion": "Gói dịch vụ đăng ký của bạn vẫn hiệu lực, nhưng chúng tôi khuyên bạn nên chọn một người thanh toán mới có quyền truy cập vào cài đặt đăng ký trong {{productName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the term 'người thanh toán' might benefit from slightly rephrasing for better flow.",
-          "suggestion": "Gói dịch vụ đăng ký của bạn vẫn hiệu lực, nhưng chúng tôi khuyên bạn nên chọn một tài khoản thanh toán mới có quyền truy cập vào cài đặt đăng ký trong {{productName}}."
+          "description": "The term 'Payer' doesn't have a direct and natural equivalent in Vietnamese in this context. It's referring to someone who manages the subscription payment and settings. A more appropriate translation would convey the role, not just the label.",
+          "suggestion": "Thay vì 'Người trả phí', sử dụng 'người quản lý thanh toán' hoặc 'người được ủy quyền quản lý đăng ký' depending on the specific nuance desired. For example: 'Gói dịch vụ đăng ký của bạn vẫn hiệu lực, nhưng chúng tôi khuyên bạn nên chọn một người quản lý thanh toán mới có quyền truy cập vào cài đặt đăng ký trong {{productName}}.'"
         }
       ],
       "approved_at": null
@@ -359,7 +338,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'who gets access' is translated too literally. A more natural phrasing in Chinese would be '能够管理' or '可以管理' (able to manage). The current translation sounds awkward.",
+          "suggestion": "您的订阅仍然有效，但我们建议您选择一位能够管理{{productName}}中订阅设置的新付款人。"
+        }
+      ],
       "approved_at": null
     }
   }

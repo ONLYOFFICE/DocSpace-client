@@ -3,7 +3,7 @@
   "content": "For any questions, please contact your {{productName}} admin.",
   "content_en_sha1_hash": "3c577caeeab1ab722445f462b6c19dd04e02860b",
   "created_at": "2025-05-19T21:30:45.549Z",
-  "updated_at": "2025-05-28T09:30:02.286Z",
+  "updated_at": "2025-06-02T10:20:51.161Z",
   "comment": {
     "text": "This translation key provides a message to be displayed when users need assistance or have questions about their account. It instructs them to contact the admin of their {{productName}} product. This message appears in a dialog box within the client application.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 67,
-      "context": "values={{ sectionName: personalUserFolderTitle }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </StyledText>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "line_number": 66,
+      "context": "values={{ sectionName: t(\"Common:MyFilesSection\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {\n productName: t(\"Common:ProductName\"),\n })}\n </StyledText>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"الخاص بكم\" (al-khaas bikum) which translates to 'yours' or 'belonging to you' is overly formal and doesn't flow naturally in this context. It's better to use a more direct phrasing.",
-          "suggestion": "لأي استفسارات، يُرجى التواصل مع مشرف {{productName}}."
+          "description": "The phrase \"مشرف {{productName}} الخاص بكم\" is a bit awkward. A more natural translation for \"your {{productName}} admin\" would be \"مسؤول {{productName}} الخاص بكم\" or \"مدير {{productName}} الخاص بكم\". While \"مشرف\" isn't wrong, it implies a supervisory role which might not be accurate.",
+          "suggestion": "لأي استفسارات، يُرجى التواصل مع مسؤول {{productName}} الخاص بكم."
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'V případě jakýchkoli dotazů se obraťte na správce {{productName}}' is technically correct but could be slightly improved for naturalness in Czech. 'Správce' (admin) can sound a little formal. A more colloquial and common phrasing would be 'správce vašeho {{productName}}'.",
+          "suggestion": "V případě jakýchkoli dotazů se obraťte na správce vašeho {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation includes a space before the variable {{productName}}, which is inconsistent with the English original.",
-          "suggestion": "Remove the space before {{productName}} in the Greek translation."
+          "description": "The Greek translation includes 'σας' after 'διαχειριστή'. While grammatically correct, it can sound slightly less natural in this context. It's more common to simply use 'τον διαχειριστή'.",
+          "suggestion": "Επικοινωνήστε με τον διαχειριστή {{productName}}."
         }
       ],
       "approved_at": null
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'por favor ponga en contacto con' is grammatically awkward in Spanish. The 'con' is unnecessary.",
-          "suggestion": "por favor contacte con"
+          "description": "The phrase 'por favor ponga en contacto con' is grammatically incorrect. The 'con' is unnecessary.",
+          "suggestion": "por favor ponga en contacto a"
         }
       ],
       "approved_at": null
@@ -90,13 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'For any questions' is better translated as 'Kysyttävää on' or 'Jos sinulla on kysymyksiä' rather than just omitting it and starting directly with 'Ole yhteydessä'. The current translation implies the question isn't actually something to be addressed.",
-          "suggestion": "Ole yhteydessä {{productName}} pääkäyttäjään, jos sinulla on kysymyksiä."
+          "description": "The phrase 'For any questions' is not accurately reflected in the Finnish translation. 'Ole yhteydessä...' implies more of an action to be taken rather than a statement of where to find assistance.",
+          "suggestion": "Kysymysten varalta ota yhteyttä..."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'pääkäyttäjä' (admin) is technically correct, 'ylläpitäjä' might be a more commonly used and understood term for an administrator in this context, particularly in a technical setting.  'Pääkäyttäjä' is often associated with system administrator roles rather than a product admin.",
-          "suggestion": "Ole yhteydessä {{productName}} ylläpitäjään, jos sinulla on kysymyksiä."
+          "description": "While 'pääkäyttäjä' can mean admin, it's often more specifically 'main user'. A more general 'ylläpitäjä' (maintainer/administrator) might be more appropriate for broader product admin contact.",
+          "suggestion": "Ole yhteydessä {{productName}} ylläpitäjään, jos sinulla on kysyttävää."
         }
       ],
       "approved_at": null
@@ -107,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'your {{productName}} admin' is not naturally translated as 'votre administrateur {{productName}}'. A more natural translation would be 'votre administrateur {{productName}}' or 'l'administrateur {{productName}} de votre compte'.",
-          "suggestion": "votre administrateur {{productName}}"
+          "description": "The translation 'administrateur' is a direct translation of 'admin' and while not incorrect, it sounds less natural in French for this context. 'Administrateur' implies a higher level of responsibility than 'admin' typically denotes.",
+          "suggestion": "Pour toute question, veuillez contacter l'administrateur de votre {{productName}}."
         }
       ],
       "approved_at": null
@@ -118,9 +124,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation uses a lowercase 'ի' after 'ձեր'. It should be an uppercase 'Ի' because it begins a proper noun (productName).",
-          "suggestion": "Հարցերի համար, դիմեք ձեր {{productName}}Ի ադմինիստրատորին"
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Հարցերի համար, դիմեք ձեր {{productName}} ի ադմինիստրատորին\" is a literal translation but sounds unnatural in Armenian. A more natural phrasing would be something like \"If you have any questions, please contact the administrator of your {{productName}}\" or \"For questions, please contact your {{productName}} administrator.\"  The possessive construction 'ձեր {{productName}} ի' is grammatically correct but not idiomatic.",
+          "suggestion": "Հարցերի դեպքում, խնդրում ենք կապվեք ձեր {{productName}} ի ադմինիստրատորի հետ։"
         }
       ],
       "approved_at": null
@@ -146,7 +152,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເຈົ້າ' (jea) is a possessive pronoun that could be interpreted as overly familiar. A more formal possessive pronoun would be more appropriate in this context.",
+          "suggestion": "ສໍາລັບຄໍາຖາມໃດໆ, ກະລຸນາຕິດຕໍ່ຜູ້ບໍລິຫານ {{productName}} ຂອງທ່ານ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -164,7 +176,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation maintains the variable {{productName}} which is present in the English source. While not inherently incorrect, consider whether this is the desired behavior and if it's being properly handled in the localization system.",
+          "suggestion": "Verify that the variable {{productName}} is correctly replaced with the product name in the Polish output. If it's intended to remain as a variable for display purposes, ensure the surrounding text is appropriate."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -173,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"contacte o seu administrador\" is a slightly awkward translation. A more natural Portuguese phrasing would be \"entre em contato com seu administrador\".",
-          "suggestion": "Entre em contato com seu administrador."
+          "description": "The phrase \"contacte o seu administrador\" is grammatically correct but sounds somewhat formal for a user-facing message. A more conversational and common phrasing would be \"entre em contato com seu administrador\".",
+          "suggestion": "Entre em contato com seu administrador"
         }
       ],
       "approved_at": null
@@ -191,8 +209,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Vă invităm să contactați {{productName}} administratorul dvs pentru orice întrebări' is a bit formal and doesn't directly translate the meaning of 'For any questions, please contact...'. 'Vă invităm să contactați' (We invite you to contact) is not the most natural phrasing. A more direct and natural translation would be 'Pentru orice întrebări, vă rugăm să contactați...'",
-          "suggestion": "Pentru orice întrebări, vă rugăm să contactați {{productName}} administratorul dvs."
+          "description": "The translation 'Vă invităm să contactați {{productName}} administratorul dvs pentru orice întrebări' is a bit formal and indirect. A more natural Romanian phrasing would be closer to 'Pentru orice întrebări, vă rugăm să contactați administratorul {{productName}}'.",
+          "suggestion": "Pentru orice întrebări, vă rugăm să contactați administratorul {{productName}}."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'dvs' (your) is less common and can sound awkward. It's more natural to omit it or use a different possessive pronoun depending on the context. In this case, omitting it makes the translation smoother.",
+          "suggestion": "Remove 'dvs' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -206,13 +229,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'පරිපාලක' (paripalaka) is a somewhat formal term for 'admin.' While technically correct, a more common and approachable term might be preferred for a customer-facing message.",
-          "suggestion": "Consider using 'අධිකාරි' (adhikaari) or 'ලේඛම්වරයා' (lekhamvarayaa) instead of 'පරිපාලක' depending on the intended tone and context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -233,7 +250,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'За било каква питања, обратите се свом {{productName}} ' is incomplete. It's missing the word 'admin' which is present in the English content. It also lacks a proper closing to the sentence.",
+          "description": "The Serbian translation 'За било каква питања, обратите се свом {{productName}}' is incomplete. It is missing the word 'admin' or a Serbian equivalent for 'admin'. It translates to 'For any questions, contact your {{productName}}'.",
           "suggestion": "За било каква питања, обратите се свом {{productName}} администратору."
         }
       ],

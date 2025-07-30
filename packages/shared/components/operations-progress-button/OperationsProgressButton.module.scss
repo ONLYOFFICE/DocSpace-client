@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables/colors";
+
+@use "../../styles/mixins";
 
 .styledDropDown {
   margin-bottom: 8px;
@@ -77,7 +77,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     z-index: 200;
     bottom: 16px;
 
@@ -104,7 +104,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     bottom: 16px;
     inset-inline-end: 16px;
 

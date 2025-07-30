@@ -3,7 +3,7 @@
   "content": "Number of active employees: {{count}}",
   "content_en_sha1_hash": "3426852c597717b5b595fdec1fb5d104c8bf3d3c",
   "created_at": "2025-05-19T21:30:52.083Z",
-  "updated_at": "2025-05-21T03:46:51.170Z",
+  "updated_at": "2025-05-24T04:40:26.212Z",
   "comment": {
     "text": "This translation key displays the number of active employees. It appears as part of a main information section on a portal settings page and is used to show the current count of active users in a human-readable format.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'աշխատողների' (workers) is spelled correctly, but it might be more natural to use a slightly different phrasing depending on the specific context and desired formality. While technically correct, it can sound slightly stiff.",
-          "suggestion": "Consider alternatives like 'աշխատակազմի թիվը' (number of staff) or 'աշխատողների քանակը' (quantity of workers) depending on the desired tone. However, this is a stylistic choice rather than an error."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

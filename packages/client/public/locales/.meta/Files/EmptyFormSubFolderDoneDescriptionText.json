@@ -3,7 +3,7 @@
   "content": "Here you will find forms which have been completely filled out by other users.",
   "content_en_sha1_hash": "47d03e7d931197b16a9e32c8448d8891b9e4cf97",
   "created_at": "2025-05-19T21:30:55.570Z",
-  "updated_at": "2025-06-03T20:59:41.789Z",
+  "updated_at": "2025-05-26T07:57:32.146Z",
   "comment": {
     "text": "This translation key is used to display a description indicating that an empty form subfolder has been completed by another user. It appears in UI components related to folder progress and status updates.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ستجد هنا النماذج التي تم ملؤها بالكامل من قبل مستخدمين آخرين.' while understandable, isn't the most natural or idiomatic way to express the meaning in Arabic (Saudi Arabia). A more fluent translation would emphasize 'completed' rather than just 'filled out'.",
+          "suggestion": "ستجد هنا النماذج المكتملة من قبل مستخدمين آخرين."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -75,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Täältä löydät muiden täyttämät lomakkeet, jotka ovat valmiita' isn't the most natural or accurate rendering of 'Here you will find forms which have been completely filled out by other users.' While technically correct, it feels a bit clunky.  'Valmiita' emphasizes 'ready' which isn't the primary focus of the original English. The English implies completion, not just readiness.",
+          "suggestion": "Täältä löydät muut käyttäjät täyttämät valmiit lomakkeet."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -111,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ຖືກຕື່ມເຕັມ' implies 'completely filled' but it's a slightly awkward phrasing. A more natural translation of 'completely filled out' would be something like 'ເຕີມຂໍ້ມູນຢ່າງຄົບຖ້ວນ'.",
+          "suggestion": "ທີ່ນີ້ເຈົ້າຈະພົບເຫັນແບບຟອມທີ່ເຕີມຂໍ້ມູນຢ່າງຄົບຖ້ວນໂດຍຜູ້ໃຊ້ອື່ນໆ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -147,19 +165,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'care au fost completate și finalizate' is redundant. 'Completate' already implies 'finalizate'.",
+          "suggestion": "Aici veți găsi formulare completate de alți utilizatori."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Здесь будут отображаться формы, полностью заполненные другими пользователями' uses the future tense 'будут отображаться' (will be displayed). While technically correct, it's less natural and more formal than a present tense phrasing to describe a state of being. A more common and user-friendly phrasing would indicate that the forms *are* present.",
+          "suggestion": "Здесь находятся формы, полностью заполненные другими пользователями."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වෙනත් පරිශ්‍රීලකයින් දැනටමත් පුරවන ලද ආකෘතිපත්‍ර මෙහි ඔබට හමු වනු ඇත' is not the most natural or accurate rendering of 'Here you will find forms which have been completely filled out by other users.' Specifically, 'පුරවන ලද' (purawan lada) literally translates to 'filled' but implies a process of filling.  A more accurate and common phrasing would focus on completed forms.",
+          "suggestion": "වෙනත් පරිශ්‍රීලකයින් සම්පූර්ණයෙන්ම පුරවාගත් ආකෘතිපත්‍ර මෙහි ඔබට හමු වනු ඇත."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is a slightly uncommon usage. While technically correct, it may be perceived as overly formal.",
+          "suggestion": "පරිශීලකයින් (parishilakayin) - a slightly more common and natural sounding word for 'users'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +218,40 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ц́ете' is a somewhat archaic form of 'ћете'. While understandable, it's not the most natural choice in modern Serbian. It feels stiff and out of place.",
+          "suggestion": "Use 'ћете' instead of 'ц́ете'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'пронац́и' is a less common and slightly awkward phrasing. A more natural alternative would be 'наћи'.",
+          "suggestion": "Use 'наћи' instead of 'пронаћи'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'други корисници' (other users) could be more naturally translated as 'буди корисници' or 'други учесници' depending on the context of the forms.",
+          "suggestion": "Consider using 'буди корисници' or 'други учесници' for a more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ćete' (you will) should be 'nalazite'. While 'ćete pronaći' is understandable, it's not the most natural phrasing in Serbian.",
+          "suggestion": "Ovde nalazite obrasce koje su u potpunosti popunili drugi korisnici."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, 'koje su u potpunosti popunili' could be more elegantly phrased as 'koji su popunjeni'.",
+          "suggestion": "Ovde nalazite obrasce koji su popunjeni drugi korisnici."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

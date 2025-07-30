@@ -1,5 +1,4 @@
-@import "../../styles/_mixins.scss";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
 
 .errorUnavailableWrapper {
   width: 100%;
@@ -14,7 +13,7 @@
   justify-content: center;
   margin: 0 16px;
 
-  @include mobile {
+  @include mixins.mobile {
     justify-content: start;
   }
 

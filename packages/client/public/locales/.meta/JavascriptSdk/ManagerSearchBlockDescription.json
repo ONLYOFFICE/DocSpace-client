@@ -3,7 +3,7 @@
   "content": "You can disable the search, filter and sort options.",
   "content_en_sha1_hash": "ffa1350e38a35df0eb49fef9d98511c60ac9d833",
   "created_at": "2025-05-19T21:30:54.569Z",
-  "updated_at": "2025-05-28T09:30:02.361Z",
+  "updated_at": "2025-06-30T12:20:31.287Z",
   "comment": {
     "text": "\"This translation key describes the text used to inform users that they can disable search, filter and sort options in a UI component.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 520,
+      "line_number": 530,
       "context": "onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n description={t(\n \"JavascriptSdk:ManagerSearchBlockDescription\",\n )}\n />\n </div>\n </>\n ) : null}",
       "module": "/packages/client"
     },
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Söndürə bilərsiniz' (you can turn off) implies a direct disabling action, which might not be the intended meaning of 'disable'. A more accurate translation might convey the ability to deactivate or remove the features.",
-          "suggestion": "Axtarış, filtr və çeşidləmə seçimlərini deaktiv edə bilərsiniz."
+          "description": "The translation 'Axtarış, filtr və çeşidləmə seçimlərini söndürə bilərsiniz' implies a capability to turn off the options, rather than the ability to disable them. 'Disable' is a more accurate representation of the original English.",
+          "suggestion": "Axtarış, filtr və çeşidləmə seçimini deaktiv edə bilərsiniz."
         }
       ],
       "approved_at": null
@@ -101,9 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'զտման' (zteman) is spelled incorrectly. It should be 'ֆիլտրման' (fil'trman) to more accurately reflect 'filter'.",
-          "suggestion": "Դուք կարող եք անջատել որոնման, ֆիլտրման և տեսակավորման ընտրանքները:"
+          "type": "incorrect_translation",
+          "description": "The English phrase \"You can disable\" is better translated as \"You have the option to disable\" or a more concise equivalent in Armenian. The current translation 'Դուք կարող եք անջատել' (You can disable) is grammatically correct but not as natural-sounding for this context. It implies an ability, rather than an option.",
+          "suggestion": "Consider 'Մալուց կարող եք անջատել...' (You have the option to disable...) or a more idiomatic Armenian equivalent conveying the same meaning of a setting or choice."
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'disable' is best translated as something more nuanced than simply '無効にすることができます' (muukou ni suru koto ga dekimasu). While technically correct, it sounds a bit formal and indirect for user interface text. A more natural phrasing would emphasize the ability to turn off the functions.",
+          "suggestion": "検索、フィルター、並べ替えオプションはオフにすることができます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -132,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຄັດເລືອກ' (kat lueak) which translates to 'selection' or 'sort' isn't the most natural translation for 'sort' in this context. While technically correct, 'ຈັດລຽງ' (jat liang) would be more accurate and commonly used.",
-          "suggestion": "ທ່ານ​ສາ​ມາດ​ປິດ​ການ​ທໍາ​ງານ​ການ​ຊອກ​ຫາ​, ຕົວ​ກັ່ນ​ຕອງ​ແລະ​ການ​ຈັດ​ລຽງ​."
+          "description": "The word 'ຄັດເລືອກ' (kat lueak) which translates to 'selection' or 'sort' is not the most accurate translation of 'sort' in this context. It implies a process of choosing rather than arranging.",
+          "suggestion": "Consider using a term more closely aligned with 'sorting,' like 'ການຈັດລຽງ' (gan jat liang)."
         }
       ],
       "approved_at": null
@@ -186,8 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබට සෙවුම, පෙරහන සහ වර්ගන විකල්ප අබල කිරීමට හැකිය' directly translates to 'You have the ability to disable the search, filter and sort options.' While technically correct, it sounds overly formal and less natural in Sinhala. A more natural phrasing would be closer to 'You can turn off the search, filter, and sort options' or 'It is possible to disable the search, filter and sort options'.",
-          "suggestion": "ඔබ සෙවුම, පෙරහන සහ වර්ගන විකල්ප අවහිර කිරීමට හැකිය (You have the ability to block the search, filter, and sort options) or, preferably,  ඔබ සෙවුම, පෙරහන සහ වර්ගන විකල්ප ක්‍රියා විරහිත කිරීමට හැකිය (You can deactivate the search, filter, and sort options)."
+          "description": "The word 'disable' is best translated as 'අයින් කිරීම' (ain karima) or 'අවසන් කිරීම' (awasankara karama) instead of 'අබල කිරීම' (abala karima). While 'අබල කිරීම' can mean to disable, it's not the most natural or precise translation in this context.",
+          "suggestion": "ඔබට සෙවුම, පෙරහන සහ වර්ගන විකල්ප අයින් කිරීමට/අවසන් කිරීමට හැකිය."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence could be slightly more fluent by rephrasing. The current wording feels a bit stiff.",
+          "suggestion": "ඔබට සෙවුම, පෙරහන සහ වර්ග කිරීමට හැකි විකල්ප අයින් කිරීමට හැකිය."
         }
       ],
       "approved_at": null
@@ -210,7 +221,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'филтер' is a direct transliteration of 'filter' and not a Serbian word. The correct Serbian word is 'филтар'.",
+          "description": "The word 'филтер' is a transliteration and not a proper Serbian word. The correct term is 'филтар'.",
           "suggestion": "филтар"
         }
       ],

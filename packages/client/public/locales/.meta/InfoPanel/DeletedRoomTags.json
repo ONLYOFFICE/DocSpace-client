@@ -3,7 +3,7 @@
   "content": "Tags removed.",
   "content_en_sha1_hash": "453b4c78053004eb819254db86b4ee03ae201130",
   "created_at": "2025-05-19T21:30:54.773Z",
-  "updated_at": "2025-05-28T09:30:02.433Z",
+  "updated_at": "2025-06-30T12:20:31.345Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that tags have been removed from a room. It appears in the UI when an action involving room tags has been performed. Translators should provide a neutral or descriptive phrase conveying the removal of tags.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 171,
-      "context": "/>\n );\n case \"AddedRoomTags\":\n return t(\"InfoPanel:AddedRoomTags\");\n case \"DeletedRoomTags\":\n return t(\"InfoPanel:DeletedRoomTags\");\n case \"RoomLogoCreated\":\n case \"RoomColorChanged\":\n case \"RoomCoverChanged\":\n return t(\"InfoPanel:RoomLogoChanged\");\n case \"RoomLogoDeleted\":",
+      "line_number": 180,
+      "context": "/>\n );\n case FeedActionKeys.AddedRoomTags:\n return t(\"InfoPanel:AddedRoomTags\");\n case FeedActionKeys.DeletedRoomTags:\n return t(\"InfoPanel:DeletedRoomTags\");\n case FeedActionKeys.RoomLogoCreated:\n case FeedActionKeys.RoomColorChanged:\n case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:",
       "module": "/packages/client"
     }
   ],
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Odstraněné štítky' while technically correct, doesn't quite capture the nuance of 'Tags removed.' It implies the tags *were* removed, rather than the action of removing them. A better translation might be something like 'Odstraněny štítky' which uses the past participle form to indicate an action.",
-          "suggestion": "Odstraněny štítky"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -111,13 +105,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ລຶບແທັກອອກແລ້ວ' is a literal translation of 'Tags removed' and while understandable, a more natural phrasing might be preferred depending on the context of the InfoPanel. It's slightly abrupt.",
-          "suggestion": "Consider 'ແທັກຖືກລຶບອອກແລ້ວ' (Tags have been removed) or 'ລົບແທັກແລ້ວ' (Tags removed - more concise)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -168,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ටැග් ඉවත් කරන ලදී.' literally translates to 'Tags were removed.' While technically correct, it sounds overly formal and passive for a UI message. It would be more natural to use a more direct and concise phrasing.",
-          "suggestion": "ටැග්​ ඉවත්​."
+          "description": "The translation \"ටැග් ඉවත් කරන ලදී.\" literally translates to \"Tags were removed.\" While conveying the general meaning, it sounds passive and less natural in Sinhala for a UI message. A more appropriate translation would imply the action is complete and confirm to the user.",
+          "suggestion": "ටැග්​ ඉවත්​ කළා."
         }
       ],
       "approved_at": null
@@ -189,19 +177,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Тагови уклоњени.' while technically correct, sounds less natural than alternatives. 'Уклоњени тагови' or 'Тагови брисани' would be more common and idiomatic for 'Tags removed.'",
-          "suggestion": "Уклоњени тагови"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The singular form 'Tag' was used when the English text uses the plural 'Tags'. The Serbian translation should reflect this.",
+          "suggestion": "Tagovi su uklonjeni."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

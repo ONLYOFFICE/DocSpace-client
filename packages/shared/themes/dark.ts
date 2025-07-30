@@ -806,18 +806,6 @@ const Dark: TTheme = {
     hoverIconColor: grayDark,
   },
 
-  inputPhone: {
-    activeBorderColor: lightSecondMain,
-    inactiveBorderColor: grayDarkStrong,
-    errorBorderColor: darkErrorStatus,
-    backgroundColor: black,
-    color: white,
-    scrollBackground: grayDark,
-    placeholderColor: grayDark,
-    dialCodeColor: grayDark,
-    width: "320px",
-    height: "44px",
-  },
   textInput: {
     fontWeight: "normal",
     placeholderColor: grayDark,
@@ -1444,25 +1432,7 @@ const Dark: TTheme = {
     marginRight: "2px",
     borderRadius: "50%",
   },
-  rombsLoader: {
-    blue: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-    red: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-    },
-    green: {
-      colorStep_1: black,
-      colorStep_2: black,
-      colorStep_3: "#323032",
-      colorStep_4: "#323032",
-    },
-  },
+
   dialogLoader: {
     borderBottom: `1px solid ${black}`,
   },
@@ -3064,17 +3034,6 @@ const Dark: TTheme = {
     colorPercentBig: black,
     errorTextColor: darkErrorStatus,
     descriptionTextColor: grayDark,
-  },
-
-  codeInput: {
-    background: darkGrayLight,
-    border: `1px solid ${grayDarkStrong}`,
-    color: white,
-    lineColor: grayDark,
-    disabledBackground: grayDarkStrong,
-    disabledBorder: `1px solid ${grayDarkStrong}`,
-    disabledColor: grayDark,
-    focusBorder: `1px solid ${lightSecondMain}`,
   },
 
   accessRightSelect: {

@@ -3,7 +3,7 @@
   "content": "Automatic indexing",
   "content_en_sha1_hash": "5c31289d03ed4b24b0edaf412e508ce77bc130da",
   "created_at": "2025-05-19T21:30:56.779Z",
-  "updated_at": "2025-05-20T09:38:12.028Z",
+  "updated_at": "2025-05-24T13:55:04.583Z",
   "comment": {
     "text": "The translation key \"AutomaticIndexing\" describes a toggle button that controls whether automatic indexing is enabled for a virtual data room. When checked, this setting affects how files are handled and made available in the system. It appears on a settings dialog for creating or editing a virtual data room.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ස්වයංක්‍රීය දර්ශනය' while containing some correct elements, doesn't fully capture the meaning of 'Automatic indexing'. 'දර්ශනය' typically means 'view' or 'perspective'. 'ස්වයංක්‍රීය දර්ශනය' translates more closely to 'Automatic View' which is not the intended meaning. A more accurate translation would convey the concept of automatic processing or cataloging.",
+          "suggestion": "ස්වයංක්‍රීය ක්‍රියාවලිය (Swayan̄kriyā Krīyāvaliya) - meaning 'automatic process', or ස්වයංක්‍රීය වර්ගීකරණය (Swayan̄kriyā Vargākarana) - meaning 'automatic classification'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

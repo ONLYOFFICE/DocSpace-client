@@ -27,45 +27,22 @@
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 
 import React from "react";
-import styled from "styled-components";
 import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+
 import { Text } from "../../../components/text";
-import { TTranslation } from "../../../types";
 
-const StyledWrapper = styled.div`
-  background: ${(props) =>
-    props.theme.client.settings.common.whiteLabel.notAvailableBackground};
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 16px;
+import styles from "./WhiteLabel.module.scss";
 
-  .lock-icon {
-    width: 16px;
-    height: 16px;
-    div > svg {
-      path {
-        fill: ${(props) =>
-          props.theme.client.settings.common.whiteLabel.textColor};
-      }
-    }
-  }
-`;
+export const NotAvailable = () => {
+  const { t } = useTranslation("Common");
 
-interface IProps {
-  t: TTranslation;
-}
-
-export const NotAvailable = (props: IProps) => {
-  const { t } = props;
   return (
-    <StyledWrapper>
-      <ReactSVG className="lock-icon" src={LockedReactSvgUrl} />
+    <div className={styles.notAvailableWrapper}>
+      <ReactSVG className={styles.lockIcon} src={LockedReactSvgUrl} />
       <Text fontSize="12px" fontWeight="600">
         {t("NotAvailableUnderLicense")}
       </Text>
-    </StyledWrapper>
+    </div>
   );
 };

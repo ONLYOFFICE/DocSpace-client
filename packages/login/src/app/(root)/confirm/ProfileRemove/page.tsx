@@ -26,21 +26,20 @@
 
 import { getSettings } from "@/utils/actions";
 
+import { logger } from "logger.mjs";
 import ProfileRemoveForm from "./page.client";
 
 async function Page() {
+  logger.info("ProfileRemove page");
+
   const settings = await getSettings();
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <ProfileRemoveForm
-          greetingSettings={settings.greetingSettings}
-          legalTerms={settings.externalResources.common?.entries.legalterms}
-        />
-      )}
-    </>
-  );
+  return settings && typeof settings !== "string" ? (
+    <ProfileRemoveForm
+      greetingSettings={settings.greetingSettings}
+      legalTerms={settings.externalResources.common?.entries.legalterms}
+    />
+  ) : null;
 }
 
 export default Page;

@@ -3,7 +3,7 @@
   "content": "Brute Force Protection",
   "content_en_sha1_hash": "ad05e298131255f6f589995a3c3f681dfa43a007",
   "created_at": "2025-05-19T21:30:50.820Z",
-  "updated_at": "2025-07-02T07:49:19.855Z",
+  "updated_at": "2025-06-18T17:11:42.493Z",
   "comment": {
     "text": "This translation key is used to display a description of \"Brute Force Protection\" in the portal settings category, particularly on the mobile view and within the security access portal. It appears as a subtitle next to the category title, helping users understand its purpose.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 116,
+      "line_number": 117,
       "context": "}\n url=\"/portal-settings/security/access-portal/ip\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"BruteForceProtection\")}\n subtitle={t(\"BruteForceProtectionDescriptionMobile\")}\n url=\"/portal-settings/security/access-portal/brute-force-protection\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 217,
+      "line_number": 210,
       "context": "{\n id: \"portal-settings_catalog-brute-force-protection\",\n key: \"1-0-6\",\n icon: \"\",\n link: \"brute-force-protection\",\n tKey: \"BruteForceProtection\",\n },\n {\n id: \"portal-settings_catalog-admin-message\",\n key: \"1-0-7\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"الحماية من الاعتداء\" while technically meaning \"Protection from Attack\", doesn't accurately convey the specific meaning of \"Brute Force Protection\". \"Brute Force Protection\" refers to security measures against attempts to guess passwords or other credentials. A more appropriate translation would focus on preventing unauthorized access attempts.",
-          "suggestion": "حماية من محاولات العنف (Himaaya min muhawalaat al-'unf) - Protection from forceful attempts. Alternatively, حماية من هجمات القوة الغاشمة (Himaaya min hajamaat al-quwwa al-ghaashima) - Protection from brute force attacks."
+          "description": "While 'الحماية من الاعتداء' is a valid phrase, it's a broad translation of 'Brute Force Protection'. A more accurate and common term for 'brute force protection' in a security context would be 'الحماية من محاولات الاقتحام' or 'الحماية من الهجمات العنيفة'.  'الاعتداء' often implies a physical attack, whereas brute force is a technical attack.",
+          "suggestion": "Consider using 'الحماية من محاولات الاقتحام' or 'الحماية من الهجمات العنيفة' for a more precise translation."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Kobud gücdən qorunma\" is a literal translation, a more natural and commonly used term for 'Brute Force Protection' in Azerbaijani would be 'Səhv məsələlərdən müdafiə' or 'Qüvvətli hücumlardan qorunma'. \"Kobud gücdən qorunma\" sounds somewhat awkward.",
-          "suggestion": "Consider using 'Səhv məsələlərdən müdafiə' or 'Qüvvətli hücumlardan qorunma'."
+          "description": "While \"Kobud gücdən qorunma\" is a literal translation, it's not the most natural or idiomatic way to express 'Brute Force Protection' in Azerbaijani. A more appropriate term would emphasize resistance or prevention.",
+          "suggestion": "Consider \"Gücə mərhələli hücumlardan müdafiə\" or \"Gücə pozmaların qarşısını alma\"."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Väsytyshyökkäysten suojaus' is a literal translation, it sounds awkward and technical in Finnish. A more natural and understandable translation would be 'Suojaus raakaa voimaa vastaan' or 'Brute Force -suojaus'.",
-          "suggestion": "Suojaus raakaa voimaa vastaan"
+          "description": "While 'Väsytyshyökkäysten suojaus' is a literal translation, it's not the most natural or common way to express 'Brute Force Protection' in Finnish. A more common and understandable term would be 'Raakahyökkäysten suojaus'.",
+          "suggestion": "Raakahyökkäysten suojaus"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"무차별 대입 보호\" is a literal translation of \"Brute Force Protection,\" it sounds somewhat technical and less natural in Korean. A more common and user-friendly translation would be something like \"무단 침입 방지\" or \"무작위 공격 방지\".",
-          "suggestion": "무단 침입 방지"
+          "description": "The Korean translation '무차별 대입 보호' is a literal translation of 'Brute Force Protection' but doesn't convey the intended meaning as naturally as possible in Korean. While technically correct, it sounds somewhat formal and less user-friendly.",
+          "suggestion": "Consider a more natural phrasing like '무차별 공격 방지' (MuchaByeol Gonggeuk Bangji) which translates to 'Brute Force Attack Prevention' or 'Protection against Brute Force Attacks'. Alternatively, '무단 침입 방지' (Mudang Chimip Bangji) meaning 'Unauthorized Access Prevention' could also be suitable depending on the precise intended function."
         }
       ],
       "approved_at": null
@@ -144,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'Brute Force ການປົກປ້ອງ' literally translates to 'Brute Force protection'. While understandable, it lacks the natural flow of a translated title. 'ການປົກປ້ອງ' acts as a suffix rather than being integrated into a more idiomatic phrasing.",
-          "suggestion": "Consider a more integrated translation like 'ການປ້ອງກັນຮົນແຮງ' (Kan plong kan hon raeng) which directly translates to 'Brute Force Prevention' or 'Brute Force Defense', or 'ການປ້ອງກັນຈາກການຮົນແຮງ' (Kan plong kan chak kan hon raeng) which means 'Protection from Brute Force'."
+          "description": "The Lao translation \"Brute Force ການປົກປ້ອງ\" literally translates to \"Brute Force protection\". While understandable, a more natural Lao translation for \"Brute Force Protection\" would be something like \"ການປົກປ້ອງການໂຈມตีແບບບັງຄັບ\" (kan pakpong kan chomtee bab bangkhap) or \"ການປ້ອງກັນການບັງຄັບໃຊ້\" (kan pongkan kan bangkhap chai). The direct translation lacks fluency.",
+          "suggestion": "Consider a more idiomatic translation like \"ການປົກປ້ອງການໂຈມตีແບບບັງຄັບ\" or \"ການປ້ອງກັນການບັງຄັບໃຊ້\"."
         }
       ],
       "approved_at": null
@@ -189,13 +189,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Защита от брутфорс-атак' is understandable, a more natural and commonly used translation for 'Brute Force Protection' would be 'Защита от подбора пароля' or 'Защита от перебора'. 'Брутфорс-атак' is a loanword and might not be immediately clear to all users.",
-          "suggestion": "Защита от подбора пароля"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -219,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses a space before the Cyrillic quotation marks. It's preferable to omit this space for consistency and readability.",
+          "suggestion": "“Brute Force заштита”"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Brute Force zaštita' directly translates 'Brute Force' but 'zaštita' is a general term for protection. A more accurate and common translation for 'Protection' in this context would be 'odbrana'.",
-          "suggestion": "Brute Force odbrana"
+          "description": "The Serbian translation 'Brute Force zaštita' directly transliterates 'Brute Force' instead of providing a more natural Serbian equivalent. While understandable, it's not the most fluent translation. A better option would be something like 'Zaštita od napada s poliranjem sile' (Protection from brute force attack) or a shorter, more common term if one exists.",
+          "suggestion": "Consider alternatives like 'Zaštita od napada s poliranjem sile' or a more idiomatic equivalent. Investigate common Serbian terms for brute force protection."
         }
       ],
       "approved_at": null
@@ -252,13 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bảo vệ Tấn công Brute Force' is not the most natural or accurate translation of 'Brute Force Protection'. It literally translates to 'Protect Brute Force Attack', which is the opposite of the intended meaning.",
-          "suggestion": "Bảo vệ chống tấn công Brute Force"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using the English term 'Brute Force' in the Vietnamese translation is less common and may be confusing to some users. Consider a fully Vietnamese alternative or a more integrated approach.",
-          "suggestion": "Bảo vệ chống lại tấn công cưỡng bức"
+          "description": "The translation 'Bảo vệ Tấn công Brute Force' is not the most natural or accurate Vietnamese translation for 'Brute Force Protection'. While understandable, it's a very literal translation and sounds awkward.",
+          "suggestion": "A more natural and idiomatic translation would be 'Chống tấn công dò mật khẩu' or 'Bảo vệ chống tấn công dò mật khẩu'. Another option could be 'Bảo vệ chống brute force'."
         }
       ],
       "approved_at": null
@@ -269,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"安全保护\" (Anquan Baohu) is a generic term for 'security protection' and doesn't accurately convey the specific meaning of 'Brute Force Protection'. It lacks the implication of preventing unauthorized access through repeated attempts.",
-          "suggestion": "防暴力破解 (Fang Youli Pojie) - This more accurately translates to 'Brute Force Prevention/Protection'. Alternatively, 防暴力攻击 (Fang Youli Gongji) - 'Brute Force Attack Prevention'. Consider the context of the application when choosing the most suitable option."
+          "description": "The translation \"安全保护\" (Anquan Baohuan) is too general. While it literally means \"security protection,\" it doesn't accurately convey the specific meaning of \"Brute Force Protection.\" It lacks the nuance of protecting against repeated, unauthorized login attempts.",
+          "suggestion": "考虑使用更具体的翻译，例如“暴力破解防护” (Baolijiekefe Fanghu) or “暴力破解保护” (Baolijiekefe Baohuan) which directly translates to \"Brute Force Protection\"."
         }
       ],
       "approved_at": null

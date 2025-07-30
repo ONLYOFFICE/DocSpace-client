@@ -3,7 +3,7 @@
   "content": "Categories",
   "content_en_sha1_hash": "6ccb60071be8f00760a3824d9f7d0fad57de789f",
   "created_at": "2025-05-19T21:30:55.108Z",
-  "updated_at": "2025-05-28T09:30:02.406Z",
+  "updated_at": "2025-05-26T07:57:32.400Z",
   "comment": {
     "text": "The \"Categories\" translation key is used to display a label for a category filter in a form gallery. It appears as a button title and can also be displayed inside a dropdown list. The translator should provide translations for this text that will be used consistently across different devices and contexts.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Arabic translation 'فئات' has a minor spelling error. The correct spelling is 'فئات'.",
-          "suggestion": "فئات"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

@@ -3,7 +3,7 @@
   "content": "Files copied ({{count}}).",
   "content_en_sha1_hash": "a934606c440fb99de1855571a1ee37bacb4a0754",
   "created_at": "2025-05-19T21:30:54.794Z",
-  "updated_at": "2025-05-28T09:30:02.426Z",
+  "updated_at": "2025-06-30T12:20:31.338Z",
   "comment": {
     "text": "This translation key is used to display a count of files that have been copied within an info panel on a file history page. It appears as part of the UI in a specific view when related items are present and helps users understand the scope of changes made to a file.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 79,
-      "context": "return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FileCopied\");\n case \"FileDeleted\":\n if (hasRelatedItems)",
+      "line_number": 85,
+      "context": "return t(\"InfoPanel:FileCopiedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)",
       "module": "/packages/client"
     }
   ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'Files' is better translated as 'Dateien' rather than just 'Datei' in this context, as it refers to a count of files.",
-          "suggestion": "Dateien kopiert ({{count}})."
+          "description": "The English phrase 'Files copied' translates to 'Dateien kopiert' which is correct. However, the English phrase 'count' is kept in the translation instead of being translated.  It should ideally be localized for clarity and consistency.",
+          "suggestion": "Dateien kopiert ({{anzahl}})."
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Αντιγραφή αρχείων ({{count}}).' is a literal translation and could be improved for natural flow in Greek. A more idiomatic translation would be 'Αντιγράφηκαν αρχεία ({{count}}).' or 'Έγιναν αντιγραφές αρχείων ({{count}}).'",
+          "suggestion": "Αντιγράφηκαν αρχεία ({{count}})."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -89,9 +95,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ֆայլերը պատճենված են ({{count}}):' is a literal translation that doesn't quite flow naturally in Armenian. It implies that the files *have already* been copied, rather than indicating the count of files being copied.",
-          "suggestion": "Consider a more natural phrasing like: 'Պատճենվել են ֆայլեր ({{count}}):' or '{{count}} ֆայլ պատճենվել է:' (if singular is preferred) or 'Պատճենվում են ֆայլեր ({{count}}):' (if emphasizing the action of copying)."
+          "type": "formatting",
+          "description": "The colon at the end of the Armenian translation feels slightly unnatural in this context. It creates a sentence-like feel which might not be desired in a UI element.",
+          "suggestion": "Consider removing the colon: Ֆայլերը պատճենված են ({{count}})."
         }
       ],
       "approved_at": null
@@ -102,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Italian translation 'File copiati ({{count}}).' is grammatically incorrect. 'File' is masculine plural, but 'copiati' is past participle in masculine plural, implying that it should agree with a masculine plural noun. Since 'File' is plural, it needs to be 'Files' or 'Archivi'. The correct term for multiple files in this context is 'Archivi'. The gender agreement is also incorrect.",
-          "suggestion": "Archivi copiati ({{count}})."
+          "description": "The Italian translation uses the plural form \"File\" (Files) when the English uses the singular. Given the context of 'count', it implies a plural, but the singular \"File copiato ({{count}}).\" would be more accurate if only one file is being copied.",
+          "suggestion": "File copiato ({{count}})."
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເອກະສານຖືກສໍາເນົາ ({{count}}).\" is not the most natural way to express 'Files copied'. 'ຖືກສໍາເນົາ' implies 'was copied' and doesn't directly convey the action of copying. A more accurate translation would convey the act of copying.",
-          "suggestion": "ເອກະສານຄັດລອກ ({{count}})."
+          "description": "The Lao translation 'ເອກະສານຖືກສໍາເນົາ ({{count}}).' is a literal translation that doesn't flow naturally. 'ເອກະສານຖືກສໍາເນົາ' translates to 'documents are copied', which is not as concise as 'Files copied'.",
+          "suggestion": "ອ່ານເອກະສານ ({{count}})."
         }
       ],
       "approved_at": null
@@ -168,13 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation 'Fișiere au fost copiate ({{count}}).' is grammatically incorrect. The verb agreement is wrong. 'Fișiere' is plural, so the verb should be 'au fost copiate'. While technically understandable, it sounds unnatural.",
-          "suggestion": "Fișierele au fost copiate ({{count}})."
-        },
-        {
-          "type": "formatting",
-          "description": "The definite article 'le' is missing after 'Fișiere'.",
-          "suggestion": "Fișierele au fost copiate ({{count}})."
+          "description": "The Romanian translation 'Fișiere au fost copiate ({{count}}).' is grammatically incorrect. The verb conjugation 'au fost copiate' doesn't agree with 'Fișiere' which is plural. It should be 'Fișierele au fost copiate' or 'Fișierele copiate'.",
+          "suggestion": "Fișierele au fost copiate."
         }
       ],
       "approved_at": null
@@ -190,9 +191,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word ' පිටපත්' (pithapath) is technically correct for 'copied', but 'පිටපත් කරන ලදී' (pithapath karana ladi) is more natural and common usage in Sinhala for conveying 'files copied'.",
-          "suggestion": "ගොනු පිටපත් කරන ලදී ({{count}})."
+          "type": "incorrect_translation",
+          "description": "The translation 'ගොනු පිටපත් කරන ලදී ({{count}}).' while understandable, is a bit verbose and unnatural for a UI element indicating the number of files copied. A more concise and natural translation would be preferred.",
+          "suggestion": "ගොනු පිටපත්: ({{count}})."
         }
       ],
       "approved_at": null
@@ -203,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Súbory skopírované\" is a passive construction and sounds slightly unnatural in Slovak in this context. A more natural phrasing would indicate the action of copying.",
-          "suggestion": "Súbory boli skopírované ({{count}})."
+          "description": "The translation 'Súbory skopírované ({{count}}).' is a literal translation and sounds awkward in Slovak. A more natural phrasing would be 'Skopírované súbory ({{count}}).' or 'Zoskupené súbory ({{count}}).'",
+          "suggestion": "Skopírované súbory ({{count}})."
         }
       ],
       "approved_at": null
@@ -221,13 +222,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation uses the imperfect tense 'су копиране' which doesn't quite convey the completed action of copying files. It should be in the perfect tense.",
-          "suggestion": "Датотеке су копиране ({{count}}.) should be Датотеке копиране ({{count}})."
+          "description": "The verb form 'су копиране' is incorrect. It should agree with the subject 'Датотеке' (Files).",
+          "suggestion": "Датотеке су копиране should be Датотеке копиране."
         },
         {
           "type": "grammar",
-          "description": "The word order is slightly awkward. While understandable, a more natural phrasing would improve readability.",
-          "suggestion": "Consider rearranging the sentence to 'Копиране {{count}} датотека(и).' or 'Копирани су {{count}} датотеке.'"
+          "description": "The translation lacks the correct verb tense. The present tense is needed to describe an ongoing process.",
+          "suggestion": "A more accurate translation would use a past tense form that implies completion: Датотеке су копиране."
         }
       ],
       "approved_at": null
@@ -235,13 +236,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Datoteke su kopirane ({{count}}).\" is a passive construction. While grammatically correct, a more natural and active phrasing would improve the user experience. A more direct translation would be 'Kopirano datoteka ({{count}}).' or 'Kopirane datoteke ({{count}}).'",
-          "suggestion": "Kopirano datoteka ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

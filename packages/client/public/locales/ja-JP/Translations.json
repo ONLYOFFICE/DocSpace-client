@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "リストから選択する",
-  "ConnectingAccount": "接続アカウント",
-  "DeleteFromTrash": "選択された要素がゴミ箱から削除されました。",
   "FileLocked": "ロックされたファイル",
   "FileProtected": "このファイルはパスワードで保護されている",
   "FileUnlocked": "ロック削除されたファイル",
@@ -14,7 +12,6 @@
   "FolderTitleSkyDrive": "OneDriveディレクトリ",
   "FolderTitleWebDav": "WebDAVディレクトリ",
   "FolderTitleYandex": "Yandexディレクトリ",
-  "GuestReleaseTipDescripton": "以前に追加されたユーザーはすべてゲストとなり、{{productName}}管理者のみの連絡先リストで利用可能になりました。ゲストは、もはやどのグループにも属していません。必要に応じて、ゲストのタイプを変更し、グループに追加することができます。",
   "GuestReleaseTipLink": "ユーザーのタイプについて、さらに詳しく",
   "LinkHasExpiredAndHasBeenDisabled": "リンクは有効期限が切れたため無効になっています",
   "LinkValidTime": "このリンクは {{days_count}} 日間のみ有効です。",
@@ -28,14 +25,5 @@
   "ThirdPartyInfo": "第三者機関情報の変更",
   "ThirdPartyTitle": "サードパーティのサービス",
   "TitleShowActions": "ファイルアクションを表示",
-  "TitleShowFolderActions": "フォルダアクションを表示",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "フォルダアクションを表示"
 }

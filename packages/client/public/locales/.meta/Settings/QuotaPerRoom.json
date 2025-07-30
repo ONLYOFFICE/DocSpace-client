@@ -3,7 +3,7 @@
   "content": "Quota per room",
   "content_en_sha1_hash": "c6d44419e178bb95bb2e8d662bb28b6b56efd1ec",
   "created_at": "2025-05-19T21:30:52.338Z",
-  "updated_at": "2025-07-02T07:49:19.861Z",
+  "updated_at": "2025-05-26T07:57:32.792Z",
   "comment": {
     "text": "The translation key \"QuotaPerRoom\" represents the label for a quota setting related to room capacity in a storage management system. It is used as a title on a category page where users can set and manage quotas per room, typically in a portal settings interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 46,
+      "line_number": 47,
       "context": "};\n \n return (\n <StyledBaseQuotaComponent>\n <MobileCategoryWrapper\n title={t(\"QuotaPerRoom\")}\n onClickLink={onClickLink}\n url=\"portal-settings/management/disk-space/quota-per-room\"\n subtitle={t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 439,
+      "line_number": 432,
       "context": "{\n id: \"portal-settings_catalog-storageManagement_quota-per-room\",\n key: \"6-0-1\",\n icon: \"\",\n link: \"quota-per-room\",\n tKey: \"QuotaPerRoom\",\n },\n {\n id: \"portal-settings_catalog-storageManagement_quota-per-user\",\n key: \"6-0-2\",\n icon: \"\",",
       "module": "/packages/client"
     }
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Otaq üçün kvota' is a literal translation, a more natural and idiomatic Azerbaijani phrasing would be 'Otaqda olan kvota' or 'Otağa ayrılmış kvota'. 'İçin' can sometimes be awkward in this context.",
-          "suggestion": "Otaqda olan kvota"
+          "description": "While 'Otaq üçün kvota' is a literal translation, a more natural and common phrasing in Azerbaijani would be 'Otağa ayrılmış kvota' or 'Otaq başına kvota'. 'Üçün' can sound a bit awkward in this context.",
+          "suggestion": "Otağa ayrılmış kvota"
         }
       ],
       "approved_at": null
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Quote pro Zimmer\" doesn't accurately convey the meaning of \"Quota per room.\" \"Quota\" refers to a limited number or allowance, which is not captured by \"Quote\".",
+          "description": "The translation \"Quote pro Zimmer\" doesn't accurately convey the meaning of \"Quota per room\". \"Quota\" refers to a limited number or allocation, which isn't captured by \"Quote\".",
           "suggestion": "Kontingent pro Zimmer"
         }
       ],
@@ -102,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Quota pour la salle\" is a rather literal translation. A more natural and commonly used phrasing in French would be \"Quote par chambre\" or \"Nombre de places par chambre\". \"Salle\" refers to a large room, not necessarily a bedroom or a room in a hotel/accommodation setting.",
+          "description": "While \"Quota pour la salle\" is technically correct, it's not the most natural or idiomatic translation of \"Quota per room\" in French. It sounds a bit literal.",
           "suggestion": "Quota par chambre"
         }
       ],
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Քվոտա մեկ սենյակի համար' literally translates to 'Quota for one room'. While understandable, a more natural and accurate translation of 'Quota per room' would be something like 'մեկ սենյակում թույլատրելի քանակ' (mek senyagum tuyalatrel kanak) or 'սենյակային թույլատրելի քանակ' (senyakayin tuyalatrel kanak).",
-          "suggestion": "Consider 'մեկ սենյակում թույլատրելի քանակ' or 'սենյակային թույլատրելի քանակ'."
+          "description": "While technically correct, \"Քվոտա մեկ սենյակի համար\" (Kvota mek senyaki hamar) is a very literal translation. A more natural and common way to express 'Quota per room' in Armenian would be something like \"սենյակային քվոտա\" (senyakayin kvota) or \"քվոտա սենյակը համարյա\" (kvota senyaku hamar).",
+          "suggestion": "Consider \"սենյակային քվոտա\" (senyakayin kvota) or \"քվոտա սենյակը համարյա\" (kvota senyaku hamar)"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ルームあたりの容量制限' (ruumu atari no yuryou seisyo) translates more literally to 'capacity limit per room' rather than the intended meaning of 'Quota per room'. While not entirely wrong, it's a slightly less direct and potentially less clear translation for a setting label.",
-          "suggestion": "Consider alternatives like '部屋ごとの割り当て' (heya goto no wariate - allocation per room) or '部屋ごとの制限' (heya goto no seigen - limit per room) depending on the specific context of 'Quota'."
+          "description": "The translation \"ルームあたりの容量制限\" (Room-ata no yōryū seigen) doesn't accurately convey \"Quota per room.\" 'Quota' implies a defined limit or allocation, while '容量制限' (yōryū seigen) literally means 'capacity limit.' It's a related concept, but not a direct equivalent.",
+          "suggestion": "Consider alternatives like \"部屋ごとの割り当て上限\" (heya goto no wariatejō jōgen) - 'Allocation limit per room' or \"部屋ごとの利用制限\" (heya goto no riyō seigen) - 'Usage limit per room'."
         }
       ],
       "approved_at": null
@@ -165,13 +165,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Limit na pokój\" is understandable, \"Quota per room\" implies a defined number of items or spaces allocated to each room. \"Limit\" is more general. A more accurate translation might convey the allocation aspect.",
-          "suggestion": "Przydział na pokój"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -189,13 +183,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Cotă\" is a valid translation for \"Quota\", \"sală\" is more accurately \"room\" when referring to a physical space, as in a hotel or event venue. A more appropriate term for 'room' in this context might be 'cameră'.",
-          "suggestion": "Cotă per cameră"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -210,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරයකට සලාකය' does not accurately convey the meaning of 'Quota per room'. 'සලාකය' translates to 'salary' or 'allowance,' which is not the intended meaning. 'Quota' refers to a limited amount or number.",
-          "suggestion": "A more accurate translation would be something along the lines of 'කාමරයකට පනියම්' (kamarayak ta paniyam - quota) or 'කාමරයකට ඉඩ ප්‍රමාණය' (kamarayak ta ida pramaṇaya - amount per room)."
+          "description": "The Sinhala translation \"කාමරයකට සලාකය\" doesn't accurately convey the meaning of \"Quota per room.\" 'සලාකය' generally refers to a discount or reduction, not a quota or limit.",
+          "suggestion": "කාමරයකට පැනක් (Kamarayakata penak) - Meaning 'quota per room' or කාමරයකටgetMax සංඛ්‍යාව (Kamarayakata max sankyawā) - Meaning 'Maximum number per room'"
         }
       ],
       "approved_at": null
@@ -234,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Квота по соби' translates to 'Quota per room' but is not idiomatic Serbian. A more natural and accurate translation would be 'Квота по соби' (Kvota po sobi) or 'Дозвољена количина по соби' (Dozvoljena količina po sobi).",
-          "suggestion": "Consider using 'Квота по соби' or 'Дозвољена количина по соби'."
+          "description": "The Serbian translation \"Квота по соби\" is not the most accurate or natural translation of \"Quota per room.\" \"По соби\" literally means \"per room\" but doesn't convey the meaning of a limit or allocation. A more accurate translation would emphasize the concept of a quota or limit.",
+          "suggestion": "Consider \"Квота по соба\" or \"Дозвољена количина по соби\""
         }
       ],
       "approved_at": null
@@ -243,13 +231,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Kvota po sobi' is understandable, a more natural and accurate translation of 'Quota per room' in Serbian would be 'Kvota po prostoriji' or 'Kvota na sobu'. 'Soba' often implies a smaller, simpler room, whereas 'prostorija' is a more general term.",
-          "suggestion": "Kvota po prostoriji"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

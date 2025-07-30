@@ -56,8 +56,9 @@ const PluginItem = ({
   image,
   url,
 }: PluginItemProps) => {
-  const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
   const { t } = useTranslation(["Common"]);
+
+  const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
 
   const withSettings = scopes.includes(PluginScopes.Settings);
 

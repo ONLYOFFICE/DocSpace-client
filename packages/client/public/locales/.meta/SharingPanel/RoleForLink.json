@@ -3,7 +3,7 @@
   "content": "Role for link",
   "content_en_sha1_hash": "69c2c795dae8fa5a3e6f70b13ed8b5690d284d62",
   "created_at": "2025-05-19T21:30:50.253Z",
-  "updated_at": "2025-05-28T09:30:02.316Z",
+  "updated_at": "2025-05-26T07:57:32.347Z",
   "comment": {
     "text": "The \"RoleForLink\" translation key is used to display a brief description explaining how roles relate to links in an editing panel. It is typically displayed as a label or title and appears in the UI when editing link roles.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'الدور للرابط' literally translates to 'The role for the link.' While understandable, it might not be the most natural or idiomatic phrasing in Arabic. A more accurate or nuanced translation might be preferable depending on the intended meaning of 'Role for link'.",
-          "suggestion": "Consider alternatives like 'دور الربط' (Role of connection) or 'مسؤولية الربط' (Responsibility for the link), depending on the context."
+          "description": "The translation 'الدور للرابط' literally translates to 'The role for the link'. While understandable, a more natural and contextually appropriate translation for 'Role for link' (likely referring to a role assigned to a link) might be 'دور الرابط' (Role of the link) or 'دور مرتبط بالرابط' (Role associated with the link).",
+          "suggestion": "دور الرابط"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"링크에 대한 역할\" is too literal. A more natural Korean translation for 'Role for link' in a UI context would be something like \"링크 역할\" (Link Role) or \"링크 권한\" (Link Permission). \"링크에 대한 역할\" implies a more extensive description or relationship, not a simple label.",
-          "suggestion": "링크 역할"
+          "description": "The translation '링크에 대한 역할' is technically correct but sounds a bit formal and stiff for a UI element like 'Role for link'. It doesn't quite capture the intended meaning of a designated role or permission related to a link.",
+          "suggestion": "Consider '링크 역할' (Link Role) or '링크 권한' (Link Permission) for a more natural and concise translation, depending on the specific context of 'Role'."
         }
       ],
       "approved_at": null
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Rol pentru link-ul' includes an unnecessary definite article ('-ul').  'Rol pentru link' is more accurate and natural.",
-          "suggestion": "Rol pentru link"
+          "description": "The translation 'Rol pentru link-ul' is not the most natural Romanian translation for 'Role for link'. While technically correct, it's a bit clunky. 'Rol pentru legătură' is a better option.",
+          "suggestion": "Rol pentru legătură"
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"මුද්දරයක් සඳහා භූමිකාව\" (mudderayak saha bhoomikav) literally translates to \"Role for a stamp.\" While 'link' and 'stamp' can sometimes be conceptually related, they are not direct equivalents in this context. 'Role for link' likely refers to a permission or responsibility associated with a link, not a physical stamp.",
-          "suggestion": "A more accurate translation might be something like \"සබැඳිය සඳහා වන භූමිකාව\" (sabandiya saha bhoomikav) which translates to 'Role for a link'."
+          "description": "The translation \"මුද්දරයක් සඳහා භූමිකාව\" (muddayak sarata bhoomikava) literally translates to \"Role for a stamp\". The English term 'link' refers to a hyperlink, not a stamp. The translation doesn't convey the intended meaning.",
+          "suggestion": "A more accurate translation would depend on the specific context. Possible suggestions include: 'සබැඳිය සඳහා භූමිකාව' (sabandiya sarata bhoomikava - Role for a link), or 'සංදේශය සඳහා භූමිකාව' (sandesa sarata bhoomikava - Role for a message/reference)."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Улога за линк\" is a literal translation, \"Role for link\" often implies a permission or access level associated with a link. A more accurate translation might be 'Uloga pristupa za vezu' or 'Uloga za povezivanje'.",
-          "suggestion": "Улога за повезивање"
+          "description": "While \"Улога за линк\" is technically a translation, it's not the most natural or idiomatic Serbian (Cyrillic) phrasing for \"Role for link\". \"Улога за везу\" would be more common and accurate, as 'link' is often translated as 'veza' in this context.",
+          "suggestion": "Улога за везу"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Uloga za link' is not an accurate translation of 'Role for link'. 'Uloga' translates to 'role' but the construction feels awkward. A more natural translation would be 'Uloga za vezu' or 'Veza za ulogu'.",
-          "suggestion": "Consider 'Uloga za vezu' or 'Veza za ulogu'."
+          "description": "The translation 'Uloga za link' doesn't accurately convey the meaning of 'Role for link'. 'Uloga' typically means 'role' or 'part' in a theatrical or film context. A more accurate translation would be 'Uloga vezana za link' or 'Namjena za link' depending on the intended meaning.",
+          "suggestion": "Consider 'Uloga vezana za link' or 'Namjena za link'."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '链接的权限' (lianjie de quanzhan) is understandable, it's a somewhat literal translation. 'Role for link' implies the *role assigned to a link*, not the permission *of* a link. A better translation would convey the link's function or designation.",
-          "suggestion": "Consider alternatives like '链接角色' (lianjie juese - link role) or '链接用途' (lianjie yongtu - link purpose) depending on the intended meaning.  Without more context, it's difficult to provide a definitive best translation."
+          "description": "The translation \"链接的权限\" is technically correct but might be too formal or literal for a user interface element. \"链接的权限\" translates to 'Permissions for the link'. A more natural phrasing might be '链接角色' (Link Role) or '链接访问权限' (Link Access Permission).",
+          "suggestion": "Consider '链接角色' or '链接访问权限' for a more natural feel. Context is important to determine the best alternative."
         }
       ],
       "approved_at": null

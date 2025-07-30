@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext, useRef, useEffect } from "react";
+import { use, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -39,7 +39,7 @@ import {
   RoomTile,
   TemplateTile,
 } from "@docspace/shared/components/tiles";
-import SpaceQuota from "@docspace/client/src/components/SpaceQuota";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 import FilesTileContent from "./FilesTileContent";
@@ -102,7 +102,7 @@ const FileTile = (props) => {
 
   const tileRef = useRef(null);
 
-  const { columnCount, thumbSize } = useContext(FileTileContext);
+  const { columnCount, thumbSize } = use(FileTileContext);
 
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;

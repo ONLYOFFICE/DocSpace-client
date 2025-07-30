@@ -3,7 +3,7 @@
   "content": "members: {{count}}",
   "content_en_sha1_hash": "6cf3172711c139cbfb9cbe7c811d95b0ae2e47e7",
   "created_at": "2025-05-19T21:30:53.482Z",
-  "updated_at": "2025-05-28T09:30:02.416Z",
+  "updated_at": "2025-05-26T07:57:32.409Z",
   "comment": {
     "text": "This translation key displays the number of members for a specific group. It is used to populate a dynamic count in various UI elements throughout the application, including an info panel and row views in a contacts body section. Translators should provide a value that represents the total number of people in the specified group.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon and space after \"sayı\" should be a non-breaking space (&#8203;) to prevent word breaks.",
-          "suggestion": "üzv sayı&#8203;: {{count}}"
+          "description": "The colon and space after 'sayı' are inconsistent with typical Azerbaijani sentence structure. While not strictly incorrect, it reads slightly awkwardly.",
+          "suggestion": "üzv sayı: {{count}}"
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'člani:' appears to be Croatian, not Sinhala. 'Člani' means 'members' in Croatian. The correct Sinhala translation for 'members' is 'sadasata' or 'kaalakaaruw'.",
-          "suggestion": "Replace 'člani:' with 'sadasata:' or 'kaalakaaruw:'"
+          "description": "The Sinhala translation 'člani:' appears to be a misspelling or a borrowing from another Slavic language (e.g., Croatian). The correct Sinhala word for 'members' is 'sadas katayama'.",
+          "suggestion": "sadas katayama"
         }
       ],
       "approved_at": null
@@ -195,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a colon (:) after 'članovi'. The English original also uses a colon. While not strictly incorrect, it's important to maintain consistency.",
+          "suggestion": "Consider whether the colon is necessary in Serbian. If not, remove it. If required, ensure consistency with other instances."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

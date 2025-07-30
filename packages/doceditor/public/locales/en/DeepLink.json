@@ -1,6 +1,6 @@
 {
-  "DeepLinkText": "You can open the document on the portal or in the mobile application",
   "DeepLinkOnlyAppText": "You can open the document only in the mobile application",
+  "DeepLinkText": "You can open the document on the portal or in the mobile application",
   "DownloadApp": "Download the app",
   "OpenInApp": "Open in the app",
   "OpeningDocument": "Opening a document",

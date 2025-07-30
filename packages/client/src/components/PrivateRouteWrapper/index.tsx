@@ -87,7 +87,7 @@ const PrivateRouteWrapper = ({
       isLoadedPublicRoom={isLoadedPublicRoom}
       isLoadingPublicRoom={isLoadingPublicRoom}
       limitedAccessDevToolsForUsers={limitedAccessDevToolsForUsers!}
-      standalone={standalone}
+      standalone={standalone!}
     >
       {children}
     </PrivateRoute>

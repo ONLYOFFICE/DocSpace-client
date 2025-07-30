@@ -30,10 +30,13 @@ import { NoEmailUsersProps } from "../types";
 export const NoEmailUsersBlock = ({ t, users }: NoEmailUsersProps) => {
   return (
     <p className="users-without-email">
-      <Trans t={t} ns="Settings" i18nKey="AccountsWithoutEmails">
-        We found <b>{{ users }} users</b> without emails. You can fill their
-        emails or continue without this action.
-      </Trans>
+      <Trans
+        t={t}
+        ns="Settings"
+        i18nKey="AccountsWithoutEmails"
+        values={{ users }}
+        components={{ 1: <b /> }}
+      />
     </p>
   );
 };

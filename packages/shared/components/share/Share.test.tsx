@@ -138,6 +138,7 @@ describe("Share component", () => {
       viewUrl: "https://example.com/view",
       webUrl: "https://example.com/web",
       fileEntryType: 1,
+      shortWebUrl: "",
     },
   });
 

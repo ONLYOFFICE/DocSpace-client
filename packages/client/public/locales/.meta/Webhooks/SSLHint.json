@@ -3,7 +3,7 @@
   "content": "By default, we verify SSL certificates when delivering payloads.",
   "content_en_sha1_hash": "0afd5e4ab7ae93de7936a9d59a2a22f51787a7b0",
   "created_at": "2025-05-19T21:30:49.842Z",
-  "updated_at": "2025-05-21T00:55:45.818Z",
+  "updated_at": "2025-05-24T02:09:50.393Z",
   "comment": {
     "text": "This translation key is used to describe the default SSL certificate verification process. It appears as a tooltip on a button in a UI element and helps users understand what this feature does.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"faydalı mübadilə yüklərini\" (beneficial exchange loads) is not the best translation for \"payloads.\" \"Payload\" has a specific technical meaning in this context.",
-          "suggestion": "Consider using a more precise term for \"payloads,\" such as \"son məzmunu\" (final content) or \"paketləri\" (packages) depending on the specific technical context.  A more natural phrasing might be \"son məzmunu ötürürkən\" (while transmitting the final content)."
+          "description": "The translation of \"payloads\" as \"faydalı mübadilə yüklərini\" is not ideal. \"Payloads\" in this context refers to data being transmitted. A better translation would convey that meaning.",
+          "suggestion": "Qeyri-məlum məlumat paketləri"
         },
         {
-          "type": "grammatical",
-          "description": "The sentence \"Qiyabi olaraq, faydalı mübadilə yüklərini çatdırarkən SSL sertifikatlarını yoxlayırıq.\" is somewhat awkward. While technically correct, it's not a very fluid sentence.",
-          "suggestion": "Rephrase to something like: \"SSL sertifikatlarını yoxlayırıq, son məzmunu çatdırarkən\" or \"Son məzmunu çatdırarkən SSL sertifikatlarının etibarlılığını yoxlayırıq.\""
+          "type": "incorrect_translation",
+          "description": "“Çatdırarkən” is a bit clunky. A more natural way to say it would be more concise.",
+          "suggestion": "göndərkən"
         }
       ],
       "approved_at": null
@@ -59,8 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'payloads' is translated as 'užitečných souborů' which means 'useful files'. While not entirely wrong, 'payloads' in this context refers to the data being transmitted. A more accurate translation would be 'dat' or 'zpráv' (messages).",
-          "suggestion": "Ve výchozím nastavení ověřujeme certifikáty SSL při doručování dat."
+          "description": "The term 'payloads' is translated as 'užitečných souborů' which means 'useful files'. While technically accurate, 'payload' has a more specific meaning in a technical context, referring to the data being sent. A more accurate translation would convey this technical meaning.",
+          "suggestion": "Consider using a more technical term like 'datových paketů' (data packets) or 'zpráv' (messages) depending on the precise context. Alternatively, leaving 'payload' untranslated might be best if the audience is technically savvy."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly an error, it would be beneficial to consider if the Czech sentence flows as naturally as the English one.  The word order could be adjusted for better readability in Czech.",
+          "suggestion": "Experiment with rephrasing for improved flow. For example, 'Výchozí nastavení zahrnuje ověřování SSL certifikátů při doručování.' "
         }
       ],
       "approved_at": null
@@ -68,13 +73,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'payloads' doesn't have a direct, perfectly equivalent translation in German. 'Nutzdaten' is a reasonable approximation, but 'Payloads' in this context often refers to the data being sent, and 'Datenpakete' or 'Datenübertragungen' could be considered more precise depending on the overall technical context. 'Nutzdaten' is a good starting point, but might benefit from review to ensure it best represents the intended meaning.",
-          "suggestion": "Consider 'Datenpakete' or 'Datenübertragungen' as potential alternatives to 'Nutzdaten', especially if referring to discrete data units being sent."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -95,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'payloads' is not accurately conveyed by 'tietosisältöjä'. 'Payloads' refers to the data being sent, and 'tietosisältöjä' translates to 'data content' which is a bit too broad. A more accurate translation might be something like 'lähetysten' (shipments/transmissions) or 'datapakettien' (data packages).",
-          "suggestion": "Consider 'lähetysten' or 'datapakettien' to more accurately represent 'payloads'."
+          "description": "The translation 'tietosisältöjä toimitettaessa' is a bit clunky and doesn't flow as naturally as it could. 'Payloads' refers to data being sent, and the translation is overly literal.  A more natural phrasing would be better.",
+          "suggestion": "Varmennamme SSL-sertifikaatit oletuksena, kun lähetämme tietoja."
         }
       ],
       "approved_at": null
@@ -113,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'օգտակար բեռներ առաքելիս' (while delivering useful payloads) is not the most natural or precise translation of 'delivering payloads.' A more accurate and common phrasing would be 'վճարումներ առաքելիս' (while delivering payments) or 'ծանուցումներ առաքելիս' (while delivering notifications), depending on the context. 'Payload' in this context typically refers to data transmitted, often related to payments or notifications in webhook scenarios.",
-          "suggestion": "Վճարումներ առաքելիս"
+          "description": "The phrase 'payloads' is best translated as 'բեռներ', which is already present, but the overall phrasing 'օգտակար բեռներ առաքելիս' is a bit awkward. A more natural phrasing would be 'բեռներ առաքելիս'.",
+          "suggestion": "բեռներ առաքելիս"
         }
       ],
       "approved_at": null
@@ -140,13 +139,25 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'payloads' is transliterated as 'payloads' which is acceptable, but potentially could be replaced with a more Laotian equivalent depending on the intended audience and technical context. However, for direct technical accuracy, keeping the English term is fine.",
+          "suggestion": "Consider using a Laotian equivalent if appropriate for the target audience, otherwise keep 'payloads'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'lietderīgo slodzi' translates to 'payload' but sounds somewhat clunky and formal in Latvian. A more natural phrasing would be 'datus' or 'informāciju'.",
+          "suggestion": "Pēc noklusējuma mēs pārbaudām SSL sertifikātus, piegādājot datus."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -161,7 +172,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'podczas dostarczania danych właściwych' is not the most natural way to express 'when delivering payloads'. 'Payload' typically refers to the data being transmitted, not 'właściwych danych'.",
+          "description": "The translation 'podczas dostarczania danych właściwych' is overly literal and slightly awkward. 'Danych właściwych' implies 'proper data' which is not the intended meaning. The word 'payload' refers to the data being sent, not necessarily 'proper data'.",
+          "suggestion": "Domyślnie weryfikujemy certyfikaty SSL podczas przesyłania danych."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'przesyłania' (sending) is a more natural and concise way to describe the delivery of payloads in this context than 'dostarczania'.",
           "suggestion": "Domyślnie weryfikujemy certyfikaty SSL podczas przesyłania danych."
         }
       ],
@@ -173,8 +189,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'cargas' (cargoes/loads) doesn't accurately convey the meaning of 'payloads' in a technical context like webhooks. 'Payloads' refers to the data being transmitted.",
-          "suggestion": "Por padrão, verificamos os certificados SSL ao entregar dados (or pacotes de dados)."
+          "description": "The word 'cargas' (cargoes) doesn't accurately convey the meaning of 'payloads' in the context of webhooks. 'Payloads' refers to the data being sent, not physical cargo.",
+          "suggestion": "Por padrão, verificamos os certificados SSL ao entregar dados."
         }
       ],
       "approved_at": null
@@ -185,8 +201,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'cargas' (cargoes) doesn't accurately convey the meaning of 'payloads' in this context. 'Payloads' refers to the data being transmitted, not physical cargo.",
-          "suggestion": "Por padrão, verificamos os certificados SSL ao entregar dados."
+          "description": "The term 'cargas' translates to 'loads' or 'cargoes' and doesn't accurately convey the meaning of 'payloads' in a technical context. 'Payloads' refers to the data being transmitted.",
+          "suggestion": "Por padrão, verificamos os certificados SSL ao entregar pacotes de dados."
         }
       ],
       "approved_at": null
@@ -197,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'în timpul livrării de sarcină' is a bit literal and not the most natural Romanian phrasing for 'when delivering payloads'. It can be improved for better flow and clarity.",
-          "suggestion": "În mod implicit, certificatele SSL sunt verificate la livrarea payload-urilor."
+          "description": "The term 'sarcină' translates to 'task' or 'payload' in this context, but it sounds overly technical and less natural in Romanian. 'Payload' would be more accurate and commonly understood.",
+          "suggestion": "În mod implicit, certificate SSL sunt verificate în timpul livrării payload-ului."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, using the English loanword 'payload-uri' instead of a Romanian equivalent might sound less professional in certain contexts. Consider if a native speaker would commonly use it.",
-          "suggestion": "Consider alternatives to 'payload-uri' if a more Romanian phrasing is desired, such as 'datelor' or 'sarcinilor'."
+          "description": "While not strictly incorrect, 'payload-ului' looks better with a hyphen, especially when used in this context.",
+          "suggestion": "În mod implicit, certificate SSL sunt verificate în timpul livrării payload-ului."
         }
       ],
       "approved_at": null
@@ -220,13 +236,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'payloads' is misspelled. It should be 'payload'.",
-          "suggestion": "payload"
+          "description": "The word 'payloads' is transliterated as 'payloads'. While understandable, it's preferable to use a more consistent Sinhala equivalent, or leave it as 'payloads' if a direct equivalent is not suitable.  Consider 'ගබඩාຂໍ້ມູນ' (gabada dathuma) or similar depending on context.",
+          "suggestion": "Consider using 'ගබඩාຂໍ້ມູນ' or leaving 'payloads' as is."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'පෙරනිමි පරිදි අපි payloads බාරදීමේ දී SSL සහතික සත්‍යාපනය කරන්නෙමු.' can be improved for better flow. A more natural phrasing might be 'සාමාන්‍යයෙන්, අපි payloads බාරදී SSL සහතික සත්‍යාපනය කරමු.'",
-          "suggestion": "සාමාන්‍යයෙන්, අපි payloads බාරදී SSL සහතික සත්‍යාපනය කරමු."
+          "description": "While not strictly incorrect, the sentence structure 'පෙරනිමි පරිදි අපි payloads බාරදීමේ දී SSL සහතික සත්‍යාපනය කරන්නෙමු' is slightly awkward. A more natural phrasing would improve readability. Specifically, the placement of 'අපි' (we) could be adjusted.",
+          "suggestion": "Consider restructuring to something like 'පෙරනිමි පරිදි, payloads බාරදීමේ දී අපි SSL සහතික සත්‍යාපනය කරන්නෙමු' or 'පෙරනිමි පරිදි SSL සහතික සත්‍යාපනය කරමින් payloads බාරදෙමු'."
         }
       ],
       "approved_at": null
@@ -237,8 +253,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"overujeme certifikáty SSL pri doručovaní dátového obsahu\" is not the most natural or precise translation of \"we verify SSL certificates when delivering payloads.\" 'Dátového obsahu' is overly formal and less clear than alternatives. A more accurate and natural translation would emphasize the delivery of payloads.",
-          "suggestion": "V predvolenom nastavení overujeme certifikáty SSL pri doručovaní dát."
+          "description": "The translation 'overujeme certifikáty SSL pri doručovaní dátového obsahu' is a bit clunky. 'Dátový obsah' (data content) is not the most natural way to describe payloads in this context. 'Payload' itself is often used in technical Slovak and would improve clarity.",
+          "suggestion": "V predvolenom nastavení overujeme certifikáty SSL pri doručovaní payloadov."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'overujeme' is grammatically correct, 'ověrujeme' might be slightly better stylistically in this context. It's a more common verb for verifying security-related items.",
+          "suggestion": "V predvolenom nastavení ověřujeme certifikáty SSL pri doručovaní payloadov."
         }
       ],
       "approved_at": null
@@ -249,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Privzeto preverjamo potrdila SSL, ko dostavljamo uporabne podatke' is a literal translation but might not be the most natural way to express the meaning in Slovenian. \"Payloads\" are often referred to more broadly as \"podatki\" or 'signale' depending on the context, or a more descriptive phrase could be used.",
-          "suggestion": "Privzeto preverjamo SSL potrdila ob dostavi podatkov. Or: Privzeto preverjamo SSL potrdila pri dostavi informacij."
+          "description": "The phrase 'payloads' is translated as 'uporabne podatke'. While technically correct, 'uporabne podatke' is quite broad. 'Payload' in this context refers to the data being sent via the webhook, and a more precise translation might be 'paket podatkov' or 'obremenitve' depending on the desired technical level.",
+          "suggestion": "Consider 'paket podatkov' or 'obremenitve' for a more accurate translation of 'payloads'."
         }
       ],
       "approved_at": null
@@ -261,13 +282,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Подразумевано, проверавамо SSL сертификате приликом достављања payload-а\" doesn't accurately convey the meaning of \"By default, we verify SSL certificates when delivering payloads.\" \"Подразумевано\" (Implied/Assumed) is not a good equivalent for \"By default\". It suggests something is assumed, not that it's the standard setting.",
-          "suggestion": "По дефолту, верификујемо SSL сертификате приликом достављања payload-а."
+          "description": "The translation \"Подразумевано, проверавамо SSL сертификате приликом достављања payload-а\" isn't the most accurate representation of \"By default, we verify SSL certificates when delivering payloads.\" \"Подразумевано\" (Implied/Assumed) isn't the best fit for 'By default'.",
+          "suggestion": "Default behavior is better conveyed with something like \"Као подразумевано, проверавамо SSL сертификате приликом достављања payload-а\" or \"Подразбирено, проверавамо SSL сертификате приликом достављања payload-а.\""
         },
         {
           "type": "formatting",
-          "description": "The Serbian translation uses a Cyrillic word 'payload-а' which doesn't consistently follow standard transliteration practices. While understood, it's better to use a more consistent transliteration.",
-          "suggestion": "По дефолту, верификујемо SSL сертификате приликом достављања пејлоад-а."
+          "description": "The word 'payload-а' is awkward and doesn't flow naturally in Serbian. While technically correct, it can be improved.",
+          "suggestion": "Consider rephrasing to avoid the direct transliteration of 'payload'. Perhaps something like 'приликом слања података' (when sending data) could be used, depending on the overall context."
         }
       ],
       "approved_at": null
@@ -290,8 +311,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'доставлення корисного навантаження' is a bit clunky. While technically correct, 'доставці корисного навантаження' or 'передачі корисного навантаження' would sound more natural in Ukrainian.",
-          "suggestion": "За замовчуванням сертифікати SSL перевіряються під час доставці корисного навантаження / За замовчуванням сертифікати SSL перевіряються під час передачі корисного навантаження."
+          "description": "The translation \"доставлення корисного навантаження\" is overly literal and not the most natural way to express 'delivering payloads' in Ukrainian. While technically correct, it sounds somewhat awkward. A more natural phrasing would be 'під час передачі даних' or 'при надсиланні даних'.",
+          "suggestion": "Під час передачі даних"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Provide a URL link to your Privacy Policy that must comply with applicable laws and regulations and that make clear how you collect, use, share, retain and otherwise process personal information.",
   "content_en_sha1_hash": "8a0b945b9b9a7a24addebe0cf989ca3c10d7cee9",
   "created_at": "2025-05-19T21:30:53.975Z",
-  "updated_at": "2025-05-21T07:06:18.122Z",
+  "updated_at": "2025-05-24T07:20:28.767Z",
   "comment": {
     "text": "This translation key is used to display a help message or error notification when a user tries to submit a Privacy Policy URL that does not comply with applicable laws and regulations. The text appears as a button in a form, providing users with information on what is required for the correct submission. Translators should focus on conveying a clear explanation of the necessary requirements for the Privacy Policy URL.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses \"الخاصة بك\" (al-khassa bik) which implies 'your' specifically owned by you. While technically correct, it's a bit more possessive than the original English which simply asks for 'a' Privacy Policy. A more neutral translation would improve clarity.",
-          "suggestion": "يرجى توفير رابط لسياسة الخصوصية التي يجب أن تتوافق مع القوانين واللوائح المعمول بها وتوضح كيف تجمع وتستخدم وتشارك وتحتفظ وتعالج المعلومات الشخصية."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -41,14 +35,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Məxfilik' is spelled correctly, but it would be more commonly understood as 'Gizlilik' in this context, as 'Məxfilik' leans towards 'confidentiality' rather than 'privacy'.",
-          "suggestion": "Gizlilik Siyasətinizə"
+          "type": "formatting",
+          "description": "The phrase 'URL linki' is slightly redundant. 'URL' itself implies a link.",
+          "suggestion": "URL-ünüzü təqdim edin."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'aydın şəkildə ifadə edən' is a bit clunky. While grammatically correct, it can be improved for natural flow.",
-          "suggestion": "ifadə edən"
+          "description": "The phrase 'başqa üsullarla emal etdiyinizi' could be more concise. 'başqa üsullarla' implies 'other methods', but 'otherwise process' is already captured in the previous phrases.",
+          "suggestion": "başqa şəkildə emal etdiyinizi"
         }
       ],
       "approved_at": null
@@ -98,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \" համօգտագործում\" (hamoqtagordum) is an unusual and potentially inaccurate translation of 'share'. A more standard translation would be 'բաժանում' (bajanum) or 'համերկրորդում' (hamerkordum).",
+          "suggestion": "Տրամադրեք URL-ի հղում ձեր Գաղտնիության Քաղաքականության, որը պետք է համապատասխանի գործող օրենքներին և կանոնակարգերին, և որը պարզաբանում է, թե ինչպես եք հավաքում, օգտագործում, բաժանում/համերկրորդում, պահպանում և այլ կերպ մշակում անձնական տվյալները:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -131,8 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'vietrādes' is not the best translation for 'Provide'. It implies a broader offering or a 'full-fledged' option, which isn't necessary here. A more direct translation like 'Norādiet' is sufficient.",
-          "suggestion": "Norādiet URL saiti uz savu konfidencialitātes politiku..."
+          "description": "The word 'vietrādes' (shortcut) is not appropriate in this context. It implies a quick link or icon, but the English text refers to a full URL.",
+          "suggestion": "Replace 'vietrādes' with 'pilnu' (full) or remove it completely."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'konfidencialitātes politiku' is correct but could potentially be slightly more natural as 'privātuma politiku'.",
+          "suggestion": "Consider using 'privātuma politiku' instead of 'konfidencialitātes politiku'."
         }
       ],
       "approved_at": null
@@ -166,14 +171,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase \"politicii dvs de confidențialitate\" should have a space before \"de\".",
-          "suggestion": "politicii dvs. de confidențialitate"
+          "type": "spelling",
+          "description": "The word 'compatibilă' should be 'conformă'. 'Compatibilă' means 'compatible,' while 'conformă' means 'compliant,' which is more appropriate in this context.",
+          "suggestion": "Furnizați un link către adresa URL a politicii dvs de confidențialitate care trebuie să fie conformă cu legea și normele aplicabile..."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'otherwise process' is translated as 'prelucrare în alt mod'. While not entirely wrong, it's slightly clunky. A more natural translation would be 'sau procesați'.",
-          "suggestion": "Furnizați un link către adresa URL a politicii dvs. de confidențialitate care trebuie să fie compatibilă cu legea și normele aplicabile și care clarifică modul de colectare, utilizare, partajare, păstrare sau procesați datele personale."
+          "type": "grammar",
+          "description": "The phrase 'în alt mod prelucrare' is grammatically awkward.  It needs restructuring for better flow.",
+          "suggestion": "Furnizați un link către adresa URL a politicii dvs de confidențialitate care trebuie să fie conformă cu legea și normele aplicabile și care clarifică modul de colectare, utilizare, partajare, păstrare și alte prelucrări datele personale."
         }
       ],
       "approved_at": null
@@ -190,13 +195,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Provide a URL link\" is not as clear as the original English. 'URL ලිපිනයක් ලබා දෙන්න' is literal but could be improved for natural flow in Sinhala. A more natural phrasing could be 'URL සබැඳියක් ලබා දෙන්න' or 'URL ඈමුණුමක් ලබා දෙන්න'.",
-          "suggestion": "URL සබැඳියක් ලබා දෙන්න"
+          "description": "The phrase \"ඔබේ පුද්ගලිකත්ව ප්‍රතිපත්ති සඳහා වන URL ලිපිනයක් ලබා දෙන්න\" (Obei pugganikavathivati pathipaththi samaga vana URL lipiyanek gavan denna) translates to 'Provide a URL address for your privacy policy'. While technically correct, it's a bit clunky. A more natural phrasing would be something like 'ඔබේ පුද්ගලිකත්ව ප්‍රතිපත්ති URL එක ලබා දෙන්න' (Obei pugganikavathivati pathipaththi URL ek gavan denna).",
+          "suggestion": "ඔබේ පුද්ගලිකත්ව ප්‍රතිපත්ති URL එක ලබා දෙන්න"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'otherwise process' is translated as 'වෙනත් ආකාරයෙන් ක්‍රියාවලිය කරන්නේ'.  While technically correct, it can be simplified to 'භාවිතා කරන්නේ' as it encompasses the essence of 'otherwise process' in this context.",
-          "suggestion": "භාවිතා කරන්නේ"
+          "description": "The phrase \"විශේෂයෙන් ක්‍රියාවලිය කරන්නේ කෙසේදැයි\" (visheshayan kriyavaliye karanne kesedayi) is a slightly awkward translation of \"otherwise process.\"  A better phrase to convey the meaning is something like 'හා වෙනත් ආකාරයෙන් හැසිරවන්නේ'.",
+          "suggestion": "හා වෙනත් ආකාරයෙන් හැසිරවන්නේ"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is quite long and could be broken into smaller sentences for better readability in Sinhala.  Long sentences are less common and can be harder to understand.",
+          "suggestion": "Consider breaking the single sentence into two or three shorter sentences."
         }
       ],
       "approved_at": null
@@ -219,13 +229,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Пружите' (Pruzite) translates to 'Provide' in a commanding way, but the English text is a suggestion, not a directive. It would be better to use a softer verb.",
-          "suggestion": "Suggest using 'Наведите' (Navedite) which means 'Indicate' or 'Provide' in a less commanding way."
+          "description": "The word \"Пружите\" (Pruzite) translates to \"Provide\" but in this context, a more appropriate word would be \"Navedite\" (Specify) or \"Unesite\" (Enter). \"Provide\" implies actively giving something, while here it's more about listing or including.",
+          "suggestion": "Navedite URL линк ка својој Политици приватности..."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The use of 'ка својој' (ka svojoj) is slightly awkward and not the most natural phrasing. It implies possession.",
-          "suggestion": "Consider revising to 'за своју' (za svoju) which is more commonly used in this context.  The entire phrase could become 'за своју Политику приватности' (za svoju Politiku privatnosti)."
+          "type": "spelling",
+          "description": "While not strictly incorrect, using \"која мора бити у складу са важећим законима и прописима\" is a bit verbose.  \"У складу са важећим законима и прописима\" could be shortened to \"у складу са законским прописима\" without significant loss of meaning.",
+          "suggestion": "која мора бити у складу са законским прописима"
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of the word 'лично' (personal) can be slightly clunky.  While technically correct, consider if it can be streamlined without sacrificing clarity.",
+          "suggestion": "која јасно објашњава како прикупљате, користите, делите, задржавате и обрађујете личне податке."
         }
       ],
       "approved_at": null
@@ -248,13 +263,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Provide a URL link' is not fully captured by 'Надайте URL-адресу'. While 'Надайте URL-адресу' is correct, a slightly more literal and clearer translation would be 'Вкажіть URL-адресу' or 'Зазначте URL-адресу'.",
-          "suggestion": "Вкажіть URL-адресу вашої Політики конфіденційності"
+          "description": "The English phrase \"Provide a URL link\" is not fully captured in the Ukrainian translation. \"Надайте URL-адресу\" is correct, but the \"link\" aspect is lost.",
+          "suggestion": "Надайте URL-адресу посилання на вашу Політику конфіденційності"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English 'share' is translated as 'надаєте'. While 'надаєте' can mean 'provide', in the context of sharing data, 'розкриваєте' or 'поширюєте' would be more accurate.",
-          "suggestion": "Надайте URL-адресу вашої Політики конфіденційності, в якій пояснюється, як ви збираєте, використовуєте, розкриваєте, зберігаєте та іншим чином обробляєте персональну інформацію."
+          "description": "The English word \"share\" is translated as \"надаєте\". While accurate, a more natural Ukrainian translation might emphasize providing access rather than simply handing over.",
+          "suggestion": "Надайте URL-адресу вашої Політики конфіденційності, в якій пояснюється, як ви збираєте, використовуєте, надаєте доступ, зберігаєте та іншим чином обробляєте персональну інформацію."
         }
       ],
       "approved_at": null

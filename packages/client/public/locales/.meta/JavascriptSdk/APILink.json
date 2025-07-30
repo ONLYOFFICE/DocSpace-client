@@ -3,7 +3,7 @@
   "content": "API library",
   "content_en_sha1_hash": "2e8c30c46ac47f76494735b3d24e32dd53045866",
   "created_at": "2025-05-19T21:30:54.365Z",
-  "updated_at": "2025-05-21T09:31:31.686Z",
+  "updated_at": "2025-05-24T09:43:41.953Z",
   "comment": {
     "text": "The \"APILink\" translation key is used to display the English label for a button that links to an API library. In the provided code snippet, it appears as part of a Link component within a CategoryDescription element.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation 'knihovny API' is technically correct but could be improved for better flow and common usage. While 'API' is often used as-is, translating it to 'rozhraní API' or 'API rozhraní' would be more natural in many contexts.",
-          "suggestion": "Consider 'rozhraní API' or 'API rozhraní' for a more natural and common usage."
+          "description": "The translation \"knihovny API\" is technically correct but could be improved for naturalness in Czech. \"API knihovna\" is more common and flows better.",
+          "suggestion": "API knihovna"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"la biblioteca de API\" is not the most natural-sounding translation. The article 'la' is redundant as 'API' is often treated as an acronym and doesn't inherently require an article.",
-          "suggestion": "biblioteca API"
+          "description": "The translation 'la biblioteca de API' is not the most natural or accurate translation of 'API library'. While technically correct, it's a literal translation that lacks fluency. A more natural Spanish equivalent would be 'biblioteca de APIs' or 'biblioteca para APIs'.",
+          "suggestion": "biblioteca de APIs"
         }
       ],
       "approved_at": null
@@ -90,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"bibliothèque de l'API\" is understandable, a more idiomatic and standard translation for \"API library\" would be \"bibliothèque API\". The preposition 'de' isn't necessary in this context.",
+          "description": "While \"bibliothèque de l'API\" is understandable, a more natural and idiomatic translation of \"API library\" in French would be \"bibliothèque API\". The 'de' can sound clunky.",
           "suggestion": "bibliothèque API"
         }
       ],
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫ້ອງສະໝຸດ API\" literally translates to 'API library'. While understandable, 'API library' in English already means 'API library'. A more direct and idiomatic translation would be better. Considering the context of a Javascript SDK, 'API' itself is often understood, or a more descriptive phrase emphasizing its function would be preferable.",
-          "suggestion": "Consider alternatives like \"ຕົວເຊື່ອມຕໍ່ API\" (API connector), \"ການເຊື່ອມຕໍ່ API\" (API connection), or simply \"API\" if the audience is technically proficient."
+          "description": "While \"ຫ້ອງສະໝຸດ\" (hong sa-mut) literally translates to 'library', in the context of a Javascript SDK, 'API library' should be more accurately translated to something like 'ຊຸດຫ້ອງສະໝຸດ API' (chut hong sa-mut API) or 'ສະບຽງຂໍ້ມູນ API' (sabaeng khomun API).  'ຫ້ອງສະໝຸດ' implies a collection, which isn't the primary meaning here.",
+          "suggestion": "Consider 'ຊຸດຫ້ອງສະໝຸດ API' or 'ສະບຽງຂໍ້ມູນ API'."
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'biblioteca API' is understandable, a more natural and accurate translation of 'API library' in Portuguese would be 'biblioteca de API'.  'de' is a preposition indicating possession or relationship, which is more common in this context.",
+          "description": "While \"biblioteca API\" is understandable, a more natural and accurate translation of \"API library\" in Portuguese would be \"biblioteca de API\" or \"biblioteca para API\". Using 'de' or 'para' provides better grammatical flow and clarity.",
           "suggestion": "biblioteca de API"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'библиотеку API' is technically correct, but could be improved for better flow and naturalness in Russian. 'API' is often used without translation in Russian technical contexts.",
-          "suggestion": "API-библиотека"
+          "description": "The translation 'библиотеку API' is technically correct, but it's slightly awkward in Russian. A more natural phrasing would be 'API-библиотеку' or 'библиотека API'. Using 'библиотеку API' emphasizes the 'library' aspect more than the 'API' itself, which might not be the intended meaning. The order of words can change the emphasis.",
+          "suggestion": "API-библиотеку"
         }
       ],
       "approved_at": null
@@ -192,8 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'යෙ.ක්‍ර.මු. පුස්තකාලය' is a literal transliteration and doesn't accurately convey the meaning of 'API library'. It sounds awkward and isn't a natural way to refer to an API library in Sinhala.",
-          "suggestion": "A more appropriate translation would be something like 'API ශිඛ්‍යාමානය' (API Shikshyamana) or 'API සැපයුම්කරුවෙකු' (API Sapayu Karuwak) or a descriptive phrase like 'අපිඅයි පීඅයි උbibliothekaya' (API library in English phonetic transliteration with added clarity)."
+          "description": "The translation 'යෙ.ක්‍ර.මු. පුස්තකාලය' doesn't accurately convey the meaning of 'API library'. 'යෙ.ක්‍ර.මු.' seems to be an abbreviation for something (likely JavaScript), but including it directly like this is not standard practice and is confusing. 'පුස්තකාලය' correctly means 'library', but the 'යෙ.ක්‍ර.මු.' part needs addressing.",
+          "suggestion": "Consider a translation like 'API පුස්තකාලය' (API pusthakalalaya) or a more descriptive phrase if 'API' needs further explanation for the target audience."
+        },
+        {
+          "type": "formatting",
+          "description": "The abbreviation 'යෙ.ක්‍ර.මු.' is awkwardly presented within the translation. This breaks flow and readability.",
+          "suggestion": "If the abbreviation must be used, ensure its meaning is defined or accepted within the context. Otherwise, avoid the abbreviation altogether."
         }
       ],
       "approved_at": null

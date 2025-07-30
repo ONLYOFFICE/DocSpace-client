@@ -3,7 +3,7 @@
   "content": "Webhook redelivered",
   "content_en_sha1_hash": "13d28a1ef0e6e6d4e990ba5202f4b9fd878de944",
   "created_at": "2025-05-19T21:30:49.883Z",
-  "updated_at": "2025-05-21T00:49:56.050Z",
+  "updated_at": "2025-05-24T02:03:31.533Z",
   "comment": {
     "text": "This translation key is used to display a success message when a webhook is successfully retried or redelivered. It appears in various UI elements, such as navigation headers and history tables, after an action related to webhooks has been completed.",
     "is_auto": true,
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ويب هوك المعاد تسليمها\" is a literal translation but doesn't quite convey the intended meaning of 'Webhook redelivered' in a natural Arabic (Saudi Arabia) context. 'Redelivered' implies a retry or resend, which isn't clearly reflected. A more natural phrasing is needed.",
-          "suggestion": "Consider \"إعادة إرسال ويب هوك\" (I'adat irsal web hook) or \"ويب هوك مُعاد إرسالها\" (Webhook mu'aad irsaluha) for a more accurate and natural translation."
+          "description": "The translation 'ويب هوك المعاد تسليمها' is a literal translation and doesn't convey the meaning of 'Webhook redelivered' in a natural way within a technical context. It sounds awkward.",
+          "suggestion": "A more natural translation might be 'إعادة توجيه ويب هوك' or 'إعادة إرسال ويب هوك', depending on the specific nuance intended. Considering the context of a webhook re-delivery, 'إعادة إرسال ويب هوك' is preferred. It implies the webhook was sent again."
         }
       ],
       "approved_at": null
@@ -66,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Доставена отново уеб кука\" is not the most accurate translation of \"Webhook redelivered.\" \"Уеб кука\" literally translates to 'web hook' but 'redelivered' implies a retry or resending of a webhook event. A better translation would capture that meaning.",
-          "suggestion": "Предоставена отново уебхук"
+          "description": "The translation 'Доставена отново уеб кука' is not the best translation for 'Webhook redelivered'. 'Доставена отново' implies delivery, which isn't the core meaning of 'redelivered' in this context (which refers to a webhook being resent). A more accurate translation would convey the meaning of re-transmission or re-sending.",
+          "suggestion": "Предоставена отново уебкука"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'уебкука' is likely missing a hyphen to form 'уеб-кука' (webhook).",
+          "suggestion": "Предоставена отново уеб-кука"
         }
       ],
       "approved_at": null
@@ -90,13 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Έγινε εκ νέου επαναφορά webhook\" while understandable, is a bit literal and not the most natural way to express 'Webhook redelivered' in Greek.  'Redelivered' implies a retry or resend, which isn't directly conveyed.",
-          "suggestion": "Consider alternatives like: 'Το webhook επανήλθε', 'Το webhook αποδόθηκε ξανά', or 'Επανήλθε το webhook'."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, 'webhook' is a direct transliteration. Consider whether a more culturally appropriate term or explanation could be incorporated depending on the audience.",
-          "suggestion": "Evaluate if 'webhook' needs further explanation or if a more Greek equivalent would be clearer for the target audience."
+          "description": "The translation \"Έγινε εκ νέου επαναφορά webhook\" is a literal translation but may not be the most natural or idiomatic way to express \"Webhook redelivered\" in Greek. It sounds a bit formal and technical. A more user-friendly translation might be needed depending on the context.",
+          "suggestion": "Consider alternatives like \"Επαναλήφθηκε η αποστολή webhook\" or \"Το webhook αποδόθηκε ξανά\" (Webhook was delivered again)."
         }
       ],
       "approved_at": null
@@ -125,8 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Webhook-ը վերահանձնվել \" doesn't accurately convey the meaning of 'Webhook redelivered'. 'Վերահանձնվել' implies a transfer or re-assignment rather than a re-delivery. A more accurate translation would reflect the action of sending a webhook again.",
-          "suggestion": "Webhook-ը վերահաղորդվել (Webhook-ը verahagordvel) - which means 'Webhook re-transmitted' or 'Webhook re-sent'."
+          "description": "The Armenian translation \"Webhook-ը վերահանձնվել \" is not an accurate translation of \"Webhook redelivered.\" 'Վերահանձնվել' implies a re-delivery to a recipient, while \"redelivered\" refers to a webhook being resent after a failure.",
+          "suggestion": "Webhook-ը վերագործարկվեց (Webhook-ը veragorgarkvec) - This suggests a retry or restart of the webhook process."
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in \"Webhook-ը\" is technically correct, but depending on the context and target audience, a space might be more readable. While technically correct, consider readability.",
+          "suggestion": "Webhook ը (Webhook e)"
         }
       ],
       "approved_at": null
@@ -149,7 +154,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"웹훅이 다시 전송되었습니다\" is understandable, a more accurate and natural translation of 'Webhook redelivered' would be '웹훅이 재전송되었습니다'. '다시' implies repetition, while '재' denotes a re-occurrence of the action, which is more fitting in a technical context.",
+          "description": "The translation '웹훅이 다시 전송되었습니다' is a literal translation of 'Webhook redelivered' which is grammatically correct but can be improved for naturalness and clarity in Korean. While technically correct, it implies a deliberate re-transmission.",
           "suggestion": "웹훅이 재전송되었습니다"
         }
       ],
@@ -161,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ຈັດສົ່ງຄືນ' (j̀ap s̄ng khn) translates to 'redelivered', it might be too literal and not the most natural phrasing in Lao. A more idiomatic translation might be preferable depending on the specific context.",
-          "suggestion": "Consider alternatives like 'ສົ່ງຄືນ Webhook' (s̄ng khn Webhook) or 'Webhooks ຖືກສົ່ງຄືນ' (Webhooks thūk s̄ng khn) depending on context.  More context is needed to determine the best option."
+          "description": "The Lao translation 'ຈັດສົ່ງຄືນ Webhook' is a literal translation of 'redelivered' as 'sent back'. While understandable, it doesn't perfectly capture the technical nuance of webhook redelivery which implies a retry or retransmission. A more accurate translation might consider wording that implies a resend or retry.",
+          "suggestion": "Consider alternatives like 'ສົ່ງຄືນ Webhook' (song khuen webhook - resend webhook) or 'Webhook ສົ່ງຄືນ' (Webhook song khuen - Webhook resend), or a more descriptive phrase depending on the specific context."
         }
       ],
       "approved_at": null
@@ -173,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Tīmekļa aizķere ir atkārtoti piegādāta\" does not accurately translate \"Webhook redelivered.\" \"Tīmekļa aizķere\" means \"web congestion\" or \"web traffic jam,\" which is unrelated to webhooks. The correct translation should convey the idea of a webhook being resent or retransmitted.",
-          "suggestion": "A more accurate translation might be something like \"Atkārtoti nosūtīts tīmekļa atgriešanas paziņojums\" or \"Tīmekļa atgriešanas paziņojums ir atkārtoti piegādāts\". A simpler option would be \"Atkārtoti piegādāts tīmekļa atgriešanas paziņojums\"."
+          "description": "The translation \"Tīmekļa aizķere ir atkārtoti piegādāta\" does not accurately convey the meaning of \"Webhook redelivered.\" \"Tīmekļa aizķere\" translates to \"Web traffic jam\" or \"Web congestion,\" which is irrelevant to webhooks. \"Atkārtoti piegādāta\" means \"re-delivered,\" which is somewhat accurate, but the entire phrase is misleading.",
+          "suggestion": "A more accurate translation would be something like \"Webhook ir atkārtoti nosūtīts\" or \"Webhook ir vēlreiz piegādāts\". Alternatively, \"Webhook ir atkārtoti aktivizēts\" could be considered depending on the precise context."
         }
       ],
       "approved_at": null
@@ -209,13 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Livrare repetată Webhook' is not the most natural or accurate translation of 'Webhook redelivered'. 'Livrare' implies delivery of a physical item. 'Webhook redelivered' refers to a webhook being resent or retried.",
-          "suggestion": "Webhook retrimis"
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, the use of 'Webhook' as a foreign word might be more readable if translated, or clarified with a brief explanation.",
-          "suggestion": "Notă Webhook (sau Webhook - notificare automatizată)"
+          "description": "The translation 'Livrare repetată Webhook' doesn't accurately convey the meaning of 'Webhook redelivered'. 'Redelivered' implies a retry or resend of a webhook. 'Livrare repetată' suggests a repeated delivery of something else. A more accurate translation would imply a retry of the webhook delivery.",
+          "suggestion": "Rețransmitere Webhook"
         }
       ],
       "approved_at": null
@@ -223,25 +223,31 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Вебхук отправлен повторно\" is understandable, a more accurate and common translation for 'Webhook redelivered' would be \"Вебхук повторно доставлен\" or \"Вебхук повторно передан\". \"Отправлен повторно\" implies sending, whereas 'redelivered' suggests a retransmission of something already sent.",
-          "suggestion": "Вебхук повторно доставлен"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'යළි බාරදුණි' (yali baaraduṇi) can mean 'redelivered', it's a more formal and passive construction. A more natural and common phrasing for 'Webhook redelivered' in Sinhala might be 'Webhook නැවත යවා ඇත' (Webhook naewath yava ethe).",
+          "suggestion": "Webhook නැවත යවා ඇත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"opätovne doručený\" is technically correct, it's a bit formal and less natural for a webhook notification. A more conversational and user-friendly option would be better.",
+          "suggestion": "Webhook znovu doručený"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -253,7 +259,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'поново испоручен' is technically correct, a more natural and idiomatic translation for 'redelivered' in the context of webhooks would be 'поново достављен' or 'поново слат'. 'Испоручен' generally implies a physical delivery.",
+          "suggestion": "Webhook поново достављен"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -262,8 +274,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Webhook ponovo isporučen' while understandable, doesn't fully capture the meaning of 'redelivered' in the context of webhooks. 'Ponovo isporučen' implies a delivery attempt, whereas 'redelivered' in this context means resent or retransmitted due to a failure.",
-          "suggestion": "Webhook ponovo poslat"
+          "description": "The translation 'Webhook ponovo isporučen' is not the most natural or accurate rendering of 'Webhook redelivered' in Serbian. 'Ponovo isporučen' implies a delivery action that happened before, which is not directly conveyed by 'redelivered'. A more accurate translation would convey the sense of a re-attempted delivery or a retry of the webhook trigger.",
+          "suggestion": "Webhook ponovo poslat/pokušan"
         }
       ],
       "approved_at": null
@@ -292,8 +304,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Webhook 已被重新传递\" is understandable, a more natural and precise translation would be \"Webhook 已重发\" or \"Webhook 已重新发送\". \"重新传递\" can imply a transfer or relay, which isn't the intended meaning here.",
-          "suggestion": "Webhook 已重发"
+          "description": "While \"Webhook 已被重新传递\" is understandable, a more natural and precise translation would be \"Webhook 已重新派送\" or \"Webhook 已重新发送\". '传递' implies a more general transfer, while '派送' or '发送' specifically refer to sending data/events, which is more appropriate for a webhook context.",
+          "suggestion": "Webhook 已重新派送"
         }
       ],
       "approved_at": null

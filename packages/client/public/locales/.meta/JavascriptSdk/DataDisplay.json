@@ -3,7 +3,7 @@
   "content": "Data display settings",
   "content_en_sha1_hash": "a3c510d4ebfdbe955be8697ef65b42208a7ea4eb",
   "created_at": "2025-05-19T21:30:54.443Z",
-  "updated_at": "2025-07-01T15:57:36.196Z",
+  "updated_at": "2025-05-24T09:27:58.665Z",
   "comment": {
     "text": "\"This translation key is used for the 'Data Display' subheader that appears on multiple pages in the PortalSettings categories, providing a consistent title and helping users navigate the settings.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 409,
+      "line_number": 405,
       "context": "<SelectTextInput t={t} config={config} setConfig={setConfig} />\n <CancelTextInput t={t} config={config} setConfig={setConfig} />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"DataDisplay\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}",
       "module": "/packages/client"
     },
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Məlumatların göstərilməsi parametrləri' is overly literal and verbose. 'Data display settings' implies a more concise phrasing.",
-          "suggestion": "Consider alternatives like 'Veri göstərişləri' or 'Məlumat sərgiləməsi ayarları'."
+          "description": "The translation \"Məlumatların göstərilməsi parametrləri\" is a bit literal and clunky. While technically correct, it doesn't flow naturally in Azerbaijani. \"Data display settings\" implies a more concise and user-friendly phrasing.",
+          "suggestion": "Məlumat göstərişləri"
         }
       ],
       "approved_at": null
@@ -138,8 +138,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Instellingen weergave gegevens\" is not a natural or accurate translation of \"Data display settings\". \"Weergave\" can be understood as 'display' or 'view' but combined with 'gegevens' (data) it sounds awkward. The English phrase implies settings *for* data display.",
-          "suggestion": "Instellingen voor dataweergave"
+          "description": "The Dutch translation 'Instellingen weergave gegevens' is a literal translation but doesn't flow naturally in Dutch. 'Weergave' is a bit clunky here. A more natural phrasing would focus on displaying data.",
+          "suggestion": "Instellingen datavisualisatie"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'gegevens' is technically correct, 'data' is commonly used in a technological context and might be better suited for consistency with the English term.",
+          "suggestion": "Instellingen dataweergave"
         }
       ],
       "approved_at": null

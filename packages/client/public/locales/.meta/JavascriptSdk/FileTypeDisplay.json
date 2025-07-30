@@ -3,7 +3,7 @@
   "content": "File type display",
   "content_en_sha1_hash": "dc67539561d9b7effa52bb701a66772d77fad39e",
   "created_at": "2025-05-19T21:30:54.508Z",
-  "updated_at": "2025-07-01T15:57:36.198Z",
+  "updated_at": "2025-05-24T09:18:59.478Z",
   "comment": {
     "text": "This translation key is used to display file type information. It will be shown on a page that allows users to customize file type displays in their portal settings, likely appearing as a label or category header.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 457,
+      "line_number": 453,
       "context": ") : null}\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n <Label className=\"label\" text={t(\"FileTypeDisplay\")} />\n <RadioButtonGroup\n orientation=\"vertical\"\n options={fileTypeDisplay}\n name=\"columnsDisplayOptions\"\n selected={typeDisplay}",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fayl növü görüntüsü\" literally translates to \"File type image/view.\" While understandable, a more natural and accurate translation would be something like \"Fayl növünün göstərilməsi\" or \"Fayl növünün təqdimi\".",
-          "suggestion": "Fayl növünün göstərilməsi"
+          "description": "The translation \"Fayl növü görüntüsü\" literally translates to \"File type image/view.\"  While understandable, a more natural and accurate translation would be \"Fayl tipi göstərişi\" or \"Fayl növünün göstərilməsi\".",
+          "suggestion": "Fayl tipi göstərişi"
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Dateitypanzeige' is understandable, a more common and accurate translation of 'File type display' would be 'Dateityp-Anzeige' or 'Datei-Typ-Anzeige'. 'Dateitypanzeige' literally translates to 'File type showing/displaying' and lacks the common hyphenated structure in German for compound nouns.",
-          "suggestion": "Dateityp-Anzeige"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -93,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ֆայլի տեսակի ցուցադրում\" is a literal translation of \"File type display,\" a more natural and commonly used term in Armenian might be \"ֆայլի տեսակը\" or \"ֆայլի ձևը\". \"Ցուցադրում\" (tsutsadroum) implies a display or presentation, which isn't the most appropriate word here. The phrase describes *what* the file is, not how it is being displayed.",
+          "suggestion": "Consider using \"ֆայլի տեսակը\" or \"ֆայլի ձևը\" for a more natural Armenian translation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"displejs\" can mean display, it's an archaic or technical term. A more natural and common translation for 'File type display' would be 'Faila tipa attēls' or 'Faila tipa demonstrējums'.",
-          "suggestion": "Faila tipa attēls"
+          "description": "The translation \"Faila tipa displejs\" is a literal translation and sounds unnatural in Latvian. 'Displejs' is a borrowed word and not commonly used in this context. A more natural translation would use 'parādīšana' or 'norādīšana'.",
+          "suggestion": "Faila tipa parādīšana"
         }
       ],
       "approved_at": null
@@ -135,13 +135,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Weergave bestandstype\" is understandable, a more natural and idiomatic translation of \"File type display\" in Dutch would be \"Weergave van bestandstypes\" or \"Bestandstype weergave\". The current translation is a bit literal and lacks flow.",
-          "suggestion": "Weergave van bestandstypes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -177,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"ගොනු වර්ගය පෙන්වීම\" is understandable, a more accurate and natural translation of \"File type display\" would be \"ගොනු වර්ග ප්‍රදර්ශනය\" or \"ගොනු වර්ග ප්‍රදර්ශනය කිරීම\". \"පෙන්වීම\" implies a showing or demonstration, which isn't necessarily the core meaning of \"display\".",
-          "suggestion": "ගොනු වර්ග ප්‍රදර්ශනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -204,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Приказ типа датотеке\" is not an accurate translation of \"File type display\".  \"Приказ\" means 'display' or 'presentation', but \"типа датотеке\" literally translates to 'of the file type'. The most natural and accurate translation would be something closer to \"Врста датотеке\" or \"Тип датотеке\".",
+          "description": "The Serbian translation \"Приказ типа датотеке\" doesn't accurately convey the meaning of \"File type display.\" \"Приказ\" (Prikaz) means 'display' or 'presentation', which is redundant. A more accurate translation would describe the action of showing the file type.",
           "suggestion": "Врста датотеке"
         }
       ],

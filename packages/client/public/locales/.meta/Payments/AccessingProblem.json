@@ -3,7 +3,7 @@
   "content": "If you are an existing user and have problems accessing this space please contact the administrator.",
   "content_en_sha1_hash": "6d177e3c0f0d17c6de7118a4bc756bedb279b9f7",
   "created_at": "2025-05-19T21:30:53.640Z",
-  "updated_at": "2025-05-21T06:48:31.882Z",
+  "updated_at": "2025-05-24T07:02:25.288Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,7 +20,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is technically correct but could be more natural. 'لديك مشاكل في الوصول إلى هذه المساحة' is a bit clunky. A more natural phrasing would be 'إذا كنت مستخدمًا موجودًا تواجه مشاكل في الدخول إلى هذه المساحة'.",
+          "suggestion": "إذا كنت مستخدمًا موجودًا تواجه مشاكل في الدخول إلى هذه المساحة"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -56,13 +62,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The translation uses the informal 'es' for 'you'. In a formal context, particularly when addressing a user with a problem, 'usted es' would be more appropriate.",
-          "suggestion": "Si usted es un usuario existente y tiene problemas al acceder a este espacio, por favor, póngase en contacto con el administrador."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -71,13 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'olemassaoleva' is a long and potentially awkward construction. While technically correct, it can be simplified.",
-          "suggestion": "Jos olet käyttäjä..."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'tilaan pääsyn suhteen' is a bit clunky and indirect. It can be phrased more directly.",
-          "suggestion": "Jos olet käyttäjä ja sinulla on ongelmia tilan käyttöön..."
+          "description": "The word 'käytttäjä' has a repeated 't'.",
+          "suggestion": "Jos olet olemassaoleva käyttäjä ja sinulla on ongelmia tilaan pääsyn suhteen, ota yhteys järjestelmänvalvojaan."
         }
       ],
       "approved_at": null
@@ -118,7 +113,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"administrator\" is translated as \"ຜູ້ເບິ່ງແຍງລະບົບ\" which literally means \"system overseer.\" While understandable, \"ຜູ້ປົກຄອງ\" (pook-ka-ong) which means \"administrator\" or \"manager\" would be a more accurate and common translation in this context.",
+          "description": "The phrase 'administrator' is translated as 'ຜູ້ເບິ່ງແຍງລະບົບ' which literally means 'system supervisor'. While understandable, 'ຜູ້ປົກຄອງ' (phuak pok khong) is a more standard and direct translation for 'administrator' in this context (referring to someone who manages access).",
           "suggestion": "ຖ້າທ່ານເປັນຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວ ແລະມີບັນຫາໃນການເຂົ້າເຖິງພື້ນທີ່ນີ້, ກະລຸນາຕິດຕໍ່ຜູ້ປົກຄອງ."
         }
       ],
@@ -172,13 +167,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'existing user' is not accurately reflected. The Sinhala translation uses 'ඔබ මෙම අවකාශයේ ලියාපදිංචි වූ අයෙක් නම්' which translates to 'If you are registered in this space'. While related, it doesn't convey the meaning of being a pre-existing user.",
-          "suggestion": "Consider rephrasing to something like 'ඔබ කලින් සිටින පරිශීලකයා නම්' (If you are an existing user) or 'ඔබට කලින් පිවිසීමට අවසර තිබුණු අයෙක් නම්'."
+          "description": "The phrase 'existing user' is not accurately conveyed. 'ලියාපදිංචි වූ අයෙක්' (liyapadinchivu ayek) translates more closely to 'registered user' which isn't the same as an existing user. It implies someone actively registered, not necessarily someone who previously had access.",
+          "suggestion": "Consider a translation that better captures 'existing user,' such as 'ඔබ කලින් අවකාශයට පිවිසී ඇති අයෙක් නම්' (oba kalin awashayata pivishee athi ayek nam)."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is a bit long and could be improved for better readability. While grammatically correct, it's slightly cumbersome.",
-          "suggestion": "Consider splitting the sentence into two: 'ඔබ මෙම අවකාශයේ ලියාපදිංචි වූ අයෙක් නම්. ප්‍රවේශ වීමේ ගැටළුවක් ඇත්නම් කරුණාකර පරිපාලක අමතන්න.' (If you are registered in this space. If you have a problem accessing, please contact the administrator.)"
+          "description": "The sentence structure could be more natural in Sinhala. While technically correct, the current wording sounds somewhat stiff.",
+          "suggestion": "Rephrase the sentence for smoother flow. For example, 'ඔබ කලින් අවකාශයට පිවිසී ඇති අතර ප්‍රවේශ වීමේ ගැටළුවක් ඇත්නම්, කරුණාකර පරිපාලක අමතන්න.' (oba kalin awashayata pivishee athi athar pravesa wimena gatulawak athinma, karunakar paripalaka amatanna.)"
         }
       ],
       "approved_at": null
@@ -201,7 +196,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'постојец́и' is misspelled. It should be 'постојец́и'.",
+          "description": "The word 'постојец́и' (postojeći) is misspelled. It should be 'постојећи' (postojeći).",
           "suggestion": "постојећи"
         }
       ],
@@ -210,7 +205,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'postojeći' is spelled incorrectly. The correct spelling is 'postojeći'.",
+          "suggestion": "postojeći"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

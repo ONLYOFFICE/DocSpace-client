@@ -3,7 +3,7 @@
   "content": "Custom filter enabled.",
   "content_en_sha1_hash": "23c45dc7a2dbd306581c8718a1d6a272a3b62997",
   "created_at": "2025-05-19T21:30:54.803Z",
-  "updated_at": "2025-05-28T09:30:02.441Z",
+  "updated_at": "2025-06-30T12:20:31.357Z",
   "comment": {
     "text": "The \"FileCustomFilterEnabled\" translation key is used to display the text \"Custom filter enabled.\" in a UI component, likely as a confirmation or indication of the user's settings on the \"History\" page in an info panel.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 297,
-      "context": "case \"FormSubmit\":\n return t(\"InfoPanel:FilledOutForm\");\n case \"FormOpenedForFilling\":\n return t(\"InfoPanel:StartedFillingItOut\");\n case \"FileCustomFilterEnabled\":\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case \"FileCustomFilterDisabled\":\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case \"FormStartedToFill\":\n return t(\"InfoPanel:FormStartedToFill\");",
+      "line_number": 310,
+      "context": "case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");\n case FeedActionKeys.FileCustomFilterEnabled:\n return t(\"InfoPanel:FileCustomFilterEnabled\");\n case FeedActionKeys.FileCustomFilterDisabled:\n return t(\"InfoPanel:FileCustomFilterDisabled\");\n \n case FeedActionKeys.FormStartedToFill:\n return t(\"InfoPanel:FormStartedToFill\");",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation uses a combining character (Arabic Combining Mark for Initial, U+064D) which might cause rendering issues in some systems. It's generally best to avoid these unless strictly necessary for specific ligatures.",
-          "suggestion": "Remove the combining character: \"تم تمكين الفِلتر المخصص.\""
+          "description": "The Arabic translation contains a combining diacritical mark ( ) which is not standard and may cause display issues. It's likely an artifact of copying and pasting from a source with unusual formatting.",
+          "suggestion": "Remove the combining diacritical mark ( ). The corrected translation should be: تم تمكين الفِلتر المخصص."
         }
       ],
       "approved_at": null
@@ -90,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Հատուկ\" (special) is used, but \"շարժական\" (customizable/adjustable) might be a more accurate translation depending on the context of 'Custom filter'.",
-          "suggestion": "Consider using \"շարժական ֆիլտրը\" instead of \"Հատուկ ֆիլտրը\" if the filter is customizable."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the sentence is a bit literal. A more natural phrasing might be preferred, depending on the overall tone of the UI.",
-          "suggestion": "Consider alternative phrasing such as \"Ֆիլտրը սեղմված է\" (The filter is set)."
+          "description": "The Armenian word 'Հատուկ' (Hatuk) should ideally be 'Անհատական' (Anhatakian) when referring to a 'custom' filter. 'Հատուկ' translates more closely to 'special'.",
+          "suggestion": "Անհատական ֆիլտրը միացված է:"
         }
       ],
       "approved_at": null
@@ -119,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation contains a non-breaking space character ( ) which might cause display issues.",
-          "suggestion": "Remove the non-breaking space: 사용자 지정 필터 활성화됨."
+          "description": "The Korean translation includes a non-breaking space ( ) which might cause display issues. It's best to use a regular space.",
+          "suggestion": "사용자 지정 필터 활성화됨."
         }
       ],
       "approved_at": null
@@ -131,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ເປີດໃຊ້ຕົວກອງແບບກຳນົດເອງແລ້ວ.' while understandable, is a bit literal. A more natural translation might be 'ກຳນົດການກັ່ນຕອງແບບກຳມົດເອີງ' or 'ເປີດການກັ່ນຕອງແບບກຳມົດເອີງ'.",
-          "suggestion": "ເປີດການກັ່ນຕອງແບບກຳມົດເອີງ"
+          "description": "The translation 'ເປີດໃຊ້ຕົວກອງແບບກຳນົດເອງແລ້ວ' could be improved. While technically correct, it's a bit wordy. A more natural and concise translation would be better.",
+          "suggestion": "ເປີດຕົວກອງແບບກຳນົດເອງ"
         }
       ],
       "approved_at": null
@@ -170,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Filtrul particularizat a fost activat' is overly literal and sounds unnatural in Romanian. A more natural translation would be something like 'Filtru personalizat activat' or 'Filtru particularizat este activ'.",
+          "suggestion": "Filtru personalizat activat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -182,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'අභිරුචි පෙරහන සක්‍රීය කර ඇත.' while technically correct, is a bit verbose for a UI label. A more concise translation would be better.",
+          "suggestion": "Consider a shorter translation like 'පෙරහන සක්‍රීය' (Perahana Sakriya) which translates to 'Filter Enabled'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -197,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation contains a non-breaking space ( ) which might cause layout issues.",
-          "suggestion": "Replace the non-breaking space with a regular space."
+          "description": "The translation contains a non-breaking space ( ) which may cause layout issues. It should be a regular space.",
+          "suggestion": "Prilagojen filter omogočen"
         }
       ],
       "approved_at": null
@@ -209,13 +216,23 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'прилагођени' (prilagođeni) is correctly spelled, but a more common and simpler alternative would improve readability and naturalness.",
-          "suggestion": "одабрани филтер је омогућен."
+          "description": "The word 'прилагођени' (prilagođeni) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'филтер' (filter) is a loanword. While commonly used, the native Serbian equivalent 'филтар' (filtar) might be preferred for increased accuracy, depending on the overall tone and target audience. However, 'филтер' is generally accepted and understandable.",
+          "suggestion": "филтар"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'омогућен' (omogućен) is spelled correctly.",
+          "suggestion": null
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Прилагођени филтер је омогућен' is technically correct, it's slightly formal for a user interface element. 'Custom filter' often translates to a more direct and simpler phrase.",
-          "suggestion": "Омогућени су кориснички филтери."
+          "description": "While grammatically correct, a more natural and concise translation might be 'Омогућена прилагођавање филтера.' or 'Прилагођавање филтера је укључено.' depending on the specific UI context.",
+          "suggestion": "Прилагођавање филтера је укључено."
         }
       ],
       "approved_at": null
@@ -232,8 +249,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Turkish translation includes a non-breaking space (U+00A0) between 'Filtre' and 'etkin'.  This may cause rendering issues and isn't standard for Turkish.",
+          "description": "The translation contains a non-breaking space (&#x20;) between 'Filtre' and 'etkin'. This might cause rendering issues.",
           "suggestion": "Özel Filtre etkin"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, 'Özel Filtre etkin' is a slightly literal translation. A more natural and idiomatic Turkish phrasing for 'Custom filter enabled' would be 'Özel filtre açık'.",
+          "suggestion": "Özel filtre açık"
         }
       ],
       "approved_at": null
@@ -241,13 +263,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Спеціальний фільтр увімкнено\" is a grammatically correct translation, it's a bit formal and clunky. A more natural and user-friendly translation would be better.",
-          "suggestion": "Увімкнено користувацький фільтр."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

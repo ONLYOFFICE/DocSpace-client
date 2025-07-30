@@ -3,7 +3,7 @@
   "content": "Watermark for files in the room enabled",
   "content_en_sha1_hash": "9506b337eecb9b7c7c5901282ebc888da3503049",
   "created_at": "2025-05-19T21:30:54.957Z",
-  "updated_at": "2025-05-28T09:30:02.436Z",
+  "updated_at": "2025-06-30T12:20:31.352Z",
   "comment": {
     "text": "This translation key is used to display the text \"Watermark for files in the room enabled\" when a room's watermark setting has been activated. It appears on the InfoPanel and is likely displayed as a notification or confirmation message indicating the status of the watermark feature.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 239,
-      "context": "case \"RoomUpdateAccessForGroup\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomGroupRemove\":\n return t(\"InfoPanel:RoomGroupRemove\");\n case \"RoomWatermarkSet\":\n return t(\"InfoPanel:RoomWatermarkSet\");\n case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":",
+      "line_number": 248,
+      "context": "case FeedActionKeys.RoomUpdateAccessForGroup:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomGroupRemove:\n return t(\"InfoPanel:RoomGroupRemove\");\n case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaqdakı fayllar üçün su nişanı aktivləşdirilib\" is a literal translation and not the most natural way to express 'Watermark for files in the room enabled' in Azerbaijani. A more idiomatic translation would better convey the meaning.",
-          "suggestion": "Consider alternatives like \"Otaqdakı fayllara su nişanı qoşulub\" or \"Otaqdakı faylların üzərinə su nişanı vurulub\"."
+          "description": "The translation \"Otaqdakı fayllar üçün su nişanı aktivləşdirilib\" while understandable, isn't the most natural way to express 'Watermark for files in the room enabled' in Azerbaijani. 'Su nişanı' is a literal translation of 'watermark' and can sound a bit clunky. A more idiomatic expression would be preferred.",
+          "suggestion": "Otaqdakı fayllara nişan əlavə edilib"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrasing 'su nişanı aktivləşdirilib' is passive and could be improved to be more active or concise.  This is a minor style point.",
+          "suggestion": "Nişan aktivləşdirilib"
         }
       ],
       "approved_at": null
@@ -66,13 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't sound natural in Greek. 'Έγινε ενεργοποίηση' is a bit clunky.",
-          "suggestion": "Ενεργοποίηση υδατογραφήματος για αρχεία στο δωμάτιο"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the added 'Έγινε' can make the sentence feel slightly verbose and less clean compared to just stating the action directly.",
-          "suggestion": "Ενεργοποίηση υδατογραφήματος για αρχεία στο δωμάτιο"
+          "description": "The translation \"Έγινε ενεργοποίηση υδατογραφήματος για αρχεία στο δωμάτιο \" is a bit literal and not the most natural way to express 'Watermark for files in the room enabled' in Greek.  A more natural phrasing would emphasize the state of being enabled rather than the act of enabling.",
+          "suggestion": "Ενεργό υδατογράφημα για αρχεία στο δωμάτιο"
         }
       ],
       "approved_at": null
@@ -80,13 +80,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Marca de agua para los archivos de la sala activada\" is a very literal and slightly awkward translation. A more natural Spanish phrasing would be preferred.",
-          "suggestion": "Marca de agua habilitada para los archivos de la sala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -95,7 +89,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tiedostojen vesileima on otettu käyttöön tässä huoneessa\" is a literal translation but slightly awkward. A more natural phrasing would be preferred.",
+          "description": "The translation 'Tiedostojen vesileima on otettu käyttöön tässä huoneessa' is a bit literal and could be improved for fluency. While technically correct, it sounds slightly awkward in Finnish.",
           "suggestion": "Tiedostojen vesileima on käytössä tässä huoneessa"
         }
       ],
@@ -107,13 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Filigrane pour les fichiers dans la salle activé' is not the most natural or accurate rendering of \"Watermark for files in the room enabled\". 'Filigrane' is correct, but the phrasing is awkward.",
+          "description": "The translation 'Filigrane pour les fichiers dans la salle activé' is not the most natural or accurate translation of 'Watermark for files in the room enabled'. 'Filigrane' is correct for watermark, but the sentence structure is a bit awkward.",
           "suggestion": "Filigrane pour les fichiers dans la pièce activé"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'pièce' is more common and natural than 'salle' when referring to a room in this context.",
-          "suggestion": "pièce"
         }
       ],
       "approved_at": null
@@ -124,8 +113,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ջրանշանը սենյակում գտնվող ֆայլերի համար միացված է\" (Jranšany senyagum gtnvogh fayleri hamar miacvac e) translates literally to 'The watermark is enabled for files in the room.' While technically correct, it's a bit clunky and not as natural-sounding in Armenian. A more natural translation would convey the sense of 'watermark enabled for room files'.",
-          "suggestion": "Consider a more natural phrasing like \"Սենյակում գտնվող ֆայլերի համար ջրանշանը միացված է\" (Senyagum gtnvogh fayleri hamar jranšany miacvac e) or \"Ջրանշանը միացված է սենյակում գտնվող ֆայլերի համար\" (Jranšany miacvac e senyagum gtnvogh fayleri hamar)."
+          "description": "The translation 'Ջրանշանը սենյակում գտնվող ֆայլերի համար միացված է' is a bit literal and could be improved for better flow and naturalness in Armenian. It translates to 'The watermark is enabled for files located in the room.'",
+          "suggestion": "Ջրանշանը միացված է սենյակում եղած ֆայլերի համար"
         }
       ],
       "approved_at": null
@@ -139,7 +128,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ルーム内のファイルの透かしは有効です\" while technically correct, doesn't convey the meaning of 'enabled' as clearly as possible in this context. It translates to 'The watermark of files in the room is enabled,' which is a bit literal. A more natural phrasing would imply that the watermark function is active.",
+          "suggestion": "ルーム内のファイルの透かし機能は有効です"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -148,7 +143,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '룸에 있는 파일에 대한 워터마크가 활성화되었습니다' is a bit verbose and formal for a simple toggle description. It literally translates to 'Watermark for files in the room has been activated'. A more natural and concise translation would be better.",
+          "description": "The translation '룸에 있는 파일에 대한 워터마크가 활성화되었습니다' is a literal translation but sounds somewhat unnatural in Korean. A more natural phrasing would imply the watermark *itself* is enabled, not just that it *exists* for the files.",
           "suggestion": "룸 파일 워터마크 활성화"
         }
       ],
@@ -160,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation includes the English word 'Watermark' within parentheses. While understandable, it's preferable to maintain consistency and avoid mixing languages unless absolutely necessary for clarity. Consider if a fully Lao equivalent is possible.",
-          "suggestion": "Investigate a fully Lao term for 'Watermark' or rephrase the sentence to avoid including the English term in parentheses. For example, consider 'ເຄື່ອງໝາຍນ້ຳ ຂອງເອກະສານໃນຫ້ອງຖືກເປີດໃຊ້ງານແລ້ວ' (Watermark of documents in the room is enabled)."
+          "description": "The translation includes the English word \"Watermark\" within the Lao text. While understandable, it's preferable to avoid mixing languages unless absolutely necessary for clarity or terminology.",
+          "suggestion": "Consider rephrasing to avoid including the English word. For example, 'ເຄື່ອງໝາຍນ້ຳ ສຳລັບເອກະສານໃນຫ້ອງຖືກເປີດໃຊ້ງານແລ້ວ' (Watermark for files in the room is enabled)."
         }
       ],
       "approved_at": null
@@ -172,7 +167,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Iespējota ūdenszīme telpā esošajiem failiem' is a bit literal and clunky. While technically correct, it doesn't flow naturally in Latvian. The English 'Watermark for files in the room enabled' implies a watermark being *applied* to files within a room (likely referring to a shared workspace or digital room).",
+          "description": "The translation \"Iespējota ūdenszīme telpā esošajiem failiem\" is a bit literal and clunky. While technically correct, it's not the most natural phrasing in Latvian. A more idiomatic translation would better convey the meaning of 'Watermark for files in the room enabled'.",
           "suggestion": "Iespējota ūdenszīme failiem telpā"
         }
       ],
@@ -184,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes a space after the word 'watermerk'.",
-          "suggestion": "Watermerk voor bestanden in de kamer ingeschakeld"
+          "description": "The translation contains a trailing space at the end of the string.",
+          "suggestion": "Remove the trailing space. \"Watermerk voor bestanden in de kamer ingeschakeld\""
         }
       ],
       "approved_at": null
@@ -193,13 +188,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation is a complete sentence. In UI elements, it's often preferable to use a more concise phrasing, especially if it's a toggle or status indicator. A more typical phrasing would eliminate the 'jest włączony' (is enabled) part.",
-          "suggestion": "Znak wodny dla plików w tym pokoju włączony"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -220,13 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Inscripționarea fișierelor din sală este activată' is a literal translation that doesn't convey the intended meaning of 'Watermark for files in the room enabled.' It sounds awkward and technical in Romanian. 'Watermark' has become somewhat understood in Romanian, or a more natural phrasing is needed.",
-          "suggestion": "Fișierele din sală au filigran activat."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'filigran' is a more accurate and understandable translation of 'watermark' in this context.",
-          "suggestion": "Use 'filigran' instead of 'inscripționare'."
+          "description": "The translation 'Inscripționarea fișierelor din sală este activată' is a literal translation but doesn't convey the meaning of 'enabled' in the context of a watermark feature. It sounds clunky and overly formal.",
+          "suggestion": "A better translation would be 'Marca de apă pentru fișierele din sală este activată' or 'Aplicația mărcii de apă pentru fișierele din sală este activată'."
         }
       ],
       "approved_at": null
@@ -237,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'В комнате включен водяной знак для файлов' is not the most natural or accurate rendering of 'Watermark for files in the room enabled'.  'Водяной знак' correctly translates 'watermark', but the sentence structure could be improved.",
-          "suggestion": "Включен водяной знак для файлов в комнате"
+          "description": "The translation 'В комнате включен водяной знак для файлов' is not the most natural or accurate rendering of 'Watermark for files in the room enabled'. A more natural phrasing would be something like 'Водяной знак для файлов в комнате включен' or 'Водяной знак файлов в комнате активирован'.",
+          "suggestion": "Водяной знак для файлов в комнате включен"
         }
       ],
       "approved_at": null
@@ -249,13 +233,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොඩබිම්වල ඇති ෆයිල් සඳහා වෝටර්මාක් සක්‍රීය කරන ලදි.' is a literal translation that doesn't quite convey the meaning of 'Watermark for files in the room enabled'. It translates to something like 'Watermark activated for files in the land/soil'. The word 'room' (as in a virtual room or space) doesn't have a direct equivalent that maintains the same nuance.",
-          "suggestion": "Consider a phrasing like 'කාමරයේ ඇති ෆයිල් සඳහා වෝටර්මාක් සක්‍රීය කරන ලදි.' (Kaamarayē athi faily sahaā vōtarmāk sakriya karaṇa ladī) which means 'Watermark enabled for files in the room' or 'කොටަރුවේ ඇති ෆයිල් සඳහා වෝටර්මාක් සක්‍රීය කරන ලදි.' (Kotaruvē athi faily sahaā vōtarmāk sakriya karaṇa ladī) which means 'Watermark enabled for files in the compartment/section'."
+          "description": "The translation 'ගොඩබිම්වල ඇති ෆයිල් සඳහා වෝටර්මාක් සක්‍රීය කරන ලදි.' is too literal and doesn't convey the meaning of 'Watermark for files in the room enabled' naturally in Sinhala. It translates to 'Watermark was enabled for files in the lands/soil'. 'Room' is likely referring to a specific area or workspace, not a physical room.",
+          "suggestion": "Consider a more appropriate translation like 'කාර්යාලයේ ඇති ෆයිල් සඳහා වෝටර්මාක් සක්‍රීය කරන ලදි.' (Watermark enabled for files in the office) or 'අනුමැත ලදුවා ෆයිල් සඳහා වෝටර්මාක්' (Watermark approved for files)."
         },
         {
-          "type": "spelling",
-          "description": "While 'වෝටර්මාක්' (vōtarmāk) is the commonly used transliteration of 'watermark', it might benefit from a slightly more Sinhala-ized spelling, though not strictly necessary.",
-          "suggestion": "Consider exploring alternatives for 'වෝටර්මාක්', but its current usage is generally understood."
+          "type": "grammar",
+          "description": "The sentence structure 'අනුමැත ලදුවා ෆයිල් සඳහා වෝටර්මාක්' would need adjustment depending on the final translation to ensure proper grammar and flow.",
+          "suggestion": "Refine the sentence structure depending on the selected translation for grammatical correctness."
         }
       ],
       "approved_at": null
@@ -263,13 +247,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is technically correct but sounds unnatural and overly literal. A more natural Slovak phrasing would improve readability.",
-          "suggestion": "Vodoznak pre súbory v miestnosti je zapnutý."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -284,7 +262,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Водени жиг за фајлове у соби је онемогућен\" translates to \"Watermark for files in the room is disabled\". The English content indicates the watermark is 'enabled', not disabled. The translation needs to reflect this.",
+          "description": "The translation \"Водени жиг за фајлове у соби је онемогућен\" translates to \"Watermark for files in the room is disabled.\" The original English states the watermark is *enabled*. The translation implies the opposite.",
           "suggestion": "Водени жиг за фајлове у соби је укључен"
         }
       ],
@@ -296,7 +274,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content states 'enabled' but the Serbian translation states 'is disabled'. This is the opposite meaning.",
+          "description": "The English content states 'enabled', but the Serbian translation says 'is disabled'. The translation doesn't reflect the original meaning.",
           "suggestion": "Vodeni žig za fajlove u sobi je uključen"
         }
       ],
@@ -308,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Odadaki dosyalar için filigran etkinleştirildi' is a literal translation but doesn't convey the intended meaning of 'Watermark for files in the room enabled' as naturally as it could in Turkish. A more natural phrasing would focus on the watermark being active.",
-          "suggestion": "Oda dosyaları için filigran aktif edildi."
+          "description": "The translation 'Odadaki dosyalar için filigran etkinleştirildi' while generally understandable, isn't the most natural or precise rendering of 'Watermark for files in the room enabled'. 'Filigran' is a direct transliteration, and a more common phrasing would be 'Odadaki dosyalar için su işareti etkinleştirildi'.",
+          "suggestion": "Odadaki dosyalar için su işareti etkinleştirildi"
         }
       ],
       "approved_at": null
@@ -317,13 +295,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Водяний знак для файлів у кімнаті ввімкнено' is a literal translation but sounds unnatural in Ukrainian. A more natural phrasing would be 'Водяний знак увімкнено для файлів у кімнаті' or 'Ввімкнено водяний знак для файлів у кімнаті'.",
-          "suggestion": "Ввімкнено водяний знак для файлів у кімнаті"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

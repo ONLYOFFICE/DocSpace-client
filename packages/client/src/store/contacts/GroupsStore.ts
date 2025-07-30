@@ -53,8 +53,8 @@ import {
   getContactsUrl,
   setContactsGroupsFilterUrl,
 } from "SRC_DIR/helpers/contacts";
+import { showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
-import InfoPanelStore from "../InfoPanelStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 
 import DialogStore from "./DialogStore";
@@ -86,14 +86,12 @@ class GroupsStore {
 
   constructor(
     public peopleStore: TStore["peopleStore"],
-    public infoPanelStore: InfoPanelStore,
     public clientLoadingStore: ClientLoadingStore,
     public userStore: UserStore,
     public settingsStore: SettingsStore,
     public dialogStore: DialogStore,
   ) {
     this.peopleStore = peopleStore;
-    this.infoPanelStore = infoPanelStore;
     this.clientLoadingStore = clientLoadingStore;
     this.userStore = userStore;
     this.settingsStore = settingsStore;
@@ -116,21 +114,19 @@ class GroupsStore {
         const idx = this.groups.findIndex((x) => x.id === group.id);
 
         if (idx !== -1) {
-          this.groups[idx] = group;
+          runInAction(() => {
+            this.groups[idx] = group;
+            this.updateSelection();
+          });
           return;
         }
-        this.groups.push(group);
+
+        this.groups = [group, ...this.groups];
         this.groupsFilter.total += 1;
       });
     });
 
     SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
-      const {
-        infoPanelSelection,
-        setInfoPanelSelection,
-        setInfoPanelSelectedGroup,
-      } = this.infoPanelStore;
-
       const { contactsTab } = this.peopleStore.usersStore;
 
       const { id, data } = value;
@@ -143,13 +139,8 @@ class GroupsStore {
 
       const group = await api.groups.getGroupById(id, true);
 
-      if ((infoPanelSelection as unknown as TGroup)?.id === group.id) {
-        setInfoPanelSelection(group);
-        setInfoPanelSelectedGroup(group);
-      }
-
       if (contactsTab !== "groups") {
-        if (this.currentGroup.id !== group.id) return;
+        if (this.currentGroup?.id !== group.id) return;
 
         this.currentGroup = group;
         return;
@@ -157,24 +148,25 @@ class GroupsStore {
 
       runInAction(() => {
         this.groups[idx] = group;
+
+        this.updateSelection();
       });
     });
 
     SocketHelper.on(SocketEvents.DeleteGroup, (id) => {
       const { contactsTab } = this.peopleStore.usersStore;
 
-      const idx = this.groups.findIndex((x) => x.id === id);
-
       if (contactsTab !== "groups") {
-        if (this.currentGroup.id !== id) return;
+        if (this.currentGroup?.id !== id) return;
 
         window.DocSpace.navigate("/accounts/groups/filter");
         return;
       }
 
       runInAction(() => {
-        this.groups.splice(idx, 1);
+        this.groups = this.groups.filter((x) => x.id !== id);
         this.groupsFilter.total -= 1;
+        this.updateSelection();
       });
     });
   }
@@ -306,8 +298,9 @@ class GroupsStore {
 
   setSelection = (selection: TGroup[]) => (this.selection = selection);
 
-  setBufferSelection = (bufferSelection: Nullable<TGroup>) =>
-    (this.bufferSelection = bufferSelection);
+  setBufferSelection = (bufferSelection: Nullable<TGroup>) => {
+    this.bufferSelection = bufferSelection;
+  };
 
   setSelected = (selected: "all" | "none") => {
     const { hotkeyCaret, setHotkeyCaret } =
@@ -382,13 +375,25 @@ class GroupsStore {
     this.setSelection(newSelections);
   };
 
+  updateSelection = () => {
+    if (this.bufferSelection) {
+      this.bufferSelection =
+        this.groups.find((g) => g.id === this.bufferSelection?.id) ?? null;
+    }
+
+    if (this.selection) {
+      this.selection = this.selection
+        .map((g) => this.groups.find((g2) => g2.id === g.id) ?? null)
+        .filter(Boolean) as TGroup[];
+    }
+  };
+
   onDeleteClick = (name: string) => {
     this.setGroupName(name);
     this.dialogStore.setDeleteGroupDialogVisible(true);
   };
 
   onDeleteGroup = async (t: TFunction, groupId: string) => {
-    const { setInfoPanelSelectedGroup } = this.infoPanelStore;
     const isDeletingCurrentGroup =
       this.peopleStore.usersStore!.contactsTab === "inside_group" &&
       this.currentGroup?.id === groupId;
@@ -409,12 +414,10 @@ class GroupsStore {
       );
       this.setSelection([]);
       this.getGroups(this.groupsFilter, true);
-      this.infoPanelStore.setInfoPanelSelection(null);
       this.setIsLoading(false);
       this.dialogStore.setDeleteGroupDialogVisible(false);
 
       if (isDeletingCurrentGroup) {
-        setInfoPanelSelectedGroup(null);
         this.setBufferSelection(null);
         window.DocSpace.navigate(`accounts/groups`);
       }
@@ -470,7 +473,7 @@ class GroupsStore {
         label: t("Common:Info"),
         title: t("Common:Info"),
         icon: InfoReactSvgUrl,
-        onClick: () => this.infoPanelStore.setIsVisible(true),
+        onClick: showInfoPanel,
       },
       {
         key: "separator",
@@ -535,7 +538,7 @@ class GroupsStore {
             this.peopleStore.usersStore!.setSelection([]);
             this.peopleStore.usersStore!.setBufferSelection(null);
           }
-          this.infoPanelStore.setIsVisible(true);
+          showInfoPanel();
         },
       });
 
@@ -555,7 +558,7 @@ class GroupsStore {
       });
     }
 
-    return options;
+    return options as ContextMenuModel[];
   };
 
   getModel = (t: TFunction, item: TGroup) => {
@@ -571,10 +574,6 @@ class GroupsStore {
     e?: React.MouseEvent<Element, MouseEvent>,
   ) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
-
-    const isSameGroup =
-      this.peopleStore.usersStore.contactsTab === "inside_group" &&
-      this.currentGroup?.id === groupId;
 
     this.peopleStore.usersStore!.setContactsTab("inside_group");
 
@@ -594,7 +593,7 @@ class GroupsStore {
       this.setInsideGroupBackUrl(url);
     }
 
-    window.DocSpace.navigate(insideGroupUrl, { replace: isSameGroup });
+    window.DocSpace.navigate(insideGroupUrl);
   };
 
   updateGroup = async (
@@ -604,12 +603,6 @@ class GroupsStore {
     membersToAdd: string[],
     membersToRemove: string[],
   ) => {
-    const {
-      infoPanelSelection,
-      setInfoPanelSelection,
-      setInfoPanelSelectedGroup,
-    } = this.infoPanelStore;
-
     try {
       const res = await groupsApi.updateGroup(
         groupId,
@@ -630,11 +623,6 @@ class GroupsStore {
         this.setCurrentGroup(res);
         this.setInsideGroupTempTitle(res.name);
         this.peopleStore.usersStore!.getUsersList();
-      }
-
-      if ((infoPanelSelection as unknown as TGroup)?.id === res.id) {
-        setInfoPanelSelection(res);
-        setInfoPanelSelectedGroup(res);
       }
     } catch (err: unknown) {
       toastr.error((err as { message: string }).message);

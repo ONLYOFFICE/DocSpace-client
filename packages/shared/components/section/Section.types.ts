@@ -73,6 +73,7 @@ export type SectionBodyProps = {
 };
 
 export type SectionContainerProps = {
+  ref?: React.RefObject<HTMLDivElement | null>;
   isSectionHeaderAvailable: boolean;
   isInfoPanelVisible?: boolean;
   viewAs?: TViewAs;
@@ -84,7 +85,6 @@ export type SectionContainerProps = {
 export type SectionFilterProps = {
   children: React.ReactNode;
   className?: string;
-  viewAs?: TViewAs;
   withTabs?: boolean;
 };
 

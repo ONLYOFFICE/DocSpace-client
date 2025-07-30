@@ -3,7 +3,7 @@
   "content": "Custom room",
   "content_en_sha1_hash": "0839c4e1eb680a458fad43d77aa71faffff6d7c4",
   "created_at": "2025-05-19T21:30:44.386Z",
-  "updated_at": "2025-06-03T20:59:42.127Z",
+  "updated_at": "2025-06-08T12:02:32.760Z",
   "comment": {
     "text": "This translation key \"CustomRoomTitle\" is used to display the label for custom rooms in various UI elements. It is likely used as a button title or a room type filter option, and its content should reflect the desired human-readable name for these custom rooms.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Հարմարեցված սենյակ\" is a literal translation of \"Custom room\", it doesn't fully capture the nuance. \"Custom\" often implies personalization or creation, not just adaptation. A more accurate translation might convey that.",
+          "suggestion": "Consider alternatives like \"Ձևավորված սենյակ\" (Designed room), \"Պատվերով սենյակ\" (Ordered room), or \"Անհատական սենյակ\" (Personalized room) depending on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Sala particularizată' is a literal translation, it's not the most natural or commonly used phrasing for \"Custom room\" in Romanian. It sounds a bit formal and clunky.",
-          "suggestion": "Consider alternatives like 'Cameră personalizată', 'Cameră proprie', or 'Cameră individuală' depending on the context. 'Cameră personalizată' is likely the best overall choice."
+          "description": "While \"Sala particularizată\" is technically correct, it's a bit formal and clunky for a user-facing setting like a 'Custom room' title. It doesn't convey the same feeling of personalization and ease.",
+          "suggestion": "Consider alternatives like \"Cameră personalizată\" or \"Camera ta\" which are more natural and friendly."
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'අභිරුචි කාමරය' (abiruchi kamaraya) translates more closely to 'whimsical room' or 'arbitrary room' rather than 'custom room'. While 'අභිරුචි' (abiruchi) can relate to taste/preference, it doesn't directly convey the sense of customization.",
-          "suggestion": "Consider using a translation like 'පිටcustomize කළ කාමරය' (pītakam customize kala kamaraya) which literally means 'customized room', or 'අපේ කැමැත්තට අනුව කාමරය' (ape kametta anuva kamaraya) which means 'room according to our wish'."
+          "description": "The translation 'අභිරුචි කාමරය' while technically meaning 'custom room', sounds slightly awkward and not the most natural phrasing in Sinhala. 'අභිරුචි' implies a very high degree of customization, whereas 'custom' can be more general.",
+          "suggestion": "Consider alternatives like 'අ sendiri පරිභෝජනයට හැකි කාමරය' (a room for personal use) or 'ත sendiri නිර්මාණය කළ කාමරය' (a room that's designed/created) depending on the specific nuance intended."
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Прилагођена соба\" is a literal translation of 'Custom room' but may not be the most natural or idiomatic way to express the concept. 'Custom' often implies a user-created or personalized experience.",
-          "suggestion": "Consider alternatives like \"Корисничка соба\" (User room), \"Соба по мери\" (Room tailored to your needs), or \"Моја соба\" (My room), depending on the exact context."
+          "description": "The Serbian (Cyrillic) translation 'Прилагођена соба' is a literal translation of 'Custom room' but doesn't fully convey the intended meaning in context. 'Custom room' often implies a room that can be personalized or modified. A more appropriate translation would consider this nuance.",
+          "suggestion": "Модерна соба"
         }
       ],
       "approved_at": null

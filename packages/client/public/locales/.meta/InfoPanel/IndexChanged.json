@@ -3,7 +3,7 @@
   "content": "Index changed",
   "content_en_sha1_hash": "4fe8f06def4eb4a82dbff497c0dcd6fee6954562",
   "created_at": "2025-05-19T21:30:54.885Z",
-  "updated_at": "2025-05-28T09:30:02.428Z",
+  "updated_at": "2025-06-30T12:20:31.339Z",
   "comment": {
     "text": "The \"IndexChanged\" translation key is used to display a message indicating that an index has changed within the feed data. This message appears in UI elements that track changes to the data structure, likely on buttons or dialogues related to data editing or management. Translators should ensure the text accurately reflects updates or changes in the context of the application's data handling.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 101,
-      "context": "version: feed.data.version,\n });\n }\n case \"FileIndexChanged\":\n case \"FolderIndexChanged\":\n return t(\"InfoPanel:IndexChanged\");\n case \"FolderIndexReordered\":\n return t(\"InfoPanel:FolderIndexReordered\");\n case \"FolderCreated\":\n return t(\"InfoPanel:FolderCreated\");\n case \"FolderRenamed\":",
+      "line_number": 107,
+      "context": "version: feed.data.version,\n });\n }\n case FeedActionKeys.FileIndexChanged:\n case FeedActionKeys.FolderIndexChanged:\n return t(\"InfoPanel:IndexChanged\");\n case FeedActionKeys.FolderIndexReordered:\n return t(\"InfoPanel:FolderIndexReordered\");\n case FeedActionKeys.FolderCreated:\n return t(\"InfoPanel:FolderCreated\");\n case FeedActionKeys.FolderRenamed:",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تم تغير الفهرس' is a literal translation and doesn't quite capture the natural flow of 'Index changed'. It implies an action *was* done, rather than stating the fact that the index *has* changed.",
-          "suggestion": "تغيير الفهرس (Taghyir al-Fihris) - This is a more natural and concise way to express 'Index changed'. Alternatively,  تم تحديث الفهرس (Tam tahdeeth al-fihris) - 'The index has been updated' is also a good option."
+          "description": "The translation \"تم تغير الفهرس\" is not the most natural or accurate rendering of \"Index changed.\" While technically correct, it sounds somewhat clunky in Arabic. A more idiomatic translation would convey the sense of a change happening to the index.",
+          "suggestion": "تغيير الفهرس (Taghyir al-fihris) or الفهرس تغير (al-fihris taghayyar)"
         }
       ],
       "approved_at": null
@@ -66,8 +66,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Έγινε αλλαγή ευρετηρίου' is a literal translation of 'Index changed' but may not be the most natural or common way to express this concept in Greek. 'Ευρετήριο' refers to an index, but the phrasing 'Έγινε αλλαγή...' (An index changed...) is somewhat formal and potentially awkward depending on the context. A more natural phrasing might be 'Αλλαγή ευρετηρίου' (Index change) or 'Τροποποιήθηκε το ευρετήριο' (The index was modified).",
-          "suggestion": "Consider 'Αλλαγή ευρετηρίου' or 'Τροποποιήθηκε το ευρετήριο'."
+          "description": "The translation 'Έγινε αλλαγή ευρετηρίου' while technically correct, is quite literal and sounds unnatural in Greek for a user interface element like 'Index changed'. It would be understood, but it's not idiomatic.",
+          "suggestion": "Αλλαγή ευρετηρίου"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a full stop, which might be overly formal for a UI element.  Consider removing it.",
+          "suggestion": "Αλλαγή ευρετηρίου"
         }
       ],
       "approved_at": null
@@ -105,7 +110,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"インデックスの変更\" is technically correct, it's a very literal translation. A more natural and concise translation would be \"インデックス変更\" or \"変更されたインデックス\". \"インデックスの変更\" sounds slightly awkward in Japanese.",
+          "suggestion": "インデックス変更"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -174,7 +185,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Index bol zmenený' is grammatically correct but not the most natural or idiomatic Slovak translation for 'Index changed'. A more accurate and common translation would be 'Index sa zmenil' or 'Zmenil sa index'. 'Bol zmenený' implies something *was* changed to the index, rather than the index itself changing.",
+          "description": "The translation 'Index bol zmenený' is not the most natural or accurate translation of 'Index changed'. While grammatically correct, it implies a past action that has already completed. 'Index changed' is often a notification of a change happening now or very recently. A more appropriate translation would convey this sense of immediacy.",
           "suggestion": "Index sa zmenil"
         }
       ],
@@ -213,7 +224,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Đã thay đổi chỉ mục' is technically correct, it's a very literal translation and sounds unnatural in Vietnamese. A more natural and user-friendly translation would be 'Đã cập nhật chỉ mục' or 'Chỉ mục đã thay đổi'.",
+          "suggestion": "Đã cập nhật chỉ mục"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

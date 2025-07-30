@@ -3,7 +3,7 @@
   "content": "Years",
   "content_en_sha1_hash": "96f997bcecb36502ed4b296a795f72aff9d6bfe7",
   "created_at": "2025-05-19T21:30:49.621Z",
-  "updated_at": "2025-05-28T09:30:02.230Z",
+  "updated_at": "2025-05-26T07:57:32.256Z",
   "comment": {
     "text": "This translation key is used for labeling options in a \"Years\" dropdown menu within the File Lifetime dialog. It will appear as the label on a button or select element in this specific component, and its purpose is to display the translated phrase \"Years\".",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 446,
+      "line_number": 450,
       "context": "case 0:\n return t(\"Common:Days\").toLowerCase();\n case 1:\n return t(\"Common:Months\").toLowerCase();\n case 2:\n return t(\"Common:Years\").toLowerCase();\n \n default:\n return t(\"Common:Days\").toLowerCase();\n }\n };",
       "module": "/packages/shared"
     }
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ປີތົ່ວມາ' doesn't accurately translate 'Years'. 'ປີތົ່ວມາ' literally means 'coming years' or 'years coming'. It doesn't simply mean 'Years'.",
-          "suggestion": "ປີ (pi) - Year(s)"
+          "description": "The Lao translation \"ປີތົ່ວມາ\" does not accurately translate \"Years.\" \"ປີ\" (pi) means 'year,' but \"ປີތົ່ວມາ\" is a less common or potentially incorrect phrasing.  A more accurate and common translation of 'Years' would be 'ປີ' (pi) or 'ປີຕ່າງໆ' (pi tang tang).",
+          "suggestion": "ປີ or ປີຕ່າງໆ"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation \"Let\" does not accurately translate \"Years\". \"Let\" means \"to\" or \"for\" in Slovenian. A more accurate translation would be \"Leti\".",
-          "suggestion": "Leti"
+          "description": "The Slovenian translation 'Let' for 'Years' is inaccurate. 'Let' means 'Let' or 'Allow' and does not convey the meaning of 'Years'. A more appropriate translation would depend on the context (e.g., 'Leti' for 'Years' in a general sense, or a more specific term if referring to a particular type of year).",
+          "suggestion": "Consider 'Leti' or a more contextually appropriate translation for 'Years'."
         }
       ],
       "approved_at": null

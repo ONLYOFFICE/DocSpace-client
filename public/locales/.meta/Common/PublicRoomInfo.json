@@ -3,7 +3,7 @@
   "content": "Share documents for viewing, editing, commenting, or reviewing without registration. You can also embed this room into any web interface.",
   "content_en_sha1_hash": "9eb88d5eef886330584cd438a6dc42214e1d9081",
   "created_at": "2025-05-19T21:30:47.660Z",
-  "updated_at": "2025-07-01T15:57:36.197Z",
+  "updated_at": "2025-06-08T12:02:32.758Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining that PublicRoomInfo allows sharing documents without registration, and can be embedded in web interfaces. It appears as a HelpButton in a LabelGroup within a ComboBox, providing context for users configuring portal settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 439,
+      "line_number": 435,
       "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
       "module": "/packages/client"
     },
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'reviewing' (مراجعة) is a bit too formal and doesn't quite capture the full nuance of 'reviewing' in this context. A more natural phrasing would be something like 'إعادة النظر' (i'adah an-nazar) or 'الاطلاع عليها' (al-iitlaa' 'alayha).",
-          "suggestion": "Replace 'مراجعة' with 'إعادة النظر' or 'الاطلاع عليها'."
+          "description": "The word 'تضمين' (tadmeen) is a direct translation of 'embed' but in this context, a more natural translation might be 'إضافة' (idafa) - which means 'add' or 'integrate'. While 'تضمين' isn't *wrong*, it's less idiomatic.",
+          "suggestion": "شارك المستندات للعرض أو التحرير أو التعليق أو المراجعة دون تسجيل. يمكنك أيضًا إضافة هذه الغرفة في أي واجهة ويب."
         }
       ],
       "approved_at": null
@@ -60,13 +60,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"place this room\" (yerləşdirə bilərsiniz) is not the most natural way to express embedding a room into a web interface. A better translation would convey the idea of integrating or embedding.",
-          "suggestion": "Həmçinin bu otağı istənilən veb interfeysə inteqrasiya edə bilərsiniz."
+          "description": "The phrase \"Share documents\" is a bit too literal. A more natural phrasing in Azerbaijani for this context would be something like \"Sənəd paylaşın\" or \"Sənədləri paylaşın\" (depending on whether multiple documents are implied).",
+          "suggestion": "Sənədləri paylaşın"
         },
         {
-          "type": "formatting",
-          "description": "While not a severe issue, the sentence structure could be improved for smoother reading. Separating the first and second sentences could enhance readability.",
-          "suggestion": "Qeydiyyatdan keçmədən sənədlərə baxmaq, redaktə etmək, şərh etmək və ya nəzərdən keçirmək üçün paylaşın. Həmçinin, bu otağı istənilən veb interfeysə inteqrasiya edə bilərsiniz."
+          "type": "incorrect_translation",
+          "description": "The word \"yerləşdirmək\" (to place) for \"embed\" isn't the most appropriate. A more common and accurate translation for \"embed\" in this context is \"daxil etmək\" or \"qoymaq\".",
+          "suggestion": "Otağı istənilən veb interfeysə daxil edə bilərsiniz."
         }
       ],
       "approved_at": null
@@ -83,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'kontrolování' (controlling/checking) doesn't quite capture the nuance of 'reviewing' in this context. It's a bit too formal and suggests a verification process rather than a general review.",
-          "suggestion": "Sdílejte dokumenty k prohlížení, úpravám, komentování nebo prozkoumávání bez registrace."
+          "description": "The word 'kontrolování' (checking/reviewing) in 'kontrolování nebo kontrolování' is less precise than 'reviewing' in the English original. While it conveys a similar meaning, 'reviewing' implies a more thorough examination.",
+          "suggestion": "Consider using a word that more closely aligns with the original 'reviewing,' such as 'přezkoumání' or 'revidování'."
         }
       ],
       "approved_at": null
@@ -95,13 +95,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Geben Sie Dokumente frei\" is awkward and doesn't accurately convey the meaning of 'Share documents'. A better translation would focus on the act of sharing.",
-          "suggestion": "Teilen Sie Dokumente..."
+          "description": "The phrase 'Share documents' is translated as 'Geben Sie Dokumente frei'. While technically correct, a more natural and idiomatic translation would be something like 'Teilen Sie Dokumente'. 'Geben Sie...frei' implies giving something away freely, which is not precisely what is meant in this context.",
+          "suggestion": "Teilen Sie Dokumente"
         },
         {
           "type": "incorrect_translation",
-          "description": "While \"Weboberfläche\" is correct for 'web interface', it sounds slightly formal. Depending on the target audience, a more common term might be better.",
-          "suggestion": "Webseite"
+          "description": "The word 'reviewing' is translated as 'Überprüfen'. While accurate, a more precise and commonly used term in this context would be 'Begutachten'.",
+          "suggestion": "Begutachten"
         }
       ],
       "approved_at": null
@@ -112,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"web interface\" is a bit literal. A more natural Greek translation would be something along the lines of \"ιστότοπο\" or \"εφαρμογή ιστού\".",
-          "suggestion": "Μπορείτε επίσης να ενσωματώσετε αυτό το δωμάτιο σε οποιονδήποτε ιστότοπο ή εφαρμογή ιστού."
+          "description": "The English phrase \"reviewing\" is not perfectly captured by \"αναθεώρηση\" in the Greek translation. While \"αναθεώρηση\" can mean review, it carries a stronger connotation of a formal or critical review. A more general term like \"έλεγχο\" might be more appropriate.",
+          "suggestion": "Replace \"αναθεώρηση\" with \"έλεγχο\"."
         }
       ],
       "approved_at": null
@@ -124,8 +124,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'incrustar' (embed) can sound a bit technical or unusual in this context. A more natural phrasing might be 'integrar' or 'insertar'.",
-          "suggestion": "Comparta documentos para su visualización, edición, comentario o revisión sin necesidad de registrarse. También puede integrar esta sala en cualquier interfaz web."
+          "description": "The phrase 'Share documents' is a bit too literal. A more natural Spanish translation would be 'Compartir documentos' or 'Publicar documentos'. While 'Comparta documentos' isn't wrong, it sounds slightly less idiomatic.",
+          "suggestion": "Publicar documentos"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a significant issue, a comma might improve readability after 'visualización'.",
+          "suggestion": "Comparta documentos para su visualización, edición, comentario o revisión sin necesidad de registrarse. (Add a comma after 'visualización')"
         }
       ],
       "approved_at": null
@@ -136,7 +141,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'katseltavaksi' is repeated unnecessarily. The English 'reviewing' isn't adequately represented and the repetition makes the sentence awkward in Finnish.",
+          "description": "The Finnish translation contains a repetition of \"katseltavaksi\" (for viewing). It appears to be an error due to a duplicated word. The English says 'viewing, editing, commenting, or reviewing', but the Finnish lists 'viewing' twice.",
           "suggestion": "Jaa asiakirjoja katseltavaksi, muokattavaksi, kommentoitavaksi tai tarkasteltavaksi ilman rekisteröintiä. Voit myös upottaa tämän huoneen mihin tahansa verkkokäyttöliittymään."
         }
       ],
@@ -154,13 +159,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Share documents\" is too literal. A more natural Armenian phrasing for sharing would be something like \"Համերձեք փաստաթղթերը\" or \"Տարածեք փաստաթղթերը\".",
-          "suggestion": "Համերձեք փաստաթղթերը դիտելու, խմբագրելու, մեկնաբանելու կամ վերանայելու համար:"
+          "description": "The phrase \"Share documents\" is not perfectly translated. A more natural Armenian phrasing would convey the intent of making documents available.",
+          "suggestion": "Մատուցեք փաստաթղթեր (Matutsek pastathger) or Տեղափոխեք փաստաթղթեր (Teghaphoxek pastathger)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'web interface' is translated literally. 'վեբ ինտերֆեյս' is technically correct, but it might be more understandable for a broader audience if rendered as something closer to 'ցանցի միջավայր' or 'էլեկտրոնային հարթակ'.",
-          "suggestion": "Տեղադրել այս սենյակը ցանկացած ցանցի միջավայրի մեջ:"
+          "description": "The word 'room' is translated literally as 'սենյակը (senyaku). A better translation would emphasize it's a digital space.",
+          "suggestion": "Պլատֆորմը (platformy) or Հարթակը (Hartagy) - which translates to platform."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a little clunky and could be improved for better flow in Armenian. The list of actions (viewing, editing, etc.) could be more smoothly integrated.",
+          "suggestion": "Կիսվեք փաստաթղթերով դիտելու, խմբագրելու, մեկնաբանելու կամ վերանայելու համար՝ առանց գրանցման: Դուք կարող եք նաև տեղադրել այս հարթակը ցանկացած վեբ ինտերֆեյսի մեջ:"
         }
       ],
       "approved_at": null
@@ -177,13 +187,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Share documents\" is too literal. A more natural Japanese phrasing would be 'ドキュメントを共有' (dokyumento o kyōyū) or 'ドキュメントの共有' (dokyumento no kyōyū). The current translation, while technically correct, sounds slightly awkward.",
-          "suggestion": "ドキュメントの共有が可能"
+          "description": "The phrase \"Share documents\" is translated as \"ドキュメントの閲覧、編集、コメント、レビューの共有が可能\". While technically correct, it's a bit verbose and less natural in Japanese. A more concise and natural translation would be something like \"ドキュメントの閲覧、編集、コメント、レビューを共有できます\".",
+          "suggestion": "ドキュメントの閲覧、編集、コメント、レビューを共有できます"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'any' in \"any web interface\" is overly broad. It is slightly unnatural in Japanese. A more appropriate phrasing would be more specific to the intended meaning.",
-          "suggestion": "任意のウェブインターフェース (onoo webu intāfēsu) is acceptable, but consider rephrasing for greater clarity depending on the target audience.  For example, '任意のウェブサイトに埋め込むこともできます' (you can also embed it into any website)."
+          "description": "The phrase \"without registration\" is translated as \"登録なしで\". While accurate, in this context, the implication is that *anyone* can view/edit/comment/review, not just that registration isn't required for *sharing*. The phrasing could be improved to emphasize the openness.",
+          "suggestion": "誰でも登録なしでドキュメントの閲覧、編集、コメント、レビューを共有できます"
         }
       ],
       "approved_at": null
@@ -194,8 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"인베드할 수도 있습니다\" is an incorrect transliteration of \"embed.\" The correct Korean word for embed in this context is '임베드하다' or a more natural phrasing using '삽입하다'.",
-          "suggestion": "등록하지 않고도 문서를 확인하고 편집하고 주석을 달거나 검토할 수 있도록 공유하세요. 또한 웹 인터페이스에 이 룸을 임베드할 수도 있습니다. or 등록하지 않고도 문서를 확인하고 편집하고 주석을 달거나 검토할 수 있도록 공유하세요. 또한 웹 인터페이스에 이 룸을 삽입할 수도 있습니다."
+          "description": "The translation of \"Share documents\" is somewhat awkward. A more natural Korean phrasing would be more appropriate.",
+          "suggestion": "문서를 공유하여"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word '인베드' is a Konglish (Korean-English hybrid) and isn't the most natural way to express 'embed' in this context. A more formal term would be preferable.",
+          "suggestion": "웹 인터페이스에 이 룸을 포함시킬 수도 있습니다."
         }
       ],
       "approved_at": null
@@ -206,8 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຝັງຫ້ອງນີ້ເຂົ້າ​ໃນ​ສ່ວນຕິດຕໍ່ຜູ້ໃຊ້ເວັບໃດໆ​ໄດ້\" is a bit clunky. A more natural translation for \"embed this room into any web interface\" might be \"ສາມາດນໍາຫ້ອງນີ້ໄປໃສ່ເວັບໄຊ້ໄດ້ເຕັມສ່ວນ\" or something similar. The current translation sounds somewhat literal and less fluent.",
-          "suggestion": "ສາ​ມາດນໍາຫ້ອງນີ້ໄປໃສ່ເວັບໄຊ້ໄດ້ເຕັມສ່ວນ"
+          "description": "The phrase 'embed this room' is translated as 'ຝັງຫ້ອງນີ້'. While technically correct, a more natural and commonly used phrasing would be 'ນໍາຫ້ອງນີ້ໄປເຊິ່ງ...' or 'ປະລິດທານຫ້ອງນີ້ເຂົ້າ...'",
+          "suggestion": "ນໍາຫ້ອງນີ້ໄປເຊິ່ງ... or ປະລິດທານຫ້ອງນີ້ເຂົ້າ..."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure in Lao could be improved for better readability. The current phrasing is a bit long and convoluted.",
+          "suggestion": "ແບ່ງປັນເອກະສານເພື່ອເບິ່ງ, ແກ້ໄຂ, ໃຫ້ຄວາມຄໍາເຫັນ, ຫຼື ກວດແກ້ໂດຍບໍ່ຕ້ອງລົງທະບຽນ. ທ່ານສາມາດນໍາຫ້ອງນີ້ໄປເຊິ່ງສ່ວນຕິດຕໍ່ຜູ້ໃຊ້ເວັບໃດໆໄດ້."
         }
       ],
       "approved_at": null
@@ -224,8 +244,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'review' is translated as 'beoordelen'. While technically correct, 'review' in this context refers more to a formal assessment or evaluation. 'Beoordelen' can imply a grading or scoring which isn't the intended meaning.",
-          "suggestion": "Consider 'bekijken en evalueren' or 'bekijken en beoordelen' if a more general term is acceptable. Alternatively, 'recenseren' could also work but it has a slightly different connotation, implying a more expert review."
+          "description": "The term \"kamer\" (room) doesn't quite convey the meaning of 'room' in the context of a shared document space. It implies a physical room rather than a digital space.",
+          "suggestion": "Consider using a term like \"ruimte\" (space) or a more descriptive phrase like \"gedeelde omgeving\" (shared environment)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"beoordelen\" (assess) isn't inherently wrong, it’s more formal than 'review'.",
+          "suggestion": "Consider using a more casual term like \"nazien\" or \"bekijken\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses the formal \"U\" (you).  Depending on the target audience, a more informal \"je\" might be preferred.",
+          "suggestion": "Consider using 'je' instead of 'U' for a more approachable tone, if appropriate for the audience."
         }
       ],
       "approved_at": null
@@ -242,13 +272,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Share\" is \"Partilhe\". While technically correct, it's a more formal form. A more natural translation for a user-facing interface might be \"Compartilhe\".",
-          "suggestion": "Compartilhe documentos para visualizar, editar, comentar ou rever sem registo."
+          "description": "The word 'Você' is used incorrectly. 'Você' is informal. 'O Senhor/A Senhora' or simply 'Pode' would be more appropriate for a public-facing message.",
+          "suggestion": "Partilhe documentos para visualizar, editar, comentar ou rever sem registo. Pode também incorporar esta sala em qualquer interface web."
         },
         {
           "type": "incorrect_translation",
-          "description": "The use of 'Você' is slightly unusual in a formal/technical context. While not incorrect, 'Pode' or 'Você pode' would flow better.",
-          "suggestion": "Pode também incorporar esta sala em qualquer interface web."
+          "description": "The English phrase 'embed this room' is somewhat awkward. A more natural Portuguese equivalent might emphasize the ability to integrate.",
+          "suggestion": "Partilhe documentos para visualizar, editar, comentar ou rever sem registo. Pode também integrar esta sala em qualquer interface web."
         }
       ],
       "approved_at": null
@@ -270,13 +300,13 @@
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'room' is translated as 'sală', which can be confusing. While 'sală' can mean room, in this context it could be misinterpreted as a physical room. A more appropriate translation might be 'spațiu'.",
+          "description": "The word 'room' is translated as 'sala' which implies a physical room. 'Room' in this context refers to a digital space. A better translation would be 'spațiu' or 'mediu'.",
           "suggestion": "Partajați documente pentru vizualizarea, editarea, comentarea sau revizuirea fără înregistrare. De asemenea puteți incorpora acest spațiu în orice interfață web."
         },
         {
-          "type": "spelling",
-          "description": "There's a typo. The word 'această' should be 'acest'.",
-          "suggestion": "Partajați documente pentru vizualizarea, editarea, comentarea sau revizuirea fără înregistrare. De asemenea puteți incorpora acest spațiu în orice interfață web."
+          "type": "incorrect_translation",
+          "description": "The pronoun 'această' is potentially incorrect and awkward.  A more natural wording might involve restructuring the sentence.",
+          "suggestion": "De asemenea puteți încorpora acest spațiu în orice interfață web."
         }
       ],
       "approved_at": null
@@ -293,18 +323,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Share documents' is translated as 'ලේඛන බලන්න', which literally means 'view documents'. While viewing is a valid action, 'share' implies distribution. A more accurate translation would convey the act of sharing.",
-          "suggestion": "ලේඛන බෙදා ගන්න (Lekhana beda gana)"
+          "description": "The English phrase 'Share documents' is translated as 'ලේඛන බලන්න' which literally means 'view documents'. While 'viewing' is a function of sharing, 'share documents' implies more than just viewing. A better translation would convey the action of sharing itself.",
+          "suggestion": "ලේඛන බෙදා ගන්න"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'reviewing' is translated as 'සමාලෝචනය කරන්න'. While technically correct, it can be perceived as formal or too specific depending on the context. A more general term for 'review' could be more suitable.",
-          "suggestion": "සමාලෝචනය කිරීම් කරන්න (Samalochana kirim karna) or පරීක්ෂා කිරීම් කරන්න (Pariksha kirim karna)"
+          "description": "The English phrase 'reviewing' is translated as 'සමාලෝචනය'. While technically correct, it's a bit formal for the context.  A slightly more casual and common term might be preferable.",
+          "suggestion": "ප්‍රතිචාර යොමු කිරීම්"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'embed this room' is translated as 'මෙම කාමරය ඇතුළු කිරීමට හැකිය'. 'ඇතුළු කිරීමට' is more like 'to include', it does not mean 'embed'.",
-          "suggestion": "මෙම කාමරය ඇතුළත් කිරීමට හැකිය (This room can be incorporated)."
+          "description": "The phrase 'web interface' is translated as 'වෙබ් අතුරුමුහුණත'. While accurate, it's a somewhat formal and technical term. A more accessible term might be better.",
+          "suggestion": "වෙබ් පිටුව"
         }
       ],
       "approved_at": null
@@ -321,13 +351,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Share documents' is 'Delite dokumente'. While 'deliti' means 'to share', 'Delite' is a formal imperative form. A more natural and common way to say 'Share documents' in Slovenian would be 'Delite dokumente'.",
-          "suggestion": "Delite dokumente"
+          "description": "The phrase \"To sobo lahko tudi vdelate\" is a literal translation of \"You can also embed this room\". While understandable, a more natural and idiomatic Slovenian phrasing would be \"Lahko ga tudi vdelate\" or \"Sobo lahko tudi vdelate\". The pronoun 'ga' needs to explicitly refer to 'sobo' (room).",
+          "suggestion": "Lahko ga tudi vdelate."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'web interface' is translated as 'spletni vmesnik'. A more natural and widely understood translation would be 'spletni interfejs'.",
-          "suggestion": "spletni interfejs"
+          "type": "formatting",
+          "description": "The translation lacks a period at the end of the sentence. This is standard practice in Slovenian.",
+          "suggestion": "Delite dokumente za ogled, urejanje, komentiranje ali pregled brez registracije. To sobo lahko tudi vdelate v katero koli spletni vmesnik."
         }
       ],
       "approved_at": null
@@ -338,13 +368,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'reviewing' is translated as 'прегледање' which literally means 'browsing' or 'looking over'. 'Прегледање' doesn't quite capture the nuance of a formal review process. A better translation would be 'исправљање' (correcting) or 'давање повратних информација' (providing feedback).",
-          "suggestion": "Делите документе за преглед, уређивање, коментарисање или исправљање/давање повратних информација без регистрације."
+          "description": "The word 'reviewing' is translated as 'прегледање' which is more accurately 'browsing' or 'scanning' rather than 'reviewing' in the context of document review. It lacks the connotation of a more thorough assessment.",
+          "suggestion": "Делите документе за преглед, уређивање, коментарисање или *исправљање* без регистрације."
         },
         {
           "type": "formatting",
-          "description": "The sentence is a bit long and could be improved for readability. Breaking it into two shorter sentences might improve clarity.",
-          "suggestion": "Делите документе за преглед, уређивање, коментарисање или исправљање без регистрације. Такође можете уградити ову собу у било који веб интерфејс."
+          "description": "The word 'or' is not consistently translated.  While 'или' is used for the first two options, it is followed by a comma before the next term, which is not present for all items.",
+          "suggestion": "Делите документе за преглед, уређивање, коментарисање, *или* прегледање без регистрације."
         }
       ],
       "approved_at": null
@@ -355,13 +385,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'reviewing' is translated as 'pregledanje'. While technically correct, 'recenziranje' would be a more appropriate translation in this context, implying a more formal review process, aligning with the implication of professional collaboration.",
+          "description": "The word 'reviewing' is translated as 'pregledanje'. While technically correct, 'recenziranje' would be a more accurate translation in this context, implying a more formal review process.",
           "suggestion": "Delite dokumente za pregled, uređivanje, komentarisanje ili recenziranje bez registracije."
         },
         {
-          "type": "incorrect_translation",
-          "description": "“embed” is translated as “ugraditi”. While understandable, 'uvesti' might be a more suitable and common term for embedding a room into a web interface. 'Ugraditi' often implies physical installation.",
-          "suggestion": "Delite dokumente za pregled, uređivanje, komentarisanje ili recenziranje bez registracije. Takođe možete uvesti ovu sobu u bilo koji veb interfejs."
+          "type": "formatting",
+          "description": "The sentence uses 'Takođe možete...' which translates literally to 'Also you can...'. A more natural phrasing would be 'Možete takođe...'",
+          "suggestion": "Delite dokumente za pregled, uređivanje, komentarisanje ili recenziranje bez registracije. Možete takođe ugraditi ovu sobu u bilo koji veb interfejs."
         }
       ],
       "approved_at": null
@@ -372,13 +402,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Share documents' is slightly awkward in Turkish. A more natural phrasing would be 'Belgeleri paylaşın' or 'Dosyaları paylaşın'. While 'belgeleri' is technically correct, 'dosyaları' is more commonly used in this context.",
-          "suggestion": "Dosyaları paylaşın"
+          "description": "The phrase 'Share documents for viewing, editing, commenting, or reviewing' is slightly awkward in Turkish. A more natural phrasing would emphasize the purpose of sharing.",
+          "suggestion": "Belgeleri, kayıt olmadan görüntülemek, düzenlemek, yorum yapmak veya incelemek amacıyla paylaşın."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'gömebilirsin' (you can embed) is grammatically correct, a more formal and professional tone is expected in this context. A more formal version would be 'gömülebilirsiniz'.",
-          "suggestion": "gömülebilirsiniz"
+          "description": "While 'gömmebilirsiniz' (can embed) is technically correct, it’s a more technical term.  A more accessible term might be preferable.",
+          "suggestion": "Ayrıca bu odayı herhangi bir web sitesine entegre edebilirsiniz."
         }
       ],
       "approved_at": null
@@ -392,7 +422,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'reviewing' is not accurately reflected in the Vietnamese translation. 'Xem lại' primarily means 'review' in the sense of looking at something again, not necessarily a formal review process.",
+          "suggestion": "Consider using 'xem xét' which has a broader meaning encompassing review and evaluation, or 'đánh giá' for a more formal review."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a comma after 'nhận xét' (commenting). While grammatically acceptable, it might be more common to omit the comma, especially in more concise writing.",
+          "suggestion": "Remove the comma after 'nhận xét'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

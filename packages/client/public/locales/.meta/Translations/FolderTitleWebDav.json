@@ -3,7 +3,7 @@
   "content": "WebDAV Directory",
   "content_en_sha1_hash": "5f28e3af75cb8e8a3f669af321d961250561489f",
   "created_at": "2025-05-19T21:30:49.983Z",
-  "updated_at": "2025-06-03T20:59:41.989Z",
+  "updated_at": "2025-05-26T07:57:32.388Z",
   "comment": {
     "text": "This translation key is used to display the title of a directory in various file management contexts. It is likely used in buttons or dialogs that allow users to select a directory from a list, such as a folder selection dialog or a context menu. The value will be displayed next to the folder title, allowing users to easily identify the selected directory.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'مجلد WebDAV' is a literal transliteration of 'WebDAV Directory'. A more natural and accurate translation would incorporate the concept of a directory.  'WebDAV Directory' implies a collection of files and folders accessible via WebDAV.",
+          "suggestion": "مجلد WebDAV للملفات"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"WebDAV գրացուցակ\" is a literal translation of \"directory\" but doesn't fully capture the meaning of \"WebDAV Directory\". It sounds a bit technical and might not be easily understood by all users. A more natural translation might be needed depending on the target audience. \"WebDAV թղթապանակ\" might be a better option.",
-          "suggestion": "Consider \"WebDAV թղթապանակ\" or a more context-specific translation for 'WebDAV Directory'."
+          "description": "The Armenian translation \"WebDAV գրացուցակ\" is a literal translation of \"directory\" but doesn't convey the meaning of a *WebDAV* directory, which implies a folder accessible via WebDAV protocol. A more accurate translation would consider the context.",
+          "suggestion": "WebDAV թղթապանակ (WebDAV t'ghat'apanak)"
         }
       ],
       "approved_at": null
@@ -93,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Cartella di WebDAV' is technically correct, a more natural and idiomatic Italian translation for 'WebDAV Directory' would be 'Directory WebDAV' or 'Cartella WebDAV'. The phrase 'Cartella di WebDAV' sounds slightly awkward.",
-          "suggestion": "Cartella WebDAV"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໄດເລກະທໍລີ WebDAV\" doesn't perfectly capture the meaning of \"WebDAV Directory\". While 'ໄດເລກະທໍລີ' translates to 'directory', the construction feels slightly unnatural in Lao. A more natural phrasing would emphasize it's a *WebDAV* directory.",
-          "suggestion": "ໄດເລກະທໍລີ WebDAV (ໄດເລກະທໍລີ ຂອງ WebDAV)"
+          "description": "The Lao translation \"ໄດເລກະທໍລີ WebDAV\" is a transliteration and doesn't accurately convey the meaning of 'WebDAV Directory.' A more accurate translation would incorporate the concept of a directory.",
+          "suggestion": "ໄດເລກະທໍລີ WebDAV ຫຼື ໂຟນ້າທ໌ໄດເລກະທໍລີ WebDAV (depending on the desired level of explanation)"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director WebDAV' is a literal translation but doesn't flow naturally. It would be more idiomatic to use a phrase like 'Dosar WebDAV' or 'Directoriu WebDAV'.",
-          "suggestion": "Director WebDAV should ideally be 'Director WebDAV' or 'Director WebDAV'."
+          "description": "The Romanian translation 'Director WebDAV' is a literal translation and doesn't fully convey the meaning of 'WebDAV Directory'.  'Director' implies a person or management, whereas 'Directory' refers to a folder or collection of files.",
+          "suggestion": "Dosar WebDAV"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'WebDAV නාමාවලිය' is a literal translation of 'directory' (නාමාවලිය) and doesn't fully convey the meaning of 'WebDAV Directory'. It could be misinterpreted.",
-          "suggestion": "WebDAV ෆෝල්ඩර් (WebDAV Folder) or WebDAV répertoire (WebDAV répertoire)"
+          "description": "The Sinhala translation 'WebDAV නාමාවලිය' translates to 'WebDAV list' which is not the most accurate rendering of 'WebDAV Directory'. 'Directory' implies a folder or collection of files, while 'list' is more generic.",
+          "suggestion": "WebDAV ෆෝල්ඩර් (WebDAV Folder)"
         }
       ],
       "approved_at": null

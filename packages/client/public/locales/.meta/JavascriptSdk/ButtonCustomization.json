@@ -3,7 +3,7 @@
   "content": "Button customization",
   "content_en_sha1_hash": "70e8a924318802e372427fa0afb10030d7a23270",
   "created_at": "2025-05-19T21:30:54.373Z",
-  "updated_at": "2025-05-21T09:30:42.716Z",
+  "updated_at": "2025-05-24T09:42:53.733Z",
   "comment": {
     "text": "This translation key is used to display the label \"Button Customization\" in a user interface element, likely a category header or subheader, where users can customize button settings. The text appears in a dialog or settings section related to developer tools and main elements.",
     "is_auto": true,
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"버튼 맞춤화\" isn't the most natural or commonly used translation for 'button customization'. While technically correct, it sounds slightly awkward. A more natural rendering would be '버튼 사용자 정의'.",
-          "suggestion": "버튼 사용자 정의"
+          "description": "The translation \"버튼 맞춤화\" is a direct transliteration of \"customization\" and while understandable, it's not the most natural or preferred Korean term. \"맞춤화\" implies a forced fitting or tailoring, which isn't the intended meaning of customization.",
+          "suggestion": "Consider \"버튼 사용자 정의\" (beon-eu seol-gi useo jeong-ui) which translates to 'button user customization' or \"버튼 설정\" (beon-eu seol-jeong) which translates to 'button settings'."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Particularizare buton' doesn't accurately convey the meaning of 'Button customization'. 'Particularizare' implies making something specific or detailed, while 'customization' refers to tailoring a button's appearance or functionality.",
-          "suggestion": "Consider alternatives like 'Personalizare buton', 'Configurare buton', or 'Adaptare buton'. 'Personalizare buton' is likely the closest and most common equivalent."
+          "description": "The translation 'Particularizare buton' doesn't accurately convey the meaning of 'Button customization'. 'Particularizare' implies specification or detailing, while 'customization' refers to the ability to modify or personalize.",
+          "suggestion": "Consider alternatives like 'Personalizare buton', 'Configurare buton', or 'Adaptare buton'. 'Personalizare buton' is likely the closest equivalent."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Прилагођавање дугмета\" is understandable, a more accurate and natural translation of \"Button customization\" would be something like \"Пример дугмета\" or \"Персонализација дугмета\". \"Прилагођавање\" implies more adaptation than customization often means.",
-          "suggestion": "Персонализација дугмета"
+          "description": "While \"Прилагођавање дугмета\" is understandable, a more accurate and natural-sounding translation of 'Button customization' in Serbian (Cyrillic) would be 'Приказивање дугмета' or 'Персонализација дугмета'. 'Прилагођавање' implies adaptation or modification, which isn't the core meaning of 'customization' in this context.",
+          "suggestion": "Приказивање дугмета"
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'pr prilagođavanje' should be 'prilagođavanje'.",
-          "suggestion": "prilagođavanje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

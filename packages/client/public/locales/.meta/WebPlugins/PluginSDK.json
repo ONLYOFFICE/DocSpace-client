@@ -3,7 +3,7 @@
   "content": "Plugin SDK",
   "content_en_sha1_hash": "db5137721d3c3c4eeffdfb6c023f6c7d28a1ca04",
   "created_at": "2025-05-19T21:30:49.920Z",
-  "updated_at": "2025-07-02T07:49:19.829Z",
+  "updated_at": "2025-05-26T07:57:32.668Z",
   "comment": {
     "text": "The translation key \"PluginSDK\" refers to the name of a plugin SDK used in developer tools. It is displayed as a label on a settings page and appears in a category title. Translators should provide a clear and concise translation for this text to be used consistently across different languages and regions.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 532,
+      "line_number": 525,
       "context": "{\n id: \"portal-settings_catalog-plugin-sdk\",\n key: \"7-2\",\n icon: \"\",\n link: \"plugin-sdk\",\n tKey: \"PluginSDK\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-webhooks\",\n key: \"7-3\",",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"اضافات SDK\" doesn't accurately convey \"Plugin SDK\". \"اضافات\" translates to \"additions\" or \"plugins\", but \"SDK\" is often kept as is in technical contexts.  A more accurate translation would incorporate the technical term 'SDK' rather than translating it.",
-          "suggestion": "SDK اضافات (SDK Idhafaat) or اضافات تطوير البرمجيات (Idhafaat Tatweer Al-Barmijaat)"
+          "description": "The Arabic translation \"اضافات SDK\" while technically meaning \"Add-ons SDK\", doesn't accurately convey the meaning of \"Plugin SDK\". \"Plugin\" has a specific meaning in this context referring to a software plugin.",
+          "suggestion": "Consider a more precise translation that reflects the software plugin concept, such as \"مجموعة تطوير الإضافات\" (Majmou'at Tatweer al-Idafat) or \"حزمة تطوير المكونات الإضافية\" (Huzmat Tatweer al-Mukawwinat al-Idafiyya)."
         }
       ],
       "approved_at": null
@@ -54,8 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Plagin SDK\" is understandable, a more accurate and idiomatic translation of \"Plugin SDK\" in Azerbaijani would be \"Proqram Tətbiqi SDK\" or a direct transliteration like \"Plugin SDK\" with a note explaining what it is.",
-          "suggestion": "Consider \"Proqram Tətbiqi SDK\" or \"Plugin SDK (Proqram Tətbiqi İnkişaf Kitabi)\""
+          "description": "The translation 'Plagin SDK' is a transliteration, not a true translation. While understandable, 'plugin' is often directly used in Azerbaijani, or transliterated as 'plagin' with the more accurate spelling 'plugin'.",
+          "suggestion": "Plugin SDK"
+        },
+        {
+          "type": "spelling",
+          "description": "The spelling 'Plagin' is less common than 'plugin' in Azerbaijani when referring to the English term.",
+          "suggestion": "plugin"
         }
       ],
       "approved_at": null
@@ -96,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'SDK-laajennus' is understandable, it's not the most natural or accurate translation of 'Plugin SDK.' 'Laajennus' means 'extension' which is a *type* of SDK, not the SDK itself. A more accurate translation would convey the SDK functionality itself, not just its extension-like nature.",
-          "suggestion": "Consider 'Lisäohjelmien kehityspaketti' or 'Plugin-kehityspaketti' for a more direct translation conveying 'Plugin SDK'."
+          "description": "While \"SDK-laajennus\" is understandable, it's not the most natural or precise translation of \"Plugin SDK.\" \"Laajennus\" generally means extension in a more general sense, not specifically referring to a software development kit.",
+          "suggestion": "Consider alternatives like \"Lisäosake SDK\" (Add-on SDK), \"Plugin-kehityspaketti\" (Plugin Development Kit), or simply \"Plugin SDK\" if using the English term is acceptable in context."
         }
       ],
       "approved_at": null
@@ -111,7 +116,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Պլագին SDK' is a direct transliteration of 'Plugin SDK'. While understandable, a more idiomatic Armenian translation might be preferable. 'Plugin' can be translated as 'մոդուլ' or 'լրացուցիչ'.",
+          "suggestion": "Consider translating 'Plugin' as 'մոդուլ' or 'լրացուցիչ', for example, 'Մոդուլ SDK' or 'Լրացուցիչ SDK'."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -120,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'SDK di Plugin' is understandable, a more natural Italian translation of 'Plugin SDK' would be 'Kit di Sviluppo Plugin' or 'SDK Plugin'. 'SDK di Plugin' reads a bit awkwardly. 'di' often implies possession, which isn't the intended meaning here.",
-          "suggestion": "Kit di Sviluppo Plugin"
+          "description": "The translation 'SDK di Plugin' is not ideal. While technically correct, it's a literal translation that doesn't flow naturally in Italian.  'SDK per Plugin' or 'Kit di sviluppo per Plugin' would be more common and idiomatic.",
+          "suggestion": "SDK per Plugin"
         }
       ],
       "approved_at": null
@@ -162,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Zestaw SDK do tworzenia wtyczek\" is understandable, a more accurate and common translation of \"Plugin SDK\" would be \"SDK do wtyczek\" or \"Zestaw SDK dla wtyczek\". \"do tworzenia wtyczek\" is unnecessarily verbose.",
-          "suggestion": "SDK do wtyczek"
+          "description": "While \"Zestaw SDK do tworzenia wtyczek\" is a literal translation, \"Plugin SDK\" is often used directly in Polish technical contexts, especially related to software development. A more natural and concise translation would be \"SDK dla wtyczek\" or \"SDK wtyczek\".",
+          "suggestion": "SDK dla wtyczek"
         }
       ],
       "approved_at": null
@@ -177,7 +188,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'SDK de plug-in' is understandable, a more idiomatic and widely accepted translation for 'Plugin SDK' in Portuguese (Brazil) would be 'SDK para plugins'. Using 'plug-in' directly is acceptable, but 'plugins' flows better and is more commonly seen.",
+          "suggestion": "SDK para plugins"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -192,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SDK плагинов' is a literal translation and may not be the most natural or idiomatic way to express 'Plugin SDK' in Russian. It's understandable but sounds somewhat clunky.",
-          "suggestion": "Consider alternatives like 'Набор средств разработки плагинов' or 'SDK для плагинов'. The best option depends on the context and intended audience."
+          "description": "The translation \"SDK плагинов\" while technically understandable, isn't the most natural or idiomatic Russian for \"Plugin SDK\". It literally translates to \"SDK of plugins\". A more common and natural translation would be something like \"SDK для плагинов\" or simply \"Плагин SDK\".",
+          "suggestion": "SDK для плагинов"
         }
       ],
       "approved_at": null
@@ -204,8 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පේනු SDK' is a transliteration of 'Plugin SDK' and doesn't convey the meaning of 'Plugin SDK'.  'SDK' is often understood in technical contexts, but 'Plugin' would need proper translation.",
-          "suggestion": "පොදුජ්ජනක සංවර්ධකයාකීතය (Podu Jjanaka Sanwardhanakithaya) or a more contextually appropriate translation depending on the target audience."
+          "description": "The translation \"පේනු SDK\" appears to be a transliteration of \"Plugin SDK\" rather than a true translation.  'Plugin' doesn't have a direct Sinhala equivalent that accurately conveys the meaning in this context. A more appropriate translation would depend on the intended meaning and audience.",
+          "suggestion": "Consider using a descriptive phrase like \"අප්ලිකේෂන් සංවර්ධක මෙවලිය\" (Application Development Tool) or \"වැඩසමඟි මෙවලිය\" (Work Tool), or if the audience understands English loanwords, keeping \"Plugin\" and adding a clarifying phrase like \"Plugin - යනු...\" (Plugin - which is...)"
+        },
+        {
+          "type": "formatting",
+          "description": "While not inherently wrong, the translation lacks capitalization. It's generally good practice to capitalize the first word of a title or heading.",
+          "suggestion": "පේනු SDK"
         }
       ],
       "approved_at": null
@@ -228,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation includes \"SDK за додатке\" which literally translates to \"SDK for plugins\". While understandable, it's redundant as \"Plugin SDK\" already implies it's for plugins. A more natural Serbian translation would simply be \"Plugin SDK\" or perhaps a slightly more descriptive term depending on the exact context (e.g., \"SDK за уређаје/апликације\" if it's for mobile devices).",
-          "suggestion": "Plugin SDK"
+          "description": "The Serbian translation includes '(SDK за додатке)' which translates to '(SDK for plugins)'. While explanatory, it's redundant as 'Plugin SDK' already implies an SDK for plugins. This addition makes the translation unnecessarily verbose.",
+          "suggestion": "Remove '(SDK за додатке)' from the translation. The simplest and most accurate translation is just 'Plugin SDK'."
         }
       ],
       "approved_at": null
@@ -240,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"SDK za dodatke\" is overly literal and unnecessary. 'Plugin SDK' is already self-explanatory, and adding '(SDK za dodatke)' is redundant. It's better to keep the original English term, or find a more natural-sounding Serbian equivalent if a true translation is desired.",
-          "suggestion": "Plugin SDK"
+          "description": "While technically correct, the addition of '(SDK za dodatke)' is redundant and not idiomatic. 'Plugin SDK' is already understood as the SDK for plugins.",
+          "suggestion": "Remove the '(SDK za dodatke)' portion. Keep the translation as 'Plugin SDK'."
         }
       ],
       "approved_at": null
@@ -258,8 +280,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"SDK плагінів\" is a literal translation but not the most natural way to express \"Plugin SDK\" in Ukrainian. A more common and idiomatic translation would be something like \"Набір інструментів для плагінів\" or \"SDK для плагінів\".",
-          "suggestion": "Consider \"SDK для плагінів\" or \"Набір інструментів для плагінів\"."
+          "description": "The translation \"SDK плагінів\" is too literal. A more natural and idiomatic Ukrainian translation for \"Plugin SDK\" would be \"Набір програмного забезпечення для плагінів\" or \"SDK для плагінів\".  The current translation simply combines 'SDK' and 'plugins', which isn't how this concept is typically expressed in Ukrainian.",
+          "suggestion": "SDK для плагінів"
         }
       ],
       "approved_at": null

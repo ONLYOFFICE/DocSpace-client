@@ -45,5 +45,5 @@ export interface DragAndDropProps {
   value?: string;
   targetFile?: Function;
   style?: React.CSSProperties;
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
 }

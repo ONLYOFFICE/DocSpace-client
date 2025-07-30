@@ -3,7 +3,7 @@
   "content": "in the left panel",
   "content_en_sha1_hash": "f99d47b1afc1ec4cdea36ebf3c5d77081b8e9ab2",
   "created_at": "2025-05-19T21:30:54.528Z",
-  "updated_at": "2025-05-21T09:03:20.899Z",
+  "updated_at": "2025-05-24T09:15:33.735Z",
   "comment": {
     "text": "This translation key is used to display the string \"in the left panel\" in a checkbox label within the Portal Settings page, specifically under the \"Developer Tools\" preset. It appears alongside checkboxes for other options and provides context about the checkbox's purpose.",
     "is_auto": true,
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"左パネルで\" (hidari paneru de) is technically a valid translation, it lacks the nuance and flow of the original English phrase \"in the left panel\". It reads more like \"with the left panel\" or \"in/at the left panel doing something\". A more accurate translation that conveys the meaning of location would be preferable.",
-          "suggestion": "左パネル内 (hidari paneru nai) - inside the left panel, or 左パネルに (hidari paneru ni) - in the left panel."
+          "description": "While '左パネルで' (hidari panel de) literally translates to 'in the left panel,' it can sound a bit unnatural in many contexts. A more natural phrasing would depend on the surrounding text. '左側のパネルで' (hidari no panel de) is often a better alternative as it explicitly indicates 'the left panel.'",
+          "suggestion": "Consider '左側のパネルで' (hidari no panel de) or a phrase more appropriate for the surrounding context."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ທາງຊ້າຍມື' literally translates to 'left hand side', it doesn't convey the same meaning as 'in the left panel'. 'In the left panel' refers to a specific area within a user interface. A more accurate translation would depend on the context of the panel, but something like 'ໃນແຜນວົງຊ້າຍ' (in the left panel) would be closer.",
-          "suggestion": "Consider 'ໃນແຜນວົງຊ້າຍ' or a more contextually appropriate translation depending on the user interface."
+          "description": "The translation 'ທາງຊ້າຍມື' literally means 'on the right hand'. The English phrase 'in the left panel' refers to the left side of a panel.",
+          "suggestion": "ທາງກໍານົດມື"
         }
       ],
       "approved_at": null
@@ -174,8 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වම්පස මඬලෙහි' while technically correct, might not be the most natural or common phrasing for 'in the left panel' in a software UI context. 'මඬලෙහි' refers to a stage or pavilion, which might not be the most appropriate word for a panel in a software interface. A more user-friendly and common phrasing might be better.",
-          "suggestion": "Consider alternatives like 'මිට වම්පස' (mita vampasa) or 'වාම් පැත්ත' (vaam pettya) for a more natural feel in a UI context."
+          "description": "While \"වම්පස මඬලෙහි\" is a literal translation, it's quite formal and doesn't flow naturally in most modern contexts. \"in the left panel\" often refers to a user interface element. A more natural and commonly used translation would be something like \"මැහුලෙහි වම්පස\" or \"වම් පැත්තේ\".",
+          "suggestion": "මැහුලෙහි වම්පස"
+        },
+        {
+          "type": "formatting",
+          "description": "The term 'මඬලෙහි' is grammatically correct, but sounds overly formal.  It's more common to use a less formal construction.",
+          "suggestion": "මැහුලෙහි"
         }
       ],
       "approved_at": null
@@ -197,8 +202,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Serbian translation 'у левом панелу' uses the preposition 'у' which typically indicates location 'in' but the dative case ending '-у' implies possession or a relationship.  For describing location, the preposition 'на' followed by the dative case would be more appropriate.",
+          "type": "incorrect_translation",
+          "description": "The translation 'у левом панелу' is grammatically correct but doesn't convey the precise meaning of 'in the left panel'. A more accurate translation would be 'на левом панелу' to indicate location on the left panel.",
           "suggestion": "на левом панелу"
         }
       ],
@@ -225,7 +230,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"trong bảng điều khiển bên trái\" is understandable, a more natural and precise translation of \"in the left panel\" would be \"ở bảng điều khiển bên trái\" or \"trong bảng điều khiển trái\". The use of 'trong' can imply being contained within, which might not always be the intended meaning.",
+          "suggestion": "ở bảng điều khiển bên trái"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

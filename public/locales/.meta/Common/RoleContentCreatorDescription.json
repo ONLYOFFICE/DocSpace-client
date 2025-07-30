@@ -3,7 +3,7 @@
   "content": "Content creators can create and edit files in the room, but can't manage users, or access settings.",
   "content_en_sha1_hash": "b4f64217478f8374be46634b2bf16cd639a3dc2f",
   "created_at": "2025-05-19T21:30:48.002Z",
-  "updated_at": "2025-05-28T09:30:03.003Z",
+  "updated_at": "2025-05-26T07:57:32.993Z",
   "comment": {
     "text": "This translation key is used for a description that explains the permissions and limitations of a Content Creator role within a room, likely appearing in user interface elements such as a form or settings panel. The content creator can create and edit files but lacks access to managing users or accessing settings.",
     "is_auto": true,
@@ -83,9 +83,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word \"manage\" (referring to user management) is not accurately reflected in the Armenian translation. \"Կառավարել\" can mean \"to govern\" or \"to control\", which is a bit too strong for the intended meaning of user management.",
-          "suggestion": "Consider using a word like \"տնօրինել\" (t'norynel) which means 'to administer' or 'to oversee', or 'ղեկավարել' (ghegavarel) which means 'to lead' when referring to user management. For example: \"Բովանդակություն ստեղծողները կարող են սենյակում ֆայլեր ստեղծել և խմբագրել, սակայն չեն կարող տնօրինել օգտատերերին կամ մուտք գործել կարգավորումներ։\""
+          "type": "spelling",
+          "description": "The word 'ֆայլեր' is a less common spelling of 'ֆայլեր'. While technically not incorrect, 'ֆայլեր' is the standard and preferred spelling.",
+          "suggestion": "ֆայլեր"
         }
       ],
       "approved_at": null
@@ -99,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"but can't\" is translated somewhat awkwardly. A more natural Japanese phrasing might improve readability.",
+          "suggestion": "コンテンツ作成者はルーム内でファイルの作成や編集を行うことができますが、ユーザー管理や設定へのアクセスは許可されていません。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -126,13 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Content creators' is translated as 'Content makers'. While understandable, 'Content creators' is more precise and conveys the intended meaning better. 'Makers' is too broad and could refer to other types of creators.",
+          "description": "The term 'Content creators' is translated as 'Content makers'. While understandable, 'Content creators' is a more direct and commonly used translation in this context.",
           "suggestion": "Content creators"
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'access settings' is translated as 'instellingen openen'. While the meaning is conveyed, 'access settings' is more literal and clearer in this context. The use of 'openen' (open) implies a direct action of opening, when the meaning is more about having permission or access.",
-          "suggestion": "toegang krijgen tot instellingen"
+          "description": "The term 'access settings' is translated as 'instellingen openen'. While it conveys a similar meaning, 'instellingen bekijken' or 'instellingen aanpassen' might be more accurate depending on the intended functionality.",
+          "suggestion": "instellingen bekijken"
         }
       ],
       "approved_at": null
@@ -149,7 +155,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'utilizadors' is misspelled. The correct word is 'utilizadores'.",
+          "description": "The word 'utilizadors' is a misspelling. It should be 'utilizadores'.",
           "suggestion": "utilizadores"
         }
       ],
@@ -179,13 +185,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'ප්‍රකාශකයින්' (Prakashakayin) translates more accurately to 'publishers' rather than 'content creators'. While there's overlap in meaning, 'content creators' is a more precise term in this context.",
-          "suggestion": "ප්‍රකාශකයින් වෙනුවට 'අන්තර්ගත නිර්මාණකරුවන්' (Antharagatha Nirmanakaruwan) භාවිතා කරන්න."
+          "description": "The Sinhala translation of \"Content creators\" (Content creators can create and edit files) is 'ප්‍රකාශකයින්' (Prakashakayin).  A more accurate translation would be 'අන්තර්ගත නිෂ්පාදකයින්' (Anthargatha Nishpadakayin) or a simpler 'නිෂ්පාදකයින්' (Nishpadakayin). 'Prakashakayin' primarily refers to publishers.",
+          "suggestion": "නිෂ්පාදකයින්"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'සැකසුම් වලට පිවිසිය' (Sakusum valata pivisiya) is grammatically awkward. A more natural phrasing would be 'සැකසුම් වෙත පිවිසිය' or 'සැකසුම් වෙත ළඟා විය'.",
-          "suggestion": "සැකසුම් වලට පිවිසිය' වෙනුවට 'සැකසුම් වෙත පිවිසිය' හෝ 'සැකසුම් වෙත ළඟා විය' භාවිතා කරන්න."
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation of 'manage users' is 'පරිශීලකයින් කළමනාකරණය කිරීමට'. A more natural and concise translation would be 'පරිශීලකයන් යwalten' or 'භාවිතකරුවන් යwalten'.",
+          "suggestion": "භාවිතකරුවන් යwalten"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation of 'access settings' is 'සැකසුම් වලට පිවිසිය'. A more natural translation would be 'අවන්සැකසුම් වෙත පිවිසිය' or simply 'අවන්සැකසුම් වෙත යාමට'.",
+          "suggestion": "අවන්සැකසුම් වෙත යාමට"
         }
       ],
       "approved_at": null

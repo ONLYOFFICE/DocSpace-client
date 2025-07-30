@@ -3,7 +3,7 @@
   "content": "Users added ({{count}}).",
   "content_en_sha1_hash": "8c7b1ab7b60a1cc8856412fa9c57d6d974a69ffb",
   "created_at": "2025-05-19T21:30:54.905Z",
-  "updated_at": "2025-05-28T09:30:02.434Z",
+  "updated_at": "2025-06-30T12:20:31.350Z",
   "comment": {
     "text": "This translation key is used to display a count of users added to a room. It appears on a history view and is likely part of a button or label that displays this information to the user.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 220,
-      "context": "1: <strong title={feed.data.title || feed.data.sharedTo?.title} />,\n }}\n />\n );\n case \"RoomCreateUser\":\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case \"RoomUpdateAccessForUser\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomRemoveUser\":\n return t(\"InfoPanel:RoomRemoveUser\");",
+      "line_number": 229,
+      "context": "1: <strong title={feed.data.title || feed.data.sharedTo?.title} />,\n }}\n />\n );\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");",
       "module": "/packages/client"
     }
   ],
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Czech translation uses the masculine plural form \"přidáni\" when referring to users. Since \"uživatelé\" (users) is masculine plural, it should be \"přidaní\".",
-          "suggestion": "Uživatelé přidáni ({{count}}.) -> Uživatelé přidáni ({{count}})."
+          "description": "The Czech translation uses the masculine plural form 'přidáni' which doesn't agree with the concept of users being added. It should be feminine plural.",
+          "suggestion": "Uživatelky přidány ({{count}})."
         }
       ],
       "approved_at": null
@@ -63,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Προσθήκη χρηστών ({{count}}).' is a literal translation of \"Users added ({{count}}).\" but it could be improved for natural Greek. A more natural phrasing would be something like 'Αριθμός χρηστών: {{count}}.' or 'Χρήστες: {{count}}'.",
-          "suggestion": "Χρήστες: {{count}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -156,13 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Utilizatorul a fost adăugat ({{count}})\" translates to \"The user was added ({{count}}).\" while the English content indicates a count of users added, not a single user. The correct translation should reflect the plural.",
-          "suggestion": "Utilizatori adăugați ({{count}})."
-        },
-        {
-          "type": "formatting",
-          "description": "The Romanian translation lacks consistency in capitalization. 'Utilizatorul' should be 'Utilizatori' to match the plural context.",
-          "suggestion": "Utilizatori adăugați ({{count}})."
+          "description": "The translation \"Utilizatorul a fost adăugat ({{count}}).\" is not accurate. It translates to 'The user was added ({{count}}).' The original English implies multiple users were added. It should reflect the plural.",
+          "suggestion": "Utilizatorii au fost adăugați ({{count}})."
         }
       ],
       "approved_at": null
@@ -179,8 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශීලකයින්' (parashīlakayin) is a less common and somewhat formal way to say 'users'. A more natural and commonly used term would be 'භාවිතරයන්' (bhavitakarayan).",
-          "suggestion": "පරිශීලකයින් → භාවිතරයන්"
+          "description": "The word 'පරිශීලකයින්' (parishiilakayin) is a less common and potentially inaccurate translation for 'Users'.  'භාවිතාකරන්නන්' (bhavithakaaranannan) or 'පරිශීලකයන්' (parishiilakayaan) are more standard and appropriate.",
+          "suggestion": "පරිශීලකයින් -> පරිශීලකයන් or භාවිතාකරන්නන්"
+        },
+        {
+          "type": "grammar",
+          "description": "The verb 'එකතු කරන ලදි' (ekathu karan ladi) translates to 'were added'. The passive voice isn't always the best choice. Consider a more active phrasing.",
+          "suggestion": "එකතු කරන ලදි -> එක්වුයේ"
         }
       ],
       "approved_at": null
@@ -203,13 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Додати корисници ({{count}}).' is not the most natural or accurate translation of 'Users added ({{count}}).'. A more accurate translation would be 'Додато корисника ({{count}}).' or 'Придодато корисника ({{count}}).'",
-          "suggestion": "Додато корисника ({{count}})."
-        },
-        {
-          "type": "grammar",
-          "description": "The Serbian translation uses the masculine plural form 'корисници'. While grammatically correct, the context implies a number of users, which could be masculine, feminine, or mixed.  For greater accuracy and inclusiveness, the form should change based on the expected user population.",
-          "suggestion": "The translation should consider the gender of the users. If the users are known to be all male, 'Додато корисника ({{count}}).' is appropriate. If the gender is unknown or mixed, it would be safer to consider alternatives, though there are no direct equivalents that perfectly capture the English meaning."
+          "description": "The translation 'Додати корисници ({{count}}).' is not an accurate translation of 'Users added ({{count}}).'. 'Додати' means 'Added', but a more appropriate translation would convey the action of adding users. The phrase 'Додати корисници' sounds awkward in Serbian.",
+          "suggestion": "Корисници додани ({{count}})."
         }
       ],
       "approved_at": null
@@ -219,9 +208,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Serbian word 'Dodati' is misspelled. The correct spelling is 'Dodato'.",
-          "suggestion": "Dodato korisnici ({{count}})."
+          "type": "formatting",
+          "description": "The Serbian translation is missing the period at the end of the sentence, consistent with English.",
+          "suggestion": "Dodati korisnici ({{count}})."
         }
       ],
       "approved_at": null

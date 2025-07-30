@@ -1,7 +1,6 @@
-@import "../../styles/mixins";
-@import "../../styles/common-icons-style.scss";
-@import "../../styles/variables/colors";
-@import "../../styles/variables/devices.scss";
+@use "../../styles/mixins";
+@use "../../styles/common-icons-style";
+@use "../../styles/variables/colors";
 
 :global(.rtl) {
   :local {
@@ -35,7 +34,7 @@
     margin-inline-start: 16px;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     flex-direction: row-reverse;
   }
 
@@ -43,7 +42,7 @@
     .add-button {
       min-width: 17px;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         display: none;
       }
     }
@@ -117,7 +116,7 @@
   &[data-is-frame="true"] {
     :global {
       .add-button {
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           display: flex;
         }
       }
@@ -126,23 +125,23 @@
 }
 
 .heading {
-  font-weight: 700;
+  font-weight: 700 !important;
   font-size: 18px !important;
-  line-height: 24px;
-  margin: 0;
+  line-height: 24px !important;
+  margin: 0 !important;
 
   &.rootFolderTitle {
     color: var(--navigation-root-folder-title-color);
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     font-size: 21px !important;
-    line-height: 28px;
+    line-height: 28px !important;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     font-size: 18px !important;
-    line-height: 24px;
+    line-height: 24px !important;
   }
 }
 
@@ -161,7 +160,7 @@
   }
 
   &[data-root-folder-title="false"] {
-    @include truncate;
+    @include mixins.truncate;
   }
 }
 
@@ -215,7 +214,7 @@
   justify-content: flex-start;
   background: var(--section-header-trash-erasure-label-background);
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-bottom: 16px;
   }
 
@@ -227,7 +226,7 @@
       line-height: 16px;
       width: 100%;
 
-      @include truncate;
+      @include mixins.truncate;
     }
   }
 }
@@ -238,7 +237,7 @@
   justify-content: flex-end;
   margin-inline-start: auto;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     flex-direction: row-reverse;
   }
 }
@@ -268,13 +267,13 @@
     align-items: baseline;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     &[data-with-logo="true"] {
       margin-inline-start: 44px;
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: 0 !important;
   }
 }
@@ -328,7 +327,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     display: none;
     margin-inline-start: 0;
 
@@ -370,20 +369,20 @@
     .title-block-text {
       margin-top: 0px;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         margin: 0;
       }
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: var(--drop-box-width);
     inset-inline-start: -16px !important;
     padding: 0 16px;
     padding-top: 14px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     padding-top: 10px !important;
     inset-inline-start: 0 !important;
   }
@@ -409,7 +408,7 @@
     grid-template-columns: auto auto auto 1fr;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     &[data-with-logo="true"][data-is-frame="true"] {
       grid-template-columns: auto 49px auto 1fr;
     }
@@ -446,7 +445,7 @@
       margin-inline-end: 16px;
       cursor: pointer;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         .logo-icon_svg {
           display: none;
         }
@@ -454,7 +453,7 @@
 
       .header_separator {
         display: none;
-        border-inline-start: 1px solid #{$light-gray-selected};
+        border-inline-start: 1px solid #{colors.$light-gray-selected};
         margin-block: 0;
         margin-inline: 15px 0;
         height: 21px;
@@ -470,11 +469,11 @@
           width: 28px;
         }
 
-        @include tablet-and-below {
+        @include mixins.tablet-and-below {
           display: flex;
         }
 
-        @include mobile {
+        @include mixins.mobile {
           &[data-is-frame="false"] {
             display: none;
           }
@@ -485,7 +484,7 @@
     .drop-box-logo {
       display: none;
 
-      @include tablet-and-below {
+      @include mixins.tablet-and-below {
         display: grid;
       }
     }
@@ -503,7 +502,7 @@
     .title-container {
       display: grid;
       grid-template-columns: minmax(1px, max-content) auto;
-      @include truncate;
+      @include mixins.truncate;
 
       .room-title {
         cursor: pointer;
@@ -517,7 +516,7 @@
       align-items: center;
       gap: 8px;
 
-      @include truncate;
+      @include mixins.truncate;
     }
 
     .navigation-header-separator {
@@ -539,11 +538,11 @@
       flex-direction: row;
       position: relative;
       cursor: pointer;
-      @include truncate;
+      @include mixins.truncate;
       min-height: 33px;
       gap: 8px;
 
-      @include mobile {
+      @include mixins.mobile {
         min-height: auto;
       }
 
@@ -574,7 +573,7 @@
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     width: 100%;
 
     grid-template-columns: 49px 1fr auto;
@@ -604,7 +603,7 @@
     }
   }
 
-  @include mobile {
+  @include mixins.mobile {
     &[data-is-frame="false"] {
       :global {
         .navigation-logo,

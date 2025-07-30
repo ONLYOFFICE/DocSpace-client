@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2025-07-02T07:49:19.732Z",
+  "updated_at": "2025-06-30T12:20:31.184Z",
   "comment": {
     "text": "This translation key is used to display the label \"Enable\" on a button in a modal dialog, typically found in settings or configuration sections of an application. It appears as the primary action button in a footer section and is used for enabling a feature or functionality.",
     "is_auto": true,
@@ -14,12 +14,6 @@
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
       "line_number": 209,
       "context": ": t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUsersDescription\", { productName: t(\"Common:ProductName\") });\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (\n <ModalDialog\n visible={visible}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 152,
-      "context": "label: t(\"Common:Disable\"),\n value: 0,\n },\n {\n id: \"enable\",\n label: t(\"Common:Enable\"),\n value: 1,\n },\n ]}\n selected={type}\n onClick={onSelect}",
       "module": "/packages/client"
     },
     {
@@ -54,13 +48,13 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 746,
+      "line_number": 748,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 746,
+      "line_number": 748,
       "context": "};\n \n const enableOption = {\n key: \"enable\",\n icon: EnableReactSvgUrl,\n label: t(\"Common:Enable\"),\n onClick: () => this.onEnable(t, clientId),\n };\n \n const disableOption = {\n key: \"disable\",",
       "module": "/packages/client"
     },

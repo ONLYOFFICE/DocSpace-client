@@ -3,7 +3,7 @@
   "content": "User’s Files",
   "content_en_sha1_hash": "8c601cb8c42483a78013375e2d836fca2adaf2ed",
   "created_at": "2025-05-19T21:30:53.154Z",
-  "updated_at": "2025-05-28T09:30:02.509Z",
+  "updated_at": "2025-06-30T12:20:31.410Z",
   "comment": {
     "text": "This translation key is used for the label of a setting that determines what files are exported by users. It appears in a settings page and is used to identify which type of file (e.g., user's files) is being exported.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 144,
+      "line_number": 143,
       "context": "usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ملفات المستخدمين\" literally translates to \"Users' Files\". While understandable, a more natural and accurate translation for a settings context, particularly in a user interface, would be something like \"ملفات المستخدم\" (User Files) or \"ملفات المستخدم الخاصة\" (User's Private Files).  The pluralization in the Arabic translation is adding an unnecessary layer of formality.",
-          "suggestion": "ملفات المستخدم"
+          "description": "The English phrase \"User's Files\" implies files belonging to a single user. The Arabic translation \"ملفات المستخدمين\" (Milfat al-Mustakhdimin) translates to \"Users' Files,\" which is a plural and implies files belonging to multiple users. This may not accurately reflect the intended meaning.",
+          "suggestion": "Consider \"ملفات المستخدم\" (Milfat al-Mustakhdim) to more closely reflect 'User's Files' implying files belonging to a single user."
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Soubory uživatele' is technically correct but not the most natural or idiomatic way to say 'User's Files' in Czech. A more common and user-friendly translation would be 'Uživatelské soubory'.",
+          "suggestion": "Uživatelské soubory"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -63,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Αρχεία του χρήστη\" is a literal translation of \"User's Files\", it lacks the possessive nuance. \"User's Files\" implies files *belonging* to the user. A more accurate and natural Greek translation might consider phrasing like \"Προσωπικά αρχεία χρήστη\" or \"Αρχεία του χρήστη\" but with emphasis on possession.",
+          "suggestion": "Consider \"Προσωπικά αρχεία χρήστη\" or re-evaluate the phrasing for better possession emphasis."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -96,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"File dell’utente\" is a literal translation but doesn't perfectly capture the meaning of \"User’s Files\" in the context of settings. It implies a single file belonging to a user, while \"User’s Files\" typically refers to a directory or collection of files.",
-          "suggestion": "Consider a translation like \"File utente\" or \"Archivio utente\" to better convey the meaning of a collection of files."
+          "description": "The translation 'File dell’utente' is a literal translation but doesn't quite capture the meaning of 'User's Files'. It implies a single file belonging to a user, whereas the English phrase suggests a collection or directory of files.",
+          "suggestion": "Consider a translation like 'File utente' or 'Archivio utente' which more accurately conveys a collection of files."
         }
       ],
       "approved_at": null
@@ -111,13 +123,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"사용자의 파일\" is grammatically correct, a more natural and concise translation of \"User's Files\" would be \"사용자 파일\". The possessive particle '의' can often be omitted when it's clear from context.",
-          "suggestion": "사용자 파일"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເອກະສານຂອງຜູ້ໃຊ້\" literally translates to \"Documents of the user.\" While not entirely wrong, it doesn't capture the nuance of \"User's Files.\" \"ເອກະສານຂອງຜູ້ໃຊ້\" implies ownership or a list of documents, whereas \"User's Files\" refers to a specific directory or collection of files belonging to a user.",
-          "suggestion": "ເອກະສານຜູ້ໃຊ້"
+          "description": "The Lao translation \"ເອກະສານຂອງຜູ້ໃຊ້\" is a literal translation of \"documents of the user.\" While technically correct, it lacks the natural flow and conciseness of the English \"User’s Files.\" A more accurate and idiomatic translation might be \"ເອກະສານຜູ້ໃຊ້\" or \"ໄຟລ໌ຂອງຜູ້ໃຊ້\".",
+          "suggestion": "ໄຟລ໌ຂອງຜູ້ໃຊ້"
         }
       ],
       "approved_at": null
@@ -156,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Arquivos do utilizador' is a literal translation, it's not the most natural phrasing in Portuguese. 'Arquivos do usuário' is more common and idiomatic.",
+          "description": "While \"Arquivos do utilizador\" is a valid translation, \"Arquivos do usuário\" is more commonly used and more closely aligns with the English \"User’s Files\" in contemporary Portuguese usage.",
           "suggestion": "Arquivos do usuário"
         }
       ],
@@ -177,7 +183,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Файлы пользователя' is a literal translation, it's not the most natural or idiomatic way to say 'User's Files' in Russian. A more common and user-friendly translation would be something like 'Пользовательские файлы' or 'Файлы пользователей'.",
+          "suggestion": "Пользовательские файлы"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -186,8 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පරිශීලකගේ ගොනු' is a literal translation of 'User's Files' but doesn't quite capture the nuance. 'පරිශීලක' (parishilaka) is more akin to 'enthusiast' or 'devotee'. A more natural translation for 'User's Files' would be something like 'භාවිතරයාගේ ගොනු' (bhavitaraage gonyu) which means 'User's Files' or 'භාවිතකරුවාගේ ගොනු' (bhavitakaruwaage gonyu).",
-          "suggestion": "භාවිතකරුවාගේ ගොනු (bhavitakaruwaage gonyu) or භාවිතරයාගේ ගොනු (bhavitaraage gonyu)"
+          "description": "The translation 'පරිශීලකගේ ගොනු' while technically meaning 'User's Files', doesn't quite convey the same nuance as 'User’s Files'. 'පරිශීලක' can imply a more skilled or dedicated user. A more literal and common translation would be 'භාවිතරයාගේ ගොනු' (Bhavitaraayaage gonu).",
+          "suggestion": "භාවිතරයාගේ ගොනු"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses lowercase for the first letter of each word, which might not be the standard for titles or labels in Sinhala. Capitalization conventions should be consistent with the broader application or system.",
+          "suggestion": "භාවිතරයාගේ ගොනු"
         }
       ],
       "approved_at": null
@@ -198,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Súbory používateľa' is technically correct, it's a bit literal and less natural for this context. A more idiomatic translation would be 'Používateľské súbory'.",
-          "suggestion": "Používateľské súbory"
+          "description": "While \"Súbory používateľa\" is technically correct, it's a very literal translation. A more natural and idiomatic Slovak translation for \"User’s Files\" would be \"Používateľove súbory\".",
+          "suggestion": "Používateľove súbory"
         }
       ],
       "approved_at": null
@@ -216,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Кориснички фајлови' while understandable, isn't the most natural or idiomatic translation for 'User's Files'. A more accurate and commonly used translation would be 'Корисникови датотеке'.",
-          "suggestion": "Корисникови датотеке"
+          "description": "While 'Кориснички фајлови' is understandable, a more accurate and common translation of 'User’s Files' in a technical context would be 'Поставке корисничких фајлова' or simply 'Кориснички датотеке'. 'Фајлови' is often used for digital files, but 'датотеке' is the more precise term.",
+          "suggestion": "Поставке корисничких фајлова or Кориснички датотеке"
         }
       ],
       "approved_at": null
@@ -225,19 +242,19 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Korisnički fajlovi' is understandable, a more natural and idiomatic translation of 'User’s Files' would be 'Datoteke korisnika'. 'Korisnički fajlovi' sounds slightly awkward.",
+          "suggestion": "Datoteke korisnika"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Kullanıcının Dosyaları\" is a literal translation, \"User's Files\" often implies files belonging to a user. A more natural and idiomatic translation might be \"Kullanıcı Dosyaları\" (User Files). \"Kullanıcının Dosyaları\" sounds a bit overly formal in this context.",
-          "suggestion": "Kullanıcı Dosyaları"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -252,8 +269,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tập tin của người dùng\" is understandable, a more natural and common translation for \"User's Files\" would be \"Tệp của người dùng\" or \"Dữ liệu người dùng\". \"Tập tin\" is often associated with physical files or documents.",
-          "suggestion": "Tệp của người dùng"
+          "description": "While \"Tập tin của người dùng\" is understandable, a more natural and commonly used translation for \"User’s Files\" would be \"Tệp người dùng\". \"Tập tin của người dùng\" is grammatically correct but slightly verbose and less idiomatic.",
+          "suggestion": "Tệp người dùng"
         }
       ],
       "approved_at": null

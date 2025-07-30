@@ -23,34 +23,34 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../../../styles/variables/_colors.scss";
-@import "../../../../styles/mixins";
+@use "../../../../styles/variables/colors";
+@use "../../../../styles/mixins";
 
 :global(.dark) {
   :local {
     .roleHistories {
-      --role-histories-border-color: #{$gray-dark};
+      --role-histories-border-color: #{colors.$gray-dark};
     }
 
     .roleTitle {
-      --role-step-filled-color: #{$gray-dark-text};
+      --role-step-filled-color: #{colors.$gray-dark-text};
     }
 
     .avatarContainer {
-      --avatar-border-color: #{$gray-dark};
+      --avatar-border-color: #{colors.$gray-dark};
     }
 
     .arrow {
-      --icon-arrow-color: #{$gray-dark};
-      --icon-arrow-hover-color: #{$white};
+      --icon-arrow-color: #{colors.$gray-dark};
+      --icon-arrow-hover-color: #{colors.$white};
     }
 
     .roleTitle {
-      --role-step-role-name-color: #{$white};
+      --role-step-role-name-color: #{colors.$white};
     }
 
     .userName {
-      --role-step-user-name-color: #{$dark-gray-dark};
+      --role-step-user-name-color: #{colors.$dark-gray-dark};
     }
   }
 }
@@ -58,26 +58,26 @@
 :global(.light) {
   :local {
     .roleHistories {
-      --role-histories-border-color: #{$gray};
+      --role-histories-border-color: #{colors.$gray};
     }
 
     .avatarContainer {
-      --avatar-border-color: #{$gray};
+      --avatar-border-color: #{colors.$gray};
     }
 
     .roleTitle {
-      --role-step-filled-color: #{$gray-text};
+      --role-step-filled-color: #{colors.$gray-text};
     }
 
     .arrow {
-      --icon-arrow-color: #{$gray};
-      --icon-arrow-hover-color: #{$light-gray-dark};
+      --icon-arrow-color: #{colors.$gray};
+      --icon-arrow-hover-color: #{colors.$light-gray-dark};
     }
     .roleTitle {
-      --role-step-role-name-color: #{$black};
+      --role-step-role-name-color: #{colors.$black};
     }
     .userName {
-      --role-step-user-name-color: #{$light-gray-dark};
+      --role-step-user-name-color: #{colors.$light-gray-dark};
     }
   }
 }
@@ -150,7 +150,7 @@
   margin: 0px;
   color: var(--role-step-role-name-color);
 
-  @include truncate;
+  @include mixins.truncate;
 }
 
 .userName {
@@ -176,10 +176,10 @@
 
 .roleContainer[data-process-status="2"] {
   .roleTitle {
-    color: $light-blue-main;
+    color: colors.$light-blue-main;
   }
   .avatarContainer {
-    border: 2px dotted $light-blue-main;
+    border: 2px dotted colors.$light-blue-main;
   }
 
   .roleHistories {
@@ -189,11 +189,11 @@
 
 .roleContainer[data-process-status="3"] {
   .roleTitle {
-    color: $light-blue-main;
+    color: colors.$light-blue-main;
   }
 
   .avatarContainer {
-    border: 2px solid $light-blue-main;
+    border: 2px solid colors.$light-blue-main;
   }
   .roleHistories {
     border-inline-start: 2px dotted var(--role-histories-border-color);
@@ -216,13 +216,13 @@
 .roleContainer[data-process-status="5"] ~ .roleContainer,
 .roleContainer[data-process-status="5"] {
   .roleTitle {
-    color: $main-red;
+    color: colors.$main-red;
   }
 
   .avatarContainer {
-    border: 2px solid $main-red;
+    border: 2px solid colors.$main-red;
   }
   .roleHistories {
-    border-inline-start: 2px solid $main-red;
+    border-inline-start: 2px solid colors.$main-red;
   }
 }

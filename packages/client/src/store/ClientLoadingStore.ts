@@ -158,7 +158,8 @@ class ClientLoadingStore {
           setTimeout(
             () => {
               this.updateLoading(type, isLoading);
-              clearTimeout(this.loaderStates[type].timer);
+              this.loaderStates[type].timer &&
+                clearTimeout(this.loaderStates[type].timer);
               this.loaderStates[type].startTime = null;
               this.loaderStates[type].timer = null;
             },

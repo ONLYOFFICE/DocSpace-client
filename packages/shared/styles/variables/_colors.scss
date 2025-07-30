@@ -101,10 +101,12 @@ $tick-color: #20d21f;
 $red-romb: #ff6f3d;
 $blue-romb: #5dc0e8;
 $green-romb: #95c038;
+$dark-romb: #323032;
 $tap-highlight: rgba(0, 0, 0, 0);
 $badge-shadow: rgba(4, 15, 27, 0.16);
 $popup-shadow: rgba(4, 15, 27, 0.08);
 $menu-shadow: rgba(4, 15, 27, 0.04);
+$menu-shadow-dark: rgba(4, 15, 27, 0.12);
 
 $light-scroll: rgba(6, 22, 38, 0.16);
 $light-scroll-hover: rgba(6, 22, 38, 0.32);
@@ -146,3 +148,14 @@ $logo-colors: (
   #7757d9,
   #ff7fd4
 );
+
+$rombs-loader-apricot-colorStep: #f2cbbf;
+$rombs-loader-gray-colorStep: #e6e4e4;
+$rombs-loader-dark-gray-colorStep: #d2d2d2;
+$rombs-loader-blue-colorStep: #bfe8f8;
+$rombs-loader-light-gray-colorStep: #efefef;
+$rombs-loader-green-colorStep: #cbe0ac;
+$rombs-loader-red-bg: rgb(255, 0, 0);
+
+$light-editor-background: #f3f3f3;
+$dark-editor-background: #222222;

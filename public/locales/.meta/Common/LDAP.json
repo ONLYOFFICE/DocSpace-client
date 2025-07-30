@@ -3,7 +3,7 @@
   "content": "LDAP",
   "content_en_sha1_hash": "d8343c683ae1584c96390fa627005bc1bb0719cd",
   "created_at": "2025-05-19T21:30:46.102Z",
-  "updated_at": "2025-05-28T09:30:02.416Z",
+  "updated_at": "2025-05-26T07:57:32.409Z",
   "comment": {
     "text": "This translation key is used for the label \"LDAP\" which indicates a group or connection type. It appears as a badge in various UI components, such as information panels and contact lists, to provide users with clear identification of specific types of groups.",
     "is_auto": true,

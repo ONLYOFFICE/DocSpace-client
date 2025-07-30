@@ -3,7 +3,7 @@
   "content": "Support & Legal info",
   "content_en_sha1_hash": "7ce901e3351f432410ccf2530e8f58ea4855b320",
   "created_at": "2025-05-19T21:30:54.048Z",
-  "updated_at": "2025-05-21T06:51:14.149Z",
+  "updated_at": "2025-05-24T07:04:59.812Z",
   "comment": {
     "text": "This translation key is used to display \"Support & Legal info\" in the user interface, specifically in a support block component within an OAuth client form, likely as a header or title. It appears alongside a field where users can input a policy URL, and also in an information dialog box for privacy policies.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The hyphen in 'Support- & Rechtsinformationen' is slightly unconventional. While not incorrect, a space might improve readability and align better with common German practices.",
-          "suggestion": "Support & Rechtsinformationen"
+          "description": "Hyphen usage is inconsistent. The English uses '&', while the German uses a hyphen. While acceptable, consistency would be preferred.",
+          "suggestion": "Consider using '&' instead of '-' for visual consistency with the English version: 'Support & Rechtsinformationen'"
         }
       ],
       "approved_at": null
@@ -105,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"サポート＆法的情報\" is technically correct, a more natural and idiomatic translation of \"Support & Legal info\" in Japanese would be \"サポートと法的情報\" or \"サポートおよび法的情報\". Using the ampersand (&) is uncommon in formal Japanese writing and can feel abrupt.",
-          "suggestion": "サポートと法的情報"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -126,13 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Legal info' is not accurately translated. 'ຂໍ້ມູນທາງການຜະລິດ' literally translates to 'production information,' which doesn't convey the meaning of legal information or legal notices.",
-          "suggestion": "ຂໍ້ມູນທາງການທີ່ຖືກຕ້ອງ (information regarding regulations) or ຂໍ້ມູນກົດໝາຍ (legal information)"
-        },
-        {
-          "type": "formatting",
-          "description": "The ampersand (&) is used in the English content but not consistently represented in the Lao translation. While common in some Lao usage, it's generally preferable to use 'ແລະ' for 'and'.",
-          "suggestion": "ຂໍ້ມູນສະຫນັບສະຫນູນແລະຂໍ້ມູນທາງການທີ່ຖືກຕ້ອງ"
+          "description": "The translation \"ຂໍ້ມູນສະຫນັບສະຫນູນ & ຂໍ້ມູນທາງການຜະລິດ\" doesn't accurately convey the meaning of \"Support & Legal info\". \"ຂໍ້ມູນທາງການຜະລິດ\" translates to 'production information' which isn't synonymous with 'Legal info'.",
+          "suggestion": "ຂໍ້ມູນສະຫນັບສະຫນູນ & ຂໍ້ມູນກົດຫມູ່ຽນ (Support & Legal info)"
         }
       ],
       "approved_at": null
@@ -164,13 +153,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Informações legais e de suporte' is understandable, a more accurate and idiomatic translation of 'Support & Legal info' would be 'Suporte e informações legais' or 'Informações de suporte e legais'. The original phrasing implies the support information is legally related, which may not be the intended meaning.",
-          "suggestion": "Suporte e informações legais"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -179,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Support' is better translated as 'Suport' rather than 'Asistență' in this context. 'Asistență' implies a more personalized or direct help, while 'Suport' is a more general term for resources and documentation.",
-          "suggestion": "Suport și informații juridice"
+          "description": "While \"Asistență\" is a valid translation for \"Support\", \"informații juridice\" is a more literal and potentially less user-friendly translation of \"Legal info\". The term \"Legal info\" is often shortened or paraphrased in Romanian to convey the same meaning more naturally.",
+          "suggestion": "Consider \"Informații legale\" or \"Informații despre legislație\" as more natural alternatives to \"informații juridice\"."
         }
       ],
       "approved_at": null
@@ -188,25 +171,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"юридическая информация\" is a more formal and legalistic translation than \"Legal info\" implies. A more natural and user-friendly translation might be \"Юридические вопросы\" or \"Юридическая помощь\".",
-          "suggestion": "Юридические вопросы"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ආධාර & නීතිමය තොරතුරු\" is a literal translation of 'Support & Legal info'. While understandable, a more natural Sinhala phrasing might be 'ප්‍රශ්න හා නීතිමය තොරතුරු' (prashna ha neetimaya thorathuru) or 'උදව් & නීති උපදෙස්' (udaw & neeti upades). 'ආධාර' (aadhara) is closer to 'assistance' or 'help', while 'ප්‍රශ්න' (prashna) implies 'questions' which is often what users are seeking in a support context.",
-          "suggestion": "ප්‍රශ්න හා නීතිමය තොරතුරු"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -227,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Подршка' is a valid translation for 'Support', 'правне информације' is a more formal translation for 'Legal info'. A more natural and commonly used translation would be something like 'Закони информације' or 'Информације о законима'.",
-          "suggestion": "Закони информације"
+          "description": "While 'Подршка' is a good translation for 'Support', 'правне информације' is a more formal and slightly less natural translation of 'Legal info'. A more colloquial and frequently used translation would be 'Законе информације'.",
+          "suggestion": "Законе информације"
         }
       ],
       "approved_at": null

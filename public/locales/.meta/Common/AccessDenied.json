@@ -3,7 +3,7 @@
   "content": "Access denied",
   "content_en_sha1_hash": "64343a83ad8c0b8e2789c32ca5ab1eb6abb614e0",
   "created_at": "2025-05-19T21:30:42.816Z",
-  "updated_at": "2025-05-28T09:30:02.888Z",
+  "updated_at": "2025-06-30T12:20:31.671Z",
   "comment": {
     "text": "This translation key displays a message indicating that access has been denied, used when the user lacks permissions to perform an action. It is displayed in an error container within the login component and can also be triggered by OAuth errors, such as client permission denial.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/ConfirmRoute.tsx",
       "line_number": 63,
-      "context": "user &&\n !user.isAdmin &&\n !user.isOwner &&\n !user.isRoomAdmin\n ) {\n throw new Error(t(\"Common:AccessDenied\"));\n }\n \n useEffect(() => {\n if (location.search.includes(\"culture\")) return;\n const lng = getCookie(LANGUAGE);",
+      "context": "user &&\n !user.isAdmin &&\n !user.isOwner &&\n !user.isRoomAdmin\n ) {\n throw new Error(t(\"Common:AccessDenied\"));\n }\n \n useEffect(() => {\n if (window.location.search.includes(\"culture\")) return;\n const lng = getCookie(LANGUAGE);",
       "module": "/packages/login"
     },
     {
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"المحاولة مرفوضة\" (Al-muhawala marfuodha) literally translates to \"The attempt is rejected.\" While conveying a similar meaning to \"Access denied\", it's not the most natural or standard translation for \"Access denied.\" A more accurate and common translation would be something like \"ممنوع الدخول\" (Mamnou' ad-dخول).",
-          "suggestion": "ممنوع الدخول"
+          "description": "The translation 'المحاولة مرفوضة' (Al-muhawala marfuda) literally translates to 'The attempt is rejected'. While it conveys a similar meaning to 'Access denied,' it's not the most accurate or idiomatic translation for this context. 'Access denied' often implies restricted access to a resource or system, and a more suitable translation might be something like 'الوصول ممنوع' (al-wusool mamnoo').",
+          "suggestion": "الوصول ممنوع"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Italian translation begins with a leading space.",
-          "suggestion": "Remove the leading space: \"Accesso negato\""
+          "description": "The translation starts with a space.",
+          "suggestion": "Remove the leading space."
         }
       ],
       "approved_at": null
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "There is an unnecessary space after 'refuzat'.",
+          "description": "The Romanian translation contains a leading space.",
           "suggestion": "Acces refuzat"
         }
       ],
@@ -183,7 +183,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ප්‍රවේශය' (pravesaya) is correctly spelled. However, some may prefer 'ආප Zugang' (aapaa pravesa) for a slightly more colloquial feel. This is a stylistic preference, not a definitive error.",
+          "suggestion": "Consider 'ආප Zugang' (aapaa pravesa) as an alternative, but 'ප්‍රවේශය' is acceptable."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි' (pravesaya pratikshepitaai) is a literal translation of 'Access denied', a more natural-sounding translation might be 'ඔබට ප්‍රවේශයක් නැත' (obata pravesa naetha).",
+          "suggestion": "Consider 'ඔබට ප්‍රවේශයක් නැත' (obata pravesa naetha) for improved naturalness."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -204,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Приступ одбијен\" while technically meaning \"Access denied\", isn't the most natural or idiomatic Serbian translation. A more common and natural translation would be 'Dozvoljen pristup nije dat' or 'Nedozvoljeno'.",
-          "suggestion": "Dozvoljen pristup nije dat"
+          "description": "The Serbian (Cyrillic) translation \"Приступ одбијен\" while conveying a similar meaning, is not the most natural or common way to express \"Access denied\" in Serbian. \"Приступ одбијен\" translates more literally to 'Access rejected' or 'Approach denied'.",
+          "suggestion": "A more natural translation would be \"Забрањен приступ\" (Zabranjen pristup) or \"Немате права приступа\" (Nemate prava pristupa)."
         }
       ],
       "approved_at": null

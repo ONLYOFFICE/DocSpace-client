@@ -3,7 +3,7 @@
   "content": "Folders copied.",
   "content_en_sha1_hash": "14b84e8a1498b14d42f5c93e1e577b484feae77c",
   "created_at": "2025-05-19T21:30:54.836Z",
-  "updated_at": "2025-05-28T09:30:02.431Z",
+  "updated_at": "2025-06-30T12:20:31.342Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a folder has been successfully copied. It typically appears as part of an info panel or UI element displaying actions taken on folders.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 122,
-      "context": "count,\n });\n return t(\"InfoPanel:FolderMovedToTrash\");\n case \"FolderCopied\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case \"FolderDeleted\":\n if (hasRelatedItems)",
+      "line_number": 131,
+      "context": "return t(\"InfoPanel:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)",
       "module": "/packages/client"
     },
     {
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Թղթապանակները պատճենված են:' literally translates to 'The folders are copied'. While understandable, a more natural Armenian phrasing for a confirmation message like 'Folders copied.' would be 'Պատճենվեցին թղթապանակները' or 'Միացվեցին ֆայլերը'.",
-          "suggestion": "Պատճենվեցին թղթապանակները"
+          "description": "The translation 'Թղթապանակները պատճենված են:' literally translates to 'The folders are copied.' While understandable, a more natural and idiomatic Armenian translation for 'Folders copied.' would be something like 'Պատճենվեցին թղթապանակները' (Patchenvts'ien thğţ'apanaknnerə) or 'Թղթապանակները պատճենվել են' (Thğţ'apanaknnerə patchenvel en).",
+          "suggestion": "Consider 'Պատճենվեցին թղթապանակները' or 'Թղթապանակները պատճենվել են'."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໄຟລ໌ຖືກກ໊ອບ ໝົດແລ້ວ' literally translates to 'Files have been copied'. The English says 'Folders copied', not 'Files copied'.",
-          "suggestion": "ໄຟລ໌ໂຟນເດີຖືກກ໊ອບ ໝົດແລ້ວ"
+          "description": "The Lao translation 'ໄຟລ໌ຖືກກ໊ອບ ໝົດແລ້ວ' translates to 'Files have been copied.' The English content 'Folders copied' refers to a plural form. It should be 'ໄຟລ໌ຖືກກ໊ອບໝົດແລ້ວ' which more accurately conveys 'folders'.",
+          "suggestion": "ໄຟລ໌ຖືກກ໊ອບໝົດແລ້ວ"
         }
       ],
       "approved_at": null
@@ -173,14 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර්' is a transliteration of 'folder' and is acceptable. However, for better readability and potentially wider understanding, consider using a more established Sinhala term if one exists that closely conveys the meaning of 'folder'.",
-          "suggestion": "Research and consider using a more established Sinhala term for 'folder' if available, otherwise 'ෆෝල්ඩර්' is acceptable."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'ෆෝල්ඩර් පිටපත් කරන ලදී' is grammatically correct but could be slightly more natural sounding. While technically accurate, it reads a bit stiff.",
-          "suggestion": "Consider alternatives like 'ෆෝල්ඩර්​යන් පිටපත් කරන ලදී' (Folders were copied) for a slightly more natural flow, although this is a stylistic preference."
+          "type": "incorrect_translation",
+          "description": "The translation 'ෆෝල්ඩර් පිටපත් කරන ලදී.' implies 'folders were being copied', suggesting an ongoing process, while the English 'Folders copied' indicates completion. A more accurate translation would emphasize the finished action.",
+          "suggestion": "ෆෝල්ඩර්​ පිටපත් කෙරුණා."
         }
       ],
       "approved_at": null
@@ -202,9 +197,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Фолдери' is a direct transliteration of 'Folders' and while understandable, a more natural Serbian (Cyrillic) word for 'folders' would be 'Мапе'.",
-          "suggestion": "Мапе су копирани."
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, \"Фолдери су копирани\" is a literal translation. A more natural Serbian (Cyrillic) phrasing would be 'Копирани су фолдери.' or 'Премештени фолдери.' depending on the context.",
+          "suggestion": "Копирани су фолдери."
         }
       ],
       "approved_at": null
@@ -212,7 +207,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Folderi su kopirani\" is a bit stiff and doesn't flow naturally. A more idiomatic translation would be \"Prekopani folderi\" or \"Folderi prekopani\".",
+          "suggestion": "Prekopani folderi"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -230,7 +231,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Đã sao chép các thư mục\" is a bit literal and less natural than other options.  A more natural phrasing would be something like \"Các thư mục đã được sao chép\" or simply \"Đã sao chép thư mục\".",
+          "suggestion": "Các thư mục đã được sao chép."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

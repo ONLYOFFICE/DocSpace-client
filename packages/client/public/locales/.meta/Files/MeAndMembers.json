@@ -3,7 +3,7 @@
   "content": "Me and members ({{ membersCount }})",
   "content_en_sha1_hash": "a3d819681518616be864b842599d088e7cd38fae",
   "created_at": "2025-05-19T21:30:55.837Z",
-  "updated_at": "2025-05-28T09:30:02.237Z",
+  "updated_at": "2025-06-30T12:20:31.207Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether you are able to view or edit files based on your membership status among users and groups. It appears in the Create Edit Room Dialog component, specifically at line 99 of TemplateAccess.tsx, and depends on the number of members in the users list.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TemplateAccess/TemplateAccess.tsx",
-      "line_number": 98,
+      "line_number": 100,
       "context": "}\n \n const getAccessLabel = () => {\n if (usersList.length) {\n if (groupsList.length) {\n return t(\"Files:MeAndMembersAndGroups\", {\n membersCount: `${usersList.length}`,\n groupsCount: `${groupsList.length}`,\n });\n }\n return t(\"Files:MeAndMembers\", { membersCount: `${usersList.length}` });",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Me and members\" is not translated accurately. The correct translation for \"Me and\" in this context should be \"Mən və\".",
-          "suggestion": "Mən və üzvlər"
+          "description": "The phrase 'Me and members' is not naturally translated as 'Mən və üzvlər'. A more natural translation would be 'Mən və qatışıcılar' or 'Mən və fədakarlar'. 'Üzv' typically refers to a 'member' in a more formal sense, like a part of a body or an organization, whereas 'qatışıcılar' or 'fədakarlar' better conveys the meaning of 'members' in this context.",
+          "suggestion": "Mən və qatışıcılar ({{ membersCount }})"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Аз и членове ({{ membersCount }})' is not the most natural Bulgarian phrasing. While technically correct, it sounds slightly awkward. A more natural translation would be 'Аз и членовете ({{ membersCount }})' or 'Аз и участниците ({{ membersCount }})'.",
-          "suggestion": "Аз и членовете ({{ membersCount }})"
+          "description": "The translation 'Аз и членове ({{ membersCount }})' is too literal and doesn't sound natural in Bulgarian.  A better phrasing would convey the meaning of 'Me and members' in a more idiomatic way.",
+          "suggestion": "Consider alternatives like 'Моите членове ({{ membersCount }})' (My members) or 'Аз и моите членове ({{ membersCount }})' (Me and my members), depending on the intended nuance."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ich und Mitglieder' is grammatically incorrect in German. The correct way to say 'Me and members' is 'Ich und die Mitglieder' or 'Ich mit den Mitgliedern'.",
-          "suggestion": "Ich und die Mitglieder"
+          "description": "The translation 'Ich und Mitglieder' is grammatically incorrect. In German, when referring to oneself and others, 'und' should be replaced with 'und ich'.",
+          "suggestion": "Ich und ich und Mitglieder"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation 'Moi et membres' is not idiomatic. 'Moi' translates to 'Me', but in French, a more natural phrasing would be 'Moi et les membres'.",
-          "suggestion": "Moi et les membres ({{ membersCount }})"
+          "description": "The translation 'Moi et membres' is not idiomatic French. 'Moi' implies a personal possessiveness and is not the correct way to refer to a group including members. A more appropriate translation would use a term indicating the group itself.",
+          "suggestion": "Le/Les membres et moi ({{ membersCount }})"
         }
       ],
       "approved_at": null
@@ -105,13 +105,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ես և անդամները({{ membersCount }})' literally translates to 'I and members'. While understandable, a more natural Armenian phrasing would be 'Ես և անդամները' (Yes ev andamner) or 'Ես ու անդամները' (Yes u andamner).",
-          "suggestion": "Ես և անդամները or Ես ու անդամները"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,7 +114,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'Io e membri' is grammatically incorrect. The correct form for 'Me and members' in Italian is 'Io e i membri'.",
+          "description": "The Italian translation 'Io e membri' is grammatically incorrect. In Italian, when referring to a group including oneself, 'e' should be 'e i'.",
           "suggestion": "Io e i membri ({{membersCount}})"
         }
       ],
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Ik en leden' is not a correct translation of 'Me and members'. 'Ik' is Dutch, and 'leden' is a mix of Dutch and Latvian. The phrase should be translated to something like 'Es un biedri' or 'Es un dalībnieki'.",
-          "suggestion": "Es un biedri"
+          "description": "The Latvian translation \"Ik en leden ({{ membersCount })\" is incorrect. \"Ik\" is Dutch, not Latvian.  The Latvian equivalent for \"Me and members\" would be something like \"Es un biedri\" or \"Es un locekļi\".",
+          "suggestion": "Es un biedri ({{ membersCount }})"
         }
       ],
       "approved_at": null
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ik en leden' is not the most natural way to express \"Me and members\" in Dutch. A more idiomatic translation would be \"Ik en de leden\" or simply \"Mij en de leden\". The use of 'en' directly after 'Ik' is grammatically correct, but sounds less fluent in this context.",
-          "suggestion": "Ik en de leden"
+          "description": "The translation 'Ik en leden' is not the most natural or accurate translation of 'Me and members'.  'Ik en leden' literally translates to 'Me and members', but it sounds awkward in Dutch. A more natural phrasing would be something like 'Mijn leden' or 'Ik met leden'.",
+          "suggestion": "Consider 'Mijn leden' or 'Ik met leden'."
         }
       ],
       "approved_at": null
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Eu și membrii' is a literal translation that is not idiomatic. 'Eu și membrii' translates directly to 'I and members'. A more natural Romanian phrasing would be 'Eu și membrii' (same as the existing translation) or 'Eu și ceilalți membri'.",
-          "suggestion": "Eu și ceilalți membri"
+          "description": "The Romanian translation 'Eu și membrii' is not the most natural or accurate translation of 'Me and members'.  'Eu' translates to 'I', which implies a single person acting with members. A more accurate translation would use a word suggesting 'we' or 'myself and'.",
+          "suggestion": "Mine și membrii ({{ membersCount }})"
         }
       ],
       "approved_at": null
@@ -213,7 +207,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Ja a členovia' is overly literal and sounds unnatural. A more natural phrasing would be 'Mne a členovia' or 'Ja a členmi'. 'Ja a členovia' suggests the speaker is part of a group and speaking for themselves, whereas the original implies a listing or description.",
+          "suggestion": "Mne a členovia"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ја и чланови ({{ membersCount }})' is a literal translation but doesn't quite convey the same natural flow as the English \"Me and members\". A more natural Serbian phrasing would be something like \"Ја и чланови ({{ membersCount }})\" or 'Моја група и чланови ({{ membersCount }})'.",
-          "suggestion": "Consider 'Моја група и чланови ({{ membersCount }})' or 'Ја и чланови ({{ membersCount }})'."
+          "description": "The Serbian translation 'Ја и чланови ({{ membersCount }})' translates literally as 'I and members'. A more natural and idiomatic translation would be 'Ја и чланови ({{ membersCount }})' or 'Ја и моји чланови ({{ membersCount }})'.",
+          "suggestion": "Ја и чланови ({{ membersCount }}) or Ја и моји чланови ({{ membersCount }})"
         }
       ],
       "approved_at": null

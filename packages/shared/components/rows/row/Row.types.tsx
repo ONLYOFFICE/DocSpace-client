@@ -27,6 +27,20 @@
 import { VDRIndexingAction } from "../../../enums";
 import { ContextMenuModel } from "../../context-menu";
 
+export type RowItemType = {
+  icon?: string;
+  avatar?: string;
+  title?: string;
+  displayName?: string;
+  logo?: {
+    color?: string;
+    medium?: string;
+    cover?: string;
+    small?: string;
+    large?: string;
+  };
+};
+
 export type TData = {
   contextOptions: ContextMenuModel[];
 };
@@ -38,7 +52,7 @@ export type RowProps = {
    * If there is no value, the occupied space is distributed among the other child elements. */
   checked?: boolean;
   /** Displays the child elements */
-  children?: React.ReactNode;
+  children?: React.ReactElement<{ item: RowItemType }>;
   /** Accepts class */
   className?: string;
   /** Required for displaying a certain element in the row */
@@ -91,4 +105,6 @@ export type RowProps = {
   isDisabled?: boolean;
   /** Callback for changing index */
   onChangeIndex?: (action: VDRIndexingAction) => void;
+  /** The item data for the row */
+  item?: RowItemType;
 };

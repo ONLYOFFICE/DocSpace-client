@@ -3,7 +3,7 @@
   "content": "Language and Time Zone Settings",
   "content_en_sha1_hash": "392b7f827b97606957ef5bc78968a32a3ca7ad0b",
   "created_at": "2025-05-19T21:30:52.811Z",
-  "updated_at": "2025-07-02T07:49:19.788Z",
+  "updated_at": "2025-06-30T12:20:31.384Z",
   "comment": {
     "text": "This translation key is used to display the title of a page that controls language and time zone settings, commonly found in portal settings or customization sections. It appears as a document title, typically displayed at the top of a page or dialog, guiding users to this specific configuration section.",
     "is_auto": true,

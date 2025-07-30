@@ -3,7 +3,7 @@
   "content": "Room or Folder",
   "content_en_sha1_hash": "2d4f7114d71dedfa27cefb1dc18af1cd6410221d",
   "created_at": "2025-05-19T21:30:54.627Z",
-  "updated_at": "2025-07-01T15:57:36.196Z",
+  "updated_at": "2025-05-24T09:00:25.975Z",
   "comment": {
     "text": "The translation key \"RoomOrFolder\" is used to display a label for selecting whether to open a file as a room or a folder in the PortalSettings application. This text appears in a label within a UI section. Translators should provide a clear and concise description that reflects this functionality, suitable for both desktop and potential mobile interfaces.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 412,
+      "line_number": 408,
       "context": "<ControlsSection>\n <CategorySubHeader>{t(\"DataDisplay\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>",
       "module": "/packages/client"
     },
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Otaq' can mean 'Room', 'Qovluq' is more accurately translated as 'Directory' rather than 'Folder'.  'Folder' would be better translated as 'Papka'.",
-          "suggestion": "Otaq və ya Papka"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Սենյակ\" is a valid translation for 'Room', \"Թղթապանակ\" is literally 'paper folder'.  A more appropriate translation for 'Folder' in a digital context might be something like 'Ցուցանակ' (tsutsanak) which signifies a container or directory.",
-          "suggestion": "Consider replacing \"Թղթապանակ\" with \"Ցուցանակ\"."
+          "description": "While technically correct, \"Սենյակ կամ Թղթապանակ\" is a very literal translation. A more natural Armenian phrasing might be something like \"Ժյամանակ կամ ֆոլդեր\" to better reflect the technical context, particularly if \"Folder\" is commonly used in English within the product.",
+          "suggestion": "Consider \"Ժյամանակ կամ ֆոլդեր\" or a similar phrasing that prioritizes naturalness within a technical context. If 'Folder' is frequently used as is, then the existing translation is acceptable."
         }
       ],
       "approved_at": null
@@ -162,12 +156,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"ală sau Folder\" is incorrect. \"ală\" doesn't accurately translate \"Room\". The correct translation would involve using a more accurate equivalent for 'Room'.",
+          "description": "The Romanian translation 'ală sau Folder' is incorrect. 'ală' doesn't accurately convey the meaning of 'Room'. It appears to be a typo or misunderstanding of the English word.",
           "suggestion": "Camera sau Folder"
         },
         {
           "type": "spelling",
-          "description": "The translation contains a typo. 'ală' should be 'Camera'",
+          "description": "The Romanian word 'ală' is likely a typo. It's not a standard Romanian word and doesn't fit the context.",
           "suggestion": "Camera"
         }
       ],
@@ -185,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"කාමරය\" (kamara) correctly translates to 'room,' \"බහාලුම\" (bahaaluma) is more accurately 'container' or 'box' rather than 'folder.' A more appropriate translation for 'folder' would be 'මුදවන්න' (mudawanna) or a more formal equivalent.",
-          "suggestion": "කාමරය හෝ මුදවන්න (kamaraa hoa mudawanna)"
+          "description": "While \"කාමරය\" (kamarayā) accurately translates to 'room', \"බහාලුම\" (bahālumā) translates to 'container' or 'box'.  'Folder' implies a structured organizational element, and a more appropriate translation might be something like 'ආකාරක පත්‍රිකා පෙට්ටිය' (ākārak pataṟikā pettiya) which means 'organized document folder'. However, a simpler option would be 'ලේඛන පෙට්ටිය' (lēkhana pettiya) meaning 'document box/folder'.",
+          "suggestion": "Consider 'ලේඛන පෙට්ටිය' (lēkhana pettiya) or 'ආකාරක පත්‍රිකා පෙට්ටිය' (ākārak pataṟikā pettiya)"
         }
       ],
       "approved_at": null
@@ -209,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Соба или Фолдер\" incorrectly translates \"Room or Folder\". \"Room\" should be translated to \"Соба\" (Soba) which is the correct Serbian word for room. \"Folder\" is accurately translated as \"Фолдер\".",
-          "suggestion": "Соба или Фолдер"
+          "description": "The Serbian (Cyrillic) translation \"Соба или Фолдер\" is an incorrect translation of \"Room or Folder\". \"Соба\" means \"room\" but doesn't convey the intended meaning of 'room' within the context of a digital workspace or folder structure. The word 'Folder' is correctly transliterated as 'Фолдер', however the 'Room' portion needs correction.",
+          "suggestion": "The correct translation should be something like \"Простор или Фолдер\" (Prostor ili Folder), where 'Prostor' means 'Space' and better fits the context."
         }
       ],
       "approved_at": null
@@ -221,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Soba' can mean 'Room', it's a more general term. A more accurate translation considering the technical context (JavascriptSdk) might be 'Prostorija' or 'Sozbenje', though 'Soba' isn't *wrong*.",
-          "suggestion": "Consider 'Prostorija' or 'Sozbenje' for improved technical accuracy."
+          "description": "While 'Soba' translates to 'Room', the word 'Folder' is commonly translated as 'Folder' in Serbian (Latin) in a technical context like a Javascript SDK. Using the English term 'Folder' maintains consistency and clarity.",
+          "suggestion": "Folder"
         }
       ],
       "approved_at": null

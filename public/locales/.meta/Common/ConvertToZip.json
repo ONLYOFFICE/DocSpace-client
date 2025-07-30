@@ -3,7 +3,7 @@
   "content": "Files will be compressed into the <strong>.zip file</strong>",
   "content_en_sha1_hash": "a3f20fa0332e521b74d0bff520f9e7c6989dbd5d",
   "created_at": "2025-05-19T21:30:43.719Z",
-  "updated_at": "2025-07-01T15:57:36.403Z",
+  "updated_at": "2025-05-26T07:57:32.938Z",
   "comment": {
     "text": "This translation key is used to describe the action of compressing files into a zip file. It appears in a download dialog when selecting a format for downloaded files, and its purpose is to inform users about the outcome of their choice.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 448,
+      "line_number": 437,
       "context": "<>\n <div className={styles.downloadDialogBodyContent}>\n <Text noSelect>{t(\"Common:ChooseFormatText\")}.</Text>\n {!isSingleFile ? (\n <Text noSelect>\n <Trans t={t} ns=\"Common\" i18nKey=\"ConvertToZip\" />\n </Text>\n ) : null}\n </div>\n {state.documents.files.length > 0 ? (\n <DownloadContent",
       "module": "/packages/shared"
     }
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"سيتم ضغط الملفات في <strong> ملف مضغوط </strong>\" literally translates to \"Files will be compressed in <strong> compressed file </strong>\". The English phrase 'zip file' doesn't have a direct equivalent that perfectly captures the meaning within a short phrase in Arabic.  A more accurate translation would convey the act of creating a .zip archive, not just a 'compressed file'.",
-          "suggestion": "سيتم ضغط الملفات في ملف ZIP"
+          "description": "The Arabic translation \"ملف مضغوط\" directly translates to \"compressed file\" which isn't equivalent to the English phrase \".zip file\".  It lacks the specific file extension.",
+          "suggestion": "سيتم ضغط الملفات في <strong>ملف .zip</strong>"
         },
         {
           "type": "formatting",
-          "description": "The formatting (strong tags) should match the English formatting. However, using just \"ملف مضغوط\" is an overly simplistic and generic term for a '.zip' file. Using the abbreviation 'ملف ZIP' is more appropriate.",
-          "suggestion": "سيتم ضغط الملفات في <strong>ملف ZIP</strong>"
+          "description": "The strong tags are used correctly in both the English and Arabic, indicating proper emphasis.",
+          "suggestion": "No change needed."
         }
       ],
       "approved_at": null
@@ -46,14 +46,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Fayllar .zip formatına sıxlaşdırılacaq' translates to 'Files will be compressed into the .zip format.' While not entirely wrong, it lacks the emphasis and directness of the English 'Files will be compressed into the <strong>.zip file</strong>'. The original implies a specific zip file.",
-          "suggestion": "Fayllar <strong>.zip</strong> arxivlərinə sıxlaşdırılacaq"
+          "type": "formatting",
+          "description": "The strong tag is not correctly placed. It should encompass the entire phrase describing the file type, not just the 'zip' part.",
+          "suggestion": "<strong>Fayllar .zip formatında sıxlaşdırılacaq</strong>"
         },
         {
-          "type": "formatting",
-          "description": "The English content uses strong tags around '.zip file'.  The Azerbaijani translation currently lacks this formatting.",
-          "suggestion": "Fayllar <strong>.zip</strong> formatına sıxlaşdırılacaq"
+          "type": "incorrect_translation",
+          "description": "While the meaning is conveyed, 'formatına' is less natural. A more fluent translation would be to use 'şəklinə' or omit the word completely.",
+          "suggestion": "<strong>Fayllar .zip şəklinə sıxlaşdırılacaq</strong>"
         }
       ],
       "approved_at": null
@@ -64,8 +64,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not closed correctly. It should be `</strong` instead of `</strong`.",
-          "suggestion": "Change `</strong` to `</strong`"
+          "description": "The strong tag is duplicated, indicating a possible error in translation process or source content. It is present both before and after '.zip'.",
+          "suggestion": "Remove the unnecessary opening or closing strong tag. The correct format should be either 'Файловете ще бъдат компресирани в <strong>.zip файл' or 'Файловете ще бъдат компресирани в .zip файл</strong>'."
         }
       ],
       "approved_at": null
@@ -76,8 +76,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is retained in the Czech translation, which is generally not desired. It's better to ensure consistent formatting across languages, and often the strong tag should be removed.",
-          "suggestion": "Remove the <strong/> tags from the Czech translation."
+          "description": "The strong tag is present in both the English and Czech versions, indicating it should be preserved. However, the space within the strong tag is inconsistent. English uses ' .zip file', Czech uses ' .zip'.",
+          "suggestion": "Ensure consistent spacing within the strong tag to match the English original, or decide if the Czech version's spacing is intentional and preferred."
         }
       ],
       "approved_at": null
@@ -88,8 +88,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML strong tag is not properly closed. It should be `<strong/>` or `<strong >` at the beginning and `</strong>` at the end.",
-          "suggestion": "Correct the HTML tag closure: `<strong >ZIP-Datei</strong>`"
+          "description": "The HTML strong tag is not consistently applied. The English uses `<strong>.zip file</strong>`, while the German uses `<strong>ZIP-Datei</strong>.  Consistency is important.",
+          "suggestion": "Use `<strong class=\"your-class\">ZIP-Datei</strong>` to maintain consistent styling and class usage."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'archiviert' (archived) is a valid translation, 'komprimiert' (compressed) might be a more accurate reflection of the English 'compressed'. The context implies compression, not just archiving.",
+          "suggestion": "Consider using 'Dateien werden in eine ZIP-Datei komprimiert' for greater accuracy."
         }
       ],
       "approved_at": null
@@ -100,8 +105,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not properly closed. It should be </strong>, not <strong",
-          "suggestion": "Replace <strong with </strong>"
+          "description": "The strong tag is inconsistent. The English uses `<strong>.zip file</strong>` and the Greek uses `<strong >αρχείο .zip</strong >`. The space before the period should be standardized.",
+          "suggestion": "Standardize the spacing within the strong tag to match the English, or consider whether the extra space is intentional."
         }
       ],
       "approved_at": null
@@ -112,8 +117,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is inconsistent. The English uses `<strong>.zip file</strong>`, while the Spanish uses `<strong>archivo .zip</strong>`.  The period should be inside the tag, but the wording differs.",
-          "suggestion": "Consider aligning the formatting to match the English: `<strong>.zip</strong>` or, more accurately reflecting the Spanish: `<strong>archivo .zip</strong>`"
+          "description": "The strong tag is present in both the English and Spanish versions, but the Spanish version uses '.zip' instead of simply 'zip'.  Consistency is preferred.",
+          "suggestion": "Consider changing `<strong>.zip file</strong>` in the Spanish version to `<strong>.zip</strong>'"
         }
       ],
       "approved_at": null
@@ -130,8 +135,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not consistent. The English uses `<strong>.zip file</strong>`, while the French uses `<strong>fichier .zip</strong>`. The period should be within the strong tag.",
-          "suggestion": "<strong>fichier .zip</strong>"
+          "description": "The strong tag is present in both the English and French versions, which is redundant and might affect rendering. Consider removing it in either language.",
+          "suggestion": "Remove the strong tags from either the English or French version."
         }
       ],
       "approved_at": null
@@ -142,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is present in both the English and Armenian translations, but the placement seems slightly off in terms of flow and readability.",
-          "suggestion": "Consider re-evaluating the placement of the strong tag to ensure a natural reading experience in Armenian. For example, perhaps placing it around the entire phrase 'ֆայլի մեջ' would improve the flow."
+          "description": "The strong tag is not properly closed. It should be `</strong>`.",
+          "suggestion": "Replace `<strong>.zip ֆայլի</strong>` with `<strong>.zip ֆայլում</strong>` or `<strong>.zip ֆայլի մեջ</strong>` depending on desired phrasing."
         }
       ],
       "approved_at": null
@@ -154,8 +159,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag placement is inconsistent. The English uses `<strong>.zip file</strong>`, while the Italian uses `<strong>file .zip</strong>`.  The period placement should also be more consistent.",
-          "suggestion": "I file verranno compressi in un <strong>.zip</strong>"
+          "description": "The strong tag is present in both the English and Italian versions, but the content within the strong tag differs. The English version uses '.zip file', while the Italian uses 'file .zip'. This inconsistency in spacing/punctuation is a formatting issue.",
+          "suggestion": "Consider standardizing the formatting within the strong tag to match the English original: '<strong>file .zip</strong>' or maintaining the Italian version: '<strong>file .zip</strong>'"
         }
       ],
       "approved_at": null
@@ -166,8 +171,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag placement is inconsistent. The English has \"<strong>.zip file</strong>\". The Japanese has \"<strong>.zipファイル</strong>\". The Japanese version should also have a stronger closing tag.",
-          "suggestion": "ファイルは<strong>.zipファイル</strong>"
+          "description": "The strong tags are not correctly closed in the Japanese translation. They should be `<strong>` and `</strong>`.",
+          "suggestion": "ファイルは<strong class=\"\">.zipファイル</strong class=\"\">に圧縮されます"
         }
       ],
       "approved_at": null
@@ -177,14 +182,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '파일이<strong>.zip 파일</strong>로 압축됩니다' does not accurately reflect the English content 'Files will be compressed into the <strong>.zip file</strong>'. Specifically, the Korean phrasing is a bit awkward and doesn't quite convey the 'into' aspect.",
-          "suggestion": "파일은 <strong>.zip 파일</strong>로 압축됩니다."
-        },
-        {
           "type": "formatting",
-          "description": "The strong tags are identical in both English and Korean. While technically not an error, it might be better to check if the styling intended for the strong tags is appropriate for the Korean context.",
-          "suggestion": "Verify the styling applied by the strong tags is appropriate for the Korean context."
+          "description": "The strong tags are not properly closed. The English content uses `<strong>.zip file</strong>`, while the Korean translation uses `<strong>.zip 파일</strong`. The closing tag is incorrect and needs to match the opening tag.",
+          "suggestion": "Change `<strong>.zip 파일</strong>` to `<strong>.zip 파일</strong>"
         }
       ],
       "approved_at": null
@@ -194,9 +194,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The Lao translation uses \"ແຟ້ມ\" which translates to 'file' or 'folder'. While technically correct, it's less precise than conveying the concept of a compressed archive. A more accurate translation of 'zip file' would be something along the lines of \"ເອກະສານຮວມ\" (dokhn chom) or \"ໄຟລ໌ຮວມ\" (file chom) which directly means 'compressed file'.",
+          "suggestion": "ໄຟລ໌ຕ່າງໆຈະຖືກບີບອັດເຂົ້າໃນ<strong>ໄຟລ໌ຮວມ.zip</strong>"
+        },
+        {
           "type": "formatting",
-          "description": "The Lao translation includes <strong> tags around the filename, mirroring the English. This might not be necessary or standard in Lao formatting and could be removed for a cleaner presentation.",
-          "suggestion": "Remove the <strong> tags from the Lao translation: ໄຟລ໌ຕ່າງໆຈະຖືກບີບອັດເຂົ້າໃນແຟ້ມ.zip"
+          "description": "While the formatting matches the English, consider if Lao users would expect the `.zip` extension to be included within the strong tag. It may be more common to separate it.",
+          "suggestion": "ໄຟລ໌ຕ່າງໆຈະຖືກບີບອັດເຂົ້າໃນ<strong>ໄຟລ໌ຮວມ .zip</strong>"
         }
       ],
       "approved_at": null
@@ -207,8 +212,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not closed correctly. It is opened before '.zip file' and closed after '.zip failā'.",
-          "suggestion": "Ensure the strong tags are properly nested and closed: Files will be compressed into a <strong>.zip file</strong/>"
+          "description": "The strong tag is present in both the English and Latvian translations. This suggests it was carried over unintentionally and may not be necessary or semantically correct in the Latvian context.",
+          "suggestion": "Review the need for the strong tag in the Latvian translation. If it's not intended to highlight the '.zip' part, remove it."
         }
       ],
       "approved_at": null
@@ -219,8 +224,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not closed correctly. It starts with `<strong>` and ends with `<strong/>` instead of `</strong>`.",
-          "suggestion": "Correct the closing tag to `</strong>`."
+          "description": "The strong tag is not closed correctly. The English version uses `<strong >`, while the Dutch translation has `<strong >.`",
+          "suggestion": "Correct the closing strong tag to `</strong>`."
         }
       ],
       "approved_at": null
@@ -231,8 +236,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"do formatu\" (into format) is not the best translation for \"into\". It implies a specific file format rather than a compressed file. A more accurate translation would be \"do pliku\" (into a file).",
-          "suggestion": "Pliki zostaną skompresowane do pliku <strong>.zip</strong>"
+          "description": "The English phrase 'into the .zip file' is better translated as 'do formatu .zip' (into the .zip format) rather than a direct translation that implies being placed *inside* the zip file.",
+          "suggestion": "Pliki zostaną skompresowane do formatu .zip"
         }
       ],
       "approved_at": null
@@ -242,9 +247,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'zip file' is translated as 'ficheiro .zip'. While technically correct, 'ficheiro ZIP' would be a more natural and commonly used term in Portuguese for a ZIP file.",
-          "suggestion": "Os ficheiros serão comprimidos para o <strong>ficheiro ZIP</strong>"
+          "type": "formatting",
+          "description": "The HTML strong tag is present in both the English and Portuguese versions, but the surrounding content 'file' needs to be adapted for better flow in Portuguese.",
+          "suggestion": "Os ficheiros serão comprimidos para o <strong>arquivo .zip</strong>"
         }
       ],
       "approved_at": null
@@ -255,8 +260,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \" .zip file\" is translated as \"arquivo .zip\". While technically correct, a more natural and idiomatic Portuguese translation would be \"arquivo ZIP\" (capitalized).",
-          "suggestion": "arquivo ZIP"
+          "description": "The English phrase 'zip file' is translated as 'arquivo .zip'. While technically correct, a more natural and idiomatic translation would be 'arquivo compactado' or 'arquivo .zip compactado'.  'Arquivo .zip' is too literal.",
+          "suggestion": "Os arquivos serão compactados no <strong>arquivo compactado</strong>"
         }
       ],
       "approved_at": null
@@ -267,8 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"în format\" (in format) is redundant. The English 'into' already implies a format. A more natural Romanian phrasing would be 'într-un' or just 'într-o'.",
-          "suggestion": "Fișiere vor fi comprimate într-un/într-o .zip"
+          "description": "The English phrase 'into the .zip file' is translated as 'în format'. While not entirely wrong, 'în format' doesn't convey the same meaning as 'into a zip file'. A more accurate translation would be something like 'într-un fișier .zip'.",
+          "suggestion": "Fișiere vor fi comprimate într-un fișier .zip"
         }
       ],
       "approved_at": null
@@ -278,9 +283,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The word 'упакованы' (upakovany) translates to 'packed' or 'archived,' which isn't quite the same as 'compressed.' While acceptable, 'сжаты' (szhaty) would be a more precise translation of 'compressed'.",
+          "suggestion": "Файлы будут сжаты в <strong>.zip файл</strong>"
+        },
+        {
           "type": "formatting",
-          "description": "The strong tag is duplicated in the translation. It appears before and after '.zip'.",
-          "suggestion": "Remove the unnecessary strong tag after '.zip'. The corrected translation should be: \"Файлы будут упакованы в .zip файл\""
+          "description": "The strong tag is repeated identically in both the English and Russian versions. This might not be desirable for consistency in UI rendering.",
+          "suggestion": "Review the use of the strong tag to ensure consistent rendering across languages."
         }
       ],
       "approved_at": null
@@ -291,13 +301,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ගොනු <strong>.zip ගොනුවකට</strong> හැකිළීම සිදුවේ\" is a bit literal and doesn't flow naturally in Sinhala. The phrase 'හැකිළීම සිදුවේ' (happens to compress) isn't the most elegant way to express file compression.",
-          "suggestion": "Consider a more natural phrasing like \"ගොනු <strong>.zip</strong> ගොනුවකට සංක්ෂෙපණය කරනු ලැබේ\" (Files are compressed into a .zip file) or \"ගොනු <strong>.zip</strong> ගොනුවකට හැකිළේ“ (Files are compressed into a .zip file)."
+          "description": "The Sinhala translation 'ගොනු <strong>.zip ගොනුවකට</strong> හැකිළීම සිදුවේ' is not a direct or natural translation of 'Files will be compressed into the <strong>.zip file</strong>'. It literally translates to 'Files become compressed into a .zip file'. While understandable, it lacks the active voice and flow of the English original. A better translation would focus on the action of compressing.",
+          "suggestion": "Consider a translation like 'ගොනු <strong>.zip</strong> ගොනුවකට හැකිළනු ලැබේ' (Files are compressed into a .zip file) or 'ගොනු <strong>.zip</strong> ගොනුවක් ලෙස හැකිළිය හැක' (Files can be compressed as a .zip file)."
         },
         {
           "type": "formatting",
-          "description": "The strong tag formatting is copied correctly, but the Sinhala translation should consider whether bolding the '.zip' is necessary or preferred in the Sinhala context. It might be more appropriate to keep it as plain text.",
-          "suggestion": "Evaluate whether the '.zip' needs to be bolded in the Sinhala context. If not, remove the strong tag around '.zip'."
+          "description": "The strong tag appears to be preserved in the Sinhala translation, which is technically correct, but may not be optimal for the Sinhala rendering. It depends on how the formatting is intended to be handled in the Sinhala context.",
+          "suggestion": "Evaluate whether the strong tag is necessary and renders correctly in the Sinhala output. If not, consider removing it or using an alternative formatting method."
         }
       ],
       "approved_at": null
@@ -305,13 +315,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is not correctly matched in the Slovak translation. It should be opening and closing the entire phrase.",
+          "suggestion": "Súbory budú komprimované do <strong class=\"\">súboru .zip</strong>"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is replicated in both the English and Slovenian versions. While not inherently wrong, it suggests a potential formatting issue or copy-paste error from the original source.",
+          "suggestion": "Review the source material to determine if the strong tag should be present and consistent in both languages. If it's a formatting requirement, ensure consistency. If it's intended to highlight 'zip file', ensure this is consistent across both languages."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -320,13 +342,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Serbian translation uses 'Датотеке ће бити компресоване' which implies a passive voice and a plural form ('files will be compressed'). The English says a single file will contain the compressed files, so a singular passive construction is more appropriate.",
-          "suggestion": "Датотека ће бити компресована"
+          "description": "The Serbian translation uses 'ће бити компресоване' which is passive voice and a bit clunky. A more natural phrasing would be active voice.",
+          "suggestion": "Датотеке ће бити спаковане у <strong>.zip датотеку</strong>."
         },
         {
           "type": "formatting",
-          "description": "The strong tag is repeated at the start and end of the phrase. This is unnecessary.",
-          "suggestion": "Датотеке ће бити компресоване у .zip датотеку."
+          "description": "The strong tag formatting is preserved in the translation, which is correct. However, ensure consistency in similar instances across all translations.",
+          "suggestion": "Ensure consistent use of strong tags across all translations to maintain formatting integrity."
         }
       ],
       "approved_at": null
@@ -337,8 +359,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not closed correctly. It should be `</strong`.",
-          "suggestion": "Change `</strong` to `</strong`."
+          "description": "The strong tag is repeated, leading to an incorrect format. It should only be at the beginning of the phrase.",
+          "suggestion": "Datoteke će biti kompresovane u <strong>.zip datoteku</strong >."
         }
       ],
       "approved_at": null
@@ -349,13 +371,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"<strong>Dosyalar .zip</strong> dosyasına sıkıştırılacak\" is not a direct or natural translation. The phrase \"dosyasına\" implies 'into the file'. A more accurate and natural translation would be something like \"<strong>Dosyalar .zip</strong> arşivine sıkıştırılacak\" or \"<strong>Dosyalar .zip</strong> formatında sıkıştırılacak\".",
-          "suggestion": "<strong>Dosyalar .zip</strong> arşivine sıkıştırılacak"
+          "description": "The translation is not a direct and accurate representation of the original English sentence. \"Files will be compressed into the .zip file\" implies a destination. The current translation, \"Files will be compressed into a .zip file\" lacks the word 'into'.",
+          "suggestion": "Dosyalar .zip dosyasına sıkıştırılacak."
         },
         {
           "type": "formatting",
-          "description": "The `<strong>` tags are preserved in the Turkish translation, which might not be the desired formatting. Consider whether this formatting is intended in Turkish.",
-          "suggestion": "Consider removing or adjusting the `<strong>` tags if they are not required for the Turkish context."
+          "description": "The translation includes strong tags (<strong >) which don't perfectly replicate the formatting of the original. While the original uses `<strong >.zip file</strong >>`, the translated content should also include closing strong tag.",
+          "suggestion": "<strong >Dosyalar .zip</strong> dosyasına sıkıştırılacak"
         }
       ],
       "approved_at": null
@@ -365,14 +387,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Ukrainian translation retains the HTML strong tag, which might not be desired depending on the context. It is generally better to avoid or sanitize HTML tags in translations if they are purely stylistic.",
-          "suggestion": "Remove the <strong/> tags, resulting in: \"Файли будуть стиснуті у файл .zip\""
+          "type": "incorrect_translation",
+          "description": "The English phrase \"file .zip\" is not a natural or accurate translation of \"zip file\". It should be translated to reflect that it's a zip archive, not just a file with the .zip extension.",
+          "suggestion": "Файли будуть стиснуті у <strong>архів .zip</strong>"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'файл .zip' is a bit literal. A more natural phrasing in Ukrainian would be something like 'архів .zip' or simply '.zip архів'.",
-          "suggestion": "Consider using 'архів .zip' or '.zip архів' instead of 'файл .zip'"
+          "type": "formatting",
+          "description": "The strong tag is correctly used in both the original and the translation, ensuring the text 'zip file'/'архів .zip' is emphasized.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -383,13 +405,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'zip file' is best translated as 'file zip' or 'tệp zip' in Vietnamese to maintain the file extension format.",
-          "suggestion": "Các tệp sẽ được nén thành <strong>tệp zip</strong>"
+          "description": "The English phrase 'Files will be compressed into the <strong>.zip file</strong>' is better translated as something indicating the files become a zip archive. 'Các tệp sẽ được nén thành <strong>tệp .zip</strong>' literally translates to 'The files will be compressed into <strong>a .zip file</strong>', which implies a single zip file being the result of compressing multiple files, which is not always the case. It's more accurate to say the files *become* a zip archive.",
+          "suggestion": "Các tệp sẽ được tạo thành một tệp .zip"
         },
         {
           "type": "formatting",
-          "description": "The Vietnamese translation includes a space before the period in '.zip'. While not strictly incorrect, it’s more typical to omit the space.",
-          "suggestion": "Các tệp sẽ được nén thành <strong>tệp .zip</strong>"
+          "description": "The strong tag formatting is maintained in the translation, which is appropriate.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -400,13 +422,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation maintains the English formatting with the HTML strong tag, but the phrasing is not idiomatic Chinese. A more natural phrasing would be preferable.",
-          "suggestion": "文件将被压缩成.zip格式的文件 (Wénjiàn bìng jiāng yānsū chéng .zip géshì de wénjiàn)"
+          "description": "The translation \"文件将被压缩成<strong>.zip文件</strong>\" is a direct transliteration and not a natural phrasing in Chinese. 'Compressed into' is better translated as '打包成' or '压缩到'.  The strong tag is incorrectly placed.",
+          "suggestion": "文件将被压缩到<strong>.zip文件</strong> or 文件将被打包成<strong>.zip文件</strong>"
         },
         {
           "type": "formatting",
-          "description": "The translation replicates the HTML strong tag. This is likely unnecessary and can be removed.",
-          "suggestion": "文件将被压缩成.zip文件 (Wénjiàn bìng jiāng yānsū chéng .zip wénjiàn)"
+          "description": "The placement of the strong tag is incorrect and doesn't match the English content.  It's repeating .zip.",
+          "suggestion": "文件将被压缩到<strong> .zip</strong>文件"
         }
       ],
       "approved_at": null

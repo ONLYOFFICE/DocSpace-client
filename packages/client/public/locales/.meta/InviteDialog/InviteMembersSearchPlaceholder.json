@@ -3,7 +3,7 @@
   "content": "Invite members by email",
   "content_en_sha1_hash": "25be32bc4914ade0794cba6ad711881458da0fcf",
   "created_at": "2025-05-19T21:30:54.725Z",
-  "updated_at": "2025-05-28T09:30:02.377Z",
+  "updated_at": "2025-05-26T07:57:32.377Z",
   "comment": {
     "text": "This translation key is used as a placeholder text for an input field that allows users to search and invite members by email in an invitation panel. It appears when creating or editing an invite, indicating its purpose. Translators should provide a corresponding text to make the invitation process accessible across languages.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pozvěte nové členy prostřednictvím e-mailu' is a bit literal. While technically correct, it sounds slightly awkward in Czech. A more natural phrasing would be something like 'Pozvěte členy e-mailem' or 'Zavolejte členy e-mailem'.",
+          "suggestion": "Pozvěte členy e-mailem"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The provided German translation \"Inviter les membres par e-mail\" is actually French, not German. It translates to 'Invite members by email' in French.",
-          "suggestion": "The correct German translation should be 'Mitglieder per E-Mail einladen'."
+          "description": "The provided German translation 'Inviter les membres par e-mail' is French, not German. The phrase 'invite members by email' should be translated into German.",
+          "suggestion": "Einladen von Mitgliedern per E-Mail"
         }
       ],
       "approved_at": null
@@ -69,7 +75,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Invitar a miembros por correo electrónico' is a literal translation but sounds unnatural in Spanish. A more natural phrasing would be 'Invitar miembros por correo electrónico' or 'Invita miembros por correo electrónico'.",
+          "suggestion": "Invitar miembros por correo electrónico"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -108,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '이메일을 통한 멤버 초대' is a literal translation and a bit stiff. A more natural and idiomatic Korean phrasing would be better.",
-          "suggestion": "멤버 이메일로 초대"
+          "description": "The translation \"이메일을 통한 멤버 초대\" is technically correct but could be more natural and concise. While it directly translates to \"Invite members through email,\" it's a bit wordy for a placeholder.",
+          "suggestion": "이메일로 멤버 초대"
         }
       ],
       "approved_at": null
@@ -138,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Zaproś przez e-mail' is a literal translation but lacks the nuance of 'Invite members by email'. It doesn't convey the 'members' aspect. A better translation would be something like 'Zaproś członków przez e-mail'.",
+          "description": "The translation 'Zaproś przez e-mail' is a literal translation, but in Polish, a more natural phrasing would be 'Zaproś członków przez e-mail' or 'Zaproszenia przez e-mail'. The current translation lacks clarity regarding who is being invited.",
           "suggestion": "Zaproś członków przez e-mail"
         }
       ],
@@ -171,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඊමේල් ඔස්සේ සාමාජිකයන්ට ආරාධනා කරන්න' is a literal translation and could be improved for natural flow in Sinhala. While technically correct, it doesn't sound as idiomatic as possible for an invite prompt.",
+          "suggestion": "Consider a more natural phrasing like 'ඊමේල් ලිපිනයෙන් සාමාජිකයන් කැඳවන්න' or 'ඊමේල් ලිපිනයෙන් අයදුම් කරුවන් කැඳවන්න'. The specific wording depends on the context - are you inviting 'members' or 'applicants'?"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -198,8 +216,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pozovite članove putem e-pošte' is a literal translation but sounds somewhat unnatural in Serbian. A more natural phrasing would be 'Pozivite članove putem e-pošte' or 'Dodajte članove putem e-pošte'. 'Pozovite' implies more of a direct call, while 'Pozivite' or 'Dodajte' are better suited for inviting members.",
-          "suggestion": "Pozivite članove putem e-pošte"
+          "description": "The translation 'Pozovite članove putem e-pošte' is a literal translation but not the most natural way to express 'Invite members by email' in Serbian. 'Invite' often implies a more formal or structured invitation.",
+          "suggestion": "Predložite članove putem e-pošte"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Pozovite' is acceptable, 'Predložite' conveys a more suitable meaning of extending an invitation or suggestion to join.",
+          "suggestion": "Predložite članove putem e-pošte"
         }
       ],
       "approved_at": null
@@ -216,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not the most natural way to express 'Invite members by email' in Ukrainian. While technically correct, it sounds a bit literal and awkward.",
-          "suggestion": "Consider alternatives like: 'Запросіть учасників електронною поштою' or 'Запросіть учасників, вказавши їхню електронну пошту'."
+          "description": "The translation 'Запросіть учасників за адресою електронної пошти' is too literal and doesn't sound natural in Ukrainian. A more idiomatic translation would be more appropriate.",
+          "suggestion": "Запросіть учасників за електронною поштою"
         }
       ],
       "approved_at": null

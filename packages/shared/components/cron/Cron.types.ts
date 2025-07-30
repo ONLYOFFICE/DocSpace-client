@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import type { TFunction } from "i18next";
 import type { Dispatch, SetStateAction } from "react";
 
 export type PeriodType = "Year" | "Month" | "Week" | "Day" | "Hour" | "Minute";
@@ -47,7 +47,7 @@ export type Option<K = unknown, L = unknown> = {
   label: L;
 };
 
-export type TFunction = (str: string, options?: unknown) => string;
+// export type TFunction = (str: string, options?: unknown) => string;
 
 export type Setter<K extends string, T = number[]> = {
   [P in K as `set${Capitalize<P>}`]: Dispatch<SetStateAction<T>>;
@@ -100,7 +100,7 @@ export interface SelectProps extends Property<"value"> {
 }
 
 export interface PeriodProps extends Property<"period", PeriodType> {
-  t: TFunction;
+  t: TFunction<"Common", undefined>;
   isDisabled?: boolean;
 }
 

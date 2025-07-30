@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Elegir de la lista",
-  "ConnectingAccount": "Conectando cuenta",
-  "DeleteFromTrash": "Los elementos seleccionados se han eliminado correctamente de la papelera",
   "FileLocked": "Archivo bloqueado",
   "FileProtected": "El archivo está protegido con contraseña",
   "FileUnlocked": "Archivo desbloqueado",
@@ -14,7 +12,6 @@
   "FolderTitleSkyDrive": "Directorio OneDrive",
   "FolderTitleWebDav": "Directorio WebDAV",
   "FolderTitleYandex": "Directorio Yandex",
-  "GuestReleaseTipDescripton": "Todos los usuarios añadidos anteriormente se convirtieron en invitados y ahora solo están disponibles en la lista de contactos de los administradores de {{productName}}. Los invitados ya no forman parte de ningún grupo. Siempre puede cambiar su tipo y añadirlos a un grupo, si es necesario.",
   "GuestReleaseTipLink": "Más información sobre los tipos de usuario",
   "LinkHasExpiredAndHasBeenDisabled": "El enlace ha expirado y se ha desactivado",
   "LinkValidTime": "Este enlace solo es válido durante {{days_count}} días.",
@@ -28,14 +25,5 @@
   "ThirdPartyInfo": "Cambiar la información de terceros",
   "ThirdPartyTitle": "Servicios de terceros",
   "TitleShowActions": "Mostrar acciones con archivo",
-  "TitleShowFolderActions": "Mostrar las acciones con la carpeta",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Mostrar las acciones con la carpeta"
 }

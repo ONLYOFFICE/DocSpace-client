@@ -3,7 +3,7 @@
   "content": "Previous link <1>«{{linkTitle}}»</1> revoked <br/> New Link <1>«{{linkTitle}}»</1> created",
   "content_en_sha1_hash": "3ab1d8a367547e80b55b96e3eae8efa81c39da94",
   "created_at": "2025-05-19T21:30:54.918Z",
-  "updated_at": "2025-05-21T09:53:41.808Z",
+  "updated_at": "2025-06-30T12:20:31.347Z",
   "comment": {
     "text": "This translation key is used for a notification message that indicates an external link to a specific room has been revoked and replaced with a new one. The message appears in a UI component, likely a popup or alert box, providing context about the change. Translators should update the existing link description to reflect the new link information.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 205,
-      "context": "linkTitle: feed.data.title,\n }}\n components={{ 1: <strong title={feed.data.title} /> }}\n />\n );\n case \"RoomExternalLinkRevoked\":\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRevoked\"",
+      "line_number": 214,
+      "context": "linkTitle: feed.data.title,\n }}\n components={{ 1: <strong title={feed.data.title} /> }}\n />\n );\n case FeedActionKeys.RoomExternalLinkRevoked:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRevoked\"",
       "module": "/packages/client"
     }
   ],
@@ -30,18 +30,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation contains stray tags </1> and <1>. These should be removed to match the English formatting.",
-          "suggestion": "Remove the stray tags </1> and <1> from both occurrences."
+          "description": "The tags </1> and <1> are inconsistent. The first occurrence of </1> does not have a corresponding opening tag <1>.",
+          "suggestion": "Ensure consistent use of opening and closing tags.  Consider removing or correcting the inconsistent tag at the beginning."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"تم إلغاء الرابط السابق\" is a literal translation of \"Previous link revoked\". While technically correct, a more natural phrasing would be \"تم إلغاء الرابط السابق\" could be improved to something like \"جاري إلغاء الرابط السابق\" or \"تم إلغاء الرابط السابق\".",
-          "suggestion": "Consider using \"جاري إلغاء الرابط السابق\" or \"تم إلغاء الرابط السابق\" for a more natural flow."
+          "type": "grammar",
+          "description": "The Arabic phrase 'تم إلغاء' is passive voice. While grammatically correct, a more natural phrasing might be preferable for a user interface.",
+          "suggestion": "Consider rewording to an active voice construction for better flow, e.g., 'أُلغي الرابط السابق' (The previous link was cancelled)."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"وتم إنشاء رابط جديد\" is a literal translation of \"New Link created\".  A more natural flow would be achieved by rephrasing. The word \"و\" (and) is often unnecessary and can be omitted for better readability.",
-          "suggestion": "Consider rephrasing to \"تم إنشاء رابط جديد\"."
+          "type": "grammar",
+          "description": "The Arabic phrase 'تم إنشاء' is passive voice. While grammatically correct, a more natural phrasing might be preferable for a user interface.",
+          "suggestion": "Consider rewording to an active voice construction for better flow, e.g., 'تم إنشاء رابط جديد' (A new link has been created)."
         }
       ],
       "approved_at": null
@@ -58,8 +58,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Bulgarian translation uses a space before the angle bracket '<' which is inconsistent with the English source. The English source has no space before the angle bracket.",
-          "suggestion": "Remove the space before the angle bracket: Предишният линк<1>«{{linkTitle}}»</1> е отменен"
+          "description": "The Bulgarian translation maintains the HTML tags, which might not be desired. It's better to remove them if the system rendering the text handles the link insertion.",
+          "suggestion": "Consider removing the <1>«{{linkTitle}}»</1> tags and let the system handle the link insertion based on the 'linkTitle' variable."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Предишният линк<1>«{{linkTitle}}»</1> е отменен' could be slightly improved for flow. While grammatically correct, it sounds a bit clunky.",
+          "suggestion": "Consider 'Предишният линк<1>«{{linkTitle}}»</1> беше отменен' or 'Предишният линк<1>«{{linkTitle}}»</1> е премахнат'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'revoked' is translated as 'отменен'. While 'отменен' can mean revoked, 'премахнат' might be more suitable depending on the context. 'Отменен' often refers to cancellation of an order or agreement. 'Премахнат' more accurately conveys removal or deletion.",
+          "suggestion": "Replace 'отменен' with 'премахнат' for greater accuracy."
         }
       ],
       "approved_at": null
@@ -73,13 +83,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'revoked' should be translated to 'aufgehoben' or 'entfernt' instead of 'widerrufen'. 'Widerrufen' implies a formal revocation, which isn't necessarily the context here.",
-          "suggestion": "Vorheriger Link <1>«{{linkTitle}}»</1> aufgehoben <br/> Neuer Link <1>«{{linkTitle}}»</1> erstellt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,14 +109,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The opening and closing tags for the `linkTitle` variable are not correctly escaped. The double quotes within the tags are preventing the variable from being properly interpreted.",
-          "suggestion": "Replace `\"{{linkTitle}}\"` with `\"{{linkTitle}}\"` in both instances."
+          "type": "incorrect_translation",
+          "description": "The English 'Previous link' is translated as 'Lien précédent'. While grammatically correct, it might benefit from a slightly more user-friendly phrasing depending on the context, such as 'Ancien lien'. However, 'Lien précédent' isn't inherently wrong.",
+          "suggestion": "Consider 'Ancien lien' for a potentially more approachable feel."
         },
         {
           "type": "formatting",
-          "description": "The use of the HTML tag `<1>` is inconsistent with standard practice for variable marking and may not be correctly interpreted by the application.  While the surrounding text is correctly formatted with `<br/>`, the tags themselves should be examined for compatibility.",
-          "suggestion": "Investigate the application’s variable marking scheme and adjust accordingly. Consider using a more standard approach like `{{linkTitle}}` directly, or a different tag format recognized by the system."
+          "description": "The HTML tags <1> and </1> are identical in both English and French. This may indicate a formatting issue if these tags represent specific formatting instructions that differ across languages.  It's unclear if this is intentional or if the French version should also use different tags.",
+          "suggestion": "Verify if the <1> tags are consistently applied across all languages and if they indicate specific formatting. If so, adjust the French translation to match."
         }
       ],
       "approved_at": null
@@ -120,7 +124,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation maintains the <1> and </1> tags from the English content, which might not be necessary or expected in the Armenian context. Consider removing them if they don't serve a specific purpose.",
+          "suggestion": "Evaluate whether the <1> and </1> tags are required in the Armenian UI. If not, remove them for cleaner presentation."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -128,24 +138,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Previous link' is translated as 'Link precedente'. While accurate, it's slightly less natural in Italian. A more fluent option would be 'Vecchia link'.",
-          "suggestion": "Vecchia link"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'revoked' is translated as 'è stato revocato'.  This is grammatically correct, but a more natural Italian phrasing would be 'è stato eliminato' or 'è stato rimosso', depending on the specific context. 'Revocato' implies a specific legal or contractual revocation that might not be intended.",
-          "suggestion": "è stato eliminato"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'New Link' is translated as 'Nuovo link'. While accurate, it feels slightly less natural in Italian than simply 'Nuovo link'. The repetition of 'link' feels awkward in Italian.",
-          "suggestion": "Nuovo link"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'created' is translated as 'è stato creato'. This is grammatically correct, but depending on the platform a more natural phrase would be 'è disponibile' or 'è stato aggiunto'.",
-          "suggestion": "è disponibile"
+          "type": "formatting",
+          "description": "The English and Italian translations both use `<1>` and `</1>` tags around `{{linkTitle}}`, which suggests this is a placeholder that needs to be consistent.",
+          "suggestion": "Verify the intended purpose of the `<1>` and `</1>` tags. If they are placeholders, ensure they are handled correctly in the application consuming the translation."
         }
       ],
       "approved_at": null
@@ -156,13 +151,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"revoked\" is translated as \"取り消されます\" (torikesaremasu). While technically correct, a more natural and user-friendly translation in this context might be \"失効しました\" (shikou shimashita) which translates to 'expired' or 'invalidated'.",
-          "suggestion": "Change \"取り消されます\" to \"失効しました\""
+          "description": "The phrase \"取り消されます\" (torikesaremasu) implies a passive voice and a formal tone, which might not be the most natural way to express 'revoked' in this context. A more conversational and direct translation would be more appropriate.",
+          "suggestion": "以前のリンク <1>「{{linkTitle}}」</1> は無効になりました <br/>"
         },
         {
-          "type": "formatting",
-          "description": "The use of the Japanese katakana (「」) to enclose `{{linkTitle}}` is consistent with the English use of angle brackets (<1> and </1>), which is good. No change needed.",
-          "suggestion": null
+          "type": "incorrect_translation",
+          "description": "The phrase \"が作成されました\" (ga sakusei saremashita) is grammatically correct but a bit formal. A more natural and common phrasing for 'created' would improve the flow.",
+          "suggestion": "新しいリンク <1>「{{linkTitle}}」</1> が追加されました"
         }
       ],
       "approved_at": null
@@ -170,7 +165,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content uses <br/> for line break, but the Korean translation also uses <br/> which might not be necessary or preferred in the target platform. It's better to verify if the platform renders <br/> correctly or if a different method is required for line breaks.",
+          "suggestion": "Check if <br/> is the correct way to create a line break in the target platform. Consider removing it if unnecessary."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -179,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The `<br/>` tag should be a new line character for better readability in the user interface.",
-          "suggestion": "Replace `<br/>` with `\\n` or equivalent newline character based on the rendering environment."
+          "description": "The Lao translation preserves the HTML tags <1>«{{linkTitle}}»</1> which are not necessary and should be removed for better readability and clean presentation. The same applies to the <br/> tag.",
+          "suggestion": "Remove the HTML tags and use appropriate line breaks for formatting in the UI."
         }
       ],
       "approved_at": null
@@ -191,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'revoked' is not accurately translated. 'Atsaukta' implies a cancellation or annulment, which might not fully capture the meaning of a link being revoked (e.g., due to expiry or change). A more accurate translation might be 'atcelta' (canceled) or 'vairs nav derīga' (is no longer valid).",
-          "suggestion": "Consider 'atcelta' or 'vairs nav derīga' instead of 'atsaukta'."
+          "description": "The English phrase \"revoked\" is best translated as \"atcelta\" rather than \"atsaukta\" in this context. \"Atsaukta\" implies a cancellation or recall, while \"atcelta\" better conveys the link being deactivated or removed.",
+          "suggestion": "Iepriekšējā saite <1>«{{linkTitle}}»</1> atcelta <br/> Jauna saite <1>«{{linkTitle}}»</1> ir izveidota"
         }
       ],
       "approved_at": null
@@ -227,8 +228,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"New Link created\" is translated as \"Un link nou va fi creat\". While technically correct, it implies a future action. A more direct and natural translation would be \"Un link nou a fost creat\" to match the past tense of 'revoked'.",
-          "suggestion": "Un link nou a fost creat"
+          "description": "The English 'revoked' is translated as 'a fost revocat'. While technically correct, it's a passive voice construction that sounds less natural in Romanian. A more direct and active translation would be 'a fost anulat' or 'a fost eliminat'.",
+          "suggestion": "a fost anulat"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'created' is translated as 'va fi creat'. This implies a future action. The present tense 'a fost creat' or 'este creat' would be more appropriate to convey the current state.",
+          "suggestion": "a fost creat"
         }
       ],
       "approved_at": null
@@ -245,18 +251,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Previous link\" as \"පෙරමුණ සම්බන්ධතාව\" is not the most natural. \"පෙර ලිಂಕ್\" would be more accurate and commonly used.",
-          "suggestion": "පෙර ලිಂಕ್"
+          "description": "The term ' සම්බන්ධතාව' (sambandhitava) while technically meaning 'connection', doesn't fully capture the meaning of 'link' in this context. A more accurate translation would be 'සබැඳිය' (sabadiiya) which directly translates to 'link'.",
+          "suggestion": "Replace 'සබැඳිය' (sabadiiya) for ' සම්බන්ධතාව' (sambandhitava)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"revoked\" as \"අවලංගු කරන ලදි\" is technically correct but could be more concise. \"අවලංගු විය\" would sound more natural.",
-          "suggestion": "අවලංගු විය"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"created\" as \"සාදා ගන්නා ලදි\" is grammatically correct but a more concise and natural phrasing would be \"ස້າງන ලදි\".",
-          "suggestion": "ස້າງන ලදි"
+          "description": "The phrasing 'සාදා ගන්නා ලදි' (sada ganlana ladi) while implying 'created', sounds a bit convoluted. A simpler and more direct translation for 'created' would be 'ඇති කර ඇති' (athi kara athi).",
+          "suggestion": "Replace 'සාදා ගන්නා ලදි' (sada ganlana ladi) with 'ඇති කර ඇති' (athi kara athi)."
         }
       ],
       "approved_at": null
@@ -279,13 +280,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"Претходни\" is misspelled. It should be \"Претходни\".",
+          "description": "The word 'Претходни' is misspelled. It should be 'Претходни'.",
           "suggestion": "Претходни"
         },
         {
           "type": "grammar",
-          "description": "The Serbian translation uses \"је опозван\" and \"је креиран\". While grammatically correct, it sounds somewhat stiff. A more natural phrasing might use a simpler construction.",
-          "suggestion": "опозван је"
+          "description": "The use of 'је' is slightly awkward in Serbian. While grammatically correct, it would sound more natural without it in this context. While not strictly an error, it can be improved.",
+          "suggestion": "Претходни линк <1>«{{linkTitle}}»</1> опозван <br/> Нови линк <1>«{{linkTitle}}»</1> креиран"
         }
       ],
       "approved_at": null
@@ -295,9 +296,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The original English content uses `<br/>` for line break. The Serbian translation also uses `<br/>`, which might not be the preferred method for line breaks in all contexts. Consider using HTML `<p>` tags or other formatting appropriate for the platform.",
-          "suggestion": "Consider using a more flexible formatting approach like `<p>` tags instead of `<br/>` if possible."
+          "type": "incorrect_translation",
+          "description": "'revoked' is translated as 'opozvan'. While 'opozvan' can mean revoked, in this context 'uklonjen' or 'poništen' would be more accurate for a link being removed.",
+          "suggestion": "Prethodni link <1>«{{linkTitle}}»</1> je uklonjen <br/> Novi link <1>«{{linkTitle}}»</1> je kreiran"
         }
       ],
       "approved_at": null
@@ -317,13 +318,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Vietnamese translation lacks the original English `<br/>` tag, which is important for maintaining the original formatting.",
-          "suggestion": "Add `<br/>` after \"đã được hủy\" to match the English source."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

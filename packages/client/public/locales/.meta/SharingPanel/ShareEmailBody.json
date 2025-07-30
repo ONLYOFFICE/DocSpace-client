@@ -3,7 +3,7 @@
   "content": "You have been granted access to the {{itemName}} document. Click the link below to open the document right now: {{shareLink}}.",
   "content_en_sha1_hash": "2a78affd4c07725e72c3433bf9f67169874016fd",
   "created_at": "2025-05-19T21:30:50.256Z",
-  "updated_at": "2025-05-28T09:30:02.373Z",
+  "updated_at": "2025-05-26T07:57:32.373Z",
   "comment": {
     "text": "This translation key is used to display a notification email body when sharing a document externally. It will be inserted into an email template and includes a link to open the shared document.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon (:) after 'Click the link' is missing in the Azerbaijani translation.",
-          "suggestion": "Sizə {{itemName}} sənədinə giriş icazəsi verildi. Sənədi hazırda açmaq üçün aşağıdakı linki klikləyin: {{shareLink}}."
+          "description": "The English version uses 'Click the link below' while the Azerbaijani uses 'aşağıdakı linki klikləyin'. While not incorrect, 'klikləyin' is a loanword. A more natural Azerbaijani phrasing could be used.",
+          "suggestion": "Sənədi hazırda açmaq üçün aşağıdakı keçidi klikləyin/və ya tıklayın."
         }
       ],
       "approved_at": null
@@ -48,8 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'You have been granted access' is not accurately translated. 'Даден Ви е достъп' is a literal translation but sounds somewhat formal and less natural in Bulgarian. A more natural phrasing would be 'Имате достъп до'.",
+          "description": "The phrase 'You have been granted access' is not perfectly conveyed by 'Даден Ви е достъп'. While understandable, a more accurate and natural translation would be 'Имате достъп'.",
           "suggestion": "Имате достъп до документ {{itemName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation doesn't include a period at the end of the first sentence, which is standard in Bulgarian.",
+          "suggestion": "Имате достъп до документ {{itemName}}. Кликнете върху връзката долу, за да отворите документа сега: {{shareLink}}"
         }
       ],
       "approved_at": null
@@ -60,13 +65,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrasing \"Kliknutím na níže uvedený odkaz dokument právě teď otevřete\" is grammatically awkward. It's a passive construction that doesn't flow naturally in Czech.",
-          "suggestion": "Kliknutím na níže uvedený odkaz můžete dokument hned otevřít.  (Clicking the link below, you can open the document right now.)"
+          "description": "The sentence structure is slightly awkward. 'Kliknutím na níže uvedený odkaz dokument právě teď otevřete' translates literally to 'By clicking on the link below, document open right now'.",
+          "suggestion": "Byl vám udělen přístup k dokumentu {{itemName}}. Kliknutím na níže uvedený odkaz jej nyní otevřete: {{shareLink}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'právě' in 'dokument právě teď otevřete' is redundant and doesn't add meaning in this context.",
-          "suggestion": "Remove 'právě' from the sentence. The suggested correction removes it entirely."
+          "description": "The word 'otevřete' (you open) is in the imperative form. The English uses the conditional 'to open'. The imperative feels slightly forceful.",
+          "suggestion": "Byl vám udělen přístup k dokumentu {{itemName}}. Kliknutím na níže uvedený odkaz jej můžete nyní otevřete: {{shareLink}}."
         }
       ],
       "approved_at": null
@@ -77,13 +82,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"You have been granted access\" is better translated as something more formal like \"Es wurde Ihnen Zugriff gewährt\" or \"Sie haben Zugriff erhalten\". The current translation 'Ihnen wurde Zugriff erteilt' is technically correct, but sounds slightly awkward in a formal context.",
-          "suggestion": "Es wurde Ihnen Zugriff auf das Dokument {{itemName}} gewährt."
+          "description": "The phrase \"You have been granted access\" is better translated as something more formal in German, suitable for a business context. \"Ihnen wurde Zugriff erteilt\" is acceptable, but slightly less formal than might be desired.",
+          "suggestion": "Ihnen wurde Zugriff auf das Dokument {{itemName}} gewährt."
         },
         {
           "type": "formatting",
-          "description": "The original English uses 'Click the link below'. A more natural German equivalent would be 'Klicken Sie auf den Link'.",
-          "suggestion": "Klicken Sie auf den Link:"
+          "description": "The English uses a colon to introduce the share link, while the German uses a period. While a period isn't necessarily incorrect, maintaining consistency with the English phrasing would improve readability and user experience.",
+          "suggestion": "Ihnen wurde Zugriff auf das Dokument {{itemName}} erteilt. Zum Öffnen klicken Sie auf den Link:"
         }
       ],
       "approved_at": null
@@ -91,13 +96,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation uses a colon (:) after 'τώρα' which is grammatically correct but can be more natural if replaced with a period (.) for consistency with typical email body formatting.",
-          "suggestion": "Κάντε κλικ στον παρακάτω σύνδεσμο για να ανοίξετε το έγγραφο τώρα ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -118,8 +117,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'granted access' is better translated as 'accorder l'accès' or 'autoriser l'accès'. 'Autorisé à accéder' is somewhat redundant.",
-          "suggestion": "Vous avez été autorisé à accéder au document {{itemName}}."
+          "description": "The phrase 'granted access' is better translated as 'accorder l'accès' or 'donner l'accès' rather than just 'autorisé à accéder'. While 'autorisé à accéder' isn't strictly incorrect, it's less natural in French.",
+          "suggestion": "Vous avez reçu l'accès au document {{itemName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The colon (:) after 'maintenant' is stylistically less common in French. It's more natural to omit it.",
+          "suggestion": "Cliquez sur le lien ci-dessous pour ouvrir le document maintenant {{shareLink}}."
         }
       ],
       "approved_at": null
@@ -130,13 +134,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"տրվել է մատչում դեպի\" is not a natural or accurate translation of \"granted access to\". It sounds awkward and doesn't convey the intended meaning. A more accurate translation would use a phrase like \"տրվել է դostęp\" (given access) or \"ունեցել եք մատչի իրավունք\" (you have access rights).",
-          "suggestion": "Ձեզ տրվել է դostęp դեպի {{itemName}} փաստաթուղթ"
+          "description": "The phrase \"տրվել է մատչում դեպի\" is not the most natural or accurate translation of \"granted access to.\" It's a bit clunky and doesn't quite convey the intended meaning. A more fluent translation would be something like \"ձեզ մատչվել է ցանկություն դեպի\" or a more direct equivalent, possibly rephrased.",
+          "suggestion": "Consider alternatives such as \"Ձեզ ցանկություն է տրվել դեպի\" or \"Ձեզ ունեցել եք մատչություն դեպի\" depending on the desired tone."
         },
         {
           "type": "formatting",
-          "description": "The space before and after the variable `{{itemName}}` is a little awkward. While not a critical error, consistency in spacing improves readability.",
-          "suggestion": "Ձեզ տրվել է մատչում դեպի{{itemName}} փաստաթուղթ"
+          "description": "While the placeholders {{itemName}} and {{shareLink}} are present, the sentence flow around them could be improved. The current phrasing feels slightly awkward.",
+          "suggestion": "Re-evaluate the sentence structure to integrate the placeholders more naturally. For example, \"Ձեզ տրվել է մատչություն դեպի {{itemName}} փաստաթուղթը, և ահա այստեղ էլ կանգնած է այն հղումը, որով կարող եք այն հենց հիմա բացել՝ {{shareLink}}.\""
         }
       ],
       "approved_at": null
@@ -146,9 +150,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Italian translation uses a colon after 'documento' which creates an unusual sentence structure in Italian. A period is more natural.",
-          "suggestion": "Ti è stato concesso l'accesso al documento {{itemName}}. Fare clic sul collegamento sottostante per aprire subito il documento: {{shareLink}}."
+          "type": "grammar",
+          "description": "The phrase \"Fare clic sul collegamento sottostante\" is slightly awkward. A more natural Italian phrasing would be \"Clicca sul link sottostante\" or \"Fai clic sul link sottostante\".",
+          "suggestion": "Clicca sul link sottostante"
         }
       ],
       "approved_at": null
@@ -159,8 +163,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "Repetitive phrasing: The phrase '{{shareLink}}をクリックしてください' is redundant, as '以下のリンクをクリックして' already implies clicking the link.",
-          "suggestion": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。以下のリンクをクリックして、今すぐドキュメントを開いてください: {{shareLink}}。"
+          "description": "The phrase '{{shareLink}}をクリックしてください' is slightly awkward. It's repetitive and not the most natural phrasing in Japanese. Repeating the action is less common in this context.",
+          "suggestion": "{{shareLink}} をクリックしてドキュメントを開いてください。"
         }
       ],
       "approved_at": null
@@ -171,8 +175,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"여세요\" (yeoseyo) is an unusual and potentially incorrect translation of \"open\". A more natural and common way to express 'open' in this context would be \"열어보세요\" (yeolloboseyo).",
-          "suggestion": "Change \"여세요\" to \"열어보세요\"."
+          "description": "The phrase \"여세요\" is not the correct verb for \"open\" in this context. \"여세요\" means something closer to 'take' or 'receive'. The correct verb for opening a document would be \"열어보세요\".",
+          "suggestion": "{{itemName}} 문서에 대한 액세스 권한을 부여 받았습니다. 아래 링크를 클릭하여 지금 바로 문서를 열어보세요: {{shareLink}}"
         }
       ],
       "approved_at": null
@@ -183,13 +187,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'document' is translated as 'ເອກະສານ' which is correct, but it is repeated. It might be better to use a synonym or rephrase to avoid repetition.",
-          "suggestion": "Consider rephrasing to avoid repetition. For example: 'ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}. ກົດທີ່ລິ້ງດ້ານລຸ່ມເພື່ອເປີດມັນດຽວນີ້: {{shareLink}}.'"
+          "description": "The word 'document' is translated as 'ເອກະສານ' which is correct, but the repetition can be slightly improved for a more natural flow. While technically correct, it might sound a bit clunky.",
+          "suggestion": "Consider rephrasing to avoid repeating 'ເອກະສານ' immediately. For example: 'ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}. ກົດທີ່ລິ້ງດ້ານລຸ່ມເພື່ອເປີດມັນດຽວນີ້: {{shareLink}}.'"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrasing 'ເອກະສານດຽວນີ້' (document now) sounds slightly unnatural in Lao. It's more common to simply say 'ເອກະສານນີ້' (this document).",
-          "suggestion": "Change 'ເອກະສານດຽວນີ້' to 'ເອກະສານນີ້'."
+          "type": "formatting",
+          "description": "The phrase 'ດຽວນີ້' (right now) could be positioned for slightly better flow. While not strictly incorrect, placing it later might sound more natural.",
+          "suggestion": "Consider repositioning 'ດຽວນີ້' to the end of the sentence: 'ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}. ກົດທີ່ລິ້ງດ້ານລຸ່ມເພື່ອເປີດເອກະສານນີ້ດຽວນີ້: {{shareLink}}.'"
         }
       ],
       "approved_at": null
@@ -200,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'tūlīt atvērtu dokumentu' could be improved for a more natural flow. While technically correct, it sounds slightly awkward in Latvian.",
-          "suggestion": "Jums ir piešķirta piekļuve dokumentam {{itemName}}. Noklikšķiniet uz tālāk esošās saites, lai atvērtu dokumentu: {{shareLink}}."
+          "description": "The Latvian translation uses a colon after 'dokumentu' when introducing the share link. In Latvian, this is less common and feels slightly unnatural in this context. A period ('.') is generally preferred.",
+          "suggestion": "Replace the colon (':') after 'dokumentu' with a period ('.')"
         }
       ],
       "approved_at": null
@@ -221,18 +225,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Foi-lhe concedido acesso\" can sound overly formal and stiff in many contexts. A more natural and common phrasing would be \"Você recebeu acesso\" or \"Você tem acesso\".",
-          "suggestion": "Você recebeu acesso ao documento {{itemName}}."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"agora mesmo\" translates to 'right now' but may be perceived as slightly too emphatic and informal in certain contexts. A softer phrasing could be considered.",
-          "suggestion": "Clique na ligação abaixo para abrir o documento: {{shareLink}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -241,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Foi-lhe concedido acesso\" is overly formal and not commonly used in Brazilian Portuguese. It translates to 'You were granted access' in a very formal way.",
-          "suggestion": "Use a more natural phrasing like \"Você recebeu acesso ao\" or \"Você tem acesso ao\"."
+          "description": "The phrase \"Foi-lhe concedido acesso\" is overly formal for a sharing email. A more common and natural phrasing would be \"Você recebeu acesso\" or \"Você tem acesso\".",
+          "suggestion": "Você recebeu acesso ao documento {{itemName}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'agora mesmo' while technically correct, can sound a little emphatic and slightly unnatural in this context. A more natural and common phrasing would be better.",
-          "suggestion": "Replace 'agora mesmo' with 'agora' or simply omit it."
+          "description": "While technically correct, \"agora mesmo\" is a bit emphatic and might sound slightly awkward in this context. A simpler \"agora\" is generally preferred.",
+          "suggestion": "Clique no link abaixo para abrir o documento agora: {{shareLink}}."
         }
       ],
       "approved_at": null
@@ -258,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation uses 'ca să' instead of a more formal 'pentru a' before 'deschideți'. While 'ca să' is common in spoken Romanian, 'pentru a' is more appropriate for formal communication like this.",
-          "suggestion": "V-a fost acordat accesul la document {{itemName}}. Faceți clic pe link-ul de mai jos pentru a deschideți documentul chiar acum: {{shareLink}}."
+          "description": "The Romanian translation uses 'ca să' which can sound a bit informal in this context. A more formal option would improve the tone.",
+          "suggestion": "V-a fost acordat accesul la document {{itemName}}. Faceți clic pe link-ul de mai jos pentru a deschide documentul chiar acum: {{shareLink}}."
         }
       ],
       "approved_at": null
@@ -276,13 +269,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ඔබට ... ප්‍රවේශය ලබා දී ඇත\" is a slightly formal way of saying 'You have been granted access'. A more natural and common phrasing would be 'ඔබට ... වෙත ප්‍රවේශය ඇත' or 'ඔබට ... භාවිතා කිරීමට අවසර ඇත'.",
-          "suggestion": "ඔබට {{itemName}} ලේඛනය වෙත ප්‍රවේශය ඇත. (or)  ඔබට {{itemName}} ලේඛනය භාවිතා කිරීමට අවසර ඇත."
+          "description": "The phrase \"granted access\" is not accurately translated. 'ඔබට ප්‍රවේශය ලබා දී ඇත' literally translates to 'You have been given access.' While understandable, a more natural translation might be 'ඔබට accès ලැබ ඇත' (You have received access) or 'ඔබට mengakses වීමට අවසර දී ඇත' (You have been permitted to access).",
+          "suggestion": "Consider 'ඔබට accès ලැබ ඇත' or 'ඔබට mengakses වීමට අවසර දී ඇත'."
         },
         {
           "type": "formatting",
-          "description": "The colon (:) after 'ඔබන්න' in 'පහත සබැඳිය ඔබන්න:' can be stylistically improved. While not incorrect, it can sound slightly abrupt. A softer tone might be preferred.",
-          "suggestion": "පහත සබැඳිය ක්ලික් කරන්න: (or) පහත සබැඳිය ක්ලික් කරන්න."
+          "description": "The phrase 'පහත සබැඳිය ඔබන්න' (Click the link below) could be improved for a more natural flow. A less literal translation might be more suitable.",
+          "suggestion": "Consider 'පහත සබැඳිය ක්ලික් කරන්න' or 'පහත සබැඳිය ක්ලික් කිරීමෙන් ලේඛනය ඇරීමට' "
         }
       ],
       "approved_at": null
@@ -293,13 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovak translation uses 'Kliknutím na odkaz nižšie otvoríte dokument hneď teraz'. While grammatically correct, it sounds slightly formal and less natural. A more conversational approach would be better.",
-          "suggestion": "Kliknite na odkaz nižšie a dokument sa otvorí hneď."
-        },
-        {
-          "type": "formatting",
-          "description": "The placement of the colon (:) after 'hneď teraz' is not ideal. It breaks the flow.",
-          "suggestion": "Remove the colon after 'hneď teraz' or rephrase the sentence to avoid it."
+          "description": "The Slovak translation uses 'Kliknutím na odkaz nižšie otvoríte dokument hneď teraz:' which is a bit clunky. A more natural phrasing would be 'Kliknite na odkaz nižšie, aby ste dokument otvorili hneď teraz.' or 'Otvoríte dokument hneď teraz kliknutím na odkaz nižšie.'",
+          "suggestion": "Kliknite na odkaz nižšie, aby ste dokument otvorili hneď teraz."
         }
       ],
       "approved_at": null
@@ -310,13 +298,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'You have been granted access' is not accurately translated. 'Omogočen vam je dostop' is a more literal translation of 'access is enabled for you,' but doesn't convey the meaning of being granted access. A more natural translation would be something like 'Imate dostop' or 'Dobili ste dostop'.",
-          "suggestion": "Imate dostop do {{itemName}} dokumenta. / Dobili ste dostop do {{itemName}} dokumenta."
+          "description": "The phrase \"You have been granted access\" is not accurately translated. \"Omogočen vam je dostop\" is a literal translation that doesn't convey the intended meaning of being *given* access.",
+          "suggestion": "Imeli boste dostop do..."
         },
         {
-          "type": "formatting",
-          "description": "The English sentence uses a colon to introduce the link explanation. The Slovenian translation uses a period. While not strictly incorrect, maintaining the colon would improve consistency and readability.",
-          "suggestion": "Omogočen vam je dostop do {{itemName}} dokumenta. Če želite dokument odpreti, kliknite spodnjo povezavo:"
+          "type": "incorrect_translation",
+          "description": "The phrase 'Click the link below' is a bit stiff.  A more natural Slovenian phrasing could improve readability.",
+          "suggestion": "Kliknite na povezavo, da odprete dokument."
         }
       ],
       "approved_at": null
@@ -326,14 +314,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word \"документу\" should be \"документу\". While understandable, the ending is not quite right for the context.",
-          "suggestion": "документу"
+          "type": "incorrect_translation",
+          "description": "The word 'granted' is not accurately translated. 'Добили сте приступ' (dobili ste pristup) translates to 'You have access,' which doesn't fully capture the meaning of 'granted access'. A more appropriate translation might be 'Имате дозволу за приступ' (imate dozvolu za pristup) or 'Добили сте право приступа' (dobili ste pravo pristupa).",
+          "suggestion": "Имате дозволу за приступ документу {{itemName}}"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'да отворите документ одмах' could be more natural. While technically correct, it feels slightly awkward.",
-          "suggestion": "да одмах отворите документ"
+          "type": "formatting",
+          "description": "The colon after 'document' seems unnecessary and disrupts the flow of the Serbian sentence.",
+          "suggestion": "Добили сте приступ документу {{itemName}}. Кликните на линк испод да отворите {{shareLink}}."
         }
       ],
       "approved_at": null
@@ -343,9 +331,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'You have been granted access' is better translated to Serbian as 'Imate pristup' rather than 'Dobili ste pristup'. While 'Dobili ste pristup' isn't *wrong*, it implies a more active granting of access, whereas 'Imate pristup' is a more neutral and accurate representation.",
-          "suggestion": "Imate pristup dokumentu {{itemName}}."
+          "type": "formatting",
+          "description": "The Serbian translation lacks the punctuation mark (period) at the end of the first sentence.",
+          "suggestion": "Dobili ste pristup dokumentu {{itemName}}. Kliknite na link ispod da otvorite dokument odmah: {{shareLink}}."
         }
       ],
       "approved_at": null
@@ -359,13 +347,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Ukrainian translation lacks a period at the end of the first sentence. While not strictly incorrect, it is standard to include a period in this context.",
-          "suggestion": "Вам надано доступ до документа {{itemName}}. Клацніть посилання нижче, щоб відкрити документ зараз: {{shareLink}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

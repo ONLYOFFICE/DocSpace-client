@@ -3,7 +3,7 @@
   "content": "Signed in as",
   "content_en_sha1_hash": "a02107c35fb17aee91fc9a3715c3e8eb17220829",
   "created_at": "2025-05-19T21:30:57.329Z",
-  "updated_at": "2025-05-28T09:30:02.885Z",
+  "updated_at": "2025-06-30T12:20:31.666Z",
   "comment": {
     "text": "The \"SignedInAs\" translation key displays a message indicating that the user is signed in as. It is used to provide contextual information about the current logged-in user in the UI.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
       "line_number": 287,
-      "context": "role={AvatarRole.user}\n source={user.avatarSmall || \"\"}\n />\n <div className=\"user-info\">\n <Text lineHeight={\"20px\"}>\n {t(\"SignedInAs\")} {user.email}\n </Text>\n <Link\n className={\"login-link\"}\n type={LinkType.action}\n isHovered={false}",
+      "context": "role={AvatarRole.user}\n source={user.avatarSmall || \"\"}\n />\n <div className=\"user-info\">\n <Text lineHeight=\"20px\">\n {t(\"SignedInAs\")} {user.email}\n </Text>\n <Link\n className=\"login-link\"\n type={LinkType.action}\n isHovered={false}",
       "module": "/packages/login"
     }
   ],
@@ -27,19 +27,37 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"تسجيل الدخول باسم\" literally translates to \"Login with name\". While conveying a similar meaning, \"Signed in as\" implies an ongoing state, whereas \"Login with name\" implies an action. A more accurate translation reflecting the ongoing state would be \"مدخل كـ\" (Madkhol ka-) or \"تم تسجيل الدخول باسم\" (Tam tasjeel al-dkhool bi ism).",
+          "suggestion": "مدخل كـ"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation \"Aşağıdakı kimi daxil olub:\" is a literal translation that doesn't quite convey the meaning of \"Signed in as.\" It implies 'Logged in as the following'. A more natural and accurate translation would be something like \"Daxil olub:\" or \"Kimi şəkildə daxil oldu:\" or even a more colloquial option depending on the brand's tone.",
+          "suggestion": "Consider alternatives such as \"Daxil olub:\" or \"Kimi şəkildə daxil oldu:\" or \"Daxil olaraq:\"."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Вписан като\" while technically meaning 'entered as' or 'logged in as,' doesn't convey the exact meaning of 'Signed in as' in the context of user authentication. It's a bit too formal and doesn't feel natural in a UI.",
+          "suggestion": "Consider alternatives like \"Влязъл като\" (Vlyazal kato - Logged in as) or \"Като\" (Kato - As) depending on the overall UI style.  'Влязъл като' is likely the closest functionally and tonally."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +81,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Conectado como\" is a possible translation, \"Conectado como\" emphasizes the connection aspect. \"Signed in as\" implies an identity association. A more accurate translation would be \"Identificado como\" or \"Iniciado sesión como\".",
+          "suggestion": "Identificado como"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -87,25 +111,49 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Accesso come\" is a literal translation of \"Access\" instead of \"Signed in as\". A more accurate translation would convey the meaning of being logged in as a specific user.",
+          "suggestion": "Effettuato l'accesso come"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '次のアカウントにサインインしている：' is too literal and doesn't convey the intended meaning of 'Signed in as'. It translates to 'Signed in to the following account:'. 'Signed in as' implies identification, which this translation lacks.",
+          "suggestion": "サインインしたのは"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"로그인한 계정:\" is a literal translation of \"account logged in as:\". While understandable, it's less natural and idiomatic than a more direct equivalent of \"Signed in as\". It implies a focus on the account itself rather than the action of signing in.",
+          "suggestion": "Consider alternatives like \"현재 로그인한 사용자:\" (Currently logged-in user:) or \"~로 로그인했습니다:\" (~ logged in as:) where ~ represents the user's identifier."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເຂົ້າສູ່ລະບົບໃນນາມຂອງ\" is a literal translation of 'Signed in as' and while understandable, it's a bit formal and lengthy for a user interface element. A more natural and concise translation might be preferred.",
+          "suggestion": "ອ່ານເປັນ: ເຂົ້າສູ່ລະບົບດ້ວຍ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -135,13 +183,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Conectado como' is understandable, 'Signed in as' typically translates to 'Logado como' in Brazilian Portuguese. 'Conectado como' implies a connection rather than authentication.",
+          "suggestion": "Logado como"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"V-ați conectat ca\" is not the most natural or idiomatic way to say \"Signed in as\" in Romanian. While technically correct, it's somewhat formal and less common in user interfaces.",
+          "suggestion": "Consider using \"Autentificat ca\" or \"Logat ca\" which are more common and user-friendly in this context."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +213,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ලෙස පුරනය වී ඇත' does not accurately convey the meaning of \"Signed in as\". It translates to something like \"Filled in as\" or \"Entered as\", which is not the intended meaning.  The phrase \"Signed in as\" refers to the user's identity after logging in.",
+          "suggestion": "The suggested translation is 'ඇතුළත් වී ඇත' (Athulath vaa etha) or 'පිහිටුවා ඇත' (Pihituwaa etha).  A more literal but still understandable alternative would be 'පිහිටුවා als' which would still require some understanding of english."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +237,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Пријављени сте као' while conveying a similar meaning, isn't the most natural or precise translation of 'Signed in as'. A more accurate and common translation would be 'Уlogovani ste kao' or 'Пријављени као'.",
+          "suggestion": "Уlogovani ste kao"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Prijavljeni ste kao' is a functional equivalent, but a more natural and concise translation for 'Signed in as' would be 'Ulogovani kao'. 'Prijavljeni ste kao' implies a more formal or official signing in.",
+          "suggestion": "Ulogovani kao"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Giriş yapan kullanıcı:' is a more literal and verbose translation of 'Signed in as'. While technically correct, it's less natural and less concise in Turkish UI/UX contexts. A more appropriate translation would be something like 'Kullanıcı olarak' or simply 'Kullanıcı:'.",
+          "suggestion": "Kullanıcı olarak"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,13 +279,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Đã đăng nhập với tư cách' is technically correct but not the most natural or concise way to say \"Signed in as\" in Vietnamese. It's a bit verbose.",
+          "suggestion": "Consider \"Đăng nhập với\" or simply \"Đăng nhập\" for a more natural feel, depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"登录为\" while technically meaning \"login as\", doesn't fully capture the nuance of \"Signed in as\". It feels a bit abrupt and impersonal. A more natural and complete translation would convey the idea of being authenticated as a specific user.",
+          "suggestion": "Consider alternatives like \"已登录为\" (Yǐ lùjìn wèi) - \"Already logged in as\" or \"以...身份登录\" (Yǐ...shēnfèn lùjìn) - \"Logged in as...\" (with the user's name following)."
+        }
+      ],
       "approved_at": null
     }
   }

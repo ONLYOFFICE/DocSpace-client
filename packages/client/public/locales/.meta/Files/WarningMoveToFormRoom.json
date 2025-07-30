@@ -3,7 +3,7 @@
   "content": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "content_en_sha1_hash": "cface7c960be4b02ae0e603f24ae30d94c77c924",
   "created_at": "2025-05-19T21:30:56.341Z",
-  "updated_at": "2025-05-28T09:30:02.129Z",
+  "updated_at": "2025-05-26T07:57:32.171Z",
   "comment": {
     "text": "This translation key is used to display an error message when a file cannot be moved to a form room. The message informs users to try moving the specific organization's PDF form instead. This message appears in the FilesSelector component when attempting to move a file to a form room.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The file cannot be moved to this room' is translated as 'لا يمكن نقل الملف إلى هذه الغرفة'. While technically correct, it lacks the natural flow of Arabic. A more natural phrasing would be something like 'لا يمكن تحريك الملف إلى هذه الغرفة' or 'لا يمكن نقل هذا الملف إلى الغرفة'.",
+          "suggestion": "لا يمكن تحريك الملف إلى هذه الغرفة"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please try to move the {{ organizationName }} PDF form' is translated as 'يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}'.  'الخاص بـ' is slightly awkward.  A more idiomatic translation would be 'نموذج PDF لـ {{ organizationName }}'.",
+          "suggestion": "يُرجى محاولة نقل نموذج PDF لـ {{ organizationName }}"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"cəhd edin\" (try) feels slightly awkward in this context. A more natural phrasing would be \"köçürməyi sınayın\" or simply \"köçürün\".",
-          "suggestion": "Fayl bu otağa köçürülə bilməz. {{ organizationName }} PDF formasını köçürün."
+          "description": "The translation of \"Please try to move\" is overly literal. A more natural Azerbaijani phrasing would improve readability.",
+          "suggestion": "Fayl bu otağa köçürülə bilməz. Zəhmətinizlə {{ organizationName }} PDF formasını köçürməyə çalışın."
         }
       ],
       "approved_at": null
@@ -54,13 +65,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses 'soubor' twice, which is slightly redundant. While not strictly incorrect, it sounds unnatural. The original English uses 'the file' once, then specifies the form type.",
-          "suggestion": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout PDF formulář {{ organizationName }}."
+          "description": "The Czech translation 'Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout soubor {{ organizationName }}. PDF formulář.' is slightly awkward. The repeated 'soubor' (file) makes it sound less natural. The English suggests a singular file, specifically a PDF form. It could be improved to reflect that.",
+          "suggestion": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout {{ organizationName }} PDF formulář."
         },
         {
           "type": "formatting",
-          "description": "The placement of the organization name within the translated sentence is slightly different. While functional, it alters the sentence flow compared to the original.",
-          "suggestion": "Consider mirroring the English structure more closely: 'Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout PDF formulář {{ organizationName }}.'"
+          "description": "The punctuation after 'prosím' is not consistent with typical Czech sentence structure. A comma would be more natural.",
+          "suggestion": "Soubor nelze do této místnosti přesunout. Zkuste prosím, přesunout {{ organizationName }} PDF formulář."
         }
       ],
       "approved_at": null
@@ -68,24 +79,19 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Please try to move the {{ organizationName }} PDF form' is not perfectly translated. A more natural German phrasing would be 'Bitte versuchen Sie, das PDF-Formular von {{ organizationName}} zu verschieben.' The current translation just swaps the position of organizationName, which is not ideal.",
+          "suggestion": "Bitte versuchen Sie, das PDF-Formular von {{ organizationName}} zu verschieben."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'The file cannot be moved' is overly literal. A more natural Greek translation would be 'Δεν επιτρέπεται η μετακίνηση του αρχείου' or 'Δεν μπορεί να μετακινηθεί το αρχείο'.",
-          "suggestion": "Δεν επιτρέπεται η μετακίνηση του αρχείου."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'Δοκιμάστε να μετακινήσετε' is a bit formal. A more conversational translation could be 'Προσπαθήστε να μετακινήσετε'.",
-          "suggestion": "Προσπαθήστε να μετακινήσετε"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -100,8 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English verb 'move' is translated as 'kopioida' (copy) in Finnish. 'Move' implies relocation, whereas 'copy' implies duplication. The appropriate term should reflect relocation.",
-          "suggestion": "Tiedostoa ei voi siirtää tähän huoneeseen."
+          "description": "The English verb 'move' is translated as 'kopioida' (copy) in Finnish. 'Move' implies relocation, while 'copy' implies duplication. A more appropriate translation for 'move' would be 'siirtää', which also means 'move'.",
+          "suggestion": "Tiedostoa ei voi siirtää tähän huoneeseen. Ole hyvä ja siirrä {{ organizationName }} PDF-lomake."
         }
       ],
       "approved_at": null
@@ -117,14 +123,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'move the {{ organizationName }} PDF form' is overly literal and could be improved for natural Armenian. A more idiomatic translation might be 'տեղափոխել {{ organizationName }} կազմակերպության PDF ձևը' (move the PDF form of the {{organizationName}} organization).",
-          "suggestion": "տեղափոխել {{ organizationName }} կազմակերպության PDF ձևը"
+          "type": "spelling",
+          "description": "The word 'սենյակ' (room) is used. While technically correct, 'դահլիճ' (hall) might be more appropriate depending on the context of a 'form room'.",
+          "suggestion": "Consider using 'դահլիճ' instead of 'սենյակ' if the 'form room' is intended to be a larger space."
         },
         {
-          "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after 'սենյակ'. While not strictly incorrect, a comma (,) might be more common and feel more natural in this context.",
-          "suggestion": "Ֆայլը չի կարող տեղափոխվել այս սենյակ, Խնդրում ենք, փորձել տեղափոխել {{ organizationName }} PDF ձևը:"
+          "type": "grammar",
+          "description": "While the sentence structure is generally correct, it might sound more natural to rephrase the second part. Specifically, the construction 'Փորձել տեղափոխել {{ organizationName }} PDF ձևը:' can be improved for smoother flow.",
+          "suggestion": "Consider 'Փորձեք տեղափոխել {{ organizationName }} PDF ձևը:' or 'Խնդրում ենք փորձել տեղափոխել {{ organizationName }} PDF ձևը:'"
         }
       ],
       "approved_at": null
@@ -132,25 +138,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"alla volta\" (one at a time) doesn't accurately reflect the English meaning. While the English suggests the problem might be with PDF forms specifically, the Italian translation implies a limitation on the number of files that can be moved.",
-          "suggestion": "Non è possibile spostare il file in questa stanza. Provare a spostare il modulo PDF di {{ organizationName }}. (This removes 'alla volta' and focuses on moving *the* PDF form)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Please try to move the {{ organizationName }} PDF form.\" could be more naturally translated in Japanese. The current translation is technically correct but sounds slightly awkward.",
-          "suggestion": "このルームにファイルを移動できません。{{organizationName}} PDFフォームの移動を試してみてください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -168,13 +162,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Mēģiniet pārvietot\" could be improved for naturalness. While technically correct, it feels a bit stiff. A more common and fluid way to express this would be \"Lūdzu, mēģiniet pārvietot\" or simply \"Pārvietojiet\".",
-          "suggestion": "Lūdzu, mēģiniet pārvietot {{ organizationName }} PDF veidlapu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -195,8 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'The file cannot be moved to this room' is accurately translated as 'O ficheiro não pode ser movido para esta sala.' However, the wording in the English original is slightly more conversational. A more natural Portuguese phrasing might be 'Não é possível mover o ficheiro para esta sala.'",
-          "suggestion": "Não é possível mover o ficheiro para esta sala."
+          "description": "The phrase 'The file cannot be moved to this room' could be more naturally translated. While technically correct, 'O ficheiro não pode ser movido para esta sala' sounds slightly awkward in Portuguese.",
+          "suggestion": "O arquivo não pode ser movido para esta sala."
         }
       ],
       "approved_at": null
@@ -207,13 +195,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'formulário PDF' is repeated and doesn't accurately convey the intended meaning. The repetition is unnatural in Portuguese.",
-          "suggestion": "O arquivo não pode ser movido para esta sala. Tente mover o formulário PDF {{ organizationName }}. or O arquivo não pode ser movido para esta sala. Tente mover o formulário {{ organizationName }} em PDF."
+          "description": "The translation is awkward and repetitive. The phrase 'formulário PDF' is repeated unnecessarily.",
+          "suggestion": "O arquivo não pode ser movido para esta sala. Tente mover o formulário PDF da {{ organizationName }}. "
         },
         {
           "type": "formatting",
-          "description": "Repetitive and awkward phrasing makes the translation sound unnatural.",
-          "suggestion": "O arquivo não pode ser movido para esta sala. Tente mover o formulário PDF {{ organizationName }}. or O arquivo não pode ser movido para esta sala. Tente mover o formulário {{ organizationName }} em PDF."
+          "description": "The repetition of 'formulário PDF' disrupts the flow and clarity of the sentence.",
+          "suggestion": "O arquivo não pode ser movido para esta sala. Tente mover o formulário PDF da {{ organizationName }}. "
         }
       ],
       "approved_at": null
@@ -224,7 +212,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The word 'acestă' should be 'această'. It's a grammatical error in Romanian. 'Acestă' is used for masculine nouns, while 'această' is for feminine nouns (sala is feminine).",
+          "description": "The word 'acestă' should be 'această'. It's a grammatical error in Romanian. 'această' is the correct form for feminine nouns in the accusative case.",
           "suggestion": "Imposibil de mutat fișierul în **această** sală."
         }
       ],
@@ -242,13 +230,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'thallu kirimath' (තල්ලු කිරීමට) which translates to 'push' doesn't quite convey the meaning of 'move' in this context. It sounds abrupt and somewhat inaccurate.",
-          "suggestion": "Consider using 'vasaya kala' (වසය කල) which translates more accurately to 'move' or 'transfer' in this situation. A more formal option would be 'vasaya karanawa'(වසය කරවන්න)."
-        },
-        {
-          "type": "formatting",
-          "description": "The double quotes around the suggestion are unnecessary and may cause issues in some systems.",
-          "suggestion": "Remove the double quotes."
+          "description": "The word 'thallu kirimu' (තල්ලු කිරීමට) literally translates to 'push' and is not the most natural way to express 'move' in this context. A more appropriate term would be 'transferu kirimu' (transfer කිරිම).",
+          "suggestion": "මෙම කාමරයට ගොනුව transfer කිරිමට හැකියාවක් නැත. කරුණාකර {{ organizationName }} PDF ආකෘතියක් transfer කිරිමට උත්සාහ කරන්න."
         }
       ],
       "approved_at": null
@@ -265,7 +248,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovenian translation includes a space before the variable {{ organizationName }}, which is inconsistent with typical variable usage. It should be placed directly after the preceding word.",
+          "description": "The space before the organizationName variable is missing.",
           "suggestion": "Datoteke ni mogoče premakniti v to sobo. Poskusite premakniti obrazec PDF {{organizationName}}."
         }
       ],
@@ -277,13 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'фајл' should likely be 'фајл' in all instances. While both are acceptable, the first is more commonly used and looks more natural in this context.",
-          "suggestion": "фајл"
+          "description": "The word 'фајл' (file) is spelled correctly, but its usage might be slightly awkward in this context. While technically correct, 'датотека' might be more natural in certain situations.",
+          "suggestion": "Consider using 'датотека' instead of 'фајл' for a more natural flow, though 'фајл' is acceptable."
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'Покушајте да преместите' could be slightly improved for a more natural flow. While grammatically correct, a more idiomatic phrasing might be more user-friendly.",
-          "suggestion": "Пробајте да преместите"
+          "description": "The sentence structure 'Покушајте да преместите {{ organizationName }} PDF образац' is grammatically correct but a slightly more natural phrasing could be considered.",
+          "suggestion": "Consider rephrasing to 'Покушајте да преместите PDF образац {{ organizationName }}.' for slightly improved readability."
         }
       ],
       "approved_at": null
@@ -312,8 +295,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"The file cannot be moved to this room\" is slightly unnatural in Vietnamese. A more common phrasing would be \"Không thể chuyển tập tin đến phòng này.\" or \"Không thể di chuyển file này đến phòng này.\" The current phrasing emphasizes the *action* of moving, rather than the inability to move.",
-          "suggestion": "Không thể chuyển tập tin đến phòng này."
+          "description": "The phrase \"Hãy thử di chuyển\" is overly polite and slightly awkward in this context. A more natural phrasing would convey the same meaning with less formality.",
+          "suggestion": "Hãy thử di chuyển biểu mẫu PDF của {{ organizationName }}"
         }
       ],
       "approved_at": null

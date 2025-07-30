@@ -3,13 +3,19 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2025-05-28T09:30:02.113Z",
+  "updated_at": "2025-06-02T10:20:51.014Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:29.688Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/RoomNoAccessContainer.js",
+      "line_number": 47,
+      "context": "const RoomNoAccessContainer = (props) => {\n const { t, setIsLoading, theme, isFrame, userId } = props;\n \n const descriptionRoomNoAccess = t(\"RoomAccessRedirectNote\", {\n sectionName: t(\"Common:Rooms\"),\n });\n const titleRoomNoAccess = t(\"NoAccessRoomTitle\");\n \n const navigate = useNavigate();",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
       "line_number": 208,
@@ -20,6 +26,12 @@
       "file_path": "/packages/client/src/components/RoomsSelectorInput/index.js",
       "line_number": 73,
       "context": "setIsDataReady,\n } = props;\n \n const [isPanelVisible, setIsPanelVisible] = useState(false);\n const BasePath = `${t(\"Common:ProductName\")} / ${t(\"Common:Rooms\")} `;\n const [path, setPath] = useState(\"\");\n \n const handleOnSubmit = (rooms) => {\n setPath(`${BasePath}/ ${rooms[0].label}`);\n onSubmit && onSubmit(rooms);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList.js",
+      "line_number": 68,
+      "context": "const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -36,32 +48,56 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 186,
-      "context": "sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n />",
+      "line_number": 180,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 186,
-      "context": "sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n />",
+      "line_number": 180,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 186,
-      "context": "sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n />",
+      "line_number": 180,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 186,
-      "context": "sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n />",
+      "line_number": 180,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 186,
-      "context": "sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Rooms\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: RoomsIcon,\n }}\n isDisabled={false}\n />",
+      "line_number": 180,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
+      "line_number": 180,
+      "context": "<ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,\n workspace: serviceName,\n sectionIcon: sharedFoldersExportDetails.icon,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.js",
+      "line_number": 60,
+      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"FileActivityNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-actions\"\n onChange={onChangeBadgeSubscription}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.js",
+      "line_number": 55,
+      "context": "return (\n <div className=\"notification-container\">\n <div className=\"row\">\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
+      "line_number": 70,
+      "context": "switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyFilesSection\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:",
       "module": "/packages/client"
     }
   ],
@@ -210,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Miestností' is a valid Slovak word, it's the genitive plural form. 'Rooms' in English typically translates to 'izby' (nominative plural) or 'miestnosti' (locative plural) in Slovak, depending on the context. Without more context, 'miestnosti' is likely the more appropriate translation.",
-          "suggestion": "Consider using 'miestnosti' as a more contextually accurate translation."
+          "description": "While 'Miestností' is a valid Slovak word, it's the genitive plural form. 'Rooms' in English typically translates to 'izby' (nominative plural) or 'miestnosti' (nominative plural). The genitive form implies possession or relationship, which isn't suitable for a simple label like 'Rooms'.",
+          "suggestion": "miestnosti"
         }
       ],
       "approved_at": null
@@ -222,7 +258,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The provided Slovenian translation 'Săli' is incorrect. It appears to be a mix of Romanian and Slovenian. The correct translation for 'Rooms' in Slovenian is 'Sobě'.",
+          "description": "The Slovenian translation 'Săli' is incorrect for 'Rooms'. The correct translation should be 'Sobě'. 'Săli' translates to 'Halls' or 'Rooms (as in meeting rooms)', whereas 'Sobě' is the general term for rooms.",
           "suggestion": "Sobě"
         }
       ],
@@ -234,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Собе\" is not an accurate translation of \"Rooms\". \"Собе\" translates to \"Rooms\" but in a more informal or diminutive sense, and doesn't fully capture the intended meaning of 'Rooms' as a general term for enclosed spaces within a building.",
-          "suggestion": "Consider using \"Просторије\" (Prostorije) which is a more formal and accurate translation of 'Rooms' in this context. Alternatively, \"Соби\" (Sobi) could work if the context implies a more specific set of rooms."
+          "description": "The Serbian (Cyrillic) translation \"Собе\" is not an accurate translation of \"Rooms\". \"Собе\" translates to \"Rooms\" in the plural, but the English term \"Rooms\" can also be singular. A more accurate translation, depending on context, might be \"Соба\" (singular) or \"Комнате\" (plural, more formal).",
+          "suggestion": "Consider \"Соба\" (singular) or \"Комнате\" (plural) depending on context."
         }
       ],
       "approved_at": null

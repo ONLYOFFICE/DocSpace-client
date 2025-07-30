@@ -31,7 +31,7 @@ import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
 
-import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
+import { ScopeList } from "@docspace/shared/utils/oauth/scope-list";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
@@ -54,8 +54,8 @@ import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import OAuthClientInfo from "../../../components/ConsentInfo";
 import { getRedirectURL } from "@/utils";
+import OAuthClientInfo from "../../../components/ConsentInfo";
 
 const StyledButtonContainer = styled.div`
   margin-top: 32px;
@@ -245,12 +245,12 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         />
       </StyledButtonContainer>
       <StyledDescriptionContainer>
-        <Text fontWeight={400} fontSize={"13px"} lineHeight={"20px"}>
+        <Text fontWeight={400} fontSize="13px" lineHeight="20px">
           <Trans t={t} i18nKey="ConsentDescription" ns="Consent">
             Data shared with {{ displayName: user.displayName }} will be
             governed by {{ nameApp: client.name }}
             <Link
-              className={"login-link"}
+              className="login-link"
               type={LinkType.page}
               isHovered={false}
               href={client.policyUrl}
@@ -261,7 +261,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
             </Link>
             and
             <Link
-              className={"login-link"}
+              className="login-link"
               type={LinkType.page}
               isHovered={false}
               href={client.termsUrl}
@@ -283,15 +283,15 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
             source={user.avatarSmall || ""}
           />
           <div className="user-info">
-            <Text lineHeight={"20px"}>
+            <Text lineHeight="20px">
               {t("SignedInAs")} {user.email}
             </Text>
             <Link
-              className={"login-link"}
+              className="login-link"
               type={LinkType.action}
               isHovered={false}
               noHover
-              lineHeight={"20px"}
+              lineHeight="20px"
               onClick={onChangeUserClick}
             >
               {t("NotYou")}

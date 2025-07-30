@@ -3,7 +3,7 @@
   "content": "Edit application",
   "content_en_sha1_hash": "4e92dd1cb88d493a3194d75e040dc94014a8d4c3",
   "created_at": "2025-05-19T21:30:53.873Z",
-  "updated_at": "2025-05-21T07:15:58.347Z",
+  "updated_at": "2025-05-24T07:30:14.355Z",
   "comment": {
     "text": "The \"EditApp\" translation key is used to display either \"Edit application\" or \"New App\", depending on the UI state, in a header section within the OAuth settings page. It appears as a button and toggle label. The text's purpose is to inform users of their action being performed on an application.",
     "is_auto": true,
@@ -44,11 +44,6 @@
           "type": "spelling",
           "description": "The word 'прилоожение' is misspelled. It should be 'приложение'.",
           "suggestion": "приложение"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'приложение' can mean 'application', the best translation for 'Edit application' in this context is more precisely 'Редактиране на приложение'. The current translation implies simply applying something.",
-          "suggestion": "Редактиране на приложение"
         }
       ],
       "approved_at": null
@@ -104,7 +99,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"アプリを変更する\" (apuri o henkou suru) literally translates to \"change the application.\" While understandable, \"Edit application\" implies a more targeted modification or adjustment. A more accurate translation might be \"アプリケーションを編集する\" (apuri o henshuu suru).",
+          "suggestion": "アプリケーションを編集する"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -119,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ກວດແກ້ຄໍາສະຫມັກ' translates to 'Review application' or 'Inspect application', not 'Edit application'. While related, it's not a direct equivalent.",
-          "suggestion": "ປ່ຽນຄໍາສະຫມັກ"
+          "description": "The Lao translation 'ກວດແກ້ຄໍາສະຫມັກ' translates to 'Review application' or 'Inspect application', not 'Edit application'.",
+          "suggestion": "ປ່ຽນແກ້ຄໍາສະຫມັກ (Bplian kae khamsamek) - This translates more closely to 'Edit application'."
         }
       ],
       "approved_at": null
@@ -170,7 +171,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'අයදුම්' is potentially misspelled. The more common and accurate term for 'application' in this context is 'වියREQUEST්'.",
+          "suggestion": "වියREQUEST්"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'සංස්කරණය කරන්න' means 'to edit', a more natural phrasing in Sinhala for 'Edit application' might be 'වියREQUEST් සංස්කරණය කිරීම' or 'වියREQUEST් වෙනස් කිරීම'.",
+          "suggestion": "වියREQUEST් වෙනස් කිරීම"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -191,7 +203,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Измени апликацију' is a literal translation of 'Edit application' but sounds unnatural in Serbian. A more idiomatic translation would be 'Уреди апликацију'.",
+          "description": "The translation 'Измени апликацију' is a literal translation and doesn't quite capture the meaning of 'Edit application' in a UI/technical context. A more suitable translation would convey the action of modifying an application's settings or details.",
           "suggestion": "Уреди апликацију"
         }
       ],

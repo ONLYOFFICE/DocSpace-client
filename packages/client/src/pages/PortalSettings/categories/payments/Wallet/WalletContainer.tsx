@@ -134,7 +134,7 @@ const Wallet = (props: WalletProps) => {
 
   const onClose = () => {
     setVisible(false);
-    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting?.(false);
   };
 
   const onOpen = () => {
@@ -201,14 +201,24 @@ const Wallet = (props: WalletProps) => {
           textDecoration="underline"
           fontWeight={600}
           href={walletHelpUrl}
-          color={currentColorScheme.main?.accent}
+          color={currentColorScheme?.main?.accent}
         >
           {t("Common:LearnMore")}
         </Link>
       ) : null}
 
-      {isCardLinkedToPortal ? <PayerInformation /> : null}
-
+      {isCardLinkedToPortal ? (
+        <PayerInformation
+          style={undefined}
+          theme={undefined}
+          user={undefined}
+          accountLink={undefined}
+          payerInfo={undefined}
+          email={undefined}
+          isNotPaidPeriod={undefined}
+          isStripePortalAvailable={undefined}
+        />
+      ) : null}
       <div className={styles.balanceWrapper}>
         <div className={styles.headerContainer}>
           <Text isBold fontSize="18px" className={styles.balanceTitle}>

@@ -3,7 +3,7 @@
   "content": "Session Lifetime",
   "content_en_sha1_hash": "7ccf450db4f16d0c0261e57e956afbad34c6eb8f",
   "created_at": "2025-05-19T21:30:52.636Z",
-  "updated_at": "2025-07-02T07:49:19.856Z",
+  "updated_at": "2025-06-18T17:11:42.493Z",
   "comment": {
     "text": "The SessionLifetime translation key is used to display the duration for which a user's session will be active. It appears in the mobile view of the PortalSettings page as the title and subtitle of a category, providing context for users when accessing settings related to security features.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 130,
+      "line_number": 131,
       "context": "}\n url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 231,
+      "line_number": 224,
       "context": "{\n id: \"portal-settings_catalog-session-life-time\",\n key: \"1-0-8\",\n icon: \"\",\n link: \"lifetime\",\n tKey: \"SessionLifetime\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-access-rights\",",
       "module": "/packages/client"
     }
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເຊດຊັນຕະຫຼອດຊີວິດ\" literally translates to \"session throughout life\". This is not an accurate translation of 'Session Lifetime'. 'Lifetime' implies a duration or period, which is not captured.",
-          "suggestion": "Consider a translation that conveys 'session duration' or 'session expiry time'. Possible alternatives include: \"ໄລຍະເວລາຂອງການເຊດຊັນ\" (lai ya we la khong kan set san - session duration) or \"ເວລາໄດ່ຫມົດເວລາເຊດຊັນ\" (we la dai mot we la set san - session expiry time)."
+          "description": "The Lao translation \"ເຊດຊັນຕະຫຼອດຊີວິດ\" literally translates to \"Session throughout life.\" This doesn't accurately convey the meaning of \"Session Lifetime,\" which refers to the duration a session lasts.",
+          "suggestion": "A more accurate translation would be something along the lines of \"ໄລຍະເວລາຂອງເຊດຊັນ\" (lai ya we la khong session) which means 'Session duration' or \"ເວລາໃຊ້ງານເຊດຊັນ\" (we la chai ngan session) which means 'Session usage time'."
         }
       ],
       "approved_at": null
@@ -162,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Durata de expirare a sesiunii\" is a literal translation of 'Session Lifetime' but isn't the most natural or common phrasing in Romanian. A more idiomatic translation would be something like 'Durata sesiunii' or 'Timpul de viață al sesiunii'.",
+          "description": "The Romanian translation \"Durata de expirare a sesiunii \" is a literal translation that doesn't quite capture the meaning of \"Session Lifetime\". It translates to \"Session expiration duration\". A more natural Romanian translation would be something like \"Durata sesiunii\" or \"Durata valabilității sesiunii\".",
           "suggestion": "Durata sesiunii"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වාරයේ ආයුකාලය' (vaaraye ayukaalaya) is a literal translation of 'lifetime' but doesn't quite capture the nuance of 'Session Lifetime' in a technical context. It feels overly formal and not idiomatic for user settings.",
-          "suggestion": "Consider a more user-friendly and contextually appropriate translation like 'සෙසන් කාලසීමාව' (sesan kaalasimaava) which is a transliteration/adaptation and easier to understand, or 'ආවරණය කාලය' (aavareynakaalaya) which translates to 'coverage time' and might be closer in meaning."
+          "description": "While \"වාරයේ ආයුකාලය\" (waaraye aayukaalaya) is understandable, it's a very literal translation of 'Lifetime'. A more natural and commonly used translation for 'Session Lifetime' in a technical context would be something like \"සෙසියන් කාලසීමාව\" (sesiyan kaalasimaawa) or \"කාලසීමාව\" (kaalasimaawa) depending on the desired level of formality.",
+          "suggestion": "Consider using \"සෙසියන් කාලසීමාව\" (sesiyan kaalasimaawa) or \"කාලසීමාව\" (kaalasimaawa)."
         }
       ],
       "approved_at": null
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Tempo da sessão' is Portuguese, not Slovenian. It translates to 'Session Time' in Portuguese. The correct Slovenian translation for 'Session Lifetime' should be something like 'Trajanje seje' or 'Veljavnost seje'.",
+          "description": "The Slovenian translation \"Tempo da sessão\" is Portuguese, not Slovenian. \"Session Lifetime\" should be translated to Slovenian.",
           "suggestion": "Trajanje seje"
         }
       ],
@@ -231,13 +231,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Thời gian tồn tại của phiên\" is a bit formal and verbose for a settings label. A more natural and concise translation would be better.",
-          "suggestion": "Thời lượng phiên"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

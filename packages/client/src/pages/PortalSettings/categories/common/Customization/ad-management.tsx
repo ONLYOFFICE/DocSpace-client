@@ -44,6 +44,10 @@ const AdManagementComponent = ({
   isMobileView,
   displayBanners,
   setDisplayBanners,
+}: {
+  isMobileView: boolean;
+  displayBanners: boolean;
+  setDisplayBanners: (value: boolean) => void;
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
@@ -109,7 +113,7 @@ const AdManagementComponent = ({
       setShowReminder(false);
       saveToSessionStorage("defaultDisplayBanners", type);
       saveToSessionStorage("currentDisplayBanners", type);
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e!);
     } finally {
@@ -146,11 +150,13 @@ const AdManagementComponent = ({
             id: "disable",
             label: t("Common:Disable"),
             value: 0,
+            dataTestId: "ad_management_disable",
           },
           {
             id: "enable",
             label: t("Common:Enable"),
             value: 1,
+            dataTestId: "ad_management_enable",
           },
         ]}
         selected={type}
@@ -161,12 +167,14 @@ const AdManagementComponent = ({
         onSaveClick={onSave}
         onCancelClick={onCancel}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
+        saveButtonDataTestId="ad_management_save_button"
+        cancelButtonDataTestId="ad_management_cancel_button"
       />
     </div>
   );

@@ -13,7 +13,6 @@
   "DeleteTemplates": "您确定要删除选定的房间模板吗？删除后无法恢复。",
   "FolderPermanentlyDeleted": "30 天后，文件夹会被永久删除。",
   "ItemsPermanentlyDeleted": "30 天后，项目会被永久删除。",
-  "MoveToTrashButton": "移至回收站",
   "UnsubscribeButton": "取消订阅",
   "UnsubscribeNote": "您确定要取消订阅列表中的选定项目吗？",
   "UnsubscribeTitle": "取消订阅确认"

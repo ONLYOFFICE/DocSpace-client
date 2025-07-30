@@ -3,7 +3,7 @@
   "content": "Click the button for the detailed instructions on how to create your own plugins.",
   "content_en_sha1_hash": "a1cac081a5c41e00e53cb58353aba707600844f1",
   "created_at": "2025-05-19T21:30:49.923Z",
-  "updated_at": "2025-05-21T00:40:35.936Z",
+  "updated_at": "2025-05-24T01:54:30.654Z",
   "comment": {
     "text": "This translation key is used for a button label that directs users to detailed instructions on creating their own plugins. It appears as a \"Read Instructions\" button in a UI element, prompting users to access further guidance on plugin development.",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'المكونات الإضافية' (al-mukawwinat al-idaafiyah) is a more formal and technical term for 'plugins'. While not incorrect, 'إضافات' (idaafaat) is a more common and accessible term in Saudi Arabic for 'plugins' in this context.",
-          "suggestion": "انقر فوق الزر للحصول على الإرشادات التفصيلية حول كيفية إنشاء إضافاتك الخاصة."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Öz plaginlərinizi necə yaratmaq barədə ətraflı təlimatlar üçün düyməni klikləyin' is a bit literal and could be improved for better flow and naturalness in Azerbaijani. 'Öz plaginlərinizi necə yaratmaq' translates to 'How to create your own plugins', which is correct but sounds slightly clunky.",
-          "suggestion": "Consider a more natural phrasing like: 'Pluginlərinizi necə hazırlayacağınızı öyrənmək üçün düyməni klikləyin' (Click the button to learn how to create plugins) or 'Öz pluginlərinizi yaratmaq üçün təlimatları oxumaq üçün düyməyə klikləyin' (Click the button to read the instructions for creating your own plugins)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -84,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Klikkaa' is a transliteration of 'Click' and may not be the most natural or preferred Finnish translation. It's understandable, but 'Paina' or 'Valitse' might be better.",
-          "suggestion": "Paina painiketta saadaksesi yksityiskohtaiset ohjeet omien laajennusten luomiseen."
+          "description": "The word 'Klikkaa' is a transliteration of 'Click'. While understandable, it's less formal and potentially jarring for some users. 'Paina painiketta' or 'Valitse painike' would be more appropriate for a professional context.",
+          "suggestion": "Paina painiketta"
         }
       ],
       "approved_at": null
@@ -117,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '자체 플러그인 생성 방법에 대한 자세한 지침을 확인하세요' is a bit verbose and less direct than the original. '확인하세요' (check) doesn't quite capture the meaning of 'detailed instructions.' A more natural phrasing would emphasize understanding or viewing the instructions.",
-          "suggestion": "버튼을 클릭하여 자체 플러그인 생성 방법을 자세히 알아보세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -165,18 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Faceți clic pe butonul pentru a vedea instrucțiunile detaliate de creare a plugin-urilor proprii ale dvs.' is slightly too literal and verbose. 'A vedea' (to see) is not the most natural phrasing here. 'Click the button for the detailed instructions' is more fluidly translated.",
-          "suggestion": "Faceți clic pe buton pentru instrucțiunile detaliate de creare a plugin-urilor proprii."
-        },
-        {
-          "type": "formatting",
-          "description": "The possessive pronoun 'ale dvs.' feels slightly redundant and clunky in this context. While grammatically correct, it adds unnecessary length.",
-          "suggestion": "Faceți clic pe buton pentru instrucțiunile detaliate de creare a plugin-urilor proprii."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -190,14 +161,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"ඔබගේම පේනු සාදා ගන්නේ කෙසේදැයි පිළිබඳ සවිස්තරාත්මක උපදෙස් සඳහා බොත්තම ඔබන්න.\" is a literal translation and sounds awkward in Sinhala. 'Plugins' is translated as 'පේනු,' which while technically correct, is not the most natural way to refer to web plugins in Sinhala. A more common and understandable phrasing is needed.",
-          "suggestion": "ඔබගේම අඩවි අplugin-s සාදා ගැනීම සඳහා, බොත්තම ක්ලික් කරන්න."
+          "type": "spelling",
+          "description": "The word 'පේනු' (penu) is likely a misspelling. It probably refers to 'plugin' which would be 'ප්ලගින්' (plagin) in Sinhala when transliterated.",
+          "suggestion": "Replace 'පේනු' with 'ප්ලගින්'."
         },
         {
-          "type": "formatting",
-          "description": "The word 'plugin' appears transliterated. While acceptable, using the English word 'plugin' directly is becoming increasingly common in Sinhala, especially in technical contexts.",
-          "suggestion": "ඔබගේම අඩවි plugin-s සාදා ගැනීම සඳහා, බොත්තම ක්ලික් කරන්න."
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'ඔබගේම' (obageema) is slightly less natural in this context. A more common phrasing would be 'ඔබට' (obata) or simply removing it.",
+          "suggestion": "Consider replacing 'ඔබගේම' with 'ඔබට' or omitting it entirely."
         }
       ],
       "approved_at": null
@@ -219,14 +190,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'дугме' (dugme) is spelled correctly, but it's more natural to use 'дугме' for a button in this context.",
-          "suggestion": "No change needed. 'дугме' is acceptable."
+          "type": "incorrect_translation",
+          "description": "The translation of 'plugins' is 'додатке'. While technically correct, 'plugins' often refers to something more specialized in a technical context. 'Додаци' is a more general term for 'add-ons'. A more accurate translation might be 'проширења' or 'додаци' depending on the specific context.",
+          "suggestion": "Consider 'проширења' or 'додаци' instead of 'додатке' to better reflect the technical meaning of 'plugins'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'додаци' (dodaci) translates to 'add-ons' or 'plugins', 'пријавице' (prijavice) might be a more direct and common term for 'plugins' in this specific context (referring to WebPlugins).  'Додаци' is understandable, but 'пријавице' might resonate better with the target audience.",
-          "suggestion": "Replace 'додаци' with 'пријавице'."
+          "type": "formatting",
+          "description": "The sentence structure, while grammatically correct, could be improved for clarity and a more natural flow in Serbian. The literal translation makes it slightly awkward.",
+          "suggestion": "Consider rephrasing to 'Кликните на дугме за детаљне инструкције за прављење сопствених додатке.' or 'Кликните на дугме да бисте видели детаљне инструкције за прављење сопствених додатке.'"
         }
       ],
       "approved_at": null
@@ -234,25 +205,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'plugins' is best translated as 'dodaci' in this context, which is already used. However, the phrasing could be more natural. 'Kako da kreirate sopstvene dodatke' is a bit clunky. A more natural flow might be 'za izradu sopstvenih dodataka'.",
-          "suggestion": "Kliknite na dugme za detaljne instrukcije za izradu sopstvenih dodataka."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'how to create your own plugins' is translated as 'nasıl oluşturacağınızla ilgili'. While understandable, a more natural and idiomatic Turkish translation would be 'kendi eklentilerinizi oluşturma'.",
-          "suggestion": "Kendi eklentilerinizi oluşturma talimatları için düğmeye tıklayın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -270,7 +229,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '单击该按钮了解如何创建您自己的插件' is a literal translation and sounds slightly awkward in Chinese. A more natural phrasing would be '点击此按钮，查看如何创建您自己的插件' or '点击按钮以获取创建您自己插件的详细说明。'",
+          "suggestion": "点击此按钮，查看如何创建您自己的插件"
+        }
+      ],
       "approved_at": null
     }
   }

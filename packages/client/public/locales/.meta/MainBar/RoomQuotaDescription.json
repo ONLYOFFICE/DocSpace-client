@@ -3,7 +3,7 @@
   "content": "You can archive the unnecessary rooms or <1>click here</1> to find a more suitable pricing plan for your {{productName}}.",
   "content_en_sha1_hash": "cb8abf7215c9ff542a9c50ac5edbe2a6bd86b4f7",
   "created_at": "2025-05-19T21:30:54.125Z",
-  "updated_at": "2025-07-01T15:57:35.915Z",
+  "updated_at": "2025-06-30T12:20:31.147Z",
   "comment": {
     "text": "This translation key is used to provide a brief description for a button that allows users to find a more suitable pricing plan for their product. It appears on a Quotas Bar component and needs to be translated into other languages for accessibility and user experience consistency.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'click here' is translated as 'buraya klikləyə bilərsiniz'. While technically correct, it's a bit awkward in Azerbaijani. A more natural phrasing would be 'buraya klikləyin'.",
-          "suggestion": "buraya klikləyin"
+          "description": "The English phrase 'archive the unnecessary rooms' is not accurately reflected in the Azerbaijani translation. 'Arxiv edə' implies archiving in a digital sense, while the English suggests removing or setting aside. A more suitable translation would convey the action of removing or setting aside.",
+          "suggestion": "lazımsız otaqları silə və ya (remove the unnecessary rooms or)"
         },
         {
           "type": "formatting",
-          "description": "The formatting tags <1> and </1> are inconsistent with the English. They should ideally be consistent (e.g., both using `<span>` or something similar) for display purposes if the tags are meant to be interpreted by a rendering engine. However, without more context about where this content will be used, it's impossible to say definitively what the correct formatting is.",
-          "suggestion": "Review and adjust formatting tags to align with the intended rendering context."
+          "description": "The HTML tag `<1>` is present in both the English and Azerbaijani versions. While the original content uses it, it's unclear what its purpose is. It should be assessed and potentially removed or modified. If it represents a link, ensure the link target is accurate and appropriate for the Azerbaijani context.",
+          "suggestion": "Review the purpose of the `<1>` tags and ensure proper link implementation and context appropriateness."
         }
       ],
       "approved_at": null
@@ -53,8 +53,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are present in both the English and Bulgarian translations. While the tags themselves are consistent, it's unclear if the intention is to preserve them or if they should be removed or replaced with a more standard hyperlink representation.",
-          "suggestion": "Review the intended behavior of the HTML tags and either preserve them, replace them with a hyperlink (e.g., `<a href=\"link\">натиснете тук</a>`), or remove them if they are unnecessary."
+          "description": "The HTML tags <1> and </1> are present in both the English and Bulgarian text. While technically correct, they might not be necessary depending on the intended rendering context and could be simplified.",
+          "suggestion": "Consider removing the HTML tags unless they are specifically required for formatting purposes."
         }
       ],
       "approved_at": null
@@ -62,13 +62,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1>click here</1> are not properly closed in the Czech translation. The opening tag is <1> and the closing tag is </1>, but it should be <1> and </1> respectively.",
-          "suggestion": "Change `<1>klikněte sem</1>` to `<1>klikněte sem</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -77,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistently applied in both the English and German content. They should be consistent for proper rendering.",
-          "suggestion": "Ensure the HTML tags are consistently applied to both the English and German translations. Consider using a standard tag like <a> or <span> depending on the desired behavior."
+          "description": "The HTML tag `<1>` and `</1>` used for the link are inconsistent. In English, it's `<1>click here</1>`. In German, it's `<1>hier klicken</1>`.  This suggests a potential tagging error.",
+          "suggestion": "Ensure consistent HTML tag usage throughout the localization process. The correct tag depends on the intended meaning and implementation, but consistency is key."
         }
       ],
       "approved_at": null
@@ -95,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are consistent between the English and Spanish versions.  No change needed.",
-          "suggestion": null
+          "description": "The HTML tags <1> and </1> are preserved in the Spanish translation, which is not ideal. They should be removed to ensure clean text.",
+          "suggestion": "Remove the HTML tags. The text should simply read: 'hacer clic aquí'"
         }
       ],
       "approved_at": null
@@ -106,9 +100,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"click here\" is translated as \"klikkaa tästä\". While technically correct, a more natural and user-friendly Finnish translation for a call to action would be \"valitse\" or \"katso\".",
+          "suggestion": "valitse"
+        },
+        {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are present in the Finnish translation, matching the English, but their purpose and use case should be reviewed for appropriateness within the Finnish UI context. It might be better to use standard styling or alternative markup.",
-          "suggestion": "Review the usage of <1> and </1> tags. Consider alternative styling or a different approach to highlighting the link in the Finnish UI."
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent. They seem intended to highlight or mark a link, but the tags are incorrect. The appropriate tag would be `<a>`. Furthermore, the `href` attribute is missing, rendering it non-functional as a link.",
+          "suggestion": "Ensure correct HTML tags are used for highlighting or marking a link (e.g., <a>...</a>) and include the 'href' attribute pointing to the relevant URL."
         }
       ],
       "approved_at": null
@@ -119,8 +118,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are inconsistent. The opening tag uses `<1>` while the closing tag uses `</1>`. This is likely a tagging error.",
-          "suggestion": "Ensure consistent HTML tags. For example, use `<1>` and `</1>` or `<click>` and `</click>` (if that's the intended meaning)."
+          "description": "The HTML tags `<1>` and `</1>` are inconsistent. The opening tag uses `<1>` while the closing tag uses `</1>`.",
+          "suggestion": "Ensure consistency in HTML tags. Use `<1>` for both opening and closing tags, or remove them entirely if they are not necessary for the intended visual effect."
         }
       ],
       "approved_at": null
@@ -131,8 +130,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are present in the Armenian translation, mirroring the English, but it is unclear if this is the desired behavior. They might need adjustment based on the platform's rendering.",
-          "suggestion": "Review if the HTML tags are necessary and properly rendered in the Armenian interface. Consider removing them or changing them to a more appropriate format if needed."
+          "description": "The HTML tags <1> and </1> are not correctly rendered in the Armenian translation. They should be translated as well, or replaced with equivalent Armenian formatting.",
+          "suggestion": "Consider translating the HTML tags or replacing them with appropriate Armenian equivalents (e.g., <b>...</b> or <a>...</a>, or a more visual cue)."
         }
       ],
       "approved_at": null
@@ -140,13 +139,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are identical to the English version and should be consistent.",
-          "suggestion": "Ensure consistent HTML tags in both English and Italian. Verify their purpose and ensure they're correctly implemented in both versions. They appear to be intended for a hyperlink, so confirm that's the case."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -155,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1>click here</1> are not properly closed in the Japanese translation. They should be <1>こちらをクリック</1>.",
-          "suggestion": "<1>こちらをクリック</1>"
+          "description": "The HTML tags <1>click here</1> are not properly closed in the Japanese translation. The opening tag is <1> and the closing tag is </1>, while the English uses <1>click here</1>. This creates a visual mismatch.",
+          "suggestion": "Change <1>こちらをクリック</1> to <1>こちらをクリック</1> to match the English formatting."
         }
       ],
       "approved_at": null
@@ -167,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent. The English uses <1> and </1>, while the Korean uses the same tag.",
-          "suggestion": "Change the Korean HTML tags to <1> and </1> to match the English."
+          "description": "The HTML tags <1> and </1> are inconsistent. The English uses <1> and </1>, while the Korean uses the same. This could impact rendering.",
+          "suggestion": "Ensure consistent HTML tag usage. If intending to highlight '여기를 클릭', use <1>여기를 클릭</1>."
         }
       ],
       "approved_at": null
@@ -179,13 +172,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1>click here</1> are not properly formatted in the Lao translation.  The `<1>` tag should likely be `<1>` to match the English content.  While functionally it might work, consistency is important.",
-          "suggestion": "Replace `<1>click here</1>` with `<1>ກົດບ່ອນນີ້</1>."
+          "description": "The HTML tags `<1>` and `</1>` appear to be misplaced and should be standardized (e.g., `<a>` and `</a>`). The content within the tags appears to be a hyperlink, suggesting the intent is to create a clickable link.",
+          "suggestion": "Replace `<1>click here</1>` with `<a href=\"[link]\" target=\"_blank\">click here</a>` and provide the appropriate URL for [link]."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຂອງເຈົ້າ\" is repeated unnecessarily. While grammatically correct, it sounds slightly awkward in Lao. It's more natural to omit the second instance.",
-          "suggestion": "Change \"ຜະລິດຕະພັນຂອງເຈົ້າ {{productName}} ຂອງເຈົ້າ\" to \"ຜະລິດຕະພັນຂອງເຈົ້າ {{productName}}\"."
+          "description": "While 'ຂອງເຈົ້າ' is technically correct, repeating it after 'ຜະລິດຕະພັນຂອງເຈົ້າ' sounds awkward. It's common practice to avoid such repetition in Lao.",
+          "suggestion": "Change 'ຜະລິດຕະພັນຂອງເຈົ້າ ຂອງເຈົ້າ' to simply 'ຜະລິດຕະພັນຂອງເຈົ້າ'."
         }
       ],
       "approved_at": null
@@ -193,7 +186,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1>click here</1> were not properly translated to Latvian HTML tags. They should be `<1>noklikšķināt šeit</1>.",
+          "suggestion": "Ensure consistency in HTML tag translation."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -202,8 +201,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"click here\" is translated literally as \"click here\" which isn't natural in Dutch.  It's better to use a more idiomatic phrasing.",
-          "suggestion": "U kunt de overbodige kamers archiveren of <1>hier klikken</1> om een meer geschikt prijsplan voor uw {{productName}} te vinden."
+          "description": "The phrase 'click here' is a literal translation and doesn't flow naturally in Dutch. It's better to use a more contextual phrase.",
+          "suggestion": "Klik hierna"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1>click here</1> are inconsistent with typical Dutch phrasing.  The HTML-like tags are unnecessary.",
+          "suggestion": "Remove the angle brackets.  If a button is intended, proper HTML/CSS should be used for styling, not angle brackets within the text."
         }
       ],
       "approved_at": null
@@ -231,9 +235,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation of \"click here\" is \"apăsați aici\". While technically correct, a more natural and user-friendly translation would be \"dați clic aici\" or \"faceți clic aici\".",
-          "suggestion": "Puteţi arhiva sălile inutile sau <1>dați clic aici</1> pentru a găsi un abonament mai potrivit pentru {{productName}} ."
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are present in both the English and Romanian translations. While technically not an error, they should be reviewed to ensure they function correctly within the context of the UI and are intended.",
+          "suggestion": "Review the intended functionality of the angle brackets. If they are meant to wrap specific HTML tags or code, ensure they are implemented correctly in the UI. If they're simply placeholder tags, consider removing them and implementing the link directly."
         }
       ],
       "approved_at": null
@@ -250,8 +254,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent with the English version. The English uses <1>click here</1> while the Sinhala uses <1>මෙතැන ක්ලික් කරන්න</1>. The tags should be consistent to maintain formatting.",
-          "suggestion": "Ensure consistency in HTML tags: Use <1>මෙතැන ක්ලික් කරන්න</1> or <1>click here</1> depending on the desired behavior."
+          "description": "The HTML tags `<1>` and `</1>` are not standard and should be reviewed for consistency with the English version. It seems they are meant to highlight a clickable link, but the standard HTML tag for a link is `<a>`. While Sinhala can use HTML tags, the use of `<1>` and `</1>` is unconventional and might not render correctly.",
+          "suggestion": "Replace `<1>` with `<a href=\"#\">` and `</1>` with `</a>` or a similar appropriate hyperlink tag."
         }
       ],
       "approved_at": null
@@ -262,8 +266,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1>click here</1> are not correctly formatted in the Slovak translation. They should be <a>click here</a>.",
-          "suggestion": "Change <1>click here</1> to <a>click here</a>"
+          "description": "The HTML tags <1>click here</1> were not translated correctly. The opening and closing tags are preserved as is, which is not ideal. The 'click here' text itself should be translated.",
+          "suggestion": "Nepotrebné miestnosti môžete archivovať alebo <1>kliknite sem</1> a nájsť vhodnejší tarifný plán pre váš {{productName}}."
         }
       ],
       "approved_at": null
@@ -271,19 +275,19 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are inconsistent. The opening tag uses `<1>` while the closing tag uses `</1>`. This is likely a formatting error.",
-          "suggestion": "Ensure consistent HTML tag usage: Use either `<1>` and `</1>` or `<1>` and `</1>` throughout the translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Serbian translations, which is fine. However, they might be rendered differently depending on the platform. Verify consistent rendering.",
+          "suggestion": "Confirm consistent HTML rendering across platforms."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -292,8 +296,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tags <1> and </1> are not correctly translated. They should remain as is to preserve the hyperlink functionality.",
-          "suggestion": "Keep the tags as <1>click here</1>."
+          "description": "The HTML tags <1> and </1> are inconsistent. They should be `<a>` and `</a>` for a proper hyperlink.",
+          "suggestion": "Replace <1>click here</1> with <a>click here</a>"
         }
       ],
       "approved_at": null
@@ -304,8 +308,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> and </1> are inconsistent between the English and Turkish content. The English uses <1>click here</1> while the Turkish uses <1>buraya tıklayın</1>.",
-          "suggestion": "Ensure consistency in the HTML tags used. If the intent is to highlight the text, maintain the same tags in both languages."
+          "description": "The HTML tags <1> and </1> are not standard for this context and should be removed or replaced with a more appropriate styling method.",
+          "suggestion": "Remove the tags <1> and </1>. The link should be implemented using standard HTML link conventions (e.g., <a>). If specific styling is required, apply CSS classes instead of direct HTML tags."
         }
       ],
       "approved_at": null
@@ -319,13 +323,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are present in both the English and Vietnamese text. While consistent, they appear to be a formatting artifact and might not be necessary for the user experience. Consider removing or standardizing them.",
-          "suggestion": "Remove or standardize the HTML tags. For example, replace <1> with <b> or <strong> and </1> with </b> or </strong> if emphasis is needed. Alternatively, remove them entirely if they serve no purpose."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -334,13 +332,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'click here' is translated as '点击此处'. While technically correct, '点击此处' sounds very formal and less natural in many contexts. A more natural and user-friendly translation would be something like '点击这里'.",
-          "suggestion": "点击这里"
+          "description": "The phrase \"click here\" is translated literally as \"点击此处\" which, while understandable, is less natural in Chinese. A more common and natural phrasing would be something like \"点击这里\" or \"了解更多\".",
+          "suggestion": "点击这里 or 了解更多"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags <1>click here</1> are replicated in the translation. The surrounding tags should match the original's formatting, but the content translation could be improved as noted above.",
-          "suggestion": "<1>点击这里</1>"
+          "description": "The HTML tags <1> and </1> appear to be used to mark the clickable element. While this is likely intended to highlight it, it's not standard HTML and may not render correctly in all contexts. It's also inconsistent with common Chinese interface conventions.",
+          "suggestion": "Consider removing the tags or using a more appropriate highlighting mechanism for Chinese interfaces, like using a different color or underline."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Folders removed.",
   "content_en_sha1_hash": "52dcbf1c8ddbba49c38a152b6726c6c77ed615ce",
   "created_at": "2025-05-19T21:30:54.843Z",
-  "updated_at": "2025-05-28T09:30:02.431Z",
+  "updated_at": "2025-06-30T12:20:31.342Z",
   "comment": {
     "text": "The translation key \"FolderDeleted\" is used to display a notification message indicating that a folder has been removed. It typically appears in UI elements such as info panels or webhooks, providing feedback to users when folders are deleted.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 128,
-      "context": "count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case \"FolderDeleted\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderDeleted\");\n case \"RoomCreated\":\n return (",
+      "line_number": 137,
+      "context": "count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderDeleted\");\n case FeedActionKeys.RoomCreated:\n return (",
       "module": "/packages/client"
     },
     {
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'Αφαίρεση φακέλων' literally translates to 'Removal of folders.' While technically accurate, it lacks the conciseness and natural flow of 'Folders removed.' It sounds slightly formal and less user-friendly.",
-          "suggestion": "Διαγράφηκαν φάκελοι."
+          "description": "The translation 'Αφαίρεση φακέλων' (Afairesi fakelon) literally translates to 'Removal of folders'. While technically correct, it sounds unnatural and doesn't convey the sense of 'removed' as simply as the original. A more natural translation would use a verb indicating action.",
+          "suggestion": "Διαγραφή φακέλων."
         }
       ],
       "approved_at": null
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao word 'ຖືກ' (thuk) is often used to indicate passive voice, but in this context, it might be more appropriate to omit it for a more direct translation. While not strictly incorrect, it can sound a bit formal or wordy.",
+          "description": "The word 'ຖືກ' (thuk) is used, which while grammatically acceptable, can sound slightly awkward in this context. A more natural phrasing might omit it.",
           "suggestion": "ໂຟນເດີລຶບອອກແລ້ວ"
         }
       ],
@@ -171,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ෆෝල්ඩර් ඉවත් කර ඇත' while literally meaning 'Folders removed', doesn't fully convey the implication of folders being *deleted*. It's passive. A more natural phrasing would emphasize the action of deleting.",
-          "suggestion": "ෆෝල්ඩර්‍යන්හි ඉවත් කිරීම් (Folder-yanhi ivat kirim) - 'Folder deletions' or  ෆෝල්ඩර්‍යන්හි දිනාගැනීම (Folder-yanhi dinagainima) - 'Folder deletions/removed'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -197,9 +191,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Фолдери су уклоњени\" is a very literal translation. A more natural and common phrasing in Serbian would be \"Избрисани су фолдери\" or \"Фолдери су избрисани\".",
-          "suggestion": "Избрисани су фолдери."
+          "type": "spelling",
+          "description": "The word 'Фолдери' is a transliteration of 'Folders' and is technically correct, but a more natural Serbian (Cyrillic) word for 'folders' would be 'Mapе' (Mape).",
+          "suggestion": "Mape su uklonjene."
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Folders removed' implies a plural. 'Folderi' is the plural form in Serbian, which is appropriate, but a more natural phrasing might be 'Izbrisani folderi.'",
-          "suggestion": "Izbrisani folderi."
+          "description": "While grammatically correct, 'Folderi su uklonjeni' translates to 'Folders have been removed'. The original 'Folders removed' is more concise and impactful. A better translation would convey the simplicity of the original.",
+          "suggestion": "Foldere su obrisani."
         }
       ],
       "approved_at": null

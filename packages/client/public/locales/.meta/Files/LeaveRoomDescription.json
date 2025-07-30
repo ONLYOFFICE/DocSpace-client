@@ -3,7 +3,7 @@
   "content": "You are the owner of this room. Before you leave the room, you must transfer the owner's role to another user.",
   "content_en_sha1_hash": "7fad132658521906219ad21519aa804777ae5ed8",
   "created_at": "2025-05-19T21:30:55.732Z",
-  "updated_at": "2025-05-28T09:30:02.280Z",
+  "updated_at": "2025-05-26T07:57:32.314Z",
   "comment": {
     "text": "This translation key is used to display a message when leaving a room, explaining that the owner must transfer their role to another user. It appears in a leave room dialog modal. The purpose is to inform users of the required action before leaving the room.",
     "is_auto": true,
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'transfer the owner's role' is slightly awkward. 'مهام المالك' (Malik's tasks) doesn't perfectly convey the concept of transferring a role.",
+          "suggestion": "أنت مالك هذه الغرفة. يجب أن تقوم بتحويل دور المالك إلى مستخدم آخر قبل مغادرة الغرفة."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the phrase 'أنت مالك هذه الغرفة. يجب أن تقوم بتحويل...' could benefit from a slightly smoother flow. Using a conjunction like 'و' (wa - and) might improve readability.",
+          "suggestion": "أنت مالك هذه الغرفة و يجب أن تقوم بتحويل دور المالك إلى مستخدم آخر قبل مغادرة الغرفة."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -51,7 +62,18 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sie sind verantwortlich für diesen Raum' doesn't fully convey the meaning of 'You are the owner of this room.' While 'verantwortlich' implies responsibility, it's not the same as ownership.",
+          "suggestion": "Sie sind der/die Besitzer*in dieses Raumes."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Rolle des Verantwortlichen' is a bit clunky and doesn't directly translate 'owner's role'.",
+          "suggestion": "Besitzerrolle"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -147,13 +169,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation implies the user is *already* the new owner, when the English states they *are* the owner and need to transfer ownership. The phrasing is not aligned with the intended meaning.",
+          "suggestion": "Вы являетесь владельцем этой комнаты. Перед тем, как покинуть комнату, вы должны передать роль владельца другому пользователю."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'භූමිකාව' (bhoomikava) can be more accurately translated as 'දූරුව' (duruwa) when referring to a role in this context.",
+          "suggestion": "ඔබ කාමරය හැරයාමට පෙර, හිමිකරුගේ දූරුව වෙනත් පරිශ්‍රීලකයෙකුට මාරු කළ යුතුය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

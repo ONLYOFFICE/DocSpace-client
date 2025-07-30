@@ -3,7 +3,7 @@
   "content": "Advanced display settings",
   "content_en_sha1_hash": "1c98932cf18b30cb931fa36dd7e0b1a0299a438d",
   "created_at": "2025-05-19T21:30:54.356Z",
-  "updated_at": "2025-07-01T15:57:36.198Z",
+  "updated_at": "2025-05-24T09:44:31.370Z",
   "comment": {
     "text": "The \"AdvancedDisplay\" translation key refers to a category header used in user interface settings, specifically in developer tools, to group related display options. It is displayed on multiple pages within the PortalSettings category, indicating that the following section contains advanced display settings and configuration options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 456,
+      "line_number": 452,
       "context": "</ControlsGroup>\n ) : null}\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n <Label className=\"label\" text={t(\"FileTypeDisplay\")} />\n <RadioButtonGroup\n orientation=\"vertical\"\n options={fileTypeDisplay}\n name=\"columnsDisplayOptions\"",
       "module": "/packages/client"
     },
@@ -69,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'Ρυθμίσεις οθόνης για προχωρημένους' is a somewhat literal translation. A more natural Greek phrasing might be 'Προχωρημένες ρυθμίσεις οθόνης' or 'Ρυθμίσεις οθόνης (για προχωρημένους χρήστες)'.",
+          "suggestion": "Προχωρημένες ρυθμίσεις οθόνης"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala word 'වැඩිදුර' (wēdidura) is generally used for 'further' or 'more', but in the context of 'advanced', a more appropriate word might be 'අඩුපාඩු' (adupaadu) or 'උසස්' (usas).",
-          "suggestion": "Consider replacing 'වැඩිදුර' (wēdidura) with 'අඩුපාඩු' (adupaadu) or 'උසස්' (usas) for better accuracy in conveying 'advanced'."
+          "description": "The word 'සැකසුම්' (sækasum) is a valid word but might be more accurately translated as 'settings' or 'configurations' to better align with the English term 'settings'. While technically correct, it could be improved for clarity.",
+          "suggestion": "වැඩිදුර සංදර්ශක සැකසුම් (Instead, consider 'වැඩිදුර සංදර්ශක ඊළඟ පියවර' for 'advanced display settings' if a more detailed description is desired)"
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Напредна подешавања приказа\" while understandable, isn't the most natural or precise translation of \"Advanced display settings\". \"Напредна подешавања приказа\" literally translates to 'Advanced display settings', but a more idiomatic rendering might be better.",
-          "suggestion": "Подешавања напредне визуелизације"
+          "description": "The translation 'Напредна подешавања приказа' while understandable, is not the most natural or preferred way to translate 'Advanced display settings' in Serbian. 'Advanced' is best translated as 'napredne'.",
+          "suggestion": "Напредне подешавања приказа"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Set file lifetime to automatically delete the files in this room after a defined period. Lifetime begins on the date of upload/creation of the file.",
   "content_en_sha1_hash": "48b33e3061a4e9194b996f885bc9816950665705",
   "created_at": "2025-05-19T21:30:56.799Z",
-  "updated_at": "2025-05-20T09:38:09.086Z",
+  "updated_at": "2025-05-24T13:51:16.494Z",
   "comment": {
     "text": "\"This translation key is used for the 'FileLifetimeDescription' text in the FileLifetime block of a Create Edit Room Dialog. It explains that setting file lifetime will automatically delete files after a defined period starting from their upload/creation date.\"",
     "is_auto": true,
@@ -27,19 +27,52 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set file lifetime' is translated as 'تعيين عمر الملف' which, while understandable, is a more literal translation of 'assign file age'. A more natural translation might be 'تحديد مدة صلاحية الملفات' or 'ضبط مدة صلاحية الملفات'.",
+          "suggestion": "تحديد مدة صلاحية الملفات"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'after a defined period' is translated as 'بعد فترة محددة'. This is accurate but can be improved for clarity and flow. Consider rephrasing to convey a specific timeframe more naturally.",
+          "suggestion": "بعد انتهاء المدة المحددة"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a single sentence. Consider breaking it into two sentences for improved readability. For example, 'Set file lifetime to automatically delete files in this room after a defined period. The lifetime begins on the date of upload/creation of the file.' becomes 'يمكنك تعيين مدة صلاحية الملفات لحذفها تلقائيًا بعد فترة محددة. تبدأ المدة من تاريخ تحميل أو إنشاء الملف.'.",
+          "suggestion": "Break into two sentences for better readability."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'File Lifetime' is awkwardly translated as 'Faylın istifadə müddəti'. While 'istifadə müddəti' conveys 'lifetime', 'File Lifetime' often refers to a setting or feature name. A more accurate translation, preserving the sense of a configuration option, might be 'Faylın saxlanma müddəti' or 'Faylın ömrü'.",
+          "suggestion": "Consider 'Faylın saxlanma müddəti' or 'Faylın ömrü' for better accuracy."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'yükləndiyi/yaradıldığı' uses a slash to represent 'or'. While understandable, a more typical Azerbaijani construction would use 'və' (and) or a clearer alternative.",
+          "suggestion": "Replace 'yükləndiyi/yaradıldığı' with 'yüklənib və yaradılıbsa' or 'yüklənib ya yaradılıbsa'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation uses a colon (:) at the end of the first sentence, which is not consistent with the English original. The English version does not use a colon at the end of the first sentence.",
+          "suggestion": "Remove the colon after 'период' in the Bulgarian translation."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +90,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set file lifetime\" is translated as \"Ορίστε τη διάρκεια ζωής αρχείου\". While technically correct, a more natural phrasing might be \"Καθορίστε τη διάρκεια ζωής αρχείου\" or \"Ρυθμίστε τη διάρκεια ζωής αρχείου\". \"Ορίστε\" implies setting a pre-defined value, while \"καθορίστε\" or \"ρυθμίστε\" are more flexible and commonly used in this context.",
+          "suggestion": "Καθορίστε τη διάρκεια ζωής αρχείου"
+        },
+        {
+          "type": "formatting",
+          "description": "The slash in 'upload/creation' in the English content is missing in the Greek translation. The conjunction should be present to accurately reflect the meaning.",
+          "suggestion": "Ορίστε τη διάρκεια ζωής αρχείου για να διαγράφετε αυτόματα τα αρχεία σε αυτό το δωμάτιο μετά από ένα καθορισμένο χρονικό διάστημα. Η διάρκεια ζωής αρχίζει από την ημερομηνία μεταφόρτωσης/δημιουργίας του αρχείου."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,43 +113,135 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set file lifetime' is somewhat awkward in Finnish. A more natural phrasing would be something like 'Määritä tiedoston säilytysaika' or 'Aseta tiedoston säilytysaika'.",
+          "suggestion": "Määritä tiedoston säilytysaika"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'käyttöikä' (lifetime) might be slightly misleading. 'Säilytysaika' (retention period) is potentially a better fit for this context.",
+          "suggestion": "Aseta tiedoston säilytysaika poistaaksesi automaattisesti tämän huoneen tiedostot määrätyn ajanjakson jälkeen. Säilytysaika alkaa tiedoston lataamis-/luomispäivämäärästä."
+        },
+        {
+          "type": "formatting",
+          "description": "The hyphen in 'lataamis-/luomispäivämäärästä' could be replaced with an en dash (–) for better readability. Although a hyphen works functionally, an en dash indicates a connection between two words.",
+          "suggestion": "lataamis–luomispäivämäärästä"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'file lifetime' is translated as 'durée de vie des fichiers'. While technically correct, it sounds less natural in French. A more common and natural phrasing would be 'durée de conservation des fichiers'.",
+          "suggestion": "durée de conservation des fichiers"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'room' is translated as 'salle'. In this context, 'espace' might be a better fit to convey the digital room concept.",
+          "suggestion": "espace"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'defined period' is translated as 'période définie'. While correct, 'prédéfinie' might be more suitable considering that it implies the period is already established.",
+          "suggestion": "période prédéfinie"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'սենյակում' (in the room) is technically correct, but 'սենյակի' (of the room) would flow better grammatically.",
+          "suggestion": "Սահմանեք ֆայլի ժամկետը, որպեսզի որոշակի ժամանակահատվածից հետո այս սենյակի ֆայլեր ավտոմատ կերպով ջնջվեն:"
+        },
+        {
+          "type": "formatting",
+          "description": "The Armenian translation has a line break within the sentence. This impacts readability.",
+          "suggestion": "Սահմանեք ֆայլի ժամկետը, որպեսզի որոշակի ժամանակահատվածից հետո այս սենյակի ֆայլեր ավտոմատ կերպով ջնջվեն: Կյանքի տևողությունը սկսվում է ֆայլի վերբեռնման/ստեղծման ամսաթվից:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set file lifetime' is not accurately translated. 'Imposta la durata dei file' is too literal and could be misinterpreted. A more natural phrasing would convey the concept of setting a lifespan or retention period.",
+          "suggestion": "Imposta la durata di conservazione dei file"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'stanza' (room) while technically correct, might not be the most appropriate term in a software context. 'Area' or 'spazio' might be better alternatives.",
+          "suggestion": "Imposta la durata dei file per eliminare automaticamente i file in questa area/spazio dopo un periodo definito."
+        },
+        {
+          "type": "formatting",
+          "description": "Lack of consistency. The English version uses a colon after the key name. The Italian translation does not.",
+          "suggestion": "Consider adding a colon after 'Imposta la durata dei file' if the standard is to include it."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"file lifetime\" is translated as \"ファイルの有効期限\" (file validity expiration). While not incorrect, \"ファイルライフタイム\" (faira raifutaimu) would be a more direct and potentially clearer translation, aligning with common terminology in technical contexts. It would maintain consistency if \"lifetime\" is used elsewhere.",
+          "suggestion": "Consider translating \"file lifetime\" as \"ファイルライフタイム\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for flow. The phrase \"このルーム内のファイルを\" (files in this room) is a bit clunky at the beginning. While not technically wrong, it could be rephrased for better readability.",
+          "suggestion": "Consider rephrasing the first part to something like \"このルームのファイルを\" (files of this room) or restructuring the sentence altogether."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Set file lifetime\" is not accurately reflected in the Korean translation. A more natural and accurate phrasing might convey the action of *configuring* or *defining* the file lifetime.",
+          "suggestion": "정해진 기간 후에 이 룸의 파일을 자동으로 삭제되도록 파일 수명을 설정하거나 정의하세요."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence \"수명은 파일을 업로드/생성한 날짜부터 시작됩니다.\" feels slightly abrupt. Adding a connector word would improve flow.",
+          "suggestion": "수명은 파일을 업로드하거나 생성한 날짜부터 시작됩니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"File Lifetime\" is translated as \"ໄລຍະເວລາຂອງເອກະສານ\" which literally means \"period of documents\". A more accurate translation for 'lifetime' in this context would be something closer to 'ອາຍຸການຂອງເອກະສານ' (age of documents) or 'ໄລຍະເວລາການໃຊ້ງານຂອງເອກະສານ' (period of document usage).",
+          "suggestion": "ກຳນົດອາຍຸການຂອງເອກະສານໄວ້ເພື່ອລົບລ້າງເອກະສານໃນຫ້ອງນີ້ໂດຍອັດຕະໂນມັດຫຼັງຈາກໄລຍະເວລາທີ່ກຳນົດໄວ້. ໄລຍະເວລາເລີ່ມຕົ້ນໃນວັນທີອັບໂຫຼດ/ສ້າງເອກະສານ."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ອັດຕະໂນມັດ' is a valid Laotian word but could benefit from a more common phrasing for automated processes.",
+          "suggestion": "Consider using a phrasing more akin to 'ອັດຕະນະມະ' or 'ອັດຕະໂນມັດ' depending on the desired register."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +253,18 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'levensduur' (lifetime) while technically correct, can sound awkward in this context. A more natural phrasing might be 'bewaartermijn' or 'retentieperiode'.",
+          "suggestion": "Stel bewaartermijn in om de bestanden in deze ruimte automatisch na een bepaalde periode te verwijderen. De bewaartermijn begint op de datum van het uploaden/aanmaken van het bestand."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the sentence structure could be improved for readability.  Splitting the sentence might help.",
+          "suggestion": "Stel een bewaartermijn in om de bestanden in deze ruimte automatisch te verwijderen na een bepaalde periode. De bewaartermijn begint op de datum van het uploaden of aanmaken van het bestand."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +288,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Set' is too literal. A more natural Romanian phrasing would be 'Configurați' or 'Definiți'.",
+          "suggestion": "Configurați durata de viață a fișierului pentru a șterge automat fișierele din sala după o anumită perioadă."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sala' is generally translated as 'room'. Using 'camera' might be more appropriate, depending on the context and what 'room' refers to in the application.",
+          "suggestion": "Configurați durata de viață a fișierului pentru a șterge automat fișierele din cameră după o anumită perioadă."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +311,40 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set file lifetime' is not accurately conveyed. 'ගොනු වල කාලානුපාතය සැකසීමෙන් පසු' translates more closely to 'After adjusting the file lifetime' which is not the intended meaning. It implies a manual adjustment rather than a setting.",
+          "suggestion": "Consider a phrasing like 'ගොනු වල ජීවන කාලය සැකසීම' which more closely translates to 'Setting the file lifetime'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'මෙම කාමරයේ ඇති ගොනු නිර්ධාරිත කාලයක් ගතවන පසු' can be improved for clarity. The passive voice construction is a bit awkward.",
+          "suggestion": "Replace with 'මෙම කාමරයේ ගොනු නිර්ධාරිත කාලයකට පසු' which translates to 'After a defined period for the files in this room'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'උඩුගත කිරීමේ' (uploading) is correct but the overall sentence flow could be smoother. It implies a continuous action of uploading, whereas 'upload/creation' implies a one-time event.",
+          "suggestion": "Consider restructuring this part of the sentence to be more consistent with the rest. Perhaps 'ගොනු නිර්මාණය කිරීමේදි' (when creating the file) can be used as an alternative"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'File Lifetime' is translated as 'doba používania súborov'. While technically correct, 'doba trvania súborov' or 'životnosť súborov' might be more idiomatic and accurately convey the intended meaning of file lifetime in this context. 'doba používania' implies a period of usage, which isn't the primary focus. The implication is how long files exist, not how long they are used.",
+          "suggestion": "Consider using 'doba trvania súborov' or 'životnosť súborov' instead of 'doba používania súborov'."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'miestnosti' is used, which is correct, but in this context, 'izby' may be more appropriate. However, 'miestnosti' is not incorrect.",
+          "suggestion": "While acceptable, consider 'izby' as an alternative."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,31 +356,86 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'поставите' (postavite) in \"Поставите век трајања фајла...\" is a formal imperative. A more natural and user-friendly phrasing would be something like \"Одредите век трајања фајла...\" (Odredite vek trajanja fajla...) or \"Подесите век трајања фајла...\" (Podesite vek trajanja fajla...).  'Set' is generally less formal than 'postavite'.",
+          "suggestion": "Одредите/Подесите век трајања фајла..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'Lifetime begins on the date of upload/creation of the file' is a bit literal. A smoother translation would be 'Век почиње са датумом учитавања/креирања фајла' (Vek pocinje sa datumom ucitavanja/kreiranja fajla) or 'Век почиње од датума учитавања или креирања фајла' (Vek pocinje od datuma ucitavanja ili kreiranja fajla).",
+          "suggestion": "Век почиње са датумом учитавања/креирања фајла"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vek' (age/epoch) is used instead of 'rok' or 'trajanje' which would be more appropriate for 'lifetime' in this context.  'Vek' implies a much longer period.",
+          "suggestion": "Postavite rok trajanja fajla za automatsko brisanje fajlova u ovoj sobi nakon definisanog perioda."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'datuma postavljanja/kreiranja fajla' is a bit awkward.  'Postavljanja' isn't the most natural word here. It could also imply 'setting' rather than upload/creation.",
+          "suggestion": "Postavite rok trajanja fajla za automatsko brisanje fajlova u ovoj sobi nakon definisanog perioda. Rok počinje od datuma otpreme/kreiranja fajla."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'file lifetime' is translated as 'dosya kullanım ömrü'. While technically correct, 'dosya ömrü' is a more natural and concise translation in Turkish.",
+          "suggestion": "Bu odadaki dosyaları belirli bir süre sonra otomatik olarak silmek için dosya ömrünü ayarlayın."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'Bu odadaki dosyaları' is grammatically correct but slightly verbose.  A more elegant phrasing could improve readability.",
+          "suggestion": "Bu odadaki dosyaların"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Set file lifetime' is translated as 'Задайте період існування файлів'. While technically correct, it's a bit literal and could be improved for naturalness in Ukrainian.  A more idiomatic phrasing might be 'Встановіть тривалість життя файлів' or 'Налаштуйте тривалість життя файлів'.",
+          "suggestion": "Встановіть тривалість життя файлів"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'upload/creation' is translated as 'передавання/створення'. 'Передавання' is a valid translation of 'upload', but 'creation' is better rendered as 'створення'. Combining them in this way is slightly awkward.  A slightly more fluid phrasing might be 'дня завантаження/створення'.",
+          "suggestion": "дня завантаження/створення"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'File Lifetime' is not directly translated. 'Thời gian tồn tại của tập tin' is a descriptive explanation rather than a direct translation. While understandable, it lacks precision.",
+          "suggestion": "Consider a more direct translation like 'Thời lượng tập tin' or 'Thời gian lưu trữ tập tin' for 'File Lifetime'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'upload/creation' is awkwardly translated as 'tạo/tải tập tin lên'. It implies uploading *and* creating.  The original implies creation *or* upload.",
+          "suggestion": "Rephrase to 'ngày tạo hoặc tải tập tin' to better reflect the original meaning of 'upload/creation'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

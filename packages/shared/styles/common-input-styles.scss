@@ -1,5 +1,5 @@
-@import "./variables/_colors.scss";
-@import "./_mixins.scss";
+@use "variables/colors";
+@use "mixins";
 
 @mixin common-input-color-styles {
   background-color: var(--input-bg);
@@ -51,7 +51,6 @@
 
     &::placeholder {
       color: var(--text-input-placeholder-disabled-color);
-      -webkit-text-fill-color: var(--text-input-placeholder-disabled-color);
     }
     &::-webkit-input-placeholder {
       color: var(--text-input-placeholder-disabled-color);
@@ -74,31 +73,31 @@
   &::placeholder {
     color: var(--text-input-placeholder-color);
     -webkit-text-fill-color: var(--text-input-placeholder-color);
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   &::-webkit-input-placeholder {
     color: var(--text-input-placeholder-color);
     -webkit-text-fill-color: var(--text-input-placeholder-color);
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   &::-moz-placeholder {
     color: var(--text-input-placeholder-color);
     -webkit-text-fill-color: var(--text-input-placeholder-color);
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   &:-ms-input-placeholder {
     color: var(--text-input-placeholder-color);
     -webkit-text-fill-color: var(--text-input-placeholder-color);
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   &:-moz-placeholder {
     color: var(--text-input-placeholder-color);
     -webkit-text-fill-color: var(--text-input-placeholder-color);
-    @include no-user-select;
+    @include mixins.no-user-select;
   }
 
   &:not(:disabled):not(&[data-disabled="true"]) {

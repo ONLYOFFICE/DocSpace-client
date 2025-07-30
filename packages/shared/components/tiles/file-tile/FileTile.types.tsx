@@ -26,7 +26,7 @@
 
 import { ReactElement } from "react";
 
-import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { ContextMenuModel } from "../../context-menu/ContextMenu.types";
 
 import type { FileType } from "../../../enums";
 
@@ -127,5 +127,21 @@ export type FileTileProps = {
   isActive?: boolean;
   /** Flag for edit mode */
   isEdit?: boolean;
-  forwardRef?: React.RefObject<HTMLDivElement>;
+  forwardRef?: React.RefObject<HTMLDivElement | null>;
+};
+
+export type FileChildProps = {
+  item: {
+    title?: string;
+    icon?: string;
+    logo?: {
+      original?: string;
+      large?: string;
+      medium?: string;
+      small?: string;
+      color?: string;
+      cover?: string | { data: string; id: string };
+    };
+    displayName?: string;
+  };
 };

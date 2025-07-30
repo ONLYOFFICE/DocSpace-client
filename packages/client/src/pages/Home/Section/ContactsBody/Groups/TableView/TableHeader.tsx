@@ -64,9 +64,7 @@ type GroupsTableHeaderProps = {
   navigate: NavigateFunction;
   location: Location;
 
-  containerRef: React.MutableRefObject<
-    Nullable<React.ForwardedRef<HTMLDivElement>>
-  >;
+  containerRef: React.RefObject<Nullable<React.ForwardedRef<HTMLDivElement>>>;
 };
 
 type GroupTableHeaderState = { columns: TableHeaderColumn[] };
@@ -205,7 +203,6 @@ class GroupsTableHeader extends React.Component<
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
-      tableStorageName,
     } = this.props;
 
     const sortBy = filter!.sortBy === "displayname" ? "AZ" : filter!.sortBy;
@@ -219,7 +216,6 @@ class GroupsTableHeader extends React.Component<
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
-        tableStorageName={tableStorageName!}
         sectionWidth={sectionWidth}
         infoPanelVisible={infoPanelVisible}
         useReactWindow

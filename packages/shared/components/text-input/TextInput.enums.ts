@@ -30,6 +30,7 @@ export enum InputType {
   email = "email",
   tel = "tel",
   search = "search",
+  number = "number",
 }
 
 export enum InputSize {

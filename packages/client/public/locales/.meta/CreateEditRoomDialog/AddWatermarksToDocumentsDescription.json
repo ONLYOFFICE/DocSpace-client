@@ -3,7 +3,7 @@
   "content": "Protect all documents in this room with watermarks. If a document already contains one, it will not be replaced.",
   "content_en_sha1_hash": "2e056742504b46dd1b79913edc7568d76aafd5c2",
   "created_at": "2025-05-19T21:30:56.777Z",
-  "updated_at": "2025-05-20T09:38:12.235Z",
+  "updated_at": "2025-05-24T13:55:32.224Z",
   "comment": {
     "text": "This translation key is used for the button text \"AddWatermarksToDocuments\" in a dialog component, prompting users to apply watermarks to documents.",
     "is_auto": true,
@@ -81,7 +81,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Protect all documents...' is a bit literal. A more natural Armenian phrasing might be 'Add watermarks to all documents...' or 'Apply watermarks to all documents...'",
+          "suggestion": "Ավելորեք ջրանշաններ այս սենյակի բոլոր փաստաթղթերին: (Add watermarks to all documents in this room)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'replacement' is somewhat implicit. While technically correct, it's a bit clunky. A more natural phrasing would be to explicitly state that existing watermarks will be preserved.",
+          "suggestion": "Եթե փաստաթուղթն արդեն պարունակում է ջրանշան, այն չի փոխարինվի, այլ պահպանվի: (If a document already contains a watermark, it will not be replaced, but preserved.)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +152,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"incripționare\" translates to \"encryption,\" but the English text refers to \"watermarks.\" This is a significant mistranslation.",
+          "suggestion": "Protejează toate documentele din această sală cu filigranare. Un filigran deja existent nu va fi înlocuit."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'incripționare' might be used colloquially, 'filigranare' is the correct term for watermark. Using 'incripționare' obscures the meaning.",
+          "suggestion": "Use 'filigranare' instead of 'incripționare'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +175,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ආරක්ෂා කරන්න\" (araksha karanna) translates to 'protect' but in this context, 'add' or 'apply' would be more accurate and natural for adding watermarks. 'Protect' implies a level of security that isn't the primary function of watermarks here.",
+          "suggestion": "මෙම කාමරයේ ඇති සියලු ලේඛන ජල සලකුණු යෙදවීමෙන් ආරක්ෂා කරන්න."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"එක ඇත්නම්\" (eka athinma) is a bit clunky. A more natural phrasing would convey the same meaning.",
+          "suggestion": "ලේඛනයක දැනටමත් ජල සලකුණක් තිබේ නම්,"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word “ප්‍රතිස්ථාපනය” (prathistapana) is a formal term, while a simpler word like “ඉවත්” (iwa) - 'removed' or 'replaced' would be more conversational and understandable for most users.",
+          "suggestion": "ලේඛනයක දැනටමත් ජල සලකුණක් තිබේ නම්, එය ඉවත් නොකරනු ලැබේ."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +209,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The term 'жиговима' is a bit awkward. While technically correct, 'шарама' might be a more natural and commonly used term for watermarks in this context, conveying a more visual aspect.",
+          "suggestion": "Заштитите све документе у овој соби водене шаре. "
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,13 +239,35 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'watermark' is directly transliterated. While understandable, a more natural Vietnamese equivalent for this context might be 'dấu bướm nước' or simply 'dấu mờ' for a less technical feel. Using 'watermark' directly can sound awkward.",
+          "suggestion": "Consider using 'dấu bướm nước' or 'dấu mờ' instead of 'watermark' to improve readability and naturalness."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly rigid. Adding a connector like 'nhưng' or 'thì' before 'nó sẽ không được thay thế' would improve the flow and make it sound more natural.",
+          "suggestion": "Change 'nó sẽ không được thay thế' to 'thì nó sẽ không được thay thế' or 'nhưng nó sẽ không được thay thế'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"使用水印保护\" (use watermarks to protect) is slightly awkward. While technically correct, it's not the most natural phrasing in Chinese. A more common and natural phrasing would emphasize the *application* of watermarks.",
+          "suggestion": "为所有文档添加水印保护此房间中的所有文档。 (Wèi suǒyǒu wéndàng tiānjiā shuǐyìn bǎohù cǐ fángjiān zhōng de suǒyǒu wéndàng.) - This translates to 'Add watermarks to protect all documents in this room.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English states 'If a document already contains one, it will not be replaced.' The Chinese translation captures the 'will not be replaced' part, but a smoother flow might be achieved by phrasing it more proactively. The current phrasing is a little passive.",
+          "suggestion": "如果文档已包含水印，则不会重复添加。(Rúguǒ wéndàng yǐ bāohán shuǐyìn, zé bù huì chóngfù tiānjiā.) - This translates to 'If a document already contains a watermark, it will not be added again.'"
+        }
+      ],
       "approved_at": null
     }
   }

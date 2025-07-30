@@ -3,7 +3,7 @@
   "content": "Your submitted PDF form was assigned a unique form number. To check the status, please contact the form owner.",
   "content_en_sha1_hash": "b6c331feae5b62af94d3ec00396b6551fd43c987",
   "created_at": "2025-05-19T21:30:57.159Z",
-  "updated_at": "2025-05-28T09:30:02.867Z",
+  "updated_at": "2025-06-30T12:20:31.645Z",
   "comment": {
     "text": "This translation key is used to display a message for anonymous form completers, informing them that their submitted PDF form has been assigned a unique form number and providing instructions on how to check its status. It appears in the UI as part of a completed form notification.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.tsx",
-      "line_number": 151,
+      "line_number": 152,
       "context": "<Heading level={HeadingLevel.h1}>\n {t(\"CompletedForm:FormCompletedSuccessfully\")}\n </Heading>\n <Text noSelect>\n {isAnonym\n ? t(\"CompletedForm:DescriptionForAnonymous\")\n : t(\"CompletedForm:DescriptionForRegisteredUser\")}\n </Text>\n </TextWrapper>\n <MainContent>\n <Box className=\"completed-form__file\">",
       "module": "/packages/doceditor"
     }
@@ -27,25 +27,64 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Your submitted PDF form\" is not accurately reflected in the Arabic translation. The current translation focuses on the form being 'sent' rather than 'submitted'.",
+          "suggestion": "لقد تم استلام النموذج الإلكتروني الذي قمت بملئه وتم تخصيص رقم فريد له. (Had tam istilaam an-namoothaj al-electroni alladhi qumta bimala'atihi tam takhsees raqm fareed lah.) - 'Your filled-in electronic form has been received and a unique number has been assigned to it.'"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The wording 'مع توفير الرقم المخصص' (with providing the assigned number) is a bit awkward and direct. It implies the contact needs to be told they *must* provide the number, rather than suggesting it's helpful.",
+          "suggestion": "للتحقق من الحالة، يرجى التواصل مع مالك النموذج مع ذكر الرقم المخصص. (Lil-tahakkuk min al-hala, yurja al-tawasul ma'a malik an-namoothaj ma'a dhikr ar-raqm al-mukhasas.) - 'To check the status, please contact the form owner mentioning the assigned number.'"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Your submitted PDF form\" is not accurately reflected in the Azerbaijani translation. \"Doldurulmuş PDF formasını təqdim etdikdən sonra\" literally translates to 'After submitting the filled PDF form'. While understandable, it's more natural to say something closer to 'The PDF form you submitted...' or 'The form you submitted...'",
+          "suggestion": "The PDF form you submitted was assigned a unique form number."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"To check the status\" is quite literal. A more natural Azerbaijani phrasing might be preferred for better flow.",
+          "suggestion": "To inquire about the status"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'To check the status, please contact the form owner' is a bit literal and stiff in Bulgarian. It doesn't flow naturally.",
+          "suggestion": "За да проверите статуса, моля свържете се с лицето, което е създало формуляра."
+        },
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation lacks a comma after 'номер' (number). While not strictly incorrect, it improves readability.",
+          "suggestion": "Изпратихте попълнения PDF формуляр, на който беше назначен уникален номер, за да проверите статуса се свържете със собственика на формуляра."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Your submitted PDF form' is not perfectly conveyed by 'Odeslali jste vyplněný formulář PDF'. A more natural translation might be 'Váš odeslaný PDF formulář' or 'PDF formulář, který jste odeslali'.",
+          "suggestion": "Váš odeslaný PDF formulář"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +96,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and awkward. \"Υποβάλατε τη συμπληρωμένη φόρμα PDF στην οποία ανατέθηκε\" is not a natural way to express the original meaning. It translates to something like 'You submitted the completed PDF form to which a number was assigned'.",
+          "suggestion": "Επιβάλατε την ολοκληρωμένη φόρμα PDF και της εκχωρήθηκε ένας μοναδικός αριθμός. Για να ελέγξετε την κατάσταση, επικοινωνήστε με τον κάτοχο της φόρμας."
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure is somewhat convoluted.  While grammatically correct, it's not the most fluid or easily understood.",
+          "suggestion": "A more natural phrasing would improve readability."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,19 +119,47 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Ota yhteyttä lomakkeen omistajaanja tarkistaaksesi tilan' is grammatically awkward. The 'ja' creates an unnecessary connection between contacting the owner and checking the status.",
+          "suggestion": "Ota yhteyttä lomakkeen omistajaan tilan tarkistamiseksi."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Au formulaire PDF soumis un numéro unique a été attribué\" is grammatically awkward and doesn't flow naturally in French. It's a literal translation that doesn't convey the meaning as clearly as it could.",
+          "suggestion": "Un numéro de formulaire unique a été attribué à votre formulaire PDF soumis."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"Au formulaire PDF soumis un numéro unique a été attribué\" has incorrect word order. In French, the subject usually comes before the verb.",
+          "suggestion": "Un numéro de formulaire unique a été attribué à votre formulaire PDF soumis."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks clarity regarding who the form owner is. It would be helpful to add a more specific phrase to help the user.",
+          "suggestion": "Pour vérifier l'état du formulaire, veuillez contacter le propriétaire du formulaire ou consultez la section dédiée sur le site web."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ձևի եզակի համար\" (zhevi yezaki hamar) literally translates to 'form's unique number', which is a bit awkward. A more natural translation for 'unique form number' would be something like \"բացառիկ ձևի համար\" (bacharak yezvi hamar) or \"բացառիկ թևի համարակային կոդ\" (bacharak tevi hamaranakayin kod).",
+          "suggestion": "Consider replacing \"ձևի եզակի համար\" with \"բացառիկ ձևի համար\" or \"բացառիկ թևի համարակային կոդ\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +177,40 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"Your submitted PDF form\" is awkward. \"작성한 PDF 양식을 제출했습니다\" literally translates to 'You submitted the PDF form you wrote.' It's not the most natural phrasing. A more accurate and natural translation would convey the idea of 'submitted PDF form' as a single action.",
+          "suggestion": "제출하신 PDF 양식에 고유 번호가 할당되었습니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"할당된 번호를 제공하는 양식 소유자에게 문의하세요\" is overly literal and slightly clunky. 'Provide the assigned number' isn't how someone would typically request this information.",
+          "suggestion": "상태 확인을 위해 양식 소유자에게 문의하세요."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure feels long and could be improved for readability. Splitting it into two sentences might be better.",
+          "suggestion": "제출하신 PDF 양식에 고유 번호가 할당되었습니다. 상태 확인을 위해 양식 소유자에게 문의하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"ໝໍ້ຖິ້ມໝໍ້ຖິ້ມ\" is repeated and doesn't convey the intended meaning of 'assigned a unique form number.' It appears to be a mistranslation or typographical error.",
+          "suggestion": "ແບບຟອມ PDF ທີ່ທ່ານສົ່ງມາໄດ້ຮັບເລກໝໍ້ຖິ້ມສະເພາະແຍກຕ່າງຫົນທາງແລ້ວ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຖ້າຕ້ອງການກວດກາສະຖານະພາບ\" is somewhat formal and could be simplified.",
+          "suggestion": "ຖ້າຕ້ອງການກວດກາສະຖານະພາບ ກະລຸນາຕິດຕໍ່ເຈົ້າຂອງແບບຟອມ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +222,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'waaraan een uniek nummer is toegekend' is a bit clunky. A more natural phrasing would be 'waaraan een uniek formuliernummer is toegekend' or 'dat een uniek formuliernummer heeft gekregen'.",
+          "suggestion": "waaraan een uniek formuliernummer is toegekend"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +240,18 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Você enviou o formulário PDF preenchido\" is overly literal. A more natural Portuguese phrasing would be \"O formulário PDF preenchido que você enviou...\" or \"O formulário PDF que você preencheu...\"",
+          "suggestion": "O formulário PDF que você preencheu foi atribuído a um número exclusivo."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The original English emphasizes contacting the *form owner* for status. The Portuguese translation also uses \"proprietário do formulário,\" which can sound formal and less approachable. A more user-friendly option might be \"responsável pelo formulário\" or \"pessoa responsável pelo formulário.\"",
+          "suggestion": "Para verificar o status, entre em contato com a pessoa responsável pelo formulário."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,19 +263,52 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation uses the instrumental case ('Formularului PDF') which might sound a bit unnatural in this context. A more natural phrasing would be in the dative case.",
+          "suggestion": "Formularului PDF pe care l-ați trimis i s-a atribuit un număr unic, sau: Formularul PDF pe care l-ați trimis a primit un număr unic."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit long and could be split for better readability. Although not strictly incorrect, it can be improved.",
+          "suggestion": "Ați trimis un formular PDF. Acestui formular i s-a atribuit un număr unic. Pentru a verifica starea acestuia, contactați proprietarul formularului."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Отправленной PDF-форме\" is a bit awkward. A more natural phrasing would be \"Вашей отправленной PDF-форме\" or simply \"Вашей PDF-форме\".",
+          "suggestion": "Вашей PDF-форме был присвоен уникальный номер."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"свяжитесь с владельцем формы\" could be more user-friendly. It's quite formal.",
+          "suggestion": "Чтобы проверить статус, обратитесь к владельцу формы."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පෝරම' (porama) is repeated excessively. While acceptable, it's stylistically clunky.",
+          "suggestion": "Consider rephrasing to reduce repetition of 'පෝරම.' For example, 'ඔබ ඉදිරිපත් කළ PDF ට අනන්‍ය අංකයක් ලබා දී ඇත. තත්ත්වය පරීක්ෂා කිරීමට, කරුණාකර පෝරමය හිමිකරු අමතන්න.'"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'ඔබ ඉදිරිපත් කළ PDF පෝරමයට' is a bit long and could be slightly improved for readability.",
+          "suggestion": "Consider 'ඔබ ඉදිරිපත් කළ PDF ට' for brevity and flow."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,25 +320,69 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'enoumna' is incorrect. It doesn't accurately convey 'unique'. The intended meaning is a unique identification number.",
+          "suggestion": "The translation should use a word like 'edinstvena' or 'posebna' to mean 'unique'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure 'ki mu je bila dodeljena enoumna številka' is a bit awkward.  It could be improved for better flow.",
+          "suggestion": "Consider rephrasing to something like 'ki ima unikatna številka' or 'ki ima edinstveno številko'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'поднели' is not the most natural or accurate translation of 'submitted' in this context. While grammatically correct, it sounds formal and slightly archaic. A more common and understandable translation would be 'испунили' or 'попунили'.",
+          "suggestion": "испунили сте попуњени PDF формулар"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'додељен' (assigned) is not inherently wrong, in the context of a form number, 'придружило' (associated) might be a slightly more natural and clear translation.",
+          "suggestion": "испунили сте попуњени PDF формулар коме је придружило јединствен број"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'popunjeni' could be improved. While technically correct, it's a bit formal. A more common and natural word for 'filled' in this context would be 'ispunjeni'.",
+          "suggestion": "ispunjeni"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Da biste proverili status' is grammatically correct, but slightly formal. A more conversational phrasing could improve readability. ",
+          "suggestion": "Za proveru statusa"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Benzersiz bir numara atanmış olan doldurulmuş PDF formunu gönderdiniz' is a bit awkward and overly literal.  A more natural phrasing would be something like 'Gönderdiğiniz PDF formuna benzersiz bir numara atandı.'",
+          "suggestion": "Gönderdiğiniz PDF formuna benzersiz bir numara atandı."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Benzersiz bir numara atanmış olan' is grammatically a bit cumbersome. While not strictly incorrect, it can be simplified.",
+          "suggestion": "Benzersiz bir numara ile"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -195,7 +394,18 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"đã điền\" (filled) is redundant and unnecessary. The context already implies the form was filled.",
+          "suggestion": "Bạn đã gửi biểu mẫu PDF. Để kiểm tra trạng thái, hãy liên hệ với chủ sở hữu biểu mẫu cung cấp số được gán."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'cung cấp số được gán' is awkwardly worded and implies the form owner provides the number, which might be misunderstood. It's unclear who is providing the number.",
+          "suggestion": "Bạn đã gửi biểu mẫu PDF. Để kiểm tra trạng thái, hãy liên hệ với chủ sở hữu biểu mẫu."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

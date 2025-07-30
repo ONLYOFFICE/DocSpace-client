@@ -3,7 +3,7 @@
   "content": "Please enable the HTTPS protocol for your {{productName}} to ensure the correct setup work.",
   "content_en_sha1_hash": "6f73324c1026b8f3e89ef6c5e6db098059c8eeb0",
   "created_at": "2025-05-19T21:30:54.418Z",
-  "updated_at": "2025-05-28T09:30:02.587Z",
+  "updated_at": "2025-06-08T12:02:32.765Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to enable HTTPS protocol for their {{productName}}. It appears in a UI component related to portal settings, prompting users to ensure correct setup work.",
     "is_auto": true,
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"لجهاز {{productName}} الخاص بك\" (for your {{productName}} device) is slightly awkward and implies the protocol needs enabling on the device itself, rather than a requirement for the overall setup. A more natural phrasing would focus on the application or service using the {{productName}}.",
-          "suggestion": "الرجاء تمكين بروتوكول HTTPS لـ {{productName}} لضمان عمل الإعداد الصحيح."
+          "type": "formatting",
+          "description": "The curly braces {{productName}} are present in the Arabic translation, which might require adjustments depending on how the product name will be dynamically inserted. Ensure proper rendering and localization of the placeholder.",
+          "suggestion": "Verify dynamic insertion of {{productName}} in the final output. Consider using a localization framework for consistent handling of placeholders."
         }
       ],
       "approved_at": null
@@ -41,9 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Quraşdırmanın düzgün işləməsini təmin etmək üçün {{productName}} üçün HTTPS protokolunu aktiv edin' is a bit literal and could be improved for natural flow in Azerbaijani. A more natural phrasing would emphasize the need for HTTPS for proper functionality.",
-          "suggestion": "Funksionallığı düzgün işləməsi üçün {{productName}} üçün HTTPS protokolunu aktiv edin."
+          "type": "formatting",
+          "description": "The Azerbaijani translation retains the English variable {{productName}}. While technically correct, it's best practice to ensure consistency with how variables are handled in the target language and potentially translate or localize the variable name itself if it's a constant and not user input.",
+          "suggestion": "Consider translating or localizing the variable name {{productName}} if appropriate for the Azerbaijani context. Otherwise, ensure it's handled consistently in the overall Azerbaijani interface."
         }
       ],
       "approved_at": null
@@ -51,19 +51,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'работи' (raboti) is used, which means 'works'. While technically correct, 'функционира' (funktsionira) or 'е настроена правилно' (is set up correctly) might be more formal and suitable for a technical message.",
-          "suggestion": "Молим да активирате HTTPS протокола за вашия {{productName}}, за да се уверите, че настройката е настроена правилно."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"správnou funkci nastavení\" is not the most natural way to convey \"correct setup work\". It implies the function *of* the settings works correctly, rather than the setup itself.",
+          "suggestion": "Povolte prosím protokol HTTPS pro váš {{productName}}, abyste zajistili správné nastavení."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,13 +81,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"ensure the correct setup work\" is not accurately translated. 'Ensure the correct setup work' implies that the setup will not function properly without HTTPS. A more accurate translation would emphasize correct operation, not just the setup process.",
-          "suggestion": "Por favor, active el protocolo HTTPS para su {{productName}} para garantizar el correcto funcionamiento."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -101,13 +95,8 @@
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Ole hyvä ja laita HTTTPS protokolla päälle {{productName}}:lle' is grammatically awkward. A more natural phrasing would be 'Ota käyttöön HTTPS protokolla {{productName}}:lle'.",
-          "suggestion": "Ota käyttöön HTTPS protokolla {{productName}}:lle"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'laita päälle' can mean 'enable', 'ota käyttöön' is a more standard and natural translation for enabling a protocol in a technical context.",
-          "suggestion": "ota käyttöön"
+          "description": "The phrase 'laita HTTTPS protokolla päälle {{productName}}:lle' is grammatically awkward. A more natural phrasing would be 'ota HTTPS käyttöön {{productName}}:lle' or 'käytä HTTPS protokollaa {{productName}}:lle'.",
+          "suggestion": "ota HTTPS käyttöön {{productName}}:lle"
         }
       ],
       "approved_at": null
@@ -123,9 +112,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ապահովելու' is misspelled. It should be 'ապահովելու'.",
-          "suggestion": "ապահովելու"
+          "type": "formatting",
+          "description": "The Armenian translation includes a hyphen in 'productName'. While technically not incorrect, it's stylistically unusual for product names and might be better without it, depending on the overall product naming convention.",
+          "suggestion": "Consider removing the hyphen: 'Ձեր {{productName}}-ի համար' becomes 'Ձեր {{productName}}-ի համար'"
         }
       ],
       "approved_at": null
@@ -154,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ຂອງເຈົ້າ' (of you) is somewhat informal. While not strictly incorrect, a more formal option might be preferred for a technical context.",
-          "suggestion": "Consider replacing 'ຂອງເຈົ້າ' with a more formal equivalent, such as 'ຂອງທ່ານ' or removing it entirely ('ສໍາລັບ {{productName}} ເພື່ອຮັບປະກັນ...') if context allows."
+          "description": "The word 'ຂອງເຈົ້າ' (khong chao) is slightly informal for this context. While understandable, a more formal or neutral wording would be preferred.",
+          "suggestion": "Consider replacing 'ຂອງເຈົ້າ' with 'ຂອງທ່ານ' (khong thun) or removing it entirely to simplify the sentence. Example: 'ກະລຸນາເປີດໃຊ້ໂປໂຕຄອນ HTTPS ສຳລັບ {{productName}} ຂອງທ່ານ' or 'ກະລຸນາເປີດໃຊ້ໂປໂຕຄອນ HTTPS ສຳລັບ {{productName}}'."
         }
       ],
       "approved_at": null
@@ -166,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Latvian phrase \"iestatījumu darbam\" is grammatically awkward. \"Darbam\" implies purpose or for the purpose of working, which isn't the intended meaning. It should be revised for clarity.",
-          "suggestion": "iestatījumu veikšanai"
+          "description": "The phrase 'iestatījumu darbam' is grammatically awkward. 'Darbam' is dative case and doesn't quite fit with the intended meaning. It should be something that indicates a successful setup.",
+          "suggestion": "iestatījumus veiksmīgam darbībā"
         }
       ],
       "approved_at": null
@@ -178,7 +167,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"to ensure the correct setup work\" is not accurately translated. 'To ensure the correct setup work' implies a desired outcome or confirmation of successful setup. The Dutch 'om er zeker van te zijn dat de installatie naar behoren werkt' is more literal, but doesn't capture the same nuance of assurance.",
+          "description": "The phrase 'om er zeker van te zijn' is a bit verbose and not the most natural way to express 'to ensure'. A more direct translation would be better.",
           "suggestion": "Activeer het HTTPS-protocol voor uw {{productName}} om een correcte installatie te garanderen."
         }
       ],
@@ -187,13 +176,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses a comma (,) instead of a semicolon (;) between 'HTTPS' and 'aby'. While a comma is grammatically acceptable, a semicolon is often preferred in more formal Polish writing and would align better with the professional tone of a technical message.",
+          "suggestion": "Włącz protokół HTTPS; aby zapewnić prawidłowe działanie konfiguracji."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'para garantir o funcionamento correto da configuração' is somewhat literal and could be more naturally expressed in Portuguese. 'Garantir o funcionamento correto' can be simplified.",
+          "suggestion": "Ative o protocolo HTTPS para o seu {{productName}} para garantir a correta configuração."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -202,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'para garantir o funcionamento correto da configuração' is a bit verbose and not the most natural way to express 'to ensure the correct setup work.' A more concise and natural translation would be 'para garantir o correto funcionamento da configuração' or 'para garantir que a configuração funcione corretamente'.",
-          "suggestion": "para garantir o correto funcionamento da configuração"
+          "description": "The phrase 'garantir o funcionamento correto da configuração' is a bit verbose and could be more directly translated. 'Configuração' refers to the setup itself, which is already implied by 'ensure the correct setup work'.",
+          "suggestion": "Ative o protocolo HTTPS para o seu {{productName}} para garantir o correto funcionamento."
         }
       ],
       "approved_at": null
@@ -214,13 +215,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The word 'spațiul' is somewhat vague. While technically correct, it could be improved for clarity. 'Instanța' or 'mediul' might be better depending on the specific context of 'productName'.",
-          "suggestion": "Activați protocol HTTPS pentru instanța dvs {{productName}} pentru a asigura functionarea corecta a configuratiei."
+          "description": "The phrase 'Activați protocol HTTPS' is grammatically awkward. It should be 'Activați protocolul HTTPS'.",
+          "suggestion": "Activați protocolul HTTPS"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'functionarea corecta a configuratiei' is a bit wordy. 'Configurarea corectă' is more concise and natural.",
-          "suggestion": "Activați protocol HTTPS pentru instanța dvs {{productName}} pentru a asigura configurarea corectă."
+          "description": "The word 'functionarea' is a grammatical error and should be 'funcționarea'.",
+          "suggestion": "funcționarea"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'spațiul dvs' feels slightly less natural than 'produsul dvs.' given the context of setting up a service.",
+          "suggestion": "produsul dvs."
         }
       ],
       "approved_at": null
@@ -237,13 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ක‍්‍රියාත්මක' (kriyātmaka) is slightly awkward. A more natural phrasing might be 'පහසු කරන්න' (pahusu karanna).",
-          "suggestion": "කෘපya ඔබගේ {{productName}} සඳහා HTTPS ප්‍රොටොකෝලය පහසු කරන්න, නිවැරදි සැකසුම් වැඩ පිළිවෙල සහතික කිරීම සඳහා."
+          "description": "The word 'කෘපya' is a misspelling of 'කරුණා'.",
+          "suggestion": "කරුණා"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'නිවැරදි සැකසුම් වැඩ පිළිවෙල සහතික කිරීම සඳහා' could be slightly improved for flow. While technically correct, it reads a little stiff.",
-          "suggestion": "කෘපya ඔබගේ {{productName}} සඳහා HTTPS ප්‍රොටොකෝලය පහසු කරන්න, නිවැරදි සැකසුම් සහතික කිරීම සඳහා."
+          "description": "The phrase 'නිවැරදි සැකසුම් වැඩ පිළිවෙල සහතික කිරීම සඳහා' is a bit convoluted. It would be clearer to say something like 'සರಿಯైన සැකසුම සඳහා'.",
+          "suggestion": "සರಿಯైన සැකසුම සඳහා"
         }
       ],
       "approved_at": null
@@ -254,8 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"correct setup work\" is awkward. \"korektnú prácu nastavení\" doesn't quite convey the intended meaning of 'correct setup'.",
-          "suggestion": "Prosím, povoľte protokol HTTPS pre váš priestor {{productName}}, aby ste zabezpečili správne nastavenie."
+          "description": "The phrase \"korektnú prácu nastavení\" is not a natural or accurate translation of \"correct setup work.\" It's clunky and doesn't convey the intended meaning clearly. \"Korektná práca nastavení\" implies the setup *itself* is doing the work, not the functionality of the HTTPS protocol ensuring correct functionality.",
+          "suggestion": "Prosím, povoľte protokol HTTPS pre váš priestor {{productName}}, aby ste zabezpečili správnu funkčnosť nastavenia."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, the Slovak translation uses 'priestor' for 'area/space'. It's a viable option, but 'prostor' may sound less user-friendly in this context. A more approachable wording could be explored. It's not strictly an error, but contributes to less-than-ideal user experience.",
+          "suggestion": "Consider using a more user-friendly term for 'space', such as 'aplikáciu' or 'účet', depending on the specific context of {{productName}}."
         }
       ],
       "approved_at": null
@@ -263,13 +274,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Omogočite protokol HTTPS za vaš {{productName}}, da zagotovite pravilno namestitev.' is a literal translation but sounds slightly unnatural in Slovenian. A more natural phrasing would convey the same meaning more effectively.",
-          "suggestion": "Omogočite uporabo HTTPS protokola za vaš {{productName}}, da zagotovite pravilno namestitev."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -277,9 +282,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'омогућите' is spelled correctly, but might be slightly formal for the context. A more conversational alternative could be considered.",
-          "suggestion": "Молимо укључите HTTPS протокол за ваш {{productName}} како би се осигурало да правилно ради."
+          "type": "incorrect_translation",
+          "description": "The translation \"како би се осигурало да правилно ради\" is a bit clunky and not the most natural way to express 'to ensure the correct setup work' in Serbian. A more idiomatic translation would be something like 'да би се осигурао правилан рад' or 'да бисте осигурали исправну функционалност'.",
+          "suggestion": "да бисте осигурали исправну функционалност"
         }
       ],
       "approved_at": null
@@ -289,9 +294,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'kako bi se osiguralo da pravilno radi' is a bit awkward in Serbian. A more natural phrasing would be 'da bi pravilno funkcionisalo' or 'da bi ispravno radilo'.",
-          "suggestion": "da bi pravilno funkcionisalo"
+          "type": "spelling",
+          "description": "The word 'radi' is a verb in the 3rd person singular, present tense. It needs to be in the 3rd person plural to match 'osiguralo'.",
+          "suggestion": "Molimo omogućite HTTPS protokol za vaš {{productName}} kako bi se osiguralo da pravilno rade."
         }
       ],
       "approved_at": null
@@ -308,8 +313,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'space' ('простору') in the Ukrainian translation doesn't accurately reflect the intended meaning of 'product'. 'Product' refers to a software product or instance, not a physical space.",
-          "suggestion": "Увімкніть протокол HTTPS для вашого продукту {{productName}}, щоб забезпечити правильне налаштування."
+          "description": "The English phrase \"ensure the correct setup work\" is not accurately translated. 'Ensure the correct setup work' implies that a setup needs to complete successfully. The Ukrainian translation 'щоб забезпечити правильне налаштування' is closer to 'to provide correct configuration'.",
+          "suggestion": "Consider a more direct translation conveying the implication of successful completion, such as: 'щоб забезпечити успішне налаштування' or 'для успішного налаштування'."
+        },
+        {
+          "type": "formatting",
+          "description": "The variable `{{productName}}` appears unchanged in the Ukrainian translation. Ensure the formatting is suitable for the target language/platform.",
+          "suggestion": "Verify that `{{productName}}` is properly handled and displayed correctly in the Ukrainian context.  Consider how variables are typically formatted in Ukrainian UI elements."
         }
       ],
       "approved_at": null
@@ -317,7 +327,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of `{{productName}}` in the English content is replicated in the Vietnamese translation. This is acceptable but should be consistently applied if the placeholder is used elsewhere.",
+          "suggestion": "Ensure consistent use of placeholders throughout all localized content."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

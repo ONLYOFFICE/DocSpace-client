@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 "use client";
 
 import React from "react";
@@ -173,7 +174,7 @@ export const CompletedForm = ({
               <Box>
                 <Text
                   className={classNames("completed-form__form-number", {
-                    ["form-number--big"]: formNumber > BIG_FORM_NUMBER,
+                    "form-number--big": formNumber > BIG_FORM_NUMBER,
                   })}
                 >
                   {formNumber}
@@ -202,7 +203,7 @@ export const CompletedForm = ({
               </Box>
             </ManagerWrapper>
           </MainContent>
-          <ButtonWrapper isShareFile={isShareFile && !isRoomMember}>
+          <ButtonWrapper isShareFile={isShareFile ? !isRoomMember : false}>
             <Button
               scale
               primary
@@ -214,14 +215,14 @@ export const CompletedForm = ({
               }
               onClick={isAnonym ? handleDownload : gotoCompleteFolder}
             />
-            {(!isShareFile || isRoomMember) && !isSDK && (
+            {(!isShareFile || isRoomMember) && !isSDK ? (
               <Button
                 scale
                 size={ButtonSize.medium}
                 label={t("CompletedForm:BackToRoom")}
                 onClick={handleBackToRoom}
               />
-            )}
+            ) : null}
           </ButtonWrapper>
           <Link
             className="link"

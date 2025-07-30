@@ -3,7 +3,7 @@
   "content": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "content_en_sha1_hash": "14dcf30f13f317e2c76ba01c199429d2e0ccc37a",
   "created_at": "2025-05-19T21:30:50.592Z",
-  "updated_at": "2025-05-21T05:10:33.443Z",
+  "updated_at": "2025-05-24T05:46:00.072Z",
   "comment": {
     "text": "This translation key is used as a subheader on an empty screen that displays when there are no audit trail users. It informs the user about the purpose of the section and how it relates to their {{productName}}.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses parentheses '()' which may not be the preferred style in Saudi Arabic. Consider using em dashes '—' or a similar alternative to maintain a more natural flow.",
+          "suggestion": "يتيح لك القسم الفرعي تصفح قائمة أحدث التغييرات (—) الإنشاء والتعديل والحذف وما إلى ذلك (—) التي أجراها المستخدمون على الكيانات (—) الغرف والفرص والملفات وما إلى ذلك (—) داخل {{productName}} الخاص بك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -41,14 +47,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase \"(otaqlara, imkanlara, fayllara və s.)\" appears abruptly within the sentence. It lacks proper integration into the sentence flow. It should be more naturally incorporated.",
-          "suggestion": "Consider rephrasing the sentence to integrate the list of entities more smoothly, for example, \"...istifadəçilər tərəfindən edilən ən son dəyişikliklərin (otaqlar, imkanlar, fayllar və s.) siyahısını...\" or \"...istifadəçilər tərəfindən edilən ən son dəyişikliklərin siyahısını, otaqlara, imkanlara, fayllara və s. kimi...\""
+          "type": "incorrect_translation",
+          "description": "The phrase \"Alt bölmə\" translates to \"Sub-section\" but it is more accurate to use a term that better reflects 'subsection' or 'section'.",
+          "suggestion": "Bu bölmə"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"nəzərdən keçirməyə\" is a bit awkward. While technically correct, a more natural phrasing would improve readability.",
-          "suggestion": "Consider alternatives like \"görməyə\" or \"araşdırmaq üçün\" depending on the desired nuance."
+          "description": "The phrasing \"istifadəçilər tərəfindən edilən ən son dəyişikliklərin\" is a bit awkward. A more natural way to express 'latest changes made by users' would be more direct.",
+          "suggestion": "istifadəçilər tərəfindən edilən son dəyişikliklər"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of ellipsis ('və s.') is acceptable, but using a more appropriate punctuation, such as a comma, may improve readability.",
+          "suggestion": "otaqlara, imkanlara, fayllara, s."
         }
       ],
       "approved_at": null
@@ -56,24 +67,19 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The ellipsis (и т.н.) is used too frequently. It's better to be more specific or omit it if possible. While not strictly incorrect, it can feel a bit lazy.",
-          "suggestion": "Consider replacing 'и т.н.' with a more explicit listing of actions if space allows, or remove it entirely if the meaning is clear without it. For example, 'и т.н.' could be replaced with 'и други действия'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"обектите\" (objects) might be too literal a translation of \"entities.\"  A more natural word could be used depending on the specific context of 'entities' in the product.",
-          "suggestion": "Consider alternatives for 'обектите' such as 'ресурси' (resources), 'елементи' (elements), or a more context-specific term that better reflects what the entities are."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation uses 'prostoru' which implies a physical space. It might be more appropriate to use a word that refers to the application/platform environment, similar to 'systému' or 'aplikace'.",
+          "suggestion": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho systému {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -82,22 +88,17 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Subsecțiunea' (Romanian) is used instead of German. The original English content is intended for a German-speaking audience.",
-          "suggestion": "Der Abschnitt ermöglicht es Ihnen, die Liste der neuesten Änderungen (Erstellung, Änderung, Löschung usw.) anzuzeigen, die Benutzer an den Objekten (Räumen, Möglichkeiten, Dateien usw.) in Ihrem {{productName}} vorgenommen haben."
+          "description": "The word 'Subsecțiunea' is Romanian, not German. The translation should be in German.",
+          "suggestion": "Der Abschnitt ermöglicht es Ihnen, die Liste der neuesten Änderungen (Erstellung, Änderung, Löschung usw.) anzuzeigen, die Benutzer an den Objekten (Räumen, Möglichkeiten, Dateien usw.) innerhalb von {{productName}} vorgenommen haben."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'efectuate' is a Romanian word, not German. It should be translated correctly into German for 'made/performed'.",
-          "suggestion": "vorgenommen haben"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'oportunităţi' is a Romanian word, not German. It should be translated correctly into German for 'opportunities'.",
+          "description": "The phrase 'oportunităţi' is Romanian for 'opportunities', but the language is supposed to be German.  The correct German term should be used.",
           "suggestion": "Möglichkeiten"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'fişiere' is a Romanian word, not German. It should be translated correctly into German for 'files'.",
+          "description": "The phrase 'fişiere' is Romanian for 'files', but the language is supposed to be German. The correct German term should be used.",
           "suggestion": "Dateien"
         }
       ],
@@ -106,7 +107,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The ellipsis (κ.λπ.) is not consistently spaced. There should be a space before and after.",
+          "suggestion": "κ.λπ. "
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -121,18 +128,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Alaosio mahdollistaa sinun katsella...\" sounds a bit awkward in Finnish. A more natural phrasing would be \"Alaosio mahdollistaa...\" or \"Tämän alaosion avulla voit katsella...\"",
-          "suggestion": "Alaosio mahdollistaa... tai Tämän alaosion avulla voit katsella..."
+          "description": "The phrase 'Alaosio mahdollistaa sinun katsella...' is slightly awkward. 'Alaosio mahdollistaa katselun...' or 'Alaosio antaa sinun katsella...' would be more natural.",
+          "suggestion": "Alaosio antaa sinun katsella..."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word \"kokonaisuuksiin\" (to wholes) is not the best fit for 'entities'.  'Kohteisiin' (to objects/targets) would be more accurate.",
-          "suggestion": "kohteisiin"
+          "description": "The word 'Kokonaisuuksiin' is not the best translation for 'entities'.  While it roughly conveys the idea of a collection, a more precise term would be better. 'Objekteihin' or 'Kohteisiin' are possible alternatives.",
+          "suggestion": "Alaosio antaa sinun katsella käyttäjien kohteisiin (huoneet, mahdollisuudet, tiedostot jne.) tekemien muutosten listaa..."
         },
         {
-          "type": "formatting",
-          "description": "The punctuation before 'kauden' is incorrect. A colon is required.",
-          "suggestion": "kauden:"
+          "type": "incorrect_translation",
+          "description": "The structure of the sentence is a bit convoluted. The passive voice construction makes it sound less direct. While not incorrect, simplifying the sentence would improve readability.",
+          "suggestion": "Alaosio antaa sinun katsella listaa käyttäjien tekemistä muutoksista (luonti, muokkaus, poisto jne.) huoneisiin, mahdollisuuksiin, tiedostoihin jne. {{productName}}."
         }
       ],
       "approved_at": null
@@ -148,14 +155,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"սուբյեկտներում\" (subyektneryum) is not the best translation for \"entities\". A more appropriate term would convey the meaning of objects or items. \"էլեմենտներում\" or \"կետերում\" might be better alternatives depending on the specific context of the product.",
-          "suggestion": "Ենթաբաժինը թույլ է տալիս թերթել վերջին փոփոխությունների ցանկը (ստեղծում, փոփոխում, ջնջում և այլն), որոնք կատարվել են օգտատերերի կողմից ձեր {{productName}}-ի էլեմենտներում (սենյակներ, հնարավորություններ, ֆայլեր և այլն):"
+          "type": "spelling",
+          "description": "The word 'ֆայլեր' is a transliteration of 'files'. While understandable, a more accurate Armenian equivalent would be 'ֆայլեր'.",
+          "suggestion": "ֆայլեր"
         },
         {
-          "type": "formatting",
-          "description": "The Armenian translation uses a combination of upper and lower case letters. While not grammatically incorrect, it is recommended to be consistent with either all uppercase or all lowercase for better visual consistency. The standard is lowercase.",
-          "suggestion": "Ենթաբաժինը թույլ է տալիս թերթել վերջին փոփոխությունների ցանկը (ստեղծում, փոփոխում, ջնջում և այլն), որոնք կատարվել են օգտատերերի կողմից ձեր {{productName}}-ի էլեմենտներում (սենյակներ, հնարավորություններ, ֆայլեր և այլն):"
+          "type": "grammar",
+          "description": "The phrase 'որոնք կատարվել են օգտատերերի կողմից' is grammatically correct but could be simplified for better flow. ",
+          "suggestion": "որոնք օգտատերերի կողմից են կատարվել"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'entities' is translated as 'սուբյեկտներ'. While 'subject' in English has a related meaning, 'entities' in this context refers to data objects like rooms, opportunities and files. A better translation would be 'մասեր' (parts) or 'կետեր' (items).",
+          "suggestion": "մասեր"
         }
       ],
       "approved_at": null
@@ -172,8 +184,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation includes 'など' (nado) after 'ファイル' (files). While not incorrect, it feels a bit repetitive since 'など' is already used before 'ルーム、機会'. Consider removing one instance for better flow.",
-          "suggestion": "サブセクションでは、{{productName}}内のエンティティ（ルーム、機会、ファイルなど）に対してユーザーが行った最新の変更（作成、変更、削除など）のリストを閲覧することができます。"
+          "description": "The Japanese translation uses a somewhat unnatural sentence structure for a user interface. The phrase 'することができます' (can do) at the end is often avoided in UI copy for conciseness. It makes the sentence feel verbose.",
+          "suggestion": "サブセクションでは、{{productName}}内のエンティティ（ルーム、機会、ファイルなど）に対するユーザーが行った最新の変更（作成、変更、削除など）のリストを閲覧できます。"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word '機会' (kikai) directly translated to 'opportunity' can sometimes be ambiguous in Japanese. Depending on the specific context, it could be better translated to something more specific to the type of opportunity being referred to within the application.",
+          "suggestion": "Consider replacing '機会' with a more contextually appropriate term. If referring to sales opportunities, for example, '案件' (ankei) might be a better fit. Without more context, it is hard to provide a definitive alternative."
         }
       ],
       "approved_at": null
@@ -184,13 +201,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term '항목' (hangmok) translates to 'items' or 'objects' which isn't the best fit for entities like rooms, opportunities, and files. It's too generic.",
-          "suggestion": "Consider using a more specific term like '데이터' (deiteo - data) or rephrasing to describe what the entities *are* (e.g., '방, 기회, 파일 데이터' - rooms, opportunities, file data)"
+          "description": "The English phrase 'browse through the list' is not accurately reflected in the Korean translation. '검색하다' (search) doesn't fully capture the meaning of browsing. A better translation would convey a more exploratory action.",
+          "suggestion": "하위 섹션에서는 사용자가 {{productName}} 내의 항목(방, 기회, 파일 등)에 대해 사용자가 수행한 최신 변경 사항(생성, 수정, 삭제 등) 목록을 **확인**할 수 있습니다."
         },
         {
           "type": "formatting",
-          "description": "The phrasing '방, 기회, 파일 데이터' might be improved for readability. There isn't a natural flow.",
-          "suggestion": "Consider rephrasing to something like '방, 기회, 파일 등' (rooms, opportunities, files, etc.) to maintain the parallel structure of the English version, assuming 'etc.' is acceptable in this context."
+          "description": "The placement of '사용자가' (user) feels slightly repetitive. While grammatically correct, it could be phrased more elegantly.",
+          "suggestion": "하위 섹션에서는 사용자가 {{productName}} 내의 항목(방, 기회, 파일 등)에 대해 수행한 최신 변경 사항(생성, 수정, 삭제 등) 목록을 확인할 수 있습니다. (Removing the repeated '사용자가' improves flow)"
         }
       ],
       "approved_at": null
@@ -201,8 +218,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation includes an extra space before 'ຂອງ ທ່ານ'.",
-          "suggestion": "ພາກສ່ວນຍ່ອຍອະນຸຍາດໃຫ້ທ່ານສາມາດທ່ອງໄປຫາບັນຊີລາຍຊື່ຂອງການປ່ຽນແປງຫຼ້າສຸດ (ການສ້າງ, ການແກ້ໄຂ, ການລຶບແລະອື່ນໆ) ທີ່ເຮັດໂດຍຜູ້ໃຊ້ກັບຫນ່ວຍງານ (ຫ້ອງ, ໂອກາດ, ໄຟລ໌ແລະອື່ນໆ) ພາຍໃນ {{productName}} ຂອງທ່ານ."
+          "description": "The Lao translation includes unnecessary spaces before and after 'ທ່ານ'.",
+          "suggestion": "ພາກສ່ວນຍ່ອຍອະນຸຍາດໃຫ້ທ່ານສາມາດທ່ອງໄປຫາບັນຊີລາຍຊື່ຂອງການປ່ຽນແປງຫຼ້າສຸດ (ການສ້າງ, ການແກ້ໄຂ, ການລຶບແລະອື່ນໆ) ທີ່ເຮັດໂດຍຜູ້ໃຊ້ກັບຫນ່ວຍງານ (ຫ້ອງ, ໂອກາດ, ໄຟລ໌ແລະອື່ນໆ) ພາຍໃນ {{productName}}."
         }
       ],
       "approved_at": null
@@ -212,9 +229,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'entītijās' is a somewhat uncommon and potentially awkward phrasing in Latvian. While technically correct, it might sound overly formal or complex for a user interface.",
-          "suggestion": "Consider using a more natural phrasing like 'objektos' (objects), 'resursos' (resources) or 'vienībās' (units) depending on the context.  The best option would depend on what 'entities' specifically refers to in the application."
+          "type": "incorrect_translation",
+          "description": "The word 'entītijās' (entities) sounds a bit clunky and formal in Latvian. A more natural phrasing would be 'objektos' or 'resursos'.",
+          "suggestion": "Apakšsadaļa ļauj pārlūkot jaunāko izmaiņu sarakstu (izveide, modificēšana, dzēšana utt.), ko lietotāji veikuši jūsu {{productName}} esošajos objektos (telpas, iespējas, faili utt.)."
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the word order in 'jūsu {{productName}} esošajos objektos' could be slightly improved for a smoother read. ",
+          "suggestion": "Apakšsadaļa ļauj pārlūkot jaunāko izmaiņu sarakstu (izveide, modificēšana, dzēšana utt.), ko lietotāji veikuši jūsu {{productName}} objektos (telpas, iespējas, faili utt.)."
         }
       ],
       "approved_at": null
@@ -231,13 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'elementach' (elements) is a bit too general. 'Entities' in the English context refers to specific items within the system like rooms, opportunities, and files. A more accurate translation would reflect this specificity.",
-          "suggestion": "Podsekcja umożliwia przeglądanie listy najnowszych zmian (utworzeń, modyfikacji, usunięć itp.) wprowadzonych przez użytkowników w poszczególnych obiektach (pokojach, możliwościach, plikach itp.) w {{productName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the repetition of 'itp.' (etc.) can be slightly improved for readability in Polish. Consider replacing the second 'itp.' with a more direct phrasing.",
-          "suggestion": "Podsekcja umożliwia przeglądanie listy najnowszych zmian (utworzeń, modyfikacji, usunięć) wprowadzonych przez użytkowników w poszczególnych obiektach (pokojach, możliwościach, plikach) w {{productName}}."
+          "description": "The phrase \"w poszczególnych elementach\" (in individual elements) is not the most natural or accurate translation of 'to the entities'. It implies a degree of separation that isn't intended. 'w obiektach' or 'w zasobach' would be more appropriate.",
+          "suggestion": "w obiektach"
         }
       ],
       "approved_at": null
@@ -266,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"возможности\" (opportunities) is an unusual and potentially incorrect translation for \"opportunities\" in this context. It’s more commonly translated as 'возможности' (vozmozhnosti) or 'перспективы' (perspektivy) when referring to business opportunities.  'Возможности' is more aligned to 'possibilities'.",
-          "suggestion": "Consider translating 'opportunities' as 'перспективы' or 'возможности' depending on the desired nuance. If 'возможности' is used, ensure it aligns with the overall product terminology."
+          "description": "The translation of 'entities (rooms, opportunities, files etc.)' as 'сущности(возможности, файлы и т. д.)' is not ideal. 'Opportunities' is not the best translation for 'opportunities' in this context. A better translation would be something like 'возможности' (translated as 'possibilities' or 'options' - depending on the specific meaning within the product) or a more descriptive phrasing.",
+          "suggestion": "Consider revising 'возможности' to a more precise translation depending on the context.  Perhaps 'компоненты' (components) or a rephrasing to clarify the meaning."
         },
         {
           "type": "formatting",
-          "description": "The ellipsis in the English content is \"etc.\", while in Russian it's \"и т. д.\". Although both are valid, maintaining consistency in formatting is generally preferred.",
-          "suggestion": "Ensure consistency in using “etc.” vs. “и т. д.” throughout the product."
+          "description": "The use of parentheses in the Russian translation feels slightly unnatural and could be improved for better readability. While technically correct, it's common to use em dashes or commas in Russian to introduce examples.",
+          "suggestion": "Consider replacing the parentheses with em dashes or commas: 'Раздел позволяет просматривать список последних изменений (создание, модификация, удаление и т. д.), внесенных пользователями в сущности – возможности, файлы и т. д. – на вашем {{productName}}.'"
         }
       ],
       "approved_at": null
@@ -280,7 +297,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'entities' is translated as 'ඒකකවල'. While technically correct, it might be too formal or technical for the target audience. A more accessible translation might be 'වියුත්තරැ' (vuyuththara) or something similar depending on the specific context of 'entities' in this application.",
+          "suggestion": "Consider a less formal translation for 'entities' like 'වියුත්තරැ' or a more contextually appropriate equivalent."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of 'ආදිය' (adiya - etc.) is somewhat repetitive. Consider rephrasing to avoid it, or using a more elegant alternative that maintains the same meaning.",
+          "suggestion": "Rephrase the sentence to avoid repetitive use of 'ආදිය'. For example, 'කාමර, අවකාශ, ගොනු අතර වෙනත්...' (rooms, spaces, files, among others...)"
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure 'ඔබගේ {{productName}} තුළ අඩංගු...' could be smoother. It's grammatically correct, but slightly clunky.",
+          "suggestion": "Consider rephrasing to a more natural flow, like 'ඔබගේ {{productName}} තුළ සිදු වූ...' (What happened within your {{productName}}...)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -289,8 +322,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovak translation uses \"atď.\" which is a common abbreviation but can be perceived as less formal. While acceptable, it might be better to spell it out for greater clarity and professionalism.",
-          "suggestion": "Replace \"atď.\" with \"atďalšie\" or rephrase to avoid the abbreviation entirely."
+          "description": "The Slovak translation uses 'atď.' which is a somewhat informal abbreviation for 'atďalšie'. Using the full form 'atďalšie' would be more formal and consistent with the tone of the English content.",
+          "suggestion": "Replace 'atď.' with 'atďalšie'."
         }
       ],
       "approved_at": null
@@ -301,8 +334,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'prostoru' (space) doesn't quite capture the intended meaning of 'within your {{productName}}'. It implies a physical space rather than the application/platform.",
-          "suggestion": "Consider using a more appropriate term that reflects the application context. Options include 'v vaši aplikaciji' (in your application), 'v vašem sistemu' (in your system), or potentially a more nuanced translation depending on the specific meaning within the product."
+          "description": "The word 'prostor' (space) doesn't accurately translate 'within your {{productName}}'. It implies a physical space rather than the platform or system itself.",
+          "suggestion": "Consider using a more suitable translation like 'v vaši {{productName}}' or 'na vaši {{productName}}' depending on the exact context and desired nuance.  'V sistemu {{productName}}' would also be a possibility."
         }
       ],
       "approved_at": null
@@ -313,8 +346,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation includes a hyphenated form '{{productName}}-а'. This might not be the standard way to incorporate variables in Serbian and might appear unnatural. It's preferable to check if the product name should be appended directly or if a more appropriate connector is required based on the specific product name and Serbian language conventions.",
-          "suggestion": "Investigate how the variable {{productName}} is typically incorporated in Serbian text. Consider using a space or another appropriate connector if a hyphen isn't the best choice."
+          "description": "The translation includes a hyphenated ProductName. While grammatically correct, consistency with the English original (which uses a product name variable) is preferred. Consider whether the product name should be properly rendered or kept as a variable.",
+          "suggestion": "Consider if the ProductName variable should be rendered properly or kept as a variable."
         }
       ],
       "approved_at": null
@@ -325,8 +358,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes an unnecessary hyphen before 'productName'.",
-          "suggestion": "Remove the hyphen: ... unutar vašeg {{productName}}."
+          "description": "The translation includes an unnecessary hyphen after 'productName'. Serbian typically doesn't require a hyphen in this context.",
+          "suggestion": "Remove the hyphen after 'productName'.  Change 'productName-a' to 'productName-a'."
         }
       ],
       "approved_at": null
@@ -334,13 +367,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The repetition of 'vb.' (veya başka) is slightly awkward. It's common in Turkish to omit it after the first instance. While not technically incorrect, it reads a little less naturally.",
-          "suggestion": "Alt bölüm, kullanıcılar tarafından {{productName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -349,8 +376,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"modification\" is missing. While 'зміна' covers a broad sense of change, specifically mentioning 'модифікація' would improve accuracy.",
-          "suggestion": "У цьому підрозділі можна переглядати список останніх змін (створення, зміна, модифікація, видалення тощо), внесених користувачами до об’єктів (кімнат, можливостей, файлів тощо) у вашому {{productName}}."
+          "description": "The term 'можливостей' (opportunities) could be more accurately translated to reflect the meaning within the context of the software. 'Можливостей' implies potential or possibilities, while 'зумовностей' or 'шансів' might be more suitable depending on the specific meaning.",
+          "suggestion": "Consider alternatives like 'зумовностей' or 'шансів' for 'opportunities' to better align with the software's context."
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'У цьому підрозділі' is a bit stiff. It might be smoother to rephrase it.",
+          "suggestion": "Consider 'Цей розділ дозволяє переглядати...' or 'В цьому розділі ви можете переглядати...' for a more natural flow."
         }
       ],
       "approved_at": null
@@ -367,13 +399,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase '此子部分' is slightly awkward. While technically correct, it's not the most natural way to describe a subsection in Chinese. It sounds a bit literal from the English.",
-          "suggestion": "Consider using a more natural phrasing like '此部分' (This section) or '本部分' (This part)."
-        },
-        {
-          "type": "grammar",
-          "description": "While understandable, the sentence structure '用户对{{productName}}中的实体（房间、机会、文件等）所做的最新更改' is a bit long and complex for Chinese. It can be broken down for better readability.",
-          "suggestion": "Restructure to something like '用户对{{productName}}中的实体（房间、机会、文件等）进行的最新更改' or '显示用户对{{productName}}中的实体（房间、机会、文件等）所做的最新更改' (shows the latest changes...). "
+          "description": "The placement of parentheses around '房间、机会、文件等' feels slightly unnatural in Chinese. It's common to list items like this with a trailing '等' without parentheses.",
+          "suggestion": "此子部分允许您浏览用户对{{productName}}中的实体（房间、机会、文件等）所做的最新更改（创建、修改、删除等）列表。 -> 此子部分允许您浏览用户对{{productName}}中的实体，如房间、机会、文件等所做的最新更改（创建、修改、删除等）列表。"
         }
       ],
       "approved_at": null

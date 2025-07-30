@@ -438,7 +438,9 @@ const SectionHeaderContent = (props) => {
       })}. ${
         lifetime.deletePermanently
           ? t("Files:AfterFilesWillBeDeletedPermanently")
-          : t("Files:AfterFilesWillBeMovedToTrash")
+          : t("Files:FilesMovedToTrashNotice", {
+              sectionName: t("Common:TrashSection"),
+            })
       }`;
 
     return null;
@@ -573,7 +575,9 @@ const SectionHeaderContent = (props) => {
     stateShowTemplateBadge || showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
-    ? t("TrashErasureWarning")
+    ? t("TrashAutoDeleteWarning", {
+        sectionName: t("Common:TrashSection"),
+      })
     : isPersonalReadOnly
       ? t("PersonalFolderErasureWarning")
       : "";
@@ -820,7 +824,7 @@ export default inject(
       getPublicKey,
     } = filesActionsStore;
 
-    const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
+    const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
 
     const {
       title,
@@ -1013,7 +1017,7 @@ export default inject(
 
       rootFolderId,
       displayAbout,
-      infoPanelRoom,
+      infoPanelRoom: infoPanelRoomSelection,
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,

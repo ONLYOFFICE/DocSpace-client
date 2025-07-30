@@ -3,7 +3,7 @@
   "content": "The email activation instructions have been sent to the <1>{{email}}</1> email address.",
   "content_en_sha1_hash": "aa4f7df17201a00f6afc20fdd488e286f298c970",
   "created_at": "2025-05-19T21:30:53.547Z",
-  "updated_at": "2025-05-21T06:07:52.062Z",
+  "updated_at": "2025-05-24T06:37:13.706Z",
   "comment": {
     "text": "This translation key is used for the email activation instructions sent notification, which appears on a success toast after sending the email activation link. It includes a placeholder for the recipient's email address, indicating where to insert the actual email value.",
     "is_auto": true,
@@ -27,13 +27,35 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The email address variable <1>{{email}}</1> is not correctly formatted for Arabic text. Arabic text typically reads right-to-left. The variable should be enclosed within right-to-left markers.",
+          "suggestion": "<1>{{email}}</1> should be <1>{{email}}</1>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While generally correct, \"تم إرسال\" (tam irsal) can sound slightly formal. A more natural and conversational phrasing could be considered.",
+          "suggestion": "Consider alternative phrasing like \"أُرسلت\" (ursilat) or \"تم إرسالها\" (tam irsaluha) for a slightly more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"aktivləşdirmə haqqında məlumat\" is a literal translation of \"information about activation\" and is not the most natural way to express 'activation instructions' in Azerbaijani. A more natural translation would be something like \"aktivlaşdırma təlimatları\" or \"aktivlaşdırma üsulları\".",
+          "suggestion": "Consider replacing \"aktivləşdirmə haqqında məlumat\" with \"aktivlaşdırma təlimatları\" or \"aktivlaşdırma üsulları\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The email placeholder is correctly formatted using <1> and </1>.",
+          "suggestion": "No change needed."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -42,13 +64,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Инструкциите за активиране на имейла\" is a literal translation of 'email activation instructions'. A more natural Bulgarian phrasing would be 'Инструкции за активиране на акаунта/пощенската кутия'.",
-          "suggestion": "Инструкции за активиране на акаунта/пощенската кутия бяха изпратени на имейл адрес <1>{{email}}</1>."
+          "description": "The translation \"Инструкциите за активиране на имейла бяха изпратени на имейл адрес <1>{{email}}</1>.\" is not a perfect translation of \"The email activation instructions have been sent to the <1>{{email}}</1> email address.\" A more natural translation would be something like \"Инструкциите за активация бяха изпратени на имейл адреса <1>{{email}}</1>.\" or \"Изпратихме инструкции за активиране на имейла на адреса <1>{{email}}</1>.\" Specifically, \"активиране на имейла\" is slightly awkward, and using \"адреса\" instead of \"имейл адрес\" is more concise.",
+          "suggestion": "Инструкциите за активация бяха изпратени на имейл адреса <1>{{email}}</1>."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'email address' is implied by 'Имейл адрес' - repeating it is redundant. A more natural and concise translation would omit the repetition.",
-          "suggestion": "Инструкциите за активиране бяха изпратени на <1>{{email}}</1>."
+          "type": "formatting",
+          "description": "The formatting with <1>{{email}}</1> is preserved in the translation, which is good, but should be noted that consistency in future translations is important.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -59,13 +81,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'email activation instructions' is not accurately translated into Czech. 'Pokyny k aktivaci e-mailu' is a literal translation that sounds unnatural. A more natural phrasing would be something like 'Instrukce pro aktivaci účtu e-mailem'.",
-          "suggestion": "Instrukce pro aktivaci účtu e-mailem"
+          "description": "The phrase 'Pokyny k aktivaci e-mailu' is a bit awkward. A more natural phrasing for 'email activation instructions' would be 'Instrukce pro aktivaci e-mailu'.",
+          "suggestion": "Instrukce pro aktivaci e-mailu"
         },
         {
           "type": "formatting",
-          "description": "While the `<1>{{email}}</1>` tags are preserved, it's common in Czech to use the `<1>` and `</1>` consistently for variables.  Ensure this is the standard practice.",
-          "suggestion": "Verify if the <1> and </1> tags are consistently used in other translations."
+          "description": "The formatting `<1>{{email}}</1>` is preserved, which is correct but could benefit from ensuring consistency with other translations. While technically correct, it's worth checking if this is the standard way to handle placeholders in Czech.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -76,13 +98,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Anleitungen zur Änderung eines Passworts wurden an <1>{{email}}</1> gesendet.\" translates to \"Password reset instructions were sent to <1>{{email}}</1>.\"  The English content refers to email activation instructions, not password reset instructions.",
-          "suggestion": "Anleitungen zur Aktivierung wurden an <1>{{email}}</1> gesendet."
+          "description": "The German translation \"Anleitungen zur Änderung eines Passworts wurden an <1>{{email}}</1> gesendet.\" translates to \"Password reset instructions were sent to <1>{{email}}</1>.\" This is not the correct translation of \"The email activation instructions have been sent to the <1>{{email}}</1> email address.\" The translation should focus on email activation rather than password reset.",
+          "suggestion": "Anleitungen zur Aktivierung der E-Mail wurden an <1>{{email}}</1> gesendet."
         },
         {
           "type": "formatting",
-          "description": "The German translation uses \"Anleitungen zur Änderung eines Passworts wurden an\" instead of mirroring the English phrasing. While not a critical error, consistency with the English structure can improve clarity and maintainability.",
-          "suggestion": "Email-Aktivierungsanleitungen wurden an <1>{{email}}</1> gesendet."
+          "description": "The translation uses a generic term 'Anleitungen' (instructions) which could be more specific depending on the context. It may be beneficial to re-evaluate the language used to convey a more precise meaning of 'email activation instructions'.",
+          "suggestion": "Consider more specific wording if clarity is critical. E.g. 'Bestätigungslink für die E-Mail wurde an... gesendet.'"
         }
       ],
       "approved_at": null
@@ -92,9 +114,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'email activation instructions' is not accurately translated. 'Οι οδηγίες ενεργοποίησης μέσω email' literally translates to 'The activation instructions via email'. A more natural Greek phrasing would be something like 'Οδηγίες ενεργοποίησης email'.",
+          "suggestion": "Οδηγίες ενεργοποίησης email έχουν σταλεί στη διεύθυνση email <1>{{email}}</1>"
+        },
+        {
           "type": "formatting",
-          "description": "The Greek translation maintains the <1>{{email}}</1> tag which is consistent with the English source, but consider if this is necessary or preferred in the Greek context. It might be more natural to remove the tags and simply insert the email address.",
-          "suggestion": "Consider removing the tags: 'Οι οδηγίες ενεργοποίησης μέσω email έχουν σταλεί στη διεύθυνση email {{email}}'"
+          "description": "While the `<1>{{email}}</1>` formatting is preserved, it would be more consistent and readable in Greek to apply the same formatting to the entire phrase where the email is being inserted, not just the `{{email}}` part.",
+          "suggestion": "Οι οδηγίες ενεργοποίησης email έχουν σταλεί στη διεύθυνση email <1>{{email}}</1>"
         }
       ],
       "approved_at": null
@@ -105,13 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Las instrucciones de activación se han enviado a la dirección de email <1>{{email}}</1>' is not the most natural or accurate translation of 'The email activation instructions have been sent to the <1>{{email}}</1> email address.' A more natural phrasing would be something like 'Se han enviado las instrucciones de activación a la dirección de correo electrónico <1>{{email}}</1>.'",
-          "suggestion": "Se han enviado las instrucciones de activación a la dirección de correo electrónico <1>{{email}}</1>."
+          "description": "The phrase \"email address\" is not directly translated. While \"dirección de email\" is understandable, a more natural translation would be \"dirección de correo electrónico\".",
+          "suggestion": "Las instrucciones de activación se han enviado a la dirección de correo electrónico <1>{{email}}</1>."
         },
         {
           "type": "formatting",
-          "description": "While the `<1>{{email}}</1>` formatting is preserved, 'email' is translated as 'email' instead of 'correo electrónico'. While understandable, maintaining consistency would suggest translating both terms.",
-          "suggestion": "Se han enviado las instrucciones de activación a la dirección de correo electrónico <1>{{email}}</1>."
+          "description": "While not strictly incorrect, the <1>{{email}}</1> tags are not the standard way of handling variables in Spanish. It might be better to ensure consistency with the system using the translation.",
+          "suggestion": "Consider if the system requires specific tags for email addresses."
         }
       ],
       "approved_at": null
@@ -119,7 +146,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"The email activation instructions\" is not perfectly translated. \"Sähköpostin aktivointiohjeet\" is somewhat literal. A more natural phrasing in Finnish might be \"Aktivointiohjeet on lähetetty sähköpostitse\".",
+          "suggestion": "Aktivointiohjeet on lähetetty sähköpostitse"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1>{{email}}</1> appear to be intended for variable substitution. Ensure they are correctly processed during rendering, and that the format matches expectations for the Finnish locale.",
+          "suggestion": "Verify that the variable substitution for <1>{{email}}</1> functions correctly in the Finnish context. Consider whether different formatting is preferred."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -128,13 +166,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Les instructions d'activation ont été envoyées à l'adresse' is not a direct or natural translation of 'The email activation instructions have been sent to the'. A more accurate translation would be 'Les instructions d'activation par e-mail ont été envoyées à'.",
-          "suggestion": "Les instructions d'activation par e-mail ont été envoyées à"
+          "description": "The phrase 'email activation instructions' is better translated as 'instructions de confirmation' or 'instructions d'activation de compte' for a more natural flow in French. 'Instructions d'activation' is technically correct but slightly less idiomatic.",
+          "suggestion": "Les instructions de confirmation ont été envoyées à l'adresse <1>{{email}}</1>."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'adresse' is acceptable, but 'adresse e-mail' is more explicit and clearer for users.",
-          "suggestion": "adresse e-mail"
+          "type": "formatting",
+          "description": "While `<1>{{email}}</1>` is consistent with the English, French often uses slightly different formatting for variable insertion. Consider a more natural French style.",
+          "suggestion": "Les instructions de confirmation ont été envoyées à l'adresse <1>{{email}}</1>."
         }
       ],
       "approved_at": null
@@ -145,13 +183,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation includes the English variable tag <1>{{email}}</1> which should be removed or localized. It is a mix of English and Armenian.",
-          "suggestion": "Remove the English variable tag. If localization is needed, the tag should be adjusted to be in Armenian."
+          "description": "The Armenian translation retains the <1>{{email}}</1> tag from the English content. This tag is unnecessary in the translated text and should be removed.",
+          "suggestion": "Remove the <1>{{email}}</1> tags. The email address should be simply incorporated into the sentence."
         },
         {
           "type": "incorrect_translation",
-          "description": "While generally accurate, 'Էլփոստի ակտիվացման հրահանգներն ուղարկվել են' is a bit verbose. A more concise and natural phrasing might improve clarity.",
-          "suggestion": "Consider a more concise phrasing like 'Ակտիվացման հրահանգներ ուղարկվել են Էլփոստի հասցեին' which translates to 'Activation instructions have been sent to the email address.'"
+          "description": "While technically correct, the phrase 'Էլփոստի ակտիվացման հրահանգներն' (Email activation instructions) is a bit formal and can be improved for naturalness. A more common phrasing would be 'ակտիվացման գործընթացը' (activation process) or a simpler alternative.",
+          "suggestion": "Consider alternative phrasing such as 'ակտիվացման գործընթացը' or a simpler construction to improve naturalness."
         }
       ],
       "approved_at": null
@@ -162,8 +200,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'via posta elettronica' (via email) is slightly more formal than necessary for this context. A simpler 'email' would be more natural.",
-          "suggestion": "Le istruzioni per l'attivazione sono state inviate all'indirizzo email <1>{{email}}</1>."
+          "description": "The phrase \"tramite posta elettronica\" is a bit redundant. While technically correct, it can be simplified.",
+          "suggestion": "Le istruzioni per l'attivazione sono state inviate all'indirizzo <1>{{email}}</1>."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags <1> and </1> appear consistent with the English source. No issues.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -174,13 +217,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"電子メールによるアクティベーションの指示\" is a bit literal and could be more naturally phrased. A more common and natural way to say 'email activation instructions' in Japanese would be something like \"メールでの認証手続き\".",
-          "suggestion": "メールでの認証手続きは、"
+          "description": "The phrase \"電子メールによるアクティベーションの指示\" is a bit literal and stiff. A more natural phrasing would convey the same meaning in Japanese.",
+          "suggestion": "メールのアクティベーション手順 (Mēru no akutibēshon jiyūbun) or メールで認証の手順 (Mēru de shōnin no tejun)"
         },
         {
           "type": "formatting",
-          "description": "While the <1>{{email}}</1> is maintained in the translation, using full-width characters (全角文字) is generally preferred in Japanese for consistency. Consider converting the angle brackets to fullwidth.",
-          "suggestion": "<１>{{email}}</１>"
+          "description": "The angle brackets (<1> and </1>) are retained in the Japanese translation, which is unusual. They should likely be removed or replaced with a more culturally appropriate marker.",
+          "suggestion": "Remove the angle brackets. If a marker is needed, consider using parentheses or a different convention commonly used in Japanese technical documentation."
         }
       ],
       "approved_at": null
@@ -191,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '이메일 활성화 방법이' (email activation method) is slightly awkward. A more natural translation for 'email activation instructions' would be '이메일 인증 링크' or '이메일 인증 안내'.",
-          "suggestion": "이메일 인증 링크가"
+          "description": "The English phrase \"activation instructions\" is not accurately conveyed by \"활성화 방법\". A more accurate translation would be something like \"활성화 안내\". \"방법\" implies a method, while \"안내\" implies guidance or instructions.",
+          "suggestion": "이메일 활성화 안내가 <1>{{email}}</1> 이메일 주소로 전송되었습니다."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, '전송되었습니다' (was sent) is a bit formal. A more conversational and natural translation might be '보내드렸습니다' (we sent to you) or simply '보냈습니다' (sent).",
-          "suggestion": "보내드렸습니다"
+          "type": "formatting",
+          "description": "The Korean translation retains the HTML tags <1> and </1>. These should be removed as they are unnecessary and disrupt readability.",
+          "suggestion": "이메일 활성화 안내가 {{email}} 이메일 주소로 전송되었습니다."
         }
       ],
       "approved_at": null
@@ -208,12 +251,12 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'ທີ່ຢູ່ເມວ' is redundant. 'ອີເມວ' already implies an email address.",
+          "description": "The phrase 'ທີ່ຢູ່ເມວ' is redundant and grammatically incorrect. 'ອີເມວ' already implies an email address.",
           "suggestion": "ຄຳແນະນຳກ່ຽວກັບການເປີດໃຊ້ອີເມວໄດ້ຖືກສົ່ງໄປທີ່ອີເມວ <1> {{email}} </1>."
         },
         {
           "type": "spelling",
-          "description": "The word 'ເມວ' is a typo; it should be 'ອີເມວ' throughout the sentence to ensure consistency.",
+          "description": "The word 'ເມວ' is a spelling error. It should be 'ອີເມວ'.",
           "suggestion": "ຄຳແນະນຳກ່ຽວກັບການເປີດໃຊ້ອີເມວໄດ້ຖືກສົ່ງໄປທີ່ອີເມວ <1> {{email}} </1>."
         }
       ],
@@ -225,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are present in the Latvian translation, mirroring the English, but might not be necessary or stylistically appropriate in Latvian. While technically correct for preserving formatting tags, it's generally better to remove them unless there's a specific reason to keep them.",
-          "suggestion": "Consider removing the `<1>` and `</1>` tags if they aren't crucial for preserving specific formatting. If they are, confirm with stakeholders if their inclusion is desirable in Latvian."
+          "description": "The Latvian translation retains the <1>{{email}}</1> tags, which should ideally be removed or adjusted to match the Latvian formatting conventions. While technically correct, it's visually awkward and unnecessary.",
+          "suggestion": "Remove the <1>{{email}}</1> tags or replace them with a more standard formatting approach for Latvian (e.g., bolding, italics, or no special formatting)."
         }
       ],
       "approved_at": null
@@ -243,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Instrukcje dotyczące aktywacji adresu e-mail zostały wysłane na adres <1>{{email}}</1>.' is a literal translation and sounds somewhat unnatural in Polish. A more natural phrasing would be 'Instrukcje aktywacji zostały wysłane na adres e-mail <1>{{email}}</1>.' or 'Wysłano instrukcje aktywacji na adres e-mail <1>{{email}}</1>.'",
-          "suggestion": "Wysłano instrukcje aktywacji na adres e-mail <1>{{email}}</1>."
+          "description": "The translation 'Instrukcje dotyczące aktywacji adresu e-mail zostały wysłane na adres' is a bit verbose and could be more concise. A more natural phrasing would be 'Instrukcje aktywacji wysłano na adres'.",
+          "suggestion": "Instrukcje aktywacji wysłano na adres"
         }
       ],
       "approved_at": null
@@ -261,8 +304,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"The email activation instructions\" is better translated as \"Instruções para ativar o e-mail\" or \"Instruções de ativação de e-mail\" to sound more natural in Portuguese (Brazil). While the current translation isn't wrong, it's not the most idiomatic.",
-          "suggestion": "Instruções para ativar o e-mail foram enviadas para o endereço de e-mail <1>{{email}}</1>."
+          "description": "The translation \"As instruções de ativação de e-mail foram enviadas para o endereço de e-mail\" is slightly awkward. A more natural phrasing would be \"As instruções de ativação foram enviadas para o endereço de e-mail\".  The repetition of 'e-mail' is not as common in Brazilian Portuguese.",
+          "suggestion": "As instruções de ativação foram enviadas para o endereço de e-mail <1>{{email}}</1>."
         }
       ],
       "approved_at": null
@@ -273,13 +316,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Instrucțiunile de activare a adresei e-mail au fost trimise' is a bit literal and can be improved for natural Romanian flow. A more natural phrasing would be 'Instrucțiunile de activare au fost trimise'.",
+          "description": "The translation 'Instrucțiunile de activare a adresei e-mail' is a bit too literal. A more natural phrasing would be 'Instrucțiunile de activare au fost trimise'.",
           "suggestion": "Instrucțiunile de activare au fost trimise"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'adresei e-mail' is redundant and grammatically a little awkward. It's implied that the instructions are for an email address. Removing it makes the sentence more concise and natural.",
-          "suggestion": "Instrucțiunile de activare au fost trimise la <1>{{email}}</1>."
+          "description": "While technically correct, the Romanian phrasing could be improved for clarity and flow. The original English emphasizes the *email* being activated. The current translation puts the emphasis on the 'address'.",
+          "suggestion": "Instrucțiunile de activare a contului au fost trimise"
         }
       ],
       "approved_at": null
@@ -287,18 +330,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Инструкции по активации электронной почты\" is a bit literal and awkward. A more natural translation would be something along the lines of \"Инструкции для активации учетной записи\" or \"Инструкции по подтверждению адреса электронной почты\".",
-          "suggestion": "Инструкции для активации учетной записи"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The direct translation of 'email activation instructions' sounds stiff in Russian. While technically correct, it doesn't flow as naturally as a more idiomatic expression.",
-          "suggestion": "Инструкции по подтверждению адреса электронной почты"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -307,13 +339,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"සක්‍රියන උපදෙස්\" (Sakriyana Upades) is not the most natural translation of \"email activation instructions.\" A more common and understandable translation would be something along the lines of \"වි-තැපැල් ක්‍රියාත්මක කිරීමේ උපදෙස්\" (Vi-tapel Kriyakarmakaren Upades) or \"වි-තැපැල් ක්‍රියාත්මක උපදෙස්\" (Vi-tapel Kriyakarmaka Upades).",
-          "suggestion": "වි-තැපැල් ක්‍රියාත්මක කිරීමේ උපදෙස්"
+          "description": "The Sinhala translation 'සක්‍රියන උපදෙස්' is not the standard way to say 'email activation instructions'. It's a direct transliteration and doesn't convey the meaning clearly. A more natural phrasing would be something like 'විද්යුත් ලිපිනය ක්‍රියාත්මක කිරීමේ උපදෙස්' (vidyut lipinaya kriyarakthama ekama upades).",
+          "suggestion": "විද්යුත් ලිපිනය ක්‍රියාත්මක කිරීමේ උපදෙස්"
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, the sentence structure could be improved for better flow in Sinhala.  The phrase \"යවා ඇත\" (yava atha) is a bit formal and direct in this context.",
-          "suggestion": "වි-තැපැල් ලිපිනයට යවා ඇත, යනුවෙනි."
+          "type": "spelling",
+          "description": "The term 'වි-තැපැල්' should be 'විද්යුත් ලිපිනය'. The prefix 'වි-' is generally used for western concepts, and 'විද්යුත් ලිපිනය' is the standard term for 'email address'.",
+          "suggestion": "විද්යුත් ලිපිනය"
+        },
+        {
+          "type": "formatting",
+          "description": "The format tags `<1>{{email}}</1>` are not standard Sinhala formatting.  Ideally, the HTML tags should be removed or replaced with a more appropriate format if needed for rendering.",
+          "suggestion": "Remove or replace HTML tags as needed for rendering."
         }
       ],
       "approved_at": null
@@ -324,13 +361,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pokyny na aktiváciu e-mailu boli odoslané' is not the most natural way to say 'The email activation instructions have been sent'. A better translation would be 'Instrukcie na aktiváciu e-mailu boli odoslané' or 'Návod na aktiváciu e-mailu bol odoslaný'.",
-          "suggestion": "Instrukcie na aktiváciu e-mailu boli odoslané"
+          "description": "The translation of \"email activation instructions\" is not ideal. \"Pokyny na aktiváciu e-mailu\" is too literal and sounds unnatural in Slovak. A better translation would be something like \"Návod na aktiváciu účtu prostredníctvom e-mailu\" or \"Instrukcie na aktiváciu účtu e-mailom\".",
+          "suggestion": "Návod na aktiváciu účtu prostredníctvom e-mailu"
         },
         {
-          "type": "spelling",
-          "description": "While technically correct, using 'e-mail' is less common in Slovak. Using 'email' would be more consistent with the English content and current usage.",
-          "suggestion": "email"
+          "type": "formatting",
+          "description": "The formatting tags <1>{{email}}</1> are present in the Slovak translation, which is consistent with the English source. However, consider whether these are necessary for the target platform or system where this text will be used.",
+          "suggestion": "Ensure the formatting tags are appropriate for the context."
         }
       ],
       "approved_at": null
@@ -341,13 +378,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'email activation instructions' is not accurately translated. 'Navodila za aktivacijo e-mail naslova' translates more literally to 'Instructions for activating the email address' rather than 'instructions for email activation'.",
-          "suggestion": "Navodila za aktivacijo preko e-pošte so bila poslana na <1>{{email}}</1> email naslov."
+          "description": "The translation 'Navodila za aktivacijo e-mail naslova so bila poslana' is a bit clunky. A more natural Slovenian phrasing would be something like 'Poslana vam je bila potrditev/navodila za aktivacijo...'.",
+          "suggestion": "Poslana vam je bila potrditev/navodila za aktivacijo..."
         },
         {
           "type": "formatting",
-          "description": "The original English has `<1>{{email}}</1>`. The Slovenian translation mirrors this structure but 'email' is written in lowercase in the English. This inconsistency should be addressed to maintain formatting consistency.",
-          "suggestion": "Navodila za aktivacijo e-mail naslova so bila poslana na <1>{{email}}</1> e-poštni naslov."
+          "description": "The Slovenian translation does not consistently use capitalization after the '<1>{{email}}</1> tag. It should match the English, so after the tag, the beginning of the sentence should be capitalized.",
+          "suggestion": "Poslana vam je bila potrditev/navodila za aktivacijo na <1>{{email}}</1> Email naslov."
         }
       ],
       "approved_at": null
@@ -358,13 +395,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'postulate' (постулате) is not the correct translation for 'sent'. It implies a proposition or assumption rather than the action of sending.",
+          "description": "The word 'postulate' is not the correct translation of 'sent'. It implies a proposition or assumption, not an action of sending.",
           "suggestion": "Инструкције о емаил активацији су послате на <1>{{email}}</1> емаил адресу."
         },
         {
-          "type": "formatting",
-          "description": "The Cyrillic script is used inconsistently with Latin words. While 'email' is Latin, the entire phrase should be consistently adapted to Serbian, or Latin terms should be consistently transliterated.",
-          "suggestion": "Инструкције о емаил активацији су послате на <1>{{email}}</1> емаил адресу."
+          "type": "spelling",
+          "description": "While 'емаил' is commonly used, it's a transliteration of 'email'. It would be more accurate to use the Cyrillic equivalent.",
+          "suggestion": "Инструкције о емаил активацији су послате на <1>{{email}}</1> имејл адресу."
         }
       ],
       "approved_at": null
@@ -375,8 +412,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'postulate' is incorrect in this context. It means 'to propose as a hypothesis'. The intended meaning is 'sent'.",
-          "suggestion": "Instrukcije o email aktivaciji su poslate na <1>{{email}}</1> email adresu."
+          "description": "The word 'postulate' is incorrect in this context. It doesn't convey the meaning of 'sent'.",
+          "suggestion": "Instrukcije o email aktivaciji su poslati na <1>{{email}}</1> email adresu."
         }
       ],
       "approved_at": null
@@ -384,13 +421,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The email address format in the Turkish translation is not consistent with the English. Both use the HTML tag `<1>{{email}}</1>`, but the consistency should be maintained.",
-          "suggestion": "Ensure the HTML tag `<1>{{email}}</1>` is consistently used in both the English and Turkish versions."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -399,13 +430,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Інструкції з активації електронної пошти надіслано на адресу <1>{{email}}</1>.\" is not the most natural or accurate translation of 'The email activation instructions have been sent to the <1>{{email}}</1> email address.'. A more accurate and natural translation would be something along the lines of 'Інструкції для активації пошти надіслано на адресу <1>{{email}}</1>.' or 'Інструкції з підтвердження електронної пошти надіслано на адресу <1>{{email}}</1>.'",
-          "suggestion": "Інструкції для активації пошти надіслано на адресу <1>{{email}}</1>."
+          "description": "The translation 'Інструкції з активації електронної пошти надіслано на адресу <1>{{email}}</1>.' is not the most natural or accurate translation of 'The email activation instructions have been sent to the <1>{{email}}</1> email address.'. A better translation would focus on conveying that instructions were sent *regarding* activation.",
+          "suggestion": "Інструкції з активації було надіслано на адресу <1>{{email}}</1>."
         },
         {
-          "type": "formatting",
-          "description": "The format tags <1>{{email}}</1> are preserved correctly in the Ukrainian translation, which is appropriate.",
-          "suggestion": null
+          "type": "grammar",
+          "description": "The original translation uses the passive voice ('надіслано'), which, while grammatically correct, can sound less direct in Ukrainian. Using an active voice would often be preferred.",
+          "suggestion": "Інструкції з активації надіслано на адресу <1>{{email}}</1>."
         }
       ],
       "approved_at": null
@@ -419,13 +450,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '邮件激活指示已发送至<1>{{email}}</1>邮件地址' is technically correct but sounds slightly awkward. A more natural phrasing would be '我们已将激活邮件发送至<1>{{email}}</1>邮件地址' or '激活邮件已发送至<1>{{email}}</1>邮件地址。'",
-          "suggestion": "激活邮件已发送至<1>{{email}}</1>邮件地址。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

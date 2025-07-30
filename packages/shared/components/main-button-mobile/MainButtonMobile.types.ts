@@ -92,6 +92,8 @@ export type ActionOption = {
 };
 
 export type MainButtonMobileProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<MainButtonMobileRef>;
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Drop down items options */
@@ -133,7 +135,7 @@ export type MainButtonMobileProps = {
   /** Custom styles for the dropdown */
   dropdownStyle?: React.CSSProperties;
   /** Main button ref, used for guidance */
-  mainButtonRef?: React.RefObject<HTMLDivElement>;
+  mainButtonRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export type SubmenuItemProps = {
@@ -157,5 +159,5 @@ export interface MainButtonMobileRef {
   /** Checks if the given target element is contained within the main button component */
   contains: (target: HTMLElement) => boolean;
   /** Returns the ref object pointing to the main button DOM element */
-  getButtonElement: () => React.MutableRefObject<HTMLDivElement | null>;
+  getButtonElement: () => React.RefObject<HTMLDivElement | null>;
 }

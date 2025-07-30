@@ -3,7 +3,7 @@
   "content": "documents",
   "content_en_sha1_hash": "ec96667ac8c50460893f4a00d5fdb401283145dd",
   "created_at": "2025-05-19T21:30:57.115Z",
-  "updated_at": "2025-06-18T07:34:15.303Z",
+  "updated_at": "2025-06-18T17:11:42.545Z",
   "comment": {
     "text": "This translation key represents the English content for a file type label used to display \"documents\" in various UI elements, such as filters and dropdown menus. Its purpose is to provide clarity and consistency across different languages when selecting files of this type. It appears in the Select File Dialog component, specifically in the filter options related to document types.",
     "is_auto": true,
@@ -129,7 +129,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation 'ficheiros' is a valid translation for 'files', but 'documents' has a more specific meaning. A better translation would be 'documentos'. 'Ficheiros' is a more general term for files.",
+          "suggestion": "documentos"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {

@@ -3,7 +3,7 @@
   "content": "Enter URL",
   "content_en_sha1_hash": "ae5afe234b1427d8cf89877643fbda2757a1d47d",
   "created_at": "2025-05-19T21:30:49.704Z",
-  "updated_at": "2025-05-21T01:15:22.990Z",
+  "updated_at": "2025-05-24T02:29:13.798Z",
   "comment": {
     "text": "EnterUrl is used as a placeholder text in a labeled input field to guide users when entering a URL. It appears on the \"PayloadUrl\" label in a dialog box and will be translated accordingly.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term 'URL' is an abbreviation and should be written as 'URL', not 'URL адрес'. While the term 'адрес' is technically correct, it's redundant and less common in Bulgarian when referring to URLs.",
-          "suggestion": "Въведи URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -63,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Εισαγωγή URL\" is technically correct, it's a bit clunky. A more natural and user-friendly translation of 'Enter URL' in Greek would be something like 'Εισάγετε URL' or 'Δώστε URL'. 'Εισαγωγή' implies an import or insertion, which isn't the intended meaning here.",
+          "suggestion": "Εισάγετε URL"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ievadiet vietrādi URL\" is not the most natural or accurate translation of \"Enter URL\". \"Vietrādi\" means \"direct\" or \"straight,\" which isn't the intended meaning in this context. The phrase implies a one-way, unchanging URL, which isn't what's meant when asking a user to enter a URL.",
-          "suggestion": "Ievadi URL"
+          "description": "The translation \"Ievadiet vietrādi URL\" is not the most natural or accurate translation of \"Enter URL\". While 'ievadiet' means 'enter', 'vietrādi' is an uncommon and not entirely appropriate word in this context. It implies a reciprocal URL.",
+          "suggestion": "Ievadiet URL"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Introducere adresă URL' is understandable, a more natural and common translation for 'Enter URL' in Romanian would be 'Introduce URL' or 'Adaugă URL'. 'Introducere' implies a more formal or lengthy introduction.",
+          "description": "While \"Introducere adresă URL\" is technically correct, a more natural and idiomatic translation of \"Enter URL\" in Romanian would be \"Introduce URL\" or \"Adaugă URL\". \"Introducere\" implies a more formal introduction, whereas 'Enter' in this context is a simple input field instruction.",
           "suggestion": "Introduce URL"
         }
       ],
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඒ.ස.නි. යොදන්න\" is not an accurate translation of \"Enter URL\". It literally translates to \"ASNI enter\" or \"ASNI add\". It lacks the intended meaning of providing a URL.",
-          "suggestion": "A more accurate translation would be something like \"URL ඇතුළත් කරන්න\" (URL athula kathakanna) or \"URL යොදා ගන්න\" (URL yoda ganne)."
+          "description": "The Sinhala translation 'ඒ.ස.නි. යොදන්න' doesn't accurately convey the meaning of 'Enter URL'. 'ඒ.ස.නි.' is an abbreviation of 'Address System' which is not the common understanding of 'URL' in this context.  It's too technical and doesn't match the expected user experience.",
+          "suggestion": "A more appropriate translation might be 'URL ඇතුළත් කරන්න' (URL athulath karanna) which directly translates to 'Enter URL'."
         }
       ],
       "approved_at": null
@@ -204,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesi URL' is a literal translation of 'Enter URL', but it doesn't flow naturally in Serbian. A more idiomatic translation would be 'Uneti URL' or 'Unesite URL'.",
+          "description": "The translation 'Unesi URL' is not the most natural or accurate translation of 'Enter URL'. While 'unesi' means 'enter', a more common and natural phrasing would be 'Uneti URL' (imperative form of 'uneti').",
           "suggestion": "Uneti URL"
         }
       ],
@@ -216,7 +216,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"URL gir\" is a literal translation but sounds unnatural in Turkish. A more natural phrasing would be \"URL'yi girin\" or \"URL adresini girin\". \"gir\" is acceptable but the addition of \"-yi\" or \"adresini\" creates better flow.",
+          "description": "The translation \"URL gir\" is too literal and doesn't flow naturally in Turkish. While \"gir\" means \"enter,\" the standard phrasing for entering a URL in Turkish would be \"URL'yi girin\" or \"URL adresini girin\".",
           "suggestion": "URL'yi girin"
         }
       ],

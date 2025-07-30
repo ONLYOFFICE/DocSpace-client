@@ -3,7 +3,7 @@
   "content": "Hide advanced settings",
   "content_en_sha1_hash": "266f39982036555762f7900f5226f77e12f74057",
   "created_at": "2025-05-19T21:30:50.086Z",
-  "updated_at": "2025-05-21T02:12:36.116Z",
+  "updated_at": "2025-05-24T03:25:38.352Z",
   "comment": {
     "text": "The \"HideAdditionalParameters\" translation key is used to display a button label that hides advanced settings when clicked. This label appears in buttons on certain pages of the portal settings, indicating an action to reveal or hide extra parameters.",
     "is_auto": true,
@@ -159,7 +159,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word 'සැකසුම්' (sakasuṁ) is a transliteration of 'settings'. While understandable, the more natural and commonly used word in this context would be 'මාන('',mān').",
+          "suggestion": "වැඩිදුර මාන සඟවන්න"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, 'සඟවන්න' (sagavannā) has a slightly formal tone. For a user interface, a more approachable verb might be preferable.",
+          "suggestion": "වැඩිදුර මාන වසන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

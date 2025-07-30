@@ -3,7 +3,7 @@
   "content": "Visit this space after creating",
   "content_en_sha1_hash": "54bd89fcd2d756ded98952e43b947df87c781040",
   "created_at": "2025-05-19T21:30:57.483Z",
-  "updated_at": "2025-05-20T09:47:52.177Z",
+  "updated_at": "2025-06-30T12:20:31.761Z",
   "comment": {
     "text": "This translation key is used for the label on a checkbox that prompts users to \"Visit Space\" after creating an element. The content will appear in a Create Portal Dialog.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/CreatePortalDialog/index.tsx",
-      "line_number": 210,
-      "context": "</div>\n </div>\n <div>\n <Checkbox\n className=\"create-portal-checkbox\"\n label={t(\"VisitSpace\")}\n onChange={() => setVisit((visitPrev) => !visitPrev)}\n isChecked={visit}\n />\n \n <Checkbox",
+      "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
+      "line_number": 221,
+      "context": "</div>\n </div>\n <div>\n <Checkbox\n className=\"create-portal-checkbox\"\n label={t(\"VisitSpace\")}\n onChange={() => setVisit((v) => !v)}\n isChecked={visit}\n />\n \n <Checkbox",
       "module": "/packages/management"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yaradıldıqdan sonra bu sahəyə baş çəkin' while understandable, doesn't fully capture the nuance of 'Visit this space after creating'. 'Baş çəkin' implies a brief visit or drop-in, whereas the English phrase could suggest a more thorough exploration.",
+          "suggestion": "Consider alternatives like 'Yaradıldıqdan sonra bu sahəyə daxil olun' (Enter this space after creating) or 'Yaradıldıqdan sonra bu sahəni araşdırın' (Explore this space after creating) depending on the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +57,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Space' is an English loanword and might not be the best fit in a German context. While commonly understood, a more German equivalent would improve clarity and flow.",
+          "suggestion": "Besuchen Sie diesen Bereich nach der Erstellung"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Επισκεφθείτε αυτόν τον χώρο μετά τη δημιουργία' is technically correct but sounds slightly awkward in Greek. A more natural phrasing would be 'Επισκεφτείτε αυτόν τον χώρο αφού δημιουργηθεί' or 'Επισκεφθείτε αυτόν τον χώρο μετά τη δημιουργία του'. The word 'μετά' can sound a bit formal in this context.",
+          "suggestion": "Επισκεφτείτε αυτόν τον χώρο αφού δημιουργηθεί"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,13 +93,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Visiter cet espace après la création' is too literal and doesn't sound natural in French. 'La création' refers to the act of creation, not the created object. A more natural phrasing would focus on the action of creating.",
+          "suggestion": "Visiter cet espace une fois créé"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ստեղծելուց հետո այցելեք այս տարածքը' is a literal translation but may not convey the intended meaning in a natural-sounding way in Armenian. 'Visit this space after creating' implies a specific action or process. A more natural Armenian phrasing might focus on completing the creation process before visiting.",
+          "suggestion": "Consider alternatives like 'Արագելուց հետո այցելեք այս տարածքը' (After completing, visit this space) or 'Այցելեք այս տարածքը, երբ ավարտվի ստեղծումը' (Visit this space when the creation is complete)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,13 +123,25 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '作成後、このスペースへ移動してください' while technically correct, is a bit formal for the original phrase \"Visit this space after creating\". It uses '移動してください' which implies a directed movement. A more natural and conversational translation would be better.",
+          "suggestion": "作成後、このスペースをご覧ください"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '생성 후 이 공간 방문' while understandable, is a bit literal and doesn't flow naturally in Korean. It implies the user *must* visit after creation, which might not be the intended meaning.",
+          "suggestion": "Consider a more natural phrasing like '생성 후 공간을 방문하세요' (Create, then visit the space) or '생성 후 공간으로 이동' (Move to the space after creation)."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -153,7 +195,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'මෙම ස්ථානය නිර්මාණය කිරීමෙන් පසු సందర్శించండి.' doesn't perfectly capture the nuance of 'Visit this space after creating'. 'නිර්මාණය කිරීමෙන් පසු' literally translates to 'after creating,' which is technically correct but might sound slightly awkward in Sinhala. A more natural phrasing would better convey the intent.",
+          "suggestion": "Consider revising to something like 'මෙම ස්ථානය නිර්මාණය කිරීමෙන් අනතුරුව సందర్శించండి' (after the creation, visit) or 'නිර්මාණය කිරීමෙන් පසුව මෙම ස්ථානයට ಭೇදුకోండి' (after creating, visit this place)."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'සందర్శించండి' (sandars̄ināci) and the preceding word 'නිර්මාණය කිරීමෙන් පසු' are separated by a space.  Sinhala typically uses a connector particle for consecutive verbs. While not a *hard* error, it impacts readability.",
+          "suggestion": "Combine the words with a connecting particle. For example, 'මෙම ස්ථානය නිර්මාණය කිරීමෙන් පසු సందర్శించండి' could be improved to 'මෙම ස්ථානය නිර්මාණය කිරීමෙන් පසුපස సందర్శించండి'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,7 +254,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"协作空间创建后进行访问\" doesn't accurately convey the meaning of \"Visit this space after creating\". '协作空间' (Collaboration Space) is too specific. It implies a collaboration space, while the original just means 'this space'. The translation is a bit too literal and doesn't flow naturally.",
+          "suggestion": "创建完成后访问此空间"
+        }
+      ],
       "approved_at": null
     }
   }

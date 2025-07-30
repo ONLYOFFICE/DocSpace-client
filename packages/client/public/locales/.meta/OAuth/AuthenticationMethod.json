@@ -3,7 +3,7 @@
   "content": "Authentication method",
   "content_en_sha1_hash": "4a2641463bda57c970dcaba44cead46536e41155",
   "created_at": "2025-05-19T21:30:53.820Z",
-  "updated_at": "2025-05-21T07:27:14.655Z",
+  "updated_at": "2025-06-30T12:20:31.467Z",
   "comment": {
     "text": "This translation key is used to display the label for an input field that allows users to select or enter their authentication method. It appears in a form element and helps users understand what value they are expected to provide.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 190,
+      "line_number": 191,
       "context": "value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}\n />\n <InputGroup\n label={t(\"AuthenticationMethod\")}\n name=\"auth_method\"\n placeholder={t(\"EnterURL\")}\n value={websiteUrlValue}\n error=\"\"\n onChange={() => {}}",
       "module": "/packages/client"
     }
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Avtorizasiya üsulu' is technically correct, 'Authentication method' is better translated as 'Təsdiq üsulu' in most technical contexts in Azerbaijani. 'Avtorizasiya' leans more towards authorization, a subsequent step after authentication.",
+          "description": "While 'Avtorizasiya üsulu' is understandable, 'Authentication method' more accurately translates to 'Təsdiq üsulu' or 'Müəyyən etmə üsulu'. 'Avtorizasiya' implies authorization, not authentication.",
           "suggestion": "Təsdiq üsulu"
         }
       ],
@@ -114,13 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ວິທີການຮັບການຮັບຮອງຕົວຕົນ\" is a very literal translation and doesn't flow naturally. While technically correct, it's overly formal and complex for the term 'Authentication method'.",
-          "suggestion": "ວິທີການຢັ້ງຢືນຕົວຕົນ"
-        },
-        {
-          "type": "spelling",
-          "description": "While likely a transcription error, 'ຕົວຕົນ' is often written as 'ໂຕຕົນ' in Lao.",
-          "suggestion": "ຕົວຕົນ is technically correct, but consider 'ໂຕຕົນ' for better readability, though 'ຕົວຕົນ' is becoming increasingly common."
+          "description": "The Lao translation \"ວິທີການຮັບການຮັບຮອງຕົວຕົນ\" is overly literal and not the most natural way to express \"Authentication method\" in Lao. It translates to something like \"method of receiving identity confirmation,\" which is cumbersome.",
+          "suggestion": "ວິທີການຢັ້ງຢືນຕົວຕົນ (vithikan yangyeun tua ton) - This translates to \"authentication method\" or \"identity verification method\" and is a more idiomatic and accurate representation."
         }
       ],
       "approved_at": null
@@ -173,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පරිහරණ ක්‍රමය\" (pariharan krēmya) translates to 'handling method' or 'resolution method', not 'authentication method'. It doesn't accurately convey the intended meaning.",
-          "suggestion": "A more accurate translation would be \"අauthentication ක්‍රමය\" (authentication krēmya) or \"අauthentication పద్ధතිය\" (authentication paddhati) or \"අauthentication පරිදි\" (authentication pərīdi)."
+          "description": "The Sinhala translation \"පරිහරණ ක්‍රමය\" (parihahana kramaya) translates to \"examination method\" or \"testing method\", not \"authentication method\". It doesn't accurately convey the meaning of the English phrase.",
+          "suggestion": "A more accurate translation for \"authentication method\" could be \"අනຸමැතිය ක්‍රමය\" (anumathiya kramaya) which means \"authorization method\" or \"authentication method\" or \" xác thực phương pháp\"."
         }
       ],
       "approved_at": null
@@ -185,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Spôsob autorizácie\" is a valid Slovak phrase, \"Authentication method\" more accurately translates to \"Metóda autentifikácie\". \"Autorizácia\" refers to authorization, not authentication.",
+          "description": "While 'Spôsob autorizácie' is understandable, 'Authentication method' more accurately translates to 'Metóda autentifikácie'. 'Autorizácia' refers to authorization, which is a subsequent step after authentication.",
           "suggestion": "Metóda autentifikácie"
         }
       ],

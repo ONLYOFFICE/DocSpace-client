@@ -3,7 +3,7 @@
   "content": "Authorization temporarily blocked",
   "content_en_sha1_hash": "4ffa7c03322442ac3b0e9cc4e8affdbceccb4a0d",
   "created_at": "2025-05-19T21:30:57.291Z",
-  "updated_at": "2025-05-28T09:30:02.895Z",
+  "updated_at": "2025-05-26T07:57:32.881Z",
   "comment": {
     "text": "This translation key is used to display a message when a login attempt is blocked due to excessive attempts from the same location. The message indicates that authorization has been temporarily blocked and appears in an error dialog or notification. It alerts users that their login credentials are not secure and may need to be reviewed.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Spanish translation 'Autorización está temporalmente bloqueada' uses the verb 'estar' which implies a temporary state. While technically correct, 'Autorización ha sido bloqueada temporalmente' (Authorization has been temporarily blocked) would be more natural and convey the intended meaning more accurately.",
+          "suggestion": "Autorización ha sido bloqueada temporalmente."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -93,7 +99,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '承認は一時的にブロックされました。' is technically correct but sounds overly formal and stiff for a user-facing error message. '承認' (shōnin) directly translates to 'authorization' but might not resonate well with users in this context. A more natural phrasing would convey the blocking of access.",
+          "suggestion": "ログインは一時的に制限されました。"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the full stop at the end feels abrupt in Japanese.  A softer closing particle could improve the overall tone.",
+          "suggestion": "ログインは一時的に制限されました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,7 +170,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"බලයදීම තාවකාලිකව අවහිර කර ඇත.\" literally translates to \"Forcefully blocked temporarily.\" This doesn't accurately convey the meaning of 'Authorization temporarily blocked'. A more accurate translation would focus on the restriction of access or authentication.",
+          "suggestion": "කාන්සුවේ අවසර තාවකාලිකව අවහිර කර ඇත. (Kānsuwe avasara tāvakālikawa avahiraka karata esta.) - 'Authorization temporarily blocked'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +194,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Овлашц́ење' is misspelled. The correct spelling is 'Овлашћење'.",
+          "suggestion": "Овлашћење"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Ovlašćenje\" is misspelled. The correct spelling is \"Ovlašćenje\".",
+          "suggestion": "Ovlašćenje"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +230,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Việc ủy quyền tạm thời bị chặn' is a literal translation that sounds slightly formal and unnatural in Vietnamese for a user-facing message like this. It doesn't convey the 'temporary blocked' feeling as effectively as alternatives.",
+          "suggestion": "Tài khoản của bạn đã bị khóa tạm thời"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

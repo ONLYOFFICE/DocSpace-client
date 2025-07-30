@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2025-07-02T07:49:19.774Z",
+  "updated_at": "2025-06-02T10:20:51.223Z",
   "comment": {
     "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 509,
+      "line_number": 502,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_editor\",\n key: \"7-1-4\",\n icon: \"\",\n link: \"editor\",\n tKey: \"Common:Editor\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_viewer\",\n key: \"7-1-5\",\n icon: \"\",",
       "module": "/packages/client"
     },
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 162,
+      "line_number": 161,
       "context": "return [\n {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 162,
+      "line_number": 161,
       "context": "return [\n {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
       "module": "/packages/shared"
     },
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Πρόγραμμα επεξεργασίας\" translates to \"Editing Program\" which is more specific than the English term \"Editor\". While functionally related, it doesn't directly convey the same meaning. A closer translation might be \"Επεξεργαστής\" or \"Επεξεργασία\".",
-          "suggestion": "Επεξεργαστής"
+          "description": "The Greek translation \"Πρόγραμμα επεξεργασίας\" translates to \"Editing Program\" which is a more descriptive term than the English \"Editor\". While not strictly incorrect, it loses the conciseness of the original term.",
+          "suggestion": "Consider a shorter, more direct translation like \"Επεξεργαστής\" (Epexergastis) which more closely matches the meaning of 'Editor'."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Editori' is not the most accurate or common translation for 'Editor'. While 'Editori' is grammatically correct as a transliteration, it doesn't convey the meaning as effectively as other options.",
-          "suggestion": "Consider using 'Toimittaja' (for journalistic editor) or 'Muokkaaja' (for general editor/modifier) depending on the context.  'Editori' sounds like a transliteration rather than a natural Finnish word."
+          "description": "The Finnish translation \"Editori\" is not the standard or most accurate translation of \"Editor.\" While it's a possible derivation, \"Toimittaja\" or \"Edistaja\" would be more appropriate depending on the context. 'Editori' sounds like a person's name rather than a function or role.",
+          "suggestion": "Consider using 'Toimittaja' (for news editor) or 'Edistaja' (for a more general editor).  A more context-specific translation might be best."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"エディタ\" (Edita) is a direct transliteration of \"Editor\" and doesn't convey the full meaning in Japanese. While understandable, a more natural and commonly used term would be something like \"編集者\" (henshasha) or \"編集機能\" (henshuu kinou) depending on the context.",
-          "suggestion": "Consider \"編集者\" (henshasha) for a person editor or \"編集機能\" (henshuu kinou) for an editor feature. Context is needed for the optimal translation."
+          "description": "The Japanese translation 'エディタ' is a transliteration of 'Editor' and doesn't convey the full meaning in some contexts. A more appropriate translation might depend on the specific usage of 'Editor'.",
+          "suggestion": "Consider alternatives like \"編集者\" (henshasha - editor/author) or \"編集機能\" (henshū kinō - editing function) depending on the context."
         }
       ],
       "approved_at": null
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"可编辑\" (ke bianji) translates to \"editable\" or \"can be edited\", not simply \"Editor\". It doesn't convey the meaning of a person or software tool that performs editing.",
-          "suggestion": "A more accurate translation might be \"编辑\" (bianji) or \"编辑器\" (bianji qi)."
+          "description": "'可编辑' (Ke Bijiao) translates to 'Editable' or 'Modifiable,' not simply 'Editor.' It doesn't convey the same meaning as the English term 'Editor'.",
+          "suggestion": "Consider a more accurate translation like '编辑器' (Bianjiqi) or '编辑' depending on the context."
         }
       ],
       "approved_at": null

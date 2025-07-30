@@ -3,7 +3,7 @@
   "content": "Invitations were successfully sent",
   "content_en_sha1_hash": "29f78d60785168c3dc83465e7f7ed83d3a2c898a",
   "created_at": "2025-05-19T21:30:53.532Z",
-  "updated_at": "2025-06-18T07:34:14.961Z",
+  "updated_at": "2025-06-18T17:11:42.397Z",
   "comment": {
     "text": "This translation key is used to display a success message when multiple invitations are resent successfully. It is typically displayed in a toast notification or a confirmation dialog after clicking a \"Resend Invitations\" button on the Info Panel for a room.",
     "is_auto": true,

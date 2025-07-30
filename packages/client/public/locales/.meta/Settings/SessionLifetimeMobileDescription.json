@@ -3,7 +3,7 @@
   "content": "Session Lifetime allows to set time (in minutes) before the {{productName}} users will need to enter the space credentials again in order to access the space.",
   "content_en_sha1_hash": "044392ac82e8db7a4c5bc674f8ca2ef7321edd16",
   "created_at": "2025-05-19T21:30:52.644Z",
-  "updated_at": "2025-05-28T09:30:02.785Z",
+  "updated_at": "2025-06-08T12:02:32.828Z",
   "comment": {
     "text": "\"Defines the session lifetime duration message to be displayed to mobile users, explaining how long their access credentials are valid before needing re-entry.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 131,
+      "line_number": 132,
       "context": "url=\"/portal-settings/security/access-portal/admin-message\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"SessionLifetime\")}\n subtitle={t(\"SessionLifetimeMobileDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n url=\"/portal-settings/security/access-portal/lifetime\"\n onClickLink={onClickLink}\n />",
       "module": "/packages/client"
     }
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'enter the space credentials again' is not accurately reflected in the Arabic translation. 'Credentials' implies username and password, but the Arabic uses the word 'الرموز' (al-rumooz) which translates to 'symbols' or 'codes.' This is ambiguous and less precise.",
-          "suggestion": "يسمح لك خيار تحديد مدة الجلسة لتحديد الوقت (بالدقيقة) قبل أن يحتاج مستخدمي {{productName}} لإدخال اسم المستخدم وكلمة المرور مجدداً من أجل الدخول للمساحة."
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, the phrase 'من أجل الدخول للمساحة' could be slightly improved for flow. It's grammatically correct, but could be more elegant.",
-          "suggestion": "يسمح لك خيار تحديد مدة الجلسة لتحديد الوقت (بالدقيقة) قبل أن يحتاج مستخدمي {{productName}} لإدخال اسم المستخدم وكلمة المرور مجدداً للدخول إلى المساحة."
+          "description": "The phrase \"إدخال الرموز مجدداً\" (entering the credentials again) is not the most natural or accurate translation of \"enter the space credentials again\". A more suitable translation would be something along the lines of \"إعادة إدخال بيانات الدخول للمساحة\" (re-entering the space login data).",
+          "suggestion": "يسمح لك خيار تحديد مدة الجلسة لتحديد الوقت (بالدقيقة) قبل أن يحتاج مستخدمي {{productName}} لإعادة إدخال بيانات الدخول للمساحة."
         }
       ],
       "approved_at": null
@@ -47,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"domen məlumatlarını\" (domain information) doesn't accurately convey \"space credentials.\" Credentials typically encompass username and password, not just domain information.",
-          "suggestion": "Sessiya Müddəti sizə {{productName}} istifadəçilərinin sahəyə daxil olmaq üçün təcrübə məlumatlarını (və ya hesab məlumatlarını) yenidən daxil etməli olduğu vaxtın miqdarını (dəqiqələrlə) təyin etməyə imkan verir."
-        },
-        {
-          "type": "formatting",
-          "description": "The English version uses double curly braces '{{productName}}' while the Azerbaijani translation uses single curly braces. Although this may be a platform/rendering issue, consistency is preferred.",
-          "suggestion": "Ensure the Azerbaijani version uses double curly braces '{{productName}}' to match the English source."
+          "description": "The translation 'domen məlumatlarını' is a literal translation of 'space credentials'. A more natural and accurate phrasing in Azerbaijani would be 'sahə giriş məlumatları' or 'sahə daxilolma məlumatları'.",
+          "suggestion": "Sessiya Müddəti sizə {{productName}} istifadəçilərinin sahəyə daxil olmaq üçün sahə giriş məlumatlarını yenidən daxil etməli olduğu vaxtın miqdarını (dəqiqələrlə) təyin etməyə imkan verir."
         }
       ],
       "approved_at": null
@@ -64,13 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Времето за Продължителност на Сесията' is a bit verbose. A more concise option would improve readability.",
-          "suggestion": "Време за Сесията"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'enter the space credentials again' is a bit awkward. 'Идентификационните данни на пространството' can be improved to be more natural.",
-          "suggestion": "потребителските данни за достъп до пространството"
+          "description": "The Bulgarian translation uses a slightly verbose phrasing that deviates from the original English's clarity. While not strictly incorrect, it could be more concise.",
+          "suggestion": "Consider rephrasing to: \"Времето за Продължителност на Сесията позволява задаването на време (в минути), преди потребителите на {{productName}} да трябва да въведат отново идентификационните данни за достъп до пространството.\""
         }
       ],
       "approved_at": null
@@ -86,9 +71,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'der Bereich zugreifen zu können' is awkward. A more natural phrasing would be 'auf den Bereich zugreifen können'.",
-          "suggestion": "auf den Bereich zugreifen können"
+          "type": "incorrect_translation",
+          "description": "The term 'Bereich' is used for 'space'. While technically correct, 'Bereich' can also mean 'area' or 'region'. A more precise translation for a digital 'space' would be 'Raum' or potentially 'Arbeitsbereich' depending on the context and desired tone.",
+          "suggestion": "Consider using 'Raum' or 'Arbeitsbereich' instead of 'Bereich'."
         }
       ],
       "approved_at": null
@@ -99,13 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Session Lifetime' is translated as 'Η επιλογή Διάρκεια περιόδου λειτουργίας'. While technically correct, it's a bit clunky. A more natural translation might be something like 'Διάρκεια Συνεδρίας' or 'Διάρκεια Ζωής Συνεδρίας'.",
-          "suggestion": "Consider using 'Διάρκεια Συνεδρίας' or 'Διάρκεια Ζωής Συνεδρίας'."
+          "description": "The translation of \"Session Lifetime\" as \"Η επιλογή Διάρκεια περιόδου λειτουργίας\" is a bit verbose and not the most natural phrasing. A more direct translation like \"Διάρκεια Συνεδρίας\" or \"Διάρκεια Συνόδου\" would be preferable.",
+          "suggestion": "Η επιλογή Διάρκεια Συνεδρίας"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'enter the space credentials' is translated as 'εισάγουν ξανά τα διαπιστευτήρια του χώρου'.  'διαπιστευτήρια του χώρου' is a bit formal. A more common and understandable phrasing would be 'συνδεθούν ξανά' or 'εισάγουν ξανά τα στοιχεία σύνδεσης'.",
-          "suggestion": "Consider using 'συνδεθούν ξανά' or 'εισάγουν ξανά τα στοιχεία σύνδεσης'."
+          "description": "The phrase \"για να έχουν πρόσβαση στον χώρο\" is redundant since it repeats the concept already established by 'access the space'.",
+          "suggestion": "για να έχουν πρόσβαση στον χώρο."
         }
       ],
       "approved_at": null
@@ -116,13 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Spanish translation uses 'La duración de la sesión' which translates to 'The session duration'. It is slightly more literal than the English 'Session Lifetime' which implies a function or feature. Consider a more idiomatic translation like 'Tiempo de sesión' or 'Vida de la sesión' to better reflect the original meaning.",
-          "suggestion": "Consider 'Tiempo de sesión' or 'Vida de la sesión' for a more natural flow."
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrase 'antes de que los usuarios de {{productName}} tengan que volver a introducir las credenciales del espacio para acceder al mismo' is a bit verbose. A more concise option would improve readability.",
-          "suggestion": "Consider revising to: 'antes de que los usuarios de {{productName}} tengan que volver a ingresar las credenciales para acceder al espacio.'"
+          "description": "The Spanish translation includes 'el mismo' at the end. While technically correct, it's a bit redundant and sounds less natural. Removing it improves flow.",
+          "suggestion": "La duración de la sesión permite establecer el tiempo (en minutos) antes de que los usuarios de {{productName}} tengan que volver a introducir las credenciales del espacio para acceder al espacio."
         }
       ],
       "approved_at": null
@@ -133,18 +113,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ennen kuin {{productName}}-n käyttäjien tulee\" is awkward and not a natural Finnish construction.  It literally translates to \"before {{productName}}-'s users must\". It should be rephrased for clarity and flow.",
-          "suggestion": "ennen kuin {{productName}}-käyttäjien on syötettävä"
+          "description": "The phrase \"ennen kuin {{productName}}-n käyttäjien tulee\" is awkward and not the most natural way to express \"before {{productName}} users will need to\". It's overly literal.",
+          "suggestion": "ennen kuin {{productName}}-käyttäjien tulee"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'tilojen' should be 'tilaan' (into the space) to accurately convey the meaning of accessing the space.",
-          "suggestion": "tilaan päästäkseen"
+          "description": "The phrase \"tilojen kirjautumistiedot jälkeen päästäkseen tilaan\" is grammatically incorrect and confusing. It should be more simply expressed as something like \"uudelleen kirjautua tilaan\".",
+          "suggestion": "uudelleen kirjautua tilaan"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure is a bit convoluted.  Breaking it up could improve readability.",
-          "suggestion": "Istunnon kesto mahdollistaa ajan (minuuteissa) asetuksen, jonka jälkeen {{productName}}-käyttäjien on syötettävä tilaan kirjautumistiedot päästäkseen tilaan."
+          "type": "incorrect_translation",
+          "description": "The word 'tilojen' (genitive plural) is not correct, it should be just 'tilan'",
+          "suggestion": "tilan"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase 'minuuteissa' is slightly clunky at the end of the sentence. It would read better if it was moved closer to 'ajan'.",
+          "suggestion": "ajan (minuuteissa) asetuksen"
         }
       ],
       "approved_at": null
@@ -161,13 +146,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'մինչև {{productName}}-ի օգտատերերը' is slightly awkward. A more natural flow would be to rephrase.",
-          "suggestion": "մինչև {{productName}}-ի օգտատերերը նորից մուտքագրեն տարածքի հավատարմագրերը."
+          "description": "The Armenian translation uses a hyphen in 'տարածք-ի' which is not standard Armenian. It should be a possessive ending.",
+          "suggestion": "տարածքի"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'allows to set' is not accurately translated. A more direct translation would be better.",
-          "suggestion": "մուտքագրելու համար"
+          "description": "The phrase 'մուտքագրեն տարածքի հավատարմագրերը' literally translates to 'enter the credentials of the space.' A more natural translation might be 'մուտքագրեն տարածքի վկայականները' (enter the space certificates/credentials). While 'հավատարմագրերը' isn't *incorrect*, 'վկայականները' flows better.",
+          "suggestion": "մուտքագրեն տարածքի վկայականները"
         }
       ],
       "approved_at": null
@@ -181,13 +166,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"スペース認証情報を入力するまでの時間\" (time until entering space credentials) is a bit clunky and could be more natural. While technically correct, it doesn't flow as smoothly as it could.",
-          "suggestion": "セッションライフタイムでは、{{productName}}ユーザーがスペースにアクセスする際に、再度認証情報を入力するまでの時間（分）を設定できます。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -196,13 +175,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"세션 수명을 사용하면\" is a bit awkward. A more natural translation for 'Session Lifetime allows' would be something like \"세션 수명 설정은\" or \"세션 수명을 통해\".",
-          "suggestion": "세션 수명 설정은"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '공간 자격 증명을 다시 입력해야 하기까지의 시간' is a bit verbose and indirect. A more direct translation for 'enter the space credentials again' would be '공간 로그인 정보' or '공간 접속 정보'.",
-          "suggestion": "공간 로그인 정보"
+          "description": "The phrase \"공간 자격 증명을 다시 입력해야 하기까지의 시간(분)을 설정할 수 있습니다\" is a bit clunky. It literally translates to \"the time until they need to re-enter the space credentials (minutes) can be set.\" A more natural Korean phrasing would improve readability. Consider a rephrasing that emphasizes the duration.",
+          "suggestion": "세션 수명을 사용하면 {{productName}} 사용자가 공간에 액세스하기 위해 공간 자격 증명을 다시 입력해야 하는 시간을 (분 단위로) 설정할 수 있습니다."
         }
       ],
       "approved_at": null
@@ -212,9 +186,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'enter the space credentials' is not the most natural way to express the English meaning in Lao. A more accurate translation would emphasize 're-login' or 're-authenticate'.",
+          "suggestion": "ອະນຸຍາດໃຫ້ກໍານົດເວລາ (ເປັນນາທີ) ກ່ອນທີ່ຜູ້ໃຊ້ {{productName}} ຈະຕ້ອງເຂົ້າສູ່ລະບົບອີກຄັ້ງເພື່ອເຂົ້າເຖິງພື້ນທີ່"
+        },
+        {
           "type": "formatting",
-          "description": "The Lao translation uses Lao script which is fine, but the placement of the double curly braces '{{productName}}' needs to be consistent with the English original.",
-          "suggestion": "Ensure that the placement of '{{productName}}' is identical to the English version, typically at the end of the relevant noun phrase or adjective."
+          "description": "The use of 'ພື້ນທີ່' (area) might be too literal for 'space' in this context. Depending on the product, a more suitable term related to 'workspace' or 'environment' might be preferable.",
+          "suggestion": "Consider replacing 'ພື້ນທີ່' with a more contextually appropriate term for 'space'."
         }
       ],
       "approved_at": null
@@ -225,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"akreditācijas dati\" (credentials) is a bit formal and less common in everyday Latvian. A more natural translation would be \"paroles\" or \"ievades dati\". While technically correct, it sounds stiff.",
-          "suggestion": "Sesijas ilgums ļauj iestatīt laiku (minūtēs), pirms {{productName}} lietotājiem būs atkārtoti jāievada telpas paroles, lai piekļūtu vietai."
+          "description": "The phrase \"akreditācijas dati\" is a more formal/technical term. A more natural and understandable translation for 'credentials' in this context would be 'paroles' or 'autorizācijas dati'.",
+          "suggestion": "Sesijas ilgums ļauj iestatīt laiku (minūtēs), pirms {{productName}} lietotājiem būs atkārtoti jāievada telpas paroles/autorizācijas datus, lai piekļūtu vietai."
         },
         {
           "type": "formatting",
-          "description": "The phrase \"lai piekļūtu vietai\" is a little redundant. 'Vietai' can be omitted as the context is already understood.",
-          "suggestion": "Sesijas ilgums ļauj iestatīt laiku (minūtēs), pirms {{productName}} lietotājiem būs atkārtoti jāievada telpas paroles, lai piekļūtu telpai."
+          "description": "While not strictly incorrect, using a more standard conjunction like 'un' would improve flow. 'un' replaces 'lai'.",
+          "suggestion": "Sesijas ilgums ļauj iestatīt laiku (minūtēs), pirms {{productName}} lietotājiem būs atkārtoti jāievada telpas paroles/autorizācijas datus un piekļūtu vietai."
         }
       ],
       "approved_at": null
@@ -242,18 +221,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Session Lifetime' is translated as 'Duur van de sessie'. While technically correct, a more natural and common Dutch translation might be 'Sessie Duur' or 'Levensduur van de sessie'.",
-          "suggestion": "Sessie Duur"
+          "description": "The phrase 'Session Lifetime' is translated as 'Duur van de sessie'. While technically correct, it lacks the nuance of the original English. A more natural translation might be 'Sessie Duur' or 'Levensduur van de Sessie'.",
+          "suggestion": "Sessie Duur or Levensduur van de Sessie"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'enter the space credentials' is translated as 'inloggegevens moeten invoeren'. A more natural translation would be 'inloggegevens opnieuw moeten invoeren' to explicitly state that it's a re-entry.",
-          "suggestion": "inloggegevens opnieuw moeten invoeren"
+          "description": "The phrase 'enter the space credentials' is translated as 'inloggegevens moeten invoeren'. While understandable, 'inloggen in de ruimte' or 'aanmelden bij de ruimte' would be more idiomatic Dutch.",
+          "suggestion": "inloggen in de ruimte or aanmelden bij de ruimte"
         },
         {
           "type": "formatting",
-          "description": "The double space after 'ruimte' is unnecessary and should be removed.",
-          "suggestion": "ruimte."
+          "description": "The double space after 'de' in 'de ruimte' creates a formatting issue. This might look visually odd.",
+          "suggestion": "Remove the extra space after 'de'."
         }
       ],
       "approved_at": null
@@ -264,8 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'enter the space credentials' is not the most natural way to express logging in again. A more common and understandable phrasing would be 'ponownie zalogować się do obszaru'.",
-          "suggestion": "Długość sesji pozwala wybrać czas (w minutach), zanim użytkownicy {{productName}} będą musieli ponownie zalogować się do obszaru, aby uzyskać do niego dostęp."
+          "description": "The translation of \"Session Lifetime\" as \"Długość sesji\" is acceptable, but a more direct translation of \"Session Lifetime\" as \"Czas trwania sesji\" might be slightly more accurate and clearer to some users.",
+          "suggestion": "Czas trwania sesji allows to set time..."
+        },
+        {
+          "type": "formatting",
+          "description": "The spacing before 'aby uzyskać do niego dostęp' is slightly awkward. It could be improved with a comma or semicolon.",
+          "suggestion": "Długość sesji pozwala wybrać czas (w minutach), zanim użytkownicy {{productName}} będą musieli ponownie wpisać swoje dane logowania do obszaru, aby, lub po czym, uzyskać do niego dostęp."
         }
       ],
       "approved_at": null
@@ -273,7 +257,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'enter the space credentials again' is a bit awkward. A more natural Portuguese phrasing would be 'inserir suas credenciais de acesso ao espaço' or 'revalidar suas credenciais de acesso ao espaço'.",
+          "suggestion": "O Session Lifetime permite definir o tempo (em minutos) antes que os usuários do {{productName}} precisem inserir suas credenciais de acesso ao espaço para acessá-lo."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -281,14 +271,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Session Lifetime' is in English within the Portuguese translation. It's better to translate it or consider keeping it in English consistently throughout the product UI.",
-          "suggestion": "Consider translating 'Session Lifetime' to 'Tempo de Sessão' or maintaining it in English if that's the standard practice."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'inserir as credenciais do espaço novamente' sounds a bit clunky. A more natural phrasing exists.",
-          "suggestion": "Consider 'revalidar as credenciais do espaço' or 'inserir as credenciais do espaço de novo'."
+          "description": "The phrase 'enter the space credentials again' is a bit awkward. A more natural translation might be 're-enter their space credentials' or 'redigitar as credenciais do espaço'.",
+          "suggestion": "redigitar as credenciais do espaço"
         }
       ],
       "approved_at": null
@@ -298,19 +283,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'vor fi nevoiți' is grammatically awkward. A more natural phrasing would be 'vor trebui'.",
-          "suggestion": "vor trebui"
+          "type": "incorrect_translation",
+          "description": "The phrase 'Session Lifetime' is translated as 'Durata de expirare a sesiunii', which is literal but could be improved for natural Romanian. 'Durata sesiunii' would be more common and flow better.",
+          "suggestion": "Durata sesiunii"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'datele de autentificare' is slightly awkward. A more natural and common phrase would be 'credințiale'.",
-          "suggestion": "credințiale"
+          "type": "incorrect_translation",
+          "description": "The phrase 'will need to enter the space credentials again' is translated as 'vor fi nevoiți să introducă din nou datele de autentificare'. While technically correct, 'vor trebui să reintroducă datele de autentificare' sounds more natural.",
+          "suggestion": "vor trebui să reintroducă datele de autentificare"
         },
         {
           "type": "formatting",
-          "description": "The word 'spaţiul' appears twice. Maintaining consistency in capitalization (e.g., using 'spațiul' consistently) improves readability.",
-          "suggestion": "Use 'spațiul' consistently throughout the translation."
+          "description": "The term 'spaţiul' appears twice, once in relation to 'space' and the second time 'space credentials'. Consistency in capitalization and form would improve readability. It may be better to be 'spațiul' for both.",
+          "suggestion": "spațiul"
         }
       ],
       "approved_at": null
@@ -321,13 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'для получения доступа к нему' is slightly awkward. 'нему' refers to the space, but the phrasing could be improved for clarity and naturalness in Russian.",
-          "suggestion": "для доступа к пространству"
-        },
-        {
-          "type": "formatting",
-          "description": "The spacing before 'нему' in 'для получения доступа к нему' isn't ideal for Russian text. It should be closer to the noun.",
-          "suggestion": "для получения доступа к пространству"
+          "description": "The phrase \"для получения доступа к нему\" (to gain access to it) is slightly awkward. It refers back to 'the space' but could be improved for clarity and naturalness.",
+          "suggestion": "для доступа к пространству (to access the space)"
         }
       ],
       "approved_at": null
@@ -338,18 +318,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'පරිශීලකයින්' (parishilakayin) which translates to 'users' or 'consumers' feels slightly unnatural in this context. A more appropriate term might be 'භාවිතකරුවන්' (bhavitakaruwan) which directly means 'users'.",
-          "suggestion": "නවතියේ කාලය, {{productName}} භාවිතකරුවන් අවකාශයට ප්‍රවේශ වීම සඳහා නැවත අවකාශයගේ සහතිකපත්ර ඇතුළු කර ගැනීමට අවශ්‍ය කාලය (මිනිත්තු වලින්) සැකසීමට ඉඩ සලසයි."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'අවකාශයගේ සහතිකපත්ර' (awasayage sahathikapatra) which translates to 'space credentials' sounds overly formal and awkward. A simpler phrasing such as 'අවකාශයේ ලියාණම්' (awasayede liyana) – 'space logins' would be more natural.",
-          "suggestion": "නවතියේ කාලය, {{productName}} භාවිතකරුවන් අවකාශයට ප්‍රවේශ වීම සඳහා නැවත අවකාශයේ ලියාණම් ඇතුළු කර ගැනීමට අවශ්‍ය කාලය (මිනිත්තු වලින්) සැකසීමට ඉඩ සලසයි."
+          "description": "The phrase \"අවකාශයගේ සහතිකපත්ර\" (awasayage sahathikapathra) translates literally to \"space's credentials.\"  A more natural translation would be something like \"අවකාශයට පිවිසීමට අවශ්‍යcredentials\" (awasayata pivesimnu awashya credentials) or \"space access credentials\".",
+          "suggestion": "නවතියේ කාලය, {{productName}} පරිශීලකයින් අවකාශයට ප්‍රවේශ වීම සඳහා අවකාශයට පිවිසීමට අවශ්‍යcredentials නැවත ඇතුළු කර ගැනීමට අවශ්‍ය කාලය (මිනිත්තු වලින්) සැකසීමට ඉඩ සලසයි."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the passive voice used throughout ('is allowed to set') can sound less direct in Sinhala.  A more active phrasing is generally preferred.",
-          "suggestion": "නවතියේ කාලය, {{productName}} භාවිතකරුවන් අවකාශයට ප්‍රවේශ වීම සඳහා නැවත අවකාශයේ ලියාණම් ඇතුළු කර ගැනීමට අවශ්‍ය කාලය (මිනිත්තු වලින්) සැකසීමට හැකිවේ."
+          "description": "The sentence is quite long and might benefit from being broken into shorter, more readable sentences. While grammatically correct, it reduces clarity.",
+          "suggestion": "නවතියේ කාලය, {{productName}} පරිශීලකයින් අවකාශයට ප්‍රවේශ වීම සඳහා අවශ්‍ය කාලය (මිනිත්තු වලින්) සැකසීමට ඉඩ සලසයි.  මෙය {{productName}} පරිශීලකයින් අවකාශයට පිවිසීමට අවශ්‍ය credentials නැවත ඇතුළු කර ගැනීමට අවශ්‍ය කාලය වේ."
         }
       ],
       "approved_at": null
@@ -360,18 +335,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Session Lifetime' is translated as 'Čas trvania relácie'. While technically correct, it's a bit literal and could be improved for natural Slovak. 'Dĺžka relácie' or 'Životnosť relácie' might be more idiomatic.",
-          "suggestion": "Consider using 'Dĺžka relácie' or 'Životnosť relácie' as alternatives to 'Čas trvania relácie'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'enter the space credentials' is translated as 'znovu zadať prihlasovacie údaje do priestoru'. A more natural translation might focus on 'prihlásiť sa do priestoru' or 'opätovne prihlásiť do priestoru'.",
-          "suggestion": "Consider using 'prihlásiť sa do priestoru' or 'opätovne prihlásiť do priestoru' as alternatives to 'znovu zadať prihlasovacie údaje do priestoru'."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'aby získali prístup do priestoru' is repeated. This is slightly redundant.  It can be shortened to 'aby sa do priestoru dostali'.",
-          "suggestion": "Replace 'aby získali prístup do priestoru' with 'aby sa do priestoru dostali'."
+          "description": "The phrase \"aby získali prístup do priestoru\" is redundant. The English says \"in order to access the space\", and repeating \"do priestoru\" is unnecessary and clunky in Slovak. It should be simplified.",
+          "suggestion": "Čas trvania relácie umožňuje nastaviť čas (v minútach), za ktorý budú musieť používatelia {{productName}} znovu zadať prihlasovacie údaje do priestoru, aby mohli pristupovať k nemu."
         }
       ],
       "approved_at": null
@@ -382,8 +347,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes 'prostora za dostop do prostora'. This is redundant. It means 'space for access to space'.",
-          "suggestion": "Življenjska doba seje omogoča nastavitev časa (v minutah), preden bodo morali uporabniki {{productName}} znova vnesti poverilnice prostora za dostop."
+          "description": "The Slovenian translation retains the double curly braces '{{productName}}'. This should ideally be replaced with the actual product name or removed if it's intended for internal documentation only.",
+          "suggestion": "Replace '{{productName}}' with the appropriate product name or remove it entirely depending on the intended use."
         }
       ],
       "approved_at": null
@@ -394,8 +359,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a hyphenated form of the product name \"{{productName}}-а\". While technically not incorrect, it's more standard in Serbian to omit the hyphen when referring to users of something. It sounds slightly unnatural.",
-          "suggestion": "Корисницима {{productName}}."
+          "description": "The product name placeholder '{{productName}}' is not properly formatted for localization. It should ideally be wrapped in a localization tag specific to the platform (e.g., a double curly brace, or a localized string key).",
+          "suggestion": "Consider using a platform-specific localization tag for '{{productName}}' to ensure proper translation and display (e.g., `{{localizedProductName}}` or `<string name=\"productName\">`)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, 'Трајање сесије омогућава постављање времена (у минутима) пре него што ће корисницима {{productName}}-а поново бити потребно да унесу приступне податке како би приступили простору.' is a bit verbose and could be more concise. The phrasing 'поново бити потребно да унесу приступне податке' can be simplified.",
+          "suggestion": "Consider a more concise phrasing such as: 'Трајање сесије омогућава постављање времена (у минутима) после којег корисницима {{productName}}-а ће бити потребна поновна пријава за приступ простору.'"
         }
       ],
       "approved_at": null
@@ -405,14 +375,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation uses a comma before 'pre nego što', which is not standard Serbian punctuation. It should be omitted.",
-          "suggestion": "Trajanje sesije omogućava postavljanje vremena (u minutima) pre što će korisnicima {{productName}}-a ponovo biti potrebno da unesu pristupne podatke kako bi pristupili prostoru."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Session Lifetime' is translated as 'Trajanje sesije'. While technically correct, 'Vreme trajanja sesije' might be more natural and idiomatic in Serbian.",
+          "suggestion": "Vreme trajanja sesije omogućava postavljanje vremena..."
         },
         {
-          "type": "incorrect_translation",
-          "description": "“access the space” is translated as “pristupili prostoru”. While accurate, 'ulazak u prostor' might be slightly more natural in this context, suggesting entry.",
-          "suggestion": "Trajanje sesije omogućava postavljanje vremena (u minutima) pre što će korisnicima {{productName}}-a ponovo biti potrebno da unesu pristupne podatke kako bi ušli u prostor."
+          "type": "grammar",
+          "description": "The sentence 'pre nego što će korisnicima {{productName}}-a ponovo biti potrebno...' is a bit awkward. It can be improved for smoother flow.",
+          "suggestion": "pre nego što korisnici {{productName}}-a ponovo budu morali..."
+        },
+        {
+          "type": "formatting",
+          "description": "The repetition of 'a' after '{{productName}}' might need review as it depends on the context of 'productName'.",
+          "suggestion": "Consider the surrounding text or how 'productName' is usually displayed in Serbian to ensure correct grammatical usage."
         }
       ],
       "approved_at": null
@@ -423,8 +398,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'alan kimlik bilgilerini tekrar girmeleri gerekmeden önce' is a bit lengthy and could be simplified for better readability in Turkish. The phrasing is technically correct but could be more concise.",
-          "suggestion": "Oturum Ömrü, {{productName}} kullanıcılarının alana erişmek için kimlik bilgilerini tekrar girmeleri gerekmeden önce geçen süreyi (dakika bazında) ayarlamanıza olanak sağlar."
+          "description": "The Turkish translation retains the double curly braces '{{productName}}' which should be removed, as this is a placeholder that is handled by the UI.",
+          "suggestion": "Oturum Ömrü, {{productName}} kullanıcılarının alana erişmek için alan kimlik bilgilerini tekrar girmeleri gerekmeden önce süreyi (dakika bazında) ayarlamanıza olanak sağlar. -> Oturum Ömrü, kullanıcılarının alana erişmek için alan kimlik bilgilerini tekrar girmeleri gerekmeden önce süreyi (dakika bazında) ayarlamanıza olanak sağlar."
         }
       ],
       "approved_at": null
@@ -435,8 +410,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'enter the space credentials' is not the most natural way to express the meaning in Ukrainian. A more accurate translation would be 'ввести дані для входу в простір' or 'ввести свої облікові дані для доступу до простору'.",
-          "suggestion": "ввести дані для входу в простір"
+          "description": "The phrase \"потрібно буде повторно ввести облікові дані\" is a bit clunky. A more natural phrasing would be \"потрібно буде знову вводити облікові дані\" or \"потрібно буде заново вводити облікові дані\".",
+          "suggestion": "потрібно буде знову вводити облікові дані"
         }
       ],
       "approved_at": null
@@ -447,18 +422,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Thời gian tồn tại của phiên\" (Session Existence Time) is not the most natural or accurate translation of \"Session Lifetime.\" A more appropriate translation would be something like \"Thời lượng phiên\" or \"Thời gian phiên\".",
+          "description": "The phrase \"Thời gian tồn tại của phiên\" is not the most natural way to translate \"Session Lifetime.\" A more common and accurate translation would be something like \"Thời lượng phiên\" or \"Thời gian hoạt động của phiên\".",
           "suggestion": "Thời lượng phiên"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"thông tin đăng nhập không gian\" is slightly awkward. While technically correct, it could be improved.",
-          "suggestion": "tài khoản đăng nhập"
+          "description": "The phrase \"thông tin đăng nhập không gian\" is slightly awkward. It's better to say just \"thông tin đăng nhập\" as the context already indicates it's for space access.",
+          "suggestion": "thông tin đăng nhập"
         },
         {
           "type": "formatting",
-          "description": "The use of double quotes in the sentence creates an awkward phrasing when combined with the variable {{productName}}. In Vietnamese, it's more natural to ensure that the variable is properly integrated into the sentence flow.",
-          "suggestion": "Thời lượng phiên cho phép đặt thời gian (tính bằng phút) trước khi người dùng {{productName}} cần nhập lại tài khoản đăng nhập để truy cập không gian."
+          "description": "While the use of '{{productName}}' is correct for placeholder, a more natural flow in Vietnamese might require re-ordering the sentence structure to fit better. Consider moving the mention of the product to the end or integrating it differently.",
+          "suggestion": "Consider restructuring the sentence to flow more naturally in Vietnamese"
         }
       ],
       "approved_at": null
@@ -469,8 +444,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"会话生命周期\" (huihua shengmingzhouqi) is a literal translation of 'Session Lifetime' which while understandable, is not the most natural phrasing in Chinese. A more common and user-friendly translation would be something along the lines of '会话时长' (huihua changshi) or '会话有效时间' (huihua youxiao shijian).",
-          "suggestion": "Consider using '会话时长' or '会话有效时间' instead of '会话生命周期'."
+          "description": "The phrase 'Session Lifetime' is translated as '会话生命周期'. While technically correct, '会话时长' or '会话有效期' might be more natural and common in Chinese for describing the duration of a session.",
+          "suggestion": "会话时长"
+        },
+        {
+          "type": "formatting",
+          "description": "The spacing around the parentheses is slightly awkward.  It should match the English.",
+          "suggestion": "会话时长允许设置{{productName}}用户需要再次输入空间凭据才能访问空间的时间（以分钟为单位）。"
         }
       ],
       "approved_at": null

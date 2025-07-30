@@ -3,7 +3,7 @@
   "content": "This link is protected with a {{parameter}}. To configure the link,",
   "content_en_sha1_hash": "6ef158eba8e1e4e0ad362ef6746097143b6229f0",
   "created_at": "2025-05-19T21:30:54.553Z",
-  "updated_at": "2025-05-21T08:59:49.057Z",
+  "updated_at": "2025-05-24T09:12:16.338Z",
   "comment": {
     "text": "This translation key is used to describe a link protection parameter and its impact on configuration. It appears as a tooltip or hint in UI elements where users configure links with protected parameters.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لتكوين الارتباط\" (to configure the link) is a literal translation that might sound awkward in Arabic. A more natural phrasing would be \"لإعداد الرابط\" (to set up the link) or \"لتفعيل الرابط\" (to activate the link).",
-          "suggestion": "لإعداد الرابط"
+          "description": "The English phrase \"To configure the link\" is best translated as \"لإعداد الرابط\" (li-i'daad ar-raabit) rather than \"لتكوين الارتباط\" (li-takween al-ir-tibaat).  'Takween' implies creation or formation, while 'i'daad' is more appropriate for configuration.",
+          "suggestion": "هذا الرابط محمي بواسطة {{parameter}}. لإعداد الرابط،"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The placeholder `{{parameter}}` is not formatted consistently with the English original. It should be enclosed within the Azerbaijani sentence.",
-          "suggestion": "Bu link {{parameter}} ilə qorunur. Bağlantını konfiqurasiya etmək üçün,"
+          "description": "The Azerbaijani translation retains the placeholder {{parameter}} which should ideally be localized or handled consistently with the English version. While technically correct, it might be more user-friendly to remove or adapt the placeholder.",
+          "suggestion": "Consider replacing {{parameter}} with a localized explanation or removing it entirely if its meaning is clear from context. Example: 'Bu link {{parameter}} vasitəsilə qorunur' (This link is protected by means of {{parameter}}) or 'Bu link bir müddətli kod ilə qorunur' (This link is protected with a time-limited code)."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation has an incomplete sentence. The phrase 'Konfigurace odkazu' (Configuration of the link) is not a complete sentence and lacks punctuation. It should either be a full sentence or incorporated into a previous sentence.",
-          "suggestion": "Consider adding punctuation to complete the sentence, e.g., 'Tento odkaz je chráněn pomocí {{parameter}}. Konfigurace odkazu, naleznete...' or incorporate it into a previous sentence for better flow."
+          "description": "The Czech translation ends with a comma which creates an unfinished sentence. It should be completed or the comma removed.",
+          "suggestion": "Tento odkaz je chráněn pomocí {{parameter}}. Konfigurace odkazu."
         }
       ],
       "approved_at": null
@@ -78,8 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'To configure the link' is not perfectly conveyed by 'Για να ρυθμίσετε τις παραμέτρους του συνδέσμου'. A more accurate translation would be 'Για να διαμορφώσετε τον σύνδεσμο' or 'Για να ρυθμίσετε τον σύνδεσμο'.  The current translation emphasizes 'parameters' which isn't the primary focus of the English sentence.",
-          "suggestion": "Για να διαμορφώσετε τον σύνδεσμο"
+          "description": "The English phrase 'This link is protected with a {{parameter}}' is not perfectly translated. 'με μια παράμετρο' literally translates to 'with a parameter'.  A more natural Greek phrasing might be 'με βάση μια παράμετρο' (based on a parameter) or 'χρησιμοποιώντας μια παράμετρο' (using a parameter).",
+          "suggestion": "Αυτός ο σύνδεσμος προστατεύεται με βάση μια παράμετρο"
+        },
+        {
+          "type": "formatting",
+          "description": "The Greek translation maintains the English formatting of {{parameter}}. This is acceptable, but it's worth noting for consistency with other translations.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -96,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Määrittääksesi linkin\" is a literal translation of \"To configure the link.\" A more natural and idiomatic Finnish translation would be something like \"linkin määrittäminen\" or \"linkin asetusten määrittäminen\".",
-          "suggestion": "linkin määrittäminen"
+          "description": "The translation of \"To configure the link\" is not ideal. \"Määrittääksesi linkin\" is grammatically correct but lacks the nuance of instruction. A more natural phrasing would convey a sense of how to set up the link.",
+          "suggestion": "Määrittääksesi linkin asetukset,"
         }
       ],
       "approved_at": null
@@ -113,9 +118,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The colon after '{{parameter}}' in the Armenian translation is unconventional and might disrupt readability. It's more typical to see a dash or no punctuation.",
-          "suggestion": "Consider replacing the colon with a dash (Այս հղումը պաշտպանված է {{parameter}}-ի շուրջ։) or removing it entirely (Այս հղումը պաշտպանված է {{parameter}}։)"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'with a {{parameter}}' is translated as '{{parameter}}-ով'. While grammatically acceptable, a more natural Armenian translation might be 'միջոցով {{parameter}}' (through/by {{parameter}}).  This would sound less abrupt.",
+          "suggestion": "Այս հղումը պաշտպանված է միջոցով {{parameter}}:"
         }
       ],
       "approved_at": null
@@ -144,13 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ລິ້ງ' is commonly spelled 'ລິ້ງ'.",
-          "suggestion": "ລິ້ງ"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better readability in Lao. 'ເພື່ອຕັ້ງຄ່າການເຊື່ອມຕໍ່' (to set the connection) is slightly awkward. Consider rephrasing to be more natural.",
-          "suggestion": "ເພື່ອກຳນົດການເຊື່ອມຕໍ່,"
+          "description": "The word 'ລິ້ງ' (link) is technically correct, but 'ເຊື່ອມຕໍ່' (connection) is often preferred in formal Lao writing to describe a hyperlink. While 'ລິ້ງ' is understood, 'ເຊື່ອມຕໍ່' offers a more polished tone.",
+          "suggestion": "Consider replacing 'ລິ້ງ' with 'ເຊື່ອມຕໍ່' for a more formal tone."
         }
       ],
       "approved_at": null
@@ -158,7 +158,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'To configure the link' is best translated as 'Lai konfigurētu saiti' is correct, but a slightly more natural phrasing in Latvian would be 'Lai iestatītu saiti'. While 'konfigurētu' isn't *wrong*, 'iestatītu' is more commonly used in this context.",
+          "suggestion": "Lai iestatītu saiti"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -173,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"protected with\" is not ideal. \"Chroniony przez\" implies 'protected by', which is technically correct, but less natural in this context. A more idiomatic translation would convey the idea of the link being secured or reliant on the parameter.",
-          "suggestion": "Ten link jest zabezpieczony parametrem {{parameter}}. Aby skonfigurować link,"
+          "description": "The phrase 'protected with a parameter' is too literal. A more natural Polish phrasing would be 'chroniony za pomocą parametru' or 'zabezpieczony parametrem'.",
+          "suggestion": "Ten link jest chroniony za pomocą parametru {{parameter}}. Aby skonfigurować link,"
         }
       ],
       "approved_at": null
@@ -196,9 +202,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'Pentru a configura link-ul' could be slightly improved for flow and naturalness. 'Pentru a configura legătura' or 'Pentru a configura acest link' would be more common.",
-          "suggestion": "Pentru a configura legătura"
+          "type": "spelling",
+          "description": "The Romanian word for 'link' should be 'legătură', not 'link'. While 'link' is sometimes used, 'legătură' is the more standard and accurate translation.",
+          "suggestion": "Acest link este protejat prin {{parameter}}. Pentru a configura legătura,"
         }
       ],
       "approved_at": null
@@ -214,14 +220,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'This link is protected with a {{parameter}}' is not accurately reflected in the Sinhala translation. 'න් ආරක්ෂිතයි' implies 'is protected by,' which isn't ideal. A more natural translation would convey that the link *uses* or *requires* the parameter, not that it's protected *by* it.",
-          "suggestion": "මෙම සබැඳිය {{parameter}} භාවිතයෙන් ආරක්ෂණය කර ඇත. (This link is secured using {{parameter}}.) or  මෙම සබැඳිය {{parameter}} මත පදනම් වේ. (This link is based on {{parameter}}.)"
-        },
-        {
           "type": "formatting",
-          "description": "The Sinhala translation has a break in the sentence after 'වින්‍යාසගත කිරීමට'. A more natural flow would be to connect the two parts of the sentence.",
-          "suggestion": "මෙම සබැඳිය {{parameter}} භාවිතයෙන් ආරක්ෂණය කර ඇත. එය වින්‍යාසගත කිරීමට,"
+          "description": "The Sinhala translation includes a space before the opening curly brace of the parameter placeholder '{{parameter}}'. This should be removed for consistency with the English original.",
+          "suggestion": "මෙම සබැඳිය{{parameter}} න් ආරක්ෂිතයි. සබැඳිය වින්‍යාසගත කිරීමට,"
         }
       ],
       "approved_at": null
@@ -229,7 +230,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pre konfiguráciu odkazu' is grammatically correct but sounds a bit formal for a user-facing message. A more natural phrasing might be 'Na konfiguráciu odkazu' or 'Ak chcete nakonfigurovať odkaz'.",
+          "suggestion": "Na konfiguráciu odkazu"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -238,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'parameter' in English is better translated as 'parametrom' in Slovenian to match the context of a technical term.  'Parametrom' conveys a more direct reference to a configurable value.",
-          "suggestion": "Ta povezava je zaščitena s parametrom {{parameter}}. Če želite konfigurirati povezavo,"
+          "description": "The English phrase 'This link is protected with a {{parameter}}' is not perfectly captured by the Slovenian 'Ta povezava je zaščitena s parametrom {{parameter}}'.  'parameter' is a direct translation, but a more natural phrasing in Slovenian might involve a more descriptive word like 'zaščita' (protection) or 'ključem' (key).",
+          "suggestion": "Ta povezava je zaščitena s ključem {{parameter}}."
         }
       ],
       "approved_at": null
@@ -249,9 +256,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Serbian translation lacks a period at the end of the sentence. It should end with a period to be grammatically correct.",
-          "suggestion": "Овај линк је заштићен са {{parameter}}. Да бисте конфигурисали овај линк,."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"To configure the link\" is not perfectly captured by \"Да бисте конфигурисали овај линк\". A more natural and accurate translation would be \"За да бисте конфигурисали овај линк\" or \"Да бисте подесили овај линк\".",
+          "suggestion": "За да бисте конфигурисали овај линк"
         }
       ],
       "approved_at": null
@@ -259,13 +266,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'To configure the link' is best translated as 'Za konfigurisanje linka' or 'Kako biste konfigurisali link'. 'Da biste konfigurisali ovaj link' is grammatically correct but less natural in this context.",
-          "suggestion": "Da biste konfigurisali link, or Za konfigurisanje linka."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -277,7 +278,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'To configure the link' is too literal and doesn't flow naturally in Ukrainian. A more natural phrasing would be needed.",
+          "suggestion": "Consider alternatives like 'Щоб налаштувати це посилання' or 'Для налаштування посилання'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -292,13 +299,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"protected with\" is not accurately translated. '保护' implies a more active form of protection than what the English suggests. It feels overly strong.",
-          "suggestion": "此链接使用 {{parameter}} 进行保护。 (This link uses {{parameter}} for protection.)"
+          "description": "The translation \"此链接受 {{parameter}} 保护\" doesn't fully capture the nuance of \"This link is protected with a {{parameter}}\". It literally translates to \"This link accepts {{parameter}} protection.\" A more accurate translation might be \"此链接使用 {{parameter}} 进行保护\" or \"此链接通过 {{parameter}} 保护\"",
+          "suggestion": "此链接使用 {{parameter}} 进行保护"
         },
         {
           "type": "formatting",
-          "description": "The phrase \"如要配置链接\" is a bit abrupt. A smoother transition would be better.",
-          "suggestion": "如需配置链接，"
+          "description": "The translation uses a full stop at the end of the sentence. While grammatically correct, the English original doesn't have one, and maintaining consistency is important in technical documentation. The full stop may cause issues when displaying the translated text with Javascript variables inserted.",
+          "suggestion": "此链接使用 {{parameter}} 进行保护，"
         }
       ],
       "approved_at": null

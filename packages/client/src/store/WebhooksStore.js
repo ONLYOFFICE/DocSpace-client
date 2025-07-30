@@ -62,6 +62,8 @@ class WebhooksStore {
 
   configName = "";
 
+  errorWebhooks = null;
+
   constructor(settingsStore) {
     makeAutoObservable(this);
 
@@ -104,6 +106,9 @@ class WebhooksStore {
       });
     } catch (error) {
       console.error(error);
+      runInAction(() => {
+        this.errorWebhooks = { error: "error" };
+      });
     }
   };
 

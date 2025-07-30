@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta, Story } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { TableSkeleton } from "./index";
 
 export default {
@@ -23,7 +23,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story = (args) => <TableSkeleton {...args} />;
+const Template: StoryFn = (args) => <TableSkeleton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

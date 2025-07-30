@@ -3,7 +3,7 @@
   "content": "Subject name",
   "content_en_sha1_hash": "bf2a13545f4c551edc483f442085b1c7f653e520",
   "created_at": "2025-05-19T21:30:54.298Z",
-  "updated_at": "2025-05-21T08:04:13.449Z",
+  "updated_at": "2025-05-24T08:18:09.874Z",
   "comment": {
     "text": "The translation key \"LdapSettingsSubjectName\" is used to display the subject name of a certificate in a LDAP settings page. It appears as a paragraph within a Certificate Dialog, allowing users to view and verify the subject information. Translators should ensure that this text accurately reflects the organization's or entity's own name.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"اسم الموضوع\" (ism al-mawdoo') is a literal translation of 'Subject name', it might not be the most natural or common way to refer to this setting in a technical context (LDAP settings). It implies the topic of the LDAP settings, rather than the subject identifier used in LDAP.",
+          "suggestion": "Consider alternatives like \"اسم الفاعل\" (ism al-fa'il) or \"اسم المستخدم\" (ism al-mustakhdim) which might be more appropriate depending on the precise meaning intended within the LDAP settings.  A more context-aware translation would be preferable to a strictly literal one."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Mövzu adı\" is a literal translation of \"Subject name\", it may not be the most natural or accurate translation in the context of LDAP settings. \"Subject name\" in this context usually refers to the distinguished name or the name used to identify a user or object in LDAP. A more appropriate translation might be something like \"Təqdim edilmiş ad\" or \"Objektin adı\".",
-          "suggestion": "Consider \"Təqdim edilmiş ad\" or \"Objektin adı\" depending on the specific LDAP context."
+          "description": "While \"Mövzu adı\" is a possible translation for \"Subject name\", it can be ambiguous. 'Subject' in this LDAP context likely refers to the name of the user or entity being identified, so a more accurate translation would be 'Istifadəçi adı' (User name) or 'Objekt adı' (Object name).",
+          "suggestion": "Istifadəçi adı"
         }
       ],
       "approved_at": null
@@ -48,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Име на предмет' doesn't accurately convey the meaning of 'Subject name' in the context of LDAP settings. 'Предмет' generally refers to a school subject or an item, not a subject identifier in a technical setting. A more appropriate translation would convey the meaning of a name associated with an entity.",
-          "suggestion": "Име на обект"
+          "description": "The translation 'Име на предмет' is a literal translation of 'Subject name' and is not the typical or expected terminology in a technical context. It could be misinterpreted.",
+          "suggestion": "A more appropriate translation in a technical context, particularly relating to LDAP settings, would be something like 'Име на обект' or 'Наименование на обект'.  Further context might clarify the best option."
         }
       ],
       "approved_at": null
@@ -66,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Name des Subjekts\" is technically correct, it's a very literal translation and not the most natural way to express \"Subject name\" in German, especially in a configuration setting. It sounds a bit clunky.",
-          "suggestion": "Consider alternatives like \"Betreffname\" or \"Benutzername\" depending on the precise context of 'Subject name' in the settings. If it refers to the name of the LDAP subject, \"LDAP-Benutzername\" might be more appropriate."
+          "description": "While 'Name des Subjekts' is technically correct, it's a very literal translation and sounds unnatural in German for a setting label. 'Subjekt' often isn't used in this context.",
+          "suggestion": "Consider 'Benutzername' or 'Name' depending on the exact meaning of 'Subject name' in the application."
         }
       ],
       "approved_at": null
@@ -81,13 +87,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nombre del sujeto' is literally 'Subject name', a more natural and common translation for a setting label like this would be 'Nombre del tema' or 'Nombre del asunto'. 'Sujeto' can have a specific legal/formal connotation that isn't intended here.",
+          "suggestion": "Nombre del tema"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a trailing space.",
+          "suggestion": "Subjektin nimi"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -96,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nom du sujet' is technically correct, it's not the most natural or common translation for 'Subject name' in the context of LDAP settings. It sounds slightly literal. A better translation would convey the meaning of 'subject' as referring to a user or entity.",
-          "suggestion": "Nom du participant"
+          "description": "While \"Nom du sujet\" is technically correct, it's not the most natural or common translation for 'Subject name' in the context of LDAP settings.  'Nom du sujet' sounds a bit formal and might not be immediately clear to all users. A more common and understandable translation would be 'Nom du Sujet' (with a capital 'S').",
+          "suggestion": "Nom du Sujet"
         }
       ],
       "approved_at": null
@@ -126,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"주체 이름\" is technically a translation of \"Subject name\", it's not the most natural or common way to express it in Korean, especially in a technical context like LDAP settings.  '주체' can have connotations of agency or initiative that might not be intended.",
-          "suggestion": "Consider using \"제목\" (Je-mok) or \"이름\" (I-reum) as a more appropriate and common translation, depending on the specific usage of \"Subject name\" in the LDAP settings.  For example, \"제목\" might be better if it refers to a title or heading, while \"이름\" is a general term for name."
+          "description": "While \"주체 이름\" is a literal translation of \"Subject name\", in the context of LDAP settings, a more appropriate translation would be \"제목\" or \"이름\". \"주체\" can have connotations beyond a simple name or title.",
+          "suggestion": "Consider using \"제목\" or \"이름\" instead of \"주체 이름\"."
         }
       ],
       "approved_at": null
@@ -150,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation \"Naam onderwerp\" is a literal translation but doesn't convey the precise meaning of 'Subject name' in the context of LDAP settings. It's a bit clunky and not idiomatic.",
-          "suggestion": "Consider \"Onderwerpnaam\" or \"Naam van het onderwerp\" for a more natural-sounding translation that accurately reflects the meaning in the LDAP context."
+          "description": "The translation \"Naam onderwerp\" while technically correct, isn't the most natural or idiomatic translation of \"Subject name\" in the context of LDAP settings. \"Onderwerp\" can be a bit vague. A more accurate and common translation would depend on the specific context, but \"Naam van de gebruiker\" or \"Gebruikersnaam\" would be preferable.",
+          "suggestion": "Naam van de gebruiker"
         }
       ],
       "approved_at": null
@@ -180,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nume de subiect' is a literal translation but doesn't quite convey the meaning of 'Subject name' in the context of LDAP settings. It sounds unnatural and potentially confusing.",
-          "suggestion": "Consider 'Nume subiectului' or 'Denumire subiectului'. 'Nume subiectului' is likely the most accurate and natural-sounding option."
+          "description": "The translation 'Nume de subiect' is not the most natural or accurate translation of 'Subject name' in the context of LDAP settings. 'Subiect' can imply 'subject' in the sense of 'topic' rather than 'name related to a subject'.",
+          "suggestion": "Consider 'Nume subiectului' or 'Denumire subiectului' which are more aligned with 'Subject name' in this context."
         }
       ],
       "approved_at": null
@@ -216,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Број субјекта' (Broj subjekta) translates to 'Subject number' rather than 'Subject name'. It adds 'Broj' which changes the meaning.",
+          "description": "The Serbian (Cyrillic) translation \"Број субјекта\" translates to \"Subject Number\" which is not an accurate translation of \"Subject name\". \"Subject name\" refers to the name of the subject, not a numerical identifier.",
           "suggestion": "Име субјекта"
         }
       ],
@@ -228,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Broj subjekta\" (Number of subject) does not accurately reflect the English term \"Subject name\". It describes the quantity of a subject, not the name itself. A more appropriate translation would be something that conveys the meaning of a person's name or identification.",
+          "description": "The translation \"Broj subjekta\" (Number of subject) doesn't accurately reflect the meaning of \"Subject name.\" It translates to 'Number of subject' instead of 'Subject name'.",
           "suggestion": "Ime subjekta"
         }
       ],
@@ -237,7 +255,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Özne adı' is a literal translation of 'Subject name', it's not the most natural or common way to refer to a subject name in a technical context, especially concerning LDAP settings. 'Konu adı' would be a more suitable and widely understood term in this scenario.",
+          "suggestion": "Konu adı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -258,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"主题名称\" (zhǔtí míngchēng) is understandable, it's a rather literal and slightly awkward translation of \"Subject name.\" It implies a general 'theme name' rather than the specific 'subject name' referring to a user's identifier in LDAP settings.",
-          "suggestion": "考虑使用更精确的翻译，例如“主体名称” (zhǔtǐ míngchēng) 或 “用户主体名” (yònghù zhǔtǐ míng)."
+          "description": "While \"主题名称\" (zhǔtí míngchēng) is technically a valid translation, it's not the most natural or common way to translate \"Subject name\" in the context of LDAP settings. It implies a 'topic name' rather than the name of a subject or person.",
+          "suggestion": "Consider alternatives like \"主体名称\" (zhǔtǐ míngchēng) or \"姓名\" (xìngmíng), depending on the specific LDAP setting. \"主体名称\" is likely the better fit."
         }
       ],
       "approved_at": null

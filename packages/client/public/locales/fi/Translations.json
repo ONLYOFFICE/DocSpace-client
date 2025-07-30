@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Valitse listalta",
-  "ConnectingAccount": "Yhdistetään tili",
-  "DeleteFromTrash": "Valitut elementit poistettiin roskakorista",
   "FileLocked": "Asiakirjat. Lukittu",
   "FileProtected": "Tiedosto on suojattu salasanalla",
   "FileUnlocked": "Asiakirjat. Lukitus poistettu",
@@ -14,7 +12,6 @@
   "FolderTitleSkyDrive": "OneDrive-hakemisto",
   "FolderTitleWebDav": "WebDAV-hakemisto",
   "FolderTitleYandex": "Yandex-hakemisto",
-  "GuestReleaseTipDescripton": "Kaikista aiemmin lisätyistä Käyttäjistä tulee Vieraita ja ovat nyt näkyvillä Kontaktit-listassa ainoastaan {{productName}} :n pääkäyttäjille. Vieraat eivät ole enää osa mitään ryhmää. Voit vaihtaa heidän tyyppiään ja lisätä heitä ryhmään, jos tarpeen.",
   "GuestReleaseTipLink": "Lue lisää käyttäjätyypeistä",
   "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä",
   "LinkValidTime": "Linkki on voimassa vain {{days_count}} päivää.",
@@ -28,14 +25,5 @@
   "ThirdPartyInfo": "Muuta kolmannen osapuolen tietoja",
   "ThirdPartyTitle": "Kolmannen osapuolen palvelut",
   "TitleShowActions": "Toimenpiteet",
-  "TitleShowFolderActions": "Kansion toiminnot",
-  "TypeTitleBoxNet": "Laatikko",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Kansion toiminnot"
 }

@@ -3,7 +3,7 @@
   "content": "Attention",
   "content_en_sha1_hash": "74e0b9c80dca267a78a89ad68a2f6c73241b5973",
   "created_at": "2025-05-19T21:30:43.129Z",
-  "updated_at": "2025-05-28T09:30:02.072Z",
+  "updated_at": "2025-05-26T07:57:32.130Z",
   "comment": {
     "text": "This translation key is used for the text \"Attention\" that appears as a header in a shell component (/packages/client/src/Shell.jsx) indicating a notification or alert message. It is likely displayed on a button or in a dialog box to draw user attention to important information.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation '¡Atención' is an interjection meaning 'Attention!' while the English word 'Attention' is a noun.  While '¡Atención!' is often used to get someone's attention, it doesn't directly translate the noun.",
+          "suggestion": "Consider 'Atención' (without the exclamation mark) or a more contextual translation depending on how 'Attention' is used in the original English."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“ຮຽນທ່ານ” translates to \"Dear you\" or \"Respectful greeting\". It is not an accurate translation of \"Attention\".",
-          "suggestion": "The appropriate Lao translation for \"Attention\" would depend on the context. Some possibilities include: ຄວາມເອົາໃຈໃສ່ (khwam ao chai sai), ກວດຈຸດໃຈ (khot chut jai), or ອຸປະຍົກອນ (uprayokhon)."
+          "description": "The Lao translation \"ຮຽນທ່ານ\" (rian thaan) translates to \"respected teacher\" or \"dear teacher,\" not \"attention.\" This is an inaccurate translation of the English word \"Attention\".",
+          "suggestion": "A more appropriate translation for \"Attention\" in Lao would depend on the context. Some possibilities include: 'ຄວາມສົນໃຈ' (khwam son jai - interest/attention), 'ເອົາໃຈໃສ່' (ao jai sai - to pay attention), or simply leaving it as 'ເອົາໃຈ' (ao jai) in some cases."
         }
       ],
       "approved_at": null

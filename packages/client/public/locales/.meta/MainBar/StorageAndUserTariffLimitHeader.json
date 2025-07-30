@@ -3,7 +3,7 @@
   "content": "The limit is reached for storage space and the number of admins",
   "content_en_sha1_hash": "f6035012dce79a4da8b697a7c8db05a916ba190f",
   "created_at": "2025-05-19T21:30:54.137Z",
-  "updated_at": "2025-07-01T15:57:35.917Z",
+  "updated_at": "2025-06-30T12:20:31.150Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that storage space and admin limits have been reached. It appears in a quota bar component, specifically on the user and storage tariff limit section.",
     "is_auto": true,
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Yaddaş sahəsi və administrator limiti çatdı\" doesn't perfectly convey the English meaning. \"Administrator\" is a loanword and using a more Azeri equivalent would improve clarity. \"Çatdı\" implies a single, sudden reaching of the limit, whereas the English suggests an ongoing condition.",
-          "suggestion": "Yaddaş sahəsi limiti və administratorların sayı limiti aşıldı"
+          "description": "The translation \"Yaddaş sahəsi və administrator limiti çatdı\" is a literal translation but doesn't flow naturally in Azerbaijani. 'The limit is reached' is better expressed as something like 'təyin edilmiş limitə çatdırılıb' or 'sərhədə çatıb'.",
+          "suggestion": "Yaddaş sahəsi və administrator sayının həddinə çatıb."
+        },
+        {
+          "type": "grammar",
+          "description": "The word order could be improved for better flow and readability.  While grammatically correct, it's not the most natural way to phrase it.",
+          "suggestion": "Yaddaş sahəsi və administratorların sayı üçün həddə çatıb."
         }
       ],
       "approved_at": null
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"the number of admins\" is not accurately translated. \"ադմինիստրատորների քանակի\" literally translates to \"quantity of administrators.\" A more natural and concise Armenian phrasing would be \"քանակի վերաբերյալ վարչակազմի\".",
-          "suggestion": "Պահեստային տարածքի և վարչակազմի քանակի սահմանաչափը հասել է"
+          "description": "The English phrase 'The limit is reached' implies a passive voice. The Armenian translation uses a more active construction 'սահմանաչափը հասել է' (the limit has reached). While not strictly incorrect, it shifts the emphasis. A more passive phrasing like 'սահմանը սպառվել է' (the limit has been exhausted) or 'սահմանը լրացվել է' (the limit has been filled) might be closer to the original meaning and nuance.",
+          "suggestion": "Consider revising to 'Պահեստային տարածքի և ադմինիստրատորների քանակի սահմանը սպառվել է' or 'Պահեստային տարածքի և ադմինիստրատորների քանակի սահմանը լրացվել է'"
         }
       ],
       "approved_at": null
@@ -120,13 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເກືອບເຕັມຂີດນໍາກົດເກືອບເຕັມສໍາລັບພື້ນທີ່ເກັບຮັກສາ ແລະ ຈໍານວນຜູ້ບໍລິຫານ\" doesn't accurately convey 'The limit is reached'. It translates to 'almost full limit for storage space and the number of admins'.",
-          "suggestion": "ອ່ານແລກສິດນໍາກົດເຕັມສໍາລັບພື້ນທີ່ເກັບຮັກສາ ແລະ ຈໍານວນຜູ້ບໍລິຫານ"
+          "description": "The Lao translation \"ເກືອບເຕັມຂີດນໍາກົດເກືອບເຕັມສໍາລັບພື້ນທີ່ເກັບຮັກສາ ແລະ ຈໍານວນຜູ້ບໍລິຫານ\" doesn't accurately convey 'The limit is reached'. 'ເກືອບເຕັມ' means 'almost full', not 'reached the limit'.",
+          "suggestion": "Consider a translation like 'ເຕັມຂີດສໍາລັບພື້ນທີ່ເກັບຮັກສາ ແລະ ຈໍານວນຜູ້ບໍລິຫານ' (tem khit samlap phuen thi kep hak sa lae chanuan phu borihan) which means 'Limit reached for storage space and the number of admins'."
         },
         {
           "type": "grammar",
-          "description": "The phrasing in the Lao translation is a bit clunky. It could be more natural.",
-          "suggestion": "ອ່ານແລກສິດນໍາກົດເຕັມສໍາລັບພື້ນທີ່ເກັບຮັກສາ ແລະ ຈໍານວນຜູ້ບໍລິຫານ"
+          "description": "The phrase 'ນໍາກົດເກືອບເຕັມ' (nam kot kueb tem) is a bit awkward and grammatically unusual in Lao. It isn't a standard phrasing for defining a limit.",
+          "suggestion": "Simplify the phrasing; remove 'ນໍາກົດ' entirely as it doesn't contribute to the meaning."
         }
       ],
       "approved_at": null
@@ -137,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached for storage space and the number of admins' is not perfectly captured by the Latvian translation. A more natural and accurate translation might emphasize the exceeding of the limit, rather than just its reaching.",
-          "suggestion": "Varbūt labāk: 'Pārskauts krātuves vietas un administratoru skaita ierobežojums' or 'Jūsu krātuves vietas un administratoru skaita ierobežojums ir pārsniegts'."
+          "description": "The English phrase \"the number of admins\" is not perfectly captured by \"administratoru skaita\". A more natural translation would be \"administratoru skaita limits\" or \"administratoru skaita ierobežojums\". Using just 'skaita' is slightly awkward.",
+          "suggestion": "Ir sasniegts krātuves vietas un administratoru skaita ierobežojums"
         }
       ],
       "approved_at": null
@@ -155,13 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Osiągnięto limit pamięci i liczbę administratorów\" is not a direct or accurate translation of 'The limit is reached for storage space and the number of admins'. It literally translates to 'Limit reached for memory and the number of administrators'. It's missing a connector to link 'storage space' and 'the number of admins' more naturally.",
-          "suggestion": "Osiągnięto limit miejsca na dane i liczbę administratorów"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'pamięci' (memory) doesn't accurately convey 'storage space'.  'Miejsce na dane' (space for data) is a more fitting translation.",
-          "suggestion": "Use 'miejsce na dane' instead of 'pamięci'."
+          "description": "The English phrase 'the number of admins' is not accurately translated. 'Liczbę administratorów' implies a quantity, but the English refers to a limit on the number of admins allowed. A more appropriate translation would convey a limit on admin accounts or admin users.",
+          "suggestion": "Osiągnięto limit pamięci i limit liczby administratorów"
         }
       ],
       "approved_at": null
@@ -184,13 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrasing 'The limit is reached' is better conveyed with a more active voice in Romanian. 'A fost atinsă' (was reached) is grammatically correct, but a more natural phrasing might be 'S-a depășit limita' (The limit has been exceeded).",
-          "suggestion": "S-a depășit limita maximă permisă de stocare și de administratori"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, 'de stocare și de administratori' is slightly redundant. Combining these phrases would improve readability. The 'de' is repeated unnecessarily.",
-          "suggestion": "Limita maximă permisă de stocare și număr de administratori a fost atinsă"
+          "description": "The translation \"Limita maximă permisă de stocare și de administratori a fost atinsă\" is a bit literal and awkward. A more natural Romanian phrasing would be something like \"S-a atins limita de spațiu de stocare și de administratori\" or \"A fost atinsă limita pentru spațiul de stocare și numărul de administratori.\"",
+          "suggestion": "S-a atins limita de spațiu de stocare și de administratori"
         }
       ],
       "approved_at": null
@@ -207,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ධාරිතාව ඉකුත්වී ඇති අතර පරිපාලකයින් සංඛ්‍යාවද ඉකුත්වී ඇත.\" is a literal translation and may not convey the intended meaning clearly in Sinhala.  'ධාරිතාව' (dharithawa) translates to capacity, but in this context 'limit' might be better conveyed.  The phrasing 'සංඛ්‍යාවද ඉකුත්වී ඇත' (sankhayawa wad ikutuwee atha) is a bit clunky for 'the number of admins'.",
-          "suggestion": "A more natural-sounding translation could be: \"භ 収納ක සීමාව හා පරිපාලක සංඛ්‍යා සීමාව ඉක්මවා ඇත.\" (Bh 収納ka seemaawa ha pariipaalaka sankhyaa seemaawa ikumawaa atha)."
+          "description": "The translation \"ධාරිතාව ඉකුත්වී ඇති අතර පරිපාලකයින් සංඛ්‍යාවද ඉකුත්වී ඇත.\" doesn't fully capture the meaning of 'The limit is reached for storage space and the number of admins'. While it translates to 'The limit is reached and the number of administrators is also reached', it doesn't directly mention 'storage space'. It's a slightly indirect phrasing.",
+          "suggestion": "ධාරිතාව ඉකුත්වී ඇති අතර ని Speicherplatz und die Anzahl der Administratoren."
         }
       ],
       "approved_at": null
@@ -219,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Slovak translation uses the passive voice ('is reached'). A more natural and direct phrasing would be preferable. While grammatically correct, it sounds slightly awkward.",
-          "suggestion": "Limit pre úložný priestor a počet administrátorov je prekročený."
+          "description": "The Slovak translation uses the imperfective 'je dosiahnutý' which implies the limit is being reached repeatedly. The English suggests a single instance. A perfective form would be more appropriate.",
+          "suggestion": "Limit pre úložný priestor a počet administrátorov bol dosiahnutý"
         }
       ],
       "approved_at": null
@@ -228,7 +223,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The limit is reached' is better conveyed as 'Presežena je meja' or 'Omejitev je dosežena' in Slovenian, rather than simply stating 'Dosežena je omejitev'. While 'Dosežena je omejitev' isn't incorrect, it's less natural.",
+          "suggestion": "Presežena je meja za prostor za shranjevanje in število skrbnikov."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -237,13 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Достигнут је лимит за складишни простор и број админа' doesn't perfectly convey the meaning of 'The limit is reached for storage space and the number of admins'. While understandable, it's a bit literal and could be improved for better flow.",
-          "suggestion": "Достигнут је лимит складишног простора и броја администратора."
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'админа' is in the genitive singular form but should ideally be in the nominative plural to match the English phrasing more closely.",
-          "suggestion": "администратора"
+          "description": "The Serbian translation \"Достигнут је лимит за складишни простор и број админа\" is not a perfect translation of \"The limit is reached for storage space and the number of admins.\"  'Admins' should be translated to 'администратори'.",
+          "suggestion": "Достигнут је лимит за складишни простор и број администратора"
         }
       ],
       "approved_at": null
@@ -254,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"the number of admins\" is not accurately translated. \"Broj admina\" literally means 'number of admins,' but it doesn't convey the meaning as effectively in this context. A more natural phrasing would be something like \"maksimalan broj administratora\" or \"ograničen broj administratora\".",
-          "suggestion": "Consider 'maksimalan broj administratora' or 'ograničen broj administratora' instead of 'broj admina'."
+          "description": "The English phrase 'the number of admins' is not accurately translated. 'Broj admina' literally translates to 'number of admins' but in this context, a more natural and idiomatic translation would be 'broj administratora' or simply 'administratora'.",
+          "suggestion": "broj administratora"
         }
       ],
       "approved_at": null
@@ -266,8 +262,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'the limit is reached' implies a specific threshold has been met. The Turkish translation 'ulaşıldı' is more general and means 'reached' without specifying that a limit was reached. A more accurate translation might include something like 'sınır aşıldı' (limit exceeded).",
-          "suggestion": "Depolama ve yönetici sınırları aşıldı"
+          "description": "The English phrase 'The limit is reached for storage space and the number of admins' implies a restriction has been hit. The Turkish translation 'Depolama ve yönetici sınırına ulaşıldı' translates to 'The storage and admin limit has been reached'. While close, it lacks the sense of 'reached' in the context of a limit being hit, which often implies a negative consequence. A more accurate translation would emphasize the limitation itself.",
+          "suggestion": "Depolama alanı ve yönetici sayısı için sınır aşıldı."
         }
       ],
       "approved_at": null

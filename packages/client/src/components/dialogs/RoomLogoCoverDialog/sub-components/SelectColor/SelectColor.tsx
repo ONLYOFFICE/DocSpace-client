@@ -58,7 +58,7 @@ export const SelectColor = ({
   openColorPicker,
   setOpenColorPicker,
 }: SelectColorProps) => {
-  const isDefaultColor = logoColors.includes(roomColor);
+  const isDefaultColor = logoColors.includes(roomColor!);
   const [pickerColor, setPickerColor] = useState<string | null>(
     isDefaultColor ? "" : roomColor || "",
   );
@@ -109,7 +109,7 @@ export const SelectColor = ({
         {roomColor ? (
           <CustomSelectedColor
             isSelected={isSelectedColorPicker}
-            color={pickerColor}
+            color={pickerColor!}
             ref={iconRef}
           >
             {isSelectedColorPicker ? (
@@ -161,7 +161,7 @@ export const SelectColor = ({
                 onApply={onApply}
                 isPickerOnly
                 handleChange={onApply}
-                appliedColor={selectedColor}
+                appliedColor={selectedColor!}
                 applyButtonLabel={t("Common:ApplyButton")}
                 cancelButtonLabel={t("Common:CancelButton")}
               />
@@ -169,7 +169,6 @@ export const SelectColor = ({
           </StyledModalDialog>
         ) : (
           <DropDown
-            directionX="both"
             directionY="both"
             topSpace={16}
             forwardedRef={iconRef}
@@ -186,7 +185,7 @@ export const SelectColor = ({
                   onApply={onApply}
                   isPickerOnly
                   handleChange={onApply}
-                  appliedColor={selectedColor}
+                  appliedColor={selectedColor!}
                   applyButtonLabel={t("Common:ApplyButton")}
                   cancelButtonLabel={t("Common:CancelButton")}
                 />

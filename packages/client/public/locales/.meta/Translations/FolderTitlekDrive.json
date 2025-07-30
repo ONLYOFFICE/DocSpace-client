@@ -3,7 +3,7 @@
   "content": "kDrive directory",
   "content_en_sha1_hash": "511e7a3843fca1fac23d32cb4e3c38073aaa218a",
   "created_at": "2025-05-19T21:30:49.978Z",
-  "updated_at": "2025-06-03T20:59:41.989Z",
+  "updated_at": "2025-05-26T07:57:32.389Z",
   "comment": {
     "text": "The translation key \"FolderTitlekDrive\" is used to display the label for a kDrive directory in various UI elements. It is typically used as the text displayed on buttons, dialog windows, or other interactive elements when interacting with a kDrive directory in the application.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'مجلد kDrive' is a literal translation and doesn't fully convey the meaning of 'kDrive directory'.  'مجلد' simply means 'folder'. A more accurate translation would incorporate the concept of a directory or a designated storage area.",
-          "suggestion": "Consider translating as 'مجلد kDrive الرئيسي' (Main kDrive folder) or 'دليل kDrive' (kDrive directory)."
+          "description": "The translation 'مجلد kDrive' is a literal translation of \"kDrive directory\" and doesn't fully convey the meaning. It misses the word 'directory'. A more accurate translation would include a term that signifies a directory or folder, depending on the desired level of formality.",
+          "suggestion": "Consider alternatives like 'مجلد kDrive' (direct translation) or 'دليل kDrive' (using 'دليل' for directory). The best choice depends on the context and intended audience."
         }
       ],
       "approved_at": null
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adresář kDrive' is a literal translation of 'kDrive directory'. A more natural Czech phrasing for a directory name might be 'kDrive složka' or 'kDrive adresář'. While 'adresář' is technically correct, 'složka' is more commonly used for directories.",
+          "description": "While \"Adresář\" translates to \"directory\", the combination with \"kDrive\" feels slightly unnatural in Czech. A more natural phrasing would be 'kDrive složka' or 'kDrive adresář'. 'Adresář kDrive' suggests the folder *is* named 'Adresář'.",
           "suggestion": "kDrive složka"
         }
       ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'kDrive գրացուցակ' while technically meaning 'kDrive list', doesn't quite convey the meaning of 'directory' as a folder or container.  'գրացուցակ' is more of a generic list.",
-          "suggestion": "kDrive պանակ (kDrive panak)"
+          "description": "The Armenian translation \"kDrive գրացուցակ\" literally translates to \"kDrive list\". While understandable, it doesn't precisely convey the meaning of \"kDrive directory\". \"Directory\" implies a container or a folder, whereas \"list\" implies a listing of items.",
+          "suggestion": "kDrive պանակ (kDrive panak) - This translates to \"kDrive folder\", which is a more accurate representation of a directory."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Italian translation 'directory kDrive' doesn't accurately convey the meaning of \"kDrive directory\". It reverses the order and lacks proper prepositional phrasing that would be natural in Italian. A more accurate translation would be 'cartella kDrive' or 'directory kDrive'.",
-          "suggestion": "cartella kDrive"
+          "description": "The Italian translation 'directory kDrive' reverses the order of words compared to the English 'kDrive directory'. It's more natural to place 'kDrive' before 'directory' in Italian as well, especially for a folder name.",
+          "suggestion": "kDrive directory"
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao word 'ໄດເລກະທໍລີ' is a transliteration and may not be the most natural way to express 'directory' in Lao. While technically correct, it lacks fluency.",
-          "suggestion": "Consider a more idiomatic Lao term for 'directory', such as 'ເອກະສານ' (ek-ga-saan) which refers to documents, or a more descriptive phrase depending on the context."
+          "description": "The Lao word 'ໄດເລກະທໍລີ' appears to be a transliteration of 'directory' rather than a proper Lao equivalent. While understandable, it might not be the most natural phrasing.",
+          "suggestion": "Consider a more idiomatic Lao term for 'directory' if one exists, such as researching common Lao terms for directories in computer contexts."
         }
       ],
       "approved_at": null
@@ -147,13 +147,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'kDrive directory' is identical to the English content. It doesn't represent a proper Dutch translation for 'kDrive directory'.",
-          "suggestion": "Consider 'kDrive map' or 'kDrive-map'. The best translation might depend on the specific context and how 'directory' is used."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Katalog kDrive\" is a literal translation but may not be the most natural or idiomatic way to refer to a 'kDrive directory' in Polish. A more natural phrasing might be 'folder kDrive' or 'kDrive folder'.",
-          "suggestion": "Consider 'folder kDrive' or 'kDrive folder' for a more natural phrasing."
+          "description": "The translation \"Katalog kDrive\" is a literal translation but lacks the specificity of \"directory.\" It might be misinterpreted as simply referring to the 'kDrive' label itself rather than the folder containing files.",
+          "suggestion": "Katalog kDrive (folder)"
         }
       ],
       "approved_at": null
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Director kDrive' is not a natural or accurate rendering of 'kDrive directory' in Romanian. It doesn't convey the concept of a directory.",
-          "suggestion": "Consider 'dosarul kDrive' or 'folderul kDrive'. 'Dosarul' is a closer equivalent to 'directory' in this context, while 'folderul' is a more common term for a folder."
+          "description": "The Romanian translation 'Director kDrive' is not a natural or accurate translation of 'kDrive directory'. It misses the 'directory' part and 'Director' sounds awkward in this context.",
+          "suggestion": "Consider 'Dosar kDrive' or 'Directorul kDrive' (if specifying a particular kDrive directory)."
         }
       ],
       "approved_at": null
@@ -204,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'kDrive නාමාවලිය' while technically meaning 'kDrive list', doesn't accurately convey 'kDrive directory'.  'නාමාවලිය' implies a listing *of* something, rather than the directory itself.",
-          "suggestion": "kDrive ෆෝල්ඩර් (kDrive Folder)"
+          "description": "The Sinhala translation \"kDrive නාමාවලිය\" while using the correct term for 'directory' (නාමාවලිය), doesn't perfectly convey the meaning of 'kDrive directory'. It lacks the possessive/association with 'kDrive'. A more accurate translation might include that relationship.",
+          "suggestion": "kDrive ෆෝල්ඩරය (kDrive folderaya) or kDrive හි නාමාවලිය (kDrive ha namaavaliya - kDrive's directory)"
         }
       ],
       "approved_at": null
@@ -213,13 +207,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Priečinok kDrive' is a literal translation. A more natural Slovak phrasing would be 'kDrive priečinok' or 'zložka kDrive'.",
-          "suggestion": "kDrive priečinok"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -234,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'kDrive директоријум' while technically correct, doesn't convey the typical meaning or feel of 'directory' in this context. 'Директоријум' is a more formal term. A more natural translation would be 'kDrive фасцикула' or 'kDrive директориј'.",
+          "description": "The Serbian (Cyrillic) translation \"kDrive директоријум\" is a direct transliteration of \"directory\" and doesn't accurately convey the meaning of 'kDrive directory'. A more appropriate translation would incorporate the context of a folder or location.",
           "suggestion": "kDrive фасцикула"
         }
       ],
@@ -243,7 +231,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'direktorijum' is spelled correctly, but might benefit from consideration of a more natural phrasing in Serbian depending on the context. While technically correct, it can sound slightly formal or borrowed.",
+          "suggestion": "Consider 'kDrive foldera' or 'kDrive mapa' for a more common usage, if appropriate for the context."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

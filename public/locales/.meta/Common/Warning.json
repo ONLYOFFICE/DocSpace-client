@@ -3,7 +3,7 @@
   "content": "Warning",
   "content_en_sha1_hash": "e9c45563358e813f157ba81b33143542165ba84e",
   "created_at": "2025-05-19T21:30:49.575Z",
-  "updated_at": "2025-07-01T15:57:35.872Z",
+  "updated_at": "2025-06-30T12:20:31.099Z",
   "comment": {
     "text": "This \"Warning\" translation key is used to display a caution message when sensitive information about file protection is detected in a file. It appears as a warning text in error messages or dialog boxes, providing context for users when accessing protected files.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 160,
+      "line_number": 153,
       "context": "return (\n <>\n {!isDowngradeToUser ? (\n <Text className=\"warning-text\" fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}\n </Text>\n ) : null}\n \n <Text className=\"body-text\">\n {isDowngradeToUser ? (",
       "module": "/packages/client"
     },
@@ -48,13 +48,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 142,
+      "line_number": 153,
       "context": ": t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n <Text className=\"text-warning\">{t(\"Common:Warning\")}</Text>\n <Text className=\"text-delete-description\">{warningMessage}</Text>\n </>\n );\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 142,
+      "line_number": 153,
       "context": ": t(\"ActionCannotBeUndone\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n \n <Text className=\"text-warning\">{t(\"Common:Warning\")}</Text>\n <Text className=\"text-delete-description\">{warningMessage}</Text>\n </>\n );\n }",
       "module": "/packages/client"
     },
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 44,
+      "line_number": 43,
       "context": "onCloseDialog();\n };\n \n return (\n <ModalDialog visible={visible} onClose={onCloseDialog} autoMaxHeight>\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"YourUserTypeHasChanged\"",
       "module": "/packages/client"
     },
@@ -92,12 +92,6 @@
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
       "line_number": 92,
       "context": "autoMaxHeight\n visible={visible}\n onClose={onCloseDialog}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect style={{ marginBottom: \"16px\" }}>\n {getWarningDescription()}\n </Text>\n <Text noSelect>{t(\"Settings:WantToContinue\")}</Text>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/restore-backup/index.js",
-      "line_number": 239,
-      "context": ");\n \n const warningContent = (\n <>\n <Text className=\"restore-backup_warning settings_unavailable\" noSelect>\n {t(\"Common:Warning\")}!\n </Text>\n <Text\n className=\"restore-backup_warning-description settings_unavailable\"\n noSelect\n >",
       "module": "/packages/client"
     },
     {
@@ -126,19 +120,25 @@
     },
     {
       "file_path": "/packages/shared/components/toast/sub-components/Toastr.tsx",
-      "line_number": 72,
+      "line_number": 58,
       "context": "defaultTitleKey: \"Done\" | \"Warning\" | \"Alert\" | \"Info\";\n }\n \n const TOAST_CONFIGS: Record<ToastType, NotifyConfig> = {\n [ToastType.success]: { type: ToastType.success, defaultTitleKey: \"Done\" }, // t(\"Common:Done\")\n [ToastType.error]: { type: ToastType.error, defaultTitleKey: \"Warning\" }, // t(\"Common:Warning\")\n [ToastType.warning]: { type: ToastType.warning, defaultTitleKey: \"Alert\" }, // t(\"Common:Alert\")\n [ToastType.info]: { type: ToastType.info, defaultTitleKey: \"Info\" }, // t(\"Common:Info\")\n };\n \n const getTitle = (type: \"Done\" | \"Warning\" | \"Alert\" | \"Info\") => {",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/management/src/categories/encrypt-data/index.tsx",
-      "line_number": 112,
+      "file_path": "/packages/shared/pages/restore-backup/index.tsx",
+      "line_number": 311,
+      "context": ");\n \n const warningContent = (\n <>\n <Text className=\"restore-backup_warning settings_unavailable\" noSelect>\n {t(\"Common:Warning\")}!\n </Text>\n <Text\n className=\"restore-backup_warning-description settings_unavailable\"\n noSelect\n >",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
+      "line_number": 95,
       "context": "organizationName: t(\"Common:OrganizationName\"),\n })}\n </Text>\n <div className=\"wrapper-block\">\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!\n </Text>\n <Text className=\"description\">\n {t(\"EncryptDataWarningDescription\")}\n </Text>\n {encryptionBlockHelpUrl ? (",
       "module": "/packages/management"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/dialogs/DeletePortalDialog/index.tsx",
-      "line_number": 120,
+      "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
+      "line_number": 116,
       "context": "</ModalDialog.Header>\n <ModalDialog.Body>\n {isWizardCompleted ? (\n <>\n <Text className=\"warning-text\" fontSize=\"16px\" fontWeight={700}>\n {t(\"Common:Warning\")}!\n </Text>\n <Trans\n i18nKey=\"DeleteSetupPortalText\"\n values={{\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/management"
     }

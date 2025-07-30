@@ -88,7 +88,7 @@ type TemplateAccessSettingsContainer =
       onSetAccessSettings?: undefined;
       inviteItems?: undefined;
       setInviteItems?: undefined;
-      updateInfoPanelMembers: (t: TTranslation) => void;
+      updateInfoPanelMembers: () => void;
       templateIsAvailable: undefined;
       setTemplateIsAvailable: undefined;
     };
@@ -120,7 +120,7 @@ const TemplateAccessSettingsPanel = ({
   templateIsAvailable,
   setTemplateIsAvailable,
 }: TemplateAccessSettingsPanelProps) => {
-  const [accessItems, setAccessItems] = useState([]);
+  const [accessItems, setAccessItems] = useState<TSelectorItem[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsLoading, setModalIsLoading] = useState(false);
@@ -132,9 +132,9 @@ const TemplateAccessSettingsPanel = ({
 
   const templateId = templateItem?.id;
 
-  const prevIsAvailable = useRef<boolean>();
+  const prevIsAvailable = useRef<boolean>(undefined);
 
-  const setAccessItemsAction = (items) => {
+  const setAccessItemsAction = (items: TSelectorItem[]) => {
     if (isContainer) setInviteItems(items);
     else setAccessItems(items);
   };
@@ -156,6 +156,10 @@ const TemplateAccessSettingsPanel = ({
 
     setIsVisible(false);
   }, [setInfoPanelIsMobileHidden, setIsVisible]);
+
+  const onBackClick = () => {
+    if (addUsersPanelVisible) setAddUsersPanelVisible(false);
+  };
 
   const onCloseUsersPanel = () => {
     if (isContainer) setUsersPanelIsVisible(false);
@@ -186,8 +190,16 @@ const TemplateAccessSettingsPanel = ({
     };
   }, [isMobileView, onMouseDown]);
 
-  const onKeyPress = (e: KeyboardEvent) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
+  const onKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Esc" || e.key === "Escape") onClose();
+    if (
+      e.key === "Backspace" &&
+      e.target instanceof HTMLElement &&
+      e.target.nodeName !== "INPUT" &&
+      e.target.nodeName !== "TEXTAREA"
+    )
+      onCloseAccessSettings?.();
+  };
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyPress);
@@ -213,11 +225,11 @@ const TemplateAccessSettingsPanel = ({
               };
             },
           );
-          setAccessItems(convertedItems);
+          setAccessItems(convertedItems as unknown as TSelectorItem[]);
         }
 
-        prevIsAvailable.current = available;
-        setIsAvailable(available);
+        prevIsAvailable.current = available as boolean;
+        setIsAvailable(available as boolean);
       })
       .catch((error) => {
         toastr.error(error as Error);
@@ -246,8 +258,8 @@ const TemplateAccessSettingsPanel = ({
     setIsLoading(true);
 
     if (prevIsAvailable.current !== isAvailable) {
-      setTemplateAvailable(templateId, isAvailable)
-        .then(() => updateInfoPanelMembers(t))
+      setTemplateAvailable?.(templateId, isAvailable)
+        ?.then(() => updateInfoPanelMembers())
         .finally(() => {
           setIsLoading(false);
           onClose();
@@ -270,7 +282,7 @@ const TemplateAccessSettingsPanel = ({
       notify: false,
       sharingMessage: "",
     })
-      .then(() => updateInfoPanelMembers(t))
+      .then(() => updateInfoPanelMembers())
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsLoading(false);
@@ -400,6 +412,7 @@ const TemplateAccessSettingsPanel = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
+      onBackClick={onBackClick}
       withBodyScroll
       isLoading={!tReady || modalIsLoading}
       onSubmit={onSubmit}
@@ -415,7 +428,7 @@ const TemplateAccessSettingsPanel = ({
             onClose={onClosePanels}
             onCloseClick={onCloseClick}
             onBackClick={onCloseUsersPanel}
-            disableInvitedUsers={invitedUsers}
+            disableInvitedUsers={invitedUsers as string[]}
           />
         ) : null}
       </ModalDialog.Container>

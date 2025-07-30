@@ -3,7 +3,7 @@
   "content": "Confirm certificate",
   "content_en_sha1_hash": "69ce41b2cdf9a76e9b116cc810c60bfb9987f24f",
   "created_at": "2025-05-19T21:30:54.181Z",
-  "updated_at": "2025-05-21T08:26:22.549Z",
+  "updated_at": "2025-05-24T08:38:52.749Z",
   "comment": {
     "text": "This translation key is used for the label \"Confirm certificate\" in a modal dialog that confirms an LDAP certificate. It is displayed as the header of the dialog and appears on a modal window within a settings page for integrating an LDAP connection.",
     "is_auto": true,
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ກວດຢັ້ງຢືນໃບຮັບຮອງ\" is a literal translation, \"Confirm certificate\" implies a confirmation action related to a certificate's validity. A more accurate translation would focus on that confirmation aspect. \"ຢັ້ງຢືນຄວາມຖືກຕ້ອງຂອງໃບຮັບຮອງ\" (Yang yeun khwam thuk thong khong lap ruap rong) - 'Verify the validity of the certificate' - would be a more fitting translation.",
-          "suggestion": "ຢັ້ງຢືນຄວາມຖືກຕ້ອງຂອງໃບຮັບຮອງ"
+          "description": "While \"ກວດຢັ້ງຢືນໃບຮັບຮອງ\" is a literal translation, it's a bit clunky and less natural for this context. A more idiomatic translation for 'Confirm certificate' would be something like 'ຢັ້ງຢືນໃບຮັບຮອງ' or 'ກວດໃບຮັບຮອງ'.",
+          "suggestion": "ຢັ້ງຢືນໃບຮັບຮອງ"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පරීක්ෂණ පත්‍රය තහවුරු කරන්න\" literally translates to \"Confirm the examination paper.\"  It doesn't accurately convey the meaning of \"Confirm certificate.\" The word 'certificate' is missing.",
-          "suggestion": "A more accurate translation would be something like \"සertifikat-එ තහවුරු කරන්න\" (Sertifikat-e thahawuru kăranna) or \"සertifikat-එ නිවැරදි කරන්න\" (Sertifikat-e niwāredī karan."
+          "description": "The translation \"පරීක්ෂණ පත්‍රය තහවුරු කරන්න\" literally translates to \"Confirm the examination paper.\" While 'certificate' and 'examination paper' can be related, 'certificate' (as in, a digital certificate) is more accurately translated. The context suggests a digital certificate confirmation.",
+          "suggestion": "පරීක්ෂණ වාත්සල්‍යනය තහවුරු කරන්න (Parīkṣaṇā vātsalyanaya thahawuru kāranna) - This translates to 'Confirm the certificate' or 'Verify the certificate' and is a more accurate reflection of the English 'Confirm certificate'."
         }
       ],
       "approved_at": null

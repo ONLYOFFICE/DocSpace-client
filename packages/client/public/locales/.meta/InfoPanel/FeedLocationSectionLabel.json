@@ -3,7 +3,7 @@
   "content": "Section «{{folderTitle}}»",
   "content_en_sha1_hash": "5578cb7bfa1e05e62f4a8a9d23e621e85f6d125e",
   "created_at": "2025-05-19T21:30:54.787Z",
-  "updated_at": "2025-05-21T10:15:58.080Z",
+  "updated_at": "2025-06-30T12:20:31.333Z",
   "comment": {
     "text": "This translation key is used to display a section label, showing a folder title within a specific context. It appears on a history panel and is used when displaying folder information in a list or grid format.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
       "line_number": 85,
-      "context": "const destination = isFolder\n ? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
+      "context": "const destination = isFolder\n ? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"«{{folderTitle}}» بەشی \" incorrectly translates \"Section\". 'بەشی' means 'part' or 'section' but is a less formal and less accurate translation of 'Section' in this context. A more formal and accurate translation would be something like \"جزء\" (juz')",
-          "suggestion": "«{{folderTitle}}» جزء "
-        },
-        {
-          "type": "formatting",
-          "description": "The Arabic translation includes a space before the opening quote mark (»). This is unnecessary and should be removed to match the English formatting.",
-          "suggestion": "«{{folderTitle}}» بەشی"
+          "description": "The Arabic translation \"«{{folderTitle}}» بەشی \" is not a correct translation of \"Section «{{folderTitle}}». The word 'بەشی' translates to 'part' or 'section' but the sentence structure feels unnatural. It is missing a preposition like 'في' (in) or 'من' (of) to properly connect the folder title to the section.",
+          "suggestion": "«{{folderTitle}}» بەشی "
         }
       ],
       "approved_at": null
@@ -104,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation includes a space before the 'セクション' (section) which might not be standard practice. It's generally more common to directly concatenate the words.",
-          "suggestion": "«{{folderTitle}}»セクション"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -221,8 +210,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"«{{folderTitle}}» 部分\" is overly literal. While \"部分\" means \"section\" or \"part,\" it doesn't flow naturally in this context. A more natural translation would be to simply use the folder title directly within quotes or use a phrase like \"文件夹 «{{folderTitle}}»\". The current translation sounds awkward.",
-          "suggestion": "«{{folderTitle}}»"
+          "description": "The translation \"«{{folderTitle}}» 部分\" is a literal translation of \"Section\".  A more natural and idiomatic translation would be something like \"文件夹 «{{folderTitle}}»\", \"«{{folderTitle}}» 文件夹\", or \"«{{folderTitle}}» 目录\". \"部分\" implies a part of something larger, which isn't necessarily the intended meaning of 'Section' in this context.",
+          "suggestion": "«{{folderTitle}}» 文件夹"
+        },
+        {
+          "type": "formatting",
+          "description": "The curly braces around {{folderTitle}} should be consistent with the English source.",
+          "suggestion": "«{{folderTitle}}» 文件夹"
         }
       ],
       "approved_at": null

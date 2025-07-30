@@ -3,7 +3,7 @@
   "content": "Folder «{{folderTitle}}»",
   "content_en_sha1_hash": "eec9f9820b33c08ccac5b304980df7ffbeef680e",
   "created_at": "2025-05-19T21:30:54.780Z",
-  "updated_at": "2025-05-21T10:16:28.208Z",
+  "updated_at": "2025-06-30T12:20:31.333Z",
   "comment": {
     "text": "The FeedLocationLabel translation key is used to display a descriptive text for folder information on the HistoryBlockContent component. The text refers to the folder title and appears in a main text area when reorder folders are enabled or section views are selected.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
       "line_number": 81,
-      "context": "isReorderFolder;\n \n const isFromFolder = fromParentType === FolderType.DEFAULT;\n \n const destination = isFolder\n ? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
+      "context": "isReorderFolder;\n \n const isFromFolder = fromParentType === FolderType.DEFAULT;\n \n const destination = isFolder\n ? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
       "module": "/packages/client"
     }
   ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation uses a full-width space before フォルダ. While technically acceptable, it's more common to omit the space, especially in UI contexts.",
-          "suggestion": "«{{folderTitle}}»フォルダ"
+          "description": "The Japanese translation includes a space before the « character, which may not be consistent with the original English content's intended formatting.",
+          "suggestion": "Remove the space before the « character. Resulting in: «{{folderTitle}}»フォルダ"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch word 'Map' ('Kaart') is not the most natural or expected translation for 'Folder'. 'Folder' generally refers to a container for files and documents. A more appropriate translation would be 'Map' in the sense of a directory or a container.",
-          "suggestion": "Map"
+          "description": "The English term 'Folder' is translated as 'Map' in Dutch. While 'Map' can sometimes be used, 'Folder' more accurately reflects the meaning of a folder in this context.",
+          "suggestion": "Ordner «{{folderTitle}}»"
         }
       ],
       "approved_at": null
@@ -168,13 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"බහාලුම\" (bahaluma) generally refers to a container or receptacle, not a folder. While it could be interpreted in a broader sense, it's not the most accurate translation for \"Folder\".",
-          "suggestion": "«{{folderTitle}}» ෆෝල්ඩර්"
+          "description": "The translation \"«{{folderTitle}}» බහාලුම\" uses 'බහාලුම' (bahaluma) which translates to 'dump' or 'heap'. A more appropriate translation for 'Folder' would be 'ඡායාරුප ඇසුර' (chayaruhapa asura) or 'ගොනුව' (gonuwa).",
+          "suggestion": "«{{folderTitle}}» ඡායාරුප ඇසුර"
         },
         {
           "type": "formatting",
-          "description": "The surrounding quotes « » are maintained in Sinhala, but consistency is needed. If they are meant to be displayed as part of the UI, ensure they are correctly rendered.",
-          "suggestion": "Maintain consistent quotation marks as per design specifications. Consider alternative UI rendering methods if required."
+          "description": "The Sinhala translation retains the surrounding quotes («») like the English, which might not be standard practice in Sinhala. Consider removing them or using different quote styles.",
+          "suggestion": "«{{folderTitle}}» ගොනුව"
         }
       ],
       "approved_at": null
@@ -196,9 +196,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word \"Folder\" should be translated to Serbian as \"Mapa\" or \"Часовник\", not transliterated as \"Фолдер\". While understandable, it's not a natural-sounding translation.",
-          "suggestion": "Mapa «{{folderTitle}}»"
+          "type": "formatting",
+          "description": "The Cyrillic transcription of 'Folder' is correct, but the surrounding quotation marks remain the same as in the English version. While not strictly incorrect, maintaining consistency with Serbian conventions would improve the result. Serbian often uses double angle brackets « » for titles.",
+          "suggestion": "Фолдер «{{folderTitle}}» should ideally be translated as «{{folderTitle}}» if consistency is preferred."
         }
       ],
       "approved_at": null
@@ -212,7 +212,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The English content uses «» (left-right quotation marks). The Turkish translation also uses «» which may not be the standard Turkish quotation mark (which is generally “”). While not strictly incorrect, using standard Turkish quotation marks would be more consistent.",
+          "suggestion": "Consider replacing «» with “”. Example: “{{folderTitle}}” klasörü"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

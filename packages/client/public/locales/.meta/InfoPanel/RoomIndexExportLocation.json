@@ -3,7 +3,7 @@
   "content": "Export of the room index saved to {{sectionName}}",
   "content_en_sha1_hash": "0bcf2b9b4084c5312b362571de6bc7eab5374c07",
   "created_at": "2025-05-19T21:30:54.927Z",
-  "updated_at": "2025-06-18T07:34:15.004Z",
+  "updated_at": "2025-06-30T12:20:31.356Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that the room index has been exported and saved to a specific location. It is typically displayed in a UI element related to file management or history, such as a button label or dialog title. The \"sectionName\" variable refers to the name of the \"My Files\" section.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 289,
-      "context": "case \"RoomArchived\":\n return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportSaved\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":\n return t(\"InfoPanel:FilledOutForm\");\n case \"FormOpenedForFilling\":",
+      "line_number": 302,
+      "context": "case FeedActionKeys.RoomUnarchived:\n return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:",
       "module": "/packages/client"
     }
   ],
@@ -29,14 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'تم حفظ تصدير فهرس الغرفة في {{sectionName}}' is a bit literal and not the most natural way to express 'Export of the room index saved to {{sectionName}}' in Arabic.  'تم حفظ' (has been saved) is a passive construction that isn't ideal here. A more active and concise phrasing would improve clarity.",
-          "suggestion": "تصدير فهرس الغرفة إلى {{sectionName}}"
-        },
-        {
           "type": "formatting",
-          "description": "The Arabic text includes a zero-width space ( ) after 'تصدير'. This is an artifact of the text processing and should be removed.",
-          "suggestion": "تصدير فهرس الغرفة إلى {{sectionName}}"
+          "description": "The Arabic text includes an unusual character \" \" (non-breaking space) immediately after \"تصدير\". This may cause rendering issues or appear unprofessional. It should be removed.",
+          "suggestion": "Remove the non-breaking space after تصدير."
         }
       ],
       "approved_at": null
@@ -47,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq indeksinin ixracı {{sectionName}} bölməsində qeyd edildi\" literally translates to 'The export of the room index was noted in the {{sectionName}} section.' This doesn't accurately convey the meaning of 'saved to'. It implies something was observed, not that it was stored.",
-          "suggestion": "Otaq indeksinin ixracı {{sectionName}} bölməsinə saxlanıldı"
+          "description": "The translation 'Otaq indeksinin ixracı {{sectionName}} bölməsində qeyd edildi' doesn't accurately convey the meaning of 'Export of the room index saved to {{sectionName}}'. 'Qeyd edildi' (was noted/recorded) implies something was recorded, not that the export was saved. A more accurate translation would indicate that the export is *located* or *saved* in the specified section.",
+          "suggestion": "Otaq indeksinin ixracı {{sectionName}} bölməsində saxlanıldı or Otaq indeksinin ixracı {{sectionName}} bölməsinə yerləşdirilib."
         },
         {
           "type": "formatting",
-          "description": "There's a space before the section name placeholder {{sectionName}} in the translated text. This might look awkward depending on the UI.",
-          "suggestion": "Otaq indeksinin ixracı {{sectionName}}bölməsinə saxlanıldı"
+          "description": "The space before 'bölməsində' could be improved for better readability.",
+          "suggestion": "Otaq indeksinin ixracı {{sectionName}} bölməsində qeyd edildi."
         }
       ],
       "approved_at": null
@@ -64,13 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Експорт на индекса на стаята е запазен в {{sectionName}}' is not the most natural or accurate translation. 'Експорт' is correct for Export, but the rest implies the export *was saved*, not that the location of the export is what's important. The intention is to say something like 'The room index export location is {{sectionName}}'.",
-          "suggestion": "Експортът на индекса на стаята се намира в {{sectionName}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'е' after 'запазен' is slightly awkward. While not grammatically incorrect, it's not the most elegant phrasing. It reads better without it.",
-          "suggestion": "Remove the 'е' after 'запазен'."
+          "description": "The translation 'Експорт на индекса на стаята е запазен в {{sectionName}}' is a literal translation and doesn't flow naturally in Bulgarian. It suggests the export *is* saved, rather than that the room index was exported *to* a specific location. A more natural phrasing would focus on where the index is saved.",
+          "suggestion": "Експорт на индекса на стаята е запазен в {{sectionName}}."
         }
       ],
       "approved_at": null
@@ -81,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation contains a non-breaking space ( ) after \"uložen\". This might cause display issues and is generally unnecessary.",
-          "suggestion": "Remove the non-breaking space after \"uložen\"."
+          "description": "The Czech translation uses a non-breaking space ( ) which may cause layout issues.  It's better to use a regular space.",
+          "suggestion": "Export indexu místnosti uložen do {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -93,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Der Export des Raumindex wird in {{sectionName}} gespeichert' implies a future action ('will be saved'). The original English implies the export *is* saved to the specified location. A more accurate translation would convey a present state.",
-          "suggestion": "Der Export des Raumindex ist in {{sectionName}} gespeichert."
+          "description": "The English phrase \"Export of the room index saved to\" is better translated as 'Der Raumindex wird in {{sectionName}} exportiert'. The current translation, 'Der Export des Raumindex wird in {{sectionName}} gespeichert,' implies that the export itself is saved, not the room index.",
+          "suggestion": "Der Raumindex wird in {{sectionName}} exportiert"
         }
       ],
       "approved_at": null
@@ -105,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a non-breaking space ( ) instead of a regular space. This can cause display issues.",
-          "suggestion": "Replace ' ' with a regular space."
+          "description": "The space before the curly braces in the Greek translation is unnecessary and should be removed for consistency with the English template.",
+          "suggestion": "Ο δείκτης δωματίου εξήχθη στο{{sectionName}}"
         }
       ],
       "approved_at": null
@@ -117,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content implies a completed action ('saved to'). The Spanish translation uses the preterite tense ('se ha guardado'), suggesting a single, completed action. A better translation might use a present perfect tense to imply a state of being saved.",
-          "suggestion": "La exportación del índice de salas está guardada en {{sectionName}}"
+          "description": "The English phrase 'Export of the room index saved to' is better translated as 'The room index export is saved to' or 'The room index has been exported to'. The current translation 'La exportación del índice de salas se ha guardado en' is slightly awkward and not as natural-sounding in Spanish.",
+          "suggestion": "La exportación del índice de salas se guarda en {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -129,13 +119,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Huoneen indeksi vietiin {{sectionName}}-osioon' while technically correct, doesn't fully convey the nuance of 'Export of the room index saved to {{sectionName}}'.  'Export' suggests a direct action taken, whereas the translation implies a passive occurrence ('was exported to'). A more accurate translation would emphasize the action of exporting.",
-          "suggestion": "Huoneen indeksi tallennettiin {{sectionName}}-osioon."
+          "description": "The translation 'Huoneen indeksi vietiin {{sectionName}}-osioon' implies the index *was* exported. The English 'Export of the room index saved to {{sectionName}}' describes a process or destination, not a completed action. A more accurate translation might focus on 'saving' or 'storing' rather than exporting.",
+          "suggestion": "Huoneen indeksi tallennettiin {{sectionName}}-osioon"
         },
         {
           "type": "formatting",
-          "description": "The use of a non-breaking space (' ') is unusual and may not be consistent with Finnish style guides. It's best to use a regular space.",
-          "suggestion": "Huoneen indeksi vietiin {{sectionName}}-osioon"
+          "description": "The hyphen in '{{sectionName}}-osioon' might not be the most natural way to express this in Finnish. It feels slightly abrupt.",
+          "suggestion": "Huoneen indeksi tallennettiin {{sectionName}}-kohtaiseen osioon"
         }
       ],
       "approved_at": null
@@ -145,9 +135,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'sauvegardé dans' is grammatically awkward in this context. A more natural phrasing would be 'enregistré dans' or simply 'dans'.",
-          "suggestion": "Exportation de l'index de la salle enregistré dans {{sectionName}}"
+          "type": "incorrect_translation",
+          "description": "The translation 'sauvegardé dans' (saved in) isn't the most natural way to express the meaning of 'Export of the room index saved to {{sectionName}}'. A more accurate translation would imply the location where the export *appears* or is *accessible*.",
+          "suggestion": "Exportation de l'index de la salle vers {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -158,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Սենյակի ինդեքսի արտահանումը պահված է {{sectionName}}' literally translates to 'The export of the room index is saved to {{sectionName}}'. This is not the most natural or accurate way to express the meaning of 'Export of the room index saved to {{sectionName}}'. It implies that the export *is* saved, rather than that the location where the export is saved is {{sectionName}}.",
-          "suggestion": "Սենյակի ինդեքսի արտահանումը կատարվում է {{sectionName}} (Senyaki indexi arhanumy katarumy e {{sectionName}} - The export of the room index is done to {{sectionName}}) or Սենյակի ինդեքսի արտահանումի վայրը՝ {{sectionName}} (Senyaki indexi arhanumi vayry e {{sectionName}} - The location of the room index export is {{sectionName}})."
+          "description": "The translation 'Սենյակի ինդեքսի արտահանումը պահված է {{sectionName}}' is a literal translation but doesn't convey the intended meaning of 'Export of the room index saved to {{sectionName}}'. A more natural translation would be something like 'Սենյակի ինդեքսը արտահանվել է և պահվել է {{sectionName}}' or 'Սենյակի ինդեքսի արտահանումը կատարվել է {{sectionName}}'-ի մեջ'",
+          "suggestion": "Consider revising to 'Սենյակի ինդեքսը արտահանվել է և պահվել է {{sectionName}}' or 'Սենյակի ինդեքսի արտահանումը կատարվել է {{sectionName}}'-ի մեջ'"
         }
       ],
       "approved_at": null
@@ -170,13 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Export of the room index' is better translated as 'Esportazione dell'indice della stanza'. The current translation 'L’indice della stanza è stato esportato' is passive and less direct.",
-          "suggestion": "Esportazione dell'indice della stanza"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'è stato salvato' is grammatically correct, it's a little wordy and less natural than a more direct equivalent.",
-          "suggestion": "è stato esportato in"
+          "description": "The translation 'L’indice della stanza è stato esportato e salvato in {{sectionName}}' is not a direct and accurate translation of \"Export of the room index saved to {{sectionName}}\". It implies that the export happened *and* the file was saved, whereas the original suggests the saved location *is* the export location. A more accurate translation would emphasize the location of the export.",
+          "suggestion": "L’esportazione dell’indice della stanza è stata salvata in {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -184,13 +169,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Export of the room index saved to\" doesn't perfectly align with the Japanese translation \"ルームインデックスのエクスポートが {{sectionName}} に保存されました\". A more accurate translation would emphasize the *destination* of the export, rather than framing it as a saving action. The implication of 'saved' doesn't quite match the English intention of an export.",
-          "suggestion": "ルームインデックスのエクスポート先は {{sectionName}} です"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -199,13 +178,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '채팅방 인덱스 내보내기가 (으)로 저장됨' is a bit awkward. The '(으)로' implies a tool or method being used for saving, which isn't clear from the English 'Export of the room index saved to {{sectionName}}'. It should be more directly '저장됨'.",
-          "suggestion": "채팅방 인덱스 내보내기가 {{sectionName}}에 저장됨"
+          "description": "The translation \"채팅방 인덱스 내보내기가 {{sectionName}}(으)로 저장됨\" doesn't accurately convey the meaning of \"Export of the room index saved to {{sectionName}}\". The current translation implies that the export itself is saved, rather than the index being saved *to* the specified location. It also uses '(으)로', which suggests a direction or means, rather than a destination.",
+          "suggestion": "채팅방 인덱스가 {{sectionName}}에 저장됨"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, using '에' instead of '(으)로' aligns better with standard Korean sentence structure when indicating a location where something is saved.",
-          "suggestion": "채팅방 인덱스 내보내기가 {{sectionName}}에 저장됨"
+          "description": "The space before the parenthesis is unnecessary and might look odd.",
+          "suggestion": "채팅방 인덱스가 {{sectionName}}에 저장됨"
         }
       ],
       "approved_at": null
@@ -215,14 +194,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ການສົ່ງອອກດອກສໍານວນຫ້ອງ\" is a bit awkward. While technically correct, it can be improved for naturalness. \"ດອກສໍານວນຫ້ອງ\" literally means \"room index flower\". A more natural translation would emphasize the 'saving' aspect.",
-          "suggestion": "ການບັນທຶກການສົ່ງອອກດອກສໍານວນຫ້ອງ"
-        },
-        {
-          "type": "formatting",
-          "description": "The Lao translation preserves the \"{{sectionName}}\" placeholder, which is correct, but consider ensuring consistency in placeholder formatting across all translations.",
-          "suggestion": "No change needed, just maintain consistency."
+          "type": "spelling",
+          "description": "The word 'ດອກສໍານວນ' (dok sanuan) is a bit unusual and potentially not the most natural way to express 'index' in this context. It's literally 'flower count'.",
+          "suggestion": "Consider using a more common Lao term for 'index' like 'ບັນຊີລຽງ' (bansilieng) which means 'list' or 'sequence'. The revised translation would then be: \"ການສົ່ງອອກບັນຊີລຽງຫ້ອງທີ່ບັນທຶກໄວ້ສູ່ {{sectionName}}\""
         }
       ],
       "approved_at": null
@@ -233,13 +207,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Telpas indeksa eksports saglabāts {{sectionName}}\" doesn't accurately convey the meaning of \"Export of the room index saved to {{sectionName}}\". It literally translates to \"Room index export saved {{sectionName}}\" which implies the export itself was saved, not where it was saved. A more accurate translation would indicate the destination of the export.",
-          "suggestion": "Telpas indeksa eksports ir saglabāts {{sectionName}}"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the sentence structure feels a little awkward in Latvian. It could benefit from a slight rephrasing for better flow.",
-          "suggestion": "Telpas indeksa eksports notiek uz {{sectionName}}"
+          "description": "The Latvian translation \"Telpas indeksa eksports saglabāts {{sectionName}}\" implies that the export itself has been saved, rather than indicating the location where the export is saved. The English phrase \"Export of the room index saved to {{sectionName}}\" means the export is saved *at* that location.",
+          "suggestion": "Telpas indeksa eksporta vieta: {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -250,8 +219,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The spacing around 'in' is inconsistent. There's a non-breaking space before it.",
-          "suggestion": "Export van ruimte-index opgeslagen in {{sectionName}}"
+          "description": "The non-breaking space before '{{sectionName}}' is unnecessary and may cause layout issues. It is not present in the source English text.",
+          "suggestion": "Remove the space before '{{sectionName}}'"
         }
       ],
       "approved_at": null
@@ -262,13 +231,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Eksport indeksu pokoju zapisany w {{sectionName}}' is a passive voice construction which doesn't directly translate the active voice of the English original 'Export of the room index saved to {{sectionName}}'.  A more accurate translation would emphasize the action of exporting.",
-          "suggestion": "Eksport indeksu pokoju został zapisany w {{sectionName}}"
+          "description": "The translation 'Eksport indeksu pokoju zapisany w {{sectionName}}' is a literal translation and doesn't flow naturally in Polish. It implies the *export* is saved, not the index itself. A more natural phrasing would indicate that the index is saved to the specified location.",
+          "suggestion": "Eksport indeksu pokoju zapisywany do {{sectionName}}"
         },
         {
           "type": "formatting",
-          "description": "The use of a non-breaking space (nbsp) before 'w' looks odd and may not be the intended formatting. It's likely a result of the translation process.",
-          "suggestion": "Remove the non-breaking space before 'w'."
+          "description": "The en dash (–) is replaced by the incorrect hyphen (–) in the Polish translation. In this case, a more appropriate en dash should be used.",
+          "suggestion": "Eksport indeksu pokoju zapisywany do {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -291,13 +260,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Fișierul cu index de săli exportat a fost salvat în secțiunea {{sectionName}}' is a bit too literal and verbose. It translates 'Export of the room index saved to...' which is best conveyed more simply.",
-          "suggestion": "Indexul sălilor a fost exportat în secțiunea {{sectionName}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The passive voice 'a fost salvat' (was saved) makes the sentence slightly clunky. A more active construction improves readability.",
-          "suggestion": "Indexul sălilor a fost exportat în secțiunea {{sectionName}}"
+          "description": "The translation is overly literal and sounds unnatural in Romanian. \"Fișierul cu index de săli exportat a fost salvat în secțiunea {{sectionName}}\" translates to \"The file with the room index exported was saved in the section {{sectionName}}\". A more natural Romanian phrasing would be something like \"Exportul indexului de săli a fost salvat în {{sectionName}}\" or \"Indexul de săli a fost exportat și salvat în {{sectionName}}\"",
+          "suggestion": "Exportul indexului de săli a fost salvat în {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -308,8 +272,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Экспорт индекса комнаты сохранен в {{sectionName}}' literally translates to 'Export of the room index saved to {{sectionName}}'. However, a more natural Russian phrasing would be 'Индекс комнаты экспортирован в {{sectionName}}' or 'Экспорт индекса комнаты расположен в {{sectionName}}'. The current translation sounds awkward.",
-          "suggestion": "Индекс комнаты экспортирован в {{sectionName}}"
+          "description": "The translation \"Экспорт индекса комнаты сохранен в {{sectionName}}\" literally translates to \"Export of the room index saved in {{sectionName}}\".  A more natural and accurate translation would be something like \"Экспорт индекса комнаты расположен в {{sectionName}}\" (Export of the room index is located in {{sectionName}}), or \"Экспорт индекса комнаты сохранён в {{sectionName}}\" (Export of the room index is saved to {{sectionName}} but with correct verb conjugation).",
+          "suggestion": "Экспорт индекса комнаты расположен в {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -320,13 +284,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අංශයේ කාමර දර්ශකය සුරක්ෂිතව අපනයනය කරනු ලැබුවේ {{sectionName}} වෙත.' is a bit literal and could be more natural. 'අංශයේ කාමර දර්ශකය {{sectionName}} වෙත සුරක්ෂිතව අපනයනය කරන ලදී' is a better phrasing. The passive voice in Sinhala feels less smooth.",
-          "suggestion": "අංශයේ කාමර දර්ශකය {{sectionName}} වෙත සුරක්ෂිතව අපනයනය කරන ලදී."
+          "description": "The translation 'අංශයේ කාමර දර්ශකය සුරක්ෂිතව අපනයනය කරනු ලැබුවේ {{sectionName}} වෙත' implies the room index was *received* at {{sectionName}}, rather than exported *to* it.  A more accurate translation would convey the export destination.",
+          "suggestion": "අංශයේ කාමර දර්ශකය {{sectionName}} වෙත අපනයනය කරනු ලැබුවේ."
         },
         {
           "type": "formatting",
-          "description": "The use of 'වෙත' at the end of the sentence can feel slightly awkward in this context. While grammatically correct, it suggests a destination rather than a place where something is saved. 'අංශයේ කාමර දර්ශකය {{sectionName}} වෙත' might imply the exported room index *goes* to that location. Consider revising for clarity.",
-          "suggestion": "අංශයේ කාමර දර්ශකය {{sectionName}} තුළ සුරක්ෂිතව අපනයනය කරන ලදී"
+          "description": "The translation includes a passive voice construction ('කරනු ලැබුවේ'), which might be stylistically less desirable in Sinhala depending on the context and desired tone.  While grammatically correct, consider a more active voice for better flow.",
+          "suggestion": "අංශයේ කාමර දර්ශකය {{sectionName}} වෙත අපනයනය කළේ."
         }
       ],
       "approved_at": null
@@ -337,13 +301,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovak translation contains a non-breaking space ( ) which might cause layout issues. It should be a regular space.",
-          "suggestion": "Replace ' ' with a regular space."
+          "description": "The Slovak translation uses a non-breaking space ( ) instead of a regular space. This can cause issues with text wrapping and display.",
+          "suggestion": "Replace the non-breaking space with a regular space: \"Export indexu miestnosti uložený do {{sectionName}}\""
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Export indexu miestnosti' is somewhat awkward. A more natural translation might use 'výpis indexu miestnosti'. 'Index' is often used as a loanword in Slovak, but the more descriptive term might be preferred for clarity.",
-          "suggestion": "Consider 'Výpis indexu miestnosti uložený do {{sectionName}}'"
+          "description": "While not incorrect, 'Export indexu miestnosti' is a bit clunky. A more natural phrasing might be 'Export miestnostného indexu'.",
+          "suggestion": "Export miestnostného indexu uložený do {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -354,8 +318,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of a non-breaking space ( ) is unusual and potentially unnecessary. Consider using a regular space.",
-          "suggestion": "Izvoz kazala sobe shranjen v {{sectionName}}"
+          "description": "The space before 'v' is unnecessary and breaks the flow of the sentence. It should be removed.",
+          "suggestion": "Izvoz kazala sobe shranjen v{{sectionName}}"
         }
       ],
       "approved_at": null
@@ -366,13 +330,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Извоз' (Izvoz) translates to 'Export' but in this context, a more natural Serbian (Cyrillic) word would be 'Сачувана' (Sačuvana) meaning 'saved'. 'Izvoz' implies an active export process, while the English implies a saved file or location.",
-          "suggestion": "Сачуван индекс собе је сачуван у {{sectionName}}"
+          "description": "The word 'Извоз' (Izvoz) generally refers to exporting goods or data *from* a system. 'Export' in this context implies saving a file *to* a location. A more accurate translation would use a word signifying saving or storing.",
+          "suggestion": "Сачувај индекса собе је сачуван у {{sectionName}}"
         },
         {
-          "type": "grammar",
-          "description": "While technically correct, using 'је сачуван' twice is a bit redundant.  A more fluent phrasing is possible.",
-          "suggestion": "Сачуван индекс собе у {{sectionName}}"
+          "type": "formatting",
+          "description": "The translation maintains the same double quote marks as the English content. While not strictly incorrect, Serbian Cyrillic often uses single quotes for certain contexts or omits them entirely. Consistency is preferable, and single quotes or no quotes might be more natural.",
+          "suggestion": "Сачувај индекса собе је сачуван у {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -383,13 +347,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Izvoz indeksa sobe je sačuvan u {{sectionName}}' is not the most natural or accurate translation of 'Export of the room index saved to {{sectionName}}'. A better phrasing would emphasize the location of the export.",
-          "suggestion": "Izvoz indeksa sobe smešten je u {{sectionName}}"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'sačuvan' implies something was preserved, which isn't the primary meaning of 'saved' in the context of an export. 'Smešten' (located) is a more accurate term.",
-          "suggestion": "Consider the suggestion above, which replaces 'sačuvan' with 'smešten'."
+          "description": "The translation 'Izvoz indeksa sobe je sačuvan u {{sectionName}}' is overly literal and slightly awkward. A more natural phrasing would be 'Soba indeks je izvezen u {{sectionName}}' or 'Izvezeni su indeksi soba u {{sectionName}}'. The current phrasing implies the 'export' itself was saved, not the index.",
+          "suggestion": "Soba indeks je izvezen u {{sectionName}}"
         }
       ],
       "approved_at": null
@@ -400,13 +359,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Oda indeksi dışa aktarımı {{sectionName}} bölümüne kaydedildi' implies that the export *is saved* to the section, rather than that it's located there. The English 'Export of the room index saved to {{sectionName}}' means the export is *found* in that location.",
+          "description": "The translation \"Oda indeksi dışa aktarımı {{sectionName}} bölümüne kaydedildi\" literally translates to \"The room index export was saved to the {{sectionName}} section.\"  This doesn't quite convey the meaning of 'saved *to*'. A more accurate translation would convey that the export is *located* in the specified section.",
           "suggestion": "Oda indeksi dışa aktarımı {{sectionName}} bölümünde bulundu"
         },
         {
           "type": "formatting",
-          "description": "The Turkish translation uses a space before the section name variable {{sectionName}}. It might be better to align it with the English spacing.",
-          "suggestion": "Oda indeksi dışa aktarımı {{sectionName}} bölümüne kaydedildi"
+          "description": "The phrase 'bölümüne kaydedildi' is grammatically correct, but stylistically, a more direct statement might be preferable in UI contexts. 'bölümüne bulundu' is suggested, but further context could refine this.",
+          "suggestion": "Oda indeksi dışa aktarımı {{sectionName}} bölümünde bulundu"
         }
       ],
       "approved_at": null
@@ -417,8 +376,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation uses a non-breaking space ( ) instead of a regular space.",
-          "suggestion": "Replace ' ' with a regular space ' '."
+          "description": "The translation contains a non-breaking space (U+00A0) which is unusual in this context. It should be a regular space.",
+          "suggestion": "Replace \"у \" with \"у \"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Експорт' is understandable, the more accurate and common translation for 'Export' in this context would be 'Експортування'.",
+          "suggestion": "Replace 'Експорт' with 'Експортування'."
         }
       ],
       "approved_at": null
@@ -429,12 +393,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Đã lưu xuất chỉ mục phòng vào {{sectionName}}\" is not the most natural or accurate translation of \"Export of the room index saved to {{sectionName}}\". \"Xuất\" implies an export action, but the original English emphasizes that the room index has been *saved*.  A more accurate rendering would convey that the room index was saved.",
-          "suggestion": "Đã lưu chỉ mục phòng vào {{sectionName}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The space before '{{sectionName}}' looks a little awkward in Vietnamese.",
+          "description": "The translation \"Đã lưu xuất chỉ mục phòng vào {{sectionName}}\" is not the most natural way to express \"Export of the room index saved to {{sectionName}}\". 'Xuất' (export) is a bit formal and 'lưu xuất' can sound awkward. A more natural translation would focus on the action of saving or storing.",
           "suggestion": "Đã lưu chỉ mục phòng vào {{sectionName}}"
         }
       ],

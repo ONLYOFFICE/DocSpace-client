@@ -59,6 +59,7 @@ type GenerateDeveloperTokenDialogProps = {
   email?: string;
 
   setGenerateDeveloperTokenDialogVisible?: (value: boolean) => void;
+  setJwtToken?: () => Promise<void>;
 };
 
 const getDate = (date: Date, i18nArg: i18n) => {
@@ -69,6 +70,7 @@ const GenerateDeveloperTokenDialog = ({
   client,
   email,
   setGenerateDeveloperTokenDialogVisible,
+  setJwtToken,
 }: GenerateDeveloperTokenDialogProps) => {
   const { i18n: i18nParam, t } = useTranslation([
     "OAuth",
@@ -102,6 +104,8 @@ const GenerateDeveloperTokenDialog = ({
 
     setRequestRunning(true);
 
+    await setJwtToken?.();
+
     await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);
 
     setRequestRunning(false);
@@ -124,6 +128,8 @@ const GenerateDeveloperTokenDialog = ({
     }
 
     setRequestRunning(true);
+
+    await setJwtToken?.();
 
     const { clientSecret } = await api.oauth.getClient(client.clientId);
 
@@ -158,6 +164,8 @@ const GenerateDeveloperTokenDialog = ({
 
   React.useEffect(() => {
     const fecthClient = async () => {
+      await setJwtToken?.();
+
       const { clientSecret } = await api.oauth.getClient(client!.clientId);
 
       setSecret(clientSecret);
@@ -275,8 +283,11 @@ export default inject(
     oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
-    const { setGenerateDeveloperTokenDialogVisible, bufferSelection } =
-      oauthStore;
+    const {
+      setGenerateDeveloperTokenDialogVisible,
+      setJwtToken,
+      bufferSelection,
+    } = oauthStore;
 
     const { user } = userStore;
 
@@ -284,6 +295,7 @@ export default inject(
       setGenerateDeveloperTokenDialogVisible,
       client: bufferSelection,
       email: user?.email,
+      setJwtToken,
     };
   },
 )(observer(GenerateDeveloperTokenDialog));

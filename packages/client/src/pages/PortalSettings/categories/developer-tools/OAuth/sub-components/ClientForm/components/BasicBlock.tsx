@@ -146,6 +146,7 @@ const BasicBlock = ({
           isRequired
           isError={isNameRequiredError || isNameError}
           onBlur={onBlur}
+          dataTestId="app_name_input_group"
         />
         <InputGroup
           label={t("WebsiteUrl")}
@@ -162,6 +163,7 @@ const BasicBlock = ({
           isRequired
           isError={isWebsiteRequiredError || isWebsiteError}
           onBlur={onBlur}
+          dataTestId="app_website_url_input_group"
         />
         <FieldContainer
           isVertical
@@ -169,6 +171,7 @@ const BasicBlock = ({
           errorMessage={t("ThisRequiredField")}
           hasError={isLogoRequiredError}
           className="icon-field"
+          dataTestId="app_icon_field"
         >
           <SelectGroup
             label={t("AppIcon")}
@@ -176,6 +179,7 @@ const BasicBlock = ({
             selectLabel={t("SelectNewImage")}
             description={t("IconDescription")}
             onSelect={onSelect}
+            dataTestId="select_new_image_container"
           />
         </FieldContainer>
 
@@ -186,6 +190,7 @@ const BasicBlock = ({
           value={descriptionValue}
           onChange={onChange}
           increaseHeight={isLogoRequiredError}
+          dataTestId="description_textarea_group"
         />
         <InputGroup
           label={t("AuthenticationMethod")}
@@ -194,6 +199,7 @@ const BasicBlock = ({
           value={websiteUrlValue}
           error=""
           onChange={() => {}}
+          dataTestId="auth_method_input_group"
         >
           <div className="pkce">
             <Checkbox
@@ -202,8 +208,12 @@ const BasicBlock = ({
               onChange={() => {
                 changeValue("allow_pkce", !allowPkce);
               }}
+              dataTestId="allow_pkce_checkbox"
             />
-            <HelpButton tooltipContent={pkceHelpButtonText} />
+            <HelpButton
+              dataTestId="allow_pkce_help_button"
+              tooltipContent={pkceHelpButtonText}
+            />
           </div>
         </InputGroup>
       </StyledInputBlock>

@@ -331,6 +331,7 @@ const WelcomePageSettingsComponent = (props) => {
           id="textInputContainerWelcomePage"
           scale
           value={state.greetingTitle}
+          testId="customization_welcome_page_text_input"
           onChange={onChangeGreetingTitle}
           isDisabled={
             state.isLoadingGreetingSave || state.isLoadingGreetingRestore
@@ -365,6 +366,7 @@ const WelcomePageSettingsComponent = (props) => {
             target="_blank"
             isHovered
             href={welcomePageSettingsUrl}
+            dataTestId="customization_welcome_page_learn_more"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -386,6 +388,8 @@ const WelcomePageSettingsComponent = (props) => {
         disableRestoreToDefault={greetingSettingsIsDefault}
         additionalClassSaveButton="welcome-page-save"
         additionalClassCancelButton="welcome-page-cancel"
+        saveButtonDataTestId="customization_welcome_page_save_buttons"
+        cancelButtonDataTestId="customization_welcome_page_cancel_buttons"
       />
     </StyledSettingsComponent>
   );

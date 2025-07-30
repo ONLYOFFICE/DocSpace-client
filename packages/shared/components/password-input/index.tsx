@@ -109,6 +109,7 @@ const PasswordInput = ({
   isAutoFocussed,
   tooltipAllowedCharacters,
   isSimulateType = false,
+  testId,
 
   // clipEmailResource = "E-mail ",
   // clipPasswordResource = "Password ",
@@ -349,6 +350,7 @@ const PasswordInput = ({
               fontWeight="600"
               isHovered
               onClick={onGeneratePassword}
+              dataTestId="generate_password_link"
             >
               {generatePasswordTitle}
             </Link>
@@ -360,7 +362,12 @@ const PasswordInput = ({
 
   const renderInputGroup = () => {
     const { type, value } = state;
-    const iconNode = type === "password" ? <EyeOffReactSvg /> : <EyeReactSvg />;
+    const iconNode =
+      type === "password" ? (
+        <EyeOffReactSvg data-testid={testId ? `${testId}_eye_icon` : undefined} />
+      ) : (
+        <EyeReactSvg data-testid={testId ? `${testId}_eye_icon` : undefined} />
+      );
     const iconButtonClassName = `password_eye--${
       type === "password" ? "close" : "open"
     }`;
@@ -398,6 +405,7 @@ const PasswordInput = ({
           autoComplete={autoComplete}
           forwardedRef={forwardedRef}
           isAutoFocussed={isAutoFocussed}
+          testId={testId}
         />
 
         {!isDisableTooltip && !isDisabled ? (

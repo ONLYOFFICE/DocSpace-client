@@ -206,6 +206,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_light_small_light"
             />
             <Logo
               name={logoUrls[0].name}
@@ -217,6 +218,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_light_small_dark"
             />
           </div>
         </div>
@@ -245,6 +247,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_left_menu_light"
             />
             <Logo
               name={logoUrls[5].name}
@@ -260,6 +263,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_left_menu_dark"
             />
           </div>
         </div>
@@ -288,6 +292,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_login_page_light"
             />
             <Logo
               name={logoUrls[1].name}
@@ -303,6 +308,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_login_page_dark"
             />
           </div>
         </div>
@@ -332,6 +338,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
                 onChangeText={t("ChangeLogoButton")}
                 onChange={onChangeLogo}
                 isSettingPaid={isSettingPaid}
+                dataTestId="logo_uploader_about_page_light"
               />
               <Logo
                 name={logoUrls[6].name}
@@ -347,6 +354,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
                 onChangeText={t("ChangeLogoButton")}
                 onChange={onChangeLogo}
                 isSettingPaid={isSettingPaid}
+                dataTestId="logo_uploader_about_page_dark"
               />
             </div>
           </div>
@@ -369,6 +377,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
             isSettingPaid={isSettingPaid}
+            dataTestId="logo_uploader_favicon_light"
           />
         </div>
 
@@ -395,6 +404,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_docs_editor_light"
             />
             <Logo
               name={logoUrls[3].name}
@@ -409,6 +419,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}
               isSettingPaid={isSettingPaid}
+              dataTestId="logo_uploader_docs_editor_dark"
             />
           </div>
         </div>
@@ -434,6 +445,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"
         additionalClassCancelButton="white-label-cancel"
+        saveButtonDataTestId="white-label-save"
+        cancelButtonDataTestId="white-label-cancel"
       />
     </div>
   );

@@ -83,7 +83,7 @@ const PeopleTableRow = ({
   inviterColumnIsEnabled,
   storageColumnIsEnabled,
 
-  isGuests,
+  contactsTab,
   isRoomAdmin,
   inProgress,
 }: TableRowProps) => {
@@ -105,6 +105,8 @@ const PeopleTableRow = ({
     isLDAP,
   } = item;
 
+  const isGuests = contactsTab === "guests";
+  const isInsideGroup = contactsTab === "inside_group";
   const isPending = statusType === "pending" || statusType === "disabled";
 
   const nameColor = isPending
@@ -146,7 +148,8 @@ const PeopleTableRow = ({
   );
 
   const onOpenGroupClick = React.useCallback(
-    ({ action, title }: TOption) => onOpenGroup!(action as string, true, title),
+    ({ action, title }: TOption) =>
+      onOpenGroup!(action as string, !isInsideGroup, title),
     [onOpenGroup],
   );
 

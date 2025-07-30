@@ -30,17 +30,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ComboBoxSize } from "../combobox";
 
 import { AccessRightSelect } from "./AccessRightSelect";
-import { AccessRightSelectProps } from "./AccessRightSelect.types";
 
 import { data } from "./data";
-
-const meta = {
-  title: "Components/AccessRightSelect",
-  component: AccessRightSelect,
-} satisfies Meta<typeof AccessRightSelect>;
-type Story = StoryObj<typeof AccessRightSelect>;
-
-export default meta;
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
   <div
@@ -52,14 +43,71 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const Template = (args: AccessRightSelectProps) => (
-  <Wrapper>
-    <AccessRightSelect {...args} />
-  </Wrapper>
-);
+const meta = {
+  title: "Components/AccessRightSelect",
+  component: AccessRightSelect,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A dropdown component for selecting access rights with various display options.",
+      },
+    },
+  },
+  tags: ["autodocs"],
+  argTypes: {
+    accessOptions: { control: "object" },
+    selectedOption: { control: "object" },
+    scaledOptions: { control: "boolean" },
+    scaled: { control: "boolean" },
+    directionX: {
+      control: { type: "select" },
+      options: ["right", "left"],
+    },
+    size: {
+      control: { type: "select" },
+      options: Object.values(ComboBoxSize),
+    },
+    manualWidth: { control: "text" },
+    isDisabled: { control: "boolean" },
+    withoutBackground: { control: "boolean" },
+    withBlur: { control: "boolean" },
+    directionY: {
+      control: { type: "select" },
+      options: ["top", "bottom", "both"],
+    },
+    isAside: { control: "boolean" },
+    isMobileView: { control: "boolean" },
+    manualY: { control: "text" },
+    fixedDirection: { control: "boolean" },
+    withBackground: { control: "boolean" },
+    shouldShowBackdrop: { control: "boolean" },
+    noBorder: { control: "boolean" },
+    isSelectionDisabled: { control: "boolean" },
+    topSpace: { control: "number" },
+    modernView: { control: "boolean" },
+    fillIcon: { control: "boolean" },
+    isDefaultMode: { control: "boolean" },
+    comboIcon: { control: "text" },
+    usePortalBackdrop: { control: "boolean" },
+    type: {
+      control: { type: "select" },
+      options: [undefined, "badge", "onlyIcon", "descriptive"],
+    },
+
+    className: { table: { disable: true } },
+    onSelect: { table: { disable: true } },
+    advancedOptions: { table: { disable: true } },
+  },
+  args: {
+    usePortalBackdrop: true,
+  },
+} satisfies Meta<typeof AccessRightSelect>;
+
+export default meta;
+type Story = StoryObj<typeof AccessRightSelect>;
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
   args: {
     accessOptions: data,
     selectedOption: data[0],
@@ -69,4 +117,9 @@ export const Default: Story = {
     size: ComboBoxSize.content,
     manualWidth: "fit-content",
   },
+  render: (args) => (
+    <Wrapper>
+      <AccessRightSelect {...args} />
+    </Wrapper>
+  ),
 };

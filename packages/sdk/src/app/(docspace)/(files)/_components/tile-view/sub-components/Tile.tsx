@@ -45,7 +45,7 @@ import type {
   TFolderItem,
 } from "@/app/(docspace)/_hooks/useItemList";
 import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
-import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
@@ -70,7 +70,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { t } = useTranslation("Common");
   const theme = useTheme();
   const { filesSettings } = useFilesSettingsStore();
-  const { currentDeviceType } = useSettingsStore();
+
   const {
     isCheckedItem,
     addSelection,
@@ -147,7 +147,6 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       t={t}
       item={item}
       viewAs="tile"
-      currentDeviceType={currentDeviceType}
       isPublicRoom
       onClickDownload={() => downloadAction(item)}
     />

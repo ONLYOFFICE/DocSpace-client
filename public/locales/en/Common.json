@@ -97,6 +97,8 @@
   "BrandingSubtitle": "Use this option to provide on-brand experience to users.",
   "BrandingSubtitleMobile": "Upload your logo or generate it from text to provide on-brand experience to your users. These settings will affect all of your portals.",
   "BrandName": "Brand name",
+  "BrandNameForbidden": "Brand name contains forbidden symbols",
+  "BrandNameLength": "The brand name must be between {{minLength}} and {{maxLength}} characters long",
   "BrandNameSubtitle": "Your Brand name will be displayed in invitations, notifications, and other places where your {{productName}} name is referenced.",
   "BrandNameSubtitleMobile": "Enter your company or brand name which will be displayed in notifications, exported spreadsheets, and other resources.",
   "Button": "Button",
@@ -439,6 +441,7 @@
   "LocalDomain": "Local domains are not supported",
   "LocalFile": "Local file",
   "Location": "Location",
+  "LockedBy": "This file is locked by {{userName}}",
   "Login": "Login",
   "LoginButton": "Sign in",
   "LogoAbout": "Logo for the About page",
@@ -877,5 +880,6 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "YouDontHaveEnoughPermission": "You don't have enough permission"
 }

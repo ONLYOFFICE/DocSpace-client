@@ -45,6 +45,7 @@ const Slider = (props: SliderProps) => {
     thumbHeight,
     thumbWidth,
     runnableTrackHeight,
+    dataTestId,
   } = props;
 
   const [sizeProp, setSizeProp] = useState("0%");
@@ -107,7 +108,7 @@ const Slider = (props: SliderProps) => {
       step={step}
       value={value}
       disabled={isDisabled}
-      data-testid="slider"
+      data-testid={dataTestId ?? "slider"}
     />
   );
 };

@@ -72,7 +72,7 @@ const DropDown = ({
   topSpace,
   backDrop,
 }: DropDownProps) => {
-  const { isLTR, isRTL } = useInterfaceDirection();
+  const { isRTL } = useInterfaceDirection();
 
   const dropDownRef = React.useRef<null | HTMLDivElement>(null);
 
@@ -122,7 +122,7 @@ const DropDown = ({
     }
 
     if (dropDown) {
-      if (isLTR) {
+      if (isRTL) {
         if (right) {
           dropDown.style.right = right;
         } else if (directionX === "right") {

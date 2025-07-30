@@ -895,5 +895,6 @@
   "PasswordAccess": "Password access",
   "PasswordLink": "Add a password to protect your link.",
   "DisableDownload": "Restrict file content copy, file download and printing",
-  "PreventDownloadFilesAndFolders": "Enable this setting to disable downloads of files and folders from this room shared via a link"
+  "PreventDownloadFilesAndFolders": "Enable this setting to disable downloads of files and folders from this room shared via a link",
+  "LimitByTimePeriod": "Limit by time period"
 }

@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Напустили сте собу и именовали новог власника",
   "LifetimeDialogDescription": "Век трајања почиње од датума креирања фајла. Неки фајлови у овој соби премашују предложени век трајања и биће обрисани када омогућите ову поставку.",
   "LifetimeDialogDescriptionHeader": "Старији фајлови који премашују век трајања ће бити обрисани",
-  "LimitByTimePeriod": "Ограничи временским периодом",
   "LinkDeletedSuccessfully": "Линк обрисан успешно",
   "LinkForPortalUsers": "Линк за {{productName}} кориснике",
   "LinkSettings": "Подешавања линка",

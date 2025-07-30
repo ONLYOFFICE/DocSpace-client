@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Bạn đã rời khỏi phòng và chỉ định một chủ sở hữu mới",
   "LifetimeDialogDescription": "Đếm ngược thời gian tồn tại bắt đầu vào ngày tạo tập tin. Một số tập tin trong phòng này vượt quá thời gian tồn tại đề xuất và sẽ bị xóa sau khi bạn bật cài đặt.",
   "LifetimeDialogDescriptionHeader": "Các tập tin cũ hơn vượt quá thời gian tồn tại sẽ bị xóa",
-  "LimitByTimePeriod": "Giới hạn theo khoảng thời gian",
   "LinkDeletedSuccessfully": "Đã xóa liên kết thành công",
   "LinkForPortalUsers": "Liên kết dành cho người dùng {{productName}}",
   "LinkSettings": "Cài đặt liên kết",

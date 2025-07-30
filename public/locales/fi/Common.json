@@ -884,5 +884,6 @@
   "PasswordAccess": "Salasanapääsy",
   "PasswordLink": "Lisää salasana suojataksesi linkkiäsi.",
   "DisableDownload": "Rajoita tiedostosisällön kopiointia, latausta ja tulostusta",
-  "PreventDownloadFilesAndFolders": "Ota tämä asetus käyttöön, jos haluat poistaa käytöstä tiedostojen ja kansioiden lataukset tästä linkin kautta jaetusta huoneesta"
+  "PreventDownloadFilesAndFolders": "Ota tämä asetus käyttöön, jos haluat poistaa käytöstä tiedostojen ja kansioiden lataukset tästä linkin kautta jaetusta huoneesta",
+  "LimitByTimePeriod": "Rajoita ajanjaksolla"
 }

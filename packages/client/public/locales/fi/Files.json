@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Olet poistunut huoneesta ja nimittänyt uuden omistajan",
   "LifetimeDialogDescription": "Käyttöiän laskenta alkaa tiedoston luontipäivämäärästä. Jotkut tämän huoneen tiedostot ylittävät esitetyn käyttöiän ja poistetaan, kun otat asetuksen käyttöön.",
   "LifetimeDialogDescriptionHeader": "Vanhat käyttöiän ylittäneet tiedostot poistetaan",
-  "LimitByTimePeriod": "Rajoita ajanjaksolla",
   "LinkDeletedSuccessfully": "Linkki onnistuneesti poistettu",
   "LinkForPortalUsers": "Linkki {{productName}}:n käyttäjiin",
   "LinkSettings": "Linkkiasetukset",

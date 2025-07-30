@@ -884,5 +884,6 @@
   "PasswordAccess": "Acceso con contraseña",
   "PasswordLink": "Añada una contraseña para proteger su enlace.",
   "DisableDownload": "Restringir la copia, descarga e impresión del contenido de los archivos ",
-  "PreventDownloadFilesAndFolders": "Active esta opción para desactivar las descargas de archivos y carpetas de esta sala compartidos a través de un enlace"
+  "PreventDownloadFilesAndFolders": "Active esta opción para desactivar las descargas de archivos y carpetas de esta sala compartidos a través de un enlace",
+  "LimitByTimePeriod": "Limitar por periodo de tiempo"
 }

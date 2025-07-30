@@ -104,7 +104,6 @@
   "LeftAndAppointNewOwner": "You have left the room and appointed a new owner",
   "LifetimeDialogDescription": "Lifetime countdown begins at the file creation date. Some files in this room exceed the proposed lifetime and will be deleted once you enable the setting.",
   "LifetimeDialogDescriptionHeader": "Older files with exceeded lifetime will be deleted",
-  "LimitByTimePeriod": "Limit by time period",
   "LinkDeletedSuccessfully": "Link deleted successfully",
   "LinkForPortalUsers": "Link for {{productName}} users",
   "LinkSettings": "Link settings",

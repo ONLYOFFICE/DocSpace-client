@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Odadan ayrıldınız ve yeni bir sahip atadınız",
   "LifetimeDialogDescription": "Yaşam süresi geri sayımı dosya oluşturma tarihinde başlar. Bu odadaki bazı dosyalar önerilen yaşam süresini aşıyor ve ayarı etkinleştirdiğinizde silinecektir.",
   "LifetimeDialogDescriptionHeader": "Yaşam süresini aşmış eski dosyalar silinecek",
-  "LimitByTimePeriod": "Zaman aralığına göre limitlendirme",
   "LinkDeletedSuccessfully": "Bağlantı başarıyla silindi",
   "LinkForPortalUsers": "{{productName}} kullanıcıları için bağlantı",
   "LinkSettings": "Bağlantı ayarları",

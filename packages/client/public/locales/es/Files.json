@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Ha salido de la sala y ha asignado un nuevo propietario",
   "LifetimeDialogDescription": "La cuenta atrás de la vida útil comienza en la fecha de creación del archivo. Algunos archivos de esta sala superan la vida útil propuesta y se eliminarán una vez que active la configuración.",
   "LifetimeDialogDescriptionHeader": "Los archivos antiguos cuya vida útil se haya superado se eliminarán",
-  "LimitByTimePeriod": "Limitar por periodo de tiempo",
   "LinkDeletedSuccessfully": "El enlace se ha eliminado correctamente",
   "LinkForPortalUsers": "Enlace para los usuarios de {{productName}}",
   "LinkSettings": "Configuración de enlace",

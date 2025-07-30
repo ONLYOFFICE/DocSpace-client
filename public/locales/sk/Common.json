@@ -884,5 +884,6 @@
   "PasswordAccess": "Prístup je chránený heslom",
   "PasswordLink": "Pridajte heslo na ochranu vášho odkazu.",
   "DisableDownload": "Obmedziť kopírovanie obsahu súboru, sťahovanie a tlač súboru",
-  "PreventDownloadFilesAndFolders": "Povoľte toto nastavenie, aby ste zakázali sťahovanie súborov a priečinkov z tejto miestnosti, ktoré sú sprístupnené cez odkaz"
+  "PreventDownloadFilesAndFolders": "Povoľte toto nastavenie, aby ste zakázali sťahovanie súborov a priečinkov z tejto miestnosti, ktoré sú sprístupnené cez odkaz",
+  "LimitByTimePeriod": "Obmedzenie podľa časového obdobia"
 }

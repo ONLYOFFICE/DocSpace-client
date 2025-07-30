@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Zapustili ste sobo in določili novega lastnika",
   "LifetimeDialogDescription": "Odštevanje življenjske dobe se začne z datumom ustvarjanja datoteke. Nekatere datoteke v tej sobi presegajo predlagano življenjsko dobo in bodo izbrisane, ko to omogočite v nastavitvah.",
   "LifetimeDialogDescriptionHeader": "Starejše datoteke s prekoračeno življenjsko dobo bodo izbrisane",
-  "LimitByTimePeriod": "Omejitev po časovnem obdobju",
   "LinkDeletedSuccessfully": "Povezava je bila uspešno izbrisana",
   "LinkForPortalUsers": "Povezava za {{productName}} uporabnike",
   "LinkSettings": "Nastavitve povezave",

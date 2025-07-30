@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Você saiu da sala e nomeou um novo proprietário",
   "LifetimeDialogDescription": "A contagem regressiva da vida útil começa na data de criação do arquivo. Alguns arquivos nessa sala excedem a vida útil proposta e serão excluídos quando você ativar a configuração.",
   "LifetimeDialogDescriptionHeader": "Os arquivos mais antigos com tempo de vida excedido serão excluídos",
-  "LimitByTimePeriod": "Limite por período de tempo",
   "LinkDeletedSuccessfully": "Link excluído com sucesso",
   "LinkForPortalUsers": "Link para usuários do {{productName}}",
   "LinkSettings": "Configurações de link",

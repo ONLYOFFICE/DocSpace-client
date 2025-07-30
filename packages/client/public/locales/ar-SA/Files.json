@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "لقد قمت بمغادرة الغرفة وتعيين مالك جديد",
   "LifetimeDialogDescription": "يبدأ عد تنازلي العمر عند تاريخ إنشاء الملف. بعض الملفات في هذه الغرفة تتجاوز العمر المقترح وسيتم حذفها بمجرد تمكين الإعداد.",
   "LifetimeDialogDescriptionHeader": "سيتم حذف الملفات القديمة التي تجاوزت عمرها",
-  "LimitByTimePeriod": "تقييد بفترة زمنية",
   "LinkDeletedSuccessfully": "تم حذف الرابط بنجاح",
   "LinkForPortalUsers": "رابط لمستخدمي {{productName}}",
   "LinkSettings": "إعدادات الرابط",

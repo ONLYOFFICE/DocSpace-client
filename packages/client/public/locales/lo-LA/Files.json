@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "ທ່ານໄດ້ອອກຈາກຫ້ອງແລະແຕ່ງຕັ້ງເຈົ້າຂອງໃຫມ່",
   "LifetimeDialogDescription": "ການນັບຖອຍລົງເວລາເລີ່ມຕົ້ນເມື່ອສ້າງເອກະສານແລ້ວ ບາງເອກະສານໃນຫ້ອງນີ້ເກີນກວ່າໄລຍະເວລາທີ່ສະເໜີ ແລະຈະຖືກລົບອອກເມື່ອທ່ານເປີດການຕັ້ງຄ່າແລ້ວ។",
   "LifetimeDialogDescriptionHeader": "ເອກະສານເກົ່າທີ່ມີອາຍຸເກີນກຳນົດຈະຖືກລົບອອກ",
-  "LimitByTimePeriod": "ຈໍາກັດໂດຍໄລຍະເວລາ",
   "LinkDeletedSuccessfully": "ລຶບລິ້ງສຳເລັດແລ້ວ",
   "LinkForPortalUsers": "ເຊື່ອມຕໍ່ສໍາລັບຜູ້ໃຊ້ {{productName}}",
   "LinkSettings": "ການຕັ້ງຄ່າການເຊື່ອມຕໍ່",

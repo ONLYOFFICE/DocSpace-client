@@ -884,5 +884,6 @@
   "PasswordAccess": "Dostęp chroniony hasłem",
   "PasswordLink": "Dodaj hasło, aby chronić swój link.",
   "DisableDownload": "Ogranicz możliwość kopiowania zawartości pliku, jego pobierania oraz drukowania",
-  "PreventDownloadFilesAndFolders": "Włącz to ustawienie, aby uniemożliwić pobieranie plików i katalogów z tego pokoju udostępnionych za pośrednictwem linku"
+  "PreventDownloadFilesAndFolders": "Włącz to ustawienie, aby uniemożliwić pobieranie plików i katalogów z tego pokoju udostępnionych za pośrednictwem linku",
+  "LimitByTimePeriod": "Ograniczenie czasowe"
 }

@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Opustili ste miestnosť a určili ste nového vlastníka",
   "LifetimeDialogDescription": "Odpočítavanie doby používania sa začína od dátumu vytvorenia súboru. Pri niektorých súboroch v tejto miestnosti je prekročená navrhovaná doba používania a po zapnutí tohto nastavenia tieto súbory budú vymazané.",
   "LifetimeDialogDescriptionHeader": "Staršie súbory s prekročenou dobou používania budú vymazané",
-  "LimitByTimePeriod": "Obmedzenie podľa časového obdobia",
   "LinkDeletedSuccessfully": "Odkaz úspešne vymazaný",
   "LinkForPortalUsers": "Odkaz pre užívateľov {{productName}}",
   "LinkSettings": "Nastavenia odkazu",

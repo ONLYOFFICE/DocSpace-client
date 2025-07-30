@@ -544,7 +544,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
               expirationDate={expirationDate}
               setExpirationDate={setExpirationDate}
               canChangeLifetime={canChangeLifetime}
-              headerText={t("Files:LimitByTimePeriod")}
+              headerText={t("Common:LimitByTimePeriod")}
             />
           </StyledEditLinkBodyContent>
         </ModalDialog.Body>

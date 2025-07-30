@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Otaqdan çıxdınız və yeni sahibi təyin etdiniz",
   "LifetimeDialogDescription": "İstifadə müddəti vaxtı faylın yaradılması tarixindən başlayır. Bu otaqdakı bəzi fayllar tövsiyə olunan istifadə müddətini aşır və parametri aktiv etdikdə silinəcək.",
   "LifetimeDialogDescriptionHeader": "İstifadə müddətini keçmiş köhnə fayllar silinəcək",
-  "LimitByTimePeriod": "Zamana görə məhdudiyyət",
   "LinkDeletedSuccessfully": "Keçid uğurla silindi",
   "LinkForPortalUsers": " {{productName}} istifadəçiləri üçün keçid",
   "LinkSettings": "Link parametrləri",

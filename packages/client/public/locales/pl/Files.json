@@ -102,7 +102,6 @@
   "LeftAndAppointNewOwner": "Opuszczono pokój i wyznaczono nowego właściciela",
   "LifetimeDialogDescription": "Odliczanie okresu ważności rozpoczyna się w dniu utworzenia pliku. Niektóre pliki w tym pokoju przekroczyły swój okres ważności i zostaną usunięte po włączeniu ustawienia.",
   "LifetimeDialogDescriptionHeader": "Starsze pliki, które przekroczyły swój okres ważności, zostaną usunięte",
-  "LimitByTimePeriod": "Ograniczenie czasowe",
   "LinkDeletedSuccessfully": "Link został pomyślnie usunięty",
   "LinkForPortalUsers": "Link dla użytkowników {{productName}}",
   "LinkSettings": "Ustawienia linku",

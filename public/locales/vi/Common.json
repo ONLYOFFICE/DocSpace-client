@@ -884,5 +884,6 @@
   "PasswordAccess": "Truy cập có mật khẩu",
   "PasswordLink": "Thêm mật khẩu để bảo vệ liên kết của bạn.",
   "DisableDownload": "Hạn chế sao chép nội dung tập tin, tải xuống và in tập tin",
-  "PreventDownloadFilesAndFolders": "Bật cài đặt này để tắt tải xuống tập tin và thư mục từ phòng này được chia sẻ qua liên kết"
+  "PreventDownloadFilesAndFolders": "Bật cài đặt này để tắt tải xuống tập tin và thư mục từ phòng này được chia sẻ qua liên kết",
+  "LimitByTimePeriod": "Giới hạn theo khoảng thời gian"
 }

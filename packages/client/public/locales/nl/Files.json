@@ -30,7 +30,6 @@
   "CopyFolderItem": "De map <2>{{title}}</2> is met succes gekopieerd naar <1>{{folderName}}</1>.",
   "CopyItems": "<2>{{qty}} elementen</2> succesvol gekopieerd naar <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopieer link wachtwoord",
-  "CopyPassword": "Kopieer wachtwoord",
   "CreateNewFolder": "Nieuwe Map aanmaken",
   "CreateNewFolderInStorage": "Maak een nieuwe map aan in de opslag",
   "CreateNewLink": "Nieuwe link aanmaken",

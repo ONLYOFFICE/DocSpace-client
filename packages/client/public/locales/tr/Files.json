@@ -30,7 +30,6 @@
   "CopyFolderItem": "<2>{{title}}</2> klasörü <1>{{folderName}}</1> konumuna başarıyla kopyalandı",
   "CopyItems": "<2>{{qty}} öğeleri</2>, <1>{{folderName}}</1> konumuna başarıyla kopyalandı",
   "CopyLinkPassword": "Bağlantı şifresini kopyala",
-  "CopyPassword": "Şifreyi kopyala",
   "CreateNewFolder": "Yeni Klasör Oluştur",
   "CreateNewFolderInStorage": "Depolama alanında yeni bir klasör oluştur",
   "CreateNewLink": "Yeni bağlantı oluştur",

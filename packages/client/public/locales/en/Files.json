@@ -30,7 +30,6 @@
   "CopyFolderItem": "The folder <2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elements</2> successfully copied to <1>{{folderName}}</1>",
   "CopyLinkPassword": "Copy link password",
-  "CopyPassword": "Copy password",
   "CreateNewFolder": "Create new Folder",
   "CreateNewFolderInStorage": "Create a new folder in the storage",
   "CreateNewLink": "Create new link",

@@ -30,7 +30,6 @@
   "CopyFolderItem": "Folderul <2>{{title}}</2> a fost copiat cu succes în <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elemente</2> au fost copiate cu succes în <1>{{folderName}}</1>",
   "CopyLinkPassword": "Copiere parola linkului",
-  "CopyPassword": "Copiere parola",
   "CreateNewFolder": "Creați un folder nou",
   "CreateNewFolderInStorage": "Crearea unui folder nou în stocarea",
   "CreateNewLink": "Creați un link nou",

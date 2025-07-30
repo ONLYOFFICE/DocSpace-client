@@ -30,7 +30,6 @@
   "CopyFolderItem": "A pasta <2>{{title}}</2> foi copiada com êxito para <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elementos</2> copiados com sucesso para <1>{{folderName}}</1>",
   "CopyLinkPassword": "Copiar senha do link",
-  "CopyPassword": "Copiar senha",
   "CreateNewFolder": "Criar nova pasta",
   "CreateNewFolderInStorage": "Crie uma nova pasta no armazenamento",
   "CreateNewLink": "Criar novo link",

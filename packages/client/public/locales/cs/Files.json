@@ -30,7 +30,6 @@
   "CopyFolderItem": "Složka <2>{{title}}</2> byla úspěšně zkopírována do <1>{{folderName}}</1>.",
   "CopyItems": "<2>{{qty}} prvků</2> úspěšně zkopírovány do <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopírovat heslo odkazu",
-  "CopyPassword": "Kopírování hesla",
   "CreateNewFolder": "Vytvořit novou složku",
   "CreateNewFolderInStorage": "Vytvoření nové složky v úložišti",
   "CreateNewLink": "Kopírování hesla",

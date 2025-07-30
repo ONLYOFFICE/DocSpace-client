@@ -30,7 +30,6 @@
   "CopyFolderItem": "Thư mục <2>{{title}} </2> được sao chép thành công vào <1>{{folderName}} </1>",
   "CopyItems": "<2> {{qty}} phần </2> được sao chép thành công vào <1>{{folderName}} </1>",
   "CopyLinkPassword": "Sao chép liên kết mật khẩu",
-  "CopyPassword": "Sao chép mật khẩu",
   "CreateNewFolder": "Tạo thư mục mới",
   "CreateNewFolderInStorage": "Tạo một thư mục mới trong lưu trữ",
   "CreateNewLink": "Tạo liên kết mới",

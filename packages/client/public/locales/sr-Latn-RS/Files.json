@@ -30,7 +30,6 @@
   "CopyFolderItem": "Folder <2>{{title}}</2> uspešno kopiran u <1>{{folderName}}</1>.",
   "CopyItems": "<2>{{qty}} elemenata</2> uspešno kopirano u <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopiraj lozinku linka",
-  "CopyPassword": "Kopiraj lozinku",
   "CreateNewFolder": "Kreiraj novi Folder",
   "CreateNewFolderInStorage": "Kreiraj novi folder u skladištu",
   "CreateNewLink": "Kreiraj novi link",

@@ -886,5 +886,6 @@
   "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限",
   "PreventDownloadFilesAndFolders": "この設定を有効にした後、リンク経由で共有されたこの部屋からのファイルとフォルダのダウンロードが無効になります",
   "LimitByTimePeriod": "期間による制限",
-  "Clean": "クリア"
+  "Clean": "クリア",
+  "CopyPassword": "パスワードをコピーする"
 }

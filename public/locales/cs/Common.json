@@ -886,5 +886,6 @@
   "DisableDownload": "Omezení kopírování obsahu souborů, stahování souborů a tisku",
   "PreventDownloadFilesAndFolders": "Povolením tohoto nastavení zakážete stahování souborů a složek z této místnosti sdílených prostřednictvím odkazu",
   "LimitByTimePeriod": "Omezení podle časového období",
-  "Clean": "Vymazat"
+  "Clean": "Vymazat",
+  "CopyPassword": "Kopírování hesla"
 }

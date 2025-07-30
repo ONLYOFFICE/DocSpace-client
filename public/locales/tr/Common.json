@@ -886,5 +886,6 @@
   "DisableDownload": "Dosya içeriği kopyalamayı, dosya indirmeyi ve yazdırmayı kısıtla",
   "PreventDownloadFilesAndFolders": "Bu odadan bir bağlantı yoluyla paylaşılan dosya ve klasörlerin indirilmesini devre dışı bırakmak için bu ayarı etkinleştirin",
   "LimitByTimePeriod": "Zaman aralığına göre limitlendirme",
-  "Clean": "Temizle"
+  "Clean": "Temizle",
+  "CopyPassword": "Şifreyi kopyala"
 }

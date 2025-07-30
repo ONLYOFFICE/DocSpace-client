@@ -30,7 +30,6 @@
   "CopyFolderItem": "<2>{{title}}</2> 폴더가 <1>{{folderName}}</1>에 복사되었습니다",
   "CopyItems": "<2>{{qty}}개 요소</2>가 <1>{{folderName}}</1> 폴더에 복사되었습니다",
   "CopyLinkPassword": "링크 비밀번호 복사",
-  "CopyPassword": "복사 비밀번호 복사",
   "CreateNewFolder": "새 폴더 생성",
   "CreateNewFolderInStorage": "스토리지에 새 폴더 생성",
   "CreateNewLink": "새 링크 생성",

@@ -30,7 +30,6 @@
   "CopyFolderItem": "Mape <2>{{title}}</2> veiksmīgi pārkopēta uz <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elementi</2> veiksmīgi pārkopēti uz <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopēt saites paroli",
-  "CopyPassword": "Kopēt paroli",
   "CreateNewFolder": "Izveidot jaunu mapi",
   "CreateNewFolderInStorage": "Izveidot jaunu mapi krātuvē",
   "CreateNewLink": "Izveidot jaunu saiti",

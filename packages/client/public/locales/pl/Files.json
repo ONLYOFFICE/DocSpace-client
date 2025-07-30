@@ -30,7 +30,6 @@
   "CopyFolderItem": "Pomyślnie skopiowano katalog <2>{{title}}</2> do katalogu <1>{{folderName}}</1>",
   "CopyItems": "Pomyślnie skopiowano <2>{{qty}} element(-y/-ów)</2> do katalogu <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopiuj hasło linku",
-  "CopyPassword": "Kopiuj hasło",
   "CreateNewFolder": "Utwórz nowy Katalog",
   "CreateNewFolderInStorage": "Utwórz nowy katalog w pamięci",
   "CreateNewLink": "Utwórz nowy link",

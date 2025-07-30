@@ -30,7 +30,6 @@
   "CopyFolderItem": "تم نسخ المجلد <2>{{title}}</2> بنجاح إلى <1>{{folderName}}</1>",
   "CopyItems": "تم نسخ <2>{{qty}} elements</2> بنجاح إلى <1>{{folderName}}</1>",
   "CopyLinkPassword": "نسخ رابط كلمة المرور",
-  "CopyPassword": "نسخ كلمة المرور",
   "CreateNewFolder": "إنشاء مجلد جديد",
   "CreateNewFolderInStorage": "قم بإنشاء مجلد جديد في وحدة التخزين",
   "CreateNewLink": "إنشاء رابط جديد",

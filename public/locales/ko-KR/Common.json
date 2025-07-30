@@ -886,5 +886,6 @@
   "DisableDownload": "파일 콘텐츠 복사, 파일 다운로드 및 인쇄 제한",
   "PreventDownloadFilesAndFolders": "이 설정을 활성화하면 링크를 통해 공유된 이 방의 파일 및 폴더 다운로드가 비활성화됩니다",
   "LimitByTimePeriod": "기간별 제한",
-  "Clean": "삭제"
+  "Clean": "삭제",
+  "CopyPassword": "복사 비밀번호 복사"
 }

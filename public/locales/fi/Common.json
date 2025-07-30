@@ -886,5 +886,6 @@
   "DisableDownload": "Rajoita tiedostosisällön kopiointia, latausta ja tulostusta",
   "PreventDownloadFilesAndFolders": "Ota tämä asetus käyttöön, jos haluat poistaa käytöstä tiedostojen ja kansioiden lataukset tästä linkin kautta jaetusta huoneesta",
   "LimitByTimePeriod": "Rajoita ajanjaksolla",
-  "Clean": "Puhdista"
+  "Clean": "Puhdista",
+  "CopyPassword": "Kopioi salasana"
 }

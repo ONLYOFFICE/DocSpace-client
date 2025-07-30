@@ -886,5 +886,6 @@
   "DisableDownload": "Beperk het kopiëren van materiaal, downloaden en afdrukken van bestanden",
   "PreventDownloadFilesAndFolders": "Schakel deze instelling in om downloads uit te schakelen van bestanden en mappen uit deze kamer die worden gedeeld via een link",
   "LimitByTimePeriod": "Beperken op tijdsperiode",
-  "Clean": "Reinig"
+  "Clean": "Reinig",
+  "CopyPassword": "Kopieer wachtwoord"
 }

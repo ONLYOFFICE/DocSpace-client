@@ -886,5 +886,6 @@
   "DisableDownload": "Restricționarea permisiunii la copierea, descărcarea și imprimarea conținutul fișierului",
   "PreventDownloadFilesAndFolders": "Activați această opțiune pentru a dezactiva descărcarea fișierelor și folderelor din această cameră, care au fost partajate printr-un link",
   "LimitByTimePeriod": "Setare limită de timp",
-  "Clean": "Golire"
+  "Clean": "Golire",
+  "CopyPassword": "Copiere parola"
 }

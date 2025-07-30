@@ -30,7 +30,6 @@
   "CopyFolderItem": "La carpeta <2>{{title}}</2> se ha copiado correctamente en <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elementos</2> se han copiado correctamente en <1>{{folderName}}</1>",
   "CopyLinkPassword": "Copiar contraseña del enlace",
-  "CopyPassword": "Copiar contraseña",
   "CreateNewFolder": "Crear nueva carpeta",
   "CreateNewFolderInStorage": "Cree una nueva carpeta en el almacenamiento",
   "CreateNewLink": "Crear nuevo enlace",

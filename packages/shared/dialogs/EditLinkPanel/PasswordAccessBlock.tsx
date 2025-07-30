@@ -173,7 +173,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               onClick={onCopyClick}
               type={LinkType.action}
             >
-              {t("Files:CopyPassword")}
+              {t("Common:CopyPassword")}
             </Link>
           </div>
         </div>

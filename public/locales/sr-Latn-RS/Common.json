@@ -877,5 +877,6 @@
   "DisableDownload": "Ograniči kopiranje sadržaja datoteke, preuzimanje i štampanje",
   "PreventDownloadFilesAndFolders": "Omogući ovo podešavanje da onemogućiš preuzimanje datoteka i foldera iz ove sobe deljenih putem linka",
   "LimitByTimePeriod": "Ograniči vremenskim periodom",
-  "Clean": "Očistiti"
+  "Clean": "Očistiti",
+  "CopyPassword": "Kopiraj lozinku"
 }

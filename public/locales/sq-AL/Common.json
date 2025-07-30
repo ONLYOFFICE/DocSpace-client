@@ -885,5 +885,6 @@
   "DisableDownload": "Kufizoni kopjimin e përmbajtjes së skedarit, shkarkimin dhe printimin e skedarëve",
   "PreventDownloadFilesAndFolders": "Aktivizoni këtë cilësim për të çaktivizuar shkarkimet e skedarëve dhe dosjeve nga kjo dhomë të ndarë nëpërmjet një lidhjeje",
   "LimitByTimePeriod": "Kufizoni sipas periudhës kohore",
-  "Clean": "Pastroni"
+  "Clean": "Pastroni",
+  "CopyPassword": "Kopjoni fjalëkalimin"
 }

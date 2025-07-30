@@ -30,7 +30,6 @@
   "CopyFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich nach <1>{{folderName}}</1> kopiert",
   "CopyItems": "<2>{{qty}} Elemente</2> erfolgreich nach <1>{{folderName}}</1> kopiert",
   "CopyLinkPassword": "Passwort für Link kopieren",
-  "CopyPassword": "Passwort kopieren",
   "CreateNewFolder": "Neuen Ordner erstellen",
   "CreateNewFolderInStorage": "Neuen Ordner im Speicher erstellen",
   "CreateNewLink": "Neuen Link erstellen",

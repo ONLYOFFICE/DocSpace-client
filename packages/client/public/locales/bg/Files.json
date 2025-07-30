@@ -30,7 +30,6 @@
   "CopyFolderItem": "Папката <2>{{title}}</2> е успешно копирана в <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} елемента</2> са успешно копирани в <1>{{folderName}}</1>",
   "CopyLinkPassword": "Копирай парола на линка",
-  "CopyPassword": "Копирай парола",
   "CreateNewFolder": "Създай нова Папка",
   "CreateNewFolderInStorage": "Създайте нова папка в хранилището",
   "CreateNewLink": "Копирай парола",

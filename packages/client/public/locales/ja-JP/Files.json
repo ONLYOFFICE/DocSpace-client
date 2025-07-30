@@ -30,7 +30,6 @@
   "CopyFolderItem": "フォルダー<2>{{title}}</2>が<1>{{folderName}}</1>に正常にコピーされました",
   "CopyItems": "<2>{{qty}} 要素</2> が <1>{{folderName}}</1> に正常にコピーされました",
   "CopyLinkPassword": "リンクパスワードをコピー",
-  "CopyPassword": "パスワードをコピーする",
   "CreateNewFolder": "新規フォルダ作成",
   "CreateNewFolderInStorage": "ストレージに新しいフォルダを作成する",
   "CreateNewLink": "新しいリンクを作成する",

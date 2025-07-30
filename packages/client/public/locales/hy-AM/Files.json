@@ -30,7 +30,6 @@
   "CopyFolderItem": "«<2>{{title}}</2>» թղթապանակը հաջողությամբ պատճենվեց «<1>{{folderName}}</1>» թղթապանակ։",
   "CopyItems": "<2>{{qty}} տարրերը</2> հաջողությամբ պատճենվեցին <1>{{folderName}}</1>ում",
   "CopyLinkPassword": "Պատճենել հղման գաղտնաբառը",
-  "CopyPassword": "Պատճենել գաղտնաբառը",
   "CreateNewFolder": "Ստեղծեք նոր Թղթապանակ",
   "CreateNewFolderInStorage": "Ստեղծել նոր թղթապանակ պահեստում",
   "CreateNewLink": "Ստեղծեք նոր հղում",

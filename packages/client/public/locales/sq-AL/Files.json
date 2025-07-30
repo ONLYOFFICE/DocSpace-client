@@ -30,7 +30,6 @@
   "CopyFolderItem": "Folderi <2>{{title}}</2> është kopjuar me sukses në <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elemente</2> janë kopjuar me sukses në <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopjoni fjalëkalimin e lidhjes",
-  "CopyPassword": "Kopjoni fjalëkalimin",
   "CreateNewFolder": "Krijoni një dosje të re",
   "CreateNewFolderInStorage": "Krijoni një dosje të re në ruajtje",
   "CreateNewLink": "Krijoni një lidhje të re",

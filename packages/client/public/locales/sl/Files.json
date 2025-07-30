@@ -30,7 +30,6 @@
   "CopyFolderItem": "Mapa <2>{{title}}</2> je bila uspešno kopirana v <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elementov</2> uspešno kopiranih v <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopiraj geslo za povezavo",
-  "CopyPassword": "Kopiraj povezavo",
   "CreateNewFolder": "Ustvari novo mapo",
   "CreateNewFolderInStorage": "Ustvari novo mapo v pomnilniku",
   "CreateNewLink": "Ustvari novo povezavo",

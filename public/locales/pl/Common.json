@@ -886,5 +886,6 @@
   "DisableDownload": "Ogranicz możliwość kopiowania zawartości pliku, jego pobierania oraz drukowania",
   "PreventDownloadFilesAndFolders": "Włącz to ustawienie, aby uniemożliwić pobieranie plików i katalogów z tego pokoju udostępnionych za pośrednictwem linku",
   "LimitByTimePeriod": "Ograniczenie czasowe",
-  "Clean": "Wyczyść"
+  "Clean": "Wyczyść",
+  "CopyPassword": "Kopiuj hasło"
 }

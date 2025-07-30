@@ -30,7 +30,6 @@
   "CopyFolderItem": "Kansio <2>{{title}}</2> onnistuneesti kopioitu <1>{{folderName}}</1> :n",
   "CopyItems": "<2>{{qty}} elements</2> onnistuneesti kopioitu <1>{{folderName}}</1> :n",
   "CopyLinkPassword": "Kopioi linkin salasana",
-  "CopyPassword": "Kopioi salasana",
   "CreateNewFolder": "Luo uusi kansio",
   "CreateNewFolderInStorage": "Luo muistiin uusi kansio",
   "CreateNewLink": "Kopioi salasana",

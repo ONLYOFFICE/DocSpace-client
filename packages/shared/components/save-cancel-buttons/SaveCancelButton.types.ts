@@ -86,4 +86,9 @@ export type SaveCancelButtonProps = {
 
   /** Function that returns a component to be rendered above the buttons */
   getTopComponent?: () => ReactNode;
+
+  /** Save button data-testid */
+  saveButtonDataTestId?: string;
+  /** Canbel button data-testid */
+  cancelButtonDataTestId?: string;
 };

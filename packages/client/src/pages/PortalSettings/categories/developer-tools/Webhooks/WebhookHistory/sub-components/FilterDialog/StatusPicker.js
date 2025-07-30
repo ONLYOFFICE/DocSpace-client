@@ -60,6 +60,7 @@ const StatusBadgeSelector = ({
   return (
     <RoundedButton
       id={id}
+      testId={`status_badge_${id}_button`}
       label={label}
       onClick={handleOnClick}
       primary={isStatusSelected(statusCode)}

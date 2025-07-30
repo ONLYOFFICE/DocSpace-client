@@ -203,6 +203,7 @@ const config = {
                     params: {
                       overrides: {
                         removeViewBox: false,
+                        cleanupIds: false,
                       },
                     },
                   },
@@ -352,8 +353,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  config.devtool = "source-map";
-
   const isProduction = argv.mode === "production";
   const styleLoader = isProduction
     ? MiniCssExtractPlugin.loader
@@ -378,6 +377,7 @@ module.exports = (env, argv) => {
   });
 
   if (isProduction) {
+    config.devtool = "source-map";
     config.mode = "production";
     config.optimization.splitChunks.chunks = "all";
     config.optimization.minimize = !env.minimize;

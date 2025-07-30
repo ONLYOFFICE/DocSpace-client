@@ -23,11 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TFeedAction } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
 export interface HistoryBlockContentProps {
   t: TTranslation;
-  feed: Feed;
+  feed: TFeedAction;
   historyWithFileList?: boolean;
 }
 

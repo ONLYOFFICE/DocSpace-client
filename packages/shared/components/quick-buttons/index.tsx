@@ -28,19 +28,15 @@
 
 import { isTablet as isTabletDevice } from "react-device-detect";
 
-import FileActionsLockedReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg";
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
-import LockedReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
-import { useMemo } from "react";
 import { useTheme } from "styled-components";
 
 import { classNames, IconSizeType, isTablet } from "../../utils";
-import { DeviceType, RoomsType, ShareAccessRights } from "../../enums";
+import { RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
@@ -51,18 +47,15 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const {
     t,
     item,
-    onClickLock,
     onClickDownload,
     onCopyPrimaryLink,
     isDisabled,
     viewAs,
-    folderCategory,
     isPublicRoom,
     onClickShare,
     isPersonalRoom,
     isArchiveFolder,
     isIndexEditingMode,
-    currentDeviceType,
     showLifetimeIcon,
     expiredDate,
     roomLifetime,
@@ -72,23 +65,11 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const theme = useTheme();
 
-  const isMobile = currentDeviceType === DeviceType.mobile;
+  const { shared } = item;
 
-  const { id, shared } = item;
-
-  const fileExst = "fileExst" in item ? item.fileExst : undefined;
   const locked = "locked" in item ? item.locked : undefined;
 
   const isTile = viewAs === "tile";
-  const isRow = viewAs === "row";
-
-  const IconLock = useMemo(() => {
-    if (isMobile && !isTile) {
-      return LockedReact12Svg;
-    }
-
-    return locked ? FileActionsLockedReactSvg : LockedReactSvg;
-  }, [locked, isMobile, isTile]);
 
   const colorLock = locked
     ? theme.filesQuickButtons.sharedColor
@@ -100,19 +81,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const sizeQuickButton: IconSizeType =
     isTile || tabletViewQuickButton ? IconSizeType.medium : IconSizeType.small;
-  const displayBadges =
-    viewAs === "table" ||
-    (isRow && locked && isMobile) ||
-    isTile ||
-    tabletViewQuickButton;
-
-  const isAvailableLockFile =
-    !isPublicRoom &&
-    !folderCategory &&
-    fileExst &&
-    displayBadges &&
-    "Lock" in item.security &&
-    item.security.Lock;
 
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
@@ -221,40 +189,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-
-          {(locked &&
-            (item.access === ShareAccessRights.Collaborator ||
-              item.access === ShareAccessRights.Editing)) ||
-          isAvailableLockFile ? (
-            <IconButton
-              iconNode={<IconLock />}
-              className="badge lock-file icons-group"
-              size={sizeQuickButton}
-              data-id={id}
-              data-locked={!!locked}
-              onClick={onClickLock}
-              color={colorLock}
-              isDisabled={isDisabled || !isAvailableLockFile}
-              hoverColor="accent"
-              title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-            />
-          ) : null}
-          {/* {fileExst && !isTrashFolder && displayBadges && (
-        <IconButton
-          iconName={iconLock}
-          className="badge lock-file icons-group"
-          size={sizeQuickButton}
-          data-id={id}
-          data-locked={locked ? true : false}
-          onClick={onClickLock}
-          color={colorLock}
-          isDisabled={isDisabled}
-          hoverColor="accent"
-          title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-        />
-      )}
-
- */}
         </>
       ) : null}
     </div>

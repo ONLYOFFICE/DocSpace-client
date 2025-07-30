@@ -875,5 +875,6 @@
   "ManageNotifications": "관리",
   "LimitTimeBlockFormRoomDescription": "양식 작성 룸에서 메인 링크는 무제한의 기간 동안 유효합니다.",
   "LimitTimeBlockPublicRoomDescription": "공개 룸에서 메인 링크는 무제한의 기간 동안 유효합니다. 시간 제한이 있는 추가 링크를 생성할 수 있습니다. ",
-  "LimitTimeBlockCustomRoomDescription": "커스텀 룸에서 메인 링크는 무제한의 기간 동안 유효합니다. 시간 제한이 있는 추가 링크를 생성할 수 있습니다."
+  "LimitTimeBlockCustomRoomDescription": "커스텀 룸에서 메인 링크는 무제한의 기간 동안 유효합니다. 시간 제한이 있는 추가 링크를 생성할 수 있습니다.",
+  "LinkValidUntil": "이 링크의 유효 기간:"
 }

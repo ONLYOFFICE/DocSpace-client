@@ -875,5 +875,6 @@
   "ManageNotifications": "Gestionar",
   "LimitTimeBlockFormRoomDescription": "En una sala para rellenar formularios, el enlace principal es válido durante un periodo de tiempo ilimitado.",
   "LimitTimeBlockPublicRoomDescription": "En una sala pública, el enlace principal es válido durante un periodo de tiempo ilimitado. Puede crear enlaces adicionales con límite de tiempo.",
-  "LimitTimeBlockCustomRoomDescription": "En una sala personalizada, el enlace principal es válido durante un periodo de tiempo ilimitado. Puede crear enlaces adicionales con límite de tiempo."
+  "LimitTimeBlockCustomRoomDescription": "En una sala personalizada, el enlace principal es válido durante un periodo de tiempo ilimitado. Puede crear enlaces adicionales con límite de tiempo.",
+  "LinkValidUntil": "Este enlace será válido hasta"
 }

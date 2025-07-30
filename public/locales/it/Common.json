@@ -875,5 +875,6 @@
   "ManageNotifications": "Gestisci",
   "LimitTimeBlockFormRoomDescription": "In una stanza di compilazione dei moduli, il collegamento principale è valido per un periodo di tempo illimitato.",
   "LimitTimeBlockPublicRoomDescription": "In una stanza pubblica, il link principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con un limite di tempo.",
-  "LimitTimeBlockCustomRoomDescription": "In una stanza personalizzata, il collegamento principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con limiti di tempo."
+  "LimitTimeBlockCustomRoomDescription": "In una stanza personalizzata, il collegamento principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con limiti di tempo.",
+  "LinkValidUntil": "Questo link sarà valido fino al"
 }

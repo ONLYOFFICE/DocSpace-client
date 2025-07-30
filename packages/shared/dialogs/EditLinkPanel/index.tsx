@@ -417,7 +417,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
 
     return expirationDate
-      ? `${t("Files:LinkValidUntil")}:`
+      ? `${t("Common:LinkValidUntil")}:`
       : t("Files:ChooseExpirationDate");
   };
 

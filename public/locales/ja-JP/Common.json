@@ -875,5 +875,6 @@
   "ManageNotifications": "管理",
   "LimitTimeBlockFormRoomDescription": "フォーム記入ルームでは、メインリンクは無制限の時間有効です。",
   "LimitTimeBlockPublicRoomDescription": "パブリックルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。",
-  "LimitTimeBlockCustomRoomDescription": "カスタムルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。"
+  "LimitTimeBlockCustomRoomDescription": "カスタムルームでは、メインリンクは無制限の時間有効です。時間制限付きの追加リンクを作成できます。",
+  "LinkValidUntil": "このリンクは次の期間まで有効です："
 }

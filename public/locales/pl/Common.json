@@ -875,5 +875,6 @@
   "ManageNotifications": "Zarządzaj",
   "LimitTimeBlockFormRoomDescription": "W pokoju do wypełniania formularzy link główny jest ważny przez czas nieograniczony.",
   "LimitTimeBlockPublicRoomDescription": "W pokoju publicznym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu.",
-  "LimitTimeBlockCustomRoomDescription": "W pokoju niestandardowym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu."
+  "LimitTimeBlockCustomRoomDescription": "W pokoju niestandardowym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu.",
+  "LinkValidUntil": "Link będzie ważny do"
 }

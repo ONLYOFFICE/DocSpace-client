@@ -874,5 +874,6 @@
   "ManageNotifications": "Pārvaldīt",
   "LimitTimeBlockFormRoomDescription": "Veidlapu aizpildīšanas telpā galvenā saite ir derīga neierobežotu laiku.",
   "LimitTimeBlockPublicRoomDescription": "Publiskā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu.",
-  "LimitTimeBlockCustomRoomDescription": "Pielāgotā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu."
+  "LimitTimeBlockCustomRoomDescription": "Pielāgotā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu.",
+  "LinkValidUntil": "Šī saite būs derīga līdz"
 }

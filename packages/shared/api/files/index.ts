@@ -216,9 +216,6 @@ export async function getFoldersTree() {
     url: "/files/@root?filterType=2&count=1",
   })) as TGetFolder[];
 
-  // TODO: Temp value. Change later
-  res.push(mockRecentTreeFolder);
-
   const folders = sortInDisplayOrder(res);
 
   return folders.map((data, index) => {

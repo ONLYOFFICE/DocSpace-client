@@ -235,7 +235,7 @@ const GenerateDeveloperTokenDialog = ({
                 maxLength={10000}
                 testId="generate_token_input"
               />
-              <Text className="dates">
+              <Text dataTestId="generate_token_dates" className="dates">
                 <strong>{t("Files:ByCreation")}</strong>: {dates.created}
                 <br />
                 <strong>{t("Expires")}</strong>: {dates.expires}
@@ -256,7 +256,9 @@ const GenerateDeveloperTokenDialog = ({
           onClick={onGenerate}
           isLoading={requestRunning}
           size={ButtonSize.normal}
-          testId="generate_token_button"
+          testId={
+            token ? "copy_generate_token_button" : "generate_token_button"
+          }
         />
         <Button
           label={token ? t("Revoke") : t("Common:CancelButton")}
@@ -264,7 +266,9 @@ const GenerateDeveloperTokenDialog = ({
           onClick={token ? onRevoke : onClose}
           size={ButtonSize.normal}
           isDisabled={requestRunning || !secret}
-          testId="generate_token_revoke_button"
+          testId={
+            token ? "revoke_token_button" : "generate_token_cancel_button"
+          }
         />
       </ModalDialog.Footer>
     </ModalDialog>

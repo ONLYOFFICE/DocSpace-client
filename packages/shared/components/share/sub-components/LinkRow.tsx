@@ -24,20 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useMemo } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useMemo } from "react";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { isMobile } from "../../../utils";
 import { RowSkeleton } from "../../../skeletons/share";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 import type { TFileLink } from "../../../api/files/types";
 
 import { Link } from "../../link";
+import type { TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
 import { ContextMenuButton } from "../../context-menu-button";
 
@@ -78,7 +79,8 @@ const LinkRow = ({
   removedExpiredLink,
 }: LinkRowProps) => {
   const { t } = useTranslation("Common");
-  const [isMobileViewLink, setIsMobileViewLink] = useState(() => isMobile());
+
+  const isMobileViewLink = useIsMobile();
 
   const shareOptions = useMemo(() => getShareOptions(t), [t]);
   const accessOptions = useMemo(() => {
@@ -92,18 +94,6 @@ const LinkRow = ({
     [t, isFolder, isRoomsLink],
   );
 
-  useEffect(() => {
-    const onCheckHeight = () => {
-      setIsMobileViewLink(isMobile());
-    };
-
-    onCheckHeight();
-    window.addEventListener("resize", onCheckHeight);
-    return () => {
-      window.removeEventListener("resize", onCheckHeight);
-    };
-  }, []);
-
   const onCopyLink = (link: TFileLink) => {
     if (isRoomsLink) {
       return copyRoomShareLink(link, t);
@@ -112,7 +102,13 @@ const LinkRow = ({
     copyDocumentShareLink(link, t);
   };
 
-  console.log({ accessOptions, availableExternalRights });
+  const changeAccessOptionHandler = (item: TOption, link: TFileLink) => {
+    if (isRoomsLink) {
+      return onAccessRightsSelect?.(item);
+    }
+
+    changeAccessOption?.(item, link);
+  };
 
   if (!links?.length) {
     return (
@@ -207,8 +203,7 @@ const LinkRow = ({
             isMobileViewLink={isMobileViewLink}
             roomAccessOptions={roomAccessOptions}
             roomSelectedOptions={roomSelectedOptions}
-            changeAccessOption={changeAccessOption}
-            onAccessRightsSelect={onAccessRightsSelect}
+            changeAccessOption={changeAccessOptionHandler}
           />
           {!isArchiveFolder ? (
             <ContextMenuButton

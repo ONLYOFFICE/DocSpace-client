@@ -47,7 +47,6 @@ export interface AccessRightSelectorProps {
   roomSelectedOptions?: TOption;
 
   changeAccessOption: (item: TOption, link: TFileLink) => void;
-  onAccessRightsSelect?: (item: TOption) => void;
 }
 
 export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
@@ -64,7 +63,6 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
   selectedAccessOption,
   roomSelectedOptions,
   changeAccessOption,
-  onAccessRightsSelect,
 }) => {
   if (isRoomsLink || isFolder) {
     if (isFormRoom) return;
@@ -72,11 +70,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
     return (
       <AccessRightSelect
         selectedOption={roomSelectedOptions ?? ({} as TOption)}
-        onSelect={
-          isFolder
-            ? (item) => changeAccessOption(item, link)
-            : onAccessRightsSelect
-        }
+        onSelect={(item) => changeAccessOption(item, link)}
         accessOptions={roomAccessOptions ?? []}
         modernView
         directionY="both"

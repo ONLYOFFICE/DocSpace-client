@@ -53,6 +53,7 @@ const TextPure = ({
   style,
   containerWidth,
   containerMinWidth,
+  dataTestId,
   ...rest
 }: TextProps) => {
   const elementType = !as && tag ? tag : as;
@@ -87,7 +88,7 @@ const TextPure = ({
     <Element
       ref={ref}
       title={title}
-      data-testid="text"
+      data-testid={dataTestId ?? "text"}
       onClick={onClick}
       className={textClassName}
       style={textStyles}

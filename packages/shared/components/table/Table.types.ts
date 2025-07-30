@@ -139,6 +139,7 @@ export interface TableRowProps {
   isActive?: boolean;
   checked?: boolean;
   dragging?: boolean;
+  contextMenuTestId?: string;
 }
 
 export interface TableCellProps {

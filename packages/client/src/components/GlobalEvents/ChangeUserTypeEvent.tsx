@@ -180,7 +180,7 @@ const ChangeUserTypeEvent = ({
   );
 };
 
-export default inject(({ peopleStore }: TStore) => {
+export default inject(({ peopleStore, infoPanelStore }: TStore) => {
   const { dialogStore, usersStore } = peopleStore;
 
   const { data: dialogData } = dialogStore!;
@@ -191,14 +191,15 @@ export default inject(({ peopleStore }: TStore) => {
     needResetUserSelection,
     setSelected,
   } = usersStore!;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
+
   return {
-    needResetUserSelection,
+    needResetUserSelection: !infoPanelVisible || needResetUserSelection,
 
     getPeopleListItem,
 
-    setSelected,
-
     dialogData,
     updateUserType,
+    setSelected,
   };
 })(observer(ChangeUserTypeEvent));

@@ -2135,6 +2135,9 @@
   --payment-icon-color: #{$light-gray-dark};
   --payment-dialog-text: #{$gray};
   --payment-devider-color: #{$gray-light-mid};
+  --payment-contact-container-text-color: #{$gray};
+  --payment-contact-container-link-color: #{$light-gray-dark};
+
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
@@ -2148,6 +2151,9 @@
   --payment-icon-color: #{$dark-gray-dark};
   --payment-dialog-text: #{$gray-dark};
   --payment-devider-color: #{$gray-dark-mid};
+  --payment-contact-container-text-color: #{$dark-gray-dark};
+  --payment-contact-container-link-color: #{$gray-dark};
+
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
@@ -2437,6 +2443,66 @@
 }
 
 .light {
+  --info-panel-name-color: #{$gray-dark};
+  --info-panel-border-color: #{$gray-light-mid};
+  --info-panel-background-color: #{$white};
+  --info-panel-text-color: #{$black};
+  --info-panel-details-border-color: #{$gray-light-mid};
+  --info-panel-group-text-color: #{$gray};
+  --info-panel-group-tag-color: #{$gray-strong};
+  --info-panel-gallery-border-color: #{$gray-strong};
+  --info-panel-gallery-description-color: #{$light-gray-dark};
+  --info-panel-links-primary-color: #{$gray-text};
+  --info-panel-links-bar-color: #{$light-gray-dark};
+  --info-panel-subtitle-color: #{$gray};
+  --info-panel-expect-name-color: #{$gray};
+  --info-panel-me-label-color: #{$gray};
+  --info-panel-disable-role-color: #{$gray};
+  --info-panel-icon-color: #{$light-icons};
+  --info-panel-icon-error-color: #{$light-error-status};
+  --info-panel-members-icon-color: #{$gray};
+  --info-panel-members-icon-hover-color: #{$light-gray-dark};
+  --info-panel-icon-button-color: #{$gray};
+  --info-panel-icon-button-hover-color: #{$light-gray-dark};
+  --info-panel-box-shadow: 0px 5px 20px 0px #{$menu-shadow};
+  --info-panel-file-exst-color: #{$gray};
+  --info-panel-comment-editor-icon-color: #{$black};
+  --info-panel-role-color: #{$light-gray-dark};
+  --info-panel-item-border-color: #{$gray-light-mid};
+  --info-panel-item-selected-color: #{$light-gray-selected};
+}
+
+.dark {
+  --info-panel-name-color: #{$gray};
+  --info-panel-border-color: #{$gray-dark-strong};
+  --info-panel-background-color: #{$black};
+  --info-panel-text-color: #{$white};
+  --info-panel-details-border-color: #{$gray-dark-strong};
+  --info-panel-group-text-color: #{$gray-dark};
+  --info-panel-group-tag-color: #{$gray-dark-strong};
+  --info-panel-gallery-border-color: #{$black};
+  --info-panel-gallery-description-color: #{$white};
+  --info-panel-links-primary-color: #{$dark-gray-dark};
+  --info-panel-links-bar-color: #{$dark-gray-dark};
+  --info-panel-subtitle-color: #{$gray};
+  --info-panel-expect-name-color: #{$gray};
+  --info-panel-me-label-color: #{$gray};
+  --info-panel-disable-role-color: #{$gray};
+  --info-panel-icon-color: #{$gray-dark};
+  --info-panel-icon-error-color: #{$dark-error-status};
+  --info-panel-members-icon-color: #{$gray-dark};
+  --info-panel-members-icon-hover-color: #{$white};
+  --info-panel-icon-button-color: #{$gray-dark};
+  --info-panel-icon-button-hover-color: #{$white};
+  --info-panel-box-shadow: 0px 5px 20px 0px #{$popup-shadow};
+  --info-panel-file-exst-color: #{$gray};
+  --info-panel-comment-editor-icon-color: #{$white};
+  --info-panel-role-color: #{$gray};
+  --info-panel-item-border-color: #{$gray-dark-strong};
+  --info-panel-item-selected-color: #{$dark-gray-light};
+}
+
+.light {
   --search-input-default-icon-fill: #{$gray-strong};
   --search-input-filled-icon-fill: #{$gray};
 }
@@ -2671,4 +2737,18 @@
 
 .dark {
   --settings-backup-separator-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --settings-payment-warning-color: #{$light-error-status};
+  --settings-payment-color: #{$light-status-warning};
+  --settings-payment-border: 1px solid #{$gray-light};
+  --settings-payment-bg-benefits-color: #{$gray-light};
+}
+
+.dark {
+  --settings-payment-warning-color: #{$dark-error-status};
+  --settings-payment-color: #{$dark-status-warning};
+  --settings-payment-border: 1px solid #{$gray-dark-strong};
+  --settings-payment-bg-benefits-color: #{$black};
 }

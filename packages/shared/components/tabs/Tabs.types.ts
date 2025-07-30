@@ -70,6 +70,7 @@ export type TabsProps = {
   scaled?: boolean;
   /** Unique identifier for hotkey functionality */
   hotkeysId?: string;
+  id?: string;
 };
 
 export type TTabsHotkey = {

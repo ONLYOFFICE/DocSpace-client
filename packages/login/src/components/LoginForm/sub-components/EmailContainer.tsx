@@ -124,7 +124,11 @@ const EmailContainer = ({
       isVertical
       labelVisible={false}
       hasError={isEmailErrorShow}
-      errorMessage={errorText || t("Common:RequiredField")} // TODO: Add wrong login server error
+      errorMessage={
+        errorText
+          ? t(`Common:${errorText}`, errorText)
+          : t("Common:RequiredField")
+      } // TODO: Add wrong login server error
     >
       {isLdapLogin ? (
         <TextInput

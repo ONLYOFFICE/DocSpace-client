@@ -79,4 +79,5 @@ export type AvatarProps = {
   model?: TAvarModel[];
   isNotIcon?: boolean;
   imgClassName?: string;
+  dataTestId?: string;
 };

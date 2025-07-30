@@ -70,6 +70,7 @@ jest.mock("react-i18next", () => ({
     i18n: {
       changeLanguage: () => new Promise(() => {}),
     },
+    ready: true,
   }),
   Trans: ({ t, i18nKey, values }: TransProps) => {
     return t(i18nKey, { ...values });

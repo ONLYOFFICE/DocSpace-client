@@ -110,6 +110,7 @@ const ContextMenu = (props: ContextMenuProps) => {
     model: propsModel,
     badgeUrl,
     headerOnlyMobile = false,
+    dataTestId,
   } = props;
 
   const onMenuClick = () => {
@@ -527,7 +528,7 @@ const ContextMenu = (props: ContextMenuProps) => {
 
     return (
       <div
-        data-testid="context-menu"
+        data-testid={dataTestId ?? "context-menu"}
         className={classNames(styles.contextMenu, {
           [styles.isRoom]: isRoom,
           [styles.coverExist]: isCoverExist,

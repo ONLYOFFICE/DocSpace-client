@@ -148,7 +148,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
                 ? t(`Common:${emailErrorMessage}`)
                 : t("Common:RequiredField")
             }
-            testId="recover-access-modal-email-container"
+            dataTestId="recover-access-modal-email-container"
           >
             <EmailInput
               scale
@@ -179,7 +179,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             className={styles.textarea}
             key="text-description"
             errorMessage={t("Common:RequiredField")}
-            testId="recover-access-modal-description-container"
+            dataTestId="recover-access-modal-description-container"
           >
             <Textarea
               tabIndex={2}

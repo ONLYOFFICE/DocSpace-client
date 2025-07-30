@@ -53,6 +53,7 @@ const DatePicker = (props: DatePickerProps) => {
     isMobile,
     hideCross,
     autoPosition,
+    testId,
   } = props;
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -144,7 +145,7 @@ const DatePicker = (props: DatePickerProps) => {
     <div
       className={classNames(styles.wrapper, className)}
       id={id}
-      data-testid="date-picker"
+      data-testid={testId ?? "date-picker"}
       role="presentation"
       ref={containerRef}
     >

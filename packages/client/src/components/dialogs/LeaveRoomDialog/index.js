@@ -40,7 +40,6 @@ const LeaveRoomDialog = (props) => {
     setChangeRoomOwnerIsVisible,
     isRoomOwner,
     onLeaveRoomAction,
-    updateInfoPanelSelection,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -54,8 +53,8 @@ const LeaveRoomDialog = (props) => {
     } else {
       setIsLoading(true);
       await onLeaveRoomAction(t, isRoomOwner);
+
       setIsLoading(false);
-      updateInfoPanelSelection();
       onClose();
     }
   };
@@ -115,7 +114,6 @@ export default inject(
     filesStore,
     selectedFolderStore,
     filesActionsStore,
-    infoPanelStore,
   }) => {
     const {
       leaveRoomDialogVisible: visible,
@@ -124,7 +122,6 @@ export default inject(
     } = dialogsStore;
     const { user } = userStore;
     const { selection, bufferSelection } = filesStore;
-    const { updateInfoPanelSelection } = infoPanelStore;
 
     const selections = selection.length ? selection : [bufferSelection];
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
@@ -137,7 +134,6 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       isRoomOwner,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
-      updateInfoPanelSelection,
     };
   },
 )(observer(withTranslation(["Common", "Files"])(LeaveRoomDialog)));

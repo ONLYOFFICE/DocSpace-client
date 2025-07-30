@@ -50,3 +50,10 @@
   margin-top: 4px;
   color: var(--payment-dialog-text);
 }
+
+.amountTabItemsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  height: 32px;
+}

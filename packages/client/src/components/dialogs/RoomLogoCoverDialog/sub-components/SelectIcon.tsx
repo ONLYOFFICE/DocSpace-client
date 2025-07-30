@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
 import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
-import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { SelectIconProps, ILogo } from "../RoomLogoCoverDialog.types";
 
 interface WithoutIconProps {
   isSelected?: boolean;

@@ -125,6 +125,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
           {value.isRead ? (
             <Checkbox
+              dataTestId={`permission_${value.isRead.name}_checkbox`}
               className="api-key_permission-row api-key_permission-checkbox"
               isChecked={value.isRead.isChecked || readIsDisabled}
               onChange={() => {
@@ -145,6 +146,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
               data-tip="tooltip"
             >
               <Checkbox
+                dataTestId={`permission_${value.isWrite.name}_checkbox`}
                 className="api-key_permission-row api-key_permission-checkbox"
                 isChecked={value.isWrite.isChecked}
                 onChange={() => {
@@ -377,6 +379,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           }}
           hasError={!isValid}
           scale
+          testId="secret_key_name_input"
         />
       </div>
       <div className="api-key_name">
@@ -384,6 +387,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           {t("Common:Permissions")}
         </Text>
         <Tabs
+          hotkeysId="apiKeys"
           type={TabsTypes.Secondary}
           items={tabsItems}
           onSelect={onSelectPermission}
@@ -400,6 +404,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
               className="api-key_toggle"
               isChecked={lifetimeIsChecked}
               onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}
+              dataTestId="secret_key_lifetime_toggle_button"
             />
           </div>
           <Text
@@ -431,6 +436,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
                   setIsValidLifeTime(true);
                 }}
                 hasError={!isValidLifeTime}
+                testId="deactivate_secret_key_input"
               />
               <Text fontSize="13px" fontWeight={600}>
                 <Trans
@@ -476,6 +482,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
             copy(secretKey?.key || "");
             toastr.success(t("Settings:ApiKeyCopied"));
           }}
+          testId="secret_key_input"
         />
       </div>
       {lifetimeIsChecked ? (
@@ -504,6 +511,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         onClick={onGenerate}
         scale
         isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}
+        testId="secret_key_generate_button"
       />
       <Button
         key="CancelButton"
@@ -511,6 +519,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         size={ButtonSize.normal}
         onClick={onClose}
         scale
+        testId="secret_key_cancel_button"
       />
     </>
   );
@@ -523,6 +532,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       primary
       onClick={onClose}
       scale
+      testId="secret_key_done_button"
     />
   );
 

@@ -185,7 +185,7 @@ const LinkRow = ({
                 directionY="both"
                 options={shareOptions}
                 selectedOption={shareOption ?? ({} as TOption)}
-                onSelect={(item) => changeShareOption(item, link)}
+                onSelect={(item) => changeShareOption?.(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems
@@ -216,11 +216,11 @@ const LinkRow = ({
             ) : (
               <ExpiredComboBox
                 link={link}
-                availableExternalRights={availableExternalRights}
+                availableExternalRights={availableExternalRights!}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
-                changeAccessOption={changeAccessOption}
+                changeAccessOption={changeAccessOption!}
                 removedExpiredLink={removedExpiredLink}
               />
             )}
@@ -273,7 +273,7 @@ const LinkRow = ({
                 directionY="both"
                 options={accessOptions}
                 selectedOption={accessOption ?? ({} as TOption)}
-                onSelect={(item) => changeAccessOption(item, link)}
+                onSelect={(item) => changeAccessOption?.(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems

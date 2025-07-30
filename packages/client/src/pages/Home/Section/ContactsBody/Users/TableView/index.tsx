@@ -173,7 +173,7 @@ const Table = ({
             setCurrentGroup={setCurrentGroup}
             {...enabledColumns}
             infoPanelVisible={infoPanelVisible}
-            isGuests={contactsTab === "guests"}
+            contactsTab={contactsTab}
           />
         ))}
       </TableBody>

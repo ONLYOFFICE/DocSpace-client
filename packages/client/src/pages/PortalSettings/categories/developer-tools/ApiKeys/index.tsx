@@ -189,6 +189,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           fontSize="13px"
           fontWeight={600}
           onClick={() => window.open(apiKeysLink, "_blank")}
+          dataTestId="api_guide_link"
         >
           {t("Settings:APIGuide")}
         </Link>
@@ -207,6 +208,7 @@ const ApiKeys = (props: ApiKeysProps) => {
                   size={ButtonSize.normal}
                   scale
                   isDisabled={isLoading}
+                  testId="create_new_secret_key_button"
                 />
               </StyledMobileButton>
             ) : (
@@ -216,6 +218,7 @@ const ApiKeys = (props: ApiKeysProps) => {
                 primary
                 size={ButtonSize.small}
                 isDisabled={isLoading}
+                testId="create_new_secret_key_button"
               />
             )}
             <div>

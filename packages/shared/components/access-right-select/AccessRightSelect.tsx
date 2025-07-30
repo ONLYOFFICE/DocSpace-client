@@ -25,21 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect, useCallback } from "react";
+import classNames from "classnames";
+import { ReactSVG } from "react-svg";
 
 import { DropDownItem } from "../drop-down-item";
 import { Badge } from "../badge";
-import { TOption } from "../combobox";
+import { ComboBox, TOption } from "../combobox";
 import { toastr } from "../toast";
 
-import {
-  StyledItemTitle,
-  StyledItemContent,
-  StyledItemIcon,
-  StyledItemDescription,
-  StyledItem,
-  StyledWrapper,
-  GlobalStyle,
-} from "./AccessRightSelect.styled";
+import styles from "./AccessRightSelect.module.scss";
 import { AccessRightSelectProps } from "./AccessRightSelect.types";
 
 export const AccessRightSelectPure = ({
@@ -52,6 +46,7 @@ export const AccessRightSelectPure = ({
   isSelectionDisabled,
   selectionErrorText,
   availableAccess,
+  isDisabled,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -105,15 +100,17 @@ export const AccessRightSelectPure = ({
           isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
         >
-          <StyledItem>
+          <div className={styles.item}>
             {item.icon && typeof item.icon === "string" ? (
-              <StyledItemIcon
+              <ReactSVG
+                className={classNames(styles.itemIcon, {
+                  [styles.isShortenIcon]: type === "onlyIcon",
+                })}
                 src={item.icon}
-                $isShortenIcon={type === "onlyIcon"}
               />
             ) : null}
-            <StyledItemContent>
-              <StyledItemTitle>
+            <div className={styles.itemContent}>
+              <div className={styles.itemTitle}>
                 {item.label}
                 {item.quota ? (
                   <Badge
@@ -124,10 +121,10 @@ export const AccessRightSelectPure = ({
                     noHover
                   />
                 ) : null}
-              </StyledItemTitle>
-              <StyledItemDescription>{item.description}</StyledItemDescription>
-            </StyledItemContent>
-          </StyledItem>
+              </div>
+              <div className={styles.itemDescription}>{item.description}</div>
+            </div>
+          </div>
         </DropDownItem>
       );
     });
@@ -141,28 +138,30 @@ export const AccessRightSelectPure = ({
   // console.log(formattedOptions);
 
   return (
-    <>
-      <GlobalStyle />
-      <StyledWrapper
-        className={className}
-        type={type}
-        advancedOptions={formattedOptions}
-        onSelect={onSelectCurrentItem}
-        options={[]}
-        selectedOption={
-          {
-            icon: currentItem?.icon,
-            default: true,
-            key: currentItem?.key,
-            label: type === "onlyIcon" ? "" : currentItem?.label,
-            description: type === "onlyIcon" ? "" : currentItem?.description,
-          } as TOption
-        }
-        forceCloseClickOutside
-        dropDownClassName="access-right-select-dropdown"
-        {...props}
-      />
-    </>
+    <ComboBox
+      className={classNames(styles.wrapper, className, {
+        [styles.descriptive]: type === "descriptive",
+        [styles.onlyIcon]: type === "onlyIcon",
+        [styles.isDisabled]: isDisabled,
+      })}
+      type={type}
+      isDisabled={isDisabled}
+      advancedOptions={formattedOptions}
+      onSelect={onSelectCurrentItem}
+      options={[]}
+      selectedOption={
+        {
+          icon: currentItem?.icon,
+          default: true,
+          key: currentItem?.key,
+          label: type === "onlyIcon" ? "" : currentItem?.label,
+          description: type === "onlyIcon" ? "" : currentItem?.description,
+        } as TOption
+      }
+      forceCloseClickOutside
+      dropDownClassName={styles.accessRightSelectDropdown}
+      {...props}
+    />
   );
 };
 

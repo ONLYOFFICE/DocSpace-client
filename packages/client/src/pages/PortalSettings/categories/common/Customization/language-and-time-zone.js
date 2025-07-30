@@ -479,6 +479,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
+            dataTestId="language_and_time_zone_combo_box_language"
           />
           {isBetaLang ? <BetaBadge place="right-start" /> : null}
         </div>
@@ -502,6 +503,7 @@ const LanguageAndTimeZoneComponent = (props) => {
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
           showDisabledItems
+          dataTestId="language_and_time_zone_combo_box_timezone"
         />
       </FieldContainer>
     </div>
@@ -537,6 +539,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
+            dataTestId="language_and_time_zone_link"
             href={languageAndTimeZoneSettingsUrl}
           >
             {t("Common:LearnMore")}
@@ -557,6 +560,8 @@ const LanguageAndTimeZoneComponent = (props) => {
         hasScroll={hasScroll}
         additionalClassSaveButton="language-time-zone-save"
         additionalClassCancelButton="language-time-zone-cancel"
+        saveButtonDataTestId="language_and_time_zone_save_buttons"
+        cancelButtonDataTestId="language_and_time_zone_cancel_buttons"
       />
     </StyledSettingsComponent>
   );

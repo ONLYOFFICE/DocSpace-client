@@ -179,7 +179,11 @@ const Details = ({
       : null;
 
   const isTemplate =
-    selection && "isTemplate" in selection && selection.isTemplate;
+    selection &&
+    "isTemplate" in selection &&
+    selection.isTemplate &&
+    "isRoom" in selection &&
+    selection.isRoom;
 
   const color = "logo" in selection ? selection.logo?.color : undefined;
   const title = "title" in selection ? selection.title : "";

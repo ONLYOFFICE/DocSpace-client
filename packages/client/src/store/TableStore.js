@@ -35,6 +35,7 @@ const TABLE_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
+const TABLE_TRASH_ROOMS_COLUMNS = `trashRoomsTableColumns_ver-${TableVersions.TrashRooms}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
 const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVersions.Rooms}`;
@@ -42,6 +43,7 @@ const TABLE_TEMPLATES_ROOM_COLUMNS = `templatesRoomsTableColumns_ver-${TableVers
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
+const COLUMNS_TRASH_ROOMS_SIZE = `trashRoomsColumnsSize_ver-${TableVersions.TrashRooms}`;
 const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
 const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
@@ -53,6 +55,7 @@ const COLUMNS_TEMPLATES_ROOM_SIZE = `templatesRoomsColumnsSize_ver-${TableVersio
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
+const COLUMNS_TRASH_ROOMS_SIZE_INFO_PANEL = `trashRoomsColumnsSizeInfoPanel_ver-${TableVersions.TrashRooms}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
@@ -169,6 +172,10 @@ class TableStore {
   templateRoomColumnActivityIsEnabled = true;
 
   templateRoomQuotaColumnIsEnable = false;
+
+  retentionPeriodColumnIsEnabled = true;
+
+  trashRoomColumnActivityIsEnabled = true;
 
   constructor(
     authStore,
@@ -298,6 +305,12 @@ class TableStore {
     this.templatesRoomColumnTypeIsEnabled = enable;
   };
 
+  setTrashRoomActivityColumn = (enable) =>
+    (this.trashRoomColumnActivityIsEnabled = enable);
+
+  setRetentionPeriodColumn = (enable) =>
+    (this.retentionPeriodColumnIsEnabled = enable);
+
   setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
 
   setCreatedTrashColumn = (enable) =>
@@ -360,7 +373,10 @@ class TableStore {
         isTrashFolder,
         isTemplatesFolder,
         isPersonalReadOnly,
+        isRoomTrash,
       } = this.treeFoldersStore;
+
+      const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
 
       const contactsView = getContactsView();
 
@@ -433,13 +449,22 @@ class TableStore {
       }
 
       if (isTrashFolder) {
-        this.setRoomColumn(splitColumns.includes("Room"));
         this.setAuthorTrashColumn(splitColumns.includes("AuthorTrash"));
         this.setCreatedTrashColumn(splitColumns.includes("CreatedTrash"));
         this.setErasureColumn(splitColumns.includes("Erasure"));
         this.setSizeTrashColumn(splitColumns.includes("SizeTrash"));
         this.setTypeTrashColumn(splitColumns.includes("TypeTrash"));
         return;
+      }
+
+      if (isRoomTrash) {
+        this.setRetentionPeriodColumn(
+          splitColumns.includes("RetentionPeriodTrashRooms"),
+        );
+        this.setSizeTrashColumn(splitColumns.includes("SizeTrash"));
+        this.setTrashRoomActivityColumn(
+          splitColumns.includes("ActivityTrashRooms"),
+        );
       }
 
       if (isRecentTab) {
@@ -571,6 +596,14 @@ class TableStore {
         this.setTypeTrashColumn(!this.typeTrashColumnIsEnabled);
         return;
 
+      case "RetentionPeriodTrashRooms":
+        this.setRetentionPeriodColumn(!this.retentionPeriodColumnIsEnabled);
+        return;
+
+      case "ActivityTrashRooms":
+        this.setTrashRoomActivityColumn(!this.trashRoomColumnActivityIsEnabled);
+        return;
+
       case "TypeRecent":
         this.setTypeRecentColumn(!this.typeRecentColumnIsEnabled);
         return;
@@ -692,6 +725,8 @@ class TableStore {
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
+    const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
+
     const { contactsTab } = this.peopleStore.usersStore;
     const { isIndexedFolder } = this.selectedFolderStore;
 
@@ -719,6 +754,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       tableStorageName = `${TABLE_TEMPLATES_ROOM_COLUMNS}=${userId}`;
+    else if (isTrashRooms)
+      tableStorageName = `${TABLE_TRASH_ROOMS_COLUMNS}=${userId}`;
     else if (isRooms) tableStorageName = `${TABLE_ROOMS_COLUMNS}=${userId}`;
     else if (isContactsPeople)
       tableStorageName = `${TABLE_PEOPLE_COLUMNS}=${userId}`;
@@ -750,7 +787,10 @@ class TableStore {
       isTrashFolder,
       isRecentTab,
       isTemplatesFolder,
+      isRoomTrash,
     } = this.treeFoldersStore;
+
+    const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
 
     const { contactsTab } = this.peopleStore.usersStore;
     const { isIndexedFolder } = this.selectedFolderStore;
@@ -777,11 +817,17 @@ class TableStore {
 
     let columnStorageName;
 
+    console.log("isRoomTrash", isRoomTrash);
+    console.log("isRooms", isRooms);
+    console.log("isTrashFolder", isTrashFolder);
+
     if (isTemplatesFolder)
       columnStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE}=${userId}`;
-    else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
     else if (isTrashFolder)
       columnStorageName = `${COLUMNS_TRASH_SIZE}=${userId}`;
+    else if (isTrashRooms)
+      columnStorageName = `${COLUMNS_TRASH_ROOMS_SIZE}=${userId}`;
+    else if (isRooms) columnStorageName = `${COLUMNS_ROOMS_SIZE}=${userId}`;
     else if (isRecentTab)
       columnStorageName = `${COLUMNS_RECENT_SIZE}=${userId}`;
     else if (isIndexedFolder)
@@ -812,6 +858,8 @@ class TableStore {
       isTemplatesFolder,
     } = this.treeFoldersStore;
 
+    const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
+
     const { isIndexedFolder } = this.selectedFolderStore;
     const { contactsTab } = this.peopleStore.usersStore;
 
@@ -839,6 +887,8 @@ class TableStore {
 
     if (isTemplatesFolder)
       columnInfoPanelStorageName = `${COLUMNS_TEMPLATES_ROOM_SIZE_INFO_PANEL}=${userId}`;
+    else if (isTrashRooms)
+      columnInfoPanelStorageName = `${COLUMNS_TRASH_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isRooms)
       columnInfoPanelStorageName = `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
     else if (isTrashFolder)

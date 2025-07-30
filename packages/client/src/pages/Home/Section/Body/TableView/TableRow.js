@@ -36,6 +36,7 @@ import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
+import TrashRoomRowDataComponent from "./sub-components/TrashRoomRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
 import TemplatesRowData from "./sub-components/TemplatesRowData";
@@ -196,6 +197,8 @@ const FilesTableRow = (props) => {
     onChangeIndex(action);
   };
 
+  const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
+
   return (
     <StyledDragAndDrop
       id={id}
@@ -249,6 +252,12 @@ const FilesTableRow = (props) => {
         {isTemplates ? (
           <TemplatesRowData
             t={t}
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isTrashRooms ? (
+          <TrashRoomRowDataComponent
             element={element}
             dragStyles={dragStyles}
             {...props}

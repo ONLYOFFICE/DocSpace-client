@@ -48,6 +48,8 @@ class TreeFoldersStore {
 
   isLoadingNodes = false;
 
+  isRoomTrash = false;
+
   constructor(selectedFolderStore, settingsStore, publicRoomStore) {
     makeAutoObservable(this);
 
@@ -168,6 +170,10 @@ class TreeFoldersStore {
 
   setExpandedPanelKeys = (expandedPanelKeys) => {
     this.expandedPanelKeys = expandedPanelKeys;
+  };
+
+  setIsRoomTrash = (isRoomTrash) => {
+    this.isRoomTrash = isRoomTrash;
   };
 
   // updateRootBadge = (id, count) => {
@@ -316,7 +322,8 @@ class TreeFoldersStore {
   get isTrashFolder() {
     return (
       this.recycleBinFolder &&
-      this.selectedFolderStore.id === this.recycleBinFolder.id
+      this.selectedFolderStore.id === this.recycleBinFolder.id &&
+      !this.isRoomTrash
     );
   }
 

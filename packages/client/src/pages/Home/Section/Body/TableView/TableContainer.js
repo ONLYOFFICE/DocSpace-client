@@ -299,8 +299,14 @@ export default inject(
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
-      treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isTemplatesFolder,
+      isRoomTrash,
+    } = treeFoldersStore;
+    const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
@@ -336,6 +342,7 @@ export default inject(
       filterTotal: isRooms ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
+      isTrashRooms,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
       isTemplatesFolder,

@@ -204,8 +204,13 @@ class FilesTableHeader extends React.Component {
       isRecentTab,
       isTemplatesFolder,
       isIndexing,
+      isRoomTrash,
     } = this.props;
 
+    const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
+    // console.log("isTrashRooms", isTrashRooms);
+
+    if (isRoomTrash) return this.getTrashRoomsColumns();
     if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
@@ -483,7 +488,6 @@ class FilesTableHeader extends React.Component {
     const {
       t,
       nameColumnIsEnabled,
-      roomColumnIsEnabled,
       authorTrashColumnIsEnabled,
       createdTrashColumnIsEnabled,
       erasureColumnIsEnabled,
@@ -545,6 +549,54 @@ class FilesTableHeader extends React.Component {
         resizable: true,
         sortBy: SortByFieldName.Type,
         // onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+    ];
+
+    return [...columns];
+  };
+
+  getTrashRoomsColumns = () => {
+    const {
+      t,
+      nameColumnIsEnabled,
+      retentionPeriodColumnIsEnabled,
+      trashRoomColumnActivityIsEnabled,
+      enable: sizeTrashColumnIsEnabled,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Label"),
+        resizable: true,
+        enable: nameColumnIsEnabled,
+        default: true,
+        minWidth: 210,
+        onClick: this.onFilter,
+      },
+      {
+        key: "RetentionPeriodTrashRooms",
+        title: t("RetentionPeriod"),
+        enable: retentionPeriodColumnIsEnabled,
+        resizable: true,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "SizeTrash",
+        title: t("Common:Size"),
+        enable: true,
+        resizable: true,
+        onClick: this.onFilter,
+        onChange: this.onColumnChange,
+      },
+      {
+        key: "ActivityTrashRooms",
+        title: t("LastActivity"),
+        enable: trashRoomColumnActivityIsEnabled,
+        resizable: true,
+        onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
     ];
@@ -874,6 +926,7 @@ export default inject(
       isTrashFolder,
       isTemplatesFolder,
       isPersonalReadOnly,
+      isRoomTrash,
     } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
@@ -904,6 +957,9 @@ export default inject(
       roomColumnOwnerIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
+
+      retentionPeriodColumnIsEnabled,
+      trashRoomColumnActivityIsEnabled,
 
       authorRecentColumnIsEnabled,
       modifiedRecentColumnIsEnabled,
@@ -982,6 +1038,9 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      retentionPeriodColumnIsEnabled,
+      trashRoomColumnActivityIsEnabled,
+
       authorRecentColumnIsEnabled,
       modifiedRecentColumnIsEnabled,
       createdRecentColumnIsEnabled,
@@ -1020,6 +1079,7 @@ export default inject(
       indexColumnSize,
       changeDocumentsTabs,
       isPersonalReadOnly,
+      isRoomTrash,
     };
   },
 )(

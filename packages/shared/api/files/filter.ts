@@ -198,7 +198,7 @@ class FilesFilter {
 
     if (isRecentFolder) {
       filter.sortBy = SortByFieldName.LastOpened;
-      filter.folder = "recent";
+      filter.folder = "@recent";
     }
 
     return filter;

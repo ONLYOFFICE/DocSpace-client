@@ -1,6 +1,5 @@
 {
   "ExternalLink": "Lidhje e jashtme",
-  "RoleForLink": "Roli për lidhje",
   "ShareEmailBody": "Juve ju është dhënë akses në dokumentin {{itemName}}. Klikoni lidhjen më poshtë për të hapur dokumentin tani: {{shareLink}}.",
   "ShareEmailSubject": "Juve ju është dhënë akses në dokumentin {{itemName}}"
 }

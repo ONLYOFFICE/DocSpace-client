@@ -889,5 +889,6 @@
   "Clean": "تنظيف",
   "CopyPassword": "نسخ كلمة المرور",
   "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح",
-  "LinkName": "اسم الرابط"
+  "LinkName": "اسم الرابط",
+  "RoleForLink": "الدور للرابط"
 }

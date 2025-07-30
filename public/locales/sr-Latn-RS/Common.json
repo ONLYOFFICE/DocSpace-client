@@ -880,5 +880,6 @@
   "Clean": "Očistiti",
   "CopyPassword": "Kopiraj lozinku",
   "PasswordSuccessfullyCopied": "Lozinka uspešno kopirana",
-  "LinkName": "Ime linka"
+  "LinkName": "Ime linka",
+  "RoleForLink": "Uloga za link"
 }

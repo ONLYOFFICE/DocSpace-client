@@ -1,6 +1,5 @@
 {
   "ExternalLink": "Zunanja povezava",
-  "RoleForLink": "Vloga za povezavo",
   "ShareEmailBody": "Omogočen vam je dostop do {{itemName}} dokumenta. Če želite dokument odpreti, kliknite spodnjo povezavo: {{shareLink}}.",
   "ShareEmailSubject": "Omogočen vam je dostop do {{itemName}} dokumenta"
 }

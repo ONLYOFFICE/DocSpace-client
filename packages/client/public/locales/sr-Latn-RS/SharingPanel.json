@@ -1,6 +1,5 @@
 {
   "ExternalLink": "Eksterni link",
-  "RoleForLink": "Uloga za link",
   "ShareEmailBody": "Dobili ste pristup dokumentu {{itemName}}. Kliknite na link ispod da otvorite dokument odmah: {{shareLink}}.",
   "ShareEmailSubject": "Dobili ste pristup {{itemName}} dokumentu"
 }

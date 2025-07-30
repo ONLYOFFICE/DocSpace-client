@@ -1,6 +1,5 @@
 {
   "ExternalLink": "外部リンク",
-  "RoleForLink": "リンクの役割",
   "ShareEmailBody": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。以下のリンクをクリックして、今すぐドキュメントを開いてください。{{shareLink}}をクリックしてください。",
   "ShareEmailSubject": "あなたは{{itemName}}ドキュメントへのアクセスを許可されています。"
 }

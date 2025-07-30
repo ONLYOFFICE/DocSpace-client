@@ -889,5 +889,6 @@
   "Clean": "Reinig",
   "CopyPassword": "Kopieer wachtwoord",
   "PasswordSuccessfullyCopied": "Wachtwoord succesvol gekopieerd",
-  "LinkName": "Link naam"
+  "LinkName": "Link naam",
+  "RoleForLink": "Rol voor link"
 }

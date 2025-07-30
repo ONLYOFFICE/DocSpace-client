@@ -55,7 +55,7 @@ const RoleLinkBlock = ({
   return (
     <RoleLinkBlockWrapper>
       <Text fontSize="16px" fontWeight={700}>
-        {t("SharingPanel:RoleForLink")}
+        {t("Common:RoleForLink")}
       </Text>
       <AccessRightSelect
         fillIcon

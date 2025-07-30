@@ -889,5 +889,6 @@
   "Clean": "Մաքուր",
   "CopyPassword": "Պատճենել գաղտնաբառը",
   "PasswordSuccessfullyCopied": "Գաղտնաբառը հաջողությամբ պատճենվեց",
-  "LinkName": "Հղման անվանում"
+  "LinkName": "Հղման անվանում",
+  "RoleForLink": "Հղման դերը"
 }

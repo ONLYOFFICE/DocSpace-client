@@ -889,5 +889,6 @@
   "Clean": "Golire",
   "CopyPassword": "Copiere parola",
   "PasswordSuccessfullyCopied": "Parola a fost copiată cu succes",
-  "LinkName": "Numele linkului"
+  "LinkName": "Numele linkului",
+  "RoleForLink": "Rol pentru link-ul"
 }

@@ -889,5 +889,6 @@
   "Clean": "Очистити",
   "CopyPassword": "Копирај лозинку",
   "PasswordSuccessfullyCopied": "Лозинка успешно копирана",
-  "LinkName": "Име линка"
+  "LinkName": "Име линка",
+  "RoleForLink": "Улога за линк"
 }

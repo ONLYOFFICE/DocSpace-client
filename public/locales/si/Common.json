@@ -878,5 +878,6 @@
   "Clean": "මකන්න",
   "CopyPassword": "මුරපදයේ පිටපතක්",
   "PasswordSuccessfullyCopied": "මුරපදය පිටපත් විය",
-  "LinkName": "සබැඳියේ නම"
+  "LinkName": "සබැඳියේ නම",
+  "RoleForLink": "මුද්දරයක් සඳහා භූමිකාව"
 }

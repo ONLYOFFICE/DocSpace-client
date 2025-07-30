@@ -889,5 +889,6 @@
   "Clean": "クリア",
   "CopyPassword": "パスワードをコピーする",
   "PasswordSuccessfullyCopied": "パスワードのコピーに成功",
-  "LinkName": "リンク名"
+  "LinkName": "リンク名",
+  "RoleForLink": "リンクの役割"
 }

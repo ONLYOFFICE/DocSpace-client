@@ -889,5 +889,6 @@
   "Clean": "Očistiť",
   "CopyPassword": "Kopírovať heslo",
   "PasswordSuccessfullyCopied": "Heslo úspešne skopírované",
-  "LinkName": "Názov odkazu"
+  "LinkName": "Názov odkazu",
+  "RoleForLink": "Rola pre odkaz"
 }

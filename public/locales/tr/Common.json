@@ -889,5 +889,6 @@
   "Clean": "Temizle",
   "CopyPassword": "Şifreyi kopyala",
   "PasswordSuccessfullyCopied": "Şifre başarıyla kopyalandı",
-  "LinkName": "Bağlantı adı"
+  "LinkName": "Bağlantı adı",
+  "RoleForLink": "Bağlantı için rol"
 }

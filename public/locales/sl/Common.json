@@ -889,5 +889,6 @@
   "Clean": "Počisti",
   "CopyPassword": "Kopiraj povezavo",
   "PasswordSuccessfullyCopied": "Geslo uspešno kopirano",
-  "LinkName": "Ime povezave"
+  "LinkName": "Ime povezave",
+  "RoleForLink": "Vloga za povezavo"
 }

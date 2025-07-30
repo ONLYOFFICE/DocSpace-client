@@ -889,5 +889,6 @@
   "Clean": "Очистить",
   "CopyPassword": "Скопировать пароль",
   "PasswordSuccessfullyCopied": "Пароль успешно скопирован",
-  "LinkName": "Имя ссылки"
+  "LinkName": "Имя ссылки",
+  "RoleForLink": "Роль для ссылки"
 }

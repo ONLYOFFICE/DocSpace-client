@@ -888,5 +888,6 @@
   "Clean": "Notīrīt",
   "CopyPassword": "Kopēt paroli",
   "PasswordSuccessfullyCopied": "Parole veiksmīgi nokopēta",
-  "LinkName": "Saites nosaukums"
+  "LinkName": "Saites nosaukums",
+  "RoleForLink": "Loma saitei"
 }

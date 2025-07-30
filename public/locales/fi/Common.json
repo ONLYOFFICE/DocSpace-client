@@ -889,5 +889,6 @@
   "Clean": "Puhdista",
   "CopyPassword": "Kopioi salasana",
   "PasswordSuccessfullyCopied": "Salasana onnistuneesti kopioitu ",
-  "LinkName": "Linkin nimi"
+  "LinkName": "Linkin nimi",
+  "RoleForLink": "Linkin rooli"
 }

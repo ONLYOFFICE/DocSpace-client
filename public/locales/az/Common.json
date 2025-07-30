@@ -889,5 +889,6 @@
   "Clean": "Təmizləyin",
   "CopyPassword": "Şifrəni nüsxələyin",
   "PasswordSuccessfullyCopied": "Şifrə uğurla nüsxələndi",
-  "LinkName": "Keçid adı"
+  "LinkName": "Keçid adı",
+  "RoleForLink": "Link üçün rol"
 }

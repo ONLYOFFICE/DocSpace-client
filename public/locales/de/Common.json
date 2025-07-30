@@ -889,5 +889,6 @@
   "Clean": "Löschen",
   "CopyPassword": "Passwort kopieren",
   "PasswordSuccessfullyCopied": "Passwort erfolgreich kopiert",
-  "LinkName": "Linkname"
+  "LinkName": "Linkname",
+  "RoleForLink": "Rolle für den Link"
 }

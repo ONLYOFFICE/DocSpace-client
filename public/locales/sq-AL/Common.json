@@ -888,5 +888,6 @@
   "Clean": "Pastroni",
   "CopyPassword": "Kopjoni fjalëkalimin",
   "PasswordSuccessfullyCopied": "Fjalëkalimi u kopjua me sukses",
-  "LinkName": "Emri lidhjes"
+  "LinkName": "Emri lidhjes",
+  "RoleForLink": "Roli për lidhje"
 }

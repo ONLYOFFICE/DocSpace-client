@@ -185,7 +185,7 @@ const MultiInputGroup = ({
         }
         isRequired
         isError={isError || hasError}
-        dataTestId={`${dataTestId}_input_group`}
+        dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}
       >
         <StyledInputRow>
           <InputBlock
@@ -211,7 +211,7 @@ const MultiInputGroup = ({
             </Text>
             <div className="add-block">
               <Text
-                dataTestId={`${dataTestId}_add_button`}
+                dataTestId={dataTestId ? `${dataTestId}_add_button` : undefined}
                 fontSize="13px"
                 fontWeight={400}
                 lineHeight="20px"
@@ -225,7 +225,9 @@ const MultiInputGroup = ({
           <SelectorAddButton
             onClick={onAddAction}
             isDisabled={isDisabled || isError}
-            testId={`${dataTestId}_selector_add_button`}
+            testId={
+              dataTestId ? `${dataTestId}_selector_add_button` : undefined
+            }
           />
         </StyledInputRow>
       </InputGroup>
@@ -242,7 +244,9 @@ const MultiInputGroup = ({
             onClose={() => {
               if (!isDisabled) onAdd(name as keyof IClientReqDTO, v, true);
             }}
-            dataTestId={`${dataTestId}_selected_item_${i}`}
+            dataTestId={
+              dataTestId ? `${dataTestId}_selected_item_${i}` : undefined
+            }
           />
         ))}
       </StyledChipsContainer>

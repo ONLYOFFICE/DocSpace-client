@@ -876,5 +876,6 @@
   "PasswordLink": "Ajoutez un mot de passe pour protéger votre lien.",
   "DisableDownload": "Restreindre la copie du contenu des fichiers, le téléchargement et l'impression des fichiers",
   "PreventDownloadFilesAndFolders": "Activez ce paramètre pour désactiver les téléchargements de fichiers et de dossiers de cette salle partagés via un lien",
-  "LimitByTimePeriod": "Limite par période"
+  "LimitByTimePeriod": "Limite par période",
+  "Clean": "Effacer"
 }

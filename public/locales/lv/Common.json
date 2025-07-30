@@ -884,5 +884,6 @@
   "PasswordLink": "Pievienojiet paroli, lai aizsargātu savu saiti.",
   "DisableDownload": "Ierobežojiet failu satura kopēšanu, lejupielādi un drukāšanu",
   "PreventDownloadFilesAndFolders": "Iespējojiet šo iestatījumu, lai atspējotu failu un mapju lejupielādi no šīs telpas, kas kopīgota, izmantojot saiti",
-  "LimitByTimePeriod": "Ierobežots pēc laika perioda"
+  "LimitByTimePeriod": "Ierobežots pēc laika perioda",
+  "Clean": "Notīrīt"
 }

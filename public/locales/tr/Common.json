@@ -885,5 +885,6 @@
   "PasswordLink": "Bağlantınızı korumak için bir şifre ekleyin.",
   "DisableDownload": "Dosya içeriği kopyalamayı, dosya indirmeyi ve yazdırmayı kısıtla",
   "PreventDownloadFilesAndFolders": "Bu odadan bir bağlantı yoluyla paylaşılan dosya ve klasörlerin indirilmesini devre dışı bırakmak için bu ayarı etkinleştirin",
-  "LimitByTimePeriod": "Zaman aralığına göre limitlendirme"
+  "LimitByTimePeriod": "Zaman aralığına göre limitlendirme",
+  "Clean": "Temizle"
 }

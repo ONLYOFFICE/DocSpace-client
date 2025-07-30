@@ -885,5 +885,6 @@
   "PasswordLink": "Keçidinizi qorumaq üçün şifrə əlavə edin.",
   "DisableDownload": "Fayl məzmununun kopyalanmasını, faylın endirilməsini və çapını məhdudlaşdırın",
   "PreventDownloadFilesAndFolders": "Bu otaqdan link vasitəsilə paylaşılan fayl və qovluqların endirilməsini deaktiv etmək üçün bu tənzimləməni aktiv edin",
-  "LimitByTimePeriod": "Zamana görə məhdudiyyət"
+  "LimitByTimePeriod": "Zamana görə məhdudiyyət",
+  "Clean": "Təmizləyin"
 }

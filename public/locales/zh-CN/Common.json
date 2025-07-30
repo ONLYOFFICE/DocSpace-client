@@ -885,5 +885,6 @@
   "PasswordLink": "添加密码保护链接。",
   "DisableDownload": "限制文件内容复制、文件下载和打印",
   "PreventDownloadFilesAndFolders": "开启此设置可禁止从该房间下载通过链接共享的文件和文件夹",
-  "LimitByTimePeriod": "按时间段限制"
+  "LimitByTimePeriod": "按时间段限制",
+  "Clean": "清理"
 }

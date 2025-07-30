@@ -164,7 +164,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               type={LinkType.action}
               onClick={onCleanClick}
             >
-              {t("Files:Clean")}
+              {t("Common:Clean")}
             </Link>
             <Link
               isHovered

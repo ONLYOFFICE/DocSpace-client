@@ -197,7 +197,7 @@ const FilterInput = React.memo(
     }, []);
 
     return (
-      <div className={styles.filterInput}>
+      <div className={styles.filterInput} data-testid="filter_container">
         <div className="filter-input_filter-row">
           {searchComponent}
           {!isIndexEditingMode && !isFlowsPage ? (
@@ -265,6 +265,7 @@ const FilterInput = React.memo(
                 group={item.group}
                 onClose={removeSelectedItemAction}
                 onClick={removeSelectedItemAction}
+                dataTestId={`filter_selected_item_${Array.isArray(item.key) ? item.key[0] : item.key}`}
               />
             ))}
             {selectedItems.filter((item) => item.label).length > 1 ? (
@@ -275,6 +276,7 @@ const FilterInput = React.memo(
                 isSemitransparent
                 type={LinkType.action}
                 onClick={clearAll}
+                dataTestId="filter_clear_all_link"
               >
                 {t("Common:ClearAll")}
               </Link>

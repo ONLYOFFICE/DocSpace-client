@@ -411,6 +411,7 @@ export type SelectorProps = TSelectorHeader &
 
     isSSR?: boolean;
     selectedItem?: TSelectorItem | null; // no multiSelect only
+    dataTestId?: string;
   };
 
 export type BodyProps = TSelectorInfo &

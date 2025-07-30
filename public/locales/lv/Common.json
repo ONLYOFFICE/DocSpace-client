@@ -890,5 +890,7 @@
   "PasswordSuccessfullyCopied": "Parole veiksmīgi nokopēta",
   "LinkName": "Saites nosaukums",
   "RoleForLink": "Loma saitei",
-  "LinkHasExpiredAndHasBeenDisabled": "Saitei ir beidzies derīguma termiņš, un tā ir atspējota"
+  "LinkHasExpiredAndHasBeenDisabled": "Saitei ir beidzies derīguma termiņš, un tā ir atspējota",
+  "UnsavedChangesBody": "Ja tūlīt aizvērsiet saites iestatījumu izvēlni, izmaiņas netiks saglabātas.",
+  "CloseMenu": "Aizvērt izvēlni"
 }

@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Ο κωδικός πρόσβασης αντιγράφηκε επιτυχώς",
   "LinkName": "Όνομα συνδέσμου",
   "RoleForLink": "Ρόλος για τον σύνδεσμο",
-  "LinkHasExpiredAndHasBeenDisabled": "Ο σύνδεσμος έχει λήξει και έχει απενεργοποιηθεί"
+  "LinkHasExpiredAndHasBeenDisabled": "Ο σύνδεσμος έχει λήξει και έχει απενεργοποιηθεί",
+  "UnsavedChangesBody": "Εάν κλείσετε το μενού ρυθμίσεων συνδέσμου αυτήν τη στιγμή, οι αλλαγές σας δεν θα αποθηκευτούν.",
+  "CloseMenu": "Κλείσιμο μενού"
 }

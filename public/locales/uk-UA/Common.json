@@ -882,5 +882,7 @@
   "PasswordSuccessfullyCopied": "Пароль успішно скопійовано",
   "LinkName": "Назва посилання",
   "RoleForLink": "Роль для посилання",
-  "LinkHasExpiredAndHasBeenDisabled": "Термін дії посилання закінчився, і його було вимкнено"
+  "LinkHasExpiredAndHasBeenDisabled": "Термін дії посилання закінчився, і його було вимкнено",
+  "UnsavedChangesBody": "Якщо ви зараз закриєте меню параметрів посилання, зміни не будуть збережені.",
+  "CloseMenu": "Закрити меню"
 }

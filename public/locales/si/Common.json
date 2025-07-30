@@ -880,5 +880,7 @@
   "PasswordSuccessfullyCopied": "මුරපදය පිටපත් විය",
   "LinkName": "සබැඳියේ නම",
   "RoleForLink": "මුද්දරයක් සඳහා භූමිකාව",
-  "LinkHasExpiredAndHasBeenDisabled": "සබැඳිය කල් ඉකුත් වී අබල කර ඇත"
+  "LinkHasExpiredAndHasBeenDisabled": "සබැඳිය කල් ඉකුත් වී අබල කර ඇත",
+  "UnsavedChangesBody": "ඔබ දැන් සබැඳි සැකසුම් වට්ටෝරුව වසා දැමුවහොත්, ඔබගේ වෙනස්කම් සුරැකෙන්නේ නැත.",
+  "CloseMenu": "වට්ටෝරුව වසන්න"
 }

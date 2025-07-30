@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Parola a fost copiată cu succes",
   "LinkName": "Numele linkului",
   "RoleForLink": "Rol pentru link-ul",
-  "LinkHasExpiredAndHasBeenDisabled": "Link-ul a expirat și este dezactivat"
+  "LinkHasExpiredAndHasBeenDisabled": "Link-ul a expirat și este dezactivat",
+  "UnsavedChangesBody": "Dacă închideți acum meniul cu opțiuni de setare a link-ului, modificările dvs nu vor fi salvate.",
+  "CloseMenu": "Închidere meniu"
 }

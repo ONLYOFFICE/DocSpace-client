@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Đã sao chép mật khẩu thành công",
   "LinkName": "Tên liên kết",
   "RoleForLink": "Vai trò của liên kết",
-  "LinkHasExpiredAndHasBeenDisabled": "Liên kết đã hết hạn và đã bị vô hiệu hóa"
+  "LinkHasExpiredAndHasBeenDisabled": "Liên kết đã hết hạn và đã bị vô hiệu hóa",
+  "UnsavedChangesBody": "Nếu bạn đóng menu cài đặt liên kết ngay bây giờ, các thay đổi của bạn sẽ không được lưu.",
+  "CloseMenu": "Đóng menu"
 }

@@ -878,5 +878,7 @@
   "PasswordSuccessfullyCopied": "ສຳເນົາລະຫັດຜ່ານສຳເລັດແລ້ວ",
   "LinkName": "ຊື່ລິ້ງ",
   "RoleForLink": "ບົດບາດສໍາລັບການເຊື່ອມຕໍ່",
-  "LinkHasExpiredAndHasBeenDisabled": "ລິ້ງໝົດອາຍຸແລ້ວ ແລະຖືກປິດການນຳໃຊ້"
+  "LinkHasExpiredAndHasBeenDisabled": "ລິ້ງໝົດອາຍຸແລ້ວ ແລະຖືກປິດການນຳໃຊ້",
+  "UnsavedChangesBody": "ຖ້າທ່ານປິດເມນູການຕັ້ງຄ່າການເຊື່ອມຕໍ່ໃນປັດຈຸບັນ, ການປ່ຽນແປງຂອງທ່ານຈະບໍ່ຖືກບັນທຶກໄວ້.",
+  "CloseMenu": "ປິດເມນູ"
 }

@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Лозинка успешно копирана",
   "LinkName": "Име линка",
   "RoleForLink": "Улога за линк",
-  "LinkHasExpiredAndHasBeenDisabled": "Линк је истекао и онемогућен је"
+  "LinkHasExpiredAndHasBeenDisabled": "Линк је истекао и онемогућен је",
+  "UnsavedChangesBody": "Ако сада затворите мени за подешавање линкова, ваше промене неће бити сачуване.",
+  "CloseMenu": "Затвори мени"
 }

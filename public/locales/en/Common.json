@@ -902,5 +902,7 @@
   "PasswordSuccessfullyCopied": "Password successfully copied",
   "LinkName": "Link name",
   "RoleForLink": "Role for link",
-  "LinkHasExpiredAndHasBeenDisabled": "The link has expired and has been disabled"
+  "LinkHasExpiredAndHasBeenDisabled": "The link has expired and has been disabled",
+  "UnsavedChangesBody": "If you close the link settings menu right now, your changes will not be saved.",
+  "CloseMenu": "Close menu"
 }

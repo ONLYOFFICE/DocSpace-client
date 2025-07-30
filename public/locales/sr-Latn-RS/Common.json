@@ -882,5 +882,7 @@
   "PasswordSuccessfullyCopied": "Lozinka uspešno kopirana",
   "LinkName": "Ime linka",
   "RoleForLink": "Uloga za link",
-  "LinkHasExpiredAndHasBeenDisabled": "Link je istekao i onemogućen je"
+  "LinkHasExpiredAndHasBeenDisabled": "Link je istekao i onemogućen je",
+  "UnsavedChangesBody": "Ako sada zatvorite meni za podešavanje linkova, vaše promene neće biti sačuvane.",
+  "CloseMenu": "Zatvori meni"
 }

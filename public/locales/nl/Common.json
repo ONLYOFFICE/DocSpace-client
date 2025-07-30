@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Wachtwoord succesvol gekopieerd",
   "LinkName": "Link naam",
   "RoleForLink": "Rol voor link",
-  "LinkHasExpiredAndHasBeenDisabled": "De link is verlopen en uitgeschakeld"
+  "LinkHasExpiredAndHasBeenDisabled": "De link is verlopen en uitgeschakeld",
+  "UnsavedChangesBody": "Als u het menu met linkinstellingen nu sluit, worden uw wijzigingen niet opgeslagen.",
+  "CloseMenu": "Sluit menu"
 }

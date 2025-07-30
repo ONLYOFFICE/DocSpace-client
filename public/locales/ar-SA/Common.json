@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح",
   "LinkName": "اسم الرابط",
   "RoleForLink": "الدور للرابط",
-  "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله"
+  "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله",
+  "UnsavedChangesBody": "لن يتم حفظ التغييرات إذا قمت بإغلاق قائمة الإعدادات الآن.",
+  "CloseMenu": "أغلاق القائمة"
 }

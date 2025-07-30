@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Şifrə uğurla nüsxələndi",
   "LinkName": "Keçid adı",
   "RoleForLink": "Link üçün rol",
-  "LinkHasExpiredAndHasBeenDisabled": "Keçidin vaxtı bitib və deaktiv edilib"
+  "LinkHasExpiredAndHasBeenDisabled": "Keçidin vaxtı bitib və deaktiv edilib",
+  "UnsavedChangesBody": "Bağlantı parametrləri menyusunu dərhal bağlasanız, dəyişiklikləriniz yadda saxlanmayacaq.",
+  "CloseMenu": "Menyunu bağlayın"
 }

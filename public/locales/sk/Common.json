@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Heslo úspešne skopírované",
   "LinkName": "Názov odkazu",
   "RoleForLink": "Rola pre odkaz",
-  "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný"
+  "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný",
+  "UnsavedChangesBody": "Ak zatvoríte menu nastavení odkazu práve teraz, vaše zmeny sa neuložia.",
+  "CloseMenu": "Zatvoriť menu"
 }

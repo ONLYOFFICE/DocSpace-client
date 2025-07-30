@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Пароль успешно скопирован",
   "LinkName": "Имя ссылки",
   "RoleForLink": "Роль для ссылки",
-  "LinkHasExpiredAndHasBeenDisabled": "Срок действия ссылки истек, она отключена"
+  "LinkHasExpiredAndHasBeenDisabled": "Срок действия ссылки истек, она отключена",
+  "UnsavedChangesBody": "Если вы закроете меню настроек ссылки прямо сейчас, изменения не сохранятся.",
+  "CloseMenu": "Закрыть меню"
 }

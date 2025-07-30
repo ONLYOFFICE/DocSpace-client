@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Password copiata con successo",
   "LinkName": "Nome del link",
   "RoleForLink": "Ruolo per il link",
-  "LinkHasExpiredAndHasBeenDisabled": "Il link è scaduto ed è stato disattivato"
+  "LinkHasExpiredAndHasBeenDisabled": "Il link è scaduto ed è stato disattivato",
+  "UnsavedChangesBody": "Se chiudi subito il menu delle impostazioni del link, le modifiche non verranno salvate.",
+  "CloseMenu": "Chiudi menù"
 }

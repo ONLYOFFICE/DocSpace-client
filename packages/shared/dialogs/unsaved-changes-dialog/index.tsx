@@ -60,7 +60,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
         {t("Common:YouHaveUnsavedChanges")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{t("Settings:UnsavedChangesBody")}</Text>
+        <Text noSelect>{t("Common:UnsavedChangesBody")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -69,7 +69,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
           key="OKButton"
           onClick={onConfirm}
           size={ButtonSize.normal}
-          label={t("Settings:CloseMenu")}
+          label={t("Common:CloseMenu")}
         />
         <Button
           scale

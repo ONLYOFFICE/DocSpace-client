@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Գաղտնաբառը հաջողությամբ պատճենվեց",
   "LinkName": "Հղման անվանում",
   "RoleForLink": "Հղման դերը",
-  "LinkHasExpiredAndHasBeenDisabled": "Այս հղումն ուժի մեջ "
+  "LinkHasExpiredAndHasBeenDisabled": "Այս հղումն ուժի մեջ ",
+  "UnsavedChangesBody": "Եթե հենց հիմա փակեք հղման կարգավորումների ընտրացանկը, ձեր փոփոխությունները չեն պահպանվի:",
+  "CloseMenu": "Փակել մենյուն"
 }

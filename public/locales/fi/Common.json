@@ -891,5 +891,7 @@
   "PasswordSuccessfullyCopied": "Salasana onnistuneesti kopioitu ",
   "LinkName": "Linkin nimi",
   "RoleForLink": "Linkin rooli",
-  "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä"
+  "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä",
+  "UnsavedChangesBody": "Jos nyt suljet linkkiasetukset-menun, muutoksia ei tallenneta.",
+  "CloseMenu": "Sulje menu "
 }

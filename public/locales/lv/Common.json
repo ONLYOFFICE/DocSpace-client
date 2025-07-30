@@ -877,5 +877,6 @@
   "LimitTimeBlockCustomRoomDescription": "Pielāgotā telpā galvenā saite ir derīga neierobežotu laiku. Varat izveidot papildu saites ar laika ierobežojumu.",
   "LinkValidUntil": "Šī saite būs derīga līdz",
   "ChooseExpirationDate": "Ierobežojiet šīs saites pieejamības periodu, iestatot derīguma termiņu.",
-  "EditSharedLink": "Rediģēt kopīgoto saiti"
+  "EditSharedLink": "Rediģēt kopīgoto saiti",
+  "EditAdditionalLink": "Rediģēt papildu saiti"
 }

@@ -889,5 +889,6 @@
   "LimitTimeBlockCustomRoomDescription": "In a Custom room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "LinkValidUntil": "This link will be valid until",
   "ChooseExpirationDate": "Limit availability period for this link by setting an expiration date.",
-  "EditSharedLink": "Edit shared link"
+  "EditSharedLink": "Edit shared link",
+  "EditAdditionalLink": "Edit additional link"
 }

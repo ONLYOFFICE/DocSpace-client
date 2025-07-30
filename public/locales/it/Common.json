@@ -878,5 +878,6 @@
   "LimitTimeBlockCustomRoomDescription": "In una stanza personalizzata, il collegamento principale è valido per un periodo di tempo illimitato. Puoi creare collegamenti aggiuntivi con limiti di tempo.",
   "LinkValidUntil": "Questo link sarà valido fino al",
   "ChooseExpirationDate": "Limita il periodo di disponibilità per questo link impostando una data di scadenza.",
-  "EditSharedLink": "Modifica link condiviso"
+  "EditSharedLink": "Modifica link condiviso",
+  "EditAdditionalLink": "Modifica link aggiuntivo"
 }

@@ -878,5 +878,6 @@
   "LimitTimeBlockCustomRoomDescription": "W pokoju niestandardowym link główny jest ważny przez czas nieograniczony. Możesz utworzyć dodatkowe linki z limitem czasu.",
   "LinkValidUntil": "Link będzie ważny do",
   "ChooseExpirationDate": "Ogranicz okres dostępności dla tego linku, ustawiając datę wygaśnięcia.",
-  "EditSharedLink": "Edytuj link udostępniania"
+  "EditSharedLink": "Edytuj link udostępniania",
+  "EditAdditionalLink": "Edytuj link dodatkowy"
 }

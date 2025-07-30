@@ -878,5 +878,6 @@
   "LimitTimeBlockCustomRoomDescription": "In einem benutzerdefinierten Raum ist der Hauptlink für einen unbegrenzten Zeitraum gültig. Sie können zusätzliche Links mit zeitlicher Begrenzung erstellen.",
   "LinkValidUntil": "Dieser Link ist gültig bis",
   "ChooseExpirationDate": "Begrenzen Sie den Verfügbarkeitszeitraum für diesen Link, indem Sie ein Verfallsdatum festlegen.",
-  "EditSharedLink": "Freigegebenen Link bearbeiten"
+  "EditSharedLink": "Freigegebenen Link bearbeiten",
+  "EditAdditionalLink": "Zusätzlichen Link bearbeiten"
 }

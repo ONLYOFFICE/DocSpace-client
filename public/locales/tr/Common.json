@@ -878,5 +878,6 @@
   "LimitTimeBlockCustomRoomDescription": "Özel bir odada ana bağlantı süresiz olarak geçerlidir. Süreli ek bağlantılar oluşturabilirsiniz.",
   "LinkValidUntil": "Bu bağlantı şu tarihe kadar geçerli olacaktır:",
   "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın.",
-  "EditSharedLink": "Paylaşılan bağlantıyı düzenle"
+  "EditSharedLink": "Paylaşılan bağlantıyı düzenle",
+  "EditAdditionalLink": "Ek bağlantıyı düzenle"
 }

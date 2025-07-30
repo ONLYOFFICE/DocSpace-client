@@ -878,5 +878,6 @@
   "LimitTimeBlockCustomRoomDescription": "커스텀 룸에서 메인 링크는 무제한의 기간 동안 유효합니다. 시간 제한이 있는 추가 링크를 생성할 수 있습니다.",
   "LinkValidUntil": "이 링크의 유효 기간:",
   "ChooseExpirationDate": "만료 날짜를 설정하여 이 링크의 사용 가능 기간을 제한하세요.",
-  "EditSharedLink": "공유 링크 편집"
+  "EditSharedLink": "공유 링크 편집",
+  "EditAdditionalLink": "추가 링크 수정"
 }

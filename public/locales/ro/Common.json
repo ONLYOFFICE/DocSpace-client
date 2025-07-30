@@ -878,5 +878,6 @@
   "LimitTimeBlockCustomRoomDescription": "În Sala particularizată, link-ul principal rămâne valabil  pentru o perioadă nelimitată de timp. Puteți crea linkuri suplimentare limitate la o anumită perioadă de timp.",
   "LinkValidUntil": "Acest link va fi valabil până la",
   "ChooseExpirationDate": "Indicați data expirării pentru a limita perioada de disponibilitate a acestui link.",
-  "EditSharedLink": "Modificare link partajat"
+  "EditSharedLink": "Modificare link partajat",
+  "EditAdditionalLink": "Modificare link suplimentar"
 }

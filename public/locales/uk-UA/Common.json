@@ -881,5 +881,6 @@
   "CopyPassword": "Копіювати пароль",
   "PasswordSuccessfullyCopied": "Пароль успішно скопійовано",
   "LinkName": "Назва посилання",
-  "RoleForLink": "Роль для посилання"
+  "RoleForLink": "Роль для посилання",
+  "LinkHasExpiredAndHasBeenDisabled": "Термін дії посилання закінчився, і його було вимкнено"
 }

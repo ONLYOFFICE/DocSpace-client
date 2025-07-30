@@ -890,5 +890,6 @@
   "CopyPassword": "Şifreyi kopyala",
   "PasswordSuccessfullyCopied": "Şifre başarıyla kopyalandı",
   "LinkName": "Bağlantı adı",
-  "RoleForLink": "Bağlantı için rol"
+  "RoleForLink": "Bağlantı için rol",
+  "LinkHasExpiredAndHasBeenDisabled": "Bağlantının süresi doldu ve devre dışı bırakıldı"
 }

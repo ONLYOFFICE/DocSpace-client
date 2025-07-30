@@ -14,7 +14,6 @@
   "FolderTitleYandex": "Yandex Directory",
   "GuestConversionNote": "All previously added Users became Guests and now available in the {{sectionName}} list of the {{productName}} administrators only. Guests are no longer part of any groups. You can always change their type and add them to a group, if necessary.",
   "GuestReleaseTipLink": "Learn more about user types",
-  "LinkHasExpiredAndHasBeenDisabled": "The link has expired and has been disabled",
   "LinkValidTime": "This link is valid for {{days_count}} days only.",
   "NewForm": "PDF Form",
   "OwnerChange": "Change owner",

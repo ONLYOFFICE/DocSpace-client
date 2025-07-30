@@ -890,5 +890,6 @@
   "CopyPassword": "Αντιγραφή κωδικού πρόσβασης",
   "PasswordSuccessfullyCopied": "Ο κωδικός πρόσβασης αντιγράφηκε επιτυχώς",
   "LinkName": "Όνομα συνδέσμου",
-  "RoleForLink": "Ρόλος για τον σύνδεσμο"
+  "RoleForLink": "Ρόλος για τον σύνδεσμο",
+  "LinkHasExpiredAndHasBeenDisabled": "Ο σύνδεσμος έχει λήξει και έχει απενεργοποιηθεί"
 }

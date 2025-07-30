@@ -890,5 +890,6 @@
   "CopyPassword": "パスワードをコピーする",
   "PasswordSuccessfullyCopied": "パスワードのコピーに成功",
   "LinkName": "リンク名",
-  "RoleForLink": "リンクの役割"
+  "RoleForLink": "リンクの役割",
+  "LinkHasExpiredAndHasBeenDisabled": "リンクは有効期限が切れたため無効になっています"
 }

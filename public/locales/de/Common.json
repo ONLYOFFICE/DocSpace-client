@@ -890,5 +890,6 @@
   "CopyPassword": "Passwort kopieren",
   "PasswordSuccessfullyCopied": "Passwort erfolgreich kopiert",
   "LinkName": "Linkname",
-  "RoleForLink": "Rolle für den Link"
+  "RoleForLink": "Rolle für den Link",
+  "LinkHasExpiredAndHasBeenDisabled": "Der Link ist abgelaufen und wurde deaktiviert."
 }

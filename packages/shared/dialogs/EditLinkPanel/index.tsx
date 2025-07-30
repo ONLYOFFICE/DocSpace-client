@@ -103,7 +103,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   setSearchParams,
   withBackButton = false,
 }) => {
-  const { t } = useTranslation(["SharingPanel", "Common", "Files"]);
+  const { t } = useTranslation("Common");
 
   const itemId = item.id;
   const accessLink = link?.access;
@@ -413,7 +413,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     }
 
     if (isExpired) {
-      return t("Translations:LinkHasExpiredAndHasBeenDisabled");
+      return t("Common:LinkHasExpiredAndHasBeenDisabled");
     }
 
     return expirationDate

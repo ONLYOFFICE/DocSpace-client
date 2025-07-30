@@ -890,5 +890,6 @@
   "CopyPassword": "نسخ كلمة المرور",
   "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح",
   "LinkName": "اسم الرابط",
-  "RoleForLink": "الدور للرابط"
+  "RoleForLink": "الدور للرابط",
+  "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله"
 }

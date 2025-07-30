@@ -877,5 +877,6 @@
   "CopyPassword": "ສຳເນົາລະຫັດຜ່ານ",
   "PasswordSuccessfullyCopied": "ສຳເນົາລະຫັດຜ່ານສຳເລັດແລ້ວ",
   "LinkName": "ຊື່ລິ້ງ",
-  "RoleForLink": "ບົດບາດສໍາລັບການເຊື່ອມຕໍ່"
+  "RoleForLink": "ບົດບາດສໍາລັບການເຊື່ອມຕໍ່",
+  "LinkHasExpiredAndHasBeenDisabled": "ລິ້ງໝົດອາຍຸແລ້ວ ແລະຖືກປິດການນຳໃຊ້"
 }

@@ -890,5 +890,6 @@
   "CopyPassword": "Kopírovať heslo",
   "PasswordSuccessfullyCopied": "Heslo úspešne skopírované",
   "LinkName": "Názov odkazu",
-  "RoleForLink": "Rola pre odkaz"
+  "RoleForLink": "Rola pre odkaz",
+  "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný"
 }

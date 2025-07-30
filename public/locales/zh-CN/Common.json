@@ -890,5 +890,6 @@
   "CopyPassword": "复制密码",
   "PasswordSuccessfullyCopied": "密码复制成功",
   "LinkName": "链接名称",
-  "RoleForLink": "链接的权限"
+  "RoleForLink": "链接的权限",
+  "LinkHasExpiredAndHasBeenDisabled": "此链接过期，已被禁用"
 }

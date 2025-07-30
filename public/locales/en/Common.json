@@ -901,5 +901,6 @@
   "CopyPassword": "Copy password",
   "PasswordSuccessfullyCopied": "Password successfully copied",
   "LinkName": "Link name",
-  "RoleForLink": "Role for link"
+  "RoleForLink": "Role for link",
+  "LinkHasExpiredAndHasBeenDisabled": "The link has expired and has been disabled"
 }

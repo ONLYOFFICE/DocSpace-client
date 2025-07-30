@@ -890,5 +890,6 @@
   "CopyPassword": "Kopiraj povezavo",
   "PasswordSuccessfullyCopied": "Geslo uspešno kopirano",
   "LinkName": "Ime povezave",
-  "RoleForLink": "Vloga za povezavo"
+  "RoleForLink": "Vloga za povezavo",
+  "LinkHasExpiredAndHasBeenDisabled": "Povezava je potekla in je onemogočena"
 }

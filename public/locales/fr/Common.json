@@ -881,5 +881,6 @@
   "CopyPassword": "Copier le mot de passe",
   "PasswordSuccessfullyCopied": "Le mot de passe a été copié avec succès",
   "LinkName": "Nom du lien",
-  "RoleForLink": "Rôle pour le lien"
+  "RoleForLink": "Rôle pour le lien",
+  "LinkHasExpiredAndHasBeenDisabled": "Le lien a expiré et a été désactivé"
 }

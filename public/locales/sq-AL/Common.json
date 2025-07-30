@@ -889,5 +889,6 @@
   "CopyPassword": "Kopjoni fjalëkalimin",
   "PasswordSuccessfullyCopied": "Fjalëkalimi u kopjua me sukses",
   "LinkName": "Emri lidhjes",
-  "RoleForLink": "Roli për lidhje"
+  "RoleForLink": "Roli për lidhje",
+  "LinkHasExpiredAndHasBeenDisabled": "Lidhja ka skaduar dhe është çaktivizuar"
 }

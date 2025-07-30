@@ -890,5 +890,6 @@
   "CopyPassword": "Kopioi salasana",
   "PasswordSuccessfullyCopied": "Salasana onnistuneesti kopioitu ",
   "LinkName": "Linkin nimi",
-  "RoleForLink": "Linkin rooli"
+  "RoleForLink": "Linkin rooli",
+  "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä"
 }

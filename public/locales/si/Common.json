@@ -879,5 +879,6 @@
   "CopyPassword": "මුරපදයේ පිටපතක්",
   "PasswordSuccessfullyCopied": "මුරපදය පිටපත් විය",
   "LinkName": "සබැඳියේ නම",
-  "RoleForLink": "මුද්දරයක් සඳහා භූමිකාව"
+  "RoleForLink": "මුද්දරයක් සඳහා භූමිකාව",
+  "LinkHasExpiredAndHasBeenDisabled": "සබැඳිය කල් ඉකුත් වී අබල කර ඇත"
 }

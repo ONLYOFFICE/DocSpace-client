@@ -881,5 +881,6 @@
   "CopyPassword": "Kopiraj lozinku",
   "PasswordSuccessfullyCopied": "Lozinka uspešno kopirana",
   "LinkName": "Ime linka",
-  "RoleForLink": "Uloga za link"
+  "RoleForLink": "Uloga za link",
+  "LinkHasExpiredAndHasBeenDisabled": "Link je istekao i onemogućen je"
 }

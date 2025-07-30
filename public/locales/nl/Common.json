@@ -890,5 +890,6 @@
   "CopyPassword": "Kopieer wachtwoord",
   "PasswordSuccessfullyCopied": "Wachtwoord succesvol gekopieerd",
   "LinkName": "Link naam",
-  "RoleForLink": "Rol voor link"
+  "RoleForLink": "Rol voor link",
+  "LinkHasExpiredAndHasBeenDisabled": "De link is verlopen en uitgeschakeld"
 }

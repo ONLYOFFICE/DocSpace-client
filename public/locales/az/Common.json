@@ -890,5 +890,6 @@
   "CopyPassword": "Şifrəni nüsxələyin",
   "PasswordSuccessfullyCopied": "Şifrə uğurla nüsxələndi",
   "LinkName": "Keçid adı",
-  "RoleForLink": "Link üçün rol"
+  "RoleForLink": "Link üçün rol",
+  "LinkHasExpiredAndHasBeenDisabled": "Keçidin vaxtı bitib və deaktiv edilib"
 }

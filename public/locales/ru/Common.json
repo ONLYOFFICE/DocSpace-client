@@ -890,5 +890,6 @@
   "CopyPassword": "Скопировать пароль",
   "PasswordSuccessfullyCopied": "Пароль успешно скопирован",
   "LinkName": "Имя ссылки",
-  "RoleForLink": "Роль для ссылки"
+  "RoleForLink": "Роль для ссылки",
+  "LinkHasExpiredAndHasBeenDisabled": "Срок действия ссылки истек, она отключена"
 }

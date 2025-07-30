@@ -890,5 +890,6 @@
   "CopyPassword": "Copiere parola",
   "PasswordSuccessfullyCopied": "Parola a fost copiată cu succes",
   "LinkName": "Numele linkului",
-  "RoleForLink": "Rol pentru link-ul"
+  "RoleForLink": "Rol pentru link-ul",
+  "LinkHasExpiredAndHasBeenDisabled": "Link-ul a expirat și este dezactivat"
 }

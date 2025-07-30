@@ -890,5 +890,6 @@
   "CopyPassword": "Kopírování hesla",
   "PasswordSuccessfullyCopied": "Heslo bylo úspěšně zkopírováno",
   "LinkName": "Název odkazu",
-  "RoleForLink": "Role pro odkaz"
+  "RoleForLink": "Role pro odkaz",
+  "LinkHasExpiredAndHasBeenDisabled": "Platnost odkazu vypršela a byl zakázán"
 }

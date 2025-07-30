@@ -141,6 +141,10 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${LOGIN_PATH}`,
     dataHandler: loginHandler,
   },
+  loginError: {
+    url: `${BASE_URL}${LOGIN_PATH}`,
+    dataHandler: loginHandler.bind(null, 401),
+  },
   loginWithTfaCode: {
     url: `${BASE_URL}${LOGIN_PATH_WITH_PARAMS}`,
     dataHandler: loginHandler,

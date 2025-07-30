@@ -238,7 +238,13 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
           )
         ) : null}
       </div>
-      {isLoading ? <Loader type={LoaderTypes.track} size="20px" /> : null}
+      {isLoading ? (
+        <Loader
+          className={styles.loader}
+          type={LoaderTypes.track}
+          size="20px"
+        />
+      ) : null}
     </div>
   );
 };

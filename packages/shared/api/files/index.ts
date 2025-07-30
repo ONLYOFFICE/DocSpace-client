@@ -1495,12 +1495,14 @@ export async function getExternalLinks(
   fileId: number | string,
   startIndex = 0,
   count = 50,
+  signal?: AbortSignal,
 ) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
 
   const res = (await request({
     method: "get",
     url: `files/file/${fileId}/links${linkParams}`,
+    signal,
   })) as { items: TFileLink[] };
 
   return res;
@@ -1552,7 +1554,7 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment,
+  expirationDate?: moment.Moment | null,
 ) {
   const res = (await request({
     method: "put",

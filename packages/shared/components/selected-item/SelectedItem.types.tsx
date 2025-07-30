@@ -64,4 +64,5 @@ export interface SelectedItemProps {
   classNameCloseButton?: string;
   hideCross?: boolean;
   title?: string;
+  dataTestId?: string;
 }

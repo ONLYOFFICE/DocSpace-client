@@ -527,7 +527,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
               <ToggleBlock
                 isLoading={isLoading}
                 headerText={t("Common:DisableDownload")}
-                bodyText={t("Files:PreventDownloadFilesAndFolders")}
+                bodyText={t("Common:PreventDownloadFilesAndFolders")}
                 isChecked={denyDownload || disabledDenyDownload}
                 onChange={onDenyDownloadChange}
                 isDisabled={disabledDenyDownload}

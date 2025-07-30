@@ -874,5 +874,6 @@
   "EditLink": "Uredi link",
   "PasswordAccess": "Pristup lozinki",
   "PasswordLink": "Dodaj lozinku da zaštitiš svoj link.",
-  "DisableDownload": "Ograniči kopiranje sadržaja datoteke, preuzimanje i štampanje"
+  "DisableDownload": "Ograniči kopiranje sadržaja datoteke, preuzimanje i štampanje",
+  "PreventDownloadFilesAndFolders": "Omogući ovo podešavanje da onemogućiš preuzimanje datoteka i foldera iz ove sobe deljenih putem linka"
 }

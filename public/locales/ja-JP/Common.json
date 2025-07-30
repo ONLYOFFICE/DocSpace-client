@@ -883,5 +883,6 @@
   "EditLink": "リンクの変更",
   "PasswordAccess": "パスワードアクセス",
   "PasswordLink": "リンクを保護するためにパスワードを追加します。",
-  "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限"
+  "DisableDownload": "ファイル内容のコピー、ファイルのダウンロード、印刷の制限",
+  "PreventDownloadFilesAndFolders": "この設定を有効にした後、リンク経由で共有されたこの部屋からのファイルとフォルダのダウンロードが無効になります"
 }

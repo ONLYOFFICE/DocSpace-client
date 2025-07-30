@@ -883,5 +883,6 @@
   "EditLink": "Modificare link",
   "PasswordAccess": "Acces prin parolă",
   "PasswordLink": "Adăugați o parolă pentru a proteja link-ul dvs.",
-  "DisableDownload": "Restricționarea permisiunii la copierea, descărcarea și imprimarea conținutul fișierului"
+  "DisableDownload": "Restricționarea permisiunii la copierea, descărcarea și imprimarea conținutul fișierului",
+  "PreventDownloadFilesAndFolders": "Activați această opțiune pentru a dezactiva descărcarea fișierelor și folderelor din această cameră, care au fost partajate printr-un link"
 }

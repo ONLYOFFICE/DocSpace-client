@@ -883,5 +883,6 @@
   "EditLink": "Linki redaktə edin",
   "PasswordAccess": "Şifrə girişi",
   "PasswordLink": "Keçidinizi qorumaq üçün şifrə əlavə edin.",
-  "DisableDownload": "Fayl məzmununun kopyalanmasını, faylın endirilməsini və çapını məhdudlaşdırın"
+  "DisableDownload": "Fayl məzmununun kopyalanmasını, faylın endirilməsini və çapını məhdudlaşdırın",
+  "PreventDownloadFilesAndFolders": "Bu otaqdan link vasitəsilə paylaşılan fayl və qovluqların endirilməsini deaktiv etmək üçün bu tənzimləməni aktiv edin"
 }

@@ -140,7 +140,6 @@
   "PersonalFolderErasureWarning": "Your user type has been changed to Guest. Personal files will be deleted in 30 days.",
   "Pin": "Pin",
   "PinToTop": "Pin to top",
-  "PreventDownloadFilesAndFolders": "Enable this setting to disable downloads of files and folders from this room shared via a link",
   "PrivateRoomDescriptionEncrypted": "Encrypted editing and real-time collaboration.",
   "PrivateRoomDescriptionSafest": "The safest storage for docx, xlsx and pptx.",
   "PrivateRoomDescriptionSecure": "Secure sharing with trusted teammates.",

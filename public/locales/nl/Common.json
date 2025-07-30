@@ -883,5 +883,6 @@
   "EditLink": "Link bewerken",
   "PasswordAccess": "Wachtwoord toegang",
   "PasswordLink": "Voeg een wachtwoord toe om uw link te beschermen.",
-  "DisableDownload": "Beperk het kopiëren van materiaal, downloaden en afdrukken van bestanden"
+  "DisableDownload": "Beperk het kopiëren van materiaal, downloaden en afdrukken van bestanden",
+  "PreventDownloadFilesAndFolders": "Schakel deze instelling in om downloads uit te schakelen van bestanden en mappen uit deze kamer die worden gedeeld via een link"
 }

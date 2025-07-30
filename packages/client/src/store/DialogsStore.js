@@ -971,7 +971,7 @@ class DialogsStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: "upload",
+        key: "create_edit_room_upload",
         onClick: (ref) => ref.current.click(),
       },
 
@@ -979,13 +979,13 @@ class DialogsStore {
         ? {
             label: t("Common:Delete"),
             icon: TrashIconSvgUrl,
-            key: "delete",
+            key: "create_edit_room_delete",
             onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
             label: t("RoomLogoCover:CustomizeCover"),
             icon: PenSvgUrl,
-            key: "cover",
+            key: "create_edit_room_customize_cover",
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
           },
     ];

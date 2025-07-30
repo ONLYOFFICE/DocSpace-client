@@ -117,6 +117,7 @@ const InputParam = ({
           onKeyDown={onKeyDown}
           maxLength={170}
           name={name}
+          testId="create_edit_room_input"
         />
       </FieldContainer>
     </StyledInputParam>

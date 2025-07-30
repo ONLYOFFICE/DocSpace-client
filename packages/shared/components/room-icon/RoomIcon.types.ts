@@ -35,6 +35,7 @@ type RoomIconDefault = {
   showDefault: boolean;
   imgClassName?: string;
   className?: string;
+  dataTestId?: string;
 };
 
 export type TModel = { label: string; icon: string } & (
@@ -59,6 +60,7 @@ type RoomIconExpansion = {
   tooltipContent?: string;
   tooltipId?: string;
   isTemplate?: boolean;
+  dataTestId?: string;
 };
 
 type RoomIconColor = {

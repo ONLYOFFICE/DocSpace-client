@@ -368,6 +368,7 @@ const SetRoomParams = ({
         withEditing
         model={isEditRoomModel}
         onChangeFile={onChangeFile}
+        dataTestId="create_edit_room_icon"
       />
     ) : (
       <RoomIcon
@@ -400,6 +401,7 @@ const SetRoomParams = ({
         }
         onChangeFile={onChangeFile}
         currentColorScheme={currentColorScheme}
+        dataTestId="create_edit_room_icon"
       />
     );
 

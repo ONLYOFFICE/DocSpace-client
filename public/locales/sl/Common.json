@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Omejitev po časovnem obdobju",
   "Clean": "Počisti",
   "CopyPassword": "Kopiraj povezavo",
-  "PasswordSuccessfullyCopied": "Geslo uspešno kopirano"
+  "PasswordSuccessfullyCopied": "Geslo uspešno kopirano",
+  "LinkName": "Ime povezave"
 }

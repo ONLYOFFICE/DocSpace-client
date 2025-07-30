@@ -899,5 +899,6 @@
   "LimitByTimePeriod": "Limit by time period",
   "Clean": "Clean",
   "CopyPassword": "Copy password",
-  "PasswordSuccessfullyCopied": "Password successfully copied"
+  "PasswordSuccessfullyCopied": "Password successfully copied",
+  "LinkName": "Link name"
 }

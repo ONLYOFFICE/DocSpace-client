@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "تقييد بفترة زمنية",
   "Clean": "تنظيف",
   "CopyPassword": "نسخ كلمة المرور",
-  "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح"
+  "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح",
+  "LinkName": "اسم الرابط"
 }

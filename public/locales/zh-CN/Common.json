@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "按时间段限制",
   "Clean": "清理",
   "CopyPassword": "复制密码",
-  "PasswordSuccessfullyCopied": "密码复制成功"
+  "PasswordSuccessfullyCopied": "密码复制成功",
+  "LinkName": "链接名称"
 }

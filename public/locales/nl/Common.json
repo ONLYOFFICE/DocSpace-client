@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Beperken op tijdsperiode",
   "Clean": "Reinig",
   "CopyPassword": "Kopieer wachtwoord",
-  "PasswordSuccessfullyCopied": "Wachtwoord succesvol gekopieerd"
+  "PasswordSuccessfullyCopied": "Wachtwoord succesvol gekopieerd",
+  "LinkName": "Link naam"
 }

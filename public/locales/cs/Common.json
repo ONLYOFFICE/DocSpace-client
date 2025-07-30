@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Omezení podle časového období",
   "Clean": "Vymazat",
   "CopyPassword": "Kopírování hesla",
-  "PasswordSuccessfullyCopied": "Heslo bylo úspěšně zkopírováno"
+  "PasswordSuccessfullyCopied": "Heslo bylo úspěšně zkopírováno",
+  "LinkName": "Název odkazu"
 }

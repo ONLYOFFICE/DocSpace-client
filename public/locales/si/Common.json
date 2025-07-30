@@ -877,5 +877,6 @@
   "LimitByTimePeriod": "කාලය අනුව සීමා කරන්න",
   "Clean": "මකන්න",
   "CopyPassword": "මුරපදයේ පිටපතක්",
-  "PasswordSuccessfullyCopied": "මුරපදය පිටපත් විය"
+  "PasswordSuccessfullyCopied": "මුරපදය පිටපත් විය",
+  "LinkName": "සබැඳියේ නම"
 }

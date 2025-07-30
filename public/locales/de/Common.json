@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Zeitlich begrenzen",
   "Clean": "Löschen",
   "CopyPassword": "Passwort kopieren",
-  "PasswordSuccessfullyCopied": "Passwort erfolgreich kopiert"
+  "PasswordSuccessfullyCopied": "Passwort erfolgreich kopiert",
+  "LinkName": "Linkname"
 }

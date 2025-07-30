@@ -875,5 +875,6 @@
   "LimitByTimePeriod": "ຈໍາກັດໂດຍໄລຍະເວລາ",
   "Clean": "ສະອາດ",
   "CopyPassword": "ສຳເນົາລະຫັດຜ່ານ",
-  "PasswordSuccessfullyCopied": "ສຳເນົາລະຫັດຜ່ານສຳເລັດແລ້ວ"
+  "PasswordSuccessfullyCopied": "ສຳເນົາລະຫັດຜ່ານສຳເລັດແລ້ວ",
+  "LinkName": "ຊື່ລິ້ງ"
 }

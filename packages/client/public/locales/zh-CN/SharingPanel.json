@@ -1,6 +1,5 @@
 {
   "ExternalLink": "外部链接",
-  "LinkName": "链接名称",
   "RoleForLink": "链接的权限",
   "ShareEmailBody": "您已获得{{itemName}}文档的访问权限。点击下方的链接以立即打开文档：{{shareLink}}",
   "ShareEmailSubject": "您已获得{{itemName}}文档的访问权限"

@@ -41,7 +41,7 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
   return (
     <div className="edit-link_link-block">
       <Text className="edit-link-text" fontSize="16px" fontWeight={600}>
-        {t("LinkName")}
+        {t("Common:LinkName")}
       </Text>
       <Text className="edit-link_required-icon">*</Text>
 
@@ -54,7 +54,7 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
         value={linkNameValue}
         isDisabled={isLoading}
         onChange={onChangeLinkName}
-        placeholder={t("LinkName")}
+        placeholder={t("Common:LinkName")}
         className="edit-link_name-input"
       />
 
@@ -67,7 +67,7 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
           isReadOnly
           value={linkValue}
           type={InputType.text}
-          placeholder={t("LinkName")}
+          placeholder={t("Common:LinkName")}
           className="edit-link_link-input"
         />
       ) : null}

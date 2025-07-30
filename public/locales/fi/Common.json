@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Rajoita ajanjaksolla",
   "Clean": "Puhdista",
   "CopyPassword": "Kopioi salasana",
-  "PasswordSuccessfullyCopied": "Salasana onnistuneesti kopioitu "
+  "PasswordSuccessfullyCopied": "Salasana onnistuneesti kopioitu ",
+  "LinkName": "Linkin nimi"
 }

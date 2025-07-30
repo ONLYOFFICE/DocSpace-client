@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Սահմանափակում ըստ ժամանակաշրջանի",
   "Clean": "Մաքուր",
   "CopyPassword": "Պատճենել գաղտնաբառը",
-  "PasswordSuccessfullyCopied": "Գաղտնաբառը հաջողությամբ պատճենվեց"
+  "PasswordSuccessfullyCopied": "Գաղտնաբառը հաջողությամբ պատճենվեց",
+  "LinkName": "Հղման անվանում"
 }

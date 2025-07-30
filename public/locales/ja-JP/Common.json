@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "期間による制限",
   "Clean": "クリア",
   "CopyPassword": "パスワードをコピーする",
-  "PasswordSuccessfullyCopied": "パスワードのコピーに成功"
+  "PasswordSuccessfullyCopied": "パスワードのコピーに成功",
+  "LinkName": "リンク名"
 }

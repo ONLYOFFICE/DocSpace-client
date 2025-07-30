@@ -1,6 +1,5 @@
 {
   "ExternalLink": "Collegamento esterno",
-  "LinkName": "Nome del link",
   "RoleForLink": "Ruolo per il link",
   "ShareEmailBody": "Ti è stato concesso l'accesso al documento {{itemName}}. Fare clic sul collegamento sottostante per aprire subito il documento: {{shareLink}}.",
   "ShareEmailSubject": "Ti è stato concesso l'accesso al documento: {{itemName}}"

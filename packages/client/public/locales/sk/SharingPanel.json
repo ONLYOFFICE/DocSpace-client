@@ -1,6 +1,5 @@
 {
   "ExternalLink": "Externý odkaz",
-  "LinkName": "Názov odkazu",
   "RoleForLink": "Rola pre odkaz",
   "ShareEmailBody": "Bol vám udelený prístup k dokumentu {{itemName}}. Kliknutím na odkaz nižšie otvoríte dokument hneď teraz: {{shareLink}}.",
   "ShareEmailSubject": "Bol vám udelený prístup k dokumentu {{itemName}}."

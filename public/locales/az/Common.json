@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Zamana görə məhdudiyyət",
   "Clean": "Təmizləyin",
   "CopyPassword": "Şifrəni nüsxələyin",
-  "PasswordSuccessfullyCopied": "Şifrə uğurla nüsxələndi"
+  "PasswordSuccessfullyCopied": "Şifrə uğurla nüsxələndi",
+  "LinkName": "Keçid adı"
 }

@@ -1,6 +1,5 @@
 {
   "ExternalLink": "Ārējā saite",
-  "LinkName": "Saites nosaukums",
   "RoleForLink": "Loma saitei",
   "ShareEmailBody": "Jums ir piešķirta piekļuve dokumentam {{itemName}}. Noklikšķiniet uz tālāk esošās saites, lai tūlīt atvērtu dokumentu: {{shareLink}}.",
   "ShareEmailSubject": "Jums ir piešķirta piekļuve dokumentam {{itemName}}"

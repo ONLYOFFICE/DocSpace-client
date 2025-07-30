@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Zaman aralığına göre limitlendirme",
   "Clean": "Temizle",
   "CopyPassword": "Şifreyi kopyala",
-  "PasswordSuccessfullyCopied": "Şifre başarıyla kopyalandı"
+  "PasswordSuccessfullyCopied": "Şifre başarıyla kopyalandı",
+  "LinkName": "Bağlantı adı"
 }

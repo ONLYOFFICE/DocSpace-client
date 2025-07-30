@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Setare limită de timp",
   "Clean": "Golire",
   "CopyPassword": "Copiere parola",
-  "PasswordSuccessfullyCopied": "Parola a fost copiată cu succes"
+  "PasswordSuccessfullyCopied": "Parola a fost copiată cu succes",
+  "LinkName": "Numele linkului"
 }

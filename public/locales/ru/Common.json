@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Ограничение по периоду времени",
   "Clean": "Очистить",
   "CopyPassword": "Скопировать пароль",
-  "PasswordSuccessfullyCopied": "Пароль успешно скопирован"
+  "PasswordSuccessfullyCopied": "Пароль успешно скопирован",
+  "LinkName": "Имя ссылки"
 }

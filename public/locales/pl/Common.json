@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Ograniczenie czasowe",
   "Clean": "Wyczyść",
   "CopyPassword": "Kopiuj hasło",
-  "PasswordSuccessfullyCopied": "Hasło zostało pomyślnie skopiowane"
+  "PasswordSuccessfullyCopied": "Hasło zostało pomyślnie skopiowane",
+  "LinkName": "Nazwa linku"
 }

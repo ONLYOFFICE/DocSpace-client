@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Περιορισμός ανά χρονική περίοδο",
   "Clean": "Εκκαθάριση",
   "CopyPassword": "Αντιγραφή κωδικού πρόσβασης",
-  "PasswordSuccessfullyCopied": "Ο κωδικός πρόσβασης αντιγράφηκε επιτυχώς"
+  "PasswordSuccessfullyCopied": "Ο κωδικός πρόσβασης αντιγράφηκε επιτυχώς",
+  "LinkName": "Όνομα συνδέσμου"
 }

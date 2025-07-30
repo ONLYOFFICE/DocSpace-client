@@ -887,5 +887,6 @@
   "LimitByTimePeriod": "Ierobežots pēc laika perioda",
   "Clean": "Notīrīt",
   "CopyPassword": "Kopēt paroli",
-  "PasswordSuccessfullyCopied": "Parole veiksmīgi nokopēta"
+  "PasswordSuccessfullyCopied": "Parole veiksmīgi nokopēta",
+  "LinkName": "Saites nosaukums"
 }

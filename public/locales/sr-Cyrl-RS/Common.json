@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Ограничи временским периодом",
   "Clean": "Очистити",
   "CopyPassword": "Копирај лозинку",
-  "PasswordSuccessfullyCopied": "Лозинка успешно копирана"
+  "PasswordSuccessfullyCopied": "Лозинка успешно копирана",
+  "LinkName": "Име линка"
 }

@@ -879,5 +879,6 @@
   "LimitByTimePeriod": "Limite par période",
   "Clean": "Effacer",
   "CopyPassword": "Copier le mot de passe",
-  "PasswordSuccessfullyCopied": "Le mot de passe a été copié avec succès"
+  "PasswordSuccessfullyCopied": "Le mot de passe a été copié avec succès",
+  "LinkName": "Nom du lien"
 }

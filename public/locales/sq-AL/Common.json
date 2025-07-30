@@ -887,5 +887,6 @@
   "LimitByTimePeriod": "Kufizoni sipas periudhës kohore",
   "Clean": "Pastroni",
   "CopyPassword": "Kopjoni fjalëkalimin",
-  "PasswordSuccessfullyCopied": "Fjalëkalimi u kopjua me sukses"
+  "PasswordSuccessfullyCopied": "Fjalëkalimi u kopjua me sukses",
+  "LinkName": "Emri lidhjes"
 }

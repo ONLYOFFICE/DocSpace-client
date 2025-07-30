@@ -879,5 +879,6 @@
   "LimitByTimePeriod": "Обмежити за періодом часу",
   "Clean": "Очистити",
   "CopyPassword": "Копіювати пароль",
-  "PasswordSuccessfullyCopied": "Пароль успішно скопійовано"
+  "PasswordSuccessfullyCopied": "Пароль успішно скопійовано",
+  "LinkName": "Назва посилання"
 }

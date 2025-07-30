@@ -879,5 +879,6 @@
   "LimitByTimePeriod": "Ograniči vremenskim periodom",
   "Clean": "Očistiti",
   "CopyPassword": "Kopiraj lozinku",
-  "PasswordSuccessfullyCopied": "Lozinka uspešno kopirana"
+  "PasswordSuccessfullyCopied": "Lozinka uspešno kopirana",
+  "LinkName": "Ime linka"
 }

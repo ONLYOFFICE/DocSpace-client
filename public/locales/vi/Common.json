@@ -888,5 +888,6 @@
   "LimitByTimePeriod": "Giới hạn theo khoảng thời gian",
   "Clean": "Xóa",
   "CopyPassword": "Sao chép mật khẩu",
-  "PasswordSuccessfullyCopied": "Đã sao chép mật khẩu thành công"
+  "PasswordSuccessfullyCopied": "Đã sao chép mật khẩu thành công",
+  "LinkName": "Tên liên kết"
 }

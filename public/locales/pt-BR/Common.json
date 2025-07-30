@@ -879,5 +879,6 @@
   "LinkValidUntil": "Este link será válido até",
   "ChooseExpirationDate": "Limite o período de disponibilidade deste link definindo uma data de expiração.",
   "EditSharedLink": "Editar link compartilhado",
-  "EditAdditionalLink": "Editar link adicional"
+  "EditAdditionalLink": "Editar link adicional",
+  "EditLink": "Editar link"
 }

@@ -879,5 +879,6 @@
   "LinkValidUntil": "Liên kết này sẽ có hiệu lực đến",
   "ChooseExpirationDate": "Giới hạn thời gian còn hiệu lực cho liên kết này bằng cách đặt ngày hết hạn.",
   "EditSharedLink": "Chỉnh sửa liên kết được chia sẻ",
-  "EditAdditionalLink": "Chỉnh sửa liên kết bổ sung"
+  "EditAdditionalLink": "Chỉnh sửa liên kết bổ sung",
+  "EditLink": "Chỉnh sửa liên kết"
 }

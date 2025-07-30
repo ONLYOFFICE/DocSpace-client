@@ -878,5 +878,6 @@
   "LinkValidUntil": "Šī saite būs derīga līdz",
   "ChooseExpirationDate": "Ierobežojiet šīs saites pieejamības periodu, iestatot derīguma termiņu.",
   "EditSharedLink": "Rediģēt kopīgoto saiti",
-  "EditAdditionalLink": "Rediģēt papildu saiti"
+  "EditAdditionalLink": "Rediģēt papildu saiti",
+  "EditLink": "Rediģēt saiti"
 }

@@ -879,5 +879,6 @@
   "LinkValidUntil": "Tämä linkki on voimassa",
   "ChooseExpirationDate": "Rajoita saatavuusaika tälle linkille asettamalla viimeinen voimassaolopäivä.",
   "EditSharedLink": "Muokkaa jaettua linkkiä",
-  "EditAdditionalLink": "Muokkaa lisälinkkiä"
+  "EditAdditionalLink": "Muokkaa lisälinkkiä",
+  "EditLink": "Muokkaa linkkiä"
 }

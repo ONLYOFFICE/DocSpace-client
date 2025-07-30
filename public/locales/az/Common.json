@@ -879,5 +879,6 @@
   "LinkValidUntil": "Bu keçid vaxta qədər etibarlı olacaq",
   "ChooseExpirationDate": "İstifadə müddəti təyin etməklə bu keçidin mövcudluğunu məhdudlaşdırın.",
   "EditSharedLink": "Paylaşılan linki redaktə edin",
-  "EditAdditionalLink": "Əlavə linki redaktə edin"
+  "EditAdditionalLink": "Əlavə linki redaktə edin",
+  "EditLink": "Linki redaktə edin"
 }

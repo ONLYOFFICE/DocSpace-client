@@ -57,7 +57,6 @@
   "DuplicateFolderItem": "フォルダー <2>{{title}}</2> が正常に複製されました",
   "DuplicateItem": "<2>{{title}}</2> が正常に複製されました",
   "Duplicating": "複製",
-  "EditLink": "リンクの変更",
   "EditRoom": "ルームを編集する",
   "EditTemplate": "テンプレートを編集",
   "Embed": "埋め込み",

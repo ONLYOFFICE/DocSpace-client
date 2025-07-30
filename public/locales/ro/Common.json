@@ -879,5 +879,6 @@
   "LinkValidUntil": "Acest link va fi valabil până la",
   "ChooseExpirationDate": "Indicați data expirării pentru a limita perioada de disponibilitate a acestui link.",
   "EditSharedLink": "Modificare link partajat",
-  "EditAdditionalLink": "Modificare link suplimentar"
+  "EditAdditionalLink": "Modificare link suplimentar",
+  "EditLink": "Modificare link"
 }

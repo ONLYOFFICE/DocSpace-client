@@ -57,7 +57,6 @@
   "DuplicateFolderItem": "文件夹<2>{{title}}</2>已成功创建副本",
   "DuplicateItem": "<2>{{title}}</2>已成功创建副本",
   "Duplicating": "正在创建副本",
-  "EditLink": "编辑链接",
   "EditRoom": "编辑房间",
   "EditTemplate": "编辑模板",
   "Embed": "嵌入",

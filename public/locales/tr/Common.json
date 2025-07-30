@@ -879,5 +879,6 @@
   "LinkValidUntil": "Bu bağlantı şu tarihe kadar geçerli olacaktır:",
   "ChooseExpirationDate": "Bir son kullanma tarihi belirleyerek bu bağlantının kullanılabilirlik süresini sınırlandırın.",
   "EditSharedLink": "Paylaşılan bağlantıyı düzenle",
-  "EditAdditionalLink": "Ek bağlantıyı düzenle"
+  "EditAdditionalLink": "Ek bağlantıyı düzenle",
+  "EditLink": "Bağlantıyı düzenle"
 }

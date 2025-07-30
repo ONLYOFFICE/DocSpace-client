@@ -879,5 +879,6 @@
   "LinkValidUntil": "سيكون الرابط صالح لغاية",
   "ChooseExpirationDate": "قم بتقييد فترة الصلاحية لهذا الرابط من خلال تعيين تاريخ لصلاحية هذا الرابط.",
   "EditSharedLink": "تعديل الرابط المشترك",
-  "EditAdditionalLink": "تعديل الرابط الإضافي"
+  "EditAdditionalLink": "تعديل الرابط الإضافي",
+  "EditLink": "تعديل الرابط"
 }

@@ -879,5 +879,6 @@
   "LinkValidUntil": "このリンクは次の期間まで有効です：",
   "ChooseExpirationDate": "有効期限を設定して、このリンクの利用可能期間を制限します。",
   "EditSharedLink": "共有リンクの編集",
-  "EditAdditionalLink": "追加リンクの編集"
+  "EditAdditionalLink": "追加リンクの編集",
+  "EditLink": "リンクの変更"
 }

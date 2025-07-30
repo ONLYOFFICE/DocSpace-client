@@ -870,5 +870,6 @@
   "LinkValidUntil": "Ovaj link će biti validan do",
   "ChooseExpirationDate": "Ograniči period dostupnosti za ovaj link postavljanjem roka upotrebe.",
   "EditSharedLink": "Uredi deljeni link",
-  "EditAdditionalLink": "Uredi dodatni link"
+  "EditAdditionalLink": "Uredi dodatni link",
+  "EditLink": "Uredi link"
 }

@@ -868,5 +868,6 @@
   "LinkValidUntil": "සබැඳිය වලංගු කාලය:",
   "ChooseExpirationDate": "කල් ඉකුත්වන දිනයක් සැකසීමෙන් මෙම සබැඳිය වලංගු කාලය සීමා කරන්න.",
   "EditSharedLink": "බෙදාගත් සබැඳිය සංස්කරණය",
-  "EditAdditionalLink": "අතිරේක සබැඳිය සංස්කරණය"
+  "EditAdditionalLink": "අතිරේක සබැඳිය සංස්කරණය",
+  "EditLink": "සබැඳිය සංස්කරණය"
 }

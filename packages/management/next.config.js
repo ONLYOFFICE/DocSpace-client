@@ -150,7 +150,6 @@ module.exports = {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-
         loader: "@svgr/webpack",
         options: {
           prettier: false,
@@ -160,7 +159,7 @@ module.exports = {
               {
                 name: "preset-default",
                 params: {
-                  overrides: { removeViewBox: false },
+                  overrides: { removeViewBox: false, cleanupIds: false },
                 },
               },
             ],

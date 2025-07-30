@@ -27,7 +27,7 @@ import React from "react";
 
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
-import { useHistory } from "./useHistory";
+import { useHistory } from "../../FilesView/hooks/useHistory";
 
 type UseSocketProps = {
   selectionId: string | number;

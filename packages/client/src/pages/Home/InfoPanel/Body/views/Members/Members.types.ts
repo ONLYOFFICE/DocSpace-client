@@ -30,6 +30,8 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import { TOption } from "@docspace/shared/components/combobox";
 
+import { Nullable } from "@docspace/shared/types";
+
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
@@ -94,6 +96,21 @@ export type MembersProps = {
 
   currentId?: SelectedFolderStore["id"];
   isRootFolder?: SelectedFolderStore["isRootFolder"];
+
+  members: Nullable<TInfoPanelMembers>;
+  total: number;
+  searchValue: string;
+  isFirstLoading: boolean;
+
+  fetchMoreMembers: () => Promise<void>;
+  changeUserRole: (
+    option: TOption,
+    userId: string,
+    currentUserId: string,
+    hasNextPage: boolean,
+  ) => Promise<void>;
+
+  scrollToTop: VoidFunction;
 };
 
 export type UserProps = {

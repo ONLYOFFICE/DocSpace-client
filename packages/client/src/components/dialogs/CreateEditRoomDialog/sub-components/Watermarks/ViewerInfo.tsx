@@ -32,7 +32,7 @@ import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { WatermarkAdditions } from "@docspace/shared/enums";
-import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
+import { TabItem } from "@docspace/shared/components/tab-item";
 import { TWatermark } from "@docspace/shared/api/rooms/types";
 import { TRoomParams } from "@docspace/shared/utils/rooms";
 
@@ -203,16 +203,15 @@ const ViewerInfoWatermark = ({
     });
   }, []);
 
-  const onSelect = (item: { id: string }) => {
+  const onSelect = (e: React.MouseEvent<HTMLDivElement>) => {
+    const itemKey = e.currentTarget.dataset.key;
     const elementsData = elements.current;
+    if (!itemKey || !elementsData) return;
+
+    elementsData[itemKey as keyof typeof elementsData] =
+      !elementsData[itemKey as keyof typeof elementsData];
+
     let flagsCount = 0;
-
-    const key = item.id;
-
-    if (!elementsData) return;
-
-    elementsData[key as keyof typeof elementsData] =
-      !elementsData[key as keyof typeof elementsData];
 
     Object.keys(elementsData).forEach((k) => {
       const value = elementsData[k as keyof typeof elementsData];
@@ -256,14 +255,24 @@ const ViewerInfoWatermark = ({
         {t("AddWatermarkElements")}
       </Text>
 
-      <Tabs
-        items={initialInfoRef?.dataTabs as TTabItem[]}
-        selectedItems={initialInfoRef?.tabs.map((item) => item.index)}
-        onSelect={onSelect}
-        type={TabsTypes.Secondary}
-        multiple
-        selectedItemId={-1}
-      />
+      <div className="watermark-tab_items">
+        {initialInfoRef.dataTabs.map((item) => {
+          const isActive =
+            initialInfoRef.tabs.findIndex((i) => i.index === item.index) > -1;
+
+          return (
+            <TabItem
+              key={item.id}
+              data-key={item.id}
+              label={item.name}
+              isActive={isActive}
+              isDisabled={isActive}
+              onSelect={onSelect}
+              withMultiSelect
+            />
+          );
+        })}
+      </div>
 
       <Text
         className="watermark-title title-without-top"

@@ -83,11 +83,15 @@ describe("<CompanyInfo />", () => {
   it("disables inputs when isSettingPaid is false", () => {
     renderWithTheme(<CompanyInfo {...defaultProps} isSettingPaid={false} />);
 
-    const companyNameInput = screen.getByTestId("company-name-input");
-    const addressInput = screen.getByTestId("address-input");
-    const emailInput = screen.getByTestId("email-input");
-    const phoneInput = screen.getByTestId("phone-input");
-    const siteInput = screen.getByTestId("site-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
+    const addressInput = screen.getByTestId(
+      "company_info_settings_address_input",
+    );
+    const emailInput = screen.getByTestId("company_info_settings_email_input");
+    const phoneInput = screen.getByTestId("company_info_settings_phone_input");
+    const siteInput = screen.getByTestId("company_info_settings_site_input");
 
     expect(companyNameInput).toBeDisabled();
     expect(addressInput).toBeDisabled();
@@ -99,7 +103,9 @@ describe("<CompanyInfo />", () => {
   it("updates state when inputs change", () => {
     renderWithTheme(<CompanyInfo {...defaultProps} />);
 
-    const companyNameInput = screen.getByTestId("company-name-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
     fireEvent.change(companyNameInput, {
       target: { value: "New Company Name" },
     });
@@ -111,12 +117,14 @@ describe("<CompanyInfo />", () => {
     const onSave = jest.fn();
     renderWithTheme(<CompanyInfo {...defaultProps} onSave={onSave} />);
 
-    const companyNameInput = screen.getByTestId("company-name-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
     fireEvent.change(companyNameInput, {
       target: { value: "New Company Name" },
     });
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("company_info_settings_save_button");
     fireEvent.click(saveButton);
 
     expect(onSave).toHaveBeenCalledWith(
@@ -131,20 +139,22 @@ describe("<CompanyInfo />", () => {
   it("shows validation errors for invalid inputs", () => {
     renderWithTheme(<CompanyInfo {...defaultProps} />);
 
-    const emailInput = screen.getByTestId("email-input");
+    const emailInput = screen.getByTestId("company_info_settings_email_input");
     fireEvent.change(emailInput, { target: { value: "invalid-email" } });
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("company_info_settings_save_button");
     expect(saveButton).toBeDisabled();
   });
 
   it("enables save button only when changes are valid", () => {
     renderWithTheme(<CompanyInfo {...defaultProps} />);
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("company_info_settings_save_button");
     expect(saveButton).toBeDisabled();
 
-    const companyNameInput = screen.getByTestId("company-name-input");
+    const companyNameInput = screen.getByTestId(
+      "company_info_settings_company_name_input",
+    );
     fireEvent.change(companyNameInput, {
       target: { value: "New Company Name" },
     });

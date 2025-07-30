@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useRef, useCallback, use } from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 
@@ -38,14 +37,12 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
 import { getCookie } from "@docspace/shared/utils";
 
-import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
+import { useHistory } from "../FilesView/hooks/useHistory";
 
 import NoHistory from "../../sub-components/NoItem/NoHistory";
 
 import HistoryBlock from "./HistoryBlock";
 import styles from "./History.module.scss";
-import ThirdPartyComponent from "./HistoryBlockContent/ThirdParty";
-import { useHistory } from "./hooks/useHistory";
 import { useSocket } from "./hooks/useSocket";
 
 export const getRelativeDateDay = (t: TTranslation, date: string) => {
@@ -77,29 +74,32 @@ export const getRelativeDateDay = (t: TTranslation, date: string) => {
 type HistoryProps = {
   infoPanelSelection: TRoom | TFile | TFolder;
 
-  setExternalLinks?: PublicRoomStore["setExternalLinks"];
+  history: ReturnType<typeof useHistory>["history"];
+  total: ReturnType<typeof useHistory>["total"];
+  showLoading: ReturnType<typeof useHistory>["showLoading"];
+  isLoading: ReturnType<typeof useHistory>["isLoading"];
+  isFirstLoading: ReturnType<typeof useHistory>["isFirstLoading"];
+  fetchHistory: ReturnType<typeof useHistory>["fetchHistory"];
+  fetchMoreHistory: ReturnType<typeof useHistory>["fetchMoreHistory"];
 };
 
-const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
+const History = ({
+  infoPanelSelection,
+
+  history,
+  total,
+  showLoading,
+  isLoading,
+  isFirstLoading,
+  fetchHistory,
+  fetchMoreHistory,
+}: HistoryProps) => {
   const { t } = useTranslation(["InfoPanel", "Common", "Translations"]);
 
   const scrollContext = use(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
 
   const loading = useRef(false);
-
-  const {
-    history,
-    total,
-    showLoading,
-    isLoading,
-    isFirstLoading,
-    fetchHistory,
-    fetchMoreHistory,
-  } = useHistory({
-    selection: infoPanelSelection,
-    setExternalLinks: setExternalLinks!,
-  });
 
   useSocket({
     selectionId: infoPanelSelection.id,
@@ -110,9 +110,6 @@ const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
         : "file",
     fetchHistory,
   });
-
-  const isThirdParty =
-    "providerId" in infoPanelSelection && infoPanelSelection?.providerId;
 
   const onCheckListScroll = () => {
     if (loading.current) return;
@@ -157,8 +154,6 @@ const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
     };
   }, [scrollElement, onScroll]);
 
-  if (isThirdParty) return <ThirdPartyComponent />;
-
   if (showLoading) return <InfoPanelViewLoader view="history" />;
 
   if (!history.length && !(isLoading || isFirstLoading)) return <NoHistory />;
@@ -184,10 +179,4 @@ const History = ({ infoPanelSelection, setExternalLinks }: HistoryProps) => {
   );
 };
 
-export default inject(({ publicRoomStore }: TStore) => {
-  const { setExternalLinks } = publicRoomStore;
-
-  return {
-    setExternalLinks,
-  };
-})(observer(History));
+export default History;

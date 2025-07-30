@@ -23,17 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
 import ItemTitle from "./sub-components/ItemTitle";
@@ -43,11 +44,7 @@ import NoItem from "./sub-components/NoItem";
 import Users from "./views/Users";
 import Groups from "./views/Groups";
 import Gallery from "./views/Gallery";
-import Members from "./views/Members";
-import Details from "./views/Details";
-import History from "./views/History";
-import Plugin from "./views/Plugin";
-import Share from "./views/Share";
+import FilesView from "./views/FilesView";
 
 import commonStyles from "./helpers/Common.module.scss";
 
@@ -119,7 +116,15 @@ const InfoPanelBodyContent = ({
     isLockedSharedRoom ||
     (isRoot && !isGallery);
 
-  const currentView = isRooms ? roomsView : fileView;
+  const [currentView, setCurrentView] = React.useState(
+    isRooms ? roomsView : fileView,
+  );
+
+  const defferedCurrentView = React.useDeferredValue(currentView);
+
+  React.useEffect(() => {
+    setCurrentView(isRooms ? roomsView : fileView);
+  }, [isRooms, roomsView, fileView]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
@@ -144,35 +149,34 @@ const InfoPanelBodyContent = ({
       );
     }
 
-    switch (currentView) {
-      case "info_members":
-        return <Members />;
-      case "info_history":
-        return <History infoPanelSelection={selection} />;
-      case "info_details":
-        return (
-          <Details
-            selection={selection}
-            isArchive={selection.rootFolderType === FolderType.Archive}
+    return (
+      <React.Suspense
+        fallback={
+          <InfoPanelViewLoader
+            view={
+              currentView === InfoPanelView.infoMembers
+                ? "members"
+                : currentView === InfoPanelView.infoHistory
+                  ? "history"
+                  : "details"
+            }
           />
-        );
-      case "info_share":
-        if (!("fileExst" in selection)) return null;
-
-        return <Share infoPanelSelection={selection} />;
-      default:
-        break;
-    }
-
-    // @ts-expect-error fixed after rewrite plugin to ts
-    if (currentView.indexOf("info_plugin") > -1) return <Plugin />;
+        }
+      >
+        <FilesView
+          currentView={defferedCurrentView}
+          selection={selection}
+          isArchive={selection.rootFolderType === FolderType.Archive}
+        />
+      </React.Suspense>
+    );
   };
 
   return (
     <div className={commonStyles.infoPanelBody}>
       {!isNoItem &&
       !Array.isArray(selection) &&
-      currentView !== "info_members" ? (
+      (isUsers || isGuests || isGroups || isGallery) ? (
         <ItemTitle
           infoPanelSelection={selection}
           isContacts={isUsers || isGuests || isGroups}

@@ -90,6 +90,13 @@ const StyledWatermark = styled.div<{
       }
     }
   }
+
+  .watermark-tab_items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 20px;
+  }
 `;
 const StyledBody = styled.div`
   .types-content {

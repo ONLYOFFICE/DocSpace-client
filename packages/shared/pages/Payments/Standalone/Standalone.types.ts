@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,38 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import { TTranslation } from "../../../types";
 
-export const StyledBody = styled.div<{
-  isCheckbox: boolean;
-  isLabel: boolean;
-  maxInputWidth: string;
-}>`
-  margin-top: 16px;
+export interface IPaymentsProps {
+  isTrial: boolean;
+  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
+  acceptPaymentsLicense: (t: TTranslation) => void;
+  isLicenseCorrect: boolean;
+  salesEmail: string;
+  isLicenseDateExpired: boolean;
+  isDeveloper: boolean;
+  buyUrl: string;
+  trialDaysLeft: string | number;
+  paymentDate: string;
+  isEnterprise: boolean;
+  logoText: string;
+}
 
-  .quota-container {
-    display: flex;
-    grid-gap: 4px;
-    margin-bottom: ${(props) => (props.isCheckbox ? "8px" : "16px")};
-    ${(props) => props.isLabel && " margin-top: 8px"};
-  }
-  .quota_limit {
-    ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};
-    max-height: 32px;
-  }
-
-  .quota_checkbox {
-    svg {
-      margin-inline-end: 8px;
-    }
-  }
-
-  .quota_value {
-    max-width: fit-content;
-    padding: 0;
-  }
-
-  .quota_description {
-    color: ${(props) => props.theme.text.disableColor};
-  }
-`;
+export interface ILicenseProps {
+  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
+  acceptPaymentsLicense: (t: TTranslation) => void;
+  isLicenseCorrect: boolean;
+  isTrial: boolean;
+}

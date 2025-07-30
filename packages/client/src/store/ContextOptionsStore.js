@@ -1507,7 +1507,7 @@ class ContextOptionsStore {
 
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
-      ? ["select", "room-info", "show-info"]
+      ? ["select", "open", "room-info", "show-info"]
       : isHeader
         ? ["select"]
         : [];
@@ -2614,15 +2614,8 @@ class ContextOptionsStore {
     element?.click();
   };
 
-  onShowFormRoomSelectFileDialog = (
-    filter = FilesSelectorFilterTypes.DOCX,
-    openRoot = false,
-  ) => {
-    this.dialogsStore.setSelectFileFormRoomDialogVisible(
-      true,
-      filter,
-      openRoot,
-    );
+  onShowFormRoomSelectFileDialog = (filter = FilesSelectorFilterTypes.DOCX) => {
+    this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
   };
 
   getContextOptionsPlusFormRoom = (t) => {

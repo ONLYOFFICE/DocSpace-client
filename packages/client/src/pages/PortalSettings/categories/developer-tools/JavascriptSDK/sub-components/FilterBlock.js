@@ -398,6 +398,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         onChange={toggleAuthor}
         isChecked={isUserFilterSet}
         isDisabled={!!config.requestToken}
+        dataTestId="files_author_toggle_button"
       />
       {isUserFilterSet ? (
         "authorType" in config.filter ? (
@@ -418,6 +419,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 isAutoFocussed
                 onKeyDown={onKeyDown}
                 tabIndex={5}
+                testId="files_author_text_input"
               />
             </UserInput>
             {author.length >= minSearchValue ? (
@@ -430,6 +432,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                 clickOutsideAction={closeInviteInputPanel}
                 eventTypes="click"
                 {...dropDownMaxHeight}
+                dataTestId="files_author_dropdown"
               >
                 {usersList.length ? foundUsers : ""}
               </StyledDropDown>
@@ -443,6 +446,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         onChange={toggleFilterType}
         isChecked={isTypeFilterSet}
         isDisabled={!!config.requestToken}
+        dataTestId="filter_type_toggle_button"
       />
       {isTypeFilterSet ? (
         "filterType" in config.filter ? (
@@ -459,6 +463,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"
+            dataTestId="filter_type_combobox"
+            dropDownTestId="filter_type_dropdown"
           />
         )
       ) : null}
@@ -471,6 +477,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         label={t("Common:Member")}
         onChange={toggleMembers}
         isChecked={isUserFilterSet}
+        dataTestId="member_toggle_button"
       />
       {isUserFilterSet ? (
         <>
@@ -492,6 +499,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   isAutoFocussed
                   onKeyDown={onKeyDown}
                   tabIndex={5}
+                  testId="author_text_input"
                 />
               </UserInput>
               {author.length >= minSearchValue ? (
@@ -503,6 +511,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
                   showDisabledItems
                   clickOutsideAction={closeInviteInputPanel}
                   eventTypes="click"
+                  dataTestId="author_dropdown"
                   {...dropDownMaxHeight}
                 >
                   {usersList.length ? foundUsers : ""}
@@ -516,6 +525,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             label={t("Translations:SearchByOwner")}
             onChange={toggleSubjectFilter}
             isChecked={false}
+            dataTestId="subject_filter_checkbox"
           />
         </>
       ) : null}
@@ -524,6 +534,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
         label={t("Common:Type")}
         onChange={toggleType}
         isChecked={isTypeFilterSet}
+        dataTestId="room_type_toggle_button"
       />
       {isTypeFilterSet ? (
         "type" in config.filter ? (
@@ -540,6 +551,8 @@ export const FilterBlock = ({ t, config, setConfig }) => {
             selectedOption={filterBy}
             displaySelectedOption
             directionY="top"
+            dataTestId="room_type_combobox"
+            dropDownTestId="room_type_dropdown"
           />
         )
       ) : null}

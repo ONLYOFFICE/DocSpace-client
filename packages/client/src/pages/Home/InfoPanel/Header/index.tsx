@@ -208,6 +208,7 @@ const InfoPanelHeaderContent = ({
             style={{ width: "100%" }}
             items={isTemplate ? templateSubmenu : tabsData}
             selectedItemId={isRoomsType ? roomsView : fileView}
+            id="info-panel-tabs"
           />
         </div>
       ) : null}

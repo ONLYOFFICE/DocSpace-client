@@ -73,5 +73,5 @@ export type FieldContainerProps = {
   /** Additional CSS class for tooltip */
   tooltipClass?: string;
 
-  testId?: string;
+  dataTestId?: string;
 };

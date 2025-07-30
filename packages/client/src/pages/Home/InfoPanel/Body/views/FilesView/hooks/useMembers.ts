@@ -37,14 +37,14 @@ import api from "@docspace/shared/api";
 import { Nullable } from "@docspace/shared/types";
 import { TOption } from "@docspace/shared/components/combobox";
 
-import {
+import type {
   TInfoPanelMember,
   TInfoPanelMembers,
-  TInfoPanelMemberType,
   TMemberTuple,
   TTitleMember,
   UseMembersProps,
-} from "../Members.types";
+} from "../../Members/Members.types";
+import { TInfoPanelMemberType } from "../../Members/Members.types";
 
 const PAGE_COUNT = 100;
 
@@ -76,6 +76,8 @@ export const useMembers = ({
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFirstLoading, setIsFirstLoading] = React.useState(false);
+
+  const abortController = React.useRef<AbortController>(null);
 
   const addMembersTitle = React.useCallback(
     (
@@ -187,6 +189,8 @@ export const useMembers = ({
   const fetchMembers = React.useCallback(async () => {
     setIsFirstLoading(true);
 
+    abortController.current = new AbortController();
+
     const roomId = room.id;
     const roomType = room.roomType;
     const isTemplate = room.isTemplate;
@@ -199,17 +203,23 @@ export const useMembers = ({
 
     const requests = [
       api.rooms
-        .getRoomMembers(roomId, {
-          filterType: 0,
-          startIndex: 0,
-          count: PAGE_COUNT,
-          filterValue: searchValue,
-        })
+        .getRoomMembers(
+          roomId,
+          {
+            filterType: 0,
+            startIndex: 0,
+            count: PAGE_COUNT,
+            filterValue: searchValue,
+          },
+          abortController.current?.signal,
+        )
         .then((res) => {
           setTotal(res.total);
           return res.items;
         }),
     ];
+
+    abortController.current = null;
 
     if (
       isPublicRoomType &&
@@ -262,6 +272,8 @@ export const useMembers = ({
 
     const convertedMembers = convertMembers(data.items, false);
 
+    abortController.current = null;
+
     setMembers((value) => {
       if (!value) return convertedMembers;
 
@@ -280,11 +292,6 @@ export const useMembers = ({
     });
     setIsLoading(false);
   };
-
-  React.useEffect(() => {
-    fetchMembers();
-    scrollToTop();
-  }, [fetchMembers, scrollToTop]);
 
   React.useEffect(() => {
     if (isMembersPanelUpdating) {
@@ -409,5 +416,7 @@ export const useMembers = ({
     fetchMoreMembers,
     total,
     changeUserRole,
+
+    abortController,
   };
 };

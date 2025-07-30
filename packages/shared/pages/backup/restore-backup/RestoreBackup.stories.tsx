@@ -45,11 +45,30 @@ import {
   storageRegions,
   mockThirdPartyAccounts,
   mockThirdPartyProviders,
+  useMockSelectedThirdPartyAccountProps,
+  useMockStorageIdProps,
+  useMockFormSettingsProps,
 } from "../mockData";
+import type { RestoreBackupProps } from "./RestoreBackup.types";
+
+const RestoreBackupWithState = (props: RestoreBackupProps) => {
+  const thirdPartyAccountProps = useMockSelectedThirdPartyAccountProps();
+  const storageIdProps = useMockStorageIdProps();
+  const formSettingsProps = useMockFormSettingsProps();
+
+  return (
+    <RestoreBackup
+      {...props}
+      {...thirdPartyAccountProps}
+      {...storageIdProps}
+      {...formSettingsProps}
+    />
+  );
+};
 
 const meta: Meta<typeof RestoreBackup> = {
   title: "Pages/Backup/RestoreBackup",
-  component: RestoreBackup,
+  component: RestoreBackupWithState,
   parameters: {
     docs: {
       description: {
@@ -120,7 +139,12 @@ export const Default: Story = {
     restoreResource: "backup.tar.gz",
     formSettings: {},
     errorsFieldsBeforeSafe: {},
-    thirdPartyStorage: [selectedStorages.amazon],
+    thirdPartyStorage: [
+      selectedStorages.amazon,
+      selectedStorages.googleCloud,
+      selectedStorages.rackspace,
+      selectedStorages.selectel,
+    ],
     storageRegions,
     defaultRegion: "us-east-1",
     accounts: mockThirdPartyAccounts,

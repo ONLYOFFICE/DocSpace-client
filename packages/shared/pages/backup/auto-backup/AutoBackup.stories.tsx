@@ -42,6 +42,10 @@ import {
   storageRegions,
   mockThirdPartyAccounts,
   mockThirdPartyProviders,
+  useMockScheduleProps,
+  useMockFormSettingsProps,
+  useMockStorageIdProps,
+  useMockSelectedThirdPartyAccountProps,
 } from "../mockData";
 import type { AutomaticBackupProps } from "./AutoBackup.types";
 
@@ -50,12 +54,13 @@ const AutoBackupWithToggle = ({
   selectedStorageType,
   ...rest
 }: AutomaticBackupProps) => {
-  const [enableSchedule, setEnableSchedule] = useState(selectedEnableSchedule);
   const [storageType, setStorageType] = useState(selectedStorageType);
 
-  const handleToggle = () => {
-    setEnableSchedule(!enableSchedule);
-  };
+  const scheduleProps = useMockScheduleProps();
+  const formSettingsProps = useMockFormSettingsProps();
+  const storageIdProps = useMockStorageIdProps();
+  const selectedThirdPartyAccountProps =
+    useMockSelectedThirdPartyAccountProps();
 
   const handleStorageTypeChange = (type: Nullable<string>) => {
     setStorageType(type);
@@ -64,10 +69,12 @@ const AutoBackupWithToggle = ({
   return (
     <AutomaticBackup
       {...rest}
-      selectedEnableSchedule={enableSchedule}
       selectedStorageType={storageType}
-      setSelectedEnableSchedule={handleToggle}
       seStorageType={handleStorageTypeChange}
+      {...scheduleProps}
+      {...formSettingsProps}
+      {...storageIdProps}
+      {...selectedThirdPartyAccountProps}
     />
   );
 };

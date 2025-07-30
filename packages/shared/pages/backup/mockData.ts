@@ -24,9 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState } from "react";
+
 import { AutoBackupPeriod, ThirdPartyStorages } from "../../enums";
 import type { TOption } from "../../components/combobox";
-import type { ConnectedThirdPartyAccountType } from "../../types";
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+  ThirdPartyAccountType,
+} from "../../types";
 
 export const periodsObject: TOption[] = [
   { key: AutoBackupPeriod.EveryDayType, label: "Every day" },
@@ -286,3 +292,109 @@ export const mockThirdPartyAccounts = [
     connected: false,
   },
 ];
+
+export const useMockScheduleProps = () => {
+  const [selectedEnableSchedule, setSelectedEnableSchedule] = useState(true);
+  const [selectedWeekdayLabel, setSelectedWeekdayLabel] = useState("Monday");
+  const [selectedMonthDay, setSelectedMonthDay] = useState("1");
+  const [selectedHour, setSelectedHour] = useState("0:00");
+  const [selectedMaxCopiesNumber, setSelectedMaxCopiesNumber] = useState("3");
+  const [selectedPeriodLabel, setSelectedPeriodLabel] = useState("Every day");
+  const [selectedPeriodNumber, setSelectedPeriodNumber] = useState("0");
+
+  const handleWeekdayChange = (option: TOption) => {
+    setSelectedWeekdayLabel(option?.label || selectedWeekdayLabel);
+  };
+
+  const handleTimeChange = (option: TOption) => {
+    setSelectedHour(option?.label || selectedHour);
+  };
+
+  const handleMaxCopiesChange = (option: TOption) => {
+    setSelectedMaxCopiesNumber(
+      option?.key.toString() || selectedMaxCopiesNumber,
+    );
+  };
+
+  const handlePeriodChange = (option: TOption) => {
+    setSelectedPeriodLabel(option?.label || selectedPeriodLabel);
+    setSelectedPeriodNumber(option?.key.toString() || selectedPeriodNumber);
+  };
+
+  const handleMonthNumberChange = (option: TOption) => {
+    setSelectedMonthDay(option?.label || selectedMonthDay);
+  };
+
+  const handleToggle = () => {
+    setSelectedEnableSchedule(!selectedEnableSchedule);
+  };
+
+  return {
+    selectedEnableSchedule,
+    setSelectedEnableSchedule: handleToggle,
+    selectedPeriodNumber,
+    selectedPeriodLabel,
+    setPeriod: handlePeriodChange,
+    selectedHour,
+    setTime: handleTimeChange,
+    selectedWeekdayLabel,
+    setWeekday: handleWeekdayChange,
+    selectedMonthDay,
+    setMonthNumber: handleMonthNumberChange,
+    selectedMaxCopiesNumber,
+    setMaxCopies: handleMaxCopiesChange,
+  };
+};
+
+export const useMockFormSettingsProps = () => {
+  const [formSettings, setFormSettings] = useState<Record<string, string>>({});
+
+  const addValueInFormSettings = (name: string, value: string) => {
+    setFormSettings((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const deleteValueFormSetting = (key: string) => {
+    setFormSettings((prevState) => {
+      const newObj = { ...prevState };
+      delete newObj[key];
+
+      return newObj;
+    });
+  };
+
+  return {
+    formSettings,
+    addValueInFormSettings,
+    deleteValueFormSetting,
+  };
+};
+
+export const useMockStorageIdProps = () => {
+  const [storageId, setStorageId] = useState<Nullable<string>>(
+    ThirdPartyStorages.AmazonId,
+  );
+
+  return {
+    setStorageId: (id: Nullable<string>) => setStorageId(id),
+    selectedStorageId: storageId,
+  };
+};
+
+export const useMockSelectedThirdPartyAccountProps = () => {
+  const [selectedThirdPartyAccount, setSelectedThirdPartyAccount] =
+    useState<ThirdPartyAccountType>(mockThirdPartyAccounts[0]);
+
+  const handleSelectedThirdPartyAccountChange = (
+    account: Nullable<Partial<ThirdPartyAccountType>>,
+  ) => {
+    if (!account) return;
+
+    setSelectedThirdPartyAccount(
+      (account as Nullable<ThirdPartyAccountType>) || mockThirdPartyAccounts[0],
+    );
+  };
+  return {
+    selectedThirdPartyAccount,
+    setSelectedThirdPartyAccount: handleSelectedThirdPartyAccountChange,
+  };
+};

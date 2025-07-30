@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { FolderType } from "../../../enums";
 
@@ -41,39 +41,23 @@ import {
   storageRegions,
   mockThirdPartyAccounts,
   mockThirdPartyProviders,
+  useMockSelectedThirdPartyAccountProps,
+  useMockFormSettingsProps,
 } from "../mockData";
-import type { ManualBackupProps, TStorageType } from "./ManualBackup.types";
+import type { ManualBackupProps } from "./ManualBackup.types";
 import { DOCUMENTS } from "./ManualBackup.constants";
 import { createStartBackupHandler } from "../../../__mocks__/storybook/handlers/portal/backup";
 
-const ManualBackupWithState = ({
-  formSettings,
-  addValueInFormSettings,
-  ...rest
-}: ManualBackupProps) => {
-  const [storageType, setStorageType] = useState<TStorageType>(
-    (formSettings?.storageType as TStorageType) || DOCUMENTS,
-  );
-
-  const handleStorageTypeChange = (type: TStorageType) => {
-    setStorageType(type);
-    addValueInFormSettings?.("storageType", type);
-  };
+const ManualBackupWithState = (props: ManualBackupProps) => {
+  const selectedThirdPartyAccountProps =
+    useMockSelectedThirdPartyAccountProps();
+  const mockFormSettingsProps = useMockFormSettingsProps();
 
   return (
     <ManualBackup
-      {...rest}
-      formSettings={{
-        ...formSettings,
-        storageType,
-      }}
-      addValueInFormSettings={(name, value) => {
-        if (name === "storageType") {
-          handleStorageTypeChange(value as TStorageType);
-        } else {
-          addValueInFormSettings?.(name, value);
-        }
-      }}
+      {...props}
+      {...selectedThirdPartyAccountProps}
+      {...mockFormSettingsProps}
     />
   );
 };
@@ -175,7 +159,6 @@ export const Default: Story = {
       selectedStorages.selectel,
     ],
     errorsFieldsBeforeSafe: {},
-    selectedThirdPartyAccount: mockThirdPartyAccounts[0],
     connectedThirdPartyAccount: {
       id: "amazon-123",
       title: "Amazon S3",
@@ -196,7 +179,6 @@ export const Default: Story = {
     setIsThirdStorageChanged: () => {},
     setThirdPartyAccountsInfo: async () => {},
     addValueInFormSettings: () => {},
-    setSelectedThirdPartyAccount: () => {},
     getStorageParams: () => [],
     saveToLocalStorage: () => {},
     setConnectedThirdPartyAccount: () => {},

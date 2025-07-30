@@ -967,7 +967,7 @@ class ContextOptionsStore {
   //             icon: SettingsReactSvgUrl,
   //             id: "manage-option",
   //             key: "manage-links",
-  //             label: t("Notifications:ManageNotifications"),
+  //             label: t("Common:ManageNotifications"),
   //             onClick: () => this.onShowInfoPanel(item, "info_members"),
   //           },
   //         ];

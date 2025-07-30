@@ -105,8 +105,8 @@ const ArticleBodyContent = (props) => {
 
       switch (folderId) {
         case recentFolderId: {
-          // TODO: Temp value. Change later
           const recentFilter = FilesFilter.getDefault({ isRecentFolder: true });
+          recentFilter.folder = folderId;
 
           if (userId) {
             const { sortBy, sortOrder } = getUserFilter(

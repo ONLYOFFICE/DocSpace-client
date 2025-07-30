@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import cloneDeep from "lodash/cloneDeep";
 
@@ -409,7 +408,7 @@ class PluginStore {
     name: string,
     status: boolean,
     settings: string,
-    t: TTranslation,
+    t?: TTranslation,
   ) => {
     try {
       let currentSettings = settings;
@@ -433,10 +432,10 @@ class PluginStore {
       if (typeof status !== "boolean") return plugin;
 
       if (status) {
-        toastr.success(t("Common:PluginEnabled"));
+        if (t) toastr.success(t("Common:PluginEnabled"));
         this.activatePlugin(name);
       } else {
-        toastr.success(t("Common:PluginDisabled"));
+        if (t) toastr.success(t("Common:PluginDisabled"));
         this.deactivatePlugin(name);
       }
 

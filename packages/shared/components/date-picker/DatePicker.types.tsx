@@ -53,4 +53,5 @@ export type DatePickerProps = {
   hideCross?: boolean;
   /** Automatically positions the calendar based on available space */
   autoPosition?: boolean;
+  testId?: string;
 };

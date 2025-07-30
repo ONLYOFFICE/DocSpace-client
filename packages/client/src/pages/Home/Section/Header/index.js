@@ -824,7 +824,7 @@ export default inject(
       getPublicKey,
     } = filesActionsStore;
 
-    const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
+    const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
 
     const {
       title,
@@ -1017,7 +1017,7 @@ export default inject(
 
       rootFolderId,
       displayAbout,
-      infoPanelRoom,
+      infoPanelRoom: infoPanelRoomSelection,
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,

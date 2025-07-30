@@ -92,6 +92,7 @@ export type TConfirmRouteContext = {
     key?: string;
     emplType?: string;
     email?: string;
+    encemail?: string;
     uid?: string;
     type?: string;
     first?: string;

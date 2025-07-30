@@ -216,8 +216,13 @@ export function changePassword(userId, passwordHash, key) {
   });
 }
 
-export async function changeEmail(userId: string, email: string, key: string) {
-  const data = { email };
+export async function changeEmail(
+  userId: string,
+  email: string,
+  encemail: string,
+  key: string,
+) {
+  const data = encemail ? { encemail } : { email };
 
   const res = (await request({
     method: "put",

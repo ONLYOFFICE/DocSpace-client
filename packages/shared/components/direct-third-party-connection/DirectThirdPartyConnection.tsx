@@ -28,7 +28,7 @@
 
 "use client";
 
-import { useReducer } from "react";
+import { Reducer, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
@@ -41,7 +41,7 @@ import { Text } from "../text";
 import { toastr } from "../toast";
 import { Button } from "../button";
 import { getOAuthToken } from "../../utils/common";
-import { ComboBox, ComboBoxSize } from "../combobox";
+import { ComboBox } from "../combobox";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
 import { DropDownItem } from "../drop-down-item";
@@ -55,10 +55,19 @@ import { useUnmount } from "../../hooks/useUnmount";
 import type { ConnectedThirdPartyAccountType } from "../../types";
 
 import { initialState } from "./DirectThirdPartyConnection.constants";
-import { DirectThirdPartyConnectionProps } from "./DirectThirdPartyConnection.types";
+import {
+  DirectThirdPartyConnectionState,
+  DirectThirdPartyConnectionProps,
+} from "./DirectThirdPartyConnection.types";
 import styles from "./DirectThirdPartyConnection.module.scss";
 
+const reducer: Reducer<
+  DirectThirdPartyConnectionState,
+  Partial<DirectThirdPartyConnectionState>
+> = (prevState, newState) => ({ ...prevState, ...newState });
+
 const DirectThirdPartyConnection = ({
+  className,
   openConnectWindow,
   onSelectFolder,
   isDisabled,
@@ -101,10 +110,7 @@ const DirectThirdPartyConnection = ({
   toDefault,
   checkCreating = false,
 }: DirectThirdPartyConnectionProps) => {
-  const [state, setState] = useReducer(
-    (prevState, newState) => ({ ...prevState, ...newState }),
-    initialState,
-  );
+  const [state, setState] = useReducer(reducer, initialState);
 
   const { t } = useTranslation(["Common"]);
 
@@ -298,7 +304,7 @@ const DirectThirdPartyConnection = ({
 
   return (
     <div
-      className={classNames(styles.directThirdPartyConnection, {
+      className={classNames(styles.directThirdPartyConnection, className, {
         [styles.isConnectedAccount]: isConnectedAccount,
         [styles.isMobileScale]: isMobileScale,
       })}
@@ -318,7 +324,6 @@ const DirectThirdPartyConnection = ({
           displaySelectedOption
           hideMobileView={false}
           forceCloseClickOutside
-          size={ComboBoxSize.content}
           className="thirdparty-combobox"
           advancedOptions={advancedOptions}
           isDisabled={isLoading}

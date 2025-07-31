@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/_z-index" as z;
 
 .userTitle {
   min-height: 80px;
@@ -41,7 +42,7 @@
   padding-block: 24px;
   padding-inline: 20px 0;
   background: var(--background-color);
-  z-index: 100;
+  z-index: z.$content;
 
   @include mixins.tablet-and-below {
     width: 440px;
@@ -117,7 +118,7 @@
       :global(.backdrop-active) {
         height: 100%;
         width: 100%;
-        z-index: 1000;
+        z-index: z.$backdrop;
       }
     }
 

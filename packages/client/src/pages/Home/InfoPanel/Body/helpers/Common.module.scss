@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 @use "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/_z-index" as z;
 
 @mixin text-overflow {
   white-space: pre-wrap;
@@ -107,7 +108,7 @@
   padding: 0 16px;
   border-radius: 0 0 6px 6px;
   background-color: var(--info-panel-background-color);
-  z-index: 101;
+  z-index: z.$floating-ui;
   box-shadow: var(--info-panel-box-shadow);
 
   @include mixins.tablet-and-below {
@@ -122,7 +123,7 @@
 .title {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: z.$sticky;
   padding-block: 24px;
   padding-inline: 20px 0;
   margin-inline-start: -20px;

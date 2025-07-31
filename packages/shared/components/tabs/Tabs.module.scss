@@ -214,7 +214,7 @@
 
     .tabText {
       color: var(--tabs-text-color-secondary);
-      z-index: 102;
+      z-index: z.$content;
     }
 
     &.selected {
@@ -223,7 +223,7 @@
       }
 
       .tabIcon {
-        z-index: 102;
+        z-index: z.$content;
         svg path {
           fill: var(--tabs-active-text-color-secondary);
         }
@@ -259,7 +259,7 @@
 }
 
 .tabIcon {
-  z-index: 99;
+  z-index: z.$content;
   min-width: 16px;
   min-height: 16px;
   max-width: 16px;
@@ -340,7 +340,7 @@
 .motionBackground {
   position: absolute;
   inset: 0;
-  z-index: 101;
+  z-index: z.$content;
   background-color: var(--tabs-active-background-color-secondary);
   height: 28px;
   border-radius: 3px;
@@ -348,7 +348,7 @@
 
 .arrowIcon {
   position: absolute;
-  z-index: 103;
+  z-index: z.$content;
   cursor: pointer;
   min-width: 24px;
   width: 32px;

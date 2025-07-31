@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+@use "@docspace/shared/styles/_z-index" as z;
+
 @mixin strike-through-styles {
   color: var(--info-panel-me-label-color);
   text-decoration: line-through;
@@ -38,7 +40,7 @@
   position: sticky;
   background: var(--info-panel-background-color);
   top: 80px;
-  z-index: 99;
+  z-index: z.$sticky;
 
   padding: 16px 0 12px;
   font-weight: 600;

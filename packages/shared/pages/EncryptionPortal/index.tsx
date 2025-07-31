@@ -34,7 +34,13 @@ import { PreparationPortalProgress } from "../../components/preparation-portal-p
 import ErrorContainer from "../../components/error-container/ErrorContainer";
 import PreparationPortalLoader from "../../skeletons/preparation-portal";
 
-import { getEncryptionProgress } from "../../api/settings";
+import { EncryptionStatus } from "../../enums";
+
+import {
+  getEncryptionProgress,
+  getEncryptionSettings,
+} from "../../api/settings";
+
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { returnToPortal } from "./EncryptionPortal.utils";
 import { EncryptionPortalProps } from "./EncryptionPortal.types";
@@ -50,6 +56,8 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
 
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const [statusEncryption, setStatusEncryption] =
+    useState<EncryptionStatus | null>(null);
 
   const getProgress = useCallback(async () => {
     const setMessage = (error?: unknown) => {
@@ -125,7 +133,21 @@ export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {
     getProgress();
   }, [ready, getProgress]);
 
-  const headerText = errorMessage ? t("Error") : t("EncryptionPortalTitle");
+  useEffect(() => {
+    if (typeof statusEncryption === "number") return;
+    const asyncFunction = async () => {
+      const encryptionSettings = await getEncryptionSettings();
+      setStatusEncryption(encryptionSettings.status);
+    };
+    asyncFunction();
+  }, [statusEncryption]);
+
+  const headerText = errorMessage
+    ? t("Error")
+    : statusEncryption === EncryptionStatus.Decrypted ||
+        statusEncryption === EncryptionStatus.DecryptionStarted
+      ? t("DecryptionPortalTitle")
+      : t("EncryptionPortalTitle");
 
   const componentBody = errorMessage ? (
     <Text

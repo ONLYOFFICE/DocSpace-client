@@ -85,6 +85,28 @@ const RecentRowDataComponent = (props) => {
         </StyledBadgesContainer>
       </TableCell>
 
+      {authorRecentColumnIsEnabled ? (
+        <TableCell
+          style={
+            !authorRecentColumnIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "AuthorRecent" ? "no-extra-space" : "",
+          )}
+        >
+          <AuthorCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
       {roomRecentColumnIsEnabled ? (
         <TableCell
           style={
@@ -122,28 +144,6 @@ const RecentRowDataComponent = (props) => {
           )}
         >
           <DateCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-
-      {authorRecentColumnIsEnabled ? (
-        <TableCell
-          style={
-            !authorRecentColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            lastColumn === "AuthorRecent" ? "no-extra-space" : "",
-          )}
-        >
-          <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />

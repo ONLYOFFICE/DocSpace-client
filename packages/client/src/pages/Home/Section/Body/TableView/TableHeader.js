@@ -408,6 +408,14 @@ class FilesTableHeader extends React.Component {
         minWidth: 210,
       },
       {
+        key: "AuthorRecent",
+        title: t("ByAuthor"),
+        enable: authorRecentColumnIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+      },
+      {
         key: "RoomRecent",
         title: t("Common:Room"),
         enable: roomRecentColumnIsEnabled,
@@ -422,14 +430,6 @@ class FilesTableHeader extends React.Component {
         resizable: true,
         sortBy: SortByFieldName.LastOpened,
         onClick: this.onFilter,
-        onChange: this.onColumnChange,
-      },
-      {
-        key: "AuthorRecent",
-        title: t("ByAuthor"),
-        enable: authorRecentColumnIsEnabled,
-        resizable: true,
-        sortBy: SortByFieldName.Author,
         onChange: this.onColumnChange,
       },
       {

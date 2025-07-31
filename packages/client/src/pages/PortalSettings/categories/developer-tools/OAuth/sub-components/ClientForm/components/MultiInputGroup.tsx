@@ -185,6 +185,7 @@ const MultiInputGroup = ({
         }
         isRequired
         isError={isError || hasError}
+        dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}
       >
         <StyledInputRow>
           <InputBlock
@@ -204,16 +205,18 @@ const MultiInputGroup = ({
             noIcon
             testId={`${dataTestId}_input`}
           />
-          <StyledInputAddBlock
-            ref={addRef}
-            onClick={onAddAction}
-            data-testid={`${dataTestId}_add_button`}
-          >
+          <StyledInputAddBlock ref={addRef} onClick={onAddAction}>
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>
               {value}
             </Text>
             <div className="add-block">
-              <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
+              <Text
+                dataTestId={dataTestId ? `${dataTestId}_add_button` : undefined}
+                fontSize="13px"
+                fontWeight={400}
+                lineHeight="20px"
+                truncate
+              >
                 {t("Common:AddButton")}
               </Text>
               <ArrowIcon />
@@ -222,12 +225,15 @@ const MultiInputGroup = ({
           <SelectorAddButton
             onClick={onAddAction}
             isDisabled={isDisabled || isError}
+            testId={
+              dataTestId ? `${dataTestId}_selector_add_button` : undefined
+            }
           />
         </StyledInputRow>
       </InputGroup>
 
       <StyledChipsContainer>
-        {currentValue.map((v) => (
+        {currentValue.map((v, i) => (
           <SelectedItem
             key={`${v}`}
             propKey={v}
@@ -238,7 +244,9 @@ const MultiInputGroup = ({
             onClose={() => {
               if (!isDisabled) onAdd(name as keyof IClientReqDTO, v, true);
             }}
-            dataTestId={`${dataTestId}_${v}`}
+            dataTestId={
+              dataTestId ? `${dataTestId}_selected_item_${i}` : undefined
+            }
           />
         ))}
       </StyledChipsContainer>

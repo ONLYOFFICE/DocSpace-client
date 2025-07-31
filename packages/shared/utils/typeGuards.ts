@@ -26,7 +26,7 @@
 import isNil from "lodash/isNil";
 
 import type { StaticImageData } from "../types";
-import type { TFile, TFolder } from "../api/files/types";
+import type { TFile, TFileLink, TFolder } from "../api/files/types";
 import type {
   ContextMenuModel,
   SeparatorType,
@@ -78,8 +78,8 @@ export const isRoom = (item: unknown): item is TRoom => {
   return (
     typeof item === "object" &&
     item !== null &&
-    "isRoom" in item &&
-    item.isRoom === true
+    (("isRoom" in item && item.isRoom === true) ||
+      ("roomType" in item && !isNil(item.roomType)))
   );
 };
 
@@ -90,5 +90,18 @@ export const isFile = (item: unknown): item is TFile => {
     (("isFile" in item && item.isFile === true) ||
       ("fileType" in item && !isNil(item.fileType)) ||
       ("fileExst" in item && !isNil(item.fileExst)))
+  );
+};
+
+export const isSharedLink = (item: unknown): item is TFileLink => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "sharedTo" in item &&
+    typeof item.sharedTo === "object" &&
+    item.sharedTo !== null &&
+    "shareLink" in item.sharedTo &&
+    "linkType" in item.sharedTo &&
+    !isNil(item.sharedTo.linkType)
   );
 };

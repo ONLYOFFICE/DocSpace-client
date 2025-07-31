@@ -382,7 +382,6 @@ const TemplateAccessSettingsPanel = ({
                 setInviteItems={setAccessItemsAction}
                 scrollAllPanelContent={scrollAllPanelContent}
                 isDisabled={isAvailable}
-                dataTestId="template_access_settings_items_list"
               />
             ) : null}
           </StyledBody>

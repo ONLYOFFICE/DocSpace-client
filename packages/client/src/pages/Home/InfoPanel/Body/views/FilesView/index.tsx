@@ -137,8 +137,6 @@ const FilesView = ({
       membersAbortController.current?.abort();
       shareAbortController.current?.abort();
 
-      console.log("fetch value");
-
       if (v === InfoPanelView.infoDetails) {
         setIsLoadingSuspense(false);
         setIsFirstLoadingSuspense(false);

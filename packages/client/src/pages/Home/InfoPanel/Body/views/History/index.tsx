@@ -44,6 +44,7 @@ import NoHistory from "../../sub-components/NoItem/NoHistory";
 import HistoryBlock from "./HistoryBlock";
 import styles from "./History.module.scss";
 import { useSocket } from "./hooks/useSocket";
+import { HistorySelectionProvider } from "./providers/HistorySelection.provider";
 
 export const getRelativeDateDay = (t: TTranslation, date: string) => {
   moment.locale(getCookie(LANGUAGE));
@@ -159,7 +160,7 @@ const History = ({
   if (!history.length && !(isLoading || isFirstLoading)) return <NoHistory />;
 
   return (
-    <>
+    <HistorySelectionProvider selection={infoPanelSelection}>
       <div className={styles.historyList} id="history-list-info-panel">
         {history.map(({ day, feeds }) => [
           <div className={styles.historySubtitle} key={day}>
@@ -175,7 +176,7 @@ const History = ({
         ])}
       </div>
       {isLoading ? <HistoryItemLoader /> : null}
-    </>
+    </HistorySelectionProvider>
   );
 };
 

@@ -31,10 +31,7 @@ import classNames from "classnames";
 import { Link } from "../../../../components/link";
 import { Text } from "../../../../components/text";
 
-import {
-  getTwoDotsReplacing,
-  parseUserStatistics,
-} from "../Standalone.helpers";
+import { getTwoDotsReplacing, parseLicenseQuota } from "../Standalone.helpers";
 import { IPaymentsProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";
 import UserStatisticsDialog from "../../../../dialogs/UserStatisticsDialog";
@@ -48,12 +45,14 @@ export const TariffTitleContainer = ({
   isDeveloper,
   logoText,
   docspaceFaqUrl,
-  license,
+  licenseQuota,
   openOnNewPage,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
-  const userStatistics = license ? parseUserStatistics(license) : null;
+  const userQuotaStatistics = licenseQuota
+    ? parseLicenseQuota(licenseQuota)
+    : null;
 
   const {
     isUserStatisticsVisible,
@@ -130,8 +129,8 @@ export const TariffTitleContainer = ({
                 license: isDeveloper
                   ? t("Common:DeveloperLicense")
                   : t("Common:EnterpriseLicense"),
-                editingCount: userStatistics?.editingCount ?? 0,
-                limit: userStatistics?.userLimit ?? 0,
+                editingCount: userQuotaStatistics?.totalConsumer ?? 0,
+                limit: userQuotaStatistics?.consumerQuotaLimit ?? 0,
               }}
               t={t}
               ns="Common"
@@ -141,6 +140,7 @@ export const TariffTitleContainer = ({
                     color="accent"
                     onClick={openUserStatistics}
                     fontWeight="600"
+                    dataTestId="open_user_statistics_link"
                   />
                 ),
               }}
@@ -157,7 +157,7 @@ export const TariffTitleContainer = ({
       <UserStatisticsDialog
         docspaceFaqUrl={docspaceFaqUrl}
         isVisible={isUserStatisticsVisible}
-        statistics={userStatistics}
+        statistics={userQuotaStatistics}
         onClose={closeUserStatistics}
         onDownloadAndReport={downloadAndOpenReport}
       />

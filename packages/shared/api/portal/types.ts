@@ -197,7 +197,7 @@ export type TDocServerLicense = {
 };
 
 export type TLicenseQuota = {
-  userQuota: Partial<TPaymentQuota["usersQuota"]>;
+  userQuota: Record<string, string>;
   license: TDocServerLicense;
 };
 

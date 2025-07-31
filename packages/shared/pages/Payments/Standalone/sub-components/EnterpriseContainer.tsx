@@ -48,7 +48,7 @@ export const EnterpriseContainer = ({
   isEnterprise,
   logoText,
   docspaceFaqUrl,
-  license,
+  licenseQuota,
   openOnNewPage,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
@@ -71,7 +71,7 @@ export const EnterpriseContainer = ({
         isDeveloper={isDeveloper}
         logoText={logoText}
         docspaceFaqUrl={docspaceFaqUrl}
-        license={license}
+        licenseQuota={licenseQuota}
         openOnNewPage={openOnNewPage}
       />
 

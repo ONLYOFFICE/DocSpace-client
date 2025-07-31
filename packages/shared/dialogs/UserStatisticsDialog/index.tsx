@@ -78,6 +78,7 @@ const UserStatisticsDialog = ({
               target={LinkTarget.blank}
               href={docspaceFaqUrl}
               fontWeight={600}
+              dataTestId="learn_how_counted_link"
             >
               {t("LearnHowItIsCounted")}
             </Link>
@@ -92,6 +93,7 @@ const UserStatisticsDialog = ({
           size={ButtonSize.normal}
           primary
           onClick={onDownloadAndReport}
+          testId="download_and_open_report_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

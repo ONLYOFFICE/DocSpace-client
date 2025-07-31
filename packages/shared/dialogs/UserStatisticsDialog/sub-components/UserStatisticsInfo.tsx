@@ -35,25 +35,30 @@ export const UserStatisticsInfo = ({
 }: TUserStatisticsInfoProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const { userLimit, usersCount, editingCount, externalCount } = statistics;
+  const {
+    consumerQuotaLimit,
+    docspaceConsumerCount,
+    externalConsumerCount,
+    totalConsumer,
+  } = statistics;
 
-  const percentEditing = Math.round((editingCount / userLimit) * 100);
+  const percentEditing = Math.round((totalConsumer / consumerQuotaLimit) * 100);
 
   const detailedEditInfo = () => {
-    const editUserCount = usersCount
+    const docspaceUserCount = docspaceConsumerCount
       ? t("EditUserCount", {
-          count: usersCount,
+          count: docspaceConsumerCount,
           productName: t("ProductName"),
         })
       : null;
 
-    const editExternalUserCount = externalCount
+    const externalUserCount = externalConsumerCount
       ? t("EditExternalUserCount", {
-          externalCount,
+          externalCount: externalConsumerCount,
         })
       : null;
 
-    const detailedInfo = [editUserCount, editExternalUserCount]
+    const detailedInfo = [docspaceUserCount, externalUserCount]
       .filter(Boolean)
       .map((item, index, arr) => {
         return index === arr.length - 1 ? item : `${item} / `;
@@ -73,7 +78,7 @@ export const UserStatisticsInfo = ({
           <Trans
             i18nKey="EditUserLimit"
             t={t}
-            values={{ limit: userLimit }}
+            values={{ limit: consumerQuotaLimit }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
         </Text>
@@ -82,9 +87,9 @@ export const UserStatisticsInfo = ({
             i18nKey="EditUserInfo"
             t={t}
             values={{
-              editingCount,
-              count: usersCount,
-              externalCount,
+              editingCount: totalConsumer,
+              count: docspaceConsumerCount,
+              externalCount: externalConsumerCount,
               productName: t("ProductName"),
             }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}

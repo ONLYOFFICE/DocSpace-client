@@ -34,7 +34,7 @@ import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
 import { toastr } from "@docspace/shared/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
-import { TDocServerLicense } from "@docspace/shared/api/portal/types";
+import { TLicenseQuota } from "@docspace/shared/api/portal/types";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
 
 const PaymentsPage = ({
@@ -46,7 +46,7 @@ const PaymentsPage = ({
   isEnterprise,
   logoText,
   docspaceFaqUrl,
-  license,
+  licenseQuota,
   filesSettings,
 }: {
   isTrial: boolean;
@@ -57,7 +57,7 @@ const PaymentsPage = ({
   isEnterprise: boolean;
   logoText: string;
   docspaceFaqUrl: string;
-  license: TDocServerLicense;
+  licenseQuota: TLicenseQuota;
   filesSettings: TFilesSettings;
 }) => {
   console.log(filesSettings);
@@ -132,7 +132,7 @@ const PaymentsPage = ({
       isEnterprise={isEnterprise}
       logoText={logoText}
       docspaceFaqUrl={docspaceFaqUrl}
-      license={license}
+      licenseQuota={licenseQuota}
       openOnNewPage={shouldOpenEditorInNewTab()}
     />
   );

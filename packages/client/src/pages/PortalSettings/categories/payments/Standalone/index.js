@@ -89,7 +89,7 @@ const StandalonePage = (props) => {
       paymentDate={paymentDate}
       isEnterprise={isEnterprise}
       docspaceFaqUrl={docspaceFaqUrl}
-      license={licenseQuota.license}
+      licenseQuota={licenseQuota}
       openOnNewPage={openOnNewPage}
     />
   );

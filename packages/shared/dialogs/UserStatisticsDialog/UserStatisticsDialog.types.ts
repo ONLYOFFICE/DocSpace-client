@@ -30,18 +30,18 @@ export type TUserStatisticsDialogProps = {
   isVisible: boolean;
   isLoading?: boolean;
   onClose: VoidFunction;
-  statistics: Nullable<TUserStatistics>;
+  statistics: Nullable<TUserQuotaStatistics>;
   onDownloadAndReport: VoidFunction;
   docspaceFaqUrl?: string;
 };
 
-export type TUserStatistics = {
-  userLimit: number;
-  editingCount: number;
-  externalCount: number;
-  usersCount: number;
+export type TUserQuotaStatistics = {
+  consumerQuotaLimit: number;
+  docspaceConsumerCount: number;
+  externalConsumerCount: number;
+  totalConsumer: number;
 };
 
 export type TUserStatisticsInfoProps = {
-  statistics: TUserStatistics;
+  statistics: TUserQuotaStatistics;
 };

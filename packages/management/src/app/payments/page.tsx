@@ -88,7 +88,6 @@ async function Page() {
   const { trial } = quota;
   const { enterprise, developer, dueDate, openSource } = portalTariff;
   const { salesEmail, buyUrl } = paymentSettings;
-  const { license } = licenseQuota;
 
   if (openSource) {
     const baseURL = await getBaseUrl();
@@ -107,7 +106,7 @@ async function Page() {
       isEnterprise={enterprise}
       logoText={logoText}
       docspaceFaqUrl={docspaceFaqUrl}
-      license={license}
+      licenseQuota={licenseQuota}
       filesSettings={filesSettings}
     />
   );

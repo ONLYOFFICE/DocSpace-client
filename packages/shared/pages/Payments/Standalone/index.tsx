@@ -48,7 +48,7 @@ export const StandalonePage = ({
   isEnterprise,
   logoText,
   docspaceFaqUrl,
-  license,
+  licenseQuota,
   openOnNewPage,
 }: IPaymentsProps) => {
   return (
@@ -64,7 +64,7 @@ export const StandalonePage = ({
           isEnterprise={isEnterprise}
           logoText={logoText}
           docspaceFaqUrl={docspaceFaqUrl}
-          license={license}
+          licenseQuota={licenseQuota}
           openOnNewPage={openOnNewPage}
         />
       ) : (
@@ -79,7 +79,7 @@ export const StandalonePage = ({
           isEnterprise={isEnterprise}
           logoText={logoText}
           docspaceFaqUrl={docspaceFaqUrl}
-          license={license}
+          licenseQuota={licenseQuota}
           openOnNewPage={openOnNewPage}
         />
       )}

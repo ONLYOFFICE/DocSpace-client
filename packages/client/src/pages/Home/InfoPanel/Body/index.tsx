@@ -120,7 +120,7 @@ const InfoPanelBodyContent = ({
     isRooms ? roomsView : fileView,
   );
 
-  const defferedCurrentView = React.useDeferredValue(currentView);
+  const deferredCurrentView = React.useDeferredValue(currentView);
 
   React.useEffect(() => {
     setCurrentView(isRooms ? roomsView : fileView);
@@ -164,7 +164,7 @@ const InfoPanelBodyContent = ({
         }
       >
         <FilesView
-          currentView={defferedCurrentView}
+          currentView={deferredCurrentView}
           selection={selection}
           isArchive={selection.rootFolderType === FolderType.Archive}
         />

@@ -820,3 +820,8 @@ export const enum LinkEntityType {
   FOLDER,
   ROOM,
 }
+
+export const enum ShareLinkType {
+  Internal = 0,
+  External = 1,
+}

@@ -108,7 +108,7 @@ const PluginSDK = ({
           scale
           label={t("GoToRepo")}
           size="small"
-          testId="go_to_repo_button"
+          testId={`${p.name}_go_to_repo_button`}
         />
       </div>
     ));

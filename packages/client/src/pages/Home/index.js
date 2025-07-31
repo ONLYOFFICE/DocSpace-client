@@ -37,6 +37,7 @@ import {
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/shared/components/section";
+import { insertEditorPreloadFrame } from "@docspace/shared/utils/common";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -53,7 +54,11 @@ import AccountsDialogs from "./Section/ContactsBody/Dialogs";
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
 
-import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
+import {
+  InfoPanelActions,
+  InfoPanelBodyContent,
+  InfoPanelHeaderContent,
+} from "./InfoPanel";
 
 import MediaViewer from "./MediaViewer";
 
@@ -165,6 +170,7 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    getDocumentServiceLocation,
 
     allowInvitingGuests,
     checkGuests,
@@ -316,6 +322,18 @@ const PureHome = (props) => {
     };
   }, []);
 
+  const insertEditorPreload = React.useCallback(async () => {
+    const { docServiceUrlApi } = await getDocumentServiceLocation();
+
+    if (docServiceUrlApi) {
+      insertEditorPreloadFrame(docServiceUrlApi);
+    }
+  }, []);
+
+  React.useLayoutEffect(() => {
+    insertEditorPreload();
+  }, [insertEditorPreload]);
+
   let sectionProps = {};
 
   if (isSettingsPage) {
@@ -428,6 +446,7 @@ const PureHome = (props) => {
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
       </SectionWrapper>
+      <InfoPanelActions />
     </>
   );
 };
@@ -549,7 +568,8 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
-    const { hideConfirmCancelOperation } = filesSettingsStore;
+    const { hideConfirmCancelOperation, getDocumentServiceLocation } =
+      filesSettingsStore;
     const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
@@ -709,6 +729,7 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+      getDocumentServiceLocation,
 
       allowInvitingGuests,
       checkGuests,

@@ -288,7 +288,8 @@
   height: 4px;
   bottom: 0px;
   border-radius: 4px 4px 0 0;
-  transition: transform 0.3s ease;
+  transform-origin: left;
+  transform: scaleX(1); // Default: fully filled
 
   &.primary {
     &.selected {
@@ -298,6 +299,34 @@
 
   &.secondary {
     display: none;
+  }
+
+  // Separate animation class
+  &.animated {
+    animation: fillWidth 1s ease-in-out infinite;
+    // Remove transition during animation to prevent conflicts
+    transition: none;
+  }
+
+  // Animation that finishes after one cycle
+  &.animatedFinishing {
+    animation: fillWidth 1s ease-in-out 1 forwards;
+    // Remove transition during animation to prevent conflicts
+    transition: none;
+  }
+
+  // Apply transition only when not animating
+  &:not(.animated) {
+    transition: transform 0.3s ease;
+  }
+}
+
+@keyframes fillWidth {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 

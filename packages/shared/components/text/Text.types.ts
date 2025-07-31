@@ -83,6 +83,8 @@ export type TextProps = {
   containerWidth?: string;
   /** Used in container component */
   containerMinWidth?: string;
+  /** Test id */
+  dataTestId?: string;
 };
 
 export type StyledTextProps = {

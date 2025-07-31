@@ -34,7 +34,7 @@ import { useTranslation } from "react-i18next";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import ManualBackup from "@docspace/shared/pages/manual-backup";
+import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { TariffState } from "@docspace/shared/enums";
 
 import type {

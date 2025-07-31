@@ -207,87 +207,87 @@ const files = [
   },
 ];
 
+const current = {
+  parentId: 0,
+  filesCount: 36,
+  foldersCount: 2,
+  new: 0,
+  mute: false,
+  pinned: false,
+  private: false,
+  indexing: false,
+  denyDownload: false,
+  fileEntryType: 1,
+  id: 5,
+  rootFolderId: 5,
+  canShare: false,
+  security: {
+    Read: true,
+    Create: true,
+    Delete: false,
+    EditRoom: false,
+    Rename: false,
+    CopyTo: true,
+    Copy: false,
+    MoveTo: true,
+    Move: false,
+    Pin: false,
+    Mute: false,
+    EditAccess: false,
+    Duplicate: false,
+    Download: false,
+    CopySharedLink: false,
+    Reconnect: false,
+    CreateRoomFrom: false,
+    CopyLink: false,
+    Embed: false,
+    ChangeOwner: false,
+    IndexExport: false,
+  },
+  title: "Documents",
+  access: 0,
+  shared: false,
+  created: "2025-01-20T12:23:49.0000000+01:00",
+  createdBy: {
+    id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+    displayName: "Administrator ",
+    avatar: "/static/images/default_user_photo_size_82-82.png?hash=1976880553",
+    avatarOriginal:
+      "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+    avatarMax:
+      "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+    avatarMedium:
+      "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
+    avatarSmall:
+      "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
+    profileUrl: "",
+    hasAvatar: false,
+    isAnonim: false,
+  },
+  updated: "2025-01-29T21:22:32.0000000+01:00",
+  rootFolderType: 5,
+  updatedBy: {
+    id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
+    displayName: "Administrator ",
+    avatar: "/static/images/default_user_photo_size_82-82.png?hash=1976880553",
+    avatarOriginal:
+      "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+    avatarMax:
+      "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
+    avatarMedium:
+      "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
+    avatarSmall:
+      "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
+    profileUrl: "",
+    hasAvatar: false,
+    isAnonim: false,
+  },
+};
+
 const folder = {
   files,
   folders: [],
-  current: {
-    parentId: 0,
-    filesCount: 36,
-    foldersCount: 2,
-    new: 0,
-    mute: false,
-    pinned: false,
-    private: false,
-    indexing: false,
-    denyDownload: false,
-    fileEntryType: 1,
-    id: 5,
-    rootFolderId: 5,
-    canShare: false,
-    security: {
-      Read: true,
-      Create: true,
-      Delete: false,
-      EditRoom: false,
-      Rename: false,
-      CopyTo: true,
-      Copy: false,
-      MoveTo: true,
-      Move: false,
-      Pin: false,
-      Mute: false,
-      EditAccess: false,
-      Duplicate: false,
-      Download: false,
-      CopySharedLink: false,
-      Reconnect: false,
-      CreateRoomFrom: false,
-      CopyLink: false,
-      Embed: false,
-      ChangeOwner: false,
-      IndexExport: false,
-    },
-    title: "Documents",
-    access: 0,
-    shared: false,
-    created: "2025-01-20T12:23:49.0000000+01:00",
-    createdBy: {
-      id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
-      displayName: "Administrator ",
-      avatar:
-        "/static/images/default_user_photo_size_82-82.png?hash=1976880553",
-      avatarOriginal:
-        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
-      avatarMax:
-        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
-      avatarMedium:
-        "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl: "",
-      hasAvatar: false,
-      isAnonim: false,
-    },
-    updated: "2025-01-29T21:22:32.0000000+01:00",
-    rootFolderType: 5,
-    updatedBy: {
-      id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
-      displayName: "Administrator ",
-      avatar:
-        "/static/images/default_user_photo_size_82-82.png?hash=1976880553",
-      avatarOriginal:
-        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
-      avatarMax:
-        "/static/images/default_user_photo_size_200-200.png?hash=1976880553",
-      avatarMedium:
-        "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl: "",
-      hasAvatar: false,
-      isAnonim: false,
-    },
-  },
+  current,
   pathParts: [
     {
       id: 5,
@@ -300,12 +300,28 @@ const folder = {
   new: 0,
 };
 
+const emptyFolder = {
+  files: [],
+  folders: [],
+  current,
+  pathParts: [
+    {
+      id: 5,
+      title: "Documents",
+    },
+  ],
+  startIndex: 0,
+  count: 0,
+  total: 0,
+  new: 0,
+};
+
 export const createGetFolderInfoHandler = () =>
   http.get(folderInfoUrl, async () => {
     return HttpResponse.json({ response: folderInfo });
   });
 
-export const createGetFolderHandler = () =>
+export const createGetFolderHandler = (isEmpty?: boolean) =>
   http.get(folderUrl, async () => {
-    return HttpResponse.json({ response: folder });
+    return HttpResponse.json({ response: isEmpty ? emptyFolder : folder });
   });

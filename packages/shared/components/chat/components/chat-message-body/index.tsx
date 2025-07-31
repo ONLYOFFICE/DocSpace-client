@@ -84,14 +84,11 @@ const ChatMessageBody = ({
     setIsScrolled(false);
   }, [currentChat]);
 
-  // Scroll to bottom whenever messages change
   useEffect(() => {
     if (isEmpty) return;
 
     if (isScrolled) return;
 
-    // Use requestAnimationFrame to ensure the DOM has been updated
-    // Method 1: Use the scrollbar instance if available
     requestAnimationFrame(() => {
       if (scrollbarRef.current?.scrollToBottom) {
         scrollbarRef.current.scrollToBottom();
@@ -115,14 +112,15 @@ const ChatMessageBody = ({
 
   const onScroll = (e: React.UIEvent<HTMLDivElement>) => {
     if (
-      e.currentTarget.clientHeight + e.currentTarget.scrollTop ===
+      e.currentTarget.scrollTop + e.currentTarget.clientHeight ===
       chatBodyRef.current?.offsetHeight
     ) {
       setIsScrolled(false);
+    } else {
+      setIsScrolled(true);
     }
 
     if (e.currentTarget.scrollTop < 500 + e.currentTarget.clientHeight) {
-      // setIsScrolled(true);
       fetchNextMessages();
     }
 

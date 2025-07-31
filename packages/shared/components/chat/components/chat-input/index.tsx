@@ -34,6 +34,7 @@ import { InfoPanelEvents } from "../../../../enums";
 import { RectangleSkeleton } from "../../../../skeletons";
 
 import { Textarea } from "../../../textarea";
+import { Text } from "../../../text";
 
 import { useMessageStore } from "../../store/messageStore";
 import { useChatStore } from "../../store/chatStore";
@@ -223,6 +224,9 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
         toggleToolsSettings={toggleMcpTools}
         forwardedRef={toolSettingsRef}
       />
+      <Text fontSize="10px" fontWeight={400} className={styles.chatInputText}>
+        AI Chat can make mistakes. Check important info.
+      </Text>
     </>
   );
 };

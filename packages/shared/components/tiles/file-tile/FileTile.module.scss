@@ -65,7 +65,7 @@
 
   &:hover:not(.isDragging),
   &:hover:not(.isEdit) {
-    :global(.badges) :global(.badge) {
+    :global(.badges) :global(.copy-link) {
       opacity: 1;
       pointer-events: auto;
     }
@@ -77,7 +77,7 @@
   }
 
   &:not(:hover) {
-    :global(.badge) {
+    :global(.copy-link) {
       opacity: 0;
       transition: opacity 0.1s;
       pointer-events: none;

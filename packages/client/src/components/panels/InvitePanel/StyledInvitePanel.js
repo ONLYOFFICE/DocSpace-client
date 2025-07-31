@@ -90,7 +90,9 @@ const StyledInvitePanel = styled.div`
   }
 `;
 
-const ScrollList = styled.div`
+const ScrollList = styled.div.attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   position: absolute;
 
   width: 100%;
@@ -160,7 +162,9 @@ const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
     `};
 `;
 
-const StyledRow = styled.div`
+const StyledRow = styled.div.attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   display: grid;
   grid-template-columns: ${(props) =>
     props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
@@ -254,7 +258,9 @@ const StyledInviteInput = styled.div`
   }
 `;
 
-const StyledEditInput = styled(TextInput)`
+const StyledEditInput = styled(TextInput).attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   height: 32px;
 `;
 
@@ -425,7 +431,9 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
-const StyledEditButton = styled(Button)`
+const StyledEditButton = styled(Button).attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   width: 32px !important;
   height: 32px !important;
   padding: 0px !important;
@@ -449,7 +457,10 @@ const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   ${iconStyles}
 `;
 
-const StyledDeleteIcon = styled(DeleteIcon).attrs(injectDefaultTheme)`
+const StyledDeleteIcon = styled(DeleteIcon).attrs((props) => ({
+  ...injectDefaultTheme(props),
+  "data-testid": props.dataTestId,
+}))`
   cursor: pointer;
 
   ${iconStyles}
@@ -473,7 +484,9 @@ const StyledButtons = styled.div.attrs(injectDefaultTheme)`
   border-top: ${(props) => props.theme.filesPanels.sharing.borderTop};
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link).attrs((props) => ({
+  "data-testid": props.dataTestId,
+}))`
   float: inline-end;
 `;
 

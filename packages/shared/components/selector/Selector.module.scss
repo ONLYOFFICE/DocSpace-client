@@ -494,6 +494,14 @@
     cursor: pointer;
   }
 
+  &.isSystem {
+    .userAvatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
   &.disabled {
     .itemLogo,
     .userAvatar {

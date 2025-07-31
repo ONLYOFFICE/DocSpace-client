@@ -236,6 +236,14 @@
     min-height: 32px;
   }
 
+  &.isSystem {
+    :global(.avatar) {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
   :global(.user_body-wrapper) {
     overflow: auto;
 

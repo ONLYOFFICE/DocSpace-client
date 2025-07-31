@@ -327,6 +327,7 @@ const ThirdPartyComboBox = ({
           size="small"
           label={t("Common:Connect")}
           onClick={onShowService}
+          testId="create_edit_room_thirdparty_connect"
         />
       </div>
     </StyledStorageLocation>

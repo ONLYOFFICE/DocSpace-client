@@ -462,6 +462,7 @@ const SetRoomParams = ({
           }
           onKeyUp={onKeyUp}
           isAutoFocussed
+          dataTestId="create_edit_room_input"
         />
       </div>
 
@@ -473,6 +474,7 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
         onFocus={() => setForceHideRoomTypeDropdown(true)}
         onBlur={() => setForceHideRoomTypeDropdown(false)}
+        dataTestId="create_edit_room_tags_input"
         tooltipLabel={
           isTemplateSelected || isTemplate ? t("Files:RoomTagsTooltip") : ""
         }

@@ -334,11 +334,18 @@ const InfoDialog = ({
                 lineHeight="16px"
                 fontWeight="600"
                 truncate
+                dataTestId="client_info_last_modified"
               >
                 {t("LastModified")}
               </Text>
 
-              <Text fontSize="13px" lineHeight="20px" fontWeight="600" truncate>
+              <Text
+                fontSize="13px"
+                lineHeight="20px"
+                fontWeight="600"
+                truncate
+                dataTestId="client_info_modified"
+              >
                 {modifiedDate}
               </Text>
             </>

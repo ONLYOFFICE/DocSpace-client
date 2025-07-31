@@ -96,6 +96,7 @@ export type SeparatorType = {
   disableColor?: string;
   isLoader?: boolean;
   style?: React.CSSProperties;
+  dataTestId?: string;
 };
 
 export type HeaderType =

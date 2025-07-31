@@ -357,6 +357,7 @@ const InfoDialog = ({
                 fontWeight="600"
                 noSelect
                 truncate
+                dataTestId="client_info_last_modified"
               >
                 {t("LastModified")}
               </Text>
@@ -367,6 +368,7 @@ const InfoDialog = ({
                 fontWeight="600"
                 noSelect
                 truncate
+                dataTestId="client_info_modified"
               >
                 {modifiedDate}
               </Text>

@@ -2351,12 +2351,12 @@
 }
 
 .light {
-  --settings-coommon-description-color: #{$light-gray-dark};
+  --settings-common-description-color: #{$light-gray-dark};
   --settings-common-white-label-paid-badge-bg: #{$favorites-status};
 }
 
 .dark {
-  --settings-coommon-description-color: #{$gray-dark};
+  --settings-common-description-color: #{$gray-dark};
   --settings-common-white-label-paid-badge-bg: #{$favorite-status-dark};
 }
 
@@ -2380,6 +2380,7 @@
   --settings-common-white-label-green-bg-color: 1px solid #{$gray-strong};
   --settings-common-white-label-not-available-background: #{$gray-light};
   --settings-common-white-label-text-color: #{$black};
+  --settings-common-backup-rectangle-bg-color: #{$gray-light};
 }
 
 .dark {
@@ -2389,6 +2390,7 @@
   --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
   --settings-common-white-label-not-available-background: #{$gray-dark};
   --settings-common-white-label-text-color: #{$white};
+  --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
 }
 
 .light {
@@ -2587,6 +2589,18 @@
 }
 .dark {
   --icon-button-color: #{$gray-dark};
+}
+
+.light {
+  --settings-backup-warning-color: #{$light-error-status};
+  --settings-backup-checked-list-item-bg: #{$light-gray-hover};
+  --settings-backup-text-color: #{$gray};
+}
+
+.dark {
+  --settings-backup-warning-color: #{$dark-error-status};
+  --settings-backup-checked-list-item-bg: #{$light-dark-gray-hover};
+  --settings-backup-text-color: #{$dark-gray-dark};
 }
 
 .light {

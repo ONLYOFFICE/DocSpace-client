@@ -24,9 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { FC } from "react";
 import { inject, observer } from "mobx-react";
 
 import Share from "@docspace/shared/components/share";
+import { ShareProps } from "@docspace/shared/components/share/Share.types";
+
+interface ExternalShareProps
+  extends Pick<ShareProps, "infoPanelSelection" | "fileLinkProps"> {}
 
 export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   const selfId = userStore.user?.id ?? "";
@@ -59,4 +64,4 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
     setEditLinkPanelIsVisible,
     setEmbeddingPanelData,
   };
-})(observer(Share));
+})(observer(Share as FC<ExternalShareProps>));

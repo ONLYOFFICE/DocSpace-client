@@ -124,11 +124,13 @@ const Share = (props: ShareProps) => {
     try {
       requestRunning.current = true;
 
-      const res = isFolder
-        ? await getExternalFolderLinks(infoPanelSelection.id)
-        : (await getExternalLinks(infoPanelSelection.id)).items;
+      const getExternalLinksMethod = isFolder
+        ? getExternalFolderLinks
+        : getExternalLinks;
 
-      setFileLinks(res);
+      const res = await getExternalLinksMethod(infoPanelSelection.id);
+
+      setFileLinks(res.items);
     } catch (error) {
       console.error(error);
       setFileLinks([]);

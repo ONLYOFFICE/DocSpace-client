@@ -34,6 +34,7 @@ import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrol
 import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
+import { isFolder, isRoom } from "@docspace/shared/utils/typeGuards";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
@@ -105,6 +106,7 @@ const FilesView = ({
     abortController: shareAbortController,
   } = useShare({
     id: selection.id?.toString() || "",
+    isFolder: isFolder(selection),
   });
 
   const scrollContext = React.use(ScrollbarContext);
@@ -285,7 +287,7 @@ const FilesView = ({
     }
 
     if (value === InfoPanelView.infoShare) {
-      if (!("fileExst" in selection)) return null;
+      if (isRoom(selection)) return null;
 
       return <Share infoPanelSelection={selection} fileLinkProps={filesLink} />;
     }

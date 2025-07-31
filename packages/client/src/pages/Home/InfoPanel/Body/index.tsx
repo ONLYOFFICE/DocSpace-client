@@ -30,6 +30,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
@@ -102,7 +103,7 @@ const InfoPanelBodyContent = ({
   const isGuests = contactsTab === "guests";
   const isUsers = contactsTab === "inside_group" || contactsTab === "people";
 
-  const isRoom = selection && "expired" in selection && "external" in selection;
+  const isRoom = isRoomUtil(selection);
   const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
 
   const isRoot = isFolder && selection?.id === selection?.rootFolderId;
@@ -117,14 +118,14 @@ const InfoPanelBodyContent = ({
     (isRoot && !isGallery);
 
   const [currentView, setCurrentView] = React.useState(
-    isRooms ? roomsView : fileView,
+    isRoom ? roomsView : fileView,
   );
 
   const deferredCurrentView = React.useDeferredValue(currentView);
 
   React.useEffect(() => {
-    setCurrentView(isRooms ? roomsView : fileView);
-  }, [isRooms, roomsView, fileView]);
+    setCurrentView(isRoom ? roomsView : fileView);
+  }, [isRoom, roomsView, fileView]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;

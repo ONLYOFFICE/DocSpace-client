@@ -40,10 +40,10 @@ import {
 } from "@docspace/shared/components/share/Share.helpers";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
-  getPrimaryLink,
   editExternalLink,
   addExternalLink,
   getPrimaryLinkIfNotExistCreate,
+  getOrCreatePrimaryFolderLink,
 } from "@docspace/shared/api/files";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
@@ -349,12 +349,11 @@ class InfoPanelStore {
 
     const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
 
-    if (value && file.isForm) {
+    if (file.isForm) {
       value.access = ShareAccessRights.Editing;
     }
 
     if (
-      value &&
       !file.isForm &&
       file.fileType === FileType.PDF &&
       (value.access === ShareAccessRights.Editing ||
@@ -365,18 +364,25 @@ class InfoPanelStore {
 
     const { getFileInfo } = this.filesStore;
 
-    const res = await (value
-      ? getPrimaryLinkIfNotExistCreate(
-          fileId,
-          value.access,
-          value.internal,
-          getExpirationDate(value.diffExpirationDate),
-        )
-      : getPrimaryLink(fileId));
+    const res = await getPrimaryLinkIfNotExistCreate(
+      fileId,
+      value.access,
+      value.internal,
+      getExpirationDate(value.diffExpirationDate),
+    );
 
     await getFileInfo(fileId);
 
     return res;
+  };
+
+  getPrimaryFolderLink = async (folderId: number) => {
+    return getOrCreatePrimaryFolderLink(
+      folderId,
+      DEFAULT_CREATE_LINK_SETTINGS.access,
+      DEFAULT_CREATE_LINK_SETTINGS.internal,
+      DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
+    );
   };
 
   editFileLink: ShareProps["editFileLink"] = async (

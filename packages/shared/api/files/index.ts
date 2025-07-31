@@ -1510,15 +1510,17 @@ export async function getExternalFolderLinks(
   fileId: number | string,
   startIndex = 0,
   count = 50,
+  signal?: AbortSignal,
 ) {
   const linkParams = `?startIndex=${startIndex}&count=${count}`;
 
-  const res = await request({
+  const res = await request<TFileLink[]>({
     method: "get",
     url: `files/folder/${fileId}/links${linkParams}`,
+    signal,
   });
 
-  return res as TFileLink[];
+  return { items: res! };
 }
 
 export async function getPrimaryLink(fileId: number) {
@@ -1548,7 +1550,7 @@ export async function getOrCreatePrimaryFolderLink(
   folderId: number | string,
   access: ShareAccessRights,
   internal: boolean,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | null,
 ) {
   const res = (await request({
     method: "post",

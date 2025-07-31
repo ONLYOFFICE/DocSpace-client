@@ -88,9 +88,7 @@ export type MembersProps = {
   setExternalLinks?: PublicRoomStore["setExternalLinks"];
   setPublicRoomKey?: PublicRoomStore["setPublicRoomKey"];
 
-  setLinkParams?: DialogsStore["setLinkParams"];
   setAccessSettingsIsVisible?: DialogsStore["setTemplateAccessSettingsVisible"];
-  setEditLinkPanelIsVisible?: DialogsStore["setEditLinkPanelIsVisible"];
 
   getPrimaryLink?: FilesStore["getPrimaryLink"];
 

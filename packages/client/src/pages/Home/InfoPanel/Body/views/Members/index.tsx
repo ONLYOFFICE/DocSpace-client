@@ -49,6 +49,7 @@ import {
   LINKS_LIMIT_COUNT,
 } from "@docspace/shared/constants";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { createExternalLink } from "@docspace/shared/api/rooms";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
@@ -88,8 +89,6 @@ const Members = ({
   primaryLink,
 
   additionalLinks,
-  setLinkParams,
-  setEditLinkPanelIsVisible,
   getPrimaryLink,
   setExternalLink,
 
@@ -122,8 +121,14 @@ const Members = ({
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
-      setLinkParams!({ roomId: infoPanelSelection!.id, isEdit: false });
-      setEditLinkPanelIsVisible!(true);
+      const roomId = infoPanelSelection!.id;
+
+      try {
+        await createExternalLink(roomId);
+      } catch (error) {
+        toastr.error(error as Error);
+        console.error(error);
+      }
     } else {
       getPrimaryLink!(infoPanelSelection!.id).then((link) => {
         setExternalLink!(link, searchParams, setSearchParams, isCustomRoom);
@@ -220,6 +225,7 @@ const Members = ({
             isPublicRoomType={isPublicRoom!}
             isFormRoom={isFormRoom!}
             isCustomRoom={isCustomRoom!}
+            item={infoPanelSelection}
           />,
         );
       }
@@ -235,6 +241,7 @@ const Members = ({
               isPublicRoomType={isPublicRoom!}
               isFormRoom={isFormRoom!}
               isCustomRoom={isCustomRoom!}
+              item={infoPanelSelection}
             />,
           );
         });
@@ -437,11 +444,8 @@ export default inject(
       publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const {
-      setLinkParams,
-      setEditLinkPanelIsVisible,
-      setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
-    } = dialogsStore;
+    const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
+      dialogsStore;
 
     const { id } = selectedFolderStore;
 
@@ -468,8 +472,6 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks,
-      setLinkParams,
-      setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
 

@@ -88,7 +88,6 @@ const RoomsItemHeader = ({
   setInvitePanelOptions,
   setCoverSelection,
   setQuotaWarningDialogVisible,
-  roomsView,
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,

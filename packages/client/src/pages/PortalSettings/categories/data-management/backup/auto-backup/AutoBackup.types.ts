@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TFolder } from "@docspace/shared/api/files/types";
-import type { AutomaticBackupProps } from "@docspace/shared/pages/auto-backup/AutoBackup.types";
+import type { AutomaticBackupProps } from "@docspace/shared/pages/backup/auto-backup/AutoBackup.types";
 import type { TTranslation } from "@docspace/shared/types";
 
 export type ExternalAutoBackupWrapperProps = Pick<

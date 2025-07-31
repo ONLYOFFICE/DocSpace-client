@@ -1489,7 +1489,7 @@ class FilesStore {
         ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
         : this.categoryType === CategoryType.SharedRoom
           ? `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`
-          : folderId === "recent"
+          : this.categoryType === CategoryType.Recent
             ? `${FILTER_RECENT}=${this.userStore.user?.id}`
             : +folderId === recycleBinFolderId
               ? `${FILTER_TRASH}=${this.userStore.user?.id}`

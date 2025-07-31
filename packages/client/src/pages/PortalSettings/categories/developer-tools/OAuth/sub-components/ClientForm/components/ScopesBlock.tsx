@@ -197,7 +197,7 @@ const ScopesBlock = ({
                   value.read?.name,
                 )
               }
-              dataTestId="scope_read_checkbox"
+              dataTestId={`${key}_read_checkbox`}
             />
           </StyledScopesCheckbox>
           <StyledScopesCheckbox>
@@ -212,7 +212,7 @@ const ScopesBlock = ({
                     value.write?.name,
                   )
                 }
-                dataTestId="scope_write_checkbox"
+                dataTestId={`${key}_write_checkbox`}
               />
             ) : null}
           </StyledScopesCheckbox>

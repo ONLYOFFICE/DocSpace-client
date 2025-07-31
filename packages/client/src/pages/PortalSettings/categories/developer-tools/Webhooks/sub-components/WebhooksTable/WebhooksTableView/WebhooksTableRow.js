@@ -179,6 +179,7 @@ const WebhooksTableRow = (props) => {
                 source={avatarSource}
                 className="author-avatar-cell"
                 role="user"
+                dataTestId={`avatar_${webhook.name}`}
               />
             ) : null}
             <Text
@@ -186,6 +187,7 @@ const WebhooksTableRow = (props) => {
               fontWeight={600}
               title={webhook.createdBy?.displayName}
               truncate
+              dataTestId={`author_name_${webhook.name}`}
             >
               {webhook.createdBy?.displayName}
             </Text>
@@ -206,6 +208,7 @@ const WebhooksTableRow = (props) => {
         </TableCell>
         <TableCell>
           <ToggleButton
+            dataTestId={`toggle_button_${webhook.name}`}
             className="toggle toggleButton"
             id="toggle id"
             isChecked={isChecked}

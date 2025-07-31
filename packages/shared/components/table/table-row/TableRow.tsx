@@ -59,6 +59,7 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
+    dataTestId,
     contextMenuTestId,
   } = props;
 
@@ -104,7 +105,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid="table-row"
+      data-testid={dataTestId ?? "table-row"}
     >
       {children}
       {isIndexEditingMode ? null : (

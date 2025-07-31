@@ -323,6 +323,7 @@ const TemplateAccessSettingsPanel = ({
           onClick={onCloseAccessSettings}
           isFill
           isClickable
+          dataTestId="template_access_settings_back_button"
         />
         <Text
           fontSize="21px"
@@ -339,6 +340,7 @@ const TemplateAccessSettingsPanel = ({
           onClick={onClosePanels}
           isClickable
           isStroke
+          dataTestId="template_access_settings_close_button"
         />
       </StyledTemplateAccessSettingsHeader>
       <Scrollbar>
@@ -351,6 +353,7 @@ const TemplateAccessSettingsPanel = ({
                 className="invite-via-link"
                 isChecked={isAvailable}
                 onChange={onAvailableChange}
+                dataTestId="template_access_settings_available"
               />
             </StyledSubHeader>
             <StyledDescription>
@@ -379,6 +382,7 @@ const TemplateAccessSettingsPanel = ({
                 setInviteItems={setAccessItemsAction}
                 scrollAllPanelContent={scrollAllPanelContent}
                 isDisabled={isAvailable}
+                dataTestId="template_access_settings_items_list"
               />
             ) : null}
           </StyledBody>
@@ -394,6 +398,7 @@ const TemplateAccessSettingsPanel = ({
           primary
           label={t("Common:SaveButton")}
           onClick={onSubmit}
+          testId="template_access_settings_save_button"
         />
         <Button
           className="cancel-button"
@@ -402,6 +407,7 @@ const TemplateAccessSettingsPanel = ({
           isDisabled={isLoading}
           onClick={onCloseAccessSettings}
           label={t("Common:CancelButton")}
+          testId="template_access_settings_footer_cancel_button"
         />
       </StyledTemplateAccessSettingsFooter>
     </StyledTemplateAccessSettingsContainer>
@@ -444,6 +450,7 @@ const TemplateAccessSettingsPanel = ({
                 className="invite-via-link"
                 isChecked={isAvailable}
                 onChange={onAvailableChange}
+                dataTestId="template_access_settings_modal_available"
               />
             </StyledSubHeader>
             <StyledDescription>
@@ -486,6 +493,7 @@ const TemplateAccessSettingsPanel = ({
           primary
           label={t("Common:SaveButton")}
           type="submit"
+          testId="template_access_settings_modal_save_button"
         />
         <Button
           className="cancel-button"
@@ -494,6 +502,7 @@ const TemplateAccessSettingsPanel = ({
           isDisabled={isLoading}
           onClick={onClose}
           label={t("Common:CancelButton")}
+          testId="template_access_settings_modal_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -63,8 +63,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const { shared } = item;
 
-  const locked = "locked" in item ? item.locked : undefined;
-
   const isTile = viewAs === "tile";
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;

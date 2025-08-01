@@ -37,7 +37,6 @@ import {
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/shared/components/section";
-import { insertEditorPreloadFrame } from "@docspace/shared/utils/common";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -170,7 +169,6 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
-    getDocumentServiceLocation,
 
     allowInvitingGuests,
     checkGuests,
@@ -321,18 +319,6 @@ const PureHome = (props) => {
       window.removeEventListener("popstate", onClickBack);
     };
   }, []);
-
-  const insertEditorPreload = React.useCallback(async () => {
-    const { docServiceUrlApi } = await getDocumentServiceLocation();
-
-    if (docServiceUrlApi) {
-      insertEditorPreloadFrame(docServiceUrlApi);
-    }
-  }, []);
-
-  React.useLayoutEffect(() => {
-    insertEditorPreload();
-  }, [insertEditorPreload]);
 
   let sectionProps = {};
 
@@ -568,8 +554,7 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
-    const { hideConfirmCancelOperation, getDocumentServiceLocation } =
-      filesSettingsStore;
+    const { hideConfirmCancelOperation } = filesSettingsStore;
     const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
@@ -729,7 +714,6 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
-      getDocumentServiceLocation,
 
       allowInvitingGuests,
       checkGuests,

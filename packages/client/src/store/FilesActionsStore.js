@@ -2193,7 +2193,7 @@ class FilesActionStore {
           key: "show-info",
           label: t("Common:Info"),
           iconUrl: InfoOutlineReactSvgUrl,
-          onClick: showInfoPanel(),
+          onClick: showInfoPanel,
         };
       case "copy":
         if (!this.isAvailableOption("copy")) return null;

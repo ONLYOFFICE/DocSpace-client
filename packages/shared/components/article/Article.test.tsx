@@ -145,8 +145,16 @@ describe("Article", () => {
     expect(screen.getByTestId("article-dev-tools")).toBeInTheDocument();
   });
 
-  it("hides dev tools when user is not admin", () => {
-    renderComponent({ isAdmin: false });
+  it("hides dev tools when user is visitor", () => {
+    renderComponent({ user: { isVisitor: true } });
+    expect(screen.queryByTestId("article-dev-tools")).not.toBeInTheDocument();
+  });
+
+  it("hides dev tools when user is not admin and limitedAccessDevToolsForUsers is true", () => {
+    renderComponent({
+      user: { isAdmin: false },
+      limitedAccessDevToolsForUsers: true,
+    });
     expect(screen.queryByTestId("article-dev-tools")).not.toBeInTheDocument();
   });
 

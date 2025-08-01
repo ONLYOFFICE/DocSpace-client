@@ -366,10 +366,8 @@
   }
 }
 
-:global {
-  .section-filter {
-    user-select: none;
-  }
+.filter {
+  user-select: none;
 }
 
 .isFixed {

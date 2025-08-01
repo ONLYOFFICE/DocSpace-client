@@ -60,7 +60,6 @@ const PaymentsPage = ({
   licenseQuota: TLicenseQuota;
   filesSettings: TFilesSettings;
 }) => {
-  console.log(filesSettings);
   const { t } = useTranslation("Common");
   const router = useRouter();
 
@@ -75,6 +74,7 @@ const PaymentsPage = ({
       window.navigator.userAgent.includes("ZoomApps")
     )
       return false;
+
     return !filesSettings.openEditorInSameTab;
   };
 

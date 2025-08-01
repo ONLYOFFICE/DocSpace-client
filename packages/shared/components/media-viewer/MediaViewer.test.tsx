@@ -41,9 +41,14 @@ import { MediaViewerProps } from "./MediaViewer.types";
 import { NextButton } from "./sub-components/Buttons/NextButton";
 import { PrevButton } from "./sub-components/Buttons/PrevButton";
 
-jest.mock("../../utils/common", () => ({
-  getFileExtension: jest.fn((filename) => filename.split(".").pop()),
-}));
+jest.mock("../../utils/common", () => {
+  const originalModule = jest.requireActual("../../utils/common");
+
+  return {
+    ...originalModule,
+    getFileExtension: jest.fn((filename) => filename.split(".").pop()),
+  };
+});
 
 jest.mock("./sub-components/ViewerWrapper", () => ({
   ViewerWrapper: jest.fn(

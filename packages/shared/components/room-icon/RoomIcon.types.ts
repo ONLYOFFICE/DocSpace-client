@@ -44,8 +44,8 @@ export type TModel = { label: string; icon: string } & (
       onClick: () => void;
     }
   | {
-      key: "upload";
-      onClick: (ref?: React.RefObject<Nullable<HTMLDivElement>>) => void;
+      key: "create_edit_room_upload";
+      onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) => void;
     }
 );
 

@@ -119,7 +119,7 @@ const RoomIcon = ({
       {model?.map((option) => {
         const optionOnClickAction = () => {
           setOpenLogoEdit(false);
-          if (option.key === "upload") {
+          if (option.key === "create_edit_room_upload") {
             return option.onClick(inputFilesElement);
           }
           option.onClick();

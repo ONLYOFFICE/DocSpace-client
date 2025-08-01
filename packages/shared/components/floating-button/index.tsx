@@ -53,22 +53,30 @@ import { FloatingButtonIcons } from "./FloatingButton.enums";
 import styles from "./FloatingButton.module.scss";
 
 const ICON_COMPONENTS = {
-  [FloatingButtonIcons.upload]: <UploadIcon />,
-  [FloatingButtonIcons.other]: <FileIcon />,
-  [FloatingButtonIcons.trash]: <TrashIcon />,
-  [FloatingButtonIcons.move]: <MoveIcon />,
-  [FloatingButtonIcons.plus]: <PlusIcon />,
-  [FloatingButtonIcons.minus]: <MinusIcon />,
-  [FloatingButtonIcons.refresh]: <RefreshIcon />,
-  [FloatingButtonIcons.duplicate]: <DuplicateIcon />,
-  [FloatingButtonIcons.exportIndex]: <ExportRoomIndexIcon />,
-  [FloatingButtonIcons.dots]: <HorizontalDotsIcon />,
-  [FloatingButtonIcons.arrow]: <ArrowIcon />,
-  [FloatingButtonIcons.deletePermanently]: <DeletePermanentlyIcon />,
-  [FloatingButtonIcons.copy]: <CopyIcon />,
-  [FloatingButtonIcons.download]: <DownloadIcon />,
-  [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon />,
-  [FloatingButtonIcons.backup]: <BackupIcon />,
+  [FloatingButtonIcons.upload]: <UploadIcon data-testid="icon-upload" />,
+  [FloatingButtonIcons.other]: <FileIcon data-testid="icon-other" />,
+  [FloatingButtonIcons.trash]: <TrashIcon data-testid="icon-trash" />,
+  [FloatingButtonIcons.move]: <MoveIcon data-testid="icon-move" />,
+  [FloatingButtonIcons.plus]: <PlusIcon data-testid="icon-plus" />,
+  [FloatingButtonIcons.minus]: <MinusIcon data-testid="icon-minus" />,
+  [FloatingButtonIcons.refresh]: <RefreshIcon data-testid="icon-refresh" />,
+  [FloatingButtonIcons.duplicate]: (
+    <DuplicateIcon data-testid="icon-duplicate" />
+  ),
+  [FloatingButtonIcons.exportIndex]: (
+    <ExportRoomIndexIcon data-testid="icon-exportIndex" />
+  ),
+  [FloatingButtonIcons.dots]: <HorizontalDotsIcon data-testid="icon-dots" />,
+  [FloatingButtonIcons.arrow]: <ArrowIcon data-testid="icon-arrow" />,
+  [FloatingButtonIcons.deletePermanently]: (
+    <DeletePermanentlyIcon data-testid="icon-deletePermanently" />
+  ),
+  [FloatingButtonIcons.copy]: <CopyIcon data-testid="icon-copy" />,
+  [FloatingButtonIcons.download]: <DownloadIcon data-testid="icon-download" />,
+  [FloatingButtonIcons.markAsRead]: (
+    <MarkAsReadIcon data-testid="icon-markAsRead" />
+  ),
+  [FloatingButtonIcons.backup]: <BackupIcon data-testid="icon-backup" />,
 } as const;
 
 const FloatingButton = ({

@@ -89,19 +89,19 @@ describe("FloatingButton", () => {
 
   it("renders different icons correctly", () => {
     Object.values(FloatingButtonIcons).forEach((icon) => {
-      const { container } = renderComponent(
-        <FloatingButton {...defaultProps} icon={icon} />,
-      );
-      const iconElement = container.querySelector(`[data-icon="${icon}"]`);
+      renderComponent(<FloatingButton {...defaultProps} icon={icon} />);
+
+      const iconElement = screen.getByTestId(`icon-${icon}`);
       expect(iconElement).toBeInTheDocument();
     });
   });
 
-  it("clears upload history when clearUploadedFilesHistory is called", () => {
+  it("calls clearUploadedFilesHistory after close icon click", () => {
     const clearUploadedFilesHistory = jest.fn();
     renderComponent(
       <FloatingButton
         {...defaultProps}
+        showCancelButton
         clearUploadedFilesHistory={clearUploadedFilesHistory}
       />,
     );

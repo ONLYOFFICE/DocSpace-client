@@ -421,6 +421,22 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
       : t("Common:ChooseExpirationDate");
   };
 
+  const getDisableDownloadText = () => {
+    if (isRoom(item)) {
+      return t("Common:PreventDownloadFilesAndFolders");
+    }
+
+    if (isFile(item)) {
+      return t("Common:PreventDownloadFile");
+    }
+
+    if (isFolder(item)) {
+      return t("Common:PreventDownloadFolder");
+    }
+
+    return t("Common:PreventDownloadFilesAndFolders");
+  };
+
   useEffect(() => {
     if (!passwordSettings) {
       getPasswordSettings();
@@ -527,7 +543,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
               <ToggleBlock
                 isLoading={isLoading}
                 headerText={t("Common:DisableDownload")}
-                bodyText={t("Common:PreventDownloadFilesAndFolders")}
+                bodyText={getDisableDownloadText()}
                 isChecked={denyDownload || disabledDenyDownload}
                 onChange={onDenyDownloadChange}
                 isDisabled={disabledDenyDownload}

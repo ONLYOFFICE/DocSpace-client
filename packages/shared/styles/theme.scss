@@ -2437,6 +2437,18 @@
 }
 
 .light {
+  --encryption-portal-text: #{$gray};
+  --encryption-portal-error: #{$light-error-status};
+  --encryption-portal-body-text: #{$gray};
+}
+
+.dark {
+  --encryption-portal-text: #{$gray};
+  --encryption-portal-error: #{$dark-error-status};
+  --encryption-portal-body-text: #{$gray-dark};
+}
+
+.light {
   --modal-dialog-resolve-color: #{$gray};
 }
 

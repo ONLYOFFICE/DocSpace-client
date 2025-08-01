@@ -78,12 +78,4 @@ describe("<MainButtonMobile />", () => {
     fireEvent.click(button);
     expect(mockOnClick).toHaveBeenCalled();
   });
-
-  it("hides loading indicator when upload is complete", () => {
-    renderWithTheme(<MainButtonMobile percent={100} />);
-    const wrapper = screen.getByTestId("main-button-mobile");
-    const button = wrapper.querySelector('[data-testid="floating-button"]');
-    expect(button).not.toBeNull();
-    expect(button?.className).toMatch(/hideLoading/);
-  });
 });

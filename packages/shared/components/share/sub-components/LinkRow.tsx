@@ -69,7 +69,6 @@ const LinkRow = ({
   isFolder = false,
   isFormRoom = false,
   isRoomsLink = false,
-  isPublicRoom = false,
   isPrimaryLink = false,
   isArchiveFolder = false,
   getData,
@@ -150,6 +149,7 @@ const LinkRow = ({
     const linkTitle = shareOption.label;
 
     const isLoaded = loadingLinks.includes(link.sharedTo.id);
+    const canEditInternal = link.canEditInternal;
 
     return (
       <div className={className} key={link.sharedTo.id}>
@@ -162,7 +162,7 @@ const LinkRow = ({
           <LinkTypeSelector
             isLoaded={isLoaded}
             linkTitle={linkTitle}
-            isPublicRoom={isPublicRoom}
+            canEditInternal={canEditInternal}
             isExpiredLink={isExpiredLink}
             onSelect={(item) => changeShareOption(item, link)}
             selectedOption={shareOption}

@@ -67,7 +67,9 @@ describe("<SelectorAddButton />", () => {
       <SelectorAddButton {...baseProps} className="test-class" />,
     );
 
-    expect(screen.getByTestId("selector-add-button")).toHaveClass("test-class");
+    expect(screen.getByTestId("selector-add-button-container")).toHaveClass(
+      "test-class",
+    );
   });
 
   it("accepts style", () => {

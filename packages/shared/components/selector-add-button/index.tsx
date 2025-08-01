@@ -91,7 +91,10 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     : style;
 
   return (
-    <div className={containerClassName}>
+    <div
+      data-testid="selector-add-button-container"
+      className={containerClassName}
+    >
       <div
         {...rest}
         id={id}

@@ -556,6 +556,7 @@ const SetRoomParams = ({
             disableImageRescaling={disableImageRescaling}
             visible={roomParams.icon.uploadedFile}
             maxImageSize={maxImageUploadSize}
+            dataTestId="create_edit_room_avatar_editor"
           />
         ) : null}
       </div>

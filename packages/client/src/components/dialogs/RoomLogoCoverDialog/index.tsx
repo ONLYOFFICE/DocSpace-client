@@ -282,6 +282,7 @@ const RoomLogoCoverDialog = ({
       scrollBodyHeight={scrollBodyHeight}
       withBodyScrollForcibly={!!scrollBodyHeight}
       isScrollLocked={openColorPicker}
+      dataTestId="room_logo_cover_dialog"
     >
       <ModalDialog.Header>{t("RoomLogoCover:RoomCover")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -309,6 +310,7 @@ const RoomLogoCoverDialog = ({
           size={ButtonSize.normal}
           label={t("Common:ApplyButton")}
           onClick={handleSubmit}
+          testId="room_logo_cover_apply_button"
         />
         <Button
           scale
@@ -316,6 +318,7 @@ const RoomLogoCoverDialog = ({
           onClick={onCloseRoomLogo}
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
+          testId="room_logo_cover_cancel_button"
         />
       </ModalDialog.Footer>
     </StyledModalDialog>

@@ -366,6 +366,12 @@
   }
 }
 
+:global {
+  .section-filter {
+    user-select: none;
+  }
+}
+
 .isFixed {
   position: sticky;
   top: 61px;

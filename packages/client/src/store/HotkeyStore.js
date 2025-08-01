@@ -136,7 +136,7 @@ class HotkeyStore {
       return e;
 
     const isDefaultKeys =
-      ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
+      ["PageUp", "PageDown", "Home", "End", "KeyV"].indexOf(e.code) > -1;
 
     const { selection: s, hotkeyCaret, filesList } = this.filesStore;
     const selection = s.length ? s : filesList;

@@ -55,7 +55,7 @@ const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
 const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
 const DEFAULT_APPLY_FILTER_OPTION: ApplyFilterOption | null = null;
 const DEFAULT_EXTENSION: string | null = null;
-const DEFAULT_SEARCH_AREA: number | null = 3;
+const DEFAULT_SEARCH_AREA: number | null = null;
 const DEFAULT_KEY: string | null = null;
 const DEFAULT_LOCATION: FilterLocation | null = null;
 

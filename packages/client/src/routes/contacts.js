@@ -26,8 +26,6 @@
 
 import { Navigate } from "react-router";
 
-import componentLoader from "@docspace/shared/utils/component-loader";
-
 import {
   GUESTS_ROUTE,
   GUESTS_ROUTE_WITH_FILTER,
@@ -41,7 +39,7 @@ import {
 } from "SRC_DIR/helpers/contacts";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 
-import { FilesView } from "SRC_DIR/pages/Home/View/Files";
+import { ViewComponent } from "SRC_DIR/pages/Home/View";
 
 export const contanctsRoutes = [
   {
@@ -84,7 +82,7 @@ export const contanctsRoutes = [
     path: PEOPLE_ROUTE_WITH_FILTER,
     element: (
       <PrivateRoute restricted withManager>
-        <FilesView />
+        <ViewComponent />
       </PrivateRoute>
     ),
   },
@@ -100,7 +98,7 @@ export const contanctsRoutes = [
     path: GROUPS_ROUTE_WITH_FILTER,
     element: (
       <PrivateRoute restricted withManager>
-        <FilesView />
+        <ViewComponent />
       </PrivateRoute>
     ),
   },
@@ -116,7 +114,7 @@ export const contanctsRoutes = [
     path: INSIDE_GROUP_ROUTE_WITH_FILTER,
     element: (
       <PrivateRoute restricted withManager>
-        <FilesView />
+        <ViewComponent />
       </PrivateRoute>
     ),
   },
@@ -132,7 +130,7 @@ export const contanctsRoutes = [
     path: GUESTS_ROUTE_WITH_FILTER,
     element: (
       <PrivateRoute restricted withManager>
-        <FilesView />
+        <ViewComponent />
       </PrivateRoute>
     ),
   },

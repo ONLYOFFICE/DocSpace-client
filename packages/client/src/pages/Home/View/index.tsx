@@ -36,12 +36,12 @@ import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import { SectionBodyContent } from "../Section";
 import { ContactsSectionBodyContent } from "../Section";
 
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 type ViewProps = UseContactsProps & {
   setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
@@ -174,7 +174,7 @@ const View = ({
       <Consumer>
         {(context) =>
           context.sectionWidth &&
-          (isContactsPage ? (
+          (currentView === "users" || currentView === "groups" ? (
             <ContactsSectionBodyContent
               sectionWidth={context.sectionWidth}
               currentView={currentView}
@@ -188,7 +188,7 @@ const View = ({
   );
 };
 
-export const FilesView = inject(
+export const ViewComponent = inject(
   ({
     peopleStore,
     treeFoldersStore,

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useRef } from "react";
 import classNames from "classnames";
 
 import { TableCellProps } from "../../Table.types";
@@ -39,6 +39,8 @@ const TableCell = (props: TableCellProps) => {
     hasAccess,
     children,
     value,
+    dataTestId,
+    index,
   } = props;
 
   const classes = classNames(
@@ -51,9 +53,12 @@ const TableCell = (props: TableCellProps) => {
     },
   );
 
+  const cellTestId =
+    dataTestId || (index !== undefined ? `table_cell_${index}` : "table-cell");
+
   return (
     <div
-      data-testid="table-cell"
+      data-testid={cellTestId}
       className={classes}
       ref={forwardedRef}
       style={style}

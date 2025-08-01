@@ -141,6 +141,7 @@ export interface TableRowProps {
   dragging?: boolean;
   dataTestId?: string;
   contextMenuTestId?: string;
+  rowIndex?: number; // Add rowIndex for automatic testid generation
 }
 
 export interface TableCellProps {
@@ -151,6 +152,8 @@ export interface TableCellProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   value?: string;
+  dataTestId?: string;
+  index?: number; // Optional index for generating indexed data-testid
 }
 
 export type TGroupMenuItem = {

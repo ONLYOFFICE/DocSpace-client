@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import classNames from "classnames";
 
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
@@ -61,10 +61,21 @@ const TableRow = (props: TableRowProps) => {
     contextMenuCellStyle,
     dataTestId,
     contextMenuTestId,
+    rowIndex,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<HTMLDivElement | null>(null);
+
+  const rowTestId = useMemo(() => {
+    if (dataTestId) return dataTestId;
+
+    if (rowIndex !== undefined) {
+      return `table-row-${rowIndex}`;
+    }
+
+    return "table-row";
+  }, [dataTestId, rowIndex]);
 
   const onContextMenu = (e: React.MouseEvent) => {
     fileContextClick?.(e.button === 2);
@@ -105,7 +116,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid={dataTestId ?? "table-row"}
+      data-testid={rowTestId}
     >
       {children}
       {isIndexEditingMode ? null : (

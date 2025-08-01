@@ -34,24 +34,18 @@ import GroupsFilter from "@docspace/shared/api/groups/filter";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { TContactsTab } from "SRC_DIR/helpers/contacts";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
-type UseContactsProps = {
+export type UseContactsProps = {
   isContactsPage: boolean;
-  contactsView: TContactsTab;
 
   setContactsTab: UsersStore["setContactsTab"];
 
-  setIsLoading: (
-    param: boolean,
-    withoutTimer?: boolean,
-    withHeaderLoader?: boolean,
-  ) => void;
   scrollToTop: FilesStore["scrollToTop"];
   setSelectedNode: TreeFoldersStore["setSelectedNode"];
 
@@ -65,11 +59,9 @@ type UseContactsProps = {
 
 const useContacts = ({
   isContactsPage,
-  contactsView,
 
   setContactsTab,
 
-  setIsLoading,
   scrollToTop,
   setSelectedNode,
 
@@ -84,13 +76,12 @@ const useContacts = ({
   const location = useLocation();
   const { t } = useTranslation(["Common"]);
 
-  React.useEffect(() => {
+  const fetchContacts = React.useCallback(async () => {
     if (!isContactsPage) return setContactsTab(false);
 
     if (showGuestReleaseTip) setGuestReleaseTipDialogVisible(true);
 
-    setIsLoading(true);
-    setContactsTab(contactsView);
+    const contactsView = getContactsView(location);
 
     const isInsideGroup = contactsView === "inside_group";
     const isGuests = contactsView === "guests";
@@ -106,6 +97,8 @@ const useContacts = ({
         const newFilter = GroupsFilter.getFilter(location)!;
 
         await getGroups(newFilter, true, true);
+
+        return "groups";
       } else {
         const newFilter = Filter.getFilter(location)!;
 
@@ -121,15 +114,19 @@ const useContacts = ({
           getUsersList(newFilter, true, true),
           groupId && isInsideGroup ? updateCurrentGroup(groupId) : null,
         ]);
-      }
 
-      scrollToTop();
-      setIsLoading(false);
+        return "users";
+      }
     };
 
-    getList();
+    const view = await getList();
+
+    setContactsTab(contactsView);
+
+    scrollToTop();
+
+    return view;
   }, [
-    contactsView,
     isContactsPage,
     setContactsTab,
     groupId,
@@ -138,12 +135,13 @@ const useContacts = ({
     getUsersList,
     updateCurrentGroup,
     scrollToTop,
-    setIsLoading,
     setSelectedNode,
     t,
     showGuestReleaseTip,
     setGuestReleaseTipDialogVisible,
   ]);
+
+  return { fetchContacts };
 };
 
 export default useContacts;

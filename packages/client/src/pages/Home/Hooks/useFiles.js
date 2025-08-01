@@ -39,21 +39,12 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { toastr } from "@docspace/shared/components/toast";
 
 const useFiles = ({
-  t,
-
-  dragging,
-  setDragging,
-  disableDrag,
-  createFoldersTree,
-  startUpload,
-
   fetchFiles,
   fetchRooms,
   setIsLoading,
@@ -72,7 +63,6 @@ const useFiles = ({
   setIsUpdatingRowItem,
 
   gallerySelected,
-  folderSecurity,
   userId,
 
   scrollToTop,
@@ -116,27 +106,6 @@ const useFiles = ({
     filter.searchArea = searchArea;
 
     navigate(`${url}?${filter.toUrlParams()}`);
-  };
-
-  const onDrop = (files, uploadToFolder) => {
-    if (
-      folderSecurity &&
-      hasOwnProperty(folderSecurity, "Create") &&
-      !folderSecurity.Create
-    )
-      return;
-
-    dragging && setDragging(false);
-
-    if (disableDrag) return;
-
-    createFoldersTree(t, files, uploadToFolder)
-      .then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
-      })
-      .catch((err) => {
-        toastr.error(err, null, 0, true);
-      });
   };
 
   React.useEffect(() => {
@@ -259,8 +228,6 @@ const useFiles = ({
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }
-
-        // console.warn("Filter restored by default", err);
       })
       .then((data) => {
         newFilter = data[0];
@@ -312,8 +279,6 @@ const useFiles = ({
         setIsLoading(false);
       });
   }, [isContactsPage, isSettingsPage, location.pathname, location.search]);
-
-  return { onDrop };
 };
 
 export default useFiles;

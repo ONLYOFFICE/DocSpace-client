@@ -46,6 +46,7 @@ import Users from "./Users";
 import Groups from "./Groups";
 
 type SectionBodyContentProps = {
+  currentView: string;
   isUsersLoading?: UsersStore["isUsersLoading"];
   selectUser?: UsersStore["selectUser"];
   setPeopleSelection?: UsersStore["setSelection"];
@@ -68,6 +69,7 @@ type SectionBodyContentProps = {
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
   const {
+    currentView,
     setPeopleSelection,
     setGroupsSelection,
     setPeopleBufferSelection,
@@ -89,8 +91,6 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   } = props;
 
   const location = useLocation();
-
-  const contactsTab = getContactsView(location);
 
   useAccountsHotkeys({
     enabledHotkeys: enabledHotkeys!,
@@ -159,7 +159,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     return () => window.removeEventListener("mousedown", onMouseDown);
   }, [onMouseDown, getTfaType]);
 
-  return contactsTab !== "groups" ? <Users /> : <Groups />;
+  return currentView !== "groups" ? <Users /> : <Groups />;
 };
 
 export default inject(

@@ -51,8 +51,6 @@ const PureAccountsItem = ({
       filesController?.abort();
       roomsController?.abort();
       onClick && onClick(e, "accounts");
-
-      setContactsTab("people");
     },
     [onClick, filesController, roomsController],
   );

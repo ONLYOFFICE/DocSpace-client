@@ -194,13 +194,6 @@ const ArticleBodyContent = (props) => {
           !window.location.pathname.includes("groups")
         : !!selectedFolderId;
 
-      if (isAccountsClick) {
-        clearFiles();
-        setContactsTab("people");
-      } else {
-        setContactsTab(false);
-      }
-
       setHashDate(getHashDate);
 
       setSelection?.([]);

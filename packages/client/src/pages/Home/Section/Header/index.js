@@ -172,16 +172,15 @@ const SectionHeaderContent = (props) => {
     isPersonalReadOnly,
     showTemplateBadge,
     allowInvitingMembers,
+    contactsTab,
   } = props;
 
   const location = useLocation();
-  const { groupId } = useParams();
 
-  const contactsView = getContactsView(location);
+  const contactsView = contactsTab;
   const isContactsPage = !!contactsView;
   const isContactsGroupsPage = contactsView === "groups";
-  const isContactsInsideGroupPage =
-    contactsView === "inside_group" && !!groupId;
+  const isContactsInsideGroupPage = contactsView === "inside_group";
 
   const addButtonRefCallback = React.useCallback(
     (ref) => {
@@ -893,7 +892,7 @@ export default inject(
     const { getContactsModel, contactsCanCreate } =
       peopleStore.contextOptionsStore;
 
-    const { setSelected: setUsersSelected } = usersStore;
+    const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
@@ -1028,6 +1027,7 @@ export default inject(
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
       allowInvitingMembers,
+      contactsTab,
     };
   },
 )(

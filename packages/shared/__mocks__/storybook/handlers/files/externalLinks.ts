@@ -53,6 +53,7 @@ const generateFileLink = ({
 } = {}): TFileLink => {
   return {
     access,
+    canEditInternal: true,
     sharedTo: {
       id,
       title,

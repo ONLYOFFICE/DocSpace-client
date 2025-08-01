@@ -97,8 +97,6 @@ const Share = (props: ShareProps) => {
 
   const mountedRef = useRef(true);
 
-  console.log({ infoPanelSelection });
-
   const [visibleBar, setVisibleBar] = useLocalStorage(
     `document-bar-${selfId}`,
     true,

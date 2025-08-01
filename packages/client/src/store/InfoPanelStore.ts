@@ -305,7 +305,7 @@ class InfoPanelStore {
     this.roomsView =
       view === InfoPanelView.infoShare ? InfoPanelView.infoMembers : view;
     this.fileView =
-      view === InfoPanelView.infoMembers ? InfoPanelView.infoDetails : view;
+      view === InfoPanelView.infoMembers ? InfoPanelView.infoShare : view;
     this.isScrollLocked = false;
   };
 

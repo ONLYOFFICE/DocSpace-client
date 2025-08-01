@@ -24,23 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-undef */
-importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/6.3.0/workbox-sw.js",
-);
-
-workbox.setConfig({
-  debug: false,
-});
-
-// This will trigger the importScripts() for workbox.strategies and its dependencies:
-const { precacheAndRoute, cleanupOutdatedCaches } = workbox.precaching;
-const { setCacheNameDetails, clientsClaim } = workbox.core;
-const { registerRoute } = workbox.routing;
-const { googleFontsCache, imageCache, offlineFallback } = workbox.recipes;
-const { StaleWhileRevalidate } = workbox.strategies;
+import { precacheAndRoute, cleanupOutdatedCaches } from "workbox-precaching";
+import { setCacheNameDetails, clientsClaim } from "workbox-core";
+import { registerRoute } from "workbox-routing";
+import { googleFontsCache, imageCache, offlineFallback } from "workbox-recipes";
+import { StaleWhileRevalidate } from "workbox-strategies";
 
 // SETTINGS
 
@@ -48,7 +36,6 @@ const { StaleWhileRevalidate } = workbox.strategies;
 clientsClaim();
 
 // PRECACHING
-
 const prefix = "docspace";
 
 // Setting custom cache name
@@ -56,15 +43,10 @@ setCacheNameDetails({
   prefix,
   precache: "precache",
   runtime: "runtime",
-  suffix: "v1.0.0",
+  suffix: "v3.2.0",
 });
 
-// We inject manifest here using "workbox-build" in workbox-inject.js
-const precachRoutes = self.__WB_MANIFEST;
-
-precacheAndRoute(precachRoutes);
-
-// Remove cache from the previous WB versions
+precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 // STATIC RESOURCES

@@ -75,7 +75,12 @@
     "ts-pattern": "5.5.0",
     "utif": "3.1.0",
     "windows-iana": "5.1.0",
-    "workbox-window": "6.6.0",
+    "workbox-core": "7.3.0",
+    "workbox-precaching": "7.3.0",
+    "workbox-recipes": "7.3.0",
+    "workbox-routing": "7.3.0",
+    "workbox-strategies": "7.3.0",
+    "workbox-window": "7.3.0",
     "zoom-level": "2.5.0"
   },
   "devDependencies": {

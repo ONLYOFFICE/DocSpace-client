@@ -32,6 +32,6 @@ window.SW = {
   unregister: unregisterSW,
 };
 
-export { unregisterSW as registerSW, unregisterSW };
+export { registerSW, unregisterSW };
 // TODO: Replace 'unregisterSW as registerSW' to 'registerSW' when sw.js is needed
 // export { registerSW, unregisterSW };

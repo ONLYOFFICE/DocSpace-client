@@ -89,7 +89,6 @@
     "ts-pattern": "5.5.0",
     "utif": "3.1.0",
     "windows-iana": "5.1.0",
-    "workbox-window": "6.6.0",
     "zoom-level": "2.5.0"
   },
   "devDependencies": {

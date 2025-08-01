@@ -85,13 +85,13 @@ i18n
 // };
 
 function register() {
-  if (
+  /*   if (
     process.env.NODE_ENV !== "production" &&
     !("serviceWorker" in navigator)
   ) {
     console.log("SKIP registerSW because of DEV mode");
     return;
-  }
+  } */
 
   const wb = new Workbox(`/sw.js`);
 

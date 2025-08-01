@@ -1478,3 +1478,11 @@ export const insertEditorPreloadFrame = (docServiceUrl: string) => {
     appendIframe();
   }
 };
+
+export function buildDataTestId(
+  dataTestId: string | undefined,
+  suffix: string,
+): string | undefined {
+  if (!dataTestId) return undefined;
+  return `${dataTestId}_${suffix}`;
+}

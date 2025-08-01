@@ -48,6 +48,7 @@ jest.mock("../../utils/socket", () => ({
 // Mock the settings API
 jest.mock("../../api/settings", () => ({
   getEncryptionProgress: jest.fn().mockResolvedValue(50),
+  getEncryptionSettings: jest.fn().mockResolvedValue({ status: 1 }),
 }));
 
 // Mock the utils

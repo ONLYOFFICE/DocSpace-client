@@ -133,6 +133,7 @@ describe("<CompanyInfo />", () => {
       defaultProps.companySettings.email,
       defaultProps.companySettings.phone,
       defaultProps.companySettings.site,
+      !defaultProps.displayAbout,
     );
   });
 

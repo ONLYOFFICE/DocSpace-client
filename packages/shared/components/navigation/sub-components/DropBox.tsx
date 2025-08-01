@@ -160,7 +160,7 @@ const DropBox = ({
         />
 
         <VariableSizeList
-          direction={interfaceDirection as Direction}
+          direction={interfaceDirection}
           height={dropBoxHeight}
           width="auto"
           itemCount={countItems}

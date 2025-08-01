@@ -70,6 +70,7 @@ const AvatarPure = ({
   noClick = false,
   isNotIcon = false,
   imgClassName = "",
+  dataTestId,
 }: AvatarProps) => {
   const { isRTL } = useInterfaceDirection();
   const { isBase } = useTheme();
@@ -210,7 +211,7 @@ const AvatarPure = ({
         onMouseDown={onMouseDown}
         onClick={onClick || onClickAvatar}
         ref={iconRef}
-        data-testid="avatar"
+        data-testid={dataTestId ?? "avatar"}
       >
         <div
           className={classNames(styles.avatarWrapper, className)}

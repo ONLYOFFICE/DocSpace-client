@@ -379,7 +379,7 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Heading>
-          {arrayOfParams[0] !== "payments" ? (
+          {arrayOfParams[0] !== "payments" && arrayOfParams.length < 3 ? (
             <div className="tariff-bar">
               <TariffBar />
             </div>

@@ -55,6 +55,7 @@ import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
@@ -320,7 +321,6 @@ const InviteInput = ({
 
   const getItemContent = (item) => {
     const {
-      avatar,
       displayName,
       name: groupName,
       email,
@@ -328,11 +328,18 @@ const InviteInput = ({
       shared,
       isGroup = false,
       status,
+      isSystem,
     } = item;
 
     const isDisabled = status === EmployeeStatus.Disabled;
 
     item.access = selectedAccess;
+
+    const avatar = item.avatar
+      ? item.avatar
+      : isSystem
+        ? EveryoneIconUrl
+        : null;
 
     const addUser = () => {
       if (isDisabled) {
@@ -381,7 +388,7 @@ const InviteInput = ({
           source={avatar}
           userName={groupName}
           isGroup={isGroup}
-          className={isDisabled ? "avatar-disabled" : ""}
+          className={isDisabled ? "avatar-disabled" : "item-avatar"}
         />
         <div className="list-item_content">
           <div className="list-item_content-box">

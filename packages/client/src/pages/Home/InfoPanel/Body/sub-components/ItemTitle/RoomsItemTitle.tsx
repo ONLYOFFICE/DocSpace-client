@@ -180,8 +180,6 @@ const RoomsItemHeader = ({
     setCoverSelection?.(selection);
   }, [setCoverSelection, selection]);
 
-  console.log(isRoomMembersPanel);
-
   return (
     <div
       className={classNames(commonStyles.title, {

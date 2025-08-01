@@ -68,10 +68,16 @@ const ItemTitle = ({
         roomsView={InfoPanelView.infoMembers}
         searchProps={searchProps}
         selection={infoPanelSelection}
+        isRoomMembersPanel={isRoomMembersPanel}
       />
     );
 
-  return <RoomsItemHeader selection={infoPanelSelection} />;
+  return (
+    <RoomsItemHeader
+      selection={infoPanelSelection}
+      isRoomMembersPanel={isRoomMembersPanel}
+    />
+  );
 };
 
 export default ItemTitle;

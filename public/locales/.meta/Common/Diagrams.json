@@ -3,7 +3,7 @@
   "content": "Diagrams",
   "content_en_sha1_hash": "ecf4d503679532de632c70286cab2a70bfaa2235",
   "created_at": "2025-07-01T15:57:10.991Z",
-  "updated_at": "2025-07-01T15:57:48.338Z",
+  "updated_at": "2025-07-10T11:11:06.892Z",
   "comment": {
     "text": "This translation key is used to display a label that refers to diagrams. It is used in the filter options section of a UI component, likely on a file selector or portal settings page. Translators should update this text to reflect different language versions of \"diagrams\".",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 359,
+      "line_number": 363,
       "context": "case FilterType.ArchiveOnly:\n return t(\"Common:Archives\");\n case FilterType.FilesOnly:\n return t(\"Common:Files\");\n case FilterType.DiagramsOnly:\n return t(\"Common:Diagrams\");\n \n case `room-${RoomsType.CustomRoom}`:\n return t(\"Common:CustomRooms\");\n case `room-${RoomsType.EditingRoom}`:\n return t(\"Common:CollaborationRooms\");",
       "module": "/packages/shared"
     }

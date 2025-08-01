@@ -1,0 +1,256 @@
+{
+  "key_path": "DeleteFromTrash",
+  "content": "Selected elements were successfully deleted from Trash",
+  "content_en_sha1_hash": "b6c08a9f5c3e7891c0f5473a6111ef1f9a96855a",
+  "created_at": "2025-05-19T21:30:49.962Z",
+  "updated_at": "2025-07-10T11:11:06.743Z",
+  "comment": {
+    "text": "This translation key is used for a confirmation message that appears when a user attempts to delete items from the Trash. If confirmed, the selected elements are deleted successfully and this message is displayed. It is used in various contexts, including file removal dialogs and action buttons.",
+    "is_auto": true,
+    "updated_at": "2025-05-20T09:46:35.870Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/HOCs/withHotkeys.js",
+      "line_number": 364,
+      "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 303,
+      "context": "[moveDragItems],\n );\n \n const onRemove = React.useCallback(() => {\n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n deleteAction(translations);\n }, [deleteAction]);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 94,
+      "context": "const onDelete = () => {\n setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n if (!selection.length) return;\n \n deleteAction(translations, selection);",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 788,
+      "context": "deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 788,
+      "context": "deleteRoomsAction([selectedFolderId], translations).catch((err) =>\n toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/FilesActionsStore.js",
+      "line_number": 2344,
+      "context": "onClick: () => {\n if (this.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:DeleteFromTrash\"),\n };\n \n this.deleteAction(translations).catch((err) => toastr.error(err));\n }\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຢ່າງ' (yang) is used unnecessarily and makes the sentence sound slightly awkward. While technically not incorrect, it's not the most natural phrasing.",
+          "suggestion": "ຂໍ້ມູນທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກຂີ້ເຫຍື້ອສໍາເລັດຜົນ"
+        }
+      ],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'තේරූ අංග කුණු කූඩයෙන් සාර්ථකව මකා ඇත' is a literal translation that doesn't flow naturally in Sinhala. A more natural phrasing would focus on the action of deleting rather than the state of being deleted. 'තේරූ අංග කුණු කූඩයෙන් මකා දමන ලදී' is a possible improvement.",
+          "suggestion": "තේරූ අංග කුණු කූඩයෙන් මකා දමන ලදී"
+        }
+      ],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Одабрани елементи су успешно обрисани из Отпада' is a literal translation but doesn't quite flow naturally in Serbian. 'Отпада' is technically correct for 'Trash' but sounds a bit formal and archaic in this context.",
+          "suggestion": "Одабрани елементи су успешно обрисани из корпе."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import {
   conversionToBytes,
@@ -37,11 +38,10 @@ import { ComboBox, ComboBoxSize, TOption } from "../combobox";
 import { SaveCancelButtons } from "../save-cancel-buttons";
 import { Text } from "../text";
 import { Checkbox } from "../checkbox";
-
 import { TTranslation } from "../../types";
 
 import { QuotaFormProps } from "./QuotaForm.types";
-import { StyledBody } from "./QuotaForm.styled";
+import styles from "./QuotaForm.module.scss";
 
 const isDefaultValue = (
   initPower: number,
@@ -115,7 +115,7 @@ export const QuotaForm = ({
     setPower(initPower);
   }, [initSize, initPower, setSize, setPower]);
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const options = getOptions(t);
 
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -198,21 +198,28 @@ export const QuotaForm = ({
   );
 
   return (
-    <StyledBody
-      maxInputWidth={maxInputWidth || "300px"}
-      isLabel={!!label}
-      isCheckbox={!!checkboxLabel}
+    <div
+      className={classNames(styles.quotaForm, {
+        [styles.isCheckbox]: !!checkboxLabel,
+        [styles.isLabel]: !!label,
+        [styles.isButtonsEnable]: isButtonsEnable,
+      })}
+      data-testid="quota-form"
     >
       {label ? <Text fontWeight={600}>{label}</Text> : null}
       {description ? (
-        <Text fontSize="12px" className="quota_description">
+        <Text
+          fontSize="12px"
+          className={classNames(styles.quotaDescription, "quota_description")}
+        >
           {description}
         </Text>
       ) : null}
-      <div className="quota-container">
+      <div className={classNames(styles.quotaContainer, "quota-container")}>
         <TextInput
-          type={InputType.number}
-          className="quota_limit"
+          type={InputType.text}
+          className={classNames(styles.quotaLimit, "quota_limit")}
+          style={{ maxWidth: maxInputWidth }}
           isAutoFocussed={isAutoFocussed}
           value={size}
           onChange={onChangeTextInput}
@@ -223,9 +230,10 @@ export const QuotaForm = ({
           scale
           withBorder
           tabIndex={tabIndex}
+          testId="quota-text-input"
         />
         <ComboBox
-          className="quota_value"
+          className={classNames(styles.quotaValue, "quota_value")}
           options={options}
           isDisabled={isDisable}
           selectedOption={options.find((elem) => elem.key === power)!}
@@ -240,7 +248,9 @@ export const QuotaForm = ({
         <Checkbox
           label={checkboxLabel}
           isChecked={isChecked}
-          className="quota_checkbox"
+          className={classNames(styles.quotaCheckbox, "quota_checkbox", {
+            [styles.isButtonsEnable]: isButtonsEnable,
+          })}
           onChange={onChangeCheckbox}
           isDisabled={isLoading || isDisabled}
         />
@@ -253,14 +263,14 @@ export const QuotaForm = ({
           onCancelClick={onCancelClick}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:CancelButton")}
-          reminderText={t("YouHaveUnsavedChanges")}
+          reminderText={t("Common:YouHaveUnsavedChanges")}
           displaySettings
           saveButtonDisabled={isDefaultQuota}
           disableRestoreToDefault={isDefaultQuota}
           showReminder={!isDefaultQuota}
         />
       ) : null}
-    </StyledBody>
+    </div>
   );
 };
 

@@ -82,6 +82,11 @@ import {
   isLockedSharedRoom,
   isSystemFolder,
 } from "@docspace/shared/utils";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_ARCHIVE_DOCUMENTS,
+  FILTER_ROOM_DOCUMENTS,
+} from "@docspace/shared/utils/filterConstants";
 import {
   getCategoryType,
   getCategoryTypeByFolderType,
@@ -110,6 +115,7 @@ import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
+import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
@@ -136,8 +142,6 @@ class FilesActionStore {
   clientLoadingStore;
 
   publicRoomStore;
-
-  infoPanelStore;
 
   peopleStore;
 
@@ -176,7 +180,6 @@ class FilesActionStore {
     clientLoadingStore,
     publicRoomStore,
     pluginStore,
-    infoPanelStore,
     userStore,
     currentTariffStatusStore,
     peopleStore,
@@ -197,7 +200,6 @@ class FilesActionStore {
     this.clientLoadingStore = clientLoadingStore;
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
-    this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.peopleStore = peopleStore;
@@ -1657,19 +1659,16 @@ class FilesActionStore {
     if (shareKey) filter.key = shareKey;
 
     if (isRoom || isTemplate) {
-      const key =
-        categoryType === CategoryType.Archive
-          ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
-          : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+      if (this.userStore.user?.id) {
+        const key =
+          categoryType === CategoryType.Archive
+            ? `${FILTER_ARCHIVE_DOCUMENTS}=${this.userStore.user?.id}`
+            : `${FILTER_ROOM_DOCUMENTS}=${this.userStore.user?.id}`;
 
-      const filterStorageSharedRoom =
-        this.userStore.user?.id && localStorage.getItem(key);
+        const filterSharedRoomObj = getUserFilter(key);
 
-      if (filterStorageSharedRoom) {
-        const splitFilter = filterStorageSharedRoom.split(",");
-
-        filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[1];
+        filter.sortBy = filterSharedRoomObj.sortBy;
+        filter.sortOrder = filterSharedRoomObj.sortOrder;
       }
     }
 
@@ -1756,7 +1755,7 @@ class FilesActionStore {
         url !== window.DocSpace.location.pathname,
     );
 
-    if (!isDesktop()) this.infoPanelStore.setIsVisible(false);
+    if (!isDesktop()) hideInfoPanel();
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
@@ -2112,14 +2111,6 @@ class FilesActionStore {
     }
   };
 
-  onShowInfoPanel = () => {
-    const { selection } = this.filesStore;
-    const { setInfoPanelSelection, setIsVisible } = this.infoPanelStore;
-
-    setInfoPanelSelection([selection]);
-    setIsVisible(true);
-  };
-
   setProcessCreatingRoomFromData = (processCreatingRoomFromData) => {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
@@ -2202,7 +2193,7 @@ class FilesActionStore {
           key: "show-info",
           label: t("Common:Info"),
           iconUrl: InfoOutlineReactSvgUrl,
-          onClick: this.onShowInfoPanel,
+          onClick: showInfoPanel(),
         };
       case "copy":
         if (!this.isAvailableOption("copy")) return null;
@@ -2679,7 +2670,6 @@ class FilesActionStore {
       if (openingNewTab(url, e)) return;
 
       setIsLoading(true);
-
       setSelection([]);
 
       window.DocSpace.navigate(url, { state });
@@ -2749,15 +2739,32 @@ class FilesActionStore {
     }
   };
 
+  closeMediaViewerAndRestoreUrl = async () => {
+    const { getFirstUrl, setMediaViewerData } = this.mediaViewerDataStore;
+
+    setMediaViewerData({ visible: false, id: null });
+
+    try {
+      const url = await getFirstUrl();
+      if (!url) return;
+      window.history.pushState("", "", url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
-    const { insideGroupBackUrl, setInsideGroupTempTitle } =
-      this.peopleStore.groupsStore;
+    const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
+
+    if (this.mediaViewerDataStore.visible) {
+      return this.closeMediaViewerAndRestoreUrl();
+    }
 
     setBufferSelection(null);
 
@@ -2811,14 +2818,11 @@ class FilesActionStore {
     if (categoryType === CategoryType.Accounts) {
       const contactsTab = getContactsView();
 
-      setInsideGroupTempTitle(null);
-
       if (insideGroupBackUrl) {
-        console.log("set");
         setIsSectionBodyLoading(true, false);
 
         setContactsTab("groups");
-        window.DocSpace.navigate(-1);
+        window.DocSpace.navigate(insideGroupBackUrl);
 
         return;
       }

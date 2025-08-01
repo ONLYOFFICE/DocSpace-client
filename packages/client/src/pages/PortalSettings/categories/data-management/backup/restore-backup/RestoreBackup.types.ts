@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { RestoreBackupProps } from "@docspace/shared/pages/restore-backup/RestoreBackup.types";
+import type { RestoreBackupProps } from "@docspace/shared/pages/backup/restore-backup/RestoreBackup.types";
 import type { TTranslation } from "@docspace/shared/types";
 
 export interface InjectedRestoreBackupWrapperProps

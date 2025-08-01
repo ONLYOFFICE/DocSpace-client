@@ -72,11 +72,13 @@ const TriggersForm = ({
             id: "enable-all",
             label: t("SendEverything"),
             value: "true",
+            dataTestId: "enable_all_radio_button",
           },
           {
             id: "select-from-list",
             label: t("IndividualEvents"),
             value: "false",
+            dataTestId: "select_from_list_radio_button",
           },
         ]}
         selected={triggerAll ? "true" : "false"}
@@ -84,6 +86,7 @@ const TriggersForm = ({
         orientation="vertical"
         spacing="8px"
         isDisabled={isDisabled}
+        dataTestId="triggers_form_radio_button_group"
       />
       {!triggerAll ? (
         <div
@@ -94,6 +97,7 @@ const TriggersForm = ({
             marginTop: "10px",
             marginInlineStart: "24px",
           }}
+          data-testid="triggers_form_checkbox_group"
         >
           {triggersList.map((value) => (
             <Checkbox
@@ -101,6 +105,7 @@ const TriggersForm = ({
               label={getTriggerTranslate(value, t)}
               isChecked={(triggers & value) !== 0}
               onChange={() => toggleTrigger(value)}
+              dataTestId={`triggers_form_checkbox_${value}`}
             />
           ))}
         </div>

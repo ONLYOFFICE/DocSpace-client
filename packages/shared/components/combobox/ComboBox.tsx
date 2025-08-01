@@ -27,14 +27,15 @@
 import React from "react";
 import equal from "fast-deep-equal/react";
 import { isMobileOnly, isMobile, isTablet } from "react-device-detect";
+import classNames from "classnames";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 
 import { ComboButton } from "./sub-components/ComboButton";
-import { StyledComboBox } from "./Combobox.styled";
-import { ComboBoxSize, ComboBoxDisplayType } from "./Combobox.enums";
+import { ComboBoxSize, ComboBoxDisplayType } from "./ComboBox.enums";
 import type { TComboboxProps, TOption } from "./ComboBox.types";
+import styles from "./ComboBox.module.scss";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
   return equal(prevProps, nextProps);
@@ -242,6 +243,8 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     onClickSelectedItem,
     shouldShowBackdrop,
     dropDownClassName,
+    dropDownTestId,
+    dataTestId,
   } = props;
 
   React.useEffect(() => {
@@ -321,7 +324,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           label={label}
           icon={icon}
           isBeta={isBeta}
-          data-testid="drop-down-item"
+          testId={option.dataTestId}
           data-focused={isOpen ? isActiveOption : undefined}
           data-is-separator={option.isSeparator || undefined}
           data-type={option.type || undefined}
@@ -375,6 +378,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       clickOutsideAction: handleClickOutside,
       shouldShowBackdrop,
       className: dropDownClassName,
+      dataTestId: dropDownTestId,
     };
 
     const dropDownOptions = advancedOptions || renderOptions();
@@ -390,18 +394,20 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     );
   };
 
+  const comboboxClasses = classNames(styles.combobox, className, styles[size], {
+    [styles.scaled]: scaled,
+    [styles.isOpen]: isOpen,
+    [styles.disableMobileView]: disableMobileView,
+    [styles.withoutPadding]: withoutPadding,
+  });
+
   return (
-    <StyledComboBox
+    <div
+      className={comboboxClasses}
       ref={ref}
-      size={size as ComboBoxSize}
-      scaled={scaled}
       onClick={comboBoxClick}
-      isOpen={isOpen}
-      disableMobileView={disableMobileView}
-      withoutPadding={withoutPadding}
-      data-testid="combobox"
+      data-testid={dataTestId ?? "combobox"}
       title={title}
-      className={className}
       data-scaled={scaledOptions || undefined}
       style={style}
     >
@@ -428,7 +434,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       />
 
       {displayType !== "toggle" ? renderDropDown() : null}
-    </StyledComboBox>
+    </div>
   );
 };
 

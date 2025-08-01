@@ -68,7 +68,6 @@ const InvitePanel = ({
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
@@ -115,6 +114,10 @@ const InvitePanel = ({
       defaultAccess: 1,
     });
     setInviteItems([]);
+  };
+
+  const onBackClick = () => {
+    if (!hideSelector && addUsersPanelVisible) setAddUsersPanelVisible(false);
   };
 
   const onCheckHeight = () => {
@@ -354,9 +357,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -519,6 +520,7 @@ const InvitePanel = ({
     <ModalDialog
       visible={isVisible}
       onClose={onClose}
+      onBackClick={onBackClick}
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector ? addUsersPanelVisible : null}
       isLoading={invitePanelIsLoding}
@@ -605,7 +607,6 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -638,7 +639,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

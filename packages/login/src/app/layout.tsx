@@ -30,6 +30,7 @@ import { Toast } from "@docspace/shared/components/toast";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
+import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
@@ -143,6 +144,8 @@ export default async function RootLayout({
     "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
 
     "--interface-direction": dirClass,
+
+    "--font-family": getFontFamilyDependingOnLanguage(locale),
   } as React.CSSProperties;
 
   return (

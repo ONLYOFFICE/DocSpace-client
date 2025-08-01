@@ -47,6 +47,8 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
     campaignConfig,
     onAction,
     onClose,
+    disableFitText,
+    actionIcon,
   } = props;
   const { Header, SubHeader, Text, ButtonLabel, Link } = campaignTranslate;
   const { borderColor, title, body, text, action } = campaignConfig;
@@ -56,10 +58,16 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
   const hasText = !!Text;
   const isButton = action?.isButton;
 
-  const { fontSize, ref, wrapperRef } = useFitText(
-    campaignBackground,
-    body?.fontSize,
-  );
+  const fitTextResult = useFitText(campaignBackground, body?.fontSize);
+
+  const staticRef = React.useRef<HTMLDivElement>(null);
+  const staticWrapperRef = React.useRef<HTMLDivElement>(null);
+
+  const fontSize = disableFitText ? body?.fontSize : fitTextResult.fontSize;
+  const ref = disableFitText ? staticRef : fitTextResult.ref;
+  const wrapperRef = disableFitText
+    ? staticWrapperRef
+    : fitTextResult.wrapperRef;
 
   const wrapperStyle = {
     "--campaign-background": `url(${campaignBackground})`,
@@ -85,7 +93,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
             color={title?.color ?? globalColors.black}
             fontSize={title?.fontSize ?? "13px"}
             fontWeight={title?.fontWeight ?? "normal"}
-            lineHeight="12px"
+            lineHeight={title?.lineHeight ?? "12px"}
           >
             {Header}
           </TextComponent>
@@ -96,6 +104,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
               color={body?.color ?? globalColors.black}
               fontSize={fontSize ?? "13px"}
               fontWeight={body?.fontWeight ?? "normal"}
+              lineHeight={body?.lineHeight ?? "20px"}
             >
               {SubHeader}
             </TextComponent>
@@ -105,6 +114,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
               color={text?.color ?? globalColors.black}
               fontSize={text?.fontSize ?? "13px"}
               fontWeight={text?.fontWeight ?? "normal"}
+              lineHeight={text?.lineHeight ?? "16px"}
             >
               {Text}
             </TextComponent>
@@ -150,7 +160,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         size={12}
         className={styles.closeIcon}
         onClick={onClose}
-        iconName={CrossReactSvg}
+        iconName={actionIcon || CrossReactSvg}
       />
     </div>
   );

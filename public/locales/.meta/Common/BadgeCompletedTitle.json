@@ -3,7 +3,7 @@
   "content": "Form is completely filled out by all members",
   "content_en_sha1_hash": "12744efea1cea3ac515c9e5af1b67d2467040d2b",
   "created_at": "2025-05-19T21:30:43.187Z",
-  "updated_at": "2025-06-08T12:02:32.933Z",
+  "updated_at": "2025-07-10T11:11:07.166Z",
   "comment": {
     "text": "This translation key is used to display a title indicating that a form has been completely filled out by all members. It appears in a UI component related to file filling status and is displayed when the form's status is set to \"Completed\".",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Forma bütün üzvlər tərəfindən tam şəkildə doldurulur.\" literally translates to \"The form is completely filled by all members.\" While not entirely wrong, it doesn't quite convey the meaning of 'Form is completely filled out by all members'. It sounds slightly passive and less direct.  A better translation would emphasize that *all* members must complete the form.",
-          "suggestion": "Forma bütün üzvlər tərəfindən doldurulması lazımdır."
+          "description": "The translation 'Forma bütün üzvlər tərəfindən tam şəkildə doldurulur.' implies that the form is being filled out *currently* by all members, not that it's been completely filled out. The English original conveys completion.",
+          "suggestion": "Forma bütün üzvlər tərəfindən tam doldurulub."
         }
       ],
       "approved_at": null
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is not the most natural way to express the English meaning. The passive voice construction ('Das Formular wird...') is less common in German when a more active voice would suffice.",
-          "suggestion": "Das Formular ist von allen Mitgliedern vollständig ausgefüllt."
+          "description": "The translation is not idiomatic and doesn't fully capture the meaning of 'Form is completely filled out by all members'. It literally translates 'The form is completely filled out by all members.' A more natural phrasing would emphasize the completion aspect.",
+          "suggestion": "Das Formular wurde vollständig von allen Mitgliedern ausgefüllt."
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ແບບຟອມຖືກຕື່ນຂໍ້ມູນຢ່າງຄົບຖ້ວນໂດຍສະມາຊິກທຸກຄົນ' translates to 'The form is filled with information completely by all members'. While not entirely wrong, it's a less natural phrasing than a direct equivalent of 'Form is completely filled out by all members'. A more accurate translation would emphasize completeness.",
-          "suggestion": "ແບບຟອມຖືກຕື່ນຂໍ້ມູນຄົບຖ້ວນໂດຍສະມາຊິກທຸກຄົນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -159,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Formularul a fost completat în întregime de toți membrii\" is a bit literal and sounds unnatural. A more natural translation would convey the meaning that all members have filled out the form.",
+          "suggestion": "Formularul a fost completat de toți membrii"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is somewhat accurate but could be more natural and concise. 'සියලුම සාමාජිකයින් විසින්' is a bit clunky. A more natural phrasing would emphasize the completion rather than the action of filling.",
+          "suggestion": "සාමාජිකයින් සියලුම පෝරමය සම්පූර්ණයෙන්ම පුරවා ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Formulár bol vyplnený všetkými členmi' doesn't fully capture the meaning of 'Form is completely filled out by all members'. It implies the form *was* filled, not that it *is* completely filled out.",
-          "suggestion": "Formulár je vyplnený všetkými členmi"
+          "description": "The Slovak translation 'Formulár bol vyplnený všetkými členmi' does not accurately convey the meaning of 'Form is completely filled out by all members'. It literally translates to 'The form was filled out by all members'. It doesn't imply completeness.",
+          "suggestion": "Formulár bol vyplnený všetkými členmi do konca"
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Образац је потпуно попуњен \" does not accurately convey the meaning of \"Form is completely filled out by all members\". It translates to \"The form is completely filled out.\" It's missing the key element of 'by all members'.",
-          "suggestion": "Потврда да је образац потпуно попуњен од стране свих чланова."
+          "description": "The Serbian translation \"Образац је потпуно попуњен\" translates to \"The form is completely filled out.\" While close, the English content specifies 'by all members.' This nuance is missing in the Serbian translation.",
+          "suggestion": "Образац је потпуно попуњен од стране свих чланова."
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Obrazac je potpuno popunjen od strane svih članova' while grammatically correct, doesn't fully capture the meaning of \"Form is completely filled out by all members\". It's a bit literal. A more natural translation might emphasize the completion aspect.",
-          "suggestion": "Obrazac je popunjen od strane svih članova"
+          "description": "The translation 'Obrazac je potpuno popunjen od strane svih članova' is not the most natural or idiomatic way to convey 'Form is completely filled out by all members'. While technically correct, it sounds somewhat formal and clunky.",
+          "suggestion": "Consider a more natural phrasing like 'Svi članovi su popunili obrazac' (All members have filled out the form) or 'Obrazac je popunjen od svih članova' (The form has been filled out by all members)."
         }
       ],
       "approved_at": null
@@ -228,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Форма повністю заповнена всіма учасниками' is a literal translation but doesn't quite capture the intended meaning of 'Form is completely filled out by all members'. It sounds a bit clunky in Ukrainian. A more natural translation would emphasize completion, not just who filled it.",
-          "suggestion": "Форму повністю заповнили всі учасники"
+          "description": "The translation 'Форма повністю заповнена всіма учасниками' (Form is completely filled out by all members) is not the most natural or idiomatic way to express the English meaning in Ukrainian. It's technically correct, but sounds somewhat awkward.",
+          "suggestion": "Форма повністю заповнена усіма учасниками"
         }
       ],
       "approved_at": null
@@ -237,13 +243,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Biểu mẫu được tất cả các thành viên điền đầy đủ' is a literal translation but sounds slightly unnatural in Vietnamese. It implies that all members *filled* the form, which might not be the intended meaning. A more natural phrasing would convey that the form is completed by all members.",
-          "suggestion": "Biểu mẫu đã được hoàn thành bởi tất cả thành viên"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -252,7 +252,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '所有成员已填写完表单' is literal and doesn't quite capture the natural flow of the English sentence 'Form is completely filled out by all members'. It emphasizes the completion action rather than the state of the form being complete.",
+          "description": "The translation '所有成员已填写完表单' while generally conveying the meaning, is slightly awkward and not the most natural way to express the English phrase 'Form is completely filled out by all members' in Chinese. A more natural and idiomatic translation would be '所有成员已完整填写表单' or '表单已由所有成员完整填写'. The current phrasing emphasizes the 'filling out' action rather than the completion of the form.",
           "suggestion": "表单已由所有成员完整填写"
         }
       ],

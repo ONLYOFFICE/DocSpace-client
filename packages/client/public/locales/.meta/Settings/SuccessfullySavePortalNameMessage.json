@@ -3,7 +3,7 @@
   "content": "Space has been renamed successfully",
   "content_en_sha1_hash": "922f43c14405a630a03224ff173c2141d787702f",
   "created_at": "2025-05-19T21:30:52.834Z",
-  "updated_at": "2025-05-24T03:59:00.410Z",
+  "updated_at": "2025-07-10T11:11:06.907Z",
   "comment": {
     "text": "This translation key is used to display a success message when renaming a portal is successfully confirmed. It appears in the UI after clicking \"Save\" on the Portal Renaming dialog and is displayed via toastr to inform the user of the outcome.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 189,
+      "line_number": 196,
       "context": "setIsLoadingPortalNameSave(true);\n \n setPortalRename(portalName)\n .then((confirmUrl) => {\n onCloseModal();\n toastr.success(t(\"SuccessfullySavePortalNameMessage\"));\n \n setPortalName(portalName);\n setPortalNameDefault(portalName);\n sessionStorage.clear();",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تمت إعادة تسمية الإستضافة بنجاح\" literally translates to 'The hosting has been renamed successfully.' While understandable, it's not the most natural or idiomatic way to convey 'Space has been renamed successfully' in Arabic. 'Space' in this context likely refers to a portal or a workspace, and a more appropriate translation would reflect that.",
-          "suggestion": "Consider \"تم تغيير اسم المساحة بنجاح\" (Tam taghyir ism al-masaha bi najah) - which translates to 'The space name has been changed successfully', or \"تم تغيير اسم المنصة بنجاح\" (Tam taghyir ism al-minassa bi najah) - 'The platform name has been changed successfully'."
+          "description": "The English phrase 'Space has been renamed successfully' is not accurately reflected in the Arabic translation. 'Space' in this context likely refers to a 'portal' or a 'site'. 'إستضافة' (Isthada) generally means 'hosting'.",
+          "suggestion": "Consider translating 'Space' as 'بوابة' (Bawwaba - portal) or 'موقع' (Mawqi' - site). A more accurate translation would be: 'تمت إعادة تسمية البوابة بنجاح' or 'تمت إعادة تسمية الموقع بنجاح'."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Space has been renamed successfully\" implies a change in name, not just a change in the name itself. \"Sahənin adı uğurla dəyişdirildi\" translates to \"The name of the space has been changed successfully,\" which is accurate but less natural than a more direct translation reflecting the action of renaming.",
-          "suggestion": "Consider \"Sahə yenidən adlandırıldı\" which translates to \"The space was renamed\" and more closely reflects the English meaning."
+          "description": "The translation 'Sahənin adı uğurla dəyişdirildi' is a literal translation of \"Space has been renamed successfully.\" However, 'Sahənin adı' translates to 'The name of the space'. It's more natural to say something like 'Fəzanın adı dəyişdirildi' or 'Fəzə yeni ad verildi'.",
+          "suggestion": "Fəzanın adı dəyişdirildi"
         }
       ],
       "approved_at": null
@@ -132,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ruimte is succesvol hernoemd' is not the most natural or accurate translation of 'Space has been renamed successfully'. 'Ruimte' translates to 'space' and while technically correct, it's not the contextually ideal wording in this situation. The meaning implies a portal or a defined area that has been renamed.",
-          "suggestion": "De portal is succesvol hernoemd"
+          "description": "The word 'Ruimte' translates to 'Space' but in this context, it is more appropriate to use a term that denotes a portal or area within a system. 'Ruimte' feels a bit too general. A better translation might be 'Portaal' or a similarly specific term depending on the context of a 'portal'.",
+          "suggestion": "Consider using 'Portaal' or a contextually appropriate term for 'portal'."
+        },
+        {
+          "type": "grammatical",
+          "description": "While grammatically correct, 'Ruimte is succesvol hernoemd' is slightly awkward. The verb 'hernoemd' implies an action performed *on* something. It would read better with a passive construction reflecting the original English.",
+          "suggestion": "Consider 'Het ruimteportaal is succesvol hernoemd' or 'Het portaal is succesvol hernoemd' depending on the specificity required."
         }
       ],
       "approved_at": null
@@ -144,13 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nazwa obszaru została zmieniona' is a literal translation of 'Space has been renamed' but doesn't fully convey the intended meaning in a natural way within a UI context. 'Obszar' translates to 'area' or 'region' and might be too general. It doesn't capture the specific term 'portal'.",
-          "suggestion": "Consider 'Nazwa portalu została zmieniona pomyślnie' or 'Portał został pomyślnie nazwany na nowo'."
-        },
-        {
-          "type": "formatting",
-          "description": "The English content includes 'Successfully'. The Polish translation does not convey this aspect, which might be important for user feedback.",
-          "suggestion": "Add 'pomyślnie' (successfully) to the translation, e.g., 'Nazwa portalu została pomyślnie zmieniona'."
+          "description": "The translation 'Nazwa obszaru została zmieniona' is a literal translation of 'Space has been renamed'. However, 'Space' in this context refers to a 'Portal'. A more natural Polish translation would use a term like 'Bramka' or 'Strefa' depending on the specific context of the portal.",
+          "suggestion": "Consider using 'Nazwa bramki została zmieniona' or 'Nazwa strefy została zmieniona' for a more accurate and natural translation.  Further context is needed to determine the best option."
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අවකාශය සාර්ථකව නැවත නම් කෙරිණි' literally translates to 'The space was successfully renamed.' While technically correct, 'Portal' is a specific term. A more accurate translation would convey this specificity. 'Portal' might be best translated as 'පිණි Settlement' or a similar term depending on context.",
-          "suggestion": "Consider a translation that specifically indicates 'Portal' was renamed. For example, something like 'පිණි Settlement සාර්ථකව නැවත නම් කෙරිණි' if 'පිණි Settlement' is an appropriate equivalent."
+          "description": "The English phrase \"Space has been renamed successfully\" implies a change in name, whereas the Sinhala translation \"අවකාශය සාර්ථකව නැවත නම් කෙරිණි\" literally translates to \"The space was successfully renamed.\" While close, \"renamed\" is stronger than just a name change. Depending on context, a more accurate translation might be something like \"දේශය සාර්ථකව වෙනස් කෙරිණි\" (The region/area was successfully changed).",
+          "suggestion": "Consider 'දේශය සාර්ථකව වෙනස් කෙරිණි' or a similar phrasing that better reflects the nuance of 'renamed'."
         }
       ],
       "approved_at": null
@@ -194,13 +194,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Priestor bol úspešne premenovaný' is a literal translation of 'Space has been renamed successfully' but 'priestor' can also mean 'area' or 'room'. 'Portal' implies a specific online connection or gateway, which is not conveyed by 'priestor'. A more accurate translation would reflect the context of a portal being renamed.",
-          "suggestion": "Karta bola úspešne premenovaná"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -215,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Space' refers to a portal or area within the application. While 'Простор' is a valid Serbian word for space, it might not convey the intended meaning of a portal or application area. A more accurate translation might be something like 'Простор је успешно преименован' or 'Портал је успешно преименован' (Portal has been renamed successfully).",
-          "suggestion": "Consider using 'Портал је успешно преименован' if 'Space' refers to a portal. Otherwise, clarify the specific meaning of 'Space' and ensure the Serbian translation accurately reflects that meaning."
+          "description": "The translation 'Простор је успешно преименован' while technically correct, may not fully capture the intended meaning of 'Space' in the context of a portal name. 'Space' often refers to a workspace or online area. A more contextually appropriate translation might consider alternatives like 'Радно место' (working space), 'Област' (area), or 'Платформа' (platform), depending on the specific portal type.",
+          "suggestion": "Consider 'Радно место је успешно преименовано' or 'Област је успешно преименована' depending on the portal's functionality."
         }
       ],
       "approved_at": null

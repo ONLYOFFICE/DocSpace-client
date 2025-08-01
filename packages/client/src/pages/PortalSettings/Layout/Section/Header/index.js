@@ -180,6 +180,8 @@ const SectionHeaderContent = (props) => {
 
   const isAvailableSettings = (key) => {
     switch (key) {
+      case "PortalRenaming":
+        return isCustomizationAvailable;
       case "DNSSettings":
         return isCustomizationAvailable;
       case "Common:RestoreBackup":
@@ -377,7 +379,7 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Heading>
-          {arrayOfParams[0] !== "payments" ? (
+          {arrayOfParams[0] !== "payments" && arrayOfParams.length < 3 ? (
             <div className="tariff-bar">
               <TariffBar />
             </div>

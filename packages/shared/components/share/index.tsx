@@ -105,6 +105,7 @@ const Share = (props: ShareProps) => {
   );
 
   const requestRunning = React.useRef(false);
+  const isInit = React.useRef(!!fileLinkProps);
 
   const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
 
@@ -121,37 +122,41 @@ const Share = (props: ShareProps) => {
 
   const fetchLinks = React.useCallback(async () => {
     if (requestRunning.current || hideSharePanel) return;
-    try {
-      requestRunning.current = true;
 
-      const getExternalLinksMethod = isFolder
-        ? getExternalFolderLinks
-        : getExternalLinks;
+    requestRunning.current = true;
 
-      const res = await getExternalLinksMethod(infoPanelSelection.id);
+    const getExternalLinksMethod = isFolder
+      ? getExternalFolderLinks
+      : getExternalLinks;
 
-      setFileLinks(res.items);
-    } catch (error) {
-      console.error(error);
-      setFileLinks([]);
-    } finally {
-      setIsLoading(false);
-      requestRunning.current = false;
-    }
-  }, [infoPanelSelection.id, hideSharePanel, isFolder]);
+    const res = await getExternalLinksMethod(infoPanelSelection.id);
+
+    setFileLinks(res.items);
+    setIsLoading(false);
+    isInit.current = false;
+    requestRunning.current = false;
+  }, [infoPanelSelection?.id, hideSharePanel, isFolder]);
 
   useEffect(() => {
     if (hideSharePanel) {
       setView?.("info_details");
-    } else {
-      fetchLinks();
+
+      return;
     }
-  }, [fetchLinks, hideSharePanel, setView]);
+
+    if (!fileLinkProps) fetchLinks();
+  }, [fetchLinks, hideSharePanel, fileLinkProps, setView]);
 
   useEffect(() => {
-    fetchLinks();
-    setShareChanged?.(false);
+    if (shareChanged) {
+      fetchLinks();
+      setShareChanged?.(false);
+    }
   }, [fetchLinks, setShareChanged, shareChanged]);
+
+  useEffect(() => {
+    if (fileLinkProps) setFileLinks(fileLinkProps);
+  }, [fileLinkProps]);
 
   const addLoaderLink = () => {
     const link = { isLoaded: true };

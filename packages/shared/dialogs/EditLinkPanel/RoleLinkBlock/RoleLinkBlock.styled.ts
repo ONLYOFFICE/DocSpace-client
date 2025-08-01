@@ -33,7 +33,7 @@ export const RoleLinkBlockWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
 
-  padding: 20px 16px;
+  padding: 0px 16px 20px 16px;
 
   .dropdown-container {
     margin-top: 4px;

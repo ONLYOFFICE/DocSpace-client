@@ -29,7 +29,10 @@ import styled from "styled-components";
 import { Scrollbar } from "../../components/scrollbar";
 
 const StyledEditLinkBodyContent = styled.div`
-  padding: 4px 0px 0px;
+  padding: 20px 0px 0px;
+
+  margin-inline-end: -16px;
+  width: calc(100% + 16px);
 
   .edit-link_link-block {
     padding: 16px 16px 20px;

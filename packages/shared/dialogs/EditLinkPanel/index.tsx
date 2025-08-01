@@ -462,11 +462,8 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const canChangeLifetime = !isPrimary || !isRoom(item);
 
-  console.log(
-    { link, isPublic, isFormRoom, item },
-    link?.canEditDenyDownload === false,
-  );
   const disabledDenyDownload = link?.canEditDenyDownload === false;
+  const canEditInternal = link?.canEditInternal;
 
   useImperativeHandle(
     ref,
@@ -518,12 +515,13 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
                 onSelect={handleSelectAccessOption}
               />
             ) : null}
-            <AccessSelectorBlock
-              options={linkAccessOptions}
-              selectedOption={selectedLinkAccess}
-              onSelect={handleSelectLinkAccess}
-            />
-
+            {canEditInternal ? (
+              <AccessSelectorBlock
+                options={linkAccessOptions}
+                selectedOption={selectedLinkAccess}
+                onSelect={handleSelectLinkAccess}
+              />
+            ) : null}
             <PasswordAccessBlock
               t={t}
               isLoading={isLoading}

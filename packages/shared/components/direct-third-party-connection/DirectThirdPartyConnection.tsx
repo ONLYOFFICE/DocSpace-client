@@ -399,6 +399,7 @@ const DirectThirdPartyConnection = ({
             setBasePath={setBasePath}
             toDefault={toDefault}
             setNewPath={setNewPath}
+            dataTestId={buildDataTestId(dataTestId, "files_selector")}
           />
         )
       )}

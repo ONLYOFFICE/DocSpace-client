@@ -253,7 +253,8 @@ const ThirdPartyStorageModule = ({
           advancedOptions={advancedOptions}
           selectedOption={{ key: 0, label: selectedStorageTitle }}
           isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
-          dataTestId="storage_combobox"
+          dataTestId="backup_storage_combobox"
+          dropDownTestId="backup_storage_dropdown"
         />
 
         {selectedId === ThirdPartyStorages.GoogleId ? (

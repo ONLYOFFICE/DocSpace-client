@@ -141,6 +141,7 @@ const AmazonStorage = ({
           primary
           isDisabled={!isValidForm || !isMaxProgress || isDisabled}
           size={buttonSize}
+          testId="manual_backup_create_copy_button"
         />
       </div>
     </div>

@@ -487,6 +487,11 @@ class ContextOptionsStore {
 
     const isSystemFolder = systemFolders.includes(item.type);
 
+    if (this.publicRoomStore.isPublicRoom) {
+      copyShareLink(item.shortWebUrl);
+      return toastr.success(t("Common:LinkCopySuccess"));
+    }
+
     if (isShared && !isArchive && !isSystemFolder) {
       try {
         const itemLink = item.isFolder

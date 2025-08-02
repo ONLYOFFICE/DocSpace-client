@@ -3324,6 +3324,7 @@ class FilesStore {
     return items.map((item) => {
       const {
         availableExternalRights,
+        shortWebUrl,
         access,
         autoDelete,
         originTitle,
@@ -3574,6 +3575,7 @@ class FilesStore {
         formFillingStatus,
         customFilterEnabled,
         customFilterEnabledBy,
+        shortWebUrl,
       };
     });
   };

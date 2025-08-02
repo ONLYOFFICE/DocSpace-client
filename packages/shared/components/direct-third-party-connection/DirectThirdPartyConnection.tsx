@@ -40,7 +40,7 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 import { Text } from "../text";
 import { toastr } from "../toast";
 import { Button } from "../button";
-import { getOAuthToken } from "../../utils/common";
+import { buildDataTestId, getOAuthToken } from "../../utils/common";
 import { ComboBox } from "../combobox";
 import { saveSettingsThirdParty } from "../../api/files";
 import { THIRD_PARTY_SERVICES_URL } from "../../constants";
@@ -109,6 +109,7 @@ const DirectThirdPartyConnection = ({
   setNewPath,
   toDefault,
   checkCreating = false,
+  dataTestId,
 }: DirectThirdPartyConnectionProps) => {
   const [state, setState] = useReducer(reducer, initialState);
 
@@ -233,6 +234,7 @@ const DirectThirdPartyConnection = ({
         onClick: onConnect,
         disabled: false,
         icon: RefreshReactSvgUrl,
+        dataTestId: "connection_settings_option",
       },
       {
         key: "Disconnect-settings",
@@ -240,6 +242,7 @@ const DirectThirdPartyConnection = ({
         onClick: onDisconnect,
         disabled: false,
         icon: AccessNoneReactSvgUrl,
+        dataTestId: "disconnect_settings_option",
       },
     ];
   };
@@ -269,6 +272,10 @@ const DirectThirdPartyConnection = ({
               className={item.className}
               data-third-party-key={item.key}
               disabled={item.disabled}
+              testId={buildDataTestId(
+                dataTestId,
+                `${item.key}_${item.name}_option`,
+              )}
             >
               <Text
                 className={classNames(
@@ -331,6 +338,8 @@ const DirectThirdPartyConnection = ({
             key: 0,
             label: selectedThirdPartyAccount?.label ?? "",
           }}
+          dataTestId={buildDataTestId(dataTestId, "accounts_combobox")}
+          dropDownTestId={buildDataTestId(dataTestId, "accounts_dropdown")}
         />
 
         {connectedThirdPartyAccount?.id &&
@@ -347,6 +356,7 @@ const DirectThirdPartyConnection = ({
             getData={getContextOptions}
             isDisabled={isDisabledComponent}
             displayIconBorder
+            testId={buildDataTestId(dataTestId, "accounts_context_button")}
           />
         ) : null}
       </div>
@@ -359,7 +369,10 @@ const DirectThirdPartyConnection = ({
           onClick={onConnect}
           size={buttonSize}
           isDisabled={isDisabledComponent}
-          testId="connect-button"
+          testId={
+            buildDataTestId(dataTestId, "connect_account_button") ??
+            "connect-button"
+          }
         />
       ) : (
         folderList.id &&

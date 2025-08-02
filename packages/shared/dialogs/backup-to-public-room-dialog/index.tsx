@@ -90,6 +90,7 @@ const BackupToPublicRoom = ({
           primary
           scale
           onClick={onBackupTo}
+          testId="save_backup_to_room_button"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -98,6 +99,7 @@ const BackupToPublicRoom = ({
           size={ButtonSize.normal}
           scale
           onClick={onClose}
+          testId="cancel_backup_to_room_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -545,20 +545,10 @@ class ContextOptionsStore {
   };
 
   onOpenEmbeddingSettings = async (item) => {
-    const { shared, navigationPath, getSelectedFolder } =
-      this.selectedFolderStore;
     const { setLinkParams, setEmbeddingPanelData } = this.dialogsStore;
 
-    const sharedItem = item.isRoom
-      ? item
-      : shared
-        ? getSelectedFolder()
-        : navigationPath.find((r) => r.shared);
-
-    if (!sharedItem) return;
-
     setLinkParams({
-      item: sharedItem,
+      item,
     });
 
     setEmbeddingPanelData({ visible: true, item });

@@ -51,6 +51,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { getExternalLinks } from "@docspace/shared/api/files";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
@@ -311,10 +312,13 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   const getLinks = useCallback(async () => {
     try {
       setIsLoading(true);
-      const roomLinks = await fetchExternalLinks(linkParams.item.id);
 
-      if (roomLinks && roomLinks.length) {
-        const linksOptions = roomLinks.map((l: LinkParamsLinkType) => {
+      const links = isFile
+        ? (await getExternalLinks(linkParams.item.id)).items
+        : await fetchExternalLinks(linkParams.item.id);
+
+      if (links && links.length) {
+        const linksOptions = links.map((l: LinkParamsLinkType) => {
           return {
             key: l.sharedTo?.id,
             label: l.sharedTo?.title,
@@ -332,13 +336,13 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     } finally {
       setIsLoading(false);
     }
-  }, [linkParams.item.id, fetchExternalLinks]);
+  }, [linkParams.item.id, fetchExternalLinks, isFile]);
 
   useEffect(() => {
-    if (itemId) {
+    if (itemId && !link) {
       getLinks();
     }
-  }, [itemId, getLinks]);
+  }, [itemId, getLinks, link]);
 
   const usePrevious = (value: TFileLink | null) => {
     const ref = useRef<TFileLink | null>(undefined);

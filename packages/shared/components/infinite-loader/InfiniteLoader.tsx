@@ -78,8 +78,6 @@ const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
 
   if (isLoading) return null;
 
-  console.log("scroll", scroll);
-
   return viewAs === "tileDynamicHeight" ? (
     <GridDynamicHeight
       scroll={scroll ?? window}

@@ -59,6 +59,8 @@ const GridDynamicHeight = ({
   const synchronizationScheduled = useRef(false);
   // Reference to store any pending timeout
   const resizeTimerRef = useRef<number | null>(null);
+  // Add loading state reference to prevent multiple simultaneous requests
+  const isLoadingMore = useRef(false);
 
   // Create a cache to store height measurements
   const [cache] = useState(
@@ -216,6 +218,24 @@ const GridDynamicHeight = ({
     [cache],
   );
 
+  // Function to get row elements and indices
+  const getRowElements = () => {
+    const rowElements: Record<string, HTMLElement[]> = {};
+    const windowItems = document.querySelectorAll(".window-item");
+
+    windowItems.forEach((item) => {
+      const rowIndex = item.getAttribute("data-row-index");
+      if (rowIndex) {
+        if (!rowElements[rowIndex]) {
+          rowElements[rowIndex] = [];
+        }
+        rowElements[rowIndex].push(item as HTMLElement);
+      }
+    });
+
+    return rowElements;
+  };
+
   // Function to initialize the cache with estimated heights
   const initializeCache = useCallback(() => {
     if (!children || children.length === 0) return;
@@ -267,139 +287,8 @@ const GridDynamicHeight = ({
     initializeCache();
   }, [children, initializeCache]);
 
-  const listClassName = classNames(styles.list, className, styles.tile);
-
-  // Create a specialized row height management system
-  // This system maintains height synchronization across rows
-  useEffect(() => {
-    // Function to synchronize heights within rows
-    const synchronizeRowHeights = () => {
-      // Store the max height for each row
-      const maxRowHeights: Record<number, number> = {};
-      const rowItems: Record<number, number[]> = {};
-
-      // First pass: Group items by row and find max heights
-      for (let i = 0; i < itemCount; i += 1) {
-        const rowIndex = Math.floor(i / countTilesInRow);
-
-        // Initialize row tracking if needed
-        if (!rowItems[rowIndex]) {
-          rowItems[rowIndex] = [];
-          maxRowHeights[rowIndex] = 0;
-        }
-
-        // Track this item in its row
-        rowItems[rowIndex].push(i);
-
-        // Update max height for this row if needed
-        const itemHeight = cache.getHeight(i, 0);
-        if (itemHeight > maxRowHeights[rowIndex]) {
-          maxRowHeights[rowIndex] = itemHeight;
-        }
-      }
-
-      // Second pass: Apply max heights to all items in each row
-      let heightsChanged = false;
-      Object.entries(rowItems).forEach(([rowIdx, itemIndices]) => {
-        const rowIndex = parseInt(rowIdx, 10);
-        const maxHeight = maxRowHeights[rowIndex];
-
-        // Skip rows with no valid height
-        if (!maxHeight) return;
-
-        // Apply max height to all items in this row
-        itemIndices.forEach((itemIndex) => {
-          if (cache.getHeight(itemIndex, 0) !== maxHeight) {
-            cache.set(itemIndex, 0, 1, maxHeight);
-            heightsChanged = true;
-          }
-        });
-      });
-
-      // If any heights changed, update the row heights state and recompute
-      if (heightsChanged) {
-        // Force List to recompute row heights with the synchronized values
-        if (listRef.current) {
-          listRef.current.recomputeRowHeights();
-
-          // Also directly modify any rendered Card elements via DOM
-          // This ensures even dynamically loaded content maintains consistent heights
-          setTimeout(() => {
-            // Find all window-items and group by row
-            const windowItems = document.querySelectorAll(".window-item");
-            const itemsByRow: Record<string, HTMLElement[]> = {};
-
-            windowItems.forEach((item) => {
-              const rowIndex = item.getAttribute("data-row-index");
-              if (rowIndex) {
-                if (!itemsByRow[rowIndex]) {
-                  itemsByRow[rowIndex] = [];
-                }
-                itemsByRow[rowIndex].push(item as HTMLElement);
-              }
-            });
-
-            // For each row, find max height and apply to all Cards in that row
-            Object.entries(itemsByRow).forEach(([rowIndex, items]) => {
-              const maxHeight = maxRowHeights[parseInt(rowIndex, 10)];
-              if (maxHeight) {
-                items.forEach((item) => {
-                  // Find all Cards within this window-item
-                  const cards = item.querySelectorAll(".Card");
-                  cards.forEach((card) => {
-                    (card as HTMLElement).style.height = `${maxHeight}px`;
-                  });
-
-                  // Also ensure the card-container has full height
-                  const containers = item.querySelectorAll(".card-container");
-                  containers.forEach((container) => {
-                    (container as HTMLElement).style.height = "100%";
-                  });
-                });
-              }
-            });
-          }, 50); // Short delay to ensure DOM is updated
-        }
-      }
-    };
-
-    // Synchronize on mount
-    synchronizeRowHeights();
-
-    // Also synchronize after images might have loaded
-    window.addEventListener("load", synchronizeRowHeights);
-
-    // Set up periodic synchronization to handle dynamic content changes
-    // This ensures that if images load or content changes, heights stay in sync
-    const syncInterval = setInterval(synchronizeRowHeights, 300);
-
-    // Clean up interval and event listeners on unmount
-    return () => {
-      clearInterval(syncInterval);
-      window.removeEventListener("load", synchronizeRowHeights);
-    };
-  }, [cache, itemCount, countTilesInRow]);
-
-  // Function to get row elements and indices
-  const getRowElements = () => {
-    const rowElements: Record<string, HTMLElement[]> = {};
-    const windowItems = document.querySelectorAll(".window-item");
-
-    windowItems.forEach((item) => {
-      const rowIndex = item.getAttribute("data-row-index");
-      if (rowIndex) {
-        if (!rowElements[rowIndex]) {
-          rowElements[rowIndex] = [];
-        }
-        rowElements[rowIndex].push(item as HTMLElement);
-      }
-    });
-
-    return rowElements;
-  };
-
   // The main synchronization function - designed to be highly resilient
-  const synchronizeCardHeights = () => {
+  const synchronizeCardHeights = useCallback(() => {
     const rowElements = getRowElements();
     if (Object.keys(rowElements).length === 0) return;
 
@@ -464,12 +353,44 @@ const GridDynamicHeight = ({
       });
     });
 
-    // Force list update
+    // Update the list in a way that preserves scroll position
     if (listRef.current) {
-      listRef.current.recomputeRowHeights();
+      // Use forceUpdateGrid instead of recomputeRowHeights to avoid scroll jumps
       listRef.current.forceUpdateGrid();
     }
-  };
+  }, [cache]);
+
+  // Enhanced loadMoreItems function with loading state control
+  const handleLoadMoreItems = useCallback(
+    (params: { startIndex: number; stopIndex: number }) => {
+      // Don't load if we're already loading or out of files
+      if (isLoadingMore.current || !hasMoreFiles) return Promise.resolve();
+
+      // Set loading state
+      isLoadingMore.current = true;
+
+      // Return the original loadMoreRows promise but ensure we reset the loading flag when done
+      return Promise.resolve(loadMoreRows(params))
+        .then((result) => {
+          // Short delay before allowing more loads to prevent rapid consecutive loads
+          setTimeout(() => {
+            isLoadingMore.current = false;
+
+            // Force synchronize card heights after loading new items
+            synchronizeCardHeights();
+          }, 300);
+          return result;
+        })
+        .catch((error) => {
+          console.error("Error loading more items:", error);
+          isLoadingMore.current = false;
+          throw error;
+        });
+    },
+    [loadMoreRows, hasMoreFiles],
+  );
+
+  const listClassName = classNames(styles.list, className, styles.tile);
 
   // Handle window resize specifically with a more robust approach
   useEffect(() => {
@@ -478,9 +399,6 @@ const GridDynamicHeight = ({
         window.clearTimeout(resizeTimerRef.current);
         resizeTimerRef.current = null;
       }
-
-      // Clear cache to force complete recalculation
-      cache.clearAll();
 
       // Schedule synchronization with debouncing
       resizeTimerRef.current = window.setTimeout(() => {
@@ -494,7 +412,7 @@ const GridDynamicHeight = ({
     // Add resize listener
     window.addEventListener("resize", handleResize);
 
-    // Start observing DOM changes
+    // Start observing DOM changes that might affect heights
     const mutationObserver = new MutationObserver(() => {
       // Add a debouncing mechanism to avoid excessive calls
       if (synchronizationScheduled.current) return;
@@ -513,7 +431,7 @@ const GridDynamicHeight = ({
       attributeFilter: ["style", "class"],
     });
 
-    // Perform initial synchronization - reduce redundant calls
+    // Perform initial synchronization
     requestAnimationFrame(() => {
       synchronizeCardHeights();
       // One additional sync after a delay to catch any late-rendered items
@@ -528,47 +446,13 @@ const GridDynamicHeight = ({
         window.clearTimeout(resizeTimerRef.current);
       }
     };
-  }, [cache]);
-
-  // Add a small style block to enforce consistent Card heights via CSS as well
-  // This provides a fallback mechanism if the JS synchronization fails for any reason
-  // useEffect(() => {
-  //   // Create a style element for our custom CSS
-  //   const styleElement = document.createElement("style");
-  //   styleElement.type = "text/css";
-  //   styleElement.innerHTML = `
-  //     /* Ensure Cards maintain consistent height */
-  //     .window-item .Card {
-  //       height: 100%;
-  //       display: flex;
-  //       flex-direction: column;
-  //     }
-
-  //     /* Ensure thumbnail images are centered vertically */
-  //     .window-item .Card .thumbnail-image {
-  //       margin: auto;
-  //       object-fit: contain;
-  //       max-height: 100%;
-  //     }
-  //   `;
-
-  //   // Add the style element to the document head
-  //   document.head.appendChild(styleElement);
-
-  //   // Clean up on unmount
-  //   return () => {
-  //     document.head.removeChild(styleElement);
-  //   };
-  // }, []);
-
-  // Calculate total rows for InfiniteLoader
-  const infiniteLoaderRowCount = Math.ceil(itemCount / countTilesInRow);
+  }, [synchronizeCardHeights]);
 
   return (
     <InfiniteLoader
       isRowLoaded={isItemLoaded}
-      loadMoreRows={loadMoreRows}
-      rowCount={infiniteLoaderRowCount}
+      loadMoreRows={handleLoadMoreItems}
+      rowCount={itemCount}
       threshold={3}
     >
       {({ onRowsRendered, registerChild }) => (
@@ -592,13 +476,14 @@ const GridDynamicHeight = ({
                   onRowsRendered(params);
 
                   // Check if we're near the end of loaded rows and trigger loading
-                  const { stopIndex, overscanStopIndex } = params;
+                  const { stopIndex } = params;
+
                   if (
                     hasMoreFiles &&
-                    (stopIndex >= children.length - 10 ||
-                      overscanStopIndex >= children.length - 5)
+                    !isLoadingMore.current &&
+                    stopIndex >= itemCount - 3
                   ) {
-                    loadMoreRows({
+                    handleLoadMoreItems({
                       startIndex: children.length,
                       stopIndex: children.length + 10,
                     });
@@ -610,7 +495,7 @@ const GridDynamicHeight = ({
                     registerChild(ref);
                   }
                 }}
-                rowCount={infiniteLoaderRowCount}
+                rowCount={itemCount}
                 deferredMeasurementCache={cache}
                 rowHeight={getItemSize}
                 rowRenderer={renderTile}
@@ -618,7 +503,7 @@ const GridDynamicHeight = ({
                 isScrolling={isScrolling}
                 onChildScroll={onChildScroll}
                 scrollTop={scrollTop}
-                overscanRowCount={10}
+                overscanRowCount={20} // Increase overscan to reduce flickering
                 onScroll={(info) => {
                   // Call the parent onScroll if provided
                   if (onScroll) {
@@ -626,21 +511,16 @@ const GridDynamicHeight = ({
                   }
 
                   // Enhanced scroll position check
-                  if (hasMoreFiles) {
+                  if (hasMoreFiles && !isLoadingMore.current) {
                     // Look at both scroll percentage and proximity to loaded rows
                     const scrollPercentage =
                       info.scrollTop /
                       (info.scrollHeight - info.clientHeight || 1);
-                    const visibleRowCount = Math.ceil(info.clientHeight / 200); // Estimate rows visible
-                    const visibleBottom =
-                      Math.floor(info.scrollTop / 200) + visibleRowCount;
 
-                    // Load more if either near bottom by percentage or approaching last loaded rows
-                    if (
-                      scrollPercentage > 0.6 ||
-                      visibleBottom >= children.length - 5
-                    ) {
-                      loadMoreRows({
+                    // Load more if approaching the bottom by percentage
+                    if (scrollPercentage > 0.7) {
+                      // More generous threshold
+                      handleLoadMoreItems({
                         startIndex: children.length,
                         stopIndex: children.length + 10,
                       });
@@ -648,6 +528,7 @@ const GridDynamicHeight = ({
                   }
                 }}
                 className={listClassName}
+                style={{ overflowX: "hidden" }} // Prevent horizontal scrolling
               />
             );
           }}

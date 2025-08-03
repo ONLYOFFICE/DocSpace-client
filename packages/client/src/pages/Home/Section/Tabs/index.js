@@ -40,13 +40,13 @@ const SectionSubmenuContent = ({
   allowInvitingGuests,
   checkGuests,
   hasGuests,
+  currentClientView,
 }) => {
   const [showGuestsTab, setShowGuestsTab] = useState(true);
   const [isCheckGuests, setIsCheckGuests] = useState(false);
 
-  const location = useLocation();
-
-  const isContacts = getContactsView(location);
+  const isContacts =
+    currentClientView === "users" || currentClientView === "groups";
 
   useEffect(() => {
     if (typeof hasGuests !== "boolean") return;
@@ -56,28 +56,40 @@ const SectionSubmenuContent = ({
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 
-  if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
   if (isContacts && (allowInvitingGuests || isCheckGuests))
     return (
       <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
     );
-  if (isRoomsFolderRoot || isTemplatesFolder) return <RoomTemplatesTabs />;
+
+  if (!isContacts && (isPersonalRoom || isRecentTab))
+    return <MyDocumentsTabs />;
+  if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
+    return <RoomTemplatesTabs />;
   return null;
 };
 
-export default inject(({ treeFoldersStore, settingsStore }) => {
-  const { isPersonalRoom, isRecentTab, isRoomsFolderRoot, isTemplatesFolder } =
-    treeFoldersStore;
+export default inject(
+  ({ treeFoldersStore, settingsStore, clientLoadingStore }) => {
+    const {
+      isPersonalRoom,
+      isRecentTab,
+      isRoomsFolderRoot,
+      isTemplatesFolder,
+    } = treeFoldersStore;
 
-  const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
+    const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
 
-  return {
-    isPersonalRoom,
-    isRecentTab,
-    isRoomsFolderRoot,
-    isTemplatesFolder,
-    allowInvitingGuests,
-    checkGuests,
-    hasGuests,
-  };
-})(observer(SectionSubmenuContent));
+    const { currentClientView } = clientLoadingStore;
+
+    return {
+      isPersonalRoom,
+      isRecentTab,
+      isRoomsFolderRoot,
+      isTemplatesFolder,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
+      currentClientView,
+    };
+  },
+)(observer(SectionSubmenuContent));

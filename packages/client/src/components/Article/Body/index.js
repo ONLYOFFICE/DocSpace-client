@@ -67,7 +67,6 @@ const ArticleBodyContent = (props) => {
     isVisitor,
     setIsLoading,
 
-    clearFiles,
     selectedFolderId,
     showArticleLoader,
     setIsBurgerLoading,

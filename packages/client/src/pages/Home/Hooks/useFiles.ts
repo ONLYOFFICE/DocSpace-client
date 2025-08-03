@@ -233,7 +233,7 @@ const useFiles = ({
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
-    axios
+    await axios
       .all(requests)
       .catch(() => {
         if (isRooms) {
@@ -302,7 +302,25 @@ const useFiles = ({
       .finally(() => {
         scrollToTop();
       });
-  }, [location.pathname, location.search]);
+  }, [
+    location.pathname,
+    location.search,
+    fetchFiles,
+    fetchRooms,
+    getFileInfo,
+    setIsPreview,
+    setIsUpdatingRowItem,
+    scrollToTop,
+    wsCreatedPDFForm,
+
+    playlist,
+    setToPreviewFile,
+
+    gallerySelected,
+    userId,
+
+    selectedFolderStore,
+  ]);
 
   return { getFiles };
 };

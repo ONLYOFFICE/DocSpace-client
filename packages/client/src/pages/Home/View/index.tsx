@@ -36,20 +36,30 @@ import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { getCategoryType } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent } from "../Section";
 import { ContactsSectionBodyContent } from "../Section";
 
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
+import useFiles, { UseFilesProps } from "../Hooks/useFiles";
 
-type ViewProps = UseContactsProps & {
-  setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
-  setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
+type ViewProps = UseContactsProps &
+  UseFilesProps & {
+    setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
+    setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
+    setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
 
-  usersAbortController: Nullable<AbortController>;
-  groupsAbortController: Nullable<AbortController>;
-};
+    clearFiles: FilesStore["clearFiles"];
+
+    usersAbortController: Nullable<AbortController>;
+    groupsAbortController: Nullable<AbortController>;
+
+    filesAbortController: Nullable<AbortController>;
+    roomsAbortController: Nullable<AbortController>;
+  };
 
 const View = ({
   scrollToTop,
@@ -70,6 +80,29 @@ const View = ({
 
   usersAbortController,
   groupsAbortController,
+
+  filesAbortController,
+  roomsAbortController,
+
+  fetchFiles,
+  fetchRooms,
+
+  playlist,
+
+  getFileInfo,
+  setToPreviewFile,
+  setIsPreview,
+
+  setIsUpdatingRowItem,
+
+  gallerySelected,
+  userId,
+
+  selectedFolderStore,
+  wsCreatedPDFForm,
+  clearFiles,
+
+  setIsSectionHeaderLoading,
 }: ViewProps) => {
   const location = useLocation();
 
@@ -79,6 +112,9 @@ const View = ({
   const [isLoading, setIsLoading] = React.useState(false);
 
   const startAnimationTimerRef = React.useRef<NodeJS.Timeout>(null);
+
+  const prevCurrentViewRef = React.useRef(currentView);
+  const prevCategoryType = React.useRef(getCategoryType(location));
 
   const { fetchContacts } = useContacts({
     isContactsPage,
@@ -96,6 +132,64 @@ const View = ({
     setGuestReleaseTipDialogVisible,
   });
 
+  const { getFiles } = useFiles({
+    fetchFiles,
+    fetchRooms,
+
+    playlist,
+
+    getFileInfo,
+    setToPreviewFile,
+    setIsPreview,
+
+    setIsUpdatingRowItem,
+
+    gallerySelected,
+    userId,
+
+    scrollToTop,
+    selectedFolderStore,
+    wsCreatedPDFForm,
+  });
+
+  const getFilesRef = React.useRef(getFiles);
+  const fetchContactsRef = React.useRef(fetchContacts);
+
+  const abortControllers = React.useRef({
+    filesAbortController,
+    roomsAbortController,
+    usersAbortController,
+    groupsAbortController,
+  });
+
+  React.useLayoutEffect(() => {
+    setIsSectionHeaderLoading(true, false);
+  }, []);
+
+  React.useEffect(() => {
+    prevCurrentViewRef.current = currentView;
+  }, [currentView]);
+
+  React.useEffect(() => {
+    getFilesRef.current = getFiles;
+  }, [getFiles]);
+
+  React.useEffect(() => {
+    fetchContactsRef.current = fetchContacts;
+  }, [fetchContacts]);
+
+  React.useEffect(() => {
+    abortControllers.current.filesAbortController = filesAbortController;
+    abortControllers.current.roomsAbortController = roomsAbortController;
+    abortControllers.current.usersAbortController = usersAbortController;
+    abortControllers.current.groupsAbortController = groupsAbortController;
+  }, [
+    filesAbortController,
+    roomsAbortController,
+    usersAbortController,
+    groupsAbortController,
+  ]);
+
   React.useEffect(() => {
     if (!isLoading) {
       TopLoadingIndicator.end();
@@ -108,9 +202,17 @@ const View = ({
 
     if (isLoading) {
       const view = getContactsView();
-      const tab = document.getElementById("contacts-tabs");
+      const tab =
+        document.getElementById("contacts-tabs") ||
+        document.getElementById("files-tabs");
 
-      if (!tab || view === "inside_group") {
+      if (
+        !tab ||
+        view === "inside_group" ||
+        (isContactsPage && prevCurrentViewRef.current === "files") ||
+        (!isContactsPage && prevCurrentViewRef.current !== "files") ||
+        prevCategoryType.current !== getCategoryType(location)
+      ) {
         TopLoadingIndicator.start();
 
         return;
@@ -123,7 +225,7 @@ const View = ({
       startAnimationTimerRef.current = setTimeout(() => {
         const event = new CustomEvent(TabsEvent.START_ANIMATION, {
           detail: {
-            id: isContactsPage ? "contacts-tabs" : "files",
+            id: tab.id,
           },
         });
 
@@ -131,17 +233,29 @@ const View = ({
         startAnimationTimerRef.current = null;
       }, 500);
     }
-  }, [isLoading, isContactsPage]);
+  }, [isLoading, isContactsPage, location]);
 
   React.useEffect(() => {
     const getView = async () => {
       try {
-        usersAbortController?.abort();
-        groupsAbortController?.abort();
+        abortControllers.current.usersAbortController?.abort();
+        abortControllers.current.groupsAbortController?.abort();
+        abortControllers.current.filesAbortController?.abort();
+        abortControllers.current.roomsAbortController?.abort();
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
-        const view = await fetchContacts();
+        let view: void | "groups" | "files" | "users" =
+          await fetchContactsRef.current();
+
+        if (!isContactsPage) {
+          await getFilesRef.current();
+
+          view = "files";
+          prevCategoryType.current = getCategoryType(location);
+        } else {
+          clearFiles();
+        }
 
         if (view) {
           setCurrentView(view);
@@ -161,7 +275,7 @@ const View = ({
     };
 
     getView();
-  }, [location.pathname, location.search, fetchContacts]);
+  }, [location, isContactsPage]);
 
   return (
     <div
@@ -196,6 +310,10 @@ export const ViewComponent = inject(
     dialogsStore,
     filesStore,
     clientLoadingStore,
+    mediaViewerDataStore,
+    oformsStore,
+    userStore,
+    selectedFolderStore,
   }: TStore) => {
     const { usersStore, groupsStore } = peopleStore;
 
@@ -217,10 +335,30 @@ export const ViewComponent = inject(
 
     const { setGuestReleaseTipDialogVisible } = dialogsStore;
 
-    const { scrollToTop } = filesStore;
+    const {
+      scrollToTop,
+      fetchFiles,
+      fetchRooms,
+      getFileInfo,
+      setIsPreview,
+      setIsUpdatingRowItem,
+      wsCreatedPDFForm,
 
-    const { setIsChangePageRequestRunning, setCurrentClientView } =
-      clientLoadingStore;
+      filesController,
+      roomsController,
+
+      clearFiles,
+    } = filesStore;
+
+    const {
+      setIsChangePageRequestRunning,
+      setCurrentClientView,
+      setIsSectionHeaderLoading,
+    } = clientLoadingStore;
+
+    const { playlist, setToPreviewFile } = mediaViewerDataStore;
+
+    const { gallerySelected } = oformsStore;
 
     return {
       setContactsTab,
@@ -234,12 +372,34 @@ export const ViewComponent = inject(
       setGuestReleaseTipDialogVisible,
 
       scrollToTop,
+      fetchFiles,
+      fetchRooms,
+      getFileInfo,
+      setIsPreview,
+      setIsUpdatingRowItem,
+      wsCreatedPDFForm,
 
       setIsChangePageRequestRunning,
       setCurrentClientView,
 
       usersAbortController,
       groupsAbortController,
+
+      filesAbortController: filesController,
+      roomsAbortController: roomsController,
+
+      playlist,
+      setToPreviewFile,
+
+      gallerySelected,
+
+      userId: userStore?.user?.id,
+
+      selectedFolderStore,
+
+      clearFiles,
+
+      setIsSectionHeaderLoading,
     };
   },
 )(observer(View));

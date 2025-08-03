@@ -56,7 +56,6 @@ import {
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -173,14 +172,16 @@ const SectionHeaderContent = (props) => {
     showTemplateBadge,
     allowInvitingMembers,
     contactsTab,
+    currentClientView,
   } = props;
 
   const location = useLocation();
 
-  const contactsView = contactsTab;
-  const isContactsPage = !!contactsView;
-  const isContactsGroupsPage = contactsView === "groups";
-  const isContactsInsideGroupPage = contactsView === "inside_group";
+  const contactsView =
+    currentClientView === "users" || currentClientView === "groups";
+  const isContactsPage = contactsView;
+  const isContactsGroupsPage = contactsTab === "groups";
+  const isContactsInsideGroupPage = contactsTab === "inside_group";
 
   const addButtonRefCallback = React.useCallback(
     (ref) => {
@@ -790,6 +791,8 @@ export default inject(
       showHeaderLoader,
 
       isLoading,
+
+      currentClientView,
     } = clientLoadingStore;
 
     const setIsLoading = (param) => {
@@ -924,6 +927,7 @@ export default inject(
       : selectedFolder.id;
 
     return {
+      currentClientView,
       showText: settingsStore.showText,
       isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,

@@ -386,7 +386,7 @@ class UsersStore {
 
     setContactsUsersFilterUrl(
       filter,
-      this.contactsTab,
+      getContactsView(),
       this.groupsStore.currentGroup?.id,
     );
   };

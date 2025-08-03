@@ -37,6 +37,7 @@ import {
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/shared/components/section";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -61,29 +62,17 @@ import {
 
 import MediaViewer from "./MediaViewer";
 
-import { useFiles, useSDK, useOperations } from "./Hooks";
+import { useSDK, useOperations } from "./Hooks";
 
 const PureHome = (props) => {
   const {
     currentClientView,
     isChangePageRequestRunning,
 
-    fetchFiles,
-    fetchRooms,
-
-    // homepage,
-    setIsSectionHeaderLoading,
-    setIsSectionBodyLoading,
     isLoading,
 
-    setToPreviewFile,
-    playlist,
-
     folderSecurity,
-    getFileInfo,
-    gallerySelected,
-    setIsUpdatingRowItem,
-    setIsPreview,
+
     selectedFolderStore,
     t,
     startUpload,
@@ -139,9 +128,7 @@ const PureHome = (props) => {
     userId,
     getFolderModel,
     getContactsModel,
-    scrollToTop,
     isEmptyGroups,
-    wsCreatedPDFForm,
 
     isUsersEmptyView,
 
@@ -171,8 +158,6 @@ const PureHome = (props) => {
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
-  // console.log(t("ComingSoon"))
-
   const location = useLocation();
 
   const isSettingsPage =
@@ -187,21 +172,15 @@ const PureHome = (props) => {
       ? "people"
       : view;
 
-  const isContactsPage = !!contactsView;
+  const isContactsPage =
+    currentClientView === "users" || currentClientView === "groups";
+
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
 
-  const setIsLoading = React.useCallback(
-    (param, withoutTimer, withHeaderLoader) => {
-      if (withHeaderLoader)
-        return setIsSectionHeaderLoading(param, !withoutTimer);
-
-      setIsSectionBodyLoading(param, !withoutTimer);
-    },
-    [setIsSectionHeaderLoading, setIsSectionBodyLoading],
-  );
-
   const onDrop = (files, uploadToFolder) => {
+    if (isContactsPage) return;
+
     if (
       folderSecurity &&
       hasOwnProperty(folderSecurity, "Create") &&
@@ -221,39 +200,6 @@ const PureHome = (props) => {
         toastr.error(err, null, 0, true);
       });
   };
-
-  useFiles({
-    t,
-    dragging,
-    setDragging,
-    disableDrag,
-    createFoldersTree,
-    startUpload,
-    fetchFiles,
-    fetchRooms,
-    setIsLoading,
-
-    isContactsPage,
-    isSettingsPage,
-
-    location,
-
-    playlist,
-
-    getFileInfo,
-    setToPreviewFile,
-    setIsPreview,
-
-    setIsUpdatingRowItem,
-
-    gallerySelected,
-    folderSecurity,
-    userId,
-
-    scrollToTop,
-    selectedFolderStore,
-    wsCreatedPDFForm,
-  });
 
   useOperations({
     clearUploadData,
@@ -419,7 +365,7 @@ const PureHome = (props) => {
           </Section.SectionFilter>
         ) : null}
 
-        <Section.SectionBody isAccounts={isContactsPage}>
+        <Section.SectionBody>
           <Outlet />
         </Section.SectionBody>
 

@@ -287,9 +287,6 @@ class FilesStore {
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
 
-    this.roomsController = new AbortController();
-    this.filesController = new AbortController();
-
     SocketHelper.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
       const { isFrame } = this.settingsStore;
 
@@ -1567,13 +1564,6 @@ class FilesStore {
     return res;
   };
 
-  abortAllFetch = () => {
-    this.filesController.abort();
-    this.roomsController.abort();
-    this.filesController = new AbortController();
-    this.roomsController = new AbortController();
-  };
-
   fetchFiles = (
     folderId,
     filter,
@@ -1585,10 +1575,6 @@ class FilesStore {
     const { setIsIndexEditingMode } = this.indexingStore;
 
     setIsIndexEditingMode(false);
-
-    if (this.clientLoadingStore.isLoading) {
-      this.abortAllFetch();
-    }
 
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
@@ -1633,6 +1619,14 @@ class FilesStore {
       filterData.filterType = defaultFilter.filterType;
 
     setSelectedNode([`${folderId}`]);
+
+    this.filesController?.abort();
+    this.roomsController?.abort();
+
+    runInAction(() => {
+      this.filesController = new AbortController();
+      this.roomsController = null;
+    });
 
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
@@ -1901,6 +1895,8 @@ class FilesStore {
           this.setIsErrorRoomNotAvailable(true);
         } else if (axios.isCancel(err)) {
           console.log("Request canceled", err.message);
+
+          throw err;
         } else {
           toastr.error(err);
           if (isThirdPartyError) {
@@ -1921,6 +1917,10 @@ class FilesStore {
       })
       .finally(() => {
         this.setIsLoadedFetchFiles(true);
+
+        runInAction(() => {
+          this.filesController = null;
+        });
 
         if (window?.DocSpace?.location?.state?.highlightFileId) {
           this.setHighlightFile({
@@ -1943,10 +1943,6 @@ class FilesStore {
     const { setIsIndexEditingMode } = this.indexingStore;
 
     setIsIndexEditingMode(false);
-
-    if (this.clientLoadingStore.isLoading) {
-      this.abortAllFetch();
-    }
 
     const filterData = filter
       ? filter.clone()
@@ -1975,6 +1971,14 @@ class FilesStore {
       quotaFilter !== FilterKeys.defaultQuota
     )
       filterData.quotaFilter = defaultFilter.quotaFilter;
+
+    this.filesController?.abort();
+    this.roomsController?.abort();
+
+    runInAction(() => {
+      this.roomsController = new AbortController();
+      this.filesController = null;
+    });
 
     const request = () =>
       api.rooms
@@ -2084,6 +2088,11 @@ class FilesStore {
 
             this.setCreatedItem(null);
           }
+
+          runInAction(() => {
+            this.roomsController = null;
+          });
+
           this.setIsErrorRoomNotAvailable(false);
           return Promise.resolve(selectedFolder);
         })
@@ -2093,6 +2102,7 @@ class FilesStore {
 
           if (axios.isCancel(err)) {
             console.log("Request canceled", err.message);
+            throw err;
           } else {
             toastr.error(err);
           }

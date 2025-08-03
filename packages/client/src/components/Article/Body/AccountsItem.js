@@ -40,19 +40,12 @@ const PureAccountsItem = ({
   t,
   currentColorScheme,
   getLinkData,
-
-  setContactsTab,
-
-  filesController,
-  roomsController,
 }) => {
   const onClickAction = React.useCallback(
     (e) => {
-      filesController?.abort();
-      roomsController?.abort();
       onClick && onClick(e, "accounts");
     },
-    [onClick, filesController, roomsController],
+    [onClick],
   );
 
   const icon = getCatalogIconUrlByType(PageType.account);

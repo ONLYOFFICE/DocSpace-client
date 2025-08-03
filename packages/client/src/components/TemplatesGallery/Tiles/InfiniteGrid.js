@@ -103,8 +103,6 @@ const InfiniteGrid = (props) => {
         addItemToList(listKey, true);
       }
 
-
-
       const cardKey = uniqueid("card-item_");
       cards.push(
         <Card countTilesInRow={countTilesInRow} key={cardKey}>
@@ -138,7 +136,6 @@ const InfiniteGrid = (props) => {
     const listKey = uniqueid("list-item_");
     addItemToList(listKey);
   }
-
 
   return (
     <InfiniteLoaderComponent

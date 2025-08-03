@@ -26,7 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { observer, inject } from "mobx-react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
 
@@ -54,7 +54,7 @@ const Form: FC<FormProps> = ({
   fetchOforms,
 }) => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [isInitLoading, setIsInitLoading] = useState(true);
 

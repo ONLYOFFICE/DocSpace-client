@@ -445,7 +445,7 @@ export function editExternalLink(
 }
 export function createExternalLink(
   roomId: number | string,
-  link?: Partial<{
+  link: Partial<{
     title: string;
     access: ShareAccessRights;
     expirationDate: moment.Moment | string | null;

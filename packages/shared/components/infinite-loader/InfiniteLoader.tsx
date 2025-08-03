@@ -40,9 +40,14 @@ const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
   const [scrollTop, setScrollTop] = useState(0);
   const [showSkeleton, setShowSkeleton] = useState(false);
 
-  const scroll = isMobile()
-    ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
-    : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
+  const scroll =
+    viewAs === "tileDynamicHeight"
+      ? document.querySelector(
+          "#scroll-templates-gallery .scroll-wrapper > .scroller",
+        )
+      : isMobile()
+        ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
+        : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
 
   const onScroll = (e: Event) => {
     const eventTarget = e.target as HTMLElement;
@@ -72,6 +77,8 @@ const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
   });
 
   if (isLoading) return null;
+
+  console.log("scroll", scroll);
 
   return viewAs === "tileDynamicHeight" ? (
     <GridDynamicHeight

@@ -141,14 +141,6 @@ const CategoryFilter = ({
     setCategoryFilterLoaded(menuItems.length !== 0);
   }, [menuItems.length]);
 
-  console.log("filterOformsByLocaleIsLoading", filterOformsByLocaleIsLoading);
-  console.log(
-    "categoryFilterLoaded languageFilterLoaded oformFilesLoaded",
-    categoryFilterLoaded,
-    languageFilterLoaded,
-    oformFilesLoaded,
-  );
-
   // if (
   //   filterOformsByLocaleIsLoading ||
   //   !(categoryFilterLoaded && languageFilterLoaded && oformFilesLoaded)

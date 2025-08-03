@@ -34,8 +34,8 @@ import {
 } from "react-virtualized";
 import classNames from "classnames";
 
-import { TileSkeleton } from "../../../skeletons/tiles";
-import { RectangleSkeleton } from "../../../skeletons/rectangle";
+// import { TileSkeleton } from "../../../skeletons/tiles";
+// import { RectangleSkeleton } from "../../../skeletons/rectangle";
 
 import { GridComponentProps } from "../InfiniteLoader.types";
 import styles from "../InfiniteLoader.module.scss";
@@ -50,7 +50,7 @@ const GridDynamicHeight = ({
   children,
   className,
   scroll,
-  showSkeleton,
+  // showSkeleton,
   currentFolderId,
 }: GridComponentProps) => {
   // Reference to the List component for recomputing row heights
@@ -90,6 +90,7 @@ const GridDynamicHeight = ({
     }
   });
 
+  // Fixed isItemLoaded implementation with correct logic from GridComponent
   const isItemLoaded = useCallback(
     ({ index }: { index: number }) => {
       return !hasMoreFiles || (index + 1) * countTilesInRow < filesLength;
@@ -101,7 +102,7 @@ const GridDynamicHeight = ({
     index,
     style,
     key,
-    isScrolling,
+    // isScrolling,
     parent, // Required for CellMeasurer
   }: {
     index: number;
@@ -116,56 +117,56 @@ const GridDynamicHeight = ({
       registerChild?: (element: HTMLElement | null) => void;
     }; // Type that matches CellMeasurer requirements
   }) => {
-    const elem = children[index] as React.ReactElement;
-    const itemClassNames = (elem.props as { className?: string })?.className;
+    // const elem = children[index] as React.ReactElement;
+    // const itemClassNames = (elem.props as { className?: string })?.className;
 
-    const isFolder = itemClassNames?.includes("isFolder");
-    const isRoom = itemClassNames?.includes("isRoom");
-    const isHeader =
-      itemClassNames?.includes("folder_header") ||
-      itemClassNames?.includes("files_header");
+    // const isFolder = itemClassNames?.includes("isFolder");
+    // const isRoom = itemClassNames?.includes("isRoom");
+    // const isHeader =
+    //   itemClassNames?.includes("folder_header") ||
+    //   itemClassNames?.includes("files_header");
 
-    if (isScrolling && showSkeleton) {
-      const list = [];
-      let i = 0;
+    // if (isScrolling && showSkeleton) {
+    //   const list = [];
+    //   let i = 0;
 
-      if (isHeader) {
-        return (
-          <div key={key} style={style}>
-            <div className={styles.item}>
-              <RectangleSkeleton height="22px" width="100px" animate />
-            </div>
-          </div>
-        );
-      }
+    //   if (isHeader) {
+    //     return (
+    //       <div key={key} style={style}>
+    //         <div className={styles.item}>
+    //           <RectangleSkeleton height="22px" width="100px" animate />
+    //         </div>
+    //       </div>
+    //     );
+    //   }
 
-      while (i < countTilesInRow) {
-        list.push(
-          <TileSkeleton
-            key={`${key}_${i}`}
-            isFolder={isFolder}
-            isRoom={isRoom}
-          />,
-        );
-        i += 1;
-      }
+    //   while (i < countTilesInRow) {
+    //     list.push(
+    //       <TileSkeleton
+    //         key={`${key}_${i}`}
+    //         isFolder={isFolder}
+    //         isRoom={isRoom}
+    //       />,
+    //     );
+    //     i += 1;
+    //   }
 
-      const rowIndex = Math.floor(index / countTilesInRow);
-      const rowHeight = cache.getHeight(rowIndex * countTilesInRow, 0);
+    //   const rowIndex = Math.floor(index / countTilesInRow);
+    //   const rowHeight = cache.getHeight(rowIndex * countTilesInRow, 0);
 
-      return (
-        <div
-          style={{
-            ...style,
-            height: rowHeight ? `${rowHeight}px` : "auto",
-          }}
-          key={key}
-          data-row-index={rowIndex}
-        >
-          <div className={styles.item}>{list.map((item) => item)}</div>
-        </div>
-      );
-    }
+    //   return (
+    //     <div
+    //       style={{
+    //         ...style,
+    //         height: rowHeight ? `${rowHeight}px` : "auto",
+    //       }}
+    //       key={key}
+    //       data-row-index={rowIndex}
+    //     >
+    //       <div className={styles.item}>{list.map((item) => item)}</div>
+    //     </div>
+    //   );
+    // }
 
     const rowIndex = Math.floor(index / countTilesInRow);
     const rowHeight = cache.getHeight(rowIndex * countTilesInRow, 0);
@@ -531,45 +532,44 @@ const GridDynamicHeight = ({
 
   // Add a small style block to enforce consistent Card heights via CSS as well
   // This provides a fallback mechanism if the JS synchronization fails for any reason
-  useEffect(() => {
-    // Create a style element for our custom CSS
-    const styleElement = document.createElement("style");
-    styleElement.type = "text/css";
-    styleElement.innerHTML = `
-      /* Ensure Cards maintain consistent height */
-      .window-item .Card {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
+  // useEffect(() => {
+  //   // Create a style element for our custom CSS
+  //   const styleElement = document.createElement("style");
+  //   styleElement.type = "text/css";
+  //   styleElement.innerHTML = `
+  //     /* Ensure Cards maintain consistent height */
+  //     .window-item .Card {
+  //       height: 100%;
+  //       display: flex;
+  //       flex-direction: column;
+  //     }
 
-      /* Ensure thumbnail images are centered vertically */
-      .window-item .Card .thumbnail-image {
-        margin: auto;
-        object-fit: contain;
-        max-height: 100%;
-      }
-    `;
+  //     /* Ensure thumbnail images are centered vertically */
+  //     .window-item .Card .thumbnail-image {
+  //       margin: auto;
+  //       object-fit: contain;
+  //       max-height: 100%;
+  //     }
+  //   `;
 
-    // Add the style element to the document head
-    document.head.appendChild(styleElement);
+  //   // Add the style element to the document head
+  //   document.head.appendChild(styleElement);
 
-    // Clean up on unmount
-    return () => {
-      document.head.removeChild(styleElement);
-    };
-  }, []);
+  //   // Clean up on unmount
+  //   return () => {
+  //     document.head.removeChild(styleElement);
+  //   };
+  // }, []);
 
   // Calculate total rows for InfiniteLoader
-  const infiniteLoaderRowCount = hasMoreFiles
-    ? children.length + 1
-    : children.length;
+  const infiniteLoaderRowCount = Math.ceil(itemCount / countTilesInRow);
 
   return (
     <InfiniteLoader
       isRowLoaded={isItemLoaded}
       loadMoreRows={loadMoreRows}
       rowCount={infiniteLoaderRowCount}
+      threshold={3}
     >
       {({ onRowsRendered, registerChild }) => (
         <WindowScroller scrollElement={scroll}>
@@ -587,14 +587,30 @@ const GridDynamicHeight = ({
               <List
                 autoHeight
                 height={newHeight}
-                onRowsRendered={onRowsRendered}
+                onRowsRendered={(params) => {
+                  // Properly call the InfiniteLoader's onRowsRendered
+                  onRowsRendered(params);
+
+                  // Check if we're near the end of loaded rows and trigger loading
+                  const { stopIndex, overscanStopIndex } = params;
+                  if (
+                    hasMoreFiles &&
+                    (stopIndex >= children.length - 10 ||
+                      overscanStopIndex >= children.length - 5)
+                  ) {
+                    loadMoreRows({
+                      startIndex: children.length,
+                      stopIndex: children.length + 10,
+                    });
+                  }
+                }}
                 ref={(ref) => {
                   if (ref !== null) {
                     listRef.current = ref;
                     registerChild(ref);
                   }
                 }}
-                rowCount={children.length}
+                rowCount={infiniteLoaderRowCount}
                 deferredMeasurementCache={cache}
                 rowHeight={getItemSize}
                 rowRenderer={renderTile}
@@ -602,8 +618,35 @@ const GridDynamicHeight = ({
                 isScrolling={isScrolling}
                 onChildScroll={onChildScroll}
                 scrollTop={scrollTop}
-                overscanRowCount={3}
-                onScroll={onScroll}
+                overscanRowCount={10}
+                onScroll={(info) => {
+                  // Call the parent onScroll if provided
+                  if (onScroll) {
+                    onScroll();
+                  }
+
+                  // Enhanced scroll position check
+                  if (hasMoreFiles) {
+                    // Look at both scroll percentage and proximity to loaded rows
+                    const scrollPercentage =
+                      info.scrollTop /
+                      (info.scrollHeight - info.clientHeight || 1);
+                    const visibleRowCount = Math.ceil(info.clientHeight / 200); // Estimate rows visible
+                    const visibleBottom =
+                      Math.floor(info.scrollTop / 200) + visibleRowCount;
+
+                    // Load more if either near bottom by percentage or approaching last loaded rows
+                    if (
+                      scrollPercentage > 0.6 ||
+                      visibleBottom >= children.length - 5
+                    ) {
+                      loadMoreRows({
+                        startIndex: children.length,
+                        stopIndex: children.length + 10,
+                      });
+                    }
+                  }
+                }}
                 className={listClassName}
               />
             );

@@ -103,7 +103,7 @@ const InfiniteGrid = (props) => {
         addItemToList(listKey, true);
       }
 
-      console.log("countTilesInRow", countTilesInRow);
+
 
       const cardKey = uniqueid("card-item_");
       cards.push(
@@ -139,13 +139,6 @@ const InfiniteGrid = (props) => {
     addItemToList(listKey);
   }
 
-  console.log("InfiniteGrid hasMoreFiles", hasMoreFiles);
-
-  console.log(
-    "filesLength itemCount",
-    filesLength,
-    hasMoreFiles ? list.length + 1 : list.length,
-  );
 
   return (
     <InfiniteLoaderComponent

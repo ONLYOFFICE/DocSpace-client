@@ -59,8 +59,11 @@ const Form: FC<FormProps> = ({
   const [isInitLoading, setIsInitLoading] = useState(true);
 
   useEffect(() => {
-    const firstLoadFilter = OformsFilter.getFilter(location);
+    console.log("location", location);
 
+    const firstLoadFilter = OformsFilter.getDefault();
+
+    console.log("firstLoadFilter", firstLoadFilter);
     if (firstLoadFilter) {
       Promise.all([fetchOforms(firstLoadFilter), fetchOformLocales()]).finally(
         () => {
@@ -71,12 +74,9 @@ const Form: FC<FormProps> = ({
   }, []);
 
   useEffect(() => {
-    if (
-      !isInitLoading &&
-      location.search !== `?${oformsFilter.toUrlParams()}`
-    ) {
+    if (!isInitLoading) {
       if (!oformsFilter.locale) oformsFilter.locale = defaultOformLocale;
-      navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
+      // navigate(`${location.pathname}?${oformsFilter.toUrlParams()}`);
     }
   }, [oformsFilter]);
 
@@ -89,7 +89,10 @@ const Form: FC<FormProps> = ({
   return (
     <div style={{ width: "100%", paddingLeft: "16px" }}>
       <SectionFilterContent />
-      <Scrollbar style={{ height: "calc(100vh - 286px)" }}>
+      <Scrollbar
+        style={{ height: "calc(100vh - 286px)" }}
+        id="scroll-templates-gallery"
+      >
         <Tiles />
       </Scrollbar>
     </div>

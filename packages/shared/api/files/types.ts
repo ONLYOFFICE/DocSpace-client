@@ -105,6 +105,7 @@ export type TFile = {
   fileType: FileType;
   folderId: number;
   id: number;
+  parentRoomType: FolderType;
   mute: boolean;
   pureContentLength: number;
   rootFolderId: number;
@@ -219,7 +220,7 @@ export type TFolder = {
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
-  parentRoomType?: number;
+  parentRoomType: FolderType;
   order?: string;
   isRoom?: false;
 };
@@ -442,6 +443,7 @@ export type TFileLink = {
   canEditAccess: boolean;
   canEditDenyDownload: boolean;
   canEditInternal: boolean;
+  canEditExpirationDate: boolean;
   isLocked: boolean;
   isOwner: boolean;
   sharedTo: {

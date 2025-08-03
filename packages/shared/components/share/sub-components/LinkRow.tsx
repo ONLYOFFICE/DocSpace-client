@@ -69,7 +69,6 @@ const LinkRow = ({
   isFolder = false,
   isFormRoom = false,
   isRoomsLink = false,
-  isPrimaryLink = false,
   isArchiveFolder = false,
   getData,
   onOpenContextMenu,
@@ -173,7 +172,6 @@ const LinkRow = ({
             link={link}
             isLoaded={isLoaded}
             isRoomsLink={isRoomsLink}
-            isPrimaryLink={isPrimaryLink}
             isArchiveFolder={isArchiveFolder}
             removedExpiredLink={removedExpiredLink}
             changeExpirationOption={changeExpirationOption}

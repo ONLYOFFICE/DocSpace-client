@@ -159,7 +159,6 @@ export type LinkRowProps = {
   setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
   isPublicRoomType: boolean;
   isFormRoom: boolean;
-  isPrimaryLink?: boolean;
   isCustomRoom: boolean;
   setExternalLink?: PublicRoomStore["setExternalLink"];
   editExternalLink?: PublicRoomStore["editExternalLink"];

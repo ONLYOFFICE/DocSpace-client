@@ -219,7 +219,6 @@ const Members = ({
           <LinkRow
             key="general-link"
             link={primaryLink}
-            isPrimaryLink
             isShareLink
             roomId={infoPanelSelection!.id}
             isPublicRoomType={isPublicRoom!}

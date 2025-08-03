@@ -84,13 +84,11 @@ export type LinkRowProps = {
 } & (
   | {
       isRoomsLink?: undefined | false;
-      isPrimaryLink?: undefined;
       isArchiveFolder?: undefined;
       onAccessRightsSelect?: never;
     }
   | {
       isRoomsLink: true;
-      isPrimaryLink: boolean;
       isArchiveFolder: boolean;
       onAccessRightsSelect: (option: TOption) => void;
     }
@@ -111,7 +109,7 @@ export type ShareProps = {
   infoPanelSelection: TFile | TFolder;
   setEmbeddingPanelData?: (value: {
     visible: boolean;
-    item: TFile | TFolder;
+    item?: TFile | TFolder;
   }) => void;
 
   setView?: (view: string) => void;

@@ -3324,7 +3324,6 @@ class FilesStore {
     return items.map((item) => {
       const {
         availableExternalRights,
-        shortWebUrl,
         access,
         autoDelete,
         originTitle,
@@ -3393,6 +3392,7 @@ class FilesStore {
         customFilterEnabled,
         customFilterEnabledBy,
         lockedBy,
+        ...rest
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3575,7 +3575,7 @@ class FilesStore {
         formFillingStatus,
         customFilterEnabled,
         customFilterEnabledBy,
-        shortWebUrl,
+        ...rest,
       };
     });
   };

@@ -65,7 +65,12 @@ import type { TOption } from "../../components/combobox";
 
 import UnsavedChangesDialog from "../unsaved-changes-dialog";
 
-import { DeviceType, RoomsType, ShareAccessRights } from "../../enums";
+import {
+  DeviceType,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+} from "../../enums";
 import { StyledEditLinkBodyContent } from "./EditLinkPanel.styled";
 
 // import LinkBlock from "./LinkBlock";
@@ -404,10 +409,17 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   }, [getPortalPasswordSettings]);
 
   const getExpiredLinkText = () => {
-    if (link?.sharedTo?.primary) {
-      if (isFormRoom) return t("Common:LimitTimeBlockFormRoomDescription");
-      if (isPublic) return t("Common:LimitTimeBlockPublicRoomDescription");
-      if (isCustomRoom) return t("Common:LimitTimeBlockCustomRoomDescription");
+    if (!link?.canEditExpirationDate) {
+      const isParentFormRoom =
+        !isRoom(item) && item.parentRoomType === FolderType.FormRoom;
+
+      const isParentPublicRoom =
+        !isRoom(item) && item.parentRoomType === FolderType.PublicRoom;
+
+      if (isFormRoom || isParentFormRoom)
+        return t("Common:LimitTimeBlockFormRoomDescription");
+      if (isPublic || isParentPublicRoom)
+        return t("Common:LimitTimeBlockPublicRoomDescription");
 
       return "";
     }
@@ -460,7 +472,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
 
   const isDisabledSaveButton = !hasChanges || isLoading || isExpired;
 
-  const canChangeLifetime = !isPrimary || !isRoom(item);
+  const canChangeLifetime = link?.canEditExpirationDate;
 
   const disabledDenyDownload = link?.canEditDenyDownload === false;
   const canEditInternal = link?.canEditInternal;

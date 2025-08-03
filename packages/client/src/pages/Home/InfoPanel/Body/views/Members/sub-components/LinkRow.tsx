@@ -60,7 +60,6 @@ const LinkRow = (props: LinkRowProps) => {
     setEmbeddingPanelData,
     isArchiveFolder,
     setIsScrollLocked,
-    isPrimaryLink,
     editExternalLink,
     setExternalLink,
     deleteExternalLink,
@@ -268,7 +267,6 @@ const LinkRow = (props: LinkRowProps) => {
       onCloseContextMenu={onCloseContextMenu}
       removedExpiredLink={removedExpiredLink}
       isRoomsLink
-      isPrimaryLink={isPrimaryLink ?? false}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder!}

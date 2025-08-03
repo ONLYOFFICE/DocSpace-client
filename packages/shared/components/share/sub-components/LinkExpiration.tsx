@@ -39,7 +39,6 @@ export interface LinkExpirationProps {
   link: TFileLink;
   isLoaded: boolean;
   isRoomsLink: boolean;
-  isPrimaryLink: boolean;
   isArchiveFolder: boolean;
 
   t: TTranslation;
@@ -55,12 +54,11 @@ export const LinkExpiration: FC<LinkExpirationProps> = ({
   link,
   isLoaded,
   isRoomsLink,
-  isPrimaryLink,
   isArchiveFolder,
   changeExpirationOption,
   removedExpiredLink,
 }) => {
-  if (isPrimaryLink) {
+  if (!link.canEditExpirationDate) {
     return (
       <Text
         fontSize="12px"

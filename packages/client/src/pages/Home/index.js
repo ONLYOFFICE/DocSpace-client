@@ -38,6 +38,7 @@ import {
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/shared/components/section";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { toastr } from "@docspace/shared/components/toast";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -152,7 +153,6 @@ const PureHome = (props) => {
 
     allowInvitingGuests,
     checkGuests,
-    hasGuests,
     sectionWithTabs,
   } = props;
 
@@ -160,17 +160,14 @@ const PureHome = (props) => {
 
   const location = useLocation();
 
+  // console.log(t("Common:ComingSoon"))
+
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
   const view = getContactsView(location);
   if (allowInvitingGuests === false && view === "guests") checkGuests();
-  const contactsView = allowInvitingGuests
-    ? view
-    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
-      ? "people"
-      : view;
 
   const isContactsPage =
     currentClientView === "users" || currentClientView === "groups";
@@ -178,7 +175,7 @@ const PureHome = (props) => {
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
 
-  const onDrop = (files, uploadToFolder) => {
+  const onDrop = (f, uploadToFolder) => {
     if (isContactsPage) return;
 
     if (
@@ -192,9 +189,9 @@ const PureHome = (props) => {
 
     if (disableDrag) return;
 
-    createFoldersTree(t, files, uploadToFolder)
-      .then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
+    createFoldersTree(t, f, uploadToFolder)
+      .then((fItem) => {
+        if (fItem.length > 0) startUpload(fItem, null, t);
       })
       .catch((err) => {
         toastr.error(err, null, 0, true);

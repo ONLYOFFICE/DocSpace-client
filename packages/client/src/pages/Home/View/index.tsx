@@ -40,8 +40,7 @@ import FilesStore from "SRC_DIR/store/FilesStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 
-import { SectionBodyContent } from "../Section";
-import { ContactsSectionBodyContent } from "../Section";
+import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { UseFilesProps } from "../Hooks/useFiles";

@@ -37,9 +37,10 @@ import {
   PEOPLE_ROUTE_WITH_FILTER,
   CONTACTS_ROUTE,
 } from "SRC_DIR/helpers/contacts";
-import PrivateRoute from "../components/PrivateRouteWrapper";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
+
+import PrivateRoute from "../components/PrivateRouteWrapper";
 
 export const contanctsRoutes = [
   {

@@ -26,6 +26,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
@@ -48,8 +49,14 @@ const MyDocumentsTabs = ({
   isPersonalReadOnly,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
+  const location = useLocation();
 
   const [selectedTab, setSelectedTab] = React.useState("my");
+
+  React.useEffect(() => {
+    const recentTab = getObjectByLocation(location)?.folder === "recent";
+    setSelectedTab(recentTab ? "recent" : "my");
+  }, [location]);
 
   if (isPersonalReadOnly) return null;
 
@@ -92,12 +99,6 @@ const MyDocumentsTabs = ({
     setFilter(filter);
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
   };
-
-  React.useEffect(() => {
-    const recentTab =
-      getObjectByLocation(window.DocSpace.location)?.folder === "recent";
-    setSelectedTab(recentTab ? "recent" : "my");
-  }, [window.DocSpace.location]);
 
   const showTabs = (isPersonalRoom || isRecentTab) && isRoot;
 

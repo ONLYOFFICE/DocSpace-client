@@ -99,24 +99,24 @@ const useContacts = ({
         await getGroups(newFilter, true, true);
 
         return "groups";
-      } else {
-        const newFilter = Filter.getFilter(location)!;
-
-        newFilter.area = isGuests ? "guests" : "people";
-
-        if (groupId) newFilter.group = groupId;
-
-        if (isGuests) {
-          newFilter.group = null;
-        }
-
-        await Promise.all([
-          getUsersList(newFilter, true, true),
-          groupId && isInsideGroup ? updateCurrentGroup(groupId) : null,
-        ]);
-
-        return "users";
       }
+
+      const newFilter = Filter.getFilter(location)!;
+
+      newFilter.area = isGuests ? "guests" : "people";
+
+      if (groupId) newFilter.group = groupId;
+
+      if (isGuests) {
+        newFilter.group = null;
+      }
+
+      await Promise.all([
+        getUsersList(newFilter, true, true),
+        groupId && isInsideGroup ? updateCurrentGroup(groupId) : null,
+      ]);
+
+      return "users";
     };
 
     const view = await getList();

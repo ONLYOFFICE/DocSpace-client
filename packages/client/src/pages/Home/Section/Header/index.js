@@ -35,7 +35,7 @@ import classnames from "classnames";
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";

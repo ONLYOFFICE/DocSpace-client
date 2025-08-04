@@ -301,6 +301,7 @@
             }
           }
           :global(.edit_toggle-text) {
+            user-select: none;
             text-decoration: underline;
             text-decoration-style: dashed;
             text-underline-offset: 2px;

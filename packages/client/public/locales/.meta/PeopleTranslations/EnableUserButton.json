@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:53.472Z",
-  "updated_at": "2025-05-26T07:57:32.843Z",
+  "updated_at": "2025-08-04T07:30:01.625Z",
   "comment": {
     "text": "This translation key \"EnableUserButton\" is used to display the text \"Enable\" on a button that allows users to activate or enable their account options. It appears as part of an action button in the ContactsContextOptionsStore, likely within a settings or configuration interface for user accounts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 226,
+      "line_number": 225,
       "context": "case \"enable\":\n return {\n id: \"option_enable\",\n key: option,\n icon: EnableReactSvgUrl,\n label: t(\"PeopleTranslations:EnableUserButton\"),\n onClick: () => this.onEnableClick(item),\n };\n case \"disable\":\n return {\n id: \"option_disable\",",
       "module": "/packages/client"
     }

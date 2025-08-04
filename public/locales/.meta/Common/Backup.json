@@ -3,7 +3,7 @@
   "content": "Backup",
   "content_en_sha1_hash": "dd96994d01e723dd6f9b0bdb6119722dbeb9faf0",
   "created_at": "2025-05-19T21:30:50.645Z",
-  "updated_at": "2025-06-30T12:20:31.387Z",
+  "updated_at": "2025-08-04T07:30:01.279Z",
   "comment": {
     "text": "The translation key \"Backup\" is used to display the label for a backup option in the Portal Settings, likely appearing as a button or toggle. It corresponds to a specific section within the data management category.",
     "is_auto": true,
@@ -18,32 +18,32 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 267,
+      "line_number": 274,
       "context": "{\n id: \"portal-settings_catalog-backup\",\n key: \"2\",\n type: PageType.backup,\n link: \"backup\",\n tKey: \"Backup\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-data-backup\",\n key: \"2-0\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 267,
+      "line_number": 274,
       "context": "{\n id: \"portal-settings_catalog-backup\",\n key: \"2\",\n type: PageType.backup,\n link: \"backup\",\n tKey: \"Backup\",\n isHeader: true,\n children: [\n {\n id: \"portal-settings_catalog-data-backup\",\n key: \"2-0\",",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 633,
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 686,
       "context": "operationsAlert={Boolean(backupProgressError)}\n operationsCompleted={operationsCompleted}\n operations={[\n {\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/manual-backup/index.tsx",
-      "line_number": 462,
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 497,
       "context": "operationsCompleted={downloadingProgress === 100}\n operations={[\n {\n label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/button-component/ButtonComponent.tsx",
-      "line_number": 60,
-      "context": "buttonSize,\n setTenantStatus,\n isFormReady,\n getStorageParams,\n uploadLocalFile,\n isBackupProgressVisible,\n setErrorInformation,\n setIsBackupProgressVisible,\n operationsAlert,\n } = props;",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/button-component/ButtonComponent.tsx",
+      "line_number": 40,
+      "context": "import { startRestore } from \"../../../../../api/portal\";\n import { toastr } from \"../../../../../components/toast\";\n import { isManagement } from \"../../../../../utils/common\";\n \n import type { ButtonContainerProps } from \"./ButtonContainer.types\";\n import styles from \"../../RestoreBackup.module.scss\";\n \n const ButtonContainer = (props: ButtonContainerProps) => {\n const {\n isConfirmed,\n navigate,",
       "module": "/packages/shared"
     }
   ],

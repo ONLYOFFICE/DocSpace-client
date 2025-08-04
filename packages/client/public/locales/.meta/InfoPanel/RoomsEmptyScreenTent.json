@@ -3,7 +3,7 @@
   "content": "See rooms details here",
   "content_en_sha1_hash": "0868f0cffa8c40cb52860e0077cc8801cd13670e",
   "created_at": "2025-05-19T21:30:54.947Z",
-  "updated_at": "2025-05-24T09:56:49.259Z",
+  "updated_at": "2025-08-04T07:30:01.205Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that there are no rooms available. It appears on an empty screen in a user interface, likely below a gallery of images or a list of available rooms. The goal is to provide clarity and transparency about room availability.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/NoRoomItem.js",
-      "line_number": 45,
-      "context": "<StyledNoItemContainer className=\"info-panel_gallery-empty-screen\">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No Room\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"RoomsEmptyScreenTent\")}\n </Text>\n </StyledNoItemContainer>\n );\n };",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoRoomItem.tsx",
+      "line_number": 57,
+      "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No Room\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"RoomsEmptyScreenTent\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "I confirm and want to proceed",
   "content_en_sha1_hash": "9a1708e8dbfcfa98c4531a9a57767fd20d9a308a",
   "created_at": "2025-05-26T07:15:49.400Z",
-  "updated_at": "2025-05-26T08:01:55.183Z",
+  "updated_at": "2025-08-04T07:30:01.752Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message for user agreement. It appears in various UI elements, such as buttons and checkboxes, where users are asked to confirm their actions or settings. Translators should ensure that this text accurately conveys the intended meaning and tone in different languages.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/restore-backup/index.tsx",
-      "line_number": 387,
-      "context": "truncate\n name={CONFIRMATION}\n className=\"restore-backup-checkbox\"\n onChange={onChangeCheckbox}\n isChecked={checkboxState.confirmation}\n label={t(\"Common:UserAgreement\")}\n isDisabled={!isEnableRestore}\n />\n <ButtonContainer\n setErrorInformation={setErrorInformation}\n isConfirmed={checkboxState.confirmation}",
+      "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
+      "line_number": 464,
+      "context": "styles.restoreBackupDescription,\n \"restore-backup-checkbox\",\n )}\n onChange={onChangeCheckbox}\n isChecked={checkboxState.confirmation}\n label={t(\"Common:UserAgreement\")}\n isDisabled={!isEnableRestore}\n />\n <ButtonContainer\n setErrorInformation={setErrorInformation}\n isConfirmed={checkboxState.confirmation}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 278,
-      "context": "className=\"backup-list_checkbox\"\n onChange={onChangeCheckbox}\n isChecked={isChecked}\n />\n <Text as=\"span\" className=\"backup-list_agreement-text\">\n {t(\"Common:UserAgreement\")}\n <HelpButton\n className=\"backup-list_tooltip\"\n offsetLeft={100}\n iconName={HelpReactSvgUrl}\n getContent={helpContent}",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 311,
+      "context": "className={classNames(\n styles.backupListAgreementText,\n \"backup-list_agreement-text\",\n )}\n >\n {t(\"Common:UserAgreement\")}\n <HelpButton\n className={classNames(\n styles.backupListTooltip,\n \"backup-list_tooltip\",\n )}",
       "module": "/packages/shared"
     }
   ],

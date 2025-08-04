@@ -167,12 +167,22 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       const confirmKey = linkData.confirmHeader;
 
       try {
-        await signupOAuth(signupAccount, confirmKey);
+        const user = await signupOAuth(signupAccount, confirmKey);
 
-        const url = roomData.roomId
+        if (!user) {
+          toastr.error(t("Common:SomethingWentWrong"));
+          return;
+        }
+
+        localStorage.setItem("profile", profile);
+
+        const finalUrl = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
           : defaultPage;
-        window.location.replace(url);
+
+        sessionStorage.setItem("referenceUrl", finalUrl);
+
+        window.location.replace(`/login`);
       } catch (error) {
         const knownError = error as TError;
         let errorMessage: string;

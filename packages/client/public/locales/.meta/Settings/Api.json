@@ -3,7 +3,7 @@
   "content": "API",
   "content_en_sha1_hash": "d93d10ff0fbef1b4aa0ddc24e10e907746d3c85a",
   "created_at": "2025-05-19T21:30:50.482Z",
-  "updated_at": "2025-05-26T07:57:32.550Z",
+  "updated_at": "2025-08-04T07:30:01.330Z",
   "comment": {
     "text": "The translation key \"Api\" refers to the name of a developer tool used in Portal Settings. It is displayed as the label for an API-related category or button in the UI, guiding users to access this feature.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 458,
+      "line_number": 465,
       "context": "{\n id: \"portal-settings_catalog-api\",\n key: \"7-0\",\n icon: \"\",\n link: \"api\",\n tKey: \"Api\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-javascript-sdk\",\n key: \"7-1\",",
       "module": "/packages/client"
     }

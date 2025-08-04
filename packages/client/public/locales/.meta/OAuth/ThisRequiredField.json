@@ -3,7 +3,7 @@
   "content": "This is a required field",
   "content_en_sha1_hash": "8b9935b76dee8b4f3542cbeb70533edc0011464f",
   "created_at": "2025-05-19T21:30:54.058Z",
-  "updated_at": "2025-06-30T12:20:31.465Z",
+  "updated_at": "2025-08-04T07:30:01.424Z",
   "comment": {
     "text": "\"This is a required field\" is a notification that appears when a user attempts to submit the form without filling in the \"name\" field. It indicates that this field is mandatory and must be completed before proceeding. This message is displayed in an input group element within forms.",
     "is_auto": true,
@@ -13,25 +13,25 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
       "line_number": 144,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
       "line_number": 144,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
       "line_number": 144,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 181,
-      "context": "placeholder={placeholder}\n onChange={onChange}\n error={\n isError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n isRequired\n isError={isError || hasError}\n >\n <StyledInputRow>",
+      "line_number": 184,
+      "context": "placeholder={placeholder}\n onChange={onChange}\n error={\n isError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n isRequired\n isError={isError || hasError}\n dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}\n >",
       "module": "/packages/client"
     },
     {

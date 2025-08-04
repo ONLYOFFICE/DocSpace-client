@@ -3,7 +3,7 @@
   "content": "User <1>{{email}}</1> is not found.",
   "content_en_sha1_hash": "772f17ec424c1e5db4a8d90482df8ddb476f0619",
   "created_at": "2025-05-19T21:30:53.746Z",
-  "updated_at": "2025-06-08T12:02:32.813Z",
+  "updated_at": "2025-08-04T07:30:01.522Z",
   "comment": {
     "text": "This translation key is used for a notification message when a user is not found. The message will appear in a UI element displaying an error or exception related to a payer's information, likely on a SaaS payment settings page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
-      "line_number": 112,
+      "line_number": 119,
       "context": "}\n />\n );\n \n const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })",
       "module": "/packages/client"
     }

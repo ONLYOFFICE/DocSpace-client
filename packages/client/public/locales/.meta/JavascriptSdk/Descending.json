@@ -3,7 +3,7 @@
   "content": "Descending",
   "content_en_sha1_hash": "36377adf43984d298439110cf96f95529471c501",
   "created_at": "2025-05-19T21:30:54.453Z",
-  "updated_at": "2025-05-24T09:27:32.581Z",
+  "updated_at": "2025-08-04T07:30:01.393Z",
   "comment": {
     "text": "This translation key is used to display \"Descending\" as a sorting option for file categories in the Portal Settings page. It appears on a dropdown menu, allowing users to select whether files should be displayed by creation date or author. The translation of this label will be used to provide clarity and consistency across different languages.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 112,
-      "context": "{ key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },\n { key: \"ascending\", label: t(\"Ascending\") },\n ];\n \n const columnDisplayOptions = [\n { value: \"default\", label: t(\"DefaultColumnsOption\") },",
+      "context": "{ key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },\n ];\n \n const dataSortOrder = [\n { key: \"descending\", label: t(\"Descending\"), default: true },\n { key: \"ascending\", label: t(\"Ascending\") },\n ];\n \n const columnDisplayOptions = [\n {",
       "module": "/packages/client"
     }
   ],

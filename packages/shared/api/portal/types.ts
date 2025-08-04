@@ -199,6 +199,9 @@ export type TDocServerLicense = {
 export type TLicenseQuota = {
   userQuota: Record<string, string>;
   license: TDocServerLicense;
+  totalUsers: number;
+  portalUsers: number;
+  externalUsers: number;
 };
 
 export type TCustomerInfo = {

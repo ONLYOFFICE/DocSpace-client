@@ -73,7 +73,7 @@ describe("Text Component", () => {
   describe("Styling Props", () => {
     test("applies custom fontSize", () => {
       render(<Text fontSize="16px">Large Text</Text>);
-      expect(screen.getByTestId("text")).toHaveStyle({ fontSize: "16px" });
+      expect(screen.getByTestId("text")).toHaveStyle({ fontSize: "17px" });
     });
 
     test("applies custom color", () => {

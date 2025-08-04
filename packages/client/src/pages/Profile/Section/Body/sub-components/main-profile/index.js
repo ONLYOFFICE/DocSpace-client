@@ -408,7 +408,7 @@ const MainProfile = (props) => {
                   className="send-again-icon"
                   src={SendClockReactSvgUrl}
                 />
-                <Text className="send-again-text" fontWeight={600} noSelect>
+                <Text className="send-again-text" fontWeight={600}>
                   {t("SendAgain")}
                 </Text>
               </div>
@@ -544,7 +544,7 @@ const MainProfile = (props) => {
                     className="send-again-icon"
                     src={SendClockReactSvgUrl}
                   />
-                  <Text className="send-again-text" fontWeight={600} noSelect>
+                  <Text className="send-again-text" fontWeight={600}>
                     {t("SendAgain")}
                   </Text>
                 </div>

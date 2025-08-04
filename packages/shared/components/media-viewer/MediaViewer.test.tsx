@@ -293,7 +293,7 @@ describe("MediaViewer", () => {
       fireEvent.click(closeButton);
       expect(props.onClose).toHaveBeenCalled();
     } else {
-      console.error("Close button not found");
+      console.log("Close button not found");
     }
   });
 

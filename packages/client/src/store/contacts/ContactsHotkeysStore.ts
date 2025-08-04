@@ -292,6 +292,14 @@ class ContactsHotkeysStore {
     const isDefaultKeys =
       ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
 
+    if (
+      ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
+        e.code,
+      ) > -1
+    ) {
+      e.preventDefault();
+    }
+
     const selection = this.contactsSelection.length
       ? this.contactsSelection
       : this.contactsList;
@@ -313,8 +321,6 @@ class ContactsHotkeysStore {
     }
 
     if (!this.hotkeyCaret || isDefaultKeys) return e;
-
-    e.preventDefault();
   };
 }
 

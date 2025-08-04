@@ -116,7 +116,14 @@ const useAccountsHotkeys = ({
   );
 
   // Select all accounts
-  useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
+  useHotkeys(
+    "shift+a, ctrl+a",
+    (e) => {
+      e.preventDefault();
+      selectAll();
+    },
+    hotkeysFilter,
+  );
 
   // Deselect all accounts
   useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);

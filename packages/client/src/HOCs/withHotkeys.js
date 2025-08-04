@@ -253,7 +253,14 @@ const withHotkeys = (Component) => {
     useHotkeys("shift+LEFT", () => multiSelectLeft(), hotkeysFilter);
 
     // Select all files and folders
-    useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
+    useHotkeys(
+      "shift+a, ctrl+a",
+      (e) => {
+        e.preventDefault();
+        selectAll();
+      },
+      hotkeysFilter,
+    );
 
     // Deselect all files and folders
     useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);

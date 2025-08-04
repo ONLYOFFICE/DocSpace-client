@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { isMobile } from "react-device-detect";
@@ -75,10 +75,20 @@ export const FolderTile = ({
 
   const { t } = useTranslation(["Translations"]);
 
+  const [isHovered, setIsHovered] = useState(false);
+
   const cmRef = useRef<ContextMenuRefType>(null);
 
   const { isRTL } = useInterfaceDirection();
   const contextMenuDirection = isRTL ? "left" : "right";
+
+  const onHover = () => {
+    setIsHovered(true);
+  };
+
+  const onLeave = () => {
+    setIsHovered(false);
+  };
 
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&
@@ -212,6 +222,10 @@ export const FolderTile = ({
     [styles.checked]: checked,
   });
 
+  const contentClassNames = classNames(styles.content, "content", {
+    [styles.isHovered]: isHovered,
+  });
+
   const iconFolder = (
     <Link type={LinkType.page}>
       <ReactSVG
@@ -233,7 +247,11 @@ export const FolderTile = ({
       {isBigFolder ? (
         <>
           <div className={fileTileTopClassNames}>{iconFolder}</div>
-          <div className={classNames(styles.icons, styles.isBadges)}>
+          <div
+            className={classNames(styles.icons, styles.isBadges)}
+            onMouseEnter={onHover}
+            onMouseLeave={onLeave}
+          >
             {badges}
           </div>
         </>
@@ -242,7 +260,11 @@ export const FolderTile = ({
       <div className={fileTileBottomClassNames}>
         {element && !isEdit ? (
           !inProgress ? (
-            <div className={iconContainerClassNames}>
+            <div
+              className={iconContainerClassNames}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
               <div className={iconClassNames} onClick={onFolderIconClick}>
                 {element}
               </div>
@@ -263,12 +285,18 @@ export const FolderTile = ({
           )
         ) : null}
 
-        <div className={styles.content}>
+        <div className={contentClassNames}>
           {FolderTileContent}
-          {isBigFolder ? null : badges}
+          <div onMouseEnter={onHover} onMouseLeave={onLeave}>
+            {isBigFolder ? null : badges}
+          </div>
         </div>
 
-        <div className={styles.optionButton}>
+        <div
+          className={styles.optionButton}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
           {renderContext ? (
             <ContextMenuButton
               isFill

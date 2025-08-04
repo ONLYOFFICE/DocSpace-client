@@ -82,8 +82,17 @@ const FileTile = ({
   const { t } = useTranslation(["Translations"]);
 
   const [errorLoadSrc, setErrorLoadSrc] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const cm = useRef<ContextMenuRefType>(null);
+
+  const onHover = () => {
+    setIsHovered(true);
+  };
+
+  const onLeave = () => {
+    setIsHovered(false);
+  };
 
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&
@@ -273,6 +282,10 @@ const FileTile = ({
     [styles.isHighlight]: isHighlight,
   });
 
+  const contentClassNames = classNames(styles.content, "content", {
+    [styles.isHovered]: isHovered,
+  });
+
   return (
     <div
       {...rest}
@@ -286,16 +299,30 @@ const FileTile = ({
       </div>
 
       {contentElement ? (
-        <div className={classNames(styles.icons, styles.isQuickButtons)}>
+        <div
+          className={classNames(styles.icons, styles.isQuickButtons)}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
           {contentElement}
         </div>
       ) : null}
-      <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
+      <div
+        className={classNames(styles.icons, styles.isBadges)}
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+      >
+        {badges}
+      </div>
 
       <div className={fileTileBottomClassNames}>
         {element && !isEdit ? (
           !inProgress ? (
-            <div className={iconContainerClassNames}>
+            <div
+              className={iconContainerClassNames}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
               <div className={iconClassNames} onClick={onFileIconClick}>
                 {element}
               </div>
@@ -316,9 +343,13 @@ const FileTile = ({
           )
         ) : null}
 
-        <div className={styles.content}>{FilesTileContent}</div>
+        <div className={contentClassNames}>{FilesTileContent}</div>
 
-        <div className={styles.optionButton}>
+        <div
+          className={styles.optionButton}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
           {renderContext ? (
             <ContextMenuButton
               isFill

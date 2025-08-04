@@ -147,10 +147,9 @@
     inset-inline-start: 8px;
 
     :global(.badges) {
-      display: grid;
-      grid-template-columns: 32px;
-      grid-template-rows: repeat(3, 32px);
-      grid-gap: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
 
       :global(.badge.file-locked),
       :global(.badge.link-shared) {
@@ -261,6 +260,12 @@
 
       text-underline-offset: 2px;
       text-decoration-thickness: 1px;
+    }
+
+    &.isHovered {
+      a {
+        text-decoration: none !important;
+      }
     }
 
     .badges {

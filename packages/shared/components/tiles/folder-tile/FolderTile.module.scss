@@ -201,6 +201,12 @@
       line-height: var(--tile-line-height);
     }
 
+    &.isHovered {
+      a {
+        text-decoration: none !important;
+      }
+    }
+
     .badges {
       display: flex;
       flex-wrap: nowrap;

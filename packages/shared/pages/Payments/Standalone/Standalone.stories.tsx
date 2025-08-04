@@ -82,6 +82,9 @@ const defaultArgs: IPaymentsProps = {
       connections: 10,
       docspace_dev: false,
     },
+    totalUsers: 20,
+    portalUsers: 1,
+    externalUsers: 0,
   },
   docspaceFaqUrl: "",
 };

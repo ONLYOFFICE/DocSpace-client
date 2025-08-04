@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { TLicenseQuota } from "api/portal/types";
+import { TLicenseQuota } from "../../../../../api/portal/types";
 import { createLicenseQuotaReport } from "../../../../../api/management";
 import { toastr } from "../../../../../components/toast";
 

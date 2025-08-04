@@ -158,7 +158,7 @@ const PrimaryTabs = (props: TabsProps) => {
   });
 
   const renderContent = (
-    <div className={classNames(styles.tabList, classes)} ref={tabsRef}>
+    <div className={classNames(styles.tabList, classes)} ref={tabsRef} id={id}>
       {items.map((item, index) => {
         const isSelected = index === selectedItemIndex;
 

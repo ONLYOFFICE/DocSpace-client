@@ -35,7 +35,7 @@ import classnames from "classnames";
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
@@ -56,7 +56,6 @@ import {
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -180,16 +179,17 @@ const SectionHeaderContent = (props) => {
 
     isAIRoom,
     isKnowledgeTab,
+    contactsTab,
+    currentClientView,
   } = props;
 
   const location = useLocation();
-  const { groupId } = useParams();
 
-  const contactsView = getContactsView(location);
-  const isContactsPage = !!contactsView;
-  const isContactsGroupsPage = contactsView === "groups";
-  const isContactsInsideGroupPage =
-    contactsView === "inside_group" && !!groupId;
+  const contactsView =
+    currentClientView === "users" || currentClientView === "groups";
+  const isContactsPage = contactsView;
+  const isContactsGroupsPage = contactsTab === "groups";
+  const isContactsInsideGroupPage = contactsTab === "inside_group";
 
   const addButtonRefCallback = React.useCallback(
     (ref) => {
@@ -810,6 +810,8 @@ export default inject(
       showHeaderLoader,
 
       isLoading,
+
+      currentClientView,
     } = clientLoadingStore;
 
     const setIsLoading = (param) => {
@@ -913,7 +915,7 @@ export default inject(
     const { getContactsModel, contactsCanCreate } =
       peopleStore.contextOptionsStore;
 
-    const { setSelected: setUsersSelected } = usersStore;
+    const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
@@ -947,6 +949,7 @@ export default inject(
     const { isKnowledgeTab } = aiRoomStore;
 
     return {
+      currentClientView,
       showText: settingsStore.showText,
       isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
@@ -1053,6 +1056,7 @@ export default inject(
 
       isAIRoom,
       isKnowledgeTab,
+      contactsTab,
     };
   },
 )(

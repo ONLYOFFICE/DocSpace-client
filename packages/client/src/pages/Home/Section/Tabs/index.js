@@ -24,10 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
-
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { inject, observer } from "mobx-react";
+
 import ContactsTabs from "./ContactsTabs";
 import MyDocumentsTabs from "./MyDocumentsTabs";
 import RoomTemplatesTabs from "./RoomTemplatesTabs";
@@ -42,13 +40,13 @@ const SectionSubmenuContent = ({
   allowInvitingGuests,
   checkGuests,
   hasGuests,
+  currentClientView,
 }) => {
   const [showGuestsTab, setShowGuestsTab] = useState(true);
   const [isCheckGuests, setIsCheckGuests] = useState(false);
 
-  const location = useLocation();
-
-  const isContacts = getContactsView(location);
+  const isContacts =
+    currentClientView === "users" || currentClientView === "groups";
 
   useEffect(() => {
     if (typeof hasGuests !== "boolean") return;
@@ -64,12 +62,21 @@ const SectionSubmenuContent = ({
     return (
       <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
     );
-  if (isRoomsFolderRoot || isTemplatesFolder) return <RoomTemplatesTabs />;
+
+  if (!isContacts && (isPersonalRoom || isRecentTab))
+    return <MyDocumentsTabs />;
+  if (!isContacts && (isRoomsFolderRoot || isTemplatesFolder))
+    return <RoomTemplatesTabs />;
   return null;
 };
 
 export default inject(
-  ({ treeFoldersStore, settingsStore, selectedFolderStore }) => {
+  ({
+    treeFoldersStore,
+    settingsStore,
+    clientLoadingStore,
+    selectedFolderStore,
+  }) => {
     const {
       isPersonalRoom,
       isRecentTab,
@@ -79,15 +86,18 @@ export default inject(
 
     const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
 
+    const { currentClientView } = clientLoadingStore;
+
     return {
       isPersonalRoom,
-      isAIRoom: selectedFolderStore.isAIRoom,
       isRecentTab,
+      isAIRoom: selectedFolderStore.isAIRoom,
       isRoomsFolderRoot,
       isTemplatesFolder,
       allowInvitingGuests,
       checkGuests,
       hasGuests,
+      currentClientView,
     };
   },
 )(observer(SectionSubmenuContent));

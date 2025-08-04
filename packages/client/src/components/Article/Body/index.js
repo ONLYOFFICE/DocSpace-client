@@ -67,7 +67,6 @@ const ArticleBodyContent = (props) => {
     isVisitor,
     setIsLoading,
 
-    clearFiles,
     selectedFolderId,
     showArticleLoader,
     setIsBurgerLoading,
@@ -195,13 +194,6 @@ const ArticleBodyContent = (props) => {
         : window.location.pathname.includes("chat")
           ? false
           : !!selectedFolderId;
-
-      if (isAccountsClick) {
-        clearFiles();
-        setContactsTab("people");
-      } else {
-        setContactsTab(false);
-      }
 
       setHashDate(getHashDate);
 

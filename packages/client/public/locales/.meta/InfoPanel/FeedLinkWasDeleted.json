@@ -3,7 +3,7 @@
   "content": "Link was deleted",
   "content_en_sha1_hash": "7ec9741f0ef568382146dd5d0aabb201e06b9fe7",
   "created_at": "2025-05-19T21:30:54.778Z",
-  "updated_at": "2025-05-24T10:25:52.994Z",
+  "updated_at": "2025-08-04T07:30:01.218Z",
   "comment": {
     "text": "The translation key \"FeedLinkWasDeleted\" is used to display a message when a feed link has been deleted. In the UI, this message appears as an error notification when editing a shared feed, prompting the user to view the updated room external link history. Translators should provide a concise and clear equivalent in their target language to convey this action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/RoomExternalLink.tsx",
-      "line_number": 87,
-      "context": "isFormRoom,\n withWrapping,\n }: HistoryRoomExternalLinkProps) => {\n const onEditLink = () => {\n if (!feedData.sharedTo) {\n toastr.error(t(\"FeedLinkWasDeleted\"));\n return;\n }\n \n setLinkParams({\n isEdit: true,",
+      "line_number": 66,
+      "context": "}: HistoryRoomExternalLinkProps) => {\n const { t } = useTranslation([\"InfoPanel\"]);\n \n const onEditLink = () => {\n if (!feedData.sharedTo) {\n toastr.error(t(\"FeedLinkWasDeleted\"));\n return;\n }\n \n setLinkParams?.({\n isEdit: true,",
       "module": "/packages/client"
     }
   ],

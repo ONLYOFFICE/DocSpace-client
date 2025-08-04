@@ -3,7 +3,7 @@
   "content": "Remove the unnecessary files or contact the {{productName}} administrator to increase the storage quota.",
   "content_en_sha1_hash": "09ed5b98a2721316678b9366deac8adabae0bf8a",
   "created_at": "2025-05-19T21:30:54.121Z",
-  "updated_at": "2025-05-24T08:02:21.218Z",
+  "updated_at": "2025-08-04T07:30:01.018Z",
   "comment": {
     "text": "This translation key is used to display a message when a user cannot be upgraded due to their storage quota. It informs the user that they can either remove unnecessary files or contact the {{productName}} administrator to increase the quota. This text appears as an error message in the QuotasBar component on a user's account page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/MainBar/QuotasBar.js",
       "line_number": 56,
-      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans i18nKey=\"TenantCustomQuotaDescription\" t={t}>\n You can remove the unnecessary files or change quota in the\n <Link",
+      "context": "const onCloseAction = () => {\n onClose && onClose(type);\n };\n \n const getTenantCustomQuota = () => {\n if (!isAdmin) return t(\"RemoveFilesOrContactToUpgradeQuota\");\n \n return (\n <Trans\n t={t}\n i18nKey=\"TenantCustomQuotaDescription\"",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Invitation Settings",
   "content_en_sha1_hash": "8a0e33d62c6b19c6f0e574b7a75348dbf29f66a4",
   "created_at": "2025-05-26T07:15:51.069Z",
-  "updated_at": "2025-06-18T17:11:42.472Z",
+  "updated_at": "2025-08-04T07:30:01.477Z",
   "comment": {
     "text": "The \"InvitationSettings\" translation key is used to display the title of a section within a security settings page, providing access to invitation settings. This title appears on a mobile view screen and can be translated for different languages. It is used as a heading for a category related to security features in an access portal.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 203,
+      "line_number": 210,
       "context": "{\n id: \"portal-settings_catalog-invitation-settings\",\n key: \"1-0-5\",\n icon: \"\",\n link: \"invitation-settings\",\n tKey: \"InvitationSettings\",\n },\n {\n id: \"portal-settings_catalog-brute-force-protection\",\n key: \"1-0-6\",\n icon: \"\",",
       "module": "/packages/client"
     }

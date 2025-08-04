@@ -3,7 +3,7 @@
   "content": "Repeat invitation",
   "content_en_sha1_hash": "478aa7782da483f4ed5158c15cf5ef9cae159576",
   "created_at": "2025-05-19T21:30:47.863Z",
-  "updated_at": "2025-06-18T17:11:42.416Z",
+  "updated_at": "2025-08-04T07:30:01.257Z",
   "comment": {
     "text": "This translation key is used to display a repeated invitation message. It appears on a button icon that can be clicked to send another invitation to a user when an existing one has been sent. Translators should provide a phrase that conveys the idea of sending a repeat request.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/User.js",
-      "line_number": 367,
-      "context": "<Text className=\"title\">{user.displayName}</Text>\n \n {showInviteIcon ? (\n <IconButton\n className=\"icon\"\n title={t(\"Common:RepeatInvitation\")}\n iconName={EmailPlusReactSvgUrl}\n isFill\n onClick={onRepeatInvitation}\n size={16}\n />",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
+      "line_number": 211,
+      "context": "</Text>\n \n {showInviteIcon ? (\n <IconButton\n className=\"icon\"\n title={t(\"Common:RepeatInvitation\")}\n iconName={EmailPlusReactSvgUrl}\n isFill\n onClick={onRepeatInvitation}\n size={16}\n />",
       "module": "/packages/client"
     }
   ],

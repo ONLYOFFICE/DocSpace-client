@@ -26,7 +26,8 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
+import { userEvent } from "@testing-library/user-event";
 
 import { renderWithTheme } from "../../utils/render-with-theme";
 
@@ -79,7 +80,7 @@ describe("<BetaBadge />", () => {
     renderWithTheme(<BetaBadge {...baseProps} />);
 
     const badge = screen.getByText("BETA");
-    fireEvent.click(badge);
+    await userEvent.click(badge);
 
     await waitFor(() => {
       expect(screen.getByText("Beta Feature")).toBeInTheDocument();
@@ -91,7 +92,7 @@ describe("<BetaBadge />", () => {
     renderWithTheme(<BetaBadge {...baseProps} withOutFeedbackLink />);
 
     const badge = screen.getByText("BETA");
-    fireEvent.click(badge);
+    await userEvent.click(badge);
 
     await waitFor(() => {
       expect(screen.queryByText(/form/)).not.toBeInTheDocument();
@@ -111,7 +112,7 @@ describe("<BetaBadge />", () => {
     renderWithTheme(<BetaBadge {...mobileProps} />);
 
     const badge = screen.getByText("BETA");
-    fireEvent.click(badge);
+    await userEvent.click(badge);
 
     await waitFor(() => {
       const tooltip = screen.getByTestId("tooltip");
@@ -125,20 +126,17 @@ describe("<BetaBadge />", () => {
     renderWithTheme(<BetaBadge {...baseProps} />);
 
     const badge = screen.getByText("BETA");
-    fireEvent.click(badge);
+    await userEvent.click(badge);
 
     await waitFor(() => {
       expect(screen.getByText("Beta Feature")).toBeInTheDocument();
     });
 
     const closeButton = screen.getByTestId("icon-button");
-    fireEvent.click(closeButton);
+    await userEvent.click(closeButton);
 
-    await waitFor(
-      () => {
-        expect(screen.queryByText("Beta Feature")).not.toBeInTheDocument();
-      },
-      { timeout: 2000 },
-    );
+    await waitFor(() => {
+      expect(screen.queryByText("Beta Feature")).not.toBeInTheDocument();
+    });
   });
 });

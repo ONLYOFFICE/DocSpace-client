@@ -3,7 +3,7 @@
   "content": "By default, we verify SSL certificates when delivering payloads.",
   "content_en_sha1_hash": "0afd5e4ab7ae93de7936a9d59a2a22f51787a7b0",
   "created_at": "2025-05-19T21:30:49.842Z",
-  "updated_at": "2025-05-24T02:09:50.393Z",
+  "updated_at": "2025-08-04T07:30:01.465Z",
   "comment": {
     "text": "This translation key is used to describe the default SSL certificate verification process. It appears as a tooltip on a button in a UI element and helps users understand what this feature does.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SSLVerification.js",
       "line_number": 72,
-      "context": "<Header>\n {t(\"SSLVerification\")}{\" \"}\n <HelpButton\n className=\"verificationHelpButton\"\n iconName={InfoReactSvgUrl}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SSLHint\")}</Text>}\n place=\"bottom\"\n />\n </Header>\n <RadioButtonGroup\n fontSize=\"13px\"",
+      "context": "<Header>\n {t(\"SSLVerification\")}{\" \"}\n <HelpButton\n className=\"verificationHelpButton\"\n iconName={InfoReactSvgUrl}\n tooltipContent={<Text fontSize=\"12px\">{t(\"SSLHint\")}</Text>}\n place=\"bottom\"\n dataTestId=\"ssl_verification_help_button\"\n />\n </Header>\n <RadioButtonGroup",
       "module": "/packages/client"
     }
   ],

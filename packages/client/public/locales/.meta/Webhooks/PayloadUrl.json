@@ -3,7 +3,7 @@
   "content": "Payload URL",
   "content_en_sha1_hash": "a097fab3ebda07ac0c8349da3156f6eb4496cb07",
   "created_at": "2025-05-19T21:30:49.784Z",
-  "updated_at": "2025-05-24T02:19:46.608Z",
+  "updated_at": "2025-08-04T07:30:01.470Z",
   "comment": {
     "text": "The \"PayloadUrl\" translation key is used to display a label for entering or selecting a URL. In the context of a Webhook Dialog component, this text appears as a placeholder and label for an input field where users can enter or select a payload URL.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
-      "line_number": 221,
-      "context": "isDisabled={isLoading}\n required\n />\n <LabledInput\n id={`${additionalId}-payload-url-input`}\n label={t(\"PayloadUrl\")}\n placeholder={t(\"EnterUrl\")}\n name=\"uri\"\n value={webhookInfo.uri}\n onChange={onInputChange}\n hasError={!isValid.uri}",
+      "line_number": 222,
+      "context": "required\n dataTestId=\"webhook_name_input\"\n />\n <LabledInput\n id={`${additionalId}-payload-url-input`}\n label={t(\"PayloadUrl\")}\n placeholder={t(\"EnterUrl\")}\n name=\"uri\"\n value={webhookInfo.uri}\n onChange={onInputChange}\n hasError={!isValid.uri}",
       "module": "/packages/client"
     }
   ],

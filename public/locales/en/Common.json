@@ -715,7 +715,6 @@
   "SendNotificationAboutRestoring": "Send notification about space restoring to users",
   "SendRequest": "Send request",
   "ServerErrorEmptyDescription": "Please reload the page or come back later.",
-  "ServerErrorEmptyTitle": "Something went wrong",
   "ServerSideEncryptionMethod": "Server Side Encryption Method",
   "ServiceUrl": "Service URL",
   "Sessions": "Sessions",

@@ -3,7 +3,7 @@
   "content": "Build your own collaboration platform",
   "content_en_sha1_hash": "cc0e3a6c783cc264d4401ef99086b4395c343b97",
   "created_at": "2025-05-19T21:30:50.576Z",
-  "updated_at": "2025-05-24T05:46:13.481Z",
+  "updated_at": "2025-08-04T07:30:01.331Z",
   "comment": {
     "text": "The translation key \"ApiPageHeader\" is used to display a header text that describes the purpose of a collaboration platform, appearing in a confirmation dialog. It's translated as \"Build your own collaboration platform\".",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
-      "line_number": 88,
+      "line_number": 89,
       "context": "}\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}\n imageSrc={imgSrc}\n />\n </ConfirmWrapper>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Api/index.js",
-      "line_number": 88,
+      "line_number": 89,
       "context": "}\n descriptionText={t(\"ApiPageDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n headerText={t(\"ApiPageHeader\")}\n imageAlt={t(\"ApiPageHeader\")}\n imageSrc={imgSrc}\n />\n </ConfirmWrapper>\n );",
       "module": "/packages/client"
     }

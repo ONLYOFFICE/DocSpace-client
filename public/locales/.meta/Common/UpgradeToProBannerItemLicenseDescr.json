@@ -3,7 +3,7 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-26T07:15:49.243Z",
-  "updated_at": "2025-06-30T12:20:31.729Z",
+  "updated_at": "2025-08-04T07:30:01.744Z",
   "comment": {
     "text": "This translation key is used for a one-year subscription license description, indicating the duration and benefits of the upgraded plan. It will appear in a banner or similar UI element, likely on a payment page or benefits container. The translation should convey a sense of time-based duration.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/BenefitsContainer.tsx",
-      "line_number": 71,
+      "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
+      "line_number": 72,
       "context": "};\n \n const lifetimeLicense = {\n imag: LifetimeLicenseReactSvgUrl,\n title: t(\"UpgradeToProBannerItemLicenseHeader\"),\n description: t(\"UpgradeToProBannerItemLicenseDescr\"),\n };\n \n const scalabilityClustering = {\n imag: ScalabilityReactSvgUrl,\n title: t(\"UpgradeToProBannerItemScalabilityHeader\"),",
       "module": "/packages/shared"
     }

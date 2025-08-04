@@ -3,7 +3,7 @@
   "content": "Storage / Quota",
   "content_en_sha1_hash": "0803802b74bb476878a34c8d544b0b2f5a1fecb8",
   "created_at": "2025-05-19T21:30:49.101Z",
-  "updated_at": "2025-05-26T07:57:32.405Z",
+  "updated_at": "2025-08-04T07:30:01.210Z",
   "comment": {
     "text": "This translation key is used to display a label indicating storage and quota information. It appears as a table header column title in a UI component, informing users about the available storage capacity. The text will vary depending on whether default rooms quota has been set or not.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 205,
-      "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 231,
+      "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
       "module": "/packages/client"
     },
     {

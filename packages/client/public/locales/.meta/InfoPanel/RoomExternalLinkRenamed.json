@@ -3,13 +3,19 @@
   "content": "Link <1>«{{oldLinkTitle}}»</1> renamed to <1>«{{linkTitle}}»</1>",
   "content_en_sha1_hash": "21f8bbe2e723f0d28d57598de084970a742352cf",
   "created_at": "2025-05-19T21:30:54.916Z",
-  "updated_at": "2025-06-30T12:20:31.347Z",
+  "updated_at": "2025-08-04T07:30:01.241Z",
   "comment": {
     "text": "This translation key is used to display a notification when a room's external link has been renamed. The notification will show a before-and-after comparison of the old and new link titles. It appears in the UI for the \"Room External Link\" feature.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:40:49.333Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 199,
+      "context": "return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkRenamed\"",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 189,

@@ -3,7 +3,7 @@
   "content": "Right panel collapsed",
   "content_en_sha1_hash": "abe48a9ab885b3e2aa26172a01e02da3e777858c",
   "created_at": "2025-05-19T21:30:54.621Z",
-  "updated_at": "2025-05-24T09:01:33.957Z",
+  "updated_at": "2025-08-04T07:30:01.386Z",
   "comment": {
     "text": "The \"RightPanelCollapsed\" translation key is used to display the text \"Right panel collapsed\" when the right panel in a specific UI element is minimized or hidden. This text appears in a checkbox label and is used to indicate the state of the right panel's visibility.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 243,
+      "line_number": 242,
       "context": "{/* <InterfaceElements>\n <Label className=\"label\">{t(\"InterfaceElements\")}</Label>\n <Checkbox\n className=\"checkbox\"\n label={t(\"RightPanelCollapsed\")}\n onChange={() => {}}\n isChecked\n />\n <Checkbox\n className=\"checkbox\"",
       "module": "/packages/client"
     }

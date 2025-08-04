@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.262Z",
-  "updated_at": "2025-06-08T12:02:32.736Z",
+  "updated_at": "2025-08-04T07:30:01.297Z",
   "comment": {
     "text": "This translation key is used for \"Custom\" labels and descriptions in the Portal Settings page, particularly in the categories and developer tools sections. It appears as a title or heading, indicating custom themes or settings. Translators should provide an equivalent label that accurately reflects the UI context.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 723,
+      "line_number": 728,
       "context": "})}\n </div>\n </div>\n \n <div className=\"theme-custom-container\">\n <div className=\"theme-name\">{t(\"Common:Custom\")}</div>\n \n <div className=\"theme-container\">\n <div className=\"custom-themes\">\n {appearanceTheme.map((item) => {\n if (item.name) return;",
       "module": "/packages/client"
     },
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 481,
+      "line_number": 488,
       "context": "{\n id: \"portal-settings_catalog-javascript-sdk_custom\",\n key: \"7-1-1\",\n icon: \"\",\n link: \"custom\",\n tKey: \"Common:Custom\",\n },\n {\n id: \"portal-settings_catalog-javascript-sdk_room-selector\",\n key: \"7-1-2\",\n icon: \"\",",
       "module": "/packages/client"
     },

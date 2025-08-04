@@ -3,7 +3,7 @@
   "content": "Empty {{sectionName}}",
   "content_en_sha1_hash": "a8c3ee9d97173f47924959f3cbc240a5d756184d",
   "created_at": "2025-05-19T21:30:55.589Z",
-  "updated_at": "2025-06-02T10:20:50.997Z",
+  "updated_at": "2025-08-04T07:30:00.963Z",
   "comment": {
     "text": "This translation key is used to display a placeholder for an empty section or folder in the personal user folder. It appears as part of a button or dialog related to file management options.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1410,
+      "line_number": 1412,
       "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1410,
+      "line_number": 1412,
       "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
       "module": "/packages/client"
     }

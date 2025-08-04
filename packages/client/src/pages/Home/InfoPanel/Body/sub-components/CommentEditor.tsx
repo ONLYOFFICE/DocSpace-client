@@ -130,7 +130,11 @@ const CommentEditor = ({
             </Text>
           ) : null}
           {changeVersionHistoryAbility ? (
-            <div className="edit_toggle" onClick={onOpenEditor}>
+            <div
+              className="edit_toggle"
+              onClick={onOpenEditor}
+              data-testid="info_panel_details_comment_edit_toggle"
+            >
               <ReactSVG className="edit_toggle-icon" src={PencilReactSvgUrl} />
               <div className="property-content edit_toggle-text">
                 {comment ? t("Common:EditButton") : t("Common:AddButton")}
@@ -148,6 +152,7 @@ const CommentEditor = ({
             areaSelect
             heightTextArea="54px"
             fontSize={13}
+            dataTestId="info_panel_details_comment_textarea"
           />
           <div className="property-comment_editor-editor-buttons">
             <Button
@@ -156,11 +161,13 @@ const CommentEditor = ({
               onClick={onSave}
               size={ButtonSize.extraSmall}
               primary
+              testId="info_panel_details_comment_save_button"
             />
             <Button
               label={t("Common:CancelButton")}
               onClick={onCancel}
               size={ButtonSize.extraSmall}
+              testId="info_panel_details_comment_cancel_button"
             />
           </div>
         </div>

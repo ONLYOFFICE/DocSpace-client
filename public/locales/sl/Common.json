@@ -875,7 +875,6 @@
   "ManageNotifications": "Upravljanje",
   "LimitTimeBlockFormRoomDescription": "V sobi za izpolnjevanje obrazcev je glavna povezava veljavna neomejeno časovno obdobje.",
   "LimitTimeBlockPublicRoomDescription": "V javni sobi je glavna povezava veljavna neomejeno časovno obdobje. Ustvarite lahko dodatne povezave s časovno omejitvijo.",
-  "LimitTimeBlockCustomRoomDescription": "V sobi po meri je glavna povezava veljavna neomejeno časovno obdobje. Ustvarite lahko dodatne povezave s časovno omejitvijo.",
   "LinkValidUntil": "Ta povezava bo veljavna do",
   "ChooseExpirationDate": "Omejite obdobje razpoložljivosti te povezave tako, da nastavite datum poteka.",
   "EditSharedLink": "Uredi povezavo v skupni rabi",

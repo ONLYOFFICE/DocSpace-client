@@ -875,7 +875,6 @@
   "ManageNotifications": "Hallitse",
   "LimitTimeBlockFormRoomDescription": "Lomakkeen täyttöhuoneessa päälinkki on voimassa rajoittamattoman ajanjakson.",
   "LimitTimeBlockPublicRoomDescription": "Julkisessa huoneessa päälinkki on voimassa rajoittamattoman ajanjakson. Voit luoda aikarajoitettuja lisälinkkejä.",
-  "LimitTimeBlockCustomRoomDescription": "Custom-huoneessa päälinkki on voimassa rajoittamattoman ajanjakson. Voit luoda aikarajoitettuja lisälinkkejä.",
   "LinkValidUntil": "Tämä linkki on voimassa",
   "ChooseExpirationDate": "Rajoita saatavuusaika tälle linkille asettamalla viimeinen voimassaolopäivä.",
   "EditSharedLink": "Muokkaa jaettua linkkiä",

@@ -875,7 +875,6 @@
   "ManageNotifications": "Gerir",
   "LimitTimeBlockFormRoomDescription": "Numa sala de Preenchimento de Formulários, o link principal é válido por um período de tempo ilimitado.",
   "LimitTimeBlockPublicRoomDescription": "Numa sala Pública, o link principal é válido por um período de tempo ilimitado. Pode criar links adicionais com limite de tempo.",
-  "LimitTimeBlockCustomRoomDescription": "Numa sala personalizada, o link principal é válido por um período de tempo ilimitado. Pode criar links adicionais com limite de tempo.",
   "LinkValidUntil": "Este link será válido até",
   "ChooseExpirationDate": "Limite o período de disponibilidade deste link definindo uma data de expiração.",
   "EditSharedLink": "Editar link compartilhado",

@@ -875,7 +875,6 @@
   "ManageNotifications": "管理",
   "LimitTimeBlockFormRoomDescription": "在表单填写房间中，主链接的有效期是不限的。",
   "LimitTimeBlockPublicRoomDescription": "在公共房间中，主链接的有效期是不限的。您可以创建有时效限制的其他链接。",
-  "LimitTimeBlockCustomRoomDescription": "在自定义房间中，主链接的有效期是不限的。您可以创建有时效限制的其他链接。",
   "LinkValidUntil": "链接有效期至",
   "ChooseExpirationDate": "通过设置失效日期，限制此链接的有效期。",
   "EditSharedLink": "编辑分享链接",

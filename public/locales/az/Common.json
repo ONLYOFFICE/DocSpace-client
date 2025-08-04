@@ -875,7 +875,6 @@
   "ManageNotifications": "İdarə etmək",
   "LimitTimeBlockFormRoomDescription": "Forma Doldurma otağında əsas link vaxt məhdudiyyəti olmadan etibarlıdır.",
   "LimitTimeBlockPublicRoomDescription": "İctimai otaqda əsas link vaxt məhdudiyyəti olmadan etibarlıdır. Vaxt məhdudiyyəti ilə əlavə linklər yarada bilərsiniz.",
-  "LimitTimeBlockCustomRoomDescription": "Şəxsi otaqda əsas link vaxt məhdudiyyəti olmadan etibarlıdır. Vaxt məhdudiyyəti ilə əlavə linklər yarada bilərsiniz.",
   "LinkValidUntil": "Bu keçid vaxta qədər etibarlı olacaq",
   "ChooseExpirationDate": "İstifadə müddəti təyin etməklə bu keçidin mövcudluğunu məhdudlaşdırın.",
   "EditSharedLink": "Paylaşılan linki redaktə edin",

@@ -866,7 +866,6 @@
   "ManageNotifications": "Gérer",
   "LimitTimeBlockFormRoomDescription": "Dans une salle de remplissage de formulaires, le lien principal est valable pour une durée illimitée.",
   "LimitTimeBlockPublicRoomDescription": "Dans une salle publique, le lien principal est valable pour une durée illimitée. Vous pouvez créer des liens supplémentaires avec une limite de temps.",
-  "LimitTimeBlockCustomRoomDescription": "Dans une salle personnalisée, le lien principal est valable pour une durée illimitée. Vous pouvez créer des liens supplémentaires avec une limite de temps.",
   "LinkValidUntil": "Ce lien est valable jusqu'à",
   "ChooseExpirationDate": "Limitez la période de disponibilité de ce lien en fixant une date d'expiration.",
   "EditSharedLink": "Modifier le lien partagé",

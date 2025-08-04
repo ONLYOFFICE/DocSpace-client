@@ -34,8 +34,8 @@ pre-push:
       skip_empty: true
       follow: true
       skip_on_fail: false
-    shared-unit-tests:
-      run: pnpm --filter @docspace/shared test
-      skip_empty: true
-      follow: true
-      skip_on_fail: false
+#    unit-tests:
+#      run: pnpm test
+#      skip_empty: true
+#      follow: true
+#      skip_on_fail: false

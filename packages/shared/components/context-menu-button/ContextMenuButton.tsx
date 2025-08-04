@@ -251,7 +251,7 @@ const ContextMenuButtonPure = ({
                   key={key || index}
                   {...rest}
                   id={item.id}
-                  testId={item?.dataTestId}
+                  testId={item?.dataTestId ?? `${key}_item`}
                   label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

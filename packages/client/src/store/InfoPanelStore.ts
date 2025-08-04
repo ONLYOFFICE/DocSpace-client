@@ -28,23 +28,10 @@ import { makeAutoObservable } from "mobx";
 import { getUserById } from "@docspace/shared/api/people";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import {
-  FileType,
-  FolderType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
-import {
-  DEFAULT_CREATE_LINK_SETTINGS,
-  getExpirationDate,
-} from "@docspace/shared/components/share/Share.helpers";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
-import {
-  editExternalLink,
-  addExternalLink,
-  getPrimaryLinkIfNotExistCreate,
-  getOrCreatePrimaryFolderLink,
-} from "@docspace/shared/api/files";
+import { editExternalLink, addExternalLink } from "@docspace/shared/api/files";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -52,6 +39,7 @@ import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
 import { ShareProps } from "@docspace/shared/components/share/Share.types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { isFolder } from "@docspace/shared/utils/typeGuards";
 
 import config from "PACKAGE_FILE";
 
@@ -232,13 +220,12 @@ class InfoPanelStore {
     const isRoom = "isRoom" in item && item.isRoom;
     const roomType = "roomType" in item && item.roomType;
 
-    const isFolder = "isFolder" in item && item.isFolder;
     const folderType = "type" in item && item.type;
 
     if ((isRoom || roomType) && "logo" in item)
       return item.logo?.cover ? item.logo : item.logo?.medium;
 
-    if (isFolder)
+    if (isFolder(item))
       return this.filesSettingsStore.getIconByFolderType(folderType, size);
 
     const fileExst = "fileExst" in item && item.fileExst;
@@ -344,46 +331,23 @@ class InfoPanelStore {
     return pathname.indexOf("files/trash") !== -1;
   };
 
-  getPrimaryFileLink = async (fileId: number) => {
-    const file = this.filesStore.files.find((item) => item.id === fileId);
+  // getPrimaryFileLink = async (file: TFile) => {
+  //   if (!isFile(file)) return;
 
-    const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
+  //   const { getFileInfo } = this.filesStore;
 
-    if (file.isForm) {
-      value.access = ShareAccessRights.Editing;
-    }
+  //   const res = ShareLinkService.getFilePrimaryLink(file);
 
-    if (
-      !file.isForm &&
-      file.fileType === FileType.PDF &&
-      (value.access === ShareAccessRights.Editing ||
-        value.access === ShareAccessRights.FormFilling)
-    ) {
-      value.access = ShareAccessRights.ReadOnly;
-    }
+  //   await getFileInfo(file.id);
 
-    const { getFileInfo } = this.filesStore;
+  //   return res;
+  // };
 
-    const res = await getPrimaryLinkIfNotExistCreate(
-      fileId,
-      value.access,
-      value.internal,
-      getExpirationDate(value.diffExpirationDate),
-    );
+  // getPrimaryFolderLink = async (folder: TFolder) => {
+  //   if (!isFolder(folder)) return;
 
-    await getFileInfo(fileId);
-
-    return res;
-  };
-
-  getPrimaryFolderLink = async (folderId: number) => {
-    return getOrCreatePrimaryFolderLink(
-      folderId,
-      DEFAULT_CREATE_LINK_SETTINGS.access,
-      DEFAULT_CREATE_LINK_SETTINGS.internal,
-      DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
-    );
-  };
+  //   return ShareLinkService.getFolderPrimaryLink(folder);
+  // };
 
   editFileLink: ShareProps["editFileLink"] = async (
     fileId,

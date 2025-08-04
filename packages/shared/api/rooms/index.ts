@@ -483,11 +483,11 @@ export function getExternalLinks(roomId, type) {
   });
 }
 
-export function getPrimaryLink(roomId) {
+export function getPrimaryLink(roomId: number | string) {
   return request({
     method: "get",
     url: `files/rooms/${roomId}/link`,
-  });
+  }) as Promise<TFileLink>;
 }
 
 export function validatePublicRoomKey(key) {

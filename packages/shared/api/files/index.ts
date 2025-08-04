@@ -1548,9 +1548,9 @@ export async function getPrimaryLinkIfNotExistCreate(
 }
 export async function getOrCreatePrimaryFolderLink(
   folderId: number | string,
-  access: ShareAccessRights,
-  internal: boolean,
-  expirationDate: moment.Moment | null,
+  access?: ShareAccessRights,
+  internal?: boolean,
+  expirationDate?: moment.Moment | null,
 ) {
   const res = (await request({
     method: "post",

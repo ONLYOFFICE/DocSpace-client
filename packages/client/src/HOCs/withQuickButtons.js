@@ -36,6 +36,7 @@ import {
 } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -60,18 +61,9 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickShare = async () => {
-      const {
-        t,
-        item,
-        getPrimaryFileLink,
-        getPrimaryFolderLink,
-        setShareChanged,
-        getManageLinkOptions,
-      } = this.props;
+      const { t, item, setShareChanged, getManageLinkOptions } = this.props;
 
-      const primaryLink = await (item.isFolder
-        ? getPrimaryFolderLink(item.id)
-        : getPrimaryFileLink(item.id));
+      const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
       if (primaryLink) {
         copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
@@ -80,8 +72,8 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getPrimaryLink, getManageLinkOptions } = this.props;
-      const primaryLink = await getPrimaryLink(item.id);
+      const { t, item, getManageLinkOptions } = this.props;
+      const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
         copyRoomShareLink(
           primaryLink,
@@ -214,12 +206,7 @@ export default function withQuickButtons(WrappedComponent) {
 
       const { isPublicRoom } = publicRoomStore;
 
-      const {
-        getPrimaryFileLink,
-        setShareChanged,
-        infoPanelRoomSelection,
-        getPrimaryFolderLink,
-      } = infoPanelStore;
+      const { setShareChanged, infoPanelRoomSelection } = infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
 
@@ -232,9 +219,7 @@ export default function withQuickButtons(WrappedComponent) {
         setSharingPanelVisible,
         isPublicRoom,
         isPersonalRoom,
-        getPrimaryLink: filesStore.getPrimaryLink,
         isArchiveFolder,
-        getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
         roomLifetime:
@@ -243,7 +228,6 @@ export default function withQuickButtons(WrappedComponent) {
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
-        getPrimaryFolderLink,
       };
     },
   )(observer(WithQuickButtons));

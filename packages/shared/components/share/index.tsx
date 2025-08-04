@@ -44,13 +44,12 @@ import {
   editExternalLink,
   getExternalFolderLinks,
   getExternalLinks,
-  getPrimaryFolderLink,
-  getPrimaryLink,
 } from "../../api/files";
 import type { TFileLink } from "../../api/files/types";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import ShareLoader from "../../skeletons/share";
 import { isDesktop } from "../../utils";
+import { ShareLinkService } from "../../services/share-link.service";
 
 import { Text } from "../text";
 import { toastr } from "../toast";
@@ -75,7 +74,6 @@ const Share = (props: ShareProps) => {
   const {
     setView,
     infoPanelSelection,
-    getPrimaryFileLink,
     selfId,
     shareChanged,
     setShareChanged,
@@ -165,15 +163,7 @@ const Share = (props: ShareProps) => {
     try {
       addLoaderLink();
 
-      const getPrimaryFileLinkApi = getPrimaryFileLink ?? getPrimaryLink;
-
-      const id = infoPanelSelection.id;
-
-      const getPrimaryLinkApi = isFolder
-        ? getPrimaryFolderLink
-        : getPrimaryFileLinkApi;
-
-      const link = await getPrimaryLinkApi(id);
+      const link = await ShareLinkService.getPrimaryLink(infoPanelSelection);
 
       if (link) {
         setFileLinks((links) => {

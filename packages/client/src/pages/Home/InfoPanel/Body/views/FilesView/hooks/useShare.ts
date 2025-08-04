@@ -32,13 +32,17 @@ import {
 } from "@docspace/shared/api/files";
 import { TFileLink } from "@docspace/shared/api/files/types";
 
+interface UseShareProps {
+  id: string;
+  isFolder?: boolean;
+  generatePrimaryLink: () => Promise<unknown> | undefined;
+}
+
 export const useShare = ({
   id,
   isFolder,
-}: {
-  id: string;
-  isFolder?: boolean;
-}) => {
+  generatePrimaryLink,
+}: UseShareProps) => {
   const [filesLink, setFilesLink] = React.useState<TFileLink[]>([]);
 
   const abortController = React.useRef<AbortController | null>(null);
@@ -47,6 +51,8 @@ export const useShare = ({
     try {
       abortController.current?.abort();
       abortController.current = new AbortController();
+
+      await generatePrimaryLink();
 
       const getExternalLinksMethod = isFolder
         ? getExternalFolderLinks
@@ -64,7 +70,7 @@ export const useShare = ({
       console.error("Error fetching external links:", error);
       throw error;
     }
-  }, [id, isFolder]);
+  }, [id, isFolder, generatePrimaryLink]);
 
   return {
     filesLink,

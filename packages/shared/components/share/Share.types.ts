@@ -117,7 +117,6 @@ export type ShareProps = {
   shareChanged?: boolean;
   setShareChanged?: (value: boolean) => void;
 
-  getPrimaryFileLink?: (id: string | number) => Promise<TFileLink>;
   editFileLink?: (
     fileId: number | string,
     linkId: number | string,

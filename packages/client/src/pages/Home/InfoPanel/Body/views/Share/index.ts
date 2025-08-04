@@ -41,7 +41,6 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
 
   const {
     setView,
-    getPrimaryFileLink,
 
     editFileLink,
     addFileLink,
@@ -52,7 +51,6 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
 
   return {
     setView,
-    getPrimaryFileLink,
 
     editFileLink,
     addFileLink,

@@ -143,6 +143,7 @@ import {
   setView,
   showInfoPanel,
 } from "SRC_DIR/helpers/info-panel";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1469,19 +1470,14 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
-  getManageLink = async (item, t) => {
-    const { getPrimaryFileLink, getPrimaryFolderLink, setShareChanged } =
-      this.infoPanelStore;
+  handleCopyPrimaryLink = async (item, t) => {
+    if (!item.canShare) return;
 
-    const getPrimaryLink = item.isFolder
-      ? getPrimaryFolderLink
-      : getPrimaryFileLink;
-
-    const primaryLink = await getPrimaryLink(item.id);
+    const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
       copyDocumentShareLink(primaryLink, t, this.getManageLinkOptions(item));
-      setShareChanged(true);
+      this.infoPanelStore?.setShareChanged(true);
     }
   };
 
@@ -1933,7 +1929,7 @@ class ContextOptionsStore {
             key: "copy-shared-link",
             label: t("Common:CopySharedLink"),
             icon: TabletLinkReactSvgUrl,
-            onClick: () => this.getManageLink(item, t),
+            onClick: () => this.handleCopyPrimaryLink(item, t),
             disabled: !item.canShare,
           },
           {

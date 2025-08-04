@@ -35,7 +35,7 @@ import {
 
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
-import ManualBackup from "@docspace/shared/pages/manual-backup";
+import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { isObjectEmpty } from "@docspace/shared/utils/isObjectEmpty";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 
@@ -80,10 +80,21 @@ const ManualBackupWrapper = ({
       try {
         getProgress(t);
 
-        const [account, backupStorage, storageRegionsS3] = await Promise.all([
+        const baseRequests = [
           getSettingsThirdParty(),
           getBackupStorage(),
           getStorageRegions(),
+        ] as const;
+
+        const optionalRequests = [];
+
+        if (isObjectEmpty(rootFoldersTitles)) {
+          optionalRequests.push(fetchTreeFolders());
+        }
+
+        const [account, backupStorage, storageRegionsS3] = await Promise.all([
+          ...baseRequests,
+          ...optionalRequests,
         ]);
 
         setConnectedThirdPartyAccount(account ?? null);
@@ -101,8 +112,6 @@ const ManualBackupWrapper = ({
         setIsEmptyContentBeforeLoader(false);
       }
     })();
-
-    if (isObjectEmpty(rootFoldersTitles)) fetchTreeFolders();
   }, []);
 
   useEffect(() => {

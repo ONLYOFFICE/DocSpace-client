@@ -54,6 +54,7 @@ import { FolderType, RoomSecurityError } from "@docspace/shared/enums";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
+import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
@@ -102,6 +103,7 @@ const User = ({
 
   const security = room?.security;
   const isExpect = user.isExpect;
+  const isSystem = "isSystem" in user && user.isSystem;
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
@@ -165,6 +167,7 @@ const User = ({
   const typeLabel = getUserTypeTranslation(type, t);
 
   const onOpenGroup = (group: TGroup) => {
+    if (group.isSystem) return;
     setEditMembersGroup!(group);
     setEditGroupMembersDialogVisible!(true);
   };
@@ -185,6 +188,12 @@ const User = ({
       ? t("Common:PortalOwner", { productName: t("Common:ProductName") })
       : t("Common:PortalAdmin", { productName: t("Common:ProductName") })
   }. ${t("Common:HasFullAccess")}`;
+
+  const itemAvatar = isSystem
+    ? EveryoneIconUrl
+    : isExpect
+      ? AtReactSvgUrl
+      : userAvatar || "";
 
   return "isTitle" in user && user.isTitle ? (
     <div
@@ -209,14 +218,17 @@ const User = ({
     </div>
   ) : (
     <div
-      className={classNames(styles.user, { [styles.isExpect]: isExpect })}
+      className={classNames(styles.user, {
+        [styles.isExpect]: isExpect,
+        [styles.isSystem]: isSystem,
+      })}
       key={user.id}
     >
       <Avatar
         role={type as unknown as AvatarRole}
         className="avatar"
         size={AvatarSize.min}
-        source={isExpect ? AtReactSvgUrl : userAvatar || ""}
+        source={itemAvatar}
         userName={
           isExpect ? "" : "displayName" in user ? user.displayName : user.name
         }
@@ -233,6 +245,7 @@ const User = ({
               type={LinkType.action}
               onClick={() => onOpenGroup(user)}
               title={decode(user.name)}
+              noHover={isSystem}
             >
               {decode(user.name)}
             </Link>

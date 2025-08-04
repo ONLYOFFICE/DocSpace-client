@@ -36,8 +36,8 @@ import { getBackupSchedule } from "@docspace/shared/api/portal";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 
 import { toastr } from "@docspace/shared/components/toast";
-import AutomaticBackup from "@docspace/shared/pages/auto-backup";
-import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
+import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
+import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";

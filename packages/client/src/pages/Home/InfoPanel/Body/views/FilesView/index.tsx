@@ -79,6 +79,9 @@ const FilesView = ({
   const isThirdParty = "providerId" in selection && selection?.providerId;
 
   const [value, setValue] = React.useState<string | null>(null);
+  const [prevSelectionId, setPrevSelectionId] = React.useState<string | null>(
+    null,
+  );
 
   const [isLoadingSuspense, setIsLoadingSuspense] = React.useState(false);
 
@@ -242,12 +245,17 @@ const FilesView = ({
   }, [showLoadingSuspense]);
 
   React.useEffect(() => {
+    if (currentView === value && selection.id?.toString() === prevSelectionId) {
+      return;
+    }
+
     fetchValue(currentView).then((v) => {
       if (!v) return;
 
+      setPrevSelectionId(selection.id?.toString() || "");
       setValue(v);
     });
-  }, [currentView, fetchValue]);
+  }, [currentView, fetchValue, selection.id, prevSelectionId]);
 
   const getView = () => {
     if (value === InfoPanelView.infoDetails)

@@ -364,9 +364,11 @@ const PasswordInput = ({
     const { type, value } = state;
     const iconNode =
       type === "password" ? (
-        <EyeOffReactSvg dataTestId={`${testId}_eye_icon`} />
+        <EyeOffReactSvg
+          data-testid={testId ? `${testId}_eye_icon` : undefined}
+        />
       ) : (
-        <EyeReactSvg dataTestId={`${testId}_eye_icon`} />
+        <EyeReactSvg data-testid={testId ? `${testId}_eye_icon` : undefined} />
       );
     const iconButtonClassName = `password_eye--${
       type === "password" ? "close" : "open"

@@ -493,6 +493,7 @@ type TSelectorItemEmpty = {
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
+  isSystem?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -566,6 +567,7 @@ export type TSelectorItemGroup = MergeTypes<
   TSelectorItemEmpty,
   {
     isGroup: boolean;
+    isSystem?: boolean;
     name: string;
   }
 >;
@@ -624,6 +626,7 @@ export type TSelectorItem = TSelectorItemType & {
   templateAccess?: ShareAccessRights;
   templateIsOwner?: boolean;
   disableMultiSelect?: boolean;
+  isSeparator?: boolean;
 };
 
 export type Data = {

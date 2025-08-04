@@ -41,7 +41,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ButtonSize } from "@docspace/shared/components/button";
-import { RestoreBackup } from "@docspace/shared/pages/restore-backup";
+import { RestoreBackup } from "@docspace/shared/pages/backup/restore-backup";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";

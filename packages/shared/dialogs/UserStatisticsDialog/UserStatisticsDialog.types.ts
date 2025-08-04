@@ -36,10 +36,10 @@ export type TUserStatisticsDialogProps = {
 };
 
 export type TUserQuotaStatistics = {
-  consumerQuotaLimit: number;
-  docspaceConsumerCount: number;
-  externalConsumerCount: number;
-  totalConsumer: number;
+  limitUsers: number;
+  portalUsers: number;
+  externalUsers: number;
+  totalUsers: number;
 };
 
 export type TUserStatisticsInfoProps = {

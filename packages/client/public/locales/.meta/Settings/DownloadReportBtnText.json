@@ -3,7 +3,7 @@
   "content": "Download report",
   "content_en_sha1_hash": "ca59430707ce8fb813997d7d85dff992c7f66e85",
   "created_at": "2025-05-19T21:30:51.450Z",
-  "updated_at": "2025-07-10T11:11:07.011Z",
+  "updated_at": "2025-08-04T07:30:01.532Z",
   "comment": {
     "text": "The \"DownloadReportBtnText\" translation key is used to display the text for a download report button in various UI elements, such as reports and audit trails, allowing users to access and export data. This text is expected to be concise and action-oriented, providing clear instructions for users to initiate the download process.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 97,
+      "line_number": 99,
       "context": "cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}",
       "module": "/packages/client"
     }

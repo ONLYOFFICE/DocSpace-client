@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2025-07-10T11:11:06.747Z",
+  "updated_at": "2025-08-04T07:30:00.962Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -23,8 +23,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
+      "line_number": 136,
+      "context": "t={t}\n ns=\"Translations\"\n i18nKey=\"GuestConversionNote\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n }}\n />\n </Text>\n {accessRightsLink ? (\n <Link",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 552,
+      "line_number": 554,
       "context": "disableInvitedUsers={invitedUsersArray}\n withGuests={showGuestsTab}\n withHeader\n headerProps={{\n // Todo: Update groups empty screen texts when they are ready\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick: closeUsersPanel,\n onCloseClick: () => {",
       "module": "/packages/client"
     },
@@ -36,31 +42,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 117,
-      "context": "const setDetails = () => setView(\"info_details\");\n const setShare = () => setView(\"info_share\");\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
+      "line_number": 96,
+      "context": "const setDetails = () => setView(InfoPanelView.infoDetails);\n const setShare = () => setView(InfoPanelView.infoShare);\n \n const memberTab = {\n id: \"info_members\",\n name: isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n onClick: setMembers,\n content: null,\n };\n \n const detailsTab = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 510,
+      "line_number": 512,
       "context": "const currentTitle = isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : isLoading && stateTitle\n ? stateTitle\n : title;\n \n const currentCanCreate =",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 510,
+      "line_number": 512,
       "context": "const currentTitle = isSettingsPage\n ? t(\"Common:Settings\")\n : isContactsPage\n ? isContactsInsideGroupPage\n ? getInsideGroupTitle()\n : t(\"Common:Contacts\")\n : isLoading && stateTitle\n ? stateTitle\n : title;\n \n const currentCanCreate =",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 132,
+      "line_number": 131,
       "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Google Workspace\"\n usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 140,
+      "line_number": 139,
       "context": "component: (\n <ImportStep\n t={t}\n serviceName=\"Nextcloud\"\n usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:UsersFiles\"),\n }}",
       "module": "/packages/client"
     },
@@ -83,14 +89,38 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
+      "line_number": 96,
+      "context": "t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (\n <Link",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
       "line_number": 213,
       "context": "isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n >\n <TextInput\n name={QUOTA}",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
+      "line_number": 248,
+      "context": "lineHeight=\"20px\"\n onClick={onChangeContacts}\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
+      "line_number": 248,
+      "context": "lineHeight=\"20px\"\n onClick={onChangeContacts}\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/GuestShareLink/page.client.tsx",
+      "line_number": 138,
+      "context": "isDisabled={isLoading}\n onClick={onDenyInvite}\n />\n </ButtonsWrapper>\n <Text fontSize=\"12px\" fontWeight=\"400\" className=\"guest-info\">\n {t(\"Common:GuestApprovalNote\", { sectionName: t(\"Common:Contacts\") })}\n </Text>\n </FormWrapper>\n );\n };",
+      "module": "/packages/login"
+    },
+    {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 472,
+      "line_number": 479,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Common:Contacts\"),\n },\n }\n : ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/packages/shared"
     }

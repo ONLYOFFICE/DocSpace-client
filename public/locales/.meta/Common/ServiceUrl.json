@@ -3,7 +3,7 @@
   "content": "Service URL",
   "content_en_sha1_hash": "077225837f3d213b1dc433defc47c2a4e06d2b94",
   "created_at": "2025-05-26T07:15:47.778Z",
-  "updated_at": "2025-06-30T12:20:31.688Z",
+  "updated_at": "2025-08-04T07:30:01.667Z",
   "comment": {
     "text": "This translation key is used to display the service URL placeholder in Amazon settings. It appears as a label in a UI element that allows users to input or select their service URL. The translation will help convey this concept to non-English speaking audiences.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/amazon-settings/AmazonSettings.tsx",
-      "line_number": 83,
+      "line_number": 85,
       "context": "selectedStorage && selectedStorage.properties[0]?.title;\n const forcePathStylePlaceholder = t(\"Common:ForcePathStyle\");\n const regionPlaceholder =\n selectedStorage && selectedStorage.properties[2]?.title;\n \n const serviceUrlPlaceholder = t(\"Common:ServiceUrl\");\n const SSEPlaceholder = t(\"Common:ServerSideEncryptionMethod\");\n const useHttpPlaceholder = t(\"Common:UseHttp\");\n const serverSideEncryption = t(\"Common:AmazonSSE\");\n const clientSideEncryption = t(\"Common:AmazonCSE\");",
       "module": "/packages/shared"
     }

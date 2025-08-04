@@ -3,7 +3,7 @@
   "content": "Revoke",
   "content_en_sha1_hash": "0be720759ff04d13c5706881d5d227a2621f91a6",
   "created_at": "2025-05-19T21:30:54.004Z",
-  "updated_at": "2025-06-08T12:02:32.772Z",
+  "updated_at": "2025-08-04T07:30:01.442Z",
   "comment": {
     "text": "This translation key \"Revoke\" is used to describe the action of canceling or terminating an OAuth developer token. It appears in a modal dialog and a button, providing a clear and concise message to users in various UI contexts.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
-      "line_number": 100,
-      "context": "if (requestRunning) return;\n \n setGenerateDeveloperTokenDialogVisible?.(false);\n };\n \n const onRevoke = async () => {\n if (requestRunning || !token) return;\n \n setRequestRunning(true);\n \n await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);",
+      "line_number": 102,
+      "context": "if (requestRunning) return;\n \n setGenerateDeveloperTokenDialogVisible?.(false);\n };\n \n const onRevoke = async () => {\n if (requestRunning || !token) return;\n \n setRequestRunning(true);\n \n await setJwtToken?.();",
       "module": "/packages/client"
     },
     {
@@ -36,8 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 770,
-      "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n };\n \n const contextOptions: ContextMenuModel[] = [",
+      "line_number": 777,
+      "context": "};\n \n const revokeDeveloperTokenOption = {\n key: \"revoke-token\",\n icon: RevokeIconUrl,\n label: t(\"OAuth:RevokeDialogHeader\"),\n onClick: onRevokeDeveloperToken,\n disabled: !item.enabled,\n dataTestId: \"oauth_revoke_token_option\",\n };",
       "module": "/packages/client"
     }
   ],

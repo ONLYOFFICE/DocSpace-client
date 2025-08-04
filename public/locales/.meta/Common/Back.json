@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2025-06-30T12:20:31.412Z",
+  "updated_at": "2025-08-04T07:30:01.311Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -66,7 +66,7 @@
     },
     {
       "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",
-      "line_number": 386,
+      "line_number": 387,
       "context": "<div className=\"button-container\">\n {currentStep !== 0 ? (\n <Button\n id=\"form-filling_tips_back\"\n key=\"TipsBack\"\n label={t(\"Common:Back\")}\n size={ButtonSize.extraSmall}\n onClick={onPrev}\n />\n ) : null}\n <Button",
       "module": "/packages/shared"
     },

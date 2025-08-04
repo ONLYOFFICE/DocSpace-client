@@ -3,7 +3,7 @@
   "content": "Spreadsheets",
   "content_en_sha1_hash": "e8a0fe95bcd9c07d210920e52baa1560871c11ad",
   "created_at": "2025-05-19T21:30:49.008Z",
-  "updated_at": "2025-07-10T11:11:06.890Z",
+  "updated_at": "2025-08-04T07:30:01.269Z",
   "comment": {
     "text": "The translation key \"Common:Spreadsheets\" is used to display a label indicating that only spreadsheets are being filtered or selected in a file filter interface. It appears as part of a dropdown menu or list, providing context for users selecting files by type.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 113,
+      "line_number": 122,
       "context": "key: FilterType.PresentationsOnly,\n label: t(`Common:Presentations`),\n },\n {\n key: FilterType.SpreadsheetsOnly,\n label: t(`Common:Spreadsheets`),\n },\n {\n key: FilterType.PDFForm,\n label: getManyPDFTitle(t, true),\n },",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 353,
+      "line_number": 357,
       "context": "case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:\n return t(\"Common:Images\");\n case FilterType.MediaOnly:\n return t(\"Common:Media\");\n case FilterType.ArchiveOnly:",
       "module": "/packages/shared"
     }

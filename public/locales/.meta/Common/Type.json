@@ -3,7 +3,7 @@
   "content": "Type",
   "content_en_sha1_hash": "3deb7456519697ecf4eefc455516c969a3681bae",
   "created_at": "2025-05-19T21:30:49.370Z",
-  "updated_at": "2025-07-10T11:11:06.869Z",
+  "updated_at": "2025-08-04T07:30:01.206Z",
   "comment": {
     "text": "This translation key is used to display a label indicating the type of an item or entity. It appears in various UI elements, such as titles, labels, and field headers, where it provides a brief description of the item's classification (e.g., \"Type\" for a data entry field).",
     "is_auto": true,
@@ -11,21 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 171,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 197,
       "context": "return this.t(\"Common:Owner\");\n case \"Location\":\n return this.t(\"Common:Location\");\n \n case \"Type\":\n return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");\n \n case \"File extension\":\n return this.t(\"FileExtension\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 239,
-      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className=\"info_field\" noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (",
+      "line_number": 261,
+      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className={styles.infoField} noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && userSelection.createdBy?.displayName ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 239,
-      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className=\"info_field\" noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && infoPanelSelection.createdBy?.displayName ? (",
+      "line_number": 261,
+      "context": "title={statusLabel}\n >\n {statusLabel}\n </Text>\n \n <Text className={styles.infoField} noSelect title={t(\"Common:Type\")}>\n {t(\"Common:Type\")}\n </Text>\n {typeData}\n \n {isGuests && userSelection.createdBy?.displayName ? (",
       "module": "/packages/client"
     },
     {
@@ -114,14 +114,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 437,
-      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n />\n {isTypeFilterSet ? (",
+      "line_number": 440,
+      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n dataTestId=\"filter_type_toggle_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 437,
-      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n />\n {isTypeFilterSet ? (",
+      "line_number": 440,
+      "context": "</UserInputContainer>\n )\n ) : null}\n <ToggleButton\n className=\"toggle\"\n label={t(\"Common:Type\")}\n onChange={toggleFilterType}\n isChecked={isTypeFilterSet}\n isDisabled={!!config.requestToken}\n dataTestId=\"filter_type_toggle_button\"\n />",
       "module": "/packages/client"
     },
     {

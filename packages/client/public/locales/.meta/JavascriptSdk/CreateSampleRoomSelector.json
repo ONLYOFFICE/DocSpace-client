@@ -3,7 +3,7 @@
   "content": "Create sample Room selector embed",
   "content_en_sha1_hash": "93d831166dcad24892ee84ef09c7ee51f7c5531b",
   "created_at": "2025-05-19T21:30:54.405Z",
-  "updated_at": "2025-05-24T09:36:34.731Z",
+  "updated_at": "2025-08-04T07:30:01.399Z",
   "comment": {
     "text": "This translation key is used for the header of a Room selector preset in a developer tool, displaying the phrase \"CreateSampleRoomSelector\" as its label. It appears in a dialog or settings section where users can customize their Room selectors.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 207,
-      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n t={t}\n loadCurrentFrame={initFrame}",
+      "line_number": 212,
+      "context": ");\n \n return (\n <PresetWrapper\n description={t(\"RoomSelectorDescription\")}\n header={t(\"CreateSampleRoomSelector\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}\n preview={preview}",
       "module": "/packages/client"
     }
   ],

@@ -73,7 +73,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const isTile = viewAs === "tile";
   const desktopView = !isTile && isDesktop();
 
-  const lockedBy = "lockedBy" in item ? item.lockedBy : undefined;
+  const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : undefined;
   const locked = "locked" in item ? item.locked : undefined;
   const colorLock = locked
     ? theme.filesQuickButtons.sharedColor

@@ -147,9 +147,10 @@ const SimpleFilesRow = (props) => {
 
     setIsDragActive(false);
   };
+  const isDragDisabled = dragging && !isDragging;
 
   const dragStyles =
-    dragging && isDragging
+    (dragging && isDragging) || isDragDisabled
       ? {
           marginInline: "-16px",
           paddingInline: "16px",
@@ -190,6 +191,7 @@ const SimpleFilesRow = (props) => {
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
+        isDragDisabled={isDragDisabled}
       >
         <FilesRow
           key={item.id}

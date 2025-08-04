@@ -151,6 +151,7 @@ const FileTile = (props) => {
   );
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
+  const isDragDisabled = dragging && !isDragging;
 
   const onDragOverEvent = (_, e) => {
     onDragOver && onDragOver(e);
@@ -248,6 +249,7 @@ const FileTile = (props) => {
         dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
+        isDragDisabled={isDragDisabled}
       >
         {renderTile()}
       </StyledDragAndDrop>

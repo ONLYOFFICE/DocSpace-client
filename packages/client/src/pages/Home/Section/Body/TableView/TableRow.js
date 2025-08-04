@@ -120,6 +120,8 @@ const FilesTableRow = (props) => {
 
   const [isDragActive, setIsDragActive] = useState(false);
 
+  const isDragDisabled = dragging && !isDragging;
+
   const dragStyles = {
     style: {
       background:
@@ -128,6 +130,7 @@ const FilesTableRow = (props) => {
             ? acceptBackground
             : background
           : "none",
+      opacity: isDragDisabled ? 0.4 : 1,
     },
   };
 
@@ -210,6 +213,7 @@ const FilesTableRow = (props) => {
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}
       onDragLeave={onDragLeaveEvent}
+      isDragDisabled={isDragDisabled}
     >
       <StyledTableRow
         key={item.id}

@@ -75,7 +75,7 @@ const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
         <img
           src={logo}
           className={classNames("logo-wrapper", className)}
-          alt=""
+          alt="portal logo"
         />
       ) : null}
     </div>

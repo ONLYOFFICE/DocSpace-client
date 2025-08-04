@@ -25,16 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TServer } from "@docspace/shared/api/ai/types";
-
-import styles from "./MCPServers.module.scss";
 import { getServersList } from "@docspace/shared/api/ai";
 
+import styles from "./MCPServers.module.scss";
+
 const MCPServers = () => {
+  const { t } = useTranslation(["MCPServers", "Common"]);
   const [serversList, setServersList] = React.useState<TServer[]>([]);
 
   React.useEffect(() => {
@@ -56,10 +58,7 @@ const MCPServers = () => {
         lineHeight="20px"
         className={styles.description}
       >
-        This section allows you to manage MCP servers that will be available in
-        AI chats within rooms. You can add your own MCP servers here if your
-        company requires them. Once added, other users will be able to use them
-        in their work.
+        {t("Description")}
       </Text>
       <Link
         target={LinkTarget.blank}
@@ -71,12 +70,12 @@ const MCPServers = () => {
         style={{ marginBottom: "8px" }}
         color="accent"
       >
-        Learn more
+        {t("Common:LearnMore")}
       </Link>
       <Button
         primary
         size={ButtonSize.small}
-        label="Add MCP server"
+        label={t("AddServer")}
         scale={false}
         className={styles.button}
       />

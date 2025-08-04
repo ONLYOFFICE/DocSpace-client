@@ -1,0 +1,4 @@
+{
+  "Description": "This section allows you to manage MCP servers that will be available in AI chats within rooms. You can add your own MCP servers here if your company requires them. Once added, other users will be able to use them in their work.",
+  "AddServer": "Add MCP server"
+}

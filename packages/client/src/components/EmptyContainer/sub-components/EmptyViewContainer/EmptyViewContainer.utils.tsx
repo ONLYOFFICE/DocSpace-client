@@ -314,7 +314,6 @@ export const getRootTitle = (
     .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
-    .with([FolderType.Flows, P._], () => t("Files:NoFlowsHereYet"))
     .otherwise(() => "");
 };
 

@@ -896,5 +896,7 @@
   "UnsavedChangesBody": "Если вы закроете меню настроек ссылки прямо сейчас, изменения не сохранятся.",
   "CloseMenu": "Закрыть меню",
   "LinkSettings": "Параметры ссылки",
-  "Embed": "Встроить"
+  "Embed": "Встроить",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Новая общая ссылка успешно создана",
+  "RevokeLink": "Отозвать ссылку"
 }

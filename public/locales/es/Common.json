@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Si usted cierra el menú de configuración de enlaces en este momento, sus cambios no se guardarán.",
   "CloseMenu": "Cerrar menú",
   "LinkSettings": "Configuración de enlace",
-  "Embed": "Incrustar"
+  "Embed": "Incrustar",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Se ha creado correctamente un nuevo enlace general ",
+  "RevokeLink": "Revocar enlace"
 }

@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "لن يتم حفظ التغييرات إذا قمت بإغلاق قائمة الإعدادات الآن.",
   "CloseMenu": "أغلاق القائمة",
   "LinkSettings": "إعدادات الرابط",
-  "Embed": "إدراج"
+  "Embed": "إدراج",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "تم إنشاء الرابط العام الجديد بنجاح",
+  "RevokeLink": "إبطال الرابط"
 }

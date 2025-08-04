@@ -893,5 +893,7 @@
   "UnsavedChangesBody": "Nëse mbyllni menunë e cilësimeve të lidhjes tani, ndryshimet tuaja nuk do të ruhen.",
   "CloseMenu": "Mbyllni menunë",
   "LinkSettings": "Cilësimet e lidhjes",
-  "Embed": "E ngulitur"
+  "Embed": "E ngulitur",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Lidhja e re e përgjithshme u krijua me sukses",
+  "RevokeLink": "Revokoni lidhjen"
 }

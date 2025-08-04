@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Če zdaj zaprete meni z nastavitvami povezave, vaše spremembe ne bodo shranjene.",
   "CloseMenu": "Zapri menu",
   "LinkSettings": "Nastavitve povezave",
-  "Embed": "Vdelaj"
+  "Embed": "Vdelaj",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nova splošna povezava je bila uspešno ustvarjena",
+  "RevokeLink": "Prekliči povezavo"
 }

@@ -168,7 +168,7 @@ const LinkRow = (props: LinkRowProps) => {
         key: "delete-link-key",
         label:
           primary && (isPublicRoomType || isFormRoom)
-            ? t("Files:RevokeLink")
+            ? t("Common:RevokeLink")
             : t("Common:Delete"),
         icon:
           primary && (isPublicRoomType || isFormRoom)

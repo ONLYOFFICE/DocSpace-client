@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "如果您现在关闭链接设置菜单，您所做的更改可能不会被保存。",
   "CloseMenu": "关闭菜单",
   "LinkSettings": "链接设置",
-  "Embed": "嵌入"
+  "Embed": "嵌入",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "已成功创建新的通用链接",
+  "RevokeLink": "撤销链接"
 }

@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Nếu bạn đóng menu cài đặt liên kết ngay bây giờ, các thay đổi của bạn sẽ không được lưu.",
   "CloseMenu": "Đóng menu",
   "LinkSettings": "Cài đặt liên kết",
-  "Embed": "Nhúng"
+  "Embed": "Nhúng",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Đã tạo liên kết chung mới thành công",
+  "RevokeLink": "Thu hồi liên kết"
 }

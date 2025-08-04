@@ -881,5 +881,7 @@
   "UnsavedChangesBody": "ຖ້າທ່ານປິດເມນູການຕັ້ງຄ່າການເຊື່ອມຕໍ່ໃນປັດຈຸບັນ, ການປ່ຽນແປງຂອງທ່ານຈະບໍ່ຖືກບັນທຶກໄວ້.",
   "CloseMenu": "ປິດເມນູ",
   "LinkSettings": "ການຕັ້ງຄ່າການເຊື່ອມຕໍ່",
-  "Embed": "ຝັງ"
+  "Embed": "ຝັງ",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "ສ້າງລິ້ງທົ່ວໄປໃໝ່ສຳເລັດແລ້ວ ",
+  "RevokeLink": "ຖອນການເຊື່ອມຕໍ່"
 }

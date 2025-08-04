@@ -885,5 +885,7 @@
   "UnsavedChangesBody": "Якщо ви зараз закриєте меню параметрів посилання, зміни не будуть збережені.",
   "CloseMenu": "Закрити меню",
   "LinkSettings": "Параметри посилання",
-  "Embed": "Вбудувати"
+  "Embed": "Вбудувати",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Нове загальне посилання успішно створено",
+  "RevokeLink": "Відкликати посилання"
 }

@@ -885,5 +885,7 @@
   "UnsavedChangesBody": "Si vous fermez le menu des paramètres du lien maintenant, vos modifications ne seront pas sauvegardées.",
   "CloseMenu": "Fermer le menu",
   "LinkSettings": "Paramètres des liens",
-  "Embed": "Intégrer"
+  "Embed": "Intégrer",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nouveau lien général créé avec succès",
+  "RevokeLink": "Supprimer le lien"
 }

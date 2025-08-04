@@ -911,5 +911,7 @@
   "CloseMenu": "Close menu",
   "LinkSettings": "Link settings",
   "Embed": "Embed",
-  "YouDontHaveEnoughPermission": "You don't have enough permission"
+  "YouDontHaveEnoughPermission": "You don't have enough permission",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "New general link created successfully",
+  "RevokeLink": "Revoke link"
 }

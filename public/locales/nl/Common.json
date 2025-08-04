@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Als u het menu met linkinstellingen nu sluit, worden uw wijzigingen niet opgeslagen.",
   "CloseMenu": "Sluit menu",
   "LinkSettings": "Link instellingen",
-  "Embed": "Insluiten"
+  "Embed": "Insluiten",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nieuwe algemene link succesvol aangemaakt",
+  "RevokeLink": "Link intrekken"
 }

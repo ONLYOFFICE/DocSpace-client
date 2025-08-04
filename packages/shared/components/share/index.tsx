@@ -34,6 +34,7 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
+import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
 import { LINKS_LIMIT_COUNT } from "../../constants";
@@ -337,8 +338,13 @@ const Share = (props: ShareProps) => {
         expDate,
       );
 
-      deleteLink(link.sharedTo.id);
-      toastr.success(t("Common:LinkRemoved"));
+      if (link.canEditExpirationDate) {
+        deleteLink(link.sharedTo.id);
+        toastr.success(t("Common:LinkRemoved"));
+      } else {
+        setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
+        toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
+      }
     } catch (error) {
       console.error(error);
     }
@@ -430,11 +436,13 @@ const Share = (props: ShareProps) => {
       },
       {
         key: "delete-link-key",
-        label: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
-        onClick: () => {
-          removeLink(link);
-        },
+        label: link.canEditExpirationDate
+          ? t("Common:Delete")
+          : t("Common:RevokeLink"),
+        icon: link.canEditExpirationDate
+          ? TrashReactSvgUrl
+          : OutlineReactSvgUrl,
+        onClick: () => removeLink(link),
       },
     ];
   };

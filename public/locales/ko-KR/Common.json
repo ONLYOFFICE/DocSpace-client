@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "지금 링크 설정 메뉴를 닫으면 변경 사항이 저장되지 않습니다.",
   "CloseMenu": "메뉴 닫기",
   "LinkSettings": "링크 설정",
-  "Embed": "임베드"
+  "Embed": "임베드",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "새로운 일반 링크가 생성되었습니다",
+  "RevokeLink": "링크 취소"
 }

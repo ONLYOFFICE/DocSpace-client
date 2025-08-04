@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Se chiudi subito il menu delle impostazioni del link, le modifiche non verranno salvate.",
   "CloseMenu": "Chiudi menù",
   "LinkSettings": "Impostazioni di link",
-  "Embed": "Incorpora"
+  "Embed": "Incorpora",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nuovo link generale è stato creato con successo",
+  "RevokeLink": "Revoca il link"
 }

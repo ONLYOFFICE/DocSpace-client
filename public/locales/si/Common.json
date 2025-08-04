@@ -883,5 +883,7 @@
   "UnsavedChangesBody": "ඔබ දැන් සබැඳි සැකසුම් වට්ටෝරුව වසා දැමුවහොත්, ඔබගේ වෙනස්කම් සුරැකෙන්නේ නැත.",
   "CloseMenu": "වට්ටෝරුව වසන්න",
   "LinkSettings": "සබැඳියේ සැකසුම්",
-  "Embed": "එම්බෙඩ් කරන්න"
+  "Embed": "එම්බෙඩ් කරන්න",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "නව සාමාන්‍ය සබැඳිය සාර්ථකව සෑදිණි",
+  "RevokeLink": "සබැඳිය ඉවතලන්න"
 }

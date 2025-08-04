@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Dacă închideți acum meniul cu opțiuni de setare a link-ului, modificările dvs nu vor fi salvate.",
   "CloseMenu": "Închidere meniu",
   "LinkSettings": "Setări link",
-  "Embed": "Încorporare"
+  "Embed": "Încorporare",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Un link general a fost creat cu succes",
+  "RevokeLink": "Revocare link"
 }

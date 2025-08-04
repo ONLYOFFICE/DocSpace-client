@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Ако сада затворите мени за подешавање линкова, ваше промене неће бити сачуване.",
   "CloseMenu": "Затвори мени",
   "LinkSettings": "Подешавања линка",
-  "Embed": "Угради"
+  "Embed": "Угради",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Нови генерални линк успешно креиран",
+  "RevokeLink": "Опозови линк"
 }

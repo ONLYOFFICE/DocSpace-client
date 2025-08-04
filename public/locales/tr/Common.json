@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Bağlantı ayarları menüsünü hemen kapatırsanız değişiklikleriniz kaydedilmeyecektir.",
   "CloseMenu": "Menüyü kapat",
   "LinkSettings": "Bağlantı ayarları",
-  "Embed": "Göm"
+  "Embed": "Göm",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni genel bağlantı başarıyla oluşturuldu",
+  "RevokeLink": "Bağlantıyı iptal et"
 }

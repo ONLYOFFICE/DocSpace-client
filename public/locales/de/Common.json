@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Wenn Sie das Menü für Link-Einstellungen jetzt schließen, werden Ihre Änderungen nicht gespeichert.",
   "CloseMenu": "Menü schließen",
   "LinkSettings": "Linkeinstellungen",
-  "Embed": "Einbetten"
+  "Embed": "Einbetten",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Neuer allgemeiner Link erfolgreich erstellt",
+  "RevokeLink": "Link widerrufen"
 }

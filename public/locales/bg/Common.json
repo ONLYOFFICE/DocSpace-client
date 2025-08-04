@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Ако затворите менюто с настройки на линка точно сега, промените Ви няма да бъдат запазени.",
   "CloseMenu": "Затвори меню",
   "LinkSettings": "Настройки на линковете",
-  "Embed": "Вмъкни"
+  "Embed": "Вмъкни",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Нов главен линк създаден успешно",
+  "RevokeLink": "Отмени линк"
 }

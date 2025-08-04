@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "今すぐリンク設定メニューを閉じると、変更は保存されません。",
   "CloseMenu": "メニューを閉じる",
   "LinkSettings": "リンクの設定",
-  "Embed": "埋め込み"
+  "Embed": "埋め込み",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "新しい一般リンクが正常に作成されました",
+  "RevokeLink": "リンクの取り消し"
 }

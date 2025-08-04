@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Bağlantı parametrləri menyusunu dərhal bağlasanız, dəyişiklikləriniz yadda saxlanmayacaq.",
   "CloseMenu": "Menyunu bağlayın",
   "LinkSettings": "Link parametrləri",
-  "Embed": "Yerləşdirin"
+  "Embed": "Yerləşdirin",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni ümumi link uğurla yaradıldı",
+  "RevokeLink": "Keçidi ləğv edin"
 }

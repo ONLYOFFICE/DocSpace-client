@@ -893,5 +893,7 @@
   "UnsavedChangesBody": "Ja tūlīt aizvērsiet saites iestatījumu izvēlni, izmaiņas netiks saglabātas.",
   "CloseMenu": "Aizvērt izvēlni",
   "LinkSettings": "Saites iestatījumi",
-  "Embed": "Iegult"
+  "Embed": "Iegult",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Jauna vispārīga saite ir veiksmīgi izveidota",
+  "RevokeLink": "Atsaukt saiti"
 }

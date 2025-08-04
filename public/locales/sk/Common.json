@@ -894,5 +894,7 @@
   "UnsavedChangesBody": "Ak zatvoríte menu nastavení odkazu práve teraz, vaše zmeny sa neuložia.",
   "CloseMenu": "Zatvoriť menu",
   "LinkSettings": "Nastavenia odkazu",
-  "Embed": "Vložiť"
+  "Embed": "Vložiť",
+  "GeneralLinkRevokedAndCreatedSuccessfully": "Nový hlavný odkaz úspešne vytvorený",
+  "RevokeLink": "Zrušiť odkaz"
 }

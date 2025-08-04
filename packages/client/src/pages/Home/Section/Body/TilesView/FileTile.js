@@ -94,6 +94,7 @@ const FileTile = (props) => {
     showStorageInfo,
     setRefMap,
     deleteRefMap,
+    dataTestId,
   } = props;
 
   const navigate = useNavigate();
@@ -191,6 +192,7 @@ const FileTile = (props) => {
     badges: badgesComponent,
     children: tileContent,
     forwardRef: tileRef,
+    dataTestId,
   };
 
   const fileTile = (

@@ -63,6 +63,7 @@ export const FolderTile = ({
   isActive,
   isEdit,
   forwardRef,
+  dataTestId,
 }: FolderTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [FolderTileContent] = childrenArray;
@@ -203,6 +204,7 @@ export const FolderTile = ({
       onClick={onFolderClick}
       ref={forwardRef}
       onContextMenu={onContextMenu}
+      data-testid={dataTestId ?? "tile"}
     >
       {element && !isEdit ? (
         !inProgress ? (

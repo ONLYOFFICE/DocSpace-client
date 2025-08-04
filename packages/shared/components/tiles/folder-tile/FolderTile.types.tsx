@@ -83,6 +83,8 @@ export type FolderTileProps = {
   /** Flag for edit mode */
   isEdit?: boolean;
   forwardRef?: React.RefObject<HTMLDivElement | null>;
+  /** Data test id for the tile */
+  dataTestId?: string;
 };
 
 export type FolderChildProps = {

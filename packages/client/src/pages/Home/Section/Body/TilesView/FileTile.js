@@ -51,7 +51,7 @@ import ItemIcon from "../../../../../components/ItemIcon";
 import withBadges from "../../../../../HOCs/withBadges";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
-  border-radius: 6px;
+  border-radius: 12px;
 `;
 
 const FileTile = (props) => {
@@ -205,7 +205,9 @@ const FileTile = (props) => {
     />
   );
 
-  const folderTile = <FolderTile {...commonProps} />;
+  const folderTile = (
+    <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />
+  );
 
   const roomTile = (
     <RoomTile

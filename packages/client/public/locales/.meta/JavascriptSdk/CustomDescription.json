@@ -3,7 +3,7 @@
   "content": "Manually configure the parameters for embedding your {{productName}}.",
   "content_en_sha1_hash": "19a15a534fcbbf259ce618528c67b5214076972a",
   "created_at": "2025-05-19T21:30:54.436Z",
-  "updated_at": "2025-05-24T09:28:56.211Z",
+  "updated_at": "2025-08-04T07:30:01.381Z",
   "comment": {
     "text": "Manually configure parameters for embedding {{productName}}. This description is used to inform users about customizing their {{productName}} integration settings in the Portal Settings page.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 392,
+      "line_number": 396,
       "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"CustomDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n header={t(\"CreateSamplePortal\", { productName: t(\"Common:ProductName\") })}\n >\n <Container>",
       "module": "/packages/client"
     }

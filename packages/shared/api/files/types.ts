@@ -105,7 +105,7 @@ export type TFile = {
   fileType: FileType;
   folderId: number;
   id: number;
-  parentRoomType: FolderType;
+  parentRoomType?: FolderType;
   mute: boolean;
   pureContentLength: number;
   rootFolderId: number;
@@ -220,7 +220,7 @@ export type TFolder = {
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
-  parentRoomType: FolderType;
+  parentRoomType?: FolderType;
   order?: string;
   isRoom?: false;
 };

@@ -54,6 +54,7 @@ const generateFileLink = ({
   return {
     access,
     canEditInternal: true,
+    canEditExpirationDate: true,
     sharedTo: {
       id,
       title,

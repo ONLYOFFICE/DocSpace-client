@@ -35,30 +35,25 @@ export const UserStatisticsInfo = ({
 }: TUserStatisticsInfoProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const {
-    consumerQuotaLimit,
-    docspaceConsumerCount,
-    externalConsumerCount,
-    totalConsumer,
-  } = statistics;
+  const { limitUsers, portalUsers, totalUsers, externalUsers } = statistics;
 
-  const percentEditing = Math.round((totalConsumer / consumerQuotaLimit) * 100);
+  const percentEditing = Math.round((totalUsers / limitUsers) * 100);
 
   const detailedEditInfo = () => {
-    const docspaceUserCount = docspaceConsumerCount
+    const portalUsersText = portalUsers
       ? t("EditUserCount", {
-          count: docspaceConsumerCount,
+          count: portalUsers,
           productName: t("ProductName"),
         })
       : null;
 
-    const externalUserCount = externalConsumerCount
+    const externalUserText = externalUsers
       ? t("EditExternalUserCount", {
-          externalCount: externalConsumerCount,
+          externalCount: externalUsers,
         })
       : null;
 
-    const detailedInfo = [docspaceUserCount, externalUserCount]
+    const detailedInfo = [portalUsersText, externalUserText]
       .filter(Boolean)
       .map((item, index, arr) => {
         return index === arr.length - 1 ? item : `${item} / `;
@@ -78,7 +73,7 @@ export const UserStatisticsInfo = ({
           <Trans
             i18nKey="EditUserLimit"
             t={t}
-            values={{ limit: consumerQuotaLimit }}
+            values={{ limit: limitUsers }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
         </Text>
@@ -87,9 +82,9 @@ export const UserStatisticsInfo = ({
             i18nKey="EditUserInfo"
             t={t}
             values={{
-              editingCount: totalConsumer,
-              count: docspaceConsumerCount,
-              externalCount: externalConsumerCount,
+              editingCount: totalUsers,
+              count: portalUsers,
+              externalCount: externalUsers,
               productName: t("ProductName"),
             }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}

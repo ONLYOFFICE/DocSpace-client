@@ -28,16 +28,17 @@ import { getCookie } from "../../utils";
 
 import { request } from "../client";
 import { TFile } from "../files/types";
+
 import {
   TCreateAiProvider,
   TAiProvider,
   TUpdateAiProviders,
   TDeleteAiProviders,
   TModelList,
-  TCurrentModel,
   TChat,
   TMessage,
   TMCPTool,
+  TServer,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -138,25 +139,6 @@ export const getModels = async (providerId?: TAiProvider["id"]) => {
     });
 
   return models;
-};
-
-export const getCurrentModel = async () => {
-  const res = (await request({
-    method: "get",
-    url: `${baseUrl}/chats/configuration`,
-  })) as TCurrentModel | undefined;
-
-  return res;
-};
-
-export const setCurrentModel = async (data: TCurrentModel) => {
-  const res = (await request({
-    method: "put",
-    url: `${baseUrl}/chats/configuration`,
-    data,
-  })) as TCurrentModel;
-
-  return res;
 };
 
 export const startNewChat = async (
@@ -278,11 +260,64 @@ export const deleteChat = async (chatId: string) => {
   });
 };
 
-export const getMCPTools = async (room: number, mcpId: string) => {
+export const getServersList = async (startIndex: number, count: number) => {
   try {
     const res = await request({
       method: "get",
-      url: `${baseUrl}/rooms/${room}/mcp/${mcpId}/tools`,
+      url: `${baseUrl}/servers?startIndex=${startIndex}&count=${count}`,
+    });
+
+    return res as { items: TServer[]; total: number };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const addServersForRoom = async (roomId: number, servers: string[]) => {
+  try {
+    await request({
+      method: "post",
+      url: `${baseUrl}/rooms/${roomId}/servers`,
+      data: { servers },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getServersListForRoom = async (roomId: number) => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/rooms/${roomId}/servers`,
+    });
+
+    return res as { items: TServer[]; total: number };
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteServersForRoom = async (
+  roomId: number,
+  servers: string[],
+) => {
+  try {
+    await request({
+      method: "post",
+      url: `${baseUrl}/rooms/${roomId}/servers`,
+      data: { servers },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getMCPToolsForRoom = async (room: number, mcpId: string) => {
+  try {
+    const res = await request({
+      method: "get",
+      url: `${baseUrl}/rooms/${room}/servers/${mcpId}/tools`,
     });
 
     return res as TMCPTool[];
@@ -291,14 +326,14 @@ export const getMCPTools = async (room: number, mcpId: string) => {
   }
 };
 
-export const changeMCPTools = async (
+export const changeMCPToolsForRoom = async (
   room: number,
   mcpId: string,
   disabledTools: string[],
 ) => {
   const res = await request({
     method: "PUT",
-    url: `${baseUrl}/rooms/${room}/mcp/${mcpId}/tools`,
+    url: `${baseUrl}/rooms/${room}/servers/${mcpId}/tools`,
     data: { disabledTools },
   });
 

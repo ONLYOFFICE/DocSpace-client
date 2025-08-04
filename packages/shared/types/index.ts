@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TBreadCrumb } from "../components/selector/Selector.types";
-import { RoomsType, ShareAccessRights } from "../enums";
+import { FolderType, RoomsType, ShareAccessRights } from "../enums";
 import { TTheme, TColorScheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
 
@@ -126,6 +126,7 @@ export type TPathParts = {
   id: number;
   title: string;
   roomType?: RoomsType;
+  folderType?: FolderType;
 };
 
 export type TCreatedBy = {

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TCreatedBy } from "../../types";
-import { ContentType, ProviderType, RoleType } from "./enums";
+import { ContentType, ProviderType, RoleType, ServerType } from "./enums";
 
 export type TCreateAiProvider =
   | {
@@ -67,11 +67,6 @@ export type TModel = {
 
 export type TModelList = TModel[];
 
-export type TCurrentModel = {
-  providerId: TAiProvider["id"];
-  modelId: TModel["modelId"];
-};
-
 export type TChat = {
   id: string;
   title: string;
@@ -108,4 +103,10 @@ export type TMessage = {
 export type TMCPTool = {
   name: string;
   enabled: boolean;
+};
+
+export type TServer = {
+  id: string;
+  name: string;
+  serverType: ServerType;
 };

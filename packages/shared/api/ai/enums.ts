@@ -50,3 +50,8 @@ export const enum EventType {
   ToolResult = "tool_result",
   Error = "error",
 }
+
+export const enum ServerType {
+  Portal,
+  Custom,
+}

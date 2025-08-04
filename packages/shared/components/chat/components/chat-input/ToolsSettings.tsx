@@ -28,7 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import { changeMCPTools, getMCPTools } from "../../../../api/ai";
+import { changeMCPToolsForRoom, getMCPToolsForRoom } from "../../../../api/ai";
 import { TMCPTool } from "../../../../api/ai/types";
 
 import { isMobile } from "../../../../utils";
@@ -78,9 +78,9 @@ const ToolsSettings = ({
         })) ?? [];
 
       if (enabled) {
-        await changeMCPTools(Number(roomId), mcpId, []);
+        await changeMCPToolsForRoom(Number(roomId), mcpId, []);
       } else {
-        await changeMCPTools(
+        await changeMCPToolsForRoom(
           Number(roomId),
           mcpId,
           newTools.map((tool) => tool.name),
@@ -100,20 +100,23 @@ const ToolsSettings = ({
       setMCPTools(new Map([...MCPTools, [mcpId, newTools]]));
 
       if (enabled) {
-        await changeMCPTools(
+        await changeMCPToolsForRoom(
           Number(roomId),
           mcpId,
           disabledTools.filter((tool) => tool !== toolId),
         );
       } else {
-        await changeMCPTools(Number(roomId), mcpId, [...disabledTools, toolId]);
+        await changeMCPToolsForRoom(Number(roomId), mcpId, [
+          ...disabledTools,
+          toolId,
+        ]);
       }
     }
   };
 
   React.useEffect(() => {
     const fetchTools = async () => {
-      const tools = await getMCPTools(Number(roomId), DOCSPACE_MCP);
+      const tools = await getMCPToolsForRoom(Number(roomId), DOCSPACE_MCP);
 
       if (!tools) return;
 

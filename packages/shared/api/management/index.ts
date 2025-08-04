@@ -168,6 +168,9 @@ export async function createLicenseQuotaReport() {
     baseURL,
     method: "post",
     url: "/portal/licensequota/report",
+    params: {
+      useCache: false,
+    },
   })) as { result: string };
 
   return res.result;

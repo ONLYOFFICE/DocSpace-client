@@ -164,23 +164,12 @@ const ClientRoutes = [
           },
           {
             path: "rooms/shared/:room/chat",
-            async lazy() {
-              const { ChatView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Chat"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <ChatView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
-
           {
             path: "rooms/archived",
             element: (

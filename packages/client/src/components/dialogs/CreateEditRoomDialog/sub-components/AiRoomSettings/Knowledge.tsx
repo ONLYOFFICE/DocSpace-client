@@ -40,7 +40,7 @@ import { StyledParam } from "../Params/StyledParam";
 const KnowledgeSettings = () => {
   const { t } = useTranslation(["AIRoom", "Common", "Article"]);
 
-  const onClickAction = () => toastr.info("Work in progress");
+  const onClickAction = () => toastr.info(t("Common:WorkInProgress"));
 
   return (
     <StyledParam increaseGap>

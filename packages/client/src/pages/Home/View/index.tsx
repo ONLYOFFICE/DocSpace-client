@@ -26,12 +26,12 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useLocation, useParams } from "react-router";
 
-import { useLocation } from "react-router";
-
+import Chat from "@docspace/shared/components/chat";
+import { availableList, availableListName } from "@docspace/shared/api/ai";
 import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
-
 import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 
@@ -39,19 +39,28 @@ import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { UseFilesProps } from "../Hooks/useFiles";
+import { TUser } from "@docspace/shared/api/people/types";
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 type ViewProps = UseContactsProps &
   UseFilesProps & {
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
+    showBodyLoader: ClientLoadingStore["showBodyLoader"];
 
     clearFiles: FilesStore["clearFiles"];
+
+    userAvatar: TUser["avatar"];
+    getIcon: FilesSettingsStore["getIcon"];
+    chatSettings: SelectedFolderStore["chatSettings"];
 
     usersAbortController: Nullable<AbortController>;
     groupsAbortController: Nullable<AbortController>;
@@ -102,8 +111,14 @@ const View = ({
   clearFiles,
 
   setIsSectionHeaderLoading,
+
+  userAvatar,
+  getIcon,
+  chatSettings,
+  showBodyLoader,
 }: ViewProps) => {
   const location = useLocation();
+  const { room } = useParams();
 
   const isContactsPage = location.pathname.includes("accounts");
 
@@ -113,7 +128,7 @@ const View = ({
   const startAnimationTimerRef = React.useRef<NodeJS.Timeout>(null);
 
   const prevCurrentViewRef = React.useRef(currentView);
-  const prevCategoryType = React.useRef(getCategoryType(location));
+  const prevCategoryType = React.useRef<number>(getCategoryType(location));
 
   const { fetchContacts } = useContacts({
     isContactsPage,
@@ -244,14 +259,16 @@ const View = ({
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
-        let view: void | "groups" | "files" | "users" =
+        let view: void | "groups" | "files" | "users" | "chat" =
           await fetchContactsRef.current();
 
         if (!isContactsPage) {
           await getFilesRef.current();
 
-          view = "files";
           prevCategoryType.current = getCategoryType(location);
+
+          view =
+            prevCategoryType.current === CategoryType.Chat ? "chat" : "files";
         } else {
           clearFiles();
         }
@@ -276,6 +293,12 @@ const View = ({
     getView();
   }, [location, isContactsPage]);
 
+  const modelNameIdx = chatSettings
+    ? availableList.findIndex((item) => chatSettings.modelId.includes(item))
+    : 0;
+
+  const modelName = availableListName[modelNameIdx];
+
   return (
     <div
       style={{
@@ -291,6 +314,14 @@ const View = ({
             <ContactsSectionBodyContent
               sectionWidth={context.sectionWidth}
               currentView={currentView}
+            />
+          ) : currentView === "chat" ? (
+            <Chat
+              userAvatar={userAvatar}
+              roomId={room!}
+              getIcon={getIcon}
+              selectedModel={modelName ?? chatSettings!.modelId}
+              isLoading={showBodyLoader}
             />
           ) : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
@@ -313,6 +344,8 @@ export const ViewComponent = inject(
     oformsStore,
     userStore,
     selectedFolderStore,
+
+    filesSettingsStore,
   }: TStore) => {
     const { usersStore, groupsStore } = peopleStore;
 
@@ -399,6 +432,11 @@ export const ViewComponent = inject(
       clearFiles,
 
       setIsSectionHeaderLoading,
+
+      userAvatar: userStore.user?.avatar,
+      getIcon: filesSettingsStore.getIcon,
+      chatSettings: selectedFolderStore?.chatSettings,
+      showBodyLoader: clientLoadingStore.showBodyLoader,
     };
   },
 )(observer(View));

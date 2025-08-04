@@ -36,7 +36,7 @@ import { StyledParam } from "../Params/StyledParam";
 const MCPSettings = () => {
   const { t } = useTranslation(["AIRoom", "Common"]);
 
-  const onClickAction = () => toastr.info("Work in progress");
+  const onClickAction = () => toastr.info(t("Common:WorkInProgress"));
 
   return (
     <StyledParam increaseGap>

@@ -26,6 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
@@ -60,12 +61,14 @@ const AiRoomTabs = ({
 }: AiRoomTabsProps) => {
   const navigate = useNavigate();
 
+  const { t } = useTranslation(["AIRoom", "Common"]);
+
   if (showTabsLoader)
     return <SectionSubmenuSkeleton style={{ marginBottom: 0 }} />;
 
   const onSelect = (tab: TTabItem) => {
     if (tab.id === "knowledge") {
-      toastr.info("Work in progress");
+      toastr.info(t("Common:WorkInProgress"));
       return;
     }
 

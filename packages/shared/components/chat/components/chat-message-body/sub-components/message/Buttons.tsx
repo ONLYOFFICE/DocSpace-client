@@ -125,7 +125,7 @@ const Buttons = ({
             className={styles.buttonsBlockItem}
             title={t("RefreshMessage")}
             onClick={() => {
-              toastr.info("Work in progress");
+              toastr.info(t("Common:WorkInProgress"));
             }}
           >
             <ReactSVG src={RefreshIconUrl} />

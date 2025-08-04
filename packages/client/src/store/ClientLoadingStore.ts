@@ -76,7 +76,7 @@ class ClientLoadingStore {
 
   isChangePageRequestRunning = false;
 
-  currentClientView: "users" | "groups" | "files" | "" = "";
+  currentClientView: "users" | "groups" | "files" | "chat" | "" = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -87,7 +87,7 @@ class ClientLoadingStore {
   };
 
   setCurrentClientView = (
-    currentClientView: "users" | "groups" | "files" | "",
+    currentClientView: ClientLoadingStore["currentClientView"],
   ) => {
     this.currentClientView = currentClientView;
   };

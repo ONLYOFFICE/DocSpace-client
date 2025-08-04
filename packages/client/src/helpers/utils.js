@@ -99,7 +99,7 @@ export const onItemClick = (e) => {
 };
 
 export const getCategoryType = (location) => {
-  let categoryType = CategoryType.Shared;
+  let categoryType;
   const { pathname } = location;
 
   if (pathname.startsWith("/rooms")) {
@@ -108,11 +108,13 @@ export const getCategoryType = (location) => {
     } else if (pathname.indexOf("shared") > -1) {
       const regexp = /(rooms)\/shared\/([\d])/;
 
+      const chatRegexp = /(rooms)\/shared\/([\d])\/chat/;
+
       categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
         : CategoryType.SharedRoom;
 
-      if (pathname.indexOf("chat") > -1) {
+      if (chatRegexp.test(location.pathname)) {
         categoryType = CategoryType.Chat;
       }
     } else if (pathname.indexOf("share") > -1) {
@@ -130,6 +132,8 @@ export const getCategoryType = (location) => {
     categoryType = CategoryType.Settings;
   } else if (pathname.startsWith("/accounts")) {
     categoryType = CategoryType.Accounts;
+  } else {
+    categoryType = CategoryType.Shared;
   }
 
   return categoryType;

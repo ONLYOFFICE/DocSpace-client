@@ -778,21 +778,32 @@ export async function getEncryptionSettings() {
 }
 
 export async function getLicenseQuota() {
-  logger.debug("Start GET /portal/licensequota");
+  const pathReq = "/portal/licensequota?useCache=false";
+  logger.debug(`Start GET ${pathReq}`);
 
-  const [getLicenseQuotaRequest] = await createRequest(
-    ["/portal/licensequota"],
-    [["", ""]],
-    "GET",
-    undefined,
-    true,
-  );
+  try {
+    const [getLicenseQuotaRequest] = await createRequest(
+      [pathReq],
+      [["", ""]],
+      "GET",
+      undefined,
+      true,
+    );
 
-  const licenseQuotaRes = await fetch(getLicenseQuotaRequest);
+    const licenseQuotaRes = await fetch(getLicenseQuotaRequest);
 
-  if (!licenseQuotaRes.ok) return;
+    if (!licenseQuotaRes.ok) {
+      logger.error(`GET ${pathReq} failed: ${licenseQuotaRes.status}`);
+      return;
+    }
 
-  const licenseQuota = await licenseQuotaRes.json();
+    const licenseQuota = await licenseQuotaRes.json();
 
-  return licenseQuota as TLicenseQuota;
+    return licenseQuota as TLicenseQuota;
+  } catch (error) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
+    logger.error(`Error in getLicenseQuota: ${error}`);
+  }
 }

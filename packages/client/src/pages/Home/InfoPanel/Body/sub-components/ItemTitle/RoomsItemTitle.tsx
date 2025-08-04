@@ -69,6 +69,7 @@ type RoomsItemHeaderProps = {
 
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
+  isRoomMembersPanel?: boolean;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -87,13 +88,13 @@ const RoomsItemHeader = ({
   setInvitePanelOptions,
   setCoverSelection,
   setQuotaWarningDialogVisible,
-  roomsView,
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
   setTemplateAccessSettingsVisible,
   getIcon,
   searchProps,
+  isRoomMembersPanel,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -121,7 +122,6 @@ const RoomsItemHeader = ({
     ("isTemplate" in selection && selection.isTemplate) ||
     selection?.rootFolderType === FolderType.RoomTemplates;
 
-  const isRoomMembersPanel = roomsView === InfoPanelView.infoMembers;
   const roomType =
     "roomType" in selection ? selection.roomType : RoomsType.CustomRoom;
 

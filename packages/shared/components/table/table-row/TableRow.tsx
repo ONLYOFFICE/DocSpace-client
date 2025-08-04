@@ -59,6 +59,8 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
+    dataTestId,
+    contextMenuTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -103,7 +105,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid="table-row"
+      data-testid={dataTestId ?? "table-row"}
     >
       {children}
       {isIndexEditingMode ? null : (
@@ -125,6 +127,7 @@ const TableRow = (props: TableRowProps) => {
                 getContextModel={getContextModel}
                 withBackdrop
                 badgeUrl={badgeUrl}
+                dataTestId={contextMenuTestId}
               />
               {renderContext ? (
                 <ContextMenuButton

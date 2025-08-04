@@ -100,6 +100,7 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
           primary
           isLoading={isRequestRunning}
           onClick={onDisableClick}
+          testId="disable_app_ok_button"
         />
         <Button
           className="cancel-button"
@@ -109,6 +110,7 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}
+          testId="disable_app_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

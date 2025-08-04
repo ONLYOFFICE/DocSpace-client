@@ -77,6 +77,7 @@ const Api = (props) => {
             primary
             size="normal"
             minWidth="135px"
+            testId="learn_more_button"
             onClick={() => window.open(apiBasicLink, "_blank")}
             scale={currentDeviceType === DeviceType.mobile}
           />

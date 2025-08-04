@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import classNames from "classnames";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
@@ -35,6 +35,11 @@ import { Scrollbar } from "../scrollbar";
 import { OFFSET_RIGHT, OFFSET_LEFT } from "./Tabs.constants";
 import styles from "./Tabs.module.scss";
 
+export const TabsEvent = {
+  START_ANIMATION: "START_ANIMATION",
+  END_ANIMATION: "END_ANIMATION",
+};
+
 const PrimaryTabs = (props: TabsProps) => {
   const {
     items,
@@ -43,6 +48,7 @@ const PrimaryTabs = (props: TabsProps) => {
     onSelect,
     withoutStickyIntend = false,
     layoutId,
+    id,
     ...rest
   } = props;
 
@@ -57,6 +63,9 @@ const PrimaryTabs = (props: TabsProps) => {
 
   const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
   const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
+
+  const [isAnimation, setIsAnimation] = useState(false);
+  const [isFinishing, setIsFinishing] = useState(false);
 
   const scrollToTab = useCallback(
     (index: number): void => {
@@ -109,6 +118,31 @@ const PrimaryTabs = (props: TabsProps) => {
   );
 
   useEffect(() => {
+    const onStartAnimation = (e: Event) => {
+      const eventId = (e as CustomEvent)?.detail?.id;
+      if (id && eventId === id) {
+        setIsAnimation(true);
+        setIsFinishing(false);
+      }
+    };
+    const onEndAnimation = () => {
+      if (isAnimation) {
+        // Start finishing animation
+        setIsAnimation(false);
+        setIsFinishing(true);
+      }
+    };
+
+    window.addEventListener(TabsEvent.START_ANIMATION, onStartAnimation);
+    window.addEventListener(TabsEvent.END_ANIMATION, onEndAnimation);
+
+    return () => {
+      window.removeEventListener(TabsEvent.START_ANIMATION, onStartAnimation);
+      window.removeEventListener(TabsEvent.END_ANIMATION, onEndAnimation);
+    };
+  }, [isAnimation, id]);
+
+  useEffect(() => {
     scrollToTab(selectedItemIndex);
   }, [selectedItemIndex, items, scrollToTab]);
 
@@ -152,9 +186,16 @@ const PrimaryTabs = (props: TabsProps) => {
                 styles.tabSubLine,
                 {
                   [styles.selected]: isSelected,
+                  [styles.animated]: isAnimation && isSelected,
+                  [styles.animatedFinishing]: isFinishing && isSelected,
                 },
                 classes,
               )}
+              onAnimationEnd={(e) => {
+                if (e.animationName === styles.fillWidth && isFinishing) {
+                  setIsFinishing(false);
+                }
+              }}
             />
             {item.badge ? (
               <span className={styles.tabBadge}>{item.badge}</span>

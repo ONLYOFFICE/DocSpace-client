@@ -115,6 +115,7 @@ import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
+import { hideInfoPanel, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
@@ -141,8 +142,6 @@ class FilesActionStore {
   clientLoadingStore;
 
   publicRoomStore;
-
-  infoPanelStore;
 
   peopleStore;
 
@@ -181,7 +180,6 @@ class FilesActionStore {
     clientLoadingStore,
     publicRoomStore,
     pluginStore,
-    infoPanelStore,
     userStore,
     currentTariffStatusStore,
     peopleStore,
@@ -202,7 +200,6 @@ class FilesActionStore {
     this.clientLoadingStore = clientLoadingStore;
     this.publicRoomStore = publicRoomStore;
     this.pluginStore = pluginStore;
-    this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.peopleStore = peopleStore;
@@ -1758,7 +1755,7 @@ class FilesActionStore {
         url !== window.DocSpace.location.pathname,
     );
 
-    if (!isDesktop()) this.infoPanelStore.setIsVisible(false);
+    if (!isDesktop()) hideInfoPanel();
 
     window.DocSpace.navigate(`${url}?${newFilter.toUrlParams()}`, { state });
   };
@@ -2114,14 +2111,6 @@ class FilesActionStore {
     }
   };
 
-  onShowInfoPanel = () => {
-    const { selection } = this.filesStore;
-    const { setInfoPanelSelection, setIsVisible } = this.infoPanelStore;
-
-    setInfoPanelSelection([selection]);
-    setIsVisible(true);
-  };
-
   setProcessCreatingRoomFromData = (processCreatingRoomFromData) => {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
@@ -2204,7 +2193,7 @@ class FilesActionStore {
           key: "show-info",
           label: t("Common:Info"),
           iconUrl: InfoOutlineReactSvgUrl,
-          onClick: this.onShowInfoPanel,
+          onClick: showInfoPanel,
         };
       case "copy":
         if (!this.isAvailableOption("copy")) return null;
@@ -2830,7 +2819,6 @@ class FilesActionStore {
       const contactsTab = getContactsView();
 
       if (insideGroupBackUrl) {
-        console.log("set");
         setIsSectionBodyLoading(true, false);
 
         setContactsTab("groups");

@@ -64,7 +64,7 @@ import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
-import { login } from "@docspace/shared/api/user";
+import { login, thirdPartyLogin } from "@docspace/shared/api/user";
 import {
   createUser,
   getUserByEmail,
@@ -112,6 +112,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
+
   const router = useRouter();
 
   const organizationName = logoText || t("Common:OrganizationName");
@@ -164,6 +165,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         culture: currentCultureName,
       };
 
+      setIsLoading(true);
+
       const confirmKey = linkData.confirmHeader;
 
       try {
@@ -174,16 +177,33 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           return;
         }
 
-        localStorage.setItem("profile", profile);
+        const response = (await thirdPartyLogin(
+          profile,
+          currentCultureName,
+        )) as {
+          confirmUrl: string;
+          token: unknown;
+        };
+
+        if (
+          !response ||
+          (response && !response.token && !response.confirmUrl)
+        ) {
+          throw new Error("Empty API response");
+        }
 
         const finalUrl = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
           : defaultPage;
 
-        sessionStorage.setItem("referenceUrl", finalUrl);
+        if (response.confirmUrl) {
+          sessionStorage.setItem("referenceUrl", finalUrl);
+          return window.location.replace(response.confirmUrl);
+        }
 
-        window.location.replace(`/login`);
+        window.location.replace(finalUrl);
       } catch (error) {
+        setIsLoading(false);
         const knownError = error as TError;
         let errorMessage: string;
 

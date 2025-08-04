@@ -3,7 +3,7 @@
   "content": "Mobile editing.",
   "content_en_sha1_hash": "950b8cee66034eb2754ac6639406c09cff5b454d",
   "created_at": "2025-05-26T07:15:49.276Z",
-  "updated_at": "2025-06-30T12:20:31.728Z",
+  "updated_at": "2025-08-04T07:30:01.743Z",
   "comment": {
     "text": "The \"UpgradeToProBannerItemMobileHeader\" translation key is used to display a mobile-specific header for an upgrade to pro banner. It appears on a payment benefits container page and includes a title and image.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/BenefitsContainer.tsx",
-      "line_number": 64,
+      "file_path": "/packages/shared/pages/Payments/common/BenefitsContainer.tsx",
+      "line_number": 65,
       "context": "description: t(\"UpgradeToProBannerItemSupportDescr\"),\n };\n \n const mobileEditing = {\n imag: MobileEditingReactSvgUrl,\n title: t(\"UpgradeToProBannerItemMobileHeader\"),\n description: t(\"UpgradeToProBannerItemMobileDescr\"),\n };\n \n const lifetimeLicense = {\n imag: LifetimeLicenseReactSvgUrl,",
       "module": "/packages/shared"
     }

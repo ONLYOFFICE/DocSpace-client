@@ -617,6 +617,17 @@ const Selector = ({
     });
   }, [tabsData]);
 
+  const bodyItems =
+    isSSR && renderedItems.length === 0
+      ? items.map((x) => ({ ...x, isSelected: false }))
+      : [...renderedItems];
+
+  const separator = { id: "separator", isSeparator: true };
+
+  if (bodyItems.findIndex((x) => x.isSystem) > -1) {
+    bodyItems.splice(1, 0, separator as TSelectorItem);
+  }
+
   const selectorComponent = (
     <div
       id={id}
@@ -648,11 +659,7 @@ const Selector = ({
           withHeader={withHeader}
           withPadding={withPadding}
           footerVisible={footerVisible || !!alwaysShowFooter}
-          items={
-            isSSR && renderedItems.length === 0
-              ? items.map((x) => ({ ...x, isSelected: false }))
-              : [...renderedItems]
-          }
+          items={bodyItems}
           isMultiSelect={isMultiSelect}
           onSelect={onSelectAction}
           hasNextPage={hasNextPage}

@@ -88,6 +88,7 @@ const Share = (props: ShareProps) => {
   );
 
   const requestRunning = React.useRef(false);
+  const isInit = React.useRef(!!fileLinkProps);
 
   const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
 
@@ -95,26 +96,36 @@ const Share = (props: ShareProps) => {
 
   const fetchLinks = React.useCallback(async () => {
     if (requestRunning.current || hideSharePanel) return;
+
     requestRunning.current = true;
     const res = await getExternalLinks(infoPanelSelection.id);
 
     setFileLinks(res.items);
     setIsLoading(false);
+    isInit.current = false;
     requestRunning.current = false;
   }, [infoPanelSelection?.id, hideSharePanel]);
 
   useEffect(() => {
     if (hideSharePanel) {
       setView?.("info_details");
-    } else {
-      fetchLinks();
+
+      return;
     }
-  }, [fetchLinks, hideSharePanel, setView]);
+
+    if (!fileLinkProps) fetchLinks();
+  }, [fetchLinks, hideSharePanel, fileLinkProps, setView]);
 
   useEffect(() => {
-    fetchLinks();
-    setShareChanged?.(false);
+    if (shareChanged) {
+      fetchLinks();
+      setShareChanged?.(false);
+    }
   }, [fetchLinks, setShareChanged, shareChanged]);
+
+  useEffect(() => {
+    if (fileLinkProps) setFileLinks(fileLinkProps);
+  }, [fileLinkProps]);
 
   const addLoaderLink = () => {
     const link = { isLoaded: true };

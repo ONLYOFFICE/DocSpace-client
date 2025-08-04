@@ -3,7 +3,7 @@
   "content": "Install package from npm and save it to the package.json file with --save:",
   "content_en_sha1_hash": "e7d392ae44d0f8bde6691b2563972cd4b41d56bf",
   "created_at": "2025-05-19T21:30:54.608Z",
-  "updated_at": "2025-05-26T07:57:32.597Z",
+  "updated_at": "2025-08-04T07:30:01.402Z",
   "comment": {
     "text": "The \"NPMCodeInstallStep\" translation key is used to display instructions on how to install a package from npm and save it to the package.json file. This text appears in a UI component, likely a settings page or configuration dialog, where users can enter code snippets or scripts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 68,
+      "line_number": 75,
       "context": "<CategorySubHeader className=\"copy-window-code\">NPM</CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeDescription\")}\n </Text>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeInstallStep\")}\n </Text>\n <Textarea\n value=\"npm install --save @onlyoffice/docspace-sdk-js\"\n heightTextArea={32}\n isReadOnly",
       "module": "/packages/client"
     }

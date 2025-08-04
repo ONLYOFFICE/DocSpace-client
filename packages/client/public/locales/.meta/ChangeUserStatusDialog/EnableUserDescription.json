@@ -3,7 +3,7 @@
   "content": "If you enable this user, they will be able to log in to {{productName}} again and access their documents and data.",
   "content_en_sha1_hash": "836adb0ca7430c88f18a6accb627246172813c61",
   "created_at": "2025-05-19T21:30:56.971Z",
-  "updated_at": "2025-05-24T14:14:11.823Z",
+  "updated_at": "2025-08-04T07:30:01.066Z",
   "comment": {
     "text": "This translation key describes the text displayed when enabling a user's access to {{productName}}, allowing them to log in and access their documents and data. It appears in a dialog for changing user status.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 204,
+      "line_number": 200,
       "context": ": t(\"EnableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"EnableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUsersDescription\", { productName: t(\"Common:ProductName\") });\n \n buttonLabelSave = t(\"Common:Enable\");",
       "module": "/packages/client"
     }

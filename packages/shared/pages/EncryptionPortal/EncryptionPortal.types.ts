@@ -24,37 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { globalColors } from "../../themes";
+import type { PropsWithChildren } from "react";
 
-export const StyledEncryptionPortal = styled.div<{
-  errorMessage?: boolean;
-}>`
-  width: 100%;
-
-  #header {
-    font-size: 23px;
-  }
-  #text {
-    color: ${globalColors.gray};
-    font-size: 13px;
-    line-height: 20px;
-    max-width: 480px;
-  }
-
-  .preparation-portal_body-wrapper {
-    margin-bottom: 24px;
-    width: 100%;
-    max-width: ${(props) => (props.errorMessage ? "560px" : "480px")};
-    box-sizing: border-box;
-    align-items: center;
-    .preparation-portal_error {
-      text-align: center;
-      color: ${(props) => props.theme.preparationPortalProgress.errorTextColor};
-    }
-  }
-
-  .restoring-portal {
-    height: 100%;
-  }
-`;
+/**
+ * Type definition for the EncryptionPortal component
+ */
+export type EncryptionPortalProps = PropsWithChildren & {
+  /** Optional className for custom styling */
+  className?: string;
+};

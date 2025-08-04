@@ -3,7 +3,7 @@
   "content": "Branding",
   "content_en_sha1_hash": "d17dc3843de8e54fc084f0b952690209018ca128",
   "created_at": "2025-05-26T07:15:40.963Z",
-  "updated_at": "2025-06-30T12:20:31.398Z",
+  "updated_at": "2025-08-04T07:30:01.298Z",
   "comment": {
     "text": "The \"Branding\" translation key is used to display the name of a portal setting category in the UI. It is shown on a settings page and appears as part of the data structure in the /packages/client/src/pages/PortalSettings/categories/common/index.js file. Translators should provide a phrase that describes this concept, commonly found in branding or marketing contexts.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 95,
+      "line_number": 102,
       "context": "{\n id: \"portal-settings_catalog-branding\",\n key: \"0-1\",\n icon: \"\",\n link: \"branding\",\n tKey: \"Common:Branding\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-brand-name\",\n key: \"0-1-0\",",
       "module": "/packages/client"
     },

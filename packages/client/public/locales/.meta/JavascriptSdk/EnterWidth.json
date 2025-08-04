@@ -3,7 +3,7 @@
   "content": "Enter width",
   "content_en_sha1_hash": "b11870b5aaf02a2746e893393870b5196d610f17",
   "created_at": "2025-05-19T21:30:54.481Z",
-  "updated_at": "2025-05-24T09:22:12.263Z",
+  "updated_at": "2025-08-04T07:30:01.414Z",
   "comment": {
     "text": "Enter width is used as a placeholder text for a user input field in a Width Setter component, allowing users to enter a value for setting a width. It appears on a specific sub-component within a Portal Settings page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/WidthSetter.js",
       "line_number": 70,
-      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"EmbeddingPanel:Width\")} />\n <RowContainer combo>\n <TextInput\n onChange={onChangeWidth}\n placeholder={t(\"EnterWidth\")}\n value={width}\n tabIndex={2}\n />\n <ComboBox\n size=\"content\"",
+      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"EmbeddingPanel:Width\")} />\n <RowContainer combo>\n <TextInput\n onChange={onChangeWidth}\n placeholder={t(\"EnterWidth\")}\n value={width}\n tabIndex={2}\n testId=\"width_dimension_input\"\n />\n <ComboBox",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Description",
   "content_en_sha1_hash": "55f8ebc805e65b5b71ddafdae390e3be2bcd69af",
   "created_at": "2025-05-19T21:30:44.499Z",
-  "updated_at": "2025-06-30T12:20:31.265Z",
+  "updated_at": "2025-08-04T07:30:01.149Z",
   "comment": {
     "text": "This translation key is used for describing plugins or other entities on a settings page, typically displayed as truncated text to limit length. It appears in various UI elements such as dialog boxes and forms, providing essential information about what users can expect from these entities.",
     "is_auto": true,
@@ -17,20 +17,20 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js",
-      "line_number": 38,
-      "context": "import { Link } from \"@docspace/shared/components/link\";\n import { parseAndFormatDate } from \"../../helpers/DetailsHelper\";\n import {\n StyledGalleryNoThumbnail,\n StyledGalleryThumbnail,\n StyledGalleryFormDescription,\n } from \"../../styles/gallery\";\n import {\n StyledLink,\n StyledProperties,\n StyledSubtitle,",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
+      "line_number": 106,
+      "context": "</Link>\n </div>\n \n <div className={commonStyles.subtitle}>\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Description\")}\n </Text>\n </div>\n \n <Text\n className={styles.galleryFormDescription}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 183,
-      "context": "onSelect={onSelect}\n />\n </FieldContainer>\n \n <TextAreaGroup\n label={t(\"Common:Description\")}\n name=\"description\"\n placeholder={t(\"EnterDescription\")}\n value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}",
+      "line_number": 187,
+      "context": "dataTestId=\"select_new_image_container\"\n />\n </FieldContainer>\n \n <TextAreaGroup\n label={t(\"Common:Description\")}\n name=\"description\"\n placeholder={t(\"EnterDescription\")}\n value={descriptionValue}\n onChange={onChange}\n increaseHeight={isLogoRequiredError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 195,
+      "line_number": 196,
       "context": "lineHeight=\"16px\"\n fontWeight=\"600\"\n noSelect\n truncate\n >\n {t(\"Common:Description\")}\n </Text>\n \n <Text\n id=\"client-info-description-text\"\n className=\"description\"",
       "module": "/packages/client"
     }

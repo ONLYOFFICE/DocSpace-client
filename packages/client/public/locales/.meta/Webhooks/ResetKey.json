@@ -3,7 +3,7 @@
   "content": "Reset key",
   "content_en_sha1_hash": "4ef3e8546c333e4167016acc1fdffcc96e5714b7",
   "created_at": "2025-05-19T21:30:49.801Z",
-  "updated_at": "2025-05-24T02:16:31.600Z",
+  "updated_at": "2025-08-04T07:30:01.467Z",
   "comment": {
     "text": "This translation key is used for the label of a \"Reset\" button, typically found on password input fields. Its purpose is to provide a clear indication of what action will be taken when clicked, in this case, resetting a secret key.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SecretKeyInput.js",
-      "line_number": 159,
-      "context": "fontWeight={600}\n isHovered\n onClick={hideReset}\n className=\"link\"\n >\n {t(\"ResetKey\")}\n </Link>\n </Hint>\n ) : null}\n <div hidden={isResetVisible}>\n <PasswordInput",
+      "line_number": 162,
+      "context": "isHovered\n onClick={hideReset}\n className=\"link\"\n dataTestId=\"reset_key_link\"\n >\n {t(\"ResetKey\")}\n </Link>\n </Hint>\n ) : null}\n <div hidden={isResetVisible}>\n <PasswordInput",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Provide a URL link to your Privacy Policy that must comply with applicable laws and regulations and that make clear how you collect, use, share, retain and otherwise process personal information.",
   "content_en_sha1_hash": "8a0b945b9b9a7a24addebe0cf989ca3c10d7cee9",
   "created_at": "2025-05-19T21:30:53.975Z",
-  "updated_at": "2025-05-24T07:20:28.767Z",
+  "updated_at": "2025-08-04T07:30:01.433Z",
   "comment": {
     "text": "This translation key is used to display a help message or error notification when a user tries to submit a Privacy Policy URL that does not comply with applicable laws and regulations. The text appears as a button in a form, providing users with information on what is required for the correct submission. Translators should focus on conveying a clear explanation of the necessary requirements for the Privacy Policy URL.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/SupportBlock.tsx",
       "line_number": 89,
-      "context": "policyError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n onChange={onChange}\n helpButtonText={t(\"PrivacyPolicyURLHelpButton\")}\n disabled={isEdit}\n isRequired\n isError={policyError || policyRequiredError}\n onBlur={onBlur}\n />",
+      "context": "policyError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n onChange={onChange}\n helpButtonText={t(\"PrivacyPolicyURLHelpButton\")}\n disabled={isEdit}\n isRequired\n isError={policyError || policyRequiredError}\n onBlur={onBlur}\n dataTestId=\"policy_url_input_group\"",
       "module": "/packages/client"
     }
   ],

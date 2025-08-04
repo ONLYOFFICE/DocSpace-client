@@ -346,6 +346,12 @@ const StyledDropDown = styled(DropDown)`
     gap: 8px;
     height: 53px;
 
+    .item-avatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+
     .avatar-disabled {
       opacity: 0.5;
     }

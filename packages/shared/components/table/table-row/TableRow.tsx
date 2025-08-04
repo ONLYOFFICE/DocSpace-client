@@ -61,21 +61,10 @@ const TableRow = (props: TableRowProps) => {
     contextMenuCellStyle,
     dataTestId,
     contextMenuTestId,
-    rowIndex,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<HTMLDivElement | null>(null);
-
-  const rowTestId = useMemo(() => {
-    if (dataTestId) return dataTestId;
-
-    if (rowIndex !== undefined) {
-      return `table-row-${rowIndex}`;
-    }
-
-    return "table-row";
-  }, [dataTestId, rowIndex]);
 
   const onContextMenu = (e: React.MouseEvent) => {
     fileContextClick?.(e.button === 2);
@@ -116,7 +105,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid={rowTestId}
+      data-testid={dataTestId}
     >
       {children}
       {isIndexEditingMode ? null : (

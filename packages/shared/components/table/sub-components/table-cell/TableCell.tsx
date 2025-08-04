@@ -40,7 +40,6 @@ const TableCell = (props: TableCellProps) => {
     children,
     value,
     dataTestId,
-    index,
   } = props;
 
   const classes = classNames(
@@ -53,8 +52,7 @@ const TableCell = (props: TableCellProps) => {
     },
   );
 
-  const cellTestId =
-    dataTestId || (index !== undefined ? `table_cell_${index}` : "table-cell");
+  const cellTestId = dataTestId ?? "table-cell";
 
   return (
     <div

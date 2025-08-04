@@ -3,7 +3,7 @@
   "content": "Recently opened via the link",
   "content_en_sha1_hash": "ba1b7dbd261f921af480d706c47f89b68942c829",
   "created_at": "2025-05-19T21:30:56.021Z",
-  "updated_at": "2025-06-18T17:11:42.407Z",
+  "updated_at": "2025-08-04T07:30:01.203Z",
   "comment": {
     "text": "This translation key is used for a tooltip that displays \"Recently opened via the link\" when a user interacts with an item in a file list or room details view. It appears as a tooltip when the selection has an external link and indicates the source of the recent open.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/index.js",
-      "line_number": 84,
-      "context": "selection?.isRoom;\n const isRoomMembersPanel = selection?.isRoom && roomsView === \"info_members\";\n \n const badgeUrl = getRoomBadgeUrl(selection);\n const tooltipContent = selection?.external\n ? t(\"Files:RecentlyOpenedTooltip\")\n : null;\n \n const isFile = !!selection.fileExst;\n let title = selection.title;",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
+      "line_number": 138,
+      "context": "? getRoomBadgeUrl(selection)\n : null;\n \n const tooltipContent =\n \"external\" in selection && selection.external\n ? t(\"Files:RecentlyOpenedTooltip\")\n : null;\n \n const isFile = \"fileExst\" in selection && !!selection.fileExst;\n let title = selection.title;",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.js",
-      "line_number": 132,
-      "context": "const hasImage = selection?.logo?.original;\n const model = getLogoCoverModel(t, hasImage);\n \n const tooltipContent = selection?.external\n ? t(\"Files:RecentlyOpenedTooltip\")\n : null;\n \n const isTemplate =\n selection && \"isTemplate\" in selection && selection.isTemplate;",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
+      "line_number": 178,
+      "context": "const hasImage = \"logo\" in selection && selection?.logo?.original;\n const model = getLogoCoverModel?.(t, hasImage);\n \n const tooltipContent =\n \"external\" in selection && selection?.external\n ? t(\"Files:RecentlyOpenedTooltip\")\n : null;\n \n const isTemplate =\n selection &&\n \"isTemplate\" in selection &&",
       "module": "/packages/client"
     },
     {

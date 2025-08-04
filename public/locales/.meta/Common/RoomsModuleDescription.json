@@ -3,7 +3,7 @@
   "content": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "content_en_sha1_hash": "2f37d9051c90dfc970642bac71d6899484e612bd",
   "created_at": "2025-05-26T07:15:47.398Z",
-  "updated_at": "2025-06-30T12:20:31.733Z",
+  "updated_at": "2025-08-04T07:30:01.747Z",
   "comment": {
     "text": "This translation key is used to describe a room name in a backup process. It appears on buttons and dialogs in the auto-backup and manual-backup pages, prompting users to select or create a specific room for their backups.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 470,
-      "context": "name={`${BackupStorageType.DocumentModuleType}`}\n isChecked={isCheckedDocuments}\n isDisabled={isLoadingData}\n />\n <Text className=\"backup-description\">\n <Trans t={t} i18nKey=\"RoomsModuleDescription\" ns=\"Common\">\n {{ roomName }}\n </Trans>\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 516,
+      "context": "className={classNames(\n styles.backupDescription,\n \"backup-description\",\n )}\n >\n <Trans t={t} i18nKey=\"RoomsModuleDescription\" ns=\"Common\">\n {{ roomName }}\n </Trans>\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/manual-backup/index.tsx",
-      "line_number": 353,
-      "context": "isChecked={isCheckedDocuments}\n isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}\n {...commonRadioButtonProps}\n />\n <Text className=\"backup-description module-documents\">\n <Trans t={t} i18nKey=\"RoomsModuleDescription\" ns=\"Common\">\n {{ roomName }}\n </Trans>\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 379,
+      "context": "className={classNames(\n styles.backupDescription,\n \"backup-description module-documents\",\n )}\n >\n <Trans t={t} i18nKey=\"RoomsModuleDescription\" ns=\"Common\">\n {{ roomName }}\n </Trans>\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule",
       "module": "/packages/shared"
     }
   ],

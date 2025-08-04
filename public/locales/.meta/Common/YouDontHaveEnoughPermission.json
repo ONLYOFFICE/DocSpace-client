@@ -1,0 +1,28 @@
+{
+  "key_path": "YouDontHaveEnoughPermission",
+  "content": "You don't have enough permission",
+  "content_en_sha1_hash": "0100053d13b47532703554baf465379a9dc4dc52",
+  "created_at": "2025-08-04T07:29:37.418Z",
+  "updated_at": "2025-08-04T08:10:59.026Z",
+  "comment": {
+    "text": "This key displays a message indicating the user lacks the necessary permissions to perform an action. It appears within a tooltip in the Create ApiKey dialog, likely when a user attempts to create an API key without sufficient privileges. Translators should ensure the message clearly conveys the user's inability to proceed due to permission restrictions.",
+    "is_auto": true,
+    "updated_at": "2025-08-04T08:10:59.026Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
+      "line_number": 169,
+      "context": "{showTooltip ? (\n <Tooltip\n id=\"emailTooltip\"\n getContent={() => (\n <Text isInline fontSize=\"12px\">\n {t(\"Common:YouDontHaveEnoughPermission\")}\n </Text>\n )}\n place=\"bottom\"\n />\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

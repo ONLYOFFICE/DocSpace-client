@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2025-06-30T12:20:31.236Z",
+  "updated_at": "2025-08-04T07:30:01.103Z",
   "comment": {
     "text": "This translation key \"User\" is used to display the content \"User\" in various UI contexts, such as a warning message and a label in a table. It appears in a dialog box when deleting a profile and in a data import component for selecting users. Translators should provide a translated version of this text that accurately reflects its purpose in these contexts.",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 694,
+      "line_number": 690,
       "context": "},\n {\n id: \"accounts-add_collaborator\",\n className: \"main-button_drop-down\",\n icon: PersonDefaultReactSvgUrl,\n label: t(\"Common:User\"),\n onClick: () => this.inviteUser(EmployeeType.User),\n \"data-type\": EmployeeType.User,\n action: EmployeeType.User,\n key: \"collaborator\",\n },",
       "module": "/packages/client"
     },

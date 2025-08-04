@@ -3,7 +3,7 @@
   "content": "Code to insert",
   "content_en_sha1_hash": "73eb0e1ccc3a17f76090eb3ee695245eb8c9ba3b",
   "created_at": "2025-05-19T21:30:54.384Z",
-  "updated_at": "2025-06-30T12:20:31.287Z",
+  "updated_at": "2025-08-04T07:30:01.164Z",
   "comment": {
     "text": "\"Used as a header text in an EmbeddingPanel component, displaying 'Code' for a translation key that provides a placeholder for inserting code.\"",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/PreviewBlock.js",
-      "line_number": 31,
-      "context": "import { useState, useEffect } from \"react\";\n import { objectToGetParams } from \"@docspace/shared/utils/common\";\n import { Tabs, TabsTypes } from \"@docspace/shared/components/tabs\";\n \n import { CodeToInsert } from \"./CodeToInsert\";\n import { GetCodeBlock } from \"./GetCodeBlock\";\n \n import { Preview } from \"../presets/StyledPresets\";\n import { showPreviewThreshold } from \"../constants\";",
+      "line_number": 33,
+      "context": "import { useTranslation } from \"react-i18next\";\n import { objectToGetParams } from \"@docspace/shared/utils/common\";\n import { Tabs, TabsTypes } from \"@docspace/shared/components/tabs\";\n \n import EyeReactSvgUrl from \"PUBLIC_DIR/images/eye.react.svg?url\";\n import CodeReactSvgUrl from \"PUBLIC_DIR/images/code.react.svg?url\";\n \n import { CodeToInsert } from \"./CodeToInsert\";\n import { GetCodeBlock } from \"./GetCodeBlock\";\n \n import { Preview } from \"../presets/StyledPresets\";",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Logo",
   "content_en_sha1_hash": "83fce8327410848c9eb609acb21732c7c0fec96a",
   "created_at": "2025-05-19T21:30:54.562Z",
-  "updated_at": "2025-05-24T09:09:49.806Z",
+  "updated_at": "2025-08-04T07:30:01.410Z",
   "comment": {
     "text": "The \"Logo\" translation key is used to display the label for a button or element that toggles the visibility of a logo in the UI. It appears in a dialog related to developer tools and is used to provide a clear and concise user interface. The translation will be applied to this label.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 95,
+      "line_number": 100,
       "context": "const setButtonText = (e) => {\n setButtonValue(e.target.value);\n debouncedSetConfig(\"buttonText\", e.target.value);\n };\n \n const toggleWithLogo = () => {\n setConfig((oldConfig) => ({\n ...oldConfig,\n buttonWithLogo: !config.buttonWithLogo,\n }));\n };",
       "module": "/packages/client"
     }

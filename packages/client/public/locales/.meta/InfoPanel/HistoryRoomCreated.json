@@ -3,13 +3,19 @@
   "content": "<1>«{{roomTitle}}»</1> room created",
   "content_en_sha1_hash": "1730e3bd2fac6570d2cc51d49c0b449d6a7f5d92",
   "created_at": "2025-05-19T21:30:54.880Z",
-  "updated_at": "2025-06-30T12:20:31.343Z",
+  "updated_at": "2025-08-04T07:30:01.239Z",
   "comment": {
     "text": "The \"HistoryRoomCreated\" translation key is used to display a specific message when a room is created in the application. This message will be displayed as part of a UI component located at /packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx, likely on a button or similar action trigger. The message will include the title of the newly created room.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:40:55.009Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 152,
+      "context": "case FeedActionKeys.RoomCreated:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"HistoryRoomCreated\"\n values={{ roomTitle: (feed.data as TFeedData).title }}\n components={{\n 1: <HistoryText title={(feed.data as TFeedData).title!} />,\n }}\n />",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 146,

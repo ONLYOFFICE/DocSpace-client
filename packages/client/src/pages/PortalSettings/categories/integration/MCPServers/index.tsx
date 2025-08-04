@@ -41,9 +41,9 @@ const MCPServers = () => {
 
   React.useEffect(() => {
     const fetchServersList = async () => {
-      const serversList = await getServersList(0, 100);
-      if (serversList?.items) {
-        setServersList(serversList?.items);
+      const servers = await getServersList(0, 100);
+      if (servers) {
+        setServersList(servers.items);
       }
     };
 
@@ -65,8 +65,7 @@ const MCPServers = () => {
         type={LinkType.page}
         fontWeight={600}
         isHovered
-        href={""}
-        tag="a"
+        href=""
         style={{ marginBottom: "8px" }}
         color="accent"
       >

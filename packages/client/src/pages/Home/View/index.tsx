@@ -34,7 +34,9 @@ import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
+import { TUser } from "@docspace/shared/api/people/types";
 
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -46,8 +48,6 @@ import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
 
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { UseFilesProps } from "../Hooks/useFiles";
-import { TUser } from "@docspace/shared/api/people/types";
-import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 type ViewProps = UseContactsProps &
   UseFilesProps & {

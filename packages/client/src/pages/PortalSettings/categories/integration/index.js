@@ -37,10 +37,11 @@ import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Secti
 import SSO from "./SingleSignOn";
 import LDAP from "./LDAP";
 import ThirdParty from "./ThirdPartyServicesSettings";
-import AISettngs from "./AISettngs";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
+import AISettngs from "./AISettngs";
+import MCPServers from "./MCPServers";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -86,6 +87,11 @@ const IntegrationWrapper = (props) => {
       id: "ai-settings",
       name: "AI settings",
       content: <AISettngs />,
+    },
+    {
+      id: "mcp-servers",
+      name: "MCP servers",
+      content: <MCPServers />,
     },
   ];
 

@@ -398,6 +398,13 @@ const PortalSettingsRoutes = {
         ),
     },
     {
+      path: "integration/mcp-servers",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/integration"),
+        ),
+    },
+    {
       path: "integration/ldap/settings",
       async lazy() {
         const { SettingsContainerSection } = await componentLoader(

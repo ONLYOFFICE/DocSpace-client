@@ -31,7 +31,7 @@ import classNames from "classnames";
 import { Link } from "../../../../components/link";
 import { Text } from "../../../../components/text";
 
-import { getTwoDotsReplacing, parseLicenseQuota } from "../Standalone.helpers";
+import { getTwoDotsReplacing } from "../Standalone.helpers";
 import { IPaymentsProps } from "../Standalone.types";
 import styles from "../Standalone.module.scss";
 import UserStatisticsDialog from "../../../../dialogs/UserStatisticsDialog";
@@ -50,16 +50,13 @@ export const TariffTitleContainer = ({
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
-  const userQuotaStatistics = licenseQuota
-    ? parseLicenseQuota(licenseQuota)
-    : null;
-
   const {
     isUserStatisticsVisible,
     openUserStatistics,
     closeUserStatistics,
     downloadAndOpenReport,
-  } = useUserStatisticsDialog(openOnNewPage);
+    usersStatistics,
+  } = useUserStatisticsDialog({ openOnNewPage, licenseQuota });
 
   const alertComponent = () => {
     if (isTrial) {
@@ -129,8 +126,8 @@ export const TariffTitleContainer = ({
                 license: isDeveloper
                   ? t("Common:DeveloperLicense")
                   : t("Common:EnterpriseLicense"),
-                editingCount: userQuotaStatistics?.totalConsumer ?? 0,
-                limit: userQuotaStatistics?.consumerQuotaLimit ?? 0,
+                editingCount: usersStatistics?.portalUsers ?? 0,
+                limit: usersStatistics?.limitUsers ?? 0,
               }}
               t={t}
               ns="Common"
@@ -157,7 +154,7 @@ export const TariffTitleContainer = ({
       <UserStatisticsDialog
         docspaceFaqUrl={docspaceFaqUrl}
         isVisible={isUserStatisticsVisible}
-        statistics={userQuotaStatistics}
+        statistics={usersStatistics}
         onClose={closeUserStatistics}
         onDownloadAndReport={downloadAndOpenReport}
       />

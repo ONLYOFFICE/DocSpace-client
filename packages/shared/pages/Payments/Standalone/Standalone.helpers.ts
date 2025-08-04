@@ -24,28 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { validate } from "uuid";
-import { TLicenseQuota } from "../../../api/portal/types";
-import { TUserQuotaStatistics } from "../../../dialogs/UserStatisticsDialog/UserStatisticsDialog.types";
-
 export function getTwoDotsReplacing(translation: string) {
   const newTranslation = translation;
   return newTranslation.replace(/\..$/, ".");
 }
-
-export const parseLicenseQuota = (
-  licenseQuota: TLicenseQuota,
-): TUserQuotaStatistics => {
-  const userQuotas = Object.keys(licenseQuota.userQuota);
-
-  const totalConsumer = userQuotas.length;
-
-  const docspaceConsumerCount = userQuotas.filter(validate).length;
-
-  return {
-    consumerQuotaLimit: licenseQuota.license.users_count,
-    docspaceConsumerCount,
-    externalConsumerCount: totalConsumer - docspaceConsumerCount,
-    totalConsumer,
-  };
-};

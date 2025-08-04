@@ -3,13 +3,19 @@
   "content": "Link <1>«{{linkTitle}}»</1> deleted.",
   "content_en_sha1_hash": "7cea2e32f802fb146ced190da8dbe579760bc862",
   "created_at": "2025-05-19T21:30:54.914Z",
-  "updated_at": "2025-06-30T12:20:31.347Z",
+  "updated_at": "2025-08-04T07:30:01.242Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an external link has been deleted. It will appear in UI elements such as infopanel pages, typically after deleting a room's external link. Translators should focus on conveying a neutral tone and avoiding any hints at the deletion action itself.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:40:49.710Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 212,
+      "context": "oldLinkTitle: (feed.data as TFeedData).oldTitle,\n }}\n components={{ 1: <strong /> }}\n />\n );\n case FeedActionKeys.RoomExternalLinkDeleted:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkDeleted\"",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 202,

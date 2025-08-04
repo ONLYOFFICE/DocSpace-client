@@ -3,7 +3,7 @@
   "content": "Welcome Page Settings is a way to change the default portal title to be displayed on the Welcome Page of your portal. The same name is also used for the From field of your portal email notifications.",
   "content_en_sha1_hash": "7b19c51f4950730b3c8f5fd1ed66ec6e31fce32c",
   "created_at": "2025-05-19T21:30:51.027Z",
-  "updated_at": "2025-05-26T07:57:32.485Z",
+  "updated_at": "2025-08-04T07:30:01.299Z",
   "comment": {
     "text": "This translation key controls the displayed text in a navigation category on the Welcome Page Settings page, explaining its purpose. It is used to describe the custom title setting feature and its connection to portal email notifications.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 78,
+      "line_number": 79,
       "context": "url=\"/portal-settings/customization/general/language-and-time-zone\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"CustomTitlesWelcome\")}\n subtitle={t(\"CustomTitlesSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/welcome-page-settings\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"DNSSettings\")}",
       "module": "/packages/client"
     }

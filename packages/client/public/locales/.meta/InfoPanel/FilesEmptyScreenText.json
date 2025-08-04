@@ -3,7 +3,7 @@
   "content": "See file and folder details here",
   "content_en_sha1_hash": "957a447d0e759d8ee240c00e22da369edeea22c0",
   "created_at": "2025-05-19T21:30:54.825Z",
-  "updated_at": "2025-05-24T10:19:48.808Z",
+  "updated_at": "2025-08-04T07:30:01.204Z",
   "comment": {
     "text": "This translation key is used for a generic text that displays when no file or folder information is available in a UI component. The text is displayed below an image and provides a brief instruction to view file details. It appears in the \"NoItem\" component on the Home page of the client application.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/NoFileOrFolderItem.js",
-      "line_number": 48,
-      "context": "src={imgSrc}\n alt=\"No item\"\n />\n </div>\n \n <div className=\"no-item-text\">{t(\"FilesEmptyScreenText\")}</div>\n </StyledNoItemContainer>\n );\n };\n \n export default inject(({ settingsStore }) => {",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoFileOrFolderItem.tsx",
+      "line_number": 49,
+      "context": "<div className={styles.noItemContainer}>\n <div className=\"no-thumbnail-img-wrapper\">\n <img className=\"no-thumbnail-img\" src={imgSrc} alt=\"No item\" />\n </div>\n \n <div className=\"no-item-text\">{t(\"FilesEmptyScreenText\")}</div>\n </div>\n );\n };\n \n export default NoFileOrFolderItem;",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Export room index",
   "content_en_sha1_hash": "bf3c9b5fcad1b57dae60769b93292c53f2c2a644",
   "created_at": "2025-05-19T21:30:55.657Z",
-  "updated_at": "2025-06-08T12:02:32.846Z",
+  "updated_at": "2025-08-04T07:30:01.600Z",
   "comment": {
     "text": "This translation key is used to display a label for an option in a file export settings menu. The text will appear as \"Export room index\" and is intended to describe the purpose of exporting a specific room's data. It appears on a settings page or dialog related to file exports, and its content should be translated to support different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1963,
+      "line_number": 1969,
       "context": "...pinOptions,\n ...muteOptions,\n {\n id: \"option_export-room-index\",\n key: \"export-room-index\",\n label: t(\"Files:ExportRoomIndex\"),\n icon: ExportRoomIndexSvgUrl,\n onClick: () => this.onExportRoomIndex(t, item.id),\n disabled: !item.indexing || !item.security?.IndexExport,\n },\n {",
       "module": "/packages/client"
     }

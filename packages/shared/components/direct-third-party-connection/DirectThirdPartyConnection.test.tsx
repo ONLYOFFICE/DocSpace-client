@@ -26,8 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { act } from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
@@ -216,9 +215,7 @@ describe("DirectThirdPartyConnection", () => {
 
       const connectButton = screen.getByTestId("connect-button");
 
-      await act(async () => {
-        await userEvent.click(connectButton);
-      });
+      await userEvent.click(connectButton);
 
       expect(defaultProps.openConnectWindow).toHaveBeenCalled();
     } finally {

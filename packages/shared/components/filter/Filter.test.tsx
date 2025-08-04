@@ -26,6 +26,7 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
+import { act } from "@testing-library/react";
 
 import { DeviceType } from "../../enums";
 import { renderWithTheme } from "../../utils/render-with-theme";
@@ -126,14 +127,16 @@ describe("Filter Component", () => {
   };
 
   describe("Search Input", () => {
-    it("clears search when clearSearch prop is true", () => {
+    it("clears search when clearSearch prop is true", async () => {
       const onClearFilter = jest.fn();
       const setClearSearch = jest.fn();
 
-      renderComponent({
-        clearSearch: true,
-        onClearFilter,
-        setClearSearch,
+      await act(async () => {
+        renderComponent({
+          clearSearch: true,
+          onClearFilter,
+          setClearSearch,
+        });
       });
 
       expect(onClearFilter).toHaveBeenCalled();

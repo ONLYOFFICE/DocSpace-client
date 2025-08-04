@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { screen, createEvent, fireEvent } from "@testing-library/react";
+import { screen, createEvent, fireEvent, act } from "@testing-library/react";
 import { renderWithTheme } from "../../utils/render-with-theme";
 import Dropzone from "./index";
 import "@testing-library/jest-dom";
@@ -107,7 +107,9 @@ describe("Dropzone", () => {
       },
     });
 
-    fireEvent(dropzone, dropEvent);
+    await act(async () => {
+      fireEvent(dropzone, dropEvent);
+    });
     await new Promise(process.nextTick);
     expect(onDrop).toHaveBeenCalledWith([file], [], expect.any(Object));
   });

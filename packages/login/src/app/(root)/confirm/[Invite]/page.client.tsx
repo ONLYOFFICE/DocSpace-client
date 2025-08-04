@@ -170,7 +170,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         const user = await signupOAuth(signupAccount, confirmKey);
 
         if (!user) {
-          toastr.error("something went wrong");
+          toastr.error(t("Common:SomethingWentWrong"));
           return;
         }
 

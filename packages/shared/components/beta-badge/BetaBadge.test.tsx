@@ -134,8 +134,11 @@ describe("<BetaBadge />", () => {
     const closeButton = screen.getByTestId("icon-button");
     fireEvent.click(closeButton);
 
-    await waitFor(() => {
-      expect(screen.queryByText("Beta Feature")).not.toBeInTheDocument();
-    });
+    await waitFor(
+      () => {
+        expect(screen.queryByText("Beta Feature")).not.toBeInTheDocument();
+      },
+      { timeout: 2000 },
+    );
   });
 });

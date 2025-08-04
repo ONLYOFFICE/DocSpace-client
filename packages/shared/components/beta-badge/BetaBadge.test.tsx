@@ -26,10 +26,8 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, render } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import { DeviceType } from "../../enums";
 
@@ -71,13 +69,13 @@ const baseProps: BetaBadgeProps = {
 
 describe("<BetaBadge />", () => {
   it("renders without error", () => {
-    renderWithTheme(<BetaBadge {...baseProps} />);
+    render(<BetaBadge {...baseProps} />);
 
     expect(screen.getByText("BETA")).toBeInTheDocument();
   });
 
   it("renders tooltip with correct content when clicked", async () => {
-    renderWithTheme(<BetaBadge {...baseProps} />);
+    render(<BetaBadge {...baseProps} />);
 
     const badge = screen.getByText("BETA");
     await userEvent.click(badge);
@@ -89,7 +87,7 @@ describe("<BetaBadge />", () => {
   });
 
   it("hides feedback links when withOutFeedbackLink is true", async () => {
-    renderWithTheme(<BetaBadge {...baseProps} withOutFeedbackLink />);
+    render(<BetaBadge {...baseProps} withOutFeedbackLink />);
 
     const badge = screen.getByText("BETA");
     await userEvent.click(badge);
@@ -109,7 +107,7 @@ describe("<BetaBadge />", () => {
       mobilePlace: "bottom-end" as const,
     };
 
-    renderWithTheme(<BetaBadge {...mobileProps} />);
+    render(<BetaBadge {...mobileProps} />);
 
     const badge = screen.getByText("BETA");
     await userEvent.click(badge);
@@ -123,7 +121,7 @@ describe("<BetaBadge />", () => {
   });
 
   it("closes tooltip when close button is clicked", async () => {
-    renderWithTheme(<BetaBadge {...baseProps} />);
+    render(<BetaBadge {...baseProps} />);
 
     const badge = screen.getByText("BETA");
     await userEvent.click(badge);

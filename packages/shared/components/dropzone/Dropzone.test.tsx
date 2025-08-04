@@ -24,8 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { screen, createEvent, fireEvent, act } from "@testing-library/react";
-import { renderWithTheme } from "../../utils/render-with-theme";
+import {
+  screen,
+  createEvent,
+  fireEvent,
+  act,
+  render,
+} from "@testing-library/react";
 import Dropzone from "./index";
 import "@testing-library/jest-dom";
 
@@ -45,7 +50,7 @@ describe("Dropzone", () => {
   });
 
   it("renders without error", () => {
-    renderWithTheme(<Dropzone {...defaultProps} />);
+    render(<Dropzone {...defaultProps} />);
 
     const dropzone = screen.getByTestId("dropzone");
     expect(dropzone).toBeInTheDocument();
@@ -64,7 +69,7 @@ describe("Dropzone", () => {
   });
 
   it("shows loader when isLoading is true", () => {
-    renderWithTheme(<Dropzone {...defaultProps} isLoading />);
+    render(<Dropzone {...defaultProps} isLoading />);
 
     const dropzone = screen.getByTestId("dropzone");
     expect(dropzone).toHaveAttribute("aria-busy", "true");
@@ -72,7 +77,7 @@ describe("Dropzone", () => {
   });
 
   it("disables dropzone when isDisabled is true", () => {
-    renderWithTheme(<Dropzone {...defaultProps} isDisabled />);
+    render(<Dropzone {...defaultProps} isDisabled />);
 
     const dropzone = screen.getByTestId("dropzone");
     expect(dropzone).toHaveAttribute("aria-disabled", "true");
@@ -84,7 +89,7 @@ describe("Dropzone", () => {
   it("handles file upload correctly", async () => {
     const onDrop = jest.fn();
 
-    renderWithTheme(<Dropzone {...defaultProps} onDrop={onDrop} />);
+    render(<Dropzone {...defaultProps} onDrop={onDrop} />);
 
     const file = new File(["test"], "test.pdf", {
       type: "application/pdf",
@@ -115,7 +120,7 @@ describe("Dropzone", () => {
   });
 
   it("applies loading styles when isLoading is true", () => {
-    renderWithTheme(<Dropzone {...defaultProps} isLoading />);
+    render(<Dropzone {...defaultProps} isLoading />);
 
     const wrapper = screen.getByTestId("dropzone");
     expect(wrapper).toHaveClass("isLoading");
@@ -130,7 +135,7 @@ describe("Dropzone", () => {
       exstsText: "Custom file types",
     };
 
-    renderWithTheme(<Dropzone {...customProps} />);
+    render(<Dropzone {...customProps} />);
 
     expect(screen.getByTestId("dropzone-main-text")).toHaveTextContent(
       customProps.linkMainText,
@@ -144,7 +149,7 @@ describe("Dropzone", () => {
   });
 
   it("has correct accessibility attributes", () => {
-    renderWithTheme(<Dropzone {...defaultProps} />);
+    render(<Dropzone {...defaultProps} />);
 
     const dropzone = screen.getByTestId("dropzone");
     const inputArea = screen.getByTestId("dropzone-input-area");

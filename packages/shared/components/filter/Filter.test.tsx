@@ -26,10 +26,9 @@
 
 import React from "react";
 import "@testing-library/jest-dom";
-import { act } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 
 import { DeviceType } from "../../enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import Filter from ".";
 import { TGetSelectedSortData, TSortDataItem } from "./Filter.types";
 import { TViewAs } from "../../types";
@@ -123,7 +122,7 @@ describe("Filter Component", () => {
   });
 
   const renderComponent = (props = {}) => {
-    return renderWithTheme(<Filter {...baseProps} {...props} />);
+    return render(<Filter {...baseProps} {...props} />);
   };
 
   describe("Search Input", () => {

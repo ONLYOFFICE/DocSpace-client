@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, waitFor, act } from "@testing-library/react";
+import { screen, waitFor, act, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { EncryptionPortal } from "./index";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import * as settingsApi from "../../api/settings";
 
@@ -76,7 +75,7 @@ describe("EncryptionPortal", () => {
         ready: false,
       }));
 
-    await act(async () => renderWithTheme(<EncryptionPortal />));
+    await act(async () => render(<EncryptionPortal />));
 
     expect(screen.getByTestId("preparation-portal-loader")).toBeInTheDocument();
     expect(screen.getByTestId("encryption-portal")).toHaveAttribute(
@@ -98,7 +97,7 @@ describe("EncryptionPortal", () => {
   });
 
   test("renders state initially", async () => {
-    await act(async () => renderWithTheme(<EncryptionPortal />));
+    await act(async () => render(<EncryptionPortal />));
 
     const portalElement = screen.getByTestId("encryption-portal");
     expect(portalElement).toBeInTheDocument();
@@ -107,7 +106,7 @@ describe("EncryptionPortal", () => {
   test("renders progress bar when encryption is in progress", async () => {
     (settingsApi.getEncryptionProgress as jest.Mock).mockResolvedValue(50);
 
-    await act(async () => renderWithTheme(<EncryptionPortal />));
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -149,7 +148,7 @@ describe("EncryptionPortal", () => {
       },
     });
 
-    await act(async () => renderWithTheme(<EncryptionPortal />));
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -185,7 +184,7 @@ describe("EncryptionPortal", () => {
       }
     });
 
-    await act(async () => renderWithTheme(<EncryptionPortal />));
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {
@@ -234,7 +233,7 @@ describe("EncryptionPortal", () => {
       }
     });
 
-    await act(async () => renderWithTheme(<EncryptionPortal />));
+    await act(async () => render(<EncryptionPortal />));
 
     await waitFor(
       () => {

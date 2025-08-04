@@ -1,8 +1,7 @@
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../../utils/render-with-theme";
 import { ArticleHeaderLoader } from ".";
 
 describe("ArticleHeaderLoader", () => {
@@ -11,34 +10,32 @@ describe("ArticleHeaderLoader", () => {
   };
 
   it("renders without error", () => {
-    renderWithTheme(<ArticleHeaderLoader {...defaultProps} />);
+    render(<ArticleHeaderLoader {...defaultProps} />);
     expect(screen.getByTestId("article-header-loader")).toBeInTheDocument();
   });
 
   it("renders RectangleSkeleton component", () => {
-    renderWithTheme(<ArticleHeaderLoader {...defaultProps} />);
+    render(<ArticleHeaderLoader {...defaultProps} />);
     expect(screen.getByTestId("rectangle-skeleton")).toBeInTheDocument();
   });
 
   it("applies custom className", () => {
     const className = "custom-class";
-    renderWithTheme(
-      <ArticleHeaderLoader {...defaultProps} className={className} />,
-    );
+    render(<ArticleHeaderLoader {...defaultProps} className={className} />);
 
     expect(screen.getByTestId("article-header-loader")).toHaveClass(className);
   });
 
   it("applies custom style", () => {
     const style = { margin: "20px" };
-    renderWithTheme(<ArticleHeaderLoader {...defaultProps} style={style} />);
+    render(<ArticleHeaderLoader {...defaultProps} style={style} />);
 
     expect(screen.getByTestId("article-header-loader")).toHaveStyle(style);
   });
 
   it("applies custom id", () => {
     const id = "custom-id";
-    renderWithTheme(<ArticleHeaderLoader {...defaultProps} id={id} />);
+    render(<ArticleHeaderLoader {...defaultProps} id={id} />);
 
     expect(screen.getByTestId("article-header-loader")).toHaveAttribute(
       "id",
@@ -47,7 +44,7 @@ describe("ArticleHeaderLoader", () => {
   });
 
   it("sets data-show-text attribute to true when showText is true", () => {
-    renderWithTheme(<ArticleHeaderLoader {...defaultProps} showText />);
+    render(<ArticleHeaderLoader {...defaultProps} showText />);
 
     expect(screen.getByTestId("article-header-loader")).toHaveAttribute(
       "data-show-text",
@@ -56,7 +53,7 @@ describe("ArticleHeaderLoader", () => {
   });
 
   it("sets data-show-text attribute to false when showText is false", () => {
-    renderWithTheme(<ArticleHeaderLoader {...defaultProps} showText={false} />);
+    render(<ArticleHeaderLoader {...defaultProps} showText={false} />);
 
     expect(screen.getByTestId("article-header-loader")).toHaveAttribute(
       "data-show-text",

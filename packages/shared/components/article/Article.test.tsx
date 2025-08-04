@@ -1,10 +1,9 @@
 import React from "react";
-import { screen, fireEvent, act } from "@testing-library/react";
+import { screen, fireEvent, act, render } from "@testing-library/react";
 
 import "@testing-library/jest-dom";
 
 import { DeviceType } from "../../enums";
-import { renderWithTheme } from "../../utils/render-with-theme";
 import Article from "./index";
 
 // Mock child components
@@ -87,7 +86,7 @@ const defaultProps = {
 };
 
 const renderComponent = (props = {}) => {
-  return renderWithTheme(<Article {...defaultProps} {...props} />);
+  return render(<Article {...defaultProps} {...props} />);
 };
 
 describe("Article", () => {

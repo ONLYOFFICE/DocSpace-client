@@ -25,12 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import ErrorContainer from "./ErrorContainer";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 describe("ErrorContainer", () => {
   const mockOnClick = jest.fn();
@@ -40,7 +38,7 @@ describe("ErrorContainer", () => {
   });
 
   test("renders without error", () => {
-    renderWithTheme(<ErrorContainer id="error-container" />);
+    render(<ErrorContainer id="error-container" />);
     expect(screen.getByTestId("ErrorContainer")).toBeInTheDocument();
   });
 
@@ -48,9 +46,7 @@ describe("ErrorContainer", () => {
     const headerText = "Some error has happened";
     const bodyText = "Try again later";
 
-    renderWithTheme(
-      <ErrorContainer headerText={headerText} bodyText={bodyText} />,
-    );
+    render(<ErrorContainer headerText={headerText} bodyText={bodyText} />);
 
     expect(screen.getByText(headerText)).toBeInTheDocument();
     expect(screen.getByText(bodyText)).toBeInTheDocument();
@@ -59,7 +55,7 @@ describe("ErrorContainer", () => {
   test("renders with customized body text", () => {
     const customText = "Custom error message";
 
-    renderWithTheme(<ErrorContainer customizedBodyText={customText} />);
+    render(<ErrorContainer customizedBodyText={customText} />);
 
     expect(screen.getByText(customText)).toBeInTheDocument();
   });
@@ -67,7 +63,7 @@ describe("ErrorContainer", () => {
   test("renders with button and handles click", () => {
     const buttonText = "Retry";
 
-    renderWithTheme(
+    render(
       <ErrorContainer buttonText={buttonText} onClickButton={mockOnClick} />,
     );
 
@@ -81,7 +77,7 @@ describe("ErrorContainer", () => {
   test("renders with primary button style", () => {
     const buttonText = "Primary Button";
 
-    renderWithTheme(
+    render(
       <ErrorContainer
         buttonText={buttonText}
         onClickButton={mockOnClick}
@@ -94,7 +90,7 @@ describe("ErrorContainer", () => {
   });
 
   test("renders in editor mode", () => {
-    renderWithTheme(<ErrorContainer isEditor />);
+    render(<ErrorContainer isEditor />);
 
     const container = screen.getByTestId("ErrorContainer");
     expect(container.className).toContain("isEditor");
@@ -103,7 +99,7 @@ describe("ErrorContainer", () => {
   test("renders with additional className", () => {
     const className = "custom-class";
 
-    renderWithTheme(<ErrorContainer className={className} />);
+    render(<ErrorContainer className={className} />);
 
     const container = screen.getByTestId("ErrorContainer");
     expect(container.className).toContain(className);
@@ -112,7 +108,7 @@ describe("ErrorContainer", () => {
   test("renders with children", () => {
     const childText = "Child component";
 
-    renderWithTheme(
+    render(
       <ErrorContainer>
         <div>{childText}</div>
       </ErrorContainer>,

@@ -1,9 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 import Section from "./index";
 import SectionBody from "./sub-components/SectionBody";
@@ -41,7 +39,7 @@ describe("<Section />", () => {
   };
 
   it("renders all section components correctly", () => {
-    renderWithTheme(
+    render(
       <Section {...defaultProps}>
         <SectionHeader className="header-class">Header Content</SectionHeader>
         <SectionFilter>Filter Content</SectionFilter>

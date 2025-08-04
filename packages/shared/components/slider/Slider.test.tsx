@@ -30,9 +30,16 @@ import "@testing-library/jest-dom";
 
 import { Slider } from "./index";
 
+const defaultProps = {
+  min: 0,
+  max: 100,
+  value: 50,
+  onChange: jest.fn(),
+};
+
 describe("<Slider />", () => {
   it("renders without error", () => {
-    render(<Slider min={0} max={100} value={50} />);
+    render(<Slider {...defaultProps} />);
     expect(screen.getByTestId("slider")).toBeInTheDocument();
   });
 
@@ -40,12 +47,10 @@ describe("<Slider />", () => {
     const props = {
       id: "testId",
       className: "test-class",
-      min: 0,
-      max: 100,
-      value: 50,
       step: 5,
       withPouring: true,
       isDisabled: false,
+      ...defaultProps,
     };
 
     render(<Slider {...props} />);
@@ -61,17 +66,16 @@ describe("<Slider />", () => {
   });
 
   it("handles value changes correctly", () => {
-    const handleChange = jest.fn();
-    render(<Slider min={0} max={100} value={50} onChange={handleChange} />);
+    render(<Slider {...defaultProps} />);
 
     const slider = screen.getByTestId("slider");
     fireEvent.change(slider, { target: { value: "75" } });
 
-    expect(handleChange).toHaveBeenCalled();
+    expect(defaultProps.onChange).toHaveBeenCalled();
   });
 
   it("respects disabled state", () => {
-    render(<Slider min={0} max={100} value={50} isDisabled />);
+    render(<Slider {...defaultProps} isDisabled />);
 
     const slider = screen.getByTestId("slider");
     expect(slider).toBeDisabled();
@@ -80,9 +84,7 @@ describe("<Slider />", () => {
   it("applies custom dimensions", () => {
     render(
       <Slider
-        min={0}
-        max={100}
-        value={50}
+        {...defaultProps}
         thumbHeight="20px"
         thumbWidth="20px"
         thumbBorderWidth="2px"

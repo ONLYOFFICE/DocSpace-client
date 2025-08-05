@@ -29,7 +29,7 @@ import type { InjectManifestOptions } from "workbox-build";
 const config: InjectManifestOptions = {
   globDirectory: "../../../publish/web",
   swSrc: "sw/template.js",
-  swDest: "../../../publish/web/public/sw.js",
+  swDest: "../../../client/web/public/sw.js",
 
   globPatterns: [
     // Critical resources

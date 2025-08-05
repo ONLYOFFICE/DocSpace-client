@@ -143,7 +143,7 @@ const ToolsSettings = ({
 
   React.useEffect(() => {
     setHideMcpToolsButton(!servers.length);
-  }, [servers.length]);
+  }, [servers.length, setHideMcpToolsButton]);
 
   if (!isVisible || !servers.length) return;
 

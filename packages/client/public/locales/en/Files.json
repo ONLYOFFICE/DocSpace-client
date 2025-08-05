@@ -234,5 +234,6 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheRoom": "You have left the room",
   "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
-  "RetentionPeriod": "Retention period"
+  "RetentionPeriod": "Retention period",
+  "EmptyRoomTrash":"Empty room trash"
 }

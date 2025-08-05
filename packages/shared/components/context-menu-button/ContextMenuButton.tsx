@@ -244,14 +244,14 @@ const ContextMenuButtonPure = ({
         >
           {state.data?.map((item: ContextMenuModel, index: number) => {
             if (!item) return null;
-            const { key, ...rest } = item;
+            const { key, dataTestId, ...rest } = item;
             return (
               item && (
                 <DropDownItem
                   key={key || index}
                   {...rest}
                   id={item.id}
-                  testId={item?.dataTestId}
+                  testId={dataTestId}
                   label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

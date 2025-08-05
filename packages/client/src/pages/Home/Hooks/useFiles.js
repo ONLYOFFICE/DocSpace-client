@@ -181,7 +181,8 @@ const useFiles = ({
     if (
       (categoryType == CategoryType.Shared ||
         categoryType == CategoryType.SharedRoom ||
-        categoryType == CategoryType.Archive) &&
+        categoryType == CategoryType.Archive ||
+        categoryType == CategoryType.TrashRooms) &&
       !isRoomFolder
     ) {
       filterObj = RoomsFilter.getFilter(window.location);

@@ -444,7 +444,7 @@ class SelectedFolderStore {
         }
       });
 
-      this.setChangeDocumentsTabs(false);
+      //this.setChangeDocumentsTabs(false);
     }
   };
 }

@@ -104,6 +104,7 @@ import {
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
+import { getRoomList } from "@docspace/shared/__mocks__/e2e/handlers/files/roomList";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -1614,6 +1615,19 @@ class FilesStore {
   };
 
   setFilter = (filter) => {
+    // Check if we're in the trash/rooms section by looking at the URL path
+    const isTrashRooms = window.location.pathname.includes("/trash/rooms");
+
+    // If we're in trash rooms and the filter is not a RoomsFilter, create a proper RoomsFilter
+    if (isTrashRooms && filter.constructor.name !== "RoomsFilter") {
+      const roomsFilter = RoomsFilter.getDefault(
+        this.userStore.user?.id,
+        RoomSearchArea.Trash,
+      );
+      this.setRoomsFilter(roomsFilter);
+      return;
+    }
+
     filter.pageCount = 100;
     this.filter = filter;
   };
@@ -2044,9 +2058,14 @@ class FilesStore {
     )
       filterData.quotaFilter = defaultFilter.quotaFilter;
 
-    const request = () =>
-      api.rooms
-        .getRooms(filterData, this.roomsController.signal)
+    const isTrashRooms = window.location.pathname.includes("/trash/rooms");
+
+    const request = () => {
+      const result = isTrashRooms
+        ? Promise.resolve(getRoomList())
+        : api.rooms.getRooms(filterData, this.roomsController.signal);
+
+      return result
         .then(async (data) => {
           if (!folderId) setSelectedNode([`${data.current.id}`]);
 
@@ -2069,22 +2088,26 @@ class FilesStore {
           }
 
           runInAction(() => {
-            this.categoryType = getCategoryTypeByFolderType(
-              data.current.rootFolderType,
-              data.current.parentId,
-            );
+            this.categoryType = isTrashRooms
+              ? getCategoryTypeByFolderType(3)
+              : getCategoryTypeByFolderType(
+                  data.current.rootFolderType,
+                  data.current.parentId,
+                );
           });
 
           this.setRoomsFilter(filterData);
 
           runInAction(() => {
-            this.selectedFolderStore.setSelectedFolder({
-              folders: data.folders,
-              ...data.current,
-              pathParts: data.pathParts,
-              navigationPath: [],
-              ...{ new: data.new },
-            });
+            if (!isTrashRooms) {
+              this.selectedFolderStore.setSelectedFolder({
+                folders: data.folders,
+                ...data.current,
+                pathParts: data.pathParts,
+                navigationPath: [],
+                ...{ new: data.new },
+              });
+            }
 
             const isEmptyList = data.folders.length === 0;
             if (filter && isEmptyList) {
@@ -2165,6 +2188,7 @@ class FilesStore {
             toastr.error(err);
           }
         });
+    };
 
     return request();
   };

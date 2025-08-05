@@ -77,6 +77,7 @@ const ArticleBodyContent = (props) => {
     userId,
     isFrame,
     setContactsTab,
+    setIsRoomTrash,
 
     displayBanners,
   } = props;
@@ -119,7 +120,7 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
-        // case "trash-files": {
+        // case "trash": {
         //   const recycleBinFilter = FilesFilter.getDefault();
         //   recycleBinFilter.folder = folderId;
 
@@ -150,6 +151,8 @@ const ArticleBodyContent = (props) => {
         }
         case recycleBinFolderId: {
           const recycleBinFilter = FilesFilter.getDefault();
+          console.log("folderid", folderId);
+
           recycleBinFilter.folder = folderId;
 
           if (userId) {
@@ -166,7 +169,7 @@ const ArticleBodyContent = (props) => {
 
           break;
         }
-        case "trash-rooms": {
+        case "trash": {
           const trashFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Trash,
@@ -216,6 +219,10 @@ const ArticleBodyContent = (props) => {
     (e, folderId) => {
       if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
+      if (folderId !== "trash") {
+        setIsRoomTrash(false);
+      }
+
       const isAccountsClick = folderId === "accounts";
 
       const withTimer = isAccountsClick
@@ -249,6 +256,7 @@ const ArticleBodyContent = (props) => {
       selectedFolderId,
       setContactsTab,
       setSelection,
+      setIsRoomTrash,
     ],
   );
 
@@ -271,17 +279,8 @@ const ArticleBodyContent = (props) => {
     )
       return setActiveItemId(myFolderId);
 
-    if (
-      location.pathname.includes("/trash/files") &&
-      activeItemId !== "trash-files"
-    )
-      return setActiveItemId("trash-files");
-
-    if (
-      location.pathname.includes("/trash/rooms") &&
-      activeItemId !== "trash-rooms"
-    )
-      return setActiveItemId("trash-rooms");
+    if (location.pathname.includes("/trash") && activeItemId !== "trash")
+      return setActiveItemId("trash");
 
     if (location.pathname.includes("/accounts") && activeItemId !== "accounts")
       return setActiveItemId("accounts");
@@ -361,8 +360,13 @@ export default inject(
       // if (param && withTimer) showProgress();
     };
 
-    const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =
-      treeFoldersStore;
+    const {
+      roomsFolderId,
+      archiveFolderId,
+      myFolderId,
+      recycleBinFolderId,
+      setIsRoomTrash,
+    } = treeFoldersStore;
 
     const selectedFolderId = selectedFolderStore.id;
 
@@ -402,6 +406,7 @@ export default inject(
       myFolderId,
       recycleBinFolderId,
       rootFolderId,
+      setIsRoomTrash,
 
       setIsLoading,
 

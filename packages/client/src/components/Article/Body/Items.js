@@ -79,6 +79,8 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  isRoomTrash,
+  setIsRoomTrash,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -134,6 +136,9 @@ const Item = ({
   const onClickAction = React.useCallback(
     (e, selectedFolderId) => {
       setBufferSelection(null);
+      if (selectedFolderId !== "trash") {
+        setIsRoomTrash(false);
+      }
 
       onClick?.(
         e,
@@ -143,16 +148,13 @@ const Item = ({
         item.security.Create,
       );
     },
-    [onClick, item.title, item.rootFolderType],
+    [onClick, item.title, item.rootFolderType, setIsRoomTrash],
   );
 
   let linkData;
-
-  const isTrash = item.rootFolderType === FolderType.TRASH;
-
-  if (isTrash && window.location.pathname.startsWith("/trash/rooms")) {
+  if (isRoomTrash) {
     linkData = getLinkData(
-      "trash-rooms",
+      "trash",
       item.title,
       item.rootFolderType,
       item.security.Create,
@@ -259,6 +261,9 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  isRoomTrash,
+  isRecycleBinFolder,
+  setIsRoomTrash,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
@@ -357,7 +362,9 @@ const Items = ({
             setBufferSelection={setBufferSelection}
             dragging={dragging}
             getFolderIcon={getFolderIcon}
-            isActive={item.id === activeItemId}
+            isActive={
+              isTrash ? "trash" === activeItemId : item.id === activeItemId
+            }
             isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
@@ -373,6 +380,9 @@ const Items = ({
             roomsFolderId={roomsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
+            isRoomTrash={isRoomTrash}
+            isRecycleBinFolder={isRecycleBinFolder}
+            setIsRoomTrash={setIsRoomTrash}
           />
         );
       });
@@ -474,6 +484,9 @@ export default inject(
       commonFolderId,
       isPrivacyFolder,
       roomsFolderId,
+      isRoomTrash,
+      isRecycleBinFolder,
+      setIsRoomTrash,
     } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
@@ -522,6 +535,9 @@ export default inject(
       currentColorScheme,
       roomsFolderId,
       isIndexEditingMode,
+      isRoomTrash,
+      isRecycleBinFolder,
+      setIsRoomTrash,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

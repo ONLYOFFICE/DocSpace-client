@@ -110,6 +110,8 @@ export type TRoomParams = {
   prompt?: string;
   providerId?: number;
   modelId?: string;
+  mcpServers?: string[];
+  mcpServersInitial?: string[];
 };
 
 const getFetchedRoomParams = (

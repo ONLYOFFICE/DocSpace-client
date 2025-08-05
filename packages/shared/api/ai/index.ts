@@ -292,7 +292,7 @@ export const getServersListForRoom = async (roomId: number) => {
       url: `${baseUrl}/rooms/${roomId}/servers`,
     });
 
-    return res as { items: TServer[]; total: number };
+    return res as TServer[];
   } catch (e) {
     console.log(e);
   }
@@ -304,7 +304,7 @@ export const deleteServersForRoom = async (
 ) => {
   try {
     await request({
-      method: "post",
+      method: "delete",
       url: `${baseUrl}/rooms/${roomId}/servers`,
       data: { servers },
     });

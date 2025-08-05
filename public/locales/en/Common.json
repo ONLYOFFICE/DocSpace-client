@@ -900,5 +900,6 @@
   "MessageExported": "Message exported to file: <1>{{fileName}}</1>",
   "ChatExported": "Chat <1>{{title}}</1> exported to file: <2>{{fileName}}</2>",
   "YouDontHaveEnoughPermission": "You don't have enough permission",
-  "WorkInProgress": "Work in progress"
+  "WorkInProgress": "Work in progress",
+  "ListMCPServers": "List MCP"
 }

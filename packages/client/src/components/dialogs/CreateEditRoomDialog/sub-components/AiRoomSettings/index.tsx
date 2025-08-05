@@ -45,7 +45,7 @@ const AiRoomSettings = ({ roomParams, setRoomParams }: AiRoomSettingsProps) => {
         setRoomParams={setRoomParams}
       />
       <KnowledgeSettings />
-      <MCPSettings />
+      <MCPSettings setRoomParams={setRoomParams} roomParams={roomParams} />
     </>
   );
 };

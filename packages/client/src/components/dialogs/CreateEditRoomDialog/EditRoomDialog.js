@@ -110,7 +110,12 @@ const EditRoomDialog = ({
       isAvailable === templateIsAvailable &&
       prevParams.modelId === currentParams.modelId &&
       prevParams.providerId === currentParams.providerId &&
-      prevParams.prompt === currentParams.prompt
+      prevParams.prompt === currentParams.prompt &&
+      currentParams.mcpServers?.every((id) =>
+        currentParams.mcpServersInitial?.includes(id),
+      ) &&
+      currentParams.mcpServers?.length ===
+        currentParams.mcpServersInitial?.length
     );
   };
 

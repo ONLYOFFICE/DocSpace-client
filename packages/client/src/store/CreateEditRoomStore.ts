@@ -45,6 +45,10 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
 import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
+import {
+  addServersForRoom,
+  deleteServersForRoom,
+} from "@docspace/shared/api/ai";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -144,6 +148,15 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
+  setWatermarks = (object: TWatermark) => {
+    this.watermarksSettings = { ...object };
+  };
+
+  resetWatermarks = () => {
+    this.watermarksSettings = {} as TWatermark;
+    this.initialWatermarksSettings = {} as TWatermark;
+  };
+
   setInitialWatermarks = (watermarksSettings: TWatermark) => {
     this.resetWatermarks();
 
@@ -158,21 +171,7 @@ class CreateEditRoomStore {
       this.initialWatermarksSettings.image = "";
     }
 
-    this.setWatermarks(this.initialWatermarksSettings as TWatermark, false);
-  };
-
-  setWatermarks = (object: TWatermark, isInit: boolean) => {
-    if (isInit) {
-      this.watermarksSettings = { ...object };
-      return;
-    }
-
-    this.watermarksSettings = { ...object };
-  };
-
-  resetWatermarks = () => {
-    this.watermarksSettings = {} as TWatermark;
-    this.initialWatermarksSettings = {} as TWatermark;
+    this.setWatermarks(this.initialWatermarksSettings as TWatermark);
   };
 
   isCorrectWatermark = (watermarkSettings: TWatermark) => {
@@ -187,6 +186,7 @@ class CreateEditRoomStore {
 
   getWatermarkRequest = async (watermarksSettings: TWatermark) => {
     const watermarkImage = watermarksSettings.image as Blob;
+
     if (!watermarkImage && !watermarksSettings.imageUrl) {
       return Promise.resolve({
         rotate: watermarksSettings.rotate,
@@ -382,6 +382,22 @@ class CreateEditRoomStore {
             sharingMessage: "",
           }),
         );
+      }
+
+      const { mcpServers, mcpServersInitial } = newParams;
+
+      if (mcpServers && mcpServersInitial) {
+        const deletedServers = mcpServersInitial.filter(
+          (id) => !mcpServers.includes(id),
+        );
+        const addedServers = mcpServers.filter(
+          (id) => !mcpServersInitial.includes(id),
+        );
+
+        if (addedServers.length)
+          requests.push(addServersForRoom(roomId, addedServers));
+        if (deletedServers.length)
+          requests.push(deleteServersForRoom(roomId, deletedServers));
       }
 
       if (room.isTemplate && isAvailable !== undefined) {
@@ -673,6 +689,10 @@ class CreateEditRoomStore {
         deleteThirdParty(
           (thirdpartyAccount as { providerId: string })?.providerId,
         );
+
+      if (roomParams.mcpServers) {
+        addServersForRoom(room.id, roomParams.mcpServers);
+      }
 
       this.onOpenNewRoom(room);
 

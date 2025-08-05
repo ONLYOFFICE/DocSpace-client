@@ -29,43 +29,131 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import { toastr } from "@docspace/shared/components/toast";
+import MCPServersSelector from "@docspace/shared/selectors/MCPServers";
+import { TSelectorItem } from "@docspace/shared/components/selector";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { TRoomParams } from "@docspace/shared/utils/rooms";
+import { getServersListForRoom } from "@docspace/shared/api/ai";
+
+import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 
 import { StyledParam } from "../Params/StyledParam";
 
-const MCPSettings = () => {
+interface MCPSettingsProps {
+  roomParams: TRoomParams;
+  setRoomParams: (value: TRoomParams) => void;
+}
+
+const MCPSettings = ({ roomParams, setRoomParams }: MCPSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
 
-  const onClickAction = () => toastr.info(t("Common:WorkInProgress"));
+  const [isSelectorVisible, setIsSelectorVisible] = React.useState(false);
+
+  const [selectedServers, setSelectedServers] = React.useState<TSelectorItem[]>(
+    [],
+  );
+  const [initialServers, setInitialServers] = React.useState<TSelectorItem[]>(
+    [],
+  );
+
+  const onClickAction = () => setIsSelectorVisible(true);
+
+  const onClose = () => setIsSelectorVisible(false);
+
+  const onSubmit = (servers: TSelectorItem[]) => {
+    setSelectedServers(servers);
+  };
+
+  const roomId = roomParams.roomId;
+
+  React.useEffect(() => {
+    if (roomId) {
+      getServersListForRoom(roomId).then((res) => {
+        console.log(res);
+        if (res) {
+          const items = res.map((item) => ({
+            key: item.id,
+            id: item.id,
+            label: item.name,
+            icon: "",
+            isInputItem: false,
+            onAcceptInput: () => {},
+            onCancelInput: () => {},
+            defaultInputValue: "",
+            placeholder: "",
+          }));
+
+          setSelectedServers(items);
+          setInitialServers(items);
+        }
+      });
+    }
+  }, [roomId]);
+
+  React.useEffect(() => {
+    setRoomParams({
+      ...roomParams,
+      mcpServers: selectedServers
+        .map((server) => server.id?.toString() || "")
+        .filter((id) => id !== ""),
+      mcpServersInitial: initialServers
+        .map((server) => server.id?.toString() || "")
+        .filter((id) => id !== ""),
+    });
+  }, [selectedServers]);
 
   return (
-    <StyledParam increaseGap>
-      <div className=" set_room_params-info">
-        <div>
-          <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("MCP")}
-          </Text>
-          <Text
-            fontSize="12px"
-            lineHeight="16px"
-            fontWeight={400}
-            className="set_room_params-info-description"
-            noSelect
-          >
-            {t("MCPDescription")}
-          </Text>
-        </div>
-        <div className="ai-mcp-group">
-          <div className="ai-mcp-item">
-            <img src="logo.ashx?logotype=3" alt="DocSpace" />
-            <Text fontSize="12px" fontWeight={600} lineHeight="16px" noSelect>
-              {t("Common:ProductName")}
+    <>
+      <StyledParam increaseGap>
+        <div className=" set_room_params-info">
+          <div>
+            <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
+              {t("MCP")}
+            </Text>
+            <Text
+              fontSize="12px"
+              lineHeight="16px"
+              fontWeight={400}
+              className="set_room_params-info-description"
+              noSelect
+            >
+              {t("MCPDescription")}
             </Text>
           </div>
-          <SelectorAddButton onClick={onClickAction} />
+          <div className="ai-mcp-group">
+            {selectedServers.map((server) => (
+              <div className="ai-mcp-item" key={server.id}>
+                <img src={server.icon} alt="DocSpace" />
+                <Text
+                  fontSize="12px"
+                  fontWeight={600}
+                  lineHeight="16px"
+                  noSelect
+                >
+                  {server.label}
+                </Text>
+
+                <IconButton
+                  iconName={CloseCircleReactSvgUrl}
+                  size={16}
+                  onClick={() => {
+                    setSelectedServers((prev) =>
+                      prev.filter((item) => item.id !== server.id),
+                    );
+                  }}
+                />
+              </div>
+            ))}
+
+            <SelectorAddButton onClick={onClickAction} />
+          </div>
         </div>
-      </div>
-    </StyledParam>
+      </StyledParam>
+
+      {isSelectorVisible ? (
+        <MCPServersSelector onSubmit={onSubmit} onClose={onClose} />
+      ) : null}
+    </>
   );
 };
 

@@ -244,7 +244,7 @@ const ContextMenuButtonPure = ({
         >
           {state.data?.map((item: ContextMenuModel, index: number) => {
             if (!item) return null;
-            const { key, ...rest } = item;
+            const { key, dataTestId, ...rest } = item;
             return (
               item && (
                 <DropDownItem

@@ -162,6 +162,7 @@ const ButtonContainer = (props: ButtonContainerProps) => {
         size={buttonSize}
         // eslint-disable-next-line jsx-a11y/tabindex-no-positive
         tabIndex={10}
+        testId="restore_backup_button"
       />
 
       {isBackupProgressVisible ? (

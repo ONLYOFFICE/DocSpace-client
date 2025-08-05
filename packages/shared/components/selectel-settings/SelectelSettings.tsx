@@ -90,6 +90,7 @@ const SelectelSettings = ({
         tabIndex={1}
         type={InputType.text}
         size={InputSize.base}
+        testId="selectel_private_container_input"
       />
       <TextInput
         scale
@@ -104,6 +105,7 @@ const SelectelSettings = ({
         tabIndex={2}
         type={InputType.text}
         size={InputSize.base}
+        testId="selectel_public_container_input"
       />
 
       {isNeedFilePath ? (
@@ -120,6 +122,7 @@ const SelectelSettings = ({
           hasError={isError[FILE_PATH]}
           type={InputType.text}
           size={InputSize.base}
+          testId="selectel_file_path_input"
         />
       ) : null}
     </>

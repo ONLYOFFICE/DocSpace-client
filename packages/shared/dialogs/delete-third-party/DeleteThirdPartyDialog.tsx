@@ -132,6 +132,7 @@ const DeleteThirdPartyDialog = ({
           size={ButtonSize.normal}
           label={t("Common:OKButton")}
           onClick={onDeleteThirdParty}
+          testId="delete_third_party_button"
         />
         <Button
           scale
@@ -139,6 +140,7 @@ const DeleteThirdPartyDialog = ({
           isLoading={isLoading}
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
+          testId="cancel_third_party_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

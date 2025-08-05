@@ -44,4 +44,6 @@ export type EmailInputProps = Omit<
   onValidateInput?: (data: TValidate) => void;
   /** Animation handler */
   handleAnimationStart?: (e: React.AnimationEvent<HTMLInputElement>) => void;
+  /** Test id */
+  dataTestId?: string;
 };

@@ -27,6 +27,7 @@
 @use "../../../styles/variables";
 @use "../../../styles/variables/colors";
 @use "../../../styles/mixins";
+@use "../../../styles/z-index" as z;
 
 .flexBoxStyles {
   display: flex;
@@ -305,7 +306,7 @@
       width: 100%;
       object-fit: cover;
       object-position: top;
-      z-index: 0;
+      z-index: z.$base;
       border-radius: 12px 12px 0 0;
     }
 

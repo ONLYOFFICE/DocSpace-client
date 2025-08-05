@@ -109,6 +109,7 @@ export type MessageBodyProps = {
 export type ToolsSettingsProps = {
   isVisible: boolean;
   toggleToolsSettings: VoidFunction;
+  setHideMcpToolsButton: (value: boolean) => void;
 
   forwardedRef: React.RefObject<HTMLDivElement | null>;
 };
@@ -125,6 +126,7 @@ export type ButtonsProps = {
   isFilesSelectorVisible: boolean;
   isMcpToolsVisible: boolean;
   toolSettingsRef: React.RefObject<HTMLDivElement | null>;
+  hideMcpToolsButton: boolean;
 
   toggleFilesSelector: VoidFunction;
   toggleMcpTools: VoidFunction;

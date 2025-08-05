@@ -62,6 +62,7 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
   const [isFilesSelectorVisible, setIsFilesSelectorVisible] =
     React.useState(false);
   const [isMcpToolsVisible, setIsMcpToolsVisible] = React.useState(false);
+  const [hideMcpToolsButton, setHideMcpToolsButton] = React.useState(false);
 
   const prevSession = React.useRef(currentChatId);
   const inputRef = React.useRef<HTMLDivElement>(null);
@@ -209,6 +210,7 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
               toggleMcpTools={toggleMcpTools}
               toolSettingsRef={toolSettingsRef}
               sendMessageAction={sendMessageAction}
+              hideMcpToolsButton={hideMcpToolsButton}
             />
           </>
         )}
@@ -222,6 +224,7 @@ const ChatInput = ({ getIcon, isLoading }: ChatInputProps) => {
       <ToolsSettings
         isVisible={isMcpToolsVisible}
         toggleToolsSettings={toggleMcpTools}
+        setHideMcpToolsButton={setHideMcpToolsButton}
         forwardedRef={toolSettingsRef}
       />
       <Text fontSize="10px" fontWeight={400} className={styles.chatInputText}>

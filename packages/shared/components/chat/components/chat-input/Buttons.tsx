@@ -50,6 +50,7 @@ const Buttons = ({
   toggleMcpTools,
   toolSettingsRef,
   sendMessageAction,
+  hideMcpToolsButton,
 }: ButtonsProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -81,18 +82,24 @@ const Buttons = ({
             isFill={false}
           />
         </div>
-        <div
-          ref={toolSettingsRef}
-          className={classNames(styles.chatInputButton, {
-            [styles.activeChatInputButton]: isMcpToolsVisible,
-          })}
-          onClick={toggleMcpTools}
-        >
-          <IconButton iconName={McpToolReactSvgUrl} size={16} isFill={false} />
-          <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
-            {t("Tools")}
-          </Text>
-        </div>
+        {hideMcpToolsButton ? null : (
+          <div
+            ref={toolSettingsRef}
+            className={classNames(styles.chatInputButton, {
+              [styles.activeChatInputButton]: isMcpToolsVisible,
+            })}
+            onClick={toggleMcpTools}
+          >
+            <IconButton
+              iconName={McpToolReactSvgUrl}
+              size={16}
+              isFill={false}
+            />
+            <Text lineHeight="16px" fontSize="13px" fontWeight={600} noSelect>
+              {t("Tools")}
+            </Text>
+          </div>
+        )}
       </div>
       <IconButton
         iconName={SendReactSvgUrl}

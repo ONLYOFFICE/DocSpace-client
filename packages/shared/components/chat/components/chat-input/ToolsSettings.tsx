@@ -28,7 +28,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import { changeMCPToolsForRoom, getMCPToolsForRoom } from "../../../../api/ai";
+import {
+  changeMCPToolsForRoom,
+  getMCPToolsForRoom,
+  getServersListForRoom,
+} from "../../../../api/ai";
 import { TMCPTool } from "../../../../api/ai/types";
 
 import { isMobile } from "../../../../utils";
@@ -44,11 +48,10 @@ import { ToolsSettingsProps } from "../../Chat.types";
 
 import styles from "./ChatInput.module.scss";
 
-const DOCSPACE_MCP = "883da87d-5ae0-49fd-8cb9-2cb82181667e";
-
 const ToolsSettings = ({
   isVisible,
   toggleToolsSettings,
+  setHideMcpToolsButton,
 
   forwardedRef,
 }: ToolsSettingsProps) => {
@@ -59,6 +62,7 @@ const ToolsSettings = ({
   const [MCPTools, setMCPTools] = React.useState<Map<string, TMCPTool[]>>(
     new Map(),
   );
+  const [servers, setServers] = React.useState<string[]>([]);
 
   const mobile = isMobile();
 
@@ -116,17 +120,32 @@ const ToolsSettings = ({
 
   React.useEffect(() => {
     const fetchTools = async () => {
-      const tools = await getMCPToolsForRoom(Number(roomId), DOCSPACE_MCP);
+      const res = await getServersListForRoom(Number(roomId));
 
-      if (!tools) return;
+      if (!res) return;
 
-      setMCPTools(new Map([[DOCSPACE_MCP, tools]]));
+      setServers(res.map((server) => server.id));
+
+      const actions = await Promise.all(
+        res.map((server) => getMCPToolsForRoom(Number(roomId), server.id)),
+      );
+
+      const serverTools: [string, TMCPTool[]][] = res.map((item, index) => [
+        item.id,
+        actions[index] ?? [],
+      ]);
+
+      setMCPTools(new Map(serverTools));
     };
 
     fetchTools();
   }, [roomId]);
 
-  if (!isVisible) return;
+  React.useEffect(() => {
+    setHideMcpToolsButton(!servers.length);
+  }, [servers.length]);
+
+  if (!isVisible || !servers.length) return;
 
   return (
     <DropDown
@@ -157,14 +176,14 @@ const ToolsSettings = ({
         withToggle
         className={styles.toolSettingsItem}
         noHover
-        checked={MCPTools.get(DOCSPACE_MCP)?.some((tool) => tool.enabled)}
+        checked={MCPTools.get(servers[0])?.some((tool) => tool.enabled)}
         onClick={(
           e:
             | React.ChangeEvent<HTMLInputElement>
             | React.MouseEvent<HTMLElement, MouseEvent>,
         ) => {
           if (e.target instanceof HTMLInputElement) {
-            toggleTool(DOCSPACE_MCP, "all_tools");
+            toggleTool(servers[0], "all_tools");
           }
         }}
       >
@@ -173,7 +192,7 @@ const ToolsSettings = ({
         </Text>
       </DropDownItem>
       <DropDownItem isSeparator />
-      {MCPTools.get(DOCSPACE_MCP)?.map((tool) => (
+      {MCPTools.get(servers[0])?.map((tool) => (
         <DropDownItem
           key={tool.name}
           withToggle
@@ -186,7 +205,7 @@ const ToolsSettings = ({
               | React.MouseEvent<HTMLElement, MouseEvent>,
           ) => {
             if (e.target instanceof HTMLInputElement) {
-              toggleTool(DOCSPACE_MCP, tool.name);
+              toggleTool(servers[0], tool.name);
             }
           }}
         >

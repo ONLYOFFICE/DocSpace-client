@@ -3,7 +3,7 @@
   "content": "Enter page number",
   "content_en_sha1_hash": "7ac45489eeeeea6114ff51313824c781ea011d31",
   "created_at": "2025-05-19T21:30:54.478Z",
-  "updated_at": "2025-05-24T09:22:37.422Z",
+  "updated_at": "2025-08-04T07:30:01.405Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text for an input field in a user interface, allowing users to enter a page number. It appears as a label within a text input component, and its purpose is to provide a clear indication that this field should be filled with a valid page number.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/DisplayPageBlock.js",
       "line_number": 58,
-      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"Page\")} />\n <TextInput\n scale\n onChange={onChangePage}\n placeholder={t(\"EnterPage\")}\n value={value}\n isDisabled={!config.filter.count}\n tabIndex={7}\n />\n </ControlsGroup>",
+      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"Page\")} />\n <TextInput\n scale\n onChange={onChangePage}\n placeholder={t(\"EnterPage\")}\n value={value}\n isDisabled={!config.filter.count}\n tabIndex={7}\n testId=\"display_page_text_input\"\n />",
       "module": "/packages/client"
     }
   ],

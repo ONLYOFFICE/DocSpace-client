@@ -237,6 +237,14 @@
     min-height: 32px;
   }
 
+  &.isSystem {
+    :global(.avatar) {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
   :global(.user_body-wrapper) {
     overflow: auto;
 
@@ -265,6 +273,12 @@
   &.isExpect {
     :global(.name) {
       color: var(--info-panel-expect-name-color);
+    }
+  }
+
+  &.isSystem {
+    :global(.name) {
+      cursor: default;
     }
   }
 

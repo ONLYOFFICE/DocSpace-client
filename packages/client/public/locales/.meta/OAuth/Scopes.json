@@ -3,7 +3,7 @@
   "content": "Scopes",
   "content_en_sha1_hash": "c23540e5fb551edff0ac95649a1d551f9736d55e",
   "created_at": "2025-05-19T21:30:54.029Z",
-  "updated_at": "2025-05-24T07:08:32.748Z",
+  "updated_at": "2025-08-04T07:30:01.443Z",
   "comment": {
     "text": "This translation key is used to display the label \"Scopes\" in a list or table view within the Portal Settings UI. It appears as a column header and provides context for users to select scopes, likely related to access or permissions settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 255,
+      "line_number": 258,
       "context": "truncate\n >\n {t(\"Access\")}\n </Text>{\" \"}\n <ScopeList\n selectedScopes={client?.scopes || []}\n scopes={scopeList || []}\n t={t}\n />\n <Text\n className=\"block-header\"",
       "module": "/packages/client"
     },

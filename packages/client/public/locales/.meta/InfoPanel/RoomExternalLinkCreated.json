@@ -3,13 +3,19 @@
   "content": "Link created.",
   "content_en_sha1_hash": "2c21fcb17481109dbc9b9cdcccd0ada3c185acb9",
   "created_at": "2025-05-19T21:30:54.912Z",
-  "updated_at": "2025-06-30T12:20:31.347Z",
+  "updated_at": "2025-08-04T07:30:01.241Z",
   "comment": {
     "text": "This translation key is used to display a message when an external link is created within a room. It appears in the UI related to updating room information and notifies users that a new link has been added. The key helps provide clarity and consistency across different languages for this specific user experience.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:40:50.063Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 198,
+      "context": "case FeedActionKeys.RoomCoverChanged:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomLogoDeleted:\n return t(\"InfoPanel:RoomLogoChanged\");\n case FeedActionKeys.RoomExternalLinkCreated:\n return t(\"InfoPanel:RoomExternalLinkCreated\");\n case FeedActionKeys.RoomExternalLinkRenamed:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 188,

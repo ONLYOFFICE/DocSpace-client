@@ -3,7 +3,7 @@
   "content": "Start setting up",
   "content_en_sha1_hash": "68e48268020a3f2798df84f3bd36e4a12273da4c",
   "created_at": "2025-05-19T21:30:54.689Z",
-  "updated_at": "2025-05-24T08:46:55.990Z",
+  "updated_at": "2025-08-04T07:30:01.411Z",
   "comment": {
     "text": "This translation key is used to display a button label that triggers setting up a development environment. It appears in a small navigation button on a Portal Settings page, prompting users to start the setup process.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/PresetTile.js",
-      "line_number": 96,
-      "context": "<Text lineHeight=\"20px\">{description}</Text>\n </div>\n \n <Button\n className=\"navigationButton\"\n label={t(\"SetUp\")}\n icon={<ArrowIcon />}\n scale\n isClicked\n size=\"small\"\n />",
+      "line_number": 97,
+      "context": "</div>\n \n <Button\n testId={`sdk_preset_${title}_button`}\n className=\"navigationButton\"\n label={t(\"SetUp\")}\n icon={<ArrowIcon />}\n scale\n isClicked\n size=\"small\"\n />",
       "module": "/packages/client"
     }
   ],

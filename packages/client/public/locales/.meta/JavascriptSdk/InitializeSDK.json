@@ -3,7 +3,7 @@
   "content": "Select one of the suggested modes, or use Custom to configure all the parameters manually.",
   "content_en_sha1_hash": "702a3edd62462b46a16de2c782b32b69d774fd2c",
   "created_at": "2025-05-19T21:30:54.525Z",
-  "updated_at": "2025-05-24T09:16:08.781Z",
+  "updated_at": "2025-08-04T07:30:01.384Z",
   "comment": {
     "text": "This translation key is used to display a message that explains how to select an embedding mode for the SDK. It appears as part of a user interface element that prompts users to choose between suggested modes or manually configure parameters. The purpose is to provide context and clarity for users making settings choices.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 177,
+      "line_number": 178,
       "context": "</CategoryDescription>\n <CategoryHeader>\n {t(\"SelectModeEmbedding\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"InitializeSDK\")}\n </Text>\n <PresetsContainer className={`${isFlex ? \"presets-flex\" : \"\"}`}>\n {presetsData.map((data) => (\n <PresetTile\n t={t}",
       "module": "/packages/client"
     }

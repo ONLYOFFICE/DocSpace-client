@@ -42,6 +42,7 @@ import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 type AiRoomTabsProps = {
   id?: SelectedFolderStore["id"];
+  rootRoomId?: SelectedFolderStore["rootRoomId"];
 
   showTabsLoader?: ClientLoadingStore["showTabsLoader"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
@@ -52,6 +53,7 @@ type AiRoomTabsProps = {
 
 const AiRoomTabs = ({
   id,
+  rootRoomId,
 
   showTabsLoader,
   setIsSectionBodyLoading,
@@ -76,16 +78,18 @@ const AiRoomTabs = ({
 
     const filesFilter = FilesFilter.getDefault();
 
-    filesFilter.folder = id?.toString() ?? "";
+    filesFilter.folder = rootRoomId?.toString() ?? id?.toString() ?? "";
+
+    console.log(rootRoomId);
 
     if (tab.id === "chat") {
-      const path = getCategoryUrl(CategoryType.Chat, id);
+      const path = getCategoryUrl(CategoryType.Chat, rootRoomId ?? id);
 
       filesFilter.searchArea = SearchArea.Any;
 
       navigate(`${path}?${filesFilter.toUrlParams()}`);
     } else {
-      const path = getCategoryUrl(CategoryType.SharedRoom, id);
+      const path = getCategoryUrl(CategoryType.SharedRoom, rootRoomId ?? id);
 
       filesFilter.searchArea =
         tab.id === "knowledge"
@@ -133,10 +137,11 @@ export default inject(
 
     const { currentTab, setCurrentTab } = aiRoomStore;
 
-    const { id } = selectedFolderStore;
+    const { id, rootRoomId } = selectedFolderStore;
 
     return {
       id,
+      rootRoomId,
 
       showTabsLoader,
       setIsSectionBodyLoading,

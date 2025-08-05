@@ -38,7 +38,6 @@ import {
   Events,
   FilterKeys,
   RoomSearchArea,
-  SearchArea,
 } from "@docspace/shared/enums";
 import SocketHelper, {
   SocketCommands,
@@ -1710,7 +1709,7 @@ class FilesStore {
               ? data.current
               : { ...folder, id: folder.id };
 
-            const { title, roomType } = folderInfo;
+            const { title, roomType, folderType } = folderInfo;
 
             const isRootRoom =
               idx === 0 &&
@@ -1762,36 +1761,56 @@ class FilesStore {
               quotaLimit,
               usedSpace,
               isRootTemplates,
+              folderType,
             };
           }),
         ).then((res) => {
           return res
-            .filter((item, index) => {
-              return index !== res.length - 1;
+            .filter(
+              (item) =>
+                item.folderType !== FolderType.Knowledge &&
+                item.folderType !== FolderType.ResultStorage,
+            )
+            .filter((item, index, arr) => {
+              return index !== arr.length - 1;
             })
             .reverse();
         });
 
-        if (data.current.roomType === RoomsType.AIRoom) {
+        let currentFolder = data.current;
+
+        if (
+          currentFolder.type === FolderType.ResultStorage ||
+          currentFolder.type === FolderType.Knowledge
+        ) {
+          const room = await api.files.getFolderInfo(data.pathParts[1].id);
+
           this.aiRoomStore.setCurrentTab(
-            filterData.searchArea === SearchArea.Knowledge
-              ? "knowledge"
-              : +filterData.searchArea === SearchArea.ResultStorage
-                ? "result"
-                : "chat",
+            currentFolder.type === FolderType.ResultStorage
+              ? "result"
+              : "knowledge",
           );
+
+          currentFolder = room;
+        } else if (currentFolder.roomType === RoomsType.AIRoom) {
+          this.aiRoomStore.setCurrentTab("chat");
+        } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {
+          this.aiRoomStore.setCurrentTab("result");
         }
 
         runInAction(() => {
           this.selectedFolderStore.setSelectedFolder({
             folders: data.folders,
-            ...data.current,
+            ...currentFolder,
             inRoom: !!data.current.inRoom,
             isRoom: !!data.current.roomType,
             isTemplate:
               data.current.rootFolderType === FolderType.RoomTemplates,
             pathParts: data.pathParts,
             navigationPath,
+            rootRoomId: data.pathParts[1]
+              ? data.pathParts[1].id
+              : currentFolder.id,
             ...{ new: data.new },
             // type,
           });

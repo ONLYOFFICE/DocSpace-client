@@ -175,6 +175,10 @@ class SelectedFolderStore {
     | { modelId: string; providerId: number; prompt: string }
     | undefined;
 
+  rootRoomType: Nullable<RoomsType> = null;
+
+  rootRoomId: number | string = "";
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -233,6 +237,8 @@ class SelectedFolderStore {
       isIndexedFolder: this.isIndexedFolder,
       isAIRoom: this.isAIRoom,
       chatSettings: this.chatSettings,
+      rootRoomType: this.rootRoomType,
+      rootRoomId: this.rootRoomId,
     };
   };
 
@@ -287,6 +293,8 @@ class SelectedFolderStore {
     this.passwordProtected = false;
     this.external = false;
     this.chatSettings = undefined;
+    this.rootRoomType = null;
+    this.rootRoomId = "";
   };
 
   setFilesCount = (filesCount: number) => {
@@ -458,7 +466,8 @@ class SelectedFolderStore {
   get isAIRoom() {
     return (
       this.roomType === RoomsType.AIRoom ||
-      this.navigationPath.some((r) => r.roomType === RoomsType.AIRoom)
+      this.navigationPath.some((r) => r.roomType === RoomsType.AIRoom) ||
+      this.rootRoomType === RoomsType.AIRoom
     );
   }
 }

@@ -223,6 +223,7 @@ export type TFolder = {
   parentRoomType?: number;
   order?: string;
   isRoom?: false;
+  rootRoomType?: RoomsType;
 };
 
 export type TGetFolderPath = TFolder[];

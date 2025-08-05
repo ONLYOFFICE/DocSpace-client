@@ -53,6 +53,7 @@ import {
   DeviceType,
   FolderType,
   WhiteLabelLogoType,
+  SearchArea,
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -345,10 +346,16 @@ const SectionHeaderContent = (props) => {
 
     const itemIdx = selectedFolder.navigationPath.findIndex((v) => v.id === id);
 
+    const isRoomCalc = selectedFolder.navigationPath[itemIdx]?.isRoom || false;
+
+    if (isAIRoom && isRoomCalc) {
+      filter.searchArea = SearchArea.ResultStorage;
+    }
+
     const state = {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
       isRoot: itemIdx === selectedFolder.navigationPath.length - 1,
-      isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
+      isRoom: isRoomCalc,
       rootFolderType,
       isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
         ? selectedFolder.navigationPath[itemIdx]?.roomType ===

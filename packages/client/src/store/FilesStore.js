@@ -102,6 +102,7 @@ import {
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
+import { isRoom } from "@docspace/shared/utils/typeGuards";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -597,7 +598,11 @@ class FilesStore {
       api.files
         .getFolderInfo(folder.id)
         .then((response) => {
-          const f = { isFolder: true, ...response };
+          const f = {
+            isFolder: isRoom(response),
+            isRoom: isRoom(response),
+            ...response,
+          };
 
           console.log("[WS] update folder", f.id, f.title);
 

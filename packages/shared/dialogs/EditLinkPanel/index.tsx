@@ -285,9 +285,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         return response;
       }
 
-      const isFileItem = isFile(item);
-
-      if (isFolder(item) || isFileItem) {
+      if (isFolder(item) || isFile(item)) {
         const editApi = item.isFolder
           ? editExternalFolderLink
           : editExternalFileLink;

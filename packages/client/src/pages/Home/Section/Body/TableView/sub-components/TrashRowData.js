@@ -35,7 +35,6 @@ import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import { StyledBadgesContainer } from "../StyledTable";
 import ErasureCell from "./ErasureCell";
-import RoomCell from "./RoomCell";
 
 const TrashRowDataComponent = (props) => {
   const {

@@ -170,6 +170,7 @@ const PureHome = (props) => {
     checkGuests,
     hasGuests,
     sectionWithTabs,
+    isTrashRooms,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -233,6 +234,7 @@ const PureHome = (props) => {
     scrollToTop,
     selectedFolderStore,
     wsCreatedPDFForm,
+    isTrashRooms,
   });
 
   useOperations({
@@ -524,6 +526,8 @@ export const Component = inject(
       isRoomsFolderRoot,
       isTemplatesFolder,
       isRoot,
+      isTrashRooms,
+      isTrashFolder,
     } = treeFoldersStore;
 
     const {
@@ -588,7 +592,9 @@ export const Component = inject(
 
     const withDocumentTabs = isPersonalRoom || isRecentTab;
     const withRoomsTabs =
-      (isRoomsFolderRoot || isTemplatesFolder) && (isRoomAdmin || isAdmin);
+      (isRoomsFolderRoot || isTemplatesFolder) &&
+      (isRoomAdmin || isAdmin) &&
+      (isTrashRooms || isRecycleBinFolder);
 
     const sectionWithTabs = (withDocumentTabs || withRoomsTabs) && isRoot;
 
@@ -714,6 +720,8 @@ export const Component = inject(
       checkGuests,
       hasGuests,
       sectionWithTabs,
+      isTrashFolder,
+      isTrashRooms,
     };
   },
 )(observer(Home));

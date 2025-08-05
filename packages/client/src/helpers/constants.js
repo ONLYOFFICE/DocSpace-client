@@ -88,6 +88,7 @@ export const TableVersions = Object.freeze({
   Files: "3",
   People: "3",
   Trash: "4",
+  TrashRooms: "4",
   Groups: "6",
   InsideGroup: "6",
   Recent: "1",

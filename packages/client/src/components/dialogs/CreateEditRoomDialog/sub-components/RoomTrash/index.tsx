@@ -30,7 +30,7 @@ import { isMobileOnly, isMobile } from "react-device-detect";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 const StyledRoomTrash = styled.div`

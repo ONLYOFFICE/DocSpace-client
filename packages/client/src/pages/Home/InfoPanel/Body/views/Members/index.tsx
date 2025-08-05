@@ -124,7 +124,9 @@ const Members = ({
       const roomId = infoPanelSelection!.id;
 
       try {
-        await createExternalLink(roomId);
+        const link = await createExternalLink(roomId);
+
+        setExternalLink!(link, searchParams, setSearchParams, isCustomRoom);
       } catch (error) {
         toastr.error(error as Error);
         console.error(error);

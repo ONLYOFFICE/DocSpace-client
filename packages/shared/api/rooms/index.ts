@@ -471,7 +471,7 @@ export function createExternalLink(
       data,
     },
     skipRedirect,
-  );
+  ) as Promise<TFileLink>;
 }
 
 export function getExternalLinks(roomId, type) {
@@ -490,7 +490,7 @@ export function getPrimaryLink(roomId: number | string) {
   }) as Promise<TFileLink>;
 }
 
-export function validatePublicRoomKey(key) {
+export function validatePublicRoomKey(key: string) {
   return request<TValidateShareRoom>({
     method: "get",
     url: `files/share/${key}`,

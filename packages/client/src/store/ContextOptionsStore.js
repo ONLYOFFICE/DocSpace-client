@@ -1367,6 +1367,7 @@ class ContextOptionsStore {
       isArchiveFolder,
       isTemplatesFolder,
       isPersonalReadOnly,
+      isRoomsFolder,
     } = this.treeFoldersStore;
     const { roomsForDelete, roomsForRestore } = this.filesStore;
 
@@ -1402,7 +1403,7 @@ class ContextOptionsStore {
       ];
     }
 
-    if (isRecycleBinFolder) {
+    if (isRecycleBinFolder || isRoomsFolder) {
       return [
         {
           id: "header_option_empty-trash",
@@ -2274,11 +2275,40 @@ class ContextOptionsStore {
       isCollaborator: false,
     };
 
-    const newOptions = options.filter(
-      (option, index) =>
-        !(index === 0 && option.key === "separator1") &&
-        !(isCollaborator && option.key === "create-room"),
-    );
+    let newOptions;
+
+    if (this.treeFoldersStore.isRoomTrash) {
+      newOptions = [
+        {
+          id: "header_option_empty-archive",
+          key: "empty-archive",
+          label: t("EmptyRoomTrash"),
+          onClick: () => {},
+          disabled: false,
+          icon: ClearTrashReactSvgUrl,
+          "data-action": "",
+          action: "",
+        },
+        {
+          id: "option_unarchive-room",
+          key: "unarchive-room",
+          label: t("RestoreAll"),
+          icon: MoveReactSvgUrl,
+          onClick: () => {},
+          disabled: false,
+          "data-action": "",
+          action: "",
+        },
+      ];
+    } else {
+      newOptions = options.filter(
+        (option, index) =>
+          !(index === 0 && option.key === "separator1") &&
+          !(isCollaborator && option.key === "create-room"),
+      );
+    }
+
+    console.log("option", options, this.treeFoldersStore.isRoomTrash);
 
     return trimSeparator(newOptions);
   };

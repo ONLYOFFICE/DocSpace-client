@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  addExternalFolderLink,
+  addExternalLink,
   editExternalLink,
   getOrCreatePrimaryFolderLink,
   getPrimaryLinkIfNotExistCreate,
@@ -34,10 +36,6 @@ import { getPrimaryLink as getRoomPrimaryLink } from "../api/rooms";
 
 import { FolderType, ShareAccessRights } from "../enums";
 import { isFile, isRoom } from "../utils/typeGuards";
-import {
-  DEFAULT_CREATE_LINK_SETTINGS,
-  getExpirationDate,
-} from "../components/share/Share.helpers";
 
 import type { TRoom } from "../api/rooms/types";
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
@@ -46,6 +44,12 @@ import type { TFile, TFileLink, TFolder } from "../api/files/types";
  * Service for managing document sharing links
  */
 export class ShareLinkService {
+  private static readonly DEFAULT_CREATE_LINK_SETTINGS = {
+    access: ShareAccessRights.ReadOnly,
+    internal: false,
+    diffExpirationDate: null,
+  };
+
   /**
    * Determines the appropriate access rights for a file based on its properties
    * @param file - The file to determine access rights for
@@ -104,8 +108,8 @@ export class ShareLinkService {
     return getPrimaryLinkIfNotExistCreate(
       file.id,
       this.getShareLinkAccessFile(file),
-      DEFAULT_CREATE_LINK_SETTINGS.internal,
-      getExpirationDate(DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate),
+      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
     );
   }
 
@@ -120,8 +124,8 @@ export class ShareLinkService {
     return getOrCreatePrimaryFolderLink(
       folder.id,
       this.getShareLinkAccessFolder(folder),
-      DEFAULT_CREATE_LINK_SETTINGS.internal,
-      DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
+      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
     );
   }
 
@@ -159,5 +163,31 @@ export class ShareLinkService {
       internal,
       expirationDate,
     );
+  };
+
+  public static addExternalFileLink = async (file: TFile) => {
+    return addExternalLink(
+      file.id,
+      this.getShareLinkAccessFile(file),
+      false,
+      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
+    );
+  };
+
+  public static addExternalFolderLink = async (folder: TFolder) => {
+    return addExternalFolderLink(
+      folder.id,
+      this.getShareLinkAccessFolder(folder),
+      false,
+      this.DEFAULT_CREATE_LINK_SETTINGS.internal,
+      this.DEFAULT_CREATE_LINK_SETTINGS.diffExpirationDate,
+    );
+  };
+
+  public static addExternalLink = async (item: TFile | TFolder) => {
+    return isFile(item)
+      ? this.addExternalFileLink(item)
+      : this.addExternalFolderLink(item);
   };
 }

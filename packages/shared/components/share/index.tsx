@@ -39,8 +39,6 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import { ShareAccessRights } from "../../enums";
 import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
-  addExternalFolderLink,
-  addExternalLink,
   editExternalFolderLink,
   editExternalLink,
   getExternalFolderLinks,
@@ -63,12 +61,7 @@ import PublicRoomBar from "../public-room-bar";
 import LinkRow from "./sub-components/LinkRow";
 
 import type { AccessItem, ShareProps, TLink } from "./Share.types";
-import {
-  copyDocumentShareLink,
-  DEFAULT_CREATE_LINK_SETTINGS,
-  getExpirationDate,
-  evenPrimaryLink,
-} from "./Share.helpers";
+import { copyDocumentShareLink, evenPrimaryLink } from "./Share.helpers";
 import styles from "./Share.module.scss";
 
 const Share = (props: ShareProps) => {
@@ -197,18 +190,8 @@ const Share = (props: ShareProps) => {
     addLoaderLink();
 
     try {
-      const { access, internal, diffExpirationDate } =
-        DEFAULT_CREATE_LINK_SETTINGS;
-
-      const addLinkApi = isFolder ? addExternalFolderLink : addExternalLink;
-
-      const newLink = await addLinkApi(
-        infoPanelSelection.id,
-        access,
-        false,
-        internal,
-        getExpirationDate(diffExpirationDate),
-      );
+      const newLink =
+        await ShareLinkService.addExternalLink(infoPanelSelection);
 
       setFileLinks((links) => {
         const newLinks: TLink[] = [...links];

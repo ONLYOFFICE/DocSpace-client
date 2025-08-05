@@ -102,7 +102,7 @@ import {
   FILTER_TEMPLATES_ROOM,
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
-import { isRoom } from "@docspace/shared/utils/typeGuards";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -599,8 +599,8 @@ class FilesStore {
         .getFolderInfo(folder.id)
         .then((response) => {
           const f = {
-            isFolder: isRoom(response),
-            isRoom: isRoom(response),
+            isFolder: !isRoomUtil(response),
+            isRoom: isRoomUtil(response),
             ...response,
           };
 

@@ -1536,7 +1536,7 @@ export async function getPrimaryLinkIfNotExistCreate(
   fileId: number | string,
   access: ShareAccessRights,
   internal: boolean,
-  expirationDate: moment.Moment,
+  expirationDate: moment.Moment | null,
 ) {
   const res = (await request({
     method: "post",
@@ -1643,7 +1643,7 @@ export async function addExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment,
+  expirationDate?: moment.Moment | null,
 ) {
   const res = (await request({
     method: "put",

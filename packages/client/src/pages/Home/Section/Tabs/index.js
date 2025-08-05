@@ -39,6 +39,7 @@ const SectionSubmenuContent = ({
   isRoomsFolderRoot,
   isTemplatesFolder,
   isTrashFolder,
+  isRoomTrash,
   allowInvitingGuests,
   checkGuests,
   hasGuests,
@@ -64,7 +65,7 @@ const SectionSubmenuContent = ({
       <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
     );
   if (isRoomsFolderRoot || isTemplatesFolder) return <RoomTemplatesTabs />;
-  if (isTrashFolder) return <TrashTabs />;
+  if (isTrashFolder || isRoomTrash) return <TrashTabs />;
   return null;
 };
 
@@ -75,6 +76,8 @@ export default inject(({ treeFoldersStore, settingsStore }) => {
     isRoomsFolderRoot,
     isTemplatesFolder,
     isTrashFolder,
+    isRoomTrash,
+    setIsRoomTrash,
   } = treeFoldersStore;
 
   const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
@@ -84,9 +87,11 @@ export default inject(({ treeFoldersStore, settingsStore }) => {
     isRecentTab,
     isRoomsFolderRoot,
     isTemplatesFolder,
+    isTrashFolder,
+    isRoomTrash,
     allowInvitingGuests,
     checkGuests,
     hasGuests,
-    isTrashFolder,
+    setIsRoomTrash,
   };
 })(observer(SectionSubmenuContent));

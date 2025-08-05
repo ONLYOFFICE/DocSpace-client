@@ -38,19 +38,26 @@ import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
+import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import { FILTER_TRASH } from "@docspace/shared/utils/filterConstants";
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
 type TrashTabsProps = {
   setFilter: (filter: RoomsFilter | FilesFilter) => void;
   showTabsLoader: boolean;
   withTabs: boolean;
   userId: TUser["id"];
+  setIsRoomTrash: (isRoomTrash: boolean) => void;
+  currentFolderId: string | number | null;
 };
 
 const TrashTabs = ({
   setFilter,
   showTabsLoader,
-  withTabs,
   userId,
+  setIsRoomTrash,
+  currentFolderId,
 }: TrashTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -58,7 +65,7 @@ const TrashTabs = ({
   const items: TTabItem[] = [
     {
       id: "trash-files",
-      name: t("Common:TrashMyDocuments"),
+      name: t("Common:TrashDocuments"),
       content: null,
     },
     {
@@ -69,23 +76,38 @@ const TrashTabs = ({
   ];
 
   const onSelect = (e: TTabItem) => {
-    const trashMyDocuments = e.id === "trash-files";
+    const isTrashFiles = e.id === "trash-files";
+    const categoryType = isTrashFiles
+      ? CategoryType.TrashFiles
+      : CategoryType.TrashRooms;
 
-    const newFilter = trashMyDocuments
-      ? FilesFilter.getDefault()
+    setIsRoomTrash(!isTrashFiles);
+
+    const newFilter = isTrashFiles
+      ? createFilesTrashFilter()
       : RoomsFilter.getDefault(userId, RoomSearchArea.Trash);
 
-    const params = newFilter.toUrlParams(userId);
-
-    const path = trashMyDocuments
-      ? getCategoryUrl(CategoryType.TrashFiles)
-      : getCategoryUrl(CategoryType.TrashRooms);
+    const params = isTrashFiles
+      ? newFilter.toUrlParams()
+      : newFilter.toUrlParams(userId);
+    const path = getCategoryUrl(categoryType);
 
     setFilter(newFilter);
+    window.DocSpace.navigate(`${path}?${params}`, { replace: true });
+  };
 
-    window.DocSpace.navigate(`${path}?${params}`, {
-      replace: true,
-    });
+  const createFilesTrashFilter = () => {
+    const filter = FilesFilter.getDefault();
+    filter.folder = String(currentFolderId);
+
+    if (userId) {
+      const filterTrashObj = getUserFilter(`${FILTER_TRASH}=${userId}`);
+      if (filterTrashObj?.sortBy) filter.sortBy = filterTrashObj.sortBy;
+      if (filterTrashObj?.sortOrder)
+        filter.sortOrder = filterTrashObj.sortOrder;
+    }
+
+    return filter;
   };
 
   const getContactsView = (
@@ -121,16 +143,25 @@ export default inject(
   ({
     clientLoadingStore,
     filesStore,
+    treeFoldersStore,
+    selectedFolderStore,
   }: {
     clientLoadingStore: ClientLoadingStore;
     filesStore: FilesStore;
+    treeFoldersStore: TreeFoldersStore;
+    selectedFolderStore: SelectedFolderStore;
   }) => {
     const { showTabsLoader } = clientLoadingStore;
     const { setFilter } = filesStore;
+    const { id: currentFolderId } = selectedFolderStore;
+
+    const { setIsRoomTrash } = treeFoldersStore;
 
     return {
       setFilter,
       showTabsLoader,
+      setIsRoomTrash,
+      currentFolderId,
     };
   },
 )(observer(TrashTabs));

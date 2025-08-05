@@ -24,9 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-module.exports = {
-  globDirectory: "build/deploy/",
-  globPatterns: ["**/*.{ico,woff2,svg,html,json,js,png}"],
-  swSrc: "packages/shared/sw/template.js",
-  swDest: "public/sw.js",
+import type { InjectManifestOptions } from "workbox-build";
+
+const config: InjectManifestOptions = {
+  globDirectory: "../../../publish/web",
+  swSrc: "sw/template.js",
+  swDest: "../../../publish/web/public/sw.js",
+
+  globPatterns: [
+    // Critical resources
+    "**/*.{html,json}",
+    // Static assets
+    "**/*.{css,js}",
+    // Icons and images (limit size for performance)
+    "**/*.{ico,png,svg,webp}",
+    // Fonts (modern formats)
+    "**/*.{woff2,woff}",
+    // Manifest and service worker related
+    "**/manifest.json",
+    "**/offline.html",
+  ],
+
+  globIgnores: [
+    // Build artifacts and configs
+    "**/node_modules/**",
+    "**/.*",
+    "**/*.map",
+    "**/*.config.*",
+
+    // Large media files that shouldn't be precached
+    "**/*.{mp4,mp3,avi,mov,mkv}",
+    "**/*.{zip,tar,gz,rar}",
+
+    // Development files
+    "**/*.{log,tmp,temp}",
+    "**/test/**",
+    "**/tests/**",
+    "**/*.test.*",
+    "**/*.spec.*",
+
+    // Documentation and readme files
+    "**/*.md",
+    "**/README*",
+    "**/LICENSE*",
+
+    // Next.js specific ignores
+    "**/_next/static/chunks/webpack-*.js",
+    "**/buildManifest.js",
+    "**/ssgManifest.js",
+
+    // Large JSON files that change frequently
+    "**/locales/**/*.json",
+  ],
+
+  // Maximum file size to precache (3MB)
+  maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
 };
+
+export default config;

@@ -24,60 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable array-callback-return */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable func-names */
-/* eslint-disable no-console */
-function clearCaches() {
-  try {
-    if (!("caches" in window)) return;
+import serviceWorker from "./worker";
 
-    caches?.keys()?.then(function (keyList) {
-      return Promise.all(
-        keyList.map(function (key) {
-          if (
-            key.startsWith("workbox-") ||
-            key.startsWith("wb6-") ||
-            key.startsWith("docspace-")
-          ) {
-            return caches.delete(key);
-          }
-        }),
-      );
-    });
-  } catch (error) {
-    console.error("clearCaches failed", error);
+declare global {
+  interface Window {
+    SW: {
+      register: () => void;
+      unregister: () => void;
+    };
   }
 }
-export default function () {
-  if (process.env.NODE_ENV !== "production" || !("serviceWorker" in navigator))
-    return;
 
-  clearCaches();
+const registerSW = () => serviceWorker.register();
+const unregisterSW = () => serviceWorker.unregister();
 
-  return navigator.serviceWorker
-    .getRegistrations()
-    .then(function (registrations) {
-      for (const registration of registrations) {
-        registration
-          .unregister()
-          .then(function () {
-            return self.clients?.matchAll() || [];
-          })
-          .then(function (clients) {
-            clients.forEach((client) => {
-              if (client.url && "navigate" in client) {
-                client.navigate(client.url);
-              }
-            });
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
+window.SW = {
+  register: registerSW,
+  unregister: unregisterSW,
+};
+
+export { registerSW, unregisterSW };

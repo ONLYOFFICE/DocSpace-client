@@ -24,14 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import registerSW from "./register";
-import unregisterSW from "./unregister";
+import { injectManifest } from "workbox-build";
+import workboxConfig from "../workbox.config";
 
-window.SW = {
-  register: registerSW,
-  unregister: unregisterSW,
-};
+async function buildServiceWorker() {
+  try {
+    console.log("Building service worker with Workbox...");
 
-export { registerSW, unregisterSW };
-// TODO: Replace 'unregisterSW as registerSW' to 'registerSW' when sw.js is needed
-// export { registerSW, unregisterSW };
+    const { count, size, warnings } = await injectManifest(workboxConfig);
+
+    console.log(`Service worker built successfully!`);
+    console.log(
+      `Precached ${count} files, totaling ${(size / 1024 / 1024).toFixed(3)} MB.`,
+    );
+
+    if (warnings.length > 0) {
+      console.warn("Warnings:");
+      warnings.forEach((warning) => console.warn(`   ${warning}`));
+    }
+
+    console.log(`Service worker generated at: ${workboxConfig.swDest}`);
+  } catch (error) {
+    console.error("Error building service worker:", error);
+    process.exit(1);
+  }
+}
+
+buildServiceWorker();

@@ -25,61 +25,192 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { precacheAndRoute, cleanupOutdatedCaches } from "workbox-precaching";
-import { setCacheNameDetails, clientsClaim } from "workbox-core";
 import { registerRoute } from "workbox-routing";
-import { googleFontsCache, imageCache, offlineFallback } from "workbox-recipes";
-import { StaleWhileRevalidate } from "workbox-strategies";
-
-// SETTINGS
-
-// Claiming control to start runtime caching asap
-clientsClaim();
-
-// PRECACHING
-const prefix = "docspace";
-
-// Setting custom cache name
-setCacheNameDetails({
-  prefix,
-  precache: "precache",
-  runtime: "runtime",
-  suffix: "v3.2.0",
-});
+import {
+  NetworkFirst,
+  CacheFirst,
+  StaleWhileRevalidate,
+} from "workbox-strategies";
+import { ExpirationPlugin } from "workbox-expiration";
+import { CacheableResponsePlugin } from "workbox-cacheable-response";
+import { BackgroundSyncPlugin } from "workbox-background-sync";
 
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
-// STATIC RESOURCES
+self.addEventListener("install", () => {
+  self.skipWaiting();
+});
 
-googleFontsCache({ cachePrefix: `${prefix}-gfonts` });
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.clients.claim());
+});
 
-// TRANSLATIONS
+const CACHE_PREFIX = "docspace-v3.2.1";
+const CACHE_NAMES = {
+  static: `${CACHE_PREFIX}-static`,
+  api: `${CACHE_PREFIX}-api`,
+  pages: `${CACHE_PREFIX}-pages`,
+  images: `${CACHE_PREFIX}-images`,
+  translations: `${CACHE_PREFIX}-translations`,
+  fonts: `${CACHE_PREFIX}-fonts`,
+};
 
+const bgSyncPlugin = new BackgroundSyncPlugin("apiQueue", {
+  maxRetentionTime: 24 * 60, // Retry for max of 24 Hours (specified in minutes)
+});
+
+// API requests - Network first with 5s timeout
 registerRoute(
-  ({ url }) => url.pathname.indexOf("/locales/") !== -1,
-  // Use cache but update in the background.
-  new StaleWhileRevalidate({
-    // Use a custom cache name.
-    cacheName: `${prefix}-translation`,
+  ({ url }) => url.pathname.includes("/api/"),
+  new NetworkFirst({
+    cacheName: CACHE_NAMES.api,
+    networkTimeoutSeconds: 5,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 100,
+        maxAgeSeconds: 5 * 60, // 5 minutes
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      bgSyncPlugin,
+    ],
   }),
 );
 
-// CONTENT
+// Translation files - Stale while revalidate
+registerRoute(
+  ({ url }) => url.pathname.includes("/locales/"),
+  new StaleWhileRevalidate({
+    cacheName: CACHE_NAMES.translations,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 24 * 60 * 60, // 1 day
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  }),
+);
 
-imageCache({ cacheName: `${prefix}-images`, maxEntries: 60 });
+// Static assets (JS, CSS, fonts)
+registerRoute(
+  ({ request, url }) =>
+    request.destination === "script" ||
+    request.destination === "style" ||
+    request.destination === "font" ||
+    /\.(js|css|woff2?|ttf)$/.test(url.pathname),
+  new CacheFirst({
+    cacheName: CACHE_NAMES.static,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 200,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  }),
+);
 
-// APP SHELL UPDATE FLOW
+// Images
+registerRoute(
+  ({ request, url }) =>
+    request.destination === "image" ||
+    /\.(png|jpg|jpeg|gif|svg|webp|ico)$/.test(url.pathname),
+  new CacheFirst({
+    cacheName: CACHE_NAMES.images,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 100,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  }),
+);
 
-addEventListener("message", (event) => {
+// Google Fonts
+registerRoute(
+  ({ url }) =>
+    url.origin === "https://fonts.googleapis.com" ||
+    url.origin === "https://fonts.gstatic.com",
+  new CacheFirst({
+    cacheName: CACHE_NAMES.fonts,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 30,
+        maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  }),
+);
+
+// DocSpace application pages
+registerRoute(
+  ({ url }) =>
+    url.pathname.includes("/client/") ||
+    url.pathname.includes("/login/") ||
+    url.pathname.includes("/editor/") ||
+    url.pathname.includes("/management/") ||
+    url.pathname.includes("/sdk/"),
+  new NetworkFirst({
+    cacheName: CACHE_NAMES.pages,
+    networkTimeoutSeconds: 3,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 24 * 60 * 60, // 1 day
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
+  }),
+);
+
+self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });
 
-// FALLBACK
+if ("sync" in self.registration) {
+  self.addEventListener("sync", (event) => {
+    if (event.tag === "background-sync") {
+      event.waitUntil(doBackgroundSync());
+    }
+  });
+}
 
-offlineFallback({
-  pageFallback: "/static/offline/offline.html",
-  imageFallback: "/static/offline/offline.svg",
-  fontFallback: false,
+async function doBackgroundSync() {
+  try {
+    console.log("Background sync triggered");
+  } catch (error) {
+    console.error("Background sync failed:", error);
+  }
+}
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+
+  event.waitUntil(
+    self.clients.matchAll().then((clients) => {
+      if (clients.length > 0) {
+        return clients[0].focus();
+      }
+      return self.clients.openWindow("/");
+    }),
+  );
 });
+
+console.log("DocSpace Service Worker v3.2.1 activated with Workbox");

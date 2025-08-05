@@ -84,7 +84,11 @@ export const GroupMembersList = ({
     const item = members[index];
 
     return (
-      <div key={key} style={style}>
+      <div
+        key={key}
+        style={style}
+        data-testid={`info_panel_contacts_group_member_item_${index}`}
+      >
         {item ? (
           <GroupMember groupMember={item} isManager={false} />
         ) : (
@@ -93,6 +97,7 @@ export const GroupMembersList = ({
             isMultiSelect={false}
             isUser
             count={1}
+            data-testid={`info_panel_contacts_group_member_loader_${index}`}
           />
         )}
       </div>

@@ -2788,3 +2788,11 @@
   --settings-payment-border: 1px solid #{$gray-dark-strong};
   --settings-payment-bg-benefits-color: #{$black};
 }
+
+.light {
+  --quick-buttons-shared-color: #{$light-icons};
+}
+
+.dark {
+  --quick-buttons-shared-color: #{$white};
+}

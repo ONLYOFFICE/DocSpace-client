@@ -209,7 +209,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 data-id={id}
                 data-locked={!!locked}
                 onClick={onIconLockClick}
-                color={theme.filesQuickButtons.sharedColor}
+                color="--quick-buttons-shared-color"
                 hoverColor="accent"
                 title={t("Common:UnblockFile")}
                 data-tooltip-id={`lockTooltip${item.id}`}

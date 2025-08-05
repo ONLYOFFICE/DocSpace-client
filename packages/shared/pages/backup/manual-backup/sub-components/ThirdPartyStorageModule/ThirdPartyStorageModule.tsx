@@ -197,6 +197,7 @@ const ThirdPartyStorageModule = ({
               data-third-party-key={item.key}
               disabled={item.disabled}
               isActive={selectedId === item.key}
+              testId={`${item.key}_dropdown_item`}
             >
               <Text
                 className={classNames(
@@ -218,6 +219,7 @@ const ThirdPartyStorageModule = ({
                   )}
                   onClick={() => onSelect(item.key)}
                   iconName={ExternalLinkReactSvgUrl}
+                  dataTestId={`${item.key}_dropdown_item_icon`}
                 />
               ) : null}
             </DropDownItem>
@@ -251,6 +253,8 @@ const ThirdPartyStorageModule = ({
           advancedOptions={advancedOptions}
           selectedOption={{ key: 0, label: selectedStorageTitle }}
           isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
+          dataTestId="backup_storage_combobox"
+          dropDownTestId="backup_storage_dropdown"
         />
 
         {selectedId === ThirdPartyStorages.GoogleId ? (

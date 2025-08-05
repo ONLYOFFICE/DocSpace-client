@@ -85,6 +85,7 @@ const QuotasComponent = (props) => {
             target="_blank"
             href={storageManagementUrl}
             color="accent"
+            dataTestId="help_center_link"
           >
             {t("Common:HelpCenter")}
           </Link>

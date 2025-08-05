@@ -131,6 +131,7 @@ const GoogleCloudStorage = ({
           primary
           isDisabled={!isValidForm || !isMaxProgress || isDisabled}
           size={buttonSize}
+          testId="google_cloud_create_copy_button"
         />
       </div>
     </div>

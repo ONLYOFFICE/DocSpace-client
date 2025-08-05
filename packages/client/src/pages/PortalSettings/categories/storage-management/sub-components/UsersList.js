@@ -94,6 +94,7 @@ const StatisticsComponent = (props) => {
           {...buttonProps}
           label={t("Common:ShowMore")}
           onClick={onClickUsers}
+          testId="show_more_users_button"
         />
       ) : null}
     </StyledStatistics>

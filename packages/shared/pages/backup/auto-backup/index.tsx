@@ -428,6 +428,7 @@ const AutomaticBackup = ({
             fontSize="13px"
             color={currentColorScheme?.main?.accent}
             isHovered
+            dataTestId="automatic_backup_learn_link"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -448,6 +449,7 @@ const AutomaticBackup = ({
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
           isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+          dataTestId="enable_automatic_backup_button"
         />
 
         <div className={classNames(styles.toggleCaption, "toggle-caption")}>
@@ -506,6 +508,7 @@ const AutomaticBackup = ({
               name={`${BackupStorageType.DocumentModuleType}`}
               isChecked={isCheckedDocuments}
               isDisabled={isLoadingData}
+              testId="auto_backup_room_radio_button"
             />
             <Text
               className={classNames(
@@ -555,6 +558,7 @@ const AutomaticBackup = ({
               name={`${BackupStorageType.ResourcesModuleType}`}
               isChecked={isCheckedThirdParty}
               isDisabled={isLoadingData}
+              testId="auto_backup_resource_radio_button"
             />
             <Text
               className={classNames(
@@ -620,6 +624,7 @@ const AutomaticBackup = ({
               name={`${BackupStorageType.StorageModuleType}`}
               isChecked={isCheckedThirdPartyStorage}
               isDisabled={isLoadingData}
+              testId="auto_backup_storage_radio_button"
             />
             <Text
               className={classNames(
@@ -673,6 +678,8 @@ const AutomaticBackup = ({
           saveButtonDisabled={isSaveCancelDisabled}
           disableRestoreToDefault={isSaveCancelDisabled}
           displaySettings
+          saveButtonDataTestId="auto_backup_storage_save_button"
+          cancelButtonDataTestId="auto_backup_storage_cancel_button"
         />
       ) : null}
 

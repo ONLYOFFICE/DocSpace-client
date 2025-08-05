@@ -263,6 +263,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
             "restore-backup_input",
           )}
           isDisabled={!isEnableRestore}
+          data-test-id="restore_backup_file_input"
         />
       ) : null}
 
@@ -285,6 +286,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           setBasePath={setBasePath}
           toDefault={toDefault}
           setNewPath={setNewPath}
+          dataTestId="restore_backup_files_selector"
         />
       ) : null}
       {radioButtonState === DISK_SPACE ? (
@@ -324,6 +326,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           providers={providers}
           removeItem={removeItem}
           filesSelectorSettings={settingsFileSelector}
+          dataTestId="restore_backup"
         />
       ) : null}
       {radioButtonState === STORAGE_SPACE ? (
@@ -424,6 +427,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         )}
         {...onClickVersionListProp}
         noSelect
+        dataTestId="restore_backup_list_button"
       >
         {t("Common:BackupList")}
       </Text>
@@ -450,6 +454,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         isChecked={checkboxState.notification}
         label={t("Common:SendNotificationAboutRestoring")}
         isDisabled={!isEnableRestore}
+        dataTestId="about_restoring_checkbox"
       />
       {warningContent}
       <Checkbox
@@ -463,6 +468,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         isChecked={checkboxState.confirmation}
         label={t("Common:UserAgreement")}
         isDisabled={!isEnableRestore}
+        dataTestId="user_agreement_checkbox"
       />
       <ButtonContainer
         setErrorInformation={setErrorInformation}

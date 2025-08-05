@@ -31,7 +31,7 @@ import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
 
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
-
+import { globalColors } from "@docspace/shared/themes";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
@@ -81,7 +81,7 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
 
     box-sizing: border-box;
 
-    border: 1px solid #d0d5da;
+    border: 1px solid ${globalColors.grayStrong};
     border-radius: 3px;
     display: flex;
     justify-content: center;

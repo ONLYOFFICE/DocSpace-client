@@ -3,7 +3,7 @@
   "content": "Data display settings",
   "content_en_sha1_hash": "a3c510d4ebfdbe955be8697ef65b42208a7ea4eb",
   "created_at": "2025-05-19T21:30:54.443Z",
-  "updated_at": "2025-05-24T09:27:58.665Z",
+  "updated_at": "2025-08-04T07:30:01.390Z",
   "comment": {
     "text": "\"This translation key is used for the 'Data Display' subheader that appears on multiple pages in the PortalSettings categories, providing a consistent title and helping users navigate the settings.\"",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 405,
+      "line_number": 421,
       "context": "<SelectTextInput t={t} config={config} setConfig={setConfig} />\n <CancelTextInput t={t} config={config} setConfig={setConfig} />\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"DataDisplay\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 567,
+      "line_number": 582,
       "context": "/>\n </LabelGroup>\n </CheckboxGroup>\n </ControlsSection>\n <ControlsSection>\n <CategorySubHeader>{t(\"DataDisplay\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"RoomOrFolder\")} />\n <HelpButton\n offsetRight={0}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 295,
+      "line_number": 294,
       "context": "t={t}\n onSetSource={onSetSource}\n onSetVersion={onSetVersion}\n />\n <ControlsSection>\n <CategorySubHeader>{t(\"DataDisplay\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:Room\")} />\n <HelpButton\n offsetRight={0}",
       "module": "/packages/client"
     }

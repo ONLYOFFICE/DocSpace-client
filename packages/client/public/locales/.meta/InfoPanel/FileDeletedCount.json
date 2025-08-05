@@ -3,13 +3,19 @@
   "content": "Files removed ({{count}}).",
   "content_en_sha1_hash": "042a8b55f4b0f4f8ec5ac79191e404ed05a3b7a0",
   "created_at": "2025-05-19T21:30:54.807Z",
-  "updated_at": "2025-06-30T12:20:31.339Z",
+  "updated_at": "2025-08-04T07:30:01.223Z",
   "comment": {
     "text": "This translation key displays a message indicating the number of files removed, typically appearing as a count after deleting multiple files. It is used to provide visual feedback and context in a UI component that handles file deletion or history views.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:41:05.487Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 97,
+      "context": "count,\n });\n return t(\"InfoPanel:FileCopied\");\n case FeedActionKeys.FileDeleted:\n if (hasRelatedItems)\n return t(\"InfoPanel:FileDeletedCount\", {\n count,\n });\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 91,

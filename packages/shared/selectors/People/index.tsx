@@ -143,6 +143,7 @@ const toListItem = (
 
     name: groupName,
     shared,
+    isSystem,
   } = item;
 
   const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
@@ -155,6 +156,7 @@ const toListItem = (
     label: groupName,
     disabledText,
     isDisabled: isInvited,
+    isSystem,
   };
 };
 

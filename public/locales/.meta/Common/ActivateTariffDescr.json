@@ -3,7 +3,7 @@
   "content": "You are using {{organizationName}} {{productName}} {{license}}.",
   "content_en_sha1_hash": "b4abdf15a611d8d64134d0f192a4d7f887e9e399",
   "created_at": "2025-05-26T07:15:40.136Z",
-  "updated_at": "2025-05-26T08:08:35.285Z",
+  "updated_at": "2025-08-04T07:30:01.742Z",
   "comment": {
     "text": "This translation key generates a descriptive message used in a tariff title container on a payment page, indicating the product name and license information. It displays when a user activates their tariff.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
-      "line_number": 99,
-      "context": "isLicenseDateExpired={isLicenseDateExpired}\n >\n <div className=\"payments_subscription\">\n <div className=\"title\">\n <Text fontWeight={600} fontSize=\"14px\" as=\"span\">\n {t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),",
+      "line_number": 106,
+      "context": "})}\n >\n <div className={styles.paymentsSubscription}>\n <div className={styles.title}>\n <Text fontWeight={600} fontSize=\"14px\" as=\"span\">\n {t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),",
       "module": "/packages/shared"
     }
   ],

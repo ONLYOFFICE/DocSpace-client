@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2025-05-24T09:12:56.084Z",
+  "updated_at": "2025-08-04T07:30:01.381Z",
   "comment": {
     "text": "\"Javascript SDK\" is a label used to describe presets or settings related to the JavaScript SDK, likely found in developer tools or settings pages, guiding users through configuration options.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
       "line_number": 85,
-      "context": "} from \"./StyledPresets\";\n \n const FileSelector = (props) => {\n const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n { value: FilesSelectorFilterTypes.ALL, label: t(\"AllTypes\") },\n {\n value: \"EditorSupportedTypes\",",
+      "context": "} from \"./StyledPresets\";\n \n const FileSelector = (props) => {\n const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n {\n value: FilesSelectorFilterTypes.ALL,\n label: t(\"AllTypes\"),",
       "module": "/packages/client"
     },
     {

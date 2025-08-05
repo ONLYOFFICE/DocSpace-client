@@ -58,20 +58,21 @@ const InfiniteGrid = (props) => {
     fetchMoreFiles,
     filesLength,
     className,
+    isShowOneTile,
     ...rest
   } = props;
 
   // Pass isTemplates=true to align with template breakpoints
   const [countTilesInRow, setCountTilesInRow] = useState(
-    getCountTilesInRow(false, false, true),
+    getCountTilesInRow(false, false, true, isShowOneTile),
   );
 
   let cards = [];
   const list = [];
 
-  const addItemToList = (key, clear) => {
+  const addItemToList = (key, clear, isOneTile) => {
     list.push(
-      <Item key={key} className="isTemplateGallery">
+      <Item key={key} className="isTemplateGallery" isOneTile={isOneTile}>
         {cards}
       </Item>,
     );
@@ -79,7 +80,7 @@ const InfiniteGrid = (props) => {
   };
 
   const setTilesCount = () => {
-    const newCount = getCountTilesInRow(false, false, true);
+    const newCount = getCountTilesInRow(false, false, true, isShowOneTile);
     if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 
@@ -100,7 +101,7 @@ const InfiniteGrid = (props) => {
     if (child) {
       if (cards.length && cards.length === countTilesInRow) {
         const listKey = uniqueid("list-item_");
-        addItemToList(listKey, true);
+        addItemToList(listKey, true, isShowOneTile);
       }
 
       const cardKey = uniqueid("card-item_");
@@ -115,7 +116,7 @@ const InfiniteGrid = (props) => {
   if (hasMoreFiles) {
     // If cards elements are full, it will add the full line of loaders
     if (cards.length === countTilesInRow) {
-      addItemToList("loaded-row", true);
+      addItemToList("loaded-row", true, isShowOneTile);
     }
 
     // Added line of loaders
@@ -130,13 +131,14 @@ const InfiniteGrid = (props) => {
       );
     }
 
-    addItemToList("loaded-row");
+    addItemToList("loaded-row", false, isShowOneTile);
   } else if (cards.length) {
     // Adds loaders until the row is full
     const listKey = uniqueid("list-item_");
-    addItemToList(listKey);
+    addItemToList(listKey, false, isShowOneTile);
   }
 
+  console.log("countTilesInRow", countTilesInRow);
   return (
     <InfiniteLoaderComponent
       viewAs="tileDynamicHeight"

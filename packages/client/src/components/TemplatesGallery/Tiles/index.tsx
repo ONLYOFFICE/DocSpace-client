@@ -49,6 +49,7 @@ const Tiles: FC<TilesProps> = ({
   // categoryFilterLoaded,
   // languageFilterLoaded,
   // oformFilesLoaded,
+  isShowOneTile,
 }) => {
   const onMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -77,7 +78,7 @@ const Tiles: FC<TilesProps> = ({
   }, [tReady, oformFiles]);
 
   return (
-    <TileContainer className="tile-container">
+    <TileContainer className="tile-container" isShowOneTile={isShowOneTile}>
       {oformFiles.map((item: { id: Key | null | undefined }) => {
         return <FileTile key={item.id} item={item} />;
       })}

@@ -32,6 +32,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import styled, { css } from "styled-components";
 
 import CategoryFilterDesktop from "./DesktopView";
+import CategoryFilterMobile from "./MobileView";
 
 export const StyledCategoryFilterWrapper = styled.div`
   width: 100%;
@@ -159,6 +160,7 @@ const CategoryFilter = ({
       className="categoryFilterWrapper"
     >
       <CategoryFilterDesktop className="desktopView" menuItems={menuItems} />
+      <CategoryFilterMobile className="mobileView" menuItems={menuItems} />
     </StyledCategoryFilterWrapper>
   );
 };

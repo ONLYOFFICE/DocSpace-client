@@ -51,6 +51,7 @@ export interface TilesProps {
    * Callback that informs mobx store whether the `oformFiles` have been fetched and can be displayed.
    */
   setOformFilesLoaded: (loaded: boolean) => void;
+  isShowOneTile?: boolean;
 }
 
 export interface TileProps {

@@ -460,6 +460,12 @@ const StyledItem = styled.div`
     grid-template-columns: repeat(6, 1fr);
   }
 
+  ${(props) =>
+    props.isOneTile &&
+    css`
+      grid-template-columns: 1fr;
+    `}
+
   /* Maintain 16px gap between items in all directions */
   grid-gap: 16px;
 `;

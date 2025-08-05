@@ -25,8 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { ReactSVG } from "react-svg";
+
+import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
+import ViewChangeReactUrl from "PUBLIC_DIR/images/view-change.react.svg?url";
 
 import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
+
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
@@ -68,6 +73,26 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
     max-width: 100%;
   }
 
+  .view-button {
+    width: 32px;
+    height: 32px;
+
+    min-width: 32px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d0d5da;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon-view {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
   @media ${tablet} {
     padding-bottom: 16px;
   }
@@ -82,10 +107,18 @@ export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
     .general-filters {
       max-width: 100%;
     }
+
+    padding-right: 16px;
   }
 `;
 
-const SectionFilterContent = () => {
+const SectionFilterContent = (props) => {
+  const { setShowOneTile, isShowOneTile, viewMobile } = props;
+
+  const onClickViewChange = () => {
+    setShowOneTile(!isShowOneTile);
+  };
+
   return (
     <StyledFilter>
       <div className="form-only-filters">
@@ -95,6 +128,14 @@ const SectionFilterContent = () => {
       <div className="general-filters">
         <SearchFilter />
         <SortFilter />
+        {viewMobile ? (
+          <div className="view-button" onClick={onClickViewChange}>
+            <ReactSVG
+              src={isShowOneTile ? ViewTilesReactSvg : ViewChangeReactUrl}
+              className="icon-view"
+            />
+          </div>
+        ) : null}
       </div>
     </StyledFilter>
   );

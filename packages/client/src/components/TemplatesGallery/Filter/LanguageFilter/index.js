@@ -72,7 +72,9 @@ const LanguageFilter = ({
 
     await filterOformsByLocale(key);
 
-    const [sectionScroll] = document.getElementsByClassName("section-scroll");
+    const sectionScroll = document.querySelector(
+      "#scroll-templates-gallery .scroll-wrapper > .scroller",
+    );
     sectionScroll.scrollTop = 0;
   };
 

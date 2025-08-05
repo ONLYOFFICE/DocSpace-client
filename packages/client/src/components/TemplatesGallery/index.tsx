@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useState, useEffect } from "react";
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs } from "@docspace/shared/components/tabs";
+import { isMobile } from "@docspace/shared/utils";
 
 import Form from "./Form";
 import styles from "./TemplatesGallery.module.scss";
@@ -36,6 +38,22 @@ const FormComponent = Form as React.ComponentType;
 
 const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
   const { templatesGalleryVisible } = props;
+  const [viewMobile, setViewMobile] = useState(false);
+
+  const onCheckView = () => {
+    if (isMobile()) {
+      setViewMobile(true);
+    } else {
+      setViewMobile(false);
+    }
+  };
+
+  useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, [onCheckView]);
 
   const tabs = [
     {
@@ -73,8 +91,24 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
     </>
   );
 
+  const nodeTemplatesGalleryMobile = (
+    <>
+      <Backdrop visible withBackground />
+      <div className={styles.containerMobile}>
+        <div className={styles.templatesGalleryMobile}>
+          <div className={styles.header}>Template gallery</div>
+
+          <Tabs items={tabs} selectedItemId="forms" />
+        </div>
+      </div>
+    </>
+  );
+
   return (
-    <Portal visible={templatesGalleryVisible} element={nodeTemplatesGallery} />
+    <Portal
+      visible={templatesGalleryVisible}
+      element={viewMobile ? nodeTemplatesGalleryMobile : nodeTemplatesGallery}
+    />
   );
 };
 

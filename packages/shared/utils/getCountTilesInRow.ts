@@ -33,8 +33,13 @@ export const getCountTilesInRow = (
   isRooms?: boolean,
   isTemplates?: boolean,
   isTemplatesGallery?: boolean,
+  isShowOneTile?: boolean,
 ) => {
   if (isTemplatesGallery) {
+    if (isShowOneTile) {
+      return 1;
+    }
+
     if (window.innerWidth > 600 && window.innerWidth <= 959) {
       return 3;
     }

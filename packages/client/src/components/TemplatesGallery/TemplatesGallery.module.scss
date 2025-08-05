@@ -56,3 +56,19 @@
 
   line-height: 28px;
 }
+
+.containerMobile {
+  position: absolute;
+
+  top: 32px;
+
+  z-index: 204;
+
+  width: 100%;
+  height: 100%;
+}
+
+.templatesGalleryMobile {
+  background-color: var(--background-color);
+  height: 100%;
+}

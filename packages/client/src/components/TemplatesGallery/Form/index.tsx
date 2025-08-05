@@ -29,6 +29,7 @@ import { observer, inject } from "mobx-react";
 import { useLocation } from "react-router";
 
 import OformsFilter from "@docspace/shared/api/oforms/filter";
+import { isMobile } from "@docspace/shared/utils";
 
 import type { FC } from "react";
 
@@ -57,6 +58,24 @@ const Form: FC<FormProps> = ({
   // const navigate = useNavigate();
 
   const [isInitLoading, setIsInitLoading] = useState(true);
+  const [isShowOneTile, setShowOneTile] = useState(false);
+
+  const [viewMobile, setViewMobile] = useState(false);
+
+  const onCheckView = () => {
+    if (isMobile()) {
+      setViewMobile(true);
+    } else {
+      setViewMobile(false);
+    }
+  };
+
+  useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, [onCheckView]);
 
   useEffect(() => {
     console.log("location", location);
@@ -88,13 +107,26 @@ const Form: FC<FormProps> = ({
 
   return (
     <div style={{ width: "100%", paddingLeft: "16px" }}>
-      <SectionFilterContent />
-      <Scrollbar
-        style={{ height: "calc(100vh - 286px)" }}
-        id="scroll-templates-gallery"
-      >
-        <Tiles />
-      </Scrollbar>
+      <SectionFilterContent
+        isShowOneTile={isShowOneTile}
+        setShowOneTile={setShowOneTile}
+        viewMobile={viewMobile}
+      />
+      {viewMobile ? (
+        <Scrollbar
+          style={{ height: "calc(100vh - 227px)" }}
+          id="scroll-templates-gallery"
+        >
+          <Tiles isShowOneTile={isShowOneTile} />
+        </Scrollbar>
+      ) : (
+        <Scrollbar
+          style={{ height: "calc(100vh - 286px)" }}
+          id="scroll-templates-gallery"
+        >
+          <Tiles />
+        </Scrollbar>
+      )}
     </div>
   );
 };

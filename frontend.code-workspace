@@ -250,6 +250,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:colors\" task"
           },
           {
+            "label": "Test zIndex",
+            "task": "Test | Jest:zIndex",
+            "tooltip": "🛠️ Start the \"Test | Jest:zIndex\" task"
+          },
+          {
             "label": "Test dependencies",
             "task": "Test | Jest:dependencies",
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task"

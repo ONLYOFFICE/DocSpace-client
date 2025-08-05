@@ -237,4 +237,5 @@ export type FilterProps = SearchInputProps &
 
     currentDeviceType: DeviceType;
     initSelectedFilterData?: TItem[];
+    isRoomTrash?: boolean;
   };

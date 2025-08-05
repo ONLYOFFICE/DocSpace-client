@@ -483,6 +483,8 @@ const FilterBlock = ({
     return !isEqual;
   };
 
+  console.log("filter data", filterData);
+
   const showFooter = isLoading ? false : isEqualFilter();
   const showClearFilterBtn =
     !isLoading && (selectedFilterValue.size > 0 || filterValues.length > 0);

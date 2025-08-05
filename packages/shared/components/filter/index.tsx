@@ -94,6 +94,7 @@ const FilterInput = React.memo(
 
     initSearchValue,
     initSelectedFilterData,
+    isRoomTrash,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -242,6 +243,7 @@ const FilterInput = React.memo(
           {viewSettings &&
           !isIndexing &&
           !isFlowsPage &&
+          !isRoomTrash &&
           currentDeviceType === DeviceType.desktop &&
           viewSelectorVisible ? (
             <ViewSelector

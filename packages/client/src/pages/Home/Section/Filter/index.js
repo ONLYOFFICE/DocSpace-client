@@ -129,6 +129,7 @@ const SectionFilterContent = ({
   showStorageInfo,
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
+  isRoomTrash,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -775,132 +776,133 @@ const SectionFilterContent = ({
       },
     ];
 
-    const typeOptions = isRooms
-      ? [
-          {
-            key: FilterGroups.filterType,
-            group: FilterGroups.roomFilterType,
-            label: t("Common:Type"),
-            isHeader: true,
-            isLast: isLastTypeOptionsRooms,
-          },
-          ...RoomsTypeValues.map((roomType) => {
-            switch (roomType) {
-              case RoomsType.FillingFormsRoom:
-                return {
-                  id: "filter_type-filling-form",
-                  key: RoomsType.FillingFormsRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:FillingFormRooms"),
-                };
-              case RoomsType.EditingRoom:
-                return {
-                  id: "filter_type-collaboration",
-                  key: RoomsType.EditingRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:CollaborationRooms"),
-                };
-              case RoomsType.ReviewRoom:
-                return {
-                  id: "filter_type-review",
-                  key: RoomsType.ReviewRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:Review"),
-                };
-              case RoomsType.ReadOnlyRoom:
-                return {
-                  id: "filter_type-view-only",
-                  key: RoomsType.ReadOnlyRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:ViewOnlyRooms"),
-                };
-              case RoomsType.FormRoom:
-                return {
-                  id: "filter_type-form",
-                  key: RoomsType.FormRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:FormRoom"),
-                };
-              case RoomsType.PublicRoom:
-                return {
-                  id: "filter_type-public",
-                  key: RoomsType.PublicRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:PublicRoom"),
-                };
-              case RoomsType.VirtualDataRoom:
-                return {
-                  id: "filter_type-virtual-data",
-                  key: RoomsType.VirtualDataRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:VirtualDataRoom"),
-                };
-              case RoomsType.CustomRoom:
-              default:
-                return {
-                  id: "filter_type-custom",
-                  key: RoomsType.CustomRoom,
-                  group: FilterGroups.roomFilterType,
-                  label: t("Common:CustomRooms"),
-                };
-            }
-          }),
-        ]
-      : [
-          {
-            key: FilterGroups.filterType,
-            group: FilterGroups.filterType,
-            label: t("Common:Type"),
-            isHeader: true,
-            isLast: true,
-          },
-          ...folders,
-          {
-            id: "filter_type-all-files",
-            key: FilterType.FilesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Common:Files"),
-          },
-          {
-            id: "filter_type-documents",
-            key: FilterType.DocumentsOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Common:Documents"),
-          },
-          {
-            id: "filter_type-spreadsheets",
-            key: FilterType.SpreadsheetsOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Common:Spreadsheets"),
-          },
-          {
-            id: "filter_type-presentations",
-            key: FilterType.PresentationsOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Common:Presentations"),
-          },
-          {
-            id: "filter_type-pdf",
-            key: FilterType.Pdf.toString(),
-            group: FilterGroups.filterType,
-            label: getManyPDFTitle(t, false),
-          },
-          {
-            id: "filter_type-forms",
-            key: FilterType.PDFForm.toString(),
-            group: FilterGroups.filterType,
-            label: getManyPDFTitle(t, true),
-          },
-          {
-            id: "filter_type-diagrams",
-            key: FilterType.DiagramsOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Common:Diagrams"),
-          },
-          ...archives,
-          ...images,
-          ...media,
-        ];
+    const typeOptions =
+      isRooms || isRoomTrash
+        ? [
+            {
+              key: FilterGroups.filterType,
+              group: FilterGroups.roomFilterType,
+              label: t("Common:Type"),
+              isHeader: true,
+              isLast: isLastTypeOptionsRooms,
+            },
+            ...RoomsTypeValues.map((roomType) => {
+              switch (roomType) {
+                case RoomsType.FillingFormsRoom:
+                  return {
+                    id: "filter_type-filling-form",
+                    key: RoomsType.FillingFormsRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:FillingFormRooms"),
+                  };
+                case RoomsType.EditingRoom:
+                  return {
+                    id: "filter_type-collaboration",
+                    key: RoomsType.EditingRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:CollaborationRooms"),
+                  };
+                case RoomsType.ReviewRoom:
+                  return {
+                    id: "filter_type-review",
+                    key: RoomsType.ReviewRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:Review"),
+                  };
+                case RoomsType.ReadOnlyRoom:
+                  return {
+                    id: "filter_type-view-only",
+                    key: RoomsType.ReadOnlyRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:ViewOnlyRooms"),
+                  };
+                case RoomsType.FormRoom:
+                  return {
+                    id: "filter_type-form",
+                    key: RoomsType.FormRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:FormRoom"),
+                  };
+                case RoomsType.PublicRoom:
+                  return {
+                    id: "filter_type-public",
+                    key: RoomsType.PublicRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:PublicRoom"),
+                  };
+                case RoomsType.VirtualDataRoom:
+                  return {
+                    id: "filter_type-virtual-data",
+                    key: RoomsType.VirtualDataRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:VirtualDataRoom"),
+                  };
+                case RoomsType.CustomRoom:
+                default:
+                  return {
+                    id: "filter_type-custom",
+                    key: RoomsType.CustomRoom,
+                    group: FilterGroups.roomFilterType,
+                    label: t("Common:CustomRooms"),
+                  };
+              }
+            }),
+          ]
+        : [
+            {
+              key: FilterGroups.filterType,
+              group: FilterGroups.filterType,
+              label: t("Common:Type"),
+              isHeader: true,
+              isLast: true,
+            },
+            ...folders,
+            {
+              id: "filter_type-all-files",
+              key: FilterType.FilesOnly.toString(),
+              group: FilterGroups.filterType,
+              label: t("Common:Files"),
+            },
+            {
+              id: "filter_type-documents",
+              key: FilterType.DocumentsOnly.toString(),
+              group: FilterGroups.filterType,
+              label: t("Common:Documents"),
+            },
+            {
+              id: "filter_type-spreadsheets",
+              key: FilterType.SpreadsheetsOnly.toString(),
+              group: FilterGroups.filterType,
+              label: t("Common:Spreadsheets"),
+            },
+            {
+              id: "filter_type-presentations",
+              key: FilterType.PresentationsOnly.toString(),
+              group: FilterGroups.filterType,
+              label: t("Common:Presentations"),
+            },
+            {
+              id: "filter_type-pdf",
+              key: FilterType.Pdf.toString(),
+              group: FilterGroups.filterType,
+              label: getManyPDFTitle(t, false),
+            },
+            {
+              id: "filter_type-forms",
+              key: FilterType.PDFForm.toString(),
+              group: FilterGroups.filterType,
+              label: getManyPDFTitle(t, true),
+            },
+            {
+              id: "filter_type-diagrams",
+              key: FilterType.DiagramsOnly.toString(),
+              group: FilterGroups.filterType,
+              label: t("Common:Diagrams"),
+            },
+            ...archives,
+            ...images,
+            ...media,
+          ];
 
     const subjectOptions = [
       {
@@ -1399,6 +1401,7 @@ const SectionFilterContent = ({
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
       isFlowsPage={isFlowsPage}
+      isRoomTrash={isRoomTrash}
     />
   );
 };
@@ -1450,6 +1453,7 @@ export default inject(
       isPersonalRoom,
       isTrashFolder: isTrash,
       isTemplatesFolder,
+      isRoomTrash,
     } = treeFoldersStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
@@ -1528,6 +1532,7 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
+      isRoomTrash,
     };
   },
 )(

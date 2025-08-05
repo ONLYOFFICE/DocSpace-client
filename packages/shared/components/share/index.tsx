@@ -329,7 +329,7 @@ const Share = (props: ShareProps) => {
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
       const expDate = moment(link.sharedTo.expirationDate);
-      await removeLinkApi(
+      const newLink = await removeLinkApi(
         infoPanelSelection.id,
         link.sharedTo.id,
         ShareAccessRights.None,
@@ -343,6 +343,11 @@ const Share = (props: ShareProps) => {
         toastr.success(t("Common:LinkRemoved"));
       } else {
         setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
+        setFileLinks((links) =>
+          links.map((l) =>
+            "sharedTo" in l && l.sharedTo.id === link.sharedTo.id ? newLink : l,
+          ),
+        );
         toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
       }
     } catch (error) {

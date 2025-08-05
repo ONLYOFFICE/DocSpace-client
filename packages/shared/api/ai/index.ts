@@ -43,26 +43,6 @@ import {
 
 const baseUrl = "/ai";
 
-export const availableList = [
-  "claude-3-5-sonnet",
-  "claude-3-7-sonnet",
-  "claude-sonnet-4",
-  "claude-opus-4",
-  "gpt-4.1",
-  "deepseek-ai/DeepSeek-V3",
-  "Qwen/Qwen3-235B-A22B-fp8-tput",
-];
-
-export const availableListName = [
-  "Claude Sonnet 3.5",
-  "Claude Sonnet 3.7",
-  "Claude Sonnet 4",
-  "Claude Opus 4",
-  "GPT-4.1",
-  "DeepSeek-V3",
-  "Qwen3",
-];
-
 export const createProvider = async (provider: TCreateAiProvider) => {
   const res = (await request({
     method: "post",
@@ -118,27 +98,7 @@ export const getModels = async (providerId?: TAiProvider["id"]) => {
     url: `${baseUrl}/chats/models${strSearch}`,
   })) as TModelList;
 
-  const models = res
-    .map((item) => {
-      const findIndex = availableList.findIndex((i) =>
-        item.modelId.includes(i),
-      );
-
-      if (typeof findIndex !== "number" || findIndex === -1) return;
-
-      return {
-        ...item,
-        modelName: availableListName[findIndex],
-      };
-    })
-    .filter((item) => !!item)
-    .filter((item, index, m) => {
-      const idx = m.findIndex((i) => i.modelName === item.modelName);
-
-      return idx === index;
-    });
-
-  return models;
+  return res;
 };
 
 export const startNewChat = async (

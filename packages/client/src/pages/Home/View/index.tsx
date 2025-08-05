@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useParams } from "react-router";
 
 import Chat from "@docspace/shared/components/chat";
-import { availableList, availableListName } from "@docspace/shared/api/ai";
 import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
@@ -293,12 +292,6 @@ const View = ({
     getView();
   }, [location, isContactsPage]);
 
-  const modelNameIdx = chatSettings
-    ? availableList.findIndex((item) => chatSettings.modelId.includes(item))
-    : 0;
-
-  const modelName = availableListName[modelNameIdx];
-
   return (
     <div
       style={{
@@ -320,7 +313,7 @@ const View = ({
               userAvatar={userAvatar}
               roomId={room!}
               getIcon={getIcon}
-              selectedModel={modelName ?? chatSettings!.modelId}
+              selectedModel={chatSettings?.modelId ?? ""}
               isLoading={showBodyLoader}
             />
           ) : (

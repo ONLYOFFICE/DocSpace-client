@@ -45,4 +45,6 @@ export type DateTimePickerProps = {
   hasError: boolean;
   /** Allows to set first shown date in calendar */
   openDate: moment.Moment;
+  /** Allows to set data-testid */
+  dataTestId?: string;
 };

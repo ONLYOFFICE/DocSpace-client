@@ -37,6 +37,7 @@ const ToggleBlock = ({
   children,
   withToggle = true,
   isExpired,
+  dataTestId,
 }) => {
   return (
     <div className="edit-link-toggle-block">
@@ -50,6 +51,7 @@ const ToggleBlock = ({
             isChecked={isChecked}
             onChange={onChange}
             className="edit-link-toggle"
+            dataTestId={dataTestId}
           />
         ) : null}
       </div>

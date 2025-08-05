@@ -93,6 +93,7 @@ const LeaveRoomDialog = (props) => {
           scale
           onClick={onLeaveRoom}
           isDisabled={isLoading}
+          testId="leave_room_modal_submit"
         />
         <Button
           key="CancelButton"
@@ -101,6 +102,7 @@ const LeaveRoomDialog = (props) => {
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="leave_room_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

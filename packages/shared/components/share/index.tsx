@@ -407,6 +407,7 @@ const Share = (props: ShareProps) => {
           bodyText={t("Common:ShareDocumentDescription")}
           iconName={InfoIcon}
           onClose={() => setVisibleBar(false)}
+          dataTestId="info_panel_share_public_room_bar"
         />
       ) : null}
 
@@ -428,6 +429,7 @@ const Share = (props: ShareProps) => {
                   }
                   size={16}
                   isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
+                  dataTestId="info_panel_share_add_link_button"
                 />
                 {fileLinks.length > LINKS_LIMIT_COUNT ? (
                   <Tooltip

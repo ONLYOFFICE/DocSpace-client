@@ -169,8 +169,8 @@ const HistoryItemList = ({
 
   return (
     <div className={styles.historyBlockFilesList}>
-      {sortItems.map((item, i) => {
-        if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
+      {sortItems.map((item, index) => {
+        if (!isExpanded && index > EXPANSION_THRESHOLD - 1) return null;
         return (
           <Fragment key={`${feed.action.id}_${item.id}`}>
             <div className={styles.historyBlockFile}>
@@ -186,6 +186,7 @@ const HistoryItemList = ({
               <div
                 className="item-wrapper"
                 onClick={() => handleOpenFile(item)}
+                data-testid={`history_item_${index}`}
               >
                 <ReactSVG
                   className="icon"
@@ -222,6 +223,7 @@ const HistoryItemList = ({
                   isFill
                   onClick={() => checkAndOpenLocationAction!(item)}
                   title={t("Files:OpenLocation")}
+                  dataTestId={`history_item_location_${index}`}
                 />
               ) : null}
             </div>
@@ -267,6 +269,7 @@ const HistoryItemList = ({
             styles.filesListExpandLink,
           )}
           onClick={onExpand}
+          data-testid="history_expand_more"
         >
           <Trans
             t={t as TFunction}

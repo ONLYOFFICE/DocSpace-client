@@ -303,7 +303,7 @@ const ConnectDialog = ({
               onClick={onReconnect}
               scale
               isDisabled={isLoading}
-              testId="reconnect_account_button"
+              testId="connect_dialog_reconnect_button"
             />
           </FieldContainer>
         ) : (
@@ -328,7 +328,7 @@ const ConnectDialog = ({
                   onChange={onChangeUrl}
                   type={InputType.text}
                   size={InputSize.base}
-                  testId="connection_account_url_input"
+                  testId="connect_dialog_url_input"
                 />
               </FieldContainer>
             ) : null}
@@ -352,7 +352,7 @@ const ConnectDialog = ({
                 onChange={onChangeLogin}
                 type={InputType.text}
                 size={InputSize.base}
-                testId="connection_account_login_input"
+                testId="connect_dialog_login_input"
               />
             </FieldContainer>
             <FieldContainer
@@ -374,7 +374,7 @@ const ConnectDialog = ({
                 // value={passwordValue}
                 onChange={onChangePassword}
                 size={InputSize.base}
-                testId="connection_account_password_input"
+                testId="connect_dialog_password_input"
               />
             </FieldContainer>
           </>
@@ -396,7 +396,7 @@ const ConnectDialog = ({
               onChange={onChangeFolderName}
               type={InputType.text}
               size={InputSize.base}
-              testId="connection_account_folder_input"
+              testId="connect_dialog_folder_title_input"
             />
           </FieldContainer>
         ) : null}
@@ -412,7 +412,7 @@ const ConnectDialog = ({
           onClick={onSave}
           isDisabled={isLoading}
           isLoading={isLoading}
-          testId="connection_account_save_button"
+          testId="connect_dialog_save_button"
         />
         <Button
           id="cancel"
@@ -422,7 +422,7 @@ const ConnectDialog = ({
           scale={isAccount}
           onClick={onClose}
           isDisabled={isLoading}
-          testId="connection_account_cancel_button"
+          testId="connect_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

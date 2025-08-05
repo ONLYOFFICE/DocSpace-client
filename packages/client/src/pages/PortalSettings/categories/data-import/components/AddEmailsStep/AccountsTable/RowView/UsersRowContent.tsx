@@ -209,6 +209,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               hasError={hasError}
               onBlur={checkEmailValidity}
               isAutoFocussed
+              dataTestId="change_email_input"
             />
 
             <IconButton
@@ -218,6 +219,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               iconName={CheckSvgUrl}
               isFill
               isClickable
+              dataTestId="change_email_save_button"
             />
             <IconButton
               className="import-clear-container-button"
@@ -226,11 +228,17 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               iconName={CrossSvgUrl}
               isFill
               isClickable
+              dataTestId="change_email_clear_button"
             />
           </EmailInputWrapper>
         )
       ) : (
-        <span onClick={openEmail} className="user-email" ref={emailTextRef}>
+        <span
+          onClick={openEmail}
+          className="user-email"
+          ref={emailTextRef}
+          data-testid="open_email_button"
+        >
           <EditSvg />
         </span>
       )}

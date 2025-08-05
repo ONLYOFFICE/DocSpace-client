@@ -197,4 +197,45 @@ describe("<IconButton />", () => {
     await screen.findByTestId("icon-button");
     expect(button).toHaveAttribute("data-iconname", baseProps.iconName);
   });
+
+  it("Apply color correctly", () => {
+    render(<IconButton color="rgb(255, 0, 0)" />);
+    const button = screen.getByTestId("icon-button");
+
+    const colorVar = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar).toBe("rgb(255, 0, 0)");
+  });
+
+  it("applies CSS variable color with and without var correctly", () => {
+    const { rerender } = render(<IconButton color="--custom-color" />);
+    const button = screen.getByTestId("icon-button");
+
+    const colorVar = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar).toBe("var(--custom-color)");
+
+    rerender(<IconButton color="var(--custom-color-2)" />);
+
+    const colorVar2 = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar2).toBe("var(--custom-color-2)");
+  });
+
+  it("maps accent color correctly", () => {
+    render(<IconButton color="accent" />);
+    const button = screen.getByTestId("icon-button");
+
+    const colorVar = window
+      .getComputedStyle(button)
+      .getPropertyValue("--icon-button-color");
+
+    expect(colorVar).toBe("var(--accent-main)");
+  });
 });

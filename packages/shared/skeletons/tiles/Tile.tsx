@@ -49,6 +49,7 @@ export const TileSkeleton = ({
 }: TileSkeletonProps) => {
   return isFolder ? (
     <div
+      data-testid="folder-tile-skeleton"
       className={classNames(styles.tile, "bottom-content", className)}
       {...rest}
     >
@@ -66,7 +67,11 @@ export const TileSkeleton = ({
       />
     </div>
   ) : isRoom ? (
-    <div className={classNames(styles.tile, className)} {...rest}>
+    <div
+      data-testid="room-tile-skeleton"
+      className={classNames(styles.tile, className)}
+      {...rest}
+    >
       <div className={styles.roomTile}>
         <div className={styles.roomTileTopContent}>
           <RectangleSkeleton
@@ -134,7 +139,11 @@ export const TileSkeleton = ({
       </div>
     </div>
   ) : (
-    <div className={classNames(styles.tile, className)} {...rest}>
+    <div
+      data-testid="file-tile-skeleton"
+      className={classNames(styles.tile, className)}
+      {...rest}
+    >
       <RectangleSkeleton
         title={title}
         height="220px"

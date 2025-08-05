@@ -1260,7 +1260,10 @@ export const getUserTypeDescription = (
   return t("Translations:RoleGuestDescriprion");
 };
 
-export function setLanguageForUnauthorized(culture: string) {
+export function setLanguageForUnauthorized(
+  culture: string,
+  isReload: boolean = true,
+) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
   });
@@ -1276,7 +1279,7 @@ export function setLanguageForUnauthorized(culture: string) {
     window.history.pushState({}, "", newUrl);
   }
 
-  window.location.reload();
+  if (isReload) window.location.reload();
 }
 
 export function setTimezoneForUnauthorized(timezone: string) {

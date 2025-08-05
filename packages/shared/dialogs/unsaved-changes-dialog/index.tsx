@@ -43,7 +43,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
   const { t, ready } = useTranslation(["Files", "Settings", "Common"]);
 
   useEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && visible) {
       onConfirm();
     }
   });

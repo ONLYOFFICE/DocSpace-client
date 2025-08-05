@@ -41,6 +41,7 @@ import FillFormsReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?u
 import { Button, ButtonSize } from "../../components/button";
 import { toastr } from "../../components/toast";
 import { Portal } from "../../components/portal";
+import { useEventListener } from "../../hooks/useEventListener";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import {
   copyRoomShareLink,
@@ -387,20 +388,11 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     selectedLinkAccess.internal,
   ]);
 
-  const onKeyPress = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Enter" && !unsavedChangesDialogVisible) {
-        onSave();
-      }
-    },
-    [unsavedChangesDialogVisible, onSave],
-  );
-
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyPress);
-
-    return () => window.removeEventListener("keydown", onKeyPress);
-  }, [onKeyPress]);
+  useEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Enter" && !unsavedChangesDialogVisible) {
+      onSave();
+    }
+  });
 
   const getPasswordSettings = useCallback(async () => {
     setIsLoading(true);

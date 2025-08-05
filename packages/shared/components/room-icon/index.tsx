@@ -345,7 +345,7 @@ const RoomIcon = ({
                 },
                 "room-icon_button",
               )}
-              isFill
+              isFill={!isTrash}
             />
 
             {tooltipContent ? (

@@ -117,6 +117,7 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
           itemIndex={index}
           selectableRef={onSetTileRef}
           withRef
+          dataTestId={`tile_${index}`}
         />
       ) : (
         <FileTile
@@ -126,6 +127,7 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
           }
           item={item}
           itemIndex={index}
+          dataTestId={`tile_${index}`}
         />
       );
     });

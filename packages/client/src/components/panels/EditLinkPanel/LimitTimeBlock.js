@@ -80,6 +80,7 @@ const LimitTimeBlock = (props) => {
         hasError={isExpired}
         locale={language}
         selectDateText={t("Common:SelectDate")}
+        dataTestId="edit_link_panel_date_time_picker"
       />
     </ToggleBlock>
   );

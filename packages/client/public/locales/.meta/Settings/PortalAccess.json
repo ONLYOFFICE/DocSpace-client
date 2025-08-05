@@ -3,7 +3,7 @@
   "content": "{{productName}} access",
   "content_en_sha1_hash": "47d03f020b562535e6eb17ded31112639c75a4e8",
   "created_at": "2025-05-19T21:30:52.162Z",
-  "updated_at": "2025-06-30T12:20:31.385Z",
+  "updated_at": "2025-08-04T07:30:01.278Z",
   "comment": {
     "text": "The \"PortalAccess\" translation key displays a label indicating access to a portal, typically found on a page or button related to security settings in a software application. The label includes the product name, making it context-specific and user-friendly for end-users. It appears on various pages within the Portal Settings section.",
     "is_auto": true,
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 160,
+      "line_number": 167,
       "context": "{\n id: \"portal-settings_catalog-access-portal\",\n key: \"1-0\",\n icon: \"\",\n link: \"access-portal\",\n tKey: \"PortalAccess\",\n isCategory: true,\n children: [\n {\n id: \"portal-settings_catalog-password\",\n key: \"1-0-0\",",
       "module": "/packages/client"
     }

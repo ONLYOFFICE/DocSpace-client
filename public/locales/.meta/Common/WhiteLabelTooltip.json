@@ -3,7 +3,7 @@
   "content": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "content_en_sha1_hash": "fba22904e71580d8ea3a4b8838ac44bbd60ffca4",
   "created_at": "2025-05-26T07:15:49.630Z",
-  "updated_at": "2025-06-02T10:20:51.607Z",
+  "updated_at": "2025-08-04T07:30:01.731Z",
   "comment": {
     "text": "This translation key is used for a tooltip that explains how logo sizes will be resized on standard-resolution displays when uploaded, appearing next to a settings button in the WhiteLabelHeader.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
       "line_number": 100,
-      "context": "fontSize=\"13px\"\n >\n {t(\"WhiteLabelSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"\n offsetRight={0}\n className=\"settings_unavailable\"\n />",
+      "context": "fontSize=\"13px\"\n >\n {t(\"WhiteLabelSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"\n offsetRight={0}\n className=\"settings_unavailable\"\n dataTestId=\"white_label_helper_button\"",
       "module": "/packages/shared"
     }
   ],

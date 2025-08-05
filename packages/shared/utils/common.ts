@@ -1260,7 +1260,10 @@ export const getUserTypeDescription = (
   return t("Translations:RoleGuestDescriprion");
 };
 
-export function setLanguageForUnauthorized(culture: string) {
+export function setLanguageForUnauthorized(
+  culture: string,
+  isReload: boolean = true,
+) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,
   });
@@ -1276,7 +1279,7 @@ export function setLanguageForUnauthorized(culture: string) {
     window.history.pushState({}, "", newUrl);
   }
 
-  window.location.reload();
+  if (isReload) window.location.reload();
 }
 
 export function setTimezoneForUnauthorized(timezone: string) {
@@ -1440,3 +1443,49 @@ export const formatCurrencyValue = (
 
   return formatter.format(truncated);
 };
+
+export const insertEditorPreloadFrame = (docServiceUrl: string) => {
+  if (
+    !docServiceUrl ||
+    typeof window === "undefined" ||
+    document.getElementById("editor-preload-frame")
+  ) {
+    return;
+  }
+
+  const preloadUrl = docServiceUrl.endsWith("/api.js")
+    ? docServiceUrl.replace("/api.js", "/preload.html")
+    : `${docServiceUrl.replace(/\/$/, "")}/preload.html`;
+
+  const iframe = document.createElement("iframe");
+  iframe.id = "editor-preload-frame";
+  iframe.style.cssText =
+    "position:absolute;width:0;height:0;border:0;opacity:0;pointer-events:none;visibility:hidden";
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.setAttribute("tabindex", "-1");
+
+  const cleanup = () => iframe.remove();
+  const setupCleanup = () => setTimeout(cleanup, 3000);
+
+  iframe.addEventListener("load", setupCleanup, { once: true });
+  iframe.addEventListener("error", cleanup, { once: true });
+
+  const appendIframe = () => {
+    document.body.appendChild(iframe);
+    iframe.src = preloadUrl;
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", appendIframe, { once: true });
+  } else {
+    appendIframe();
+  }
+};
+
+export function buildDataTestId(
+  dataTestId: string | undefined,
+  suffix: string,
+): string | undefined {
+  if (!dataTestId) return undefined;
+  return `${dataTestId}_${suffix}`;
+}

@@ -77,6 +77,7 @@ const RoleLinkBlock = ({
         selectedOption={selectedOption}
         accessOptions={accessOptions}
         comboIcon={ArrowIcon}
+        dataTestId="edit_link_panel_role_access_select"
       />
     </RoleLinkBlockWrapper>
   );

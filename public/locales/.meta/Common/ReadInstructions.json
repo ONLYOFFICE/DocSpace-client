@@ -3,7 +3,7 @@
   "content": "Read instructions",
   "content_en_sha1_hash": "1b4f6403ea7b35ba0ee20f4a34678cc048a6f917",
   "created_at": "2025-05-19T21:30:47.714Z",
-  "updated_at": "2025-05-26T07:57:32.669Z",
+  "updated_at": "2025-08-04T07:30:01.451Z",
   "comment": {
     "text": "This translation key is used to display instructions to read plugin SDK documentation. It appears as a button label in a UI component, prompting users to access further information about a specific plugin or SDK element.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 143,
-      "context": ">\n {t(\"PluginSDKInstruction\")}\n </Text>\n <Button\n className=\"read-instructions-button\"\n label={t(\"Common:ReadInstructions\")}\n primary\n scale={isMobile}\n size={isMobile ? \"normal\" : \"small\"}\n onClick={() => window.open(apiPluginSDKLink, \"_blank\")}\n />",
+      "line_number": 144,
+      "context": ">\n {t(\"PluginSDKInstruction\")}\n </Text>\n <Button\n className=\"read-instructions-button\"\n label={t(\"Common:ReadInstructions\")}\n primary\n scale={isMobile}\n size={isMobile ? \"normal\" : \"small\"}\n onClick={() => window.open(apiPluginSDKLink, \"_blank\")}\n testId=\"read_instructions_button\"",
       "module": "/packages/client"
     }
   ],

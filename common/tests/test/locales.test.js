@@ -146,7 +146,8 @@ beforeAll(() => {
         filePath &&
         searchPattern.test(filePath) &&
         !filePath.includes(".test.") &&
-        !filePath.includes(".stories.")
+        !filePath.includes("mockData.") &&
+        !filePath.includes(".stories."),
     );
   });
 

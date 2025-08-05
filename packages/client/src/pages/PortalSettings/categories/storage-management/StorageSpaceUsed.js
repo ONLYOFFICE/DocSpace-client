@@ -135,6 +135,7 @@ const DiskSpaceUsedComponent = (props) => {
               onClick={onChangeDialogClick}
               className="disk-space_link"
               color="accent"
+              dataTestId="disk_space_link"
             >
               {t("Common:ManageStorageQuota")}
             </Link>
@@ -142,12 +143,17 @@ const DiskSpaceUsedComponent = (props) => {
         </div>
         {standalone && isTenantCustomQuotaSet ? (
           <div className="disk-space_icon">
-            <ContextMenu ref={ref} getContextModel={getContextModel} />
+            <ContextMenu
+              dataTestId="disk_space_context_menu"
+              ref={ref}
+              getContextModel={getContextModel}
+            />
             <ContextMenuButton
               onClick={onClickContextMenu}
               getData={getContextModel}
               directionX="right"
               displayType="toggle"
+              testId="disk_space_context_menu_button"
             />
           </div>
         ) : null}

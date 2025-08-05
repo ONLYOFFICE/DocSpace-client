@@ -299,13 +299,8 @@ export default inject(
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      isTemplatesFolder,
-      isRoomTrash,
-    } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
     const isTrashRooms = window.location.pathname.startsWith("/trash/rooms");
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 

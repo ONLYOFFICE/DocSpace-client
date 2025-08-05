@@ -37,6 +37,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import DateCell from "./DateCell";
+import TypeCell from "./TypeCell";
 
 const OPTIONS = [
   { key: "0", days: "15" },
@@ -60,6 +61,7 @@ const TrashRoomRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     tableStorageName,
+    roomColumnTypeIsEnabled,
   } = props;
 
   const { t } = useTranslation(["Common"]);
@@ -209,6 +211,29 @@ const TrashRoomRowDataComponent = (props) => {
       ) : (
         <div />
       )}
+
+      {roomColumnTypeIsEnabled ? (
+        <TableCell
+          style={
+            !roomColumnTypeIsEnabled
+              ? { background: "none !important" }
+              : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
+        >
+          <TypeCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+          {/* {lastColumn === "Type" ? quickButtonsComponentNode : null} */}
+        </TableCell>
+      ) : (
+        <div />
+      )}
     </>
   );
 };
@@ -219,6 +244,7 @@ export default inject(({ tableStore }) => {
     trashRoomColumnActivityIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
+    roomColumnTypeIsEnabled,
     tableStorageName,
   } = tableStore;
 
@@ -227,6 +253,7 @@ export default inject(({ tableStore }) => {
     trashRoomColumnActivityIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
+    roomColumnTypeIsEnabled,
     tableStorageName,
   };
 })(observer(TrashRoomRowDataComponent));

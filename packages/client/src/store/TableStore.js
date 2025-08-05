@@ -465,6 +465,7 @@ class TableStore {
         this.setTrashRoomActivityColumn(
           splitColumns.includes("ActivityTrashRooms"),
         );
+        this.setRoomColumnType(splitColumns.includes("Type"));
       }
 
       if (isRecentTab) {

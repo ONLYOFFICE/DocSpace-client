@@ -563,6 +563,7 @@ class FilesTableHeader extends React.Component {
       retentionPeriodColumnIsEnabled,
       trashRoomColumnActivityIsEnabled,
       enable: sizeTrashColumnIsEnabled,
+      roomColumnTypeIsEnabled,
     } = this.props;
 
     const columns = [
@@ -598,6 +599,14 @@ class FilesTableHeader extends React.Component {
         resizable: true,
         onClick: this.onFilter,
         onChange: this.onColumnChange,
+      },
+      {
+        key: "Type",
+        title: t("Common:Type"),
+        enable: roomColumnTypeIsEnabled,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
       },
     ];
 

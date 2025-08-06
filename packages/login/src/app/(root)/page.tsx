@@ -42,6 +42,7 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 async function Page({
   searchParams,
@@ -79,7 +80,11 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
+
+  if (ssoUrl && hideAuthPage && !searchParams?.skipssoredirect) {
+    redirect(ssoUrl);
+  }
 
   return (
     <>
@@ -112,8 +117,6 @@ async function Page({
                     thirdParty={thirdParty}
                     capabilities={capabilities}
                     ssoExists={ssoExists}
-                    ssoUrl={ssoUrl}
-                    hideAuthPage={hideAuthPage}
                     oauthDataExists={oauthDataExists}
                   />
                 )}

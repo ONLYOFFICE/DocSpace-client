@@ -112,8 +112,6 @@ async function Page(props: {
                 thirdParty={thirdParty}
                 capabilities={capabilities}
                 ssoExists={ssoExists}
-                ssoUrl={ssoUrl}
-                hideAuthPage={hideAuthPage}
                 oauthDataExists={oauthDataExists}
               />
             ) : null}

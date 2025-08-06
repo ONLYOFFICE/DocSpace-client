@@ -141,16 +141,16 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
-      roomParts: "storage-encryption",
-    });
-
-    SocketHelper.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 
     if (standalone) {
       SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
+      });
+
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "encryption",
       });
     }
 
@@ -198,6 +198,21 @@ const Shell = ({ page = "home", ...rest }) => {
       });
     };
   }, [setPreparationPortalDialogVisible]);
+
+  useEffect(() => {
+    const storageEncryptionHandler = () => {
+      window.location.href = "/encryption-portal";
+    };
+
+    SocketHelper.on(SocketEvents.StorageEncryption, storageEncryptionHandler);
+
+    return () => {
+      SocketHelper.off(
+        SocketEvents.StorageEncryption,
+        storageEncryptionHandler,
+      );
+    };
+  }, []);
 
   useEffect(() => {
     const callback = (loginEventId) => {

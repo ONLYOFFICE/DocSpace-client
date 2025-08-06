@@ -304,7 +304,13 @@
     &.animatedProgress {
       height: 100%;
       width: 10%;
+
       animation: progressWidth 2s ease-out forwards;
+    }
+
+    &.animatedFinish {
+      width: var(--end-width, 90%);
+      animation: progressWidthFinish 0.4s ease-out forwards;
     }
 
     // Show transparent background when ready for animation
@@ -399,9 +405,18 @@
 
 @keyframes progressWidth {
   0% {
-    width: 10%;
+    width: 0%;
   }
   100% {
     width: 90%;
+  }
+}
+
+@keyframes progressWidthFinish {
+  0% {
+    width: var(--end-width, 90%);
+  }
+  100% {
+    width: 100%;
   }
 }

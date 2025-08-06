@@ -70,8 +70,14 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
   } = props;
 
   // Animation hook
-  const { animationPhase, isAnimationReady, triggerAnimation } =
-    useAnimation(isActive);
+  const {
+    animationPhase,
+    isAnimationReady,
+    animationElementRef,
+    parentElementRef,
+    endWidth,
+    triggerAnimation,
+  } = useAnimation(isActive);
 
   const onClickAction = (e: React.MouseEvent) => {
     onClick?.(e, id);
@@ -125,23 +131,26 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         style={style}
         data-testid="article-item"
         title={tooltipTitle}
+        ref={parentElementRef}
       >
         <div
           className={classNames(styles.articleItemSibling, {
             [styles.active]: isActive,
-            [styles.withAnimation]: withAnimation,
             [styles.animationReady]: isAnimationReady,
             [styles.animatedProgress]:
               isActive && animationPhase === "progress",
+            [styles.animatedFinish]: isActive && animationPhase === "finish",
             [styles.dragging]: isDragging,
             [styles.dragActive]: isDragActive,
             [styles.mobileDevice]: isMobile,
           })}
+          style={{ "--end-width": `${endWidth}%` } as React.CSSProperties}
           id={folderId}
           onClick={onClickAction}
           onMouseUp={onMouseUpAction}
           onMouseDown={onMouseDown}
           data-testid="article-item-sibling"
+          ref={animationElementRef}
         />
         <div
           className={classNames(styles.articleItemImg, {

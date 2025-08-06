@@ -32,8 +32,10 @@ export const AnimationEvents = {
 
 export type UseAnimationReturn = {
   animationPhase: "none" | "start" | "progress" | "finish";
-  currentProgress: number;
   isAnimationReady: boolean;
+  animationElementRef: React.RefObject<HTMLDivElement | null>;
+  parentElementRef: React.RefObject<HTMLDivElement | null>;
+  endWidth: number;
   triggerAnimation: () => void;
 };
 
@@ -42,9 +44,12 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
   const [animationPhase, setAnimationPhase] = useState<
     "none" | "start" | "progress" | "finish"
   >("none");
-  const [currentProgress, setCurrentProgress] = useState(0.1);
   const [isAnimationReady, setIsAnimationReady] = useState(false);
+  const [endWidth, setEndWidth] = useState(90);
+
   const progressInterval = useRef<NodeJS.Timeout | null>(null);
+  const animationElementRef = useRef<HTMLDivElement>(null);
+  const parentElementRef = useRef<HTMLDivElement>(null);
 
   // Function to start animation (CSS-based)
   const startAnimation = () => {
@@ -57,7 +62,6 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
     // Start the animation sequence
     setIsAnimationReady(false);
     setAnimationPhase("progress");
-    setCurrentProgress(0.1); // Start from 10%
 
     // CSS animation will handle the progress from 10% to 90%
     // No JavaScript interval needed
@@ -68,9 +72,7 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
     // First show empty state
     setIsAnimationReady(true);
     // Start animation after a brief delay to show the empty state
-    setTimeout(() => {
-      startAnimation();
-    }, 50);
+    startAnimation();
   };
 
   // Handle active state changes
@@ -82,7 +84,6 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
         progressInterval.current = null;
       }
       setAnimationPhase("none");
-      setCurrentProgress(0.2);
       setIsAnimationReady(false);
     }
   }, [isActive]);
@@ -106,15 +107,24 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
           clearInterval(progressInterval.current);
           progressInterval.current = null;
         }
+
+        if (
+          animationElementRef.current?.offsetWidth &&
+          parentElementRef.current?.offsetWidth
+        ) {
+          setEndWidth(
+            (animationElementRef.current.offsetWidth /
+              parentElementRef.current.offsetWidth) *
+              100,
+          );
+        }
         // Set to finish phase and complete the animation
         setAnimationPhase("finish");
-        setCurrentProgress(0.9);
         // Reset after a brief moment
         setTimeout(() => {
           setAnimationPhase("none");
-          setCurrentProgress(0.2);
           setIsAnimationReady(false);
-        }, 200);
+        }, 400);
       }
     };
 
@@ -127,8 +137,10 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
 
   return {
     animationPhase,
-    currentProgress,
     isAnimationReady,
+    animationElementRef,
+    parentElementRef,
+    endWidth,
     triggerAnimation,
   };
 };

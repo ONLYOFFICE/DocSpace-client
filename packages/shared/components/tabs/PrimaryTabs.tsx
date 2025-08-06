@@ -69,8 +69,14 @@ const PrimaryTabs = (props: TabsProps) => {
   const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
 
   // Use same animation logic as ArticleItem
-  const { animationPhase, isAnimationReady, triggerAnimation } =
-    useAnimation(true); // Always active for tabs
+  const {
+    animationPhase,
+    isAnimationReady,
+    animationElementRef,
+    parentElementRef,
+    endWidth,
+    triggerAnimation,
+  } = useAnimation(true); // Always active for tabs
 
   const scrollToTab = useCallback(
     (index: number): void => {
@@ -178,8 +184,24 @@ const PrimaryTabs = (props: TabsProps) => {
                 },
                 classes,
               )}
-              // No inline styles needed - CSS animation handles everything
-            />
+              ref={isSelected ? parentElementRef : null}
+            >
+              <div
+                className={classNames(
+                  styles.tabSubLineSibling,
+                  {
+                    [styles.selected]: isSelected,
+                    [styles.animationReady]: isAnimationReady,
+                    [styles.animatedProgress]: isAnimationProgress,
+                    [styles.animatedFinish]: animationPhase === "finish",
+                  },
+                  classes,
+                )}
+                style={{ "--end-width": `${endWidth}%` } as React.CSSProperties}
+                ref={isSelected ? animationElementRef : null}
+              />
+            </div>
+
             {item.badge ? (
               <span className={styles.tabBadge}>{item.badge}</span>
             ) : null}

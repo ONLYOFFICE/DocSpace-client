@@ -288,34 +288,39 @@
   bottom: 0px;
   border-radius: 4px 4px 0 0;
   transform-origin: left;
+
+  position: relative;
   // Remove default transform and background to allow animation
 
   &.primary {
     &.selected {
       // Default: fully filled background when not animating
-      background-color: var(--accent-main);
 
-      // Animated progress background when animating
-      &.animatedProgress {
-        background-color: transparent !important;
-        position: relative;
+      .tabSubLineSibling {
+        background-color: var(--accent-main);
 
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          background-color: var(--accent-main);
-          border-radius: 4px 4px 0 0;
+        width: 100%;
+        height: 4px;
+
+        position: absolute;
+        top: 0;
+        border-radius: 4px 4px 0 0;
+
+        // Animated progress background when animating
+        &.animatedProgress {
           width: 10%;
           animation: progressWidth 2s ease-out forwards;
         }
-      }
 
-      // Show transparent background when ready for animation
-      &.animationReady {
-        background-color: transparent;
+        &.animatedFinish {
+          width: var(--end-width, 90%);
+          animation: progressWidthFinish 0.4s ease-out forwards;
+        }
+
+        // Show transparent background when ready for animation
+        &.animationReady {
+          background-color: transparent;
+        }
       }
     }
   }
@@ -332,6 +337,15 @@
   }
   100% {
     width: 90%;
+  }
+}
+
+@keyframes progressWidthFinish {
+  0% {
+    width: var(--end-width, 90%);
+  }
+  100% {
+    width: 100%;
   }
 }
 

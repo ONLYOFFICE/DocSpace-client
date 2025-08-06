@@ -99,10 +99,12 @@ const AmazonSettings = ({
     {
       key: "1",
       label: serverSideEncryption,
+      dataTestId: "server_encryption_option",
     },
     {
       key: "2",
       label: clientSideEncryption,
+      dataTestId: "client_encryption_option",
     },
   ];
 
@@ -233,6 +235,7 @@ const AmazonSettings = ({
             {helpInfo}
           </Trans>
         }
+        dataTestId="amazon_settings_help_button"
       />
     );
   };
@@ -476,6 +479,7 @@ const AmazonSettings = ({
                 isDisabled={isDisabled}
                 tabIndex={8}
                 showDisabledItems
+                dataTestId="amazon_managed_cmk_combobox"
               />
 
               {managedKeys.label === CUSTOMER_MANAGER ? (

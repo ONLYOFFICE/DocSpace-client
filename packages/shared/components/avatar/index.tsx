@@ -195,6 +195,7 @@ const AvatarPure = ({
             label={option.label}
             icon={option.icon}
             onClick={optionOnClickAction}
+            testId={option.key}
           />
         );
       })}

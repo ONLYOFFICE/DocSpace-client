@@ -91,6 +91,7 @@ const SpaceQuota = (props) => {
     needResetSelection,
     setSelected,
     inRoom,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -195,6 +196,7 @@ const SpaceQuota = (props) => {
       hideColumns={hideColumns}
       className={className}
       isLoading={isLoading}
+      data-testid={dataTestId}
     >
       <Text fontWeight={600}>{usedQuota} / </Text>
 

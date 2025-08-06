@@ -206,6 +206,7 @@ const RoomsModule = ({
           onClick={handleMakeCopy}
           label={t("Common:CreateCopy")}
           isDisabled={isModuleDisabled || !selectedFolder}
+          testId="create_backup_room_button"
         />
       </div>
     </div>

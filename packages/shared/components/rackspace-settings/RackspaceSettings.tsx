@@ -91,6 +91,7 @@ const RackspaceSettings = ({
         tabIndex={1}
         type={InputType.text}
         size={InputSize.base}
+        testId="rackspace_private_container_input"
       />
       <TextInput
         id="public-container-input"
@@ -105,6 +106,7 @@ const RackspaceSettings = ({
         tabIndex={2}
         type={InputType.text}
         size={InputSize.base}
+        testId="rackspace_public_container_input"
       />
       <TextInput
         id="region-input"
@@ -119,6 +121,7 @@ const RackspaceSettings = ({
         tabIndex={3}
         type={InputType.text}
         size={InputSize.base}
+        testId="rackspace_region_input"
       />
       {isNeedFilePath ? (
         <TextInput
@@ -134,6 +137,7 @@ const RackspaceSettings = ({
           hasError={isError[FILE_PATH]}
           type={InputType.text}
           size={InputSize.base}
+          testId="rackspace_file_path_input"
         />
       ) : null}
     </>

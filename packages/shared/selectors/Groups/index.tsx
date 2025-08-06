@@ -185,6 +185,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
           isUser={false}
         />
       }
+      dataTestId="groups_selector"
     />
   );
 };

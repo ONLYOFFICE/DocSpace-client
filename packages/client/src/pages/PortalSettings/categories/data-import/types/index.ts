@@ -444,6 +444,7 @@ export interface ImportSectionProps {
   description: string;
   exportSection: Omit<ImportItemProps, "isChecked">;
   importSection: Omit<ImportItemProps, "isChecked">;
+  dataTestId?: string;
 }
 
 export interface NoEmailUsersProps {

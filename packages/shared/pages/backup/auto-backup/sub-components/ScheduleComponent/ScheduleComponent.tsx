@@ -117,6 +117,7 @@ const ScheduleComponent = ({
           place="right"
           offsetRight={0}
           tooltipContent={undefined}
+          dataTestId="auto_save_perido_help_button"
         />
       </div>
       <div className={classNames(styles.mainOptions, "main_options")}>
@@ -138,6 +139,8 @@ const ScheduleComponent = ({
           )}
           showDisabledItems
           directionY="both"
+          dataTestId="auto_backup_period_combobox"
+          dropDownTestId="auto_backup_period_dropdown"
         />
         {weeklySchedule ? (
           <ComboBox
@@ -159,6 +162,8 @@ const ScheduleComponent = ({
             )}
             showDisabledItems
             directionY="both"
+            dataTestId="auto_backup_weekday_combobox"
+            dropDownTestId="auto_backup_weekday_dropdown"
           />
         ) : null}
         {monthlySchedule ? (
@@ -181,6 +186,8 @@ const ScheduleComponent = ({
             )}
             showDisabledItems
             directionY="both"
+            dataTestId="auto_backup_month_combobox"
+            dropDownTestId="auto_backup_month_dropdown"
           />
         ) : null}
         <ComboBox
@@ -202,6 +209,8 @@ const ScheduleComponent = ({
           )}
           showDisabledItems
           directionY="both"
+          dataTestId="auto_backup_time_combobox"
+          dropDownTestId="auto_backup_time_dropdown"
         />
       </div>
       <div className={classNames(styles.maxCopiesOption, "maxCopiesOption")}>
@@ -226,6 +235,8 @@ const ScheduleComponent = ({
           )}
           showDisabledItems
           directionY="both"
+          dataTestId="auto_backup_max_copies_combobox"
+          dropDownTestId="auto_backup_max_copies_dropdown"
         />
       </div>
     </div>

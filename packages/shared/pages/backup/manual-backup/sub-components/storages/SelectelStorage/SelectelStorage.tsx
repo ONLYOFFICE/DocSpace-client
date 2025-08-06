@@ -130,6 +130,7 @@ const SelectelStorage = ({
           primary
           isDisabled={!isValidForm || !isMaxProgress || isDisabled}
           size={buttonSize}
+          testId="selectel_create_copy_button"
         />
       </div>
     </div>

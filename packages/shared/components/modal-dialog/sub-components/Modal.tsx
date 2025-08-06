@@ -72,6 +72,7 @@ const Modal = ({
   onSubmit,
   withBodyScrollForcibly = false,
   withBorder = false,
+  dataTestId,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -189,7 +190,7 @@ const Modal = ({
       className={classNames(styles.modal, {
         [styles.modalActive]: visible,
       })}
-      data-testid="modal"
+      data-testid={dataTestId ?? "modal"}
     >
       <ModalBackdrop
         className={classNames({

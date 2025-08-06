@@ -48,9 +48,14 @@ import styles from "./History.module.scss";
 type HistoryBlockProps = {
   feed: TFeedAction<TFeedData | RoomMember>;
   isLastEntity: boolean;
+  dataTestId?: string;
 };
 
-const HistoryBlock = ({ feed, isLastEntity }: HistoryBlockProps) => {
+const HistoryBlock = ({
+  feed,
+  isLastEntity,
+  dataTestId,
+}: HistoryBlockProps) => {
   const { initiator, date } = feed;
 
   return (
@@ -58,6 +63,7 @@ const HistoryBlock = ({ feed, isLastEntity }: HistoryBlockProps) => {
       className={classNames(date, styles.historyBlock, {
         [styles.withBottomDivider]: !isLastEntity,
       })}
+      data-testid={dataTestId ?? "history_block"}
     >
       <Avatar
         role={AvatarRole.user}

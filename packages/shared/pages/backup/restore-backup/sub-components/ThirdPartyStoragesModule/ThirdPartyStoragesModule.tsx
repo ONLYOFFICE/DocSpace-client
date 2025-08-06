@@ -126,6 +126,7 @@ const ThirdPartyStoragesModule = ({
               onClick={() => onSelect(item.key)}
               data-third-party-key={item.key}
               disabled={item.disabled}
+              testId={`${item.key}_dropdown_item`}
             >
               <Text
                 className={classNames(
@@ -147,6 +148,7 @@ const ThirdPartyStoragesModule = ({
                   )}
                   onClick={() => onSelect(item.key)}
                   iconName={ExternalLinkReactSvgUrl}
+                  dataTestId={`${item.key}_dropdown_item_icon`}
                 />
               ) : null}
             </DropDownItem>
@@ -177,6 +179,8 @@ const ThirdPartyStoragesModule = ({
         showDisabledItems
         displayArrow
         className={classNames(styles.backupCombo, "backup_combo")}
+        dataTestId="restore_storage_combobox"
+        dropDownTestId="restore_storage_dropdown"
       />
 
       {selectedStorageId === ThirdPartyStorages.GoogleId ? (

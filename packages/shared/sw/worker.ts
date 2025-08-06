@@ -25,6 +25,37 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Workbox } from "workbox-window";
+import i18n from "i18next";
+import { useTranslation, initReactI18next } from "react-i18next";
+import Backend from "i18next-http-backend";
+import { LANGUAGE } from "../constants";
+
+i18n
+  .use(Backend)
+  .use(initReactI18next)
+  .init({
+    load: "currentOnly",
+    ns: ["Common"],
+    defaultNS: "Common",
+    backend: {
+      backendOptions: [
+        {
+          loadPath: "../../client/public/locales/{{lng}}/{{ns}}.json",
+        },
+        {
+          loadPath: "../../../public/locales/{{lng}}/{{ns}}.json",
+        },
+      ],
+    },
+    lng: localStorage.getItem(LANGUAGE) || "en",
+    fallbackLng: "en",
+    interpolation: {
+      escapeValue: false,
+    },
+    react: {
+      useSuspense: false,
+    },
+  });
 
 interface SwUpdateOptions {
   onUpdate?: () => void;
@@ -82,13 +113,13 @@ export class ServiceWorker {
   }
 
   private showUpdatePrompt(): void {
+    const { t, ready } = useTranslation("Common", { i18n });
     const notification = document.createElement("div");
     notification.innerHTML = `
       <div style="
         position: fixed;
         top: 20px;
         right: 20px;
-        background: #007acc;
         color: white;
         padding: 16px 20px;
         border-radius: 8px;
@@ -99,20 +130,18 @@ export class ServiceWorker {
         max-width: 300px;
       ">
         <div style="margin-bottom: 12px;">
-          <strong>Update Available</strong><br>
-          A new version of DocSpace is ready.
+          ${t("NewVersionAvailable")}
         </div>
         <div>
           <button onclick="this.parentElement.parentElement.parentElement.updateSw()" style="
             background: white;
-            color: #007acc;
             border: none;
             padding: 8px 16px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
             margin-right: 8px;
-          ">Update</button>
+          ">${t("Load")}</button>
           <button onclick="this.parentElement.parentElement.parentElement.remove()" style="
             background: transparent;
             color: white;

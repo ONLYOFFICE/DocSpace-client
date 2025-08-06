@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 import { Portal } from "@docspace/shared/components/portal";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Tabs } from "@docspace/shared/components/tabs";
@@ -39,6 +39,30 @@ const FormComponent = Form as React.ComponentType;
 const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
   const { templatesGalleryVisible } = props;
   const [viewMobile, setViewMobile] = useState(false);
+  const [currentTabId, setCurrentTabId] = useState("forms");
+
+  const tabs = [
+    {
+      id: "forms",
+      name: "Forms",
+      content: <FormComponent />,
+    },
+    {
+      id: "documents",
+      name: "Documents",
+      content: <FormComponent tabDocuments={true} />,
+    },
+    {
+      id: "spreadsheet",
+      name: "Spreadsheet",
+      content: <FormComponent tabSpreadsheet={true} />,
+    },
+    {
+      id: "presentation",
+      name: "Presentation",
+      content: <FormComponent tabPresentation={true} />,
+    },
+  ];
 
   const onCheckView = () => {
     if (isMobile()) {
@@ -55,28 +79,9 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
     return () => window.removeEventListener("resize", onCheckView);
   }, [onCheckView]);
 
-  const tabs = [
-    {
-      id: "forms",
-      name: "Forms",
-      content: <FormComponent />,
-    },
-    {
-      id: "documents",
-      name: "Documents",
-      content: <div />,
-    },
-    {
-      id: "spreadsheet",
-      name: "Spreadsheet",
-      content: <div />,
-    },
-    {
-      id: "presentation",
-      name: "Presentation",
-      content: <div />,
-    },
-  ];
+  const onSelect = (e: { id: SetStateAction<string> }) => {
+    setCurrentTabId(e.id);
+  };
 
   const nodeTemplatesGallery = (
     <>
@@ -85,7 +90,11 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
         <div className={styles.templatesGallery}>
           <div className={styles.header}>Template gallery</div>
 
-          <Tabs items={tabs} selectedItemId="forms" />
+          <Tabs
+            items={tabs}
+            selectedItemId={currentTabId}
+            onSelect={onSelect}
+          />
         </div>
       </div>
     </>
@@ -98,7 +107,11 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
         <div className={styles.templatesGalleryMobile}>
           <div className={styles.header}>Template gallery</div>
 
-          <Tabs items={tabs} selectedItemId="forms" />
+          <Tabs
+            items={tabs}
+            selectedItemId={currentTabId}
+            onSelect={onSelect}
+          />
         </div>
       </div>
     </>

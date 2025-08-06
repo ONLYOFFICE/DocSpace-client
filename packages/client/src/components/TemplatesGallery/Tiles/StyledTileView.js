@@ -269,33 +269,6 @@ const paddingCss = css`
   }
 `;
 
-const StyledGridWrapper = styled.div`
-  display: grid;
-
-  grid-template-columns: repeat(2, 1fr);
-
-  width: 100%;
-  margin-bottom: ${(props) => (props.isFolders ? "23px" : 0)};
-  box-sizing: border-box;
-  ${paddingCss};
-
-  //change grid template based on screen size TemplatesGallery
-  @media (min-width: 600px) and (max-width: 959px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media (min-width: 960px) and (max-width: 1319px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  @media (min-width: 1320px) and (max-width: 1559px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  @media (min-width: 1560px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  grid-gap: 16px;
-`;
-
 const StyledTileContainer = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   height: 100%;
@@ -438,25 +411,16 @@ const StyledItem = styled.div`
     height: 100%;
   }
 
-  /* Responsive layout per requirements */
-  /* 3 FileTiles per row */
-  @media (min-width: 600px) and (max-width: 959px) {
+  @media (min-width: 600px) and (max-width: 839px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  /* 4 FileTiles per row */
-  @media (min-width: 960px) and (max-width: 1319px) {
+  @media (min-width: 840px) and (max-width: 1199px) {
     grid-template-columns: repeat(4, 1fr);
   }
-  /* 5 FileTiles per row */
-  @media (min-width: 1320px) and (max-width: 1559px) {
+  @media (min-width: 1200px) and (max-width: 1439px) {
     grid-template-columns: repeat(5, 1fr);
   }
-  /* 6 FileTiles per row */
-  @media (min-width: 1560px) and (max-width: 1810px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  /* Fall back to 6 FileTiles for very large screens */
-  @media (min-width: 1811px) {
+  @media (min-width: 1440px) {
     grid-template-columns: repeat(6, 1fr);
   }
 
@@ -489,7 +453,6 @@ export {
   StyledElement,
   StyledOptionButton,
   SimpleFilesTileContent,
-  StyledGridWrapper,
   StyledTileContainer,
   StyledCard,
   StyledItem,

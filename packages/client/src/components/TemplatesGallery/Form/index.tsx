@@ -53,6 +53,9 @@ const Form: FC<FormProps> = ({
   fetchOformLocales,
   oformsFilter,
   fetchOforms,
+  tabDocuments,
+  tabSpreadsheet,
+  tabPresentation,
 }) => {
   const location = useLocation();
   // const navigate = useNavigate();
@@ -80,7 +83,13 @@ const Form: FC<FormProps> = ({
   useEffect(() => {
     console.log("location", location);
 
-    const firstLoadFilter = OformsFilter.getDefault();
+    const firstLoadFilter = tabDocuments
+      ? OformsFilter.getDefaultDocx()
+      : tabSpreadsheet
+        ? OformsFilter.getDefaultSpreadsheet()
+        : tabPresentation
+          ? OformsFilter.getDefaultPresentation()
+          : OformsFilter.getDefault();
 
     console.log("firstLoadFilter", firstLoadFilter);
     if (firstLoadFilter) {
@@ -90,7 +99,7 @@ const Form: FC<FormProps> = ({
         },
       );
     }
-  }, []);
+  }, [tabDocuments, tabPresentation, tabSpreadsheet]);
 
   useEffect(() => {
     if (!isInitLoading) {

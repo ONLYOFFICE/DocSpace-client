@@ -40,19 +40,19 @@ export const getCountTilesInRow = (
       return 1;
     }
 
-    if (window.innerWidth > 600 && window.innerWidth <= 959) {
+    if (window.innerWidth > 600 && window.innerWidth <= 839) {
       return 3;
     }
 
-    if (window.innerWidth >= 960 && window.innerWidth <= 1319) {
+    if (window.innerWidth >= 840 && window.innerWidth <= 1199) {
       return 4;
     }
 
-    if (window.innerWidth >= 1320 && window.innerWidth <= 1559) {
+    if (window.innerWidth >= 1200 && window.innerWidth <= 1439) {
       return 5;
     }
 
-    if (window.innerWidth >= 1560) {
+    if (window.innerWidth >= 1440) {
       return 6;
     }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
@@ -143,7 +143,7 @@ describe("QuotaForm", () => {
 
   it("disables save button when values are unchanged", async () => {
     render(<QuotaForm {...defaultProps} isButtonsEnable />);
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("quota-save-button");
     expect(saveButton).toBeDisabled();
     const input = screen.getByTestId("quota-text-input");
     await userEvent.clear(input);

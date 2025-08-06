@@ -66,8 +66,6 @@ import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-compone
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 import { useContactsHeader } from "./useContacts";
@@ -383,31 +381,13 @@ const SectionHeaderContent = (props) => {
     setIsIndexEditingMode(false);
   };
 
-  const stateTitle = location?.state?.title;
-  const stateCanCreate = location?.state?.canCreate;
-  const stateIsRoot = location?.state?.isRoot;
-  const stateIsRoom = location?.state?.isRoom;
-  const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsShared = location?.state?.isShared;
-  const stateIsExternal = location?.state?.isExternal;
-  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-  const stateShowTemplateBadge =
-    location?.state?.rootFolderType === FolderType.RoomTemplates &&
-    !stateIsRoot;
-
-  const isRoot =
-    isLoading && typeof stateIsRoot === "boolean"
-      ? stateIsRoot
-      : isRootFolder || isContactsPage || isSettingsPage;
+  const isRoot = isRootFolder || isContactsPage || isSettingsPage;
 
   const isLifetimeEnabled = Boolean(
-    !isRoot &&
-      (selectedFolder?.lifetime ||
-        infoPanelRoom?.lifetime ||
-        (isLoading && stateIsLifetimeEnabled)),
+    !isRoot && (selectedFolder?.lifetime || infoPanelRoom?.lifetime),
   );
 
-  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
+  const navigationButtonIsVisible = !!showNavigationButton;
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -416,7 +396,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-  const sharedType = stateIsExternal && !isPublicRoom;
+  const sharedType = !isPublicRoom;
 
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -510,21 +490,14 @@ const SectionHeaderContent = (props) => {
       ? isContactsInsideGroupPage
         ? getInsideGroupTitle()
         : t("Common:Contacts")
-      : isLoading && stateTitle
-        ? stateTitle
-        : title;
+      : title;
 
-  const currentCanCreate =
-    isLoading && hasOwnProperty(location?.state, "canCreate")
-      ? stateCanCreate
-      : security?.Create;
+  const currentCanCreate = security?.Create;
 
   const currentRootRoomTitle =
-    isLoading && stateRootRoomTitle
-      ? stateRootRoomTitle
-      : navigationPath &&
-        navigationPath.length > 1 &&
-        navigationPath[navigationPath.length - 2].title;
+    navigationPath &&
+    navigationPath.length > 1 &&
+    navigationPath[navigationPath.length - 2].title;
 
   const accountsNavigationPath = isContactsInsideGroupPage && [
     {
@@ -542,8 +515,7 @@ const SectionHeaderContent = (props) => {
     };
   }, [deleteRefMap]);
 
-  const isCurrentRoom =
-    isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
+  const isCurrentRoom = isRoom;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
@@ -571,8 +543,7 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel =
-    stateShowTemplateBadge || showTemplateBadge ? t("Files:Template") : "";
+  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
     ? t("TrashAutoDeleteWarning", {
@@ -609,7 +580,7 @@ const SectionHeaderContent = (props) => {
         <div
           className={classnames(styles.headerContainer, {
             [styles.infoPanelVisible]: isInfoPanelVisible,
-            [styles.isExternalFolder]: stateIsExternal,
+            [styles.isExternalFolder]: location.state?.isExternal,
             [styles.isLifetimeEnabled]: isLifetimeEnabled,
           })}
         >

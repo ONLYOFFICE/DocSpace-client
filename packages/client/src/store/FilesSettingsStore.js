@@ -43,6 +43,7 @@ import { HTML_EXST, EBOOK_EXST } from "@docspace/shared/constants";
 import {
   getIconPathByFolderType,
   isPublicPreview,
+  insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -230,6 +231,13 @@ class FilesSettingsStore {
             this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
           });
+      })
+      .then(() => {
+        api.files.getDocumentServiceLocation().then(({ docServiceUrlApi }) => {
+          if (docServiceUrlApi) {
+            insertEditorPreloadFrame(docServiceUrlApi);
+          }
+        });
       })
       .catch(() => this.setIsErrorSettings(true));
   };

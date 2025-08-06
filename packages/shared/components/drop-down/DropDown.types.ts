@@ -60,7 +60,7 @@ export interface DropDownProps {
   columnCount?: number;
   /** Sets the disabled items to display */
   showDisabledItems?: boolean;
-  forwardedRef?: React.RefObject<HTMLDivElement | null>;
+  forwardedRef?: React.RefObject<HTMLElement | null>;
   /** Sets the operation mode of the component. The default option is set to portal mode */
   isDefaultMode?: boolean;
   /** Used to open people and group selectors correctly when the section width is small */

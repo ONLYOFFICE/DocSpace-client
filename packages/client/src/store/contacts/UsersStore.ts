@@ -101,8 +101,6 @@ import SelectedFolderStore from "../SelectedFolderStore";
 class UsersStore {
   filter = Filter.getDefault();
 
-  isUsersFetched = false;
-
   users: TUser[] = [];
 
   selection: TPeopleListItem[] = [];
@@ -122,7 +120,7 @@ class UsersStore {
 
   isUsersLoading = false;
 
-  abortController = new AbortController();
+  abortController: Nullable<AbortController> = null;
 
   requestRunning = false;
 
@@ -327,10 +325,6 @@ class UsersStore {
     });
   }
 
-  setIsUsersFetched = (value: boolean) => {
-    this.isUsersFetched = value;
-  };
-
   setContactsTab = (contactsTab: TContactsTab) => {
     if (contactsTab) {
       const roomParts =
@@ -358,9 +352,10 @@ class UsersStore {
         });
     }
 
-    if (contactsTab !== this.contactsTab) {
-      this.filter = Filter.getDefault();
-    }
+    // if (contactsTab !== this.contactsTab) {
+    //   console.log("set filter here");
+    //   this.filter = Filter.getDefault();
+    // }
     this.contactsTab = contactsTab;
 
     const guestsTabVisitedStorage = window.localStorage.getItem(
@@ -391,7 +386,7 @@ class UsersStore {
 
     setContactsUsersFilterUrl(
       filter,
-      this.contactsTab,
+      getContactsView(),
       this.groupsStore.currentGroup?.id,
     );
   };
@@ -435,11 +430,11 @@ class UsersStore {
     const { currentGroup } = this.groupsStore;
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
-    if (this.requestRunning) {
-      this.abortController.abort();
+    this.abortController?.abort();
 
-      this.abortController = new AbortController();
-    }
+    this.abortController = new AbortController();
+
+    const contactsView = getContactsView(window.location);
 
     if (!(window.DocSpace?.location?.state as { user?: unknown })?.user) {
       this.setSelection([]);
@@ -447,9 +442,9 @@ class UsersStore {
     }
 
     const localStorageKey =
-      this.contactsTab === "inside_group"
+      contactsView === "inside_group"
         ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
-        : this.contactsTab === "guests"
+        : contactsView === "guests"
           ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
           : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
@@ -469,7 +464,7 @@ class UsersStore {
       if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
-    if (currentGroup?.id && this.contactsTab === "inside_group") {
+    if (currentGroup?.id && contactsView === "inside_group") {
       filterData.group = currentGroup.id;
     }
 
@@ -477,7 +472,7 @@ class UsersStore {
       filterData.group = null;
     }
 
-    if (!guestsTabVisitedStorage && this.contactsTab === "guests") {
+    if (!guestsTabVisitedStorage && contactsView === "guests") {
       filterData.inviterId = null;
       window.localStorage.setItem(
         `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
@@ -486,20 +481,22 @@ class UsersStore {
       this.guestsTabVisited = true;
     }
 
-    if (this.contactsTab === "guests") {
+    if (contactsView === "guests") {
       filterData.area = "guests";
-    } else if (this.contactsTab === "people") {
+    } else if (contactsView === "people") {
       filterData.area = "people";
     }
 
-    this.requestRunning = true;
+    runInAction(() => {
+      this.requestRunning = true;
+    });
 
     const res = await api.people.getUserList(
       filterData,
       this.abortController.signal,
     );
 
-    this.setIsUsersFetched(true);
+    this.setUsers(res.items);
 
     filterData.total = res.total;
 
@@ -507,9 +504,10 @@ class UsersStore {
       this.setFilter(filterData);
     }
 
-    this.requestRunning = false;
-
-    this.setUsers(res.items);
+    runInAction(() => {
+      this.requestRunning = false;
+      this.abortController = null;
+    });
 
     return Promise.resolve(res.items);
   };
@@ -803,7 +801,12 @@ class UsersStore {
 
     const newFilter = this.filter.clone();
     newFilter.page += 1;
+
     this.setFilter(newFilter);
+
+    this.abortController?.abort();
+
+    this.abortController = new AbortController();
 
     const res = await api.people.getUserList(
       newFilter,
@@ -814,6 +817,8 @@ class UsersStore {
       this.setUsers([...this.users, ...res.items]);
       this.setIsUsersLoading(false);
     });
+
+    this.abortController = null;
   };
 
   getPeopleListItem: (user: TUser) => TPeopleListItem = (user: TUser) => {

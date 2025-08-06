@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
 
@@ -222,24 +222,13 @@ const FilesView = ({
   });
 
   React.useEffect(() => {
-    const onStartAnimation = () => {
-      const event = new CustomEvent(TabsEvent.START_ANIMATION, {
-        detail: {
-          id: "info-panel-tabs",
-        },
-      });
-      window.dispatchEvent(event);
-    };
-
     const onEndAnimation = () => {
-      const event = new CustomEvent(TabsEvent.END_ANIMATION);
+      const event = new CustomEvent(AnimationEvents.END_ANIMATION);
 
       window.dispatchEvent(event);
     };
 
-    if (showLoadingSuspense) {
-      onStartAnimation();
-    } else {
+    if (!showLoadingSuspense) {
       onEndAnimation();
     }
   }, [showLoadingSuspense]);

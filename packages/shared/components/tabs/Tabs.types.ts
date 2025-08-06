@@ -71,6 +71,7 @@ export type TabsProps = {
   /** Unique identifier for hotkey functionality */
   hotkeysId?: string;
   id?: string;
+  withAnimation?: boolean;
 };
 
 export type TTabsHotkey = {

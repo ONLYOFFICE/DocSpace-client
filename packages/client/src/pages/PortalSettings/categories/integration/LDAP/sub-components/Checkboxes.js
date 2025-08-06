@@ -84,7 +84,7 @@ const Checkboxes = ({
             onChange={onChangeUnencrypted}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeUnencrypted")}
-            testId="ldap_connection_type_radio_button"
+            testId="type_unencrypted_radio_button"
           />
         </div>
         <div className="ldap_checkbox-header">
@@ -97,11 +97,11 @@ const Checkboxes = ({
             onChange={onChangeTls}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeStartTls")}
-            testId="ldap_connection_type_radio_button"
+            testId="type_starttls_radio_button"
           />
           <HelpButton
             tooltipContent={t("LdapConnectionTypeStartTlsTooltip")}
-            dataTestId="ldap_connection_type_help_button"
+            dataTestId="type_starttls_help_button"
           />
         </div>
         <div className="ldap_checkbox-header">
@@ -114,11 +114,11 @@ const Checkboxes = ({
             onChange={onChangeSsl}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeSSL")}
-            testId="ldap_connection_type_ssl_radio_button"
+            testId="type_ssl_radio_button"
           />
           <HelpButton
             tooltipContent={t("LdapConnectionTypeSSLTooltip")}
-            dataTestId="ldap_connection_type_ssl_help_button"
+            dataTestId="type_ssl_help_button"
           />
         </div>
       </div>

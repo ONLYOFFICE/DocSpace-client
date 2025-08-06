@@ -85,6 +85,8 @@ const SimpleFilesRow = (props) => {
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    selectedFolderTitle,
+    setDropTargetPreview,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -146,6 +148,7 @@ const SimpleFilesRow = (props) => {
     onDragLeave && onDragLeave(e);
 
     setIsDragActive(false);
+    setDropTargetPreview(null);
   };
   const isDragDisabled = dragging && !isDragging;
 
@@ -160,6 +163,25 @@ const SimpleFilesRow = (props) => {
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
+
+  React.useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        setDropTargetPreview(item.title);
+      } else {
+        setDropTargetPreview(selectedFolderTitle);
+      }
+    } else {
+      setDropTargetPreview(null);
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    isDragDisabled,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
 
   return (
     <FilesRowWrapper

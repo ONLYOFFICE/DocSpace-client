@@ -86,6 +86,8 @@ const FilesTableRow = (props) => {
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    setDropTargetPreview,
+    selectedFolderTitle,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -182,6 +184,25 @@ const FilesTableRow = (props) => {
       deleteRefMap(GuidanceRefKey.Ready);
     };
   }, [deleteRefMap, setRefMap]);
+
+  useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        setDropTargetPreview(item.title);
+      } else {
+        setDropTargetPreview(selectedFolderTitle);
+      }
+    } else {
+      setDropTargetPreview(null);
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    isDragDisabled,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`

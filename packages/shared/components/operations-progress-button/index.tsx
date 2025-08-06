@@ -45,6 +45,7 @@ import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
 import { Backdrop } from "../backdrop";
 import { Text } from "../text";
+import PreviewButton from "./PreviewButton";
 
 type ValueOf<T> = T[keyof T];
 
@@ -65,6 +66,7 @@ const operationToIconMap: Record<
   trash: FloatingButtonIcons.trash,
   other: FloatingButtonIcons.other,
   upload: FloatingButtonIcons.upload,
+  previewUpload: FloatingButtonIcons.upload,
   deleteVersionFile: FloatingButtonIcons.trash,
   backup: FloatingButtonIcons.backup,
 };
@@ -81,6 +83,9 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   needErrorChecking,
   showCancelButton,
   isInfoPanelVisible,
+  dropTargetFolderName,
+  isDragging,
+  clearDropPreviewLocation,
 }) => {
   const { t } = useTranslation(["Common"]);
 
@@ -321,6 +326,13 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         visible={isOpenDropdown}
         onClick={() => setIsOpenDropdown(false)}
       />
+
+      <PreviewButton
+        dropTargetFolderName={dropTargetFolderName || null}
+        isDragging={isDragging ?? false}
+        clearDropPreviewLocation={clearDropPreviewLocation}
+      />
+
       <div
         ref={containerRef}
         className={classNames(styles.progressBarContainer, {
@@ -336,34 +348,35 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         onMouseEnter={!isMobile ? handleMouseEnter : undefined}
         onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       >
-        <HelpButton
-          className="layout-progress-bar"
-          place="left"
-          tooltipContent={getTooltipLabel()}
-          openOnClick={isMobile}
-          {...(isMobile && { afterShow: handleTooltipOpen })}
-          {...(isHideTooltip && { isOpen: false })}
-          noUserSelect
-        >
-          <FloatingButton
-            className={classNames(styles.floatingButton, {
-              [styles.cursorDefault]:
-                !panelOperationsLength || disableOpenPanel,
-            })}
-            icon={getIcons()}
-            alert={operationsAlert}
-            completed={operationsCompleted}
-            onClick={handleFloatingButtonClick}
-            {...(!isSeveralOperations &&
-              !isMobile && {
-                showCancelButton,
-                clearUploadedFilesHistory: onCancelOperation,
+        {allOperationsLength > 0 ? (
+          <HelpButton
+            className="layout-progress-bar"
+            place="left"
+            tooltipContent={getTooltipLabel()}
+            openOnClick={isMobile}
+            {...(isMobile && { afterShow: handleTooltipOpen })}
+            {...(isHideTooltip && { isOpen: false })}
+            noUserSelect
+          >
+            <FloatingButton
+              className={classNames(styles.floatingButton, {
+                [styles.cursorDefault]:
+                  !panelOperationsLength || disableOpenPanel,
               })}
-            withoutStatus={withoutStatus}
-            percent={getPercent()}
-          />
-        </HelpButton>
-
+              icon={getIcons()}
+              alert={operationsAlert}
+              completed={operationsCompleted}
+              onClick={handleFloatingButtonClick}
+              {...(!isSeveralOperations &&
+                !isMobile && {
+                  showCancelButton,
+                  clearUploadedFilesHistory: onCancelOperation,
+                })}
+              withoutStatus={withoutStatus}
+              percent={getPercent()}
+            />
+          </HelpButton>
+        ) : null}
         {isOpenDropdown ? (
           <DropDown
             open={isOpenDropdown}

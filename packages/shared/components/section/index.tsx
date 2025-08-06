@@ -121,6 +121,11 @@ const Section = (props: SectionProps) => {
     primaryOperationsAlert,
     needErrorChecking,
     withTabs,
+    onDragOverEmpty,
+    onDragLeaveEmpty,
+    dragging,
+    clearDropPreviewLocation,
+    dropTargetPreview,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -204,7 +209,9 @@ const Section = (props: SectionProps) => {
   );
 
   const isShowOperationButton =
-    secondaryActiveOperations?.length || primaryOperationsArray?.length;
+    secondaryActiveOperations?.length ||
+    primaryOperationsArray?.length ||
+    dropTargetPreview?.visible;
 
   const isCompletedOperations = () => {
     if (
@@ -263,6 +270,8 @@ const Section = (props: SectionProps) => {
           {isSectionBodyAvailable ? (
             <SubSectionBody
               onDrop={onDrop}
+              onDragOverEmpty={onDragOverEmpty}
+              onDragLeaveEmpty={onDragLeaveEmpty}
               uploadFiles={uploadFiles}
               withScroll={withBodyScroll}
               autoFocus={currentDeviceType === DeviceType.desktop}
@@ -312,6 +321,7 @@ const Section = (props: SectionProps) => {
               operations={secondaryActiveOperations}
               operationsCompleted={isCompletedOperations()}
               clearPanelOperationsData={clearPrimaryProgressData}
+              clearDropPreviewLocation={clearDropPreviewLocation}
               operationsAlert={
                 primaryOperationsAlert || secondaryOperationsAlert
               }
@@ -322,6 +332,8 @@ const Section = (props: SectionProps) => {
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
               isInfoPanelVisible={isInfoPanelVisible}
+              dropTargetFolderName={dropTargetPreview?.title}
+              isDragging={dragging}
             />
           ) : null}
         </SectionContainer>

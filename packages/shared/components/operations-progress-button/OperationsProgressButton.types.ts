@@ -50,6 +50,7 @@ export interface OperationsProgressProps {
     operation?: string | null,
   ) => void;
   clearPanelOperationsData?: (operation?: string | null) => void;
+  clearDropPreviewLocation?: () => void;
   cancelUpload?: (t: (key: string) => string) => void;
   onOpenPanel?: () => void;
   mainButtonVisible?: boolean;
@@ -58,6 +59,8 @@ export interface OperationsProgressProps {
   onCancelOperation?: (callback: () => void) => void;
   percent?: number;
   isInfoPanelVisible?: boolean;
+  dropTargetFolderName?: string | null;
+  isDragging?: boolean;
 }
 export interface ProgressBarMobileProps {
   /** Display text for the progress bar */

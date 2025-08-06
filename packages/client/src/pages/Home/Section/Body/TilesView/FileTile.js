@@ -94,6 +94,8 @@ const FileTile = (props) => {
     showStorageInfo,
     setRefMap,
     deleteRefMap,
+    setDropTargetPreview,
+    selectedFolderTitle,
   } = props;
 
   const navigate = useNavigate();
@@ -115,6 +117,7 @@ const FileTile = (props) => {
   );
 
   const { thumbnailUrl } = item;
+  const isDragDisabled = dragging && !isDragging;
 
   useEffect(() => {
     if (!tileRef?.current) return;
@@ -131,6 +134,24 @@ const FileTile = (props) => {
       deleteRefMap(GuidanceRefKey.Ready);
     };
   }, [setRefMap, deleteRefMap]);
+
+  useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        setDropTargetPreview(item.title);
+      } else {
+        setDropTargetPreview(selectedFolderTitle);
+      }
+    } else {
+      setDropTargetPreview(null);
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragDisabled,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
 
   const element = (
     <ItemIcon
@@ -151,7 +172,6 @@ const FileTile = (props) => {
   );
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
-  const isDragDisabled = dragging && !isDragging;
 
   const onDragOverEvent = (_, e) => {
     onDragOver && onDragOver(e);
@@ -159,6 +179,7 @@ const FileTile = (props) => {
 
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
+    setDropTargetPreview(null);
   };
 
   const onOpenUser = () => {

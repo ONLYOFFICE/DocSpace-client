@@ -52,6 +52,8 @@ const FilesRowContainer = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  selectedFolderTitle,
+  setDropTargetPreview,
 }) => {
   const { sectionWidth } = use(Context);
 
@@ -83,6 +85,8 @@ const FilesRowContainer = ({
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        setDropTargetPreview={setDropTargetPreview}
       />
     ));
   }, [
@@ -120,6 +124,8 @@ export default inject(
     indexingStore,
     filesActionsStore,
     guidanceStore,
+    selectedFolderStore,
+    uploadDataStore,
   }) => {
     const {
       viewAs,
@@ -131,11 +137,15 @@ export default inject(
       highlightFile,
     } = filesStore;
 
+    const { title: selectedFolderTitle } = selectedFolderStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -154,6 +164,8 @@ export default inject(
       changeIndex: filesActionsStore.changeIndex,
       setRefMap,
       deleteRefMap,
+      selectedFolderTitle,
+      setDropTargetPreview,
     };
   },
 )(withContainer(observer(FilesRowContainer)));

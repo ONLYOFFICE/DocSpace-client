@@ -51,6 +51,64 @@
   }
 }
 
+.previewFloatingButtonContainer {
+  position: fixed;
+  bottom: 88px;
+  right: calc(50% - 210px);
+  transform: translateX(-50%);
+  z-index: 310;
+  opacity: 1;
+
+  animation: none;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+
+  @include mixins.mobile {
+    right: calc(50% - 32px);
+
+    &.mainButtonVisible {
+      bottom: 80px;
+    }
+  }
+
+  .previewFloatingButton {
+    @keyframes raisePreviewButton {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes dropPreviewButton {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+    }
+
+    &.raising {
+      animation: raisePreviewButton 0.3s ease-out forwards;
+    }
+
+    &.dropping {
+      animation: dropPreviewButton 0.3s ease-in forwards;
+    }
+  }
+
+  .previewHelpButton {
+    animation: raisePreviewButton 0.3s ease-in-out forwards;
+  }
+}
+
 .progressBarContainer {
   position: fixed;
   inset-inline-end: 24px;

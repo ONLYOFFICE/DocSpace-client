@@ -170,6 +170,10 @@ const PureHome = (props) => {
     checkGuests,
     hasGuests,
     sectionWithTabs,
+    dropTargetPreview,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    clearDropPreviewLocation,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -348,6 +352,23 @@ const PureHome = (props) => {
     }
   }
 
+  const onDragOverEmpty = React.useCallback(
+    (isDragActive) => {
+      if (isDragActive && selectedFolderTitle) {
+        // console.log("Dragging over empty space");
+        setDropTargetPreview(selectedFolderTitle);
+      }
+    },
+    [selectedFolderTitle, setDropTargetPreview],
+  );
+
+  const onDragLeaveEmpty = React.useCallback(() => {
+    if (setDropTargetPreview) {
+      // console.log("Dragging left empty space");
+      setDropTargetPreview(null);
+    }
+  }, [setDropTargetPreview]);
+
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
   sectionProps.getContextModel = getContextModel;
@@ -355,9 +376,11 @@ const PureHome = (props) => {
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
+  sectionProps.dropTargetPreview = dropTargetPreview;
   sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
+  sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = onCancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
@@ -365,6 +388,9 @@ const PureHome = (props) => {
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
   sectionProps.withTabs = sectionWithTabs;
+  sectionProps.onDragOverEmpty = onDragOverEmpty;
+  sectionProps.onDragLeaveEmpty = onDragLeaveEmpty;
+  sectionProps.dragging = dragging;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -378,6 +404,7 @@ const PureHome = (props) => {
   const shouldRenderSectionFilter =
     (isValidMainContent || isValidContactsContent) && !isSettingsPage;
 
+  console.log("RENDER HOME");
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -453,7 +480,11 @@ export const Component = inject(
     dialogsStore,
     filesSettingsStore,
   }) => {
-    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
+    const {
+      setSelectedFolder,
+      security: folderSecurity,
+      title: selectedFolderTitle,
+    } = selectedFolderStore;
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -533,6 +564,9 @@ export const Component = inject(
       primaryOperationsAlert,
       isErrorChecking,
       isPrimaryProgressVisbile,
+      dropTargetPreview,
+      setDropTargetPreview,
+      clearDropPreviewLocation,
     } = primaryProgressDataStore;
 
     const {
@@ -714,6 +748,10 @@ export const Component = inject(
       checkGuests,
       hasGuests,
       sectionWithTabs,
+      dropTargetPreview,
+      setDropTargetPreview,
+      selectedFolderTitle,
+      clearDropPreviewLocation,
     };
   },
 )(observer(Home));

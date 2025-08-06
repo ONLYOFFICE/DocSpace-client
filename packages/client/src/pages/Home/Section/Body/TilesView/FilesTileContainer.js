@@ -45,7 +45,13 @@ import { elementResizeDetector } from "./FileTile.utils";
 import InfiniteGrid from "./sub-components/InfiniteGrid";
 import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
+const FilesTileContainer = ({
+  list,
+  isTutorialEnabled,
+  isDesc,
+  selectedFolderTitle,
+  setDropTargetPreview,
+}) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -117,6 +123,8 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
           itemIndex={index}
           selectableRef={onSetTileRef}
           withRef
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
         />
       ) : (
         <FileTile
@@ -126,6 +134,8 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
           }
           item={item}
           itemIndex={index}
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
         />
       );
     });
@@ -147,14 +157,22 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
   );
 };
 
-export default inject(({ filesStore }) => {
-  const { filesList } = filesStore;
-  const { filter } = filesStore;
+export default inject(
+  ({ filesStore, uploadDataStore, selectedFolderStore }) => {
+    const { filesList } = filesStore;
+    const { filter } = filesStore;
 
-  const isDesc = filter?.sortOrder === "desc";
+    const isDesc = filter?.sortOrder === "desc";
 
-  return {
-    filesList,
-    isDesc,
-  };
-})(withContainer(observer(FilesTileContainer)));
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
+    const { title: selectedFolderTitle } = selectedFolderStore;
+
+    return {
+      filesList,
+      isDesc,
+      setDropTargetPreview,
+      selectedFolderTitle,
+    };
+  },
+)(withContainer(observer(FilesTileContainer)));

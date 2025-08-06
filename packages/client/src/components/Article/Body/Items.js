@@ -79,6 +79,7 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  setDropTargetPreview,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -87,6 +88,14 @@ const Item = ({
 
   let value = "";
   if (isDragging) value = `${item.id} dragging`;
+
+  React.useEffect(() => {
+    if (isDragging && isDragActive) {
+      setDropTargetPreview(item.title);
+    } else {
+      setDropTargetPreview(null);
+    }
+  }, [isDragging, isDragActive]);
 
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
@@ -246,6 +255,7 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
@@ -360,6 +370,7 @@ const Items = ({
             roomsFolderId={roomsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
+            setDropTargetPreview={setDropTargetPreview}
           />
         );
       });
@@ -453,8 +464,8 @@ export default inject(
 
     const { firstLoad } = clientLoadingStore;
 
-    const { startUpload } = uploadDataStore;
-
+    const { startUpload, primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
     const {
       treeFolders,
       myFolderId,
@@ -509,6 +520,7 @@ export default inject(
       currentColorScheme,
       roomsFolderId,
       isIndexEditingMode,
+      setDropTargetPreview,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

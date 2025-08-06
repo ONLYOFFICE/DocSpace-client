@@ -145,6 +145,8 @@ const Table = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  selectedFolderTitle,
+  setDropTargetPreview,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -228,6 +230,8 @@ const Table = ({
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        setDropTargetPreview={setDropTargetPreview}
       />
     ));
   }, [
@@ -296,6 +300,7 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
+    uploadDataStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -319,9 +324,12 @@ export default inject(
 
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
-    const { isIndexedFolder } = selectedFolderStore;
+    const { isIndexedFolder, title: selectedFolderTitle } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     return {
       viewAs,
@@ -346,6 +354,8 @@ export default inject(
       onEditIndex: changeIndex,
       setRefMap,
       deleteRefMap,
+      selectedFolderTitle,
+      setDropTargetPreview,
     };
   },
 )(withContainer(observer(Table)));

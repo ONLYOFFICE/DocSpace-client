@@ -455,6 +455,7 @@ const MainProfile = (props) => {
               withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
               modernView={!isMobile()}
+              noSelect={false}
             />
             {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
           </div>

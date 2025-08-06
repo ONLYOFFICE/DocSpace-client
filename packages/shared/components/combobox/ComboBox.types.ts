@@ -204,6 +204,8 @@ export type TComboboxProps = {
   shouldShowBackdrop?: boolean;
   /** Data test id */
   dataTestId?: string;
+  /** Disables text selection */
+  noSelect?: boolean;
 };
 
 export type TComboButtonProps = {
@@ -247,6 +249,8 @@ export type TComboButtonProps = {
   plusBadgeValue?: number;
   /** Indicates if arrow should be displayed */
   displayArrow?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
 };
 
 export interface TComboButtonThemeProps {

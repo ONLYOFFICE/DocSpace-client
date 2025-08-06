@@ -65,6 +65,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
   tabIndex = -1,
   isLoading = false,
   displayArrow: displayArrowProp,
+  noSelect,
 }) => {
   const defaultOption = selectedOption?.default;
   // const isSelected = selectedOption?.key !== 0;
@@ -88,6 +89,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
       [styles.type]: type,
       [styles.descriptive]: type === "descriptive",
       [styles.plusBadgeValue]: plusBadgeValue,
+      [styles.noSelect]: noSelect,
     },
   );
 

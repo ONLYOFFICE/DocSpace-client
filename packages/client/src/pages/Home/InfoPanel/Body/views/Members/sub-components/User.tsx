@@ -295,6 +295,7 @@ const User = ({
               isMobileView={isMobileOnly}
               directionY="both"
               displaySelectedOption
+              noSelect={false}
             />
           ) : (
             <div className="disabled-role-combobox" title={t("Common:Role")}>

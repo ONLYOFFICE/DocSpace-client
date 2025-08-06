@@ -245,6 +245,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     dropDownClassName,
     dropDownTestId,
     dataTestId,
+    noSelect = true,
   } = props;
 
   React.useEffect(() => {
@@ -397,6 +398,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
   const comboboxClasses = classNames(styles.combobox, className, styles[size], {
     [styles.scaled]: scaled,
     [styles.isOpen]: isOpen,
+    [styles.noSelect]: noSelect,
     [styles.disableMobileView]: disableMobileView,
     [styles.withoutPadding]: withoutPadding,
   });
@@ -431,6 +433,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         type={type}
         plusBadgeValue={plusBadgeValue}
         displayArrow={displayArrow}
+        noSelect={noSelect}
       />
 
       {displayType !== "toggle" ? renderDropDown() : null}

@@ -69,6 +69,10 @@
     border-radius: 3px;
   }
 
+  &.noSelect {
+    @include mixins.no-user-select;
+  }
+
   &.advancedOptions {
     :global(.dropdown-container) {
       padding: 6px 0;
@@ -76,8 +80,6 @@
   }
 
   &:not(.disableMobileView) {
-    -webkit-user-select: none;
-
     &:global(.dropdown-container) {
       @include mixins.mobile {
         position: fixed;

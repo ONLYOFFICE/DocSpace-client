@@ -202,6 +202,7 @@ const ExpiredComboBox = ({
           as="div"
           fontSize="12px"
           fontWeight="400"
+          noSelect
         >
           {getExpirationTrans()}
         </Text>

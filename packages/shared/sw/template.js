@@ -29,8 +29,8 @@ import { registerRoute } from "workbox-routing";
 import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
-import { BackgroundSyncPlugin } from "workbox-background-sync";
 import { imageCache, googleFontsCache } from "workbox-recipes";
+import { cacheNames, setCacheNameDetails } from "workbox-core";
 
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
@@ -43,22 +43,21 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-const CACHE_PREFIX = "docspace-v3.2.1";
-const CACHE_NAMES = {
-  static: `${CACHE_PREFIX}-static`,
-  images: `${CACHE_PREFIX}-images`,
-  translations: `${CACHE_PREFIX}-translations`,
-  gfonts: `${CACHE_PREFIX}-gfonts`,
-};
-
-const bgSyncPlugin = new BackgroundSyncPlugin("apiQueue", {
-  maxRetentionTime: 24 * 60, // Retry for max of 24 Hours (specified in minutes)
+setCacheNameDetails({
+  prefix: "docspace",
+  suffix: "v3.2.1",
+  precache: "precache",
+  runtime: "runtime",
+  static: "static",
+  googleFonts: "gfonts",
+  images: "images",
+  translations: "translations",
 });
 
 registerRoute(
   ({ url }) => url.pathname.includes("/locales/"),
   new StaleWhileRevalidate({
-    cacheName: CACHE_NAMES.translations,
+    cacheName: cacheNames.translations,
     plugins: [
       new ExpirationPlugin({
         maxEntries: 50,
@@ -78,7 +77,7 @@ registerRoute(
     request.destination === "font" ||
     /\.(js|css|woff2?|ttf)$/.test(url.pathname),
   new CacheFirst({
-    cacheName: CACHE_NAMES.static,
+    cacheName: cacheNames.static,
     plugins: [
       new ExpirationPlugin({
         maxEntries: 200,
@@ -91,7 +90,7 @@ registerRoute(
   }),
 );
 
-imageCache({ cacheName: CACHE_NAMES.images, maxEntries: 60 });
+imageCache({ cacheName: cacheNames.images, maxEntries: 60 });
 
 /* registerRoute(
   ({ request, url }) =>
@@ -111,7 +110,7 @@ imageCache({ cacheName: CACHE_NAMES.images, maxEntries: 60 });
   }),
 ); */
 
-googleFontsCache({ cachePrefix: CACHE_PREFIX.gfonts });
+googleFontsCache({ cachePrefix: cacheNames.gfonts });
 
 /* registerRoute(
   ({ url }) =>
@@ -136,22 +135,6 @@ self.addEventListener("message", (event) => {
     self.skipWaiting();
   }
 });
-
-if ("sync" in self.registration) {
-  self.addEventListener("sync", (event) => {
-    if (event.tag === "background-sync") {
-      event.waitUntil(doBackgroundSync());
-    }
-  });
-}
-
-async function doBackgroundSync() {
-  try {
-    console.log("Background sync triggered");
-  } catch (error) {
-    console.error("Background sync failed:", error);
-  }
-}
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();

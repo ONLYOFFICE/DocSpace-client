@@ -35,12 +35,10 @@ declare global {
   }
 }
 
-const registerSW = () => serviceWorker.register();
-const unregisterSW = () => serviceWorker.unregister();
-
 window.SW = {
-  register: registerSW,
-  unregister: unregisterSW,
+  register: () => serviceWorker.register(),
+  unregister: () => serviceWorker.unregister(),
 };
 
-export { registerSW, unregisterSW };
+export const registerSW = serviceWorker.register;
+export const unregisterSW = serviceWorker.unregister;

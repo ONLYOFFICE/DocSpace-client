@@ -42,6 +42,7 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { LoginContainer } from "@/components/LoginContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 async function Page(props: {
   searchParams: Promise<{ [key: string]: string }>;
@@ -80,6 +81,10 @@ async function Page(props: {
     typeof settings === "string" ? undefined : settings?.culture;
 
   const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
+
+  if (ssoUrl && hideAuthPage && !searchParams?.skipssoredirect) {
+    redirect(ssoUrl);
+  }
 
   return settings && typeof settings !== "string" ? (
     <LoginContainer isRegisterContainerVisible={isRegisterContainerVisible}>

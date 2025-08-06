@@ -30,7 +30,7 @@ import { CacheFirst, StaleWhileRevalidate } from "workbox-strategies";
 import { ExpirationPlugin } from "workbox-expiration";
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { BackgroundSyncPlugin } from "workbox-background-sync";
-import { imageCache, googleFontsCache } from "workbox-recipies";
+import { imageCache, googleFontsCache } from "workbox-recipes";
 
 precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();

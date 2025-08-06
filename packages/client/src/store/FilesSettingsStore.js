@@ -233,11 +233,13 @@ class FilesSettingsStore {
           });
       })
       .then(() => {
-        api.files.getDocumentServiceLocation().then(({ docServiceUrlApi }) => {
-          if (docServiceUrlApi) {
-            insertEditorPreloadFrame(docServiceUrlApi);
-          }
-        });
+        api.files
+          .getDocumentServiceLocation()
+          .then(({ docServicePreloadUrl }) => {
+            if (docServicePreloadUrl) {
+              insertEditorPreloadFrame(docServicePreloadUrl);
+            }
+          });
       })
       .catch(() => this.setIsErrorSettings(true));
   };

@@ -37,6 +37,7 @@ export const MonthDays = memo(
     setMonthDays,
     t,
     isDisabled,
+    dataTestId,
   }: MonthDaysProps) => {
     const placeholder = useMemo(() => {
       const isEmpty = weekDays.length === 0;
@@ -52,6 +53,7 @@ export const MonthDays = memo(
         unit={unit}
         dropDownMaxHeight={300}
         isDisabled={isDisabled}
+        dataTestId={dataTestId}
       />
     );
   },

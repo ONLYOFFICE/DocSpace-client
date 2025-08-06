@@ -109,7 +109,7 @@ const MyDocumentsTabs = ({
       items={tabs}
       selectedItemId={selectedTab}
       onSelect={onSelect}
-      id="files-tabs"
+      withAnimation
     />
   ) : null;
 };

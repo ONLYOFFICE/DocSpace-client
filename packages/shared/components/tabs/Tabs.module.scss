@@ -288,44 +288,50 @@
   bottom: 0px;
   border-radius: 4px 4px 0 0;
   transform-origin: left;
-  transform: scaleX(1); // Default: fully filled
+  // Remove default transform and background to allow animation
 
   &.primary {
     &.selected {
+      // Default: fully filled background when not animating
       background-color: var(--accent-main);
+
+      // Animated progress background when animating
+      &.animatedProgress {
+        background-color: transparent !important;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          background-color: var(--accent-main);
+          border-radius: 4px 4px 0 0;
+          width: 10%;
+          animation: progressWidth 2s ease-out forwards;
+        }
+      }
+
+      // Show transparent background when ready for animation
+      &.animationReady {
+        background-color: transparent;
+      }
     }
   }
 
   &.secondary {
     display: none;
   }
-
-  // Separate animation class
-  &.animated {
-    animation: fillWidth 1s ease-in-out infinite;
-    // Remove transition during animation to prevent conflicts
-    transition: none;
-  }
-
-  // Animation that finishes after one cycle
-  &.animatedFinishing {
-    animation: fillWidth 1s ease-in-out 1 forwards;
-    // Remove transition during animation to prevent conflicts
-    transition: none;
-  }
-
-  // Apply transition only when not animating
-  &:not(.animated) {
-    transition: transform 0.3s ease;
-  }
 }
 
-@keyframes fillWidth {
-  from {
-    transform: scaleX(0);
+// Width-based animation from 10% to 90%
+@keyframes progressWidth {
+  0% {
+    width: 10%;
   }
-  to {
-    transform: scaleX(1);
+  100% {
+    width: 90%;
   }
 }
 

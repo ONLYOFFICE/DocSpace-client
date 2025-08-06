@@ -32,7 +32,6 @@ import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-
 import { TUser } from "@docspace/shared/api/people/types";
 import { Badge } from "@docspace/shared/components/badge";
 import Filter from "@docspace/shared/api/people/filter";
@@ -67,8 +66,6 @@ type ContactsTabsProps = {
 
   contactsTab: UsersStore["contactsTab"];
 };
-
-const tabId = "contacts-tabs";
 
 const ContactsTabs = ({
   showTabsLoader,
@@ -114,9 +111,14 @@ const ContactsTabs = ({
     }
   }, [isChangePageRequestRunning]);
 
-  const onPeople = () => {
+  const onSelect = () => {
     setUsersSelection([]);
     setUsersBufferSelection(null);
+  };
+
+  const onPeople = () => {
+    onSelect();
+
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
 
@@ -124,8 +126,7 @@ const ContactsTabs = ({
   };
 
   const onGroups = () => {
-    setUsersSelection([]);
-    setUsersBufferSelection(null);
+    onSelect();
 
     navigate(GROUPS_ROUTE_WITH_FILTER);
   };
@@ -133,8 +134,8 @@ const ContactsTabs = ({
   const onGuests = () => {
     if (isVisitor || isCollaborator) return;
 
-    setUsersSelection([]);
-    setUsersBufferSelection(null);
+    onSelect();
+
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
 
@@ -184,7 +185,7 @@ const ContactsTabs = ({
       className="accounts-tabs"
       selectedItemId={contactsView as string}
       items={items}
-      id={tabId}
+      withAnimation
     />
   );
 };

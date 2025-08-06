@@ -32,12 +32,12 @@ import { useLocation } from "react-router";
 import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
 
-import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
+// import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
@@ -109,8 +109,6 @@ const View = ({
 
   const [currentView, setCurrentView] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-
-  const startAnimationTimerRef = React.useRef<NodeJS.Timeout>(null);
 
   const prevCurrentViewRef = React.useRef(currentView);
   const prevCategoryType = React.useRef(getCategoryType(location));
@@ -192,47 +190,30 @@ const View = ({
   React.useEffect(() => {
     if (!isLoading) {
       TopLoadingIndicator.end();
-      window.dispatchEvent(new CustomEvent(TabsEvent.END_ANIMATION));
-      if (startAnimationTimerRef.current) {
-        clearTimeout(startAnimationTimerRef.current);
-      }
-      startAnimationTimerRef.current = null;
+
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
     }
+  }, [isLoading]);
 
-    if (isLoading) {
-      const view = getContactsView();
-      const tab =
-        document.getElementById("contacts-tabs") ||
-        document.getElementById("files-tabs");
+  // React.useEffect(() => {
+  //   if (isLoading) {
+  //     const view = getContactsView();
+  //     const tab =
+  //       document.getElementById("contacts-tabs") ||
+  //       document.getElementById("files-tabs");
 
-      if (
-        !tab ||
-        view === "inside_group" ||
-        (isContactsPage && prevCurrentViewRef.current === "files") ||
-        (!isContactsPage && prevCurrentViewRef.current !== "files") ||
-        prevCategoryType.current !== getCategoryType(location)
-      ) {
-        TopLoadingIndicator.start();
+  //     if (tab) return;
 
-        return;
-      }
-      if (startAnimationTimerRef.current) {
-        clearTimeout(startAnimationTimerRef.current);
-        startAnimationTimerRef.current = null;
-      }
-
-      startAnimationTimerRef.current = setTimeout(() => {
-        const event = new CustomEvent(TabsEvent.START_ANIMATION, {
-          detail: {
-            id: tab.id,
-          },
-        });
-
-        window.dispatchEvent(event);
-        startAnimationTimerRef.current = null;
-      }, 500);
-    }
-  }, [isLoading, isContactsPage, location]);
+  //     if (
+  //       view === "inside_group" ||
+  //       (isContactsPage && prevCurrentViewRef.current === "files") ||
+  //       (!isContactsPage && prevCurrentViewRef.current !== "files") ||
+  //       prevCategoryType.current !== getCategoryType(location)
+  //     ) {
+  //       TopLoadingIndicator.start();
+  //     }
+  //   }
+  // }, [isLoading, isContactsPage, location]);
 
   React.useEffect(() => {
     const getView = async () => {

@@ -44,10 +44,15 @@ jest.mock("../../api/files", () => ({
   saveSettingsThirdParty: jest.fn().mockResolvedValue({}),
 }));
 
-jest.mock("../../utils/common", () => ({
-  getOAuthToken: jest.fn().mockResolvedValue("mock-oauth-token"),
-  getIconPathByFolderType: jest.fn().mockReturnValue("folder-icon-path"),
-}));
+jest.mock("../../utils/common", () => {
+  const originalModule = jest.requireActual("../../utils/common");
+
+  return {
+    ...originalModule,
+    getOAuthToken: jest.fn().mockResolvedValue("mock-oauth-token"),
+    getIconPathByFolderType: jest.fn().mockReturnValue("folder-icon-path"),
+  };
+});
 
 jest.mock("../toast", () => ({
   toastr: {

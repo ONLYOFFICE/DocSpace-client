@@ -88,6 +88,7 @@ const HistoryUserList = ({
             style={
               withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
             }
+            data-testid={`history_user_${i}`}
           >
             {isVisitor || isCollaborator ? (
               <Text as="span" className="text">
@@ -101,6 +102,7 @@ const HistoryUserList = ({
                   withWrapping ? { display: "inline", textWrap: "wrap" } : {}
                 }
                 title={userName}
+                dataTestId={`history_user_link_${i}`}
               >
                 {userName}
               </Link>
@@ -119,6 +121,7 @@ const HistoryUserList = ({
             styles.userListExpandLink,
           )}
           onClick={onExpand}
+          data-testid="history_users_expand_more"
         >
           <Trans
             t={t as TFunction}

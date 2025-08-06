@@ -49,6 +49,7 @@ const Calendar = ({
   isMobile,
   forwardedRef,
   isScroll = false,
+  dataTestId,
 }: CalendarProps) => {
   moment.locale(locale);
 
@@ -154,7 +155,7 @@ const Calendar = ({
       })}
       style={style}
       ref={forwardedRef}
-      data-testid="calendar"
+      data-testid={dataTestId ?? "calendar"}
     >
       {CalendarNode}
     </div>

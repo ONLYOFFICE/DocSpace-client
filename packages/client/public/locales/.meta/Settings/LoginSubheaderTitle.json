@@ -3,7 +3,7 @@
   "content": "This subsection is used to monitor the latest user login activity including successful logins and failed attempts with an indication of reasons.",
   "content_en_sha1_hash": "b34e2be66de68cff67840aca5ca9d1eb6bf3fd38",
   "created_at": "2025-05-19T21:30:51.843Z",
-  "updated_at": "2025-05-24T04:43:01.680Z",
+  "updated_at": "2025-08-04T07:30:01.557Z",
   "comment": {
     "text": "\"This subsection is used to monitor the latest user login activity, including successful logins and failed attempts. The title of this subsection will appear as a header in the login history section, providing context to users viewing their login activity.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 88,
+      "line_number": 90,
       "context": "securityLifetime &&\n securityLifetime.loginHistoryLifeTime && (\n <HistoryMainContent\n t={t}\n loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}",
       "module": "/packages/client"
     }

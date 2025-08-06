@@ -233,6 +233,7 @@ const SimpleFilesRow = (props) => {
           badgeUrl={badgeUrl}
           canDrag={canDrag}
           isFolder={isFolder}
+          dataTestId={`files_row_${itemIndex}`}
         >
           <FilesRowContent
             item={item}

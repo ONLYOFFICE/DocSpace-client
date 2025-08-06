@@ -299,6 +299,7 @@ const ManualBackup = ({
             fontSize="13px"
             color={currentColorScheme?.main?.accent}
             isHovered
+            dataTestId="creating_backup_learn_link"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -314,6 +315,7 @@ const ManualBackup = ({
           isChecked={isCheckedTemporaryStorage}
           isDisabled={!isMaxProgress || pageIsDisabled}
           {...commonRadioButtonProps}
+          testId="temporary_storage_radio_button"
         />
         <Text
           className={classNames(styles.backupDescription, "backup-description")}
@@ -334,6 +336,7 @@ const ManualBackup = ({
               primary
               isDisabled={!isMaxProgress || pageIsDisabled}
               size={buttonSize}
+              testId="create_temporary_backup_button"
             />
             {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
               <Button
@@ -343,6 +346,7 @@ const ManualBackup = ({
                 isDisabled={pageIsDisabled}
                 size={buttonSize}
                 style={{ marginInlineStart: "8px" }}
+                testId="download_temporary_copy_button"
               />
             ) : null}
             {!isMaxProgress ? (
@@ -351,6 +355,7 @@ const ManualBackup = ({
                 isDisabled
                 size={buttonSize}
                 style={{ marginInlineStart: "8px" }}
+                testId="copy_temporary_operation_button"
               />
             ) : null}
           </div>
@@ -369,6 +374,7 @@ const ManualBackup = ({
           isChecked={isCheckedDocuments}
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
           {...commonRadioButtonProps}
+          testId="backup_room_radio_button"
         />
         <Text
           className={classNames(
@@ -409,6 +415,7 @@ const ManualBackup = ({
           isChecked={isCheckedThirdParty}
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
           {...commonRadioButtonProps}
+          testId="third_party_resource_radio_button"
         />
         <Text
           className={classNames(styles.backupDescription, "backup-description")}

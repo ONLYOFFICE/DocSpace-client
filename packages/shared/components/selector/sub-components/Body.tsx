@@ -26,7 +26,7 @@
 
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
-import { FixedSizeList as List } from "react-window";
+import { VariableSizeList as List } from "react-window";
 import { classNames } from "../../../utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
@@ -269,6 +269,14 @@ const Body = ({
 
   const cloneProps = { ref: injectedElementRef };
 
+  const getItemSize = (index: number): number => {
+    if (items[index]?.isSeparator) {
+      return 16;
+    }
+
+    return 48;
+  };
+
   return (
     <div
       ref={bodyRef}
@@ -419,7 +427,7 @@ const Body = ({
                     setSavedInputValue,
                     listHeight,
                   }}
-                  itemSize={48}
+                  itemSize={getItemSize}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
                   outerElementType={VirtualScroll}

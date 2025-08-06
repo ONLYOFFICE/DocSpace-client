@@ -211,6 +211,7 @@ const Details = ({
                   onClick={onCreateRoom}
                   size={ButtonSize.extraSmall}
                   primary
+                  testId="info_panel_details_create_room_button"
                 />
               </>
             }
@@ -257,6 +258,7 @@ const Details = ({
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             withEditing={"isRoom" in selection ? selection.isRoom : false}
+            dataTestId="info_panel_details_room_icon"
           />
         </div>
       )}

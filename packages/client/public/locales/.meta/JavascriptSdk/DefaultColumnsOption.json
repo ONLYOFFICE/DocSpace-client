@@ -3,7 +3,7 @@
   "content": "Default (Quantity depends on screen width)",
   "content_en_sha1_hash": "c9cffe920b3fe39998cc9c0a0c4b442c111c6746",
   "created_at": "2025-05-19T21:30:54.447Z",
-  "updated_at": "2025-05-24T09:27:48.653Z",
+  "updated_at": "2025-08-04T07:30:01.393Z",
   "comment": {
     "text": "This translation key is used to display a label for a preset option that controls the quantity of columns displayed based on screen width. It appears in a dropdown menu or button, likely within settings or configuration pages, where users can select from predefined options.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 117,
-      "context": "{ key: \"descending\", label: t(\"Descending\"), default: true },\n { key: \"ascending\", label: t(\"Ascending\") },\n ];\n \n const columnDisplayOptions = [\n { value: \"default\", label: t(\"DefaultColumnsOption\") },\n { value: \"custom\", label: t(\"SetItUp\") },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },",
+      "line_number": 119,
+      "context": "];\n \n const columnDisplayOptions = [\n {\n value: \"default\",\n label: t(\"DefaultColumnsOption\"),\n dataTestId: \"default_radio_button\",\n },\n { value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];",
       "module": "/packages/client"
     }
   ],

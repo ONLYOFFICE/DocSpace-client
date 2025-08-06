@@ -57,7 +57,7 @@ const EmptyServerErrorContainer = () => {
   return (
     <EmptyView
       icon={icon}
-      title={t("Common:ServerErrorEmptyTitle")}
+      title={t("Common:SomethingWentWrong")}
       description={t("Common:ServerErrorEmptyDescription")}
       options={options}
     />

@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2025-06-30T12:20:31.199Z",
+  "updated_at": "2025-08-04T07:30:01.077Z",
   "comment": {
     "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
     "is_auto": true,
@@ -72,13 +72,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1131,
+      "line_number": 1153,
       "context": "const commonOptions = [];\n \n const name = {\n id: \"sort-by_name\",\n key: SortByFieldName.Name,\n label: t(\"Common:Label\"),\n default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 416,
+      "line_number": 370,
       "context": "{t(\"Settings:CreateNewSecretKeyDialogDescription\")}\n </Text>\n ) : null}\n <div className=\"api-key_name\">\n <Text fontSize=\"13px\" fontWeight={600}>\n {t(\"Common:Label\")}\n </Text>\n <TextInput\n placeholder={t(\"Settings:NewSecretKey\")}\n value={inputValue}\n type={InputType.text}",
       "module": "/packages/client"
     },
@@ -90,7 +90,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 138,
+      "line_number": 142,
       "context": "const [columnDisplay, setColumnDisplay] = useState(\n columnDisplayOptions[0].value,\n );\n const [selectedColumns, setSelectedColumns] = useState([\n { key: \"Index\", label: t(\"Files:Index\") },\n { key: \"Name\", label: t(\"Common:Label\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Tags\", label: t(\"Common:Tags\") },\n ]);",
       "module": "/packages/client"
     },

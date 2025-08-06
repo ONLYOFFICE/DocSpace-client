@@ -121,6 +121,7 @@ const AvatarEditorDialog = (props) => {
     onChangeFile,
     isProfileUpload,
     setPreview,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -196,6 +197,7 @@ const AvatarEditorDialog = (props) => {
       withFooterBorder
       withBodyScrollForcibly={!!scrollBodyHeight}
       scrollBodyHeight={scrollBodyHeight}
+      dataTestId={dataTestId}
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>

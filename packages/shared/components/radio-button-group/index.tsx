@@ -118,7 +118,7 @@ const RadioButtonGroup = ({
             spacing={spacing}
             orientation={orientation}
             autoFocus={option.autoFocus}
-            testId={option.dataTestId}
+            testId={option.dataTestId || option.id}
           />
         );
       })}

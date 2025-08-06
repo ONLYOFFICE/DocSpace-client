@@ -107,6 +107,7 @@ const Providers = (props: ProvidersProps) => {
             key={workspace.title}
             className="workspace-item"
             onClick={() => setWorkspace(workspace.title)}
+            data-testid={`workspace_item_${workspace.title}`}
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
 
@@ -117,6 +118,7 @@ const Providers = (props: ProvidersProps) => {
               isHovered
               isTextOverflow
               color="accent"
+              dataTestId={`workspace_item_${workspace.title}_import_link`}
             >
               {t("Import")}
             </Link>

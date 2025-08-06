@@ -143,6 +143,7 @@ const toListItem = (
 
     name: groupName,
     shared,
+    isSystem,
   } = item;
 
   const isInvited = disableInvitedUsers?.includes(id) || (isRoom && shared);
@@ -155,6 +156,7 @@ const toListItem = (
     label: groupName,
     disabledText,
     isDisabled: isInvited,
+    isSystem,
   };
 };
 
@@ -644,7 +646,7 @@ const PeopleSelector = ({
       renderCustomItem={renderCustomItem}
       aria-label={ariaLabel || "People Selector"}
       data-selector-type={dataSelectorType || "people"}
-      data-test-id={dataTestId || "people-selector"}
+      dataTestId={dataTestId || "people-selector"}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}

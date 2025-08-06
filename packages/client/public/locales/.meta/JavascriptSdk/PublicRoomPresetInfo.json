@@ -3,7 +3,7 @@
   "content": "Embed a public room to allow users to view, edit, comment, or review all the documents stored there without registration",
   "content_en_sha1_hash": "44b0f19f1cc2230605339b239499132c0ecb337c",
   "created_at": "2025-05-19T21:30:54.619Z",
-  "updated_at": "2025-05-26T07:57:32.563Z",
+  "updated_at": "2025-08-04T07:30:01.377Z",
   "comment": {
     "text": "Embed a public room allows users to view, edit, comment, or review all documents stored there without registration. This preset info is used in UI elements such as buttons and dialogues on the PortalSettings page.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 274,
-      "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"JavascriptSdk:PublicRoomPresetInfo\")}\n header={t(\"CreateSamplePublicRoom\")}\n >\n <Container>\n <PreviewBlock\n t={t}",
+      "context": "</Frame>\n );\n \n return (\n <PresetWrapper\n description={t(\"JavascriptSdk:PublicRoomPresetInfo\")}\n header={t(\"CreateSamplePublicRoom\")}\n >\n <Container>\n <PreviewBlock\n loadCurrentFrame={initFrame}",
       "module": "/packages/client"
     }
   ],

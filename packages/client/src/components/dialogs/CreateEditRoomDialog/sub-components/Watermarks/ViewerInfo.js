@@ -98,8 +98,16 @@ const getInitialTabs = (additions, isEdit, t) => {
 };
 
 const rotateOptions = (t) => [
-  { key: -45, label: t("Diagonal") },
-  { key: 0, label: t("Horizontal") },
+  {
+    key: -45,
+    label: t("Diagonal"),
+    dataTestId: "virtual_data_room_watermark_position_diagonal",
+  },
+  {
+    key: 0,
+    label: t("Horizontal"),
+    dataTestId: "virtual_data_room_watermark_position_horizontal",
+  },
 ];
 
 const getInitialRotate = (rotate, isEdit, isImage, t) => {
@@ -231,6 +239,7 @@ const ViewerInfoWatermark = ({
               isDisabled={isActive}
               onSelect={onSelect}
               withMultiSelect
+              dataTestId={`virtual_data_room_watermark_tab_${item.id.toLowerCase()}`}
             />
           );
         })}
@@ -243,7 +252,13 @@ const ViewerInfoWatermark = ({
       >
         {t("AddStaticText")}
       </Text>
-      <TextInput scale value={textValue} tabIndex={1} onChange={onTextChange} />
+      <TextInput
+        scale
+        value={textValue}
+        tabIndex={1}
+        onChange={onTextChange}
+        testId="virtual_data_room_watermark_text_input"
+      />
 
       <Text className="watermark-title" fontWeight={600} lineHeight="20px">
         {t("Position")}
@@ -254,6 +269,7 @@ const ViewerInfoWatermark = ({
         onSelect={onPositionChange}
         scaled
         scaledOptions
+        dataTestId="virtual_data_room_watermark_position_combobox"
       />
     </StyledWatermark>
   );

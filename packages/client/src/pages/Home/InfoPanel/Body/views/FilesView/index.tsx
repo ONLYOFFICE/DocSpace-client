@@ -79,6 +79,9 @@ const FilesView = ({
   const isThirdParty = "providerId" in selection && selection?.providerId;
 
   const [value, setValue] = React.useState<string | null>(null);
+  const [prevSelectionId, setPrevSelectionId] = React.useState<string | null>(
+    null,
+  );
 
   const [isLoadingSuspense, setIsLoadingSuspense] = React.useState(false);
 
@@ -242,12 +245,17 @@ const FilesView = ({
   }, [showLoadingSuspense]);
 
   React.useEffect(() => {
+    if (currentView === value && selection.id?.toString() === prevSelectionId) {
+      return;
+    }
+
     fetchValue(currentView).then((v) => {
       if (!v) return;
 
+      setPrevSelectionId(selection.id?.toString() || "");
       setValue(v);
     });
-  }, [currentView, fetchValue]);
+  }, [currentView, fetchValue, selection.id, prevSelectionId]);
 
   const getView = () => {
     if (value === InfoPanelView.infoDetails)
@@ -311,7 +319,7 @@ const FilesView = ({
     : {};
 
   return (
-    <>
+    <div data-testid="info_panel_files_view_container">
       <ItemTitle
         infoPanelSelection={
           isRoomMembersPanel ? infoPanelRoomSelection! : selection
@@ -323,6 +331,7 @@ const FilesView = ({
           opacity: isLoadingSuspense ? 0.5 : 1,
           pointerEvents: isLoadingSuspense ? "none" : "auto",
         }}
+        data-testid="info_panel_files_view_content"
       >
         {isFirstLoadingSuspense ? (
           currentView === InfoPanelView.infoShare ? (
@@ -336,13 +345,18 @@ const FilesView = ({
                     ? "history"
                     : "details"
               }
+              data-testid="info_panel_files_view_loader"
             />
           )
         ) : (
-          getView()
+          <div
+            data-testid={`info_panel_files_view_${value?.replace("info_", "")}`}
+          >
+            {getView()}
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@
   "content": "Tab Plugins",
   "content_en_sha1_hash": "e55bd87644d60d366a8efd44d8bb849c63a4a8f9",
   "created_at": "2025-05-19T21:30:54.702Z",
-  "updated_at": "2025-05-24T08:44:57.814Z",
+  "updated_at": "2025-08-04T07:30:01.386Z",
   "comment": {
     "text": "The \"TabPlugins\" translation key is used to display the label for a checkbox that enables or disables tab plugins in the portal settings. It appears as a simple label in a UI element and needs to be translated into different languages for consistency.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 249,
+      "line_number": 248,
       "context": "onChange={() => {}}\n isChecked\n />\n <Checkbox\n className=\"checkbox\"\n label={t(\"TabPlugins\")}\n onChange={() => {}}\n isChecked\n />\n <RowContainer>\n <Checkbox label={t(\"Chat\")} onChange={() => {}} isChecked />",
       "module": "/packages/client"
     }

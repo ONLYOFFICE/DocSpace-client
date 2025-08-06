@@ -87,7 +87,7 @@ const contentElement = (
   <div className="badges">
     <IconButton
       iconName={LockedReact12SvgUrl}
-      className="badge lock-file icons-group"
+      className="badge lock-file icons-group file-locked"
       size={IconSizeType.medium}
       data-id="file-lock"
       data-locked={false}

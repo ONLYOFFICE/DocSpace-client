@@ -3,7 +3,7 @@
   "content": "This subsection allows you to change the look and feel of your space. You can use your own company logo, name and text to match your organization brand.",
   "content_en_sha1_hash": "3ed304aa4cbda2d1fbc3a0c1d04d2decae6a4ba6",
   "created_at": "2025-05-19T21:30:51.011Z",
-  "updated_at": "2025-05-26T07:57:32.487Z",
+  "updated_at": "2025-08-04T07:30:01.303Z",
   "comment": {
     "text": "This translation key is used to display a description of customization options in the Portal Settings page. It provides context about changing the look and feel of your space to match an organization's brand. The translated content will appear as a label for this section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization.js",
-      "line_number": 128,
+      "line_number": 130,
       "context": "<StyledComponent>\n {!isLoadedPage ? (\n <LoaderDescriptionCustomization />\n ) : (\n <div className=\"category-description\">\n {t(\"Settings:CustomizationDescription\")}\n </div>\n )}\n <LanguageAndTimeZoneSettings isMobileView={viewMobile} />\n <StyledSettingsSeparator />\n <WelcomePageSettings isMobileView={viewMobile} />",
       "module": "/packages/client"
     }

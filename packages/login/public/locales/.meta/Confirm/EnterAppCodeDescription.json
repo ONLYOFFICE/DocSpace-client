@@ -3,7 +3,7 @@
   "content": "Enter 6-digit generated code from your app. If you don't have access to your phone, use the backup codes.",
   "content_en_sha1_hash": "2becb50812c03a28380cb672fdd577cf8b46d8fd",
   "created_at": "2025-05-19T21:30:57.358Z",
-  "updated_at": "2025-06-30T12:20:31.664Z",
+  "updated_at": "2025-08-04T07:30:01.646Z",
   "comment": {
     "text": "This translation key is used to display instructions for users to enter a 6-digit code generated from their app. The description explains that if users cannot access their phone, they can use backup codes instead, appearing in a UI element within the TFA Auth page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 151,
+      "line_number": 140,
       "context": "<>\n <div className=\"app-code-description\">\n <Text isBold fontSize=\"14px\" className=\"app-code-text\">\n {t(\"EnterAppCodeTitle\")}\n </Text>\n <Text>{t(\"EnterAppCodeDescription\")}</Text>\n </div>\n <div className=\"app-code-wrapper\">\n <div className=\"app-code-input\">\n <FieldContainer\n labelVisible={false}",
       "module": "/packages/login"
     }

@@ -198,7 +198,8 @@ function WizardForm(props: WizardFormProps) {
   };
 
   const onLanguageSelect = (lang: TOption) => {
-    setLanguageForUnauthorized(lang.key.toString());
+    setLanguageForUnauthorized(lang.key.toString(), false);
+    i18n.changeLanguage(lang.key.toString());
   };
 
   const onTimezoneSelect = (timezone: TOption) => {

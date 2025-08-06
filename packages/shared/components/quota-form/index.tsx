@@ -101,6 +101,7 @@ export const QuotaForm = ({
   description,
   isAutoFocussed = false,
   tabIndex,
+  dataTestId,
 }: QuotaFormProps) => {
   const initPower = getInitialPower(initialSize);
   const initSize = getInitialSize(initialSize, initPower);
@@ -204,7 +205,7 @@ export const QuotaForm = ({
         [styles.isLabel]: !!label,
         [styles.isButtonsEnable]: isButtonsEnable,
       })}
-      data-testid="quota-form"
+      data-testid={dataTestId ?? "quota-form"}
     >
       {label ? <Text fontWeight={600}>{label}</Text> : null}
       {description ? (
@@ -230,7 +231,7 @@ export const QuotaForm = ({
           scale
           withBorder
           tabIndex={tabIndex}
-          testId="quota-text-input"
+          testId={dataTestId ? `${dataTestId}_input` : "quota-text-input"}
         />
         <ComboBox
           className={classNames(styles.quotaValue, "quota_value")}
@@ -242,6 +243,9 @@ export const QuotaForm = ({
           showDisabledItems
           manualWidth="auto"
           directionY="both"
+          dataTestId={
+            dataTestId ? `${dataTestId}_size_combo_box` : "quota-combo-box"
+          }
         />
       </div>
       {checkboxLabel ? (
@@ -253,6 +257,7 @@ export const QuotaForm = ({
           })}
           onChange={onChangeCheckbox}
           isDisabled={isLoading || isDisabled}
+          dataTestId={dataTestId ? `${dataTestId}_checkbox` : "quota-checkbox"}
         />
       ) : null}
 
@@ -268,6 +273,12 @@ export const QuotaForm = ({
           saveButtonDisabled={isDefaultQuota}
           disableRestoreToDefault={isDefaultQuota}
           showReminder={!isDefaultQuota}
+          saveButtonDataTestId={
+            dataTestId ? `${dataTestId}_save_button` : "quota-save-button"
+          }
+          cancelButtonDataTestId={
+            dataTestId ? `${dataTestId}_cancel_button` : "quota-cancel-button"
+          }
         />
       ) : null}
     </div>

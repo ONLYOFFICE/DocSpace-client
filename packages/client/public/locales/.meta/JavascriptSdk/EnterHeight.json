@@ -3,7 +3,7 @@
   "content": "Enter height",
   "content_en_sha1_hash": "584df7fd9c2be290b3a2f821fb9d0d47cf3681b4",
   "created_at": "2025-05-19T21:30:54.473Z",
-  "updated_at": "2025-05-24T09:23:22.265Z",
+  "updated_at": "2025-08-04T07:30:01.407Z",
   "comment": {
     "text": "This translation key is used for labeling a placeholder that asks users to input their height. It appears as a dialog prompt or a form field, and its purpose is to provide guidance to the user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/HeightSetter.js",
       "line_number": 70,
-      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"EmbeddingPanel:Height\")} />\n <RowContainer combo>\n <TextInput\n onChange={onChangeHeight}\n placeholder={t(\"EnterHeight\")}\n value={height}\n tabIndex={3}\n />\n <ComboBox\n size=\"content\"",
+      "context": "<ControlsGroup>\n <Label className=\"label\" text={t(\"EmbeddingPanel:Height\")} />\n <RowContainer combo>\n <TextInput\n onChange={onChangeHeight}\n placeholder={t(\"EnterHeight\")}\n value={height}\n tabIndex={3}\n testId=\"height_dimension_input\"\n />\n <ComboBox",
       "module": "/packages/client"
     }
   ],

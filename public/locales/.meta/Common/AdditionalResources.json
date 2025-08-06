@@ -3,7 +3,7 @@
   "content": "Additional resources",
   "content_en_sha1_hash": "a15fa56393dfeea6e8ddbb0e0c2a6f3cc24b93de",
   "created_at": "2025-05-26T07:15:40.217Z",
-  "updated_at": "2025-06-30T12:20:31.601Z",
+  "updated_at": "2025-08-04T07:30:01.571Z",
   "comment": {
     "text": "This translation key is used to display the label \"Additional resources\" in various parts of the user interface, such as in settings pages and category lists. Its purpose is to provide a clear and concise title for users to access supplementary content related to portal settings.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 124,
+      "line_number": 131,
       "context": "{\n id: \"portal-settings_catalog-additional-resources\",\n key: \"0-1-3\",\n icon: \"\",\n link: \"additional-resources\",\n tKey: \"Common:AdditionalResources\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-appearance\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
-      "line_number": 34,
-      "context": "import classNames from \"classnames\";\n \n import { Checkbox } from \"../../../components/checkbox\";\n import { SaveCancelButtons } from \"../../../components/save-cancel-buttons\";\n \n import { IAdditionalResources } from \"./AdditionalResources.types\";\n import styles from \"./AdditionalResources.module.scss\";\n \n export const AdditionalResources = ({\n isSettingPaid,\n feedbackAndSupportEnabled,",
+      "line_number": 87,
+      "context": "className={classNames(\n styles.additionalHeader,\n \"settings_unavailable\",\n )}\n >\n {t(\"Common:AdditionalResources\")}\n </div>\n </div>\n <div\n className={classNames(\n styles.additionalDescription,",
       "module": "/packages/shared"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2025-07-10T11:11:06.837Z",
+  "updated_at": "2025-08-04T07:30:01.151Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -67,19 +67,19 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
       "line_number": 92,
-      "context": "id=\"login\"\n name=\"login\"\n size={InputSize.large}\n hasError={isEmailErrorShow && !emailValid}\n value={email}\n placeholder={t(\"Common:Email\")}\n scale={true}\n isAutoFocussed={true}\n tabIndex={1}\n isDisabled={isLoading || !!emailFromLink}\n autoComplete=\"username\"",
+      "context": "id=\"login\"\n name=\"login\"\n size={InputSize.large}\n hasError={isEmailErrorShow ? !emailValid : undefined}\n value={email}\n placeholder={t(\"Common:Email\")}\n scale\n isAutoFocussed\n tabIndex={1}\n isDisabled={isLoading || !!emailFromLink}\n autoComplete=\"username\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
       "line_number": 347,
-      "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale={true}\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed={true}\n onChange={onChangeEmail}",
+      "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed\n onChange={onChangeEmail}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 141,
-      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n testId=\"email-input\"\n id=\"textInputContainerEmail\"",
+      "line_number": 225,
+      "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width settings_unavailable\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"company_info_settings_email_input\"",
       "module": "/packages/shared"
     }
   ],

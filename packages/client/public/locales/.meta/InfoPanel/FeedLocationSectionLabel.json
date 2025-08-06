@@ -3,7 +3,7 @@
   "content": "Section «{{folderTitle}}»",
   "content_en_sha1_hash": "5578cb7bfa1e05e62f4a8a9d23e621e85f6d125e",
   "created_at": "2025-05-19T21:30:54.787Z",
-  "updated_at": "2025-06-30T12:20:31.333Z",
+  "updated_at": "2025-08-04T07:30:01.216Z",
   "comment": {
     "text": "This translation key is used to display a section label, showing a folder title within a specific context. It appears on a history panel and is used when displaying folder information in a list or grid format.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
-      "line_number": 85,
+      "line_number": 88,
       "context": "const destination = isFolder\n ? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
       "module": "/packages/client"
     }

@@ -72,6 +72,7 @@ const RoomIcon = ({
   tooltipContent,
   tooltipId,
   isTemplate = false,
+  dataTestId,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
   const [openEditLogo, setOpenLogoEdit] = React.useState(false);
@@ -118,7 +119,7 @@ const RoomIcon = ({
       {model?.map((option) => {
         const optionOnClickAction = () => {
           setOpenLogoEdit(false);
-          if (option.key === "upload") {
+          if (option.key === "create_edit_room_upload") {
             return option.onClick(inputFilesElement);
           }
           option.onClick();
@@ -129,6 +130,7 @@ const RoomIcon = ({
             label={option.label}
             icon={option.icon}
             onClick={optionOnClickAction}
+            testId={option.key}
           />
         );
       })}
@@ -217,7 +219,7 @@ const RoomIcon = ({
             "--room-icon-cover-size": coverSize / 20,
           } as React.CSSProperties
         }
-        data-testid="room-icon"
+        data-testid={dataTestId ?? "room-icon"}
         data-is-archive={isArchive}
         data-has-editing={withEditing}
         data-is-template={isTemplate}

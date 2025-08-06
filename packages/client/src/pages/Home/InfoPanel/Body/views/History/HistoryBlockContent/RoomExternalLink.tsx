@@ -80,6 +80,7 @@ const HistoryRoomExternalLink = ({
     <div
       className={styles.historyLink}
       style={withWrapping ? { display: "inline", wordBreak: "break-all" } : {}}
+      data-testid="history_external_link_container"
     >
       {canEditLink ? (
         <Link
@@ -87,6 +88,7 @@ const HistoryRoomExternalLink = ({
           onClick={onEditLink}
           isTextOverflow
           style={withWrapping ? { display: "inline", textWrap: "wrap" } : {}}
+          dataTestId="history_external_link_edit"
         >
           {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
         </Link>

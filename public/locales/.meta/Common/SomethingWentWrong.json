@@ -3,13 +3,19 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2025-05-28T09:30:02.513Z",
+  "updated_at": "2025-08-04T07:30:00.979Z",
   "comment": {
     "text": "This translation key is used to display an error message when a specific action fails, such as clicking a button or importing data. It appears in the UI as a generic error notification and can be found in a catch block of code that handles errors thrown during certain user interactions. Translators should provide a clear and concise alternative text for this key to help users understand what went wrong.",
     "is_auto": true,
     "updated_at": "2025-05-20T08:39:21.496Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/EmptyContainer/EmptyServerErrorContainer.tsx",
+      "line_number": 60,
+      "context": "];\n \n return (\n <EmptyView\n icon={icon}\n title={t(\"Common:SomethingWentWrong\")}\n description={t(\"Common:ServerErrorEmptyDescription\")}\n options={options}\n />\n );\n };",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
       "line_number": 102,
@@ -62,6 +68,12 @@
       "file_path": "/packages/login/src/app/(root)/confirm/PasswordChange/page.client.tsx",
       "line_number": 116,
       "context": "errorMessage = knownError;\n }\n console.error(errorMessage);\n \n if (errorMessage === \"Invalid params\") {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } else {\n toastr.error(t(`${errorMessage}`));\n }\n setIsLoading(false);\n }",
+      "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/page.client.tsx",
+      "line_number": 173,
+      "context": "try {\n const user = await signupOAuth(signupAccount, confirmKey);\n \n if (!user) {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n return;\n }\n \n localStorage.setItem(\"profile\", profile);",
       "module": "/packages/login"
     },
     {

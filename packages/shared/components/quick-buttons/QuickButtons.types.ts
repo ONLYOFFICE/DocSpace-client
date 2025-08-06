@@ -51,4 +51,5 @@ export type QuickButtonsProps = {
   onCopyPrimaryLink?: VoidFunction;
   onClickShare?: VoidFunction;
   onCreateRoom?: VoidFunction;
+  onClickLock?: VoidFunction;
 };

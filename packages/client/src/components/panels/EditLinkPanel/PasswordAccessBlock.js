@@ -102,7 +102,7 @@ const PasswordAccessBlock = (props) => {
   };
 
   return (
-    <ToggleBlock {...props}>
+    <ToggleBlock {...props} dataTestId="edit_link_panel_password_toggle">
       {isChecked ? (
         <div>
           <div className="edit-link_password-block">
@@ -129,6 +129,7 @@ const PasswordAccessBlock = (props) => {
                 isSimulateType
                 simulateSymbol="•"
                 autoComplete="off"
+                testId="edit_link_panel_password_input"
                 {...tooltipData}
               />
             </FieldContainer>
@@ -139,6 +140,7 @@ const PasswordAccessBlock = (props) => {
               isDisabled={isLoading}
               iconName={RefreshReactSvgUrl}
               onClick={onGeneratePasswordClick}
+              dataTestId="edit_link_panel_generate_password_button"
             />
           </div>
           <div className="edit-link_password-links">
@@ -148,6 +150,7 @@ const PasswordAccessBlock = (props) => {
               isHovered
               type="action"
               onClick={onCleanClick}
+              dataTestId="edit_link_panel_clean_password_link"
             >
               {t("Files:Clean")}
             </Link>
@@ -157,6 +160,7 @@ const PasswordAccessBlock = (props) => {
               isHovered
               type="action"
               onClick={onCopyClick}
+              dataTestId="edit_link_panel_copy_password_link"
             >
               {t("Files:CopyPassword")}
             </Link>

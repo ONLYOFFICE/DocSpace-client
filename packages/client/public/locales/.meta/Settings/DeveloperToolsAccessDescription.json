@@ -3,7 +3,7 @@
   "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click Save button.",
   "content_en_sha1_hash": "01d2a8045315e8f0f4963266d4c08d273e77ec34",
   "created_at": "2025-07-10T11:10:58.987Z",
-  "updated_at": "2025-07-10T11:11:12.688Z",
+  "updated_at": "2025-08-04T07:30:01.541Z",
   "comment": {
     "text": "This translation key is used to describe a setting that controls access to Developer Tools on a portal. It will appear in a dialog or settings page, providing guidance on how to restrict or enable access to this section.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 226,
+      "line_number": 229,
       "context": "<Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"DeveloperToolsAccess\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"DeveloperToolsAccessDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n {limitedDevToolsBlockHelpUrl ? (\n <Link",
       "module": "/packages/client"
     }

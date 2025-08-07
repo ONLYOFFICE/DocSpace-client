@@ -90,6 +90,7 @@ const ModalDialog = ({
   containerVisible = false,
   withoutPadding = false,
   hideContent = false,
+  dataTestId,
 
   ...rest
 }: ModalDialogProps) => {
@@ -204,6 +205,7 @@ const ModalDialog = ({
           embedded={embedded}
           withoutPadding={withoutPadding}
           hideContent={hideContent}
+          dataTestId={dataTestId}
           {...rest}
         />
       }

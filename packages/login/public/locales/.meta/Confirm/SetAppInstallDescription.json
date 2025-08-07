@@ -3,7 +3,7 @@
   "content": "To connect the app, scan the QR code or manually enter your secret key <1>{{ secretKey }}</1>, and then enter a 6-digit code from your app in the field below.",
   "content_en_sha1_hash": "cf9b40e5f46ca93c16c888bec1fb50554be9c4b8",
   "created_at": "2025-05-19T21:30:57.390Z",
-  "updated_at": "2025-06-30T12:20:31.663Z",
+  "updated_at": "2025-08-04T07:30:01.645Z",
   "comment": {
     "text": "The translation key SetAppInstallDescription is used to provide instructions on how to connect an app, including scanning a QR code or manually entering a secret key. This text appears in a UI element that prompts users to complete this step, likely a dialog or confirmation page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 193,
+      "line_number": 181,
       "context": "}}\n />\n <Text className=\"set-app-text\">\n <Trans\n t={t}\n i18nKey=\"SetAppInstallDescription\"\n ns=\"Confirm\"\n values={{\n secretKey,\n }}\n components={{",
       "module": "/packages/login"
     }

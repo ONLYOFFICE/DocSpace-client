@@ -3,7 +3,7 @@
   "content": "Support & Legal info",
   "content_en_sha1_hash": "7ce901e3351f432410ccf2530e8f58ea4855b320",
   "created_at": "2025-05-19T21:30:54.048Z",
-  "updated_at": "2025-05-24T07:04:59.812Z",
+  "updated_at": "2025-08-04T07:30:01.433Z",
   "comment": {
     "text": "This translation key is used to display \"Support & Legal info\" in the user interface, specifically in a support block component within an OAuth client form, likely as a header or title. It appears alongside a field where users can input a policy URL, and also in an information dialog box for privacy policies.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog.tsx",
-      "line_number": 311,
+      "line_number": 314,
       "context": "lineHeight=\"20px\"\n fontWeight=\"600\"\n noSelect\n truncate\n >\n {t(\"SupportAndLegalInfo\")}\n </Text>\n <Text\n className=\"privacy-block\"\n fontSize=\"13px\"\n lineHeight=\"15px\"",
       "module": "/packages/client"
     }

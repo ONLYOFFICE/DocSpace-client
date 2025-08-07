@@ -68,11 +68,19 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
   const formTitle = gallerySelected?.attributes?.name_form;
 
   return (
-    <>
+    <div data-testid="info_panel_gallery_container">
       <ItemTitle gallerySelected={gallerySelected} />
       {thumbnailUrl ? (
-        <div className={styles.galleryThumbnail}>
-          <img className={styles.galleryImg} src={thumbnailUrl} alt="" />
+        <div
+          className={styles.galleryThumbnail}
+          data-testid="info_panel_gallery_thumbnail"
+        >
+          <img
+            className={styles.galleryImg}
+            src={thumbnailUrl}
+            alt=""
+            data-testid="info_panel_gallery_image"
+          />
         </div>
       ) : (
         <div
@@ -80,15 +88,20 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
             styles.galleryNoThumbnail,
             "no-thumbnail-img-wrapper",
           )}
+          data-testid="info_panel_gallery_no_thumbnail"
         >
           <ReactSVG
             className={styles.noThumbnailImg}
             src={thumbnailBlank ?? ""}
+            data-testid="info_panel_gallery_no_thumbnail_icon"
           />
         </div>
       )}
 
-      <div className={commonStyles.link}>
+      <div
+        className={commonStyles.link}
+        data-testid="info_panel_gallery_suggest_changes_container"
+      >
         <Link
           className="link"
           href={`mailto:marketing@onlyoffice.com?subject=Suggesting changes for ${formTitle}&body=Suggesting changes for ${formTitle}.`}
@@ -96,12 +109,16 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
           type={LinkType.action}
           isHovered
           color="accent"
+          dataTestId="info_panel_gallery_suggest_changes_link"
         >
           {t("FormGallery:SuggestChanges")}
         </Link>
       </div>
 
-      <div className={commonStyles.subtitle}>
+      <div
+        className={commonStyles.subtitle}
+        data-testid="info_panel_gallery_description_header"
+      >
         <Text fontWeight="600" fontSize="14px">
           {t("Description")}
         </Text>
@@ -112,19 +129,29 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
         fontSize="13px"
         fontWeight={400}
         lineHeight="20px"
+        data-testid="info_panel_gallery_description_text"
       >
         {gallerySelected?.attributes?.template_desc ||
           gallerySelected?.attributes?.description_card}
       </Text>
 
-      <div className={commonStyles.subtitle}>
+      <div
+        className={commonStyles.subtitle}
+        data-testid="info_panel_gallery_properties_header"
+      >
         <Text fontWeight="600" fontSize="14px">
           {t("Properties")}
         </Text>
       </div>
 
-      <div className={commonStyles.properties}>
-        <div className="property">
+      <div
+        className={commonStyles.properties}
+        data-testid="info_panel_gallery_properties"
+      >
+        <div
+          className="property"
+          data-testid="info_panel_gallery_date_modified_property"
+        >
           <Text className="property-title">{t("InfoPanel:DateModified")}</Text>
           <Text className="property-content">
             {getCorrectDate(
@@ -134,7 +161,7 @@ const Gallery = ({ gallerySelected, getIcon, culture }: GalleryProps) => {
           </Text>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

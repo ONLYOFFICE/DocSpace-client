@@ -3,7 +3,7 @@
   "content": "Configure your authenticator application",
   "content_en_sha1_hash": "5a812c83be8c97b662816888e9f8955859f6b9d1",
   "created_at": "2025-05-19T21:30:57.392Z",
-  "updated_at": "2025-06-30T12:20:31.662Z",
+  "updated_at": "2025-08-04T07:30:01.637Z",
   "comment": {
     "text": "Configure a title that describes the authenticator application setup process. This text is used as the app title in a login confirmation page, guiding users through the configuration of their authenticator application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 158,
+      "line_number": 146,
       "context": "<>\n <div className=\"set-app-description\">\n <GreetingContainer />\n \n <Text isBold fontSize=\"14px\" className=\"set-app-title\">\n {t(\"SetAppTitle\")}\n </Text>\n \n <Trans\n t={t}\n i18nKey=\"SetAppDescription\"",
       "module": "/packages/login"
     }

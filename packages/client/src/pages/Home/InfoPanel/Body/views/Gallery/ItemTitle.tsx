@@ -83,7 +83,11 @@ const ItemTitle = ({
   };
 
   return (
-    <div className={commonStyles.title} ref={itemTitleRef}>
+    <div
+      className={commonStyles.title}
+      ref={itemTitleRef}
+      data-testid="info_panel_gallery_item_title"
+    >
       <ReactSVG className="icon" src={getIcon?.(32, ".pdf") ?? ""} />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
@@ -91,12 +95,16 @@ const ItemTitle = ({
         {t("Common:Free")}
       </Text>
       {gallerySelected ? (
-        <div className={styles.contextOptions}>
+        <div
+          className={styles.contextOptions}
+          data-testid="info_panel_gallery_context_options"
+        >
           <ContextMenu
             ref={contextMenuRef}
             getContextModel={onGetContextOptions}
             withBackdrop={false}
             model={onGetContextOptions()}
+            dataTestId="info_panel_gallery_context_menu"
           />
           <ContextMenuButton
             id="info-options"
@@ -106,6 +114,7 @@ const ItemTitle = ({
             getData={onGetContextOptions}
             directionX="right"
             displayType={ContextMenuButtonDisplayType.toggle}
+            testId="info_panel_gallery_context_menu_button"
           />
         </div>
       ) : null}

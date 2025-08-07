@@ -53,13 +53,17 @@ const GroupMember = ({ groupMember, isManager }: GroupMemberProps) => {
   ]);
 
   return (
-    <div className={styles.groupMember}>
+    <div
+      className={styles.groupMember}
+      data-testid="info_panel_contacts_group_member"
+    >
       <Avatar
         className={styles.avatar}
         role={AvatarRole.user}
         size={AvatarSize.min}
         source={groupMember.avatar}
         noClick
+        dataTestId="info_panel_contacts_group_member_avatar"
       />
 
       <div className={styles.mainWrapper}>

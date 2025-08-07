@@ -364,7 +364,9 @@ const PasswordInput = ({
     const { type, value } = state;
     const iconNode =
       type === "password" ? (
-        <EyeOffReactSvg data-testid={testId ? `${testId}_eye_icon` : undefined} />
+        <EyeOffReactSvg
+          data-testid={testId ? `${testId}_eye_icon` : undefined}
+        />
       ) : (
         <EyeReactSvg data-testid={testId ? `${testId}_eye_icon` : undefined} />
       );

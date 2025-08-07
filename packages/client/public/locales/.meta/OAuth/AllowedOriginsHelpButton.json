@@ -3,7 +3,7 @@
   "content": "URLs added here are used to improve the OAuth redirect security.",
   "content_en_sha1_hash": "b91fa47198899abef0fcb42efe9d338f64b5361f",
   "created_at": "2025-05-19T21:30:53.784Z",
-  "updated_at": "2025-05-24T07:45:03.634Z",
+  "updated_at": "2025-08-04T07:30:01.431Z",
   "comment": {
     "text": "\"This translation key is used for a help button that provides instructions on how URLs added to improve OAuth redirect security are utilized in the application.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/OAuthBlock.tsx",
-      "line_number": 84,
-      "context": "label={t(\"AllowedOrigins\")}\n placeholder={t(\"EnterURL\")}\n name=\"allowed_origins\"\n onAdd={changeValue}\n currentValue={allowedOriginsValue}\n helpButtonText={t(\"AllowedOriginsHelpButton\")}\n hasError={requiredErrorFields.includes(\"allowed_origins\")}\n />\n </StyledInputBlock>\n </StyledBlock>\n );",
+      "line_number": 85,
+      "context": "label={t(\"AllowedOrigins\")}\n placeholder={t(\"EnterURL\")}\n name=\"allowed_origins\"\n onAdd={changeValue}\n currentValue={allowedOriginsValue}\n helpButtonText={t(\"AllowedOriginsHelpButton\")}\n hasError={requiredErrorFields.includes(\"allowed_origins\")}\n dataTestId=\"allowed_origins\"\n />\n </StyledInputBlock>\n </StyledBlock>",
       "module": "/packages/client"
     }
   ],

@@ -140,6 +140,7 @@ const LinkWithDropdown = ({
         className={classNames(styles.dropDownItem, "drop-down-item")}
         id={`${item.key}`}
         onClick={onClickDropDownItem}
+        testId={`link_with_drop_down_${item.key}`}
         data-key={item.key}
         textOverflow={isTextOverflow}
       />

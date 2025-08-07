@@ -3,7 +3,7 @@
   "content": "Light theme",
   "content_en_sha1_hash": "9e5ba0f0f6b52d08b363bdcde46caac8862e4c70",
   "created_at": "2025-05-19T21:30:53.361Z",
-  "updated_at": "2025-05-28T09:30:02.493Z",
+  "updated_at": "2025-08-07T11:20:05.875Z",
   "comment": {
     "text": "This translation key is used to display the label for a \"Light theme\" option in a theme selection component. It appears on-screen when users are selecting their preferred theme and helps identify the light theme among available options.",
     "is_auto": true,
@@ -30,25 +30,25 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 209,
+      "line_number": 214,
       "context": "{logoUrls[0].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 209,
+      "line_number": 214,
       "context": "{logoUrls[0].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 209,
+      "line_number": 214,
       "context": "{logoUrls[0].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 209,
+      "line_number": 214,
       "context": "{logoUrls[0].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[0].name}\n title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     }

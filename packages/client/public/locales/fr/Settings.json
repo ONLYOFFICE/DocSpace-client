@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Indiquez si vous souhaitez afficher des liens vers des ressources supplémentaires dans {{productName}}.",
   "AdditionalResourcesSubtitle": "Configurez l'affichage de liens vers des ressources utiles pour vos utilisateurs.",
   "AddTrustedDomain": "Ajouter domaine autorisé",
+  "AdManagement": "Gestion des publicités",
+  "AdManagementDescription": "Choisissez si les bannières promotionnelles sont affichées dans votre {{productName}}.",
   "Admins": "Administrateurs",
   "AdminsMessage": "Paramètres des messages de l’administrateur",
   "AdminsMessageMobileDescription": "Les paramètres du message de l'administrateur permettent de contacter l'administrateur du portail.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Cette sous-section est utilisée pour suivre les dernières activités de connexion des utilisateurs, y compris les connexions réussies et les tentatives échouées, avec indication des raisons.",
   "LogoAbout": "Logo pour la page À propos",
   "LogoCompact": "Logo pour le menu compact à gauche",
-  "LogoDocsEditor": "Logo pour l'en-tête des éditeurs",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo pour l'éditeur {{editorName}}",
+  "LogoForViewer": "Logo pour le {{diagramViewer}}",
   "LogoLightSmall": "Logo pour l'en-tête de l’espace",
   "LogoLogin": "Logo pour la page de connexion et les e-mails",
   "ManagementCategoryDataManagement": "Gestion des données",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
-  "YourLogo": "Votre logo",
-  "AdManagement": "Gestion des publicités",
-  "AdManagementDescription": "Choisissez si les bannières promotionnelles sont affichées dans votre {{productName}}."
+  "YourLogo": "Votre logo"
 }

@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Seleccione si desea mostrar enlaces a recursos adicionales en {{productName}}.",
   "AdditionalResourcesSubtitle": "Configure la visualización de enlaces a recursos útiles para sus usuarios.",
   "AddTrustedDomain": "Añadir dominio seguro",
+  "AdManagement": "Gestión de anuncios",
+  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}.",
   "Admins": "Administradores",
   "AdminsMessage": "Configuración del mensaje del administrador",
   "AdminsMessageMobileDescription": "La configuración del mensaje del administrador es una forma de ponerse en contacto con el administrador del portal.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Esta subsección se utiliza para supervisar la última actividad de inicio de sesión de los usuarios, incluidos los inicios de sesión correctos y los intentos fallidos con indicación de los motivos.",
   "LogoAbout": "Logotipo para la página Acerca de",
   "LogoCompact": "Logotipo para el menú compacto de la izquierda",
-  "LogoDocsEditor": "Logo para los encabezados de los editores",
   "LogoFavicon": "Favicono",
+  "LogoForEditors": "Logotipo para el editor {{editorName}}",
+  "LogoForViewer": "Logotipo para {{diagramViewer}}",
   "LogoLightSmall": "Logo para el encabezado del espacio",
   "LogoLogin": "Logotipo para la página de inicio de sesión y los correos electrónicos",
   "ManagementCategoryDataManagement": "Archivo local",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso.",
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
-  "YourLogo": "Su logotipo",
-  "AdManagement": "Gestión de anuncios",
-  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}."
+  "YourLogo": "Su logotipo"
 }

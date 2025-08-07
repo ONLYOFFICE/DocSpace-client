@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "ເລືອກວ່າທ່ານຕ້ອງການສະແດງລິ້ງໄປສູ່ຂໍ້ມູນເພີ່ມເຕີມໃນ {{productName}} ບໍ່.",
   "AdditionalResourcesSubtitle": "ຕັ້ງຄ່າການສະແດງລິ້ງໄປຫາຊັບພະຍາກອນທີ່ເປັນປະໂຫຍດສໍາລັບຜູ້ໃຊ້ຂອງທ່ານ.",
   "AddTrustedDomain": "ຕື່ມ ເຊື່ອຖືໄດ້ ໂດ​ເມນ",
+  "AdManagement": "ການຄຸ້ມຄອງການໂຄສະນາ",
+  "AdManagementDescription": "ເລືອກວ່າຈະໃຫ້ສະແດງປ້າຍໂຄສະນາໃນ {{productName}} ຂອງທ່ານຫຼືບໍ່.",
   "Admins": "ບໍລິຫານ",
   "AdminsMessage": "ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບ",
   "AdminsMessageMobileDescription": "ການຕັ້ງຄ່າຂໍ້ຄວາມຂອງຜູ້ເບິ່ງແຍງລະບົບເປັນວິທີຕິດຕໍ່ກັບຜູ້ເບິ່ງແຍງລະບົບປະຕູ.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "ພາກສ່ວນຍ່ອຍນີ້ຖືກນໍາໃຊ້ເພື່ອຕິດຕາມກິດຈະກໍາການເຂົ້າສູ່ລະບົບຂອງຜູ້ໃຊ້ຫຼ້າສຸດລວມທັງການເຂົ້າສູ່ລະບົບທີ່ປະສົບຜົນສໍາເລັດແລະຄວາມພະຍາຍາມທີ່ລົ້ມເຫລວດ້ວຍການຊີ້ບອກເຫດຜົນ.",
   "LogoAbout": "ໂລໂກ້ສຳລັບໜ້າກ່ຽວກັບ",
   "LogoCompact": "ໂລໂກ້ສໍາລັບເມນູດ້ານຊ້າຍທີ່ຫນາແຫນ້ນ",
-  "LogoDocsEditor": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວ",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "ໂລໂກ້ສຳລັບບັນນາທິການ {{editorName}}",
+  "LogoForViewer": "ໂລໂກ້ສຳລັບ {{diagramViewer}}",
   "LogoLightSmall": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວຂອງ portal ",
   "LogoLogin": "ໂລໂກ້ສຳລັບໜ້າເຂົ້າສູ່ລະບົບ ແລະອີເມວ",
   "ManagementCategoryDataManagement": "ຂໍ້ມູນ ການ​ຄຸ້ມ​ຄອງ",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "ທ່ານບໍ່ມີຜູ້ໃຊ້ທີ່ບໍ່ມີອີເມວ. ກະລຸນາດໍາເນີນຂັ້ນຕອນຕໍ່ໄປ.",
   "YouHaveUnsavedChanges": "ທ່ານມີການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກ",
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
-  "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "AdManagement": "ການຄຸ້ມຄອງການໂຄສະນາ",
-  "AdManagementDescription": "ເລືອກວ່າຈະໃຫ້ສະແດງປ້າຍໂຄສະນາໃນ {{productName}} ຂອງທ່ານຫຼືບໍ່."
+  "YourLogo": "ໂລໂກ້ຂອງທ່ານ"
 }

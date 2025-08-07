@@ -3,7 +3,7 @@
   "content": "Change Logo",
   "content_en_sha1_hash": "71fe1b5c775dc620d259a03165596a8d06a2c87c",
   "created_at": "2025-05-19T21:30:50.873Z",
-  "updated_at": "2025-05-21T04:51:30.767Z",
+  "updated_at": "2025-08-07T11:20:06.187Z",
   "comment": {
     "text": "\"ChangeLogoButton\" is used to display the text \"Change Logo\" on a button, typically found in settings or branding-related pages, such as updating a logo. It appears when users interact with logo upload options or settings.",
     "is_auto": true,
@@ -12,67 +12,115 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 214,
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
+      "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 219,
       "context": "title={t(\"Profile:LightTheme\")}\n src={logoUrls[0].path.light}\n imageClass=\"logo-header background-light\"\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}\n linkId=\"link-space-header-light\"\n onChangeText={t(\"ChangeLogoButton\")}\n onChange={onChangeLogo}\n isSettingPaid={isSettingPaid}\n />\n <Logo\n name={logoUrls[0].name}",
       "module": "/packages/shared"
     }

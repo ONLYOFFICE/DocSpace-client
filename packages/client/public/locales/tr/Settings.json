@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "{{productName}} içinde ek kaynaklara ait bağlantıları görüntülemek isteyip istemediğinizi seçin.",
   "AdditionalResourcesSubtitle": "Kullanıcılarınız için yararlı kaynaklara yönelik bağlantıların görünümünü yapılandırın.",
   "AddTrustedDomain": "Güvenilen alan adı ekle",
+  "AdManagement": "Reklam Yönetimi",
+  "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin.",
   "Admins": "Yöneticiler",
   "AdminsMessage": "Yönetici Mesajı Ayarları",
   "AdminsMessageMobileDescription": "Yönetici Mesajı Ayarları, portal yöneticisiyle iletişim kurmanın bir yoludur.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Bu alt bölüm, başarılı oturum açmalar ve nedenleriyle birlikte başarısız denemeler dahil olmak üzere en son kullanıcı oturum açma etkinliğini izlemek için kullanılır.",
   "LogoAbout": "Hakkında sayfası logosu",
   "LogoCompact": "Kompakt sol menü logosu",
-  "LogoDocsEditor": "Editörler başlığı için logo",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "{{editorName}} editörü için logo",
+  "LogoForViewer": "{{diagramViewer}} için logo",
   "LogoLightSmall": "Alan başlığı için logo",
   "LogoLogin": "Giriş sayfası ve e-postalar için logo",
   "ManagementCategoryDataManagement": "Veri Yönetimi",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
-  "YourLogo": "Logonuz",
-  "AdManagement": "Reklam Yönetimi",
-  "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin."
+  "YourLogo": "Logonuz"
 }

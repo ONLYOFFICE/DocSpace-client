@@ -174,6 +174,9 @@
   "Description": "Описание",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Инструменти за разработчици",
+  "Diagram": "Диаграма",
+  "Diagrams": "Диаграми",
+  "DiagramViewer": "Преглед на диаграми",
   "Disable": "Деактивирай",
   "Disabled": "Деактивиран",
   "DisableQuota": "Деактивирай квота",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "Моля, <0>въведете парола</0> за защитените файлове, за да продължите",
   "PasswordRequired": "Изисква парола",
   "PaymentsTitle": "Плащания",
+  "PDF": "PDF",
   "People": "Хора",
   "Permissions": "Разрешения",
   "PerUserMonth": "<1>{{price}}</1> на администратор/месец",
@@ -721,7 +725,5 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вие",
-  "YourTurn": "Ваш ред",
-  "Diagram": "Диаграма",
-  "Diagrams": "Диаграми"
+  "YourTurn": "Ваш ред"
 }

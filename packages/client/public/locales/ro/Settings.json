@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Alegeţi dacă doriţi să afişaţi linkurile către resurse suplimentare în {{productName}}.",
   "AdditionalResourcesSubtitle": "Configurați modul de afișare a linkurilor către resurse utile pentru utilizatorii dvs.",
   "AddTrustedDomain": "Adăugare domeniu de încredere",
+  "AdManagement": "Gestionare anunțuri",
+  "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
   "Admins": "Administratori",
   "AdminsMessage": "Setări mesagerie de administrator",
   "AdminsMessageMobileDescription": "Setări mesagerie de administrator este o modalitate de a contacta administratorul de portal.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Această subsecțiune este utilizată pentru a monitoriza cea mai recentă activitate de conectare a utilizatorilor, inclusiv conectările reuşite şi încercările eşuate, cu indicarea motivelor.",
   "LogoAbout": "Siglă pentru pagina Despre",
   "LogoCompact": "Meniul compact din partea stângă",
-  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo pentru editorul {{editorName}}",
+  "LogoForViewer": "Logo pentru {{diagramViewer}}",
   "LogoLightSmall": "Logo-ul pentru antetul spațiului",
   "LogoLogin": "Siglă pentru pagina de conectare și mesaje de e-mail",
   "ManagementCategoryDataManagement": "Gestionarea datelor",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
-  "YourLogo": "Logo-ul dvs",
-  "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
-  "AdManagement": "Gestionare anunțuri"
+  "YourLogo": "Logo-ul dvs"
 }

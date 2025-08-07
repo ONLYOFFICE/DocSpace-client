@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Chọn xem bạn có muốn hiển thị liên kết đến các tài nguyên bổ sung trong {{productName}} hay không.",
   "AdditionalResourcesSubtitle": "Định cấu hình hiển thị các liên kết đến các tài nguyên hữu ích cho người dùng của bạn.",
   "AddTrustedDomain": "Thêm tên miền được tin cậy",
+  "AdManagement": "Quản lý Quảng cáo",
+  "AdManagementDescription": "Chọn xem liệu các biểu ngữ quảng cáo có hiển thị trong {{productName}} của bạn hay không.",
   "Admins": "Quản trị viên",
   "AdminsMessage": "Cài đặt Tin nhắn Quản trị viên",
   "AdminsMessageMobileDescription": "Cài đặt Tin nhắn Quản trị viên là một cách để liên hệ với quản trị viên cổng thông tin.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Phần phụ này được sử dụng để theo dõi hoạt động đăng nhập mới nhất của người dùng bao gồm đăng nhập thành công và các lần cố đăng nhập không thành công với thông tin nguyên nhân.",
   "LogoAbout": "Logo cho trang Giới thiệu",
   "LogoCompact": "Logo cho menu nhỏ gọn bên trái",
-  "LogoDocsEditor": "Logo cho tiêu đề trình chỉnh sửa",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo cho trình soạn thảo {{editorName}}",
+  "LogoForViewer": "Logo cho {{diagramViewer}}",
   "LogoLightSmall": "Logo cho tiêu đề không gian",
   "LogoLogin": "Logo cho trang Đăng nhập và email",
   "ManagementCategoryDataManagement": "Quản lý dữ liệu",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
-  "YourLogo": "Logo của bạn",
-  "AdManagement": "Quản lý Quảng cáo",
-  "AdManagementDescription": "Chọn xem liệu các biểu ngữ quảng cáo có hiển thị trong {{productName}} của bạn hay không."
+  "YourLogo": "Logo của bạn"
 }

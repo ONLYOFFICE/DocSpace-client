@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Zgjidhni nëse dëshironi të shfaqni lidhje me burime shtesë në menynë {{productName}}.",
   "AdditionalResourcesSubtitle": "Konfiguroni shfaqjen e lidhjeve në burime të dobishme për përdoruesit tuaj.",
   "AddTrustedDomain": "Shtoni domen të besuar",
+  "AdManagement": "Menaxhimi i reklamave",
+  "AdManagementDescription": "Zgjidhni nëse shfaqen banderolat promovuese në {{productName}} tuaj.",
   "Admins": "Administratorët",
   "AdminsMessage": "Cilësimet e mesazheve të administratorit",
   "AdminsMessageMobileDescription": "Cilësimet e mesazheve të administratorit janë një mënyrë për të kontaktuar administratorin e portalit.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Ky nënseksion përdoret për të monitoruar aktivitetin më të fundit të hyrjes së përdoruesit, duke përfshirë hyrjet e suksesshme dhe përpjekjet e dështuara me një tregues të arsyeve.",
   "LogoAbout": "Logo për faqen Rreth",
   "LogoCompact": "Logo për menunë kompakte të majtë",
-  "LogoDocsEditor": "Logo për menunë kompakte të majtë",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logoja për redaktorin {{editorName}}",
+  "LogoForViewer": "Logo për {{diagramViewer}}",
   "LogoLightSmall": "Logo për kokën e hapësirës",
   "LogoLogin": "Logo për faqen e hyrjes dhe emailet",
   "ManagementCategoryDataManagement": "Menaxhimi i të dhënave",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër.",
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
-  "YourLogo": "Logos juaj",
-  "AdManagement": "Menaxhimi i reklamave",
-  "AdManagementDescription": "Zgjidhni nëse shfaqen banderolat promovuese në {{productName}} tuaj."
+  "YourLogo": "Logos juaj"
 }

@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Wybierz, czy chcesz wyświetlać linki do dodatkowych zasobów w {{productName}}.",
   "AdditionalResourcesSubtitle": "Skonfiguruj wyświetlanie linków do przydatnych zasobów dla użytkowników.",
   "AddTrustedDomain": "Dodaj zaufaną domenę",
+  "AdManagement": "Zarządzanie Reklamami",
+  "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}.",
   "Admins": "Administratorzy",
   "AdminsMessage": "Ustawienia wiadomości administratora",
   "AdminsMessageMobileDescription": "Ustawienia wiadomości administratora to sposób na skontaktowanie się z administratorem portalu.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Dana podsekcja służy do monitorowania logowania przez użytkowników, w tym udanych i nieudanych prób zalogowania ze wskazaniem przyczyny.",
   "LogoAbout": "Logo dla strony O nas",
   "LogoCompact": "Logo dla kompaktowego menu po lewej stronie",
-  "LogoDocsEditor": "Logo dla nagłówka edytorów",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo dla edytora {{editorName}}",
+  "LogoForViewer": "Logo dla {{diagramViewer}}",
   "LogoLightSmall": "Logo dla nagłówka portalu",
   "LogoLogin": "Logo dla strony logowania i e-maili",
   "ManagementCategoryDataManagement": "Zarządzanie danymi",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku.",
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
-  "YourLogo": "Twoje Logo",
-  "AdManagement": "Zarządzanie Reklamami",
-  "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}."
+  "YourLogo": "Twoje Logo"
 }

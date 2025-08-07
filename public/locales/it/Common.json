@@ -174,6 +174,9 @@
   "Description": "Descrizione",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Strumenti di sviluppo",
+  "Diagram": "Diagramma",
+  "Diagrams": "Diagrammi",
+  "DiagramViewer": "Visualizzatore di diagrammi",
   "Disable": "Disabilita",
   "Disabled": "Disattivata",
   "DisableQuota": "Disabilita quota",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "Sei pregato di <0>inserire la password</0> dei file protetti per continuare",
   "PasswordRequired": "Password richiesta",
   "PaymentsTitle": "Pagamenti",
+  "PDF": "PDF",
   "People": "Persone",
   "Permissions": "Permessi",
   "PerUserMonth": "<1>{{price}}</1> per amministratore/mese",
@@ -721,7 +725,5 @@
   "Yes": "Sì",
   "Yesterday": "Ieri",
   "You": "Tu",
-  "YourTurn": "Il tuo turno",
-  "Diagram": "Diagramma",
-  "Diagrams": "Diagrammi"
+  "YourTurn": "Il tuo turno"
 }

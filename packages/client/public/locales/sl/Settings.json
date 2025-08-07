@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Izberite, ali želite prikazati povezave do dodatnih virov v {{productName}}.",
   "AdditionalResourcesSubtitle": "Konfigurirajte prikaz povezav do koristnih virov za vaše uporabnike.",
   "AddTrustedDomain": "Dodaj zaupanja vredno domeno",
+  "AdManagement": "Upravljanje oglasov",
+  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}.",
   "Admins": "Administratorji",
   "AdminsMessage": "Nastavitve sporočil skrbnika",
   "AdminsMessageMobileDescription": "Nastavitve skrbniškega sporočila so način za stik s skrbnikom portala.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Ta pododdelek se uporablja za spremljanje zadnje dejavnosti prijave uporabnikov, vključno z uspešnimi prijavami in neuspelimi poskusi z opisi razlogov.",
   "LogoAbout": "Logotip za stran O nas",
   "LogoCompact": "Logotip za kompaktni levi meni",
-  "LogoDocsEditor": "Logotip za glavo urednika",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
+  "LogoForViewer": "Logotip za {{diagramViewer}}",
   "LogoLightSmall": "Logotip za glavo prostora",
   "LogoLogin": "Logotip za prijavno stran in emaile",
   "ManagementCategoryDataManagement": "Urejanje podatkov",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
-  "YourLogo": "Vaš logotip",
-  "AdManagement": "Upravljanje oglasov",
-  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}."
+  "YourLogo": "Vaš logotip"
 }

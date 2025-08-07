@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "选择是否要在{{productName}}中显示指向其他资源的链接。",
   "AdditionalResourcesSubtitle": "为用户配置显示有用资源的链接。",
   "AddTrustedDomain": "添加受信任的域名",
+  "AdManagement": "广告管理",
+  "AdManagementDescription": "选择是否在您的{{productName}}中显示促销横幅。",
   "Admins": "管理员",
   "AdminsMessage": "管理员消息设置",
   "AdminsMessageMobileDescription": "您可通过“管理员留言设置”联系门户管理员",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "了解最新用户登录活动，包括登录成功和失败的尝试次数及其原因说明。",
   "LogoAbout": "关于页面徽标",
   "LogoCompact": "紧凑左菜单徽标",
-  "LogoDocsEditor": "编辑器标头Logo",
   "LogoFavicon": "网站图标",
+  "LogoForEditors": "{{editorName}}编辑器 logo",
+  "LogoForViewer": "{{diagramViewer}} logo",
   "LogoLightSmall": "协作空间的标头 Logo",
   "LogoLogin": "用于登录页面和电子邮件的标志",
   "ManagementCategoryDataManagement": "数据管理",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。",
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
-  "YourLogo": "您的logo",
-  "AdManagement": "广告管理",
-  "AdManagementDescription": "选择是否在您的{{productName}}中显示促销横幅。"
+  "YourLogo": "您的logo"
 }

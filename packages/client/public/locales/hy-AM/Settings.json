@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Ընտրեք՝ ցանկանու՞մ եք ցուցադրել լրացուցիչ ռեսուրսների հղումներ {{productName}}-ում:",
   "AdditionalResourcesSubtitle": "Կարգավորեք ձեր օգտատերերի համար օգտակար ռեսուրսների հղումների ցուցադրումը:",
   "AddTrustedDomain": "Ավելացնել վստահելի տիրույթ",
+  "AdManagement": "Գովազդի Կառավարում",
+  "AdManagementDescription": "Ընտրեք՝ արդյոք գովազդային պաստառները ցուցադրվեն ձեր {{productName}}-ում:",
   "Admins": "Ադմինիստրատորներ",
   "AdminsMessage": "Ադմինիստրատորի հաղորդագրության կարգավորումներ",
   "AdminsMessageMobileDescription": "Ադմինիստրատորի հաղորդագրությունների կարգավորումները պորտալի ադմինիստրատորի հետ կապ հաստատելու միջոց է:",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "Այս ենթաբաժինը օգտագործվում է վերահսկելու օգտվողների մուտքի վերջին գործունեությունը, ներառյալ հաջող մուտքերը և ձախողված փորձերը՝ նշելով պատճառները:",
   "LogoAbout": "Մասին էջի լոգոն",
   "LogoCompact": "Կոմպակտ ձախ մենյուի պատկերանշան",
-  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "{{editorName}} խմբագրի լոգո",
+  "LogoForViewer": "{{diagramViewer}}-ի լոգո",
   "LogoLightSmall": "Լոգո կայքէջի էջագլխի համար",
   "LogoLogin": "Մուտք գործելու էջի և էլ. նամակների պատկերանշան",
   "ManagementCategoryDataManagement": "Տվյալների կառավարում",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "Դուք չունեք օգտատերեր առանց էլփոստի: Խնդրում ենք անցնել հաջորդ քայլին:",
   "YouHaveUnsavedChanges": "Դուք չպահված փոփոխություններ ունեք",
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
-  "YourLogo": "Ձեր լոգոն",
-  "AdManagement": "Գովազդի Կառավարում",
-  "AdManagementDescription": "Ընտրեք՝ արդյոք գովազդային պաստառները ցուցադրվեն ձեր {{productName}}-ում:"
+  "YourLogo": "Ձեր լոգոն"
 }

@@ -174,6 +174,9 @@
   "Description": "الوصف",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "ادوات المطورين",
+  "Diagram": "مخطط",
+  "Diagrams": "مخططات",
+  "DiagramViewer": "عارض المخططات",
   "Disable": "تعطيل",
   "Disabled": "تعطيل",
   "DisableQuota": "تعطيل الحصة",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "الرجاء <0>أدخل كلمة مرور</0> للملفات المحمية للمتابعة ",
   "PasswordRequired": "مطلوب كلمة مرور",
   "PaymentsTitle": "المدفوعات",
+  "PDF": "ملف PDF",
   "People": "الأشخاص",
   "Permissions": "الصلاحيات",
   "PerUserMonth": "<1>{{price}}</1> لكل مشرف /شهر",
@@ -721,7 +725,5 @@
   "Yes": "نعم",
   "Yesterday": "أمس",
   "You": "أنت",
-  "YourTurn": "دوركم الآن",
-  "Diagram": "مخطط",
-  "Diagrams": "مخططات"
+  "YourTurn": "دوركم الآن"
 }

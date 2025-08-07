@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "{{productName}}의 추가 리소스 링크 표시 여부를 선택하세요.",
   "AdditionalResourcesSubtitle": "사용자를 위한 유용한 리소스에 대한 링크 표시를 구성하세요.",
   "AddTrustedDomain": "신뢰할 수있는 도메인을 추가",
+  "AdManagement": "광고 관리",
+  "AdManagementDescription": "{{productName}}에서 프로모션 배너가 표시될지 여부를 선택하세요.",
   "Admins": "관리자",
   "AdminsMessage": "관리자 메시지 설정",
   "AdminsMessageMobileDescription": "관리자 메시지를 설정하여 포털 관리자에게 연락할 수 있습니다.",
@@ -200,8 +202,9 @@
   "LoginSubheaderTitle": "이 하위 섹션은 성공적인 로그인과 실패한 로그인 시도 및 그 이유를 포함하여 최신 사용자 로그인 활동을 모니터링하는 데 사용됩니다.",
   "LogoAbout": "소개 페이지 로고",
   "LogoCompact": "컴팩트한 왼쪽 메뉴 로고",
-  "LogoDocsEditor": "편집기 헤더 로고",
   "LogoFavicon": "파비콘",
+  "LogoForEditors": "{{editorName}} 편집기 로고",
+  "LogoForViewer": "{{diagramViewer}} 로고",
   "LogoLightSmall": "스페이스 헤더 로고",
   "LogoLogin": "로그인 페이지 및 이메일용 로고",
   "ManagementCategoryDataManagement": "데이터 관리",
@@ -366,7 +369,5 @@
   "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요.",
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
   "YourCurrentDomain": "내 현재 도메인",
-  "YourLogo": "로고",
-  "AdManagement": "광고 관리",
-  "AdManagementDescription": "{{productName}}에서 프로모션 배너가 표시될지 여부를 선택하세요."
+  "YourLogo": "로고"
 }

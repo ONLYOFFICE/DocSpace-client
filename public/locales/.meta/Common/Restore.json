@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2025-07-10T11:11:06.765Z",
+  "updated_at": "2025-08-07T11:20:05.650Z",
   "comment": {
     "text": "The translation key \"Restore\" is used to display a button label or header in various UI elements, such as buttons and dialogs. It indicates an action of recovering or returning a file or room to its original state. This translation key appears on screens like Restore Room Dialogs where users can restore a room.",
     "is_auto": true,
@@ -102,7 +102,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 398,
+      "line_number": 535,
       "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}\n reminderText={t(\"YouHaveUnsavedChanges\")}",
       "module": "/packages/shared"
     }

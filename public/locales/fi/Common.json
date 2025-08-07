@@ -174,6 +174,9 @@
   "Description": "Kuvaus",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Kehittäjän työkalut",
+  "Diagram": "Kaavio",
+  "Diagrams": "Kaaviot",
+  "DiagramViewer": "Kaavion katseluohjelma",
   "Disable": "Poista käytöstä",
   "Disabled": "Poistettu käytöstä",
   "DisableQuota": "Poista kiintiö käytöstä",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "<0>Syötä salasana<0> suojatuille tiedostoille jatkaaksesi",
   "PasswordRequired": "Salasana vaaditaan",
   "PaymentsTitle": "Maksut",
+  "PDF": "PDF",
   "People": "Ihmiset",
   "Permissions": "Oikeudet",
   "PerUserMonth": "<1>{{price}}</1> per ylläpitäjä/kuukausi",
@@ -721,7 +725,5 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "YourTurn": "Sinun vuorosi",
-  "Diagram": "Kaavio",
-  "Diagrams": "Kaaviot"
+  "YourTurn": "Sinun vuorosi"
 }

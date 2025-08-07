@@ -91,7 +91,6 @@ export type TConfirmRouteContext = {
     confirmHeader?: string;
     key?: string;
     emplType?: string;
-    email?: string;
     encemail?: string;
     uid?: string;
     type?: string;
@@ -103,6 +102,10 @@ export type TConfirmRouteContext = {
   roomData: {
     roomId?: string;
     title?: string;
+  };
+  confirmLinkResult: {
+    result?: ValidationResult;
+    email?: string;
   };
 };
 

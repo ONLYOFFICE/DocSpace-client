@@ -174,6 +174,8 @@ const PureHome = (props) => {
     setDropTargetPreview,
     selectedFolderTitle,
     clearDropPreviewLocation,
+    canCreateSecurity,
+    startDropPreview,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -354,12 +356,16 @@ const PureHome = (props) => {
 
   const onDragOverEmpty = React.useCallback(
     (isDragActive) => {
-      if (isDragActive && selectedFolderTitle) {
-        // console.log("Dragging over empty space");
+      if (
+        isDragActive &&
+        selectedFolderTitle &&
+        !disableDrag &&
+        canCreateSecurity
+      ) {
         setDropTargetPreview(selectedFolderTitle);
       }
     },
-    [selectedFolderTitle, setDropTargetPreview],
+    [selectedFolderTitle, setDropTargetPreview, disableDrag, canCreateSecurity],
   );
 
   const onDragLeaveEmpty = React.useCallback(() => {
@@ -391,6 +397,7 @@ const PureHome = (props) => {
   sectionProps.onDragOverEmpty = onDragOverEmpty;
   sectionProps.onDragLeaveEmpty = onDragLeaveEmpty;
   sectionProps.dragging = dragging;
+  sectionProps.startDropPreview = startDropPreview;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -485,6 +492,9 @@ export const Component = inject(
       security: folderSecurity,
       title: selectedFolderTitle,
     } = selectedFolderStore;
+
+    const canCreateSecurity = folderSecurity?.Create;
+
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -567,6 +577,7 @@ export const Component = inject(
       dropTargetPreview,
       setDropTargetPreview,
       clearDropPreviewLocation,
+      startDropPreview,
     } = primaryProgressDataStore;
 
     const {
@@ -752,6 +763,8 @@ export const Component = inject(
       setDropTargetPreview,
       selectedFolderTitle,
       clearDropPreviewLocation,
+      canCreateSecurity,
+      startDropPreview,
     };
   },
 )(observer(Home));

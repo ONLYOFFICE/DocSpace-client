@@ -27,7 +27,9 @@
 import { useState, useEffect, useRef } from "react";
 
 export const AnimationEvents = {
-  END_ANIMATION: "ARTICLE_ITEM_END_ANIMATION",
+  END_ANIMATION: "ANIMATION_END",
+  ANIMATION_STARTED: "ANIMATION_STARTED",
+  ANIMATION_ENDED: "ANIMATION_ENDED",
 };
 
 export type UseAnimationReturn = {
@@ -53,6 +55,8 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
 
   // Function to start animation (CSS-based)
   const startAnimation = () => {
+    window.dispatchEvent(new CustomEvent(AnimationEvents.ANIMATION_STARTED));
+
     // Clear any existing interval
     if (progressInterval.current) {
       clearInterval(progressInterval.current);
@@ -124,6 +128,9 @@ export const useAnimation = (isActive: boolean): UseAnimationReturn => {
         setTimeout(() => {
           setAnimationPhase("none");
           setIsAnimationReady(false);
+          window.dispatchEvent(
+            new CustomEvent(AnimationEvents.ANIMATION_ENDED),
+          );
         }, 400);
       }
     };

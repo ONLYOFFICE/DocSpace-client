@@ -37,7 +37,6 @@ import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicat
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
-// import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
@@ -58,6 +57,8 @@ type ViewProps = UseContactsProps &
 
     filesAbortController: Nullable<AbortController>;
     roomsAbortController: Nullable<AbortController>;
+
+    showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
   };
 
 const View = ({
@@ -102,6 +103,8 @@ const View = ({
   clearFiles,
 
   setIsSectionHeaderLoading,
+
+  showHeaderLoader,
 }: ViewProps) => {
   const location = useLocation();
 
@@ -152,6 +155,8 @@ const View = ({
   const getFilesRef = React.useRef(getFiles);
   const fetchContactsRef = React.useRef(fetchContacts);
 
+  const animationStartedRef = React.useRef(false);
+
   const abortControllers = React.useRef({
     filesAbortController,
     roomsAbortController,
@@ -188,6 +193,26 @@ const View = ({
   ]);
 
   React.useEffect(() => {
+    animationStartedRef.current = false;
+
+    const animationStartedAction = () => {
+      animationStartedRef.current = true;
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_STARTED,
+      animationStartedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_STARTED,
+        animationStartedAction,
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
     if (!isLoading) {
       TopLoadingIndicator.end();
 
@@ -195,25 +220,35 @@ const View = ({
     }
   }, [isLoading]);
 
-  // React.useEffect(() => {
-  //   if (isLoading) {
-  //     const view = getContactsView();
-  //     const tab =
-  //       document.getElementById("contacts-tabs") ||
-  //       document.getElementById("files-tabs");
+  React.useEffect(() => {
+    animationStartedRef.current = false;
 
-  //     if (tab) return;
+    const animationEndedAction = () => {
+      animationStartedRef.current = false;
+    };
 
-  //     if (
-  //       view === "inside_group" ||
-  //       (isContactsPage && prevCurrentViewRef.current === "files") ||
-  //       (!isContactsPage && prevCurrentViewRef.current !== "files") ||
-  //       prevCategoryType.current !== getCategoryType(location)
-  //     ) {
-  //       TopLoadingIndicator.start();
-  //     }
-  //   }
-  // }, [isLoading, isContactsPage, location]);
+    window.addEventListener(
+      AnimationEvents.ANIMATION_ENDED,
+      animationEndedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_ENDED,
+        animationEndedAction,
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (showHeaderLoader) return;
+
+    if (isLoading) {
+      if (!animationStartedRef.current) {
+        TopLoadingIndicator.start();
+      }
+    }
+  }, [isLoading, showHeaderLoader]);
 
   React.useEffect(() => {
     const getView = async () => {
@@ -334,6 +369,8 @@ export const ViewComponent = inject(
       setIsChangePageRequestRunning,
       setCurrentClientView,
       setIsSectionHeaderLoading,
+
+      showHeaderLoader,
     } = clientLoadingStore;
 
     const { playlist, setToPreviewFile } = mediaViewerDataStore;
@@ -380,6 +417,8 @@ export const ViewComponent = inject(
       clearFiles,
 
       setIsSectionHeaderLoading,
+
+      showHeaderLoader,
     };
   },
 )(observer(View));

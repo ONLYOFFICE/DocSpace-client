@@ -176,10 +176,6 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       hadOperationsBeforeDrag.current = false;
     }
 
-    previewHideTimerRef.current = setTimeout(() => {
-      setIsVisible(false);
-      setAnimationState("idle");
-    }, 300);
   }, [isDragging, hasUploadOperationByDrag, setHideMainButton]);
 
   useEffect(() => {
@@ -195,6 +191,9 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
 
       if (animation.includes("dropPreviewButton") && !isDragging) {
         clearDropPreviewLocation?.();
+        // Reset visibility after animation completes
+        setIsVisible(false);
+        setAnimationState("idle");
       }
     },
     [clearDropPreviewLocation, isDragging],
@@ -207,12 +206,6 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     }
 
     setHideMainButton(false);
-
-    setTimeout(() => {
-      setIsVisible(false);
-      setAnimationState("idle");
-    }, 300);
-
     clearDropPreviewLocation?.();
   }, [
     clearDropPreviewLocation,

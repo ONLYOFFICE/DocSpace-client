@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { use, useRef, useEffect } from "react";
+import { use, useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -103,6 +103,7 @@ const FileTile = (props) => {
   // const { sectionWidth } = useContext(Context);
 
   const tileRef = useRef(null);
+  const [isDragActive, setIsDragActive] = useState(false);
 
   const { columnCount, thumbSize } = use(FileTileContext);
 
@@ -138,18 +139,15 @@ const FileTile = (props) => {
   useEffect(() => {
     if (dragging) {
       if (isDragging) {
-        setDropTargetPreview(item.title);
+        if (isDragActive) setDropTargetPreview(item.title);
       } else {
         setDropTargetPreview(selectedFolderTitle);
       }
     }
-    // else {
-    //   setDropTargetPreview(null);
-    // }
   }, [
     dragging,
     isDragging,
-    isDragDisabled,
+    isDragActive,
     selectedFolderTitle,
     setDropTargetPreview,
   ]);
@@ -174,13 +172,18 @@ const FileTile = (props) => {
 
   const activeClass = checkedProps || isActive ? "tile-selected" : "";
 
-  const onDragOverEvent = (_, e) => {
+  const onDragOverEvent = (dragActive, e) => {
     onDragOver && onDragOver(e);
+
+    if (dragActive !== isDragActive) {
+      setIsDragActive(dragActive);
+    }
   };
 
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
     setDropTargetPreview(null);
+    setIsDragActive(false);
   };
 
   const onOpenUser = () => {

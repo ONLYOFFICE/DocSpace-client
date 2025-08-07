@@ -2684,17 +2684,17 @@ class FilesActionStore {
 
       window.DocSpace.navigate(url, { state });
     } else {
+      if (isFrame && frameConfig?.events?.onFileManagerClick) {
+        frameCallEvent({ event: "onFileManagerClick", data: item });
+        return;
+      }
+
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
         setConvertDialogData({
           files: item,
         });
         setConvertDialogVisible(true);
-        return;
-      }
-
-      if (isFrame && frameConfig?.events?.onFileManagerClick) {
-        frameCallEvent({ event: "onFileManagerClick", data: item });
         return;
       }
 

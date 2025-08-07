@@ -288,44 +288,64 @@
   bottom: 0px;
   border-radius: 4px 4px 0 0;
   transform-origin: left;
-  transform: scaleX(1); // Default: fully filled
+
+  position: relative;
+  // Remove default transform and background to allow animation
 
   &.primary {
     &.selected {
-      background-color: var(--accent-main);
+      // Default: fully filled background when not animating
+
+      .tabSubLineSibling {
+        background-color: var(--accent-main);
+
+        width: 100%;
+        height: 4px;
+
+        position: absolute;
+        top: 0;
+        border-radius: 4px 4px 0 0;
+
+        // Animated progress background when animating
+        &.animatedProgress {
+          width: 10%;
+          animation: progressWidth 2s ease-out forwards;
+        }
+
+        &.animatedFinish {
+          width: var(--end-width, 90%);
+          animation: progressWidthFinish 0.4s ease-out forwards;
+        }
+
+        // Show transparent background when ready for animation
+        &.animationReady {
+          background-color: transparent;
+        }
+      }
     }
   }
 
   &.secondary {
     display: none;
   }
+}
 
-  // Separate animation class
-  &.animated {
-    animation: fillWidth 1s ease-in-out infinite;
-    // Remove transition during animation to prevent conflicts
-    transition: none;
+// Width-based animation from 10% to 90%
+@keyframes progressWidth {
+  0% {
+    width: 10%;
   }
-
-  // Animation that finishes after one cycle
-  &.animatedFinishing {
-    animation: fillWidth 1s ease-in-out 1 forwards;
-    // Remove transition during animation to prevent conflicts
-    transition: none;
-  }
-
-  // Apply transition only when not animating
-  &:not(.animated) {
-    transition: transform 0.3s ease;
+  100% {
+    width: 90%;
   }
 }
 
-@keyframes fillWidth {
-  from {
-    transform: scaleX(0);
+@keyframes progressWidthFinish {
+  0% {
+    width: var(--end-width, 90%);
   }
-  to {
-    transform: scaleX(1);
+  100% {
+    width: 100%;
   }
 }
 

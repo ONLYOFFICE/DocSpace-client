@@ -96,6 +96,8 @@ const FileTile = (props) => {
     deleteRefMap,
     setDropTargetPreview,
     selectedFolderTitle,
+    disableDrag,
+    canCreateSecurity,
   } = props;
 
   const navigate = useNavigate();
@@ -140,8 +142,10 @@ const FileTile = (props) => {
     if (dragging) {
       if (isDragging) {
         if (isDragActive) setDropTargetPreview(item.title);
-      } else {
+      } else if (!disableDrag && canCreateSecurity) {
         setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
       }
     }
   }, [

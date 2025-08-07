@@ -51,6 +51,8 @@ const FilesTileContainer = ({
   isDesc,
   selectedFolderTitle,
   setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
 }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
@@ -125,6 +127,8 @@ const FilesTileContainer = ({
           withRef
           selectedFolderTitle={selectedFolderTitle}
           setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
         />
       ) : (
         <FileTile
@@ -136,6 +140,8 @@ const FilesTileContainer = ({
           itemIndex={index}
           selectedFolderTitle={selectedFolderTitle}
           setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
         />
       );
     });
@@ -159,20 +165,23 @@ const FilesTileContainer = ({
 
 export default inject(
   ({ filesStore, uploadDataStore, selectedFolderStore }) => {
-    const { filesList } = filesStore;
+    const { filesList, disableDrag } = filesStore;
     const { filter } = filesStore;
 
     const isDesc = filter?.sortOrder === "desc";
 
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
-    const { title: selectedFolderTitle } = selectedFolderStore;
+    const { title: selectedFolderTitle, security: canCreateSecurity } =
+      selectedFolderStore;
 
     return {
       filesList,
       isDesc,
       setDropTargetPreview,
       selectedFolderTitle,
+      disableDrag,
+      canCreateSecurity,
     };
   },
 )(withContainer(observer(FilesTileContainer)));

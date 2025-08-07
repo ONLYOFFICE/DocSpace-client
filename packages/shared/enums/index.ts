@@ -815,10 +815,9 @@ export enum ProvidersType {
   Yandex = "Yandex",
 }
 
-export const enum LinkEntityType {
-  FILE,
-  FOLDER,
-  ROOM,
+export const enum LinkSharingEntityType {
+  RoomOrFolder = 1,
+  File = 2,
 }
 
 export const enum ShareLinkType {

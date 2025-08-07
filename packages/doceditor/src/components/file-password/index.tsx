@@ -40,6 +40,7 @@ import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import PublicRoomPassword from "@docspace/shared/pages/PublicRoom/PublicRoomPasswordForm";
 
 import { getLogoUrl } from "@docspace/shared/utils";
 import { frameCallCommand } from "@docspace/shared/utils/common";
@@ -53,67 +54,72 @@ import {
   StyledContent,
   StyledBody,
   StyledSimpleNav,
+  Container,
 } from "./FilePassword.styled";
 
-const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
+const FilePassword = ({ shareKey, validationData }: FilePasswordProps) => {
   const { t } = useTranslation(["Common"]);
 
   const theme = useTheme();
 
-  const [password, setPassword] = useState("");
-  const [passwordValid, setPasswordValid] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [passwordValid, setPasswordValid] = useState(true);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => frameCallCommand("setIsLoaded"), []);
 
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    !passwordValid && setPasswordValid(true);
-  };
+  // const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setPassword(e.target.value);
+  //   !passwordValid && setPasswordValid(true);
+  // };
 
-  const onSubmit = async () => {
-    if (!password.trim()) {
-      setPasswordValid(false);
-      setErrorMessage(t("Common:RequiredField"));
-    } else {
-      setErrorMessage("");
-    }
+  // const onSubmit = async () => {
+  //   if (!password.trim()) {
+  //     setPasswordValid(false);
+  //     setErrorMessage(t("Common:RequiredField"));
+  //   } else {
+  //     setErrorMessage("");
+  //   }
 
-    if (!passwordValid || !password.trim()) {
-      setIsLoading(false);
-      return;
-    }
+  //   if (!passwordValid || !password.trim()) {
+  //     setIsLoading(false);
+  //     return;
+  //   }
 
-    setIsLoading(true);
-    try {
-      const res = await validatePublicRoomPassword(shareKey, password);
+  //   setIsLoading(true);
+  //   try {
+  //     const res = await validatePublicRoomPassword(shareKey, password);
 
-      if (res?.status === ValidationStatus.Ok) {
-        return window.location.reload();
-      }
+  //     if (res?.status === ValidationStatus.Ok) {
+  //       return window.location.reload();
+  //     }
 
-      setIsLoading(false);
+  //     setIsLoading(false);
 
-      if (res?.status === ValidationStatus.InvalidPassword) {
-        setErrorMessage(t("Common:IncorrectPassword"));
-      }
-    } catch (error) {
-      toastr.error(error as TData);
-      setIsLoading(false);
-    }
-  };
+  //     if (res?.status === ValidationStatus.InvalidPassword) {
+  //       setErrorMessage(t("Common:IncorrectPassword"));
+  //     }
+  //   } catch (error) {
+  //     toastr.error(error as TData);
+  //     setIsLoading(false);
+  //   }
+  // };
 
-  const onKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      onSubmit();
-    }
-  };
+  // const onKeyPress = (event: React.KeyboardEvent) => {
+  //   if (event.key === "Enter") {
+  //     onSubmit();
+  //   }
+  // };
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
 
+  const onSubmit = () => {
+    return window.location.reload();
+  };
+
   return (
-    <>
+    <Container>
       <StyledSimpleNav id="public-room-password-header">
         <Image
           className="logo"
@@ -124,95 +130,116 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
           height={24}
         />
       </StyledSimpleNav>
-      <StyledPage>
-        <div className="public-room_content-wrapper">
-          <StyledContent className="public-room-content">
-            <StyledBody>
-              <Image
-                priority
-                src={logoUrl}
-                className="logo-wrapper"
-                alt="icon"
-                width={386}
-                height={44}
-              />
-
-              <FormWrapper>
-                <div className="password-form">
-                  <Text fontSize="16px" fontWeight="600">
-                    {t("Common:PasswordRequired")}
-                  </Text>
-
-                  <Text
-                    fontSize="13px"
-                    fontWeight="400"
-                    className="public-room-text"
-                  >
-                    <Trans
-                      t={t}
-                      ns="Common"
-                      i18nKey="EnterPasswordDescription"
-                      values={{ fileName: entryTitle }}
-                      components={{
-                        1: <span key="component_key" className="bold" />,
-                      }}
-                    />
-                  </Text>
-                  <div className="public-room-name">
-                    <PublicRoomIcon className="public-room-icon" />
-                    <Text
-                      className="public-room-text"
-                      fontSize="15px"
-                      fontWeight="600"
-                    >
-                      {title}
-                    </Text>
-                  </div>
-
-                  <FieldContainer
-                    isVertical
-                    labelVisible={false}
-                    hasError={!!errorMessage}
-                    errorMessage={errorMessage}
-                  >
-                    <PasswordInput
-                      simpleView
-                      id="password"
-                      inputName="password"
-                      placeholder={t("Common:Password")}
-                      inputType={InputType.password}
-                      inputValue={password}
-                      hasError={!!errorMessage}
-                      size={InputSize.large}
-                      scale
-                      tabIndex={1}
-                      autoComplete="current-password"
-                      onChange={onChangePassword}
-                      onKeyDown={onKeyPress}
-                      isDisabled={isLoading}
-                      isDisableTooltip
-                      isAutoFocussed
-                      // forwardedRef={inputRef}
-                    />
-                  </FieldContainer>
-                </div>
-
-                <Button
-                  primary
-                  size={ButtonSize.medium}
-                  scale
-                  label={t("Common:ContinueButton")}
-                  tabIndex={5}
-                  onClick={onSubmit}
-                  isDisabled={isLoading}
-                />
-              </FormWrapper>
-            </StyledBody>
-          </StyledContent>
-        </div>
-      </StyledPage>
-    </>
+      <PublicRoomPassword
+        t={t}
+        roomKey={shareKey}
+        validationData={validationData}
+        onSuccessValidationCallback={onSubmit}
+      />
+    </Container>
   );
+
+  // return (
+  //   <>
+  //     <StyledSimpleNav id="public-room-password-header">
+  //       <Image
+  //         className="logo"
+  //         src={logoUrl}
+  //         priority
+  //         alt="mobile-icon"
+  //         width={211}
+  //         height={24}
+  //       />
+  //     </StyledSimpleNav>
+  //     <StyledPage>
+  //       <div className="public-room_content-wrapper">
+  //         <StyledContent className="public-room-content">
+  //           <StyledBody>
+  //             <Image
+  //               priority
+  //               src={logoUrl}
+  //               className="logo-wrapper"
+  //               alt="icon"
+  //               width={386}
+  //               height={44}
+  //             />
+
+  //             <FormWrapper>
+  //               <div className="password-form">
+  //                 <Text fontSize="16px" fontWeight="600">
+  //                   {t("Common:PasswordRequired")}
+  //                 </Text>
+
+  //                 <Text
+  //                   fontSize="13px"
+  //                   fontWeight="400"
+  //                   className="public-room-text"
+  //                 >
+  //                   <Trans
+  //                     t={t}
+  //                     ns="Common"
+  //                     i18nKey="EnterPasswordDescription"
+  //                     values={{ fileName: entryTitle }}
+  //                     components={{
+  //                       1: <span key="component_key" className="bold" />,
+  //                     }}
+  //                   />
+  //                 </Text>
+  //                 <div className="public-room-name">
+  //                   <PublicRoomIcon className="public-room-icon" />
+  //                   <Text
+  //                     className="public-room-text"
+  //                     fontSize="15px"
+  //                     fontWeight="600"
+  //                   >
+  //                     {title}
+  //                   </Text>
+  //                 </div>
+
+  //                 <FieldContainer
+  //                   isVertical
+  //                   labelVisible={false}
+  //                   hasError={!!errorMessage}
+  //                   errorMessage={errorMessage}
+  //                 >
+  //                   <PasswordInput
+  //                     simpleView
+  //                     id="password"
+  //                     inputName="password"
+  //                     placeholder={t("Common:Password")}
+  //                     inputType={InputType.password}
+  //                     inputValue={password}
+  //                     hasError={!!errorMessage}
+  //                     size={InputSize.large}
+  //                     scale
+  //                     tabIndex={1}
+  //                     autoComplete="current-password"
+  //                     onChange={onChangePassword}
+  //                     onKeyDown={onKeyPress}
+  //                     isDisabled={isLoading}
+  //                     isDisableTooltip
+  //                     isAutoFocussed
+  //                     // forwardedRef={inputRef}
+  //                   />
+  //                 </FieldContainer>
+  //               </div>
+
+  //               <Button
+  //                 primary
+  //                 size={ButtonSize.medium}
+  //                 scale
+  //                 label={t("Common:ContinueButton")}
+  //                 tabIndex={5}
+  //                 onClick={onSubmit}
+  //                 isDisabled={isLoading}
+  //               />
+  //             </FormWrapper>
+  //           </StyledBody>
+  //         </StyledContent>
+  //       </div>
+  //     </StyledPage>
+  //   </>
+  // );
 };
 
 export default dynamic(() => Promise.resolve(FilePassword), { ssr: false });

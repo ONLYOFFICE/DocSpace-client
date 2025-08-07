@@ -490,10 +490,13 @@ export function getPrimaryLink(roomId: number | string) {
   }) as Promise<TFileLink>;
 }
 
-export function validatePublicRoomKey(key: string) {
+export function validatePublicRoomKey(
+  key: string,
+  searchParams?: URLSearchParams,
+) {
   return request<TValidateShareRoom>({
     method: "get",
-    url: `files/share/${key}`,
+    url: `files/share/${key}${searchParams && searchParams.size > 0 ? `?${searchParams.toString()}` : ""}`,
   });
 }
 

@@ -312,7 +312,7 @@ const Members = ({
 
     const showPublicRoomBar =
       ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
-      infoPanelSelection.security.EditAccess &&
+      infoPanelSelection?.security?.EditAccess &&
       !searchValue &&
       !isTemplate;
 

@@ -61,6 +61,11 @@ class PublicRoomStore {
 
   filesStore;
 
+  /**
+   * @type {import("@docspace/shared/api/rooms/types").TValidateShareRoom | null}
+   */
+  validationData = null;
+
   constructor(clientLoadingStore, filesStore) {
     this.clientLoadingStore = clientLoadingStore;
     this.filesStore = filesStore;
@@ -83,6 +88,7 @@ class PublicRoomStore {
     this.roomId = id;
     this.roomStatus = status;
     this.roomType = roomType;
+    this.validationData = data;
 
     if (status === ValidationStatus.Ok) this.isLoaded = true;
   };
@@ -246,8 +252,19 @@ class PublicRoomStore {
 
   validatePublicRoomKey = (key) => {
     this.setIsLoading(true);
+
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const fileId = searchParams.get("fileId");
+    const folderId = searchParams.get("folderId") ?? searchParams.get("folder");
+
+    const params = new URLSearchParams();
+
+    if (fileId) params.set("fileId", fileId);
+    if (folderId) params.set("folderId", folderId);
+
     api.rooms
-      .validatePublicRoomKey(key)
+      .validatePublicRoomKey(key, params)
       .then((res) => {
         runInAction(() => {
           this.publicRoomKey = key;

@@ -28,6 +28,7 @@ import { TFile, TFolder } from "../files/types";
 import {
   ExportRoomIndexTaskStatus,
   FolderType,
+  LinkSharingEntityType,
   RoomsType,
   ShareAccessRights,
   ValidationStatus,
@@ -167,23 +168,22 @@ export type TNewFiles = {
   items: TNewFilesItem[];
 };
 
-export type TValidateShareRoom =
-  | {
-      id: string;
-      isAuthenticated: boolean;
-      linkId: string;
-      shared: boolean;
-      status: number;
-      tenantId: number;
-      title: string;
-    }
-  | {
-      isAuthenticated: boolean;
-      linkId: string;
-      shared: boolean;
-      status: number;
-      tenantId: number;
-    };
+export type TValidateShareRoom = {
+  id: string;
+  isAuthenticated: boolean;
+  linkId: string;
+  shared: boolean;
+  status: number;
+  tenantId: number;
+  title: string;
+
+  isRoom: boolean;
+  type: LinkSharingEntityType;
+
+  entityId?: string;
+  entityTitle?: string;
+  entityType?: LinkSharingEntityType;
+};
 
 export type RoomMember = {
   access: number;

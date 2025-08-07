@@ -913,5 +913,11 @@
   "Embed": "Embed",
   "YouDontHaveEnoughPermission": "You don't have enough permission",
   "GeneralLinkRevokedAndCreatedSuccessfully": "New general link created successfully",
-  "RevokeLink": "Revoke link"
+  "RevokeLink": "Revoke link",
+  "PasswordProtectedFile": "File <1>{{fileName}}</1> is password-protected. Please enter the password",
+  "PasswordProtectedRoomFile": "File <1>{{fileName}}</1> is located in the password-protected room. Please enter a password for the room",
+  "PasswordProtectedRoomFolder": "Folder <1>{{folderName}}</1> is located in the password-protected room. Please enter a password for the room",
+  "PasswordProtectedFolder": "Folder <1>{{folderName}}</1> is password-protected. Please enter the password",
+  "PasswordProtectedFolderFolder": "Folder <1>{{folderName}}</1> is located in the password-protected folder. Please enter a password for the folder",
+  "PasswordProtectedFolderFile": "File <1>{{fileName}}</1> is located in the password-protected folder. Please enter a password for the folder"
 }

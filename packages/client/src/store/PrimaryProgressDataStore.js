@@ -115,7 +115,9 @@ class PrimaryProgressDataStore {
     console.log("clearPrimaryProgressData", this.primaryOperationsArray);
 
   clearDropPreviewLocation = () => {
-    this.dropTargetPreview = { title: null, visible: false };
+    console.log("clearDropPreviewLocation");
+    this.setStartDropPreview(false);
+    this.dropTargetPreview = null;
   };
 
   get primaryOperationsCompleted() {
@@ -147,10 +149,17 @@ class PrimaryProgressDataStore {
     }
   };
 
-  setDropTargetPreview = (title) => {
-    if (title === this.dropTargetPreview?.title) return;
+  setStartDropPreview = (visible) => {
+    if (this.startDropPreview === visible) return;
 
-    this.dropTargetPreview = { title, visible: true };
+    this.startDropPreview = visible;
+  };
+
+  setDropTargetPreview = (title) => {
+    if (!title && !this.startDropPreview) return;
+    this.setStartDropPreview(true);
+    // console.log("setDropTargetPreview", title);
+    this.dropTargetPreview = title;
   };
 }
 

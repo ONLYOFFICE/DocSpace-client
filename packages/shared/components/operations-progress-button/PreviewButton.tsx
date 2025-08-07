@@ -138,7 +138,13 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     }
 
     prevDropPreviewLocation.current = current;
-  }, [isDragging, dropTargetFolderName, lastKnownTitle, allOperationsLength]);
+  }, [
+    isDragging,
+    dropTargetFolderName,
+    lastKnownTitle,
+    allOperationsLength,
+    isVisible,
+  ]);
 
   useEffect(() => {
     if (isDragging) return;
@@ -285,7 +291,9 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       <HelpButton
         place="bottom"
         tooltipContent={
-          dropTargetFolderName || lastKnownTitle ? (
+          animationState !== "hidingUnder" &&
+          animationState !== "dropping" &&
+          (dropTargetFolderName || lastKnownTitle) ? (
             <Text fontWeight={600}>
               {`Moved to: ${dropTargetFolderName || lastKnownTitle}`}
             </Text>

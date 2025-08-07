@@ -37,8 +37,9 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 const EmailChangeHandler = () => {
   const [error, setError] = useState<string>();
 
-  const { linkData } = useContext(ConfirmRouteContext);
-  const { email = "", encemail = "", uid = "", key = "" } = linkData;
+  const { linkData, confirmLinkResult } = useContext(ConfirmRouteContext);
+  const { uid = "", key = "", encemail = "" } = linkData;
+  const { email = "" } = confirmLinkResult;
 
   useEffect(() => {
     async function emailChange() {

@@ -69,9 +69,9 @@ const ActivateUserForm = ({
   defaultPage = "/",
 }: ActivateUserFormPorps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
-  const { linkData } = useContext(ConfirmRouteContext);
+  const { confirmLinkResult, linkData } = useContext(ConfirmRouteContext);
 
-  const emailFromLink = linkData?.email ? linkData.email : "";
+  const emailFromLink = confirmLinkResult?.email ? confirmLinkResult.email : "";
 
   const [name, setName] = useState(linkData.firstname ?? "");
   const [nameValid, setNameValid] = useState(true);
@@ -142,7 +142,7 @@ const ActivateUserForm = ({
     const hash = createPasswordHash(password, passwordHash);
 
     const loginData = {
-      userName: linkData.email ?? "",
+      userName: confirmLinkResult.email ?? "",
       passwordHash: hash,
     };
 

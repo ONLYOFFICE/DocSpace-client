@@ -367,5 +367,6 @@
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
   "AdManagement": "广告管理",
-  "AdManagementDescription": "选择是否在您的{{productName}}中显示促销横幅。"
+  "AdManagementDescription": "选择是否在您的{{productName}}中显示促销横幅。",
+  "LogoForEditors": "{{editorName}} 编辑器的 Logo"
 }

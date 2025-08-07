@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
   "AdManagement": "Menaxhimi i reklamave",
-  "AdManagementDescription": "Zgjidhni nëse shfaqen banderolat promovuese në {{productName}} tuaj."
+  "AdManagementDescription": "Zgjidhni nëse shfaqen banderolat promovuese në {{productName}} tuaj.",
+  "LogoForEditors": "Logo për editorin {{editorName}}"
 }

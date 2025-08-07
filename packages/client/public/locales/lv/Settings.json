@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
   "AdManagement": "Reklamu vadība",
-  "AdManagementDescription": "Izvēlieties, vai reklāmas banneri tiek rādīti jūsu {{productName}}."
+  "AdManagementDescription": "Izvēlieties, vai reklāmas banneri tiek rādīti jūsu {{productName}}.",
+  "LogoForEditors": "Logo priekš {{editorName}} redaktoram"
 }

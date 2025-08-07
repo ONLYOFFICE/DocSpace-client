@@ -367,5 +367,6 @@
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
   "AdManagement": "إدارة الإعلانات",
-  "AdManagementDescription": "اختروا ما إذا كانت اللافتات الترويجية ستظهر في {{productName}} الخاص بكم."
+  "AdManagementDescription": "اختروا ما إذا كانت اللافتات الترويجية ستظهر في {{productName}} الخاص بكم.",
+  "LogoForEditors": "شعار لمحرر {{editorName}}"
 }

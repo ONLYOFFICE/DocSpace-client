@@ -367,5 +367,6 @@
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
   "AdManagement": "ການຄຸ້ມຄອງການໂຄສະນາ",
-  "AdManagementDescription": "ເລືອກວ່າຈະໃຫ້ສະແດງປ້າຍໂຄສະນາໃນ {{productName}} ຂອງທ່ານຫຼືບໍ່."
+  "AdManagementDescription": "ເລືອກວ່າຈະໃຫ້ສະແດງປ້າຍໂຄສະນາໃນ {{productName}} ຂອງທ່ານຫຼືບໍ່.",
+  "LogoForEditors": "ໂລโก້ສໍາລັບຕົວແກ້ໄຂ {{editorName}}"
 }

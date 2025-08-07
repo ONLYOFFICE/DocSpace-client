@@ -367,5 +367,6 @@
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
   "AdManagement": "広告管理",
-  "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。"
+  "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。",
+  "LogoForEditors": "{{editorName}} エディター用ロゴ"
 }

@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
   "AdManagement": "Správa reklam",
-  "AdManagementDescription": "Vyberte, zda se zobrazují propagační bannery ve vašem {{productName}}."
+  "AdManagementDescription": "Vyberte, zda se zobrazují propagační bannery ve vašem {{productName}}.",
+  "LogoForEditors": "Logo pro editor {{editorName}}"
 }

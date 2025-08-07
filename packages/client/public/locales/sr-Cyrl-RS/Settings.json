@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
   "AdManagement": "Управљање огласима",
-  "AdManagementDescription": "Изаберите да ли ће промотивни банери бити приказани у вашем {{productName}}."
+  "AdManagementDescription": "Изаберите да ли ће промотивни банери бити приказани у вашем {{productName}}.",
+  "LogoForEditors": "Лого за уређивач {{editorName}}"
 }

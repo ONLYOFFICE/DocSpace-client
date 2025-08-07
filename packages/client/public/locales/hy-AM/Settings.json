@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Ձեր ընթացիկ տիրույթը",
   "YourLogo": "Ձեր լոգոն",
   "AdManagement": "Գովազդի Կառավարում",
-  "AdManagementDescription": "Ընտրեք՝ արդյոք գովազդային պաստառները ցուցադրվեն ձեր {{productName}}-ում:"
+  "AdManagementDescription": "Ընտրեք՝ արդյոք գովազդային պաստառները ցուցադրվեն ձեր {{productName}}-ում:",
+  "LogoForEditors": "{{editorName}} խմբագրիչի պատկերանիշ"
 }

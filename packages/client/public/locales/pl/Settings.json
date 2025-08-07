@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
   "AdManagement": "Zarządzanie Reklamami",
-  "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}."
+  "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}.",
+  "LogoForEditors": "Logo dla edytora {{editorName}}"
 }

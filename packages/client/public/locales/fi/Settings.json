@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
   "YourLogo": "Logosi",
   "AdManagement": "Mainoshallinta",
-  "AdManagementDescription": "Valitse, näytetäänkö mainosbannerit {{productName}}-tuotteessasi."
+  "AdManagementDescription": "Valitse, näytetäänkö mainosbannerit {{productName}}-tuotteessasi.",
+  "LogoForEditors": "{{editorName}} -editorin logo"
 }

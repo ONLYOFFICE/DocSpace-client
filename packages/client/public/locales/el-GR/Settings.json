@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
   "YourLogo": "Το λογότυπό σας",
   "AdManagement": "Διαχείριση Διαφημίσεων",
-  "AdManagementDescription": "Επιλέξτε αν θα εμφανίζονται διαφημιστικές μπάνερ στο {{productName}} σας."
+  "AdManagementDescription": "Επιλέξτε αν θα εμφανίζονται διαφημιστικές μπάνερ στο {{productName}} σας.",
+  "LogoForEditors": "Logo για τον επεξεργαστή {{editorName}}"
 }

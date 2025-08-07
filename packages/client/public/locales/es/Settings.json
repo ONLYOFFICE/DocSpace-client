@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
   "AdManagement": "Gestión de anuncios",
-  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}."
+  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}.",
+  "LogoForEditors": "Logo para el editor {{editorName}}"
 }

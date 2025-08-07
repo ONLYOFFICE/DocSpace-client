@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
   "AdManagement": "Reklam Yönetimi",
-  "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin."
+  "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin.",
+  "LogoForEditors": "{{editorName}} editörü için logo"
 }

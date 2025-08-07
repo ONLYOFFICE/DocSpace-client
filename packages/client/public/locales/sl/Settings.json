@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
   "AdManagement": "Upravljanje oglasov",
-  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}."
+  "AdManagementDescription": "Izberite, ali so promocijski pasici prikazani v vašem {{productName}}.",
+  "LogoForEditors": "Logotip za urejevalnik {{editorName}}"
 }

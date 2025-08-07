@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
   "AdManagement": "Ad Management",
-  "AdManagementDescription": "Kies of promotiebanners worden weergegeven in uw {{productName}}."
+  "AdManagementDescription": "Kies of promotiebanners worden weergegeven in uw {{productName}}.",
+  "LogoForEditors": "Logo voor de {{editorName}} editor"
 }

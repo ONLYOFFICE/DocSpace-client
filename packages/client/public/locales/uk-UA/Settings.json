@@ -367,5 +367,6 @@
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
   "AdManagement": "Управління рекламою",
-  "AdManagementDescription": "Оберіть, чи відображатимуться рекламні банери у вашому {{productName}}."
+  "AdManagementDescription": "Оберіть, чи відображатимуться рекламні банери у вашому {{productName}}.",
+  "LogoForEditors": "Логотип для редактора {{editorName}}"
 }

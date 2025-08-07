@@ -27,6 +27,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 interface AccountsHotkeysProps {
   enabledHotkeys: boolean;
@@ -39,6 +40,7 @@ interface AccountsHotkeysProps {
   deselectAll: () => void;
   openItem: () => void;
   onClickBack: (fromHotkeys: boolean) => void;
+  enableSelection: ContactsHotkeysStore["enableSelection"];
 }
 
 const useAccountsHotkeys = ({
@@ -51,6 +53,7 @@ const useAccountsHotkeys = ({
   deselectAll,
   openItem,
   onClickBack,
+  enableSelection,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -133,6 +136,13 @@ const useAccountsHotkeys = ({
 
   // Back to parent folder
   useHotkeys("Backspace", onClickBackAction, hotkeysFilter);
+
+  // Disable selection area
+  useHotkeys("ctrl+alt", enableSelection, {
+    ...hotkeysFilter,
+    keyup: true,
+    keydown: true,
+  });
 };
 
 export default useAccountsHotkeys;

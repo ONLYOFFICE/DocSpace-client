@@ -44,6 +44,10 @@ class ContactsHotkeysStore {
 
   hotkeyCaretStart: AccountsType | null = null;
 
+  selectionAreaIsEnabled: boolean = true;
+
+  withContentSelection: boolean = false;
+
   elemOffset: number = 0;
 
   constructor(peopleStore: TStore["peopleStore"]) {
@@ -321,6 +325,24 @@ class ContactsHotkeysStore {
     }
 
     if (!this.hotkeyCaret || isDefaultKeys) return e;
+  };
+
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled: boolean) => {
+    this.selectionAreaIsEnabled = selectionAreaIsEnabled;
+  };
+
+  setWithContentSelection = (withContentSelection: boolean) => {
+    this.withContentSelection = withContentSelection;
+  };
+
+  enableSelection = (e: KeyboardEvent) => {
+    if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      this.setSelectionAreaIsEnabled(false);
+      this.setWithContentSelection(true);
+    } else if (e.type === "keyup") {
+      this.setSelectionAreaIsEnabled(true);
+    }
+    e.preventDefault();
   };
 }
 

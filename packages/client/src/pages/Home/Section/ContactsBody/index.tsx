@@ -64,6 +64,7 @@ type SectionBodyContentProps = {
   openItem?: ContactsHotkeysStore["openItem"];
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
+  enableSelection: ContactsHotkeysStore["enableSelection"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -86,6 +87,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     openItem,
     onClickBack,
     getTfaType,
+    enableSelection,
   } = props;
 
   const location = useLocation();
@@ -102,6 +104,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     deselectAll: deselectAll!,
     openItem: openItem!,
     onClickBack: onClickBack!,
+    enableSelection,
   });
 
   const onMouseDown = useCallback(
@@ -206,6 +209,8 @@ export default inject(
       selectAll,
       deselectAll,
       openItem,
+
+      enableSelection,
     } = contactsHotkeysStore!;
 
     const { onClickBack } = filesActionsStore;
@@ -234,6 +239,8 @@ export default inject(
       onClickBack,
 
       getTfaType,
+
+      enableSelection,
     };
   },
 )(

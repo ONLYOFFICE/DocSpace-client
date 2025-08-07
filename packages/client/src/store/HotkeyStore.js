@@ -60,6 +60,10 @@ class HotkeyStore {
 
   hotkeysClipboardAction = null;
 
+  selectionAreaIsEnabled = true;
+
+  withContentSelection = false;
+
   constructor(
     filesStore,
     dialogsStore,
@@ -736,6 +740,24 @@ class HotkeyStore {
       .catch((err) => {
         toastr.error(err, null, 0, true);
       });
+  };
+
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled) => {
+    this.selectionAreaIsEnabled = selectionAreaIsEnabled;
+  };
+
+  setWithContentSelection = (withContentSelection) => {
+    this.withContentSelection = withContentSelection;
+  };
+
+  enableSelection = (e) => {
+    if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      this.setSelectionAreaIsEnabled(false);
+      this.setWithContentSelection(true);
+    } else if (e.type === "keyup") {
+      this.setSelectionAreaIsEnabled(true);
+    }
+    e.preventDefault();
   };
 
   get countTilesInRow() {

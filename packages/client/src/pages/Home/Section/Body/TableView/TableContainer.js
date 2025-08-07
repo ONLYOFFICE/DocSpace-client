@@ -145,6 +145,7 @@ const Table = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  withContentSelection,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -250,7 +251,7 @@ const Table = ({
 
   return (
     <StyledTableContainer
-      noSelect
+      noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}
@@ -297,6 +298,7 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
+    hotkeyStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -323,6 +325,7 @@ export default inject(
     const { isIndexedFolder } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
+    const { withContentSelection } = hotkeyStore;
 
     return {
       viewAs,
@@ -347,6 +350,7 @@ export default inject(
       onEditIndex: changeIndex,
       setRefMap,
       deleteRefMap,
+      withContentSelection,
     };
   },
 )(withContainer(observer(Table)));

@@ -34,8 +34,18 @@
   max-width: 100%;
   margin-top: -25px;
 
+  user-select: text;
+
+  & * {
+    user-select: text;
+  }
+
   &.noSelect {
     user-select: none;
+
+    & * {
+      user-select: none;
+    }
   }
 
   &.useReactWindow {

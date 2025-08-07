@@ -93,6 +93,7 @@ const withHotkeys = (Component) => {
       isFormRoom,
       isParentFolderFormRoom,
       isIndexEditingMode,
+      enableSelection,
     } = props;
 
     const navigate = useNavigate();
@@ -441,6 +442,13 @@ const withHotkeys = (Component) => {
       hotkeysFilter,
     );
 
+    // Disable selection area, enable use-select
+    useHotkeys("ctrl+alt", enableSelection, {
+      ...hotkeysFilter,
+      keyup: true,
+      keydown: true,
+    });
+
     return <Component {...props} />;
   };
 
@@ -489,6 +497,7 @@ const withHotkeys = (Component) => {
         uploadFile,
         copyToClipboard,
         uploadClipboardFiles,
+        enableSelection,
       } = hotkeyStore;
 
       const {
@@ -587,6 +596,7 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
+        enableSelection,
       };
     },
   )(observer(WithHotkeys));

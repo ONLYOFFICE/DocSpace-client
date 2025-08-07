@@ -164,6 +164,18 @@
   .previewHelpButton {
     animation: raisePreviewButton 0.3s ease-in-out forwards;
   }
+
+  :global {
+    .layout-progress-bar_wrapper {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+      display: flex;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+  }
 }
 
 .progressBarContainer {

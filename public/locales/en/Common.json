@@ -723,5 +723,7 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "DiagramViewer": "Diagram Viewer",
+  "PDF": "PDF"
 }

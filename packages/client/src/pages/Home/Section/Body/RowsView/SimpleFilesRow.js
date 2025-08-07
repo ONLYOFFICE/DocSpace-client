@@ -171,9 +171,10 @@ const SimpleFilesRow = (props) => {
       } else {
         setDropTargetPreview(selectedFolderTitle);
       }
-    } else {
-      setDropTargetPreview(null);
     }
+    // else {
+    //   setDropTargetPreview(null);
+    // }
   }, [
     dragging,
     isDragging,

@@ -142,9 +142,10 @@ const FileTile = (props) => {
       } else {
         setDropTargetPreview(selectedFolderTitle);
       }
-    } else {
-      setDropTargetPreview(null);
     }
+    // else {
+    //   setDropTargetPreview(null);
+    // }
   }, [
     dragging,
     isDragging,

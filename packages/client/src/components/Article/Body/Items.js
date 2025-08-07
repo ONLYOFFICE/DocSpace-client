@@ -90,18 +90,19 @@ const Item = ({
   if (isDragging) value = `${item.id} dragging`;
 
   React.useEffect(() => {
-    if (isDragging && isDragActive) {
-      setDropTargetPreview(item.title);
-    } else {
-      setDropTargetPreview(null);
+    if (isDragging) {
+      if (isDragActive) setDropTargetPreview(item.title);
+      else setDropTargetPreview(null);
     }
   }, [isDragging, isDragActive]);
 
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
+      const dragged = dragging;
+
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder)
+      createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
           if (f.length > 0) startUpload(f, null, t);
         })

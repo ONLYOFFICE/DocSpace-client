@@ -38,6 +38,7 @@ export interface Operation {
     percent: number;
   }>;
   errorCount?: number;
+  dragged?: string | null;
 }
 
 export interface OperationsProgressProps {

@@ -187,13 +187,12 @@ const FilesTableRow = (props) => {
 
   useEffect(() => {
     if (dragging) {
+      console.log("dragging", dragging, isDragging, isDragActive);
       if (isDragging) {
         setDropTargetPreview(item.title);
       } else {
         setDropTargetPreview(selectedFolderTitle);
       }
-    } else {
-      setDropTargetPreview(null);
     }
   }, [
     dragging,

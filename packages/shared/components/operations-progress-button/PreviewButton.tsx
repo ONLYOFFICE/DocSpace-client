@@ -36,6 +36,10 @@ import styles from "./OperationsProgressButton.module.scss";
 interface PreviewButtonProps {
   dropTargetFolderName: string | null;
   isDragging: boolean;
+  allOperationsLength: boolean;
+  setHideMainButton: (flag: boolean) => void;
+  setShowSeveralOperationsIcon: (flag: boolean) => void;
+  hasUploadOperationByDrag: () => boolean;
   clearDropPreviewLocation?: () => void;
 }
 
@@ -43,17 +47,25 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
   dropTargetFolderName,
   isDragging,
   clearDropPreviewLocation,
+  hasUploadOperationByDrag,
+  setHideMainButton,
+  allOperationsLength,
+  setShowSeveralOperationsIcon,
 }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [animationState, setAnimationState] = useState<
-    "idle" | "raising" | "dropping"
+    "idle" | "raising" | "dropping" | "hidingUnder"
   >("raising");
   const [lastKnownTitle, setLastKnownTitle] = useState<string | null>(null);
 
   const previewContainerRef = useRef<HTMLDivElement>(null);
+  const previewMainContainerRef = useRef<HTMLDivElement>(null);
   const previewHideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const tooltipHideTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const prevDropPreviewLocation = useRef(dropTargetFolderName);
+  const prevDropPreviewLocation = useRef<string | null>(null);
+  const hadOperationsBeforeDrag = useRef<boolean>(false);
+  const previewButtonWasVisible = useRef<boolean>(false);
+  const shouldShowDotsAfterAnimation = useRef<boolean>(false);
 
   const clearTimers = useCallback(() => {
     if (previewHideTimerRef.current) {
@@ -87,34 +99,71 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       }, 100);
     }
 
-    if (isDragging) {
-      setIsVisible(true);
+    if (!isDragging) return;
 
-      if (!prev && current) {
-        setAnimationState("raising");
-      }
+    // Track if operations existed before dragging started
+    if (!previewButtonWasVisible.current) {
+      hadOperationsBeforeDrag.current = allOperationsLength;
+      previewButtonWasVisible.current = true;
+    }
+    shouldShowDotsAfterAnimation.current = false;
 
-      if (!current) {
-        previewHideTimerRef.current = setTimeout(() => {
-          if (!dropTargetFolderName) {
-            setAnimationState("dropping");
-            setTimeout(() => {
-              setIsVisible(false);
-              setAnimationState("idle");
-            }, 300);
-          }
-        }, 200);
-      }
-    } else {
-      setAnimationState("dropping");
+    setIsVisible(true);
+
+    if (!prev && current) {
+      setAnimationState("raising");
+    }
+
+    if (!current) {
       previewHideTimerRef.current = setTimeout(() => {
-        setIsVisible(false);
-        setAnimationState("idle");
-      }, 300);
+        if (!dropTargetFolderName) {
+          setAnimationState("dropping");
+          setTimeout(() => {
+            setIsVisible(false);
+            setAnimationState("idle");
+          }, 300);
+        }
+      }, 200);
     }
 
     prevDropPreviewLocation.current = current;
-  }, [isDragging, dropTargetFolderName, lastKnownTitle]);
+  }, [isDragging, dropTargetFolderName, lastKnownTitle, allOperationsLength]);
+
+  useEffect(() => {
+    if (isDragging) return;
+
+    const shouldHideUnder = hasUploadOperationByDrag();
+    const animationType = shouldHideUnder ? "hidingUnder" : "dropping";
+
+    setAnimationState(animationType);
+
+    if (previewButtonWasVisible.current) {
+      // Dragging stopped
+      const hadOperationsBefore = hadOperationsBeforeDrag.current;
+      const hasUploadNow = shouldHideUnder;
+
+      if (!hadOperationsBefore && hasUploadNow) {
+        // If there were no operations before and upload operation appeared,
+        // hide main button during PreviewButton transition
+        // The button will be shown again in handleHideAnimationComplete
+
+        setHideMainButton(true);
+      } else if (hadOperationsBefore && hasUploadNow) {
+        // If there were operations before and upload operation appeared,
+        // delay showing several operations icon until PreviewButton animation completes
+        shouldShowDotsAfterAnimation.current = true;
+      }
+
+      // Reset tracking
+      previewButtonWasVisible.current = false;
+      hadOperationsBeforeDrag.current = false;
+    }
+
+    previewHideTimerRef.current = setTimeout(() => {
+      setIsVisible(false);
+      setAnimationState("idle");
+    }, 300);
+  }, [isDragging, hasUploadOperationByDrag, setHideMainButton]);
 
   useEffect(() => {
     return () => {
@@ -131,6 +180,48 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       }
     },
     [clearDropPreviewLocation, isDragging],
+  );
+
+  const onHideAnimationComplete = useCallback(() => {
+    if (shouldShowDotsAfterAnimation.current) {
+      setShowSeveralOperationsIcon(true);
+      shouldShowDotsAfterAnimation.current = false;
+    }
+
+    setHideMainButton(false);
+
+    setTimeout(() => {
+      setIsVisible(false);
+      setAnimationState("idle");
+    }, 300);
+
+    clearDropPreviewLocation?.();
+  }, [
+    clearDropPreviewLocation,
+    setHideMainButton,
+    setShowSeveralOperationsIcon,
+  ]);
+
+  const handlePreviewMainAnimationEnd = useCallback(
+    (e: globalThis.AnimationEvent) => {
+      const animation = e.animationName;
+      const target = e.target as HTMLElement;
+      const currentTarget = e.currentTarget as HTMLElement;
+
+      if (target !== currentTarget) {
+        return;
+      }
+
+      if (
+        (animation.includes("hideUnderProgressBar") ||
+          animation.includes("hideUnderProgressBarMobile") ||
+          animation.includes("hideUnderProgressBarTablet")) &&
+        !isDragging
+      ) {
+        onHideAnimationComplete();
+      }
+    },
+    [isDragging, onHideAnimationComplete],
   );
 
   useEffect(() => {
@@ -151,16 +242,33 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     };
   }, [handlePreviewAnimationEnd, isVisible]);
 
-  // console.log("PreviewButton isVisible:", isVisible);
-  // console.log("PreviewButton dropTargetFolderName:", dropTargetFolderName);
-  // console.log("PreviewButton lastKnownTitle:", lastKnownTitle);
+  useEffect(() => {
+    const previewContainer = previewMainContainerRef.current;
+
+    if (!isVisible || !previewContainer) return;
+
+    previewContainer.addEventListener(
+      "animationend",
+      handlePreviewMainAnimationEnd as EventListener,
+    );
+
+    return () => {
+      previewContainer.removeEventListener(
+        "animationend",
+        handlePreviewMainAnimationEnd as EventListener,
+      );
+    };
+  }, [handlePreviewMainAnimationEnd, isVisible]);
 
   if (!isVisible) return null;
 
   return (
     <div
-      className={styles.previewFloatingButtonContainer}
+      className={classNames(styles.previewFloatingButtonContainer, {
+        [styles.hidingUnder]: animationState === "hidingUnder",
+      })}
       style={{ zIndex: "200" }}
+      ref={previewMainContainerRef}
     >
       <HelpButton
         place="bottom"

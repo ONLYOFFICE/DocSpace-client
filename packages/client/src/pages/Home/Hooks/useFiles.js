@@ -126,11 +126,13 @@ const useFiles = ({
     )
       return;
 
+    const dragged = dragging;
+
     dragging && setDragging(false);
 
     if (disableDrag) return;
 
-    createFoldersTree(t, files, uploadToFolder)
+    createFoldersTree(t, files, uploadToFolder, dragged)
       .then((f) => {
         if (f.length > 0) startUpload(f, null, t);
       })

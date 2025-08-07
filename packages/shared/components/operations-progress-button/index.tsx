@@ -66,7 +66,6 @@ const operationToIconMap: Record<
   trash: FloatingButtonIcons.trash,
   other: FloatingButtonIcons.other,
   upload: FloatingButtonIcons.upload,
-  previewUpload: FloatingButtonIcons.upload,
   deleteVersionFile: FloatingButtonIcons.trash,
   backup: FloatingButtonIcons.backup,
 };
@@ -92,15 +91,43 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const [isHideTooltip, setIsHideTooltip] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [hideMainButton, setHideMainButton] = useState<boolean>(false);
+  const [showSeveralOperationsIcon, setShowSeveralOperationsIcon] =
+    useState<boolean>(false);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+  // Track the last seen dragged operation ID to detect new uploads
+  const lastDraggedOperationId = useRef<string | null>(null);
 
   const panelOperationsLength = panelOperations.length;
   const operationsLength = operations.length;
 
   const allOperationsLength = panelOperationsLength + operationsLength;
   const isSeveralOperations = allOperationsLength > 1;
+
+  const hasUploadOperationByDrag = useCallback(() => {
+    const uploadOperation = panelOperations.find(
+      (operation) =>
+        operation.operation === OPERATIONS_NAME.upload &&
+        operation.dragged &&
+        operation.completed === false,
+    );
+
+    if (!uploadOperation) {
+      return false;
+    }
+
+    const isNewDraggedUpload =
+      uploadOperation.dragged !== lastDraggedOperationId.current;
+
+    if (isNewDraggedUpload) {
+      lastDraggedOperationId.current = uploadOperation.dragged || null;
+    }
+
+    return isNewDraggedUpload;
+  }, [panelOperations]);
 
   const clearTimers = () => {
     if (hideTimerRef.current) {
@@ -217,12 +244,25 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
     }
   }, [isOpenDropdown, isSeveralOperations]);
 
+  useEffect(() => {
+    if (isDragging) {
+      setShowSeveralOperationsIcon(false);
+    }
+  }, [isDragging]);
+
+  useEffect(() => {
+    if (allOperationsLength === 0) {
+      lastDraggedOperationId.current = null;
+    }
+  }, [allOperationsLength]);
+
   const getIcons = () => {
-    if (isSeveralOperations) {
+    if (isSeveralOperations || showSeveralOperationsIcon) {
       return isOpenDropdown
         ? FloatingButtonIcons.arrow
         : FloatingButtonIcons.dots;
     }
+
     const operation = operationsLength
       ? operations[0].operation
       : panelOperations[0].operation;
@@ -319,6 +359,15 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
 
   const checkError = needErrorChecking && !disableOpenPanel;
 
+  const hideMainButtonHandler = useCallback(
+    (flag: boolean) => setHideMainButton(flag),
+    [],
+  );
+  const setShowSeveralOperationsIconHandler = useCallback(
+    (flag: boolean) => setShowSeveralOperationsIcon(flag),
+    [],
+  );
+
   return (
     <>
       <Backdrop
@@ -331,6 +380,10 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         dropTargetFolderName={dropTargetFolderName || null}
         isDragging={isDragging ?? false}
         clearDropPreviewLocation={clearDropPreviewLocation}
+        hasUploadOperationByDrag={hasUploadOperationByDrag}
+        setHideMainButton={hideMainButtonHandler}
+        allOperationsLength={allOperationsLength > 0}
+        setShowSeveralOperationsIcon={setShowSeveralOperationsIconHandler}
       />
 
       <div
@@ -348,7 +401,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         onMouseEnter={!isMobile ? handleMouseEnter : undefined}
         onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       >
-        {allOperationsLength > 0 ? (
+        {allOperationsLength > 0 && !hideMainButton ? (
           <HelpButton
             className="layout-progress-bar"
             place="left"

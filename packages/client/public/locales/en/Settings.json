@@ -202,7 +202,6 @@
   "LoginSubheaderTitle": "This subsection is used to monitor the latest user login activity including successful logins and failed attempts with an indication of reasons.",
   "LogoAbout": "Logo for the About page",
   "LogoCompact": "Logo for the compact left menu",
-  "LogoDocsEditor": "Logo for the editors header",
   "LogoForEditors": "Logo for {{editorName}} editor",
   "LogoForViewer": "Logo for {{diagramViewer}}",
   "LogoFavicon": "Favicon",

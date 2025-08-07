@@ -3,7 +3,7 @@
   "content": "Last name",
   "content_en_sha1_hash": "adec36a821f81a6990b1e65d9e4ac5fb8ee2a205",
   "created_at": "2025-05-19T21:30:46.065Z",
-  "updated_at": "2025-07-10T11:11:06.794Z",
+  "updated_at": "2025-08-04T07:30:01.056Z",
   "comment": {
     "text": "The translation key \"LastName\" is used to display the label for a surname field in various UI components, such as dialogs and form fields. It appears on screens where user name information is being edited or inputted, typically on a line below or next to the first name field.",
     "is_auto": true,
@@ -31,13 +31,13 @@
     {
       "file_path": "/packages/login/src/app/(root)/confirm/Activation/page.client.tsx",
       "line_number": 233,
-      "context": ">\n <TextInput\n id=\"surname\"\n name=\"surname\"\n value={surName}\n placeholder={t(\"Common:LastName\")}\n type={InputType.text}\n size={InputSize.large}\n scale={true}\n tabIndex={2}\n autoComplete=\"family-name\"",
+      "context": ">\n <TextInput\n id=\"surname\"\n name=\"surname\"\n value={surName}\n placeholder={t(\"Common:LastName\")}\n type={InputType.text}\n size={InputSize.large}\n scale\n tabIndex={2}\n autoComplete=\"family-name\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 217,
-      "context": "name=\"last-name\"\n type={InputType.text}\n size={InputSize.large}\n hasError={!snameValid}\n value={sname}\n placeholder={t(\"Common:LastName\")}\n scale={true}\n tabIndex={1}\n isDisabled={isLoading}\n onChange={onChangeSname}\n onKeyDown={onKeyPress}",
+      "line_number": 216,
+      "context": "name=\"last-name\"\n type={InputType.text}\n size={InputSize.large}\n hasError={!snameValid}\n value={sname}\n placeholder={t(\"Common:LastName\")}\n scale\n tabIndex={1}\n isDisabled={isLoading}\n onChange={onChangeSname}\n onKeyDown={onKeyPress}",
       "module": "/packages/login"
     }
   ],

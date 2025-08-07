@@ -3,7 +3,7 @@
   "content": "Document Service",
   "content_en_sha1_hash": "56cd1da1e1b8ef8da631a87da2db26079d5a2586",
   "created_at": "2025-05-19T21:30:51.251Z",
-  "updated_at": "2025-05-26T07:57:32.686Z",
+  "updated_at": "2025-08-04T07:30:01.473Z",
   "comment": {
     "text": "The translation key \"DocumentService\" is used to display the name of a document service component, likely appearing on a settings page or integration wrapper. This text provides context for users navigating portal settings and configuring integration options.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 382,
+      "line_number": 389,
       "context": "{\n id: \"portal-settings_catalog-document-service\",\n key: \"4-4\",\n icon: \"\",\n link: \"document-service\",\n tKey: \"DocumentService\",\n isCategory: true,\n },\n {\n id: \"portal-settings_catalog-smtp-settings\",\n key: \"4-5\",",
       "module": "/packages/client"
     }

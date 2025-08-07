@@ -3,7 +3,7 @@
   "content": "Link deleted successfully",
   "content_en_sha1_hash": "1d0682ce997a2ffc32592cbebffe9839b47dab71",
   "created_at": "2025-05-19T21:30:55.776Z",
-  "updated_at": "2025-07-10T11:11:06.819Z",
+  "updated_at": "2025-08-04T07:30:01.097Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is deleted successfully. It appears as an alert in a delete confirmation dialog and info panel, providing feedback to users that their link has been removed.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 258,
-      "context": "editExternalLink(roomId, { ...removeLink, access: ShareAccessRights.None })\n .then(() => {\n deleteExternalLink(null, removeLink.sharedTo.id);\n \n toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n })\n .catch((err: Error) => toastr.error(err?.message))\n .finally(() => setLoadingLinks([]));\n };",
+      "line_number": 238,
+      "context": "access: ShareAccessRights.None,\n });\n \n deleteExternalLink!(null, removeLink.sharedTo.id);\n \n toastr.success(t(\"Files:LinkDeletedSuccessfully\"));\n } catch (err: unknown) {\n console.log(err);\n toastr.error((err as Error)?.message);\n } finally {\n setLoadingLinks([]);",
       "module": "/packages/client"
     }
   ],

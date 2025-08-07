@@ -3,7 +3,7 @@
   "content": "Buy now",
   "content_en_sha1_hash": "c38860a3ba58e9263dba3ac926101f8b2358d4c9",
   "created_at": "2025-06-08T12:02:00.173Z",
-  "updated_at": "2025-06-08T12:02:52.485Z",
+  "updated_at": "2025-08-04T07:30:01.738Z",
   "comment": {
     "text": "This translation key is used to display the button label \"Buy now\" on a payment button component, located in the /packages/shared/pages/Payments/Standalone/sub-components/ButtonContainer.tsx file. It appears as a primary action button when clicked. Translators should provide a phrase that encourages immediate purchase.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/ButtonContainer.tsx",
       "line_number": 42,
-      "context": "};\n \n return (\n <StyledButtonComponent>\n <Button\n label={t(\"ActivatePurchaseBuyNow\")}\n size={ButtonSize.small}\n primary\n onClick={onClickBuy}\n />\n </StyledButtonComponent>",
+      "context": "};\n \n return (\n <div className={styles.buttonComponent}>\n <Button\n label={t(\"ActivatePurchaseBuyNow\")}\n size={ButtonSize.small}\n primary\n onClick={onClickBuy}\n />\n </div>",
       "module": "/packages/shared"
     }
   ],

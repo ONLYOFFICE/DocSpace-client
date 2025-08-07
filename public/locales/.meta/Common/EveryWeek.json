@@ -3,7 +3,7 @@
   "content": "Every week",
   "content_en_sha1_hash": "043058e2050c0345ef7aac78bd9025d3adce099a",
   "created_at": "2025-05-19T21:30:45.186Z",
-  "updated_at": "2025-06-30T12:20:31.696Z",
+  "updated_at": "2025-08-04T07:30:01.693Z",
   "comment": {
     "text": "This translation key is used to display the frequency at which data should be backed up automatically. It appears in a file backup settings page, where users can select how often backups are performed. Translators, please update this key to reflect the desired frequency in English for the \"EveryWeek\" category.",
     "is_auto": true,
@@ -17,7 +17,7 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/hooks/index.ts",
+      "file_path": "/packages/shared/pages/backup/auto-backup/hooks/index.ts",
       "line_number": 50,
       "context": "key: 0,\n label: t(\"Common:EveryDay\"),\n },\n {\n key: 1,\n label: t(\"Common:EveryWeek\"),\n },\n {\n key: 2,\n label: t(\"Common:EveryMonth\"),\n },",
       "module": "/packages/shared"

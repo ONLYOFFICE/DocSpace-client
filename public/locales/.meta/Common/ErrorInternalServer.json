@@ -3,7 +3,7 @@
   "content": "Internal server error. Try again later.",
   "content_en_sha1_hash": "50b64918b994b2985e494b4a494e20d58180ff95",
   "created_at": "2025-05-19T21:30:45.082Z",
-  "updated_at": "2025-06-02T10:20:51.070Z",
+  "updated_at": "2025-08-04T07:30:01.047Z",
   "comment": {
     "text": "This translation key displays an internal server error message, typically used when a server-side operation fails, and is usually shown in error dialogs or notifications. The exact location of this text may vary depending on the specific use case, but it often appears as a toast notification or within a dialog box. It aims to inform users that something went wrong and encourage them to try again later.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 134,
+      "line_number": 140,
       "context": "components={{ 1: <span /> }}\n />\n );\n const translations = {\n label: t(\"Common:ArchivingData\"),\n error: t(\"Common:ErrorInternalServer\"),\n passwordError,\n };\n \n return translations;\n }, [t]);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/EncryptionPortal/index.tsx",
-      "line_number": 46,
-      "context": "let requestsCount = 0;\n \n export const EncryptionPortal = () => {\n const { t, ready } = useTranslation(\"Common\");\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getProgress = useCallback(async () => {",
+      "line_number": 55,
+      "context": "let requestsCount = 0;\n \n export const EncryptionPortal: React.FC<EncryptionPortalProps> = () => {\n const { t, ready } = useTranslation(\"Common\");\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n const [statusEncryption, setStatusEncryption] =\n useState<EncryptionStatus | null>(null);",
       "module": "/packages/shared"
     },
     {

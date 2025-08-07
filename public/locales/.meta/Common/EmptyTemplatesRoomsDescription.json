@@ -3,7 +3,7 @@
   "content": "Create your first room template and then you can create new rooms based on it.",
   "content_en_sha1_hash": "07a4e005f532c156a91be0251d0103ff7ae67865",
   "created_at": "2025-05-19T21:30:44.905Z",
-  "updated_at": "2025-05-26T07:57:32.253Z",
+  "updated_at": "2025-08-04T07:30:01.080Z",
   "comment": {
     "text": "This translation key describes the content to be displayed when creating a new room template, guiding users through the process of initial room creation based on the template. It appears in the Create Room Dialog component, specifically within an empty screen header and description section.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 257,
+      "line_number": 259,
       "context": "withoutBackButton: false,\n withoutBorder: false,\n }}\n withSearch\n emptyScreenHeader={t(\"Common:EmptyTemplatesRoomsHeader\")}\n emptyScreenDescription={t(\"Common:EmptyTemplatesRoomsDescription\")}\n />\n </ModalDialog.Container>\n ) : null}\n <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>",
       "module": "/packages/client"
     }

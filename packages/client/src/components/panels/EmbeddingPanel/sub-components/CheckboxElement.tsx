@@ -35,6 +35,7 @@ type CheckboxElementProps = {
   description: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isChecked: boolean;
+  dataTestId?: string;
 };
 
 const CheckboxElement = ({
@@ -44,6 +45,7 @@ const CheckboxElement = ({
   description,
   onChange,
   isChecked,
+  dataTestId,
 }: CheckboxElementProps) => {
   return (
     <div className="embedding-panel_checkbox-element">
@@ -52,11 +54,13 @@ const CheckboxElement = ({
         label={label}
         onChange={onChange}
         isChecked={isChecked}
+        dataTestId={`${dataTestId}_embedding_panel_checkbox`}
       />
       <HelpButton
         place="right"
         offsetRight={4}
         size={12}
+        dataTestId={`${dataTestId}_embedding_panel_help_button`}
         tooltipContent={
           <TooltipContent img={img} title={title} description={description} />
         }

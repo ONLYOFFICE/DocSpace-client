@@ -67,6 +67,7 @@ const ToggleParam = ({
         className="set_room_params-toggle"
         isChecked={isChecked}
         onChange={onCheckedChange}
+        dataTestId="create_edit_room_toggle"
       />
     </StyledToggleParam>
   );

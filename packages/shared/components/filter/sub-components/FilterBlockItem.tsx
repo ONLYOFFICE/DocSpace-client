@@ -121,6 +121,7 @@ const FilterBlockItem = ({
         onClick={(event) =>
           showSelectorAction(event, selectorType, item.group, [])
         }
+        data-testid={`filter_selector_${item.key}`}
       >
         {item?.displaySelectorType === "button" ? (
           <SelectorAddButton
@@ -128,6 +129,7 @@ const FilterBlockItem = ({
             label={item.label}
             lineHeight="15px"
             noSelect
+            testId={`filter_selector_add_button_${item.key}`}
           />
         ) : (
           <Text
@@ -154,6 +156,7 @@ const FilterBlockItem = ({
             clearSelectorRef.current || [],
           )
         }
+        data-testid={`filter_selector_selected_${item.key}`}
       >
         <Text
           className={classNames(
@@ -171,7 +174,11 @@ const FilterBlockItem = ({
           {item?.selectedLabel}
         </Text>
         {item.isSelected ? (
-          <div className={styles.filterBlockItemTagIcon} ref={clearSelectorRef}>
+          <div
+            className={styles.filterBlockItemTagIcon}
+            ref={clearSelectorRef}
+            data-testid={`filter_selector_clear_${item.key}`}
+          >
             <XIcon style={{ marginTop: "2px" }} />
           </div>
         ) : null}
@@ -181,7 +188,11 @@ const FilterBlockItem = ({
 
   const getToggleItem = (item: TToggleButtonItem) => {
     return (
-      <div className={styles.filterBlockItemToggle} key={item.key}>
+      <div
+        className={styles.filterBlockItemToggle}
+        key={item.key}
+        data-testid={`filter_toggle_${item.key}`}
+      >
         <Text fontSize="13px" fontWeight={600} lineHeight="36px" noSelect>
           {item.label}
         </Text>
@@ -194,6 +205,7 @@ const FilterBlockItem = ({
               item.isSelected || false,
             )
           }
+          dataTestId={`filter_toggle_button_${item.key}`}
         />
       </div>
     );
@@ -229,7 +241,11 @@ const FilterBlockItem = ({
 
   const getCheckboxItem = (item: TCheckboxItem) => {
     return (
-      <div className={styles.filterBlockItemCheckboxContainer} key={item.key}>
+      <div
+        className={styles.filterBlockItemCheckboxContainer}
+        key={item.key}
+        data-testid={`filter_checkbox_container_${item.key}`}
+      >
         <Checkbox
           id={item.id}
           isChecked={item.isSelected}
@@ -242,6 +258,7 @@ const FilterBlockItem = ({
               false,
             )
           }
+          dataTestId={`filter_checkbox_${item.key}`}
         />
       </div>
     );
@@ -291,6 +308,7 @@ const FilterBlockItem = ({
                   item.isMultiSelect,
                 )
         }
+        data-testid={`filter_tag_${Array.isArray(item.key) ? item.key[0] : item.key}`}
       >
         <Text
           className={classNames(
@@ -317,9 +335,13 @@ const FilterBlockItem = ({
         [styles.isFirst]: isFirst,
         [styles.withoutHeader]: withoutHeader,
       })}
+      data-testid={`filter_block_item_${group}`}
     >
       {!withoutHeader ? (
-        <div className={styles.filterBlockItemHeader}>
+        <div
+          className={styles.filterBlockItemHeader}
+          data-testid={`filter_block_item_header_${group}`}
+        >
           <Heading size={HeadingSize.xsmall} level={HeadingLevel.h1}>
             {label}
           </Heading>
@@ -331,6 +353,7 @@ const FilterBlockItem = ({
           [styles.withMultiItems]: withMultiItems,
           [styles.withoutSeparator]: withoutSeparator,
         })}
+        data-testid={`filter_block_item_content_${group}`}
       >
         {groupItem.map((item: TGroupItem) => {
           if ("displaySelectorType" in item && item.displaySelectorType)

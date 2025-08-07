@@ -140,6 +140,7 @@ const ThirdPartyModule = ({
           setBasePath={setBasePath}
           toDefault={toDefault}
           setNewPath={setNewPath}
+          dataTestId="auto_backup"
         />
       </div>
       <ScheduleComponent

@@ -32,11 +32,13 @@ import InfiniteGrid from "./InfiniteGrid";
 
 class TileContainer extends React.PureComponent {
   render() {
-    const { children, isShowOneTile, ...rest } = this.props;
+    const { children, isShowOneTile, smallPreview, ...rest } = this.props;
 
     return (
       <StyledTileContainer {...rest}>
-        <InfiniteGrid isShowOneTile={isShowOneTile}>{children}</InfiniteGrid>
+        <InfiniteGrid isShowOneTile={isShowOneTile} smallPreview={smallPreview}>
+          {children}
+        </InfiniteGrid>
       </StyledTileContainer>
     );
   }

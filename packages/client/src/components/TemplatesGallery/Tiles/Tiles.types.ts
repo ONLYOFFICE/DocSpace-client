@@ -52,6 +52,7 @@ export interface TilesProps {
    */
   setOformFilesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
+  smallPreview: boolean;
 }
 
 export interface TileProps {

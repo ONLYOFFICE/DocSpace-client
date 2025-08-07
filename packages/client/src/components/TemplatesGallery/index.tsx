@@ -34,7 +34,14 @@ import { isMobile } from "@docspace/shared/utils";
 import Form from "./Form";
 import styles from "./TemplatesGallery.module.scss";
 
-const FormComponent = Form as React.ComponentType;
+// Define the props interface for FormComponent
+interface FormComponentProps {
+  tabDocuments?: boolean;
+  tabSpreadsheet?: boolean;
+  tabPresentation?: boolean;
+}
+
+const FormComponent = Form as React.ComponentType<FormComponentProps>;
 
 const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
   const { templatesGalleryVisible } = props;
@@ -50,17 +57,17 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
     {
       id: "documents",
       name: "Documents",
-      content: <FormComponent tabDocuments={true} />,
+      content: <FormComponent tabDocuments />,
     },
     {
       id: "spreadsheet",
       name: "Spreadsheet",
-      content: <FormComponent tabSpreadsheet={true} />,
+      content: <FormComponent tabSpreadsheet />,
     },
     {
       id: "presentation",
       name: "Presentation",
-      content: <FormComponent tabPresentation={true} />,
+      content: <FormComponent tabPresentation />,
     },
   ];
 

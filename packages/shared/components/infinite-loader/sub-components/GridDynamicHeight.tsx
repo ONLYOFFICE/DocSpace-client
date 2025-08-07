@@ -52,6 +52,7 @@ const GridDynamicHeight = ({
   scroll,
   // showSkeleton,
   currentFolderId,
+  smallPreview,
 }: GridComponentProps) => {
   // Reference to the List component for recomputing row heights
   const listRef = useRef<List | null>(null);
@@ -67,6 +68,8 @@ const GridDynamicHeight = ({
     () =>
       new CellMeasurerCache({
         fixedWidth: true,
+        // When smallPreview is true, use fixed height
+        fixedHeight: smallPreview,
         minHeight: 10, // Minimum height for any tile
         keyMapper: (index) => index, // Use index as the key for cache
       }),
@@ -119,57 +122,6 @@ const GridDynamicHeight = ({
       registerChild?: (element: HTMLElement | null) => void;
     }; // Type that matches CellMeasurer requirements
   }) => {
-    // const elem = children[index] as React.ReactElement;
-    // const itemClassNames = (elem.props as { className?: string })?.className;
-
-    // const isFolder = itemClassNames?.includes("isFolder");
-    // const isRoom = itemClassNames?.includes("isRoom");
-    // const isHeader =
-    //   itemClassNames?.includes("folder_header") ||
-    //   itemClassNames?.includes("files_header");
-
-    // if (isScrolling && showSkeleton) {
-    //   const list = [];
-    //   let i = 0;
-
-    //   if (isHeader) {
-    //     return (
-    //       <div key={key} style={style}>
-    //         <div className={styles.item}>
-    //           <RectangleSkeleton height="22px" width="100px" animate />
-    //         </div>
-    //       </div>
-    //     );
-    //   }
-
-    //   while (i < countTilesInRow) {
-    //     list.push(
-    //       <TileSkeleton
-    //         key={`${key}_${i}`}
-    //         isFolder={isFolder}
-    //         isRoom={isRoom}
-    //       />,
-    //     );
-    //     i += 1;
-    //   }
-
-    //   const rowIndex = Math.floor(index / countTilesInRow);
-    //   const rowHeight = cache.getHeight(rowIndex * countTilesInRow, 0);
-
-    //   return (
-    //     <div
-    //       style={{
-    //         ...style,
-    //         height: rowHeight ? `${rowHeight}px` : "auto",
-    //       }}
-    //       key={key}
-    //       data-row-index={rowIndex}
-    //     >
-    //       <div className={styles.item}>{list.map((item) => item)}</div>
-    //     </div>
-    //   );
-    // }
-
     const rowIndex = Math.floor(index / countTilesInRow);
     const rowHeight = cache.getHeight(rowIndex * countTilesInRow, 0);
 
@@ -193,6 +145,7 @@ const GridDynamicHeight = ({
                 ...style,
                 height: rowHeight ? `${rowHeight}px` : "auto",
                 width: "auto", // Ensure full width
+                marginBottom: "16px",
               }}
               key={key}
               data-row-index={rowIndex}
@@ -213,7 +166,7 @@ const GridDynamicHeight = ({
       // Use the CellMeasurerCache to get the dynamic height for this index
       const height = cache.getHeight(index, 0);
 
-      return height;
+      return height + 16;
     },
     [cache],
   );
@@ -240,6 +193,30 @@ const GridDynamicHeight = ({
   const initializeCache = useCallback(() => {
     if (!children || children.length === 0) return;
 
+    // If smallPreview is true, find the minimum height to use for all elements
+    let minimumHeight = 0;
+    if (smallPreview) {
+      children.forEach((child) => {
+        const elem = child as React.ReactElement;
+        if (
+          React.isValidElement(elem) &&
+          typeof elem !== "string" &&
+          typeof elem !== "boolean" &&
+          typeof elem !== "number"
+        ) {
+          const estimatedHeight = 0;
+
+          // For smallPreview, track the minimum height across all elements
+          if (
+            minimumHeight === 0 ||
+            (estimatedHeight > 0 && estimatedHeight < minimumHeight)
+          ) {
+            minimumHeight = estimatedHeight;
+          }
+        }
+      });
+    }
+
     children.forEach((child, index) => {
       const elem = child as React.ReactElement;
 
@@ -249,38 +226,18 @@ const GridDynamicHeight = ({
         typeof elem !== "boolean" &&
         typeof elem !== "number"
       ) {
-        const props = elem?.props as { className?: string };
-        const itemClassNames = props?.className;
-        const isFile = itemClassNames?.includes("isFile");
-        const isFolder = itemClassNames?.includes("isFolder");
-        const isRoom = itemClassNames?.includes("isRoom");
-        const isTemplate = itemClassNames?.includes("isTemplate");
-        const isFolderHeader = itemClassNames?.includes("folder_header");
-
-        const horizontalGap = 16;
-        const verticalGap = 14;
-        const verticalRoomGap = 16;
-        const headerMargin = 15;
-
-        // Add buffer for height to ensure content fits
-        const folderHeight = 64 + verticalGap;
-        const roomHeight = 104 + verticalRoomGap;
-        const fileHeight = 220 + horizontalGap;
-        const templateHeight = 150 + verticalRoomGap; // Increased to accommodate FileTile content
-        const titleHeight = 20 + headerMargin + (isFolderHeader ? 0 : 11);
-
         let estimatedHeight = 0;
-        if (isRoom) estimatedHeight = roomHeight;
-        else if (isFolder) estimatedHeight = folderHeight;
-        else if (isFile) estimatedHeight = fileHeight;
-        else if (isTemplate) estimatedHeight = templateHeight;
-        else estimatedHeight = titleHeight;
+
+        // When smallPreview is true, use the minimum height for all elements
+        if (smallPreview && minimumHeight > 0) {
+          estimatedHeight = minimumHeight;
+        }
 
         // Set the estimated height in the cache
         cache.set(index, 0, 1, estimatedHeight);
       }
     });
-  }, [children, cache]);
+  }, [children, cache, smallPreview]);
 
   // Initialize cache with estimated heights on children change
   useEffect(() => {
@@ -291,6 +248,39 @@ const GridDynamicHeight = ({
   const synchronizeCardHeights = useCallback(() => {
     const rowElements = getRowElements();
     if (Object.keys(rowElements).length === 0) return;
+
+    // If smallPreview is true, find the minimum height of all elements
+    let globalMinHeight = 0;
+    if (smallPreview) {
+      Object.entries(rowElements).forEach(([, elements]) => {
+        elements.forEach((element) => {
+          const cards = element.querySelectorAll(".Card");
+          cards.forEach((card) => {
+            (card as HTMLElement).style.height = "auto";
+            (card as HTMLElement).style.minHeight = "auto";
+          });
+        });
+      });
+
+      // Force reflow to ensure measurements are accurate
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      document.body.offsetHeight;
+
+      Object.entries(rowElements).forEach(([, elements]) => {
+        elements.forEach((element) => {
+          const cards = element.querySelectorAll(".Card");
+          cards.forEach((card) => {
+            const cardHeight = (card as HTMLElement).offsetHeight;
+            if (
+              globalMinHeight === 0 ||
+              (cardHeight > 0 && cardHeight < globalMinHeight)
+            ) {
+              globalMinHeight = cardHeight;
+            }
+          });
+        });
+      });
+    }
 
     // Process each row
     Object.entries(rowElements).forEach(([, elements]) => {
@@ -311,6 +301,12 @@ const GridDynamicHeight = ({
     // Process each row again to find max heights
     const rowMaxHeights: Record<string, number> = {};
     Object.entries(rowElements).forEach(([rowIndex, elements]) => {
+      // For smallPreview, use the global minimum height for all rows
+      if (smallPreview && globalMinHeight > 0) {
+        rowMaxHeights[rowIndex] = globalMinHeight;
+        return;
+      }
+
       // Find maximum height in this row
       elements.forEach((element) => {
         const cards = element.querySelectorAll(".Card");
@@ -358,7 +354,7 @@ const GridDynamicHeight = ({
       // Use forceUpdateGrid instead of recomputeRowHeights to avoid scroll jumps
       listRef.current.forceUpdateGrid();
     }
-  }, [cache]);
+  }, [cache, smallPreview]);
 
   // Enhanced loadMoreItems function with loading state control
   const handleLoadMoreItems = useCallback(

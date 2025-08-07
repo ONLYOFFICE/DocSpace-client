@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Styled = styled.div`
   width: 100%;
   height: 100%;
-  margin-bottom: 16px;
+
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -37,12 +37,18 @@ const Styled = styled.div`
   border: 1px solid blue;
 
   .thumbnail-container {
-    flex: 1; /* Take available space */
+    flex: 1;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+
+    ${(props) =>
+      props.smallPreview &&
+      css`
+        align-items: flex-start;
+      `}
   }
 
   .thumbnail-image {
@@ -51,7 +57,16 @@ const Styled = styled.div`
     width: auto;
     height: auto;
     object-fit: contain;
-    vertical-align: middle;
+
+    ${(props) =>
+      props.smallPreview &&
+      css`
+        width: 100%;
+        height: auto;
+
+        object-fit: cover;
+        object-position: top;
+      `}
   }
 
   .name {
@@ -69,11 +84,11 @@ const Styled = styled.div`
   }
 `;
 
-const FileTile = ({ item }) => {
+const FileTile = ({ item, smallPreview }) => {
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
 
   return (
-    <Styled>
+    <Styled smallPreview={smallPreview}>
       <div className="thumbnail-container">
         <img
           src={previewSrc}

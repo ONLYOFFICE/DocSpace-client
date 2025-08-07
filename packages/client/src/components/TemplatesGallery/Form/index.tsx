@@ -44,6 +44,9 @@ type FormProps = {
   fetchOformLocales: () => Promise<unknown>;
   oformsFilter: OformsFilter;
   fetchOforms: (filter: OformsFilter) => Promise<unknown>;
+  tabDocuments?: boolean;
+  tabSpreadsheet?: boolean;
+  tabPresentation?: boolean;
 };
 
 const Form: FC<FormProps> = ({
@@ -126,14 +129,17 @@ const Form: FC<FormProps> = ({
           style={{ height: "calc(100vh - 227px)" }}
           id="scroll-templates-gallery"
         >
-          <Tiles isShowOneTile={isShowOneTile} />
+          <Tiles
+            isShowOneTile={isShowOneTile}
+            smallPreview={tabPresentation || tabSpreadsheet}
+          />
         </Scrollbar>
       ) : (
         <Scrollbar
           style={{ height: "calc(100vh - 286px)" }}
           id="scroll-templates-gallery"
         >
-          <Tiles />
+          <Tiles smallPreview={tabPresentation || tabSpreadsheet} />
         </Scrollbar>
       )}
     </div>

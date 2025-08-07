@@ -368,5 +368,6 @@
   "YourLogo": "Logos juaj",
   "AdManagement": "Menaxhimi i reklamave",
   "AdManagementDescription": "Zgjidhni nëse shfaqen banderolat promovuese në {{productName}} tuaj.",
-  "LogoForEditors": "Logo për editorin {{editorName}}"
+  "LogoForEditors": "Logo për editorin {{editorName}}",
+  "LogoForViewer": "Logo për {{diagramViewer}}"
 }

@@ -368,5 +368,6 @@
   "YourLogo": "Logo-ul dvs",
   "AdManagementDescription": "Alegeți dacă doriți afișarea anunțurilor banner în {{productName}}.",
   "AdManagement": "Gestionare anunțuri",
-  "LogoForEditors": "Logo pentru editorul {{editorName}}"
+  "LogoForEditors": "Logo pentru editorul {{editorName}}",
+  "LogoForViewer": "Logo pentru {{diagramViewer}}"
 }

@@ -368,5 +368,6 @@
   "YourLogo": "Вашето лого",
   "AdManagement": "Управление на реклами",
   "AdManagementDescription": "Изберете дали промоционални банери да се показват във вашия {{productName}}.",
-  "LogoForEditors": "Лого за редактора {{editorName}}"
+  "LogoForEditors": "Лого за редактора {{editorName}}",
+  "LogoForViewer": "Лого за {{diagramViewer}}"
 }

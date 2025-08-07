@@ -368,5 +368,6 @@
   "YourLogo": "Logonuz",
   "AdManagement": "Reklam Yönetimi",
   "AdManagementDescription": "{{productName}}'ınızda tanıtım afişlerinin gösterilip gösterilmeyeceğini seçin.",
-  "LogoForEditors": "{{editorName}} editörü için logo"
+  "LogoForEditors": "{{editorName}} editörü için logo",
+  "LogoForViewer": "{{diagramViewer}} için logo"
 }

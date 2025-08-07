@@ -368,5 +368,6 @@
   "YourLogo": "Logo của bạn",
   "AdManagement": "Quản lý Quảng cáo",
   "AdManagementDescription": "Chọn xem liệu các biểu ngữ quảng cáo có hiển thị trong {{productName}} của bạn hay không.",
-  "LogoForEditors": "Logo cho trình chỉnh sửa {{editorName}}"
+  "LogoForEditors": "Logo cho trình chỉnh sửa {{editorName}}",
+  "LogoForViewer": "Logo cho {{diagramViewer}}"
 }

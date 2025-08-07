@@ -368,5 +368,6 @@
   "YourLogo": "Ձեր լոգոն",
   "AdManagement": "Գովազդի Կառավարում",
   "AdManagementDescription": "Ընտրեք՝ արդյոք գովազդային պաստառները ցուցադրվեն ձեր {{productName}}-ում:",
-  "LogoForEditors": "{{editorName}} խմբագրիչի պատկերանիշ"
+  "LogoForEditors": "{{editorName}} խմբագրիչի պատկերանիշ",
+  "LogoForViewer": "{{diagramViewer}}-ի պատկերանիշան"
 }

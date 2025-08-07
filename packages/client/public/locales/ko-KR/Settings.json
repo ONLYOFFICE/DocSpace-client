@@ -368,5 +368,6 @@
   "YourLogo": "로고",
   "AdManagement": "광고 관리",
   "AdManagementDescription": "{{productName}}에서 프로모션 배너가 표시될지 여부를 선택하세요.",
-  "LogoForEditors": "{{editorName}} 편집기 로고"
+  "LogoForEditors": "{{editorName}} 편집기 로고",
+  "LogoForViewer": "{{diagramViewer}}을 위한 로고"
 }

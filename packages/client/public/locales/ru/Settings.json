@@ -368,5 +368,6 @@
   "YourLogo": "Ваш логотип",
   "AdManagementDescription": "Выберите, будут ли показываться рекламные баннеры в вашем {{productName}}.",
   "AdManagement": "Управление рекламой",
-  "LogoForEditors": "Логотип для редактора {{editorName}}"
+  "LogoForEditors": "Логотип для редактора {{editorName}}",
+  "LogoForViewer": "Логотип для {{diagramViewer}}"
 }

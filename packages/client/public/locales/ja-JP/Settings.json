@@ -368,5 +368,6 @@
   "YourLogo": "あなたのロゴ",
   "AdManagement": "広告管理",
   "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。",
-  "LogoForEditors": "{{editorName}} エディター用ロゴ"
+  "LogoForEditors": "{{editorName}} エディター用ロゴ",
+  "LogoForViewer": "{{diagramViewer}} のロゴ"
 }

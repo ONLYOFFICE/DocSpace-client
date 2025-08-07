@@ -368,5 +368,6 @@
   "YourLogo": "Loqonuz",
   "AdManagement": "Reklam İdarəçiliyi",
   "AdManagementDescription": "{{productName}} məhsulunuzda reklam bannelerinin göstərilməsi seçimini edin.",
-  "LogoForEditors": "{{editorName}} redaktoru üçün loqo"
+  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
+  "LogoForViewer": "{{diagramViewer}} üçün loqo"
 }

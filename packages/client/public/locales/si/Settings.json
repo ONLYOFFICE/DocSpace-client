@@ -368,5 +368,6 @@
   "YourLogo": "ඔබේ ලාංචනය",
   "AdManagement": "දැන්වීම් කළමනාකරණය",
   "AdManagementDescription": "ඔබේ {{productName}} හි ප්‍රවර්ධන බැනර් පෙන්වනවාද යන්න තෝරන්න.",
-  "LogoForEditors": "{{editorName}} සංස්කාරකයා සඳහා ලාංඡනය"
+  "LogoForEditors": "{{editorName}} සංස්කාරකයා සඳහා ලාංඡනය",
+  "LogoForViewer": "{{diagramViewer}} සඳහා ලාංඡනය"
 }

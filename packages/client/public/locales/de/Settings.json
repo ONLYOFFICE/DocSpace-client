@@ -368,5 +368,6 @@
   "YourLogo": "Ihr Logo",
   "AdManagement": "Anzeigenverwaltung",
   "AdManagementDescription": "Wählen Sie aus, ob Werbebanner in Ihrem {{productName}} angezeigt werden sollen.",
-  "LogoForEditors": "Logo für den {{editorName}} Editor"
+  "LogoForEditors": "Logo für den {{editorName}} Editor",
+  "LogoForViewer": "Logo für {{diagramViewer}}"
 }

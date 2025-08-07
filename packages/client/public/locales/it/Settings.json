@@ -368,5 +368,6 @@
   "YourLogo": "Il tuo logo",
   "AdManagement": "Gestione annunci",
   "AdManagementDescription": "Scegli se mostrare o meno i banner promozionali in {{productName}}.",
-  "LogoForEditors": "Logo per l'editor {{editorName}}"
+  "LogoForEditors": "Logo per l'editor {{editorName}}",
+  "LogoForViewer": "Logo per {{diagramViewer}}"
 }

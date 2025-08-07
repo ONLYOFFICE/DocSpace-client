@@ -368,5 +368,6 @@
   "YourLogo": "Vaše logo",
   "AdManagement": "Správa reklám",
   "AdManagementDescription": "Vyberte, či sa zobrazujú propagačné bannery vo vašom {{productName}}.",
-  "LogoForEditors": "Logo pre editor {{editorName}}"
+  "LogoForEditors": "Logo pre editor {{editorName}}",
+  "LogoForViewer": "Logo pre {{diagramViewer}}"
 }

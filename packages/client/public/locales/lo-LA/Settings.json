@@ -368,5 +368,6 @@
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
   "AdManagement": "ການຄຸ້ມຄອງການໂຄສະນາ",
   "AdManagementDescription": "ເລືອກວ່າຈະໃຫ້ສະແດງປ້າຍໂຄສະນາໃນ {{productName}} ຂອງທ່ານຫຼືບໍ່.",
-  "LogoForEditors": "ໂລโก້ສໍາລັບຕົວແກ້ໄຂ {{editorName}}"
+  "LogoForEditors": "ໂລโก້ສໍາລັບຕົວແກ້ໄຂ {{editorName}}",
+  "LogoForViewer": "ໂລໂກ້ສໍາລັບ {{diagramViewer}}"
 }

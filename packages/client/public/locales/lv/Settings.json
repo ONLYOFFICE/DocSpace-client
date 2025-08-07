@@ -368,5 +368,6 @@
   "YourLogo": "Jūsu logotips",
   "AdManagement": "Reklamu vadība",
   "AdManagementDescription": "Izvēlieties, vai reklāmas banneri tiek rādīti jūsu {{productName}}.",
-  "LogoForEditors": "Logo priekš {{editorName}} redaktoram"
+  "LogoForEditors": "Logo priekš {{editorName}} redaktoram",
+  "LogoForViewer": "Logo for {{diagramViewer}}"
 }

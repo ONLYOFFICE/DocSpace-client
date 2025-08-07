@@ -368,5 +368,6 @@
   "YourLogo": "Ваш лого",
   "AdManagement": "Управљање огласима",
   "AdManagementDescription": "Изаберите да ли ће промотивни банери бити приказани у вашем {{productName}}.",
-  "LogoForEditors": "Лого за уређивач {{editorName}}"
+  "LogoForEditors": "Лого за уређивач {{editorName}}",
+  "LogoForViewer": "Лого за {{diagramViewer}}"
 }

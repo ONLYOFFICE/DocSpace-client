@@ -368,5 +368,6 @@
   "YourLogo": "Twoje Logo",
   "AdManagement": "Zarządzanie Reklamami",
   "AdManagementDescription": "Wybierz, czy banery promocyjne są wyświetlane w Twoim {{productName}}.",
-  "LogoForEditors": "Logo dla edytora {{editorName}}"
+  "LogoForEditors": "Logo dla edytora {{editorName}}",
+  "LogoForViewer": "Logo dla {{diagramViewer}}"
 }

@@ -70,7 +70,12 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
 
       window.open(url, !isSameTab ? "_blank" : "_self");
     },
-    [filesSettings?.openEditorInSameTab, setMediaViewerData, shareKey],
+    [
+      filesSettings?.openEditorInSameTab,
+      setMediaViewerData,
+      shareKey,
+      sdkConfig?.events?.onFileManagerClick,
+    ],
   );
 
   const copyFileLink = React.useCallback(

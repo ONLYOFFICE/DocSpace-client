@@ -113,6 +113,7 @@ class PrimaryProgressDataStore {
     this.primaryOperationsArray.splice(operationIndex, 1);
 
     console.log("clearPrimaryProgressData", this.primaryOperationsArray);
+  };
 
   clearDropPreviewLocation = () => {
     console.log("clearDropPreviewLocation");

@@ -80,7 +80,7 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
 
   if (ssoUrl && hideAuthPage && !searchParams?.skipssoredirect) {
     redirect(ssoUrl);

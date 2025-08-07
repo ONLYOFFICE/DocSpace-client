@@ -32,7 +32,6 @@ class PrimaryProgressDataStore {
 
   needErrorChecking = [];
 
-
   dropTargetPreview = null;
 
   constructor() {

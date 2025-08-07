@@ -44,6 +44,7 @@ export type InfiniteLoaderProps = {
   countTilesInRow?: number;
   showSkeleton?: boolean;
   currentFolderId?: string | number;
+  smallPreview?: boolean;
 };
 
 export type ListComponentProps = InfiniteLoaderProps & {

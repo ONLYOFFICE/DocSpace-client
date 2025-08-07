@@ -40,6 +40,7 @@ import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
 import { getItemHeight, hideDisabledItems } from "./DropDown.utils";
 import styles from "./DropDown.module.scss";
+import type { TDirectionX } from "../../types";
 
 const DropDown = ({
   directionY = "bottom",
@@ -122,43 +123,52 @@ const DropDown = ({
       if (topSpace && bottom < 0) bottom = topSpace;
     }
 
-    if (dropDown) {
-      if (isRTL) {
-        if (right) {
-          dropDown.style.right = right;
-        } else if (directionX === "right") {
-          dropDown.style.left = `${parentRects.right - dropDown.clientWidth}px`;
-        } else if (
-          dropDownRects &&
-          parentRects.left + dropDownRects.width > viewport.width
-        ) {
-          if (parentRects.right - dropDownRects.width < 0) {
-            dropDown.style.left = "0px";
-          } else {
-            dropDown.style.left = `${
-              parentRects.right - dropDown.clientWidth
-            }px`;
-          }
-        } else {
-          dropDown.style.left = `${parentRects.left + offsetLeft}px`;
-        }
-      } else if (right) {
-        dropDown.style.left = right;
-      } else if (directionX === "right") {
-        dropDown.style.left = `${parentRects.left - scrollBarWidth}px`;
-      } else if (dropDownRects && parentRects.right - dropDownRects.width < 0) {
-        if (parentRects.left + dropDownRects.width > viewport.width) {
-          dropDown.style.left = `${
-            viewport.width - dropDown.clientWidth - scrollBarWidth
-          }px`;
-        } else {
-          dropDown.style.left = `${parentRects.left - scrollBarWidth}px`;
-        }
-      } else {
-        dropDown.style.left = `${
-          parentRects.right - dropDown.clientWidth - offsetLeft - scrollBarWidth
-        }px`;
-      }
+    if (dropDown && dropDownRects) {
+      // directionX logic
+
+      // Check available space around the parent
+      const hasRightSpace =
+        parentRects.left + dropDownRects.width < viewport.width;
+      const hasLeftSpace = parentRects.right - dropDownRects.width > 0;
+      const hasNoSpace = !hasRightSpace && !hasLeftSpace;
+
+      // Determine if start/end alignment is possible
+      const canAlignStart = isRTL ? hasLeftSpace : hasRightSpace;
+      const canAlignEnd = isRTL ? hasRightSpace : hasLeftSpace;
+
+      // Alignment functions
+      const alignToParentStart = () => {
+        const left = isRTL
+          ? parentRects.right - dropDownRects.width - scrollBarWidth
+          : parentRects.left;
+
+        dropDown.style.left = `${left}px`;
+      };
+
+      const alignToParentEnd = () => {
+        const left = isRTL
+          ? parentRects.left - scrollBarWidth
+          : parentRects.right - dropDownRects.width;
+
+        dropDown.style.left = `${left}px`;
+      };
+
+      const alignToViewportStart = () => {
+        const left = isRTL ? viewport.width - dropDownRects.width : 0;
+
+        dropDown.style.left = `${left}px`;
+      };
+
+      // Alignment logic based on direction and space
+      const alignMap: Record<TDirectionX | "hasNoSpace", () => void> = {
+        right: canAlignStart ? alignToParentStart : alignToParentEnd,
+        left: canAlignEnd ? alignToParentEnd : alignToParentStart,
+        hasNoSpace: alignToViewportStart,
+      };
+
+      // Apply alignment
+      const setAlignment = alignMap[hasNoSpace ? "hasNoSpace" : directionX];
+      setAlignment();
     }
     if (dropDownRef.current)
       dropDownRef.current.style.top = top || `${bottom}px`;

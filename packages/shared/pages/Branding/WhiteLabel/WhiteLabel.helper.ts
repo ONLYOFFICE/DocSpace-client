@@ -127,6 +127,87 @@ export const getLogoOptions = (
         width,
         height,
       };
+    case 7:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 8:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 9:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 10:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 11:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 12:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 13:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 14:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
+    case 15:
+      return {
+        fontSize,
+        text,
+        width,
+        height,
+        alignCenter: false,
+        isEditor: true,
+      };
     default:
       return { fontSize: 32, text, width: 422, height: 48 };
   }

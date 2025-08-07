@@ -85,6 +85,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
     const newLogos = logoUrls.map((logo, i) => {
       if (!showAbout && logo.name === "AboutPage") return logo;
+      if (logo.name === "Notification") return logo;
 
       const options = getLogoOptions(
         i,
@@ -93,14 +94,18 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         logo.size.height,
       );
 
-      const isDocsEditorName = logo.name === "DocsEditor";
+      const isLightEditor = logo.name.includes("EditorEmbed");
 
       const logoLight = generateLogo(
         options.width,
         options.height,
         options.text,
         options.fontSize,
-        isDocsEditorName ? globalColors.white : globalColors.darkBlack,
+        options.isEditor
+          ? isLightEditor
+            ? globalColors.darkBlack
+            : globalColors.white
+          : globalColors.darkBlack,
         options.alignCenter,
         options.isEditor,
       );
@@ -362,8 +367,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             fontWeight="600"
             className="settings_unavailable"
           >
-            {t("LogoDocsEditor")} ({logoUrls[3].size.width}x
-            {logoUrls[3].size.height})
+            {t("LogoForEditors", { editorName: t("Common:Documents") })} (
+            {logoUrls[3].size.width}x{logoUrls[3].size.height})
           </Text>
           <div className="logos-wrapper">
             <Logo
@@ -381,6 +386,138 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               src={logoUrls[3].path.light}
               imageClass="border-img logo-docs-editor background-dark-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.DocsEditor}_light`}
+              linkId="link-editors-header"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+          </div>
+        </div>
+
+        <div className="logo-wrapper">
+          <Text
+            fontSize="15px"
+            fontWeight="600"
+            className="settings_unavailable"
+          >
+            {t("LogoForEditors", { editorName: t("Common:Spreadsheet") })} (
+            {logoUrls[9].size.width}x{logoUrls[9].size.height})
+          </Text>
+          <div className="logos-wrapper">
+            <Logo
+              name={logoUrls[9].name}
+              src={logoUrls[9].path.light}
+              imageClass="border-img logo-docs-editor background-light-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.SpreadsheetEditorEmbed}_light`}
+              linkId="link-embedded-editor"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+            <Logo
+              name={logoUrls[8].name}
+              src={logoUrls[8].path.light}
+              imageClass="border-img logo-docs-editor background-dark-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.SpreadsheetEditor}_light`}
+              linkId="link-editors-header"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+          </div>
+        </div>
+
+        <div className="logo-wrapper">
+          <Text
+            fontSize="15px"
+            fontWeight="600"
+            className="settings_unavailable"
+          >
+            {t("LogoForEditors", { editorName: t("Common:Presentation") })} (
+            {logoUrls[11].size.width}x{logoUrls[11].size.height})
+          </Text>
+          <div className="logos-wrapper">
+            <Logo
+              name={logoUrls[11].name}
+              src={logoUrls[11].path.light}
+              imageClass="border-img logo-docs-editor background-light-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.PresentationEditorEmbed}_light`}
+              linkId="link-embedded-editor"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+            <Logo
+              name={logoUrls[10].name}
+              src={logoUrls[10].path.light}
+              imageClass="border-img logo-docs-editor background-dark-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.PresentationEditor}_light`}
+              linkId="link-editors-header"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+          </div>
+        </div>
+
+        <div className="logo-wrapper">
+          <Text
+            fontSize="15px"
+            fontWeight="600"
+            className="settings_unavailable"
+          >
+            {t("LogoForEditors", { editorName: t("Common:PDF") })} (
+            {logoUrls[13].size.width}x{logoUrls[13].size.height})
+          </Text>
+          <div className="logos-wrapper">
+            <Logo
+              name={logoUrls[13].name}
+              src={logoUrls[13].path.light}
+              imageClass="border-img logo-docs-editor background-light-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.PdfEditorEmbed}_light`}
+              linkId="link-embedded-editor"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+            <Logo
+              name={logoUrls[12].name}
+              src={logoUrls[12].path.light}
+              imageClass="border-img logo-docs-editor background-dark-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.PdfEditor}_light`}
+              linkId="link-editors-header"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+          </div>
+        </div>
+
+        <div className="logo-wrapper">
+          <Text
+            fontSize="15px"
+            fontWeight="600"
+            className="settings_unavailable"
+          >
+            {t("LogoForViewer", { diagramViewer: t("Common:DiagramViewer") })} (
+            {logoUrls[15].size.width}x{logoUrls[15].size.height})
+          </Text>
+          <div className="logos-wrapper">
+            <Logo
+              name={logoUrls[15].name}
+              src={logoUrls[15].path.light}
+              imageClass="border-img logo-docs-editor background-light-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.DiagramEditorEmbed}_light`}
+              linkId="link-embedded-editor"
+              onChangeText={t("ChangeLogoButton")}
+              onChange={onChangeLogo}
+              isSettingPaid={isSettingPaid}
+            />
+            <Logo
+              name={logoUrls[14].name}
+              src={logoUrls[14].path.light}
+              imageClass="border-img logo-docs-editor background-dark-editor"
+              inputId={`logoUploader_${WhiteLabelLogoType.DiagramEditor}_light`}
               linkId="link-editors-header"
               onChangeText={t("ChangeLogoButton")}
               onChange={onChangeLogo}

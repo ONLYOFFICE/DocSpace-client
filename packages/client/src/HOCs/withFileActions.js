@@ -105,7 +105,10 @@ export default function withFileActions(WrappedFileItem) {
         canDrag,
         viewAs,
         isIndexEditingMode,
+        withContentSelection,
       } = this.props;
+
+      if (withContentSelection) return;
 
       if (isIndexEditingMode) {
         if (

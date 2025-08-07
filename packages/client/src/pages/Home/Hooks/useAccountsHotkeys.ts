@@ -97,8 +97,13 @@ const useAccountsHotkeys = ({
     "*",
     (e) => {
       const someDialogIsOpen = checkDialogsOpen();
+      if (someDialogIsOpen) return;
 
-      if (e.shiftKey || e.ctrlKey || someDialogIsOpen) return;
+      if (e.key === "Alt" && e.ctrlKey) {
+        return enableSelection(e);
+      }
+
+      if (e.shiftKey || e.ctrlKey) return;
 
       switch (e.key) {
         case "ArrowDown":
@@ -136,13 +141,6 @@ const useAccountsHotkeys = ({
 
   // Back to parent folder
   useHotkeys("Backspace", onClickBackAction, hotkeysFilter);
-
-  // Disable selection area
-  useHotkeys("ctrl+alt", enableSelection, {
-    ...hotkeysFilter,
-    keyup: true,
-    keydown: true,
-  });
 };
 
 export default useAccountsHotkeys;

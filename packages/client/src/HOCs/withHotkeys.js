@@ -197,9 +197,13 @@ const withHotkeys = (Component) => {
       "*",
       (e) => {
         const someDialogIsOpen = checkDialogsOpen();
+        if (someDialogIsOpen) return;
 
-        if (e.shiftKey || e.ctrlKey || someDialogIsOpen || isIndexEditingMode)
-          return;
+        if (e.key === "Alt" && e.ctrlKey) {
+          return enableSelection(e);
+        }
+
+        if (e.shiftKey || e.ctrlKey || isIndexEditingMode) return;
 
         switch (e.key) {
           case "ArrowDown":
@@ -441,13 +445,6 @@ const withHotkeys = (Component) => {
 
       hotkeysFilter,
     );
-
-    // Disable selection area, enable use-select
-    useHotkeys("ctrl+alt", enableSelection, {
-      ...hotkeysFilter,
-      keyup: true,
-      keydown: true,
-    });
 
     return <Component {...props} />;
   };

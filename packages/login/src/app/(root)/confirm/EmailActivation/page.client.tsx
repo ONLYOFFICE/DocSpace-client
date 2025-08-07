@@ -51,7 +51,10 @@ const EmailActivationHandler = () => {
           confirmHeader,
         );
 
-        window.location.replace(`/login?confirmedEmail=${res[0].email}`);
+        const base64Data = btoa(JSON.stringify(res[0].email));
+        sessionStorage.setItem("confirmedData", base64Data);
+
+        window.location.replace(`/login`);
       } catch (e) {
         const knownError = e as TError;
         let errorMessage: string;

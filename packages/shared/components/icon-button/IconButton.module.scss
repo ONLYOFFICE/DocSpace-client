@@ -28,7 +28,6 @@
 
 @use "../../styles/mixins";
 @use "../../styles/variables/colors";
-@use "../../styles/common-icons-style";
 
 :global(.dark) {
   :local {
@@ -54,7 +53,7 @@
   height: var(--icon-button-size);
 
   &.commonIconsStyle {
-    @include common-icons-style.common-icons-style;
+    @include mixins.common-icons-style;
   }
 
   &.disabled {

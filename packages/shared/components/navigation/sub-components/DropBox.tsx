@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useCallback } from "react";
-import { useTheme } from "styled-components";
-import { Direction, VariableSizeList } from "react-window";
+import { VariableSizeList } from "react-window";
 
 import { DeviceType } from "../../../enums";
 
@@ -34,6 +33,7 @@ import { CustomScrollbarsVirtualList } from "../../scrollbar";
 
 import styles from "../Navigation.module.scss";
 import { TDropBoxProps } from "../Navigation.types";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import NavigationLogo from "./LogoBlock";
 import ArrowButton from "./ArrowBtn";
@@ -67,6 +67,8 @@ const DropBox = ({
   isPlusButtonVisible,
 }: TDropBoxProps) => {
   const [dropBoxHeight, setDropBoxHeight] = React.useState(0);
+  const { interfaceDirection } = useInterfaceDirection();
+
   const countItems = navigationItems.length;
 
   const getItemSize = useCallback(
@@ -77,7 +79,6 @@ const DropBox = ({
     [countItems, currentDeviceType],
   );
 
-  const { interfaceDirection } = useTheme();
   React.useEffect(() => {
     const itemsHeight = navigationItems.map((item, index) =>
       getItemSize(index),
@@ -159,7 +160,7 @@ const DropBox = ({
         />
 
         <VariableSizeList
-          direction={interfaceDirection as Direction}
+          direction={interfaceDirection}
           height={dropBoxHeight}
           width="auto"
           itemCount={countItems}
@@ -176,7 +177,7 @@ const DropBox = ({
       </div>
 
       <VariableSizeList
-        direction={interfaceDirection as Direction}
+        direction={interfaceDirection}
         height={dropBoxHeight}
         width="auto"
         itemCount={countItems}

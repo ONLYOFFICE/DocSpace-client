@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { ContextMenuSkeleton } from ".";
 
 jest.mock("../../utils", () => ({
@@ -38,13 +37,13 @@ jest.mock("../../utils", () => ({
 
 describe("<ContextMenuSkeleton />", () => {
   it("renders without error", () => {
-    renderWithTheme(<ContextMenuSkeleton />);
+    render(<ContextMenuSkeleton />);
     expect(screen.getAllByTestId("rectangle-skeleton")[0]).toBeInTheDocument();
     expect(screen.getAllByTestId("rectangle-skeleton")[1]).toBeInTheDocument();
   });
 
   it("renders with custom id and className", () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <ContextMenuSkeleton id="test-id" className="test-class" />,
     );
 

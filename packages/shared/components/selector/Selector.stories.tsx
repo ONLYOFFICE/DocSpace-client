@@ -28,7 +28,6 @@
 // @ts-nocheck
 
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
@@ -39,28 +38,16 @@ import { RoomsTypeValues } from "../../utils";
 
 import RoomType from "../room-type";
 import { AvatarRole } from "../avatar";
+import {
+  BreadCrumbsLoader,
+  RowLoader,
+  SearchLoader,
+} from "../../skeletons/selector";
 
 import { Selector } from "./Selector";
 import { SelectorProps, TSelectorItem } from "./Selector.types";
 import { globalColors } from "../../themes";
 import { EmployeeStatus, EmployeeType } from "../../enums";
-
-const StyledRowLoader = styled.div`
-  width: 100%;
-  height: 48px;
-`;
-
-const StyledSearchLoader = styled.div`
-  width: 100%;
-  height: 32px;
-  background: black;
-`;
-
-const StyledBreadCrumbsLoader = styled.div`
-  width: 100%;
-  height: 54px;
-  background: black;
-`;
 
 const meta = {
   title: "Components/Selector",
@@ -189,14 +176,13 @@ const renderedItems = items.slice(0, 100);
 const totalItems = items.length;
 
 const Template = (args: SelectorProps) => {
+  const { isMultiSelect } = args;
+
   const [rendItems, setRendItems] = React.useState(renderedItems);
 
   const loadNextPage = React.useCallback(async (index: number) => {
     setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
   }, []);
-
-  const rowLoader = <StyledRowLoader />;
-  const searchLoader = <StyledSearchLoader className="search-loader" />;
 
   return (
     <div
@@ -212,8 +198,8 @@ const Template = (args: SelectorProps) => {
         {...args}
         items={rendItems}
         loadNextPage={loadNextPage}
-        searchLoader={searchLoader}
-        rowLoader={rowLoader}
+        searchLoader={<SearchLoader />}
+        rowLoader={<RowLoader isUser={false} isMultiSelect={isMultiSelect} />}
       />
     </div>
   );
@@ -260,7 +246,7 @@ export const Default: Story = {
     withBreadCrumbs: false,
     breadCrumbs: [],
     onSelectBreadCrumb: () => {},
-    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    breadCrumbsLoader: <BreadCrumbsLoader />,
     withoutBackButton: false,
     withSearch: false,
     isBreadCrumbsLoading: false,
@@ -315,7 +301,7 @@ export const BreadCrumbs: Story = {
       { id: 5, label: "4222222222222222222222222222222222222" },
     ],
     onSelectBreadCrumb: () => {},
-    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    breadCrumbsLoader: <BreadCrumbsLoader />,
     withoutBackButton: false,
     withSearch: false,
     isBreadCrumbsLoading: false,
@@ -372,7 +358,7 @@ export const NewName: Story = {
       { id: 3, label: "21222222222" },
     ],
     onSelectBreadCrumb: () => {},
-    breadCrumbsLoader: <StyledBreadCrumbsLoader />,
+    breadCrumbsLoader: <BreadCrumbsLoader />,
     withoutBackButton: false,
     withSearch: false,
     isBreadCrumbsLoading: false,

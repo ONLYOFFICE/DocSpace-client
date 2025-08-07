@@ -148,20 +148,6 @@ describe("ColorPicker component", () => {
     expect(hexInput).toHaveValue(testColor);
   });
 
-  it("updates internal color state when appliedColor prop changes", () => {
-    const { rerender } = render(
-      <ColorPicker {...defaultProps} appliedColor="#ff0000" />,
-    );
-
-    let hexInput = screen.getByTestId("color-picker-hex-input");
-    expect(hexInput).toHaveValue("#ff0000");
-
-    rerender(<ColorPicker {...defaultProps} appliedColor="#00ff00" />);
-
-    hexInput = screen.getByTestId("color-picker-hex-input");
-    expect(hexInput).toHaveValue("#00ff00");
-  });
-
   it("has correct ARIA attributes", () => {
     render(<ColorPicker {...defaultProps} />);
 

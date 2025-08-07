@@ -25,17 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
-import { renderWithTheme } from "../../utils/render-with-theme";
 import { Badge } from ".";
 import styles from "./Badge.module.scss";
 
 describe("<Badge />", () => {
   const renderComponent = (props = {}) => {
-    return renderWithTheme(<Badge {...props} />);
+    return render(<Badge {...props} />);
   };
 
   describe("Rendering", () => {

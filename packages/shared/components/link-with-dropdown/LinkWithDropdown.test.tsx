@@ -84,7 +84,9 @@ describe("LinkWithDropdown", () => {
     expect(dropdown).toHaveAttribute("role", "listbox");
 
     // Check if dropdown items are rendered
-    const items = screen.getAllByTestId("drop-down-item");
+    const items = screen.getAllByTestId((testId) =>
+      testId.startsWith("link_with_drop_down_"),
+    );
     expect(items).toHaveLength(4); // Including separator
 
     // Verify menu items text content (excluding separator)

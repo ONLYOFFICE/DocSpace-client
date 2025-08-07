@@ -25,12 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 
 import styles from "./SelectionArea.module.scss";
 import { frames } from "./SelectionArea.utils";
 import { SelectionAreaProps, TArrayTypes } from "./SelectionArea.types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 const SelectionArea = ({
   onMove,
@@ -56,15 +56,13 @@ const SelectionArea = ({
   const scrollSpeed = React.useRef({ x: 0, y: 0 });
   const selectableNodes = React.useRef(new Set<Element>());
 
-  const theme = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
   const isIntersects = React.useCallback(
     (itemIndex: number, itemType: string) => {
       const { right, left, bottom, top } = areaRect.current;
       if (!scrollElement.current) return;
       const { scrollTop } = scrollElement.current;
-
-      const isRtl = theme.interfaceDirection === "rtl";
 
       let itemTop;
       let itemBottom;
@@ -128,7 +126,7 @@ const SelectionArea = ({
         let columnIndex = (itemIndex + countOfMissingTiles) % countTilesInRow!;
 
         // Mirror fileIndex for RTL interface (2, 1, 0 => 0, 1, 2)
-        if (isRtl && viewAs === "tile") {
+        if (isRTL && viewAs === "tile") {
           columnIndex = countTilesInRow! - 1 - columnIndex;
         }
 
@@ -162,13 +160,7 @@ const SelectionArea = ({
 
       return bottom > itemTop && top < itemBottom;
     },
-    [
-      arrayTypes,
-      countTilesInRow,
-      defaultHeaderHeight,
-      theme.interfaceDirection,
-      viewAs,
-    ],
+    [arrayTypes, countTilesInRow, defaultHeaderHeight, isRTL, viewAs],
   );
 
   const recalculateSelectionAreaRect = React.useCallback(() => {

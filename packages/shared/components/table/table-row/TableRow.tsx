@@ -59,7 +59,7 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
-    dataTestId,
+    dataTestId = "table-row",
     contextMenuTestId,
   } = props;
 

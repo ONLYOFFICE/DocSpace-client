@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { screen, waitFor, act } from "@testing-library/react";
+import { screen, waitFor, act, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import { PreparationPortal } from "./index";
 import SocketHelper, { SocketEvents } from "../../utils/socket";
 import { getRestoreProgress } from "../../api/portal";
-import { renderWithTheme } from "../../utils/render-with-theme";
 
 // Mock the i18next library
 jest.mock("react-i18next", () => ({
@@ -75,7 +74,7 @@ describe("<PreparationPortal />", () => {
       error: null,
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the component to load and make API call
     await waitFor(() => {
@@ -95,7 +94,7 @@ describe("<PreparationPortal />", () => {
       error: null,
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the progress to be displayed
     await waitFor(() => {
@@ -114,7 +113,7 @@ describe("<PreparationPortal />", () => {
       error: errorMessage,
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the error message to be displayed
     await waitFor(() => {
@@ -139,7 +138,7 @@ describe("<PreparationPortal />", () => {
       return SocketHelper;
     });
 
-    renderWithTheme(<PreparationPortal />);
+    render(<PreparationPortal />);
 
     // Wait for the component to register socket listener
     await waitFor(() => {
@@ -169,7 +168,7 @@ describe("<PreparationPortal />", () => {
       error: null,
     });
 
-    renderWithTheme(<PreparationPortal withoutHeader />);
+    render(<PreparationPortal withoutHeader />);
 
     // With withoutHeader prop, the header text should not be present
     await waitFor(() => {

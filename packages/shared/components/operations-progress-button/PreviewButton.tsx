@@ -120,6 +120,10 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     shouldShowDotsAfterAnimation.current = false;
 
     setIsVisible(true);
+    // Reset animation state when dragging starts to interrupt any ongoing animations
+    if (animationState === "hidingUnder" || animationState === "dropping") {
+      setAnimationState("raising");
+    }
 
     if (!prev && current) {
       setAnimationState("raising");
@@ -144,6 +148,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     lastKnownTitle,
     allOperationsLength,
     isVisible,
+    animationState,
   ]);
 
   useEffect(() => {

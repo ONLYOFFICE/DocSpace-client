@@ -154,6 +154,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
           components={{
             1: (
               <Link
+                key="android-link"
                 color="accent"
                 href={TFA_ANDROID_APP_URL}
                 target={LinkTarget.blank}
@@ -161,6 +162,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
             ),
             4: (
               <Link
+                key="ios-link"
                 color="accent"
                 href={TFA_IOS_APP_URL}
                 target={LinkTarget.blank}
@@ -168,6 +170,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
             ),
             8: (
               <Link
+                key="windows-link"
                 color="accent"
                 href={TFA_WIN_APP_URL}
                 target={LinkTarget.blank}
@@ -184,7 +187,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
               secretKey,
             }}
             components={{
-              1: <strong />,
+              1: <strong key="secret-key-strong" />,
             }}
           />
         </Text>

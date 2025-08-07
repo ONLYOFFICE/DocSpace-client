@@ -772,7 +772,7 @@ class SettingsStore {
   }
 
   get requestEntriesUrl() {
-    return this.externalResources?.support.entries?.request;
+    return this.externalResources?.support?.entries?.request;
   }
 
   get requestSupportUrl() {
@@ -782,11 +782,11 @@ class SettingsStore {
   }
 
   get documentationEmail() {
-    return this.externalResources?.common.entries.documentationemail;
+    return this.externalResources?.common?.entries?.documentationemail;
   }
 
   get bookTrainingEmail() {
-    return this.externalResources?.common.entries?.booktrainingemail;
+    return this.externalResources?.common?.entries?.booktrainingemail;
   }
 
   get appearanceBlockHelpUrl() {

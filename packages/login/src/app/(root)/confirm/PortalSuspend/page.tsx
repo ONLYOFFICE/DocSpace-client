@@ -44,7 +44,7 @@ async function Page() {
           <GreetingContainer greetingText={settings?.greetingSettings} />
           <FormWrapper id="portal-suspend-form">
             <DeactivatePortalForm
-              onlyofficeUrl={settings?.externalResources.site.domain}
+              onlyofficeUrl={settings?.externalResources?.site?.domain}
               siteUrl={companyInfoSettings?.site}
             />
           </FormWrapper>

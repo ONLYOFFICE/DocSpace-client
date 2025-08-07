@@ -36,7 +36,7 @@ async function Page() {
       {settings && typeof settings !== "string" && (
         <ProfileRemoveForm
           greetingSettings={settings.greetingSettings}
-          legalTerms={settings.externalResources.common?.entries.legalterms}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
         />
       )}
     </>

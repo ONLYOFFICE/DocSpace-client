@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Виберіть, чи потрібно показувати посилання на додаткові ресурси в {{productName}}.",
   "AdditionalResourcesSubtitle": "Налаштуйте показ посилань на корисні ресурси для ваших користувачів.",
   "AddTrustedDomain": "Додати довірений домен",
+  "AdManagement": "Управління рекламою",
+  "AdManagementDescription": "Оберіть, чи відображатимуться рекламні банери у вашому {{productName}}.",
   "Admins": "Адміністратори",
   "AdminsMessage": "Параметри повідомлень адміністратору",
   "AdminsMessageMobileDescription": "Параметри повідомлень адміністратору — це спосіб зв’язатися з адміністратором порталу.",
@@ -201,6 +203,8 @@
   "LogoAbout": "Логотип для сторінки «Інформація».",
   "LogoCompact": "Логотип для компактного лівого меню",
   "LogoFavicon": "Фавікон",
+  "LogoForEditors": "Логотип для редактора {{editorName}}",
+  "LogoForViewer": "Логотип для {{diagramViewer}}",
   "LogoLightSmall": "Логотип заголовка порталу",
   "LogoLogin": "Логотип для сторінки входу та електронної пошти",
   "ManagementCategoryDataManagement": "Управління даними",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "У вас немає користувачів без електронної пошти. Перейдіть до наступного кроку.",
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
-  "YourLogo": "Ваш логотип",
-  "AdManagement": "Управління рекламою",
-  "AdManagementDescription": "Оберіть, чи відображатимуться рекламні банери у вашому {{productName}}.",
-  "LogoForEditors": "Логотип для редактора {{editorName}}",
-  "LogoForViewer": "Логотип для {{diagramViewer}}"
+  "YourLogo": "Ваш логотип"
 }

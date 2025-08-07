@@ -174,6 +174,9 @@
   "Description": "Tanım",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Geliştirici Araçları",
+  "Diagram": "Şema",
+  "Diagrams": "Şemalar",
+  "DiagramViewer": "Şematik Görüntüleyici",
   "Disable": "Devre dışı bırak",
   "Disabled": "Devre dışı bırakıldı",
   "DisableQuota": "Kotayı devre dışı bırak",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "Devam etmek için lütfen korunan dosyalar için <0>bir şifre girin</0>",
   "PasswordRequired": "Şifre gerekli",
   "PaymentsTitle": "Ödemeler",
+  "PDF": "PDF",
   "People": "Kişiler",
   "Permissions": "İzinler",
   "PerUserMonth": "Yönetici/ay başına <1>{{price}}</1>",
@@ -721,9 +725,5 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "YourTurn": "Sıra sizde",
-  "Diagram": "Şema",
-  "Diagrams": "Şemalar",
-  "PDF": "PDF",
-  "DiagramViewer": "Şema Görüntüleyici"
+  "YourTurn": "Sıra sizde"
 }

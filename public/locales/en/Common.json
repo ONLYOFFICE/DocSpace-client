@@ -174,13 +174,14 @@
   "Description": "Description",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Developer Tools",
+  "Diagram": "Diagram",
+  "Diagrams": "Diagrams",
+  "DiagramViewer": "Diagram Viewer",
   "Disable": "Disable",
   "Disabled": "Disabled",
   "DisableQuota": "Disable quota",
   "DisableStorageQuota": "Disable storage quota",
   "Disconnect": "Disconnect",
-  "Diagram": "Diagram",
-  "Diagrams": "Diagrams",
   "Document": "Document",
   "Documents": "Documents",
   "Domain": "Domain",
@@ -470,6 +471,7 @@
   "PasswordProtectedFiles": "Please <0>enter a password</0> for the protected files to continue",
   "PasswordRequired": "Password required",
   "PaymentsTitle": "Payments",
+  "PDF": "PDF",
   "People": "People",
   "Permissions": "Permissions",
   "PerUserMonth": "<1>{{price}}</1> per admin/month",
@@ -723,7 +725,5 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn",
-  "DiagramViewer": "Diagram Viewer",
-  "PDF": "PDF"
+  "YourTurn": "Your turn"
 }

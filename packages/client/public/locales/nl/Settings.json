@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Kies of u links naar aanvullende bronnen in {{productName}} wilt weergeven.",
   "AdditionalResourcesSubtitle": "Configureer de weergave van links naar nuttige bronnen voor uw gebruikers.",
   "AddTrustedDomain": "Voeg vertrouwd domein toe",
+  "AdManagement": "Ad Management",
+  "AdManagementDescription": "Kies of promotiebanners worden weergegeven in uw {{productName}}.",
   "Admins": "Beheerders",
   "AdminsMessage": "Beheerder Bericht Instellingen",
   "AdminsMessageMobileDescription": "Beheerder Bericht Instellingen is een manier om contact op te nemen met de portaal beheerder.",
@@ -201,6 +203,8 @@
   "LogoAbout": "Logo voor de Over pagina",
   "LogoCompact": "Logo voor het compacte linkermenu",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo voor {{editorName}}-editor",
+  "LogoForViewer": "Logo voor {{diagramViewer}}",
   "LogoLightSmall": "Logo voor de koptekst van de ruimte",
   "LogoLogin": "Logo voor de inlogpagina en e-mails",
   "ManagementCategoryDataManagement": "Databeheer",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
-  "YourLogo": "Uw logo",
-  "AdManagement": "Ad Management",
-  "AdManagementDescription": "Kies of promotiebanners worden weergegeven in uw {{productName}}.",
-  "LogoForEditors": "Logo voor de {{editorName}} editor",
-  "LogoForViewer": "Logo voor {{diagramViewer}}"
+  "YourLogo": "Uw logo"
 }

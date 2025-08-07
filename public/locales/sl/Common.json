@@ -174,6 +174,9 @@
   "Description": "Opis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Razvijalska orodja",
+  "Diagram": "Diagram",
+  "Diagrams": "Diagrami",
+  "DiagramViewer": "Ogled diagrama",
   "Disable": "Onemogoči",
   "Disabled": "Onemogočeno",
   "DisableQuota": "Onemogoči kvoto",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "Za nadaljevanje <0>vnesite geslo</0> za zaščitene datoteke",
   "PasswordRequired": "Zahtevano je geslo",
   "PaymentsTitle": "Plačila",
+  "PDF": "PDF",
   "People": "Ljudje",
   "Permissions": "Dovoljenja",
   "PerUserMonth": "<1>{{price}}</1> na skrbnika/mesec",
@@ -721,9 +725,5 @@
   "Yes": "Da",
   "Yesterday": "Včeraj",
   "You": "Vi",
-  "YourTurn": "Vi ste na vrsti",
-  "Diagram": "Diagram",
-  "Diagrams": "Diagrami",
-  "PDF": "PDF",
-  "DiagramViewer": "Ogled diagrama"
+  "YourTurn": "Vi ste na vrsti"
 }

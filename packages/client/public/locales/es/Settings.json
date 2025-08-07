@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Seleccione si desea mostrar enlaces a recursos adicionales en {{productName}}.",
   "AdditionalResourcesSubtitle": "Configure la visualización de enlaces a recursos útiles para sus usuarios.",
   "AddTrustedDomain": "Añadir dominio seguro",
+  "AdManagement": "Gestión de anuncios",
+  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}.",
   "Admins": "Administradores",
   "AdminsMessage": "Configuración del mensaje del administrador",
   "AdminsMessageMobileDescription": "La configuración del mensaje del administrador es una forma de ponerse en contacto con el administrador del portal.",
@@ -201,6 +203,8 @@
   "LogoAbout": "Logotipo para la página Acerca de",
   "LogoCompact": "Logotipo para el menú compacto de la izquierda",
   "LogoFavicon": "Favicono",
+  "LogoForEditors": "Logotipo para el editor {{editorName}}",
+  "LogoForViewer": "Logotipo para {{diagramViewer}}",
   "LogoLightSmall": "Logo para el encabezado del espacio",
   "LogoLogin": "Logotipo para la página de inicio de sesión y los correos electrónicos",
   "ManagementCategoryDataManagement": "Archivo local",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso.",
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
-  "YourLogo": "Su logotipo",
-  "AdManagement": "Gestión de anuncios",
-  "AdManagementDescription": "lija si se muestran banners promocionales en su {{productName}}.",
-  "LogoForEditors": "Logo para el editor {{editorName}}",
-  "LogoForViewer": "Logo para {{diagramViewer}}"
+  "YourLogo": "Su logotipo"
 }

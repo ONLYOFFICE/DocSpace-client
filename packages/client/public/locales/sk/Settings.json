@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Vyberte, či chcete v časti {{productName}} zobraziť odkazy na ďalšie zdroje.",
   "AdditionalResourcesSubtitle": "Nastavte zobrazovanie odkazov na užitočné zdroje pre vašich používateľov.",
   "AddTrustedDomain": "Pridať dôveryhodnú doménu",
+  "AdManagement": "Správa reklám",
+  "AdManagementDescription": "Vyberte, či sa zobrazujú propagačné bannery vo vašom {{productName}}.",
   "Admins": "Administrátori",
   "AdminsMessage": "Nastavenia správ administrátora",
   "AdminsMessageMobileDescription": "Nastavenia sprav administrátorovi je spôsob ako kontaktovať administrátora portálu.",
@@ -201,6 +203,8 @@
   "LogoAbout": "Logo pre stránku Informácie",
   "LogoCompact": "Logo pre kompaktné ľavé menu",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo pre editor {{editorName}}",
+  "LogoForViewer": "Logo pre {{diagramViewer}}",
   "LogoLightSmall": "Logo pre hlavičku priestoru",
   "LogoLogin": "Logo pre prihlasovaciu stránku a e-maily",
   "ManagementCategoryDataManagement": "Správa dat",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
-  "YourLogo": "Vaše logo",
-  "AdManagement": "Správa reklám",
-  "AdManagementDescription": "Vyberte, či sa zobrazujú propagačné bannery vo vašom {{productName}}.",
-  "LogoForEditors": "Logo pre editor {{editorName}}",
-  "LogoForViewer": "Logo pre {{diagramViewer}}"
+  "YourLogo": "Vaše logo"
 }

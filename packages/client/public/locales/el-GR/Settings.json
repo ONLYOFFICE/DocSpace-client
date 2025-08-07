@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Επιλέξτε αν θέλετε να εμφανίζετε συνδέσμους προς επιπλέον πόρους στο {{productName}}.",
   "AdditionalResourcesSubtitle": "Διαμορφώστε την εμφάνιση συνδέσμων προς χρήσιμους πόρους για τους χρήστες σας.",
   "AddTrustedDomain": "Προσθήκη αξιόπιστου domain",
+  "AdManagement": "Διαχείριση Διαφημίσεων",
+  "AdManagementDescription": "Επιλέξτε αν θα εμφανίζονται διαφημιστικές μπάνερ στο {{productName}} σας.",
   "Admins": "Διαχειριστές",
   "AdminsMessage": "Ρυθμίσεις μηνυμάτων διαχειριστή",
   "AdminsMessageMobileDescription": "Οι Ρυθμίσεις μηνυμάτων διαχειριστή είναι ένας τρόπος επικοινωνίας με τον διαχειριστή της πύλης..",
@@ -201,6 +203,8 @@
   "LogoAbout": "Λογότυπο για τη σελίδα «Σχετικά»",
   "LogoCompact": "Λογότυπο για το συμπαγές αριστερό μενού",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Λογότυπο για τον επεξεργαστή {{editorName}}",
+  "LogoForViewer": "Λογότυπο για {{diagramViewer}}",
   "LogoLightSmall": "Λογότυπο για την κεφαλίδα του χώρου",
   "LogoLogin": "Λογότυπο για τα μηνύματα ηλεκτρονικού ταχυδρομείου και τη σελίδα Σύνδεσης",
   "ManagementCategoryDataManagement": "Διαχείριση δεδομένων",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "Δεν έχετε χρήστες χωρίς email. Προχωρήστε στο επόμενο βήμα.",
   "YouHaveUnsavedChanges": "Έχετε μη αποθηκευμένες αλλαγές",
   "YourCurrentDomain": "Το τρέχον όνομα τομέα σας",
-  "YourLogo": "Το λογότυπό σας",
-  "AdManagement": "Διαχείριση Διαφημίσεων",
-  "AdManagementDescription": "Επιλέξτε αν θα εμφανίζονται διαφημιστικές μπάνερ στο {{productName}} σας.",
-  "LogoForEditors": "Logo για τον επεξεργαστή {{editorName}}",
-  "LogoForViewer": "Logo για το {{diagramViewer}}"
+  "YourLogo": "Το λογότυπό σας"
 }

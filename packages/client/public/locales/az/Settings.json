@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "{{productName}} məhsulunda əlavə resurslara linklərin göstərilməsini seçin.",
   "AdditionalResourcesSubtitle": "İstifadəçiləriniz üçün faydalı resurslara keçidlərin görünüşünü konfiqurasiya edin.",
   "AddTrustedDomain": "İnanılmış domen əlavə et",
+  "AdManagement": "Reklam İdarəçiliyi",
+  "AdManagementDescription": "{{productName}} məhsulunuzda reklam bannelerinin göstərilməsi seçimini edin.",
   "Admins": "Adminlər",
   "AdminsMessage": "Administrator Mesaj Parametrləri",
   "AdminsMessageMobileDescription": "Admin Mesaj Parametrləri portal administratoru ilə əlaqə qurmağın bir yoludur.",
@@ -201,6 +203,8 @@
   "LogoAbout": "Haqqımızda səhifəsi üçün loqo",
   "LogoCompact": "Kompakt sol menyu üçün loqo",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
+  "LogoForViewer": "{{diagramViewer}} üçün loqo",
   "LogoLightSmall": "Sahə başlığı üçün loqo",
   "LogoLogin": "Giriş səhifəsi və e-məktublar üçün loqo",
   "ManagementCategoryDataManagement": "Məlumatların idarə olunması",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
-  "YourLogo": "Loqonuz",
-  "AdManagement": "Reklam İdarəçiliyi",
-  "AdManagementDescription": "{{productName}} məhsulunuzda reklam bannelerinin göstərilməsi seçimini edin.",
-  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
-  "LogoForViewer": "{{diagramViewer}} üçün loqo"
+  "YourLogo": "Loqonuz"
 }

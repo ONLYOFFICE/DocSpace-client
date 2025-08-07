@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Valitse haluatko näyttää linkit lisäresursseille  {{productName}} :ssa.",
   "AdditionalResourcesSubtitle": "Määritä käyttäjillesi lista linkeistä helpottaviin resursseihin. ",
   "AddTrustedDomain": "Lisää luotettu verkkotunnus",
+  "AdManagement": "Mainoshallinta",
+  "AdManagementDescription": "Valitse, näytetäänkö mainosbannerit {{productName}}-tuotteessasi.",
   "Admins": "Järjestelmänvalvojat",
   "AdminsMessage": "Järjestelmänvalvojan viestiasetukset",
   "AdminsMessageMobileDescription": "Järjestelmänvalvojan Viestiasetukset on helppo tapa ottaa yhteyttä järjestelmänvalvojaan.",
@@ -201,6 +203,8 @@
   "LogoAbout": "Logo Sisällöstä-osioon",
   "LogoCompact": "Logo vasempaan kompaktiin menuun",
   "LogoFavicon": "Favicon",
+  "LogoForEditors": "Editorin {{editorName}} logo",
+  "LogoForViewer": "Logo kohteelle {{diagramViewer}}",
   "LogoLightSmall": "Tilan otsikon logo",
   "LogoLogin": "Logo sisäänkirjautumissivulle ja sähköposteihin",
   "ManagementCategoryDataManagement": "Tiedon hallinta",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
   "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
-  "YourLogo": "Logosi",
-  "AdManagement": "Mainoshallinta",
-  "AdManagementDescription": "Valitse, näytetäänkö mainosbannerit {{productName}}-tuotteessasi.",
-  "LogoForEditors": "{{editorName}} -editorin logo",
-  "LogoForViewer": "{{diagramViewer}}-sovelluksen logo"
+  "YourLogo": "Logosi"
 }

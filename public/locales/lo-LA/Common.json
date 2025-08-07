@@ -174,6 +174,9 @@
   "Description": "ລາຍລະອຽດ",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "ເຄື່ອງມືພັດທະນາ",
+  "Diagram": "ແຜນວາດ",
+  "Diagrams": "ແຜນວາດ",
+  "DiagramViewer": "ຕົວເບິ່ງແຜນວາດ",
   "Disable": "ປິດການໃຊ້ງານ",
   "Disabled": "ປິດສິດ",
   "DisableQuota": "ປິດການນຳໃຊ້ໂຄຕ້າ",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "ກະລຸນາ <0>ໃສ່ລະຫັດລັບ</0> ຂອງເອກະສານທີ່ຖືກປົກປ້ອງ ເພື່ອດໍາເນີນການຕໍ່ໄປ",
   "PasswordRequired": "ຕ້ອງການລະຫາຍຊັບຊ້ອນ",
   "PaymentsTitle": "ການຊຳລະເງິນ",
+  "PDF": "PDF",
   "People": "ຄົນ",
   "Permissions": "ສິດອະນຸຍາດ",
   "PerUserMonth": "<1>{{price}}</1> ຕໍ່ຜູ້ໃຊ້ admin/ຕໍ່ເດືອນ",
@@ -721,9 +725,5 @@
   "Yes": "ຍາ",
   "Yesterday": "ມື້ວານນີ້",
   "You": "ເຈົ້າ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "Diagram": "ແຜນວາດ",
-  "Diagrams": "ແຜນວາດ",
-  "PDF": "PDF",
-  "DiagramViewer": "ຕົວເບິ່ງຮູບວາດ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
 }

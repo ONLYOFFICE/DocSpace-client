@@ -174,6 +174,9 @@
   "Description": "Նկարագրություն",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Մշակողի գործիքներ",
+  "Diagram": "Դիագրամ",
+  "Diagrams": "Դիագրամներ",
+  "DiagramViewer": "Դիագրամի Դիտարկիչ",
   "Disable": "Անջատել",
   "Disabled": "Անջատված է",
   "DisableQuota": "Անջատել քվոտան",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "Խնդրում ենք <0>մուտքագրել գաղտնաբառ</0>, որպեսզի պաշտպանված ֆայլերը շարունակվեն",
   "PasswordRequired": "Պահանջվում է գաղտնաբառ",
   "PaymentsTitle": "Վճարումներ",
+  "PDF": "PDF",
   "People": "Մարդիկ",
   "Permissions": "Թույլտվություններ",
   "PerUserMonth": "<1>{{price}}</1> մեկ ադմինիստրատորի / ամսվա համար",
@@ -721,9 +725,5 @@
   "Yes": "Այո",
   "Yesterday": "Երեկ",
   "You": "Դու",
-  "YourTurn": "Ձեր հերթն է",
-  "Diagram": "Դիագրամ",
-  "Diagrams": "Դիագրամներ",
-  "PDF": "PDF",
-  "DiagramViewer": "Դիագրամների դիտող"
+  "YourTurn": "Ձեր հերթն է"
 }

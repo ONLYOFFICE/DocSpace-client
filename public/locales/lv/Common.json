@@ -174,6 +174,9 @@
   "Description": "Apraksts",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Izstrādātāja rīki",
+  "Diagram": "Diagramma",
+  "Diagrams": "Diagrammas",
+  "DiagramViewer": "Diagrammu skatītājs",
   "Disable": "Atspējot",
   "Disabled": "Atspējots",
   "DisableQuota": "Atspējot kvotu",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "Lai faili turpinātu būt aizsargāti, <0>ievadiet paroli</0>",
   "PasswordRequired": "Jānorāda parole",
   "PaymentsTitle": "Maksājumi",
+  "PDF": "PDF",
   "People": "Cilvēki",
   "Permissions": "Atļaujas",
   "PerUserMonth": "<1>{{price}} </1> vienam administratoram/mēnesī",
@@ -721,9 +725,5 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "YourTurn": "Jūsu kārta",
-  "Diagram": "Diagramma",
-  "Diagrams": "Diagrammas",
-  "PDF": "PDF",
-  "DiagramViewer": "Diagrammu skatītājs"
+  "YourTurn": "Jūsu kārta"
 }

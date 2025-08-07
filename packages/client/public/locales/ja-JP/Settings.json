@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "{{productName}}に追加リソースへのリンクを表示するかどうかを選択してください。",
   "AdditionalResourcesSubtitle": "ユーザーに役立つリソースへのリンクの表示を設定します。",
   "AddTrustedDomain": "信頼されたドメインを追加",
+  "AdManagement": "広告管理",
+  "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。",
   "Admins": "管理者",
   "AdminsMessage": "管理者メッセージの設定",
   "AdminsMessageMobileDescription": "管理者メッセージ設定は、ポータル管理者に連絡する方法です。",
@@ -201,6 +203,8 @@
   "LogoAbout": "「詳細情報」ページ用のロゴマーク",
   "LogoCompact": "左側のコンパクトメニュー用のロゴマーク",
   "LogoFavicon": "ファビコン",
+  "LogoForEditors": "{{editorName}}エディタのロゴ",
+  "LogoForViewer": "{{diagramViewer}} のロゴ",
   "LogoLightSmall": "スペースのヘッダー用ロゴ",
   "LogoLogin": "用于登录页面和电子邮件的标志",
   "ManagementCategoryDataManagement": "データ管理",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
-  "YourLogo": "あなたのロゴ",
-  "AdManagement": "広告管理",
-  "AdManagementDescription": "{{productName}}にプロモーションバナーを表示するかどうかを選択します。",
-  "LogoForEditors": "{{editorName}} エディター用ロゴ",
-  "LogoForViewer": "{{diagramViewer}} のロゴ"
+  "YourLogo": "あなたのロゴ"
 }

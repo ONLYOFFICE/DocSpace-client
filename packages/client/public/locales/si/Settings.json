@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "{{productName}} හිදී අතිරේක සම්පත් සඳහා වූ සම්බන්ධතා පෙන්වීමට ඔබට අවශ්‍යද යන්න තෝරන්න.",
   "AdditionalResourcesSubtitle": "ඔබගේ පරිශ්‍රීලකයින්ට ප්‍රයෝජනවත් සම්පත් වෙත සබැඳි පෙන්වීම වින්‍යාස කරන්න.",
   "AddTrustedDomain": "විශ්වසනීය වසමක් යොදන්න",
+  "AdManagement": "දැන්වීම් කළමනාකරණය",
+  "AdManagementDescription": "ඔබේ {{productName}} හි ප්‍රවර්ධන බැනර් පෙන්වනවාද යන්න තෝරන්න.",
   "Admins": "පරිපාලකයින්",
   "AdminsMessage": "පරිපාලක පණිවිඩ සැකසුම්",
   "AdminsMessageMobileDescription": "පරිපාලක පණිවුඩ සැකසුම් යනු पोर्टल පරිපාලකයෙකු සම්බන්ධ කර ගැනීමට ඇති ක්‍රමයක් වේ.",
@@ -201,6 +203,8 @@
   "LogoAbout": "පිළිබඳව පිටුව සඳහා ලාංඡනය",
   "LogoCompact": "සංගත වම් වට්ටෝරුවට ලාංඡනය",
   "LogoFavicon": "කුඩා නිරූපකය",
+  "LogoForEditors": "සංස්කාරක {{editorName}} සඳහා ලාංඡනය",
+  "LogoForViewer": "{{diagramViewer}} සඳහා ලාංඡනය",
   "LogoLightSmall": "අවකාශයේ ශ්‍රීර්ෂයට ලාංඡනය",
   "LogoLogin": "පිවිසීමේ පිටුවට හා වි-තැපැල් සඳහා ලාංඡනය",
   "ManagementCategoryDataManagement": "දත්ත කළමනාකරණය",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "ඔබට වි-තැපෑලක් රහිත පරිශ්‍රීලකයින් නැත. කරුණාකර ඊළඟ පියවරට යන්න.",
   "YouHaveUnsavedChanges": "ඔබ සතුව නොසුරැකි වෙනස්කම් ඇත",
   "YourCurrentDomain": "ඔබගේ වත්මන් වසම",
-  "YourLogo": "ඔබේ ලාංචනය",
-  "AdManagement": "දැන්වීම් කළමනාකරණය",
-  "AdManagementDescription": "ඔබේ {{productName}} හි ප්‍රවර්ධන බැනර් පෙන්වනවාද යන්න තෝරන්න.",
-  "LogoForEditors": "{{editorName}} සංස්කාරකයා සඳහා ලාංඡනය",
-  "LogoForViewer": "{{diagramViewer}} සඳහා ලාංඡනය"
+  "YourLogo": "ඔබේ ලාංචනය"
 }

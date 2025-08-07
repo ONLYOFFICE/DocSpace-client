@@ -13,6 +13,8 @@
   "AdditionalResourcesDescription": "Izaberite da li želite da prikažete linkove ka dodatnim resursima u okviru {{productName}}.",
   "AdditionalResourcesSubtitle": "Konfigurišite prikaz linkova ka korisnim resursima za vaše korisnike.",
   "AddTrustedDomain": "Dodajte pouzdani domen",
+  "AdManagement": "Upravljanje oglasima",
+  "AdManagementDescription": "Izaberite da li će promotivni baneri biti prikazani u vašem {{productName}}.",
   "Admins": "Administratori",
   "AdminsMessage": "Podešavanja poruka administratora",
   "AdminsMessageMobileDescription": "Podešavanja poruka administratora je način da kontaktirate administratora portala.",
@@ -201,6 +203,8 @@
   "LogoAbout": "Logotip za U vezi stranicu",
   "LogoCompact": "Logotip za kompaktni levi meni",
   "LogoFavicon": "Favikona",
+  "LogoForEditors": "Logo za {{editorName}} uređivač",
+  "LogoForViewer": "Logo za {{diagramViewer}}",
   "LogoLightSmall": "Logotip za prostorno zaglavlje",
   "LogoLogin": "Logotip za Prijava stranicu i email-ove",
   "ManagementCategoryDataManagement": "Upravljanje podacima",
@@ -365,9 +369,5 @@
   "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
-  "YourLogo": "Vaš logo",
-  "AdManagement": "Upravljanje oglasima",
-  "AdManagementDescription": "Izaberite da li će promotivni baneri biti prikazani u vašem {{productName}}.",
-  "LogoForEditors": "Logo za {{editorName}} editor",
-  "LogoForViewer": "Logo za {{diagramViewer}}"
+  "YourLogo": "Vaš logo"
 }

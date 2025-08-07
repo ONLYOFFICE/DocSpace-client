@@ -174,6 +174,9 @@
   "Description": "සවිස්තරය",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "සංවර්ධක මෙවලම්",
+  "Diagram": "රූප සටහන",
+  "Diagrams": "රූප සටහන්",
+  "DiagramViewer": "රූප සටහන් දක්වනය",
   "Disable": "අබල කරන්න",
   "Disabled": "අබලයි",
   "DisableQuota": "සලාකය අබල කරන්න",
@@ -468,6 +471,7 @@
   "PasswordProtectedFiles": "ආරක්ෂිත ගොනු දිගටම කරගෙන යාමට කරුණාකර <0>මුරපදයක් ඇතුළත් කරන්න</0>",
   "PasswordRequired": "රහස්යාංකය අවශ්‍යයි",
   "PaymentsTitle": "ගෙවීම්",
+  "PDF": "PDF",
   "People": "පුද්ගලයින්",
   "Permissions": "අවසර",
   "PerUserMonth": "<1>{{price}}</1> මාසයකට එක් පරිපාලකයකට",
@@ -721,9 +725,5 @@
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
   "You": "ඔබ",
-  "YourTurn": "ඔබේ වාරය.",
-  "Diagram": "රූප සටහන",
-  "Diagrams": "රූප සටහන්",
-  "PDF": "PDF",
-  "DiagramViewer": "ආලේඛ්‍ය දැක්ම බලන්න"
+  "YourTurn": "ඔබේ වාරය."
 }

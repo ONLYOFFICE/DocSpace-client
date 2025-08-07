@@ -182,8 +182,8 @@ importers:
         specifier: 11.7.1
         version: 11.7.1(react@19.1.0)
       react-hotkeys-hook:
-        specifier: 5.1.0
-        version: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 3.4.7
+        version: 3.4.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1093,8 +1093,8 @@ importers:
         specifier: 11.7.1
         version: 11.7.1(react@19.1.0)
       react-hotkeys-hook:
-        specifier: 5.1.0
-        version: 5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 3.4.7
+        version: 3.4.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -6562,6 +6562,9 @@ packages:
   hoist-non-react-statics@3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
 
+  hotkeys-js@3.9.4:
+    resolution: {integrity: sha512-2zuLt85Ta+gIyvs4N88pCYskNrxf1TFv3LR9t5mdAZIX8BcgQQ48F2opUptvHa6m8zsy5v/a0i9mWzTrlNWU0Q==}
+
   hpack.js@2.1.6:
     resolution: {integrity: sha512-zJxVehUdMGIKsRaNt7apO2Gqp0BdqW5yaiGHXXmbpvxgBYVZnAql+BJb4RO5ad2MgpbZKn5G6nMnegrH1FcNYQ==}
 
@@ -8605,11 +8608,11 @@ packages:
     peerDependencies:
       react: '>=16.4.1'
 
-  react-hotkeys-hook@5.1.0:
-    resolution: {integrity: sha512-GCNGXjBzV9buOS3REoQFmSmE4WTvBhYQ0YrAeeMZI83bhXg3dRWsLHXDutcVDdEjwJqJCxk5iewWYX5LtFUd7g==}
+  react-hotkeys-hook@3.4.7:
+    resolution: {integrity: sha512-+bbPmhPAl6ns9VkXkNNyxlmCAIyDAcWbB76O4I0ntr3uWCRuIQf/aRLartUahe9chVMPj+OEzzfk3CQSjclUEQ==}
     peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
+      react: '>=16.8.1'
+      react-dom: '>=16.8.1'
 
   react-i18next@14.0.1:
     resolution: {integrity: sha512-TMV8hFismBmpMdIehoFHin/okfvgjFhp723RYgIqB4XyhDobVMyukyM3Z8wtTRmajyFMZrBl/OaaXF2P6WjUAw==}
@@ -16644,6 +16647,8 @@ snapshots:
     dependencies:
       react-is: 16.13.1
 
+  hotkeys-js@3.9.4: {}
+
   hpack.js@2.1.6:
     dependencies:
       inherits: 2.0.4
@@ -19285,8 +19290,9 @@ snapshots:
       react: 19.1.0
       react-async-script: 1.2.0(react@19.1.0)
 
-  react-hotkeys-hook@5.1.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  react-hotkeys-hook@3.4.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
+      hotkeys-js: 3.9.4
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 

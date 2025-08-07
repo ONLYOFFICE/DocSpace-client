@@ -54,6 +54,8 @@ const FilesRowContainer = ({
   deleteRefMap,
   selectedFolderTitle,
   setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
 }) => {
   const { sectionWidth } = use(Context);
 
@@ -87,6 +89,8 @@ const FilesRowContainer = ({
         deleteRefMap={deleteRefMap}
         selectedFolderTitle={selectedFolderTitle}
         setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
+        canCreateSecurity={canCreateSecurity}
       />
     ));
   }, [
@@ -135,9 +139,10 @@ export default inject(
       hasMoreFiles,
       roomsFilter,
       highlightFile,
+      disableDrag,
     } = filesStore;
 
-    const { title: selectedFolderTitle } = selectedFolderStore;
+    const { title: selectedFolderTitle, security } = selectedFolderStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
@@ -148,6 +153,7 @@ export default inject(
     const { setDropTargetPreview } = primaryProgressDataStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
+    const canCreateSecurity = security?.Create;
 
     return {
       viewAs,
@@ -166,6 +172,8 @@ export default inject(
       deleteRefMap,
       selectedFolderTitle,
       setDropTargetPreview,
+      disableDrag,
+      canCreateSecurity,
     };
   },
 )(withContainer(observer(FilesRowContainer)));

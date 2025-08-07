@@ -87,6 +87,8 @@ const SimpleFilesRow = (props) => {
     deleteRefMap,
     selectedFolderTitle,
     setDropTargetPreview,
+    disableDrag,
+    canCreateSecurity,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -168,13 +170,12 @@ const SimpleFilesRow = (props) => {
     if (dragging) {
       if (isDragging) {
         setDropTargetPreview(item.title);
-      } else {
+      } else if (!disableDrag && canCreateSecurity) {
         setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
       }
     }
-    // else {
-    //   setDropTargetPreview(null);
-    // }
   }, [
     dragging,
     isDragging,

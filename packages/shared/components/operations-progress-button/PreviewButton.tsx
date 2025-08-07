@@ -91,6 +91,17 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       tooltipHideTimerRef.current = null;
     }
 
+    if (!current && !prev) {
+      if (isVisible) {
+        setAnimationState("dropping");
+        setTimeout(() => {
+          setIsVisible(false);
+          setAnimationState("idle");
+        }, 300);
+      }
+      return;
+    }
+
     if (current) {
       setLastKnownTitle(current);
     } else if (!current && lastKnownTitle) {
@@ -168,8 +179,9 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
   useEffect(() => {
     return () => {
       clearTimers();
+      clearDropPreviewLocation?.();
     };
-  }, [clearTimers]);
+  }, [clearTimers, clearDropPreviewLocation]);
 
   const handlePreviewAnimationEnd = useCallback(
     (e: globalThis.AnimationEvent) => {

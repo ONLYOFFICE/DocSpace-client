@@ -151,8 +151,9 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     mainBarVisible?: boolean;
     withTabs?: boolean;
     dragging?: boolean;
-    dropTargetPreview?: { title: string; visible: boolean };
+    dropTargetPreview?: string;
     clearDropPreviewLocation?: () => void;
+    startDropPreview?: () => void;
   };
 
 export type SectionContextMenuProps = {

@@ -88,6 +88,8 @@ const FilesTableRow = (props) => {
     deleteRefMap,
     setDropTargetPreview,
     selectedFolderTitle,
+    canCreateSecurity,
+    disableDrag,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -187,11 +189,12 @@ const FilesTableRow = (props) => {
 
   useEffect(() => {
     if (dragging) {
-      console.log("dragging", dragging, isDragging, isDragActive);
       if (isDragging) {
-        setDropTargetPreview(item.title);
-      } else {
+        if (isDragActive) setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
         setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
       }
     }
   }, [
@@ -201,6 +204,7 @@ const FilesTableRow = (props) => {
     isDragDisabled,
     selectedFolderTitle,
     setDropTargetPreview,
+    disableDrag,
   ]);
 
   const idWithFileExst = item.fileExst

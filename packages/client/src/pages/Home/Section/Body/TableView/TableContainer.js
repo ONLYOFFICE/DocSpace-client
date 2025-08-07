@@ -146,7 +146,9 @@ const Table = ({
   setRefMap,
   deleteRefMap,
   selectedFolderTitle,
+  canCreateSecurity,
   setDropTargetPreview,
+  disableDrag,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -231,7 +233,9 @@ const Table = ({
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
         selectedFolderTitle={selectedFolderTitle}
+        canCreateSecurity={canCreateSecurity}
         setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
       />
     ));
   }, [
@@ -320,16 +324,23 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
+      disableDrag,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
-    const { isIndexedFolder, title: selectedFolderTitle } = selectedFolderStore;
+    const {
+      isIndexedFolder,
+      title: selectedFolderTitle,
+      security,
+    } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
 
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
+
+    const canCreateSecurity = security?.Create;
 
     return {
       viewAs,
@@ -355,7 +366,9 @@ export default inject(
       setRefMap,
       deleteRefMap,
       selectedFolderTitle,
+      canCreateSecurity,
       setDropTargetPreview,
+      disableDrag,
     };
   },
 )(withContainer(observer(Table)));

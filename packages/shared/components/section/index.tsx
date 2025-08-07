@@ -126,6 +126,7 @@ const Section = (props: SectionProps) => {
     dragging,
     clearDropPreviewLocation,
     dropTargetPreview,
+    startDropPreview,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -211,7 +212,7 @@ const Section = (props: SectionProps) => {
   const isShowOperationButton =
     secondaryActiveOperations?.length ||
     primaryOperationsArray?.length ||
-    dropTargetPreview?.visible;
+    startDropPreview;
 
   const isCompletedOperations = () => {
     if (
@@ -332,7 +333,7 @@ const Section = (props: SectionProps) => {
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
               isInfoPanelVisible={isInfoPanelVisible}
-              dropTargetFolderName={dropTargetPreview?.title}
+              dropTargetFolderName={dropTargetPreview}
               isDragging={dragging}
             />
           ) : null}

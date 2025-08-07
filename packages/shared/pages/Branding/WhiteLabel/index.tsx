@@ -85,7 +85,6 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
     const newLogos = logoUrls.map((logo, i) => {
       if (!showAbout && logo.name === "AboutPage") return logo;
-      if (logo.name === "Notification") return logo;
 
       const options = getLogoOptions(
         i,
@@ -170,7 +169,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           value.dark = currentLogo.path.dark;
 
         logosArr.push({
-          key: String(i + 1),
+          key: String(currentLogo.type),
           value,
         });
       }
@@ -401,12 +400,12 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             className="settings_unavailable"
           >
             {t("LogoForEditors", { editorName: t("Common:Spreadsheet") })} (
-            {logoUrls[9].size.width}x{logoUrls[9].size.height})
+            {logoUrls[8].size.width}x{logoUrls[8].size.height})
           </Text>
           <div className="logos-wrapper">
             <Logo
-              name={logoUrls[9].name}
-              src={logoUrls[9].path.light}
+              name={logoUrls[8].name}
+              src={logoUrls[8].path.light}
               imageClass="border-img logo-docs-editor background-light-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.SpreadsheetEditorEmbed}_light`}
               linkId="link-embedded-editor"
@@ -415,8 +414,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               isSettingPaid={isSettingPaid}
             />
             <Logo
-              name={logoUrls[8].name}
-              src={logoUrls[8].path.light}
+              name={logoUrls[7].name}
+              src={logoUrls[7].path.light}
               imageClass="border-img logo-docs-editor background-dark-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.SpreadsheetEditor}_light`}
               linkId="link-editors-header"
@@ -434,12 +433,12 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             className="settings_unavailable"
           >
             {t("LogoForEditors", { editorName: t("Common:Presentation") })} (
-            {logoUrls[11].size.width}x{logoUrls[11].size.height})
+            {logoUrls[10].size.width}x{logoUrls[10].size.height})
           </Text>
           <div className="logos-wrapper">
             <Logo
-              name={logoUrls[11].name}
-              src={logoUrls[11].path.light}
+              name={logoUrls[10].name}
+              src={logoUrls[10].path.light}
               imageClass="border-img logo-docs-editor background-light-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.PresentationEditorEmbed}_light`}
               linkId="link-embedded-editor"
@@ -448,8 +447,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               isSettingPaid={isSettingPaid}
             />
             <Logo
-              name={logoUrls[10].name}
-              src={logoUrls[10].path.light}
+              name={logoUrls[9].name}
+              src={logoUrls[9].path.light}
               imageClass="border-img logo-docs-editor background-dark-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.PresentationEditor}_light`}
               linkId="link-editors-header"
@@ -467,12 +466,12 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             className="settings_unavailable"
           >
             {t("LogoForEditors", { editorName: t("Common:PDF") })} (
-            {logoUrls[13].size.width}x{logoUrls[13].size.height})
+            {logoUrls[12].size.width}x{logoUrls[12].size.height})
           </Text>
           <div className="logos-wrapper">
             <Logo
-              name={logoUrls[13].name}
-              src={logoUrls[13].path.light}
+              name={logoUrls[12].name}
+              src={logoUrls[12].path.light}
               imageClass="border-img logo-docs-editor background-light-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.PdfEditorEmbed}_light`}
               linkId="link-embedded-editor"
@@ -481,8 +480,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               isSettingPaid={isSettingPaid}
             />
             <Logo
-              name={logoUrls[12].name}
-              src={logoUrls[12].path.light}
+              name={logoUrls[11].name}
+              src={logoUrls[11].path.light}
               imageClass="border-img logo-docs-editor background-dark-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.PdfEditor}_light`}
               linkId="link-editors-header"
@@ -500,12 +499,12 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             className="settings_unavailable"
           >
             {t("LogoForViewer", { diagramViewer: t("Common:DiagramViewer") })} (
-            {logoUrls[15].size.width}x{logoUrls[15].size.height})
+            {logoUrls[14].size.width}x{logoUrls[14].size.height})
           </Text>
           <div className="logos-wrapper">
             <Logo
-              name={logoUrls[15].name}
-              src={logoUrls[15].path.light}
+              name={logoUrls[14].name}
+              src={logoUrls[14].path.light}
               imageClass="border-img logo-docs-editor background-light-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.DiagramEditorEmbed}_light`}
               linkId="link-embedded-editor"
@@ -514,8 +513,8 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               isSettingPaid={isSettingPaid}
             />
             <Logo
-              name={logoUrls[14].name}
-              src={logoUrls[14].path.light}
+              name={logoUrls[13].name}
+              src={logoUrls[13].path.light}
               imageClass="border-img logo-docs-editor background-dark-editor"
               inputId={`logoUploader_${WhiteLabelLogoType.DiagramEditor}_light`}
               linkId="link-editors-header"

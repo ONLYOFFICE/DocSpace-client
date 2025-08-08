@@ -28,6 +28,8 @@ import { Trans } from "react-i18next";
 import type { TFunction } from "i18next";
 import { match, P } from "ts-pattern";
 
+import PublicRoomIconURL from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
+
 import { Text } from "../../../components/text";
 import { LinkSharingEntityType } from "../../../enums";
 import { iconSize32 } from "../../../utils/image-helpers";
@@ -215,7 +217,7 @@ export const getLogo = (validationData: TValidateShareRoom) => {
       return iconSize32.get(path);
     }
     case LinkSharingEntityType.RoomOrFolder:
-      if (validationData.isRoom) return undefined;
+      if (validationData.isRoom) return PublicRoomIconURL;
 
       return iconSize32.get("folder.svg");
     default:

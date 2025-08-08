@@ -183,10 +183,9 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
                   )}
                 >
                   <RoomIcon
-                    title={validationData.title}
-                    showDefault={validationData.isRoom}
-                    color="FF8F40"
                     logo={logo}
+                    showDefault={false}
+                    title={validationData.title}
                   />
                   <Text
                     className={classNames(

@@ -50,11 +50,8 @@ const DropDown = ({
   enableOnClickOutside,
   isDefaultMode = true,
   fixedDirection = false,
-  smallSectionWidth,
   forwardedRef,
-  right,
   offsetX = 0,
-  top,
   children,
   maxHeight,
   showDisabledItems,
@@ -171,8 +168,7 @@ const DropDown = ({
       const setAlignment = alignMap[hasNoSpace ? "hasNoSpace" : directionX];
       setAlignment();
     }
-    if (dropDownRef.current)
-      dropDownRef.current.style.top = top || `${bottom}px`;
+    if (dropDownRef.current) dropDownRef.current.style.top = `${bottom}px`;
 
     setState((s) => ({
       ...s,
@@ -187,9 +183,7 @@ const DropDown = ({
     fixedDirection,
     forwardedRef,
     offsetX,
-    right,
     isRTL,
-    top,
     topSpace,
   ]);
 
@@ -236,11 +230,7 @@ const DropDown = ({
       dimensions.toTopCorner > rects.height;
     const bottom = rects.top < 0;
 
-    const x = left
-      ? "left"
-      : rightVar || smallSectionWidth
-        ? "right"
-        : state.directionX;
+    const x = left ? "left" : rightVar ? "right" : state.directionX;
 
     const y = bottom ? "bottom" : topVar ? "top" : state.directionY;
 
@@ -258,7 +248,6 @@ const DropDown = ({
     fixedDirection,
     isRTL,
     forwardedRef,
-    smallSectionWidth,
     state.directionX,
     state.directionY,
     state.manualY,

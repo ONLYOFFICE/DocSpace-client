@@ -63,8 +63,6 @@ export interface DropDownProps {
   forwardedRef?: React.RefObject<HTMLElement | null>;
   /** Sets the operation mode of the component. The default option is set to portal mode */
   isDefaultMode?: boolean;
-  /** Used to open people and group selectors correctly when the section width is small */
-  smallSectionWidth?: boolean;
   /** Disables check position. Used to set the direction explicitly */
   fixedDirection?: boolean;
   /** Enables blur for backdrop */
@@ -74,8 +72,6 @@ export interface DropDownProps {
   /** Test id */
   dataTestId?: string;
 
-  right?: string;
-  top?: string;
   isMobileView?: boolean;
   isNoFixedHeightOptions?: boolean;
   enableKeyboardEvents?: boolean;

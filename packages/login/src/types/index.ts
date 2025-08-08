@@ -112,7 +112,7 @@ export type TConfirmRouteContext = {
 export type TConfirmLinkParams = {
   key: string;
   emplType?: string;
-  email: string;
+  encemail: string;
   uid?: string;
   type?: string;
   first?: string;
@@ -125,6 +125,7 @@ export type TConfirmLinkResult = {
   result: ValidationResult;
   roomId?: string;
   title?: string;
+  email?: string;
 };
 
 export type TCreateUserData = {

@@ -26,6 +26,7 @@
 
 import {
   endpoints,
+  HEADER_CONFIRM_WITHOUT_EMAIL,
   HEADER_NO_STANDALONE_SETTINGS,
 } from "@docspace/shared/__mocks__/e2e";
 
@@ -62,6 +63,9 @@ const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
 );
 
 test("link invite email render", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
@@ -73,6 +77,9 @@ test("link invite email render", async ({ page, mockRequest }) => {
 });
 
 test("link invite login render", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
@@ -88,7 +95,13 @@ test("link invite login render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite registration render standalone", async ({ page }) => {
+test("link invite registration render standalone", async ({
+  page,
+  mockRequest,
+}) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -112,6 +125,7 @@ test("link invite registration render no standalone", async ({
 }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_NO_STANDALONE_SETTINGS,
+    HEADER_CONFIRM_WITHOUT_EMAIL,
   ]);
 
   await page.goto(URL_WITH_PARAMS);
@@ -132,6 +146,9 @@ test("link invite registration render no standalone", async ({
 });
 
 test("link invite email error", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
   await page.goto(URL_WITH_PARAMS);
 
@@ -146,6 +163,9 @@ test("link invite email error", async ({ page, mockRequest }) => {
 });
 
 test("link invite login success", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([
     endpoints.getUserByEmail,
     endpoints.checkConfirmLink,
@@ -179,6 +199,9 @@ test("link invite login success", async ({ page, mockRequest }) => {
 });
 
 test("link invite login error", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.getUserByEmail]);
 
   await page.goto(URL_WITH_PARAMS);
@@ -202,6 +225,9 @@ test("link invite registration success standalone", async ({
   page,
   mockRequest,
 }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await mockRequest.router([endpoints.createUser, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
@@ -238,6 +264,7 @@ test("link invite registration success no standalone", async ({
 }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_NO_STANDALONE_SETTINGS,
+    HEADER_CONFIRM_WITHOUT_EMAIL,
   ]);
 
   await mockRequest.router([endpoints.createUser, endpoints.login]);
@@ -273,7 +300,13 @@ test("link invite registration success no standalone", async ({
   ]);
 });
 
-test("link invite registration error standalone", async ({ page }) => {
+test("link invite registration error standalone", async ({
+  page,
+  mockRequest,
+}) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_CONFIRM_WITHOUT_EMAIL,
+  ]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -296,6 +329,7 @@ test("link invite registration error no standalone", async ({
 }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_NO_STANDALONE_SETTINGS,
+    HEADER_CONFIRM_WITHOUT_EMAIL,
   ]);
 
   await page.goto(URL_WITH_PARAMS);

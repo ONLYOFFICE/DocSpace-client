@@ -183,7 +183,6 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
         shouldShowDotsAfterAnimation.current = true;
       }
 
-      // Reset tracking
       previewButtonWasVisible.current = false;
       hadOperationsBeforeDrag.current = false;
     }

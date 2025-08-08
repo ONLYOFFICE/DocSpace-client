@@ -93,7 +93,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   const [isHovered, setIsHovered] = useState(false);
   const [hideMainButton, setHideMainButton] = useState<boolean>(false);
   const [showSeveralOperationsIcon, setShowSeveralOperationsIcon] =
-    useState<boolean>(false);
+    useState<boolean>(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -245,10 +245,10 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   }, [isOpenDropdown, isSeveralOperations]);
 
   useEffect(() => {
-    if (isDragging) {
+    if (isDragging && operationsLength && !isSeveralOperations) {
       setShowSeveralOperationsIcon(false);
     }
-  }, [isDragging]);
+  }, [isDragging, operationsLength, isSeveralOperations]);
 
   useEffect(() => {
     if (allOperationsLength === 0) {
@@ -257,7 +257,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   }, [allOperationsLength]);
 
   const getIcons = () => {
-    if (isSeveralOperations || showSeveralOperationsIcon) {
+    if (isSeveralOperations && showSeveralOperationsIcon) {
       return isOpenDropdown
         ? FloatingButtonIcons.arrow
         : FloatingButtonIcons.dots;

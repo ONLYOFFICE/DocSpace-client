@@ -180,7 +180,6 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       previewButtonWasVisible.current = false;
       hadOperationsBeforeDrag.current = false;
     }
-
   }, [isDragging, hasUploadOperationByDrag, setHideMainButton]);
 
   useEffect(() => {
@@ -209,7 +208,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       setShowSeveralOperationsIcon(true);
       shouldShowDotsAfterAnimation.current = false;
     }
-
+    setIsVisible(false);
     setHideMainButton(false);
     clearDropPreviewLocation?.();
   }, [

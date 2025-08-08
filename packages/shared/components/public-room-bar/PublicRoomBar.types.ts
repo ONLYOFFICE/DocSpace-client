@@ -35,4 +35,5 @@ export interface PublicRoomBarProps {
   className?: string;
   style?: React.CSSProperties;
   barIsVisible?: boolean;
+  dataTestId?: string;
 }

@@ -122,6 +122,7 @@ const FilesTileContainer = ({
           itemIndex={index}
           selectableRef={onSetTileRef}
           withRef
+          dataTestId={`tile_${index}`}
         />
       ) : (
         <FileTile
@@ -131,6 +132,7 @@ const FilesTileContainer = ({
           }
           item={item}
           itemIndex={index}
+          dataTestId={`tile_${index}`}
         />
       );
     });

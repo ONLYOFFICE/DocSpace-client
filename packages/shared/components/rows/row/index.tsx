@@ -73,6 +73,7 @@ const Row = (props: RowProps) => {
     badgeUrl,
     isDisabled,
     isIndexEditingMode,
+    dataTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -173,7 +174,7 @@ const Row = (props: RowProps) => {
         },
         className,
       )}
-      data-testid="row"
+      data-testid={dataTestId ?? "row"}
     >
       {inProgress ? (
         <Loader

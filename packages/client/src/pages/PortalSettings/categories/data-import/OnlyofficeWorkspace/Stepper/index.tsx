@@ -113,6 +113,7 @@ export const getStepsData = (
               bottom: "-2px",
               margin: "0px 5px",
             }}
+            dataTestId="types_and_privileges_help_button"
           />
         </>
       ),

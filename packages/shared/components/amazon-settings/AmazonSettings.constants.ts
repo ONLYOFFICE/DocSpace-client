@@ -43,9 +43,11 @@ export const MANAGED_KEYS = [
   {
     key: "0",
     label: defaultManaged,
+    dataTestId: "default_managed_option",
   },
   {
     key: "1",
     label: CUSTOMER_MANAGER,
+    dataTestId: "customer_manager_option",
   },
 ];

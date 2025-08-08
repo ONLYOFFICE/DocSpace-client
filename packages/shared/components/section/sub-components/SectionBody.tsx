@@ -92,11 +92,11 @@ const SectionBody = React.memo(
         }
       : {};
 
-    return uploadFiles ? (
+    return (
       <DragAndDrop
         className={classNames(
-          styles.dropzone,
           {
+            [styles.dropzone]: true,
             [styles.withScroll]: withScroll,
             [styles.isDesktop]: isDesktop,
             [styles.isRowView]: viewAs === "row",
@@ -110,7 +110,7 @@ const SectionBody = React.memo(
           "section-body",
         )}
         onDrop={onDrop}
-        isDropZone
+        isDropZone={false}
       >
         {withScroll ? (
           <div className="section-wrapper">
@@ -130,37 +130,37 @@ const SectionBody = React.memo(
           <SectionContextMenu getContextModel={getContextModel} />
         ) : null}
       </DragAndDrop>
-    ) : (
-      <div
-        className={classNames(
-          styles.sectionBody,
-          {
-            [styles.withScroll]: withScroll,
-            [styles.isDesktop]: isDesktop,
-            [styles.isRowView]: viewAs === "row",
-            [styles.isTile]: viewAs === "tile",
-            [styles.isSettingsView]: viewAs === "settings",
-            [styles.isProfileView]: viewAs === "profile",
-            [styles.isFormGallery]: isFormGallery,
-            [styles.isStudio]: settingsStudio,
-            [styles.common]: true,
-          },
-          "section-body",
-        )}
-      >
-        {withScroll ? (
-          <div className="section-wrapper">
-            <div className="section-wrapper-content" {...focusProps}>
-              {children}
-              <div className={classNames(styles.spacer, "settings-mobile")} />
-            </div>
-          </div>
-        ) : (
-          <div className="section-wrapper">{children}</div>
-        )}
-        <SectionContextMenu getContextModel={getContextModel} />
-      </div>
     );
+    //   <div
+    //     className={classNames(
+    //       styles.sectionBody,
+    //       {
+    //         [styles.withScroll]: withScroll,
+    //         [styles.isDesktop]: isDesktop,
+    //         [styles.isRowView]: viewAs === "row",
+    //         [styles.isTile]: viewAs === "tile",
+    //         [styles.isSettingsView]: viewAs === "settings",
+    //         [styles.isProfileView]: viewAs === "profile",
+    //         [styles.isFormGallery]: isFormGallery,
+    //         [styles.isStudio]: settingsStudio,
+    //         [styles.common]: true,
+    //       },
+    //       "section-body",
+    //     )}
+    //   >
+    //     {withScroll ? (
+    //       <div className="section-wrapper">
+    //         <div className="section-wrapper-content" {...focusProps}>
+    //           {children}
+    //           <div className={classNames(styles.spacer, "settings-mobile")} />
+    //         </div>
+    //       </div>
+    //     ) : (
+    //       <div className="section-wrapper">{children}</div>
+    //     )}
+    //     <SectionContextMenu getContextModel={getContextModel} />
+    //   </div>
+    // );
   },
 );
 

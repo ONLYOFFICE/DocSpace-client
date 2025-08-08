@@ -170,13 +170,13 @@ class TargetUserStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: "upload",
+        key: "profile_avatar_upload",
         onClick: (ref) => ref.current.click(),
       },
       {
         label: t("Common:Delete"),
         icon: TrashIconSvgUrl,
-        key: "delete",
+        key: "profile_avatar_delete",
         onClick: () => this.deleteProfileAvatar(),
       },
     ];

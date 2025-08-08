@@ -84,7 +84,7 @@ const BackupListBody = ({
       const isChecked = isFileChecked(index);
 
       return (
-        <div style={style}>
+        <div style={style} data-testid={`backup_list_item_${index}`}>
           <div
             className={classNames(styles.backupList, {
               [styles.isChecked]: isChecked,
@@ -106,6 +106,7 @@ const BackupListBody = ({
                   styles.backupListFullName,
                   "backup-list_full-name",
                 )}
+                dataTestId="backup_list_full_name"
               >
                 {fileName}
               </Text>
@@ -121,6 +122,7 @@ const BackupListBody = ({
                   styles.backupListDialogChecked,
                   "backup-list-dialog_checked",
                 )}
+                testId="select_file_radio_button"
               />
 
               <TrashIcon
@@ -129,6 +131,7 @@ const BackupListBody = ({
                   "backup-list_trash-icon",
                 )}
                 onClick={() => onTrashClick(fileId)}
+                dataTestId="select_file_trash_icon"
               />
             </div>
           </div>

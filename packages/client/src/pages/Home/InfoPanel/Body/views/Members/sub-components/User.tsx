@@ -200,6 +200,7 @@ const User = ({
       className={classNames(styles.userTypeHeader, {
         [styles.isExpect]: isExpect,
       })}
+      data-testid="info_panel_members_user_type_header"
     >
       <Text className="title">
         {"displayName" in user ? user.displayName : ""}
@@ -213,6 +214,7 @@ const User = ({
           isFill
           onClick={onRepeatInvitation}
           size={16}
+          data-testid="info_panel_members_repeat_invitation_button"
         />
       ) : null}
     </div>
@@ -223,6 +225,7 @@ const User = ({
         [styles.isSystem]: isSystem,
       })}
       key={user.id}
+      data-testid="info_panel_members_user"
     >
       <Avatar
         role={type as unknown as AvatarRole}
@@ -236,6 +239,7 @@ const User = ({
         tooltipContent={tooltipContent}
         hideRoleIcon={!withTooltip}
         isGroup={"isGroup" in user ? user.isGroup : false}
+        dataTestId="info_panel_members_user_avatar"
       />
       <div className="user_body-wrapper">
         <div className="name-wrapper">
@@ -246,6 +250,7 @@ const User = ({
               onClick={() => onOpenGroup(user)}
               title={decode(user.name)}
               noHover={isSystem}
+              dataTestId="info_panel_members_user_group_link"
             >
               {decode(user.name)}
             </Link>
@@ -296,6 +301,7 @@ const User = ({
               directionY="both"
               displaySelectedOption
               noSelect={false}
+              dataTestId="info_panel_members_user_role_combobox"
             />
           ) : (
             <div className="disabled-role-combobox" title={t("Common:Role")}>

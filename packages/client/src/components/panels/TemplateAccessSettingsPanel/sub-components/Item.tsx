@@ -46,6 +46,7 @@ type ItemProps = {
   setInviteItems: (items: TSelectorItem[]) => void;
   inviteItems: TSelectorItem[];
   isDisabled: boolean;
+  index?: number;
 };
 
 const Item = ({
@@ -54,6 +55,7 @@ const Item = ({
   setInviteItems,
   inviteItems,
   isDisabled,
+  index,
 }: ItemProps) => {
   const { avatar, displayName, email, id, isGroup, name: groupName } = item;
 
@@ -93,6 +95,7 @@ const Item = ({
         isGroup={isGroup}
         userName={groupName}
         className="invite-input-avatar"
+        data-testid={`template_access_settings_avatar_${index ?? id}`}
       />
       <StyledInviteUserBody>
         <div className="invite-input-item">
@@ -109,6 +112,7 @@ const Item = ({
           className="remove-icon"
           src={RemoveReactSvgUrl}
           onClick={removeItem}
+          data-testid={`template_access_settings_remove_button_${index ?? id}`}
         />
       ) : null}
     </>

@@ -101,12 +101,14 @@ export const WarningQuotaDialog = ({
           primary
           onClick={onClickRedirect}
           scale
+          testId="continue_change_quota_button"
         />
         <Button
           label={t("Common:ContinueButton")}
           size={ButtonSize.normal}
           onClick={onCloseDialog}
           scale
+          testId="cancel_continue_change_quota_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

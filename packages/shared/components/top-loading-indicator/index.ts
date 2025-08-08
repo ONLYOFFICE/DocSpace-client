@@ -24,14 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const intervalTimeout = 10;
-
 const MAX = 100;
 let timerId: ReturnType<typeof setTimeout> | null;
 let width = 0;
 let percentage = 0;
-const increasePercentage = 0.75;
-const moreIncreasePercentage = 3;
+let isEnding = false;
+let endingStartTime = 0;
+let startTime = 0;
 
 let elem =
   typeof document !== "undefined" &&
@@ -53,6 +52,10 @@ const cancelProgress = () => {
     elem.setAttribute("aria-valuenow", "0");
   }
   width = 0;
+  percentage = 0;
+  isEnding = false;
+  endingStartTime = 0;
+  startTime = 0;
 };
 
 const animatingWidth = () => {
@@ -61,7 +64,27 @@ const animatingWidth = () => {
     return;
   }
 
-  width += percentage !== MAX ? increasePercentage : moreIncreasePercentage;
+  const now = Date.now();
+
+  if (isEnding) {
+    // End progress in 0.1 second
+    const elapsed = now - endingStartTime;
+    const progress = Math.min(elapsed / 100, 1); // 0 to 1 over 0.1 second (100ms)
+    width = percentage + (MAX - percentage) * progress;
+  } else if (startTime > 0) {
+    // Normal progression: 50% in first second, then 10% every second
+    const elapsed = now - startTime;
+
+    if (elapsed <= 1000) {
+      // First second: 0% to 50%
+      width = (elapsed / 1000) * 50;
+    } else {
+      // After first second: add 10% every second
+      const secondsAfterFirst = Math.floor((elapsed - 1000) / 1000);
+      width = Math.min(50 + (secondsAfterFirst + 1) * 10, 90); // Cap at 90% until end() is called
+    }
+  }
+
   if (elem) {
     elem.style.width = `${width}%`;
     elem.setAttribute("aria-valuenow", width.toString());
@@ -76,12 +99,16 @@ const startInterval = () => {
     setAttributes(elem);
   }
 
-  timerId = setInterval(animatingWidth, intervalTimeout);
+  startTime = Date.now();
+  timerId = setInterval(animatingWidth, 50); // Update every 50ms for smooth animation
 };
 
 export default class TopLoaderService {
   static start() {
     percentage = 0;
+    width = 0;
+    isEnding = false;
+    endingStartTime = 0;
 
     if (elem) elem.setAttribute("aria-valuenow", "0");
 
@@ -93,8 +120,10 @@ export default class TopLoaderService {
   }
 
   static end() {
-    percentage = MAX;
+    if (!timerId) return;
 
-    if (elem) elem.setAttribute("aria-valuenow", "100");
+    percentage = width; // Store current width as starting point for ending animation
+    isEnding = true;
+    endingStartTime = Date.now();
   }
 }

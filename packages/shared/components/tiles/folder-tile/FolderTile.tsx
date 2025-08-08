@@ -67,6 +67,7 @@ export const FolderTile = ({
   isActive,
   isEdit,
   forwardRef,
+  dataTestId,
   isBigFolder,
   temporaryIcon,
 }: FolderTileProps) => {
@@ -243,6 +244,7 @@ export const FolderTile = ({
       onClick={onFolderClick}
       ref={forwardRef}
       onContextMenu={onContextMenu}
+      data-testid={dataTestId ?? "tile"}
     >
       {isBigFolder ? (
         <>

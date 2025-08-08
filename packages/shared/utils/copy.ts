@@ -34,6 +34,11 @@ import { TPeopleListItem } from "../api/people/types";
 
 export type TSelection = TRoom | TFile | TFolder | TPeopleListItem | TGroup;
 
+const wait = (ms: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+
 export const copyShareLink = async (link: string) => {
   if (navigator.clipboard && window.isSecureContext) {
     try {
@@ -42,6 +47,8 @@ export const copyShareLink = async (link: string) => {
       console.error(err);
     }
   } else {
+    await wait(100);
+
     copy(link);
   }
 };

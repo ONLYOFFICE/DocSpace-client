@@ -305,6 +305,7 @@ const DeleteDialogComponent = (props) => {
           onClick={onDeleteAction}
           isLoading={isLoading}
           isDisabled={!selection.length}
+          testId="delete_dialog_modal_submit"
         />
         <Button
           id="delete-file-modal_cancel"
@@ -314,6 +315,7 @@ const DeleteDialogComponent = (props) => {
           scale
           onClick={onClose}
           isLoading={isLoading}
+          testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

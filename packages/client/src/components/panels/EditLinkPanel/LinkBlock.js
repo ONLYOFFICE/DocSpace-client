@@ -52,6 +52,7 @@ const LinkBlock = (props) => {
         onChange={onChangeLinkName}
         placeholder={t("LinkName")}
         isDisabled={isLoading}
+        testId="edit_link_panel_name_input"
       />
 
       {isEdit ? (
@@ -64,6 +65,7 @@ const LinkBlock = (props) => {
           className="edit-link_link-input"
           value={linkValue}
           placeholder={t("LinkName")}
+          testId="edit_link_panel_link_input"
         />
       ) : null}
     </div>

@@ -60,16 +60,19 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
       key: 1,
       label: capitalize(t("Common:Days")),
       value: 0,
+      dataTestId: "virtual_data_room_file_lifetime_period_days",
     },
     {
       key: 2,
       label: t("Common:Months"),
       value: 1,
+      dataTestId: "virtual_data_room_file_lifetime_period_months",
     },
     {
       key: 3,
       label: t("Common:Years"),
       value: 2,
+      dataTestId: "virtual_data_room_file_lifetime_period_years",
     },
   ];
 
@@ -80,11 +83,13 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
         sectionName: t("Common:TrashSection"),
       }),
       value: false,
+      dataTestId: "virtual_data_room_file_lifetime_delete_move_to_trash",
     },
     {
       key: 2,
       label: t("Common:DeletePermanently"),
       value: true,
+      dataTestId: "virtual_data_room_file_lifetime_delete_permanently",
     },
   ];
 
@@ -159,6 +164,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             onChange={onChange}
             scale
             maxLength={3}
+            testId="virtual_data_room_file_lifetime_input"
           />
           <ComboBox
             className="virtual-data-room_file-lifetime_combo-box"
@@ -169,6 +175,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             scaledOptions
             onSelect={onSelectDate}
             directionY="bottom"
+            dataTestId="virtual_data_room_file_lifetime_period_combobox"
           />
         </div>
         <ComboBox
@@ -179,6 +186,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
           scale
           onSelect={onSelectDelete}
           directionY="bottom"
+          dataTestId="virtual_data_room_file_lifetime_delete_combobox"
         />
       </div>
     </StyledFileLifetime>

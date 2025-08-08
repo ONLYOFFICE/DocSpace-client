@@ -44,9 +44,9 @@ export interface DropDownProps {
   id?: string;
   /** Required for specifying the exact width of the component; for example; 100% */
   manualWidth?: string;
-  /** Required for specifying the exact distance from the parent component */
+  /** (Non portal only) Required for specifying the exact distance from the parent component */
   manualX?: string;
-  /** Required for specifying the exact distance from the parent component */
+  /** (Non portal only) Required for specifying the exact distance from the parent component */
   manualY?: string;
   /** Required if the scrollbar is displayed */
   maxHeight?: number;
@@ -67,7 +67,7 @@ export interface DropDownProps {
   fixedDirection?: boolean;
   /** Enables blur for backdrop */
   withBlur?: boolean;
-  /** Specifies the horizontal offset */
+  /** (Portal only) Specifies the horizontal offset */
   offsetX?: number;
   /** Test id */
   dataTestId?: string;

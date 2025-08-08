@@ -68,8 +68,8 @@ type SectionBodyContentProps = {
   getTfaType?: TfaStore["getTfaType"];
   enableSelection: ContactsHotkeysStore["enableSelection"];
   viewAs: PeopleStore["viewAs"];
-  membersSelection: TUser[];
-  groupsSelection: TGroup[];
+  membersSelection: UsersStore["selection"];
+  groupsSelection: GroupsStore["selection"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {

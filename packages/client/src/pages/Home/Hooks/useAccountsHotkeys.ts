@@ -30,8 +30,8 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { copySelectedText } from "@docspace/shared/utils/copy";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
-import { TUser } from "@docspace/shared/api/people/types";
-import { TGroup } from "@docspace/shared/api/groups/types";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 interface AccountsHotkeysProps {
   enabledHotkeys: boolean;
@@ -46,7 +46,7 @@ interface AccountsHotkeysProps {
   onClickBack: (fromHotkeys: boolean) => void;
   enableSelection: ContactsHotkeysStore["enableSelection"];
   viewAs: PeopleStore["viewAs"];
-  selection: TUser[] | TGroup[];
+  selection: UsersStore["selection"] | GroupsStore["selection"];
 }
 
 const useAccountsHotkeys = ({
@@ -157,7 +157,7 @@ const useAccountsHotkeys = ({
     copySelectedText(e, viewAs, selection);
   };
 
-  // // Copy selected items to clipboard
+  // Copy selected items to clipboard
   useHotkeys("Ctrl+Shift+c", copySelectedTextFn, hotkeysFilter);
 };
 

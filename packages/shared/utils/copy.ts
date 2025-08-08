@@ -30,9 +30,9 @@ import { TViewAs } from "../types";
 import { TRoom } from "../api/rooms/types";
 import { TFile, TFolder } from "../api/files/types";
 import { TGroup } from "../api/groups/types";
-import { TUser } from "../api/people/types";
+import { TPeopleListItem } from "../api/people/types";
 
-export type TSelection = TRoom | TFile | TFolder | TGroup | TUser;
+export type TSelection = TRoom | TFile | TFolder | TPeopleListItem | TGroup;
 
 export const copyShareLink = async (link: string) => {
   if (navigator.clipboard && window.isSecureContext) {

@@ -1,7 +1,6 @@
 {
   "ActiveSessions": "Sessioni Attive",
   "AutoDeleteTitle": "Tutte le sessioni più vecchie di 60 giorni verranno cancellate automaticamente.",
-  "ChangeEmailSuccess": "L'indirizzo e-mail è stato modificato con successo",
   "ChangePasswordAfterLoggingOut": "Cambia la password dopo il logout",
   "ConnectSocialNetworks": "Connetti le tue reti sociali",
   "DescriptionForSecurity": "Per maggiore sicurezza, è necessario modificare la password.",

@@ -33,10 +33,10 @@ import { mapCulturesToArray } from "@docspace/shared/utils/common";
 import i18n from "../i18n";
 
 interface ComponentWithCultureNamesProps {
-  tReady: boolean;
-  cultures: string[];
-  isAuthenticated: boolean;
-  getPortalCultures: () => Promise<void>;
+  tReady?: boolean;
+  cultures?: string[];
+  isAuthenticated?: boolean;
+  getPortalCultures?: () => Promise<void>;
 }
 
 interface WrappedComponentProps extends ComponentWithCultureNamesProps {
@@ -45,7 +45,8 @@ interface WrappedComponentProps extends ComponentWithCultureNamesProps {
     label: string;
     icon: string;
     isBeta: boolean;
-  };
+    index?: number;
+  }[];
 }
 
 export default function withCultureNames<
@@ -61,18 +62,18 @@ export default function withCultureNames<
     const { tReady, cultures, getPortalCultures, isAuthenticated } = props;
 
     useEffect(() => {
-      if (cultures.length > 0) return;
+      if (cultures && cultures.length > 0) return;
 
-      getPortalCultures();
+      getPortalCultures?.();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const cultureNames = useMemo(
-      () => mapCulturesToArray(cultures, true, i18n),
+      () => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
       [cultures, isAuthenticated],
     );
 
-    return cultures.length > 0 && tReady ? (
+    return cultures && cultures.length > 0 && tReady ? (
       <WrappedComponent {...(props as T)} cultureNames={cultureNames} />
     ) : (
       <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />

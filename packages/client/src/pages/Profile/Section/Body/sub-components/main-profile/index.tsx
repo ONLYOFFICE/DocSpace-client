@@ -30,7 +30,6 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobileOnly } from "react-device-detect";
 import { useTheme } from "styled-components";
-import { TFunction } from "i18next";
 
 import {
   Avatar,
@@ -55,6 +54,8 @@ import { isMobile } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { TDirectionY } from "@docspace/shared/types";
 import { TUser } from "@docspace/shared/api/people/types";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { TAvatarModel } from "@docspace/shared/components/avatar/Avatar.types";
 
 import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
 import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -66,6 +67,7 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 
 import {
   StyledWrapper,
@@ -83,17 +85,22 @@ type MainProfileProps = {
   profile: TUser;
   culture: string;
   becometranslatorUrl: string;
-  cultureNames: TOption[];
-
-  setChangeEmailVisible: (visible: boolean) => void;
-  setChangePasswordVisible: (visible: boolean) => void;
-  setChangeNameVisible: (visible: boolean) => void;
-  setChangeAvatarVisible: (visible: boolean) => void;
-  withActivationBar: boolean;
-  sendActivationLink: () => Promise<void>;
-  updateProfileCulture: (userId: string, culture: string) => Promise<void>;
+  cultureNames: {
+    key: string;
+    label: string;
+    icon: string;
+    isBeta: boolean;
+  }[];
   documentationEmail: string;
-  setDialogData: TargetUserStore["setDialogData"];
+  withActivationBar: boolean;
+
+  setChangePasswordVisible: TargetUserStore["setChangePasswordVisible"];
+  setChangeNameVisible: TargetUserStore["setChangeNameVisible"];
+  setChangeAvatarVisible: TargetUserStore["setChangeAvatarVisible"];
+  updateProfileCulture: TargetUserStore["updateProfileCulture"];
+  sendActivationLink: UserStore["sendActivationLink"];
+  setChangeEmailVisible: DialogStore["setChangeEmailVisible"];
+  setDialogData: DialogStore["setDialogData"];
   getProfileModel: TargetUserStore["getProfileModel"];
   avatarEditorDialogVisible: AvatarEditorDialogStore["avatarEditorDialogVisible"];
   setAvatarEditorDialogVisible: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
@@ -266,21 +273,27 @@ const MainProfile = (props: MainProfileProps) => {
     </Text>
   );
 
-  const { cultureName, currentCulture } = profile;
-  const language = convertLanguage(cultureName || currentCulture || culture);
+  const { cultureName } = profile;
+  const language = convertLanguage(cultureName || culture);
 
   const selectedLanguage = cultureNames.find(
-    (item: TOption) => item.key === language,
+    (item: { key: string; label: string; icon: string; isBeta: boolean }) =>
+      item.key === language,
   ) ||
-    cultureNames.find((item: TOption) => item.key === culture) || {
+    cultureNames.find(
+      (item: { key: string; label: string; icon: string; isBeta: boolean }) =>
+        item.key === culture,
+    ) || {
       key: language,
       label: "",
+      icon: "",
+      isBeta: false,
     };
 
   const onLanguageSelect = (newLanguage: TOption) => {
     if (profile.cultureName === newLanguage.key) return;
 
-    updateProfileCulture(profile.id, newLanguage.key)
+    updateProfileCulture(profile.id, newLanguage.key as string)
       .then(() => window.location.reload())
       .catch((error: unknown) => {
         toastr.error(
@@ -304,7 +317,7 @@ const MainProfile = (props: MainProfileProps) => {
           userName={profile.displayName}
           editing={!profile.isLDAP}
           hasAvatar={!!profile.hasAvatar}
-          model={model}
+          model={model as unknown as TAvatarModel[]}
           editAction={() => setChangeAvatarVisible(true)}
           onChangeFile={onChangeFileContext}
         />
@@ -743,4 +756,4 @@ export default inject(
       setImage,
     };
   },
-)(withCultureNames(observer(MainProfile)));
+)(withCultureNames<MainProfileProps>(observer(MainProfile)));

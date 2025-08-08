@@ -295,7 +295,6 @@ const SectionBodyContent = (props) => {
 
           const documentTitle = currentDroppable.getAttribute("documentTitle");
           setDropTargetPreview(documentTitle);
-
         }
       } else {
         setDropTargetPreview(null);

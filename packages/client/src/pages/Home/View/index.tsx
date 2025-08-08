@@ -294,11 +294,15 @@ const View = ({
 
   return (
     <div
-      style={{
-        opacity: isLoading ? 0.5 : 1,
-        pointerEvents: isLoading ? "none" : "auto",
-        transition: "opacity 0.3s ease-in-out",
-      }}
+      style={
+        !showHeaderLoader
+          ? {
+              opacity: isLoading ? 0.5 : 1,
+              pointerEvents: isLoading ? "none" : "auto",
+              transition: "opacity 0.3s ease-in-out",
+            }
+          : undefined
+      }
     >
       <Consumer>
         {(context) =>

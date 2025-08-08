@@ -311,7 +311,9 @@ const FilesView = ({
     <div data-testid="info_panel_files_view_container">
       <ItemTitle
         infoPanelSelection={
-          isRoomMembersPanel ? infoPanelRoomSelection! : selection
+          isRoomMembersPanel
+            ? { ...infoPanelRoomSelection!, isRoom: true }!
+            : selection
         }
         {...roomMembersProps}
       />

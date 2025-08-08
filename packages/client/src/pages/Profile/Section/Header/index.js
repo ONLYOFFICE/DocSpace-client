@@ -175,6 +175,7 @@ const Header = (props) => {
         isFill
         onClick={onClickBack}
         className="arrow-button"
+        dataTestId="header_arrow_back_icon_button"
       />
 
       <div>
@@ -193,6 +194,7 @@ const Header = (props) => {
             getData={getUserContextOptions}
             isDisabled={false}
             usePortal
+            testId="user_context_menu_button"
           />
         ) : null}
 

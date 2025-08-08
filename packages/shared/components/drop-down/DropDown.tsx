@@ -224,18 +224,10 @@ const DropDown = ({
 
     if (isRTL) {
       left = rects.left < 0 && rects.width < container.width;
-      rightVar =
-        rects.width &&
-        rects.left < (rects.width || 250) &&
-        rects.left > rects.width &&
-        rects.width < container.width;
-    } else {
       rightVar = rects.right > container.width && rects.width < container.width;
-      left =
-        rects.width &&
-        rects.right > container.width - (rects.width || 250) &&
-        rects.right < container.width - rects.width &&
-        rects.width < container.width;
+    } else {
+      left = rects.right > container.width && rects.width < container.width;
+      rightVar = rects.left < 0 && rects.width < container.width;
     }
 
     const topVar =

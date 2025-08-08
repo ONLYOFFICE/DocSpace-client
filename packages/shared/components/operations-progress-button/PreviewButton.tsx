@@ -26,6 +26,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "../text";
 import { HelpButton } from "../help-button";
@@ -54,6 +55,8 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
   setShowSeveralOperationsIcon,
   isArticleExpanded,
 }) => {
+  const { t } = useTranslation("Common");
+
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [animationState, setAnimationState] = useState<
     "raising" | "dropping" | "hidingUnder"
@@ -174,7 +177,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       if (!hadOperationsBefore && hasUploadNow) {
         // If there were no operations before and upload operation appeared,
         // hide main button during PreviewButton transition
-        // The button will be shown again in handleHideAnimationComplete
+        // The button will be shown again
 
         setHideMainButton(true);
       } else if (hadOperationsBefore && hasUploadNow) {
@@ -296,13 +299,16 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
           animationState !== "hidingUnder" &&
           animationState !== "dropping" &&
           (dropTargetFolderName || lastKnownTitle) ? (
-            <Text fontWeight={600}>
-              {`Moved to: ${dropTargetFolderName || lastKnownTitle}`}
+            <Text fontWeight={600} fontSize="14px">
+              {t("Common:DropToLocation", {
+                folderName: dropTargetFolderName || lastKnownTitle,
+              })}
             </Text>
           ) : null
         }
         isOpen
         noUserSelect
+        isClickable={false}
       >
         <FloatingButton
           ref={previewContainerRef}

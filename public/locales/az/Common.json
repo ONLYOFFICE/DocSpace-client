@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Şifrələmə prosesi davam edir",
   "EnterName": "Adı daxil edin",
   "EnterPassword": "Şifrəni daxil edin",
-  "EnterPasswordDescription": "<1>«{{fileName}}»</1> faylı şifrəylə qorunan otaqda yerləşir. Lütfən, otaq üçün şifrə daxil edin",
   "EnterpriseLicense": "Enterprise",
   "Error": "Səhv",
   "Error401Text": "Təəssüf ki, resurs hal-hazırda əlçatan deyil.",

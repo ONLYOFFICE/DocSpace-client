@@ -281,7 +281,6 @@
   "EncryptionPortalTitle": "ຂະບວນການເຂົ້າລະຫັດພວມດຳເນີນຢູ່",
   "EnterName": "ເຂົ້າ ຊື່",
   "EnterPassword": "ໃສ່ລະຫັດຜ່ານ",
-  "EnterPasswordDescription": "ເອກະສານ <1>«{{fileName}}»</1> ຕັ້ງຢູ່ຫ້ອງທີ່ຖືກປົກປ້ອງດ້ວຍລະຫັດລັບ ຂໍ້ຄວາມໃສ່ລະຫັດລັບຂອງຫ້ອງດ້ວຍເດີ້",
   "EnterpriseLicense": "Enterprise",
   "Error": "ຂໍ້ຜິດພາດ",
   "Error401Text": "ຂໍອະໄພ, ບໍ່ສາມາດເຂົ້າເຖິງຊັບພະຍາກອນໄດ້.",

@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Der Verschlüsselungsprozess läuft",
   "EnterName": "Namen eingeben",
   "EnterPassword": "Kennwort eingeben",
-  "EnterPasswordDescription": "Die Datei <1>«{{fileName}}»</1> befindet sich im passwortgeschützten Raum. Bitte geben Sie ein Passwort für den Raum ein",
   "EnterpriseLicense": "Enterprise",
   "Error": "Fehler",
   "Error401Text": "Die Ressource kann zurzeit nicht zugegriffen werden.",

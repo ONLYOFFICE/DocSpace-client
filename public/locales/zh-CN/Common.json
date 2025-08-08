@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "加密正在进行中",
   "EnterName": "输入名称",
   "EnterPassword": "输入密码",
-  "EnterPasswordDescription": "文件<1>«{{fileName}}»</1>位于受密码保护的房间中。请输入房间密码",
   "EnterpriseLicense": "企业",
   "Error": "错误",
   "Error401Text": "抱歉，资源目前无法访问。",

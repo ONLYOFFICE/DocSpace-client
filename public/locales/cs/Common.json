@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Probíhající proces šifrování",
   "EnterName": "Zadejte název",
   "EnterPassword": "Zadat heslo",
-  "EnterPasswordDescription": "Soubor <1>«{{fileName}}»</1> se nachází v místnosti chráněné heslem. Zadejte prosím heslo pro tuto místnost",
   "EnterpriseLicense": "Enterprise",
   "Error": "Chyba",
   "Error401Text": "Omlouváme se, ale tento zdroj není v současné době přístupný.",

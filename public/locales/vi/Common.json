@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Quá trình mã hóa đang được thực hiện",
   "EnterName": "Nhập tên",
   "EnterPassword": "Nhập mật khẩu",
-  "EnterPasswordDescription": "Tập tin <1>«{{fileName}}»</1> nằm trong phòng được bảo vệ bằng mật khẩu. Vui lòng nhập mật khẩu cho phòng",
   "EnterpriseLicense": "Enterprise",
   "Error": "Lỗi",
   "Error401Text": " Xin lỗi, hiện không thể truy cập tài nguyên.",

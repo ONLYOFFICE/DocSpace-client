@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Notiek šifrēšanas process",
   "EnterName": "Ievadiet vārdu",
   "EnterPassword": "Ievadiet paroli",
-  "EnterPasswordDescription": "Fails <1>«{{fileName}}»</1> atrodas ar paroli aizsargātā telpā. Ievadiet telpas paroli",
   "EnterpriseLicense": "Enterprise",
   "Error": "Kļūda",
   "Error401Text": "Diemžēl resurss pašlaik nav pieejams.",

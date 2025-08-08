@@ -288,7 +288,6 @@
   "EncryptionPortalTitle": "Proces enkripcije u toku",
   "EnterName": "Unesi ime",
   "EnterPassword": "Unesi lozinku",
-  "EnterPasswordDescription": "Datoteka <1>«{{fileName}}»</1> se nalazi u lozinkom-zaštićenoj prostoriji. Molimo unesite lozinku za prostoriju",
   "EnterpriseLicense": "Enterprise",
   "Error": "Greška",
   "Error401Text": "Izvinjavamo se, resurs trenutno nije dostupan.",

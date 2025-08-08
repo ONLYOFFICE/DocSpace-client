@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Procesi i enkriptimit është në zhvillim",
   "EnterName": "Futni emrin",
   "EnterPassword": "Futni fjalëkalimin",
-  "EnterPasswordDescription": "Skedari <1>«{{fileName}}»</1> ndodhet në dhomën e mbrojtur me fjalëkalim. Ju lutem shkruani një fjalëkalim për dhomën",
   "EnterpriseLicense": "Ndërmarrja",
   "Error": "Gabim",
   "Error401Text": "Na vjen keq, burimi nuk është aktualisht i aksesueshëm.",

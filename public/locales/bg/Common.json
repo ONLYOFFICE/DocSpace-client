@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Процесът на криптиране е в ход",
   "EnterName": "Въведи име",
   "EnterPassword": "Въведете паролата",
-  "EnterPasswordDescription": "Файл <1>«{{fileName}}»</1> се намира в защитената с парола стая. Моля, въведете парола за стаята",
   "EnterpriseLicense": "Enterprise",
   "Error": "Грешка",
   "Error401Text": "Съжаляваме, в момента няма достъп до този ресурс.",

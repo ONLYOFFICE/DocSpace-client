@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Het versleutelingsproces in uitvoering",
   "EnterName": "Voer naam in",
   "EnterPassword": "Voer wachtwoord in",
-  "EnterPasswordDescription": "Bestand <1>«{{fileName}}»</1> bevindt zich in de met een wachtwoord beveiligde kamer. Voer een wachtwoord voor de kamer in",
   "EnterpriseLicense": "Enterprise",
   "Error": "Fout",
   "Error401Text": "Sorry, de bron is momenteel niet beschikbaar.",

@@ -288,7 +288,6 @@
   "EncryptionPortalTitle": "Le processus de chiffrement en cours",
   "EnterName": "Saisir un prénom",
   "EnterPassword": "Entrer le mot de passe",
-  "EnterPasswordDescription": "Le fichier <1>«{{fileName}}»</1> se trouve dans la salle protégée par un mot de passe. Veuillez saisir un mot de passe pour la salle",
   "EnterpriseLicense": "Enterprise",
   "Error": "Erreur",
   "Error401Text": "Désolé, la ressource n'est pas disponible actuellement.",

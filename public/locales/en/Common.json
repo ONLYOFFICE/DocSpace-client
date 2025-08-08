@@ -293,7 +293,6 @@
   "EncryptionPortalTitle": "The encryption process in progress",
   "EnterName": "Enter name",
   "EnterPassword": "Enter password",
-  "EnterPasswordDescription": "File <1>«{{fileName}}»</1> is located in the password-protected room. Please enter a password for the room",
   "EnterpriseLicense": "Enterprise",
   "Error": "Error",
   "Error401Text": "Sorry, the resource is not currently accessible.",

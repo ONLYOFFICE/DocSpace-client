@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Trwa proces szyfrowania",
   "EnterName": "Wpisz nazwę",
   "EnterPassword": "Wprowadź hasło",
-  "EnterPasswordDescription": "Plik <1>«{{fileName}}»</1> znajduje się w pokoju chronionym hasłem. Wprowadź hasło do pokoju",
   "EnterpriseLicense": "Enterprise",
   "Error": "Błąd",
   "Error401Text": "Przepraszamy, wybrany zasób jest w tej chwili niedostępny.",

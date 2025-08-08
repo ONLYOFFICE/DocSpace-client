@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Processo di crittografia in corso",
   "EnterName": "Inserisci nome",
   "EnterPassword": "Inserisci la Password",
-  "EnterPasswordDescription": "Il file <1>«{{fileName}}»</1> si trova nella stanza protetta da password. Inserisci una password per la stanza",
   "EnterpriseLicense": "Enterprise",
   "Error": "Errore",
   "Error401Text": "Spiacente, la risorsa non è attualmente accessibile.",

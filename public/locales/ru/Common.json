@@ -292,7 +292,6 @@
   "EncryptionPortalTitle": "Идет процесс шифрования",
   "EnterName": "Введите имя",
   "EnterPassword": "Ввести пароль",
-  "EnterPasswordDescription": "Файл <1>«{{fileName}}»</1> находится в комнате, защищенной паролем. Пожалуйста, введите пароль для комнаты",
   "EnterpriseLicense": "Enterprise",
   "Error": "Ошибка",
   "Error401Text": "Извините, страница недоступна.",

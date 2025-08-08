@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Criptarea în desfășurare",
   "EnterName": "Introduceți un nume",
   "EnterPassword": "Introduceți parola",
-  "EnterPasswordDescription": "Fișierul <1>«{{fileName}}»</1> se află în sală protejată prin parolă. Introduceți parola pentru camera",
   "EnterpriseLicense": "Enterprise",
   "Error": "Eroare",
   "Error401Text": "Ne pare rău, sursa nu este accesibilă.",

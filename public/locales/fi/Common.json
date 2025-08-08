@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Salausprosessi on käynnissä",
   "EnterName": "Syötä nimi",
   "EnterPassword": "Anna salasana",
-  "EnterPasswordDescription": "Tiedosto <1>«{{fileName}}»</1> sijaitsee salasanalla suojatussa huoneessa. Ole hyvä ja syötä huoneen salasana.",
   "EnterpriseLicense": "Enterprise",
   "Error": "Virhe",
   "Error401Text": "Valitettavasti resurssi ei ole tällä hetkellä käytettävissä.",

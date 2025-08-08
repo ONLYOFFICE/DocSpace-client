@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "暗号化プロセスが進行中です",
   "EnterName": "名前を入力してください",
   "EnterPassword": "パスワードをご入力ください",
-  "EnterPasswordDescription": "<1>「{{fileName}}」</1>ファイルはパスワードで保護されたルームにあります。ルームのパスワードを入力してください。",
   "EnterpriseLicense": "Enterprise",
   "Error": "エラー",
   "Error401Text": "申し訳ありませんが、このリソースは現在アクセスできません。",

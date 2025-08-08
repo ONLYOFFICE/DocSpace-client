@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Şifreleme işlemi devam ediyor",
   "EnterName": "İsim girin",
   "EnterPassword": "Parola giriniz",
-  "EnterPasswordDescription": "<1>«{{fileName}}»</1> dosyası parola korumalı odada bulunmaktadır. Lütfen oda için bir parola girin",
   "EnterpriseLicense": "Enterprise",
   "Error": "Hata",
   "Error401Text": "Üzgünüz, kaynak şu anda ulaşılabilir değil.",

@@ -285,7 +285,6 @@
   "EncryptionPortalTitle": "සංකේතන ක්‍රියාවලිය සිදුවෙමින් පවතී",
   "EnterName": "නම ලියන්න",
   "EnterPassword": "මුරපදය යොදන්න",
-  "EnterPasswordDescription": "ගොනුව <1>«{{fileName}}»</1> මුරපදයෙන් ආරක්ෂිත කාමරයේ පිහිටා ඇත. කාමරය සඳහා මුරපදයක් ඇතුළත් කරන්න.",
   "EnterpriseLicense": "Enterprise",
   "Error": "දෝෂයකි",
   "Error401Text": "දැනට සම්පත වෙත ප්‍රවේශ වීමට නොහැකිය.",

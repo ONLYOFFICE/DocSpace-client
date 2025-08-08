@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "O processo de criptografia em andamento",
   "EnterName": "Inserir nome",
   "EnterPassword": "Inserir senha",
-  "EnterPasswordDescription": "O arquivo <1>«{{fileName}}»</1> está localizado na sala protegida por senha. Insira uma senha para a sala",
   "EnterpriseLicense": "Enterprise",
   "Error": "Erro",
   "Error401Text": "Desculpe, o recurso não está atualmente acessível.",

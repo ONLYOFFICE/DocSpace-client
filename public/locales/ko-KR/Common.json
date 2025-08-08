@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "암호화 프로세스가 진행 중입니다",
   "EnterName": "이름을 입력하세요",
   "EnterPassword": "비밀번호 입력",
-  "EnterPasswordDescription": "<1>«{{fileName}}»</1> 파일은 암호로 보호된 룸에 있습니다. 룸의 암호를 입력하세요.",
   "EnterpriseLicense": "Enterprise",
   "Error": "오류",
   "Error401Text": "죄송하지만, 현재 해당 리소스에 액세스할 수 없습니다.",

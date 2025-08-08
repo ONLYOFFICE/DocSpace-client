@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Կատարվում է գաղտնագրման գործընթաց",
   "EnterName": "Մուտքագրեք անունը",
   "EnterPassword": "Մուտքագրել գաղտնաբառը",
-  "EnterPasswordDescription": "Ֆայլը <1>«{{fileName}}»</1> գտնվում է գաղտնաբառով պաշտպանված սենյակում: Խնդրում ենք մուտքագրել սենյակի գաղտնաբառը",
   "EnterpriseLicense": "Enterprise",
   "Error": "Սխալ",
   "Error401Text": "Ներողություն, ռեսուրսը ներկայումս հասանելի չէ.",

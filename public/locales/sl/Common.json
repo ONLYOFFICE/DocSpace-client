@@ -290,7 +290,6 @@
   "EncryptionPortalTitle": "Postopek šifriranja je v teku",
   "EnterName": "Vnesite ime",
   "EnterPassword": "Vnesi geslo",
-  "EnterPasswordDescription": "Datoteka <1>«{{fileName}}»</1> se nahaja v sobi, ki je zaščitena z geslom. Vnesi geslo za sobo",
   "EnterpriseLicense": "Enterprise",
   "Error": "Napaka",
   "Error401Text": "Žal vir trenutno ni dostopen.",

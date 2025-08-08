@@ -85,6 +85,7 @@ const FilesSelectorInput = ({
   checkCreating,
   openRoot,
   formProps,
+  dataTestId,
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
@@ -245,7 +246,7 @@ const FilesSelectorInput = ({
     <div
       className={classNames(styles.filesSelectorInput, className)}
       style={{ maxWidth }}
-      data-testid="files-selector-input"
+      data-testid={dataTestId ?? "files-selector-input"}
     >
       <FileInput
         scale

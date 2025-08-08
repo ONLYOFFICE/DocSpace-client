@@ -38,10 +38,14 @@ const Plugin = ({ boxProps, pluginName, plugin, selection }) => {
   }, [selection.id]);
 
   return (
-    <WrappedComponent
-      pluginName={pluginName}
-      component={{ component: PluginComponents.box, props: boxProps }}
-    />
+    <div
+      data-testid={`info_panel_plugin_${pluginName?.toLowerCase().replace(/\s+/g, "_")}`}
+    >
+      <WrappedComponent
+        pluginName={pluginName}
+        component={{ component: PluginComponents.box, props: boxProps }}
+      />
+    </div>
   );
 };
 

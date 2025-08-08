@@ -1453,11 +1453,8 @@ export const insertEditorPreloadFrame = (docServiceUrl: string) => {
     return;
   }
 
-  const preloadUrl = docServiceUrl.endsWith("/api.js")
-    ? docServiceUrl.replace("/api.js", "/preload.html")
-    : `${docServiceUrl.replace(/\/$/, "")}/preload.html`;
-
   const iframe = document.createElement("iframe");
+
   iframe.id = "editor-preload-frame";
   iframe.style.cssText =
     "position:absolute;width:0;height:0;border:0;opacity:0;pointer-events:none;visibility:hidden";
@@ -1472,7 +1469,7 @@ export const insertEditorPreloadFrame = (docServiceUrl: string) => {
 
   const appendIframe = () => {
     document.body.appendChild(iframe);
-    iframe.src = preloadUrl;
+    iframe.src = docServiceUrl;
   };
 
   if (document.readyState === "loading") {
@@ -1481,3 +1478,11 @@ export const insertEditorPreloadFrame = (docServiceUrl: string) => {
     appendIframe();
   }
 };
+
+export function buildDataTestId(
+  dataTestId: string | undefined,
+  suffix: string,
+): string | undefined {
+  if (!dataTestId) return undefined;
+  return `${dataTestId}_${suffix}`;
+}

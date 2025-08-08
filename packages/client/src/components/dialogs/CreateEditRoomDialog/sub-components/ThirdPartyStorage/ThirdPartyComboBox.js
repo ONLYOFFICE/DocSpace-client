@@ -266,6 +266,7 @@ const ThirdPartyComboBox = ({
             onClick={onSelect}
             data-third-party-id={item.id}
             disabled={disabled}
+            testId={`drop_down_item_${item.id}`}
             {...disabledData}
           >
             <Text className="drop-down-item_text" fontWeight={600}>
@@ -313,6 +314,7 @@ const ThirdPartyComboBox = ({
           scaledOptions
           showDisabledItems
           displayArrow
+          dataTestId="create_edit_room_thirdparty_combobox"
         />
         <Button
           id="shared_third-party-storage_connect"
@@ -325,6 +327,7 @@ const ThirdPartyComboBox = ({
           size="small"
           label={t("Common:Connect")}
           onClick={onShowService}
+          testId="create_edit_room_thirdparty_connect"
         />
       </div>
     </StyledStorageLocation>

@@ -35,6 +35,7 @@ type RoomIconDefault = {
   showDefault: boolean;
   imgClassName?: string;
   className?: string;
+  dataTestId?: string;
 };
 
 export type TModel = { label: string; icon: string } & (
@@ -43,8 +44,8 @@ export type TModel = { label: string; icon: string } & (
       onClick: () => void;
     }
   | {
-      key: "upload";
-      onClick: (ref?: React.RefObject<Nullable<HTMLDivElement>>) => void;
+      key: "create_edit_room_upload";
+      onClick: (ref?: React.RefObject<Nullable<HTMLInputElement>>) => void;
     }
 );
 
@@ -59,6 +60,7 @@ type RoomIconExpansion = {
   tooltipContent?: string;
   tooltipId?: string;
   isTemplate?: boolean;
+  dataTestId?: string;
 };
 
 type RoomIconColor = {

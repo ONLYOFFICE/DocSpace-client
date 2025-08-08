@@ -147,6 +147,7 @@ const ChangeRoomOwner = (props) => {
         productName: t("Common:ProductName"),
       })}
       className="change-owner_people-selector"
+      data-test-id="change_owner_people_selector"
     />
   );
 

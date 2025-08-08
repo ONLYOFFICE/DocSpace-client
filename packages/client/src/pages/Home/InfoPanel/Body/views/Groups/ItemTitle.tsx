@@ -82,6 +82,7 @@ const ItemTitle = ({
         className={styles.avatar}
         size={AvatarSize.big}
         role={AvatarRole.user}
+        dataTestId="info_panel_contacts_group_avatar"
         userName={groupSelection.name}
         isGroup
       />

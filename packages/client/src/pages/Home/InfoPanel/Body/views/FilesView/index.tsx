@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
 
@@ -222,24 +222,13 @@ const FilesView = ({
   });
 
   React.useEffect(() => {
-    const onStartAnimation = () => {
-      const event = new CustomEvent(TabsEvent.START_ANIMATION, {
-        detail: {
-          id: "info-panel-tabs",
-        },
-      });
-      window.dispatchEvent(event);
-    };
-
     const onEndAnimation = () => {
-      const event = new CustomEvent(TabsEvent.END_ANIMATION);
+      const event = new CustomEvent(AnimationEvents.END_ANIMATION);
 
       window.dispatchEvent(event);
     };
 
-    if (showLoadingSuspense) {
-      onStartAnimation();
-    } else {
+    if (!showLoadingSuspense) {
       onEndAnimation();
     }
   }, [showLoadingSuspense]);
@@ -319,7 +308,7 @@ const FilesView = ({
     : {};
 
   return (
-    <>
+    <div data-testid="info_panel_files_view_container">
       <ItemTitle
         infoPanelSelection={
           isRoomMembersPanel ? infoPanelRoomSelection! : selection
@@ -331,6 +320,7 @@ const FilesView = ({
           opacity: isLoadingSuspense ? 0.5 : 1,
           pointerEvents: isLoadingSuspense ? "none" : "auto",
         }}
+        data-testid="info_panel_files_view_content"
       >
         {isFirstLoadingSuspense ? (
           currentView === InfoPanelView.infoShare ? (
@@ -344,13 +334,18 @@ const FilesView = ({
                     ? "history"
                     : "details"
               }
+              data-testid="info_panel_files_view_loader"
             />
           )
         ) : (
-          getView()
+          <div
+            data-testid={`info_panel_files_view_${value?.replace("info_", "")}`}
+          >
+            {getView()}
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

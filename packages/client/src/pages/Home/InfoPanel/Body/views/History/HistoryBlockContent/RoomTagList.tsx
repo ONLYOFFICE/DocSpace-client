@@ -42,23 +42,36 @@ type HistoryRoomTagListProps = {
 const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
   if (actionType === "create")
     return (
-      <div className={styles.historyBlockTagList}>
-        {feed.data?.tags?.map((tag: string) => (
-          <Tag className="history-tag" key={tag} label={tag} tag={tag} />
+      <div
+        className={styles.historyBlockTagList}
+        data-testid="history_tag_list_create"
+      >
+        {feed.data?.tags?.map((tag: string, index: number) => (
+          <Tag
+            className="history-tag"
+            key={tag}
+            label={tag}
+            tag={tag}
+            dataTestId={`history_tag_create_${index}`}
+          />
         ))}
       </div>
     );
 
   if (actionType === "delete") {
     return (
-      <div className={styles.historyBlockTagList}>
-        {feed.data?.tags?.map((tag: string) => (
+      <div
+        className={styles.historyBlockTagList}
+        data-testid="history_tag_list_delete"
+      >
+        {feed.data?.tags?.map((tag: string, index: number) => (
           <Tag
             className="history-tag deleted-tag"
             key={tag}
             label={tag}
             tag={tag}
             isDeleted
+            dataTestId={`history_tag_delete_${index}`}
           />
         ))}
       </div>

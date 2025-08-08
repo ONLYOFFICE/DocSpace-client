@@ -41,6 +41,7 @@ interface PreviewButtonProps {
   setShowSeveralOperationsIcon: (flag: boolean) => void;
   hasUploadOperationByDrag: () => boolean;
   clearDropPreviewLocation?: () => void;
+  isArticleExpanded?: boolean;
 }
 
 const PreviewButton: React.FC<PreviewButtonProps> = ({

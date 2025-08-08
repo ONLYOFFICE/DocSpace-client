@@ -314,10 +314,10 @@
   }
 
   &.withScroll {
-    margin-inline-start: -20px;
+    margin-inline-start: var(--section-desctop-padding);
 
     @include mixins.tablet-and-below {
-      margin-inline-start: -24px;
+      margin-inline-start: var(--section-tablet-padding);
     }
   }
 }
@@ -327,10 +327,10 @@
   user-select: none;
 
   &.withScroll {
-    margin-inline-start: -20px;
+    margin-inline-start: var(--section-desctop-padding);
 
     @include mixins.tablet-and-below {
-      margin-inline-start: -24px;
+      margin-inline-start: var(--section-tablet-padding);
     }
   }
 

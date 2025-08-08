@@ -52,9 +52,32 @@
 }
 
 .previewFloatingButtonContainer {
+  --desktop-right-offset: calc(
+    50% -
+      (
+        var(--article-desktop-width) - abs(var(--section-desktop-padding)) - abs(
+            var(--section-desktop-padding)
+          )
+      )
+  );
+  --tablet-right-offset: calc(
+    50% -
+      (
+        var(--article-tablet-width) - abs(var(--section-tablet-padding)) - abs(
+            var(--section-tablet-padding)
+          )
+      )
+  );
+  --tablet-collapsed-right-offset: calc(
+    50% - var(--article-tablet-width-collapsed) - abs(
+        var(--section-tablet-padding)
+      ) - abs(var(--section-tablet-padding))
+  );
+  --mobile-right-offset: calc(50% - 16px - abs(var(--section-tablet-padding)));
+
   position: fixed;
   bottom: 88px;
-  right: calc(50% - 210px);
+  right: var(--desktop-right-offset);
   transform: translateX(-50%);
   z-index: 310;
   opacity: 1;
@@ -64,8 +87,16 @@
     opacity 0.3s ease-in-out,
     transform 0.3s ease-in-out;
 
+  @include mixins.tablet-and-below {
+    right: var(--tablet-right-offset);
+
+    &.articleExpanded {
+      right: var(--tablet-collapsed-right-offset);
+    }
+  }
+
   @include mixins.mobile {
-    right: calc(50% - 32px);
+    right: var(--mobile-right-offset);
 
     &.mainButtonVisible {
       bottom: 80px;
@@ -75,7 +106,7 @@
   @keyframes hideUnderProgressBar {
     from {
       bottom: 88px;
-      right: calc(50% - 210px);
+      right: var(--desktop-right-offset);
       transform: translateX(-50%);
       opacity: 1;
     }
@@ -87,10 +118,27 @@
       opacity: 1;
     }
   }
+
   @keyframes hideUnderProgressBarTablet {
     from {
       bottom: 88px;
-      right: calc(50% - 210px);
+      right: var(--tablet-right-offset);
+      transform: translateX(-50%);
+      opacity: 1;
+    }
+    to {
+      bottom: 88px;
+      right: 0;
+      inset-inline-end: 24px;
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes hideUnderProgressBarTabletExpanded {
+    from {
+      bottom: 88px;
+      right: var(--tablet-collapsed-right-offset);
       transform: translateX(-50%);
       opacity: 1;
     }
@@ -106,7 +154,7 @@
   @keyframes hideUnderProgressBarMobile {
     from {
       bottom: 88px;
-      right: calc(50% - 32px);
+      right: var(--mobile-right-offset);
       transform: translateX(-50%);
       opacity: 1;
     }
@@ -123,6 +171,10 @@
     animation: hideUnderProgressBar 0.3s ease-out forwards;
     @include mixins.tablet-and-below {
       animation: hideUnderProgressBarTablet 0.3s ease-out forwards;
+
+      &.articleExpanded {
+        animation: hideUnderProgressBarTabletExpanded 0.3s ease-out forwards;
+      }
     }
     @include mixins.mobile {
       animation: hideUnderProgressBarMobile 0.3s ease-out forwards;

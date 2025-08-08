@@ -51,6 +51,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
   setHideMainButton,
   allOperationsLength,
   setShowSeveralOperationsIcon,
+  isArticleExpanded,
 }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [animationState, setAnimationState] = useState<
@@ -281,6 +282,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     <div
       className={classNames(styles.previewFloatingButtonContainer, {
         [styles.hidingUnder]: animationState === "hidingUnder",
+        [styles.articleExpanded]: !isArticleExpanded,
       })}
       style={{ zIndex: "200" }}
       ref={previewMainContainerRef}

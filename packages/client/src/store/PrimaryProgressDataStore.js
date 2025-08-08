@@ -36,6 +36,8 @@ class PrimaryProgressDataStore {
 
   dropTargetPreview = null;
 
+  startDropPreview = true;
+
   constructor() {
     makeAutoObservable(this);
   }

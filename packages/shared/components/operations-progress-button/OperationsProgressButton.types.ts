@@ -62,6 +62,7 @@ export interface OperationsProgressProps {
   isInfoPanelVisible?: boolean;
   dropTargetFolderName?: string | null;
   isDragging?: boolean;
+  isArticleExpanded?: boolean;
 }
 export interface ProgressBarMobileProps {
   /** Display text for the progress bar */

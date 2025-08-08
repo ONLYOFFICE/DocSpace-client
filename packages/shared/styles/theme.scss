@@ -21,6 +21,9 @@
   --files-article-body-dev-tools-background-opacity: 0.17;
   --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
   --article-client-home-logo-color: #{$black};
@@ -367,6 +370,9 @@
   --files-article-body-dev-tools-background-opacity: 1;
   --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
   --article-client-home-logo-color: #{$white};
@@ -1032,6 +1038,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 }
 
 .light {
@@ -1075,6 +1083,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 
   --section-header-bg: #{$white};
   --info-panel-blur-color: #{$blur-light};

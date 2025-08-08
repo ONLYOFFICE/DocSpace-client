@@ -85,6 +85,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   dropTargetFolderName,
   isDragging,
   clearDropPreviewLocation,
+  isArticleExpanded,
 }) => {
   const { t } = useTranslation(["Common"]);
 
@@ -384,6 +385,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         setHideMainButton={hideMainButtonHandler}
         allOperationsLength={allOperationsLength > 0}
         setShowSeveralOperationsIcon={setShowSeveralOperationsIconHandler}
+        isArticleExpanded={isArticleExpanded}
       />
 
       <div

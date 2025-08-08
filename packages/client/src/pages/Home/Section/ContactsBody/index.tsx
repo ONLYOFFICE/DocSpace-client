@@ -39,8 +39,6 @@ import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
-import { TUser } from "@docspace/shared/api/people/types";
-import { TGroup } from "@docspace/shared/api/groups/types";
 
 import { useAccountsHotkeys } from "../../Hooks";
 

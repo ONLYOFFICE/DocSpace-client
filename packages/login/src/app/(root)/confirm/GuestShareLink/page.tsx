@@ -37,8 +37,8 @@ import { getStringFromSearchParams } from "@/utils";
 
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
 import { logger } from "logger.mjs";
-import GuestShareLinkForm from "./page.client";
 import { TConfirmLinkParams } from "@/types";
+import GuestShareLinkForm from "./page.client";
 
 type GuestShareLinkProps = {
   searchParams: Promise<{ [key: string]: string }>;

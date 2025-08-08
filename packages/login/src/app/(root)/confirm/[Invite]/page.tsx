@@ -43,8 +43,8 @@ import {
   checkConfirmLink,
 } from "@/utils/actions";
 import { logger } from "logger.mjs";
-import CreateUserForm from "./page.client";
 import { TConfirmLinkParams } from "@/types";
+import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
   searchParams: Promise<{ [key: string]: string }>;

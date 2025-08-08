@@ -53,7 +53,7 @@ const DropDown = ({
   smallSectionWidth,
   forwardedRef,
   right,
-  offsetLeft = 0,
+  offsetX = 0,
   top,
   children,
   maxHeight,
@@ -128,8 +128,9 @@ const DropDown = ({
 
       // Check available space around the parent
       const hasRightSpace =
-        parentRects.left + dropDownRects.width < viewport.width;
-      const hasLeftSpace = parentRects.right - dropDownRects.width > 0;
+        parentRects.left + dropDownRects.width + offsetX < viewport.width;
+      const hasLeftSpace =
+        parentRects.right - dropDownRects.width - offsetX > 0;
       const hasNoSpace = !hasRightSpace && !hasLeftSpace;
 
       // Determine if start/end alignment is possible
@@ -139,16 +140,16 @@ const DropDown = ({
       // Alignment functions
       const alignToParentStart = () => {
         const left = isRTL
-          ? parentRects.right - dropDownRects.width - scrollBarWidth
-          : parentRects.left;
+          ? parentRects.right - dropDownRects.width - scrollBarWidth - offsetX
+          : parentRects.left + offsetX;
 
         dropDown.style.left = `${left}px`;
       };
 
       const alignToParentEnd = () => {
         const left = isRTL
-          ? parentRects.left - scrollBarWidth
-          : parentRects.right - dropDownRects.width;
+          ? parentRects.left - scrollBarWidth + offsetX
+          : parentRects.right - dropDownRects.width - offsetX;
 
         dropDown.style.left = `${left}px`;
       };
@@ -185,7 +186,7 @@ const DropDown = ({
     directionY,
     fixedDirection,
     forwardedRef,
-    offsetLeft,
+    offsetX,
     right,
     isRTL,
     top,

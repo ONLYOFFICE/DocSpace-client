@@ -75,6 +75,10 @@ Note: Parent element must have \`position: relative\` for proper positioning.`,
       control: "number",
       description: "Custom z-index for the dropdown",
     },
+    offsetX: {
+      control: "number",
+      description: "Custom offset for the dropdown in the horizontal direction",
+    },
   },
 } satisfies Meta<typeof DropDown>;
 

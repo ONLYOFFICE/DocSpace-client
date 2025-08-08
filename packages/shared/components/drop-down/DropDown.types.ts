@@ -69,8 +69,8 @@ export interface DropDownProps {
   fixedDirection?: boolean;
   /** Enables blur for backdrop */
   withBlur?: boolean;
-  /** Specifies the offset */
-  offsetLeft?: number;
+  /** Specifies the horizontal offset */
+  offsetX?: number;
   /** Test id */
   dataTestId?: string;
 

@@ -26,12 +26,12 @@
 
 import React from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useLocation, useParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
-
+import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
   FolderType,
@@ -39,47 +39,52 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { toastr } from "@docspace/shared/components/toast";
+import FilesStore from "SRC_DIR/store/FilesStore";
+import MediaViewerDataStore from "SRC_DIR/store/MediaViewerDataStore";
+import OformsStore from "SRC_DIR/store/OformsStore";
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+
+export type UseFilesProps = {
+  fetchFiles: FilesStore["fetchFiles"];
+  fetchRooms: FilesStore["fetchRooms"];
+  getFileInfo: FilesStore["getFileInfo"];
+  setIsPreview: FilesStore["setIsPreview"];
+  setIsUpdatingRowItem: FilesStore["setIsUpdatingRowItem"];
+  scrollToTop: FilesStore["scrollToTop"];
+  wsCreatedPDFForm: FilesStore["wsCreatedPDFForm"];
+
+  playlist: MediaViewerDataStore["playlist"];
+  setToPreviewFile: MediaViewerDataStore["setToPreviewFile"];
+
+  gallerySelected: OformsStore["gallerySelected"];
+
+  userId: string;
+
+  selectedFolderStore: SelectedFolderStore;
+};
 
 const useFiles = ({
-  t,
-
-  dragging,
-  setDragging,
-  disableDrag,
-  createFoldersTree,
-  startUpload,
-
   fetchFiles,
   fetchRooms,
-  setIsLoading,
-
-  isContactsPage,
-  isSettingsPage,
-
-  location,
+  getFileInfo,
+  setIsPreview,
+  setIsUpdatingRowItem,
+  scrollToTop,
+  wsCreatedPDFForm,
 
   playlist,
-
-  getFileInfo,
   setToPreviewFile,
-  setIsPreview,
-
-  setIsUpdatingRowItem,
 
   gallerySelected,
-  folderSecurity,
   userId,
 
-  scrollToTop,
   selectedFolderStore,
-  wsCreatedPDFForm,
-}) => {
+}: UseFilesProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
 
   const fetchDefaultFiles = () => {
@@ -93,7 +98,7 @@ const useFiles = ({
   const fetchDefaultRooms = () => {
     const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
-    const categoryType = getCategoryType(location);
+    const categoryType = getCategoryType(location) as number;
 
     const url = getCategoryUrl(categoryType);
 
@@ -101,7 +106,7 @@ const useFiles = ({
 
     switch (categoryType) {
       case CategoryType.Shared:
-        searchArea = RoomSearchArea.Shared;
+        searchArea = RoomSearchArea.Active;
         break;
 
       case CategoryType.Archive:
@@ -109,7 +114,7 @@ const useFiles = ({
         break;
 
       default:
-        searchArea = RoomSearchArea.Archive;
+        searchArea = RoomSearchArea.Active;
         break;
     }
 
@@ -118,33 +123,7 @@ const useFiles = ({
     navigate(`${url}?${filter.toUrlParams()}`);
   };
 
-  const onDrop = (files, uploadToFolder) => {
-    if (
-      folderSecurity &&
-      hasOwnProperty(folderSecurity, "Create") &&
-      !folderSecurity.Create
-    )
-      return;
-
-    dragging && setDragging(false);
-
-    if (disableDrag) return;
-
-    createFoldersTree(t, files, uploadToFolder)
-      .then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
-      })
-      .catch((err) => {
-        toastr.error(err, null, 0, true);
-      });
-  };
-
-  React.useEffect(() => {
-    if (isContactsPage || isSettingsPage) return;
-
-    if (location.pathname === "/") setIsLoading(true, true, true);
-    else setIsLoading(true, false, false);
-
+  const getFiles = React.useCallback(async () => {
     const categoryType = getCategoryType(location);
 
     let filterObj = null;
@@ -169,14 +148,9 @@ const useFiles = ({
             fetchDefaultFiles();
           });
       }, 1);
-
-      return setIsLoading(false);
     }
 
-    if (window.location.href.indexOf(MEDIA_VIEW_URL) > 1)
-      return setIsLoading(false);
-
-    const isRoomFolder = getObjectByLocation(window.location)?.folder;
+    const isRoomFolder = getObjectByLocation(location)?.folder;
 
     if (
       (categoryType == CategoryType.Shared ||
@@ -205,29 +179,37 @@ const useFiles = ({
 
     if (!filterObj) return;
 
-    let dataObj = { filter: filterObj };
+    let dataObj: {
+      filter: FilesFilter | RoomsFilter;
+      type?: string;
+      itemId?: string;
+    } = {
+      filter: filterObj,
+    };
 
-    if (filterObj && filterObj.authorType) {
-      const authorType = filterObj.authorType;
-      const indexOfUnderscore = authorType.indexOf("_");
-      const type = authorType.slice(0, indexOfUnderscore);
-      const itemId = authorType.slice(indexOfUnderscore + 1);
+    if (filterObj && (filterObj as FilesFilter).authorType) {
+      const authorType = (filterObj as FilesFilter).authorType;
+      if (authorType) {
+        const indexOfUnderscore = authorType.indexOf("_");
+        const type = authorType.slice(0, indexOfUnderscore);
+        const itemId = authorType.slice(indexOfUnderscore + 1);
 
-      if (itemId) {
-        dataObj = {
-          type,
-          itemId,
-          filter: filterObj,
-        };
-      } else {
-        filterObj.authorType = null;
-        dataObj = { filter: filterObj };
+        if (itemId) {
+          dataObj = {
+            type,
+            itemId,
+            filter: filterObj,
+          };
+        } else {
+          (filterObj as FilesFilter).authorType = null;
+          dataObj = { filter: filterObj, type: "", itemId: "" };
+        }
       }
     }
 
-    if (filterObj && filterObj.subjectId) {
+    if (filterObj && (filterObj as RoomsFilter).subjectId) {
       const type = "user";
-      const itemId = filterObj.subjectId;
+      const itemId = (filterObj as RoomsFilter).subjectId;
 
       if (itemId) {
         dataObj = {
@@ -236,7 +218,7 @@ const useFiles = ({
           filter: filterObj,
         };
       } else {
-        filterObj.subjectId = null;
+        (filterObj as RoomsFilter).subjectId = null;
         dataObj = { filter: filterObj };
       }
     }
@@ -247,29 +229,31 @@ const useFiles = ({
     let newFilter = filter
       ? filter.clone()
       : isRooms
-        ? RoomsFilter.getDefault(userId, filterObj.searchArea)
+        ? RoomsFilter.getDefault(userId, filterObj.searchArea?.toString())
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
-    axios
+    await axios
       .all(requests)
       .catch(() => {
         if (isRooms) {
-          Promise.resolve(RoomsFilter.getDefault(userId, filterObj.searchArea));
+          Promise.resolve(
+            RoomsFilter.getDefault(userId, filterObj.searchArea?.toString()),
+          );
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }
-
-        // console.warn("Filter restored by default", err);
       })
       .then((data) => {
+        if (!data) return;
+
         newFilter = data[0];
 
         if (newFilter) {
           if (isRooms) {
             return fetchRooms(null, newFilter, undefined, undefined, false);
           }
-          const folderId = newFilter.folder;
+          const folderId = (newFilter as FilesFilter).folder;
           return fetchFiles(folderId, newFilter)?.finally(() => {
             const itemData = sessionStorage.getItem(CREATED_FORM_KEY);
             if (itemData) {
@@ -287,8 +271,6 @@ const useFiles = ({
         if (gallerySelected) {
           setIsUpdatingRowItem(false);
 
-          const event = new Event(Events.CREATE);
-
           const isFormRoom =
             selectedFolderStore.roomType === RoomsType.FormRoom ||
             selectedFolderStore.parentRoomType === FolderType.FormRoom;
@@ -297,9 +279,19 @@ const useFiles = ({
             extension: "pdf",
             id: -1,
             fromTemplate: true,
-            title: gallerySelected.attributes.name_form,
+            title: (
+              gallerySelected as {
+                attributes: {
+                  name_form: string;
+                };
+              }
+            ).attributes.name_form,
             openEditor: !isFormRoom,
             edit: !isFormRoom,
+          };
+
+          const event = new Event(Events.CREATE) as Event & {
+            payload: unknown;
           };
 
           event.payload = payload;
@@ -309,11 +301,28 @@ const useFiles = ({
       })
       .finally(() => {
         scrollToTop();
-        setIsLoading(false);
       });
-  }, [isContactsPage, isSettingsPage, location.pathname, location.search]);
+  }, [
+    location.pathname,
+    location.search,
+    fetchFiles,
+    fetchRooms,
+    getFileInfo,
+    setIsPreview,
+    setIsUpdatingRowItem,
+    scrollToTop,
+    wsCreatedPDFForm,
 
-  return { onDrop };
+    playlist,
+    setToPreviewFile,
+
+    gallerySelected,
+    userId,
+
+    selectedFolderStore,
+  ]);
+
+  return { getFiles };
 };
 
 export default useFiles;

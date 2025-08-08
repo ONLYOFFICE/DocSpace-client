@@ -29,7 +29,6 @@ import styled, { css } from "styled-components";
 const Styled = styled.div`
   width: 100%;
   height: 100%;
-
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -43,6 +42,8 @@ const Styled = styled.div`
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border: 1px solid #dfe2e3;
+    margin: 10px 10px 0 10px;
 
     ${(props) =>
       props.smallPreview &&
@@ -63,7 +64,6 @@ const Styled = styled.div`
       css`
         width: 100%;
         height: auto;
-
         object-fit: cover;
         object-position: top;
       `}
@@ -73,14 +73,14 @@ const Styled = styled.div`
     height: 38px;
     width: 100%;
     box-sizing: border-box;
-    font-weight: 600;
-
     padding: 8px 10px 10px 10px;
+  }
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-break: break-word;
+  .name-text {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    color: #555f65;
   }
 `;
 
@@ -97,30 +97,13 @@ const FileTile = ({ item, smallPreview }) => {
           data-testid="template-thumbnail"
         />
       </div>
-
-      <div className="name">{item.attributes.name_form}</div>
+      <div className="name">
+        <div className="name-text" title={item.attributes.name_form}>
+          {item.attributes.name_form}
+        </div>
+      </div>
     </Styled>
   );
-
-  // return (
-  //   <div ref={selectableRef}>
-  //     <Tile key={item.id} item={item}>
-  //       <SimpleFilesTileContent>
-  //         <Link
-  //           className="item-file-name"
-  //           containerWidth="100%"
-  //           type="page"
-  //           fontWeight="600"
-  //           fontSize={isDesktop() ? "13px" : "14px"}
-  //           target="_blank"
-  //           isTextOverflow
-  //         >
-  //           {item.attributes.name_form}
-  //         </Link>
-  //       </SimpleFilesTileContent>
-  //     </Tile>
-  //   </div>
-  // );
 };
 
 export default FileTile;

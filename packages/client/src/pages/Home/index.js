@@ -369,11 +369,27 @@ const PureHome = (props) => {
     [selectedFolderTitle, setDropTargetPreview, disableDrag, canCreateSecurity],
   );
 
-  const onDragLeaveEmpty = React.useCallback(() => {
-    if (setDropTargetPreview) {
-      setDropTargetPreview(null);
-    }
-  }, [setDropTargetPreview]);
+  const onDragLeaveEmpty = React.useCallback(
+    (e) => {
+      if (setDropTargetPreview) {
+        // Check if mouse is over preview button or progress bar elements
+        const target =
+          e?.relatedTarget ||
+          document.elementFromPoint(e?.clientX || 0, e?.clientY || 0);
+
+        const isOverPreviewButton =
+          target?.closest(".previewFloatingButtonContainer") ||
+          target?.closest(".layout-progress-bar") ||
+          target?.closest(".layout-progress-bar_wrapper") ||
+          target?.closest('[role="tooltip"]');
+
+        if (!isOverPreviewButton) {
+          setDropTargetPreview(null);
+        }
+      }
+    },
+    [setDropTargetPreview],
+  );
 
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 

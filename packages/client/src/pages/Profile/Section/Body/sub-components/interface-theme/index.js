@@ -150,6 +150,7 @@ const InterfaceTheme = (props) => {
           label={systemThemeLabel}
           isChecked={isSystemTheme}
           onChange={onChangeSystemTheme}
+          dataTestId="system_theme_checkbox"
         />
         <Text as="div" className="system-theme-description">
           {systemThemeDescriptionLabel}
@@ -189,8 +190,16 @@ const InterfaceTheme = (props) => {
           orientation="vertical"
           name="interface-theme"
           options={[
-            { value: ThemeKeys.BaseStr, label: t("LightTheme") },
-            { value: ThemeKeys.DarkStr, label: t("DarkTheme") },
+            {
+              value: ThemeKeys.BaseStr,
+              label: t("LightTheme"),
+              dataTestId: "light_theme_radio_button",
+            },
+            {
+              value: ThemeKeys.DarkStr,
+              label: t("DarkTheme"),
+              dataTestId: "dark_theme_radio_button",
+            },
           ]}
           onClick={onChangeTheme}
           selected={theme}

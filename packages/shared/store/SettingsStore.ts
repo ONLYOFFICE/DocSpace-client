@@ -746,19 +746,19 @@ class SettingsStore {
   get downloaddesktopUrl() {
     return this.siteDomain && this.siteEntries?.downloaddesktop
       ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforandroidUrl() {
     return this.siteDomain && this.siteEntries?.officeforandroid
       ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforiosUrl() {
     return this.siteDomain && this.siteEntries?.officeforios
       ? `${this.siteDomain}${this.siteEntries.officeforios}`
-      : this.siteDomain;
+      : null;
   }
 
   get forumLinkUrl() {

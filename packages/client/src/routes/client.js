@@ -348,17 +348,17 @@ const ClientRoutes = [
       {
         index: true,
         element: (
-          <PrivateRoute restricted withManager withCollaborator>
+          <PublicRoute>
             <ViewComponent />
-          </PrivateRoute>
+          </PublicRoute>
         ),
       },
       {
         path: "media/view/:id",
         element: (
-          <PrivateRoute restricted withManager withCollaborator>
+          <PublicRoute>
             <ViewComponent />
-          </PrivateRoute>
+          </PublicRoute>
         ),
       },
     ],

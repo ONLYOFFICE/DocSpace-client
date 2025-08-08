@@ -31,15 +31,12 @@ import { useTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { TContactsTab } from "SRC_DIR/helpers/contacts";
 import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
-import DialogsStore from "SRC_DIR/store/DialogsStore";
 
 type UseContactsProps = {
   isContactsPage: boolean;
@@ -58,9 +55,6 @@ type UseContactsProps = {
   getUsersList: UsersStore["getUsersList"];
   getGroups: GroupsStore["getGroups"];
   updateCurrentGroup: GroupsStore["updateCurrentGroup"];
-
-  showGuestReleaseTip: SettingsStore["showGuestReleaseTip"];
-  setGuestReleaseTipDialogVisible: DialogsStore["setGuestReleaseTipDialogVisible"];
 };
 
 const useContacts = ({
@@ -76,9 +70,6 @@ const useContacts = ({
   getUsersList,
   getGroups,
   updateCurrentGroup,
-
-  showGuestReleaseTip,
-  setGuestReleaseTipDialogVisible,
 }: UseContactsProps) => {
   const { groupId } = useParams();
   const location = useLocation();
@@ -86,8 +77,6 @@ const useContacts = ({
 
   React.useEffect(() => {
     if (!isContactsPage) return setContactsTab(false);
-
-    if (showGuestReleaseTip) setGuestReleaseTipDialogVisible(true);
 
     setIsLoading(true);
     setContactsTab(contactsView);
@@ -141,8 +130,6 @@ const useContacts = ({
     setIsLoading,
     setSelectedNode,
     t,
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
   ]);
 };
 

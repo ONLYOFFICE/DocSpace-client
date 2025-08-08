@@ -69,7 +69,6 @@ import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
-import GuestReleaseTipDialog from "./GuestReleaseTip";
 import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
@@ -123,7 +122,6 @@ export {
   DeleteGroupDialog,
   RoomLogoCoverDialog,
   RemoveGuestDialog,
-  GuestReleaseTipDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
   FormFillingTipsDialog,

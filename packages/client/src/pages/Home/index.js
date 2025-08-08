@@ -146,8 +146,6 @@ const PureHome = (props) => {
     wsCreatedPDFForm,
     setContactsTab,
     isUsersEmptyView,
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
     secondaryOperationsCompleted,
     primaryOperationsCompleted,
     secondaryActiveOperations,
@@ -255,9 +253,6 @@ const PureHome = (props) => {
     getUsersList,
     getGroups,
     updateCurrentGroup,
-
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
   });
 
   useSettings({
@@ -557,7 +552,6 @@ export const Component = inject(
       isFrame,
       enablePlugins,
       getSettings,
-      showGuestReleaseTip,
       allowInvitingGuests,
       checkGuests,
       hasGuests,
@@ -578,11 +572,8 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
-    const {
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      setGuestReleaseTipDialogVisible,
-    } = dialogsStore;
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
 
     const { isRoomAdmin, isAdmin } = authStore;
 
@@ -689,8 +680,6 @@ export const Component = inject(
       isEmptyGroups,
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
-      showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
 

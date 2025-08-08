@@ -126,8 +126,6 @@ class UsersStore {
 
   contactsTab: TContactsTab = false;
 
-  guestsTabVisited: boolean = false;
-
   roomParts: string = "";
 
   activeUsers: TUser[] = [];
@@ -369,14 +367,6 @@ class UsersStore {
       this.filter = Filter.getDefault();
     }
     this.contactsTab = contactsTab;
-
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
-
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
-    }
   };
 
   setFilter = (filter: Filter) => {
@@ -460,14 +450,6 @@ class UsersStore {
           ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
           : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
-
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
-    }
-
     if (withFilterLocalStorage) {
       const filterObj = getUserFilter(localStorageKey);
 
@@ -482,15 +464,6 @@ class UsersStore {
 
     if (filterData.group && filterData.group === "root") {
       filterData.group = null;
-    }
-
-    if (!guestsTabVisitedStorage && this.contactsTab === "guests") {
-      filterData.inviterId = null;
-      window.localStorage.setItem(
-        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-        "true",
-      );
-      this.guestsTabVisited = true;
     }
 
     if (this.contactsTab === "guests") {

@@ -54,7 +54,6 @@ type ContactsTabsProps = {
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
   setContactsTab: UsersStore["setContactsTab"];
-  guestsTabVisited: UsersStore["guestsTabVisited"];
   contactsTab: UsersStore["contactsTab"];
 
   setGroupsSelection: GroupsStore["setSelection"];
@@ -82,8 +81,6 @@ const ContactsTabs = ({
   isRoomAdmin,
 
   setContactsTab,
-
-  guestsTabVisited,
 
   contactsTab,
   showGuestsTab,
@@ -158,9 +155,6 @@ const ContactsTabs = ({
       name: t("Common:Guests"),
       onClick: onGuests,
       content: null,
-      badge: !guestsTabVisited ? (
-        <Badge label={t("Common:New")} noHover />
-      ) : undefined,
     });
   }
 
@@ -200,8 +194,6 @@ export default inject(
 
       setContactsTab,
 
-      guestsTabVisited,
-
       contactsTab,
     } = usersStore!;
     const {
@@ -224,8 +216,6 @@ export default inject(
       isRoomAdmin,
 
       setContactsTab,
-
-      guestsTabVisited,
 
       contactsTab,
     };

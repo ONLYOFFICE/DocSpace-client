@@ -314,7 +314,7 @@
   }
 
   &.withScroll {
-    margin-inline-start: var(--section-desctop-padding);
+    margin-inline-start: var(--section-desktop-padding);
 
     @include mixins.tablet-and-below {
       margin-inline-start: var(--section-tablet-padding);
@@ -327,7 +327,7 @@
   user-select: none;
 
   &.withScroll {
-    margin-inline-start: var(--section-desctop-padding);
+    margin-inline-start: var(--section-desktop-padding);
 
     @include mixins.tablet-and-below {
       margin-inline-start: var(--section-tablet-padding);

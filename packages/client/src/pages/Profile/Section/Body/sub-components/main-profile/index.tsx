@@ -82,31 +82,31 @@ const TooltipContent = ({ content }: { content: React.ReactNode }) => (
 );
 
 type MainProfileProps = {
-  profile: TUser;
-  culture: string;
-  becometranslatorUrl: string;
-  cultureNames: {
+  profile?: TUser;
+  culture?: string;
+  becometranslatorUrl?: string;
+  cultureNames?: {
     key: string;
     label: string;
     icon: string;
     isBeta: boolean;
   }[];
-  documentationEmail: string;
-  withActivationBar: boolean;
+  documentationEmail?: string;
+  withActivationBar?: boolean;
 
-  setChangePasswordVisible: TargetUserStore["setChangePasswordVisible"];
-  setChangeNameVisible: TargetUserStore["setChangeNameVisible"];
-  setChangeAvatarVisible: TargetUserStore["setChangeAvatarVisible"];
-  updateProfileCulture: TargetUserStore["updateProfileCulture"];
-  sendActivationLink: UserStore["sendActivationLink"];
-  setChangeEmailVisible: DialogStore["setChangeEmailVisible"];
-  setDialogData: DialogStore["setDialogData"];
-  getProfileModel: TargetUserStore["getProfileModel"];
-  avatarEditorDialogVisible: AvatarEditorDialogStore["avatarEditorDialogVisible"];
-  setAvatarEditorDialogVisible: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
-  onChangeFile: AvatarEditorDialogStore["onChangeFile"];
-  image: AvatarEditorDialogStore["image"];
-  setImage: AvatarEditorDialogStore["setImage"];
+  setChangePasswordVisible?: TargetUserStore["setChangePasswordVisible"];
+  setChangeNameVisible?: TargetUserStore["setChangeNameVisible"];
+  setChangeAvatarVisible?: TargetUserStore["setChangeAvatarVisible"];
+  updateProfileCulture?: TargetUserStore["updateProfileCulture"];
+  sendActivationLink?: UserStore["sendActivationLink"];
+  setChangeEmailVisible?: DialogStore["setChangeEmailVisible"];
+  setDialogData?: DialogStore["setDialogData"];
+  getProfileModel?: TargetUserStore["getProfileModel"];
+  avatarEditorDialogVisible?: AvatarEditorDialogStore["avatarEditorDialogVisible"];
+  setAvatarEditorDialogVisible?: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
+  onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
+  image?: AvatarEditorDialogStore["image"];
+  setImage?: AvatarEditorDialogStore["setImage"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -166,7 +166,7 @@ const MainProfile = (props: MainProfileProps) => {
 
   const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
-  const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile;
+  const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile!;
 
   const updateDropDownMaxHeight = () => {
     if (comboBoxRef.current) {
@@ -192,7 +192,7 @@ const MainProfile = (props: MainProfileProps) => {
   };
 
   const onChangeFileContext = (e?: unknown) => {
-    onChangeFile(e, t);
+    onChangeFile?.(e, t);
   };
 
   useEffect(() => {
@@ -215,32 +215,31 @@ const MainProfile = (props: MainProfileProps) => {
     }
   }, []);
 
-  const role = getUserType(profile);
+  const role = getUserType(profile!);
 
   const sendActivationLinkAction = () => {
     sendActivationLink && sendActivationLink().then(showEmailActivationToast);
   };
 
   const onChangeEmailClick = () => {
-    setDialogData(profile);
-    setChangeEmailVisible(true);
+    setDialogData?.(profile);
+    setChangeEmailVisible?.(true);
   };
 
   const onChangePasswordClick = () => {
-    const email = profile.email;
-    setDialogData({ email });
-    setChangePasswordVisible(true);
+    const email = profile!.email;
+    setDialogData?.({ email });
+    setChangePasswordVisible?.(true);
   };
 
-  const model = getProfileModel(t);
+  const model = getProfileModel?.(t);
 
   const onChangeIcon = (icon: unknown) => {
-    setImage(icon);
+    setImage?.(icon);
   };
 
-  const userAvatar = profile.hasAvatar
-    ? profile.avatarMax
-    : DefaultUserAvatarMax;
+  const userAvatar =
+    profile && profile.hasAvatar ? profile.avatarMax : DefaultUserAvatarMax;
 
   const tooltipLanguage = (
     <Text as="div" fontSize="12px">
@@ -273,14 +272,14 @@ const MainProfile = (props: MainProfileProps) => {
     </Text>
   );
 
-  const { cultureName } = profile;
-  const language = convertLanguage(cultureName || culture);
+  const { cultureName } = profile!;
+  const language = convertLanguage(cultureName || culture || "");
 
-  const selectedLanguage = cultureNames.find(
+  const selectedLanguage = cultureNames?.find(
     (item: { key: string; label: string; icon: string; isBeta: boolean }) =>
       item.key === language,
   ) ||
-    cultureNames.find(
+    cultureNames?.find(
       (item: { key: string; label: string; icon: string; isBeta: boolean }) =>
         item.key === culture,
     ) || {
@@ -291,9 +290,9 @@ const MainProfile = (props: MainProfileProps) => {
     };
 
   const onLanguageSelect = (newLanguage: TOption) => {
-    if (profile.cultureName === newLanguage.key) return;
+    if (profile!.cultureName === newLanguage.key) return;
 
-    updateProfileCulture(profile.id, newLanguage.key as string)
+    updateProfileCulture?.(profile!.id, newLanguage.key as string)
       .then(() => window.location.reload())
       .catch((error: unknown) => {
         toastr.error(
@@ -314,14 +313,14 @@ const MainProfile = (props: MainProfileProps) => {
           size={AvatarSize.max}
           role={role as unknown as AvatarRole}
           source={userAvatar}
-          userName={profile.displayName}
-          editing={!profile.isLDAP}
-          hasAvatar={!!profile.hasAvatar}
+          userName={profile!.displayName}
+          editing={!profile!.isLDAP}
+          hasAvatar={!!profile!.hasAvatar}
           model={model as unknown as TAvatarModel[]}
-          editAction={() => setChangeAvatarVisible(true)}
+          editAction={() => setChangeAvatarVisible?.(true)}
           onChangeFile={onChangeFileContext}
         />
-        {profile.isSSO ? (
+        {profile!.isSSO ? (
           <div className="badges-wrapper">
             <Badge
               className="sso-badge"
@@ -336,7 +335,7 @@ const MainProfile = (props: MainProfileProps) => {
             />
           </div>
         ) : null}
-        {profile.isLDAP ? (
+        {profile!.isLDAP ? (
           <div className="badges-wrapper">
             <Badge
               className="sso-badge"
@@ -358,10 +357,10 @@ const MainProfile = (props: MainProfileProps) => {
         <div className="rows-container">
           <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
           <div className="profile-block-field">
-            <Text fontWeight={600} truncate title={profile.displayName}>
-              {profile.displayName}
+            <Text fontWeight={600} truncate title={profile!.displayName}>
+              {profile!.displayName}
             </Text>
-            {profile.isSSO ? (
+            {profile!.isSSO ? (
               <>
                 <Badge
                   id="sso-badge-profile"
@@ -383,7 +382,7 @@ const MainProfile = (props: MainProfileProps) => {
               </>
             ) : null}
 
-            {profile.isLDAP ? (
+            {profile!.isLDAP ? (
               <>
                 <Badge
                   id="ldap-badge-profile"
@@ -405,12 +404,12 @@ const MainProfile = (props: MainProfileProps) => {
               </>
             ) : null}
 
-            {!profile.isSSO && !profile.isLDAP ? (
+            {!profile!.isSSO && !profile!.isLDAP ? (
               <IconButton
                 className="edit-button"
                 iconName={PencilOutlineReactSvgUrl}
                 size={12}
-                onClick={() => setChangeNameVisible(true)}
+                onClick={() => setChangeNameVisible?.(true)}
               />
             ) : null}
           </div>
@@ -426,7 +425,7 @@ const MainProfile = (props: MainProfileProps) => {
                 fontWeight={600}
                 truncate
               >
-                {profile.email}
+                {profile!.email}
               </Text>
               {withActivationBar ? (
                 <Tooltip
@@ -436,7 +435,7 @@ const MainProfile = (props: MainProfileProps) => {
                   place="bottom"
                 />
               ) : null}
-              {!profile.isSSO && !profile.isLDAP ? (
+              {!profile!.isSSO && !profile!.isLDAP ? (
                 <IconButton
                   className="edit-button email-edit-button"
                   iconName={PencilOutlineReactSvgUrl}
@@ -464,7 +463,7 @@ const MainProfile = (props: MainProfileProps) => {
           <StyledLabel as="div">{t("Common:Password")}</StyledLabel>
           <div className="profile-block-field profile-block-password">
             <Text fontWeight={600}>********</Text>
-            {!profile.isSSO && !profile.isLDAP ? (
+            {!profile!.isSSO && !profile!.isLDAP ? (
               <IconButton
                 className="edit-button password-edit-button"
                 iconName={PencilOutlineReactSvgUrl}
@@ -491,7 +490,7 @@ const MainProfile = (props: MainProfileProps) => {
                   ? "bottom"
                   : (directionY as TDirectionY)
               }
-              options={cultureNames}
+              options={cultureNames!}
               selectedOption={selectedLanguage}
               onSelect={onLanguageSelect}
               isDisabled={false}
@@ -511,7 +510,7 @@ const MainProfile = (props: MainProfileProps) => {
 
           <StyledLabel as="div">{t("Common:Type")}</StyledLabel>
           <div className="user-type-container">
-            <Text fontWeight={600} truncate title={profile.displayName}>
+            <Text fontWeight={600} truncate title={profile!.displayName}>
               {getUserTypeName(
                 isOwner,
                 isAdmin,
@@ -548,14 +547,14 @@ const MainProfile = (props: MainProfileProps) => {
                 fontWeight={600}
                 truncate
               >
-                {profile.displayName}
+                {profile!.displayName}
               </Text>
             </div>
             <IconButton
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
               size={12}
-              onClick={() => setChangeNameVisible(true)}
+              onClick={() => setChangeNameVisible?.(true)}
             />
           </div>
           <div className="mobile-profile-row">
@@ -573,7 +572,7 @@ const MainProfile = (props: MainProfileProps) => {
                     fontWeight={600}
                     truncate
                   >
-                    {profile.email}
+                    {profile!.email}
                   </Text>
                 </div>
                 {withActivationBar ? (
@@ -628,7 +627,7 @@ const MainProfile = (props: MainProfileProps) => {
               <Text as="div" className="mobile-profile-label">
                 {t("Common:Type")}
               </Text>
-              <Text fontWeight={600} truncate title={profile.displayName}>
+              <Text fontWeight={600} truncate title={profile!.displayName}>
                 {getUserTypeName(
                   isOwner,
                   isAdmin,
@@ -669,7 +668,7 @@ const MainProfile = (props: MainProfileProps) => {
               <ComboBox
                 className="language-combo-box"
                 directionY={isMobileHorizontalOrientation ? "bottom" : "both"}
-                options={cultureNames}
+                options={cultureNames!}
                 selectedOption={selectedLanguage}
                 onSelect={onLanguageSelect}
                 isDisabled={false}
@@ -693,12 +692,12 @@ const MainProfile = (props: MainProfileProps) => {
       {avatarEditorDialogVisible ? (
         <AvatarEditorDialog
           t={t}
-          visible={image.uploadedFile}
+          visible={image?.uploadedFile}
           image={image}
           isProfileUpload
           onChangeImage={onChangeIcon}
           onChangeFile={onChangeFileContext}
-          onClose={() => setAvatarEditorDialogVisible(false)}
+          onClose={() => setAvatarEditorDialogVisible?.(false)}
         />
       ) : null}
     </StyledWrapper>

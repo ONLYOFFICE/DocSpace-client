@@ -77,7 +77,13 @@ const copyRowSelectedText = (e: KeyboardEvent) => {
 const copyTileSelectedText = (selection: TSelection[]) => {
   let textToCopy = "";
   selection.forEach((item) => {
-    textToCopy += item.title;
+    const title =
+      "title" in item
+        ? item.title
+        : "userName" in item
+          ? item.userName
+          : item.name;
+    textToCopy += title;
     textToCopy += "\n";
   });
 

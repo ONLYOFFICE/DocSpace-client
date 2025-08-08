@@ -1625,10 +1625,8 @@ class FilesStore {
     this.filesController?.abort();
     this.roomsController?.abort();
 
-    runInAction(() => {
-      this.filesController = new AbortController();
-      this.roomsController = null;
-    });
+    this.filesController = new AbortController();
+    this.roomsController = null;
 
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
@@ -1875,6 +1873,12 @@ class FilesStore {
           UnauthorizedHttpCode,
         ].includes(err?.response?.status);
 
+        if (axios.isCancel(err)) {
+          console.log("Request canceled", err.message);
+
+          throw err;
+        }
+
         if (requestCounter > 0 && !isThirdPartyError && !isUserError) return;
 
         requestCounter++;
@@ -1895,10 +1899,6 @@ class FilesStore {
           }
 
           this.setIsErrorRoomNotAvailable(true);
-        } else if (axios.isCancel(err)) {
-          console.log("Request canceled", err.message);
-
-          throw err;
         } else {
           toastr.error(err);
           if (isThirdPartyError) {
@@ -1919,10 +1919,6 @@ class FilesStore {
       })
       .finally(() => {
         this.setIsLoadedFetchFiles(true);
-
-        runInAction(() => {
-          this.filesController = null;
-        });
 
         if (window?.DocSpace?.location?.state?.highlightFileId) {
           this.setHighlightFile({
@@ -1977,10 +1973,8 @@ class FilesStore {
     this.filesController?.abort();
     this.roomsController?.abort();
 
-    runInAction(() => {
-      this.roomsController = new AbortController();
-      this.filesController = null;
-    });
+    this.roomsController = new AbortController();
+    this.filesController = null;
 
     const request = () =>
       api.rooms

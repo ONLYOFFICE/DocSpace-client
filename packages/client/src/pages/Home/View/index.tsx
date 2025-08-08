@@ -277,6 +277,7 @@ const View = ({
           setCurrentView(view);
           setCurrentClientView(view);
         }
+
         setIsChangePageRequestRunning(false);
         setIsLoading(false);
       } catch (error) {

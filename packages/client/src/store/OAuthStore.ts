@@ -465,9 +465,9 @@ class OAuthStore {
   };
 
   fetchScopes = async () => {
-    await this.setJwtToken();
-
     try {
+      await this.setJwtToken();
+
       const scopes = await getScopeList();
 
       this.scopes = scopes;

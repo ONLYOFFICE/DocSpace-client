@@ -24,67 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import LoginSettings from "./login-settings";
+import SocialNetworks from "./social-networks";
+import ActiveSession from "./active-session";
 
-const StyledSectionBodyContent = styled.div`
-  width: 100%;
-  max-width: 660px;
+import { StyledWrapper } from "./Login.styled";
 
-  @media ${tablet} {
-    max-width: 100%;
-  }
+type LoginContentProps = {
+  tfaOn: boolean;
+  backupCodesCount: number;
+};
 
-  .notification-container {
-    display: flex;
-    flex-direction: column;
+const LoginContent = ({ tfaOn, backupCodesCount }: LoginContentProps) => {
+  return (
+    <StyledWrapper>
+      {tfaOn ? <LoginSettings backupCodesCount={backupCodesCount} /> : null}
+      <SocialNetworks />
+      <ActiveSession />
+    </StyledWrapper>
+  );
+};
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      div > label {
-        position: relative;
-        gap: 0;
-      }
-    }
-    margin-bottom: 12px;
-
-    .notification-container_description {
-      color: ${(props) =>
-        props.theme.profile.notifications.textDescriptionColor};
-    }
-  }
-
-  .badges-container {
-    margin-bottom: 24px;
-    p {
-      line-height: 20px;
-    }
-  }
-`;
-
-const StyledTextContent = styled.div`
-  margin-bottom: 12px;
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  p {
-    line-height: 16px;
-    padding-bottom: 8px;
-  }
-
-  .email-title {
-    padding-top: 2px;
-  }
-`;
-
-const StyledSectionHeader = styled.div`
-  display: flex;
-  align-items: center;
-  .arrow-button {
-    margin-inline-end: 16px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-`;
-export { StyledTextContent, StyledSectionBodyContent, StyledSectionHeader };
+export default LoginContent;

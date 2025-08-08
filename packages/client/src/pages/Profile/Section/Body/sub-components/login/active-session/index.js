@@ -26,22 +26,22 @@
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled from "styled-components";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
 
 import {
   LogoutSessionDialog,
   LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
 import SessionsTable from "./SessionsTable";
 
 const StyledWrapper = styled.div`
@@ -76,8 +76,6 @@ const ActiveSessions = ({
   logoutAllDialogVisible,
   setLogoutAllDialogVisible,
   removeAllExecptThis,
-  sessionsIsInit,
-  getSessions,
   sessions,
   viewAs,
   setViewAs,
@@ -86,10 +84,6 @@ const ActiveSessions = ({
   platformModalData,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    getSessions();
-  }, []);
 
   useViewEffect({
     view: viewAs,
@@ -149,8 +143,6 @@ const ActiveSessions = ({
       {t("Profile:LogoutAllActiveSessionsDescription")}
     </Text>
   );
-
-  if (!sessionsIsInit) return <ProfileFooterLoader isProfileFooter />;
 
   return (
     <StyledWrapper>
@@ -216,11 +208,9 @@ export default inject(({ settingsStore, setup }) => {
     logoutAllDialogVisible,
     setLogoutAllDialogVisible,
     removeAllExecptThis,
-    sessionsIsInit,
     sessions,
     viewAs,
     setViewAs,
-    getSessions,
     setSessions,
     platformModalData,
   } = setup;
@@ -233,11 +223,9 @@ export default inject(({ settingsStore, setup }) => {
     logoutAllDialogVisible,
     setLogoutAllDialogVisible,
     removeAllExecptThis,
-    sessionsIsInit,
     sessions,
     viewAs,
     setViewAs,
-    getSessions,
     setSessions,
     currentDeviceType,
     platformModalData,

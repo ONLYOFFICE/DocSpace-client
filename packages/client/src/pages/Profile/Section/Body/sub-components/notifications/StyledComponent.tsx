@@ -25,29 +25,68 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+
 import { tablet } from "@docspace/shared/utils";
 
-export const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: ${(props) => props.theme.profile.themePreview.border};
-  border-radius: 12px;
-  height: 284px;
-  width: 318px;
-  overflow: hidden;
+const StyledSectionBodyContent = styled.div`
+  width: 100%;
+  max-width: 660px;
 
   @media ${tablet} {
-    width: 100%;
+    max-width: 100%;
   }
 
-  .card-header {
-    padding: 11px 19px;
-    border-bottom: ${(props) => props.theme.profile.themePreview.border};
-    line-height: 20px;
+  .notification-container {
+    display: flex;
+    flex-direction: column;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      div > label {
+        position: relative;
+        gap: 0;
+      }
+    }
+    margin-bottom: 12px;
+
+    .notification-container_description {
+      color: ${(props) =>
+        props.theme.profile.notifications.textDescriptionColor};
+    }
   }
 
-  .floating-btn {
-    bottom: 100px !important;
-    inset-inline-end: 16px !important;
+  .badges-container {
+    margin-bottom: 24px;
+    p {
+      line-height: 20px;
+    }
   }
 `;
+
+const StyledTextContent = styled.div`
+  margin-bottom: 12px;
+  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+
+  p {
+    line-height: 16px;
+    padding-bottom: 8px;
+  }
+
+  .email-title {
+    padding-top: 2px;
+  }
+`;
+
+const StyledSectionHeader = styled.div`
+  display: flex;
+  align-items: center;
+  .arrow-button {
+    margin-inline-end: 16px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+`;
+
+export { StyledTextContent, StyledSectionBodyContent, StyledSectionHeader };

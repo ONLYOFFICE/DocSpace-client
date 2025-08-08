@@ -243,15 +243,13 @@ const AvatarEditorDialog = (props) => {
   );
 };
 
-export default inject(({ peopleStore, settingsStore }) => {
+export default inject(({ peopleStore, settingsStore, userStore }) => {
   const { targetUserStore } = peopleStore;
   const { maxImageUploadSize } = settingsStore;
 
-  const {
-    targetUser: profile,
-    updateCreatedAvatar,
-    setHasAvatar,
-  } = targetUserStore;
+  const { user: profile } = userStore;
+
+  const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
 
   return {
     profile,

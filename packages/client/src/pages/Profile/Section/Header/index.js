@@ -61,7 +61,6 @@ const Header = (props) => {
     isCollaborator,
 
     profile,
-    isMe,
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeAvatarVisible,
@@ -164,8 +163,7 @@ const Header = (props) => {
   return (
     <StyledHeader
       showContextButton={
-        (isAdmin && !profile?.isOwner) ||
-        (isMe && !profile?.isLDAP && !profile?.isSSO)
+        (isAdmin && !profile?.isOwner) || (!profile?.isLDAP && !profile?.isSSO)
       }
       isVisitor={isVisitor || isCollaborator}
     >
@@ -184,7 +182,7 @@ const Header = (props) => {
       </div>
       <div className="action-button">
         {(isAdmin && !profile?.isOwner) ||
-        (isMe && !profile?.isLDAP && !profile?.isSSO) ? (
+        (!profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
             directionX="left"
             title={t("Common:Actions")}
@@ -235,8 +233,6 @@ export default inject(
 
     const { targetUserStore, dialogStore } = peopleStore;
 
-    const { targetUser, isMe } = targetUserStore;
-
     const { showProfileLoader } = clientLoadingStore;
 
     const { profileClicked } = profileActionsStore;
@@ -254,9 +250,7 @@ export default inject(
       isVisitor,
       isCollaborator,
 
-      profile: targetUser,
       userId: user?.id,
-      isMe,
       setChangeEmailVisible,
       setChangePasswordVisible,
       setChangeAvatarVisible,

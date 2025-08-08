@@ -24,27 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
-import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
 
-import StyledWrapper from "./styled-file-management";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+
+import styles from "./FileManagement.module.scss";
+
+type FileManagementProps = {
+  logoText: string;
+
+  storeOriginalFiles: boolean;
+  setStoreOriginal: FilesSettingsStore["setStoreOriginal"];
+
+  confirmDelete: boolean;
+  setConfirmDelete: FilesSettingsStore["setConfirmDelete"];
+
+  keepNewFileName: boolean;
+  setKeepNewFileName: FilesSettingsStore["setKeepNewFileName"];
+
+  openEditorInSameTab: boolean;
+  setOpenEditorInSameTab: FilesSettingsStore["setOpenEditorInSameTab"];
+
+  displayFileExtension: boolean;
+  setDisplayFileExtension: FilesSettingsStore["setDisplayFileExtension"];
+
+  hideConfirmCancelOperation: boolean;
+  setHideConfirmCancelOperation: FilesSettingsStore["setHideConfirmCancelOperation"];
+};
 
 const FileManagement = ({
-  storeOriginalFiles,
-  confirmDelete,
+  logoText,
 
+  storeOriginalFiles,
   setStoreOriginal,
 
+  confirmDelete,
   setConfirmDelete,
-
-  showTitle,
-
-  showAdminSettings,
 
   keepNewFileName,
   setKeepNewFileName,
@@ -54,21 +75,11 @@ const FileManagement = ({
 
   displayFileExtension,
   setDisplayFileExtension,
-  getFilesSettings,
-  logoText,
+
   hideConfirmCancelOperation,
   setHideConfirmCancelOperation,
-}) => {
-  const { t, ready } = useTranslation(["FilesSettings", "Common"]);
-
-  const getData = () => getFilesSettings();
-
-  useEffect(() => {
-    const prefix =
-      window.DocSpace.location.pathname.includes("portal-settings");
-
-    if (prefix) getData();
-  }, []);
+}: FileManagementProps) => {
+  const { t } = useTranslation(["FilesSettings", "Common"]);
 
   const onChangeOriginalCopy = React.useCallback(() => {
     setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
@@ -95,31 +106,30 @@ const FileManagement = ({
     setOpenEditorInSameTab(!openEditorInSameTab);
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
-  if (!ready) return <SettingsCommonSkeleton />;
   return (
-    <StyledWrapper showTitle={showTitle} hideAdminSettings={!showAdminSettings}>
-      <div className="settings-section">
-        <div className="toggle-btn-wrapper">
+    <div className={styles.styledWrapper}>
+      <div className={styles.settingsSection}>
+        <div className={styles.toggleBtnWrapper}>
           <ToggleButton
-            className="ask-again toggle-btn"
+            className={classNames("ask-again", styles.toggleBtn)}
             onChange={onChangeKeepNewFileName}
             isChecked={keepNewFileName}
           />
           <Text>{t("Common:DontAskAgain")}</Text>
         </div>
 
-        <div className="toggle-btn-wrapper">
+        <div className={styles.toggleBtnWrapper}>
           <ToggleButton
-            className="save-copy-original toggle-btn"
+            className={classNames("save-copy-original ", styles.toggleBtn)}
             onChange={onChangeOriginalCopy}
             isChecked={storeOriginalFiles}
           />
           <Text>{t("OriginalCopy")}</Text>
         </div>
 
-        <div className="toggle-btn-wrapper">
+        <div className={styles.toggleBtnWrapper}>
           <ToggleButton
-            className="display-notification toggle-btn"
+            className={classNames("display-notification", styles.toggleBtn)}
             onChange={onChangeDeleteConfirm}
             isChecked={confirmDelete}
           />
@@ -130,9 +140,9 @@ const FileManagement = ({
           </Text>
         </div>
 
-        <div className="toggle-btn-wrapper">
+        <div className={styles.toggleBtnWrapper}>
           <ToggleButton
-            className="open-same-tab toggle-btn"
+            className={classNames("open-same-tab", styles.toggleBtn)}
             onChange={onChangeOpenEditorInSameTab}
             isChecked={openEditorInSameTab}
           />
@@ -143,29 +153,32 @@ const FileManagement = ({
           </Text>
         </div>
 
-        <div className="toggle-btn-wrapper">
+        <div className={styles.toggleBtnWrapper}>
           <ToggleButton
-            className="display-file-extension toggle-btn"
+            className={classNames("display-file-extension", styles.toggleBtn)}
             onChange={onChangeDisplayFileExtension}
             isChecked={displayFileExtension}
           />
           <Text>{t("DisplayFileExtension")}</Text>
         </div>
-        <div className="toggle-btn-wrapper">
+        <div className={styles.toggleBtnWrapper}>
           <ToggleButton
-            className="cancelletion-notification toggle-btn"
+            className={classNames(
+              "cancelletion-notification",
+              styles.toggleBtn,
+            )}
             onChange={onChangeCancellationNotification}
             isChecked={hideConfirmCancelOperation}
           />
           <Text>{t("CancellaionNotification")}</Text>
         </div>
       </div>
-    </StyledWrapper>
+    </div>
   );
 };
 
 export default inject(
-  ({ filesSettingsStore, treeFoldersStore, settingsStore }) => {
+  ({ filesSettingsStore, treeFoldersStore, settingsStore }: TStore) => {
     const {
       storeOriginalFiles,
       confirmDelete,
@@ -185,7 +198,6 @@ export default inject(
 
       displayFileExtension,
       setDisplayFileExtension,
-      getFilesSettings,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,
     } = filesSettingsStore;
@@ -215,7 +227,6 @@ export default inject(
 
       displayFileExtension,
       setDisplayFileExtension,
-      getFilesSettings,
       logoText,
       hideConfirmCancelOperation,
       setHideConfirmCancelOperation,

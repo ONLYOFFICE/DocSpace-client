@@ -27,7 +27,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
 
-import { useAnimation } from "../../hooks/useAnimation";
+import { useAnimation, AnimationEvents } from "../../hooks/useAnimation";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
@@ -37,11 +37,6 @@ import { useViewTab } from "./hooks/useViewTab";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
 import { OFFSET_RIGHT, OFFSET_LEFT } from "./Tabs.constants";
 import styles from "./Tabs.module.scss";
-
-export const TabsEvent = {
-  START_ANIMATION: "START_ANIMATION",
-  END_ANIMATION: "END_ANIMATION",
-};
 
 const PrimaryTabs = (props: TabsProps) => {
   const {
@@ -67,6 +62,11 @@ const PrimaryTabs = (props: TabsProps) => {
 
   const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
   const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
+
+  const [selectedContent, setSelectedContent] = React.useState(
+    items[selectedItemIndex]?.content,
+  );
+  const [requestRunning, setRequestRunning] = React.useState(false);
 
   // Use same animation logic as ArticleItem
   const {
@@ -129,10 +129,16 @@ const PrimaryTabs = (props: TabsProps) => {
   );
 
   useEffect(() => {
+    if (!requestRunning) {
+      setSelectedContent(items[selectedItemIndex]?.content);
+    }
+  }, [selectedItemIndex, items, requestRunning]);
+
+  useEffect(() => {
     scrollToTab(selectedItemIndex);
   }, [selectedItemIndex, items, scrollToTab]);
 
-  const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
+  const setSelectedItem = async (selectedTabItem: TTabItem, index: number) => {
     // Trigger animation if withAnimation is true
     if (withAnimation) {
       triggerAnimation();
@@ -140,6 +146,16 @@ const PrimaryTabs = (props: TabsProps) => {
 
     // setCurrentItem(index);
     onSelect?.(selectedTabItem);
+
+    if (selectedTabItem.onClick && withAnimation) {
+      setRequestRunning(true);
+
+      await selectedTabItem.onClick();
+
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+
+      setRequestRunning(false);
+    }
 
     scrollToTab(index);
   };
@@ -168,7 +184,7 @@ const PrimaryTabs = (props: TabsProps) => {
             )}
             onClick={() => {
               if (index === selectedItemIndex) return;
-              item.onClick?.();
+              if (!withAnimation) item.onClick?.();
               setSelectedItem(item, index);
             }}
             data-testid={item.name}
@@ -246,10 +262,8 @@ const PrimaryTabs = (props: TabsProps) => {
       {withoutStickyIntend ? null : (
         <div className={classNames(styles.stickyIndent, "sticky-indent")} />
       )}
-      {items[selectedItemIndex]?.content ? (
-        <div className={`${styles.tabsBody} tabs-body`}>
-          {items[selectedItemIndex].content}
-        </div>
+      {selectedContent ? (
+        <div className={`${styles.tabsBody} tabs-body`}>{selectedContent}</div>
       ) : null}
     </div>
   );

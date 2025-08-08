@@ -25,25 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
-const DailyFeedContainer = ({
+import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+
+type UsefulTipsContainerProps = {
+  t: TFunction;
+  changeSubscription?: TargetUserStore["changeSubscription"];
+  usefulTipsSubscription?: TargetUserStore["usefulTipsSubscription"];
+  textProps: Record<string, unknown>;
+  textDescriptionsProps: Record<string, unknown>;
+};
+
+const UsefulTipsContainer = ({
   t,
-  dailyFeedSubscriptions,
   changeSubscription,
+  usefulTipsSubscription,
   textProps,
   textDescriptionsProps,
-}) => {
-  const onChangeEmailSubscription = async (e) => {
+}: UsefulTipsContainerProps) => {
+  const onChangeEmailSubscription = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const checked = e.currentTarget.checked;
     try {
-      await changeSubscription(NotificationsType.DailyFeed, checked);
+      await changeSubscription?.(NotificationsType.UsefulTips, checked);
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     }
   };
 
@@ -51,28 +64,28 @@ const DailyFeedContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("DailyFeed", { productName: t("Common:ProductName") })}
+          {t("UsefulTips", { productName: t("Common:ProductName") })}
         </Text>
         <ToggleButton
-          className="daily-feed"
+          className="useful-tips toggle-btn"
           onChange={onChangeEmailSubscription}
-          isChecked={dailyFeedSubscriptions}
+          isChecked={usefulTipsSubscription}
         />
       </div>
       <Text {...textDescriptionsProps}>
-        {t("DailyFeedDescription", { productName: t("Common:ProductName") })}
+        {t("UsefulTipsDescription", { productName: t("Common:ProductName") })}
       </Text>
     </div>
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ peopleStore }: TStore) => {
   const { targetUserStore } = peopleStore;
 
-  const { changeSubscription, dailyFeedSubscriptions } = targetUserStore;
+  const { changeSubscription, usefulTipsSubscription } = targetUserStore!;
 
   return {
     changeSubscription,
-    dailyFeedSubscriptions,
+    usefulTipsSubscription,
   };
-})(observer(DailyFeedContainer));
+})(observer(UsefulTipsContainer));

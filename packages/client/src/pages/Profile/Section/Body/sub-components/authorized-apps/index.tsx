@@ -20,12 +20,12 @@ import EmptyScreen from "./sub-components/EmptyScreen";
 
 const AuthorizedApps = ({
   consents,
-  fetchConsents,
+
   viewAs,
   setViewAs,
   currentDeviceType,
   infoDialogVisible,
-  fetchScopes,
+
   revokeDialogVisible,
   setRevokeDialogVisible,
   selection,
@@ -34,15 +34,6 @@ const AuthorizedApps = ({
   logoText,
 }: AuthorizedAppsProps) => {
   const { t } = useTranslation(["OAuth"]);
-
-  const getConsentList = React.useCallback(async () => {
-    fetchScopes?.();
-    await fetchConsents?.();
-  }, [fetchConsents, fetchScopes]);
-
-  React.useEffect(() => {
-    getConsentList();
-  }, [getConsentList]);
 
   useViewEffect({
     view: viewAs,
@@ -105,14 +96,11 @@ export default inject(
   }) => {
     const {
       consents,
-      fetchConsents,
-      fetchScopes,
       viewAs,
       setViewAs,
       infoDialogVisible,
       revokeDialogVisible,
       setRevokeDialogVisible,
-
       selection,
       bufferSelection,
       revokeClient,
@@ -122,12 +110,10 @@ export default inject(
 
     return {
       consents,
-      fetchConsents,
       viewAs,
       setViewAs,
       currentDeviceType,
       infoDialogVisible,
-      fetchScopes,
       revokeDialogVisible,
       setRevokeDialogVisible,
       selection,

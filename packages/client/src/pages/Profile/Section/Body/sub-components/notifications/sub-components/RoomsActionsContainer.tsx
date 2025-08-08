@@ -24,26 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
+
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { inject, observer } from "mobx-react";
-
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
-const UsefulTipsContainer = ({
+import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
+import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+
+type RoomsActionsContainerProps = {
+  t: TFunction;
+  badgesSubscription?: TargetUserStore["badgesSubscription"];
+  changeSubscription?: TargetUserStore["changeSubscription"];
+  fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
+  resetTreeItemCount?: TreeFoldersStore["resetTreeItemCount"];
+  textProps: Record<string, unknown>;
+  textDescriptionsProps: Record<string, unknown>;
+};
+
+const RoomsActionsContainer = ({
   t,
+  badgesSubscription,
   changeSubscription,
-  usefulTipsSubscription,
+  fetchTreeFolders,
+  resetTreeItemCount,
   textProps,
   textDescriptionsProps,
-}) => {
-  const onChangeEmailSubscription = async (e) => {
+}: RoomsActionsContainerProps) => {
+  const onChangeBadgeSubscription = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const checked = e.currentTarget.checked;
+    !checked && resetTreeItemCount?.();
+
     try {
-      await changeSubscription(NotificationsType.UsefulTips, checked);
+      await changeSubscription?.(NotificationsType.Badges, checked);
+      await fetchTreeFolders?.();
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     }
   };
 
@@ -51,28 +72,30 @@ const UsefulTipsContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("UsefulTips", { productName: t("Common:ProductName") })}
+          {t("FileActivityNotify", {
+            sectionName: t("Common:Rooms"),
+          })}
         </Text>
         <ToggleButton
-          className="useful-tips toggle-btn"
-          onChange={onChangeEmailSubscription}
-          isChecked={usefulTipsSubscription}
+          className="rooms-actions"
+          onChange={onChangeBadgeSubscription}
+          isChecked={badgesSubscription}
         />
       </div>
-      <Text {...textDescriptionsProps}>
-        {t("UsefulTipsDescription", { productName: t("Common:ProductName") })}
-      </Text>
+      <Text {...textDescriptionsProps}>{t("ActionsWithFilesDescription")}</Text>
     </div>
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
   const { targetUserStore } = peopleStore;
-
-  const { changeSubscription, usefulTipsSubscription } = targetUserStore;
+  const { fetchTreeFolders, resetTreeItemCount } = treeFoldersStore;
+  const { changeSubscription, badgesSubscription } = targetUserStore!;
 
   return {
+    resetTreeItemCount,
+    fetchTreeFolders,
     changeSubscription,
-    usefulTipsSubscription,
+    badgesSubscription,
   };
-})(observer(UsefulTipsContainer));
+})(observer(RoomsActionsContainer));

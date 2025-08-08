@@ -40,27 +40,27 @@ import {
   getLoginLink,
 } from "@docspace/shared/utils/common";
 import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { AuthStore } from "@docspace/shared/store/AuthStore";
 
-import { StyledWrapper } from "./styled-social-networks";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
-const SocialNetworks = (props) => {
+import { StyledWrapper } from "./SocialNetworks.styled";
+
+type SocialNetworksProps = {
+  providers?: UsersStore["providers"];
+  setProviders?: UsersStore["setProviders"];
+  capabilities?: AuthStore["capabilities"];
+};
+
+const SocialNetworks = (props: SocialNetworksProps) => {
   const { t } = useTranslation(["Profile", "Common"]);
-  const { providers, setProviders, getCapabilities, capabilities } = props;
+  const { providers, setProviders, capabilities } = props;
 
-  const fetchData = async () => {
-    try {
-      const [newProviders] = await Promise.all([
-        getAuthProviders(),
-        getCapabilities(),
-      ]);
-
-      setProviders(newProviders);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const linkAccount = async (providerName, link, e) => {
+  const linkAccount = async (
+    providerName: string,
+    link: string,
+    e: React.MouseEvent,
+  ) => {
     e.preventDefault();
 
     try {
@@ -84,26 +84,28 @@ const SocialNetworks = (props) => {
         }),
       );
 
-      tokenGetterWin.location.href = getLoginLink(token, code);
+      if (tokenGetterWin) {
+        tokenGetterWin.location.href = getLoginLink(token, code);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const unlinkAccount = (providerName) => {
-    unlinkOAuth(providerName).then(() => {
+  const unlinkAccount = (providerName: string) => {
+    unlinkOAuth(providerName)?.then(() => {
       getAuthProviders().then((providersAuth) => {
-        setProviders(providersAuth);
+        setProviders?.(providersAuth);
         toastr.success(t("ProviderSuccessfullyDisconnected"));
       });
     });
   };
 
-  const loginCallback = (profile) => {
+  const loginCallback = (profile: unknown) => {
     linkOAuth(profile)
-      .then(() => {
+      ?.then(() => {
         getAuthProviders().then((providersAuth) => {
-          setProviders(providersAuth);
+          setProviders?.(providersAuth);
           toastr.success(t("ProviderSuccessfullyConnected"));
         });
       })
@@ -118,20 +120,22 @@ const SocialNetworks = (props) => {
   };
 
   useEffect(() => {
-    fetchData();
     window.loginCallback = loginCallback;
 
-    return () => (window.loginCallback = null);
+    return () => {
+      window.loginCallback = null;
+    };
   }, []);
 
   const providerButtons =
     providers &&
     providers.map((item) => {
-      if (!PROVIDERS_DATA[item.provider]) return;
-      const { icon, label, iconOptions } = PROVIDERS_DATA[item.provider];
+      if (!PROVIDERS_DATA[item.provider as keyof typeof PROVIDERS_DATA]) return;
+      const { icon, label, iconOptions } =
+        PROVIDERS_DATA[item.provider as keyof typeof PROVIDERS_DATA];
       if (!icon || !label) return null;
 
-      const onClick = (e) => {
+      const onClick = (e: React.MouseEvent) => {
         if (item.linked) {
           unlinkAccount(item.provider);
         } else {
@@ -155,7 +159,7 @@ const SocialNetworks = (props) => {
 
   if (!capabilities?.oauthEnabled) return null;
 
-  if (providers.length === 0) return null;
+  if (providers?.length === 0) return null;
 
   return (
     <StyledWrapper>
@@ -167,15 +171,14 @@ const SocialNetworks = (props) => {
   );
 };
 
-export default inject(({ authStore, peopleStore }) => {
+export default inject(({ authStore, peopleStore }: TStore) => {
   const { usersStore } = peopleStore;
   const { providers, setProviders } = usersStore;
-  const { getCapabilities, capabilities } = authStore;
+  const { capabilities } = authStore;
 
   return {
     providers,
     setProviders,
-    getCapabilities,
     capabilities,
   };
 })(observer(SocialNetworks));

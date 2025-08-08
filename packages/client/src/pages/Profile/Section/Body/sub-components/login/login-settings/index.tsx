@@ -29,18 +29,28 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { unlinkTfaApp } from "@docspace/shared/api/settings";
+import { TUser } from "@docspace/shared/api/people/types";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
+
 import {
   ResetApplicationDialog,
   BackupCodesDialog,
 } from "SRC_DIR/components/dialogs";
 
-import { StyledWrapper } from "./styled-login-settings";
+import { StyledWrapper } from "./LoginSettings.styled";
 
-const LoginSettings = (props) => {
+type LoginSettingsProps = {
+  profile?: TUser;
+
+  backupCodes?: unknown;
+  backupCodesCount: number;
+  setBackupCodes?: unknown;
+};
+
+const LoginSettings = (props: LoginSettingsProps) => {
   const { t } = useTranslation(["Profile", "Settings", "Common"]);
 
   const {
@@ -75,12 +85,12 @@ const LoginSettings = (props) => {
           className="button"
           label={t("ShowBackupCodes")}
           onClick={() => setBackupCodesDialogVisible(true)}
-          size="small"
+          size={ButtonSize.small}
         />
         <Link
           fontWeight="600"
           isHovered
-          type="action"
+          type={LinkType.action}
           onClick={() => setResetAppDialogVisible(true)}
         >
           {t("Common:ResetApplication")}
@@ -92,7 +102,7 @@ const LoginSettings = (props) => {
           visible={resetAppDialogVisible}
           onClose={() => setResetAppDialogVisible(false)}
           resetTfaApp={unlinkTfaApp}
-          id={profile.id}
+          id={(profile as TUser | null)?.id}
         />
       ) : null}
       {backupCodesDialogVisible ? (
@@ -108,10 +118,8 @@ const LoginSettings = (props) => {
   );
 };
 
-export default inject(({ tfaStore, peopleStore }) => {
-  const { targetUserStore } = peopleStore;
-
-  const { targetUser: profile } = targetUserStore;
+export default inject(({ tfaStore, userStore }: TStore) => {
+  const { user: profile } = userStore!;
 
   const { backupCodes, setBackupCodes } = tfaStore;
 

@@ -24,55 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
+import styled from "styled-components";
 
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
-import { NotificationsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { mobile } from "@docspace/shared/utils";
 
-const RoomsActivityContainer = ({
-  t,
-  roomsActivitySubscription,
-  changeSubscription,
-  textProps,
-  textDescriptionsProps,
-}) => {
-  const onChangeEmailSubscription = async (e) => {
-    const checked = e.currentTarget.checked;
-    try {
-      await changeSubscription(NotificationsType.RoomsActivity, checked);
-    } catch (err) {
-      toastr.error(err);
+export const StyledWrapper = styled.div`
+  max-width: 660px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .description {
+    color: ${(props) => props.theme.profile.login.textColor};
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    @media ${mobile} {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+
+      .button {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+      }
     }
-  };
-
-  return (
-    <div className="notification-container">
-      <div className="row">
-        <Text {...textProps} className="subscription-title">
-          {t("RoomUpdateNotify", {
-            sectionName: t("Common:Rooms"),
-          })}
-        </Text>
-        <ToggleButton
-          className="rooms-activity toggle-btn"
-          onChange={onChangeEmailSubscription}
-          isChecked={roomsActivitySubscription}
-        />
-      </div>
-      <Text {...textDescriptionsProps}>{t("RoomsActivityDescription")}</Text>
-    </div>
-  );
-};
-
-export default inject(({ peopleStore }) => {
-  const { targetUserStore } = peopleStore;
-
-  const { roomsActivitySubscription, changeSubscription } = targetUserStore;
-
-  return {
-    roomsActivitySubscription,
-    changeSubscription,
-  };
-})(observer(RoomsActivityContainer));
+  }
+`;

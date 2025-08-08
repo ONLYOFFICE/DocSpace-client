@@ -24,55 +24,88 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
-import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
-import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { isMobileOnly } from "react-device-detect";
+import { useTheme } from "styled-components";
+import { TFunction } from "i18next";
 
-import { Avatar } from "@docspace/shared/components/avatar";
-
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { Link, LinkTarget } from "@docspace/shared/components/link";
+import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Badge } from "@docspace/shared/components/badge";
-import { isMobileOnly } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
-import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import {
   getUserType,
   convertLanguage,
   getUserTypeName,
   getUserTypeDescription,
 } from "@docspace/shared/utils/common";
+import { isMobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import { TDirectionY } from "@docspace/shared/types";
+import { TUser } from "@docspace/shared/api/people/types";
+
+import SendClockReactSvgUrl from "PUBLIC_DIR/images/send.clock.react.svg?url";
+import PencilOutlineReactSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
+import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
-
-import { HelpButton } from "@docspace/shared/components/help-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
-import { isMobile } from "@docspace/shared/utils";
-import { useTheme } from "styled-components";
-import { globalColors } from "@docspace/shared/themes";
-import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
+import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
+import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+
 import {
   StyledWrapper,
   StyledInfo,
   StyledLabel,
   StyledAvatarWrapper,
   getDropdownHoverRules,
-} from "./styled-main-profile";
+} from "./MainProfile.styled";
 
-const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
+const TooltipContent = ({ content }: { content: React.ReactNode }) => (
+  <Text fontSize="12px">{content}</Text>
+);
 
-const MainProfile = (props) => {
+type MainProfileProps = {
+  profile: TUser;
+  culture: string;
+  becometranslatorUrl: string;
+  cultureNames: TOption[];
+
+  setChangeEmailVisible: (visible: boolean) => void;
+  setChangePasswordVisible: (visible: boolean) => void;
+  setChangeNameVisible: (visible: boolean) => void;
+  setChangeAvatarVisible: (visible: boolean) => void;
+  withActivationBar: boolean;
+  sendActivationLink: () => Promise<void>;
+  updateProfileCulture: (userId: string, culture: string) => Promise<void>;
+  documentationEmail: string;
+  setDialogData: TargetUserStore["setDialogData"];
+  getProfileModel: TargetUserStore["getProfileModel"];
+  avatarEditorDialogVisible: AvatarEditorDialogStore["avatarEditorDialogVisible"];
+  setAvatarEditorDialogVisible: AvatarEditorDialogStore["setAvatarEditorDialogVisible"];
+  onChangeFile: AvatarEditorDialogStore["onChangeFile"];
+  image: AvatarEditorDialogStore["image"];
+  setImage: AvatarEditorDialogStore["setImage"];
+};
+
+const MainProfile = (props: MainProfileProps) => {
   const { t } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
 
   const {
-    theme,
     profile,
     culture,
     becometranslatorUrl,
@@ -84,7 +117,6 @@ const MainProfile = (props) => {
     setChangeAvatarVisible,
     withActivationBar,
     sendActivationLink,
-    currentColorScheme,
     updateProfileCulture,
     documentationEmail,
     setDialogData,
@@ -96,7 +128,8 @@ const MainProfile = (props) => {
     setImage,
   } = props;
 
-  const styleContainerRef = useRef(null);
+  const styleContainerRef = useRef<HTMLDivElement>(null);
+  const comboBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!styleContainerRef.current) return;
@@ -108,23 +141,25 @@ const MainProfile = (props) => {
     const rules = getDropdownHoverRules();
 
     rules.forEach((rule, index) => {
-      sheet.insertRule(rule, index);
+      if (sheet) {
+        sheet.insertRule(rule, index);
+      }
     });
 
-    return () => styleElement.parentNode?.removeChild(styleElement);
+    return () => {
+      styleElement.parentNode?.removeChild(styleElement);
+    };
   }, []);
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
   const [directionY, setDirectionY] = useState("both");
-  const { interfaceDirection } = useTheme();
+  const { interfaceDirection, isBase } = useTheme();
   const dirTooltip = interfaceDirection === "rtl" ? "left" : "right";
 
   const isMobileHorizontalOrientation = isMobile() && horizontalOrientation;
 
   const { isOwner, isAdmin, isRoomAdmin, isCollaborator } = profile;
-
-  const comboBoxRef = useRef(null);
 
   const updateDropDownMaxHeight = () => {
     if (comboBoxRef.current) {
@@ -149,7 +184,7 @@ const MainProfile = (props) => {
     updateDropDownMaxHeight();
   };
 
-  const onChangeFileContext = (e) => {
+  const onChangeFileContext = (e?: unknown) => {
     onChangeFile(e, t);
   };
 
@@ -192,7 +227,7 @@ const MainProfile = (props) => {
 
   const model = getProfileModel(t);
 
-  const onChangeIcon = (icon) => {
+  const onChangeIcon = (icon: unknown) => {
     setImage(icon);
   };
 
@@ -202,18 +237,16 @@ const MainProfile = (props) => {
 
   const tooltipLanguage = (
     <Text as="div" fontSize="12px">
-      <Trans t={t} i18nKey="NotFoundLanguage" ns="Common">
-        "In case you cannot find your language in the list of the available
-        ones, feel free to write to us at
-        <Link
-          href={`mailto:${documentationEmail}`}
-          isHovered
-          color={currentColorScheme?.main?.accent}
-        >
-          {{ supportEmail: documentationEmail }}
-        </Link>
-        to take part in the translation and get up to 1 year free of charge."
-      </Trans>
+      <Trans
+        t={t}
+        i18nKey="NotFoundLanguage"
+        ns="Common"
+        values={{ supportEmail: documentationEmail }}
+        components={{
+          1: <Link href={`mailto:${documentationEmail}`} isHovered />,
+        }}
+      />
+
       {becometranslatorUrl ? (
         <Link
           style={{
@@ -225,7 +258,7 @@ const MainProfile = (props) => {
           isBold
           fontSize="13px"
           href={becometranslatorUrl}
-          target="_blank"
+          target={LinkTarget.blank}
         >
           {t("Common:LearnMore")}
         </Link>
@@ -236,19 +269,25 @@ const MainProfile = (props) => {
   const { cultureName, currentCulture } = profile;
   const language = convertLanguage(cultureName || currentCulture || culture);
 
-  const selectedLanguage = cultureNames.find((item) => item.key === language) ||
-    cultureNames.find((item) => item.key === culture) || {
+  const selectedLanguage = cultureNames.find(
+    (item: TOption) => item.key === language,
+  ) ||
+    cultureNames.find((item: TOption) => item.key === culture) || {
       key: language,
       label: "",
     };
 
-  const onLanguageSelect = (newLanguage) => {
+  const onLanguageSelect = (newLanguage: TOption) => {
     if (profile.cultureName === newLanguage.key) return;
 
     updateProfileCulture(profile.id, newLanguage.key)
       .then(() => window.location.reload())
-      .catch((error) => {
-        toastr.error(error && error.message ? error.message : error);
+      .catch((error: unknown) => {
+        toastr.error(
+          error && (error as { message: string }).message
+            ? (error as { message: string }).message
+            : (error as string),
+        );
       });
   };
 
@@ -259,8 +298,8 @@ const MainProfile = (props) => {
       <StyledAvatarWrapper className="avatar-wrapper">
         <Avatar
           className="avatar"
-          size="max"
-          role={role}
+          size={AvatarSize.max}
+          role={role as unknown as AvatarRole}
           source={userAvatar}
           userName={profile.displayName}
           editing={!profile.isLDAP}
@@ -268,7 +307,6 @@ const MainProfile = (props) => {
           model={model}
           editAction={() => setChangeAvatarVisible(true)}
           onChangeFile={onChangeFileContext}
-          currentColorScheme={currentColorScheme}
         />
         {profile.isSSO ? (
           <div className="badges-wrapper">
@@ -277,9 +315,7 @@ const MainProfile = (props) => {
               label={t("Common:SSO")}
               color={globalColors.white}
               backgroundColor={
-                theme.isBase
-                  ? globalColors.secondGreen
-                  : globalColors.secondGreenDark
+                isBase ? globalColors.secondGreen : globalColors.secondGreenDark
               }
               fontSize="9px"
               fontWeight={800}
@@ -294,7 +330,7 @@ const MainProfile = (props) => {
               label={t("Common:LDAP")}
               color={globalColors.white}
               backgroundColor={
-                theme.isBase
+                isBase
                   ? globalColors.secondPurple
                   : globalColors.secondPurpleDark
               }
@@ -305,10 +341,7 @@ const MainProfile = (props) => {
           </div>
         ) : null}
       </StyledAvatarWrapper>
-      <StyledInfo
-        withActivationBar={withActivationBar}
-        currentColorScheme={currentColorScheme}
-      >
+      <StyledInfo withActivationBar={withActivationBar}>
         <div className="rows-container">
           <StyledLabel as="div">{t("Common:Name")}</StyledLabel>
           <div className="profile-block-field">
@@ -323,7 +356,7 @@ const MainProfile = (props) => {
                   label={t("Common:SSO")}
                   color={globalColors.white}
                   backgroundColor={
-                    theme.isBase
+                    isBase
                       ? globalColors.secondGreen
                       : globalColors.secondGreenDark
                   }
@@ -345,7 +378,7 @@ const MainProfile = (props) => {
                   label={t("Common:LDAP")}
                   color={globalColors.white}
                   backgroundColor={
-                    theme.isBase
+                    isBase
                       ? globalColors.secondPurple
                       : globalColors.secondPurpleDark
                   }
@@ -363,7 +396,7 @@ const MainProfile = (props) => {
               <IconButton
                 className="edit-button"
                 iconName={PencilOutlineReactSvgUrl}
-                size="12"
+                size={12}
                 onClick={() => setChangeNameVisible(true)}
               />
             ) : null}
@@ -394,7 +427,7 @@ const MainProfile = (props) => {
                 <IconButton
                   className="edit-button email-edit-button"
                   iconName={PencilOutlineReactSvgUrl}
-                  size="12"
+                  size={12}
                   onClick={onChangeEmailClick}
                 />
               ) : null}
@@ -422,7 +455,7 @@ const MainProfile = (props) => {
               <IconButton
                 className="edit-button password-edit-button"
                 iconName={PencilOutlineReactSvgUrl}
-                size="12"
+                size={12}
                 onClick={onChangePasswordClick}
               />
             ) : null}
@@ -440,7 +473,11 @@ const MainProfile = (props) => {
           <div className="language-combo-box-wrapper" ref={comboBoxRef}>
             <ComboBox
               className="language-combo-box"
-              directionY={isMobileHorizontalOrientation ? "bottom" : directionY}
+              directionY={
+                isMobileHorizontalOrientation
+                  ? "bottom"
+                  : (directionY as TDirectionY)
+              }
               options={cultureNames}
               selectedOption={selectedLanguage}
               onSelect={onLanguageSelect}
@@ -504,7 +541,7 @@ const MainProfile = (props) => {
             <IconButton
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
-              size="12"
+              size={12}
               onClick={() => setChangeNameVisible(true)}
             />
           </div>
@@ -553,7 +590,7 @@ const MainProfile = (props) => {
             <IconButton
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
-              size="12"
+              size={12}
               onClick={onChangeEmailClick}
             />
           </div>
@@ -569,7 +606,7 @@ const MainProfile = (props) => {
             <IconButton
               className="edit-button"
               iconName={PencilOutlineReactSvgUrl}
-              size="12"
+              size={12}
               onClick={onChangePasswordClick}
             />
           </div>
@@ -656,15 +693,14 @@ const MainProfile = (props) => {
 };
 
 export default inject(
-  ({ settingsStore, peopleStore, userStore, avatarEditorDialogStore }) => {
-    const { withActivationBar, sendActivationLink } = userStore;
-    const {
-      theme,
-      becometranslatorUrl,
-      culture,
-      currentColorScheme,
-      documentationEmail,
-    } = settingsStore;
+  ({
+    settingsStore,
+    peopleStore,
+    userStore,
+    avatarEditorDialogStore,
+  }: TStore) => {
+    const { withActivationBar, sendActivationLink, user: profile } = userStore;
+    const { becometranslatorUrl, culture, documentationEmail } = settingsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -675,18 +711,16 @@ export default inject(
     } = avatarEditorDialogStore;
 
     const {
-      targetUser: profile,
       setChangePasswordVisible,
       setChangeNameVisible,
       changeAvatarVisible,
       setChangeAvatarVisible,
       updateProfileCulture,
       getProfileModel,
-    } = peopleStore.targetUserStore;
-    const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
+    } = peopleStore.targetUserStore!;
+    const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore!;
 
     return {
-      theme,
       profile,
       culture,
       becometranslatorUrl,
@@ -698,7 +732,6 @@ export default inject(
       setChangeAvatarVisible,
       withActivationBar,
       sendActivationLink,
-      currentColorScheme,
       updateProfileCulture,
       documentationEmail,
       setDialogData,

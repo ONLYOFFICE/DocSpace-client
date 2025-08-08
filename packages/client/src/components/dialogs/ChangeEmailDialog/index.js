@@ -178,7 +178,6 @@ class ChangeEmailDialogComponent extends React.Component {
   };
 
   render() {
-    console.log("ChangeEmailDialog render");
     const { t, tReady, visible, onClose } = this.props;
     const { isRequestRunning, email, errorMessage, hasError } = this.state;
 

@@ -25,30 +25,37 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
-import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Text } from "@docspace/shared/components/text";
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
 
-const RoomsActionsContainer = ({
+type DailyFeedContainerProps = {
+  t: TFunction;
+  dailyFeedSubscriptions?: TargetUserStore["dailyFeedSubscriptions"];
+  changeSubscription?: TargetUserStore["changeSubscription"];
+  textProps: Record<string, unknown>;
+  textDescriptionsProps: Record<string, unknown>;
+};
+
+const DailyFeedContainer = ({
   t,
-  badgesSubscription,
+  dailyFeedSubscriptions,
   changeSubscription,
-  fetchTreeFolders,
-  resetTreeItemCount,
   textProps,
   textDescriptionsProps,
-}) => {
-  const onChangeBadgeSubscription = async (e) => {
+}: DailyFeedContainerProps) => {
+  const onChangeEmailSubscription = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const checked = e.currentTarget.checked;
-    !checked && resetTreeItemCount();
-
     try {
-      await changeSubscription(NotificationsType.Badges, checked);
-      await fetchTreeFolders();
+      await changeSubscription?.(NotificationsType.DailyFeed, checked);
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     }
   };
 
@@ -56,30 +63,28 @@ const RoomsActionsContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("FileActivityNotify", {
-            sectionName: t("Common:Rooms"),
-          })}
+          {t("DailyFeed", { productName: t("Common:ProductName") })}
         </Text>
         <ToggleButton
-          className="rooms-actions"
-          onChange={onChangeBadgeSubscription}
-          isChecked={badgesSubscription}
+          className="daily-feed"
+          onChange={onChangeEmailSubscription}
+          isChecked={dailyFeedSubscriptions}
         />
       </div>
-      <Text {...textDescriptionsProps}>{t("ActionsWithFilesDescription")}</Text>
+      <Text {...textDescriptionsProps}>
+        {t("DailyFeedDescription", { productName: t("Common:ProductName") })}
+      </Text>
     </div>
   );
 };
 
-export default inject(({ peopleStore, treeFoldersStore }) => {
+export default inject(({ peopleStore }: TStore) => {
   const { targetUserStore } = peopleStore;
-  const { fetchTreeFolders, resetTreeItemCount } = treeFoldersStore;
-  const { changeSubscription, badgesSubscription } = targetUserStore;
+
+  const { changeSubscription, dailyFeedSubscriptions } = targetUserStore!;
 
   return {
-    resetTreeItemCount,
-    fetchTreeFolders,
     changeSubscription,
-    badgesSubscription,
+    dailyFeedSubscriptions,
   };
-})(observer(RoomsActionsContainer));
+})(observer(DailyFeedContainer));

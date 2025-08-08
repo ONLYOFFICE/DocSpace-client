@@ -2758,7 +2758,6 @@ class FilesActionStore {
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
-    const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
 
@@ -2821,7 +2820,6 @@ class FilesActionStore {
       if (insideGroupBackUrl) {
         setIsSectionBodyLoading(true, false);
 
-        setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
 
         return;
@@ -2840,13 +2838,11 @@ class FilesActionStore {
         setIsSectionBodyLoading(true, false);
 
         setSelectedNode(["accounts", "groups", "filter"]);
-        setContactsTab("groups");
 
         return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
           replace: true,
         });
       }
-      setContactsTab("people");
 
       setSelectedNode(["accounts", "people", "filter"]);
 

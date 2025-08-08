@@ -204,7 +204,8 @@ const withHotkeys = (Component) => {
           return enableSelection(e);
         }
 
-        if (e.shiftKey || e.ctrlKey || isIndexEditingMode) return;
+        if (e.shiftKey || e.ctrlKey || isIndexEditingMode || e.type === "keyup")
+          return;
 
         switch (e.key) {
           case "ArrowDown":
@@ -231,7 +232,7 @@ const withHotkeys = (Component) => {
             break;
         }
       },
-      hotkeysFilter,
+      { ...hotkeysFilter, keyup: true, keydown: true },
     );
 
     // //Select bottom element

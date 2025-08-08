@@ -111,7 +111,7 @@ const useAccountsHotkeys = ({
         return enableSelection(e);
       }
 
-      if (e.shiftKey || e.ctrlKey) return;
+      if (e.shiftKey || e.ctrlKey || e.type === "keyup") return;
 
       switch (e.key) {
         case "ArrowDown":
@@ -128,7 +128,7 @@ const useAccountsHotkeys = ({
           break;
       }
     },
-    hotkeysFilter,
+    { ...hotkeysFilter, keyup: true, keydown: true },
   );
 
   // Select all accounts

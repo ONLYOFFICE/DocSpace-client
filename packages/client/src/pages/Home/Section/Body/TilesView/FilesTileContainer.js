@@ -45,7 +45,12 @@ import { elementResizeDetector } from "./FileTile.utils";
 import InfiniteGrid from "./sub-components/InfiniteGrid";
 import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
+const FilesTileContainer = ({
+  list,
+  isTutorialEnabled,
+  isDesc,
+  withContentSelection,
+}) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -140,6 +145,7 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
         infiniteGrid={InfiniteGrid}
         headingFolders={t("Common:Folders")}
         headingFiles={t("Common:Files")}
+        noSelect={!withContentSelection}
       >
         {filesListNode}
       </TileContainer>
@@ -147,14 +153,16 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
   );
 };
 
-export default inject(({ filesStore }) => {
+export default inject(({ filesStore, hotkeyStore }) => {
   const { filesList } = filesStore;
   const { filter } = filesStore;
+  const { withContentSelection } = hotkeyStore;
 
   const isDesc = filter?.sortOrder === "desc";
 
   return {
     filesList,
     isDesc,
+    withContentSelection,
   };
 })(withContainer(observer(FilesTileContainer)));

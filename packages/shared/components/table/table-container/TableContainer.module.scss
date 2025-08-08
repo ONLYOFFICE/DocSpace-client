@@ -36,14 +36,14 @@
 
   user-select: text;
 
-  & * {
+  & *:not(img) {
     user-select: text;
   }
 
   &.noSelect {
     user-select: none;
 
-    & * {
+    & *:not(img) {
       user-select: none;
     }
   }

@@ -52,6 +52,7 @@ const FilesRowContainer = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  withContentSelection,
 }) => {
   const { sectionWidth } = use(Context);
 
@@ -104,6 +105,7 @@ const FilesRowContainer = ({
       hasMoreFiles={hasMoreFiles}
       draggable
       useReactWindow
+      noSelect={!withContentSelection}
       itemHeight={58}
     >
       {filesListNode}
@@ -120,6 +122,7 @@ export default inject(
     indexingStore,
     filesActionsStore,
     guidanceStore,
+    hotkeyStore,
   }) => {
     const {
       viewAs,
@@ -136,6 +139,7 @@ export default inject(
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
+    const { withContentSelection } = hotkeyStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -154,6 +158,7 @@ export default inject(
       changeIndex: filesActionsStore.changeIndex,
       setRefMap,
       deleteRefMap,
+      withContentSelection,
     };
   },
 )(withContainer(observer(FilesRowContainer)));

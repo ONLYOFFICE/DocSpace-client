@@ -56,6 +56,7 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
         onChange={onChangeLinkName}
         placeholder={t("Common:LinkName")}
         className="edit-link_name-input"
+        testId="edit_link_panel_name_input"
       />
 
       {isEdit ? (
@@ -69,6 +70,7 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
           type={InputType.text}
           placeholder={t("Common:LinkName")}
           className="edit-link_link-input"
+          testId="edit_link_panel_link_input"
         />
       ) : null}
     </div>

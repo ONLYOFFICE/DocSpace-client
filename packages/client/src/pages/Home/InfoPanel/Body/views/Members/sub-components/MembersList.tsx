@@ -94,6 +94,7 @@ const MembersList = (props: MembersListProps) => {
           key={key}
           className="members-list-item members-list-loader-item"
           style={style}
+          data-testid={`info_panel_members_loader_item_${index}`}
         >
           <RowLoader isMultiSelect={false} isContainer isUser />
         </div>
@@ -101,7 +102,12 @@ const MembersList = (props: MembersListProps) => {
     }
 
     return (
-      <div className="members-list-item" key={key} style={style}>
+      <div
+        className="members-list-item"
+        key={key}
+        style={style}
+        data-testid={`info_panel_members_list_item_${index}`}
+      >
         {item}
       </div>
     );

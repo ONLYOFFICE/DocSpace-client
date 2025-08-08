@@ -176,7 +176,11 @@ const Members = ({
     ) {
       if (!isArchiveFolder || primaryLink) {
         publicRoomItems.push(
-          <div className={styles.linksBlock} key={GENERAL_LINK_HEADER_KEY}>
+          <div
+            className={styles.linksBlock}
+            key={GENERAL_LINK_HEADER_KEY}
+            data-testid="info_panel_members_links_block"
+          >
             <Text fontSize="14px" fontWeight={600} lineHeight="16px">
               {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
             </Text>
@@ -199,6 +203,7 @@ const Members = ({
                       : false
                   }
                   title={t("Files:AddNewLink")}
+                  dataTestId="info_panel_members_add_new_link_button"
                 />
 
                 {additionalLinks &&
@@ -253,6 +258,7 @@ const Members = ({
             className={className("additional-link", styles.linkRow)}
             onClick={onAddNewLink}
             data-share
+            data-testid="info_panel_members_create_additional_link"
           >
             <div className="create-link-icon">
               <IconButton size={12} iconName={PlusIcon} isDisabled />
@@ -264,6 +270,7 @@ const Members = ({
               fontSize="14px"
               fontWeight={600}
               className="external-row-link"
+              dataTestId="info_panel_members_create_new_link_text"
             >
               {t("Files:CreateNewLink")}
             </Link>
@@ -341,6 +348,7 @@ const Members = ({
                   fontWeight={600}
                   fontSize="13px"
                   onClick={onOpenAccessSettings}
+                  dataTestId="info_panel_members_template_access_settings_link"
                 >
                   {t("Files:AccessSettings")}
                 </Link>
@@ -358,7 +366,10 @@ const Members = ({
     return (
       <>
         {showPublicRoomBar ? (
-          <div className={styles.publicRoomBarContainer}>
+          <div
+            className={styles.publicRoomBarContainer}
+            data-testid="info_panel_members_public_room_bar_container"
+          >
             <PublicRoomBar
               headerText={
                 isFormRoom

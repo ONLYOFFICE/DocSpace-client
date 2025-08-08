@@ -587,6 +587,7 @@ const InviteInput = ({
             type="action"
             isHovered
             onClick={openUsersPanel}
+            dataTestId="invite_panel_choose_from_list_link"
           >
             {t("Translations:ChooseFromList")}
           </StyledLink>
@@ -634,6 +635,7 @@ const InviteInput = ({
               withBackdrop={isMobileView}
               withBackground={isMobileView}
               shouldShowBackdrop={isMobileView}
+              dataTestId="invite_panel_language_combobox"
             />
           </div>
           {isChangeLangMail ? (
@@ -642,6 +644,7 @@ const InviteInput = ({
               iconName={BackupIcon}
               onClick={onResetLangMail}
               size={12}
+              dataTestId="invite_panel_reset_language_button"
             />
           ) : null}
         </StyledInviteLanguage>
@@ -664,6 +667,7 @@ const InviteInput = ({
             onKeyDown={onKeyDown}
             type="search"
             withBorder={false}
+            testId="invite_panel_search_input"
           />
 
           <div className="append" onClick={() => onChangeInput("")}>
@@ -698,6 +702,7 @@ const InviteInput = ({
           isOwner={isOwner}
           isAdmin={isAdmin}
           isMobileView={isMobileView}
+          dataTestId="invite_panel_access_selector"
           {...(roomId === -1 && {
             isSelectionDisabled: isUserTariffLimit,
             selectionErrorText: <PaidQuotaLimitError />,

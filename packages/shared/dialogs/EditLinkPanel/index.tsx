@@ -498,6 +498,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         onBackClick={onClosePanel}
         isBackButton={withBackButton}
         displayType={ModalDialogType.aside}
+        dataTestId="edit_link_panel_modal"
       >
         <ModalDialog.Header>
           {isPrimary
@@ -548,6 +549,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
                 onChange={onDenyDownloadChange}
                 isDisabled={disabledDenyDownload}
                 tooltipContent={t("Common:RestrictionDownloadCopyRoom")}
+                dataTestId="edit_link_panel_deny_download_toggle"
               />
             ) : null}
 
@@ -572,6 +574,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
             size={ButtonSize.normal}
             label={t("Common:SaveButton")}
             isDisabled={isDisabledSaveButton}
+            testId="edit_link_panel_save_button"
           />
           <Button
             scale
@@ -579,6 +582,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
             isDisabled={isLoading}
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
+            testId="edit_link_panel_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

@@ -335,6 +335,7 @@ const Users = ({
                 item={userSelection}
                 className={styles.typeCombobox}
                 onAbort={onAbort}
+                dataTestId="info_panel_contacts_user_space_quota"
               />
             </>
           ) : null}
@@ -350,7 +351,7 @@ const Users = ({
               </Text>
 
               <div className={styles.groups}>
-                {userSelection.groups.map((group) => (
+                {userSelection.groups.map((group, index) => (
                   <Link
                     key={group.id}
                     isHovered
@@ -360,6 +361,7 @@ const Users = ({
                     title={group.name}
                     onClick={() => onGroupClick(group.id)}
                     isTextOverflow
+                    dataTestId={`info_panel_contacts_user_group_link_${index}`}
                   >
                     {group.name}
                   </Link>

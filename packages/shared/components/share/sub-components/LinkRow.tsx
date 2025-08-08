@@ -110,7 +110,11 @@ const LinkRow = ({
 
   if (!links?.length) {
     return (
-      <div className={styles.linkRow} onClick={onAddClick}>
+      <div
+        onClick={onAddClick}
+        className={styles.linkRow}
+        data-testid="info_panel_share_create_and_copy_link"
+      >
         <div className={styles.square}>
           <IconButton size={12} iconName={PlusIcon} isDisabled />
         </div>

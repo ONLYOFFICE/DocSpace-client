@@ -43,6 +43,7 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
   isChecked = false,
   withToggle = true,
   isDisabled = false,
+  dataTestId,
 }) => {
   const tooltipId = useId();
 
@@ -60,6 +61,7 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
               isChecked={isChecked}
               onChange={onChange}
               className="edit-link-toggle"
+              dataTestId={dataTestId}
             />
           ) : null}
         </div>

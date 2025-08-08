@@ -117,6 +117,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
       isChecked={isChecked}
       headerText={headerText}
       onChange={onChange}
+      dataTestId="edit_link_panel_password_toggle"
     >
       {isChecked ? (
         <div>
@@ -144,6 +145,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
                 isSimulateType
                 simulateSymbol="•"
                 autoComplete="off"
+                testId="edit_link_panel_password_input"
                 {...tooltipData}
               />
             </FieldContainer>
@@ -154,6 +156,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               iconName={RefreshReactSvgUrl}
               onClick={onGeneratePasswordClick}
               className="edit-link_generate-icon"
+              dataTestId="edit_link_panel_generate_password_button"
             />
           </div>
           <div className="edit-link_password-links">
@@ -163,6 +166,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               fontWeight={600}
               type={LinkType.action}
               onClick={onCleanClick}
+              dataTestId="edit_link_panel_clean_password_link"
             >
               {t("Common:Clean")}
             </Link>
@@ -172,6 +176,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
               fontWeight={600}
               onClick={onCopyClick}
               type={LinkType.action}
+              dataTestId="edit_link_panel_copy_password_link"
             >
               {t("Common:CopyPassword")}
             </Link>

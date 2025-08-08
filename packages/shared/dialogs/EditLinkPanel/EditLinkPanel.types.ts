@@ -91,6 +91,7 @@ export interface ToggleBlockProps {
   tooltipContent?: string;
   withToggle?: boolean;
   isDisabled?: boolean;
+  dataTestId?: string;
 }
 
 export interface LinkBlockProps {

@@ -161,8 +161,12 @@ const History = ({
 
   return (
     <HistorySelectionProvider selection={infoPanelSelection}>
-      <div className={styles.historyList} id="history-list-info-panel">
-        {history.map(({ day, feeds }) => [
+      <div
+        className={styles.historyList}
+        id="history-list-info-panel"
+        data-testid="info_panel_history"
+      >
+        {history.map(({ day, feeds }, idx) => [
           <div className={styles.historySubtitle} key={day}>
             {getRelativeDateDay(t, feeds[0].date)}
           </div>,
@@ -171,6 +175,7 @@ const History = ({
               key={`${feed.action.id}_${feed.date}`}
               feed={feed}
               isLastEntity={i === feeds.length - 1 ? !isLoading : false}
+              dataTestId={`history_block_${idx}`}
             />
           )),
         ])}

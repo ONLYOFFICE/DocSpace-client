@@ -41,4 +41,6 @@ export type TTabItemProps = {
   withMultiSelect?: boolean;
   /** Sets a tab class name */
   className?: string;
+  /** Sets a tab data-testid */
+  dataTestId?: string;
 };

@@ -38,6 +38,7 @@ const TabItem = ({
   className,
   allowNoSelection,
   withMultiSelect = false,
+  dataTestId,
   ...rest
 }: TTabItemProps) => {
   const [isActive, setIsActive] = useState(isActiveInit);
@@ -76,7 +77,7 @@ const TabItem = ({
       )}
       onClick={onItemClick}
       aria-selected={isActive}
-      data-testid="tab-item"
+      data-testid={dataTestId ?? "tab-item"}
       {...rest}
     >
       <Text

@@ -86,6 +86,7 @@ const LimitTimeBlock: FC<LimitTimeBlockProps> = (props) => {
         initialDate={expirationDate}
         className="public-room_date-picker"
         selectDateText={t("Common:SelectDate")}
+        dataTestId="edit_link_panel_date_time_picker"
       />
     </ToggleBlock>
   );

@@ -64,6 +64,7 @@ const RoomsActionsContainer = ({
           className="rooms-actions"
           onChange={onChangeBadgeSubscription}
           isChecked={badgesSubscription}
+          dataTestId="actions_rooms_toggle_button"
         />
       </div>
       <Text {...textDescriptionsProps}>{t("ActionsWithFilesDescription")}</Text>

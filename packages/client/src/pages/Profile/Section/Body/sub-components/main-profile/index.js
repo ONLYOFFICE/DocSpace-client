@@ -209,6 +209,7 @@ const MainProfile = (props) => {
           href={`mailto:${documentationEmail}`}
           isHovered
           color={currentColorScheme?.main?.accent}
+          dataTestId="language_support_link"
         >
           {{ supportEmail: documentationEmail }}
         </Link>
@@ -226,6 +227,7 @@ const MainProfile = (props) => {
           fontSize="13px"
           href={becometranslatorUrl}
           target="_blank"
+          dataTestId="language_becometranslator_link"
         >
           {t("Common:LearnMore")}
         </Link>
@@ -365,6 +367,7 @@ const MainProfile = (props) => {
                 iconName={PencilOutlineReactSvgUrl}
                 size="12"
                 onClick={() => setChangeNameVisible(true)}
+                dataTestId="name_edit_icon_button"
               />
             ) : null}
           </div>
@@ -396,6 +399,7 @@ const MainProfile = (props) => {
                   iconName={PencilOutlineReactSvgUrl}
                   size="12"
                   onClick={onChangeEmailClick}
+                  dataTestId="email_edit_icon_button"
                 />
               ) : null}
             </div>
@@ -403,6 +407,7 @@ const MainProfile = (props) => {
               <div
                 className="send-again-container"
                 onClick={sendActivationLinkAction}
+                data-testid="send_again_container"
               >
                 <ReactSVG
                   className="send-again-icon"
@@ -424,6 +429,7 @@ const MainProfile = (props) => {
                 iconName={PencilOutlineReactSvgUrl}
                 size="12"
                 onClick={onChangePasswordClick}
+                dataTestId="password_edit_icon_button"
               />
             ) : null}
           </div>
@@ -435,6 +441,7 @@ const MainProfile = (props) => {
               offsetRight={0}
               place={dirTooltip}
               tooltipContent={tooltipLanguage}
+              dataTestId="language_help_button"
             />
           </StyledLabel>
           <div className="language-combo-box-wrapper" ref={comboBoxRef}>
@@ -455,6 +462,8 @@ const MainProfile = (props) => {
               withBlur={isMobileHorizontalOrientation ? false : isMobile()}
               fillIcon={false}
               modernView={!isMobile()}
+              dataTestId="language_combo_box"
+              dropDownTestId="language_combo_box_dropdown"
             />
             {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
           </div>
@@ -482,6 +491,7 @@ const MainProfile = (props) => {
                   isCollaborator,
                   t,
                 )}
+                dataTestId="user_type_help_button"
               />
             ) : null}
           </div>
@@ -506,6 +516,7 @@ const MainProfile = (props) => {
               iconName={PencilOutlineReactSvgUrl}
               size="12"
               onClick={() => setChangeNameVisible(true)}
+              dataTestId="edit_name_icon_button"
             />
           </div>
           <div className="mobile-profile-row">
@@ -539,6 +550,7 @@ const MainProfile = (props) => {
                 <div
                   className="send-again-container"
                   onClick={sendActivationLinkAction}
+                  data-testid="send_again_container"
                 >
                   <ReactSVG
                     className="send-again-icon"
@@ -571,6 +583,7 @@ const MainProfile = (props) => {
               iconName={PencilOutlineReactSvgUrl}
               size="12"
               onClick={onChangePasswordClick}
+              dataTestId="edit_password_icon_button"
             />
           </div>
           <div className="mobile-profile-row">
@@ -600,6 +613,7 @@ const MainProfile = (props) => {
                     isCollaborator,
                     t,
                   )}
+                  dataTestId="user_type_help_button"
                 />
               </div>
             ) : null}
@@ -613,6 +627,7 @@ const MainProfile = (props) => {
                 offsetRight={0}
                 place="right"
                 tooltipContent={tooltipLanguage}
+                dataTestId="language_help_button"
               />
             </Text>
             <div className="mobile-language__wrapper-combo-box">
@@ -633,6 +648,8 @@ const MainProfile = (props) => {
                 withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
                 modernView={!isMobile()}
+                dataTestId="language_combo_box"
+                dropDownTestId="language_combo_box_dropdown"
               />
               {isBetaLanguage ? <BetaBadge place="bottom-end" /> : null}
             </div>

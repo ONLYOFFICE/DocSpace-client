@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import {
+  checkConfirmLink,
   getSettings,
   getUserByEmail,
   getUserFromConfirm,
@@ -37,6 +38,7 @@ import { getStringFromSearchParams } from "@/utils";
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
 import { logger } from "logger.mjs";
 import GuestShareLinkForm from "./page.client";
+import { TConfirmLinkParams } from "@/types";
 
 type GuestShareLinkProps = {
   searchParams: Promise<{ [key: string]: string }>;
@@ -46,15 +48,16 @@ async function Page(props: GuestShareLinkProps) {
   logger.info("GuestShareLink page");
 
   const { searchParams: sp } = props;
-  const searchParams = await sp;
+  const searchParams = (await sp) as TConfirmLinkParams;
   const uid = searchParams.uid;
-  const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
+
+  const result = await checkConfirmLink(searchParams);
 
   const [settings, initiator, guest] = await Promise.all([
     getSettings(),
-    getUserFromConfirm(uid, confirmKey),
-    getUserByEmail(email, confirmKey),
+    getUserFromConfirm(uid ?? "", confirmKey),
+    getUserByEmail(result?.email ?? "", confirmKey),
   ]);
 
   const settingsCulture =

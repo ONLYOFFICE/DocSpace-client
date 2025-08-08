@@ -112,7 +112,6 @@ const SectionBody = React.memo(
           "section-body",
         )}
         onDrop={onDrop}
-        isDropZone={false}
         onDragOver={onDragOverEmpty}
         onDragLeave={onDragLeaveEmpty}
         isDropZone

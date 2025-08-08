@@ -192,11 +192,12 @@ const PureHome = (props) => {
     )
       return;
 
+    const dragged = dragging;
     dragging && setDragging(false);
 
     if (disableDrag) return;
 
-    createFoldersTree(t, f, uploadToFolder)
+    createFoldersTree(t, f, uploadToFolder, dragged)
       .then((fItem) => {
         if (fItem.length > 0) startUpload(fItem, null, t);
       })

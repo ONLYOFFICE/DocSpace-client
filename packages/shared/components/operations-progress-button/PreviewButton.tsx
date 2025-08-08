@@ -56,13 +56,14 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [animationState, setAnimationState] = useState<
-    "idle" | "raising" | "dropping" | "hidingUnder"
+    "raising" | "dropping" | "hidingUnder"
   >("raising");
   const [lastKnownTitle, setLastKnownTitle] = useState<string | null>(null);
 
   const previewContainerRef = useRef<HTMLDivElement>(null);
   const previewMainContainerRef = useRef<HTMLDivElement>(null);
   const previewHideTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const previewFirstHideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const tooltipHideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const prevDropPreviewLocation = useRef<string | null>(null);
   const hadOperationsBeforeDrag = useRef<boolean>(false);
@@ -88,6 +89,11 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
       clearTimeout(previewHideTimerRef.current);
       previewHideTimerRef.current = null;
     }
+    if (previewFirstHideTimerRef.current) {
+      clearTimeout(previewFirstHideTimerRef.current);
+      previewFirstHideTimerRef.current = null;
+    }
+
     if (tooltipHideTimerRef.current) {
       clearTimeout(tooltipHideTimerRef.current);
       tooltipHideTimerRef.current = null;
@@ -96,9 +102,9 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     if (!current && !prev) {
       if (isVisible) {
         setAnimationState("dropping");
-        setTimeout(() => {
+
+        previewFirstHideTimerRef.current = setTimeout(() => {
           setIsVisible(false);
-          setAnimationState("idle");
         }, 300);
       }
       return;
@@ -137,7 +143,6 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
           setAnimationState("dropping");
           setTimeout(() => {
             setIsVisible(false);
-            setAnimationState("idle");
           }, 300);
         }
       }, 200);
@@ -197,9 +202,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
 
       if (animation.includes("dropPreviewButton") && !isDragging) {
         clearDropPreviewLocation?.();
-        // Reset visibility after animation completes
         setIsVisible(false);
-        setAnimationState("idle");
       }
     },
     [clearDropPreviewLocation, isDragging],

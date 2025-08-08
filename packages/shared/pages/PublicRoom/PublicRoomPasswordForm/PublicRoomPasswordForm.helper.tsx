@@ -34,25 +34,8 @@ import { iconSize32 } from "../../../utils/image-helpers";
 import type { TValidateShareRoom } from "../../../api/rooms/types";
 
 /**
- * Creates a description component for password-protected resources
- * based on the validation data
+ * Helper types for password-protected resources descriptions
  */
-const createTrans = (
-  i18nKey: string,
-  valueKey: string,
-  valueText: string,
-  t: TFunction,
-) => (
-  <Trans
-    t={t}
-    ns="Common"
-    i18nKey={i18nKey}
-    values={{ [valueKey]: valueText }}
-    components={{
-      1: <Text key={valueText} as="strong" fontSize="13px" fontWeight="600" />,
-    }}
-  />
-);
 export const getPasswordDescription = (
   t: TFunction,
   validationData: TValidateShareRoom,
@@ -60,22 +43,48 @@ export const getPasswordDescription = (
   const displayText = validationData.entityTitle || validationData.title || "";
 
   return match(validationData)
-    .with({ type: LinkSharingEntityType.File }, () =>
-      createTrans("Common:PasswordProtectedFile", "fileName", displayText, t),
-    )
+    .with({ type: LinkSharingEntityType.File }, () => (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="Common:PasswordProtectedFile"
+        values={{ fileName: displayText }}
+        components={{
+          1: (
+            <Text
+              key={displayText}
+              as="strong"
+              fontSize="13px"
+              fontWeight="600"
+            />
+          ),
+        }}
+      />
+    ))
     .with(
       {
         isRoom: true,
         type: LinkSharingEntityType.RoomOrFolder,
         entityType: LinkSharingEntityType.File,
       },
-      () =>
-        createTrans(
-          "Common:PasswordProtectedRoomFile",
-          "fileName",
-          displayText,
-          t,
-        ),
+      () => (
+        <Trans
+          t={t}
+          ns="Common"
+          i18nKey="Common:PasswordProtectedRoomFile"
+          values={{ fileName: displayText }}
+          components={{
+            1: (
+              <Text
+                key={displayText}
+                as="strong"
+                fontSize="13px"
+                fontWeight="600"
+              />
+            ),
+          }}
+        />
+      ),
     )
     .with(
       {
@@ -83,13 +92,24 @@ export const getPasswordDescription = (
         type: LinkSharingEntityType.RoomOrFolder,
         entityType: LinkSharingEntityType.File,
       },
-      () =>
-        createTrans(
-          "Common:PasswordProtectedFolderFile",
-          "fileName",
-          displayText,
-          t,
-        ),
+      () => (
+        <Trans
+          t={t}
+          ns="Common"
+          i18nKey="Common:PasswordProtectedFolderFile"
+          values={{ fileName: displayText }}
+          components={{
+            1: (
+              <Text
+                key={displayText}
+                as="strong"
+                fontSize="13px"
+                fontWeight="600"
+              />
+            ),
+          }}
+        />
+      ),
     )
     .with(
       {
@@ -97,13 +117,24 @@ export const getPasswordDescription = (
         type: LinkSharingEntityType.RoomOrFolder,
         entityType: LinkSharingEntityType.RoomOrFolder,
       },
-      () =>
-        createTrans(
-          "Common:PasswordProtectedRoomFolder",
-          "folderName",
-          displayText,
-          t,
-        ),
+      () => (
+        <Trans
+          t={t}
+          ns="Common"
+          i18nKey="Common:PasswordProtectedRoomFolder"
+          values={{ folderName: displayText }}
+          components={{
+            1: (
+              <Text
+                key={displayText}
+                as="strong"
+                fontSize="13px"
+                fontWeight="600"
+              />
+            ),
+          }}
+        />
+      ),
     )
     .with(
       {
@@ -111,13 +142,24 @@ export const getPasswordDescription = (
         type: LinkSharingEntityType.RoomOrFolder,
         entityType: LinkSharingEntityType.RoomOrFolder,
       },
-      () =>
-        createTrans(
-          "Common:PasswordProtectedFolderFolder",
-          "folderName",
-          displayText,
-          t,
-        ),
+      () => (
+        <Trans
+          t={t}
+          ns="Common"
+          i18nKey="Common:PasswordProtectedFolderFolder"
+          values={{ folderName: displayText }}
+          components={{
+            1: (
+              <Text
+                key={displayText}
+                as="strong"
+                fontSize="13px"
+                fontWeight="600"
+              />
+            ),
+          }}
+        />
+      ),
     )
     .with(
       {
@@ -133,13 +175,24 @@ export const getPasswordDescription = (
         type: LinkSharingEntityType.RoomOrFolder,
         entityType: P.nullish,
       },
-      () =>
-        createTrans(
-          "Common:PasswordProtectedFolder",
-          "folderName",
-          displayText,
-          t,
-        ),
+      () => (
+        <Trans
+          t={t}
+          ns="Common"
+          i18nKey="Common:PasswordProtectedFolder"
+          values={{ folderName: displayText }}
+          components={{
+            1: (
+              <Text
+                key={displayText}
+                as="strong"
+                fontSize="13px"
+                fontWeight="600"
+              />
+            ),
+          }}
+        />
+      ),
     )
     .when(
       () => !displayText && !validationData.entityType,

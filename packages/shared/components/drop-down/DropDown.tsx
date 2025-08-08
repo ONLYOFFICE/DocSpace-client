@@ -168,7 +168,8 @@ const DropDown = ({
       const setAlignment = alignMap[hasNoSpace ? "hasNoSpace" : directionX];
       setAlignment();
     }
-    if (dropDownRef.current) dropDownRef.current.style.top = `${bottom}px`;
+    if (dropDownRef.current)
+      dropDownRef.current.style.top = `${bottom + window.scrollY}px`;
 
     setState((s) => ({
       ...s,

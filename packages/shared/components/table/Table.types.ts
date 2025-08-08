@@ -149,6 +149,7 @@ export interface TableCellProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   value?: string;
+  documentTitle?: string;
 }
 
 export type TGroupMenuItem = {

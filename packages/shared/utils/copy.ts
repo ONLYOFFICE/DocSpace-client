@@ -25,6 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import copy from "copy-to-clipboard";
+import { TViewAs } from "../types";
+
+import { TRoom } from "../api/rooms/types";
+import { TFile, TFolder } from "../api/files/types";
+import { TGroup } from "../api/groups/types";
+import { TUser } from "../api/people/types";
+
+export type TSelection = TRoom | TFile | TFolder | TGroup | TUser;
 
 export const copyShareLink = async (link: string) => {
   if (navigator.clipboard && window.isSecureContext) {
@@ -35,5 +43,60 @@ export const copyShareLink = async (link: string) => {
     }
   } else {
     copy(link);
+  }
+};
+
+const copyRowSelectedText = (e: KeyboardEvent) => {
+  const container = document.querySelector(
+    ".ReactVirtualized__Grid__innerScrollContainer",
+  );
+  if (!container) return e;
+
+  const checkedElements = container.querySelectorAll(".checked");
+
+  if (!checkedElements.length) return e;
+
+  let textToCopy = "";
+
+  checkedElements.forEach((el) => {
+    // Split the input string into lines and trim whitespace
+    if (el instanceof HTMLElement) {
+      textToCopy += el.innerText
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line !== "")
+        .join(" ");
+    }
+    // Insert a line break
+    textToCopy += "\n";
+  });
+
+  copy(textToCopy);
+};
+
+const copyTileSelectedText = (selection: TSelection[]) => {
+  let textToCopy = "";
+  selection.forEach((item) => {
+    textToCopy += item.title;
+    textToCopy += "\n";
+  });
+
+  copy(textToCopy);
+};
+
+export const copySelectedText = (
+  e: KeyboardEvent,
+  viewAs: TViewAs,
+  selection: TSelection[],
+) => {
+  switch (viewAs) {
+    case "table":
+    case "row":
+      return copyRowSelectedText(e);
+
+    case "tile":
+      return copyTileSelectedText(selection);
+    default:
+      return e;
   }
 };

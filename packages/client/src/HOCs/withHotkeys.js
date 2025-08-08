@@ -31,6 +31,7 @@ import { useNavigate } from "react-router";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { copySelectedText } from "@docspace/shared/utils/copy";
 
 const withHotkeys = (Component) => {
   const WithHotkeys = (props) => {
@@ -441,6 +442,19 @@ const withHotkeys = (Component) => {
       () => {
         if (folderWithNoAction) return;
         uploadFile(true);
+      },
+
+      hotkeysFilter,
+    );
+
+    // Copy selected items to clipboard
+    useHotkeys(
+      "Ctrl+Shift+c",
+      (e) => {
+        if (!selection.length) return e;
+        e.preventDefault();
+
+        copySelectedText(e, viewAs, selection);
       },
 
       hotkeysFilter,

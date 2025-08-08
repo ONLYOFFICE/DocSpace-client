@@ -39,6 +39,8 @@ import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TGroup } from "@docspace/shared/api/groups/types";
 
 import { useAccountsHotkeys } from "../../Hooks";
 
@@ -65,6 +67,9 @@ type SectionBodyContentProps = {
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
   enableSelection: ContactsHotkeysStore["enableSelection"];
+  viewAs: PeopleStore["viewAs"];
+  membersSelection: TUser[];
+  groupsSelection: TGroup[];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -88,11 +93,17 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     onClickBack,
     getTfaType,
     enableSelection,
+    viewAs,
+    membersSelection,
+    groupsSelection,
   } = props;
 
   const location = useLocation();
 
   const contactsTab = getContactsView(location);
+
+  const selection =
+    contactsTab !== "groups" ? membersSelection : groupsSelection;
 
   useAccountsHotkeys({
     enabledHotkeys: enabledHotkeys!,
@@ -105,6 +116,8 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     openItem: openItem!,
     onClickBack: onClickBack!,
     enableSelection,
+    viewAs,
+    selection,
   });
 
   const onMouseDown = useCallback(
@@ -182,6 +195,7 @@ export default inject(
       contactsHotkeysStore,
 
       enabledHotkeys,
+      viewAs,
     } = peopleStore;
     const {
       isFiltered,
@@ -190,11 +204,13 @@ export default inject(
       selectUser,
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
+      selection: membersSelection,
     } = usersStore!;
 
     const {
       setSelection: setGroupsSelection,
       setBufferSelection: setGroupsBufferSelection,
+      selection: groupsSelection,
     } = groupsStore!;
 
     const { setChangeOwnerDialogVisible } = dialogStore!;
@@ -241,6 +257,9 @@ export default inject(
       getTfaType,
 
       enableSelection,
+      viewAs,
+      membersSelection,
+      groupsSelection,
     };
   },
 )(

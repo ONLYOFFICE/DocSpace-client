@@ -28,6 +28,10 @@ import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
+import { copySelectedText } from "@docspace/shared/utils/copy";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TGroup } from "@docspace/shared/api/groups/types";
 
 interface AccountsHotkeysProps {
   enabledHotkeys: boolean;
@@ -41,6 +45,8 @@ interface AccountsHotkeysProps {
   openItem: () => void;
   onClickBack: (fromHotkeys: boolean) => void;
   enableSelection: ContactsHotkeysStore["enableSelection"];
+  viewAs: PeopleStore["viewAs"];
+  selection: TUser[] | TGroup[];
 }
 
 const useAccountsHotkeys = ({
@@ -54,6 +60,8 @@ const useAccountsHotkeys = ({
   openItem,
   onClickBack,
   enableSelection,
+  viewAs,
+  selection,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -141,6 +149,16 @@ const useAccountsHotkeys = ({
 
   // Back to parent folder
   useHotkeys("Backspace", onClickBackAction, hotkeysFilter);
+
+  const copySelectedTextFn = (e: KeyboardEvent): void => {
+    if (!selection.length) return;
+    e.preventDefault();
+
+    copySelectedText(e, viewAs, selection);
+  };
+
+  // // Copy selected items to clipboard
+  useHotkeys("Ctrl+Shift+c", copySelectedTextFn, hotkeysFilter);
 };
 
 export default useAccountsHotkeys;

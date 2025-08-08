@@ -268,6 +268,7 @@ const View = ({
 
           view = "files";
           prevCategoryType.current = getCategoryType(location);
+          setContactsTab(false);
         } else {
           clearFiles();
         }

@@ -107,17 +107,21 @@ const Template = ({
 
   return (
     <div style={{ height: "110px", display: "grid", gridGap: "24px" }}>
-      <TextInput
-        name="demoEmailInput"
-        type={InputType.email}
-        size={InputSize.base}
-        isDisabled={args.isDisabled}
-        isReadOnly
-        value="demo@gmail.com"
-      />
+      <div style={{ backgroundColor: "transparent", width: "fit-content" }}>
+        <TextInput
+          name="demoEmailInput"
+          type={InputType.email}
+          size={InputSize.base}
+          isDisabled={args.isDisabled}
+          isReadOnly
+          value="demo@gmail.com"
+          style={{ width: "166px" }}
+        />
+      </div>
 
-      <div style={{ backgroundColor: "transparent" }}>
+      <div style={{ backgroundColor: "transparent", width: "fit-content" }}>
         <PasswordInput
+          size={InputSize.base}
           {...args}
           inputValue={value}
           onChange={onChangeHandler}
@@ -218,22 +222,6 @@ export const WithCustomWidth: Story = {
   },
 };
 
-export const Small: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    size: InputSize.base,
-    inputName: "demoPasswordInput-small",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Small-sized password input",
-      },
-    },
-  },
-};
-
 export const Large: Story = {
   render: (args) => <Template {...args} />,
   args: {
@@ -277,38 +265,6 @@ export const WithError: Story = {
     docs: {
       description: {
         story: "Password input with error state",
-      },
-    },
-  },
-};
-
-export const WithWarning: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    hasWarning: true,
-    inputName: "demoPasswordInput-warning",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Password input with warning state",
-      },
-    },
-  },
-};
-
-export const WithScale: Story = {
-  render: (args) => <Template {...args} />,
-  args: {
-    ...Default.args,
-    scale: true,
-    inputName: "demoPasswordInput-scale",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Password input with scaling enabled",
       },
     },
   },

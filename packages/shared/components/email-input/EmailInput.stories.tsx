@@ -130,6 +130,7 @@ export const WithCustomValidation: Story = {
   render: Template,
   args: {
     ...Default.args,
+    scale: true,
     placeholder: "Enter @custom-domain.com email",
     customValidate: (value) => ({
       value,

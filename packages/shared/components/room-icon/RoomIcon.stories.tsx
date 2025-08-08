@@ -31,6 +31,7 @@ import CollaborateImageUrl from "PUBLIC_DIR/images/notifications/collaborate.png
 import PlanetIcon from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import EditPenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import styles from "./RoomIcon.stories.module.scss";
 
 import { RoomIcon } from ".";
 
@@ -104,6 +105,14 @@ export const Default: Story = {
     radius: "6px",
     showDefault: true,
   },
+  render: (args) => (
+    <div>
+      <RoomIcon
+        {...args}
+        className={`${styles.roomTitle} ${styles.roomBackground}`}
+      />
+    </div>
+  ),
 };
 
 export const WithImage: Story = {
@@ -122,7 +131,10 @@ export const WithEditing: Story = {
   },
   render: (args) => (
     <div style={{ height: "200px" }}>
-      <RoomIcon {...args} />
+      <RoomIcon
+        {...args}
+        className={`${styles.roomTitle} ${styles.roomBackground}`}
+      />
     </div>
   ),
 };
@@ -145,6 +157,11 @@ export const Archive: Story = {
     ...Default.args,
     isArchive: true,
   },
+  render: (args) => (
+    <div>
+      <RoomIcon {...args} className={styles.roomTitle} />
+    </div>
+  ),
 };
 
 export const WithBadge: Story = {
@@ -172,7 +189,7 @@ export const WithBadge: Story = {
           transformOrigin: "center",
         }}
       >
-        <RoomIcon {...args} />
+        <RoomIcon {...args} className={styles.roomTitle} />
       </div>
     </div>
   ),
@@ -183,4 +200,12 @@ export const WithHover: Story = {
     ...Default.args,
     hoverSrc: "https://picsum.photos/200",
   },
+  render: (args) => (
+    <div>
+      <RoomIcon
+        {...args}
+        className={`${styles.roomTitle} ${styles.roomBackground}`}
+      />
+    </div>
+  ),
 };

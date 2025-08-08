@@ -90,11 +90,32 @@ const Template: StoryFn<FilterProps> = (args) => {
   );
 };
 
+const TemplateWithOpenFilter: StoryFn<FilterProps> = (args) => {
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      const filterButton = document.querySelector(
+        '[data-testid="filter_icon_button"]',
+      ) as HTMLElement;
+      if (filterButton) {
+        filterButton.click();
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Wrapper>
+      <Filter {...args} />
+    </Wrapper>
+  );
+};
+
 /**
  * Basic filter with document type options
  * This story shows a simple filter with document type options
  */
-export const DocumentTypes = Template.bind({});
+export const DocumentTypes = TemplateWithOpenFilter.bind({});
 DocumentTypes.args = {
   viewAs: "row",
   view: "row",
@@ -158,7 +179,7 @@ DocumentTypes.parameters = {
   docs: {
     description: {
       story:
-        "Basic filter with document type options. Shows filter items for different document types.",
+        "Basic filter with document type options. Shows filter items for different document types. The filter dropdown automatically opens when the story loads.",
     },
   },
 };
@@ -167,7 +188,7 @@ DocumentTypes.parameters = {
  * Filter with pre-selected options
  * This story shows a filter with some options already selected
  */
-export const WithSelectedFilters = Template.bind({});
+export const WithSelectedFilters = TemplateWithOpenFilter.bind({});
 WithSelectedFilters.args = {
   ...DocumentTypes.args,
   getSelectedFilterData: () =>
@@ -219,14 +240,22 @@ WithSelectedFilters.args = {
         isSelected: false,
       },
     ]),
-  initSelectedFilterData: [],
+  initSelectedFilterData: [
+    {
+      id: "filter_type-documents",
+      key: "documents",
+      group: FilterGroups.filterType,
+      label: "Documents",
+      isSelected: true,
+    },
+  ],
 };
 
 WithSelectedFilters.parameters = {
   docs: {
     description: {
       story:
-        "Filter with pre-selected options. Shows how the filter looks with some options already selected.",
+        "Filter with pre-selected options. Shows how the filter looks with some options already selected. The filter dropdown automatically opens when the story loads.",
     },
   },
 };
@@ -235,7 +264,7 @@ WithSelectedFilters.parameters = {
  * Filter with multiple filter groups
  * This story shows a filter with multiple groups of filter options
  */
-export const MultipleFilterGroups = Template.bind({});
+export const MultipleFilterGroups = TemplateWithOpenFilter.bind({});
 MultipleFilterGroups.args = {
   ...DocumentTypes.args,
   getFilterData: () =>
@@ -302,7 +331,7 @@ MultipleFilterGroups.parameters = {
   docs: {
     description: {
       story:
-        "Filter with multiple filter groups. Shows how the filter displays different categories of filter options.",
+        "Filter with multiple filter groups. Shows how the filter displays different categories of filter options. The filter dropdown automatically opens when the story loads.",
     },
   },
 };
@@ -311,7 +340,7 @@ MultipleFilterGroups.parameters = {
  * Room filter story
  * Shows a filter with room options without using complex selectors
  */
-export const RoomsFilter = Template.bind({});
+export const RoomsFilter = TemplateWithOpenFilter.bind({});
 RoomsFilter.args = {
   ...DocumentTypes.args,
   isRooms: true,
@@ -356,7 +385,7 @@ RoomsFilter.parameters = {
   docs: {
     description: {
       story:
-        "Filter with room options. Shows room filter items without using complex selectors.",
+        "Filter with room options. Shows room filter items without using complex selectors. The filter dropdown automatically opens when the story loads.",
     },
   },
 };

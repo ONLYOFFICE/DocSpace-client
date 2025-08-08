@@ -181,6 +181,7 @@ const Template = (args: BackdropProps) => {
       <Backdrop {...args} visible={isVisible} onClick={toggleVisible} />
       {isVisible ? (
         <div
+          onClick={toggleVisible}
           style={{
             position: "fixed",
             top: "50%",
@@ -261,6 +262,7 @@ const ModalTemplate = (args: BackdropProps) => {
       />
       {isVisible ? (
         <div
+          onClick={toggleVisible}
           style={{
             position: "fixed",
             top: "50%",

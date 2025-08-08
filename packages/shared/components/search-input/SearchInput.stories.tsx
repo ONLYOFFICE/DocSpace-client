@@ -91,90 +91,155 @@ export const Default: Story = {
     scale: false,
     placeholder: "Search",
     value: "",
-    showClearButton: true,
     autoRefresh: true,
   },
 };
 
-export const Sizes: Story = {
-  render: () => (
+const SizesComponent = () => {
+  const [sizes, setSizes] = useState({
+    base: "Base size",
+    middle: "Middle size",
+    big: "Big size",
+    huge: "Huge size",
+  });
+
+  const handleChange = (key: string) => (value: string) => {
+    setSizes((prev) => ({ ...prev, [key]: value }));
+  };
+
+  return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <div style={{ width: "300px" }}>
-        <SearchInput size={InputSize.base} value="Base size" showClearButton />
+        <SearchInput
+          size={InputSize.base}
+          value={sizes.base}
+          onChange={handleChange("base")}
+          showClearButton={!!sizes.base}
+        />
       </div>
       <div style={{ width: "300px" }}>
         <SearchInput
           size={InputSize.middle}
-          value="Middle size"
-          showClearButton
+          value={sizes.middle}
+          onChange={handleChange("middle")}
+          showClearButton={!!sizes.middle}
         />
       </div>
       <div style={{ width: "300px" }}>
-        <SearchInput size={InputSize.big} value="Big size" showClearButton />
+        <SearchInput
+          size={InputSize.big}
+          value={sizes.big}
+          onChange={handleChange("big")}
+          showClearButton={!!sizes.big}
+        />
       </div>
       <div style={{ width: "300px" }}>
-        <SearchInput size={InputSize.huge} value="Huge size" showClearButton />
+        <SearchInput
+          size={InputSize.huge}
+          value={sizes.huge}
+          onChange={handleChange("huge")}
+          showClearButton={!!sizes.huge}
+        />
       </div>
     </div>
-  ),
+  );
+};
+
+export const Sizes: Story = {
+  render: () => <SizesComponent />,
+};
+
+const StatesComponent = () => {
+  const [values, setValues] = useState({
+    normal: "Normal state",
+    disabled: "Disabled state",
+    scaled: "With scale",
+  });
+
+  const handleChange = (key: string) => (value: string) => {
+    setValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value={values.normal}
+          onChange={handleChange("normal")}
+          showClearButton={!!values.normal}
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value={values.disabled}
+          onChange={handleChange("disabled")}
+          isDisabled
+          showClearButton={!!values.disabled}
+        />
+      </div>
+      <div style={{ width: "300px" }}>
+        <SearchInput
+          size={InputSize.base}
+          value={values.scaled}
+          onChange={handleChange("scaled")}
+          scale
+          showClearButton={!!values.scaled}
+        />
+      </div>
+    </div>
+  );
 };
 
 export const States: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <div style={{ width: "300px" }}>
-        <SearchInput
-          size={InputSize.base}
-          value="Normal state"
-          showClearButton
-        />
-      </div>
-      <div style={{ width: "300px" }}>
-        <SearchInput
-          size={InputSize.base}
-          value="Disabled state"
-          isDisabled
-          showClearButton
-        />
-      </div>
-      <div style={{ width: "300px" }}>
-        <SearchInput
-          size={InputSize.base}
-          value="With scale"
-          scale
-          showClearButton
-        />
-      </div>
-    </div>
-  ),
+  render: () => <StatesComponent />,
 };
 
-export const Behaviors: Story = {
-  render: () => (
+const BehaviorsComponent = () => {
+  const [searchValues, setSearchValues] = useState({
+    withClear: "With clear button",
+    autoRefresh: "Auto refresh enabled",
+    withPlaceholder: "",
+  });
+
+  const handleChange = (key: string) => (value: string) => {
+    setSearchValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <div style={{ width: "300px" }}>
         <SearchInput
           size={InputSize.base}
-          value="With clear button"
-          showClearButton
+          value={searchValues.withClear}
+          onChange={handleChange("withClear")}
+          showClearButton={!!searchValues.withClear}
         />
       </div>
       <div style={{ width: "300px" }}>
         <SearchInput
           size={InputSize.base}
-          value="Auto refresh enabled"
+          value={searchValues.autoRefresh}
+          onChange={handleChange("autoRefresh")}
           autoRefresh
           refreshTimeout={1000}
+          showClearButton={!!searchValues.autoRefresh}
         />
       </div>
       <div style={{ width: "300px" }}>
         <SearchInput
           size={InputSize.base}
           placeholder="With placeholder"
-          showClearButton
-          value=""
+          value={searchValues.withPlaceholder}
+          onChange={handleChange("withPlaceholder")}
+          showClearButton={!!searchValues.withPlaceholder}
         />
       </div>
     </div>
-  ),
+  );
+};
+
+export const Behaviors: Story = {
+  render: () => <BehaviorsComponent />,
 };

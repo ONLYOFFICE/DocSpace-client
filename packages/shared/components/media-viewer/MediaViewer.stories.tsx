@@ -311,15 +311,15 @@ const filesMock: TFile[] = [
       WebView: false,
     },
     viewUrl:
-      "https://api.onlyoffice.com/assets/images/samples-preview-19b97fee9e3b2fd9fe6abdaf481bebb4.png",
+      "https://static-blog.onlyoffice.com/wp-content/uploads/2025/05/15170532/How-to-create-a-DocSpace-plugin-634x320.png",
     webUrl:
-      "https://api.onlyoffice.com/assets/images/samples-preview-19b97fee9e3b2fd9fe6abdaf481bebb4.png",
+      "https://static-blog.onlyoffice.com/wp-content/uploads/2025/05/15170532/How-to-create-a-DocSpace-plugin-634x320.png",
   },
 ];
 
 const extsImagePreviewed = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
 
-export const ImageGallery: Story = {
+export const DesktopView: Story = {
   args: {
     files: filesMock,
     currentDeviceType: DeviceType.desktop,

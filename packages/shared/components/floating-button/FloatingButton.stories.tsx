@@ -58,7 +58,8 @@ const meta = {
     (Story) => (
       <div
         style={{
-          height: "300px",
+          height: "70px",
+          width: "100px",
           display: "flex",
           justifyContent: "flex-start",
           position: "relative",

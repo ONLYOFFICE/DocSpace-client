@@ -371,7 +371,6 @@ const PureHome = (props) => {
 
   const onDragLeaveEmpty = React.useCallback(() => {
     if (setDropTargetPreview) {
-      // console.log("Dragging left empty space");
       setDropTargetPreview(null);
     }
   }, [setDropTargetPreview]);
@@ -413,7 +412,6 @@ const PureHome = (props) => {
   const shouldRenderSectionFilter =
     (isValidMainContent || isValidContactsContent) && !isSettingsPage;
 
-  console.log("RENDER HOME");
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (

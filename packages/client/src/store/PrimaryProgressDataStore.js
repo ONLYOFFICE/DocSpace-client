@@ -123,7 +123,8 @@ class PrimaryProgressDataStore {
   };
 
   clearDropPreviewLocation = () => {
-    console.log("clearDropPreviewLocation");
+    // console.log("clearDropPreviewLocation");
+
     this.setStartDropPreview(false);
     this.dropTargetPreview = null;
   };

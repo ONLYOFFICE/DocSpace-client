@@ -29,11 +29,13 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import { isMobile } from "react-device-detect";
 
+import { useAnimation } from "../../hooks/useAnimation";
+
 import { Text } from "../text";
 import { Badge } from "../badge";
 
-import styles from "./ArticleItem.module.scss";
 import { ArticleItemProps } from "./ArticleItem.types";
+import styles from "./ArticleItem.module.scss";
 
 const getInitial = (text: string) => text.substring(0, 1).toUpperCase();
 
@@ -64,10 +66,26 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     title,
     item,
     iconNode,
+    withAnimation,
   } = props;
+
+  // Animation hook
+  const {
+    animationPhase,
+    isAnimationReady,
+    animationElementRef,
+    parentElementRef,
+    endWidth,
+    triggerAnimation,
+  } = useAnimation(isActive);
 
   const onClickAction = (e: React.MouseEvent) => {
     onClick?.(e, id);
+
+    // Start animation if withAnimation is true
+    if (withAnimation) {
+      triggerAnimation();
+    }
   };
   const onMouseDown = (e: React.MouseEvent) => {
     if (e.button !== 1) return;
@@ -113,19 +131,26 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
         style={style}
         data-testid="article-item"
         title={tooltipTitle}
+        ref={parentElementRef}
       >
         <div
           className={classNames(styles.articleItemSibling, {
             [styles.active]: isActive,
+            [styles.animationReady]: isAnimationReady,
+            [styles.animatedProgress]:
+              isActive && animationPhase === "progress",
+            [styles.animatedFinish]: isActive && animationPhase === "finish",
             [styles.dragging]: isDragging,
             [styles.dragActive]: isDragActive,
             [styles.mobileDevice]: isMobile,
           })}
+          style={{ "--end-width": `${endWidth}%` } as React.CSSProperties}
           id={folderId}
           onClick={onClickAction}
           onMouseUp={onMouseUpAction}
           onMouseDown={onMouseDown}
           data-testid="article-item-sibling"
+          ref={animationElementRef}
         />
         <div
           className={classNames(styles.articleItemImg, {

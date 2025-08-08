@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive direktorijs",
   "FolderTitleWebDav": "WebDAV direktorijs",
   "FolderTitleYandex": "Yandex direktorijs",
-  "GuestReleaseTipDescripton": "Visi iepriekš pievienotie Lietotāji kļuva par Viesiem un tagad ir pieejami tikai {{productName}} administratoru Kontaktu sarakstā. Viesi vairs nav iekļauti nevienā grupā. Ja nepieciešams, jūs jebkurā laikā varat mainīt to tipu un pievienot tos kādai grupai.",
-  "GuestReleaseTipLink": "Uzzināt vairāk par lietotāju tipiem",
   "LinkHasExpiredAndHasBeenDisabled": "Saitei ir beidzies derīguma termiņš, un tā ir atspējota",
   "LinkValidTime": "Šī saite ir derīga tikai {{days_count}} dienu (-as).",
   "NewForm": "PDF veidlapa",

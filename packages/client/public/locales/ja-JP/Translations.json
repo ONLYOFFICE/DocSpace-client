@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDriveディレクトリ",
   "FolderTitleWebDav": "WebDAVディレクトリ",
   "FolderTitleYandex": "Yandexディレクトリ",
-  "GuestReleaseTipDescripton": "以前に追加されたユーザーはすべてゲストとなり、{{productName}}管理者のみの連絡先リストで利用可能になりました。ゲストは、もはやどのグループにも属していません。必要に応じて、ゲストのタイプを変更し、グループに追加することができます。",
-  "GuestReleaseTipLink": "ユーザーのタイプについて、さらに詳しく",
   "LinkHasExpiredAndHasBeenDisabled": "リンクは有効期限が切れたため無効になっています",
   "LinkValidTime": "このリンクは {{days_count}} 日間のみ有効です。",
   "NewForm": "PDFフォーム",

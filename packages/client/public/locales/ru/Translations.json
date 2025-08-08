@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Каталог OneDrive",
   "FolderTitleWebDav": "Каталог WebDAV",
   "FolderTitleYandex": "Каталог Яндекса",
-  "GuestReleaseTipDescripton": "Все ранее добавленные Пользователи стали Гостями и теперь доступны только в списке контактов администраторов {{productName}}. Гости больше не являются участниками каких-либо групп. При необходимости вы в любое время можете изменить их тип и добавить в группу.",
-  "GuestReleaseTipLink": "Подробнее о типах пользователей",
   "LinkHasExpiredAndHasBeenDisabled": "Срок действия ссылки истек, она отключена",
   "LinkValidTime": "Эта ссылка действительна только {{days_count}} дней.",
   "NewForm": "PDF-форма",

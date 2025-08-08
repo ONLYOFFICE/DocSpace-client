@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Priečinok OneDrive",
   "FolderTitleWebDav": "Priečinok WebDAV",
   "FolderTitleYandex": "Priečinok Yandex",
-  "GuestReleaseTipDescripton": "Všetci doteraz pridaní Používatelia sa stali Hosťami a teraz sú evidovaní iba v zozname Kontaktov administrátorov {{productName}}. Hostia už nepatria do žiadnej skupiny. Vždy môžete zmeniť ich typ a v prípade potreby ich pridať do skupiny.",
-  "GuestReleaseTipLink": "Ďalšie informácie o typoch používateľov",
   "LinkHasExpiredAndHasBeenDisabled": "Platnosť odkazu vypršala a bol deaktivovaný",
   "LinkValidTime": "Tento odkaz je platný iba {{days_count}} dní.",
   "NewForm": "Formulár PDF",

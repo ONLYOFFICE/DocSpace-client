@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Director OneDrive",
   "FolderTitleWebDav": "Director WebDAV",
   "FolderTitleYandex": "Director Yandex",
-  "GuestReleaseTipDescripton": "Toți Utilizatorii pe care le-ați adăugat anterior au devenit Invitații și sunt disponibile acum în lista Persoane de contact numai a administratorilor{{productName}}. Invitații nu mai aparțin niciunui grup. Puteți schimba tipul și să le adăugați în orice grup oricând este necesar.",
-  "GuestReleaseTipLink": "Aflați mai multe despre tipuri de utilizatori",
   "LinkHasExpiredAndHasBeenDisabled": "Link-ul a expirat și este dezactivat",
   "LinkValidTime": "Acest link este valabil doar timp de {{days_count}} zile.",
   "NewForm": "Formular PDF",

@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive-hakemisto",
   "FolderTitleWebDav": "WebDAV-hakemisto",
   "FolderTitleYandex": "Yandex-hakemisto",
-  "GuestReleaseTipDescripton": "Kaikista aiemmin lisätyistä Käyttäjistä tulee Vieraita ja ovat nyt näkyvillä Kontaktit-listassa ainoastaan {{productName}} :n pääkäyttäjille. Vieraat eivät ole enää osa mitään ryhmää. Voit vaihtaa heidän tyyppiään ja lisätä heitä ryhmään, jos tarpeen.",
-  "GuestReleaseTipLink": "Lue lisää käyttäjätyypeistä",
   "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä",
   "LinkValidTime": "Linkki on voimassa vain {{days_count}} päivää.",
   "NewForm": "PDF-lomake",

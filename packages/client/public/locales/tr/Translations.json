@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive dizini",
   "FolderTitleWebDav": "WebDAV Dizini",
   "FolderTitleYandex": "Yandex Dizini",
-  "GuestReleaseTipDescripton": "Daha önce eklenen tüm Kullanıcılar Konuk statüsüne geldi ve artık yalnızca {{productName}} yöneticilerinin Kişiler listesinde yer alıyorlar. Konuklar artık hiçbir grubun parçası değil. Gerekirse türlerini değiştirebilir ve bir gruba ekleyebilirsiniz.",
-  "GuestReleaseTipLink": "Kullanıcı türleri hakkında daha fazla bilgi edinin",
   "LinkHasExpiredAndHasBeenDisabled": "Bağlantının süresi doldu ve devre dışı bırakıldı",
   "LinkValidTime": "Bu bağlantı yalnızca {{days_count}} gün için geçerlidir.",
   "NewForm": "PDF formu",

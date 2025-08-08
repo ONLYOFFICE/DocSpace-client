@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive 디렉토리",
   "FolderTitleWebDav": "WebDAV 디렉토리",
   "FolderTitleYandex": "Yandex 디렉토리",
-  "GuestReleaseTipDescripton": "이전에 추가한 모든 사용자는 게스트가 되었으며 이제 {{productName}} 관리자의 연락처 목록에서만 사용할 수 있습니다. 게스트는 더 이상 어떤 그룹에도 속하지 않습니다. 필요에 따라 언제든지 사용자 유형을 변경하고 그룹에 추가할 수 있습니다.",
-  "GuestReleaseTipLink": "사용자 유형에 대해 더 보기",
   "LinkHasExpiredAndHasBeenDisabled": "링크가 만료되어 비활성화되었습니다",
   "LinkValidTime": "이 링크는 {{days_count}}일 동안만 유효합니다.",
   "NewForm": "PDF 양식",

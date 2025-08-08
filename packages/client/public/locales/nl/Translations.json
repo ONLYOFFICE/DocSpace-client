@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive directory",
   "FolderTitleWebDav": "WebDAV Directory",
   "FolderTitleYandex": "Yandex Directory",
-  "GuestReleaseTipDescripton": "Alle eerder toegevoegde Gebruikers werden Gasten en zijn nu alleen beschikbaar in de Contactpersonenlijst van de {{productName}} beheerders. Gasten maken niet langer deel uit van een groep. U kunt hun type altijd wijzigen en ze aan een groep toevoegen, indien nodig.",
-  "GuestReleaseTipLink": "Meer informatie over gebruikerstypen",
   "LinkHasExpiredAndHasBeenDisabled": "De link is verlopen en uitgeschakeld",
   "LinkValidTime": "Deze link is slechts {{days_count}} dagen geldig.",
   "NewForm": "PDF-formulier",

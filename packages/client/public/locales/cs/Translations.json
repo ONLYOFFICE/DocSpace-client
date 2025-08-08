@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Adresář OneDrive",
   "FolderTitleWebDav": "Adresář WebDAV",
   "FolderTitleYandex": "Adresář Yandex",
-  "GuestReleaseTipDescripton": "Všichni dříve přidaní uživatelé se stali Hosty a jsou nyní k dispozici pouze v seznamu kontaktů správců {{productName}}. Hosté již nejsou součástí žádných skupin. Vždy můžete změnit jejich typ a v případě potřeby je přidat do skupiny.",
-  "GuestReleaseTipLink": "Další informace o typech uživatelů",
   "LinkHasExpiredAndHasBeenDisabled": "Platnost odkazu vypršela a byl zakázán",
   "LinkValidTime": "Tento odkaz je platný pouze po dobu {{days_count}} dnů.",
   "NewForm": "PDF formulář",

@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "ໄດເລກະທໍລີ OneDrive",
   "FolderTitleWebDav": "ໄດເລກະທໍລີ WebDAV",
   "FolderTitleYandex": "ໄດເລກະທໍລີ Yandex",
-  "GuestReleaseTipDescripton": "ຜູ້ໃຊ້ທັງໝົດທີ່ເຄີຍເພີ່ມໄວ້ກາຍເປັນແຂກ ແລະປັດຈຸບັນສາມາດເຫັນໄດ້ໃນບັນຊີຕິດຕໍ່ຂອງຜູ້ບໍລິຫານ {{productName}} ຜູ້ດຽວເທົ່ານັ້ນ ແຂກບໍ່ແມ່ນສ່ວນຫນຶ່ງຂອງກຸ່ມໃດໆອີກຕໍ່ໄປ ທ່ານສາມາດປ່ຽນປະເພດຂອງເຂົາເຈົ້າ ແລະເພີ່ມເຂົາເຈົ້າເຂົ້າສູ່ກຸ່ມຖ້າຈໍາເປັນໄດ້ຕະຫຼອດເວລາ",
-  "GuestReleaseTipLink": "ຮຽນຮູ້ເພີ່ມເຕີມກ່ຽວກັບປະເພດຜູ້ໃຊ້",
   "LinkHasExpiredAndHasBeenDisabled": "ລິ້ງໝົດອາຍຸແລ້ວ ແລະຖືກປິດການນຳໃຊ້",
   "LinkValidTime": "ລິ້ງນີ້ໃຊ້ໄດ້ເປັນເວລາ {{days_count}} ມື້ເທົ່ານັ້ນ.",
   "NewForm": "ແບບຟອມ PDF",

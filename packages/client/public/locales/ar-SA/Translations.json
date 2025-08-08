@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "مجلد OneDrive",
   "FolderTitleWebDav": "مجلد WebDAV",
   "FolderTitleYandex": "مجلد Yandex",
-  "GuestReleaseTipDescripton": "أصبح جميع المستخدمين الذين تمت إضافتهم مسبقًا ضيوف ومتاحين الآن في قائمة جهات الاتصال الخاصة بـ {{productName}} المسؤولين فقط. لم يعد الضيوف جزءًا من أي مجموعات. يمكنك دائمًا تغيير نوعهم وإضافتهم إلى مجموعة ، إذا لزم الأمر.",
-  "GuestReleaseTipLink": "تعرف على المزيد حول أنواع المستخدمين",
   "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله",
   "LinkValidTime": "هذا الرابط صالح لمدة {{days_count}} أيام فقط.",
   "NewForm": "نموذج PDF",

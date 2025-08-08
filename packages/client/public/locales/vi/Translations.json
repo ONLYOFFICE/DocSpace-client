@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Thư mục OneDrive",
   "FolderTitleWebDav": "Thư mục WebDAV",
   "FolderTitleYandex": "Thư mục Yandex",
-  "GuestReleaseTipDescripton": "Tất cả Người dùng đã thêm trước đó đã trở thành Khách và hiện chỉ khả dụng trong danh sách Liên hệ của quản trị viên {{productName}}. Khách không còn thuộc bất kỳ nhóm nào nữa. Bạn luôn có thể thay đổi loại của họ và thêm họ vào một nhóm, nếu cần.",
-  "GuestReleaseTipLink": "Tìm hiểu thêm về loại người dùng",
   "LinkHasExpiredAndHasBeenDisabled": "Liên kết đã hết hạn và đã bị vô hiệu hóa",
   "LinkValidTime": "Liên kết này chỉ có giá trị trong {{days_count}} ngày.",
   "NewForm": "Mẫu PDF",

@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive kataloqu",
   "FolderTitleWebDav": "WebDAV Kataloqu",
   "FolderTitleYandex": "Yandex Kataloqu",
-  "GuestReleaseTipDescripton": "Əvvəllər əlavə edilmiş bütün İstifadəçilər Qonaq oldular və indi yalnız {{productName}} administratorlarının Əlaqələr siyahısında mövcuddur. Qonaqlar artıq heç bir qrupun üzvü deyil. Siz həmişə onların növünü dəyişə və lazım gələrsə qrupa əlavə edə bilərsiniz.",
-  "GuestReleaseTipLink": "İstifadəçi növləri haqqında ətraflı məlumat əldə edin",
   "LinkHasExpiredAndHasBeenDisabled": "Keçidin vaxtı bitib və deaktiv edilib",
   "LinkValidTime": "Bu link yalnız {{days_count}} gün ərzində etibarlıdır.",
   "NewForm": "PDF forma",

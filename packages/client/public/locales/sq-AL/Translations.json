@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Drejtoria e OneDrive",
   "FolderTitleWebDav": "Drejtori WebDAV",
   "FolderTitleYandex": "Drejtoria Yandex",
-  "GuestReleaseTipDescripton": "Të gjithë përdoruesit e shtuar më parë u bënë të ftuar dhe tani disponohen vetëm në listën e kontakteve të administratorëve të {{productName}}. Të ftuarit nuk janë më pjesë e asnjë grupi. Ju gjithmonë mund të ndryshoni llojin e tyre dhe t'i shtoni ato në një grup, nëse është e nevojshme.",
-  "GuestReleaseTipLink": "Mësoni më shumë rreth llojeve të përdoruesve",
   "LinkHasExpiredAndHasBeenDisabled": "Lidhja ka skaduar dhe është çaktivizuar",
   "LinkValidTime": "Kjo lidhje është e vlefshme vetëm për {{days_count}} ditë.",
   "NewForm": "Formulari PDF",

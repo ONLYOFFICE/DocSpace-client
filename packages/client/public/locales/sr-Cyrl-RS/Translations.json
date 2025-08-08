@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive директоријум",
   "FolderTitleWebDav": "WebDAV директоријум",
   "FolderTitleYandex": "Yandex директоријум",
-  "GuestReleaseTipDescripton": "Сви претходно додани корисници постали су гости и сада су доступни само у контакт листи администратора {{productName}}. Гости више нису део ниједне групе. Увек можете променити њихов тип и додати их у групу, ако је потребно.",
-  "GuestReleaseTipLink": "Сазнајте више о типовима корисника",
   "LinkHasExpiredAndHasBeenDisabled": "Линк је истекао и онемогућен је",
   "LinkValidTime": "Овај линк је валидан само за {{days_count}} дана",
   "NewForm": "PDF образац",

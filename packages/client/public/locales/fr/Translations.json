@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Répertoire de OneDrive",
   "FolderTitleWebDav": "Répertoire WebDAV",
   "FolderTitleYandex": "Répertoire Yandex",
-  "GuestReleaseTipDescripton": "Tous les utilisateurs précédemment ajoutés sont devenus des Invités et sont désormais disponibles dans la liste de contacts des administrateurs de {{productName}} uniquement. Les invités ne font plus partie d'aucun groupe. Vous pouvez toujours modifier leur type et les ajouter à un groupe, si nécessaire.",
-  "GuestReleaseTipLink": "En savoir plus sur les types d'utilisateurs",
   "LinkHasExpiredAndHasBeenDisabled": "Le lien a expiré et a été désactivé",
   "LinkValidTime": "Ce lien n’est valable que pour les {{days_count}} jours.",
   "NewForm": "Formulaire PDF",

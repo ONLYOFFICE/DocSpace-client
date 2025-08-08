@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "Diretório OneDrive",
   "FolderTitleWebDav": "Diretório WebDAV",
   "FolderTitleYandex": "Diretório Yandex",
-  "GuestReleaseTipDescripton": "Todos os Usuários adicionados anteriormente tornaram-se Convidados e agora estão disponíveis apenas na lista de Contatos dos administradores {{productName}}. Os hóspedes já não fazem parte de nenhum grupo. Você sempre pode alterar seu tipo e adicioná-los a um grupo, se necessário.",
-  "GuestReleaseTipLink": "Saiba mais sobre os tipos de utilizador",
   "LinkHasExpiredAndHasBeenDisabled": "O link expirou e foi desativado",
   "LinkValidTime": "Esta hiperligação é válida apenas por {{days_count}} dias.",
   "NewForm": "Formulário PDF",

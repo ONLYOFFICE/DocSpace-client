@@ -14,8 +14,6 @@
   "FolderTitleSkyDrive": "OneDrive目录",
   "FolderTitleWebDav": "WebDAV目录",
   "FolderTitleYandex": "Yandex目录",
-  "GuestReleaseTipDescripton": "所有之前添加的用户都已成为访客，现在仅在 {{productName}} 管理员的联系人列表中。访客不再属于任何群组。如有必要，您可以随时更改其用户类型并添加至群组。",
-  "GuestReleaseTipLink": "详细了解用户类型",
   "LinkHasExpiredAndHasBeenDisabled": "此链接过期，已被禁用",
   "LinkValidTime": "该链接仅在{{days_count}}天内有效。",
   "NewForm": "PDF 表单",

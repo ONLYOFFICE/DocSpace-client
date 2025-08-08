@@ -129,6 +129,7 @@ const FilesTileContainer = ({
           setDropTargetPreview={setDropTargetPreview}
           disableDrag={disableDrag}
           canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       ) : (
         <FileTile
@@ -142,6 +143,7 @@ const FilesTileContainer = ({
           setDropTargetPreview={setDropTargetPreview}
           disableDrag={disableDrag}
           canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       );
     });

@@ -184,7 +184,10 @@ const secondaryProgressDataStore = new SecondaryProgressDataStore(
   treeFoldersStore,
   mediaViewerDataStore,
 );
-const primaryProgressDataStore = new PrimaryProgressDataStore();
+const primaryProgressDataStore = new PrimaryProgressDataStore(
+  filesStore,
+  selectedFolderStore,
+);
 const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 
 const dialogsStore = new DialogsStore(

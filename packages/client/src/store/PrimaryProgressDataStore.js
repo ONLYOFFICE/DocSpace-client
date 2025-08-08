@@ -38,7 +38,10 @@ class PrimaryProgressDataStore {
 
   startDropPreview = true;
 
-  constructor() {
+  constructor(filesStore, selectedFolderStore) {
+    this.filesStore = filesStore;
+    this.selectedFolderStore = selectedFolderStore;
+
     makeAutoObservable(this);
   }
 
@@ -104,7 +107,7 @@ class PrimaryProgressDataStore {
         ...incompleteOperations,
       );
 
-      console.log("clearPrimaryProgressData", this.primaryOperationsArray);
+      // console.log("clearPrimaryProgressData", this.primaryOperationsArray);
       return;
     }
 
@@ -161,9 +164,17 @@ class PrimaryProgressDataStore {
   };
 
   setDropTargetPreview = (title) => {
+    if (this.filesStore.startDrag && title === this.selectedFolderStore.title) {
+      this.dropTargetPreview = null;
+      return;
+    }
+
     if (!title && !this.startDropPreview) return;
+
+    if (this.dropTargetPreview === title) return;
+
     this.setStartDropPreview(true);
-    // console.log("setDropTargetPreview", title);
+
     this.dropTargetPreview = title;
   };
 }

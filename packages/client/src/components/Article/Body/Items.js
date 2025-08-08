@@ -163,6 +163,8 @@ const Item = ({
     item.security.Create,
   );
 
+  const droppableClassName = isDragging ? "droppable" : "";
+
   return (
     <StyledDragAndDrop
       key={item.id}
@@ -172,7 +174,8 @@ const Item = ({
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className="document-catalog"
+      className={`document-catalog ${droppableClassName}`}
+      documentTitle={item.title}
     >
       <ArticleItem
         item={item}

@@ -50,6 +50,7 @@ const FilesTableRow = (props) => {
     checkedProps,
     className,
     value,
+    documentTitle,
     onMouseClick,
     dragging,
     isDragging,
@@ -120,6 +121,7 @@ const FilesTableRow = (props) => {
   const selectionProp = {
     className: `files-item ${className} ${value}`,
     value,
+    documentTitle,
   };
 
   const [isDragActive, setIsDragActive] = useState(false);
@@ -153,6 +155,7 @@ const FilesTableRow = (props) => {
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
 
+    setDropTargetPreview(null);
     setIsDragActive(false);
   };
 
@@ -201,7 +204,6 @@ const FilesTableRow = (props) => {
     dragging,
     isDragging,
     isDragActive,
-    isDragDisabled,
     selectedFolderTitle,
     setDropTargetPreview,
     disableDrag,

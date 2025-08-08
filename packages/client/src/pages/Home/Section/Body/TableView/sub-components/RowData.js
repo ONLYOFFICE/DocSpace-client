@@ -52,6 +52,7 @@ const RowDataComponent = (props) => {
     dragStyles,
     selectionProp,
     value,
+    documentTitle,
     theme,
     onContentFileSelect,
     checkedProps,
@@ -125,6 +126,7 @@ const RowDataComponent = (props) => {
             : "",
         )}
         value={value}
+        documentTitle={documentTitle}
       >
         <FileNameCell
           theme={theme}

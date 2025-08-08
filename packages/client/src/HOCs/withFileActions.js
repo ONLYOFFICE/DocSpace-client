@@ -340,6 +340,7 @@ export default function withFileActions(WrappedFileItem) {
           className={className}
           isDragging={isDragging}
           value={value}
+          documentTitle={item.title}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
           isIndexUpdated={isIndexUpdated}

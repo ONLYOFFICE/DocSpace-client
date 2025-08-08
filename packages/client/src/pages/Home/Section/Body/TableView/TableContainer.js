@@ -254,6 +254,7 @@ const Table = ({
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    disableDrag,
   ]);
 
   return (

@@ -98,6 +98,7 @@ const FileTile = (props) => {
     selectedFolderTitle,
     disableDrag,
     canCreateSecurity,
+    documentTitle,
   } = props;
 
   const navigate = useNavigate();
@@ -267,18 +268,21 @@ const FileTile = (props) => {
     return fileTile;
   };
 
+  const droppableClassName = isDragging ? "droppable" : "";
+
   return (
     <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}
-        className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst}`}
+        className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst} ${droppableClassName}`}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
         dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         isDragDisabled={isDragDisabled}
+        documentTitle={documentTitle}
       >
         {renderTile()}
       </StyledDragAndDrop>

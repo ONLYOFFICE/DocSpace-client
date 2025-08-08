@@ -133,12 +133,14 @@ const WebhooksTableRow = (props) => {
       label: t("Common:Settings"),
       icon: SettingsIcon,
       onClick: onSettingsOpen,
+      dataTestId: "webhook_settings_item",
     },
     {
       key: "Webhook history dropdownItem",
       label: t("WebhookHistory"),
       icon: HistoryIcon,
       onClick: redirectToHistory,
+      dataTestId: "webhook_history_item",
     },
     {
       key: "Separator dropdownItem",
@@ -149,6 +151,7 @@ const WebhooksTableRow = (props) => {
       label: t("DeleteWebhook"),
       icon: DeleteIcon,
       onClick: onDeleteOpen,
+      dataTestId: "webhook_delete_item",
     },
   ];
 
@@ -158,7 +161,11 @@ const WebhooksTableRow = (props) => {
 
   return (
     <StyledWrapper onClick={handleRowClick}>
-      <StyledTableRow contextOptions={contextOptions} hideColumns={hideColumns}>
+      <StyledTableRow
+        contextOptions={contextOptions}
+        hideColumns={hideColumns}
+        contextMenuTestId="webhook_table_contextmenu"
+      >
         <TableCell>
           <Text as="span" fontWeight={600} className="mr-8 textOverflow">
             {webhook.name}{" "}
@@ -172,6 +179,7 @@ const WebhooksTableRow = (props) => {
                 source={avatarSource}
                 className="author-avatar-cell"
                 role="user"
+                dataTestId={`avatar_${webhook.name}`}
               />
             ) : null}
             <Text
@@ -179,6 +187,7 @@ const WebhooksTableRow = (props) => {
               fontWeight={600}
               title={webhook.createdBy?.displayName}
               truncate
+              dataTestId={`author_name_${webhook.name}`}
             >
               {webhook.createdBy?.displayName}
             </Text>
@@ -199,6 +208,7 @@ const WebhooksTableRow = (props) => {
         </TableCell>
         <TableCell>
           <ToggleButton
+            dataTestId={`toggle_button_${webhook.name}`}
             className="toggle toggleButton"
             id="toggle id"
             isChecked={isChecked}

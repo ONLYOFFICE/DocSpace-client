@@ -1092,6 +1092,9 @@ importers:
       react-dropzone:
         specifier: 11.7.1
         version: 11.7.1(react@19.1.0)
+      react-hotkeys-hook:
+        specifier: 3.4.7
+        version: 3.4.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)

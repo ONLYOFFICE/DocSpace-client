@@ -121,6 +121,7 @@ const AvatarEditorDialog = (props) => {
     onChangeFile,
     isProfileUpload,
     setPreview,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -187,6 +188,14 @@ const AvatarEditorDialog = (props) => {
     }
   };
 
+  const onSaveAction = async (img) => {
+    setIsLoading(true);
+
+    await onSave(img);
+
+    setIsLoading(false);
+  };
+
   return (
     <StyledModalDialog
       displayType="modal"
@@ -196,6 +205,7 @@ const AvatarEditorDialog = (props) => {
       withFooterBorder
       withBodyScrollForcibly={!!scrollBodyHeight}
       scrollBodyHeight={scrollBodyHeight}
+      dataTestId={dataTestId}
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
@@ -225,7 +235,7 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           primary
-          onClick={onSave ? () => onSave(image) : onSaveClick}
+          onClick={onSave ? () => onSaveAction(image) : onSaveClick}
           isLoading={isLoading}
         />
         <Button

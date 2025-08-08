@@ -125,6 +125,7 @@ const FilesTileContainer = ({
           itemIndex={index}
           selectableRef={onSetTileRef}
           withRef
+          dataTestId={`tile_${index}`}
           selectedFolderTitle={selectedFolderTitle}
           setDropTargetPreview={setDropTargetPreview}
           disableDrag={disableDrag}
@@ -139,6 +140,7 @@ const FilesTileContainer = ({
           }
           item={item}
           itemIndex={index}
+          dataTestId={`tile_${index}`}
           selectedFolderTitle={selectedFolderTitle}
           setDropTargetPreview={setDropTargetPreview}
           disableDrag={disableDrag}

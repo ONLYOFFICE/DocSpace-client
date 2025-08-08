@@ -35,7 +35,7 @@ import classnames from "classnames";
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
@@ -56,7 +56,6 @@ import {
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -67,8 +66,6 @@ import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-compone
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 import { useContactsHeader } from "./useContacts";
@@ -172,16 +169,17 @@ const SectionHeaderContent = (props) => {
     isPersonalReadOnly,
     showTemplateBadge,
     allowInvitingMembers,
+    contactsTab,
+    currentClientView,
   } = props;
 
   const location = useLocation();
-  const { groupId } = useParams();
 
-  const contactsView = getContactsView(location);
-  const isContactsPage = !!contactsView;
-  const isContactsGroupsPage = contactsView === "groups";
-  const isContactsInsideGroupPage =
-    contactsView === "inside_group" && !!groupId;
+  const contactsView =
+    currentClientView === "users" || currentClientView === "groups";
+  const isContactsPage = contactsView;
+  const isContactsGroupsPage = contactsTab === "groups";
+  const isContactsInsideGroupPage = contactsTab === "inside_group";
 
   const addButtonRefCallback = React.useCallback(
     (ref) => {
@@ -383,31 +381,15 @@ const SectionHeaderContent = (props) => {
     setIsIndexEditingMode(false);
   };
 
-  const stateTitle = location?.state?.title;
-  const stateCanCreate = location?.state?.canCreate;
-  const stateIsRoot = location?.state?.isRoot;
-  const stateIsRoom = location?.state?.isRoom;
-  const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsShared = location?.state?.isShared;
-  const stateIsExternal = location?.state?.isExternal;
-  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-  const stateShowTemplateBadge =
-    location?.state?.rootFolderType === FolderType.RoomTemplates &&
-    !stateIsRoot;
-
-  const isRoot =
-    isLoading && typeof stateIsRoot === "boolean"
-      ? stateIsRoot
-      : isRootFolder || isContactsPage || isSettingsPage;
+  const isRoot = isRootFolder || isContactsPage || isSettingsPage;
 
   const isLifetimeEnabled = Boolean(
-    !isRoot &&
-      (selectedFolder?.lifetime ||
-        infoPanelRoom?.lifetime ||
-        (isLoading && stateIsLifetimeEnabled)),
+    !isRoot && (selectedFolder?.lifetime || infoPanelRoom?.lifetime),
   );
 
-  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
+  const navigationButtonIsVisible = !!(
+    showNavigationButton || location.state?.isShared
+  );
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -416,7 +398,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-  const sharedType = stateIsExternal && !isPublicRoom;
+  const sharedType = location.state?.isExternal && !isPublicRoom;
 
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -510,21 +492,14 @@ const SectionHeaderContent = (props) => {
       ? isContactsInsideGroupPage
         ? getInsideGroupTitle()
         : t("Common:Contacts")
-      : isLoading && stateTitle
-        ? stateTitle
-        : title;
+      : title;
 
-  const currentCanCreate =
-    isLoading && hasOwnProperty(location?.state, "canCreate")
-      ? stateCanCreate
-      : security?.Create;
+  const currentCanCreate = security?.Create;
 
   const currentRootRoomTitle =
-    isLoading && stateRootRoomTitle
-      ? stateRootRoomTitle
-      : navigationPath &&
-        navigationPath.length > 1 &&
-        navigationPath[navigationPath.length - 2].title;
+    navigationPath &&
+    navigationPath.length > 1 &&
+    navigationPath[navigationPath.length - 2].title;
 
   const accountsNavigationPath = isContactsInsideGroupPage && [
     {
@@ -542,8 +517,7 @@ const SectionHeaderContent = (props) => {
     };
   }, [deleteRefMap]);
 
-  const isCurrentRoom =
-    isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
+  const isCurrentRoom = isRoom;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
@@ -571,8 +545,7 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel =
-    stateShowTemplateBadge || showTemplateBadge ? t("Files:Template") : "";
+  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
     ? t("TrashAutoDeleteWarning", {
@@ -609,7 +582,7 @@ const SectionHeaderContent = (props) => {
         <div
           className={classnames(styles.headerContainer, {
             [styles.infoPanelVisible]: isInfoPanelVisible,
-            [styles.isExternalFolder]: stateIsExternal,
+            [styles.isExternalFolder]: location.state?.isExternal,
             [styles.isLifetimeEnabled]: isLifetimeEnabled,
           })}
         >
@@ -791,6 +764,8 @@ export default inject(
       showHeaderLoader,
 
       isLoading,
+
+      currentClientView,
     } = clientLoadingStore;
 
     const setIsLoading = (param) => {
@@ -824,7 +799,7 @@ export default inject(
       getPublicKey,
     } = filesActionsStore;
 
-    const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
+    const { setIsVisible, isVisible, infoPanelRoomSelection } = infoPanelStore;
 
     const {
       title,
@@ -893,7 +868,7 @@ export default inject(
     const { getContactsModel, contactsCanCreate } =
       peopleStore.contextOptionsStore;
 
-    const { setSelected: setUsersSelected } = usersStore;
+    const { setSelected: setUsersSelected, contactsTab } = usersStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
@@ -925,6 +900,7 @@ export default inject(
       : selectedFolder.id;
 
     return {
+      currentClientView,
       showText: settingsStore.showText,
       isDesktop: settingsStore.isDesktopClient,
       showHeaderLoader,
@@ -1017,7 +993,7 @@ export default inject(
 
       rootFolderId,
       displayAbout,
-      infoPanelRoom,
+      infoPanelRoom: infoPanelRoomSelection,
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
@@ -1028,6 +1004,7 @@ export default inject(
       deleteRefMap,
       showTemplateBadge: isTemplate && !isRoot,
       allowInvitingMembers,
+      contactsTab,
     };
   },
 )(

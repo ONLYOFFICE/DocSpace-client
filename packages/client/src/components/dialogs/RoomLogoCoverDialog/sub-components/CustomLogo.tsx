@@ -30,7 +30,6 @@ import { Text } from "@docspace/shared/components/text";
 import { getTextColor } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { CustomLogoProps, ICover } from "../RoomLogoCoverDialog.types";
-import { fixSvgClipPath } from "../utils";
 
 interface StyledLogoProps {
   isBase: boolean;
@@ -117,7 +116,7 @@ export const CustomLogo = ({
         <div
           {...((icon as ICover) && {
             dangerouslySetInnerHTML: {
-              __html: fixSvgClipPath((icon as ICover).data),
+              __html: (icon as ICover).data,
             },
           })}
           className="custom-logo-cover"

@@ -84,4 +84,5 @@ export type TextareaProps = {
   paddingLeftProp?: string;
 
   isChatMode?: boolean;
+  dataTestId?: string;
 };

@@ -68,7 +68,6 @@ const InvitePanel = ({
   defaultAccess,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
-  isRoomMembersPanelOpen,
   setInviteLanguage,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
@@ -358,9 +357,7 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      if (isRoomMembersPanelOpen) {
-        updateInfoPanelMembers(t);
-      }
+      updateInfoPanelMembers();
     } catch (err) {
       let error = err;
 
@@ -529,6 +526,7 @@ const InvitePanel = ({
       isLoading={invitePanelIsLoding}
       withBodyScroll
       isInvitePanelLoader
+      id="invite_panel_modal"
     >
       {!hideSelector && addUsersPanelVisible ? (
         <ModalDialog.Container>
@@ -552,6 +550,7 @@ const InvitePanel = ({
             disableInvitedUsers={invitedUsersArray}
             withGuests={showGuestsTab}
             withHeader
+            dataTestId="invite_panel_people_selector"
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
               headerLabel: t("Common:Contacts"),
@@ -580,6 +579,7 @@ const InvitePanel = ({
           onClick={onClickSend}
           label={t("SendInvitation")}
           isLoading={isLoading}
+          testId="invite_panel_send_button"
         />
         <Button
           className="cancel-button"
@@ -588,6 +588,7 @@ const InvitePanel = ({
           onClick={onClose}
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
+          testId="invite_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -610,7 +611,6 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
     } = infoPanelStore;
 
     const {
@@ -643,7 +643,6 @@ export default inject(
       getFolderInfo,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
-      isRoomMembersPanelOpen,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

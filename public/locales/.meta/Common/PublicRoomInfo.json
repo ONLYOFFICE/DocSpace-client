@@ -3,7 +3,7 @@
   "content": "Share documents for viewing, editing, commenting, or reviewing without registration. You can also embed this room into any web interface.",
   "content_en_sha1_hash": "9eb88d5eef886330584cd438a6dc42214e1d9081",
   "created_at": "2025-05-19T21:30:47.660Z",
-  "updated_at": "2025-06-08T12:02:32.758Z",
+  "updated_at": "2025-08-04T07:30:01.392Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining that PublicRoomInfo allows sharing documents without registration, and can be embedded in web interfaces. It appears as a HelpButton in a LabelGroup within a ComboBox, providing context for users configuring portal settings.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 435,
-      "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
+      "line_number": 452,
+      "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n dataTestId=\"external_link_help_button\"\n />\n </LabelGroup>\n <ComboBox",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 597,
+      "line_number": 613,
       "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 329,
+      "line_number": 330,
       "context": "/>\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>\n }\n />\n </LabelGroup>\n <ComboBox\n scaled",
       "module": "/packages/client"
     },

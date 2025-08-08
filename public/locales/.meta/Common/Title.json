@@ -3,7 +3,7 @@
   "content": "Title",
   "content_en_sha1_hash": "768e0c1c69573fb588f61f1308a015c11468e05f",
   "created_at": "2025-05-19T21:30:49.298Z",
-  "updated_at": "2025-06-30T12:20:31.285Z",
+  "updated_at": "2025-08-04T07:30:01.162Z",
   "comment": {
     "text": "This translation key is used to display the title of a header or panel element. It appears as a label on buttons, checkboxes, and other UI elements in various applications, such as panels, sections, and settings pages. Translators should focus on translating this content to provide clear and consistent titles throughout the product.",
     "is_auto": true,
@@ -48,14 +48,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 383,
-      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n />\n <HelpButton\n place=\"right\"",
+      "line_number": 384,
+      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n dataTestId=\"title_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 383,
-      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n />\n <HelpButton\n place=\"right\"",
+      "line_number": 384,
+      "context": "<CheckboxGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Title\")}\n onChange={onChangeShowTitle}\n isChecked={config.showTitle}\n dataTestId=\"title_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {

@@ -78,6 +78,7 @@ const GoogleCloudSettings = ({
         placeholder={bucketPlaceholder || ""}
         type={InputType.text}
         size={InputSize.base}
+        testId="google_cloud_bucket_input"
       />
 
       {isNeedFilePath ? (
@@ -94,6 +95,7 @@ const GoogleCloudSettings = ({
           hasError={isError[FILE_PATH]}
           value={formSettings[FILE_PATH]}
           isDisabled={isLoadingData || isLoading || isDisabled}
+          testId="google_cloud_file_path_input"
         />
       ) : null}
     </>

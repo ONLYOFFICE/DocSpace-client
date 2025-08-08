@@ -3,7 +3,7 @@
   "content": "You can later delete or enable the disabled users if needed. Note that you can’t disable users such as the Owner and yourself.",
   "content_en_sha1_hash": "c8ab22320844cd45d5b33e77f82bfb1ef5ad2b83",
   "created_at": "2025-05-19T21:30:56.941Z",
-  "updated_at": "2025-05-24T14:20:12.206Z",
+  "updated_at": "2025-08-04T07:30:01.064Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that some users (e.g. Owner and themselves) cannot be disabled in certain contexts. It appears on a dialog to inform users about limitations when disabling other user statuses.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 187,
+      "line_number": 183,
       "context": "productName: t(\"Common:ProductName\"),\n });\n \n bodyText += isGuests\n ? t(\"DisableGuestsGeneralDescription\")\n : t(\"DisableGeneralDescription\");\n \n buttonLabelSave = isGuests\n ? t(\"Common:Disable\")\n : t(\"PeopleTranslations:DisableUserButton\");\n } else {",
       "module": "/packages/client"
     }

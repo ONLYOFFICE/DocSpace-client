@@ -280,6 +280,7 @@ const EditLinkPanel = (props) => {
       zIndex={310}
       withBodyScroll
       withoutPadding
+      dataTestId="edit_link_panel_modal"
     >
       <ModalDialog.Header>
         {isEdit
@@ -333,6 +334,7 @@ const EditLinkPanel = (props) => {
               bodyText={t("Files:PreventDownloadFilesAndFolders")}
               isChecked={denyDownload}
               onChange={onDenyDownloadChange}
+              dataTestId="edit_link_panel_deny_download_toggle"
             />
           ) : null}
 
@@ -357,6 +359,7 @@ const EditLinkPanel = (props) => {
           label={isEdit ? t("Common:SaveButton") : t("Common:Create")}
           isDisabled={isDisabledSaveButton}
           onClick={onSave}
+          testId="edit_link_panel_save_button"
         />
         <Button
           scale
@@ -364,6 +367,7 @@ const EditLinkPanel = (props) => {
           label={t("Common:CancelButton")}
           isDisabled={isLoading}
           onClick={onClose}
+          testId="edit_link_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

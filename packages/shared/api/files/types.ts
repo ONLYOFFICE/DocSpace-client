@@ -134,6 +134,8 @@ export type TFile = {
   startFilling?: boolean;
   fileEntryType: number;
   hasDraft?: boolean;
+  order?: string;
+  lockedBy?: string;
 };
 
 export type TOpenEditRequest = {
@@ -220,6 +222,8 @@ export type TFolder = {
   denyDownload: boolean;
   fileEntryType: number;
   parentRoomType?: number;
+  order?: string;
+  isRoom?: false;
 };
 
 export type TGetFolderPath = TFolder[];

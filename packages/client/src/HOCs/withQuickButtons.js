@@ -39,6 +39,25 @@ import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        isLoading: false,
+      };
+    }
+
+    onClickLock = () => {
+      const { item, lockFileAction, t } = this.props;
+      const { locked, id, security } = item;
+      const { isLoading } = this.state;
+      if (!security?.Lock || isLoading) return;
+      this.setState({ isLoading: true });
+      return lockFileAction(id, !locked)
+        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .catch((err) => toastr.error(err))
+        .finally(() => this.setState({ isLoading: false }));
+    };
+
     onClickDownload = () => {
       const { item } = this.props;
       window.open(item.viewUrl, "_self");
@@ -164,6 +183,7 @@ export default function withQuickButtons(WrappedComponent) {
           onClickDownload={this.onClickDownload}
           onClickFavorite={this.onClickFavorite}
           onClickShare={this.onClickShare}
+          onClickLock={this.onClickLock}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
           isIndexEditingMode={isIndexEditingMode}
@@ -198,8 +218,12 @@ export default function withQuickButtons(WrappedComponent) {
       contextOptionsStore,
       selectedFolderStore,
     }) => {
-      const { setFavoriteAction, onSelectItem, onCreateRoomFromTemplate } =
-        filesActionsStore;
+      const {
+        setFavoriteAction,
+        onSelectItem,
+        onCreateRoomFromTemplate,
+        lockFileAction,
+      } = filesActionsStore;
       const { isPersonalRoom, isArchiveFolder, isTemplatesFolder } =
         treeFoldersStore;
 
@@ -208,7 +232,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { setSharingPanelVisible } = dialogsStore;
 
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
+      const { getPrimaryFileLink, setShareChanged, infoPanelRoomSelection } =
         infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
@@ -227,11 +251,13 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
-        roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
+        roomLifetime:
+          infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
+        lockFileAction,
       };
     },
   )(observer(WithQuickButtons));

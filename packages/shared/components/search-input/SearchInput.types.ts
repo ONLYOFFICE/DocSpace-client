@@ -66,4 +66,6 @@ export type SearchInputProps = {
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   /** Determines whether the input should reset to the original value when focus is lost */
   resetOnBlur?: boolean;
+  /** Added data-testid for testing  */
+  dataTestId?: string;
 };

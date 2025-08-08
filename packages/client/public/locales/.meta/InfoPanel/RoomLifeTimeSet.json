@@ -3,13 +3,19 @@
   "content": "Set lifetime of <1>{{data}}</1> for all files in room",
   "content_en_sha1_hash": "b4cc4d190d3dac05a992829399f697ba34a42807",
   "created_at": "2025-05-19T21:30:54.938Z",
-  "updated_at": "2025-06-30T12:20:31.354Z",
+  "updated_at": "2025-08-04T07:30:01.246Z",
   "comment": {
     "text": "This translation key is used to display a message about setting the lifetime of files in a room. It appears on a settings panel or configuration screen, likely as part of options for room-related functionality. Translators should focus on conveying a sense of duration and file management.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:40:46.052Z"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 277,
+      "context": "return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = (feed.data as TFeedData).lifeTime?.period;\n const value = (feed.data as TFeedData).lifeTime?.value;\n const maxValue = 9999;\n const period =\n periodLifeTime === 0",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
       "line_number": 255,

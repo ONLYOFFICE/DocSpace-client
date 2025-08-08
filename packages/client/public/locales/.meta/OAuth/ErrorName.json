@@ -3,7 +3,7 @@
   "content": "Minimal name length:",
   "content_en_sha1_hash": "b3c5f9c7877af590746a0e847e4a7a40da7f59ef",
   "created_at": "2025-05-19T21:30:53.884Z",
-  "updated_at": "2025-06-30T12:20:31.464Z",
+  "updated_at": "2025-08-04T07:30:01.423Z",
   "comment": {
     "text": "This translation key is used to display a minimal length requirement message for names. It should be translated as \"Minimal name length:\" and will appear in the UI when validating input within an input group component.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
       "line_number": 144,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     }
   ],

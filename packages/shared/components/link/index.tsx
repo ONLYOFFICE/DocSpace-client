@@ -80,7 +80,7 @@ const Link: React.FC<LinkProps> = ({
         textDecoration,
       }}
       aria-label={ariaLabel || children}
-      data-testid={dataTestId || "link"}
+      data-testid={dataTestId ?? "link"}
       {...rest}
     >
       {children}

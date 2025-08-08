@@ -594,14 +594,16 @@ class FilesStore {
       api.files
         .getFolderInfo(folder.id)
         .then((f) => {
-          console.log(f);
+          const folderInfo = { ...f, isRoom: !!f.roomType };
           console.log("[WS] update folder", f.id, f.title);
 
           if (this.selection?.length) {
-            const foundIndex = this.selection?.findIndex((x) => x.id === f.id);
+            const foundIndex = this.selection?.findIndex(
+              (x) => x.id === folderInfo.id,
+            );
             if (foundIndex > -1) {
               runInAction(() => {
-                this.selection[foundIndex] = f;
+                this.selection[foundIndex] = folderInfo;
               });
             }
           }
@@ -611,7 +613,7 @@ class FilesStore {
               this.bufferSelection.id === f.id &&
               (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
             ) {
-              this.setBufferSelection(f);
+              this.setBufferSelection(folderInfo);
             }
           }
 
@@ -626,17 +628,17 @@ class FilesStore {
 
           if (f.id === this.selectedFolderStore.id) {
             this.selectedFolderStore.setSelectedFolder({
-              ...f,
+              ...folderInfo,
               navigationPath,
               pathParts,
             });
 
-            const item = this.getFilesListItems([f])[0];
+            const item = this.getFilesListItems([folderInfo])[0];
 
             setInfoPanelSelectedRoom(item, true);
           }
 
-          this.setFolder(f);
+          this.setFolder(folderInfo);
         })
         .catch(() => {
           // console.log("Folder deleted")

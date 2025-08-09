@@ -26,6 +26,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 
+import isNil from "lodash/isNil";
 import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -358,12 +359,14 @@ class UsersStore {
     // }
     this.contactsTab = contactsTab;
 
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
+    if (!isNil(this.userStore?.user?.id)) {
+      const guestsTabVisitedStorage = window.localStorage.getItem(
+        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user.id}`,
+      );
 
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
+      if (guestsTabVisitedStorage && !this.guestsTabVisited) {
+        this.guestsTabVisited = true;
+      }
     }
   };
 

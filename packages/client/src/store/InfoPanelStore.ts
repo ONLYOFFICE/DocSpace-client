@@ -305,8 +305,11 @@ class InfoPanelStore {
   getCanDisplay = () => {
     const isFiles = this.getIsFiles();
     const isRooms = this.getIsRooms();
-    const isAccounts = getContactsView() !== false;
+    const isAccounts =
+      this.peopleStore.usersStore.contactsTab !== false ||
+      getContactsView(window.location) !== false;
     const isGallery = window.location.pathname.includes("form-gallery");
+
     return isRooms || isFiles || isGallery || isAccounts;
   };
 

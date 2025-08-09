@@ -42,7 +42,6 @@ import { FolderType } from "@docspace/shared/enums";
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
-import { useLoader } from "../../helpers/useLoader";
 import ItemTitle from "../../sub-components/ItemTitle";
 
 import Details from "../Details";
@@ -152,13 +151,22 @@ const FilesView = ({
     scrollToTop,
   });
 
+  const onEndAnimation = React.useCallback(() => {
+    const event = new CustomEvent(AnimationEvents.END_ANIMATION);
+
+    window.dispatchEvent(event);
+  }, []);
+
   const fetchValue = React.useCallback(
     async (v: FilesViewProps["currentView"]) => {
       abortController.current?.abort();
       membersAbortController.current?.abort();
       shareAbortController.current?.abort();
 
+      setIsLoadingSuspense(true);
+
       if (v === InfoPanelView.infoDetails) {
+        onEndAnimation();
         setIsLoadingSuspense(false);
         setIsFirstLoadingSuspense(false);
 
@@ -166,9 +174,13 @@ const FilesView = ({
       }
 
       if (v === InfoPanelView.infoHistory) {
-        if (isThirdParty) return v;
+        if (isThirdParty) {
+          setIsLoadingSuspense(false);
+          setIsFirstLoadingSuspense(false);
+          onEndAnimation();
 
-        setIsLoadingSuspense(true);
+          return v;
+        }
 
         try {
           await fetchHistory();
@@ -185,8 +197,6 @@ const FilesView = ({
       }
 
       if (v === InfoPanelView.infoMembers) {
-        setIsLoadingSuspense(true);
-
         try {
           await fetchMembers();
           scrollToTop();
@@ -203,8 +213,6 @@ const FilesView = ({
       }
 
       if (v === InfoPanelView.infoShare) {
-        setIsLoadingSuspense(true);
-
         try {
           await fetchExternalLinks();
 
@@ -221,6 +229,7 @@ const FilesView = ({
 
       setIsFirstLoadingSuspense(false);
       setIsLoadingSuspense(false);
+      onEndAnimation();
 
       return v;
     },
@@ -232,24 +241,15 @@ const FilesView = ({
       fetchMembers,
       fetchExternalLinks,
       scrollToTop,
+      onEndAnimation,
     ],
   );
 
-  const { showLoading: showLoadingSuspense } = useLoader({
-    isFirstLoading: isLoadingSuspense,
-  });
-
   React.useEffect(() => {
-    const onEndAnimation = () => {
-      const event = new CustomEvent(AnimationEvents.END_ANIMATION);
-
-      window.dispatchEvent(event);
-    };
-
-    if (!showLoadingSuspense) {
+    if (!isLoadingSuspense) {
       onEndAnimation();
     }
-  }, [showLoadingSuspense]);
+  }, [isLoadingSuspense, onEndAnimation]);
 
   React.useEffect(() => {
     if (currentView === value && selection.id?.toString() === prevSelectionId) {
@@ -329,7 +329,9 @@ const FilesView = ({
     <div data-testid="info_panel_files_view_container">
       <ItemTitle
         infoPanelSelection={
-          isRoomMembersPanel ? infoPanelRoomSelection! : selection
+          isRoomMembersPanel
+            ? { ...infoPanelRoomSelection!, isRoom: true }!
+            : selection
         }
         {...roomMembersProps}
       />

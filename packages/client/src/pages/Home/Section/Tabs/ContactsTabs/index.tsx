@@ -90,6 +90,7 @@ const ContactsTabs = ({
   const navigate = useNavigate();
 
   const startAnimationTimerRef = React.useRef<NodeJS.Timeout>(null);
+  const prevContactsViewRef = React.useRef("");
 
   const view = getContactsView(location);
 
@@ -101,6 +102,10 @@ const ContactsTabs = ({
         : contactsTab === "inside_group" && view !== "inside_group"
           ? contactsTab
           : view;
+
+  React.useEffect(() => {
+    if (contactsView) prevContactsViewRef.current = contactsView;
+  }, [contactsView]);
 
   React.useEffect(() => {
     if (!isChangePageRequestRunning) {
@@ -183,7 +188,9 @@ const ContactsTabs = ({
   return (
     <Tabs
       className="accounts-tabs"
-      selectedItemId={contactsView as string}
+      selectedItemId={
+        !contactsView ? prevContactsViewRef.current : (contactsView as string)
+      }
       items={items}
       withAnimation
     />

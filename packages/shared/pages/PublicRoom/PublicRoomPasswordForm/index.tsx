@@ -61,10 +61,12 @@ export type PublicRoomPasswordProps = {
   roomKey: string;
   validationData: TValidateShareRoom;
   onSuccessValidationCallback: (res: TPublicRoomPassword) => void;
+  getIcon?: (fileExst: string) => string;
 };
 
 const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
-  const { t, roomKey, validationData, onSuccessValidationCallback } = props;
+  const { t, roomKey, validationData, onSuccessValidationCallback, getIcon } =
+    props;
 
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(true);
@@ -86,7 +88,10 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
     [t, validationData],
   );
 
-  const logo = useMemo(() => getLogo(validationData), [validationData]);
+  const logo = useMemo(
+    () => getLogo(validationData, getIcon),
+    [validationData, getIcon],
+  );
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);

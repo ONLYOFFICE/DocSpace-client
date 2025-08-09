@@ -203,7 +203,10 @@ export const getPasswordDescription = (
     .otherwise(() => t("Common:NeedPassword"));
 };
 
-export const getLogo = (validationData: TValidateShareRoom) => {
+export const getLogo = (
+  validationData: TValidateShareRoom,
+  getIcon?: (fileExst: string) => string,
+) => {
   switch (validationData.type) {
     case LinkSharingEntityType.File: {
       const fileExtension = validationData.title.split(".").pop();
@@ -214,7 +217,7 @@ export const getLogo = (validationData: TValidateShareRoom) => {
 
       const path = `${fileExtension.replace(/^\./, "")}.svg`;
 
-      return iconSize32.get(path);
+      return getIcon ? getIcon(`.${fileExtension}`) : iconSize32.get(path);
     }
     case LinkSharingEntityType.RoomOrFolder:
       if (validationData.isRoom) return PublicRoomIconURL;

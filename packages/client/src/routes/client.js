@@ -26,6 +26,8 @@
 
 import { Navigate } from "react-router";
 
+import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
+import { getSettingsFiles } from "@docspace/shared/api/files";
 import componentLoader from "@docspace/shared/utils/component-loader";
 import Error404 from "@docspace/shared/components/errors/Error404";
 
@@ -38,6 +40,9 @@ import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 import { generalRoutes } from "./general";
 import { contanctsRoutes } from "./contacts";
 
+/**
+ * @type {import("react-router").RouteObject[]}
+ */
 const ClientRoutes = [
   {
     path: "/",
@@ -311,19 +316,30 @@ const ClientRoutes = [
   {
     path: "/share/preview/:id",
     async lazy() {
-      const { WrappedComponent } = await componentLoader(
+      const { PublicPreview } = await componentLoader(
         () => import("SRC_DIR/pages/PublicPreview/PublicPreview"),
       );
 
       const Component = () => (
         <PublicRoute>
           <ErrorBoundary>
-            <WrappedComponent />
+            <PublicPreview />
           </ErrorBoundary>
         </PublicRoute>
       );
 
       return { Component };
+    },
+    loader: async ({ request }) => {
+      const searchParams = new URL(request.url).searchParams;
+      const key = searchParams.get("share");
+
+      const [validateData, settings] = await Promise.all([
+        validatePublicRoomKey(key),
+        getSettingsFiles(),
+      ]);
+
+      return { validateData, key, settings };
     },
   },
   {

@@ -157,4 +157,8 @@ export const StyledForm = styled.div`
       z-index: -1;
     }
   }
+
+  strong {
+    user-select: text;
+  }
 `;

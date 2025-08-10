@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 import moment from "moment";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
+import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
@@ -100,6 +101,7 @@ const Share = (props: ShareProps) => {
   const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
 
   const hideSharePanel = !infoPanelSelection?.canShare;
+  const parentShared = infoPanelSelection.parentShared;
 
   const editLinkApi = isFolder ? editExternalFolderLink : editExternalLink;
 
@@ -440,6 +442,31 @@ const Share = (props: ShareProps) => {
     [fileLinks],
   );
 
+  const barData = useMemo(() => {
+    if (parentShared) {
+      return {
+        headerText: isFolder
+          ? t("Common:FolderAvailableViaParentFolderLinkTitle")
+          : t("Common:FileAvailableViaParentFolderLinkTitle"),
+        bodyText: isFolder
+          ? t("Common:FolderAvailableViaParentFolderLinkDescription")
+          : t("Common:FileAvailableViaParentFolderLinkDescription"),
+        iconName: FolderIcon,
+      };
+    }
+
+    return {
+      headerText: isFolder
+        ? t("Common:ShareFolder")
+        : t("Common:ShareDocument"),
+      bodyText: isFolder
+        ? t("Common:ShareFolderDescription")
+        : t("Common:ShareDocumentDescription"),
+      iconName: InfoIcon,
+      onClose: () => setVisibleBar(false),
+    };
+  }, [parentShared, setVisibleBar, t, isFolder]);
+
   const availableExternalRights =
     infoPanelSelection && "availableExternalRights" in infoPanelSelection
       ? infoPanelSelection.availableExternalRights
@@ -447,14 +474,12 @@ const Share = (props: ShareProps) => {
 
   if (hideSharePanel) return null;
 
+  const barIsVisible = visibleBar || parentShared;
   return (
     <div data-testid="shared-links">
-      {visibleBar ? (
+      {barIsVisible ? (
         <PublicRoomBar
-          headerText={t("Common:ShareDocument")}
-          bodyText={t("Common:ShareDocumentDescription")}
-          iconName={InfoIcon}
-          onClose={() => setVisibleBar(false)}
+          {...barData}
           dataTestId="info_panel_share_public_room_bar"
         />
       ) : null}

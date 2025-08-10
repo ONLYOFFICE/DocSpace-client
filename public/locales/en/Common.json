@@ -719,7 +719,9 @@
   "ShareAndCollect": "Share & collect",
   "SharedLinks": "Shared links",
   "ShareDocument": "Share this document",
+  "ShareFolder": "Share this folder",
   "ShareDocumentDescription": "Provide access to the document and set the permission levels.",
+  "ShareFolderDescription": "Provide access to the folder and set the permission levels.",
   "SharedWithMe": "Shared with me",
   "ShareInTheRoom": "Share in the room",
   "ShareLinkTitle": "<1>Anyone</1> with this link can <1>{{access}}</1>.",
@@ -918,5 +920,9 @@
   "PasswordProtectedRoomFolder": "Folder <1>{{folderName}}</1> is located in the password-protected room. Please enter a password for the room",
   "PasswordProtectedFolder": "Folder <1>{{folderName}}</1> is password-protected. Please enter the password",
   "PasswordProtectedFolderFolder": "Folder <1>{{folderName}}</1> is located in the password-protected folder. Please enter a password for the folder",
-  "PasswordProtectedFolderFile": "File <1>{{fileName}}</1> is located in the password-protected folder. Please enter a password for the folder"
+  "PasswordProtectedFolderFile": "File <1>{{fileName}}</1> is located in the password-protected folder. Please enter a password for the folder",
+  "FileAvailableViaParentFolderLinkTitle": "File available via parent folder link",
+  "FileAvailableViaParentFolderLinkDescription": "This file is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
+  "FolderAvailableViaParentFolderLinkTitle": "Folder available via parent folder link",
+  "FolderAvailableViaParentFolderLinkDescription": "This folder is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions."
 }

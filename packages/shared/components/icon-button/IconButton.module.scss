@@ -96,6 +96,10 @@
       path {
         fill: var(--icon-button-color);
       }
+
+      rect {
+        fill: var(--icon-button-color);
+      }
     }
 
     @media (hover: hover) and (pointer: fine) {

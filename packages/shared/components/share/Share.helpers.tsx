@@ -454,5 +454,5 @@ export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
 };
 
 export const evenPrimaryLink = (fileLinks: TFileLink[]) => {
-  return fileLinks.map((link) => link?.sharedTo?.primary).includes(true);
+  return fileLinks.some((link) => link?.sharedTo?.primary);
 };

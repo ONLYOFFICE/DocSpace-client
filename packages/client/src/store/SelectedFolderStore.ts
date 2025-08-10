@@ -41,7 +41,11 @@ import type {
   TPathParts,
   // TTranslation,
 } from "@docspace/shared/types";
-import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
+import {
+  TFolder,
+  TFolderSecurity,
+  TShareSettings,
+} from "@docspace/shared/api/files/types";
 import {
   TLogo,
   TRoomLifetime,
@@ -171,6 +175,8 @@ class SelectedFolderStore {
 
   passwordProtected: boolean = false;
 
+  shareSettings: TShareSettings | null = null;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -227,6 +233,7 @@ class SelectedFolderStore {
       external: this.external,
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
+      shareSettings: this.shareSettings,
     };
   };
 
@@ -280,6 +287,7 @@ class SelectedFolderStore {
     this.watermark = null;
     this.passwordProtected = false;
     this.external = false;
+    this.shareSettings = null;
   };
 
   setFilesCount = (filesCount: number) => {

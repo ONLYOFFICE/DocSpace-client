@@ -1538,11 +1538,14 @@ export async function getPrimaryLinkIfNotExistCreate(
   internal: boolean,
   expirationDate: moment.Moment | null,
 ) {
-  const res = (await request({
-    method: "post",
-    url: `/files/file/${fileId}/link`,
-    data: { access, internal, expirationDate },
-  })) as TFileLink;
+  const res = (await request(
+    {
+      method: "post",
+      url: `/files/file/${fileId}/link`,
+      data: { access, internal, expirationDate },
+    },
+    true,
+  )) as TFileLink;
 
   return res;
 }
@@ -1552,11 +1555,14 @@ export async function getOrCreatePrimaryFolderLink(
   internal?: boolean,
   expirationDate?: moment.Moment | null,
 ) {
-  const res = (await request({
-    method: "post",
-    url: `/files/folder/${folderId}/link`,
-    data: { access, internal, expirationDate },
-  })) as TFileLink;
+  const res = (await request(
+    {
+      method: "post",
+      url: `/files/folder/${folderId}/link`,
+      data: { access, internal, expirationDate },
+    },
+    true,
+  )) as TFileLink;
 
   return res;
 }

@@ -90,6 +90,11 @@ export type TAvailableExternalRights = {
   FillForms: boolean;
 };
 
+export type TShareSettings = {
+  ExternalLink?: number;
+  PrimaryExternalLink?: number;
+};
+
 export type TFile = {
   isFile?: boolean;
   access: ShareAccessRights;
@@ -106,6 +111,7 @@ export type TFile = {
   folderId: number;
   id: number;
   parentRoomType?: FolderType;
+  shareSettings?: TShareSettings;
   mute: boolean;
   parentShared?: boolean;
   pureContentLength: number;
@@ -226,6 +232,7 @@ export type TFolder = {
   parentRoomType?: FolderType;
   order?: string;
   isRoom?: false;
+  shareSettings?: TShareSettings;
 };
 
 export type TGetFolderPath = TFolder[];

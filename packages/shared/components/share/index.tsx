@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import axios, { AxiosError } from "axios";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
@@ -38,7 +39,6 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
-import { LINKS_LIMIT_COUNT } from "../../constants";
 import {
   editExternalFolderLink,
   editExternalLink,
@@ -176,11 +176,21 @@ const Share = (props: ShareProps) => {
         setFileLinks([]);
       }
     } catch (error) {
+      console.error(error);
+      setFileLinks([]);
+      if (axios.isAxiosError(error)) {
+        const errorData = error as AxiosError<{ error: { message: string } }>;
+
+        if (errorData?.response?.data?.error?.message) {
+          toastr.error(errorData?.response?.data?.error?.message);
+          return;
+        }
+      }
+
       const message = (error as { message: string }).message
         ? ((error as { message: string }).message as TData)
         : (error as string);
       toastr.error(message);
-      setFileLinks([]);
     }
   };
 
@@ -205,16 +215,24 @@ const Share = (props: ShareProps) => {
         return newLinks;
       });
     } catch (error) {
-      console.error({ error });
+      console.error(error);
+      setFileLinks((links) => {
+        return links.filter((link) => !("isLoaded" in link && link.isLoaded));
+      });
+
+      if (axios.isAxiosError(error)) {
+        const errorData = error as AxiosError<{ error: { message: string } }>;
+
+        if (errorData?.response?.data?.error?.message) {
+          return toastr.error(errorData?.response?.data?.error?.message);
+        }
+      }
 
       const message = (error as { message: string }).message
         ? ((error as { message: string }).message as TData)
         : (error as string);
-      toastr.error(message);
 
-      setFileLinks((links) => {
-        return links.filter((link) => !("isLoaded" in link && link.isLoaded));
-      });
+      toastr.error(message);
     } finally {
       setIsLoadedAddLinks(true);
     }
@@ -475,6 +493,16 @@ const Share = (props: ShareProps) => {
   if (hideSharePanel) return null;
 
   const barIsVisible = visibleBar || parentShared;
+
+  const countCanCreateLink = Math.max(
+    0,
+    (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) +
+      (infoPanelSelection?.shareSettings?.PrimaryExternalLink ?? 0) -
+      1,
+  );
+
+  const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
+
   return (
     <div data-testid="shared-links">
       {barIsVisible ? (
@@ -492,7 +520,7 @@ const Share = (props: ShareProps) => {
             <Text fontSize="14px" fontWeight={600} className={styles.titleLink}>
               {t("Common:SharedLinks")}
             </Text>
-            {fileLinks.length > 0 && !onlyOneLink ? (
+            {fileLinks.length > 0 && !onlyOneLink && canAddLink ? (
               <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
                 <IconButton
                   className={styles.linkToViewingIcon}
@@ -501,10 +529,10 @@ const Share = (props: ShareProps) => {
                     isEvenPrimaryLink ? addAdditionalLinks : addGeneralLink
                   }
                   size={16}
-                  isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
+                  isDisabled={fileLinks.length > countCanCreateLink}
                   dataTestId="info_panel_share_add_link_button"
                 />
-                {fileLinks.length > LINKS_LIMIT_COUNT ? (
+                {fileLinks.length > countCanCreateLink ? (
                   <Tooltip
                     float={isDesktop()}
                     id="file-links-tooltip"

@@ -92,7 +92,13 @@ const FilesView = ({
     React.useState(true);
 
   const generatePrimaryLink = useEventCallback(() => {
-    if (!selection || isRoom(selection) || !selection.canShare) return;
+    if (
+      !selection ||
+      isRoom(selection) ||
+      !selection.canShare ||
+      selection.shared
+    )
+      return;
 
     const parentRoomType = selection.parentRoomType;
 

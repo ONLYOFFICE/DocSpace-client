@@ -484,10 +484,13 @@ export function getExternalLinks(roomId, type) {
 }
 
 export function getPrimaryLink(roomId: number | string) {
-  return request({
-    method: "get",
-    url: `files/rooms/${roomId}/link`,
-  }) as Promise<TFileLink>;
+  return request(
+    {
+      method: "get",
+      url: `files/rooms/${roomId}/link`,
+    },
+    true,
+  ) as Promise<TFileLink>;
 }
 
 export function validatePublicRoomKey(

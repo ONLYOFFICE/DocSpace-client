@@ -107,7 +107,7 @@ export type TFile = {
   id: number;
   parentRoomType?: FolderType;
   mute: boolean;
-  parentShared: boolean;
+  parentShared?: boolean;
   pureContentLength: number;
   rootFolderId: number;
   rootFolderType: FolderType;
@@ -222,7 +222,7 @@ export type TFolder = {
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;
-  parentShared: boolean;
+  parentShared?: boolean;
   parentRoomType?: FolderType;
   order?: string;
   isRoom?: false;

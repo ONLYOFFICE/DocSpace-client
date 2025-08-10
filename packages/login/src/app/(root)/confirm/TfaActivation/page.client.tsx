@@ -26,7 +26,7 @@
 
 "use client";
 
-import DownloadSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import ScanSvgUrl from "PUBLIC_DIR/images/scan.react.svg?url";
 import CheckSvgUrl from "PUBLIC_DIR/images/check.toast.react.svg?url";
 

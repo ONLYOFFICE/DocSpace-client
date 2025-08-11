@@ -48,6 +48,8 @@ const SectionBody = React.memo(
     getContextModel,
     isIndexEditingMode,
     pathname,
+    onDragLeaveEmpty,
+    onDragOverEmpty,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -109,7 +111,9 @@ const SectionBody = React.memo(
           "section-body",
         )}
         onDrop={onDrop}
-        isDropZone={false}
+        onDragOver={onDragOverEmpty}
+        onDragLeave={onDragLeaveEmpty}
+        isDropZone
       >
         {withScroll ? (
           <div className="section-wrapper">

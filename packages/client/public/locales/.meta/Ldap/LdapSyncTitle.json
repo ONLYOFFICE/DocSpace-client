@@ -3,7 +3,7 @@
   "content": "Sync LDAP data",
   "content_en_sha1_hash": "eacc43f7e59fe313e63f3f6f031fcc75dac16efb",
   "created_at": "2025-05-19T21:30:54.316Z",
-  "updated_at": "2025-08-04T07:30:01.280Z",
+  "updated_at": "2025-08-11T18:11:59.196Z",
   "comment": {
     "text": "This translation key is used for the title \"Sync LDAP data\" and appears as a page title in the Portal Settings. It provides context for users navigating to the synchronization settings within LDAP integration.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/LdapMobileView.js",
-      "line_number": 60,
-      "context": "badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
+      "line_number": 61,
+      "context": "onClickLink={onClickLink}\n disabled={!isLdapEnabled}\n dataTestId=\"ldap_settings\"\n />\n <MobileCategoryWrapper\n title={t(\"Ldap:LdapSyncTitle\")}\n subtitle={t(\"LdapMobileSyncDescription\")}\n url=\"/portal-settings/integration/ldap/sync-data\"\n withPaidBadge={!isLDAPAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}",
       "module": "/packages/client"
     },
     {

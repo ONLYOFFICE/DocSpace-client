@@ -89,12 +89,7 @@ const Shell = ({ page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
-    setShowGuestReleaseTip,
 
-    isOwner,
-    isAdmin,
-    releaseDate,
-    registrationDate,
     logoText,
     setLogoText,
     standalone,
@@ -490,31 +485,6 @@ const Shell = ({ page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
-  useEffect(() => {
-    if (isFrame) return setShowGuestReleaseTip(false);
-
-    if (!releaseDate || !registrationDate) return;
-
-    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
-
-    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
-
-    if (closed) return setShowGuestReleaseTip(false);
-
-    const regDate = new Date(registrationDate).getTime();
-    const release = new Date(releaseDate).getTime();
-
-    setShowGuestReleaseTip(regDate < release);
-  }, [
-    isFrame,
-    userId,
-    setShowGuestReleaseTip,
-    isAdmin,
-    isOwner,
-    releaseDate,
-    registrationDate,
-  ]);
-
   const rootElement = document.getElementById("root");
 
   const toast =
@@ -591,8 +561,6 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
-      setShowGuestReleaseTip,
-      buildVersionInfo,
       logoText,
       setLogoText,
       standalone,
@@ -669,8 +637,6 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
-      setShowGuestReleaseTip,
-      releaseDate: buildVersionInfo.releaseDate,
       logoText,
       setLogoText,
       standalone,

@@ -3,7 +3,7 @@
   "content": "or",
   "content_en_sha1_hash": "1758356db21759f7c5a0da9b4dd1db8fd6feab3f",
   "created_at": "2025-05-19T21:30:47.119Z",
-  "updated_at": "2025-05-26T07:57:32.360Z",
+  "updated_at": "2025-08-11T18:11:59.164Z",
   "comment": {
     "text": "\"This translation key is used to display an 'or' operator symbol, typically used in hotkeys or shortcuts, such as Ctrl + / or ?.\"",
     "is_auto": true,
@@ -66,8 +66,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/UploadXML.js",
-      "line_number": 173,
-      "context": "onClick={onUploadClick}\n tabIndex={2}\n />\n </div>\n <Text className=\"or-text\" noSelect>\n {t(\"Common:Or\")}\n </Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}",
+      "line_number": 175,
+      "context": "tabIndex={2}\n testId=\"upload_xml_button\"\n />\n </div>\n <Text className=\"or-text\" noSelect>\n {t(\"Common:Or\")}\n </Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}",
       "module": "/packages/client"
     }
   ],

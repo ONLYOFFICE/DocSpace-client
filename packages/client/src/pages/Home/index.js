@@ -132,7 +132,6 @@ const PureHome = (props) => {
     isEmptyGroups,
 
     isUsersEmptyView,
-
     secondaryOperationsCompleted,
     primaryOperationsCompleted,
     secondaryActiveOperations,
@@ -569,7 +568,6 @@ export const Component = inject(
       isFrame,
       enablePlugins,
       getSettings,
-      showGuestReleaseTip,
       allowInvitingGuests,
       checkGuests,
       hasGuests,
@@ -590,11 +588,8 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
-    const {
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      setGuestReleaseTipDialogVisible,
-    } = dialogsStore;
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
 
     const { isRoomAdmin, isAdmin } = authStore;
 
@@ -703,8 +698,6 @@ export const Component = inject(
       isEmptyGroups,
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
-      showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
 

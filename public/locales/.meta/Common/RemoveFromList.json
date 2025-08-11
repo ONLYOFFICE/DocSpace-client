@@ -3,7 +3,7 @@
   "content": "Remove from list",
   "content_en_sha1_hash": "23a97691b4e6c4fdf5bb0cb8f8d5ab31d1af9fd4",
   "created_at": "2025-05-19T21:30:47.827Z",
-  "updated_at": "2025-08-11T09:02:44.053Z",
+  "updated_at": "2025-08-11T18:11:59.309Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Remove from list\" in a user interface, typically on a button or dialog related to managing shared rooms. The text appears when a user has permission to remove items and external data is not expired.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2347,
+      "line_number": 2350,
       "context": "iconUrl: DeleteReactSvgUrl,\n };\n case \"remove-from-recent\":\n return {\n id: \"menu-remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n onClick: () => this.onClickRemoveFromRecent(selection),\n iconUrl: RemoveOutlineSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2347,
+      "line_number": 2350,
       "context": "iconUrl: DeleteReactSvgUrl,\n };\n case \"remove-from-recent\":\n return {\n id: \"menu-remove-from-recent\",\n label: t(\"Common:RemoveFromList\"),\n onClick: () => this.onClickRemoveFromRecent(selection),\n iconUrl: RemoveOutlineSvgUrl,\n };\n default:\n break;",
       "module": "/packages/client"
     },

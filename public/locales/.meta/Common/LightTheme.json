@@ -3,7 +3,7 @@
   "content": "Light theme",
   "content_en_sha1_hash": "9e5ba0f0f6b52d08b363bdcde46caac8862e4c70",
   "created_at": "2025-05-26T07:15:44.567Z",
-  "updated_at": "2025-08-11T09:02:43.938Z",
+  "updated_at": "2025-08-11T18:11:59.199Z",
   "comment": {
     "text": "The \"LightTheme\" translation key is used to display the English label \"Light theme\" in a UI context, likely found in settings or appearance options. It appears as part of a list of themes and is used when selecting the Light theme from a color scheme preview.",
     "is_auto": true,
@@ -17,15 +17,15 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 161,
-      "context": "</Text>\n </div>\n <div className=\"themes-container\">\n <ThemePreview\n className=\"light-theme\"\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme.main?.accent}\n themeId={selectedThemeId}\n value={ThemeKeys.BaseStr}\n isChecked={",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 131,
+      "context": "{systemThemeDescriptionLabel}\n </Text>\n </div>\n <div className=\"themes-container\">\n <ThemePreview\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.BaseStr}\n isChecked={",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 161,
-      "context": "</Text>\n </div>\n <div className=\"themes-container\">\n <ThemePreview\n className=\"light-theme\"\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme.main?.accent}\n themeId={selectedThemeId}\n value={ThemeKeys.BaseStr}\n isChecked={",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 131,
+      "context": "{systemThemeDescriptionLabel}\n </Text>\n </div>\n <div className=\"themes-container\">\n <ThemePreview\n label={t(\"LightTheme\")}\n theme=\"Light\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.BaseStr}\n isChecked={",
       "module": "/packages/client"
     },
     {

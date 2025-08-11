@@ -320,8 +320,6 @@ class SettingsStore {
 
   isBannerVisible = false;
 
-  showGuestReleaseTip = false;
-
   logoText = "";
 
   limitedAccessDevToolsForUsers = false;
@@ -346,10 +344,6 @@ class SettingsStore {
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
-  };
-
-  setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
-    this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
   get wizardCompleted() {

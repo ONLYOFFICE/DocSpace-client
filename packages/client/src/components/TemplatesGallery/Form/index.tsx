@@ -118,7 +118,7 @@ const Form: FC<FormProps> = ({
   if (isInitLoading) return null;
 
   return (
-    <div style={{ width: "100%", paddingLeft: "16px" }}>
+    <div style={{ width: "100%" }}>
       <SectionFilterContent
         isShowOneTile={isShowOneTile}
         setShowOneTile={setShowOneTile}
@@ -126,7 +126,7 @@ const Form: FC<FormProps> = ({
       />
       {viewMobile ? (
         <Scrollbar
-          style={{ height: "calc(100vh - 227px)" }}
+          style={{ height: "calc(100vh - 227px)", width: "calc(100% + 16px)" }}
           id="scroll-templates-gallery"
         >
           <Tiles
@@ -136,7 +136,7 @@ const Form: FC<FormProps> = ({
         </Scrollbar>
       ) : (
         <Scrollbar
-          style={{ height: "calc(100vh - 286px)" }}
+          style={{ height: "calc(100vh - 286px)", width: "calc(100% + 16px)" }}
           id="scroll-templates-gallery"
         >
           <Tiles smallPreview={tabPresentation || tabSpreadsheet} />

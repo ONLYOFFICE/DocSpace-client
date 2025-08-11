@@ -263,12 +263,6 @@ const SimpleFilesTileContent = styled(TileContent)`
   }
 `;
 
-const paddingCss = css`
-  @media ${desktop} {
-    padding-inline-end: 3px;
-  }
-`;
-
 const StyledTileContainer = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   height: 100%;
@@ -404,7 +398,6 @@ const StyledItem = styled.div`
 
   width: 100%;
   box-sizing: border-box;
-  ${paddingCss};
 
   /* Ensure all Cards in a row have identical heights */
   .Card {

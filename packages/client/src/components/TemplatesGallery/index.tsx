@@ -96,12 +96,13 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
       <div className={styles.container}>
         <div className={styles.templatesGallery}>
           <div className={styles.header}>Template gallery</div>
-
-          <Tabs
-            items={tabs}
-            selectedItemId={currentTabId}
-            onSelect={onSelect}
-          />
+          <div className={styles.templatesGalleryWrapper}>
+            <Tabs
+              items={tabs}
+              selectedItemId={currentTabId}
+              onSelect={onSelect}
+            />
+          </div>
         </div>
       </div>
     </>
@@ -113,12 +114,13 @@ const TemplatesGallery = (props: { templatesGalleryVisible: boolean }) => {
       <div className={styles.containerMobile}>
         <div className={styles.templatesGalleryMobile}>
           <div className={styles.header}>Template gallery</div>
-
-          <Tabs
-            items={tabs}
-            selectedItemId={currentTabId}
-            onSelect={onSelect}
-          />
+          <div className={styles.templatesGalleryWrapper}>
+            <Tabs
+              items={tabs}
+              selectedItemId={currentTabId}
+              onSelect={onSelect}
+            />
+          </div>
         </div>
       </div>
     </>

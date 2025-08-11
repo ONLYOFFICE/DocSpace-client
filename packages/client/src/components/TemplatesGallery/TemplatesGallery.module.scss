@@ -48,13 +48,18 @@
   height: 100%;
 }
 
-.header {
-  height: 54px;
+.templatesGalleryWrapper {
+  padding: 0 16px;
+}
 
+.header {
   font-weight: 700;
   font-size: 21px;
 
   line-height: 28px;
+
+  padding: 12px 0 13px 16px;
+  border-bottom: 1px solid #{colors.$gray-light-mid};
 }
 
 .containerMobile {

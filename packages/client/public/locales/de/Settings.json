@@ -158,6 +158,11 @@
   "LoginHistoryTitle": "Anmeldehistorie",
   "LoginLatestText": "Nur die letzte Aktivität wird auf dieser Seite angezeigt. Die Daten selbst werden während des Zeitraums gespeichert, das im folgenden Feld eingegeben werden kann (gemessen in Tagen, maximal 180):",
   "LoginSubheaderTitle": "Dieser Unterabschnitt dient zur Überwachung der letzten Benutzeranmeldungen, einschließlich erfolgreicher Anmeldungen und fehlgeschlagener Versuche mit Angabe der Gründe.",
+  "LogoAbout": "Logo für die Informationsseite",
+  "LogoCompact": "Logo für das kompakte Menü links",
+  "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo für den {{editorName}}-Editor",
+  "LogoForViewer": "Logo für {{diagramViewer}}",
   "LogoLightSmall": "Logo für Kopfzeile des Bereichs",
   "ManagementCategoryDataManagement": "Datenmanagement",
   "ManagementCategoryIntegration": "Integration",
@@ -287,5 +292,9 @@
   "WantToCancelUpload": "Möchten Sie den Upload abbrechen?",
   "WantToContinue": "Möchten Sie fortfahren oder das Benutzer-Speicherlimit ändern?",
   "WhiteLabelSubtitle": "Geben Sie Ihren Firmennamen ein, laden Sie das Logo hoch, und passen Sie das Design an Ihr Branding an.",
-  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort."
+  "WhiteLabelTooltip": "Die Größen sind für Retina-Displays angegeben. Für Displays mit Standardauflösungen werden die Breite und Höhe des Logos beim Hochladen entsprechend angepasst.",
+  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort.",
+  "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
+  "YourCurrentDomain": "Ihre aktuelle Domain",
+  "YourLogo": "Ihr Logo"
 }

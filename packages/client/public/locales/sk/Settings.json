@@ -158,6 +158,11 @@
   "LoginHistoryTitle": "História prihlásenia",
   "LoginLatestText": "Táto stránka zobrazuje iba nedávne aktivity. Samotné údaje sa uchovávajú po dobu uvedenú v poli nižšie (maximálne 180 dní).",
   "LoginSubheaderTitle": "Táto podsekcia sa používa na sledovanie poslednej aktivity prihlásenia používateľa vrátane úspešných prihlásení a neúspešných pokusov o prihlásenie s uvedením dôvodov.",
+  "LogoAbout": "Logo pre stránku Informácie",
+  "LogoCompact": "Logo pre kompaktné ľavé menu",
+  "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo pre editor {{editorName}}",
+  "LogoForViewer": "Logo pre {{diagramViewer}}",
   "LogoLightSmall": "Logo pre hlavičku priestoru",
   "ManagementCategoryDataManagement": "Správa dat",
   "ManagementCategoryIntegration": "Integrácia",
@@ -287,5 +292,9 @@
   "WantToCancelUpload": "Chcete zrušiť nahrávanie?",
   "WantToContinue": "Chcete pokračovať alebo zmeniť kvótu úložiska používateľa?",
   "WhiteLabelSubtitle": "Zadajte názov svojej spoločnosti, nahrajte logo a prispôsobte štýl tak, aby zodpovedal vašej značke.",
-  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok."
+  "WhiteLabelTooltip": "Rozmery sú pre Retina obrazovky. Pri obrazovkách so štandardným rozlíšením sa šírka a výška loga prispôsobí pri načítaní.",
+  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
+  "YouHaveUnsavedChanges": "Máte neuložené zmeny",
+  "YourCurrentDomain": "Vaša aktuálna doména",
+  "YourLogo": "Vaše logo"
 }

@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { logger } from "logger.mjs";
 import { getSettings } from "@/utils/actions";
 
-import { logger } from "logger.mjs";
 import ProfileRemoveForm from "./page.client";
 
 async function Page() {
@@ -37,7 +37,7 @@ async function Page() {
   return settings && typeof settings !== "string" ? (
     <ProfileRemoveForm
       greetingSettings={settings.greetingSettings}
-      legalTerms={settings.externalResources.common?.entries.legalterms}
+      legalTerms={settings.externalResources?.common?.entries?.legalterms}
     />
   ) : null;
 }

@@ -158,6 +158,11 @@
   "LoginHistoryTitle": "Giriş Tarixçəsi",
   "LoginLatestText": "Bu səhifədə yalnız ən son fəaliyyət göstərilir. Məlumatın özü aşağıdakı sahədə göstərilən müddət ərzində saxlanılır (maksimum 180 gün).",
   "LoginSubheaderTitle": "Bu alt bölmə uğurlu girişlər və uğursuz cəhdlər daxil olmaqla, səbəblərlə son istifadəçi giriş fəaliyyətini izləmək üçün istifadə olunur.",
+  "LogoAbout": "Haqqımızda səhifəsi üçün loqo",
+  "LogoCompact": "Kompakt sol menyu üçün loqo",
+  "LogoFavicon": "Favicon",
+  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
+  "LogoForViewer": "{{diagramViewer}} üçün loqo",
   "LogoLightSmall": "Sahə başlığı üçün loqo",
   "ManagementCategoryDataManagement": "Məlumatların idarə olunması",
   "ManagementCategoryIntegration": "İnteqrasiya",
@@ -287,5 +292,9 @@
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
   "WantToContinue": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
   "WhiteLabelSubtitle": "Şirkətinizin adını daxil edin, loqonu yükləyin və stili brendinizə uyğunlaşdırın.",
-  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
+  "WhiteLabelTooltip": "Retina displeylər üçün göstərilən ölçülər. Standart ekranlar üçün loqonun eni və hündürlüyü yükləmə zamanı müvafiq olaraq dəyişdiriləcək.",
+  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
+  "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
+  "YourCurrentDomain": "Cari domen adınız",
+  "YourLogo": "Loqonuz"
 }

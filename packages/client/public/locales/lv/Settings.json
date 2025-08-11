@@ -158,6 +158,11 @@
   "LoginHistoryTitle": "Pieteikšanās vēsture",
   "LoginLatestText": "Šajā lapā tiek rādīta tikai jaunākā aktivitāte. Dati tiek saglabāti laika periodā, kas norādīts zemāk esošajā laukā (maks. 180 dienas).",
   "LoginSubheaderTitle": "Šī apakšsadaļa tiek izmantota, lai uzraudzītu jaunākās lietotāju pieteikšanās darbības, tostarp veiksmīgas pieteikšanās un neveiksmīgus mēģinājumus, norādot iemeslus.",
+  "LogoAbout": "Logotips lapai Par",
+  "LogoCompact": "Kompaktās kreisās izvēlnes logotips",
+  "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logotips redaktoram {{editorName}}",
+  "LogoForViewer": "Logotips priekš {{diagramViewer}}",
   "LogoLightSmall": "Logotips portāla galvenei",
   "ManagementCategoryDataManagement": "Datu pārvaldība",
   "ManagementCategoryIntegration": "Integrācija",
@@ -287,5 +292,9 @@
   "WantToCancelUpload": "Vai vēlaties atcelt augšupielādi?",
   "WantToContinue": "Vai vēlaties turpināt vai mainīt lietotāja krātuves kvotu?",
   "WhiteLabelSubtitle": "Ievadiet sava uzņēmuma nosaukumu, augšupielādējiet logotipu un pielāgojiet stilu atbilstoši savam zīmolam.",
-  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību."
+  "WhiteLabelTooltip": "Izmēri ir parādīti Retina displejiem. Logotipa platuma un augstuma izmēri standarta izšķirtspējas displejiem pēc augšupielādes tiks atbilstoši mainīti.",
+  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību.",
+  "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
+  "YourCurrentDomain": "Jūsu pašreizējais domēns",
+  "YourLogo": "Jūsu logotips"
 }

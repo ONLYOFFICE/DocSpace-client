@@ -158,6 +158,11 @@
   "LoginHistoryTitle": "Historia e hyrjes",
   "LoginLatestText": "Vetëm aktiviteti më i fundit shfaqet në këtë faqe. Vetë të dhënat ruhen gjatë periudhës së specifikuar në fushën më poshtë (maksimumi 180 ditë).",
   "LoginSubheaderTitle": "Ky nënseksion përdoret për të monitoruar aktivitetin më të fundit të hyrjes së përdoruesit, duke përfshirë hyrjet e suksesshme dhe përpjekjet e dështuara me një tregues të arsyeve.",
+  "LogoAbout": "Logo për faqen Rreth",
+  "LogoCompact": "Logo për menunë kompakte të majtë",
+  "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logoja për redaktorin {{editorName}}",
+  "LogoForViewer": "Logo për {{diagramViewer}}",
   "LogoLightSmall": "Logo për kokën e hapësirës",
   "ManagementCategoryDataManagement": "Menaxhimi i të dhënave",
   "ManagementCategoryIntegration": "Integrimi",
@@ -287,5 +292,9 @@
   "WantToCancelUpload": "Dëshironi ta anuloni ngarkimin?",
   "WantToContinue": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
   "WhiteLabelSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
-  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër."
+  "WhiteLabelTooltip": "Madhësitë tregohen për ekranet Retina. Për ekranet me rezolucion standard, gjerësia dhe lartësia e logos do të ndryshohen në përputhje me rrethanat pas ngarkimit.",
+  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër.",
+  "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
+  "YourCurrentDomain": "Domeni juaj aktual",
+  "YourLogo": "Logos juaj"
 }

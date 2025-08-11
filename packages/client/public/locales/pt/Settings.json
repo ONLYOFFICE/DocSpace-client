@@ -158,6 +158,11 @@
   "LoginHistoryTitle": "Histórico de Acessos",
   "LoginLatestText": "Nesta página, apenas a última atividade é mostrada. Os dados em si são armazenados durante o período especificado no campo abaixo (máximo 180 dias).",
   "LoginSubheaderTitle": "Esta subsecção é utilizada para monitorizar a última atividade de início de sessão do utilizador, incluindo inícios de sessão bem sucedidos e tentativas falhadas com indicação dos motivos.",
+  "LogoAbout": "Logótipo para a página Sobre",
+  "LogoCompact": "Logótipo para o menu compacto à esquerda",
+  "LogoFavicon": "Favicon",
+  "LogoForEditors": "Logo para o editor {{editorName}}",
+  "LogoForViewer": "Logo para {{diagramViewer}}",
   "LogoLightSmall": "Logo para o cabeçalho do espaço",
   "ManagementCategoryDataManagement": "Gestão de dados",
   "ManagementCategoryIntegration": "Integração",
@@ -287,5 +292,9 @@
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Deseja continuar ou alterar a cota de armazenamento do utilizador?",
   "WhiteLabelSubtitle": "Introduza o nome da sua empresa, carregue o logótipo, e personalize o estilo para combinar com a sua imagem de marca.",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
+  "WhiteLabelTooltip": "Os tamanhos são mostrados para os mostradores da Retina. Para os ecrãs com resoluções padrão, a largura e altura do logótipo serão redimensionadas em conformidade no momento do carregamento do ficheiro.",
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
+  "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
+  "YourCurrentDomain": "O seu domínio atual",
+  "YourLogo": "O seu logótipo"
 }

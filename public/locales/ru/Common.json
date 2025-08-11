@@ -236,6 +236,7 @@
   "DeveloperTools": "Инструменты разработчика",
   "Diagram": "Диаграмма",
   "Diagrams": "Диаграммы",
+  "DiagramViewer": "Просмотрщик диаграмм",
   "Disable": "Отключить",
   "Disabled": "Отключено",
   "DisableQuota": "Отключить квоту",
@@ -551,6 +552,7 @@
   "PasswordRequired": "Требуется пароль",
   "Path": "Путь",
   "PaymentsTitle": "Платежи",
+  "PDF": "PDF",
   "People": "Люди",
   "Permissions": "Права доступа",
   "PerUserMonth": "<1>{{price}}</1> за администратора/месяц",
@@ -872,7 +874,5 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь",
-  "Diagram": "Диаграмма",
-  "Diagrams": "Диаграммы"
+  "YourTurn": "Ваша очередь"
 }

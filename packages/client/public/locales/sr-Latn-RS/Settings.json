@@ -158,6 +158,11 @@
   "LoginHistoryTitle": "Istorija prijava",
   "LoginLatestText": "Na ovoj stranici se prikazuje samo najnovija aktivnost. Sami podaci se čuvaju tokom perioda navedenog u polju ispod (maksimalno 180 dana).",
   "LoginSubheaderTitle": "Ovaj pododeljak se koristi za praćenje najnovije aktivnosti korisničkog prijavljivanja, uključujući uspešne prijave i neuspele pokušaje sa indikacijom razloga.",
+  "LogoAbout": "Logotip za U vezi stranicu",
+  "LogoCompact": "Logotip za kompaktni levi meni",
+  "LogoFavicon": "Favikona",
+  "LogoForEditors": "Logo za {{editorName}} uređivač",
+  "LogoForViewer": "Logo za {{diagramViewer}}",
   "LogoLightSmall": "Logotip za prostorno zaglavlje",
   "ManagementCategoryDataManagement": "Upravljanje podacima",
   "ManagementCategoryIntegration": "Integracija",
@@ -287,5 +292,9 @@
   "WantToCancelUpload": "Da li želite da otkažete otpremanje?",
   "WantToContinue": "Da li želite da nastavite ili da promenite korisničku kvotu za skladište?",
   "WhiteLabelSubtitle": "Unesite naziv svoje kompanije, otpremite logotip i prilagodite stil da odgovara vašem brendu.",
-  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak."
+  "WhiteLabelTooltip": "Veličine su prikazane za Retina ekrane. Za ekrane sa standardnim rezolucijama, širina i visina logotipa će biti automatski prilagođene prilikom otpremanja.",
+  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
+  "YouHaveUnsavedChanges": "Imate nesačuvane promene",
+  "YourCurrentDomain": "Vaš trenutni domen",
+  "YourLogo": "Vaš logo"
 }

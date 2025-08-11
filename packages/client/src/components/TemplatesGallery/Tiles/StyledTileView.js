@@ -28,12 +28,7 @@ import styled, { css } from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
-import {
-  tablet,
-  desktop,
-  mobile,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
 import TileContent from "./TileContent";
 
 const FlexBoxStyles = css`

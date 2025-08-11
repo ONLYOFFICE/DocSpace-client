@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2025-08-04T07:30:00.986Z",
+  "updated_at": "2025-08-11T09:02:43.824Z",
   "comment": {
     "text": "This translation key is used for the \"Create room\" button label in various UI components, such as buttons and dialog headers. It appears when a user clicks on the \"Create room\" link or button to initiate the creation of a new room.",
     "is_auto": true,
@@ -43,7 +43,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
       "line_number": 209,
-      "context": "className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary\n />",
+      "context": "className={styles.roomTemplateText}\n >\n {t(\"Files:RoomTemplateDescription\")}\n </Text>\n <Button\n label={t(\"Common:CreateRoom\")}\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_create_room_button\"",
       "module": "/packages/client"
     },
     {
@@ -66,19 +66,19 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2211,
+      "line_number": 2212,
       "context": "case \"create-room\":\n if (!this.isAvailableOption(\"create-room\")) return null;\n return {\n id: \"menu-create-room\",\n label: t(\"Common:CreateRoom\"),\n onClick: this.onClickCreateRoom,\n iconUrl: CatalogRoomsReactSvgUrl,\n };\n \n case \"download\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 532,
-      "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile && isRoom ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
+      "line_number": 480,
+      "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 162,
+      "line_number": 182,
       "context": "size={IconSizeType.medium}\n onClick={onCreateRoom}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     }

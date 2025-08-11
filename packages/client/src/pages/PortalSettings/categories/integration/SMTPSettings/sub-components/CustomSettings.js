@@ -114,6 +114,7 @@ const CustomSettings = (props) => {
         onChange={onChangeToggle}
         label={t("Common:Authentication")}
         isDisabled={isLoading}
+        dataTestId="smtp_auth_toggle_button"
       />
 
       <div className="smtp-settings_title smtp-settings_login">
@@ -130,6 +131,7 @@ const CustomSettings = (props) => {
         value={settings[HOST_LOGIN]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}
         scale
+        testId="smtp_host_login_imput"
       />
 
       <div className="smtp-settings_title">
@@ -146,6 +148,7 @@ const CustomSettings = (props) => {
         value={settings[HOST_PASSWORD]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}
         scale
+        testId="smtp_host_password_input"
       />
 
       <Checkbox
@@ -155,6 +158,7 @@ const CustomSettings = (props) => {
         isChecked={settings[USE_NTLM]}
         onChange={onChangeCheckbox}
         isDisabled={isLoading || !settings[AUTHENTICATION]}
+        dataTestId="smtp_auth_ntlm_checkbox"
       />
     </div>
   );
@@ -175,6 +179,7 @@ const CustomSettings = (props) => {
         onChange={onChange}
         value={settings[HOST]}
         scale
+        testId="smtp_host_domain_input"
       />
 
       <div className="smtp-settings_title">
@@ -192,6 +197,7 @@ const CustomSettings = (props) => {
         value={settings[PORT].toString()}
         scale
         hasError={errors[PORT]}
+        testId="smtp_port_input"
       />
       {enableAuthComponent}
 
@@ -204,6 +210,7 @@ const CustomSettings = (props) => {
         onChange={onChange}
         value={settings[SENDER_DISPLAY_NAME]}
         scale
+        testId="smtp_sender_display_name_input"
       />
 
       <div className="smtp-settings_title">
@@ -218,6 +225,7 @@ const CustomSettings = (props) => {
         place="top"
         hasError={errors[SENDER_EMAIL_ADDRESS]}
         errorMessage={t("Common:IncorrectEmail")}
+        dataTestId="smtp_sender_email_container"
       >
         <EmailInput
           name={SENDER_EMAIL_ADDRESS}
@@ -228,6 +236,7 @@ const CustomSettings = (props) => {
           hasError={errors[SENDER_EMAIL_ADDRESS] ?? false}
           placeholder={t("EnterEmail")}
           scale
+          dataTestId="smtp_sender_email_input"
         />
       </FieldContainer>
 
@@ -238,6 +247,7 @@ const CustomSettings = (props) => {
         label={t("EnableSSL")}
         isChecked={settings[ENABLE_SSL]}
         onChange={onChangeCheckbox}
+        dataTestId="enable_ssl_checkbox"
       />
       <ButtonContainer
         t={t}

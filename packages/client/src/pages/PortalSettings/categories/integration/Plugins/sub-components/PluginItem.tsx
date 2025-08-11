@@ -55,6 +55,7 @@ const PluginItem = ({
 
   image,
   url,
+  dataTestId,
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -71,11 +72,12 @@ const PluginItem = ({
   };
 
   return (
-    <StyledPluginItem description={description}>
+    <StyledPluginItem description={description} data-testid={dataTestId}>
       <img
         className="plugin-logo"
         src={imgSrc || PluginDefaultLogoUrl}
         alt="Plugin logo"
+        data-testid="plugin_logo"
       />
       <div className="plugin-info">
         <StyledPluginHeader>
@@ -86,12 +88,14 @@ const PluginItem = ({
                 iconName={PluginSettingsIconUrl}
                 size={16}
                 onClick={onOpenSettingsDialog}
+                data-testid="open_settings_icon_button"
               />
             ) : null}
             <ToggleButton
               className="plugin-toggle-button"
               onChange={onChangeStatus}
               isChecked={enabled}
+              dataTestId="enable_plugin_toggle_button"
             />
           </div>
         </StyledPluginHeader>

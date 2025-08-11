@@ -154,6 +154,7 @@ const UploadXML = (props) => {
             value={uploadXmlUrl}
             hasError={!isValidXmlUrl}
             onFocus={onFocus}
+            dataTestId="upload_xml_input"
           />
 
           <Button
@@ -167,6 +168,7 @@ const UploadXML = (props) => {
             }
             onClick={onUploadClick}
             tabIndex={2}
+            testId="upload_xml_button"
           />
         </div>
         <Text className="or-text" noSelect>
@@ -182,6 +184,7 @@ const UploadXML = (props) => {
           onInput={uploadXml}
           size="middle"
           tabIndex={3}
+          data-test-id="upload_xml_file_input"
         />
       </StyledWrapper>
     </FieldContainer>

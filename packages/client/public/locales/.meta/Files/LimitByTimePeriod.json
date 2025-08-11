@@ -3,7 +3,7 @@
   "content": "Limit by time period",
   "content_en_sha1_hash": "03e40a5e784a8aec64ccc72778ffd126b2588b86",
   "created_at": "2025-05-19T21:30:55.756Z",
-  "updated_at": "2025-07-10T11:11:06.848Z",
+  "updated_at": "2025-08-11T09:02:43.890Z",
   "comment": {
     "text": "\"LimitByTimePeriod\" is used to display a message when a file's expiration date has passed, prompting users to take action. This translation key appears in a component used for editing links, specifically on a panel that handles time-limited content. Translators should provide a clear and concise phrase to convey this reminder.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 342,
+      "line_number": 344,
       "context": ") : null}\n \n <LimitTimeBlock\n isExpired={isExpired}\n isLoading={isLoading}\n headerText={t(\"Files:LimitByTimePeriod\")}\n bodyText={expiredLinkText}\n expirationDate={expirationDate}\n setExpirationDate={setExpirationDate}\n setIsExpired={setIsExpired}\n language={language}",
       "module": "/packages/client"
     }

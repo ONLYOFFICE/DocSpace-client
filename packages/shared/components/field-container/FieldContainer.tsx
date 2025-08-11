@@ -102,6 +102,9 @@ const FieldContainer = ({
                 className={classNames(styles.iconButton, tooltipClass)}
                 tooltipContent={tooltipContent}
                 place={place}
+                dataTestId={
+                  dataTestId ? `${dataTestId}_help_button` : undefined
+                }
               />
             ) : null}
           </div>
@@ -121,6 +124,9 @@ const FieldContainer = ({
                   place={place}
                   style={displayInlineBlock}
                   offsetRight={0}
+                  dataTestId={
+                    dataTestId ? `${dataTestId}_help_button` : undefined
+                  }
                 />
               ) : null}
             </Label>

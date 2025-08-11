@@ -3,7 +3,7 @@
   "content": "Type your instance ID",
   "content_en_sha1_hash": "0a9bd3f683637f50a1e728a0092dab4ffd8d11fa",
   "created_at": "2025-05-19T21:30:45.927Z",
-  "updated_at": "2025-06-30T12:20:31.668Z",
+  "updated_at": "2025-08-11T09:02:44.069Z",
   "comment": {
     "text": "This translation key is used for a placeholder text in an input field that asks users to enter their instance ID. It appears in a login wizard page and will be displayed when the instance ID field is empty or not yet populated. The purpose of this text is to guide users by providing a clear instruction on what value they should enter.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 414,
+      "line_number": 415,
       "context": "name=\"instance-id\"\n type={InputType.text}\n size={InputSize.large}\n hasError={hasErrorInstanceId}\n value={instanceId}\n placeholder={t(\"Common:InstanceId\")}\n scale\n tabIndex={3}\n isDisabled={isCreated}\n onChange={onChangeInstanceId}\n />",
       "module": "/packages/login"
     }

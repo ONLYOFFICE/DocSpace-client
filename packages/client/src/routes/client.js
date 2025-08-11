@@ -117,39 +117,19 @@ const ClientRoutes = [
           },
           {
             path: "recent",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "recent/filter",
-            async lazy() {
-              const { FilesView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Files"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute>
-                    <FilesView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
+            element: (
+              <PrivateRoute>
+                <ViewComponent />
+              </PrivateRoute>
+            ),
           },
           {
             path: "files/trash",

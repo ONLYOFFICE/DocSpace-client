@@ -167,7 +167,7 @@ const Shell = ({ page = "home", ...rest }) => {
       });
 
       SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
-        roomParts: "encryption",
+        roomParts: "storage-encryption",
       });
     }
   }, [standalone]);

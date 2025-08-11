@@ -237,6 +237,7 @@ const AvatarEditorDialog = (props) => {
           primary
           onClick={onSave ? () => onSaveAction(image) : onSaveClick}
           isLoading={isLoading}
+          testId="avatar_editor_save_button"
         />
         <Button
           className="cancel-button"
@@ -245,6 +246,7 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           onClick={onCloseModal}
+          testId="avatar_editor_cancel_button"
         />
       </ModalDialog.Footer>
     </StyledModalDialog>

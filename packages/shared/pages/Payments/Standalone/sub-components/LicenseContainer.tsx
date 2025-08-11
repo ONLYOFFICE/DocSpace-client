@@ -113,6 +113,7 @@ export const LicenseContainer = ({
         onInput={onLicenseFileHandler}
         isDisabled={isLicenseUploading || isLoading}
         isLoading={isLicenseUploading}
+        data-test-id="upload_license_file_input"
       />
       <div className={styles.buttonComponent}>
         <Button
@@ -122,6 +123,7 @@ export const LicenseContainer = ({
           onClick={onClickUpload}
           isLoading={isLoading}
           isDisabled={!isLicenseCorrect}
+          testId="activate_license_button"
         />
       </div>
     </div>

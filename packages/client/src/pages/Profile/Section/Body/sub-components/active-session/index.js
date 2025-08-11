@@ -167,6 +167,7 @@ const ActiveSessions = ({
           type="action"
           isHovered
           onClick={() => setLogoutAllDialogVisible(true)}
+          dataTestId="terminate_all_sessions_link"
         >
           {t("Profile:TerminateAllSessions")}
         </Link>
@@ -174,6 +175,7 @@ const ActiveSessions = ({
           offsetRight={0}
           iconName={InfoReactSvgUrl}
           tooltipContent={tooltipContent}
+          dataTestId="terminate_all_sessions_help_button"
         />
       </div>
 

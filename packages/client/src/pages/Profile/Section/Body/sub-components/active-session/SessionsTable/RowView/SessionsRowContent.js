@@ -67,7 +67,7 @@ const SessionsRowContent = ({
       sectionWidth={sectionWidth}
       sideColor={theme.profile.activeSessions.tableCellColor}
     >
-      <Text fontSize="14px" fontWeight="600">
+      <Text fontSize="14px" fontWeight="600" dataTestId="session_platform">
         {platform} <span className="session-browser">{`(${browser})`}</span>
       </Text>
       {isMobile() && showTickIcon ? (
@@ -77,14 +77,16 @@ const SessionsRowContent = ({
           color={globalColors.tickColor}
         />
       ) : null}
-      <Text truncate>{getCorrectDate(locale, date)}</Text>
+      <Text truncate dataTestId="session_date">
+        {getCorrectDate(locale, date)}
+      </Text>
       {country || city ? (
-        <Text fontSize="12px" fontWeight="600">
+        <Text fontSize="12px" fontWeight="600" dataTestId="session_location">
           {country}
           {country && city ? ` ${city}` : null}
         </Text>
       ) : null}
-      <Text truncate containerWidth="160px">
+      <Text truncate containerWidth="160px" dataTestId="session_ip">
         {ip}
       </Text>
     </StyledRowContent>

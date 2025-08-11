@@ -57,6 +57,7 @@ const DailyFeedContainer = ({
           className="daily-feed"
           onChange={onChangeEmailSubscription}
           isChecked={dailyFeedSubscriptions}
+          dataTestId="daily_feed_toggle_button"
         />
       </div>
       <Text {...textDescriptionsProps}>

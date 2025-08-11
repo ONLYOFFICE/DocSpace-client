@@ -187,7 +187,7 @@ const Header = (props) => {
         {(isAdmin && !profile?.isOwner) ||
         (isMe && !profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
-            directionX="left"
+            directionX="right"
             title={t("Common:Actions")}
             iconName={VerticalDotsReactSvgUrl}
             size={17}

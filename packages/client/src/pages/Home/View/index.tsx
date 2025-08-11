@@ -308,6 +308,9 @@ const View = ({
             await getProfileInitialValue();
           }
 
+          clearFiles();
+          setContactsTab(false);
+
           view = "profile";
         } else if (!isContactsPage) {
           await getFilesRef.current();

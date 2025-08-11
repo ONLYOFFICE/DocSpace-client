@@ -165,6 +165,7 @@ const UpdatePlanButtonContainer = ({
                 onClick={goLinkCard}
                 fontWeight={600}
                 style={{ textDecoration: "underline" }}
+                data-testid="add_payment_method_link"
               >
                 {t("AddPaymentMethod")}
               </a>
@@ -260,6 +261,7 @@ const UpdatePlanButtonContainer = ({
         isDisabled={isLessCountThanAcceptable || isLoading || isDisabled}
         onClick={goToStripePortal}
         isLoading={isLoading}
+        testId="upgrade_plan_button"
       />
     ) : (
       <DowngradePlanButtonContainer
@@ -284,6 +286,7 @@ const UpdatePlanButtonContainer = ({
           isDisabled={isLoading || isDisabled}
           onClick={onOpenPaymentDialog}
           isLoading={isLoading}
+          testId="upgrade_plan_button"
         />
       );
     }
@@ -305,6 +308,7 @@ const UpdatePlanButtonContainer = ({
         }
         onClick={onUpdateTariff}
         isLoading={isLoading}
+        testId="upgrade_plan_button"
       />
     );
   };

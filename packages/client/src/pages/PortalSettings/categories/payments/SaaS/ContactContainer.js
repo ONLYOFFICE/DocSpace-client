@@ -42,13 +42,14 @@ const ContactContainer = ({ t, salesEmail }) => {
     <StyledContactContainer>
       {salesEmail ? (
         <Text as="span" noSelect fontWeight={600}>
-          {t("ContactUs")}
+          {t("Common:ContactUs")}
           <Link
             className="sales-email-link"
             tag="a"
             fontWeight="600"
             href={`mailto:${salesEmail}`}
             color="accent"
+            dataTestId="sales_email_link"
           >
             {salesEmail}
           </Link>

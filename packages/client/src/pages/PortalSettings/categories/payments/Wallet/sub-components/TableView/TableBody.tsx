@@ -75,7 +75,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   return (
     <TableRow>
       <TableCell>
-        <Text fontWeight={600} fontSize="11px">
+        <Text fontWeight={600} fontSize="11px" dataTestId="transaction_date">
           {correctDate}
         </Text>
       </TableCell>

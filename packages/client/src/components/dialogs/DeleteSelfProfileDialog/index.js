@@ -83,6 +83,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
               title={email}
               tag="a"
               color="accent"
+              dataTestId="dialog_self_email_link"
             >
               {email}
             </Link>
@@ -97,6 +98,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
             primary
             onClick={this.onDeleteSelfProfileInstructions}
             isLoading={isRequestRunning}
+            testId="dialog_delete_self_button"
           />
           <Button
             key="CloseBtn"
@@ -105,6 +107,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
             scale
             onClick={onClose}
             isDisabled={isRequestRunning}
+            testId="dialog_delete_self_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

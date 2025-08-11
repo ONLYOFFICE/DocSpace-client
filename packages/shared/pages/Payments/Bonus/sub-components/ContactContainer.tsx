@@ -66,6 +66,7 @@ export const ContactContainer = ({
                       fontWeight="600"
                       href={forEnterprisesUrl}
                       className={styles.link}
+                      dataTestId="for_enterprise_license_link"
                     />
                   ),
                 }}
@@ -86,6 +87,7 @@ export const ContactContainer = ({
                   fontWeight="600"
                   href={demoOrderUrl}
                   className={styles.link}
+                  dataTestId="demo_order_link"
                 >
                   here
                 </Link>
@@ -111,6 +113,7 @@ export const ContactContainer = ({
                     tag="a"
                     href={`mailto:${salesEmail}`}
                     className={styles.link}
+                    dataTestId="upgrade_to_pro_banner_purchase_link"
                   />
                 ),
               }}
@@ -133,6 +136,7 @@ export const ContactContainer = ({
                     fontWeight="600"
                     href={feedbackAndSupportUrl}
                     className={styles.link}
+                    dataTestId="upgrade_to_pro_banner_support_link"
                   />
                 ),
               }}

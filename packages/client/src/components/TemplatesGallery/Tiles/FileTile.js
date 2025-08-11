@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
 const Styled = styled.div`
   width: 100%;
@@ -43,7 +44,7 @@ const Styled = styled.div`
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border: 1px solid #dfe2e3;
+    border: ${`1px solid ${globalColors.lightGraySelected}`};
     margin: 10px 10px 0 10px;
 
     ${(props) =>

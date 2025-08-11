@@ -88,7 +88,6 @@ import AccessRightsStore from "../AccessRightsStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import TreeFoldersStore from "../TreeFoldersStore";
 
-import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
@@ -132,7 +131,6 @@ class UsersStore {
   constructor(
     public settingsStore: SettingsStore,
     public userStore: UserStore,
-    public targetUserStore: TargetUserStore,
     public groupsStore: GroupsStore,
     public contactsHotkeysStore: ContactsHotkeysStore,
     public accessRightsStore: AccessRightsStore,
@@ -145,7 +143,6 @@ class UsersStore {
   ) {
     this.settingsStore = settingsStore;
     this.userStore = userStore;
-    this.targetUserStore = targetUserStore;
     this.groupsStore = groupsStore;
     this.contactsHotkeysStore = contactsHotkeysStore;
     this.accessRightsStore = accessRightsStore;
@@ -569,19 +566,15 @@ class UsersStore {
   };
 
   updateProfileInUsers = async (updatedProfile?: TUser) => {
-    const updatedUser = updatedProfile ?? this.targetUserStore.targetUser;
     if (!this.users) {
       return this.getUsersList(this.filter, true);
     }
 
-    if (!updatedUser) return;
+    if (!updatedProfile) return;
 
     const updatedUsers = this.users.map((user) => {
-      if (
-        user.id === updatedUser.id ||
-        user.userName === updatedUser.userName
-      ) {
-        return { ...user, ...updatedUser };
+      if (user.id === updatedProfile.id) {
+        return { ...user, ...updatedProfile };
       }
 
       return user;
@@ -639,6 +632,7 @@ class UsersStore {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
 
+            options.push("change-name");
             options.push("change-email");
             options.push("change-password");
 

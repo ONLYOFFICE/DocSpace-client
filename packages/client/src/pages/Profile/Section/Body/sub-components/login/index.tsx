@@ -24,30 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
+import LoginSettings from "./login-settings";
+import SocialNetworks from "./social-networks";
+import ActiveSession from "./active-session";
 
-export const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: ${(props) => props.theme.profile.themePreview.border};
-  border-radius: 12px;
-  height: 284px;
-  width: 318px;
-  overflow: hidden;
+import { StyledWrapper } from "./Login.styled";
 
-  @media ${tablet} {
-    width: 100%;
-  }
+type LoginContentProps = {
+  tfaOn: boolean;
+};
 
-  .card-header {
-    padding: 11px 19px;
-    border-bottom: ${(props) => props.theme.profile.themePreview.border};
-    line-height: 20px;
-  }
+const LoginContent = ({ tfaOn }: LoginContentProps) => {
+  return (
+    <StyledWrapper>
+      {tfaOn ? <LoginSettings /> : null}
+      <SocialNetworks />
+      <ActiveSession />
+    </StyledWrapper>
+  );
+};
 
-  .floating-btn {
-    bottom: 100px !important;
-    inset-inline-end: 16px !important;
-  }
-`;
+export default LoginContent;

@@ -24,56 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Text } from "@docspace/shared/components/text";
-import { NotificationsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-
-const DailyFeedContainer = ({
-  t,
-  dailyFeedSubscriptions,
-  changeSubscription,
-  textProps,
-  textDescriptionsProps,
+export const LoaderWrapper = ({
+  children,
+  isLoading,
+  testId,
+}: {
+  children: React.ReactNode;
+  isLoading: boolean;
+  testId?: string;
 }) => {
-  const onChangeEmailSubscription = async (e) => {
-    const checked = e.currentTarget.checked;
-    try {
-      await changeSubscription(NotificationsType.DailyFeed, checked);
-    } catch (err) {
-      toastr.error(err);
-    }
-  };
-
   return (
-    <div className="notification-container">
-      <div className="row">
-        <Text {...textProps} className="subscription-title">
-          {t("DailyFeed", { productName: t("Common:ProductName") })}
-        </Text>
-        <ToggleButton
-          className="daily-feed"
-          onChange={onChangeEmailSubscription}
-          isChecked={dailyFeedSubscriptions}
-          dataTestId="daily_feed_toggle_button"
-        />
-      </div>
-      <Text {...textDescriptionsProps}>
-        {t("DailyFeedDescription", { productName: t("Common:ProductName") })}
-      </Text>
+    <div
+      style={{
+        opacity: isLoading ? 0.5 : 1,
+        pointerEvents: isLoading ? "none" : "auto",
+        transition: "opacity 0.3s ease-in-out",
+      }}
+      data-testid={testId}
+    >
+      {children}
     </div>
   );
 };
-
-export default inject(({ peopleStore }) => {
-  const { targetUserStore } = peopleStore;
-
-  const { changeSubscription, dailyFeedSubscriptions } = targetUserStore;
-
-  return {
-    changeSubscription,
-    dailyFeedSubscriptions,
-  };
-})(observer(DailyFeedContainer));

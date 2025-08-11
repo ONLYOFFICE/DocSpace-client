@@ -153,6 +153,12 @@ const PureHome = (props) => {
     allowInvitingGuests,
     checkGuests,
     sectionWithTabs,
+    dropTargetPreview,
+    setDropTargetPreview,
+    selectedFolderTitle,
+    clearDropPreviewLocation,
+    canCreateSecurity,
+    startDropPreview,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -170,12 +176,12 @@ const PureHome = (props) => {
 
   const isContactsPage =
     currentClientView === "users" || currentClientView === "groups";
-
+  const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
 
   const onDrop = (f, uploadToFolder) => {
-    if (isContactsPage) return;
+    if (isContactsPage || isProfile) return;
 
     if (
       folderSecurity &&
@@ -184,11 +190,12 @@ const PureHome = (props) => {
     )
       return;
 
+    const dragged = dragging;
     dragging && setDragging(false);
 
     if (disableDrag) return;
 
-    createFoldersTree(t, f, uploadToFolder)
+    createFoldersTree(t, f, uploadToFolder, dragged)
       .then((fItem) => {
         if (fItem.length > 0) startUpload(fItem, null, t);
       })
@@ -231,7 +238,8 @@ const PureHome = (props) => {
   });
 
   const getContextModel = () => {
-    if (isFrame) return null;
+    if (isFrame || isProfile) return null;
+
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
   };
@@ -286,6 +294,42 @@ const PureHome = (props) => {
     }
   }
 
+  const onDragOverEmpty = React.useCallback(
+    (isDragActive) => {
+      if (
+        isDragActive &&
+        selectedFolderTitle &&
+        !disableDrag &&
+        canCreateSecurity
+      ) {
+        setDropTargetPreview(selectedFolderTitle);
+      }
+    },
+    [selectedFolderTitle, setDropTargetPreview, disableDrag, canCreateSecurity],
+  );
+
+  const onDragLeaveEmpty = React.useCallback(
+    (e) => {
+      if (setDropTargetPreview) {
+        // Check if mouse is over preview button or progress bar elements
+        const target =
+          e?.relatedTarget ||
+          document.elementFromPoint(e?.clientX || 0, e?.clientY || 0);
+
+        const isOverPreviewButton =
+          target?.closest(".previewFloatingButtonContainer") ||
+          target?.closest(".layout-progress-bar") ||
+          target?.closest(".layout-progress-bar_wrapper") ||
+          target?.closest('[role="tooltip"]');
+
+        if (!isOverPreviewButton) {
+          setDropTargetPreview(null);
+        }
+      }
+    },
+    [setDropTargetPreview],
+  );
+
   // sectionProps.onOpenUploadPanel = showUploadPanel;
 
   sectionProps.getContextModel = getContextModel;
@@ -293,9 +337,11 @@ const PureHome = (props) => {
 
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
+  sectionProps.dropTargetPreview = dropTargetPreview;
   sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
+  sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = onCancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
@@ -303,6 +349,10 @@ const PureHome = (props) => {
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
   sectionProps.withTabs = sectionWithTabs;
+  sectionProps.onDragOverEmpty = onDragOverEmpty;
+  sectionProps.onDragLeaveEmpty = onDragLeaveEmpty;
+  sectionProps.dragging = dragging;
+  sectionProps.startDropPreview = startDropPreview;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -324,10 +374,10 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage ? null : isContactsPage ? (
+      {isSettingsPage ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
-          <ContactsSelectionArea />
+          {isProfile ? null : <ContactsSelectionArea />}
         </>
       ) : (
         <>
@@ -337,7 +387,10 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps}>
-        {!isErrorRoomNotAvailable || isContactsPage || isSettingsPage ? (
+        {!isErrorRoomNotAvailable ||
+        isContactsPage ||
+        isProfile ||
+        isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -351,7 +404,7 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldShowFilter ? (
+        {shouldShowFilter && !isProfile ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />
@@ -398,7 +451,14 @@ export const Component = inject(
     dialogsStore,
     filesSettingsStore,
   }) => {
-    const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
+    const {
+      setSelectedFolder,
+      security: folderSecurity,
+      title: selectedFolderTitle,
+    } = selectedFolderStore;
+
+    const canCreateSecurity = folderSecurity?.Create;
+
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
@@ -480,6 +540,10 @@ export const Component = inject(
       primaryOperationsAlert,
       isErrorChecking,
       isPrimaryProgressVisbile,
+      dropTargetPreview,
+      setDropTargetPreview,
+      clearDropPreviewLocation,
+      startDropPreview,
     } = primaryProgressDataStore;
 
     const {
@@ -657,6 +721,12 @@ export const Component = inject(
       checkGuests,
       hasGuests,
       sectionWithTabs,
+      dropTargetPreview,
+      setDropTargetPreview,
+      selectedFolderTitle,
+      clearDropPreviewLocation,
+      canCreateSecurity,
+      startDropPreview,
     };
   },
 )(observer(Home));

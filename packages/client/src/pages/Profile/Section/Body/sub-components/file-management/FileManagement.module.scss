@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
-const StyledWrapper = styled.div`
+.styledWrapper {
   max-width: 660px;
 
   width: 100%;
@@ -34,12 +32,11 @@ const StyledWrapper = styled.div`
   display: grid;
   grid-gap: 32px;
 
-  .toggle-btn-wrapper {
+  .toggleBtnWrapper {
     display: flex;
-    //gap: 8px;
   }
 
-  .toggle-btn {
+  .toggleBtn {
     height: 20px;
     line-height: 20px;
     position: relative;
@@ -54,11 +51,9 @@ const StyledWrapper = styled.div`
     margin-top: 0;
   }
 
-  .settings-section {
+  .settingsSection {
     box-sizing: border-box;
     display: grid;
     grid-gap: 12px;
   }
-`;
-
-export default StyledWrapper;
+}

@@ -25,39 +25,75 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { mobile } from "@docspace/shared/utils";
+
+import { tablet, mobile } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: ${(props) => props.theme.profile.themePreview.border};
+  border-radius: 12px;
+  height: 284px;
+  width: 318px;
+  overflow: hidden;
+
+  @media ${tablet} {
+    width: 100%;
+  }
+
+  .card-header {
+    padding: 11px 19px;
+    border-bottom: ${(props) => props.theme.profile.themePreview.border};
+    line-height: 20px;
+  }
+
+  .floating-btn {
+    bottom: 100px !important;
+    inset-inline-end: 16px !important;
+  }
+`;
+
+export const StyledWrapperInterfaceTheme = styled.div`
+  width: 100%;
   max-width: 660px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 
-  .header {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  .system-theme-checkbox {
+    display: inline-flex;
   }
 
-  .description {
-    color: ${(props) => props.theme.profile.login.textColor};
+  .checkbox {
+    height: 20px;
+    margin-inline-end: 8px !important;
   }
 
-  .actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+  .system-theme-description {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    padding-inline-start: 24px;
+    max-width: 295px;
+    color: ${(props) => props.theme.profile.themePreview.descriptionColor};
+  }
+
+  .themes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
 
     @media ${mobile} {
-      flex-direction: column;
-      gap: 12px;
-      align-items: flex-start;
+      display: none;
+    }
+  }
 
-      .button {
-        width: 100%;
-        height: 40px;
-        font-size: 14px;
-      }
+  .mobile-themes-container {
+    display: none;
+
+    @media ${mobile} {
+      display: flex;
+      padding-inline-start: 30px;
     }
   }
 `;

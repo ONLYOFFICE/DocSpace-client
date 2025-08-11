@@ -248,10 +248,6 @@ class ClientLoadingStore {
     return this.isArticleLoading;
   }
 
-  get showProfileLoader(): boolean {
-    return !this.isProfileLoaded;
-  }
-
   get showHeaderLoader(): boolean {
     return this.loaderStates.header.isLoading || this.showArticleLoader;
   }
@@ -266,6 +262,10 @@ class ClientLoadingStore {
 
   get showBodyLoader(): boolean {
     return this.loaderStates.body.isLoading || this.showFilterLoader;
+  }
+
+  get showProfileLoader(): boolean {
+    return this.showHeaderLoader || !this.isProfileLoaded;
   }
 }
 

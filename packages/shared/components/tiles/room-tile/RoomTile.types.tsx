@@ -88,4 +88,6 @@ export type RoomTileProps = {
   showHotkeyBorder?: boolean;
   /** Flag for edit mode */
   isEdit?: boolean;
+  /** Data test id for the tile */
+  dataTestId?: string;
 };

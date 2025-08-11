@@ -29,16 +29,11 @@ import { useLocation } from "react-router";
 import { TableSkeleton, RowsSkeleton } from "@docspace/shared/skeletons";
 import { TilesSkeleton } from "@docspace/shared/skeletons/tiles";
 
-const pathname = window.location.pathname.toLowerCase();
-const isEditor = pathname.indexOf("doceditor") !== -1;
-const isGallery = pathname.indexOf("form-gallery") !== -1;
-
 const withLoader = (WrappedComponent) => (Loader) => {
   const LoaderWrapper = (props) => {
     const {
       isInit,
       tReady,
-      firstLoad,
       isLoaded,
       isRooms,
       viewAs,
@@ -57,8 +52,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
 
     const showLoader = window?.ClientConfig?.loaders?.showLoader;
 
-    return (!isEditor && firstLoad && !isGallery) ||
-      !isLoaded ||
+    return !isLoaded ||
       showBodyLoader ||
       (isLoadingFilesFind && !Loader) ||
       !tReady ||

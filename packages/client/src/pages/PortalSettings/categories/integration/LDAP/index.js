@@ -105,6 +105,7 @@ const LDAP = ({
                 color={currentColorScheme?.main?.accent}
                 isHovered
                 onClick={onGoToInvitationSettings}
+                dataTestId="invitation_settings_link"
               />
             ),
           }}
@@ -117,6 +118,7 @@ const LDAP = ({
             isHovered
             target="_blank"
             href={ldapSettingsUrl}
+            dataTestId="ldap_settings_link"
           >
             {t("Common:LearnMore")}
           </Link>

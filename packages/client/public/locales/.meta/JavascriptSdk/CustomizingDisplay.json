@@ -3,7 +3,7 @@
   "content": "Customizing the display",
   "content_en_sha1_hash": "d89fd68cf6cfcf0d4d0b02cee820b4e13b8d1a88",
   "created_at": "2025-05-19T21:30:54.439Z",
-  "updated_at": "2025-05-24T09:28:18.058Z",
+  "updated_at": "2025-08-04T07:30:01.384Z",
   "comment": {
     "text": "This translation key is used to display the text \"Customizing the display\" in various UI contexts, such as buttons and section headers. It appears in sections related to portal settings, allowing users to customize their display preferences.",
     "is_auto": true,
@@ -12,43 +12,43 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
-      "line_number": 175,
+      "line_number": 174,
       "context": "t={t}\n onSetSource={onSetSource}\n onSetVersion={onSetVersion}\n />\n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 218,
+      "line_number": 217,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 335,
+      "line_number": 347,
       "context": "setConfig={setConfig}\n isButtonMode={config.isButtonMode}\n />\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 414,
+      "line_number": 417,
       "context": "t={t}\n onSetSource={onSetSource}\n onSetVersion={onSetVersion}\n />\n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 233,
+      "line_number": 237,
       "context": "setConfig={setConfig}\n isButtonMode={config.isButtonMode}\n />\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 354,
+      "line_number": 355,
       "context": "</ControlsGroup>\n ) : null}\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
-      "line_number": 219,
+      "line_number": 218,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     }

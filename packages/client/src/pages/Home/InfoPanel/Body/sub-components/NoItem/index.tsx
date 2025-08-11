@@ -63,17 +63,52 @@ const NoItem = ({
   isLockedSharedRoom,
   infoPanelSelection,
 }: NoItemsProps) => {
+  const prevNoItemsRef = React.useRef({
+    isUsers,
+    isGroups,
+    isGuests,
+    isGallery,
+    isRooms,
+    isFiles,
+    isLockedSharedRoom,
+  });
+
+  if (
+    isUsers ||
+    isGroups ||
+    isGuests ||
+    isGallery ||
+    isRooms ||
+    isFiles ||
+    isLockedSharedRoom
+  ) {
+    prevNoItemsRef.current = {
+      isUsers,
+      isGroups,
+      isGuests,
+      isGallery,
+      isRooms,
+      isFiles,
+      isLockedSharedRoom,
+    };
+  }
+
   if (infoPanelSelection?.expired && infoPanelSelection?.external)
     return <ExpiredItem />;
 
-  if (isLockedSharedRoom) return <LockedItem item={infoPanelSelection} />;
+  if (prevNoItemsRef.current.isLockedSharedRoom)
+    return <LockedItem item={infoPanelSelection!} />;
 
-  if (isGroups || isUsers || isGuests)
+  if (
+    prevNoItemsRef.current.isGroups ||
+    prevNoItemsRef.current.isUsers ||
+    prevNoItemsRef.current.isGuests
+  )
     return <NoContactsItem isGuests={isGuests} isGroups={isGroups} />;
-  if (isGallery) return <NoGalleryItem />;
+  if (prevNoItemsRef.current.isGallery) return <NoGalleryItem />;
 
-  if (isFiles) return <NoFileOrFolderItem />;
-  if (isRooms) return <NoRoomItem />;
+  if (prevNoItemsRef.current.isFiles) return <NoFileOrFolderItem />;
+  if (prevNoItemsRef.current.isRooms) return <NoRoomItem />;
 
   return null;
 };

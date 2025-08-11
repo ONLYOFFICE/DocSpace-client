@@ -185,6 +185,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
+        withAnimation
         badgeTitle={
           labelBadge
             ? ""

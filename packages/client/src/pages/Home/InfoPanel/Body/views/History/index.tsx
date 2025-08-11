@@ -160,19 +160,27 @@ const History = ({
 
   return (
     <>
-      <div className={styles.historyList} id="history-list-info-panel">
-        {history.map(({ day, feeds }) => [
-          <div className={styles.historySubtitle} key={day}>
-            {getRelativeDateDay(t, feeds[0].date)}
-          </div>,
-          ...feeds.map((feed, i) => (
-            <HistoryBlock
-              key={`${feed.action.id}_${feed.date}`}
-              feed={feed}
-              isLastEntity={i === feeds.length - 1 ? !isLoading : false}
-            />
-          )),
-        ])}
+      <div
+        className={styles.historyList}
+        id="history-list-info-panel"
+        data-testid="info_panel_history"
+      >
+        {(() => {
+          let globalIndex = 0;
+          return history.map(({ day, feeds }) => [
+            <div className={styles.historySubtitle} key={day}>
+              {getRelativeDateDay(t, feeds[0].date)}
+            </div>,
+            ...feeds.map((feed, i) => (
+              <HistoryBlock
+                key={`${feed.action.id}_${feed.date}`}
+                feed={feed}
+                isLastEntity={i === feeds.length - 1 ? !isLoading : false}
+                dataTestId={`history_block_${globalIndex++}`}
+              />
+            )),
+          ]);
+        })()}
       </div>
       {isLoading ? <HistoryItemLoader /> : null}
     </>

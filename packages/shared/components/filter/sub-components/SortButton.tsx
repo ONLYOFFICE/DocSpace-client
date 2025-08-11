@@ -146,7 +146,11 @@ const SortButton = ({
     <>
       {viewSelectorVisible ? (
         <>
-          <DropDownItem noHover className="view-selector-item">
+          <DropDownItem
+            noHover
+            className="view-selector-item"
+            testId="filter_sort_view_selector_item"
+          >
             <Text fontWeight={600}>{view}</Text>
             <ViewSelector
               className="view-selector"
@@ -166,6 +170,7 @@ const SortButton = ({
           className={item.className}
           key={item.key}
           data-value={item.key}
+          testId={`filter_sort_option_${item.key}`}
         >
           <Text fontWeight={600}>{item.label}</Text>
           <SortDesc
@@ -192,6 +197,7 @@ const SortButton = ({
       className={styles.sortButton}
       data-row-view={viewAs === "row" ? "true" : "false"}
       data-desc={selectedSortData.sortDirection === "desc" ? "true" : "false"}
+      data-testid="filter_sort_button"
     >
       <ComboBox
         opened={isOpen}
@@ -199,7 +205,7 @@ const SortButton = ({
         className="sort-combo-box"
         options={[]}
         selectedOption={{ key: "", label: "" }}
-        directionX="right"
+        directionX="left"
         directionY="both"
         scaled
         size={ComboBoxSize.content}
@@ -213,6 +219,7 @@ const SortButton = ({
         withBackdrop
         onBackdropClick={toggleCombobox}
         type="onlyIcon"
+        dataTestId="filter_sort_combobox"
       >
         <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>

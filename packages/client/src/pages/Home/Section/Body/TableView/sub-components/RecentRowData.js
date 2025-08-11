@@ -58,6 +58,7 @@ const RecentRowDataComponent = (props) => {
     badgesComponent,
     tableStorageName,
     item,
+    index,
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
@@ -66,6 +67,7 @@ const RecentRowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`recent-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
@@ -87,6 +89,7 @@ const RecentRowDataComponent = (props) => {
 
       {authorRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-author-${index}`}
           style={
             !authorRecentColumnIsEnabled
               ? { background: "none" }
@@ -109,6 +112,7 @@ const RecentRowDataComponent = (props) => {
 
       {roomRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-room-${index}`}
           style={
             !roomRecentColumnIsEnabled
               ? { background: "none" }
@@ -132,6 +136,7 @@ const RecentRowDataComponent = (props) => {
 
       {lastOpenedRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-lastopened-${index}`}
           style={
             !lastOpenedRecentColumnIsEnabled
               ? { background: "none" }
@@ -154,6 +159,7 @@ const RecentRowDataComponent = (props) => {
 
       {sizeRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-size-${index}`}
           style={
             !sizeRecentColumnIsEnabled
               ? { background: "none" }
@@ -176,6 +182,7 @@ const RecentRowDataComponent = (props) => {
 
       {typeRecentColumnIsEnabled ? (
         <TableCell
+          dataTestId={`recent-cell-type-${index}`}
           style={
             !typeRecentColumnIsEnabled
               ? { background: "none !important" }

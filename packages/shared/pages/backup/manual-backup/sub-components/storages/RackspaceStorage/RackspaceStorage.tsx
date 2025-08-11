@@ -130,6 +130,7 @@ const RackspaceStorage = ({
           primary
           isDisabled={!isValidForm || !isMaxProgress || isDisabled}
           size={buttonSize}
+          testId="racspace_create_copy_button"
         />
       </div>
     </div>

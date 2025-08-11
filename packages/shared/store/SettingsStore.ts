@@ -751,19 +751,19 @@ class SettingsStore {
   get downloaddesktopUrl() {
     return this.siteDomain && this.siteEntries?.downloaddesktop
       ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforandroidUrl() {
     return this.siteDomain && this.siteEntries?.officeforandroid
       ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforiosUrl() {
     return this.siteDomain && this.siteEntries?.officeforios
       ? `${this.siteDomain}${this.siteEntries.officeforios}`
-      : this.siteDomain;
+      : null;
   }
 
   get forumLinkUrl() {
@@ -777,7 +777,7 @@ class SettingsStore {
   }
 
   get requestEntriesUrl() {
-    return this.externalResources?.support.entries?.request;
+    return this.externalResources?.support?.entries?.request;
   }
 
   get requestSupportUrl() {
@@ -787,11 +787,11 @@ class SettingsStore {
   }
 
   get documentationEmail() {
-    return this.externalResources?.common.entries.documentationemail;
+    return this.externalResources?.common?.entries?.documentationemail;
   }
 
   get bookTrainingEmail() {
-    return this.externalResources?.common.entries?.booktrainingemail;
+    return this.externalResources?.common?.entries?.booktrainingemail;
   }
 
   get appearanceBlockHelpUrl() {

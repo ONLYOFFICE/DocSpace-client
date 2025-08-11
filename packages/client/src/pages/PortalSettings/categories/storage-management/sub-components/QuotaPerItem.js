@@ -48,6 +48,7 @@ const QuotaPerItemComponent = (props) => {
     type,
 
     tabIndex,
+    dataTestId,
   } = props;
 
   const { t } = useTranslation("Settings");
@@ -103,6 +104,7 @@ const QuotaPerItemComponent = (props) => {
           onChange={onToggleChange}
           isChecked={isToggleChecked}
           isDisabled={isDisabled || isLoading}
+          dataTestId={dataTestId ? `${dataTestId}_button` : undefined}
         />
         <Text className="toggle_label" fontSize="12px">
           {type === "user"
@@ -125,6 +127,7 @@ const QuotaPerItemComponent = (props) => {
             onCancel={onCancel}
             initialSize={initialSize}
             tabIndex={tabIndex}
+            dataTestId={dataTestId ? `${dataTestId}_form` : undefined}
           />
         ) : null}
       </div>

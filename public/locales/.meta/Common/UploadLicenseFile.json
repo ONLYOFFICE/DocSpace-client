@@ -3,7 +3,7 @@
   "content": "Upload license file",
   "content_en_sha1_hash": "6333456e22fe94df2bb16029236561d60ddcd9ea",
   "created_at": "2025-05-26T07:15:49.355Z",
-  "updated_at": "2025-05-26T08:01:59.538Z",
+  "updated_at": "2025-08-04T07:30:01.740Z",
   "comment": {
     "text": "The translation key \"UploadLicenseFile\" is used to display a placeholder text in a file input field for uploading license files. In this context, it appears as the placeholder text on a button component. The translator should provide an alternative phrase that clearly instructs users to upload their license file.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/LicenseContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/LicenseContainer.tsx",
       "line_number": 112,
-      "context": "<FileInput\n className=\"payments_file-input\"\n scale\n size={InputSize.base}\n accept={[\".lic\"]}\n placeholder={t(\"UploadLicenseFile\")}\n onInput={onLicenseFileHandler}\n isDisabled={isLicenseUploading || isLoading}\n isLoading={isLicenseUploading}\n />\n <StyledButtonComponent>",
+      "context": "<FileInput\n className={styles.paymentsFileInput}\n scale\n size={InputSize.base}\n accept={[\".lic\"]}\n placeholder={t(\"UploadLicenseFile\")}\n onInput={onLicenseFileHandler}\n isDisabled={isLicenseUploading || isLoading}\n isLoading={isLicenseUploading}\n />\n <div className={styles.buttonComponent}>",
       "module": "/packages/shared"
     }
   ],

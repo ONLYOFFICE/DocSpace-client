@@ -3,7 +3,7 @@
   "content": "Third-party resource",
   "content_en_sha1_hash": "001907b089c0c5b90b1c10187b7bc68cca254fae",
   "created_at": "2025-05-26T07:15:48.793Z",
-  "updated_at": "2025-06-30T12:20:31.379Z",
+  "updated_at": "2025-08-11T09:02:43.929Z",
   "comment": {
     "text": "This translation key is used as a label for a radio button in a UI component, typically displayed on buttons or dialogs. It represents the term \"Third-party resource\" and appears to be associated with backup options, specifically in contexts related to third-party resources, auto-backup, and manual-backup pages.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1024,
+      "line_number": 1042,
       "context": "});\n \n filterOptions.push({\n key: FilterGroups.roomFilterProviderType,\n group: FilterGroups.roomFilterProviderType,\n label: t(\"Common:ThirdPartyResource\"),\n isHeader: true,\n isLast: true,\n });\n \n filterOptions.push(...thirdPartyOptions);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/index.tsx",
-      "line_number": 510,
-      "context": "// isDisabled={isDisabledThirdPartyList}\n >\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={`${BackupStorageType.ResourcesModuleType}`}\n isChecked={isCheckedThirdParty}\n isDisabled={\n isLoadingData\n // || isDisabledThirdPartyList",
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 557,
+      "context": "<div className={styles.modules}>\n <RadioButton\n {...commonRadioButtonProps}\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={`${BackupStorageType.ResourcesModuleType}`}\n isChecked={isCheckedThirdParty}\n isDisabled={isLoadingData}\n testId=\"auto_backup_resource_radio_button\"\n />",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/manual-backup/index.tsx",
-      "line_number": 380,
-      "context": "</StyledModules>\n \n <StyledModules isDisabled={isNotPaidPeriod}>\n <RadioButton\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={THIRD_PARTY_RESOURCE}\n key={2}\n isChecked={isCheckedThirdParty}\n isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}\n {...commonRadioButtonProps}",
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 412,
+      "context": "[styles.isDisabled]: isNotPaidPeriod,\n })}\n >\n <RadioButton\n id=\"third-party-resource\"\n label={t(\"Common:ThirdPartyResource\")}\n name={THIRD_PARTY_RESOURCE}\n key={2}\n isChecked={isCheckedThirdParty}\n isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}\n {...commonRadioButtonProps}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/index.tsx",
-      "line_number": 223,
+      "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
+      "line_number": 233,
       "context": "label: t(\"Common:RoomsModule\"),\n },\n {\n id: \"third-party-resource\",\n value: DISK_SPACE,\n label: t(\"Common:ThirdPartyResource\"),\n },\n {\n id: \"third-party-storage\",\n value: STORAGE_SPACE,\n label: t(\"Common:ThirdPartyStorage\"),",
       "module": "/packages/shared"
     }

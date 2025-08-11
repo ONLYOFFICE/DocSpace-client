@@ -3,7 +3,7 @@
   "content": "The room '{{name}}' is archived",
   "content_en_sha1_hash": "4cf8fde269eac548a2798f4497add90e7c4d0b0a",
   "created_at": "2025-05-19T21:30:43.060Z",
-  "updated_at": "2025-07-10T11:11:06.762Z",
+  "updated_at": "2025-08-11T09:02:43.828Z",
   "comment": {
     "text": "This translation key is used to display a message when a room is archived, indicating that the specific room with the provided name has been archived. It appears in error messages or success notifications related to file actions, such as archiving files or updating folders.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1468,
+      "line_number": 1466,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 1468,
+      "line_number": 1466,
       "context": ".then(() => {\n const successTranslation =\n folders.length !== 1 && Array.isArray(folders)\n ? t(\"ArchivedRoomsAction\")\n : Array.isArray(folders)\n ? t(\"Common:ArchivedRoomAction\", { name: folders[0].title })\n : t(\"Common:ArchivedRoomAction\", { name: folders.title });\n \n toastr.success(successTranslation);\n })\n .then(() => {",
       "module": "/packages/client"
     }

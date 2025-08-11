@@ -595,6 +595,14 @@ export const enum WhiteLabelLogoType {
   LeftMenu = 6,
   AboutPage = 7,
   Notification = 8,
+  SpreadsheetEditor = 9,
+  SpreadsheetEditorEmbed = 10,
+  PresentationEditor = 11,
+  PresentationEditorEmbed = 12,
+  PdfEditor = 13,
+  PdfEditorEmbed = 14,
+  DiagramEditor = 15,
+  DiagramEditorEmbed = 16,
 }
 
 /**

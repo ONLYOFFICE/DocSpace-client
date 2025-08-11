@@ -24,23 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import type { PropsWithChildren } from "react";
 
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-
-const useSettings = ({
-  t,
-  isSettingsPage,
-
-  setIsLoading,
-}) => {
-  React.useEffect(() => {
-    if (!isSettingsPage) return;
-
-    setDocumentTitle(t("Common:Settings"));
-
-    setIsLoading(false);
-  }, [isSettingsPage]);
+/**
+ * Type definition for the EncryptionPortal component
+ */
+export type EncryptionPortalProps = PropsWithChildren & {
+  /** Optional className for custom styling */
+  className?: string;
 };
-
-export default useSettings;

@@ -3,7 +3,7 @@
   "content": "Set the storage quota for users of this {{productName}}. User quota affects storage limit for the {{sectionName}} folder of each user.",
   "content_en_sha1_hash": "f458865eae0c8ae790107a81c760cf27584a9b51",
   "created_at": "2025-05-19T21:30:53.116Z",
-  "updated_at": "2025-05-26T07:57:32.793Z",
+  "updated_at": "2025-08-11T09:02:44.043Z",
   "comment": {
     "text": "This translation key is used for the default storage quota description displayed to users when setting their individual quotas on a specific product in the portal settings. It appears as a subtitle within a mobile categories component and can be toggled to show or hide the quota details.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerItem.js",
-      "line_number": 109,
-      "context": "isChecked={isToggleChecked}\n isDisabled={isDisabled || isLoading}\n />\n <Text className=\"toggle_label\" fontSize=\"12px\">\n {type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 111,
+      "context": "isDisabled={isDisabled || isLoading}\n dataTestId={dataTestId ? `${dataTestId}_button` : undefined}\n />\n <Text className=\"toggle_label\" fontSize=\"12px\">\n {type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),",
       "module": "/packages/client"
     }
   ],

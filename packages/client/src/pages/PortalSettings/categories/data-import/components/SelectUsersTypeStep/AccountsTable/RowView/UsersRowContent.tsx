@@ -137,6 +137,7 @@ const UsersRowContent = (props: TypeSelectRowContentProps) => {
           displaySelectedOption
           modernView
           manualWidth="auto"
+          dataTestId="user_type_combobox"
         />
       </div>
     </div>,

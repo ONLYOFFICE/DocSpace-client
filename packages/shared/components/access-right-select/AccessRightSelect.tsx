@@ -47,6 +47,7 @@ export const AccessRightSelectPure = ({
   selectionErrorText,
   availableAccess,
   isDisabled,
+  dataTestId,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -99,6 +100,7 @@ export const AccessRightSelectPure = ({
           isSelected={isSelected}
           isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
+          testId={`access_right_option_${item.key.toString().toLowerCase()}`}
         >
           <div className={styles.item}>
             {item.icon && typeof item.icon === "string" ? (
@@ -160,6 +162,7 @@ export const AccessRightSelectPure = ({
       }
       forceCloseClickOutside
       dropDownClassName={styles.accessRightSelectDropdown}
+      dataTestId={dataTestId}
       {...props}
     />
   );

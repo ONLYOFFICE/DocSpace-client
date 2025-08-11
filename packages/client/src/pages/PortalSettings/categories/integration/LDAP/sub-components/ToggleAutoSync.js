@@ -104,6 +104,7 @@ const ToggleAutoSync = ({
         isChecked={isCronEnabled}
         onChange={onChangeToggle}
         isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+        dataTestId="auto_sync_toggle_button"
       />
 
       <div className="toggle-caption">

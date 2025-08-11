@@ -3,7 +3,7 @@
   "content": "New presentation",
   "content_en_sha1_hash": "2f9d6210592804df00fdbb934945bcb6ee2accb8",
   "created_at": "2025-05-19T21:30:46.772Z",
-  "updated_at": "2025-07-10T11:11:06.861Z",
+  "updated_at": "2025-08-04T07:30:01.190Z",
   "comment": {
     "text": "The translation key \"NewPresentation\" is used to display the label for a button or action that creates a new presentation. In the UI, this text appears on a button that triggers the creation of a new presentation file in Microsoft PowerPoint format (pptx).",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2754,
+      "line_number": 2770,
       "context": "};\n \n const createNewPresentation = {\n id: \"personal_new-presentation\",\n key: \"new-presentation\",\n label: t(\"Common:NewPresentation\"),\n onClick: () => this.onCreate(\"pptx\"),\n icon: ActionsPresentationReactSvgUrl,\n };\n \n const createTemplateForm = {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/hooks/useEditorEvents.ts",
-      "line_number": 308,
+      "line_number": 300,
       "context": "switch (fileExt) {\n case \"xlsx\":\n fileName = t(\"Common:NewSpreadsheet\");\n break;\n case \"pptx\":\n fileName = t(\"Common:NewPresentation\");\n break;\n case \"pdf\":\n fileName = t(\"Common:NewPDFForm\");\n break;\n default:",
       "module": "/packages/doceditor"
     }

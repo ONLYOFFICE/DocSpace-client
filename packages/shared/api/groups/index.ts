@@ -83,7 +83,10 @@ export const createGroup = async (
 
 // * Read
 
-export const getGroups = async (filter = Filter.getDefault()) => {
+export const getGroups = async (
+  filter = Filter.getDefault(),
+  signal?: AbortSignal,
+) => {
   let params = "";
 
   if (filter) {
@@ -95,6 +98,7 @@ export const getGroups = async (filter = Filter.getDefault()) => {
   const res = (await request({
     method: "get",
     url: `/group${params}`,
+    signal,
   })) as TGetGroupList;
 
   res.items = decodeGroups(res.items);

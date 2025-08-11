@@ -24,16 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Consumer } from "@docspace/shared/utils";
+.encryptionPortal {
+  width: 100%;
 
-import { ContactsSectionBodyContent } from "../Section";
+  :global {
+    #header {
+      font-size: 23px;
+    }
 
-export const ContactsView = () => {
-  return (
-    <Consumer>
-      {(context) => (
-        <ContactsSectionBodyContent sectionWidth={context.sectionWidth} />
-      )}
-    </Consumer>
-  );
-};
+    #text {
+      color: var(--encryption-portal-text);
+      font-size: 13px;
+      line-height: 20px;
+      max-width: 480px;
+    }
+  }
+
+  .restoring-portal {
+    height: 100%;
+  }
+}
+
+.encryptionPortalBodyWrapper {
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+  align-items: center;
+
+  &.error {
+    max-width: 560px;
+  }
+
+  .encryptionPortalError {
+    text-align: center;
+    color: var(--encryption-portal-error);
+  }
+
+  .encryptionPortalText {
+    text-align: center;
+    color: var(--encryption-portal-body-text);
+  }
+}

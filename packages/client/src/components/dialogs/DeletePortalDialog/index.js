@@ -69,6 +69,7 @@ const DeletePortalDialog = (props) => {
             href={stripeUrl}
             target="_blank"
             color="accent"
+            dataTestId="stripe_url_link"
           >
             on your Stripe customer portal.
           </Link>
@@ -83,6 +84,7 @@ const DeletePortalDialog = (props) => {
           scale
           primary
           onClick={onDeleteClick}
+          testId="submit_delete_portal_button"
         />
         <Button
           className="cancel-button"
@@ -91,6 +93,7 @@ const DeletePortalDialog = (props) => {
           size="normal"
           scale
           onClick={onClose}
+          testId="cancel_delete_portal_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

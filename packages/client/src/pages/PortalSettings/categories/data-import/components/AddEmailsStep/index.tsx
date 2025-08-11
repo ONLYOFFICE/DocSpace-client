@@ -149,6 +149,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
             refreshTimeout={REFRESH_TIMEOUT}
             onClearSearch={onClearSearchInput}
             size={InputSize.base}
+            dataTestId="search_users_input"
           />
 
           <AccountsTable t={t as TFunction} accountsData={filteredAccounts} />

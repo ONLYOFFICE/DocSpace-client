@@ -91,6 +91,7 @@ const useSearch = ({
       isDisabled={isIndexEditingMode}
       onFocus={onInputFocus}
       scale
+      dataTestId="filter_search_input"
     />
   );
   return { searchComponent };

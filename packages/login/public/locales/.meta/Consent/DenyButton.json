@@ -3,7 +3,7 @@
   "content": "Deny",
   "content_en_sha1_hash": "53577bb5df0ee9b6376e87f4896b6957a25d7a43",
   "created_at": "2025-05-19T21:30:57.326Z",
-  "updated_at": "2025-05-28T09:30:02.884Z",
+  "updated_at": "2025-05-26T07:57:32.868Z",
   "comment": {
     "text": "This translation key is used for the \"Deny\" label displayed on a button that allows users to decline a consent request in a login page. The text appears on a button and is also used as an accessibility label. It should be translated to indicate rejection or refusal of a requested action.",
     "is_auto": true,
@@ -57,19 +57,37 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation \"Άρνησης\" is a genitive noun meaning \"of denial\" or \"denial\". It doesn't function as a button label for 'Deny'. A more appropriate translation would be something like 'Απόρριψη' (Aporripși - Rejection) or 'Όχι' (Ochi - No).",
+          "suggestion": "Άρνηση (Arnísi - Denial) or Απόρριψη (Aporripși - Rejection) or Όχι (Ochi - No)"
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Denegar\" is a valid Spanish word meaning 'to deny', it's quite formal and less common in UI contexts. \"Rechazar\" would be a more natural and user-friendly translation for a button labeled 'Deny'.",
+          "suggestion": "Rechazar"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Kiellä\" is a valid Finnish word meaning 'to deny' or 'to prohibit', in the context of a button label, a more common and natural translation for 'Deny' would be \"Hylkää\" or \"Torju\". \"Kiellä\" is more suitable for a general statement of prohibition.",
+          "suggestion": "Hylkää"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,13 +99,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Մերժման\" (Merzhman) is a noun meaning \"rejection\" or \"denial\". The English word \"Deny\" is a verb. A more accurate translation would be a verb form like \"Մերժել\" (Merzhel) which means 'to deny'.",
+          "suggestion": "Մերժել (Merzhel)"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Nega' is a valid Italian word, it's not the most natural or common translation for 'Deny' in the context of a consent button. 'Rifiuta' or 'Non accetto' would be more appropriate and convey the intended meaning of declining an offer or consent.",
+          "suggestion": "Rifiuta"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -111,7 +141,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Atteikšanās' is a noun meaning 'rejection' or 'refusal'. It doesn't directly translate the meaning of 'Deny' (as in, to refuse something). A more appropriate translation would be 'Noraidīt' or 'Atsaukt'.",
+          "suggestion": "Noraidīt"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -135,13 +171,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Negar\" is a valid translation of \"Deny,\" it carries a stronger, more formal connotation of refusal or rejection than the button label \"Deny\" typically implies. For a button label, a more neutral or less negative option might be preferable.",
+          "suggestion": "Consider alternatives like \"Rejeitar\" or \"Não Aceitar\" depending on the overall tone and context."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Interzice' translates more closely to 'Prohibit' or 'Forbid' rather than 'Deny'. While it conveys a similar meaning in this context, 'Refuz' would be a more accurate translation of 'Deny'.",
+          "suggestion": "Refuz"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ප්‍රතික්ෂේප කරනවා\" (pratikshapakarannawa) while literally meaning 'rejecting/denying' isn't the most natural or concise translation for 'Deny' in this context (presumably a button label). It is overly verbose.",
+          "suggestion": "A more appropriate translation would be \"අdenyu\" (Denyu) or \"නැවතන්න\" (naetannanna) or \"අවඅහන්න\" (awahanna)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -189,7 +243,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Заборонити' is a valid Ukrainian word meaning 'to prohibit' or 'to deny', it's a very formal and strong term. For a 'Deny' button in a consent context, a softer, more user-friendly translation might be more appropriate.",
+          "suggestion": "Розхилити, Відхилити, or Не дозволяти. 'Відхилити' (Vidkhylyty) might be the closest in terms of feel to 'Deny'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

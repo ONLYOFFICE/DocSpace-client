@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Kies uit lijst",
-  "ConnectingAccount": "Account koppelen",
-  "DeleteFromTrash": "Geselecteerde elementen werden met succes uit de Prullenmand verwijderd",
   "FileLocked": "Bestand Op Slot",
   "FileProtected": "Het bestand is beschermd met een wachtwoord",
   "FileUnlocked": "Bestand Van Slot Af",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Wijzig de info van derden",
   "ThirdPartyTitle": "Diensten van derden",
   "TitleShowActions": "Bestand acties tonen",
-  "TitleShowFolderActions": "Toon folder acties",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Toon folder acties"
 }

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface PlayerTimelineProps {
+  ref?: React.RefObject<PlayerTimelineRef | null>;
   value: number;
   duration: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

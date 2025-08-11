@@ -3,7 +3,7 @@
   "content": "The destination already contains a file named «<1>{{fileName}}</1>».",
   "content_en_sha1_hash": "c76660403b19106f373e22284611e0a17e7e4ffc",
   "created_at": "2025-05-19T21:30:45.242Z",
-  "updated_at": "2025-05-28T09:30:02.212Z",
+  "updated_at": "2025-06-30T12:20:31.190Z",
   "comment": {
     "text": "The FileActionRequired translation key is used to display a message indicating that a file already exists at the destination, prompting the user to take alternative action. It appears in a conflict resolution dialog and button labels, providing context for translators on how to handle existing files during file actions.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 55,
-      "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
+      "line_number": 56,
+      "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong key=\"component_key\" className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
       "module": "/packages/doceditor"
     }
   ],
@@ -35,9 +35,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Arabic translation uses the same angle brackets as the English, which is unusual and might not be standard practice. The original angle brackets are retained instead of being localized to a more appropriate Arabic equivalent (e.g., using Arabic brackets or parentheses).",
-          "suggestion": "Consider replacing the angle brackets with a more culturally appropriate Arabic alternative, or removing them entirely if they are purely for formatting and not essential to the meaning."
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"الوجهة تحتوي بالفعل على ملف اسمه «</1>{{fileName}}<1>».\" directly translates to \"The destination already contains a file named «</1>{{fileName}}<1>».\". While technically correct, it's a very literal translation that sounds awkward in Arabic. A more natural phrasing would be \"يوجد بالفعل ملف باسم «</1>{{fileName}}<1>» في الوجهة.\" (meaning 'There already exists a file named «</1>{{fileName}}<1>» in the destination.')",
+          "suggestion": "يوجد بالفعل ملف باسم «</1>{{fileName}}<1>» في الوجهة."
         }
       ],
       "approved_at": null
@@ -47,9 +47,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Azerbaijani translation maintains the XML-like tags «<1> and </1> which should be reviewed for consistency with the original English content's formatting conventions. It's possible these tags are meant to be placeholders or should be rendered differently.",
-          "suggestion": "Confirm if the tags are required or should be removed/modified to match the intended rendering."
+          "type": "incorrect_translation",
+          "description": "The translation \"Hədəfdə artıq «<1>{{fileName}}</1> adlı fayl var.\" is a generally accurate translation but could be improved for clarity and flow. A more natural phrasing might be \"Hədəfdə artıq «<1>{{fileName}}</1>» adlı bir fayl var.\" The addition of 'bir' (a/one) makes the sentence flow more naturally in Azerbaijani.",
+          "suggestion": "Hədəfdə artıq «<1>{{fileName}}</1>» adlı bir fayl var."
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Дестинацията вече съдържа файл с име «<1>{{fileName}}</1>».' is a literal translation and sounds unnatural in Bulgarian. A more natural phrasing would be something like 'Има вече файл с име «<1>{{fileName}}</1>» на дестинацията.' or 'Вече има файл с име «<1>{{fileName}}</1>» на дестинацията.'.",
-          "suggestion": "Вече има файл с име «<1>{{fileName}}</1>» на дестинацията."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -107,9 +101,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation includes a colon (:) at the end of the sentence. The English version does not.",
-          "suggestion": "Remove the colon from the Armenian translation."
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Նպատակակետն արդեն պարունակում է «<1>{{fileName}}</1>» անունով ֆայլ:\" could be improved for clarity and naturalness. A more fluent translation might consider rephrasing. The word order sounds slightly unnatural.",
+          "suggestion": "Նպատակակետում արդեն կա «<1>{{fileName}}</1>» անունով ֆայլ։ (Napatakaketum arden ka «<1>{{fileName}}</1>» anunov fayl:)"
         }
       ],
       "approved_at": null
@@ -120,8 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'La destinazione contiene già un file denominato' is a literal translation of 'The destination already contains a file named'. A more natural Italian phrasing would be 'La destinazione contiene già un file chiamato'.",
-          "suggestion": "La destinazione contiene già un file chiamato"
+          "description": "The English phrase \"FileActionRequired\" implies a need for action (like overwrite, skip, or rename). The Italian translation \"La destinazione contiene già un file denominato...\" simply states the file exists and doesn't convey the necessary action requirement. A better translation might be something like \"Un file con il nome «<1>{{fileName}}</1>» esiste già nella destinazione.\" or \"È presente già un file con il nome «<1>{{fileName}}</1>» nella destinazione.\" or \"È necessario gestire un file esistente con il nome «<1>{{fileName}}</1>» nella destinazione.\" depending on the desired nuance.",
+          "suggestion": "È necessario gestire un file esistente con il nome «<1>{{fileName}}</1>» nella destinazione."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags «<1>» and «</1>» are identical in both English and Italian. This is expected and appropriate.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -131,9 +130,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation \"保存先に既に「<1>{{fileName}}</1>」という名前のファイルがあります\" is a literal translation but can be improved for naturalness. \"保存先\" (saving destination) is accurate but a more user-friendly phrasing might be preferred. The phrasing implies the user is actively trying to save something.  A more passive and less directive phrasing would be better.",
+          "suggestion": "既に「<1>{{fileName}}</1>」というファイルが保存先に存在します。"
+        },
+        {
           "type": "formatting",
-          "description": "The Japanese translation retains the angle brackets «» which are not idiomatic Japanese for indicating placeholders. The English uses «» as well, so maintaining the formatting is acceptable, but it's worth noting it's not standard.",
-          "suggestion": "Consider replacing «» with a more natural Japanese equivalent for placeholder indication, or removing them entirely if they are purely stylistic."
+          "description": "The use of 「」 for the filename within the Japanese translation matches the English use of «».  It's consistent, but could be considered slightly more formal than necessary.",
+          "suggestion": "While consistent, consider using single quotes ' ' for slightly less formality.  This isn't critical."
         }
       ],
       "approved_at": null
@@ -141,13 +145,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '목표에 이미 «<1>{{fileName}}</1>» 이름의 파일이 있습니다.' is a literal translation and sounds slightly unnatural in Korean. A more natural phrasing would emphasize the conflict or redundancy.",
-          "suggestion": "이미 «<1>{{fileName}}</1>»라는 파일이 목표 위치에 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -156,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຈຸດຫມາຍປັດຈຸບັນມີແລ້ວເອກະສານຊື່ວ່າ «<1>{{fileName}}</1>».\" is not a perfect translation. \"ມີແລ້ວ\" implies 'already exists' which is accurate, but the phrasing could be more natural.  It sounds somewhat literal.",
-          "suggestion": "ຈຸດຫມາຍປັດຈຸບັນມີເອກະສານຊື່ວ່າ «<1>{{fileName}}</1>» ຢູ່ແລ້ວ."
+          "description": "The Lao translation \"ຈຸດຫມາຍປັດຈຸບັນມີແລ້ວເອກະສານຊື່ວ່າ «<1>{{fileName}}</1>».\" is not the most natural or accurate translation of \"The destination already contains a file named «<1>{{fileName}}</1>». A better translation would focus on the existence of a file with that name.",
+          "suggestion": "ຈຸດຫມາຍປັດຈຸບັນມີເອກະສານຊື່ວ່າ «<1>{{fileName}}</1>» ຢູ່ແລ້ວ"
         }
       ],
       "approved_at": null
@@ -195,13 +193,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation \"Fișierul «<1>{{fileName}}</1>» există deja la destinație.\" is a literal translation but lacks the implication of a required action. The English 'FileActionRequired' suggests an action needs to be taken, like overwriting or canceling.  A more accurate translation would convey this necessity. A suggestion would be \"Fișierul «<1>{{fileName}}</1>» există deja la destinație, este necesară o acțiune.\" or \"Fișierul «<1>{{fileName}}</1>» există deja la destinație. Vă rugăm să alegeți o acțiune.\" (Please choose an action).",
-          "suggestion": "Fișierul «<1>{{fileName}}</1>» există deja la destinație. Vă rugăm să alegeți o acțiune."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -215,9 +207,44 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'ගමනාන්තයේ' (gamanantaye) which translates to 'destination' is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ලෙස' (lesa) which translates to 'named as' is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'නම්' (nam) which means 'name' is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'කරන ලද' (karana leda) which translates to 'named' is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ගොනුවක්' (gonuwak) which translates to 'a file' is correctly spelled.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'අඩංගු වේ' (adangue ve) which translates to 'contains' is correctly spelled.",
+          "suggestion": null
+        },
+        {
           "type": "formatting",
-          "description": "The Sinhala translation retains the angle brackets «<1>{{fileName}}</1>» which are likely intended for the English version and are unnecessary/confusing in Sinhala. They should be removed or adapted to a Sinhala equivalent if a similar formatting is required.",
-          "suggestion": "Remove the angle brackets. Consider a Sinhala equivalent if formatting is required (e.g., using parentheses or other markers)."
+          "description": "The angle brackets «<1> and </1> are correctly replicated in the Sinhala translation, mirroring the English content's placeholders.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, the phrasing 'ලෙස නම් කරන ලද' (lesa nam karan lada) might be slightly less natural in Sinhala. A more fluent option might be using a more direct phrasing.",
+          "suggestion": "ගමනාන්තයේ දැනටමත් «<1>{{fileName}}</1>» නම් වූ ගොනුවක් අඩංගු වේ."
         }
       ],
       "approved_at": null
@@ -240,13 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets « and » are used correctly and consistently with the English source.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, \"називом\" (nazivom) is a bit formal for this context. A more natural and common phrasing would be \"именом\" (imenom).",
-          "suggestion": "Одредиште већ садржи датотеку са именом «<1>{{fileName}}</1>»."
+          "description": "The opening and closing tags «<1> and </1> are consistent with the English content but should be checked for consistency with the overall system.",
+          "suggestion": "Verify the tag format is consistent with the rest of the application."
         }
       ],
       "approved_at": null
@@ -280,9 +302,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"目标位置\" (mùbiāo wèizhì) translates to \"destination location\" which is slightly redundant. A more natural translation for \"destination\" would be something like \"目标\" (mùbiāo) or even omitting it completely.",
-          "suggestion": "目标已存在名«<1>{{fileName}}</1>»的文件。"
+          "type": "formatting",
+          "description": "The Chinese translation retains the angle brackets «<1>{{fileName}}</1>» which are not idiomatic in Chinese and should be removed.",
+          "suggestion": "目标位置中已存在名为“{{fileName}}”的文件。"
         }
       ],
       "approved_at": null

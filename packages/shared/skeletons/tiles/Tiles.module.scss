@@ -1,62 +1,22 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
-@import "../../styles/variables/colors.scss";
+@use "../../styles/mixins";
+
+@use "../../styles/variables/colors";
 
 .tile {
   position: relative;
   display: grid;
   width: 100%;
 
-  @include mobile {
+  @include mixins.mobile {
     &:nth-of-type(n + 3) {
       display: none;
     }
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     &:nth-of-type(n + 8) {
       display: none;
     }
-  }
-}
-
-.mainContent {
-  height: 156px;
-
-  .content {
-    box-sizing: border-box;
-    border: var(--files-section-tiles-view-tile-border);
-    border-bottom-style: none;
-    border-radius: 6px 6px 0 0;
-  }
-}
-
-.bottom {
-  display: flex;
-  align-items: center;
-  border: var(--files-section-tiles-view-tile-border);
-  border-radius: 6px;
-  padding: 15px;
-
-  .firstContent {
-    height: 32px;
-    width: 32px;
-    min-width: 32px;
-  }
-
-  .secondContent {
-    width: 100%;
-    margin-inline-start: 8px;
-  }
-
-  &.file {
-    border-top-style: none;
-    border-radius: 0 0 6px 6px;
-  }
-
-  .optionButton {
-    min-width: 16px;
-    margin-inline-start: 8px;
   }
 }
 
@@ -90,22 +50,22 @@
   grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   grid-gap: 16px;
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   }
 
-  @include mobile {
+  @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   }
 
   .tilesSkeletonRooms {
     grid-template-columns: repeat(auto-fill, minmax(275mpx, 1fr));
 
-    @include tablet-and-below {
+    @include mixins.tablet-and-below {
       grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
     }
 
-    @include mobile {
+    @include mixins.mobile {
       grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
     }
   }

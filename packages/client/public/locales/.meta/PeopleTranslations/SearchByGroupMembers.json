@@ -3,7 +3,7 @@
   "content": "Search by group members",
   "content_en_sha1_hash": "184145132a97e055ac3dffd682c055646ed6d938",
   "created_at": "2025-05-19T21:30:53.510Z",
-  "updated_at": "2025-05-28T09:30:02.269Z",
+  "updated_at": "2025-05-26T07:57:32.305Z",
   "comment": {
     "text": "The translation key \"SearchByGroupMembers\" is used to describe the search input field in a dialogue, allowing users to find and select group members. The text appears in a modal body loader or dialog box, typically prompting users to enter a search query.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Qrup üzvlərinə görə axtarın\" while technically understandable, is not the most natural or idiomatic way to say \"Search by group members.\" It literally translates to \"Search according to group members.\" A more natural phrasing would be something like \"Qrup üzvləri ilə axtarın\" or \"Qrup üzvləri ilə axtar\".",
-          "suggestion": "Qrup üzvləri ilə axtarın"
+          "description": "The translation \"Qrup üzvlərinə görə axtarın\" is a literal translation but doesn't quite capture the intended meaning of \"Search by group members.\" A more natural phrasing would be something like \"Qrup üzvləri ilə axtar\" or \"Qrup üzvləri ilə axtarış et\".",
+          "suggestion": "Qrup üzvləri ilə axtar"
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Căutare după membru de grup' is not the most natural or accurate rendering of 'Search by group members'. While technically correct, it's a bit clunky.",
-          "suggestion": "A better translation would be 'Căutare în funcție de membrii grupului' or 'Căutare prin membrii grupului'."
+          "description": "The translation 'Căutare după membru de grup' is not the most natural or accurate rendering of 'Search by group members'. While technically correct, it sounds somewhat clunky in Romanian. A more fluent translation would be 'Căutare prin membri de grup' or 'Căutare în funcție de membrii grupului'.",
+          "suggestion": "Căutare prin membri de grup"
         }
       ],
       "approved_at": null

@@ -99,47 +99,45 @@ const GuestShareLinkForm = ({
   };
 
   return (
-    <>
-      <FormWrapper>
-        <Avatar
-          className="guest-avatar"
-          role={AvatarRole.guest}
-          source={guestAvatar ?? ""}
-          size={AvatarSize.big}
-          isDefaultSource
-        />
-        <div className="guest-info-wrapper">
-          <Text fontSize="16px" fontWeight="700" className="guest-name">
-            {guestDisplayName}
-          </Text>
-          <Text fontSize="13px" fontWeight="400" className="guest-email">
-            {email}
-          </Text>
-        </div>
-        <ButtonsWrapper className="buttons-guest">
-          <Button
-            primary
-            scale
-            size={ButtonSize.medium}
-            label={t("Common:Approve")}
-            tabIndex={2}
-            isDisabled={isLoading}
-            onClick={onApproveInvite}
-          />
-          <Button
-            scale
-            size={ButtonSize.medium}
-            label={t("Common:Deny")}
-            tabIndex={2}
-            isDisabled={isLoading}
-            onClick={onDenyInvite}
-          />
-        </ButtonsWrapper>
-        <Text fontSize="12px" fontWeight="400" className="guest-info">
-          {t("Common:GuestInvitationInfo")}
+    <FormWrapper>
+      <Avatar
+        className="guest-avatar"
+        role={AvatarRole.guest}
+        source={guestAvatar ?? ""}
+        size={AvatarSize.big}
+        isDefaultSource
+      />
+      <div className="guest-info-wrapper">
+        <Text fontSize="16px" fontWeight="700" className="guest-name">
+          {guestDisplayName}
         </Text>
-      </FormWrapper>
-    </>
+        <Text fontSize="13px" fontWeight="400" className="guest-email">
+          {email}
+        </Text>
+      </div>
+      <ButtonsWrapper className="buttons-guest">
+        <Button
+          primary
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:Approve")}
+          tabIndex={2}
+          isDisabled={isLoading}
+          onClick={onApproveInvite}
+        />
+        <Button
+          scale
+          size={ButtonSize.medium}
+          label={t("Common:Deny")}
+          tabIndex={2}
+          isDisabled={isLoading}
+          onClick={onDenyInvite}
+        />
+      </ButtonsWrapper>
+      <Text fontSize="12px" fontWeight="400" className="guest-info">
+        {t("Common:GuestApprovalNote", { sectionName: t("Common:Contacts") })}
+      </Text>
+    </FormWrapper>
   );
 };
 

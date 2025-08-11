@@ -2,17 +2,17 @@
   "key_path": "InviteViaLinkDescriptionRoomGuest",
   "content": "Create a universal link for self-authorization in the room as a guest.",
   "content_en_sha1_hash": "41ce826ff4224ef9dcf224ebb4eed22e0514a4c9",
-  "created_at": "2025-05-28T09:33:07.796Z",
-  "updated_at": "2025-05-28T09:34:04.718Z",
+  "created_at": "2025-05-26T07:15:53.268Z",
+  "updated_at": "2025-08-11T09:02:43.897Z",
   "comment": {
-    "text": "\"This translation key is used for a button that creates a universal link for guest authorization in a room. It appears on an invite panel and is used to customize the invitation message.\"",
+    "text": "This translation key describes a message used to invite guests to join a room via a universal link for self-authorization. It appears in an invitation panel component and is displayed when inviting guests, providing context for the user's authorization flow.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:34:04.718Z"
+    "updated_at": "2025-05-26T08:09:26.598Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/ExternalLinks.js",
-      "line_number": 284,
+      "line_number": 285,
       "context": "})\n : !allowInvitingGuests\n ? t(\"InviteViaLinkDescriptionRoomMembers\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InviteViaLinkDescriptionRoomGuest\")}\n </StyledDescription>\n {externalLinksVisible ? (\n <StyledInviteInputContainer key={activeLink.id}>\n <StyledInviteInput isShowCross>\n <InputBlock",
       "module": "/packages/client"
     }

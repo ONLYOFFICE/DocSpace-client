@@ -3,7 +3,7 @@
   "content": "Pending invite",
   "content_en_sha1_hash": "4c0cead4ed08558db964b020a52ab1b4c0661e30",
   "created_at": "2025-05-19T21:30:53.487Z",
-  "updated_at": "2025-05-28T09:30:02.380Z",
+  "updated_at": "2025-08-04T07:30:01.184Z",
   "comment": {
     "text": "This translation key is used to display a label for pending invitations. It appears as a button title and will be displayed when an invitation is pending review or approval. The translator should provide a clear and concise phrase that communicates the status of the invitation in a user-friendly manner.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/helpers/contacts/utils.ts",
       "line_number": 202,
-      "context": ") => {\n switch (item) {\n case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"All\");\n default:",
+      "context": ") => {\n switch (item) {\n case \"active\":\n return t(\"Common:Active\");\n case \"pending\":\n return t(\"PeopleTranslations:PendingInviteTitle\");\n case \"disabled\":\n return t(\"PeopleTranslations:DisabledEmployeeStatus\");\n case \"all\":\n return t(\"Common:All\");\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 112,
-      "context": "const getStatusLabel = React.useCallback(() => {\n let label = \"\";\n \n switch (infoPanelSelection.status) {\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n \n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;",
+      "line_number": 119,
+      "context": "let label = \"\";\n \n switch (userSelection.status) {\n case EmployeeStatus.Pending:\n label = t(\"PeopleTranslations:PendingInviteTitle\");\n break;\n \n case EmployeeStatus.Disabled:\n label = t(\"PeopleTranslations:DisabledEmployeeStatus\");\n break;",
       "module": "/packages/client"
     },
     {
@@ -138,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Uitnodigingen in afwachting' is grammatically correct, it's a rather literal and formal translation of \"Pending invite\". A more natural and concise Dutch translation would be 'Wachtende uitnodigingen' or 'Openstaande uitnodigingen'.",
+          "description": "The Dutch translation \"Uitnodigingen in afwachting\" is a literal translation but doesn't perfectly capture the nuance of 'Pending invite'. It's a bit verbose and formal for a UI element. A more natural and concise translation would be preferable.",
           "suggestion": "Wachtende uitnodigingen"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අවලංගු ආරාධනය' while literally translatable, doesn't perfectly convey the meaning of 'Pending invite'. 'Pending' implies a state of waiting. A more accurate translation would consider this nuance.",
-          "suggestion": "නිලන්විත ආරාධනය"
+          "description": "While \"අවලංගු ආරාධනය\" (awalangu aaraadhanaaya) is a possible translation, it implies a 'suspended' or 'conditional' invite, rather than a 'pending' invite. A more accurate translation would convey the sense of waiting to be accepted.",
+          "suggestion": "Consider \"ඉදිරියේදී ආරාධනය\" (idiriyadee aaraadhanaaya) which translates to 'future invite' or 'invite to come', or \"ආරාධනය එනතුරු\" (aaraadhana enantaru) meaning 'until the invite arrives'."
         }
       ],
       "approved_at": null
@@ -201,25 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Чекање на позивницу' while technically correct, is a bit literal and can be improved for naturalness. A more common and idiomatic Serbian (Cyrillic) translation for 'Pending invite' would be 'Очекује се позивница' or 'Почечено чекање позивнице'.",
-          "suggestion": "Очекује се позивница"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Čekanje na pozivnicu\" is understandable, a more direct and common translation of 'Pending invite' would be 'Neočekivana pozivnica' or 'Pričekuje se pozivnica'. \"Čekanje na pozivnicu\" is a bit verbose and not the most natural phrasing.",
-          "suggestion": "Pričekuje se pozivnica"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -237,13 +225,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Lời mời đang chờ xử lý' is understandable, it's a bit verbose and formal for a pending invite notification. A more natural and concise translation would be preferable.",
-          "suggestion": "Lời mời đang chờ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

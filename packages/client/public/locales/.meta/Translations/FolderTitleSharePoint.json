@@ -3,7 +3,7 @@
   "content": "SharePoint directory",
   "content_en_sha1_hash": "ba3b2bcebb6c52948e33724869585c561a7dec4f",
   "created_at": "2025-05-19T21:30:49.979Z",
-  "updated_at": "2025-06-03T20:59:41.989Z",
+  "updated_at": "2025-05-26T07:57:32.388Z",
   "comment": {
     "text": "This translation key is used to display the title of a SharePoint directory. It appears in various contexts, such as file lists or directories, where a user needs to identify the type of storage location. The label will be translated to reflect its specific content.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"مجلد SharePoint\" literally translates to \"SharePoint folder\". While technically correct, \"SharePoint directory\" implies a broader concept than just a folder. A more accurate translation might consider using a term that conveys 'directory' or 'repository'.",
-          "suggestion": "Consider alternatives like \"دليل SharePoint\" (SharePoint guide/directory) or \"مستودع SharePoint\" (SharePoint repository) depending on the intended meaning."
+          "description": "The translation \"مجلد SharePoint\" literally translates to \"SharePoint folder\". While understandable, \"SharePoint directory\" implies a broader collection of files and information, not just a single folder. A more accurate translation would convey this broader scope.",
+          "suggestion": "مجلدات SharePoint"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"SharePoint գրացուցակ\" is a literal translation of 'directory' but doesn't fully convey the meaning of 'SharePoint directory.' It should imply a list or collection of SharePoint resources or sites. A more accurate translation would be something like 'SharePoint ցանկ' or 'SharePoint ռեսուրսներիցանկ'.",
-          "suggestion": "SharePoint ցանկ"
+          "description": "The translation 'SharePoint գրացուցակ' is a literal translation of 'directory' as 'ցուցակ' which typically refers to a list or index, not a directory. A more appropriate translation for 'SharePoint directory' would be 'SharePoint թղթապանակների շարք' or 'SharePoint տեղամաս' depending on the specific context.",
+          "suggestion": "SharePoint թղթապանակների շարք"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cartella di SharePoint' is not the most natural or accurate translation of 'SharePoint directory'. While 'Cartella' correctly translates 'Folder,' 'directory' implies more than just a folder; it suggests a collection of resources. A more accurate translation would consider the context and potentially use a term like 'Area di SharePoint' or 'Risorse di SharePoint'.",
-          "suggestion": "Consider 'Area di SharePoint' or 'Risorse di SharePoint' for a more precise translation depending on the context."
+          "description": "The translation 'Cartella di SharePoint' is technically correct but could be improved to be more natural-sounding for Italian speakers. 'Directory' in this context implies a shared space, and 'Cartella' emphasizes just a folder. A better translation would reflect the concept of a shared space or repository.",
+          "suggestion": "Spazio SharePoint"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໄດເລກະທໍລີ SharePoint' is a literal transliteration of 'directory' and 'SharePoint'. A more natural and accurate translation of 'SharePoint directory' would be something like 'ບ່ອນຈັດເອກະສານຂອງ SharePoint' (SharePoint's document location) or 'ໄດເລກະທໍລີ ຂອງ SharePoint' (SharePoint's directory).",
-          "suggestion": "ບ່ອນຈັດເອກະສານຂອງ SharePoint"
+          "description": "The Lao translation \"ໄດເລກະທໍລີ SharePoint\" doesn't accurately convey the meaning of \"SharePoint directory\". \"ໄດເລກະທໍລີ\" generally means 'directory' or 'folder,' but combining it with 'SharePoint' creates an unnatural phrasing. A more accurate translation would incorporate a phrase indicating a SharePoint location or container.",
+          "suggestion": "Consider alternatives like \"ບ່ອນເກັບຂໍ້ມູນ SharePoint\" (SharePoint data storage) or \"ໄດເລກະທໍລີ ຂອງ SharePoint\" (SharePoint's directory)."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director SharePoint' does not accurately convey the meaning of 'SharePoint directory'.  'Director' implies leadership or management, which is not the intended meaning. A more accurate translation would include words relating to a location or collection of files.",
-          "suggestion": "Consider 'Dosar SharePoint' or 'Arhivă SharePoint' (depending on the context of 'directory')"
+          "description": "The Romanian translation 'Director SharePoint' doesn't accurately convey the meaning of 'SharePoint directory'. 'Director' translates to 'Director' in Romanian, but it doesn't fit the context of a directory. It implies a person rather than a location of files.",
+          "suggestion": "Dosar SharePoint"
         }
       ],
       "approved_at": null
@@ -183,18 +183,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The term \"ෂෙයාර්පොයින්ට්\" is a transliteration of \"SharePoint\" and while common, a more formally accepted transliteration could be considered.",
-          "suggestion": "Consider using a more formally accepted transliteration of 'SharePoint' if available and applicable to the style guide."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'නාමාවලිය' translates to 'directory' or 'list,' 'ಷෙයාර්පොයින්ට්' + 'නාමාවලිය' literally translates to 'SharePoint List'. A more accurate translation might be 'ಷෙයාර්පොයින්ට් ස්ථානය' (SharePoint location) or 'ಷෙයාර්පොයින්ට් ගොනුවලzeichnis' (SharePoint file directory), depending on the intended nuance.",
-          "suggestion": "Consider 'ಷෙයාර්පොයින්ට් ස්ථානය' or 'ಷෙයාර්පොයින්ට් ගොනුවලzeichnis' depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -203,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Priečinok SharePoint' is technically correct but could be improved for clarity and common usage. 'SharePoint directory' often implies a list or set of files accessible through SharePoint. 'Priečinok' primarily means folder. A more accurate translation might include the concept of a list or access point.",
+          "description": "The Slovak translation 'Priečinok SharePoint' is a literal translation but doesn't quite convey the meaning of \"SharePoint directory\" as it's often understood. 'Directory' in this context refers to a specific area or repository within SharePoint.",
           "suggestion": "Zložka SharePoint"
         }
       ],
@@ -224,13 +213,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'direktorijum' is missing a diacritic. It should be 'direktorijum'.",
-          "suggestion": "direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -248,7 +231,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Thư mục\" is a valid translation for 'directory', it's a very literal one. A more natural translation for 'SharePoint directory' would be something like 'SharePoint site' or 'SharePoint repository'. 'Directory' in this context refers to a collection of files and resources within SharePoint, and 'site' or 'repository' conveys that meaning better.",
+          "suggestion": "SharePoint site"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

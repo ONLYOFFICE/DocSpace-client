@@ -1,4 +1,4 @@
-@import "../../styles/common-input-styles.scss";
+@use "../../styles/common-input-styles";
 
 .iconBlock {
   display: flex;
@@ -30,7 +30,7 @@
 }
 
 .inputGroup {
-  @include common-input-color-styles;
+  @include common-input-styles.common-input-color-styles;
 
   width: 100%;
 

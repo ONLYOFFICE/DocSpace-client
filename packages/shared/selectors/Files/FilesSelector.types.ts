@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TSelectorItem } from "../../components/selector";
-import {
+import { WithFlag, Nullable } from "../../types";
+import type {
   TBreadCrumb,
   TInfoBar,
   TSelectorHeader,
@@ -46,7 +47,7 @@ import {
   RoomSearchArea,
 } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
-import { Nullable } from "../../types";
+import { TGetIcon } from "../utils/types";
 
 export type TCreateDefineRoom = {
   label: string;
@@ -72,40 +73,41 @@ export interface UseRootHelperProps {
 
 export type UseSocketHelperProps = {
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
-  filterParam?: string | number;
-  withCreate: boolean;
+  filterParam?: string;
+  withCreate?: boolean;
 };
 
-export type UseRoomsHelperProps = {
-  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setHasNextPage: (value: boolean) => void;
-  setTotal: (value: number) => void;
-  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  setIsRoot: (value: boolean) => void;
+export type UseRoomsHelperProps = TUseInputItemHelper & {
   searchValue?: string;
+  disableThirdParty?: boolean;
   isRoomsOnly: boolean;
+  roomType?: RoomsType | RoomsType[];
+  excludeItems?: (number | string | undefined)[];
+  isInit: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
   ) => void;
-  isInit: boolean;
-  setIsInit: (value: boolean) => void;
-  withCreate: boolean;
-  createDefineRoomLabel?: string;
-  createDefineRoomType?: RoomsType;
   getRootData?: () => Promise<void>;
-  setSelectedItemType: React.Dispatch<
+  subscribe: (id: number) => void;
+  withInit?: boolean;
+  setIsInit: (value: boolean) => void;
+  setBreadCrumbs?: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
+  setHasNextPage: (value: boolean) => void;
+  setTotal: (value: number) => void;
+  setIsRoot?: (value: boolean) => void;
+  setSelectedItemType?: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
-  setSelectedItemSecurity: React.Dispatch<
+  setSelectedItemSecurity?: React.Dispatch<
     React.SetStateAction<
       TRoomSecurity | TFileSecurity | TFolderSecurity | undefined
     >
   >;
-  subscribe: (id: number) => void;
-  withInit?: boolean;
   searchArea?: RoomSearchArea;
 };
 
@@ -153,9 +155,9 @@ export type UseFilesHelpersProps = {
 };
 
 export type TUseInputItemHelper = {
-  withCreate: boolean;
+  withCreate?: boolean;
   selectedItemId?: string | number | undefined;
-  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
+  setItems?: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 };
 
 export type TSelectedFileInfo = {
@@ -167,32 +169,22 @@ export type TSelectedFileInfo = {
   inPublic?: boolean | undefined;
 } | null;
 
-export type TGetIcon = (size: number, fileExst: string) => string;
+export type TFilesSelectorInit = WithFlag<
+  "withInit",
+  {
+    withInit: true;
+    initTotal: number;
+    initHasNextPage: boolean;
+    initItems: TRoom[] | (TFolder | TFile)[];
+    initBreadCrumbs: TBreadCrumb[];
+    initSelectedItemType: "rooms" | "files";
+    initSelectedItemId: string | number;
+    initSearchValue?: Nullable<string>;
+  }
+>;
 
-export type TFilesSelectorInit =
-  | {
-      withInit: true;
-      initTotal: number;
-      initHasNextPage: boolean;
-      initItems: TRoom[] | (TFolder | TFile)[];
-      initBreadCrumbs: TBreadCrumb[];
-      initSelectedItemType: "rooms" | "files";
-      initSelectedItemId: string | number;
-      initSearchValue?: Nullable<string>;
-    }
-  | {
-      withInit?: never;
-      initItems?: never;
-      initTotal?: never;
-      initHasNextPage?: never;
-      initSearchValue?: never;
-      initSelectedItemType?: never;
-      initSelectedItemId?: never;
-      initBreadCrumbs?: never;
-    };
-
-export type FilesSelectorProps = TSelectorHeader &
-  TInfoBar &
+export type FilesSelectorProps = TInfoBar &
+  TSelectorHeader &
   TFilesSelectorInit &
   (
     | {
@@ -216,6 +208,7 @@ export type FilesSelectorProps = TSelectorHeader &
     ) => void;
     isUserOnly?: boolean;
     openRoot?: boolean;
+    roomType?: RoomsType | RoomsType[];
     isRoomsOnly: boolean;
     isThirdParty: boolean;
     rootThirdPartyId?: string;

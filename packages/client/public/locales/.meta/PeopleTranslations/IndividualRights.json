@@ -3,7 +3,7 @@
   "content": "Individual rights in the room",
   "content_en_sha1_hash": "50106622971aec0a90a7902b87dffefc200e8765",
   "created_at": "2025-05-19T21:30:53.476Z",
-  "updated_at": "2025-05-28T09:30:02.269Z",
+  "updated_at": "2025-06-30T12:20:31.240Z",
   "comment": {
     "text": "This translation key is used to translate the phrase \"Individual rights\" which appears as a tooltip or label in a UI component, likely a button or dialog element, indicating that it relates to individual permissions or entitlements.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EditGroupMembersDialog/sub-components/GroupMember/index.tsx",
-      "line_number": 169,
+      "line_number": 177,
       "context": "place=\"left\"\n offsetRight={0}\n openOnClick={false}\n tooltipContent={\n <Text fontSize=\"12px\" fontWeight={600}>\n {t(\"PeopleTranslations:IndividualRights\")}\n </Text>\n }\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Отделни правомощия в стая' does not accurately convey the meaning of 'Individual rights in the room'. 'Правомощия' translates to 'powers' or 'authorities', which is different from 'rights'.",
-          "suggestion": "A more accurate translation would be 'Индивидуални права в стая' or 'Лични права в стая'."
+          "description": "The translation 'Отделни правомощия в стая' doesn't accurately convey the meaning of 'Individual rights in the room'. 'Правомощия' translates to 'powers' or 'authorities,' which isn't the intended meaning of 'rights'.",
+          "suggestion": "A more accurate translation would be something like 'Индивидуални права в стаята' (Individualni prava v stята)."
         }
       ],
       "approved_at": null
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Permisos' translates to 'permissions' or 'authorizations', not 'rights'. While it conveys a similar concept, 'derechos' is the more accurate translation of 'rights' in this context.",
+          "description": "'Permisos' translates to 'permissions' or 'licenses', not 'rights'. While it conveys a similar concept, 'derechos' is a more accurate translation of 'rights' in this context.",
           "suggestion": "Derechos individuales en la sala"
         }
       ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'rights' is better translated as 'droits' in French, not 'autorisations'. While 'autorisations' can sometimes be used interchangeably, 'droits' more accurately conveys the concept of individual rights.",
-          "suggestion": "Autorisations individuelles should be changed to Droits individuels."
+          "description": "The term 'rights' is better translated as 'droits' in French, not 'autorisations'. 'Autorisations' implies permissions or authorizations granted by someone, whereas 'droits' refers to inherent rights.",
+          "suggestion": "Droits individuels dans la salle"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ルームでの個人権限\" doesn't accurately convey the meaning of \"Individual rights in the room.\" \"権限\" (ken'gen) means 'authority' or 'power,' not 'rights.'",
-          "suggestion": "ルームでの個人の権利 (rūmu de no kojin no kenri)"
+          "description": "The translation 'ルームでの個人権限' is not the best rendering of 'Individual rights in the room'. '権限' (ken'gen) translates to 'authority' or 'permission,' which isn't the accurate meaning of 'rights' in this context. '権利' (kenri) is the more appropriate term for 'rights'.",
+          "suggestion": "ルームでの個人権利"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"방 내 개인 권리\" literally translates to \"rights within the room\" which doesn't accurately convey the meaning of \"Individual rights in the room\".  It's unclear why 'in the room' is included in the original English, and the Korean translation further obscures the meaning.",
-          "suggestion": "Consider revising the English source. If the intent is to refer to individual rights possessed by people within a room, a more accurate Korean translation could be \"방 안에 있는 개인의 권리\" (bang ane itneun gaeinui gwonniri) meaning 'individual rights within the room'. Alternatively, if the English phrase intends to refer to individual rights pertaining to the room itself, a different phrasing is needed."
+          "description": "The Korean translation \"방 내 개인 권리\" literally translates to \"rights within the room\". While it conveys the general idea, it's not a natural or accurate translation of \"Individual rights in the room\". The preposition \"in\" is lost, and the phrasing is unusual in Korean.",
+          "suggestion": "Consider a more accurate translation such as \"개인의 권리 (개인 권리)\" (gae-in-ui gwon-ri) which means 'individual rights', or a phrase like \"방 안에서의 개인 권리\" (bang an-e-seo-ui gae-in gwon-ri) which translates to 'individual rights within the room' but is more idiomatic."
         }
       ],
       "approved_at": null
@@ -173,8 +173,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammatical",
-          "description": "The preposition 'no' should be 'na' to agree with the feminine noun 'sala'.",
+          "type": "grammar",
+          "description": "The preposition 'no' is incorrect. It should be 'na' to agree with the feminine noun 'sala'.",
           "suggestion": "Direitos individuais na sala"
         }
       ],
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Permisiuni individuale în sala' translates to 'Individual permissions in the room' rather than 'Individual rights in the room'. 'Drepturi' is a more accurate translation for 'rights'.",
+          "description": "The translation 'Permisiuni individuale în sala' is not the most accurate rendering of 'Individual rights in the room.' 'Permisiuni' translates to 'permissions' or 'allowances,' not 'rights.' A more accurate translation would convey the concept of fundamental rights.",
           "suggestion": "Drepturi individuale în sala"
         }
       ],
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"කාමරයේ පෞද්ගලික අයිතීන්\" is a literal translation, it might not be the most natural or accurate phrasing for 'Individual rights in the room' in Sinhala. A more common and precise translation would emphasize the individual's rights being *present* or *applicable* within the room.",
-          "suggestion": "කාමරයේ පුද්ගල අයිතීන් (Kaamare payugala ayithin) or කාමරයට අයත් පුද්ගල අයිතීන් (Kaamare ayattha payugala ayithin)"
+          "description": "The translation 'කාමරයේ පෞද්ගලික අයිතීන්' is a literal translation and doesn't fully capture the intended meaning of 'Individual rights in the room.' While technically correct, it can be improved to be more natural-sounding in Sinhala.",
+          "suggestion": "කාමර තුළ ඇති පුද්ගල අයිතිවාසිකම් (Kamara thulae athi pugall aitihavaseekam) - This translates to 'Individual rights within the room' which is more idiomatic."
         }
       ],
       "approved_at": null
@@ -228,8 +228,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Индивидуална права у соби' translates more literally to 'Individual rights in the room'. While technically correct, a more natural and idiomatic Serbian translation would be something like 'Права појединца у просторији' or 'Права појединца у соби'.",
-          "suggestion": "Consider 'Права појединца у просторији' or 'Права појединца у соби'."
+          "description": "The Serbian translation 'Индивидуална права у соби' translates literally to 'Individual rights in the room'. While understandable, a more natural Serbian phrasing for 'Individual rights in the room' would be 'Права појединаца у просторији' or 'Права особа у просторији'. 'Соби' implies a small room, whereas 'просторији' is a more general term for a room or space.",
+          "suggestion": "Права појединаца у просторији"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Индивидуална' is a direct transliteration, it's not the most common or natural way to express 'Individual' in Serbian. The more common word is 'Појединачне'.",
+          "suggestion": "Појединачне права у просторији"
         }
       ],
       "approved_at": null
@@ -252,7 +257,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Individual rights in the room\" has been translated as \"Індивідуальні права в групі\". \"Room\" (кімната) has been translated as \"group\" (група). This changes the meaning.",
+          "description": "The translation 'Індивідуальні права в групі' translates to 'Individual rights in a group,' which doesn't accurately reflect the original phrase 'Individual rights in the room'. The original refers to a specific enclosed space, while the translation implies a collection of people.",
           "suggestion": "Індивідуальні права в кімнаті"
         }
       ],
@@ -270,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'权限' (quanxian) translates more closely to 'permissions' or 'privileges' rather than 'rights' in this context. '权利' (quanli) is a more accurate translation for 'rights'.",
-          "suggestion": "房间内的个人权利"
+          "description": "The translation '房间内的个人权限' doesn't fully capture the meaning of 'Individual rights in the room'. '权限' (quanxian) typically refers to permissions or access rights, not inherent individual rights. A more accurate translation would convey the concept of individual freedoms or entitlements within the room.",
+          "suggestion": "房间内的个人权利 (fangjiannei de geren quanli) - This translates to 'Individual rights in the room' and is a more direct and accurate representation of the original meaning. Alternatively, 房间内的个人自由 (fangjiannei de geren ziyou) - Individual freedoms in the room."
         }
       ],
       "approved_at": null

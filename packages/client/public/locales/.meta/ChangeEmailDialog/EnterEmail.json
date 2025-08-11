@@ -3,7 +3,7 @@
   "content": "Enter new email",
   "content_en_sha1_hash": "53e3a4b69f71fbdd1c88e8baacaee0bd1e035822",
   "created_at": "2025-05-19T21:30:57.026Z",
-  "updated_at": "2025-05-20T09:37:36.922Z",
+  "updated_at": "2025-05-24T14:26:39.099Z",
   "comment": {
     "text": "This translation key is used for the placeholder text \"Enter new email\" in various input fields within the application, typically in forms or dialogs where users are required to enter a new email address.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Въведете нов имейл адрес\" is a bit verbose for a label like 'Enter new email'. A more concise and natural translation might be preferred in UI contexts.",
+          "suggestion": "Въведете нов имейл"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -75,7 +81,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Escriba una nueva dirección de email' is overly formal. A more natural and conversational translation would be preferred.",
+          "suggestion": "Ingrese un nuevo correo electrónico"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -87,13 +99,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Entrer une nouvelle adresse email' is a bit verbose and formal for a dialog label. A more natural and concise translation would be better.",
+          "suggestion": "Saisir une nouvelle adresse e-mail"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Մուտքագրեք նոր էլփոստի հասցե' literally translates to 'Enter new email address'. While understandable, 'Enter new email' is more concise and aligns better with the English prompt, especially in a dialog box context.  The added 'հասցե' (address) is unnecessary and clutters the phrase.",
+          "suggestion": "Մուտքագրեք նոր էլփոստ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +129,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"新しいメールアドレスの入力\" is too literal and formal for a dialog label like \"Enter new email\". It translates to \"Input of new email address\".",
+          "suggestion": "新しいメールアドレスを入力"
+        },
+        {
+          "type": "formatting",
+          "description": "The Japanese translation is a full sentence. Dialog labels are typically short and concise.",
+          "suggestion": "新しいメールアドレス"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,7 +176,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Inserir um novo endereço de e-mail\" is a bit verbose and formal for a dialog prompt. A more natural and concise translation would be better.",
+          "suggestion": "Digite um novo e-mail"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,7 +206,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"නව වි-තැපෑල යොදන්න\" while understandable, is not the most natural way to say 'Enter new email' in Sinhala. It's overly literal.",
+          "suggestion": "A more natural translation would be \"නව විද්‍යාත්මක ලිපිනය ඇතුළත් කරන්න\" or simply \"විද්‍යාත්මක ලිපිනය ඇතුළත් කරන්න\" (Enter email address)."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'වි-තැපෑල' (vi-tapeela) is sometimes used, it's less common than just 'විද්‍යාත්මක' (vidyātamika) for 'email'.",
+          "suggestion": "Replace 'වි-තැපෑල' with 'විද්‍යාත්මක'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,19 +229,37 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Vnesite email naslov' is a more formal and literal translation of 'Enter new email'. A more natural and user-friendly translation would be something like 'Vnesite novo elektronsko pošto' or 'Vnesite novo e-mail naslov'.",
+          "suggestion": "Vnesite novo elektronsko pošto"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Унеси нови емаил\" uses \"емаил\" which is a direct transliteration of \"email\" and not a natural Serbian word. While understood, it's not ideal. A more natural translation would be \"Унеси нову електронску пошту\" or \"Унеси нову е-маил адресу\".",
+          "suggestion": "Унеси нову електронску пошту"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Unesi novi email' is a literal translation and doesn't sound natural in Serbian. 'Unesi' is more appropriate for entering data into a field manually. A more natural phrasing would be something like 'Novo email' or 'Unesite novu email adresu'.",
+          "suggestion": "Novo email"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

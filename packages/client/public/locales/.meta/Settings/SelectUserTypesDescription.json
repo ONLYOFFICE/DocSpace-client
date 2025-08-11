@@ -3,7 +3,7 @@
   "content": "Select {{productName}} roles for the imported users: <1>{{productName}} admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
   "content_en_sha1_hash": "e90aa9f2a0e200f361dff9163df3131462ddc07f",
   "created_at": "2025-05-19T21:30:52.598Z",
-  "updated_at": "2025-05-21T03:13:11.438Z",
+  "updated_at": "2025-06-30T12:20:31.405Z",
   "comment": {
     "text": "\"This translation key describes a message that appears in the data import process for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace. It instructs users to select roles (admin, Room admin, or User) for imported users, explaining that User role is selected by default.\"",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 84,
+      "line_number": 83,
       "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 91,
+      "line_number": 90,
       "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 84,
+      "line_number": 83,
       "context": ") : (\n <>\n <Trans\n t={t}\n ns=\"Settings\"\n i18nKey=\"SelectUserTypesDescription\"\n values={{\n productName: t(\"Common:ProductName\"),\n }}\n components={{\n 1: <b />,",
       "module": "/packages/client"
     },
@@ -54,18 +54,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Select {{productName}} roles\" is not accurately translated. While \"أدوار {{productName}}\" (roles {{productName}}) is present, the 'Select' aspect is missing.",
-          "suggestion": "اختر أدوار {{productName}} للمستخدمين المستوردين"
+          "description": "The phrase \"Select {{productName}} roles\" is not accurately translated. The Arabic translation \"{{productName}} للمستخدمين المستوردين\" literally translates to '{{productName}} for the imported users' which doesn't convey the 'Select' action.",
+          "suggestion": "اختر أدوار {{productName}} للمستخدمين المستوردين (Ikhtar adwar {{productName}} lilmustakhdameen al-mustawridin)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English content specifies \"{{productName}} admin\". The Arabic translation simply uses 'مشرف' (Mushrif) which translates to 'supervisor'. It loses the specific reference to the product name.",
+          "suggestion": "مشرف {{productName}} (Mushrif {{productName}})"
         },
         {
           "type": "formatting",
-          "description": "The `<1>` tags are inconsistently used. While they are present, they don't clearly indicate any specific importance or purpose in the Arabic translation. This could be a formatting issue inherited from the English.",
-          "suggestion": "Consider whether these tags are necessary in the Arabic translation and remove them if they are purely cosmetic or are meant for a technical purpose not applicable in the Arabic context."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence \"بشكل افتراضي، يتم تحديد دور المستخدم لكل مستخدم.\" could be more naturally phrased. The current phrasing is technically correct but sounds a bit stiff.",
-          "suggestion": "بشكل افتراضي، يتم تعيين دور المستخدم لكل مستخدم."
+          "description": "The `<1>` tags are retained in the Arabic translation. While understandable in context, they disrupt the readability. These should ideally be removed.",
+          "suggestion": "Remove the `<1>` tags."
         }
       ],
       "approved_at": null
@@ -76,13 +76,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Bacarıqlı istifadəçi rolu\" translates to \"Skilled User Role\" which is not accurate. It should represent the English 'User' role.",
-          "suggestion": "İstifadəçi rolu"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation maintains the <1> tags which are likely intended for formatting in the UI. Confirm this is the desired behavior and ensure they are correctly interpreted by the rendering system.",
-          "suggestion": "Confirm <1> tags are correctly implemented in the UI and intended."
+          "description": "The phrase \"Bacarıqlı istifadəçi rolu\" is an incorrect translation of \"User role\". It translates to \"Skillful User Role\", which doesn't convey the intended meaning.",
+          "suggestion": "istifadəçi rolu"
         }
       ],
       "approved_at": null
@@ -95,11 +90,6 @@
           "type": "spelling",
           "description": "The word 'входираните' is a misspelling of 'вносираните'.",
           "suggestion": "вносираните"
-        },
-        {
-          "type": "formatting",
-          "description": "The tags `<1>` are inconsistent with the English content. They seem intended to represent bold tags, but the correct tag format should be checked based on the target platform.",
-          "suggestion": "Verify and correct the tag format for bolding to match the platform's standard (e.g., <b>...</b> or <strong>...</strong> if applicable)."
         }
       ],
       "approved_at": null
@@ -115,19 +105,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The German translation of \"Select {{productName}} roles\" is somewhat awkward. It directly translates to 'Select {{productName}}-Roles', which isn't the most natural phrasing in German.  A better translation would convey the meaning of assigning roles.",
-          "suggestion": "Weisen Sie {{productName}}-Rollen für die importierten Benutzer zu:"
-        },
-        {
           "type": "formatting",
-          "description": "The use of `<1>` tags is not standard in German text and feels unnatural.  While the English uses these for differentiation, German text would typically use commas or other punctuation for list items or emphasis.",
-          "suggestion": "Remove the `<1>` tags. Consider using commas and possibly capitalization for the roles if they are appearing in a list. For example:  {{productName}}-Administrator, Raumadministrator oder User"
+          "description": "The translation preserves the HTML tags (<1> and {{productName}}), which is generally undesirable in a user-facing text. These should ideally be removed or handled in the rendering process.",
+          "suggestion": "Remove the HTML tags (<1>) and ensure {{productName}} is correctly rendered as a variable."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'User' is understandable, it's common to use the German equivalent 'Benutzer' in this context, especially to maintain consistency and clarity.",
-          "suggestion": "Replace 'User' with 'Benutzer'"
+          "description": "While 'User' is understandable, a more appropriate German translation for 'User' in this context (referring to a role) might be 'Benutzer' or 'Standardbenutzer'. 'User' feels a little too literal and might not resonate well with German speakers familiar with user roles.",
+          "suggestion": "Consider translating 'User' to 'Benutzer' or 'Standardbenutzer'."
         }
       ],
       "approved_at": null
@@ -138,13 +123,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'User' is translated as 'ισχύος'. This appears to be an incorrect translation. 'ισχύος' translates to 'power' or 'validity', not 'user'.",
-          "suggestion": "Replace 'ισχύος' with a more appropriate translation of 'User', such as 'χρήστης'."
-        },
-        {
-          "type": "formatting",
-          "description": "The tags `<1>` are inconsistently applied. While they are present, the meaning of their usage is not clear and might impact rendering.",
-          "suggestion": "Verify the purpose of the `<1>` tags and ensure consistent application. If they are HTML tags, ensure they are valid and appropriate for the intended purpose."
+          "description": "The word 'User' is translated as 'ισχύος' which doesn't accurately convey the meaning of 'User' in this context. It translates more to 'power' or 'authority'.",
+          "suggestion": "Επιλέξτε ρόλους {{productName}} για τους εισαγόμενους χρήστες: <1>Διαχειριστής {{productName}}</1>, <1>Διαχειριστής δωματίου</1> ή <1>Χρήστης</1>."
         }
       ],
       "approved_at": null
@@ -155,8 +135,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'User' is translated as 'Avanzado' in Spanish. 'Avanzado' means 'Advanced' and doesn't accurately reflect the meaning of 'User' in this context, which refers to a standard or regular user.",
-          "suggestion": "Consider translating 'User' as 'Usuario' or 'Normal' to more accurately convey the intended meaning."
+          "description": "The English term 'User' is translated as 'Avanzado' in Spanish. 'Avanzado' typically means 'advanced' and doesn't accurately represent the intended meaning of a standard user role. A more appropriate translation would be 'Usuario'.",
+          "suggestion": "Change 'Avanzado' to 'Usuario'."
         }
       ],
       "approved_at": null
@@ -166,9 +146,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "“productName” is translated as “product name” in the English content. In the Finnish translation it's integrated into the roles: “{{productName}} järjestelmänvalvoja”. While understandable, it might be more consistent to translate it as “{{productName}} hallinto-oikeudet” or something similar that conveys “admin” more naturally within the phrase, rather than directly translating it as a noun.",
+          "suggestion": "Consider translating '{{productName}}' as something like '{{productName}} hallinto-oikeudet' to align with how it's used in the context of user roles."
+        },
+        {
           "type": "formatting",
-          "description": "The Finnish translation retains the `<1>` tags from the English content. These are likely meant to be removed as they are only for formatting and shouldn't appear in the final translated text.",
-          "suggestion": "Remove the `<1>` tags from the translated text.  For example, change `<1>{{productName}} järjestelmänvalvoja</1>` to `{{productName}} järjestelmänvalvoja`."
+          "description": "The angle brackets `<1>` are inconsistent with how they appear in the English original. The Finnish version has `<1>` where the English content has `<1>`. This could confuse users if they're comparing content.",
+          "suggestion": "Ensure the angle bracket usage is consistent with the English original: `<1>{{productName}} järjestelmänvalvoja</1>`"
         }
       ],
       "approved_at": null
@@ -179,13 +164,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'User' is translated as 'Avancé' in French. 'Avancé' implies advanced features, not the basic user role. A more appropriate translation would be 'Utilisateur' or 'Standard'.",
-          "suggestion": "Replace 'Avancé' with 'Utilisateur' or 'Standard'."
+          "description": "The English term 'User' is translated as 'Avancé' in French. 'Avancé' typically means 'Advanced'. A more accurate translation for 'User' in this context would be something like 'Utilisateur' or 'Standard'.",
+          "suggestion": "Consider translating 'User' as 'Utilisateur' or 'Standard' to better reflect the intended meaning."
         },
         {
           "type": "formatting",
-          "description": "The tags <1> are inconsistent between the English and French translations. In the English version, they surround role names. In the French translation, they enclose the entire phrase.",
-          "suggestion": "Ensure consistency in the use of tags. The tags should encapsulate just the role names, mirroring the English formatting."
+          "description": "The French translation uses '<1>' tags instead of the English '<1>'. While the meaning is clear, the formatting should be consistent with the original.",
+          "suggestion": "Ensure the tags used in the French translation match the original English format (<1>).</1>)."
         }
       ],
       "approved_at": null
@@ -195,9 +180,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Armenian translation retains the <1> tags from the English content. These tags are likely formatting markers and should be removed from the translated text to ensure proper display.",
-          "suggestion": "Remove the <1> tags from the translated text."
+          "type": "incorrect_translation",
+          "description": "The phrase \"Դուք կարող եք կառավարել դերերը ներմուծումից հետո:\" could be improved. A more natural phrasing would emphasize the ability to *modify* the roles.",
+          "suggestion": "Դուք կարող եք փոփոխել դերերը ներմուծումից հետո:"
         }
       ],
       "approved_at": null
@@ -208,13 +193,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'User' is translated as 'Esperto' in Italian. While 'Esperto' can mean expert, in this context 'User' refers to a standard user account with limited privileges. A more appropriate translation would be 'Utente'.",
-          "suggestion": "Replace 'Esperto' with 'Utente'."
+          "description": "The translation of 'User' as 'Esperto' is inaccurate. 'Esperto' translates to 'Expert' which doesn't align with the intended meaning of a standard user role.",
+          "suggestion": "Consider 'Utente' or 'Semplice utente' for a more accurate translation of 'User'."
         },
         {
           "type": "formatting",
-          "description": "The formatting tags <1> and </1> appear to be placeholders. Ensure these tags are correctly handled or removed during the implementation.",
-          "suggestion": "Verify if the tags <1> and </1> are necessary and handle them properly in the target system. If they are not needed, remove them."
+          "description": "The formatting tags <1> are not consistently applied across all roles in both the English and Italian versions. This could be a localization consistency issue.",
+          "suggestion": "Ensure consistent application of formatting tags for all role names."
         }
       ],
       "approved_at": null
@@ -225,18 +210,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<1>` are present in both the English and Japanese text, but their purpose isn't clear. It’s likely meant to indicate a span or emphasis, but the tags themselves aren't necessary for conveying the meaning and might be misinterpreted by users or cause rendering issues. While not a direct translation error, they are a formatting concern.",
-          "suggestion": "Remove the `<1>` tags. The content should be rendered naturally within the sentence structure."
+          "description": "The `<1>` tags are inconsistently used in both the English and Japanese versions. They appear to be meant to highlight certain words but the Japanese version uses the same tag for all. It might be better to use a consistent formatting approach or to remove them entirely.",
+          "suggestion": "Review and standardize the use of HTML tags. Consider removing them if they don't add significant value or use a consistent approach (e.g., `<b>` or `<em>`)."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase '役割を選択してください' (yakusho o sentaku shite kudasai) is a bit formal and direct for a user-facing setting description. A more natural and user-friendly phrasing would be better. The literal translation feels stiff.",
-          "suggestion": "Consider a more conversational phrasing like '{{productName}} の役割を設定してください' ({{productName}} no yakusho o settei shite kudasai) or '{{productName}} の役割を選んでください' ({{productName}} no yakusho o erande kudasai)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '各ユーザーに対してユーザーロールが選択されます' (kaku yuuzaa ni taishite yuuzaa rooru ga sentaku saremasu) is a bit convoluted and literal.  It could be simplified.",
-          "suggestion": "Consider phrasing like 'デフォルトでは、ユーザーはユーザーロールが選択されます' (Deforuto de wa, yuuzaa wa yuuzaa rooru ga sentaku saremasu) which translates to 'By default, users have the user role selected.'"
+          "description": "While 'ユーザー' is a valid translation for 'User', the phrasing '各ユーザーに対してユーザーロールが選択されます' is slightly awkward. A more natural phrasing in Japanese might improve readability. It literally translates to 'user role is selected for each user.'",
+          "suggestion": "Consider a more natural phrasing like '各ユーザーに対して、ユーザー権限が自動的に選択されます' (each user is automatically assigned the user permission) or '各ユーザーはデフォルトでユーザー権限が選択されます' (each user is defaulted to user permission)."
         }
       ],
       "approved_at": null
@@ -247,18 +227,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"가져오기한 사용자에 대한\" is slightly awkward. A more natural phrasing would be \"가져오기한 사용자들에게\".",
-          "suggestion": "가져오기한 사용자들에게"
+          "description": "The phrase '가져오기한 사용자에 대한' is a bit awkward. A more natural phrasing would be '가져오기 하는 사용자들에게' or '가져온 사용자들에게'.",
+          "suggestion": "가져오기 하는 사용자들에게"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word '에 대한' following '역할' is not ideal. It should be integrated into the verb phrase to make the sentence flow better.  While technically not incorrect, it sounds unnatural.",
-          "suggestion": "가져오기한 사용자들에게 어떤 {{productName}} 역할을 부여할지 선택하세요."
+          "description": "The repetition of '가져오기한' is a bit clunky. It's redundant and makes the sentence less readable.",
+          "suggestion": "가져온 사용자들에게"
         },
         {
           "type": "formatting",
-          "description": "The format of the tags (<1>...</1>) seems consistent, but ensure that Korean audience understands these tags and the underlying principle if any.",
-          "suggestion": "Consider checking with the Korean localization team regarding use of tags for special formatting in UI"
+          "description": "The Korean translation retains the `<1>` tags, which are likely remnants from the English source and unnecessary in the target language.",
+          "suggestion": "Remove the `<1>` tags."
         }
       ],
       "approved_at": null
@@ -269,18 +249,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ຜູ້ເບິ່ງແຍງ {{productName}}\" is a literal translation of 'admin' and may not be the most natural or understandable phrasing for Lao speakers. 'Admin' often refers to a system administrator.",
-          "suggestion": "Consider using a term more closely aligned with 'administrator' or 'manager' which might be more culturally appropriate and understandable for Lao users, such as 'ຜູ້ບໍ່ງານງານ {{productName}}' or 'ຜູ້ຈັດການ {{productName}}'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'Room admin' as 'ຜູ້ເບິ່ງແຍງຫ້ອງ' is accurate but could be refined. It's a very literal translation. Depending on the context, 'ຫ້ອງການຜູ້ບໍ່ງານງານ' might be more accurate.",
-          "suggestion": "Consider 'ຫ້ອງການຜູ້ບໍ່ງານງານ' or similar phrasing that implies responsibility and management of a room."
+          "description": "The term 'ຜູ້ເບິ່ງແຍງ' translates to 'viewer' or 'supervisor' but in this context, 'admin' would be more appropriate. The Lao translation doesn't accurately convey the meaning of 'admin' as it refers to administrative roles.",
+          "suggestion": "Consider using a term more akin to 'ຜູ້ບໍລິຫານ' (phu borihan) which translates to 'administrator' or 'manager'."
         },
         {
           "type": "formatting",
-          "description": "The original English uses `<1>` tags for emphasis. The Lao translation mirrors this, but the impact might be less clear in Lao.  While technically correct, consider if these tags are necessary and visually impactful.",
-          "suggestion": "Evaluate whether the tags `<1>` add value or clutter the text. If not, remove them for a cleaner presentation."
+          "description": "The HTML tags <1>...</1> are not standard and seem to be an attempt to preserve formatting. This might cause rendering issues in the target language. The translation should not include these tags.",
+          "suggestion": "Remove the HTML tags completely. The translation should be plain text."
         }
       ],
       "approved_at": null
@@ -291,8 +266,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of `<1>` tags within the Latvian translation is inconsistent with common practice and may cause display issues. While the English uses these tags, their relevance in the Latvian context isn't immediately clear and might suggest a technical artifact rather than intentional styling.",
-          "suggestion": "Review the intended purpose of the `<1>` tags. If they are for display or styling purposes, consider a more standard approach or remove them if they are unnecessary."
+          "description": "The `<1>` tags are inconsistent. The English uses `<1>` to denote role names, but the Latvian translation uses the same tags. It is better to follow the source formatting or remove the tags entirely if they are purely for internal use and not meant to be visible.",
+          "suggestion": "Consider removing or standardizing the `<1>` tags. If they's meant to be HTML tags, make sure the Latvian output is valid HTML or remove the tags if only for marking."
         }
       ],
       "approved_at": null
@@ -303,13 +278,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Dutch translation retains the `<1>` tags which are not necessary and should be removed.",
-          "suggestion": "Remove the `<1>` tags from the translation. For example, change `<1>{{productName}}-admin</1>` to `{{productName}}-admin`."
+          "description": "The use of `<1>` tags is inconsistent with the English version. The Dutch translation also uses hyphens in the product name with the roles, while the English does not. This could cause rendering issues or confusion.",
+          "suggestion": "Review the intended purpose of the `<1>` tags and ensure consistent formatting with the English version. Consider removing hyphens for consistency."
         },
         {
           "type": "incorrect_translation",
-          "description": "“Room admin” is translated as “Kamer beheerders”. While technically correct, it sounds slightly awkward in Dutch. A more natural phrasing would be 'Ruimtebeheerders'.",
-          "suggestion": "Change 'Kamer beheerders' to 'Ruimtebeheerders'."
+          "description": "“Kamer beheerders” translates to 'Room Managers'.  'Room admin' is more direct and accurate to the English term and implies a role rather than a person.",
+          "suggestion": "Change 'Kamer beheerders' to 'Ruimtebeheerders' or 'Kamersbeheerder' depending on desired level of formality and how it fits with existing terminology."
         }
       ],
       "approved_at": null
@@ -320,13 +295,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The spacing around the `<1>` tags is inconsistent. English uses a space after the tag, Polish doesn't. This can lead to visual discrepancies in the UI.",
-          "suggestion": "Remove the spaces after the `<1>` tags in the Polish translation."
+          "description": "The Polish translation retains the `<1>` tags. These tags are unnecessary and should be removed.",
+          "suggestion": "Remove the `<1>` tags from the translation."
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'Administrator' is generally correct, it's slightly less natural than 'Zarządca' for 'admin' in a technical context. 'Administrator' is a more formal term, and 'Zarządca' often implies a more practical, hands-on role. This is especially true in the context of a product.",
-          "suggestion": "Consider using 'Zarządca' instead of 'Administrator' for 'admin'. For example: \"Wybierz role {{productName}} dla zaimportowanych użytkowników: <1>Zarządca {{productName}} </1>, <1>Zarządca pokoju</1> lub <1>Użytkownik</1>.\""
+          "description": "The phrase 'Administrator pokoju' is a literal translation of 'Room admin' but may not be the most natural-sounding Polish term.  Consider a more idiomatic equivalent.",
+          "suggestion": "Consider using a more natural Polish phrase for 'Room admin', such as 'Administrator obiektu' or 'Zarządca pokoju', depending on the precise context.  Further research might be needed to find the best fit."
         }
       ],
       "approved_at": null
@@ -334,19 +309,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> are inconsistent. English uses 'productName', Portuguese uses 'Administrador do {{productName}}' and 'Administrador da sala'.",
+          "suggestion": "Ensure consistent use of tags and variable names throughout the translation to match the English source. Consider updating the English tags to improve clarity and consistency."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The `<1>` tags are inconsistently applied. They appear around each role option, which is correct, but this format needs to be consistent across all locales.",
-          "suggestion": "Ensure the use of `<1>` tags around each role option remains consistent with the English source and other locales, if applicable. This may require broader style guide review."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -355,13 +330,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"Puteți gestona roluri după importul\" is grammatically incorrect.  'gestona' is not a standard Romanian verb. The correct verb would be 'gestiona' or 'administra'.",
-          "suggestion": "Puteți gestiona rolurile după importul."
+          "description": "The sentence \"Puteți gestona roluri după importul\" contains a grammatical error. The correct word is 'gestiona', not 'gestona'.",
+          "suggestion": "Puteți gestiona roluri după import."
         },
         {
           "type": "formatting",
-          "description": "The opening and closing tags <1> are inconsistent with English. It seems meant to represent formatting tags but needs verification/standardization.",
-          "suggestion": "Verify the intended purpose and format. If it's meant to be bold, change to <b>...</b> or <strong>...</strong>. If it's for other formatting, ensure consistent tags."
+          "description": "The formatting tags (<1>...</1>) are consistent in both the English and Romanian versions. While technically correct, it's worth noting that these tags might need specific handling depending on the platform displaying the content. No change is needed but consider it a potential rendering issue.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -372,13 +347,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'productName' is not translated consistently. In the English content, it is used as a placeholder for the product name, but in the Russian translation, the phrase 'Администратор {{productName}}' is used, which implies a direct translation of 'admin' instead of keeping it as a placeholder.",
-          "suggestion": "Replace 'Администратор {{productName}}' with '{{productName}} администратор' or simply 'Администратор' depending on the product name's intended usage and translation in context."
+          "description": "The phrase 'Select {{productName}} roles' is translated as 'Выберите роли {{productName}}'. It would be more natural to say 'Выберите роли для {{productName}}' or 'Выберите роли, связанные с {{productName}}'.",
+          "suggestion": "Выберите роли для {{productName}}"
         },
         {
           "type": "formatting",
-          "description": "The formatting of the role names within the tags `<1>` is inconsistent with the English version. The English version uses lowercase for the role names within the tags, while the Russian version uses capitalized names. This might cause inconsistencies in display.",
-          "suggestion": "Ensure the role names within the tags `<1>` are consistently lowercased, mirroring the English content. For example, change 'Администратор {{productName}}' to 'администратор {{productName}}'."
+          "description": "The tags <1>...</1> are not standard and may cause issues. They seem to be intended to delineate specific roles. While the content within is correct, the tags themselves are not recommended. They are similar to HTML tags but not standard.",
+          "suggestion": "Consider removing or replacing the <1> tags with a more standard formatting method, such as bolding or bullet points, depending on the target platform."
         }
       ],
       "approved_at": null
@@ -389,13 +364,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> are inconsistent with English formatting. The Sinhala translation doesn't follow the same structure, which can affect rendering.",
-          "suggestion": "Maintain the same HTML tag structure as the English content. Review how this tag is interpreted in the user interface and ensure consistency."
+          "description": "The HTML tags `<1>` are inconsistent. They are present in the English content, and mirrored in the Sinhala translation but should maintain consistency.",
+          "suggestion": "Ensure that the formatting (HTML tags) is consistent with the original English content. If they are unnecessary, remove them."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'කාමර පරිපාලක' (Kamara Paripalaka) directly translates to 'Room Administrator'. While accurate, a more natural phrasing in Sinhala might be 'මෝට්ටුව පරිපාලක' (Mottuwa Paripalaka), implying a 'suite administrator' which aligns better with the intended meaning in the context of user roles within a product.",
-          "suggestion": "Consider using 'මෝට්ටුව පරිපාලක' (Mottuwa Paripalaka) instead of 'කාමර පරිපාලක' (Kamara Paripalaka) to better reflect the nuanced meaning of 'Room admin'."
+          "description": "The term \"productName\" remains untranslated in the Sinhala version. It should ideally be replaced with a localized equivalent if possible or at least be accompanied by instructions for maintaining the variable within the localized content.",
+          "suggestion": "Replace \"{{productName}}\" with the appropriate localized term or provide instructions on how to handle the variable."
+        },
+        {
+          "type": "spelling",
+          "description": "There might be a more natural sounding word for 'ආනයනය කරන ලද' (imported). While technically correct, it sounds slightly formal for the context.",
+          "suggestion": "Consider a more colloquial translation for 'imported' if appropriate for the tone and target audience (e.g., 'අලුත් පරිශීලකයින්' - new users)."
         }
       ],
       "approved_at": null
@@ -406,8 +386,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Pokročilý používateľ' is used for 'User'.  'User' generally translates to 'Používateľ' and 'Pokročilý používateľ' implies an advanced or privileged user, not the basic user role.",
-          "suggestion": "Používateľ"
+          "description": "The term 'Pokročilý používateľ' (Advanced User) is used instead of 'User'. The English content specifies 'User', which should be directly translated.",
+          "suggestion": "Replace 'Pokročilý používateľ' with 'Používateľ'."
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting tags (<1>...</1>) are inconsistent in English and Slovak. They seem to be attempting to emphasize certain words, but the implementation is different. While this isn't necessarily an error, it impacts consistency.",
+          "suggestion": "Ensure the formatting tags (<1>...</1>) are applied consistently with the English source. Consider if emphasizing these words is necessary in Slovak."
         }
       ],
       "approved_at": null
@@ -418,8 +403,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovenian translation maintains the HTML tags (<1>...</1>) identical to the English content. While technically correct, this might be unnecessary and can impact readability in the UI. Consider removing or adjusting the tags based on the UI rendering requirements.",
-          "suggestion": "Review and adjust HTML tags based on UI requirements.  Consider removing if not needed or changing to appropriate format for the target platform."
+          "description": "The Slovenian translation retains the HTML tags `<1>` which are not necessary and should be removed for clarity and proper rendering in most contexts.",
+          "suggestion": "Remove the `<1>` tags from the Slovenian translation."
         }
       ],
       "approved_at": null
@@ -430,8 +415,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation maintains the HTML tags <1>...</1> which are unnecessary and may cause rendering issues. These tags should be removed.",
-          "suggestion": "Remove the <1>...</1> tags from the translated text."
+          "description": "The Serbian translation retains the HTML tags (<1>...</1>) from the English content. These tags are unnecessary and should be removed for better readability and consistency.",
+          "suggestion": "Remove the <1> tags from the Serbian translation. The translation should read: 'Изаберите улоге у {{productName}}-у за увезене кориснике: {{productName}} админ, Админ собе или Корисник. Подразумевано, улога корисник је изабрана за сваког корисника. Можете управљати улогама након увоза.'"
         }
       ],
       "approved_at": null
@@ -442,13 +427,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation maintains the HTML tags (<1></1>) from the English content. These tags are not necessary and should be removed for clarity in Serbian.",
-          "suggestion": "Remove the <1></1> tags surrounding '{{productName}} admin', 'Room admin', and 'User'."
+          "description": "The Serbian translation maintains the use of `<1>` tags, which were present in the English content. These tags are likely formatting placeholders and should ideally be removed or adapted for the Serbian context if they serve a specific purpose.",
+          "suggestion": "Remove or adapt the `<1>` tags for the Serbian context. Consider using standard formatting techniques for the text."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'Room admin' is translated as 'Admin sobe'. While technically correct, 'Administrator sobe' would be more accurate and common in this context.",
-          "suggestion": "Change 'Admin sobe' to 'Administrator sobe'."
+          "description": "“Room admin” is translated as “Admin sobe”. While understandable, “Admin sobe” is a literal translation. A more natural phrasing in Serbian might be 'Administrator sobe' or 'Upravnik sobe'.",
+          "suggestion": "Consider translating 'Room admin' as 'Administrator sobe' or 'Upravnik sobe' for better flow and natural language."
         }
       ],
       "approved_at": null
@@ -465,13 +450,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "“Досвідчений користувач” translates to 'Experienced User,' which isn't the intended meaning of 'User' in this context. It needs to be a generic 'User' role.",
-          "suggestion": "Виберіть ролі {{productName}} для імпортованих користувачів: <1>Адміністратор {{productName}}</1>, <1>Кімнати</1> або <1>Користувач</1>. За замовчуванням для кожного користувача вибрана роль «Користувач». Ви можете керувати ролями після імпорту."
+          "description": "The term 'Досвідчений користувач' (Experienced User) is not an accurate translation of 'User' in this context. It implies a higher level of expertise than the English term suggests. It should be a neutral term for a standard user.",
+          "suggestion": "Користувач (Korystuvach)"
         },
         {
           "type": "formatting",
-          "description": "The Ukrainian translation doesn't consistently maintain the HTML tags as in the original English. The tags <1>...</1> should enclose the role names.",
-          "suggestion": "Виберіть ролі {{productName}} для імпортованих користувачів: <1>Адміністратор {{productName}}</1>, <1>Кімнати</1> або <1>Користувач</1>. За замовчуванням для кожного користувача вибрана роль «Користувач». Ви можете керувати ролями після імпорту."
+          "description": "The Ukrainian translation retains the `<1>` tags from the English content. These tags are unnecessary and should be removed.",
+          "suggestion": "Remove the `<1>` tags from the translation."
         }
       ],
       "approved_at": null
@@ -482,13 +467,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags <1> are not consistently applied. They appear around each role option in both English and Vietnamese, but their purpose isn't clear and might interfere with rendering.",
-          "suggestion": "Consider removing the <1> tags if they are not essential for rendering or replacing them with a more appropriate HTML tag (e.g., <span>, <div>) or CSS class."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While generally correct, 'Người sử dụng' is a less common and slightly awkward translation of 'User'. A more natural translation would be 'Người dùng'.",
-          "suggestion": "Change 'Người sử dụng' to 'Người dùng'."
+          "description": "The Vietnamese translation retains the <1> tags from the English content. These tags are not necessary and should be removed.",
+          "suggestion": "Remove the <1> tags from the Vietnamese translation."
         }
       ],
       "approved_at": null

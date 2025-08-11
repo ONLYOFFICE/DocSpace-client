@@ -1,0 +1,34 @@
+{
+  "key_path": "TrashAutoDeleteWarning",
+  "content": "Items in {{sectionName}} are automatically deleted after 30 days.",
+  "content_en_sha1_hash": "72740d2f13fab9038a1cf3a73558f696ef70b1af",
+  "created_at": "2025-06-02T10:19:23.448Z",
+  "updated_at": "2025-08-11T09:02:43.932Z",
+  "comment": {
+    "text": "This translation key is used to display a warning message indicating that items in a specific section are automatically deleted after 30 days. It appears in the UI as part of a header on the Home page and in certain warnings, informing users about the auto-deletion policy for their files or personal folders.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:39.647Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 551,
+      "context": ": {};\n \n const badgeLabel = showTemplateBadge ? t(\"Files:Template\") : \"\";\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Warning/index.tsx",
+      "line_number": 50,
+      "context": "const { t } = useTranslation([\"Files\", \"Common\"]);\n \n if (currentDeviceType === DeviceType.desktop) return null;\n \n const warningText = isRecycleBinFolder\n ? t(\"TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n : isPersonalReadOnly\n ? t(\"PersonalFolderErasureWarning\")\n : \"\";",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

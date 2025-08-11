@@ -3,7 +3,7 @@
   "content": "Document conversion",
   "content_en_sha1_hash": "f96037ca2ed0cf02f83458fa984002b431ca5108",
   "created_at": "2025-05-19T21:30:56.882Z",
-  "updated_at": "2025-05-20T09:37:57.404Z",
+  "updated_at": "2025-06-02T10:20:51.099Z",
   "comment": {
     "text": "This translation key is used for the title \"Document conversion\" in a file upload dialog. It appears as the header of a modal dialog when converting a single file, and also as an alternative title when uploading multiple files.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
-      "line_number": 164,
+      "line_number": 163,
       "context": "withFooterCheckboxes\n autoMaxHeight\n >\n <ModalDialog.Header>\n {convertSingleFile\n ? t(\"DocumentConversionTitle\")\n : t(\"FileUploadTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body style={{ paddingBottom: \"0px\" }}>\n <Text>\n {convertSingleFile",
       "module": "/packages/client"
     }
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ලේඛනය හැරවීම' while technically meaning 'document conversion,' is not the most natural or common way to express this in Sinhala. A more accurate and natural translation would be 'ලේඛන පරිවර්තනය'.",
+          "suggestion": "ලේඛන පරිවර්තනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Create template",
   "content_en_sha1_hash": "40baede05e31ce20287f973b549356fa6540d596",
   "created_at": "2025-05-19T21:30:55.385Z",
-  "updated_at": "2025-05-28T09:30:02.247Z",
+  "updated_at": "2025-08-11T09:02:43.866Z",
   "comment": {
     "text": "The translation key \"CreateTemplate\" is used to display the text \"Create template\" in a button, which triggers creating a new template when clicked. It appears in a dialog box at line 231 of CreateRoomTemplate.tsx, specifically in the create room template buttons section. Translators should provide a text that conveys the action of creating something from scratch.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateRoomTemplate/CreateRoomTemplate.tsx",
-      "line_number": 231,
+      "line_number": 258,
       "context": "<div className=\"create-room-template_buttons\">\n <Button\n id=\"create-room-template-modal_submit\"\n tabIndex={5}\n label={t(\"Files:CreateTemplate\")}\n size={ButtonSize.normal}\n primary\n scale\n isDisabled={isWrongTitle}\n isLoading={isLoading}",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Şablon yaradın\" translates to \"You created a template\". The English phrase \"Create template\" is an instruction or a command, not a statement about someone having already created a template. A more accurate translation would be something like \"Şablon düzəlt\" or \"Yeni şablon yaradın\".",
+          "suggestion": "Şablon düzəlt"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -129,7 +135,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Crie template' is understandable, a more natural and accurate translation of 'Create template' would be 'Criar modelo'. The word 'template' is often translated as 'modelo' in Portuguese, especially in technical contexts.",
+          "suggestion": "Criar modelo"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"පාඨමාලාව නිර්මාණය කරන්න\" is technically a valid translation, it's quite literal and not the most natural phrasing for 'Create template'. 'Template' doesn't directly translate to 'පාඨමාලාව' (pathamaalawa - curriculum/syllabus).",
+          "suggestion": "Consider alternatives like \"ආකාරය නිර්මාණය කරන්න\" (aakaaraya nirmanaaya karaanawa - create a form/structure) or \"ප්‍රවර්ගය නිර්මාණය කරන්න\" (pravegaya nirmanaaya karaanawa - create a category/template), depending on the specific context of 'template'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

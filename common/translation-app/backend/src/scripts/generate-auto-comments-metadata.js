@@ -76,7 +76,12 @@ async function generateBasicComment(keyPath, content, usages) {
 - **Key Name:** ${keyPath}
 - **English Content:** "${content}"
 - **Usage Contexts:**
-${processedUsages.map((u) => `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`).join("\n")}
+${processedUsages
+  .map(
+    (u) =>
+      `  - **File:** ${u.file_path}\n    **Line:** ${u.line_number}\n    **Context:** ${u.context}`
+  )
+  .join("\n")}
 
 ## Instructions
 You are a helpful assistant that creates concise descriptions for translation keys.
@@ -98,7 +103,9 @@ Based on this information, please write a short, clear description of what this 
   while (retries < maxRetries) {
     try {
       console.log(
-        `Generating comment for ${keyPath} (attempt ${retries + 1}/${maxRetries})`
+        `Generating comment for ${keyPath} (attempt ${
+          retries + 1
+        }/${maxRetries})`
       );
 
       // Call Ollama API with timeout
@@ -462,7 +469,9 @@ generateAutoCommentsMetadata()
     Object.entries(stats.namespaces || {}).forEach(([namespace, nsStats]) => {
       if (nsStats) {
         console.log(
-          `  ${namespace}: ${nsStats.updatedComments || 0}/${nsStats.totalKeys || 0} comments generated`
+          `  ${namespace}: ${nsStats.updatedComments || 0}/${
+            nsStats.totalKeys || 0
+          } comments generated`
         );
       }
     });

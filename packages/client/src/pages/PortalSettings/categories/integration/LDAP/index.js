@@ -89,9 +89,13 @@ const LDAP = ({
       <Text className="intro-text settings_unavailable">
         <Trans
           t={t}
-          i18nKey="LdapIntro"
+          i18nKey="LdapIntegrationDescription"
           ns="Ldap"
-          values={{ productName: t("Common:ProductName"), link }}
+          values={{
+            productName: t("Common:ProductName"),
+            sectionName: t("Common:Contacts"),
+            link,
+          }}
           components={{
             1: (
               <Link

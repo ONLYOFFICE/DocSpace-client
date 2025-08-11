@@ -3,7 +3,7 @@
   "content": "NPM package description",
   "content_en_sha1_hash": "0fa961aa09590e50748d50589c48f3ae07b543a8",
   "created_at": "2025-05-19T21:30:54.597Z",
-  "updated_at": "2025-05-28T09:30:02.574Z",
+  "updated_at": "2025-08-04T07:30:01.402Z",
   "comment": {
     "text": "The \"NPMCodeDescription\" translation key provides the text used to display a package description in the JavaScript SDK's CodeToInsert component. It is used to provide a brief explanation of what the NPM code is intended for, helping users understand its purpose and context within the application.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 65,
+      "line_number": 72,
       "context": "const npm = (\n <CodeWrapper height=\"fit-content\">\n <CategorySubHeader className=\"copy-window-code\">NPM</CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeDescription\")}\n </Text>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeInstallStep\")}\n </Text>\n <Textarea",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'وصف حزمة \"NPM\"' is a literal translation of \"package description\". While understandable, a more natural and idiomatic translation would be preferred for a package description.",
-          "suggestion": "وصف حزمة Node Package Manager"
+          "description": "The translation \"وصف حزمة \"NPM\"\" is a literal translation and while understandable, it doesn't flow naturally in Arabic. A more idiomatic translation would be preferable.",
+          "suggestion": "وصف لـ NPM Package"
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"փաթեթի\" is spelled correctly, but it might benefit from hyphenation depending on Armenian style guidelines.",
-          "suggestion": "Consider hyphenating: \"փաթեթ-ի\" (if applicable)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ຄໍາອະທິບາຍຂອງໂປຣແກຣມ NPM' is too literal. 'ໂປຣແກຣມ' means 'program' and while technically correct, a more natural Lao phrasing would be something closer to 'ໝວດໂປຣແກຣມ NPM' or 'ພາກສ່ວນອະທິບາຍຂອງ NPM'.",
-          "suggestion": "ຄໍາອະທິບາຍຂອງໝວດໂປຣແກຣມ NPM"
+          "description": "The English term 'package' is better translated as 'ຊຸດໂປຣແກຣມ' rather than 'ໂປຣແກຣມ'. While 'ໂປຣແກຣມ' isn't *wrong*, 'ຊຸດໂປຣແກຣາມ' more accurately conveys the meaning of an NPM package.",
+          "suggestion": "ຄໍາອະທິບາຍຂອງຊຸດໂປຣແກຣມ NPM"
         }
       ],
       "approved_at": null
@@ -189,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Опис NPM пакета' is understandable, a more accurate translation of 'package description' would be 'Опис пакета NPM'. The order is slightly changed to maintain a more natural flow in Serbian, placing the more general term ('package') first.",
-          "suggestion": "Опис пакета NPM"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

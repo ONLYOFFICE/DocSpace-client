@@ -104,9 +104,9 @@ export const SettingsStoreContextProvider = ({
   initData: TSettingsStoreInitData;
 }) => {
   return (
-    <SettingsStoreContext.Provider value={new SettingsStore(initData)}>
+    <SettingsStoreContext value={new SettingsStore(initData)}>
       {children}
-    </SettingsStoreContext.Provider>
+    </SettingsStoreContext>
   );
 };
 

@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "Annuleringsmelding niet meer weergeven",
   "DisplayFileExtension": "Bestandsextensie naast bestandsnaam weergeven",
-  "DisplayNotification": "Meldingen weergeven wanneer items naar de Prullenbak worden verplaatst",
   "OpenSameTab": "Open {{organizationName}} editor in hetzelfde tabblad",
   "OriginalCopy": "Bewaar de bestandskopie ook in het oorspronkelijke formaat"
 }

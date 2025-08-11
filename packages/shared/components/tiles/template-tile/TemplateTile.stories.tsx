@@ -28,10 +28,9 @@ import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import PublicRoomTemplateIconReactSvgUrl from "PUBLIC_DIR/images/icons/32/template/public.svg?url";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
+import { ContextMenuModel } from "../../context-menu";
 import { Link } from "../../link";
-import { ColorTheme } from "../../color-theme/ColorTheme";
-import { ThemeId } from "../../color-theme/ColorTheme.enums";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 import { ComboBox, ComboBoxSize } from "../../combobox";
@@ -40,6 +39,7 @@ import { Text } from "../../text";
 import { TemplateTile } from "./TemplateTile";
 import { TemplateTileProps, TemplateItem } from "./TemplateTile.types";
 import { TileContent } from "../tile-content/TileContent";
+import { IconButton } from "../../icon-button";
 
 const contextOptions: ContextMenuModel[] = [
   {
@@ -163,11 +163,13 @@ const element = (
 
 const badges = (
   <div className="badges">
-    <ColorTheme
-      themeId={ThemeId.IconButton}
+    <IconButton
+      iconName={CreateRoomReactSvgUrl}
       onClick={() => {}}
       className="badge icons-group"
       size={IconSizeType.medium}
+      hoverColor="accent"
+      clickColor="accent"
     />
   </div>
 );

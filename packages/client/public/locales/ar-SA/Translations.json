@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "اختر من القائمة",
-  "ConnectingAccount": "ربط الحساب",
-  "DeleteFromTrash": "تم حذف العناصر المحددة من سلة المهملات بنجاح",
   "FileLocked": "الملف مؤمن",
   "FileProtected": "الملف محمي بكلمة مرور",
   "FileUnlocked": "ملف مفتوح",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "تغيير معلومات الجهة الخارجية",
   "ThirdPartyTitle": "الخدمات الجهة الخارجية",
   "TitleShowActions": "عرض إجراءات الملف",
-  "TitleShowFolderActions": "عرض إجراءات المجلد",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "عرض إجراءات المجلد"
 }

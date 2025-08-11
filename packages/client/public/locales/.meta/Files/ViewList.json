@@ -3,7 +3,7 @@
   "content": "List",
   "content_en_sha1_hash": "a1fffaaafb7cc996685bceb829c053cc4f7de43d",
   "created_at": "2025-05-19T21:30:56.303Z",
-  "updated_at": "2025-07-01T15:57:36.132Z",
+  "updated_at": "2025-08-11T09:02:43.930Z",
   "comment": {
     "text": "The translation key \"ViewList\" is used to display the label for a filter option that controls the layout of data in a list view. In the UI, it appears as a button or toggle on the filtering options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1130,
+      "line_number": 1132,
       "context": "const getViewSettingsData = React.useCallback(() => {\n const viewSettings = [\n {\n id: \"view-switch_rows\",\n value: \"row\",\n label: t(\"ViewList\"),\n icon: ViewRowsReactSvgUrl,\n },\n {\n id: \"view-switch_tiles\",\n value: \"tile\",",
       "module": "/packages/client"
     }
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala translation 'ලැයිස්තුව' contains a spelling error. While intended to be 'List', the vowel placements and consonant usage create an inaccurate representation.",
-          "suggestion": "The correct spelling should be 'รายการ' (List). While this is influenced by English, a proper Sinhala equivalent would require deeper linguistic consideration."
+          "description": "The Sinhala translation 'ලැයිස්තුව' contains a spelling error. The correct spelling is likely 'ලේඛන ලැයිස්තුව' for 'file list'. However, given the English 'List' is quite generic, 'ලේඛන ලැයිස්තුව' might be too specific.",
+          "suggestion": "Consider 'ලේඛනයන්' (lekanayan) for 'files' or 'รายการ' for a more general list, or 'ලේඛන' (lekhena) if the context implies a document list."
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Листа\" is a noun meaning \"list\" in the nominative singular form. While it's a potential meaning of 'List' in English, it lacks the sense of an action (viewing). A more appropriate translation would convey the action of 'viewing a list'.",
-          "suggestion": "Consider a translation that implies 'View' or 'Look at', such as 'Приказ' or 'Преглед'."
+          "description": "The translation 'Листа' is the nominative singular form of the word 'list'. The appropriate translation for 'List' in this context, implying a menu item or action, would likely be a verb in the imperative mood, such as 'Прикажи' (Prikaži) or 'Покажи' (Pokaži) meaning 'Show' or 'Display'. Alternatively, a noun like 'Списак' (Spisak) could also work, meaning 'List' as a noun.",
+          "suggestion": "Consider 'Прикажи', 'Покажи', or 'Списак' as alternatives."
         }
       ],
       "approved_at": null

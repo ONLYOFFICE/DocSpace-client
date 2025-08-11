@@ -3,7 +3,7 @@
   "content": "You need to connect your domain to your current IP to change the address settings. Please make sure you have access to the domain settings to be able to do that. After connecting the domain, create a {{productName}} name. You can change the created {{productName}} name later using the space settings.",
   "content_en_sha1_hash": "6428b4f823da2c4393fa0d6b961f1bfec647cf0a",
   "created_at": "2025-05-19T21:30:57.414Z",
-  "updated_at": "2025-05-20T09:48:02.280Z",
+  "updated_at": "2025-05-26T07:57:33.005Z",
   "comment": {
     "text": "This translation key is used for a configuration section that explains how to connect a domain to its IP address and create a product name. The text appears in a UI component as part of a configuration setting, providing context for users to complete the setup process.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/ConfigurationSection.tsx",
-      "line_number": 128,
-      "context": "<Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n </div>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>\n {t(\"ConfigurationDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </div>\n <div className=\"spaces-input-wrapper\">",
+      "file_path": "/packages/management/src/app/spaces/configuration/header.tsx",
+      "line_number": 45,
+      "context": "</Text>\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigurationHeader\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" fontWeight={400}>\n {t(\"ConfigurationDescription\")}\n </Text>\n </StyledHeader>\n );\n };",
       "module": "/packages/management"
     }
   ],
@@ -27,175 +27,459 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"عنوان IP الحالي الخاص بك\" (your current IP) is slightly awkward. A more natural phrasing in Arabic would be something like \"عنوان IP الحالي\" (the current IP).  While technically correct, it sounds less conversational.",
+          "suggestion": "تحتاج إلى توصيل النطاق الخاص بك بعنوان IP الحالي لتغيير إعدادات العنوان."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"إعدادات المساحة\" (space settings) is unclear and doesn't accurately convey the meaning of 'settings' as in the configuration or control panel of the product.  It needs to be more specific.",
+          "suggestion": "يمكنك تغيير {{productName}} الذي تم إنشاؤه لاحقًا باستخدام إعدادات المنتج/التحكم."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“space settings” is an awkward translation. The English phrase refers to a settings panel within the product, not a literal 'space'.",
+          "suggestion": "Consider a more accurate translation like 'məkan parametrləri' or a more descriptive phrase explaining where the name can be changed within the product interface. For example: '{{productName}} adını daha sonra məkan ayrimları bölməsindən dəyişə bilərsiniz' or '{{productName}} adını daha sonra sistem ayrimları bölməsindən dəyişə bilərsiniz.'"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"настройките на пространството\" (settings of the space) is not the correct translation for \"space settings\". The English phrase refers to a dedicated hosting or server space. A more accurate translation would be something along the lines of \"настройките на хостинга\" (hosting settings) or \"настройките на сървъра\" (server settings), depending on the specific context.",
+          "suggestion": "Consider replacing \"настройките на пространството\" with \"настройките на хостинга\" or \"настройките на сървъра\" to better reflect the English meaning of 'space settings'."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'space settings' is a potentially unclear translation for 'settings'. It's not immediately obvious what 'space' refers to in this context. It should be translated more closely to the English meaning of 'settings'.",
+          "suggestion": "Po připojení domény vytvořte název {{productName}}. Vytvořený název {{productName}} můžete později změnit pomocí nastavení."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"create a {{productName}} name\" is awkward in German. It sounds like creating a name *for* the {{productName}} rather than creating a {{productName}} itself.",
+          "suggestion": "Erstellen Sie nach dem Verbinden der Domain einen {{productName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated use of spaces around the product name variable is inconsistent and unnecessary. While this may be correct in the original English, it looks odd in German.",
+          "suggestion": "Erstellen Sie nach dem Verbinden der Domain einen {{productName}}. Sie können den erstellten {{productName}} später über die Space-Einstellungen ändern."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'Για να μπορέσετε να το κάνετε αυτό' is slightly awkward. It literally translates to 'In order to be able to do this.'",
+          "suggestion": "Χρειάζεται να έχετε πρόσβαση στις ρυθμίσεις του τομέα για να το κάνετε αυτό."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Μπορείτε να αλλάξετε το όνομα {{productName}} που δημιουργήσατε αργότερα' could be more concise and natural. The repetition of 'όνομα' (name) makes it slightly cumbersome.",
+          "suggestion": "Μπορείτε να αλλάξετε αργότερα το όνομα {{productName}} χρησιμοποιώντας τις ρυθμίσεις χώρου."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"cambiar la configuración de la dirección\" is a bit clunky. A more natural translation for \"change the address settings\" would be \"cambiar la dirección\" or \"modificar la dirección\".",
+          "suggestion": "Debe conectar su dominio a su IP actual para cambiar la dirección. "
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"configuración del espacio\" is unclear and doesn't directly translate to \"space settings\". It's likely referring to a specific platform or area where settings can be adjusted.",
+          "suggestion": "Puede cambiar el nombre del {{productName}} creado más adelante utilizando la configuración del sistema."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'using the space settings' is unclear and doesn't directly translate the English meaning 'using the space settings'. It's likely referring to 'site settings' or a similar term.",
+          "suggestion": "Sinun täytyy yhdistää verkkotunnuksesi nykyiseen IP:en muuttaaksesi osoiteasetuksia. Ole hyvä ja varmista, että sinulla on pääsy verkkotunnuksen asetuksiin voidaksesi tehdä sen. Verkkotunnuksen yhdistämisen jälkeen luo {{productName}}-nimi. Voit muuttaa luotua {{productName}}-nimeä myöhemmin käyttäen sivuston asetuksia."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"Il vous faut\" is a bit formal and could be softened for a more user-friendly tone. While grammatically correct, a more conversational alternative might improve clarity.",
+          "suggestion": "Il est nécessaire de connecter votre domaine à votre IP actuelle..."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"pour pouvoir le faire\" is slightly redundant. \"Pour ce faire\" would be more concise.",
+          "suggestion": "pour ce faire."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"à l'aide des paramètres de l'espace\" is unclear and potentially inaccurate. It's better to be more specific about where the name can be modified.",
+          "suggestion": "dans les paramètres du service"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"օգտագործելով բացատների կարգավորումները\" translates to \"using the space settings\". This is not the correct translation of the English phrase 'using the space settings.' The English refers to configuration settings, not physical space settings. A more accurate translation would be something along the lines of 'օգտագործելով համադրիչների կարգավորումները' or 'օգտագործելով կարգավորումների բաժինը'.",
+          "suggestion": "օգտագործելով համադրիչների կարգավորումները"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase \"Dopo aver connesso il dominio\" could be improved for better flow. Using \"Dopo aver collegato il dominio\" or \"Dopo aver associato il dominio\" would be more natural in Italian.",
+          "suggestion": "Dopo aver collegato il dominio"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase \"utilizzando le impostazioni dello spazio\" is slightly vague. It should be more explicit about what 'space' refers to in this context, likely referring to the platform or service.",
+          "suggestion": "utilizzando le impostazioni della piattaforma"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You need to connect your domain to your current IP\" is translated as \"ドメインを現在のIPに接続する必要があります\". While technically correct, it sounds overly formal and less natural in Japanese. A more natural phrasing would be something like \"ドメインを現在のIPアドレスに紐付けする必要があります\" or \"ドメインを現在のIPアドレスに関連付けする必要があります\".",
+          "suggestion": "ドメインを現在のIPアドレスに紐付けする必要があります"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"create a {{productName}} name\" is translated as \"{{productName}}名を作成します\". This is not incorrect, but it might be more clear to specify what kind of name is being created. For example, if it's a resource name, it would be clearer to say \"{{productName}} リソース名を作成します\" or similar.",
+          "suggestion": "{{productName}} リソース名を作成します"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, using the phrase \"作成した{{productName}}名は後でスペース設定で変更することができます\" is slightly awkward.  It's better to rephrase for better flow.",
+          "suggestion": "作成した{{productName}}名は、後でスペース設定から変更できます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"using the space settings\" is not a natural translation of \"using the space settings\". It implies something related to physical space rather than configuration settings. A more appropriate translation would be something like \"공간 설정(space settings)을 통해\" or \"설정 공간에서\".",
+          "suggestion": "변경한 {{productName}} 이름은 나중에 설정 공간에서 변경할 수 있습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'using the space settings' is unclear and awkward in Lao. It's likely referring to a 'zone' or 'region' setting.",
+          "suggestion": "ທ່ານສາມາດປ່ຽນຊື່ {{productName}} ທີ່ສ້າງຂຶ້ນໃນຕໍ່ໜ້າໂດຍໃຊ້ການຕັ້ງຄ່າພື້ນທີ່ ຫຼື ເຂດໄດ້."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"telpas iestatījumus\" (space settings) doesn't accurately reflect the intended meaning of 'change the created {{productName}} name later using the space settings'. It's unclear what 'space settings' refers to in this context. It should be something more descriptive of how to rename a resource, like 'atspoguļojuma iestatījumos' (reflection settings) or a more specific term if applicable.",
+          "suggestion": "Investigate the intended meaning of 'space settings' and translate it more accurately, perhaps with 'atspoguļojuma iestatījumos' or a more specific term related to renaming a resource."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The phrase 'de ruimte instellingen' is awkward and unclear. It's unclear what 'ruimte' refers to here. It likely refers to a settings panel or configuration area, but the Dutch phrasing isn't idiomatic.",
+          "suggestion": "U kunt de gemaakte {{productName}} naam later wijzigen via de instellingen."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"z poziomu ustawień obszaru\" is a less common and slightly awkward way to say \"using the space settings.\"  A more natural translation might be \"z poziomu ustawień\".",
+          "suggestion": "z poziomu ustawień"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation maintains the English double curly braces `{{productName}}`. This is not standard practice in Portuguese and should be adjusted to reflect a more natural Portuguese convention for placeholders.",
+          "suggestion": "Replace `{{productName}}` with a placeholder format commonly used in Portuguese, such as `<nomeDoProduto>` or `[nomeDoProduto]` or a similar system based on context."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation maintains the double curly braces '{{productName}}', which might be visually jarring or require further processing depending on the platform. Consider whether they should be removed or replaced with a more appropriate formatting.",
+          "suggestion": "Review the platform's requirements for variable placeholders. If it's not a direct placeholder format, consider removing or altering the braces."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"parametrii de adresă\" is a literal translation of \"address settings\" and sounds awkward in Romanian. A more natural phrasing would be \"setările de adresă\" or simply \"setări\".",
+          "suggestion": "Domeniul dvs trebuie conectat la adresa dvs IP actuală pentru a schimba setările de adresă / setări."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ca să le puteți schimba\" is a bit clunky and a more fluent option would be \"pentru a le putea schimba\".",
+          "suggestion": "Verificați dacă aveți accesul la setările domeniului pentru a le putea schimba."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"nume pentru spațiul {{productName}}\" is not as clear as it could be. It's implying a name *for* a space named {{productName}}. A better translation would clarify that the user is creating a named resource, potentially referring to a Kubernetes namespace or similar.",
+          "suggestion": "creați un nume pentru resursa {{productName}} / creați un {{productName}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"setările spațiului\" is potentially ambiguous. It should be more specific based on the context, if possible. If referring to Kubernetes namespaces, it should be \"setările namespace-ului\"",
+          "suggestion": "Puteți să schimbați numele spațiului {{productName}} mai târziu utilizând setările spațiului / setările namespace-ului."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"настройки пространства\" (space settings) is an awkward and potentially incorrect translation of \"space settings\" in this context. It likely refers to account or resource settings within the platform, not a generic 'space'.",
+          "suggestion": "Consider a more precise translation such as \"настройки учетной записи\" (account settings) or \"настройки ресурса\" (resource settings), depending on the specific context of the platform."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඔබේ' (obaey) appears multiple times and seems to be a misspelling or incorrect usage. It should likely be 'ඔබගේ' (obage) when referring to possession.",
+          "suggestion": "Replace 'ඔබේ' with 'ඔබගේ' in all instances."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ළමයා' (lamyaa) appears in the text. This seems out of place and likely a misspelling or incorrect usage. It does not fit the context of verifying domain access.",
+          "suggestion": "The word is likely a typo. Remove or replace with a more appropriate word that conveys the idea of having domain access."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'පරි ලිපිනය සැකසුම් වෙනස් කිරීමට අවශ්‍යයි' (pari lipinaya sakasum venas kirimata avashyayi) translates poorly and doesn't clearly convey the meaning of 'to change the address settings'. It lacks clarity and flow. The original sentence is 'You need to connect your domain to your current IP to change the address settings'.",
+          "suggestion": "Consider a more direct translation of 'to change the address settings' such as 'ලිපිනය සැකසුම් වෙනස් කිරීමට'."
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure 'එය කිරීමට හැකිවීම සඳහා ඔබට డొమెయిన్ සැකසුම් වෙත ප්‍රවේශය ඇති බවට' is awkward and grammatically incorrect. The flow of the sentence is disrupted.",
+          "suggestion": "Rephrase the sentence for better flow and clarity. Consider 'එය සඳහා ඔබට డొమెయిన్ සැකසුම් වෙත ප්‍රවේශය තිබිය යුතුය' or similar variations."
+        },
+        {
+          "type": "spelling",
+          "description": "The word డొమెయిన్‌ (domen) has a wrong character. It should likely be డొమెయిన్ (domen).",
+          "suggestion": "Replace డొమెయిన్‌ with డొమెయిన్."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"nastavenia priestoru\" is an awkward and potentially inaccurate translation of \"space settings.\" It's unclear what \"space settings\" refers to in the English context. A more accurate translation might be something like \"nastavenia aplikácie\" or a more specific term if the context is known.",
+          "suggestion": "Consider a more precise translation of \"space settings\" based on the specific context. For example: 'nastavenia aplikácie' or a more specific term."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"using the space settings\" is unclear and doesn't accurately reflect the English \"using the space settings\". It suggests a generic 'space' rather than referring to the application's or platform's settings. The original English implies settings within the application/platform, not a physical space.",
+          "suggestion": "Ustvarjeno ime {{productName}} lahko pozneje spremenite z nastavitvami aplikacije/platforme."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'using the space settings' is unclear and doesn't directly translate the English meaning of 'using the space settings'. It's likely referring to a control panel or hosting environment, but the Serbian translation is vague.",
+          "suggestion": "Након што креирате име, можете га касније променити у администраторској конзоли."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated use of 'име {{productName}}-а' is slightly awkward in Serbian. While technically correct, it could be more natural.",
+          "suggestion": "Након што повежете домен, креирајте име {{productName}}. Касније можете променити име {{productName}} користећи администраторске подешавања."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"podešavanja prostora\" (space settings) is an awkward translation of \"space settings\" in this context. It doesn't clearly convey the meaning of adjusting settings within a platform or service. It implies physical space, which is incorrect.",
+          "suggestion": "Consider alternatives like \"postavke\" (settings), \"uspostavke\" (configurations), or a more specific term depending on the platform's terminology.  For example, \"postavke platforme\" (platform settings)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The repetition of \"ime {{productName}}-a\" is grammatically clunky. While technically correct, it's stylistically undesirable in Serbian.  The genitive case is used repeatedly.",
+          "suggestion": "Rephrase the sentences to avoid repetition. For example: 'Nakon što povežete domen, kreirajte {{productName}} ime. Kasnije možete promeniti ime {{productName}} koristeći postavke platforme.' (After connecting the domain, create a {{productName}} name. Later, you can change the {{productName}} name using the platform settings.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of the genitive case after the product name ({{productName}}) feels a little unnatural and potentially confusing.  While grammatically possible, it is not the most common or fluent way to express this in Serbian.",
+          "suggestion": "Consider if the product name needs to be in genitive case. If it's a product label, keeping it in the nominative might sound more natural in a technical context.  Experiment with both options in context with a native speaker."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"using the space settings\" in the English content is awkwardly translated as \"alan ayarlarını kullanarak\" in Turkish. 'Space settings' likely refers to settings accessible within the {{productName}} platform itself, not general domain settings. This is a mistranslation of context.",
+          "suggestion": "Oluşturulan {{productName}} adını daha sonra {{productName}} ayarlarından değiştirebilirsiniz."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a hyphenated IP address ('IP-адреси'), which is less common in Ukrainian. It's more natural to use 'IP-адреса' or 'IP адреса'.",
+          "suggestion": "Замініть 'IP-адреси' на 'IP-адреса' або 'IP адреса'."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Для цього переконайтеся, що у вас є доступ до параметрів домену' is grammatically correct but sounds a bit formal and wordy. It could be more natural.",
+          "suggestion": "Розгляньте можливість спрощення до 'Переконайтеся, що у вас є доступ до налаштувань домену'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'параметри простору' (space parameters) is a direct translation of 'space settings', but it might be unclear to a Ukrainian user.  A more natural term might be 'налаштування простору' (space configuration) or something contextually appropriate.",
+          "suggestion": "Розгляньте можливість заміни 'параметри простору' на 'налаштування простору' або інший відповідний термін в контексті."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"cài đặt địa chỉ\" is a literal translation of \"address settings\" but might be understood as \"network settings\" or \"DNS settings\" in this context. It lacks nuance.",
+          "suggestion": "Bạn cần kết nối tên miền của mình với IP hiện tại để thay đổi cài đặt DNS hoặc cài đặt mạng."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“cài đặt không gian” is unclear and doesn’t directly translate to “space settings”.  It's likely referring to control panel or hosting settings.",
+          "suggestion": "Bạn có thể thay đổi tên {{productName}} đã tạo sau này bằng cách sử dụng bảng điều khiển hoặc cài đặt trên tài khoản của bạn."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

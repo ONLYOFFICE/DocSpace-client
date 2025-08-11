@@ -46,12 +46,13 @@ import {
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
-import { authStore } from "@docspace/shared/store";
+import { authStore, settingsStore } from "@docspace/shared/store";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import {
@@ -74,6 +75,8 @@ class PaymentStore {
   currentTariffStatusStore: CurrentTariffStatusStore | null = null;
 
   currentQuotaStore: CurrentQuotasStore | null = null;
+
+  settingsStore: SettingsStore | null = null;
 
   paymentQuotasStore: PaymentQuotasStore | null = null;
 
@@ -156,6 +159,7 @@ class PaymentStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
     this.paymentQuotasStore = paymentQuotasStore;
+    this.settingsStore = settingsStore;
 
     makeAutoObservable(this);
   }
@@ -199,7 +203,7 @@ class PaymentStore {
     if (!this.userStore || !this.currentQuotaStore) return;
 
     const { user } = this.userStore;
-    const { walletCustomerEmail } = this.currentTariffStatusStore;
+    const { walletCustomerEmail } = this.currentTariffStatusStore!;
 
     if (!user) return false;
 
@@ -390,7 +394,10 @@ class PaymentStore {
     return this.servicesQuotas?.price.value ?? 0;
   }
 
-  formatWalletCurrency = (item: number = null, fractionDigits: number = 3) => {
+  formatWalletCurrency = (
+    item: number | null = null,
+    fractionDigits: number = 3,
+  ) => {
     const { language } = authStore;
 
     const amount = item ?? this.walletBalance;
@@ -406,13 +413,13 @@ class PaymentStore {
   formatPaymentCurrency = (item: number = 0, fractionDigits: number = 0) => {
     const { language } = authStore;
     const amount = item || this.walletBalance;
-    const { planCost } = this.paymentQuotasStore;
+    const { planCost } = this.paymentQuotasStore!;
     const { isoCurrencySymbol } = planCost;
 
     return formatCurrencyValue(
       language,
       amount,
-      isoCurrencySymbol,
+      isoCurrencySymbol || "USD",
       fractionDigits,
     );
   };
@@ -511,7 +518,7 @@ class PaymentStore {
     }
   };
 
-  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
@@ -532,7 +539,7 @@ class PaymentStore {
   };
 
   isShowStorageTariffDeactivated = () => {
-    const { previousStoragePlanSize } = this.currentTariffStatusStore;
+    const { previousStoragePlanSize } = this.currentTariffStatusStore!;
 
     if (!previousStoragePlanSize) return false;
 
@@ -826,6 +833,7 @@ class PaymentStore {
       localStorage.removeItem("enterpriseAlertClose");
 
       await getPaymentInfo();
+      await this.settingsStore?.getSettings();
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -899,11 +907,14 @@ class PaymentStore {
     const { stepAddingQuotaManagers, stepAddingQuotaTotalSize } =
       this.paymentQuotasStore;
 
-    if (stepAddingQuotaManagers)
+    if (stepAddingQuotaManagers && typeof stepAddingQuotaManagers === "number")
       this.stepByQuotaForManager = stepAddingQuotaManagers;
     this.minAvailableManagersValue = this.stepByQuotaForManager;
 
-    if (stepAddingQuotaTotalSize)
+    if (
+      stepAddingQuotaTotalSize &&
+      typeof stepAddingQuotaTotalSize === "number"
+    )
       this.stepByQuotaForTotalSize = stepAddingQuotaTotalSize;
     this.minAvailableTotalSizeValue = this.stepByQuotaForManager;
   };
@@ -912,7 +923,7 @@ class PaymentStore {
     email: string,
     userName: string,
     message: string,
-    t,
+    t: TTranslation,
   ) => {
     try {
       await api.portal.sendPaymentRequest(email, userName, message);

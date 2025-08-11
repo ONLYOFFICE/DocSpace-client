@@ -26,18 +26,17 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "@docspace/shared/styles/variables/devices";
-@import "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/mixins";
 
 .rowWrapper {
   :global(.row_context-menu-wrapper) .badgesComponent {
-    @include mobile {
+    @include mixins.mobile {
       display: none;
     }
   }
 
   .mobileBadges .badgesComponent {
-    @include not-mobile {
+    @include mixins.not-mobile {
       display: none;
     }
   }

@@ -60,6 +60,9 @@ class FilesSettingsStore {
 
   settingsStore;
 
+  /**
+   *  @type {import("@docspace/shared/api/files/types").TFilesSettings=}
+   */
   filesSettings = null;
 
   isErrorSettings = null;
@@ -228,6 +231,7 @@ class FilesSettingsStore {
             capabilities.forEach((item) => {
               item.splice(1, 1);
             });
+
             this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
             this.thirdPartyStore.setThirdPartyProviders(providers);
           });
@@ -401,15 +405,14 @@ class FilesSettingsStore {
     presentInArray(this.extsSpreadsheet, extension);
 
   /**
-   *
-   * @param {number} [size = 24]
-   * @param {string } [fileExst = null]
-   * @param {string} [pproviderKey
+   * @param {number} size
+   * @param {string} fileExst
+   * @param {string} providerKey
    * @param {*} contentLength
-   * @param {RoomsType | null} roomType
-   * @param {boolean | null} isArchive
+   * @param {RoomsType} roomType
+   * @param {boolean } isArchive
    * @param {FolderType} folderType
-   * @returns {string | undefined}
+   * @returns {string}
    */
   getIcon = (
     size = 32,

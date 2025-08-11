@@ -3,7 +3,7 @@
   "content": "Author",
   "content_en_sha1_hash": "5fda23d62015b99fb2a9f86b38bcdf2bdf7609c8",
   "created_at": "2025-05-19T21:30:55.305Z",
-  "updated_at": "2025-07-01T15:57:36.028Z",
+  "updated_at": "2025-08-11T09:02:43.881Z",
   "comment": {
     "text": "This translation key is used to display \"Author\" in various UI contexts, typically as a column title or label. It appears in settings dialogs and table headers, providing context for users to filter or sort data by author.",
     "is_auto": true,
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1056,
+      "line_number": 1058,
       "context": "} else {\n const authorOption = [\n {\n key: FilterGroups.filterAuthor,\n group: FilterGroups.filterAuthor,\n label: t(\"ByAuthor\"),\n isHeader: true,\n },\n {\n id: \"filter_author-me\",\n key: FilterKeys.me,",
       "module": "/packages/client"
     },
@@ -55,7 +55,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
       "line_number": 392,
-      "context": "return \"id\" in config ? (\n <>\n <Label className=\"label\" text={t(\"FileFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Files:ByAuthor\")}\n onChange={toggleAuthor}\n isChecked={isUserFilterSet}\n isDisabled={!!config.requestToken}\n />\n {isUserFilterSet ? (",
+      "context": "return \"id\" in config ? (\n <>\n <Label className=\"label\" text={t(\"FileFilter\")} />\n <ToggleButton\n className=\"toggle\"\n label={t(\"Files:ByAuthor\")}\n onChange={toggleAuthor}\n isChecked={isUserFilterSet}\n isDisabled={!!config.requestToken}\n dataTestId=\"files_author_toggle_button\"\n />",
       "module": "/packages/client"
     },
     {
@@ -147,7 +147,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"생성자\" (saeng-jeong-ja) generally means 'creator' or 'generator', not 'author'. While it might be used in some contexts, it's not the most accurate translation of 'Author' in this context (likely referring to the writer of a file).",
+          "suggestion": "Consider using \"작성자\" (jak-seong-ja) which more accurately translates to 'author' or 'writer'."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {

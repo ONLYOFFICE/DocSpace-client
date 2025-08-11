@@ -86,7 +86,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
       </TableCell>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {getServiceQuantity(transaction.quantity, transaction.service)}
+          {getServiceQuantity(transaction.quantity, transaction.service!)}
         </Text>
       </TableCell>
       <TableCell>

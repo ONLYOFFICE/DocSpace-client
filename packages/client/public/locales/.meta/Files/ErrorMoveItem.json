@@ -3,7 +3,7 @@
   "content": "Error moving <2>{{title}}</2> to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "6b0a2a33b1ba27a0f050169f9a804766851a5e70",
   "created_at": "2025-05-19T21:30:55.623Z",
-  "updated_at": "2025-05-20T09:39:47.910Z",
+  "updated_at": "2025-05-24T12:12:59.134Z",
   "comment": {
     "text": "This translation key displays an error message when attempting to move a file or item. The error message includes the title and folder name of the item being moved, providing context for users. It appears in a UI element where file movement attempts fail, likely in a confirmation dialog or progress bar.",
     "is_auto": true,
@@ -27,13 +27,30 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses Arabic numerals (1, 2) instead of the English content's position markers. Although functionally equivalent, it's best to maintain consistency with the original format.",
+          "suggestion": "Consider changing the position markers in the Arabic translation to <1> and <2> to match the English original."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'köçürmə' (move) is correct, but the sentence structure could be improved for naturalness. While technically correct, it reads a bit literal from English.",
+          "suggestion": "Error moving <2>{{title}}</2> to <1>{{folderName}}</1> folder - an error occurred."
+        },
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation is missing a conjunction ('to' in English) before 'qovluğuna'. While not strictly required, it would improve readability.",
+          "suggestion": "<2>{{title}}</2>-ni <1>{{folderName}}</1> qovluğuna doğru köçürmə xətası"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -63,13 +80,25 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Error moving' translates more accurately to 'Error al trasladar' or 'Error moviendo' in Spanish, not just 'Error al mover'. While 'Error al mover' is understandable, it's not the most natural translation.",
+          "suggestion": "Error al trasladar <2>{{title}}</2> a <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Error moving\" is best translated as \"Siirto epäonnistui\" or \"Ongelma siirrettäessä\". \"Virhe siirrettäessä\" is grammatically correct, but less idiomatic for a user-facing error message.",
+          "suggestion": "Siirto epäonnistui"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +110,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'ը չհաջողվեց տեղափոխել' translates to 'failed to move'. The original English implies an error occurred during the move, not that the move simply failed. A more accurate translation would convey the error.",
+          "suggestion": "Consider a phrase like 'տեղափոխման ժամանակ սխալ առաջացավ' (an error occurred during the move) or 'տեղափոխելու ընթացքում թույլատրվեց սխալ' (an error was permitted/occurred during the move)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Armenian translation has incorrect tag order.  The original English has <2>{{title}}</2> to <1>{{folderName}}</1>. The Armenian translation maintains the same incorrect order: <2>{{title}}</2> to <1>{{folderName}}</1>ը չհաջողվեց տեղափոխել",
+          "suggestion": "The tag order must match the original English.  Therefore, it should be <1>{{folderName}}</1> to <2>{{title}}</2>."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,25 +133,54 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrasing \"Error moving...\" is better translated as \"移動中にエラーが発生しました\" (during moving an error occurred) to accurately convey the meaning and flow in Japanese.  A more literal translation of 'Error moving' would be something like '移動エラー', but it's less natural in this context.",
+          "suggestion": "<2>{{title}}</2> を <1>{{folderName}}</1> への移動中にエラーが発生しました"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '을/를' is overly literal and not idiomatic in this context. While grammatically correct, it creates an awkward translation.",
+          "suggestion": "Remove '을/를' for a more natural-sounding translation. A possible suggestion would be: \"<2>{{title}}</2>을/를 <1>{{folderName}}</1> 폴더로 이동하는 중 오류가 발생했습니다\" -> \"<2>{{title}}</2> 폴더로 이동하는 중 오류가 발생했습니다\"."
+        },
+        {
+          "type": "formatting",
+          "description": "The tag order is reversed compared to the original English. `<1>` should appear before `<2>` in the Korean translation to mirror the English structure.",
+          "suggestion": "Change the order of the tags to match the English original: \"<1>{{folderName}}</1> 폴더로 <2>{{title}}</2> 이동하는 중 오류가 발생했습니다\"."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຜົນບົກຜ່ອງ' (phon bok phong) is a rather formal or technical term for 'error'. While not strictly incorrect, a more common and understandable word for 'error' in this context might be more appropriate. It sounds a bit stilted.",
+          "suggestion": "Consider using a more common term for 'error,' such as 'ຄວາມຜິດພາດ' (khwam phit phat) or 'ບັນຫາ' (ban ha). For example, 'ຄວາມຜິດພາດໃນການຍ້າຍ...' or 'ບັນຫາໃນການຍ້າຍ...'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The placement of angle brackets around the folder name is reversed compared to the title. The title has `<2>` and the folder name has `<1>`, which should be the other way around.",
+          "suggestion": "Change `<1>{{folderName}}</1>` to `<2>{{folderName}}</2> and `<2>{{title}}</2>` to `<1>{{title}}</1>."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +210,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Eroare la deplasare' is not the best way to express 'Error moving'. A more natural translation would be 'Eroare la mutare' or 'A apărut o eroare la mutare'. 'Deplasare' implies a relocation, which is not always the case.",
+          "suggestion": "Eroare la mutare a <2>{{title}}</2> în <1>{{folderName}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +228,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"නැවත\" (naewath) which means 'again' doesn't fit the context of moving a file. It implies the move was attempted before. A more accurate translation would be something along the lines of 'ඔවුන්' (uwen) or remove it entirely, indicating the destination.",
+          "suggestion": "File(s) නැවත {{folderName}} වෙත ගෙනයන ලදි‍යේ‍නොහැකි. -> File(s) {{folderName}} වෙත ගෙනයන ලදි‍යේ‍නොහැකි."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ලදි‍යේ‍නොහැකි' (ladidiyaenohaki) is a very formal and lengthy way of saying 'වියහැකි' (viyahaki). It sounds unnatural for an error message.",
+          "suggestion": "File(s) {{folderName}} වෙත ගෙනයන ලදි‍යේ‍නොහැකි. -> File(s) {{folderName}} වෙත ගෙනයන ලදි‍යේ‍නොහැකි."
+        },
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation preserves the incorrect HTML tag order (<2> should be before <1>) used in the English original. Ideally the HTML tags should be reviewed and adjusted to be more appropriate for Sinhala.",
+          "suggestion": "Review and adjust HTML formatting according to Sinhala reading direction."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,7 +274,18 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Error moving\" is not accurately reflected in the Turkish translation. \"taşınırken hata oluştu\" translates to \"an error occurred while moving\". A more direct translation would be something like \"<2>{{title}}</2> dosyasını <1>{{folderName}}</1> konumuna taşırken bir hata oluştu\" or \"<2>{{title}}</2>'ı <1>{{folderName}}</1> konumuna taşımada hata oluştu\".",
+          "suggestion": "<2>{{title}}</2>'ı <1>{{folderName}}</1> konumuna taşımada hata oluştu"
+        },
+        {
+          "type": "formatting",
+          "description": "The formatting of the tags `<1>` and `<2>` are swapped in the Turkish translation compared to the English. This needs to be corrected to match the original formatting to ensure proper variable substitution.",
+          "suggestion": "Reverse the order of `<1>` and `<2>` to match the English: \"<1>{{title}}</2>, <2>{{folderName}}</1> konumuna taşınırken hata oluştu\""
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +303,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Error moving' is better translated as '移动失败' or '移动过程中出现错误' to convey the same meaning of an error occurring during the movement. '移动...时出错' is grammatically correct, but less idiomatic for describing a file move error.",
+          "suggestion": "将<2>{{title}}</2>移动到<1>{{folderName}}</1>移动失败"
+        }
+      ],
       "approved_at": null
     }
   }

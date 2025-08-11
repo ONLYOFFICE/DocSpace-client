@@ -3,7 +3,7 @@
   "content": "Application could not be found",
   "content_en_sha1_hash": "560c59db081117f2c4b8a0fb377e3750ce3e34f2",
   "created_at": "2025-05-19T21:30:57.296Z",
-  "updated_at": "2025-05-28T09:30:02.910Z",
+  "updated_at": "2025-05-26T07:57:32.887Z",
   "comment": {
     "text": "This translation key displays an error message when an OAuth application is not found. It appears on screens indicating that an application has been disabled or missing, and its purpose is to inform the user of the error.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Imposibil de găsit aplicația\" is technically correct, a more natural and commonly used translation would be \"Aplicația nu a fost găsită\" or \"Nu s-a putut găsi aplicația\". \"Imposibil de găsit aplicația\" sounds slightly awkward.",
+          "suggestion": "Aplicația nu a fost găsită"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"යෙදුම සොයා ගැනීමට නොහැකි විය\" while understandable, is a bit literal. A more natural translation for 'Application could not be found' would be something along the lines of \"අප්ලිකේෂන් සොයාගත නොහැකි විය\" or \"අප්ලිකේෂන් නොමැත\" depending on desired tone.",
+          "suggestion": "අප්ලිකේෂන් සොයාගත නොහැකි විය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

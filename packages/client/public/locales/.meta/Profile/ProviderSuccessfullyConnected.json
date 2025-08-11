@@ -3,7 +3,7 @@
   "content": "Provider successfully connected",
   "content_en_sha1_hash": "31af35b9112072c6a9acdc45f45020050020561e",
   "created_at": "2025-05-19T21:30:53.373Z",
-  "updated_at": "2025-05-21T05:39:11.589Z",
+  "updated_at": "2025-05-24T06:08:55.020Z",
   "comment": {
     "text": "This translation key displays a success message when a user successfully connects with an OAuth provider. It is typically displayed after a successful login or authorization process in the social network section of a profile page.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'qoşuldu' is spelled incorrectly. It should be 'qоşuldu'.",
-          "suggestion": "qоşuldu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, \"Il fornitore è stato collegato con successo\" is a somewhat literal translation. A more natural-sounding Italian translation would be \"Il fornitore si è connesso correttamente\" or \"La connessione al fornitore è avvenuta con successo\".",
-          "suggestion": "Il fornitore si è connesso correttamente"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -108,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"プロバイダが正常に接続されました\" (Provider ga seijou ni tsunetsuke saremashita) implies a passive voice (\"was connected\"). The English phrase \"Provider successfully connected\" implies an active connection initiated by the provider. A more accurate translation would reflect this active role.",
-          "suggestion": "プロバイダが正常に接続しました (Provider ga seijou ni tsunetsukemashita)"
+          "description": "The translation 'プロバイダが正常に接続されました' is overly formal for a simple confirmation message like 'Provider successfully connected'. It translates to 'The provider was successfully connected'.",
+          "suggestion": "プロバイダに接続しました (Purobaida ni ketsureki shimashita) - 'Connected to the provider' or プロバイダに接続完了 (Purobaida ni ketsureki kanryou) - 'Provider connection complete'"
         }
       ],
       "approved_at": null
@@ -150,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Operadora ligada com êxito' implies 'operator connected successfully', which is a slightly different nuance than the English 'Provider successfully connected'. 'Provider' is broader than 'operator'.",
-          "suggestion": "Consider 'Fornecedor conectado com êxito' or 'Serviço conectado com êxito' depending on the context of 'Provider'."
+          "description": "The translation 'Operadora ligada com êxito' implies 'operator connected successfully'. The original English 'Provider successfully connected' refers to a service provider, not an operator. While 'operadora' can sometimes mean provider, it's not the most accurate translation in this context. A better translation would depend on the specific type of provider being referred to.",
+          "suggestion": "Consider alternatives such as 'Fornecedor conectado com sucesso' (Supplier connected successfully) or 'Serviço conectado com sucesso' (Service connected successfully), depending on the context."
         }
       ],
       "approved_at": null
@@ -165,7 +153,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Furnizorul a fost conectat cu succes\" sounds slightly awkward and passive in Romanian. A more natural phrasing would emphasize the action of connecting.",
+          "suggestion": "Furnizorul s-a conectat cu succes"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -183,7 +177,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Poskytovateľ bol úspešne pripojený' is a bit passive and formal for a user-facing notification. A more natural and direct translation would improve the user experience.",
+          "suggestion": "Poskytovateľ sa úspešne pripojil"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -225,7 +225,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '供应方成功连接' while literally meaning 'Supplier successfully connected', might not be the most natural or idiomatic way to convey 'Provider successfully connected' in a user interface context.  'Provider' often implies a service or platform.",
+          "suggestion": "考虑使用更自然的表达方式，例如“服务商已连接” (Service provider connected) 或 “提供者已成功连接” (Provider successfully connected – more formal)."
+        }
+      ],
       "approved_at": null
     }
   }

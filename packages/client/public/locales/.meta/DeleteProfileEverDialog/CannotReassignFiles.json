@@ -3,7 +3,7 @@
   "content": "If you delete multiple users at once, you cannot reassign their files to other users.",
   "content_en_sha1_hash": "1d82f9d2d56e9e5ac7a5d3230b1554e9ba7c8f60",
   "created_at": "2025-05-19T21:30:56.652Z",
-  "updated_at": "2025-05-20T09:38:30.589Z",
+  "updated_at": "2025-06-30T12:20:31.238Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that deleting multiple users prevents reassigning their files. It appears in a delete profile dialog, specifically on the body component, where it explains the limitation of file reassignment after mass deletion.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 117,
+      "line_number": 128,
       "context": "sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n })}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"CannotReassignFiles\")}\n </Text>\n <Text className=\"text-delete-description\">\n {t(\"ToBeAbleToReassignData\")}\n </Text>\n <Text className=\"text-delete-description\">",
       "module": "/packages/client"
     }
@@ -81,7 +81,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"օգտատերերի\" appears multiple times. While technically correct, it's a bit repetitive and could be improved for readability. Consider alternative phrasing.",
+          "suggestion": "Եթե դուք միանգամից ջնջեք մի քանի օգտատեր, չեք կարող վերապահել նրանց ֆայլերը այլ օգտատերին:"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure is a bit clunky.  The repeated use of \"չեք կարող\" makes it sound less fluent.",
+          "suggestion": "Եթե դուք միանգամից ջնջեք մի քանի օգտատեր, չեք կարող վերապահել նրանց ֆայլերը այլ օգտատերին:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +116,18 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ກໍາ' in 'ກໍາ​ນົດ' appears to be a potential typo. It should likely be 'ກໍານົດ' (garnot).",
+          "suggestion": "ກໍານົດ"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'ກໍາ​ນົດ​ໄຟລ​໌​ຂອງ​ເຂົາ​ເຈົ້າ​ກັບ​ຜູ້​ໃຊ້​ອື່ນໆ' (garnot file khong khao jea kap phou sa uan uan) could be more natural. It literally translates to 'assign files of them to other users'.",
+          "suggestion": "ຖ່າຍ​ໂອນ​ໄຟລ​໌​ຂອງ​ເຂົາ​ເຈົ້າ​ໃຫ້​ຜູ້​ໃຊ້​ອື່ນໆ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +175,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'පරිශ්‍රීලකයින්' (parishreelakayin) is used repeatedly and is a complex transliteration. It should be simplified for better readability. Consider 'පරිශ්‍රීලකයෙක්' (parishreelakayak) for singular and 'පරිශ්‍රීලකයින්' (parishreelakayin) for plural, and 'භාවිතකරුවෝ' (bhavitakaruwoo) as a more common alternative.",
+          "suggestion": "Consider using 'භාවිතකරුවෝ' (bhavitakaruwoo) instead of 'පරිශ්‍රීලකයින්' (parishreelakayin) for better readability and understanding."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure, while technically correct, can be improved for a more natural flow in Sinhala. The use of 'ඔබ' (oba - you) feels slightly formal and could be omitted for a more conversational tone.",
+          "suggestion": "Consider restructuring the sentence to something like: 'ඔබ එකවර කිහිප දෙනෙක් මකා දැමුවහොත්, ඔවුන්ගේ ගොනු වෙනත් පරිශ්‍රීලකයින්ට යළි පැවරීමට නොහැකිය' (If you delete multiple users at once, their files cannot be reassigned to other users.)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'reassign' is translated as 'යළි පැවරීමට' (yali pawerimito). While accurate, a more natural translation might be 'වරින්නේ වෙනත් අයෙකුට' (varinne wenath ayakunt).",
+          "suggestion": "Consider replacing 'යළි පැවරීමට' (yali pawerimito) with 'වරින්නේ වෙනත් අයෙකුට' (varinne wenath ayakunt)."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

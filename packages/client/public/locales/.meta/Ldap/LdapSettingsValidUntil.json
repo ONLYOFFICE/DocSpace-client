@@ -3,7 +3,7 @@
   "content": "Valid until",
   "content_en_sha1_hash": "c8214d35a16e2ce6ecca4a054a7242e2e5ff7fe6",
   "created_at": "2025-05-19T21:30:54.306Z",
-  "updated_at": "2025-05-21T08:03:03.626Z",
+  "updated_at": "2025-05-24T08:16:59.970Z",
   "comment": {
     "text": "This translation key is used to display the \"Valid until\" date of an LDAP certificate. It appears in a Certificate Dialog on the Portal Settings page and is part of a list of certificate details.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'صالح حتى تاريخ' (Saalih hatta tareekh) literally translates to 'Valid until date'. While understandable, it's a more literal translation than the simple and concise 'Valid until'. A more natural and idiomatic translation would be 'صالح لغاية' (Saalih li ghayat) or 'ساري المفعول حتى'.",
-          "suggestion": "صالح لغاية"
+          "description": "The translation \"صالح حتى تاريخ\" (Saalih hatta tareekh) literally translates to \"Valid until date.\" It lacks the article 'the' which would make it more accurate to the English 'Valid until'.",
+          "suggestion": "صالح حتى تاريخ"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"qədər etibarlıdır\" doesn't accurately convey the meaning of \"Valid until.\" It translates to something like \"is valid until...\" and lacks the intended meaning of an expiration date or a point in time.",
-          "suggestion": "A more accurate translation would be something like \"Etibarlılıq tarixi\" (Validity Date) or \"Bitmə vaxtı\" (Expiration Time). Another option is \"İstifadə müddəti\" (Shelf life/Duration of use)."
+          "description": "The Azerbaijani translation 'qədər etibarlıdır' doesn't accurately convey the meaning of 'Valid until'. It literally translates to 'is valid until', which isn't the intended nuance. The phrase 'Valid until' implies a deadline or expiration date.",
+          "suggestion": "A more accurate translation would be something like 'bitərəfçilikə qədər etibarlıdır' (valid until impartiality), 'bitirməyə qədər etibarlıdır' (valid until completion), or simply 'bitərəfçilikə etibarlıdır' (valid until impartiality). The best option depends on the context of 'Ldap:LdapSettingsValidUntil'."
         }
       ],
       "approved_at": null
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Voimassa \" does not fully convey the meaning of \"Valid until\". \"Voimassa\" translates to \"in effect\" or \"valid\", but lacks the temporal aspect of \"until\".",
-          "suggestion": "Päiväys voimassa"
+          "description": "The Finnish translation \"Voimassa \" does not accurately convey the meaning of \"Valid until\". \"Voimassa\" translates to \"in force\" or \"valid\", but lacks the temporal aspect of \"until\".",
+          "suggestion": "Päiväys voimassa - until date or Voimassa asti - valid until"
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Վավեր է մինչև \" literally translates to \"Valid until\". While technically correct, it lacks the conciseness and natural flow of the English \"Valid until\". A more idiomatic translation might be better.",
-          "suggestion": "Consider alternatives like \"ժամանակաւրություն մինչև\" or simply \"մինչև\" depending on the surrounding context and desired level of formality."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'有効期限' generally translates to 'expiration date' or 'expiry date,' not 'valid until.' While understandable, it doesn't directly convey the English meaning.  A more accurate translation would depend on the precise context of the setting.",
-          "suggestion": "Consider '有効な期間まで' (yuukou na kikan made) or '有効期間' (yuukou kikan) for a closer translation.  The best choice requires knowing the context."
+          "description": "While \"有効期限\" (yuukou kigen) is a common term for 'valid until' or 'expiration date', it lacks the nuance of 'until' in the context of a setting. It implies a hard deadline, whereas 'valid until' might allow for adjustments or extensions.",
+          "suggestion": "Consider alternatives like \"有効期限まで\" (yuukou kigen made) or a more descriptive phrase depending on the specific functionality of the setting. If an actual expiration date is meant, then the current translation is acceptable."
         }
       ],
       "approved_at": null
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"유효 기간 끝\" (yu-hyo gi-gan kkeut) translates to \"end of validity period\" which is not a direct or natural equivalent of \"Valid until\". While understandable, it's less idiomatic.",
-          "suggestion": "Consider a more natural translation like \"만료일\" (man-ryo-il) which means \"expiration date\" or \"expiry date\". Alternatively, \"유효 기간까지\" (yu-hyo gi-gan kkaji) meaning \"valid until\" might be more accurate depending on the specific context."
+          "description": "The Korean translation \"유효 기간 끝\" (yu-hyo gi-gan kkeut) translates to \"end of validity period\" which is a more literal and less natural way to say \"Valid until\". A more appropriate translation would focus on the 'until' aspect.",
+          "suggestion": "유효 기간까지 (yu-hyo gi-gan kkaji) - 'until validity period'"
         }
       ],
       "approved_at": null
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຫມາຍເລກໃຊ້ໄດ້ເຖິງ\" translates more closely to 'usable until' or 'applicable until' rather than 'valid until'. It doesn't convey the meaning of something being legally or officially valid.",
-          "suggestion": "ອະນຸໂອມໃຊ້ມາດເຖິງ"
+          "description": "The Lao translation 'ຫມາຍເລກໃຊ້ໄດ້ເຖິງ' translates more to 'number valid until' or 'applicable until a number'. It doesn't accurately convey the meaning of 'Valid until'. The intended meaning is a date or a time period.",
+          "suggestion": "ຫມາຍເລກໃຊ້ໄດ້ເຖິງວັນທີ"
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"වලංගු වනතුරු\" translates more closely to 'until it becomes valid' or 'until it is enabled.' While not entirely wrong, it's not the most natural or direct translation of 'Valid until.' A more common and direct translation might be \"වරලද්දාක්\" (varaladdak) or \"නීತಿගත වනතුරු\" (nītiyata vananturu).",
-          "suggestion": "Consider \"වරලද්දාක්\" (varaladdak) or \"නීතිගත වනතුරු\" (nītiyata vananturu) as alternative translations."
+          "description": "The translation 'වලංගු වනතුරු' while potentially conveying a sense of validity ending, isn't the most natural or precise translation of 'Valid until'. It leans towards 'validity continues until'. A more accurate translation would better reflect the meaning of 'Valid until' indicating a deadline or expiry date.",
+          "suggestion": "Consider alternatives like 'පාය තැබිලි දක්වා' (paya thabawili dakawa) - 'until a specified date', or 'අවලංගු වනු දක්වා' (awalangu vanu dakawa) - 'until it becomes invalid' depending on the specific context of the Ldap settings."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Validno do\" doesn't accurately convey the meaning of \"Valid until\".  \"Validno\" means \"validly\" or \"correctly\", not \"valid\".",
-          "suggestion": "Važeće do"
+          "description": "The translation 'Validno do' doesn't accurately convey the meaning of 'Valid until'. 'Validno' translates to 'valid' but in this context, a more appropriate translation would convey the concept of expiration or a deadline.",
+          "suggestion": "Isteklo do"
         }
       ],
       "approved_at": null
@@ -240,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Şu tarihe kadar geçerlidir\" is a more literal translation of \"Valid until\" and doesn't quite capture the nuance. It translates to 'Valid until this date'.  A more natural and concise translation for a setting label would be 'Geçerlilik Süresi' or 'Son Kullanım'.",
-          "suggestion": "Consider 'Geçerlilik Süresi' or 'Son Kullanım'."
+          "description": "The translation 'Şu tarihe kadar geçerlidir' is a descriptive phrase meaning 'Valid until [date]'. While it conveys a similar idea, it's not a direct translation of 'Valid until'. A more direct, and commonly used translation would be 'Geçerlilik tarihi'.",
+          "suggestion": "Geçerlilik tarihi"
         }
       ],
       "approved_at": null
@@ -258,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Có hiệu lực đến' is understandable, it's not the most natural or precise translation of 'Valid until' in a technical context like LDAP settings. It suggests a point of enforcement rather than a simple validity timeframe.",
-          "suggestion": "Một số lựa chọn thay thế có thể là: 'Thời hạn hiệu lực', 'Hết hạn', or 'Có giá trị đến'."
+          "description": "While \"Có hiệu lực đến\" is understandable, it's not the most natural or accurate translation of \"Valid until\" in this context. It implies something is 'in effect until'. A better translation would convey the end date or expiration date of the LDAP settings.",
+          "suggestion": "Consider alternatives like \"Hết hạn\" (Expires) or \"Thời gian hiệu lực đến\" (Effective until)"
         }
       ],
       "approved_at": null

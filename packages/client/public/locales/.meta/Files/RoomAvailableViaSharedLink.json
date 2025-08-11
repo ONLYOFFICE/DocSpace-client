@@ -3,7 +3,7 @@
   "content": "Room available via shared link",
   "content_en_sha1_hash": "8acb01f94cadbbbaa3b7e445cdaf6f155d7a1512",
   "created_at": "2025-05-19T21:30:56.077Z",
-  "updated_at": "2025-07-10T11:11:06.882Z",
+  "updated_at": "2025-08-11T09:02:43.922Z",
   "comment": {
     "text": "The translation key \"RoomAvailableViaSharedLink\" is used to display a message indicating that a room can be accessed via a shared link. This text appears in a file sharing or collaboration context, likely on a button or dialog related to creating or editing a room.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.js",
-      "line_number": 327,
-      "context": "{showPublicRoomBar ? (\n <StyledPublicRoomBarContainer>\n <PublicRoomBar\n headerText={\n isFormRoom\n ? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/index.tsx",
+      "line_number": 368,
+      "context": "data-testid=\"info_panel_members_public_room_bar_container\"\n >\n <PublicRoomBar\n headerText={\n isFormRoom\n ? t(\"Files:RoomAvailableViaSharedLink\")\n : t(\"Files:RoomAvailableViaExternalLink\")\n }\n bodyText={\n isFormRoom\n ? t(\"CreateEditRoomDialog:FormRoomBarDescription\")",
       "module": "/packages/client"
     }
   ],

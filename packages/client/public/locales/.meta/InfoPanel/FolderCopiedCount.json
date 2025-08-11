@@ -3,7 +3,7 @@
   "content": "Folders copied ({{count}}).",
   "content_en_sha1_hash": "a1dca028ddb924f234b5c17d714194b24989bb6e",
   "created_at": "2025-05-19T21:30:54.838Z",
-  "updated_at": "2025-05-28T09:30:02.430Z",
+  "updated_at": "2025-08-04T07:30:01.234Z",
   "comment": {
     "text": "This translation key displays the number of folders copied, indicating a successful file transfer action. It appears on the History page, showing the count of copies made.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 137,
+      "context": "return t(\"InfoPanel:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 122,
-      "context": "count,\n });\n return t(\"InfoPanel:FolderMovedToTrash\");\n case \"FolderCopied\":\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case \"FolderDeleted\":\n if (hasRelatedItems)",
+      "line_number": 131,
+      "context": "return t(\"InfoPanel:FoldersTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FolderCopied:\n if (hasRelatedItems)\n return t(\"InfoPanel:FolderCopiedCount\", {\n count,\n });\n return t(\"InfoPanel:FolderCopied\");\n case FeedActionKeys.FolderDeleted:\n if (hasRelatedItems)",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Folders copied' is best translated as 'تم نسخ المجلدات' but a more natural and conversational translation in Saudi Arabic could be 'نُسِخَتْ المجلدات'.",
-          "suggestion": "نُسِخَتْ المجلدات"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Folders copied' translates more accurately to 'Carpetas copiadas' is a good start, but 'Carpetas copiadas' is a bit literal. A more natural phrasing might be 'Carpetas copiadas' or 'Carpetas transferidas'.",
-          "suggestion": "Carpetas transferidas ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -96,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Թղթապանակները պատճենված են ({{count}}):' literally translates to 'The folders are copied ({{count}}):'. While understandable, a more natural Armenian phrasing might be '{{count}} ծավալաշարեր պատճենվել է:' or 'Պատճենվել է {{count}} ծավալաշար:' depending on the desired level of formality. The current translation is passive and slightly awkward.",
-          "suggestion": "Consider '{{count}} ծավալաշարեր պատճենվել է:' or 'Պատճենվել է {{count}} ծավալաշար:'"
-        },
-        {
-          "type": "formatting",
-          "description": "The colon at the end of the Armenian translation feels slightly unnatural in this context. Removing it could improve the flow.",
-          "suggestion": "Remove the colon at the end of the Armenian translation."
+          "description": "The translation 'Թղթապանակները պատճենված են ({{count}}):' directly translates to 'Folders copied ({{count}}):'. While not entirely wrong, it's a bit stiff and less natural in Armenian. A more idiomatic translation might use a phrasing that emphasizes completion.",
+          "suggestion": "Consider a more natural phrasing like 'Պատճենվել են Թղթապանակներ ({{count}}):' or '{{count}} Թղթապանակ պատճենվել է:' (depending on context and intended emphasis)."
         }
       ],
       "approved_at": null
@@ -116,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"フォルダがコピーされました ({{count}})。\" uses the past tense \"コピーされました\" (copied). The English \"Folders copied ({{count}}).\" implies an ongoing action or a process that is happening, not something that has already been completed. A more accurate translation would suggest the action is in progress or recently completed.",
+          "suggestion": "フォルダがコピー中です ({{count}})。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -131,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເອກະບົກຖືກຜະລິດສຳເນົາ ({{count}}).\" doesn't accurately convey the meaning of 'Folders copied'.  'ເອກະບົກຖືກຜະລິດສຳເນົາ' literally translates to 'Document has been reproduced/manufactured'. This implies creation, not copying. 'ຖືກຜະລິດສຳເນົາ' could suggest something is being manufactured rather than copied.",
-          "suggestion": "A more accurate translation would be something along the lines of 'ໄຟລ໌ໂຟນເອກະບົກຖືກກ໊ອບີ້ ({{count}}).' or 'ເອກະບົກຖືກຄັດລອກ ({{count}}).' The best option depends on the intended tone and the target audience. 'ໄຟລ໌ໂຟນເອກະບົກ' translates to 'folders' and 'ຖືກກ໊ອບີ້' is a common loanword for 'copied'."
+          "description": "The translation \"ເອກະບົກຖືກຜະລິດສຳເນົາ ({{count}}).\" doesn't accurately convey the meaning of \"Folders copied ({{count}}).\" The term 'ຜະລິດສຳເນົາ' (phalit samnao) implies creation or reproduction, not copying. It's not the natural way to describe copying folders.",
+          "suggestion": "A more appropriate translation would be something like \"ໂຟນເອກະບົກຖືກຜະລິດຄັດລອກ ({{count}}).\" or \"ເອກະບົກຖືກຄັດລອກ ({{count}}).\" or \"ເອກະບົກຖືກສໍາເນົາ ({{count}}).\" The best option depends on the specific nuance desired."
         }
       ],
       "approved_at": null
@@ -170,13 +165,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Foldere au fost copiate ({{count}}).' is not the most natural or accurate translation of 'Folders copied ({{count}}).' A more idiomatic translation would be 'Dosare copiate ({{count}})' or 'Foldere copiate ({{count}})' depending on the intended meaning and stylistic preference.",
-          "suggestion": "Dosare copiate ({{count}})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -191,43 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර්' (folders) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word ' පිටපත්' (copied) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'කරන' (doing) is spelled correctly.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ලදී' (done/completed) is spelled correctly.",
-          "suggestion": null
+          "description": "The word 'ෆෝල්ඩර්' is a transliteration of 'folder'. While acceptable, using a more Sinhala equivalent might improve readability and flow, depending on the overall style guide. It's a stylistic choice, but worth considering.",
+          "suggestion": "Consider using a more Sinhala term for 'folder' if applicable. Research and consult with a Sinhala language expert for the most appropriate term."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure is grammatically correct for Sinhala, and the word order aligns with common usage.",
-          "suggestion": null
-        },
-        {
-          "type": "formatting",
-          "description": "The placeholder `{{count}}` is correctly placed and formatted within the Sinhala text.",
-          "suggestion": null
-        },
-        {
-          "type": "cultural",
-          "description": "The translation is culturally appropriate and conveys the same meaning as the English source.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, a more natural phrasing might be 'පිටපත් {{count}} ෆෝල්ඩර්'. This places emphasis on the number of folders copied.",
-          "suggestion": "පිටපත් {{count}} ෆෝල්ඩර්"
+          "description": "While technically correct, the use of 'කරන ලදී' might be slightly less natural than a more concise phrasing. It implies an action in progress, which might not be the intended nuance.",
+          "suggestion": "Consider alternatives like 'පිටපත් විය' (pitaraya viya) or a simplified phrasing like 'පිටපත්.' The best option depends on the intended tone."
         }
       ],
       "approved_at": null
@@ -250,18 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Фасцикле су копиране ({{count}}).\" is not a natural or accurate translation of \"Folders copied ({{count}}).\" The word 'Фасцикле' is incorrect. It should be 'Foldere'. The verb conjugation is also incorrect.  'Foldere su kopirane' would be more accurate, although a better flow would be 'Kopirane foldere'.",
-          "suggestion": "Kopirane foldere ({{count}})."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure 'Фасцикле су копиране' is grammatically incorrect in Serbian (Cyrillic). The verb 'су' (are) doesn't fit the context.",
-          "suggestion": "The suggestion in the previous issue addresses this."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'Фасцикле' is a misspelling of 'Foldere'.",
-          "suggestion": "Foldere"
+          "description": "The translation \"Фасцикле су копиране ({{count}}).\" is not a grammatically correct or natural-sounding translation of \"Folders copied ({{count}}).\". The word 'fascijele' is not the direct translation of folders.  Also, the verb tense is incorrect.",
+          "suggestion": "Премештени фолдере ({{count}})."
         }
       ],
       "approved_at": null
@@ -269,13 +218,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Fascikle su kopirane' is not grammatically correct. 'Fascikle' is the accusative plural, but the verb 'kopirane' implies a singular or a different plural form. The correct plural form of 'folder' in Serbian (Latin) should be 'foldere'.",
-          "suggestion": "Foldere su kopirane ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -293,13 +236,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Đã sao chép thư mục ({{count}}).' is a literal translation but could be more natural. 'Đã sao chép' translates to 'copied' but might sound slightly formal in this context. A more conversational phrasing might improve the user experience.",
-          "suggestion": "Thư mục đã sao chép ({{count}})."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

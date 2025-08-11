@@ -3,7 +3,7 @@
   "content": "Embed code successfully copied to clipboard",
   "content_en_sha1_hash": "436fc62d95bda252fc9791a3d3313539c3e69fd8",
   "created_at": "2025-05-19T21:30:54.467Z",
-  "updated_at": "2025-05-21T09:12:23.238Z",
+  "updated_at": "2025-05-24T09:24:26.888Z",
   "comment": {
     "text": "The translation key \"EmbedCodeSuccessfullyCopied\" is used to display a success message when the user copies embed code. It appears in a modal dialog as a toast notification when the user clicks the \"Copy\" button, indicating that the code has been successfully copied to their clipboard.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yerləşdirmə kodu uğurla mübadilə buferinə nüsxələndi' is a literal translation and doesn't sound natural in Azerbaijani.  'Mübadilə buferinə' is a technical term that's not commonly used for 'clipboard'.",
-          "suggestion": "Daha yaxşı çeviri: 'Yerləşdirmə kodu uğurla keçid xəttinə (clipboard) kopyalandı' or 'Yerləşdirmə kodu klipanboyda (clipboard) müvəffəqiyyətlə kopyalandı'."
+          "description": "The translation \"Yerləşdirmə kodu uğurla mübadilə buferinə nüsxələndi\" is a literal translation that doesn't sound natural in Azerbaijani. 'Mübadilə buferinə' is an overly technical term for 'clipboard'.",
+          "suggestion": "Daha natural olan variant: 'Yerləşdirmə kodu uğurla keçid xəttinə (clipboard) kopyalandı' or 'Yerləşdirmə kodu uğurla clipboard'a kopyalandı'."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation '挿入するコードを取得する' does not accurately convey the meaning of 'Embed code successfully copied to clipboard'. It literally translates to 'Get code to insert'.",
-          "suggestion": "A more accurate translation would be something like '埋め込みコードがクリップボードにコピーされました' (Ikimomi kōdo ga kuripubōdo ni kopī saremashita) which means 'The embed code was copied to the clipboard'."
+          "description": "The Japanese translation \"挿入するコードを取得する\" does not accurately convey the meaning of 'Embed code successfully copied to clipboard'. It translates to something like 'Get code to insert'. It misses the 'successfully copied to clipboard' part.",
+          "suggestion": "A more accurate translation would be something like \"埋め込みコードがクリップボードにコピーされました\" (Ime-noko kōdo ga kurippubōdo ni kopī saremashita) which means 'The embed code was copied to the clipboard'."
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Iegulšanas' is misspelled. The correct spelling is 'Ielādes'.",
+          "suggestion": "Ielādes"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +147,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, \"área de transferência\" is a more technical term for clipboard. A more natural and user-friendly translation would be 'área de copiar e colar' or simply 'na área de transferência'.",
+          "suggestion": "Código incorporado copiado com sucesso na área de copiar e colar."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -156,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Obține codul pentru inserare\" does not accurately convey the meaning of \"Embed code successfully copied to clipboard.\" It translates to \"Get the embed code.\" It doesn't mention the copying action or confirmation.",
-          "suggestion": "Codul de inserare a fost copiat cu succes în clipboard."
+          "description": "The Romanian translation \"Obține codul pentru inserare\" does not accurately convey the meaning of \"Embed code successfully copied to clipboard.\" It translates to \"Get the code for insertion,\" which lacks the confirmation of successful copying.",
+          "suggestion": "Codul pentru inserare a fost copiat cu succes în clipboard"
         }
       ],
       "approved_at": null
@@ -174,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාවද්දන කේතය පසුරුපුවරුවට පිටපත් විය' doesn't accurately convey the meaning of 'Embed code successfully copied to clipboard.' 'කාවද්දන' (kawaddan) implies 'protected' or 'held,' which is not relevant to the context of an embed code.  'පසුරුපුවරුවට' (pasurupuwaruwata) is an awkward and overly formal way to say 'clipboard'.",
-          "suggestion": "A better translation would be something like 'ඇන්බෙඩ් කේතය පිටපත් කළා' (Anbed keta pitakatha kala) or 'ඇන්බෙඩ් කේතය ක්ලිප්බෝඩ් වෙත පිටපත් විය' (Anbed keta klippobd hewa pitakatha viya)."
+          "description": "The translation 'කාවද්දන කේතය පසුරුපුවරුවට පිටපත් විය' is not an ideal translation of 'Embed code successfully copied to clipboard'. 'කාවද්දන' (kawaddan) implies 'holding' or 'keeping', which isn't accurate in this context.  'කේතය' (keyta) for 'code' is correct. 'පසුරුපුවරුවට' (pasurupuwaruwata) for 'clipboard' is also acceptable. The phrasing is somewhat formal.",
+          "suggestion": "A more natural and accurate translation might be: 'ඇන්බෙඩ් කේතය පිටපත් කිරීම සාර්ථක විය' (Anbed keyta pitakata kirima sartaka viya) or 'ඇන්බෙඩ් කේතය ක්ලිප්බෝඩ්ට පිටපත් විය' (Anbed keyta klipboardta pitakata viya)."
         },
         {
           "type": "formatting",
-          "description": "While not strictly wrong, the phrase 'පිටපත් විය' (pitakatha viya) sounds somewhat passive. A more active construction improves the flow.",
-          "suggestion": "Use 'පිටපත් කළා' (pitakatha kala) instead of 'පිටපත් විය' (pitakatha viya)."
+          "description": "The translation is a long sentence. While grammatically correct, it could be broken up for better readability in a UI.",
+          "suggestion": "Consider breaking the sentence into two: 'ඇන්බෙඩ් කේතය පිටපත් විය.' 'පසුරුපුවරුවට සාර්ථකව පිටපත් විය.' (Anbed keyta pitakata viya. Pasurupuwaruwata sartakawan pitakata viya.)"
         }
       ],
       "approved_at": null
@@ -196,9 +208,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'odložišče' is a general term for 'storage' or 'repository', while 'clipboard' is more specific.  While understandable, it's not the most precise translation.",
-          "suggestion": "Koda za vdelavo je bila uspešno kopirana v zgodovino (ali: izhodišče)"
+          "type": "incorrect_translation",
+          "description": "The translation 'Koda za vdelavo je bila uspešno kopirana v odložišče' is not the most natural or idiomatic way to express 'Embed code successfully copied to clipboard' in Slovenian. 'Vdelavo' is a somewhat formal term. A more common and user-friendly translation would be 'Koda za vstavljanje'. 'Odložišče' is correct but could be simplified.",
+          "suggestion": "Koda za vstavljanje je bila uspešno kopirana v zgodovino (or spričevalo)"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, using 'zgodovino' (history) or 'spričevalo' (clipboard) is preferred over 'odložišče' for clarity in a UI context. The use of 'odložišče' might be confusing to a user.",
+          "suggestion": "Consider replacing 'odložišče' with 'zgodovino' or 'spričevalo' for better user comprehension."
         }
       ],
       "approved_at": null
@@ -209,13 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Уграђени код успешно копиран на привремену меморију' is a literal translation but not the most natural way to express 'Embed code successfully copied to clipboard' in Serbian. 'Привремену меморију' refers to temporary memory/clipboard, which isn't always explicitly stated.",
-          "suggestion": "Уграђени код успешно скопиран у међускладност (or simply: Уграђени код успешно скопиран)."
+          "description": "The translation \"Уграђени код успешно копиран на привремену меморију\" is not the most natural or precise translation of \"Embed code successfully copied to clipboard\". \"Привремену меморију\" translates to 'temporary memory,' which is a technically correct but awkward way to describe a clipboard.",
+          "suggestion": "Уграђени код успешно копиран у одељак за копирање (clipboard)"
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, 'Уграђени код успешно скопиран' would read better with a single space between 'код' and 'успешно'.",
-          "suggestion": "Уграђени код успешно скопиран."
+          "description": "While not strictly incorrect, using parentheses to clarify 'clipboard' would enhance readability for users unfamiliar with technical terminology.",
+          "suggestion": "Consider adding parentheses around the clarification of 'clipboard', such as: \"Уграђени код успешно копиран у одељак за копирање (clipboard)\""
         }
       ],
       "approved_at": null
@@ -226,13 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ugrađeni kod uspešno kopiran na privremenu memoriju' is a literal translation and doesn't quite capture the natural flow of the English phrase. 'Privremena memorija' refers to temporary memory which is generally understood as clipboard, but it's not the most common or idiomatic way to express it in Serbian.",
-          "suggestion": "Ugrađeni kod uspešno kopiran u isečnu tablu"
+          "description": "The translation \"Ugrađeni kod uspešno kopiran na privremenu memoriju\" is a literal translation and doesn't quite capture the natural flow of the English phrase. \"Privremena memorija\" is a very technical term for clipboard.",
+          "suggestion": "Ugrađeni kod uspešno kopiran u svesku."
         },
         {
           "type": "formatting",
-          "description": "The translation uses lowercase for the first word of the sentence 'ugrađeni'. While not strictly incorrect, it's generally preferred to capitalize the first word of a sentence in Serbian.",
-          "suggestion": "Ugrađeni kod uspešno kopiran u isečnu tablu"
+          "description": "While not strictly incorrect, the use of 'privremenu memoriju' is unnecessarily formal. A more conversational tone would be preferable.",
+          "suggestion": "Consider using more common language for a user-facing message."
         }
       ],
       "approved_at": null
@@ -248,14 +265,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'буфера' (buffer) is a bit clunky in this context. It's technically correct, but not the most natural-sounding.",
-          "suggestion": "Код вбудовування успішно скопійовано в буфер обміну"
-        },
-        {
-          "type": "formatting",
-          "description": "Consider adding a period at the end of the sentence for clarity and completeness.",
-          "suggestion": "Код вбудовування успішно скопійовано в буфер обміну."
+          "type": "incorrect_translation",
+          "description": "The translation 'Код вбудовування успішно скопійовано до буфера обміну' is a bit literal and clunky. A more natural Ukrainian phrasing would be preferred.",
+          "suggestion": "Код вбудовування успішно скопійовано"
         }
       ],
       "approved_at": null
@@ -265,9 +277,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'bộ nhớ tạm' is not the most accurate translation of 'clipboard'. While technically correct, 'clipboard' is often used directly in Vietnamese in technical contexts.",
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'bộ nhớ tạm' (temporary memory) isn't the most natural way to refer to a clipboard in Vietnamese.  'Clipboard' is often used directly or translated more colloquially.",
           "suggestion": "Đã sao chép mã nhúng thành công vào clipboard"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A slightly more natural phrasing might use a word like 'khay nhớ tạm' or simply 'clipboard'.",
+          "suggestion": "Đã sao chép mã nhúng thành công vào khay nhớ tạm"
         }
       ],
       "approved_at": null
@@ -278,8 +295,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"获取要插入的代码\" does not accurately reflect the meaning of \"Embed code successfully copied to clipboard\". It translates to \"Get the code to insert\", which is not the same as confirming a successful copy action.",
-          "suggestion": "A more accurate translation would be something like \"嵌入代码已成功复制到剪贴板\" (Rù cài mǎ yǐ chénggōng fùzào dào jiǎntiēbǎn) which directly translates to 'Embed code successfully copied to clipboard'."
+          "description": "The Chinese translation \"获取要插入的代码\" does not accurately convey the meaning of \"Embed code successfully copied to clipboard\". It translates to 'Get the code to insert,' which is not equivalent.",
+          "suggestion": "A more accurate translation would be something like \"嵌入代码已成功复制到剪贴板\" (Rùcūn dàimǎ yǐ chénggōng fùzào dào jiǎntiēbǎn)."
         }
       ],
       "approved_at": null

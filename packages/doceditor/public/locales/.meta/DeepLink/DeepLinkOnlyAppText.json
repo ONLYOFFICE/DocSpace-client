@@ -2,12 +2,12 @@
   "key_path": "DeepLinkOnlyAppText",
   "content": "You can open the document only in the mobile application",
   "content_en_sha1_hash": "28b4547a00825cbbc444e4aa0722821207801a37",
-  "created_at": "2025-07-01T15:57:23.965Z",
-  "updated_at": "2025-07-01T15:57:55.576Z",
+  "created_at": "2025-06-30T12:20:13.385Z",
+  "updated_at": "2025-06-30T12:20:55.388Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that a document can only be opened through a mobile application. It appears in a UI component displaying file information and has two usage contexts, depending on whether the document is accessible only through an app.",
+    "text": "This translation key is used to display a message indicating that a document can only be opened through the mobile application. It appears in a styled file tile component and is conditionally rendered based on whether the document should be opened exclusively in the app.",
     "is_auto": true,
-    "updated_at": "2025-07-01T15:57:55.576Z"
+    "updated_at": "2025-06-30T12:20:55.388Z"
   },
   "usage": [
     {

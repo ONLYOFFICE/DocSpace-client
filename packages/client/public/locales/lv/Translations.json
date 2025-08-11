@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Izvēlaties no saraksta",
-  "ConnectingAccount": "Savieno kontu",
-  "DeleteFromTrash": "Atlasītie elementi tika veiksmīgi izdzēsti no atkritnes",
   "FileLocked": "Bloķēts fails",
   "FileProtected": "Fails ir aizsargāts ar paroli",
   "FileUnlocked": "Atbloķēts fails",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Mainīt trešās puses informāciju",
   "ThirdPartyTitle": "Trešo pušu pakalpojumi",
   "TitleShowActions": "Rādīt failu darbības",
-  "TitleShowFolderActions": "Rādīt mapes darbības",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Rādīt mapes darbības"
 }

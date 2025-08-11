@@ -29,6 +29,8 @@ import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
+import i18n from "../i18n";
+
 class TreeFoldersStore {
   selectedFolderStore;
 
@@ -58,6 +60,26 @@ class TreeFoldersStore {
     if (this.publicRoomStore.isPublicRoom) return;
 
     const treeFolders = await getFoldersTree();
+
+    treeFolders.forEach((folder) => {
+      switch (folder.rootFolderType) {
+        case FolderType.USER:
+          folder.title = i18n.t("Common:MyFilesSection");
+          break;
+        case FolderType.Rooms:
+          folder.title = i18n.t("Common:Rooms");
+          break;
+        case FolderType.Archive:
+          folder.title = i18n.t("Common:Archive");
+          break;
+        case FolderType.TRASH:
+          folder.title = i18n.t("Common:TrashSection");
+          break;
+        default:
+          break;
+      }
+    });
+
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
     this.listenTreeFolders(treeFolders);
@@ -187,18 +209,6 @@ class TreeFoldersStore {
 
   get personalFolderId() {
     return this.rootFoldersTitles[FolderType.USER]?.id;
-  }
-
-  get personalUserFolderTitle() {
-    return this.rootFoldersTitles[FolderType.USER]?.title;
-  }
-
-  get trashFolderTitle() {
-    return this.rootFoldersTitles[FolderType.TRASH]?.title;
-  }
-
-  get archiveFolderTitle() {
-    return this.rootFoldersTitles[FolderType.Archive]?.title;
   }
 
   get isPersonalReadOnly() {

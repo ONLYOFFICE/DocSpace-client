@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Aus der Liste wählen",
-  "ConnectingAccount": "Konto wird verbunden",
-  "DeleteFromTrash": "Die ausgewählten Elemente wurden aus dem Papierkorb gelöscht",
   "FileLocked": "Datei gesperrt",
   "FileProtected": "Diese Datei ist kennwortgeschützt",
   "FileUnlocked": "Datei nicht gesperrt",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Ändern Sie die Drittanbieterinformationen",
   "ThirdPartyTitle": "Dienste von Dritten",
   "TitleShowActions": "Dateiaktionen anzeigen",
-  "TitleShowFolderActions": "Ordneraktionen anzeigen",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Ordneraktionen anzeigen"
 }

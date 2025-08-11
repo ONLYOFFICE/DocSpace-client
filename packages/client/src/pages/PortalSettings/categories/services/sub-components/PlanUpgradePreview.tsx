@@ -44,7 +44,7 @@ import { useServicesActions } from "../hooks/useServicesActions";
 import { calculateDifference } from "../hooks/resourceUtils";
 import { usePaymentContext } from "../context/PaymentContext";
 
-let timeout: NodeJS.Timeout;
+let timeout: NodeJS.Timeout | null;
 let controller: AbortController;
 
 type PlanUpgradePreviewProps = {
@@ -57,7 +57,7 @@ type PlanUpgradePreviewProps = {
   formatWalletCurrency?: (amount: number, decimalPlaces?: number) => string;
 };
 
-const getDirectionalText = (isRTL) => {
+const getDirectionalText = (isRTL: boolean) => {
   return isRTL ? `>1` : `<1`;
 };
 
@@ -120,12 +120,11 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
           }
 
           const paymentAmount = currentWriteOff.amount;
-
-          setPartialUpgradeFee(paymentAmount);
+          setPartialUpgradeFee!(paymentAmount);
           setIsLoading(false);
           setIsWaitingCalculation(false);
         } catch (e) {
-          toastr.error(e);
+          toastr.error(e as unknown as string);
         }
       }, 1000);
     };
@@ -163,7 +162,7 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
         <div className={styles.planInfoBody}>
           <Text fontWeight={600}>
             {t("AdditionalStorage", {
-              amount: `${calculateDifference(amount, currentStoragePlanSize)} ${t("Common:Gigabyte")}`,
+              amount: `${calculateDifference(amount, currentStoragePlanSize!)} ${t("Common:Gigabyte")}`,
             })}
           </Text>
           <Text
@@ -171,7 +170,7 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
             fontSize="11px"
             className={styles.priceForEach}
           >
-            {t("RemainingDays", { count: days })}
+            {t("RemainingDays", { count: Number(days) })}
           </Text>
         </div>
 
@@ -181,14 +180,14 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
           ) : (
             <>
               <Text fontWeight="600" fontSize="14px">
-                {formatWalletCurrency(partialUpgradeFee)}
+                {formatWalletCurrency!(partialUpgradeFee!)}
               </Text>
               <Text
                 fontWeight="600"
                 fontSize="11px"
                 className={styles.priceForEach}
               >
-                {t("ForDays", { count: days })}
+                {t("ForDays", { count: Number(days) })}
               </Text>
             </>
           )}

@@ -3,7 +3,7 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2025-06-18T07:34:14.784Z",
+  "updated_at": "2025-08-11T09:02:43.819Z",
   "comment": {
     "text": "This translation key is used to display a button or label that indicates actions available in an article or profile section. It appears on a main button and in some header sections, where it shows a title such as \"Actions\" or \"Invite\", depending on the context.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 658,
+      "line_number": 635,
       "context": "isInfoPanelVisible={isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}",
       "module": "/packages/client"
     },
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 259,
+      "line_number": 261,
       "context": "contextOptions={contextOptions}\n canEdit={canChangeVersionFileHistory}\n isTabletView={isTabletView}\n isSavingComment={isSavingComment}\n isEditing={isEditing}\n contextTitle={t(\"Common:Actions\")}\n versionDeleteProcess={versionDeletionProcess}\n versionDeleteRow={\n versionDeletionProcess\n ? versionSelectedForDeletion === info.versionGroup\n : null",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2261,
+      "line_number": 2275,
       "context": "});\n } else {\n options.splice(1, 0, {\n id: \"option_plugin-actions\",\n key: \"plugin_actions\",\n label: t(\"Common:Actions\"),\n icon: PluginActionsSvgUrl,\n disabled: false,\n \n onLoad: () => this.onLoadPlugins(item),\n });",
       "module": "/packages/client"
     },
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Actions' can have multiple valid Korean translations depending on the context. '작업' primarily means 'task' or 'work'.  'Actions' could also be translated as '행동' (haengdong) which is closer to the direct meaning of actions, or '동작' (dongjak) which refers to movements or actions in a more physical sense.",
-          "suggestion": "Consider context to determine the most accurate translation. Alternatives: '행동', '동작'."
+          "description": "'Actions' can have multiple Korean translations depending on the context. '작업' (jak-up) generally means 'work' or 'task', which isn't always the best fit for 'Actions' in a UI/software context. Alternatives like '행동' (haeng-dong - action) or '동작' (dong-jak - movement/action) might be more accurate, but require understanding the specific usage of 'Actions'.",
+          "suggestion": "Consider alternatives like '행동' or '동작', or further context to determine the most appropriate translation."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ການດໍາເນີນການ' (kan dam noen kan) is a valid Lao word and can sometimes translate to 'actions', it is more accurately 'operations' or 'processes'. 'Actions' can also be translated as 'ການກະທໍາ' (kan ka tham).",
-          "suggestion": "Consider 'ການກະທໍາ' (kan ka tham) as a more direct translation of 'Actions'."
+          "description": "While \"ການດໍາເນີນການ\" is a valid Lao word, it's a rather formal and literal translation of \"Actions.\"  It doesn't quite capture the nuance of the English term, which can imply a range of actions, not just 'operations' or 'procedures'. A more natural translation might be something like \"ການກະເຮັດ\" or \"ປະຕິບັດງານ\", depending on the context.",
+          "suggestion": "Consider \"ການກະເຮັດ\" or \"ປະຕິບັດງານ\" as potentially more appropriate alternatives, depending on context.  Further context would help determine the most suitable translation."
         }
       ],
       "approved_at": null

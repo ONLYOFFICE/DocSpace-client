@@ -31,10 +31,20 @@ const pkg = require("./package.json");
 
 const nextConfig = {
   basePath: "/sdk",
-  output: "standalone",
   typescript: {
-    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
+    ignoreBuildErrors: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  serverExternalPackages: [
+    "nconf",
+    "date-and-time",
+    "winston",
+    "winston-cloudwatch",
+    "winston-daily-rotate-file",
+    "@aws-sdk/client-cloudwatch-logs",
+  ],
   compiler: {
     styledComponents: true,
   },
@@ -54,6 +64,15 @@ const nextConfig = {
     NEXT_PUBLIC_E2E_TEST: process.env.E2E_TEST,
   },
   webpack: (config) => {
+    // Add resolve configuration for shared package
+    config.resolve = {
+      ...config.resolve,
+      alias: {
+        ...config.resolve?.alias,
+        "@docspace/shared": path.resolve(__dirname, "../shared"),
+      },
+    };
+
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg"),
@@ -113,6 +132,11 @@ const nextConfig = {
 
     return config;
   },
+  devIndicators: false,
 };
+
+if (process.env.DEPLOY) {
+  nextConfig.output = "standalone";
+}
 
 module.exports = nextConfig;

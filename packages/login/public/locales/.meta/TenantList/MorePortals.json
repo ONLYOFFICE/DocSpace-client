@@ -3,7 +3,7 @@
   "content": "You have more than one accounts. Please choose one of them",
   "content_en_sha1_hash": "11aafc3d73bfad7acf0d2fa3c2b849d25493fcd5",
   "created_at": "2025-05-19T21:30:57.233Z",
-  "updated_at": "2025-05-20T09:47:47.956Z",
+  "updated_at": "2025-05-24T14:56:22.848Z",
   "comment": {
     "text": "This translation key is used to display a message when a user has multiple accounts, prompting them to choose one of them. The text appears as a button label in the tenant list page.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'accounts' is translated as 'профил' (profile). While technically conveys the meaning, 'accounts' often refers to user accounts in a system. A more accurate translation might be 'потребителски акаунти'.",
+          "suggestion": "потребителски акаунти"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Greek translation uses the plural form 'λογαριασμούς' (logariasmous) which is grammatically incorrect in this context. It should be in the singular form.",
+          "suggestion": "Έχετε περισσότερους από έναν λογαριασμό. Επιλέξτε έναν από αυτούς"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Դուք ունեք մեկից ավելի հաշիվներ: Խնդրում ենք ընտրել որևէ մեկը' is a literal translation of 'You have more than one accounts. Please choose one of them.' It's not the most natural sounding Armenian. A more natural phrasing would be closer to 'You have multiple accounts. Please select one.'",
+          "suggestion": "Դուք ունեք մի քանի հաշիվներ: Խնդրում ենք ընտրել մեկը։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,19 +111,42 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"複数のアカウントをお持ちのようです。そのうちの1つを選択してください。\" is a bit too formal and verbose for the context. A more natural and concise translation would better reflect the original meaning.",
+          "suggestion": "複数のアカウントがあります。一つをお選びください。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'You have more than one accounts' implies possession by the user. The Korean translation '두 개 이상의 계정을 보유하고 있습니다' directly translates to 'You have more than two accounts', which is technically correct but less natural. A more natural translation would be '여러 계정을 보유하고 있습니다.' (You have multiple accounts).",
+          "suggestion": "여러 계정을 보유하고 있습니다."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Please choose one of them' is best conveyed by a softer, more polite tone in Korean. '그 중 하나를 선택하세요' is grammatically correct but sounds somewhat abrupt.",
+          "suggestion": "그 중 하나를 선택해 주십시오."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ທ່ານມີບັນຊີຫຼາຍກວ່າໜຶ່ງບັນຊີ។ ກະລຸນາເລືອກບັນຊີໜຶ່ງໃນບັນຊີຂອງທ່ານ።' is a bit verbose and not as concise as the English \"You have more than one accounts. Please choose one of them\". A more natural translation might be \"ທ່ານມີບັນຊີຫຼາຍກວ່າໜຶ່ງບັນຊີ ກະລຸນາເລືອກບັນຊີໜຶ່ງ\" or \"ທ່ານມີບັນຊີຫຼາຍບັນຊີ ກະລຸນາເລືອກບັນຊີໜຶ່ງ\".",
+          "suggestion": "ທ່ານມີບັນຊີຫຼາຍບັນຊີ ກະລຸນາເລືອກບັນຊີໜຶ່ງ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,13 +164,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Masz więcej niż jedno konto. Wybierz jedno z nich' is a literal translation but lacks the nuance of 'accounts' being plural. It should more accurately reflect the original meaning of 'You have more than one accounts'.",
+          "suggestion": "Masz więcej niż jedno konto. Proszę, wybierz jedno."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'one of them' ('um deles') doesn't accurately reflect the English 'one of them'. It implies the accounts are masculine. The correct phrasing should refer to the accounts as feminine.",
+          "suggestion": "Você tem mais de uma conta. Por favor, escolha uma delas."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +194,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dvs aveți mai multe conturi. Vă rugăm să alegeți unul dintre cele existente' is a bit literal and awkward. 'Dvs' is overly formal and 'cele existente' is redundant. A more natural translation would convey the meaning more clearly.",
+          "suggestion": "Aveți mai multe conturi. Vă rugăm să alegeți unul."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +212,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබට ගිණුම් එකකට වඩා තිබේ. කරුණාකර ඒවායින් එකක් තෝරන්න' doesn't perfectly convey the meaning of 'You have more than one accounts. Please choose one of them'. A more accurate translation might emphasize the necessity of choosing.",
+          "suggestion": "ඔබට එකකට වඩා ගිණුමක් තිබේ. කරුණාකර එකක් තෝරා ගන්න."
+        },
+        {
+          "type": "grammar",
+          "description": "The word order in 'ඔබට ගිණුම් එකකට වඩා තිබේ' could be improved for a more natural flow in Sinhala. While not strictly incorrect, it sounds slightly awkward.",
+          "suggestion": "ඔබට එකකට වඩා ගිණුමක් තිබෙනවා."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +265,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is overly literal and doesn't flow naturally in Vietnamese. A more natural phrasing would better convey the meaning.",
+          "suggestion": "Bạn có nhiều tài khoản. Vui lòng chọn một tài khoản."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -24,18 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .baseTile {
   cursor: pointer;
   max-height: 104px;
 
-  box-sizing: content-box; 
+  box-sizing: content-box;
 
   background: var(--tile-background-color);
-  border: var(--tile-border);
+  border: var(--tile-room-border);
   border-radius: var(--tile-room-border-radius);
 
   display: flex;
@@ -45,7 +45,7 @@
 
   padding: 16px 0;
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: 2px;
   }
 
@@ -135,7 +135,7 @@
     padding-top: 8px;
     padding-inline-start: 12px;
 
-    @include tablet {
+    @include mixins.tablet {
       opacity: 1;
     }
 
@@ -196,7 +196,7 @@
     }
   }
 
-  @include tablet {
+  @include mixins.tablet {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

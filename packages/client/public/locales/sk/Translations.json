@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Vyberte si zo zoznamu",
-  "ConnectingAccount": "Pripojenie účtu",
-  "DeleteFromTrash": "Vybraté prvky boli úspešne odstránené z koša",
   "FileLocked": "Súbor zamknutý",
   "FileProtected": "Súbor je chránený heslom",
   "FileUnlocked": "Súbor odomknutý",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Zmeniť informácie o tretej strane",
   "ThirdPartyTitle": "Služby tretích strán",
   "TitleShowActions": "Zobraziť akcie pre súbor",
-  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Zobraziť akcie pre priečinky"
 }

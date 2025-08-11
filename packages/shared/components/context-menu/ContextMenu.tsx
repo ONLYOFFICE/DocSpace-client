@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { CSSTransition } from "react-transition-group";
@@ -57,634 +59,627 @@ import styles from "./ContextMenu.module.scss";
 
 const MARGIN_BORDER = 16; // Indentation from the border of the screen
 
-const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
-  (props, ref) => {
-    const [visible, setVisible] = React.useState(false);
-    const [reshow, setReshow] = React.useState(false);
-    const [resetMenu, setResetMenu] = React.useState(false);
-    const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
-    const [changeView, setChangeView] = React.useState(false);
-    const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-    const [mobileSubMenuItems, setMobileSubMenuItems] = React.useState<
-      ContextMenuModel[] | undefined
-    >([]);
-    const [mobileHeader, setMobileHeader] = React.useState<string>("");
+const ContextMenu = (props: ContextMenuProps) => {
+  const [visible, setVisible] = React.useState(false);
+  const [reshow, setReshow] = React.useState(false);
+  const [resetMenu, setResetMenu] = React.useState(false);
+  const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
+  const [changeView, setChangeView] = React.useState(false);
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [mobileSubMenuItems, setMobileSubMenuItems] = React.useState<
+    ContextMenuModel[] | undefined
+  >([]);
+  const [mobileHeader, setMobileHeader] = React.useState<string>("");
 
-    const prevReshow = React.useRef(false);
-    const menuRef = React.useRef<null | HTMLDivElement>(null);
-    const currentEvent = React.useRef<
-      | null
-      | React.MouseEvent
-      | MouseEvent
-      | React.ChangeEvent<HTMLInputElement>
-      | Event
-    >(null);
+  const prevReshow = React.useRef(false);
+  const menuRef = React.useRef<null | HTMLDivElement>(null);
+  const currentEvent = React.useRef<
+    | null
+    | React.MouseEvent
+    | MouseEvent
+    | React.ChangeEvent<HTMLInputElement>
+    | Event
+  >(null);
 
-    const { isRTL } = useInterfaceDirection();
+  const [root, setRoot] = React.useState<null | HTMLDivElement>(null);
 
-    const {
-      getContextModel,
-      onShow,
-      onHide,
-      autoZIndex = true,
-      baseZIndex,
-      leftOffset,
-      rightOffset,
-      containerRef,
-      scaled,
-      global,
-      className,
-      header,
-      fillIcon = true,
-      isRoom,
-      id,
-      style,
-      isArchive,
-      ignoreChangeView,
-      appendTo,
-      withBackdrop,
-      model: propsModel,
-      badgeUrl,
-      headerOnlyMobile = false,
-    } = props;
+  const { isRTL } = useInterfaceDirection();
 
-    const onMenuClick = () => {
-      setResetMenu(false);
-    };
+  const {
+    ref,
+    getContextModel,
+    onShow,
+    onHide,
+    autoZIndex = true,
+    baseZIndex,
+    leftOffset,
+    rightOffset,
+    containerRef,
+    scaled,
+    global,
+    className,
+    header,
+    fillIcon = true,
+    isRoom,
+    id,
+    style,
+    isArchive,
+    ignoreChangeView,
+    appendTo,
+    withBackdrop,
+    model: propsModel,
+    badgeUrl,
+    headerOnlyMobile = false,
+    dataTestId,
+  } = props;
 
-    const onMenuMouseEnter = () => {
-      setResetMenu(false);
-    };
+  const onMenuClick = () => {
+    setResetMenu(false);
+  };
 
-    const show = React.useCallback(
-      (
-        e:
-          | React.MouseEvent
-          | MouseEvent
-          | Event
-          | React.ChangeEvent<HTMLInputElement>,
-      ) => {
-        if (getContextModel) {
-          const m = trimSeparator(getContextModel());
-          setModel(m);
+  const onMenuMouseEnter = () => {
+    setResetMenu(false);
+  };
+
+  const show = React.useCallback(
+    (
+      e:
+        | React.MouseEvent
+        | MouseEvent
+        | Event
+        | React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      if (getContextModel) {
+        const m = trimSeparator(getContextModel());
+        setModel(m);
+      }
+
+      e.stopPropagation();
+      e.preventDefault();
+
+      currentEvent.current = e;
+
+      if (visible) {
+        if (!isMobileUtils()) {
+          setReshow(true);
+          prevReshow.current = true;
         }
+      } else {
+        setVisible(true);
+        if (currentEvent.current) onShow?.(currentEvent.current);
+      }
+    },
+    [visible, onShow, getContextModel],
+  );
 
-        e.stopPropagation();
-        e.preventDefault();
+  const hide = React.useCallback(
+    (
+      e:
+        | React.MouseEvent
+        | MouseEvent
+        | Event
+        | React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      currentEvent.current = e;
 
-        currentEvent.current = e;
+      onHide?.(e);
 
-        if (visible) {
-          if (!isMobileUtils()) {
-            setReshow(true);
-            prevReshow.current = true;
+      setVisible(false);
+      setReshow(false);
+      prevReshow.current = false;
+      setChangeView(false);
+      setShowMobileMenu(false);
+    },
+    [onHide],
+  );
+
+  const toggle = React.useCallback(
+    (
+      e:
+        | React.MouseEvent
+        | MouseEvent
+        | Event
+        | React.ChangeEvent<HTMLInputElement>,
+    ) => {
+      if (currentEvent.current === e) return;
+
+      if (visible) {
+        hide(e);
+        return false;
+      }
+      show(e);
+      return true;
+    },
+    [visible, hide, show],
+  );
+
+  React.useEffect(() => {
+    if (visible && prevReshow.current !== reshow) {
+      setVisible(false);
+      setReshow(false);
+      prevReshow.current = false;
+      setResetMenu(true);
+      setChangeView(false);
+
+      if (currentEvent.current) show(currentEvent.current);
+    }
+  }, [visible, reshow, show]);
+
+  const position = (event: React.MouseEvent | MouseEvent) => {
+    if (event) {
+      const rects = containerRef?.current?.getBoundingClientRect();
+
+      const currentLeftOffset = leftOffset ?? 0;
+      const currentRightOffset = rightOffset ?? 0;
+
+      let left = rects
+        ? rects.left - currentLeftOffset - currentRightOffset
+        : event.pageX + 1;
+      let top = rects ? rects.top : event.pageY + 1;
+      let width =
+        menuRef.current && menuRef.current.offsetParent
+          ? menuRef.current.offsetWidth
+          : DomHelpers.getHiddenElementOuterWidth(menuRef.current);
+      const height =
+        menuRef.current && menuRef.current.offsetParent
+          ? menuRef.current.offsetHeight
+          : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
+      const viewport = DomHelpers.getViewport();
+
+      const borderWidth = menuRef.current
+        ? +window
+            .getComputedStyle(menuRef.current)
+            .borderWidth.replace("px", "")
+        : 0;
+
+      const mobileView = isMobileUtils() && (height > 210 || ignoreChangeView);
+
+      if (!mobileView) {
+        const options = menuRef?.current?.getElementsByClassName("p-menuitem");
+        const optionsWidth: number[] = [];
+
+        if (options) {
+          Array.from(options).forEach((option) =>
+            optionsWidth.push(option.getBoundingClientRect().width),
+          );
+
+          const widthMaxContent = Math.max(...optionsWidth);
+
+          width = Math.ceil(widthMaxContent);
+        }
+      }
+
+      if (isRTL && !rects && left > width) {
+        left = event.pageX - width + 1;
+      }
+
+      if (mobileView) {
+        setChangeView(true);
+
+        return;
+      }
+
+      // flip
+      if (left + width - document.body.scrollLeft > viewport.width) {
+        left -= width;
+      }
+
+      // flip
+      if (top + height - document.body.scrollTop > viewport.height) {
+        top -= height;
+      }
+
+      // fit
+      if (left < document.body.scrollLeft) {
+        left = document.body.scrollLeft;
+      }
+
+      // fit
+      if (top < document.body.scrollTop) {
+        if (document.body.scrollTop === 0) top = MARGIN_BORDER;
+        else top = document.body.scrollTop;
+      }
+
+      if (borderWidth) width += borderWidth * 2;
+
+      if (containerRef) {
+        if (rects) top += rects.height + 4;
+
+        if (menuRef.current) {
+          if (scaled && rects) {
+            menuRef.current.style.width = `${rects.width}px`;
           }
-        } else {
-          setVisible(true);
-          if (currentEvent.current) onShow?.(currentEvent.current);
+          menuRef.current.style.minWidth = "210px";
         }
-      },
-      [visible, onShow, getContextModel],
-    );
+      }
+      if (menuRef.current) {
+        menuRef.current.style.left = `${left || MARGIN_BORDER}px`;
+        menuRef.current.style.top = `${top}px`;
 
-    const hide = React.useCallback(
-      (
-        e:
-          | React.MouseEvent
-          | MouseEvent
-          | Event
-          | React.ChangeEvent<HTMLInputElement>,
-      ) => {
-        currentEvent.current = e;
+        if (!mobileView) menuRef.current.style.width = `${width}px`;
+      }
+    }
+  };
 
-        onHide?.(e);
+  const onEnter = () => {
+    if (autoZIndex && menuRef.current) {
+      const zIndex = baseZIndex || 0;
+      menuRef.current.style.zIndex = String(
+        zIndex + DomHelpers.generateZIndex(),
+      );
+    }
 
+    if (currentEvent.current && "clientX" in currentEvent.current) {
+      position(currentEvent.current);
+    }
+  };
+
+  const onExited = () => {
+    DomHelpers.revertZIndex();
+  };
+
+  const onLeafClick = (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setResetMenu(true);
+
+    hide(e);
+
+    e.stopPropagation();
+  };
+
+  const isOutsideClicked = React.useCallback(
+    (e: React.MouseEvent | MouseEvent) => {
+      const target = e.target as HTMLElement;
+      return (
+        menuRef.current &&
+        !(
+          menuRef.current.isSameNode(target) || menuRef.current.contains(target)
+        )
+      );
+    },
+    [],
+  );
+
+  const documentClickListener = React.useCallback(
+    (e: MouseEvent) => {
+      if (isOutsideClicked(e)) {
+        // TODO: (&& e.button !== 2) restore after global usage
+
+        hide(e);
+
+        setResetMenu(true);
+      }
+    },
+    [setResetMenu, isOutsideClicked, hide],
+  );
+
+  const documentContextMenuListener = React.useCallback(
+    (e: MouseEvent) => {
+      show(e);
+    },
+    [show],
+  );
+
+  const documentResizeListener = React.useCallback(
+    (e: Event) => {
+      if (visible) {
+        hide(e);
+      }
+    },
+    [visible, hide],
+  );
+
+  const bindDocumentListeners = () => {
+    window.addEventListener("resize", documentResizeListener);
+    document.addEventListener("click", documentClickListener);
+    document.addEventListener("mousedown", documentClickListener);
+  };
+
+  const unbindDocumentListeners = () => {
+    window.removeEventListener("resize", documentResizeListener);
+    document.removeEventListener("click", documentClickListener);
+    document.removeEventListener("mousedown", documentClickListener);
+  };
+
+  const onEntered = () => {
+    bindDocumentListeners();
+  };
+
+  const onExit = () => {
+    currentEvent.current = null;
+    unbindDocumentListeners();
+  };
+
+  const onClickBackdrop = () => {
+    setVisible(false);
+  };
+
+  React.useEffect(() => {
+    if (global)
+      document.addEventListener("contextmenu", documentContextMenuListener);
+    return () => {
+      document.removeEventListener("contextmenu", documentContextMenuListener);
+      document.removeEventListener("click", documentClickListener);
+      document.removeEventListener("mousedown", documentClickListener);
+
+      DomHelpers.revertZIndex();
+    };
+  }, [documentClickListener, documentContextMenuListener, global]);
+
+  React.useEffect(() => {
+    return () => {
+      if (visible && onHide) {
+        onHide();
         setVisible(false);
         setReshow(false);
         prevReshow.current = false;
         setChangeView(false);
         setShowMobileMenu(false);
-      },
-      [onHide],
-    );
-
-    const toggle = React.useCallback(
-      (
-        e:
-          | React.MouseEvent
-          | MouseEvent
-          | Event
-          | React.ChangeEvent<HTMLInputElement>,
-      ) => {
-        if (currentEvent.current === e) return;
-
-        if (visible) {
-          hide(e);
-          return false;
-        }
-        show(e);
-        return true;
-      },
-      [visible, hide, show],
-    );
-
-    React.useEffect(() => {
-      if (visible && prevReshow.current !== reshow) {
-        setVisible(false);
-        setReshow(false);
-        prevReshow.current = false;
-        setResetMenu(true);
-        setChangeView(false);
-
-        if (currentEvent.current) show(currentEvent.current);
-      }
-    }, [visible, reshow, show]);
-
-    const position = (event: React.MouseEvent | MouseEvent) => {
-      if (event) {
-        const rects = containerRef?.current?.getBoundingClientRect();
-
-        const currentLeftOffset = leftOffset ?? 0;
-        const currentRightOffset = rightOffset ?? 0;
-
-        let left = rects
-          ? rects.left - currentLeftOffset - currentRightOffset
-          : event.pageX + 1;
-        let top = rects ? rects.top : event.pageY + 1;
-        let width =
-          menuRef.current && menuRef.current.offsetParent
-            ? menuRef.current.offsetWidth
-            : DomHelpers.getHiddenElementOuterWidth(menuRef.current);
-        const height =
-          menuRef.current && menuRef.current.offsetParent
-            ? menuRef.current.offsetHeight
-            : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
-        const viewport = DomHelpers.getViewport();
-
-        const borderWidth = menuRef.current
-          ? +window
-              .getComputedStyle(menuRef.current)
-              .borderWidth.replace("px", "")
-          : 0;
-
-        const mobileView =
-          isMobileUtils() && (height > 210 || ignoreChangeView);
-
-        if (!mobileView) {
-          const options =
-            menuRef?.current?.getElementsByClassName("p-menuitem");
-          const optionsWidth: number[] = [];
-
-          if (options) {
-            Array.from(options).forEach((option) =>
-              optionsWidth.push(option.getBoundingClientRect().width),
-            );
-
-            const widthMaxContent = Math.max(...optionsWidth);
-
-            width = Math.ceil(widthMaxContent);
-          }
-        }
-
-        if (isRTL && !rects && left > width) {
-          left = event.pageX - width + 1;
-        }
-
-        if (mobileView) {
-          setChangeView(true);
-
-          return;
-        }
-
-        // flip
-        if (left + width - document.body.scrollLeft > viewport.width) {
-          left -= width;
-        }
-
-        // flip
-        if (top + height - document.body.scrollTop > viewport.height) {
-          top -= height;
-        }
-
-        // fit
-        if (left < document.body.scrollLeft) {
-          left = document.body.scrollLeft;
-        }
-
-        // fit
-        if (top < document.body.scrollTop) {
-          if (document.body.scrollTop === 0) top = MARGIN_BORDER;
-          else top = document.body.scrollTop;
-        }
-
-        if (borderWidth) width += borderWidth * 2;
-
-        if (containerRef) {
-          if (rects) top += rects.height + 4;
-
-          if (menuRef.current) {
-            if (scaled && rects) {
-              menuRef.current.style.width = `${rects.width}px`;
-            }
-            menuRef.current.style.minWidth = "210px";
-          }
-        }
-        if (menuRef.current) {
-          menuRef.current.style.left = `${left || MARGIN_BORDER}px`;
-          menuRef.current.style.top = `${top}px`;
-
-          if (!mobileView) menuRef.current.style.width = `${width}px`;
-        }
-      }
-    };
-
-    const onEnter = () => {
-      if (autoZIndex && menuRef.current) {
-        const zIndex = baseZIndex || 0;
-        menuRef.current.style.zIndex = String(
-          zIndex + DomHelpers.generateZIndex(),
-        );
       }
 
-      if (currentEvent.current && "clientX" in currentEvent.current) {
-        position(currentEvent.current);
-      }
-    };
-
-    const onExited = () => {
-      DomHelpers.revertZIndex();
-    };
-
-    const onLeafClick = (
-      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    ) => {
-      setResetMenu(true);
-
-      hide(e);
-
-      e.stopPropagation();
-    };
-
-    const isOutsideClicked = React.useCallback(
-      (e: React.MouseEvent | MouseEvent) => {
-        const target = e.target as HTMLElement;
-        return (
-          menuRef.current &&
-          !(
-            menuRef.current.isSameNode(target) ||
-            menuRef.current.contains(target)
-          )
-        );
-      },
-      [],
-    );
-
-    const documentClickListener = React.useCallback(
-      (e: MouseEvent) => {
-        if (isOutsideClicked(e)) {
-          // TODO: (&& e.button !== 2) restore after global usage
-
-          hide(e);
-
-          setResetMenu(true);
-        }
-      },
-      [setResetMenu, isOutsideClicked, hide],
-    );
-
-    const documentContextMenuListener = React.useCallback(
-      (e: MouseEvent) => {
-        show(e);
-      },
-      [show],
-    );
-
-    const documentResizeListener = React.useCallback(
-      (e: Event) => {
-        if (visible) {
-          hide(e);
-        }
-      },
-      [visible, hide],
-    );
-
-    const bindDocumentListeners = () => {
-      window.addEventListener("resize", documentResizeListener);
-      document.addEventListener("click", documentClickListener);
-      document.addEventListener("mousedown", documentClickListener);
-    };
-
-    const unbindDocumentListeners = () => {
       window.removeEventListener("resize", documentResizeListener);
-      document.removeEventListener("click", documentClickListener);
-      document.removeEventListener("mousedown", documentClickListener);
     };
+  }, [documentResizeListener, onHide, visible]);
 
-    const onEntered = () => {
-      bindDocumentListeners();
-    };
+  React.useEffect(() => {
+    setRoot(document.getElementById("root") as HTMLDivElement);
+  }, []);
 
-    const onExit = () => {
-      currentEvent.current = null;
-      unbindDocumentListeners();
-    };
+  const createSyntheticMouseEvent = (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ): MouseEvent => {
+    const eventX = "clientX" in e ? e.clientX : 0;
+    const eventY = "clientY" in e ? e.clientY : 0;
+    const eventPageX = "pageX" in e ? e.pageX : 0;
+    const eventPageY = "pageY" in e ? e.pageY : 0;
 
-    const onClickBackdrop = () => {
-      setVisible(false);
-    };
+    return {
+      clientX: eventX,
+      clientY: eventY,
+      pageX: eventPageX,
+      pageY: eventPageY,
+      preventDefault: () => {},
+      stopPropagation: () => {},
+    } as unknown as MouseEvent;
+  };
 
-    React.useEffect(() => {
-      if (global)
-        document.addEventListener("contextmenu", documentContextMenuListener);
-      return () => {
-        document.removeEventListener(
-          "contextmenu",
-          documentContextMenuListener,
-        );
-        document.removeEventListener("click", documentClickListener);
-        document.removeEventListener("mousedown", documentClickListener);
+  const calculateSubMenuWidth = (items: ContextMenuModel[]): number => {
+    const MIN_SUBMENU_WIDTH = 180;
+    const MAX_SUBMENU_WIDTH = 400;
+    const CHAR_WIDTH = 8;
+    const PADDING_AND_ICONS = 60;
 
-        DomHelpers.revertZIndex();
-      };
-    }, [documentClickListener, documentContextMenuListener, global]);
-
-    React.useEffect(() => {
-      return () => {
-        if (visible && onHide) {
-          onHide();
-          setVisible(false);
-          setReshow(false);
-          prevReshow.current = false;
-          setChangeView(false);
-          setShowMobileMenu(false);
+    let maxLength = 0;
+    if (items && items.length > 0) {
+      items.forEach((item) => {
+        if (
+          !("isSeparator" in item && item.isSeparator) &&
+          "label" in item &&
+          item.label
+        ) {
+          const labelLength =
+            typeof item.label === "string" ? item.label.length : 10;
+          maxLength = Math.max(maxLength, labelLength);
         }
-
-        window.removeEventListener("resize", documentResizeListener);
-      };
-    }, [documentResizeListener, onHide, visible]);
-
-    const createSyntheticMouseEvent = (
-      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    ): MouseEvent => {
-      const eventX = "clientX" in e ? e.clientX : 0;
-      const eventY = "clientY" in e ? e.clientY : 0;
-      const eventPageX = "pageX" in e ? e.pageX : 0;
-      const eventPageY = "pageY" in e ? e.pageY : 0;
-
-      return {
-        clientX: eventX,
-        clientY: eventY,
-        pageX: eventPageX,
-        pageY: eventPageY,
-        preventDefault: () => {},
-        stopPropagation: () => {},
-      } as unknown as MouseEvent;
-    };
-
-    const calculateSubMenuWidth = (items: ContextMenuModel[]): number => {
-      const MIN_SUBMENU_WIDTH = 180;
-      const MAX_SUBMENU_WIDTH = 400;
-      const CHAR_WIDTH = 8;
-      const PADDING_AND_ICONS = 60;
-
-      let maxLength = 0;
-      if (items && items.length > 0) {
-        items.forEach((item) => {
-          if (
-            !("isSeparator" in item && item.isSeparator) &&
-            "label" in item &&
-            item.label
-          ) {
-            const labelLength =
-              typeof item.label === "string" ? item.label.length : 10;
-            maxLength = Math.max(maxLength, labelLength);
-          }
-        });
-      }
-
-      return Math.min(
-        Math.max(maxLength * CHAR_WIDTH + PADDING_AND_ICONS, MIN_SUBMENU_WIDTH),
-        MAX_SUBMENU_WIDTH,
-      );
-    };
-
-    const onMobileItemClick = async (
-      e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-      label: string,
-      items?: ContextMenuModel[],
-      loadFunc?: () => Promise<ContextMenuModel[]>,
-    ) => {
-      e.stopPropagation();
-
-      setShowMobileMenu(true);
-
-      const res = loadFunc ? await loadFunc() : items;
-      setMobileSubMenuItems(res);
-
-      setMobileHeader(label);
-
-      if (res && menuRef.current) {
-        const height =
-          menuRef.current && menuRef.current.offsetParent
-            ? menuRef.current.offsetHeight
-            : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
-
-        const mobileView =
-          isMobileUtils() && (height > 210 || ignoreChangeView);
-
-        const syntheticEvent = createSyntheticMouseEvent(e);
-
-        if (!mobileView) {
-          const estimatedWidth = calculateSubMenuWidth(res);
-          menuRef.current.style.width = `${estimatedWidth}px`;
-          position(syntheticEvent);
-        }
-      }
-    };
-
-    const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
-      e.stopPropagation();
-      setShowMobileMenu(false);
-    };
-
-    React.useImperativeHandle(ref, () => {
-      return { show, hide, toggle, menuRef };
-    }, [hide, show, toggle]);
-
-    const renderContextMenu = () => {
-      const currentClassName = className
-        ? classNames("p-contextmenu p-component", className) ||
-          "p-contextmenu p-component"
-        : "p-contextmenu p-component";
-
-      const isIconExist = !!header?.icon;
-      const isAvatarExist = header && "avatar" in header && header?.avatar;
-      const withHeader = header && "title" in header && !!header?.title;
-      const defaultIcon = header && "color" in header && !!header?.color;
-      const isCoverExist = header && "cover" in header && !!header?.cover;
-      const isHeaderMobileSubMenu = headerOnlyMobile && showMobileMenu;
-
-      return (
-        <div
-          data-testid="context-menu"
-          className={classNames(styles.contextMenu, {
-            [styles.isRoom]: isRoom,
-            [styles.coverExist]: isCoverExist,
-            [styles.isIconExist]: isIconExist,
-            [styles.fillIcon]: fillIcon,
-            [styles.changeView]: changeView,
-          })}
-        >
-          <CSSTransition
-            nodeRef={menuRef}
-            classNames="p-contextmenu"
-            in={visible}
-            timeout={{ enter: 250, exit: 0 }}
-            unmountOnExit
-            onEnter={onEnter}
-            onEntered={onEntered}
-            onExit={onExit}
-            onExited={onExited}
-          >
-            <div
-              ref={menuRef}
-              id={id}
-              className={currentClassName}
-              style={style}
-              onClick={onMenuClick}
-              onMouseEnter={onMenuMouseEnter}
-            >
-              {changeView && (withHeader || isHeaderMobileSubMenu) ? (
-                <div className="contextmenu-header">
-                  {isIconExist || isHeaderMobileSubMenu ? (
-                    showMobileMenu ? (
-                      <IconButton
-                        className="edit_icon"
-                        iconName={ArrowLeftReactUrl}
-                        onClick={onBackClick}
-                        size={16}
-                      />
-                    ) : (
-                      <div className="icon-wrapper">
-                        {(header?.icon &&
-                          "color" in header &&
-                          !header?.color) ||
-                        (header && "cover" in header && header?.cover) ||
-                        (header && "logo" in header && header?.logo) ? (
-                          <RoomIcon
-                            title={header.title}
-                            isArchive={isArchive}
-                            showDefault={false}
-                            imgClassName="drop-down-item_icon"
-                            logo={
-                              header && "cover" in header && header?.cover
-                                ? {
-                                    cover: header.cover,
-                                    color: header.color,
-                                    medium: header.medium,
-                                    small: header.small,
-                                    large: header.large,
-                                    original: header.original,
-                                  }
-                                : header && "logo" in header && header?.logo
-                                  ? header?.logo
-                                  : header?.icon
-                            }
-                            badgeUrl={badgeUrl}
-                            color={
-                              (header && "color" in header && header.color) ||
-                              ""
-                            }
-                          />
-                        ) : (
-                          <RoomIcon
-                            color={
-                              (header && "color" in header && header.color) ||
-                              ""
-                            }
-                            title={
-                              header && "title" in header ? header.title : ""
-                            }
-                            isArchive={isArchive}
-                            showDefault={defaultIcon ?? false}
-                            badgeUrl={badgeUrl}
-                          />
-                        )}
-                      </div>
-                    )
-                  ) : null}
-                  {isAvatarExist ? (
-                    <div className="avatar-wrapper">
-                      <Avatar
-                        role={AvatarRole.none}
-                        source={header.avatar || ""}
-                        size={AvatarSize.min}
-                        className="drop-down-item_avatar"
-                      />
-                    </div>
-                  ) : null}
-
-                  <Text className="text" truncate dir="auto">
-                    {showMobileMenu ? mobileHeader : (header?.title ?? "")}
-                  </Text>
-                </div>
-              ) : null}
-
-              {showMobileMenu ? (
-                <MobileSubMenu
-                  root
-                  resetMenu={resetMenu}
-                  onLeafClick={onLeafClick}
-                  mobileSubMenuItems={mobileSubMenuItems}
-                />
-              ) : (
-                <SubMenu
-                  model={getContextModel ? model || [] : propsModel}
-                  root
-                  resetMenu={resetMenu}
-                  onLeafClick={onLeafClick}
-                  onMobileItemClick={onMobileItemClick}
-                  changeView={changeView}
-                  withHeader={withHeader}
-                />
-              )}
-            </div>
-          </CSSTransition>
-        </div>
-      );
-    };
-
-    const element = renderContextMenu();
-
-    const isMobileUtil = isMobileUtils();
-
-    const contextMenu = (
-      <>
-        {withBackdrop ? (
-          <Backdrop
-            visible={(visible && (changeView || ignoreChangeView)) || false}
-            withBackground
-            withoutBlur={false}
-            zIndex={baseZIndex}
-            onClick={onClickBackdrop}
-          />
-        ) : null}
-
-        <Portal element={element} appendTo={appendTo} />
-      </>
-    );
-
-    const root =
-      typeof window !== "undefined" && document.getElementById("root");
-    if (isMobileUtil) {
-      const portal = <Portal element={contextMenu} appendTo={root || null} />;
-
-      return portal;
+      });
     }
 
-    return contextMenu;
-  },
-);
+    return Math.min(
+      Math.max(maxLength * CHAR_WIDTH + PADDING_AND_ICONS, MIN_SUBMENU_WIDTH),
+      MAX_SUBMENU_WIDTH,
+    );
+  };
+
+  const onMobileItemClick = async (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    label: string,
+    items?: ContextMenuModel[],
+    loadFunc?: () => Promise<ContextMenuModel[]>,
+  ) => {
+    e.stopPropagation();
+
+    setShowMobileMenu(true);
+
+    const res = loadFunc ? await loadFunc() : items;
+    setMobileSubMenuItems(res);
+
+    setMobileHeader(label);
+
+    if (res && menuRef.current) {
+      const height =
+        menuRef.current && menuRef.current.offsetParent
+          ? menuRef.current.offsetHeight
+          : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
+
+      const mobileView = isMobileUtils() && (height > 210 || ignoreChangeView);
+
+      const syntheticEvent = createSyntheticMouseEvent(e);
+
+      if (!mobileView) {
+        const estimatedWidth = calculateSubMenuWidth(res);
+        menuRef.current.style.width = `${estimatedWidth}px`;
+        position(syntheticEvent);
+      }
+    }
+  };
+
+  const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setShowMobileMenu(false);
+  };
+
+  React.useImperativeHandle(ref, () => {
+    return { show, hide, toggle, menuRef };
+  }, [hide, show, toggle]);
+
+  const renderContextMenu = () => {
+    const currentClassName = className
+      ? classNames("p-contextmenu p-component", className) ||
+        "p-contextmenu p-component"
+      : "p-contextmenu p-component";
+
+    const isIconExist = !!header?.icon;
+    const isAvatarExist = header && "avatar" in header && header?.avatar;
+    const withHeader = header && "title" in header && !!header?.title;
+    const defaultIcon = header && "color" in header && !!header?.color;
+    const isCoverExist = header && "cover" in header && !!header?.cover;
+    const isHeaderMobileSubMenu = headerOnlyMobile && showMobileMenu;
+
+    return (
+      <div
+        data-testid={dataTestId ?? "context-menu"}
+        className={classNames(styles.contextMenu, {
+          [styles.isRoom]: isRoom,
+          [styles.coverExist]: isCoverExist,
+          [styles.isIconExist]: isIconExist,
+          [styles.fillIcon]: fillIcon,
+          [styles.changeView]: changeView,
+        })}
+      >
+        <CSSTransition
+          nodeRef={menuRef}
+          classNames="p-contextmenu"
+          in={visible}
+          timeout={{ enter: 250, exit: 0 }}
+          unmountOnExit
+          onEnter={onEnter}
+          onEntered={onEntered}
+          onExit={onExit}
+          onExited={onExited}
+        >
+          <div
+            ref={menuRef}
+            id={id}
+            className={currentClassName}
+            style={style}
+            onClick={onMenuClick}
+            onMouseEnter={onMenuMouseEnter}
+          >
+            {changeView && (withHeader || isHeaderMobileSubMenu) ? (
+              <div className="contextmenu-header">
+                {isIconExist || isHeaderMobileSubMenu ? (
+                  showMobileMenu ? (
+                    <IconButton
+                      className="edit_icon"
+                      iconName={ArrowLeftReactUrl}
+                      onClick={onBackClick}
+                      size={16}
+                    />
+                  ) : (
+                    <div className="icon-wrapper">
+                      {(header?.icon && "color" in header && !header?.color) ||
+                      (header && "cover" in header && header?.cover) ||
+                      (header && "logo" in header && header?.logo) ? (
+                        <RoomIcon
+                          title={header.title}
+                          isArchive={isArchive}
+                          showDefault={false}
+                          imgClassName="drop-down-item_icon"
+                          logo={
+                            header && "cover" in header && header?.cover
+                              ? {
+                                  cover: header.cover,
+                                  color: header.color,
+                                  medium: header.medium,
+                                  small: header.small,
+                                  large: header.large,
+                                  original: header.original,
+                                }
+                              : header && "logo" in header && header?.logo
+                                ? header?.logo
+                                : header?.icon
+                          }
+                          badgeUrl={badgeUrl}
+                          color={
+                            (header && "color" in header && header.color) || ""
+                          }
+                        />
+                      ) : (
+                        <RoomIcon
+                          color={
+                            (header && "color" in header && header.color) || ""
+                          }
+                          title={
+                            header && "title" in header ? header.title : ""
+                          }
+                          isArchive={isArchive}
+                          showDefault={defaultIcon ?? false}
+                          badgeUrl={badgeUrl}
+                        />
+                      )}
+                    </div>
+                  )
+                ) : null}
+                {isAvatarExist ? (
+                  <div className="avatar-wrapper">
+                    <Avatar
+                      role={AvatarRole.none}
+                      source={header.avatar || ""}
+                      size={AvatarSize.min}
+                      className="drop-down-item_avatar"
+                    />
+                  </div>
+                ) : null}
+
+                <Text className="text" truncate dir="auto">
+                  {showMobileMenu ? mobileHeader : (header?.title ?? "")}
+                </Text>
+              </div>
+            ) : null}
+
+            {showMobileMenu ? (
+              <MobileSubMenu
+                root
+                resetMenu={resetMenu}
+                onLeafClick={onLeafClick}
+                mobileSubMenuItems={mobileSubMenuItems}
+              />
+            ) : (
+              <SubMenu
+                model={getContextModel ? model || [] : propsModel}
+                root
+                resetMenu={resetMenu}
+                onLeafClick={onLeafClick}
+                onMobileItemClick={onMobileItemClick}
+                changeView={changeView}
+                withHeader={withHeader}
+              />
+            )}
+          </div>
+        </CSSTransition>
+      </div>
+    );
+  };
+
+  const element = renderContextMenu();
+
+  const isMobileUtil = isMobileUtils();
+
+  const contextMenu = (
+    <>
+      {withBackdrop ? (
+        <Backdrop
+          visible={(visible && (changeView || ignoreChangeView)) || false}
+          withBackground
+          withoutBlur={false}
+          zIndex={baseZIndex}
+          onClick={onClickBackdrop}
+        />
+      ) : null}
+
+      <Portal element={element} appendTo={appendTo} />
+    </>
+  );
+
+  if (root && isMobileUtil) {
+    const portal = <Portal element={contextMenu} appendTo={root} />;
+
+    return portal;
+  }
+
+  return contextMenu;
+};
 
 ContextMenu.displayName = "ContextMenu";
 

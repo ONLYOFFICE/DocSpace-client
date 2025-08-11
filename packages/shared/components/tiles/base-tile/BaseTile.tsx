@@ -29,20 +29,17 @@ import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Checkbox } from "../../checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import {
-  ContextMenu,
-  ContextMenuRefType,
-} from "@docspace/shared/components/context-menu";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+} from "../../context-menu-button";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
+import { hasOwnProperty } from "../../../utils/object";
+import { HeaderType } from "../../context-menu/ContextMenu.types";
+import { Loader, LoaderTypes } from "../../loader";
 
-import { BaseTileProps } from "./BaseTile.types";
+import { BaseTileProps, TileChildProps } from "./BaseTile.types";
 
 import styles from "./BaseTile.module.scss";
 
@@ -70,6 +67,7 @@ export const BaseTile = ({
   onRoomClick,
   checkboxContainerRef,
   forwardRef,
+  dataTestId,
 }: BaseTileProps) => {
   const childrenArray = React.Children.toArray(topContent);
 
@@ -82,18 +80,28 @@ export const BaseTile = ({
     contextOptions &&
     contextOptions?.length > 0;
 
-  const firstChild = childrenArray[0];
+  const firstChild = childrenArray[0] as React.ReactElement<TileChildProps>;
   const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {
-          title: firstChild.props.item.title,
+          title:
+            firstChild.props.item.title ||
+            firstChild.props.item.displayName ||
+            "",
           icon: firstChild.props.item.icon,
-          original: firstChild.props.item.logo?.original,
-          large: firstChild.props.item.logo?.large,
-          medium: firstChild.props.item.logo?.medium,
-          small: firstChild.props.item.logo?.small,
+          original: firstChild.props.item.logo?.original || "",
+          large: firstChild.props.item.logo?.large || "",
+          medium: firstChild.props.item.logo?.medium || "",
+          small: firstChild.props.item.logo?.small || "",
           color: firstChild.props.item.logo?.color,
-          cover: firstChild.props.item.logo?.cover,
+          cover: firstChild.props.item.logo?.cover
+            ? typeof firstChild.props.item.logo.cover === "string"
+              ? {
+                  data: firstChild.props.item.logo.cover,
+                  id: "",
+                }
+              : firstChild.props.item.logo.cover
+            : undefined,
         }
       : undefined;
 
@@ -162,6 +170,7 @@ export const BaseTile = ({
       className={tileClassName}
       onClick={onRoomClick}
       onContextMenu={onContextMenu}
+      data-testid={dataTestId ?? "tile"}
     >
       <div className={styles.topContent}>
         {element && !isEdit ? (

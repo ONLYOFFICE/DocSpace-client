@@ -3,7 +3,7 @@
   "content": "Unbreakable AES-256 algorithm.",
   "content_en_sha1_hash": "1568d0980e87c187522b1560cb26e4baa6a5730e",
   "created_at": "2025-05-19T21:30:55.989Z",
-  "updated_at": "2025-05-21T11:32:31.119Z",
+  "updated_at": "2025-06-02T10:20:51.021Z",
   "comment": {
     "text": "This translation key is used to describe the security level of a private room, specifically emphasizing its unbreakable encryption using the AES-256 algorithm. It appears in the header of an empty root folder container and is intended for display to users, informing them about the robust security measures in place.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 133,
+      "line_number": 135,
       "context": "const privateRoomDescTranslations = [\n t(\"PrivateRoomDescriptionSafest\"),\n t(\"PrivateRoomDescriptionSecure\"),\n t(\"PrivateRoomDescriptionEncrypted\"),\n t(\"PrivateRoomDescriptionUnbreakable\"),\n ];\n \n const roomHeader = t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'خوارزمية AES-256 غير قابلة للكسر' while conveying the general meaning, isn't a direct or optimal translation of 'Unbreakable AES-256 algorithm.'  'غير قابلة للكسر' literally means 'not breakable'. A more accurate translation might consider a phrasing like 'AES-256 خوارزمية قوية جداً' (AES-256, a very strong algorithm) or 'AES-256 خوارزمية لا يمكن اختراقها' (AES-256, an unhackable algorithm).",
+          "suggestion": "Consider 'AES-256 خوارزمية قوية جداً' or 'AES-256 خوارزمية لا يمكن اختراقها'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -78,7 +84,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'Unbreakable' implies security and resistance to tampering. 'Stable' in French ('stable') does not convey the same meaning. A better translation would emphasize the strength and robustness of the encryption.",
+          "description": "The word 'stable' doesn't accurately convey the meaning of 'unbreakable'. 'Unbreakable' implies robustness and security, while 'stable' suggests reliability but not necessarily security.",
           "suggestion": "Algorithme incassable AES-256."
         }
       ],
@@ -87,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Անկոտրում' is a less common or less precise translation of 'Unbreakable'. A more common and accurate translation would be something like 'Անխորխելի' (Ankhorkheli) or 'Անկազմելի' (Ankhasmeli).",
-          "suggestion": "Անխորխելի AES-256 ալգորիթմ."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -102,8 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'L'algoritmo AES-256 attualmente è infrangibile' introduces the word 'attualmente' (currently). The English 'Unbreakable' implies it *is* unbreakable, not just currently unbreakable. The Italian phrasing changes the meaning.",
-          "suggestion": "L'algoritmo AES-256 è infrangibile."
+          "description": "The translation 'L'algoritmo AES-256 attualmente è infrangibile' implies the algorithm *currently* is unbreakable, which introduces a temporal element not present in the English. 'Unbreakable' suggests an inherent property, not a temporary state.",
+          "suggestion": "L'algoritmo AES-256 è indistruttibile."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'indistruttibile' is a valid word, it might be perceived as slightly more formal or impactful than other possible options.",
+          "suggestion": "Consider 'L'algoritmo AES-256 è inviolabile' or 'L'algoritmo AES-256 è a prova di manomissione' for alternatives depending on the desired tone."
         }
       ],
       "approved_at": null
@@ -114,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '解読できないAES-256アルゴリズムを採用' literally translates to 'We adopted an undecipherable AES-256 algorithm'. While conveying the general meaning of 'Unbreakable', it implies an action ('adopted') that isn't present in the English source.  A more accurate translation would focus on describing the algorithm itself, not the act of implementing it.",
-          "suggestion": "Consider alternatives like 'AES-256アルゴリズムを採用し、解読不能な強度を備えています' (We adopted AES-256 algorithm and it has unbreakable strength) or 'AES-256アルゴリズムを採用、解読不能です' (AES-256 algorithm adopted, undecipherable)."
+          "description": "The English phrase 'Unbreakable' is not accurately conveyed by '解読できない'. While '解読できない' means 'undecipherable' or 'unbreakable in terms of deciphering', 'Unbreakable' implies a higher level of security and robustness. A more suitable translation might focus on '絶対的な強さ' (absolute strength) or '絶対的なセキュリティ' (absolute security).",
+          "suggestion": "Consider translating 'Unbreakable' with phrases like '絶対的な強さ' (absolute strength) or '絶対的なセキュリティ' (absolute security) to better reflect the intended meaning."
         }
       ],
       "approved_at": null
@@ -126,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Unbreakable' is best translated as '깨지지 않는' (kkaja jineun) or '해킹할 수 없는' (haekinghal su eomneun) rather than '풀 수 없는' (pul su eomneun). '풀 수 없는' implies solvable, just difficult, while 'unbreakable' implies impossible to break.",
-          "suggestion": "깨지지 않는 AES-256 알고리즘."
+          "description": "The English phrase 'Unbreakable' implies a level of security and resistance that '풀 수 없는' (cannot be solved) doesn't fully convey. While technically correct, it's not the strongest translation for this context. A more impactful translation might emphasize invulnerability or absolute security.",
+          "suggestion": "Consider alternatives like '절대적인' (absolute), '완전한' (complete/perfect), or '해체 불가능한' (indestructible) to better capture the meaning of 'Unbreakable'."
         }
       ],
       "approved_at": null
@@ -138,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ສູດການຄິດໄລ່ AES-256 ບໍ່ສາມາດ ທຳລາຍໄດ້' literally translates to 'AES-256 calculation formula cannot be destroyed.' While conveying a similar meaning, it's not a direct and natural translation of 'Unbreakable AES-256 algorithm.' The word 'algorithm' is lost in translation.",
-          "suggestion": "Consider a translation closer to 'ວິທີການເຂົ້າລະຫັດ AES-256 ທີ່ບໍ່ສາມາດ ທຳລາຍໄດ້' (AES-256 encryption method that is unbreakable) or 'ລະບົບການເຂົ້າລະຫັດ AES-256 ທີ່ບໍ່ສາມາດ ທຳລາຍໄດ້' (AES-256 encryption system that is unbreakable)."
+          "description": "The Lao translation \"ສູດການຄິດໄລ່ AES-256 ບໍ່ສາມາດ ທຳລາຍໄດ້\" literally translates to 'AES-256 calculation formula cannot be destroyed'. While conveying a similar concept, it's not a direct or natural translation of 'Unbreakable AES-256 algorithm.' It's overly literal and a bit awkward.",
+          "suggestion": "Consider a more natural translation like \"ລະບົບການເຂົ້າລະຫັດ AES-256 ທີ່ບໍ່ສາມາດແກ້ໄຂໄດ້\" (system of AES-256 encryption that cannot be solved/broken) or \"ລະບົບ AES-256 ທີ່ປອດໄພຢ່າງເຂັ້ມງວດ\" (highly secure AES-256 system)."
         }
       ],
       "approved_at": null
@@ -165,13 +170,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Unbreakable' implies a security property - something resistant to breaking or cracking. 'Inquebrável' translates literally to 'unbreakable' but might not convey the intended meaning of robust encryption. A more suitable translation emphasizing security might be 'criptografia robusta' or 'algoritmo de criptografia seguro'.",
+          "suggestion": "Consider 'Algoritmo de criptografia seguro' or 'Algoritmo de criptografia robusto'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Algoritmo inquebrável AES-256\" is understandable, a more natural and accurate translation of 'Unbreakable' in this context would be 'indecifrável' or 'resistente'. 'Inquebrável' leans more towards physical resilience rather than cryptographic strength.",
+          "suggestion": "Algoritmo indecifrável AES-256."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -180,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Algoritm stabil AES-256' doesn't fully capture the meaning of 'Unbreakable'. 'Stabil' means 'stable' which is a different attribute than 'unbreakable'.",
-          "suggestion": "Algoritm AES-256 imposibil de spart."
+          "description": "The English phrase 'Unbreakable' implies a sense of security and invulnerability, which 'stabil' (stable) doesn't fully convey. 'Stabil' implies durability but lacks the emphasis on robustness against attacks.",
+          "suggestion": "Algoritm inviolabil AES-256."
         }
       ],
       "approved_at": null
@@ -192,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"Стойкий\" (Stoykiy) translates more closely to 'resilient' or 'robust' rather than 'unbreakable'. While it conveys a sense of strength, it doesn't directly reflect the meaning of 'unbreakable'.",
-          "suggestion": "Consider using \"Неломаный\" (Nelomanyy) which translates closer to 'unbreakable' or \"Неразрушимый\" (Nezrushimyy) which translates to 'indestructible'."
+          "description": "The English phrase 'Unbreakable' implies a strong security guarantee and resilience. 'Стойкий' translates to 'resilient' or 'durable' but doesn't fully capture the meaning of 'unbreakable' in the context of an encryption algorithm, which implies invulnerability to attack. A more accurate translation might convey invincibility or impenetrability.",
+          "suggestion": "Непробиваемый алгоритм AES-256."
         }
       ],
       "approved_at": null
@@ -201,7 +218,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඇල්ගොරිතමය' (algorithm) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'බිඳීමට' (to break) is spelled correctly.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the Sinhala translation is understandable, a more literal translation of 'Unbreakable' could be 'නොබිඳිය හැකි' which might convey a slightly stronger sense of robustness. 'බිඳීමට නොහැකි' directly translates to 'not able to break' which is accurate, but slightly less impactful.",
+          "suggestion": "නොබිඳිය හැකි AES-256 ඇල්ගොරිතමය."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -222,8 +255,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Unbreakable' is translated as 'Несаломив'. While technically correct, a more natural and commonly used translation for 'Unbreakable' in the context of security algorithms would be 'Непробиван' or 'Нечуливи'.",
-          "suggestion": "Непробиван AES-256 алгоритам."
+          "description": "The word 'Unbreakable' is translated as 'Несаломив', which while meaning 'unbreakable', isn't the most natural or common translation for a technical term like 'unbreakable algorithm'. A more appropriate translation might be 'Непробиван' or 'Непробојан'.",
+          "suggestion": "Consider using 'Непробиван' or 'Непробојан' for a more technically accurate and natural-sounding translation."
         }
       ],
       "approved_at": null
@@ -233,9 +266,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While 'Nesalomiv' can mean unbreakable, it's an uncommon and slightly awkward translation of 'Unbreakable' in this context. A more natural phrasing would use a synonym that better conveys the technical meaning of 'unbreakable' in the context of an encryption algorithm.",
-          "suggestion": "Neupucni AES-256 algoritam."
+          "type": "spelling",
+          "description": "The Serbian word 'Nesalomiv' is a compound word and should ideally have a hyphen between 'Ne' and 'salomiv' to improve readability.",
+          "suggestion": "Nesalomiv = Ne-salomiv"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Room type display",
   "content_en_sha1_hash": "165bb5ec5f6e4fb29f2448e73ad35a8267ef1fe0",
   "created_at": "2025-05-19T21:30:54.639Z",
-  "updated_at": "2025-06-03T20:59:42.128Z",
+  "updated_at": "2025-08-04T07:30:01.399Z",
   "comment": {
     "text": "The \"RoomTypeDisplay\" translation key is used to display the room type selection label in a dropdown menu. It appears in the Room Selector category of the developer tools page and provides context for translators to translate this text into different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 270,
+      "line_number": 275,
       "context": "</ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"AdvancedDisplay\")}</CategorySubHeader>\n \n <Label className=\"label\" text={t(\"RoomTypeDisplay\")} />\n <ComboBox\n onSelect={changeRoomType}\n options={roomTypeOptions}\n scaled\n selectedOption={roomType}",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Otaq növü görüntüsü\" doesn't fully capture the meaning of \"Room type display.\" \"Görüntüsü\" translates to \"view\" or \"image,\" which implies a visual representation, but \"display\" often refers to the way the room type is presented or categorized within a system or interface.",
-          "suggestion": "Consider alternatives like \"Otaq tiplərinin göstəricisi\" (Indicator of room types) or \"Otaq tiplərinin təqdimatı\" (Presentation of room types)."
+          "description": "The translation \"Otaq növü görüntüsü\" is not the most natural or accurate translation of \"Room type display.\" \"Görüntüsü\" implies an image or visual representation, whereas \"display\" suggests a presentation or indication of the room type.",
+          "suggestion": "Otaq növü göstərişi"
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"displejs\" is a valid word meaning 'display,' it's a somewhat technical term. A more natural and user-friendly translation for 'Room type display' in a general context would be something like 'Istabu tipu attēls' or 'Istabu veidu displejs'.",
+          "suggestion": "Istabu tipu attēls"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Отобразить тип комнаты' (Display room type) is too literal and implies an action. 'Room type display' refers to the visual representation of the room type, not the act of displaying it. A more appropriate translation would convey that visual aspect.",
-          "suggestion": "Вид типа комнаты"
+          "description": "The translation \"Отобразить тип комнаты\" literally translates to \"Display room type\". While not entirely wrong, it's not the most natural or idiomatic translation of \"Room type display\". It suggests an action rather than a description of a feature or element. A more accurate translation would describe the display itself, not the action of displaying it.",
+          "suggestion": "Возможные варианты: \"Отображение типа комнаты\", \"Тип комнаты: отображение\", \"Вид отображения типа комнаты\" - depending on the specific context and what 'Room type display' refers to. Further context is needed for the best translation."
         }
       ],
       "approved_at": null
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Тип приказа собе\" does not accurately translate \"Room type display.\" \"Приказа\" is related to 'display' but \"Тип собе\" is the more direct and accurate translation for 'Room type'.",
-          "suggestion": "Тип собе"
+          "description": "The Serbian (Cyrillic) translation \"Тип приказа собе\" does not accurately convey the meaning of \"Room type display\". \"Приказа\" is related to 'display' but 'типа' (type) should be more closely aligned. The word 'собе' (rooms) is also incorrect in this context. It seems to be interpreting 'display' as 'order/request'.",
+          "suggestion": "A more accurate translation would be something like \"Приказ типа собе\" or \"Тип просторије/амбијента\" depending on the specific context. \"Приказ типа просторије\" is a good starting point."
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tip prikaza sobe\" is not the most natural or accurate translation of \"Room type display.\" \"Tip\" often refers to a suggestion or hint, not a display type. A more appropriate translation would convey the idea of 'room type presentation' or 'display of room types'.",
-          "suggestion": "Prikaz tipova soba"
+          "description": "The translation 'Tip prikaza sobe' is not the most natural or accurate translation of 'Room type display'. While 'Tip' (tip) implies a display, 'prikaza' (of display) is clunky. A more idiomatic translation would consider phrasing like 'Izgled sobe' (Room appearance) or 'Vrsta sobe' (Room type).",
+          "suggestion": "Consider 'Izgled sobe' or 'Vrsta sobe'."
         }
       ],
       "approved_at": null

@@ -33,12 +33,7 @@ import { injectDefaultTheme } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 
 import { useTranslation } from "react-i18next";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { LinkTarget, LinkType } from "@docspace/shared/components/link";
-
-const InfoWrapper = styled.div`
-  margin-bottom: 25px;
-`;
+import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 const InfoText = styled(Text).attrs(injectDefaultTheme)`
   max-width: 660px;
@@ -53,7 +48,7 @@ const WebhookInfo = (props) => {
   const { webhooksGuideUrl, logoText } = props;
 
   return (
-    <InfoWrapper>
+    <div>
       <InfoText as="p">
         {t("WebhooksInfo", {
           productName: t("Common:ProductName"),
@@ -61,20 +56,21 @@ const WebhookInfo = (props) => {
         })}
       </InfoText>
       {webhooksGuideUrl ? (
-        <ColorTheme
+        <Link
           id="webhooks-info-link"
           tag="a"
-          themeId={ThemeId.Link}
           fontWeight={600}
           href={webhooksGuideUrl}
           target={LinkTarget.blank}
           type={LinkType.page}
           isHovered
+          color="accent"
+          dataTestId="webhooks_info_link"
         >
           {t("WebhooksGuide")}
-        </ColorTheme>
+        </Link>
       ) : null}
-    </InfoWrapper>
+    </div>
   );
 };
 

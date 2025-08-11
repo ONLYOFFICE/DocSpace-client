@@ -3,7 +3,7 @@
   "content": "{{organizationName}} SP Metadata",
   "content_en_sha1_hash": "e10f705fc5ab78e95d83d6b7504bfb479ac5118a",
   "created_at": "2025-05-19T21:30:50.167Z",
-  "updated_at": "2025-07-02T07:49:19.845Z",
+  "updated_at": "2025-08-04T07:30:01.506Z",
   "comment": {
     "text": "The translation key \"SpMetadata\" is used to display the metadata of an organization's Single Sign-On (SSO) setup. It appears in a button or dialog related to portal settings and provides context about the SSO configuration, such as whether it's available for paid badges.",
     "is_auto": true,
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'البيانات الوصفية {{organizationName}} SP' doesn't fully capture the meaning of '{{organizationName}} SP Metadata'.  'Metadata' isn't directly translated, which might confuse users. A more accurate translation would incorporate the concept of metadata.",
-          "suggestion": "البيانات الوصفية لـ {{organizationName}} SP"
+          "description": "The Arabic translation 'البيانات الوصفية {{organizationName}} SP' doesn't fully convey the meaning of '{{organizationName}} SP Metadata'. Specifically, it lacks the word 'Metadata'. A more accurate translation would include a term for 'Metadata' in Arabic.",
+          "suggestion": "البيانات الوصفية لـ {{organizationName}} SP (or البيانات الوصفية الخاصة بـ {{organizationName}} SP)"
         },
         {
           "type": "formatting",
-          "description": "The placement of '{{organizationName}}' is identical to the English. Consider if a different structure might read better in Arabic.",
-          "suggestion": "SP البيانات الوصفية لـ {{organizationName}}"
+          "description": "The variable {{organizationName}} is correctly placed, but the translation should consider how the full phrase integrates with the application's UI or document style. Sometimes variable placement can impact readability.",
+          "suggestion": "Consider the context where this phrase will be used to ensure the variable placement is optimal."
         }
       ],
       "approved_at": null
@@ -71,12 +71,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Metadata {{organizationName}} SP\" doesn't accurately reflect the English content \"{{organizationName}} SP Metadata\". The order of the elements is reversed, and 'SingleSignOn:' context is lost.",
+          "description": "The translation 'Metadata {{organizationName}} SP' doesn't accurately convey the meaning of '{{organizationName}} SP Metadata'. The word order is unusual and 'Metadata' is placed at the beginning instead of being part of the description.",
           "suggestion": "Metadata SP {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "The placement of {{organizationName}} is different from the original. It should ideally maintain the same position to avoid disruption to variable substitution.",
+          "description": "The placement of '{{organizationName}}' at the end of the translated string is different from the English original. Consider keeping the variable placement consistent for maintainability.",
           "suggestion": "Metadata SP {{organizationName}}"
         }
       ],
@@ -88,8 +88,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The German translation uses a hyphen to join 'SP' and 'Metadaten'. While not strictly incorrect, a space is often preferred in German for clarity and readability, especially when referring to technical terms. It might be more natural for a German speaker to see 'SP Metadaten'.",
-          "suggestion": "SP Metadaten"
+          "description": "The German translation lacks a space after the organization name.",
+          "suggestion": "{{organizationName}} - SP Metadaten"
         }
       ],
       "approved_at": null
@@ -100,13 +100,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'SP Metadata' is not accurately translated. 'Παρόχου υπηρεσιών' (service provider) is correct in context, but 'Μεταδεδομένα' is a direct translation of 'Metadata' and doesn't convey the full meaning as 'SP Metadata' refers to specific metadata related to a service provider's identity and configuration.",
-          "suggestion": "Consider a more descriptive translation like 'Μεταδεδομένα παρόχου υπηρεσιών' or 'Μεταδεδομένα για τον πάροχο υπηρεσιών'."
-        },
-        {
-          "type": "formatting",
-          "description": "The variable {{organizationName}} is correctly placed, indicating variable usage is maintained.",
-          "suggestion": "N/A"
+          "description": "The translation \"Μεταδεδομένα παρόχου υπηρεσιών {{organizationName}}\" is a literal translation of 'SP Metadata'. While technically correct, 'SP Metadata' often refers to information about the Service Provider (SP). A more natural and accurate translation might consider explicitly mentioning 'Service Provider' or using a term that implies it within the Greek context. \"Παρόχου Υπηρεσιών\" is correct, but the overall phrasing could be improved for clarity and common usage within IT/technical Greek.",
+          "suggestion": "Consider options like \"Μεταδεδομένα για τον Παρόχο Υπηρεσιών {{organizationName}}\" (Metadata for the Service Provider) or a phrasing that’s standard in the Greek IT sector for describing SP Metadata.  Further research into common Greek terminology would be beneficial."
         }
       ],
       "approved_at": null
@@ -117,8 +112,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Metadatos de {{organizationName}} SP' is technically correct but could be improved for clarity and naturalness in Spanish. 'SP' is an abbreviation that might not be universally understood. A more descriptive term would enhance readability.",
-          "suggestion": "Metadatos del Proveedor de Servicios {{organizationName}}"
+          "description": "The translation 'Metadatos de {{organizationName}} SP' is technically correct but lacks the 'SP Metadata' portion directly.  It translates 'SP Metadata' to 'SP', which is an abbreviation. Ideally, it should be more descriptive.",
+          "suggestion": "Metadatos SP de {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -135,13 +130,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'SP Metadata' is a technical term and should be translated more accurately. 'SP' stands for Service Provider. A more accurate translation would include this clarification.",
-          "suggestion": "Métadonnées de Fournisseur de Services {{organizationName}}"
+          "description": "The translation 'Métadonnées {{organizationName}} SP' is not entirely accurate. 'SP Metadata' refers to 'Service Provider Metadata'. A more accurate translation would be 'Métadonnées de fournisseur de services' or 'Métadonnées SP'. Using 'SP' alone might be unclear to a French speaker.",
+          "suggestion": "Métadonnées de fournisseur de services"
         },
         {
           "type": "formatting",
-          "description": "The space between 'Services' and the organizationName variable seems inconsistent with standard translation practices and can be improved",
-          "suggestion": "Métadonnées de Fournisseur de Services {{organizationName}}"
+          "description": "The variable {{organizationName}} is present in both the English and French versions. While technically correct for programmatic replacement, it's worth considering if the French translation could be more fluent without it. If the organization name is meant to be dynamically inserted, the current format is acceptable.",
+          "suggestion": "Consider removing if the organization name is known and can be incorporated directly into the translated text."
         }
       ],
       "approved_at": null
@@ -152,8 +147,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'Metadata' is best translated as 'Մետատեղեկություններ' in Armenian, not 'Մետատվյալներ'. While 'Մետատվյալներ' might be understandable, it's a less common and potentially less accurate rendering of 'Metadata'.",
-          "suggestion": "«{{organizationName}} SP Մետատեղեկություններ»"
+          "description": "The Armenian translation \"Մետատվյալներ\" is a direct transliteration of \"Metadata\" and doesn't convey the full meaning of \"SP Metadata.\"  \"SP\" refers to Service Provider, which isn't reflected in the Armenian.",
+          "suggestion": "Consider a more descriptive translation such as \"{{organizationName}} Ծառայություն մատուցողի մետատվյալներ\" ({{organizationName}} Service Provider Metadata) or a more contextual translation depending on the target audience and use case."
         }
       ],
       "approved_at": null
@@ -163,9 +158,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses 'SP' without explanation. While 'SP' is often understood in technical contexts, for broader audiences, a brief explanation might be beneficial. However, this is a minor issue, and the direct translation is acceptable.",
-          "suggestion": "Consider adding a brief explanation of 'SP' if the target audience is not familiar with the term (e.g., 'Metadati di {{organizationName}} SP (Service Provider)')"
+          "type": "incorrect_translation",
+          "description": "The translation 'Metadati di {{organizationName}} SP' is technically correct, but a more natural and common Italian phrasing would be 'Metadati SP di {{organizationName}}'. The preposition 'di' is placed differently in the more natural phrasing.",
+          "suggestion": "Metadati SP di {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -182,8 +177,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SP 메타메이터' for 'SP Metadata' is not entirely accurate. While '메타' (meta) is correct, '데이터' (data) would be a more accurate and natural translation for 'Metadata' in this context. '메타메이터' sounds somewhat awkward.",
-          "suggestion": "SP 메타데이터"
+          "description": "The Korean translation \"{{organizationName}} SP 메타메이터\" appears to be a transliteration and not a proper translation of \"{{organizationName}} SP Metadata\". \"Metadata\" should be translated to more accurately reflect its meaning. A more accurate translation might be something like \"{{organizationName}} SP 메타데이터\" or \"{{organizationName}} SP 메타 정보\".",
+          "suggestion": "{{organizationName}} SP 메타데이터"
         }
       ],
       "approved_at": null
@@ -212,8 +207,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Metadane usługodawcy {{organizationName}}' is a functional translation, but a more accurate and natural rendering of \"{{organizationName}} SP Metadata\" would be \"Metadane dostawcy usług {{organizationName}}\".  'Usługodawcy' implies a service provider offering a service, while 'dostawcy usług' is a broader term referring to a service provider.",
-          "suggestion": "Metadane dostawcy usług {{organizationName}}"
+          "description": "The translation 'Metadane usługodawcy {{organizationName}}' is not a precise translation of '{{organizationName}} SP Metadata'. 'SP Metadata' refers to Service Provider Metadata. A more accurate translation would include that context.",
+          "suggestion": "Metadane usługodawcy (Service Provider) {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -224,13 +219,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Metadados {{organizationName}} SP\" lacks the word 'SP Metadata'. It translates 'SP' but not 'Metadata'. A more accurate translation would include both.",
+          "description": "The translation \"Metadados {{organizationName}} SP\" doesn't accurately reflect the English \"{{organizationName}} SP Metadata\". The word order is incorrect and the English conveys 'SP Metadata of [Organization Name]', whereas the Portuguese translation implies '[Organization Name]' has SP Metadata. A more accurate translation would be 'Metadados SP {{organizationName}}' or 'Metadados de SP {{organizationName}}'.",
           "suggestion": "Metadados SP {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "The translated text is missing a space after 'Metadados'. While not a strict error, it improves readability.",
-          "suggestion": "Metadados SP {{organizationName}}"
+          "description": "The placement of 'SP' feels a bit awkward. Consider putting 'de SP' before '{{organizationName}}' to improve readability.",
+          "suggestion": "Metadados de SP {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -241,8 +236,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Metadados do {{organizationName}} SP' is not as natural as it could be. While technically correct, 'do' isn't the best preposition here. A more natural translation would be something like 'Metadados SP do {{organizationName}}' or 'Metadados SP para {{organizationName}}'.",
-          "suggestion": "Metadados SP para {{organizationName}}"
+          "description": "The translation 'Metadados do {{organizationName}} SP' while conveying the general idea, isn't the most natural or precise translation for '{{organizationName}} SP Metadata'. 'SP Metadata de {{organizationName}}' would be a more typical and fluent phrasing in Portuguese (Brazil). The 'do' construction is less common in this context.",
+          "suggestion": "Metadados SP de {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -253,13 +248,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Metadate furnizor de servicii {{organizationName}}\" doesn't accurately convey the meaning of \"{{organizationName}} SP Metadata\". \"SP Metadata\" refers to Service Provider Metadata, not provider services metadata.  The translation implies that {{organizationName}} *is* the service provider, which might not be the case. A more accurate translation would incorporate 'Service Provider' or 'Furnizor de servicii' in a way that clearly indicates it's metadata *of* the service provider.",
-          "suggestion": "Metadate Furnizor de Servicii {{organizationName}}"
+          "description": "The Romanian translation 'Metadate furnizor de servicii {{organizationName}}' doesn't accurately reflect the English '{{organizationName}} SP Metadata'. 'SP Metadata' implies Service Provider Metadata, which isn't directly conveyed. 'Furnizor de servicii' (Service Provider) is added without basis in the English.",
+          "suggestion": "Metadate {{organizationName}} furnizor de servicii"
         },
         {
           "type": "formatting",
-          "description": "The initial capitalization of \"Metadate\" is incorrect in Romanian.  It should be \"Metadatele\".",
-          "suggestion": "Metadatele furnizor de servicii {{organizationName}}"
+          "description": "The original English includes a double curly brace for variable substitution. The Romanian translation also includes a double curly brace, which may or may not be correct depending on the templating system.",
+          "suggestion": "Ensure double curly braces are correctly implemented in the Romanian templating system. If not required, remove them."
         }
       ],
       "approved_at": null
@@ -270,8 +265,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Метаданные поставщика сервиса {{organizationName}}' is a bit literal and could be improved for naturalness. 'Поставщика сервиса' (Service Provider) is not strictly necessary and can be simplified.",
-          "suggestion": "Метаданные {{organizationName}}"
+          "description": "The translation \"Метаданные поставщика сервиса {{organizationName}}\" is a bit too literal. 'SP Metadata' generally refers to the metadata provided *by* the service provider. A more natural translation would be something along the lines of \"Метаданные для поставщика сервиса {{organizationName}}\" or \"Метаданные сервиса {{organizationName}}\"",
+          "suggestion": "Метаданные сервиса {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -279,7 +274,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation is identical to the English content. It doesn't reflect a proper translation for \"{{organizationName}} SP Metadata\". It should be translated to accurately convey the meaning in Sinhala.",
+          "suggestion": "A proper Sinhala translation of \"{{organizationName}} SP Metadata\" is required. Consider translating 'SP Metadata' to describe what it represents in Sinhala. For example, a possible translation could be: \"{{organizationName}} අන්තර් ක්‍රියා පද්ධති දත්ත ({{organizationName}} Interakthiya Paththiya Datha)\""
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -288,13 +289,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Metadáta {{organizationName}} SP' doesn't accurately convey the meaning of '{{organizationName}} SP Metadata'. 'SP Metadata' implies metadata *for* a Service Provider, whereas the current translation implies metadata *about* the organization. The English title implies the organization is providing the SP metadata.",
-          "suggestion": "Metadáta poskytovateľa služieb {{organizationName}}"
+          "description": "The Slovak translation \"Metadáta {{organizationName}} SP\" doesn't accurately convey the meaning of \"{{organizationName}} SP Metadata\".  'SP Metadata' implies metadata *of* a Service Provider. The current translation lacks the possessive relationship.",
+          "suggestion": "Metadáta SP {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "The Slovak translation lacks proper capitalization. 'Metadáta' should be capitalized.",
-          "suggestion": "Metadáta poskytovateľa služieb {{organizationName}}"
+          "description": "The placement of {{organizationName}} in the Slovak translation is different from the English. While not necessarily incorrect, it affects consistency.",
+          "suggestion": "Consider matching the variable placement with the original: 'Metadáta {{organizationName}} SP'"
         }
       ],
       "approved_at": null
@@ -311,13 +312,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Метаподаци пружаоца услуга {{organizationName}}\" doesn't accurately convey \"{{organizationName}} SP Metadata\". \"SP Metadata\" refers to Service Provider Metadata.  \"Пружаоца услуга\" implies a 'service provider', but SP Metadata is more specific.",
-          "suggestion": "Метаподаци пружаоца (СП) {{organizationName}}"
+          "description": "The translation \"Метаподаци пружаоца услуга {{organizationName}}\" doesn't accurately convey the meaning of \"{{organizationName}} SP Metadata\". \"SP Metadata\" specifically refers to Service Provider Metadata, not just any metadata provided by a service provider.  'Пружаоца услуга' (service provider) is too general.",
+          "suggestion": "Метаподаци пружаоца услуга {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "While not a severe issue, adding \"(СП)\" in parentheses after \"Пружаоца\" improves clarity by explicitly indicating 'Service Provider'.",
-          "suggestion": "Метаподаци пружаоца (СП) {{organizationName}}"
+          "description": "The double curly braces around {{organizationName}} are present in the original, and should be maintained in the translation to ensure proper variable substitution.",
+          "suggestion": "No change needed, ensure double curly braces are present."
         }
       ],
       "approved_at": null
@@ -328,13 +329,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Metapodaci pružaoca usluga {{organizationName}}' doesn't accurately reflect the original English phrase '{{organizationName}} SP Metadata'. 'SP Metadata' refers to Service Provider Metadata, and the Serbian translation lacks the 'Service Provider' aspect. 'Pružalac usluga' (Service Provider) is added, but it's not explicitly 'metadata'.",
-          "suggestion": "Metapodaci pružaoca usluga {{organizationName}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation does not indicate that {{organizationName}} should be treated as a placeholder for an organization's name.",
-          "suggestion": "Metapodaci pružaoca usluga {{organizationName}}"
+          "description": "The translation \"Metapodaci pružaoca usluga {{organizationName}}\" does not accurately reflect the English \"{{organizationName}} SP Metadata\". 'SP Metadata' is not directly translated, and 'pružaoca usluga' (service provider) is not a direct equivalent of 'SP' in this context. The translation implies that it's the metadata *of* the service provider, not the metadata *for* the service provider.",
+          "suggestion": "A better translation would incorporate the concept of 'SP' or provide a more descriptive term for 'SP Metadata'.  Possible suggestions include: \"{{organizationName}} SP Metapodaci\" or \"{{organizationName}} Metapodaci za pružaoca usluga\"."
         }
       ],
       "approved_at": null
@@ -342,7 +338,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Meta Verileri' is a literal translation of 'Metadata', it's not the most natural or commonly used term in Turkish in this context. 'Meta Veri' (without the pluralization) would be more typical.",
+          "suggestion": "{{organizationName}} SP Meta Veri"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -351,8 +353,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Метадані постачальника сервісу {{organizationName}}\" is a literal translation but doesn't fully capture the meaning of 'SP Metadata'. 'SP Metadata' typically refers to Service Provider Metadata. A more accurate translation would be something like 'Метадані сервісного провайдера {{organizationName}}' or 'Метадані постачальника послуг {{organizationName}}'.",
-          "suggestion": "Метадані сервісного провайдера {{organizationName}}"
+          "description": "The translation \"Метадані постачальника сервісу {{organizationName}}\" is a literal translation but not the most natural or common way to express 'SP Metadata' in Ukrainian in this context. While technically correct, it's a bit verbose and less idiomatic. 'SP Metadata' is often used directly or abbreviated within the Ukrainian IT community.",
+          "suggestion": "Consider a more concise translation like \"Метадані SP {{organizationName}}\" or \"Метадані постачальника {{organizationName}}\" (removing 'сервісу'). The best option depends on the target audience's familiarity with English IT terminology."
         }
       ],
       "approved_at": null
@@ -363,13 +365,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Siêu dữ liệu' translates to 'Metadata'. While not incorrect, it's a bit literal and could be improved for better flow in Vietnamese. The English 'SP Metadata' is commonly shortened to 'SP Metadata' without needing to explicitly translate 'Metadata'.",
-          "suggestion": "Dữ liệu SP {{organizationName}}"
+          "description": "The translation \"Siêu dữ liệu {{organizationName}} SP\" is not entirely accurate. \"Siêu dữ liệu\" translates to \"Metadata\", but including it directly after \"Siêu\" is slightly awkward in Vietnamese. \"SP Metadata\" should be translated into a more natural phrasing, potentially using \"Thông tin SP\" or similar.",
+          "suggestion": "Thông tin SP {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "The placeholder {{organizationName}} is present in both the English and Vietnamese versions.  It's crucial this is preserved and handled correctly in the implementation.",
-          "suggestion": "Ensure the placeholder {{organizationName}} is handled correctly in the implementation."
+          "description": "The variable {{organizationName}} is not consistently formatted. While it is present in both the source and translation, ensuring consistent usage (e.g., always surrounded by spaces, consistent capitalization) would improve readability and maintainability.",
+          "suggestion": "Ensure consistent formatting of variables throughout the translation project."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Add allowed IP address",
   "content_en_sha1_hash": "af9c05a9deff4df886dbc45b353bc08a5f221460",
   "created_at": "2025-05-19T21:30:50.310Z",
-  "updated_at": "2025-05-21T05:26:51.120Z",
+  "updated_at": "2025-08-04T07:30:01.549Z",
   "comment": {
     "text": "\"This translation key is used for the 'Add Allowed IP address' label in the access portal settings, which appears as a button label.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 287,
+      "line_number": 291,
       "context": "{enable ? (\n <UserFields\n className=\"user-fields\"\n inputs={ips}\n buttonLabel={t(\"AddAllowedIP\")}\n onChangeInput={onChangeInput}\n onDeleteInput={onDeleteInput}\n onClickAdd={onClickAdd}\n regexp={regexp}\n classNameAdditional=\"add-allowed-ip-address\"",
       "module": "/packages/client"
     }
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Czech translation uses the plural form 'adresy' (IP addresses) while the English refers to a single IP address. The correct form should be singular.",
+          "description": "The Czech translation 'Přidat povolenou IP adresy' uses the plural form 'adresy' (IP addresses). The English 'Add allowed IP address' refers to a single IP address. The correct form should be singular.",
           "suggestion": "Přidat povolenou IP adresu"
         }
       ],
@@ -87,33 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Armenian word 'Ավելացնել' (Avelatsnel) is correctly spelled and means 'Add'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The Armenian word 'թույլատրված' (tuylatrvadz) is correctly spelled and means 'allowed'.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The Armenian word 'IP' is correctly used.",
-          "suggestion": null
-        },
-        {
-          "type": "spelling",
-          "description": "The Armenian word 'հասցե' (hasce) is correctly spelled and means 'address'.",
-          "suggestion": null
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, a more natural phrasing in Armenian might be 'Добавить разрешенный IP-адрес' or 'Ավելացնել IP հասցեի թույլտվություն' (Avelatsnel IP hasceei tuylt’vut'yun).  The current translation, while understandable, sounds slightly literal.",
-          "suggestion": "Consider using 'Ավելացնել IP հասցեի թույլտվություն' or a similar more idiomatic phrase."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -137,7 +111,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the Lao translation is understandable, a more natural translation of 'Add allowed IP address' would be something like 'ເພີ່ມທີ່ຢູ່ IP ທີ່ຮັບອະນຸຍາດ' or 'ເພີ່ມທີ່ຢູ່ IP ທີ່ສາມາດໃຊ້ໄດ້'. The current translation, while technically correct, sounds slightly awkward.",
+          "suggestion": "ເພີ່ມທີ່ຢູ່ IP ທີ່ຮັບອະນຸຍາດ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -146,13 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pievienot atļauto interneta protokola (IP) adresi' is overly literal and technical. 'Interneta protokola' is unnecessarily detailed. A more natural and user-friendly translation would avoid this technical jargon.",
+          "description": "The translation \"Pievienot atļauto interneta protokola (IP) adresi\" is overly literal and somewhat awkward in Latvian. While technically correct, it's not the most natural phrasing.",
           "suggestion": "Pievienot atļauto IP adresi"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the inclusion of the acronym '(IP)' after 'interneta protokola' disrupts the flow and reads awkwardly. Unless it's absolutely necessary for clarity within the specific UI context, it should be omitted.",
-          "suggestion": "Remove the acronym (IP)."
+          "description": "The inclusion of \"interneta protokola\" is redundant as IP is commonly understood. The abbreviation 'IP' is standard and removes unnecessary words.",
+          "suggestion": "Remove 'interneta protokola' and just use 'IP'."
         }
       ],
       "approved_at": null
@@ -199,13 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ඉඩදෙන අ.ජා.කෙ. (IP) ලිපින යොදන්න\" is not the most natural or clear way to say \"Add allowed IP address\" in Sinhala. The abbreviation අ.ජා.කෙ. (A.J.A.Ke.) is not commonly understood and feels overly technical for a settings menu. 'අ.ජා.කෙ.' stands for 'ඉන්ටර්නෙට් ප්‍රොටෝකොල්'.",
-          "suggestion": "Consider a more user-friendly translation like \"ඉඩ ලබාගත් IP ලිපිනය එක් කරන්න\" or \"අනුමැත IP ලිපිනය එක් කරන්න\"."
+          "description": "The translation \"ඉඩදෙන අ.ජා.කෙ. (IP) ලිපින යොදන්න\" is not the most natural or accurate translation of \"Add allowed IP address\".  'අ.ජා.කෙ.' is an abbreviation for 'අන්තර්ජාල ක්‍රෙඩන්షియල්' (Internet Credentials) which isn't directly related to an IP address.  A more accurate translation would emphasize the 'allowed' nature of the IP.",
+          "suggestion": "Consider using a translation like \"ඉඩකඩ ඇති IP ලිපිනය එක් කරන්න\" (Add IP address with access) or \"අනුමැත IP ලිපිනය එක් කරන්න\" (Add approved IP address)."
         },
         {
           "type": "formatting",
-          "description": "The use of abbreviation (අ.ජා.කෙ.) within the phrase might disrupt the readability for users who are not familiar with the full term.",
-          "suggestion": "Avoid abbreviations unless absolutely necessary for brevity and clarity. If the full term is crucial, consider providing a tooltip or explanation on a separate help screen."
+          "description": "While the use of parenthesis around 'IP' is not inherently incorrect, it's common to use parentheses less frequently in Sinhala compared to English.  It might read slightly awkward.",
+          "suggestion": "Consider removing the parentheses, such as \"ඉඩකඩ ඇති IP ලිපිනය එක් කරන්න\" or \"අනුමැත IP ලිපිනය එක් කරන්න\"."
         }
       ],
       "approved_at": null

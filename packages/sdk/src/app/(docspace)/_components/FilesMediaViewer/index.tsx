@@ -25,6 +25,7 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+
 "use client";
 
 import { observer } from "mobx-react";
@@ -42,7 +43,7 @@ type FilesMediaViewerProps = {
 };
 
 function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common"]);
   const {
     visible,
     mediaId,

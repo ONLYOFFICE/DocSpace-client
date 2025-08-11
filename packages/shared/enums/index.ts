@@ -58,7 +58,7 @@ export const enum EmployeeActivationStatus {
  * Enum for employee status.
  * @readonly
  */
-export const enum EmployeeStatus {
+export enum EmployeeStatus {
   Active = 1,
   Disabled = 2,
   Pending = 4, // NEW STATUS from server
@@ -67,7 +67,7 @@ export const enum EmployeeStatus {
  * Enum for employee type.
  * @readonly
  */
-export const enum EmployeeType {
+export enum EmployeeType {
   RoomAdmin = 1,
   Guest = 2,
   Admin = 3,
@@ -78,7 +78,7 @@ export const enum EmployeeType {
  * Enum for user payments type.
  * @readonly
  */
-export const enum PaymentsType {
+export enum PaymentsType {
   Paid = "0",
   Free = "1",
 }
@@ -86,7 +86,7 @@ export const enum PaymentsType {
  * Enum for account login type.
  * @readonly
  */
-export const enum AccountLoginType {
+export enum AccountLoginType {
   SSO = "0",
   LDAP = "1",
   STANDART = "2",
@@ -95,7 +95,7 @@ export const enum AccountLoginType {
  * Enum for files selector filter.
  * @readonly
  */
-export const enum ApplyFilterOption {
+export enum ApplyFilterOption {
   All = "All",
   Files = "Files",
   Folder = "Folder",
@@ -126,7 +126,7 @@ export const enum FilterSubject {
  * Enum for filter type.
  * @readonly
  */
-export const enum FilterType {
+export enum FilterType {
   None = 0,
   FilesOnly = 1,
   FoldersOnly = 2,
@@ -802,4 +802,23 @@ export enum WebhookTriggers {
 export enum RoomSecurityError {
   None,
   FormRoleBlockingDeletion,
+}
+
+export enum BackupStorageLocalKey {
+  StorageType = "LocalCopyStorageType",
+  Folder = "LocalCopyFolder",
+  Storage = "LocalCopyStorage",
+  ThirdPartyStorageType = "LocalCopyThirdPartyStorageType",
+  ThirdPartyStorageValues = "LocalCopyThirdPartyStorageValues",
+}
+
+export enum ProvidersType {
+  Box = "Box",
+  DropBox = "DropBox",
+  GoogleDrive = "Google Drive",
+  kDrive = "kDrive",
+  OneDrive = "OneDrive",
+  SharePoint = "SharePoint",
+  WebDav = "WebDav",
+  Yandex = "Yandex",
 }

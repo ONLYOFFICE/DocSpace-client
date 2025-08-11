@@ -231,7 +231,7 @@ const BruteForceProtection = (props) => {
         getBruteForceProtection();
         setShowReminder(false);
         setIsLoadingSave(false);
-        toastr.success(t("SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       })
       .catch((error) => {
         toastr.error(error);
@@ -257,6 +257,7 @@ const BruteForceProtection = (props) => {
         {bruteForceProtectionUrl ? (
           <Link
             className="link"
+            dataTestId="brute_force_protection_learn_more"
             fontSize="13px"
             target="_blank"
             isHovered
@@ -279,6 +280,7 @@ const BruteForceProtection = (props) => {
       >
         <TextInput
           className="brute-force-protection-input"
+          testId="brute_force_protection_number_attempts_input"
           tabIndex={1}
           value={currentNumberAttempt}
           onChange={onChangeNumberAttempt}
@@ -299,6 +301,7 @@ const BruteForceProtection = (props) => {
       >
         <TextInput
           className="brute-force-protection-input"
+          testId="brute_force_protection_blocking_time_input"
           tabIndex={2}
           value={currentBlockingTime}
           onChange={onChangeBlockingTime}
@@ -319,6 +322,7 @@ const BruteForceProtection = (props) => {
       >
         <TextInput
           className="brute-force-protection-input"
+          testId="brute_force_protection_check_period_input"
           tabIndex={3}
           value={currentCheckPeriod}
           onChange={onChangeCheckPeriod}
@@ -341,6 +345,8 @@ const BruteForceProtection = (props) => {
         additionalClassCancelButton="brute-force-protection-cancel"
         isSaving={isLoadingSave}
         disableRestoreToDefault={isDefault}
+        saveButtonDataTestId="brute_force_protection_save_button"
+        cancelButtonDataTestId="brute_force_protection_cancel_button"
       />
     </StyledBruteForceProtection>
   );

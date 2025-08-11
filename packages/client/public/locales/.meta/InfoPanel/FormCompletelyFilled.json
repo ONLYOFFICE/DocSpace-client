@@ -3,7 +3,7 @@
   "content": "Completely filled out form.",
   "content_en_sha1_hash": "1df38c0718eb781ad67511545662d74e79ce3888",
   "created_at": "2025-05-19T21:30:54.860Z",
-  "updated_at": "2025-05-28T09:30:02.442Z",
+  "updated_at": "2025-08-04T07:30:01.249Z",
   "comment": {
     "text": "The translation key \"FormCompletelyFilled\" is used to display the text \"Completely filled out form.\" in UI elements. This text is likely displayed when a form is successfully submitted or validated, indicating that all required fields have been completed.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 343,
+      "context": "case FeedActionKeys.FormPartiallyFilled:\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case FeedActionKeys.FormCompletelyFilled:\n return t(\"InfoPanel:FormCompletelyFilled\");\n \n case FeedActionKeys.FormStopped:\n return t(\"InfoPanel:FormStopped\");\n \n default:",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 308,
-      "context": "case \"FormPartiallyFilled\":\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case \"FormCompletelyFilled\":\n return t(\"InfoPanel:FormCompletelyFilled\");\n \n case \"FormStopped\":\n return t(\"InfoPanel:FormStopped\");\n \n default:",
+      "line_number": 321,
+      "context": "case FeedActionKeys.FormPartiallyFilled:\n return t(\"InfoPanel:FormPartiallyFilled\");\n \n case FeedActionKeys.FormCompletelyFilled:\n return t(\"InfoPanel:FormCompletelyFilled\");\n \n case FeedActionKeys.FormStopped:\n return t(\"InfoPanel:FormStopped\");\n \n default:",
       "module": "/packages/client"
     }
   ],
@@ -27,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'نموذج مكتمل بالكامل' is understandable, it's a very literal translation. A more natural and common phrasing for 'Completely filled out form' in Saudi Arabian Arabic would be something like 'النموذج مملوء بالكامل' or 'تم ملء النموذج بالكامل'. The current translation sounds slightly formal and stiff.",
-          "suggestion": "النموذج مملوء بالكامل"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Modulo compilato completamente' is a literal translation and not the most natural way to express 'Completely filled out form' in Italian. While technically correct, it sounds somewhat awkward.",
-          "suggestion": "Consider alternatives like 'Modulo compilato interamente' or 'Modulo compilato per intero'. A simpler and more common phrasing might be 'Modulo completamente compilato'."
+          "description": "The translation 'Modulo compilato completamente' is a literal translation of 'Completely filled out form' but sounds unnatural in Italian. A more idiomatic translation would be 'Modulo completamente compilato' or 'Formulario compilato per intero'.",
+          "suggestion": "Modulo completamente compilato"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Formularul este completat în întregime' is a bit formal and verbose for a user interface label. A more natural and concise translation would be better.",
+          "description": "While technically correct, the translation 'Formularul este completat în întregime' is a bit formal and verbose for a UI element. A more natural and concise translation would be better.",
           "suggestion": "Formular completat."
         }
       ],
@@ -174,13 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පූර්ණ වශයෙන්' (pūrṇavasena) is a somewhat formal way of saying 'completely'. While grammatically correct, a more natural and common phrasing might be preferred for a form-related context. It could be perceived as slightly stiff.",
-          "suggestion": "පූර්ණයෙන්ම පිරවුණු ආකෘතිය (pūrṇayama pīravuṇu ākṛtiya)"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'පූර්ණ වශයෙන් පිරවුණු ආකෘතිය' is a literal translation, it's not the most natural phrasing in Sinhala. The English 'Completely filled out form' implies the form is entirely completed.",
-          "suggestion": "පහසුවෙන්ම පිරවුණු ආකෘතිය (pahusuvamen pīravuṇu ākṛtiya) - meaning 'Easily filled form' as a more idiomatic translation depending on the desired nuance."
+          "description": "The word 'පූර්ණ වශයෙන්' (pūrṇavasena) can be slightly cumbersome and might be better simplified. While not strictly incorrect, it sounds overly formal in this context.",
+          "suggestion": "පූර්ණයෙන්ම පිරවුණු ආකෘතිය (pūrṇayama piraunuu aakruthinya) - 'completely filled form'."
         }
       ],
       "approved_at": null
@@ -209,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Potpuno popunjen formular\" sounds slightly awkward. A more natural and idiomatic translation would be \"U potpunosti popunjen formular\" or \"Kompletno popunjen formular\".",
-          "suggestion": "U potpunosti popunjen formular"
+          "description": "The translation 'Potpuno popunjen formular' is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be something like 'Kompletno popunjen formular' or 'Целовитe попълнети формулар'.",
+          "suggestion": "Kompletno popunjen formular"
         }
       ],
       "approved_at": null
@@ -233,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Biểu mẫy' should be 'Biểu mẫu'. 'Mẫy' is a misspelling of 'mẫu'.",
+          "description": "The word 'Biểu mẫy' should be 'Biểu mẫu'. It's a common misspelling.",
           "suggestion": "Biểu mẫu"
         }
       ],
@@ -245,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '已全部填写表单' is overly literal and slightly awkward. While technically correct, it's not the most natural way to express 'Completely filled out form' in Chinese. It emphasizes 'completely' too much.",
-          "suggestion": "已完整填写表单。 or 表单已完整填写。"
+          "description": "The translation '已全部填写表单' is overly verbose and not the most natural way to express 'Completely filled out form'. While technically correct, it sounds stiff.",
+          "suggestion": "Consider a more concise translation such as '完整填写表单' or '表单已完整填写'."
         }
       ],
       "approved_at": null

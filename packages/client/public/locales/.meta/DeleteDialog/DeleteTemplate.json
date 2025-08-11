@@ -3,7 +3,7 @@
   "content": "Do you really want to delete template room <1>«{{templateName}}»</1>? The template cannot be restored.",
   "content_en_sha1_hash": "42cc6f2e7810dd946fb00d679c28bdc48a545120",
   "created_at": "2025-05-19T21:30:56.711Z",
-  "updated_at": "2025-06-18T07:34:14.877Z",
+  "updated_at": "2025-08-04T07:30:01.095Z",
   "comment": {
     "text": "This translation key is used to display a warning message when deleting a template room. It prompts the user to confirm their action and informs them that the template cannot be restored. The translation appears in a delete confirmation dialog.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 176,
+      "line_number": 180,
       "context": "const isThirdParty = selection[0]?.providerKey;\n \n if (isTemplate) {\n return isSingle ? (\n <Trans\n i18nKey=\"DeleteTemplate\"\n ns=\"DeleteDialog\"\n t={t}\n values={{ templateName: selection[0].title }}\n components={{ 1: <Text fontWeight={600} as=\"span\" /> }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2213,
+      "line_number": 2227,
       "context": "id: \"option_delete\",\n key: \"delete\",\n label: isRootThirdPartyFolder\n ? t(\"Common:Disconnect\")\n : item.isTemplate\n ? t(\"DeleteTemplate\")\n : t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },",
       "module": "/packages/client"
     }
@@ -33,19 +33,52 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'هل أنتم متأكدون من رغبتكم في حذف' is a bit formal and indirect. A more natural and conversational translation would be something like 'هل تريد حذف' (Do you want to delete).",
+          "suggestion": "هل تريد حذف"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic translation retains the English angle brackets <1> and </1>. While understandable, it's better to use Arabic equivalents or remove them for better readability and localization.",
+          "suggestion": "Remove the angle brackets or replace with Arabic equivalents depending on the overall UI/UX design. Example: <1> or <رقم1>"
+        },
+        {
+          "type": "spelling",
+          "description": "Although not strictly a misspelling, 'قالب الغرفة' could be simplified to 'غرفة' (room) in many contexts to avoid redundancy. However, keeping 'قالب الغرفة' maintains the emphasis on the template.",
+          "suggestion": "غرفة"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1>«{{templateName}}»</1> are not properly closed in the Azerbaijani translation.  It appears a closing bracket is missing.",
+          "suggestion": "<1>«{{templateName}}»</1>"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"otağını silmək\" translates more literally to 'to delete the room'. While understandable, a more natural phrasing would be something like 'silmək' or 'pozmaq' without explicitly mentioning the room. However, given the context of template rooms, keeping 'otağını' might be acceptable.",
+          "suggestion": "Şablonu silmək istədiyinizdən əminsiz?"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are not properly closed in the Bulgarian translation.",
+          "suggestion": "Ensure the angle brackets are correctly closed: `Наистина ли искате да изтриете шаблонна стая <1>{{templateName}}</1>? Шаблонът не може да бъде възстановен.`"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -57,13 +90,30 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are not correctly rendered and do not follow the English source. They should match the original structure.",
+          "suggestion": "Ensure angle brackets are consistent: `<1>` and `</1>`"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The double quotes around the template name within the Greek translation are incorrect. They should match the English double quotes.",
+          "suggestion": "Replace the double quotes around `{{templateName}}` with standard double quotes: “{{templateName}}”"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Δεν θα μπορεί να γίνει επαναφορά προτύπου.\" is a literal translation and sounds unnatural in Greek. A more natural phrasing would be something like \"Δεν είναι δυνατή η επαναφορά του προτύπου.\" or \"Δεν μπορεί να επαναφερθεί το πρότυπο.\" ",
+          "suggestion": "Replace \"Δεν θα μπορεί να γίνει επαναφορά προτύπου.\" with \"Δεν είναι δυνατή η επαναφορά του προτύπου.\" or \"Δεν μπορεί να επαναφερθεί το πρότυπο.\""
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,13 +131,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'modèle' can be used for template, but in the context of a 'room template', a more precise term like 'modèle de pièce' or 'plan de salle' might be more accurate. 'Modèle de salle' is preferred here for clarity.",
+          "suggestion": "Voulez-vous vraiment supprimer le modèle de pièce <1>«{{templateName}}»</1> ? Le modèle ne peut pas être restauré."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"աղապար\" (aghapar) is an archaic term for a type of shelter or building and isn't appropriate for describing a 'template room'. A more suitable word would be something like \"մոդելային սենյակ\" (modelayin senyak) meaning 'model room' or \"օրինակի սենյակ\" (orinakayin senyak) meaning 'example room'.",
+          "suggestion": "Replace \"աղապար\" with \"մոդելային սենյակ\" or \"օրինակի սենյակ\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,19 +161,47 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are not properly closed in the Japanese translation. They are missing the closing bracket at the end of the template name.",
+          "suggestion": "本当にテンプレートルーム<1>«{{templateName}}»</1>を削除しますか？テンプレートは復元できません。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Do you really want to delete' is better translated as something more natural in Korean. '정말로' is correct for 'really', but the overall sentence structure feels slightly awkward.",
+          "suggestion": "정말로 룸 템플릿 «{{templateName}}» <1>을 삭제하시겠습니까? 템플릿을 삭제하면 복원할 수 없습니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the bracket tags `<1>` and `</1>` does not align perfectly with the English. While technically correct, the phrasing could be improved for readability.",
+          "suggestion": "룸 템플릿 «{{templateName}}» <1>을 삭제하시겠습니까? 템플릿을 삭제하면 복원할 수 없습니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets `<1>` and `</1>` are not correctly rendered in the Lao translation. They appear literally.",
+          "suggestion": "Ensure the angle brackets `<1>` and `</1>` are correctly displayed or replaced with appropriate Lao equivalent if necessary, based on the platform's rendering capabilities."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While generally accurate, the phrase 'ຢ່າງແທ້จริงບໍ?' (yang thae jing bor?) can sound a bit formal in this context. A more natural phrasing for confirming deletion might be better.",
+          "suggestion": "Consider using a more conversational Lao phrasing for confirmation, such as 'ຕ້ອງການລົບຈິງບໍ?' (thang kan lob jing bor?)"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +213,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The quotation marks around \"{{templateName}}\" are incorrect. In Dutch, double quotes should be used.",
+          "suggestion": "Wilt u sjabloon kamer <1>\"{{templateName}}\"</1> echt verwijderen? Het sjabloon kan niet hersteld worden."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -135,7 +231,23 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'template room' is not accurately translated. 'Sala de modelos' is closer to 'model room' which isn't quite the same. 'Template room' implies a room used as a template, which is likely what's intended.",
+          "suggestion": "Consider 'Sala de modelo' or 'Sala de templates' depending on the precise meaning and context.  'Sala de modelos' might be acceptable if it's commonly understood to mean 'template room' in this specific context."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The template cannot be restored' is not accurately translated. 'Não pode restaurar os templates' is too literal. A more natural phrasing would emphasize the irreversibility of the action.",
+          "suggestion": "Consider 'Não é possível recuperar o modelo.' or 'O modelo não pode ser recuperado.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The quotes around `{{templateName}}` are inconsistent with English. English uses double quotes, Portuguese can use single or double.",
+          "suggestion": "If consistency with the original is desired, change `“{{templateName}}”` to `“{{templateName}}”`."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,7 +259,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are not correctly closed in the Romanian translation. They should be `<1>` and `</1>` respectively to match the English format.",
+          "suggestion": "Ensure the tags are correctly formatted as `<1>` and `</1>`."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +283,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The quotation marks around \"{{templateName}}\" are incorrect. Slovak uses double angle brackets « » for placeholders within quotes, not double quotes.",
+          "suggestion": "Naozaj chcete odstrániť šablónu miestnosti <1>«{{templateName}}»</1>? Šablónu nebude možné obnoviť."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -177,19 +301,47 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'zaista' (really) is redundant and makes the sentence sound unnatural. 'Da li želite' is sufficient to convey the question.",
+          "suggestion": "Да ли желите да обришете шаблон собе <1>«{{templateName}}»</1>? Шаблон се не може вратити."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sobe' (room) is awkwardly placed.  A more natural phrasing would involve the genitive case.",
+          "suggestion": "Да ли желите да обришете шаблон за собу <1>«{{templateName}}»</1>? Шаблон се не може вратити."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sobe' (room) is used. While technically correct, 'prostoria' (space/room) might be a more natural and common choice in this context, especially when referring to a template.",
+          "suggestion": "Da li zaista želite da obrišete šablon prostora <1>«{{templateName}}»</1>? Šablon se ne može vratiti."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The `<1>` and `</1>` tags are misplaced and inconsistent with the English original. They should enclose the entire template room name, not just the start tag.",
+          "suggestion": "<1>«{{templateName}}»</1> should be changed to `<1>«{{templateName}}»</1> to match the English original's placement."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'şablon odayı silmek istediğinize emin misiniz?' is a literal translation of 'Do you really want to delete template room...' However, a more natural and fluent Turkish phrasing would be '...şablonu silmek istediğinizden emin misiniz?'",
+          "suggestion": "Replace 'şablon odayı silmek istediğinize emin misiniz?' with '...şablonu silmek istediğinizden emin misiniz?'"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,13 +353,35 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"template room\" is somewhat awkwardly translated as \"phòng mẫu\". While technically correct, it might be more natural to say something like \"mẫu phòng\" or just \"mẫu\" depending on the context. The nuance of 'room' isn't always necessary.",
+          "suggestion": "Consider \"Bạn có thực sự muốn xóa mẫu <1>«{{templateName}}»</1> không? Không thể khôi phục mẫu.\""
+        },
+        {
+          "type": "formatting",
+          "description": "The English uses `<1>` and `</1>` around a specific part of the message to indicate a variable.  This is replicated exactly in the Vietnamese translation. While functionally consistent, it's worth considering if the same formatting is standard in Vietnamese UI design. A more context-aware format might be more appropriate.",
+          "suggestion": "Evaluate if using `<1>` and `</1>` is common practice in Vietnamese UI development; otherwise, consider a more localized formatting style."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Do you really want to...' is best translated as a more emphatic phrasing in Chinese. While '您确定要...' is acceptable, it lacks the 'really' emphasis.",
+          "suggestion": "您真的要删除模板房间<1>«{{templateName}}»</1>吗？"
+        },
+        {
+          "type": "formatting",
+          "description": "The English version uses angle brackets `<1>` and `</1>` around the placeholder. This should be consistently applied to the Chinese translation.",
+          "suggestion": "No change needed, the formatting appears consistent."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "The process of data reassignment from user <0>{{fromUser}}</0> to user <1>{{toUser}}</1> <2>{{you}}</2> has started. Please note that it may take a considerable time.",
   "content_en_sha1_hash": "ca58b699fcc803526fdd659431542a2f947a0e32",
   "created_at": "2025-05-19T21:30:56.757Z",
-  "updated_at": "2025-05-20T09:38:14.753Z",
+  "updated_at": "2025-05-24T13:33:47.522Z",
   "comment": {
     "text": "This translation key is used for a notification that announces the start of data reassignment from one user to another. It appears in a progress bar or similar indicator within a dialog or UI element, informing users about the process and potential time required.",
     "is_auto": true,
@@ -33,19 +33,47 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <0>{{fromUser}}</0>, <1>{{toUser}}</1>, and <2>{{you}}</2> are inconsistent with the English source. The English source uses `<0>{{fromUser}}</0>`, `<1>{{toUser}}</1>`, `<2>{{you}}</2>`. The Azerbaijani translation uses `<0>{{fromUser}}</0>`, `<1>{{toUser}}</1>`, `<2>{{you}}</2>`, which are also incorrect.",
+          "suggestion": "Correct the tags to match the English source: `<0>{{fromUser}}</0>`, `<1>{{toUser}}</1>`, `<2>{{you}}</2>`."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'verilənlərin' should be 'verilənlər'",
+          "suggestion": "Change 'verilənlərin' to 'verilənlər'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The closing tag for 'toUser' is incorrect. It should be </1> instead of </1>",
+          "suggestion": "Change </1> to </1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The closing tag for 'you' is incorrect. It should be </2> instead of </2>",
+          "suggestion": "Change </2> to </2>"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The closing angle bracket for the second user `<1>{{{toUser}}</1>` appears to be incorrect. It should be `<1>{{{toUser}}</1>.",
+          "suggestion": "<1>{{{toUser}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +85,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The user tags <1>{{toUser}}</1> are incorrectly formatted. They should be <1>{{toUser}}</0> to match the surrounding tags.",
+          "suggestion": "Change </1> to </0>."
+        },
+        {
+          "type": "formatting",
+          "description": "The user tags <2>{{you}}</2> are incorrectly formatted. They should be <2>{{you}}</0> to match the surrounding tags.",
+          "suggestion": "Change </2> to </0>."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +108,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Toimintojen siirtotoiminto' is a literal translation of 'process of data reassignment' and is not idiomatic Finnish. A more natural translation would be something like 'Tietojen siirto'.",
+          "suggestion": "Tietojen siirto"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets are inconsistent. The second bracket should also be >.  <1>{{toUser}}</1> should be <1>{{toUser}}</1>",
+          "suggestion": "<1>{{toUser}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,37 +131,83 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The user tags <0>, <1>, and <2> are not consistently formatted.  <0> and <1> use the correct opening tag, but <2> uses a different structure.",
+          "suggestion": "Ensure all user tags consistently use the same opening tag structure: `<2>{{you}}</2>'"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Օգտագործողի կողմից' is a bit clunky and might be unnecessarily formal.  It literally translates to 'By the user'.",
+          "suggestion": "Consider rewording to a more natural phrasing, such as 'Տվյալների վերաբաշխումը սկսվեց օգտագործողների միջև: <0>{{fromUser}}</0> և <1>{{toUser}}</1> <2>{{you}}</2>.'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets in the Italian translation are inconsistent with the English. <1>{{toUser}}</1> should be <1>{{toUser}}</1>.",
+          "suggestion": "Correct the closing angle bracket to use </1>."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation incorrectly uses '<1>{{toUser}}</1> <2>{{you}}</2>'. The closing tags are incorrect. They should be '<1>{{toUser}}</1> <2>{{you}}</2>.",
+          "suggestion": "Change '<1>{{toUser}}</1> <2>{{you}}</2>' to '<1>{{toUser}}</1> <2>{{you}}</2>'"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation includes user tags `<1>{{toUser}}</1> <2>{{you}}</2>` which are incorrectly formatted. The closing tags should be `</1>` not `<2>{{you}}</2>`. This is inconsistent with the opening tag `<0>{{fromUser}}</0>`. The latter uses only a single closing tag.",
+          "suggestion": "Correct the closing tags for <1> and <2> to match the format of <0>:  `<1>{{toUser}}</1> <2>{{you}}</2>` should become `<1>{{toUser}}</1> <2>{{you}}</2>."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ຄືນໃໝ່\" (kuen mai) literally translates to \"newly returned\" which is awkward in this context. It implies the data was previously assigned and then returned. The intention is to simply reassign the data, not re-return it. The correct phrasing should focus on the act of assigning or transferring.",
+          "suggestion": "ຂັ້ນຕອນການມອບໝາຍຂໍ້ມູນຈາກຜູ້ໃຊ້ <0>{{fromUser}}</0> ຫາຜູ້ໃຊ້ <1>{{toUser}}</1> <2>{{you}}</2> ໄດ້ເລີ່ມຂຶ້ນແລ້ວ."
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets in the Lao translation ( <0>, <1>, <2> ) appear to be directly replicated from the English source. While technically correct, it’s standard practice to maintain consistency with the target language’s conventions. Consider if brackets are needed at all or if a different formatting style would be preferable.",
+          "suggestion": "Remove the angle brackets if they serve no purpose or adapt them to a Lao convention, e.g. using parentheses or a different marker.  If keeping the angle brackets, ensure consistency across all similar content in the application."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The user tags <1>{{toUser}}</1> have incorrect closing tags. It should be <1>{{toUser}}</2>.",
+          "suggestion": "Change </1> to </2>."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -135,37 +231,98 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The user tags <1>{{toUser}}</1> have incorrect closing brackets. They should be <1>{{toUser}}</2>.",
+          "suggestion": "<1>{{toUser}}</2>"
+        },
+        {
+          "type": "formatting",
+          "description": "The user tags <2>{{you}}</2> have incorrect closing brackets. They should be <2>{{you}}</2>.",
+          "suggestion": "<2>{{you}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The user tags <1>{{toUser}}</1> have an incorrect closing tag. It should be <1>{{toUser}}</1>",
+          "suggestion": "<1>{{toUser}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The user tag <2>{{you}}</2> has an incorrect closing tag. It should be <2>{{you}}</2>",
+          "suggestion": "<2>{{you}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The closing tag for 'toUser' is incorrect. It should be </1>{{toUser}}</1>.",
+          "suggestion": "Change </1>{{toUser}}</1> to </1>{{toUser}}</1>"
+        },
+        {
+          "type": "formatting",
+          "description": "The closing tag for 'you' is incorrect. It should be </2>{{you}}</2>.",
+          "suggestion": "Change </2>{{you}}</2> to </2>{{you}}</2>"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"data reassignment\" is awkwardly translated as \"දත්ත යළි පැවරීමේ\". A more natural and commonly used translation would be \"දත්ත නැවත බෙදා හැදීම\" or \"දත්ත යථා තැනට පැවරීම\".",
+          "suggestion": "Replace \"දත්ත යළි පැවරීමේ\" with \"දත්ත නැවත බෙදා හැදීම\" or \"දත්ත යථා තැනට පැවරීම\"."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better readability. The phrasing \"<1>{{toUser}}</1> <2>{{you}}</2> වෙත\" feels slightly unnatural.",
+          "suggestion": "Consider restructuring to \"<1>{{toUser}}</1> වෙත <2>{{you}}</2> ට\" or similar for a more fluid feel."
+        },
+        {
+          "type": "formatting",
+          "description": "The tags <0>, <1>, and <2> are inconsistently applied. While <0> is correctly closed with </0>, <1> is closed with </1> and <2> with </2>. This inconsistency should be corrected.",
+          "suggestion": "Ensure consistent closing of tags, e.g., </0>, </1>, </2> throughout the translation."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <2>{{you}}</2> are redundant and not necessary in the Slovak translation.  The original English has a number in the tag, but the surrounding text clearly implies 'you'.",
+          "suggestion": "Remove the <2>{{you}}</2> tag and just include the pronoun 'ty' (if appropriate and grammatically correct in context) or remove it entirely."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>{{toUser}}</1>` is incorrectly closed with `</1>` instead of `</1>`. This appears to be a typo.",
+          "suggestion": "Change `</1>` to `</1>`"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -177,31 +334,81 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"DataReassignmentDialog:ReassigningDataToItself\" suggests this refers to an error scenario where data is reassigned to the same user. The Serbian translation 'Proces ponovne dodele podataka' (Process of re-assignment of data) doesn't convey this specific context. It implies a standard reassignment, not a problematic one.",
+          "suggestion": "Consider a translation that reflects the error context. For example: 'Došlo je do problema kod ponovne dodele podataka korisnika...' (There was a problem with the re-assignment of data...)"
+        },
+        {
+          "type": "formatting",
+          "description": "The angle brackets <0>, <1>, <2> are inconsistently applied. The last tag <2>{{you}}</2> has a different closing bracket than the others.",
+          "suggestion": "Ensure consistent formatting for all angle brackets. For example: <0>{{fromUser}}</0> <1>{{toUser}}</1> <2>{{you}}</2>"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence \"Proces ponovne dodele podataka korisnika <0>{{fromUser}}</0> korisniku <1>{{toUser}}</1> <2>{{you}}</2> je započeo\" could be slightly more fluent. While grammatically correct, it could be improved.",
+          "suggestion": "Consider rephrasing to something like \"Proces ponovne dodele podataka korisnika <0>{{fromUser}}</0> korisniku <1>{{toUser}}</1> <2>{{you}}</2> je u toku\" (The re-assignment process...is underway)."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '<2>{{you}}</2> kullanıcısına' implies the data is being reassigned *to* you. The English implies you are performing the reassignment, not receiving the data.",
+          "suggestion": "Consider revising to something like: '<2>{{you}}</2> tarafından <1>{{toUser}}</1> kullanıcısına veri yeniden atanıyor.'"
+        },
+        {
+          "type": "formatting",
+          "description": "The markup around 'you' is inconsistent. English uses <0>, <1>, <2>, while Turkish seems to follow this but the usage is awkward due to the incorrect translation already identified.",
+          "suggestion": "Review and potentially remove or adjust the markup to align with the corrected translation."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1>{{toUser}}</1> are incorrect. The closing tag should be </1> not </1>.",
+          "suggestion": "Change </1> to </1>."
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <2>{{you}}</2> are incorrect. The closing tag should be </2> not </2>.",
+          "suggestion": "Change </2> to </2>."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"chuyển giao lại dữ liệu\" (transfer data again) is redundant. It's sufficient to say \"chuyển giao dữ liệu\" (transfer data).",
+          "suggestion": "Quá trình chuyển giao dữ liệu từ người dùng <0>{{fromUser}}</0> sang người dùng <1>{{toUser}}</1> <2>{{you}}</2> đã bắt đầu. Xin lưu ý rằng có thể mất một thời gian đáng kể."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Chinese translation uses angle brackets `<>` which are not standard for marking placeholders in Chinese. They are more common in English.",
+          "suggestion": "Consider using a more common placeholder notation like `{{fromUser}}` directly within the translated text or using a more standard Chinese markup method."
+        }
+      ],
       "approved_at": null
     }
   }

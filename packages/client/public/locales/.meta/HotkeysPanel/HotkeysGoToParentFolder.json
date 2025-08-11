@@ -3,7 +3,7 @@
   "content": "Jump to the folder one level up",
   "content_en_sha1_hash": "caec3a026dc328f760a167fcc4a3c86ea9d2809b",
   "created_at": "2025-05-19T21:30:55.056Z",
-  "updated_at": "2025-05-21T10:31:14.127Z",
+  "updated_at": "2025-05-24T10:41:09.005Z",
   "comment": {
     "text": "This translation key is used to display a label that suggests jumping to the parent folder when pressed. It appears on a hotkeys panel and is used in conjunction with a backspace key action.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'القفز الى المجلد الاعلى' literally translates to 'Jump to the folder above'. While understandable, a more natural and accurate translation of 'Jump to the folder one level up' would be something like 'الانتقال إلى المجلد الأصل' or 'العودة إلى المجلد الأصل'. 'القفز' (jumping) doesn't accurately convey the action of navigating up a folder.",
-          "suggestion": "الانتقال إلى المجلد الأصل"
+          "description": "The translation 'القفز الى المجلد الاعلى' literally translates to 'Jump to the folder above'. While understandable, 'Jump' isn't the best choice of words for a 'Go to' function. A more accurate and natural phrasing would imply navigation.",
+          "suggestion": "انتقل الى المجلد الاصلي"
         }
       ],
       "approved_at": null
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bir üst səviyyədəki qovluğa keçin' is a bit literal and verbose. A more natural phrasing would be closer to 'Parent folderə keç' or 'Ana qovluğa keç'",
-          "suggestion": "Ana qovluğa keç"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -54,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Прескочи към папката едно ниво нагоре\" doesn't perfectly capture the meaning of \"Jump to the folder one level up\".  'Прескочи' (preskochi) implies skipping or jumping over, which might be misinterpreted. A more accurate translation would convey the action of navigating or going to the parent folder.",
-          "suggestion": "Навигирай към родителската папка"
+          "description": "The translation 'Прескочи към папката едно ниво нагоре' doesn't fully capture the meaning of 'Jump to the folder one level up'. 'Прескочи' (preskochi) means 'jump over', which isn't the intended action.  It suggests skipping *over* the folder, not navigating to it.",
+          "suggestion": "Отиди в папката едно ниво нагоре"
         }
       ],
       "approved_at": null
@@ -84,8 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Saltar a la carpeta un nivel arriba\" is a literal translation but not the most natural way to express 'Jump to the folder one level up' in Spanish. \"Saltar\" implies a jump, which isn't quite right in this context. A more appropriate verb would be 'Ir' or 'Subir'.",
-          "suggestion": "Ir a la carpeta un nivel arriba"
+          "description": "The translation 'Saltar a la carpeta un nivel arriba' is a literal translation and doesn't convey the meaning of 'Jump to the folder one level up' in a natural way for Spanish users. 'Saltar' (to jump) isn't the common verb used for navigation in this context.",
+          "suggestion": "Ir a la carpeta superior"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'carpeta' is correct for 'folder,' the phrase 'un nivel arriba' is clunky. A more natural phrasing exists.",
+          "suggestion": "Consider using 'superior' which is a common term for 'parent' in this context."
         }
       ],
       "approved_at": null
@@ -99,13 +98,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Passer au dossier un niveau plus haut' is a literal translation that doesn't quite capture the nuance of 'Jump to the folder one level up'. While technically correct, it sounds a bit clunky and less natural in French. A more idiomatic translation would be better.",
-          "suggestion": "Monter d'un niveau dans le dossier"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -114,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Jump to the folder one level up' is more accurately translated as 'Go to the parent folder' or 'Open the parent folder'.  'Անցնել պանակը մեկ մակարդակ վեր' literally means 'Go to the folder one level up,' which, while understandable, isn't the most natural way to express 'go to the parent folder' in Armenian. It lacks the succinctness of the original.",
-          "suggestion": "Մեկնել ծնող պանակ"
+          "description": "The translation \"Անցնել պանակը մեկ մակարդակ վեր\" literally translates to \"Go to the folder one level up\". While understandable, it doesn't perfectly capture the nuance of 'Jump to'. A more accurate translation might emphasize the action of jumping or navigating.",
+          "suggestion": "Consider alternatives like \"Մեկ մակարդակ վեր փոխել\" (Switch one level up) or \"Ավագ պանակին անցնել\" (Go to the parent folder)."
         }
       ],
       "approved_at": null
@@ -138,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '한 레벨 위로 폴더 이동' is a literal translation but not the most natural way to express 'Jump to the folder one level up' in Korean. While understandable, it sounds slightly awkward.",
-          "suggestion": "Consider a more natural phrasing like '상위 폴더로 이동' or '부모 폴더로 이동'."
+          "description": "The translation '한 레벨 위로 폴더 이동' is a literal translation but not the most natural way to express \"Jump to the folder one level up\" in Korean. It sounds somewhat stiff.",
+          "suggestion": "Consider alternatives like '상위 폴더로 이동' (Move to the parent folder) or '폴더 하나 위로 이동' (Move one folder up)."
         }
       ],
       "approved_at": null
@@ -150,8 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ໂດດໄປຫາໂຟເດີຂຶ້ນລະດັບໜຶ່ງ' literally translates to 'Jump to the folder up one level'. While understandable, 'Jump' might not be the most accurate term in this context. A more suitable translation would convey the action of navigating *back* to the parent folder.",
-          "suggestion": "Consider a translation that uses a word like 'ກັບໄປຫາ' (go back to) instead of 'ໂດດໄປຫາ' (jump to). A possible suggestion: 'ກັບໄປຫາໂຟເດີຂຶ້ນລະດັບໜຶ່ງ' (Go back to the folder one level up)."
+          "description": "The translation 'ໂດດໄປຫາໂຟເດີຂຶ້ນລະດັບໜຶ່ງ' literally translates to 'Jump to the folder up one level'. While understandable, it's not the most natural phrasing in Lao. 'Jump' (ໂດດ) implies a sudden action, which isn't ideal for navigating folders.",
+          "suggestion": "ອັບໄປຫາໂຟເດີລະດັບກ່ອນໜ້າ"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'ລະດັບ' appears twice. While not inherently incorrect, consistency in phrasing might improve readability.",
+          "suggestion": "Consider using 'ຊັ້ນ' instead of 'ລະດັບ' for both instances if a more accessible term is desired.  The impact on meaning is minimal."
         }
       ],
       "approved_at": null
@@ -171,7 +169,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Przejdź do katalogu poziom wyżej' is a literal translation that isn't the most natural way to express 'Jump to the folder one level up' in Polish. A more idiomatic translation would be better.",
+          "suggestion": "Wróć do folderu nadrzędnego"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -180,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Saltar para a pasta um nível acima\" is a literal translation of 'Jump to the folder one level up.'  A more natural Portuguese phrasing for a hotkey label would be something like 'Voltar para a pasta pai' or 'Ir para a pasta pai'. 'Saltar' (jump) isn't the typical verb used in this context.",
-          "suggestion": "Voltar para a pasta pai"
+          "description": "The translation 'Saltar para a pasta um nível acima' is a literal translation of 'Jump to the folder one level up'. While understandable, it's not the most natural phrasing in Portuguese. 'Saltar' (jump) isn't typically used for navigating folders.",
+          "suggestion": "Ir para a pasta pai"
         }
       ],
       "approved_at": null
@@ -192,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pular para a pasta um nível acima' literally translates to 'Jump to the folder one level above.' While technically correct, 'Jump' isn't the most natural phrasing in this context. A more idiomatic translation would convey the action of navigating 'up' or 'back'.",
-          "suggestion": "Ir para a pasta pai"
+          "description": "The translation 'Pular para a pasta um nível acima' is too literal and doesn't convey the intended meaning as naturally in Portuguese. 'Pular' (to jump) is not the best verb choice in this context.",
+          "suggestion": "Voltar para a pasta pai"
         }
       ],
       "approved_at": null
@@ -204,13 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Treci la folderul cu un nivel în sus\" is not the most natural or precise translation of \"Jump to the folder one level up.\" The word 'treci' (go) implies action from the user. A more accurate translation would be something like \"Mergi la folderul părinte\" or \"Accesează folderul părinte\".",
-          "suggestion": "Mergi la folderul părinte"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrasing \"cu un nivel în sus\" is a bit verbose. It can be simplified.",
-          "suggestion": "Use 'părinte' instead of 'cu un nivel în sus'"
+          "description": "The translation 'Treci la folderul cu un nivel în sus' is not the most natural or accurate rendering of 'Jump to the folder one level up'. While understandable, it's a bit clunky. A more natural translation would emphasize the movement *up* the folder hierarchy.",
+          "suggestion": "Mută-te la folderul părinte"
         }
       ],
       "approved_at": null
@@ -227,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'බහාලුම් එක් මට්ටමක් ආපසු යන්න' while literally meaning 'Go back one level folder,' doesn't fully capture the nuance of 'Jump to the folder one level up.' It's a bit too literal.",
-          "suggestion": "Consider a more idiomatic translation like 'මුල් පිටුවට පිවිසිය' (Mula pituwa pivisiyata) which means 'Go back to the root folder' or a more general 'ඉහල් මට්ටම වෙත යන්න' (Ihal mattama veva yanna) which means 'Go to the higher level'."
+          "description": "The translation \"බහාලුම් එක් මට්ටමක් ආපසු යන්න\" while literally meaning 'go back one level of folders', doesn't convey the precise meaning of \"Jump to the folder one level up\".  'Jump' implies a quicker action. A better translation should reflect this.",
+          "suggestion": "Consider alternatives like \"මුල්lel අනිත්lel පින්තූරය පින්තූරය අතුරුප්‍රයෝජනය තෙරෙහි වට්ටක්කා වට්ටක්කා මෝසමව එකකිව වදෙමින් විනිශ්චයකිව පූරචමවනවකීක"
         }
       ],
       "approved_at": null
@@ -242,7 +241,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Preskoči na mapo en nivo višje' is not the most natural or precise way to convey 'Jump to the folder one level up'. While technically correct, it sounds somewhat awkward.",
+          "suggestion": "Pojdi v nadstojno mapo"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -251,13 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Скочи на фолдер један ниво горе\" is a literal translation and doesn't convey the intended meaning effectively. \"Скочи\" (skochi) means 'jump' which is not the best choice for navigating folders. A more appropriate term would imply movement or navigation.",
+          "description": "The Serbian translation \"Скочи на фолдер један ниво горе\" doesn't accurately convey the meaning of \"Jump to the folder one level up\". \"Скочи\" (skochi) means \"jump\" in a physical sense, which is not what's intended here. A more appropriate verb would be 'Idi' (go) or 'Пређи' (navigate).",
           "suggestion": "Пређи на фолдер један ниво горе"
         },
         {
           "type": "formatting",
-          "description": "The use of the English word 'folder' (фолдер) is not ideal. While understood, it's preferable to use the Serbian equivalent.",
-          "suggestion": "Пређи на папка један ниво горе"
+          "description": "While not strictly incorrect, 'фолдер' is a direct transliteration of 'folder.' Using a more localized Serbian word could improve the flow and sound more natural.",
+          "suggestion": "Пређи на директорију један ниво горе"
         }
       ],
       "approved_at": null
@@ -268,8 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Skoči na folder jedan nivo gore' doesn't perfectly convey the meaning of 'Jump to the folder one level up'. 'Skoči' (jump) implies a more abrupt action than is typically associated with navigating a folder hierarchy. A more natural phrasing would be 'Idi na folder jedan nivo gore' or 'Pređi na folder jedan nivo gore'.",
-          "suggestion": "Idi na folder jedan nivo gore"
+          "description": "The translation 'Skoči na folder jedan nivo gore' is a literal translation that doesn't quite capture the intended meaning of 'Jump to the folder one level up'. While understandable, it's not the most natural way to express this in Serbian.",
+          "suggestion": "Premesti se u nadređeni folder"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical issue, the use of 'folder' is repeated. Consider consolidating to improve flow.",
+          "suggestion": "Premesti se u nadređeni direktorijum"
         }
       ],
       "approved_at": null
@@ -280,7 +290,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Jump to the folder one level up' implies a quick action. 'Atla' (jump) might be too literal and not accurately convey the intended action of navigating up a folder. A more accurate translation would emphasize navigation.",
+          "description": "The translation 'Bir seviye üstteki klasöre atla' while understandable, doesn't perfectly convey the action of 'Jump to'. 'Atla' implies skipping or jumping over something, which isn't the intended meaning. A more accurate translation would focus on navigating to the parent folder.",
           "suggestion": "Bir seviye yukarı git"
         }
       ],
@@ -298,8 +308,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Chuyển lên thư mục ngay bên trên' is a bit too literal and doesn't quite convey the intended meaning of 'Jump to the folder one level up' in a natural way for a hotkey label. It sounds a bit formal and verbose.",
-          "suggestion": "Consider a more concise and user-friendly translation like 'Lên thư mục cha' or 'Thư mục cha'."
+          "description": "The translation 'Chuyển lên thư mục ngay bên trên' is a literal translation that doesn't fully convey the meaning of 'Jump to the folder one level up'. It sounds somewhat awkward in Vietnamese. A more natural translation would emphasize the action of going 'back' or 'up' a level.",
+          "suggestion": "Có thể sử dụng 'Quay lên thư mục cha' hoặc 'Đi lên thư mục cha'."
         }
       ],
       "approved_at": null
@@ -310,8 +320,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '跳到上一层的文件夹' literally translates to 'Jump to the folder of the previous level'. While understandable, it's slightly awkward. A more natural phrasing would emphasize moving 'up' a level.",
-          "suggestion": "跳到上一级文件夹 (Tiào dào shàng yī jí fùjiàn)"
+          "description": "The translation \"跳到上一层的文件夹\" literally translates to \"Jump to the folder of the previous level\". While understandable, it's slightly awkward and doesn't fully capture the nuance of 'one level up'. It implies a 'level' of folder hierarchy which might not be the most intuitive.",
+          "suggestion": "跳到上一级文件夹 (Tiào dào shàng yī jí fùjiānbì) - This translates to 'Jump to the upper level folder' and is more natural sounding."
         }
       ],
       "approved_at": null

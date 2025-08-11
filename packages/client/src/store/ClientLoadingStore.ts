@@ -74,9 +74,23 @@ class ClientLoadingStore {
     },
   };
 
+  isChangePageRequestRunning = false;
+
+  currentClientView: "users" | "groups" | "files" | "" = "";
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  setIsChangePageRequestRunning = (isChangePageRequestRunning: boolean) => {
+    this.isChangePageRequestRunning = isChangePageRequestRunning;
+  };
+
+  setCurrentClientView = (
+    currentClientView: "users" | "groups" | "files" | "",
+  ) => {
+    this.currentClientView = currentClientView;
+  };
 
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
@@ -158,7 +172,8 @@ class ClientLoadingStore {
           setTimeout(
             () => {
               this.updateLoading(type, isLoading);
-              clearTimeout(this.loaderStates[type].timer);
+              this.loaderStates[type].timer &&
+                clearTimeout(this.loaderStates[type].timer);
               this.loaderStates[type].startTime = null;
               this.loaderStates[type].timer = null;
             },
@@ -206,6 +221,7 @@ class ClientLoadingStore {
     isSectionBodyLoading: boolean,
     withTimer: boolean = true,
   ) => {
+    return;
     this.setIsLoading("body", isSectionBodyLoading, withTimer);
   };
 

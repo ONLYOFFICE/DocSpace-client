@@ -3,7 +3,7 @@
   "content": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage space used: {{storageSpace}}",
   "content_en_sha1_hash": "4659b3b5379878abe9dab17bbcc3d1c54ba69117",
   "created_at": "2025-05-19T21:30:57.466Z",
-  "updated_at": "2025-05-20T09:47:54.246Z",
+  "updated_at": "2025-06-30T12:20:31.759Z",
   "comment": {
     "text": "This translation key is used to display a summary of room statistics, including user count and storage space usage. It appears on-screen as part of the UI, likely in a Room Content component, providing an overview of a portal's current state.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/RowView/RoomContent.tsx",
-      "line_number": 180,
-      "context": "</Text>\n ) : null}\n \n {isWizardCompleted ? (\n <Text fontSize=\"12px\" as=\"div\" fontWeight={600} truncate>\n {`${t(\"PortalStats\", {\n roomCount: roomsCount,\n userCount: roomAdminCount + usersCount,\n storageSpace,\n })}`}\n </Text>",
+      "file_path": "/packages/management/src/app/spaces/multiple/row-content.tsx",
+      "line_number": 127,
+      "context": "{isMobileView ? (\n <div />\n ) : isWizardCompleted ? (\n <Text fontSize=\"12px\" as=\"div\" fontWeight={600} truncate>\n {`${t(\"PortalStats\", {\n roomCount: roomsCount,\n userCount: roomAdminCount + usersCount,\n storageSpace,\n })}`}\n </Text>",
       "module": "/packages/management"
     }
   ],
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The pipe symbol '|' is used consistently in both the English and Azerbaijani versions. This maintains consistency and is appropriate for this type of display.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'İstifadə olunan yaddaş sahəsi' is a technically correct translation of 'Storage space used', a more natural and commonly used translation in Azerbaijani would be 'İşlənən yer'.",
+          "suggestion": "İşlənən yer: {{storageSpace}}"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +62,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Users' is translated as 'Benutzer'. While correct, 'Nutzer' is a more common and natural term for 'users' in a German context, especially in a digital platform.",
+          "suggestion": "Räume: {{roomCount}} | Nutzer: {{userCount}} | Verwendeter Speicherplatz: {{storageSpace}}"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,7 +86,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Storage space used' is translated as 'Käytetty tilan muisti'. A more natural and common translation would be 'Käytetty levytila' or 'Käytetty tallennustila'.",
+          "suggestion": "Käytetty levytila"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -93,19 +116,37 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation uses vertical bar (|) for separation, which is less common in Japanese and may look awkward. A full-width space or a colon (:) would be more natural.",
+          "suggestion": "ルーム：{{roomCount}} ユーザー：{{userCount}} 使用されているストレージスペース：{{storageSpace}}"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation uses vertical bar (|) as a separator, matching the English source. While acceptable, a more common separator in Korean for this context would be a hyphen (–) or a space.",
+          "suggestion": "Consider using '방: {{roomCount}} – 사용자: {{userCount}} – 사용된 스토리지 공간: {{storageSpace}}' or '방: {{roomCount}} 사용자: {{userCount}} 사용된 스토리지 공간: {{storageSpace}}'"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation uses vertical bars (|) as separators, matching the English original. While acceptable, consider using a more natural Lao separator such as 'ແລະ' (lae - and) for better readability in Lao.",
+          "suggestion": "ຫ້ອງ: {{roomCount}} | ຜູ້ໃຊ້: {{userCount}} | ໃຊ້ພື້ນທີ່ຈັດເກັບຂໍ້ມູນ: {{storageSpace}}"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +158,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Storage space used' is not perfectly translated. 'Gebruikte opslagruimte' is technically correct, but 'Gebruikt opslagvolume' or 'Benutigde opslagruimte' might be more natural and commonly used in Dutch in this context.",
+          "suggestion": "Gebruikt opslagvolume"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -147,13 +194,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Storage space used' is best translated as 'Используемое пространство для хранения' rather than 'Используемое место для хранения'. 'Место' implies a physical location, while 'пространство' better conveys storage capacity.",
+          "suggestion": "Комнаты: {{roomCount}} | Пользователи: {{userCount}} | Используемое пространство для хранения: {{storageSpace}}"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'Users' is translated as 'පරිශීලකයන්'. While technically correct, 'පරිශීලකයන්' can sound slightly formal or technical. A more common and natural translation for 'Users' in this context might be 'භාවිත කරන්නන්' or 'වියත්කරුවන්'.",
+          "suggestion": "Consider 'භාවිත කරන්නන්' or 'වියත්කරුවන්' instead of 'පරිශීලකයන්'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'Storage space used' is translated as 'භාවිත කළ ගබඩා ඉඩ'. While understandable, a more direct and commonly used translation would be 'ලේඛනය කරන ලද ගබඩා ඉඩ'.",
+          "suggestion": "Consider 'ලේඛනය කරන ලද ගබඩා ඉඩ' instead of 'භාවිත කළ ගබඩා ඉඩ'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +235,42 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Rooms' is translated as 'Собе'. While 'Собе' can mean rooms, in the context of a portal statistics, a more accurate translation would be 'Просторије' or 'Апартмани', depending on the specific type of rooms being referred to. 'Собе' can imply smaller rooms like bedrooms.",
+          "suggestion": "Consider translating 'Rooms' as 'Просторије' or 'Апартмани'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Storage space used' is translated as 'Складишни простор искоришћен'. A more natural translation would be 'Коришћени складишни простор' or 'Заузет складишни простор'.",
+          "suggestion": "Consider translating 'Storage space used' as 'Коришћени складишни простор' or 'Заузет складишни простор'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses '|' as a separator, mirroring the English. While acceptable, consider using a more natural Serbian separator like ', ' or a dash '-' for better readability.",
+          "suggestion": "Consider using ', ' or '-' instead of '|' as a separator. For example: 'Sobe: {{roomCount}}, Korisnici: {{userCount}}, Skladišni prostor iskorišćen: {{storageSpace}}'"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'Storage space used' is not perfectly translated. 'Kullanılan depolama alanı' is accurate, but 'Kullanılan depolama alanı' sounds slightly less natural. A more fluent option would be 'Depolama alanı kullanımı'.",
+          "suggestion": "Depolama alanı kullanımı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

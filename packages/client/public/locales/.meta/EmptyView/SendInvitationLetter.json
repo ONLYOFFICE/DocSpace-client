@@ -3,7 +3,7 @@
   "content": "Send an invitation letter to add new members to the portal",
   "content_en_sha1_hash": "b91e346ed7862a7a8be3833a1c53720528e3000b",
   "created_at": "2025-05-19T21:30:56.532Z",
-  "updated_at": "2025-05-28T09:30:02.461Z",
+  "updated_at": "2025-06-30T12:20:31.375Z",
   "comment": {
     "text": "Send an invitation letter to new members to join the portal. This key is used in an empty screen on the contacts page when there are no guests to invite.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
       "line_number": 143,
-      "context": "if (isFiltered)\n return [\n {\n key: \"empty-view-invite-new-users\",\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:SendInvitationLetter\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,\n icon: <InviteUserIcon />,\n model: (getContactsModel(t, false) ?? []).filter(\n (m) => typeof m !== \"boolean\",\n ) as ContextMenuModel[],",
+      "context": "if (isFiltered)\n return [\n {\n key: \"empty-view-invite-new-users\",\n title: t(\"EmptyView:InviteNewUsers\"),\n description: t(\"EmptyView:SendInvitationLetter\"),\n disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,\n icon: <InviteUserIcon />,\n model: (getContactsModel?.(t, false) ?? []).filter(\n (m) => typeof m !== \"boolean\",\n ) as ContextMenuModel[],",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'add new members' is not perfectly captured by 'əlavə etmək'. While 'əlavə etmək' means 'to add', it sounds slightly awkward in this context. A more natural phrasing would emphasize inviting them *into* the portal.",
+          "suggestion": "Portala yeni üzvləri dəvət etmək üçün məktub göndərin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +75,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'lisätäksesi' (to add) is in the infinitive form, but it should be conjugated to match the verb 'lähetä' (to send).",
+          "suggestion": "Lähetä kutsukirje portaaliin uusien jäsenten lisäämiseksi."
+        },
+        {
+          "type": "grammar",
+          "description": "The use of 'uusien' (new) should be 'uusia' to agree with 'jäseniä'.",
+          "suggestion": "Lähetä kutsukirje portaaliin uusien jäsenten lisäämiseksi."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,25 +104,64 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation 'Invia di una lettera di invito...' is not grammatically correct and doesn't convey the intended meaning effectively. The 'di' is unnecessary and awkward.",
+          "suggestion": "Invia una lettera di invito per aggiungere nuovi membri al portale"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Invia di una lettera' is grammatically incorrect. It should be 'Invia una lettera'.",
+          "suggestion": "Invia una lettera"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is too literal and doesn't flow naturally in Japanese. '招待状を送信してポータルに新しいメンバーを追加してください' directly translates to 'Send an invitation letter and add new members to the portal', which sounds awkward.",
+          "suggestion": "ポータルへの新規メンバー追加の招待状をお送りください"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure feels overly instructional. A more natural phrasing would soften the command.",
+          "suggestion": "ポータルに新しいメンバーを追加するための招待状をお送りいただけますか？"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '포털에 새 멤버를 추가하기 위해 초대장을 보냅니다 ' is a literal translation and sounds somewhat unnatural in Korean. It focuses on the action of sending rather than the purpose. A more natural phrasing would emphasize inviting members.",
+          "suggestion": "포털에 새 멤버를 초대합니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be improved for better readability. While grammatically correct, it could be made more concise.",
+          "suggestion": "포털에 새 멤버를 초대합니다."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ເວັບໄຊ້' (websai) is a transliteration of 'website' and might be better replaced with a more Lao equivalent depending on the context. It's technically correct but lacks nuance.",
+          "suggestion": "Consider using a more contextually appropriate Lao word for 'portal' or 'website', such as 'ເວັບໄຊົດ' (websaite) or a more descriptive phrase."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +179,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Send an invitation letter\" is better translated as \"Wyślij zaproszenie/zaproszenia\" rather than 'Wyślij zaproszenia, aby dodać...'. While the meaning is conveyed, the directness of the original is lost and it's slightly verbose.",
+          "suggestion": "Wyślij zaproszenie, aby dodać nowych członków do portalu"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Wyślij zaproszenia' isn't technically incorrect, using the singular 'zaproszenie' sounds more natural given the context of sending a single invitation for multiple people.",
+          "suggestion": "Wyślij zaproszenie"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,19 +208,52 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Trimiteți o invitaţie pentru a adăuga noii membri la portalul' is not a natural or accurate translation of 'Send an invitation letter to add new members to the portal'. The wording is a bit awkward and lacks precision.",
+          "suggestion": "Trimiteți o scrisoare de invitație pentru a adăuga membri noi în portal."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'la portalul' is grammatically correct but sounds less fluent than alternative formulations.",
+          "suggestion": "în portal"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'add new members' is not perfectly captured by 'добавления новых участников'. It implies a process of addition rather than a simple invitation to join. A more accurate translation would convey the idea of inviting someone to *become* a member.",
+          "suggestion": "Отправьте приглашение для присоединения новых участников к порталу"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ප්‍රවේශ' (praveśa) is a valid Sinhala word, but in this context, 'විදෙහසු' (videhāsu) might be more appropriate to signify 'portal'.",
+          "suggestion": "ප්‍රවේශ ද්වාරයට → විදෙහසුයට"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'සාමාජිකයන්' (sāmājikayan) is spelled correctly, however, consider using a more specific term depending on the nature of the 'members'.",
+          "suggestion": "සාමාජිකයන් → (Consider a more precise term for 'members', e.g., පරිශීලකයින් - parīśīlakayin if they are users)"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrasing 'එවීම' (evam) can be more elegantly expressed as 'යැවිය' (yāviya) in this context. It conveys a slightly more formal and professional tone.",
+          "suggestion": "එවීම → යැවිය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +271,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Пошаљите позивно писмо за додавање нових чланова у портал' is a bit literal and can be improved for a more natural Serbian phrasing. While technically correct, it sounds slightly awkward.",
+          "suggestion": "Пошаљите позивницу за додавање нових чланова на портал"
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'позивно писмо' is a bit clunky. Using 'позивница' is more common and flows better.",
+          "suggestion": "Replacing 'позивно писмо' with 'позивница'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

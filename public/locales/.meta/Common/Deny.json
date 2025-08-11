@@ -3,7 +3,7 @@
   "content": "Deny",
   "content_en_sha1_hash": "53577bb5df0ee9b6376e87f4896b6957a25d7a43",
   "created_at": "2025-05-19T21:30:44.480Z",
-  "updated_at": "2025-05-28T09:30:02.879Z",
+  "updated_at": "2025-06-30T12:20:31.656Z",
   "comment": {
     "text": "The translation key \"Deny\" is used to display a button label that cancels or rejects an action in a UI element. It appears as a button labeled \"Deny\" and is likely used in a dialog or confirmation page where the user needs to approve or reject an invitation, share link, or other action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/GuestShareLink/page.client.tsx",
-      "line_number": 132,
+      "line_number": 131,
       "context": "onClick={onApproveInvite}\n />\n <Button\n scale\n size={ButtonSize.medium}\n label={t(\"Common:Deny\")}\n tabIndex={2}\n isDisabled={isLoading}\n onClick={onDenyInvite}\n />\n </ButtonsWrapper>",
       "module": "/packages/login"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Rədd edin\" is a command form (imperative) and doesn't directly translate \"Deny\". \"Deny\" typically refers to a prohibition or refusal. A more accurate translation might be \"İnkar\", \"Qadağan\", or \"Rədd\". The best choice depends on the specific context.",
-          "suggestion": "Consider alternatives like \"İnkar\", \"Qadağan\", or \"Rədd\" depending on the context. A noun form is generally more appropriate for a key name."
+          "description": "The English word \"Deny\" is a verb but the Azerbaijani translation \"Rədd edin\" is an imperative (command) form. While it can convey a similar meaning in some contexts, it's not a direct translation. A more accurate translation might depend on the specific context. A simple noun translation would be \"rədd\".",
+          "suggestion": "Consider \"rədd\" for a more direct noun translation or provide more context for a more accurate verb translation."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ඉවතලන්න\" (iwathalanna) means \"to abandon\" or \"to reject\" rather than \"deny\". \"Deny\" in the sense of disagreeing with a statement or refusing a request requires a different translation.",
-          "suggestion": "Consider alternatives like \"නොපිළිගැනීම\" (nopiliganem) which means \"rejection\" or \"disagreement\"."
+          "description": "'ඉවතලන්න' translates to 'abandon', 'reject', or 'discard', not 'Deny'. While it can sometimes convey a similar meaning, it's not a direct or accurate translation of 'Deny'. 'Deny' implies negation or refusal, while 'ඉවතලන්න' implies giving up or releasing.",
+          "suggestion": "A more accurate translation for 'Deny' would depend on the context. Possible alternatives include: 'අdeny කිරීම' (adeny kirima - formal), 'නැවතීම' (nawaitima - refusal), or 'පිළිසdeny කිරීම' (pilisan deny kirima - rejection)."
         }
       ],
       "approved_at": null

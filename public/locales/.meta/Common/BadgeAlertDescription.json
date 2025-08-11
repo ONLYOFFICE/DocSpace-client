@@ -3,7 +3,7 @@
   "content": "Several roles are specified in this form. Forms with multiple roles are not available for filling in this type of room",
   "content_en_sha1_hash": "c77d18eca5a33e5263ab898522d85d5125198a95",
   "created_at": "2025-05-19T21:30:43.177Z",
-  "updated_at": "2025-05-28T09:30:02.928Z",
+  "updated_at": "2025-08-11T09:02:44.078Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that forms with multiple roles are not available for filling in certain types of rooms. It appears as a tooltip on a button in a UI component. Translators should provide a clear explanation of this restriction to help users understand the functionality of the form.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 381,
+      "line_number": 385,
       "context": "<BadgeWrapper isTile={isTile}>\n <HelpButton\n place=\"bottom\"\n size={isViewTable ? 12 : 16}\n className=\"bagde_alert icons-group\"\n tooltipContent={t(\"Common:BadgeAlertDescription\")}\n />\n </BadgeWrapper>\n )} */}\n \n {customFilterEnabled && !isRoom && isExtsCustomFilter ? (",
       "module": "/packages/shared"
     }
@@ -36,12 +36,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Several roles are specified\" is translated as \"Bu formada müxtəlif rollar göstərilir\". While 'göstərilir' means 'shown/displayed', 'specified' implies a more direct assignment or requirement. A more accurate translation might be something like 'təyin edilmişdir' (assigned) or 'qeyd edilmişdir' (indicated).",
-          "suggestion": "Bu formada müxtəlif rollar təyin edilmişdir."
+          "description": "The English phrase \"Several roles are specified\" is not accurately conveyed by \"Bu formada müxtəlif rollar göstərilir\". 'Müxtəlif' implies different roles, while 'several' means multiple. A more accurate translation would be something like 'Bir neçə rol göstərilir' or 'Çoxlu rol göstərilir'.",
+          "suggestion": "Bir neçə rol göstərilir"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Forms with multiple roles' is translated as 'Çox rolu olan formalar'. While grammatically correct, 'Çox rolu olan' is slightly less natural than a phrasing that emphasizes the form's condition.  A better phrasing would reflect that the form *itself* has multiple roles.",
+          "description": "The English phrase 'Forms with multiple roles' is not perfectly translated as 'Çox rolu olan formalar'. While understandable, it is slightly awkward. A smoother translation would be 'Çoxlu rol olan formalar'.",
           "suggestion": "Çoxlu rol olan formalar"
         }
       ],
@@ -83,13 +83,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Forms with multiple roles are not available for filling in this type of room\" is not the most natural or clear translation. It sounds somewhat awkward in Finnish. A more natural phrasing would better convey the intended meaning.",
-          "suggestion": "Tähän lomakkeeseen on määritelty useita rooleja. Huoneille, joissa on useita rooleja, ei voi täyttää lomakkeita."
+          "description": "The phrase 'Forms with multiple roles are not available for filling in this type of room' is a bit clunky and doesn't translate the meaning perfectly. It's more about *why* they aren't available. A better translation would focus on the restriction, not just the unavailability.",
+          "suggestion": "Lomakkeet, joilla on useita rooleja, eivät ole tällä hetkellä tuettuja tässä huonetyypissä."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is a bit long and could be split for better readability.",
-          "suggestion": "Tähän lomakkeeseen on määritelty useita rooleja. Tämän tyyppisissä huoneissa ei voida käyttää lomakkeita, joissa on useita rooleja."
+          "description": "The phrase \"Tämäntyyppisessä huoneessa\" is grammatically correct but stylistically a little stiff. Using a simpler phrasing would improve readability.",
+          "suggestion": "Tällaisissa huoneissa"
         }
       ],
       "approved_at": null
@@ -106,13 +106,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Forms with multiple roles are not available for filling in this type of room\" is not accurately reflected in the Armenian translation. The Armenian phrasing is quite literal and doesn't flow naturally. A more natural phrasing would better convey the intended meaning.",
-          "suggestion": "Consider rephrasing to something like: \"Այս տեսակի համարում բազմաթիվ դերերով ձևաթղթերը լրացնելու հնարավորություն չկա։\" or \"Այս տեսակի սենյակները բազմաթիվ դերերով ձևաթղթերով լրացնելու համար չենթարկվում։\" "
+          "description": "The translation \"Այս ձևում նշված են մի քանի դերեր: Այս տեսակի սենյակները լրացնելու համար բազմաթիվ դերերով ձևաթղթերը հասանելի չեն\" doesn't fully capture the nuance of the original English text. While technically correct, it's a bit wordy and doesn't flow naturally in Armenian. The English implies a restriction *on* the room, not just on the form. ",
+          "suggestion": "Մի քանի դեր են նշված այս ձևում։ Այս տեսակի սենյակները այնպիսի ձևերով լրացնելուց հնարավորություն չկա, որոնցում բազմաթիվ դերեր են նշված։"
         },
         {
           "type": "formatting",
-          "description": "The punctuation and flow within the Armenian translation could be improved for better readability.",
-          "suggestion": "Review sentence structure and punctuation to ensure clarity and flow. Consider breaking up longer sentences if necessary."
+          "description": "The translation uses a more formal tone, which might not align with the overall UI style. Consider whether a more conversational tone would be more appropriate.",
+          "suggestion": "While the current tone may be correct depending on the desired feel, consider a slightly less formal phrasing for better user engagement."
         }
       ],
       "approved_at": null
@@ -129,13 +129,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Forms with multiple roles are not available for filling in this type of room\" is slightly awkward and could be improved for clarity and naturalness in Japanese.",
-          "suggestion": "複数の役割が指定されたフォームは、この種類の部屋では利用できません。"
-        },
-        {
-          "type": "formatting",
-          "description": "The punctuation in the Japanese translation could be improved for readability.  Adding a slightly longer pause with a comma before \"このタイプのルームでは\" would be better.",
-          "suggestion": "このフォームには複数の役割が指定されています。複数の役割が指定されたフォームは、このタイプのルームでは、入力できません。"
+          "description": "The phrase \"Forms with multiple roles are not available for filling in this type of room\" is slightly awkward in its translation. A more natural Japanese phrasing would be better.",
+          "suggestion": "このタイプのルームでは、複数の役割が指定されたフォームは利用できません。"
         }
       ],
       "approved_at": null
@@ -146,13 +141,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"이 타입의 방을 채우는 데 여러 역할이 포함된 양식을 사용할 수 없습니다\" is a bit verbose and doesn't quite capture the original meaning. The phrase 'filling in this type of room' sounds awkward.",
-          "suggestion": "이 타입의 방은 여러 역할이 지정된 양식을 사용할 수 없습니다."
+          "description": "The translation \"이 타입의 방을 채우는 데 여러 역할이 포함된 양식을 사용할 수 없습니다.\" is a bit awkward and doesn't perfectly capture the meaning of \"Forms with multiple roles are not available for filling in this type of room.\" A more natural and accurate translation would convey that filling the room is restricted due to the multiple roles.",
+          "suggestion": "이 타입의 방은 여러 역할이 지정된 양식으로 작성할 수 없습니다."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase '이 타입의 방' is slightly unnatural. It could be improved for better flow.",
-          "suggestion": "해당 방"
+          "description": "The phrasing '이 타입의 방을 채우는 데' is a literal translation and not the most natural way to express the restriction.  It focuses on the *action* of filling, rather than the limitation on the room itself.",
+          "suggestion": "이 타입의 방에 대해서는"
         }
       ],
       "approved_at": null
@@ -162,14 +157,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'ແມ່ນບໍ່ມີສໍາລັບການຕື່ມຂໍ້ມູນ' is a bit awkward. A more natural phrasing would be 'ບໍ່ສາມາດຕື່ມຂໍ້ມູນໄດ້' or 'ບໍ່ອະນຸຍາດໃຫ້ຕື່ມຂໍ້ມູນໄດ້'.",
-          "suggestion": "ແມ່ນບໍ່ສາມາດຕື່ມຂໍ້ມູນໄດ້"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Forms with multiple roles\" is not accurately translated. It implies a restriction imposed *on* the form itself, rather than the action of filling it out. A more accurate translation would convey that the room type doesn't support forms with multiple roles assigned.",
+          "suggestion": "ແບບຟອມທີ່ມີຫຼາຍບົດບາດຖືກລະบุໄວ້ບໍ່ໄດ້ສໍາລັບຫ້ອງປະເພດນີ້"
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow. While technically correct, it's a bit clunky.",
-          "suggestion": "ຫຼາຍບົດບາດແມ່ນໄດ້ລະບຸໄວ້ໃນແບບຟອມນີ້. ຫ້ອງປະເພດນີ້ບໍ່ສາມາດຕື່ມຂໍ້ມູນໄດ້ຖ້າมีຫຼາຍບົດບາດ."
+          "type": "incorrect_translation",
+          "description": "The word 'ການຕື່ມຂໍ້ມູນ' (filling in) is a bit too verbose. It can be simplified.",
+          "suggestion": "ແບບຟອມທີ່ມີຫຼາຍບົດບາດບໍ່ສາມາດໃຊ້ໄດ້ໃນຫ້ອງປະເພດນີ້"
         }
       ],
       "approved_at": null
@@ -180,13 +175,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"veidlapas ar vairākām lomām\" is a slightly awkward translation of \"Forms with multiple roles.\" A more natural phrasing would be \"veidlapas ar vairākiem amatiem\" or \"veidlapas, kurās norādīti vairāki amati\".",
-          "suggestion": "veidlapas, kurās norādīti vairāki amati"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word \"aizpildīšanai\" is a bit verbose and less natural in this context. A simpler and more direct word would improve the readability.",
-          "suggestion": "lietošanai"
+          "description": "The phrase \"veidlapas ar vairākām lomām\" is a slightly awkward phrasing. A more natural translation for 'Forms with multiple roles' would be 'Veidlapas, kurās norādītas vairākas lomas'.",
+          "suggestion": "Veidlapas, kurās norādītas vairākas lomas"
         }
       ],
       "approved_at": null
@@ -202,14 +192,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Forms with multiple roles are not available for filling in this type of room\" is not the most natural or clear translation of the English content. It's a bit awkward in Polish.",
-          "suggestion": "W formularzu określono kilka ról. Tego typu pokoju nie można wypełnić, jeśli formularz zawiera wiele ról."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"wieloma rolami\" is grammatically correct but a bit clunky.  While technically accurate, it could be more elegantly expressed.",
-          "suggestion": "wiele ról"
+          "type": "grammar",
+          "description": "The phrase 'wieloma rolami' sounds unnatural in Polish. It should be 'z wieloma rolami'.",
+          "suggestion": "z wieloma rolami"
         }
       ],
       "approved_at": null
@@ -232,13 +217,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Forms with multiple roles' is a bit clunky. A more natural Romanian translation would be 'Formulare cu mai multe roluri'.",
-          "suggestion": "Formulare cu mai multe roluri"
+          "description": "The phrase \"Forms with multiple roles are not available for filling in this type of room\" is a bit awkward. A more natural Romanian phrasing would be better.",
+          "suggestion": "Formulare cu mai multe roluri nu pot fi completate în acest tip de încăpere."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'sunt disponibile spre completare' is grammatically correct, but it's a bit formal and indirect.  A more direct and common way to say 'available for filling in' would be 'pot fi completate'.",
-          "suggestion": "pot fi completate"
+          "description": "The word 'sunt atribuite' (are assigned) is not the best choice for conveying the meaning. It implies an action being performed, whereas the English suggests roles are simply specified.",
+          "suggestion": "Pentru acest formular sunt specificate mai multe roluri."
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical error, consider reordering the sentence for better flow. The current structure can be slightly jarring.",
+          "suggestion": "Mai multe roluri sunt specificate pentru acest formular. Formulare cu mai multe roluri nu pot fi completate în acest tip de încăpere."
         }
       ],
       "approved_at": null
@@ -255,13 +245,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Forms with multiple roles' is not accurately translated. A more natural Sinhala phrasing would be 'භූමිකා සහිත ආකෘතිපත්‍රයක්'. The current translation feels a bit clunky.",
-          "suggestion": "මෙම වර්ගයේ කාමරයක භූමිකා සහිත ආකෘතිපත්‍ර පිරවීමට නොහැකිය"
+          "description": "The English phrase 'Several roles are specified' is translated as 'භූමිකා කිහිපයක් දක්වා ඇත'. While not strictly incorrect, a more natural translation might be 'භූමිකා කිහිපයක් සඳහන් කර ඇත' or 'භූමිකා කිහිපයක් දැක්වේ'.",
+          "suggestion": "භූමිකා කිහිපයක් සඳහන් කර ඇත"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'room' is translated as 'කාමරය'. While technically correct, 'වර්ගයක' (type) could be more appropriate to match the English nuance of 'type of room' to avoid ambiguity and focus on the room's categorization.",
-          "suggestion": "මෙම වර්ගයේ කාමරයක භූමිකා සහිත ආකෘතිපත්‍ර පිරවීමට නොහැකිය"
+          "description": "The phrase 'Forms with multiple roles are not available for filling in this type of room' is translated as 'මෙම වර්ගයේ කාමරයක භූමිකා කිහිපයක් සහිත ආකෘතිපත්‍ර පිරවීමට නොහැකිය'. A more natural and precise translation might be 'මෙම වර්ගයේ කාමරයට භූමිකා කිහිපයක් සහිත ආකෘතිපත්‍ර පිරවීමට නොමැත'.",
+          "suggestion": "මෙම වර්ගයේ කාමරයට භූමිකා කිහිපයක් සහිත ආකෘතිපත්‍ර පිරවීමට නොමැත"
         }
       ],
       "approved_at": null
@@ -278,13 +268,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Forms with multiple roles\" is slightly awkward. A more natural phrasing would be \"Obrazci z več kot eno vlogo\" or \"Obrazci z več vlog\".",
-          "suggestion": "Obrazci z več kot eno vlogo"
+          "description": "The translation 'niso na voljo za izpolnjevanje' is a bit clunky and doesn't perfectly convey the intended meaning of 'are not available for filling in'. A more natural Slovenian phrasing would improve readability.",
+          "suggestion": "are not editable in this type of room"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"za izpolnjevanje v tej vrsti sobe\" is a bit wordy and not perfectly natural. It can be improved for clarity.",
-          "suggestion": "za to vrsto sobe"
+          "description": "The term 'vrsti sobe' is technically correct, but 'tip sobe' would be more common and understandable in this context.",
+          "suggestion": "tip sobe"
         }
       ],
       "approved_at": null
@@ -292,18 +282,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Forms with multiple roles\" is not the most natural translation of \"Several roles are specified in this form.\" A more idiomatic Serbian translation would be something like \"Обрасци са дефинисаним улогама\" or \"Обрасци где су дефинисане улоге\".",
-          "suggestion": "Обрасци где су дефинисане улоге"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'this type of room' is a bit clunky. A more natural wording would be something like 'за ове собе' or 'за ову врсту просторије'.",
-          "suggestion": "за ове собе"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -312,18 +291,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Forms with multiple roles\" is not the most natural way to express the English meaning. A more accurate and natural translation would emphasize that the *room* is restricted, not the forms themselves.",
-          "suggestion": "Ova vrsta sobe ne podržava obrasce sa više uloga."
+          "description": "The phrase \"Forms with multiple roles\" is a literal translation and doesn't flow naturally in Serbian. It would be more accurate to convey the meaning of roles being assigned to the form.",
+          "suggestion": "Obrasci sa više dodeljenih uloga..."
         },
         {
-          "type": "spelling",
-          "description": "The word 'Obrascu' is written incorrectly. It should be 'Obrascu'.",
-          "suggestion": "Obrascu"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'popunjavanje' is a bit formal and verbose. A simpler phrasing would be more user-friendly.",
-          "suggestion": "Za ovu vrstu sobe obrasci sa više uloga nisu dostupni."
+          "type": "formatting",
+          "description": "The term 'Obrasci' is repeated. While technically correct, it's slightly repetitive and could be improved for readability.",
+          "suggestion": "U ovom obrascu je navedeno nekoliko uloga. Više uloga nije dostupno za popunjavanje ove vrste soba."
         }
       ],
       "approved_at": null
@@ -346,8 +320,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Không có biểu mẫu có nhiều vai trò để điền trong loại phòng này\" is a bit awkward. A more natural phrasing would be something like 'Biểu mẫu với nhiều vai trò không được hỗ trợ cho loại phòng này' or 'Loại phòng này không hỗ trợ biểu mẫu với nhiều vai trò'.",
-          "suggestion": "Biểu mẫu với nhiều vai trò không được hỗ trợ cho loại phòng này"
+          "description": "The translation \"Không có biểu mẫu có nhiều vai trò để điền trong loại phòng này\" is a bit awkward. A more natural translation would emphasize that users *cannot* fill out forms with multiple roles.",
+          "suggestion": "Không thể điền biểu mẫu có nhiều vai trò trong loại phòng này."
         }
       ],
       "approved_at": null
@@ -358,13 +332,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"此类型房间不支持设置多个角色填写表单\" is a bit awkward and doesn't fully capture the meaning of \"Forms with multiple roles are not available for filling in this type of room\". It's more of a statement about the *room* not supporting the feature, rather than the form itself.",
-          "suggestion": "这个表单中含有几个填写人角色。此类房间不支持填写具有多个角色权限的表单"
+          "description": "The phrase \"Several roles are specified in this form\" is not accurately conveyed. \"含有几个填写人角色\" implies the roles *contain* people, which isn't the intended meaning. It should convey that multiple roles are *assigned* or *defined*.",
+          "suggestion": "这个表单中设置了几个填写人角色 (Zhège biàodān zhōng shèzhǐ le jǐ ge tiánxiě rén juésè) - 'Several filling roles are set in this form.'"
         },
         {
-          "type": "formatting",
-          "description": "The phrasing '此类型' can be slightly improved for better flow. It's not strictly wrong, but can be more natural.",
-          "suggestion": "此类"
+          "type": "incorrect_translation",
+          "description": "The term “此类型房间不支持设置多个角色填写表单” (This type of room does not support setting multiple roles to fill out the form) is a bit clunky and verbose. It could be more concisely stated.",
+          "suggestion": "此类型房间不支持多个角色填写。(Cǐ lèixíng fángjiān bù zhīchí duō ge juésè tiánxiě.) - 'This type of room does not support multiple roles to fill out.'"
         }
       ],
       "approved_at": null

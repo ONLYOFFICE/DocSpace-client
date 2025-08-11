@@ -3,7 +3,7 @@
   "content": "Audio",
   "content_en_sha1_hash": "acdac205f5e24cb75113c4b281a2c13f08b75159",
   "created_at": "2025-05-19T21:30:43.139Z",
-  "updated_at": "2025-05-28T09:30:02.459Z",
+  "updated_at": "2025-08-04T07:30:01.265Z",
   "comment": {
     "text": "This translation key is used for the audio file type, displaying \"Audio\" as its translated label. It appears in UI elements that display file types, such as in a table view of files on the home page.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 14,
+      "line_number": 17,
       "context": "case FileType.Archive:\n return t(\"Common:Archive\");\n case FileType.Video:\n return t(\"Common:Video\");\n case FileType.Audio:\n return t(\"Common:Audio\");\n case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:",
       "module": "/packages/shared"
     }
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ձայնային' translates to 'audio' or 'sound' in a more general sense. While acceptable, it's more descriptive than the single-word English term 'Audio'.  A more direct and concise translation might be preferable depending on the context.",
-          "suggestion": "Consider alternatives like 'Աուդիո' (transliteration of 'Audio') or 'ձայն' if a simpler term is needed, but this depends on the specific application."
+          "description": "The Armenian translation \"Ձայնային\" (Dzaaynayin) translates to 'audio' or 'sound' but is more accurately 'sound-related' or 'sound-like'. While not strictly incorrect, it's not the most direct or natural translation for the English word 'Audio'. A more common and direct translation would be \"Աուդիո\" (Audio) using a transliteration.",
+          "suggestion": "Աուդիո"
         }
       ],
       "approved_at": null

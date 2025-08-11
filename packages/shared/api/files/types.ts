@@ -134,6 +134,8 @@ export type TFile = {
   startFilling?: boolean;
   fileEntryType: number;
   hasDraft?: boolean;
+  order?: string;
+  lockedBy?: string;
 };
 
 export type TOpenEditRequest = {
@@ -220,6 +222,8 @@ export type TFolder = {
   denyDownload: boolean;
   fileEntryType: number;
   parentRoomType?: number;
+  order?: string;
+  isRoom?: false;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -269,15 +273,17 @@ export type TUploadOperation = {
 
 export type TThirdPartyCapabilities = string[][];
 
-export type TThierdParty = {
+export type TThirdParty = {
   corporate: boolean;
   roomsStorage: boolean;
   customerTitle: string;
   providerId: string;
   providerKey: string;
+  provider_id?: string;
+  customer_title?: string;
 };
 
-export type TTirdParties = TThierdParty[];
+export type TThirdParties = TThirdParty[];
 
 export type TFilesSettings = {
   automaticallyCleanUp: {
@@ -479,6 +485,8 @@ export type TConnectingStorage = {
   connected: boolean;
   oauth: boolean;
   redirectUrl: string;
+  clientId?: string;
+  requiredConnectionUrl: boolean;
 };
 
 export type TIndexItems = {
@@ -488,6 +496,20 @@ export type TIndexItems = {
 };
 
 export type TConnectingStorages = TConnectingStorage[];
+
+export type SettingsThirdPartyType = {
+  id: string;
+  title: string;
+  providerId: string;
+  providerKey: string;
+};
+
+export type TUploadBackup = {
+  Message?: string;
+  EndUpload: boolean;
+  Success: boolean;
+  ChunkSize: number;
+};
 
 export type TFormRoleMappingRequest = {
   formId: number;

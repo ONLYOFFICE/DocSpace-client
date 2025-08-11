@@ -126,7 +126,7 @@ const Services: React.FC<ServicesProps> = ({
     setIsStorageCancellation(false);
   };
 
-  const onToggle = (id, enabled) => {
+  const onToggle = (id: string, enabled: boolean) => {
     if (id === TOTAL_SIZE) {
       if (enabled) {
         setIsStorageCancellation(true);

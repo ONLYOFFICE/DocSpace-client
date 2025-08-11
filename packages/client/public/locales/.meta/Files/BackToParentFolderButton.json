@@ -3,7 +3,7 @@
   "content": "Back to parent folder",
   "content_en_sha1_hash": "31d5a073e7e2d5d9e43e7521777a3cd036066ff1",
   "created_at": "2025-05-19T21:30:55.296Z",
-  "updated_at": "2025-05-20T09:40:08.808Z",
+  "updated_at": "2025-05-24T12:36:23.536Z",
   "comment": {
     "text": "This translation key is used for the button label \"Back to parent folder\" in a file management interface. It should be translated to display the correct action when navigating back from a subfolder.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"العودة إلى المجلد الأصل\" while conveying the general meaning, is not the most natural or precise translation of \"Back to parent folder.\"  \"أصل\" (origin/root) implies a more fundamental beginning than simply the parent folder.",
+          "suggestion": "العودة إلى المجلد الأب (Al-'awda ila al-mujalad al-ab)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Ana qovluğa qayıt' is a somewhat literal translation. A more natural and idiomatic translation might be preferred for better user experience. 'Ana menyüə keç' or 'Ana səhifəyə keç' could be alternatives depending on the context.",
+          "suggestion": "Consider alternatives like 'Ana menyüə keç' or 'Ana səhifəyə keç'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,19 +81,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Takaisin pääkansioon\" literally translates to \"Back to main folder\". The original English text specifies \"parent folder\", which implies the folder immediately above the current one. \"Pääkansio\" generally refers to the root directory or main folder of a system, not the immediate parent folder.",
+          "suggestion": "Takaisin yläkansioon"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Retour vers le dossier précédent' is understandable, a more accurate and idiomatic translation of 'Back to parent folder' would be 'Remonter d'un niveau' or 'Retour au dossier parent'.  'Dossier précédent' implies the immediately prior folder, not necessarily the parent.",
+          "suggestion": "Retour au dossier parent"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Վերադառնալ ծնող պանակ\" is a literal translation of \"Back to parent folder\". While understandable, a more natural and idiomatic Armenian phrasing would be preferable. \"Ծնող պանակ\" is correct, but the verb \"վերադառնալ\" (to return) might not be the best choice.",
+          "suggestion": "Consider alternatives like \"Մեկնել ծնող պանակ\" (Go to parent folder) or \"Ծնող պանակով\" (To the parent folder) depending on the overall UI tone."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -105,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ກັບໄປທີ່ແຟ້ມຫຼັກ\" literally translates to \"Return to main file.\" While understandable, it doesn't perfectly capture the nuance of 'Back to parent folder'. It implies a 'main' file rather than a hierarchical parent folder.",
+          "suggestion": "ກັບຄືນໄປທີ່ໂຟນເດີເກົ່າ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,19 +177,42 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'părinte' should be 'părinteală'. While 'părinte' means 'parent', 'părinteală' more accurately translates to 'parent folder' in this context.",
+          "suggestion": "Revenire la folderul părinteală"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Вернуться в папку на уровень выше\" is a bit verbose and not the most natural way to say \"Back to parent folder\" in Russian. While technically correct, it's not concise.",
+          "suggestion": "Возврат к родительской папке"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a hard error, using a more common UI/UX phrasing can improve the user experience.",
+          "suggestion": "Consider alternatives like \"На уровень выше\" (One level up) if space is limited."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'මුල් බහාලුමට ආපසු' while literally meaning 'Back to the original box,' doesn't accurately convey the meaning of 'Back to parent folder' in a UI context.  A parent folder is a directory level above the current one. It implies navigation, not necessarily a return to an 'original' state or container.",
+          "suggestion": "Consider 'පින්තූර ෆෝල්ඩමට ආපසු' (Pinthura folder-ma apas-u) which translates to 'Back to the image/picture folder', or 'ආපසු ෆෝල්ඩරයට' (apas-u folder-aya-th) which translates to 'Back to the folder.'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +230,35 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Изврши повратак у родитељски фолдер' is a bit too literal and formal for a button label. 'Изврши' is unnecessary and makes the phrase clunky.",
+          "suggestion": "Вратите се у родитељски фолдер"
+        },
+        {
+          "type": "formatting",
+          "description": "The phrase could be shortened for better readability on a button.",
+          "suggestion": "Родитељска фолдер"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izvrši povratak u roditeljski folder' is overly formal and literal. A more natural and idiomatic translation would be preferred.",
+          "suggestion": "Vrati se u roditeljski folder"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes an unnecessary verb 'Izvrši'.",
+          "suggestion": "Vrati se u roditeljski folder"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +276,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Back to parent folder' implies navigation one level up in a file system hierarchy. 'Quay lại thư mục gốc' translates to 'Return to root directory'. While conceptually similar, it's not a precise match. 'Parent folder' specifically refers to the immediate folder above the current one.",
+          "suggestion": "Consider 'Quay lại thư mục cha' which directly translates to 'Return to parent folder'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

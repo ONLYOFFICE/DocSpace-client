@@ -3,7 +3,7 @@
   "content": "Unsupported action. Please switch to the desktop mode to be able to edit PDFs or create PDF forms.",
   "content_en_sha1_hash": "38b34163571b050a0e177d79b00073163a6f1c1b",
   "created_at": "2025-05-19T21:30:46.558Z",
-  "updated_at": "2025-06-03T20:59:41.778Z",
+  "updated_at": "2025-08-04T07:30:00.964Z",
   "comment": {
     "text": "This translation key is used to display a message when attempting to edit or create PDFs on mobile devices. It appears as an info toast notification and instructs users to switch to desktop mode to enable these actions.",
     "is_auto": true,
@@ -30,37 +30,37 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.hooks.ts",
-      "line_number": 257,
+      "line_number": 258,
       "context": "const event: CreateEvent = new Event(Events.CREATE);\n \n const edit = extension === FileExtensions.PDF;\n \n if (isMobile && edit && t) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n \n const payload = {\n id: -1,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1751,
+      "line_number": 1760,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1751,
+      "line_number": 1760,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1751,
+      "line_number": 1760,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1751,
+      "line_number": 1760,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1751,
+      "line_number": 1760,
       "context": "key: \"edit-pdf\",\n label: t(\"Common:EditButton\"),\n icon: AccessEditReactSvgUrl,\n onClick: () => {\n if (isMobile) {\n toastr.info(t(\"Common:MobileEditPdfNotAvailableInfo\"));\n return;\n }\n this.onOpenPDFEditDialog(item.id);\n },\n disabled: false,",
       "module": "/packages/client"
     }
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'iş masası rejiminə' (desktop mode) is a literal translation and might not be the most natural way to express 'desktop mode' in Azerbaijani. It feels slightly awkward.",
-          "suggestion": "Consider a more colloquial or user-friendly phrasing like 'kompüter rejiminə keçin' (switch to computer mode) or 'masaüstü rejiminə keçin' (switch to desktop mode) which is more commonly understood."
+          "description": "The term 'work table mode' (iş masası rejimi) is not a common or accurate translation for 'desktop mode'. It's likely to confuse users. A better translation would be 'kompüter rejimi' or 'masaüstü rejimi'.",
+          "suggestion": "Lütfən, PDF sənədlərini redaktə edə və ya PDF formaları yarada bilmək üçün kompüter rejiminə keçin."
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Chcete-li upravovat soubory PDF nebo vytvářet formuláře PDF, přepněte prosím do režimu počítače.\" is a bit literal and could be more natural. 'Režimu počítače' is awkward. The word 'desktop' can be translated as 'počítač' but the phrasing is stiff.",
-          "suggestion": "Chcete-li upravovat PDF soubory nebo vytvářet PDF formuláře, přepněte prosím do počítačové verze."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'κατάσταση εργασίας' (katastasi ergasias) translates to 'work state' or 'work mode', which is not the intended meaning of 'desktop mode'. A more accurate translation for 'desktop mode' would be 'επιτραπέζια λειτουργία' (epitrapezia λειτουργia).",
-          "suggestion": "Μεταβείτε στην επιτραπέζια λειτουργία για να μπορείτε να επεξεργαστείτε PDF ή να δημιουργήσετε φόρμες PDF."
+          "description": "The term 'εργασίας' (ergasias) in \"Μεταβείτε στην κατάσταση εργασίας\" doesn't accurately convey 'desktop mode'.  'Εργασίας' translates to 'work' or 'working' which is not the intended meaning. A more suitable translation for 'desktop mode' would be something like 'γραφείου' (grafiou - office) or 'υπολογιστή' (ypologisti - computer).",
+          "suggestion": "Μεταβείτε στην κατάσταση γραφείου ή στην κατάσταση υπολογιστή για να μπορείτε να επεξεργαστείτε PDF ή να δημιουργήσετε φόρμες PDF."
         }
       ],
       "approved_at": null
@@ -132,13 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'MobileEditPdfNotAvailableInfo' implies a notification about PDF editing not being available on mobile. The Spanish translation, 'Acción no admitida,' is too generic and doesn't convey the specific context of PDF editing.",
-          "suggestion": "Consider a more specific translation like: 'Edición de PDF no disponible en dispositivos móviles. Cambie al modo de escritorio para poder editar archivos PDF o crear formularios PDF.'"
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the Spanish translation could benefit from a slightly more natural flow. The original is a bit clunky.",
-          "suggestion": "Consider: 'La edición de PDF no está disponible en dispositivos móviles. Para poder editar archivos PDF o crear formularios PDF, cambie al modo de escritorio.'"
+          "description": "The phrase 'Cambie al modo de escritorio' is a literal translation of 'switch to the desktop mode'. A more natural Spanish phrasing would be something like 'Utilice el modo de escritorio' or 'Pase al modo de escritorio'.",
+          "suggestion": "Utilice el modo de escritorio para poder editar archivos PDF o crear formularios PDF."
         }
       ],
       "approved_at": null
@@ -146,7 +135,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses \"tai\" (or) which might be slightly less formal than necessary. A more formal alternative could be used depending on the overall tone.",
+          "suggestion": "Consider using a more formal conjunction, potentially rephrasing to remove the direct 'or'. For example: 'Ole hyvä ja vaihda työpöytätilaan PDF-tiedostojen muokkaamiseksi tai PDF-lomakkeiden luomiseksi.'"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -154,14 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'PDF' is inconsistently capitalized. It should be consistently 'PDF'.",
-          "suggestion": "Replace 'PDF' with 'PDF' throughout the translation."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, 'Veuillez passer en mode desktop' is slightly awkward.  A more natural phrasing would improve readability.",
-          "suggestion": "Consider 'Veuillez passer au mode bureau' or 'Veuillez activer le mode bureau' instead of 'Veuillez passer en mode desktop'."
+          "type": "formatting",
+          "description": "The phrase 'PDF' is inconsistently capitalized. It's 'PDF' in the English and should be consistent in French. While common usage allows for lowercase, maintaining consistency with the source is preferable.",
+          "suggestion": "Action non prise en charge. Veuillez passer en mode desktop pour pouvoir éditer des PDF ou créer des formulaires PDF."
         }
       ],
       "approved_at": null
@@ -172,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after \"Համակարգչային ռեժիմին\" is unnecessary and creates a slight awkwardness in the sentence flow. It is more natural to omit it.",
-          "suggestion": "Change \"Համակարգչային ռեժիմին:“ to “Համակարգչային ռեժիմ”"
+          "description": "The translation uses a colon (:) after \"Չաջակցվող գործողություն:\" which is acceptable, but the subsequent sentence begins with a hyphen (-).  Consistency in punctuation would improve readability. Consider using a colon or simply starting the sentence.",
+          "suggestion": "Remove the hyphen or change it to a colon."
         }
       ],
       "approved_at": null
@@ -193,13 +183,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"데스크탑 모드로 전환하세요\" is a bit too literal and formal for a user-facing message. A more natural and user-friendly phrasing would be better.",
-          "suggestion": "PDF를 편집하거나 PDF 양식을 만들려면 데스크탑 버전으로 전환해주세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -207,14 +191,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ຄອມພິວເຕີ້' is a transliteration of 'computer' and might not be the most natural way to say 'desktop' in Lao. While understandable, it could be improved.",
-          "suggestion": "ປ່ຽນໄປໃຊ້ໂໝດອຸປະກອນຄອມພິວເຕີ້"
+          "type": "incorrect_translation",
+          "description": "The phrase \"ການກະທຳແບບນີ້ຍັງບໍ່ຮອງຮັບ\" is a literal translation of 'Unsupported action' which, while understandable, isn't the most natural phrasing in Lao. A more natural phrasing might be something like 'ການເຮັດແບບນີ້ບໍ່ສາມາດເຮັດໄດ້' or 'ບໍ່ສາມາດປະຕິບັດງານນີ້ໄດ້'.",
+          "suggestion": "ປ່ຽນເປັນ 'ການເຮັດແບບນີ້ບໍ່ສາມາດເຮັດໄດ້' ຫຼື 'ບໍ່ສາມາດປະຕິບັດງານນີ້ໄດ້'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrasing 'ການກະທຳແບບນີ້ຍັງບໍ່ຮອງຮັບ' is a bit literal and clunky. A more natural phrasing might be preferred.",
-          "suggestion": "ບໍ່ສາມາດເຮັດການນີ້ໄດ້ໃນປັດຈຸບັນ"
+          "description": "The word 'ຈະສາມາດ' while technically correct, creates an awkward sentence flow. It implies potentiality when certainty is intended.",
+          "suggestion": "ປ່ຽນເປັນ 'ສາມາດ'"
         }
       ],
       "approved_at": null
@@ -231,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Niet-ondersteunde handeling\" is a bit awkward and literal. A more natural Dutch translation for 'Unsupported action' would be 'Ongeldige actie' or 'Deze actie wordt niet ondersteund'.",
-          "suggestion": "Ongeldige actie / Deze actie wordt niet ondersteund"
+          "description": "The term 'handeling' is not the best translation for 'action' in this context. 'Actie' would be more accurate and natural in Dutch.",
+          "suggestion": "Niet-ondersteunde actie. Schakel over naar de desktopmodus om PDF's te bewerken of PDF formulieren te maken."
         }
       ],
       "approved_at": null
@@ -243,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Włącz tryb pulpitu\" is a literal translation of \"switch to the desktop mode\" and isn't the most natural way to express this in Polish. A more idiomatic translation would be something like \"Przejdź do trybu pulpitu\" or \"Użyj trybu pulpitu\".",
-          "suggestion": "Przejdź do trybu pulpitu"
+          "description": "The term 'Włącz tryb pulpitu' is a literal translation of 'switch to the desktop mode'. A more natural Polish phrasing would be 'przejdź do trybu pulpitu' or 'przełącz się w tryb pulpitu'.",
+          "suggestion": "przejdź do trybu pulpitu"
         }
       ],
       "approved_at": null
@@ -258,13 +242,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Área de trabalho' translates to 'work area' which is not the intended meaning of 'desktop mode'.  'Desktop mode' should be more accurately conveyed.",
-          "suggestion": "Alternar para o modo desktop/versão para desktop para poder editar PDFs ou criar formulários PDF."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -273,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Treceți la modul desktop' is a bit literal. A more natural Romanian phrasing for 'switch to desktop mode' would be 'utilizați modul desktop' or 'accesați modul desktop'.",
-          "suggestion": "utilizați modul desktop"
+          "description": "The phrase \"Treceți la modul desktop\" is a somewhat literal and slightly awkward translation of \"switch to the desktop mode.\" A more natural Romanian phrasing would convey the same meaning.",
+          "suggestion": "Vă rugăm să treceți în modul desktop"
         }
       ],
       "approved_at": null
@@ -291,18 +269,23 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙවැනි ක්‍රියාවලියකට අපි සහායෝගය කරන්නේ නෑ' (mevan'i kriyawaliyakata api sahaayogaaya karan'e nae) translates to 'We do not support such a process'. While accurate, it's less user-friendly than a more direct explanation of the limitation. The English implies lack of support for the *action*, not a general lack of support.",
-          "suggestion": "මෙවැනි ක්‍රියාවලිය කළ නොහැකියි. PDF සංස්කරණය කිරීමටත්, PDF ආකෘතීන් නිර්මාණය කිරීමටත්, පරිඝණක ක්‍රියාකාරිත්වයට හැරවිය යුතුයි."
+          "description": "The translation 'මෙවැනි ක්‍රියාවලියකට අපි සහායෝගය කරන්නේ නෑ' (mevanai kriyavalekata api sahaayogaya karanne nae) translates to 'We do not support such a process'. While conveying a similar meaning, it's a bit too literal and informal. A more natural and professional translation would be closer to 'This action is not supported'.",
+          "suggestion": "හැකියාවක් නැහැ. (Hakiyawe nathe)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'පරිඝණක ක්‍රියාකාරිත්වයට හැරවිය යුතුයි' (parighanaka kriyakaarithuwathata harawiya yeththaai) literally means 'must be turned to computer functionality'. A more natural phrasing for Sinhala would be 'පරිඝණක ක්‍රියාකාරිත්වය භාවිතා කළ යුතුයි' (parighanaka kriyakaarithuwathaa upayogathaa kala yeththaai) or 'පරිඝණක පරිසරයට යා යුතුය' (parighanaka parisarathaa yaaythu yai).",
-          "suggestion": "පරිඝණක පරිසරයට යා යුතුය."
+          "description": "The phrase 'PDF න්‍යාථා සංස්කරණය කිරීමටත්' (PDF n'yatha sanskarayanaya kirimata) is technically correct but sounds awkward. 'න්‍යාථා' is a bit too formal for a user-facing message. It translates to 'To edit PDF documents'.",
+          "suggestion": "PDF ගොඩ සංස්කරණය කිරීමට"
         },
         {
-          "type": "formatting",
-          "description": "The sentence structure is a bit long and complex for optimal readability. It might be beneficial to split it into two shorter sentences.",
-          "suggestion": "මෙවැනි ක්‍රියාවලිය කළ නොහැකියි. PDF න්‍යාථා සංස්කරණය කිරීමටත්, PDF ආකෘතීන් නිර්මාණය කිරීමටත්, පරිඝණක ක්‍රියාකාරිත්වයට හැරවිය යුතුයි."
+          "type": "incorrect_translation",
+          "description": "The phrase 'PDF ආකෘතීන් නිර්මාණය කිරීමටත්' (PDF akruteen nirmanaya kirimata) translates to 'To create PDF forms'. While accurate, it could be more concise.  'ආකෘතීන්' is a slightly formal term.",
+          "suggestion": "PDF ආකෘති නිර්මාණය කිරීමට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing 'පරිඝණක ක්‍රියාකාරිත්වයට හැරවිය යුතුයි' (parighanaka kriyakarithuwata harrayi yuktai) is complex and not the most natural way to express 'switch to desktop mode'.  It translates literally to 'must be turned over to the computer functionality'.",
+          "suggestion": "පරිඝණක ක්‍රියාකාරිත්වයට යා යුතුය. (Parighanaka kriyakarithuwata yayama) or පරිඝණක ක්‍රියාකාරිත්වයට මාරුවන්න (Parighanaka kriyakarithuwata maruwanna)"
         }
       ],
       "approved_at": null
@@ -319,13 +302,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Please' is missing. The English sentence uses a polite imperative, and the Slovenian should reflect this to maintain the original tone. While 'Preklopite' is grammatically correct, it lacks the politeness implied by 'Please'.",
-          "suggestion": "Nepodprto dejanje. Prosim, preklopite v namizni način, da boste lahko urejali datoteke PDF ali ustvarjali obrazce PDF."
+          "description": "The phrase 'Preklopite v namizni način' is a literal translation of 'Switch to desktop mode'. A more natural and user-friendly translation would be something like 'Preklopite na omizni način' or 'Uporabite namizno različico'.",
+          "suggestion": "Preklopite na omizni način"
         },
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Preklopite v namizni način' could be more naturally translated as 'preklopi v namizni način' or 'preklopite na namizni način'. The current phrasing is a bit awkward.",
-          "suggestion": "Nepodprto dejanje. Prosim, preklopi v namizni način, da boste lahko urejali datoteke PDF ali ustvarjali obrazce PDF."
+          "description": "The word 'različico' isn't explicitly present in the English. Adding it to maintain accuracy while adding clarity is helpful.",
+          "suggestion": "Uporabite namizno različico"
         }
       ],
       "approved_at": null
@@ -335,9 +318,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The sentence structure is slightly awkward. While technically correct, it could be improved for better flow.",
-          "suggestion": "Неподржана акција. Молимо Вас да пребаците на десктоп режим да бисте уређивали PDF-ове или креирали PDF обрасце."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Молимо Вас' is overly formal for this context. A more natural and friendly tone would be more appropriate.",
+          "suggestion": "Молимо или Пређите на"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'уређујете PDF-ове' could be improved for flow and naturalness.  The use of the plural 'PDF-ове' feels slightly clunky here.",
+          "suggestion": "уређујете PDF датотеке"
         }
       ],
       "approved_at": null
@@ -345,13 +333,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses \"PDF-ove\" which is a shortened form and can appear less formal. While acceptable, using the full form \"PDF datoteke\" might improve clarity and professionalism.",
-          "suggestion": "Consider using \"PDF datoteke\" instead of \"PDF-ove\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -366,7 +348,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Перемкніться' is misspelled. The correct spelling is 'Перейдіть'.",
+          "description": "The word 'Перемкніться' is a misspelling of 'Перейдіть'.",
           "suggestion": "Перейдіть"
         }
       ],
@@ -375,7 +357,23 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Hành động không được hỗ trợ' is a literal translation of 'Unsupported action'. While technically correct, a more natural and user-friendly phrasing might be 'Không hỗ trợ thao tác này' or 'Thao tác này không được hỗ trợ'.",
+          "suggestion": "Thao tác này không được hỗ trợ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'chỉnh sửa tập tin PDF' is grammatically correct but 'chỉnh sửa PDF' is more common and concise in Vietnamese.",
+          "suggestion": "chỉnh sửa PDF"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'tạo biểu mẫu PDF' is understandable, a more colloquial translation could be 'tạo mẫu PDF'.",
+          "suggestion": "tạo mẫu PDF"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

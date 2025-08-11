@@ -53,7 +53,10 @@ const VirtualList = ({
   const activeIndex = useMemo(() => {
     let foundIndex = -1;
     React.Children.forEach(cleanChildren, (child, index) => {
-      if (React.isValidElement(child) && child.props?.disabled) {
+      if (
+        React.isValidElement(child) &&
+        (child.props as { disabled?: boolean })?.disabled
+      ) {
         foundIndex = index;
       }
     });

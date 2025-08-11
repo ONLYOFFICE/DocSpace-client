@@ -3,7 +3,7 @@
   "content": "This link is valid for {{days_count}} days only.",
   "content_en_sha1_hash": "5755edd171493aa08c31afc1ee60817539d2d325",
   "created_at": "2025-05-19T21:30:49.995Z",
-  "updated_at": "2025-05-28T09:30:02.372Z",
+  "updated_at": "2025-05-26T07:57:32.372Z",
   "comment": {
     "text": "The \"LinkValidTime\" translation key is used to display a countdown message indicating how long a link remains valid. It appears in a success notification after copying a link and should be translated to indicate the number of days the link is valid for.",
     "is_auto": true,
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Ce lien n’est valable que pour les {{days_count}} jours' could be improved for better flow. The repetition of 'jours' is a bit awkward.",
-          "suggestion": "Ce lien est valable seulement pour {{days_count}} jours."
+          "description": "The phrase 'n’est valable que pour' is grammatically correct, but could be slightly more natural sounding. While technically correct, a more common phrasing might improve readability.",
+          "suggestion": "Ce lien est valide uniquement pour {{days_count}} jours."
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Այս հղումը վավեր է միայն {{days_count}} օր:' is a literal translation and could be improved for natural flow. A more natural phrasing would consider reordering the sentence.",
-          "suggestion": "Այս հղումը կլինի վավեր {{days_count}} օրով:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -125,9 +119,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Latvian translation includes a gendered form 'dienu (-as)'. It's unclear whether the intended meaning requires this grammatical variation.  Ideally, the variable 'days_count' would inform the correct form, or a gender-neutral form would be used.",
-          "suggestion": "Consider if the variable 'days_count' informs the gender. If not, revise to a gender-neutral form like 'dienu' or 'dienas'."
+          "type": "grammar",
+          "description": "The Latvian translation uses a gendered form ('dienu (-as)'). The appropriate gender depends on the value of days_count. While technically correct, it's less ideal for a purely informational message.  It's better to avoid gendered forms unless specifically necessary for context.",
+          "suggestion": "Šī saite ir derīga tikai {{days_count}} dienas."
         }
       ],
       "approved_at": null
@@ -173,9 +167,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'මෙම සබැඳිය දවස් {{days_count}}කට වලංගුය.' is not the most natural or idiomatic way to express 'This link is valid for {{days_count}} days only.' A more natural phrasing would focus on the duration as a whole rather than referencing 'days' twice.",
-          "suggestion": "මෙම සබැඳිය {{days_count}} දින වලංගු වේ."
+          "type": "formatting",
+          "description": "The Sinhala translation uses the English variable `{{days_count}}` directly. It's better to use a localized variable name or format the number appropriately in Sinhala.",
+          "suggestion": "Consider localizing `{{days_count}}` to a Sinhala variable name or format the number as needed within the Sinhala sentence."
         }
       ],
       "approved_at": null
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation uses a shortened form of 'днів' (dniv). While grammatically correct, it might be more formal and readable to use the full form 'днів' (dniv) to match the English phrasing's clarity and formality.",
-          "suggestion": "Це посилання дійсне лише протягом {{days_count}} днів."
+          "description": "The Ukrainian translation uses a shortened form 'дн' for 'днів'. While commonly used, using the full form 'днів' would be more formal and potentially more accurate for certain contexts.",
+          "suggestion": "Replace 'дн' with 'днів'."
         }
       ],
       "approved_at": null

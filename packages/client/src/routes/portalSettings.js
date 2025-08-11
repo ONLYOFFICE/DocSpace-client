@@ -92,7 +92,7 @@ const PortalSettingsRoutes = {
       },
     },
     {
-      path: "customization/branding/company-info-settings",
+      path: "customization/branding/company-info",
       async lazy() {
         const { CompanyInfoSettings } = await componentLoader(
           () =>
@@ -551,12 +551,13 @@ const PortalSettingsRoutes = {
     {
       path: "restore/restore-backup",
       lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/data-management/backup/restore-backup"
-            ),
-        ),
+        componentLoader(async () => {
+          const RestoreBackup = await import(
+            "SRC_DIR/pages/PortalSettings/categories/data-management/backup/restore-backup"
+          );
+
+          return { Component: RestoreBackup.default };
+        }),
     },
     {
       path: "bonus",

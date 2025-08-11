@@ -40,6 +40,7 @@ import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
+import { logger } from "@/../logger.mjs";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -50,13 +51,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  logger.info("SDK layout");
+
+  const hdrs = await headers();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    return <></>;
+    logger.info("get health check and return empty layout");
+    return null;
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const [self, portalSettings, colorTheme, portalCultures] = await Promise.all([
     getSelf(),
@@ -80,7 +84,7 @@ export default async function RootLayout({
     | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
-    (theme) => theme.id === colorTheme.selected,
+    (t) => t.id === colorTheme.selected,
   );
 
   const dirClass = getDirectionByLanguage(locale || "en");

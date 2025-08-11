@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "从列表中选择",
-  "ConnectingAccount": "连接账户",
-  "DeleteFromTrash": "选择的元素已成功从回收站中删除",
   "FileLocked": "文件已锁定",
   "FileProtected": "该文件受密码保护",
   "FileUnlocked": "文件已解锁",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "更改第三方信息",
   "ThirdPartyTitle": "第三方服务",
   "TitleShowActions": "显示文件相关操作",
-  "TitleShowFolderActions": "显示文件夹相关操作",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google 云端硬盘",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "显示文件夹相关操作"
 }

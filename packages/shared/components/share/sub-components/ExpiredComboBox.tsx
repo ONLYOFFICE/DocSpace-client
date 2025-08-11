@@ -28,6 +28,7 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 
 import moment from "moment";
+import classNames from "classnames";
 
 import { Text } from "../../text";
 import { LinkWithDropdown } from "../../link-with-dropdown";
@@ -39,7 +40,7 @@ import { ExpiredComboBoxProps } from "../Share.types";
 import ShareCalendar from "./ShareCalendar";
 import { globalColors } from "../../../themes";
 import { ShareAccessRights } from "../../../enums";
-import { classNames } from "../../../utils";
+import styles from "../Share.module.scss";
 
 const ExpiredComboBox = ({
   link,
@@ -134,7 +135,7 @@ const ExpiredComboBox = ({
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">
           The link will expire after
           <LinkWithDropdown
-            className="expired-options"
+            className={styles.expiredOptions}
             color={globalColors.lightBlueMain}
             dropdownType="alwaysDashed"
             data={expiredOptions}
@@ -155,7 +156,7 @@ const ExpiredComboBox = ({
       <Trans t={t} i18nKey="LinkIsValid" ns="Common">
         The link is valid for
         <LinkWithDropdown
-          className="expired-options"
+          className={styles.expiredOptions}
           color={globalColors.lightBlueMain}
           dropdownType="alwaysDashed"
           data={expiredOptions}
@@ -175,8 +176,8 @@ const ExpiredComboBox = ({
     <div ref={bodyRef}>
       {isExpired ? (
         <Text
-          className={classNames("expire-text", {
-            "expire-text-room": Boolean(isRoomsLink),
+          className={classNames(styles.expireText, {
+            [styles.expireTextRoom]: isRoomsLink,
           })}
           as="div"
           fontSize="12px"
@@ -189,14 +190,15 @@ const ExpiredComboBox = ({
             fontSize="12px"
             color={globalColors.lightBlueMain}
             onClick={onRemoveLink}
+            dataTestId="expired_combo_box_remove_link"
           >
             {t("Common:RemoveLink")}
           </Link>
         </Text>
       ) : (
         <Text
-          className={classNames("expire-text", {
-            "expire-text-room": Boolean(isRoomsLink),
+          className={classNames(styles.expireText, {
+            [styles.expireTextRoom]: isRoomsLink,
           })}
           as="div"
           fontSize="12px"

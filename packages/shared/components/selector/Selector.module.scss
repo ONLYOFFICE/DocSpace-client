@@ -23,8 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../../shared/styles/mixins.scss";
-@import "../../../shared/styles/variables/devices.scss";
+@use "../../../shared/styles/mixins.scss";
+@use "../../../shared/styles/variables/devices.scss";
 
 .selector {
   width: 100%;
@@ -94,7 +94,7 @@
   :global {
     .combo-button {
       min-height: 40px;
-      padding-inline-start: 16px;
+      padding-inline-start: 16px !important;
     }
 
     .combo-button-label,
@@ -494,6 +494,14 @@
     cursor: pointer;
   }
 
+  &.isSystem {
+    .userAvatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
   &.disabled {
     .itemLogo,
     .userAvatar {
@@ -584,7 +592,7 @@
     inset-inline-start: -12px;
   }
 
-  @include mobile {
+  @include mixins.mobile {
     width: 100%;
     position: fixed;
     top: unset;
@@ -593,4 +601,12 @@
 
     border-radius: 6px 6px 0 0;
   }
+}
+
+.selectorSeparator {
+  cursor: default;
+  margin: 8px 16px 0px 16px;
+  line-height: 1px;
+  height: 1px;
+  width: calc(100% - 32px);
 }

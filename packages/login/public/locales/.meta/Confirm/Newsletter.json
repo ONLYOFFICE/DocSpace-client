@@ -3,7 +3,7 @@
   "content": "I want to subscribe to the {{organizationName}} newsletter",
   "content_en_sha1_hash": "c2523a0f39579a0e89f6536c419daebc365c6295",
   "created_at": "2025-05-19T21:30:57.372Z",
-  "updated_at": "2025-05-20T09:47:26.762Z",
+  "updated_at": "2025-05-26T07:57:32.867Z",
   "comment": {
     "text": "This translation key is used to render a newsletter subscription confirmation message. It appears on a form, specifically in the RegistrationForm component, and provides a user-friendly way to express their desire to subscribe to the organization's newsletter.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 124,
+      "line_number": 123,
       "context": "}: RegistrationFormProps) => {\n const { t } = useTranslation([\"Confirm\", \"Common\"]);\n \n const { linkData } = useContext(ConfirmRouteContext);\n \n const newsletter = t(\"Newsletter\", {\n organizationName,\n });\n \n const termsConditionsComponent = (\n <div className=\"terms-conditions\">",
       "module": "/packages/login"
     }
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Finnish translation includes an unnecessary colon after {{organizationName}}. It should be a possessive particle instead.",
+          "suggestion": "Haluan tilata {{organizationName}}:n uutiskirjeen should be Haluan tilata {{organizationName}}n uutiskirjeen"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"informatīvo izdevumu\" translates to 'newsletter', it's a more formal term and might not be the most natural choice for a subscription request. 'Vēstuli' is a more common and direct translation for 'newsletter' in this context.",
+          "suggestion": "Es vēlos abonēt {{organizationName}} vēstuli"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Quero subscrever a newsletter {{organizationName}}' while understandable, isn't the most natural way to say 'I want to subscribe to the newsletter' in Portuguese. 'Subscrever' is more formal than necessary. A more common and natural phrasing would use 'receber' or 'inscrever-me'.",
+          "suggestion": "Quero receber a newsletter {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මට {{organizationName}} පුවත් පත්‍රිකාවට දායක වීමට අවශ්‍යයි' is a literal translation and while understandable, it's not the most natural way to express the sentiment in Sinhala. A more natural phrasing would be something like 'මට {{organizationName}} පුවත්පත් ලිපි මඟින් දැනුවත් වීමට කැමතියි' (I want to be informed by {{organizationName}} newsletters).",
+          "suggestion": "Consider: 'මට {{organizationName}} පුවත්පත් ලිපි මඟින් දැනුවත් වීමට කැමතියි'"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,13 +189,30 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Želim se naročiti na novice {{organizationName}}' isn't the most natural way to say 'I want to subscribe to the {{organizationName}} newsletter'. 'Novice' translates to 'news', while 'newsletter' is more specific. A more accurate translation would use a word that better conveys a newsletter.",
+          "suggestion": "Želim se naročiti na e-novice {{organizationName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'newsletter' is transliterated as 'ne' instead of properly translated. The correct Serbian (Cyrillic) word for 'newsletter' is 'informativni bilten' or simply 'bilten'.",
+          "suggestion": "Желим да се претплатим на информативни билтен {{organizationName}}"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'Желим' is spelled incorrectly. The correct spelling is 'Желим'",
+          "suggestion": "Желим"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -201,7 +242,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word '资讯' (zixun) is a more formal term for 'newsletter' or 'news'. While not strictly incorrect, it might not perfectly convey the casual and direct tone of 'I want to subscribe'. '订阅' (subscribe) is accurate.",
+          "suggestion": "Consider using a more direct translation, such as '我想订阅{{organizationName}}的邮件' (I want to subscribe to the {{organizationName}} email) or '我想订阅{{organizationName}}的最新消息' (I want to subscribe to the latest news from {{organizationName}})."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -1,0 +1,40 @@
+{
+  "key_path": "SectionMoveConfirmation",
+  "content": "Move to {{sectionName}}?",
+  "content_en_sha1_hash": "ee3b1c51a995b4cd544de5f673d85dd47977b235",
+  "created_at": "2025-06-02T10:19:15.915Z",
+  "updated_at": "2025-08-04T07:30:01.045Z",
+  "comment": {
+    "text": "This translation key is used to display a confirmation message when moving a section to another location. It prompts the user to confirm their action and includes the name of the destination section. This key appears in modal dialogs where users are prompted to move sections to archives or trash.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:28.080Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/ArchiveDialog/index.js",
+      "line_number": 95,
+      "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:Archive\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{description}</Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
+      "line_number": 167,
+      "context": "};\n }, []);\n \n const moveToTrashTitle = () => {\n if (unsubscribe) return t(\"UnsubscribeTitle\");\n return t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n };\n \n const moveToTrashNoteText = () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
+      "line_number": 45,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>\n {t(\"Common:SectionMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>",
+      "module": "/packages/doceditor"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

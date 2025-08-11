@@ -3,7 +3,7 @@
   "content": "Third-party Authorization",
   "content_en_sha1_hash": "3861395ee9ebb8b36b5c86c31bb334a7938d4491",
   "created_at": "2025-05-19T21:30:52.873Z",
-  "updated_at": "2025-07-02T07:49:19.790Z",
+  "updated_at": "2025-08-04T07:30:01.279Z",
   "comment": {
     "text": "This translation key is used to display the label \"Third-party Authorization\" in various UI contexts, such as buttons and dialog titles, primarily within integration settings and portal settings. It appears on a page that allows users to manage third-party services integrations.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
       "line_number": 212,
-      "context": "return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Backup\");",
+      "context": "return t(\"PortalAccess\", { productName: t(\"Common:ProductName\") });\n case \"TwoFactorAuth\":\n return t(\"TwoFactorAuth\");\n case \"ManagementCategoryIntegration\":\n return t(\"ManagementCategoryIntegration\");\n case \"ThirdPartyAuthorization\":\n return t(\"ThirdPartyAuthorization\");\n case \"Migration\":\n return t(\"Migration\");\n case \"Backup\":\n return t(\"Common:Backup\");",
       "module": "/packages/client"
     },
     {

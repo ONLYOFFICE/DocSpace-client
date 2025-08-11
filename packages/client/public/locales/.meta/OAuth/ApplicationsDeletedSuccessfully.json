@@ -3,7 +3,7 @@
   "content": "Applications deleted successfully",
   "content_en_sha1_hash": "8b4aa180b604699ada2726392ae8d2a81e701bb9",
   "created_at": "2025-05-19T21:30:53.804Z",
-  "updated_at": "2025-05-28T09:30:02.595Z",
+  "updated_at": "2025-05-26T07:57:32.656Z",
   "comment": {
     "text": "The \"ApplicationsDeletedSuccessfully\" translation key is used to display a success message when applications are deleted successfully in an OAuth settings context. This message appears as part of a delete dialog and a toast notification when the delete process completes without errors.",
     "is_auto": true,
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Հավելվածը հաջողությամբ միացված է\" translates to \"The application has successfully connected.\" This does not accurately convey the meaning of \"Applications deleted successfully\". It implies a connection, not a deletion.",
-          "suggestion": "Հավելվածները հաջողությամբ ջնջվեցին (Havelinqner hazhoghutyamb dznjvetsin)"
+          "description": "The Armenian translation \"Հավելվածը հաջողությամբ միացված է\" translates to \"The application was successfully connected.\" This does not accurately reflect the English phrase \"Applications deleted successfully.\" The Armenian translation should convey the meaning of deletion, not connection.",
+          "suggestion": "Հավելվածները հաջողությամբ ջնջվեցին։ (Havelappner hacoghutyamb dzngev cin)."
         }
       ],
       "approved_at": null
@@ -108,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '애플리케이션이 삭제되었습니다' is a passive voice construction that translates to 'Applications have been deleted'. While technically correct, it doesn't perfectly capture the active and affirmative tone of 'Applications deleted successfully'. A more direct translation conveying success would be better.",
+          "description": "The translation '애플리케이션이 삭제되었습니다' is a literal translation of 'Applications were deleted'.  The original English indicates success. A better translation would convey that the action was successful.",
           "suggestion": "애플리케이션 삭제가 완료되었습니다"
         }
       ],
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ຄຳ ຮ້ອງ ຖືກ ລົບ ອອກ ຢ່າງ ສົມບູນ ແລ້ວ' while conveying the general meaning, is a bit verbose and not the most natural phrasing. A more direct translation of 'Applications deleted successfully' would be 'ຄໍາຮ້ອງຖືກລົບແລ້ວ' or 'ຄໍາຮ້ອງລົບອອກແລ້ວ'.",
-          "suggestion": "ຄໍາຮ້ອງຖືກລົບແລ້ວ"
+          "description": "While the Lao translation conveys the general meaning, a more natural and accurate translation for 'Applications deleted successfully' would be something along the lines of 'ຄໍາຮ້ອງຖືກລຶບອອກຢ່າງຖືກຕ້ອງ' or 'ຄໍາຮ້ອງຖືກລຶບອອກແລ້ວທຸກຄັ້ງ'. The current translation 'ຄໍາ ຮ້ອງ ຖືກ ລົບ ອອກ ຢ່າງ ສົມບູນ ແລ້ວ' sounds slightly awkward and uses 'ສົມບູນ' (complete) which isn't the most fitting adjective in this context. 'ຖືກຕ້ອງ' (correct) or simply stating it has been deleted (ຖືກລຶບອອກແລ້ວທຸກຄັ້ງ) is preferable.",
+          "suggestion": "ຄໍາຮ້ອງຖືກລຶບອອກຢ່າງຖືກຕ້ອງ"
         }
       ],
       "approved_at": null
@@ -162,7 +162,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation 'Aplicații au fost șterse cu succes' is grammatically correct, but slightly passive. A more natural phrasing would be in the active voice.",
+          "description": "The Romanian translation 'Aplicații au fost șterse cu succes' uses the passive voice. While grammatically correct, it sounds less natural than an active construction in this context. Considering the message conveys a successful action performed by the system, a more direct phrasing might be preferred.",
           "suggestion": "Aplicațiile au fost șterse cu succes."
         }
       ],
@@ -179,9 +179,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'යෙදුම්' (yedum) is the correct spelling for 'applications'.",
+          "suggestion": null
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow and clarity. While technically correct, it sounds slightly unnatural. Consider a more common phrasing.",
+          "suggestion": "යෙදුම් සාර්ථකව ඉවත් කරන ලදි."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The translation 'යෙදුම් සාර්ථකව මකන ලදි.' while understandable, isn't the most natural or precise translation of 'Applications deleted successfully'. A more accurate and common phrasing would emphasize the action completed by a subject.",
-          "suggestion": "යෙදුම් සාර්ථකව මකවා දමන ලදි."
+          "description": "While 'මකන ලදි' (makana ladi) translates to 'deleted', 'ඉවත් කරන ලදි' (iwath karan ladi) or 'හරවා ලදි' (harawa ladi) are more commonly used and natural-sounding when referring to deleting applications in Sinhala. 'මකන' has a more forceful connotation.",
+          "suggestion": "යෙදුම් සාර්ථකව ඉවත් කරන ලදි."
         }
       ],
       "approved_at": null
@@ -197,9 +207,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Slovenian translation \"Aplikacije uspešno izbrisane\" is passive voice. While grammatically correct, a more natural and active voice construction would be preferred for this context.  \"Uspešno izbrisane aplikacije\" would be more common.",
-          "suggestion": "Uspešno izbrisane aplikacije"
+          "type": "incorrect_translation",
+          "description": "The translation \"Aplikacije uspešno izbrisane\" is grammatically correct but sounds awkward and passive. A more natural and active phrasing would be better.",
+          "suggestion": "Aplikacije so bile uspešno izbrisane"
         }
       ],
       "approved_at": null
@@ -228,13 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Застосунки успішно видалено' is not the most natural or accurate translation of 'Applications deleted successfully'. 'Застосунки' is a diminutive and somewhat informal term for 'applications'. While understandable, it might not be suitable for all contexts, especially if a more formal tone is desired.",
-          "suggestion": "Заявки успішно видалено (Applications successfully deleted)"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, 'Застосунки' is less commonly used than 'Заявки' when referring to applications in a technical context. Although not a misspelling, it impacts the professional tone.",
-          "suggestion": "Use 'Заявки' instead of 'Застосунки' for a more standard and formal feel."
+          "description": "The translation 'Застосунки успішно видалено' uses the diminutive form 'Застосунки' which might be too informal for a formal context like OAuth application management. 'Застосунки' is more suitable for children's applications or informal settings.",
+          "suggestion": "Успішно видалено застосунки"
         }
       ],
       "approved_at": null
@@ -251,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"多个应用已删除\" (Duō gè yìngyòng yǐ shānchú) translates to \"Multiple applications have been deleted.\" While not entirely wrong, it's less precise than the English \"Applications deleted successfully.\" The English conveys a sense of completion and success, which isn't explicitly present in the Chinese translation. \"多个\" (multiple) isn't strictly necessary and adds slight awkwardness.",
-          "suggestion": "应用已成功删除 (Yìngyòng yǐ chénggōng shānchú) - \"Applications have been successfully deleted\" or simply 应用已删除 (Yìngyòng yǐ shānchú) - \"Applications have been deleted\"."
+          "description": "The translation '多个应用已删除' (Duō gè yìngyòng yǐ shānchú) translates to 'Multiple applications have been deleted'. While not entirely wrong, it doesn't perfectly capture the meaning of 'Applications deleted successfully'. The emphasis on 'successfully' is lost.",
+          "suggestion": "考虑更贴切的翻译，例如：应用删除成功 (Yìngyòng shānchú chénggōng) - 'Applications deleted successfully' or 删除应用成功 (Shānchú yìngyòng chénggōng) - 'Successfully deleted applications'."
         }
       ],
       "approved_at": null

@@ -1,14 +1,14 @@
-@import "../../styles/mixins";
-@import "../../styles/variables/_colors.scss";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .label {
   line-height: 20px;
   margin-inline-end: 10px;
   max-width: 23ch;
 
-  @include no-user-select;
+  @include mixins.no-user-select;
 
-  @include truncate;
+  @include mixins.truncate;
 
   &.disabled {
     color: var(--disabled-selected-item-color);

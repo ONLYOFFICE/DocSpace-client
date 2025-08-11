@@ -3,7 +3,7 @@
   "content": "Remove selected items",
   "content_en_sha1_hash": "b77240cb7909315367a21c30a237c9663e97ec53",
   "created_at": "2025-05-19T21:30:55.079Z",
-  "updated_at": "2025-05-21T10:26:16.666Z",
+  "updated_at": "2025-05-24T10:35:45.017Z",
   "comment": {
     "text": "The \"HotkeysRemove\" translation key is used to display the text \"Remove selected items\" in a hotkey settings panel, likely within an action or button context. This phrase informs users of the intended action when using a specific hotkey combination.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Seçilmiş elementləri silin' is a literal translation that doesn't quite capture the nuance of 'Remove selected items'. While technically correct, it's a bit formal and might not flow naturally in Azerbaijani UI contexts. A more natural phrasing could be considered.",
-          "suggestion": "Consider a more idiomatic translation like 'Seçilmişləri sil' or 'Silin seçilmişləri' which are more commonly used for removing selections in UI elements."
+          "description": "The translation \"Seçilmiş elementləri silin\" is a literal translation but doesn't convey the most natural phrasing for removing selected items in a UI context.  'Silin' implies a permanent deletion. A more appropriate term might suggest removal from the list or panel, not necessarily complete deletion.",
+          "suggestion": "Seçilmişləri çıxarın"
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Հեռացնել ընտրված միավորները' while technically correct, doesn't quite capture the nuance of 'Remove selected items'. 'Հեռացնել' is a general term for removal. A more suitable translation would focus on the action of removing selections.",
+          "suggestion": "Հաղթել ընտրվածները"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -102,8 +108,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '選択されているアイテムを解除' doesn't perfectly convey the meaning of 'Remove selected items'. '解除' implies releasing or canceling, which isn't quite the same as removing. A more suitable term would convey the action of deleting or taking away.",
-          "suggestion": "選択されたアイテムを削除する (Sentaku sareta aitemu o sakujo suru)"
+          "description": "The translation \"選択されているアイテムを解除\" is not the most natural or accurate translation of \"Remove selected items.\" While technically correct, it sounds somewhat formal and awkward.  '解除' implies releasing or canceling, which isn't the primary meaning of 'remove' in this context.",
+          "suggestion": "選択された項目を削除する (Sentaku sareta koumoku o sakujo suru)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more concise and common translation would be '選択項目を削除' (Sentaku koumoku o sakujo).",
+          "suggestion": "選択項目を削除 (Sentaku koumoku o sakujo)"
         }
       ],
       "approved_at": null
@@ -153,7 +164,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Șterge elementele selectate' is understandable, 'Remove' often implies the action of deleting or removing from a list, not just deleting. 'Elimină elementele selectate' would be a more precise translation for 'Remove' in this context, as 'șterge' can also mean 'wipe' or 'erase'.",
+          "suggestion": "Elimină elementele selectate"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -168,13 +185,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'තේරූ අථක ඉවත් කරන්න' is not an accurate translation of 'Remove selected items'. 'අථක' (athaka) is not a standard word and doesn't convey the meaning of 'items' in this context. It's closer to 'materials' or 'substance'.",
-          "suggestion": "තේරීම් ඉවත් කරන්න (Therim Iwat Kanna) - which means 'Remove selections'."
+          "description": "The translation 'තේරූ අථක ඉවත් කරන්න' doesn't accurately convey the meaning of 'Remove selected items'. 'අථක' (athaka) is not a common or appropriate word in this context. It translates more to 'objects' or 'things' but doesn't fit the intended action of removing *selected* items.",
+          "suggestion": "තේරීම් ඉවත් කරන්න (Therimee Ewat Kanna)"
         },
         {
-          "type": "grammar",
-          "description": "While technically grammatically correct, 'තේරූ අථක ඉවත් කරන්න' sounds awkward and unnatural in Sinhala. The suggested phrasing is more fluent.",
-          "suggestion": "Use the suggested phrasing 'තේරීම් ඉවත් කරන්න'."
+          "type": "spelling",
+          "description": "While the individual words are spelled correctly, the combination is unnatural and the meaning is unclear.",
+          "suggestion": "Consider alternative phrasing entirely to better reflect 'Remove selected items'. The suggested phrase 'තේරීම් ඉවත් කරන්න' utilizes standard Sinhala words."
         }
       ],
       "approved_at": null
@@ -188,13 +205,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Odstrani izbrane izdelke' is too literal. 'Izdelke' translates to 'products' which is not the intended meaning of 'items' in this context (likely referring to actions or controls).",
-          "suggestion": "Odstrani izbrane elemente"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -203,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Уклони одабране ставке\" doesn't accurately convey the meaning of \"Remove selected items.\" The verb \"уклонити\" means \"to avoid\" or \"to deviate,\" not \"to remove.\" It implies bypassing or evading the selected items, which is not the intended action.",
-          "suggestion": "Уклони одабране елементе"
+          "description": "The translation \"Уклони одабране ставке\" doesn't accurately convey the meaning of \"Remove selected items.\" \"Уклони\" implies evasion or avoidance, not removal.",
+          "suggestion": "Избриши одабране ставке"
         }
       ],
       "approved_at": null
@@ -215,12 +226,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ukloni odabrane stavke' is not an accurate rendering of 'Remove selected items'. 'Ukloni' is a verb in the imperative form (you remove), and while technically conveys removal, it's not the most natural phrasing in this context. A more accurate translation would use a form suggesting 'removing' or 'deleting'.",
-          "suggestion": "Obriši odabrane stavke"
-        },
-        {
-          "type": "grammar",
-          "description": "While grammatically correct, the usage of 'Ukloni' sounds somewhat formal or technical for a user interface element like a hotkey action.",
+          "description": "The translation 'Ukloni odabrane stavke' doesn't accurately convey the meaning of 'Remove selected items.' 'Ukloni' is a formal/command form and 'Remove' implies a simpler action.  A more natural and accurate translation would use a verb that implies removal without the formality.",
           "suggestion": "Obriši odabrane stavke"
         }
       ],

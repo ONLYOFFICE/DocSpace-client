@@ -3,7 +3,7 @@
   "content": "Share this document",
   "content_en_sha1_hash": "e221ad72445df0b9bdff3f83c62c294910835379",
   "created_at": "2025-05-19T21:30:48.642Z",
-  "updated_at": "2025-05-28T09:30:02.956Z",
+  "updated_at": "2025-08-11T09:02:44.085Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to share a document. It appears as part of a UI element containing a button or link that allows users to share a file, and its purpose is to provide context for the sharing action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/index.tsx",
-      "line_number": 394,
-      "context": "return (\n <div data-testid=\"shared-links\">\n {visibleBar ? (\n <PublicRoomBar\n headerText={t(\"Common:ShareDocument\")}\n bodyText={t(\"Common:ShareDocumentDescription\")}\n iconName={InfoIcon}\n onClose={() => setVisibleBar(false)}\n />\n ) : null}",
+      "line_number": 406,
+      "context": "return (\n <div data-testid=\"shared-links\">\n {visibleBar ? (\n <PublicRoomBar\n headerText={t(\"Common:ShareDocument\")}\n bodyText={t(\"Common:ShareDocumentDescription\")}\n iconName={InfoIcon}\n onClose={() => setVisibleBar(false)}\n dataTestId=\"info_panel_share_public_room_bar\"\n />",
       "module": "/packages/shared"
     }
   ],
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Համօգտագործել այս փաստաթուղթը\" translates to \"Use this document\" or \"Co-use this document\", which doesn't accurately convey the meaning of \"Share this document\". Sharing implies giving access to others, while \"Use\" simply implies utilizing it.",
-          "suggestion": "A more accurate translation would be something like \"Մանվել այս փաստաթուղթը\" (Manvel ays fasthaguhty) which means \"Share this document\" or \"Distribute this document\". Another option could be \"Տարածել այս փաստաթուղթը\" (Taracel ays fasthaguhty) which also means \"Share\" or \"Distribute\"."
+          "description": "The Armenian translation \"Համօգտագործել այս փաստաթուղթը\" translates to 'Use this document' which doesn't accurately convey the meaning of 'Share this document'. 'Share' implies giving access or distributing, while 'use' implies personal consumption.",
+          "suggestion": "A more accurate translation could be something like \"Բաշխեք այս փաստաթուղթը\" (Bashkeg ays fasitoghutyun) - meaning 'Distribute this document', or \"Միավորեք այս փաստաթուղթը\" (Miavordz ays fasitoghutyun) meaning 'Share this document' (in a collaborative sense)."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '이 문서 공유' is a literal translation but lacks a complete sentence structure. It's more like a title or label than a full command or suggestion to share.",
-          "suggestion": "Consider a more complete translation like '이 문서를 공유하세요' (Share this document) or '이 문서를 공유해 주세요' (Please share this document)."
+          "description": "The translation \"이 문서 공유\" is a literal translation of \"Share this document\" and lacks a polite verb conjugation. It sounds abrupt and unnatural in Korean. A more appropriate translation would include a verb conjugation to make it sound more polite and natural.",
+          "suggestion": "이 문서를 공유해주세요 (I munseoreul gongyohaeyeo juseyo)"
         }
       ],
       "approved_at": null
@@ -192,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Deli ovaj dokument' is not the best translation for 'Share this document'. While 'deli' means 'share' or 'distribute,' a more natural and common translation would be 'Podeli ovaj dokument'.",
+          "description": "The translation \"Deli ovaj dokument\" is not the most natural or accurate rendering of \"Share this document\" in Serbian. \"Deli\" is a command form, and while technically correct, a more common and polite phrasing would be \"Podeli ovaj dokument\" or \"Podelite ovaj dokument\" (formal).",
           "suggestion": "Podeli ovaj dokument"
         }
       ],

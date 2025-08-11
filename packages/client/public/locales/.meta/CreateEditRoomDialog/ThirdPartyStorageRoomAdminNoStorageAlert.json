@@ -3,7 +3,7 @@
   "content": "To connect a third-party storage, you need to add the corresponding service in the Integration section of {{productName}} settings. Contact {{productName}} owner or administrator to enable the integration.",
   "content_en_sha1_hash": "6d21f17fc8337aa5d64cc41bd098795b12ff02d3",
   "created_at": "2025-05-19T21:30:56.848Z",
-  "updated_at": "2025-05-20T09:38:01.410Z",
+  "updated_at": "2025-05-24T13:40:49.789Z",
   "comment": {
     "text": "This translation key is used to display a message when a third-party storage room's integration is not enabled. It prompts the user to contact the product owner/administrator to set up the integration in {{productName}} settings. This message appears in the CreateEditRoomDialog when no connected items are found.",
     "is_auto": true,
@@ -27,13 +27,40 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"لتوصيل وحدة تخزين تابعة لجهة خارجية\" (to connect a third-party storage unit) is a bit literal and could be more naturally phrased as \"لربط مساحة تخزين خارجية\" (to connect an external storage space). While technically correct, the original phrasing sounds somewhat stiff in Arabic.",
+          "suggestion": "لربط مساحة تخزين خارجية"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"المسئول\" (al-mas'ool) for administrator is correct but could be improved to “المدير” (al-mudeer) which is a more common and generally accepted term for 'administrator' in this context. It conveys a clearer sense of responsibility.",
+          "suggestion": "المدير"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Üçüncü' should probably be 'Xarici' or 'Zəruri' to better reflect 'Third-party'.",
+          "suggestion": "Xarici tərəfin yaddaşına qoşulmaq üçün..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'qoşulmaq' is a direct translation of 'connect', but in this context, it might be better to use a phrase that implies configuration or setup, rather than simply connecting.",
+          "suggestion": "Xarici tərəfin yaddaşı ilə işləmək üçün..."
+        },
+        {
+          "type": "formatting",
+          "description": "The repeated use of {{productName}} is correct and necessary, but consider if it would be more natural to refer to the product by a more localized name where appropriate (though maintaining consistency is crucial).",
+          "suggestion": "No direct suggestion, as this depends on the product's localization strategy."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +72,18 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'služby {{productName}}' appears twice. While technically correct, it's clunky. A better phrasing might imply the overall platform rather than the service itself.",
+          "suggestion": "Chcete-li připojit úložiště třetí strany, musíte přidat příslušnou službu v části Integrace v nastavení {{productName}}. Pro povolení integrace se obraťte na vlastníka nebo správce {{productName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The second instance of '{{productName}}' is not preceded by a space after the period.",
+          "suggestion": "Chcete-li připojit úložiště třetí strany, musíte přidat příslušnou službu v části Integrace v nastavení {{productName}}. Pro povolení integrace se obraťte na vlastníka nebo správce {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +95,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation uses quotation marks (« ») that don't match the standard English quotation marks (\").",
+          "suggestion": "Replace « » with \" \""
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +113,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Ingtegraatio' is a misspelling of 'Integroitio'.",
+          "suggestion": "Integroitio"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +131,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation lacks a period at the end of the sentence.",
+          "suggestion": "Երրորդ կողմի պահեստին միանալու համար դուք պետք է ավելացնեք համապատասխան ծառայությունը {{productName}}-ի կարգավորումների Ինտեգրման բաժնում։ Կապվեք {{productName}}-ի սեփականատիրոջ կամ ադմինիստրատորի հետ՝ ինտեգրումը միացնելու համար:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -111,7 +167,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation lacks the double curly braces for the `productName` placeholder, which are present in the English content. This could cause rendering issues.",
+          "suggestion": "Change \"{{productName}}\" to \"{{productName}}\" to match the English formatting."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +203,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"această integrare\" (this integration) feels slightly awkward in this context. A more natural phrasing would be \"integrarea\" (the integration).",
+          "suggestion": "Pentru a activa integrarea."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,13 +221,45 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"තෙවන පාර්ශ්ව ආචයනයක් සම්බන්ධ කිරීමට\" is a literal translation of 'To connect a third-party storage.' A more natural Sinhala phrasing would be something like 'තෙවන පාර්ශ්ව ගබඩාවක් සම්බන්ධ කිරීමට' (To connect a third-party storage).  'ආචයනය' refers to a method or technology, not a storage space.",
+          "suggestion": "තෙවන පාර්ශ්ව ගබඩාවක් සම්බන්ධ කිරීමට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"අනුකලනය කොටසට\" is a somewhat clunky translation of 'in the Integration section.' A more natural phrasing would be something like 'අනුසంధານ කොටසට' or 'අනුකලන කොටසට'.",
+          "suggestion": "අනුසන්ධານ කොටසට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'enable' can be translated as 'ප්‍රවර්ධනය කිරීමට' or 'සක්‍රීය කිරීමට'.  'සබල කිරීමට' is understandable, but not the most natural choice.",
+          "suggestion": "සක්‍රීය කිරීමට"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Ak chcete pripojiť úložisko od tretej strany\" is a literal translation of 'To connect a third-party storage'. A more natural Slovak phrasing would be something like 'Pre pripojenie úložiska tretej strany' or 'Na pripojenie úložiska tretej strany'.",
+          "suggestion": "Pre pripojenie úložiska tretej strany"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'integráciu povoliť' is somewhat awkward. A more idiomatic phrasing would be 'zapnúť integráciu'.",
+          "suggestion": "zapnúť integráciu"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly clumsy. Combining the two sentences about contacting the owner/admin would improve flow. ",
+          "suggestion": "Ak chcete zapnúť integráciu, kontaktujte vlastníka alebo administrátora {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,31 +271,71 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation uses the possessive suffix '-а' after '{{productName}}' multiple times. This is grammatically correct but may sound slightly repetitive and less natural. While technically accurate, consider a phrasing that avoids the repetition.",
+          "suggestion": "Consider rephrasing to avoid the repetition of '-а' after '{{productName}}'. For example, 'у подешавањима {{productName}}' or 'у подешавањима овог производа'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes a hyphenated form of the product name \"{{productName}}-a\". While grammatically correct in Serbian, it might be more consistent to avoid the hyphenation if it isn't standard practice for product names in Serbian. Consider whether to use '{{productName}}' or '{{productName}}a' consistently throughout the application.",
+          "suggestion": "Consider using '{{productName}}a' instead of '{{productName}}-a' for consistency."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"birimine bağlanmak\" (to connect to a unit) is slightly awkward. A more natural phrasing would be \"bir üçüncü taraf depolama hizmeti bağlamak\" (to connect a third-party storage service).",
+          "suggestion": "Bir üçüncü taraf depolama hizmeti bağlamak için ilgili hizmeti..."
+        },
+        {
+          "type": "formatting",
+          "description": "The Turkish translation maintains the capitalization of 'Entegrasyon' which could be more consistent with Turkish conventions, potentially lowercasing it to 'entegrasyon'.",
+          "suggestion": "Bir üçüncü taraf depolama hizmeti bağlamak için ilgili hizmeti {{productName}} ayarlarının entegrasyon bölümünde eklemeniz gerekir."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Щоб увімкнути інтеграцію\" is a less direct translation of \"to enable the integration.\" A more accurate and natural phrasing would be closer to 'Для ввімкнення інтеграції'.",
+          "suggestion": "Для ввімкнення інтеграції, зверніться до власника чи адміністратора {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"bộ nhớ của bên thứ ba\" (third-party storage) is somewhat literal and could be improved for natural flow in Vietnamese. A more natural phrasing might be \"dịch vụ lưu trữ của bên thứ ba\" or simply \"dịch vụ lưu trữ bên ngoài\".",
+          "suggestion": "Để kết nối dịch vụ lưu trữ của bên thứ ba, bạn cần thêm dịch vụ tương ứng trong phần Tích hợp của cài đặt {{productName}}."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'kích hoạt' (activate) might be too technical for the target audience. Consider a more accessible term like 'bật' (turn on) or 'thiết lập' (set up).",
+          "suggestion": "Liên hệ với chủ sở hữu hoặc quản trị viên {{productName}} để thiết lập tích hợp."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

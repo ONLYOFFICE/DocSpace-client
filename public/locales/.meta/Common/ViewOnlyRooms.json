@@ -3,7 +3,7 @@
   "content": "View-only",
   "content_en_sha1_hash": "bd0aae2579470d5e5f8f929445ef59305e61809b",
   "created_at": "2025-05-19T21:30:49.539Z",
-  "updated_at": "2025-07-01T15:57:36.064Z",
+  "updated_at": "2025-08-11T09:02:43.902Z",
   "comment": {
     "text": "This translation key is used to display a label for rooms that can only be viewed, typically in a filtering or search interface. It appears as a filter option on pages like the Home page's Filter section, allowing users to select view-only rooms. Translators should aim for an accurate and descriptive phrase that maintains the intended accessibility and functionality of the UI component.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 815,
+      "line_number": 817,
       "context": "case RoomsType.ReadOnlyRoom:\n return {\n id: \"filter_type-view-only\",\n key: RoomsType.ReadOnlyRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:ViewOnlyRooms\"),\n };\n case RoomsType.FormRoom:\n return {\n id: \"filter_type-form\",\n key: RoomsType.FormRoom,",
       "module": "/packages/client"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yalnız baxın' does not accurately convey the meaning of 'View-only'. It literally translates to 'Only look' or 'Just watch'.  'View-only' implies a permission level or access restriction. A more appropriate translation would convey that meaning.",
-          "suggestion": "Consider alternatives like 'Sərfəli baxış' (for read-only access) or 'Təkrar baxış' (for viewing-only access) or a phrase that expresses read-only permissions."
+          "description": "The translation \"Yalnız baxın\" doesn't accurately convey the meaning of \"View-only.\" It literally translates to \"Just look,\" which is not the intended restriction.",
+          "suggestion": "A more accurate translation would be something like \"Tək baxış\" (Tek baxış) or \"Sərfəli olmayan redaktə\" (Non-editable view) to indicate a read-only access."
         }
       ],
       "approved_at": null
@@ -51,13 +51,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"Само за преглед\" is a literal translation of 'for review' and doesn't fully capture the meaning of 'View-only'. 'View-only' implies read-only access, preventing modification. A better translation would convey this restriction.",
-          "suggestion": "Преглед само"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Schreibgeschützt\" while technically meaning 'write-protected' or 'read-only', doesn't perfectly capture the nuance of \"View-only\" in the context of rooms. It implies a technical protection, rather than simply a permission.",
-          "suggestion": "Consider \"Nur-Anzeigen\" or \"Nur lesen\" to better reflect the intended meaning of 'View-only'."
+          "description": "The German translation 'Schreibgeschützt' while technically meaning 'write-protected' or 'write-protected', doesn't accurately convey the meaning of 'View-only' in the context of rooms. It implies a restriction on writing, not simply viewing.",
+          "suggestion": "Consider alternatives like 'Nur-Anzeigen', 'Nur-Lesen', or 'Ansicht-Modus' to better reflect 'View-only'."
         }
       ],
       "approved_at": null
@@ -108,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Միայն դիտելու համար\" while literal, doesn't quite capture the nuance of \"View-only.\" It translates to 'Only for viewing' which is slightly verbose and not the most natural phrasing for a technical setting. A more concise and accurate translation would be better.",
-          "suggestion": "Consider \"Դիտելու ռեժիմ\" (Ditelu rezhim) – which translates to 'View mode' or simply \"Դիտելու համար\" (Ditelu hamar) - 'For viewing'."
+          "description": "The translation \"Միայն դիտելու համար\" while literal, doesn't fully capture the concise meaning of \"View-only\". It's a bit verbose. A more natural translation might be something like \"Դիտողական\" or \"Դիտման համար միայն\" depending on the overall context and desired formality.",
+          "suggestion": "Consider alternatives like \"Դիտողական\" or \"Դիտման համար միայն\"."
         }
       ],
       "approved_at": null
@@ -123,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"読み取り専用\" is technically correct for 'view-only' but lacks nuance and might be too formal/technical for a user-facing setting. A more natural and user-friendly translation might be preferable.",
+          "suggestion": "検討: 閲覧専用, 表示専用, または文脈に合わせたより自然な表現"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -135,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ເບິ່ງເທົ່ານັ້ນ\" (bèng tèu nán) is understandable, it translates more literally to 'view only' or 'look only'. It lacks the nuance of 'View-only' which implies a permission level or restriction. A more accurate translation would depend on the specific context, but a better option might be something like 'ຊັດເຊັນການເບິ່ງ' (sèt-sèn gaan bèng) which translates to 'restricted viewing' or 'read-only viewing'.",
+          "suggestion": "Consider 'ຊັດເຊັນການເບິ່ງ' (sèt-sèn gaan bèng) or a similarly nuanced translation depending on the context.  Consult with a Lao language expert to ensure accuracy."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Apenas ver\" is a literal translation but doesn't quite capture the nuance of 'View-only'. It sounds a bit awkward in Portuguese. A more natural translation would convey the idea of restriction.",
-          "suggestion": "Possíveis sugestões: 'Somente visualização', 'Visualização apenas', 'Apenas para visualização'."
+          "description": "The translation \"Apenas ver\" is a literal translation but doesn't fully capture the nuance of \"View-only.\" It's somewhat awkward and doesn't convey the restriction of viewing only.",
+          "suggestion": "Consider a more descriptive translation like \"Somente visualização\" or \"Apenas para visualização\" to better communicate the intended meaning.  \"Visualização apenas\" is also an option."
         }
       ],
       "approved_at": null
@@ -171,13 +177,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Somente visualização' is understandable, it's not the most natural or idiomatic translation for 'View-only' in a software context. It's a very literal translation and might sound awkward.",
-          "suggestion": "Consider alternatives like 'Apenas visualização', 'Visualização apenas', or 'Somente leitura' (if it strictly means read-only access)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Просмотр\" while technically meaning 'viewing' or 'view', doesn't fully capture the meaning of \"View-only\". It lacks the restrictive aspect. 'View-only' implies read-only access, not just any viewing.",
-          "suggestion": "Только просмотр"
+          "description": "The translation \"Просмотр\" while technically meaning 'viewing' or 'view', doesn't accurately convey the nuance of 'View-only'. 'View-only' implies a restriction; the user can only view, not interact.  'Просмотр' lacks this implication of restriction.",
+          "suggestion": "A more accurate translation would be something that implies restriction, such as \"Только просмотр\" (Only view) or \"Просмотр только\" (View only) or \"Чтение\" (Read-only, if the context allows). The best option depends on the broader context of the Key's usage."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Iba prezeranie' while understandable, isn't the most natural or precise translation of 'View-only'. It literally means 'Only viewing'. A better translation would be something like 'Len na zobrazenie' or 'Výhradne na zobrazenie'.",
-          "suggestion": "Len na zobrazenie"
+          "description": "While \"Iba prezeranie\" is understandable, it's not the most natural or idiomatic translation of \"View-only.\" It lacks the nuance of restricting access to viewing only.",
+          "suggestion": "Consider \"Len na prezeranie\" or \"Pouze na zobrazenie\" for a more accurate translation. A more detailed explanation might be necessary depending on the context to convey the restriction fully."
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Само-за-преглед\" does not accurately convey the meaning of \"View-only.\" It literally translates to something like \"Self-review\" or \"For self-viewing,\" which is not the intended meaning.  'View-only' indicates a permission level where users can only see, but not modify, information.",
-          "suggestion": "A more appropriate translation would be something like \"Само-гледање\" (Samo-gledanje), \"Само за гледање\" (Samo za gledanje), or \"Само приказ\" (Samo prikaz)."
+          "description": "The Serbian translation 'Само-за-преглед' does not accurately convey the meaning of 'View-only'. It literally translates to something like 'Self-for-review' which is nonsensical in this context. 'View-only' implies a restriction where users can only view, not edit or modify.",
+          "suggestion": "A more accurate translation would be 'Само-за-гледање' (Samo-za-gledanje) or 'Више само за гледање' (Vishe samo za gledanje)."
         }
       ],
       "approved_at": null
@@ -240,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Samo-za-pregled\" doesn't accurately convey the meaning of \"View-only.\" It's a literal combination of words rather than a natural Serbian equivalent.",
-          "suggestion": "Pogled-samo or Čisto-za-pregled"
+          "description": "The Serbian translation \"Samo-za-pregled\" does not accurately convey the meaning of \"View-only\". It's a literal string concatenation that doesn't make sense in Serbian. \"View-only\" implies read-only access.",
+          "suggestion": "A better translation would be \"Više samo za pregled\" (More read-only), \"Samo za prelistavanje\" (Just for browsing), or a more specific term depending on the context of the application."
         }
       ],
       "approved_at": null
@@ -252,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Sadece görüntüleme\" is a literal translation of 'View-only' but doesn't fully capture the intended meaning in a user interface context. It's slightly awkward.",
-          "suggestion": "Consider \"Yalnızca görüntüleme\" or \"Sadece okunabilir\" for a more natural and clearer meaning in a UI context.  \"Salt okunur\" is also a good option."
+          "description": "While \"Sadece görüntüleme\" is understandable, it's not the most natural or idiomatic translation for \"View-only.\" It's a bit literal.",
+          "suggestion": "Consider alternatives like \"Yalnızca görüntüleme\", \"Sadece okuma\", or \"Sadece izleme\" depending on the specific context."
         }
       ],
       "approved_at": null
@@ -267,13 +267,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Chỉ xem\" is understandable, it's a somewhat literal translation and doesn't fully capture the nuance of \"View-only.\" A more natural and idiomatic translation might be better.",
-          "suggestion": "Xem chỉ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -282,8 +276,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '仅查看' (jin chakan) is a literal translation of 'View-only', it lacks the nuance of permission restriction implied by 'View-only' in the context of rooms. It simply means 'only view'.",
-          "suggestion": "考虑使用更精确的翻译，例如“仅读” (jin du) 或 “查看权限” (chakanquanxian)，以传达仅查看的权限限制。"
+          "description": "The translation \"仅查看\" (jin chakan) while technically meaning 'only view', doesn't fully capture the nuance of 'View-only'. It implies a limitation but doesn't explicitly state that editing is not permitted. A more accurate translation would convey the restriction on modification.",
+          "suggestion": "限制查看"
         }
       ],
       "approved_at": null

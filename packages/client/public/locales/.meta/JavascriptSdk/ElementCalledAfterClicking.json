@@ -3,7 +3,7 @@
   "content": "The element will be called after clicking",
   "content_en_sha1_hash": "f74ab04736b423fd87596ef7106470f399e142c5",
   "created_at": "2025-05-19T21:30:54.461Z",
-  "updated_at": "2025-05-21T09:13:18.095Z",
+  "updated_at": "2025-08-04T07:30:01.409Z",
   "comment": {
     "text": "This translation key is used to describe the action that occurs after an element is clicked. It appears as a tooltip on the \"Common:Button\" in the PortalSettings categories sub-component, providing context about the main element parameter when interacting with the button.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 58,
-      "context": "{\n value: \"button\",\n label: (\n <RowContainer>\n {t(\"Common:Button\")}\n <Text color=\"gray\">{`(${t(\"ElementCalledAfterClicking\")})`}</Text>\n </RowContainer>\n ),\n },\n ];",
+      "line_number": 62,
+      "context": "{\n value: \"button\",\n label: (\n <RowContainer>\n {t(\"Common:Button\")}\n <Text color=\"gray\">{`(${t(\"ElementCalledAfterClicking\")})`}</Text>\n </RowContainer>\n ),\n dataTestId: \"button_radio_button\",\n },\n ];",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Element kliklədikdən sonra adlandırılacaq\" doesn't perfectly convey the original meaning. \"Called\" in this context likely refers to a function or method being invoked, not the element itself being named. A more accurate translation would imply the action being performed *on* the element.",
-          "suggestion": "Element klikləndikdən sonra işləniləcək"
+          "description": "The translation 'Element kliklədikdən sonra adlandırılacaq' implies 'named' after clicking, which isn't the intended meaning of 'called' in the English context. 'Called' in this context likely refers to a function or method being executed.",
+          "suggestion": "Element klikləndikdən sonra işə düşəcək"
         }
       ],
       "approved_at": null
@@ -84,13 +84,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Appel de l'élément est déclenché au clic\" doesn't accurately convey the meaning of \"The element will be called after clicking.\" It implies the element *is* being called, whereas the original implies it *will be* called.",
-          "suggestion": "Un appel de l'élément sera effectué après le clic."
+          "description": "The translation 'Appel de l'élément est déclenché au clic' doesn't fully capture the meaning of \"The element will be called after clicking\". It implies the element *is* being called, whereas the English suggests it *will* be.",
+          "suggestion": "L'élément sera appelé après le clic"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Un appel de l'élément sera effectué' is grammatically correct, but a more natural flow could be achieved with a slightly different phrasing.",
-          "suggestion": "L'élément sera appelé après le clic."
+          "description": "While technically correct, 'Appel de l'élément est déclenché au clic' sounds a bit awkward in French. The use of 'déclenché' is not the most natural choice here.",
+          "suggestion": "L'élément sera appelé après le clic"
         }
       ],
       "approved_at": null
@@ -107,7 +107,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"L'elemento verrà attivato dopo aver fatto clic\" doesn't fully capture the meaning of \"The element will be called after clicking.\"  'Called' in this context likely refers to a function or event handler being triggered, not the element itself being 'activated'.",
+          "description": "The translation 'L'elemento verrà attivato dopo aver fatto clic' doesn't perfectly convey the meaning of 'The element will be called after clicking'. 'Attivato' implies activation, whereas 'called' in the original English implies a function or method being invoked. A more accurate translation would focus on function execution.",
           "suggestion": "L'elemento verrà eseguito dopo aver fatto clic"
         }
       ],
@@ -116,13 +116,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'クリックした後に要素が呼び出されます' is technically correct but sounds a bit formal and unnatural in many contexts. A more natural phrasing would depend on the specific context (e.g., a user interface element, a programmatic action).",
-          "suggestion": "Consider alternatives like 'クリックすると要素が呼び出されます' (Clicking will call the element) or 'クリック後に要素が実行されます' (The element will be executed after clicking), depending on the intended nuance."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -131,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '클릭하면 요소가 호출됩니다' implies 'the element will be called *if* you click'. The original English 'The element will be called after clicking' implies that clicking is a prerequisite for the element being called, not a conditional action.",
-          "suggestion": "클릭 후에 요소가 호출됩니다"
+          "description": "The translation '클릭하면 요소가 호출됩니다' is technically correct but could be more natural. '호출됩니다' implies a more technical function call rather than a simple action. A more natural phrasing would better convey the intended meaning of 'will be called after clicking'.",
+          "suggestion": "클릭하면 요소가 실행됩니다"
         }
       ],
       "approved_at": null
@@ -149,13 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Elements tiks izsaukts pēc noklikšķināšanas' is not entirely accurate. 'Elements' (elements) is plural, but the verb 'tiks izsaukts' is singular (will be called). The original English refers to a single element being called, so a singular verb form is preferred.",
-          "suggestion": "Elements tiks izsaukts pēc noklikšķināšanas"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'tiks izsaukts' is grammatically correct, a more natural phrasing would be 'tiks izsauks' which means 'will call'.",
-          "suggestion": "Elements tiks izsauks pēc noklikšķināšanas"
+          "description": "The translation 'Elements tiks izsaukts pēc noklikšķināšanas' is not accurate. 'Elements' (elements) is plural, but 'tiks izsaukts' (will be called) is singular. The original English states 'The element will be called', implying a singular element. However, the intention might be for multiple elements. A more accurate translation would depend on the exact context, but a possible corrected translation is 'Elements tiks izsaukts pēc noklikšķināšanas' (plural) or 'Elements tiks izsaukts pēc noklikšķināšanas' (singular) if only one is expected.",
+          "suggestion": "Consider rephrasing to reflect whether a single element or multiple elements are being referred to.  Possible corrections: 'Elements tiks izsaukts pēc noklikšķināšanas' or 'Elements tiks izsaukts pēc noklikšķināšanas'."
         }
       ],
       "approved_at": null
@@ -166,8 +155,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Het element wordt aangeroepen nadat u er op klikt' is a bit too literal and doesn't flow naturally in Dutch. 'Aangeroepen' (called) in this context feels awkward. It would be better to use a more natural phrasing for triggering an action.",
-          "suggestion": "Het element wordt geactiveerd nadat u erop klikt"
+          "description": "The translation \"Het element wordt aangeroepen nadat u er op klikt\" is not the most natural or accurate translation of \"The element will be called after clicking\". 'Aangeroepen' implies a function call, which might not be the intended meaning. A more suitable translation would convey the idea of the element being activated or triggered.",
+          "suggestion": "Het element wordt geactiveerd nadat u er op klikt"
+        },
+        {
+          "type": "grammatical",
+          "description": "While grammatically correct, the use of 'u' (formal 'you') might not be appropriate for all contexts. Using 'je' (informal 'you') could be more suitable depending on the target audience.",
+          "suggestion": "Het element wordt geactiveerd nadat je er op klikt"
         }
       ],
       "approved_at": null
@@ -196,8 +190,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Elementul va fi chemat după ce faceți clic' is a literal translation and doesn't convey the intended meaning naturally in Romanian. 'Chemat' (called) is unusual in this context. A more natural phrasing would be 'Elementul va fi executat după ce faceți clic' or 'Elementul va fi apelat după ce faceți clic'.",
-          "suggestion": "Elementul va fi executat după ce faceți clic"
+          "description": "The translation 'Elementul va fi chemat după ce faceți clic' is a literal translation that doesn't flow naturally in Romanian. 'Chemat' implies a summoning, which isn't the intended meaning in this context. It should convey the idea of an action being triggered or executed.",
+          "suggestion": "Elementul va fi apelat după ce faceți clic"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'faceți clic' is slightly formal. Depending on the target audience, a more common alternative might be more appropriate.",
+          "suggestion": "Elementul va fi apelat după ce dați clic"
         }
       ],
       "approved_at": null
@@ -214,13 +213,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'එබීමෙන් පසුව අංගය ගෙන්වයි' doesn't accurately convey the meaning of \"The element will be called after clicking.\" It translates to something like 'The element is retrieved after looking'. The intended meaning is that a function or method associated with the element will be executed.",
-          "suggestion": "A more accurate translation would be something like 'බලන්නා ඊට පසුව අංගය ක්‍රියාත්මක කරයි' (Balannā ēcita pahuva aṅgaya kriyātmaka karadī) or 'බලන්නා ඊට පසුව අංගය වැඩවසන්නකි' (Balannā ēcita pahuva aṅgaya vādavasannaki)."
-        },
-        {
-          "type": "grammar",
-          "description": "While understandable, the sentence structure in 'එබීමෙන් පසුව අංගය ගෙන්වයි' is slightly awkward in Sinhala. It's not entirely incorrect, but could be improved for fluency.",
-          "suggestion": "Consider restructuring the sentence for better flow based on the suggested alternative translations above."
+          "description": "The translation \"එබීමෙන් පසුව අංගය ගෙන්වයි\" doesn't accurately convey the meaning of \"The element will be called after clicking.\" The word 'call' in this context refers to executing a function or triggering an action, not retrieving an element.  'එබීමෙන් පසුව අංගය ගෙන්වයි' translates to 'The element is retrieved after clicking'.",
+          "suggestion": "A more accurate translation would focus on the execution of a function or action.  Possible suggestions include: \"බැලීමෙන් පසු ක්‍රියාව සිදුකරනු ලැබේ\" (After clicking, the action is performed) or \"බැලීමෙන් පසු සිදුකරනු ලැබේ\" (After clicking, it is performed). The most appropriate suggestion will depend on the precise context."
         }
       ],
       "approved_at": null
@@ -237,8 +231,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Element bo priklican po kliku\" doesn't perfectly capture the nuance of \"The element will be called after clicking.\" 'Priklican' implies something is being summoned or retrieved, rather than 'called' in the programming sense (executed or triggered).",
-          "suggestion": "Element se bo izvedel/spustil po kliku."
+          "description": "The translation 'Element bo priklican po kliku' doesn't fully capture the meaning of 'The element will be called after clicking.' 'Priklican' implies summoning or retrieving, which isn't necessarily the intended meaning. A better translation would convey that a function or event handler attached to the element will be executed.",
+          "suggestion": "Element se bo izvedel po kliku"
         }
       ],
       "approved_at": null
@@ -249,13 +243,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Елемент ц́е бити позван након клика' is a literal translation and doesn't convey the intended meaning effectively. The phrase 'ће бити позван' is somewhat awkward in this context.",
-          "suggestion": "Елемент ће се активирати након клика"
+          "description": "The translation 'Елемент ц́е бити позван након клика' doesn't accurately convey the meaning of 'The element will be called after clicking.'  It's a bit too literal and awkward. A more natural translation would focus on the *action* being performed.",
+          "suggestion": "Consider 'Елемент ће бити активиран након клика' (Element will be activated after click) or 'Елемент се позива након клика' (Element is called after click - more direct but potentially less clear)."
         },
         {
-          "type": "spelling",
-          "description": "The stressed vowel 'ц́е' might be incorrect.  'ће' is the more common form.",
-          "suggestion": "Елемент ће бити позван након клика"
+          "type": "formatting",
+          "description": "The accented character 'ц́е' is not the standard Serbian Cyrillic pronunciation for 'će'.",
+          "suggestion": "Use 'ће' instead of 'ц́е'."
         }
       ],
       "approved_at": null
@@ -265,14 +259,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'će' is an incorrect representation of future tense marker. It should be 'će'.",
-          "suggestion": "će"
+          "type": "incorrect_translation",
+          "description": "The translation 'Element će biti pozvan nakon klika' isn't the most natural or accurate rendering of 'The element will be called after clicking'. 'Pozvan' implies an invitation, which doesn't quite fit the context of a function or method being executed.",
+          "suggestion": "Element će se aktivirati nakon klika"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Element će biti pozvan nakon klika' literally translates to 'The element will be called after click'. While understandable, a more natural translation in this context might be 'Element će se aktivirati nakon klika' or 'Element će se ispaliti nakon klika' which better conveys the meaning of an element being triggered or activated.",
-          "suggestion": "Element će se aktivirati nakon klika"
+          "type": "spelling",
+          "description": "The letter 'ć' is a non-standard diacritic in this context and might confuse users. It's unnecessary and potentially inaccurate.",
+          "suggestion": "Element će biti aktiviran nakon klika"
         }
       ],
       "approved_at": null
@@ -283,8 +277,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Öğe şu öğeye tıklandıktan sonra çağrılacaktır' doesn't accurately convey the meaning of 'The element will be called after clicking.' It implies the element is being clicked *on* an element, rather than triggering a call on the element itself.",
-          "suggestion": "Öğe tıklandıktan sonra çağrılacak. (The element will be called after it is clicked.) or Öğe, tıklandığında çağrılacak. (The element will be called when clicked.)"
+          "description": "The translation 'Öğe şu öğeye tıklandıktan sonra çağrılacaktır' is a bit awkward and doesn't accurately convey the meaning of 'The element will be called after clicking'. It implies the element is being clicked on something else.",
+          "suggestion": "Öğe tıklanır tıklanmaz çağrılacaktır"
         }
       ],
       "approved_at": null
@@ -295,8 +289,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Елемент буде викликано після клацання' is a literal translation that doesn't quite capture the natural phrasing in Ukrainian. 'Called' implies a function or action triggered by the click. A more natural phrasing would emphasize the action triggered.",
-          "suggestion": "Елемент спрацює після клацання"
+          "description": "The translation 'Елемент буде викликано після клацання' while technically correct, doesn't fully capture the nuance of 'called after clicking' in the context of a Javascript SDK. A more natural and precise translation would convey the action being triggered or executed.",
+          "suggestion": "Елемент буде активовано після клацання"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'викликано' (vyklykano) can sometimes imply a direct function call, which might not always be the intended meaning. 'Активовано' (aktyvovano) suggests the element becomes active or starts a process.",
+          "suggestion": "Consider alternatives like 'Запущено після клацання' (Zapuscheno pislya klatsannya) or 'Виконано після клацання' (Vykono pislya klatsannya), depending on the specific functionality."
         }
       ],
       "approved_at": null
@@ -313,8 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '点击后元素会被调用' implies that the element *will be called* passively after the click. The original English 'The element will be called after clicking' suggests the element is *responsible* for the call after the click, or is being triggered by the click. The Chinese translation doesn't convey this nuance.",
-          "suggestion": "点击后触发元素调用 (Click to trigger the element's call)"
+          "description": "The translation '点击后元素会被调用' while technically correct, doesn't fully convey the nuance of 'will be called'. The Chinese translation suggests it *will* happen, but lacks the sense of a future action or a scheduled event.",
+          "suggestion": "点击后元素会被触发 (Jìndiǎn hòu yuánsù huì bèi chùfā)"
         }
       ],
       "approved_at": null

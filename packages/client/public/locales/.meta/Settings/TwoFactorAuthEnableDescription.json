@@ -3,7 +3,7 @@
   "content": "Enable two-factor authentication for a more secure {{productName}} access for users.",
   "content_en_sha1_hash": "6ce1a1af78378b2613e5ff44bb9f6cce9bf8079c",
   "created_at": "2025-05-19T21:30:53.013Z",
-  "updated_at": "2025-06-18T07:34:15.187Z",
+  "updated_at": "2025-08-04T07:30:01.542Z",
   "comment": {
     "text": "This translation key is used to display a message explaining the benefits of enabling two-factor authentication in {{productName}}, which appears on a settings page or during a confirmation dialog. It helps users understand why two-factor authentication enhances security for accessing {{productName}}.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 172,
+      "line_number": 173,
       "context": "{t(\"TwoFactorAuth\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TwoFactorAuthEnableDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"TwoFactorAuthSave\" />",
       "module": "/packages/client"
     },
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"لحماية أكثر\" (li-himāyah akthar) translates to 'for more protection' which is slightly awkward in this context. A more natural phrasing for 'a more secure' would be something like \"أمان أكبر\" (amān akbar) or \"حماية أعلى\" (himāyah a'lā).",
-          "suggestion": "تفعيل المصادقة ثنائية العوامل لأمان أكبر لوصول المستخدمين لـ {{productName}}."
+          "description": "The phrase \"لحماية أكثر\" (li himāyah akthar) translates to \"for more protection\" which is slightly awkward in this context. A more natural phrasing would emphasize enhanced security.",
+          "suggestion": "تفعيل المصادقة ثنائية العوامل لزيادة أمان وصول المستخدمين لـ {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, using 'لوصول المستخدمين لـ' (li-wusūl al-mustakhdimīn li-) is a bit verbose. A more concise phrasing would improve readability. Consider 'لوصول المستخدمين إلى' (li-wusūl al-mustakhdimīn ilā).",
-          "suggestion": "تفعيل المصادقة ثنائية العوامل لأمان أكبر لوصول المستخدمين إلى {{productName}}."
+          "description": "While technically correct, the spacing before and after the product name should be standardized. Consistency is key for a professional appearance.",
+          "suggestion": "تفعيل المصادقة ثنائية العوامل لزيادة أمان وصول المستخدمين لـ {{productName}}."
         }
       ],
       "approved_at": null
@@ -53,7 +53,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a lowercase 'i' in 'İstifadəçilərə' which should be capitalized consistently with the English content's 'users'.",
+          "description": "The translation uses a lowercase 'i' in 'İstifadəçilərə', which should be capitalized to match the English 'users'.",
           "suggestion": "İstifadəçilərə"
         }
       ],
@@ -68,13 +68,25 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'pro bezpečnější přístup uživatelů do {{productName}}' could be improved. It translates to 'for a more secure access of users to {{productName}}'. A more natural Czech phrasing would be 'k {{productName}}'.",
+          "suggestion": "Povolte dvoufázové ověřování pro bezpečnější přístup uživatelů k {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation maintains the double curly braces `{{productName}}` which might not be appropriate for all contexts. It's generally better to localize this separately or use a more platform-appropriate formatting (e.g., placeholders).",
+          "suggestion": "Consider if `{{productName}}` needs to be localized separately or if a different placeholder format is preferable."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -89,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Active la autenticación de dos factores...' uses 'Active' which is not the standard verb for enabling a feature. 'Activar' is the more appropriate translation.",
-          "suggestion": "Activa la autenticación de dos factores..."
+          "description": "The phrase 'para que los usuarios tengan' is slightly awkward and less natural in Spanish. A more direct translation of 'for' would improve flow.",
+          "suggestion": "Active la autenticación de dos factores para un acceso más seguro de los usuarios a {{productName}}."
         }
       ],
       "approved_at": null
@@ -98,25 +110,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation preserves the placeholder {{productName}} which is good, but the surrounding text could be slightly improved for flow and naturalness in Finnish. While technically correct, it feels a little stiff.",
-          "suggestion": "Ota käyttöön kaksivaiheinen tunnistautuminen turvaamaan {{productName}}-käyttäjien tiliä."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"sécuriser l'accès\" sounds less natural than alternatives.  \"protéger l'accès\" or \"renforcer la sécurité de l'accès\" would be more idiomatic.",
-          "suggestion": "Activez l'authentification à deux facteurs pour protéger l'accès des utilisateurs à {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -125,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The double curly braces `{{productName}}` are inconsistent with the English content's single curly braces.  It's likely the Armenian translation is unnecessarily using double braces.",
-          "suggestion": "Change `{{productName}}` to `{{productName}}`"
+          "description": "The Armenian translation uses a colon (:) at the end of the sentence, which might be more appropriate for a title or a question rather than a descriptive sentence. A period (.) might be more suitable.",
+          "suggestion": "Միացնել երկգործոն նույնականացումը՝ օգտատերերի համար ավելի ապահով {{productName}} մուտքի համար։"
         }
       ],
       "approved_at": null
@@ -143,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"より安全に{{productName}}にアクセスできるようになります\" is a bit verbose and doesn't flow naturally. A more concise and idiomatic translation for 'a more secure {{productName}} access' would be something like \"より安全に{{productName}}にログインできるようになります\" (more secure login) or \"{{productName}}へのアクセスをより安全にします\" (makes {{productName}} access more secure).",
-          "suggestion": "{{productName}}へのアクセスをより安全にします。"
+          "description": "The phrase 'より安全に{{productName}}にアクセスできるようになります' is a bit literal and slightly awkward. It translates to 'You will be able to access {{productName}} more safely.' A more natural Japanese phrasing would emphasize the security benefit for the user.",
+          "suggestion": "二要素認証を有効にすることで、{{productName}}へのアクセスをより安全に保つことができます。(Ni yōso shōnin o yūko ni suru koto de, {{productName}} e no accessu o yori anzen ni tamotsu koto ga dekimasu.) - This translates to 'Enabling two-factor authentication allows you to keep access to {{productName}} secure.'"
         }
       ],
       "approved_at": null
@@ -155,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '보다 안전한' (boda anjeonhan) translates to 'more secure' but sounds a bit awkward and formal in this context. A more natural phrasing would be '더욱 안전한' (deouk anjeonhan).",
-          "suggestion": "사용자의 더욱 안전한 {{productName}} 액세스를 위해 이중 인증을 활성화하세요."
+          "description": "The translation \"사용자의 보다 안전한 {{productName}} 액세스를 위해 이중 인증을 활성화하세요\" is a bit formal and doesn't flow naturally. A more conversational and user-friendly phrasing would improve readability. While technically correct, it's not the best choice for a user-facing setting description.",
+          "suggestion": "사용자의 {{productName}} 계정을 더욱 안전하게 보호하기 위해 이중 인증을 활성화하세요."
         }
       ],
       "approved_at": null
@@ -164,18 +164,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ປັດໃຈ' is potentially misspelled. The correct spelling is likely 'ປັດຈຸບັນ'. While 'ປັດໃຈ' can be understood, it's not standard Lao.",
-          "suggestion": "ປັດຈຸບັນ"
-        },
-        {
-          "type": "grammar",
-          "description": "While understandable, the sentence structure 'ສໍາລັບການເຂົ້າເຖິງ {{productName}} ທີ່ປອດໄພກວ່າສໍາລັບຜູ້ໃຊ້' could be more natural in Lao. It sounds a bit clunky. It's a bit passive.",
-          "suggestion": "ສໍາລັບຜູ້ໃຊ້ເຂົ້າເຖິງ {{productName}} ທີ່ປອດໄພກວ່າ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -214,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'pentru a securiza accesul tuturor utilizatorilor' is a bit literal and could be improved for natural flow. 'pentru a asigura un acces mai sigur' or 'pentru o accesare mai sigură' would be more idiomatic.",
-          "suggestion": "pentru a asigura un acces mai sigur"
+          "description": "The translation 'Activați autentificarea cu doi factori pentru a securiza accesul tuturor utilizatorilor la {{productName}}' is a bit literal and could be improved for natural flow in Romanian. 'Securiza accesul' is less common than 'pentru o mai bună securitate a accesului'.",
+          "suggestion": "Activați autentificarea cu doi factori pentru o mai bună securitate a accesului utilizatorilor la {{productName}}."
         }
       ],
       "approved_at": null
@@ -232,18 +221,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'පරිශ්‍රීලකයින්ට' is misspelled. The correct word should be 'පරිශ්රමකරුවන්ට'.",
-          "suggestion": "පරිශ්රමකරුවන්ට"
+          "description": "The word 'පරිශ්‍රීලකයින්ට' (parashreelayakinta) is a less common and potentially incorrect form. 'පරිශ්‍රමකරුවන්' (parashramakarawan) or simply 'පරිශ්‍රමකරුවන්ට' (parashramakaruwanta) would be more natural and accurate for 'users'.",
+          "suggestion": "පරිශ්‍රමකරුවන්"
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'පරිශ්රීලකයින්ට වඩාත් ආරක්‍ෂිතව {{productName}} වෙත ප්‍රවේශ වීමට' is slightly awkward.  It can be improved for better flow.",
-          "suggestion": "පරිශ්රමකරුවන්ට වඩාත් ආරක්‍ෂිත {{productName}} ප්‍රවේශය සඳහා"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'ද්වි-සාධක සත්‍යාපනය' is a literal translation of 'two-factor authentication', it might be too technical for some users. A more user-friendly term might be better, depending on the target audience.  Consider 'අමතර ආරක්‍ෂිත ක්‍රමය' (additional security method) or a similar phrase.",
-          "suggestion": "අමතර ආරක්‍ෂිත ක්‍රමය"
+          "description": "The sentence structure 'පරිශ්‍රීලකයින්ට වඩාත් ආරක්‍ෂිතව {{productName}} වෙත ප්‍රවේශ වීමට' could be improved for better flow and clarity.  Consider rephrasing.",
+          "suggestion": "පරිශ්‍රමකරුවන් {{productName}} වෙත ප්‍රවේශ වීමේ ආරක්ෂාව වැඩි කිරීමට ද්වි-සාධක සත්‍යාපනය සබල කරන්න."
         }
       ],
       "approved_at": null
@@ -266,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word \"приступ\" is correctly spelled but could be improved for clarity. While technically correct, a more natural phrasing might be preferred.",
-          "suggestion": "Омогући двофакторску аутентификацију за безбеднији {{productName}} приступ корисника."
+          "description": "The word 'аутентификацију' (authentication) should be written with a soft sign (ъ) in the middle. The correct spelling is 'аутентификацију'.",
+          "suggestion": "Омогући двофакторску аутентификацију (with ъ) за безбеднији {{productName}} приступ за кориснике."
         }
       ],
       "approved_at": null
@@ -284,8 +268,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kullanıcılar için daha güvenli bir {{productName}} erişimi için iki faktörlü kimlik doğrulamayı etkinleştirin' is slightly awkward. A more natural Turkish phrasing would emphasize the benefit *to* the user.",
-          "suggestion": "Kullanıcıların daha güvenli bir {{productName}} erişimi için iki faktörlü kimlik doğrulamayı etkinleştirin."
+          "description": "The translation 'Kullanıcılar için daha güvenli bir {{productName}} erişimi için iki faktörlü kimlik doğrulamayı etkinleştirin.' is a bit literal and could be improved for naturalness in Turkish. A more common phrasing would emphasize the benefit to the user.",
+          "suggestion": "Daha güvenli bir {{productName}} deneyimi için iki faktörlü kimlik doğrulamayı etkinleştirin."
         }
       ],
       "approved_at": null

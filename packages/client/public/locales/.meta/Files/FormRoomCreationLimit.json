@@ -1,0 +1,28 @@
+{
+  "key_path": "FormRoomCreationLimit",
+  "content": "Creation based on several files and folders is not available for this type of room. To create such a room, go to the {{sectionName}} section or use one of the PDF forms.",
+  "content_en_sha1_hash": "04390f074403148046bbe6a9ceb367130918e5f4",
+  "created_at": "2025-06-02T10:19:22.921Z",
+  "updated_at": "2025-06-02T10:21:47.053Z",
+  "comment": {
+    "text": "This translation key is used to display a tooltip message indicating that file-based room creation is not available for certain types of rooms, directing users to alternative options in the \"Rooms\" section or using PDF forms. It appears on a dialog component, specifically on a button or option related to room type selection.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:21:47.053Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList.js",
+      "line_number": 67,
+      "context": "};\n \n const getTooltipContent = () => {\n return (\n <Text fontSize=\"12px\" noSelect>\n {t(\"Files:FormRoomCreationLimit\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n </Text>\n );\n };",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

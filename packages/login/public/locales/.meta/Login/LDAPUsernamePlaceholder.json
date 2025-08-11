@@ -3,7 +3,7 @@
   "content": "Username of {{ldap_domain}}",
   "content_en_sha1_hash": "8bbb4ddbdcd89f76a9a1adc6a6fa2460cef380c3",
   "created_at": "2025-05-19T21:30:57.244Z",
-  "updated_at": "2025-05-20T09:47:46.702Z",
+  "updated_at": "2025-08-04T07:30:01.651Z",
   "comment": {
     "text": "The \"LDAPUsernamePlaceholder\" translation key is used to display a placeholder text in the login form's email input field, indicating the expected username format. The placeholder includes the LDAP domain, which varies depending on the application's configuration. This text appears as a placeholder when typing into the username field of the login form.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 137,
-      "context": "id=\"login_username\"\n name=\"login\"\n type={InputType.text}\n hasError={isEmailErrorShow}\n value={identifier}\n placeholder={t(\"LDAPUsernamePlaceholder\", {\n ldap_domain: ldapDomain,\n })}\n size={InputSize.large}\n scale={true}\n isAutoFocussed={true}",
+      "line_number": 140,
+      "context": "id=\"login_username\"\n name=\"login\"\n type={InputType.text}\n hasError={isEmailErrorShow}\n value={identifier}\n placeholder={t(\"LDAPUsernamePlaceholder\", {\n ldap_domain: ldapDomain,\n })}\n size={InputSize.large}\n scale\n isAutoFocussed",
       "module": "/packages/login"
     }
   ],
@@ -33,7 +33,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{ldap_domain}} istifadəçi adı\" is not the most natural or accurate rendering of \"Username of {{ldap_domain}}\". \"İstifadəçi adı\" literally translates to \"user name\" and while understandable, it's less idiomatic than alternatives.",
+          "suggestion": "{{ldap_domain}} istifadəçinin adı"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses double curly braces `{{...}}` for variables. The Azerbaijani translation also uses this format, which is consistent but should be confirmed is the expected convention for the application.",
+          "suggestion": "Maintain consistent double curly brace formatting as in the English source."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +68,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Greek translation has a space before the opening curly brace of the placeholder. It should be removed for consistency and proper rendering in most systems.",
+          "suggestion": "Όνομα χρήστη του{{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +86,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{ldap_domain}}:n käyttäjänimi' is not the most natural or accurate way to express 'Username of {{ldap_domain}}' in Finnish. While technically correct, it's a bit clunky. A more fluent translation would be something like '{{ldap_domain}} - käyttäjänimi' or '{{ldap_domain}}: käyttäjänimi'.",
+          "suggestion": "{{ldap_domain}}: käyttäjänimi"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +104,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{ldap_domain}}-ի օգտատիրոջ անուն\" is not the most natural or precise translation of 'Username of {{ldap_domain}}'. While technically correct, it's a bit clunky. A more natural translation would be something like '{{ldap_domain}} դոմեյնի օգտագործողի անուն' ({{ldap_domain}} domain user name) or '{{ldap_domain}} օգտատիրոջ լոգին' ({{ldap_domain}} user login).",
+          "suggestion": "{{ldap_domain}} դոմեյնի օգտագործողի անուն"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +122,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'ユーザーネーム' (yuuzaaneemu) is a direct transliteration of 'username' and less natural in Japanese. A more appropriate term would be 'ユーザー名' (yuuzaamei).",
+          "suggestion": "{{ldap_domain}}のユーザー名"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,13 +146,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation includes a colon (:) before '{{ldap_domain}}'. The English version does not. This difference in formatting should be reviewed for consistency with other translations and overall user experience.",
+          "suggestion": "Remove the colon: \"Lietotājvārds {{ldap_domain}} \""
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation has an unnecessary space at the end.",
+          "suggestion": "Gebruikersnaam van {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,25 +200,49 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{ldap_domain}} හි පරිශීලක නාමය' is not a natural or accurate translation of 'Username of {{ldap_domain}}'.  'හි' implies possession which isn't the intended meaning. A more suitable translation would incorporate a phrase indicating 'Username for'.",
+          "suggestion": "{{ldap_domain}} සඳහා පරිශීලක නාමය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "There's an unnecessary space after the colon in the Slovak translation.",
+          "suggestion": "Používateľské meno {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Uporabniško ime za {{ldap_domain}} \" is a literal translation of 'Username for {{ldap_domain}}'. A more natural Slovenian phrasing for a placeholder would be 'Uporabniško ime {{ldap_domain}}' or 'Vnesite uporabniško ime {{ldap_domain}}'. The word 'za' adds unnecessary formality and doesn't flow well in this context.",
+          "suggestion": "Uporabniško ime {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Корисничко име {{ldap_domain}}\" is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be 'Корисничко име за {{ldap_domain}}'.",
+          "suggestion": "Корисничко име за {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,25 +254,54 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"{{ldap_domain}} kullanıcı adı\" is a literal translation but sounds awkward in Turkish. A more natural phrasing would be something like \"{{ldap_domain}}'deki kullanıcı adı\" or \"{{ldap_domain}} kullanıcı adınız\".",
+          "suggestion": "{{ldap_domain}}'deki kullanıcı adı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "There is an extra space after the colon in the Ukrainian translation.",
+          "suggestion": "Ім'я користувача {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation includes an unnecessary space before the curly brace.",
+          "suggestion": "Tên người dùng của {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses a direct replacement of the placeholder, which might be less user-friendly. Consider adding a colon or a more descriptive phrase before the placeholder.",
+          "suggestion": "用户名: {{ldap_domain}}"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"用户名\" simply translates to \"username\". A more natural phrasing for a placeholder might be \"LDAP 用户名\" or \"用户名 (LDAP 域)\"",
+          "suggestion": "用户名 (LDAP 域): {{ldap_domain}}"
+        }
+      ],
       "approved_at": null
     }
   }

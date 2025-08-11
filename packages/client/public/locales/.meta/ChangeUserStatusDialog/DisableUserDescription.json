@@ -3,7 +3,7 @@
   "content": "If you Disable this user, they won’t be able to log in to {{productName}}, while their documents and data will remain intact.",
   "content_en_sha1_hash": "bb5c8f7b397a2ee225b8297d11a623a23ff26cf3",
   "created_at": "2025-05-19T21:30:56.958Z",
-  "updated_at": "2025-05-20T09:37:45.996Z",
+  "updated_at": "2025-08-04T07:30:01.062Z",
   "comment": {
     "text": "This translation key is used to display a message describing the effect of disabling a user's account on access to {{productName}}. It appears in a dialogue where users can change their account status, informing them about the impact on login ability and document retention.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 176,
+      "line_number": 172,
       "context": ": t(\"DisableUsers\");\n \n bodyText = onlyOneUser\n ? isGuests\n ? t(\"DisableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"DisableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"DisableGuestsDescription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"DisableUsersDescription\", {",
       "module": "/packages/client"
     }
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'هؤلاء' (hoolaa'a) means 'these' and refers to multiple users. The English refers to a single user. The translation should reflect the singular nature of the English content.",
+          "suggestion": "إذا قمت بتعطيل هذا المستخدم، لن يتمكن من تسجيل الدخول إلى {{productName}} بينما سيتم المحافظة على بياناته ومستنداته."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"deaktiv etsəniz\" is a literal translation of 'disable'. A more natural and user-friendly phrasing would be something like \"istifadəçini söndürsəniz\" or \"istifadəçinin hesabını bağlayırsınızsa\".",
+          "suggestion": "Bu istifadəçini söndürsəniz, onlar {{productName}}-ə daxil ola bilməyəcək və onların sənədləri və məlumatları toxunulmaz qalacaq."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -69,7 +81,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The colon in '{{productName}}:een' should be a comma ({{productName}},) according to Finnish grammar rules for cases.",
+          "suggestion": "Jos otat tämän käyttäjän pois käytöstä, he eivät voi kirjautua {{productName}}, mutta heidän asiakirjansa ja tietonsa säilyvät."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -111,13 +129,25 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The pronoun 'viņš' (he) is used, which might not be appropriate for all users. It's better to use a gender-neutral pronoun or rephrase the sentence.",
+          "suggestion": "Consider using a gender-neutral pronoun like 'viņi' (they) or rephrasing the sentence to avoid pronouns altogether, e.g., 'Ja atspējosiet šo lietotāju, lietotājs nevarēs pieteikties {{productName}}, kamēr viņa dokumenti un dati paliks neskarti.'"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The pronoun 'hij/zij' is overly formal and clunky. It means 'he/she'. It's better to use gender-neutral language or rewrite the sentence to avoid the pronoun entirely.",
+          "suggestion": "Consider rewording to avoid the pronoun. For example: 'Als u deze gebruiker uitschakelt, kan deze zich niet meer aanmelden...' or 'Als u deze gebruiker uitschakelt, kan de gebruiker zich niet meer aanmelden...'."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +171,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'acești utilizatori' (these users) is used instead of 'acest utilizator' (this user) to match the singular 'this user' in the English content. The Romanian translation implies multiple users are being disabled, which is not what the original intends.",
+          "suggestion": "Dacă dezactivați acest utilizator, acesta nu va putea să se conecteze la spațiul {{productName}}, în timp ce documentele și datele asociate vor rămâne intacte."
+        },
+        {
+          "type": "grammar",
+          "description": "The pronoun 'acesta' (this/he) is masculine, and while grammatically not inherently wrong, it might be more appropriate to use a gender-neutral pronoun or rephrase the sentence for clarity.",
+          "suggestion": "Dacă dezactivați acest utilizator, acesta/aceasta/utilizatorul nu va putea să se conecteze la spațiul {{productName}}, în timp ce documentele și datele asociate vor rămâne intacte."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +194,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ඔබ මෙම පරිශ්‍රීලකයා අබල කළහොත්\" translates to \"If you disable this user\". While grammatically correct, it's a more formal phrasing than might be typical. A more natural phrasing might consider a more direct approach. It's technically accurate but could benefit from adjusting for tone.",
+          "suggestion": "ඔබ මේ පරිශ්‍රීලකයා අබල කළ විට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"යථාස්ථව\" is not the most common or natural way to express 'remain intact'. It's technically correct, but sounds a bit too formal or academic.",
+          "suggestion": "පවතී"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,19 +223,42 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'онемогуц́ите' is a valid, though potentially less common, spelling for 'онемогућите'. While acceptable, 'онемогућите' is preferred for clarity and wider understanding.",
+          "suggestion": "онемогућите"
+        },
+        {
+          "type": "grammar",
+          "description": "The repeated use of 'он/она' and 'његови/њени' can sound awkward and repetitive in Serbian. While grammatically correct to account for both genders, it could be improved for readability.",
+          "suggestion": "If possible, rephrase to avoid gendered pronouns. Consider alternatives like: 'Ако онемогуц́ите овог корисника, он/она нец́е моц́и да се пријави на {{productName}}, док ц́е његови документи и подаци остати нетакнути.' (This is best resolved with context about whether the intended audience would benefit from simplification. Without context, a simple rephrasing is difficult.)"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'they' is awkward and grammatically incorrect. 'On/ona' is a clumsy way to represent a gender-neutral pronoun in Serbian when referring to a user. It's better to rephrase to avoid specifying gender.",
+          "suggestion": "Ako Onemogućite ovog korisnika, on/ona neće moći da se prijavi na {{productName}}, dok će njegovi/njeni dokumenti i podaci ostati netaknuti."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The term 'Devre Dışı Bırakırsanız' is a bit formal and can be improved for better readability. While technically correct, it might feel stiff in a user interface.",
+          "suggestion": "Bu kullanıcıyı devre dışı bırakırsanız"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

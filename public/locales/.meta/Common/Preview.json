@@ -3,7 +3,7 @@
   "content": "Preview",
   "content_en_sha1_hash": "f1fbb2b43dca281d0138f4fcc92543ad143ef0b1",
   "created_at": "2025-05-19T21:30:47.467Z",
-  "updated_at": "2025-06-03T20:59:42.074Z",
+  "updated_at": "2025-08-04T07:30:01.298Z",
   "comment": {
     "text": "The translation key \"Preview\" is used to display a preview label in various UI elements, such as buttons and dialog titles. It provides a clear indication of what is being previewed or shown. This text appears in the PortalSettings categories, specifically in a header with a help button.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 782,
-      "context": "openHexColorPickerAccent={openHexColorPickerAccent}\n showSaveButtonDialog={showSaveButtonDialog}\n onSaveColorSchemeDialog={onSaveColorSchemeDialog}\n />\n <div className=\"header preview-header\">\n {t(\"Common:Preview\")}\n <HelpButton\n place=\"right\"\n tooltipContent={\n <div>\n <Text fontSize=\"12px\" fontWeight={400}>",
+      "line_number": 789,
+      "context": "openHexColorPickerAccent={openHexColorPickerAccent}\n showSaveButtonDialog={showSaveButtonDialog}\n onSaveColorSchemeDialog={onSaveColorSchemeDialog}\n />\n <div className=\"header preview-header\">\n {t(\"Common:Preview\")}\n <HelpButton\n place=\"right\"\n dataTestId=\"appearance_preview_help_button\"\n tooltipContent={\n <div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/PreviewBlock.js",
-      "line_number": 66,
-      "context": "/>\n );\n const dataTabs = [\n {\n id: \"preview\",\n name: t(\"Common:Preview\"),\n content: preview,\n },\n {\n id: \"code\",\n name: t(\"Code\"),",
+      "line_number": 80,
+      "context": "/>\n );\n const dataTabs = [\n {\n id: \"preview\",\n name: t(\"Common:Preview\"),\n content: preview,\n iconName: EyeReactSvgUrl,\n },\n {\n id: \"code\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1777,
+      "line_number": 1786,
       "context": "disabled: false,\n },\n {\n id: \"option_preview\",\n key: \"preview\",\n label: t(\"Common:Preview\"),\n icon: EyeReactSvgUrl,\n onClick: () => this.onPreviewClick(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -51,7 +51,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Öncədən bax' is a literal translation of 'Preview', it doesn't convey the same nuance. 'Preview' in this context often means a sneak peek or a sample. 'Öncədən bax' is more like 'look beforehand'.",
+          "suggestion": "Consider alternatives like 'Baxış' or 'Nümayiş' which might be more appropriate depending on the context. A more contextual translation would be preferable."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -147,13 +153,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Pré-visualizar' is a valid Portuguese word, it's a verb form (to preview). 'Preview' as a noun is better translated as 'Visualização prévia' or simply 'Prévia'.",
-          "suggestion": "Visualização prévia or Prévia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

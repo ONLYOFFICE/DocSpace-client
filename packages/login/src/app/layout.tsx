@@ -42,29 +42,30 @@ import {
 } from "@/utils/actions";
 
 import "../styles/globals.scss";
-import "../../../shared/styles/theme.scss";
+import "@docspace/shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
 import { TConfirmLinkParams } from "@/types";
+import { logger } from "@/../logger.mjs";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
+  const hdrs = await headers();
   const type = hdrs.get("x-confirm-type") ?? "";
   const searchParams = hdrs.get("x-confirm-query") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    console.log("is health check");
-    return <></>;
+    logger.info("get health check and return empty layout");
+    return null;
   }
 
   const queryParams = Object.fromEntries(
     new URLSearchParams(searchParams.toString()),
   ) as TConfirmLinkParams;
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
   const cookieLng = cookieStore.get(LANGUAGE);
@@ -123,8 +124,6 @@ export default async function RootLayout({
   if (cookieLng && settings && typeof settings !== "string") {
     settings.culture = cookieLng.value;
   }
-
-  console.log("Render root layout");
 
   const locale =
     queryParams?.culture ||

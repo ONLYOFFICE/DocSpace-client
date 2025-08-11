@@ -149,12 +149,14 @@ const RowView = (props: RowViewProps) => {
                 size={12}
                 onClick={onClearFilter}
                 iconName={ClearEmptyFilterSvgUrl}
+                dataTestId="accounts_clear_filter_icon_button"
               />
               <Link
                 type={LinkType.action}
                 isHovered
                 fontWeight="600"
                 onClick={onClearFilter}
+                dataTestId="accounts_clear_filter_link"
               >
                 {t("Common:ClearFilter")}
               </Link>
@@ -162,6 +164,7 @@ const RowView = (props: RowViewProps) => {
           }
         />
       )}
+      <div />
     </StyledRowContainer>
   );
 };

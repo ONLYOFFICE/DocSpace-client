@@ -3,7 +3,7 @@
   "content": "has been assigned role",
   "content_en_sha1_hash": "aef70da66b941209c92e870194495cfe8c638177",
   "created_at": "2025-05-19T21:30:54.952Z",
-  "updated_at": "2025-05-28T09:30:02.434Z",
+  "updated_at": "2025-08-04T07:30:01.243Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"has been assigned role\" in various contexts within the application, typically on buttons or views related to user management and room updates. It appears when a user is assigned a new role or access level, providing a clear notification of the change.",
     "is_auto": true,
@@ -11,15 +11,27 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 223,
-      "context": ");\n case \"RoomCreateUser\":\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case \"RoomUpdateAccessForUser\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomRemoveUser\":\n return t(\"InfoPanel:RoomRemoveUser\");\n case \"RoomInviteResend\":\n return t(\"InfoPanel:RoomInviteResend\");\n case \"RoomGroupAdded\":",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 254,
+      "context": "case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 254,
+      "context": "case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems)\n return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 223,
-      "context": ");\n case \"RoomCreateUser\":\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case \"RoomUpdateAccessForUser\":\n return t(\"InfoPanel:RoomUpdateAccess\");\n case \"RoomRemoveUser\":\n return t(\"InfoPanel:RoomRemoveUser\");\n case \"RoomInviteResend\":\n return t(\"InfoPanel:RoomInviteResend\");\n case \"RoomGroupAdded\":",
+      "line_number": 232,
+      "context": ");\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
+      "line_number": 232,
+      "context": ");\n case FeedActionKeys.RoomCreateUser:\n if (hasRelatedItems) return t(\"InfoPanel:RoomCreateUserCount\", { count });\n return t(\"InfoPanel:RoomCreateUser\");\n case FeedActionKeys.RoomUpdateAccessForUser:\n return t(\"InfoPanel:RoomUpdateAccess\");\n case FeedActionKeys.RoomRemoveUser:\n return t(\"InfoPanel:RoomRemoveUser\");\n case FeedActionKeys.RoomInviteResend:\n return t(\"InfoPanel:RoomInviteResend\");\n case FeedActionKeys.RoomGroupAdded:",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تم تعيين الوظيفة\" (tam ta'yeen al-wazifa) literally translates to 'the function has been assigned'. While it conveys a related concept, it's not the most natural or accurate translation of 'has been assigned role'.  A better translation would focus on assigning a 'position' or 'responsibility'.",
-          "suggestion": "تم تعيين منصب"
+          "description": "The Arabic translation \"تم تعيين الوظيفة\" literally translates to \"The job has been assigned\". While not entirely wrong, it doesn't accurately convey the meaning of \"has been assigned role\" in the context of user permissions or access levels. A more appropriate translation would reflect the idea of a role being assigned.",
+          "suggestion": "تم منحه صلاحية"
         }
       ],
       "approved_at": null
@@ -48,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'təyin edilmişdir' doesn't fully capture the meaning of 'has been assigned role'. It translates to 'has been appointed' or 'has been assigned' in a general sense, but lacks the nuance of role assignment within a system. It's too literal and doesn't convey the intended meaning in the context of a user's permissions or access level.",
-          "suggestion": "Consider 'rolu təyin edilib' or 'rolu verilib'. 'Rolu təyin edilib' is closer to 'a role has been assigned', while 'rolu verilib' implies giving a role."
+          "description": "The translation 'təyin edilmişdir' literally translates to 'has been appointed' or 'has been designated'. While it's close to 'has been assigned role', it's not the most natural or accurate translation in this context. 'Role' is a specific term.",
+          "suggestion": "Consider a translation like 'rolu təyin edilmişdir' (role has been assigned) or 'rolu verilib' (role has been given) for a more accurate representation of 'has been assigned role'."
         }
       ],
       "approved_at": null
@@ -60,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation \"бе назначен\" (be naznachen) translates to \"was assigned\". While technically correct, it lacks the context of \"role\" present in the English content \"has been assigned role\". It's incomplete and doesn't convey the full meaning.",
-          "suggestion": "бе даден роля\" (be daden rolja) - which translates to 'has been given a role', or \"получи роля\" (poluchi rolja) - which translates to 'received a role'."
+          "description": "The translation \"бе назначен\" (be naznachen) lacks context and doesn't accurately reflect the English phrase \"has been assigned role\". It translates to \"was assigned\" but doesn't convey the idea of a role being given. A more accurate translation would include the noun 'role' or a similar term to make the meaning clear.",
+          "suggestion": "бе дадена роля (be dadena rolja) - 'a role was given' or 'е получил роля (e polu4il rolja) - 'received a role'"
         }
       ],
       "approved_at": null
@@ -72,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Czech translation \"byl přidělen\" (was assigned) doesn't fully convey the meaning of \"has been assigned role\". It's more of a passive construction. A more accurate translation would incorporate the concept of a role being assigned.",
-          "suggestion": "byl mu přidělena role"
+          "description": "The Czech translation \"byl přidělen\" translates to 'was assigned'. While not entirely wrong, it lacks context and doesn't convey the full meaning of 'has been assigned role'. A more accurate translation would depend on the specific context of 'role'. It is passive and less informative.",
+          "suggestion": "Consider a more contextually relevant translation, such as 'má přidělenou roli' (has an assigned role) or 'obdržel roli' (received a role), depending on the broader message."
         }
       ],
       "approved_at": null
@@ -84,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"wurde zugewiesen\" translates to 'was assigned' or 'has been assigned'. While not incorrect, it lacks the context of 'role', which is important for accurate understanding of the original English phrase 'has been assigned role'. It feels incomplete.",
-          "suggestion": "wurde eine Rolle zugewiesen"
+          "description": "The German translation 'wurde zugewiesen' doesn't fully convey the meaning of 'has been assigned role'. It translates to 'was assigned'. While not entirely wrong, it lacks the implication of a prior assignment process. A more accurate translation would be something like 'hat eine Rolle erhalten' (received a role) or 'ist eine Rolle zugeteilt bekommen' (was assigned a role).",
+          "suggestion": "hat eine Rolle erhalten"
         }
       ],
       "approved_at": null
@@ -96,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation 'έχει εκχωρηθεί' translates to 'has been assigned' or 'has been granted'. While technically correct, it lacks the nuance of 'role' which is important context. A more accurate translation would incorporate the concept of a role.",
-          "suggestion": "έχει ανατεθεί ρόλος"
+          "description": "The Greek translation \"έχει εκχωρηθεί\" translates to \"has been assigned\" or \"has been granted.\" While not entirely wrong, it lacks the specificity of the original English phrase \"has been assigned role.\" It doesn't convey the 'role' aspect.",
+          "suggestion": "Consider a translation that incorporates the concept of a 'role,' such as \"έχει ανατεθεί ρόλος\" (has been assigned a role) or \"έχει οριστεί ρόλος\" (a role has been defined/assigned)."
         }
       ],
       "approved_at": null
@@ -108,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Spanish translation 'se ha asignado' does not accurately convey the meaning of 'has been assigned role'. It translates to 'has been assigned' but lacks the mention of a 'role'.",
-          "suggestion": "se le ha asignado un rol"
+          "description": "The Spanish translation \"se ha asignado\" doesn't accurately convey the meaning of \"has been assigned role.\" It's a passive construction without specifying *what* has been assigned. It's too generic.",
+          "suggestion": "A more accurate translation would depend on the context, but options include: 'se le ha asignado un rol' (a role has been assigned to them), 'ha sido asignado un rol' (a role has been assigned), or 'tiene un rol asignado' (has an assigned role)."
         }
       ],
       "approved_at": null
@@ -120,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"on määrätty\" is too literal and doesn't convey the full meaning of \"has been assigned role.\" It translates to 'has been assigned' but lacks the sense of a role being given.",
-          "suggestion": "Consider a translation like \"on saanut roolin\" (has received a role) or \"on nimetty rooliin\" (has been appointed to a role), depending on the context."
+          "description": "The translation 'on määrätty' literally means 'has been appointed' or 'was assigned'. While not entirely wrong, it lacks the nuance of 'has been assigned role'. It sounds more formal and doesn't fully convey the meaning of the original English phrase in the context of a room access update.",
+          "suggestion": "Consider alternatives like 'on saanut roolin' (has received a role) or 'on annettu rooli' (a role has been assigned)."
         }
       ],
       "approved_at": null
@@ -132,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The French translation \"a été assigné\" doesn't accurately convey the meaning of \"has been assigned role\". It's a passive voice construction that lacks context. The original phrase implies someone *received* a role.",
-          "suggestion": "Possible suggestions include: 'a reçu le rôle' (received the role), 'a été nommé(e) à un rôle' (was appointed to a role), or 'occupe le rôle de' (holds the role of) depending on the specific context."
+          "description": "The translation \"a été assigné\" doesn't fully convey the meaning of \"has been assigned role\". It only translates to 'has been assigned', missing the reference to a role. It's grammatically correct, but semantically incomplete.",
+          "suggestion": "a reçu un rôle"
         }
       ],
       "approved_at": null
@@ -144,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'նշանակվել է' (nshanakvel e) translates to 'has been appointed' or 'has been assigned' in a formal context. While it's not entirely wrong, it lacks the nuance of 'role'.  A more accurate translation might convey the action of assigning a specific role.",
-          "suggestion": "Consider 'ստացել է դեր' (stsacel e der) which translates to 'has received a role' or 'պահում է դերը' (pahum e dery) which means 'holds the role'."
+          "description": "The Armenian translation 'նշանակվել է' (nshanakvel e) literally translates to 'has been assigned' or 'has been appointed'. While not entirely wrong, it lacks the nuance of 'role'. It's a bit too literal and doesn't convey the intended meaning as effectively as a more context-specific translation would.",
+          "suggestion": "A more appropriate translation would consider the context of 'role'. Possible alternatives include: 'ունեցել է դեր' (unecel e der - has had a role), 'կարգավիճակ է ստացել' (kargavichak e stavcel - has received a status), or a more natural phrasing depending on the surrounding text."
         }
       ],
       "approved_at": null
@@ -156,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"è stato assegnato\" (it was assigned) does not accurately convey the meaning of \"has been assigned role.\" It's missing the context of a role being assigned.",
-          "suggestion": "A more accurate translation would be something like \"ha ricevuto il ruolo\" (has received the role) or \"gli è stato assegnato un ruolo\" (a role has been assigned to him/her)."
+          "description": "The Italian translation 'è stato assegnato' translates to 'has been assigned' but lacks the context of 'role'. The translation is incomplete and doesn't convey the full meaning of the original English phrase.",
+          "suggestion": "è stato assegnato un ruolo"
         }
       ],
       "approved_at": null
@@ -168,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'に次の役割が割り当てられた：' is a literal translation that may sound awkward in Japanese. A more natural phrasing might be '役割が与えられた' or '役割が付与された'.",
-          "suggestion": "役割が与えられた："
+          "description": "The Japanese translation \"に次の役割が割り当てられた:\" is a literal translation and doesn't flow naturally in this context. It's overly formal and doesn't convey the intended meaning of 'has been assigned role' succinctly.",
+          "suggestion": "Consider a more natural Japanese phrasing such as \"役割が与えられました:\" (Yakuwari ga ataeraremashita: - A role was given) or \"役割が付与されました:\" (Yakuwari ga fuyo saremashita: - A role was granted) depending on the specific nuance desired."
         }
       ],
       "approved_at": null
@@ -180,13 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"님에게 역할이 할당되었습니다\" is technically correct but sounds overly formal and somewhat unnatural in this context. The phrase \"님에게\" is a very polite honorific that might not be appropriate for a system notification or UI element. It implies a level of deference that isn't usually required in this kind of message.",
-          "suggestion": "역할이 부여되었습니다"
+          "description": "The translation \"님에게 역할이 할당되었습니다\" is overly formal and slightly awkward. While technically correct, it doesn't flow naturally in a user interface context. '님' is generally used when addressing someone respectfully. It's likely unnecessary here.",
+          "suggestion": "역할이 할당되었습니다"
         },
         {
-          "type": "formatting",
-          "description": "The inclusion of \"님\" can cause issues with natural language processing and could be omitted for better compatibility in different systems and avoid potential parsing errors.",
-          "suggestion": "역할이 할당되었습니다"
+          "type": "cultural",
+          "description": "The use of '님' (nim) can be overly formal and create distance. In a UI context where the user is being informed, a less formal tone is often preferred. While not strictly incorrect, it might feel stiff.",
+          "suggestion": "Consider removing '님' for a more conversational tone. Evaluate the overall tone of the UI and application to ensure consistency."
         }
       ],
       "approved_at": null
@@ -203,8 +215,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ir piešķirts' lacks context. 'has been assigned role' implies that a specific role has been given to someone or something. 'ir piešķirts' simply means 'has been assigned' without specifying what.",
-          "suggestion": "ir piešķirts amats"
+          "description": "The translation 'ir piešķirts' is too literal and doesn't accurately convey the meaning of \"has been assigned role\" in the context of a room access update. It implies something has simply been granted, not necessarily a role.",
+          "suggestion": "ir piešķirta piekļuves tiesības"
         }
       ],
       "approved_at": null
@@ -215,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Dutch translation 'heeft toegewezen gekregen' doesn't accurately convey the meaning of 'has been assigned role'. It literally translates to 'has been received assignment' which is not the intended meaning. The passive voice is awkward in Dutch in this context.",
-          "suggestion": "A more accurate translation would be something like 'heeft een rol gekregen' (has received a role) or 'is een rol toegewezen' (has been assigned a role)."
+          "description": "The Dutch translation \"heeft toegewezen gekregen\" is a passive construction and doesn't accurately reflect the active meaning of \"has been assigned role.\" It implies the role was assigned *to* someone, rather than the subject having the role.",
+          "suggestion": "A more accurate translation would be something like \"heeft de rol gekregen\" (received the role) or \"heeft de rol\" (has the role)."
         }
       ],
       "approved_at": null
@@ -227,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'przypisano' lacks context. While it means 'assigned', it doesn't convey the complete meaning of 'has been assigned role'. It's too short and doesn't read naturally in most contexts.",
-          "suggestion": "przypisano rolę"
+          "description": "The translation \"przypisano\" is a verb in the passive form and doesn't fully convey the meaning of 'has been assigned role'. It implies something was assigned, but not who or what.",
+          "suggestion": "Consider a more complete translation like \"nadano rolę\" (a role was granted) or \"przypisano rolę\" (a role was assigned)."
         }
       ],
       "approved_at": null
@@ -239,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"foi assinado\" does not accurately convey the meaning of \"has been assigned role\". \"Assinado\" means \"signed\". The intended meaning refers to a role being assigned to someone.",
-          "suggestion": "A more appropriate translation would be something like \"teve um papel atribuído\" or \"recebeu um papel\" (received a role), or a more natural phrasing depending on the specific context."
+          "description": "The Portuguese translation 'foi assinado' does not accurately convey the meaning of 'has been assigned role'. 'Assinado' means 'signed'.",
+          "suggestion": "A more appropriate translation would be something like 'recebeu a função' (received the role) or 'teve a função atribuída' (had the role assigned)."
         }
       ],
       "approved_at": null
@@ -251,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation 'foi assinado' does not accurately convey the meaning of 'has been assigned role'. 'Assinado' means 'signed'.",
-          "suggestion": "A more appropriate translation would be 'recebeu o papel', 'teve o papel atribuído', or 'foi designado para o papel'."
+          "description": "The Portuguese translation 'foi assinado' does not accurately convey the meaning of 'has been assigned role'. 'Assinado' means 'signed' and doesn't relate to role assignment.",
+          "suggestion": "A more accurate translation would be something like 'recebeu a função' (received the role) or 'teve a função atribuída' (had the role assigned)."
         }
       ],
       "approved_at": null
@@ -263,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'a fost atribuit' (literally 'has been assigned') doesn't fully convey the meaning of 'has been assigned role'. It's missing the context of a role.",
-          "suggestion": "a primit rolul"
+          "description": "The translation 'a fost atribuit' literally means 'was assigned'. While technically correct, it lacks context and doesn't convey the meaning of 'has been assigned role' effectively. It's missing the part about 'role'.",
+          "suggestion": "a primit rol"
         }
       ],
       "approved_at": null
@@ -281,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"හාඩ් පත්වී ඇත කාර්යභාරය\" does not accurately convey the meaning of \"has been assigned role.\" \"හාඩ් පත්වී ඇත\" implies 'has been appointed' or 'has been selected', while \"කාර්යභාරය\" refers to 'duty' or 'responsibility'. It misses the core concept of role assignment.",
-          "suggestion": "A more accurate translation would be something like \"භූමිකාව පත්කර ඇත\" (bhūmikāva pathakaratha) which translates to 'has been assigned a role' or \"කාරිය පත්කර ඇත\" (kāriya pathakaratha) meaning 'has been assigned duty/role'."
+          "description": "The translation 'හාඩ් පත්වී ඇත කාර්යභාරය' doesn't accurately convey the meaning of \"has been assigned role\". 'හාඩ් පත්වී ඇත' typically means 'has been appointed' or 'has been elected'. 'කාර්යභාරය' means 'responsibility' or 'duty,' which doesn't fit the context of assigning a role.",
+          "suggestion": "A more accurate translation would be something like 'භූමිකාව පත්වී ඇත' (bhūmikāva pathavi etā) which translates to 'has been assigned a role'."
         }
       ],
       "approved_at": null
@@ -302,19 +314,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'додељена је улога' while technically correct, isn't the most natural or concise way to express 'has been assigned role' in Serbian. A more common and fluent phrasing would be 'придружила се улога' or 'има улогу'. The current translation sounds a bit formal and less conversational.",
+          "suggestion": "придружила се улога"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'dodeljena je uloga' while grammatically correct, doesn't fully capture the nuance of 'has been assigned role'. A more accurate translation would reflect the passive voice, perhaps using something like 'priključena je uloga' or 'dodijeljena je uloga'.",
-          "suggestion": "priključena je uloga"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

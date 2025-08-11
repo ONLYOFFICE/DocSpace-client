@@ -40,7 +40,10 @@ export default function withBadges(WrappedComponent) {
     constructor(props) {
       super(props);
 
-      this.state = { disableBadgeClick: false, disableUnpinClick: false };
+      this.state = {
+        disableBadgeClick: false,
+        disableUnpinClick: false,
+      };
     }
 
     onShowVersionHistory = () => {

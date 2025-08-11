@@ -130,7 +130,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
   };
 
   return (
-    <StyledTableRow checked={isChecked} onClick={handleAccountToggle}>
+    <StyledTableRow>
       <TableCell className="checkboxWrapper">
         <Checkbox isChecked={isChecked} onChange={handleAccountToggle} />
         <Text className="username" truncate>
@@ -150,6 +150,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
             displaySelectedOption
             modernView
             manualWidth="auto"
+            dataTestId="user_type_combobox"
           />
         </div>
       </TableCell>

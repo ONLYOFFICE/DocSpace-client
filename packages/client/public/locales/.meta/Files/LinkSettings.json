@@ -3,7 +3,7 @@
   "content": "Link settings",
   "content_en_sha1_hash": "14b50416a42f1b3caddef7006b9b95657e7b4e43",
   "created_at": "2025-05-19T21:30:55.790Z",
-  "updated_at": "2025-05-28T09:30:02.446Z",
+  "updated_at": "2025-08-04T07:30:01.255Z",
   "comment": {
     "text": "This translation key \"LinkSettings\" refers to the settings related to links in a file. It is used as a label in a UI component, likely displayed on a button or in a dialog, to indicate that the user can edit link settings for a specific file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/LinkRow.tsx",
-      "line_number": 172,
+      "line_number": 147,
       "context": "const getData = () => {\n return [\n {\n key: \"edit-link-key\",\n label: t(\"Files:LinkSettings\"),\n icon: SettingsReactSvgUrl,\n onClick: onEditLink,\n },\n {\n key: \"copy-link-settings-key\",",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Link parametrləri\" is understandable, a more accurate and commonly used translation for \"Link settings\" in Azerbaijani would be \"Keçid parametrləri\" or \"Bağlantı parametrləri\". \"Link\" often translates to \"keçid\" or \"bağlantı\" in this context.",
-          "suggestion": "Keçid parametrləri"
+          "description": "While \"Link parametrləri\" is understandable, \"parametrleri\" (parameters) isn't the most natural or precise translation of \"Link settings.\" \"Link ayarları\" would be a more common and accurate equivalent.",
+          "suggestion": "Link ayarları"
         }
       ],
       "approved_at": null
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Setări link' is understandable, a more accurate and natural Romanian translation of 'Link settings' would be 'Configurări link' or 'Setări legături'. 'Setări link' feels slightly awkward.",
-          "suggestion": "Configurări link"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Подешавања линка\" is a literal translation of 'Link settings' but might sound awkward or unnatural in Serbian. A more natural phrasing might be \"Поставке везе\" or \"Поставке линка\".",
-          "suggestion": "Consider using \"Поставке везе\" or \"Поставке линка\" for a more natural and idiomatic translation."
+          "description": "While 'Подешавања линка' is understandable, a more accurate and idiomatic translation of 'Link settings' would be 'Поставке везе' or 'Поставке линка'. 'Подешавања' implies adjustments or configurations, whereas 'поставке' refers more directly to the settings themselves.",
+          "suggestion": "Поставке везе"
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Podešavanja linka\" is understandable, a more accurate and common translation of \"Link settings\" would be \"Podešavanja veza\" or \"Postavke veze\". \"Linka\" sounds somewhat awkward in this context.",
-          "suggestion": "Podešavanja veza"
+          "description": "While \"Podešavanja linka\" is understandable, a more accurate and idiomatic translation of \"Link settings\" would be \"Postavke veza\" or \"Postavke poveznica\". \"Podešavanja linka\" sounds somewhat literal and less natural.",
+          "suggestion": "Postavke veza"
         }
       ],
       "approved_at": null
@@ -216,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Параметри посилання' is a literal translation of 'Link settings,' it's not the most natural phrasing in Ukrainian. 'Параметри посилання' implies settings *for* links, which might not be the intended meaning. A more common and natural translation would be 'Налаштування посилань'.",
+          "description": "While \"Параметри посилання\" is a literal translation, \"Налаштування посилань\" would be a more natural and commonly used term for 'Link settings' in a UI context in Ukrainian.",
           "suggestion": "Налаштування посилань"
         }
       ],
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Cài đặt' generally means 'settings', 'liên kết' translates to 'link'. 'Link settings' implies configurations related to links, so a more accurate translation might consider options that reflect that relationship. 'Cài đặt liên kết' is understandable but not the most precise.",
-          "suggestion": "Consider alternatives like 'Thiết lập liên kết' or 'Tùy chọn liên kết' for greater accuracy, depending on the specific context and desired nuance."
+          "description": "While 'Cài đặt' means 'settings' and 'liên kết' means 'link', the overall phrasing 'Cài đặt liên kết' is a bit literal and doesn't flow naturally in Vietnamese. A more natural translation would be 'Thiết lập liên kết' or simply 'Liên kết'.",
+          "suggestion": "Thiết lập liên kết"
         }
       ],
       "approved_at": null

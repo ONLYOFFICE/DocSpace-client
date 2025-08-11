@@ -71,6 +71,7 @@ const DropDown = ({
   style,
   topSpace,
   backDrop,
+  dataTestId,
 }: DropDownProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -280,11 +281,13 @@ const DropDown = ({
         return getItemHeight(child);
       });
 
-    const getItemSize = (index: number) => rowHeights && rowHeights[index];
+    const getItemSize = (index: number) =>
+      (rowHeights && rowHeights[index]) as number;
     const fullHeight =
-      cleanChildren &&
-      rowHeights &&
-      rowHeights.reduce((a: number, b: number) => a + b, 0);
+      (cleanChildren &&
+        rowHeights &&
+        rowHeights.reduce((a: number, b: number) => a + b, 0)) ||
+      0;
     const calculatedHeight =
       fullHeight > 0 && maxHeight && fullHeight < maxHeight
         ? fullHeight
@@ -328,7 +331,7 @@ const DropDown = ({
           ref={dropDownRef}
           style={dropDownStyles}
           className={dropDownClasses}
-          data-testid="dropdown"
+          data-testid={dataTestId ?? "dropdown"}
           role="listbox"
         >
           <VirtualList
@@ -337,7 +340,7 @@ const DropDown = ({
             itemCount={itemCount}
             maxHeight={maxHeight}
             cleanChildren={cleanChildren}
-            calculatedHeight={calculatedHeight}
+            calculatedHeight={calculatedHeight || 0}
             isNoFixedHeightOptions={isNoFixedHeightOptions ?? false}
             getItemSize={getItemSize}
             isOpen={open ?? false}

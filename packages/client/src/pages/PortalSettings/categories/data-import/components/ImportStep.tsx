@@ -111,6 +111,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: AccountsIcon,
         }}
         isDisabled
+        dataTestId="import_users_section"
       />
 
       <ImportSection
@@ -131,6 +132,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: AccountsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_groups_section"
       />
 
       <ImportSection
@@ -151,6 +153,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_personal_files_section"
       />
 
       <ImportSection
@@ -171,12 +174,15 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_shared_files_section"
       />
       <ImportSection
         isChecked={importOptions.importSharedFolders}
         onChange={(e) => onChange(e, "importSharedFolders")}
         sectionName={t("Settings:SharedFolders")}
-        description={t("Settings:SharedFoldersDescription")}
+        description={t("Settings:FolderToRoomImportNote", {
+          sectionName: t("Common:Rooms"),
+        })}
         exportSection={{
           sectionName: sharedFoldersExportDetails.name,
           workspace: serviceName,
@@ -188,6 +194,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: RoomsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_shared_folders_section"
       />
       <ImportSection
         isChecked={importOptions.importCommonFiles}
@@ -208,6 +215,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: RoomsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_common_files_section"
       />
       <ImportSection
         isChecked={importOptions.importProjectFiles}
@@ -225,6 +233,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: RoomsIcon,
         }}
         isDisabled={false}
+        dataTestId="import_project_files_section"
       />
       {hasCommonFiles ? (
         <ImportSection
@@ -245,6 +254,7 @@ const ImportStep = (props: ImportStepProps) => {
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}
+          dataTestId="import_common_files_section"
         />
       ) : null}
 
@@ -265,6 +275,7 @@ const ImportStep = (props: ImportStepProps) => {
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}
+          dataTestId="import_project_files_section"
         />
       ) : null}
 

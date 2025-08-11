@@ -276,7 +276,6 @@ const SimpleRoom = (props) => {
     >
       <Container>
         <PreviewBlock
-          t={t}
           loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
@@ -302,6 +301,7 @@ const SimpleRoom = (props) => {
                   tooltipContent={
                     <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
                   }
+                  dataTestId="room_selector_help_button"
                 />
               </LabelGroup>
               <FilesSelectorInputWrapper>
@@ -312,6 +312,7 @@ const SimpleRoom = (props) => {
                   onSubmit={onChangeFolderId}
                   withHeader
                   headerProps={{ headerLabel: t("Common:SelectAction") }}
+                  dataTestId="room_selector_input"
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
@@ -383,11 +384,13 @@ const SimpleRoom = (props) => {
                   label={t("Common:Title")}
                   onChange={onChangeShowTitle}
                   isChecked={config.showTitle}
+                  dataTestId="title_checkbox"
                 />
                 <HelpButton
                   place="right"
                   offsetRight={4}
                   size={12}
+                  dataTestId="title_help_button"
                   tooltipContent={
                     <TooltipContent
                       title={t("Common:Title")}
@@ -403,11 +406,13 @@ const SimpleRoom = (props) => {
                   label={t("SearchFilterAndSort")}
                   onChange={onChangeShowFilter}
                   isChecked={config.showFilter}
+                  dataTestId="filter_checkbox"
                 />
                 <HelpButton
                   place="right"
                   offsetRight={4}
                   size={12}
+                  dataTestId="filter_help_button"
                   tooltipContent={
                     <TooltipContent
                       title={t("SearchBlock")}

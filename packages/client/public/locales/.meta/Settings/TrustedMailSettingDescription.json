@@ -3,7 +3,7 @@
   "content": "Configure Trusted Mail Domain Settings to specify the allowed mail servers to use for self-registration.",
   "content_en_sha1_hash": "0f4d0291e365f84ebfba31711be3a84c9938ddc2",
   "created_at": "2025-05-19T21:30:52.998Z",
-  "updated_at": "2025-06-18T07:34:15.188Z",
+  "updated_at": "2025-08-04T07:30:01.543Z",
   "comment": {
     "text": "Configure Trusted Mail Domain Settings to specify allowed mail servers for self-registration. This setting is used to describe a security category in a portal settings page and appears as part of the \"Trusted Mail\" section, likely on a button or link labeled \"Save To Apply\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 200,
+      "line_number": 202,
       "context": "<Text fontSize=\"16px\" fontWeight=\"700\">\n {t(\"TrustedMail\")}\n </Text>\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"TrustedMailSettingDescription\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight=\"400\">\n <Trans t={t} i18nKey=\"SaveToApply\" />\n </Text>\n {trustedMailDomainSettingsUrl ? (",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'self-registration' is translated as 'التسجيل الشخصي للمستخدم'. While technically correct, 'التسجيل الذاتي' would be a more concise and commonly used translation in this context.  'الشخصي للمستخدم' adds unnecessary verbosity.",
+          "description": "The phrase \"للمستخدم\" (lilmustakhdim) which translates to \"for the user\" is unnecessary and adds redundancy. The English original doesn't specify the registration is for a user, it's just self-registration.",
           "suggestion": "تهيئة إعدادات نطاق البريد الموثوق لتحديد خوادم البريد المسموحة للتسجيل الذاتي."
         }
       ],
@@ -48,13 +48,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Özünü qeydiyyat üçün istifadə edilməsinə icazə verilən\" is overly verbose and doesn't accurately convey the meaning of 'to use for self-registration'. A more direct translation would be better.",
-          "suggestion": "Öz-qeydiyyat üçün istifadə oluna bilən"
+          "description": "The translation of \"Configure\" is overly literal and clunky. A more natural phrasing would be better.",
+          "suggestion": "Etibarlı Poçt Domenləri üçün parametrləri ayarlayın (Adjust Trusted Mail Domains settings)."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Özünü qeydiyyat üçün istifadə edilməsinə icazə verilən\" is complex and could be simplified. It literally means \"to be used for self-registration\".",
+          "suggestion": "Öz-qeydiyyatda istifadə edilə bilən"
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is slightly awkward and could be improved for readability in Azerbaijani. Consider reordering the phrases.",
-          "suggestion": "Etibarlı Poçt Domen Parametrlərini konfiqurasiya edərək, öz-qeydiyyat üçün istifadə oluna bilən poçt serverlərini təyin edin."
+          "description": "The phrase \"Etibarlı Poçt Domen Parametrlərini konfiqurasiya edin\" could benefit from a more fluid sentence structure. Splitting the sentence could improve readability.",
+          "suggestion": "Etibarlı Poçt Domenləri üçün parametrləri ayarlayın."
         }
       ],
       "approved_at": null
@@ -65,13 +70,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Настройките за Доверен Мейл Домейн' is a bit lengthy and could be made more concise. While technically correct, it's stylistically less elegant.",
-          "suggestion": "Consider rephrasing as 'Настройки за доверени имейл домейни' (Settings for trusted email domains) for better readability."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'електронна поща' (elektronna poshta) is correct for 'email', it's quite formal.  'Имейл' is a more common and natural term in modern Bulgarian usage.",
-          "suggestion": "Replace 'електронна поща' with 'имейл'."
+          "description": "The translation uses a long sentence structure that can be improved for readability. The phrase \"за да уточните разрешените сървъри за електронна поща, които да използвате за само-регистрация\" is quite lengthy.",
+          "suggestion": "Конфигурирайте Настройките за Доверен Мейл Домейн, за да определите разрешените имейл сървъри за само-регистрация."
         }
       ],
       "approved_at": null
@@ -94,8 +94,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after 'Settings' is missing in the Greek translation.  It should read 'Ρυθμίσεις: αξιόπιστου τομέα...'",
-          "suggestion": "Διαμορφώστε τις Ρυθμίσεις: αξιόπιστου τομέα αλληλογραφίας για να καθορίσετε..."
+          "description": "The colon after \"Settings\" is missing in the Greek translation.",
+          "suggestion": "Διαμορφώστε τις Ρυθμίσεις: αξιόπιστου τομέα αλληλογραφίας για να καθορίσετε τους επιτρεπόμενους διακομιστές αλληλογραφίας που θα χρησιμοποιούνται για την αυτοεγγραφή."
         }
       ],
       "approved_at": null
@@ -106,13 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'autorregistro' while technically meaning self-registration, is not commonly used in Spanish and can sound awkward. A more natural phrasing would be 'registro automático' or 'registro por cuenta propia'.",
+          "description": "The phrase 'self-registration' is not accurately translated. 'Autorregistro' is a less common and potentially confusing term. A more natural and understandable translation would be 'registro automático' or 'registro propio'.",
           "suggestion": "Configure los ajustes de dominio de correo de confianza para especificar los servidores de correo permitidos que se utilizarán para el registro automático."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrase 'que se utilizarán' is a bit wordy.  It can be more concise.",
-          "suggestion": "Configure los ajustes de dominio de correo de confianza para especificar los servidores de correo permitidos para el registro automático."
         }
       ],
       "approved_at": null
@@ -123,13 +118,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Määritä Luotetun sähköpostin toimialueen asetukset määrittääksesi sallitut sähköpostipalvelimet, joita käytetään itse-rekisteröintiin' is a bit verbose and formal for this context. 'Luotetun sähköpostin toimialueen asetukset' is a bit clunky.  A more natural phrasing would be more concise.",
-          "suggestion": "Määritä sallitut sähköpostipalvelimet itse-rekisteröintiä varten."
+          "description": "The phrase \"Luotetun sähköpostin toimialueen asetukset\" is a bit verbose and potentially unclear. A more natural phrasing might be \"Luotettujen sähköpostitoimialueiden asetukset\" or a shorter alternative.",
+          "suggestion": "Määritä Luotettujen sähköpostitoimialueiden asetukset"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'joita käytetään itse-rekisteröintiin' is grammatically correct, but feels unnecessarily complex for this context. A more accessible phrasing could improve clarity.",
-          "suggestion": "itse rekisteröitymiseen"
+          "description": "The phrase 'joita käytetään itse-rekisteröintiin' can be simplified to 'itse rekisteröintiin'.",
+          "suggestion": "joita käytetään itse rekisteröintiin"
         }
       ],
       "approved_at": null
@@ -140,8 +135,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"à utiliser pour l'auto-enregistrement\" is a literal translation and sounds awkward in French. A more natural phrasing would be \"pour l'inscription automatique\" or \"pour l'enregistrement automatique\".",
-          "suggestion": "Configurez les paramètres du domaine de messagerie de confiance pour spécifier les serveurs de messagerie autorisés pour l'inscription automatique."
+          "description": "The phrase \"à utiliser pour l'auto-enregistrement\" is a slightly awkward translation of \"to use for self-registration\". It's literally 'to use for self-registration'. A more natural phrasing would be something like \"pour l'auto-inscription\".",
+          "suggestion": "Configurez les paramètres du domaine de messagerie de confiance pour spécifier les serveurs de messagerie autorisés pour l'auto-inscription."
         }
       ],
       "approved_at": null
@@ -152,18 +147,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Վստահելի փոստի Դոմենի կարգավորումները\" is a literal translation of \"Trusted Mail Domain Settings\" but sounds overly formal and somewhat clunky in Armenian. A more natural phrasing would convey the same meaning.",
-          "suggestion": "Consider a more fluent translation such as \"Վստահելի փոստային դոմեների կարգավորումներ\" (Trusted mail domains settings) or \"Վստահելի էլեկտրոնային փոստի դոմեների կարգավորումներ\" (Trusted email domain settings)."
+          "description": "The phrase \"Վստահելի փոստի Դոմենի կարգավորումները\" is a literal translation of \"Trusted Mail Domain Settings\" but might be improved for natural flow in Armenian. A more idiomatic phrasing might be \"վստահելի էլեկտրոնային փոստի դոմենների կարգավորումները\" or similar, to better convey the meaning of \"Trusted Mail Domain Settings\".",
+          "suggestion": "Consider rephrasing as \"վստահելի էլեկտրոնային փոստի դոմենների կարգավորումները\" or a similarly natural-sounding equivalent."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"որպեսզի նշեք փոստի թույլատրելի սերվերները\" (in order to specify the allowed mail servers) could be simplified for better readability.",
-          "suggestion": "Consider rephrasing to \"որպեսզի ցուցեք թույլատրված փոստի սերվերները\" (in order to indicate the permitted mail servers) or \"որպեսզի սահմանեք թույլատրված փոստի սերվերները\" (in order to define the permitted mail servers)."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"ինքնագրանցման համար\" (for self-registration) is correct but could be adjusted for a more colloquial feel.",
-          "suggestion": "Consider  \"ինքնուրույն գրանցման համար\" (for independent registration) or \"ինքնակազմավարման համար\" (for self-managed registration) as potential alternatives. However, the original is not incorrect."
+          "description": "The phrase \"որպեսզի նշեք փոստի թույլատրելի սերվերները\" could be more accurately translated as something conveying 'to specify which mail servers are allowed'. The current wording implies a directive rather than a specification.",
+          "suggestion": "Consider rephrasing as \"զորպեսզի նշեք թույլատրելի էլեկտրոնային փոստի սերվերները\" or similar."
         }
       ],
       "approved_at": null
@@ -171,13 +161,25 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"autoregistrazione\" is a less common and slightly technical term. A more natural translation of 'self-registration' in this context might be 'registrazione diretta' or 'registrazione autonoma'.",
+          "suggestion": "Configura le impostazioni del dominio di posta affidabile per specificare i server di posta consentiti da utilizzare per la registrazione diretta."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Configure Trusted Mail Domain Settings\" is somewhat awkwardly translated as \"信頼できるメールドメインを構成して\". A more natural translation might be something like \"信頼できるメールドメインの設定を構成して\" (Shinrai dekiru meerudo main no sosete o kouchiku shite) or simply \"信頼できるメールドメインの設定をします\" (Shinrai dekiru meerudo main no sosete o shimasu). The current translation is technically correct but less fluent.",
+          "suggestion": "信頼できるメールドメインの設定を構成して (Shinrai dekiru meerudo main no sosete o kouchiku shite) or 信頼できるメールドメインの設定をします (Shinrai dekiru meerudo main no sosete o shimasu)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -192,8 +194,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ອະນຸຍາດ' can be improved for clarity in this context. It literally means 'allowed' but in this context, 'ຮັບອະນຸຍາດ' (permitted) or 'ຮັບຮອງ' (approved/recognized) might be better.",
-          "suggestion": "ຕັ້ງຄ່າການຕັ້ງຄ່າໂດເມນເມລທີ່ເຊື່ອຖືໄດ້ເພື່ອລະບຸເຄື່ອງແມ່ຂ່າຍເມລທີ່ຮັບຮອງໃຫ້ໃຊ້ສໍາລັບການລົງທະບຽນດ້ວຍຕົນເອງ."
+          "description": "The word 'ໂດເມນ' (domain) seems to be used incorrectly. It should probably be 'ໂດເມນອີເມລ' (email domain) for better clarity.",
+          "suggestion": "ຕັ້ງຄ່າການຕັ້ງຄ່າໂດເມນອີເມລທີ່ເຊື່ອຖືໄດ້"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'ສໍາລັບການລົງທະບຽນດ້ວຍຕົນເອງ' is grammatically correct but a bit lengthy. Consider a more concise alternative.",
+          "suggestion": "ສໍາລັບການລົງທະບຽນດ້ວຍຕົນເອງ"
         }
       ],
       "approved_at": null
@@ -222,13 +229,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"autorregistro\" is not the most natural or widely understood translation for \"self-registration\" in Portuguese. While technically correct, it sounds somewhat formal and might not be easily grasped by all users.",
-          "suggestion": "Registro próprio or Auto-registro would be better options, depending on the target audience and overall tone of the application."
+          "description": "The term 'autorregistro' while technically meaning 'self-registration,' is not commonly used in Brazilian Portuguese and sounds awkward. It's better to use a more natural phrasing.",
+          "suggestion": "Defina as configurações de domínio de correio confiável para especificar os servidores de correio permitidos para registro próprio."
         },
         {
           "type": "formatting",
-          "description": "While not a major issue, the translation could benefit from a slightly smoother flow. It sounds a bit clunky due to the direct translation of 'Configure'.",
-          "suggestion": "Ajuste as configurações de domínio de correio confiável para especificar os servidores de correio permitidos para registro próprio."
+          "description": "While not strictly incorrect, the flow could be improved for clarity. The sentence structure is a little clunky.",
+          "suggestion": "Configure as configurações de domínio de correio confiável para especificar os servidores de correio permitidos para registro próprio."
         }
       ],
       "approved_at": null
@@ -239,13 +246,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'autorregistro' while technically correct, isn't the most common or natural way to express 'self-registration' in Brazilian Portuguese. It can sound a bit formal or technical for a user-facing setting.",
+          "description": "The term 'autorregistro' while technically correct, is not the most natural or common way to express 'self-registration' in Brazilian Portuguese. It's somewhat formal and less frequently used.",
           "suggestion": "Configure as configurações de domínio de e-mail confiável para especificar os servidores de e-mail permitidos para registro próprio."
         },
         {
           "type": "formatting",
-          "description": "The translation uses a somewhat formal tone. Consider softening the wording to improve user experience.",
-          "suggestion": "Configure as configurações de domínio de e-mail confiável para especificar os servidores de e-mail permitidos para o registro de novos usuários."
+          "description": "The phrase 'e-mail confiável' is better than 'correio confiável'. 'Correio' is a more general term.",
+          "suggestion": "Configure as configurações de domínio de e-mail confiável para especificar os servidores de e-mail permitidos para registro próprio."
         }
       ],
       "approved_at": null
@@ -261,8 +268,8 @@
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"autoînregistrarea utilizatorilor\" is a bit clunky. A more natural phrasing would be more direct.",
-          "suggestion": "Configurați setările domeniului de e-mail de încredere pentru a indica serverele de e-mail pe care le utilizați pentru înregistrare."
+          "description": "The translation of 'self-registration' is awkward.  A more natural phrasing would be 'înregistrare automata'.",
+          "suggestion": "Configurați setările domeniului de e-mail de încredere pentru a indica serverele de e-mail pe care le utilizați pentru înregistrare automata."
         }
       ],
       "approved_at": null
@@ -278,19 +285,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'වසම්' is a slightly unusual and potentially ambiguous choice. While it can mean 'domains,' in this context, a more common and clearer term might be preferred.",
-          "suggestion": "වසම් වෙනුවට 'බෙල්ඔරිඩම්' (beloridam) හෝ 'අඩෝමීන්' (adomin) වැනි වචන භාවිතා කරන්න."
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure is a bit convoluted. It could be made more fluent and natural for Sinhala readers.",
-          "suggestion": "ස්වයං ලියාපදිංචිය සඳහා භාවිතා කිරීමට හැකි විශ්වසනීය තැපැල් සේවාදායකයන් (mail servers) සකසන්න."
+          "type": "incorrect_translation",
+          "description": "The translation 'විශ්වසන තැපැල් වසම්' (vishvasana thapael wasam) for 'Trusted Mail Domain' is not the most natural or commonly used phrasing. 'විශ්වසිත තැපැල් වසම' (vishvasitha thapael wasama) or 'නమ్మනීය තැපැල් වසම' (nammanyeiya thapael wasama) would be more appropriate.",
+          "suggestion": "Consider using 'විශ්වසිත තැපැල් වසම' or 'නమ్మනීය තැපැල් වසම' instead of 'විශ්වසන තැපැල් වසම්'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English 'Configure' is translated as 'වින්‍යාස කරන්න' which focuses on the action of configuring rather than the resulting setting. A better representation of 'settings' is needed.",
-          "suggestion": " 'වින්‍යාස කරන්න' වෙනුවට 'සකසන්න' (sakasanawa - to set/arrange) භාවිතා කරන්න, වඩාත් සුදුසු වේ."
+          "description": "The phrase 'වින්‍යාස කරන්න' (vinayas karanawa) for 'Configure' is grammatically correct but sounds slightly formal and could be softened. 'අ mengatur කරන්න' (ath karannava) or 'සකස් කරන්න' (sakas karanawa) are more common and less formal alternatives.",
+          "suggestion": "Consider using 'අ mengatur කරන්න' or 'සකස් කරන්න' instead of 'වින්‍යාස කරන්න'."
         }
       ],
       "approved_at": null
@@ -301,13 +303,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Nakonfigurujte nastavenia dôveryhodnej poštovej domény a zadajte povolené poštové servery, ktoré sa môžu použiť na samo registráciu' is not an accurate translation of 'Configure Trusted Mail Domain Settings to specify the allowed mail servers to use for self-registration.'. The phrase 'ktoré sa môžu použiť' is clunky and doesn't convey the meaning accurately. It implies the servers *can* be used, not that they *are* used.",
-          "suggestion": "Nakonfigurujte nastavenia dôveryhodných poštových domén a určite povolené poštové servery pre samo registráciu."
+          "description": "The word 'Nakonfigurujte' (Configure) appears to be a Serbian word, not Slovak. The Slovak equivalent is 'Konfigurujte'.",
+          "suggestion": "Konfigurujte nastavenia dôveryhodnej poštovej domény a zadajte povolené poštové servery, ktoré sa môžu použiť na samo registráciu."
         },
         {
-          "type": "spelling",
-          "description": "While 'samo registráciu' is grammatically correct, 'samoregistráciu' is more commonly used and would be a more natural-sounding word.",
-          "suggestion": "samoregistráciu"
+          "type": "incorrect_translation",
+          "description": "The phrase 'samo registráciu' is not grammatically correct in Slovak. It should be 'samoregistráciu'.",
+          "suggestion": "Konfigurujte nastavenia dôveryhodnej poštovej domény a zadajte povolené poštové servery, ktoré sa môžu použiť na samoregistráciu."
         }
       ],
       "approved_at": null
@@ -323,14 +325,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The term 'поузданих поштанских домена' (trusted mail domains) is technically correct, but in a user interface context, a simpler phrasing like 'поузданих домена е-поште' (trusted email domains) might be more understandable to a broader audience.",
-          "suggestion": "Конфигуришите подешавања поузданих домена е-поште да одредите дозвољене сервере поште за саморегистрацију."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the sentence structure is a bit long and complex. Breaking it into two sentences might improve readability.",
-          "suggestion": "Конфигуришите подешавања поузданих поштанских домена. Ово ће одредити дозвољене сервере поште за саморегистрацију."
+          "type": "spelling",
+          "description": "The word 'поузданих' (pouzdaniх) is a grammatically correct form but might be slightly less common than 'сигурних' (sigurnih) when referring to trusted domains in a technical context. While not strictly incorrect, 'сигурних' could improve readability and feel more natural to a Serbian speaker familiar with IT terminology.",
+          "suggestion": "Конфигуришите подешавања сигурних поштанских домена да одредите дозвољене сервере поште за саморегистрацију."
         }
       ],
       "approved_at": null
@@ -341,13 +338,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'poštanskih' is a genitive plural and might not be the best fit. 'Poštanskih domena' (of mail domains) is technically correct, but sounds a bit awkward.",
-          "suggestion": "Konfigurišite podešavanja pouzdanih mejlovskih domena da odredite dozvoljene servere pošte za samoregistraciju."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'odredite' is a valid translation for 'specify', it might be slightly formal for this context. A more natural wording could be considered.",
-          "suggestion": "Konfigurišite podešavanja pouzdanih mejlovskih domena da navedete dozvoljene servere pošte za samoregistraciju."
+          "description": "The word 'Konfigurišite' is a formal command form. A more natural and user-friendly option would be to use the imperative form appropriate for settings configuration.",
+          "suggestion": "Konfigurišanje"
         }
       ],
       "approved_at": null
@@ -358,13 +350,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Güvenilen Posta Alanı Ayarlarını yapılandırın\" is a bit literal and could be more natural. 'Configure' often translates to 'ayarla' or 'belirle' depending on context.  'Yapılandırın' implies a more complex configuration than might be necessary.",
-          "suggestion": "Kendi kendine kayıt için kullanılabilecek posta sunucularını belirlemek üzere Güvenilir E-posta Alanı ayarlarını yapın."
+          "description": "The translation is overly literal and sounds unnatural in Turkish. 'Kendi kendine kayıt' (self-registration) is a bit clunky. 'Öz kayıt' or simply 'kayıt' would be more common.",
+          "suggestion": "Self-registration is better translated as 'kayıt' or 'öz kayıt' depending on the desired level of formality.  A better translation would be: 'Kayıt için kullanılmasına izin verilen posta sunucularını belirtmek üzere Güvenilir Posta Alanı Ayarlarını yapılandırın.' or 'Öz kayıt için kullanılmasına izin verilen posta sunucularını belirlemek üzere Güvenilir Posta Alanı Ayarlarını yapılandırın.'"
         },
         {
           "type": "formatting",
-          "description": "The use of '...' in the English content isn't directly translated into the Turkish. While not strictly incorrect, it might be better to mirror the structure to maintain consistency.",
-          "suggestion": "Kendi kendine kayıt için kullanılmak üzere izin verilen posta sunucularını belirlemek üzere Güvenilir Posta Alanı Ayarlarını yapılandırın."
+          "description": "The sentence structure is a bit long and complex for user interface text. It could be broken down for better readability.",
+          "suggestion": "Consider splitting the sentence into two: 'Güvenilir Posta Alanı Ayarlarını yapılandırın. Bu ayarlar, kendi kendine kayıt için kullanılabilecek posta sunucularını belirtmenizi sağlar.'"
         }
       ],
       "approved_at": null
@@ -372,13 +364,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a comma after 'доменів' which, while not strictly incorrect, is less common and stylistically weaker than a period in this context.  A period would improve readability.",
-          "suggestion": "Налаштуйте параметри довірених поштових доменів. Щоб вказати поштові сервери, які дозволено використовувати для самостійної реєстрації."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -387,13 +373,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Trusted Mail Domain\" as \"Tên miền Thư Tin cậy\" is technically correct but could be improved for clarity and natural flow in Vietnamese. 'Thư Tin cậy' sounds a bit stiff. A more natural phrasing might be 'Miền thư đáng tin cậy' or 'Miền thư tin cậy'.",
-          "suggestion": "Consider 'Miền thư đáng tin cậy' or 'Miền thư tin cậy'."
+          "description": "The translation of \"Trusted Mail Domain\" is a bit literal. A more natural translation might be \"Tên miền thư đáng tin cậy\" or \"Tên miền email đáng tin cậy\". \"Thư Tin cậy\" is understandable, but less common and potentially unclear to a wider audience.",
+          "suggestion": "Tên miền thư đáng tin cậy"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'để tự đăng ký' (to self-register) is grammatically correct but could be more precise. It’s not clear if it means *by* the user or the system using the mail servers for registration.",
-          "suggestion": "Consider rephrasing to clarify who is registering. For example, 'để tự động đăng ký' (for automatic registration)."
+          "type": "spelling",
+          "description": "The word 'đăng ký' is spelled correctly, but consider if 'đăng ký' or 'tự đăng ký' is more appropriate in this context. 'Tự đăng ký' is more accurate to the original English.",
+          "suggestion": "tự đăng ký"
         }
       ],
       "approved_at": null
@@ -404,8 +390,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"通过“配置受信任的邮件域设置”\" is a bit awkward. It literally translates to \"Through 'Configure Trusted Mail Domain Settings'\" which is not the most natural phrasing in Chinese. It's better to rephrase the introduction of the setting.",
-          "suggestion": "使用“配置受信任的邮件域设置”来指定允许用于自注册的邮件服务器。"
+          "description": "The phrase \"通过“配置受信任的邮件域设置”\" is awkward and overly verbose. It directly translates the English UI element name instead of conveying the meaning.  A more natural phrasing would be better.",
+          "suggestion": "配置允许用于自注册的邮件服务器。"
         }
       ],
       "approved_at": null

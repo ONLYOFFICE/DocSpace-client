@@ -3,7 +3,7 @@
   "content": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",
   "content_en_sha1_hash": "d3fb9b35c837c5329abc87569daecaa83b8fff21",
   "created_at": "2025-05-19T21:30:54.114Z",
-  "updated_at": "2025-05-21T07:51:11.885Z",
+  "updated_at": "2025-05-24T08:05:30.209Z",
   "comment": {
     "text": "This translation key describes a message displayed to users when they try to upload files or create new folders and do not have enough disk space. The message directs them to manage quota per user in Storage management settings. It appears as a tooltip on the QuotasBar component.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tag `<1>` is present in both the English and Arabic text, indicating it should be preserved. However, ensure consistency in the formatting and placement of this tag across all translations and the original English.",
+          "suggestion": "Verify the tag `<1>` is consistently formatted and placed correctly."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -35,9 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The angle brackets <1> are present in both the English and Azerbaijani content, but the closing tag is missing a closing bracket. It should be <1>Yaddaş idarəetmə parametrlərində</1>",
-          "suggestion": "<1>Yaddaş idarəetmə parametrlərində</1>"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Storage management settings' is translated as 'Yaddaş idarəetmə parametrlərində'. While 'Yaddaş' means memory, 'Storage' implies disk space, which is the context. A more accurate translation would be something like 'Saxtə idarəetmə parametrləri' (for 'Storage') or 'Saxlanma idarəetmə parametrləri'.",
+          "suggestion": "Consider translating 'Storage management settings' as 'Saxtə idarəetmə parametrləri' or 'Saxlanma idarəetmə parametrləri'."
         }
       ],
       "approved_at": null
@@ -54,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tag <1> is present in both the English and Czech content, but its content should be analyzed for consistency and appropriateness.",
-          "suggestion": "Verify that the highlighted text 'Správa úložiště' accurately reflects the meaning of 'Storage management settings' and is appropriate for the user interface."
+          "description": "The tag `<1>` is present in both the English and Czech text. It should be verified that the tag is used consistently and appropriately within the application's UI.",
+          "suggestion": "Verify the correct usage and application of the `<1>` tag within the target system."
         }
       ],
       "approved_at": null
@@ -72,13 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Greek versions, but it seems to be representing a link. The link target should be verified and ensured the Greek version uses the correct HTML or Markdown for links if this is intended.",
-          "suggestion": "Verify the intended link target and ensure the Greek version uses the appropriate link formatting (e.g., HTML `<a>` tag or Markdown link syntax)."
+          "description": "The angle brackets `<1>` and `</1>` are present in both the English and Greek translations. They indicate a formatting element that should be checked for consistency in the UI/application.",
+          "suggestion": "Verify that the formatting tag `<1>` and `</1>` are rendered correctly within the UI/application where this text is displayed. Ensure it's consistent with the English version."
         },
         {
           "type": "incorrect_translation",
-          "description": "While generally accurate, 'αποθ. χώρου' is an abbreviation for 'αποθηκευτικού χώρου'. While understandable, the full form ('αποθηκευτικού χώρου') would be more professional in this context.",
-          "suggestion": "Replace 'αποθ. χώρου' with 'αποθηκευτικού χώρου'."
+          "description": "The English phrase 'Storage management settings' is translated as 'Ρυθμίσεις διαχείρισης αποθ. χώρου'. While technically correct, it's somewhat literal and could be more naturally expressed in Greek. 'Αποθ. χώρου' is an abbreviation and might not be immediately clear to all users.",
+          "suggestion": "Consider a more natural Greek phrasing for 'Storage management settings', such as 'Ρυθμίσεις αποθήκευσης' or 'Ρυθμίσεις διαχείρισης χώρου αποθήκευσης'. The best option depends on the overall tone and style of the application."
         }
       ],
       "approved_at": null
@@ -95,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are not properly closed or rendered in the Finnish translation. They appear literally as part of the text.",
-          "suggestion": "Remove or correctly render the HTML tags. If the tags are intended to be a link, ensure proper HTML structure and styling for the Finnish context."
+          "description": "The angle brackets '<1> ... </1>' are not correctly rendered in the Finnish translation. They seem to be literal tags instead of intended formatting.",
+          "suggestion": "Ensure the angle brackets are correctly interpreted as formatting tags and display the content appropriately.  It may require escaping or special handling depending on the rendering system."
         }
       ],
       "approved_at": null
@@ -106,14 +112,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'manage quota per user' is translated as 'gérez des quotas d'utilisateurs'. While technically correct, a more natural and idiomatic French translation would be 'gérer les quotas par utilisateur' or 'administrer les quotas par utilisateur'. The current translation sounds slightly awkward.",
-          "suggestion": "gérer les quotas par utilisateur"
-        },
-        {
           "type": "formatting",
-          "description": "The HTML tag <1> appears to be used for highlighting or linking, but it's not clear what its intended purpose is. While technically correct to include it, it should be verified that the intended highlight/link is actually present in the UI.",
-          "suggestion": "Verify the purpose and functionality of the <1> tag in the user interface."
+          "description": "The angle brackets <1> are present in both the English and French versions. While technically correct as they mirror the original, it's worth considering whether they are necessary for the user interface and potentially remove them for a cleaner look.",
+          "suggestion": "Consider removing the angle brackets from the French translation if they aren't essential for the UI."
         }
       ],
       "approved_at": null
@@ -124,18 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ազատեք սկավառակի տարածքը\" (free up disk space) is technically correct but could be more natural in Armenian. It sounds a bit literal.",
-          "suggestion": "ազատեք տեղը կամ"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"manage quota per user\" is slightly awkward. While \"յուրաքանչյուր օգտատիրոջ չափաբաժինը\" is understandable, it could be improved for flow.",
-          "suggestion": "յուրաքանչյուր օգտատիրոջ համար չափաքանակը"
+          "description": "The phrase \"ազատեք սկավառակի տարածքը\" translates to 'free up disk space', which is correct. However, the sentence structure feels slightly unnatural in Armenian.  A more natural phrasing might be something like \"աշխատեք ազատել սկավառակի տարածքը\" (try to free up disk space) or “վերացրեք սկավառակի տարածքը” (reduce disk space).",
+          "suggestion": "աշխատեք ազատել սկավառակի տարածքը"
         },
         {
           "type": "formatting",
-          "description": "The <1> tags are present in both the original and the translation, which is good.  However, confirming the exact styling/rendering of these tags is crucial to ensure consistency.",
-          "suggestion": "Ensure consistent styling and rendering of <1> tags across platforms."
+          "description": "The `<1>Storage management settings.</1>` tag is present in both the English and Armenian translations. It's important to ensure the Armenian tag renders correctly within the platform's context. While technically present, a check is needed to confirm correct display.",
+          "suggestion": "Verify correct rendering of `<1>Storage management settings.</1>` within the target platform."
         }
       ],
       "approved_at": null
@@ -146,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag <1> is present in both the English and Italian content. It seems like it's intended to highlight a link or specific text. Ensure consistent formatting in all translations.",
-          "suggestion": "Verify the intended function of the <1> tag and ensure it's applied correctly in all localized versions. If it's a hyperlink, ensure the link target is accurate."
+          "description": "The angle bracket tags <1> are present in both the English and Italian content. While not strictly an error, it's important to ensure these tags are handled consistently in the localization process and aren't accidentally included in the final user interface.",
+          "suggestion": "Verify that the <1> tags are intended and handled correctly within the localization workflow. If not, remove them from the Italian translation."
         }
       ],
       "approved_at": null
@@ -158,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Japanese text, but there's no explicit indication it should be bolded or otherwise styled. While the tag exists, it's unclear what it's intended to signify.",
-          "suggestion": "Confirm intended styling of `<1>` and apply consistently. If it's meant to be bold, ensure it's rendered as such. If it's for internal tracking, ensure it doesn't affect display."
+          "description": "The HTML tag <1> is inconsistent with the English source. It appears in both, but its purpose is unclear without additional context. It should be verified to ensure consistency across languages and platforms.",
+          "suggestion": "Verify the purpose of the <1> tag and ensure consistency in both English and Japanese. If it's meant for highlighting, consider alternative methods that translate correctly (e.g., bolding). If it's an ID for linking, ensure the link exists and targets the correct location."
         }
       ],
       "approved_at": null
@@ -170,8 +166,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Korean content, but the content within the tag might require review for consistency in its role and function. Specifically, verify whether 'Storage management settings' accurately represents the intended functionality/location in the Korean context.",
-          "suggestion": "Review the Korean tag content '<1>스토리지 관리 설정</1>' to ensure it reflects the correct translation and functionality of 'Storage management settings' and its placement in the Korean user interface."
+          "description": "The tag `<1>` is not consistently rendered. The English uses `<1>Storage management settings</1>` while the Korean uses `<1>스토리지 관리 설정</1>.",
+          "suggestion": "Ensure consistent tag usage. Consider if the tags are necessary and consistent across all translations."
         }
       ],
       "approved_at": null
@@ -182,13 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag <1> is not closed correctly. It's closed with </1> instead of </1>",
-          "suggestion": "Ensure the closing tag matches the opening tag: </1>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“To upload and create new files and folders” is a bit stiff. A more natural Lao phrasing might be considered.",
-          "suggestion": "Consider: “ເພື່ອກ່າຍອັບໄຟລ໌ ແລະ ສ້າງໄຟລ໌ ແລະ ໂຟນເດີໃໝ່” or similar phrasing that flows better in Lao."
+          "description": "The Laotian translation retains the `<1>` tag from the English content. This is a formatting issue and should be removed.",
+          "suggestion": "Remove the `<1>` tags from the Laotian translation."
         }
       ],
       "approved_at": null
@@ -196,7 +187,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets <1>...</1> are present in both the English and Latvian text, indicating they should be preserved. This is likely a tag or identifier for a specific element in the UI.",
+          "suggestion": "Ensure the angle brackets <1>...</1> are correctly rendered in the UI and match the English version exactly."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -205,8 +202,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in both the English and Dutch translations. While they indicate a tag, it's important to ensure this formatting is handled correctly by the rendering system and doesn't introduce display issues.",
-          "suggestion": "Verify that the rendering system correctly interprets and displays the <1> and </1> tags. If they are meant to be HTML tags, confirm their proper use. If they are meant to be plain text, remove them."
+          "description": "The angle brackets <1> and </1> are present in both the English and Dutch versions. It's important to ensure this formatting is consistent with the platform's conventions.",
+          "suggestion": "Verify the intended functionality and appearance of the angle brackets. If they denote a specific action or link, ensure it functions correctly in the Dutch interface. If they are purely formatting, verify they are the correct tags for the target platform."
         }
       ],
       "approved_at": null
@@ -217,13 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"manage quota per user\" is translated as \"zmień limit pamięci na użytkownika\". While not entirely wrong, it's a bit literal and could be more naturally phrased. 'Zmień limit pamięci' directly translates to 'change memory limit', which is not exactly what is intended.  A more accurate translation might imply adjusting or assigning quotas.",
-          "suggestion": "Consider a phrasing like 'zarządzaj limitami pamięci dla użytkowników' or 'ustawiaj limity pamięci dla użytkowników'."
+          "description": "The English phrase 'PersonalUserQuotaAdminsDescription' implies a more direct reference to user quota administration. The Polish translation, while technically correct, translates more generally as 'manage memory'. 'Quota' is a more specific term than 'pamięć' (memory).",
+          "suggestion": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub zmień limit przypisany użytkownikom w <1>ustawieniach zarządzania pamięcią.</1>"
         },
         {
           "type": "formatting",
-          "description": "The HTML tag <1> is present in both the original and translated texts. Ensure consistency in how this tag is handled in the UI or documentation. No change is needed to the translation itself, but this needs to be a known and maintained aspect.",
-          "suggestion": "Confirm proper rendering and intention of <1> tags in the target system/UI."
+          "description": "The HTML tag `<1>` doesn't appear to serve a specific purpose; it's just wrapping the phrase 'Storage management settings' in English. This may introduce rendering issues.  The Polish translation contains `<1>` as well, which might need to be consistent with the source's intent.",
+          "suggestion": "Review the purpose of the `<1>` tags in the English source. If they are for a specific style or functional purpose, ensure the Polish translation mirrors this. If they are unnecessary, remove them."
         }
       ],
       "approved_at": null
@@ -231,7 +228,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets (<1> and </1>) are not consistently applied in the Portuguese translation. They should match the English content.",
+          "suggestion": "Ensure the angle brackets are consistently applied to the entire phrase 'Configurações de gerenciamento de armazenamento' as they are in the English text."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -246,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets <1>...</1> are inconsistent between the English and Romanian versions. While the English uses 'Storage management settings', the Romanian uses 'Setările de gestionare a spațiului de stocare.' This inconsistency might confuse users.",
-          "suggestion": "Ensure the translated tag matches the original tag’s content/meaning.  If the intent is to link to storage management, verify the link target is correct for the Romanian version."
+          "description": "The HTML tag `<1>` is present in both the English and Romanian versions. It's important to ensure this tag is rendered correctly in the UI and doesn't introduce unnecessary HTML. However, for verification purposes, the tag itself is acceptable as it mirrors the source.",
+          "suggestion": "Confirm correct rendering of `<1>` tag in UI."
         }
       ],
       "approved_at": null
@@ -255,13 +258,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are present in both the English and Russian text.  While technically not an error, it's important to confirm these tags are being rendered correctly in the target system.  Consider if the tags are meant to represent a specific style or link and if that style/link is properly applied in the Russian version.",
-          "suggestion": "Verify that the <1> and </1> tags render as intended within the application using the Russian translation. If they are meant for styling, ensure the styling is applied correctly."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -270,13 +267,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ආචයන කළමනාකරණ සැකසුම්\" (Aachayana Kalamanagara Sanasum) doesn't directly translate to \"Storage management settings\". A more accurate translation would be something like \"ගබඩාවේ කළමනාකරණ සැකසුම්\" (Gabadavē Kalamanagara Sanasum) or \"භදාරණ කළමනාකරණ සැකසුම්\" (Bhadaarana Kalamanagara Sanasum). 'ආචයන' (Aachayana) implies a ritualistic or ceremonial aspect, which is not relevant here.",
-          "suggestion": "Replace \"ආචයන කළමනාකරණ සැකසුම්\" with \"ගබඩාවේ කළමනාකරණ සැකසුම්\" or \"භදාරණ කළමනාකරණ සැකසුම්\"."
+          "description": "The phrase \"ආචයන කළමනාකරණ සැකසුම්\" (Aachayana Kalamanagaraana Saekasuum) is not a standard or easily understood translation of \"Storage management settings.\" It appears to be a literal translation that lacks clarity. 'ආචයන' isn't commonly used in this context.",
+          "suggestion": "Consider a more natural phrasing like \"භද්‍රතා කළමනාකරණ සැකසුම්\" (Badratha Kalamanagaraana Saekasuum) which translates to 'Storage Management Settings'. Alternatively, a more descriptive phrase like “depot kala manaa karana saekasuum” (depot management settings) could be used, explaining the concept of storage."
         },
         {
           "type": "formatting",
-          "description": "The Sinhala translation does not retain the HTML tag <1> as present in the English original.",
-          "suggestion": "Ensure the <1> tag surrounding \"Storage management settings\" is also present in the Sinhala translation, e.g., <1>ගබඩාවේ කළමනාකරණ සැකසුම්</1>."
+          "description": "The tag <1>Storage management settings</1> is not correctly represented in the Sinhala translation. It appears as <1>ආචයන කළමනාකරණ සැකසුම්</1>.",
+          "suggestion": "Ensure the tag is rendered correctly as <1>භද්‍රතා කළමනාකරණ සැකසුම්</1> or <1>depot kala manaa karana saekasuum</1> depending on the preferred translation."
         }
       ],
       "approved_at": null
@@ -287,8 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle bracket tags <1>...</1> are present in both the English and Slovak content. It is important to ensure this formatting is consistent and serves a specific purpose (e.g., highlighting a link).",
-          "suggestion": "Verify the intended purpose of the angle brackets. If they are meant to highlight a link, ensure the link functionality is implemented correctly. If they are purely for display, consider removing them for better readability."
+          "description": "The HTML tag <1> is inconsistent between the English and Slovak versions. The English uses Storage management settings, while the Slovak uses Nastaveniach spravovania úložiska. While technically correct, the styling or intent behind the tag may need alignment with the original English to ensure consistency in the user interface.",
+          "suggestion": "Verify if the styling or intent behind the HTML tag <1> requires adjustment to align with the original English version. Consider whether a simple change in tag content is sufficient or a more complex adjustment is needed."
         }
       ],
       "approved_at": null
@@ -298,9 +295,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The HTML tag `<1>` is present in both the English and Slovenian texts. This likely indicates a formatting tag for highlighting or similar, and its presence should be verified and consistent with the intended behavior in the UI.",
-          "suggestion": "Verify that the `<1>` tag functions correctly in the UI and is consistently applied in both languages. If it's just for highlighting, ensure the style/behavior is translated appropriately."
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Storage management settings\" is translated as \"nastavitvah upravljanja shrambe\". While understandable, a more direct and potentially clearer translation might be \"nastavitvah upravljanja prostora za shranjevanje\" or \"nastavitvah upravljanja shrambe\" (depending on context and terminology commonly used). The current translation is a bit wordy and less natural.",
+          "suggestion": "Consider \"nastavitvah upravljanja prostora za shranjevanje\" or \"nastavitvah upravljanja shrambe\"."
         }
       ],
       "approved_at": null
@@ -310,14 +307,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Serbian content. This indicates a formatting issue that needs to be reviewed for consistency with the platform's implementation. It should be verified that this tag is correctly interpreted and rendered in the user interface.",
-          "suggestion": "Verify the platform's handling of the `<1>` tag and ensure it renders correctly in the Serbian user interface. If the tag is unnecessary, remove it from the translation."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Да бисте отпремили' is a bit literal and less natural in this context. A more idiomatic translation would be something along the lines of 'За да бисте уплодовали' or 'Да бисте могли да уплодујете'.",
+          "suggestion": "Да бисте могли да уплодујете"
         },
         {
           "type": "incorrect_translation",
-          "description": "While the translation conveys the general meaning, \"Да бисте отпремили и креирали нове датотеке и фолдере\" could be more naturally phrased in Serbian. The phrase 'отпремили и креирали' sounds slightly awkward. A more fluent option might include a simpler word choice.",
-          "suggestion": "Consider alternatives like: 'Да бисте могли да закачите и креирате нове датотеке и фолдере' or 'Да бисте креирали и отпремили нове датотеке и фолдере'."
+          "description": "The phrase 'креирали нове датотеке и фолдере' is also quite literal.  A more natural phrasing might be 'правили нове датотеке и фолдере'.",
+          "suggestion": "правили нове датотеке и фолдере"
         }
       ],
       "approved_at": null
@@ -327,9 +324,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Da biste otpremili\" is not the most natural or accurate translation of \"To upload\". A more natural translation would be \"Da biste učitali\".",
+          "suggestion": "Da biste učitali"
+        },
+        {
           "type": "formatting",
-          "description": "The angle brackets `<1>Storage management settings</1>` are not correctly translated within the Serbian text. The tag should remain in English.",
-          "suggestion": "Da biste otpremili i kreirali nove datoteke i foldere, oslobodite prostor na disku ili upravljajte kvotom po korisniku u <1>Storage management settings</1>"
+          "description": "The angle brackets `<1>Storage management settings</1>` are not correctly rendered in Serbian. They should either be removed or the tags changed to suit Serbian formatting conventions if present in the UI.",
+          "suggestion": "Consider removing the tags or replacing them with appropriate Serbian equivalent if required by the platform."
         }
       ],
       "approved_at": null
@@ -340,8 +342,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tag `<1>` is present in both the English and Turkish content, but its placement might need review for consistency with the platform's expected formatting. While technically correct, a closer look at how this tag is rendered is recommended.",
-          "suggestion": "Ensure the `<1>` tag renders as expected within the user interface. If it's meant to be a link or highlight, verify it's properly styled."
+          "description": "The angle bracket tag <1> is present in both the English and Turkish text, but its impact on the UI rendering (e.g., highlighting or linking) isn't specified.  It's important to confirm that the tag renders correctly in the target platform and doesn't negatively affect usability.  Specifically, the closing tag </1> is missing a space after the angle bracket, which might cause rendering issues depending on the system.",
+          "suggestion": "Verify UI rendering of the <1> tag and ensure consistent spacing around the closing tag, e.g., </1>."
         }
       ],
       "approved_at": null
@@ -351,9 +353,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The word 'upload' is translated as 'вивантажити'. While 'вивантажити' can mean to unload or download, in this context, 'завантажити' (to upload) would be more accurate. The original English refers to uploading new files, not downloading them.",
+          "suggestion": "Щоб завантажити та створити нові файли й папки, звільніть місце на диску або керуйте квотою користувача в <1>Параметрах керування сховищем</1>."
+        },
+        {
           "type": "formatting",
-          "description": "The opening and closing tags <1> are not consistently applied in the Ukrainian translation. The closing tag is missing a closing bracket.",
-          "suggestion": "Ensure consistent and correct formatting of tags. <1>Параметрах керування сховищем</1>"
+          "description": "The HTML tags <1> and </1> are present in both the original and translated content. While this is acceptable, it's important to confirm the purpose and application of this tag in the final product. It's potentially unnecessary if the tags do not have a particular formatting or functional significance.",
+          "suggestion": "Verify the purpose and application of the <1> tags. Consider removing if unnecessary."
         }
       ],
       "approved_at": null
@@ -363,9 +370,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The term 'Storage management settings' is translated as 'cài đặt Quản lý lưu trữ'. While technically correct, a more natural and user-friendly translation would be 'Cài đặt quản lý dung lượng' or 'Cài đặt quản lý không gian lưu trữ'.",
-          "suggestion": "Cài đặt quản lý dung lượng"
+          "type": "formatting",
+          "description": "The `<1>` tag in the English content is not consistently rendered in the Vietnamese translation.  It's inconsistent capitalization. It should be '<1>Quản lý lưu trữ</1>' to match the English.",
+          "suggestion": "<1>Quản lý lưu trữ</1>"
         }
       ],
       "approved_at": null
@@ -376,8 +383,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle bracket tag <1> is inconsistent with the English version. The English uses <1>Storage management settings</1>, while the Chinese uses <1>存储空间管理设置</1>. The formatting should match.",
-          "suggestion": "Change the tag to <1>存储空间管理设置</1>."
+          "description": "The angle brackets `<1>` and `</1>` are not properly closed or consistent with the English original in the Chinese translation. The English uses `<1>Storage management settings</1>`, and the Chinese uses `<1>存储空间管理设置</1>`. This might require consistent handling in the UI or translation system.",
+          "suggestion": "Ensure consistent use of angle brackets for UI tags, either `<1>存储空间管理设置</1>` or similar to match the English structure, depending on system requirements."
         }
       ],
       "approved_at": null

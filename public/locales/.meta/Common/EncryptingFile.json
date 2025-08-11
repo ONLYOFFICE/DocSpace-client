@@ -3,7 +3,7 @@
   "content": "Encrypting file",
   "content_en_sha1_hash": "ab3cc493a1d903eff8fa478a04fc1b61cc941160",
   "created_at": "2025-05-19T21:30:44.942Z",
-  "updated_at": "2025-05-28T09:30:03.001Z",
+  "updated_at": "2025-05-26T07:57:32.992Z",
   "comment": {
     "text": "The translation key \"EncryptingFile\" is used to display a message indicating that a file is being encrypted in the desktop application. It appears as part of a loading process and is likely seen on a button or similar UI element where encryption is initiated.",
     "is_auto": true,
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Dateiverschlüsselung' is technically correct, it's a more formal and less common way to say 'Encrypting file'. A more natural and direct translation would be 'Datei verschlüsseln' or 'Verschlüsselung der Datei'. 'Dateiverschlüsselung' emphasizes the *process* of encryption rather than the state of the file.",
+          "description": "While 'Dateiverschlüsselung' is a technically correct term, it's a more formal and complex translation of \"Encrypting file\".  A more natural and user-friendly translation might be 'Datei verschlüsseln' or 'Dateien verschlüsseln' (depending on context - singular or plural). 'Dateiverschlüsselung' sounds more like a process or feature name than a description of an action.",
           "suggestion": "Datei verschlüsseln"
         }
       ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Կոդավորման ֆայլ\" literally translates to \"coding file\". While 'encrypting' and 'coding' can be related concepts, 'encrypting' is the more accurate translation of 'Encrypting file' in this context.",
-          "suggestion": "Մալուխավորման ֆայլ (Maluxavorumani fayl) - This translates to 'encrypted file', which is a more accurate representation of 'encrypting file'."
+          "description": "The translation \"Կոդավորման ֆայլ\" while containing the correct word for 'file', 'ֆայլ', doesn't accurately convey the meaning of 'Encrypting file'. 'Կոդավորման' literally translates to 'coding' or 'encoding', which is related, but not precisely 'encrypting'. A more accurate translation would involve a term specific to encryption, like 'գաղտնագրային ֆայլ' (gagtnagrayin fayl - encrypted file).",
+          "suggestion": "գաղտնագրային ֆայլ (gagtnagrayin fayl)"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"파일을 암호화하는 중입니다\" is accurate but could be more concise and natural. While technically correct, it reads slightly formal for a common phrase.",
-          "suggestion": "파일 암호화 중 (File encryption in progress)"
+          "description": "The Korean translation \"파일을 암호화하는 중입니다\" translates to \"Encrypting file\" but is more literally \"File is encrypting.\"  A more natural and accurate translation would be something like \"파일을 암호화 중입니다\" or \"파일 암호화 중입니다\".",
+          "suggestion": "파일 암호화 중입니다"
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ລະຫັດ' (la-had) is the standard transliteration of 'encrypt' in Lao. While technically understandable, it could be replaced with a more common term for better clarity.",
+          "suggestion": "Consider using a more common term for 'encrypt', if available and appropriate for the context. However, this is a minor point."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A encriptar o ficheiro' is a literal translation that doesn't quite convey the intended meaning of 'Encrypting file' in Portuguese. It implies something is currently being encrypted rather than the description of a file.",
-          "suggestion": "A more accurate translation would be 'Ficheiro a encriptar' or 'Ficheiro encriptado'."
+          "description": "The translation \"A encriptar o ficheiro\" is not the most natural or accurate translation of \"Encrypting file.\" It literally translates to \"Encrypting the file.\" A more accurate and idiomatic translation would be something like \"Arquivo a ser criptografado\" or \"Arquivo em criptografia\".",
+          "suggestion": "Arquivo a ser criptografado"
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනුව සංකේතනය වෙමින්' is a literal translation and doesn't quite convey the intended meaning of 'Encrypting file'.  'ගොනුව' means 'file', 'සංකේතනය' means 'encryption', and 'වෙමින්' means 'is being'. While technically correct, it's clunky and not how a native speaker would typically express this. It sounds more like 'File is being encrypted' rather than 'Encrypting file'.",
-          "suggestion": "Consider a more natural phrasing like 'ගොනුව සංකේතනය කෙරේ' (Gonuwa sankethana kere) which translates to 'File is encrypting' or 'Encrypting the file', or 'ගොනුව සංකේතනය වෙයි' (Gonuwe sankethana weyi) which means 'File is encrypting'."
+          "description": "The translation \"ගොනුව සංකේතනය වෙමින්\" (Ganuwa sankethanaya vemin) literally translates to 'File is being encrypted'. While not entirely wrong, it's slightly awkward. A more natural translation would be \"ගොනුව සංකේතනය කෙරෙමින්\" (Ganuwa sankethanaya keremina) or simply \"ගොනුව සංකේතනය වෙයි\" (Ganuwa sankethanaya vey).",
+          "suggestion": "ගොනුව සංකේතනය කෙරෙමින් (Ganuwa sankethanaya keremina) or ගොනුව සංකේතනය වෙයි (Ganuwa sankethanaya vey)"
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Dosya şifreleme\" is a literal translation, it's not the most natural way to express \"Encrypting file\" in Turkish. It implies the *process* of encryption, not a file that *is being* encrypted. A better translation would convey the ongoing action.",
-          "suggestion": "Şifrelenen dosya"
+          "description": "While \"Dosya şifreleme\" is a literal translation of \"Encrypting file\", it implies the *process* of encryption rather than the file *being* encrypted. A more accurate translation would convey the state of the file.",
+          "suggestion": "Dosyayı şifreliyor"
         }
       ],
       "approved_at": null
@@ -231,7 +237,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Mã hóa tệp' is a possible translation, it's quite literal and might not be the most natural-sounding in Vietnamese. 'Mã hóa file' would be more common and closer to the English phrasing, especially in technical contexts.",
+          "suggestion": "Mã hóa file"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

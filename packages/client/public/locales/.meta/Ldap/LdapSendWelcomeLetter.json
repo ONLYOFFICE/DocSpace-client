@@ -3,7 +3,7 @@
   "content": "Send welcome letter",
   "content_en_sha1_hash": "9a770b109558f84680cf019bd25bba994749b961",
   "created_at": "2025-05-19T21:30:54.263Z",
-  "updated_at": "2025-05-21T08:09:10.279Z",
+  "updated_at": "2025-05-24T08:22:48.771Z",
   "comment": {
     "text": "This translation key is used for the label of a checkbox in an LDAP integration settings page. It prompts users to send a welcome letter when setting up an LDAP connection. Translators should provide a short and clear phrase that can be displayed on this UI component.",
     "is_auto": true,
@@ -33,19 +33,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Xoş gəlmisiniz məktubu göndərin' is a literal translation and sounds somewhat unnatural in Azerbaijani. It directly translates to 'Send the welcome letter.'  A more natural phrasing would be something like 'Xoş gəlmisiniz zənginlərin göndərin' or 'Xoş gəlmisiniz məktubu ünvanlayın'.",
+          "suggestion": "Xoş gəlmisiniz zənginlərin göndərin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'приветстващо' is a less common and potentially incorrect spelling. The more common and accurate spelling is 'поздравително'.",
-          "suggestion": "Изпратете поздравително писмо"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Willkommens-E-Mail senden' is understandable, it's a more literal translation of 'welcome email'. 'Send welcome letter' implies a physical letter, whereas 'Willkommens-E-Mail' directly states it's an email. A more accurate and idiomatic translation considering the potential of a physical letter would be 'Willkommensbrief versenden' (send welcome letter).",
-          "suggestion": "Willkommensbrief versenden"
+          "description": "While 'Willkommens-E-Mail senden' is understandable, a more precise translation of 'Send welcome letter' would be 'Ein Willkommensschreiben versenden'. 'E-Mail' specifies a digital letter, which might not be intended if the original refers to a physical letter.",
+          "suggestion": "Ein Willkommensschreiben versenden"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ウェルカムレターの送信' is technically correct but sounds slightly unnatural in Japanese. A more natural phrasing would be something like 'ウェルカムレターを送信する' or 'ウェルカムレターを送付する'.",
-          "suggestion": "ウェルカムレターを送信する"
+          "description": "While \"ウェルカムレターの送信\" is understandable, a more natural and common phrasing would be something like \"ウェルカムレターの発送\" or \"ウェルカムレターの送付\". \"送信\" implies digital transmission, which doesn't align with a physical letter.",
+          "suggestion": "ウェルカムレターの発送"
         }
       ],
       "approved_at": null
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While '웰컴 메일 전송' is understandable, a more accurate translation of 'Send welcome letter' would be '환영 편지 발송' or '환영 메일 발송'. '웰컴 메일' is a direct transliteration and while commonly used, '환영' conveys the welcoming aspect better.",
+          "description": "While \"웰컴 메일 전송\" is understandable, a more accurate and natural translation of 'Send welcome letter' would be something like '환영 편지 발송' or '환영 메일 발송'.  '웰컴 메일 전송' is a transliteration and might sound less professional or less aligned with a native Korean communication style.",
           "suggestion": "환영 편지 발송"
         }
       ],
@@ -150,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Send welcome letter\" implies a single action. The Polish translation \"Wysyłaj wiadomość powitalną\" uses the imperfective verb form (\"wysyłaj\"), suggesting a recurring or habitual action. A more accurate translation would use the perfective form to match the English meaning.",
+          "description": "The translation 'Wysyłaj wiadomość powitalną' uses the imperative form ('Wysyłaj'), implying a continuous or habitual action. The English 'Send welcome letter' is a one-time action.",
           "suggestion": "Wysłać wiadomość powitalną"
         }
       ],
@@ -183,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ආගමන ලිපිය එවන්න\" is understandable, a more accurate and natural translation of \"Send welcome letter\" would be something like \"පිවියේ ලිපිය යවන්න\" or \"స్వాగత ලිපිය పంపන්න\". \"ආගමන ලිපිය\" literally means 'arrival letter'.",
+          "suggestion": "පිවියේ ලිපිය යවන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Пошаљи добродошло писмо\" is understandable, a more natural and accurate translation of \"Send welcome letter\" would be something like \"Испрати добродошло писмо\" or \"Упути добродошло писмо\". \"Пошаљи\" is more for sending something to a specific recipient, while a welcome letter is often broadcast.",
-          "suggestion": "Испрати добродошло писмо"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

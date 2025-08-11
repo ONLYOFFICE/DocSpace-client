@@ -3,7 +3,7 @@
   "content": "Display settings",
   "content_en_sha1_hash": "fa9e60e47cdd12f16c67ab946c0d803d00e8a50a",
   "created_at": "2025-05-19T21:30:56.581Z",
-  "updated_at": "2025-05-28T09:30:02.357Z",
+  "updated_at": "2025-08-11T09:02:43.891Z",
   "comment": {
     "text": "Display settings are related to the embedding panel's width. This translation key is used to display the current width setting in the Embedding Panel component, likely appearing as a label within the panel.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 474,
+      "line_number": 488,
       "context": "<Text\n className=\"embedding-panel_header-text\"\n fontSize=\"15px\"\n fontWeight={600}\n >\n {t(\"EmbeddingPanel:DisplaySettings\")}\n </Text>\n \n <div className=\"embedding-panel_inputs-container\">\n <DisplayBlock\n label={t(\"EmbeddingPanel:Width\")}",
       "module": "/packages/client"
     }
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Görüntü parametrləri' while understandable, isn't the most accurate or natural translation of 'Display settings'. 'Görüntü ayarları' would be a more common and accurate translation.",
+          "suggestion": "Görüntü ayarları"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -135,7 +141,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Configurações do visor' is technically correct, a more natural and common translation for 'Display settings' in Portuguese (Brazil) would be 'Configurações de exibição'. 'Visor' typically refers to a screen or viewer, while 'exibição' more broadly covers display functionalities.",
+          "suggestion": "Configurações de exibição"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -171,13 +183,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Подешавања екрана\" (Podeshavanja ekrana) literally translates to \"Screen settings\". While related, \"Display settings\" is broader and could encompass more than just screen-specific settings. A more accurate translation might be \"Подешавања приказа\" (Podeshavanja prikaza) which means 'Display settings'.",
+          "suggestion": "Подешавања приказа"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Podešavanja Ekrana\" is understandable, a more accurate translation of \"Display settings\" would be \"Podešavanja prikaza\". \"Ekran\" refers to the screen itself, while \"prikaz\" refers to the display or presentation.",
+          "suggestion": "Podešavanja prikaza"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +213,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Показати параметри\" while understandable, doesn't perfectly convey the meaning of \"Display settings.\" \"Display settings\" refers to settings *for* display, whereas \"Показати параметри\" more literally translates to 'Show parameters'. A more accurate translation would be something like 'Налаштування відображення' or 'Параметри відображення'.",
+          "suggestion": "Налаштування відображення"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Form templates",
   "content_en_sha1_hash": "c2d535bf745606b2674f9041a286dd91c5c0f493",
   "created_at": "2025-05-19T21:30:45.540Z",
-  "updated_at": "2025-07-01T15:57:36.403Z",
+  "updated_at": "2025-08-04T07:30:01.722Z",
   "comment": {
     "text": "This translation key is used for a button title displaying \"Form Templates\" and appears on a download dialog in the application.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"قوالب جاهزة\" (qawālib jāhiza) is a possible translation, it's quite literal ('ready templates'). A more natural and idiomatic translation for 'Form templates' in a Saudi Arabian context might be something like 'نماذج جاهزة' (namādhij jāhiza) or 'تصاميم نماذج' (tasāmīm namādhij). The literal translation misses some of the nuance of the original term.",
-          "suggestion": "Consider 'نماذج جاهزة' (namādhij jāhiza) or 'تصاميم نماذج' (tasāmīm namādhij)."
+          "description": "While 'قوالب جاهزة' (qawālib jāhizah) is understandable, it's a more literal translation of 'ready templates'. 'Form templates' implies templates specifically for forms. A more accurate and natural translation might consider 'نماذج جاهزة' (namādhij jāhizah) or 'قوالب نماذج' (qawālib namādhij).",
+          "suggestion": "Consider 'نماذج جاهزة' (namādhij jāhizah) or 'قوالب نماذج' (qawālib namādhij)."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Modelli di moduli\" is a literal translation, it's not the most natural or idiomatic Italian for \"Form templates\". It's a bit clunky and repetitive.",
-          "suggestion": "Consider \"Modelli per moduli\" or simply \"Modelli di formulario\" which is more commonly used in professional contexts."
+          "description": "While technically correct, \"Modelli di moduli\" is a bit redundant. \"Modelli\" alone is more idiomatic and clearer for 'Form templates'.",
+          "suggestion": "Modelli"
         }
       ],
       "approved_at": null
@@ -129,7 +129,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'sjablonen' can be considered a less formal or slightly colloquial term. While not strictly incorrect, 'formulier templates' or 'formulier modellen' might be preferred for a more professional or technical context.",
+          "suggestion": "Consider 'formulier templates' or 'formulier modellen' for a more formal alternative."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Șabloane formular\" is not the most natural or accurate translation of \"Form templates\". While technically correct, it's a bit literal. A more common and natural translation would be \"Modele de formulare\" or \"Șabloane de formulare\".",
-          "suggestion": "Modele de formulare"
+          "description": "While 'Șabloane formular' is understandable, a more natural and accurate translation of 'Form templates' in Romanian would be 'Șabloane de formulare' or 'Modele de formulare'. 'Șabloane formular' is a literal translation that sounds awkward.",
+          "suggestion": "Șabloane de formulare"
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ආකෘතිපත්‍ර අච්චු\" is not the most accurate or natural rendering of \"Form templates\" in Sinhala. \"අච්චු\" (acchu) generally refers to molds or dies, which doesn't align with the concept of form templates.",
-          "suggestion": "Consider using \"ආකෘති පත්‍ර\" (aakruthu patra) or \"පත්‍ර ආකෘති\" (pathra aakruthu). These options are more commonly used and accurately convey the meaning of form templates."
+          "description": "The translation 'ආකෘතිපත්‍ර අච්චු' doesn't accurately convey the meaning of 'Form templates'. 'අච්චු' (acchu) generally means 'mold' or 'die', which isn't the intended meaning for 'templates'.",
+          "suggestion": "A better translation would be something along the lines of 'පත්‍ර ආකෘති' (pathra aakruthi), 'ආකෘති පත්‍ර' (aakruthi pathra), or 'පත්‍ර පත්‍රිකා ආකෘති' (pathra pathrika aakruthi) depending on the desired nuance."
         }
       ],
       "approved_at": null
@@ -195,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Serbian (Cyrillic) translation 'Шаблони образаца' contains a spelling error. The correct term for 'form' in this context should be 'образац'.",
+          "suggestion": "Шаблони обрасца"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Mẫu biểu mẫu\" is technically correct, it's a bit redundant. \"Mẫu\" already implies a form or template. A more natural and concise translation would be \"Mẫu\" or \"Biểu mẫu\".",
+          "description": "While \"Mẫu biểu mẫu\" is understandable, it's a bit redundant. 'Mẫu' already implies a form or template. It's more natural and concise to just use 'Mẫu'.",
           "suggestion": "Mẫu"
         }
       ],

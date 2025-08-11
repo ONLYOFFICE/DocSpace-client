@@ -3,7 +3,7 @@
   "content": "Storage quota successfully set.",
   "content_en_sha1_hash": "55290c0a938000153f80653dfca4cadaa72f7658",
   "created_at": "2025-05-19T21:30:49.137Z",
-  "updated_at": "2025-05-28T09:30:02.137Z",
+  "updated_at": "2025-08-04T07:30:01.011Z",
   "comment": {
     "text": "This translation key is used to display a success message when a storage quota is successfully set. It is commonly displayed in dialogs and notifications after updating storage quotas, ensuring users are informed of the successful completion of the operation.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/GlobalEvents/ChangeQuotaEvent.js",
-      "line_number": 82,
-      "context": "timerId = setTimeout(() => setIsLoading(true), 200);\n let items;\n \n try {\n items = await updateFunction(size);\n toastr.success(t(\"Common:StorageQuotaSet\"));\n \n successCallback && successCallback(items);\n \n if (!needResetSelection) {\n if (type === \"user\") {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/ChangeStorageQuotaDialog/index.js",
-      "line_number": 77,
-      "context": "TenantId: portalInfo.tenantId,\n Quota: isDisableQuota ? -1 : size,\n });\n \n await updateFunction(storageQuota);\n toastr.success(t(\"Common:StorageQuotaSet\"));\n } catch (e) {\n toastr.error(e);\n }\n \n setSize(\"\");",
+      "line_number": 78,
+      "context": "timerId = setTimeout(() => setIsLoading(true), 200);\n let items;\n \n try {\n items = await updateFunction(size);\n toastr.success(t(\"Common:StorageQuotaSet\"));\n \n successCallback && successCallback(items);\n } catch (e) {\n toastr.error(e);",
       "module": "/packages/client"
     }
   ],

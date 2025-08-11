@@ -3,7 +3,7 @@
   "content": "Show advanced settings",
   "content_en_sha1_hash": "065144e113594429bdaf3fda3f9534ebb1eb21c8",
   "created_at": "2025-05-19T21:30:50.135Z",
-  "updated_at": "2025-05-21T01:59:13.141Z",
+  "updated_at": "2025-05-24T03:12:26.996Z",
   "comment": {
     "text": "This translation key is used to display a button that toggles advanced settings on or off. It appears as a label in buttons and dialogs where users can choose to show or hide additional parameters. The text \"ShowAdditionalParameters\" should be translated to indicate this action.",
     "is_auto": true,
@@ -159,7 +159,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'වැඩිදුර' (wēdidura) can be slightly ambiguous. While technically correct, 'අතරමැදි' (ataramēdi) might be more precise in the context of 'advanced'.",
+          "suggestion": "වැඩිදුර instead of අතරමැදි (but keeping 'වැඩිදුර' is acceptable)"
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure 'වැඩිදුර සැකසුම් පෙන්වන්න' sounds slightly less natural. Rephrasing for better flow is recommended.",
+          "suggestion": "සැකසුම් වැඩිදුර පෙන්වන්න (sakusum wēdidura penvanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -180,7 +191,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Прикажи напредна подешавања\" is not the most natural or precise translation of \"Show advanced settings.\" While technically correct, a more idiomatic translation would be preferable.",
+          "description": "The Serbian translation 'Прикажи напредна подешавања' while understandable, is not the most natural or preferred phrasing for 'Show advanced settings' in a UI context.  'Покажи додатна подешавања' or 'Прикажи додатне опције' would be more common.",
           "suggestion": "Покажи додатна подешавања"
         }
       ],

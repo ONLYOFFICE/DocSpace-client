@@ -3,7 +3,7 @@
   "content": "Reconnect",
   "content_en_sha1_hash": "6988b16a8fd21194b9d1d8d8c49312194ff46ae3",
   "created_at": "2025-05-19T21:30:47.744Z",
-  "updated_at": "2025-05-28T09:30:02.223Z",
+  "updated_at": "2025-08-11T09:02:44.079Z",
   "comment": {
     "text": "The \"Reconnect\" translation key is used to display a button label in a ConnectDialog component, which prompts users to reconnect to an account or third-party connection when a valid URL is provided. The text appears as a header for a dialog that allows users to re-establish connections. It should convey the sense of recovery and restoration.",
     "is_auto": true,
@@ -11,16 +11,16 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/ConnectDialog/index.js",
-      "line_number": 92,
-      "context": "const isAccount = !!link;\n const showUrlField = !!connectItem?.requiredConnectionUrl;\n \n const header = isConnectDialogReconnect\n ? t(\"Common:ReconnectStorage\")\n : t(\"Translations:ConnectingAccount\");\n \n const onChangeUrl = (e) => {\n setIsUrlValid(true);\n setUrlValue(e.target.value);",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/components/direct-third-party-connection/DirectThirdPartyConnection.tsx",
+      "line_number": 233,
+      "context": "};\n const getContextOptions = () => {\n return [\n {\n key: \"connection-settings\",\n label: t(\"Common:Reconnect\"),\n onClick: onConnect,\n disabled: false,\n icon: RefreshReactSvgUrl,\n dataTestId: \"connection_settings_option\",\n },",
+      "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/backup/common-container/DirectThirdPartyConnection.js",
-      "line_number": 201,
-      "context": "};\n const getContextOptions = () => {\n return [\n {\n key: \"connection-settings\",\n label: t(\"Common:Reconnect\"),\n onClick: onConnect,\n disabled: false,\n icon: RefreshReactSvgUrl,\n },\n {",
-      "module": "/packages/client"
+      "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
+      "line_number": 102,
+      "context": "const isAccount = !!link;\n const showUrlField = !!connectItem?.requiredConnectionUrl;\n \n const header = isConnectDialogReconnect\n ? t(\"Common:ReconnectStorage\")\n : t(\"Common:ConnectingAccount\");\n \n const onChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {\n setIsUrlValid(true);\n setUrlValue(e.target.value);",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

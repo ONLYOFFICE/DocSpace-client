@@ -27,8 +27,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import FillingRoleProcess from "./FillingRoleProcess";
-import { FileFillingFormStatus, RoleStatus } from "../../enums";
-import type { TUser } from "../../api/people/types";
+import { FileFillingFormStatus } from "../../enums";
 
 const meta = {
   title: "Components/FillingRoleProcess",
@@ -59,168 +58,20 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof FillingRoleProcess>;
 
-const mockUser: TUser = {
-  id: "1",
-  userName: "John Smith",
-  email: "john@example.com",
-  avatar: "avatar-url",
-  avatarMax: "avatar-max-url",
-  avatarMedium: "avatar-medium-url",
-  avatarOriginal: "avatar-original-url",
-  displayName: "John Smith",
-  isVisitor: false,
-
-  isCollaborator: true,
-  isRoomAdmin: false,
-  firstName: "John",
-  lastName: "Smith",
-  status: 1, // EmployeeStatus.Active
-  activationStatus: 1, // EmployeeActivationStatus.Activated
-  workFrom: "",
-  department: "",
-  isLDAP: false,
-  isAdmin: false,
-  listAdminModules: [],
-  isOwner: false,
-  mobilePhoneActivationStatus: 0,
-  isSSO: false,
-  profileUrl: "",
-  access: 0,
-  avatarSmall: "",
-  hasAvatar: false,
-  isAnonim: false,
-};
-
 export const Default: Story = {
   args: {
     fileStatus: FileFillingFormStatus.InProgress,
-    processDetails: [
-      {
-        id: "1",
-        user: mockUser,
-        processStatus: RoleStatus.Filled,
-        roleName: "Manager",
-        histories: [
-          {
-            id: "1",
-            action: "Form sent",
-            date: "2025-02-13T10:00:00Z",
-          },
-          {
-            id: "2",
-            action: "Form signed",
-            date: "2025-02-13T11:00:00Z",
-          },
-        ],
-      },
-      {
-        id: "2",
-        user: { ...mockUser, id: "2", userName: "Alice Johnson" },
-        processStatus: RoleStatus.YourTurn,
-        roleName: "Reviewer",
-        histories: [
-          {
-            id: "3",
-            action: "Form received",
-            date: "2025-02-13T11:05:00Z",
-          },
-        ],
-      },
-      {
-        id: "3",
-        user: { ...mockUser, id: "3", userName: "Bob Wilson" },
-        processStatus: RoleStatus.Waiting,
-        roleName: "Approver",
-        histories: [],
-      },
-    ],
   },
 };
 
 export const Completed: Story = {
   args: {
     fileStatus: FileFillingFormStatus.Completed,
-    processDetails: [
-      {
-        id: "1",
-        user: mockUser,
-        processStatus: RoleStatus.Filled,
-        roleName: "Manager",
-        histories: [
-          {
-            id: "1",
-            action: "Form sent",
-            date: "2025-02-13T10:00:00Z",
-          },
-          {
-            id: "2",
-            action: "Form signed",
-            date: "2025-02-13T11:00:00Z",
-          },
-        ],
-      },
-      {
-        id: "2",
-        user: { ...mockUser, id: "2", userName: "Alice Johnson" },
-        processStatus: RoleStatus.Filled,
-        roleName: "Reviewer",
-        histories: [
-          {
-            id: "3",
-            action: "Form received",
-            date: "2025-02-13T11:05:00Z",
-          },
-          {
-            id: "4",
-            action: "Form reviewed",
-            date: "2025-02-13T12:00:00Z",
-          },
-        ],
-      },
-    ],
   },
 };
 
 export const Stopped: Story = {
   args: {
     fileStatus: FileFillingFormStatus.Stopped,
-    processDetails: [
-      {
-        id: "1",
-        user: mockUser,
-        processStatus: RoleStatus.Filled,
-        roleName: "Manager",
-        histories: [
-          {
-            id: "1",
-            action: "Form sent",
-            date: "2025-02-13T10:00:00Z",
-          },
-          {
-            id: "2",
-            action: "Form signed",
-            date: "2025-02-13T11:00:00Z",
-          },
-        ],
-      },
-      {
-        id: "2",
-        user: { ...mockUser, id: "2", userName: "Alice Johnson" },
-        processStatus: RoleStatus.Stopped,
-        roleName: "Reviewer",
-        histories: [
-          {
-            id: "3",
-            action: "Form received",
-            date: "2025-02-13T11:05:00Z",
-          },
-          {
-            id: "4",
-            action: "Process stopped",
-            date: "2025-02-13T12:00:00Z",
-          },
-        ],
-      },
-    ],
   },
 };

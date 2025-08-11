@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Vyberte ze seznamu",
-  "ConnectingAccount": "Připojovací účet",
-  "DeleteFromTrash": "Vybrané prvky byly úspěšně odstraněny z koše",
   "FileLocked": "Soubor uzamčen",
   "FileProtected": "Soubor je chráněn heslem",
   "FileUnlocked": "Soubor odemčen",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Změnit informace o třetí straně",
   "ThirdPartyTitle": "Služby třetích stran",
   "TitleShowActions": "Zobrazit akce souborů",
-  "TitleShowFolderActions": "Zobrazit akce složek",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Zobrazit akce složek"
 }

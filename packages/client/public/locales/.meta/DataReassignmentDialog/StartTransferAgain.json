@@ -3,7 +3,7 @@
   "content": "Start transfer again",
   "content_en_sha1_hash": "ef68ad214f166adc17614487cd1523d94d89c1a3",
   "created_at": "2025-05-19T21:30:56.761Z",
-  "updated_at": "2025-05-28T09:30:02.251Z",
+  "updated_at": "2025-05-26T07:57:32.281Z",
   "comment": {
     "text": "This translation key is used for the label of a button that restarts a data transfer process when the user clicks on it. The button's content changes depending on the progress of the transfer, and its purpose varies between aborting or starting again. It appears in a footer component within a dialog.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sākt pasūtīt vēlreiz' literally translates to 'Start ordering again.' The original English phrase 'Start transfer again' refers to restarting a data transfer process, not placing another order. The term 'transfer' requires a more accurate translation in this context.",
+          "suggestion": "Sākt pārsūtīšanu vēlreiz"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pornire transfer de date nou' is not the most natural or accurate translation of 'Start transfer again'. It literally translates to 'Start new data transfer'.",
+          "suggestion": "A better translation would be 'Reluare transfer' or 'Începe transferul din nou'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation 'මාරුව නැවත අරඹන්න' is understandable, a more natural and common phrasing for 'Start transfer again' in Sinhala would be 'transfer එක නැවත පටන් ගන්න'. 'අරඹන්න' is generally used for initiating something new, while 'පටන් ගන්න' is better suited for resuming or restarting a process.",
+          "suggestion": "transfer එක නැවත පටන් ගන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

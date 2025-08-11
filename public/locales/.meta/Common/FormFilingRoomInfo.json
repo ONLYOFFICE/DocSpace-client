@@ -3,7 +3,7 @@
   "content": "Upload PDF forms into the room. Invite members and guests to fill out a PDF form. Review completed forms and analyze data automatically collected in a spreadsheet.",
   "content_en_sha1_hash": "8cd90c87d377873629df198e4b6e79f66ef220b7",
   "created_at": "2025-05-19T21:30:45.502Z",
-  "updated_at": "2025-06-03T20:59:42.346Z",
+  "updated_at": "2025-06-08T12:02:32.890Z",
   "comment": {
     "text": "This translation key is used to display information about a Form Filing Room. It is likely used on a button or dialog that invites users to upload PDF forms and review completed ones.",
     "is_auto": true,
@@ -30,18 +30,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Invite members and guests' is not accurately conveyed. 'دعوة الأعضاء والضيوف' literally translates to 'inviting members and guests' which is grammatically correct but the intended meaning of *allowing* them to fill out the form is missing. A better translation would reflect the permission aspect.",
-          "suggestion": "السماح للأعضاء والضيوف بملء نموذج PDF"
+          "description": "The phrase 'Invite members and guests' is translated as 'دعوة الأعضاء والضيوف'. While technically correct, a more natural phrasing in Arabic would be 'قم بدعوة الأعضاء والضيوف' or 'ادعُ الأعضاء والضيوف'.",
+          "suggestion": "قم بدعوة الأعضاء والضيوف"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Review completed forms' is somewhat literal. A more natural translation might emphasize the action of examining or checking them.",
-          "suggestion": "فحص النماذج المكتملة"
+          "description": "The phrase 'fill out a PDF form' is translated as 'ملء نموذج PDF'. A more accurate and common translation would be 'تعبئة نموذج PDF'.",
+          "suggestion": "تعبئة نموذج PDF"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'جدول بيانات' (spreadsheet) is accurate but potentially too formal for some contexts. Depending on the target audience, a more common term could be considered.",
-          "suggestion": "ورقة عمل"
+          "description": "The word 'automatically' is not explicitly translated. While the meaning is implied, adding a word that emphasizes the automatic nature of the process would enhance clarity.",
+          "suggestion": "تحليل البيانات التي يتم جمعها تلقائيًا في جدول بيانات."
         }
       ],
       "approved_at": null
@@ -52,8 +52,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Invite members and guests\" is not perfectly conveyed by \"Üzv və qonaqları PDF formasını doldurmağa dəvət edin\". A more natural translation would be \"Üzv və qonaqları PDF forması doldurmağa dəvət edin\" or \"Üzv və qonaqları PDF formalarını doldurmağa dəvət edin\". The original translation implies inviting them to *fill out* the invitation, not the PDF form itself.",
-          "suggestion": "Üzv və qonaqları PDF forması doldurmağa dəvət edin"
+          "description": "The phrase \"Invite members and guests\" is not accurately conveyed. \"Üzv və qonaqları PDF formasını doldurmağa dəvət edin\" literally translates to \"Invite members and guests to fill out a PDF form.\" It's slightly awkward and could be more natural.",
+          "suggestion": "Consider a phrasing like \"Üzv və qonaqları PDF forması doldurmağa dəvət edin\" (Invite members and guests to fill out the PDF form) or a more general invitation like \"Üzv və qonaqları formanı doldurmağa dəvət edin\" (Invite members and guests to fill out the form)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not incorrect, the repetition of \"PDF\" is slightly clunky. Could be improved with a pronoun or less direct phrasing.",
+          "suggestion": "Consider rephrasing to avoid repeating \"PDF\" so much. Example:  \"Üzv və qonaqları formanı doldurmağa dəvət edin.\" (Invite members and guests to fill out the form)."
         }
       ],
       "approved_at": null
@@ -70,8 +75,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"vyzvěte členy a hosty, k vyplnění PDF formuláře\" is grammatically awkward. The 'k' is unnecessary and the sentence structure could be improved.",
+          "description": "The phrase 'vyzvěte členy a hosty, k vyplnění PDF formuláře' is grammatically awkward. The 'k' construction is not the most natural way to express 'to fill out'.",
           "suggestion": "Vyzvěte členy a hosty, aby vyplnili PDF formulář."
+        },
+        {
+          "type": "formatting",
+          "description": "Consistency in capitalization. 'PDF formuláře' appears both with and without capitalization. Should be consistent.",
+          "suggestion": "Use 'PDF formuláře' consistently throughout the translation or 'pdf formuláře' consistently."
         }
       ],
       "approved_at": null
@@ -79,7 +89,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Invite members and guests to fill out a PDF form' is slightly awkward in the German translation 'Laden Sie Mitglieder und Gäste ein, ein PDF-Formular auszufüllen.' A more natural phrasing would be 'Laden Sie Mitglieder und Gäste ein, das PDF-Formular auszufüllen.' or 'Bitten Sie Mitglieder und Gäste, das PDF-Formular auszufüllen.'",
+          "suggestion": "Laden Sie Mitglieder und Gäste ein, das PDF-Formular auszufüllen."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -94,18 +110,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Invite members and guests' is somewhat stiff in Spanish. A more natural phrasing would be 'Invite a miembros e invitados'.",
-          "suggestion": "Invite a miembros e invitados a completar un formulario PDF."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'fill out a PDF form' is translated as 'rellenar un formulario PDF'. While technically correct, 'completar un formulario PDF' is more common and natural in this context.",
-          "suggestion": "Invite a miembros e invitados a completar un formulario PDF."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'analyze data automatically collected in a spreadsheet' is a bit clunky. A more natural flow would be 'analice los datos recopilados automáticamente en una hoja de cálculo.'",
-          "suggestion": "Revise los formularios rellenados y analice los datos recopilados automáticamente en una hoja de cálculo."
+          "description": "The English phrase 'fill out a PDF form' is best translated as 'completar un formulario PDF' or 'llenar un formulario PDF', not just 'rellenar un formulario PDF'. While 'rellenar' is valid, it is more often used for filling containers and can sound slightly awkward in this context.",
+          "suggestion": "Cargue formularios PDF en la sala. Invite a miembros e invitados a completar/llenar un formulario PDF. Revise los formularios rellenados y analice los datos recopilados automáticamente en una hoja de cálculo."
         }
       ],
       "approved_at": null
@@ -119,7 +125,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Fill out a PDF form' is better translated to 'Remplir un formulaire PDF'. 'Remplir' is a more natural and common verb for 'fill out' in French in this context.",
+          "suggestion": "Remplir un formulaire PDF"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -128,18 +140,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after 'սենյակ' (room) is unnecessary and breaks the flow of the sentence.",
-          "suggestion": "Remove the colon after 'սենյակ'."
+          "description": "The translation lacks a conjunction or transition between the first and second sentences, making it sound abrupt. The colon after 'սենյակ' is also unusual in this context.",
+          "suggestion": "Վերբեռնեք PDF ձևերը սենյակում: Հրավիրեք անդամներին և հյուրերին լրացնել PDF ձևը:"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'լրացնել PDF ձևը' is overly literal and can be improved for natural Armenian phrasing. It directly translates to 'fill PDF form'.",
-          "suggestion": "Consider rewording to 'լրացնելու համար PDF ձևեր' or 'լրացնելու համար PDF ֆորմ'."
+          "description": "The word 'սենյակ' (room) is used repeatedly. While technically correct, it might be more natural to use a more descriptive term like 'աշխատանքային տարածք' (work space) or 'գործարարական հարթակ' (business platform) depending on the context.  Using 'սենյակ' repeatedly sounds a little awkward.",
+          "suggestion": "Consider replacing 'սենյակ' with a more specific term if appropriate. For example:  Վերբեռնեք PDF ձևերը աշխատանքային տարածքում: Հրավիրեք..."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'ֆորմ' (form) is an Armenian transliteration of the English word and feels somewhat awkward in this context. Using the Armenian equivalent is preferred.",
-          "suggestion": "Replace 'ֆորմ' with 'ձև' consistently throughout the translation."
+          "type": "grammar",
+          "description": "The phrase 'ավտոմատ հավաքագրված տվյալները' is grammatically correct but could be more fluent. The word order could be improved.",
+          "suggestion": "Վերլուծեք աղյուսակում ավտոմատ կողմից հավաքված տվյալները: (Analyze the data automatically collected in the spreadsheet)."
         }
       ],
       "approved_at": null
@@ -150,8 +162,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Upload PDF forms into the room' is translated as 'Carica moduli PDF nella stanza.' While technically correct, a more natural Italian phrasing would be 'Carica i moduli PDF nella stanza' or 'Invia i moduli PDF nella stanza' depending on the precise intended action.",
-          "suggestion": "Carica i moduli PDF nella stanza"
+          "description": "The English phrase 'into the room' is better translated as 'nella stanza'. While 'nella stanza' isn't incorrect, 'nella' is more precise than just 'nella' when referring to a dedicated space.",
+          "suggestion": "Carica moduli PDF nella stanza."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'fill out a PDF form' is commonly translated as 'compila un modulo PDF' which is a more natural expression in Italian.",
+          "suggestion": "Invitate i membri e gli ospiti a compilare un modulo PDF."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Review completed forms' is better rendered as 'Rivedi i moduli compilati' which provides a more immediate verb.",
+          "suggestion": "Esamina i moduli compilati"
         }
       ],
       "approved_at": null
@@ -162,13 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Invite members and guests to fill out a PDF form\" is a bit clunky in Japanese. A more natural phrasing would be 'メンバーとゲストにPDFフォームへの入力をお願いします' or similar, which emphasizes requesting their cooperation.",
-          "suggestion": "メンバーとゲストにPDFフォームへの入力を依頼します。"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrasing \"完了したフォームを確認し、スプレッドシートに自動的に収集されたデータを分析します\" could be improved. It's a bit long and slightly awkward. A more concise option would be '完了したフォームを確認し、スプレッドシートに集められたデータを分析します。'",
-          "suggestion": "完了したフォームを確認し、スプレッドシートに集められたデータを分析します。"
+          "description": "The phrase 'Invite members and guests to fill out a PDF form' is not perfectly captured. '入ってもらいます' (ittemo raimasu) implies a request or permission rather than an invitation. A more appropriate term would convey invitation.",
+          "suggestion": "PDFフォームに入力してもらうことを招待します。"
         }
       ],
       "approved_at": null
@@ -176,18 +193,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Invite members and guests to fill out a PDF form' is not perfectly captured. '작성하도록 하세요' (jaksyeonghago haseyo) translates to 'make them write'. A more natural translation would convey an invitation or request.",
-          "suggestion": "멤버와 게스트에게 PDF 양식 작성을 초대하세요. (Member-wa guest-ege PDF yangsik jaksyeong-eul chodaha-seyo.)"
-        },
-        {
-          "type": "formatting",
-          "description": "While grammatically correct, the translation uses a slightly formal tone that might not be ideal for user interface text. A less formal phrasing can improve readability.",
-          "suggestion": "PDF 양식을 룸에 올리세요. 멤버와 게스트를 초대해서 PDF 양식을 작성하게 하세요. 완성된 양식을 검토하고 스프레드시트에 자동으로 모이는 데이터를 분석하세요."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -196,7 +202,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ສະເປຣດຊີດ' is a transliteration error and should be 'ສະເປຣດສິສ'.",
+          "description": "The word 'ສະເປຣດຊີດ' appears to be a misspelling of 'ສະເປຣດສິສ'.",
           "suggestion": "ສະເປຣດສິສ"
         }
       ],
@@ -214,13 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The sentence 'Nodig leden en gasten uit om een PDF formulier in te vullen' is a bit awkward. Using 'uit te vullen' is grammatically correct, but more natural phrasing would improve readability.",
-          "suggestion": "Nodig leden en gasten uit om een PDF-formulier in te vullen."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'room' is somewhat ambiguous and might benefit from a more specific translation depending on the context.  'Room' in this case likely refers to a digital space or workspace, which might be better represented by a word like 'ruimte' or 'werkruimte'.",
-          "suggestion": "PDF formulieren uploaden naar de ruimte. Nodig leden en gasten uit om een PDF formulier in te vullen. Controleer ingevulde formulieren en analyseer automatisch verzamelde gegevens in een spreadsheet."
+          "description": "The Dutch translation uses a semicolon after 'kamer' which is unusual. Periods are preferred for sentence endings.",
+          "suggestion": "PDF formulieren uploaden naar de kamer. Nodig leden en gasten uit om een PDF formulier in te vullen. Controleer ingevulde formulieren en analyseer automatisch verzamelde gegevens in een spreadsheet."
         }
       ],
       "approved_at": null
@@ -231,13 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Invite members and guests' is slightly awkward in Polish. 'Zaproś członków i gości' is technically correct but a more natural phrasing would emphasize the invitation to *fill out* the form.",
-          "suggestion": "Zapraszaj członków i gości do wypełniania formularza PDF."
+          "description": "The phrase 'Invite members and guests to fill out a PDF form' is slightly awkward in Polish. 'Zaproś członków i gości do wypełnienia formularza PDF' implies inviting them to *one* PDF form. It might be better to indicate multiple forms are possible.",
+          "suggestion": "Zaproś członków i gości do wypełnienia formularzy PDF."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Review completed forms' translates literally to 'Sprawdź wypełnione formularze'. A more natural phrasing in the context of form processing would be 'Przeglądaj wypełnione formularze' or 'Oglądaj wypełnione formularze'.",
-          "suggestion": "Przeglądaj wypełnione formularze."
+          "description": "The phrase 'Review completed forms' could be more precisely translated to reflect the meaning of reviewing *submissions* or *entries* rather than just the forms themselves.  'Sprawdź wypełnione formularze' literally translates to 'Check filled forms', which might not fully capture the intended action.",
+          "suggestion": "Sprawdź wypełnione formularze/zgłoszenia/wypełnione dane."
         }
       ],
       "approved_at": null
@@ -260,18 +261,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'into the room' is not accurately translated. 'În sala' is too literal and doesn't convey the intended meaning of a digital workspace or folder.",
-          "suggestion": "Încărcați formulare PDF într-un spațiu de lucru/folder."
+          "description": "The phrase \"în sala\" is too literal and doesn't quite convey the meaning of 'room' in this context. It should imply a digital space or environment.",
+          "suggestion": "Încărcați formulare PDF într-un spațiu de lucru/mediu virtual/platformă."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'invitații' implies guests who are invited to a party. It doesn't accurately describe members and guests being invited to fill out forms.  A more appropriate word is needed to convey the idea of providing access or permissions.",
-          "suggestion": "Invitaţi membrii și utilizatorii pentru completarea formularului PDF."
+          "description": "The word 'învitați' is a plural form. It's implied that each member and guest is invited individually.",
+          "suggestion": "Invitați membrii și invitații să completeze formularul PDF."
         },
         {
-          "type": "grammar",
-          "description": "The sentence 'Revizuiți formulare completate și analizaţi datele colectate automat într-o foaie de calcul' is a bit long and could be improved for better flow. The repetition of verbs makes it less elegant.",
-          "suggestion": "Revizuiți formularele completate și analizați automat datele colectate într-o foaie de calcul."
+          "type": "incorrect_translation",
+          "description": "The phrasing \"Revizuiți formulare completate\" could be more natural. While technically correct, it sounds slightly formal.",
+          "suggestion": "Verificați formularele completate."
         }
       ],
       "approved_at": null
@@ -288,18 +289,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"කාමරයට PDF පෝරම උඩුගත කරන්න\" (kamarayata PDF porama udhugatha kāranna) translates to 'Upload PDF forms to the room'. While technically correct, a more natural phrasing would be 'PDF පෝරම කාමරයට යවන්න' (PDF porama kamarayata yavana) which means 'Send PDF forms to the room'.",
-          "suggestion": "PDF පෝරම කාමරයට යවන්න"
+          "description": "The phrase \"කාමරයට PDF පෝරම උඩුගත කරන්න\" could be improved to better convey the meaning of \"Upload PDF forms into the room.\" A more accurate translation would be something like \"PDF පෝරම කාමරයට ඇupload කරන්න\" or \"PDF පෝරම කාමරයේ upload කරන්න\". The current phrasing sounds slightly unnatural.",
+          "suggestion": "PDF පෝරම කාමරයේ upload කරන්න"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"සාමාජිකයින්ට සහ අමුත්තන්ට ආරාධනා කරන්න\" (sāmajikayinta saha amuttanta ārādhana kāranna) is a literal translation of 'Invite members and guests'. A more natural flow might be 'සාමාජිකයන් සහ අමුත්තන් පෝරම පිරවීමට ආරාධනය කරන්න' (sāmajikayan saha amuttan porama pirivvāmin āradhanaya kāranna)",
-          "suggestion": "සාමාජිකයන් සහ අමුත්තන් පෝරම පිරවීමට ආරාධනය කරන්න"
+          "description": "The phrase \"සාමාජිකයින්ට සහ අමුත්තන්ට ආරාධනා කරන්න\" is a literal translation. While technically correct, it might sound better to rephrase for more natural flow. Consider \"සාමාජිකයන් සහ අමුත්තන් පෝරම පිරවීමට ආරාධනා කරන්න\".",
+          "suggestion": "සාමාජිකයන් සහ අමුත්තන් පෝරම පිරවීමට ආරාධනා කරන්න"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"පැතුරුම්පතක ස්වයංක්‍රීයව එකතු කරන ලද දත්ත විශ්ලේෂණය කරන්න\" (patherumpathaka swayamkriyawa ekathukarala dala vishyalesanaya karanna) is quite literal and verbose.  A more concise and natural translation would be something like 'ස්ප්‍රෙඩ්ෂීට් වලට ස්වයංක්‍රීයව එක්වන දත්ත විශ්ලේෂණය කරන්න' (spredsheet valata swayamkriyawa ekkavana data vishyalesanaya karanna).",
-          "suggestion": "ස්ප්‍රෙඩ්ෂීට් වලට ස්වයංක්‍රීයව එක්වන දත්ත විශ්ලේෂණය කරන්න"
+          "description": "The term \"ප්ලේට්ෆෝම්පතක ස්වයංක්‍රීයව එකතු කරන ලද දත්ත\" directly translates to \"data automatically collected in a spreadsheet.\"  While understandable, a more natural translation could be \"එක්සෙල් වැනි පැතුරුම්පත් තුළ ස්වයංක්‍රීයව එකතු කරන ලද දත්ත\". Specifying 'Excel' could be useful for clarity. Or even, 'ගූගල් ශීට් වැනි පැතුරුම්පත් තුළ'.",
+          "suggestion": "ගූගල් ශීට් වැනි පැතුරුම්පත් තුළ ස්වයංක්‍රීයව එකතු කරන ලද දත්ත"
         }
       ],
       "approved_at": null
@@ -309,14 +310,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses short, choppy sentences. It reads better if the sentences are combined for better flow. The overall tone is somewhat robotic.",
-          "suggestion": "Nahrávajte PDF formuláre do miestnosti. Pozývajte členov a hostí, aby ich vyplnili. Prezrite si vyplnené formuláre a automaticky analyzujte údaje zozbierané v tabuľke."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The word 'miestnosti' (room) is repeated, making the text slightly awkward. While technically correct, a more natural phrasing might be considered.",
-          "suggestion": "Nahrávajte PDF formuláre do priestoru. Pozývajte členov a hostí, aby ich vyplnili. Prezrite si vyplnené formuláre a automaticky analyzujte údaje zozbierané v tabuľke."
+          "description": "The phrase 'analyze data automatically collected in a spreadsheet' is not accurately conveyed. 'Zozbierané v tabuľke' implies a simple collection in a table, whereas the English implies automated collection *and* analysis.",
+          "suggestion": "Analyzujte údaje automaticky uložené a spracované v tabuľke."
         }
       ],
       "approved_at": null
@@ -327,13 +323,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'fill out a PDF form' is translated as 'izpolnijo PDF obrazec'. While grammatically correct, 'izpolnijo PDF obrazec' sounds somewhat awkward. A more natural phrasing would be 'izpolnijo PDF obrazce' (plural) to match the earlier reference to 'PDF forms'.",
-          "suggestion": "izpolnijo PDF obrazce"
+          "description": "The English phrase 'form filing room' is not directly and naturally translated. 'Soba' is a general term for room and doesn't convey the specific purpose of a 'form filing room'.",
+          "suggestion": "Consider a more descriptive translation, such as 'soba za obdelavo obrazcev' (room for processing forms) or 'soba za shranjevanje obrazcev' (room for storing forms). Alternatively, the context may need to clarify the meaning of 'room' to make 'soba' acceptable."
         },
         {
-          "type": "formatting",
-          "description": "The English phrase 'Review completed forms and analyze data automatically collected in a spreadsheet' uses a single verb for two separate actions. The Slovenian translation maintains this structure.  Consider breaking it into two sentences for improved readability.",
-          "suggestion": "Pregledujte izpolnjene obrazce. Analizirajte samodejno zbrane podatke v preglednici."
+          "type": "incorrect_translation",
+          "description": "The use of 'obrazec' (singular) after 'PDF obrazce' (plural) feels inconsistent. It should be 'PDF obrazca' to maintain grammatical agreement.",
+          "suggestion": "Change 'izpolnijo PDF obrazec' to 'izpolnijo PDF obrazca'."
         }
       ],
       "approved_at": null
@@ -344,18 +340,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'room' is translated as 'sobu'. While technically correct, in the context of a digital workspace, 'soba' (room) might be misleading. A more appropriate translation would be something like 'prostor' (space) or 'radna област' (working area/section).",
-          "suggestion": "Consider translating 'room' as 'простор' or 'радна област'."
+          "description": "The word 'room' (English) is translated as 'sobu' (Serbian), which while technically correct, doesn't quite convey the intended meaning of a digital workspace or form filing space. 'Простор' (prostor) or 'опште подручје' (opšte područje) might be more suitable depending on the specific context.",
+          "suggestion": "Consider replacing 'sobu' with 'простор' or 'опште подручје'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'fill out a PDF form' is translated as 'попуне PDF образац'. It's a bit clunky. A more natural Serbian phrasing would be 'испуни PDF образац'.",
-          "suggestion": "Change 'попуне PDF образац' to 'испуни PDF образац'."
+          "description": "The phrase 'fill out a PDF form' is translated as 'попуне PDF образац'. A more natural phrasing in Serbian would be 'испуне PDF образац'.",
+          "suggestion": "Replace 'попуне PDF образац' with 'испуне PDF образац'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'automatically' is not explicitly translated. While the meaning is conveyed, adding 'аутоматски' would improve clarity and fidelity.",
-          "suggestion": "Add 'аутоматски' before 'прикупљају'."
+          "type": "spelling",
+          "description": "PDF is consistently in uppercase, which is standard, but it might be stylistically preferable to lowercase it in some contexts (e.g., when first introduced).",
+          "suggestion": "Consider lowercase 'pdf' (e.g., 'испуне pdf образац')."
         }
       ],
       "approved_at": null
@@ -366,18 +362,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'room' is translated as 'sobu', which is technically correct but potentially lacks the nuance of a digital space or 'room' in a software context. A more fitting translation might consider 'prostor' or 'digitalna soba' depending on the specific context.",
-          "suggestion": "Consider 'prostor' or 'digitalna soba' as alternative translations for 'room' depending on the overall context."
+          "description": "The word 'room' is translated as 'sobu', which while technically correct, doesn't fully capture the intended meaning of a digital workspace or folder. It could be misinterpreted as a physical room.",
+          "suggestion": "Consider 'digitalno okruženje', 'folder', or 'radna prostorija' depending on the specific context and desired level of formality."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'fill out a PDF form' is translated as 'popune PDF obrazac'. While understandable, 'ispuniti PDF obrazac' would be a more natural and common phrasing in Serbian.",
-          "suggestion": "Change 'popune PDF obrazac' to 'ispuniti PDF obrazac'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'analyze data automatically collected in a spreadsheet' is translated as 'analizirajte podatke koji se automatski prikupljaju u tabeli'. The word 'tabela' is suitable for a table, but 'proširenje' (spreadsheet) might be more precise in this context.",
-          "suggestion": "Change 'tabeli' to 'proširenju'."
+          "description": "“Popuni PDF obrazac” is somewhat ambiguous. The plural 'obrasce' in the first sentence implies a collection of forms, but the instruction uses the singular.",
+          "suggestion": "Popunjavaju PDF obrasce - to ensure consistency or use 'popunite PDF obrazac' to match the plural in the first sentence."
         }
       ],
       "approved_at": null
@@ -394,13 +385,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Upload PDF forms into the room\" is translated as \"Передавайте PDF-форми до кімнати.\" While 'Передавайте' implies transferring, 'Upload' specifically refers to uploading files digitally. A more accurate translation would use a verb signifying digital upload.",
-          "suggestion": "Завантажуйте PDF-форми до кімнати."
+          "description": "The phrase 'Invite members and guests to fill out a PDF form' is slightly awkward in Ukrainian. 'Запрошуйте учасників і гостей заповнити PDF-форму' implies a general invitation, not a directed action of prompting them to fill it out.",
+          "suggestion": "Запрошуйте учасників та гостей, щоб вони заповнили PDF-форму."
         },
         {
           "type": "formatting",
-          "description": "The Ukrainian translation uses a singular form of \"PDF-форму\" when referring to the action of inviting members and guests. It should be the plural form to maintain consistency and accuracy.",
-          "suggestion": "Запрошуйте учасників і гостей заповнити PDF-форми."
+          "description": "The use of 'і' (and) vs. 'та' (and) can subtly change the tone. While both are correct, 'та' is often preferred for a slightly more formal or descriptive feel. Given the context, 'та' might be a better choice.",
+          "suggestion": "Replace 'і гостей' with 'та гостей'."
         }
       ],
       "approved_at": null
@@ -411,13 +402,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'fill out a PDF form' is translated as 'điền vào biểu mẫu PDF'. While technically correct, it's more natural and idiomatic in Vietnamese to say 'điền biểu mẫu PDF' or 'điền các biểu mẫu PDF'.",
-          "suggestion": "điền biểu mẫu PDF"
-        },
-        {
-          "type": "formatting",
-          "description": "The repetition of 'PDF' is slightly awkward in Vietnamese. While technically correct due to the English source, it can be more fluid to use it less frequently.",
-          "suggestion": "điền biểu mẫu (PDF) hoặc simply 'điền biểu mẫu'"
+          "description": "The phrase 'Invite members and guests' is translated as 'Mời thành viên và khách'. While technically correct, a more natural and idiomatic Vietnamese translation might be 'Mời các thành viên và khách'. Adding 'các' before 'thành viên' and 'khách' makes the invitation sound more inviting and complete.",
+          "suggestion": "Mời các thành viên và khách"
         }
       ],
       "approved_at": null

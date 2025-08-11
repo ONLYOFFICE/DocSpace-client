@@ -3,7 +3,7 @@
   "content": "Number of admins according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "content_en_sha1_hash": "810503379392ed3bd1fd1c2e5cdeaffc01287a43",
   "created_at": "2025-05-19T21:30:53.712Z",
-  "updated_at": "2025-05-21T06:32:36.051Z",
+  "updated_at": "2025-05-24T06:47:16.464Z",
   "comment": {
     "text": "This translation key is used to display information about the number of admins according to a user's tariff plan. It appears in a dialogue warning about quota almost being exhausted, providing current and maximum values for better understanding.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"خطة التعريف الخاصة بك\" (your tariff plan) is not the most natural or accurate translation of 'tariff plan'. A more appropriate translation would be something like \"باقة الاشتراك الخاصة بك\" (your subscription package) or \"الخطة التسعيرية الخاصة بك\" (your pricing plan).",
-          "suggestion": "عدد المشرفين وفقًا لباقة الاشتراك الخاصة بك: {{currentValue}}/{{maxValue}}"
+          "description": "The English phrase 'Number of admins' is translated as 'عدد المشرفين' which means 'Number of supervisors'. While 'admins' can be loosely translated as 'supervisors', it's more accurate to reflect the specific role.",
+          "suggestion": "Consider using 'عدد المسؤولين' (Number of officials/managers) or a more nuanced term depending on the exact meaning of 'admins' in the context."
         }
       ],
       "approved_at": null
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Number of admins' is translated as 'administrator sayı'. While technically correct, 'administrator sayı' sounds slightly awkward in Azerbaijani. A more natural translation might be 'Administratorların sayı'.",
-          "suggestion": "Administratorların sayı"
+          "description": "The translation of \"Number of admins\" is not ideal. \"Administrator sayı\" directly translates to \"Number of administrators\". While understandable, \"Administratorların sayı\" would be more natural and accurate in Azerbaijani for indicating a count.",
+          "suggestion": "Administratorların sayı: {{currentValue}}/{{maxValue}}"
+        },
+        {
+          "type": "formatting",
+          "description": "While the double curly braces are maintained for the placeholders, it might be beneficial to review if this is the standard formatting for Azerbaijani translations within the application context.",
+          "suggestion": "Consider reviewing application-specific formatting guidelines for placeholders."
         }
       ],
       "approved_at": null
@@ -65,14 +70,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The German translation is awkward and doesn't flow naturally. 'Anzahl Administratoren Ihrem Tarifplan' is not idiomatic.",
-          "suggestion": "Anzahl der Administratoren gemäß Ihrem Tarifplan: {{currentValue}}/{{maxValue}}"
+          "type": "grammar",
+          "description": "The German translation 'Anzahl Administratoren Ihrem Tarifplan' has incorrect word order and case. It should be 'Anzahl der Administratoren für Ihren Tarifplan'. The possessive pronoun 'Ihrem' is also incorrect and should be 'Ihren'.",
+          "suggestion": "Anzahl der Administratoren für Ihren Tarifplan: {{currentValue}}/{{maxValue}}"
         },
         {
-          "type": "grammar",
-          "description": "The article 'der' is missing before 'Tarifplan'.",
-          "suggestion": "Anzahl der Administratoren Ihrem Tarifplan: {{currentValue}}/{{maxValue}}"
+          "type": "formatting",
+          "description": "The use of 'Ihr' (informal you) might not be appropriate depending on the target audience.  'Ihrer' (formal you) would be more suitable for a formal context. In most cases, the formal 'Ihr' (Ihrer) is preferred for business communication.",
+          "suggestion": "Consider using the formal possessive pronoun: Anzahl der Administratoren für Ihren Tarifplan: {{currentValue}}/{{maxValue}}"
         }
       ],
       "approved_at": null
@@ -95,8 +100,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'admins' is translated as 'pääkäyttäjien'. While 'pääkäyttäjien' can mean 'administrators' or 'main users', it doesn't perfectly capture the nuance of 'admins' in the context of a tariff plan, which typically refers to users with elevated privileges. A more accurate translation might be 'käyttäjien tilauksesi mukaan' (users according to your subscription) or 'tilauksesi mukaiset käyttäjät' (users according to your subscription).",
-          "suggestion": "Consider 'käyttäjien tilauksesi mukaan' or 'tilauksesi mukaiset käyttäjät'."
+          "description": "The word 'admins' (Number of admins) has been translated as 'Pääkäyttäjien'. While 'Pääkäyttäjien' can mean 'admin users', it doesn't perfectly capture the meaning of 'Number of admins according to your tariff plan.' A more accurate translation could consider the context of a 'tariff plan' (subscription plan).",
+          "suggestion": "Consider 'Käyttäjien määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}' or 'Tilaajien määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}'"
         }
       ],
       "approved_at": null
@@ -104,7 +109,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to 'Number of admins' while the French translation uses 'Nombre d'administrateurs'. Although both refer to administrators, 'admins' is a more casual and common term in the context of software and user management. Using 'administrateurs' feels slightly formal and less aligned with the original tone.",
+          "suggestion": "Consider using a more casual term like 'Nombre d'administrateurs' or 'Nombre d'utilisateurs administrateurs' to better reflect the original tone."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -113,8 +124,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'admins' is translated as 'ադմինիստրատորների', which is accurate but potentially too formal for a user-facing message. Consider a simpler or more common term depending on the target audience.",
-          "suggestion": "Consider using a more colloquial term for 'admins' if appropriate for the context.  For example, something like 'բաժանմունքի ղեկավարների' (department heads) or a simplified version if that fits the overall tone."
+          "description": "The English phrase 'Number of admins' is translated as 'Ադմինիստրատորների թիվը'. While technically correct, a more natural translation considering the context of a tariff plan might be 'Օգտագործողների թիվը' (Number of users) or a similar phrasing that aligns with how users are tracked in a tariff system.",
+          "suggestion": "Consider translating 'Number of admins' as 'Օգտագործողների թիվը' or a similar user-centric phrase."
+        },
+        {
+          "type": "formatting",
+          "description": "The Armenian translation includes the phrase 'ձեր սակագնային պլանի'. While grammatically correct, the phrasing could potentially be shortened or rephrased to improve readability without losing meaning.",
+          "suggestion": "Consider shortening 'ձեր սակագնային պլանի' to 'ձեր պլանի' or a similar succinct option, if it aligns with the overall tone."
         }
       ],
       "approved_at": null
@@ -125,8 +141,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Numero di amministratori in base al tuo piano tariffario' is a literal translation but doesn't quite capture the natural flow of the English phrase 'Number of admins according to your tariff plan'. 'Admins' is better translated as 'amministratori'.",
-          "suggestion": "Numero di amministratori secondo il tuo piano tariffario."
+          "description": "The English phrase 'Number of admins' is translated as 'Numero di amministratori'. While technically correct, it could be improved for clarity and naturalness in Italian. 'Admins' is often understood as 'amministratori' directly, but phrasing it as 'Numero di utenti con ruolo di amministratore' (Number of users with administrator role) might be more precise.",
+          "suggestion": "Numero di utenti con ruolo di amministratore in base al tuo piano tariffario: {{currentValue}}/{{maxValue}}"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'in base al tuo piano tariffario' could be slightly more concise.  Consider an alternative.",
+          "suggestion": "secondo il tuo piano tariffario"
         }
       ],
       "approved_at": null
@@ -137,8 +158,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Number of admins' is translated as '管理者の数' (kanrisha no su), which directly translates to 'Number of managers'. While 'admins' can be interpreted as managers in some contexts, it's more accurate to reflect the nuance of 'admins' (which implies administrative users or people with special privileges). A closer translation might be '管理者アカウントの数' (kanrisha akunto no su - number of administrator accounts) or '管理者ユーザーの数' (kanrisha yūzā no su - number of administrator users).",
-          "suggestion": "Consider using '管理者アカウントの数' (kanrisha akunto no su) or '管理者ユーザーの数' (kanrisha yūzā no su) to more accurately convey the meaning of 'Number of admins'."
+          "description": "The term 'admins' in the English content implies a specific role within a system. '管理者' (kanrisha) is a general term for 'manager' or 'administrator' and doesn't necessarily convey the same nuance. Depending on the context, a more precise translation might be necessary, such as 'システム管理者' (system kanrisha) or a term specific to the platform's user roles.",
+          "suggestion": "Consider using a more specific term for 'admins' based on the platform's user roles. For example, if they are 'Super Admins', use 'スーパー管理者' (suupaa kanrisha)."
+        },
+        {
+          "type": "formatting",
+          "description": "While the Japanese translation includes the variable placeholders '{{currentValue}}' and '{{maxValue}}', it might be beneficial to confirm their placement and formatting are consistent with the system using the translation.",
+          "suggestion": "Verify the format and placement of '{{currentValue}}' and '{{maxValue}}' are compatible with the application's rendering engine."
         }
       ],
       "approved_at": null
@@ -149,8 +175,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Number of admins' is translated as '관리자 수' (Number of managers). While 'admins' can be interpreted as managers, it's more accurate to reflect the distinction of 'admin' users specifically.",
-          "suggestion": "요금제에 따른 관리 사용자 수: {{currentValue}}/{{maxValue}}"
+          "description": "The English phrase \"Number of admins\" is translated as \"관리자 수 (administrator su)\". While technically correct, '사용자 수' (user su) might be more appropriate in this context, as 'admin' could be considered a user within the tariff system.",
+          "suggestion": "요금제에 따른 사용자 수: {{currentValue}}/{{maxValue}}"
         }
       ],
       "approved_at": null
@@ -158,7 +184,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'admins' is translated as 'ຜູ້ປົກຄອງ' which generally means 'caretakers' or 'guardians'. While not strictly incorrect, 'admins' implies a more specific role within a system or platform.",
+          "suggestion": "Consider a more precise translation for 'admins' that reflects their role, potentially something like 'ຜູ້ບໍລິຫານລະບົບ' (system administrators) if appropriate for the context."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -170,25 +202,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'admins' is translated as 'beheerders'. While 'beheerders' can mean administrators/managers, the context (tariff plan) might suggest 'gebruikers' (users) would be more accurate, depending on what the 'admins' represent in the system.",
-          "suggestion": "Consider 'Aantal gebruikers volgens uw tariefplan: {{currentValue}}/{{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"planie cenowym\" sounds slightly awkward. A more natural Polish phrasing would be \"planie taryfowym\" or \"planie abonamentowym\".",
-          "suggestion": "Liczba administratorów w Twoim planie taryfowym: {{currentValue}}/{{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -197,8 +217,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English content refers to 'Number of admins' while the Portuguese translation says 'Número de administradores'. While 'administradores' is a valid term, it might be more accurate to reflect 'users' for broader compatibility with various admin roles or user types.",
-          "suggestion": "Consider translating 'admins' as 'usuários' or 'utilizadores' depending on the target Portuguese dialect (Brazilian Portuguese or European Portuguese respectively)."
+          "description": "The English phrase 'Number of admins' is translated as 'Número de administradores'. While technically correct, 'Número de administradores' is more formal. A slightly more natural translation might be 'Número de usuários'.",
+          "suggestion": "Número de usuários"
         }
       ],
       "approved_at": null
@@ -206,13 +226,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Número de administradores de acordo com seu plano tarifário' doesn't directly convey the meaning of 'Number of admins according to your tariff plan.' 'Admins' should be translated to reflect the administrative users, which isn't explicitly captured by 'administradores'.",
-          "suggestion": "Número de usuários administradores de acordo com seu plano tarifário: {{currentValue}}/{{maxValue}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -221,13 +235,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Number of admins\" is translated as \"Limita de administratori\". While not entirely incorrect, \"Număr de administratori\" would be a more direct and common translation.",
-          "suggestion": "Număr de administratori"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"according to your tariff plan\" is translated as \"conform planului dvs tarifar\". While understandable, \"în funcție de planul dvs tarifar\" would be a more natural Romanian expression.",
-          "suggestion": "în funcție de planul dvs tarifar"
+          "description": "The English phrase 'Number of admins' is translated as 'Limita de administratori'. While 'Limita' (limit) isn't entirely wrong, 'Număr' (number) would be a more accurate and direct translation for 'Number'.  'Limita' implies a hard cap, while 'Number' simply states the count.",
+          "suggestion": "Numărul de administratori conform planului dvs tarifar: {{currentValue}}/{{maxValue}}"
         }
       ],
       "approved_at": null
@@ -244,13 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබේ මිල ගණන් සැලැස්මට අනුව පරිපාලකයින් සංඛ්‍යාව: {{currentValue}}/{{maxValue}}' is a literal translation but 'admins' should be translated to a more appropriate term in Sinhala as 'admins' can be interpreted as 'administrators' in English, which isn't always the best equivalent. A more natural translation for 'admins' in this context might be 'භාවිතරුවන්' (bhavitārūvān) which means 'users'.",
-          "suggestion": "ඔබේ මිල ගණන් සැලැස්මට අනුව භාවිතරුවන් සංඛ්‍යාව: {{currentValue}}/{{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "The Sinhala translation preserves the English formatting with the double curly braces. This is generally unnecessary and can look odd in Sinhala.",
-          "suggestion": "Consider removing the English-style double curly braces and using a Sinhala equivalent if needed. However, given this is dynamic content, the double curly braces might be necessary for the application to render correctly, in which case, leaving them is acceptable."
+          "description": "The translation 'පරිපාලකයින්' (paripaalakayin) translates to 'administrators' or 'managers', not 'admins'. While understandable in context, 'පරිපාලකයන්' would be a more precise translation for 'admins'.",
+          "suggestion": "පරිපාලකයන්"
         }
       ],
       "approved_at": null
@@ -267,13 +271,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Število skrbnikov, ki je določeno z vašim trenutnim tarifnim načrtom' is overly literal and not the most natural way to express this in Slovenian. 'Skrbnikov' means 'caretakers' or 'guardians', but 'admins' is more appropriate in the context of a tariff plan.",
-          "suggestion": "Število administratorjev glede na vaš tarifni načrt: {{currentValue}}/{{maxValue}}"
+          "description": "The translation 'Število skrbnikov, ki je določeno z vašim trenutnim tarifnim načrtom' is a bit too literal and verbose.  'Skrbnikov' (admins) should align with the English 'Number of admins'.  The phrase 'ki je določeno z vašim trenutnim tarifnim načrtom' could be simplified for better readability.",
+          "suggestion": "Število skrbnikov po vaši tarifni shemi: {{currentValue}}/{{maxValue}}"
         },
         {
           "type": "formatting",
-          "description": "The phrase 'ki je določeno z vašim trenutnim' is a bit cumbersome. It could be more concise.",
-          "suggestion": "glede na vaš tarifni načrt"
+          "description": "The phrase 'tarifni načrt' translates to 'tariff plan', while 'shema' or 'paketi' might flow more naturally in this context.  'Shema' implies a structure or outline of the tariff, and 'paketi' translates to 'packages'.",
+          "suggestion": "Consider replacing 'tarifni načrt' with 'tarifna shema' or 'tarifni paketi' for better flow."
         }
       ],
       "approved_at": null
@@ -284,7 +288,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'admins' is translated as 'админа'. The correct plural form of 'admin' in Serbian (Cyrillic) should be 'администратори'.",
+          "description": "The word 'admina' (admins) is grammatically incorrect in this context. It should be the plural form of 'admin' which is 'администратори'.",
           "suggestion": "Број администратора према вашем тарифном плану: {{currentValue}}/{{maxValue}}"
         }
       ],
@@ -302,8 +306,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'admins' is translated as 'yönetici'. While 'yönetici' can mean 'manager' or 'administrator', it's more accurate to use 'kullanıcı' or 'aboneler' to reflect 'users according to tariff plan'.  'Yönetici' implies a more elevated role.",
-          "suggestion": "Tarife planınıza göre kullanıcı/aboneler sayısı: {{currentValue}}/{{maxValue}}"
+          "description": "The English term 'admins' is translated as 'yönetici'. While 'yönetici' can mean manager, in this context referring to users or accounts with administrative privileges within a tariff plan, 'kullanıcı' (user) or a more specific term related to administrative accounts might be more accurate.",
+          "suggestion": "Consider using 'kullanıcı' or a more specific term that accurately represents the 'admins' in the English context."
+        },
+        {
+          "type": "formatting",
+          "description": "The format should maintain consistency with the English version. Both sentences contain '{{currentValue}}/{{maxValue}}'.",
+          "suggestion": "No change needed in this aspect, format is consistent."
         }
       ],
       "approved_at": null
@@ -323,7 +332,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Number of admins' is translated as '管理员数量' which literally means 'administrator quantity'. While understandable, 'Number of admins' is more naturally translated as '管理用户数量' or '管理用户数' to better convey the intended meaning within a tariff plan context. The current translation could be misinterpreted.",
+          "suggestion": "您资费计划的管理用户数量：{{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "External link",
   "content_en_sha1_hash": "66305476ff6932547d4b8aa6c41b8e0c5f410286",
   "created_at": "2025-05-19T21:30:50.202Z",
-  "updated_at": "2025-07-01T15:57:36.197Z",
+  "updated_at": "2025-08-04T07:30:01.391Z",
   "comment": {
     "text": "This translation key is used for the label \"External link\" which appears as a help tooltip when hovering over the ExternalLink button in the PortalSettings categories. Its purpose is to provide additional information about the button's functionality.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 433,
+      "line_number": 446,
       "context": "{sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label\n className=\"label\"\n text={t(\"SharingPanel:ExternalLink\")}\n />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 591,
+      "line_number": 607,
       "context": "{sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label\n className=\"label\"\n text={t(\"SharingPanel:ExternalLink\")}\n />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 323,
+      "line_number": 324,
       "context": "{sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label\n className=\"label\"\n text={t(\"SharingPanel:ExternalLink\")}\n />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={",
       "module": "/packages/client"
     }
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Екстерни линк' is a literal transliteration of 'External link' and doesn't accurately convey the meaning in Serbian. While understandable, it's not the most natural phrasing.",
-          "suggestion": "A more accurate and natural translation would be 'Спољни линк' or 'Спољашње повезање'."
+          "description": "The Serbian (Cyrillic) translation \"Екстерни линк\" is a transliteration of 'External link' and not a proper translation. A more appropriate translation would be 'Спољашњи линк' or 'Спољашње повезање'.",
+          "suggestion": "Спољашњи линк"
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Eksterni link' is understandable, a more accurate and commonly used translation of 'External link' in Serbian (Latin) would be 'Spoljašnji link'. 'Eksterni' is borrowed directly from a different language and less natural.",
-          "suggestion": "Spoljašnji link"
+          "description": "While 'Eksterni link' is understandable, a more accurate and commonly used translation of 'External link' in Serbian (Latin) would be 'Vanjski link'. 'Eksterni' is a more recent borrowing and less established in everyday usage.",
+          "suggestion": "Vanjski link"
         }
       ],
       "approved_at": null

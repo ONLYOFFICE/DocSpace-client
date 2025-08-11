@@ -28,7 +28,7 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import QuotaForm from "SRC_DIR/components/QuotaForm";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 const RoomQuota = (props) => {
   const {

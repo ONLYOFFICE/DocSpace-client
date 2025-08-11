@@ -3,7 +3,7 @@
   "content": "The link to the file with the enabled <strong>Custom filter</strong> is successfully copied to the clipboard.",
   "content_en_sha1_hash": "5fb2ad6180a6cc99acbd44e4f13dfba22b809b66",
   "created_at": "2025-05-19T21:30:46.153Z",
-  "updated_at": "2025-06-03T20:59:42.285Z",
+  "updated_at": "2025-08-04T07:30:01.588Z",
   "comment": {
     "text": "This translation key displays a success message when a shared link is copied to the clipboard after applying a custom filter. It appears as an alert notification and is used in the Context Options Store dialog or similar contexts where file sharing options are being accessed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 496,
+      "line_number": 498,
       "context": "? await getFolderLink(item.id)\n : await getFileLink(item.id);\n copyShareLink(itemLink.sharedTo.shareLink);\n item.customFilterEnabled\n ? toastr.success(\n <Trans t={t} i18nKey=\"Common:LinkCopySuccessWithCustomFilter\" />,\n )\n : toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(error);\n }",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag (<b>) is not properly closed. It should be </strong>, not </strong.",
-          "suggestion": "Correct the closing strong tag to </strong>"
+          "description": "The strong tag (`<strong>`) is correctly used to emphasize 'Custom filter'.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -42,13 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is missing from the Azerbaijani translation for 'Custom filter'. It should be `<strong/>Xüsusi filtr</strong/>.",
-          "suggestion": "<strong/>Xüsusi filtr</strong/>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'mübadilə buferinə' which translates to 'exchange buffer' isn't the most natural way to say 'clipboard'. 'Keçirildi' (transferred) is more appropriate for 'copied'.",
-          "suggestion": "<strong/>Xüsusi filtr</strong> aktivləşdirilmiş faylın linki müvəffəqiyyətlə clipboard-a keçirildi."
+          "description": "The strong tag is present in the Azerbaijani translation, mirroring the English content. While not inherently incorrect, it's worth considering whether it's necessary in the Azerbaijani context. It could be removed if it doesn't add any value.",
+          "suggestion": "Consider removing the strong tag: \"Xüsusi filtr aktivləşdirilmiş faylın linki müvəffəqiyyətlə mübadilə buferinə köçürüldü.\""
         }
       ],
       "approved_at": null
@@ -59,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is correctly applied to both the English and Bulgarian versions, maintaining the emphasis on 'Custom filter'.",
-          "suggestion": null
+          "description": "The strong tag is correctly used, but it's important to ensure consistency in strong tag usage across all translations. Verify that Bulgarian translations consistently apply the equivalent formatting.",
+          "suggestion": "Ensure consistent use of bold formatting in all Bulgarian translations where English uses strong tags."
         }
       ],
       "approved_at": null
@@ -77,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag formatting is inconsistent. The English uses <strong>, while the German uses <strong. It should be <strong>.",
-          "suggestion": "Change <strong to <strong>"
+          "description": "The strong tag is present in both the English and German versions, which is good for consistency. However, it's worth noting that the format might be handled differently in the UI depending on how strong tags are rendered.",
+          "suggestion": "Ensure that the strong tag is rendered correctly in the UI to maintain visual emphasis."
         }
       ],
       "approved_at": null
@@ -86,13 +81,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is not correctly rendered in the Greek translation. While it's present, proper HTML rendering might be needed for the bolding to display correctly depending on the context where the translation will be used.",
-          "suggestion": "Ensure the HTML tags `<strong/>` are properly rendered in the target environment, potentially requiring adjustments based on the platform’s requirements."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -107,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is present in the Finnish translation, mirroring the English. While technically correct, it might be stylistically better to evaluate if bolding is necessary in the Finnish context.",
-          "suggestion": "Consider whether bolding is needed; if not, remove the strong tags."
+          "description": "The strong tag (<strong>) is present in both the English and Finnish translations, which is generally undesirable for translated content. It's best to remove it and let the presentation layer handle the styling.",
+          "suggestion": "Remove the <strong > tags. The Finnish translation could be: \"Linkki tiedostoon, jossa mukautettu suodatin on käytössä, kopioitiin leikepöydälle.\""
         }
       ],
       "approved_at": null
@@ -125,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation does not replicate the strong tag around \"Հատուկ ֆիլտրով\".",
-          "suggestion": "Միացված <strong >Հատուկ ֆիլտրով</strong> ֆայլի հղումը հաջողությամբ պատճենվել է սեղմատախտակում:"
+          "description": "The strong tag is missing from the Armenian translation. The English version has a strong tag around 'Custom filter'.",
+          "suggestion": "Միացված <strong>Հատուկ ֆիլտրով</strong> ֆայլի հղումը հաջողությամբ պատճենվել է սեղմատախտակում:"
         }
       ],
       "approved_at": null
@@ -134,13 +123,25 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag (`<strong>`) is correctly applied to 'Custom filter' in both the English and Italian versions.",
+          "suggestion": "No change needed."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly placed in the Japanese translation, mirroring the English.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -149,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag (<strong/>) is present and correctly placed around '사용자 지정 필터' which is the Korean translation of 'Custom filter'. This matches the English original.",
-          "suggestion": null
+          "description": "The strong tag (<b>) is missing around '사용자 지정 필터' to match the English formatting.",
+          "suggestion": "Change '<strong>사용자 지정 필터</strong>가 활성화된 파일 링크가 클립보드에 성공적으로 복사되었습니다.' to '<strong>사용자 지정 필터</strong>가 활성화된 파일 링크가 클립보드에 성공적으로 복사되었습니다.'"
         }
       ],
       "approved_at": null
@@ -161,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag (`<strong>`) is present in the Lao translation, mirroring the English. While not inherently wrong, it's generally best practice to consider whether bolding is necessary for clarity in the target language and adjust accordingly. It should be reviewed by a localization expert to determine if it's the best approach for Lao readers.",
-          "suggestion": "Review the need for bolding in the Lao context. Consider removing the `<strong>` tag if it doesn't enhance readability or aligns with Lao conventions."
+          "description": "The strong tag formatting is inconsistent. The English uses `<strong>` while the Lao translation uses `<strong >`.",
+          "suggestion": "Change `<strong >` to `<strong>`"
         }
       ],
       "approved_at": null
@@ -173,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is correctly placed in the Latvian translation, mirroring the English content.",
+          "description": "The strong tag is correctly used in both the English and Latvian versions, preserving the emphasis on 'Custom filter'.",
           "suggestion": null
         }
       ],
@@ -185,13 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag (`<strong>`) is present in both the English and Dutch content, but it's important to ensure that the formatting renders correctly in the target environment. While technically correct, it's worth validating the visual rendering.",
-          "suggestion": "Verify the visual rendering of the `<strong>` tag to ensure proper formatting."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'klembord' is an older Dutch term for clipboard and might sound dated or less familiar to some users. A more common and contemporary term would be 'knippplank'.",
-          "suggestion": "Replace 'klembord' with 'knippplank'."
+          "description": "The strong tag is present but the spacing around it isn't consistent with the English version. There's a space before the opening strong tag in the Dutch translation.",
+          "suggestion": "De link naar het bestand met ingeschakeld <b>aangepast filter</b> is succesvol naar het klembord gekopieerd."
         }
       ],
       "approved_at": null
@@ -202,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is correctly applied, but it is important to ensure consistency in applying strong tags across all related translations. Confirm that the English 'Custom filter' is also consistently formatted as strong in other Polish translations where this term appears.",
-          "suggestion": "Verify consistent application of strong tags across all translations of 'Custom filter'."
+          "description": "The strong tag is present in both the English and Polish versions. It should be verified that this is the intended behavior and consistency is maintained in the UI.",
+          "suggestion": "Verify if the strong tag is necessary and consistent across the UI elements."
         }
       ],
       "approved_at": null
@@ -211,7 +207,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag remains unchanged in the translation, which may not be the desired formatting in Portuguese.",
+          "suggestion": "Consider re-evaluating the necessity and proper formatting of the strong tag in the Portuguese translation. It might be better to adjust the sentence structure to emphasize 'Filtro Personalizado' naturally, or use a different formatting style if necessary."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -220,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is correctly applied in the Portuguese translation, mirroring the English content.",
-          "suggestion": null
+          "description": "The strong tag is inconsistent. The English uses `<strong>Custom filter</strong>` while the Portuguese uses `<strong/>Filtro personalizado</strong/>. The closing tag has a mismatched tag name.",
+          "suggestion": "Change `<strong/>Filtro personalizado</strong/>` to `<strong>Filtro personalizado</strong>`"
         }
       ],
       "approved_at": null
@@ -232,8 +234,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag (<strong/>) is present in both the English and Romanian versions, which is good, but it’s important to ensure the formatting aligns with the intended style guide for the application. It’s preserved here as a positive, but a review of the application's overall style is advised.",
-          "suggestion": "Verify the usage of strong tags aligns with the application style guide."
+          "description": "The strong tag is not consistently applied. The English version has `<strong >Custom filter</strong >`, while the Romanian version has `<strong >Filtru particularizat</strong >>`.",
+          "suggestion": "Ensure consistent use of strong tags.  It should be `<strong >Filtru particularizat</strong >`."
         }
       ],
       "approved_at": null
@@ -241,13 +243,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The strong tag is correctly applied and maintains the same emphasis as the English version.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -256,13 +252,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is not correctly applied to the Sinhala translation. It should wrap the equivalent phrase.",
-          "suggestion": "<strong>අභිරුචි පෙරහන</strong> සක්‍රීය කර ඇති ගොනුවට සබැඳිය සාර්ථකව පසුරු පුවරුවට පිටපත් කරන ලදී."
+          "description": "The Sinhala translation includes the strong tag (<strong/>) around 'අභිරුචි පෙරහන', mirroring the English. It's unclear if this is intended, as Sinhala formatting conventions might differ.  It's recommended to review and potentially remove or adjust the tag based on the design guidelines.",
+          "suggestion": "Review the use of the strong tag and adjust based on Sinhala formatting conventions. Consider removing it if not intended."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'Custom filter' is translated as 'අභිරුචි පෙරහන'. While technically correct, a more natural and common translation might be 'පෙරහුම්'.",
-          "suggestion": "<strong>පෙරහුම්</strong> සක්‍රීය කර ඇති ගොනුවට සබැඳිය සාර්ථකව පසුරු පුවරුවට පිටපත් කරන ලදී."
+          "description": "The Sinhala word 'සාර්ථකව' (saarthaakava) meaning 'successfully' is positioned somewhat awkwardly in the sentence flow. It's a direct translation, but a more natural Sinhala phrasing might improve readability.",
+          "suggestion": "Consider rephrasing to improve sentence flow. For example: '<strong>අභිරුචි පෙරහන</strong> සක්‍රීය කර ඇති ගොනුවට සබැඳිය පසුරු පුවරුවට පිටපත් කරන ලදී.'"
         }
       ],
       "approved_at": null
@@ -279,8 +275,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is correctly applied to 'Custom filter' in both the English and Slovenian text, preserving the emphasis.",
-          "suggestion": null
+          "description": "The strong tag is not consistently applied. The English content uses `<strong>`, but the Slovenian translation uses `<strong/>`. While functionally similar, using the same tag is preferable for consistency.",
+          "suggestion": "Change `<strong/>` to `<strong>`"
         }
       ],
       "approved_at": null
@@ -290,19 +286,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation of \"Custom filter\" as \"Прилагођеним филтером\" is technically correct but lacks the natural flow of Serbian. A more common and idiomatic translation would be \"Користички филтер\" or \"Прилагођени филтар\". The context suggests a filter being *applied* rather than being in a state of being custom.",
-          "suggestion": "Consider \"Користички филтер\" or \"Прилагођени филтар\"."
-        },
-        {
           "type": "formatting",
-          "description": "The strong tag formatting is retained but might benefit from re-evaluation to ensure consistency with the overall UI/UX of the Serbian version.",
-          "suggestion": "Verify the use of the strong tag aligns with the Serbian language style guide and overall UI/UX."
+          "description": "The strong tag is not consistently used. The English uses <strong>Custom filter</strong>, while the Serbian translation uses `<strong/>Прилагођеним филтером</strong/>. While technically functional, consistency is preferred.",
+          "suggestion": "Ensure consistent use of strong tags, e.g., <strong/>Прилагођеним филтером</strong/>."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term \"привремену меморију\" translates to temporary memory, which is the technical term for clipboard. It’s overly technical for the user. A more user-friendly translation would be \"клипоарду\" or “свеске са исјеченим датотекама”.",
-          "suggestion": "Consider \"клипоарду\" or “свеске са исјеченим датотекама”."
+          "description": "The word 'привремена меморију' translates to 'temporary memory' which isn't the accurate term for a clipboard. The correct term would be 'клипоборд'.",
+          "suggestion": "Change 'привремена меморију' to 'клипоборд'."
         }
       ],
       "approved_at": null
@@ -313,8 +304,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag is missing a closing tag.",
-          "suggestion": "Veza do datoteke sa omogućenim <strong>Prilagođeni filter</strong> je uspešno kopirana u privremenu memoriju."
+          "description": "The strong tag is not properly closed. It should be `</strong>` after 'filterom'.",
+          "suggestion": "Replace `<strong>Prilagođenim filterom </strong>` with `<strong>Prilagođenim filterom</strong>`"
         }
       ],
       "approved_at": null
@@ -324,9 +315,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"etkin dosyanın bağlantısı\" is not the most natural way to express \"the link to the file\". A more accurate translation would be \"filin bağlantısı\".",
+          "suggestion": "filin bağlantısı"
+        },
+        {
           "type": "formatting",
-          "description": "The strong tag is correctly placed, mirroring the English content, but could be improved for better readability. The use of a full stop at the end of the sentence would also improve the grammar.",
-          "suggestion": "<strong>Özel Filtre</strong> etkin dosyanın bağlantısı panoya kopyalandı."
+          "description": "The formatting of the strong tag is correct, but the resulting bolding might need to be reviewed for consistency with the overall UI.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -336,9 +332,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The term 'Custom filter' is translated as 'спеціальним фільтром'. While 'спеціальним' can mean 'special', in this context, 'custom' implies a user-defined filter, which might be better conveyed with a more precise term.",
+          "suggestion": "Consider alternatives like 'індивідуальним фільтром' (individual filter) or 'налаштованим фільтром' (configured filter) to better reflect the meaning of 'Custom filter'."
+        },
+        {
           "type": "formatting",
-          "description": "The strong tag is correctly applied but inconsistent with the English version. While 'спеціальним фільтром' is a reasonable translation, it's worth considering maintaining stylistic consistency.  The English uses 'Custom filter', while the Ukrainian uses 'special filter'.",
-          "suggestion": "Consider translating 'Custom filter' more literally or using a term that more closely matches the style of 'Custom' in English. Potentially explore alternatives like 'індивідуальним фільтром' or 'налаштованим фільтром'."
+          "description": "The bolding from the English content (`<strong>Custom filter</strong>`) is replicated in the Ukrainian translation. While technically correct, consider whether the emphasis is needed or whether a different formatting style might be more appropriate in the Ukrainian UI.",
+          "suggestion": "Evaluate the need for bolding in the Ukrainian UI. If not necessary, remove the `<strong>` tags."
         }
       ],
       "approved_at": null
@@ -349,8 +350,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The strong tag (<strong/>) is not consistently applied. In the English content, it surrounds \"Custom filter\". In the Vietnamese translation, it surrounds \"Bộ lọc tùy chỉnh\".",
-          "suggestion": "Ensure consistent formatting of bolded text.  Verify the correct phrase is being bolded based on the English original."
+          "description": "The strong tag (<b>) is used in the English content and should be maintained in the Vietnamese translation for consistency in highlighting the term 'Custom filter'.",
+          "suggestion": "Ensure the term 'Bộ lọc tùy chỉnh' is also wrapped in strong tags: Đã sao chép liên kết đến tệp có <strong>Bộ lọc tùy chỉnh</strong> được bật vào bảng tạm."
         }
       ],
       "approved_at": null
@@ -358,7 +359,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is inconsistently applied. The English source uses `<strong>Custom filter</strong>`, while the Chinese translation uses `<strong/>自定义过滤器</strong/>. The closing strong tag should match the opening tag.",
+          "suggestion": "Change `<strong/>自定义过滤器</strong/>` to `<strong/>自定义过滤器</strong/>"
+        }
+      ],
       "approved_at": null
     }
   }

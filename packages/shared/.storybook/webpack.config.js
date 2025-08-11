@@ -2,6 +2,7 @@
 const path = require("path");
 const ReactDocgenTypescriptPlugin =
   require("react-docgen-typescript-plugin").default;
+const webpack = require("webpack");
 // const pathToAssets = path.resolve(__dirname, "../../../public/images");
 
 module.exports = ({ config }) => {
@@ -15,6 +16,12 @@ module.exports = ({ config }) => {
   fileLoaderRule.exclude = /\.svg$/;
 
   config.plugins.push(new ReactDocgenTypescriptPlugin());
+
+  config.plugins.push(
+    new webpack.ProvidePlugin({
+      React: "react",
+    }),
+  );
 
   config.output.assetModuleFilename = (pathData) => {
     //console.log({ pathData });
@@ -41,7 +48,7 @@ module.exports = ({ config }) => {
     test: /\.s[ac]ss$/i,
     use: [
       // Creates `style` nodes from JS strings
-      "style-loader",
+      { loader: "style-loader" },
       // Translates CSS into CommonJS
       {
         loader: "css-loader",
@@ -89,7 +96,17 @@ module.exports = ({ config }) => {
         loader: "@svgr/webpack",
         options: {
           svgoConfig: {
-            plugins: [{ removeViewBox: false }],
+            plugins: [
+              {
+                name: "preset-default",
+                params: {
+                  overrides: {
+                    removeViewBox: false,
+                    cleanupIds: false,
+                  },
+                },
+              },
+            ],
           },
         },
       },

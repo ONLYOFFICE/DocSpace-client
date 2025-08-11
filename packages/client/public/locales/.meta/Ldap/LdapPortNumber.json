@@ -3,7 +3,7 @@
   "content": "Port Number",
   "content_en_sha1_hash": "36469310e52904d723dedb225ab3d5675bf823c6",
   "created_at": "2025-05-19T21:30:54.250Z",
-  "updated_at": "2025-05-21T08:10:49.612Z",
+  "updated_at": "2025-05-24T08:24:30.167Z",
   "comment": {
     "text": "The \"Port Number\" translation key is used to display a label for a field that requires an LDAP port number in a portal settings page. It appears as a required input field and is accompanied by error messaging and tooltips.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'رقم البوابة' while literally translating to 'Gate Number', doesn't accurately convey the meaning of 'Port Number' in the context of LDAP. 'Port' in this context refers to a network port, not a physical gate.",
-          "suggestion": "رقم المنفذ (Raqm al-Manfath)"
+          "description": "While 'رقم البوابة' (raqm al-bawwabah) is technically correct as 'gate number', it's not the most common or natural translation for 'Port Number' in a technical context like LDAP. A more accurate and standard translation would be 'رقم المنفذ' (raqm al-manfath).",
+          "suggestion": "Use 'رقم المنفذ' (raqm al-manfath) instead."
         }
       ],
       "approved_at": null
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Պորտի համարը' is too literal. A more natural Armenian translation for 'Port Number' would be something like 'Պորտ թողունակությունը' (Port Capability) or simply 'Պորտը' (The Port), depending on the context within the LDAP configuration.",
-          "suggestion": "Consider 'Պորտ թողունակությունը' or 'Պորտը' for a more natural and contextually appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເລກປະຕູ\" literally translates to 'door number'. While it's a reasonable approximation for 'port number' in some contexts, it's not the most precise or common translation. 'Port number' specifically refers to a numerical identifier for a network port.",
-          "suggestion": "Consider a more precise translation like \"ໝາຍເລກປະຕູເຄືອກ່າຍ\" (maih lek patu khuea khai) or \"ເລກປະຕູເຄືອກ່າຍ\" (lek patu khuea khai) which more accurately conveys 'port number' in a technical context."
+          "description": "The Lao translation \"ເລກປະຕູ\" literally translates to 'door number'. While it might be understood in context, 'Port Number' is better conveyed with a more specific term related to network ports.",
+          "suggestion": "Consider using \"ຕົວເລກຊອດໂປ໊ร์ດ\" (tua lek sod port) which more accurately translates to 'port number' or \"ເລກຊອດ\" (lek sod) for 'port number'."
         }
       ],
       "approved_at": null
@@ -129,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation includes a colon (:) at the end, which might be unnecessary and visually disruptive depending on the context where this key is used. It's often better to omit the colon unless it's specifically required for the UI or application.",
+          "suggestion": "Consider removing the colon: 'Porta numurs'"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Број порта' is understandable, a more accurate and idiomatic translation of 'Port Number' in this context (LDAP configuration) would be 'Број лука'. 'Порта' often refers to a door or gate, while 'лука' specifically denotes a network port.",
-          "suggestion": "Број лука"
+          "description": "While 'Број порта' is understandable, a more accurate and idiomatic translation for 'Port Number' in this context (LDAP configuration) would be 'Порт број'. The Serbian language typically places the noun before the descriptor.",
+          "suggestion": "Порт број"
         }
       ],
       "approved_at": null

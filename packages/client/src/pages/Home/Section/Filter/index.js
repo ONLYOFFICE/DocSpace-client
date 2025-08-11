@@ -129,16 +129,18 @@ const SectionFilterContent = ({
   showStorageInfo,
   isDefaultRoomsQuotaSet,
   isTemplatesFolder,
+
+  currentClientView,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const isContactsPage = location.pathname.includes("accounts");
+  const isContactsPage =
+    currentClientView === "users" || currentClientView === "groups";
   const isContactsPeoplePage = contactsTab === "people";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
-  const isFlowsPage = location.pathname.includes("flows");
 
   const {
     onContactsFilter,
@@ -1037,7 +1039,7 @@ const SectionFilterContent = ({
         filterOptions.push({
           key: FilterGroups.roomFilterProviderType,
           group: FilterGroups.roomFilterProviderType,
-          label: t("Settings:ThirdPartyResource"),
+          label: t("Common:ThirdPartyResource"),
           isHeader: true,
           isLast: true,
         });
@@ -1421,7 +1423,6 @@ const SectionFilterContent = ({
       isContactsGroupsPage={isContactsGroupsPage}
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
-      isFlowsPage={isFlowsPage}
     />
   );
 };
@@ -1520,6 +1521,8 @@ export default inject(
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
+
+      currentClientView: clientLoadingStore.currentClientView,
 
       fetchTags,
       setViewAs,

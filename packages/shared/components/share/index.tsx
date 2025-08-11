@@ -54,7 +54,6 @@ import ShareLoader from "../../skeletons/share";
 
 import LinkRow from "./sub-components/LinkRow";
 
-import { StyledLinks } from "./Share.styled";
 import type { AccessItem, ShareProps, TLink } from "./Share.types";
 import {
   copyDocumentShareLink,
@@ -62,6 +61,7 @@ import {
   getExpirationDate,
   evenPrimaryLink,
 } from "./Share.helpers";
+import styles from "./Share.module.scss";
 
 const Share = (props: ShareProps) => {
   const {
@@ -76,10 +76,11 @@ const Share = (props: ShareProps) => {
     setShareChanged,
     onOpenPanel,
     onlyOneLink,
+    fileLinkProps,
   } = props;
   const { t } = useTranslation(["Common"]);
-  const [fileLinks, setFileLinks] = useState<TLink[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [fileLinks, setFileLinks] = useState<TLink[]>(fileLinkProps ?? []);
+  const [isLoading, setIsLoading] = useState(!fileLinkProps);
   const [loadingLinks, setLoadingLinks] = useState<(string | number)[]>([]);
   const [visibleBar, setVisibleBar] = useLocalStorage(
     `document-bar-${selfId}`,
@@ -87,6 +88,7 @@ const Share = (props: ShareProps) => {
   );
 
   const requestRunning = React.useRef(false);
+  const isInit = React.useRef(!!fileLinkProps);
 
   const [isLoadedAddLinks, setIsLoadedAddLinks] = useState(true);
 
@@ -94,26 +96,36 @@ const Share = (props: ShareProps) => {
 
   const fetchLinks = React.useCallback(async () => {
     if (requestRunning.current || hideSharePanel) return;
+
     requestRunning.current = true;
     const res = await getExternalLinks(infoPanelSelection.id);
 
     setFileLinks(res.items);
     setIsLoading(false);
+    isInit.current = false;
     requestRunning.current = false;
-  }, [infoPanelSelection.id, hideSharePanel]);
+  }, [infoPanelSelection?.id, hideSharePanel]);
 
   useEffect(() => {
     if (hideSharePanel) {
       setView?.("info_details");
-    } else {
-      fetchLinks();
+
+      return;
     }
-  }, [fetchLinks, hideSharePanel, setView]);
+
+    if (!fileLinkProps) fetchLinks();
+  }, [fetchLinks, hideSharePanel, fileLinkProps, setView]);
 
   useEffect(() => {
-    fetchLinks();
-    setShareChanged?.(false);
+    if (shareChanged) {
+      fetchLinks();
+      setShareChanged?.(false);
+    }
   }, [fetchLinks, setShareChanged, shareChanged]);
+
+  useEffect(() => {
+    if (fileLinkProps) setFileLinks(fileLinkProps);
+  }, [fileLinkProps]);
 
   const addLoaderLink = () => {
     const link = { isLoaded: true };
@@ -395,27 +407,29 @@ const Share = (props: ShareProps) => {
           bodyText={t("Common:ShareDocumentDescription")}
           iconName={InfoIcon}
           onClose={() => setVisibleBar(false)}
+          dataTestId="info_panel_share_public_room_bar"
         />
       ) : null}
 
       {isLoading ? (
         <ShareLoader t={t} />
       ) : (
-        <StyledLinks>
-          <div className="additional-link">
-            <Text fontSize="14px" fontWeight={600} className="title-link">
+        <div className={styles.links}>
+          <div className={styles.additionalLink}>
+            <Text fontSize="14px" fontWeight={600} className={styles.titleLink}>
               {t("Common:SharedLinks")}
             </Text>
             {fileLinks.length > 0 && !onlyOneLink ? (
               <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
                 <IconButton
-                  className="link-to-viewing-icon"
+                  className={styles.linkToViewingIcon}
                   iconName={LinksToViewingIconUrl}
                   onClick={
                     isEvenPrimaryLink ? addAdditionalLinks : addGeneralLink
                   }
                   size={16}
                   isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
+                  dataTestId="info_panel_share_add_link_button"
                 />
                 {fileLinks.length > LINKS_LIMIT_COUNT ? (
                   <Tooltip
@@ -440,7 +454,7 @@ const Share = (props: ShareProps) => {
             }
             loadingLinks={loadingLinks}
           />
-        </StyledLinks>
+        </div>
       )}
     </div>
   );

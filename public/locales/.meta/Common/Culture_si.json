@@ -3,7 +3,7 @@
   "content": "සිංහල (ශ්‍රී ලංකාව)",
   "content_en_sha1_hash": "97bb3fbddfd5b0ea5776aebec9a899fc4ee99d6a",
   "created_at": "2025-05-19T21:30:44.171Z",
-  "updated_at": "2025-05-21T00:03:27.811Z",
+  "updated_at": "2025-05-24T01:17:02.837Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -29,8 +29,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation is identical to the English content, which is incorrect. It should be the Azerbaijani translation of 'Sinhala (Sri Lanka).",
-          "suggestion": "Sinhala (Sri Lanka) should be translated to Azərbaycan (Siri Lanka)"
+          "description": "The Azerbaijani translation is identical to the English content, which is incorrect. It needs to be translated to Azerbaijani.",
+          "suggestion": "Sinhala (Sri Lanka) should be translated to Azerbaijani. A possible translation is 'سิงහල (ශ්‍රී ලංකාව)'."
         }
       ],
       "approved_at": null
@@ -140,13 +140,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation is identical to the English content, which is the Sinhala name for the language. It needs to be translated to Romanian.",
-          "suggestion": "Sinhala (Sri Lanka)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -203,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Vietnamese translation is identical to the English content. It does not represent a Vietnamese translation of 'Sinhala (Sri Lanka)'.",
-          "suggestion": "The correct translation should be 'Tiếng Sinhala (Sri Lanka)'."
+          "description": "The Vietnamese translation is identical to the English source content. This is not a valid translation.",
+          "suggestion": "The translation should reflect the meaning of \"Sinhala (Sri Lanka)\" in Vietnamese. A possible translation could be \"Tiếng Sinhalese (Sri Lanka)\" or \"Sinhala (Sri Lanka)\". The best translation will depend on the established Vietnamese terminology."
         }
       ],
       "approved_at": null

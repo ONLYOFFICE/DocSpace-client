@@ -31,9 +31,9 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { toastr } from "@docspace/shared/components/toast";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -148,43 +148,38 @@ const PayerInformation = ({
       </Text>
       <div>
         {isStripePortalAvailable ? (
-          <ColorTheme
+          <Link
             noSelect
             fontWeight={600}
             tag="a"
-            themeId={ThemeId.Link}
             target="_blank"
             className="payer-info_account-link"
+            color="accent"
             onClick={goToStripePortal}
           >
             {t("ChooseNewPayer")}
-          </ColorTheme>
+          </Link>
         ) : null}
       </div>
     </div>
   );
 
   const payerInformation = isStripePortalAvailable ? (
-    <ColorTheme
+    <Link
       noSelect
       fontWeight={600}
       className="payer-info_account-link"
       tag="a"
-      themeId={ThemeId.Link}
       target="_blank"
+      color="accent"
       onClick={goToStripePortal}
     >
       {t("StripeCustomerPortal")}
-    </ColorTheme>
+    </Link>
   ) : (
-    <ColorTheme
-      fontWeight={600}
-      href={`mailto:${email}`}
-      tag="a"
-      themeId={ThemeId.Link}
-    >
+    <Link fontWeight={600} href={`mailto:${email}`} tag="a" color="accent">
       {email}
-    </ColorTheme>
+    </Link>
   );
 
   const payerName = () => {

@@ -3,7 +3,7 @@
   "content": "See form template details here",
   "content_en_sha1_hash": "b7b7142711a93367eb3d5281f8eb4a92c1c24471",
   "created_at": "2025-05-19T21:30:54.869Z",
-  "updated_at": "2025-05-28T09:30:02.450Z",
+  "updated_at": "2025-08-04T07:30:01.205Z",
   "comment": {
     "text": "The \"GalleryEmptyScreenText\" translation key is used to display a message indicating that there are no items in a gallery, pointing users to see details about form templates. This text appears in an empty gallery screen within a UI component. Translators should provide a clear and concise message for this context.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/NoGalleryItem.js",
-      "line_number": 55,
-      "context": "className=\"info-panel_gallery-empty-screen-img\"\n src={FormGalleryEmptyInfoReactSvgUrl}\n alt=\"Empty Screen Gallery\"\n />\n <Text className=\"info-panel_gallery-empty-screen-text\">\n {t(\"InfoPanel:GalleryEmptyScreenText\")}\n </Text>\n </StyledGalleryEmptyScreen>\n );\n };\n export default NoGalleryItem;",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoGalleryItem.tsx",
+      "line_number": 45,
+      "context": "className={styles.galleryEmptyScreenImg}\n src={FormGalleryEmptyInfoReactSvgUrl}\n alt=\"Empty Screen Gallery\"\n />\n <Text className={styles.galleryEmptyScreenText}>\n {t(\"InfoPanel:GalleryEmptyScreenText\")}\n </Text>\n </div>\n );\n };\n export default NoGalleryItem;",
       "module": "/packages/client"
     }
   ],
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Здесь будут представлены подробности о шаблонах форм' is too literal and doesn't convey the meaning of 'See form template details here' accurately. It implies that the details will be shown later, rather than offering to show them now.",
-          "suggestion": "Смотрите подробности шаблона формы здесь"
+          "description": "The translation 'Здесь будут представлены подробности о шаблонах форм' is too literal and doesn't convey the same meaning as 'See form template details here'. It implies that the details will be presented in the future, while the original implies they are available to be seen.",
+          "suggestion": "Consider a more natural translation like 'Подробности о шаблонах форм здесь' or 'Смотрите детали шаблонов форм здесь'."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආකෘතිපත්‍ර අච්චුවේ විස්තර මෙතැන බලන්න' is not a direct or natural translation of 'See form template details here'. 'අච්චුවේ' (achchuwe) means 'in the mold' or 'in the die', which is not accurate in this context. It incorrectly implies the details are *within* the template itself.",
-          "suggestion": "A more accurate translation would be something like 'ආකෘතිපත්‍ර විස්තර මෙහි බලන්න' (Akrutipatra visthar mehi balanna) - 'See form details here'."
+          "description": "The translation 'ආකෘතිපත්‍ර අච්චුවේ විස්තර මෙතැන බලන්න' is not an ideal translation of 'See form template details here'.  'අච්චුවේ' (achchuwe) implies a mold or pattern, which isn't directly related to the meaning of 'template'. It creates a potentially misleading connotation.",
+          "suggestion": "Consider a translation that more directly conveys 'template' without the implication of a mold. Possible suggestions include: 'ආකෘතිපත්‍රයේ විස්තර මෙතැන බලන්න' (Akruthipatraye visthara methana balanna - See the form's details here) or 'ආකෘතියේ විස්තර මෙතැන බලන්න' (Akruhie visthara methana balanna - See the template's details here)."
         }
       ],
       "approved_at": null
@@ -183,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Види детаље шаблона обрасца овде' is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be 'Погледајте детаље шаблона обрасца овде' or 'Видите детаље шаблона обрасца овде'.",
+          "suggestion": "Погледајте детаље шаблона обрасца овде"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -192,13 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vidi detalje šablona obrasca ovde\" doesn't accurately convey the meaning of \"See form template details here.\" \"Vidi\" (see) implies a command, whereas the English is more of an informational link or suggestion.  A more suitable translation would use a word like \"Pogledaj\" or \"Vidite\" (more formal) to soften the imperative nature.",
+          "description": "The translation \"Vidi detalje šablona obrasca ovde\" doesn't accurately convey the meaning of \"See form template details here.\"  'Vidi' (see) is a bit formal and doesn't fit the context of an empty gallery screen. A more natural and idiomatic translation would be something like 'Pogledajte detalje šablona obrasca ovde' or 'Vidite detalje šablona obrasca.'",
           "suggestion": "Pogledajte detalje šablona obrasca ovde"
         },
         {
-          "type": "grammar",
-          "description": "While grammatically not strictly incorrect, the word order in \"detalje šablona obrasca\" sounds slightly unnatural in Serbian.  A more natural order would be \"detalje obrasca šablona\" or simply \"detalji obrasca šablona\".",
-          "suggestion": "detalji obrasca šablona"
+          "type": "spelling",
+          "description": "While technically correct, 'ovde' might be improved to 'tamo' depending on the UI flow. 'Ovde' translates to 'here', but 'tamo' (there) might be more appropriate as a call to action to view more details.",
+          "suggestion": "Pogledajte detalje šablona obrasca tamo"
         }
       ],
       "approved_at": null
@@ -206,13 +212,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Form şablonu ayrıntılarına buradan bakın' is a literal translation but doesn't flow naturally in Turkish. A more natural phrasing would be 'Form şablonunun detaylarına buradan ulaşabilirsiniz' or 'Form şablonu detayları için buraya bakın'.",
-          "suggestion": "Form şablonunun detaylarına buradan ulaşabilirsiniz"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

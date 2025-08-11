@@ -123,7 +123,11 @@ const FileManagement = ({
             onChange={onChangeDeleteConfirm}
             isChecked={confirmDelete}
           />
-          <Text>{t("DisplayNotification")}</Text>
+          <Text>
+            {t("TrashMoveConfirmation", {
+              sectionName: t("Common:TrashSection"),
+            })}
+          </Text>
         </div>
 
         <div className="toggle-btn-wrapper">

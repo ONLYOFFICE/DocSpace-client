@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @next/next/no-img-element */
-
 "use client";
 
 import { useContext } from "react";
@@ -62,7 +60,7 @@ export const GreetingCreateUserContainer = ({
   return (
     <GreetingContainer>
       <img src={logoUrl} className="portal-logo" alt="greeting-logo" />
-      {type === "LinkInvite" && (
+      {type === "LinkInvite" ? (
         <div className="tooltip">
           <Text fontSize="16px">
             {roomData.title ? (
@@ -78,7 +76,14 @@ export const GreetingCreateUserContainer = ({
                     : { spaceAddress: hostName }),
                 }}
                 components={{
-                  1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                  1: (
+                    <Text
+                      key="component_key"
+                      fontWeight={600}
+                      as="strong"
+                      fontSize="16px"
+                    />
+                  ),
                 }}
               />
             ) : (
@@ -95,13 +100,20 @@ export const GreetingCreateUserContainer = ({
                     : { spaceAddress: hostName }),
                 }}
                 components={{
-                  1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+                  1: (
+                    <Text
+                      key="component_key"
+                      fontWeight={600}
+                      as="strong"
+                      fontSize="16px"
+                    />
+                  ),
                 }}
               />
             )}
           </Text>
         </div>
-      )}
+      ) : null}
     </GreetingContainer>
   );
 };

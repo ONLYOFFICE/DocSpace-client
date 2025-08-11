@@ -3,7 +3,7 @@
   "content": "Login History",
   "content_en_sha1_hash": "d755284b3b68f68fa53e1d95ff88d8d202c5bbc1",
   "created_at": "2025-05-19T21:30:51.828Z",
-  "updated_at": "2025-07-02T07:49:19.858Z",
+  "updated_at": "2025-08-04T07:30:01.557Z",
   "comment": {
     "text": "The \"LoginHistoryTitle\" translation key is used to display the title \"Login History\" in various parts of the application's UI. It appears on a category page and is also set as the document title when accessing login history data. Translators should ensure this phrase accurately reflects the content being displayed.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 53,
-      "context": "isAuditAvailable,\n resetIsInit,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(t(\"LoginHistoryTitle\"));\n \n getLoginHistory();\n \n getLifetimeAuditSettings();",
+      "line_number": 55,
+      "context": "tfaEnabled,\n currentColorScheme,\n } = props;\n \n useEffect(() => {\n setDocumentTitle(t(\"LoginHistoryTitle\"));\n \n getLoginHistory();\n \n getLifetimeAuditSettings();",
       "module": "/packages/client"
     },
     {
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"قم بتسجيل الدخول\" literally translates to \"Log In\" or \"Sign In\", not \"Login History\". It doesn't convey the meaning of a historical record of logins.",
+          "description": "The Arabic translation \"قم بتسجيل الدخول\" translates to \"Log In\" or \"Sign In\", not \"Login History\". It doesn't convey the concept of a history.",
           "suggestion": "سجل الدخول"
         }
       ],
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'История на вход' is a literal translation of 'History of entry'. A more natural Bulgarian translation for 'Login History' would be 'История на влизанията' or 'История на достъпа'.",
-          "suggestion": "История на влизанията"
+          "description": "The translation 'История на вход' is a literal translation of 'History of entry/input' rather than 'Login History'. A more accurate translation would be something like 'История на влизания' or 'История на потребителски сеанси'.",
+          "suggestion": "История на влизания"
         }
       ],
       "approved_at": null

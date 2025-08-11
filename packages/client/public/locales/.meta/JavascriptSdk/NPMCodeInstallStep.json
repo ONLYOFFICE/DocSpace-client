@@ -3,7 +3,7 @@
   "content": "Install package from npm and save it to the package.json file with --save:",
   "content_en_sha1_hash": "e7d392ae44d0f8bde6691b2563972cd4b41d56bf",
   "created_at": "2025-05-19T21:30:54.608Z",
-  "updated_at": "2025-05-28T09:30:02.575Z",
+  "updated_at": "2025-08-04T07:30:01.402Z",
   "comment": {
     "text": "The \"NPMCodeInstallStep\" translation key is used to display instructions on how to install a package from npm and save it to the package.json file. This text appears in a UI component, likely a settings page or configuration dialog, where users can enter code snippets or scripts.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/CodeToInsert.js",
-      "line_number": 68,
+      "line_number": 75,
       "context": "<CategorySubHeader className=\"copy-window-code\">NPM</CategorySubHeader>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeDescription\")}\n </Text>\n <Text lineHeight=\"20px\" className=\"preview-description\">\n {t(\"NPMCodeInstallStep\")}\n </Text>\n <Textarea\n value=\"npm install --save @onlyoffice/docspace-sdk-js\"\n heightTextArea={32}\n isReadOnly",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Arabic translation uses a command/instructional tone (\"ثبتوا واحفظوها\") which might be too direct for some contexts. A more polite/suggestive tone might be preferred depending on the overall documentation style.",
-          "suggestion": "Consider a more suggestive phrasing like: \"يمكن تثبيت الحزمة من \"npm\" وحفظها في ملف \"package.json\" باستخدام \"--save\"."
+          "description": "The Arabic translation uses a command-like style. While technically correct, it's more of an instruction than a descriptive label. It might be more appropriate to rephrase for better readability within a UI.",
+          "suggestion": "Consider a more descriptive phrase like: \"تثبيت الحزمة من NPM وإضافتها إلى ملف package.json باستخدام الخيار --save\" (Install the package from NPM and add it to the package.json file using the --save option)."
         }
       ],
       "approved_at": null
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '--save it to the package.json file with --save' is redundant. The '--save' flag automatically saves to package.json. The translation could be more concise and natural.",
-          "suggestion": "Paketi npm-dən quraşdırın və package.json faylına --saxla bayrağı ilə əlavə edin:"
+          "description": "The translation of '--save' as '--yadda saxla seçimi ilə' is not idiomatic and not the standard way to express this in Azerbaijani. It's too literal and awkward.",
+          "suggestion": "Use a more natural phrasing like '--yadda saxla' or '--saxla' or simply leave it as '--save'."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the use of 'bayrağı ilə' (with flag) can sound a bit technical for a user. Consider simplifying.",
-          "suggestion": "Paketi npm-dən quraşdırın və package.json faylına əlavə edin:"
+          "description": "The colon at the end of the sentence is not standard in Azerbaijani. While technically not incorrect, it feels unnatural.",
+          "suggestion": "Remove the colon at the end of the sentence."
         }
       ],
       "approved_at": null
@@ -62,25 +62,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Install package from npm and save it to the package.json file with --save:' implies a specific command usage. The Czech translation 'Nainstalujte balíček z npm a uložte jej do souboru package.json pomocí příkazu --save:' is technically correct but could be improved for clarity and flow. A more natural phrasing might explicitly mention *how* to save the package, e.g., 'Nainstalujte balíček z npm a přidejte jej do souboru package.json pomocí příkazu npm install --save'.",
-          "suggestion": "Nainstalujte balíček z npm a přidejte jej do souboru package.json pomocí příkazu npm install --save."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation includes a colon at the end of the sentence, which is grammatically correct but might be stylistically better without it depending on the context of usage. Consider removing it if it follows a list or command format.",
-          "suggestion": "Installieren Sie das Paket von npm und speichern Sie es mit --save in der Datei package.json"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -89,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'με την εντολή' (with the command) feels slightly clunky in Greek. While technically correct, it could be more natural.",
-          "suggestion": "Εγκαταστήστε το πακέτο από το npm και αποθηκεύστε το στο αρχείο package.json χρησιμοποιώντας την επιλογή --save:"
+          "description": "The colon after 'package.json' is unnecessary and breaks the natural flow of the Greek sentence. It's more common to simply end the sentence after mentioning 'package.json'.",
+          "suggestion": "Εγκαταστήστε το πακέτο από το npm και αποθηκεύστε το στο αρχείο package.json"
         }
       ],
       "approved_at": null
@@ -107,7 +95,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after 'komennolla' is unnecessary and breaks the flow. The instruction is clearer without it.",
+          "description": "The colon after 'komennolla' is unnecessary and breaks the flow. The instruction implies a direct command to be executed.",
           "suggestion": "Asenna paketti npm:stä ja tallenna se package.json-tiedostoon komennolla save:"
         }
       ],
@@ -119,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon at the end of the sentence seems unnecessary and might disrupt readability. It's directly following a verb and doesn't clearly introduce a clause.",
-          "suggestion": "Installez le paquet depuis npm et sauvegardez-le dans le fichier package.json avec --save."
+          "description": "The colon after \"--save\" is inconsistent with the English original. It should be removed.",
+          "suggestion": "Installez le paquet depuis npm et sauvegardez-le dans le fichier package.json avec --save"
         }
       ],
       "approved_at": null
@@ -131,8 +119,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a colon (:) after 'ավելացնել այն package.json ֆայլում', which is unusual in Armenian sentence structure. While technically understandable, it's not idiomatic.",
-          "suggestion": "Remove the colon after ֆայլում.  Consider rephrasing slightly for better flow, like 'ավելացնել այն package.json ֆայլում՝ --save-ով' or 'ավելացնել այն package.json ֆայլում, --save-ով։'"
+          "description": "The hyphen in 'npm-ից' could be improved for readability. While technically correct, a slightly more natural phrasing might be preferred.",
+          "suggestion": "Տեղադրել npm-ի փաթեթը և ավելացնել այն package.json ֆայլում --save-ով:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'ավելացնել' (to add) is not strictly incorrect, 'գրանցել' (to register) or 'ներառել' (to include) might be a slightly more accurate translation of 'save' in the context of adding a dependency to package.json. 'ավելացնել' implies a general addition, not specifically adding it as a dependency.",
+          "suggestion": "Տեղադրել npm-ի փաթեթը և գրանցել այն package.json ֆայլում --save-ով:"
         }
       ],
       "approved_at": null
@@ -149,8 +142,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon at the end of the Japanese sentence feels abrupt and might be more natural without it. It's a stylistic preference, but makes it read slightly less fluently.",
-          "suggestion": "npmからパッケージをインストールし、--saveを使ってpackage.jsonファイルに保存します。"
+          "description": "The colon at the end of the Japanese translation makes it appear as if it's a complete sentence, but it's likely intended as an instruction. Removing it would make it flow better.",
+          "suggestion": "npmからパッケージをインストールし、--saveを使ってpackage.jsonファイルに保存する。"
         }
       ],
       "approved_at": null
@@ -161,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon after 'package.json 파일에 저장하세요' feels a bit abrupt and not natural in Korean. It's more typical to end a command with a period or an implied continuation.",
-          "suggestion": "npm에서 패키지를 설치하고 --save를 사용하여 package.json 파일에 저장하세요."
+          "description": "The colon after 'package.json 파일에 저장하세요:' feels abrupt and less natural in Korean. It would flow better with a more conversational ending.",
+          "suggestion": "npm에서 패키지를 설치하고 --save를 사용하여 package.json 파일에 저장해 주세요:"
         }
       ],
       "approved_at": null
@@ -170,7 +163,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຕົວເລືອກ' should be 'ທາງເລືອກ'.",
+          "suggestion": "ຕິດຕັ້ງແພັກເກັດຈາກ npm ແລະບັນທຶກມັນໄວ້ໃນເອກະສານ package.json ດ້ວຍທາງເລືອກ --save:"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -179,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase '--save:' is incorrectly translated as '--saglabāt:'. The correct translation for '--save:' in this context, referring to the npm command, is '--glabāt:'.",
-          "suggestion": "--glabāt:"
+          "description": "The word 'saglabāt' in the Latvian translation directly translates to 'save' and while technically correct, it's redundant. The English phrase 'save it' is implied by the action of installing and adding to package.json.  A more natural phrasing would omit the second 'save'.",
+          "suggestion": "Instalējiet paketi no npm un pievienojiet to package.json failā ar --save:"
         }
       ],
       "approved_at": null
@@ -202,9 +201,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'guarde-o' is not the most natural or common way to say 'save it' in Portuguese. While grammatically correct, 'salve-o' is more prevalent.",
-          "suggestion": "Instale o pacote a partir do npm e salve-o no ficheiro package.json com --save:"
+          "type": "formatting",
+          "description": "The phrase \"guarde-o\" can be slightly improved for better flow and naturalness in Portuguese. While technically correct, it sounds a bit clunky.",
+          "suggestion": "Instale o pacote a partir do npm e adicione-o ao ficheiro package.json com --save:"
         }
       ],
       "approved_at": null
@@ -227,8 +226,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase '--save:' translates more accurately to '--save' in Russian. The colon is unnecessary and makes the sentence slightly awkward.",
-          "suggestion": "Установите пакет из npm и сохраните его в файле package.json с помощью --save"
+          "description": "The English phrase '--save:' is not accurately translated. 'сохранить' translates to 'save' but in the context of npm, '--save' should be represented as '--save'.",
+          "suggestion": "Установите пакет из npm и сохраните его в файле package.json с помощью --save:"
         }
       ],
       "approved_at": null
@@ -239,13 +238,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase '--save සමඟ' is a literal translation of '--save with'. A more natural Sinhala phrasing would be something like '--save උපාංගය සමඟ' or simply '--save යාවත්තු සමඟ'. The intended meaning of the English phrase is to indicate that the package should be saved as a dependency in the package.json file.",
-          "suggestion": "npm වෙතින් පැකේජය ස්ථාපනය කර --save යාවත්තු සමඟ package.json ගොනුවට සුරකින්න:"
+          "description": "The phrase '--save සමඟ' is a literal translation of '--save with' and doesn't flow naturally in Sinhala. It's better to convey the meaning of saving the package to the package.json file using a more idiomatic expression.",
+          "suggestion": "npm වෙතින් පැකේජය ස්ථාපනය කර package.json ගොනුවට --save සමඟින් එක් කරන්න:"
         },
         {
           "type": "formatting",
-          "description": "The colon (:) at the end of the sentence might be unnecessary or unusual in Sinhala. It's typical to end sentences with a full stop.",
-          "suggestion": "npm වෙතින් පැකේජය ස්ථාපනය කර --save යාවත්තු සමඟ package.json ගොනුවට සුරකින්න."
+          "description": "The colon at the end of the Sinhala sentence is not standard in this type of instruction.",
+          "suggestion": "Remove the colon at the end of the sentence."
         }
       ],
       "approved_at": null
@@ -253,13 +252,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '--save:' is a command-line argument and should be presented as such. Simply including it as text loses its meaning. It's a flag used to add the package to the `dependencies` section of package.json.",
-          "suggestion": "Nainštalujte balík z npm a uložte ho do súboru package.json s príkazom --save:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -274,18 +267,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "“пацкаге.јсон” is a misspelling of 'package.json'.",
-          "suggestion": "package.json"
-        },
-        {
-          "type": "spelling",
-          "description": "“сачувај” should be 'сачувајте' to match the imperative mood and agree with the package.",
-          "suggestion": "сачувајте"
+          "description": "The word 'пацкаге' is a misspelling of 'package'.",
+          "suggestion": "пакета"
         },
         {
           "type": "formatting",
-          "description": "The colon after 'сачувајте' is misplaced. It should be after the entire phrase.",
-          "suggestion": "Инсталирај пакет из нпм-а и сачувај га у package.json фајлу са --сачувајте:"
+          "description": "The '--save' flag should be translated consistently. It appears as '--сачувај:' which is not a direct translation of the English flag. It's better to keep it as is.",
+          "suggestion": "--save:"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'фајлу' is an incorrect declension of 'фајл'. It should be 'фајл'.",
+          "suggestion": "фајл"
         }
       ],
       "approved_at": null
@@ -296,8 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation includes a colon at the end of the sentence, mirroring the English. It's generally more natural in Serbian to omit it in this context.",
-          "suggestion": "Instaliraj paket iz npm-a i sačuvaj ga u package.json fajlu sa --sačuvaj"
+          "description": "The translation includes a colon after 'sačuvaj:'. This colon isn't present in the English source and disrupts the flow.  It also inappropriately ends the sentence.",
+          "suggestion": "Remove the colon after 'sačuvaj:'."
         }
       ],
       "approved_at": null

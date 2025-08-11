@@ -2,7 +2,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { TUser } from "@docspace/shared/api/people/types";
-import EditGroupStore from "SRC_DIR/store/EditGroupStore";
+import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
+
+import EditGroupStore from "SRC_DIR/store/contacts/EditGroupStore";
 
 import { MembersSelector } from "../MembersSelector/MembersSelector";
 
@@ -14,7 +16,7 @@ type InjectedProps = Pick<
 type SelectMembersPanelProps = {
   onClose: () => void;
   onParentPanelClose: () => void;
-  addMembers: (members: TUser[]) => void;
+  addMembers: TOnSubmit;
 
   injectedProps?: InjectedProps;
 };
@@ -44,6 +46,7 @@ const Panel = ({
     <MembersSelector
       onClose={onClose}
       onParentPanelClose={onParentPanelClose}
+      isVisible
       addMembers={addMembers}
       checkIfUserInvited={checkIfUserInvited}
     />

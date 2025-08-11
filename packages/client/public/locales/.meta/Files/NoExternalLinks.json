@@ -3,7 +3,7 @@
   "content": "No external links",
   "content_en_sha1_hash": "ff672adde427c15e2c3387c1d27fc7212794d3f5",
   "created_at": "2025-05-19T21:30:55.908Z",
-  "updated_at": "2025-06-03T20:59:42.286Z",
+  "updated_at": "2025-08-04T07:30:01.589Z",
   "comment": {
     "text": "The translation key \"NoExternalLinks\" is used to describe a feature that disables external links in a user interface. This text appears on a button or option that prevents users from accessing external websites. Translators should provide a phrase that conveys this concept in the target language.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 960,
+      "line_number": 964,
       "context": "//         linksArray = [\n //           {\n //             id: \"no-external-links-option\",\n //             key: \"no-external-links\",\n //             label: !links.length\n //               ? t(\"Files:NoExternalLinks\")\n //               : t(\"Files:AllLinksAreDisabled\"),\n //             disableColor: true,\n //           },\n //           !isMobile && {\n //             key: \"separator0\",",
       "module": "/packages/client"
     }
@@ -99,7 +99,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '외부 링크가 없습니다' is a literal translation of 'There are no external links'. A more natural and concise translation would be '외부 링크 없음' or '외부 링크 미지원'.",
+          "suggestion": "외부 링크 없음"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -155,9 +161,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'බාහිර' (bahira) is a reasonable translation for 'external', but its accuracy can depend on context. Considering it's referring to links, 'පිටත' (pitatha) might be slightly more precise and commonly used in technical contexts.",
-          "suggestion": "Consider using 'පිටත සබැඳි නැත' for potentially greater clarity in a technical context."
+          "type": "incorrect_translation",
+          "description": "The translation \"බාහිර සබැඳි නැත\" while understandable, is a slightly literal translation. A more natural phrasing in Sinhala would be something like \"තොරතුරු බාහිර සබැඳි නොමැත\" or \"බාහිර සබැඳි වලට අනුගත නොවීය\".",
+          "suggestion": "Consider \"තොරතුරු බාහිර සබැඳි නොමැත\" or \"බාහිර සබැඳි වලට අනුගත නොවීය\""
         }
       ],
       "approved_at": null

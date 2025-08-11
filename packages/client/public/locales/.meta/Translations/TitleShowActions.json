@@ -3,7 +3,7 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2025-05-19T21:30:50.015Z",
-  "updated_at": "2025-05-28T09:30:02.416Z",
+  "updated_at": "2025-08-11T09:02:43.907Z",
   "comment": {
     "text": "This translation key \"TitleShowActions\" is used to display the text \"Show File Actions\" in various UI elements, including buttons and dialogs. It appears in contexts where file actions are relevant, such as in a context menu or a button title. Translators should ensure the text accurately reflects the functionality of these elements.",
     "is_auto": true,
@@ -11,32 +11,32 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/GalleryItemTitle.js",
-      "line_number": 89,
-      "context": "withBackdrop={false}\n />\n <ContextMenuButton\n id=\"info-options\"\n className=\"expandButton\"\n title={t(\"Translations:TitleShowActions\")}\n onClick={onClickContextMenu}\n getData={onGetContextOptions}\n directionX=\"right\"\n displayType=\"toggle\"\n />",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/ContextButton.tsx",
+      "line_number": 88,
+      "context": "id=\"info-options\"\n className=\"expandButton\"\n title={\n \"isFolder\" in selection && selection.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"\n displayType={ContextMenuButtonDisplayType.toggle}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/Rooms/context-btn.js",
-      "line_number": 71,
-      "context": "id=\"info-options\"\n className=\"expandButton\"\n title={\n selection.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n onClick={onContextMenu}\n getData={getData}\n directionX=\"right\"\n displayType=\"toggle\"",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/ItemTitle.tsx",
+      "line_number": 112,
+      "context": "dataTestId=\"info_panel_gallery_context_menu\"\n />\n <ContextMenuButton\n id=\"info-options\"\n className=\"expandButton\"\n title={t(\"Translations:TitleShowActions\")}\n onClick={onClickContextMenu}\n getData={onGetContextOptions}\n directionX=\"right\"\n displayType={ContextMenuButtonDisplayType.toggle}\n testId=\"info_panel_gallery_context_menu_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableRow.js",
-      "line_number": 240,
+      "line_number": 241,
       "context": "showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}\n displayFileExtension={displayFileExtension}\n title={\n item.isFolder\n ? t(\"Translations:TitleShowFolderActions\")\n : t(\"Translations:TitleShowActions\")\n }\n isRoom={item.isRoom}\n isHighlight={isHighlight}\n hideColumns={hideColumns}\n badgeUrl={badgeUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/tiles/file-tile/FileTile.tsx",
-      "line_number": 325,
+      "line_number": 366,
       "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"Translations:TitleShowActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/tiles/folder-tile/FolderTile.tsx",
-      "line_number": 243,
+      "line_number": 313,
       "context": "displayType={ContextMenuButtonDisplayType.toggle}\n onClick={(e) => {\n e.stopPropagation();\n onContextMenu(e);\n }}\n title={t(\"Translations:TitleShowActions\")}\n />\n ) : (\n <div className=\"expandButton\" />\n )}\n <ContextMenu",
       "module": "/packages/shared"
     }
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fayl əyləmlərini göstər\" is a literal translation but doesn't quite capture the nuance of 'Show File Actions'. A more natural phrasing would be something like 'Fayl hərəkətlərini göstər' or 'Fayl üzrə hərəkətlərini göstər'.",
-          "suggestion": "Fayl hərəkətlərini göstər"
+          "description": "The translation 'Fayl əyləmlərini göstər' is a literal translation that doesn't quite capture the intended meaning of 'Show File Actions'. It translates to 'Show File Actions' but sounds less natural in Azerbaijani. A more idiomatic translation would be preferred.",
+          "suggestion": "Consider \"Fayl üzrə əməliyyatları göstər\" or \"Fayl ilə bağlı hərəkətləri göstər\""
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Покажи действията за файлове' is a literal translation but lacks the natural flow of the English phrase 'Show File Actions'. A more natural phrasing would be 'Показване на действията за файлове' or 'Действия за файлове'.",
-          "suggestion": "Показване на действията за файлове"
+          "description": "The translation 'Покажи действията за файлове' is too literal and doesn't flow naturally in Bulgarian. A more idiomatic translation would be something like 'Показване на действията с файлове' or 'Действия с файлове'.",
+          "suggestion": "Показване на действията с файлове"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Mostrar acciones con archivo' is not the most natural or accurate translation of 'Show File Actions'. It literally translates to 'Show actions with file'.",
-          "suggestion": "Consider 'Mostrar acciones del archivo' or 'Mostrar acciones para el archivo'."
+          "description": "The translation \"Mostrar acciones con archivo\" is not the most natural or accurate translation of \"Show File Actions.\" It literally translates to \"Show actions with file.\" A more appropriate translation would convey the meaning of displaying options related to a file.",
+          "suggestion": "Consider \"Mostrar Acciones del Archivo\" or \"Mostrar Opciones del Archivo\"."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Toimenpiteet\" is too generic. While it technically means 'Actions' or 'Measures', it doesn't specifically convey the meaning of 'File Actions' as intended by the original English content. A more accurate translation would include the concept of 'file' or 'tiedosto'.",
-          "suggestion": "Tiedoston toimenpiteet"
+          "description": "The Finnish translation \"Toimenpiteet\" is too generic. It translates to \"Actions\" or \"Procedures\" and doesn't specifically convey \"File Actions\".",
+          "suggestion": "Consider a more specific translation like \"Tiedosto toiminnat\" (File Actions) or \"Toiminnot tiedostolle\" (Actions for the file)."
         }
       ],
       "approved_at": null
@@ -126,7 +126,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Actions sur le fichier\" is a more literal translation and doesn't flow as naturally in French for a UI element. A more idiomatic translation would be 'Actions du fichier' or 'Actions liées au fichier'.",
+          "description": "The translation 'Actions sur le fichier' is too literal and doesn't flow naturally in French. A more idiomatic translation would convey the intended meaning of 'Show File Actions' more effectively.",
           "suggestion": "Actions du fichier"
         }
       ],
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ցույց տալ ֆայլի գործողությունները\" (Tsuyts tal fayli gorchogutyunerə) is a literal translation and doesn't quite capture the intended meaning of 'Show File Actions'. It's a bit clunky and verbose. A more natural Armenian phrasing would be better.",
-          "suggestion": "Consider \"Ֆայլի գործողություններ ցույց տալ\" (Fayli gorchogutyuner tsuyts tal) or \"Ցույց տալ գործողություններ ֆայլի հետ կապված\" (Tsuyts tal gorchogutyuner fayli het kapvad) - 'Show actions related to the file'."
+          "description": "The translation 'Ցույց տալ ֆայլի գործողությունները' is a literal translation of 'Show File Actions' but sounds slightly awkward in Armenian. A more natural phrasing might be preferred.",
+          "suggestion": "Ցույց տալ ֆայլի գործողություններ"
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mostra azioni con file\" is not the most natural or accurate translation of \"Show File Actions\". While technically understandable, it's a bit literal and clunky.",
-          "suggestion": "Consider alternatives like \"Mostra azioni sui file\" or \"Mostra le azioni per i file\"."
+          "description": "The Italian translation 'Mostra azioni con file' is a literal translation that doesn't quite capture the meaning of 'Show File Actions'. It translates to 'Show actions with files,' which implies the actions are contained within the files themselves, rather than actions *on* the files.",
+          "suggestion": "Consider a more idiomatic translation such as 'Mostra azioni sui file' (Show actions on files) or 'Mostra operazioni sui file' (Show operations on files)."
         }
       ],
       "approved_at": null
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"파일 동작 표시\" (Fail Dongjak Biyasi) while understandable, doesn't directly translate to 'Show File Actions'. A more accurate translation would convey the action of displaying or revealing the actions available for a file.",
-          "suggestion": "Consider \"파일 작업 표시\" (Fail Jageup Biyasi) or \"파일 작업 보기\" (Fail Jageup Bogi) which better capture the action of 'Show File Actions'."
+          "description": "The translation '파일 동작 표시' while understandable, is not the most natural or accurate rendering of 'Show File Actions'.  '표시' implies 'display' but 'Show' often implies a menu action or a revealed set of options. A more suitable translation would convey this function.",
+          "suggestion": "파일 작업 표시"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ\" is a literal translation and doesn't convey the intended meaning of 'Show File Actions' naturally in Lao.  'ປະຕິບັດ' refers to actions *performed*, not actions *available*. It's too generic.",
-          "suggestion": "A more accurate and natural translation would be something like \"ສະແດງຕົວເລືອກ​ໃນ​ໄຟລ໌\" (sa-daeng tua-leuak nai file) which means 'Show options in file' or \"ສະແດງການກະ​ທຳ​ຂອງ​ໄຟລ໌\" (sa-daeng gaan-ga-tham khong file) which means 'Show file actions'."
+          "description": "The translation 'ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ' is a literal translation and doesn't convey the intended meaning of 'Show File Actions' naturally in Lao. 'ການ​ປະ​ຕິ​ບັດ' translates to 'actions' or 'execution' which is too broad. A more natural translation would be something along the lines of 'ສະແດງຕົວເລືອກໄຟລ໌' (Show File Options) or 'ສະແດງການກະ ທຳ ໄຟລ໌' (Show File Actions - more formal).",
+          "suggestion": "ສະແດງຕົວເລືອກໄຟລ໌"
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Działania na plikach' is a literal translation of 'File Actions' but doesn't fully capture the intended meaning of 'Show File Actions'. It lacks the 'Show' aspect, which implies a display or presentation of actions.",
-          "suggestion": "Rozszerzone działania na plikach"
+          "description": "The translation 'Działania na plikach' is a literal translation of 'File Actions'. While understandable, it's less natural and could be improved to better reflect the intended meaning of 'Show File Actions'. A more natural phrasing would be something like 'Pokaż działania na pliku' or 'Opcje dla pliku'.",
+          "suggestion": "Pokaż działania na pliku"
         }
       ],
       "approved_at": null
@@ -216,8 +216,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mostrar ações com ficheiros\" is not the most natural or accurate translation of \"Show File Actions\". While literally translatable, it doesn't convey the intended meaning as clearly.",
-          "suggestion": "Mostrar Ações do Arquivo"
+          "description": "The translation 'Mostrar ações com ficheiros' is not the most natural or accurate translation of 'Show File Actions'. While technically correct, it's a bit literal and clunky.",
+          "suggestion": "Mostrar Ações do Ficheiro"
+        },
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation lacks capitalization. 'Mostrar' should be capitalized.",
+          "suggestion": "Mostrar Ações do Ficheiro"
         }
       ],
       "approved_at": null
@@ -234,8 +239,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Afișare acțiuni asupra fișierului' is a literal translation that is less natural in Romanian. A more idiomatic and concise translation would be preferable.",
-          "suggestion": "Afișare acțiuni fișier"
+          "description": "The translation 'Afișare acțiuni asupra fișierului' is overly literal. 'Upon the file' is redundant. A more natural translation would focus on the action related to the file.",
+          "suggestion": "Afișare acțiuni pentru fișier"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the phrase \"Afișare acțiuni pentru fișier\" is more concise and aligns better with common UI/UX patterns.",
+          "suggestion": "Afișare acțiuni pentru fișier"
         }
       ],
       "approved_at": null
@@ -246,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Показать действия над файлом' is a literal translation but might be improved for clarity and natural flow in a UI context. While technically correct, it's a bit verbose.",
-          "suggestion": "Consider 'Действия над файлом' or 'Файловые действия' for a more concise and UI-friendly option."
+          "description": "The translation 'Показать действия над файлом' is a literal translation of 'Show File Actions'. A more natural and common phrasing in Russian would be something like 'Отобразить действия с файлом' or 'Показать действия для файла'.",
+          "suggestion": "Отобразить действия с файлом"
         }
       ],
       "approved_at": null
@@ -264,7 +274,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Zobraziť akcie pre súbor' is too literal. A more natural and user-friendly translation would be closer to 'Zobraziť ponuky pre súbor' or 'Zobraziť akcie pre tento súbor'. 'Ponuky' better reflects the user interface element's purpose.",
+          "description": "The translation 'Zobraziť akcie pre súbor' is too literal. A more natural Slovak phrasing would be 'Zobraziť ponuky pre súbor' or 'Zobraziť akcie so súborom'.  'Ponuky' conveys the meaning of 'actions' better in this context, particularly within a file management interface.",
           "suggestion": "Zobraziť ponuky pre súbor"
         }
       ],
@@ -282,8 +292,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Прикажи акције датотека\" does not accurately convey the meaning of \"Show File Actions.\" \"Датотека\" refers to a 'file' in the sense of a data file, not a general action related to a file (like renaming, deleting, etc.). It translates more literally as 'Show file data'.",
+          "description": "The Serbian translation 'Прикажи акције датотека' doesn't accurately convey the meaning of 'Show File Actions'. 'датотека' translates to 'file' but the English term 'actions' isn't properly represented. It's too literal.",
           "suggestion": "Покажи опције датотеке"
+        },
+        {
+          "type": "spelling",
+          "description": "While 'датотека' is a valid word, it might sound slightly formal or technical in this context. Consider a simpler alternative.",
+          "suggestion": "Consider 'фајл' or a similar colloquial term if appropriate for the target audience."
         }
       ],
       "approved_at": null
@@ -312,8 +327,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hiển thị Hoạt động của File\" is not the most natural or accurate translation of 'Show File Actions'. While understandable, it's a bit literal. A more natural phrasing would be closer to \"Hiện các Hành động trên File\" or \"Hiển thị các Hành động của File\".",
-          "suggestion": "Hiển thị các Hành động trên File"
+          "description": "The translation 'Hiển thị Hoạt động của File' is a literal translation and not the most natural way to say 'Show File Actions' in Vietnamese. It's overly verbose and a bit clunky.",
+          "suggestion": "Thay đổi thành 'Hiển thị Tùy chọn File' or 'Hiển thị Hành động trên File'."
         }
       ],
       "approved_at": null
@@ -324,8 +339,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '显示文件相关操作' is a bit too verbose and doesn't directly convey the meaning of 'Show File Actions'. It translates to 'Show file related operations' which is not as concise.",
-          "suggestion": "显示文件操作 (Xiǎnshì wénjiàn cāozuò)"
+          "description": "The translation '显示文件相关操作' is a bit too literal and verbose. A more natural and concise translation would be better.",
+          "suggestion": "显示文件操作"
         }
       ],
       "approved_at": null

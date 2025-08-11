@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Izberi iz seznama",
-  "ConnectingAccount": "Povezovanje računa",
-  "DeleteFromTrash": "Izbrani elementi so bili uspešno izbrisani iz koša",
   "FileLocked": "Datoteka zaklenjena",
   "FileProtected": "Datoteka je zaščitena z geslom",
   "FileUnlocked": "Datoteka odklenjena",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Spremenite podatke tretjih oseb",
   "ThirdPartyTitle": "Storitve tretjih oseb",
   "TitleShowActions": "Pokaži akcije datoteke",
-  "TitleShowFolderActions": "Pokaži akcije mape",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Pokaži akcije mape"
 }

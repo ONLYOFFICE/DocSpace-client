@@ -3,7 +3,7 @@
   "content": "Drop files here or create new ones.",
   "content_en_sha1_hash": "b7cdc5efa37d7e19706293b7a41a3d3e01cbcb1a",
   "created_at": "2025-05-19T21:30:56.470Z",
-  "updated_at": "2025-06-03T20:59:41.802Z",
+  "updated_at": "2025-05-26T07:57:32.164Z",
   "comment": {
     "text": "\"This translation key is used to display a default message when there are no files or folders to show in a folder view. The text invites users to drop files here or create new ones. It appears on an empty file manager interface.\"",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dateien hier ablegen oder neue erstellen' is not the most natural or idiomatic translation of 'Drop files here or create new ones'. While technically correct, it sounds slightly awkward.",
+          "suggestion": "A more natural translation would be 'Dateien hier hineinziehen oder neue erstellen' or 'Dateien hier ablegen oder neue anlegen'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -87,7 +93,18 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Քաշել\" (Kashel) should ideally be \"Ներմուծեք\" (Nermuydzek) or a similar term that more accurately conveys 'Drop' in a UI context. \"Քաշել\" more closely means 'pull' or 'drag', which is not the intended action.",
+          "suggestion": "Ներմուծեք"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation \"Քաշել ֆայլերն այստեղ կամ ստեղծեք նորերը:\" is not the most natural or user-friendly phrasing for a drop zone instruction.  'Drop files here' is typically a more direct and action-oriented instruction.",
+          "suggestion": "Ֆայլեր դրեք այստեղ կամ ստեղծեք նորերը:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -123,7 +140,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sleep bestanden hierheen of maak nieuwe aan' while conveying the general idea, isn't the most natural or precise Dutch rendering of 'Drop files here or create new ones'. 'Sleep' (to sleep) is used incorrectly. It should be 'Plaats' or 'Zet'.",
+          "suggestion": "Plaats bestanden hier of maak nieuwe aan."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -147,7 +170,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Plasați fișierele aici sau creați cele noi' is a literal translation, but sounds unnatural in Romanian. A more natural phrasing would be 'Trageți și plasați fișiere aici sau creați altele noi.' or 'Puneți fișiere aici sau creați altele noi.'",
+          "suggestion": "Puneți fișiere aici sau creați altele noi."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +188,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"පහතින් ගොනු ඇදගෙන යන්න හෝ නව ඒවා සාදන්න.\" is a literal translation that doesn't quite capture the nuance of \"Drop files here or create new ones.\"  'ඇදගෙන යන්න' (adegangna yanna) implies dragging, which might not be the best way to communicate the action in a UI context. It could be interpreted as a physical action instead of a virtual drop.",
+          "suggestion": "Consider a translation like \"මෙහි ගොනු තැබන්න හෝ නව ගොනු සාදන්න\" (mehi gonu thabanna ho nava gonu sadanna) - 'Place files here or create new files'. This is more aligned with the action of dropping files in a digital interface."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +212,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'фајлове' is potentially misspelled. The correct spelling should be 'фајлове' (files).",
+          "suggestion": "фајлове"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Повуците фајлове овде или креирајте нове' is understandable, a more natural and accurate translation of 'Drop files here or create new ones' would be 'Превуците фајлове овде или креирајте нове'. 'Превуците' is the more idiomatic Serbian verb for 'drop' in this context.",
+          "suggestion": "Превуците фајлове овде или креирајте нове."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'fajlove' is slightly archaic and less commonly used. 'Datoteke' is a more modern and preferred term for 'files'.",
+          "suggestion": "Povucite datoteke ovde ili kreirajte nove."
+        }
+      ],
       "approved_at": null
     },
     "tr": {

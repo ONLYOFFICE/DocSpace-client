@@ -35,13 +35,13 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import VersionRow from "./VersionRow";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
 
-const VirtualScroll = React.forwardRef((props, ref) => (
+const VirtualScroll = ({ ref, ...props }) => (
   <CustomScrollbarsVirtualListWithAutoFocus
     {...props}
     ref={ref}
     paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
   />
-));
+);
 VirtualScroll.displayName = "VirtualScroll";
 
 class SectionBodyContent extends React.Component {

@@ -3,7 +3,7 @@
   "content": "Connect app",
   "content_en_sha1_hash": "4a7f6f5831a934a0bf6d0fe0d4cfbc86482cd92d",
   "created_at": "2025-05-19T21:30:57.386Z",
-  "updated_at": "2025-06-18T07:34:15.319Z",
+  "updated_at": "2025-08-04T07:30:01.646Z",
   "comment": {
     "text": "This translation key is used to display the label \"Connect app\" on a button that prompts the user to activate an app connection in the login flow. The button appears on-screen when a user confirms their account settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 243,
+      "line_number": 228,
       "context": "scale\n primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"SetAppButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
       "module": "/packages/login"
     }
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Միացնել հավելվածը\" is technically a valid translation for 'Connect app', it implies 'to turn on the app'. 'Connect app' often refers to establishing a connection to an application, not simply turning it on. A more accurate translation might be something like 'Համակարգչային ծրագրին միանալ' or 'Համակարգչային ծրագրին կապ ունենալ'.",
+          "suggestion": "Համակարգչային ծրագրին միանալ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,13 +135,25 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ligar à app\" is understandable, a more natural and commonly used translation for \"Connect app\" in Portuguese would be \"Conectar ao aplicativo\" or \"Conectar ao app\". \"Ligar\" typically implies turning something on, not connecting to it.",
+          "suggestion": "Conectar ao aplicativo"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Conectar app' is a literal translation and doesn't convey the intended meaning as naturally as it could in Brazilian Portuguese. A more idiomatic translation would be something like 'Conectar o aplicativo' or 'Ligar o app'.",
+          "suggestion": "Conectar o aplicativo"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -153,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'යෙදුම සබඳින්න' literally translates to 'Connect the app'. While understandable, a more natural and accurate translation for 'Connect app' in this context (likely a button label) would be something like 'අප් එක සම්බන්ධ කරන්න' or 'අප් එකට සම්බන්ධ වන්න'. The literal translation feels clunky.",
+          "suggestion": "අප් එක සම්බන්ධ කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,13 +189,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Aplikacija za prijavo\" literally translates to \"Application for login.\" It doesn't accurately convey the meaning of \"Connect app.\" A more appropriate translation would imply establishing a connection or linking.",
+          "suggestion": "Povezava z aplikacijo"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Повежи апликацију' is a literal translation of 'Connect app' but sounds unnatural in Serbian. A more natural translation would be something along the lines of 'Уповежи апликацију' or 'Повези се са апликацијом'.",
+          "suggestion": "Уповежи апликацију"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -183,7 +219,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Uygulamaya bağlan' is a literal translation of 'Connect to app' rather than 'Connect app'. While understandable, 'Connect app' is more concise and potentially more aligned with the original intent, especially for a button label. A better translation might be 'Uygulama Bağlantısı' (App Connection) or a shorter, more colloquial equivalent, depending on the overall tone.",
+          "suggestion": "Consider 'Uygulama Bağlantısı' or a more colloquial alternative depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

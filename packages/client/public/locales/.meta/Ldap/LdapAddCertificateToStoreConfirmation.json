@@ -3,7 +3,7 @@
   "content": "Do you want to add this certificate to certificate store and continue with user import?",
   "content_en_sha1_hash": "ff7af28fff53533dec74633a798b78b64ae40315",
   "created_at": "2025-05-19T21:30:54.157Z",
-  "updated_at": "2025-05-21T08:29:48.627Z",
+  "updated_at": "2025-05-24T08:42:38.107Z",
   "comment": {
     "text": "This translation key is used to confirm whether a user wants to add a certificate to the certificate store and continue with the import process. It appears as the title of a modal dialog in the LDAP settings category.",
     "is_auto": true,
@@ -75,19 +75,19 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses 'liste des certificats' which is a bit verbose. A more natural phrasing would be 'magasin de certificats'.",
+          "suggestion": "Souhaitez-vous ajouter ce certificat au magasin de certificats et poursuivre l'importation des utilisateurs ?"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'վկայականը' (certificate) is potentially a bit formal. While not incorrect, a slightly more conversational alternative might improve flow.",
-          "suggestion": "Consider using 'տեղեկանքը' or a more colloquial term depending on the intended tone. However, 'վկայականը' is technically correct."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -123,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses a question mark at the end. While grammatically correct, the English version does not. It's best to maintain consistency.",
+          "suggestion": "Remove the question mark from the end: 'Wilt u dit certificaat toevoegen aan de certificatenwinkel en doorgaan met het importeren van gebruikers'"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -162,18 +168,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'මෙම සහතිකයේ ගබඩා කිරීමට' (this certificate's storage) is not the most natural phrasing. It's overly literal. A more natural way to say 'add this certificate to certificate store' would be 'මෙම සහතිකය සහතික ගබඩාවට එක් කිරීමට'.",
-          "suggestion": "මෙම සහතිකය සහතික ගබඩාවට එක් කිරීමට"
+          "description": "The translation 'මෙම සහතිකයේ ගබඩා කිරීමට සහ පරිශීලකයා ආනයනය කිරීම සමඟ ඉදිරියට යාමට ඔබට අවශ්‍යද?' is not a natural or accurate translation of \"Do you want to add this certificate to certificate store and continue with user import?\". The phrasing is awkward. 'පරිශීලකයා ආනයනය කිරීම සමඟ' is a literal and less common way of saying 'user import'.",
+          "suggestion": "හැටිපත ඇතුළත් කිරීම හා පරිශීලකයා ආනයනය කිරීම కొనసాగಿಸಲು ඔබට අවශ්‍යද? (Hati pata athulatha kirimu ha pariseelakaya aanayanya kirimunu saksaagarala aanuva de)"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'පරිශීලකයා ආනයනය කිරීම සමඟ ඉදිරියට යාමට' (with user import to go forward) is awkward. It's better to use a more concise and natural phrasing.",
-          "suggestion": "පරිශීලකයා ආනයනය කරමින් ඉදිරියට යාමට"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "Combining both suggestions from above, the entire translation is not as natural as it could be. The phrasing feels clunky and not idiomatic Sinhala.",
-          "suggestion": "මෙම සහතිකය සහතික ගබඩාවට එක් කර පරිශීලකයා ආනයනය කරමින් ඉදිරියට යාමට ඔබට අවශ්‍යද?"
+          "type": "grammar",
+          "description": "The use of 'හා' (and) feels slightly clunky. It could be rephrased for a more fluid sentence.",
+          "suggestion": "හැටිපත ඇතුළත් කිරීම හා පරිශීලකයා ආනයනය කිරීම కొనసాగಿಸಲು ඔබට අවශ්‍යද? (Hati pata athulatha kirimu ha pariseelakaya aanayanya kirimunu saksaagarala aanuva de)"
         }
       ],
       "approved_at": null
@@ -187,31 +188,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'potrdilo' is correctly spelled, but contextually it might be slightly formal. While not strictly incorrect, a more conversational alternative might improve user experience.",
+          "suggestion": "Consider 'certifikat' as a potentially more accessible alternative, although 'potrdilo' is technically correct."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'складиште' (skladiste) which translates to 'storage' or 'repository' in this context, is a valid word but may not be the most natural or user-friendly term for 'certificate store'. While technically correct, it can be perceived as overly technical for a general user.",
-          "suggestion": "Consider using a more user-friendly term like 'спремиште' (spremište) which translates more closely to 'repository' or 'container' or 'контејнер' (container)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'sertifikat' is a misspelling of 'sertifikat'.",
-          "suggestion": "sertifikat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

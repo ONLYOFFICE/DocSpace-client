@@ -3,7 +3,7 @@
   "content": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
   "content_en_sha1_hash": "60714cd70ca7d13efc48745ab7823e95ca812d51",
   "created_at": "2025-05-19T21:30:53.442Z",
-  "updated_at": "2025-05-21T05:52:40.714Z",
+  "updated_at": "2025-06-02T10:20:51.617Z",
   "comment": {
     "text": "The PreparationPortalDescription translation key is used to display a message that will be shown after the restoring process is complete, informing users that they will be automatically redirected to their product name. This text appears in the UI on a screen where a progress indicator and percentage are displayed, likely on a preparation portal page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 152,
-      "context": "<div className=\"preparation-portal_progress-line\" />\n </div>\n <Text className=\"preparation-portal_percent\">{`${percent} %`}</Text>\n </div>\n <Text className=\"preparation-portal_text\">\n {t(\"PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n </ColorTheme>\n );",
+      "line_number": 143,
+      "context": "const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (\n <PreparationPortalProgress\n text={t(\"PreparationPortalDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n percent={percent}\n />\n );",
       "module": "/packages/shared"
     }
   ],
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Czech translation uses 'Váš' which is the informal possessive pronoun. It should be 'Vaše' to maintain a formal tone, consistent with the context of a portal.",
-          "suggestion": "Po ukončení procesu obnovy, budete automaticky přesměrováni na Vaše {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Spanish translation uses the formal 'usted' which might not be appropriate for all users. Consider using the informal 'tú' for a more conversational tone, or assessing the target audience to determine the correct level of formality.",
-          "suggestion": "Consider replacing 'usted será' with 'tú serás' or evaluating the appropriate formality for the target audience."
+          "description": "The passive voice 'usted será redirigido' is somewhat stiff and less common in modern Spanish. A more natural phrasing would be using an active voice.",
+          "suggestion": "Una vez terminado el proceso de restauración, te redirigiremos a tu {{productName}}."
         }
       ],
       "approved_at": null
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Siinä vaiheessa kun' is a rather verbose and slightly awkward way to say 'Once'. A more natural Finnish phrasing would improve readability.",
-          "suggestion": "Kun palautus on valmis, sinut siirretään automaattisesti {{productName}}."
+          "description": "The phrase \"Siinä vaiheessa kun\" is a somewhat verbose and unnatural way to say \"Once\" in this context. A more natural translation would be something like \"Kun\" or \"Heti kun\".",
+          "suggestion": "Kun palautuksen prosessi on ohi, sinut siirretään automaattisesti {{productName}}."
         }
       ],
       "approved_at": null
@@ -96,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The French translation uses 'est terminé', which is grammatically incorrect. It should be 'est terminée' to agree with 'processus' (masculine).",
+          "description": "The French translation uses 'est terminé' which is grammatically incorrect in this context. It should be 'est terminée' to agree with 'processus' (masculine).",
           "suggestion": "Une fois le processus de restauration est terminée, vous serez automatiquement redirigé vers votre {{productName}}."
         }
       ],
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"redirected to your\" is not accurate. \"포털로 자동으로\" implies redirection *to* a portal, not the user's own instance of the product.",
-          "suggestion": "복원 과정이 끝나면 {{productName}}으로 자동으로 리디렉션됩니다."
+          "description": "The translation of \"redirected\" is not ideal. \"리디렉션됩니다\" is a direct transliteration of 'redirect' and might not be the most natural way to express the idea in Korean. A more common and natural phrasing would be \"이동됩니다\" or \"넘어갑니다\".",
+          "suggestion": "복원 과정이 끝나면 포털로 자동으로 {{productName}}로 이동됩니다."
         }
       ],
       "approved_at": null
@@ -156,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Polish sentence uses the masculine form 'przekierowany' (redirected) which assumes the user is male. It should be gender-neutral or use a more inclusive form.",
+          "description": "The sentence uses the masculine form 'przekierowany'. Assuming the user can be male or female, it should be gender-neutral.",
           "suggestion": "Po zakończeniu procesu przywracania zostaniesz automatycznie przekierowany/a do {{productName}}."
         }
       ],
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'Uma vez que o processo de restauração tenha terminado' is grammatically a bit awkward. While technically correct, it's not the most natural way to express this in Portuguese.",
-          "suggestion": "Após a conclusão do processo de restauração, você será automaticamente redirecionado para o {{productName}}."
+          "description": "The phrase 'Uma vez que' can sound slightly formal or clunky in this context. While grammatically correct, a more natural phrasing would improve readability.",
+          "suggestion": "Assim que o processo de restauração terminar, você será automaticamente redirecionado para o {{productName}}."
         }
       ],
       "approved_at": null
@@ -195,7 +189,18 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ප්‍රත්‍යර්පණ' is a complex term. While it's generally understood as 'restoration', a more common and accessible term in this context might be 'නැවත සකස් කිරීම' or 'අලුත්වැඩියාව'.",
+          "suggestion": "Consider replacing 'ප්‍රත්‍යර්පණ' with 'නැවත සකස් කිරීම' or 'අලුත්වැඩියාව' for improved clarity."
+        },
+        {
+          "type": "grammar",
+          "description": "While the sentence structure is technically correct, it might sound a little formal for a user-facing message. A slightly more conversational tone could be beneficial.",
+          "suggestion": "Consider restructuring the sentence to something like: 'ඔබගේ {{productName}} වෙත යවා දීමට, ප්‍රත්‍යර්පණ ක්‍රියාවලිය අවසානයේ ඔබව ස්වයංක්‍රීයව යවා දමනු ඇත.' (After the restoring process is complete, you will automatically be redirected to your {{productName}}.)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

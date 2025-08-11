@@ -3,7 +3,7 @@
   "content": "Room template <1>«{{title}}»</1> saved",
   "content_en_sha1_hash": "496cf170e612670afa1b398b24d8e9cdd2c96d27",
   "created_at": "2025-05-19T21:30:56.171Z",
-  "updated_at": "2025-05-21T11:15:19.646Z",
+  "updated_at": "2025-05-24T11:24:45.222Z",
   "comment": {
     "text": "This translation key is used to display a success toast notification when a room template is saved as a template in the UI. The notification includes the title of the saved template and is displayed after saving. It appears in the application's global events section.",
     "is_auto": true,
@@ -29,9 +29,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in both the English and Arabic translations, which is consistent, but should be verified for relevance to the application’s UI. It's possible these tags are only for display in a specific editor and should be removed from the final user-facing text.",
-          "suggestion": "Verify the purpose of the angle brackets and consider removing them if they are only for editor display."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Room template' is translated as 'قالب الغرفة' which is generally correct, but a more natural translation for a UI element in this context might be 'نموذج غرفة'.",
+          "suggestion": "نموذج غرفة"
         }
       ],
       "approved_at": null
@@ -42,8 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets <1> and </1> are present in both the English and Azerbaijani content. While technically correct, they appear to be for internal markup and may not be intended for display to the user. Consider removing them if they are unnecessary in the user interface.",
-          "suggestion": "Remove the <1> and </1> tags from the Azerbaijani translation if they are not necessary for display."
+          "description": "The HTML tags <1> and </1> are present in both the English and Azerbaijani, which is acceptable. However, ensure consistency in usage across all translations for this key.",
+          "suggestion": "Ensure consistent use of HTML tags throughout all translations for 'Files:SaveAsTemplateToast'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Otaq' is a valid word for 'Room', the translation might sound a bit formal. Consider if a more colloquial term would be more appropriate based on the application's tone.",
+          "suggestion": "Consider 'Xətt' or 'Otaq' depending on desired formality and target audience."
         }
       ],
       "approved_at": null
@@ -51,7 +56,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The tags <1> and </1> are present in both the English and Bulgarian versions. While technically correct, it's worth investigating *why* they are there and whether they are necessary for the intended functionality. They might be rendering artifacts or unnecessary markup.",
+          "suggestion": "Investigate the purpose of the <1> and </1> tags and determine if they are required. If they are simply for rendering and aren't functionally critical, consider removing them for cleaner output."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -66,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The German translation maintains the XML tags `<1>` and `</1>` just like the English content, which may not be desirable depending on the context and rendering requirements. While technically correct, it's worth checking if this is the intended behavior.",
-          "suggestion": "Consider removing or adjusting the XML tags if they are not essential for display."
+          "description": "The German translation retains the HTML tags `<1>` and `</1>` which should be considered for localization and potential removal or replacement with a more appropriate formatting.",
+          "suggestion": "Evaluate if the HTML tags `<1>` and `</1>` are necessary in the German context. If not, remove them."
         }
       ],
       "approved_at": null
@@ -78,8 +89,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Greek translation retains the HTML tags `<1>` and `</1>` just like the English content. While technically correct, this might not be necessary or desirable in the Greek user interface. It's worth considering removing them or adjusting the rendering.",
-          "suggestion": "Consider removing or adjusting the rendering of the HTML tags `<1>` and `</1>` to improve the UI's aesthetics and readability.  The content 'Room template' could potentially be integrated directly into the sentence."
+          "description": "The Greek translation retains the HTML tags '<1>' and '</1>' just like the English source. While technically correct, it's generally better to remove these tags in the translated text unless they are essential for the UI.",
+          "suggestion": "Remove the HTML tags '<1>' and '</1>'. The translated text should be: 'Το πρότυπο δωματίου «{{title}}» αποθηκεύτηκε'"
         }
       ],
       "approved_at": null
@@ -90,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English \"Room\" is translated as \"Sala\" (room) which is technically correct but might be better translated to something more specific to templates, like \"Modelo\" (model) or \"Diseño\" (design). The best option depends on the specific context.",
-          "suggestion": "Consider translating 'Room' as 'Modelo' or 'Diseño' for better clarity within the template context."
+          "description": "The English 'Room template' is better translated as 'Plantilla de habitación' rather than 'Plantilla de sala'. 'Sala' can mean 'living room,' which is too specific.",
+          "suggestion": "Plantilla de habitación <1>«{{title}}»</1> guardada"
         }
       ],
       "approved_at": null
@@ -99,19 +110,19 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Finnish translation retains the HTML tags '<1>' and '</1>' identical to the English source. While technically correct, it's unusual and potentially unnecessary in a toast notification in Finnish. Consider removing or adapting them for a more natural user experience.",
-          "suggestion": "Consider removing the tags or adapting them to be more suitable for a Finnish toast notification. For example, if the HTML tags are simply intended to enclose a dynamic variable, it might be better to integrate the variable directly into the text without using tags."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets \"<1>\" and \"</1>\" are present in the French translation but should be identical to the English version in terms of positioning and content.",
+          "suggestion": "Ensure the tags match the English version exactly: 'Modèle de salle <1>«{{title}}»</1> enregistré'."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -120,13 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'կաղապարը' (template) should be preceded by a definite article to match the English sentence structure. The English uses 'Room template' which implies a specific room template. The Armenian translation needs a definite article for 'կաղապար'.",
-          "suggestion": "Սենյակի <1>«{{title}}»</1> կաղապարը պահպանվել է"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'պահպանված է' (saved) is in passive voice. While technically correct, 'պահպանվել է' is a more natural and common way to express 'saved' in this context.",
-          "suggestion": "Սենյակի <1>«{{title}}»</1> կաղապարը պահպանվել է"
+          "description": "The word 'կաղապարը' (template) is in the definite form, implying a specific template. The English suggests a more general 'template'.",
+          "suggestion": "Սենյակի <1>«{{title}}»</1> կաղապար է պահպանվել"
         }
       ],
       "approved_at": null
@@ -137,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are inconsistent with the English content. The English uses `<1>` and `</1>`, while the Italian uses `<1>` and `</1>`. This could lead to rendering issues.",
-          "suggestion": "Ensure the HTML tags match the original English content: `<1>` and `</1>`."
+          "description": "The Italian translation retains the HTML tags `<1>` and `</1>` identical to the English source. This suggests they should be reviewed to determine if they are necessary or appropriate for the target language and context.  They may be extraneous and could impact readability.",
+          "suggestion": "Review the necessity of the `<1>` and `</1>` tags. If they are meant to be removed, the translation should be 'Modello di stanza «{{title}}» salvato'."
         }
       ],
       "approved_at": null
@@ -149,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation maintains the XML tags (<1>«{{title}}»</1>) which should ideally be removed or handled more gracefully depending on the intended display.  While technically correct, it's likely unnecessary and visually jarring.",
-          "suggestion": "Consider removing the XML tags or replacing them with a more appropriate display format, depending on how the toast is rendered."
+          "description": "The HTML tags <1>«{{title}}»</1> are identical in both the English and Japanese translations. This suggests the tags were not meant to be translated and should be handled differently (e.g., left as is, removed, or replaced with a different tag).",
+          "suggestion": "Investigate the purpose of the HTML tags and determine if they should be translated or handled differently. If they are purely formatting and not part of the text, consider removing them or using a more appropriate tag if necessary."
         }
       ],
       "approved_at": null
@@ -160,14 +166,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Korean translation retains the HTML tags `<1>` and `</1>` from the English content. This is unnecessary and disrupts the natural flow of the Korean sentence.",
-          "suggestion": "Remove the HTML tags `<1>` and `</1>` from the Korean translation. The sentence should read: «{{title}}» 룸 템플릿이 저장되었습니다"
+          "type": "incorrect_translation",
+          "description": "The translation \"룸 템플릿이 저장되었습니다\" is a passive construction and doesn't directly correspond to the English 'saved'. A more accurate translation might use a more active voice.",
+          "suggestion": "룸 템플릿을 저장했습니다"
         },
         {
-          "type": "incorrect_translation",
-          "description": "While '룸 템플릿' is a reasonable translation for 'Room template', it is slightly less natural than alternatives.",
-          "suggestion": "Consider using '방 템플릿' instead of '룸 템플릿'. '방' is a more common and natural word for 'room' in this context."
+          "type": "formatting",
+          "description": "The Korean translation includes the same tags as the English, which might be unnecessary and could cause formatting issues in the target environment.  It's unclear if these tags are supposed to be preserved.",
+          "suggestion": "Consider removing the <1> and </1> tags if they are not required for the application's functionality."
         }
       ],
       "approved_at": null
@@ -177,9 +183,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ບັນທຶກແມ່ແບບຫ້ອງ <1>«{{title}}»</1> ແລ້ວ' translates to 'Room template <1>«{{title}}»</1> saved' which is too literal.  A more natural Lao phrasing would emphasize the completion of the saving action.  'ແລ້ວ' at the end can sometimes feel abrupt and less conversational in this context.  While not strictly incorrect, it's not ideal.",
-          "suggestion": "ບັນທຶກແມ່ແບບຫ້ອງ <1>«{{title}}»</1> ໄວ້ແລ້ວ (Ban-thuk mae-baen hong <1>«{{title}}»</1> wai laeo) - This translates to 'Room template <1>«{{title}}»</1> saved (successfully)' and sounds more natural."
+          "type": "formatting",
+          "description": "The Lao translation includes 'ແລ້ວ' (laew) which translates to 'already' or 'done'. While not strictly incorrect, it might be unnecessary in this context as it's a notification. Removing it would make the translation more concise and consistent with typical UI toast messages.",
+          "suggestion": "ບັນທຶກແມ່ແບບຫ້ອງ <1>«{{title}}»</1>"
         }
       ],
       "approved_at": null
@@ -190,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The tags <1> and </1> are present in both the English and Latvian versions. This suggests they might be placeholders for dynamic content that should be preserved. However, their necessity in the final UI should be verified.",
-          "suggestion": "Verify if the tags <1> and </1> are required for the UI rendering and if so, ensure they are handled correctly in the Latvian version."
+          "description": "The angle brackets `<1>` and `</1>` are not localized, and should ideally be replaced with a Latvian equivalent for 'Room template' if applicable, or remain as is if they are part of the technical markup that shouldn't be translated. Assuming they should remain, they are correct.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -199,13 +205,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are present in both the English and Dutch versions. While technically correct in terms of mirroring the structure, they might not be necessary or stylistically preferred in the Dutch UI. Consider if they are essential for functionality or visual representation.",
-          "suggestion": "Evaluate if the `<1>` and `</1>` tags are required. If not, remove them for cleaner UI."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -220,13 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English word \"saved\" is best translated as \"salvo\" or \"salva\" depending on the gender of the template, rather than \"guardados\". 'Guardados' implies something being stored, not saved.  'Salvo' for masculine template names or 'salva' for feminine would be more accurate.",
-          "suggestion": "Templates de sala <1>«{{title}}»</1> salvo(a)"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation preserves the HTML tags from the English source exactly, which may not be ideal for localization. Consider whether these tags are necessary in the Portuguese context.",
-          "suggestion": "Remove unnecessary HTML tags. E.g., \"Templates de sala «{{title}}» salvos\""
+          "description": "The English 'saved' is better translated as 'salvo' to match the verb tense and meaning of 'guardados'. 'Guardados' implies a more general storage, while 'salvo' implies a successful save action.",
+          "suggestion": "Templates de sala <1>«{{title}}»</1> salvos"
         }
       ],
       "approved_at": null
@@ -234,13 +229,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Room template\" is better translated as \"Template de sala\" rather than \"Modelo de sala\". While 'modelo' is a valid translation of 'template', 'template de sala' is a more natural and common phrasing in Portuguese (Brazil).",
-          "suggestion": "Template de sala <1>«{{title}}»</1> salvo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -249,23 +238,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>` are present in both the English and Romanian, which is appropriate for maintaining the structure. However, it's important to ensure this structure is properly handled in the UI.",
-          "suggestion": "Verify the UI displays the angle bracket structure as intended, or remove if not necessary.  If it's intended to indicate placeholder, ensure that's clear."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'sală' (room) is correctly spelled. No spelling errors found.",
-          "suggestion": "N/A"
-        },
-        {
-          "type": "grammar",
-          "description": "The grammar is correct. The phrase \"a fost salvat\" correctly translates to 'was saved'.",
-          "suggestion": "N/A"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'sală' is a good general translation for 'room', it's possible that a more specific term might be more suitable depending on the context of the template. Consider if 'room' refers to a specific type of room.",
-          "suggestion": "Consider context and potential alternatives like 'camera', 'spațiu', or 'locație' if a more specific translation is needed."
+          "description": "The HTML tags '<1>' and '</1>' appear unchanged in the translation, which should ideally be adapted to Romanian conventions if applicable. While not strictly incorrect, it's better to ensure consistency with Romanian UI conventions.",
+          "suggestion": "Consider whether these tags need adjustment for Romanian UI conventions. If the Romanian UI uses different tags for similar functionality, replace them accordingly. If not, it's acceptable to keep them as is but a review is still recommended."
         }
       ],
       "approved_at": null
@@ -282,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'සුරක්ෂිත කෙරිණි' translates to 'was saved'. The English says 'saved', implying a present tense action. While the difference is subtle, using the present tense 'සුරක්ෂිත වේ' would be more aligned with the English.",
-          "suggestion": "Room template <1>«{{title}}»</1> සුරක්ෂිත වේ"
+          "description": "The English phrase \"saved\" is not accurately translated. \"සුරක්ෂිත කෙරිණි\" translates to 'secured' or 'protected'.  'Saved' implies a storage action, which 'සුරක්ෂිත කෙරිණි' doesn't fully convey. A more accurate translation would involve words that specifically mean 'saved' or 'stored'.",
+          "suggestion": "Consider alternatives like \"ගබඩා කෙරිණි\" (gabadā keriṇi - stored) or \"සංරක්ෂණය කෙරිණි\" (sanrakṣaṇaya keriṇi - preserved/archived)."
         }
       ],
       "approved_at": null
@@ -291,13 +265,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovak translation retains the XML-like tags (<1>«{{title}}»</1>) from the English source. These tags likely represent placeholders and should not be part of the displayed text in the Slovak version.  They are unnecessary and confusing to the user.",
-          "suggestion": "Remove the tags <1>«{{title}}»</1> from the Slovak translation. The translated text should only be 'Šablóna miestnosti {{title}} uložená'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -312,13 +280,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"собе\" is not the correct translation for \"Room\". It appears to be a shortened or incorrect form. \"Соба\" is also not correct. The appropriate translation would likely be \"просторија\" or potentially \"амбијент\" depending on the context, but \"просторија\" is more generally applicable.",
-          "suggestion": "Шаблон просторије <1>«{{title}}»</1> сачуван"
+          "description": "The word \"собе\" is unusual and doesn't accurately translate \"Room\". It's unclear what it refers to.  \"Soba\" doesn't have a direct translation related to 'room' in this context. It's likely a misunderstanding or a corrupted word.",
+          "suggestion": "Consider using a more appropriate word for 'Room', such as 'Соба' (Soba) which could be interpreted as 'space' or 'area', or use a more literal translation based on context. Without more context, it's difficult to provide the perfect translation, but 'просторија' (prostorija) might be a safer, more accurate option. Alternatively, 'Простор' (Prostor) meaning 'space' could be suitable."
         },
         {
           "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are present in both the original and translation, which is fine. However, consider if this is truly necessary for the user interface. It might be better to remove them if they serve no purpose other than being placeholders for some internal system.",
-          "suggestion": "Шаблон просторије «{{title}}» сачуван (remove HTML tags if unnecessary)"
+          "description": "The `<1>` and `</1>` tags seem to be retained from the original English content.  This may not be necessary or understandable in the Serbian translation.",
+          "suggestion": "Remove the `<1>` and `</1>` tags if they serve no purpose in the Serbian context. If they are intended to mark a specific part of the sentence, make sure the Serbian equivalent is used."
         }
       ],
       "approved_at": null
@@ -329,13 +297,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are present in the Serbian translation and should match the English, indicating the placeholder for a dynamic value.",
-          "suggestion": "No change needed, maintains original format."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'sačuvan' is a valid translation for 'saved', a more natural-sounding translation for this context would be 'spremljen'. 'Sačuvan' often implies preservation for a longer period.",
-          "suggestion": "Šablon sobe <1>«{{title}}»</1> spremljen"
+          "description": "The HTML tags <1> and </1> are inconsistent in casing. They should be consistently lowercase.",
+          "suggestion": "Change </1> to </1>."
         }
       ],
       "approved_at": null

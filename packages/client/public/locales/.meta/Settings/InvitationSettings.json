@@ -2,12 +2,12 @@
   "key_path": "InvitationSettings",
   "content": "Invitation Settings",
   "content_en_sha1_hash": "8a0e33d62c6b19c6f0e574b7a75348dbf29f66a4",
-  "created_at": "2025-05-28T09:33:04.830Z",
-  "updated_at": "2025-07-02T07:49:19.835Z",
+  "created_at": "2025-05-26T07:15:51.069Z",
+  "updated_at": "2025-08-04T07:30:01.477Z",
   "comment": {
-    "text": "The \"InvitationSettings\" translation key is used to display the title of a section related to invitation settings in a security access portal. This title appears on a mobile view and is part of a category list. The translator should ensure that this text accurately reflects the content and functionality of the UI component.",
+    "text": "The \"InvitationSettings\" translation key is used to display the title of a section within a security settings page, providing access to invitation settings. This title appears on a mobile view screen and can be translated for different languages. It is used as a heading for a category related to security features in an access portal.",
     "is_auto": true,
-    "updated_at": "2025-05-28T09:39:04.699Z"
+    "updated_at": "2025-05-26T08:10:08.812Z"
   },
   "usage": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/mobileView.js",
-      "line_number": 95,
+      "line_number": 96,
       "context": "}\n url=\"/portal-settings/security/access-portal/access-dev-tools\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"InvitationSettings\")}\n subtitle={\n <Trans\n i18nKey=\"InvitationSettingsMobile\"\n ns=\"Settings\"\n t={t}",
       "module": "/packages/client"
     },

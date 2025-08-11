@@ -265,7 +265,6 @@ const SetRoomParams = ({
 
     if (newValue.match(folderFormValidation)) {
       setIsWrongTitle(true);
-      // toastr.warning(t("Files:ContainsSpecCharacter"));
     } else {
       setIsWrongTitle(false);
     }
@@ -369,6 +368,7 @@ const SetRoomParams = ({
         withEditing
         model={isEditRoomModel}
         onChangeFile={onChangeFile}
+        dataTestId="create_edit_room_icon"
       />
     ) : (
       <RoomIcon
@@ -401,6 +401,7 @@ const SetRoomParams = ({
         }
         onChangeFile={onChangeFile}
         currentColorScheme={currentColorScheme}
+        dataTestId="create_edit_room_icon"
       />
     );
 
@@ -456,11 +457,12 @@ const SetRoomParams = ({
           onBlur={() => setForceHideRoomTypeDropdown(false)}
           errorMessage={
             isWrongTitle
-              ? t("Files:ContainsSpecCharacter")
+              ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
           onKeyUp={onKeyUp}
           isAutoFocussed
+          dataTestId="create_edit_room_input"
         />
       </div>
 
@@ -472,6 +474,7 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
         onFocus={() => setForceHideRoomTypeDropdown(true)}
         onBlur={() => setForceHideRoomTypeDropdown(false)}
+        dataTestId="create_edit_room_tags_input"
         tooltipLabel={
           isTemplateSelected || isTemplate ? t("Files:RoomTagsTooltip") : ""
         }
@@ -553,6 +556,7 @@ const SetRoomParams = ({
             disableImageRescaling={disableImageRescaling}
             visible={roomParams.icon.uploadedFile}
             maxImageSize={maxImageUploadSize}
+            dataTestId="create_edit_room_avatar_editor"
           />
         ) : null}
       </div>

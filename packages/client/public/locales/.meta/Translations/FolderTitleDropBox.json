@@ -3,7 +3,7 @@
   "content": "Dropbox directory",
   "content_en_sha1_hash": "1a991dfb32e8cd8808fd95385917355bc689cb86",
   "created_at": "2025-05-19T21:30:49.974Z",
-  "updated_at": "2025-06-03T20:59:41.987Z",
+  "updated_at": "2025-05-26T07:57:32.387Z",
   "comment": {
     "text": "This translation key is used to display the title of a Dropbox directory. It appears as part of file names or folder labels in the application, and its value will be translated by users based on their language settings.",
     "is_auto": true,
@@ -48,7 +48,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Adresář\" technically translates to 'directory', it's a more formal and less commonly used term in Czech for user interfaces. \"Složka Dropbox\" or \"Dropbox složka\" would be more natural and user-friendly.",
+          "description": "While \"Adresář\" technically translates to 'directory,' it's a more formal and less common term in everyday Czech usage. 'Složka Dropbox' would be more natural and easily understood by most users.",
           "suggestion": "Složka Dropbox"
         }
       ],
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Dropbox գրացուցակ' literally translates to 'Dropbox list'. While understandable, 'directory' implies a more structured folder system than just a 'list'. A more accurate translation might convey the concept of a folder structure.",
-          "suggestion": "Dropbox պանակներ (Dropbox panakers)"
+          "description": "The translation 'Dropbox գրացուցակ' while technically meaning 'Dropbox list', doesn't accurately convey the meaning of 'Dropbox directory'. 'Directory' implies a folder structure, which is more accurate than just 'list'.",
+          "suggestion": "Dropbox պանակ (Dropbox panak)"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໄດເລກະທໍລີ Dropbox\" is a direct transliteration of 'directory' and 'Dropbox' rather than a natural Lao equivalent. A more accurate and idiomatic translation would be something like 'ໂຟນເອກະໂຕຂອງ Dropbox' (phone directory of Dropbox) or 'ບ່ອນເກັບຂໍ້ມູນ Dropbox' (Dropbox storage).",
-          "suggestion": "ໂຟນເອກະໂຕຂອງ Dropbox"
+          "description": "The Lao translation \"ໄດເລກະທໍລີ Dropbox\" is a direct transliteration of \"directory Dropbox\" rather than a proper translation of \"Dropbox directory.\" A more accurate translation would convey the meaning of a folder or location within Dropbox.",
+          "suggestion": "Possible suggestions include: \"ໂຟນເດີ Dropbox\" (Folder Dropbox), \"ບ່ອນເກັບຂໍ້ມູນ Dropbox\" (Dropbox storage location), or \"ໄດເລກະທໍລີໃນ Dropbox\" (Directory in Dropbox)."
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Dropbox' is a proper noun and should not be translated. The translation currently includes 'da Dropbox,' which is grammatically incorrect and changes the meaning.",
+          "description": "The translation 'Diretório da Dropbox' is technically correct but could be improved for naturalness in Brazilian Portuguese. 'Diretório Dropbox' is a more common and fluent phrasing.",
           "suggestion": "Diretório Dropbox"
         }
       ],
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Director Dropbox' does not accurately convey the meaning of 'Dropbox directory'. 'Director' implies a person, not a directory. A more accurate translation would include a word indicating a folder or location.",
-          "suggestion": "Posible suggestions include: 'Dosar Dropbox', 'Folder Dropbox', 'Locație Dropbox' or 'Directorul Dropbox' (if the intention is to explicitly state it's a directory)."
+          "description": "The Romanian translation \"Director Dropbox\" is not an accurate translation of \"Dropbox directory.\" \"Director\" implies a person or management role, whereas \"directory\" refers to a folder or location. A more appropriate translation would convey the concept of a folder or location within Dropbox.",
+          "suggestion": "Posible suggestions: \"Dosar Dropbox\", \"Folder Dropbox\", \"Cale Dropbox\""
         }
       ],
       "approved_at": null
@@ -186,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ඩ්‍රොප්බොක්ස් නාමාවලිය\" (DropBox Namavaliya) is understandable, it literally translates to 'Dropbox list'. 'Directory' implies a collection of files and folders, and a more accurate translation would be something like \"ඩ්‍රොප්බොක්ස් ෆෝල්ඩර්\" (DropBox Folder) or \"ඩ්‍රොප්බොක්ස් ලිපිගබඩාව\" (DropBox Repository).",
+          "description": "The translation 'ඩ්‍රොප්බොක්ස් නාමාවලිය' literally translates to 'Dropbox list'. While understandable, 'directory' implies a folder structure, which 'නාමාවලිය' (list) doesn't fully convey. A more accurate translation would incorporate the concept of a folder or collection.",
           "suggestion": "ඩ්‍රොප්බොක්ස් ෆෝල්ඩර්"
         }
       ],
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'директоријум' is less common and sounds slightly formal/technical for a folder title in a user interface. A more natural and common term would be 'фасцикула'.",
+          "description": "The Serbian translation 'Dropbox директоријум' while technically correct, is not the most natural or commonly used phrasing. A more common and idiomatic translation would be 'Dropbox фасцикула' or 'Dropbox директоријум' (using Latin script would be more standard).",
           "suggestion": "Dropbox фасцикула"
         }
       ],

@@ -90,7 +90,7 @@ class ServicesStore {
     this.partialUpgradeFee = partialUpgradeFee;
   };
 
-  setVisibleWalletSetting = (isVisibleWalletSettings) => {
+  setVisibleWalletSetting = (isVisibleWalletSettings: boolean) => {
     this.isVisibleWalletSettings = isVisibleWalletSettings;
   };
 
@@ -130,10 +130,10 @@ class ServicesStore {
       isAlreadyPaid,
       initWalletPayerAndBalance,
       handleServicesQuotas,
-    } = this.paymentStore;
+    } = this.paymentStore!;
 
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
-      this.currentTariffStatusStore;
+      this.currentTariffStatusStore!;
 
     const requests = [
       handleServicesQuotas(),
@@ -147,18 +147,18 @@ class ServicesStore {
       if (!quotas) throw new Error();
 
       if (isAlreadyPaid) {
-        if (this.paymentStore.isStripePortalAvailable) {
+        if (this.paymentStore!.isStripePortalAvailable) {
           requests.push(setPaymentAccount());
 
-          if (this.paymentStore.isPayer && walletCustomerStatusNotActive) {
+          if (this.paymentStore!.isPayer && walletCustomerStatusNotActive) {
             requests.push(fetchCardLinked());
           }
 
           if (
-            this.paymentStore.isShowStorageTariffDeactivated() &&
-            this.paymentStore.isPayer
+            this.paymentStore!.isShowStorageTariffDeactivated() &&
+            this.paymentStore!.isPayer
           ) {
-            this.paymentStore.setIsShowTariffDeactivatedModal(true);
+            this.paymentStore!.setIsShowTariffDeactivatedModal(true);
           }
         }
         requests.push(fetchAutoPayments());

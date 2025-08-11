@@ -85,8 +85,8 @@ const CurrentPaymentSettings = ({
       </div>
       <Text fontSize="12px" fontWeight={400} className={styles.infoDescription}>
         {t("WhenBalanceDropsTo", {
-          min: formatWalletCurrency(minBalance, 0),
-          max: formatWalletCurrency(upToBalance, 0),
+          min: formatWalletCurrency!(minBalance, 0),
+          max: formatWalletCurrency!(upToBalance, 0),
         })}
       </Text>
     </div>
@@ -177,7 +177,7 @@ const AutoPayments = ({
     if (!validity.valid) return;
 
     setUpToBalance!(value);
-    validateMaxUpToBalance(value, minBalance);
+    validateMaxUpToBalance(value, minBalance!);
   };
 
   const onSave = async (isEnable: boolean = true) => {
@@ -241,8 +241,8 @@ const AutoPayments = ({
       fontWeight={400}
     >
       {t("EnterAnIntegerAmountBetween", {
-        min: formatWalletCurrency(min, 0),
-        max: formatWalletCurrency(max, 0),
+        min: formatWalletCurrency!(min, 0),
+        max: formatWalletCurrency!(max, 0),
       })}
     </Text>
   );

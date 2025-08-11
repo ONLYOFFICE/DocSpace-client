@@ -3,7 +3,7 @@
   "content": "Invalid email or expired link",
   "content_en_sha1_hash": "c0a2370e7342390662dccc58db6ad239d084d6a5",
   "created_at": "2025-05-19T21:30:57.274Z",
-  "updated_at": "2025-05-28T09:30:02.895Z",
+  "updated_at": "2025-05-26T07:57:32.881Z",
   "comment": {
     "text": "The \"ErrorConfirmURLError\" translation key is used to display an error message when a user tries to confirm a URL that has expired or is invalid. This message appears as part of an error dialog or alert when the user attempts to perform an action involving the potentially incorrect link, such as logging in to an account.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Etibarsız elektron poçt və ya vaxtı keçmiş keçid' is a literal translation but doesn't quite convey the intended meaning of 'Invalid email or expired link' in a natural-sounding way for Azerbaijani. 'Invalid email' is better expressed as 'Yanlış e-poçt' or 'Xətali e-poçt'.",
+          "suggestion": "Yanlış e-poçt və ya vaxtı keçmiş keçid"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,7 +51,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Neplatný e-mail nebo odkaz, kterému vypršela platnost' is overly literal and slightly awkward in Czech.  While technically correct, a more natural phrasing would improve readability.",
+          "suggestion": "Neplatný e-mail nebo prošlý odkaz"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -81,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Անվավեր էլ․ հասցե կամ ժամկետանց հղում\" is a literal translation but might not be the most natural way to express \"Invalid email or expired link\" in Armenian.  The abbreviation 'էլ' for 'էլեկտրոնային' (electronic) can sound a bit abrupt. It's also common to use 'չաշխատող' (not working) for 'invalid' in this context.",
+          "suggestion": "Consider rephrasing to something like \"Անվավեր էլ․ փոստային հասցե կամ ժամկետանց հղում\" or \"Չաշխատող էլ․ փոստային հասցե կամ ժամկետանց հղում\"."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +117,18 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of \"expired link\" is not ideal. \"유효 기간이 만료 된 링크\" literally translates to \"link with an expired validity period,\" which is clunky. A more natural translation would be \"만료된 링크\" (manryo doen link) or \"기간이 만료된 링크\" (gigan-i manryo doen link).",
+          "suggestion": "만료된 링크"
+        },
+        {
+          "type": "formatting",
+          "description": "While not technically incorrect, the phrasing \"잘못된 이메일 또는 유효 기간이 만료 된 링크\" could be improved for better flow. It's a bit lengthy and the '또는' (or) feels slightly disconnected.",
+          "suggestion": "잘못된 이메일 또는 만료된 링크"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +170,18 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'e-mail' should be 'e-mail'.",
+          "suggestion": "e-mail"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence construction is slightly awkward. It could be improved for natural flow.",
+          "suggestion": "Adresă de e-mail invalidă sau link expirat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +193,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'වලංගු නොවන හෝ ඉකුත් වූ සබැඳියකි' is a literal translation and doesn't convey the intended meaning of 'Invalid email or expired link' as naturally in Sinhala. It sounds a bit formal and clunky.",
+          "suggestion": "A more natural translation could be 'අවලංගු විද්‍යාත්මක ලිපිනයක් හෝ සbatasොහො ඔත්තේ සබැඳියකි' or 'අවලංගු ලිපිනයක් හෝ අත්හැකි සබැඳියකි'. The best option depends on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +223,23 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'email' is misspelled as 'email' in Serbian. It should be 'e-mail'.",
+          "suggestion": "e-mail"
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'link' is misspelled as 'link' in Serbian. It should be 'link'.",
+          "suggestion": "link"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Nevažeći' is a bit formal for this context. A more conversational translation would be better.",
+          "suggestion": "Pogrešan"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +251,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'сссилки' is a misspelling of 'посилання'.",
+          "suggestion": "Неправильний email або закінчився термін дії посилання"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

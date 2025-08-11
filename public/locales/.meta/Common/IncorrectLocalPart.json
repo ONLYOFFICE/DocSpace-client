@@ -3,7 +3,7 @@
   "content": "Incorrect local part",
   "content_en_sha1_hash": "f295e102907935b47152a237d618a71a6cfb0930",
   "created_at": "2025-05-19T21:30:45.882Z",
-  "updated_at": "2025-08-07T11:27:46.515Z",
+  "updated_at": "2025-08-11T09:02:43.843Z",
   "comment": {
     "text": "This translation key is used to display an error message when a local part of an email address contains incorrect formatting. It appears in dialog boxes where users can change their email addresses. Translators should provide a clear and concise error message that informs users about the issue with their local part.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 179,
+      "line_number": 183,
       "context": "case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"Common:MaxLengthExceeded\");\n default:",
       "module": "/packages/shared"
     }

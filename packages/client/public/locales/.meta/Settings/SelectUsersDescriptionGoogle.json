@@ -3,7 +3,7 @@
   "content": "Check users from the list to import into {{organizationName}} {{productName}}. Users from Google Workspace will be imported without First Name / Last Name, and their email name will be used instead. Names of the users can be changed after the import. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "content_en_sha1_hash": "24b72ad22f9e64bc2e50b7ce28e5cc96671b7535",
   "created_at": "2025-05-19T21:30:52.560Z",
-  "updated_at": "2025-05-28T09:30:02.502Z",
+  "updated_at": "2025-06-30T12:20:31.403Z",
   "comment": {
     "text": "This translation key is used to describe the step in the data import process that allows users to select and import Google Workspace users into {{organizationName}} {{productName}}. It explains how the import will handle user names and highlights existing users within the organization. This text appears on a UI component, likely a stepper or dialog, guiding users through the data import process.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 62,
+      "line_number": 61,
       "context": "/>\n ),\n },\n {\n title: t(\"Settings:SelectUsers\"),\n description: t(\"Settings:SelectUsersDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <SelectUsersStep t={t} canDisable shouldSetUsers />,\n },",
       "module": "/packages/client"
     },
@@ -36,18 +36,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'لاستيرادها إلى' is slightly awkward. It implies importing 'them' (the users) to the organization. A more natural phrasing would indicate importing *into* the organization.",
-          "suggestion": "لاستيرادهم إلى"
+          "description": "The phrase 'لاستيرادها إلى' (li-istiraadiha ila) is slightly awkward. A more natural phrasing would be 'لاستيرادهم إلى' (li-istiraadihim ila) to refer to the users.",
+          "suggestion": "تحقق من المستخدمين من القائمة لاستيرادهم إلى"
         },
         {
           "type": "grammar",
-          "description": "The phrasing 'اسم بريدهم الإلكتروني بدلا من ذلك' is grammatically correct but could be improved for clarity. A more natural phrasing would focus on what's being used instead.",
-          "suggestion": "سيتم استخدام أسمائهم المستندة إلى بريدهم الإلكتروني بدلاً من ذلك"
+          "description": "The phrase 'اسم بريدهم الإلكتروني بدلا من ذلك' (ism bareedhum al-electroni badalan min dhalik) could be improved for clarity. While technically correct, 'اسمهم في البريد الإلكتروني' (ismhum fil bareed al-electroni) might be more easily understood.",
+          "suggestion": "يمكن تغيير أسماء المستخدمين بعد الاستيراد. سيتم استخدام اسمهم في البريد الإلكتروني بدلاً من ذلك."
         },
         {
           "type": "formatting",
-          "description": "Consistency in the use of bolding or specific punctuation for variable placeholders like {{organizationName}} {{productName}} should be reviewed.  While this isn't an error, it can impact readability.",
-          "suggestion": "Ensure consistent formatting of placeholders throughout the translated text."
+          "description": "The sentence structure is slightly verbose. Consider streamlining the phrasing while maintaining accuracy.",
+          "suggestion": "تحقق من المستخدمين من القائمة لاستيرادهم إلى {{organizationName}} {{productName}}. سيتم استيراد المستخدمين من مساحة عمل Google بأسماء بريدهم الإلكتروني. يمكن تغيير أسماء المستخدمين بعد الاستيراد. المستخدمون الموجودون بالفعل في {{organizationName}} {{productName}} مميزون بلون أخضر ولا يتم اختيارهم بشكل افتراضي."
         }
       ],
       "approved_at": null
@@ -57,19 +57,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"email name\" is not accurately translated.  'E-poçt adları' can be interpreted as 'email addresses' rather than the user's name derived from their email.",
-          "suggestion": "Consider translating 'email name' as something like 'e-poçt istifadəçi adı' (email user name) or a phrase that clarifies it's the name extracted from the email."
+          "type": "grammar",
+          "description": "The phrase \"defolt olaraq qeyd olunmur\" is grammatically awkward. It's unclear what it means.",
+          "suggestion": "Artıq mövcud olan istifadəçilər yaşıl rənglə vurğulanır və seçilmədiyi üçün seçilməz."
         },
         {
           "type": "formatting",
-          "description": "The phrase 'default olarak qeyd olunmur' is a direct translation of 'not checked by default' but sounds unnatural in Azerbaijani.  It uses the Turkish loanword 'default' which may be confusing for all readers.",
-          "suggestion": "Rewrite the phrase to something like 'təyin edilmiş (default) şəkildə seçilməyib' (not selected in the defined state) or 'standart olaraq seçilməyib' (not selected as standard) for a more natural flow. Another option is 'başlangıçda seçilməyib' (not selected initially)."
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'idxal' appears multiple times. While technically correct, it's often more appropriate to use 'import' (transliterated to Azerbaijani) in this context, especially when referring to technical processes. This is because 'idxal' can also refer to importing goods.",
-          "suggestion": "Consider replacing instances of 'idxal' with 'import' (transliterated as 'import' or 'import edilməsi') for clarity in a technical context."
+          "description": "The use of \"defolt\" should be corrected to \"default\". While potentially understood by some speakers, it's a spelling error.",
+          "suggestion": "default"
         }
       ],
       "approved_at": null
@@ -80,13 +75,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"входирате\" (vhodirate) is not the most natural or commonly used term for \"import\" in this context.  A more appropriate translation would be \"внос\" (vnos).",
-          "suggestion": "Проверете потребителите от списъка, за да ги внесете в {{organizationName}} {{productName}}."
+          "description": "The term \"входирате\" is used repeatedly, which is not the standard or most natural way to say \"import\" in Bulgarian. While understandable, it sounds somewhat awkward. A better translation would use \"импортирате\".",
+          "suggestion": "Replace all instances of \"входирате\" with \"импортирате\"."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"имейлът им\" is slightly awkward.  A more fluent translation would use a more direct equivalent of 'their email name'.",
-          "suggestion": "и техният имейл."
+          "type": "formatting",
+          "description": "The phrase \"имейлът им\" could be improved for clarity. It is grammatically correct, but slightly less natural.",
+          "suggestion": "Change \"имейлът им\" to \"техният имейл\" or simply \"имейла им\"."
         }
       ],
       "approved_at": null
@@ -97,8 +92,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation uses 'Křestního jména / Příjmení' which is very formal and clunky.  A more natural phrasing would improve readability.",
-          "suggestion": "Use 'Jméno a příjmení' or simply 'jméno' instead of 'Křestního jména / Příjmení'."
+          "description": "The phrase \"Křestního jména / Příjmení\" (First Name / Last Name) is not consistently formatted with a slash, as it's used in the English content. A more consistent approach might be to use a dash or a more natural Czech phrasing.",
+          "suggestion": "Consider rephrasing to 'Křestní jméno – Příjmení' or 'Křestní jméno a Příjmení' for better flow."
         }
       ],
       "approved_at": null
@@ -106,18 +101,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The translation uses a period after 'Nachname' which is grammatically correct, but the original English uses a slash. Consistency is preferred.",
-          "suggestion": "Wählen Sie Benutzer aus der Liste aus, die in {{organizationName}} {{productName}} importiert werden sollen. Benutzer aus Google Workspace werden ohne Vorname / Nachname importiert."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English says 'highlighted with a green color', while the German says 'grün hervorgehoben'. While both convey the same meaning, 'in grüner Farbe hervorgehoben' would be more literal and potentially preferred.",
-          "suggestion": "Benutzer, die bereits in {{organizationName}} {{productName}} vorhanden sind, werden in grüner Farbe hervorgehoben und standardmäßig nicht markiert."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -125,14 +109,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Settings:SelectUsersDescriptionGoogle\" is not translated. The Greek translation doesn't reflect the fact that it's part of a settings description related to user selection.",
-          "suggestion": "While a direct translation isn't necessary for the content itself, noting this context for future translators would be beneficial. A general note or tag might be appropriate in a translation management system."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'email name' is translated literally as 'όνομα email'. While understandable, a more natural translation in Greek would be 'όνομα χρήστη email' or a more colloquial phrasing depending on the target audience.",
-          "suggestion": "Consider replacing 'όνομα email' with 'όνομα χρήστη email' or a more natural equivalent based on the context."
+          "type": "formatting",
+          "description": "The Greek translation uses 'productName' of 'organizationName' which is not ideal. It would be better to translate these placeholders into the full names or a more natural phrasing.",
+          "suggestion": "Consider replacing 'productName' of 'organizationName' with the actual names (e.g., 'το Όνομα Προϊόντος της Εταιρείας' or a simpler equivalent depending on the context)."
         }
       ],
       "approved_at": null
@@ -143,13 +122,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'First Name / Last Name' is translated as 'nombre ni apellido'. While technically correct, it's a bit clunky. A more natural translation would be 'nombre y apellido'.",
-          "suggestion": "nombre y apellido"
+          "description": "The phrase 'First Name / Last Name' is translated as 'nombre ni apellido'. While technically correct, it's a bit clunky in Spanish. A more natural translation would be 'Nombre y Apellido'.",
+          "suggestion": "Nombre y Apellido"
         },
         {
-          "type": "formatting",
-          "description": "The phrasing 'no están marcados de forma predeterminada' could be slightly improved for flow. It's grammatically correct, but 'no se marcan por defecto' would read a bit better.",
-          "suggestion": "no se marcan por defecto"
+          "type": "incorrect_translation",
+          "description": "The phrase 'no están marcados de forma predeterminada' is not the most natural way to say it. It's a direct translation, but a more fluent phrasing would be 'no están seleccionados por defecto' or 'no están seleccionados inicialmente'.",
+          "suggestion": "no están seleccionados por defecto"
         }
       ],
       "approved_at": null
@@ -160,8 +139,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'virheällä' is a spelling error. It should be 'vihreällä'.",
+          "description": "The word 'virheällä' is a misspelling of 'vihreällä'.",
           "suggestion": "vihreällä"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'tuotavat käyttäjät' is not a natural translation of 'Check users'. A more accurate translation would be 'valittavat käyttäjät' or 'tarkistettavat käyttäjät'.",
+          "suggestion": "valittavat käyttäjät"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'tuotavat käyttäjät' is a slightly awkward translation for 'import'.",
+          "suggestion": "tuodaan"
         }
       ],
       "approved_at": null
@@ -172,8 +161,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Prénom / Nom' should ideally be formatted as 'Prénom et Nom' for better readability and consistency with common French usage.",
-          "suggestion": "Cochez les utilisateurs de la liste à importer dans {{organizationName}} {{productName}}. Les utilisateurs de Google Workspace seront importés sans Prénom et Nom, et leur e-mail sera utilisé à la place."
+          "description": "Inconsistent use of capitalization. 'Prénom / Nom' should either be 'Prénom / Nom' or 'prénom / nom' consistently.",
+          "suggestion": "Standardize capitalization to either 'Prénom / Nom' or 'prénom / nom'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'their email name will be used instead' is a literal translation that doesn't sound natural in French. A more natural phrasing would convey that the email address itself will be used.",
+          "suggestion": "Replace 'leur e-mail sera utilisé à la place' with 'leur adresse e-mail sera utilisée'."
         }
       ],
       "approved_at": null
@@ -183,14 +177,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The double curly braces `{{organizationName}}` and `{{productName}}` are used consistently in the English version. It's important to maintain this format in the Armenian translation for proper variable substitution.",
-          "suggestion": "Ensure that `{{organizationName}}` and `{{productName}}` are consistently used throughout the Armenian translation."
+          "type": "spelling",
+          "description": "The word 'email' is transliterated as 'էլփոստ'. While understandable, 'ենլայնային' (electronic) or 'ազատագրային' might be more appropriate in a formal setting.",
+          "suggestion": "Consider using 'ենլայնային' or 'ազատագրային' instead of 'էլփոստ'."
         },
         {
           "type": "grammar",
-          "description": "The phrase \"լռելյայն չեն ստուգվում\" (literally: 'are not checked silently') is a little awkward. It could be clearer. While technically correct, it doesn't flow naturally.",
-          "suggestion": "Consider rephrasing to something like \"առավելության համար չեն ընտրված\" (are not selected by default) or \"առկայությունը չի ընտրված ըստ դեֆոլթի\" (their presence is not selected by default)."
+          "description": "The phrase 'լռելյայն չեն ստուգվում' could be more naturally phrased.",
+          "suggestion": "Consider rephrasing to 'առայժմ չեն ստուգվում' or 'ներկայումս չեն ստուգվում'."
+        },
+        {
+          "type": "formatting",
+          "description": "The consistent use of bolding or italics for variables like `{{organizationName}}` and `{{productName}}` should be verified across all translated content to ensure uniformity.",
+          "suggestion": "Ensure consistent formatting of variables throughout all translations."
         }
       ],
       "approved_at": null
@@ -201,8 +200,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses '/' to separate 'nome' and 'cognome'. In Italian, a period ('.') is more commonly used.",
-          "suggestion": "Seleziona gli utenti dall'elenco da importare in {{organizationName}} {{productName}}. Gli utenti di Google Workspace verranno importati senza nome.cognome e verrà utilizzato il loro nome email. I nomi degli utenti possono essere modificati dopo l'importazione. Gli utenti già esistenti in {{organizationName}} {{productName}} sono evidenziati con un colore verde e non sono selezionati per impostazione predefinita."
+          "description": "The translation uses a slash (/) where a conjunction or alternative phrasing would be more natural in Italian. 'nome/cognome' sounds awkward.",
+          "suggestion": "nome e cognome"
         }
       ],
       "approved_at": null
@@ -213,13 +212,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of double curly braces `{{...}}` in the Japanese translation mirrors the English, which is acceptable but could be adapted for more natural Japanese phrasing.  While functional, a more fluent approach might consider alternatives depending on the overall UI style.",
-          "suggestion": "Consider adjusting the double curly braces to fit the overall UI style. For example, if the platform uses single braces or a different method of variable insertion, adapt accordingly.  However, maintaining consistency is important."
+          "description": "The repetition of \"{{organizationName}} {{productName}}\" feels clunky in Japanese. While technically correct, it would be more natural to either shorten it to a single name or rephrase the sentence to avoid it.",
+          "suggestion": "Consider shortening the repeated names or rephrasing for better flow. For example, using \"該当の組織/サービス\" or similar depending on the specific context."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"メール名が使用されます\" (email name is used) could be more naturally translated as something that implies the email address *serves as* the name, rather than simply 'is used'.",
-          "suggestion": "Consider rephrasing to something like \"メールアドレスが名前として使用されます\" (the email address is used as a name) or a more idiomatic equivalent, depending on the tone of the application."
+          "description": "“email name” is not a standard Japanese term. The English concept of an email name doesn’t directly translate.",
+          "suggestion": "Replace \"メール名\" with a more descriptive phrase like \"メールアドレスの表示名\" or \"メールアドレスの一部\" (part of the email address) to better convey the meaning."
         }
       ],
       "approved_at": null
@@ -230,18 +229,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"가져오기할 사용자를 선택하세요\" is not the most natural way to say 'Check users from the list to import'. A more natural translation would be something like \"목록에서 가져올 사용자를 선택하세요\" or \"목록에서 가져올 사용자를 확인하세요\".",
-          "suggestion": "목록에서 가져올 사용자를 선택하세요"
+          "description": "The phrase \"가져오기할 사용자\" is awkward. It directly translates to \"users to import\" but sounds unnatural in Korean. It should be rephrased for better flow.",
+          "suggestion": "목록에서 {{organizationName}} {{productName}}로 가져올 사용자를 선택하세요."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"가져오기한 후 사용자 이름을 변경할 수 있습니다\" is slightly awkward. A better translation would be \"가져온 후 사용자 이름을 변경할 수 있습니다\" or \"가져온 후에 사용자 이름을 수정할 수 있습니다\".",
-          "suggestion": "가져온 후에 사용자 이름을 수정할 수 있습니다"
+          "description": "The phrase \"이메일 이름이 사용됩니다\" is a literal translation of \"email name will be used\". It’s better to say something like \"이메일 주소가 사용됩니다\" (email address will be used) for clarity.",
+          "suggestion": "Google Workspace의 사용자는 이름/성 없이 가져오기되며 대신 이메일 주소가 사용됩니다."
         },
         {
           "type": "formatting",
-          "description": "The repeated use of \"{{organizationName}} {{productName}}\" can be slightly jarring. While this is reflected in the English, there might be a more elegant phrasing for Korean to avoid repetition.",
-          "suggestion": "Consider rephrasing to avoid redundancy. For example, if the context makes it clear what is being referred to, the variable could be omitted or shortened."
+          "description": "The sentence structure can be improved for better readability. Combining the second and third sentences could result in a more natural flow.",
+          "suggestion": "Google Workspace의 사용자는 이름/성 없이 가져오기되며 대신 이메일 주소가 사용됩니다. 가져오기 후 사용자 이름을 변경할 수 있습니다."
         }
       ],
       "approved_at": null
@@ -251,9 +250,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term 'ແທນ' in \"ຊື່ອີເມວຂອງພວກເຂົາຈະຖືກໃຊ້ແທນ\" is slightly awkward. A more natural phrasing would be 'ຖືກນໍາໃຊ້ແທນ' or simply 'ຖືກນໍາໃຊ້'.",
-          "suggestion": "ຊື່ອີເມວຂອງພວກເຂົາຈະຖືກນໍາໃຊ້ແທນ."
+          "type": "formatting",
+          "description": "The translation uses Lao script, which requires specific rendering capabilities to display correctly.  Consider the target platform's ability to handle Lao script.",
+          "suggestion": "Ensure the platform supports Lao script rendering."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase \"ຖືກກວດສອບຕາມຄ່າເລີ່ມຕົ້ນ\" could be rephrased for improved clarity and naturalness. It's a bit clunky.",
+          "suggestion": "Consider rewording to something like \"ບໍ່ຖືກເລືອກໂດຍຄ່າເລີ່ມຕົ້ນ\" (not selected by default) or \"ບໍ່ໄດ້ຖືກກວດສອບໂດຍຄ່າເລີ່ມຕົ້ນ\" (not checked by default) depending on the precise meaning intended."
         }
       ],
       "approved_at": null
@@ -264,13 +268,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"email name\" is not a standard translation for email address or username. It's unclear what it refers to in this context.",
-          "suggestion": "Change \"viņu e-pasta vārds\" to \"viņu e-pasta adrese\" or \"toņu vārds\" (if referring to username) for clarity. The best choice depends on the exact meaning intended."
+          "description": "The phrase 'email name' in the English content is not accurately translated. 'Email name' refers to the part of the email address before the @ symbol. The Latvian translation uses a generic 'e-pasta vārds', which is vague and doesn't convey the intended meaning.",
+          "suggestion": "Consider translating 'email name' as 'epasta nosaukums' or 'epasta daļa', to more accurately reflect the part of the email address being referenced."
         },
         {
           "type": "formatting",
-          "description": "The Latvian translation maintains the formatting with double curly braces for variables. Consistency with English is important. It's good, but worth noting for style guide adherence.",
-          "suggestion": "Ensure double curly braces are consistently used throughout the product."
+          "description": "The use of '{{organizationName}} {{productName}}' in the Latvian translation might be visually awkward. Consider if these placeholders are rendered correctly within the target system or if a more natural phrasing would be better.",
+          "suggestion": "Evaluate if the placeholders are correctly displayed in the UI. If not, consider rewriting the sentence to avoid using them repeatedly or to rephrase them for better flow in Latvian."
         }
       ],
       "approved_at": null
@@ -281,8 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Dutch translation consistently uses '{{organizationName}} {{productName}}' where it appears. While this is likely intended to be a placeholder, it's not formatted in a way that is readily apparent as such. The English version clearly indicates placeholders with double curly braces.",
-          "suggestion": "Consider using a more standard placeholder format, like `{{orgName}}` or similar, to be more consistent with the original English."
+          "description": "The translation maintains the use of {{organizationName}} and {{productName}} which is consistent with the English content. This is a good choice.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -293,13 +297,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Polish translation uses a period (.) after 'nazwiska' instead of a slash (/), mirroring the English structure. While grammatically correct, it deviates from the original flow and may be confusing to the user.",
-          "suggestion": "Change 'imienia / nazwiska' to 'imienia i nazwiska'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Zamiast tego zostanie użyta ich nazwa e-mail' is a literal translation of 'their email name'. A more natural Polish phrasing would be 'używany będzie ich adres e-mail' or 'będzie używany ich adres e-mail'.",
-          "suggestion": "Change 'Zamiast tego zostanie użyta ich nazwa e-mail' to 'Zamiast tego będzie używany ich adres e-mail'."
+          "description": "The phrase \"imienia / nazwiska\" is a little awkward. It's a literal translation of \"First Name / Last Name\". A more natural phrasing would improve readability.",
+          "suggestion": "imienia i nazwiska"
         }
       ],
       "approved_at": null
@@ -310,8 +309,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"Nome/Sobrenome\" appears with a slash, which isn't the most natural Portuguese phrasing. While understandable, it's slightly awkward.",
-          "suggestion": "Use \"Nome e Sobrenome\" or simply \"Nome\" (assuming the context implies both)."
+          "description": "The phrase \"Nome/Sobrenome\" is presented without spacing.",
+          "suggestion": "Verifique os usuários da lista para importar para o {{organizationName}} {{productName}}. Os usuários do Google Workspace serão importados sem Nome e Sobrenome, e seu nome de e-mail será usado em seu lugar. Os nomes dos usuários podem ser alterados após a importação. Os usuários já existentes no {{organizationName}} {{productName}} são destacados em verde e não são verificados por padrão."
         }
       ],
       "approved_at": null
@@ -328,8 +327,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'exstenți' is a misspelling of 'existenți'.",
+          "description": "The word 'extenți' is a misspelling of 'existenți'.",
           "suggestion": "existenți"
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'Bifați utilizatorii din lista pentru a le importa' can be improved for clarity and flow.  'Bifați utilizatorii din listă pentru a-i importa' would be more natural.",
+          "suggestion": "Bifați utilizatorii din listă pentru a-i importa"
         }
       ],
       "approved_at": null
@@ -337,13 +341,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase 'имя электронной почты' (email name) is a bit awkward. It might be better to use a more standard term for 'email alias' or 'email address'.",
-          "suggestion": "имя электронной почты -> адрес электронной почты или псевдоним электронной почты"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -352,18 +350,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of '{{organizationName}} {{productName}}' is repeated throughout the translation. While acceptable, consider if a more natural phrasing or variable substitution could improve readability in Sinhala.",
-          "suggestion": "Review the context and consider variable substitution or rephrasing to avoid repetition. For example, 'ඔබේ {{organizationName}} {{productName}}' (Your {{organizationName}} {{productName}})"
+          "description": "The use of double curly braces `{{...}}` in the Sinhala translation is inconsistent with common practice. While variables are used, the format is unusual.",
+          "suggestion": "Review and potentially adjust the variable formatting to be consistent with standard practices (e.g., single curly braces or a different marker)."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'පෙරනිසාම සලකුණු කරනු නොලැබේ' (not marked by default) could be improved for clarity. It’s a somewhat awkward construction in Sinhala.",
-          "suggestion": "Consider 'පෙරනිසාම සලකුණු නොවනු ඇත' (will not be marked by default) or 'පෙරනිසාම සලකුණු කර නොමැත' (is not marked by default)."
+          "description": "The phrase 'පරිශීලකයින්ගේ නම් වෙනස් කළ හැකිය' (parishilakayinunge naam venas kalayba) could be improved for clarity.  It translates literally to 'names of users can be changed', which is a bit awkward.",
+          "suggestion": "Consider rephrasing to something like 'පරිශීලකයින්ගේ නම් ආනයනය කිරීමෙන් පසු වෙනස් කළ හැකිය' (parishilakayinunge naam aanya karam gaman pahuu venas kalayba) - 'Users' names can be changed after the import'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'email name' is translated as 'විද්‍යුත් ලිපිලේඛන නම'. While technically correct, 'විද්‍යුත් ලිපිනය' (email address) might be a more natural and understandable term for the target audience.",
-          "suggestion": "Replace 'විද්‍යුත් ලිපිලේඛන නම' with 'විද්‍යුත් ලිපිනය'."
+          "type": "spelling",
+          "description": "The word 'ලැදිල්ලේ' (ladillae) might not be the most accurate translation for 'list'.  It conveys a sense of a small collection.",
+          "suggestion": "Consider 'ලේඛනය' (lekhnaya) or 'รายการ' (rata) for a more general 'list'."
         }
       ],
       "approved_at": null
@@ -374,13 +372,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"pôvodne nie sú označení\" is an awkward translation of \"are not checked by default.\" It implies a prior state of being marked, which isn't the intended meaning. A better translation would convey the default unchecked state.",
-          "suggestion": "are not selected by default"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation lacks consistency in capitalization. \"Používatelia\" should consistently be capitalized when referring to users.",
-          "suggestion": "Používatelia"
+          "description": "The phrase \"pôvodne nie sú označení\" is an awkward translation of \"are not checked by default.\" A more natural Slovak translation would be something like \"nie sú predvyberaní\" or \"nie sú predvolene vybraní.\"  The current phrasing implies an initial state that isn't accurately represented.",
+          "suggestion": "nie sú predvyberaní"
         }
       ],
       "approved_at": null
@@ -390,8 +383,13 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'priimka' (last name) is written as 'imena/priimka' which is a bit awkward. It would be more natural to use 'ime in priimek' or simply 'ime'.",
+          "suggestion": "Preverite uporabnike s seznama za uvoz v {{organizationName}} {{productName}}. Uporabniki iz Google Workspace bodo uvoženi brez imena/priimka, namesto tega bo uporabljeno njihovo e-mail ime. Imena uporabnikov lahko po uvozu spremenite. Uporabniki, ki že obstajajo v {{organizationName}} {{productName}}, so označeni z zeleno barvo in privzeto niso označeni."
+        },
+        {
           "type": "formatting",
-          "description": "The phrase \"imena/priimka\" uses a slash. While acceptable, using a more natural Slovenian construction like \"ime in priimek\" would improve readability.",
+          "description": "The slash '/' in 'imena/priimka' is not the typical Slovenian way to separate items in a list. It's more common to use 'in' or to rephrase the sentence.",
           "suggestion": "Preverite uporabnike s seznama za uvoz v {{organizationName}} {{productName}}. Uporabniki iz Google Workspace bodo uvoženi brez imena in priimka, namesto tega bo uporabljeno njihovo e-mail ime. Imena uporabnikov lahko po uvozu spremenite. Uporabniki, ki že obstajajo v {{organizationName}} {{productName}}, so označeni z zeleno barvo in privzeto niso označeni."
         }
       ],
@@ -402,19 +400,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'емаил' is a misspelling of 'е-маил'.",
-          "suggestion": "е-маил"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Корисници из Google Workspace ће бити увезени без имена и презимена' can be improved for clarity.  A more natural phrasing would avoid repetition.",
-          "suggestion": "Корисници из Google Workspace биће увезени без пуног имена – користиће се само њихова е-маил адреса."
-        },
-        {
           "type": "formatting",
-          "description": "Inconsistent use of hyphenation.  '{{organizationName}} {{productName}}' appears frequently, but it is not consistently hyphenated.",
-          "suggestion": "Consider hyphenating consistently, e.g., '{{organizationName}}-{{productName}}'"
+          "description": "The translation includes a hyphenated form \"-у\" at the end of '{{organizationName}} {{productName}}-у'. This is grammatically correct but might not be the preferred formatting in all contexts and could be revised for consistency.",
+          "suggestion": "Consider removing the hyphen and the 'у' if the context doesn't require it. Alternatives include using a space or no punctuation at all. (e.g., '{{organizationName}} {{productName}}' or '{{organizationName}} {{productName}}')."
         }
       ],
       "approved_at": null
@@ -422,29 +410,24 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Serbian translation uses a hyphen to connect 'organizationName' and 'productName'. While grammatically acceptable, it's more common in English to use a space. Consistent formatting would improve readability.",
-          "suggestion": "organizationName productName"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'bez imena i prezimena' (without first name and last name) is a literal translation but might sound a bit clunky in Serbian in this context. A more natural phrasing would be something like 'bez punog imena'.",
-          "suggestion": "bez punog imena"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence 'Korisnici koji već postoje u {{organizationName}} {{productName}}-u su označeni zelenom bojom i podrazumevano nisu označeni.' is slightly awkward.  The double possessive ('u') can be improved.  Also, 'nisu označeni' directly translates to 'are not marked', a more fluid translation would be 'ne čekiraju se automatski'.",
-          "suggestion": "Korisnici koji već postoje u {{organizationName}} {{productName}} su označeni zelenom bojom i ne čekiraju se automatski."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The use of double curly braces `{{...}}` in the Turkish translation is inconsistent with English, where single curly braces are used. It's a technical formatting issue, not a content issue.",
+          "suggestion": "Change `{{organizationName}}` and `{{productName}}` to `{organizationName}` and `{productName}` respectively."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "“Ad / Soyad bilgileri yerine e-posta adları kullanılacaktır.” could be improved for clarity and naturalness. While technically correct, it's a bit clunky.",
+          "suggestion": "Consider rephrasing to something like “Google Workspace kullanıcılarının ad ve soyadı yerine e-posta adresleri kullanılır.” or  “Google Workspace’teki kullanıcılar için ad ve soyadı yerine e-posta adresleri alınır.”"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -452,14 +435,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"простору\" (prostoru) is used for {{organizationName}} {{productName}}. While technically correct, it might be better to use a more user-friendly term like \"організації\" (organizatsii) or \"платформи\" (platformy) to better convey the meaning of the organization/platform in a more conversational way. It depends on the target audience and the overall tone of the product.",
-          "suggestion": "Consider using \"організації\" or \"платформи\" instead of \"простору\" to better convey the meaning of {{organizationName}} {{productName}}."
+          "type": "formatting",
+          "description": "The term 'простору' (meaning 'space') seems slightly awkward in this context. It's technically correct, but '{{organizationName}} {{productName}}' generally refers to a platform or application, not a 'space'.",
+          "suggestion": "Consider rephrasing to use a more general term like 'системи' (system) or removing the preposition 'до' entirely to read 'для імпорту в {{organizationName}} {{productName}}'."
         },
         {
-          "type": "formatting",
-          "description": "The phrase 'First Name / Last Name' is translated as 'імені/прізвища'. While functionally correct, this is quite literal and a more natural phrasing might improve readability. It's also consistent with Google's general preference to avoid literal translations where possible.",
-          "suggestion": "Consider rewording 'імені/прізвища' to a more natural phrasing such as 'імя та прізвище' or simply 'ім'я'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'виділені зеленим кольором' literally translates to 'highlighted green'. While understandable, a more natural Ukrainian phrasing might be 'позначені зеленим кольором' or 'мають зелене маркування'.",
+          "suggestion": "Replace 'виділені зеленим кольором' with 'позначені зеленим кольором' or 'мають зелене маркування'."
         }
       ],
       "approved_at": null
@@ -470,13 +453,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Tên / Họ' is less natural in Vietnamese. It directly translates 'First Name / Last Name' but sounds awkward. It's better to convey the meaning rather than directly translate.",
-          "suggestion": "Use a more natural phrasing like 'Tên đệm/Tên' or 'Tên' if the distinction isn't vital."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'chọn' (selected/chosen) isn't the best fit for 'checked'. 'Highlighted' is already used to describe the existing users, so 'checked' needs a word that accurately represents the action of verifying or choosing.",
-          "suggestion": "Consider using 'đánh dấu' (marked) or 'xác nhận' (confirmed) instead of 'chọn'."
+          "description": "The translation uses a direct translation of \"First Name / Last Name\" which is a bit awkward in Vietnamese. It might be more natural to use a more general term for name.",
+          "suggestion": "Consider replacing \"Tên / Họ\" with a more general term like \"Tên\" or rephrasing the sentence to avoid the explicit separation."
         }
       ],
       "approved_at": null
@@ -487,13 +465,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses spaces around the variables {{organizationName}}{{productName}} instead of a single space. It should be {{organizationName}} {{productName}} to match the English source.",
-          "suggestion": "Change '{{organizationName}}{{productName}}' to '{{organizationName}} {{productName}}'"
+          "description": "The repeated use of '{{organizationName}}{{productName}}' can be improved for readability. It's clunky in Chinese.",
+          "suggestion": "Consider rephrasing to avoid the repetition. For example, use a more general term like '系统中' or '平台' after the initial mention, or rewrite the sentence structure.  A more natural phrasing might be: '从列表中选中要导入到 {{organizationName}}{{productName}} 的用户。' (Select users from the list to import to {{organizationName}}{{productName}}.)"
         },
         {
           "type": "incorrect_translation",
-          "description": "“电子邮件名称” is a literal translation of \"email name\" but sounds unnatural in Chinese. A more natural phrasing would be '邮箱名' or '邮件名称'.",
-          "suggestion": "Change '电子邮件名称' to '邮箱名' or '邮件名称'"
+          "description": "The phrase 'email name' is not a common or clear translation of 'email' in Chinese. It's unclear what is meant by 'email name'.",
+          "suggestion": "Replace '电子邮件名称' with '电子邮件地址' (email address) or simply '邮件' (mail) depending on the overall context. For example: '来自 Google 工作区 的用户将导入他们的电子邮件地址' (Users from Google Workspace will import their email addresses)."
         }
       ],
       "approved_at": null

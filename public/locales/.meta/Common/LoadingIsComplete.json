@@ -3,7 +3,7 @@
   "content": "Loading is complete 100%",
   "content_en_sha1_hash": "e717c91d11975369ea8b5cd6bb78010cd183e900",
   "created_at": "2025-05-19T21:30:46.271Z",
-  "updated_at": "2025-05-28T09:30:02.523Z",
+  "updated_at": "2025-08-11T09:02:43.948Z",
   "comment": {
     "text": "This translation key displays a message indicating that a file loading process is complete, showing 100% progress. It is used in an error state within a data import component, suggesting that the selected file is not supported.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 436,
+      "line_number": 438,
       "context": "{isFileError ? (\n <div>\n <ProgressBar\n percent={100}\n className=\"complete-progress-bar\"\n label={t(\"Common:LoadingIsComplete\")}\n />\n <Text className=\"error-text\">\n {t(\"Settings:UnsupportedFilesDescription\")}\n </Text>\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 436,
+      "line_number": 438,
       "context": "{isFileError ? (\n <div>\n <ProgressBar\n percent={100}\n className=\"complete-progress-bar\"\n label={t(\"Common:LoadingIsComplete\")}\n />\n <Text className=\"error-text\">\n {t(\"Settings:UnsupportedFilesDescription\")}\n </Text>\n <Link",
       "module": "/packages/client"
     }
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Зареждането е завършено на 100%\" is a very literal translation. A more natural and idiomatic Bulgarian equivalent for 'Loading is complete 100%' would be something like \"Зареждането приключи напълно\" or \"Зареждането е 100% завършено\".",
+          "suggestion": "Зареждането приключи напълно"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -54,7 +60,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Načítání je dokončeno na 100%' is a literal translation and sounds slightly awkward in Czech. A more natural phrasing would be closer to 'Načítání dokončeno' or 'Načítání je hotovo'. The addition of 'na 100%' isn't standard for this type of message.",
+          "description": "The translation 'Načítání je dokončeno na 100%' is a literal translation and sounds unnatural in Czech. A more natural phrasing would be 'Načítání dokončeno' or 'Načítání je hotovo'.",
           "suggestion": "Načítání dokončeno"
         }
       ],
@@ -81,7 +87,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'Lataus on suoritettu 100%' is a slightly less natural phrasing compared to alternatives. 'Lataus on valmis 100%' or 'Lataus on täydellisesti valmis' would be more common and closer to the original's emphasis on completion.",
+          "suggestion": "Consider 'Lataus on valmis 100%' or 'Lataus on täydellisesti valmis'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -123,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Latvian translation includes 'apmērā' at the end, which adds unnecessary verbosity compared to the English '100%'. While not incorrect, it deviates from the original intent and could be simplified.",
+          "suggestion": "Ielāde ir pabeigta 100%"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -138,8 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'Ładowanie zostało zakończone w 100%' is a bit verbose and not as natural-sounding as other options for conveying 'Loading is complete 100%'. A more natural phrasing would emphasize completion rather than the percentage.",
+          "description": "While technically correct, the Polish translation 'Ładowanie zostało zakończone w 100%' is a very literal translation and sounds unnatural in Polish. A more idiomatic translation would convey the same meaning more smoothly.",
           "suggestion": "Ładowanie zakończone."
+        },
+        {
+          "type": "formatting",
+          "description": "The percentage sign (%) is included in the Polish translation but not explicitly stated in the English content. It's a minor point, but maintaining consistency in the inclusion of percentage signs could be beneficial for UI consistency.",
+          "suggestion": "Consider adding a percentage sign if it's part of the UI display. If not, remove it from the Polish translation."
         }
       ],
       "approved_at": null
@@ -174,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පූරණය සම්පූර්ණයි 100%' while literally meaning 'Filling is complete 100%', doesn't fully capture the meaning of 'Loading is complete'. A more accurate translation would convey the idea of data or content being fully loaded.",
-          "suggestion": "A better translation would be something like 'දත්ත බාගන්නා 100% අවසන්' (Data downloading 100% complete) or 'බාගත කිරීම අවසානයයි 100%' (Downloading is complete 100%) depending on the context."
+          "description": "The translation \"පූරණය සම්පූර්ණයි 100%\" while conveying the general meaning, is not the most natural or accurate translation of 'Loading is complete 100%'. A more accurate and natural translation would be something like \"ටබැරණ අවසානයයි 100%\" or \"බාගත කිරීම අවසානයයි 100%\".",
+          "suggestion": "Consider \"ටබැරණ අවසානයයි 100%\" or \"බාගත කිරීම අවසානයයි 100%\"."
         }
       ],
       "approved_at": null
@@ -183,7 +206,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"Načítanie je dokončené 100%\" is a very literal translation. A more natural Slovak phrasing would be \"Načítanie sa dokončilo o 100%\" or simply \"Načítanie dokončené (100%)\". The current translation feels somewhat unnatural in Slovak.",
+          "suggestion": "Consider \"Načítanie sa dokončilo o 100%\" or \"Načítanie dokončené (100%)\""
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -198,8 +227,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Учитавање је завршено 100%' is not the most natural or accurate translation of 'Loading is complete 100%'. 'Учитавање' implies an upload, while 'Loading' generally refers to downloading or a process of appearing. A more accurate translation would use a word like 'Утисак' or 'Пуњење'.",
-          "suggestion": "Утисак је завршен 100%"
+          "description": "The Serbian translation 'Учитавање је завршено 100%' while technically correct, doesn't quite convey the same nuance as 'Loading is complete 100%'. 'Учитавање' can also mean 'uploading'. A more accurate and commonly used translation for 'Loading' in this context would be 'Постављање' or 'Утврђивање'.",
+          "suggestion": "Постављање је завршено 100%"
         }
       ],
       "approved_at": null

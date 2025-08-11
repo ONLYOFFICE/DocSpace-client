@@ -3,7 +3,7 @@
   "content": "A new version of the website available",
   "content_en_sha1_hash": "fca1ca011a56ace46b5510f663187f90e7020358",
   "created_at": "2025-05-19T21:30:46.800Z",
-  "updated_at": "2025-05-28T09:30:02.985Z",
+  "updated_at": "2025-05-26T07:57:32.976Z",
   "comment": {
     "text": "This translation key is used for displaying a notification about a new version of the website being available. It will be shown in a snackbar component when an \"Update\" button is clicked, prompting the user to load the updated version.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'متوفر إصدار جديد من الموقع' is a literal translation but sounds unnatural in Arabic. A more natural and accurate translation would be something like 'هناك إصدار جديد من الموقع متاح' or 'يتوفر إصدار جديد من الموقع'.",
-          "suggestion": "هناك إصدار جديد من الموقع متاح"
+          "description": "The translation 'متوفر إصدار جديد من الموقع' is a literal translation and doesn't flow naturally in Arabic. A more natural phrasing would be 'توجد نسخة جديدة من الموقع' or 'نسخة جديدة من الموقع متاحة'.",
+          "suggestion": "توجد نسخة جديدة من الموقع"
         }
       ],
       "approved_at": null
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A new version of the website available\" is more accurately translated as 'A new version of the website is available'. The current translation 'A new version of the website is accessible' is not incorrect but changes the nuance.  'A new version is available' is a more natural way to phrase it.",
+          "description": "The translation 'Vebsaytın yeni versiyası əlçatandır' is not the most natural or accurate translation of \"A new version of the website available\". While technically correct, it sounds awkward. 'A new version of the website is available' is more idiomatic.",
           "suggestion": "Vebsaytın yeni versiyası mövcuddur"
         }
       ],
@@ -51,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"A new version of the website available\" is a slightly awkward phrasing. A more natural English equivalent would be \"A new version of the website is available\" or \"A new version of the website is out\". The Bulgarian translation, while understandable, doesn't perfectly capture the intended meaning and flow of a more natural English sentence.",
+          "suggestion": "Consider rephrasing the English source to \"A new version of the website is available\" and then verifying the Bulgarian translation against that revised source. Alternatively, assess if a different Bulgarian phrasing better conveys the intended meaning, such as 'Има налична нова версия на уебсайта' (There is a new version of the website available)."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -60,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A new version of the website available' is slightly awkward. A more natural translation would convey the availability more clearly. The current Czech translation is technically correct but not the most fluent.",
-          "suggestion": "Dostupná je nová verze webové stránky"
+          "description": "The English phrase 'A new version of the website available' is slightly awkward. A more natural English phrasing would be 'A new version of the website is available' or 'A new version of the website is now available'.  The Czech translation, while grammatically correct, doesn't fully capture the immediacy of 'now'.",
+          "suggestion": "Consider a translation that better reflects the immediacy of the English; for example, 'Dostupná je nová verze webové stránky.' or 'Nová verze webové stránky je k dispozici.'"
         }
       ],
       "approved_at": null
@@ -78,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A new version of the website available' is not perfectly captured by the Greek translation. A more natural translation would be 'Μια νέα έκδοση της ιστοσελίδας είναι διαθέσιμη' is acceptable, but slightly awkward. A better alternative might be 'Υπάρχει νέα έκδοση της ιστοσελίδας' (There is a new version of the website).",
-          "suggestion": "Υπάρχει νέα έκδοση της ιστοσελίδας"
+          "description": "The English phrase \"A new version of the website available\" is somewhat awkward. A more natural English translation would be \"A new version of the website is available.\" The Greek translation reflects the awkwardness. A more accurate and natural Greek translation would better match a polished English version.",
+          "suggestion": "Consider rephrasing the English to 'A new version of the website is available'. This would lead to a more natural Greek translation: 'Μια νέα έκδοση της ιστοσελίδας είναι διαθέσιμη.'"
         }
       ],
       "approved_at": null
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A new version of the website available' is not perfectly captured by the Armenian translation. A more accurate translation would reflect that the website *has* a new version available, rather than just stating it is available.  The current translation lacks a verb indicating the availability.",
-          "suggestion": "Հասանելի է կայքի նոր տարբերակը։ (Has a new version of the website available) or Կայքի համար հասանելի է նոր տարբերակ։ (A new version is available for the website)."
+          "description": "The translation 'Հասանելի է կայքի նոր տարբերակը' is a literal translation but doesn't quite capture the natural flow of the English phrase 'A new version of the website available'. A more natural translation would emphasize the availability to the user.",
+          "suggestion": "Մատչելի է կայքի նոր տարբերակը"
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A new version of the website available' is a slightly awkward construction. A more natural English phrase would be 'A new version of the website is available.' The Italian translation is technically correct but doesn't fully capture the nuance of a more natural English phrasing.",
-          "suggestion": "Consider revising the English source to 'A new version of the website is available' to allow for a more equivalent translation."
+          "description": "The English phrase 'A new version of the website available' is slightly awkward. A more natural translation would be 'La nuova versione del sito web è disponibile'.",
+          "suggestion": "La nuova versione del sito web è disponibile"
         }
       ],
       "approved_at": null
@@ -132,8 +138,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"新バージョンのウェブサイトを公開\" literally translates to \"The website's new version is released.\" It doesn't quite capture the meaning of 'A new version of the website available'. A more accurate translation would imply availability, like 'A new version of the website is available' or 'A new version of the website is now available'.",
-          "suggestion": "新バージョンのウェブサイトが利用可能です (Shin baajon no webusaito ga ryouyouteki desu) - A new version of the website is available."
+          "description": "The translation \"新バージョンのウェブサイトを公開\" directly translates to \"We have released a new version of the website.\" It doesn't quite capture the original meaning \"A new version of the website available\". A more accurate translation would indicate availability rather than release.",
+          "suggestion": "新バージョンのウェブサイトが利用可能になりました (Shin baajon no webusaito ga riyou kanou ni narimashita - A new version of the website is now available)"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the sentence structure could be slightly more natural in Japanese. The \"を\" after \"ウェブサイト\" can sound a little clunky in this context.",
+          "suggestion": "新バージョンのウェブサイトが利用可能です (Shin baajon no webusaito ga riyou kanou desu - A new version of the website is available)"
         }
       ],
       "approved_at": null
@@ -144,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '웹사이트의 새로운 버전을 이용할 수 있습니다' while generally correct, is slightly awkward and could be improved to more naturally convey the meaning of 'A new version of the website is available'. The current phrasing leans toward 'can use' instead of simply 'is available'.",
-          "suggestion": "웹사이트의 새 버전이 출시되었습니다"
+          "description": "The translation \"웹사이트의 새로운 버전을 이용할 수 있습니다\" (websaiteui saeroun beojeon-eul iyonghal su issumnida) is a functional but slightly awkward translation of \"A new version of the website available\". A more natural and concise translation would be \"웹사이트 새 버전이 나왔습니다\" (websaite sae beojeoni nawatseumnida) or \"웹사이트 새 버전이 사용 가능합니다\" (websaite sae beojeoni sayong ganeunghamnida). The current translation implies the user *can use* the new version, rather than simply stating it *is* available.",
+          "suggestion": "웹사이트 새 버전이 나왔습니다"
         }
       ],
       "approved_at": null
@@ -156,13 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເປັນເວັບໄຊທ໌ລ້າສຸດ\" translates to 'latest website' instead of 'a new version of the website available'. The original English emphasizes availability of a new version, which is not accurately conveyed.",
-          "suggestion": "ອັບເດດເວັບໄຊທ໌ໃໝ່ມີໃຫ້ໃຊ້ງານ"
-        },
-        {
-          "type": "grammar",
-          "description": "While \"ອັບເດດເວັບໄຊທ໌ໃໝ່ມີໃຫ້ໃຊ້ງານ\" is better, it's still slightly awkward.  A more natural phrasing might be considered.",
-          "suggestion": "ມີເວີຊັນໃໝ່ຂອງເວັບໄຊທ໌ມີໃຫ້ໃຊ້ງານ"
+          "description": "The Lao translation \"ເປັນເວັບໄຊທ໌ລ້າສຸດ\" translates to \"It's the latest website\" which is not equivalent to the English content \"A new version of the website available\". It doesn't convey the sense of availability or update.",
+          "suggestion": "A more accurate translation could be something like \"ມີເວີຊັນໃໝ່ຂອງເວັບໄຊທ໌” (Mi vee-chan mai khong website) which means “There's a new version of the website” or “ເວັບໄຊທ໌ມີເວີຊັນໃໝ່” (Website mi vee-chan mai) meaning “The website has a new version”."
         }
       ],
       "approved_at": null
@@ -170,19 +176,19 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"A new version of the website available\" is a slightly awkward construction. A more natural translation would consider the 'is' implied in the English and translate it accordingly. The Latvian translation, while technically correct, doesn't quite capture the nuance.",
+          "suggestion": "Ir pieejama jauna tīmekļa vietnes versija"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Dutch translation \"Een nieuwe versie van de website beschikbaar\" is grammatically awkward. It lacks a verb. A more natural phrasing would include a verb like 'is' or 'is te vinden'.",
-          "suggestion": "Een nieuwe versie van de website is beschikbaar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -191,8 +197,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Nowa wersja witryny jest dostępna\" is a literal translation and could be improved for naturalness. \"A new version of the website available\" doesn't have an explicit subject and verb. A more natural Polish translation would include them.",
-          "suggestion": "Nowa wersja witryny jest dostępna."
+          "description": "The translation \"Nowa wersja witryny jest dostępna\" is a literal translation but sounds slightly awkward in Polish. A more natural phrasing would emphasize the availability of the new version for the user.",
+          "suggestion": "Nowa wersja strony jest dostępna"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'witryny' (witryny) is less common than 'strony' when referring to a website in Polish in general conversation. While 'witryny' is technically correct, 'strony' sounds more natural and conversational.",
+          "suggestion": "Nowa wersja strony jest dostępna"
         }
       ],
       "approved_at": null
@@ -200,7 +211,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'A new version of the website available' translates more naturally to Portuguese as 'Existe uma nova versão do website disponível' or 'Uma nova versão do website está disponível'. The current translation, 'Há disponível uma nova versão do website', is grammatically correct but sounds slightly awkward and less idiomatic.",
+          "suggestion": "Existe uma nova versão do website disponível"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -212,13 +229,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"A new version of the website available\" is a bit awkward and incomplete. A more natural English phrasing would be \"A new version of the website is available\" or \"A new version of the website is now available\". The Romanian translation, while grammatically correct, mirrors this awkward phrasing.  While understandable, it doesn't flow as well.",
-          "suggestion": "Consider re-evaluating the English source for clarity and translating that refined English version into Romanian.  For example, if the source was 'A new version of the website is available', the Romanian translation would be fine."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -233,8 +244,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A new version of the website available\" is not accurately translated. A more appropriate translation would be \"There is a new version of the website available\" or \"A new version of the website is available\". The Sinhala translation simply states \"A new version of the website exists\", lacking the sense of availability.",
-          "suggestion": "අඩවියේ නව අනුවාදය දැන් ලබා ගත හැකිය"
+          "description": "The translation 'අඩවියේ නව අනුවාදයක් තිබේ' is a literal translation and doesn't flow naturally in Sinhala. A more natural translation would convey the availability of the new version.",
+          "suggestion": "අඩවියට නව අනුවාදය ඇත"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The literal translation 'අඩවියේ නව අනුවාදයක් තිබේ' implies the website *has* a new version, rather than indicating it's *available* to the user. 'Available' is key here.",
+          "suggestion": "නව අනුවාදය දැන් ඇත"
         }
       ],
       "approved_at": null
@@ -251,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A new version of the website available' is slightly awkward. A more natural English translation would be 'A new version of the website is available' or 'A new version of the website is now available'. The Slovenian translation, while grammatically correct, reflects the awkwardness of the original English.  It is overly literal.",
-          "suggestion": "Consider rephrasing the English source to 'A new version of the website is available' and then translate that to Slovenian, resulting in 'Na voljo je nova verzija spletne strani'."
+          "description": "The English phrase \"A new version of the website available\" is a slightly awkward phrasing. A more natural translation would reflect this. The Slovenian translation is technically correct but lacks nuance.",
+          "suggestion": "Na voljo je posodobljena različica spletne strani."
         }
       ],
       "approved_at": null
@@ -263,13 +279,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Нова верзија wеб-сајта доступна\" is not the most natural or accurate translation of \"A new version of the website available\".  While understandable, it's a literal translation that doesn't flow well in Serbian. 'Website' is transliterated which is technically correct but less common. The structure is a bit awkward.",
-          "suggestion": "A better translation would be something like: 'Доступна је нова верзија веб-сајта.' or 'Нова верзија веб-сајта је доступна.'"
+          "description": "The translation 'Нова верзија wеб-сајта доступна' is a literal translation and doesn't read naturally in Serbian. 'wеб-сајта' is an awkward construction.",
+          "suggestion": "Нова верзија сајта је доступна"
         },
         {
           "type": "formatting",
-          "description": "The word 'website' is transliterated ('wеб-сајта'). While acceptable, the Serbian word for website is often used, making the transliteration slightly jarring.",
-          "suggestion": "Consider using the Serbian word for 'website' which is 'веб сајт'."
+          "description": "The transliteration of 'website' using 'wеб-сајта' is technically correct but less common and less aesthetically pleasing. Using 'сајта' is more natural.",
+          "suggestion": "Use 'сајта' instead of 'wеб-сајта'."
         }
       ],
       "approved_at": null
@@ -280,8 +296,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A new version of the website available\" is a slightly awkward construction. A more natural translation would be \"Novi verzija veb-sajta je dostupna\" or \"Dostupna je nova verzija veb-sajta\". The current translation is technically correct but not idiomatic.",
-          "suggestion": "Novi verzija veb-sajta je dostupna"
+          "description": "The English content 'A new version of the website available' is not perfectly captured by 'Nova verzija web-sajta dostupna'. A more natural translation would be 'Dostupna je nova verzija web-sajta' or 'Postoji nova verzija web-sajta'.",
+          "suggestion": "Dostupna je nova verzija web-sajta"
         }
       ],
       "approved_at": null
@@ -292,8 +308,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"A new version of the website available\" is a slightly awkward phrasing. A more natural English equivalent would be \"A new version of the website is available.\" The Turkish translation, while technically correct, doesn't fully capture the nuance of the English. It lacks the 'is'.",
-          "suggestion": "Consider a translation like \"Web sitesinin yeni bir sürümü bulunmaktadır\" which more closely aligns with 'A new version of the website is available.'"
+          "description": "The translation 'Web sitesinin yeni bir sürümü mevcut' is technically correct but sounds awkward and not idiomatic in Turkish. A more natural phrasing would be 'Web sitesinin yeni bir sürümü bulunmaktadır' or 'Web sitesinin yeni bir sürümü var'.",
+          "suggestion": "Web sitesinin yeni bir sürümü bulunmaktadır"
         }
       ],
       "approved_at": null
@@ -310,8 +326,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'A new version of the website available' is more naturally translated as 'There is a new version of the website available' or 'A new version of the website is available'. The current translation 'Đã có phiên bản mới của trang web' is technically correct but a bit abrupt. It implies the version 'exists' rather than 'is available'.",
-          "suggestion": "Cập nhật: Có phiên bản mới của trang web."
+          "description": "The English phrase \"A new version of the website available\" is somewhat awkward. A more natural translation would be \"There is a new version of the website available\" or simply \"A new version of the website is available\". The Vietnamese translation, while technically correct, doesn't fully capture the implied 'there is'.",
+          "suggestion": "Consider translating to \"Có phiên bản mới của trang web\" (There is a new version of the website)."
         }
       ],
       "approved_at": null
@@ -322,8 +338,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"有新版本的网站可用\" is technically correct but sounds somewhat awkward and not as natural as other options. A more natural phrasing would better capture the meaning of 'A new version of the website available'.",
-          "suggestion": "网站有新版本可用"
+          "description": "The translation \"有新版本的网站可用\" is a literal translation that is not the most natural way to express this in Chinese. It sounds somewhat awkward. A more natural phrasing would emphasize the availability *for use* rather than just saying the website has a new version.",
+          "suggestion": "网站有新版本可以使用 (Website has a new version available for use)."
         }
       ],
       "approved_at": null

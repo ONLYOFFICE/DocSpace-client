@@ -3,7 +3,7 @@
   "content": "See rooms details here",
   "content_en_sha1_hash": "0868f0cffa8c40cb52860e0077cc8801cd13670e",
   "created_at": "2025-05-19T21:30:54.947Z",
-  "updated_at": "2025-05-21T09:46:49.980Z",
+  "updated_at": "2025-08-04T07:30:01.205Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that there are no rooms available. It appears on an empty screen in a user interface, likely below a gallery of images or a list of available rooms. The goal is to provide clarity and transparency about room availability.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/NoItem/NoRoomItem.js",
-      "line_number": 45,
-      "context": "<StyledNoItemContainer className=\"info-panel_gallery-empty-screen\">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No Room\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"RoomsEmptyScreenTent\")}\n </Text>\n </StyledNoItemContainer>\n );\n };",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoRoomItem.tsx",
+      "line_number": 57,
+      "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No Room\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"RoomsEmptyScreenTent\")}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Siehe Details von Räumen hier' is a literal translation and sounds unnatural in German. A more natural phrasing would be something like 'Hier finden Sie Details zu den Räumen' or 'Details zu den Räumen finden Sie hier'.",
-          "suggestion": "Details zu den Räumen finden Sie hier"
+          "description": "The translation 'Siehe Details von Räumen hier' is a literal translation and sounds awkward in German. A more natural phrasing would be 'Hier finden Sie Details zu den Räumen' or 'Hier finden Sie die Raumdetails'.",
+          "suggestion": "Hier finden Sie Details zu den Räumen"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Սենյակների մանրամասները տես \" is a literal translation but lacks a crucial component of the English phrase \"See rooms details here\". The Armenian translation is missing the 'here'. A better translation would convey the idea of location or access point.",
-          "suggestion": "Սենյակների մանրամասները այստեղ դիտեք"
+          "description": "The translation 'Սենյակների մանրամասները տես' is a literal translation of 'See rooms details here'. A more natural and idiomatic Armenian translation would be something along the lines of 'Դիտել սենյակների մանրամասերը' or 'ծանոթանալ սենյակների մանրամասներին'.",
+          "suggestion": "Consider 'Դիտել սենյակների մանրամասերը' or 'ծանոթանալ սենյակների մանրամասներին'"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Detaliile sălilor aici\" is a literal translation but lacks the implied action or invitation present in the English \"See rooms details here.\" It sounds a bit abrupt and doesn't fully convey the purpose of the link or button. A more natural Romanian translation would be something like \"Vezi detaliile camerelor\" or \"Afișează detalii camere\".",
+          "description": "The translation \"Detaliile sălilor aici\" is not the most natural or accurate rendering of \"See rooms details here.\" A better translation would convey the sense of 'View room details' or 'Check room details'.",
           "suggestion": "Vezi detaliile camerelor"
         }
       ],
@@ -168,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Здесь будут представлены подробности о комнатах' is too literal and formal for a button or link labeled 'See rooms details here'. It doesn't convey the action of viewing details. A more natural and user-friendly translation would be needed.",
-          "suggestion": "Consider alternatives like 'Посмотреть детали комнат' (See room details), 'Детали комнат' (Room details), or 'Смотреть комнаты' (View rooms)."
+          "description": "The translation \"Здесь будут представлены подробности о комнатах\" is overly formal and doesn't quite capture the simple and inviting tone of \"See rooms details here\".  It translates more literally to 'Details about the rooms will be presented here'.",
+          "suggestion": "Consider a more direct and friendly translation, such as \"Здесь информация о комнатах\" (Here is information about the rooms) or \"Посмотрите информацию о комнатах\" (See information about the rooms)."
         }
       ],
       "approved_at": null
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"See rooms details here\" is a slightly awkward phrasing. A more natural translation might emphasize viewing the details *of* the rooms. The current translation, while technically correct, lacks nuance.",
+          "description": "The translation 'කාමරයේ විස්තර මෙතැන බලන්න' literally translates to 'See the room's details here'.  The English 'See rooms details here' implies viewing details of *multiple* rooms, not just one room's details.  A more accurate translation might reflect the plural.",
           "suggestion": "කාමර වල විස්තර මෙතැන බලන්න"
         }
       ],
@@ -210,13 +210,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vidi detalje sobe ovde' is not a natural or accurate translation of 'See rooms details here'. 'Vidi' is the third-person singular form of 'videti' (to see). It doesn't fit the imperative mood needed to match 'See'.",
+          "description": "The translation 'Vidi detalje sobe ovde' is not an accurate translation of 'See rooms details here'. 'Vidi' is the imperfect tense of 'videti' (to see) and implies a continuous or repeated action. 'See' in this context implies a direct reference to a page or section.",
           "suggestion": "Pogledaj detalje soba ovde"
         },
         {
           "type": "grammar",
-          "description": "The word 'sobe' is in the genitive case but should be in the nominative. It needs to agree with 'detalje' which is plural.",
-          "suggestion": "Pogledaj detalje soba ovde"
+          "description": "The phrase 'detalje sobe' is grammatically incorrect. It should be 'detalje soba' to agree with 'soba' in the plural.",
+          "suggestion": "detalje soba"
         }
       ],
       "approved_at": null

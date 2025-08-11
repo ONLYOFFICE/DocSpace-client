@@ -3,7 +3,7 @@
   "content": "Notifications",
   "content_en_sha1_hash": "753a22b2eb617204efee4644795034b8ace1ee14",
   "created_at": "2025-05-19T21:30:54.085Z",
-  "updated_at": "2025-05-28T09:30:02.814Z",
+  "updated_at": "2025-05-26T07:57:32.799Z",
   "comment": {
     "text": "The \"Notifications\" translation key is used to display the title of a section that contains notification-related content in a dialog. It appears as part of a Connect Dialog login interface and indicates that it holds notifications information.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.js",
       "line_number": 77,
-      "context": "name: t(\"ConnectDialog:Login\"),\n content: <LoginContent />,\n },\n {\n id: \"notifications\",\n name: t(\"Notifications:Notifications\"),\n content: <Notifications />,\n },\n {\n id: \"interface-theme\",\n name: t(\"InterfaceTheme\"),",
+      "context": "name: t(\"Common:Login\"),\n content: <LoginContent />,\n },\n {\n id: \"notifications\",\n name: t(\"Notifications:Notifications\"),\n content: <Notifications />,\n },\n {\n id: \"interface-theme\",\n name: t(\"InterfaceTheme\"),",
       "module": "/packages/client"
     }
   ],
@@ -201,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"消息通知\" (Xiao Xi Tong Zhi) is a common translation for 'Notifications', it is more literally 'Message Notification'. A more concise and commonly used translation in modern Chinese UI/UX contexts for just 'Notifications' would be \"通知\" (Tong Zhi).",
-          "suggestion": "\"通知\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

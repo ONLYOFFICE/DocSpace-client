@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "ເລືອກຈາກບັນຊີລາຍຊື່",
-  "ConnectingAccount": "ການເຊື່ອມໂຍງບັນຊີ",
-  "DeleteFromTrash": "ຂໍ້ມູນທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກຂີ້ເຫຍື້ອຢ່າງສໍາເລັດຜົນ",
   "FileLocked": "ໄຟລ໌ ລັອກ",
   "FileProtected": "ໄຟລ໌ຖືກປ້ອງກັນດ້ວຍລະຫັດຜ່ານ",
   "FileUnlocked": "ໄຟລ໌ ປົດລັອກ",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "ປ່ຽນຂໍ້ມູນພາກສ່ວນທີສາມ",
   "ThirdPartyTitle": "ການບໍລິການພາກສ່ວນທີສາມ",
   "TitleShowActions": "ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ",
-  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ",
-  "TypeTitleBoxNet": "ກ່ອງ",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ"
 }

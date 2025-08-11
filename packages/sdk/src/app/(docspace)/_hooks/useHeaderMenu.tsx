@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +41,7 @@ import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 
 import useFileType from "./useFileType";
 
-export default function useItemList({}) {
+export default function useItemList() {
   const { t } = useTranslation(["Common"]);
 
   const { items } = useFilesListStore();
@@ -138,7 +139,11 @@ export default function useItemList({}) {
       );
     });
 
-    return <>{dropdownItems}</>;
+    return (
+      <>
+        {dropdownItems} <div />
+      </>
+    );
   }, [
     isArchive,
     isDocument,

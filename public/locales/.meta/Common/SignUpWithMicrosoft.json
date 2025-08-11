@@ -3,7 +3,7 @@
   "content": "Sign up with Microsoft",
   "content_en_sha1_hash": "e42ef65d8922b6518d457278329d7e64a6f24601",
   "created_at": "2025-05-19T21:30:48.853Z",
-  "updated_at": "2025-08-07T11:27:46.861Z",
+  "updated_at": "2025-08-11T09:02:44.102Z",
   "comment": {
     "text": "This translation key is used to display the label for a Microsoft sign-up button. It appears on the login form and is translated to support different languages, ensuring a consistent user experience across various regions.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 409,
+      "line_number": 413,
       "context": "return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");",
       "module": "/packages/shared"
     }
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Bulgarian translation 'Влезте чрез Microsoft' translates to 'Log in with Microsoft', not 'Sign up with Microsoft'. The English phrase implies creating a new account, whereas the Bulgarian phrase implies logging into an existing one.",
+          "description": "The Bulgarian translation \"Влезте чрез Microsoft\" translates to \"Log in with Microsoft\" instead of \"Sign up with Microsoft\". While related, the meaning is different. \"Sign up\" implies creating a new account, while \"Log in\" implies accessing an existing one.",
           "suggestion": "Регистрирайте се с Microsoft"
         }
       ],
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Rekisteröidy Microsoftilla' is understandable, a more natural and accurate translation of 'Sign up with Microsoft' would be 'Liity Microsoftin käyttäjäksi' or 'Luo tili Microsoftilla'. 'Rekisteröidy Microsoftilla' implies registering an already existing account, rather than creating a new one.",
-          "suggestion": "Liity Microsoftin käyttäjäksi"
+          "description": "The translation 'Rekisteröidy Microsoftilla' is not the most natural or accurate Finnish translation of 'Sign up with Microsoft'. While technically understandable, it's a literal translation that doesn't flow well. A more natural phrasing would be 'Liity Microsoftilla' or 'Luo tili Microsoftilla'.",
+          "suggestion": "Liity Microsoftilla"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Գրանցվեք Microsoft-ով' literally translates to 'Register with Microsoft'. While understandable, a more natural and accurate translation for 'Sign up with Microsoft' would be something along the lines of 'Ստեղծեք հաշիվ Microsoft-ի միջոցով' or 'Գրանցվել Microsoft-ով'. The use of 'ով' (ov) implies 'with' but doesn't fully capture the 'Sign up' action.",
-          "suggestion": "Ստեղծեք հաշիվ Microsoft-ի միջոցով"
+          "description": "The translation \"Գրանցվեք Microsoft-ով\" is not the most natural or accurate translation of \"Sign up with Microsoft\". While technically conveys the meaning, it's a bit clunky.  A more natural phrasing would be something like \"Մուտքագրվեք Microsoft-ի միջոցով\" or \"Հաշիվ ստեղծեք Microsoft-ով\".",
+          "suggestion": "Մուտքագրվեք Microsoft-ի միջոցով"
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເຂົ້າສູ່ລະບົບດ້ວຍ Microsoft' literally translates to 'Log in with Microsoft.' The English phrase 'Sign up with Microsoft' implies account creation, not just logging in. This is a significant difference in meaning.",
-          "suggestion": "ອານຸສ້າງບັນຊີດ້ວຍ Microsoft (Anusang Banchi Duai Microsoft) - 'Create an account with Microsoft'"
+          "description": "The Lao translation \"ເຂົ້າສູ່ລະບົບດ້ວຍ Microsoft\" translates to 'Log in with Microsoft' instead of 'Sign up with Microsoft'. While similar, 'sign up' implies creating a new account, while 'log in' implies accessing an existing one.",
+          "suggestion": "ສ້າງບັນຊີດ້ວຍ Microsoft"
         }
       ],
       "approved_at": null
@@ -156,7 +156,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Inscreva-se na Microsoft' is not the most natural or idiomatic translation of 'Sign up with Microsoft'. While technically correct, it sounds a bit formal and clunky in Portuguese. A more natural translation would be something along the lines of 'Criar conta com Microsoft' or 'Registrar-se com Microsoft'.",
+          "description": "The translation 'Inscreva-se na Microsoft' is not the most natural or accurate translation of 'Sign up with Microsoft'. A more idiomatic translation would be 'Criar conta com Microsoft' or 'Registrar-se com Microsoft'.",
           "suggestion": "Criar conta com Microsoft"
         }
       ],
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cadastre-se com Linkedin' incorrectly translates 'Sign up with Microsoft'. It uses 'Linkedin' instead of 'Microsoft'.",
+          "description": "The translation 'Cadastre-se com Linkedin' incorrectly translates 'Sign up with Microsoft'. It substitutes 'Microsoft' with 'Linkedin'.",
           "suggestion": "Cadastre-se com Microsoft"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Conectare prin Microsoft\" is not the most natural or accurate translation of \"Sign up with Microsoft.\" While \"conectare\" means 'to connect', \"sign up\" implies creating an account. A more accurate translation would be something like \"Înregistrare cu Microsoft\" or \"Creează cont cu Microsoft\".",
-          "suggestion": "Înregistrare cu Microsoft"
+          "description": "The translation \"Conectare prin Microsoft\" is a literal translation of \"Connect with Microsoft.\" The more natural and commonly used phrasing for \"Sign up with Microsoft\" in Romanian would be \"Înscrie-te cu Microsoft\" or \"Creează cont cu Microsoft\". \"Conectare prin Microsoft\" implies connecting an existing account, not creating a new one.",
+          "suggestion": "Înscrie-te cu Microsoft"
         }
       ],
       "approved_at": null
@@ -210,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vpiši se z Microsoft' while understandable, isn't the most natural or accurate translation of 'Sign up with Microsoft'. A more idiomatic translation would be 'Prijavi se z Microsoft'. 'Vpiši se' implies filling out a form, not registering or signing up.",
+          "description": "The translation 'Vpiši se z Microsoft' is a literal translation but doesn't flow naturally in Slovenian. A more idiomatic translation would be 'Prijavi se z Microsoft' or 'Ustvari račun z Microsoft'.",
           "suggestion": "Prijavi se z Microsoft"
         }
       ],
@@ -222,13 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Региструј се путем Microsoft-а\" is a literal translation and doesn't flow naturally in Serbian. A more idiomatic translation would be preferred.",
-          "suggestion": "Региструј се са Microsoft-ом"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a genitive case ('Microsoft-а' or 'Microsoft-ом'). While grammatically correct, consistency in casing and usage (with or without a hyphen) across the product would be important.  'Microsoft-ом' is slightly more informal.",
-          "suggestion": "Consider enforcing a consistent case and hyphen usage across all Microsoft-related translations."
+          "description": "The translation \"Региструј се путем Microsoft-а\" is not the most natural or accurate translation of \"Sign up with Microsoft\". While technically correct, it sounds somewhat clunky. A more common and fluent translation would be \"Пријави се путем Microsoft-а\" or \"Региструј се са Microsoft-ом\".",
+          "suggestion": "Пријави се путем Microsoft-а"
         }
       ],
       "approved_at": null
@@ -239,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Registruj se putem Microsoft-a' is not the most natural or accurate translation of 'Sign up with Microsoft.' While understandable, it's a bit clunky.",
+          "description": "The translation 'Registruj se putem Microsoft-a' is not the most natural or idiomatic Serbian (Latin) translation of 'Sign up with Microsoft.' While technically correct, it sounds slightly awkward.",
           "suggestion": "Registruj se uz Microsoft"
         },
         {
           "type": "formatting",
-          "description": "The translation includes an unnecessary genitive case ending ('-a') after 'Microsoft'. This makes the phrase sound less idiomatic.",
-          "suggestion": "Remove the '-a' from 'Microsoft-a'."
+          "description": "The phrase 'Microsoft-a' uses the genitive case, which is correct, but using 'uz' is more common and sounds more natural in this context.  The subtle difference affects readability.",
+          "suggestion": "N/A - This is about stylistic preference, not a strict error."
         }
       ],
       "approved_at": null
@@ -274,7 +269,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"用 Microsoft 帐号注册\" is understandable, a more accurate and natural translation of \"Sign up with Microsoft\" would be something like \"使用 Microsoft 账户注册\" or \"使用微软账号注册\". The current translation focuses on 'register' while the English phrase implies a broader 'sign-up' action.",
+          "description": "The translation '用 Microsoft 帐号注册' while understandable, is not the most natural or precise translation of \"Sign up with Microsoft\". It translates to \"Register with a Microsoft account\". A more accurate and commonly used translation would be '使用 Microsoft 账户注册' or '使用微软账号注册'.",
           "suggestion": "使用 Microsoft 账户注册"
         }
       ],

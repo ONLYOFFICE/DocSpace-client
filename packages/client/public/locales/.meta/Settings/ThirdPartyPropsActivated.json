@@ -3,7 +3,7 @@
   "content": "Updated successfully",
   "content_en_sha1_hash": "6d518cb77f8fee6fb91d236f4b3c5be23b28d204",
   "created_at": "2025-05-19T21:30:52.896Z",
-  "updated_at": "2025-05-21T02:50:20.108Z",
+  "updated_at": "2025-05-24T03:55:23.045Z",
   "comment": {
     "text": "This translation key is used for success messages when a consumer's third-party properties are updated successfully. It appears in a modal dialog after updating the consumer's properties via a specific button action. Translators should provide a message that conveys a positive outcome of this update process.",
     "is_auto": true,
@@ -54,12 +54,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Einstellungen wurde aktualisiert' is grammatically awkward and doesn't perfectly convey the meaning of \"Updated successfully\".  'Einstellungen' is plural, while the English refers to a singular setting. The verb 'wurde' implies a passive voice, which isn't the most natural way to express this.",
-          "suggestion": "Einstellungen aktualisiert"
+          "description": "The German translation 'Einstellungen wurde aktualisiert' is not the most natural or accurate translation of 'Updated successfully'. While technically correct, it lacks elegance and doesn't fully convey the sense of success. 'Einstellungen' is in the nominative case when it should be accusative.",
+          "suggestion": "Einstellungen wurden aktualisiert"
         },
         {
           "type": "grammar",
-          "description": "The sentence 'Einstellungen wurde aktualisiert' is grammatically incorrect. 'Einstellungen' is plural, so the correct form of the past participle should be 'aktualisiert wurden'.",
+          "description": "The verb 'wurde' needs to agree with the subject (Einstellungen).",
           "suggestion": "Einstellungen wurden aktualisiert"
         }
       ],
@@ -161,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Настройки сервиса успешно обновлены\" translates to \"Service settings successfully updated\". While not entirely wrong, it's less direct and less aligned with the original \"Updated successfully\".  A closer translation would be something like \"Настройки успешно обновлены\" (Settings successfully updated). The inclusion of 'сервиса' (service) adds unnecessary specificity.",
-          "suggestion": "Настройки успешно обновлены"
+          "description": "The translation 'Настройки сервиса успешно обновлены' (Settings of the service were successfully updated) is too literal and verbose for a simple success message like 'Updated successfully'. It doesn't convey the same brevity.",
+          "suggestion": "Обновлено успешно"
         }
       ],
       "approved_at": null
@@ -173,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'යාවත්කාල කෙරිණි' translates to 'updated' or 'synchronized', but a more natural and user-friendly translation for 'Updated successfully' would be something like 'සාර්ථකව යාවත්කාල කෙරිණි' (saarthaaka vataakaala keriṇi) which means 'Successfully updated'.",
-          "suggestion": "සාර්ථකව යාවත්කාල කෙරිණි"
+          "description": "The translation 'යාවත්කාල කෙරිණි' while grammatically correct, doesn't fully convey the meaning of 'Updated successfully'. It translates to 'Updated' or 'Synchronized'.  'Successfully' is missing.",
+          "suggestion": "යාවත්කාල කෙරිණි සාර්ථකව (yāvatkāla kerīni sārtthaka), which translates to 'Updated successfully'."
         }
       ],
       "approved_at": null
@@ -203,8 +203,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Ažurirano uspešno\" uses \"Ažurirano\" which is more akin to 'Synchronized' or 'Refreshed' rather than 'Updated'. A more appropriate translation for 'Updated' would be 'Izmenjeno uspešno' or 'Nadograđeno uspešno'.",
-          "suggestion": "Izmenjeno uspešno"
+          "description": "The Serbian translation 'Ažurirano uspešno' is not the most natural or accurate translation of \"Updated successfully\". While understandable, 'Ažurirano uspešno' is somewhat literal and can sound clunky. A more natural translation would be something like 'Uspešno ažurirano' or 'Ažurirano bez greške'.",
+          "suggestion": "Uspešno ažurirano"
         }
       ],
       "approved_at": null

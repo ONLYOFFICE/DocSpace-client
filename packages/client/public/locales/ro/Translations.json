@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Alegeţi din lista",
-  "ConnectingAccount": "Conectare cont",
-  "DeleteFromTrash": "Elementele selectate au fost șterse cu succes din Coșul de gunoi",
   "FileLocked": "Fișier blocat",
   "FileProtected": "Fișierul este protejat prin parolă",
   "FileUnlocked": "Fișier deblocat",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Modificarea informațiilor despre servicii terțe",
   "ThirdPartyTitle": "Servicii terțe",
   "TitleShowActions": "Afișare acțiuni asupra fișierului",
-  "TitleShowFolderActions": "Afișare acțiuni asupra folderului",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Afișare acțiuni asupra folderului"
 }

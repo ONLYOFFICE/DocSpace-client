@@ -77,6 +77,7 @@ const ContextMenuButtonPure = ({
   zIndex,
   usePortal = true,
   iconName,
+  testId,
 }: ContextMenuButtonProps) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const throttledResize = React.useRef<null | DebouncedFunc<() => void>>(null);
@@ -204,7 +205,7 @@ const ContextMenuButtonPure = ({
       })}
       id={id}
       style={style}
-      data-testid="context-menu-button"
+      data-testid={testId ?? "context-menu-button"}
       onClick={callNewMenu}
       ref={ref}
     >
@@ -243,13 +244,14 @@ const ContextMenuButtonPure = ({
         >
           {state.data?.map((item: ContextMenuModel, index: number) => {
             if (!item) return null;
-            const { key, ...rest } = item;
+            const { key, dataTestId, ...rest } = item;
             return (
               item && (
                 <DropDownItem
                   key={key || index}
                   {...rest}
                   id={item.id}
+                  testId={item?.dataTestId ?? `${key}_item`}
                   label={getLabel(item)}
                   onClick={(
                     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,

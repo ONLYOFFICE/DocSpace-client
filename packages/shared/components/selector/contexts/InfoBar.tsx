@@ -34,7 +34,5 @@ export const InfoBarProvider = ({
   children,
   ...rest
 }: Required<PropsWithChildren> & TInfoBar) => {
-  return (
-    <InfoBarContext.Provider value={rest}>{children}</InfoBarContext.Provider>
-  );
+  return <InfoBarContext value={rest}>{children}</InfoBarContext>;
 };

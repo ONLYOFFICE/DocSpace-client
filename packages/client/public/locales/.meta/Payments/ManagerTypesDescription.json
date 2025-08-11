@@ -3,7 +3,7 @@
   "content": "Admin account types and their privileges",
   "content_en_sha1_hash": "5060d32a68417be31ade57ca08df60bbb21d2738",
   "created_at": "2025-05-19T21:30:53.702Z",
-  "updated_at": "2025-05-21T06:34:10.084Z",
+  "updated_at": "2025-05-24T06:48:37.670Z",
   "comment": {
     "text": "This translation key is used for a tooltip that describes admin account types and their privileges, appearing next to an icon in a payment settings page. It is likely used to provide context or clarify functionality related to administrative accounts.",
     "is_auto": true,
@@ -69,7 +69,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Admin' is translated as 'Järjestelmänvalvoja' which is correct, but the overall phrase 'Admin account types' doesn't flow as well in Finnish. 'Admin' can also be understood as simply 'hallinnoija' in some contexts. A more natural phrasing might be considered.",
+          "suggestion": "Hallinnoijan tilityypit ja niiden etuoikeudet"
+        },
+        {
+          "type": "formatting",
+          "description": "While grammatically correct, the phrasing 'Järjestelmänvalvojan tilityypit' sounds a bit clunky. Consider a slightly restructured sentence for better readability in Finnish.",
+          "suggestion": "Järjestelmänvalvojan erilaiset tilit ja niiden etuoikeudet"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +92,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ադմինիստրատորի հաշվի տեսակները և դրանց արտոնությունները' is a literal translation of 'Admin account types and their privileges'. While understandable, 'Admin' is better translated as 'գործընտրականի' or 'տնօրենի' to maintain a more natural feel in Armenian. The original phrasing refers to account *types* not just an 'admin account'.",
+          "suggestion": "գործընտրականի հաշվի տեսակները և դրանց արտոնությունները"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -102,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '주소 관리자 계정 유형 및 특권' translates to 'Address Manager Account Types and Privileges'. It misses the intended meaning of 'Admin'.",
-          "suggestion": "관리자 계정 유형 및 특권 (Gwanrija gyejeong yueong mit teukkwon)"
+          "description": "The Korean translation '주소 관리자 계정 유형 및 특권' translates to 'Address manager account types and privileges'. This doesn't accurately reflect the English meaning of 'Admin account types and their privileges'. '주소' (address) is incorrectly included.",
+          "suggestion": "Consider a translation like '관리자 계정 유형 및 권한' (Gwanrija gyejeong yueong mit geonhan) which translates to 'Admin account types and permissions'."
         }
       ],
       "approved_at": null
@@ -113,14 +130,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ເບິ່ງແຍງ' (beng yaeng) can be interpreted as 'overseeing' or 'managing'. While not strictly incorrect, 'ຜູ້ເບິ່ງແຍງ' could be improved for clarity in this context.",
-          "suggestion": "Consider using a more precise term for 'manager' or 'administrator', such as 'ຜູ້ບໍລິຫານ' (phu borihan) which means 'administrator'."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'ສິດທິພິເສດ' (sithiphiset) is technically correct for 'privileges', it can sound somewhat formal and legalistic. A simpler alternative might be more suitable depending on the overall tone.",
-          "suggestion": "Consider 'ສິດ' (sit) which simply means 'rights' or 'permissions', for a more accessible term."
+          "description": "The translation \"ປະເພດບັນຊີຜູ້ເບິ່ງແຍງລະບົບ ແລະສິດທິພິເສດຂອງເຂົາເຈົ້າ\" is a bit literal and could be more natural. 'Admin account types' is accurately translated, but 'and their privileges' is clunky. A more natural phrasing could emphasize the description of the privileges.",
+          "suggestion": "ປະເພດບັນຊີຜູ້ເບິ່ງແຍງລະບົບ ແລະລັກສະນະຂອງສິດທິພິເສດຂອງເຂົາເຈົ້າ"
         }
       ],
       "approved_at": null
@@ -137,8 +149,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Beheerder accounts en hun rechten' doesn't fully capture the meaning of 'Admin account types and their privileges'. The term 'types' is missing.  'Beheerder accounts' is correct for 'Admin accounts'. However, 'hun rechten' is a bit literal; a more natural phrasing to encompass 'privileges' might be 'hun bevoegdheden'.",
-          "suggestion": "Beheerder accounttypes en hun bevoegdheden"
+          "description": "The translation 'Beheerder accounts en hun rechten' while generally conveying the meaning, lacks the nuance of 'account types'. The English implies a categorization of administrator accounts. 'Beheerder accounts' is more general.",
+          "suggestion": "Beheerder accounttypen en hun rechten"
         }
       ],
       "approved_at": null
@@ -155,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tipos de contas de administradores e os seus privilégios' is not a perfect equivalent to 'Admin account types and their privileges'. While understandable, a more precise translation might consider 'tipos de conta de administrador' or 'tipos de contas administrativas'. The phrasing 'e os seus privilégios' is a bit clunky; a simpler construction would be better.",
-          "suggestion": "Tipos de conta de administrador e seus privilégios"
+          "description": "The English 'Admin' is best translated to 'Administradores' rather than 'Tipos de contas de administradores'. The current translation is overly verbose.",
+          "suggestion": "Administradores e os seus privilégios"
         }
       ],
       "approved_at": null
@@ -170,13 +182,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tipurile de cont administrator şi privilegiile aferente' is not a perfect match for 'Admin account types and their privileges'. 'Aferente' implies 'related to' or 'corresponding to', which isn't the core meaning. A more accurate translation would convey the types themselves and their privileges directly.",
-          "suggestion": "Tipurile de cont administrator și privilegiile acestora"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -188,13 +194,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"Admin account types and their privileges\" is not perfectly captured by \"පරිපාලක ගිණුම් වර්ග සහ ඒවායේ වරප්‍රසාද\". While \"පරිපාලක ගිණුම් වර්ග\" is accurate for \"Admin account types,\" the use of \"එව්‍වයේ වරප්‍රසාද\" for \"their privileges\" is slightly awkward. A more natural phrasing might emphasize 'rights' or 'authorities' in Sinhala.",
-          "suggestion": "පරිපාලක ගිණුම් වර්ග සහ ඒවායේ අයිතිවාසිකම් (or) පරිපාලක ගිණුම් වර්ග සහ ඒවායේ බලතීන්"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -206,7 +206,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'Admin' is translated as 'Skrbniških', which while technically meaning 'caretaker' or 'custodian', doesn't accurately convey the meaning of 'Admin' in this context of user accounts with elevated privileges. 'Administratorski' would be a more accurate translation.",
+          "suggestion": "Administratorski računi in njihove pravice"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -215,8 +221,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Admin' is translated as 'администраторских'. While technically correct, 'Admin' often refers to the role of an administrator. A more direct translation considering the context might be 'Админ' or 'Рачуни администратора'.",
-          "suggestion": "Consider 'Админ рачуни и њихове привилегије' or 'Рачуни администратора и њихове привилегије'."
+          "description": "The translation \"Типови администраторских налога и њихове привилегије\" is a literal translation but may not be the most natural or idiomatic way to express \"Admin account types and their privileges\" in Serbian. \"Admin\" is best translated as 'Administratorski' or 'Administratorski računi'.",
+          "suggestion": "Consider \"Типови администраторских рачуна и њихове привилегије\" or \"Типови администраторских налога и њихове овласти\"."
         }
       ],
       "approved_at": null

@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Выберите из списка",
-  "ConnectingAccount": "Подключение аккаунта",
-  "DeleteFromTrash": "Выбранные элементы успешно удалены из корзины",
   "FileLocked": "Заблокирован файл",
   "FileProtected": "Файл защищен с помощью пароля",
   "FileUnlocked": "Разблокирован файл",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Изменить настройки подключения",
   "ThirdPartyTitle": "Сторонние сервисы",
   "TitleShowActions": "Показать действия над файлом",
-  "TitleShowFolderActions": "Показать действия над папкой",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Яндекс.Диск"
+  "TitleShowFolderActions": "Показать действия над папкой"
 }

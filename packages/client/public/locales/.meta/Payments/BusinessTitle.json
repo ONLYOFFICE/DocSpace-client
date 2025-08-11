@@ -3,7 +3,7 @@
   "content": "You are using {{planName}} plan",
   "content_en_sha1_hash": "d4806feb989611df3effd43da85972098a769b7a",
   "created_at": "2025-05-19T21:30:53.663Z",
-  "updated_at": "2025-05-21T06:43:43.173Z",
+  "updated_at": "2025-05-24T06:57:57.305Z",
   "comment": {
     "text": "This translation key is used to display a title related to a user's current payment plan. It appears in a UI component that shows details about a paid or grace period subscription, and its content will vary depending on the specific plan name being referred to.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The German translation uses a hyphen to connect 'plan' and the variable 'planName'. In German, when used as an adjective, 'Plan' should be capitalized: '{{planName}}Plan'.",
-          "suggestion": "Sie verwenden den {{planName}}Plan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -78,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Käytät {{planName}}-ohjelmaa' isn't the most natural or idiomatic way to say \"You are using {{planName}} plan\" in Finnish. 'Ohjelmaa' implies a software program rather than a plan. A more accurate translation would convey the sense of a plan or subscription.",
-          "suggestion": "Käytät {{planName}}-tilausta"
+          "description": "The translation 'Käytät {{planName}}-ohjelmaa' is not the most natural or accurate rendering of \"You are using {{planName}} plan\". While grammatically correct, 'ohjelmaa' (program) doesn't fully capture the nuance of 'plan' in a business context. 'Suunnitelmaa' (plan) would be more appropriate.",
+          "suggestion": "Käytät {{planName}}-suunnitelmaa"
         }
       ],
       "approved_at": null
@@ -87,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The French translation uses 'plan tarifaire' which is more formal than the English 'plan'. While correct, consider if a less formal alternative would be more appropriate depending on the overall tone of the application.",
+          "suggestion": "Consider a less formal option like 'plan' or 'forfait' if appropriate for the application's tone."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ທ່ານກຳລັງໃຊ້ແພັກເກດ {{planName}}\" translates to 'You are using package {{planName}}'. While understandable, 'plan' in this context implies a service or subscription, and 'package' doesn't convey that nuance as effectively. A more suitable translation would depend on the specific context of 'plan'.",
-          "suggestion": "Consider alternatives like \"ທ່ານກຳລັງໃຊ້ແຜນການ {{planName}}\" (ທ່ານກຳລັງໃຊ້ແຜນການ {{planName}} - You are using plan {{planName}}) or a more contextually appropriate term."
+          "description": "The translation 'ທ່ານກຳລັງໃຊ້ແພັກເກດ {{planName}}' while understandable, isn't the most natural translation of 'You are using {{planName}} plan'. 'ແພັກເກດ' translates to 'package'. A more direct translation would be 'ທ່ານກຳລັງໃຊ້ແຜນ {{planName}}'.",
+          "suggestion": "ທ່ານກຳລັງໃຊ້ແຜນ {{planName}}"
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is too literal. 'plan' should be translated to 'abonnement' or 'plan' depending on the context. Using 'plan' twice is redundant and sounds unnatural in Dutch.",
-          "suggestion": "U gebruikt het {{planName}} abonnement."
+          "description": "The translation 'U gebruikt {{planName}} plan' is too literal and sounds unnatural in Dutch. The word 'plan' is duplicated, which is not standard Dutch usage. It should be translated as something like 'U heeft het {{planName}} abonnement'.",
+          "suggestion": "U heeft het {{planName}} abonnement"
         }
       ],
       "approved_at": null
@@ -153,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Está a utilizar o plano {{planName}}' is grammatically correct but might not be the most natural or idiomatic way to convey 'You are using {{planName}}'. A more common and natural phrasing could be 'Você está usando o plano {{planName}}' (using 'Você' instead of 'Está a').",
+          "suggestion": "Você está usando o plano {{planName}}"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,13 +171,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'abonamentul' is spelled correctly, but it might benefit from a slight rephrasing for better flow, depending on the overall tone.",
-          "suggestion": "Consider alternatives like 'aveți abonamentul' or 'folosiți planul' for a potentially more natural sound. However, 'abonamentul' is not incorrect."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'plan' is translated as 'план' which means 'a plan' instead of 'plan'. It should be a more general term like 'тарифный план'.",
+          "description": "The word 'plan' is translated as 'план' which means 'plan' as a noun, but in this context, it refers to a plan *type*. The correct translation should reflect that. Using 'план' implies there's a physical plan.",
           "suggestion": "Вы используете {{planName}} тарифный план"
         }
       ],
@@ -189,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'ඔබ {{planName}} සැලසුම භාවිතා කරයි' is a literal translation and sounds awkward in Sinhala. A more natural phrasing would be 'ඔබ {{planName}} වැඩසැලියම භාවිතා කරන්නේය' or 'ඔබ {{planName}} සැලසුම යොදාගෙන සිටින්නේය'.",
+          "suggestion": "ඔබ {{planName}} වැඩසැලියම භාවිතා කරන්නේය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -207,7 +213,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation \"Користи {{planName}} план\" is a literal translation but sounds unnatural in Serbian. A more natural phrasing would be 'Користите {{planName}} план' (using the formal 'Ви' - 'Vi' for 'you').",
+          "suggestion": "Користите {{planName}} план"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -240,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"您正在使用{{planName}}版本\" doesn't accurately convey the meaning of \"You are using {{planName}} plan\". \"版本\" typically means \"version\" rather than \"plan\".",
-          "suggestion": "您正在使用{{planName}}计划"
+          "description": "The translation '版本' (banben) meaning 'version' doesn't perfectly convey the meaning of 'plan'. While 'version' can sometimes imply a plan, 'plan' generally refers to a subscription tier or package. A more appropriate translation might be something like '套餐' (taocan) or '方案' (fang'an).",
+          "suggestion": "Consider using '套餐' (taocan) or '方案' (fang'an) instead of '版本' (banben) to better reflect the meaning of 'plan'."
         }
       ],
       "approved_at": null

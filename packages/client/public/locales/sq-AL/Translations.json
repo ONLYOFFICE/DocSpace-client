@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Zgjidhni nga lista",
-  "ConnectingAccount": "Lidhja e llogarisë",
-  "DeleteFromTrash": "Elementet e zgjedhura u fshinë me sukses nga koshi",
   "FileLocked": "Skedari u kyç",
   "FileProtected": "Skedari është i mbrojtur me fjalëkalim",
   "FileUnlocked": "Skedari u hap",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Ndryshoni informacionin e palës së tretë",
   "ThirdPartyTitle": "Shërbime të palëve të treta",
   "TitleShowActions": "Shfaqni veprimet e skedarit",
-  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve",
-  "TypeTitleBoxNet": "Kuti",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Shfaqni veprimet e dosjeve"
 }

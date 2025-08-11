@@ -184,7 +184,7 @@ const SectionHeaderContent = (props) => {
         return isCustomizationAvailable;
       case "DNSSettings":
         return isCustomizationAvailable;
-      case "RestoreBackup":
+      case "Common:RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "BrandName":
         return isCustomizationAvailable || standalone;
@@ -379,7 +379,7 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Heading>
-          {arrayOfParams[0] !== "payments" ? (
+          {arrayOfParams[0] !== "payments" && arrayOfParams.length < 3 ? (
             <div className="tariff-bar">
               <TariffBar />
             </div>

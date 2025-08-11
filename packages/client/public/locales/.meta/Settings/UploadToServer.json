@@ -3,7 +3,7 @@
   "content": "Upload to server",
   "content_en_sha1_hash": "64e8bb3b5f86ea7da45c956345a760d2533c5442",
   "created_at": "2025-05-19T21:30:53.077Z",
-  "updated_at": "2025-05-28T09:30:02.524Z",
+  "updated_at": "2025-08-11T09:02:43.949Z",
   "comment": {
     "text": "Upload to server is used as a button label on a save cancel buttons component in the data import process. It is displayed when saving file data and appears in a dialog or modal context.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 470,
-      "context": "{isNetworkError ? (\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n />\n ) : (",
+      "line_number": 473,
+      "context": "{isNetworkError ? (\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"upload_to_server_button\"\n cancelButtonDataTestId=\"back_to_providers_button\"",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Serverə yükləyin' is understandable, a more natural and technically accurate translation of \"Upload to server\" would be 'Serverə yüklə' or 'Serverə fayl yüklə'. 'Yükləyin' implies a command directed at someone, which isn't the intention of a settings label.",
-          "suggestion": "Serverə yüklə"
+          "description": "While 'Serverə yükləyin' is understandable, a more natural and precise translation of 'Upload to server' would be 'Serverə yüklə' or 'Serverə göndərin'. The imperative form 'yükləyin' implies a direct command, which might not be suitable depending on the context of the setting.",
+          "suggestion": "Serverə yüklə or Serverə göndərin"
         }
       ],
       "approved_at": null
@@ -48,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Качи в сървър\" is a literal translation and not the most natural way to express \"Upload to server\" in Bulgarian. While technically correct, it sounds somewhat robotic. A more natural phrasing would be \"Качване в сървър\" or \"Зареждане в сървър\".",
-          "suggestion": "Качване в сървър"
+          "description": "The translation 'Качи в сървър' is a literal translation and while understandable, it's not the most natural way to say 'Upload to server' in Bulgarian. 'Качи' implies an upload, but 'сървър' feels slightly awkward in this context.",
+          "suggestion": "Прехвърли към сървър"
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Վերբեռնել սերվերը\" literally translates to \"Upload the server.\" It should mean \"Upload to server.\" The preposition 'to' is missing.",
-          "suggestion": "Վերբեռնել սերվերում"
+          "description": "The translation 'Վերբեռնել սերվերը' literally translates to 'Upload the server' instead of 'Upload to server'. It implies uploading *the* server as an object, not uploading *to* a server.",
+          "suggestion": "Վերբեռնել սերվերում (Verbərnel' serverum) - This translates to 'Upload to server' and is a more accurate representation of the English meaning. Alternatively, 'Վերբեռնել դեպի սերվեր (Verbərnel' depi server) - Upload to server"
         }
       ],
       "approved_at": null
@@ -123,13 +123,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Lao word 'ເຊີບເວີ' is a transliteration of 'server' and might be better represented with a more localized term or transliteration that's commonly understood by Lao speakers. While understandable, it may sound unnatural.",
-          "suggestion": "Consider using a more localized term for 'server' if available, or a more common transliteration like 'ເຊີບເວີເຕີ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -179,9 +173,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'සේවාදායකයට උඩුගත කරන්න' is a somewhat formal and literal translation of 'Upload to server.' A more natural and commonly used phrasing might be more appropriate.",
-          "suggestion": "Consider alternatives like 'සgetServer උඩුගත කරන්න' or 'Server උඩුගත කරන්න'.  The direct transliteration of 'server' is increasingly common and understandable."
+          "type": "spelling",
+          "description": "The word 'සේවාදායකයට' (sevadaayakayaat) is a valid Sinhala word, but might be slightly ambiguous. It literally translates to 'to the service holder' and while understandable in context, 'සේවාකාරයට' (sevakaaraayaat) is more commonly used to mean 'to the server' in a technical context.",
+          "suggestion": "සේවාකාරයට උඩුගත කරන්න"
         }
       ],
       "approved_at": null
@@ -204,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Отпреми на сервер' doesn't accurately convey the meaning of 'Upload to server.' 'Отпреми' implies 'dispatch' or 'send off,' which isn't the typical meaning of 'upload.' A more appropriate translation would use a word related to transferring data.",
+          "description": "The Serbian translation 'Отпреми на сервер' doesn't accurately convey the meaning of 'Upload to server.' 'Отпреми' typically means 'ship' or 'dispatch,' not 'upload.'",
           "suggestion": "Уплоад на сервер"
         }
       ],

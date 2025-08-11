@@ -3,7 +3,7 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2025-05-28T09:30:02.176Z",
+  "updated_at": "2025-08-11T09:02:43.839Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add\" as a button label in various UI elements, such as buttons, input fields, and dialogs. It appears in contexts where users need to add new items or content, including form submissions, editing comments, and OAuth client settings. Translators should provide a clear and concise alternative for this key to ensure consistent and accurate display across the application.",
     "is_auto": true,
@@ -13,24 +13,24 @@
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
       "line_number": 92,
-      "context": "return (\n <PeopleSelector\n useAside\n onClose={onClose}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n isMultiSelect\n disableDisabledUsers\n withGroups\n withInfo",
+      "context": "return (\n <PeopleSelector\n useAside\n onClose={onClose!}\n onSubmit={onSubmit}\n submitButtonLabel={t(\"Common:AddButton\")}\n disableSubmitButton={false}\n isMultiSelect\n disableDisabledUsers\n withGroups\n withInfo",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.js",
-      "line_number": 113,
-      "context": ") : null}\n {changeVersionHistoryAbility ? (\n <div className=\"edit_toggle\" onClick={onOpenEditor}>\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
+      "line_number": 140,
+      "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 209,
-      "context": "<Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\" truncate>\n {value}\n </Text>\n <div className=\"add-block\">\n <Text fontSize=\"13px\" fontWeight={400} lineHeight=\"20px\" truncate>\n {t(\"Common:AddButton\")}\n </Text>\n <ArrowIcon />\n </div>\n </StyledInputAddBlock>\n <SelectorAddButton",
+      "line_number": 220,
+      "context": "fontSize=\"13px\"\n fontWeight={400}\n lineHeight=\"20px\"\n truncate\n >\n {t(\"Common:AddButton\")}\n </Text>\n <ArrowIcon />\n </div>\n </StyledInputAddBlock>\n <SelectorAddButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/DeliveryDatePicker.js",
-      "line_number": 308,
+      "line_number": 312,
       "context": "/>\n </TimePickerCell>\n ) : (\n <TimePickerCell>\n <SelectorAddButton\n title={t(\"Common:AddButton\")}\n onClick={showTimePicker}\n className=\"mr-8 add-delivery-time-button\"\n label={t(\"SelectDeliveryTime\")}\n />\n </TimePickerCell>",
       "module": "/packages/client"
     }
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Əlavə edin' is a command form (imperative) which translates to 'Add it' or 'Add them'. The key 'AddButton' implies a label or a more general 'Add' which requires a nounless translation. A more appropriate translation would be 'Əlavə et'.",
+          "description": "The translation 'Əlavə edin' is a command form (imperative) of 'add'. The context 'Common:AddButton' implies a label or a button text, which should be a noun or a short phrase. It should be more like 'Əlavə et' (Add) or 'Yeni' (New).",
           "suggestion": "Əlavə et"
         }
       ],
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "\"Salva\" translates to \"Save\" in English, not \"Add\". This is a significant mistranslation.",
-          "suggestion": "The correct translation for \"Add\" in Italian should be \"Aggiungi\"."
+          "description": "The Italian translation 'Salva' means 'Save', not 'Add'. It's a semantically incorrect translation of 'Add'.",
+          "suggestion": "A more accurate translation of 'Add' in this context would be 'Aggiungi'."
         }
       ],
       "approved_at": null
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ບັນທຶກ\" typically means \"save\" or \"record\", not \"add\". It doesn't convey the intended meaning of an 'Add' button.",
-          "suggestion": "ບັນເອກະ"
+          "description": "The Lao translation \"ບັນທຶກ\" typically means \"save\" or \"record,\" not \"add.\" This doesn't accurately convey the meaning of the English word \"Add.\" A more appropriate translation would depend on the specific context of the button, but common alternatives might include \"ເພີ່ມ\" (perm) or \"ໃສ່\" (sai).",
+          "suggestion": "Consider alternatives like \"ເພີ່ມ\" (perm) or \"ໃສ່\" (sai), depending on context."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Salvar' translates to 'Save', not 'Add'. This is a semantic error.",
-          "suggestion": "Consider 'Adicionar' which translates directly to 'Add'."
+          "description": "'Salvar' translates to 'Save' in English, not 'Add'. This is a significant semantic mismatch.",
+          "suggestion": "Consider 'Adicionar' for a more accurate translation of 'Add'."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Salvează' means 'Save', not 'Add'. The English word 'Add' implies creating a new item or including something.",
-          "suggestion": "Consider using 'Adaugă' which directly translates to 'Add'."
+          "description": "The Romanian translation 'Salvează' means 'Save', not 'Add'. This is an inaccurate translation of the English content 'Add'.",
+          "suggestion": "The correct Romanian translation for 'Add' would be 'Adaugă'."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'එකතු' typically means 'together' or 'join'. It doesn't directly translate to 'Add' in the context of a button.",
-          "suggestion": "Consider 'சேர்' (Ser) or 'නව එකතු කරන්න' (Nawa ekathu karran) which more accurately convey 'Add'."
+          "description": "'එකතු' generally translates to 'together' or 'combine', not 'add'. While it can sometimes be used in a context implying addition, it's not the most accurate translation for a button labeled 'Add'.",
+          "suggestion": "Consider using 'වැඩ එක් කරන්න' (Waeda ek kāranna) or 'එක් කරන්න' (Ek kāranna) which more closely aligns with the English 'Add'."
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Активний\" does not accurately convey the meaning of \"Add\". \"Активний\" means \"Active\".",
-          "suggestion": "The correct translation of \"Add\" would be something like \"Додати\" or \"Добав\"."
+          "description": "'Активний' translates to 'Active' in English, not 'Add'.",
+          "suggestion": "The correct Ukrainian translation for 'Add' is 'Додати'."
         }
       ],
       "approved_at": null
@@ -258,7 +258,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Thêm vào' is a valid translation, 'Thêm' is a more concise and often preferred translation for 'Add' in UI contexts, especially for a button label. 'Thêm vào' implies adding *into* something, which may not be the intended meaning.",
+          "description": "While 'Thêm vào' is a valid translation for 'Add', it's often more context-dependent. 'Thêm' might be a more concise and universally applicable translation for a button label like 'Add'. 'Thêm vào' implies adding *into* something, which might not be the intended meaning.",
           "suggestion": "Thêm"
         }
       ],

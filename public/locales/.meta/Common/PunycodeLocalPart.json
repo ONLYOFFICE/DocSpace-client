@@ -3,7 +3,7 @@
   "content": "Punycode local part is not supported",
   "content_en_sha1_hash": "527a2aa6c62b234fef95360c6517ee1bcfa5a635",
   "created_at": "2025-05-19T21:30:47.687Z",
-  "updated_at": "2025-08-07T11:27:46.513Z",
+  "updated_at": "2025-08-11T09:02:43.843Z",
   "comment": {
     "text": "The translation key \"PunycodeLocalPart\" indicates an error message that is used when a local part of an email address cannot be converted to Punycode. This error typically appears in UI elements such as dialog boxes or input fields where email addresses are entered. The phrase translates to the user-friendly error description \"Punycode local part is not supported\".",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 177,
+      "line_number": 181,
       "context": "case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"Common:SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:",
       "module": "/packages/shared"
     }
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"الجزء المحلي للبانيكود غير مدعومة\" doesn't perfectly capture the meaning of \"Punycode local part is not supported\". While technically correct, it sounds slightly awkward in Arabic.  'Local part' implies a specific component; a more natural rendering might emphasize the unavailability of that feature.",
-          "suggestion": "قد لا تتوفر وظيفة الجزء المحلي للبانيكود"
+          "description": "The translation \"الجزء المحلي للبانيكود غير مدعومة\" is a literal translation and might not convey the intended meaning clearly to a Saudi Arabian audience. 'Punycode local part' is a technical term. A more natural phrasing might be needed. It is also possible 'غير مدعومة' is not the best way to phrase the lack of support.",
+          "suggestion": "Consider alternatives like \"لا يتم دعم الجزء المحلي للبانيكود\" (The local part of Punycode is not supported) or \"لا تتوفر دعم للجزء المحلي للبانيكود\" (Support for the local part of Punycode is not available)."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Lokal yolda icazə verilməyən simvollardan istifadə olunur\" doesn't accurately convey the meaning of \"Punycode local part is not supported.\" It translates to something like 'Using unsupported symbols in the local path is not allowed'. The intended meaning is that Punycode local parts are not supported, not the general usage of unsupported symbols.",
-          "suggestion": "Punycode yerli hissəsi dəstəklənmir"
+          "description": "The translation \"Lokal yolda icazə verilməyən simvollardan istifadə olunur\" does not accurately convey the meaning of \"Punycode local part is not supported.\" It translates to something like 'Using unsupported symbols in the local path is not allowed'.  The key concept of Punycode is missing.",
+          "suggestion": "A more accurate translation would be something like \"Punycode yerli hissəsi dəstəklənmir\" or \"Punycode yerli hissəsi qeyri-dəstəkli\"."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Punycode wird beim lokalen Teil nicht unterstützt\" is not the most natural or precise translation of \"Punycode local part is not supported\". While understandable, it's a bit clunky. A better translation would emphasize that the local part *itself* is not supported, rather than Punycode being used *with* the local part.",
-          "suggestion": "Punycode-Lokaler Teil wird nicht unterstützt"
+          "description": "The translation 'Punycode wird beim lokalen Teil nicht unterstützt' is somewhat awkward. While technically correct, it doesn't flow naturally in German. A more idiomatic translation would better convey the meaning.",
+          "suggestion": "Punycode-Komponente wird nicht unterstützt"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Punycode-verkkotunnuksia ei tueta' while understandable, isn't the most precise translation of 'Punycode local part is not supported'.  'Verkkotunnuksia' refers to domains, not the local part specifically.  A more accurate translation would highlight the 'local part' aspect.",
-          "suggestion": "Punycode-osan paikallista osaa ei tueta"
+          "description": "The translation 'Punycode-verkkotunnuksia ei tueta' is technically correct but somewhat verbose and not the most natural way to express the meaning of 'Punycode local part is not supported' in Finnish. A more concise and natural translation might be 'Punycode-osaa ei tueta'.",
+          "suggestion": "Punycode-osaa ei tueta"
         }
       ],
       "approved_at": null
@@ -117,13 +117,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word \"աջակցվում\" (ajatsqcvum) might be better as \"աջակցվում է\" (ajatsqcvum e) to indicate passive voice, which aligns better with the English 'is not supported'.",
-          "suggestion": "Punycode տեղական մասը չի աջակցվում է"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -144,13 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"지원되지 않는 퓨니코드 로컬 파트입니다\" is a literal translation that sounds unnatural in Korean. While technically correct, it's not idiomatic.",
+          "description": "The translation \"지원되지 않는 퓨니코드 로컬 파트입니다\" is a literal translation but sounds unnatural in Korean. While technically correct, a more natural phrasing would be better.",
           "suggestion": "지원되지 않는 퓨니코드 로컬 부분입니다"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'part' is translated as '파트' (pateu), which is the Konglish term for 'part'. A more natural Korean word would be '부분' (bubun).",
-          "suggestion": "The word 'part' should be changed to '부분'. The entire sentence would then be '지원되지 않는 퓨니코드 로컬 부분입니다'."
         }
       ],
       "approved_at": null
@@ -161,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ພື້ນທີ່ບໍ່ຮອງຮັບ Punycode\" doesn't accurately convey the meaning of \"Punycode local part is not supported.\" 'ພື້ນທີ່' (pheun tee) translates to 'area' or 'space,' which is not the correct terminology for the Punycode local part.  It implies a geographical or physical area rather than a technical component.",
-          "suggestion": "Consider a more precise translation that reflects the technical nature of the 'Punycode local part.' A possible suggestion would be: 'ສ່ວນຂອງ Punycode ທີ່ບໍ່ຮອງຮັບ' (suan khong Punycode thi bor rong rup) which means 'The part of Punycode that is not supported'."
+          "description": "The Lao translation \"ພື້ນທີ່ບໍ່ຮອງຮັບ Punycode\" translates to 'Area does not support Punycode.' This isn't a direct or accurate translation of 'Punycode local part is not supported'. It misses the nuance of 'local part'.",
+          "suggestion": "Consider a translation that more accurately reflects \"Punycode local part\", such as \"ສ່ວນພື້ນທີ່ Punycode ບໍ່ຮອງຮັບ\" (Punycode local part is not supported) or \"ສ່ວນຂອງ Punycode ບໍ່ຮອງຮັບ\" (Punycode part is not supported)."
         }
       ],
       "approved_at": null
@@ -185,7 +174,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Identyfikator użytkownika Punycode nie jest obsługiwany\" doesn't accurately convey the meaning of \"Punycode local part is not supported\". \"Identyfikator użytkownika\" (user identifier) is not a direct translation of \"local part\". It implies a user-specific element, which isn't the intended meaning. The translation should focus on the technical aspect of Punycode.",
+          "description": "The translation 'Identyfikator użytkownika Punycode nie jest obsługiwany' doesn't accurately convey the meaning of 'Punycode local part is not supported.' 'Identyfikator użytkownika' (user identifier) is not the same as 'local part'. The focus should be on the 'local part' itself, not the user.",
           "suggestion": "Część lokalna Punycode nie jest obsługiwana"
         }
       ],
@@ -197,7 +186,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A peça local Punycode não é suportada' is not the most natural or accurate translation of 'Punycode local part is not supported'. 'Peça' refers to a part or piece in a theatrical context, which isn't the intended meaning here. 'Local part' refers to the portion of a Punycode representation.",
+          "description": "The translation 'A peça local Punycode não é suportada' is not the most natural or accurate translation of 'Punycode local part is not supported'. 'Peça' (piece) isn't the best fit for 'part' in this context. It implies a physical component.",
           "suggestion": "A parte local Punycode não é suportada"
         }
       ],
@@ -209,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A peça local Punycode não é suportada' isn't the most natural or accurate rendering of 'Punycode local part is not supported'. 'Peça' (piece) doesn't quite capture the meaning of 'part' in this technical context.",
-          "suggestion": "A parte local Punycode não é suportada"
+          "description": "The translation \"A peça local Punycode não é suportada\" is not the most natural or accurate translation of 'Punycode local part is not supported'. 'Peça' translates to 'piece' or 'part' in a physical sense, which isn't appropriate for Punycode. A better translation would focus on the functionality being unavailable.",
+          "suggestion": "O suporte para a parte local Punycode não está disponível"
         }
       ],
       "approved_at": null
@@ -227,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Имя почтового ящика содержит запрещенные символы\" (The mailbox name contains forbidden symbols) doesn't accurately reflect the English meaning \"Punycode local part is not supported\". It's a broader statement about forbidden characters, not specifically about the lack of Punycode support.",
-          "suggestion": "A more accurate translation might be something like \"Поддержка Punycode для локальной части не поддерживается\" (Punycode support for the local part is not supported) or \"Локальная часть Punycode не поддерживается\" (Punycode local part is not supported)."
+          "description": "The Russian translation \"Имя почтового ящика содержит запрещенные символы\" translates to \"The mailbox name contains forbidden characters.\" This is not an accurate translation of \"Punycode local part is not supported.\" It describes a different problem.",
+          "suggestion": "A more accurate translation would be something along the lines of \"Поддержка Punycode локальной части не поддерживается\" or \"Punycode локальная часть не поддерживается\"."
         }
       ],
       "approved_at": null
@@ -239,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ස්ථානීය කොටසට අන්තර්ජාතික කේත සහාය නොදක්වයි\" doesn't accurately convey the meaning of \"Punycode local part is not supported\". The Sinhala phrase translates to something like \"The local part does not support international codes\". The original English sentence means that the system doesn't support Punycode local parts, not that the local part itself is lacking support.  A more accurate translation would focus on the system's inability to handle Punycode local parts.",
-          "suggestion": "හැකියාවක් නැත ඤාඪක කේත ප්‍රදේශය සඳහා (Hakidayawa naeth puniycode keta praadeshaya satha)"
+          "description": "The translation 'ස්ථානීය කොටසට අන්තර්ජාතික කේත සහාය නොදක්වයි' does not accurately convey the meaning of 'Punycode local part is not supported'. 'අන්තර්ජාතික කේත' (international code) is not directly related to the Punycode concept. A more accurate translation would focus on the lack of support for the local part of a Punycode encoded domain.",
+          "suggestion": "A better translation could be something like 'පුනියකෝඩ් ප්‍රදේශීය කොටස සඳහා සහාය ලබා නොදක්වයි' (Punycode local part is not supported)."
         }
       ],
       "approved_at": null

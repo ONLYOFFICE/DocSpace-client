@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "مطلوب التنشيط",
   "AddStaticText": "إضافة نص ثابت",
   "AddWatermarkElements": "إضافة عناصر العلامة المائية",
   "AddWatermarksToDocuments": "إضافة علامات مائية إلى المستندات",
@@ -33,7 +32,6 @@
   "StorageDescription": "تم تحديد حصص التخزين لكل غرفة. يمكنك تغيير هذه القيمة أو إيقاف تشغيل حد التخزين.",
   "TagsPlaceholder": "أضف وسم",
   "ThirdPartyStorageComboBoxPlaceholder": "حدد المساحة التخزينية",
-  "ThirdPartyStorageDescription": "استخدم التحزين عبر طرف ثالث لحفظ بيانات هذه الغرفة. يمكنك إنشاء مجلد جديد، أو اختيار مجلد داخل وحدة التخزين المتصلة.",
   "ThirdPartyStorageNoStorageAlert": "قبل ذلك ، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". خلاف ذلك ، لن يكون الاتصال ممكنًا.",
   "ThirdPartyStoragePermanentSettingDescription": "يتم تخزين الملفات في وحدة تخزين تابعة لجهة خارجية {{thirdpartyTitle}} \\\"{{thirdpartyFolderName}}\\\" مجلد.\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "لتوصيل وحدة تخزين تابعة لجهة خارجية ، تحتاج إلى إضافة الخدمة المقابلة في قسم التكامل من إعدادات {{productName}}. اتصل بمالك {{productName}} أو المسئول لتمكين التكامل.",

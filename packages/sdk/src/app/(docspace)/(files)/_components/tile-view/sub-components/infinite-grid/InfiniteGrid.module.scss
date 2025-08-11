@@ -26,8 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "@docspace/shared/styles/variables/devices.scss";
-@import "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/mixins";
 
 .infiniteLoader {
   overflow: visible !important;
@@ -47,12 +46,12 @@
   grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   gap: 16px;
 
-  @include desktop {
+  @include mixins.desktop {
     margin-inline-start: 1px;
     padding-inline-end: 0;
   }
 
-  @include tablet-and-below {
+  @include mixins.tablet-and-below {
     margin-inline-start: -1px;
     margin-inline-end: 3px;
   }

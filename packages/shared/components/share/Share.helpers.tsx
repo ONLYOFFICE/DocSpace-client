@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import moment from "moment";
 import { Trans } from "react-i18next";
-
 import isUndefined from "lodash/isUndefined";
 import isNull from "lodash/isNull";
+import type { TFunction } from "i18next";
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
@@ -53,7 +53,6 @@ import type {
   TFolder,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
-import { Strong } from "./Share.styled";
 
 export const getShareOptions = (
   t: TTranslation,
@@ -290,7 +289,7 @@ export const getRoleNameByAccessRight = (
 
 export const getTranslationDate = (
   expirationDate: TFileLink["sharedTo"]["expirationDate"],
-  t: TTranslation,
+  t: TFunction,
 ) => {
   if (expirationDate) {
     const date = getDate(expirationDate);
@@ -301,7 +300,7 @@ export const getTranslationDate = (
         i18nKey="LinkExpireAfter"
         ns="Common"
         values={{ date }}
-        components={{ 1: <strong /> }}
+        components={{ 1: <strong key="strong-expire-after" /> }}
       />
     );
   }
@@ -312,7 +311,7 @@ export const getTranslationDate = (
       i18nKey="LinkIsValid"
       ns="Common"
       values={{ date }}
-      components={{ 1: <strong /> }}
+      components={{ 1: <strong key="strong-link-valid" /> }}
     />
   );
 };
@@ -342,7 +341,7 @@ export const canShowManageLink = (
 
 export const copyRoomShareLink = (
   link: TFileLink,
-  t: TTranslation,
+  t: TFunction,
   withCopy = true,
   linkOptions?: {
     canShowLink: boolean;
@@ -362,7 +361,7 @@ export const copyRoomShareLink = (
       ns="Common"
       i18nKey="RoomShareLinkRole"
       values={{ role }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-role" /> }}
     />
   );
 
@@ -377,14 +376,14 @@ export const copyRoomShareLink = (
       ns="Common"
       i18nKey="LinkIsValid"
       values={{ date: moment(expirationDate).format("lll") }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-date" /> }}
     />
   ) : null;
 
   toastr.success(
     <span>
       {roleText} {passwordText} {restrictionText} {date}
-      {date ? <Strong>.</Strong> : null}
+      {date ? <strong>.</strong> : null}
       {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <Link
           color={globalColors.lightBlueMain}
@@ -400,7 +399,7 @@ export const copyRoomShareLink = (
 
 export const copyDocumentShareLink = (
   link: TFileLink,
-  t: TTranslation,
+  t: TFunction,
   linkOptions?: {
     canShowLink: boolean;
     onClickLink: VoidFunction;
@@ -418,7 +417,7 @@ export const copyDocumentShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitleInternal"
       values={{ productName: t("Common:ProductName"), access }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-internal" /> }}
     />
   ) : (
     <Trans
@@ -426,7 +425,7 @@ export const copyDocumentShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitle"
       values={{ access }}
-      components={{ 1: <Strong /> }}
+      components={{ 1: <strong key="strong-external" /> }}
     />
   );
   const date = getTranslationDate(expirationDate, t);
@@ -434,7 +433,7 @@ export const copyDocumentShareLink = (
   toastr.success(
     <span>
       {head} {date}
-      <Strong>.</Strong>
+      <strong>.</strong>
       {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <>
           &nbsp;

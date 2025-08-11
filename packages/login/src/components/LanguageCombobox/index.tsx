@@ -67,7 +67,7 @@ const LanguageComboboxWrapper = ({
   const { currentDeviceType } = useDeviceType();
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  if (!cultures) return <></>;
+  if (!cultures) return null;
 
   return (
     <LanguageCombobox

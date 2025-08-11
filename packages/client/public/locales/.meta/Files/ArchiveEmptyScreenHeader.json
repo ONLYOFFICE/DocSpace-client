@@ -3,7 +3,7 @@
   "content": "No archived rooms here yet",
   "content_en_sha1_hash": "6868d854f39578b54b8277c27e2f1b3fb40fd2d3",
   "created_at": "2025-05-19T21:30:55.281Z",
-  "updated_at": "2025-06-03T20:59:41.791Z",
+  "updated_at": "2025-06-02T10:20:51.016Z",
   "comment": {
     "text": "The ArchiveEmptyScreenHeader translation key is used to display a message indicating that there are no archived rooms in the current folder. It typically appears as a header on an empty archive screen, providing feedback to users about the contents of the archive section.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
       "line_number": 101,
-      "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashEmptyDescription\");\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");",
+      "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 311,
+      "line_number": 315,
       "context": ")\n .with([FolderType.USER, ShareAccessRights.None], () =>\n t(\"Common:EmptyScreenFolder\"),\n )\n .with([FolderType.Recent, P._], () => t(\"Files:NoFilesHereYet\"))\n .with([FolderType.Archive, P._], () => t(\"Files:ArchiveEmptyScreenHeader\"))\n .with([FolderType.TRASH, P._], () => t(\"Common:EmptyScreenFolder\"))\n .otherwise(() => \"\");\n };\n \n export const getFolderIcon = (",
       "module": "/packages/client"
     }
@@ -105,7 +105,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '아직 여기에 아카이브 방이 없습니다' while technically correct, sounds slightly unnatural in Korean. '아카이브 방' feels a little direct. A more natural phrasing would incorporate the concept of archived rooms.",
+          "suggestion": "아직 여기에는 보관된 방이 없습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -135,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Ainda não tem qualquer sala arquivada' is not the most natural or idiomatic Portuguese. It's grammatically correct, but sounds a bit awkward. A better translation would convey the meaning more elegantly.",
+          "suggestion": "Ainda não existem salas arquivadas aqui"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'මෙහි සංරක්‍ෂිත කාමර නැත' while literally translates to 'No archived rooms here', doesn't quite capture the natural flow and nuance of the English phrase 'No archived rooms here yet'. It sounds a bit abrupt in Sinhala.",
+          "suggestion": "මෙහි සංරක්‍ෂිත කාමර දැන් නැත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +195,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Нема архивираних соба овде још' is not the most natural or accurate translation of 'No archived rooms here yet'. It translates literally to 'There are no archived rooms here yet'. A more natural phrasing would convey the 'yet' aspect more effectively.",
+          "suggestion": "Нема још ништа архивирано од соба овде."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the literal translation sounds a bit clunky. A more flowing phrasing improves readability.",
+          "suggestion": "Consider alternative phrasing options as suggested in the incorrect_translation issue."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is literal and doesn't flow naturally in Serbian. A more idiomatic translation would be better.",
+          "suggestion": "Nema arhiviranih soba još."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -207,7 +242,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '暂无已存档房间' is understandable, a more natural and common translation for 'No archived rooms here yet' would be '这里暂无已存档房间' or '目前没有已存档房间'. The original translation feels slightly stiff.",
+          "suggestion": "这里暂无已存档房间"
+        }
+      ],
       "approved_at": null
     }
   }

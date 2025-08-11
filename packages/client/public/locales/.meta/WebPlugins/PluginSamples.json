@@ -3,7 +3,7 @@
   "content": "Plugin samples",
   "content_en_sha1_hash": "52548adb731eeeda86b2df3c051c254dd28ffc5b",
   "created_at": "2025-05-19T21:30:49.918Z",
-  "updated_at": "2025-05-21T00:42:09.465Z",
+  "updated_at": "2025-08-04T07:30:01.451Z",
   "comment": {
     "text": "This translation key is used to display \"Plugin samples\" as a heading in the developer tools section of the Portal Settings page. It appears as a bold title above a list of plugin SDK-related content when the user clicks on a link or navigates to this page.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/PluginSDK/index.js",
-      "line_number": 152,
-      "context": "onClick={() => window.open(apiPluginSDKLink, \"_blank\")}\n />\n {!isEmptyList && list.length > 0 ? (\n <>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PluginSamples\")}\n </Text>\n <div className=\"plugin-list\">{list}</div>\n </>\n ) : null}\n </StyledContainer>",
+      "line_number": 154,
+      "context": "testId=\"read_instructions_button\"\n />\n {!isEmptyList && list.length > 0 ? (\n <>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"PluginSamples\")}\n </Text>\n <div className=\"plugin-list\">{list}</div>\n </>\n ) : null}\n </StyledContainer>",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'عينات الاضافات' while understandable, isn't the most natural or precise translation of \"Plugin samples\". 'عينات' (ayyinat) means 'samples', but 'الاضافات' (al-idaafaat) translates to 'the additions' which is close but not exactly 'plugins'. A more accurate translation might use a term that specifically refers to plugins.",
-          "suggestion": "Consider using 'نماذج الإضافات' (namazij al-idaafaat) which translates to 'Plugin Models/Examples' or 'عينات المكونات الإضافية' (ayyinat al-mukawwinat al-idaafiyya) - 'Samples of Additional Components'."
+          "description": "While \"عينات الاضافات\" is a literal translation, a more natural and accurate translation for \"Plugin samples\" in a software or technical context might be something like \"نماذج الإضافات\" or \"أمثلة الإضافات\". \"عينات\" often implies physical samples, which isn't the intended meaning here.",
+          "suggestion": "نماذج الإضافات"
         }
       ],
       "approved_at": null
@@ -69,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "Missing period at the end of the sentence.",
-          "suggestion": "Ejemplos de plugins."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Laajennusmallit' is a possible translation, 'Plugin samples' generally refers to example plugins, not just extensions/add-ons in general. A more accurate translation could consider the context of 'samples' as example implementations.",
-          "suggestion": "Esimerkkilaajennukset"
+          "description": "While 'Laajennusmallit' is a possible translation, 'Plugin samples' more accurately conveys the meaning of sample plugins. 'Laajennusmallit' translates to 'extension models' or 'expansion models', which doesn't align with the original meaning of 'samples'.",
+          "suggestion": "Lisäosesan mallit"
         }
       ],
       "approved_at": null
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Exemple de plugin-uri' is understandable, a more natural and accurate translation of 'Plugin samples' would be 'Mostre de plugin-uri' or 'Plugin-uri de exemplu'. 'Exemple' refers to examples in a broader sense, while 'samples' implies a representative selection.",
-          "suggestion": "Mostre de plugin-uri"
+          "description": "The English phrase \"Plugin samples\" implies a collection of plugin examples. \"Exemple de plugin-uri\" is technically correct but lacks the nuance of \"samples.\" It suggests individual examples rather than a group.",
+          "suggestion": "Consider \"Mostre de plugin-uri\" or \"Exemple de plugin-uri multiple\" to better convey the meaning of 'samples'."
         }
       ],
       "approved_at": null
@@ -180,13 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ආදර්ශ පේනු' doesn't accurately convey the meaning of 'Plugin samples'. 'ආදර්ශ' means 'model' or 'example,' and 'පේනු' is a less common word for 'plugins'. A more accurate translation would focus on conveying 'examples' or 'sample' plugins, potentially using a phrasing closer to 'ප්ලගින් උදාහරණ' or 'ප්ලගින් నమూనా'.",
-          "suggestion": "ප්ලගින් උදාහරණ"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'පේනු' isn't strictly incorrect, it's not the most common or preferred word for 'plugins' in Sinhala in this context. It can be perceived as slightly unnatural.",
-          "suggestion": "ප්ලගින්"
+          "description": "The translation 'ආදර්ශ පේනු' is not the most accurate translation for 'Plugin samples'. 'ආදර්ශ' translates to 'example' or 'model', and 'පේනු' means 'plugins'. A more accurate translation would convey the idea of sample plugins or demonstration plugins.",
+          "suggestion": "Possible suggestions include: 'ප්ලගින් උදාහරණ' (Plugin Udaharana - Plugin Examples) or 'ප්ලගින් සාම්පල' (Plugin Sampala - Plugin Samples)."
         }
       ],
       "approved_at": null
@@ -209,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Узорци додатака\" is understandable, a more accurate and idiomatic translation of \"Plugin samples\" would be \"Примери додатка/а\". \"Узорци\" implies patterns or designs, which isn't the intended meaning.",
-          "suggestion": "Примери додатка/а"
+          "description": "While 'Узорци додатака' is a literal translation, a more natural and idiomatic translation for 'Plugin samples' in a technical context might be 'Примери додатка' or 'Примерци додатка'. 'Узорци' often implies decorative patterns, which isn't the intended meaning here.",
+          "suggestion": "Примери додатка"
         }
       ],
       "approved_at": null

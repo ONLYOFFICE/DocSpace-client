@@ -3,7 +3,7 @@
   "content": "Enter email",
   "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
   "created_at": "2025-05-19T21:30:53.296Z",
-  "updated_at": "2025-06-18T07:34:14.891Z",
+  "updated_at": "2025-06-30T12:20:31.241Z",
   "comment": {
     "text": "\"Used as a placeholder and label for an email input field in various UI components, such as dialogs and tables, to prompt users to enter their email address.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EmailChangeDialog/index.tsx",
-      "line_number": 85,
-      "context": "<ModalDialog.Header>{t(\"AddEmail\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <DialogBodyWrapper>\n <Text>{displayName}</Text>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n type={InputType.email}\n onValidateInput={onValidateEmail}",
+      "line_number": 84,
+      "context": "<ModalDialog.Header>{t(\"AddEmail\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <DialogBodyWrapper>\n <Text>{displayName}</Text>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
       "module": "/packages/client"
     },
     {
@@ -24,14 +24,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/UsersRowContent.tsx",
-      "line_number": 205,
-      "context": "displayName={displayName}\n />\n ) : (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n type={InputType.email}\n onValidateInput={onValidateEmail}",
+      "line_number": 204,
+      "context": "displayName={displayName}\n />\n ) : (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n hasError={hasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
-      "line_number": 202,
-      "context": "<TableCell>\n {isEmailOpen ? (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n type={InputType.email}\n onValidateInput={onValidateEmail}",
+      "line_number": 203,
+      "context": "<TableCell>\n {isEmailOpen ? (\n <EmailInputWrapper ref={emailInputRef}>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}\n className=\"import-email-input\"\n value={tempEmail}\n onChange={handleEmailChange}\n onValidateInput={onValidateEmail}\n onKeyDown={handleKeyDown}",
       "module": "/packages/client"
     }
   ],
@@ -96,7 +96,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Saisir l'adresse e-mail' is a more literal translation of 'Enter email' than what is typically used in UI. A more natural translation would be 'Entrez votre adresse e-mail' or 'Adresse e-mail'.",
+          "description": "While \"Saisir l'adresse e-mail\" is a valid translation, it's slightly more formal than the simplicity of \"Enter email\".  A more direct and common translation for UI labels would be \"Entrez votre adresse e-mail\" or \"Adresse e-mail\".",
           "suggestion": "Entrez votre adresse e-mail"
         }
       ],
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Մուտքագրեք էլ' is an incomplete translation. It seems to be missing the word 'address' or a similar term to fully convey 'Enter email'.",
-          "suggestion": "Մուտքագրեք էլ. հասցե (Mut’yagrek el. Hasce)"
+          "description": "The Armenian translation \"Մուտքագրեք էլ\" is not a complete or accurate translation of \"Enter email\". It translates to something like \"Enter el\", where \"el\" is an incomplete word. The full word for 'email' in Armenian is \"էլփոստ\".",
+          "suggestion": "Մուտքագրեք էլփոստ (Mut’yagreq el’post)"
         }
       ],
       "approved_at": null
@@ -159,13 +159,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Introduzir email' is not the most natural or common way to say 'Enter email' in Portuguese. While technically correct, it's a bit formal and doesn't flow as well. A more common and idiomatic translation would be 'Digite o email' or 'Insira o email'.",
-          "suggestion": "Digite o email"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Introduceți adresa de e-mail' is a literal translation, but slightly more natural phrasing would be 'Introduceți emailul'. While 'adresa de e-mail' is correct, it can sound overly formal in this context.",
-          "suggestion": "Introduceți emailul"
+          "description": "While \"Introduceți adresa de e-mail\" is understandable, it's a bit formal for a simple label like 'Enter email'. A more natural and user-friendly translation would be more direct.",
+          "suggestion": "Introduceți email"
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වි-තැපෑල යොදන්න' doesn't perfectly capture the meaning of 'Enter email'. While 'යොදන්න' (yodannaa) means 'to add' or 'to enter', 'වි-තැපෑල' (vi-tapaeala) is a more literal translation of 'email' and less natural in this context. A more natural phrasing would convey the action of providing or inputting an email address.",
-          "suggestion": "Consider 'විද්‍යුත් ලිපිනය ඇතුළත් කරන්න' (vidyut lipinaya athulath kannaa) - which means 'Enter email address'."
+          "description": "The translation 'වි-තැපෑල යොදන්න' while understandable, isn't the most natural or accurate translation of 'Enter email'. It literally translates to 'Connect email'. A more common and accurate translation would be something like 'විද්යුත් තැපෑල ඇතුළත් කරන්න' or 'විද්යුත් තැපෑල ලිවන්න'.",
+          "suggestion": "විද්යුත් තැපෑල ඇතුළත් කරන්න"
         }
       ],
       "approved_at": null
@@ -222,13 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Унеси емаил' is a transliteration of 'Enter email' rather than a true translation. 'Enter' can be translated as 'Унеси' but 'email' is better translated as 'електронска пошта' or 'меjl'. Using 'емаил' is an Anglicism and might not be the most natural or professional choice in Serbian.",
-          "suggestion": "Унеси електронску пошту"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the Anglicism 'емаил' might require a slightly different tone or phrasing adjustment depending on the overall application's voice. Consider using a more native Serbian term for consistency.",
-          "suggestion": "Review the overall brand voice and consider a more integrated Serbian term like 'електронска пошта' or 'меjl'."
+          "description": "While 'Унеси емаил' is understandable, it's a transliteration rather than a true translation. 'Email' is often used in Serbian, but a more natural translation would be something like 'Унесите адресу е-поште' or 'Унесите е-маил адресу'.",
+          "suggestion": "Унесите адресу е-поште"
         }
       ],
       "approved_at": null
@@ -239,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Unesi email' is not the most natural or accurate Serbian (Latin) translation of 'Enter email'. While 'Unesi' means 'enter' or 'input', the common and preferred phrasing would be 'Uneti email' or 'Unesite email'.",
-          "suggestion": "Uneti email"
+          "description": "The translation 'Unesi email' is not the most natural or accurate Serbian (Latin) translation of 'Enter email'. While understandable, it's a direct transliteration and not idiomatic.",
+          "suggestion": "The more natural translation would be 'Unesite e-mail' or 'Upisite e-mail'."
         }
       ],
       "approved_at": null
@@ -257,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Введіть адресу ел. пошти' is a literal translation but can be improved for naturalness and common usage in Ukrainian. 'ел. пошти' is a shortened form, while a more common and fluent phrasing would be 'Введіть електронну пошту'.",
+          "description": "The translation \"Введіть адресу ел. пошти\" is a more literal and verbose translation of \"Enter email\". A more natural Ukrainian equivalent would be \"Введіть електронну пошту\" or \"Введіть email\".",
           "suggestion": "Введіть електронну пошту"
         }
       ],
@@ -269,7 +258,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nhập địa chỉ email' is understandable, a more natural and direct translation of 'Enter email' would be 'Nhập email'. 'Địa chỉ' (address) is redundant in this context.",
+          "description": "While \"Nhập địa chỉ email\" is understandable, a more natural and common translation for \"Enter email\" would be \"Nhập email\". \"Địa chỉ\" (address) is often implied and not explicitly stated in this context.",
           "suggestion": "Nhập email"
         }
       ],
@@ -278,13 +267,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"输入电子邮件\" is a more formal and lengthy translation. A more natural and concise translation for 'Enter email' would be '输入邮箱' or '输入邮件'.",
-          "suggestion": "输入邮箱"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

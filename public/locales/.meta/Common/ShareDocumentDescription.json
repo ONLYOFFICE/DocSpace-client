@@ -3,7 +3,7 @@
   "content": "Provide access to the document and set the permission levels.",
   "content_en_sha1_hash": "fadee6246aa07df38bf00a87b1e091ea755c3d52",
   "created_at": "2025-05-19T21:30:48.651Z",
-  "updated_at": "2025-05-28T09:30:02.956Z",
+  "updated_at": "2025-08-11T09:02:44.085Z",
   "comment": {
     "text": "Provide access to the document and set the permission levels. This translation key is used as a descriptive text in a UI component, likely a button or dialog, to inform users about the purpose of sharing a document.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/index.tsx",
-      "line_number": 395,
-      "context": "return (\n <div data-testid=\"shared-links\">\n {visibleBar ? (\n <PublicRoomBar\n headerText={t(\"Common:ShareDocument\")}\n bodyText={t(\"Common:ShareDocumentDescription\")}\n iconName={InfoIcon}\n onClose={() => setVisibleBar(false)}\n />\n ) : null}",
+      "line_number": 407,
+      "context": "return (\n <div data-testid=\"shared-links\">\n {visibleBar ? (\n <PublicRoomBar\n headerText={t(\"Common:ShareDocument\")}\n bodyText={t(\"Common:ShareDocumentDescription\")}\n iconName={InfoIcon}\n onClose={() => setVisibleBar(false)}\n dataTestId=\"info_panel_share_public_room_bar\"\n />\n ) : null}",
       "module": "/packages/shared"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sənədə daxil olun və icazə səviyyələrini təyin edin\" doesn't fully capture the meaning of \"Provide access to the document and set the permission levels.\" 'Provide access' implies granting permission, which isn't explicitly conveyed. 'Daxil olun' leans more towards 'enter' or 'access in a physical sense'.",
-          "suggestion": "Consider a more accurate translation like \"Sənədə daxil olunmaq və icazə səviyyələrini müəyyən etmək\" or \"Sənədə giriş əldə edin və icazə səviyyələrini təyin edin.\""
+          "description": "The translation 'Sənədə daxil olun və icazə səviyyələrini təyin edin' doesn't fully capture the meaning of 'Provide access to the document and set the permission levels.' 'Sənədə daxil olun' implies entering the document, whereas 'provide access' implies giving someone permission to view it.",
+          "suggestion": "Verilmiş olan sənədə girişə icazə verin və icazə səviyyələrini təyin edin."
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aseta asiakirjalle oikeudet ja käyttöoikeustasot' is a literal translation that doesn't fully capture the meaning of 'Provide access to the document and set the permission levels.' It's a bit clunky and doesn't flow naturally in Finnish. 'Provide access' implies granting permission, which is adequately conveyed by 'oikeudet', but 'käyttöoikeustasot' adds unnecessary complexity.",
-          "suggestion": "Anna pääsy asiakirjaan ja määritä käyttöoikeustasot."
+          "description": "The Finnish translation 'Aseta asiakirjalle oikeudet ja käyttöoikeustasot' is not a perfect equivalent of 'Provide access to the document and set the permission levels'. While it conveys the general idea, it's a bit literal and sounds slightly awkward in Finnish.  'Provide access' is better expressed by implying the act of granting access.",
+          "suggestion": "Anna käyttöoikeus asiakirjalle ja määritä käyttöoikeustasot."
         }
       ],
       "approved_at": null
@@ -105,7 +105,18 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '文書へのアクセスを提供し、権限レベルを設定してください。' is a bit formal and could be improved for clarity and naturalness. '提供し' is quite stiff in this context. A more natural phrasing would convey the meaning of granting access and setting permissions.",
+          "suggestion": "文書へのアクセスを許可し、権限レベルを設定してください。"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses polite language ('ください'). While technically correct, it might be too formal depending on the intended audience and the tone of the UI. Consider a less formal alternative.",
+          "suggestion": "文書へのアクセスを許可し、権限レベルを設定します。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,7 +128,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ກໍານົດລະດັບການອະນຸຍາດ' while literally meaning 'define permission levels' doesn't quite capture the nuance of 'set the permission levels.' A better translation would convey the action of establishing or assigning permission levels.",
+          "suggestion": "Consider 'ຕັ້ງລະດັບການອະນຸຍາດ' which translates to 'set permission levels'."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -156,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Oferire acces la acest document și definire niveluri de permisiuni\" is not a perfect equivalent of \"Provide access to the document and set the permission levels.\" \"Oferire\" (Offering) is a bit awkward. A more natural phrasing would be \"A oferi acces...\"",
-          "suggestion": "A oferi acces la acest document și definire niveluri de permisiuni."
+          "description": "The translation 'Oferire acces la acest document și definire niveluri de permisiuni' is not the most natural or accurate translation of 'Provide access to the document and set the permission levels.' While technically correct, 'Oferire acces' is less common than 'Asigurarea accesului'. 'Definire niveluri de permisiuni' is a bit formal, 'stabilirea nivelurilor de acces' would be more common.",
+          "suggestion": "Asigurarea accesului la document și stabilirea nivelurilor de acces."
         }
       ],
       "approved_at": null
@@ -173,14 +190,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ලේඛනයට' (lehakanaṭa) is correctly spelled, but its usage might be slightly unnatural in this context. A more natural phrasing could be considered.",
-          "suggestion": "Consider 'ලේඛනය සඳහා' (lehakana sarakā) instead of 'ලේඛනයට' (lehakanaṭa)"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'අවසර මට්ටම් සකසන්න' (avasaramataṭṭam sakasanna) translates to 'set permission levels' but doesn't fully convey the nuance of 'provide access and set permission levels' in the English original. It's more literal than ideal.",
-          "suggestion": "Consider 'ලේඛනයට ප්‍රවේශය ලබා දී අවසර පවරාන්න.' (lehakanaṭa pravēśaya labā dī avasara pavanānna.) - This emphasizes granting access and transferring permissions."
+          "description": "The translation \"ලේඛනයට ප්‍රවේශය ලබා දී අවසර මට්ටම් සකසන්න.\" is a literal translation that doesn't fully convey the meaning of 'Provide access to the document and set the permission levels'. A more natural phrasing would capture the action of granting access and setting permissions together.",
+          "suggestion": "ලේඛනයට ප්‍රවේශය දී අවසර මට්ටම්‍නූ සකසන්න."
         }
       ],
       "approved_at": null
@@ -203,13 +215,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Обезбедите приступ документу и поставите нивое дозволе' doesn't fully convey the meaning of 'Provide access to the document and set the permission levels.' 'Обезбедите приступ' is a somewhat formal and less common way to say 'Provide access.'  'Нивое дозволе' is a literal translation of 'permission levels' but sounds awkward. A more natural phrasing would be more idiomatic.",
-          "suggestion": "Узбедите приступ документу и подесите нивое дозвола."
+          "description": "The translation 'Обезбедите приступ документу и поставите нивое дозволе' doesn't fully convey the meaning of 'Provide access to the document and set the permission levels.' 'Обезбедите приступ' is a bit awkward and doesn't quite match the active tone of 'Provide access'. 'Поставите нивое дозволе' could be more accurately phrased.",
+          "suggestion": "Омогућите приступ документу и поставите нивое дозвола."
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'поставите нивое дозволе' is grammatically acceptable, but 'подесите нивое дозвола' would be more idiomatic Serbian.",
-          "suggestion": "подесите нивое дозвола"
+          "type": "spelling",
+          "description": "The word 'дозволе' is spelled correctly, but could be slightly improved for clarity and common usage in this context. While technically correct, it is less common than 'права'.",
+          "suggestion": "Омогућите приступ документу и поставите права."
         }
       ],
       "approved_at": null
@@ -220,8 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Obezbedite pristup dokumentu i postavite nivoe dozvole' doesn't perfectly capture the nuance of 'Provide access to the document and set the permission levels.' 'Obezbedite' implies a more active securing of access, while 'Provide' is more neutral. 'Nivoe dozvole' is grammatically correct, but slightly awkward. A more natural phrasing would be 'postavite dozvole'.",
-          "suggestion": "Omogućite pristup dokumentu i postavite dozvole."
+          "description": "The translation 'Obezbedite pristup dokumentu i postavite nivoe dozvole' isn't a precise translation of 'Provide access to the document and set the permission levels.'  'Obezbedite' is a more formal 'ensure' rather than 'provide.' 'Nivoe' is grammatically incorrect. The correct form would be 'nivoa'.",
+          "suggestion": "Omogućite pristup dokumentu i postavite nivoe dozvola."
+        },
+        {
+          "type": "grammar",
+          "description": "The word 'nivoe' is grammatically incorrect in Serbian. It should be 'nivoa'.",
+          "suggestion": "nivoa"
         }
       ],
       "approved_at": null

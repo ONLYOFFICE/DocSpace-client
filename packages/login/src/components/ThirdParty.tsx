@@ -81,13 +81,13 @@ const ThirdParty = ({
       let url = targetElement.dataset.url || "";
 
       try {
-        //Lifehack for Twitter
+        // Lifehack for Twitter
         if (providerName == "twitter") {
           url += "authCallback";
         }
 
         const tokenGetterWin =
-          window["AscDesktopEditor"] !== undefined
+          window.AscDesktopEditor !== undefined
             ? (window.location.href = url)
             : window.open(
                 url,

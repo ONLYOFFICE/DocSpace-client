@@ -3,7 +3,7 @@
   "content": "Enter time",
   "content_en_sha1_hash": "1e957f72bff227aeb488649dc0014df9ee9b2f44",
   "created_at": "2025-05-19T21:30:51.524Z",
-  "updated_at": "2025-05-21T04:16:34.982Z",
+  "updated_at": "2025-08-04T07:30:01.540Z",
   "comment": {
     "text": "\"Enter time\" is used as a placeholder text for an input field to prompt users to enter a specific duration in a security setting, typically on a brute force protection page. It appears as a label within a form element and helps users understand what value is expected from them.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 306,
-      "context": "className=\"brute-force-protection-input\"\n tabIndex={2}\n value={currentBlockingTime}\n onChange={onChangeBlockingTime}\n isDisabled={isLoadingSave}\n placeholder={t(\"EnterTime\")}\n hasError={hasErrorBlockingTime}\n />\n </FieldContainer>\n \n <FieldContainer",
+      "line_number": 309,
+      "context": "testId=\"brute_force_protection_blocking_time_input\"\n tabIndex={2}\n value={currentBlockingTime}\n onChange={onChangeBlockingTime}\n isDisabled={isLoadingSave}\n placeholder={t(\"EnterTime\")}\n hasError={hasErrorBlockingTime}\n />\n </FieldContainer>\n \n <FieldContainer",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 306,
-      "context": "className=\"brute-force-protection-input\"\n tabIndex={2}\n value={currentBlockingTime}\n onChange={onChangeBlockingTime}\n isDisabled={isLoadingSave}\n placeholder={t(\"EnterTime\")}\n hasError={hasErrorBlockingTime}\n />\n </FieldContainer>\n \n <FieldContainer",
+      "line_number": 309,
+      "context": "testId=\"brute_force_protection_blocking_time_input\"\n tabIndex={2}\n value={currentBlockingTime}\n onChange={onChangeBlockingTime}\n isDisabled={isLoadingSave}\n placeholder={t(\"EnterTime\")}\n hasError={hasErrorBlockingTime}\n />\n </FieldContainer>\n \n <FieldContainer",
       "module": "/packages/client"
     }
   ],
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation \"ادخل وقت\" literally translates to 'Enter time'. While understandable, a more natural and idiomatic translation for a settings label might be something like 'تحديد الوقت' (Set time) or 'الوقت' (Time) depending on the context. \"ادخل وقت\" sounds like an instruction rather than a label.",
-          "suggestion": "تحديد الوقت"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -78,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Introduzca la hora' is grammatically correct, it's a very formal translation. 'Enter time' is a label, not a directive. A more natural and user-friendly translation would be something like 'Hora de inicio' or 'Hora'.",
-          "suggestion": "Hora de inicio"
+          "description": "The English phrase 'Enter time' can have different meanings depending on context. 'Introduzca la hora' specifically means 'Enter the hour' or 'Input the hour'. A more general translation, if the intent is for the user to enter a date and time, would be something like 'Introduzca la fecha y hora' or 'Ingrese la fecha y hora'.",
+          "suggestion": "Consider 'Introduzca la fecha y hora' or 'Ingrese la fecha y hora' if the context requires date and time input."
         }
       ],
       "approved_at": null
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Introducere timp' is a literal translation that doesn't convey the intended meaning of 'Enter time' in the context of settings. It could be interpreted as 'Introducing time' rather than 'Setting the time'.",
-          "suggestion": "A more accurate translation would be 'Setare timp', 'Introducere ora', or 'Specificare timp', depending on the specific function."
+          "description": "The Romanian translation \"Introducere timp\" is a literal translation of \"Enter time\" but doesn't convey the intended meaning. \"Enter time\" in this context likely refers to setting or inputting a time.",
+          "suggestion": "A more appropriate translation would be something like \"Setare timp\" or \"Introducere oră\" depending on the specific context. \"Setare timp\" is likely better as it implies configuration."
         }
       ],
       "approved_at": null
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාලය යොදන්න' (Kaalaya yodanna) literally translates to 'Enter time' or 'Add time'. While understandable, a more natural translation for a settings label might be 'සමయం ඇතුළත් කරන්න' (Samayam athulath kanna) or 'දිනය හා කාලය ඇතුළත් කරන්න' (Dinaya ha kaalaya athulath kanna) depending on the context.",
-          "suggestion": "Consider using 'සමయం ඇතුළත් කරන්න' (Samayam athulath kanna) or 'දිනය හා කාලය ඇතුළත් කරන්න' (Dinaya ha kaalaya athulath kanna)"
+          "description": "The translation 'කාලය යොදන්න' while literally meaning 'Enter time', doesn't fully capture the nuance of a settings label. A more natural translation for a settings field that requires the user to input a time would be 'වෙලාව ඇතුළත් කරන්න' (Welaawa athulath karanna).",
+          "suggestion": "වෙලාව ඇතුළත් කරන්න"
         }
       ],
       "approved_at": null
@@ -198,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Vnesi uro\" is a literal translation of \"Enter time\", it doesn't accurately convey the meaning in the context of settings. \"Enter time\" usually refers to setting or inputting a specific time value.",
+          "description": "The translation 'Vnesi uro' literally translates to 'Enter hour'. The English 'Enter time' refers to a general time entry, not specifically an hour. A more accurate translation would be something like 'Vnesite čas' or 'Določite čas'.",
           "suggestion": "Vnesite čas"
         }
       ],
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Enter time\" refers to specifying a time value, usually in a date/time picker or similar context. \"Unesi vreme\" literally translates to \"Enter time\", but doesn't accurately convey the intended meaning of specifying or inputting a time. A more accurate translation would be something along the lines of \"Odredi vreme\" or \"Postavi vreme\".",
-          "suggestion": "Odredi vreme"
+          "description": "The English phrase \"Enter time\" typically refers to setting or inputting a specific time value. \"Unesi vreme\" literally translates to \"Enter time,\" but in this context, it might be more accurate to convey the meaning of \"Set time\" or \"Specify time.\"  Without more context, \"Unesi vreme\" might be misinterpreted as simply entering any arbitrary time.",
+          "suggestion": "Consider 'Postavi vreme' or 'Odredi vreme' to better reflect the intended meaning of setting or specifying a time."
         }
       ],
       "approved_at": null
@@ -228,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Saati gir' is a literal translation of 'Enter time' but might not be the most natural phrasing in Turkish depending on the context. 'Zamanı gir' would be more accurate and common for general time entry.",
-          "suggestion": "Zamanı gir"
+          "description": "The translation 'Saati gir' is a literal translation but doesn't fully capture the meaning of 'Enter time' within a settings context. It could be misinterpreted as 'Enter the hour' rather than 'Set the time'.",
+          "suggestion": "Consider a more contextually appropriate translation like 'Zamanı ayarla' (Set the time) or 'Zamanı belirle' (Specify the time)."
         }
       ],
       "approved_at": null

@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Escolha da lista",
-  "ConnectingAccount": "Conectando conta",
-  "DeleteFromTrash": "Os elementos selecionados foram excluídos com sucesso do Lixo",
   "FileLocked": "Arquivo bloqueado",
   "FileProtected": "O arquivo está protegido com senha",
   "FileUnlocked": "Arquivo desbloqueado",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Alterar as informações de terceiros",
   "ThirdPartyTitle": "Serviços terceirizados",
   "TitleShowActions": "Exibir ações do arquivo",
-  "TitleShowFolderActions": "Exibir ações da pasta",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Exibir ações da pasta"
 }

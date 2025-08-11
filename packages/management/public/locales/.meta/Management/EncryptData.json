@@ -3,7 +3,7 @@
   "content": "Encrypt data at rest",
   "content_en_sha1_hash": "55866187e3f73d7f89a5bbe25fe1344c85a640cd",
   "created_at": "2025-05-19T21:30:57.442Z",
-  "updated_at": "2025-05-20T09:47:57.884Z",
+  "updated_at": "2025-05-26T07:57:33.001Z",
   "comment": {
     "text": "This translation key is used for the phrase \"Encrypt data at rest\" which appears on a button or similar action element in the encrypt data management page. It informs users about the encryption process's purpose and impact on stored files.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/management/src/categories/encrypt-data/index.tsx",
-      "line_number": 44,
-      "context": "import { setDocumentTitle } from \"SRC_DIR/utils\";\n import { useStore } from \"SRC_DIR/store\";\n \n import { EncryptWarningDialog } from \"./EncryptWarningDialog\";\n import { StyledWrapper } from \"./EncryptData.styles\";\n \n type EncryptDataPageProps = {\n logoText: string;\n };",
+      "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
+      "line_number": 42,
+      "context": "import { EncryptionStatus } from \"@docspace/shared/enums\";\n import type { TPortals } from \"@docspace/shared/api/management/types\";\n \n import { EncryptWarningDialog } from \"./EncryptWarningDialog\";\n import { StyledWrapper } from \"./EncryptData.styles\";\n \n type EncryptDataPageProps = {\n portals: TPortals[];\n encryptionBlockHelpUrl: string;\n isNotify: boolean;",
       "module": "/packages/management"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Fasilə zamanı məlumatları şifrələyin\" literally translates to 'Encrypt data during pause'. While conveying a similar meaning, 'at rest' implies data stored and not actively being used. A more accurate translation would reflect this.",
+          "suggestion": "Saxlanılan məlumatları şifrələyin"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'at rest' is not accurately translated. 'Κατάσταση ηρεμίας' (katastasi hremías) literally translates to 'state of tranquility' or 'state of peace', which doesn't convey the meaning of data at rest (data stored on disk).",
+          "suggestion": "A more accurate translation for 'at rest' would be something like 'σε αποθήκευση' (se apothékeusi) which means 'in storage' or 'during storage'."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,13 +93,25 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Գաղտնագրեք տվյալները հանգիստ վիճակում' is a literal translation and doesn't convey the intended meaning of 'Encrypt data at rest' in a natural way in Armenian. It sounds somewhat awkward. A better translation would focus on the concept of data encryption while stored.",
+          "suggestion": "Consider a translation such as 'Մաղձրացրեք տվյալները պահեսանցում' or 'Պահպանեք տվյալների գաղտնագրությունը պահեսանցում' which translates to 'Encrypt data in storage' or 'Protect the confidentiality of data in storage' respectively.  The best option will depend on the specific context."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation \"Crittografare i dati a risposto\" is not accurate. The correct phrase for 'at rest' in this context is 'a riposo'. 'Risposto' means 'responded'.",
+          "suggestion": "Crittografare i dati a riposo"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,13 +123,25 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '저장 데이터 암호화' is a literal translation of 'Encrypt data at rest', it lacks the nuance of emphasizing the 'at rest' part. It simply states 'encryption of stored data'.",
+          "suggestion": "Consider a translation like '저장 중인 데이터 암호화' or '저장 데이터에 대한 암호화' to more accurately convey 'at rest' encryption."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເຂົ້າລະບຸຂໍ້ມູນໃນສະຖານທີ່พักໄວ້' doesn't accurately convey the meaning of 'Encrypt data at rest'.  'ເຂົ້າລະບຸຂໍ້ມູນ' generally means 'enter data' or 'input data,' which is not the intended meaning here. The phrase 'ໃນສະຖານທີ່พักໄວ້' (in a place to rest) is a literal translation of 'at rest' and doesn't fit the context of data encryption.",
+          "suggestion": "A more accurate translation might be something like 'ເຊື່ອງຂໍ້ມູນໄວ້ໃນເວລາພັກ' (hide data when resting) or 'ລົບຂໍ້ມູນໃນສະຖານທີ່ເກັບຮັກສາ' (remove/encrypt data in a storage place). A professional Lao translator specializing in technical terminology is recommended for a precise translation."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,7 +153,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'at rest' is not directly translated. A more accurate translation would convey the concept of data encryption when data is not in use or being processed. The term 'at rest' is often kept in English in technical contexts.",
+          "suggestion": "Versleutel gegevens in rust"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -141,7 +183,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Criptare date inactive\" is understandable, a more accurate and natural Romanian translation for \"Encrypt data at rest\" would be \"Criptarea datelor în repaus\".  'Inactive' implies data that isn't being used, whereas 'at rest' refers to data stored but not currently in use.",
+          "suggestion": "Criptarea datelor în repaus"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +201,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'විවේකයෙන් දත්ත සංකේතනය කරන්න' while literally translating to 'Encrypt data peacefully' doesn't fully capture the meaning of 'at rest'. It implies a peaceful encryption process rather than the state of data being encrypted.",
+          "suggestion": "විවේකී දත්ත සංකේතනය"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -183,19 +237,42 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dinlenimdeki veriyi şifrele' is not the most natural or accurate translation of 'Encrypt data at rest'. While it conveys the general idea, a more idiomatic translation would be 'Veriyi beklemedeyken şifrele' or 'Veriyi dinlenme esnasında şifrele'. 'Dinlenimdeki' isn't commonly used in this context.",
+          "suggestion": "Veriyi beklemedeyken şifrele"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Шифрувати дані, які зберігаються' is a literal translation and while technically correct, it's not the most natural or concise way to express 'Encrypt data at rest' in Ukrainian. It's a bit wordy.",
+          "suggestion": "Consider a more idiomatic translation such as 'Шифрування даних у стані спокою' or 'Зашифрувати дані при зберіганні'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ở trạng thái nghỉ' is a literal translation of 'at rest' and sounds unnatural in Vietnamese when describing data encryption. It's not the idiomatic way to express this concept.",
+          "suggestion": "Mã hóa dữ liệu khi lưu trữ (Encrypt data when stored) or Mã hóa dữ liệu khi không sử dụng (Encrypt data when not in use)"
+        },
+        {
+          "type": "formatting",
+          "description": "The addition of '(data at rest)' in parentheses is redundant as the Vietnamese translation already attempts to convey the meaning. It's unnecessary and breaks the flow.",
+          "suggestion": "Remove '(data at rest)'."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

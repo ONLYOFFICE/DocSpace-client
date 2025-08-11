@@ -75,17 +75,17 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
   visible,
   onClose,
   hasStorageSubscription,
-  currentStoragePlanSize,
+  currentStoragePlanSize = 0,
   fetchPortalTariff,
   fetchBalance,
   storagePriceIncrement,
   isVisibleWalletSettings,
   setVisibleWalletSetting,
   partialUpgradeFee,
-  featureCountData,
+  featureCountData = 0,
   setPartialUpgradeFee,
   hasScheduledStorageChange,
-  previousValue,
+  previousValue = 0,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<number>(
@@ -111,15 +111,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const isExceedingStorageLimit = isExceedingPlanLimit(amount);
   const isCurrentStoragePlan = isCurrentPlan(amount);
-  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement);
+  const totalPrice = calculateTotalPrice(amount, storagePriceIncrement!);
 
   const isUpgradeStoragePlan = isPlanUpgrade(amount);
   const isDowngradeStoragePlan = isPlanDowngrade(amount);
   const newStorageSizeOnUpgrade =
-    isUpgradeStoragePlan && currentStoragePlanSize > 0;
+    isUpgradeStoragePlan && currentStoragePlanSize! > 0;
 
   const isPaymentBlockedByBalance = newStorageSizeOnUpgrade
-    ? isWalletBalanceInsufficient(partialUpgradeFee)
+    ? isWalletBalanceInsufficient(partialUpgradeFee!)
     : isWalletBalanceInsufficient(totalPrice);
 
   const buttonMainTitle = buttonTitle(amount);
@@ -139,7 +139,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
-      setPartialUpgradeFee(0);
+      setPartialUpgradeFee!(0);
     };
   }, []);
 
@@ -151,7 +151,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     if (isUpgradeStoragePlan) onCloseDialog();
 
     if (isCancellation || !isUpgradeStoragePlan)
-      setAmount(currentStoragePlanSize);
+      setAmount(currentStoragePlanSize!);
 
     if (intervalRef.current) {
       toastr.success(t("StorageCapacityUpdated"));
@@ -202,15 +202,15 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           if (isWaitingRef.current) return;
           isWaitingRef.current = true;
 
-          const { walletQuotas } = await fetchPortalTariff(true);
+          const { walletQuotas } = await fetchPortalTariff!(true);
 
           if (isUpdatedTariff(walletQuotas, isCancellation)) {
             resetIntervalSuccess(isCancellation);
           }
         } catch (e) {
           setIsLoading(false);
-          toastr.error(e);
-          clearInterval(intervalRef.current);
+          toastr.error(e as unknown as string);
+          clearInterval(intervalRef.current!);
           intervalRef.current = null;
         } finally {
           isWaitingRef.current = false;
@@ -240,7 +240,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
         }
 
         if (isUpgradeStoragePlan) fetchBalance!();
-        const { walletQuotas } = await fetchPortalTariff(true);
+        const { walletQuotas } = await fetchPortalTariff!(true);
 
         if (isUpdatedTariff(walletQuotas, isCancellation)) {
           resetIntervalSuccess(isCancellation);
@@ -248,7 +248,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
           waitingForTariff(isCancellation);
         }
       } catch (e) {
-        toastr.error(e);
+        toastr.error(e as Error);
         setIsLoading(false);
       }
     },
@@ -279,7 +279,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
 
   const onCloseTopUpModal = () => {
     setIsVisibleContainer(false);
-    if (isVisibleWalletSettings) setVisibleWalletSetting(false);
+    if (isVisibleWalletSettings) setVisibleWalletSetting!(false);
   };
 
   const container = isVisibleContainer ? (
@@ -294,6 +294,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
       <SalesDepartmentRequestDialog
         visible={isRequestDialog}
         onClose={() => setIsRequestDialog(false)}
+        sendPaymentRequest={undefined}
       />
     );
   }

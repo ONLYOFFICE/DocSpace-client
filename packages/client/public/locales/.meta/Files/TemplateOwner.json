@@ -3,7 +3,7 @@
   "content": "Template owner",
   "content_en_sha1_hash": "d9ae8457d753942fe67ef8711f4c568a3a2860aa",
   "created_at": "2025-05-19T21:30:56.237Z",
-  "updated_at": "2025-07-01T15:57:36.129Z",
+  "updated_at": "2025-08-11T09:02:43.929Z",
   "comment": {
     "text": "This translation key is used to display the label \"Template owner\" in a filter option on a web page. It likely appears as a button or dropdown menu title within the /packages/client/src/pages/Home/Section/Filter/index.js file. Translators should provide a description that matches this context, such as \"Label for Template Owner filter option\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 909,
+      "line_number": 911,
       "context": "const subjectOptions = [\n {\n key: FilterGroups.roomFilterSubject,\n group: FilterGroups.roomFilterSubject,\n label: isTemplatesFolder ? t(\"TemplateOwner\") : t(\"Common:Member\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     }
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Կաղապարի տեղծող\" while literally meaning 'Template creator', doesn't fully convey the meaning of 'Template owner'. 'Owner' implies responsibility and possession, which is not directly represented by 'creator'.",
-          "suggestion": "Consider using \"Կաղապարի սեփականատեր\" (Kaghapari sepakanater) which more accurately translates to 'Template owner' and implies ownership."
+          "description": "The translation \"Կաղապարի տեղծող\" while technically meaning 'template creator' or 'template producer', doesn't quite capture the nuance of 'Template owner'. 'Owner' implies responsibility and authority, which is not conveyed by 'տեղծող'. A more accurate translation would consider 'զույգ' (zoyg - possessor/holder) or a phrase like 'կաղապարի պատվորդ' (kaghpari patvorrd - template custodian).",
+          "suggestion": "Consider 'կաղապարի զույգ' (kaghpari zoyg) or 'կաղապարի պատվորդ' (kaghpari patvorrd)."
         }
       ],
       "approved_at": null
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Proprietar șablon\" is understandable, a more natural and accurate translation of 'Template owner' in Romanian would be 'Utilizator șablon' or 'Persoană responsabilă de șablon'. 'Proprietar' implies ownership in a legal sense which isn't the intended meaning.",
-          "suggestion": "Utilizator șablon"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"ප්‍රාඛ්‍ය හිමිකරු\" is not the most accurate or natural translation of \"Template owner\". \"ප්‍රාඛ්‍ය\" means 'precedent' or 'previous' and doesn't fit the context of 'template'. \"හිමිකරු\" correctly means 'owner', but the preceding word is incorrect.",
-          "suggestion": "A more accurate translation would be \"ආකාරය හිමිකරු\" (Akaraya himikaru) which means 'Template owner' or “නිර්මාණ හිමිකරු” (Nirmanaya himikaru) which means 'Design owner'."
+          "description": "The Sinhala translation \"ප්‍රාඛ්‍ය හිමිකරු\" doesn't accurately convey the meaning of \"Template owner\".  \"ප්‍රාඛ්‍ය\" translates to 'principal' or 'main', and \"හිමිකරු\" means 'owner'. While technically it includes the concept of ownership, it's not the idiomatic or common way to express \"Template owner\" in Sinhala. It sounds overly formal or legalistic.",
+          "suggestion": "A more accurate translation might be \"නිදර්ශන හිමිකරු\" (nidarsana himikaraya), which translates to 'template owner' more directly. Alternatively, \"වෙනමකරු\" (venamakaraya) could be considered, meaning the person who created the template, but it's less literal."
         }
       ],
       "approved_at": null

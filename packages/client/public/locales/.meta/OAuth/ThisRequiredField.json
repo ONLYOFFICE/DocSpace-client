@@ -3,7 +3,7 @@
   "content": "This is a required field",
   "content_en_sha1_hash": "8b9935b76dee8b4f3542cbeb70533edc0011464f",
   "created_at": "2025-05-19T21:30:54.058Z",
-  "updated_at": "2025-05-21T06:50:00.064Z",
+  "updated_at": "2025-08-04T07:30:01.424Z",
   "comment": {
     "text": "\"This is a required field\" is a notification that appears when a user attempts to submit the form without filling in the \"name\" field. It indicates that this field is mandatory and must be completed before proceeding. This message is displayed in an input group element within forms.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 143,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "line_number": 144,
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 143,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "line_number": 144,
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 143,
-      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n />",
+      "line_number": 144,
+      "context": "<InputGroup\n label={t(\"AppName\")}\n name=\"name\"\n placeholder={t(\"Common:EnterName\")}\n value={nameValue}\n error={isNameError ? `${t(\"ErrorName\")} 3` : t(\"ThisRequiredField\")}\n onChange={onChange}\n isRequired\n isError={isNameRequiredError || isNameError}\n onBlur={onBlur}\n dataTestId=\"app_name_input_group\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/MultiInputGroup.tsx",
-      "line_number": 181,
-      "context": "placeholder={placeholder}\n onChange={onChange}\n error={\n isError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n isRequired\n isError={isError || hasError}\n >\n <StyledInputRow>",
+      "line_number": 184,
+      "context": "placeholder={placeholder}\n onChange={onChange}\n error={\n isError\n ? `${t(\"ErrorWrongURL\")}: ${window.location.origin}`\n : t(\"ThisRequiredField\")\n }\n isRequired\n isError={isError || hasError}\n dataTestId={dataTestId ? `${dataTestId}_input_group` : undefined}\n >",
       "module": "/packages/client"
     },
     {
@@ -135,13 +135,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ນີ້ແມ່ນບ່ອນທີ່ຕ້ອງການຕື່ມຂໍ້ມູນ' translates more accurately to 'This is a place that needs filling/inputting'. It's not a direct equivalent of 'This is a required field'.",
-          "suggestion": "ນີ້ແມ່ນສູນທີ່ຕ້ອງຕື່ມຂໍ້ມູນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -162,13 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dane pole jest wymagane' is not a natural or accurate translation of 'This is a required field.' 'Dane pole' is not grammatically correct and doesn't convey the meaning of 'field' in this context. It literally translates to 'Data field'.",
-          "suggestion": "Pole jest wymagane"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Dane pole jest wymagane' has incorrect grammar.  'pole' should be declined correctly.",
-          "suggestion": "Pole jest wymagane"
+          "description": "The Polish translation 'Dane pole jest wymagane' is not a natural or accurate translation of 'This is a required field'. It's grammatically awkward and doesn't convey the meaning correctly. 'Dane' translates to 'data', 'pole' to 'field', and 'jest wymagane' to 'is required'. It's an overly literal and incorrect rendering.",
+          "suggestion": "A more appropriate translation would be 'To pole jest obowiązkowe' or 'Wypełnienie tego pola jest wymagane'."
         }
       ],
       "approved_at": null
@@ -203,8 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'මෙය අවශ්‍ය ක්ෂේත්‍රයක් වේ' is a bit formal and slightly unnatural. A more common and natural phrasing would be better.",
-          "suggestion": "මෙය අවශ්‍ය වන ක්ෂේත්‍රයකි."
+          "description": "While the translation is understandable, 'ක්ෂේත්‍රයක් වේ' is a bit formal and indirect for a required field message. A more common and natural phrasing would be more appropriate.",
+          "suggestion": "මෙය අවශ්‍යයි (Meya avashyayi) - This is necessary."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation contains a period at the end, which is a standard practice, however, depending on the UI context, it might be better to remove it for consistent styling.",
+          "suggestion": "මෙය අවශ්‍ය ක්ෂේත්‍රයක් වේ (without the period)"
         }
       ],
       "approved_at": null

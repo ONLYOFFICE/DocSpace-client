@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Виберіть зі списку",
-  "ConnectingAccount": "Підключення облікового запису",
-  "DeleteFromTrash": "Вибрані елементи успішно видалено з кошика",
   "FileLocked": "Файл заблоковано",
   "FileProtected": "Файл захищено паролем",
   "FileUnlocked": "Файл розблоковано",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Змінити інформацію третьої сторони",
   "ThirdPartyTitle": "Сторонні служби",
   "TitleShowActions": "Показати дії з файлами",
-  "TitleShowFolderActions": "Відобразити дії з папками",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Відобразити дії з папками"
 }

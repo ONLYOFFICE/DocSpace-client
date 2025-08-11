@@ -3,7 +3,7 @@
   "content": "Use the search LDAP filter to select the users who must be imported.",
   "content_en_sha1_hash": "f8d706e6577b6c7f9638591e8d4a71d0903ddc18",
   "created_at": "2025-05-19T21:30:54.333Z",
-  "updated_at": "2025-05-21T07:57:43.603Z",
+  "updated_at": "2025-05-24T08:11:43.114Z",
   "comment": {
     "text": "This translation key is used to provide a tooltip explaining the purpose of an LDAP user filter field in a connection settings page. The tooltip appears when hovering over the label and provides context for users unfamiliar with LDAP filters.",
     "is_auto": true,
@@ -33,18 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'İdxal' is spelled incorrectly. It should be 'İdxal et'.",
-          "suggestion": "İdxal et"
-        },
-        {
-          "type": "grammar",
-          "description": "The sentence structure could be improved for better flow. A more natural phrasing would place the action before the object.",
-          "suggestion": "LDAP axtarış filtrindən istifadə edərək idxal edilməli olan istifadəçiləri seçin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -107,13 +96,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '検索LDAPフィルタを使用して、インポートするユーザーを選択してください' is a literal translation but could be improved for naturalness in Japanese.  'インポートする' (import suru) is grammatically correct, but '取り込む' (torikomu) or '取り上げる' (toriau) would be more common when referring to importing data/users in a technical context.  '選択してください' is also slightly formal and can be softened.",
-          "suggestion": "検索LDAPフィルタを使用して、取り込むユーザーを選択してください。"
+          "description": "The translation '検索LDAPフィルタを使用して、インポートするユーザーを選択してください' is a literal translation and sounds unnatural in Japanese. A more natural phrasing would convey the same meaning with better flow.",
+          "suggestion": "LDAPフィルタを使用して、インポートするユーザーを選択します。"
         },
         {
           "type": "formatting",
-          "description": "While technically correct, the use of katakana (LDAP) is consistent with common practice in Japanese technical documentation but could be further considered if the target audience has varying levels of English familiarity. A more thorough explanation (e.g., adding 'エル・ディー・エイピー' in hiragana next to the katakana) might be better for broader accessibility.",
-          "suggestion": "検索LDAP (エル・ディー・エイピー) フィルタを使用して、取り込むユーザーを選択してください。"
+          "description": "The use of katakana for 'LDAP' is technically correct, but using a combination of katakana and hiragana/kanji could improve readability depending on the target audience and overall text style.",
+          "suggestion": "LDAPフィルタを使用して、インポートするユーザーを選択します。"
         }
       ],
       "approved_at": null
@@ -124,12 +113,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"가져오기 해야 하는 사용자를 선택하세요\" is awkward and not a natural way to express the intended meaning. It literally translates to 'select the users that must be imported.' A more natural phrasing would be preferred.",
-          "suggestion": "검색 LDAP 필터를 사용하여 가져올 사용자를 선택하세요."
-        },
-        {
-          "type": "grammar",
-          "description": "While technically correct, the phrase '가져오기 해야 하는' sounds unnecessarily formal and complex. A simpler construction would be better.",
+          "description": "The translation '가져오기 해야 하는' is not the most natural way to express 'who must be imported'. It's grammatically correct, but sounds a bit awkward.",
           "suggestion": "검색 LDAP 필터를 사용하여 가져올 사용자를 선택하세요."
         }
       ],
@@ -141,8 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຕົວປ່ຽນແກ້ໄຂຕົວກວດກາ LDAP' is a literal translation of 'LDAP filter' that might not be easily understood by Lao speakers. 'ຕົວປ່ຽນແກ້ໄຂຕົວກວດກາ' means 'filter editor', which isn't the core meaning. The word 'ຕົວກວດກາ' (filter) is redundant and adds unnecessary complexity.",
-          "suggestion": "ນໍາໃຊ້ຕົວປ່ຽນແກ້ໄຂ LDAP ເພື່ອເລືອກເອົາຜູ້ໃຊ້ທີ່ຈະນໍາເຂົ້າມາ។ (Use the LDAP filter to select the users who must be imported.) - Simplifying the term 'LDAP filter' will improve clarity. A more culturally appropriate translation might use a simpler term for 'filter' that is commonly used in the context of user selection, if available. Alternatively, a more explanatory phrase could be used instead of a direct translation, such as 'ໃຊ້ຄໍາແນະນໍາໃນການຄົ້ນຫາ LDAP ເພື່ອເລືອກຜູ້ໃຊ້ທີ່ຕ້ອງການນໍາເຂົ້າມາ' (Use the LDAP search guide to select the users who must be imported)."
+          "description": "The Lao translation uses \"ຕົວປ່ຽນແກ້ໄຂຕົວກວດກາ\" which translates to 'filter editor checker.' This is overly literal and doesn't convey the meaning of 'search LDAP filter' clearly. A more natural translation would be something that emphasizes searching or filtering users.",
+          "suggestion": "ນໍາໃຊ້ຕົວປ່ຽນແກ້ໄຂການຄົ້ນຫາ LDAP ເພື່ອເລືອກເອົາຜູ້ໃຊ້ທີ່ຈະນໍາເຂົ້າມາ"
+        },
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes a full stop (។) at the end of the sentence. While this is grammatically correct, it's often omitted in UI tooltips, especially in shorter phrases. Consider removing it for consistency.",
+          "suggestion": "ນໍາໃຊ້ຕົວປ່ຽນແກ້ໄຂການຄົ້ນຫາ LDAP ເພື່ອເລືອກເອົາຜູ້ໃຊ້ທີ່ຈະນໍາເຂົ້າມາ"
         }
       ],
       "approved_at": null
@@ -158,9 +147,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Dutch translation starts with a capitalized word 'Gebruik'. In UI elements, tooltips often benefit from starting with a lowercase letter for better readability.",
-          "suggestion": "gebruik"
+          "type": "grammar",
+          "description": "The phrase 'die zullen worden geïmporteerd' is slightly awkward. A more natural phrasing would be 'die geïmporteerd moeten worden'.",
+          "suggestion": "Gebruik Zoek LDAP filter om gebruikers te selecteren die geïmporteerd moeten worden."
         }
       ],
       "approved_at": null
@@ -189,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation 'Folosiți filtru de căutare LDAP pentru a selecta utilizatorii pentru importul' is grammatically awkward. 'pentru importul' should be 'pentru import'.",
-          "suggestion": "Folosiți filtru de căutare LDAP pentru a selecta utilizatorii pentru import."
+          "description": "The Romanian translation 'Folosiți filtru de căutare LDAP pentru a selecta utilizatorii pentru importul.' is grammatically awkward. The preposition 'pentru' is redundant. It should be 'pentru a importa utilizatorii' or 'pentru selecția utilizatorilor'.",
+          "suggestion": "Folosiți filtru de căutare LDAP pentru a selecta utilizatorii care trebuie importați."
         }
       ],
       "approved_at": null
@@ -207,13 +196,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රාණයනය සඳහා ආනයනය කළ යුතු පරිශීලකයින් තෝරා ගැනීමට සෙවුම් LDAP පෙරකය භාවිතා කරන්න.' is not the most accurate or natural rendering of 'Use the search LDAP filter to select the users who must be imported.' 'ප්‍රාණයනය' (pranayanaya) which translates to 'animation' is used incorrectly. A more suitable translation for 'imported' in this context might be 'රැගෙන ඒමට' (ragenema eema).  The phrasing is also a bit clunky.",
-          "suggestion": "ප්‍රධාන පරිශීලකයින් රැගෙන ඒමට අවශ්‍ය පරිශීලකයන් තෝරා ගැනීමට සෙවුම් LDAP පෙරකය භාවිතා කරන්න."
+          "description": "The translation 'ප්‍රාණයනය සඳහා ආනයනය කළ යුතු පරිශීලකයින් තෝරා ගැනීමට සෙවුම් LDAP පෙරකය භාවිතා කරන්න' is not a precise translation of 'Use the search LDAP filter to select the users who must be imported.' 'ප්‍රාණයනය' (pranayanaya) translates to 'animation' or 'incarnation', which is not appropriate in this context. 'පරිශීලකයින්' translates to 'enthusiasts', which is also not accurate. The intended meaning of 'users' is lost.",
+          "suggestion": "ප්‍රේශනය සඳහා ආනයනය කිරීමට අවශ්‍ය පරිශීලකයින් තෝරා ගැනීම සඳහා සෙවුම් LDAP පෙරකය භාවිතා කරන්න."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure is slightly awkward. While understandable, it could be improved for better flow in Sinhala.",
-          "suggestion": "ප්‍රධාන පරිශීලකයින් රැගෙන ඒමට අවශ්‍ය පරිශීලකයන් තෝරා ගැනීමට සෙවුම් LDAP පෙරකය භාවිතා කරන්න."
+          "type": "grammatical",
+          "description": "While the suggestion above attempts correction, the entire phrasing can be improved for better flow and natural Sinhala.",
+          "suggestion": "ආනයනය කිරීමට අවශ්‍ය පරිශීලකයින් තෝරා ගැනීම සඳහා සෙවුම් LDAP පෙරකය භාවිතා කරන්න."
         }
       ],
       "approved_at": null
@@ -221,7 +210,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Pomocou filtra na vyhľadávanie LDAP vyberte používateľov, ktorí musia byť importovaní' is a bit literal and could be improved for naturalness in Slovak. 'na vyhľadávanie LDAP' is awkward. A better phrasing would convey the same meaning more smoothly.",
+          "suggestion": "Použite LDAP filter na výber používateľov, ktorí sa majú importovať."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -229,9 +224,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ki jih je potrebno uvoziti\" is a bit verbose and formal. A more natural and concise translation would be better.",
-          "suggestion": "Uporabi iskalni filter LDAP, da izbereš uporabnike za uvoz."
+          "type": "spelling",
+          "description": "The word 'uvoziti' could be improved. While technically correct, 'uvesti' is more commonly used in this context and sounds more natural.",
+          "suggestion": "Uporabi iskalni filter LDAP, da izbereš uporabnike, ki jih je potrebno uvesti."
         }
       ],
       "approved_at": null
@@ -242,8 +237,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Користите LDAP филтер за претрагу да бисте изабрали кориснике који морају бити увезени.' is a bit verbose and not the most natural way to express the meaning.  'Претрагу' (search) is redundant.",
-          "suggestion": "Користите LDAP филтер да бисте изабрали кориснике који морају бити увезени."
+          "description": "The phrase \"да бисте изабрали\" is a bit wordy and less natural in this context. A more direct translation of 'to select' would be better.",
+          "suggestion": "Користите LDAP филтер за претрагу да бисте изабрали кориснике који треба да се увезу."
         }
       ],
       "approved_at": null
@@ -254,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Koristite LDAP filter za pretragu da biste izabrali korisnike koji moraju biti uvezeni' is a bit literal and could be improved for natural flow. 'Za pretragu' (for searching) is redundant as 'LDAP filter' inherently implies searching.",
-          "suggestion": "Koristite LDAP filter za odabir korisnika koji će biti uvezeni."
+          "description": "The translation 'Koristite LDAP filter za pretragu da biste izabrali korisnike koji moraju biti uvezeni' is a bit too literal and could be improved for clarity and naturalness in Serbian. The phrase 'za pretragu' (for searching) is redundant.",
+          "suggestion": "Koristite LDAP filter da biste izabrali korisnike koji moraju biti uvezeni."
         }
       ],
       "approved_at": null
@@ -263,7 +258,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation is slightly awkward and doesn't perfectly capture the nuance of the English phrase. 'İçe aktarılması gereken kullanıcıları seçmek için' is a bit verbose and could be improved. A more natural phrasing would better convey the intended meaning.",
+          "suggestion": "Kullanıcıları içe aktarmak için arama LDAP filtresini kullanın."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -278,8 +279,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Sử dụng bộ lọc tìm kiếm LDAP để chọn người dùng phải được nhập\" is not the most natural or precise translation. \"phải được nhập\" implies a requirement or obligation, which isn't necessarily present in the English context. A more accurate rendering would reflect selection rather than mandatory import.",
-          "suggestion": "Sử dụng bộ lọc LDAP để chọn người dùng sẽ được nhập."
+          "description": "The translation 'phải được nhập' implies a mandatory import, which may not be the intended meaning. It's more accurate to convey a choice or option.",
+          "suggestion": "Sử dụng bộ lọc tìm kiếm LDAP để chọn người dùng sẽ được nhập."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'nhập' can have multiple meanings. In this context, it's likely referring to 'imported' or 'added'.",
+          "suggestion": "Sử dụng bộ lọc tìm kiếm LDAP để chọn người dùng cần được nhập."
         }
       ],
       "approved_at": null

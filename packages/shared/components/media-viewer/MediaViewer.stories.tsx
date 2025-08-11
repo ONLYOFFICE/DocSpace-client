@@ -154,6 +154,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
 
 const filesMock: TFile[] = [
   {
+    shortWebUrl: "",
     isFile: true,
     access: 0,
     canShare: true,
@@ -234,6 +235,7 @@ const filesMock: TFile[] = [
       "https://helpcenter.onlyoffice.com/ru/images/Help/Guides/big/guide139/hyperlink_settings.png",
   },
   {
+    shortWebUrl: "",
     isFile: true,
     access: 0,
     canShare: true,

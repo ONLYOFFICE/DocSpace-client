@@ -3,7 +3,7 @@
   "content": "Creating items",
   "content_en_sha1_hash": "49705184c3d9cebcb3af7ae213c55471e517ad0d",
   "created_at": "2025-05-19T21:30:55.045Z",
-  "updated_at": "2025-05-21T10:33:56.276Z",
+  "updated_at": "2025-05-24T10:43:44.838Z",
   "comment": {
     "text": "\"This translation key is used to display a heading that indicates 'Creating items' in a component panel. It is likely displayed above or within a block that allows users to create items, possibly with a keyboard shortcut (AltKey) associated with it.\"",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Elementlərin yaradılması' is a literal translation, it's not the most natural or idiomatic way to express \"Creating items\" in this context. It sounds overly formal and technical for a hotkey panel, which often uses simpler language. \"Eşyaların yaradılması\" would be more appropriate.",
-          "suggestion": "Eşyaların yaradılması"
+          "description": "While 'Elementlərin yaradılması' is technically correct, it's a bit formal and doesn't quite capture the meaning of 'Creating items' in the context of hotkeys. 'Items' often refers to objects or assets within a software application, not just generic 'elements'.",
+          "suggestion": "Consider a more contextually appropriate translation like 'Objektlərin yaradılması' or 'Resursların yaradılması', depending on what 'items' specifically refers to in the application."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Միավորների ստեղծում\" literally translates to 'Units creation'. While 'items' and 'units' can sometimes be synonymous, 'items' in this context likely refers to game objects or assets being created, not necessarily 'units'.",
-          "suggestion": "Consider a translation that more accurately reflects 'items' in the game context, such as 'Նախնականոների ստեղծում' (Initial creation) or 'Բաժակների ստեղծում' (Objects creation)."
+          "description": "The Armenian translation \"Միավորների ստեղծում\" (Miavorneri stegcdum) translates more closely to 'Units creation' rather than the intended meaning of 'Creating items'. It lacks the nuance of the English phrase.",
+          "suggestion": "Consider \"Պարբերացրիչներ ստեղծելուց\" (Parberacricner stegcdeluc) - which means 'Creating objects/items' or \"Նոր առարկաների ստեղծում\" (Nor ararkanneri stegcdum) - 'New objects/items creation'."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Creazione elementi\" is a literal translation and doesn't fully capture the meaning of \"Creating items.\" It lacks a verb indicating the act of creation. \"Creating items\" implies an ongoing process or a feature related to creation, while the Italian translation focuses solely on the result (elements).",
-          "suggestion": "Consider a more nuanced translation like \"Creazione oggetti\" or \"Creazione di oggetti\" (Creation of objects).  Alternatively, if it refers to the function to create items, \"Creazione oggetti\" might be acceptable depending on the UI context."
+          "description": "The translation 'Creazione elementi' is a literal translation but doesn't convey the nuance of 'Creating items' in the context of hotkeys for creating objects. It's a bit clunky and doesn't flow naturally.",
+          "suggestion": "Consider 'Creazione oggetti' or 'Creazione di oggetti' for a more natural and accurate translation that aligns with the object creation context."
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"항목 생성\" is technically correct, it might be too literal and sound clunky in a UI context. \"아이템 생성\" or \"객체 생성\" might be more natural and align better with common UI terminology.",
-          "suggestion": "Consider \"아이템 생성\" or \"객체 생성\" for a more natural user experience."
+          "description": "The translation \"항목 생성\" while technically correct, might be too literal and not the most natural phrasing for a UI element like a hotkey panel. It translates directly to \"item creation\". A more user-friendly translation might be more focused on the action of creating rather than the type of thing being created.",
+          "suggestion": "Consider alternatives like \"객체 생성\" (object creation) or \"만들기\" (create/make) which might read better in a UI context, depending on the overall tone and style."
         }
       ],
       "approved_at": null
@@ -135,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Izveidot vienumus\" is a literal translation of 'Creating items' but doesn't fully capture the nuance of object creation within a hotkeys panel. It sounds a bit generic. A better translation would convey the sense of assigning hotkeys for creating objects.",
+          "suggestion": "Consider \"Objektu izveidošana ar taustiņu kombinācijām\" or \"Vienumu izveidošana ar īsinājumiem\" depending on the overall tone and context."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"A criar itens\" is not the most natural or accurate translation of \"Creating items\". While literally \"Creating items\", it uses the gerund form (\"A criar\") which sounds awkward in Portuguese. A more common and natural translation would be \"Criando itens\" or \"Criação de itens\".",
-          "suggestion": "Criando itens"
+          "description": "The translation \"A criar itens\" is not the most natural or accurate Portuguese equivalent of \"Creating items.\" It's a gerund form (like 'creating') which isn't always the best choice depending on the context. A more common and natural translation would be 'Criação de itens' or 'Criando itens'.",
+          "suggestion": "Criação de itens"
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Создание объектов\" is a literal translation of \"Creating items\", it's not the most natural or idiomatic way to convey the meaning in a user interface context. \"Creating items\" implies a process of generation or creation, and \"Создание объектов\" is a more general term for object creation. It might be too formal or abstract for a hotkey label.",
-          "suggestion": "Рассмотреть варианты: \"Создание предметов\", \"Создание элементов\", \"Добавление объектов\" (depending on the specific context of 'items')."
+          "description": "While 'Создание объектов' is technically correct, 'Creating items' in this context likely refers to creating specific kinds of objects, not just any objects. It's more about the act of creation rather than the general term.  'Creating objects' is too broad.",
+          "suggestion": "Создание элементов"
         }
       ],
       "approved_at": null
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අථක සෑදීම\" is not an accurate translation of \"Creating items.\" \"අථක\" generally refers to unreal, nonexistent, or empty. \"සෑදීම\" means creation, but the combination doesn't convey the meaning of creating items as in the English phrase.",
-          "suggestion": "A more accurate translation would be something along the lines of \"వస్తువులను సృష్టించడం\" (Vastuvulanu srushtin̄cam) which translates to 'creating objects/items'."
+          "description": "The translation \"අථක සෑදීම\" doesn't accurately convey the meaning of \"Creating items.\" \"අථක\" often implies something is insignificant or worthless. \"Creating items\" refers to the process of making objects or items.",
+          "suggestion": "A more accurate translation would be something like \"වියත්තු සෑදීම\" (viyatthu saedima) - creating objects, or \"දේහල් සෑදීම\" (dehalk saedima) - making things/objects. Context might dictate the best option."
         }
       ],
       "approved_at": null
@@ -213,13 +219,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Креирање ставки\" is technically correct, \"Creating items\" often implies a process of generating or producing something, whereas \"Креирање ставки\" can be interpreted as merely creating a list of items. A more precise translation, depending on the context, might be \"Набавка ставки\" (Acquiring items) or \"Израда ставки\" (Manufacturing items) or \"Креирање објеката\" if truly referring to objects.",
-          "suggestion": "Consider \"Набавка ставки\" or \"Израда ставки\" or \"Креирање објеката\" depending on the specific meaning of 'Creating items'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -228,7 +228,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kreiranje stavki\" is not the most accurate translation of \"Creating items\". 'Items' in this context likely refers to objects or elements being created within the hotkeys panel, not 'statements'.",
+          "description": "The translation \"Kreiranje stavki\" is not the most accurate or natural translation of \"Creating items\" in this context. 'Items' likely refers to objects or creations within the software. 'Stavke' generally means 'items' in the sense of list items or menu entries.",
           "suggestion": "Kreiranje objekata"
         }
       ],
@@ -240,7 +240,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Öğeler oluşturuluyor' translates to 'Items are being created'. While technically correct, it's less concise and direct than the English 'Creating items'. It also implies an ongoing action rather than a general capability.",
+          "description": "The translation \"Öğeler oluşturuluyor\" literally translates to \"Items are being created.\" While not entirely wrong, it implies an ongoing process. \"Creating items\" in this context likely refers to the panel or functionality for creating items, not the act of creating them in progress. A better translation would be something like \"Yeni öğe oluşturma\" (Creating new item) or \"Öğe oluşturma\" (Item creation).",
           "suggestion": "Öğe oluşturma"
         }
       ],
@@ -258,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tạo mục\" is understandable, it's a somewhat literal and potentially not the most natural translation for 'Creating items' in a hotkeys context.  'Creating items' often implies creating new objects within a game or application, not just any generic item.",
-          "suggestion": "Consider 'Tạo đối tượng' or 'Tạo vật phẩm' depending on the specific context. 'Tạo đối tượng' is more general, 'Tạo vật phẩm' is more specific to in-game items."
+          "description": "While \"Tạo mục\" is a literal translation of \"Creating items,\" it might not be the most natural or clear phrasing for a UI element related to creating objects in a software application. It lacks the nuance of implying creation, rather than simply referring to an item.",
+          "suggestion": "Consider alternatives like \"Tạo đối tượng\" (creating objects), \"Thêm mục\" (adding items), or \"Phím tắt tạo\" (hotkeys to create)."
         }
       ],
       "approved_at": null
@@ -270,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"创建项目\" (chuàngjiàn xiàngmù) is a literal translation of \"Creating items\" but doesn't fully capture the intended meaning in the context of hotkeys for object creation. \"项目\" (xiàngmù) typically refers to a project, which is different from individual objects being created.",
-          "suggestion": "考虑使用更贴切的术语，例如“创建对象” (chuàngjiàn duìxiàng) or “创建物品” (chuàngjiàn wùpǐn) depending on the specific type of objects being created."
+          "description": "The translation \"创建项目\" (chuàngjiàn xiàngmù) can be interpreted as 'creating projects' which doesn't perfectly align with the English 'Creating items'. '项目' (xiàngmù) often refers to a project, whereas 'items' can be a broader term encompassing objects or things.",
+          "suggestion": "Consider \"创建物品\" (chuàngjiàn wùpǐn) which more accurately translates to 'creating items' or \"创建物件\" (chuàngjiàn wùjiàn) for a closer meaning."
         }
       ],
       "approved_at": null

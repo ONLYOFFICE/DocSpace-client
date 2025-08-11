@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction, JSX } from "react";
 import type { getCustomToolbar } from "../../MediaViewer.helpers";
 
 interface ImageViewerToolbarProps {
+  ref?: React.RefObject<ImperativeHandle | null>;
   toolbar: ReturnType<typeof getCustomToolbar>;
   generateContextMenu: (
     isOpen: boolean,

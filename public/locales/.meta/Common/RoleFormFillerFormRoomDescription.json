@@ -3,7 +3,7 @@
   "content": "Form fillers can fill out forms and view only their completed/started forms within the Complete and In Process folders.",
   "content_en_sha1_hash": "feefe7fdf044fbc2fbabfaea05d182d09dbe37d8",
   "created_at": "2025-05-19T21:30:48.048Z",
-  "updated_at": "2025-05-28T09:30:03.004Z",
+  "updated_at": "2025-05-26T07:57:32.993Z",
   "comment": {
     "text": "Form fillers can view their completed and started forms within the Complete and In Process folders. This description is used to inform form fillers about the permissions they have in the Form Room. It appears in UI elements related to file access options.",
     "is_auto": true,
@@ -30,18 +30,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Form fillers\" is translated as \"يمكن لمعبئ النماذج\" which is a bit awkward and doesn't fully capture the intended meaning. A more natural translation would be something like \"الأشخاص الذين يملأون النماذج\" (people who fill out forms) or \"املأو النماذج\" (form fillers).",
-          "suggestion": "الأشخاص الذين يملأون النماذج"
+          "description": "The phrase 'Form fillers' is translated as 'يمكن لمعبئ النماذج' which is a bit literal and doesn't flow naturally in Arabic. A more natural translation would be something like 'الأشخاص المسؤولون عن تعبئة النماذج' or 'مسؤولو تعبئة النماذج'.",
+          "suggestion": "الأشخاص المسؤولون عن تعبئة النماذج"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'view only their completed/started forms' is translated as 'عرض النماذج المكتملة/التي بدأت فقط'. While technically correct, it lacks the nuance of 'view *only*'. A better translation would emphasize the restriction.",
-          "suggestion": "عرض النماذج المكتملة/التي بدأت فقط و *فقط*."
+          "description": "The phrase 'view only their completed/started forms' is translated as 'عرض النماذج المكتملة/التي بدأت فقط'. The word 'فقط' (only) is misplaced. It implies only completed or started forms exist, when the context means *they* can only view them.",
+          "suggestion": "عرض النماذج المكتملة أو التي بدأوها فقط"
         },
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Complete and In Process folders' as 'مجلدات الاكتمال والمراحل الجارية' is acceptable but slightly verbose. A more concise option could be considered.",
-          "suggestion": "مجلدات الإكمال والعمل الجاري"
+          "description": "The phrase 'Complete and In Process folders' is translated as 'مجلدات الاكتمال والمراحل الجارية'. While technically correct, it can be rephrased for better clarity. 'مجلدات الإكمال والمتابعة' or 'مجلدات الإكمال والعمل' would be more common and understandable.",
+          "suggestion": "مجلدات الإكمال والمتابعة"
         }
       ],
       "approved_at": null
@@ -52,13 +52,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"Tamamlanmış və Prosesdə olan qovluqlarda\" is slightly awkward. A more natural phrasing would emphasize the forms are *in* those folders.",
-          "suggestion": "Tamamlanmış və Prosesdə olan qovluqlarda olan"
+          "description": "The phrasing \"Tamamlanmış və Prosesdə olan qovluqlarda tamamlanmış/başlanmış formalara baxa bilər\" is somewhat awkward. It could be improved for better flow.",
+          "suggestion": "Forma dolduranlar Tamamlanmış və Prosesdə olan qovluqlarda tamamlanmış və ya başlamış formalara baxa bilər."
         },
         {
-          "type": "formatting",
-          "description": "The slash in \"tamamlanmış/başlanmış\" should be consistent with English’s use of the slash. It's acceptable, but consistency is preferred.",
-          "suggestion": "tamamlanmış və ya başlanmış"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'started forms' is translated as 'başlanmış formalara'. While understandable, 'başlanmış' can imply 'initiated' rather than 'in progress'.  A more accurate translation might capture the concept of forms currently being worked on.",
+          "suggestion": "Forma dolduranlar Tamamlanmış və Prosesdə olan qovluqlarda tamamlanmış və davam edən formalara baxa bilər."
         }
       ],
       "approved_at": null
@@ -69,13 +69,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form fillers' is translated as 'Тези, които попълват формуляри'. While technically correct, it's a bit verbose and loses the conciseness of the original. A more direct translation might be 'Попълващи формуляри' or 'Хора, които попълват формуляри', although the former is more common in technical contexts.",
-          "suggestion": "Попълващи формуляри"
+          "description": "The term \"Form fillers\" is translated as \"Тези, които попълват формуляри\". While technically correct, it's a bit verbose and doesn't capture the conciseness of the English original. A more natural-sounding translation might be something like \"Попълващите формуляри\" or \"Потребителите, попълващи формуляри\".",
+          "suggestion": "Попълващите формуляри"
         },
         {
-          "type": "formatting",
-          "description": "The English content uses '/' to separate 'completed/started'. The Bulgarian translation replicates this but 'завършени/започнати' feels slightly less natural than an 'и' conjunction.",
-          "suggestion": "завършени и започнати"
+          "type": "incorrect_translation",
+          "description": "The phrase 'Complete and In Process' is translated as 'Завършени и В ход'. While understandable, the English term is more commonly used and recognized.  It might be beneficial to maintain a degree of consistency and potentially consider a closer parallel.",
+          "suggestion": "Завършени и В процес"
         }
       ],
       "approved_at": null
@@ -86,8 +86,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation uses lower case for folder names 'Dokončeno' and 'V procesu'. While not strictly incorrect, it's more common and professional to capitalize them as 'Dokončeno' and 'V procesu' to match the formality of the English content.",
-          "suggestion": "Change 'Dokončeno' and 'V procesu' to 'Dokončeno' and 'V procesu' respectively."
+          "description": "The Czech translation uses lowercase for folder names 'Dokončeno' and 'V procesu'. These should likely be capitalized to match the English 'Complete and In Process' and maintain consistency.",
+          "suggestion": "Vyplňovatelé formulářů mohou vyplňovat formuláře a zobrazovat pouze své dokončené/zahájené formuláře ve složkách Dokončeno a V Procesu."
         }
       ],
       "approved_at": null
@@ -98,13 +98,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Im Nicht ausgefüllt\" is not the correct translation for \"In Process\". It translates to \"Not filled out\".",
-          "suggestion": "Change \"Im Nicht ausgefüllt\" to \"In Bearbeitung\" or \"Zur Bearbeitung\"."
+          "description": "The term \"Im Nicht ausgefüllt\" is not a standard or clear translation for \"In Process\". It lacks clarity regarding the form's state. \"In Process\" implies forms that are currently being worked on.",
+          "suggestion": "Consider translating \"In Process\" as \"In Bearbeitung\" or \"Aktuell\" for better clarity."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term \"Benutzer\" (users) is too generic. The English uses \"Form fillers\" which refers to a specific role.",
-          "suggestion": "Consider using a term like \"Formularausfüller\" or a more contextually appropriate term to match the specificity of \"Form fillers\"."
+          "description": "The phrase \"Benutzer, die Formulare ausfüllen\" is a bit verbose and doesn't directly translate \"Form fillers\". While technically correct, a more concise phrasing would improve readability.",
+          "suggestion": "Consider \"Formularausfüller\" or rewording the sentence to be more natural in German."
         }
       ],
       "approved_at": null
@@ -115,18 +115,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Form fillers' is translated as 'Οι χρήστες που συμπληρώνουν φόρμες' which is a bit verbose and less concise. A more direct translation could be 'Οι συμπληρωτές φόρμας' or 'Άτομα που συμπληρώνουν φόρμες'.",
-          "suggestion": "Οι συμπληρωτές φόρμας"
+          "description": "The phrase \"Οι χρήστες που συμπληρώνουν φόρμες\" is a bit verbose. A more direct translation of 'Form fillers' would be 'Άτομα που συμπληρώνουν φόρμες' or simply 'Συμπληρωτές φορμών'.",
+          "suggestion": "Άτομα που συμπληρώνουν φόρμες"
         },
         {
           "type": "incorrect_translation",
-          "description": "The repetition 'μπορούν και να συμπληρώνουν φόρμες' (can fill out forms and fill out forms) is redundant.  It implies they *can* fill out forms, which is already established.",
-          "suggestion": "μπορούν να συμπληρώνουν"
+          "description": "The repetition of \"μπορούν και να συμπληρώνουν φόρμες\" (can fill out forms) is redundant. The original English doesn't explicitly state this. It implies they can.",
+          "suggestion": "Μπορούν να συμπληρώνουν φόρμες"
         },
         {
           "type": "formatting",
-          "description": "The Greek translation uses a colon after 'φόρμες' which doesn't align with standard English sentence structure and introduces unnecessary punctuation.",
-          "suggestion": "Remove the colon after 'φόρμες'."
+          "description": "While not strictly incorrect, the capitalization of \"Ολοκληρωμένα και Σε εξέλιξη\" might be more natural if it were \"Ολοκληρωμένα και σε εξέλιξη\" (lowercase 'σε').",
+          "suggestion": "Ολοκληρωμένα και σε εξέλιξη"
         }
       ],
       "approved_at": null
@@ -137,13 +137,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"rellenadores de formularios\" is a literal translation of \"form fillers\" and while understandable, it's not the most natural or common phrasing in Spanish. A more natural translation would be 'personas que completan formularios' or 'usuarios que completan formularios'.",
-          "suggestion": "personas que completan formularios"
+          "description": "The phrase 'Form fillers' is translated as 'Los rellenadores de formularios'. While technically correct, it's a bit clunky and less natural in Spanish. A more natural translation would be 'Personas que rellenan formularios' or simply 'Rellenadores'.",
+          "suggestion": "Rellenadores"
+        },
+        {
+          "type": "formatting",
+          "description": "The slash in 'rellenados/iniciados' is not ideal for a formal context. It's more common to use 'y' (and) or 'o' (or).",
+          "suggestion": "rellenados y/o iniciados"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'formularios rellenados/iniciados' is a direct translation of 'completed/started forms' but might sound a bit clunky in Spanish.  A more natural way to express this is 'formularios completados/iniciados' or 'formularios que han completado/iniciado'.",
-          "suggestion": "formularios completados/iniciados"
+          "description": "While 'En curso' is acceptable for 'In Process', it may not be the most common or readily understood term in all Spanish-speaking regions. Depending on the context, 'En progreso' might be a better choice.",
+          "suggestion": "En progreso"
         }
       ],
       "approved_at": null
@@ -151,7 +156,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Finnish translation uses hyphens (-) between 'Valmiit' and 'Keskeneräiset' to form a compound word. A more natural and common construction in Finnish would be to use 'ja' (and) to connect the folder names.",
+          "suggestion": "Lomakkeen täyttäjät voivat täyttää lomakkeita ja katsella vain heidän valmiita/aloitettuja lomakkeita Valmiit-kansioissa ja Keskeneräiset-kansioissa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -160,8 +171,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Complete and In Process\" is directly translated as \"Complet et En cours.\" While understandable, it's more natural in French to use a more idiomatic equivalent for folder names, such as 'Terminés et En Cours' or 'Achèvement et En Cours', depending on the context and intended tone. 'Complet' can imply completion of a task rather than a folder status.",
-          "suggestion": "Consider translating 'Complete and In Process' as 'Terminés et En Cours' or 'Achèvement et En Cours' for better readability and accuracy within the folder name context."
+          "description": "The English phrase 'Complete and In Process' is translated as 'Complet et En cours'. While understandable, a more common and accurate translation for folder names in a French context would be 'Complété et En Cours'.",
+          "suggestion": "Change 'Complet et En cours' to 'Complété et En Cours'."
         }
       ],
       "approved_at": null
@@ -172,8 +183,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation uses a mixture of upper and lower case letters. It should be consistently lower case, as is typical for Armenian text, or consistently upper case if that is the desired style.",
-          "suggestion": "Consider standardizing to lowercase for consistency: \"ձևերը լրացնողները կարող են լրացնել ձևաթղթերը և դիտել միայն իրենց ավարտված/սկսած ձևերը ավարտված և ընթացքում թղթապանակներում:\""
+          "description": "The Armenian translation uses a colon (:) after \"Ընթացքում\" which is not typical Armenian punctuation in this context. It's more common to use a period or no punctuation at all.",
+          "suggestion": "Remove the colon after 'Ընթացքում'."
         }
       ],
       "approved_at": null
@@ -181,13 +192,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Italian translation uses a semicolon (;) to separate the two clauses. In Italian, using 'e' (and) is more natural in this context.",
-          "suggestion": "I compilatori di moduli possono compilare i moduli e visualizzare solo i moduli completati/iniziati nelle cartelle Completato e In corso."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -196,13 +201,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"started forms\" is not accurately conveyed by \"開始済みフォーム\". While \"開始済み\" means 'started', it implies a more formal initiation.  A more natural phrasing in Japanese, considering the context of form filling, would be something like \"未完了のフォーム\" (mikanryou no fōmu - incomplete forms) or \"作業中のフォーム\" (sagyou-chuu no fōmu - forms in progress).",
-          "suggestion": "Consider using \"未完了のフォーム\" or \"作業中のフォーム\" instead of \"開始済みフォーム\"."
+          "description": "The phrase \"view only their completed/started forms\" is not accurately conveyed. The Japanese translation simply states they 'can view' without emphasizing the restriction to only completed/started forms. The nuance of restriction is lost.",
+          "suggestion": "フォーム記入者は、フォームに記入し、「完成」および「処理中」フォルダ内の入力済み/開始済みフォームのみを表示でき、それ以外のフォームは閲覧できません。"
         },
         {
           "type": "formatting",
-          "description": "The Japanese sentence has a slightly passive and formal tone. While grammatically correct, it might benefit from a more conversational and direct phrasing for user-friendliness.",
-          "suggestion": "Explore alternative sentence structures for a more approachable tone, potentially starting with 'フォーム記入者は...' and then directly stating the actions."
+          "description": "The Japanese sentence is a bit long and could be broken down for better readability. While not strictly incorrect, it feels a little dense.",
+          "suggestion": "フォーム記入者は、フォームに記入できます。また、「完成」および「処理中」フォルダ内の入力済み/開始済みフォームのみを表示することができます。"
         }
       ],
       "approved_at": null
@@ -210,7 +215,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Form fillers\" is translated as \"양식 작성자\" which is accurate but somewhat formal. A slightly more natural phrasing might be better depending on the target audience. 'Form fillers' implies someone specifically designated to fill out forms.",
+          "suggestion": "Consider \"양식 작성 담당자\" or \"양식 작성자\" depending on the desired level of formality and emphasis.  Keep \"양식 작성자\" if the current formality is appropriate."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -218,9 +229,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The term \"ໂຟນເດີ\" (fon der) is a transliteration of 'folder' and may not be the most natural or clear word for Lao speakers. While understandable, a more common and accepted term might improve readability.",
+          "suggestion": "Consider using a more common Lao term for 'folder', perhaps 'ເອກະບົກ' (ekabok) or a similar equivalent. The best choice would depend on the specific context and intended audience."
+        },
+        {
           "type": "formatting",
-          "description": "The Lao translation includes the English folder names \"ສຳເລັດ\" and \"ກຳລັງເຮັດຢູ່\". It would be more natural to translate these as well or maintain consistency.",
-          "suggestion": "Consider translating the folder names to \"ສຳເລັດຮູບ\" and \"ກຳລັງຢູ່ໃນຂະບວນການ\" or retaining the English terms, depending on the overall tone and target audience."
+          "description": "The use of double quotes around the folder names \"ສຳເລັດ\" and \"ກຳລັງເຮັດຢູ່\" is somewhat unusual. While not technically incorrect, it's less common in Lao text.",
+          "suggestion": "Consider removing the double quotes around the folder names: 'ສຳເລັດ' ແລະ 'ກຳລັງເຮັດຢູ່'."
         }
       ],
       "approved_at": null
@@ -231,13 +247,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The terms 'Complete' and 'In Process' are in English within the Latvian translation. While parenthetical translations are provided, maintaining English terms throughout can be jarring for the reader.",
-          "suggestion": "Consider translating 'Complete' and 'In Process' fully into Latvian or consistently using the parenthetical translations without the English originals. For example: 'mapēs Pabeigts un Notiekošs' or 'mapēs Pabeigtajās un Notiekošajās'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'aizpildītās/sāktās' might be improved for clarity. It can be slightly awkward.",
-          "suggestion": "Consider rephrasing to something like 'aizpildītās vai iesāktās' or 'aizpildītās un iesāktās' for better flow."
+          "description": "The English content uses parentheses for translations of folder names (Complete (Pabeigts) and In Process (Notiekošs)). It would be more consistent to apply this to both sides or remove them altogether.",
+          "suggestion": "Consider removing the parentheses or applying them to the English side as well: 'Complete (Pabeigts) and In Process (Notiekošs)' or 'Complete and In Process (Pabeigts un Notiekošs)'."
         }
       ],
       "approved_at": null
@@ -257,7 +268,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation uses \"Concluído e Em processamento\" for \"Complete and In Process\". While understandable, it deviates from a more literal and potentially clearer translation.  'Completo e Em Andamento' might be a closer equivalent.",
+          "suggestion": "Consider using 'Completo e Em Andamento' instead of 'Concluído e Em processamento'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -266,8 +283,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a colon (:) after 'Concluído e Em processamento' which doesn't match the English formatting (no colon).",
-          "suggestion": "Remove the colon after 'Em processamento'. The translation should be: '...nas pastas Concluído e Em processamento.'"
+          "description": "The phrase 'Complete and In Process' is translated as 'Concluído e Em processamento'. While accurate, it might benefit from a more user-friendly term if 'Complete' and 'In Process' have specific equivalent terms commonly used in the context of the application.",
+          "suggestion": "Consider if 'Complete' and 'In Process' have established equivalents in the application's user interface (e.g., 'Finalizadas' and 'Em Andamento') for better clarity and consistency."
         }
       ],
       "approved_at": null
@@ -278,13 +295,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Romanian translation uses 'foldere Formulare completate și În curs de completare' which is not ideal. It's a bit clunky. 'Formulare completate și În curs de completare' is better without 'foldere'.",
-          "suggestion": "folderele Formulare completate și În curs de completare OR folderele cu Formulare completate și În curs de completare OR just 'Formulare completate și În curs de completare' depending on the desired level of formality and context."
+          "description": "The phrase \"foldere Formulare completate și În curs de completare\" is a bit awkward. It directly translates 'folders Complete forms and In process of completion'. A more natural Romanian phrasing would improve readability.",
+          "suggestion": "folderele 'Formulare completate' și 'În curs de completare'"
         },
         {
           "type": "incorrect_translation",
-          "description": "While the overall meaning is conveyed, 'afișa' is a bit formal for describing viewing forms. A more natural Romanian equivalent might be 'vedea'.",
-          "suggestion": "Instead of 'afișa', use 'vedea'."
+          "description": "The term 'În curs de completare' is a literal translation of 'in process of completion'. While correct, it's not the most common or natural way to express this in Romanian. A more common phrase would be 'în lucru'.",
+          "suggestion": "folderele 'Formulare completate' și 'În lucru'"
         }
       ],
       "approved_at": null
@@ -300,19 +317,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Sinhala translation uses a mix of Sinhala and English terms. While 'Form fillers' is translated as 'පෝරම පිරවුම්කරුවන්ට', it's followed by 'folders' which is not translated. Consistency in language would improve readability.",
-          "suggestion": "Consider translating 'folders' to 'ආශ්‍රිත ෆෝල්ඩර්' or a similar Sinhala equivalent for complete consistency."
+          "type": "spelling",
+          "description": "The word 'ෆෝල්ඩර' (folder) is repeated multiple times, which can be slightly awkward. While technically correct, it might be improved for flow.",
+          "suggestion": "Consider using 'පිංචුවල' (pinchuwala) or rephrasing to avoid repetition."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'සම්පූර්ණ කරන ලද/ආරම්භ කරන ලද පෝරම පමණක් නැරඹිය හැකිය' could be slightly improved for flow. Although grammatically correct, it sounds a little clunky.",
-          "suggestion": "Consider rephrasing to something like 'ඔවුන්ගේ සම්පූර්ණ කරන ලද හෝ ආරම්භ කරන ලද පෝරම පමණක් නැරඹිය හැකිය' (They can only view their completed or started forms)."
+          "description": "The phrase 'සම්පූර්ණ කරන ලද/ආරම්භ කරන ලද' is grammatically correct but reads slightly stiffly in Sinhala. A more natural phrasing could be explored.",
+          "suggestion": "Consider 'සම්පූර්ණ වී ඇති/ආරම්භ කරන ලද' or 'ඔවුන් සම්පූර්ණ කරන ලද/ආරම්භ කරන ලද'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While not strictly incorrect, 'ක්‍රියාවලියේ ඇති' (within the in process) is a bit wordy.  'ක්‍රියාත්මක' might be a more concise and accurate translation of 'in process'.",
-          "suggestion": "Replace 'ක්‍රියාවලියේ ඇති' with 'ක්‍රියාත්මක'."
+          "type": "formatting",
+          "description": "While not strictly an error, separating the list of conditions ('completed/started') with a conjunction ('and') might improve readability. The Sinhala construction is technically correct without it, but a conjunction would improve flow.",
+          "suggestion": "Add 'සහ' (and) before 'ආරම්භ කරන ලද'."
         }
       ],
       "approved_at": null
@@ -323,13 +340,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Form fillers' is translated as 'Používatelia, ktorí vyplňujú formuláre', which is a bit verbose. A more direct translation like 'Osób vyplňajúcich formuláre' or simply 'Vyplňovatelia formulárov' would be more aligned with the original meaning and maintain brevity.",
-          "suggestion": "Vyplňovatelia formulárov"
+          "description": "The term 'Form fillers' is translated as 'Používatelia, ktorí vyplňujú formuláre' which is a bit verbose and doesn't directly convey the meaning of 'form fillers'. A more direct translation would be something like 'Osób vyplňajúcich formuláre' or 'Vyplňovatelia formulárov'.",
+          "suggestion": "Consider 'Vyplňovatelia formulárov' or 'Osób vyplňajúcich formuláre'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Complete and In Process' is translated as 'Vyplnené a V procese'. While understandable, 'Dokončené a V spracovaní' might be a more precise equivalent, especially considering 'In Process' refers to an ongoing, active state.",
-          "suggestion": "Dokončené a V spracovaní"
+          "description": "The phrase 'Complete and In Process' is translated as 'Vyplnené a V procese'. While understandable, a more accurate and common Slovak term for 'Complete' in this context would be 'Dokončené'.",
+          "suggestion": "Change 'Vyplnené a V procese' to 'Dokončené a V procese'."
         }
       ],
       "approved_at": null
@@ -345,9 +362,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Form fillers' is translated as 'Попуњачи формулара', which is accurate but a bit clunky. A more natural phrasing in Serbian might be 'Особе које попуњавају формуларе' or 'Корисници који попуњавају формуларе'.",
+          "suggestion": "Особе које попуњавају формуларе"
+        },
+        {
           "type": "formatting",
-          "description": "The Serbian translation uses 'ф' for folder, which might be less common than 'папка'.",
-          "suggestion": "Consider using 'папка' instead of 'фолдер' for better readability in Serbian."
+          "description": "The slash '/' in 'завршене/започете' could be replaced with a dash or em dash to improve readability, although both are acceptable.",
+          "suggestion": "завршене-започете"
         }
       ],
       "approved_at": null
@@ -358,13 +380,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses lowercase 'foldera'. Should be capitalized as 'foldera'.",
-          "suggestion": "foldera"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'popuniti' is repeated. Although not strictly incorrect, it can sound awkward. Consider rephrasing.",
-          "suggestion": "Popunjači formulara mogu popunjavati formulare i pregledati samo svoje završene/započete formulare unutar foldera Završeno i U Procesu."
+          "description": "The Serbian translation uses lowercase for folder names ('Završeno i U Procesu'). While not strictly incorrect, maintaining capitalization to match the English source's capitalization ('Complete and In Process') might improve consistency and readability.",
+          "suggestion": "Consider capitalizing the folder names: 'Završeni i U Procesu'."
         }
       ],
       "approved_at": null
@@ -386,9 +403,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Hoàn thành và Đang xử lý' is a direct translation of 'Complete and In Process'. While understandable, it might be more natural in Vietnamese to use a phrasing like 'Đã hoàn thành và đang xử lý' or 'Hoàn thành và đang được xử lý' to better reflect the meaning and flow.",
-          "suggestion": "Consider rephrasing 'Hoàn thành và Đang xử lý' to 'Đã hoàn thành và đang xử lý' or 'Hoàn thành và đang được xử lý'."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Complete and In Process folders' is translated as 'các thư mục Hoàn thành và Đang xử lý'. While not incorrect, it's a bit literal. A more natural-sounding Vietnamese translation would be 'thư mục Hoàn thành và Đang xử lý' or 'thư mục đã hoàn thành và đang xử lý', omitting the extra 'các'.",
+          "suggestion": "thư mục Hoàn thành và Đang xử lý"
         }
       ],
       "approved_at": null
@@ -399,8 +416,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase “完成”和“正在处理中” is separated by a comma instead of an 'and' or a more natural conjunction. This can make the sentence feel disjointed in Chinese.",
-          "suggestion": "Replace the comma with “和” (hé) for a more fluent reading. Example: “完成和正在处理中”"
+          "description": "The phrase “完成”和“正在处理中” is separated by a comma, which is not standard Chinese punctuation. A conjunction or ellipsis would be more appropriate.",
+          "suggestion": "填表人可以填写表单，并且能在“完成”和“正在处理中”文件夹中，仅查看他们已完成/已开始的表单。 -> 填表人可以填写表单，并且能在“完成”和“正在处理中”文件夹中，仅查看他们已完成/已开始的表单，或仅查看..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'filler' is translated as '填表人' which is accurate but sounds a bit formal and might not be the most natural way to describe a form filler in all contexts. A more colloquial or common term could be considered depending on the target audience.",
+          "suggestion": "Consider alternatives like '表单填写者' or a less formal equivalent, depending on the intended tone."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Group created",
   "content_en_sha1_hash": "a72534ec04c811d9241605c84240805ba9206f26",
   "created_at": "2025-05-19T21:30:49.768Z",
-  "updated_at": "2025-05-21T01:07:36.060Z",
+  "updated_at": "2025-05-24T02:21:36.278Z",
   "comment": {
     "text": "This translation key is used to display a message indicating when a new group has been created, typically on a web interface. It appears in the UI, likely as part of a notification or confirmation dialog, to inform users about newly created groups. The goal is to provide feedback to users when their group is successfully created.",
     "is_auto": true,
@@ -156,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කුழு සාදා ගන්නා ලදි\" is not the most natural or accurate translation of \"Group created\". It implies a process of creating and obtaining, rather than simply stating the group's creation.",
-          "suggestion": "කුழு නිර්මාණය කරන ලදි\" (Kulu nirmanaya karana ladi) or simply \"කුழு සාදා ඇත\" (Kulu sada atha) are more accurate translations."
+          "description": "The translation 'කුழு සාදා ගන්නා ලදි' is too verbose and doesn't accurately convey the brevity of \"Group created\". It implies an ongoing action rather than a completed event.",
+          "suggestion": "කුழு නිර්මාණය කරන ලදි (Kulu nirmanaya karan ladi) - 'Group created' or කෙටිగా, 'කුழு' (Kulu) - 'Group' (context dependent)"
         },
         {
           "type": "grammar",
-          "description": "The phrase \"ගන්නා ලදි\" is somewhat awkward and doesn't flow naturally in Sinhala. It's overly verbose.",
-          "suggestion": "Removing \"ගන්නා ලදි\" improves the sentence. Alternatives given in incorrect translation issue are more suitable."
+          "description": "The use of 'ගන්නා ලදි' ('ganna ladi') suggests an ongoing process. The translation should imply completion.",
+          "suggestion": "Using a more appropriate verb tense to indicate completion, like 'කරයි' (karayi) in certain contexts, could improve accuracy, but a simpler phrasing is preferable."
         }
       ],
       "approved_at": null

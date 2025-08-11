@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
+import { i18n as i18nType } from "i18next";
 import { match, P } from "ts-pattern";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
@@ -43,7 +43,7 @@ type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
 export interface UseThemeProps {
   initialTheme?: ThemeKeys;
-  i18n?: i18n;
+  i18n?: i18nType;
   systemTheme?: ThemeKeys;
   colorTheme?: TGetColorTheme;
   lang?: string;
@@ -105,14 +105,14 @@ const useTheme = ({
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();
 
-    let theme = initialTheme ?? SYSTEM_THEME;
+    let newTheme = initialTheme ?? SYSTEM_THEME;
     const interfaceDirection = getDirectionByLanguage(lang || "en");
 
-    if (initialTheme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    if (initialTheme === ThemeKeys.SystemStr) newTheme = SYSTEM_THEME;
 
     const fontFamily = getFontFamilyDependingOnLanguage(i18n?.language ?? "en");
 
-    const isBaseTheme = theme === ThemeKeys.BaseStr;
+    const isBaseTheme = newTheme === ThemeKeys.BaseStr;
 
     setTheme({
       ...(isBaseTheme ? Base : Dark),

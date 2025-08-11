@@ -51,7 +51,9 @@ const RoomsActivityContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("RoomsActivity")}
+          {t("RoomUpdateNotify", {
+            sectionName: t("Common:Rooms"),
+          })}
         </Text>
         <ToggleButton
           className="rooms-activity toggle-btn"

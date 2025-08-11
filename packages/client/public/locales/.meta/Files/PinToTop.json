@@ -3,7 +3,7 @@
   "content": "Pin to top",
   "content_en_sha1_hash": "a94cf5385edad5e968827d91757ef6b07d571826",
   "created_at": "2025-05-19T21:30:55.964Z",
-  "updated_at": "2025-06-03T20:59:42.288Z",
+  "updated_at": "2025-08-04T07:30:01.591Z",
   "comment": {
     "text": "This translation key is used for the label on a button or option that allows users to pin items to the top of their list. It appears in various contexts, including settings or options dialogs, where users can customize their interaction with pinned content. The text should be translated from \"Pin to top\" to make it consistent across different languages.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1256,
+      "line_number": 1260,
       "context": "const pinOptions = [\n {\n id: \"option_pin-room\",\n key: \"pin-room\",\n label: t(\"PinToTop\"),\n icon: PinReactSvgUrl,\n onClick: (e) => this.onClickPin(e, item.id, t),\n disabled:\n this.publicRoomStore.isPublicRoom ||\n Boolean(item.external && item.expired),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1256,
+      "line_number": 1260,
       "context": "const pinOptions = [\n {\n id: \"option_pin-room\",\n key: \"pin-room\",\n label: t(\"PinToTop\"),\n icon: PinReactSvgUrl,\n onClick: (e) => this.onClickPin(e, item.id, t),\n disabled:\n this.publicRoomStore.isPublicRoom ||\n Boolean(item.external && item.expired),",
       "module": "/packages/client"
     }
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'تثبيت في أعلى الصفحة' is a literal translation of 'Pin to top', it doesn't convey the same functionality or user understanding in a UI context. Users expect a more intuitive term.",
-          "suggestion": "Consider using 'إبقاء في الأعلى' (Ibaqa fi al-a'la) or 'تثبيت في القمة' (Tathbeet fi al-qimma) which better reflect the pinning functionality.  Research common UI terminology in Saudi Arabic for 'Pin to top' to find the most appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -48,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Yuxarıya sabitləyin\" is a literal translation of \"Pin to top\", it might not be the most natural or idiomatic phrasing in Azerbaijani. \"Pin to top\" often implies fixing something at the top of a list or interface. A more suitable translation might focus on that function.",
-          "suggestion": "Consider alternatives like \"Yuxarıya keçir\" (Move to top) or \"Yuxarıya bərkidərin\" (Fix to top), or even exploring more context-dependent phrasing depending on the UI."
+          "description": "While 'Yuxarıya sabitləyin' is understandable, a more natural and accurate translation of 'Pin to top' in Azerbaijani would be something like 'Yuxarı dayaşdırın' or 'Yuxarı bərkidəyin'. 'Sabitləyin' implies a more permanent fixation, whereas 'pinning' is a temporary action.",
+          "suggestion": "Yuxarı dayaşdırın"
         }
       ],
       "approved_at": null
@@ -60,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Закачете най-отгоре\" is understandable, it's not the most natural or idiomatic translation of \"Pin to top\". It literally translates to \"Attach to the top\".  A better translation would capture the functionality of pinning an item to the top of a list or display.",
-          "suggestion": "Consider \"Закрепи към горната част\" or \"Фиксирай най-отгоре\" for a more accurate representation of the action."
+          "description": "While \"Закачете най-отгоре\" is understandable, it's a literal translation that doesn't fully capture the meaning of \"Pin to top\" in a UI context. A more natural and accurate translation would be something like \"Закрепи към върха\" or \"Закачи в горната част\".",
+          "suggestion": "Закрепи към върха"
         }
       ],
       "approved_at": null
@@ -69,7 +63,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Připnout na začátek\" is technically correct, it doesn't fully capture the nuance of \"Pin to top.\" \"Pin to top\" typically refers to pinning an item to the very top of a list or feed, rather than simply attaching it to the beginning. A more accurate translation would convey this sense of prominence.",
+          "suggestion": "Consider alternatives like \"Upevnit nahoře\" or \"Připnout do horní části\" to better reflect the intended meaning."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Oben anstecken\" is technically correct, it's not the most natural or common way to translate \"Pin to top\" in a UI context. It sounds quite literal and doesn't convey the meaning of fixing something to the top of a list or view.",
-          "suggestion": "A better translation would be something like \"An den oberen Rand anheften\", \"Fest an den oberen Rand setzen\", or \"Nach oben fixieren\". The best choice will depend on the exact UI element and desired tone."
+          "description": "The translation \"Oben anstecken\" doesn't accurately convey the meaning of \"Pin to top.\" \"Anstecken\" implies attaching something with a pin, which isn't the intended functionality. The meaning of pinning to the top in this context is to prioritize or move to the top of a list or display.",
+          "suggestion": "A more accurate translation would depend on the specific UI context, but options could include: \"An die Spitze festlegen\", \"Nach oben verschieben\", or \"An die oberste Position bewegen\". Alternatively, something more colloquial like \"Nach oben sortieren\" could also work."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Καρφίτσωμα στην κορυφή\" is a literal translation, it's not the most natural or commonly used phrasing in Greek for \"Pin to top.\" It sounds somewhat awkward.",
-          "suggestion": "A more natural translation would be something like \"Στάχυση\" or \"Κλείδωμα στην κορυφή\". \"Στάχυση\" is a very common translation for 'pinning' in digital interfaces."
+          "description": "The translation \"Καρφίτσωμα στην κορυφή\" is a literal translation of \"Pin to top\" but doesn't convey the intended meaning in a natural Greek way. \"Pin to top\" in a UI context typically means to fix an item at the top of a list or other view. A more appropriate translation would be something that implies prioritization or placement at the top.",
+          "suggestion": "Consider alternatives like \"Επικόλληση στην κορυφή\" (Stick to top), \"Σημαντικό - στο πάνω μέρος\" (Important - at the top), or \"Προτεραιότητα - στην κορυφή\" (Priority - at the top). The best choice will depend on the UI context."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Anclar al principio' is technically 'Anchor to the beginning', the common and idiomatic Spanish translation for 'Pin to top' in a UI context (like a list or board) is 'Fijar en la parte superior' or 'Fijar arriba'. 'Anclar al principio' implies attaching something to the very start, not necessarily pinning it to the top.",
-          "suggestion": "Fijar en la parte superior"
+          "description": "While 'Anclar al principio' literally translates to 'Anchor to the beginning,' the intended meaning of 'Pin to top' implies pinning an item to the top of a list or view. 'Anclar al principio' doesn't convey this specific meaning.",
+          "suggestion": "Consider alternatives like 'Fijar en la parte superior' or 'Anclar a la parte superior' to more accurately reflect the English phrase 'Pin to top'."
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Kiinnitä yläreunaan' is understandable, it's a quite literal translation and not the most natural way to express 'Pin to top' in Finnish. A more idiomatic translation would better reflect the intended meaning in a UI context.",
-          "suggestion": "Consider alternatives like 'Lukitse yläosaan' or 'Kiinnitä otsikkoon', depending on the specific UI element being referred to. 'Kiinnitä näkyviin' could also be appropriate."
+          "description": "While 'Kiinnitä yläreunaan' is a literal translation of 'Pin to top', it doesn't convey the intended meaning within a user interface context. 'Pin to top' usually means keeping an item at the top of a list or view, regardless of sorting or other changes. A more natural translation would capture this function.",
+          "suggestion": "Consider alternatives like 'Lukitse ylätasolle', 'Kiinnitä päällimmäiseksi', or 'Pidä ylhäällä'."
         }
       ],
       "approved_at": null
@@ -132,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation \"Ամրացնել վերին մասում\" literally translates to \"Secure/Fasten in the top part\". While conveying a similar concept, it's not the most natural or idiomatic translation of \"Pin to top\". A more suitable translation would capture the action of pinning something to the top of a list or display.",
-          "suggestion": "Consider \"Թողնել ամենամեծի վրա\" or \"Լքել գագաթին\" which better convey the action of pinning to the top."
+          "description": "The Armenian translation \"Ամրացնել վերին մասում\" (Amratcnel verin masum) is a literal translation that doesn't quite capture the intended meaning of \"Pin to top\". It translates to something like 'Fasten at the top' which isn't the same as pinning an item to the top of a list or view.",
+          "suggestion": "A more accurate translation might be something like \"Թողնել ամենամեծի վրա\" (Tognel amenametsi vra) meaning 'Move to the top' or \"Լքել ամենաբարձրի վրա\" (Lqel amenabardzi vra) meaning 'Place at the top'."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ປັກໝຸດຢູ່ເທິງ\" translates literally to \"Pin at top\", the standard and more natural translation of \"Pin to top\" in a user interface context in Lao would be \"ຫມຸດເທິງສຸດ\" or \"ຍຶດໝຸດເທິງສຸດ\". \"ປັກໝຸດຢູ່ເທິງ\" sounds awkward and doesn't accurately convey the intended meaning of pinning something to the very top of a list or collection.",
-          "suggestion": "ຫມຸດເທິງສຸດ"
+          "description": "While \"ປັກໝຸດຢູ່ເທິງ\" literally translates to 'pin to top', it's not the most natural or common phrasing in Lao for this UI element.  'Pin to top' usually implies a permanent placement at the top of a list or display, and a more natural phrasing is needed to convey that meaning.",
+          "suggestion": "Consider 'ຍຶດໄວ້ເທິງສຸດ' (yut wai thung sut) which means 'fix/hold at the top' or 'ຢູ່ນຳ້ນຳ້ເທິງສຸດ' (yu nam nam thung sut) which means 'stay at the top'."
         }
       ],
       "approved_at": null
@@ -171,7 +171,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Piespraust augšā' is understandable, a more natural and commonly used translation for 'Pin to top' in a UI context would be 'Fiksēt augšā' or 'Ievietot augšā'. 'Piespraust' often implies physically pinning something.",
+          "suggestion": "Fiksēt augšā"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Przypnij u góry\" literally translates to 'Pin at the top'. While understandable, a more natural and idiomatic translation for 'Pin to top' in a UI context would be something like \"Przypnij na górę\" or \"Przypiąć na górę\". \"Przypnij u góry\" can imply pinning *within* the top area, rather than pinning *to* the top.",
-          "suggestion": "Przypnij na górę"
+          "description": "The translation \"Przypnij u góry\" is not the most natural or accurate translation of \"Pin to top\". While literally meaning \"Pin at the top\", a more idiomatic translation would convey the action of fixing something to the top of a list or screen.",
+          "suggestion": "Consider alternatives like \"Przypnij na górze\" or \"Ustaw na górze\" depending on the precise context. \"Przypięcie na górze\" could also work well."
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Afixar em cima\" doesn't perfectly capture the meaning of \"Pin to top.\" While \"Afixar\" means to attach or fix, \"em cima\" (on top) is not the best way to convey the action of pinning something to the top of a list or interface. It could be misinterpreted.",
-          "suggestion": "Consider alternatives like \"Fixar no topo\" or \"Anclar ao topo\" which more accurately reflect the intended functionality."
+          "description": "The translation \"Afixar em cima\" while technically conveying a meaning related to pinning something, isn't the most natural or common way to express 'Pin to top' in Portuguese. It's a bit literal.",
+          "suggestion": "A more natural translation would be \"Fixar no topo\" or \"Travar no topo\"."
         }
       ],
       "approved_at": null
@@ -216,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Fixare sus' is a literal translation of 'Pin to top', it doesn't convey the intended meaning of pinning something to the top of a list or interface. A more natural Romanian equivalent would convey the idea of permanence or sticking to the top.",
-          "suggestion": "Consider alternatives like 'Ține sus', 'Fixat sus', 'Blocare sus', or 'Afixare sus'. The best option depends on the specific context."
+          "description": "While 'Fixare sus' is a literal translation, it doesn't convey the intended meaning of 'Pin to top' in the context of UI elements. 'Pin to top' typically means to keep an item at the top of a list or view, regardless of scrolling. 'Fixare sus' implies a more permanent fixing.",
+          "suggestion": "Consider alternatives like 'Ține sus', 'Menține sus', or 'Blocare sus'. The best option would depend on the specific UI context and the existing terminology used in the application."
         }
       ],
       "approved_at": null
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"මුදුනට අමුණන්න\" while literally meaning \"attach to the top\", doesn't convey the intended meaning of 'Pin to top' which implies fixing an item at the top of a list or view.  It's too literal and lacks the nuance of a pinning action.",
-          "suggestion": "A more appropriate translation would be something along the lines of \"ප්‍රමුඛ ස්ථානයට තැබන්න\" (pramukha sthanaya thabanna) which means 'place at the top' or \"ඉහළට යවන්න\" (ihala yavana) which means 'send to the top'.  A more idiomatic expression would be preferable."
+          "description": "The translation \"මුදුනට අමුණන්න\" doesn't accurately convey the meaning of \"Pin to top\". \"මුදුනට අමුණන්න\" literally translates to 'tie to the top' which implies physically attaching something to the top, not pinning it to the top of a list or interface.",
+          "suggestion": "A more accurate translation would be something that implies fixing or anchoring to the top, such as \"ප ඉස ඉහළට\" (pis isa ihala ta) or \"ඉහළ ස්ථානයේ ස්ථාපනය කරන්න\" (ihala sthanaye sthanapana karna) depending on the context. A more natural and functional translation might also require understanding how this functionality is intended to work within the interface."
         }
       ],
       "approved_at": null
@@ -246,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Pripnúť hore' is technically a literal translation of 'Pin to top', it doesn't convey the intended meaning of pinning something to the top of a list or view. It sounds awkward and unnatural in Slovak in this context.",
-          "suggestion": "A more appropriate translation would be 'Upevniť na vrch' or 'Zafixovať na vrch' or 'Prichytiť na vrch'.  Alternatively, depending on the user interface, 'Umiestniť na vrchol' could work."
+          "description": "The translation \"Pripnúť hore\" while literally translating to \"Pin to top\", is not the idiomatic or preferred way to express this function in Slovak. It sounds awkward and unnatural. The common and accepted translation would be \"Priraziť na vrch\" or \"Upevniť na vrch\".",
+          "suggestion": "Consider using \"Priraziť na vrch\" or \"Upevniť na vrch\"."
         }
       ],
       "approved_at": null
@@ -264,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Закачи на врх\" while understandable, isn't the most natural or precise translation of \"Pin to top\". It literally translates to \"Attach to top\". A more idiomatic translation would convey the action of pinning something so it remains at the top.",
-          "suggestion": "Consider \"Прикачи на врх\" or \"Залепи на врх\" which more accurately capture the 'pinning' action, though finding a perfect equivalent is challenging."
+          "description": "While \"Закачи на врх\" is understandable, it's not the most natural or accurate translation of \"Pin to top\" in a software context. \"Закачи\" implies attaching, but \"Pin\" suggests a more fixed position.",
+          "suggestion": "Consider alternatives like \"Прикачи на врх\", \"Фиксај на врх\", or \"Залепи на врх\", depending on the specific functionality."
         }
       ],
       "approved_at": null

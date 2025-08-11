@@ -3,7 +3,7 @@
   "content": "Hide menu",
   "content_en_sha1_hash": "93066aecf8f75fbb8e34e32fb582d55ae44b9cb5",
   "created_at": "2025-05-19T21:30:45.764Z",
-  "updated_at": "2025-06-18T07:34:15.332Z",
+  "updated_at": "2025-06-18T17:11:42.564Z",
   "comment": {
     "text": "This translation key is used for the text \"Hide menu\" which appears as a button label on an article component, allowing users to hide the menu. It is part of a larger UI element that includes a font weight and size specification.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "line_number": 67,
       "context": "fontSize=\"15px\"\n lineHeight=\"16px\"\n noSelect\n truncate\n >\n {t(\"Common:HideArticleMenu\")}\n </Text>\n </div>\n ) : (\n <div\n className=\"article-show-menu-container\"",
       "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/management/src/components/article/article-hide-button.tsx",
+      "line_number": 70,
+      "context": "fontWeight={600}\n fontSize=\"12px\"\n noSelect\n truncate\n >\n {t(\"HideArticleMenu\")}\n </Text>\n </StyledHideButton>\n )}\n </StyledHideButtonWrapper>\n );",
+      "module": "/packages/management"
     }
   ],
   "languages": {
@@ -36,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Menyunu gizlədin' while understandable, is grammatically awkward. It implies a completed action on the menu, which isn't the intended meaning of 'Hide menu'.  The desired meaning is to *hide* the menu, not that it *has* been hidden.",
+          "description": "The translation \"Menyunu gizlədin\" is in the past tense ('I hid the menu'). The English 'Hide menu' implies a present or default action (to hide the menu).",
           "suggestion": "Menyunu gizlə"
         }
       ],
@@ -149,8 +155,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ascundere meniu' is not the most natural or accurate translation of 'Hide menu' in Romanian. 'Ascundere' is a valid word for 'hide', but it's more formal. A more common and natural translation would be 'Ascunde meniul' or 'Ascunderea meniului'.",
+          "type": "spelling",
+          "description": "The Romanian word 'Ascundere' is a verb in the infinitive form. For a menu item 'Hide menu', the imperative form is more appropriate.",
           "suggestion": "Ascunde meniul"
         }
       ],
@@ -168,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"වට්ටෝරුව සඟවන්න\" (wattoruwa sagawanna) literally translates to \"Hide the button\". While functionally similar, \"Hide menu\" implies a more comprehensive action. A better translation would convey the intent of hiding the entire menu, not just a button.",
-          "suggestion": "වට්ටෝරුව අයින් කරන්න (wattoruwa aein karanna) - Hide the menu, or සැඟවන්න (segawanna) - Hide it (referring to the menu)"
+          "description": "While \"වට්ටෝරුව සඟවන්න\" (wattoruwa sagavanna) is technically correct, a more natural and common phrasing for \"Hide menu\" would be \"වට්ටෝරුව අයින් කරන්න\" (wattoruwa ain karanna). 'සඟවන්න' implies concealing or hiding something discreetly, whereas 'අයින් කරන්න' is more aligned with removing something from view.",
+          "suggestion": "වට්ටෝරුව අයින් කරන්න"
         }
       ],
       "approved_at": null

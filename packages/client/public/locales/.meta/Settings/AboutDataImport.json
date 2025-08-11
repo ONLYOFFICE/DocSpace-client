@@ -3,7 +3,7 @@
   "content": "Data import includes several steps: data upload, parsing, import configuration, and import. Your backup file will be stored in {{organizationName}} {{productName}} servers for 24 hours, and then it will be automatically deleted.",
   "content_en_sha1_hash": "e0f675b298d8f6211666ee36285131ed498e9ed6",
   "created_at": "2025-05-19T21:30:50.265Z",
-  "updated_at": "2025-05-28T09:30:02.527Z",
+  "updated_at": "2025-05-26T07:57:32.545Z",
   "comment": {
     "text": "The \"AboutDataImport\" translation key describes the data import process, including the storage duration of uploaded files on {{organizationName}} {{productName}} servers. It appears in a step layout component, providing context to users about the process and expected outcome. The purpose is to inform users about the automatic deletion of their backup file after 24 hours.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation uses a full stop ('.') at the end of each sentence, which is common in formal writing but may feel slightly less natural in a user interface setting. Consider using a more conversational tone, potentially omitting the full stop after the first sentence.",
+          "suggestion": "يتضمن استيراد البيانات عدة خطوات: تحميل البيانات وتحليلها وتكوين الاستيراد. سيتم تخزين ملف النسخ الاحتياطي الخاص بك في خوادم {{organizationName}} {{productName}} لمدة 24 ساعة، ومن ثم سيتم حذفه تلقائيا."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -47,9 +53,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'parsing' is translated as 'syntaktickou analýzu'. While technically correct, it's overly technical and not the most natural way to express it in this context. A more user-friendly translation would be 'zpracování dat' or 'přípravu dat'.",
-          "suggestion": "Change 'syntaktickou analýzu' to 'zpracování dat' or 'přípravu dat'."
+          "type": "spelling",
+          "description": "The word 'syntaktickou analýzu' is a bit formal and potentially confusing for a general user. While technically correct, it might be better simplified.",
+          "suggestion": "syntaktickou analýzu -> zpracování dat"
+        },
+        {
+          "type": "formatting",
+          "description": "The Czech translation retains the English variable names {{organizationName}} and {{productName}}. This may not be ideal for Czech localization and requires consideration of how these variables should be localized.",
+          "suggestion": "Consider localizing {{organizationName}} and {{productName}} appropriately for the Czech audience."
         }
       ],
       "approved_at": null
@@ -75,13 +86,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"{{productName}}-palvelimille\" appears slightly awkward. While grammatically correct, it would flow better to rephrase it to clarify the relationship between the product and the servers.",
-          "suggestion": "Consider rephrasing to something like \"{{productName}}-palveluiden palvelimille\" or \"{{productName}}-tuotealustan palvelimille\" or simply \"{{productName}}-palvelun palvelimille\" depending on the context.  Alternatively, “{{productName}}-palvelussa” could work."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -90,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase \"et ensuite celui-ci sera automatiquement supprimé\" is grammatically awkward. 'Celui-ci' refers back to 'fichier de sauvegarde', which is a bit redundant and stilted in French. A more natural phrasing would avoid it.",
-          "suggestion": "et sera automatiquement supprimé."
+          "description": "The phrase 'celui-ci sera automatiquement supprimé' is grammatically awkward.  'Celui-ci' refers back to 'fichier de sauvegarde', but the sentence structure is not ideal. It sounds better to directly state what will be deleted.",
+          "suggestion": "Votre fichier de sauvegarde sera automatiquement supprimé."
         }
       ],
       "approved_at": null
@@ -117,18 +122,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'parsing' is not accurately translated. '파싱' is a direct transliteration and might not be understood by all Korean speakers. It's a technical term and a more descriptive translation is preferable.",
-          "suggestion": "데이터 분석 (data analysis) or 데이터 처리 (data processing) could be more appropriate alternatives to '파싱' depending on the specific process being described."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of '{{organizationName}} {{productName}}' is consistent with the English, but consider if this is the preferred way to display these variables in Korean. Sometimes, Korean prefers a different construction for variable insertion.",
-          "suggestion": "Evaluate if a phrase like '{{organizationName}}의 {{productName}}' ({{organizationName}}'s {{productName}}) would sound more natural in Korean, depending on the context. This is a nuanced point and may not be a necessary change."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -137,13 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'parsing' has not been translated. It's a technical term and needs to be rendered into Lao.",
-          "suggestion": "Consider using a term like 'ການວິເຄາະຂໍ້ມູນ' (kan wikhao khomun) or a similar translation for 'parsing' depending on the context."
+          "description": "The word 'parsing' is directly transliterated as 'parsing' without a Lao equivalent. It's a technical term and should be translated to accurately reflect its meaning (e.g., 'ການວິເຄາະຂໍ້ມູນ' - 'data analysis').",
+          "suggestion": "ການວິເຄາະຂໍ້ມູນ"
         },
         {
           "type": "formatting",
-          "description": "The term 'import configuration' is awkward. It's unclear if this means configuration for the import process itself, or configuration to be imported.",
-          "suggestion": "Rephrase to something clearer like 'ການຕັ້ງຄ່າການນໍາເຂົ້າ' (kan tangkha kan namkhao) to specify it is the configuration *for* the import process."
+          "description": "The Lao translation uses a mix of Lao and English terms which can break the flow. While it keeps the variables {{organizationName}} {{productName}}, the surrounding text should ideally be consistent.",
+          "suggestion": "Consider translating 'servers' to ເສີບເວີ (if it's already common usage) or ເສີບເວີຂອງ..."
         }
       ],
       "approved_at": null
@@ -183,13 +177,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'parsing' is not well translated. 'Analizarea' is a direct translation but doesn't fully capture the meaning of parsing in a data import context. It implies a more general analysis rather than specifically processing the data structure.",
-          "suggestion": "Consider using a more precise term for 'parsing' such as 'procesarea' or 'interpretarea' depending on the specific context. Alternatively, a more explanatory phrase like 'pregătirea datelor pentru import' could be used."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure feels a bit awkward. Combining the two sentences before 'after which it will be deleted' would improve flow.",
+          "type": "grammar",
+          "description": "The Romanian translation uses 'după ce va fi șters automat' which implies the file is deleted *after* a specific action. The English 'and then it will be automatically deleted' implies deletion *after* the 24-hour period.  The phrasing is slightly awkward in Romanian.",
           "suggestion": "Fișierul dvs. de rezervă va fi stocat pe serverele {{organizationName}} {{productName}} timp de 24 de ore, după care va fi șters automat."
         }
       ],
@@ -206,14 +195,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'සේවකයන්ගේ' (sevakayanĝe) is used for 'servers'. A more appropriate translation would be 'සේවකයින්' (sevakayin) or 'ගණකාගාරය' (ganakaagaraaya).",
-          "suggestion": "Replace 'සේවකයන්ගේ' with 'සේවකයින්' or 'ගණකාගාරය'."
+          "type": "incorrect_translation",
+          "description": "The phrase \"ආනයන වින්‍යාසය\" (import configuration) is slightly awkward and could be improved. While technically correct, it doesn't flow naturally in Sinhala.",
+          "suggestion": "Consider using \"ආනයන සැකසුම්\" (import settings) or \"ආනයන වැඩපිළිවෙල\" (import process) for better flow."
         },
         {
-          "type": "grammar",
-          "description": "The sentence structure 'ඔබේ පිටපත් ගොනුව ... තබාගනු ලැබේ, ඉන්පසුව එය ස්වයංක්‍රීයව මකා දමනු ලැබේ.' is slightly awkward. A more natural flow would be to connect the two clauses better.",
-          "suggestion": "Consider revising to: 'ඔබේ පිටපත් ගොනුව {{organizationName}} {{productName}} සේවකයින්ගේ 24 පැයක් තබාගෙන, ඉන්පසුව ස්වයංක්‍රීයව මකා දමනු ලැබේ.' or 'ඔබේ පිටපත් ගොනුව {{organizationName}} {{productName}} සේවකයින්ගේ 24 පැයක් තබාගෙන, පසුව ස්වයංක්‍රීයව මකා දමනු ලැබේ.'"
+          "type": "incorrect_translation",
+          "description": "The word \"සේවකයන්\" (servants/workers) used for \"servers\" is not the correct terminology. It's a literal translation and doesn't convey the intended meaning.",
+          "suggestion": "Use \"සgetServerන්\" or \"සgetServerන් පද්ධතිය\" (server system) for a more accurate translation of 'servers'."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of spaces around the curly brackets `{{organizationName}}` and `{{productName}}` might look strange to Sinhala readers. Consistent spacing is preferred.",
+          "suggestion": "Remove the spaces around the curly brackets: `{{organizationName}}` and `{{productName}}`."
         }
       ],
       "approved_at": null
@@ -221,19 +215,24 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'odosielanie údajov' is a literal translation of 'data upload' but might sound awkward in Slovak. A more natural phrasing would be something like 'nahrávanie údajov'.",
+          "suggestion": "nahrávanie údajov"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'parsovanie' is acceptable but 'spracovanie údajov' is often preferred for broader understanding.",
+          "suggestion": "spracovanie údajov"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Slovenian translation maintains the double curly braces `{{organizationName}} {{productName}}` which should be replaced with the actual variable values within the application.",
-          "suggestion": "Ensure that `{{organizationName}}` and `{{productName}}` are replaced with the corresponding variables during rendering."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -248,8 +247,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'fajl' is a less formal term. 'Datoteka' is more appropriate in a technical context.",
-          "suggestion": "Vaš rezervni datoteka će biti sačuvan"
+          "description": "The word 'fajl' is a colloquial spelling of 'fajl'. The more formal and preferred spelling is 'datoteka'.",
+          "suggestion": "Replace 'fajl' with 'datoteka'."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the phrase 'sačuvan na serverima' sounds slightly awkward. A smoother phrasing could use the dative case.",
+          "suggestion": "Replace 'sačuvan na serverima' with 'sačuvan na {{organizationName}} {{productName}} serverima'."
         }
       ],
       "approved_at": null
@@ -263,13 +267,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"data upload\" is translated as \"вивантаження даних\". While technically correct, \"завантаження даних\" would be a more common and natural translation in Ukrainian for 'data upload' in this context.",
-          "suggestion": "Імпорт даних містить кілька етапів: завантаження даних, аналіз, налаштування імпорту та імпорт."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -278,18 +276,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'parsing' is directly translated as 'phân tích cú pháp parsing'. While technically correct, it's clunky and unnecessary to include the English term in parentheses. A more natural Vietnamese phrasing would be better.",
-          "suggestion": "Việc nhập dữ liệu bao gồm một số bước: tải lên dữ liệu, phân tích cú pháp, nhập cấu hình và nhập dữ liệu."
+          "description": "The term 'parsing' is awkwardly translated as 'phân tích cú pháp parsing'.  'Parsing' is a technical term and should be translated more naturally in context. While 'phân tích cú pháp' is a literal translation, it's not common usage and the English term is repeated.",
+          "suggestion": "Consider using a more natural phrasing for 'parsing' depending on the specific context. Possible options include: 'xử lý dữ liệu', 'kiểm tra dữ liệu', or simply omitting it if the meaning is clear without it. For example: 'Việc nhập dữ liệu bao gồm một số bước: tải lên dữ liệu, xử lý dữ liệu, nhập cấu hình và nhập dữ liệu.'"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The repetition of 'nhập dữ liệu' (import data) is redundant. The phrase is used twice in the same context.",
-          "suggestion": "Việc nhập dữ liệu bao gồm một số bước: tải lên dữ liệu, phân tích cú pháp, nhập cấu hình và nhập."
-        },
-        {
-          "type": "formatting",
-          "description": "The use of the placeholder '{{organizationName}} {{productName}}' might be too literal. Consider if a more idiomatic Vietnamese expression exists to describe the server environment.",
-          "suggestion": "Consider rephrasing the server description to align better with Vietnamese conventions for technical descriptions (e.g., 'máy chủ của [tên tổ chức] [tên sản phẩm]' or similar)."
+          "type": "grammar",
+          "description": "The sentence 'Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ {{organizationName}} {{productName}} trong 24 giờ và sau đó nó sẽ bị xóa tự động.' could be improved for flow. The 'nó' (it) is a little ambiguous.",
+          "suggestion": "Rewrite the sentence to avoid the pronoun 'nó'. For example: 'Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ {{organizationName}} {{productName}} trong 24 giờ và sau đó sẽ bị xóa tự động.' or 'Tập tin sao lưu của bạn sẽ được lưu trữ trong máy chủ {{organizationName}} {{productName}} trong 24 giờ và sau đó tự động bị xóa.'"
         }
       ],
       "approved_at": null
@@ -300,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The space between '服务器中' and '24' is missing. This makes the sentence slightly less fluent.",
-          "suggestion": "数据导入包括几个步骤：数据上传、解析、导入配置和导入。您的备份文件将存储在 {{organizationName}}{{productName}}服务器中 24 小时，然后会自动删除。"
+          "description": "The spacing around the '{{organizationName}}{{productName}}' is incorrect. It should be visually separated by a space.",
+          "suggestion": "数据导入包括几个步骤：数据上传、解析、导入配置和导入。您的备份文件将存储在 {{organizationName}} {{productName}}服务器中 24 小时，然后会自动删除。"
         }
       ],
       "approved_at": null

@@ -29,9 +29,11 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ReactSVG } from "react-svg";
 import PublicRoomIconReactSvgUrl from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
+
+import { RoomsType } from "../../../enums";
+
 import { Link } from "../../link";
-import { ColorTheme } from "../../color-theme/ColorTheme";
-import { ThemeId } from "../../color-theme/ColorTheme.enums";
+import { IconButton } from "../../icon-button";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
 
@@ -49,8 +51,7 @@ const element = (
 
 const badges = (
   <div className="badges">
-    <ColorTheme
-      themeId={ThemeId.IconButtonPin}
+    <IconButton
       onClick={() => {}}
       className="badge icons-group is-pinned tablet-badge tablet-pinned"
       iconName={UnpinReactSvgUrl}
@@ -128,7 +129,7 @@ export const Default: Story = {
       tags: [
         {
           label: "Collaboration",
-          roomType: "collaboration",
+          roomType: RoomsType.EditingRoom,
         },
       ],
       contextOptions,

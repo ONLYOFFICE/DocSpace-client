@@ -3,7 +3,7 @@
   "content": "{{organizationName}} SP Settings",
   "content_en_sha1_hash": "bfbd7d95c8767887e77950d3041a33ab5f3eecd8",
   "created_at": "2025-05-19T21:30:50.127Z",
-  "updated_at": "2025-07-02T07:49:19.844Z",
+  "updated_at": "2025-08-04T07:30:01.505Z",
   "comment": {
     "text": "The ServiceProviderSettings translation key is used to display the title of a settings page, which provides configuration options for single sign-on services. This key appears as the title of a button or dialog in the UI, and its content should include the name of the organization. Translators should use this key to provide a consistent and informative label for users navigating the application's settings.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation \"{{organizationName}} SP اعدادت\" is a literal translation of 'Settings' but doesn't convey the intended meaning of 'ServiceProvider Settings' in a natural way for a Saudi Arabic speaker. It lacks context and could be confusing.",
+          "description": "The Arabic translation \"{{organizationName}} SP اعدادت\" is a literal translation of 'Settings'. A more natural and accurate translation for 'ServiceProvider Settings' would convey the purpose or function of the settings.",
           "suggestion": "{{organizationName}} إعدادات مزود الخدمة"
         }
       ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Settings' is translated as 'Parametrləri'. While 'Parametrləri' can mean parameters, 'Settings' in this context refers to configuration settings. A more appropriate translation might be 'Tənzimləmələr' or 'Ayarları'.",
-          "suggestion": "{{organizationName}} SP Tənzimləmələr"
+          "description": "The English phrase \"Settings\" is not accurately translated by \"Parametrləri\". While \"Parametrləri\" means \"parameters,\" \"Settings\" implies a configuration or setup, which is better conveyed by a word like \"Tənzimləmələr\" or a similar term depending on the specific context within Single Sign-On.",
+          "suggestion": "{{organizationName}} SP Tənzimləmələri"
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'ServiceProviderSettings' is best translated as 'Настройки за доставчик на услуги' or 'Настройки на доставчик' rather than just 'настройки'. While 'настройки' is understandable, it's less precise.",
+          "suggestion": "{{organizationName}} Настройки на доставчик на услуги"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -72,8 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Czech translation retains the variable {{organizationName}} which should be handled consistently with the English source.",
-          "suggestion": "Verify that the variable {{organizationName}} is correctly integrated into the Czech application/system. Ensure it's properly replaced with the actual organization name during runtime."
+          "description": "The Czech translation maintains the placeholder {{organizationName}}, which is consistent with the English content. No formatting issues detected related to the placeholder itself.",
+          "suggestion": null
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While grammatically correct, \"Nastavení {{organizationName}} SP\" is a literal translation. A more natural and idiomatic Czech translation for '{{organizationName}} SP Settings' would be \"Nastavení poskytovatele identity pro {{organizationName}}\" or \"Nastavení SP pro {{organizationName}}\".",
+          "suggestion": "Nastavení poskytovatele identity pro {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -84,7 +95,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The hyphen in the German translation appears unnecessary and disrupts readability. In German, 'SP' is usually integrated into the sentence or description rather than being hyphenated with 'Einstellungen'.",
+          "description": "The German translation uses a hyphen where a space might be more natural in this context. While not strictly incorrect, it might feel less readable.",
           "suggestion": "{{organizationName}} SP-Einstellungen"
         }
       ],
@@ -96,13 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'ServiceProvider' is better translated as 'παρόχου υπηρεσιών', which is used here. However, a more natural phrasing for a user interface might be 'Ρυθμίσεις συνεργαζόμενου οργανισμού' (Settings of Partner Organization).",
-          "suggestion": "Ρυθμίσεις συνεργαζόμενου οργανισμού"
-        },
-        {
-          "type": "formatting",
-          "description": "The variable {{organizationName}} is correctly preserved. However, ensure the UI displays it appropriately based on the variable's content.",
-          "suggestion": "N/A - Ensure proper UI rendering of variable."
+          "description": "The term 'ServiceProvider' is not directly translated. 'Πάροχος υπηρεσιών' is a literal translation but might not be the most natural phrasing in this context.  A more user-friendly term might be appropriate, depending on the target audience and the overall product terminology.",
+          "suggestion": "Consider alternatives like 'Εφαρμογή' (Application) or 'Σύστημα' (System) if they better align with the intended meaning within the Single Sign-On context."
         }
       ],
       "approved_at": null
@@ -110,19 +116,19 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Configuración de {{organizationName}} SP' is a literal translation and might not be the most natural way to express '{{organizationName}} SP Settings' in Spanish. A more natural phrasing might be 'Configuración del Proveedor de Servicios (SP) de {{organizationName}}' or 'Configuración SP de {{organizationName}}'.",
-          "suggestion": "Consider 'Configuración del Proveedor de Servicios (SP) de {{organizationName}}' or 'Configuración SP de {{organizationName}}'"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Asetukset' generally means 'settings', in the context of Single Sign-On and Service Providers, a more precise translation might be 'Palveluntarjoajan asetukset' or 'Palveluntarjoajan määritykset'. Using just 'Asetukset' is acceptable but slightly less specific.",
+          "suggestion": "Palveluntarjoajan asetukset"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -131,13 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Paramètres {{organizationName}} SP' is not the most natural or accurate translation of '{{organizationName}} SP Settings'. 'SP' is an abbreviation for 'Service Provider', which isn't explicitly translated. A better translation would incorporate that context. While 'Paramètres' is correct for 'Settings', the overall phrasing is a bit awkward.",
-          "suggestion": "Paramètres du fournisseur de services {{organizationName}}"
+          "description": "The translation 'Paramètres {{organizationName}} SP' doesn't accurately convey the meaning of '{{organizationName}} SP Settings'. 'SP' is an abbreviation for Service Provider, which isn't explicitly translated. A more accurate translation would incorporate this meaning.",
+          "suggestion": "Paramètres du Fournisseur de Services {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "The variable {{organizationName}} is correctly maintained, which is good. However, if this is displayed in a user interface, the order might be more readable with 'Paramètres SP {{organizationName}}'.",
-          "suggestion": "Paramètres SP {{organizationName}}"
+          "description": "The variable {{organizationName}} is present in both the English and French translations. While technically correct, it may be preferable to re-evaluate its usage to ensure consistency across the entire application and potential for localization of this variable itself.",
+          "suggestion": "Consider if {{organizationName}} should also be localizable."
         }
       ],
       "approved_at": null
@@ -148,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Կարգավորումներ' while meaning 'Settings' can be more accurately translated to 'Փաթեթավորումներ' to be more aligned with 'ServiceProviderSettings'. 'Կարգավորումներ' is more general.",
-          "suggestion": "{{organizationName}} SP Փաթեթավորումներ"
+          "description": "The Armenian translation 'Կարգավորումներ' translates to 'Settings' or 'Configurations', which is accurate but slightly less natural than other options. 'Կարգավորումներ' sounds a bit formal for 'Settings'.",
+          "suggestion": "{{organizationName}} SP Կարգավորմաններ"
         }
       ],
       "approved_at": null
@@ -175,13 +181,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'SP ການຕັ້ງຄ່າ' doesn't accurately convey 'ServiceProvider Settings'. 'ການຕັ້ງຄ່າ' generally means 'settings', but 'SP' needs further clarification or translation for better understanding within the Lao context.",
-          "suggestion": "Consider translating 'SP' to its full meaning (e.g., 'ຜູ້ໃຫ້ບໍລິການເຂົ້າສູ່ລະບົບດຽວ' - 'Single Sign-On Provider') or using a more descriptive term for 'ServiceProvider' if a direct equivalent is unavailable. For example, 'ການຕັ້ງຄ່າຜູ້ໃຫ້ບໍລິການເຂົ້າສູ່ລະບົບດຽວ' could be a better translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -196,7 +196,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Instellingen\" is a valid translation for \"Settings,\" it might be more accurate to use \"Service Provider Instellingen\" to specifically indicate Service Provider Settings. \"Instellingen\" is too generic.",
+          "description": "While 'Instellingen' is a valid translation for 'Settings', 'ServiceProviderSettings' is more accurately translated as 'Service Provider Instellingen'. Using just 'Instellingen' loses the specificity of what kind of settings are being referred to.",
           "suggestion": "{{organizationName}} Service Provider Instellingen"
         }
       ],
@@ -214,13 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Configurações {{organizationName}} SP\" is not ideal. \"SP\" is an abbreviation that might not be clear to all Portuguese speakers. A more descriptive translation would be preferable.",
+          "description": "The translation 'Configurações {{organizationName}} SP' is not the most natural or accurate translation of '{{organizationName}} SP Settings'. 'SP' typically refers to 'Service Provider'. A more accurate translation would be 'Configurações do Provedor de Serviços {{organizationName}}' or 'Configurações do SP {{organizationName}}' (if the audience is familiar with the abbreviation).",
           "suggestion": "Configurações do Provedor de Serviços {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "The Portuguese translation maintains the \"{{organizationName}}\" placeholder, similar to the English. This might require the development team to handle this placeholder appropriately.",
-          "suggestion": "No change needed in the translation itself, but note the placeholder."
+          "description": "The formatting of the Portuguese translation mirrors the English. It's important to consider if a more idiomatic Portuguese phrasing would be better, even if it slightly alters the direct word order.",
+          "suggestion": "Consider rephrasing for better flow in Portuguese."
         }
       ],
       "approved_at": null
@@ -231,7 +231,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Configurações do {{organizationName}} SP' is not the most natural or accurate translation of '{{organizationName}} SP Settings'. While technically correct, 'SP' is commonly understood, but using a more descriptive term would improve clarity.  'SP' is short for 'Service Provider'.",
+          "description": "The translation 'Configurações do {{organizationName}} SP' is not the most natural or accurate translation of '{{organizationName}} SP Settings'. 'SP' is an abbreviation and directly translating it might be confusing to some users. A more understandable translation would be 'Configurações do Provedor de Serviços {{organizationName}}'.",
           "suggestion": "Configurações do Provedor de Serviços {{organizationName}}"
         }
       ],
@@ -243,8 +243,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Setări furnizor de servicii' is not the most natural or clear translation for 'ServiceProvider Settings'. 'Setări pentru furnizori de servicii' or 'Configurări furnizor de servicii' would be better alternatives, depending on the context and desired level of formality.",
-          "suggestion": "Setări pentru furnizori de servicii"
+          "description": "The Romanian translation 'Setări furnizor de servicii' is a literal translation of 'ServiceProvider Settings'. A more natural Romanian phrasing would be 'Setări pentru furnizor de servicii' or 'Configurări furnizor de servicii'. 'Setări furnizor de servicii' sounds slightly awkward.",
+          "suggestion": "Setări pentru furnizor de servicii"
         }
       ],
       "approved_at": null
@@ -261,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala word 'සැකසුම්' (sakasuṁ) is a reasonable translation of 'Settings' but might be more accurately translated as 'මානකරණි' (mānakarani) for a more formal and technical context. 'සැකසුම්' implies adjustments or configurations, while 'මානකරණි' refers to established parameters.",
-          "suggestion": "Consider using 'මානකරණි' instead of 'සැකසුම්' for a more technically precise translation."
+          "description": "The Sinhala word 'සැකසුම්' is a valid word, but depending on the specific context of 'ServiceProvider Settings', a more accurate translation might be 'සැපයුම්කරු සැකසුම්' (sapayuṁkaru sakesum). However, 'සැකසුම්' is generally understandable.",
+          "suggestion": "Consider 'සැපයුම්කරු සැකසුම්' for greater precision, but 'සැකසුම්' is acceptable."
         }
       ],
       "approved_at": null
@@ -273,8 +273,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nastavenia {{organizationName}} SP' is not idiomatic. 'SP' likely refers to Service Provider. A more accurate translation would incorporate this. 'Nastavenia poskytovateľa služieb {{organizationName}}' would be better.",
-          "suggestion": "Nastavenia poskytovateľa služieb {{organizationName}}"
+          "description": "The Slovak translation 'Nastavenia {{organizationName}} SP' is not a natural-sounding translation of '{{organizationName}} SP Settings'. 'SP' is likely understood as 'Service Provider', but the direct translation isn't optimal. A more natural Slovak phrasing would incorporate that understanding.",
+          "suggestion": "Nastavenia poskytovateľa služby {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -285,7 +285,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Nastavitve' generally means 'Settings', a more accurate translation considering the context (SingleSignOn ServiceProvider Settings) would be 'Ponudnikove Nastavitve' or 'Ponudnikove Usmeritve'. 'Nastavitve' is too generic and might be misinterpreted.",
+          "description": "The English phrase 'ServiceProviderSettings' is better translated as 'PonudnikNastavitve' or 'PonudnikoveNastavitve' in Slovenian to accurately convey the meaning of 'Service Provider Settings'. 'Nastavitve' is too generic and doesn't specify that these are settings *for* the service provider.",
           "suggestion": "{{organizationName}} Ponudnikove Nastavitve"
         }
       ],
@@ -297,8 +297,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Подешавања  SP-а за {{organizationName}}\" is not the most natural or accurate translation of \"{{organizationName}} SP Settings\". 'SP' is an abbreviation and translating it literally as 'SP-а' is not standard practice in Serbian. A better translation would convey the purpose of the settings.",
-          "suggestion": "Подешавања за {{organizationName}} (Једнократна пријава)"
+          "description": "The translation \"Подешавања  SP-а за {{organizationName}}\" is a literal translation of '{{organizationName}} SP Settings' but is not the most natural or idiomatic way to express this in Serbian. 'SP' is an acronym and using it directly without explanation might confuse the user. The phrasing is also a bit clunky.",
+          "suggestion": "Подешавања за {{organizationName}} (Јединствену пријаву)"
         },
         {
           "type": "formatting",
@@ -314,8 +314,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Podešavanja SP-a\" is not the most natural or common way to say 'SP Settings' in Serbian (Latin). 'SP podešavanja' or 'Postavke SP-a' would be more idiomatic.",
-          "suggestion": "Podešavanja SP-a"
+          "description": "The translation \"Podešavanja SP-a za {{organizationName}}\" is a literal translation of 'SP Settings'. While understandable, it's more natural and clear to translate 'ServiceProvider' instead of just using 'SP'. 'SP' is an abbreviation not commonly used in Serbian.",
+          "suggestion": "Podešavanja davalaca usluga za {{organizationName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "The Serbian translation lacks proper capitalization as is commonly expected. In Serbian, titles and headings usually begin with a capital letter.",
+          "suggestion": "Podešavanja davalaca usluga za {{organizationName}}"
         }
       ],
       "approved_at": null
@@ -332,13 +337,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Параметри постачальника сервісу {{organizationName}}\" is a literal translation of 'ServiceProvider'. While technically correct, it's not the most natural or user-friendly phrasing in Ukrainian.  'Single Sign-On' is the key concept, and 'ServiceProvider' represents the entity providing that service.",
-          "suggestion": "Розширені налаштування провайдера {{organizationName}}"
+          "description": "The translation \"Параметри постачальника сервісу {{organizationName}}\" is a literal translation and doesn't quite capture the meaning of \"SP Settings.\" While technically correct, it sounds overly formal and technical for a settings label.  \"SP\" in this context refers to Service Provider, which is generally understood within IT contexts, but including \"сервісу\" makes it clunky.",
+          "suggestion": "Налаштування постачальника сервісів {{organizationName}}"
         },
         {
           "type": "formatting",
-          "description": "While the variable substitution {{organizationName}} is handled correctly, consider adding a leading space after the colon in the translation for better readability in UI contexts.  This depends on the platform’s rendering style.",
-          "suggestion": "Розширені налаштування провайдера {{organizationName}} "
+          "description": "The translation maintains the double curly braces {{organizationName}}, which is correct for template placeholders, but it's important to ensure the surrounding system handles these correctly.",
+          "suggestion": "N/A - Correct formatting for placeholder"
         }
       ],
       "approved_at": null
@@ -349,8 +354,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Cài đặt {{organizationName}} SP' is not the best translation for '{{organizationName}} SP Settings'. 'Cài đặt' translates to 'Settings' but 'SP' is not directly translated. A better translation would convey the meaning of Service Provider Settings.",
-          "suggestion": "Cài đặt Nhà cung cấp dịch vụ {{organizationName}}"
+          "description": "The translation \"Cài đặt {{organizationName}} SP\" is not the most natural or accurate translation of \"{{organizationName}} SP Settings\". \"Cài đặt\" translates to \"Settings\", but \"SP\" is an abbreviation and might not be understood by all users. A more user-friendly translation would retain the intent of 'Settings'.",
+          "suggestion": "Cài đặt của {{organizationName}}"
         }
       ],
       "approved_at": null

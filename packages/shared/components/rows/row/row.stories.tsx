@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CheckReactSvgUrl from "PUBLIC_DIR/images/check.react.svg?url";
-import { IconSizeType, commonIconsStyles } from "../../../utils";
+import { IconSizeType } from "../../../utils";
 
 import { Text } from "../../text";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
@@ -38,6 +37,7 @@ import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 
 import { Row } from ".";
 import { RowProps } from "./Row.types";
+import styles from "./row.stories.module.scss";
 
 const meta = {
   title: "Components/Row",
@@ -65,10 +65,6 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const CatalogFolderIcon = styled(CatalogFolderReactSvg)`
-  ${commonIconsStyles}
-`;
-
 const elementAvatar = (
   <Avatar
     size={AvatarSize.min}
@@ -77,7 +73,12 @@ const elementAvatar = (
     userName="Demo Avatar"
   />
 );
-const elementIcon = <CatalogFolderIcon size={IconSizeType.big} />;
+const elementIcon = (
+  <CatalogFolderReactSvg
+    className={styles.catalogFolderIcon}
+    data-size={IconSizeType.big}
+  />
+);
 
 const renderElementComboBox = (onSelect?: (option?: TOption) => void) => (
   <ComboBox

@@ -154,7 +154,7 @@ const TwoFactorAuth = (props) => {
       setShowReminder(false);
       saveToSessionStorage("defaultTfaSettings", type);
       saveToSessionStorage("currentTfaSettings", type);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
 
       if (res) {
         setIsInit(false);
@@ -193,6 +193,7 @@ const TwoFactorAuth = (props) => {
             target="_blank"
             isHovered
             href={tfaSettingsUrl}
+            dataTestId="tfa_component_learn_more"
           >
             {t("Common:LearnMore")}
           </Link>
@@ -206,11 +207,13 @@ const TwoFactorAuth = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="tfa_radio_button_group"
         options={[
           {
             id: "tfa-disabled",
             label: t("Common:Disabled"),
             value: "none",
+            dataTestId: "tfa_radio_button_disabled",
           },
           // TODO: hide while 2fa by sms is not working
           /* {
@@ -224,6 +227,7 @@ const TwoFactorAuth = (props) => {
             label: t("ByApp"),
             value: "app",
             disabled: !appAvailable,
+            dataTestId: "tfa_radio_button_app",
           },
         ]}
         selected={type}
@@ -235,7 +239,7 @@ const TwoFactorAuth = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -243,6 +247,8 @@ const TwoFactorAuth = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="two-factor-auth-save"
         additionalClassCancelButton="two-factor-auth-cancel"
+        saveButtonDataTestId="tfa_save_button"
+        cancelButtonDataTestId="tfa_cancel_button"
       />
     </MainContainer>
   );

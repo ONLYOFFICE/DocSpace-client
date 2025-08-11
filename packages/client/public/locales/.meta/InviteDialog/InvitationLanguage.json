@@ -3,7 +3,7 @@
   "content": "Invitation language",
   "content_en_sha1_hash": "293f3a534498681bf02e7a988de2abf5ea526015",
   "created_at": "2025-05-19T21:30:54.722Z",
-  "updated_at": "2025-05-28T09:30:02.377Z",
+  "updated_at": "2025-08-11T09:02:43.898Z",
   "comment": {
     "text": "This translation key defines the text that appears on a language selection dropdown in an invite panel, specifying the label for the \"Invitation Language\" selection. It is used to display the correct language name based on the product name and should be translated accordingly.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 607,
+      "line_number": 615,
       "context": "})}\n </StyledDescription>\n {roomId === -1 || allowInvitingGuests ? (\n <StyledInviteLanguage>\n <Text className=\"invitation-language\" noSelect>\n {t(\"InvitationLanguage\")}:\n </Text>\n <div className=\"language-combo-box-wrapper\">\n <ComboBox\n className=\"language-combo-box\"\n directionY=\"both\"",
       "module": "/packages/client"
     }
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ພາສາເຊີນ\" literally translates to \"invitation language\" but doesn't convey the intended meaning of \"Invitation language\" in the context of a setting or option. It might be better to translate it as something that describes the language *used* for invitations, or a preferred language for invitations.",
-          "suggestion": "Consider alternatives like \"ພາສາມຸຂະພາບເຊີນ\" (language of invitation) or \"ພາສາທີ່ໃຊ້ເຊີນ\" (language used for invitation) depending on the specific meaning required. The best suggestion would require more context."
+          "description": "The Lao translation \"ພາສາເຊີນ\" literally translates to \"invitation language.\" While understandable, a more natural and idiomatic translation of \"Invitation language\" would be something like \"ພາສາມັນເຊີນ\" (Invitation wording/style) or a more descriptive phrase depending on the context.",
+          "suggestion": "Consider \"ພາສາມັນເຊີນ\" or a contextually appropriate alternative."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation 'Invitația în limba' is incomplete. It translates to 'The invitation in the language...' but is missing the specific language being referred to. It's also not the best translation for the English 'Invitation language', which typically refers to the language the invitation is written in.",
-          "suggestion": "A more accurate translation would depend on the context, but options could include: 'Limba invitației' (Language of the invitation) or 'Limba folosită în invitație' (Language used in the invitation)."
+          "description": "The Romanian translation \"Invitația în limba\" translates to \"The invitation in the...\" It's missing the language itself. The intended meaning is \"Invitation language\".",
+          "suggestion": "Invitație în limbă"
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Ngôn ngữ mời' is understandable, a more natural and accurate translation of 'Invitation language' would be 'Ngôn ngữ lời mời'. 'Ngôn ngữ mời' implies the language *of the invitation itself*, whereas 'Ngôn ngữ lời mời' signifies the language *used in the invitation*. The nuance is important.",
-          "suggestion": "Ngôn ngữ lời mời"
+          "description": "While \"Ngôn ngữ mời\" is a literal translation of \"Invitation language\", it sounds unnatural and could be misinterpreted. A more natural and accurate translation would convey the purpose of the language setting.",
+          "suggestion": "Ngôn ngữ gửi lời mời"
         }
       ],
       "approved_at": null

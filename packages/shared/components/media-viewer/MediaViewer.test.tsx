@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import type { TFunction } from "i18next";
 import {
   render,
   screen,
@@ -69,6 +70,7 @@ jest.mock("./sub-components/ViewerWrapper", () => ({
 
 // Mock data
 const mockFile = {
+  shortWebUrl: "",
   id: 1,
   title: "test.jpg",
   fileExst: ".jpg",
@@ -180,7 +182,7 @@ const createMockProps = (overrides = {}): MediaViewerProps => ({
   currentDeviceType: DeviceType.desktop,
   isPublicFile: false,
   autoPlay: false,
-  t: (key: string) => key,
+  t: ((key: string) => key) as unknown as TFunction,
   getIcon: (size: number, ext: string) => `icon-${size}-${ext}`,
   onClose: jest.fn(),
   onDelete: jest.fn(),

@@ -3,7 +3,7 @@
   "content": "Log out from active connection",
   "content_en_sha1_hash": "2761a5016758c53145afc62fc76ca6bf9133f149",
   "created_at": "2025-05-19T21:30:53.363Z",
-  "updated_at": "2025-05-28T09:30:02.283Z",
+  "updated_at": "2025-05-26T07:57:32.318Z",
   "comment": {
     "text": "This translation key is used to display a message when logging out from an active connection. It appears as a header in a logout session dialog box. The phrase should be translated to indicate the action of disconnecting from an ongoing session.",
     "is_auto": true,
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Déconnexion de la connexion active\" is a literal translation and doesn't convey the intended meaning as clearly as it could. \"Déconnexion de la connexion active\" implies disconnecting *from* an active connection, which might be too technical for a general user.",
-          "suggestion": "Déconnexion de la session active"
+          "description": "The translation 'Déconnexion de la connexion active' is a literal translation and doesn't convey the intended meaning of 'Log out from active connection' naturally in French. It's awkward and redundant.",
+          "suggestion": "Se déconnecter de la connexion active"
         }
       ],
       "approved_at": null
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Դուրս եկեք ակտիվ կապից' is a literal translation that might not convey the intended meaning of 'Log out from active connection' in a user-friendly way. It sounds a bit formal and potentially confusing to an average user. A more natural phrasing might be preferable.",
+          "suggestion": "Consider alternatives like 'Անջրկեք ակտիվ կապը' (Disconnect active connection) or 'Անջրկել կապը' (Disconnect connection) for better user experience."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, the translation 'アクティブな接続からログアウトする' sounds slightly unnatural in Japanese. A more natural phrasing would emphasize the action of logging out rather than the source.",
-          "suggestion": "アクティブな接続からログアウトします"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,7 +120,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ອອກຈາກລະບົບການເຊື່ອມຕໍ່ທີ່ໃຊ້ງານ\" is a literal translation but doesn't quite capture the natural flow of the English phrase \"Log out from active connection\". A more natural translation might be something like \"ອອກຈາກການເຊື່ອມຕໍ່ທີ່កំពុងដំណើរការ\" (ok jak kan chaeomto thi khong donnan)",
+          "description": "The Lao translation \"ອອກຈາກລະບົບການເຊື່ອມຕໍ່ທີ່ໃຊ້ງານ\" while understandable, is a bit literal and not the most natural way to say 'Log out from active connection' in Lao. A more idiomatic translation would be something like \"ອອກຈາກການເຊື່ອມຕໍ່ທີ່កំពុងដំណើរការ\" or \"ອອກຈາກບັນຊີທີ່កំពុងເຊື່ອມຕໍ່\".",
           "suggestion": "ອອກຈາກການເຊື່ອມຕໍ່ທີ່កំពុងដំណើរការ"
         }
       ],
@@ -135,13 +135,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Uitloggen van actieve verbinding\" is a literal translation and doesn't convey the intended meaning as naturally in Dutch.  \"Logout\" is often used directly in Dutch, especially in technical contexts. \"Van\" isn't the ideal preposition here.",
-          "suggestion": "Uitloggen van de actieve verbinding"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Terminar a sessão na conexão ativa\" doesn't perfectly capture the nuance of 'Log out from active connection'. 'Terminar a sessão' is closer to 'end the session', while 'Log out' implies a more deliberate action.",
-          "suggestion": "Consider 'Desconectar da conexão ativa' or 'Sair da conexão ativa' for a closer match."
+          "description": "The translation 'Terminar a sessão na conexão ativa' doesn't quite capture the nuance of 'Log out from active connection'. 'Terminar a sessão' is more like 'end the session' and misses the direct action of logging out. A better translation would convey the explicit action of logging out.",
+          "suggestion": "Desconectar da conexão ativa"
         }
       ],
       "approved_at": null
@@ -183,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'සක්‍රිය සම්බන්ධතාවයෙන් නික්මෙන්න' while technically understandable, is not the most natural or idiomatic way to express 'Log out from active connection' in Sinhala. A more natural phrasing would be something along the lines of 'සක්‍රිය සම්බන්ධතාවයෙන් ඉවත් වන්න' or 'සක්‍රිය සම්බන්ධතාවයෙන්signOut කරන්න'.",
-          "suggestion": "Consider 'සක්‍රිය සම්බන්ධතාවයෙන් ඉවත් වන්න' or 'සක්‍රිය සම්බන්ධතාවයෙන්signOut කරන්න'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -207,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'конекција' (connection) is grammatically incorrect in the plural form. It should be 'конекције'.",
-          "suggestion": "Одјави се са активних конекција"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -246,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"从活动连接中注销\" is a literal translation and doesn't convey the natural meaning of 'Log out from active connection'. It sounds awkward in Chinese. A more natural phrasing would be something like '结束当前会话' or '退出当前连接'.",
-          "suggestion": "退出当前连接"
+          "description": "The translation \"从活动连接中注销\" does not accurately convey the meaning of \"Log out from active connection.\"  '活动' (huódòng) means 'active' in the sense of 'eventful' or 'dynamic,' not 'active' as in 'currently connected'. It's suggesting logging out of an event related to a connection, which is incorrect.",
+          "suggestion": "从当前连接注销"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Action required",
   "content_en_sha1_hash": "a5f995a22060510a354c12efb27296065c533247",
   "created_at": "2025-05-19T21:30:42.869Z",
-  "updated_at": "2025-05-28T09:30:02.220Z",
+  "updated_at": "2025-06-30T12:20:31.195Z",
   "comment": {
     "text": "The \"ActionRequired\" translation key is used to display a message indicating that an action needs to be taken in conflict resolution dialogues, such as a file conflict. This text typically appears on a button or header label, prompting users to take further action. Its purpose is to guide the user through resolving conflicts in a clear and concise manner.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ConflictResolveDialog/ConflictResolveDialog.tsx",
-      "line_number": 55,
-      "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
+      "line_number": 56,
+      "context": "submitButtonLabel={t(\"Common:OKButton\")}\n messageText={\n <Trans\n t={t}\n ns=\"Common\"\n i18nKey=\"FileActionRequired\"\n values={{ fileName }}\n components={{ 1: <strong key=\"component_key\" className=\"bold\" /> }}\n />\n }\n selectActionText={t(\"ConflictResolveSelectAction\")}",
       "module": "/packages/doceditor"
     }
   ],

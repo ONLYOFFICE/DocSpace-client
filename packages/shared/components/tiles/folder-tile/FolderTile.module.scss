@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../styles/variables/index.scss";
-@import "../../../styles/variables/_colors.scss";
-@import "../../../styles/_mixins.scss";
+@use "../../../styles/variables";
+@use "../../../styles/variables/colors";
+@use "../../../styles/mixins";
 
 .flexBoxStyles {
   display: flex;
@@ -39,7 +39,8 @@
 }
 
 .folderTile {
-  @extend .flexBoxStyles;
+  position: relative;
+  display: flex;
 
   cursor: pointer;
   box-sizing: border-box;
@@ -51,6 +52,11 @@
 
   height: 64px;
 
+  &.isBig {
+    height: 220px;
+    flex-direction: column;
+  }
+
   &.blocking {
     pointer-events: none;
   }
@@ -59,14 +65,35 @@
     border-color: var(--secondary-text);
   }
 
-  @include mobile {
+  @include mixins.mobile {
     margin-inline-start: 2px;
   }
 
   &.checked,
   &.isActive,
-  &:hover:not(.isDragging, isEdit) {
+  &:hover:not(.isDragging, .isEdit) {
     background: var(--tile-checked-background);
+
+    .fileTileBottom {
+      &.isBig {
+        background: var(--tile-checked-background);
+      }
+    }
+  }
+
+  &.checked {
+    .fileTileTop {
+      background: var(--tile-checked-background);
+    }
+  }
+
+  &.isActive,
+  &:hover:not(.isDragging, .isEdit) {
+    .content {
+      a {
+        text-decoration: var(--link-hover-page-text-decoration);
+      }
+    }
   }
 
   &.isBlockingOperation {
@@ -92,8 +119,8 @@
   .iconContainer {
     width: 32px;
     height: 32px;
-    margin-inline-start: 15px;
-    margin-inline-end: 7px;
+    margin-inline-start: 16px;
+    margin-inline-end: 8px;
 
     &:hover:not(.isDragging, inProgress) {
       .icon {
@@ -102,6 +129,23 @@
       .checkbox {
         opacity: 1;
         display: flex;
+      }
+    }
+
+    &:hover:not(.isDragging, .inProgress),
+    &.checked {
+      background: var(--tile-background-color);
+      border-radius: 6px;
+    }
+
+    .checkbox,
+    .checkbox:active {
+      padding-top: 8px;
+      padding-inline-start: 8px;
+
+      svg {
+        margin: -8px;
+        padding: 8px;
       }
     }
   }
@@ -125,7 +169,7 @@
     padding: 8px;
     padding-inline-start: 8px;
 
-    @include tablet {
+    @include mixins.tablet {
       opacity: 1;
     }
 
@@ -146,13 +190,21 @@
       display: -webkit-box;
       max-width: 400px;
       height: auto;
-      line-height: 19px;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;
       word-break: break-word;
+
+      font-size: var(--tile-font-size);
+      line-height: var(--tile-line-height);
+    }
+
+    &.isHovered {
+      a {
+        text-decoration: none !important;
+      }
     }
 
     .badges {
@@ -182,7 +234,7 @@
       }
     }
 
-    @include tablet {
+    @include mixins.tablet {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -194,7 +246,88 @@
 
     .expandButton > div:first-child {
       padding-block: 8px;
-      padding-inline: 12px 21px;
+      padding-inline: 8px 16px;
+    }
+  }
+
+  .icons {
+    position: absolute;
+    top: 8px;
+
+    :global {
+      .badges .badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        background: var(--tile-background-badge-color);
+        border-radius: 4px;
+        box-shadow: var(--tile-badge-shadow);
+      }
+    }
+  }
+
+  .isBadges {
+    inset-inline-end: 8px;
+
+    :global(.badges) {
+      display: flex;
+      height: 32px;
+      gap: 4px;
+
+      .badge {
+        height: 32px;
+      }
+    }
+  }
+
+  .fileTileTop {
+    @extend .flexBoxStyles;
+
+    background: var(--tile-background-color);
+    justify-content: space-between;
+    align-items: baseline;
+    height: 156px;
+    position: relative;
+    border-radius: 12px 12px 0 0;
+    transition: background 0.2s;
+
+    width: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .thumbnailImage {
+      pointer-events: none;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+      z-index: 0;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .temporaryIcon > div > :global(.injected-svg) {
+      position: absolute;
+      width: 100%;
+      bottom: 16px;
+    }
+  }
+
+  .fileTileBottom {
+    @extend .flexBoxStyles;
+    width: 100%;
+
+    &.isBig {
+      border-top: 1px solid transparent;
+      background: var(--tile-background-color);
+      border-radius: 0 0 12px 12px;
+
+      padding: 16px 0;
+      height: 62px;
+      box-sizing: border-box;
     }
   }
 }

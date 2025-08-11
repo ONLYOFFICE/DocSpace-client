@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
+import React, { useMemo } from "react";
+import dynamic from "next/dynamic";
+import { useTranslation } from "react-i18next";
 import {
   DocumentEditor,
   type IConfig,
@@ -160,7 +161,7 @@ const Editor = ({
 
   // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
-  //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
+  // if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
   let goBack: TGoBack = {} as TGoBack;
 
@@ -172,12 +173,13 @@ const Editor = ({
         i18n.getDataByLanguage(i18n.language) as unknown as {
           Editor: { [key: string]: string };
         }
-      )?.["Editor"] as {
+      )?.Editor as {
         [key: string]: string;
       }
-    )?.["FileLocation"]; // t("FileLocation");
+    )?.FileLocation; // t("FileLocation");
 
     if (editorGoBack === false || user?.isVisitor || !user) {
+      console.log("goBack", goBack);
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -224,17 +226,23 @@ const Editor = ({
     }
   }
 
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  try {
+    // if (newConfig.document && newConfig.document.info)
+    //  newConfig.document.info.favorite = false;
+    const url = typeof window !== "undefined" ? window.location.href : "";
 
-  if (url.indexOf("anchor") !== -1) {
-    const splitUrl = url.split("anchor=");
-    const decodeURI = decodeURIComponent(splitUrl[1]);
-    const obj = JSON.parse(decodeURI);
+    if (url.indexOf("anchor") !== -1) {
+      const splitUrl = url.split("anchor=");
+      const decodeURI = decodeURIComponent(splitUrl[1]);
+      const obj = JSON.parse(decodeURI);
 
-    if (newConfig.editorConfig)
-      newConfig.editorConfig.actionLink = {
-        action: obj.action,
-      };
+      if (newConfig.editorConfig)
+        newConfig.editorConfig.actionLink = {
+          action: obj.action,
+        };
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   newConfig.events = {
@@ -352,4 +360,4 @@ const Editor = ({
   );
 };
 
-export default Editor;
+export default dynamic(() => Promise.resolve(Editor), { ssr: false });

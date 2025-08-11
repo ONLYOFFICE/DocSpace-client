@@ -3,7 +3,7 @@
   "content": "Stop filling",
   "content_en_sha1_hash": "81403b204666d43c8e360eaa868736a22790325d",
   "created_at": "2025-05-19T21:30:49.055Z",
-  "updated_at": "2025-06-03T20:59:42.299Z",
+  "updated_at": "2025-08-04T07:30:01.605Z",
   "comment": {
     "text": "This translation key \"StopFilling\" is used to display the text \"Stop filling\" in the UI. It is typically found on buttons or in dialog content that indicate a stop action for filling operations, such as stopping file uploads or editing processes.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2234,
+      "line_number": 2248,
       "context": "isSeparator: true,\n },\n {\n id: \"option_stop-filling\",\n key: \"stop-filling\",\n label: t(\"Common:StopFilling\"),\n icon: AccessNoneReactSvgUrl,\n onClick: () =>\n this.dialogsStore.setStopFillingDialogVisible(true, item.id),\n disabled: false,\n },",
       "module": "/packages/client"
     },
@@ -57,13 +57,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Doldurmağı dayandırın\" is a literal translation of \"Stop filling\", it sounds slightly awkward and formal. A more natural phrasing would be more appropriate, depending on the context.",
-          "suggestion": "Consider \"Doldurmağı saxlayın\" or \"Doldurmanı dayandır\" depending on the desired level of formality and who is being addressed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -84,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Mit dem Ausfüllen stoppen\" is a rather literal and awkward translation. A more natural and idiomatic German translation for \"Stop filling\" in this context would be \"Ausfüllen beenden\" or simply \"Stoppen\".",
-          "suggestion": "Ausfüllen beenden"
+          "description": "While technically correct, \"Mit dem Ausfüllen stoppen\" is a bit clunky and not the most natural way to say \"Stop filling\" in German. A more idiomatic translation would be something like \"Füllen Sie aufhören\" or \"Füllvorgang stoppen\".",
+          "suggestion": "Füllen Sie aufhören"
         }
       ],
       "approved_at": null
@@ -126,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Interrompi la compilazione\" is understandable, it's a bit formal and literal for a simple 'Stop filling'. A more natural and common translation might be more appropriate depending on the context. It assumes 'compilazione' refers to form filling.",
-          "suggestion": "Consider alternatives like 'Smetti di compilare' or 'Non compilare più' depending on the precise context."
+          "description": "While \"Interrompi la compilazione\" is understandable, it's a more literal and formal translation. A more natural and user-friendly translation for 'Stop filling' in this context (likely referring to a form or data entry) would be something like 'Smetti di compilare' or 'Non compilare più'.",
+          "suggestion": "Smetti di compilare"
         }
       ],
       "approved_at": null
@@ -138,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"記入を中止する\" is technically correct but can be improved for a more natural and concise feel. \"記入を中止する\" implies a formal or technical context. A more common and generally appropriate translation for 'Stop filling' would be something like '入力ストップ' or '中断してください'.",
-          "suggestion": "入力ストップ"
+          "description": "The translation '記入を中止する' is a literal translation of 'Stop filling' and while technically correct, it might sound overly formal or technical depending on the context. A more natural translation might be '入力停止' or '中断する' depending on the nuances required.",
+          "suggestion": "Consider alternatives like '入力停止' or '中断する' for a more natural sound."
         }
       ],
       "approved_at": null
@@ -150,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"작성 중지\" (jaksyeong jungji) is understandable, it literally translates to 'writing stop'. 'Stop filling' implies halting the process of filling something out (like a form or field). A more accurate translation would convey that meaning.",
-          "suggestion": "Consider alternatives like \"입력 중단\" (ipnyeok jungdan - input stop) or \"채우기 중지\" (chaeugi jungji - filling stop) depending on the specific context."
+          "description": "While \"작성 중지\" (jaksyeong jungji) is a literal translation, it might be too formal or technical depending on the context. \"작성 중지\" means 'stop writing' or 'stop composing'. 'Stop filling' could imply stopping the process of filling a form or container. A more natural translation might be something like '작성 중단' (jaksyeong jungdan) or '입력 중단' (ipnyeok jungdan) depending on the specific meaning of 'filling'.",
+          "suggestion": "Consider '작성 중단' (jaksyeong jungdan) or '입력 중단' (ipnyeok jungdan) for a more natural and contextually appropriate translation."
         }
       ],
       "approved_at": null
@@ -198,7 +192,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Încetează completarea\" is technically correct, it's quite formal and doesn't quite capture the simplicity and directness of \"Stop filling.\" A more natural and common translation would be \"Oprește completarea\" or simply \"Oprește\".",
+          "description": "While 'Încetează completarea' is a literal translation of 'Stop filling', it sounds unnatural in Romanian. A more natural translation would be something like 'Oprește completarea' or 'Nu mai completa'.",
           "suggestion": "Oprește completarea"
         }
       ],
@@ -216,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'නොපිරීම නවත්වන්න' while technically meaning 'stop filling', might be overly literal and not the most natural way to express 'Stop filling' in Sinhala depending on the context. A more common and natural phrasing might be 'උන්නන් එක නවත්වන්න' (unnan eka nawathwanna) or 'උන්නන් නවත්වන්න' (unnan nawathwanna) if referring to something being filled.",
-          "suggestion": "Consider 'උන්නන් එක නවත්වන්න' or 'උන්නන් නවත්වන්න' depending on the context."
+          "description": "While \"නොපිරීම නවත්වන්න\" is a literal translation, a more natural and common way to say \"Stop filling\" in Sinhala would be \"උන්නනවා නවත්වන්න\" (unnannaawa nawaathawanna) or \"උන්නවා හැරපාන්න\" (unnannaawa haerapanna). \"නොපිරීම නවත්වන්න\" sounds slightly awkward and less idiomatic.",
+          "suggestion": "Consider using \"උන්නනවා නවත්වන්න\" (unnannaawa nawaathawanna) or \"උන්නවා හැරපාන්න\" (unnannaawa haerapanna)."
         }
       ],
       "approved_at": null
@@ -237,7 +231,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Зауставите попуњавање' while technically correct, might not be the most natural or common phrasing for \"Stop filling\" in Serbian. A more natural translation might be 'Престаните са попуњавањем' or 'Одустаните од попуњавања' depending on the context. 'Зауставите' can sound a bit formal or abrupt.",
+          "suggestion": "Consider 'Престаните са попуњавањем' or 'Одустаните од попуњавања' for a more natural phrasing."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

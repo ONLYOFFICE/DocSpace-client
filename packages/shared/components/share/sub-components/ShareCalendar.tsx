@@ -24,27 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
 import moment from "moment";
+import classNames from "classnames";
 
 import { isMobile } from "../../../utils/device";
 
 import { Calendar } from "../../calendar";
+import { DropDown } from "../../drop-down";
 import { ShareCalendarProps } from "../Share.types";
-import { StyledDropDown } from "../Share.styled";
-
-const StyledCalendar = styled(Calendar)`
-  position: absolute;
-  inset-inline-end: 32px;
-
-  ${(props) =>
-    props.isMobile &&
-    css`
-      position: fixed;
-      bottom: 0;
-      inset-inline-start: 0;
-    `}
-`;
+import styles from "../Share.module.scss";
 
 const ShareCalendar = ({
   onDateSet,
@@ -58,8 +46,8 @@ const ShareCalendar = ({
   const maxDate = moment().add(10, "years");
 
   const calendarComponent = (
-    <StyledCalendar
-      className="share-link_calendar"
+    <Calendar
+      className={classNames(styles.calendar, "share-link_calendar")}
       selectedDate={selectedDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}
@@ -68,11 +56,13 @@ const ShareCalendar = ({
       locale={locale}
       minDate={selectedDate}
       maxDate={maxDate}
+      dataTestId="info_panel_share_calendar"
     />
   );
 
   return useDropDown ? (
-    <StyledDropDown
+    <DropDown
+      className={styles.dropDown}
       open
       isDefaultMode={false}
       forwardedRef={bodyRef}
@@ -80,7 +70,7 @@ const ShareCalendar = ({
       withBackdrop={false}
     >
       {calendarComponent}
-    </StyledDropDown>
+    </DropDown>
   ) : (
     calendarComponent
   );

@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2025-07-01T15:57:36.082Z",
+  "updated_at": "2025-08-11T09:02:43.913Z",
   "comment": {
     "text": "This translation key is used to display the content \"Storage\" in various places throughout the application, such as on a user's profile page or in an info panel. The text appears when displaying storage information and quotas for users. It provides context for translators to ensure consistency in language usage.",
     "is_auto": true,
@@ -11,21 +11,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 205,
-      "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 233,
+      "context": "return this.t(\"Common:Tags\");\n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {\n return this.isDefaultRoomsQuotaSet &&\n this.item.quotaLimit !== undefined\n ? this.t(\"Common:StorageAndQuota\")\n : this.t(\"Common:Storage\");\n }\n \n return null;\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 299,
-      "context": "</Text>\n </>\n ) : null}\n {showStorageInfo && !isGuests ? (\n <>\n <Text className=\"info_field\" noSelect title={t(\"Common:Storage\")}>\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"\n item={infoPanelSelection}",
+      "line_number": 329,
+      "context": "{showStorageInfo && !isGuests ? (\n <>\n <Text\n className={styles.infoField}\n noSelect\n title={t(\"Common:Storage\")}\n >\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 299,
-      "context": "</Text>\n </>\n ) : null}\n {showStorageInfo && !isGuests ? (\n <>\n <Text className=\"info_field\" noSelect title={t(\"Common:Storage\")}>\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"\n item={infoPanelSelection}",
+      "line_number": 329,
+      "context": "{showStorageInfo && !isGuests ? (\n <>\n <Text\n className={styles.infoField}\n noSelect\n title={t(\"Common:Storage\")}\n >\n {t(\"Common:Storage\")}\n </Text>\n <SpaceQuota\n type=\"user\"",
       "module": "/packages/client"
     },
     {
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 702,
+      "line_number": 704,
       "context": "const getFilterData = React.useCallback(async () => {\n const quotaFilter = [\n {\n key: FilterGroups.filterQuota,\n group: FilterGroups.filterQuota,\n label: t(\"Common:StorageQuota\"),\n isHeader: true,\n withoutSeparator: true,\n withMultiItems: true,\n },\n {",
       "module": "/packages/client"
     },
@@ -59,15 +59,9 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/management/src/categories/settings/index.tsx",
-      "line_number": 71,
-      "context": "name: t(\"Settings:RestoreBackup\"),\n content: <Restore logoText={logoText} />,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: <EncryptDataPage logoText={logoText} />,\n },\n ];\n \n if (!isCommunity) {",
-      "module": "/packages/management"
-    },
-    {
-      "file_path": "/packages/management/src/utils/settingsTree.ts",
-      "line_number": 118,
-      "context": "{\n id: \"management-settings_catalog-encrypt\",\n key: \"1-5\",\n icon: \"\",\n link: \"encrypt-data\",\n tKey: \"Common:Storage\",\n isHeader: true,\n },\n {\n id: \"management-settings_catalog-payments\",\n key: \"2\",",
+      "file_path": "/packages/management/src/app/settings/layout.tsx",
+      "line_number": 51,
+      "context": "name: t(\"Common:RestoreBackup\"),\n content: children,\n },\n {\n id: \"encrypt-data\",\n name: t(\"Common:Storage\"),\n content: children,\n },\n ];\n \n useEffect(() => {",
       "module": "/packages/management"
     }
   ],

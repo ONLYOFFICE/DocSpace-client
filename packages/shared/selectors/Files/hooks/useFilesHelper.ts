@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { use } from "react";
 
 import { useTranslation } from "react-i18next";
 
@@ -38,18 +38,19 @@ import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
-import { SettingsContext } from "../contexts/Settings";
-import { LoadersContext } from "../contexts/Loaders";
+import useInputItemHelper from "../../utils/hooks/useInputItemHelper";
+import { SettingsContext } from "../../utils/contexts/Settings";
+import { LoadersContext } from "../../utils/contexts/Loaders";
 
-import { PAGE_COUNT } from "../FilesSelector.constants";
+import { PAGE_COUNT } from "../../utils/constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
-  configureFilterByFilterParam,
   convertFilesToItems,
   convertFoldersToItems,
   getDefaultBreadCrumb,
-} from "../FilesSelector.utils";
-import useInputItemHelper from "./useInputItemHelper";
+} from "../../utils";
+
+import { configureFilterByFilterParam } from "../FilesSelector.utils";
 
 const useFilesHelper = ({
   setHasNextPage,
@@ -93,10 +94,9 @@ const useFilesHelper = ({
     setIsFirstLoad,
     setIsNextPageLoading,
     setIsBreadCrumbsLoading,
-  } = useContext(LoadersContext);
+  } = use(LoadersContext);
 
-  const { getIcon, extsWebEdited, filesSettingsLoading } =
-    useContext(SettingsContext);
+  const { getIcon, extsWebEdited, filesSettingsLoading } = use(SettingsContext);
 
   const { addInputItem } = useInputItemHelper({
     withCreate,

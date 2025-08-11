@@ -3,7 +3,7 @@
   "content": "Plugin enabled",
   "content_en_sha1_hash": "3063607d780a2074562d9247ffab948b5167f20d",
   "created_at": "2025-05-19T21:30:47.389Z",
-  "updated_at": "2025-05-28T09:30:02.854Z",
+  "updated_at": "2025-08-04T07:30:01.617Z",
   "comment": {
     "text": "This translation key is used for a success message that appears when a plugin is enabled or disabled. It provides feedback to the user about the result of an action in the Plugin Store UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PluginStore.ts",
-      "line_number": 436,
-      "context": ");\n \n if (typeof status !== \"boolean\") return plugin;\n \n if (status) {\n toastr.success(t(\"Common:PluginEnabled\"));\n this.activatePlugin(name);\n } else {\n toastr.success(t(\"Common:PluginDisabled\"));\n this.deactivatePlugin(name);\n }",
+      "line_number": 435,
+      "context": ");\n \n if (typeof status !== \"boolean\") return plugin;\n \n if (status) {\n if (t) toastr.success(t(\"Common:PluginEnabled\"));\n this.activatePlugin(name);\n } else {\n if (t) toastr.success(t(\"Common:PluginDisabled\"));\n this.deactivatePlugin(name);\n }",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تم تمكين المُلحق' while understandable, is slightly awkward. A more natural and common translation for 'Plugin enabled' would be 'تفعيل الإضافة' or 'تم تفعيل الإضافة'. The repetition of 'تم' makes it less fluent.",
-          "suggestion": "تفعيل الإضافة"
+          "description": "The translation \"تم تمكين المُلحق\" while technically correct, is a bit literal and verbose. A more natural and concise translation would be better. \"تمكين الملحق\" is preferable.",
+          "suggestion": "تمكين الملحق"
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Azerbaijani translation contains a non-breaking space (represented as &nbsp;) between 'Plagin' and 'aktiv'. This is unnecessary and may affect rendering.",
-          "suggestion": "Remove the non-breaking space: \"Plagin aktiv edildi\""
+          "description": "The word 'Plagin' is separated from the rest of the phrase with a non-breaking space (represented by the ' '). This may appear visually awkward and is not standard practice.",
+          "suggestion": "Replace 'Plagin aktiv edildi' with 'Plagin aktiv edildi'."
         }
       ],
       "approved_at": null
@@ -51,13 +51,25 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Приставка активирана\" is a literal translation, a more natural and common phrasing for \"Plugin enabled\" in Bulgarian would be \"Активиран плъгин\" or \"Плъгинът е активиран\". The current translation sounds a bit awkward.",
+          "suggestion": "Активиран плъгин"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation contains a non-breaking space (U+00A0) between 'modul' and 'aktivován'. This might cause rendering issues.",
+          "suggestion": "Replace 'modul aktivován' with 'modul aktivován'."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -69,7 +81,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Ενεργοποιημένο πρόσθετο\" while technically correct, might not be the most natural or concise translation of \"Plugin enabled\". \"Plugin enabled\" implies a state of being, while \"Ενεργοποιημένο πρόσθετο\" emphasizes the action of enabling. A more direct and common translation would be something like \"Ενεργό πρόσθετο\" or \"Λειτουργικό πρόσθετο\".",
+          "suggestion": "Ενεργό πρόσθετο"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -108,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'プラグイン有効' while technically correct, is a more formal/technical way of saying \"Plugin enabled\". A more natural and user-friendly translation would be something like 'プラグイン有効になっています' or 'プラグインが有効です'.",
-          "suggestion": "プラグインが有効です"
+          "description": "While \"プラグイン有効\" is understandable, a more natural and common translation of \"Plugin enabled\" would be \"プラグイン有効になっています\" or \"プラグインが有効です\". The current translation is a bit abrupt.",
+          "suggestion": "プラグイン有効になっています"
         }
       ],
       "approved_at": null
@@ -126,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໂພ້ໂລຄຳ ຖືກເປີດໃຊ້ງານ\" translates to 'Poklocam is enabled'. 'Poklocam' seems to be a specific name (likely the plugin name) rather than a general 'Plugin'. A more accurate translation would depend on whether the plugin name should be retained or a general term used.",
-          "suggestion": "Consider translating as \"ອຸປະກອນເສີມຖືກເປີດໃຊ້ງານ\" (U-pah-korn ser-im took per-it chai-ngaan) for a general 'plugin enabled' or keep the original if 'Poklocam' is the proper name and should be used."
+          "description": "The Lao translation 'ໂພ້ໂລຄຳ ຖືກເປີດໃຊ້ງານ' translates to 'Poklocam is enabled'. 'Poklocam' seems to be a brand or specific name, not a general 'plugin'. The English 'Plugin enabled' is a more generic statement.",
+          "suggestion": "ປ່ຽນເປັນ 'ໂປຣແກຣມເສີມຖືກເປີດໃຊ້ງານ' (Programเสริมຖືກເປີດໃຊ້ງານ) or 'ການໃຊ້ງານໂປຣແກຣມເສີມ' (The use of a plugin)"
         }
       ],
       "approved_at": null
@@ -144,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation contains a non-breaking space ( ) which is unnecessary and might cause layout issues.",
-          "suggestion": "Remove the non-breaking space. The translation should be 'Plugin ingeschakeld'."
+          "description": "The translation includes a non-breaking space (represented by &#x20;) after 'Plug-in'. This might not be desirable in all contexts and may cause rendering issues.",
+          "suggestion": "Remove the non-breaking space after 'Plug-in'. The translation should be 'Plug-in ingeschakeld'."
         }
       ],
       "approved_at": null
@@ -162,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation contains a non-breaking space (U+00A0) which may cause rendering issues in certain contexts. While acceptable in some cases, it's often better to use a regular space.",
-          "suggestion": "Plug-in ativado"
+          "description": "The translation contains a non-breaking space ( ) which might cause display issues depending on the context.",
+          "suggestion": "Remove the non-breaking space. Use a regular space."
         }
       ],
       "approved_at": null
@@ -177,13 +195,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Plugin-ul a fost activat\" is grammatically correct, a more natural and concise translation of \"Plugin enabled\" in Romanian would be \"Plugin activat\". The original translation implies a past action that isn't necessarily conveyed by the English phrase.",
-          "suggestion": "Plugin activat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -198,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation 'Vtičnik omogočen' appears to be Slovenian, not Sinhala. The English phrase 'Plugin enabled' requires a Sinhala translation.",
-          "suggestion": "The correct Sinhala translation would be something along the lines of 'ගබඩිනිය ක්‍රියාත්මක' (Gabadenia kriyātmaka) or 'ආප්ගන්වා' (Āpaganvā). A more precise translation requires context."
+          "description": "The Sinhala translation \"Vtičnik omogočen\" appears to be Slovenian, not Sinhala. It translates to 'Plugin enabled' in Slovenian.",
+          "suggestion": "The translation should be in Sinhala. A potential Sinhala translation could be \"ආ Supplements උපකරණය සක්‍රීය කර ඇත\" (Aa Supplements ukaranaya sakriya kara ath), or a simpler option depending on the context."
         }
       ],
       "approved_at": null
@@ -210,7 +222,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Doplnok aktivovaný' is understandable, a more natural and commonly used Slovak translation for 'Plugin enabled' would be 'Zapnutý doplnok'. 'Aktivovaný' implies a more complex activation process.",
+          "description": "While \"Doplnok aktivovaný\" is understandable, a more natural and accurate translation of \"Plugin enabled\" in Slovak would be \"Zapnutý doplnok\" or \"Aktivovaný doplnok\". \"Doplnok aktivovaný\" sounds slightly awkward in Slovak.",
           "suggestion": "Zapnutý doplnok"
         }
       ],
@@ -225,13 +237,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Додатак је омогућен\" while understandable, doesn't perfectly capture the meaning of \"Plugin enabled.\" 'Dodatak' translates to 'add-on' or 'supplement', which isn't the most direct equivalent to 'plugin'. A more accurate translation would use a term closer to 'plugin' itself, or a more general term for software component.",
-          "suggestion": "Consider alternatives like 'Проширење је омогућено' (Extension is enabled) or 'Укључено је додатачка функција' (The plugin function is enabled)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -240,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Dodatak je omogućen\" is understandable, a more accurate and common translation of 'Plugin enabled' would be 'Uključeni dodatak' or 'Aktiviran dodatak'. \"Omogućen\" implies permission granted, which isn't the core meaning here.",
+          "description": "While \"Dodatak je omogućen\" is understandable, a more direct and common translation of \"Plugin enabled\" would be \"Uključeni dodatak\" or \"Omogućen plugin\". \"Dodatak je omogućen\" implies the plugin is now enabled after being disabled, not just that it's enabled in general.",
           "suggestion": "Uključeni dodatak"
         }
       ],
@@ -249,7 +255,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation contains a non-breaking space (U+00A0) after 'Eklenti'. This is likely an artifact from copy-pasting and should be removed for proper rendering.",
+          "suggestion": "Eklenti etkin"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -264,7 +276,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tiện ích bổ sung đã bật\" is understandable, a more natural and concise translation of \"Plugin enabled\" would be \"Plugin đã kích hoạt\" or \"Đã kích hoạt plugin\". \"Tiện ích bổ sung\" is a bit more verbose than simply \"plugin\".",
+          "description": "While \"Tiện ích bổ sung đã bật\" is understandable, a more natural and concise translation of \"Plugin enabled\" would be \"Plugin đã kích hoạt\" or \"Đã kích hoạt plugin\". \"Tiện ích bổ sung\" is a more general term and not a direct translation of \"plugin\".",
           "suggestion": "Plugin đã kích hoạt"
         }
       ],

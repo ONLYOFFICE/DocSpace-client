@@ -1,19 +1,19 @@
 {
   "key_path": "DeleteReassignDescriptionUser",
-  "content": "{{warningMessageMyDocuments}} Rooms created by this user and documents stored in these rooms will be reassigned automatically to an admin performing the deletion: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reassign data manually to choose another destination user for reassignment.",
-  "content_en_sha1_hash": "6ca1132121220293ae8ee4328085dc43d0936065",
-  "created_at": "2025-05-19T21:30:56.664Z",
-  "updated_at": "2025-05-20T09:38:28.903Z",
+  "content": "{{warningMessageMyDocuments}} Rooms created by this user and documents stored in these rooms will be reassigned automatically to an admin performing the deletion: <1>{{userPerformedDeletion}} ({{userYou}})</1>. Reassign data manually to choose another destination user for reassignment.",
+  "content_en_sha1_hash": "353861a3f0411b234f9135860dd89e671befaab4",
+  "created_at": "2025-06-30T12:20:12.968Z",
+  "updated_at": "2025-06-30T12:20:50.260Z",
   "comment": {
-    "text": "This translation key is used to display a warning message when a user's account is deleted. It informs users that their documents and rooms will be automatically reassigned to an admin performing the deletion, and provides an option to manually reassign data to another user. This appears in a dialog box for deleting a profile.",
+    "text": "This translation key is used for a warning message that informs users when they delete a profile, explaining that rooms created by the deleted user and documents stored in those rooms will be automatically reassigned to an admin. The message appears as part of a dialog, prompting users to manually reassign data if they choose not to use an auto-reassignment feature.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:28.903Z"
+    "updated_at": "2025-06-30T12:20:50.260Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 72,
-      "context": "? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"\n ns=\"DeleteProfileEverDialog\"\n t={t}\n >\n {{ warningMessageMyDocuments }}\n <strong>",
+      "line_number": 73,
+      "context": "? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"\n ns=\"DeleteProfileEverDialog\"\n t={t as TFunction}\n values={{\n warningMessageMyDocuments,\n userPerformedDeletion: userPerformedDeletion!.displayName,",
       "module": "/packages/client"
     }
   ],
@@ -163,6 +163,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

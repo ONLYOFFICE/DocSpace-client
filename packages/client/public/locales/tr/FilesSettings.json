@@ -1,7 +1,6 @@
 {
   "CancellaionNotification": "İptal bildirimini bir daha gösterme",
   "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
-  "DisplayNotification": "Öğeleri Çöp Kutusuna taşırken bildirim göster",
   "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın",
   "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet"
 }

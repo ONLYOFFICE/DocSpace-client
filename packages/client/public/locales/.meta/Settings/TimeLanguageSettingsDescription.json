@@ -3,7 +3,7 @@
   "content": "Change Language and Time Zone Settings to adjust common {{productName}} language and time.",
   "content_en_sha1_hash": "9e6265da9246b0ab4fe70895c70f763d8cd5d9e2",
   "created_at": "2025-05-19T21:30:52.935Z",
-  "updated_at": "2025-05-21T02:46:58.956Z",
+  "updated_at": "2025-08-04T07:30:01.289Z",
   "comment": {
     "text": "This translation key is used for a descriptive text that explains the purpose of adjusting language and time zone settings in the application. It is displayed as part of a UI element to inform users about the impact on common product language and time, typically found in a Portal Settings category or customization options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 534,
+      "line_number": 529,
       "context": "</div>\n </div>\n ) : null}\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"TimeLanguageSettingsDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <Text>\n <Trans t={t} i18nKey=\"TimeLanguageSettingsSave\" />",
       "module": "/packages/client"
     }
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'لتعديل اللغة والتوقيت {{productName}} الشائع' is not a natural or accurate translation of 'to adjust common {{productName}} language and time'. It literally translates to 'to modify the language and time {{productName}} common'. The word 'شائع' (common) is awkwardly placed.",
-          "suggestion": "قم بتغيير إعدادات اللغة والمنطقة الزمنية لتعديل اللغة والتوقيت لـ {{productName}}."
+          "description": "The translation 'قم بتغيير إعدادت اللغة والمنطقة الزمنية لتعديل اللغة والتوقيت {{productName}} الشائع' is not a natural or accurate translation of 'Change Language and Time Zone Settings to adjust common {{productName}} language and time.'. The phrasing 'لتعديل اللغة والتوقيت' is awkward. It literally translates to 'to adjust the language and time,' but the intention is to adjust the *settings* which control language and time.",
+          "suggestion": "قم بتغيير إعدادات اللغة والمنطقة الزمنية لضبط لغة وتوقيت {{productName}} الشائعة."
         },
         {
           "type": "formatting",
-          "description": "The spacing before the product name variable '{{productName}}' is slightly off.",
-          "suggestion": "قم بتغيير إعدادات اللغة والمنطقة الزمنية لتعديل اللغة والتوقيت لـ {{productName}}."
+          "description": "The adjective 'الشائع' (al-shaa'i') is placed after 'توقيت' which is unusual in Arabic sentence structure.",
+          "suggestion": "قم بتغيير إعدادات اللغة والمنطقة الزمنية لضبط لغة وتوقيت {{productName}} الشائعة."
         }
       ],
       "approved_at": null
@@ -47,13 +47,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ümumi {{productName}} dilini və vaxtı təyin etmək üçün Dil və Saat Zonası Parametrlərini dəyişdirin' is a bit awkward. 'Ümumi dilini' (common language) feels disconnected. It would be better to rephrase the first part to indicate the purpose of changing the settings.",
-          "suggestion": "Təyin etmək üçün {{productName}} dilini və saat zonasını dəyişdirin."
+          "description": "The phrase \"Change Language and Time Zone Settings\" is not accurately translated. 'Parametrlərini dəyişdirin' is a general 'change settings' and doesn't convey the specific meaning of changing language and time zone settings.",
+          "suggestion": "Ümumi {{productName}} dilini və saat zonasını təyin etmək üçün Dil və Saat Zonası ayarlarını dəyişdirin."
         },
         {
           "type": "formatting",
-          "description": "The phrase 'Dil və Saat Zonası Parametrlərini' is quite lengthy. Consider shortening it or restructuring the sentence for better readability.",
-          "suggestion": "Saat və Dil Parametrlərini dəyişdirin"
+          "description": "The use of “{{productName}}” is consistent across the English and Azerbaijani versions, which is good.",
+          "suggestion": "N/A - Consistent formatting."
         }
       ],
       "approved_at": null
@@ -64,8 +64,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"коригирате общия език и час\" is not the best translation of \"adjust common language and time.\" A more natural translation would be something like \"настройвате езика и часовата зона\" or \"променяте езика и часовата зона\". The current translation implies correction, while the English suggests an adjustment.",
-          "suggestion": "Променете настройките за език и часова зона, за да настроите езика и часовата зона на {{productName}}."
+          "description": "The translation 'коригирате общия език и час' doesn't accurately convey the meaning of 'adjust common language and time'. It suggests a correction or calibration, which isn't the intended meaning.  'Adjust' implies a customization, not a correction.",
+          "suggestion": "Променете настройките за език и часова зона, за да персонализирате езика и часа на {{productName}}."
         }
       ],
       "approved_at": null
@@ -76,8 +76,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'běžného jazyka a času' translates more accurately as 'common language and time' or 'default language and time'.  'běžného' implies a more general usage, not necessarily the intended meaning of settings.",
-          "suggestion": "Změna nastavení jazyka a časového pásma pro nastavení výchozího jazyka a času v {{productName}}."
+          "description": "The phrase \"pro nastavení běžného jazyka a času\" is a somewhat literal and less natural translation of \"to adjust common language and time.\"  It implies *setting* the common language and time, rather than *adjusting* them.",
+          "suggestion": "Změna nastavení jazyka a časového pásma pro úpravu běžného jazyka a času v {{productName}}."
         }
       ],
       "approved_at": null
@@ -85,18 +85,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'to adjust common {{productName}} language and time' is not accurately translated. 'Anpassen' is a good translation for 'adjust', but the structure sounds slightly awkward. A more natural phrasing in German would emphasize setting or configuring the language and time *for* {{productName}}.",
-          "suggestion": "Ändern Sie die Einstellungen für Sprache und Zeitzone, um die Sprache und die Uhrzeit für {{productName}} festzulegen."
-        },
-        {
-          "type": "formatting",
-          "description": "While technically correct, the repeated use of 'die' before Sprache and Uhrzeit could be slightly improved for flow. It's not incorrect, but could be more elegant.",
-          "suggestion": "Ändern Sie die Einstellungen für Sprache und Zeitzone, um die Sprache und die Uhrzeit für {{productName}} festzulegen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,8 +94,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'κοινής γλώσσας και ώρας' (common language and time) is a literal translation and might not be the most natural way to express 'common language and time' in Greek in this context. It sounds slightly awkward.",
-          "suggestion": "Consider a more natural phrasing like 'προεπιλεγμένης γλώσσας και ώρας' (default language and time) or 'κοινής ρύθμισης γλώσσας και ώρας' (common setting for language and time)."
+          "description": "The phrase 'προσαρμογή της κοινής γλώσσας και ώρας' (adjustment of the common language and time) is not the best translation for 'adjust common {{productName}} language and time'. It sounds a bit awkward in Greek. A more natural phrasing would focus on setting or configuring.",
+          "suggestion": "Αλλαγή ρυθμίσεων γλώσσας και ζώνης ώρας για την ρύθμιση της γλώσσας και ώρας του {{productName}}."
+        },
+        {
+          "type": "formatting",
+          "description": "The Greek translation retains the double curly braces '{{productName}}'. While technically correct, it might be best to remove them if the placeholder is always handled dynamically during rendering.",
+          "suggestion": "Αλλαγή ρυθμίσεων γλώσσας και ζώνης ώρας για την ρύθμιση της γλώσσας και ώρας του [productName]."
         }
       ],
       "approved_at": null
@@ -123,8 +117,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Vaihda Kieli- ja aikavyöhykeasetuksia muokataksesi yleistä {{productName}}-n kieltä ja aikaa\" is a bit awkward and doesn't perfectly capture the meaning of the English. The phrase \"muokataksesi yleistä...kieltä ja aikaa\" sounds unnatural in Finnish.  The possessive suffix '-n' is also incorrectly placed.",
-          "suggestion": "Vaihda kieli- ja aikavyöhykeasetukset, jotta voit säätää {{productName}}-tuotteen yleistä kieltä ja aikaa."
+          "description": "The phrase \"yleistä {{productName}}-n kieltä\" is awkward and doesn't accurately convey the meaning of \"common {{productName}} language.\" It implies the language *of* the product, rather than the language used *within* the product.",
+          "suggestion": "Vaihda Kieli- ja aikavyöhykeasetuksia muokataksesi {{productName}}-tuotteen kieltä ja aikaa."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a hyphen in \"{{productName}}-tuotteen\" is potentially unnecessary. Consider whether it's stylistically required or whether removing it would improve readability.",
+          "suggestion": "Vaihda Kieli- ja aikavyöhykeasetuksia muokataksesi {{productName}} tuotteen kieltä ja aikaa."
         }
       ],
       "approved_at": null
@@ -135,8 +134,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ajuster la langue et l'heure\" is slightly awkward. A more natural translation of 'adjust' in this context would be 'configurer' or 'modifier'.",
-          "suggestion": "Modifiez les paramètres de langue et de fuseau horaire pour configurer la langue et l'heure du {{productName}}."
+          "description": "The phrase 'to adjust the language and time of {{productName}}' is a slightly awkward translation.  A more natural phrasing in French might emphasize adjusting the display or settings *for* the user's language and time zone.",
+          "suggestion": "Modifiez les paramètres de langue et de fuseau horaire pour adapter la langue et l'heure à votre {{productName}}."
         }
       ],
       "approved_at": null
@@ -147,8 +146,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Armenian translation includes a hyphenated product name like '{{productName}}-ի'. This is likely unnecessary and may disrupt the flow. It's better to omit the hyphen.",
-          "suggestion": "Փոխեք լեզվի և ժամային գոտու կարգավորումները՝ {{productName}}-ի ընդհանուր լեզուն և ժամը հարմարեցնելու համար:"
+          "description": "The Armenian translation includes a hyphen in \"ժամային-գոտու\". It should be a single word: ժամայինգոտու.",
+          "suggestion": "Փոխեք լեզվի և ժամայինգոտու կարգավորումները՝ {{productName}}-ի ընդհանուր լեզուն և ժամը հարմարեցնելու համար:"
         }
       ],
       "approved_at": null
@@ -159,8 +158,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"regolare la lingua e l'ora comuni di {{productName}}\" is not the best translation of \"adjust common {{productName}} language and time.\" It implies adjusting the common language and time *of* the product, which isn't the intended meaning. A more accurate translation would focus on adjusting the user's settings for language and time related to the product.",
-          "suggestion": "Modifica le impostazioni di lingua e fuso orario per configurare la lingua e l'ora relative a {{productName}}."
+          "description": "The phrase 'comuni di' is awkward and doesn't accurately convey the meaning of 'common' in this context. It implies that the language and time are 'common' *to* something, which is not the intention.",
+          "suggestion": "Modifica le impostazioni di lingua e fuso orario per personalizzare la lingua e l'ora di {{productName}}."
         }
       ],
       "approved_at": null
@@ -177,13 +176,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Change Language and Time Zone Settings' is translated too literally. A more natural Korean phrasing would emphasize the action of modification.",
-          "suggestion": "언어 및 시간대 설정을 통해 {{productName}}의 공통 언어 및 시간대를 수정하세요."
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"언어 및 시간대 설정을 통해\" is a little clunky. Consider rephrasing for better flow.",
-          "suggestion": "언어 및 시간대 설정을 변경하여"
+          "description": "The translation '언어 및 시간대 설정을 변경하세요' is a bit literal and could be more natural. A more common phrasing would be '언어 및 시간 설정을 변경하세요'.",
+          "suggestion": "언어 및 시간 설정을 변경하세요."
         }
       ],
       "approved_at": null
@@ -194,8 +188,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ປັບພາສາ ແລະເວລາ {{productName}} ທົ່ວໄປ\" is slightly awkward. It literally translates to 'adjust language and time {{productName}} generally.' A more natural phrasing would be something like 'ສໍາລັບ {{productName}} ທັງຫມົດ' (for all {{productName}}).",
-          "suggestion": "ປ່ຽນການຕັ້ງຄ່າພາສາ ແລະເຂດເວລາເພື່ອປັບພາສາ ແລະເວລາສໍາລັບ {{productName}} ທັງຫມົດ."
+          "description": "The phrase \"ປັບພາສາ ແລະເວລາ {{productName}} ທົ່ວໄປ\" is awkward and doesn't accurately convey the meaning of \"adjust common {{productName}} language and time.\"  It literally translates to 'adjust language and time {{productName}} generally.'",
+          "suggestion": "ປັບການໃຊ້ພາສາ ແລະເວລາຂອງ {{productName}} ທົ່ວໄປ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ທົ່ວໄປ' (general/common) seems redundant after 'ປັບການໃຊ້' which already implies this.",
+          "suggestion": "ປັບການໃຊ້ພາສາ ແລະເວລາຂອງ {{productName}}"
         }
       ],
       "approved_at": null
@@ -206,8 +205,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Mainiet valodas un laika joslas iestatījumus, lai pielāgotu parasto {{productName}} valodu un laiku\" is not a perfect translation. \"pielāgotu parasto\" is a bit awkward and doesn't directly convey the meaning of 'adjust'. A more natural translation for 'adjust' would be 'pielāgotu' or 'norādītu'.",
-          "suggestion": "Mainiet valodas un laika joslas iestatījumus, lai norādītu {{productName}} valodu un laiku."
+          "description": "The Latvian translation 'Mainiet valodas un laika joslas iestatījumus, lai pielāgotu parasto {{productName}} valodu un laiku' is a literal translation but doesn't flow naturally in Latvian. 'pielāgotu' (to adapt) isn't the best word choice here. A more natural phrasing would be 'iestatīt' (to set) or 'norādīt' (to specify).",
+          "suggestion": "Mainiet valodas un laika joslas iestatījumus, lai iestatītu parasto {{productName}} valodu un laiku."
         }
       ],
       "approved_at": null
@@ -215,7 +214,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Taal- en tijdzone-instellingen wijzigen om de taal en tijd van {{productName}} aan te passen' is a bit literal and doesn't flow naturally in Dutch. A more idiomatic translation would convey the meaning more clearly.",
+          "suggestion": "Taal- en tijdzone-instellingen wijzigen om de taal en tijd voor {{productName}} aan te passen."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -224,8 +229,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'wspólny język i czas {{productName}}' is not a natural or accurate translation of 'common {{productName}} language and time'. It implies that the language and time belong to {{productName}} which is incorrect.",
-          "suggestion": "Consider 'język i czas {{productName}}' or 'język i strefa czasowa dla {{productName}}'"
+          "description": "The phrase \"wspólny język i czas {{productName}}\" is an awkward and potentially inaccurate translation of \"common {{productName}} language and time.\" It doesn't convey the intended meaning of adjusting settings *for* the product's language and time.",
+          "suggestion": "Zmień ustawienia języka oraz strefy czasowej, aby dostosować język i czas dla {{productName}}."
         }
       ],
       "approved_at": null
@@ -236,8 +241,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ajustar o idioma e a hora comuns do {{productName}}\" is not the most natural way to express the English \"adjust common {{productName}} language and time.\" It implies the language and time *belong* to the product, rather than being set *for* the product's usage.",
-          "suggestion": "Consider a phrasing like \"configurar o idioma e o fuso horário para uso com o {{productName}}\" or \"configurar o idioma e fuso horário para o {{productName}}\"."
+          "description": "The phrase \"idioma e a hora comuns do {{productName}}\" is not the best translation for \"common {{productName}} language and time.\" A more natural phrasing would be something like \"idioma e horário padrão do {{productName}}\" or \"idioma e horário do {{productName}}\".",
+          "suggestion": "Altere as configurações de idioma e fuso horário para ajustar o idioma e horário do {{productName}}."
         }
       ],
       "approved_at": null
@@ -248,8 +253,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Altere as configurações de idioma e fuso horário para ajustar o idioma e a hora comuns do {{productName}}' is slightly awkward and doesn't perfectly convey the meaning of 'adjust common language and time'. 'Ajustar' implies more active modification. A better phrasing might emphasize configuration.",
-          "suggestion": "Altere as configurações de idioma e fuso horário para configurar o idioma e a hora padrão do {{productName}}."
+          "description": "The phrase \"ajustar o idioma e a hora comuns do {{productName}}\" is not the most natural or accurate translation of \"adjust common {{productName}} language and time.\" A better phrasing would be something like \"configurar o idioma e a hora padrão do {{productName}}\" or \"configurar as configurações de idioma e fuso horário padrão do {{productName}}\".",
+          "suggestion": "Altere as configurações de idioma e fuso horário para configurar as configurações de idioma e fuso horário padrão do {{productName}}."
         }
       ],
       "approved_at": null
@@ -260,13 +265,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Configurați setări limbă și fus orar pentru a alege limba și fusul orar al spațiului {{productName}}' doesn't accurately convey the meaning of 'Change Language and Time Zone Settings to adjust common {{productName}} language and time.'. The Romanian translation implies a selection process, while the English implies adjustment.  'Configurați' (Configure) is okay, but the rest is a bit too literal and changes the implied meaning.",
-          "suggestion": "Modificați setările de limbă și fus orar pentru a ajusta limba și ora implicită a {{productName}}."
+          "description": "The English phrase \"Change Language and Time Zone Settings\" is not accurately reflected in the Romanian translation \"Configurați setări limbă și fus orar\". \"Change\" implies modification, while \"Configurați\" (configure) implies setting up for the first time.  A more accurate translation would convey the ability to modify existing settings.",
+          "suggestion": "Actualizați setările limbă și fus orar pentru a modifica limba și fusul orar al spațiului {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "The use of 'a alege' is slightly awkward.  Combining the two 'a's is less natural in Romanian.",
-          "suggestion": "a alege -> a"
+          "description": "While not strictly incorrect, \"Configurați\" followed by a conjunction \"pentru a alege\" is slightly clunky.  A more fluent phrasing is possible.",
+          "suggestion": "Actualizați setările limbă și fus orar pentru a modifica limba și fusul orar al spațiului {{productName}}."
         }
       ],
       "approved_at": null
@@ -277,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Измените настройки языка и часового пояса, чтобы настроить общий язык и время {{productName}}' doesn't accurately convey the meaning of 'Change Language and Time Zone Settings to adjust common {{productName}} language and time.' The term 'настроить общий язык и время' is awkward and doesn't align with the original intent, which seems to be about setting the user's preferred language and time zone for the product.",
-          "suggestion": "Измените настройки языка и часового пояса для настройки языка и времени в {{productName}}."
+          "description": "The translation 'Измените настройки языка и часового пояса, чтобы настроить общий язык и время {{productName}}' is not an ideal translation of 'Change Language and Time Zone Settings to adjust common {{productName}} language and time.'. The phrase 'настроить общий язык' (adjust common language) is awkward and doesn't accurately convey the original meaning.",
+          "suggestion": "Измените настройки языка и часового пояса для настройки языка и времени {{productName}}."
         }
       ],
       "approved_at": null
@@ -289,13 +294,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පොදු {{productName}} භාෂාව සහ වේලාව සැකසීමට භාෂාව සහ වේලා කලාපයේ සැකසුම් වෙනස් කරන්න' is a bit literal and clunky. A more natural translation would convey the intended meaning more smoothly.",
-          "suggestion": "පොදු {{productName}} භාෂාව හා කාලසමයට අනුව සැකසුම් වෙනස් කරන්න."
+          "description": "The translation \"පොදු {{productName}} භාෂාව සහ වේලාව සැකසීමට භාෂාව සහ වේලා කලාපයේ සැකසුම් වෙනස් කරන්න.\" is a bit convoluted and doesn't flow naturally. 'පොදු' (pōdu) translates to 'common' but using it in this context makes the sentence awkward. The phrase 'වේලා කලාපයේ සැකසුම්' (vēlā kālāpaye sākasaum) is also a less common phrasing.  It's suggesting setting time zone settings, which is accurate but doesn't match the elegance of the English.",
+          "suggestion": "පොදු {{productName}} භාෂාව සහ කාල සීමාව සැකසීමට, භාෂාව සහ වේලාව වෙනස් කරන්න."
         },
         {
           "type": "formatting",
-          "description": "The conjunction 'හා' (and) is used instead of 'සහ' (and). While both are acceptable, 'සහ' matches the original English 'and' and feels more consistent in this context.",
-          "suggestion": "Replace 'හා' with 'සහ'."
+          "description": "The use of '{{productName}}' appears consistent with the English. It should remain unchanged to allow for dynamic insertion.",
+          "suggestion": null
         }
       ],
       "approved_at": null
@@ -306,13 +311,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'aby ste upravili' doesn't perfectly capture the meaning of 'to adjust'. A more accurate translation would reflect the purpose of changing the settings, rather than just performing an action on them. 'aby ste nastavili' or 'na nastavenie' would be more suitable.",
-          "suggestion": "Zmeňte nastavenia jazyka a časového pásma na nastavenie štandardného jazyka a času {{productName}}."
+          "description": "The translation 'aby ste upravili' (so that you adjust) isn't the most natural way to express 'to adjust' in this context. A more suitable translation would convey the purpose of the settings change.",
+          "suggestion": "Zmeňte nastavenia jazyka a časového pásma na zmenu štandardného jazyka a času {{productName}}."
         },
         {
           "type": "grammar",
-          "description": "While not strictly incorrect, the sentence structure 'Zmeňte nastavenia jazyka a časového pásma aby ste upravili...' could be improved for readability. Starting with 'Na nastavenie...' would flow better.",
-          "suggestion": "Na nastavenie štandardného jazyka a času {{productName}} zmeňte nastavenia jazyka a časového pásma."
+          "description": "The phrase 'štandardný jazyk a času' is grammatically awkward. 'Času' should be 'Čas'.",
+          "suggestion": "štandardný jazyk a čas"
         }
       ],
       "approved_at": null
@@ -323,13 +328,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'da prilagodite običajni jezik in čas {{productName}}' doesn't accurately convey the meaning of 'to adjust common {{productName}} language and time'.  'Prilagodite' implies adaptation, while the original implies modification/adjustment. A better translation would convey the sense of simply changing or setting the language and time for the product.",
-          "suggestion": "Spremenite nastavitve jezika in časovnega pasu, da nastavite jezik in čas {{productName}}."
+          "description": "The phrase 'prilagodite običajni jezik in čas' is not a natural or accurate translation of 'adjust common language and time'. It implies adapting the *default* language and time, which might not be the intended meaning.",
+          "suggestion": "Spremenite nastavitve jezika in časovnega pasu za prilagajanje jezika in časa v {{productName}}."
         },
         {
           "type": "formatting",
-          "description": "The repetition of 'in' can sound awkward in Slovenian.  Consider rephrasing to improve flow.",
-          "suggestion": "Spremenite nastavitve jezika in časovnega pasu, da nastavite jezik in čas {{productName}}."
+          "description": "The placement of '{{productName}}' might be awkward in the suggested correction depending on the context of the UI. It's crucial to ensure consistent placement within other similar strings.",
+          "suggestion": "Consider re-evaluating the placement of '{{productName}}' to align with existing patterns within the Slovenian interface."
         }
       ],
       "approved_at": null
@@ -339,14 +344,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'common' is awkwardly translated. 'Уобичајен' implies a default or standard, which isn't always the intended meaning of 'common' in this context. It could be misinterpreted as a less desirable or less frequently used setting.",
-          "suggestion": "Consider translating 'common' as 'главни' (glavni) which means 'main' or 'primary,' or rephrasing to something like 'обични' (obichni) to mean 'regular' or 'typical'."
-        },
-        {
           "type": "formatting",
-          "description": "The formatting of the variable `{{productName}}` appears consistent with the English version, ensuring correct placeholder handling.",
-          "suggestion": "No change needed. Ensure consistency across all translations."
+          "description": "The Serbian translation uses Cyrillic script. While acceptable, consider if a Latin script (Latinica) translation is also needed to cater to users who prefer it.",
+          "suggestion": "Consider providing a Latin script (Latinica) translation as well: \"Промените Подешавања језика и временске зоне да подесите уобичајен {{productName}} језик и време.\""
         }
       ],
       "approved_at": null
@@ -357,8 +357,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Promenite Podešavanja jezika i vremenske zone da podesite uobičajen {{productName}} jezik i vreme' is not the most natural or accurate translation of 'Change Language and Time Zone Settings to adjust common {{productName}} language and time.' 'Promenite' translates to 'change' but the overall phrasing is somewhat clunky. A more natural translation would focus on the purpose of the settings adjustment.",
-          "suggestion": "Izmenite Podešavanja jezika i vremenske zone da prilagodite jezik i vreme za {{productName}}."
+          "description": "The Serbian translation 'Promenite Podešavanja jezika i vremenske zone da podesite uobičajen {{productName}} jezik i vreme' is not a direct and natural translation of 'Change Language and Time Zone Settings to adjust common {{productName}} language and time'.  'Podesite uobičajen...' sounds awkward.",
+          "suggestion": "Promenite Podešavanja jezika i vremenske zone da biste prilagodili jezik i vreme za {{productName}}."
         }
       ],
       "approved_at": null
@@ -369,13 +369,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Ortak {{productName}} dilini ve saatini ayarlamak için Dil ve Saat Dilimi Ayarlarını değiştirin' is not a natural or accurate translation of 'Change Language and Time Zone Settings to adjust common {{productName}} language and time.'. The wording is somewhat awkward and doesn't convey the intended meaning clearly. 'Ortak' (common) is misplaced and doesn't fit the context. The phrasing 'Dil ve Saat Dilimi Ayarlarını değiştirin' is overly literal and clunky.",
-          "suggestion": "Consider a more fluent translation like: '{{productName}} dilini ve saat dilimini değiştirmek için Dil ve Saat Ayarlarını değiştirin.' or '{{productName}} dilini ve saat dilimini ayarlamak için Dil ve Saat Ayarlarını düzenleyin.'"
+          "description": "The phrase \"Ortak {{productName}} dilini\" is not an accurate translation of \"common {{productName}} language.\" It implies a shared or common language used by the product itself, rather than the user's preferred language for the product's interface. A more accurate translation would convey the idea of user settings for language.",
+          "suggestion": "Kullanıcı {{productName}} dil ayarlarını değiştirin."
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure is slightly awkward. The use of \"ve\" (and) connecting \"dili\" (language) and \"saatini\" (time) feels unnatural in Turkish in this context. It would be better to separate these concerns.",
+          "suggestion": "Kullanıcı {{productName}} dilini ve saat dilimini ayarlamak için Dil ve Saat Dilimi Ayarlarını değiştirin."
         },
         {
           "type": "formatting",
-          "description": "The translation uses 'Dil ve Saat Dilimi Ayarlarını' which is slightly more verbose than a more concise 'Dil ve Saat Ayarlarını'. While technically correct, the latter is preferable for brevity and clarity.",
-          "suggestion": "Replace 'Dil ve Saat Dilimi Ayarlarını' with 'Dil ve Saat Ayarlarını'."
+          "description": "The English content uses double curly braces `{{productName}}`. The Turkish translation should follow this convention.",
+          "suggestion": "Ortak {{productName}} dilini ve saatini ayarlamak için Dil ve Saat Dilimi Ayarlarını değiştirin."
         }
       ],
       "approved_at": null
@@ -386,13 +391,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Change Language and Time Zone Settings\" is not ideal. \"Змініть параметри мови та часового поясу\" translates to 'Change language and time zone parameters' which is a bit too formal and technical for a user-facing setting description. A more natural phrasing would convey the action of adjusting settings.",
-          "suggestion": "Спробуйте змінити налаштування мови та часового поясу..."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"налаштувати загальну мову та час {{productName}}\" is awkward. It translates to 'to configure the general language and time of {{productName}}'. It doesn't clearly convey that the user is adjusting settings *for* the product.",
-          "suggestion": "щоб налаштувати мову та час для {{productName}}"
+          "description": "The translation 'щоб налаштувати загальну мову та час {{productName}}' is not a direct or natural translation of 'to adjust common {{productName}} language and time'. It implies setting the language and time *for* {{productName}}, rather than adjusting them generally within the system. A better translation would reflect the purpose of adjusting settings.",
+          "suggestion": "Змініть параметри мови та часового поясу, щоб налаштувати мову та час для {{productName}}."
         }
       ],
       "approved_at": null
@@ -403,13 +403,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Thay đổi Cài đặt Ngôn ngữ và Múi giờ' is technically correct but somewhat verbose and less natural for this context. 'Ngôn ngữ' is redundant, as 'Cài đặt Ngôn ngữ' implies it.",
-          "suggestion": "Thay đổi Cài đặt Múi giờ để điều chỉnh ngôn ngữ và thời gian chung của {{productName}}."
-        },
-        {
-          "type": "formatting",
-          "description": "While acceptable, the translated sentence structure 'để điều chỉnh ngôn ngữ và thời gian chung của {{productName}}' could be slightly more fluid. The phrasing 'của {{productName}}' feels a bit tacked on.",
-          "suggestion": "để điều chỉnh ngôn ngữ và thời gian chung cho {{productName}}."
+          "description": "The phrase \"thời gian chung\" (common time) is not the most natural or accurate translation of \"time\" in this context. It implies a shared or default time setting, which might not be the intention. A more appropriate translation would be 'giờ' or 'thời gian hiển thị'.",
+          "suggestion": "Thay đổi Cài đặt Ngôn ngữ và Múi giờ để điều chỉnh ngôn ngữ và thời gian hiển thị chung của {{productName}}."
         }
       ],
       "approved_at": null

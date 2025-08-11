@@ -3,7 +3,7 @@
   "content": "Adjust the default space title displayed on the Welcome Page and in the From field of the email notifications.",
   "content_en_sha1_hash": "509f4c811b4bd79763d49e1085f1eb0c426ff7a3",
   "created_at": "2025-05-19T21:30:51.019Z",
-  "updated_at": "2025-05-21T04:43:16.914Z",
+  "updated_at": "2025-08-04T07:30:01.294Z",
   "comment": {
     "text": "The \"CustomTitlesDescription\" translation key is used to adjust the default space title displayed on the Welcome Page and in the From field of email notifications. It appears in a category item description section within the Portal Settings page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 359,
+      "line_number": 360,
       "context": "<div className=\"category-item-title\">{t(\"CustomTitlesWelcome\")}</div>\n </div>\n ) : null}\n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"CustomTitlesDescription\")}\n </Text>\n {welcomePageSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
       "module": "/packages/client"
     }
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"From field\" is not accurately translated. \"الوارد\" (al-waarid) generally means 'incoming' or 'received' and doesn't directly represent the 'From' field in an email.",
+          "description": "The translation of \"From field\" is not accurate. \"الوارد\" (al-waarid) typically means \"incoming\" or \"received.\" It doesn't convey the meaning of the \"From\" field in an email.",
           "suggestion": "قم بتعديل اسم المساحة الافتراضي المعروض في الصفحة الترحيبية وفي حقل المرسل في إشعارات البريد."
         },
         {
           "type": "formatting",
-          "description": "The Arabic translation uses parentheses around \"الوارد\". While not strictly incorrect, it's uncommon and could be improved for clarity and consistency.",
-          "suggestion": "Remove the parentheses:  قم بتعديل اسم المساحة الافتراضي المعروض في الصفحة الترحيبية وفي حقل المرسل في إشعارات البريد."
+          "description": "The use of parentheses around \"الوارد\" is unusual and doesn't improve clarity. It might be better to remove them.",
+          "suggestion": "قم بتعديل اسم المساحة الافتراضي المعروض في الصفحة الترحيبية وفي حقل الوارد في إشعارات البريد."
         }
       ],
       "approved_at": null
@@ -44,7 +44,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Adjust' is not accurately conveyed by 'təyin edin'. 'Təyin edin' implies assigning or designating, while 'adjust' suggests modifying an existing setting. A better translation would be something like 'dəyişdirin' (change) or 'redaktə edin' (edit).",
+          "suggestion": "Xoş gəlmisiniz Səhifəsində və e-poçt bildirişlərinin Kimdən sahəsində göstərilən standart sahə başlığını dəyişdirin."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'From field' is translated as 'Kimdən sahəsində'. While technically correct, it could be more natural sounding. A more user-friendly translation might be 'Kimdən gələn' (From who).",
+          "suggestion": "Xoş gəlmisiniz Səhifəsində və e-poçt bildirişlərinin Kimdən gələn sahəsində göstərilən standart sahə başlığını dəyişdirin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -53,13 +64,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"space\" as \"пространството\" might be too literal. 'Space' in this context likely refers to a specific area or project within the application. A more appropriate translation might be 'областта' or 'проекта', depending on the intended meaning.",
-          "suggestion": "Consider 'Коригирайте заглавието по подразбиране на областта/проекта, показвано на Началната Страница и в полето От на имейл известията.'"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation is grammatically correct but could be slightly more fluent.  There's a tendency to translate directly from English, which can sound awkward in Bulgarian.",
-          "suggestion": "Consider rephrasing for better flow: 'Коригирайте основното заглавие, което се показва на Началната Страница и в полето „От“ на имейл известията.'"
+          "description": "The term 'space' is not directly equivalent to 'пространство' in this context. 'Space' refers to a specific area or project within the application, and a more accurate translation might be something like 'област' or 'проект'. 'Пространство' can be interpreted more broadly.",
+          "suggestion": "Consider translating 'space' as 'област' or 'проект' depending on the precise meaning within the application's context. For example, 'Коригирайте заглавието по подразбиране на областта, показвано на Началната Страница...'"
         }
       ],
       "approved_at": null
@@ -76,13 +82,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Bereich\" (area/section) doesn't quite capture the meaning of 'space' in this context. 'Space' refers to a specific area within the application, and 'Bereich' is too generic.",
-          "suggestion": "Passen Sie den Standardtitel des Raums an, der auf der Willkommensseite und im Absenderfeld der E-Mail-Benachrichtigungen angezeigt wird."
+          "description": "The term 'Bereich' (area/section) doesn't quite capture the meaning of 'space' in this context. 'Space' refers to a defined area or workspace. 'Bereich' is too broad.",
+          "suggestion": "Passen Sie den Standardtitel des Arbeitsbereichs an, der auf der Willkommensseite und im Absenderfeld der E-Mail-Benachrichtigungen angezeigt wird."
         },
         {
-          "type": "formatting",
-          "description": "While grammatically correct, the sentence is a bit long and could be slightly improved for readability. Consider splitting it.",
-          "suggestion": "Passen Sie den Standardtitel des Raums an, der auf der Willkommensseite angezeigt wird. Passen Sie auch den Titel im Absenderfeld der E-Mail-Benachrichtigungen an."
+          "type": "spelling",
+          "description": "While technically correct, the double 'e' in 'Willkommensseite' is more commonly written as 'Willkommensseite'.",
+          "suggestion": "Passen Sie den Standardtitel des Arbeitsbereichs an, der auf der Willkommensseite und im Absenderfeld der E-Mail-Benachrichtigungen angezeigt wird."
         }
       ],
       "approved_at": null
@@ -90,7 +96,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'καλωσορίσματος' is a genitive case and doesn't quite fit the context. It means 'of welcome', but 'κάλωσορίσματος' would be more appropriate (genitive singular).",
+          "suggestion": "Ρυθμίστε τον προεπιλεγμένο τίτλο χώρου που εμφανίζεται στη σελίδα καλωσορίσματος και στο πεδίο «Από» στις ειδοποιήσεις email."
+        },
+        {
+          "type": "grammar",
+          "description": "While technically correct, the flow could be slightly improved. Consider a more natural Greek phrasing.",
+          "suggestion": "Ρυθμίστε τον προεπιλεγμένο τίτλο χώρου που εμφανίζεται στη σελίδα καλωσορίσματος και στο πεδίο «Από» στις ειδοποιήσεις email."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -102,7 +119,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'From field' is not accurately translated. 'Lähettäjäkentässä' translates to 'sender field', which is technically correct but might be less clear to the user. A more natural phrasing for 'From field' in this context could be 'lähettäjän nimessä'.",
+          "suggestion": "Säädä oletustilan nimeä, joka näytetään Tervetuloa-sivulla ja sähköposti-ilmoitusten lähettäjän nimessä."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -117,8 +140,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"From field\" is not accurately translated. \"Սկսած դաշտում\" literally translates to 'in the starting field' which isn't the intended meaning. It refers to the 'From' address.",
-          "suggestion": "Կարգավորեք լռելյայն տարածության անվանումը, որը ցուցադրվում է ողջույնի էջում և էլփոստի ծանուցումների հասցեի դաշտում:"
+          "description": "The English phrase \"From field\" is not accurately translated. \"Սկսած դաշտում\" implies a starting field rather than the 'From' field in an email.",
+          "suggestion": "Կարգավորեք լռելյայն տարածության անվանումը, որը ցուցադրվում է ողջույնի էջում և էլփոստի ծանուցումների ուղարկող դաշտում:"
         }
       ],
       "approved_at": null
@@ -129,8 +152,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'From field' is not accurately translated. 'From field' refers to the 'From' address in email notifications, and the Italian translation doesn't convey this specific meaning. A more accurate translation would be 'campo mittente'.",
-          "suggestion": "campo mittente"
+          "description": "The English phrase 'From field' is not accurately translated. 'Campo Da' is a literal translation but doesn't convey the intended meaning, which refers to the 'From' address in email notifications.",
+          "suggestion": "Campo 'Mittente' nelle notifiche e-mail."
         }
       ],
       "approved_at": null
@@ -141,8 +164,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"From field\" is not accurately translated. While \"差出人フィールド\" (sasshin person fiirudo) literally translates to \"sender field\", the intended meaning in this context is \"From field\" (as in the 'From' label in an email). A more appropriate translation would convey the function rather than a direct translation of the words.",
-          "suggestion": "ウェルカムページとメール通知の差出人名を表示されるデフォルトのスペースタイトルを調整します。"
+          "description": "The phrase \"From field\" is not accurately translated. While \"差出人フィールド\" is a literal translation of \"sender field\", in the context of email notifications, it's more natural to use a term that implies the 'sender' or 'originating' space. The nuance of 'From' is lost.",
+          "suggestion": "ウェルカムページとメール通知の送信元スペースタイトルを調整します。"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a little clunky and could be improved for smoother reading in Japanese.",
+          "suggestion": "ウェルカムページとメール通知の送信元に表示されるデフォルトのスペースタイトルを調整できます。"
         }
       ],
       "approved_at": null
@@ -153,13 +181,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"From field\" is not accurately translated. \"보낸 사람란\" (bosen saramlan) literally translates to 'sender person field,' which is not the common understanding of the 'From' field in email. It should convey the meaning of the sender's information.",
-          "suggestion": "환영 페이지와 이메일 알림의 발신자 정보란에 표시되는 기본 공간 제목을 조정하세요."
+          "description": "The phrase \"From field\" is not accurately translated. \"보낸 사람란\" directly translates to \"Sender field\" but \"From field\" refers specifically to the 'From' field in the email header. A more precise translation would be something like \"보낸 사람 필드\" or \"From 필드\".",
+          "suggestion": "보낸 사람 필드"
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is a bit stiff and could be more natural-sounding in Korean. While grammatically correct, it doesn't flow as elegantly.",
-          "suggestion": "환영 페이지와 이메일 알림에서 표시되는 기본 공간 제목을 조정할 수 있습니다."
+          "description": "While not strictly incorrect, the sentence structure and flow could be improved for more natural Korean. Adding a particle or rephrasing might enhance readability.",
+          "suggestion": "환영 페이지와 이메일 알림에서 보낸 사람 필드에 표시되는 기본 공간 제목을 조정하세요."
         }
       ],
       "approved_at": null
@@ -170,13 +198,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'space title' is not accurately translated. 'ຫົວຂໍ້ພື້ນທີ່' could be interpreted as 'area title' or 'title of the area,' rather than the title of a workspace or space.",
-          "suggestion": "ປັບປ່ຽນຫົວຂໍ້ຂອງພື້ນທີ່ເລີ່ມຕົ້ນ (space title) ທີ່ສະແດງ..."
+          "description": "The term \"space title\" is not directly equivalent to a single Lao term. \"ຫົວຂໍ້ພື້ນທີ່\" is somewhat literal but might not be the most natural phrasing. It's a little awkward.",
+          "suggestion": "Consider rephrasing to something like \"ຊື່ພື້ນທີ່ຕາມເລີ່ມຕົ້ນ\" (initial space name) or \"ຫົວຂໍ້ຂອງພື້ນທີ່\" (space header) for improved clarity."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The term 'From field' is not accurately translated. It's not clear what 'ຊ່ອງຈາກ' refers to.",
-          "suggestion": "ປັບປ່ຽນຫົວຂໍ້ພື້ນທີ່ເລີ່ມຕົ້ນທີ່ສະແດງຢູ່ໃນໜ້າຍິນດີຕ້ອນຮັບ ແລະໃນຊ່ອງ 'ຈາກ' ຂອງການແຈ້ງເຕືອນອີເມວ."
+          "type": "spelling",
+          "description": "The word 'ອີເມວ' is technically correct but 'ອີເມລ໌' is more commonly used and is considered more standard in Lao.",
+          "suggestion": "Replace 'ອີເມວ' with 'ອີເມລ໌'."
         }
       ],
       "approved_at": null
@@ -187,13 +215,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"atstarpes\" (spaces) isn't the most accurate translation of \"space\" in this context. It would be better to use a more general term relating to titles or headings.",
-          "suggestion": "Pielāgojiet noklusējuma nosaukuma parādīšanu Laipni lūdzam lapā un e-pasta paziņojumu laukā."
+          "description": "The term 'atstarpes' (spaces) is not the correct translation for 'space' in this context. It likely refers to a location/area. A more appropriate translation would be something like 'telpa' or 'vieta'.",
+          "suggestion": "Pielāgojiet noklusējuma telpas nosaukumu, kas tiek rādīts Laipni lūdzam lapā un e-pasta paziņojumu laukā."
         },
         {
           "type": "formatting",
-          "description": "The sentence could be improved for flow and readability. Combining 'Laipni lūdzam lapā un e-pasta paziņojumu laukā' into a single phrase would be more natural.",
-          "suggestion": "Pielāgojiet noklusējuma nosaukuma parādīšanu Laipni lūdzam lapā un e-pasta paziņojumu laukā."
+          "description": "While not strictly incorrect, the translation uses a comma instead of an ampersand (&) after 'Laipni lūdzam lapā'. While a comma is grammatically acceptable, an ampersand might be more visually consistent with other similar UI texts.",
+          "suggestion": "Pielāgojiet noklusējuma telpas nosaukumu, kas tiek rādīts Laipni lūdzam lapā & e-pasta paziņojumu laukā."
         }
       ],
       "approved_at": null
@@ -204,13 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'space' doesn't have a direct, widely accepted translation in this context. 'Space' likely refers to the location or venue. 'Ruimte' can mean space, but in this scenario, it might be better translated to something more specific depending on the application.",
-          "suggestion": "Consider alternatives like 'locatie' (location), 'plaats' (place), or 'evenementenruimte' (event space), depending on the application's specific meaning of 'space'."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'die wordt weergegeven' is grammatically correct but sounds a bit formal and clunky. It could be more conversational.",
-          "suggestion": "Replace 'die wordt weergegeven' with 'die je ziet' or 'die verschijnt'."
+          "description": "The word 'space' is translated as 'ruimte'. While technically correct, 'space' in this context likely refers to a section or area within the application. A more appropriate translation might be 'sectie' or 'gebied'.",
+          "suggestion": "Pas de standaardsectietitel aan die wordt weergegeven op de Welkomstpagina en in het veld Van van de e-mailmeldingen."
         }
       ],
       "approved_at": null
@@ -221,13 +244,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'space' doesn't have a direct equivalent in this context. 'Obszar' while technically meaning 'area', isn't the best fit for 'space' when referring to a user-defined location or category within an application. 'Sekcja', 'zakładka', or 'przestrzeń' could be considered depending on the specific context and intended meaning.",
-          "suggestion": "Consider alternatives like 'Sekcja', 'zakładka', or 'przestrzeń' depending on the application context."
+          "description": "The term 'space' is not accurately translated. 'Obszar' can mean area or region, but in this context, 'title' or 'label' would be more accurate for something displayed on a welcome page.",
+          "suggestion": "Dostosuj domyślną nazwę/etykietę wyświetlaną na stronie powitalnej..."
         },
         {
-          "type": "formatting",
-          "description": "While not strictly incorrect, a more natural Polish phrasing might benefit from reordering the sentence for better flow. The word order could be improved.",
-          "suggestion": "Dostosuj nazwę obszaru wyświetlaną na stronie powitalnej i w polu Od powiadomień e-mail."
+          "type": "incorrect_translation",
+          "description": "While 'powiadomień e-mail' is grammatically correct, it's a bit verbose.  'Powiadomień e-mailowych' is more natural and compact.",
+          "suggestion": "Dostosuj domyślną nazwę obszaru wyświetlaną na stronie powitalnej i w polu Od powiadomień e-mailowych."
         }
       ],
       "approved_at": null
@@ -250,8 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"From field\" is not accurately translated. \"Câmpul De la\" is technically correct, but sounds unnatural in Romanian in this context. It should be something more descriptive of the sender information.",
-          "suggestion": "Câmpul expeditorului pentru notificări prin e-mail"
+          "description": "The phrase 'From field' is not accurately translated. 'From field' refers to the 'From:' line in an email. A more accurate translation would incorporate this understanding.",
+          "suggestion": "Configurați câmpul 'De:' pentru notificări prin e-mail"
+        },
+        {
+          "type": "formatting",
+          "description": "There's a potential formatting issue. While not strictly wrong, using single quotes around 'De:' might improve clarity, especially if this is a UI element.",
+          "suggestion": "Configurați câmpul 'De:' pentru notificări prin e-mail"
         }
       ],
       "approved_at": null
@@ -262,12 +290,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'рабочее пространство' (working space) isn't the most natural translation of 'space' in this context. 'Пространство' would be more accurate and consistent with common UI terminology.",
+          "description": "The phrase \"рабочего пространства\" (working space) while technically correct, might be better translated as \"пространства\" (space) for a more natural flow and common usage in this context. 'Рабочее пространство' implies a workspace, whereas 'пространство' is more generic and applicable to a title.",
           "suggestion": "Настройте заголовок пространства по умолчанию, который будет отображаться на странице приветствия и в поле ‘От’ электронного уведомления портала."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'портала' (of the portal) is unnecessary and slightly awkward in this context. It implies a distinction that doesn't exist in the original English.",
+          "description": "The word 'портала' (portal) seems unnecessary and potentially confusing. The English doesn't mention a portal.",
           "suggestion": "Настройте заголовок пространства по умолчанию, который будет отображаться на странице приветствия и в поле ‘От’ электронного уведомления."
         }
       ],
@@ -279,13 +307,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'From field' is not accurately translated. 'From field' refers to the sender's address in email notifications. The Sinhala translation focuses on 'area' which is not a precise equivalent.",
-          "suggestion": "පිළිගැනීමේ පිටුවේ සහ වි-තැපැල් දැනුම්දීම්වල යවන්නකුගේ ලිපිනය වෙනස් කරන්න."
+          "description": "The translation 'පිළිගැනීමේ පිටුවේ' (piligænimei pituve) translates to 'Welcome Page' which is accurate, however, 'වි-තැපැල් දැනුම්දීම් ක්‍ෂේත්‍රයේ' (vi-tæpææl dænnumdeem kṣhetrayæ) is a very literal and slightly awkward translation of 'in the From field of the email notifications'. A more natural phrasing would be something along the lines of 'වි-තැපැල් දැනුම්දීම්වල 'පිළිගැනීම්' ක්ෂේත්‍රයේ' (vi-tæpææl dænnumdeemvala 'piligænimei' kṣhetrayæ).",
+          "suggestion": "වි-තැපැල් දැනුම්දීම්වල 'පිළිගැනීම්' ක්ෂේත්‍රයේ"
         },
         {
-          "type": "spelling",
-          "description": "The word 'වි-තැපැල්' is acceptable but could be more accurately represented.",
-          "suggestion": "විද්‍යුත්-තැපැල්"
+          "type": "formatting",
+          "description": "The phrase 'පෙරනිමි අවකාශයේ සිරැසිය' (peranimii awāsiyæ avāsiyæ) is a bit verbose and may not be the most efficient wording. While technically correct, it could be simplified.",
+          "suggestion": "පෙරනිමි සිරැසිය"
         }
       ],
       "approved_at": null
@@ -299,7 +327,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'prostora' is slightly awkward. While technically correct, 'prostor' (without the '-a') would sound more natural in this context, as it refers to the space itself, not a collection of spaces.",
+          "suggestion": "Prilagodite privzeti naslov prostora, prikazan na pozdravni strani in v polju Od e-poštnih obvestil."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -308,13 +342,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'емаил' is a transliteration and should be 'email'.",
-          "suggestion": "email"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'страници' should be 'страници Добродошлице'.",
-          "suggestion": "страници Добродошлице"
+          "description": "The word 'страници' is misspelled. It should be 'страници'.",
+          "suggestion": "страници"
         }
       ],
       "approved_at": null
@@ -324,9 +353,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'podesite' should be 'prilagodite'. 'Podesite' implies setting something to a specific value, while 'prilagodite' implies adjusting or customizing.",
+          "suggestion": "Prilagodite podrazumevani naslov prostora koji se prikazuje na stranici Dobrodošlice i u Od polju email obaveštenja."
+        },
+        {
           "type": "grammar",
-          "description": "The phrase 'email obaveštenja' is grammatically slightly awkward. A more natural phrasing would use the genitive case, aligning better with 'Od polju'.",
-          "suggestion": "email notifikacija"
+          "description": "While technically correct, the construction 'u Od polju email obaveštenja' sounds slightly awkward. It could be improved for better flow.",
+          "suggestion": "u polju 'Od' u email obaveštenjima"
         }
       ],
       "approved_at": null
@@ -337,13 +371,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'From field' is not accurately translated. 'Kimden alanı' is literal and doesn't convey the intended meaning, which refers to the 'From' name/address shown in email notifications.",
-          "suggestion": "Hoş Geldiniz Sayfasında ve e-posta bildirimlerinin 'Gönderen' alanında görüntülenen varsayılan alan başlığını ayarlayın."
+          "description": "The English phrase 'space title' is not accurately translated. 'Başlık' (title) is correct, but 'space title' implies a specific kind of title related to a space or area, which isn't explicitly conveyed. A more accurate translation might be 'alan adı' (field name) or 'alan başlığı' (field title) depending on the specific context.",
+          "suggestion": "Consider using 'alan adı' or 'alan başlığı' instead of 'alan başlığını' to better reflect the meaning of 'space title'."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure is slightly awkward. The combination of 'Hoş Geldiniz Sayfasında ve' followed by a clause beginning with 've' is not the most natural flow in Turkish.",
-          "suggestion": "Hoş Geldiniz Sayfasında ve e-posta bildirimlerinin 'Gönderen' alanında görüntülenen varsayılan alan başlığını ayarlayın."
+          "description": "The Turkish sentence 'Hoş Geldiniz Sayfasında ve e-posta bildirimlerinin Kimden alanında görüntülenen varsayılan alan başlığını ayarlayın.' is quite long and could be broken into two shorter sentences for better readability.  It feels slightly clunky.",
+          "suggestion": "Split the sentence into two: 'Hoş Geldiniz Sayfasında görüntülenen varsayılan alan başlığını ayarlayın. Ayrıca, e-posta bildirimlerinin Kimden alanında görüntülenen varsayılan alanı da ayarlayabilirsiniz.'"
         }
       ],
       "approved_at": null
@@ -354,13 +388,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Adjust' as 'Налаштуйте' is accurate, but the overall phrasing could be more natural. While technically correct, it feels slightly stiff.",
-          "suggestion": "Змініть заголовок простору за замовчуванням, який відображається на сторінці привітання та в полі 'Від' у сповіщеннях електронною поштою."
+          "description": "The phrase \"Adjust\" is translated as \"Налаштуйте\" which is accurate but lacks nuance. \"Adjust\" in this context implies customization or modification, rather than just setting something up. A more precise translation might emphasize this.",
+          "suggestion": "Змініть або налаштуйте заголовок простору за замовчуванням…"
         },
         {
           "type": "formatting",
-          "description": "The use of single quotes around 'Від' might not be standard Ukrainian formatting for email field names. It's potentially confusing.",
-          "suggestion": "Використовувати подвійні лапки або скобки замість одинарних лапок навколо 'Від', наприклад: в полі «Від» або в полі (Від)."
+          "description": "The phrase 'сповіщень електронною поштою' could be slightly more concise. While accurate, it's a bit verbose.",
+          "suggestion": "сповіщень електронної пошти"
         }
       ],
       "approved_at": null
@@ -371,8 +405,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'From field' is not accurately translated. 'From field' refers to the sender field in an email. A more accurate translation would convey this meaning.",
-          "suggestion": "Điều chỉnh trường 'Từ' trong thông báo email (adjust the 'From' field in email notifications)."
+          "description": "The translation of 'Adjust' is not ideal. 'Điều chỉnh' can imply a more significant modification than simply customizing a title.",
+          "suggestion": "Cá nhân hóa tiêu đề không gian mặc định..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'in the From field' could be improved for clarity in Vietnamese.  A more natural phrasing would convey the location of the title.",
+          "suggestion": "trong phần tiêu đề 'Từ' của thông báo email."
         }
       ],
       "approved_at": null
@@ -383,13 +422,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'From field' is not accurately translated. '发件人字段' is technically correct but 'From' often refers to the sender's name, not just the field itself. A more natural translation would convey the intent of customizing the sender's name/title.",
-          "suggestion": "调整欢迎页面和电子邮件通知中显示的默认发件人名称。"
+          "description": "The translation focuses too much on the 'From' field specifically. The original English implies adjusting the space title generally, which appears in multiple places. '发件人字段' (From field) is too narrow.",
+          "suggestion": "调整欢迎页面和电子邮件通知中显示的默认空间标题。"
         },
         {
           "type": "formatting",
-          "description": "The phrasing '欢迎页面和电子邮件通知' could be improved for better flow. Combining them with '和' can feel slightly clunky.",
-          "suggestion": "调整欢迎页面和电子邮件通知的发件人名称。"
+          "description": "The sentence structure could be improved for better flow and readability in Chinese. Combining '欢迎页面' and '电子邮件通知' directly is a bit clunky.",
+          "suggestion": "调整欢迎页面及电子邮件通知中显示的默认空间标题。"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Items selected",
   "content_en_sha1_hash": "71df4f9b608d03b3dfa07d8ce7cdee242420abae",
   "created_at": "2025-05-19T21:30:54.887Z",
-  "updated_at": "2025-05-28T09:30:02.451Z",
+  "updated_at": "2025-08-04T07:30:01.206Z",
   "comment": {
     "text": "This translation key is used to display a message indicating which items are selected in a list view. It appears on an info panel on a webpage and is displayed when multiple items are highlighted or checked.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/SeveralItems/index.tsx",
-      "line_number": 74,
-      "context": "const itemsText = isGroups\n ? t(\"InfoPanel:SelectedGroups\")\n : isContacts\n ? t(\"InfoPanel:SelectedUsers\")\n : t(\"InfoPanel:ItemsSelected\");\n \n return (\n <StyledSeveralItemsContainer className=\"no-thumbnail-img-wrapper\">\n <img src={imgSrc} alt=\"Several items\" />\n <Text fontSize=\"16px\" fontWeight={700}>",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/SeveralItems/index.tsx",
+      "line_number": 75,
+      "context": "const itemsText = isGroups\n ? t(\"InfoPanel:SelectedGroups\")\n : isUsers\n ? t(\"InfoPanel:SelectedUsers\")\n : t(\"InfoPanel:ItemsSelected\");\n \n return (\n <div className={classNames(\"no-thumbnail-img-wrapper\", styles.container)}>\n <img src={imgSrc} alt=\"Several items\" />\n <Text fontSize=\"16px\" fontWeight={700}>",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Seçilmiş elementlər\" is technically correct, it translates more literally as \"Selected elements.\" The original phrase \"Items selected\" implies a count or a listing of chosen items. A more natural and accurate translation would convey this sense of selection and plurality.",
-          "suggestion": "Seçilmiş əşyalar"
+          "description": "While 'Seçilmiş elementlər' is technically correct, 'Items selected' generally translates more accurately to 'Seçilmiş maddələr' or 'Seçilmiş əşyalar' depending on the context. 'Elementlər' usually refers to a technical element, not a selected item.",
+          "suggestion": "Seçilmiş maddələr or Seçilmiş əşyalar"
         }
       ],
       "approved_at": null
@@ -90,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ընտրված միավորները' (Entrvadz miaynerv) literally translates to 'Selected units'. While not entirely wrong, 'Items selected' implies a more general selection of items. 'Ընտրված իրերը' (Entrvadz irery) would be a closer translation, meaning 'Selected items'.",
+          "description": "The translation \"Ընտրված միավորները\" while technically meaning 'selected units', doesn't fully capture the nuance of \"Items selected\" in this context. 'Items selected' refers to a list or collection of chosen items, not necessarily units. A more accurate translation would better reflect that.",
           "suggestion": "Ընտրված իրերը"
         }
       ],
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Elemente selectate\" is understandable, a more natural and accurate translation of \"Items selected\" in Romanian would be \"Articole selectate\" or \"Elemente alese\". \"Selectate\" is grammatically correct but less common in this context.",
-          "suggestion": "Articole selectate"
+          "description": "While 'Elemente selectate' is a possible translation, 'Articole selectate' or 'Produse selectate' might be more appropriate depending on the context of what 'Items' refers to in the InfoPanel.",
+          "suggestion": "Consider 'Articole selectate' or 'Produse selectate' based on context."
         }
       ],
       "approved_at": null
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Выбрано элементов\" is a somewhat literal and less natural translation of \"Items selected.\" A more common and idiomatic phrasing would be \"Выбранные элементы\" or \"Выбранные позиции\".",
+          "description": "The translation 'Выбрано элементов' while technically correct, is a bit formal for a UI element like 'Items selected'. A more natural and concise option would be better suited for a user interface.",
           "suggestion": "Выбранные элементы"
         }
       ],
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අථක සෑදිණි\" does not accurately convey the meaning of \"Items selected\". \"අථක\" generally refers to things like 'wealth' or 'abundance', and 'සෑදිණි' means 'was made' or 'was prepared'. This combination doesn't fit the context of selecting items.",
-          "suggestion": "A more accurate translation would be something like \"ප්‍රිඅද තේරීම්\" (Pradathereem) - meaning 'Selected items', or \"තේරීම්\" (Thereem) - meaning 'Selections'."
+          "description": "The Sinhala translation \"අථක සෑදිණි\" does not accurately convey the meaning of \"Items selected\".  \"අථක\" often relates to 'unripe' or 'immature', and \"සෑදිණි\" means 'was prepared' or 'was made'.  This translation is nonsensical in the context of selecting items.",
+          "suggestion": "A more accurate translation would be something like \"ප්‍රිමාණය තෝරාගැනිවුයේ\" (Pirimani thora geniye) meaning 'Items selected', or \"තෝරාගත් වස්තූන්\" (Thora gath wastun) meaning 'Selected items'."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Predmeti izbrani' is literally 'Items selected' but sounds awkward in Slovenian. A more natural translation would be 'Izbrani predmeti'.",
-          "suggestion": "Izbrani predmeti"
+          "description": "The translation \"Predmeti izbrani\" is a literal translation and doesn't quite convey the intended meaning of 'Items selected' in a user interface context. It sounds passive.",
+          "suggestion": "A more natural and contextually appropriate translation would be something like \"Izbrani predmeti\" or \"Izbrani elementi\"."
         }
       ],
       "approved_at": null
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Ставке одабране' translates more accurately to 'Selected items' rather than 'Items selected'. While understandable, it's not a direct or idiomatic equivalent.",
-          "suggestion": "Одабрани предмети (Odabrani predmeti) or Избор (Izbor) might be more accurate, depending on the context."
+          "description": "The Serbian (Cyrillic) translation \"Ставке одабране\" does not accurately convey the meaning of \"Items selected\". \"Ставке\" translates to \"Items\" but \"одабране\" means \"selected\" in the past participle, implying they *were* selected.  The intended meaning is a present or general state of selection.",
+          "suggestion": "Избор ставке"
         }
       ],
       "approved_at": null
@@ -219,13 +219,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Stavke odabrane\" is understandable, a more natural and accurate translation of \"Items selected\" would be \"Izabrani predmeti\" or \"Odabrani predmeti\". \"Stavke odabrane\" implies 'selected items' where the 'items' are points or individual things, rather than general items.",
-          "suggestion": "Izabrani predmeti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -249,7 +243,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"选定的项目\" is technically correct, it's a very literal and somewhat clunky translation of \"Items selected\". A more natural and concise translation would be preferable. \"已选项目\" or \"已选择项目\" are better alternatives.",
+          "suggestion": "已选项目"
+        }
+      ],
       "approved_at": null
     }
   }

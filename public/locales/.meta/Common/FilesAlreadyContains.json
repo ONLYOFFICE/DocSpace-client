@@ -3,7 +3,7 @@
   "content": "The destination already contains files with the same name.",
   "content_en_sha1_hash": "98478c230a84dcee9c8eb888686df966c0230a3f",
   "created_at": "2025-05-19T21:30:45.279Z",
-  "updated_at": "2025-05-28T09:30:02.213Z",
+  "updated_at": "2025-05-26T07:57:32.240Z",
   "comment": {
     "text": "The translation key \"FilesAlreadyContains\" is used to display a message when adding files to a destination that already contains files with the same name. This message appears in a dialog box when trying to resolve conflicts while uploading or importing files.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'الوجهة تحتوي بالفعل على ملفات بنفس الاسم' is a literal translation and while understandable, it doesn't sound entirely natural in Arabic. A more idiomatic phrasing would be preferable.",
-          "suggestion": "الوجهة تحتوي على ملفات بنفس الاسم بالفعل. (Al-wijha tuḥtawi ʿala malaffat bi nafs al-ism bil-fiʿl.) - This emphasizes 'already' more naturally."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -45,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Дестинацията' (Destinatsiyata) sounds overly formal and technical for this context. 'Папка' (Papka - folder) or a more general term for 'location' would be more natural.",
+          "suggestion": "Проверете дали съществува по-разговорна алтернатива на 'Дестинацията', например 'Папка' (Papka) или подобна."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase \"files with the same name\" is not perfectly conveyed by \"նույն անունով ֆայլեր:\" A more accurate translation would consider the *exact* match of both name and potentially other attributes (like size or timestamp) to avoid ambiguity. While 'same name' is the core meaning, a more precise rendering could strengthen the message in a technical context.",
-          "suggestion": "Consider phrasing it as: «Նպատակակետն արդեն պարունակում է նույն անունով և հատկանիշներով ֆայլեր» (The destination already contains files with the same name and attributes) or a similar construction emphasizing a more complete match."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -155,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The Romanian translation 'Fișiere cu acelaşi nume există deja la destinație' is grammatically correct, but could be slightly more fluent. A more natural phrasing would be 'Există deja fișiere cu același nume în destinație.'",
-          "suggestion": "Există deja fișiere cu același nume în destinație."
+          "type": "incorrect_translation",
+          "description": "The translation 'Fișiere cu acelaşi nume există deja la destinație' is technically correct but sounds somewhat unnatural in Romanian. A more idiomatic translation would be closer to 'Există deja fișiere cu același nume în destinație.' or 'Destinația conține deja fișiere cu același nume.'",
+          "suggestion": "Destinația conține deja fișiere cu același nume."
         }
       ],
       "approved_at": null
@@ -174,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගමනාන්තයේ දැනටමත් එකම නමින් ගොනු අඩංගු වේ.' is a literal translation and may not be the most natural or idiomatic way to express the meaning in Sinhala. A more natural phrasing might emphasize that the file cannot be copied.",
-          "suggestion": "ගමනාන්තයේ එවැනි ගොනු දැනටමත් පවතී."
+          "description": "The translation 'ගමනාන්තයේ දැනටමත් එකම නමින් ගොනු අඩංගු වේ.' while understandable, isn't the most natural way to phrase this in Sinhala. A more common and idiomatic translation would be something like 'ඉලක්කගත ස්ථානයේ එවැනි නම් සහිත ගොනු දැනටමත් පවතී.'",
+          "suggestion": "ඉලක්කගත ස්ථානයේ එවැනි නම් සහිත ගොනු දැනටමත් පවතී."
         }
       ],
       "approved_at": null
@@ -207,13 +201,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Hedef zaten aynı ada sahip dosyalar içeriyor.' is a literal translation that doesn't fully capture the nuance of 'The destination already contains files with the same name.' It sounds slightly awkward in Turkish. A more natural and idiomatic translation would convey the same meaning more effectively.",
-          "suggestion": "Hedefte aynı isimli dosyalar zaten mevcut."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

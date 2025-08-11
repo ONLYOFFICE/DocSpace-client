@@ -64,7 +64,10 @@ import {
 } from "./device";
 import { getCookie } from "./cookie";
 import { Context, Provider, Consumer } from "./context";
-import commonIconsStyles, { IconSizeType } from "./common-icons-style";
+import commonIconsStyles, {
+  IconSizeType,
+  isIconSizeType,
+} from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
 import { NoUserSelect, TextUserSelect } from "./commonStyles";
@@ -123,6 +126,7 @@ export {
   classNames,
   commonIconsStyles,
   IconSizeType,
+  isIconSizeType,
   Context,
   Provider,
   Consumer,

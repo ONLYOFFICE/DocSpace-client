@@ -3,7 +3,7 @@
   "content": "Adjust Session Lifetime to define the time period before automatic logoff. After saving, logoff will be performed for all users.",
   "content_en_sha1_hash": "0c6dc2e12543d442f19d41fc7480959c780e4b71",
   "created_at": "2025-05-19T21:30:52.652Z",
-  "updated_at": "2025-06-18T07:34:15.191Z",
+  "updated_at": "2025-08-04T07:30:01.546Z",
   "comment": {
     "text": "Adjust Session Lifetime defines the time period before automatic logoff. This setting will be applied to all users after saving, prompting them to log off. It appears in a portal settings category.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/index.js",
-      "line_number": 327,
+      "line_number": 333,
       "context": "{t(\"SessionLifetime\")}\n </Text>\n \n <div className=\"category-item-description\">\n <Text fontSize=\"13px\" fontWeight=\"400\">\n {t(\"SessionLifetimeSettingDescription\")}\n </Text>\n \n {lifetimeSettingsUrl ? (\n <Link\n className=\"link-learn-more\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
       "line_number": 239,
-      "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>\n <Text className=\"learn-subtitle\">\n {t(\"SessionLifetimeSettingDescription\")}\n </Text>\n {lifetimeSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n color={currentColorScheme.main?.accent}",
+      "context": "return (\n <MainContainer>\n <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>\n <Text className=\"learn-subtitle\">\n {t(\"SessionLifetimeSettingDescription\")}\n </Text>\n {lifetimeSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"session_lifetime_component_learn_more\"",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"سيتم تسجيل الخروج لجميع المستخدمين بعد الحفظ\" is a literal translation but can be improved for clarity and naturalness. A better phrasing would convey the effect on existing sessions more gracefully.",
-          "suggestion": "سيتم تسجيل خروج جميع المستخدمين الحاليين بعد الحفظ."
+          "description": "The phrase \"سيتم تسجيل الخروج لجميع المستخدمين بعد الحفظ\" could be misinterpreted. It directly translates to 'All users will be logged out after saving', which might sound overly drastic. A softer phrasing might be more appropriate.",
+          "suggestion": "قم بتعديل مدة الجلسة لتحديد الفترة الزمنية قبل أن يتم تسجيل الخروج بشكل تلقائي. سيتم تطبيق هذا الإعداد على جميع المستخدمين بعد الحفظ."
         }
       ],
       "approved_at": null
@@ -48,13 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Adjust Session Lifetime\" as \"Sessiya Müddəti təyin edin\" is slightly awkward. A more natural phrasing might be \"Sessiya müddətini ayarlayın\" or \"Sessiya müddətini dəyişdirin\". \"Təyin edin\" sounds more like assigning a value rather than adjusting a setting.",
-          "suggestion": "Sessiya müddətini ayarlayın"
+          "description": "The translation of \"Adjust Session Lifetime\" as \"Sessiya Müddəti təyin edin\" is somewhat literal and could be more natural. A better phrasing might convey the adjustment more clearly.",
+          "suggestion": "Consider a phrasing like \"Sessiya müddətini dəyişdirin\" or \"Sessiya müddətini tənzimləyin\" to better convey the action of adjusting the setting."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"çıxış həyata keçiriləcək\" is technically correct but sounds very formal and bureaucratic. A more user-friendly alternative would be more direct.",
-          "suggestion": "Bütün istifadəçilər avtomatik olaraq çıxış edəcək"
+          "description": "The phrase \"çıxış həyata keçiriləcək\" is grammatically correct, but a more natural phrasing in this context would be better. It sounds a little formal and robotic.",
+          "suggestion": "Replace \"çıxış həyata keçiriləcək\" with \"çıxış aparılacaq\" or \"çıxış olacaq\"."
         }
       ],
       "approved_at": null
@@ -62,13 +62,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'излизане' (logout) could be more precisely translated to 'изключване' in this context, which better conveys the action of ending a session.",
-          "suggestion": "Коригирайте Продължителността на Сесията, за да определите периода на време преди автоматично изключване. След запазване ще се извърши изключване за всички потребители."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -95,13 +89,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Adjust Session Lifetime' is better translated as 'Establezca la duración de la sesión' or 'Configure la duración de la sesión'. 'Ajuste la duración de la sesión' is acceptable but slightly less idiomatic.",
-          "suggestion": "Establezca la duración de la sesión"
+          "description": "The phrase \"Adjust Session Lifetime\" is not accurately translated. \"Adjust\" implies an action to be performed. While 'Ajuste' is a valid translation, it doesn't fully capture the meaning of *adjusting* a setting. A more accurate translation might involve indicating the setting itself is being defined.",
+          "suggestion": "Consider: 'Defina la duración de la sesión...' or 'Establezca la duración de la sesión...'"
         },
         {
           "type": "incorrect_translation",
-          "description": "While 'desconexión automática' is a correct translation for 'automatic logoff,'  'cierre de sesión automático' is more common and natural in Spanish.",
-          "suggestion": "cierre de sesión automático"
+          "description": "The phrase \"automatic logoff\" is translated as \"desconexión automática.\" While correct, it's a bit formal.  A more conversational alternative would be better.",
+          "suggestion": "Consider: 'cierre de sesión automático' or 'desconexión automática de la sesión'"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure, while grammatically correct, is a little clunky. Separating the consequence of saving into a distinct sentence would improve readability.",
+          "suggestion": "Ajuste la duración de la sesión para definir el periodo de tiempo antes de la desconexión automática. Tras guardar los cambios, todos los usuarios serán desconectados."
         }
       ],
       "approved_at": null
@@ -124,18 +123,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Adjust\" as \"Կարգավորեք\" is technically correct, but might be too formal for a user interface setting. A more user-friendly phrasing might be preferable.",
-          "suggestion": "Consider a phrase like \"Սահմանեք\" (Set) or \"Փոփոխեք\" (Change) for a more approachable tone."
+          "description": "The phrase \"սահմանելու ժամանակաշրջանը մինչև ավտոմատ դուրս գալը\" is a bit awkward. A more natural phrasing would improve clarity.",
+          "suggestion": "Կարգավորեք սեսիայի տևողությունը՝ սահմանելով ժամանակաշրջանը, որից հետո կկատարվի ավտոմատ դուրս գալը։"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrasing \"մինչև ավտոմատ դուրս գալը\" (until automatic exit) is a bit awkward. \"ավտոմատ լոգաութ\" (automatic logout) would be more natural and commonly understood.",
-          "suggestion": "Replace \"մինչև ավտոմատ դուրս գալը\" with \"ավտոմատ լոգաութ\"."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon after \"ավտոմատ լոգաութ\" is not consistent with the original English sentence's punctuation.  The sentence would flow better without it.",
-          "suggestion": "Remove the colon after \"ավտոմատ լոգաութ\"."
+          "description": "The word 'ելքը' (exit) sounds slightly formal in this context. It's better to use a more common term for logoff.",
+          "suggestion": "Պահպանելուց հետո դուրս գալը կկատարվի բոլոր օգտատերերի համար։"
         }
       ],
       "approved_at": null
@@ -152,13 +146,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Session Lifetime' is not accurately conveyed by 'セッションの有効期間'. '有効期間' implies validity, while 'Session Lifetime' refers to the duration. A better translation might be 'セッションライフタイム' (transliteration) or 'セッション持続時間' (session duration).",
-          "suggestion": "セッションライフタイム or セッション持続時間"
+          "description": "The phrase \"Adjust Session Lifetime\" is not accurately reflected in \"セッションの有効期間を調整します\". While '有効期間' refers to validity period, '調整します' implies adjustment, which is a bit too literal. A more natural phrasing might be something like \"セッションのタイムアウト設定\".",
+          "suggestion": "セッションのタイムアウト設定を調整します"
         },
         {
-          "type": "formatting",
-          "description": "The phrase \"すべてのユーザーに対してログオフが実行されます\" is slightly awkward.  It's technically correct, but could be improved for flow.",
-          "suggestion": "保存後、すべてのユーザーはログオフされます。"
+          "type": "incorrect_translation",
+          "description": "The phrase \"automatic logoff\" is translated as \"自動ログオフ\". This is generally correct, but the emphasis on 'automatic' isn't fully conveyed. A better phrasing might include '自動的に'.",
+          "suggestion": "自動的にログオフされるまでの期間を定義するには"
         }
       ],
       "approved_at": null
@@ -166,7 +160,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Adjust Session Lifetime\" is translated as \"세션 수명을 조정하세요\" which is technically correct but doesn't convey the intuitive meaning of 'setting' a duration. A more natural translation would emphasize the act of setting a duration.",
+          "suggestion": "자동 로그오프까지의 기간을 설정하려면 세션 지속 시간을 설정하세요."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -175,13 +175,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ເຂົ້າສູ່ລະບົບອັດຕະໂນມັດ\" (khao suu rabop attathomad) literally translates to 'automatically login'. The English phrase 'logoff' implies the opposite, 'logout'.",
-          "suggestion": "ປັບ Session Lifetime ເພື່ອກໍານົດໄລຍະເວລາກ່ອນການອອກຈາກລະບົບອັດຕະໂນມັດ"
+          "description": "The phrase \"ເຂົ້າສູ່ລະບົບອັດຕະໂນມັດ\" (khao suu rabop attathomath) translates to \"log in automatically\", but the English says \"logoff\". The Lao translation should reflect \"log off\" or \"automatic logout\".",
+          "suggestion": "ປັບ Session Lifetime ເພື່ອ ກໍານົດໄລຍະເວລາກ່ອນການອອກຈາກລະບົບອັດຕະໂນມັດ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrasing 'ການອອກຈາກລະບົບຈະໄດ້ຮັບການປະຕິບັດ' is a bit wordy and formal for a user-facing setting description. While not strictly incorrect, it could be improved for clarity and flow.",
-          "suggestion": "ຫຼັງ​ຈາກ​ການ​ບັນ​ທຶກ​, ທຸກ​ຄົນ​ຈະ​ຖືກ​ອອກຈາກ​ລະ​ບົບ"
+          "description": "The phrase 'ການອອກຈາກລະບົບ' (kaan ook jaak rabop) is a literal translation of “logoff” which is correct, but a more natural phrasing might be preferred for readability.",
+          "suggestion": "ປັບ Session Lifetime ເພື່ອ ກໍານົດໄລຍະເວລາກ່ອນການອອກຈາກລະບົບ ໂດຍອັດຕະໂນມັດ"
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'automātiskās atteikšanās' is a literal translation of 'automatic logoff' but sounds unnatural in Latvian. A more natural phrasing would be 'automātiski izrakstīšanās'.",
-          "suggestion": "Pielāgojiet sesijas ilgumu, lai noteiktu laika periodu pirms automātiski izrakstīšanās. Pēc saglabāšanas visi lietotāji tiks izlogoti."
+          "description": "The phrase 'automatic logoff' is translated as 'automātiskās atteikšanās'. While technically correct, 'automātiskā izrakstīšanās' would be a more natural and commonly used term in Latvian for 'automatic logoff' in a technical context.",
+          "suggestion": "Pielāgojiet sesijas ilgumu, lai noteiktu laika periodu pirms automātiskā izrakstīšanās. Pēc saglabāšanas visi lietotāji tiks izlogoti."
         }
       ],
       "approved_at": null
@@ -204,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Adjust Session Lifetime' is not accurately reflected in 'Pas Duur van de sessie aan'. While 'Duur van de sessie' translates to 'Session Duration', 'Pas...aan' implies an action on the duration, but 'Adjust' can also imply a configuration change. A better translation could be 'Configure sessieduur'.",
-          "suggestion": "Configure sessieduur"
+          "description": "The phrase \"Adjust Session Lifetime\" is rendered as \"Pas Duur van de sessie aan\". While understandable, \"Levensduur van de sessie\" or \"Sessie-levensduur\" would be more idiomatic and precise translations of \"Session Lifetime\" in this context.",
+          "suggestion": "Pas Levensduur van de sessie aan"
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'afmelden' can be ambiguous. While it translates to 'logoff,' it also implies a formal disengagement or termination. 'Uitloggen' might be a clearer and more commonly used term for 'logoff' in this context.",
-          "suggestion": "Configure sessieduur om de periode vóór het automatisch uitloggen te definiëren. Na het opslaan wordt het uitloggen voor alle gebruikers uitgevoerd."
+          "description": "The phrase \"automatic logoff\" is translated as \"automatisch afmelden\". While technically correct, \"automatische uitloggen\" is a more common and natural way to express this in Dutch, particularly in technical contexts.",
+          "suggestion": "automatische uitloggen"
         }
       ],
       "approved_at": null
@@ -221,12 +221,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Dostosuj czas trwania sesji\" is a reasonable translation of 'Adjust Session Lifetime', but 'czas trwania sesji' is a bit verbose. A more concise and natural translation could be 'Czas trwania sesji'.",
-          "suggestion": "Czas trwania sesji"
+          "description": "The phrase 'Dostosuj czas trwania sesji' is a literal translation of 'Adjust Session Lifetime', but 'Dostosuj czas trwania sesji' can be improved for a more natural flow in Polish. A better option would be 'Ustaw czas trwania sesji' or 'Skonfiguruj czas trwania sesji'.",
+          "suggestion": "Ustaw czas trwania sesji"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"z obszaru\" at the end of the sentence doesn't quite convey the meaning of \"all users\". It implies logging off from a specific area.  It's missing the nuance of system-wide logoff.",
+          "description": "The phrase 'wylogowania z obszaru' is awkward. The 'z obszaru' (from the area) is unnecessary and doesn't accurately convey the meaning.",
           "suggestion": "zostaną wylogowani"
         }
       ],
@@ -250,13 +250,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'Session Lifetime' is translated as 'durata de expirare a sesiunii'. While technically correct, a more natural and common Romanian phrasing would be 'durata sesiunii'.",
-          "suggestion": "durata sesiunii"
+          "description": "The phrase 'Adjust Session Lifetime' is translated as 'Configurați durata de expirare a sesiunii'. While technically correct, 'Durata de expirare' is a bit clunky. A more natural translation might be 'Durata sesiunii'.",
+          "suggestion": "Configurați Durata sesiunii"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English word 'logoff' is translated as 'deconectarea automată'. A more natural Romanian equivalent is simply 'deconectare'.",
-          "suggestion": "deconectare"
+          "description": "The phrase 'automatic logoff' is translated as 'deconectarea automată'. While accurate, it might be beneficial to use a more common Romanian term for 'logoff' which could be 'iesire automată'.",
+          "suggestion": "iesire automată"
         }
       ],
       "approved_at": null
@@ -266,14 +266,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"Adjust Session Lifetime\" is translated as \"Настройте Время существования сессии\". While understandable, a more natural and accurate translation might be \"Измените Продолжительность сессии\" or \"Настройте Длительность сессии\".  \"Время существования сессии\" is technically correct but sounds a bit clunky in Russian.",
-          "suggestion": "Измените Продолжительность сессии"
-        },
-        {
           "type": "formatting",
-          "description": "The translation maintains the sentence structure almost identically to the English. Consider slightly adjusting for better flow and naturalness in Russian. For example, placing \"После сохранения\" at the beginning of the second sentence.",
-          "suggestion": "После сохранения для всех пользователей будет произведен выход из системы.  Настройте Время существования сессии, чтобы определить период времени перед автоматическим выходом из системы."
+          "description": "The phrase 'Время существования сессии' (Time of Session Existence) is a literal translation and sounds unnatural in Russian. A more natural phrasing would be 'Длительность сессии'.",
+          "suggestion": "Длительность сессии"
         }
       ],
       "approved_at": null
@@ -284,18 +279,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Adjust Session Lifetime' is not accurately conveyed. 'Adjust' implies a small change, but the setting likely defines the entire lifetime. A better translation would emphasize setting or defining the duration.",
-          "suggestion": "සරල කාලසීමාව (Session Lifetime) සකසන්න (Sakasan)"
+          "description": "The translation of \"Adjust\" is somewhat literal. \"Adjust\" in this context implies setting or configuring. A more natural translation would be something like \"සකසන්න\" (sakasanne - set/configure).",
+          "suggestion": "ස්වයංක්‍රීය නික්මීම සඳහා වාරයේ ආයු කාලය සකසන්න."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word 'වාරයේ' (waaraye) is used to describe 'Session Lifetime'. While it can mean 'period,' it’s not the most natural fit.  'කාලසීමාව' (Kaalasheemaava) is a more accurate and common term for 'lifetime' or 'duration' in this context.",
-          "suggestion": "සරල කාලසීමාව (Session Lifetime)  සකසන්න (Sakasan)"
+          "description": "The phrase 'ආයු කාලය' (ayu kalaaya) while technically meaning 'lifespan', might be overly formal for 'lifetime' in this context. A simpler, more common term for 'lifetime' could be used to improve readability.",
+          "suggestion": "ස්වයංක්‍රීය නික්මීම සඳහා වාරයේ කාලසීමාව සකසන්න."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'සියලුම පරිශ්‍රීලකයින්' (siyalluma parishaalikalayin) translates to 'all users'.  While technically correct, a more common and understandable phrasing would be 'සියලු පරිශීලකයින්' (siyallu parishaalakalayin).",
-          "suggestion": "සියලු පරිශීලකයින් (siyallu parishaalakalayin)"
+          "description": "The sentence 'සුරැකීමෙන් පසු, එය සියලුම පරිශ්‍රීලකයින් සඳහා බලපායි' (surakimaen pasu, ewasa siyalluma parishreelakayin satha balaapayi) is a bit clunky. A more fluid translation would be 'සියලුම පරිශ්‍රීලකයින්ට බලපානු ඇත.'",
+          "suggestion": "සුරැකීමෙන් පසු, එය සියලුම පරිශ්‍රීලකයින්ට බලපානු ඇත."
         }
       ],
       "approved_at": null
@@ -306,8 +301,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Session Lifetime' is translated as 'Čas trvania relácie'. While technically correct, 'Dĺžka relácie' might be a more natural and commonly used term in Slovak in this context.",
-          "suggestion": "Nastavte Dĺžka relácie, aby ste definovali časový úsek pred automatickým odhlásením."
+          "description": "The translation of \"Session Lifetime\" as \"Čas trvania relácie\" is technically correct but sounds clunky and not natural in Slovak. A more natural phrasing would be something like \"Dĺžka relácie\" or \"Trvanie relácie\".",
+          "suggestion": "Consider using \"Dĺžka relácie\" or \"Trvanie relácie\" instead of \"Čas trvania relácie\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While understandable, the phrase \"všetci používatelia budú odhlásení\" is a bit formal and less idiomatic than a more conversational alternative. The passive voice can be avoided.",
+          "suggestion": "Consider rewording to something like \"Všetci používatelia sa odhlásia\"."
         }
       ],
       "approved_at": null
@@ -323,9 +323,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation starts with a capitalized word 'Подесите'. While not strictly incorrect, it's more standard to begin a descriptive sentence with a lowercase letter in UI settings descriptions.",
-          "suggestion": "подесите"
+          "type": "spelling",
+          "description": "The word 'одјављивања' is a bit awkward. While technically correct, it could be improved for better flow.",
+          "suggestion": "одјављивања"
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence 'Након чувања, одјављивање ће бити извршено за све кориснике.' could be restructured for a more natural flow in Serbian. Using a more active voice would be preferred.",
+          "suggestion": "Након чувања, сви корисници ће бити одјављени."
         }
       ],
       "approved_at": null
@@ -336,8 +341,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'odjavljivanja' is potentially incorrect. It's a verbal noun derived from 'odjaviti' (to log off), but it could be more naturally phrased.",
-          "suggestion": "Podesite Trajanje sesije kako biste definisali vremenski period pre automatskog isključenja. Nakon čuvanja, isključenje će biti izvršeno za sve korisnike."
+          "description": "The word \"odjavljivanje\" is used repeatedly. While technically correct, it's a bit clunky and can be improved for better flow. Consider alternative phrasing.",
+          "suggestion": "Consider rephrasing to use a more concise or varied vocabulary for 'logoff' such as 'istupanje iz sistema' or simply 'odjava'."
+        },
+        {
+          "type": "grammar",
+          "description": "The sentence structure could be slightly improved for a more natural flow. The phrase 'Nakon čuvanja, odjavljivanje će biti izvršeno...' is a bit passive.",
+          "suggestion": "Consider rephrasing to: 'Posle sačuvavanja, svi korisnici će biti automatski odjavljeni.'"
         }
       ],
       "approved_at": null
@@ -348,18 +358,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Adjust Session Lifetime' is translated as 'Oturum Ömrü ayarlayın'. While technically correct, a more natural and user-friendly translation would be 'Oturum süresini ayarlayın' or 'Oturumun ömrünü ayarlayın'. 'Oturum Ömrü' sounds a bit formal and technical for a user-facing setting description.",
-          "suggestion": "Oturum süresini ayarlayın"
+          "description": "The phrase 'Adjust Session Lifetime' is not accurately translated. 'Adjust' implies a range of values to select, while the Turkish translation simply states 'Oturum Ömrü ayarlayın' which is more of a setting instruction rather than an adjustment.",
+          "suggestion": "Consider a translation that implies a setting or defining a value, such as 'Oturum Ömrünü tanımlayın' or 'Oturum Ömrü süresini belirleyin'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'automatic logoff' is translated as 'otomatik oturum kapatma'.  While correct, a more common and natural phrasing in Turkish would be 'otomatik çıkış'.",
-          "suggestion": "otomatik çıkış"
+          "description": "The term 'automatic logoff' is accurately translated as 'otomatik oturum kapatma', but the overall sentence flow could be improved.",
+          "suggestion": "Consider rephrasing the sentence to improve readability, perhaps: 'Oturum Ömrü'nü ayarlayarak otomatik oturum kapatma süresini belirleyin. Kaydettikten sonra tüm kullanıcılar için oturum kapatma işlemi gerçekleşecektir.'"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'After saving, logoff will be performed for all users' is translated as 'Kaydettikten sonra tüm kullanıcılar için oturum kapatma işlemi gerçekleştirilecektir'. This is grammatically correct but a bit verbose and formal. A more concise and natural translation would be 'Kaydettikten sonra tüm kullanıcılar otomatik olarak çıkış yapacaktır'.",
-          "suggestion": "Kaydettikten sonra tüm kullanıcılar otomatik olarak çıkış yapacaktır."
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could benefit from splitting into two for improved readability in Turkish.",
+          "suggestion": "Split the second sentence for clarity."
         }
       ],
       "approved_at": null
@@ -376,8 +386,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Session Lifetime\" is translated as \"Thời gian tồn tại của Phiên\". While technically correct, a more natural and common translation for \"Session Lifetime\" in this context would be something like \"Thời lượng phiên\" or \"Thời gian phiên\".",
-          "suggestion": "Consider using \"Thời lượng phiên\" or \"Thời gian phiên\" instead of \"Thời gian tồn tại của Phiên\"."
+          "description": "The phrase \"Thời gian tồn tại của Phiên\" is a somewhat literal and slightly awkward translation of \"Session Lifetime.\" A more natural and commonly used term would be \"Thời lượng phiên\" or \"Thời gian phiên\".",
+          "suggestion": "Điều chỉnh Thời lượng phiên để xác định khoảng thời gian trước khi tự động đăng xuất. Sau khi lưu, việc đăng xuất sẽ được thực hiện cho tất cả người dùng."
         }
       ],
       "approved_at": null
@@ -388,13 +398,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"自动注销到期会话\" (automatic logout of expired sessions) isn't a direct and clear translation of \"automatic logoff.\" It's technically correct but could be misinterpreted. A more natural phrasing might be \"自动注销所有用户会话\" or \"自动注销用户会话\".",
-          "suggestion": "自动注销所有用户会话"
+          "description": "The phrase '系统将为所有用户自动注销到期会话' is not a direct and accurate translation of 'logoff will be performed for all users'. It implies a forced logout, which might not be the intended meaning. A more accurate translation would focus on the session expiring.",
+          "suggestion": "系统将在所有用户会话过期时自动注销 (Xìtǒng jiāng zài suǒyǒu yònghù huìhuà guòqí shí zìdòng zhùxiāo) - 'The system will automatically logoff all users when their sessions expire.'"
         },
         {
           "type": "formatting",
-          "description": "The translation includes the word '系统' (system). While not incorrect, it's unnecessary and makes the sentence less concise. The English doesn't specify 'system'.",
-          "suggestion": "保存设置后，所有用户会话将自动注销。"
+          "description": "While not a major issue, the sentence structure in the translation feels slightly convoluted. Splitting it into two shorter sentences could improve readability.",
+          "suggestion": "调整会话有效期，可定义自动注销的时间段。 保存设置后，系统将在所有用户会话过期时自动注销。"
         }
       ],
       "approved_at": null

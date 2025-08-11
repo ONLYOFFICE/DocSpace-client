@@ -3,7 +3,7 @@
   "content": "Show",
   "content_en_sha1_hash": "d97d1ee339e4eeaba8cac91dca37c8b4ec8f5501",
   "created_at": "2025-05-19T21:30:50.132Z",
-  "updated_at": "2025-05-21T01:59:27.499Z",
+  "updated_at": "2025-05-24T03:12:40.049Z",
   "comment": {
     "text": "This translation key \"Show\" is used to display a button that toggles the visibility of settings or parameters in a user interface. It is rendered as part of a styled link component and appears in the layout of a portal settings page. Translators should provide an equivalent word for this text that conveys the same action, such as \"Toggle\", \"Activate\", or similar words depending on the intended context.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Göstərin' is a valid Azerbaijani word meaning 'Show', it's an imperative form (command). The English 'Show' in this context likely refers to a display or option, not a direct command to someone. A more appropriate translation might be 'Rəy' (Display) or 'Təqdim et' (Present) depending on the specific UI element it describes.",
-          "suggestion": "Consider 'Rəy' or 'Təqdim et' for a more contextually accurate translation."
+          "description": "The translation 'Göstərin' is the imperative form ('Show' - command form addressed to multiple people or formally). The English 'Show' in this context (likely a UI label) is better represented by a noun or a descriptive word. A more appropriate translation would depend on the specific context of 'Show' but could be 'Qoşul', 'Əlavə et', or 'Təqdim et'.",
+          "suggestion": "Consider 'Qoşul', 'Əlavə et', or 'Təqdim et' depending on the context.  Further context is required to determine the best translation."
         }
       ],
       "approved_at": null
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Ցույց տալ\" (Tsuyts tal) literally translates to \"Show/Give to see\". While understandable, it might be too literal for a UI element like 'Show'. A more contextually appropriate translation might be \"Ցուցադրել\" (Tsutsadrel) which is closer to 'Display' or 'Present'.",
-          "suggestion": "Consider using \"Ցուցադրել\" (Tsutsadrel) for a more natural and contextually accurate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Раскрыть' (Raskryt') while technically meaning 'reveal' or 'uncover,' doesn't quite capture the intended meaning of 'Show' in the context of a Single Sign-On feature. 'Show' usually implies displaying something, or making it visible. 'Раскрыть' suggests a more profound reveal, like a secret.",
-          "suggestion": "Consider alternatives like 'Показать' (Pokazat') which directly translates to 'Show,' or 'Отобразить' (Otobrazit') which means 'Display.'"
+          "description": "The translation 'Раскрыть' (Raskryt') while technically meaning 'reveal' or 'uncover', doesn't accurately convey the meaning of 'Show' in the context of a Single Sign-On feature. 'Show' implies displaying or enabling something. 'Раскрыть' is too strong and doesn't fit the intended user interface behavior.",
+          "suggestion": "Consider alternatives like 'Показать' (Pokazat') which directly translates to 'Show,' or 'Отобразить' (Otobrazit') which means 'Display'."
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Прикажи\" is a valid Serbian (Cyrillic) word meaning \"Show\" or \"Display\", it can sound somewhat formal or commanding in many contexts. Depending on the context of \"SingleSignOn:Show\", a more natural translation might be \"Покажи\" (Pokaji), which is more common and less assertive.",
-          "suggestion": "Consider using \"Покажи\" instead of \"Прикажи\"."
+          "description": "The Serbian (Cyrillic) translation \"Прикажи\" while technically meaning 'Show', isn't the most natural or appropriate translation for a UI element labeled 'Show' in a Single Sign-On context. It sounds somewhat formal or commanding. A more user-friendly alternative might be 'Prikaži' (slightly less formal) or 'Покажи' (Pokazi, a common and natural translation for 'Show' in a user interface).",
+          "suggestion": "Consider 'Prikaži' or 'Покажи'."
         }
       ],
       "approved_at": null

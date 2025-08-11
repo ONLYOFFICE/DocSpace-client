@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { ContextMenuModel } from "../../context-menu";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface TemplateItem extends TileItem {

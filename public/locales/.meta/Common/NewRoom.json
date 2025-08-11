@@ -3,7 +3,7 @@
   "content": "New room",
   "content_en_sha1_hash": "747a74c7041456888174f7ee810ae8966dccf372",
   "created_at": "2025-05-19T21:30:46.782Z",
-  "updated_at": "2025-06-18T07:34:14.784Z",
+  "updated_at": "2025-08-11T09:02:43.819Z",
   "comment": {
     "text": "This translation key is used for the label of a button that invites users to create a new room. The button appears in various UI elements, including main buttons and folder input dialogs. It displays the text \"New room\" to guide users through the process of creating a new room.",
     "is_auto": true,
@@ -36,38 +36,38 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 657,
+      "line_number": 634,
       "context": "toggleInfoPanel={onToggleInfoPanel}\n isInfoPanelVisible={isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2852,
+      "line_number": 2868,
       "context": "? isFlowsFolder\n ? []\n : [\n {\n key: \"new-room\",\n label: t(\"Common:NewRoom\"),\n onClick: this.onCreateRoom,\n icon: CatalogRoomsReactSvgUrl,\n },\n ]\n : [",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.js",
-      "line_number": 271,
+      "line_number": 268,
       "context": "const currTags = newParams.tags.map((p) => p.name).sort();\n const isTagsChanged = !isEqual(prevTags, currTags);\n \n const editRoomParams = {\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/CreateEditRoomStore.js",
-      "line_number": 271,
+      "line_number": 268,
       "context": "const currTags = newParams.tags.map((p) => p.name).sort();\n const isTagsChanged = !isEqual(prevTags, currTags);\n \n const editRoomParams = {\n ...(isTitleChanged && {\n title: title || t(\"Common:NewRoom\"),\n }),\n ...(isDenyDownloadChanged && {\n denyDownload,\n }),\n ...(isIndexingChanged && {",
       "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/shared/selectors/Files/hooks/useRoomsHelper.tsx",
-      "line_number": 170,
-      "context": "if (withCreate && security.Create) {\n setTotal(total + 1);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType,",
-      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/selectors/Files/hooks/useSelectorState.ts",
       "line_number": 87,
       "context": "return [\n ...((withCreate && [\n {\n isCreateNewItem: true,\n label: initSelectedItemType === \"files\" ? t(\"NewFolder\") : t(\"NewRoom\"),\n id: \"create-folder-item\",\n key: \"create-folder-item\",\n hotkey: \"f\",\n onBackClick: () => {},\n },",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/selectors/utils/hooks/useRoomsHelper.tsx",
+      "line_number": 189,
+      "context": "if (withCreate && security.Create) {\n setTotal(total + 1);\n const createItem: TSelectorItem = {\n isCreateNewItem: true,\n label: createDefineRoomLabel ?? t(\"NewRoom\"),\n id: \"create-room-item\",\n key: \"create-room-item\",\n hotkey: \"r\",\n isRoomsOnly,\n createDefineRoomType,",
       "module": "/packages/shared"
     }
   ],

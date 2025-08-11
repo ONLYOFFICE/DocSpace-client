@@ -3,7 +3,7 @@
   "content": "You can archive rooms you don’t use and restore them in your {{productName}} at any moment or delete them permanently. These rooms will appear here.",
   "content_en_sha1_hash": "021a3e92d5e3d82b2290810cee0e924a1972f323",
   "created_at": "2025-05-19T21:30:55.277Z",
-  "updated_at": "2025-06-03T20:59:41.795Z",
+  "updated_at": "2025-06-02T10:20:51.019Z",
   "comment": {
     "text": "This translation key is used to display a message informing users that they can archive and restore unused rooms or delete them permanently. It appears on an empty screen when there are no files in a folder, providing users with options for managing their spaces.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
       "line_number": 101,
-      "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashEmptyDescription\");\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");\n const recentDescription = t(\"RecentViaLinkEmptyContainerDescription\");",
+      "context": "const navigate = useNavigate();\n const location = useLocation();\n \n const personalDescription = t(\"EmptyFolderDecription\");\n const emptyScreenHeader = t(\"Common:EmptyScreenFolder\");\n const archiveHeader = t(\"ArchiveEmptyScreenHeader\");\n const noFilesHeader = t(\"NoFilesHereYet\");\n const trashDescription = t(\"TrashFunctionalityDescription\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n const favoritesDescription = t(\"FavoritesEmptyContainerDescription\");",
       "module": "/packages/client"
     },
     {
@@ -39,7 +39,18 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'restore them' is not accurately translated. 'Bərpa edə' can mean 'restore' but in this context, 'yenidən yarada' or a similar phrasing would be more accurate to convey the action of bringing archived rooms back.",
+          "suggestion": "Siz {{productName}}-də istifadə etmədiyiniz otaqları arxivləşdirə və yenidən yarada və ya istənilən vaxt onları həmişəlik silə bilərsiniz."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is slightly awkward. Combining the two actions ('restore' and 'delete') into one sentence makes it harder to read.",
+          "suggestion": "Siz {{productName}}-də istifadə etmədiyiniz otaqları arxivləşdirə, istənilən vaxt bərpa edə və ya həmişəlik silə bilərsiniz. Bu otaqlar burada görünəcək."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,7 +62,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"v prostoru {{productName}}\" is an awkward translation of 'in your {{productName}}'. It implies the rooms are being restored *within* the product, rather than *to* the product.",
+          "suggestion": "Nepoužívané místnosti můžete archivovat a kdykoli je obnovit do {{productName}} nebo je trvale odstranit."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -75,7 +92,18 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"-esi\" after {{productName}} is incorrect and doesn't convey the intended meaning of \"in your [productName]\". It appears to be a mangled attempt at possessive case.",
+          "suggestion": "Voit arkistoida huoneita, joita et käytä ja palauttaa niitä {{productName}}-tilissä milloin tahansa tai poistaa ne lopullisesti. Nämä huoneet ilmestyvät tähän."
+        },
+        {
+          "type": "formatting",
+          "description": "While minor, \"-tilissä\" is a slightly more natural phrasing in Finnish for indicating a service/account.",
+          "suggestion": "No change needed if the original phrasing is strictly adhered to. Consider \"-tilissä\" for a more natural flow."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -87,7 +115,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation includes \"դրանք\" multiple times. While grammatically correct, it can sound repetitive. Consider varying the pronouns or rephrasing.",
+          "suggestion": "Review sentence structure to reduce repetition of \"դրանք\". For example, 'Դուք կարող եք արխիվացնել այն սենյակները, որոնք չեք օգտագործում, և վերականգնել դրանք ձեր {{productName}}-ում կամ ընդմիշտ ջնջել։ Այս սենյակները կհայտնվեն այստեղ: "
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +133,23 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"You can archive rooms you don’t use\" is not perfectly conveyed. While '使わないルームはアーカイブして' (used not room is archive) is understandable, it's a bit literal. A more natural phrasing might be '不要なルームはアーカイブして' (fudan na room wa aakaibu shite).",
+          "suggestion": "使わないルームはアーカイブして -> 不要なルームはアーカイブして"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'restore them in your {{productName}}' is adequately translated, but a more natural phrasing for Japanese might emphasize the action of restoring *to* the product.",
+          "suggestion": "いつでも{{productName}}に復元したり -> いつでも{{productName}}に復元できます"
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be improved for readability. Breaking it into two sentences would make it easier to process.",
+          "suggestion": "使わないルームはアーカイブして、いつでも{{productName}}に復元したり、永久に削除することができます。そのルームはここに表示されます。 -> 使わないルームはアーカイブして、いつでも{{productName}}に復元したり、永久に削除することができます。アーカイブしたルームはここに表示されます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,13 +161,30 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"restore them\" is not accurately conveyed by \"ກູ້ພວກມັນຄືນມາ\". A more appropriate translation might be \"ນຳພວກມັນຄືນມາ\" (to bring them back) or \"ຟື້ນຟູພວກມັນ\" (to restore them), depending on the desired nuance.",
+          "suggestion": "ນຳພວກມັນຄືນມາ"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'delete them permanently' is better translated with a more natural phrasing.",
+          "suggestion": "ລຶບຖິ້ມທັງໝົດ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'restore them' is translated as 'atjaunot tās'. While technically correct, 'atgūt tās' would be a more natural and commonly used translation for 'restore' in this context. 'Atjaunot' often implies a more complete restoration after damage or loss, whereas 'atgūt' implies retrieval.",
+          "suggestion": "Jūs jebkurā brīdī varat arhivēt neizmantotās telpas un atgūt tās savā {{productName}} vai neatgriezeniski izdzēst."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -147,7 +214,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The sentence 'Puteţi arhiva sălile pe care nu le folosiţi şi le restaurați...' contains a grammatical error. The verb 'restaurați' doesn't agree with 'puteți'. It should be 'puteți restaura'.",
+          "suggestion": "Puteţi arhiva sălile pe care nu le folosiţi şi le puteți restaura..."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -159,7 +232,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ඔබ භාවිත නොකරන කාමර\" (oba upayog nokaran kamar) is a literal translation of 'rooms you don’t use'. A more natural Sinhala phrasing would be something like \"ඔබ නොවන කාමර\" (oba nawa kamar) or “ඔබල පරිහරණය නොකරන කාමර”.",
+          "suggestion": "ඔබල පරිහරණය නොකරන කාමර"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation of 'restore' as “ප්‍රත්‍යර්පණයට” (pratyarpanayata) is technically correct but can be clunky. A smoother option would be something like “ නැවත ලබා ගැනීමට” (naewath laba gnetu).",
+          "suggestion": " නැවත ලබා ගැනීමට"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'delete them permanently' is translated as 'සදහටම මැකීමට' (sadahatama mekima). While understandable, “ඔබ පත්‍රිකාවලින් මකා දමන්න” (oba pathrakawalinda makadaamann) might sound more natural for permanent deletion in this context.",
+          "suggestion": "ඔබ පත්‍රිකාවලින් මකා දමන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +266,30 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'поврати' is a less common and slightly less natural word choice for 'restore' in this context. 'Вратити' would be more common and idiomatic.",
+          "suggestion": "Можете да архивирате собе које не користите и да их вратите у свој {{productName}} у било ком тренутку или да их трајно обришете. Ове собе ц́е се појавити овде."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'povratite' is a less common and somewhat archaic form. 'Vratite' would be more natural and widely understood.",
+          "suggestion": "Vratite"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence structure 'Možete da arhivirate sobe koje ne koristite i da ih povratite...' is a bit clunky. It could be improved for readability.",
+          "suggestion": "Možete arhivirati sobe koje ne koristite i vratiti ih u svoj {{productName}} u bilo kom trenutku..."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -195,7 +301,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'restore them in your {{productName}}' is a bit awkward. A more natural Ukrainian phrasing would be 'відновити їх у {{productName}}' or 'повернути їх у {{productName}}'.",
+          "suggestion": "Ви можете архівувати кімнати, які не використовуєте, та повернути їх у вашому {{productName}} у будь-який момент або видалити їх остаточно."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -207,7 +319,18 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"存档\" (archiv) is a bit technical and might not be the most natural way to describe archiving rooms in this context.  A more user-friendly term like \"备份\" (backup) or \"整理\" (organize) might be preferable, depending on the overall tone of the product.",
+          "suggestion": "Consider using a more intuitive term like \"备份\" (backup) or “整理” (organize) instead of “存档” (archiv)."
+        },
+        {
+          "type": "formatting",
+          "description": "The placement of the product name might be too close to the verb “恢复” (restore).  It might be better to separate them a bit for readability.",
+          "suggestion": "Consider adding a space or slight phrasing adjustment to separate the product name from the verb '恢复'."
+        }
+      ],
       "approved_at": null
     }
   }

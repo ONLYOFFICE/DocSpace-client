@@ -3,7 +3,7 @@
   "content": "Mark as revision",
   "content_en_sha1_hash": "81c16fba6a6aa6f91ca729e449a37cbfbe71b54e",
   "created_at": "2025-05-19T21:30:55.809Z",
-  "updated_at": "2025-05-28T09:30:02.830Z",
+  "updated_at": "2025-05-26T07:57:32.813Z",
   "comment": {
     "text": "This translation key is used to display the text \"Mark as revision\" in a version history page. It marks a file as an incomplete or updated version, and appears on a button.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 282,
+      "line_number": 284,
       "context": "//  {...onClickProp}\n t={t}\n title={\n index > 0\n ? isVersion\n ? t(\"Files:MarkAsRevision\")\n : t(\"Files:MarkAsVersion\")\n : \"\"\n }\n />\n <div className=\"version-link-box\">",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"وضع إشارة تمت مراجعته\" (Wada'u ishārah tammat muraja'atuhā) translates to 'Place a reviewed mark' or 'To put a reviewed mark'. It's a literal translation and doesn't convey the meaning of 'Mark as revision' which implies assigning a version number or marking a file as an updated revision. A more accurate translation would convey the action of creating or assigning a revision.",
-          "suggestion": "Consider alternatives like: 'تمييز كإصدار' (Tamyeez ka isdar - Mark as version) or 'تحديد كإصدار' (Tahdeed ka isdar - Define as version) or 'وضع كإصدار' (Wada'a ka isdar - Place as version)."
+          "description": "The translation 'وضع إشارة تمت مراجعته' translates to 'Place a reviewed mark' which isn't an exact equivalent of 'Mark as revision'. It implies placing a mark *onto* something, rather than designating something *as* a revision. A more accurate translation would reflect the action of designating something as a revision.",
+          "suggestion": "تحديد كإصدار (Tahdid ka-Isdar)"
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"修正マーク\" (shuusei maakku) while understandable, is a more literal translation of \"revision mark\" rather than the action \"mark as revision.\" It focuses on the mark itself, not the action of marking. A more accurate translation would capture the action.",
-          "suggestion": "検討：'改訂版としてマーク' (kaitei-ban to shite maakku) - 'Mark as revised version' or '版としてマーク' (ban to shite maakku) - 'Mark as version'."
+          "description": "The translation \"修正マーク\" while technically correct, is a descriptive label rather than an action phrase. \"Mark as revision\" implies an action being performed. A more suitable translation would be something that conveys the action of marking something as a revision, like \"改訂版としてマークする\" (Kaitei-ban toshite marku suru) or \"リビジョンとしてマークする\" (Ribijon toshite marku suru).",
+          "suggestion": "Consider alternatives like \"改訂版としてマークする\" or \"リビジョンとしてマークする\" to better reflect the action being described."
         }
       ],
       "approved_at": null
@@ -114,13 +114,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"리비전으로 표시 \" is a literal transliteration of \"revision\" and doesn't fully convey the meaning of \"Mark as revision.\" It's more of a description than an action.  The nuance of marking something *as* a revision might be lost.",
-          "suggestion": "Consider alternatives like \"수정 사항으로 표시\" (mark as modification) or \"버전으로 표시\" (mark as version). The best choice will depend on the specific context within the application."
+          "description": "The Korean translation \"리비전으로 표시 \" is a literal translation of \"as revision\". It's not the most natural or idiomatic way to express this in Korean. A more suitable translation would convey the action of marking something *as a version* or *as a revision*. The direct translation sounds awkward.",
+          "suggestion": "Consider alternatives like \"개정판으로 표시\" (as revised version) or \"버전으로 표시\" (as version). The best option depends on the precise context."
         },
         {
           "type": "formatting",
-          "description": "The translation ends abruptly without punctuation. Korean sentences generally require a terminal particle or punctuation mark.",
-          "suggestion": "Add a terminal particle like \"합니다\" or a punctuation mark (period/exclamation mark) for grammatical correctness.  e.g., \"리비전으로 표시합니다.\" or \"리비전으로 표시.\"."
+          "description": "The Korean translation lacks a trailing space, which is standard practice in Korean.",
+          "suggestion": "Add a space after the last character: \"리비전으로 표시 \" → \"리비전으로 표시 \" "
         }
       ],
       "approved_at": null
@@ -131,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ໝາຍເປັນການແກ້ໄຂ' is understandable, a more precise translation of 'Mark as revision' might be 'ບັນທຶກເປັນຮ່າງປ່ຽນແທກ' or 'ກຳມາຍເປັນຮ່າງສ້າງແກ້'. The current translation emphasizes 'แก้ไข' (correction) which may not always be the intended nuance of 'revision'.",
-          "suggestion": "ບັນທຶກເປັນຮ່າງປ່ຽນແທກ"
+          "description": "While \"ໝາຍເປັນການແກ້ໄຂ\" is understandable, a more precise translation of \"Mark as revision\" would be \"ກຳມາຍເປັນບູຮິມິການ\" or \"ໝາຍເປັນບູຮິມິການ\". \"ແກ້ໄຂ\" generally implies a correction or editing, whereas 'revision' indicates a version or update.",
+          "suggestion": "ກຳມາຍເປັນບູຮິມິການ"
         }
       ],
       "approved_at": null
@@ -155,7 +155,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Oznacz jako wersję poprawioną\" is overly literal and doesn't convey the intended meaning as smoothly as it could in Polish. While technically correct, it's a bit clunky.",
+          "description": "The translation \"Oznacz jako wersję poprawioną\" is overly literal and doesn't convey the intended meaning as concisely as it could. While technically correct, it's not the most natural phrasing in Polish for this context.",
           "suggestion": "Oznacz jako wersję"
         }
       ],
@@ -179,8 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Marcare ca revizuire' is not the most natural Romanian equivalent of 'Mark as revision'. While technically correct, it's a bit literal and could be improved.",
-          "suggestion": "Consider 'Marchează ca revizie' or 'Stabilește ca revizie'."
+          "description": "The translation 'Marcare ca revizuire' is not the most natural or accurate translation of 'Mark as revision.' While understandable, it's a literal translation. A more idiomatic translation would be 'Marchează ca revizie' or 'Setează ca revizie'.",
+          "suggestion": "Marchează ca revizie"
         }
       ],
       "approved_at": null
@@ -197,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, 'ප්‍රතිශෝධනයක් ලෙස සලකුණු කරන්න' is a literal translation and can sound somewhat formal or technical. A more natural phrasing might be more appropriate for a user interface.",
-          "suggestion": "Consider a more colloquial phrasing such as 'අලුත් සංස්කරණයක් ලෙස සලකුණු කරන්න' (New version as mark) or 'පොත්සහගත කිරීම' (Version control)"
+          "description": "While \"ප්‍රතිශෝධනයක් ලෙස සලකුණු කරන්න\" is understandable, it's a rather literal translation of \"Mark as revision.\" A more natural and idiomatic Sinhala equivalent for 'Mark as revision' would be something along the lines of \"සරල සංශෝධනය ලෙස සලකුණු කරන්න\" (sarala sanshodhana lesa salakunu karanna) which conveys the meaning of adding a simple revision.",
+          "suggestion": "සරල සංශෝධනය ලෙස සලකුණු කරන්න"
         }
       ],
       "approved_at": null
@@ -209,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Označiť ako zmenu\" is understandable, a more accurate and standard translation of \"Mark as revision\" would be \"Označit ako revíziu\". \"Revízia\" is the commonly used term for \"revision\" in Slovak in this context.",
-          "suggestion": "Označit ako revíziu"
+          "description": "While \"Označiť ako zmenu\" is understandable, a more accurate and common translation of 'Mark as revision' would be 'Označit́ ako revízia'. 'Zmena' means 'change,' while 'revízia' specifically refers to a revision or version.",
+          "suggestion": "Označit́ ako revízia"
         }
       ],
       "approved_at": null
@@ -236,13 +236,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Düzeltme olarak işaretle' is understandable, it's not the most natural or precise translation of 'Mark as revision'. 'Düzeltme' implies a correction, while 'revision' can encompass more than just corrections. A more accurate translation would convey the meaning of creating a new version or marking a file as a specific version.",
-          "suggestion": "Consider alternatives like 'Versiyon olarak işaretle' or 'Revizyon olarak işaretle'. 'Versiyon olarak işaretle' is likely the clearest and most common in a software context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

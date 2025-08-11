@@ -78,7 +78,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
       toastr.success(t("WalletToppedUp"));
       onClose();
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as unknown as string);
     } finally {
       setIsLoading(false);
     }

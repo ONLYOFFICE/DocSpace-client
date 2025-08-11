@@ -3,7 +3,7 @@
   "content": "Punycode domains are not supported",
   "content_en_sha1_hash": "53c39d1bf2e61c3a67827abbd0537b665c47fc09",
   "created_at": "2025-05-19T21:30:47.678Z",
-  "updated_at": "2025-08-07T11:27:46.512Z",
+  "updated_at": "2025-08-11T09:02:43.843Z",
   "comment": {
     "text": "This translation key is used to display an error message when a domain input by the user is not supported in its native format. It appears on a change email dialog and is triggered when the system detects a Punycode domain.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 175,
+      "line_number": 179,
       "context": "case ErrorKeys.IncorrectEmail:\n return t(\"Common:IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"Common:DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"Common:PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"Common:PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"Common:IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:",
       "module": "/packages/shared"
     }
@@ -42,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"بانيكود\" (Panikod) is a transliteration of \"Punycode\" and doesn't convey the meaning directly to an Arabic speaker familiar with technical terminology. A more accurate translation would be something like \"نطاقات بونيكود\" (nitaqaat boonikood), which retains the original term in a more phonetically appropriate way.",
-          "suggestion": "Replace \"بانيكود\" with \"بونيكود\" (boonikood)."
+          "description": "The term \"بانيكود\" is a transliteration of 'Punycode' and might not be readily understandable to all Arabic speakers. While accurate in representing the word, it lacks clarity. A more descriptive translation might be preferable.",
+          "suggestion": "Consider a translation that explains what Punycode domains are, such as \"نطاقات رموز الباني كود (لتحويل أسماء النطاقات)\" or a simplified explanation depending on the intended audience."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The addition of \"(نطاقات المحولة)\" (nitaqaat al-muhawwala) which translates to \"converted domains\" is unnecessary and confusing. It doesn't add any clarifying information and detracts from the simplicity of the message.",
-          "suggestion": "Remove \"(نطاقات المحولة)\" completely."
+          "type": "formatting",
+          "description": "The addition of \"(نطاقات المحولة)\" feels like an afterthought and interrupts the flow. If 'converted domains' is a necessary explanation, it should be integrated more naturally.",
+          "suggestion": "Rephrase the sentence to incorporate the concept of converted domains more smoothly, for example: \"نطاقات الباني كود، وهي نطاقات تم تحويلها، غير مدعومة\"."
         }
       ],
       "approved_at": null
@@ -59,8 +59,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Domen icazəsi olmayan simvollardan ibarətdir' does not accurately convey the meaning of 'Punycode domains are not supported'. It translates to something like 'It consists of symbols without permission domain'. It's a very literal and inaccurate rendering.",
-          "suggestion": "A more accurate translation would be something like 'Punikod domenləri dəstəklənmir' (Punycode domains are not supported) or 'Punikod domenləri qəbul edilmir' (Punycode domains are not accepted)."
+          "description": "The Azerbaijani translation 'Domen icazəsi olmayan simvollardan ibarətdir' does not accurately convey the meaning of 'Punycode domains are not supported'. It translates to something like 'It consists of symbols that are not allowed in domains'. This misses the specific context of Punycode.",
+          "suggestion": "A more accurate translation would be something like 'Punycode domenləri dəstəklənmir' (Punycode domains are not supported) or 'Punycode istifadə edilən domenləri dəstəkləmir' (Domains using Punycode are not supported)."
+        },
+        {
+          "type": "spelling",
+          "description": "While technically correct, the word 'domen' is a loanword from English. While commonly used, a more Azerbaijani word could be considered for greater clarity and cultural appropriateness.",
+          "suggestion": "Consider using 'sahə' or 'internet ünvanı' as alternatives to 'domen', although this may change the overall meaning slightly and requires context checking."
         }
       ],
       "approved_at": null
@@ -101,8 +106,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Paikallisia verkkotunnuksia ei tueta' translates to 'Local domains are not supported'. While technically correct, it doesn't fully capture the nuance of 'Punycode domains'. Punycode is a specific encoding method, and the translation doesn't reflect that.",
-          "suggestion": "Consider a more precise translation like 'Punycode-muotoiltuja verkkotunnuksia ei tueta' (Punycode-formatted domains are not supported) or 'Punycode-koodattuja verkkotunnuksia ei tueta' (Punycode-encoded domains are not supported)."
+          "description": "The English phrase 'Punycode domains' is not accurately conveyed by 'Paikallisia verkkotunnuksia'. 'Punycode' refers to a specific encoding method, while 'Paikallisia verkkotunnuksia' translates to 'local domains'.  While there's a connection, it doesn't fully represent the original meaning. A more precise translation might be something along the lines of 'Punycode-koodattuja verkkotunnuksia ei tueta' (Punycode-encoded domains are not supported), but this is a complex technical term.",
+          "suggestion": "Consider a more explanatory phrase if the audience isn't technically savvy.  If technical accuracy is paramount, 'Punycode-koodattuja verkkotunnuksia ei tueta' is closer, but could require additional context."
         }
       ],
       "approved_at": null
@@ -143,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ບໍ່ຮອງຮັບໂດເມນ Punycode' is a literal translation. While understandable, a more natural Lao phrasing would be preferable. The meaning is correct, but the flow isn't ideal.",
-          "suggestion": "Consider a more natural phrasing like 'ບໍ່ສາມາດໃຊ້ໂດເມນ Punycode ໄດ້' or 'ໂດເມນ Punycode ບໍ່ໄດ້ຮັບການສະຫນອງ'"
+          "description": "The Lao translation 'ບໍ່ຮອງຮັບໂດເມນ Punycode' is a literal translation. While understandable, it could be improved for natural Lao phrasing. 'ບໍ່ຮອງຮັບໂດເມນ Punycode' translates to 'Do not support Punycode domain'. A more natural phrasing might be something like 'ໂດເມນ Punycode ບໍຮັບຮອງ' (Punycode domains are not accepted) or 'ບໍອະນຸຍາດໂດເມນ Punycode' (Punycode domains are not permitted).",
+          "suggestion": "ໂດເມນ Punycode ບໍຮັບຮອງ"
         }
       ],
       "approved_at": null
@@ -191,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Домен содержит запрещенные символы\" (Domain contains forbidden characters) doesn't accurately convey the meaning of \"Punycode domains are not supported.\" Punycode domains are a specific technical concept; the translation implies a general character restriction.",
-          "suggestion": "A more accurate translation would be something like \"Поддержка доменов Punycode не предусмотрена\" (Punycode domain support is not provided) or \"Домены Punycode не поддерживаются\" (Punycode domains are not supported)."
+          "description": "The Russian translation \"Домен содержит запрещенные символы\" (Domain contains prohibited characters) does not accurately reflect the English meaning \"Punycode domains are not supported\".  Punycode domains are a specific type of domain name, and the Russian translation implies a general restriction on characters.",
+          "suggestion": "A more accurate translation would be something like \"Поддержка Punycode доменов не предусмотрена\" (Punycode domain support is not provided) or \"Punycode домены не поддерживаются\" (Punycode domains are not supported)."
         }
       ],
       "approved_at": null
@@ -203,8 +208,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"අන්තර්ජාතික වසම් සඳහා තවම සහාය නොදක්වයි\" while attempting to convey 'not supported', doesn't quite capture the nuance of 'Punycode domains'. It translates to 'International domains are not yet supported'. Punycode is a specific encoding, not just 'international domains'.",
-          "suggestion": "A more accurate translation would be something like \"පනීකෝඩ් වසම් සඳහා සහාය ලබා නොදක්වයි\" (Punikōḍa vasam sahaaya laba na dakavai) or \"පනීකෝඩ් වසම් වලට සහාය නොමැත\" (Punikoḍa vasamvala sahaaya naema)."
+          "description": "The translation 'අන්තර්ජාතික වසම් සඳහා තවම සහාය නොදක්වයි' translates to 'Currently does not support international domains'. While not entirely wrong, it's a slightly verbose and less direct translation of 'Punycode domains are not supported.' Punycode is a specific type of domain, and the translation doesn't reflect that specificity.",
+          "suggestion": "අන්තර්ජාතික වසම් (Punycode) සඳහා සහාය නොමැත"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, incorporating the English term 'Punycode' within the Sinhala translation helps clarify the specific type of domain being referred to.  This helps ensure the translation remains as precise as the original.",
+          "suggestion": "Consider adding 'Punycode' within parentheses after 'අන්තර්ජාතික වසම්'."
         }
       ],
       "approved_at": null
@@ -236,18 +246,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'desteklenmemektedir' is technically correct but sounds overly formal for this context. It's a passive, lengthy construction.",
-          "suggestion": "desteklenmiyor"
-        },
-        {
-          "type": "formatting",
-          "description": "The translated sentence is a bit long and could benefit from a slight rephrasing to improve readability, especially for a technical context.",
-          "suggestion": "Punycode alan adları desteklenmiyor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -268,8 +267,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"不支持Punycode域\" is a rather literal and somewhat awkward translation. A more natural and user-friendly translation would convey the same meaning in a more common phrasing. \"域\" can feel overly technical in this context.",
-          "suggestion": "不支持Punycode域名"
+          "description": "While technically correct, \"不支持Punycode域\" is a very literal translation and doesn't convey the naturalness of the English phrase. It sounds somewhat stiff in Chinese. A more natural translation might be something like \"不支持Punycode域名\" or \"不支持使用Punycode的域名\".",
+          "suggestion": "Consider \"不支持Punycode域名\" or \"不支持使用Punycode的域名\"."
         }
       ],
       "approved_at": null

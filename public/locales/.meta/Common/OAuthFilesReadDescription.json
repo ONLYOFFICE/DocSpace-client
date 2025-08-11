@@ -3,7 +3,7 @@
   "content": "View all files and folders",
   "content_en_sha1_hash": "2f6f7aa2eec82936c2269721d3146dc8e5649c5d",
   "created_at": "2025-05-19T21:30:47.001Z",
-  "updated_at": "2025-05-28T09:30:03.010Z",
+  "updated_at": "2025-05-26T07:57:32.997Z",
   "comment": {
     "text": "The translation key \"OAuthFilesReadDescription\" is used to display the phrase \"View all files and folders\", appearing in UI elements related to file permissions or access controls. This text likely appears on a button or dropdown menu within a file management interface. Translators should focus on providing a clear and concise message that reflects this intended use case.",
     "is_auto": true,
@@ -33,19 +33,19 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Bütün fayl və qovluqlara baxın\" is a literal translation and doesn't quite capture the nuance of \"View all files and folders\". It implies 'look at' rather than 'access' or 'view'.",
+          "suggestion": "Consider a translation that implies access or viewing, such as \"Bütün fayllara və qovluqlara daxil olun\" (Access all files and folders) or \"Bütün fayl və qovluqları görün\" (View all files and folders - slightly more formal)."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Прегледайте всички файлове и папки' is a good start but could be more accurately translated as 'Преглед на всички файлове и папки' or 'Вижте всички файлове и папки'. 'Прегледайте' implies a more thorough review than simply viewing.",
-          "suggestion": "Преглед на всички файлове и папки"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ֆայլերը' (files) could be more accurately transliterated as 'ֆայլեր' to be more consistent with common usage.",
+          "suggestion": "ֆայլեր"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -96,7 +102,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Visualizza e gestisci tutti i file e le cartelle' implies the ability to manage files and folders, which is not conveyed by the English 'View all files and folders'.  'Gestisci' (manage) is an action not present in the original.",
+          "description": "The translation 'Visualizza e gestisci tutti i file e le cartelle' implies the ability to *manage* the files and folders, while the English only specifies *viewing*. The English implies read-only access.",
           "suggestion": "Visualizza tutti i file e le cartelle"
         }
       ],
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"すべてのファイルとフォルダ\" is too literal and doesn't convey the meaning of 'View all files and folders' accurately. It simply lists the objects without indicating the action of viewing them.",
-          "suggestion": "Consider a translation like \"ファイルとフォルダの閲覧\" (Fairu to Fōrudā no Bōkyū) which translates to 'Viewing files and folders' or \"ファイルとフォルダを表示\" (Fairu to Fōrudā o Hyōji) which translates to 'Display files and folders'."
+          "description": "The Japanese translation \"すべてのファイルとフォルダ\" is a literal translation of \"all files and folders\" but lacks the nuance of describing permission or access. It doesn't convey the 'View' aspect.",
+          "suggestion": "Consider a more appropriate translation that implies the ability to view, such as \"ファイルとフォルダの閲覧\" (Fairu to Fōruda no Browsing) or \"ファイルとフォルダの表示\" (Fairu to Fōruda no Hyōji)."
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ເບິ່ງເອກະສານ ແລະ ໂຟນເດີທັງໝົດ\" translates to 'View documents and all folders'. While functionally similar, 'files' is more accurate than 'documents' in this context. 'files' specifically refers to digital files.",
-          "suggestion": "ເບິ່ງເອກະສານ ແລະ ໂຟນເດີທັງໝົດ could be improved to 'ເບິ່ງໄຟລ໌ ແລະ ໂຟນເດີທັງໝົດ' to more accurately translate 'files'."
+          "description": "The Lao translation \"ເບິ່ງເອກະສານ ແລະ ໂຟນເດີທັງໝົດ\" translates to 'View documents and all folders'. While not entirely wrong, 'ເອກະສານ' (documents) is more specific than 'files'. The English 'files' includes various types of files, not just documents. It's better to be more inclusive or use a more general term for 'files'.",
+          "suggestion": "Consider using a more general term for 'files' in Lao, such as 'ຂໍ້ມູນ' (data) or rephrasing to better encompass various file types.  For example, 'ເບິ່ງຂໍ້ມູນ ແລະ ໂຟນເດີທັງໝົດ' (View data and all folders)."
         }
       ],
       "approved_at": null
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Skatīt visus failus un mapes\" does not accurately convey the meaning of \"View all files and folders.\" 'Mapes' translates to 'folders' but isn't as direct and natural as a better alternative.",
-          "suggestion": "Skatīt visus failus un mapes/katalogus"
+          "description": "The translation 'Skatīt visus failus un mapes' is not an accurate translation of 'View all files and folders'. 'Mapes' is the Latvian word for 'maps', not 'folders'. The correct translation should use the Latvian word for 'folders'.",
+          "suggestion": "Skatīt visus failus un folders"
         }
       ],
       "approved_at": null
@@ -159,7 +165,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English content 'View all files and folders' implies the ability to see the files and folders. 'Ver todos os ficheiros e pastas' translates to 'See all files and folders,' which is a slightly less active phrasing. A more accurate translation might convey the 'view' aspect more directly.",
+          "suggestion": "Consider 'Aceder a todos os ficheiros e pastas' or 'Visualizar todos os ficheiros e pastas'."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -174,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vizualizarea fișierelor și folderelor' is a literal translation of 'Viewing files and folders.' The English phrase 'View all files and folders' implies a broader permission, not just viewing. A more accurate translation would convey the ability to see all files and folders, potentially including access.",
-          "suggestion": "Accesați toate fișierele și folderele"
+          "description": "The translation \"Vizualizarea fișierelor și folderelor\" is a literal translation of \"View all files and folders\" but doesn't quite capture the intended meaning of access and permission. \"View\" implies viewing, but \"Vizualizarea\" emphasizes the action of viewing. A better translation would convey the ability to see and interact with the files and folders.",
+          "suggestion": "Accesează fișierele și folderele"
         }
       ],
       "approved_at": null
@@ -191,9 +203,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ෆෝල්ඩර' is a transliteration and while understandable, a more common and accepted term in Sinhala for 'folder' could improve clarity and professionalism.",
-          "suggestion": "ෆෝල්ඩර් (using the English word transliterated with Sinhala letters) or  විභාගයක් (vibhaagayak) which means 'section' or 'division', depending on the context."
+          "type": "incorrect_translation",
+          "description": "The translation 'සියලුම ගොනු සහ ෆෝල්ඩර බලන්න' is a literal translation and doesn't quite capture the meaning of 'View all files and folders' in a natural Sinhala way. While technically correct, it can be improved for better user experience.",
+          "suggestion": "A more natural translation would be 'සියලු ගොනු හා ෆෝල්ඩර දැකීමට' or 'සියලු ගොණු හා ෆෝල්ඩර් බලන්න'."
         }
       ],
       "approved_at": null
@@ -210,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Poglej vse datoteke in mape' translates more literally to 'Look at all files and folders'. The original English 'View all files and folders' implies a broader permission or access, not just viewing. A better translation would reflect that.",
-          "suggestion": "Ogledi vseh datotek in map"
+          "description": "The translation 'Poglej vse datoteke in mape' is a literal translation of 'View all files and folders'. A more natural and accurate translation considering the context (access permission description) would be something like 'Ogled datotek in map' or 'Dostop do vseh datotek in map'. 'Poglej' implies a passive viewing action, while the English suggests permission to access.",
+          "suggestion": "Ogled datotek in map"
         }
       ],
       "approved_at": null
@@ -222,13 +234,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Прикажи све фајлове и фасцикле' while understandable, isn't the most natural or precise translation of 'View all files and folders.' 'Прикажи' implies 'display' or 'show,' which isn't quite the same as 'view.' A more accurate translation would convey access or ability to see.",
-          "suggestion": "Прегледај све фајлове и фасцикле"
+          "description": "The Serbian (Cyrillic) translation 'Прикажи све фајлове и фасцикле' doesn't perfectly convey the meaning of 'View all files and folders'. 'Прикажи' can imply showing something, but 'View' often implies access and permission. A more accurate translation would better reflect the concept of having access to view the files and folders.",
+          "suggestion": "Погледај све фајлове и фасцикле"
         },
         {
           "type": "spelling",
-          "description": "The word 'фасцикле' (fascikle) is used. While acceptable, 'foldere' (фолдери) would be more common in a technical context, reflecting the English terminology.",
-          "suggestion": "Прегледај све фајлове и фолдере"
+          "description": "The word 'фасцикле' is spelled correctly but might be less common or slightly formal compared to other options. Depending on the target audience, a simpler term might be preferred.",
+          "suggestion": "Погледај све фајлове и директорије"
         }
       ],
       "approved_at": null
@@ -239,8 +251,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'fascikle' is a less common and potentially archaic term for 'folders'.",
-          "suggestion": "Mapu sve fajlove i mape"
+          "description": "The word 'fascikle' is a less common and potentially outdated word for 'folders'. While technically correct, 'foldere' would be more contemporary Serbian.",
+          "suggestion": "foldere"
         }
       ],
       "approved_at": null

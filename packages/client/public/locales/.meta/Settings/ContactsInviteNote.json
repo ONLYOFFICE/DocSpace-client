@@ -1,0 +1,28 @@
+{
+  "key_path": "ContactsInviteNote",
+  "content": "Enable this option to allow invitations to be sent to new {{productName}} members through the {{sectionName}} section. Disable this option in case you want to invite new members through LDAP only.  ",
+  "content_en_sha1_hash": "cfbde54cb866b61bc9793d42952da1f2e3e3b989",
+  "created_at": "2025-06-02T10:19:19.135Z",
+  "updated_at": "2025-08-04T07:30:01.548Z",
+  "comment": {
+    "text": "This translation key is used to describe a checkbox option that enables or disables invitations to new users through the contacts section of a portal settings page. It appears in a dialog or settings panel and helps explain the purpose of sending invitation notifications to new members.",
+    "is_auto": true,
+    "updated_at": "2025-06-02T10:22:18.206Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
+      "line_number": 259,
+      "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.checkboxDescription}\n >\n {t(\"ContactsInviteNote\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

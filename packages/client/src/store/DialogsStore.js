@@ -42,6 +42,10 @@ import {
   removeLogoFromRoom,
 } from "@docspace/shared/api/rooms";
 
+/**
+ * @typedef {import("@docspace/shared/components/files-selector-input/FilesSelectorInput.types").BackupToPublicRoomOptionType } BackupToPublicRoomOptionType
+ */
+
 class DialogsStore {
   authStore;
 
@@ -52,8 +56,6 @@ class DialogsStore {
   selectedFolderStore;
 
   versionHistoryStore;
-
-  infoPanelStore;
 
   moveToPanelVisible = false;
 
@@ -304,7 +306,6 @@ class DialogsStore {
     filesStore,
     selectedFolderStore,
     versionHistoryStore,
-    infoPanelStore,
   ) {
     makeAutoObservable(this);
 
@@ -313,7 +314,6 @@ class DialogsStore {
     this.selectedFolderStore = selectedFolderStore;
     this.authStore = authStore;
     this.versionHistoryStore = versionHistoryStore;
-    this.infoPanelStore = infoPanelStore;
   }
 
   /**
@@ -376,8 +376,7 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection &&
-      !this.infoPanelStore.infoPanelSelection
+      !this.filesStore.hasBufferSelection
     )
       return;
 
@@ -405,8 +404,7 @@ class DialogsStore {
     if (
       visible &&
       !this.filesStore.hasSelection &&
-      !this.filesStore.hasBufferSelection &&
-      !this.infoPanelStore.infoPanelSelection
+      !this.filesStore.hasBufferSelection
     ) {
       console.log("No files selected");
       return;
@@ -813,6 +811,10 @@ class DialogsStore {
     this.moveToPublicRoomData = data;
   };
 
+  /**
+   * @param {boolean} visible
+   * @param {null | BackupToPublicRoomOptionType } [data]
+   */
   setBackupToPublicRoomVisible = (visible, data = null) => {
     this.backupToPublicRoomVisible = visible;
     this.backupToPublicRoomData = data;
@@ -942,11 +944,8 @@ class DialogsStore {
   };
 
   setRoomLogoCover = async (roomId) => {
-    const res = await setRoomCover(
-      roomId || this.coverSelection?.id,
-      this.cover,
-    );
-    this.infoPanelStore.updateInfoPanelSelection(res);
+    await setRoomCover(roomId || this.coverSelection?.id, this.cover);
+
     this.setRoomCoverDialogProps({
       ...this.roomCoverDialogProps,
       withSelection: true,
@@ -955,9 +954,10 @@ class DialogsStore {
   };
 
   deleteRoomLogo = async () => {
+    console.log(this.coverSelection);
     if (!this.coverSelection) return;
-    const res = await removeLogoFromRoom(this.coverSelection.id);
-    this.infoPanelStore.updateInfoPanelSelection(res);
+
+    await removeLogoFromRoom(this.coverSelection.id);
   };
 
   getLogoCoverModel = (t, hasImage, onDelete) => {
@@ -965,7 +965,7 @@ class DialogsStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        key: "upload",
+        key: "create_edit_room_upload",
         onClick: (ref) => ref.current.click(),
       },
 
@@ -973,13 +973,13 @@ class DialogsStore {
         ? {
             label: t("Common:Delete"),
             icon: TrashIconSvgUrl,
-            key: "delete",
+            key: "create_edit_room_delete",
             onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
             label: t("RoomLogoCover:CustomizeCover"),
             icon: PenSvgUrl,
-            key: "cover",
+            key: "create_edit_room_customize_cover",
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
           },
     ];

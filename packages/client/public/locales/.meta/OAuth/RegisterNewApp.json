@@ -3,7 +3,7 @@
   "content": "Register a new application",
   "content_en_sha1_hash": "a837b93db395ef80c1fdcc0f221a96f5a578b9b7",
   "created_at": "2025-05-19T21:30:53.992Z",
-  "updated_at": "2025-05-21T07:03:07.408Z",
+  "updated_at": "2025-08-04T07:30:01.446Z",
   "comment": {
     "text": "\"Register a new application\" is used as a label for a button to prompt users to create a new application. It appears in a UI component where users have access to developer tools and can interact with it when clicked.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/RegisterNewButton.tsx",
-      "line_number": 53,
-      "context": "<Button\n className=\"add-button\"\n size={\n currentDeviceType !== \"desktop\" ? ButtonSize.normal : ButtonSize.small\n }\n label={t(\"RegisterNewApp\")}\n primary\n onClick={onClick}\n />\n );\n };",
+      "line_number": 57,
+      "context": "<Button\n className=\"add-button\"\n size={\n currentDeviceType !== \"desktop\" ? ButtonSize.normal : ButtonSize.small\n }\n label={t(\"RegisterNewApp\")}\n primary\n onClick={onClick}\n isDisabled={isDisabled}\n testId=\"register_new_app_button\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Yeni tətbiqi qeydiyyatdan keçirin' is a bit literal. A more natural phrasing would be something like 'Yeni bir tətbiq yarat' or 'Yeni tətbiq qeydiyat et'.",
+          "suggestion": "Yeni bir tətbiq yarat"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Գրանցել նոր դիմում' while literally meaning 'Register new application', might not be the most natural or idiomatic way to express 'Register a new application' in Armenian. It can sound slightly formal or technical. A more user-friendly and common phrasing might be preferable.",
-          "suggestion": "Consider alternatives like 'Ստեղծել նոր հավելված' (Create new application) or 'Գրանցել նոր ծրագիր' (Register new program), depending on the context."
+          "description": "The Armenian translation 'Գրանցել նոր դիմում' literally translates to 'Register new application'. While understandable, a more natural and idiomatic translation for 'Register a new application' in Armenian would be something like 'Ստեղծել նոր հավելված' (Shtegtsel nor havelvad) or 'Հավելված գրանցել' (Havelvad granvel).",
+          "suggestion": "Consider 'Ստեղծել նոր հավելված' (Shtegtsel nor havelvad) or 'Հավելված գրանցել' (Havelvad granvel)"
         }
       ],
       "approved_at": null
@@ -138,7 +144,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Registar uma nova candidatura' is not the most natural or common way to express 'Register a new application' in Portuguese. 'Candidatura' typically refers to an application for a position or scholarship, not a software application.",
+          "description": "The translation 'Registar uma nova candidatura' doesn't fully capture the meaning of 'Register a new application'. 'Candidatura' typically refers to an application for a position or opportunity, not a software application.",
           "suggestion": "Registar uma nova aplicação"
         }
       ],
@@ -156,7 +162,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Înregistrare aplicație nouă' is technically correct but sounds slightly awkward in Romanian. A more natural phrasing would be 'Înregistrează o aplicație nouă' or 'Înregistrare aplicație nouă' (less common). The verb 'Înregistrare' as a noun isn't the most common usage in this context.",
+          "description": "While technically correct, \"Înregistrare aplicație nouă\" is a very literal translation and lacks the nuance of \"Register a new application.\" A more natural Romanian phrasing would be preferred.",
+          "suggestion": "Înregistrează o aplicație nouă"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation lacks a definite article before 'aplicație' which makes it sound slightly awkward in Romanian.",
           "suggestion": "Înregistrează o aplicație nouă"
         }
       ],
@@ -189,37 +200,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Региструјте' is spelled correctly, but might benefit from a more natural phrasing in this context.",
-          "suggestion": "Региструјте нову апликацију (or possibly 'Креирајте нову апликацију' - 'Create a new application')"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Registrujte' is misspelled. The correct spelling is 'Registruj'.",
-          "suggestion": "Registruj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yeni bir uygulama kaydet' while understandable, isn't the most natural or precise translation of 'Register a new application'. It implies a direct saving action rather than the process of registration.",
-          "suggestion": "Yeni bir uygulama kaydı yap"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

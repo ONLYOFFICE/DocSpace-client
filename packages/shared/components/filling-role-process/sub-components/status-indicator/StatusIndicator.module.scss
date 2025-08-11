@@ -23,14 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../../../styles/variables/_colors.scss";
+@use "../../../../styles/variables/colors";
 
 :global(.dark) {
   :local {
     .statusIndicator {
-      --color-completed-icon: #{$black};
-      --color-stopped-icon: #{$black};
-      --color-in-progress-icon: #{$gray-dark};
+      --color-completed-icon: #{colors.$black};
+      --color-stopped-icon: #{colors.$black};
+      --color-in-progress-icon: #{colors.$gray-dark};
     }
   }
 }
@@ -38,9 +38,9 @@
 :global(.light) {
   :local {
     .statusIndicator {
-      --color-completed-icon: #{$white};
-      --color-stopped-icon: #{$white};
-      --color-in-progress-icon: #{$gray};
+      --color-completed-icon: #{colors.$white};
+      --color-stopped-icon: #{colors.$white};
+      --color-in-progress-icon: #{colors.$gray};
     }
   }
 }
@@ -52,7 +52,7 @@
   gap: 8px;
 
   span {
-    color: $light-gray-dark;
+    color: colors.$light-gray-dark;
 
     line-height: 16px;
     font-size: 14px;
@@ -60,10 +60,10 @@
   }
 
   span[data-status="4"] {
-    color: $main-green;
+    color: colors.$main-green;
   }
   span[data-status="5"] {
-    color: $main-red;
+    color: colors.$main-red;
   }
 
   .completedIcon path {

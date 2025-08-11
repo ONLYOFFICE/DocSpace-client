@@ -50,6 +50,7 @@ import {
   TExternalResources,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
+import { TPortals } from "../api/management/types";
 import {
   size as deviceSize,
   isTablet,
@@ -285,7 +286,7 @@ class SettingsStore {
 
   baseDomain: string | null = null;
 
-  portals: string[] = [];
+  portals: Nullable<TPortals[]> = null;
 
   domain = null;
 
@@ -740,19 +741,19 @@ class SettingsStore {
   get downloaddesktopUrl() {
     return this.siteDomain && this.siteEntries?.downloaddesktop
       ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforandroidUrl() {
     return this.siteDomain && this.siteEntries?.officeforandroid
       ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
-      : this.siteDomain;
+      : null;
   }
 
   get officeforiosUrl() {
     return this.siteDomain && this.siteEntries?.officeforios
       ? `${this.siteDomain}${this.siteEntries.officeforios}`
-      : this.siteDomain;
+      : null;
   }
 
   get forumLinkUrl() {
@@ -842,7 +843,7 @@ class SettingsStore {
     this.baseDomain = domain;
   };
 
-  setPortals = (portals: string[]) => {
+  setPortals = (portals: TPortals[]) => {
     this.portals = portals;
   };
 
@@ -1028,7 +1029,9 @@ class SettingsStore {
     this.setAdditionalResourcesData(res);
     this.setAdditionalResourcesIsDefault(res.isDefault);
 
-    this.getSettings();
+    if (!this.isFirstLoaded && !this.isLoading) {
+      this.getSettings();
+    }
   };
 
   getPortalCultures = async () => {
@@ -1077,6 +1080,7 @@ class SettingsStore {
 
     this.setCompanyInfoSettingsData(res);
     this.setCompanyInfoSettingsIsDefault(res.isDefault);
+    this.getSettings();
   };
 
   getWhiteLabelLogoUrls = async () => {

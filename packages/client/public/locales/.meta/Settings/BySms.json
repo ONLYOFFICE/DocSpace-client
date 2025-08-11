@@ -3,7 +3,7 @@
   "content": "By sms",
   "content_en_sha1_hash": "acc6f325b621aed5a550cdbfdbb67f90a0376976",
   "created_at": "2025-05-19T21:30:50.858Z",
-  "updated_at": "2025-06-18T07:34:15.197Z",
+  "updated_at": "2025-08-04T07:30:01.554Z",
   "comment": {
     "text": "\"This translation key is used for the label 'By sms' which is displayed on a Two-Factor Authentication (TFA) setting in the Portal Settings. It appears as a category title and is likely used in a security access portal.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 218,
-      "context": "value: \"none\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {\n id: \"by-sms\",\n label: t(\"BySms\"),\n value: \"sms\",\n disabled: !smsAvailable,\n }, */\n {\n id: \"by-app\",",
+      "line_number": 221,
+      "context": "dataTestId: \"tfa_radio_button_disabled\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {\n id: \"by-sms\",\n label: t(\"BySms\"),\n value: \"sms\",\n disabled: !smsAvailable,\n }, */\n {\n id: \"by-app\",",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +27,18 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'عن طريق الرسائل القصيرة' is a literal translation of 'By sms', it's a bit verbose for a setting label. A more concise and natural translation would be better.",
+          "suggestion": "رسائل قصيرة (Rasael Qasira) - meaning 'Short Messages'"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation is a full sentence, while settings labels often benefit from brevity. A shorter, more direct phrase would improve clarity and user experience.",
+          "suggestion": "رسائل قصيرة (Rasael Qasira)"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Sms vasitəsilə\" is understandable, it's a slightly awkward and literal translation of \"By sms.\" A more natural and idiomatic translation would be something like \"SMS ilə\" or \"SMS üsulu ilə\". \"Vasitəsilə\" is more commonly used for methods or means, not simply the means of communication.",
-          "suggestion": "SMS ilə"
+          "description": "While \"Sms vasitəsilə\" is understandable, it's not the most natural or common way to say \"By sms\" in Azerbaijani. It's a bit literal.",
+          "suggestion": "Consider alternatives like \"Sms ilə\" or \"Sms yolu ilə\".  \"Sms ilə\" is often the most concise and preferred option."
         }
       ],
       "approved_at": null
@@ -99,13 +110,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically accurate, 'smsで' is a very literal translation. A more natural Japanese phrasing would depend on the context.  Without further context, a more suitable translation could be something like \"SMS経由で\" (SMS kyū yō de) or simply \"SMSにて\" (SMS ni te).",
-          "suggestion": "Consider \"SMS経由で\" or \"SMSにて\" depending on context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -114,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'SMS 이용' while technically correct, doesn't fully capture the nuance of 'By sms'. 'By sms' implies using SMS as a method. 'SMS 이용' simply means 'SMS usage'. A more accurate translation might be 'SMS를 통한' or 'SMS를 사용하여'.",
-          "suggestion": "SMS를 통한"
+          "description": "The translation 'SMS 이용' while literally meaning 'Use of SMS', doesn't quite capture the nuance of 'By sms' which indicates method or means. It's a functional translation but not an ideal one.",
+          "suggestion": "문자 메시지 이용 (munja mesiji 이용) - 'Use of text message' or 방법 (bangbeop) - 'by method/way' depending on the context within the settings."
         }
       ],
       "approved_at": null
@@ -126,8 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຈາກຂໍ້ຄວາມ\" while literally meaning \"from message\", is not the common or idiomatic way to say \"by sms\" in Lao. A more accurate translation would convey the method of sending, such as 'ທາງຂໍ້ຄວາມ' (through message) or 'ສົ່ງທາງຂໍ້ຄວາມ' (send via message).",
-          "suggestion": "ທາງຂໍ້ຄວາມ or ສົ່ງທາງຂໍ້ຄວາມ"
+          "description": "The Lao translation \"ຈາກຂໍ້ຄວາມ\" (jak khong khaw khwam) literally translates to 'from message'. While it conveys the general idea of receiving something via SMS, it's not the most accurate or natural translation of 'By sms'. A more direct and accurate translation would be something like \"ທາງຂໍ້ຄວາມ\" (thang khaw khwam) which means 'via SMS' or 'through SMS'.",
+          "suggestion": "ທາງຂໍ້ຄວາມ"
         }
       ],
       "approved_at": null
@@ -150,13 +155,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Za pośrednictwem wiadomości SMS' is too formal and lengthy for a simple setting label like 'By sms'. A more natural and concise translation would be preferable.",
+          "description": "While technically correct, \"Za pośrednictwem wiadomości SMS\" is quite formal for a settings option. A more natural and concise translation would be better.",
           "suggestion": "Przez SMS"
         },
         {
           "type": "formatting",
-          "description": "The translation uses a slightly longer phrase which might not fit well in the UI element where this setting is displayed. The translated phrase may need to be truncated.",
-          "suggestion": "Consider using a shorter alternative, such as 'SMS' or 'Przez SMS' to avoid truncation issues."
+          "description": "The translation is quite long for a settings label. Consider brevity.",
+          "suggestion": "Przez SMS"
         }
       ],
       "approved_at": null
@@ -191,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කෙටි පණිවිඩයකින්' while literally meaning 'by a short message', doesn't perfectly capture the intended meaning of 'By sms' in this context. It's a bit too verbose and formal. A more natural and concise translation would be something like 'SMS' or 'දුරකථන පණිවිඩය' (durakathana panividaya - mobile message).",
-          "suggestion": "Consider using 'SMS' or 'දුරකථන පණිවිඩය' (durakathana panividaya)."
+          "description": "While \"කෙටි පණිවිඩයකින්\" (keti paniwidayakin) translates to 'by a short message', it's a bit verbose for \"By sms\". A more direct and common translation would be \"SMS යින්\" (SMS yin).",
+          "suggestion": "SMS යින්"
         }
       ],
       "approved_at": null
@@ -200,13 +205,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Prostredníctvom SMS' is a valid translation, 'cez SMS' or 'SMSom' would be more common and natural-sounding in Slovak in this context. 'Prostredníctvom SMS' is more formal and less frequently used in user interface settings.",
-          "suggestion": "cez SMS"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -227,7 +226,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Preko sms-a' is understandable, a more natural and precise translation of 'By sms' in this context would be 'Putem sms-om'. 'Preko' often implies 'through' or 'over', which isn't the intended meaning in this case, suggesting the setting uses SMS.",
+          "description": "While 'Preko sms-a' is understandable, it's not the most natural or idiomatic translation of 'By sms'. A more accurate and commonly used translation would be 'Putem sms-om'.",
           "suggestion": "Putem sms-om"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Edit color scheme",
   "content_en_sha1_hash": "e4b8ec853d190dec813a72518343f018e0a210e4",
   "created_at": "2025-05-19T21:30:51.466Z",
-  "updated_at": "2025-05-28T09:30:02.493Z",
+  "updated_at": "2025-08-04T07:30:01.295Z",
   "comment": {
     "text": "EditColorScheme is used in settings pages to display a button that allows users to edit their color scheme. It appears as \"Edit Color Scheme\" and is likely part of a UI element such as a dialog or settings panel, allowing users to modify their appearance preferences.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 83,
+      "line_number": 85,
       "context": "const defaultAppliedColorButtons = currentColorScheme.main.buttons;\n \n const isMobileView = currentDeviceType === DeviceType.mobile;\n \n const headerAddTheme = t(\"Settings:NewColorScheme\");\n const headerEditTheme = t(\"Settings:EditColorScheme\");\n \n const checkImgHover = (\n <ReactSVG className=\"check-hover\" src={CheckWhiteSvgUrl} />\n );",
       "module": "/packages/client"
     }
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Επεξεργασία χρωμάτων' literally means 'Color Processing' or 'Color Editing'. While not entirely wrong, it doesn't perfectly convey the meaning of 'Edit color scheme'. A more accurate translation would focus on the concept of 'color scheme' itself.",
-          "suggestion": "Επεξεργασία προτύπου χρωμάτων (Edit color scheme)"
+          "description": "The translation \"Επεξεργασία χρωμάτων\" literally translates to \"Color editing.\" While related, \"Edit color scheme\" implies a broader scope, referring to the overall color scheme settings, not just the act of editing colors.",
+          "suggestion": "Επεξεργασία χρωματικού συνόλου"
         }
       ],
       "approved_at": null
@@ -72,7 +72,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Editar combinación de colores\" is understandable, \"Editar esquema de color\" would be a more accurate and standard translation for 'Edit color scheme'. \"Combinación\" implies a blend or mixture, whereas 'esquema' directly refers to a color scheme or palette.",
+          "description": "While \"Editar combinación de colores\" is understandable, it's not the most natural or common translation for \"Edit color scheme.\" \"Esquema de color\" is a more direct and widely used term for 'color scheme'.",
           "suggestion": "Editar esquema de color"
         }
       ],
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Խմբագրել գունավորումը\" is a literal translation of \"Edit color scheme\", it might not be the most natural or idiomatic way to express the concept in Armenian. A more user-friendly translation might be 'Գունային ծաղկաձևի խմբագրում' (Gunayin tsaghakadzi hamargrum) or 'Գունատոնի փոփոխություն' (Gunatoni popoxutyun).",
+          "suggestion": "Consider 'Գունային ծաղկաձևի խմբագրում' or 'Գունատոնի փոփոխություն' for a more natural phrasing."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -102,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Modifica la combinazione di colori' is a literal translation of 'Edit color scheme' but doesn't quite capture the intended meaning. 'Color scheme' refers to a pre-defined set of colors used for design and user interface, not just any combination.",
+          "description": "The translation 'Modifica la combinazione di colori' is a functional equivalent but not the most natural or accurate translation of 'Edit color scheme'. While 'combinazione di colori' means 'color combination', 'Edit' implies a more direct modification or adjustment.",
           "suggestion": "Modifica lo schema colori"
         }
       ],
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Editare schemă culori\" is a literal translation but sounds awkward. A more natural Romanian phrasing would be \"Modificare schemă culori\" or \"Schimbă schema de culori\". \"Editare\" implies a more complex editing process than is usually implied by \"Edit\".",
-          "suggestion": "Modificare schemă culori"
+          "description": "The translation 'Editare schemă culori' is a literal translation but sounds slightly awkward in Romanian. A more natural phrasing would be 'Modificare schemă de culori' or 'Personalizare schemă de culori'.",
+          "suggestion": "Modificare schemă de culori"
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වත්මන් තේමාව සංස්කරණය' translates to 'Edit current theme'. While close, the English content refers to editing a color scheme, not necessarily the current one. 'ColorScheme' implies more than just the overall theme.",
-          "suggestion": "වරණ පේලිය සංස්කරණය කරන්න"
+          "description": "The translation 'වත්මන් තේමාව සංස්කරණය' (Vathman themeawa sanskaranya) literally translates to 'Edit current theme'. While functionally close, 'Edit color scheme' implies a broader scope than just the current theme. A more accurate translation would capture the concept of color scheme editing, not just theme editing.",
+          "suggestion": "වැඩරູບ පාටల පද්ධතිය සංස්කරණය (Wedarupa pata lathiyama sanskaranya) - 'Edit color scheme'"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Contact email",
   "content_en_sha1_hash": "726a1ceebd2e32d2524d492e882bb6cd64700879",
   "created_at": "2025-05-19T21:30:57.254Z",
-  "updated_at": "2025-05-28T09:30:02.894Z",
+  "updated_at": "2025-05-26T07:57:32.880Z",
   "comment": {
     "text": "Recover Contact Email Placeholder: This translation key is used to display \"Contact email\" when a user attempts to recover their contact information in the login process. It appears in a dialog box that prompts users to enter or recover their recovery contact details. Translators should provide a relevant phrase for this context.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation \"تواصل بالبريد الاكتروني\" is a literal translation of \"Contact by email\". The intended meaning is a placeholder for an email address, so a more appropriate translation would be something like \"بريد الكتروني\" (email address) or \"عنوان بريد الكتروني\" (email address).",
+          "suggestion": "بريد الكتروني"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Əlaqə üçün e-poçt ünvanı' is too literal. A more natural translation of 'Contact email' would be something like 'E-poçt' or 'E-poçt ünvanı'.",
+          "suggestion": "E-poçt"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -45,19 +57,37 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Kontaktní emailová adresa\" is more literal and verbose than the original \"Contact email\". While technically correct, it's not the most natural or user-friendly phrasing in Czech. A more idiomatic translation might be \"Email\" or \"Emailová adresa\".",
+          "suggestion": "Email"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'E-Mail-Adresse' is too literal and doesn't fit the context of a placeholder for recovering a contact email. It means 'Email Address' in general, not specifically a contact email.",
+          "suggestion": "A better translation would be something like 'Kontakt-E-Mail-Adresse' or 'E-Mail-Adresse für Kontakt'."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Email επικοινωνίας\" is a literal translation of 'Contact email' and, while understandable, might sound slightly unnatural in a typical user interface context. A more natural phrasing would be something like 'Διεύθυνση email επικοινωνίας' or simply 'Email επικοινωνίας'.",
+          "suggestion": "Consider 'Διεύθυνση email επικοινωνίας' or 'Email επικοινωνίας' depending on the UI context."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -69,7 +99,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sähköposti yhteydenottoa varten' is too literal and not the typical way to refer to a contact email placeholder in Finnish. It translates to 'Email for contact'.",
+          "suggestion": "A more natural translation would be 'Yhteystiedot' or 'Oma sähköposti'."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,7 +117,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Կոնտակտային էլ. փոստ' is a literal transcription and doesn't fully convey the meaning of 'Contact email' in the context of a placeholder. It feels somewhat awkward.",
+          "suggestion": "Consider 'Էլեկտրոնային փոստի հասցե' (Electronic mail address) or 'Էլ. փոստ' (shortened version, but needs context to be clear). A more natural phrasing might be 'Համարձրեք էլ. փոստ' (Enter email)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +141,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation \"연락처 이메일\" is a literal translation of \"Contact email.\" While understandable, a more natural and user-friendly translation might be \"이메일 주소\" (email address) or \"이메일\" (email).",
+          "suggestion": "이메일 주소 or 이메일"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,19 +159,37 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'E-pasts saziņai' is understandable, it's a somewhat literal and not the most natural translation of 'Contact email'. A more idiomatic translation would be 'Sazinieties pa e-pastu' or simply 'E-pasts'.",
+          "suggestion": "Sazinieties pa e-pastu"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Contact e-mail' is a direct transliteration and doesn't flow naturally in Dutch. The more idiomatic translation would be 'Contact e-adres'.",
+          "suggestion": "Contact e-adres"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'E-mail kontaktowy' is understandable, it's not the most natural or idiomatic translation of 'Contact email' in Polish. A more common and natural phrasing would be 'Adres e-mail kontaktowy' or simply 'Adres e-mail'.",
+          "suggestion": "Adres e-mail kontaktowy"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -147,13 +213,30 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation is overly verbose and doesn't capture the conciseness of the English placeholder. A placeholder should be short and easily editable.",
+          "suggestion": "Электронная почта"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation includes \"с Вами\" which isn't necessary in a placeholder and adds unnecessary length. It makes it sound like a full sentence rather than a placeholder.",
+          "suggestion": "Removed 'с Вами'"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'වි-තැපැල් ලිපිනය' is a literal transliteration of 'email address' rather than a natural translation of 'Contact email'. It's too literal and awkward.",
+          "suggestion": "Possible better translations include: සම්බන්ධතා විද්‍යුත් ලිපිනය (sampandata widyut lipinaya) or විද්‍යුත් ලිපිනය (vidyut lipinaya) - depending on the desired level of formality and context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +254,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Контакт емаил' is a transliteration of 'Contact email' and not a proper Serbian translation. It misses the Serbian word for 'email', which would be 'е-маил'.",
+          "suggestion": "Контакт е-маил"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Kontakt email\" is a direct transliteration of the English phrase and doesn't reflect idiomatic Serbian. A more natural translation would be 'E-mail adresa' or 'E-pošta'.",
+          "suggestion": "E-mail adresa"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

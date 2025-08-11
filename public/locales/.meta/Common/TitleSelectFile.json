@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:49.307Z",
-  "updated_at": "2025-06-18T07:34:15.015Z",
+  "updated_at": "2025-08-04T07:30:01.264Z",
   "comment": {
     "text": "The translation key \"TitleSelectFile\" is used to display a file selection title in various places within the application. It appears as the label for checkboxes and dropdown menus related to file management, guiding users to select a file.",
     "is_auto": true,
@@ -17,9 +17,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/components/table/TableGroupMenu.tsx",
-      "line_number": 111,
-      "context": "className=\"table-container_group-menu-combobox not-selectable\"\n options={[]}\n selectedOption={{} as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"Common:TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={() => {}}\n />\n ) : null}\n <div className=\"table-container_group-menu-separator\" />",
+      "file_path": "/packages/shared/components/table/table-group-menu/TableGroupMenu.tsx",
+      "line_number": 120,
+      "context": "className={classNames(styles.combobox, \"not-selectable\")}\n options={[]}\n selectedOption={{} as TOption}\n manualY=\"42px\"\n manualX=\"-32px\"\n title={t(\"Common:TitleSelectFile\")}\n isMobileView={isMobileView}\n onSelect={() => {}}\n />\n ) : null}\n <div",
       "module": "/packages/shared"
     }
   ],

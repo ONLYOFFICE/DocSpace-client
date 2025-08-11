@@ -37,6 +37,11 @@ declare module "*.svg?url" {
   export default SVGUrl;
 }
 
+declare module "*.gif" {
+  const content: string;
+  export default content;
+}
+
 declare global {
   type TStore = typeof store;
 

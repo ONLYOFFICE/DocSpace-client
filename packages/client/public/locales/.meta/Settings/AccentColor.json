@@ -3,7 +3,7 @@
   "content": "Accent",
   "content_en_sha1_hash": "233064dd90bda7ca4c1a71b0aa16595cce74a940",
   "created_at": "2025-05-19T21:30:50.279Z",
-  "updated_at": "2025-05-28T09:30:02.499Z",
+  "updated_at": "2025-08-04T07:30:01.303Z",
   "comment": {
     "text": "The \"AccentColor\" translation key defines the text used to display \"Accent\" in a color scheme dialog, likely indicating the current accent color chosen. This text appears on a sub-component of the PortalSettings categories page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/colorSchemeDialog.js",
       "line_number": 156,
-      "context": "className=\"new-colors-container\"\n currentColorAccent={currentColorAccent}\n currentColorButtons={currentColorButtons}\n >\n <div className=\"flex relative\">\n <div className=\"name-color\">{t(\"Settings:AccentColor\")}</div>\n <div\n id=\"accent\"\n className=\"modal-add-theme accent-box\"\n onClick={onClickColor}\n />",
+      "context": "className=\"new-colors-container\"\n currentColorAccent={currentColorAccent}\n currentColorButtons={currentColorButtons}\n >\n <div className=\"flex relative\">\n <div className=\"name-color\">{t(\"Settings:AccentColor\")}</div>\n <div\n id=\"accent\"\n className=\"modal-add-theme accent-box\"\n data-testid=\"color_scheme_dialog_accent\"\n onClick={onClickColor}",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'لهجة' (lahja) translates to 'dialect' or 'accent' in a broader sense, but it doesn't convey the specific meaning of 'Accent' as in a color accent or theme color within settings. It's too general.",
-          "suggestion": "Consider a more precise translation like 'لون ثانوي' (lawn thanawi) meaning 'secondary color' or 'highlight color'. Alternatively, if there’s no perfect equivalent, keeping the English term 'Accent' might be preferable."
+          "description": "The Arabic translation \"لهجة\" (lahjah) translates to \"dialect\" or \"accent\" in a broader sense, but it doesn't convey the specific meaning of 'Accent' as in a UI color accent.  It’s not the best translation for a user interface setting.",
+          "suggestion": "Consider alternatives like \"لون ثانوي\" (lawn thanawi - secondary color), \"لون مميز\" (lawn mumayyiz - distinctive color), or a transliteration if a suitable equivalent doesn't exist.  Further context regarding the usage of 'Accent' would help determine the most accurate translation."
         }
       ],
       "approved_at": null
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Vurğu' while technically meaning 'accent' or 'emphasis' doesn't accurately convey the meaning of 'Accent' in the context of a UI color setting. It's more appropriate for a linguistic accent.",
-          "suggestion": "Consider using 'Rəng Skeması' (Color Scheme) or 'Rəngləmə' (Coloring) as a more appropriate translation depending on the exact UI context. A more literal translation like 'Nübarə Rəngi' (Highlight Color) might also work."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -72,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Προφορά\" (Pronfora) means 'pronunciation,' not 'accent' in the context of a UI color theme. It's a semantic mismatch.",
-          "suggestion": "Consider \"Έμφαση\" (Emphasis) or \"Χρώμα έμφασης\" (Emphasis Color) as alternatives, depending on the desired nuance. A more literal, though less common, option could be \"Χρώμα αναδείξεως\" (Color of Highlight)."
+          "description": "The Greek translation \"Προφορά\" (Pronfora) means \"Pronunciation\", not \"Accent\" in the context of a UI element like an accent color.",
+          "suggestion": "A more appropriate translation would be something like \"Χρώμα έμφασης\" (Chroma emfasis) which translates to \"Emphasis color\" or \"Highlight color\"."
         }
       ],
       "approved_at": null
@@ -99,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation \"Շեշտ\" (Shesht) translates to 'accent' in the general sense, but in this context (Settings:AccentColor), it doesn't fully capture the meaning of 'Accent' as a color theme or highlight color. A more appropriate translation would depend on the specific nuance intended in the UI.",
-          "suggestion": "Consider alternatives like \"Գունավորման Շեշտ\" (Gunavoram Shesht - Color Accent) or researching common UI terminology for 'accent color' in Armenian."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -126,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '강조' while meaning 'emphasis' or 'highlight,' doesn't perfectly capture the meaning of 'Accent' in the context of a UI color theme. 'Accent' refers to a color used to draw attention to specific elements. A more accurate translation might be '포인트 색상' or '주요 색상'.",
-          "suggestion": "포인트 색상 or 주요 색상"
+          "description": "The Korean translation '강조' while meaning 'emphasis' or 'highlight', doesn't directly translate 'Accent' in the context of a UI setting. 'Accent Color' typically refers to a color used to highlight UI elements, and a more appropriate translation might be something closer to '포인트 색상' (point color) or '활용색' (usage color).",
+          "suggestion": "Consider '포인트 색상' or '활용색' for a more accurate translation reflecting the UI context."
         }
       ],
       "approved_at": null
@@ -165,7 +153,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Acento' is a valid Portuguese word, it doesn't fully capture the meaning of 'Accent' in the context of a user interface setting (e.g., a color accent). A more suitable translation would convey the idea of an emphasized color or a highlight color.",
+          "suggestion": "Consider using 'Cor de Destaque' or 'Cor Primária' depending on the specific visual design."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -186,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"උදාත්තය\" (udataaya) doesn't accurately convey the meaning of \"Accent\" in the context of a UI color setting. 'Accent' typically refers to a highlight or emphasis color. 'උදාත්තය' translates to 'emphasis' or 'stress' which isn't the intended meaning.",
-          "suggestion": "A more suitable translation might be something like \"ප්‍රවර්ගපාත්‍රය\" (prawaargapaatraya) which means 'highlight color' or \"විශේෂා පාත්‍රය\" (visheshaapaatraya) which means 'special color'."
+          "description": "The Sinhala translation \"උදාත්තය\" (udattaaya) while technically meaning 'accent' or 'emphasis', isn't the most natural or common translation for 'Accent' in the context of a user interface setting like 'Accent Color'. It carries a more literary or grammatical connotation.",
+          "suggestion": "Consider a more common and contextually appropriate translation such as \"වண்ணය\" (vannaya) meaning 'color' or \"තිරසාරය\" (thirasaaray) meaning 'highlight' or 'accentuation', depending on the intended meaning in the UI."
         }
       ],
       "approved_at": null
@@ -210,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Истакнутост\" while grammatically correct, doesn't accurately convey the meaning of \"Accent\" in the context of a UI color setting. \"Accent\" refers to a highlight color, and \"Истакнутост\" translates to \"prominence\" or \"emphasis\", which is a different concept.  A better translation might be something closer to 'Наглашени боја' (Naglašeni boja) or 'Акцентна боја' (Akcentna boja).",
-          "suggestion": "Consider 'Наглашени боја' (Naglašeni boja) or 'Акцентна боја' (Akcentna boja)."
+          "description": "The Serbian (Cyrillic) translation \"Истакнутост\" while technically meaning 'prominence' or 'highlight', is not the most natural or commonly used translation for 'Accent' in the context of UI/UX settings (like an accent color). It's a bit formal and uncommon.",
+          "suggestion": "Consider \"Наглашени боја\" (Naglaseni boja) which more closely translates to 'highlighted color' or 'emphasis color' and is more commonly used in Serbian UI/UX contexts. Alternatively, 'Акцентирана боја' (Akcentirana boja) could also be suitable as it directly uses the word 'accent'."
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Istaknutost\" doesn't accurately convey the meaning of \"Accent\" in the context of a UI color setting. \"Istaknutost\" translates to prominence or emphasis, which isn't the intended meaning.",
-          "suggestion": "Consider a more appropriate translation such as \"Naglasak\" (Emphasis) or \"Boja Isticanja\" (Highlight Color) depending on the desired level of formality and precision."
+          "description": "The Serbian translation \"Istaknutost\" doesn't accurately convey the meaning of \"Accent\" in the context of UI color settings. \"Istaknutost\" translates to prominence or emphasizedness, which isn't the intended meaning.",
+          "suggestion": "Consider alternatives like \"Akcentna boja\" (Accent color), \"Naglasak\" (Emphasis), or a more descriptive phrase depending on the specific UI function."
         }
       ],
       "approved_at": null
@@ -234,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation \"Ara değer\" does not accurately reflect the meaning of \"Accent\" in the context of a user interface setting. \"Accent\" refers to a highlight color used to emphasize UI elements. \"Ara değer\" translates to 'intermediate value' or 'intermediate color' which is not suitable.",
-          "suggestion": "Consider translations like \"Vurgu Rengi\" (Emphasis Color), \"Aksan Rengi\" (Accent Color - transliteration), or \"Öne Çıkan Renk\" (Highlight Color)."
+          "description": "The Turkish translation \"Ara değer\" does not accurately convey the meaning of \"Accent\" in the context of \"Settings:AccentColor\". \"Accent\" refers to a color used to highlight UI elements, and \"Ara değer\" translates to 'intermediate value' or 'selection value,' which is not an appropriate equivalent.",
+          "suggestion": "Consider alternatives like \"Vurgu Rengi\" (Emphasis Color), \"Ek Renk\" (Additional Color), or \"Tema Rengi\" (Theme Color), depending on the specific meaning intended within the settings."
         }
       ],
       "approved_at": null
@@ -246,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Акцентний колір' is technically correct, it's a very literal and somewhat clunky translation of 'Accent'. A more natural and idiomatic Ukrainian translation would be more concise and aligned with the context of a settings menu (likely referring to a color highlight).",
-          "suggestion": "Розгляньте варіанти, як 'Колір акценту' або просто 'Акцент'. The best choice depends on how it is used in the interface."
+          "description": "The translation 'Акцентний колір' literally translates to 'Accent Color'. While technically correct, it's a very literal and potentially clunky translation for a user interface setting. A more natural and concise translation might be preferable.",
+          "suggestion": "Розділити колір"
         }
       ],
       "approved_at": null
@@ -258,8 +252,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'Nhấn mạnh' while literally meaning 'emphasis,' doesn't accurately convey the meaning of 'Accent' in this context (likely referring to an accent color). It's a common UI/UX term with a specific meaning.",
-          "suggestion": "Consider using a term like 'Màu nhấn' or 'Màu sắc nổi bật' depending on the desired level of formality and precision. Researching existing Vietnamese UI/UX terminology for 'accent color' would be ideal."
+          "description": "The translation 'Nhấn mạnh' while conveying a sense of emphasis, doesn't accurately reflect the meaning of 'Accent' in the context of a UI color setting. 'Accent' in this context refers to a color that highlights or contrasts with other colors. A better translation would be something that reflects that visual distinction.",
+          "suggestion": "Màu nổi bật"
         }
       ],
       "approved_at": null
@@ -267,7 +261,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"强调\" (qiángdiào) for \"Accent\" in the context of 'Settings:AccentColor' is not the most accurate. While '强调' means 'emphasize,' 'AccentColor' refers to a color used to highlight elements of the user interface. A more appropriate translation would be something like \"强调色\" (qiángdiào sè) or simply \"强调\" with a footnote explaining the specific meaning.",
+          "suggestion": "Consider \"强调色\" (qiángdiào sè) or \"强调\" with an explanatory note."
+        }
+      ],
       "approved_at": null
     }
   }

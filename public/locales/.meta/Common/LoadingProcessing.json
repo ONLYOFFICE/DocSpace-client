@@ -3,7 +3,7 @@
   "content": "Loading...",
   "content_en_sha1_hash": "b04ba49f848624bb97ab094a2631d2ad74913498",
   "created_at": "2025-05-19T21:30:46.280Z",
-  "updated_at": "2025-06-18T07:34:15.319Z",
+  "updated_at": "2025-08-04T07:30:01.646Z",
   "comment": {
     "text": "This translation key is used to display a loading message when an operation is in progress. It appears on various buttons, including confirm and continue buttons, as well as a registration form button, and is intended to provide visual feedback to the user that something is happening behind the scenes.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 243,
+      "line_number": 228,
       "context": "scale\n primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"SetAppButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaAuth/page.client.tsx",
-      "line_number": 190,
+      "line_number": 175,
       "context": "primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading\n ? t(\"Common:LoadingProcessing\")\n : t(\"Common:ContinueButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/RegistrationForm.tsx",
-      "line_number": 285,
-      "context": "id=\"register-singup\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale={true}\n label={isLoading ? t(\"Common:LoadingProcessing\") : t(\"SignUp\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
+      "line_number": 284,
+      "context": "id=\"register-singup\"\n className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={isLoading ? t(\"Common:LoadingProcessing\") : t(\"SignUp\")}\n tabIndex={1}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 650,
+      "line_number": 654,
       "context": "className=\"login-button\"\n primary\n size={ButtonSize.medium}\n scale\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"Common:LoginButton\")\n }\n tabIndex={5}\n isDisabled={isLoading}\n isLoading={isLoading}\n onClick={onSubmit}",
       "module": "/packages/login"
     },
@@ -81,7 +81,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Ladevorgang\" literally translates to \"loading process,\" \"Loading...\" is better translated as \"Lädt...\". \"Ladevorgang...\" is a complete sentence and feels less natural as a loading indicator.",
+          "suggestion": "Lädt..."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Japanese translation \"更新中...\" translates to \"Updating...\" or \"Refreshing...\", which isn't a direct equivalent of \"Loading...\". While \"更新中\" can be used in situations where data is being loaded and updated, it's not the most accurate translation for a simple 'Loading...' message.",
-          "suggestion": "Consider using \"読み込み中...\" (yomi-kachi-chuu...) which directly translates to \"Loading...\" or \"ローディング...\" (ro-dingu...) which is a loanword and often used for 'Loading...'."
+          "description": "The English 'Loading...' typically implies a process of retrieving data. '更新中...' (updating...) is a valid translation in some contexts, but might not accurately convey the feeling of a loading process which often involves waiting for data to be fetched and displayed. A more accurate translation might be '読み込み中...' (reading...) or '読み込んでいます...' (loading...).",
+          "suggestion": "Consider '読み込み中...' or '読み込んでいます...' for a more accurate representation of 'Loading...'"
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation 'Ielādē...' is an imperative form (command) meaning 'Load...'. The English 'Loading...' is a gerund functioning as a noun, indicating an ongoing process. A more accurate translation would be something like 'Notiek ielādes...' (Loading is happening...) or 'Lādēšana...' (Loading...).",
-          "suggestion": "Lādēšana..."
+          "description": "The Latvian translation \"Ielādē...\" translates to \"Loading...\" (imperative form). A more natural and accurate translation for a loading indicator would be the present tense \"Ielādējas...\" or a continuous form like \"Notiek ielāde...\"",
+          "suggestion": "Ielādējas..."
         }
       ],
       "approved_at": null
@@ -198,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පූරණය වෙමින්...\" translates to \"Filling...\" instead of \"Loading...\". While 'filling' can sometimes be synonymous with 'loading' in certain contexts, in this instance referring to data or a webpage, 'loading' is the more accurate and standard term.",
-          "suggestion": "Consider using a translation closer to \"බාගතමින්...\" or \"හොදවා ගැනෙමින්...\" to better convey the meaning of 'Loading'."
+          "description": "The Sinhala translation \"පූරණය වෙමින්...\" while meaning 'filling/loading', doesn't fully capture the succinctness and common usage of \"Loading...\" in an application context. A more direct translation, or adaptation, might be better.",
+          "suggestion": "Consider \"හොබදමින්...\" (Hobadamin...) which is closer to 'downloading/obtaining' or exploring options for a more colloquial equivalent that conveys the action of loading data."
         }
       ],
       "approved_at": null
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Учитавање…' while understandable, isn't the most natural or common rendering of 'Loading...' in Serbian. 'Учитавање' directly translates to 'Uploading', not 'Loading'.",
-          "suggestion": "Consider using 'Приступање…' or 'Товарење…' which are more common and accurate translations of 'Loading...'"
+          "description": "The Serbian (Cyrillic) translation 'Учитавање…' is a technically correct rendering of 'Loading...' but conveys more of a 'Uploading' or 'Importing' sense rather than the common 'Loading' indication. A more natural translation for 'Loading...' would be 'Учитавање...' or 'Прилагођавање...' (Adaptation/Adjusting).",
+          "suggestion": "Consider using 'Учитавање...' or 'Прилагођавање…'"
         }
       ],
       "approved_at": null

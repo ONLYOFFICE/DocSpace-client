@@ -3,7 +3,7 @@
   "content": "Webhook settings",
   "content_en_sha1_hash": "e769d461d10615b7c28c4b55e1a206f828e583b7",
   "created_at": "2025-05-19T21:30:49.839Z",
-  "updated_at": "2025-05-21T00:56:06.326Z",
+  "updated_at": "2025-08-04T07:30:01.464Z",
   "comment": {
     "text": "This translation key is used for the title of a webhook settings dialog. It appears as the header of a modal window that allows users to manage their webhook settings and update existing webhooks.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 158,
+      "line_number": 189,
       "context": "isSettingsModal={false}\n />\n <WebhookDialog\n visible={isSettingsOpened}\n onClose={closeSettingsModal}\n header={t(\"SettingsWebhook\")}\n isSettingsModal\n webhook={currentWebhook}\n onSubmit={handleWebhookUpdate}\n additionalId=\"settings-webhook\"\n />",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Webhook parametrləri' is understandable, 'parametrleri' implies parameters rather than settings. 'Webhook tələbləri' or 'Webhook ayarları' would be more accurate translations for 'Webhook settings'.",
-          "suggestion": "Consider 'Webhook tələbləri' or 'Webhook ayarları'."
+          "description": "While 'parametrleri' technically means 'parameters,' 'settings' implies a configuration interface. A more accurate translation might be 'Webhook təyinatları' or 'Webhook ayarları'.",
+          "suggestion": "Webhook təyinatları"
         }
       ],
       "approved_at": null
@@ -47,9 +47,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "While \"Настройки на уеб кука\" is understandable, a more accurate and common translation of \"Webhook settings\" in Bulgarian would be \"Настройки за уебкук\" or \"Настройки на уебхук\". 'Кука' (kuka) translates to 'hook' and while technically correct, 'уебкук' or 'уебхук' are the established terms.",
-          "suggestion": "Настройки за уебкук"
+          "type": "spelling",
+          "description": "The term 'уеб кука' is a literal translation of 'webhook' and not the commonly used or accepted term in Bulgarian IT context. It sounds awkward and unprofessional.",
+          "suggestion": "Use the transliterated term 'уебхук' (webhook) or describe it as 'обратно известие' (reverse notification) depending on the target audience and context."
         }
       ],
       "approved_at": null
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Webhook կարգավորումներ\" is technically correct but could be improved for naturalness. \"կարգավորումներ\" (kargavorumner) directly translates to 'settings' or 'regulations', but in the context of software settings, \"Webhook գործունեություն\" (Webhook gorjunutyun - Webhook activity/functions) or \"Webhook-ի կարգավիճակ\" (Webhook-i kargavitchak - Webhook status) might be more idiomatic.",
-          "suggestion": "Consider \"Webhook գործունեություն\" or \"Webhook-ի կարգավիճակ\" for a more natural translation."
+          "description": "The translation 'Webhook կարգավորումներ' while technically accurate, might not be the most natural or idiomatic way to express 'Webhook settings' in Armenian. 'Կարգավորումներ' implies adjustments or configurations, which is generally correct, but a more direct and common translation could be explored.",
+          "suggestion": "Consider alternatives like 'Webhook գործունեություն' (Webhook activity/functionality) or 'Webhook-ի կարգավարում' (Webhook management) depending on the specific context and intended meaning.  Further context would help determine the best choice."
         }
       ],
       "approved_at": null
@@ -132,13 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"Webhook\" is not accurately translated. \"Tīmekļa aizķere\" translates to 'web blockage' or 'web jam', which is not the intended meaning. 'Webhook' refers to a specific type of automated notification.",
-          "suggestion": "Vērotāja URL"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'settings' is not accurately translated. 'Iestatījumi' is a good translation for 'settings', but should be used in conjunction with the corrected translation for 'Webhook'.",
-          "suggestion": "Vērotāja URL iestatījumi"
+          "description": "The term \"Webhook\" is directly translated as \"Tīmekļa aizķeres\". While \"aizķere\" can mean a snag or hindrance, it doesn't accurately convey the meaning of a webhook (a web callback). A more appropriate translation would be closer to \"Web atgriezējziņa\" or \"Webpakaļsaite\".",
+          "suggestion": "Consider translating \"Webhook\" as \"Web atgriezējziņa\" or \"Webpakaļsaite\"."
         }
       ],
       "approved_at": null
@@ -185,13 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala word 'webhook' is written as 'webhook'. While loanwords are common, it might be beneficial to consider a more localized term if one exists and is readily understood by the target audience.  However, for direct translation, 'webhook' is acceptable.",
-          "suggestion": "Consider researching if a suitable Sinhala equivalent for 'webhook' exists within the target audience's understanding. If not, maintaining 'webhook' is a viable option."
-        },
-        {
-          "type": "spelling",
-          "description": "The Sinhala word 'සැකසුම්' (sakasuṁ) is correct and transliterates to 'settings'.",
-          "suggestion": null
+          "description": "The Sinhala translation 'webhook සැකසුම්' contains a spelling error. 'සැකසුම්' is the correct form for 'settings'.",
+          "suggestion": "webhook සැකසුම්"
         }
       ],
       "approved_at": null
@@ -214,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'подешавања' is a valid Serbian (Cyrillic) word but might not be the most natural or commonly used translation for 'settings' in a technical context like webhooks. 'Поставке' would likely be a better fit.",
+          "description": "The word 'подешавања' is spelled correctly, but the proper spelling for 'settings' in this context could be 'поставке'. While 'подешавања' isn't *incorrect*, 'поставке' is more commonly used for configuration options.",
           "suggestion": "Webhook поставке"
         }
       ],
@@ -235,19 +225,19 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Параметри вебхуку\" is a valid translation, \"Налаштування вебхуку\" might be a more accurate and common translation of \"Webhook settings\" in Ukrainian, as 'налаштування' directly translates to 'settings'.",
-          "suggestion": "Налаштування вебхуку"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Cài đặt\" can mean \"settings,\" it more literally translates to \"installation.\" \"Webhook settings\" implies configuration options, not the process of installing a webhook.",
+          "suggestion": "Cấu hình Webhook"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

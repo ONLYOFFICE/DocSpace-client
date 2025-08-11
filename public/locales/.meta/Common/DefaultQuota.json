@@ -3,7 +3,7 @@
   "content": "Default quota",
   "content_en_sha1_hash": "74e18c6f0fe3effdc2053a9286b7b902f2d9c1b1",
   "created_at": "2025-05-19T21:30:44.442Z",
-  "updated_at": "2025-07-01T15:57:36.127Z",
+  "updated_at": "2025-08-11T09:02:43.927Z",
   "comment": {
     "text": "The \"DefaultQuota\" translation key is used to display the label for the default quota option in a filter section. It appears on a page where users can customize their filters and provides an alternative label when the default quota option is selected. This text should be translated to provide a consistent user experience across different languages.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 556,
+      "line_number": 558,
       "context": "const key = roomsFilter.quotaFilter;\n \n const label =\n key === FilterKeys.customQuota\n ? t(\"Common:CustomQuota\")\n : t(\"Common:DefaultQuota\");\n \n filterValues.push({\n key: roomsFilter.quotaFilter,\n label,\n group: FilterGroups.filterQuota,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 556,
+      "line_number": 558,
       "context": "const key = roomsFilter.quotaFilter;\n \n const label =\n key === FilterKeys.customQuota\n ? t(\"Common:CustomQuota\")\n : t(\"Common:DefaultQuota\");\n \n filterValues.push({\n key: roomsFilter.quotaFilter,\n label,\n group: FilterGroups.filterQuota,",
       "module": "/packages/client"
     },
@@ -48,8 +48,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Default' is misspelled as 'Defolt'.",
+          "description": "The word \"Default\" is misspelled as \"Defolt\".",
           "suggestion": "Default"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While \"kvota\" is a valid loanword for \"quota\" in Azerbaijani, \"Default\" is best translated as \"standart\". The current translation misses the intended meaning.",
+          "suggestion": "Standart kvota"
         }
       ],
       "approved_at": null
@@ -99,13 +104,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Կանխադրված քվոտա\" (Kanxadrvats kvota) is a possible translation for \"Default quota\", it leans more towards \"Predefined quota\" or \"Preset quota.\" \"Default\" often implies a standard or baseline value, which isn't perfectly captured by \"Կանխադրված\".",
-          "suggestion": "Consider \"Սկզբային քվոտա\" (Sgzbvain kvota) for a more accurate translation of \"Default quota,\" implying a starting or initial quota."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -120,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"デフォルトな容量制限\" is technically correct but sounds unnatural. While \"デフォルト\" (default) and \"容量制限\" (capacity limit) are accurate, the addition of \"な\" makes the phrase sound awkward in Japanese. A more natural translation would focus on a more concise and idiomatic expression.",
-          "suggestion": "デフォルトの制限 (Deforuto no seigen) - 'Default Limit' or デフォルト制限 (Deforuto seigen) - 'Default Limit'"
+          "description": "The translation \"デフォルトな容量制限\" is overly literal and slightly awkward. While technically correct, \"デフォルト容量\" or \"初期容量制限\" would be more natural and commonly used in Japanese.",
+          "suggestion": "デフォルト容量 or 初期容量制限"
         }
       ],
       "approved_at": null
@@ -186,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පෙරනිමි සලාකය\" does not accurately convey the meaning of \"Default quota\". \"පෙරනිමි\" (peranim) suggests a prior or previous state, and \"සලාකය\" (salakaya) is a less common word. A more accurate translation would reflect a standard or pre-set limit.",
-          "suggestion": "A better translation might be \"තsetDefault quota\" (dēsathwaya kotawa) or \"සාමාන්‍ය කොට්ටාව\" (samanaya kotawa)."
+          "description": "The Sinhala translation \"පෙරනිමි සලාකය\" does not accurately convey the meaning of \"Default quota\". \"පෙරනිමි\" (peranimu) translates to 'previous' or 'former,' and \"සලාකය\" (salakaya) translates to 'slice' or 'portion.' This combination doesn't capture the concept of a default quota.",
+          "suggestion": "A more accurate translation would be something like \"නිර්දේශිත වාරකය\" (nirdeshitha varakaya) which translates to 'recommended quota' or \"ප්‍රස්ථාරණාත්මක වාරකය\" (prastharanathmakatha varakaya) which translates to 'default quota'."
         }
       ],
       "approved_at": null
@@ -210,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Подразумевана квота\" is technically a valid translation, it carries a connotation of 'implied quota' or 'assumed quota' which isn't precisely what 'Default quota' means. A more accurate translation would emphasize the standard or pre-defined nature of the quota.",
-          "suggestion": "Уобичајена квота"
+          "description": "The Serbian (Cyrillic) translation \"Подразумевана квота\" translates to \"Implied quota\" or \"Assumed quota,\" which doesn't fully capture the meaning of \"Default quota.\" \"Default\" implies a pre-set or standard value.",
+          "suggestion": "Почетна квота"
         }
       ],
       "approved_at": null

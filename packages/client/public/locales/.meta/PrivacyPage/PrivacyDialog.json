@@ -3,7 +3,7 @@
   "content": "If you don't see a dialog, click the button below",
   "content_en_sha1_hash": "049ffa88767854e44e4d415136604ba13bda9bcf",
   "created_at": "2025-05-19T21:30:53.428Z",
-  "updated_at": "2025-05-21T05:49:20.175Z",
+  "updated_at": "2025-05-24T06:18:39.442Z",
   "comment": {
     "text": "This translation key is used for a center-aligned text that appears below a button, prompting users to click the button if they don't see a visible dialog in a private rooms page. The text indicates where to find alternative action.",
     "is_auto": true,
@@ -36,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Dialoq pəncərəsi görsənmirsə' is not the most natural or accurate rendering of 'If you don't see a dialog'. 'Pəncərəsi' implies a window, which isn't the intended meaning of 'dialog'.",
-          "suggestion": "Əgər dialoq açılmayıbsa, aşağıdakı düyməyə klikəyin"
+          "description": "The translation 'Dialoq pəncərəsi görsənmirsə' is not the most natural way to say 'If you don't see a dialog'. 'Pəncərəsi' (window) is unnecessary and sounds awkward.  'Dialoqı görmürsünüzsə' would be more accurate.",
+          "suggestion": "Dialoqı görmürsünüzsə"
         },
         {
-          "type": "spelling",
-          "description": "The word 'klikəyin' is a transliteration of 'click' and isn't standard Azerbaijani. While understandable, it's not ideal.",
-          "suggestion": "Aşağıdakı düyməni kəsdiyiniz təqdirdə"
+          "type": "incorrect_translation",
+          "description": "'klikəyin' is not the standard way to say 'click'. It's a somewhat informal and potentially outdated phrasing. 'Tıklayın' is the more commonly used and accepted term.",
+          "suggestion": "Tıklayın"
         }
       ],
       "approved_at": null
@@ -71,8 +71,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"παράθυρο διαλόγου\" (parathyro dialogou) is a literal translation of \"dialog window\" which is less common and potentially confusing.  A more natural Greek equivalent for \"dialog\" in this context would be something like \"μήνυμα\" (minyma - message) or a more conversational term indicating a notification or popup.",
-          "suggestion": "Εάν δεν βλέπετε ένα μήνυμα, κάντε κλικ στο παρακάτω κουμπί"
+          "description": "The term 'dialog' is translated as 'παράθυρο διαλόγου'. While technically correct, 'παράθυρο διαλόγου' is overly literal and sounds awkward in Greek. A more natural translation would be 'κουτί διαλόγου' or simply 'διάλογος' depending on the context.",
+          "suggestion": "Εάν δεν βλέπετε ένα κουτί διαλόγου, κάντε κλικ στο παρακάτω κουμπί"
         }
       ],
       "approved_at": null
@@ -83,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation uses 'usted,' which is more formal. A more common and user-friendly approach would be to use 'no ves'.",
-          "suggestion": "Si no ves un diálogo, haga clic en el botón de abajo"
+          "description": "The translation 'Si usted no ve un diálogo, haga clic en el botón de abajo' is technically correct but sounds overly formal. Using 'tú' instead of 'usted' would sound more natural in most contexts.",
+          "suggestion": "Si no ves un diálogo, haz clic en el botón de abajo"
         }
       ],
       "approved_at": null
@@ -104,7 +104,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Եթե ​​երկխոսություն չեք տեսնում, սեղմեք ստորև նշված կոճակը' is a literal translation that doesn't flow naturally in Armenian. 'Dialog' is best translated to a more conversational term for Armenian users.",
+          "suggestion": "Եթե չեք տեսնում դիալոգը, սեղմեք ստորև գտնված կոճակը։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -113,7 +119,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'finestra di dialogo' while technically correct, is a more formal term than 'dialog' in the original English. A more natural translation would be 'schermata di dialogo' or simply 'dialogo'.",
+          "description": "The English phrase \"dialog\" is best translated as \"dialogo\" in Italian, not \"finestra di dialogo.\" While \"finestra di dialogo\" is understandable, \"dialogo\" is more concise and technically accurate in this context.",
           "suggestion": "Se non vedi un dialogo, fai clic sul pulsante in basso"
         }
       ],
@@ -137,8 +143,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'click the button below' is too literal. A more natural Lao phrasing would be 'ກົດປຸ່ມຂ້າງລຸ່ມນີ້' (got puem khang lum ni).",
-          "suggestion": "ກົດປຸ່ມຂ້າງລຸ່ມນີ້"
+          "description": "The Lao translation 'ຖ້າຫາກທ່ານບໍ່ເຫັນກ່ອງເປີດ, ໃຫ້ກົດປຸ່ມດ້ານລຸ່ມ' while conveying the general meaning, isn't the most natural or precise translation of 'If you don't see a dialog, click the button below'. 'ກ່ອງເປີດ' (gong bpert) translates to 'opening box' which isn't the best for 'dialog'.",
+          "suggestion": "Consider a translation like 'ຖ້າທ່ານບໍ່ເຫັນປົດຊ້ອນ, ກົດປຸ່ມຂ້າງລຸ່ມນີ້' (Tha thaan bor hen plot sawn, kot pum khang lum ni) - 'If you don't see a dialog, click the button below.'"
         }
       ],
       "approved_at": null
@@ -149,7 +155,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ja neredzat dialoglodziņu, noklikšķiniet uz tālāk esošās pogas' is a literal translation but doesn't quite capture the natural flow of the English phrase. 'tālāk esošās pogas' (the following button) is too formal and specific. A more natural translation would imply the button to access the dialog.",
+          "description": "The translation 'Ja neredzat dialoglodziņu, noklikšķiniet uz tālāk esošās pogas' is a literal translation, but 'tālāk esošās pogas' (the further existing button) doesn't convey the intended meaning of 'below' in the English context. A more natural translation would use a term indicating placement.",
           "suggestion": "Ja neredzat dialoglodziņu, noklikšķiniet uz pogas zemāk."
         }
       ],
@@ -185,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"fereastră de dialog\" (dialog window) is a bit literal and less common than other options. \"Dacă nu vedeți caseta de dialog\" or \"Dacă nu vedeți panoul de dialog\" would be more natural.",
-          "suggestion": "Dacă nu vedeți caseta de dialog, faceți clic pe butonul de mai jos"
+          "description": "The word \"fereastră\" (window) is a bit too literal for \"dialog.\" A more appropriate term would convey the idea of a pop-up or panel.",
+          "suggestion": "Dacă nu vedeți panoul, faceți clic pe butonul de mai jos"
         }
       ],
       "approved_at": null
@@ -202,9 +208,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ඔබන්න' is a slightly informal/colloquial contraction of 'ඔබන්න'. A more formal/standard version might be preferable depending on the target audience and brand voice. While not strictly incorrect, it lowers the formality.",
-          "suggestion": "ඔබ ක්ලික් කරන්න"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'If you don't see a dialog' is best translated as 'ඔබට කවුළුවක් නොපෙනුණු නම්'. The current translation 'ඔබට කවුළුවක් නොපෙනේ නම්' uses the present indicative tense, suggesting it's a recurring observation. The conditional tense is more appropriate for this instruction.",
+          "suggestion": "ඔබට කවුළුවක් නොපෙනුණු නම්"
         }
       ],
       "approved_at": null
@@ -239,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bir ileti görmüyorsanız, aşağıdaki düğmeyi tıklayın' is not a direct equivalent of 'If you don't see a dialog, click the button below'. 'İleti' translates to 'message' which isn't the same as 'dialog'. A more accurate translation would be 'Eğer bir iletişim kutusu görmüyorsanız, aşağıdaki düğmeyi tıklayın' or 'Eğer bir pencere görmüyorsanız, aşağıdaki düğmeyi tıklayın'.",
-          "suggestion": "Eğer bir iletişim kutusu görmüyorsanız, aşağıdaki düğmeyi tıklayın"
+          "description": "The translation 'Bir ileti görmüyorsanız, aşağıdaki düğmeyi tıklayın' isn't the most natural or accurate translation of 'If you don't see a dialog, click the button below.' 'İleti' translates to 'message' which isn't the direct equivalent of 'dialog'. A better translation would be closer to 'Eğer bir iletişim kutusu/penceresi görmüyorsanız...' or 'Eğer bir diyalog kutusu görmüyorsanız...'",
+          "suggestion": "Eğer bir diyalog kutusu görmüyorsanız, aşağıdaki düğmeyi tıklayın."
         }
       ],
       "approved_at": null

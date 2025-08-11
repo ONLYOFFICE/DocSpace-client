@@ -3,7 +3,7 @@
   "content": "Delete group",
   "content_en_sha1_hash": "b6f15b2f40a093d6920368a98483c94f1ae50aa1",
   "created_at": "2025-05-19T21:30:56.701Z",
-  "updated_at": "2025-05-28T09:30:02.256Z",
+  "updated_at": "2025-05-26T07:57:32.292Z",
   "comment": {
     "text": "\"This translation key is used to display the text 'Delete group' in a modal dialog and on an empty screen, indicating that the user can delete a group.\"",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Qrupu silin' is a literal translation and lacks natural flow in Azerbaijani. A more natural phrasing would be 'Qrup sil' or 'Guruhu sil'.",
+          "suggestion": "Qrup sil"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -87,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ջնջել խմբերը\" literally translates to \"Delete groups\". The English content is \"Delete group\" (singular).  The translation should reflect the singular form.",
+          "suggestion": "Ջնջել խումբ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -159,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ප්‍රජාව ඉවත් කරන්න\" is a possible translation, \"Delete group\" often implies a more direct deletion, not just removal. A more precise translation might be \"ගෘහය මකන්න\" (gruhaya makanna) or \"ගෘහය නිශුද්ධ කරන්න\" (gruhaya nishuddha kanna).",
+          "suggestion": "ගෘහය මකන්න (gruhaya makanna) or ගෘහය නිශුද්ධ කරන්න (gruhaya nishuddha kanna)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -177,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Обриши групу\" while understandable, isn't the most natural or accurate translation of \"Delete group\". \"Delete\" often implies a more permanent action. \"Обриши групу\" leans more towards 'wipe' or 'erase'. A better translation would consider a term implying removal or deletion.",
+          "suggestion": "Избриши групу"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

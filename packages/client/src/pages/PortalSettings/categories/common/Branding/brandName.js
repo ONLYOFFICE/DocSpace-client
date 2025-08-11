@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/BrandName";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
+import { BRAND_NAME_REGEX } from "@docspace/shared/constants";
 
 import LoaderBrandName from "../sub-components/loaderBrandName";
 
@@ -49,6 +50,7 @@ const BrandNameComponent = (props) => {
     getBrandName,
   } = props;
   const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     getBrandName();
@@ -60,12 +62,27 @@ const BrandNameComponent = (props) => {
       await saveBrandName(data);
       setBrandName(data.logoText);
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-    } catch (error) {
-      toastr.error(error);
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    } catch (err) {
+      toastr.error(err);
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const handleValidation = (value) => {
+    let errorCode = "";
+
+    if (!value) {
+      errorCode = "Empty";
+    } else if (value.length < 2) {
+      errorCode = "MinLength";
+    } else if (!BRAND_NAME_REGEX.test(value)) {
+      errorCode = "SpecSymbols";
+    }
+
+    setError(errorCode);
+    return errorCode;
   };
 
   return !isBrandNameLoaded ? (
@@ -82,6 +99,8 @@ const BrandNameComponent = (props) => {
       brandName={brandName}
       onSave={onSave}
       deviceType={deviceType}
+      error={error}
+      onValidate={handleValidation}
     />
   );
 };

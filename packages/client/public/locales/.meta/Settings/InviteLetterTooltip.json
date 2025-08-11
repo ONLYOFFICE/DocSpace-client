@@ -3,7 +3,7 @@
   "content": "If checked, all new users will receive a invite letter with authorization details.",
   "content_en_sha1_hash": "786c8777e89e96027a94e5fb1d939eceaed3d376",
   "created_at": "2025-05-19T21:30:51.710Z",
-  "updated_at": "2025-05-28T09:30:02.514Z",
+  "updated_at": "2025-08-11T09:02:43.945Z",
   "comment": {
     "text": "This translation key is used to display a tooltip explaining that an invite letter will be sent to new users who have this option checked. It appears in a Help Button within the Import Complete Step page, providing context for users interacting with this feature.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportCompleteStep.tsx",
-      "line_number": 168,
-      "context": "<HelpButton\n place=\"right\"\n offsetRight={0}\n style={{ margin: \"0px 5px\" }}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Settings:InviteLetterTooltip\")}</Text>\n }\n />\n </Wrapper>\n \n <SaveCancelButtons",
+      "line_number": 169,
+      "context": "<HelpButton\n place=\"right\"\n offsetRight={0}\n style={{ margin: \"0px 5px\" }}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Settings:InviteLetterTooltip\")}</Text>\n }\n dataTestId=\"invite_letter_help_button\"\n />\n </Wrapper>",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تفاصيل التفويض' for 'authorization details' is not the most natural or accurate. 'تفويض' literally means 'authorization' itself. A more common and understandable phrasing would be 'تفاصيل صلاحية' or 'بيانات التفويض'.",
-          "suggestion": "إذا تم التحقق منها، فسيتلقى جميع المستخدمين الجدد خطاب دعوة مع تفاصيل صلاحية."
+          "description": "The translation 'تفاصيل التفويض' for 'authorization details' is not the most natural or precise rendering in Arabic. 'تفويض' implies authorization, but a more common and clear term would be 'بيانات التفويض' or 'تفاصيل صلاحية'.",
+          "suggestion": "إذا تم التحقق منها، فسيتلقى جميع المستخدمين الجدد خطاب دعوة مع بيانات التفويض."
         }
       ],
       "approved_at": null
@@ -41,14 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The verb tense in the Azerbaijani translation is a bit awkward. 'alacaqlar' (will receive) sounds slightly unnatural in this context. It might be better to use a more general present tense to imply a recurring action.",
-          "suggestion": "İşarələndikdə bütün yeni istifadəçilər avtorizasiya təfərrüatları olan dəvət məktubu alır."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, it's beneficial to consider capitalization. In Azerbaijani, titles and the start of sentences are capitalized. Using capitalization would improve the overall readability and feel more professional.",
-          "suggestion": "İşarələndikdə bütün yeni istifadəçilər avtorizasiya təfərrüatları olan dəvət məktubu alır."
+          "type": "incorrect_translation",
+          "description": "The translation 'avtorizasiya təfərrüatları' for 'authorization details' is technically correct, but a more natural phrasing would be 'təsdiq məlumatları' or 'giriş məlumatları'. 'Avtorizasiya' is a more formal term and might not be the most user-friendly choice.",
+          "suggestion": "İşarələndikdə bütün yeni istifadəçilər təsdiq məlumatları olan dəvət məktubu alacaqlar."
         }
       ],
       "approved_at": null
@@ -59,8 +54,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'authorization details' is not the most natural translation of 'authorization details' in this context. While technically correct, a more user-friendly translation would be 'инструкции за достъп' (access instructions) or 'детайли за активиране' (activation details).",
-          "suggestion": "Ако е отметнато, всички нови потребители ще получат писмо с покана с детайли за активиране."
+          "description": "The translation 'Ако е отметнато, всички нови потребители ще получат писмо с покана с подробности за оторизация.' is a literal translation and slightly awkward in Bulgarian. A more natural phrasing would be 'Ако е активирано, всички нови потребители ще получат покана с информация за достъп.'",
+          "suggestion": "Ако е активирано, всички нови потребители ще получат покана с информация за достъп."
+        },
+        {
+          "type": "formatting",
+          "description": "The word 'покана' (invitation) could be better separated by a comma or dash for readability. The current phrasing feels a bit clunky.",
+          "suggestion": "Ако е активирано, всички нови потребители ще получат покана – с информация за достъп."
         }
       ],
       "approved_at": null
@@ -107,8 +107,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"authorization details\" is not accurately translated. \"Թույլտվության մանրամասներով\" is a literal translation and might not convey the intended meaning of invite letter authorization details. A more appropriate translation might focus on access details or permission details within the invitation.",
-          "suggestion": "Consider translating \"authorization details\" as something like \"մուտքի իրավունքի մանրամասներով\" (access details) or \"բացառիկ իրավունքի մանրամասներով\" (exclusive rights/permissions details)."
+          "description": "The term 'invite letter' is translated as 'հրավեր նամակ'. While technically correct, a more natural and commonly used term in Armenian for an invitation letter in a digital context might be 'միացման հրավերդարձ' or simply 'հրավերդարձ'.",
+          "suggestion": "Consider translating 'invite letter' as 'միացման հրավերդարձ' or 'հրավերդարձ'."
         }
       ],
       "approved_at": null
@@ -131,13 +131,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '인증 정보가 포함된 초대장' (invitation containing authentication information) is a bit literal and could be improved for naturalness. '인증 정보' is technically correct, but a more user-friendly phrasing might be preferred.",
-          "suggestion": "체크하면 모든 신규 사용자에게 인증 관련 정보가 담긴 초대장이 발송됩니다."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing '전송됩니다' (jeonseongdoemnida) is somewhat formal. A more conversational tone might be better suited for a tooltip.",
-          "suggestion": "체크하면 모든 신규 사용자에게 인증 관련 정보가 담긴 초대장이 발송됩니다."
+          "description": "The English phrase 'authorization details' is not accurately conveyed by '인증 정보'. '인증 정보' implies authentication information, whereas 'authorization details' refers to the specific permissions and access granted by the invite. A more accurate translation might be something like '승인 정보' or '권한 정보'.",
+          "suggestion": "승인 정보가 포함된 초대장이 전송됩니다."
         }
       ],
       "approved_at": null
@@ -148,13 +143,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ຖ້າກວດແລ້ວ\" translates to 'If checked' which is acceptable but could be improved to be more natural. 'ຖ້າເລືອກເອົາ' (if selected) or 'ຖ້າເປີດໃຊ້' (if enabled) might be more accurate depending on the UI element.",
+          "description": "The phrase \"ຖ້າກວດແລ້ວ\" (if checked) doesn't perfectly capture the nuance of \"If checked.\" A more accurate translation would be something like \"ຖ້າເລືອກເອົາ\" (if selected) or \"ຖ້າຕັ້ງໃຈໄວ້\" (if set).",
           "suggestion": "ຖ້າເລືອກເອົາ"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'with authorization details' could be more precisely translated.  'ລາຍລະອຽດການອະນຸຍາດ' is accurate but a slight nuance in 'details' might be conveyed by 'ຂໍ້ມູນການເຂົ້າສິດ' (access information).",
-          "suggestion": "ຂໍ້ມູນການເຂົ້າສິດ"
+          "description": "The word “ອະນຸຍາດ” (authorization) is technically correct but might be overly formal or technical for this context. Depending on the target audience, a more accessible term might be beneficial.",
+          "suggestion": "ຖ້າເລືອກເອົາ, ຜູ້ໃຊ້ທຸກຄົນຈະໄດ້ຮັບຈົດໝຶນເຊີນທີ່ມີຂໍ້ມູນການເຂົ້າໃຊ້ງານ."
         }
       ],
       "approved_at": null
@@ -177,8 +172,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"authorization details\" is not accurate. \"Proces uwierzytelniania\" translates to \"authentication process\" and doesn't convey the meaning of authorization details.",
+          "description": "The translation of \"authorization details\" is inaccurate. \"Szczegóły procesu uwierzytelniania\" translates to \"details of the authentication process\" which is not the same as \"authorization details\". The original English implies details necessary for granting access or permission.",
           "suggestion": "Jeśli opcja jest zaznaczona, wszyscy nowi użytkownicy otrzymają zaproszenie ze szczegółami autoryzacji."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing \"Jeśli opcja jest zaznaczona\" is slightly awkward. It implies that a checkbox or other UI element is being referred to.",
+          "suggestion": "Jeśli zaznaczysz tę opcję, wszyscy nowi użytkownicy otrzymają zaproszenie ze szczegółami autoryzacji."
         }
       ],
       "approved_at": null
@@ -213,8 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පිළිගැනීමේ ලිපිය' (piliganae lipeya) translates to 'acceptance letter' which is not quite the same as an 'invite letter'.  A more accurate translation for 'invite letter' would be 'අundangනාව' (undhanawa).",
-          "suggestion": "සබල කළහොත්, සියලුම නව පරිශ්‍රීලකයින්ට අවසර දීමේ විස්තර සහිත අundangනාව ලැබෙනු ඇත."
+          "description": "The phrase \"authorization details\" is not accurately reflected in the Sinhala translation. \"අවසර දීමේ විස්තර\" (awasadaimē vistharama) literally translates to 'authorization details,' which isn't the best way to convey the meaning of invite letter details. It should be more along the lines of 'invitation details' or 'information related to the invitation'.",
+          "suggestion": "Consider revising to something like: \"සබල කළහොත්, සියලුම නව පරිශ්‍රීලකයින්ට පිළිගැනීමේ ලිපියේ ඇති තොරතුරු ලැබෙනු ඇත.\" (Sabala kalāhotha, siyallum nawa parīśrīlakayin ta piliganeemi lipiyē ati thoraturu labēnu athā.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes a slightly formal tone which may not align with the original English tooltip.  The use of 'අති' (ati) is overly formal for a tooltip.",
+          "suggestion": "Consider a slightly less formal wording, but this depends on the overall tone of the application."
         }
       ],
       "approved_at": null
@@ -240,7 +245,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'authorization details' is not accurately translated. 'Autorizacija' refers to the authorization process, not the details associated with it. A more accurate translation would convey what details are being provided.",
+          "suggestion": "Ako je označeno, svi novi korisnici će dobiti pozivno pismo sa detaljima o pristupu/priključivanju."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -249,13 +260,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'yetkilendirme ayrıntılarını içeren bir davet mektubu alır' is a bit literal and sounds unnatural in Turkish. A more natural phrasing would be 'yetkilendirme bilgilerini içeren bir davetiye alırlar'.",
-          "suggestion": "yetkilendirme bilgilerini içeren bir davetiye alırlar"
+          "description": "The phrase \"authorization details\" is a bit too literal and formal for a user-facing tooltip. It doesn't flow naturally in Turkish. \"Yetkilendirme ayrıntıları\" is technically correct but can be simplified.",
+          "suggestion": "İşaretlenirse, tüm yeni kullanıcılar davetiyelerinde erişim bilgileriyle birlikte bir mektup alır."
         },
         {
           "type": "formatting",
-          "description": "The use of 'İşaretlenirse' is correct, but a more consistent flow might be achieved by rephrasing the entire sentence to align better with standard Turkish sentence structure. This isn't a hard error, but improves readability.",
-          "suggestion": "Seçildiğinde, tüm yeni kullanıcılar yetkilendirme bilgilerini içeren bir davetiye alırlar."
+          "description": "While grammatically correct, the sentence structure is a little clunky.  Consider reordering for better readability in Turkish.",
+          "suggestion": "İşaretlenirse, tüm yeni kullanıcılar erişim bilgileri içeren bir davet mektubu alırlar."
         }
       ],
       "approved_at": null
@@ -272,13 +283,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"invite letter\" is inaccurate. \"Thư chào mừng\" translates to 'welcome letter', not 'invite letter'.",
-          "suggestion": "Nếu được chọn, tất cả người dùng mới sẽ nhận được thư mời với các chi tiết việc ủy quyền."
+          "description": "“Invite Letter” is not accurately translated. “Chào mừng” (welcome) doesn't convey the meaning of an invitation letter.",
+          "suggestion": "Thư mời"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"các chi tiết việc ủy quyền\" is awkward and not the most natural way to express \"authorization details\".",
-          "suggestion": "Nếu được chọn, tất cả người dùng mới sẽ nhận được thư mời với các chi tiết ủy quyền."
+          "description": "“Việc ủy quyền” is an awkward phrasing. It's better to convey the meaning of authorization details more naturally.",
+          "suggestion": "Thông tin xác thực"
         }
       ],
       "approved_at": null

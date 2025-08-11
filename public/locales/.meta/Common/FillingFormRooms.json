@@ -3,7 +3,7 @@
   "content": "Filling form",
   "content_en_sha1_hash": "7d83d7eca125edcf45bdc6c74e4efc3a8e517850",
   "created_at": "2025-05-19T21:30:45.351Z",
-  "updated_at": "2025-07-01T15:57:36.063Z",
+  "updated_at": "2025-08-11T09:02:43.901Z",
   "comment": {
     "text": "The translation key \"FillingFormRooms\" is used to display the label for a filter option in the Home page's room filtering section, specifically when selecting rooms of type \"Filling Forms Room\". This text will appear as the label on a filter dropdown.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 794,
+      "line_number": 796,
       "context": "case RoomsType.FillingFormsRoom:\n return {\n id: \"filter_type-filling-form\",\n key: RoomsType.FillingFormsRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:FillingFormRooms\"),\n };\n case RoomsType.EditingRoom:\n return {\n id: \"filter_type-collaboration\",\n key: RoomsType.EditingRoom,",
       "module": "/packages/client"
     }
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Φόρμα συμπλήρωσης\" is understandable, it's a literal translation and not the most natural way to express \"Filling form\" in Greek. It translates to \"Form of filling\" rather than \"Form filling\" or \"Filling out a form\".",
-          "suggestion": "Consider alternatives like \"Συμπλήρωση φόρμας\" (Symplirosi formás) which means \"Filling out a form\" or \"Φόρμα για συμπλήρωση\" (Forma gia symplirosi) which means \"Form for filling\"."
+          "description": "The translation \"Φόρμα συμπλήρωσης\" while literally meaning 'Form of filling', doesn't quite capture the concise meaning of \"Filling form\". A more natural Greek translation would better convey the intended meaning.",
+          "suggestion": "Consider using something like \"Συμπλήρωση φόρμας\" (Symplirosi formass) or \"Φόρμα για συμπλήρωση\" (Forma gia symplirosi) which means 'Form to fill' or 'Form filling'."
         }
       ],
       "approved_at": null
@@ -75,7 +75,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Relleno de formularios\" is a literal translation, it doesn't quite capture the nuance of \"Filling form.\" It implies the act of *filling* a form, not the form itself. A better translation would convey the concept of the form itself.",
+          "suggestion": "Formulario"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Täyttölomake' while technically meaning 'form for filling', isn't the most natural or common way to express 'Filling form' in Finnish. It sounds quite literal and somewhat awkward.",
-          "suggestion": "A more natural translation would be 'Täytettävä lomake' (form to be filled) or 'Lomake täytettäväksi' (form for filling)."
+          "description": "While \"Täyttölomake\" is a valid Finnish word, it's a compound word literally meaning 'filling form'. A more natural and concise translation for \"Filling form\" would be \"Täytettävä lomake\" or simply \"Lomake\". \"Täyttölomake\" sounds somewhat clunky.",
+          "suggestion": "Täytettävä lomake"
         }
       ],
       "approved_at": null
@@ -96,13 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Salles de remplissages de formulaires' is too literal and doesn't sound natural in French. 'Remplissages' is not a common or elegant way to describe the action of filling out forms.",
-          "suggestion": "A more natural translation would be 'Salles de formulaire' or 'Locaux de remplissage de formulaires' or simply 'Salles de formulaires'."
+          "description": "The translation \"Salles de remplissages de formulaires\" is overly literal and doesn't convey the intended meaning of 'Filling form' in a natural French way. It translates to 'Rooms of filling out forms', which is awkward.",
+          "suggestion": "A more appropriate translation would be \"Formulaires à remplir\" or \"Remplissage de formulaires\" depending on the context. \"Formulaires à remplir\" is a common phrase meaning 'Forms to fill out'.  \"Remplissage de formulaires\" would translate to 'Form filling'."
         },
         {
           "type": "grammar",
-          "description": "While grammatically correct, the use of 'de' multiple times makes the translation sound clunky.",
-          "suggestion": "As mentioned in the incorrect translation issue, restructuring the sentence helps with flow."
+          "description": "Even if we interpret 'Salles de remplissages de formulaires' as intended, the construction 'de remplissages' is grammatically unusual. It implies a collection of filling processes.",
+          "suggestion": "If 'salles' (rooms) is truly needed, it could be rephrased as 'Salles de formulaire à remplir' (Rooms for filling out forms)."
         }
       ],
       "approved_at": null
@@ -113,8 +119,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Լրացման ձև\" literally translates to \"Form for filling\" and doesn't accurately convey the meaning of \"Filling form\". A more accurate translation would be something along the lines of \"Լրացվող ձև\" (Fillable form) or \"Լրացման համար ձև\" (Form for filling out).",
-          "suggestion": "Consider using \"Լրացվող ձև\" or \"Լրացման համար ձև\"."
+          "description": "The translation \"Լրացման ձև\" (Lracman rev) literally translates to 'Form for filling'. While understandable, a more natural Armenian translation for 'Filling form' would be something along the lines of 'Լրացվող ձև' (Lracvog rev) which means 'Form to be filled'.",
+          "suggestion": "Լրացվող ձև"
         }
       ],
       "approved_at": null
@@ -149,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Aizpildīšanas veidlapa\" literally translates to \"Form for filling\". While understandable, it's not the most natural or idiomatic translation of \"Filling form\". A more accurate and fluent translation would be something like \"Aizpildāma veidlapa\" (Fillable form) or \"Veidlapas aizpildīšana\" (Form filling).",
-          "suggestion": "Aizpildāma veidlapa"
+          "description": "The translation 'Aizpildīšanas veidlapa' is too literal. While technically correct, it's not the most natural or common way to say 'Filling form' in Latvian.  'Aizpildīšanas' implies the action of filling. A more natural translation would focus on the form itself.",
+          "suggestion": "Forms for filling out (Aizpildāmas formas) or Filling forms (Aizpildīšanas formas)."
         }
       ],
       "approved_at": null
@@ -185,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Completare formular\" isn't the most natural or idiomatic translation for \"Filling form\". While technically correct, it's a bit literal. A more common and natural Romanian equivalent would be \"Întocmirea formularului\" or \"Completarea formularului\", the latter being acceptable.",
-          "suggestion": "Consider using \"Întocmirea formularului\" or \"Completarea formularului\"."
+          "description": "The translation \"Completare formular\" is not the most natural or accurate translation of \"Filling form.\" While \"completare\" means 'to complete,' \"formular\" is the diminutive form of \"formular\", it's better to use \"formularul\" or just \"formular\".",
+          "suggestion": "Completarea formularului"
         }
       ],
       "approved_at": null
@@ -203,8 +209,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පුරවන ආකෘතිපත්‍ර' (puravana aakruthipaththara) is a literal translation of 'filling form' and while understandable, it's not the most natural or idiomatic way to express the concept in Sinhala. A more natural phrasing would convey the action of filling out the form, rather than the form itself being filled.",
-          "suggestion": "Consider 'ආකෘතිය පුරවා' (aakruthiy purawa) which translates to 'filling the form' or 'ආකෘතිය පිරවිය' (aakruthiy piriviya) which translates to 'to fill the form'."
+          "description": "The translation 'පුරවන ආකෘතිපත්‍ර' (Puravana aakruthipatara) is a literal translation of 'Filling form'. While technically correct, it's not the most natural or common way to express this in Sinhala. A more fluent translation would be 'ආකෘතිය පුරවා' (Akruthiyu purawa) or 'ආකෘතිය පිරවෙන' (Akruthiyu pirawene).",
+          "suggestion": "Consider 'ආකෘතිය පුරවා' (Akruthiyu purawa) or 'ආකෘතිය පිරවෙන' (Akruthiyu pirawene)."
         }
       ],
       "approved_at": null
@@ -218,7 +224,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Obrazec za izpolnjevanje' while technically correct, is a bit literal and clunky. 'Obrazec za izpolnitev' would be a more natural and idiomatic translation of 'Filling form' in this context, suggesting a form to be filled out.",
+          "suggestion": "Obrazec za izpolnitev"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -239,7 +251,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Doldurma formu' is not the most natural or accurate translation of 'Filling form'. While 'Doldurma' correctly means 'filling', 'formu' is a possessive case that doesn't quite fit the intended meaning. A more suitable translation would be 'Form doldurma'.",
+          "description": "The translation \"Doldurma formu\" is not the most natural or accurate translation of \"Filling form.\" \"Doldurma formu\" literally translates to \"filling form,\" but a more common and idiomatic translation would be something like \"Form doldurma\" or \"Formu doldurma\".",
           "suggestion": "Form doldurma"
         }
       ],

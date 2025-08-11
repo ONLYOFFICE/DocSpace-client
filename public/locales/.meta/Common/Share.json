@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2025-06-03T20:59:41.837Z",
+  "updated_at": "2025-08-04T07:30:01.034Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/index.tsx",
-      "line_number": 158,
+      "line_number": 137,
       "context": "!isRoomsType &&\n selection.canShare\n ) {\n tabsData.unshift({\n id: \"info_share\",\n name: t(\"Common:Share\"),\n onClick: setShare,\n content: null,\n });\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1921,
+      "line_number": 1930,
       "context": "},\n },\n {\n id: \"option_sharing-settings\",\n key: \"sharing-settings\",\n label: t(\"Common:Share\"),\n icon: ShareReactSvgUrl,\n onClick: () => this.onClickShare(item),\n disabled: !isShareable,\n },\n ...versionActions,",
       "module": "/packages/client"
     },
@@ -48,7 +48,7 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 157,
+      "line_number": 155,
       "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
       "module": "/packages/doceditor"
     }
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Համօգտագործել' (Hamogtavorzel) translates to 'use together' or 'co-use,' which doesn't accurately convey the meaning of 'Share.' 'Share' implies distributing or making something available to others, not just using it jointly.",
-          "suggestion": "Consider alternatives like 'Տարածել' (Taratsel - 'Distribute'), 'Բաժանել' (Bajanel - 'Divide/Share'), or 'Հետաքրքրել' (Hetakrerqel - 'To make available'). The best option depends on the specific context."
+          "description": "The Armenian translation \"Համօգտագործել\" (Hamogtagorzel) translates to 'co-use' or 'use together'.  It doesn't accurately convey the meaning of 'Share', which implies giving or distributing something to others.  A more appropriate translation would depend on the context, but options could include 'Բաժանել' (Bajanel - to distribute, divide) or 'Տարել' (Tarel - to give).",
+          "suggestion": "Consider 'Բաժանել' (Bajanel) or 'Տարել' (Tarel) depending on the specific context of 'Share'."
         }
       ],
       "approved_at": null
@@ -192,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Russian translation \"Доступ\" (Dostup) doesn't accurately convey the meaning of \"Share\" in this context. \"Share\" implies distributing or making something available to others, while \"Доступ\" primarily means 'access'.",
-          "suggestion": "Consider translations like \"Поделиться\" (Poderitsya - to share) or \"Распространить\" (Rasprostranit' - to distribute) depending on the specific nuance of 'Share' that's intended."
+          "description": "The Russian translation \"Доступ\" (Dostup) translates to 'Access' rather than 'Share'. While related, it doesn't accurately convey the meaning of 'Share'.",
+          "suggestion": "Consider alternatives like \"Поделиться\" (Podelit'sya) which directly translates to 'Share', or \"Расшарить\" (Rassharit') which is a more colloquial option meaning 'to share'."
         }
       ],
       "approved_at": null
@@ -228,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation \"Deli\" does not accurately convey the meaning of \"Share\". \"Deli\" means 'divides' or 'cuts', while 'Share' implies providing something to others.",
-          "suggestion": "Consider alternatives like \"Podeli\" (to share), \"Dajte\" (give), or \"Udelite\" (distribute), depending on the specific context."
+          "description": "The Serbian (Latin) translation 'Deli' is not the most accurate translation of 'Share'. While 'Deli' can mean 'to share', it's more commonly used for dividing or distributing. A more appropriate translation would be 'Podeli' which better conveys the act of sharing something.",
+          "suggestion": "Podeli"
         }
       ],
       "approved_at": null
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Надати спільний доступ' is a valid translation for 'Share', it's quite formal and lengthy. A more common and natural translation for 'Share' in many contexts would be 'Поділитися'.",
-          "suggestion": "Поділитися"
+          "description": "While \"Надати спільний доступ\" is a technically correct translation of \"Share,\" it's quite formal and lengthy for a simple 'Share' button or context. It implies granting access, rather than simply sharing.",
+          "suggestion": "Consider more concise and common alternatives like \"Поділитися\" or \"Ділитися\" which are closer in meaning and usage for a 'Share' function."
         }
       ],
       "approved_at": null

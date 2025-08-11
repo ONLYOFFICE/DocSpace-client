@@ -3,7 +3,7 @@
   "content": "Don't have {{organizationName}} Desktop Editors?",
   "content_en_sha1_hash": "69a48202776287e511596cd90337409ffe14d506",
   "created_at": "2025-05-19T21:30:53.430Z",
-  "updated_at": "2025-05-21T05:48:57.270Z",
+  "updated_at": "2025-05-24T06:18:12.566Z",
   "comment": {
     "text": "The \"Don't have {{organizationName}} Desktop Editors?\" translation key is used to display a question message when the user does not have permission to access desktop editors. It appears in a UI element that prompts the user to grant or confirm their permissions for specific actions.",
     "is_auto": true,
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{organizationName}} Desktop Editors yoxdurmu?\" while understandable, is not the most natural way to express \"Don't have {{organizationName}} Desktop Editors?\" in Azerbaijani. A more common phrasing would emphasize the lack of possession or access, rather than just posing a question.",
-          "suggestion": "{{organizationName}} Desktop Editors sizdə yoxdur?"
+          "description": "The translation \"{{organizationName}} Desktop Editors yoxdurmu?\" is a literal translation of 'Don't have {{organizationName}} Desktop Editors?'.  A more natural and idiomatic Azerbaijani phrasing would be closer to \"Do you not have {{organizationName}} Desktop Editors?\" or \"You don't have {{organizationName}} Desktop Editors?\"",
+          "suggestion": "{{organizationName}} Desktop Editorsiniz yoxdurmu?\" or \"{{organizationName}} Desktop Editorsunuz yoxdur?\""
         }
       ],
       "approved_at": null
@@ -51,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Нямате {{organizationName}} Настолни Редактори?' is a literal translation and might sound unnatural in Bulgarian. A more natural phrasing would be 'Нямате инсталирани {{organizationName}} Настолни Редактори?' or 'Не сте инсталирали {{organizationName}} Настолни Редактори?'",
+          "suggestion": "Не сте инсталирали {{organizationName}} Настолни Редактори?"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -60,7 +66,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nemáte nainstalovány {{organizationName}} Desktop Editors?' implies that the editors are not installed. The English sentence 'Don't have {{organizationName}} Desktop Editors?' suggests a broader question - do they not possess them at all? A more accurate translation would reflect this broader sense.",
+          "description": "The translation \"Nemáte nainstalovány {{organizationName}} Desktop Editors?\" implies 'installed'. The original English 'Don't have...' refers to not possessing or having access to the application, not specifically whether it's installed. A better translation would convey the lack of possession/access.",
           "suggestion": "Nemáte {{organizationName}} Desktop Editors?"
         }
       ],
@@ -72,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Haben Sie {{organizationName}} Desktop Editoren nicht?\" is a literal translation and sounds unnatural. A more natural phrasing would be \"Besitzen Sie keinen {{organizationName}} Desktop Editor?\" or \"Haben Sie keinen {{organizationName}} Desktop Editor?\"",
-          "suggestion": "Haben Sie keinen {{organizationName}} Desktop Editor?"
+          "description": "The translation \"Haben Sie {{organizationName}} Desktop Editoren nicht?\" is a literal translation that sounds unnatural in German. A more natural phrasing would be 'Besitzen Sie keine {{organizationName}} Desktop Editoren?' or 'Haben Sie keine {{organizationName}} Desktop Editoren?'",
+          "suggestion": "Besitzen Sie keine {{organizationName}} Desktop Editoren?"
         }
       ],
       "approved_at": null
@@ -84,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Δεν έχετε το {{organizationName}} Desktop Editors;' is a literal translation and doesn't flow naturally in Greek. A more natural phrasing would imply that the user *doesn't have* access or doesn't use the editors.",
-          "suggestion": "Δεν χρησιμοποιείτε το {{organizationName}} Desktop Editors;"
+          "description": "The translation 'Δεν έχετε το {{organizationName}} Desktop Editors;' is a literal translation and doesn't sound natural in Greek. A more natural phrasing would be something like 'Δεν έχετε εγκατεστημένους το {{organizationName}} Desktop Editors;' or 'Δεν έχετε το πρόγραμμα {{organizationName}} Desktop Editors;'",
+          "suggestion": "Δεν έχετε εγκατεστημένους το {{organizationName}} Desktop Editors;"
         }
       ],
       "approved_at": null
@@ -102,7 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Eikö sinulla ole {{organizationName}} -työpöytäeditoria?' is a literal translation that might sound awkward in Finnish. A more natural phrasing would be something like 'Sinulla ei ole {{organizationName}} -työpöytäeditoria?' or 'Oletko ilman {{organizationName}} -työpöytäeditoria?'. The current translation uses a question structure that isn't the most idiomatic.",
+          "description": "The translation \"Eikö sinulla ole {{organizationName}} -työpöytäeditoria?\" is a bit awkward. A more natural phrasing would be \"Sinulla ei ole {{organizationName}} -työpöytäeditoria?\" or \"Etkö sinulla ole {{organizationName}} -työpöytäeditoria?\" The original English implies a question to someone who doesn't have the editors.",
           "suggestion": "Sinulla ei ole {{organizationName}} -työpöytäeditoria?"
         }
       ],
@@ -120,13 +126,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Don't have\" as \"Չունե՞ք\" implies a question. The English phrase is a statement, not a question. It would be more accurate to translate it as a statement.",
-          "suggestion": "Մի՞ց դադրեցրիք {{organizationName}} աշխատասեղանի հավելվածի խմբագրիչները?"
+          "description": "The translation 'աշխատասեղանի հավելվածի խմբագրիչները?' is too literal and doesn't flow naturally in Armenian. A more natural translation for \"Desktop Editors\" would be something like 'աշխատասեղանի խմբագիրներ' or 'աշխատասեղանի ծառայություններում մասնակցիչներ', depending on the specific meaning intended. The possessive form with 'ի' also feels awkward.",
+          "suggestion": "Consider 'աշխատասեղանի խմբագիրներ' or 'աշխատասեղանի ծառայություններում մասնակցիչներ' depending on context."
         },
         {
-          "type": "formatting",
-          "description": "The word order in the Armenian translation sounds somewhat unnatural. While grammatically correct, it could be improved for better flow. Consider restructuring for a more idiomatic expression.",
-          "suggestion": "Ունե՞ք {{organizationName}} աշխատասեղանի հավելվածի խմբագրիչները?"
+          "type": "grammar",
+          "description": "The question mark placement might be more idiomatic in a different position, depending on the specific nuance intended. While not strictly incorrect, it's worth considering for better flow.",
+          "suggestion": "Experiment with placing the question mark at the beginning of the sentence: Չունե՞ք աշխատասեղանի խմբագիրներ? or Չունե՞ք աշխատասեղանի ծառայություններում մասնակցիչներ? "
         }
       ],
       "approved_at": null
@@ -137,7 +143,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Desktop Editors' is plural, but the Italian translation uses the singular 'Desktop Editor'. This implies the organization only offers one editor, while the English suggests multiple.",
+          "description": "The Italian translation uses the singular 'Editor' while the English uses the plural 'Editors'. It should be the plural to match the English.",
           "suggestion": "Non hai {{organizationName}} Desktop Editors?"
         }
       ],
@@ -149,8 +155,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"{{organizationName}}デスクトップエディターを持っていない場合?\" is a literal translation and sounds unnatural in Japanese. A more natural phrasing would be something like \"{{organizationName}}のデスクトップエディターをお持ちでない場合\" or \"{{organizationName}}のデスクトップエディターをお持ちですか?\" depending on the desired tone (question vs. statement).",
-          "suggestion": "{{organizationName}}のデスクトップエディターをお持ちでない場合"
+          "description": "The translation \"{{organizationName}}デスクトップエディターを持っていない場合?\" is a literal translation and sounds unnatural in Japanese. A more natural phrasing would be something like \"{{organizationName}}デスクトップエディターをお持ちでない場合?\" or \"{{organizationName}}デスクトップエディターをお持ちですか?\" (if implying a question).",
+          "suggestion": "{{organizationName}}デスクトップエディターをお持ちでない場合？"
+        },
+        {
+          "type": "formatting",
+          "description": "The question mark at the end feels abrupt. While technically correct, a softer phrasing might be better depending on the context.",
+          "suggestion": "Consider softening the tone with a more appropriate closing particle, or rephrasing the entire sentence for smoother reading."
         }
       ],
       "approved_at": null
@@ -167,8 +178,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ທ່ານຍັງບໍ່ໄດ້ຕິດຕັ້ງ {{organizationName}} Desktop Editors ແມ່ນບໍ່?\" is a bit literal and doesn't flow naturally in Lao. A more natural phrasing would be something like \"ເຈົ້າບໍ່ໄດ້ຕິດຕັ້ງ {{organizationName}} Desktop Editors ບໍ?\" or \"ເຈົ້າບໍ່ມີ {{organizationName}} Desktop Editors ບໍ?\"",
-          "suggestion": "ເຈົ້າບໍ່ມີ {{organizationName}} Desktop Editors ບໍ?"
+          "description": "The Lao translation 'ທ່ານຍັງບໍ່ໄດ້ຕິດຕັ້ງ {{organizationName}} Desktop Editors ແມ່ນບໍ່?' is a bit literal and could be improved for naturalness. A more common and natural phrasing would be 'ທ່ານບໍ່ມີ {{organizationName}} Desktop Editors ບໍ?' or 'ທ່ານບໍໍ່ໄດ້ໃຊ້ງານ {{organizationName}} Desktop Editors ບໍ?'",
+          "suggestion": "ທ່ານບໍໍ່ໄດ້ໃຊ້ງານ {{organizationName}} Desktop Editors ບໍ?"
         }
       ],
       "approved_at": null
@@ -179,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vai jums nav {{organizationName}} darbvirsmas redaktoru?' is a literal translation but doesn't flow naturally in Latvian. A more natural phrasing would be something like 'Nav jums {{organizationName}} darbvirsmas redaktori?' or 'Jums nav {{organizationName}} darbvirsmas redaktori?'",
-          "suggestion": "Jums nav {{organizationName}} darbvirsmas redaktori?"
+          "description": "The translation 'Vai jums nav {{organizationName}} darbvirsmas redaktoru?' is a literal translation and sounds slightly unnatural in Latvian. A more natural phrasing would be 'Vai nav jums {{organizationName}} darbvirsmas redaktori?' or 'Nav jums {{organizationName}} darbvirsmas redaktori?'",
+          "suggestion": "Nav jums {{organizationName}} darbvirsmas redaktori?"
         }
       ],
       "approved_at": null
@@ -197,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nie masz pakietu {{organizationName}} Desktop Editors?' implies that 'Desktop Editors' is a package or subscription. The original English suggests they might not *have* the editors, not necessarily a package. A more accurate translation would focus on possession, not package type.",
-          "suggestion": "Nie masz edytorów Desktop {{organizationName}}?"
+          "description": "The translation \"Nie masz pakietu {{organizationName}} Desktop Editors?\" implies that 'Desktop Editors' is a 'package'. The English phrase implies that the user may not *have* the editors.",
+          "suggestion": "Nie masz {{organizationName}} Desktop Editors?"
         }
       ],
       "approved_at": null
@@ -209,8 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Não tem editores de desktop {{organizationName}}?\" is a literal translation and sounds unnatural in Portuguese. A more natural phrasing would be something like \"Você não tem editores de desktop {{organizationName}}?\" or \"Não possui editores de desktop {{organizationName}}?\"",
-          "suggestion": "Você não tem editores de desktop {{organizationName}}?"
+          "description": "The translation \"Não tem editores de desktop {{organizationName}}?\" is a literal translation but doesn't flow naturally in Portuguese. It's missing the implied 'access' or 'permission' for using the desktop editors. A more natural phrasing would be \"Não possui editores de desktop {{organizationName}}?\" or \"Você não tem acesso aos editores de desktop {{organizationName}}?\"",
+          "suggestion": "Você não tem acesso aos editores de desktop {{organizationName}}?"
         }
       ],
       "approved_at": null
@@ -221,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Não tem editores de desktop {{organizationName}}?' is not ideal. A more natural and fluent translation would be 'Você não tem os Editores de Desktop da {{organizationName}}?' or 'Não possui os Editores de Desktop da {{organizationName}}?'. The current phrasing sounds a bit awkward in Portuguese.",
-          "suggestion": "Você não tem os Editores de Desktop da {{organizationName}}?"
+          "description": "The translation 'Não tem editores de desktop {{organizationName}}?' is a literal translation and doesn't flow naturally in Brazilian Portuguese. It's more common to use a phrasing that indicates a lack of access or availability.",
+          "suggestion": "Não possui editores de desktop {{organizationName}}?"
         }
       ],
       "approved_at": null
@@ -236,13 +247,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is too literal and doesn't flow naturally in Russian. A more natural phrasing would be something like \"У вас нет {{organizationName}} Desktop Editors?\" or \"У вас нет редакторов Desktop от {{organizationName}}?\"",
-          "suggestion": "У вас нет {{organizationName}} Desktop Editors?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -251,8 +256,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '{{organizationName}} Desktop Editors නැද්ද?' while understandable, isn't the most natural phrasing in Sinhala. A more natural rendering would be something like '{{organizationName}} Desktop Editors ඔබට නැද්ද?' (Do you not have {{organizationName}} Desktop Editors?) or '{{organizationName}} Desktop Editors නැවතී?' (Don't you have {{organizationName}} Desktop Editors?).",
-          "suggestion": "{{organizationName}} Desktop Editors ඔබට නැද්ද?"
+          "description": "The translation \"{{organizationName}} Desktop Editors නැද්ද?\" while conveying a similar sentiment, isn't the most natural or accurate translation of 'Don't have {{organizationName}} Desktop Editors?'. A more natural phrasing would be 'ඔබට {{organizationName}} Desktop Editors නැද්ද?' or 'ඔබට {{organizationName}} Desktop Editors ළඟ නැද්ද?'. The current phrasing sounds a bit abrupt and less conversational.",
+          "suggestion": "ඔබට {{organizationName}} Desktop Editors නැද්ද? or ඔබට {{organizationName}} Desktop Editors ළඟ නැද්ද?"
         }
       ],
       "approved_at": null
@@ -272,13 +277,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Немате {{organizationName}} Desktop Editors?' is a literal translation and doesn't flow naturally in Serbian. A more natural phrasing would be 'Niste korisnici {{organizationName}} Desktop Editors?' or 'Nemate instalirane {{organizationName}} Desktop Editors?'",
-          "suggestion": "Niste korisnici {{organizationName}} Desktop Editors?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -287,8 +286,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nemate' is grammatically correct, but it sounds slightly unnatural in this context. A more natural phrasing would be 'Niste li...' or 'Da li imate...'.",
-          "suggestion": "Da li imate {{organizationName}} Desktop Editors?"
+          "description": "The translation 'Nemate' is a valid word but doesn't quite convey the meaning of \"Don't have\". A more natural Serbian (Latin) translation would be \"Niste li\" or \"Imate li\". The current translation is somewhat literal and sounds unnatural.",
+          "suggestion": "Niste li {{organizationName}} Desktop Editors?"
         }
       ],
       "approved_at": null
@@ -296,7 +295,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Turkish translation includes an apostrophe (') before 'ınız' which, while not strictly incorrect, is less common and can be slightly jarring in modern Turkish. A more natural phrasing would omit the apostrophe.",
+          "suggestion": "{{organizationName}} Desktop Editors'unuz mu var?"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -305,8 +310,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Немає настільних редакторів {{organizationName}}?' is a literal translation and sounds slightly awkward in Ukrainian. A more natural phrasing would be 'У вас немає настільних редакторів {{organizationName}}?' or 'Ви не маєте настільних редакторів {{organizationName}}?'",
-          "suggestion": "У вас немає настільних редакторів {{organizationName}}?"
+          "description": "The translation \"Немає настільних редакторів {{organizationName}}?\" is a literal translation and doesn't flow naturally in Ukrainian. A more natural phrasing would emphasize the lack of editors provided *by* the organization.",
+          "suggestion": "Немає редакторів настільного {{organizationName}}?"
         }
       ],
       "approved_at": null
@@ -317,8 +322,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Bạn không có Trình chỉnh sửa {{organizationName}} cho Máy tính?' is a literal translation and doesn't flow naturally in Vietnamese. It sounds somewhat awkward. A more natural phrasing would imply 'Do you not have...?'",
-          "suggestion": "Bạn chưa có Trình chỉnh sửa {{organizationName}} cho Máy tính?"
+          "description": "The translation 'Bạn không có Trình chỉnh sửa {{organizationName}} cho Máy tính?' is a literal translation and sounds unnatural in Vietnamese. A more natural phrasing would be something like 'Bạn chưa có Trình chỉnh sửa {{organizationName}} trên máy tính?' or 'Bạn chưa cài đặt Trình chỉnh sửa {{organizationName}} trên máy tính?'",
+          "suggestion": "Bạn chưa có Trình chỉnh sửa {{organizationName}} trên máy tính?"
         }
       ],
       "approved_at": null

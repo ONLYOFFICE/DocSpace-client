@@ -2,62 +2,51 @@
   "name": "docspace",
   "version": "3.3.0",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
   "engines": {
     "node": ">=20",
-    "yarn": ">=4"
+    "pnpm": ">=9"
   },
   "scripts": {
-    "build": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run build",
-    "build:lite": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 3 --from '{@docspace/client,@docspace/login,@docspace/doceditor}' run build",
-    "bump": "yarn version apply --all",
-    "clean": "yarn workspaces foreach -vptiR run clean",
-    "deploy": "shx rm -rf ../publish/web && yarn workspaces foreach -ptR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run deploy && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
-    "start": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start",
-    "start-prod": "yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start-prod",
-    "start-prod:lite": "yarn workspaces foreach -vptiR -j 3 --from '{@docspace/client,@docspace/login,@docspace/doceditor}' run start-prod",
-    "start:internal": "node ./common/scripts/before-build.js && yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start:internal",
-    "start-prod:internal": "yarn workspaces foreach -vptiR -j 5 --from '{@docspace/client,@docspace/login,@docspace/doceditor,@docspace/management,@docspace/sdk}' run start-prod:internal",
-    "storybook": "yarn workspace @docspace/shared storybook",
-    "storybook-build": "yarn workspace @docspace/shared run storybook-build",
-    "storybook-serve": "yarn workspace @docspace/shared run storybook-serve",
-    "test": "yarn workspace @docspace/shared test",
-    "wipe": "shx rm -rf node_modules yarn.lock packages/**/node_modules",
-    "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
-    "check-circular": "yarn madge --circular ./packages",
-    "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
-    "lint": "yarn workspaces foreach -vptiR -j 5 --from '{@docspace/login,@docspace/doceditor,@docspace/client,@docspace/shared,@docspace/sdk}' run lint",
-    "lint:fix": "yarn workspaces foreach -vptiR -j 5 --from '{@docspace/login,@docspace/doceditor,@docspace/client,@docspace/shared,@docspace/sdk}' run lint:fix",
-    "test:build": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:build",
-    "test:e2e:docker:build": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:build",
-    "test:e2e:docker:start": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:start",
-    "test:e2e:docker:clear": "yarn workspaces foreach -vptiR --from '{@docspace/sdk,@docspace/login}' run test:e2e:docker:clear"
-  },
-  "old-scripts": {
-    "build:test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test",
-    "build:test.translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login,@docspace/editor}' run build:test.translation",
-    "e2e.test": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:sequential",
-    "e2e.test:sequential": "yarn workspace @docspace/client test:sequential && yarn workspace @docspace/login test:sequential",
-    "e2e.test:model": "yarn workspace @docspace/client test:model && yarn workspace @docspace/login test:model",
-    "e2e.test:translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:translation:model"
+    "before-build": "node ./common/scripts/before-build.js",
+    "build": "pnpm run before-build && pnpm nx run-many -t build -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "build:lite": "pnpm run before-build && pnpm nx run-many -t build -p @docspace/client @docspace/login @docspace/doceditor",
+    "bump": "pnpm version --workspace",
+    "clean": "pnpm -r run clean",
+    "deploy": "shx rm -rf ../publish/web && pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
+    "start": "pnpm run before-build && pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "start:lite": "pnpm run before-build && pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor",
+    "start-prod": "pnpm run before-build && pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "start-prod:lite": "pnpm run before-build && pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor",
+    "storybook": "pnpm nx storybook @docspace/shared",
+    "storybook-build": "pnpm nx storybook-build @docspace/shared",
+    "storybook-serve": "pnpm nx storybook-serve @docspace/shared",
+    "test": "pnpm nx test @docspace/shared",
+    "wipe": "pnpm nx reset && shx rm -rf node_modules pnpm-lock.yaml packages/**/node_modules",
+    "licenses-audit": "pnpm licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
+    "check-circular": "pnpm madge --circular ./packages",
+    "check-circular:graph": "pnpm madge --circular --image graph.svg ./packages",
+    "lint": "pnpm nx run-many -t lint -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "lint:fix": "pnpm nx run-many -t lint:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "tsc": "pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
+    "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci"
   },
   "devDependencies": {
     "@types/node": "22.9.3",
     "@types/react-text-mask": "5.4.14",
     "he": "1.2.0",
+    "lefthook": "^1.11.14",
     "madge": "6.1.0",
+    "nx": "21.2.0",
+    "react": "19.1.0",
     "shx": "0.3.4",
     "terser": "5.34.1",
     "ts-node": "10.9.2",
-    "typescript": "5.7.2"
+    "typescript": "5.6.3"
   },
-  "packageManager": "yarn@4.3.0",
+  "packageManager": "pnpm@10.12.3",
   "resolutions": {
-    "@types/react": "18.3.1",
+    "@types/react": "19.1.4",
+    "@types/react-dom": "19.1.5",
     "nth-check": "2.1.1"
   }
 }

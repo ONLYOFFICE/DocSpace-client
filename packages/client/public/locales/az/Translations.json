@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Siyahıdan seçin",
-  "ConnectingAccount": "Akkauntun qoşulması",
-  "DeleteFromTrash": "Seçilmiş elementlər zibil qutusundan silindi",
   "FileLocked": "Fayl Kilidləndi",
   "FileProtected": "Fayl parolla qorunur",
   "FileUnlocked": "Faylın Kilidi Açıldı",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Üçüncü tərəf məlumatları dəyiş",
   "ThirdPartyTitle": "Üçüncü tərəf xidmətləri",
   "TitleShowActions": "Fayl əyləmlərini göstər",
-  "TitleShowFolderActions": "Qovluq əyləmlərini göstər",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Qovluq əyləmlərini göstər"
 }

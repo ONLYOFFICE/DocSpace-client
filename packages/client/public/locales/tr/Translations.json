@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Listeden seç",
-  "ConnectingAccount": "Hesap bağlanıyor",
-  "DeleteFromTrash": "Seçilen öğeler Çöp Kutusundan başarıyla silindi",
   "FileLocked": "Dosya Kilitlendi",
   "FileProtected": "Dosya parola korumalıdır",
   "FileUnlocked": "Dosya Kilidi Kaldırıldı",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Üçüncü taraf bilgilerini değiştirin",
   "ThirdPartyTitle": "Üçüncü taraf hizmetleri",
   "TitleShowActions": "Dosya eylemlerini göster",
-  "TitleShowFolderActions": "Klasör eylemlerini göster",
-  "TypeTitleBoxNet": "Kutu",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google sürücü",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Klasör eylemlerini göster"
 }

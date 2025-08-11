@@ -3,7 +3,7 @@
   "content": "Open",
   "content_en_sha1_hash": "cf9b77061f7b3126b49d50a6fa68f7ca8c26b7a3",
   "created_at": "2025-05-19T21:30:55.917Z",
-  "updated_at": "2025-06-03T20:59:42.284Z",
+  "updated_at": "2025-08-04T07:30:01.586Z",
   "comment": {
     "text": "The translation key \"Open\" is used to display the label for a file opening action. It is commonly found on a button or link in UI elements that allow users to access or open files, such as external links or file picker dialogs. This key helps to provide clear and consistent language across different interfaces and locales.",
     "is_auto": true,
@@ -12,32 +12,32 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/VersionHistory/Section/Body/VersionRow.js",
-      "line_number": 201,
+      "line_number": 203,
       "context": "const contextOptions = [\n {\n key: \"open\",\n icon: ExternalLinkIcon,\n label: t(\"Files:Open\"),\n onClick: onOpenFile,\n },\n canChangeVersionFileHistory && {\n key: \"edit\",\n icon: AccessCommentReactSvgUrl,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 133,
-      "context": "getFileLink,\n getFolderLink,\n removeSharedFolder,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n \n const LOADER_TIMER = 500;",
+      "context": "getFileLink,\n getFolderLink,\n removeSharedFolder,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n import {\n getInfoPanelOpen,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 133,
-      "context": "getFileLink,\n getFolderLink,\n removeSharedFolder,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n \n const LOADER_TIMER = 500;",
+      "context": "getFileLink,\n getFolderLink,\n removeSharedFolder,\n } from \"@docspace/shared/api/files\";\n \n import { checkDialogsOpen } from \"@docspace/shared/utils/checkDialogsOpen\";\n import { hasOwnProperty } from \"@docspace/shared/utils/object\";\n import { createLoader } from \"@docspace/shared/utils/createLoader\";\n import { FILLING_STATUS_ID } from \"@docspace/shared/constants\";\n import {\n getInfoPanelOpen,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 690,
-      "context": "};\n \n const openOption = {\n key: \"open\",\n icon: ExternalLinkReactSvgUrl,\n label: t(\"Files:Open\"),\n onClick: () => window.open(item.websiteUrl, \"_blank\"),\n disabled: isInfo,\n };\n \n const infoOption = {",
+      "line_number": 692,
+      "context": "};\n \n const openOption = {\n key: \"open\",\n icon: ExternalLinkReactSvgUrl,\n label: t(\"Files:Open\"),\n onClick: () => window.open(item.websiteUrl, \"_blank\"),\n disabled: isInfo,\n dataTestId: \"oauth_files_open_option\",\n };",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/management/src/categories/spaces/sub-components/RowView/SpacesRoomRow.tsx",
+      "file_path": "/packages/management/src/app/spaces/multiple/spaces-row.tsx",
       "line_number": 98,
-      "context": "const protocol = window?.location?.protocol;\n \n const contextOptionsProps = [\n {\n label: t(\"Files:Open\"),\n key: \"space_open\",\n icon: ExternalLinkIcon,\n onClick: () => window.open(`${protocol}//${item.domain}/`, \"_blank\"),\n },\n {",
+      "context": "setProtocol(window?.location?.protocol);\n }, []);\n \n const contextOptionsProps = [\n {\n label: t(\"Files:Open\"),\n key: \"space_open\",\n icon: ExternalLinkIcon,\n onClick: () => window.open(`${protocol}//${item.domain}/`, \"_blank\"),\n },\n {",
       "module": "/packages/management"
     }
   ],
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Açmaq\" means \"to open\" (infinitive form). The English word \"Open\" (present tense) likely requires a different translation depending on the context (e.g., \"açıq\" for 'open' as an adjective or 'aç' for 'open' as an imperative). \"Açmaq\" is not the most accurate translation for the English word \"Open\".",
-          "suggestion": "Consider \"açıq\" (open - adjective) or \"aç\" (open - imperative) depending on the intended meaning in context."
+          "description": "The Azerbaijani translation \"Açmaq\" means \"to open\" as a verb. The English word \"Open\" is often used as a noun (e.g., \"Open file\") or a command. A more accurate translation might be \"Открыть\" (if referring to an action) or \"Açılış\" (if referring to the state of being open).",
+          "suggestion": "Consider \"Açılış\" or \"Открыть\" depending on the context."
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Άνοιγμα' can mean 'opening', in the context of 'Files:Open' (likely referring to the action of opening a file), a more accurate translation would be 'Άνοιγμα Αρχείου' or simply 'Άνοιγμα'. The current translation is too literal and lacks the nuance of a file-related action.",
-          "suggestion": "Consider 'Άνοιγμα Αρχείου' or 'Άνοιγμα' for better context."
+          "description": "The Greek translation 'Άνοιγμα' (Ánoigma) typically refers to 'opening' as a noun (e.g., the opening of a door). The English word 'Open' is a verb and signifies the action of opening. A more accurate translation would be 'Άνοιγμα' (Anigma) or 'Άνοιξε' (Anixe), depending on the intended nuance.",
+          "suggestion": "Consider 'Άνοιγμα' (Ánoigma) or 'Άνοιξε' (Anixe) as alternatives, depending on the context and desired meaning."
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otwórz' is an imperative form (command) meaning 'Open' (command). The key 'Files:Open' likely refers to an action or option to open a file, not a direct command to the user. A more accurate translation would be 'Otwieranie' (Opening) or 'Otwórz plik' (Open file), depending on the context.",
-          "suggestion": "Consider 'Otwieranie' or 'Otwórz plik' depending on the surrounding text."
+          "description": "The translation 'Otwórz' is an imperative form, meaning 'Open!' or 'To open'. 'Open' in English is a noun or a verb in the infinitive form. A more appropriate translation, depending on context, could be 'Otwieranie' (gerund - Opening) or 'Otwarcie' (noun - Opening). Without context, it's difficult to determine the best fit, but 'Otwórz' implies an instruction.",
+          "suggestion": "Consider 'Otwieranie' or 'Otwarcie' depending on the intended meaning."
         }
       ],
       "approved_at": null
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"අරින්න\" (Arinna) translates to \"open\" or \"remove\" but is more commonly associated with \"remove\" or \"take out.\" While \"open\" can be implied, it's not the most natural or precise translation for a button or menu item labeled 'Open'. A more suitable translation might be \"විවෘත කරන්න\" (Vivruta Kanna) which directly means 'Open'.",
-          "suggestion": "විවෘත කරන්න (Vivruta Kanna)"
+          "description": "'අරින්න' translates to 'take' or 'remove' in Sinhala, not 'open'. A more accurate translation for 'open' would be 'විවරන්න' (vivaranna).",
+          "suggestion": "විවරන්න (vivaranna)"
         }
       ],
       "approved_at": null
@@ -219,37 +219,19 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Отвори' is a command meaning 'Open' (imperative form). While technically a valid translation, it's not the most appropriate for a UI element labeled 'Open'. A more suitable translation might be 'Опција' (Option), 'Отвори Фајл' (Open File), or a similar descriptor depending on context.",
-          "suggestion": "Consider 'Опција' or 'Отвори Фајл' or another contextually appropriate translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Otvori' is the imperative form of the verb 'otvarati' (to open). The English word 'Open' in this context likely refers to a button or menu item. A more appropriate translation would be 'Otv' or 'Otvorene'.",
-          "suggestion": "Otv"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Aç' while literally meaning 'open', is not the most appropriate translation for 'Open' in the context of a file operation. It's a command, and 'Aç' is more commonly used for opening things generally.",
-          "suggestion": "Dosyayı Aç"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

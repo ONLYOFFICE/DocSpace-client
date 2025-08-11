@@ -3,7 +3,7 @@
   "content": "User DN",
   "content_en_sha1_hash": "cd3e5d959eafef42593d538687647d5c129dbd20",
   "created_at": "2025-05-19T21:30:54.326Z",
-  "updated_at": "2025-05-21T07:59:12.008Z",
+  "updated_at": "2025-05-24T08:13:05.209Z",
   "comment": {
     "text": "The \"LdapUserDN\" translation key is used to display the user's DN in a LDAP connection settings. It is labeled as \"User DN\" and appears on a form, likely a button or input field, where users can enter their distinguished name for LDAP authentication.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"DN İstifadəçisi\" is understandable, it's a somewhat literal translation. A more natural and accurate Azerbaijani translation for 'User DN' would be 'DN İstifadəçi Məlumatı' or 'DN İstifadəçi Kimliyi'.",
-          "suggestion": "DN İstifadəçi Məlumatı"
+          "description": "While 'DN İstifadəçisi' is a literal translation, it might not be the most natural or idiomatic way to express 'User DN' in Azerbaijani. 'DN İstifadəçisi' directly translates to 'DN User'. A more appropriate translation might be something like 'DN Məlumatı' or 'İstifadəçi DN' depending on the context and desired level of formality.",
+          "suggestion": "Consider 'DN Məlumatı' or 'İstifadəçi DN' for a more natural phrasing."
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"DN χρήστη\" is understandable, a more accurate and natural translation of \"User DN\" would be \"ΔΝ χρήστη\" or \"Διακριτικός Νόμος χρήστη\". 'DN' is an abbreviation and is often retained or transliterated.",
+          "suggestion": "ΔΝ χρήστη"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -75,13 +81,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Käyttäjä DN' is a direct transliteration of 'User DN'. While understandable, a more natural and idiomatic Finnish translation would be 'Käyttäjän erottelutunnus' or 'Käyttäjätunnus'.",
-          "suggestion": "Käyttäjän erottelutunnus"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nume distinct de utilizator' is a literal translation of 'User DN' and doesn't accurately convey the technical meaning. 'DN' stands for Distinguished Name, which is a hierarchical identifier. A more accurate translation would capture this concept.",
-          "suggestion": "Distinguished Name utilizator"
+          "description": "The translation 'Nume distinct de utilizator' is a literal translation of 'User DN' but doesn't fully capture the technical meaning. 'DN' stands for Distinguished Name, which has a specific meaning in LDAP. A more accurate translation would convey this technical aspect.",
+          "suggestion": "Utilizator DN (keeping the English abbreviation) or Nume Distinctiv al Utilizatorului"
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"පරිශීලක DN\" is a literal transliteration of \"User DN\" and doesn't convey the meaning effectively for a Sinhala audience in a technical context like LDAP. \"පරිශීලක\" refers to a craftsman or artisan, not a user in the LDAP sense.  A more accurate translation would be something conveying 'User Identifier' or 'User Distinguished Name'.",
-          "suggestion": "Consider \"පරිශීලකයාගේ වෙනසන්නාමනය\" (Parishilakayaage Venasannamaya - User Distinguished Name) or \"පරිශීලක හැඳුනුම්\" (Parishilak Hadunum - User Identifier)."
+          "description": "The translation \"පරිශීලක DN\" is a literal transliteration of \"User DN\". While understandable, a more natural Sinhala translation for 'User DN' would be 'භාවිතරයාගේ DN' (Pavitarayage DN) or 'පරිශීලක හැඳුනුම් DN' (Parishilaka hadanumu DN).",
+          "suggestion": "Consider 'භාවිතරයාගේ DN' or 'පරිශීලක හැඳුනුම් DN'."
         }
       ],
       "approved_at": null
@@ -195,13 +195,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'DN Корисника' is understandable, a more natural and precise Serbian (Cyrillic) translation for \"User DN\" would be \"Кориснички DN\" or \"DN корисника\". The current translation reverses the order, which is less common in Serbian.",
-          "suggestion": "Кориснички DN"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Унікальне ім'я користувача\" (Unique username) doesn't accurately convey the meaning of \"User DN\" (User Distinguished Name).  'DN' refers to a specific type of identifier within LDAP, not simply a unique username. It includes information about the user and their location in the directory structure.",
-          "suggestion": "Consider a more precise translation that reflects the LDAP context, such as \"Ідентифікатор користувача LDAP\" (LDAP User Identifier) or \"DN користувача\" (User DN) if using the English abbreviation is acceptable in the target audience."
+          "description": "The translation 'Унікальне ім'я користувача' (Unique user name) doesn't accurately convey the meaning of 'User DN'. User DN stands for Distinguished Name and is a specific technical term in LDAP. A more accurate translation would be something like 'Ідентифікатор користувача' (User Identifier) or 'Розрізнене ім'я користувача' (Distinguished User Name).",
+          "suggestion": "Розрізнене ім'я користувача"
         }
       ],
       "approved_at": null
@@ -231,13 +225,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"DN người dùng\" is understandable, a more natural and technically accurate translation of \"User DN\" in a Vietnamese technical context would be \"DN người dùng LDAP\" or \"DN người dùng Active Directory\" depending on the LDAP implementation.",
-          "suggestion": "DN người dùng LDAP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

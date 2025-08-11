@@ -3,7 +3,7 @@
   "content": "Attribute mapping",
   "content_en_sha1_hash": "27eab1836ffd4c37244c32f6e2d3186e58553f97",
   "created_at": "2025-05-19T21:30:54.168Z",
-  "updated_at": "2025-05-21T08:29:04.520Z",
+  "updated_at": "2025-05-24T08:41:48.278Z",
   "comment": {
     "text": "The \"LdapAttributeMapping\" translation key refers to the label for an attribute mapping component in a LDAP integration settings page. It is used to display a descriptive title for this setting, likely appearing as a header or section title within a dialog or settings panel.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تعيين الميزات\" while understandable, doesn't perfectly capture the meaning of \"Attribute mapping.\" \"Attribute mapping\" refers to the process of linking or correlating attributes, which isn't explicitly conveyed. A more accurate translation would emphasize the association or correspondence aspect.",
-          "suggestion": "ربط السمات"
+          "description": "The translation 'تعيين الميزات' while technically meaning 'attribute assignment/mapping', doesn't fully capture the nuance of 'Attribute mapping' in a technical context. It implies a general assignment of features, whereas 'Attribute mapping' specifically refers to the process of associating attributes from one system to another.",
+          "suggestion": "تخطيط السمات"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ການຖອດຄ່າສັດທະລັດ\" (kan thot kha satthalat) literally translates to 'attribute decoding' or 'attribute transferring'. While potentially understandable in context, it doesn't accurately convey the meaning of 'attribute mapping'.  'Mapping' implies a correspondence or relationship, which is missing in the current translation.",
-          "suggestion": "Consider a translation that emphasizes the concept of correspondence or relationship. For example, \"ການຕັ້ງຄ່າຄວາມສಂಬັດຂອງຄຸນນະລັກສນະ\" (kan tang kha khwam sombat khong khunnarak san) which translates to 'setting the relationship of attributes'."
+          "description": "The Lao translation \"ການຖອດຄ່າສັດທະລັດ\" (kan thot kha satthalat) literally translates to 'attribute decoding'. While 'decoding' might be conceptually related to mapping in some contexts, 'attribute mapping' generally refers to a direct correspondence or assignment, not a process of decoding. A more appropriate translation would capture the idea of correspondence or association.",
+          "suggestion": "Consider \"ການຕິດຄ່າລັກສະນະ\" (kan tit kha lak sane) which means 'attribute association' or \"ການກຳນົດຄ່າສັດທະລັດ\" (kan kamnot kha satthalat) which means 'attribute assignment'."
         }
       ],
       "approved_at": null
@@ -138,7 +138,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Mapowanie atrybutów DOS\" includes \"DOS\", which seems to be an unnecessary addition and doesn't reflect the original meaning of \"Attribute mapping\".  \"DOS\" is likely a misunderstanding or an attempt to add context that isn't present in the English term.",
+          "description": "The Polish translation \"Mapowanie atrybutów DOS\" includes \"DOS,\" which is likely an unnecessary and inaccurate addition. \"DOS\" refers to a specific operating system and doesn't belong in the translation of 'Attribute mapping'.",
           "suggestion": "Mapowanie atrybutów"
         }
       ],
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Mapare atribute\" is a literal translation but doesn't quite capture the nuanced meaning of \"Attribute mapping\" in the context of LDAP. It lacks the sense of correspondence or association.",
-          "suggestion": "Consider alternatives like \"Asocieri de atribute\", \"Corespondență de atribute\", or \"Definirea asocierilor de atribute\" for a more accurate representation. The best choice depends on the overall context of the LDAP configuration."
+          "description": "While \"Mapare atribute\" is understandable, it's not the most natural or precise translation of \"Attribute mapping.\" It literally translates to \"Mapping attributes.\" A more accurate and common translation would be \"Asocierea atributelor\" or \"Corespondența atributelor\".",
+          "suggestion": "Asocierea atributelor"
         }
       ],
       "approved_at": null
@@ -180,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගුණාංග සිතුවීම' (gunaṅga situvima) while technically meaning 'attribute thought' or 'attribute concept', doesn't accurately convey the meaning of 'attribute mapping' in a technical context. 'Mapping' implies a correspondence or association, which is missing in this translation. A more suitable translation should incorporate the idea of connection or correspondence.",
-          "suggestion": "Consider alternatives like 'විශේෂතා ගැටලීම' (vishishtatha gatleem) - 'attribute correspondence' or 'විශේෂතා සම්බන්ධතා' (vishishtatha sambandhataa) - 'attribute associations'."
+          "description": "The translation 'ගුණාංග සිතුවීම' while containing relevant words, doesn't fully capture the meaning of 'Attribute mapping'. 'Attribute mapping' implies a process or relationship, while 'ගුණාංග සිතුවීම' primarily means 'attribute thinking' or 'quality thinking'. A more suitable translation would emphasize the 'mapping' aspect, suggesting a relationship or correspondence.",
+          "suggestion": "Consider translations like 'විශේෂතා ඇමිණුම' (Vishishtaama anum) which more closely represents 'attribute mapping' by focusing on the connection or association."
         }
       ],
       "approved_at": null
@@ -204,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Мапирање Атрибута' is a transliteration rather than a true translation. 'Attribute mapping' would be more accurately conveyed as something like 'Упоредба атрибута' or 'Додељивање атрибута', depending on the specific context.",
-          "suggestion": "Consider 'Упоредба атрибута' or 'Додељивање атрибута' as more accurate translations."
+          "description": "The translation 'Мапирање Атрибута' is a literal transliteration of 'Attribute Mapping'. While understandable, a more natural Serbian (Cyrillic) translation would be 'Упоредба атрибута' or 'Додељивање атрибута'. 'Мапирање' is a borrowed word and sounds slightly awkward in this context.",
+          "suggestion": "Упоредба атрибута"
         }
       ],
       "approved_at": null

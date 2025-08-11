@@ -51,7 +51,7 @@ const GridComponent = ({
   const listRef = useRef<List | null>(null);
 
   const usePrevious = (value?: number | string) => {
-    const prevRef = useRef<number | string>();
+    const prevRef = useRef<number | string>(undefined);
 
     useEffect(() => {
       prevRef.current = value;
@@ -88,7 +88,7 @@ const GridComponent = ({
     isScrolling: boolean;
   }) => {
     const elem = children[index] as React.ReactElement;
-    const itemClassNames = elem.props?.className;
+    const itemClassNames = (elem.props as { className?: string })?.className;
 
     const isFolder = itemClassNames?.includes("isFolder");
     const isRoom = itemClassNames?.includes("isRoom");

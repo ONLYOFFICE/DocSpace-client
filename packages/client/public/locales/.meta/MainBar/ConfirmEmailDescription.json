@@ -3,7 +3,7 @@
   "content": "Use the link provided in the activation email. Haven't received an email with the activation link?",
   "content_en_sha1_hash": "1ea94356fb1abf2defd1d41b6cbe9fa77d977c11",
   "created_at": "2025-05-19T21:30:54.104Z",
-  "updated_at": "2025-05-21T07:54:02.115Z",
+  "updated_at": "2025-05-24T08:08:07.043Z",
   "comment": {
     "text": "The translation key \"ConfirmEmailDescription\" is used to display a message to users when they haven't received an activation email, prompting them to use the link provided in the main product. This text appears as a label on a button in the Main Bar component, encouraging users to take action to complete the activation process.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'keçid' (link) is repeated. While not incorrect, it can sound repetitive. Consider rephrasing for better flow.",
-          "suggestion": "Aktivləşdirmə e-məktubunda göndərilən linkdən istifadə edin. Aktivləşdirmə linki olan e-məktub almamısınız?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -78,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Finnish. 'Etkö ole saanut aktivointilinkkiä sähköpostilla?' is awkward. It's saying 'Haven't you received the activation link by email?' which is not the intended meaning.",
-          "suggestion": "Käytä aktivointisähköpostissa annettua linkkiä. Jos et ole saanut aktivointisähköpostia, tarkista roskapostikansio."
+          "description": "The translation 'Etkö ole saanut aktivointilinkkiä sähköpostilla?' is a bit awkward. A more natural phrasing would be 'Et ole saanut sähköpostilla aktivointilinkkiä?' or 'Oletko saanut aktivointilinkkiä sähköpostilla?'",
+          "suggestion": "Oletko saanut aktivointilinkkiä sähköpostilla?"
         }
       ],
       "approved_at": null
@@ -96,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ակտիվացման հղումով նամակ չե՞ք ստացել:' is a bit awkward. A more natural phrasing would be something like 'Ակտիվացման հղումը պարունակող նամակ չե՞ք ստացել:' or 'չե՞ք ստացել ակտիվացման հղումով նամակ։'",
-          "suggestion": "Համոզվեք, որ օգտագործել եք ակտիվացման նամակում առկա հղումը։ Ձեռք չենք առել ակտիվացման հղումով նամակը։"
+          "description": "The phrase \"Haven't received an email with the activation link?\" is not perfectly conveyed by \"Ակտիվացման հղումով նամակ չե՞ք ստացել:\" A more natural translation would emphasize the lack of email or imply a question of where it might be.",
+          "suggestion": "Օգտագործեք ակտիվացման նամակում նշված հղումը: Դեռ չեք ստացել ակտիվացման հղումով նամակը:"
         }
       ],
       "approved_at": null
@@ -123,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ບໍ?' is a question marker and can be improved for natural Lao phrasing. While technically correct, it's slightly stilted.",
+          "suggestion": "ໃຊ້ລິ້ງທີ່ລະບຸໄວ້ໃນອີເມວການເປີດໃຊ້ງານ. ບໍ່ໄດ້ຮັບອີເມວທີ່ມີລິ້ງເປີດໃຊ້ງານບໍ?"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Polish translation uses two sentences separated by a period. The English uses a question following a statement. This creates a slightly disjointed flow in Polish. Consider restructuring for better readability.",
+          "suggestion": "Użyj linku otrzymanego w e-mailu aktywacyjnym. Jeśli nie otrzymałeś e-maila z linkiem aktywacyjnym?"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -174,18 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'සක්‍රියන' is likely a misspelling of 'ක්‍රියාත්මක'.",
-          "suggestion": "ක්‍රියාත්මක"
+          "description": "The word 'සබැඳිය' (sabandiya) is used multiple times. While correct, using variety in wording might improve readability. Consider alternatives like 'සංදේශය' (sandeshaya) or 'එකම' (ekama) depending on the context.",
+          "suggestion": "Consider replacing one instance of 'සබැඳිය' with a synonym like 'සංදේශය' or 'එකම'."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While 'සක්‍රියන' can be interpreted as 'activation,' 'ක්‍රියාත්මක' is a more accurate and commonly used term for 'active' in this context. The entire phrase sounds slightly unnatural.",
-          "suggestion": "ක්‍රියාත්මක වි-තැපෑලෙහි ඇති සබැඳිය භාවිතා කරන්න. ක්‍රියාත්මක සබැඳියක් සහිත වි-තැපෑලක් ලැබුණේ නැද්ද?"
-        },
-        {
-          "type": "formatting",
-          "description": "The repetition of 'වි-තැපෑලක්' (email) is slightly repetitive. While grammatically correct, it could be improved for flow.",
-          "suggestion": "ක්‍රියාත්මක වි-තැපෑලෙහි ඇති සබැඳිය භාවිතා කරන්න. ක්‍රියාත්මක සබැඳියක් ලැබුණේ නැද්ද?"
+          "type": "grammar",
+          "description": "The phrase 'සක්‍රියන සබැඳියක් සහිත වි-තැපෑලක් ලැබුණේ නැද්ද?' can be slightly improved for smoother flow. It's grammatically correct but sounds a bit stiff.",
+          "suggestion": "Consider rephrasing to 'සක්‍රියන සබැඳියක් සහිත වි-තැපෑලක් ලැබී නැද්ද?' or 'ඔබට සක්‍රියන සබැඳියක් සහිත වි-තැපෑලක් ලැබී නැද්ද?'"
         }
       ],
       "approved_at": null
@@ -208,18 +209,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Use the link provided in the activation email\" is not accurately translated. \"Користите везу дату у емаил-у\" is a literal translation that doesn't flow naturally in Serbian. It implies 'use the link date in the email.'",
-          "suggestion": "Користите линк/везу из активационе емаил поруке."
+          "description": "The phrase \"везу дату\" is an unusual and potentially incorrect translation of \"link.\" It's more literally \"bound data\" and doesn't convey the intended meaning.",
+          "suggestion": "Користите линк из емаила за активацију."
         },
         {
-          "type": "spelling",
-          "description": "The word 'емаил' should ideally be 'е-маил' to be more consistent with the standard Serbian transliteration of 'email'. Although 'емаил' is common, 'е-маил' is preferred in more formal contexts.",
-          "suggestion": "е-маил"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The second part \"Haven't received an email with the activation link?\" is a bit awkward in the translation. \"Нисте добили емаил са линком за активацију?\" is grammatically correct but could be improved for naturalness.",
-          "suggestion": "Нисте примили емаил са линком за активацију?"
+          "type": "formatting",
+          "description": "The use of \"емаил\" is a transliteration and not a standard Serbian word. While commonly used, using the Serbian equivalent would be more appropriate.",
+          "suggestion": "Користите линк из емаила за активацију. Нисте добили емаил са линком за активацију?"
         }
       ],
       "approved_at": null
@@ -230,13 +226,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'vezu datu' is not idiomatic Serbian. It translates literally as 'link of data' which is incorrect in this context. It should be 'vezu' meaning 'link'.",
-          "suggestion": "Koristite vezu u email-u za aktivaciju."
+          "description": "The phrase 'veza datu' is not a natural or accurate translation of 'link'. It literally translates to 'connection data'.",
+          "suggestion": "Koristite link poslat u email-u za aktivaciju."
         },
         {
           "type": "grammar",
-          "description": "The sentence structure could be improved for better flow. It's a bit clunky in Serbian.",
-          "suggestion": "Koristite link poslat emailom za aktivaciju. Niste dobili email sa linkom za aktivaciju?"
+          "description": "While understandable, the sentence structure could be improved for better flow. 'Niste dobili email sa linkom za aktivaciju?' is a bit clunky.",
+          "suggestion": "Niste primili email sa linkom za aktivaciju?"
         }
       ],
       "approved_at": null

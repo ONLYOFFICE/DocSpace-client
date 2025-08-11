@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2025-06-18T07:34:14.805Z",
+  "updated_at": "2025-08-04T07:30:01.006Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -24,25 +24,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 50,
+      "line_number": 49,
       "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionNextcloud\"),\n component: (\n <SelectFileStep\n t={t}\n isMultipleUpload={false}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 50,
+      "line_number": 49,
       "context": "isTypeSelectEmpty: boolean,\n logoText: string,\n ) => {\n return [\n {\n title: t(\"Common:SelectFile\"),\n description: t(\"Settings:SelectFileDescriptionWorkspace\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 204,
+      "line_number": 203,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
-      "line_number": 205,
+      "line_number": 204,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },
@@ -63,6 +63,18 @@
       "line_number": 52,
       "context": "const { t } = useTranslation();\n \n // const sessionPath = sessionStorage.getItem(\"filesSelectorPath\");\n \n const headerLabel = fileTypeDetection.filterParam\n ? (t?.(\"Common:SelectFile\") ?? \"\")\n : (t?.(\"Common:SelectAction\") ?? \"\");\n \n const getFileTypeTranslation = React.useCallback(() => {\n switch (fileTypeDetection.filterParam) {\n case FilesSelectorFilterTypes.XLSX:",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
+      "line_number": 37,
+      "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
+      "line_number": 37,
+      "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
@@ -192,7 +204,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Selectare fișier' is understandable, a more natural and common Romanian translation for 'Select file' would be 'Alege fișier'. 'Selectare' implies a selection process, while 'Alege' directly means 'choose'.",
+          "description": "The translation 'Selectare fișier' isn't the most natural or idiomatic translation of 'Select file'. While technically correct, it sounds somewhat formal and awkward. A more common and natural translation would be 'Alege fișier' or 'Selectează fișier'.",
           "suggestion": "Alege fișier"
         }
       ],
@@ -228,7 +240,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Изабери датотеку\" is not the most natural or idiomatic Serbian (Cyrillic) translation of 'Select file'. A more common and preferred translation would be 'Избери датотеку'.  'Изабери' is technically correct, but 'Избери' is more frequently used in this context.",
+          "description": "The translation 'Изабери датотеку' while technically understandable, is not the most natural or idiomatic translation of 'Select file' in Serbian (Cyrillic). A more common and preferred translation would be 'Избери датотеку'.",
           "suggestion": "Избери датотеку"
         }
       ],
@@ -246,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Turkish translation 'Dosya Seç' is a literal translation but sounds unnatural. A more natural and idiomatic translation would be 'Dosya Yükle' or 'Dosya Seçimi'.",
-          "suggestion": "Dosya Yükle"
+          "description": "The translation 'Dosya Seç' is a literal word-for-word translation but sounds awkward and isn't the most natural way to say 'Select file' in Turkish. It lacks a grammatical connector.",
+          "suggestion": "Dosya seçin"
         }
       ],
       "approved_at": null

@@ -45,8 +45,8 @@ const EmailChangeHandler = () => {
       try {
         await changeEmail(uid, email, key);
         window.location.replace(`/profile?email_change=success`);
-      } catch (error) {
-        const knownError = error as TError;
+      } catch (e) {
+        const knownError = e as TError;
         let errorMessage: string;
 
         if (typeof knownError === "object") {

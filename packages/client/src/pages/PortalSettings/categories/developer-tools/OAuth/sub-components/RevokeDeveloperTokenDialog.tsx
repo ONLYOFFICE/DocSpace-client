@@ -177,6 +177,7 @@ const GenerateDeveloperTokenDialog = ({
               onChange={onChange}
               maxLength={10000}
               hasError={!!tokenError}
+              testId="revoke_token_input"
             />
           </FieldContainer>
         </div>
@@ -190,6 +191,7 @@ const GenerateDeveloperTokenDialog = ({
           isDisabled={!token || !isValidToken || !secret}
           isLoading={requestRunning}
           size={ButtonSize.normal}
+          testId="revoke_token_button"
         />
         <Button
           label={t("Common:CancelButton")}
@@ -197,6 +199,7 @@ const GenerateDeveloperTokenDialog = ({
           onClick={onClose}
           size={ButtonSize.normal}
           isDisabled={requestRunning}
+          testId="revoke_token_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

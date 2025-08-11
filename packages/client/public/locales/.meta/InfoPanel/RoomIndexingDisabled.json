@@ -3,7 +3,7 @@
   "content": "Automatic file indexing disabled in the room",
   "content_en_sha1_hash": "02f93b1ebdc68c686754c44ec9bc719c1dcc705a",
   "created_at": "2025-05-19T21:30:54.930Z",
-  "updated_at": "2025-05-28T09:30:02.437Z",
+  "updated_at": "2025-08-04T07:30:01.245Z",
   "comment": {
     "text": "This translation key is used for the UI message that indicates automatic file indexing is disabled in a room. It appears when the user interacts with settings or options related to file management or room features.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 276,
+      "context": "case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = (feed.data as TFeedData).lifeTime?.period;\n const value = (feed.data as TFeedData).lifeTime?.value;\n const maxValue = 9999;\n const period =",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 245,
-      "context": "case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case \"RoomLifeTimeSet\": {\n const periodLifeTime = feed.data.lifeTime.period;\n const value = feed.data.lifeTime.value;\n const maxValue = 9999;\n const period =",
+      "line_number": 254,
+      "context": "case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = feed.data.lifeTime?.period;\n const value = feed.data.lifeTime?.value;\n const maxValue = 9999;\n const period =",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'تفعيل الفهرسة التلقائية للملفات معطل في الغرفة' literally translates to 'Automatic file indexing activation is disabled in the room.' It's a bit awkward and less natural than a more direct translation.",
-          "suggestion": "تُعطِّل الفهرسة التلقائية للملفات في الغرفة"
-        },
-        {
-          "type": "spelling",
-          "description": "While technically correct, the phrasing 'تفعيل الفهرسة' (activation of indexing) can be simplified.",
-          "suggestion": "الفهرسة"
+          "description": "The translation 'تفعيل الفهرسة التلقائية للملفات معطل في الغرفة' literally translates to 'Automatic file indexing activation is disabled in the room'. It's a bit awkward and not the most natural way to express the intended meaning. A more accurate and natural phrasing would be 'الفهرسة التلقائية للملفات معطلة في الغرفة'.",
+          "suggestion": "الفهرسة التلقائية للملفات معطلة في الغرفة"
         }
       ],
       "approved_at": null
@@ -59,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vypnutí automatického indexování souborů v místnosti' is a bit too literal. 'Vypnutí' (switch off) implies an action performed, whereas the English says the feature is disabled (a state).",
-          "suggestion": "Automatické indexování souborů v místnosti je vypnuto"
+          "description": "The translation 'Vypnutí automatického indexování souborů v místnosti' literally translates to 'Turning off automatic file indexing in the room'. While understandable, 'disabled' implies a state of being, not an action of turning off. A more accurate translation would reflect that.",
+          "suggestion": "Automatické indexování souborů v místnosti je zakázáno"
         }
       ],
       "approved_at": null
@@ -77,8 +78,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Έγινε απενεργοποίηση της αυτόματης ευρετηρίασης αρχείων στο δωμάτιο\" is a bit wordy and passive. A more direct and natural translation would be better.",
-          "suggestion": "Η αυτόματη ευρετηρίαση αρχείων απενεργοποιήθηκε στο δωμάτιο"
+          "description": "The translation 'Έγινε απενεργοποίηση της αυτόματης ευρετηρίασης αρχείων στο δωμάτιο' is a bit verbose and formal for a user interface message. A more natural and concise translation would be better.",
+          "suggestion": "Απενεργοποίηση αυτόματης ευρετηρίασης αρχείων στο δωμάτιο"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a passive voice ('Έγινε απενεργοποίηση...') which can feel less direct in UI messages.  A more active voice is preferable.",
+          "suggestion": "Απενεργοποίηση αυτόματης ευρετηρίασης αρχείων στο δωμάτιο"
         }
       ],
       "approved_at": null
@@ -116,13 +122,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ルーム内での自動ファイルインデックス作成が無効になりました\" is a bit literal and not the most natural way to express the English meaning. While technically correct, it sounds a bit clunky in Japanese.",
-          "suggestion": "ルームの自動ファイルインデックスが無効になりました (Rūmu no jidō fairu indekkusu ga mēi ni narimashita)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -137,13 +137,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is overly literal and doesn't flow naturally in Lao. 'ການນໍາໃຊ້ການຄົ້ນຫາເອກະສານແບບອັດຕະໂນມັດຖືກປິດການນໍາໃຊ້' is verbose. A more natural phrasing would be better.",
-          "suggestion": "ການຄົ້ນຫາເອກະສານແບບອັດຕະໂນມັດປິດໃຊ້ໃນຫ້ອງນີ້"
+          "description": "The translation is overly literal and sounds unnatural in Lao. \"ການນໍາໃຊ້ການຄົ້ນຫາເອກະສານແບບອັດຕະໂນມັດຖືກປິດການນໍາໃຊ້\" is a very wordy way to convey the meaning.",
+          "suggestion": "ອັດຕະໂນມັດການຄົ້ນຫາເອກະສານປິດການນໍາໃຊ້ໃນຫ້ອງນີ້"
         },
         {
           "type": "grammar",
-          "description": "The repetition of 'ການນໍາໃຊ້' is grammatically awkward in Lao.",
-          "suggestion": "ການຄົ້ນຫາເອກະສານແບບອັດຕະໂນມັດປິດໃຊ້ໃນຫ້ອງນີ້"
+          "description": "While not strictly incorrect, the phrasing 'ຖືກປິດການນໍາໃຊ້' is a bit clunky. A more natural phrasing would improve readability.",
+          "suggestion": "ປິດການນໍາໃຊ້"
         }
       ],
       "approved_at": null
@@ -157,7 +157,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Automatic file indexing' is better translated as 'Automatische bestandsindexering' rather than 'Automatische indexeren van bestanden'. The latter is less concise and sounds slightly unnatural in Dutch.",
+          "suggestion": "Automatische bestandsindexering uitgeschakeld in de kamer"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -169,13 +175,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'ficheiros' could be improved for a more natural flow in Brazilian Portuguese. 'Arquivos' is a common alternative.",
-          "suggestion": "Indexação automática de arquivos desativada na sala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -187,13 +187,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"pentru această sală\" sounds slightly awkward in this context. A more natural phrasing would be \"în această sală\".",
-          "suggestion": "Indexarea automată a fișierelor este dezactivată în această sală"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -207,14 +201,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'දර්ශනය' (darshanaya) which translates to 'view' or 'display' is not the most accurate translation of 'indexing' in this context. It suggests showing the files rather than cataloging them.",
-          "suggestion": "කාමරයේ ස්වයංක්‍රීය ගොනු ලේඛනය අක්‍රිය කර ඇත"
-        },
-        {
           "type": "incorrect_translation",
-          "description": "The word 'ලේඛනය' (lekhinaya) translates to 'record' or 'register'. While not a perfect equivalent to 'indexing', it conveys the idea of creating a catalog or record of files more accurately than 'දර්ශනය'.",
-          "suggestion": "කාමරයේ ස්වයංක්‍රීය ගොනු ලේඛනය අක්‍රිය කර ඇත"
+          "description": "The translation \"කාමරයේ ස්වයංක්‍රීය ගොනු දර්ශනය අක්‍රිය කර ඇත\" doesn't perfectly capture the meaning of \"Automatic file indexing disabled in the room.\" \"දර්ශනය\" (darshana) means 'view' or 'display', not 'indexing'. A more accurate translation would focus on the indexing process itself.",
+          "suggestion": "කාමරයේ ස්වයංක්‍රීය ගොනු ක්‍රියාවලිය අක්‍රිය කර ඇත (Kamaraye swayanakriya gonu kriyawaliya akriya kara ath) - This translates to 'Automatic file indexing process disabled in the room'"
         }
       ],
       "approved_at": null
@@ -234,13 +223,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'фајлова' should be 'фајлова'. The Serbian Cyrillic alphabet does not have a 'j' in this context.",
-          "suggestion": "фајлова"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -267,8 +250,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tự động lập chỉ mục tập tin đã bị vô hiệu hóa trong phòng' is technically correct but a bit formal and clunky for this context. 'Lập chỉ mục' is a direct translation of 'indexing' and can sound overly technical.  A more natural phrasing would be something like 'Tự động lập danh mục tập tin đã bị tắt trong phòng' or 'Tự động lập chỉ mục tập tin đã tắt trong phòng'.",
-          "suggestion": "Tự động lập danh mục tập tin đã bị tắt trong phòng"
+          "description": "The translation 'Tự động lập chỉ mục tập tin đã bị vô hiệu hóa trong phòng' is a bit literal and doesn't flow naturally in Vietnamese. 'Lập chỉ mục' is a direct translation of 'indexing' but might be too technical for the intended user.",
+          "suggestion": "Tự động lập chỉ mục tệp tin đã tắt trong phòng"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'vô hiệu hóa' is a bit formal. A more common and understandable term would be more appropriate.",
+          "suggestion": "Tự động lập chỉ mục tệp tin đã bị tắt trong phòng"
+        },
+        {
+          "type": "spelling",
+          "description": "Although 'tệp tin' is correct, 'tài liệu' might be a more user-friendly term, depending on the context.",
+          "suggestion": "Tự động lập chỉ mục tài liệu đã bị tắt trong phòng"
         }
       ],
       "approved_at": null

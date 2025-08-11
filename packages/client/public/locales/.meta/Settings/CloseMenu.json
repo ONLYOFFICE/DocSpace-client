@@ -3,7 +3,7 @@
   "content": "Close menu",
   "content_en_sha1_hash": "6c9fc990898478022834278db2a52594773d2b71",
   "created_at": "2025-05-19T21:30:50.919Z",
-  "updated_at": "2025-05-28T09:30:02.305Z",
+  "updated_at": "2025-05-26T07:57:32.339Z",
   "comment": {
     "text": "The \"CloseMenu\" translation key is used to display the text \"Close menu\" on a button in a modal dialog. It is part of a user interface element that allows users to dismiss a dialog and close any associated menus or actions.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Menyunu bağlayın' literally translates to 'Tie the menu'. A more accurate and natural translation for 'Close menu' would be something like 'Qapayın' (Close) or 'Bağlayın' (Close/Shut).",
-          "suggestion": "Qapayın"
+          "description": "The translation \"Menyunu bağlayın\" literally translates to \"Tie the menu\". The intended meaning of \"Close menu\" is to dismiss or hide the menu. A more accurate translation would convey that action.",
+          "suggestion": "Menyunu bağla"
         }
       ],
       "approved_at": null
@@ -77,9 +77,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation 'Sulje menu ' is a direct translation but sounds unnatural in Finnish. 'Sulje' implies closing something, and 'menu' is already understood as something that can be closed.",
+          "suggestion": "Sulje"
+        },
+        {
           "type": "formatting",
-          "description": "The translation includes a leading space.",
-          "suggestion": "Sulje menu"
+          "description": "There is a space before the quotation mark at the end of the translated string.",
+          "suggestion": "Remove the space before the final quotation mark."
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"වට්ටෝරුව වසන්න\" literally translates to \"Close the button\" which isn't quite the intended meaning of 'Close menu'. While 'වට්ටෝරුව' (wattoruwa) can refer to a button, the phrasing is awkward.",
-          "suggestion": "A more natural translation for \"Close menu\" would be \"වට්ටෝරුව අයින් කරන්න\" (wattoruwa aein karanna) which means 'Remove the button/menu' or simply \"වසන්න\" (vasanna) - 'close' if the context makes it clear."
+          "description": "The translation \"වට්ටෝරුව වසන්න\" literally translates to \"Cover the button.\" While understandable, it's not the most natural or precise translation of \"Close menu.\" A more accurate and idiomatic translation would convey the action of closing, not just covering, the menu.",
+          "suggestion": "වට්ටෝරුව අයින් කරන්න (Vattoruwa aein karanna - Remove the button) or  වට්ටෝරුවම වහන්න (Vattoruwama vahanna - Close the button/menu)"
         }
       ],
       "approved_at": null
@@ -192,8 +197,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Затвори мени\" is not the most natural or accurate translation of \"Close menu.\"  \"Затвори мени\" literally translates to 'Close menu' but sounds awkward in Serbian. A more natural phrasing would be 'Затвори мени' (Close the menu).",
-          "suggestion": "Затвори мени"
+          "description": "The Serbian (Cyrillic) translation \"Затвори мени\" is a literal translation of \"Close menu\" but sounds unnatural in Serbian. A more natural phrasing would be \"Затвори мени\" or \"Претходни мени\".",
+          "suggestion": "Претходни мени"
         }
       ],
       "approved_at": null

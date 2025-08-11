@@ -3,7 +3,7 @@
   "content": "Data import from Google Workspace to {{organizationName}} {{productName}} is complete!",
   "content_en_sha1_hash": "ef10a17235d9e03bfb43af21ea4434872953d860",
   "created_at": "2025-05-19T21:30:51.619Z",
-  "updated_at": "2025-05-28T09:30:02.506Z",
+  "updated_at": "2025-06-30T12:20:31.408Z",
   "comment": {
     "text": "This translation key is used for a completion message when data import from Google Workspace is finished. The message informs users that the import process has been completed successfully and displays the product name of the {{organizationName}}. It appears in a dialog or notification after a successful import operation.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 154,
+      "line_number": 153,
       "context": "description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"GoogleWorkspace\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <ImportCompleteStep t={t} />,\n },",
       "module": "/packages/client"
     },
@@ -45,7 +45,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"Входирането\" is not the most natural way to say 'import' in Bulgarian. It's technically correct but sounds awkward and less common.",
+          "suggestion": "Импортирането на данни от Google Workspace към {{organizationName}} {{productName}} приключи!"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -65,9 +71,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The translation 'Η εισαγωγή δεδομένων από το Google Workspace στο {{productName}} του {{organizationName}} ολοκληρώθηκε!' is slightly awkward. A more natural phrasing would be 'Η εισαγωγή δεδομένων από το Google Workspace στο {{productName}} {{organizationName}} έχει ολοκληρωθεί!' or 'Η εισαγωγή δεδομένων από το Google Workspace στο {{productName}} της {{organizationName}} ολοκληρώθηκε!'",
+          "suggestion": "Η εισαγωγή δεδομένων από το Google Workspace στο {{productName}} {{organizationName}} έχει ολοκληρωθεί!"
+        },
+        {
           "type": "formatting",
-          "description": "The Greek translation places 'του' between 'στο' and '{{organizationName}}'. While grammatically valid, it might be more natural to place it after '{{organizationName}}' for better readability in a user interface.",
-          "suggestion": "Η εισαγωγή δεδομένων από το Google Workspace στο {{organizationName}} του {{productName}} ολοκληρώθηκε!"
+          "description": "The possessive particle 'του' suggests that {{productName}} belongs to {{organizationName}}. While not incorrect, depending on the specific product relationship, using 'της' (of) might be more appropriate or removing the particle altogether could improve flow.",
+          "suggestion": "Η εισαγωγή δεδομένων από το Google Workspace στο {{productName}} της {{organizationName}} ολοκληρώθηκε!"
         }
       ],
       "approved_at": null
@@ -84,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The colon and space after \"{{productName}}\" are awkward in Finnish. It breaks the flow of the sentence.",
-          "suggestion": "Tietojen tuonti Google Workspacesta {{organizationName}} {{productName}}-tuotteeseen on suoritettu!"
+          "description": "The colon and space after 'productName' in the Finnish translation are not ideal for a user-facing message. It breaks the flow.",
+          "suggestion": "Tietojen tuonti Google Workspacesta {{organizationName}} {{productName}} on suoritettu!"
         }
       ],
       "approved_at": null
@@ -101,9 +112,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Data import from Google Workspace\" should be translated more naturally in Armenian. A more idiomatic translation would be something like \"Google Workspace-ից տվյալներ ներմուծվել են...\"",
+          "suggestion": "Google Workspace-ից տվյալներ ներմուծվել են..."
+        },
+        {
           "type": "formatting",
-          "description": "The Armenian translation uses a hyphen (-) between 'Google Workspace' and 'ից'. While understandable, using an en dash (–) might be more appropriate for this type of connection, signifying a relationship or association rather than a direct connection.",
-          "suggestion": "Google Workspace–ից տվյալների ներմուծումը..."
+          "description": "The Armenian translation does not include the spaces before and after the `{{organizationName}}` and `{{productName}}` variables as present in the English.",
+          "suggestion": "Google Workspace-ից տվյալներ ներմուծվել են {{organizationName}} {{productName}}:"
         }
       ],
       "approved_at": null
@@ -156,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'A importação de dados...' is grammatically incorrect. It should be 'A importação dos dados...' or simply 'A importação...'.",
-          "suggestion": "A importação dos dados do Google Workspace para o {{organizationName}} {{productName}} foi concluída!"
+          "description": "The Portuguese translation uses 'A importação' which is grammatically correct but sounds slightly less natural than 'A importação de'.",
+          "suggestion": "A importação de dados do Google Workspace para o {{organizationName}} {{productName}} foi concluída!"
         }
       ],
       "approved_at": null
@@ -168,8 +184,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence starts with 'A' (feminine article) instead of 'A importação' (The import). This is grammatically incorrect in Portuguese.",
-          "suggestion": "A importação de dados do Google Workspace para o {{organizationName}} {{productName}} foi concluída!"
+          "description": "The phrase 'A importação de dados...' should be 'A importação dos dados...' to agree in number with 'dados' (data).",
+          "suggestion": "A importação dos dados do Google Workspace para o {{organizationName}} {{productName}} foi concluída!"
         }
       ],
       "approved_at": null
@@ -180,8 +196,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'date' is used instead of 'datele'. 'Date' is plural and 'datele' is the correct plural form for 'data'.",
-          "suggestion": "Import datele din Google Workspace în {{organizationName}} {{productName}} este finalizat!"
+          "description": "The word 'date' is used incorrectly. 'Date' means 'date' in Romanian, but in this context, 'import' should be the correct translation.",
+          "suggestion": "Importul de date din Google Workspace în {{organizationName}} {{productName}} este finalizat!"
         }
       ],
       "approved_at": null
@@ -213,7 +229,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses Cyrillic script which is appropriate for Serbian. However, consistency in handling variables {{organizationName}} and {{productName}} should be ensured across all translations.",
+          "suggestion": "Ensure the placeholders {{organizationName}} and {{productName}} are handled consistently in all languages and localization processes."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

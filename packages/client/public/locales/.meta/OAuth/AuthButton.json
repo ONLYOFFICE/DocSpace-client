@@ -3,7 +3,7 @@
   "content": "Auth button",
   "content_en_sha1_hash": "42d86c4f8b922902e61c87c4247787aa5fa197e8",
   "created_at": "2025-05-19T21:30:53.817Z",
-  "updated_at": "2025-05-28T09:30:02.604Z",
+  "updated_at": "2025-08-04T07:30:01.445Z",
   "comment": {
     "text": "The AuthButton translation key refers to the label displayed on an \"Auth button\" component used in OAuth authentication workflows. It appears as a title within a modal dialog, guiding users through the authorization process. Translators should use this key for buttons and dialog titles related to authenticating with external services.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/store/OAuthStore.ts",
-      "line_number": 738,
-      "context": "};\n \n const authButtonOption = {\n key: \"auth-button\",\n icon: CodeReactSvgUrl,\n label: t(\"AuthButton\"),\n onClick: onShowPreview,\n disabled: !item.enabled,\n };\n \n const enableOption = {",
+      "line_number": 744,
+      "context": "};\n \n const authButtonOption = {\n key: \"auth-button\",\n icon: CodeReactSvgUrl,\n label: t(\"AuthButton\"),\n onClick: onShowPreview,\n disabled: !item.enabled,\n dataTestId: \"oauth_auth_option\",\n };",
       "module": "/packages/client"
     }
   ],
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tlačítko Auth\" is a literal translation and doesn't convey the intended meaning. 'Auth' is an abbreviation and should ideally be translated or replaced with a Czech equivalent that describes the button's function.",
-          "suggestion": "Consider translating 'Auth' to 'Autorizace' (Authorization) or providing a more descriptive label like 'Přihlašovací tlačítko' (Login button) depending on the context.  A more suitable translation would depend on the specific purpose of the button. Without more context, 'Tlačítko pro autorizaci' (Authorization button) is a reasonable alternative."
+          "description": "The translation 'Tlačítko Auth' is a literal translation and doesn't convey the intended meaning of 'Auth button' in a natural way for Czech speakers. 'Auth' is an abbreviation and likely needs to be explained or replaced with a Czech equivalent if the context allows.",
+          "suggestion": "Consider 'Autorizační tlačítko' (Authorization button) or 'Přihlašovací tlačítko' (Login button) depending on the specific function of the button. Alternatively, if 'Auth' is a known term in the target audience's context, keeping 'Tlačítko Auth' might be acceptable, but further context is needed to confirm."
         }
       ],
       "approved_at": null
@@ -66,8 +66,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The German translation 'Auth-Button' uses a hyphen to combine the words. While understandable, it's not the most idiomatic way to represent a compound noun in German. It's technically correct but could be improved for better readability and stylistic consistency.",
-          "suggestion": "Auth Button"
+          "description": "The German translation \"Auth-Button\" uses a hyphen which might not be standard. While not incorrect, it's potentially unconventional for technical terms and may benefit from review based on existing style guides. Consider whether a space or no hyphen would be preferred.",
+          "suggestion": "Consider reviewing if a space or no hyphen is more appropriate based on established style guides."
         }
       ],
       "approved_at": null
@@ -126,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ກົດອະນຸຍາດ\" (kot anuyat) is understandable, it's a more literal translation of 'authorize' rather than directly conveying 'auth button'. A more natural translation considering the context would be something like 'ປຸ່ມຢັ້ງຢືນ' (pum yangyeun) or 'ປຸ່ມຮັບອະນຸຍາດ' (pum rup anuyat).",
-          "suggestion": "ປຸ່ມຢັ້ງຢືນ (pum yangyeun) or ປຸ່ມຮັບອະນຸຍາດ (pum rup anuyat)"
+          "description": "The translation \"ກົດອະນຸຍາດ\" while technically meaning 'authorization button', isn't the most natural or commonly used term for an 'Auth button' in a user interface context. A more common and direct translation might be \"ປຸ່ມຢັ້ງຢືນ\" (pum yang yeun) or \"ປຸ່ມເຂົ້າສູ່ລະບົບ\" (pum khao su lap bob) depending on the button's function.",
+          "suggestion": "Consider \"ປຸ່ມຢັ້ງຢືນ\" (pum yang yeun) or \"ປຸ່ມເຂົ້າສູ່ລະບົບ\" (pum khao su lap bob)."
         }
       ],
       "approved_at": null
@@ -150,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"Metoda uwierzytelnienia\" translates to \"Authentication method\". While related to an auth button, it doesn't directly represent the button itself.  A more accurate translation might be \"Przycisk autoryzacji\" or \"Przycisk uwierzytelniania\".",
-          "suggestion": "Przycisk autoryzacji"
+          "description": "The Polish translation \"Metoda uwierzytelnienia\" translates to \"Authentication method\", which is not equivalent to \"Auth button\". While related, it doesn't directly convey the meaning of a button for authentication.",
+          "suggestion": "Consider a translation like \"Przycisk autoryzacji\" or \"Przycisk logowania\" which more closely reflects the meaning of an 'Auth button'."
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'සත්‍යාපන බොත්තම' is technically correct, a more natural and commonly used translation for 'Auth button' in Sinhala would be 'ප්‍රමauthenticating බොත්තම' or 'අauthenticating බොත්තම'. 'සත්‍යාපන' can sound formal or bureaucratic in this context.",
-          "suggestion": "ප්‍රමauthenticating බොත්තම"
+          "description": "The translation \"සත්‍යාපන බොත්තම\" literally translates to \"Verification button\". While close, \"Auth button\" often refers to a button that initiates the authentication process, which might be better conveyed with a phrase emphasizing initiation or access.",
+          "suggestion": "Consider alternatives like \"ප්‍රauthentication බොත්තම\" (pramaanikaaran bottama - authentication button) or \"ලියාපදිංචි බොත්තම\" (liyapadinchik bottama - login button/registration button) depending on the specific function of the button. More context would be beneficial to suggest a precise alternative."
         }
       ],
       "approved_at": null
@@ -207,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Дугме за аутентификацију\" is understandable, a more natural and idiomatic translation of \"Auth button\" in Serbian (Cyrillic) would be \"Дугме за пријаву\" or \"Дугме за ауторизацију\". \"Аутентификација\" is a more formal term and might not be the best fit for a user interface element.",
-          "suggestion": "Дугме за пријаву"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -231,13 +225,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Кнопка «Аутентифікація»\" is overly literal and formal for a user interface element like an \"Auth button\". A more natural and user-friendly translation would be something like \"Кнопка авторизації\" or \"Кнопка входу\".",
-          "suggestion": "Кнопка авторизації"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

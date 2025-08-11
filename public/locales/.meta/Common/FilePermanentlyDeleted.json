@@ -3,7 +3,7 @@
   "content": "The file will be permanently deleted in 30 days.",
   "content_en_sha1_hash": "0893b91fab956db6aa23b845defda697042a8cb4",
   "created_at": "2025-05-19T21:30:45.251Z",
-  "updated_at": "2025-06-18T07:34:14.878Z",
+  "updated_at": "2025-06-30T12:20:31.224Z",
   "comment": {
     "text": "The translation key \"FilePermanentlyDeleted\" is used to display a message indicating that a file will be permanently deleted in 30 days. It appears as part of a delete confirmation dialog in the UI, providing context for users who have chosen to delete a file and ensuring they understand the permanent nature of the action.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 200,
+      "line_number": 204,
       "context": "isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 200,
+      "line_number": 204,
       "context": "isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 200,
+      "line_number": 204,
       "context": "isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (\n <>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 48,
-      "context": "<ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:MoveToTrashTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </span>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "line_number": 52,
+      "context": "})}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n {t(\"Common:DeleteFile\")}\n {t(\"Common:FilePermanentlyDeleted\")}\n {t(\"Common:WantToContinue\")}\n </span>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/doceditor"
     }
   ],
@@ -57,13 +57,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'permanently deleted' is more accurately conveyed as 'безвъзвратно изтрит' in Bulgarian to emphasize the irreversible nature of the action. 'Изтрит завинаги' is understandable but less precise.",
-          "suggestion": "Файлът ще бъде безвъзвратно изтрит след 30 дни."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -105,7 +99,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation \"Ֆայլը ընդմիշտ կջնջվի 30 օրվա ընթացքում:\" literally translates to 'The file will be permanently deleted within 30 days.' While understandable, the English implies a waiting period *before* deletion. A more accurate translation would convey that the deletion will happen *after* the 30-day period.",
+          "suggestion": "Ֆայլը մշտապես ջնջվելու է 30 օրից հետո:"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Fails tiks neatgriezeniski izdzēsts 30 dienu laikā' is a bit awkward. While technically correct, it's not the most natural way to express this in Latvian. A more natural phrasing would emphasize the future action.",
-          "suggestion": "Faili tiks neatgriezeniski izdzēsts pēc 30 dienām."
+          "description": "The translation \"Fails tiks neatgriezeniski izdzēsts 30 dienu laikā.\" doesn't quite capture the nuance of 'in 30 days'. It literally translates to 'The file will be irrevocably deleted within 30 days'. While understandable, it's slightly less natural sounding in Latvian. A better phrasing would emphasize the timeframe.",
+          "suggestion": "Fails tiks neatgriezeniski izdzēsts pēc 30 dienām."
         }
       ],
       "approved_at": null
@@ -186,13 +186,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Sinhala word 'දවස්' (davas) which means 'days' is misspelled. It should be 'වස'.",
-          "suggestion": "ගොනුව වස 30කින් සදහටම මැකෙනු ඇත."
+          "description": "The Sinhala word 'දවස්' (davas) should ideally be 'වසංගුම්' (vasangum) when referring to a duration of time. While 'davas' means 'days', 'vasangum' implies a period or duration, which is more appropriate in this context.",
+          "suggestion": "ගොනුව වසංගුම් 30 කින් සදහටම මැකෙනු ඇත."
         },
         {
           "type": "formatting",
-          "description": "The Sinhala number '𑇬' doesn't render correctly and the number should appear as '30'.",
-          "suggestion": "ගොනුව වස 30කින් සදහටම මැකෙනු ඇත."
+          "description": "The number '30' is placed within the Sinhala word 'වසංගුම්'. While not strictly incorrect, it's more readable to include it outside of the word, or separate with a space.",
+          "suggestion": "ගොනුව වසංගුම් 30 කින් සදහටම මැකෙනු ඇත."
         }
       ],
       "approved_at": null
@@ -212,7 +212,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Датотека' is a somewhat informal term for 'file'. While not strictly incorrect, 'Фaјл' or 'Фaјл' (transliterated from 'File') would be more standard and maintain a consistent tone with English.",
+          "suggestion": "Фaјл ће бити трајно обрисана за 30 дана."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -239,8 +245,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày' is not the most natural or accurate rendering of 'The file will be permanently deleted in 30 days.' 'Xóa vĩnh viễn' is a bit awkward. A better phrasing would emphasize the time frame for recovery is over.",
-          "suggestion": "Tập tin sẽ bị xóa sau 30 ngày và không thể phục hồi."
+          "description": "The translation \"Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày.\" is not the most natural or precise translation of \"The file will be permanently deleted in 30 days.\" \"Bị xóa\" implies a passive deletion. A more accurate phrasing would emphasize the scheduled removal.",
+          "suggestion": "Tập tin sẽ bị xóa khỏi hệ thống sau 30 ngày."
         }
       ],
       "approved_at": null

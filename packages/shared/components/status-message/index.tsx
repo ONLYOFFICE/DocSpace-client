@@ -26,20 +26,13 @@
 import React from "react";
 import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 
-import styled from "styled-components";
-import commonIconsStyles, {
-  IconSizeType,
-} from "../../utils/common-icons-style";
+import { IconSizeType } from "../../utils/common-icons-style";
 import styles from "./StatusMessage.module.scss";
 import { Text } from "../text";
 
 interface StatusMessageProps {
   message: string;
 }
-
-const StyledDangerIcon = styled(DangerToastReactSvg)`
-  ${commonIconsStyles}
-`;
 
 const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
   const [isVisible, setIsVisible] = React.useState(true);
@@ -115,7 +108,10 @@ const StatusMessage: React.FC<StatusMessageProps> = ({ message }) => {
       ref={messageRef}
       className={`${styles.body} ${!isVisible ? styles.hide : ""}`}
     >
-      <StyledDangerIcon size={IconSizeType.medium} />
+      <DangerToastReactSvg
+        className={styles.dangerToastIcon}
+        data-size={IconSizeType.medium}
+      />
       <Text>{prevMessageRef.current}</Text>
     </div>
   );

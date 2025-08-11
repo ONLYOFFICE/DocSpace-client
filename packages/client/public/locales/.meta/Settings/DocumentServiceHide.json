@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:51.369Z",
-  "updated_at": "2025-05-28T09:30:02.628Z",
+  "updated_at": "2025-05-26T07:57:32.689Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether document service settings are being shown or hidden. It appears in an integrated settings UI element and changes its content based on the state of the setting.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"Gizlədin\" is the first-person singular past tense of the verb 'gizləmək' (to hide). The correct translation for 'Hide' (as a setting label) should be an imperative form or a noun.",
-          "suggestion": "Gizlə"
+          "description": "The Azerbaijani translation \"Gizlədin\" is not the correct translation for \"Hide\" in this context. \"Gizlədin\" is a verb in the past tense (I hid). The correct translation for \"Hide\" (as in a setting option) should be a noun, like \"Gizləmə\" or \"Başqa Gizlə\".",
+          "suggestion": "Gizləmə or Başqa Gizlə"
         }
       ],
       "approved_at": null
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පහ කිරීමට\" (paha karamnu) translates to 'to lower' or 'to bring down'. It doesn't accurately convey the meaning of 'Hide', which implies concealing something from view.",
-          "suggestion": "A more appropriate translation for 'Hide' would be \"සඟවා\" (sagawa) which means 'to conceal' or 'to hide'."
+          "description": "The Sinhala translation 'පහ කිරීමට' (paha karamnu) translates to 'to lower' or 'to bring down,' not 'hide.'  'Hide' implies concealing something from view. A more appropriate translation would convey that meaning.",
+          "suggestion": "A better translation might be 'ගැණීම' (genaema) which means 'to hide' or 'to conceal'."
         }
       ],
       "approved_at": null
@@ -183,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Сакриј\" is a valid translation for \"Hide\", it's often used in a more active sense (e.g., 'to hide something'). For a setting label like 'Hide', a more passive and direct translation might be preferred. A better option would be 'Скривена'",
+          "suggestion": "Скривена"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

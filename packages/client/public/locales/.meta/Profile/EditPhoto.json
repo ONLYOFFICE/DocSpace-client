@@ -3,7 +3,7 @@
   "content": "Edit photo",
   "content_en_sha1_hash": "482a854d97390264784ec52d8c7eeadebd39c886",
   "created_at": "2025-05-19T21:30:53.352Z",
-  "updated_at": "2025-05-28T09:30:02.826Z",
+  "updated_at": "2025-05-26T07:57:32.810Z",
   "comment": {
     "text": "This translation key is used for the \"Edit photo\" button in a profile settings section. It appears on a header and provides a clear instruction to edit a user's photo.",
     "is_auto": true,
@@ -36,7 +36,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Şəklin redaktə olunması\" is technically correct, it's a very literal translation and sounds unnatural in Azerbaijani. A more idiomatic translation would be preferable.",
+          "description": "While 'Şəklin redaktə olunması' is technically correct, it's a very literal and somewhat clunky translation. A more natural and idiomatic translation for 'Edit photo' in Azerbaijani would be something like 'Şəkil redaktə et' or 'Foto redaktə et'.",
           "suggestion": "Şəkil redaktə et"
         }
       ],
@@ -168,7 +168,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Upraviť foto' is understandable, a more natural and accurate Slovak translation for 'Edit photo' would be 'Upraviť fotografiu' or 'Upraviť obrázok'. 'Foto' is an abbreviation commonly used, but 'fotografiu' and 'obrázok' are more formal and precise.",
+          "description": "The translation 'Upraviť foto' while understandable, is not the most natural or idiomatic translation of 'Edit photo'. A more accurate and common translation would be 'Upraviť fotografiu'.",
           "suggestion": "Upraviť fotografiu"
         }
       ],
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Edit photo\" is singular. The Slovenian translation \"Uredi fotografije\" translates to \"Edit photos,\" which is plural. This doesn't accurately reflect the original meaning. A more appropriate translation would be \"Uredi fotografijo\" (Edit photo).",
+          "description": "The English phrase \"Edit photo\" refers to editing a single photo. The Slovenian translation \"Uredi fotografije\" translates to \"Edit photos\" (plural). This implies editing multiple photos, which is not aligned with the original English meaning.",
           "suggestion": "Uredi fotografijo"
         }
       ],
@@ -198,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Uredi sliku' is not the most natural or accurate translation of 'Edit photo'. A more common and natural translation would be 'Izmeni sliku'. 'Uredi' implies editing in a more general sense, while 'Izmeni' specifically refers to modifying or changing a photo.",
-          "suggestion": "Izmeni sliku"
+          "description": "The translation 'Uredi sliku' is a literal translation of 'Edit photo' but doesn't quite convey the same meaning in Serbian. 'Urediti fotografiju' would be more natural and accurate, implying editing the photo.",
+          "suggestion": "Urediti fotografiju"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Error report",
   "content_en_sha1_hash": "4e31c347b987a17f7cb3d98f8aa8b10ea251a784",
   "created_at": "2025-05-19T21:30:45.100Z",
-  "updated_at": "2025-05-28T09:30:02.945Z",
+  "updated_at": "2025-05-26T07:57:32.916Z",
   "comment": {
     "text": "This translation key is used for the \"Error report\" label in a report dialog component, typically found in an error reporting feature. It describes the content of the label displayed to users when viewing or submitting error reports.",
     "is_auto": true,
@@ -183,7 +183,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Izveštaj greške\" is understandable, \"Izveštaj o grešci\" would be a more accurate and natural translation of 'Error report'. 'O' is needed to indicate 'report *about* an error'.",
+          "suggestion": "Izveštaj o grešci"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

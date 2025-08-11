@@ -2,13 +2,13 @@ name: storybook build/publish
 
 on:
   push:
-    branches: 
-     - 'master'
-     - 'hotfix/v*'
-     - 'release/v*'
+    branches:
+      - "master"
+      - "hotfix/v*"
+      - "release/v*"
     paths:
-      - 'public/**'
-      - 'packages/shared/**'
+      - "public/**"
+      - "packages/shared/**"
 
 jobs:
   build:
@@ -20,45 +20,45 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'    
-      - run: yarn
-      - run: yarn storybook-build
-      
+          node-version: "22.x"
+      - run: pnpm install
+      - run: pnpm nx storybook-build @docspace/shared
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      
+
       - name: Get directory
         run: |
           BRANCH_REGEX="^hotfix\/v.*|^release\/v.*"
-          
+
           if [ "${GITHUB_REF_NAME}" = "master" ]; then 
              echo DIRECTORY="prod" >> $GITHUB_ENV
           fi
-          
+
           if [[ "${GITHUB_REF_NAME} =~ ${BRANCH_REGEX}" ]]; then
              echo DIRECTORY="test" >> $GITHUB_ENV
           fi
 
       - name: Upload storybook files
-        run: | 
-             aws s3 cp ./packages/shared/storybook-static/ ${{ secrets.AWS_BUCKER_URL }}/${DIRECTORY}/ \
-             --recursive 
-     
+        run: |
+          aws s3 cp ./packages/shared/storybook-static/ ${{ secrets.AWS_BUCKER_URL }}/${DIRECTORY}/ \
+          --recursive
+
       - name: Invalidate AWS CLOUDFRONT cache
         run: |
-             DISTRIBUTION_ID=${{ secrets.AWS_DISTRIBUTION_ID }}
-             
-             if [ "${DIRECTORY}" = "master" ]; then
-                DISTRIBUTION_ID=${{ secrets.COM_AWS_DISTRIBUTION_ID }}
-             fi  
+          DISTRIBUTION_ID=${{ secrets.AWS_DISTRIBUTION_ID }}
 
-             aws cloudfront create-invalidation \
-                --paths "/*" \
-                --distribution-id ${DISTRIBUTION_ID}
+          if [ "${DIRECTORY}" = "master" ]; then
+             DISTRIBUTION_ID=${{ secrets.COM_AWS_DISTRIBUTION_ID }}
+          fi  
+
+          aws cloudfront create-invalidation \
+             --paths "/*" \
+             --distribution-id ${DISTRIBUTION_ID}

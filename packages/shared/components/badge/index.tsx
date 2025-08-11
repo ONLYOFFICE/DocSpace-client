@@ -30,8 +30,9 @@ import { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.scss";
 import { Text } from "../text";
 
-const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
+const Badge = (props: BadgeProps) => {
   const {
+    ref,
     onClick,
     fontSize = "11px",
     color,
@@ -136,7 +137,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
       </div>
     </div>
   );
-});
+};
 
 Badge.displayName = "Badge";
 

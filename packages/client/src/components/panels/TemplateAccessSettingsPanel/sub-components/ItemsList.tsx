@@ -67,13 +67,19 @@ const Row = memo(({ data, index, style }: RowProps) => {
   const item = listItems[index];
 
   return (
-    <StyledRow key={item.id} style={style} className="row-item">
+    <StyledRow
+      key={item.id}
+      style={style}
+      className="row-item"
+      data-testid={`template_access_settings_row_${index}`}
+    >
       <Item
         t={t}
         item={item}
         setInviteItems={setInviteItems}
         inviteItems={inviteItems}
         isDisabled={isDisabled}
+        index={index}
       />
     </StyledRow>
   );
@@ -92,7 +98,9 @@ const ItemsList = ({
   const [offsetTop, setOffsetTop] = useState(0);
   const [isTotalListHeight, setIsTotalListHeight] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
-  const { height } = useResizeObserver({ ref: bodyRef });
+  const { height } = useResizeObserver({
+    ref: bodyRef as React.RefObject<HTMLDivElement>,
+  });
   const { interfaceDirection } = useTheme();
 
   const listItems = [...inviteItems].filter(
@@ -137,6 +145,7 @@ const ItemsList = ({
       ref={bodyRef}
       scrollAllPanelContent={scrollAllPanelContent}
       isTotalListHeight={isTotalListHeight}
+      data-testid="template_access_settings_scroll_list"
     >
       <List
         style={{ overflow: overflowStyle, willChange: "transform" }}
@@ -155,6 +164,7 @@ const ItemsList = ({
         outerElementType={
           !scrollAllPanelContent ? CustomScrollbarsVirtualList : undefined
         }
+        data-testid="template_access_settings_list"
       >
         {Row}
       </List>

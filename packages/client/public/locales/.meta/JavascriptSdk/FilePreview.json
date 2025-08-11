@@ -3,7 +3,7 @@
   "content": "File preview",
   "content_en_sha1_hash": "f2808459267be0f7ecfd63aa82d868b3deb85f94",
   "created_at": "2025-05-19T21:30:54.499Z",
-  "updated_at": "2025-05-21T09:08:37.593Z",
+  "updated_at": "2025-05-24T09:20:53.328Z",
   "comment": {
     "text": "This translation key is used to display a generic preview message when an iframe cannot be loaded. It appears as an \"EmptyIframeContainer\" in certain UI elements, typically found within developer tools or settings pages, prompting users that the file preview content could not be rendered.",
     "is_auto": true,
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ຕົວຢ່າງໄຟລ໌' is understandable, a more accurate and common translation for 'File preview' in Lao would be 'ຕົວຢ່າງເອກະສານ' or 'ລາຍງານຕົວຢ່າງ'. 'ຕົວຢ່າງໄຟລ໌' literally translates to 'file example', which isn't the intended meaning.",
-          "suggestion": "ຕົວຢ່າງເອກະສານ"
+          "description": "While \"ຕົວຢ່າງໄຟລ໌\" is a literal translation of \"file preview,\" it might not be the most natural or idiomatic way to express the concept in Lao. \"ຕົວຢ່າງໄຟລ໌\" translates to 'file example,' which is slightly different than 'file preview'.",
+          "suggestion": "Consider \"ຄະນະສະແດງຕົວໄຟລ໌\" or \"ການເບິ່ງຕົວຢ່າງໄຟລ໌\" for a more accurate and natural translation of 'file preview'."
         }
       ],
       "approved_at": null
@@ -183,13 +183,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation 'Преглед датотеке' uses the Cyrillic alphabet. While acceptable, depending on the context, a Latin alphabet version might be preferred for wider compatibility and user experience (e.g., 'Pregled datoteke').",
-          "suggestion": "Consider using 'Pregled datoteke' (Latin alphabet) if appropriate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -254,7 +254,7 @@ class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
         onDrag={this.handleOnDrag}
         onStart={this.handleOnDragStart}
         onStop={this.handleOnDragStop}
-        nodeRef={this.elementRefHack}
+        nodeRef={this.elementRefHack as React.RefObject<HTMLElement>}
       >
         {renderDivWithRenderer(props, this.elementRef)}
       </DraggableCore>

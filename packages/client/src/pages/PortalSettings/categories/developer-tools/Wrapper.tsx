@@ -26,12 +26,17 @@
 
 import React from "react";
 import { Outlet, useParams, useLocation } from "react-router";
+import { TUser } from "@docspace/shared/api/people/types";
+import { DeviceType } from "@docspace/shared/enums";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import Section from "@docspace/shared/components/section";
 
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
 import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";
 import SectionWrapper from "SRC_DIR/components/Section";
+
+import pkg from "PACKAGE_FILE";
 
 import SectionHeaderContent from "../../Layout/Section/Header";
 import HistoryHeader from "./Webhooks/WebhookHistory/sub-components/HistoryHeader";
@@ -53,8 +58,13 @@ export const Component = () => {
 
   return (
     <PrivateRoute>
-      <ErrorBoundary>
-        <SectionWrapper withBodyScroll viewAs="settings">
+      <ErrorBoundary
+        user={{} as TUser}
+        version={pkg.version}
+        currentDeviceType={DeviceType.desktop}
+        firebaseHelper={{} as FirebaseHelper}
+      >
+        <SectionWrapper withBodyScroll viewAs="settings" settingsStudio={false}>
           <Section.SectionHeader>
             {currentPath === webhookHistoryPath ? (
               <HistoryHeader />

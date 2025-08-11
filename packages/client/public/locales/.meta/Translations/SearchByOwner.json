@@ -3,7 +3,7 @@
   "content": "Search by Owners",
   "content_en_sha1_hash": "871fbf34747757d5e66494981884a599ad165876",
   "created_at": "2025-05-19T21:30:50.005Z",
-  "updated_at": "2025-07-01T15:57:36.130Z",
+  "updated_at": "2025-08-11T09:02:43.929Z",
   "comment": {
     "text": "This translation key is used for the label of a checkbox filter that allows users to search by the owner in various contexts, including filtering rooms. It appears on a FilterBlock component and enables users to select this option as part of their room settings or portal preferences. Translators should provide a text equivalent of \"Search by Owners\" to facilitate user understanding.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 949,
+      "line_number": 951,
       "context": "},\n {\n id: \"filter_author-user\",\n key: FilterSubject.Owner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Translations:SearchByOwner\"),\n isCheckbox: true,\n isDisabled: false,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 511,
-      "context": "</UserInputContainer>\n )}\n \n <Checkbox\n className=\"checkbox\"\n label={t(\"Translations:SearchByOwner\")}\n onChange={toggleSubjectFilter}\n isChecked={false}\n />\n </>\n ) : null}",
+      "line_number": 520,
+      "context": "</UserInputContainer>\n )}\n \n <Checkbox\n className=\"checkbox\"\n label={t(\"Translations:SearchByOwner\")}\n onChange={toggleSubjectFilter}\n isChecked={false}\n dataTestId=\"subject_filter_checkbox\"\n />\n </>",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +42,9 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Sahiblərə görə axtarış' is a literal translation but doesn't quite convey the intended meaning of 'Search by Owners' in a natural way in Azerbaijani. It sounds a bit awkward.",
-          "suggestion": "Consider 'Sahiblər üzrə axtarış' or 'Sahiblərə aiddir axtarış' for a more natural and idiomatic translation. Alternatively, 'Sahiblərindən axtarış' could work, but depends on the specific context."
+          "description": "The translation 'Sahiblərə görə axtarış' is a literal translation but doesn't quite convey the natural phrasing for 'Search by Owners'. It suggests searching *for* owners, rather than searching *based on* owners.",
+          "suggestion": "Consider alternatives like 'Sahiblər üzrə axtarış' or 'Sahiblərə əsasən axtarış'. A more natural phrasing might be 'Sahiblərə görə axtar'",
+          "priority": "high"
         }
       ],
       "approved_at": null
@@ -72,8 +73,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Αναζήτηση με βάση τους ιδιοκτήτες' literally translates to 'Search based on the owners'. While technically correct, it's less natural and idiomatic than a more direct translation. A more natural phrasing would be 'Αναζήτηση ιδιοκτητών' or 'Αναζήτηση κατά ιδιοκτήτες'.",
-          "suggestion": "Consider 'Αναζήτηση ιδιοκτητών' or 'Αναζήτηση κατά ιδιοκτήτες'."
+          "description": "The translation \"Αναζήτηση με βάση τους ιδιοκτήτες\" is a literal translation that doesn't quite convey the intended meaning of 'Search by Owners'. It sounds more like 'Search based on the owners' rather than a general search functionality related to owners.",
+          "suggestion": "Αναζήτηση ιδιοκτητών"
         }
       ],
       "approved_at": null
@@ -90,8 +91,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Haku Omistajien mukaan\" is not the most natural or accurate translation of \"Search by Owners.\" While technically understandable, it's a bit literal and wordy. A more idiomatic translation would be preferable.",
-          "suggestion": "Hae omistajien mukaan"
+          "description": "The translation 'Haku Omistajien mukaan' is a literal translation and doesn't quite capture the meaning of 'Search by Owners' in a natural Finnish way. It sounds a bit clunky.",
+          "suggestion": "Consider alternatives like 'Omistajien haku' or 'Hae omistajan mukaan'."
         }
       ],
       "approved_at": null
@@ -108,8 +109,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Որոնում ըստ սեփականատերերի\" is a literal translation of \"Search by Owners\" but could be improved for natural-sounding Armenian. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Consider alternatives like \"Սեփականատերերի շուրջ հարցում\" or \"Որոնել սեփականատերերի կողմից\" to convey the meaning more naturally. The best option depends on the specific context."
+          "description": "The translation 'Որոնում ըստ սեփականատերերի' while literally meaning 'Search by Owners', might sound slightly awkward in Armenian. A more natural phrasing might be 'Սեփականատերերի որոնում' or 'Որոնել սեփականատերերի համաձայն'.",
+          "suggestion": "Consider 'Սեփականատերերի որոնում' or 'Որոնել սեփականատերերի համաձայն' for a more idiomatic expression."
         }
       ],
       "approved_at": null
@@ -120,7 +121,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ricerca per Proprietario' translates to 'Search by Owner' instead of 'Search by Owners'. The English content is plural, indicating multiple owners.",
+          "description": "The Italian translation 'Ricerca per Proprietario' translates to 'Search by Owner' (singular) instead of 'Search by Owners' (plural).",
           "suggestion": "Ricerca per Proprietari"
         }
       ],
@@ -132,8 +133,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"所有者で検索する\" literally translates to \"Search by owner.\" While understandable, it's less natural than other options for a user interface label. A more common and user-friendly phrasing would be \"所有者別検索\" (search by owner) or \"オーナー別検索\" (owner search).",
-          "suggestion": "所有者別検索 or オーナー別検索"
+          "description": "The translation '所有者で検索する' is a literal translation that sounds unnatural in Japanese. A more natural phrasing would convey the same meaning in a more user-friendly way.",
+          "suggestion": "オーナーで検索"
         }
       ],
       "approved_at": null
@@ -144,8 +145,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"소유자로 검색\" is a literal translation of \"Search by Owners\" but lacks the nuance of the original phrase in the context of a search function. It translates to 'Search by owner' rather than 'Search by Owners'.",
-          "suggestion": "소유주 검색"
+          "description": "The translation '소유자로 검색' is a literal translation that may not be the most natural or idiomatic way to express 'Search by Owners' in Korean. While understandable, it sounds slightly awkward.",
+          "suggestion": "Consider alternatives like '소유주별 검색' (Search by Owner) or '소유주 기준으로 검색' (Search based on Owners) for a more natural phrasing."
         }
       ],
       "approved_at": null
@@ -156,8 +157,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຄົ້ນຫາໂດຍເຈົ້າຂອງ' while literally meaning 'Search by Owners', might not be the most natural or idiomatic way to express the intent. A more natural phrasing might be preferred depending on the context.",
-          "suggestion": "Consider alternatives like 'ການຄົ້ນຫາເຈົ້າຂອງ' or 'ລາຍການເຈົ້າຂອງ' depending on the specific functionality and user interface."
+          "description": "While technically correct, \"ຄົ້ນຫາໂດຍເຈົ້າຂອງ\" (kon ha doi jao khong) is a very literal translation. A more natural and user-friendly translation might be \"ການຄົ້ນຫາເຈົ້າຂອງ\" (kan kon ha jao khong) or \"ຄົ້ນຫາເຈົ້າຂອງທັງຫມົດ\" (kon ha jao khong thang mot) - 'Search owners all'.",
+          "suggestion": "Consider 'ການຄົ້ນຫາເຈົ້າຂອງ' or 'ຄົ້ນຫາເຈົ້າຂອງທັງຫມົດ'."
         }
       ],
       "approved_at": null
@@ -180,7 +181,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Szukaj wg Właścicieli' is technically correct but sounds awkward and unnatural in Polish. 'wg' is an abbreviation for 'względem,' which is overly formal in this context. A more natural phrasing would be 'Wyszukiwanie po właścicielach' or 'Szukaj właścicieli'.",
+          "description": "The translation \"Szukaj wg Właścicieli\" is not the most natural or accurate translation of \"Search by Owners.\" \"wg\" is a shortened form of \"zgodnie z\" and while technically correct, it's less common and can sound slightly awkward in this context. A more natural translation would be \"Wyszukiwanie po właścicielach\" or \"Szukaj właścicieli\".",
           "suggestion": "Wyszukiwanie po właścicielach"
         }
       ],
@@ -204,7 +205,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Căutare după proprietar\" literally translates to 'Search after owner'. A more natural and accurate translation for 'Search by Owners' would be 'Căutare după proprietari'.",
+          "description": "The translation 'Căutare după proprietar' literally translates to 'Search after owner'.  While understandable, a more natural and accurate translation for 'Search by Owners' would be 'Căutare după proprietari'. The singular 'proprietar' doesn't accurately reflect the plural 'Owners'.",
           "suggestion": "Căutare după proprietari"
         }
       ],
@@ -222,8 +223,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'හිමිකරු අනුව සොයන්න' literally translates to 'Search according to owner'. While understandable, a more natural and idiomatic translation of 'Search by Owners' would be something like 'හිමිකරුවන් අනුව සොයන්න' (Himikaruwan Anuvaa Soyanna) or 'හිමිකරුවන්ගෙන සොයන්න' (Himikaruwanagena Soyanna).",
-          "suggestion": "හිමිකරුවන් අනුව සොයන්න"
+          "description": "The Sinhala translation 'හිමිකරු අනුව සොයන්න' is a literal translation of 'Search by Owners' which doesn't flow naturally in Sinhala. A more natural phrasing would be 'හිමිකරුවන්ගෙන් සොයන්න' or 'හිමිකාරුවන් අනුව සොයන්න'.",
+          "suggestion": "හිමිකරුවන්ගෙන් සොයන්න"
         }
       ],
       "approved_at": null
@@ -246,7 +247,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Претражуј по Власницима' while understandable, isn't the most natural or idiomatic translation of 'Search by Owners'. A more suitable option would be 'Претрага по власницима'.",
+          "description": "The Serbian translation \"Претражуј по Власницима\" is not the most natural or idiomatic way to say \"Search by Owners.\" While technically correct, it can sound somewhat awkward. A more natural translation would be something like \"Претрага по власницима\" or \"Тражи по власницима\".",
           "suggestion": "Претрага по власницима"
         }
       ],
@@ -258,8 +259,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Pretražuj po Vlasnicima\" while technically correct, is not the most natural or idiomatic way to say \"Search by Owners\" in Serbian. It's a literal translation that lacks nuance.",
-          "suggestion": "Potraži prema vlasnicima"
+          "description": "The translation 'Pretražuj po Vlasnicima' is a literal translation but sounds unnatural in Serbian. A more idiomatic translation would be 'Pretraga po vlasnicima' or 'Pretraživanje po vlasnicima'.",
+          "suggestion": "Pretraga po vlasnicima"
         }
       ],
       "approved_at": null
@@ -267,7 +268,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Sahiplere Göre Ara\" is a literal translation of 'Search by Owners'. While understandable, a more natural and idiomatic Turkish translation for 'Search by Owners' would be something like 'Sahip Adına Arama' or 'Sahip Listesi'. 'Sahiplere Göre Ara' sounds slightly awkward.",
+          "suggestion": "Sahip Adına Arama"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -282,8 +289,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Tìm kiếm theo Chủ sở hữu\" is a literal translation, it can sound a bit formal and clunky in Vietnamese. A more natural and commonly used translation would be \"Tìm kiếm của chủ sở hữu\" or \"Tìm theo chủ sở hữu\".",
-          "suggestion": "Tìm kiếm của chủ sở hữu"
+          "description": "The translation \"Tìm kiếm theo Chủ sở hữu\" is technically correct but sounds slightly formal and less natural for a user interface label. \"Chủ sở hữu\" is a direct translation of \"Owner\" but a more common and user-friendly term in this context might be \"người sở hữu\" or simply \"người dùng\".",
+          "suggestion": "Tìm kiếm theo người sở hữu"
         }
       ],
       "approved_at": null
@@ -294,8 +301,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '按所有者搜索' while literally meaning 'Search by all owners', is not the most natural or accurate translation of 'Search by Owners'. It sounds somewhat rigid and overly specific.",
-          "suggestion": "考虑使用更自然的说法，例如 '按所有者查找' or '查找所有者'."
+          "description": "The translation '按所有者搜索' while technically correct, is a bit clunky and not the most natural way to say \"Search by Owners\" in Chinese. A more fluid and commonly used translation would be '按房东搜索' (An fangdong search) or '按业主搜索' (An yezhu search).",
+          "suggestion": "按房东搜索"
         }
       ],
       "approved_at": null

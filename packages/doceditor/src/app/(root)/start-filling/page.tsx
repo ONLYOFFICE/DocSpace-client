@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { logger } from "@/../logger.mjs";
 
 import {
   getFileById,
@@ -34,16 +33,18 @@ import {
 import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
 import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 
-const log = logger.child({ module: "Create page" });
+import { logger } from "@/../logger.mjs";
 
 interface PageProps {
-  searchParams: Record<string, string | undefined>;
+  searchParams: Promise<Record<string, string | undefined>>;
 }
 
-async function Page({ searchParams }: PageProps) {
+async function Page(props: PageProps) {
+  const { searchParams: sp } = props;
+  const searchParams = await sp;
   const { formId, roomId, share } = searchParams;
 
-  log.info("Open start filling form page");
+  logger.info("Open start filling form page");
 
   const [formFillingStatus, file, user, settings] = await Promise.all([
     getFormFillingStatus(formId!),

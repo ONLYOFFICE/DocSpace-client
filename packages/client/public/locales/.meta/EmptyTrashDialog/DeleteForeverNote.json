@@ -3,7 +3,7 @@
   "content": "All items from the {{sectionName}} section will be deleted forever. You won’t be able to restore them.",
   "content_en_sha1_hash": "f63c0cba122e23660d36c3dff04f53bc9ffd90a4",
   "created_at": "2025-05-19T21:30:56.569Z",
-  "updated_at": "2025-05-20T09:38:38.891Z",
+  "updated_at": "2025-06-02T10:20:51.146Z",
   "comment": {
     "text": "This translation key is used to display a message when deleting items from a section permanently. It appears as part of a modal dialog and informs users that deleted items cannot be restored. The translation should convey a clear warning about data loss without being overly alarming or technical.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
-      "line_number": 92,
+      "line_number": 89,
       "context": "window.addEventListener(\"keydown\", onKeyPress);\n \n return () => window.removeEventListener(\"keydown\", onKeyPress);\n }, []);\n \n const description = t(\"DeleteForeverNote\", { sectionName });\n \n return (\n <ModalDialog\n isLoading={!tReady}\n visible={visible}",
       "module": "/packages/client"
     }
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Arabic translation includes a passive voice ('will be deleted'). While grammatically correct, it could be slightly more direct and user-friendly, depending on the overall tone of the application. Consider an active voice alternative.",
+          "suggestion": "سيتم حذف جميع العناصر الموجودة في قسم {{sectionName}}."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Դրանք հնարավոր չի լինի վերականգնել\" is a bit awkward. A more natural and accurate translation of \"You won’t be able to restore them\" would be something like \"Դրանք չի լինի վերականգնելու հնարավորությունը\" or \"Դրանք վերականգնելու հնարավորություն չի լինի։\"",
+          "suggestion": "Դրանք չի լինի վերականգնելու հնարավորությունը։"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -93,7 +105,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation includes a double-curly brace '{{' at the beginning of the sectionName. It should be a single curly brace '{'.",
+          "suggestion": "{sectionName}セクションのすべてのアイテムは永遠に削除されます。復元することはできません。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -117,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Dutch translation uses 'sectie' instead of 'sectie'. While understandable, it's a minor inconsistency. It should be consistently 'sectie' (lowercase) or 'Sectie' (uppercase).",
+          "suggestion": "Change 'sectie' to 'sectie' or 'Sectie' for consistency."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'secção' is a Portuguese variant and might be better replaced with 'seção' for wider understanding and consistency with standard Portuguese.",
+          "suggestion": "seção"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The possessive pronoun 'veţi' is more formal than necessary and could be replaced with 'vei' for a more conversational tone, especially considering the context of a user interaction.",
+          "suggestion": "Toate elementele din secțiunea {{sectionName}} vor fi şterse pentru totdeauna. Nu le vei putea restaura."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ප්‍රතිෂ්ඨාපනය' (prathisthapana) is a formal word for 'restore'. A more natural and commonly used word in this context might be ' නැවත ලබා ගැනීමට' (naewath laba gathu).",
+          "suggestion": "{{sectionName}} කොටසින් සියලුම අයිතමයන් සදහටම මකා දමනු ලැබේ. ඒවා නැවත ලබා ගැනීමට ඔබට හැකියාවක් නොවනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,13 +213,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word \"избрисани\" is spelled correctly, but it would be more natural to use 'обрисани' in this context. While 'избрисани' is technically correct, 'обрисани' flows better and is more commonly used when referring to deleting items.",
+          "suggestion": "Сви елементи из одељка {{sectionName}} биће трајно обрисани. Нећете моћи да их вратите."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'odeljka' should be 'odeljenja'.",
+          "suggestion": "Svi elementi iz odeljenja {{sectionName}} biće trajno izbrisani. Nećete moći da ih vratite."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,7 +243,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb 'буде' (future tense, masculine singular) doesn't agree with the plural subject 'Усі елементи' (All items). It should be in the plural form.",
+          "suggestion": "Усі елементи розділу {{sectionName}} будуть видалено назавжди."
+        }
+      ],
       "approved_at": null
     },
     "vi": {

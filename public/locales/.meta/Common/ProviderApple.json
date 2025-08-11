@@ -3,7 +3,7 @@
   "content": "Apple",
   "content_en_sha1_hash": "476432a3e85a0aa21c23f5abd2975a89b6820d63",
   "created_at": "2025-05-19T21:30:47.540Z",
-  "updated_at": "2025-08-07T11:27:46.862Z",
+  "updated_at": "2025-08-11T09:02:44.103Z",
   "comment": {
     "text": "This translation key is used for the label displayed when selecting an Apple provider. It appears in a dropdown menu within the UI, providing users with a clear indication of which provider they have chosen. Translators should ensure that this text accurately reflects the product or service being offered by Apple.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 422,
+      "line_number": 426,
       "context": "}\n }\n export function getProviderLabel(provider: string, t: (key: string) => string) {\n switch (provider) {\n case \"apple\":\n return t(\"Common:ProviderApple\");\n case \"google\":\n return t(\"Common:ProviderGoogle\");\n case \"facebook\":\n return t(\"Common:ProviderFacebook\");\n case \"twitter\":",
       "module": "/packages/shared"
     }
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao translation 'ແອບເປີල්' appears to be a transliteration of 'Apple' and may contain a slight spelling error. While understandable, the correct transliteration often uses 'ແອບເພິල්'.",
-          "suggestion": "ແອບເພິල්"
+          "description": "The Lao translation 'ແອບເປີල්' appears to be a transliteration of 'Apple' rather than a true translation. While understandable, it doesn't reflect the meaning in a culturally appropriate manner. It's a direct sound-alike.",
+          "suggestion": "Consider if a descriptive term or loanword already exists in Lao for 'Apple' that would be more natural. Alternatively, a more accurate transliteration focusing on pronunciation might be preferable, depending on context.  Without more context, it's difficult to provide a definitive Lao equivalent."
         }
       ],
       "approved_at": null

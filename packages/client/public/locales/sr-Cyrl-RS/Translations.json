@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Изабери са листе",
-  "ConnectingAccount": "Повезивање налога",
-  "DeleteFromTrash": "Одабрани елементи су успешно обрисани из Отпада",
   "FileLocked": "Датотека закључана",
   "FileProtected": "Датотека је заштићена лозинком",
   "FileUnlocked": "Датотека откључана",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Промени инфо треће стране",
   "ThirdPartyTitle": "Услуге трећих страна",
   "TitleShowActions": "Прикажи акције датотека",
-  "TitleShowFolderActions": "Прикажи акциије фолдера",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Прикажи акциије фолдера"
 }

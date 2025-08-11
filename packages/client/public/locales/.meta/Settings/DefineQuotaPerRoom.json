@@ -3,7 +3,7 @@
   "content": "Define quota per room",
   "content_en_sha1_hash": "47a3cb53c72a46cf615a95cb8036dc8ac249a47d",
   "created_at": "2025-05-19T21:30:51.096Z",
-  "updated_at": "2025-05-21T04:37:13.301Z",
+  "updated_at": "2025-05-24T05:22:10.569Z",
   "comment": {
     "text": "This translation key defines the label for a button that allows users to set the quota per room. The label is used on a form element where users can define their storage limits. It appears in the UI as part of a settings dialog or form page.",
     "is_auto": true,
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Quote pro Raum definieren' is not an accurate translation of 'Define quota per room'. 'Quote' refers to a quotation, not a quota. A quota represents a maximum limit.",
-          "suggestion": "Define quota per room -> 'Kontingent pro Raum festlegen' or 'Raumkontingent definieren'"
+          "description": "The German translation \"Quote pro Raum definieren\" is not a natural or accurate translation of \"Define quota per room.\" \"Quote\" translates to \"Zitat\" in this context. The intended meaning is likely to define a limit or allowance.",
+          "suggestion": "Definieren Sie die Raumkontingente"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation conveys the general meaning, 'Define quota per room' is better translated as 'Մեկ սենյակի համար քվոտա սահմանել'. The current phrasing sounds slightly awkward in Armenian.",
-          "suggestion": "Մեկ սենյակի համար քվոտա սահմանել"
+          "description": "The translation 'Սահմանել քվոտա մեկ սենյակի համար' is a literal translation and while understandable, it's a bit clunky. A more natural phrasing would be something like 'Մեկ սենյակի համար սահմանել քվոտա' or 'Սահմանեք սենյակի համար քվոտա'.",
+          "suggestion": "Consider 'Մեկ սենյակի համար սահմանել քվոտա' or 'Սահմանեք սենյակի համար քվոտա'."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ルームごとの容量制限を定義する\" literally translates to 'Define capacity limits per room'. While close to the original meaning of 'Define quota per room', 'quota' implies a specific, predetermined limit, whereas '容量制限' (capacity limits) is more general.  'Quota' is often used in a more controlled allocation context, which might be the intended meaning.",
-          "suggestion": "ルームごとの割り当て量を定義する"
+          "description": "The translation \"ルームごとの容量制限を定義する\" is technically correct but could be improved for clarity and naturalness in Japanese. 'Quota' isn't directly translated to '容量制限'. While '容量制限' (capacity limit) conveys a similar meaning, it's not the most precise equivalent.",
+          "suggestion": "ルームごとの利用制限を設定する (Rūmu gotono riyō seigen o setto suru) - This translates to 'Set usage limits per room' and is a more natural way to express the intended meaning."
         }
       ],
       "approved_at": null
@@ -141,13 +141,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Zdefiniuj limit na pokój' is understandable, a more accurate and natural translation of 'Define quota per room' would be 'Ustal limit na pokój' or 'Określ limit na pokój'. 'Zdefiniuj' implies a more formal or technical definition, which may not be the intended meaning.",
-          "suggestion": "Ustal limit na pokój"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -168,13 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Stabilire\" (establish) is acceptable, \"Define\" implies a more specific setting or assigning of a limit. \"Stabili\" is more general.",
-          "suggestion": "Definează cotă per sală"
-        },
-        {
-          "type": "formatting",
-          "description": "While 'per sală' is understandable, a more natural Romanian phrasing might use 'pe cameră' or 'pentru cameră'.",
-          "suggestion": "Definează cotă pe cameră"
+          "description": "While 'Stabilire' is correct, 'cotă' might not be the best translation for 'quota' in this context. 'Cota' often refers to a specific numerical quota. 'Limita' or 'Număr maxim' might be more appropriate depending on the exact meaning of 'quota' in the settings.",
+          "suggestion": "Consider 'Stabilire limită per sală' or 'Stabilire număr maxim per sală'."
         }
       ],
       "approved_at": null
@@ -191,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"කාමරයකට සලාකය දක්වන්න\" (kaamarayakata salaakaya dakkavanna) doesn't accurately convey the meaning of \"Define quota per room.\" 'Salaakaya' translates to 'salary' or 'allowance,' which is not the intended meaning. It implies defining a salary per room, not a room quota.",
-          "suggestion": "කාමරයකට කොට්ටුව පවරාන්න (kaamarayakata kotuwa pavaraanna) - This translates to 'Assign quota per room' or 'Define a quota for each room.'  Alternatively, කාමරයකට ඉඩ ප්‍රමාණය දක්වන්න (kaamarayakata ida pramaṇaya dakkavanna) - which means 'Specify the capacity/space per room'."
+          "description": "The translation \"කාමරයකට සලාකය දක්වන්න\" doesn't accurately convey the meaning of \"Define quota per room.\"  'සලාකය' typically refers to a 'slice' or 'portion' and isn't the correct term for a quota. The meaning is lost.",
+          "suggestion": "කාමරයකට කොට්ටාව තීරණය කරන්න (Kamarayakata kotthawa theeradena katananna)"
         }
       ],
       "approved_at": null
@@ -215,13 +204,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Дефиниши квоту по соби' doesn't accurately convey the meaning of 'Define quota per room'. 'по соби' literally translates to 'per room' but the phrasing is awkward and doesn't fit the context of settings.",
-          "suggestion": "Дефинисање квоте по соби"
+          "description": "The translation 'Дефиниши квоту по соби' doesn't accurately convey 'Define quota per room'. 'по соби' translates to 'by room' or 'per room', but 'Дефиниши' implies a command or instruction rather than the concept of defining a quota.",
+          "suggestion": "Definisanje kvote po sobi"
         },
         {
           "type": "grammar",
-          "description": "While 'Дефиниши квоту по соби' isn't technically *wrong*, using the infinitive form 'Дефинисање' (Defining) sounds more formal and appropriate for a settings panel.",
-          "suggestion": "Дефинисање квоте по соби"
+          "description": "The verb 'Дефиниши' (Define) is in the imperative form, which might not be the most appropriate for a settings label. The infinitive or present tense might be more suitable.",
+          "suggestion": "Definisanje kvote po sobi"
         }
       ],
       "approved_at": null
@@ -253,13 +242,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"设置每个房间的额度\" is understandable, a more accurate and natural-sounding translation for \"Define quota per room\" would be \"为每个房间定义配额\" or \"设置房间配额\". \"额度\" can imply a limit or budget, which might not be the intended meaning of 'quota'.",
-          "suggestion": "为每个房间定义配额"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

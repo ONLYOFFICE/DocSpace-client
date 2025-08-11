@@ -1,5 +1,4 @@
 {
-  "ActivationRequired": "потрібна активація",
   "AddStaticText": "Додати статичний текст",
   "AddWatermarkElements": "Додати елементи водяних знаків",
   "AddWatermarksToDocuments": "Додати водяні знаки до документів",
@@ -33,7 +32,6 @@
   "StorageDescription": "Квота сховища встановлена на кімнату. Ви можете змінити це значення або вимкнути обмеження сховища.",
   "TagsPlaceholder": "Додати тег",
   "ThirdPartyStorageComboBoxPlaceholder": "Виберіть сховище",
-  "ThirdPartyStorageDescription": "Використовуйте сторонні служби як сховище даних для цієї кімнати. У під’єднаному сховищі буде створено нову папку для зберігання даних цієї кімнати.",
   "ThirdPartyStorageNoStorageAlert": "Перед цим необхідно ввімкнути відповідну службу в розділі «Інтеграція». В іншому випадку з’єднання буде неможливим.",
   "ThirdPartyStoragePermanentSettingDescription": "Файли зберігаються в сторонньому сховищі {{thirdpartyTitle}} у папці \"{{thirdpartyFolderName}}\".\n<strong>{{thirdpartyPath}}</strong>",
   "ThirdPartyStorageRoomAdminNoStorageAlert": "Щоб під’єднати стороннє сховище, необхідно додати відповідну службу в розділі «Інтеграція» в параметрах {{productName}}. Щоб увімкнути інтеграцію, зверніться до власника чи адміністратора {{productName}}.",

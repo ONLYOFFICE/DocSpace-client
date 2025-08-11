@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ScrollbarProps as ScrollbarLibraryProps } from "./custom-scrollbar";
+import {
+  ScrollbarProps as ScrollbarLibraryProps,
+  Scrollbar as CustomScrollbar,
+} from "./custom-scrollbar";
 
 type PickedScrollbarLibraryProps = Pick<
   ScrollbarLibraryProps,
@@ -32,8 +35,12 @@ type PickedScrollbarLibraryProps = Pick<
 >;
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.Ref<CustomScrollbar | null>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
+  /** This class will be placed on scroller body element */
+  scrollBodyClassName?: string;
   /** Enable tracks auto hiding.  */
   autoHide?: boolean;
   /** Fix scrollbar size. */
@@ -63,5 +70,5 @@ export type CustomScrollbarsVirtualListProps = Pick<
   | "paddingAfterLastItem"
 > & {
   forwardedRef?: React.ForwardedRef<unknown>;
-  contentRef?: React.MutableRefObject<HTMLDivElement | null>;
+  contentRef?: React.RefObject<HTMLDivElement | null>;
 };

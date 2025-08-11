@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Wybierz z listy",
-  "ConnectingAccount": "Podłączanie konta",
-  "DeleteFromTrash": "Wybrane elementy zostały pomyślnie usunięte z kosza",
   "FileLocked": "Plik zablokowany",
   "FileProtected": "Plik jest chroniony hasłem",
   "FileUnlocked": "Odblokowany plik",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Zmień dane podmiotu trzeciego",
   "ThirdPartyTitle": "Usługi podmiotów trzecich",
   "TitleShowActions": "Działania na plikach",
-  "TitleShowFolderActions": "Działania na folderach",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Działania na folderach"
 }

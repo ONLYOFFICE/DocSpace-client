@@ -3,7 +3,7 @@
   "content": "Delete theme",
   "content_en_sha1_hash": "bd17efc386422720b42d5a367d2b782acd621131",
   "created_at": "2025-05-19T21:30:51.143Z",
-  "updated_at": "2025-05-28T09:30:02.496Z",
+  "updated_at": "2025-08-04T07:30:01.298Z",
   "comment": {
     "text": "Delete theme button label, used in a delete dialog when the \"DeleteTheme\" option is enabled.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 829,
-      "context": "isDisabled={isDisabledEditButton}\n />\n {isShowDeleteButton ? (\n <Button\n className=\"delete-theme button\"\n label={t(\"Settings:DeleteTheme\")}\n onClick={onOpenDialogDelete}\n size={buttonSize}\n isDisabled={isDisabledDeleteButton}\n />\n ) : null}",
+      "line_number": 842,
+      "context": "testId=\"appearance_edit_button\"\n />\n {isShowDeleteButton ? (\n <Button\n className=\"delete-theme button\"\n label={t(\"Settings:DeleteTheme\")}\n onClick={onOpenDialogDelete}\n size={buttonSize}\n isDisabled={isDisabledDeleteButton}\n testId=\"appearance_delete_button\"\n />",
       "module": "/packages/client"
     }
   ],
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"テーマを解除する\" (Teema o kaijo suru) translates to \"Release theme\" or \"Remove theme.\" It does not directly mean \"Delete theme.\"  While deletion can be achieved through releasing, it's not the most accurate phrasing.",
-          "suggestion": "テーマを削除する (Teema o sakujo suru) - This translates directly to \"Delete theme\" and is a more accurate representation."
+          "description": "The translation \"テーマを解除する\" (Teema o kaijo suru) literally translates to 'Release theme'. While it conveys a similar concept, 'Delete' implies a more permanent removal. A more accurate translation would be closer to '削除する' (sakujo suru) which means 'delete'.",
+          "suggestion": "テーマを削除する (Teema o sakujo suru)"
         }
       ],
       "approved_at": null
@@ -114,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"ລຶບຮູບແບບສີສັນ\" is technically 'delete theme' or 'remove theme color scheme,' it's a bit literal and doesn't flow naturally in Lao. A more common and natural phrasing would be 'ລົບທິມ' or 'ເຊົາໃຊ້ທິມ'.",
-          "suggestion": "Consider 'ລົບທິມ' or 'ເຊົາໃຊ້ທິມ' for a more natural and idiomatic translation."
+          "description": "While 'ລຶບຮູບແບບສີສັນ' is understandable, a more accurate and natural translation of 'Delete theme' would be 'ລົບທິມ' or 'ລົບຮູບແບບ'. The current translation literally means 'delete color scheme,' which isn't the core meaning of deleting a theme.",
+          "suggestion": "ລົບທິມ"
         }
       ],
       "approved_at": null
@@ -183,7 +183,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Обриши тему' is understandable, a more accurate and natural-sounding translation of \"Delete theme\" in Serbian (Cyrillic) would be 'Izbriši temu'. 'Обриши' implies wiping or erasing something like dust, whereas 'Izbriši' specifically refers to deleting or removing.",
+          "suggestion": "Izbriši temu"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Sign in with SSO",
   "content_en_sha1_hash": "01bb06993459150dbe13098f52962ab2acda16f8",
   "created_at": "2025-05-19T21:30:48.790Z",
-  "updated_at": "2025-08-07T11:27:46.861Z",
+  "updated_at": "2025-08-11T09:02:44.102Z",
   "comment": {
     "text": "Sign in with SSO is used to display the sign-in button for Single Sign-On. It appears on a form when the user selects SSO as their authentication method. Translators should ensure the phrase is consistent across all supported languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 412,
+      "line_number": 416,
       "context": "case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");\n case \"sso\":\n return signUp ? t(\"Common:SignUpWithSso\") : t(\"Common:SignInWithSso\");\n case \"zoom\":\n return signUp ? t(\"Common:SignUpWithZoom\") : t(\"Common:SignInWithZoom\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Arabic translation 'تسجيل الدخول SSO' is a literal transliteration of \"Sign in with SSO.\" It doesn't convey the full meaning and sounds awkward in Arabic. It should be a more natural phrasing indicating 'Sign in using SSO'.",
+          "description": "The translation 'تسجيل الدخول SSO' is a literal translation and doesn't convey the meaning of 'Sign in with SSO' effectively for a Saudi Arabian audience. 'SSO' is typically not translated, but the phrasing could be more natural.",
           "suggestion": "تسجيل الدخول عبر SSO"
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic text is concatenated with 'SSO' without proper spacing. This can appear visually jarring.",
+          "suggestion": "تسجيل الدخول باستخدام SSO"
         }
       ],
       "approved_at": null
@@ -147,19 +152,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Conectare cu SSO' is understandable, a more accurate and natural translation of 'Sign in with SSO' would be 'Autentificare cu SSO' or 'Logare cu SSO'. 'Conectare' implies a connection, while 'Sign in' refers to authentication.",
-          "suggestion": "Autentificare cu SSO"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Вход через SSO' is a very literal translation. A more natural and user-friendly translation in Russian would be something like 'Войти через SSO' or 'Вход с помощью SSO'. 'Вход через' is a bit clunky.",
+          "suggestion": "Войти через SSO"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -167,9 +172,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The term \"තනි\" (thani) which translates to 'single' or 'sole' might not be the most appropriate word choice in this context. While technically correct, it's not the common way to refer to SSO.",
+          "suggestion": "Consider using a more direct and commonly understood term for 'single sign-on' such as \"එකිනම පිවිසුම\" (ekakinama pivisuma) or a more descriptive phrase."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The translation 'තනි පිවිසුම (SSO) සමඟ පිවිසෙන්න' while technically conveying the meaning of 'Sign in with SSO', is a rather literal and somewhat awkward phrasing in Sinhala. A more natural and fluent translation might be preferred.",
-          "suggestion": "Consider alternatives like 'SSO හරහා පිවිසෙන්න' (SSO hara va pivesenna - Sign in through SSO) or 'තනි පුද්ගල පරිගණක (SSO) සමඟ පිවිසෙන්න' (Tani puggala pariganaka (SSO) samaaga pivesenna - Sign in with Personal Computer (SSO)) depending on the intended nuance.  The current translation sounds slightly robotic."
+          "description": "While the translation is literal, \"එකිනම පිවිසුම\" (ekakinama pivisuma) is a more accurate and commonly understood translation of 'SSO' in Sinhala, representing 'single sign-on'.",
+          "suggestion": "Replace 'තනි පිවිසුම' with 'එකිනම පිවිසුම'."
         }
       ],
       "approved_at": null
@@ -192,13 +202,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Пријави се путем SSO-а\" is not the most natural or idiomatic way to express \"Sign in with SSO\" in Serbian. While technically correct, it's a bit clunky.",
-          "suggestion": "Пријава преко SSO-а"
+          "description": "While technically correct, \"Пријави се путем SSO-а\" is a very literal translation and sounds awkward in Serbian. A more natural phrasing would be preferred for user interface text.",
+          "suggestion": "Пријава путем SSO"
         },
         {
           "type": "formatting",
-          "description": "The use of the genitive case with \"SSO-а\" might be perceived as overly formal or technical for a user interface element. Consider whether a more straightforward approach would be clearer.",
-          "suggestion": "Пријави се са SSO-м"
+          "description": "The use of \"SSO-а\" introduces a hyphen and an extra letter that could be improved for readability and consistency. Consider removing the hyphen.",
+          "suggestion": "Пријави се путем SSO"
         }
       ],
       "approved_at": null
@@ -233,7 +243,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"用SSO登录\" is understandable, a more natural and accurate translation of \"Sign in with SSO\" would be something like \"使用SSO登录\" or \"通过SSO登录\". \"用\" implies using something *for* something, while \"使用\" or \"通过\" more directly convey the method of signing in.",
+          "description": "While \"用SSO登录\" is understandable, it's a very literal translation and doesn't flow naturally in Chinese. A more natural and commonly used phrasing would be something along the lines of \"使用SSO登录\" or \"通过SSO登录\".",
           "suggestion": "使用SSO登录"
         }
       ],

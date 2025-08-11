@@ -24,23 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { logger } from "logger.mjs";
 import { getSettings } from "@/utils/actions";
 
 import ProfileRemoveForm from "./page.client";
 
 async function Page() {
+  logger.info("ProfileRemove page");
+
   const settings = await getSettings();
 
-  return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <ProfileRemoveForm
-          greetingSettings={settings.greetingSettings}
-          legalTerms={settings.externalResources?.common?.entries?.legalterms}
-        />
-      )}
-    </>
-  );
+  return settings && typeof settings !== "string" ? (
+    <ProfileRemoveForm
+      greetingSettings={settings.greetingSettings}
+      legalTerms={settings.externalResources?.common?.entries?.legalterms}
+    />
+  ) : null;
 }
 
 export default Page;

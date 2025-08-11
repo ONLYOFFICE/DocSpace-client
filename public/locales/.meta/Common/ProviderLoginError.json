@@ -3,7 +3,7 @@
   "content": "Authorization error",
   "content_en_sha1_hash": "14a7e84261230bbb4b1ed8b2fc1a0afddf92688d",
   "created_at": "2025-05-19T21:30:47.577Z",
-  "updated_at": "2025-05-28T09:30:02.891Z",
+  "updated_at": "2025-06-30T12:20:31.674Z",
   "comment": {
     "text": "The \"ProviderLoginError\" translation key is used to display an error message when a user attempts to log in through a provider that has failed authorization. This error message appears on screen after an invalid login attempt and informs the user of the issue. It is displayed in a notification dialog box, typically triggered by an error caught during the login process.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 194,
+      "line_number": 198,
       "context": "window.location.replace(\"/\");\n }\n } catch (e) {\n toastr.error(\n t(\"Common:ProviderNotConnected\"),\n t(\"Common:ProviderLoginError\"),\n );\n }\n },\n [t, referenceUrl, currentCulture, isPublicAuth],\n );",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/index.tsx",
-      "line_number": 194,
+      "line_number": 198,
       "context": "window.location.replace(\"/\");\n }\n } catch (e) {\n toastr.error(\n t(\"Common:ProviderNotConnected\"),\n t(\"Common:ProviderLoginError\"),\n );\n }\n },\n [t, referenceUrl, currentCulture, isPublicAuth],\n );",
       "module": "/packages/login"
     }
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'خطأ في المصادقة' is a literal translation of 'Authorization error', it's not the most natural or commonly used phrasing for this type of error in a user-facing context in Saudi Arabia. A more user-friendly translation might be 'خطأ في تسجيل الدخول' (Login Error) or 'مشكلة في المصادقة' (Authentication Problem).",
-          "suggestion": "خطأ في تسجيل الدخول"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"බලය දීමේ දෝෂයකි\" (Balaya dimee doshayakiyi) translates to 'An authorization error' or 'An error of granting power'. While not entirely wrong, it's a more literal and technical translation than is likely appropriate for a user-facing error message. A more natural and user-friendly translation would be better.",
-          "suggestion": "Consider alternatives like \"ප්‍රවේශය ලබා ගැනීමට බලය නොමැත\" (Pravešaya labā gatūwen balaya nōmathe) - 'Unable to access' or \"ප්‍රවේශ අසාර්ථක\" (Pravešā asārthaka) - 'Access failed'."
+          "description": "While 'බලය දීමේ දෝෂයකි' (balaya dime doyayakiki) is a literal translation of 'Authorization error,' it's not the most natural or commonly used phrasing in Sinhala. A more suitable translation would convey the meaning more clearly and accurately for a user experience.",
+          "suggestion": "සරල ක්‍රියාදායකයාකමැරියාවකි (sarala kriyadakayakameariyawakiki) - This translates to 'Simple action failure' or 'Basic action error' and is more commonly used in technical contexts. Alternatively, 'අවසරයකමැරියාවකි' (awasayakameariyawakiki) - 'Authorization failure' can be used which is more direct."
         }
       ],
       "approved_at": null
@@ -198,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Greška u ovlašćenju' while technically correct, doesn't fully capture the nuance of 'Authorization error'. A more accurate translation, depending on context, could be 'Problem sa autorizacijom' or 'Neuspešna autorizacija'. 'Greška u ovlašćenju' implies an error *within* the authorization process, while 'Authorization error' can refer to failure to authorize.",
-          "suggestion": "Consider 'Problem sa autorizacijom' or 'Neuspešna autorizacija' for a more precise translation."
+          "description": "While \"Greška u ovlašćenju\" is a literal translation of 'Authorization error,' it's not the most natural or idiomatic phrasing in Serbian. A more common and clearer translation would be 'Greška u autorizaciji' or 'Problem sa autorizacijom'.",
+          "suggestion": "Greška u autorizaciji"
         }
       ],
       "approved_at": null

@@ -24,15 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useMemo, useContext } from "react";
+import { useMemo, use } from "react";
 import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Context } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/rows";
-
-import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+import { FilesRowContainer as RowContainer } from "@docspace/shared/components/files-row";
 
 import withContainer from "../../../../../HOCs/withContainer";
 
@@ -55,7 +53,7 @@ const FilesRowContainer = ({
   setRefMap,
   deleteRefMap,
 }) => {
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   useViewEffect({
     view: viewAs,
@@ -99,7 +97,7 @@ const FilesRowContainer = ({
 
   return (
     <RowContainer
-      className={`files-row-container ${styles.filesRowContainer}`}
+      className="files-row-container"
       filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}

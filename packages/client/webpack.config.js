@@ -27,13 +27,10 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
-const ESLintPlugin = require("eslint-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
@@ -41,15 +38,10 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
-const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
-//const fs = require("fs");
-//const { readdir } = require("fs").promises;
-
 const path = require("path");
 
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
-const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
@@ -117,6 +109,7 @@ const config = {
       SRC_DIR: path.resolve(__dirname, "./src"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+      "@docspace/shared": path.resolve(__dirname, "../shared"),
     },
   },
 
@@ -204,7 +197,17 @@ const config = {
             loader: "@svgr/webpack",
             options: {
               svgoConfig: {
-                plugins: [{ removeViewBox: false }],
+                plugins: [
+                  {
+                    name: "preset-default",
+                    params: {
+                      overrides: {
+                        removeViewBox: false,
+                        cleanupIds: false,
+                      },
+                    },
+                  },
+                ],
               },
             },
           },
@@ -219,7 +222,7 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
         test: /\.module\.s[ac]ss$/i,
@@ -234,6 +237,8 @@ const config = {
               },
             },
           },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
           {
             loader: "sass-loader",
             options: {
@@ -250,7 +255,7 @@ const config = {
       {
         test: /(?<!\.module)\.s[ac]ss$/i,
         use: [
-          "style-loader",
+          { loader: "style-loader" },
           {
             loader: "css-loader",
             options: {
@@ -258,6 +263,8 @@ const config = {
               importLoaders: 2,
             },
           },
+          // Fix relative url() in fonts.css
+          "resolve-url-loader",
           {
             loader: "sass-loader",
             options: {
@@ -284,12 +291,12 @@ const config = {
               ],
               plugins: [
                 "@babel/plugin-transform-runtime",
-                "@babel/plugin-proposal-class-properties",
+                "@babel/plugin-transform-class-properties",
                 "@babel/plugin-proposal-export-default-from",
               ],
             },
           },
-          "source-map-loader",
+          { loader: "source-map-loader" },
         ],
       },
     ],
@@ -346,8 +353,6 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
-  config.devtool = "source-map";
-
   const isProduction = argv.mode === "production";
   const styleLoader = isProduction
     ? MiniCssExtractPlugin.loader
@@ -372,6 +377,7 @@ module.exports = (env, argv) => {
   });
 
   if (isProduction) {
+    config.devtool = "source-map";
     config.mode = "production";
     config.optimization.splitChunks.chunks = "all";
     config.optimization.minimize = !env.minimize;
@@ -387,49 +393,6 @@ module.exports = (env, argv) => {
       }),
     ];
   }
-
-  config.plugins.push(
-    new ModuleFederationPlugin({
-      name: "client",
-      filename: "remoteEntry.js",
-      remotes: [],
-      exposes: {
-        "./shell": "./src/Shell",
-        "./store": "./src/store",
-        "./Layout": "./src/components/Layout",
-        "./Main": "./src/components/Main",
-        "./NavMenu": "./src/components/NavMenu",
-        "./PreparationPortalDialog":
-          "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
-        "./utils": "./src/helpers/filesUtils.js",
-        "./BrandingPage":
-          "./src/pages/PortalSettings/categories/common/branding.js",
-        "./BrandNamePage":
-          "./src/pages/PortalSettings/categories/common/Branding/brandName.js",
-        "./WhiteLabelPage":
-          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
-        "./AdditionalResPage":
-          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
-        "./CompanyInfoPage":
-          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
-        "./BackupPage":
-          "./src/pages/PortalSettings/categories/data-management/backup/manual-backup",
-        "./AutoBackupPage":
-          "./src/pages/PortalSettings/categories/data-management/backup/auto-backup",
-        "./RestorePage":
-          "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
-        "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
-        "./BonusPage": "./src/pages/Bonus",
-        "./ChangeStorageQuotaDialog":
-          "./src/components/dialogs/ChangeStorageQuotaDialog",
-        "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
-      },
-      shared: {
-        ...deps,
-        ...sharedDeps,
-      },
-    }),
-  );
 
   const htmlTemplate = {
     title: title,
@@ -494,23 +457,6 @@ module.exports = (env, argv) => {
 */`,
     }),
   );
-
-  if (!env.lint || env.lint == "true") {
-    console.log("Enable eslint");
-    config.plugins.push(
-      new ESLintPlugin({
-        configType: "eslintrc",
-        cacheLocation: path.resolve(
-          __dirname,
-          "../../node_modules/.cache/.eslintcache",
-        ),
-        quiet: true,
-        formatter: "json",
-      }),
-    );
-  } else {
-    console.log("Skip eslint");
-  }
 
   return config;
 };

@@ -3,7 +3,7 @@
   "content": "Folder created",
   "content_en_sha1_hash": "d757fedebf319cb3697fac09278dd18e5a03e9bf",
   "created_at": "2025-05-19T21:30:49.749Z",
-  "updated_at": "2025-05-21T01:10:14.548Z",
+  "updated_at": "2025-05-24T02:24:21.602Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -101,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ໂຟນເດີຖືກສ້າງຂຶ້ນ\" is a literal translation of 'Folder created'. While understandable, a more natural phrasing in Lao would convey the same meaning.",
-          "suggestion": "Consider a more idiomatic Lao translation such as \"ສ້າງໂຟນເດີໃໝ່\" (New folder created) or \"ໂຟນເດີໃໝ່ຖືກສ້າງ\" (New folder was created)."
+          "description": "The Lao translation \"ໂຟນເດີຖືກສ້າງຂຶ້ນ\" is a literal translation of \"Folder created\" and while understandable, it is not the most natural or idiomatic way to express this in Lao.  It translates to something closer to \"The folder was created.\" A more natural phrasing would be \"ສ້າງໂຟນເດີ\" or \"ໂຟນເດີສ້າງແລ້ວ\".",
+          "suggestion": "Consider using \"ສ້າງໂຟນເດີ\" or \"ໂຟນເດີສ້າງແລ້ວ\" for a more natural Lao phrasing."
         }
       ],
       "approved_at": null
@@ -155,13 +155,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ෆෝල්ඩරය සාදා ගන්නා ලදි\" is too verbose and not a direct translation of \"Folder created\". It implies the action of creating a folder is ongoing. A more accurate and concise translation would be \"නව ෆෝල්ඩරය\" (Nava Folderaya) or \"ෆෝල්ඩරය නිර්මාණය කරන ලදි\" (Folder nirmanaya karan ladi).",
-          "suggestion": "නව ෆෝල්ඩරය"
+          "description": "The translation 'ෆෝල්ඩරය සාදා ගන්නා ලදි' is overly verbose and not the most natural way to express 'Folder created' in Sinhala. It literally translates to 'The folder is being created'.",
+          "suggestion": "A more concise and natural translation would be 'ෆෝල්ඩරය නිර්මාණය කරන ලදි' (Folder Nimakaranaya Karana Ladi) or simply 'නව ෆෝල්ඩරය' (New Folder)."
         },
         {
           "type": "grammar",
-          "description": "While understandable, the translation uses a somewhat informal verb tense/form. A more formal or standard Sinhala phrasing would improve clarity and professionalism.",
-          "suggestion": "ෆෝල්ඩරය නිර්මාණය කරන ලදි"
+          "description": "While grammatically correct, the continuous aspect ('-na ladi') might be unnecessary and sound awkward depending on the context of the webhook event. It indicates an ongoing process.",
+          "suggestion": "Consider removing the '-na ladi' for a simpler and potentially more accurate representation of a completed action: 'ෆෝල්ඩරය සාදා ඇත' (Folder Sada Atha)."
         }
       ],
       "approved_at": null
@@ -172,8 +172,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, 'Priečinok vytvorený' is a passive construction that sounds less natural in Slovak for this context. A more common and preferred phrasing would be active.",
-          "suggestion": "Priečinok bol vytvorený"
+          "description": "While \"Priečinok vytvorený\" is grammatically correct, it's a passive construction that doesn't flow as naturally in Slovak. A more natural and active translation would be \"Vytvorený priečinok\" or simply \"Nový priečinok\".",
+          "suggestion": "Vytvorený priečinok"
         }
       ],
       "approved_at": null
@@ -190,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Фасцикла креирана' doesn't accurately convey the meaning of 'Folder created'. 'Фасцикла' (fascikla) is an archaic or less common term for 'folder' and might not be readily understood by all users. 'Kreirana' is grammatically correct but can feel overly formal.",
-          "suggestion": "More natural translations would be 'Нова папка креирана' (Nova papka kreirana - New folder created) or simply 'Креирана папка' (Kreirana papka - Created folder)."
+          "description": "The translation \"Фасцикла креирана\" is not the most natural or accurate translation of \"Folder created.\" \"Фасцикла\" is a somewhat archaic term for folder. A more common and natural translation would be \"Направна креирана\" or \"Мапка креирана\".",
+          "suggestion": "Направна креирана"
         }
       ],
       "approved_at": null
@@ -202,7 +202,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'kreirana' is a feminine form. Since 'folder' (fascikla) is feminine, the past participle needs to agree in gender. However, the meaning implies a more general action. The translation doesn't quite capture the nuance.",
+          "description": "The word 'kreirana' is a grammatically correct participle, but in this context, a simpler noun form would be more natural. 'Fascikla' is correctly spelled.",
           "suggestion": "Fascikla napravljena"
         }
       ],

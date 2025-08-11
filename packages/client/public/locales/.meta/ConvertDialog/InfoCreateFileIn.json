@@ -3,7 +3,7 @@
   "content": "The new '{{fileTitle}}' file is created in '{{folderTitle}}'",
   "content_en_sha1_hash": "c79a91db3ff2018b3bacad21c6f4e74fbf64a79a",
   "created_at": "2025-05-19T21:30:56.889Z",
-  "updated_at": "2025-06-18T07:34:15.292Z",
+  "updated_at": "2025-06-18T17:11:42.539Z",
   "comment": {
     "text": "This translation key is used to display a success message when a new file is created. The message informs the user that the new file has been successfully created in a specific folder, identified by its title. It appears as a notification after clicking the upload button or similar action.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/UploadDataStore.js",
-      "line_number": 843,
+      "line_number": 842,
       "context": "folderId &&\n getFolderInfo(folderId)\n .then((folderInfo) =>\n toastr.success(\n t(\"InfoCreateFileIn\", {\n fileTitle,\n folderTitle: folderInfo.title,\n }),\n ),\n )",
       "module": "/packages/client"
     }
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The single quotes around '{{fileTitle}}' are incorrect. They should be double quotes.",
+          "suggestion": "Un archivo nuevo \"{{fileTitle}}\" ha sido creado en \"{{folderTitle}}\""
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -81,13 +87,30 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'The new '{{fileTitle}}' file' is not accurately translated. The word 'new' is missing.",
+          "suggestion": "Նորը '{{fileTitle}}' ֆայլը ստեղծվում է '{{folderTitle}}'"
+        },
+        {
+          "type": "formatting",
+          "description": "The apostrophe placement is incorrect. It should be placed after the Armenian definite article.",
+          "suggestion": "Նորը '{{fileTitle}}' ֆայլը ստեղծվում է '{{folderTitle}}'"
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The verb tense 'è creato' (is created) is passive voice and sounds unnatural in Italian. A more natural phrasing would use the active voice.",
+          "suggestion": "Il nuovo file '{{fileTitle}}' è stato creato in '{{folderTitle}}'"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -105,7 +128,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ຖືກສ້າງຂື້ນ' is commonly spelled 'ຖືກສ້າງຂຶ້ນ'.",
+          "suggestion": "ໄຟລ໌ '{{fileTitle}}' ໃໝ່ຖືກສ້າງຂຶ້ນໃນ '{{folderTitle}}'"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +152,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'is created' implies a completed action. The Polish 'zostanie utworzony' (will be created) indicates a future action. While not strictly incorrect, it subtly changes the meaning.  A better translation to match the English tense would be 'jest utworzony'.",
+          "suggestion": "Nowy '{{fileTitle}}' plik jest utworzony w '{{folderTitle}}'"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -153,7 +188,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'සාදා' (saada) is a slightly awkward phrasing for 'created'. A more natural phrasing would be 'ඇති' (athi).",
+          "suggestion": "නව '{{fileTitle}}' ගොනුව '{{folderTitle}}' හි ඇත"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +212,18 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'датотека' (datoteka) is a direct translation of 'file' but doesn't flow naturally in this context. A more common and natural way to say 'file' in this situation would be 'фајл' (fajl) or sometimes 'datoteka' in more formal contexts.",
+          "suggestion": "Нова '{{fileTitle}}' фајл је направљена у '{{folderTitle}}'"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, using a single quote for the file and folder titles might feel slightly less natural compared to double quotes or no quotes at all. Consistency is also key, ensure the English version uses single quotes consistently.",
+          "suggestion": "Нова '{{fileTitle}}' фајл је направљена у '{{folderTitle}}'"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -195,13 +247,25 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The new' isn't directly translated. While not strictly incorrect, it introduces unnecessary emphasis that isn't present in the original.  Consider a more direct translation for better flow.",
+          "suggestion": "File '{{fileTitle}}' được tạo trong '{{folderTitle}}'"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"设置为\" (set to) doesn't accurately convey the meaning of 'is created in'. It implies the file was assigned to the folder rather than being created within it.",
+          "suggestion": "新的文件“{{fileTitle}}”创建在“{{folderTitle}}” (Xīn de wénjiàn “{{fileTitle}}” chuàngjiàn zài “{{folderTitle}}”) - This translates to 'The new file “{{fileTitle}}” is created in “{{folderTitle}}”'"
+        }
+      ],
       "approved_at": null
     }
   }

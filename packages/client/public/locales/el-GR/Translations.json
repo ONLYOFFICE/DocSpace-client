@@ -1,7 +1,5 @@
 {
   "ChooseFromList": "Επιλέξτε από τη λίστα",
-  "ConnectingAccount": "Σύνδεση λογαριασμού",
-  "DeleteFromTrash": "Τα επιλεγμένα στοιχεία διαγράφηκαν επιτυχώς από τον Κάδο απορριμμάτων",
   "FileLocked": "Το Αρχείο Κλειδώθηκε",
   "FileProtected": "Το αρχείο προστατεύεται με κωδικό πρόσβασης",
   "FileUnlocked": "Το Αρχείο Ξεκλειδώθηκε",
@@ -26,14 +24,5 @@
   "ThirdPartyInfo": "Αλλάξτε τις πληροφορίες τρίτου μέρους",
   "ThirdPartyTitle": "Υπηρεσίες τρίτων",
   "TitleShowActions": "Εμφάνιση ενεργειών αρχείου",
-  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου"
 }

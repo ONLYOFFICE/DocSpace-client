@@ -28,13 +28,7 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import elementResizeDetectorMaker from "element-resize-detector";
-import React, {
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-  useContext,
-} from "react";
+import React, { useEffect, useRef, useCallback, useMemo, use } from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
@@ -155,7 +149,7 @@ const Table = ({
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
 
-  const { sectionWidth } = useContext(Context);
+  const { sectionWidth } = use(Context);
 
   const ref = useRef(null);
   const tagRef = useRef(null);

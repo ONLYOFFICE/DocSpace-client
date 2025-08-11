@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/_mixins.scss";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .body {
   display: contents;
@@ -43,7 +43,7 @@
   display: contents;
 
   .recoverButtonDialog {
-    @include mobile {
+    @include mixins.mobile {
       width: 100%;
     }
   }

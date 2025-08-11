@@ -59,7 +59,7 @@ export default function RoomSelectorClient({
   pageCount,
   roomList,
 }: RoomSelectorClientProps) {
-  const { sdkConfig } = useSDKConfig();
+  useSDKConfig();
 
   useDocumentTitle("RoomSelector");
 
@@ -142,6 +142,10 @@ export default function RoomSelectorClient({
     ? { roomType: baseConfig.roomType }
     : {};
 
+  const searchProps = baseConfig?.search
+    ? { withSearch: baseConfig?.search }
+    : {};
+
   const { folders, total } = roomList;
 
   return (
@@ -149,6 +153,7 @@ export default function RoomSelectorClient({
       {...cancelButtonProps}
       {...headerProps}
       {...roomTypeProps}
+      {...searchProps}
       initHasNextPage={total > pageCount}
       initItems={folders}
       initTotal={total}
@@ -156,7 +161,6 @@ export default function RoomSelectorClient({
       onSubmit={onSubmit}
       submitButtonLabel={baseConfig?.acceptLabel}
       withInit
-      withSearch={baseConfig?.search}
     />
   );
 }

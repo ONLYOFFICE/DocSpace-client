@@ -3,7 +3,7 @@
   "content": "{{length}} characters",
   "content_en_sha1_hash": "a7ed7492dec488d47f9502d4211e3214ea9ebdf5",
   "created_at": "2025-05-19T21:30:50.881Z",
-  "updated_at": "2025-06-18T07:34:15.195Z",
+  "updated_at": "2025-08-04T07:30:01.552Z",
   "comment": {
     "text": "This translation key is used to display the length of a password in the user interface. It appears on a page where users can set and view the strength of their passwords, providing feedback on the number of characters in the input field.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 288,
+      "line_number": 290,
       "context": "withPouring\n value={passwordLen}\n onChange={onSliderChange}\n />\n <Text>\n {t(\"Characters\", {\n length: passwordLen,\n })}\n </Text>\n </div>\n <div className=\"checkboxes\">",
       "module": "/packages/client"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'characters' is best translated as 'أحرف' (ahruf) rather than 'حرفًا' (harfan) when referring to a count. 'حرفًا' implies a single character.",
-          "suggestion": "Change 'حرفًا' to 'أحرف' (أحرف)"
+          "description": "The English phrase 'characters' is translated as 'حرفًا' which literally means 'letters'. While related, 'characters' in this context (likely referring to a character limit) refers to the total number of characters, not individual letters. A more accurate translation would be 'أحرف' (ahruf) to represent a plural form of characters or 'أحرف' with a clarifying addition if context requires.",
+          "suggestion": "Consider 'أحرف' or a more context-specific translation that accurately conveys the intended meaning of 'characters' (e.g., 'عدد الأحرف' for 'number of characters')."
         }
       ],
       "approved_at": null
@@ -42,8 +42,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation \"İşarələrin {{length}}\" doesn't accurately convey the meaning of \"characters\" in the context of settings. 'İşarələrin' translates to 'of signs' or 'of indicators', which is not the intended meaning of character count.",
-          "suggestion": "Consider using \"Simvolların {{length}}\" (Simvolların - of symbols) or \"Hərflərin {{length}}\" (Hərflərin - of letters) for a more accurate translation, depending on the specific context."
+          "description": "The Azerbaijani translation \"İşarələrin {{length}}\" does not accurately convey the meaning of \"characters\". \"İşarələrin\" translates to \"Signs\" or \"Indicators\".  It doesn't reflect the technical meaning of 'characters' in the context of settings (e.g., character limit).",
+          "suggestion": "The correct translation should be something like \"simvollar {{length}}\" or \"məxəzzələr {{length}}\". \"simvollar\" is a more common and accurate translation for 'characters' in a technical context."
         }
       ],
       "approved_at": null
@@ -57,13 +57,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'characters' is best translated as 'znaky' in this context, representing the number of characters in a text field or similar. While 'postavy' exists for 'characters' in the sense of people, 'znaky' is the appropriate term for this setting.",
-          "suggestion": "Keep as \"{{length}} znaků\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English term 'characters' refers to the number of letters or symbols in a string, not just 'signs'. 'գրանշաններ' literally translates to 'signs' or 'marks' and doesn't accurately convey the intended meaning.",
-          "suggestion": "Consider using a more accurate translation such as \"տողեր\" (toger, meaning 'letters/characters') or \"симвоլներ\" (simvolner, meaning 'symbols'). The best option depends on the context."
+          "description": "The English term \"characters\" refers to the number of alphanumeric symbols, not necessarily a more general term for 'signs' or 'marks'. \"գրանշաններ\" can be understood as 'signatures' or 'stamps', which isn't accurate in this context.",
+          "suggestion": "A more appropriate translation for \"characters\" in this context might be something like \"տողեր\" (toger) meaning 'characters' or 'symbols' or possibly \"գրանշանների թիվ\" (gran shani er tiv) for 'number of characters'."
         }
       ],
       "approved_at": null
@@ -129,7 +123,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Lao word 'ຕົວອັກສອນ' is correctly spelled. However, it might be worth considering whether a more colloquial or precise term exists depending on the overall tone and context of the application.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -149,9 +149,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation 'znak(i/ów)' is overly literal and not idiomatic Polish for 'characters' in this context. It indicates both singular and plural forms within the same word, which is awkward.  A more natural translation would be 'znaki'.",
-          "suggestion": "znaki"
+          "type": "formatting",
+          "description": "The Polish translation uses \"znak(i/ów)\" which includes both singular and plural forms in parentheses. While grammatically correct, it's less elegant than a dynamically generated version.  The original English uses a variable, and the Polish should ideally do the same to avoid this construct.",
+          "suggestion": "Consider a dynamically generated string that uses a variable to determine the correct singular or plural form of 'znak' depending on the value of 'length'."
         }
       ],
       "approved_at": null
@@ -174,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The singular form 'caractere' is used when the English uses 'characters'. Since the length is variable, the Romanian should use the plural form.",
-          "suggestion": "\"{{length}} caractere\" should be \"{{length}} caractere\"."
+          "description": "The singular form 'caractere' is used, but the English uses 'characters' which implies a potentially plural count. It should be 'caractere' if the count is always one, or 'caractere' if it is potentially plural.",
+          "suggestion": "Consider using 'caractere' or 'caractere' depending on whether length refers to singular or plural characters."
         }
       ],
       "approved_at": null
@@ -189,7 +189,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The Sinhala word for 'characters' is 'අක්ෂරය' (aksharaya) in the singular.  'අකුරු' (akuru) refers to letters. Since 'length' implies a count, using the singular form is more accurate.",
+          "suggestion": "අක්ෂරය {{length}}"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"{{length}} знакова\" is not the most natural or accurate translation of \"{{length}} characters\". While 'знакова' is grammatically correct for 'characters' (nominative plural), a more common and idiomatic phrasing would use 'каратера'.",
-          "suggestion": "{{length}} каратера"
+          "description": "The Serbian (Cyrillic) translation \"{{length}} знакова\" translates to '{{length}} signs' instead of '{{length}} characters'. The correct term for characters in this context is 'simboli'.",
+          "suggestion": "{{length}} симбола"
         }
       ],
       "approved_at": null
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English 'characters' is best translated as 'karaktera' in Serbian (Latin) when referring to the length of text. 'Znakova' refers to 'signs' or 'symbols', which is not the intended meaning here.",
-          "suggestion": "\"{{length}} karaktera\""
+          "description": "The English 'characters' is best translated as 'karaktera' in Serbian (Latin) when referring to the number of characters. 'Znakova' is more general and can refer to symbols or marks.",
+          "suggestion": "'{{length}} karakterа'"
         }
       ],
       "approved_at": null
@@ -240,7 +246,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'characters' is better translated as 'символів' (simvoliv) in the Ukrainian translation, which is the genitive case to match 'Символи:'",
+          "description": "The English phrase \"characters\" is better translated as \"символів\" (symboliv) rather than \"символи\" (simvoly) in this context. \"Символи\" is the nominative plural, while \"символів\" is the genitive plural which is needed to match the preposition 'Символи:'",
           "suggestion": "Символи: {{length}} символів"
         }
       ],

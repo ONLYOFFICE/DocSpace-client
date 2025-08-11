@@ -3,7 +3,7 @@
   "content": "{{usersQuotaLimit}} for users",
   "content_en_sha1_hash": "9e6e5c83a7705ebda93dbfed5f4cb4f8bf50f01c",
   "created_at": "2025-05-19T21:30:53.161Z",
-  "updated_at": "2025-05-28T09:30:02.305Z",
+  "updated_at": "2025-05-26T07:57:32.340Z",
   "comment": {
     "text": "This translation key is used to display a quota limit message for users, indicating how many users can be added before exceeding a certain threshold. It appears in a warning dialog, specifically when setting default or tenant custom quotas.",
     "is_auto": true,
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'İstifadəçilər üçün {{usersQuotaLimit}}' doesn't fully convey the meaning of '{{usersQuotaLimit}} for users'. A more accurate translation would include a quantifier or specify the limit type.",
-          "suggestion": "İstifadəçilər üçün {{usersQuotaLimit}} limit"
+          "description": "The translation \"İstifadəçilər üçün {{usersQuotaLimit}}\" is a literal translation that doesn't convey the intended meaning of 'for users'. A more natural phrasing would be '{{usersQuotaLimit}} istifadəçi'",
+          "suggestion": "{{usersQuotaLimit}} istifadəçi"
         }
       ],
       "approved_at": null
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation 'Käyttäjien {{usersQuotaLimit}}' doesn't fully convey the meaning of \"{{usersQuotaLimit}} for users\". It translates to 'Users' which is incomplete. It lacks the 'limit' aspect of the original English.",
-          "suggestion": "Käyttäjien käyttöraja on {{usersQuotaLimit}}"
+          "description": "The translation 'Käyttäjien {{usersQuotaLimit}}' is incomplete and doesn't convey the full meaning of '{{usersQuotaLimit}} for users'. It's missing the 'limit' part of the phrase.",
+          "suggestion": "Käyttäjien {{usersQuotaLimit}} käyttöraja"
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ユーザーごとに{{usersQuotaLimit}}\" doesn't accurately convey \"{{usersQuotaLimit}} for users\". It translates to \"{{usersQuotaLimit}} per user\". The English phrase implies a limit *for* users, not a limit *per* user. A more accurate translation would consider the context and intent.",
-          "suggestion": "Consider \"ユーザーの利用制限は{{usersQuotaLimit}}」 or \"ユーザーアカウントの利用可能数: {{usersQuotaLimit}}\" depending on the exact meaning of the original English."
+          "description": "The translation \"ユーザーごとに{{usersQuotaLimit}}\" doesn't accurately convey the meaning of \"{{usersQuotaLimit}} for users\". It translates to \"{{usersQuotaLimit}} per user\". The original phrase implies a limit *for* users, not *per* user.",
+          "suggestion": "ユーザーの制限は{{usersQuotaLimit}}です"
         }
       ],
       "approved_at": null
@@ -120,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '사용자에 대한 {{usersQuotaLimit}}' translates literally to '{{usersQuotaLimit}} for users'. This is not the most natural way to express a quota limit in Korean. It lacks a clarifying preposition or structure to indicate that the value represents a limit.",
-          "suggestion": "Consider a more natural phrasing such as '사용자당 {{usersQuotaLimit}}' ({{usersQuotaLimit}} per user) or '사용자 제한은 {{usersQuotaLimit}}' (The user limit is {{usersQuotaLimit}})."
+          "description": "The Korean translation \"사용자에 대한 {{usersQuotaLimit}}\" is a literal translation and doesn't flow naturally in Korean. It implies the quota limit *belongs to* or is *about* the users, rather than being a limit *per* user.",
+          "suggestion": "Consider a more natural phrasing like \"사용자당 {{usersQuotaLimit}}\" ({{usersQuotaLimit}} per user) or \"사용자 {{usersQuotaLimit}}까지\" (up to {{usersQuotaLimit}} users)."
         }
       ],
       "approved_at": null
@@ -132,13 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ກຳນົດຈຳນວນຜູ້ໃຊ້ສູງສຸດ {{usersQuotaLimit}} ສຳລັບຜູ້ໃຊ້' is not a direct or natural translation of '{{usersQuotaLimit}} for users'. While understandable, it's overly verbose and doesn't capture the simplicity of the English.",
-          "suggestion": "Consider a more direct translation like 'ຈຳນວນຜູ້ໃຊ້ສູງສຸດ: {{usersQuotaLimit}}'"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'ສູງສຸດ' (highest) before the variable feels slightly awkward. While grammatically correct, it might be more readable with a different construction.",
-          "suggestion": "Experiment with phrasing to prioritize clarity and natural flow.  Perhaps 'ຈຳນວນຜູ້ໃຊ້: {{usersQuotaLimit}}' is better."
+          "description": "The translation \"ກຳນົດຈຳນວນຜູ້ໃຊ້ສູງສຸດ {{usersQuotaLimit}} ສຳລັບຜູ້ໃຊ້\" is too literal and slightly awkward. A more natural phrasing would be something like \"ຈຳນວນຜູ້ໃຊ້ສູງສຸດແມ່ນ {{usersQuotaLimit}} ສຳລັບຜູ້ໃຊ້\" or \"ຜູ້ໃຊ້ມີຈຳນວນສູງສຸດ {{usersQuotaLimit}} ສະບັບ\".",
+          "suggestion": "Consider revising to \"ຈຳນວນຜູ້ໃຊ້ສູງສຸດແມ່ນ {{usersQuotaLimit}} ສຳລັບຜູ້ໃຊ້\" or \"ຜູ້ໃຊ້ມີຈຳນວນສູງສຸດ {{usersQuotaLimit}} ສະບັບ\"."
         }
       ],
       "approved_at": null
@@ -197,13 +192,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'පරිශීලකයින් සඳහා {{usersQuotaLimit}}' is a literal translation but doesn't quite convey the intended meaning of 'for users' in the context of a quota limit. It's grammatically correct, but stylistically awkward. A more natural phrasing would emphasize the limit *of* users.",
-          "suggestion": "පරිශීලකයන්ගේ සංඛ්‍යාත්මක සීමාව {{usersQuotaLimit}}"
+          "description": "The translation \"පරිශීලකයින් සඳහා {{usersQuotaLimit}}\" is a literal translation but doesn't convey the intended meaning of 'limit for users'. A more natural translation would express the concept of a quota.",
+          "suggestion": "පරිශීලකයන් සඳහා උපරිම සංඛ්‍යාව {{usersQuotaLimit}}"
         },
         {
           "type": "formatting",
-          "description": "The double curly braces {{usersQuotaLimit}} are present in the Sinhala translation, mirroring the English. This is acceptable, but consider if it's necessary for the target audience’s comprehension.",
-          "suggestion": "No change needed unless clarity is improved without it."
+          "description": "The variable {{usersQuotaLimit}} is retained in the Sinhala translation, which might not be ideal for user-facing text. Consider localizing the value itself instead of using the variable.",
+          "suggestion": "If possible, replace {{usersQuotaLimit}} with the actual number or a localized representation of the limit."
         }
       ],
       "approved_at": null
@@ -238,8 +233,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Kullanıcılar için {{usersQuotaLimit}}' is not a natural or idiomatic way to express '{{usersQuotaLimit}} for users'. It lacks a clear indicator of what the limit refers to. A more accurate translation would indicate that it's a limit.",
-          "suggestion": "Kullanıcılar için {{usersQuotaLimit}} kullanıcı"
+          "description": "The Turkish translation 'Kullanıcılar için {{usersQuotaLimit}}' literally translates to 'For users {{usersQuotaLimit}}'. A more natural and accurate translation would indicate the limit *of* users. 'Kullanıcılar başına {{usersQuotaLimit}}' would be a better option, meaning '{{usersQuotaLimit}} per user'.",
+          "suggestion": "Kullanıcılar başına {{usersQuotaLimit}}"
         }
       ],
       "approved_at": null
@@ -262,13 +257,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"用户的{{usersQuotaLimit}}限制\" doesn't accurately convey the meaning of \"{{usersQuotaLimit}} for users\". The English phrase implies a quota *limit* *for* users, whereas the Chinese translation implies a limit *of* users.  It's awkwardly worded and doesn't flow naturally.",
+          "description": "The translation '用户的{{usersQuotaLimit}}限制' doesn't accurately convey the meaning of '{{usersQuotaLimit}} for users'. It translates to 'limit for users' which isn't the intended meaning. The original English implies a quota or limit *applied to* each user.",
           "suggestion": "用户的{{usersQuotaLimit}}额度"
-        },
-        {
-          "type": "formatting",
-          "description": "While the variable substitution is present, it's better to ensure consistency with surrounding text. It’s possible surrounding text uses a different formatting style.",
-          "suggestion": "Consider reviewing the formatting style used in the surrounding text and ensuring consistency (e.g., placement of braces)."
         }
       ],
       "approved_at": null

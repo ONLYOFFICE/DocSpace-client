@@ -27,9 +27,8 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
+import { IndexIconButtons } from "@docspace/shared/components/index-icon-buttons";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { VDRIndexingAction } from "@docspace/shared/enums";
 import FileNameCell from "./FileNameCell";
 import TypeCell from "./TypeCell";
@@ -68,6 +67,7 @@ const RowDataComponent = (props) => {
     changeIndex,
     isIndexedFolder,
     erasureColumnIsEnabled,
+    index,
   } = props;
 
   const [lastColumn, setLastColumn] = useState(
@@ -97,29 +97,17 @@ const RowDataComponent = (props) => {
   );
 
   const indexComponentNode = (
-    <div
-      className="index-arrows-container"
+    <IndexIconButtons
+      containerClassName="index-arrows-container"
       style={
         lastColumn === "Name"
-          ? { display: "flex", justifyContent: "flex-end", flexGrow: "1" }
-          : { display: "flex" }
+          ? { justifyContent: "flex-end", flexGrow: "1" }
+          : {}
       }
-    >
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-up-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
-      />
-      <ColorTheme
-        themeId={ThemeId.IndexIconButton}
-        iconName={ArrowReactSvgUrl}
-        className="index-down-icon change-index_icon"
-        size="small"
-        onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
-      />
-    </div>
+      commonIconClassName="change-index_icon"
+      onUpIndexClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+      onDownIndexClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+    />
   );
 
   const lastColumnContent = isIndexEditingMode
@@ -130,12 +118,14 @@ const RowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`files-cell-name-${index}`}
         className={classNames(
-          selectionProp?.className,
           "table-container_file-name-cell",
-          lastColumn === "Name" && isIndexEditingMode
-            ? "index-buttons-name"
-            : "",
+          dragStyles.className,
+          {
+            "table-container_file-name-cell-first":
+              value?.indexOf("first") > -1,
+          },
         )}
         value={value}
       >
@@ -155,8 +145,11 @@ const RowDataComponent = (props) => {
 
       {authorColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-author-${index}`}
           style={
-            !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
+            !authorColumnIsEnabled
+              ? { background: "none !important" }
+              : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
@@ -179,6 +172,7 @@ const RowDataComponent = (props) => {
 
       {createdColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-created-${index}`}
           style={
             !createdColumnIsEnabled
               ? { background: "none !important" }
@@ -206,6 +200,7 @@ const RowDataComponent = (props) => {
 
       {modifiedColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-modified-${index}`}
           style={
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -230,6 +225,7 @@ const RowDataComponent = (props) => {
 
       {erasureColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-erasure-${index}`}
           style={
             !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -250,6 +246,7 @@ const RowDataComponent = (props) => {
 
       {sizeColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-size-${index}`}
           style={
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -272,6 +269,7 @@ const RowDataComponent = (props) => {
 
       {typeColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-type-${index}`}
           style={
             !typeColumnIsEnabled
               ? { background: "none !important" }

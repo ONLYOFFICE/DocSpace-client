@@ -55,9 +55,12 @@ const FilterIcon = ({
         [styles.button]: true,
         [styles.isOpen]: isOpen,
       })}
+      data-testid="filter_icon_button"
     >
       <IconButton iconNode={<FilterReactSvg />} size={16} />
-      {isShowIndicator ? <div className={styles.indicator} /> : null}
+      {isShowIndicator ? (
+        <div className={styles.indicator} data-testid="filter_icon_indicator" />
+      ) : null}
     </div>
   );
 };

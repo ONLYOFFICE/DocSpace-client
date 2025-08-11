@@ -3,7 +3,7 @@
   "content": "JPG, PNG or SVG, 32x32",
   "content_en_sha1_hash": "1baf4b76e0d607b049dde3a0f3e90399140b17e4",
   "created_at": "2025-05-19T21:30:53.905Z",
-  "updated_at": "2025-05-21T07:10:33.226Z",
+  "updated_at": "2025-08-04T07:30:01.425Z",
   "comment": {
     "text": "This translation key is used to describe file formats and sizes that are accepted as icons. It appears on a form component in the OAuth settings page, guiding users on what types of images can be uploaded as icons.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/components/BasicBlock.tsx",
-      "line_number": 176,
-      "context": ">\n <SelectGroup\n label={t(\"AppIcon\")}\n value={logoValue}\n selectLabel={t(\"SelectNewImage\")}\n description={t(\"IconDescription\")}\n onSelect={onSelect}\n />\n </FieldContainer>\n \n <TextAreaGroup",
+      "line_number": 180,
+      "context": ">\n <SelectGroup\n label={t(\"AppIcon\")}\n value={logoValue}\n selectLabel={t(\"SelectNewImage\")}\n description={t(\"IconDescription\")}\n onSelect={onSelect}\n dataTestId=\"select_new_image_container\"\n />\n </FieldContainer>",
       "module": "/packages/client"
     }
   ],
@@ -30,13 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The size specification '3232x' is incorrect and lacks clarity. It seems to be a concatenation of '32' and '32' without proper separation. It's unclear if it indicates width and height or a single value.",
-          "suggestion": "JPG أو PNG أو SVG، بحجم 32 × 32"
+          "description": "The dimensions '32x32' are incorrectly represented as '3232x' in the Arabic translation. This creates a nonsensical dimension.",
+          "suggestion": "JPG أو PNG أو SVG، بحجم 32x32"
         },
         {
           "type": "incorrect_translation",
-          "description": "The use of 'بحجم' (bi hajmin) might be too literal and doesn't flow naturally in this context. It implies a general size, not a specific requirement.",
-          "suggestion": "JPG أو PNG أو SVG، بمقاس 32 × 32"
+          "description": "The concatenation of the numbers '32' creates an incorrect representation of the required dimensions. It loses the 'x' character which separates width and height.",
+          "suggestion": "JPG أو PNG أو SVG، بحجم 32 × 32"
         }
       ],
       "approved_at": null
@@ -68,7 +68,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'JPG, PNG ή SVG, 32x32' is a direct transliteration and doesn't accurately convey the meaning of 'or' in the context of supported file types.  'ή' is a simple 'or' connector. A more natural Greek phrasing would be needed to reflect the 'acceptable formats' meaning.",
+          "suggestion": "JPG, PNG και SVG, 32x32"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -92,13 +98,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses a comma to separate the file types, mirroring the English. While acceptable, a hyphen might be more natural in Armenian.",
-          "suggestion": "JPG, PNG- կամ SVG, 32x32"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -137,7 +137,7 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Dutch translation uses 'of' instead of 'of' to separate the image file types. The correct Dutch conjunction is 'of'.",
+          "description": "The Dutch translation uses 'of' instead of 'of'. While understandable, 'of' is not the correct preposition in this context. It should be 'of' to mirror the original.",
           "suggestion": "JPG, PNG of SVG, 32x32"
         }
       ],
@@ -176,7 +176,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation maintains the same formatting as the English content. While technically correct, it might be more natural to add a punctuation mark (e.g., a comma or period) after 'SVG' to improve readability in Sinhala. However, this is a minor stylistic preference and doesn't constitute an error.",
+          "suggestion": "Consider adding a punctuation mark after 'SVG', e.g., 'JPG, PNG හෝ SVG, 32x32.' or 'JPG, PNG හෝ SVG, 32x32'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -194,7 +200,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'или' (ili) is used for 'or' in Serbian, but in this context, 'ili' should be 'ili'.",
+          "suggestion": "JPG, PNG или SVG, 32x32"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

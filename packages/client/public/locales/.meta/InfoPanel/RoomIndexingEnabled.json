@@ -3,7 +3,7 @@
   "content": "Automatic file indexing enabled in the room",
   "content_en_sha1_hash": "7a847c4f14ff109b1a13c27a8774a3a16f658ac1",
   "created_at": "2025-05-19T21:30:54.932Z",
-  "updated_at": "2025-05-28T09:30:02.437Z",
+  "updated_at": "2025-08-04T07:30:01.245Z",
   "comment": {
     "text": "Automatic file indexing is enabled in the room, allowing users to easily access and manage files within the space. This setting is typically found on a configuration panel or settings screen within the application, where users can toggle its availability.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 274,
+      "context": "case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = (feed.data as TFeedData).lifeTime?.period;\n const value = (feed.data as TFeedData).lifeTime?.value;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 243,
-      "context": "case \"RoomWatermarkSet\":\n return t(\"InfoPanel:RoomWatermarkSet\");\n case \"RoomWatermarkDisabled\":\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case \"RoomIndexingEnabled\":\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case \"RoomIndexingDisabled\":\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case \"RoomLifeTimeSet\": {\n const periodLifeTime = feed.data.lifeTime.period;\n const value = feed.data.lifeTime.value;",
+      "line_number": 252,
+      "context": "case FeedActionKeys.RoomWatermarkSet:\n return t(\"InfoPanel:RoomWatermarkSet\");\n case FeedActionKeys.RoomWatermarkDisabled:\n return t(\"InfoPanel:RoomWatermarkDisabled\");\n case FeedActionKeys.RoomIndexingEnabled:\n return t(\"InfoPanel:RoomIndexingEnabled\");\n case FeedActionKeys.RoomIndexingDisabled:\n return t(\"InfoPanel:RoomIndexingDisabled\");\n case FeedActionKeys.RoomLifeTimeSet: {\n const periodLifeTime = feed.data.lifeTime?.period;\n const value = feed.data.lifeTime?.value;",
       "module": "/packages/client"
     }
   ],
@@ -35,14 +41,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Otaqda faylların avtomatik indeksləşdirilməsi aktivləşdirilib\" is a bit literal and slightly awkward in Azerbaijani. While technically correct, it doesn't flow naturally. \"Otaqda faylların avtomatik indekslənməsi aktivləşdirilib\" would be more idiomatic.",
-          "suggestion": "Otaqda faylların avtomatik indekslənməsi aktivləşdirilib"
-        },
-        {
           "type": "spelling",
-          "description": "The word 'indeksləşdirilməsi' is long and could be shortened to 'indeksləməsi' to improve readability. While 'indeksləşdirilməsi' is grammatically correct, 'indeksləməsi' is more common and flows better.",
-          "suggestion": "Otaqda faylların avtomatik indekslənməsi aktivləşdirilib"
+          "description": "The word 'avtomatik' (automatic) is spelled correctly, but could be replaced with a more natural-sounding equivalent if preferred.",
+          "suggestion": "Consider using 'mərhələli' or 'qeyri-kəsilmiş' for a more natural flow, though 'avtomatik' is technically correct."
         }
       ],
       "approved_at": null
@@ -50,7 +51,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, the translation \"Автоматичното индексиране на файлове в стаята е активирано\" is a bit wordy and formal for a user-facing setting label. It could be more concise and user-friendly.",
+          "suggestion": "Автоматично индексиране в стаята"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -71,12 +78,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a bit literal and doesn't flow naturally in Greek. 'Έγινε ενεργοποίηση' is awkward. A more natural phrasing would convey the enabling action directly.",
+          "description": "The translation is overly literal and sounds unnatural in Greek. 'Έγινε ενεργοποίηση της αυτόματης ευρετηρίασης αρχείων στο δωμάτιο' translates to 'Automatic file indexing was activated in the room'. While technically correct, a more natural phrasing would convey the meaning more clearly.",
           "suggestion": "Αυτόματη ευρετηρίαση αρχείων ενεργοποιημένη στο δωμάτιο"
         },
         {
           "type": "formatting",
-          "description": "The translation includes a passive voice construction which makes it sound less direct and clear. A more active voice would be preferred.",
+          "description": "The translation uses a passive voice ('was activated'). While grammatically correct, it is not as concise and impactful as an active voice, which is often preferred in UI labels.",
           "suggestion": "Αυτόματη ευρετηρίαση αρχείων ενεργοποιημένη στο δωμάτιο"
         }
       ],
@@ -103,7 +110,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Սենյակում միացված է ֆայլերի ավտոմատ ինդեքսավորումը\" literally translates to 'Automatic file indexing is enabled in the room'. While technically correct, it sounds slightly unnatural in Armenian. A more natural phrasing might emphasize that the room has automatic indexing enabled.",
+          "suggestion": "Consider a phrasing like \"Սենյակում գործում է ֆայլերի ավտոմատ ինդեքսավորում\" (meaning 'Automatic file indexing is operating in the room') or \"Սենյակում ակտիվացված է ֆայլերի ավտոմատ ինդեքսավորում\" (meaning 'Automatic file indexing is activated in the room')."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -118,8 +131,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"ルーム内で自動ファイルインデックス作成が有効になりました\" is a bit literal and awkward. It directly translates 'automatic file indexing creation has been enabled'. A more natural phrasing would convey that file indexing is active or working.",
-          "suggestion": "ルームで自動ファイルインデックスが有効になっています (Room de jidou fairu indeksu ga yūkō ni natteimasu - Automatic file indexing is active in the room) or ルームで自動ファイルインデックス機能が有効になりました (Room de jidou fairu indeksu kinou ga yūkō ni narimashita - Automatic file indexing function is enabled in the room)."
+          "description": "The translation is overly literal and sounds unnatural in Japanese. '自動ファイルインデックス作成' is a very technical term and '有効になりました' (became enabled) is not the most natural way to express this in this context.",
+          "suggestion": "ルームで自動ファイルインデックスが有効になりました (Room de jidou fairu indeksu ga yūkō ni narimashita)"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While the suggestion above is slightly better, a more concise and natural phrasing would be better. The current phrasing can be simplified for better clarity.",
+          "suggestion": "ルームで自動ファイルインデックスが利用可能です (Room de jidou fairu indeksu ga riyō kanō desu)"
         }
       ],
       "approved_at": null
@@ -136,8 +154,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ການຊອກຫາເອກະສານອັດຕະໂນມັດຖືກເປີດໃຊ້ງານໃນຫ້ອງ' literally translates to 'Automatic document searching is enabled in the room.' While conveying a similar meaning, 'indexing' implies more than just searching. It suggests organization and cataloging.  A more accurate translation would better reflect this nuance.",
-          "suggestion": "ການນໍາໃຊ້ການຈັດດຶກດຶກອາການແບບອັດຕະໂນມັດໃນຫ້ອງ"
+          "description": "The translation 'ການຊອກຫາເອກະສານອັດຕະໂນມັດຖືກເປີດໃຊ້ງານໃນຫ້ອງ' is a bit literal and could be improved for natural Lao phrasing. While technically correct, it sounds somewhat awkward.",
+          "suggestion": "Consider a more natural phrasing like 'ການອິນເດັກซ์ເອກະສານແບບອັດຕະໂນມັດແມ່ນເປີດໃຊ້ງານໃນຫ້ອງ' or 'ຫ້ອງຖືກເປີດໃຊ້ງານການອິນເດັກສ໌ເອກະສານແບບອັດຕະໂນມັດ.'"
         }
       ],
       "approved_at": null
@@ -145,13 +163,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Automātiska failu indeksēšana telpā ir iespējota\" is overly literal and slightly awkward in Latvian. A more natural phrasing would be something like \"Automātiski faili tiek indeksēti telpā\" or \"Telpā ir iespējota automātiskā failu indeksēšana\".",
-          "suggestion": "Telpā ir iespējota automātiskā failu indeksēšana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,14 +171,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Automatische' is a compound word that is split incorrectly. It should be 'Automatische'.",
-          "suggestion": "Automatische"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'Automatische indexeren van bestanden' is slightly awkward. While grammatically correct, it's more natural to say 'Automatisch indexeren'.",
-          "suggestion": "Automatisch indexeren"
+          "type": "incorrect_translation",
+          "description": "The translation \"Automatische indexeren van bestanden ingeschakeld in de kamer\" is not the most natural Dutch. \"Indexeren\" is correct, but the phrasing is slightly awkward. A more idiomatic translation would emphasize the process of enabling rather than just stating it's enabled.",
+          "suggestion": "Automatisch bestanden indexeren is ingeschakeld in de kamer"
         }
       ],
       "approved_at": null
@@ -176,9 +183,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The translation \"Automatyczne indeksowanie plików jest włączone w tym pokoju\" is a bit literal and could be improved for fluency. While technically correct, it doesn't sound as natural in Polish. A better phrasing would convey the meaning more elegantly.",
-          "suggestion": "Automatyczne indeksowanie plików włączono w tym pokoju"
+          "type": "formatting",
+          "description": "The Polish translation 'Automatyczne indeksowanie plików jest włączone w tym pokoju' is grammatically correct, but sounds a bit clunky. The phrase 'w tym pokoju' (in this room) is slightly less natural in this context.",
+          "suggestion": "Automatyczne indeksowanie plików jest włączone w pokoju."
         }
       ],
       "approved_at": null
@@ -188,9 +195,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ficheiros' is a valid Portuguese word but might be less common or slightly more formal than alternatives like 'arquivos' in this context. While not strictly incorrect, 'arquivos' might be more natural for a user interface.",
-          "suggestion": "arquivos"
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Indexação automática de ficheiros ativada na sala\" is a bit clunky. A more natural and common phrasing would be \"Indexação automática de arquivos habilitada na sala\".  'Arquivos' is more frequently used than 'ficheiros' in this context, and 'habilitada' is preferred over 'ativada' when referring to a feature being enabled.",
+          "suggestion": "Indexação automática de arquivos habilitada na sala"
         }
       ],
       "approved_at": null
@@ -207,13 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Indexarea automată a fișierelor este activată pentru această sală' is a literal translation that doesn't quite capture the original meaning. While grammatically correct, it sounds slightly awkward in Romanian.  'Enabled' implies a setting is on. A more natural phrasing would emphasize that indexing is *working*.",
-          "suggestion": "Indexarea automată a fișierelor funcționează pentru această sală"
-        },
-        {
-          "type": "formatting",
-          "description": "While not a major issue, adding a comma after 'fișierelor' would improve readability.",
-          "suggestion": "Indexarea automată a fișierelor, este activată pentru această sală"
+          "description": "The translation \"Indexarea automată a fișierelor este activată pentru această sală\" is a bit literal and slightly awkward. While technically correct, it doesn't flow naturally in Romanian. A more natural phrasing would convey the same meaning.",
+          "suggestion": "Indexare automată a fișierelor activată pentru această sală."
         }
       ],
       "approved_at": null
@@ -230,13 +232,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරයේ ස්වයංක්‍රීය ගොනු දර්ශනය සක්‍රීය කරන ලදී' is a literal translation and a bit awkward in Sinhala. It implies an action being *done* to enable indexing, rather than stating the indexing is enabled.",
-          "suggestion": "කාමරයේ ස්වයංක්‍රීය ගොනු දර්ශනය සක්‍රීයයි."
+          "description": "The translation 'කාමරයේ ස්වයංක්‍රීය ගොනු දර්ශනය සක්‍රීය කරන ලදී' is a literal translation and sounds unnatural in Sinhala. 'දර්ශනය' (darshana) refers to 'view' or 'perspective' and isn't the best fit for 'indexing'.",
+          "suggestion": "කාමරයේ ස්වයංක්‍රීය ගොනු ලේබල කිරීම සක්‍රීය කරන ලදී."
         },
         {
           "type": "spelling",
-          "description": "While 'දර්ශනය' (darshanaya) can be used for 'view' or 'display', in the context of file indexing, 'සුචිතනය' (suchitanaya) or 'ලේඛනය' (lekhanaya) would be more accurate and natural.",
-          "suggestion": "කාමරයේ ස්වයංක්‍රීය ගොනු සුචිතනය සක්‍රීයයි."
+          "description": "While the individual words appear to be spelled correctly, the overall phrase construction feels stilted.",
+          "suggestion": "Consider a more idiomatic Sinhala phrasing for 'automatic file indexing'. A native speaker review would be beneficial."
         }
       ],
       "approved_at": null
@@ -247,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Automatické indexovanie súborov v miestnosti je povolené' is a bit literal and sounds unnatural in Slovak. A more idiomatic translation would be preferable.",
-          "suggestion": "Automatické indexovanie súborov v miestnosti je aktívne."
+          "description": "The translation 'Automatické indexovanie súborov v miestnosti je povolené' is overly literal and sounds unnatural in Slovak. A more natural phrasing would focus on the enabling action.",
+          "suggestion": "Automatické indexovanie súborov v miestnosti je zapnuté."
         }
       ],
       "approved_at": null
@@ -262,18 +264,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Аутоматско индексирање фајлова омогућено у соби\" is a very literal and somewhat awkward translation. It sounds unnatural in Serbian. A more natural phrasing would be \"Аутоматско индексирање датотека је укључено у соби\" or \"У соби је укључено аутоматско индексирање датотека\".",
-          "suggestion": "У соби је укључено аутоматско индексирање датотека"
-        },
-        {
-          "type": "spelling",
-          "description": "While 'фајлова' (fajlova) is technically correct, using 'датотека' (datoтека) is a more common and generally preferred term for 'file' in this context.",
-          "suggestion": "датотека"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -300,13 +291,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Tự động lập chỉ mục tập tin đã được bật trong phòng' is a literal translation and sounds unnatural in Vietnamese. 'Lập chỉ mục' is a bit technical for a user-facing setting description.",
-          "suggestion": "Bật tự động lập chỉ mục tệp trong phòng"
+          "description": "The translation 'Tự động lập chỉ mục tập tin đã được bật trong phòng' is overly literal and not the most natural phrasing in Vietnamese. 'Lập chỉ mục' (indexing) sounds a bit technical and formal for a user-facing setting.",
+          "suggestion": "Tự động đánh chỉ mục file đã được kích hoạt trong phòng"
         },
         {
           "type": "formatting",
-          "description": "The word order could be improved for better readability.",
-          "suggestion": "Bật tự động lập chỉ mục tệp trong phòng"
+          "description": "While not strictly incorrect, 'đã được bật' is slightly less preferred than 'đã được kích hoạt' in this context. The latter feels more active and user-initiated.",
+          "suggestion": "None (Minor preference)"
         }
       ],
       "approved_at": null

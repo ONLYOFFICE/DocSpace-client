@@ -3,7 +3,7 @@
   "content": "Empty {{sectionName}}",
   "content_en_sha1_hash": "a8c3ee9d97173f47924959f3cbc240a5d756184d",
   "created_at": "2025-05-19T21:30:55.589Z",
-  "updated_at": "2025-06-03T20:59:42.290Z",
+  "updated_at": "2025-08-11T09:02:43.816Z",
   "comment": {
     "text": "This translation key is used to display a placeholder for an empty section or folder in the personal user folder. It appears as part of a button or dialog related to file management options.",
     "is_auto": true,
@@ -11,9 +11,21 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/Article/Body/Items.js",
+      "line_number": 192,
+      "context": "iconBadge={iconBadge}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1463,
-      "context": "disabled: false,\n },\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Files:EmptySection\", {\n sectionName: personalUserFolderTitle,\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
+      "line_number": 1412,
+      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1412,
+      "context": "if (isRecycleBinFolder) {\n return [\n {\n id: \"header_option_empty-trash\",\n key: \"empty-trash\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n onClick: this.onEmptyTrashAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,",
       "module": "/packages/client"
     }
   ],
@@ -27,7 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"إفراغ قسم {{sectionName}}\" implies 'emptying' or 'clearing' a section, which doesn't accurately convey the meaning of 'Empty {{sectionName}}'. A more appropriate translation would indicate a missing or blank section.",
+          "suggestion": "A better translation would be something like \"قسم فارغ {{sectionName}}\" (Qism Farigh {{sectionName}}) which translates to 'Empty Section {{sectionName}}' or \"لا يوجد قسم {{sectionName}}\" (La yujad Qism {{sectionName}}) which translates to 'No Section {{sectionName}}'."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -39,7 +57,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Изпразни {{sectionName}}' doesn't accurately convey the meaning of 'Empty {{sectionName}}'. 'Изпразни' translates to 'to empty' or 'to drain', which implies an action being performed on something, not the state of being empty. A more accurate translation would reflect the empty state.",
+          "suggestion": "Празен {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -51,7 +75,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The German translation retains the double curly braces around 'sectionName' which are unnecessary and inconsistent with typical German sentence structure. The English template uses double curly braces to indicate a placeholder to be replaced. In German, this level of formatting is not required or expected.",
+          "suggestion": "sectionName leer"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -99,19 +129,37 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{sectionName}} 섹션 비우기' literally translates to 'Empty {{sectionName}} section'. While understandable, it's less natural than other options. '{{sectionName}} 비우기' is a more concise and commonly used phrasing.",
+          "suggestion": "{{sectionName}} 비우기"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"{{sectionName}} ຫວ່າງເປົ່າ\" is a literal translation of 'Empty {{sectionName}}'. While understandable, it might not be the most natural phrasing in Lao. A more idiomatic translation could be considered.",
+          "suggestion": "{{sectionName}} ບໍ່ມີເນື້ອຫາ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"Empty {{sectionName}}\" implies removing all content from a section. The Latvian translation \"Iztukšot {{sectionName}}\" literally translates to \"To empty {{sectionName}}\" or \"Empties {{sectionName}}\", which implies an action performed *on* the section, rather than describing the state of the section being empty. A more accurate translation for describing an empty section would be \"Ievads {{sectionName}}\" (Empty section).",
+          "suggestion": "Ievads {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -135,13 +183,25 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Portuguese translation uses double curly braces \"{{\" and \"}}\" which matches the English template. However, best practice suggests using single curly braces \"{\" and \"}\" unless the platform specifically requires double braces for variable substitution. This is because double braces can be misinterpreted in some contexts.",
+          "suggestion": "{sectionName} vazio"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Golire' doesn't accurately convey the meaning of 'Empty' in this context. 'Golire' generally means 'emptying' or 'drainage'.  A more appropriate translation for 'Empty' in this context (referring to a section being empty) would be 'Secțiune goală' or 'Secțiune necompletată'.",
+          "suggestion": "Secțiune goală"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,55 +213,109 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'ශූන්‍ය' (shunya) while meaning 'zero' or 'empty' doesn't perfectly convey the nuance of 'Empty' as a label for a section. A better translation might be 'ឱබئة' (obae) or 'ឱබئه' (obae).",
+          "suggestion": "ශූන්‍ය -> ឱබئة or ឱබئه"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Vyprázdniť' (meaning 'to empty') doesn't accurately reflect the English phrase 'Empty {{sectionName}}'. The English phrase describes a label indicating an empty section, not an instruction to empty it. A more appropriate translation would be something like 'Prázdne {{sectionName}}' (Empty section) or '{{sectionName}} (prázdne)' ({{sectionName}} (empty)).",
+          "suggestion": "Prázdne {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Izprazni {{sectionName}}' literally translates to 'Empty {{sectionName}}' but the intended meaning in this context is likely 'Clear {{sectionName}}' or 'Remove from {{sectionName}}'. 'Izprazni' implies emptying something completely, which might not be the desired action.",
+          "suggestion": "Consider 'Počisti {{sectionName}}' (Clean {{sectionName}}) or 'Odstrani iz {{sectionName}}' (Remove from {{sectionName}})"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Испразни' doesn't fully capture the meaning of 'Empty'. While 'Испразни' means 'empty out' or 'clear', 'Empty' in this context likely refers to a section being completely devoid of content. A more accurate translation would be 'Попуни' (Popuni) which means 'Fill' (implying it should be empty).  Alternatively 'Празни' (Prazni) could also work, depending on the desired nuance.",
+          "suggestion": "Празни {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Isprazni {{sectionName}}\" doesn't fully convey the meaning of \"Empty {{sectionName}}\". \"Isprazni\" means 'empty out' or 'clear out'. A more accurate translation would be something like 'Prazan {{sectionName}}' which directly means 'Empty {{sectionName}}'.",
+          "suggestion": "Prazan {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '{{sectionName}} bölümünü boşalt' is too literal and doesn't convey the intended meaning of 'Empty {{sectionName}}'. It implies an action to empty the section, rather than simply stating it is empty. A more natural translation would be '{{sectionName}} boş'",
+          "suggestion": "{{sectionName}} boş"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Спорожнити {{sectionName}}' translates to 'Empty' in the sense of 'to empty' or 'to clear', rather than simply 'Empty' as a descriptor. A more accurate translation would be '{{sectionName}} порожня' or '{{sectionName}} пуста'.",
+          "suggestion": "{{sectionName}} порожня"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Làm trống {{sectionName}}\" literally translates to \"Make empty {{sectionName}}\". A more natural translation for an empty section would be something like \"Phần trống {{sectionName}}\" or \"{{sectionName}} trống\".",
+          "suggestion": "Phần trống {{sectionName}}"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"清空{{sectionName}}\" literally translates to 'clear' or 'empty'. While 'empty' is the intended meaning, '清空' implies a forceful clearing, which might not always be the desired nuance. A more neutral translation would be better.",
+          "suggestion": "空{{sectionName}}"
+        }
+      ],
       "approved_at": null
     }
   }

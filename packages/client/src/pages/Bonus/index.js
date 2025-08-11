@@ -25,50 +25,87 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
+import { Bonus as BonusPage } from "@docspace/shared/pages/Payments/Bonus";
 
-import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
-import StyledComponent from "./StyledComponent";
-import OfficialDocumentation from "./sub-components/OfficialDocumentation";
-
-const Bonus = ({ standaloneInit, isInitPaymentPage, logoText }) => {
-  const { t, ready } = useTranslation("PaymentsEnterprise");
-
+const Bonus = ({
+  standaloneInit,
+  isInitPaymentPage,
+  isEnterprise,
+  isTrial,
+  isDeveloper,
+  isCommunity,
+  feedbackAndSupportUrl,
+  salesEmail,
+  dataBackupUrl,
+  logoText,
+  enterpriseInstallScriptUrl,
+  enterpriseInstallWindowsUrl,
+  forEnterprisesUrl,
+  demoOrderUrl,
+}) => {
   useEffect(() => {
     standaloneInit();
   }, []);
 
-  if (!isInitPaymentPage || !ready) return <PaymentsStandaloneLoader />;
+  if (!isInitPaymentPage) return <PaymentsStandaloneLoader />;
 
   return (
-    <StyledComponent>
-      <BenefitsContainer />
-      <Text fontWeight={600}>
-        {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: logoText,
-          license: t("Common:EnterpriseLicense"),
-        })}
-      </Text>
-      <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
-
-      <OfficialDocumentation />
-
-      <ContactContainer />
-    </StyledComponent>
+    <BonusPage
+      isEnterprise={isEnterprise}
+      isTrial={isTrial}
+      isDeveloper={isDeveloper}
+      isCommunity={isCommunity}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
+      salesEmail={salesEmail}
+      dataBackupUrl={dataBackupUrl}
+      logoText={logoText}
+      enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+      enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+      forEnterprisesUrl={forEnterprisesUrl}
+      demoOrderUrl={demoOrderUrl}
+    />
   );
 };
 
-export const Component = inject(({ paymentStore, settingsStore }) => {
-  const { standaloneInit, isInitPaymentPage } = paymentStore;
-  const { logoText } = settingsStore;
-  return {
-    standaloneInit,
-    isInitPaymentPage,
-    logoText,
-  };
-})(observer(Bonus));
+export const Component = inject(
+  ({
+    paymentStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    settingsStore,
+  }) => {
+    const { standaloneInit, isInitPaymentPage } = paymentStore;
+    const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
+    const { isTrial } = currentQuotaStore;
+    const {
+      dataBackupUrl,
+      logoText,
+      enterpriseInstallScriptUrl,
+      enterpriseInstallWindowsUrl,
+      feedbackAndSupportUrl,
+      salesEmail,
+      forEnterprisesUrl,
+      demoOrderUrl,
+    } = settingsStore;
+
+    return {
+      standaloneInit,
+      isInitPaymentPage,
+      isCommunity,
+      isEnterprise,
+      isTrial,
+      isDeveloper,
+      feedbackAndSupportUrl,
+      salesEmail,
+      dataBackupUrl,
+      logoText,
+      enterpriseInstallScriptUrl,
+      enterpriseInstallWindowsUrl,
+      forEnterprisesUrl,
+      demoOrderUrl,
+    };
+  },
+)(observer(Bonus));

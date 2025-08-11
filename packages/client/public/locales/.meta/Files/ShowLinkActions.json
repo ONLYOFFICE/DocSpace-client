@@ -3,7 +3,7 @@
   "content": "Show link actions",
   "content_en_sha1_hash": "72f0997576b413c97ea3e610e93f71bc02088b32",
   "created_at": "2025-05-19T21:30:56.204Z",
-  "updated_at": "2025-05-21T11:12:00.865Z",
+  "updated_at": "2025-08-11T09:02:44.086Z",
   "comment": {
     "text": "This translation key is used for the title of a contextual menu button that displays link actions when hovered over or right-clicked on a file, typically in an archive folder. The content will be displayed as \"Show link actions\" and serves to notify users about the available actions related to links within the file.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 243,
+      "line_number": 270,
       "context": "/>\n ) : null}\n {!isArchiveFolder ? (\n <ContextMenuButton\n getData={getData}\n title={t(\"Files:ShowLinkActions\")}\n directionY=\"both\"\n onClick={onOpenContextMenu}\n onClose={onCloseContextMenu}\n isDisabled={isExpiredLink || isLoaded}\n />",
       "module": "/packages/shared"
     }
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Keçid hərəkətlərini göstərin' is a literal translation and not the most natural way to express 'Show link actions' in Azerbaijani. A more idiomatic translation would be 'Bağlantı hərəkətlərini göstər' or 'Bağlantı hərəkətlərini aç'.",
-          "suggestion": "Bağlantı hərəkətlərini aç"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -90,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Ցույց տալ հղման գործողությունները\" is a literal translation that doesn't quite capture the intended meaning of 'Show link actions'. It sounds clunky and overly formal in Armenian. A more natural translation would convey the functionality of displaying options related to a link.",
-          "suggestion": "A better translation might be something like \"Ցուցադրել հղման ընտրանքները\" or \"Ցուցադրել հղման գործողություններ\" (depending on the specific context and desired level of formality).  Both convey the idea of showing options or actions associated with a link."
+          "description": "The translation \"Ցույց տալ հղման գործողությունները\" is a literal translation of \"Show link actions\" but might be overly verbose or not the most natural phrasing in Armenian. A more idiomatic translation could be considered, depending on the context. \"Ցուցադրել հղման գործողությունները\" or something similar might be preferred.",
+          "suggestion": "Consider a more idiomatic translation such as \"Ցուցադրել հղման գործողությունները\" or consult with a native Armenian speaker familiar with UI terminology."
         }
       ],
       "approved_at": null
@@ -102,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Mostra azioni di link' is understandable, a more natural and accurate translation would be 'Mostra azioni sui link' or 'Mostra le azioni dei link'. 'Di link' isn't the most idiomatic way to express 'of links' in this context.",
-          "suggestion": "Mostra azioni sui link"
+          "description": "While \"Mostra azioni di link\" is understandable, a more natural and accurate translation of \"Show link actions\" would be \"Visualizza azioni sui link\" or \"Mostra le azioni sui link\". \"Mostra azioni di link\" sounds a bit awkward in Italian.",
+          "suggestion": "Visualizza azioni sui link"
         }
       ],
       "approved_at": null
@@ -120,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"링크 작업 표시\" is a literal translation of \"Show link actions\" but doesn't convey the intended meaning naturally in Korean. It sounds awkward and might be misinterpreted as 'display link tasks' rather than 'show options or actions related to a link'.",
-          "suggestion": "A more natural and accurate translation would be something like \"링크 작업 표시\" (Link Actions Show) or \"링크 관련 작업 표시\" (Show link related actions) or potentially a more contextualized phrase depending on the UI."
+          "description": "The translation \"링크 작업 표시\" doesn't fully capture the meaning of \"Show link actions\". \"작업 표시\" translates to 'display actions' or 'show actions,' but the word 'link' is lost. A more accurate translation would incorporate the concept of 'links'.",
+          "suggestion": "링크 작업 표시 (Link actions display) or 링크 작업 보기 (View link actions)"
         }
       ],
       "approved_at": null
@@ -132,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ສະແດງການດໍາເນີນການເຊື່ອມຕໍ່' is a literal translation but doesn't fully capture the intended meaning of 'Show link actions.' It sounds overly formal and technical. A more natural translation would be something along the lines of 'ສະແດງຕົວເລືອກເຊື່ອມຕໍ່' or 'ສະແດງການກະ ທຳ ກ່ຽວກັບລິ້ງກ์'.",
-          "suggestion": "ສະແດງຕົວເລືອກເຊື່ອມຕໍ່"
+          "description": "The Lao translation \"ສະແດງການດໍາເນີນການເຊື່ອມຕໍ່\" is a literal translation that doesn't convey the intended meaning of \"Show link actions\" in a user interface context. A more natural Lao phrase for displaying link actions would be something along the lines of 'ຕົວເລືອກການເຊື່ອມຕໍ່' (options for links) or 'ການກະ ທຳ ຂອງເຊື່ອມຕໍ່' (link actions).",
+          "suggestion": "Consider alternatives like 'ຕົວເລືອກການເຊື່ອມຕໍ່' or 'ການກະ ທຳ ຂອງເຊື່ອມຕໍ່'."
         }
       ],
       "approved_at": null
@@ -156,8 +150,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pokaż działania linku' while understandable, is not the most natural or idiomatic way to say 'Show link actions' in Polish. A more accurate and natural translation would be 'Wyświetl akcje linku' or 'Pokaż menu akcji linku'.",
-          "suggestion": "Wyświetl akcje linku"
+          "description": "The translation 'Pokaż działania linku' is a literal translation but doesn't quite capture the meaning of 'Show link actions'. It implies showing actions *of* a link, rather than providing action options *for* a link.",
+          "suggestion": "Rozważ 'Wyświetl akcje dla linku' lub 'Pokaż opcje linku'. These options convey the intended functionality of displaying actions related to a link."
         }
       ],
       "approved_at": null
@@ -180,8 +174,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Afișare acțiuni asupra link-ului' is a bit literal and not the most natural way to express 'Show link actions' in Romanian. It sounds slightly clunky.",
-          "suggestion": "Consider 'Acțiuni pentru link' or 'Opțiuni pentru link' for a more fluent and natural translation."
+          "description": "The translation 'Afișare acțiuni asupra link-ului' is technically correct but a bit verbose and not as concise as the English 'Show link actions'. A more natural and concise translation would be preferable.",
+          "suggestion": "Afișează acțiuni link"
         }
       ],
       "approved_at": null
@@ -201,7 +195,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Zobraziť akcie odkazov\" is a bit literal and could be improved for natural Slovak. A more common and user-friendly phrasing would be better.",
+          "suggestion": "Zobraziť ponuky pre odkaz"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -210,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Prikaži dejanja povezav\" is a literal translation but not the most natural or idiomatic way to express \"Show link actions\" in Slovenian. A better translation would convey the intended functionality.",
-          "suggestion": "Razkriti možnosti povezav"
+          "description": "The translation 'Prikaži dejanja povezav' is technically correct but sounds a bit literal and not idiomatic. A more natural Slovenian translation would be something like 'Prikaži možnosti povezav' or 'Prikaži ukaze povezav'.",
+          "suggestion": "Prikaži možnosti povezav"
         }
       ],
       "approved_at": null
@@ -222,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Прикажи радње линка\" is a literal translation and doesn't convey the intended meaning of \"Show link actions\" in a natural way for a user interface. \"Show\" implies a display or presentation of actions. \"Прикажи\" is more like 'display' or 'show off', which might not be the best fit.",
-          "suggestion": "Consider alternatives like \"Покажи опције линка\" (Show link options) or \"Отвори мени радњи линка\" (Open link actions menu) which might better convey the intended function."
+          "description": "The translation \"Прикажи радње линка\" is a literal translation but doesn't fully capture the intended meaning of 'Show link actions'. A more natural phrasing in Serbian would convey the idea of displaying available actions related to a link. \"Прикажи опције линка\" or \"Покажи опције за линк\" would be more appropriate.",
+          "suggestion": "Прикажи опције линка"
         }
       ],
       "approved_at": null
@@ -234,7 +234,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Prikaži radnje linka\" is a bit literal and doesn't flow naturally in Serbian. A more idiomatic translation would convey the action of displaying options related to a link.",
+          "description": "The translation 'Prikaži radnje linka' is not the most natural or accurate translation of 'Show link actions'. 'Radnje' refers to actions in general, not necessarily the actions *of* a link. A better translation would convey the action related to the link itself.",
           "suggestion": "Prikaži opcije veze"
         }
       ],
@@ -246,8 +246,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bağlantı işlemlerini göster\" is a literal translation but doesn't quite capture the intended meaning of \"Show link actions.\" It sounds more like 'Display link operations' rather than showing available actions on a link.",
-          "suggestion": "Consider a more natural phrasing like \"Bağlantı eylemlerini göster\" or \"Bağlantı seçeneklerini göster\"."
+          "description": "The translation 'Bağlantı işlemlerini göster' is a literal translation and doesn't quite capture the nuance of 'Show link actions'. It implies a list of operations *related* to links, rather than the actions available *on* a link itself (e.g., copy, download, open in new tab).",
+          "suggestion": "Bir more natural translation might be 'Bağlantı eylemlerini göster' or 'Bağlantı seçeneklerini göster'."
         }
       ],
       "approved_at": null
@@ -264,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Hiển thị hành động với liên kết\" is a literal translation and not the most natural phrasing in Vietnamese. While technically correct, it's not idiomatic.",
-          "suggestion": "Consider alternatives like \"Hiển thị các tùy chọn liên kết\" or \"Hiển thị thao tác trên liên kết\" for a more natural-sounding translation."
+          "description": "The translation \"Hiển thị hành động với liên kết\" is a literal translation and sounds unnatural in Vietnamese. A more natural phrasing would be something along the lines of \"Hiển thị các hành động liên quan đến liên kết\" or \"Hiển thị các tùy chọn liên kết\".",
+          "suggestion": "Hiển thị các tùy chọn liên kết"
         }
       ],
       "approved_at": null

@@ -49,7 +49,9 @@ export type RadioButtonProps = {
   label?: React.ReactNode | string;
 
   /** Callback fired when radio button is clicked */
-  onClick?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+  ) => void;
 
   /** Sets margin between radio buttons.
    * For horizontal orientation, sets margin-inline-start.
@@ -63,6 +65,9 @@ export type RadioButtonProps = {
 
   /** Additional CSS class for the input element */
   classNameInput?: string;
+
+  /** Test ID for the radio button component */
+  testId?: string;
 } & PickedTextProps &
   PickedInputProps &
   PickedLabelProps;

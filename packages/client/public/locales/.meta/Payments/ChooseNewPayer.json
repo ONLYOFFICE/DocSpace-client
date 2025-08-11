@@ -3,7 +3,7 @@
   "content": "Choose a new Payer",
   "content_en_sha1_hash": "c471b31c7f8dd9d9248613b310879ae201323017",
   "created_at": "2025-05-19T21:30:53.675Z",
-  "updated_at": "2025-07-01T15:57:36.282Z",
+  "updated_at": "2025-08-04T07:30:01.521Z",
   "comment": {
     "text": "Choose a new Payer is a button label used in the PortalSettings payment section, appearing as a link to choose an alternative payer when existing options are insufficient. This text appears on a page within the application's interface. The translator should ensure the chosen wording accurately conveys this action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
       "line_number": 160,
-      "context": "themeId={ThemeId.Link}\n target=\"_blank\"\n className=\"payer-info_account-link\"\n onClick={goToStripePortal}\n >\n {t(\"ChooseNewPayer\")}\n </ColorTheme>\n ) : null}\n </div>\n </div>\n );",
+      "context": "target=\"_blank\"\n className=\"payer-info_account-link\"\n color=\"accent\"\n onClick={goToStripePortal}\n >\n {t(\"ChooseNewPayer\")}\n </Link>\n ) : null}\n </div>\n </div>\n );",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'اختر طريقة دفع جديدة' is understandable, a more precise translation of 'Choose a new Payer' would be 'اختر مُدفع جديد'. 'طريقة دفع' refers to a payment method, while 'Payer' refers to the person or entity making the payment. Depending on the context, 'اختر مُدفع جديد' is preferable for clarity.",
-          "suggestion": "اختر مُدفع جديد"
+          "description": "The translation 'اختر طريقة دفع جديدة' literally translates to 'Choose a new payment method'. While functionally similar to 'Choose a new Payer', it's not the most accurate rendering of the original English.",
+          "suggestion": "Consider 'اختر مُدَفِّع جديد' (Ikhtar Mudaffi' Jadeed) which more closely aligns with 'Choose a new Payer'."
         }
       ],
       "approved_at": null
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"새 지불자 선택\" is understandable, a more natural and accurate translation of 'Choose a new Payer' would be something like \"새로운 지불인 선택\" or \"새 지불인 지정\".  '지불자' can feel slightly formal and '지불인' is more commonly used in this context.",
-          "suggestion": "새로운 지불인 선택"
+          "description": "While \"새 지불자 선택\" is understandable, a more natural and accurate translation of \"Choose a new Payer\" would be something along the lines of \"새로운 결제인 선택\" or \"새 결제 계정 선택\".  '지불자' is technically correct, but less common than '결제인' in this context.",
+          "suggestion": "새로운 결제인 선택"
         }
       ],
       "approved_at": null
@@ -186,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Изабери новог Платиоца' is a literal translation, but 'Payer' in this context likely refers to a payment processor or someone making payments on behalf of another. A more accurate translation might consider alternatives like 'Нови прималац средстава' (New recipient of funds) or 'Нови дужник' (New debtor), depending on the precise meaning.",
-          "suggestion": "Consider alternatives like 'Нови прималац средстава' or 'Нови дужник' for greater accuracy."
+          "description": "The translation \"Изабери новог Платиоца\" is technically correct but could be improved for clarity and naturalness. 'Payer' often refers to a person or entity making payments, and 'Platioca' is a less common or direct equivalent. A more natural translation would use a word more commonly associated with 'payer'.",
+          "suggestion": "Изабери новог дужника"
         }
       ],
       "approved_at": null
@@ -198,7 +198,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Izaberi novog Platioca\" isn't the most natural or accurate translation of \"Choose a new Payer.\" While technically correct, it sounds a bit formal and clunky. A more natural phrasing would convey the meaning better.",
+          "description": "While \"Izaberi novog Platioca\" is understandable, a more natural and precise translation of 'Choose a new Payer' would be 'Odaberite novog Platioca'. 'Izaberi' can imply a random choice, whereas 'Odaberite' suggests a deliberate selection.",
           "suggestion": "Odaberite novog Platioca"
         }
       ],
@@ -210,13 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Yeni bir Ödeme Yapan seçin' literally translates to 'Choose a new Person Making Payment.' It's not the correct phrasing for 'Choose a new Payer.' The term 'Payer' refers to the entity making the payment.",
-          "suggestion": "Yeni ödeyen seçin"
-        },
-        {
-          "type": "formatting",
-          "description": "The translation uses a slightly formal tone. While acceptable, a more natural flow could be achieved.",
-          "suggestion": "Yeni bir ödeyen seçin"
+          "description": "The translation 'Yeni bir Ödeme Yapan seçin' is a literal translation that doesn't convey the intended meaning of 'Choose a new Payer.' It translates to 'Select a new Person Making Payment.' A more natural and accurate translation would be something like 'Yeni Ödeme Yapanı Seçin' or 'Farklı Bir Ödeme Yapan Seçin'.",
+          "suggestion": "Yeni Ödeme Yapanı Seçin"
         }
       ],
       "approved_at": null

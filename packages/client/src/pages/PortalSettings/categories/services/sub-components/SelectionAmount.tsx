@@ -91,7 +91,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
 
   useEffect(() => {
     if (!isPaymentBlockedByBalance || !isUpgradeStoragePlan) {
-      setReccomendedAmount(0);
+      setReccomendedAmount!(0);
       return;
     }
 
@@ -99,9 +99,9 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       ? partialUpgradeFee
       : totalPrice;
 
-    const difference = Math.abs(walletBalance - amountValue);
+    const difference = Math.abs(walletBalance! - amountValue!);
     const recommendedValue = Math.ceil(difference);
-    setReccomendedAmount(recommendedValue);
+    setReccomendedAmount?.(recommendedValue);
 
     const getCardLink = () => {
       if (timeout) clearTimeout(timeout);
@@ -113,7 +113,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
 
         try {
           const url = `${window.location.href}?complete=true&amount=${amount}&recommendedAmount=${recommendedValue}`;
-          await fetchCardLinked(url);
+          await fetchCardLinked?.(url);
         } catch (e) {
           console.error(e);
         }
@@ -148,8 +148,8 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
   const disableValueProps = hasScheduledStorageChange
     ? {
         disableValue: getDirectionalText(
-          currentStoragePlanSize,
-          nextStoragePlanSize,
+          currentStoragePlanSize ?? 0,
+          nextStoragePlanSize ?? 0,
         ),
       }
     : {};
@@ -160,7 +160,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
       ns="Payments"
       i18nKey="PerStorageWitnMinValue"
       values={{
-        currency: formatWalletCurrency(storagePriceIncrement),
+        currency: formatWalletCurrency!(storagePriceIncrement),
         amount: getConvertedSize(t, storageSizeIncrement || 0),
         storageUnit: t("Common:Gigabyte"),
         minValue: MIN_VALUE,

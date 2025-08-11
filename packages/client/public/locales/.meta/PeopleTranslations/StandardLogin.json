@@ -3,7 +3,7 @@
   "content": "Standard login",
   "content_en_sha1_hash": "38bb5a5e5491e6e234123e866be5f667cc1af6e6",
   "created_at": "2025-05-19T21:30:53.517Z",
-  "updated_at": "2025-05-28T09:30:02.468Z",
+  "updated_at": "2025-05-26T07:57:32.462Z",
   "comment": {
     "text": "This translation key is used to display a generic login label on a contact filter page. It should be translated as \"Standard login\" and will appear in a dropdown or button related to account login types.",
     "is_auto": true,
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Login normal' doesn't accurately convey the meaning of 'Standard login'. 'Standard' implies a typical or default login process, whereas 'normal' is less specific.",
-          "suggestion": "Login padrão"
+          "description": "The translation \"Login normal\" doesn't fully capture the meaning of \"Standard login\". \"Standard\" implies a common or default method, which \"normal\" doesn't necessarily convey.",
+          "suggestion": "Consider \"Login padrão\" or \"Acesso padrão\" which more accurately translates 'standard login'."
         }
       ],
       "approved_at": null
@@ -153,13 +153,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "'Standard login' translates more accurately as 'Autentificare standard' rather than 'Conectarea standard'. 'Conectarea' implies connection, while 'autentificare' directly refers to the login process.",
-          "suggestion": "Autentificare standard"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

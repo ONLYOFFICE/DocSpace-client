@@ -3,7 +3,7 @@
   "content": "Welcome Page Settings is a way to change the default portal title to be displayed on the Welcome Page of your portal. The same name is also used for the From field of your portal email notifications.",
   "content_en_sha1_hash": "7b19c51f4950730b3c8f5fd1ed66ec6e31fce32c",
   "created_at": "2025-05-19T21:30:51.027Z",
-  "updated_at": "2025-07-02T07:49:19.799Z",
+  "updated_at": "2025-08-04T07:30:01.299Z",
   "comment": {
     "text": "This translation key controls the displayed text in a navigation category on the Welcome Page Settings page, explaining its purpose. It is used to describe the custom title setting feature and its connection to portal email notifications.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/customization-navbar.js",
-      "line_number": 78,
+      "line_number": 79,
       "context": "url=\"/portal-settings/customization/general/language-and-time-zone\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"CustomTitlesWelcome\")}\n subtitle={t(\"CustomTitlesSettingsNavDescription\")}\n url=\"/portal-settings/customization/general/welcome-page-settings\"\n onClickLink={onClickLink}\n />\n <MobileCategoryWrapper\n title={t(\"DNSSettings\")}",
       "module": "/packages/client"
     }
@@ -30,13 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"الوارد\" (Al-Waared) is a literal translation of \"incoming\" and doesn't accurately convey the meaning of 'From' field in email notifications. It's a technical term that might not be understood by all users. A better translation would focus on the function of the field, which is the sender's name/email.",
-          "suggestion": "حقل المرسل (Haqle Al-Mursel) - which means 'Sender Field'"
-        },
-        {
-          "type": "formatting",
-          "description": "The Arabic text could benefit from kerning adjustments for improved readability, though this is a minor aesthetic concern.",
-          "suggestion": "Review kerning for optimal readability."
+          "description": "The phrase \"From field\" is translated as \"حقل (الوارد)\". While 'الوارد' can mean 'incoming' or 'received,' in the context of email notifications, 'مرسل' (Murasil) or 'مصدر' (Masdar) which means 'Sender' or 'Source' respectively, would be more accurate and commonly used.",
+          "suggestion": "إعدادات الصفحة الترحيبية هي وسيلة لتغيير العنوان الافتراضي للبوابة لعرضها في الصفحة الترحيبية لبوابتك. يستخدم نفس الاسم في حقل (المرسل) في اشعارات البريد الخاص ببوابتك."
         }
       ],
       "approved_at": null
@@ -47,18 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"Welcome Page Settings\" is not accurately translated. \"Xoş gəlmisiniz Səhifə Parametrləri\" is overly literal and slightly awkward. A more natural translation would be something like \"Xuş Səhifəsi Ayarları\" or \"Portal Xuş Səhifəsi Tənzimləmələri\".",
-          "suggestion": "Xuş Səhifəsi Ayarları or Portal Xuş Səhifəsi Tənzimləmələri"
+          "description": "The English phrase \"Welcome Page Settings\" is translated as \"Xoş gəlmisiniz Səhifə Parametrləri\". While technically correct, a more natural and idiomatic translation might be something like \"Giriş Səhifəsi Parametrləri\" or \"Xoşgələn Səhifəsi Ayarları\". \"Xoş gəlmisiniz Səhifə Parametrləri\" sounds a bit too literal and stilted.",
+          "suggestion": "Consider \"Giriş Səhifəsi Parametrləri\" or \"Xoşgələn Səhifəsi Ayarları\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English term 'From' in the context of email notifications is translated as 'Kimdən' which is technically correct but can be improved for clarity.  A more common and readily understandable translation could be 'Göndərən' or 'E-poçt Göndərən'.",
-          "suggestion": "Göndərən or E-poçt Göndərən"
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure feels slightly disjointed. The connection between the two sentences could be improved to make the overall description flow better.",
-          "suggestion": "Consider combining the two sentences or adding a transition word/phrase to connect them better.  For example: \"Xoş gəlmisiniz Səhifə Parametrləri portalınızın Xoş Gəlmə Səhifəsində göstəriləcək standart portal başlığını dəyişmək üçün bir yoldur *və* eyni ad portal e-poçt bildirişlərinizin Kimdən sahəsi üçün istifadə olunur.\""
+          "description": "The English phrase 'From field' is translated as 'Kimdən sahəsi'. While understandable, a more accurate and commonly used term in Azerbaijani for this context might be 'Göndərilən' or 'Müəllif sahəsi'. 'Kimdən sahəsi' is grammatically correct but less conventional.",
+          "suggestion": "Consider 'Göndərilən sahəsi' or 'Müəllif sahəsi'."
         }
       ],
       "approved_at": null
@@ -69,8 +59,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'Началната Страница' is repeated multiple times. While not incorrect, it can be slightly repetitive and could be reworded for better flow.",
-          "suggestion": "Consider rephrasing to avoid repetition. For example: 'Настройките за заглавието на началната страница ви позволяват да промените заглавието по подразбиране на портала, което се показва на началната страница. Същото име се използва и за полето От на имейл известията на портала ви.'"
+          "description": "The Bulgarian translation uses 'Началната Страница' repeatedly. While technically correct, it sounds repetitive and could be slightly improved for readability. Using 'домашната страница' once might improve the flow.",
+          "suggestion": "Consider replacing one instance of 'Началната Страница' with 'домашната страница' for better flow, though this is a minor stylistic preference and not a strict error."
         }
       ],
       "approved_at": null
@@ -92,14 +82,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'πύλης' (pylis) is used repeatedly. While technically correct, using 'πλατφόρμας' (platformas) might be more understandable to a wider audience in this context, as 'pylis' often refers to a gate or portal in a more technical sense.",
-          "suggestion": "Consider replacing 'πύλης' with 'πλατφόρμας' for greater clarity."
+          "type": "incorrect_translation",
+          "description": "The phrase 'Welcome Page Settings' is translated as 'Ρυθμίσεις σελίδας καλωσορίσματος'. While technically correct, it's a bit clunky in Greek. A more natural phrasing would be 'Ρυθμίσεις για τη Σελίδα Καλωσορίσματος' or 'Ρυθμίσεις Σελίδας Καλωσορίσματος'.",
+          "suggestion": "Ρυθμίσεις για τη Σελίδα Καλωσορίσματος"
         },
         {
-          "type": "grammar",
-          "description": "The phrase 'Ο ίδιος τίτλος χρησιμοποιείται, επίσης, για το πεδίο «Από» των ειδοποιήσεων email της πύλης σας.' could be slightly improved for flow. Using a more direct construction would enhance readability.",
-          "suggestion": "Ο ίδιος τίτλος χρησιμοποιείται και στο πεδίο «Από» των ειδοποιήσεων email της πλατφόρμας σας."
+          "type": "incorrect_translation",
+          "description": "The phrase 'portal' is translated as 'πύλης'. While correct, a less formal and more user-friendly translation could be 'ιστοσελίδας' or 'πλατφόρμας'. The choice depends on the overall tone of the documentation.",
+          "suggestion": "ιστοσελίδας"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'From field' in the context of email notifications is translated as 'πεδίο «Από»'. While understandable, it would be better to use a more natural phrasing like 'πεδίο αποστολέα'.",
+          "suggestion": "πεδίο αποστολέα"
         }
       ],
       "approved_at": null
@@ -107,18 +102,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \"La configuración de la Página de bienvenida\" is a bit awkward. A more natural translation for \"Welcome Page Settings\" would be something like \"Configuración de la página de bienvenida\" or \"Ajustes de la página de bienvenida\".",
-          "suggestion": "Configuración de la página de bienvenida"
-        },
-        {
-          "type": "grammatical",
-          "description": "The phrase \"que se mostrará en la Página de bienvenida de su portal\" is grammatically correct but sounds a little verbose. A smoother phrasing would improve readability.",
-          "suggestion": "que se muestra en la página de bienvenida de su portal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -126,9 +110,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'lähettäjäkentässä' might be better translated as 'lähettäjän kentässä' for more accurate grammar.",
-          "suggestion": "lähettäjän kentässä"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Welcome Page' is translated as 'Tervetuloa-sivun'. While technically correct, it's slightly awkward in Finnish. A more natural translation might be 'Aloitussivu' or 'Etusivu' depending on the context. 'Tervetuloa-sivun' implies a page specifically designed for welcoming users.",
+          "suggestion": "Consider using 'Aloitussivu' or 'Etusivu' instead of 'Tervetuloa-sivun'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'From field' is translated as 'lähettäjäkentässä'. While understandable, 'lähettäjä' might be overly formal. A more common and natural term for 'From' in email notifications could be 'lähettäjä' (sender) in some contexts, but it may need further context-specific refinement.",
+          "suggestion": "Consider refining 'lähettäjäkentässä' to ensure it aligns with common Finnish phrasing for email notification 'From' fields."
         }
       ],
       "approved_at": null
@@ -145,8 +134,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Սկսած դաշտի համար\" translates more literally to \"for the From field\". A more natural Armenian phrasing would be something like \"'Ուղարկողի' դաշտի համար\" or similar, to more accurately convey the meaning of the 'From' field in email notifications. The current phrasing is grammatically correct but sounds awkward.",
-          "suggestion": "Ողջույնի էջի կարգավորումները միջոց է փոխելու լռելյայն պորտալի անվանումը, որը կցուցադրվի ձեր պորտալի ողջույնի էջում: Նույն անունը օգտագործվում է նաև ձեր պորտալի էլփոստի ծանուցումների 'Ուղարկողի' դաշտի համար:"
+          "description": "The phrase 'Welcome Page' is consistently translated as 'Ողջույնի էջ'. While technically correct, it might be more natural to use a term that conveys 'Landing Page' or 'Initial Page' depending on the specific context within the portal's user interface. 'Ողջույնի էջ' sounds somewhat literal and might not resonate with all users.",
+          "suggestion": "Consider alternative translations for 'Welcome Page' like 'Սկզբնական էջ' (Initial Page) or a more colloquial term relevant to the portal's branding."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'From field' is translated as 'Սկսած դաշտի համար'. While understandable, a more natural and common Armenian translation for 'From field' in the context of email notifications would be 'Ուղարկող դաշտ' or 'Պատճառատան դաշտ'.",
+          "suggestion": "Change 'Սկսած դաշտի համար' to 'Ուղարկող դաշտ' or 'Պատճառատան դաշտ'."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure 'Նույն անունը օգտագործվում է նաև ձեր պորտալի էլփոստի ծանուցումների Սկսած դաշտի համար' is a bit lengthy and could be broken down for improved readability.  It may also benefit from punctuation adjustment.",
+          "suggestion": "Consider restructuring the sentence to: 'Նույն անունը օգտագործվում է նաև ձեր պորտալի էլփոստի ծանուցումների ուղարկող դաշտի համար։'"
         }
       ],
       "approved_at": null
@@ -157,8 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"rappresentano un modo\" (represent a way) isn't the most natural or accurate translation of \"is a way\". A more direct translation would be something like \"è un modo\" or \"consente di\".",
-          "suggestion": "Le impostazioni della pagina di benvenuto sono un modo per modificare il titolo del portale predefinito da visualizzare nella pagina di benvenuto del tuo portale. / Le impostazioni della pagina di benvenuto consentono di modificare il titolo del portale predefinito da visualizzare nella pagina di benvenuto del tuo portale."
+          "description": "The phrase \"Le impostazioni della pagina di benvenuto\" is a literal translation of \"Welcome Page Settings\" but it might sound unnatural in Italian. A more natural phrasing would be something like \"Impostazioni per la pagina di benvenuto\" or \"Configurazione della pagina di benvenuto\".",
+          "suggestion": "Impostazioni per la pagina di benvenuto"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrasing \"Lo stesso nome viene utilizzato anche per il campo Da delle notifiche e-mail del portale\" could be improved for clarity and flow. \"Da\" literally means 'From', but it might be better to specify what 'Da' refers to.",
+          "suggestion": "Lo stesso nome viene utilizzato anche nel campo 'Da' delle notifiche e-mail del portale"
         }
       ],
       "approved_at": null
@@ -166,13 +170,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term \"From field\" is translated as \"差出人フィールド\". While technically correct, it might be more natural and understandable for Japanese users to use a more common term like \"送信者フィールド\" or \"送信元フィールド\".",
-          "suggestion": "Replace \"差出人フィールド\" with \"送信者フィールド\" or \"送信元フィールド\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -181,13 +179,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"From field\" is not accurately translated. \"보낸 사람란\" while literally meaning 'sender field', doesn't fully convey the meaning of the 'From' field in an email notification setting within a portal. It's more of a technical term.",
-          "suggestion": "Consider a more descriptive phrase like \"발신자 이름 필드\" (balsinjja irem pilleudeu - Sender Name Field) or \"이메일 발신자 정보 필드\" (imeil balsinjja jeongbo pilleudeu - Email Sender Information Field)."
-        },
-        {
-          "type": "formatting",
-          "description": "The Korean translation lacks the smooth flow and tone expected in user-facing documentation. It sounds slightly abrupt.",
-          "suggestion": "Rephrase the first sentence for better readability. For example: \"환영 페이지 설정에서 포털 환영 페이지에 표시되는 기본 제목을 변경할 수 있습니다.\" (Welcome Page Settings allows you to change the default title displayed on the portal’s welcome page.)"
+          "description": "The phrase 'From field' is not accurately translated. '보낸 사람란' is a literal translation and might not be the most natural way to describe it in this context. A more accurate translation might be '보내는 사람' or '발신자'.",
+          "suggestion": "환영 페이지 설정에서는 포털의 환영 페이지에 표시될 기본 포털 제목을 변경할 수 있습니다. 포털 이메일 알림의 보내는 사람 또는 발신자란에도 동일한 이름이 사용됩니다."
         }
       ],
       "approved_at": null
@@ -198,18 +191,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ໜ້າເວັບເລີ່ມຕົ້ນ\" (naa web leum ton) translates to \"initial webpage\" but in this context, \"default portal title\" is more accurate. It feels a bit too literal.",
-          "suggestion": "ໜ້າເວັບກ່ອນໜ້າ (naa web gon haa) or ໜ້າເວັບຕາມພື້ນຖານ (naa web taam pheun thaan)"
+          "description": "The phrase \"ໜ້າເວັບເລີ່ມຕົ້ນ\" (nao web reo mot) translates to \"starting webpage\" which isn't the intended meaning. It should convey the default portal title.",
+          "suggestion": "ໜ້າຈໍເລີ່ມຕົ້ນ (nao ja reo mot) or ເປັນຊື່ໜ້າຈໍເລີ່ມຕົ້ນ (pen suu nao ja reo mot) would be more accurate. Alternatively, a more descriptive phrase like 'ຊື່ໜ້າຈໍເວັບໄຊ້ເລີ່ມຕົ້ນ' could be considered."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"ພາກສະຫນາມຈາກ\" (phak sa naam jak) translates to \"field from\", but it should convey the concept of \"From field\" of an email notification. The phrasing is awkward.",
-          "suggestion": "ພາກສ່ວນ 'ຈາກ' ຂອງ (phak suan 'jak' khong)"
+          "description": "The phrasing \"ພາກສະຫນາມຈາກ\" (pak sanam jak) is awkward and doesn't accurately translate \"From field.\" It lacks clarity.",
+          "suggestion": "ອີເມລ໌ຈາກ (email jak) or ພາກສ່ວນຂອງຕົວສົ່ງອີເມລ໌ (pak suan khong tua song email) would be better alternatives."
         },
         {
-          "type": "grammatical",
-          "description": "The sentence structure regarding the 'From' field is slightly awkward. The flow could be improved.",
-          "suggestion": "ຊື່ດຽວກັນນີ້ຖືກນໍາໃຊ້ສໍາລັບພາກສ່ວນ 'ຈາກ' ຂອງການແຈ້ງເຕືອນອີເມວຂອງທ່ານ."
+          "type": "grammar",
+          "description": "While grammatically not incorrect, the sentence structure feels somewhat unnatural in Lao. Combining sentences can improve readability.",
+          "suggestion": "Consider revising to: 'ການຕັ້ງຄ່າໜ້າຍິນດີຕ້ອນຮັບແມ່ນວິທີທີ່ຈະປ່ຽນຊື່ໜ້າຈໍເວັບໄຊ້ເລີ່ມຕົ້ນທີ່ຈະສະແດງຢູ່ໃນໜ້າຍິນດີຕ້ອນຮັບຂອງທ່ານ, ແລະຊື່ດຽວກັນນີ້ກໍ່ຖືກນໍາໃຊ້ໃນພາກສ່ວນຂອງຕົວສົ່ງອີເມລ໌ຂອງການແຈ້ງເຕືອນຂອງທ່ານ.'"
         }
       ],
       "approved_at": null
@@ -220,13 +213,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of \"Welcome Page\" is literal. A more natural phrasing in Latvian would be something along the lines of \"Laipni lūgšanas lapa\" or simply \"Sveiciena lapa\" if 'Sveiciena lapas iestatījumi' already established the context.",
-          "suggestion": "Consider revising to 'Laipni lūgšanas lapa' or adjusting the context to allow for just 'Sveiciena lapa'."
+          "description": "The phrase \"Laipni lūdzam lapā\" is a literal translation of \"Welcome Page\" and is slightly awkward in Latvian. A more natural phrasing would be \"Sveiciena lapā\" or simply \"galvenajā lapā\" (main page).",
+          "suggestion": "Sveiciena lapā (slightly awkward) or galvenajā lapā (main page)"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Tas pats nosaukums tiek izmantots arī jūsu portāla e-pasta paziņojumu laukam' is a bit clunky. 'Lauks' is correct, but the phrasing could be improved.",
-          "suggestion": "Consider revising to 'Tas pats nosaukums tiek izmantots arī jūsu portāla e-pastu paziņojumu nosaukuma laukā.' or 'Tas pats nosaukums tiek izmantots arī jūsu portāla e-pastu paziņojumu nosaukumā.'"
+          "description": "The phrase \"Tas pats nosaukums tiek izmantots arī jūsu portāla e-pasta paziņojumu laukam\" is a bit clunky. 'Lauks' specifically refers to a field in a database or form, whereas in this context, it’s the subject line or name used in the email notification. A better phrasing would convey the name's usage within the email notification.",
+          "suggestion": "Tas pats nosaukums tiek izmantots arī jūsu portāla e-pasta paziņojumu nosaukumā."
         }
       ],
       "approved_at": null
@@ -237,18 +230,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Instellingen welkomstpagina\" is not a natural or accurate translation of \"Welcome Page Settings.\" It's a literal translation that doesn't convey the meaning effectively.  'Welkomstpagina Instellingen' would be more natural, or a rephrasing like 'Instellingen voor de welkomstpagina' would be better.",
-          "suggestion": "Instellingen voor de welkomstpagina"
+          "description": "The Dutch translation \"Instellingen welkomstpagina\" is not a grammatically correct or natural phrase. It literally translates to \"Welcome Page Settings\". It should be rephrased to better reflect \"Welcome Page Settings\".",
+          "suggestion": "Portaal welkomstpagina instellingen"
         },
         {
           "type": "grammar",
-          "description": "The sentence \"Instellingen welkomstpagina is een manier...\" is grammatically awkward. The verb 'is' doesn't fit naturally after the noun phrase. It's missing a necessary article or preposition.",
-          "suggestion": "Instellingen voor de welkomstpagina zijn een manier..."
+          "description": "The sentence \"Instellingen welkomstpagina is een manier...\" is grammatically awkward. The phrase 'is een manier' feels unnatural in this context.",
+          "suggestion": "Welkomstpagina instellingen bieden een manier..."
         },
         {
-          "type": "spelling",
-          "description": "The word 'standaardtitel' is technically correct, but 'defauldtitel' (while not standard Dutch) is increasingly common due to the influence of English. While not a strict error, consider whether the target audience would understand 'standaardtitel'.",
-          "suggestion": "defauldtitel (consider audience)"
+          "type": "incorrect_translation",
+          "description": "The phrase 'het veld Van' is an accurate translation of 'From field' but reads awkwardly in Dutch. 'Van' is more commonly used for ownership or origin, not as a field name.",
+          "suggestion": "het veld 'Afzender'"
         }
       ],
       "approved_at": null
@@ -259,18 +252,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Welcome Page Settings' is translated as 'Ustawienia powitania'. While understandable, 'Ustawienia strony powitalnej' would be more accurate and consistent with the English term, especially considering it refers to settings *for* the welcome page.",
+          "description": "The phrase \"Welcome Page Settings\" is translated as \"Ustawienia powitania\". While technically correct, a more natural and idiomatic translation for this context might be \"Ustawienia strony powitalnej\" or \"Ustawienia ekranu powitalnego\". \"Ustawienia powitania\" is a bit too literal and might not be readily understood by all users.",
           "suggestion": "Ustawienia strony powitalnej"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'portal title' is translated as 'nazwę obszaru'. 'Nazwa portalu' would be a more direct and natural translation.",
-          "suggestion": "nazwa portalu"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'From field' is translated as 'polu Od'. A better translation would be 'polu Nadawcy' which is the standard term for 'From' in email contexts.",
-          "suggestion": "polu Nadawcy"
+          "description": "The phrase \"From field\" is translated as \"polu Od\". While understandable, a more accurate translation of 'From' in the context of email notifications would be 'nadawcy'.",
+          "suggestion": "polu nadawcy"
         }
       ],
       "approved_at": null
@@ -292,19 +280,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase \"Setările paginii de întâmpinare este\" is grammatically incorrect. It should be \"Setările paginii de întâmpinare sunt\". The verb should agree with the plural noun 'Setările'.",
-          "suggestion": "Setările paginii de întâmpinare sunt"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase 'va fi afișat in câmpul De la' is missing a space after the Romanian word 'in'.",
-          "suggestion": "va fi afișat în câmpul De la"
+          "type": "incorrect_translation",
+          "description": "The phrase \"Setările paginii de întâmpinare\" is not the most natural or accurate translation of \"Welcome Page Settings\". A more idiomatic translation would be something like \"Configurarea paginii de întâmpinare\" or \"Setări pagină de bun venit\".",
+          "suggestion": "Configurarea paginii de întâmpinare"
         },
         {
           "type": "incorrect_translation",
-          "description": "While not strictly incorrect, 'De la' used to translate 'From' can be misleading. It literally means 'from' but in this context, 'Expeditorul' or a more contextual phrase might be better, to emphasize the sender of the email.",
-          "suggestion": "Expeditorul"
+          "description": "The phrase \"Același titlu va fi afișat in câmpul De la\" is grammatically awkward.  'De la' refers to the 'from' field. The phrasing needs to be more fluid.",
+          "suggestion": "Același titlu va fi utilizat în câmpul 'De la' din notificările prin e-mail."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation lacks consistent use of quotation marks around technical terms like 'De la'.",
+          "suggestion": "Add quotation marks around 'De la' to maintain consistency with English. e.g., ...câmpul 'De la'..."
         }
       ],
       "approved_at": null
@@ -315,8 +303,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of single quotes around 'От' is slightly unconventional in Russian technical documentation. Double quotes or no quotes might be more appropriate.",
-          "suggestion": "Remove the single quotes around 'От' or replace with double quotes: «От»"
+          "description": "The Russian translation uses single quotes for 'От'. It should use double quotes.",
+          "suggestion": "Используйте двойные кавычки: ‘От’ -> “От”"
         }
       ],
       "approved_at": null
@@ -324,7 +312,23 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"අවකාශයේ පෙරනිමි නම\" (awasayane pernim nama) is not the most natural translation for \"default portal title\". A more accurate translation would be something like \"ප්‍රජාගාරයේ පෙරනිමි නම\" (prajagaraye pernim nama) or \"ප්‍රවිෂ්ඨි පිටුවේ පෙරනිමි නම\" (pavishtipiye pernim nama).",
+          "suggestion": "ප්‍රජාගාරයේ පෙරනිමි නම"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"වෙතින්\" (wethin) is used in place of 'From' field. A better choice would be 'සඳහා' (sadhaha) or directly translate 'From' using context like 'එවීම්' (ewim) or a similar term describing the originator of the notification.",
+          "suggestion": "සඳහා"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"වි-තැපැල් දැනුම්දීම්වල වෙතින් ක්‍ෂේත්‍රය\" (vi-taepam dahnumdeemwala wethin kshetriya) is somewhat awkward.  The meaning is understandable but can be improved. A more natural way to express this is \"තැපැල් දැනුම්දීම්වල 'සඳහා' ක්ෂේත්‍රයේ\"",
+          "suggestion": "තැපැල් දැනුම්දීම්වල 'සඳහා' ක්ෂේත්‍රයේ"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -332,9 +336,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'políčko' is technically correct but sounds somewhat formal and might be better replaced with a more common synonym.",
-          "suggestion": "The word 'políčko' could be replaced with 'pole' or 'oblasť'."
+          "type": "formatting",
+          "description": "The Slovak translation uses a somewhat lengthy sentence structure. Breaking it into two sentences would improve readability.",
+          "suggestion": "Nastavenia uvítacej stránky umožňujú zmeniť predvolený názov portálu, ktorý sa má zobrazovať na uvítacej stránke portálu. Používa sa tiež pre políčko 'Od' v e-mailových oznámeniach vášho portálu."
         }
       ],
       "approved_at": null
@@ -342,13 +346,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'pozravne' should be 'uvodne'. 'Pozdravne' translates to 'greeting' while 'uvodne' means 'introductory' or 'welcome', which is more appropriate in this context.",
-          "suggestion": "uvodne"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -357,18 +355,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'емаил' is a transliteration and should be the Serbian word for email.",
-          "suggestion": "емаил should be 'е-маил'"
+          "description": "The word 'емаил' is a transliteration and not a standard Serbian word. It should be 'е-маил'.",
+          "suggestion": "е-маил"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'страници добродошлице вашег портала' is slightly redundant. It can be simplified.",
-          "suggestion": "страници добродошлице портала"
+          "description": "The phrase 'ц́е бити приказан' is slightly awkward. A more natural phrasing would be 'биће приказан'.",
+          "suggestion": "биће приказан"
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Welcome Page Settings' is translated as 'Подешавања странице добродошлице'. While technically correct, it might be better to use a more commonly understood term for 'Welcome Page' in this context. A more direct equivalent might be 'Налагодбе почетне стране'",
-          "suggestion": "Consider translating 'Welcome Page Settings' as 'Налагодбе почетне стране'"
+          "description": "While technically correct, the word 'нотификација' is a direct transliteration and not commonly used. 'Обавештења' would be a more natural and widely understood equivalent.",
+          "suggestion": "Обавештења"
         }
       ],
       "approved_at": null
@@ -379,13 +377,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'će' is a non-standard representation of 'će'.",
+          "description": "The word 'će' is not correctly rendered in Serbian Latin. It should be 'će'.",
           "suggestion": "će"
         },
         {
+          "type": "spelling",
+          "description": "The word 'Od' should be 'Od'. It is a correct spelling, but it appears to be a lower-case issue.",
+          "suggestion": "Od"
+        },
+        {
           "type": "grammar",
-          "description": "The sentence 'Isto ime se takođe koristi za polje Od vaših email notifikacija portala.' is slightly awkward. 'Od' should be 'polje 'Od'' for better clarity.",
-          "suggestion": "Isto ime se takođe koristi za polje 'Od' vaših email notifikacija portala."
+          "description": "The sentence 'Isto ime se takođe koristi za polje Od vaših email notifikacija portala.' sounds slightly awkward. A more natural phrasing might be 'Isto ime se takođe koristi u polju 'Od' vaših email notifikacija portala.' or 'Isto ime se takođe koristi za polje 'Od' u vašim email notifikacijama portala.'",
+          "suggestion": "Isto ime se takođe koristi u polju 'Od' vaših email notifikacija portala."
         }
       ],
       "approved_at": null
@@ -396,13 +399,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Welcome Page' is translated as 'Hoş Geldiniz Sayfası' consistently. While technically correct, 'Giriş Sayfası' might be a more common and natural term for 'Welcome Page' in a portal context.",
-          "suggestion": "Consider using 'Giriş Sayfası' instead of 'Hoş Geldiniz Sayfası' for greater clarity and user familiarity."
+          "description": "The phrase 'Welcome Page' is literally translated as 'Hoş Geldiniz Sayfası' which while technically correct, sounds awkward in Turkish. A more natural translation would be something like 'Portal Ana Sayfası' or 'Portal Giriş Sayfası'.",
+          "suggestion": "Consider translating 'Welcome Page' as 'Portal Ana Sayfası' or 'Portal Giriş Sayfası' for a more natural flow."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'From field' is translated as 'Kimden alanı'. While understandable, a more precise translation for a portal notification context might be 'Gönderen alanı'.",
-          "suggestion": "Consider using 'Gönderen alanı' instead of 'Kimden alanı' for greater precision in the context of email notifications."
+          "description": "The phrase 'From field' is literally translated to 'Kimden alanı'. While understandable, 'Gönderen alanı' would be more common and professional.",
+          "suggestion": "Replace 'Kimden alanı' with 'Gönderen alanı'."
         }
       ],
       "approved_at": null
@@ -413,18 +416,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"Параметри вітальної сторінки\" is a bit clunky. It translates literally to \"Parameters of the welcome page\" which isn't the most natural phrasing in Ukrainian. A more idiomatic translation might be something like \"Налаштування сторінки привітання\" or \"Параметри привітальної сторінки\".",
-          "suggestion": "Налаштування сторінки привітання"
+          "description": "The translation uses an em dash (—) which might not be standard Ukrainian punctuation. Consider using a hyphen (-) or revising the sentence structure for better readability.",
+          "suggestion": "Consider replacing '—' with '-' or rephrasing the sentence to avoid the em dash entirely. For example: 'Параметри вітальної сторінки — це спосіб змінити заголовок порталу за замовчуванням, який відображатиметься на вітальній сторінці вашого порталу. Та саме ім’я використовується у полі «Від» електронних сповіщень порталу.'"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Це ж саме ім’я' can be improved for clarity and flow. A more natural phrasing would be 'Також це саме ім’я' or 'Те саме ім’я'.",
-          "suggestion": "Також це саме ім’я"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'сповіщень' is correct, but in this context, the usage can be considered more formal. Depending on the target audience, 'повідомлень' could be more appropriate and flow better.",
-          "suggestion": "повідомлень"
+          "description": "The English phrase \"Welcome Page Settings\" is literally translated to \"Параметри вітальної сторінки.\" While accurate, a more natural and user-friendly Ukrainian term for 'Welcome Page' within a portal context might exist. It's possible a more common or established equivalent exists that would improve comprehension.",
+          "suggestion": "Research common terminology for 'Welcome Page' in Ukrainian portal/application contexts. Consider alternatives like 'Головна сторінка порталу' or a similar phrase that resonates more naturally."
         }
       ],
       "approved_at": null
@@ -435,13 +433,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Welcome Page' is translated as 'Trang Chào mừng'. While technically correct, it's slightly verbose for Vietnamese. A more natural translation might be 'Trang Bắt đầu' or just 'Trang chủ' depending on the context.",
-          "suggestion": "Consider using 'Trang Bắt đầu' or 'Trang chủ' instead of 'Trang Chào mừng'."
+          "description": "The phrase \"Cài đặt Trang Chào mừng\" translates literally as \"Welcome Page Settings\", which while understandable, isn't the most natural Vietnamese phrasing. It lacks flow and precision. A better translation would convey the idea of configuring or customizing the welcome page settings.",
+          "suggestion": "Cấu hình Trang Chào mừng"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'portal email notifications' is a bit clunky in the Vietnamese translation ('thông báo email cổng thông tin'). A more concise phrasing would improve readability.",
-          "suggestion": "Consider using 'thông báo email' or 'thông báo' depending on the surrounding text."
+          "description": "The phrase \"Tên tương tự\" (similar name) is slightly vague.  It's clear from the English but in Vietnamese, a more specific term would improve clarity.",
+          "suggestion": "Tên này"
+        },
+        {
+          "type": "formatting",
+          "description": "While not a critical error, a more consistent use of “cổng thông tin” (portal) throughout the translation would improve flow and readability. The repetition feels a bit clunky.",
+          "suggestion": "Consider rephrasing to avoid repeated use of 'cổng thông tin' where implied."
         }
       ],
       "approved_at": null
@@ -452,18 +455,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"门户欢迎页面\" (portal welcome page) is redundant. It's understood that '欢迎页面' refers to the portal's welcome page.",
-          "suggestion": "门户默认标题 (portal default title) would be more concise and natural."
+          "description": "The phrase \"门户电子邮件通知的发件人字段\" is not an accurate translation of \"From field of your portal email notifications.\" 'From field' refers to the sender field. A better translation would emphasize the sender aspect.",
+          "suggestion": "门户电子邮件通知的寄件人字段 (Ménkǒu diànzǐ yóuzhī tōngzhī de jìjiàn rén chāngdiàn)"
         },
         {
-          "type": "incorrect_translation",
-          "description": "“发件人字段” is not the most accurate translation for “From field.” While technically correct, it doesn't fully capture the technical meaning within the context of email notifications.  A more appropriate term could be used depending on the portal's terminology.",
-          "suggestion": "Consider using a term like “邮件通知的发件人” (email notification sender) or a more specific term if the portal uses a particular designation for this field."
-        },
-        {
-          "type": "formatting",
-          "description": "The sentence structure is a little awkward. Combining the two sentences would improve readability.",
-          "suggestion": "您可以通过“欢迎页面设置”更改门户欢迎页面上显示的默认门户标题，该名称也用于门户电子邮件通知的发件人字段。"
+          "type": "grammatical",
+          "description": "The sentence structure \"门户电子邮件通知的寄件人字段也使用相同的名称\" is slightly awkward. It can be improved for better flow.",
+          "suggestion": "门户电子邮件通知也使用相同的名称作为发件人 (Ménkǒu diànzǐ yóuzhī tōngzhī yě shǐyòng xiāngtóng de míngchēng zuòwéi fājiàn rén)"
         }
       ],
       "approved_at": null

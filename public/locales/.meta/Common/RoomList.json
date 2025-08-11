@@ -3,7 +3,7 @@
   "content": "Room list",
   "content_en_sha1_hash": "61e05608df86be266bae6e1183981c8d88c82435",
   "created_at": "2025-05-19T21:30:48.199Z",
-  "updated_at": "2025-05-28T09:30:02.862Z",
+  "updated_at": "2025-08-04T07:30:01.625Z",
   "comment": {
     "text": "The \"RoomList\" translation key is used to display a room list label on buttons and other UI elements. It appears in contexts where users can select or view rooms, such as in contact options and selector components. Translators should replace this term with local language equivalents to make the interface accessible to diverse user bases.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 218,
+      "line_number": 217,
       "context": "};\n case \"room-list\":\n return {\n key: option,\n icon: FolderReactSvgUrl,\n label: t(\"Common:RoomList\"),\n onClick: () => this.openUserRoomList(item),\n };\n case \"enable\":\n return {\n id: \"option_enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/selectors/Room/index.tsx",
-      "line_number": 220,
+      "line_number": 198,
       "context": "const headerSelectorProps: TSelectorHeader = withHeader\n ? {\n withHeader,\n headerProps: {\n ...headerProps,\n headerLabel: headerProps.headerLabel || t(\"Common:RoomList\"),\n },\n }\n : {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton",
       "module": "/packages/shared"
     }

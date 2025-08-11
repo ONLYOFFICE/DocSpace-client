@@ -3,7 +3,7 @@
   "content": "The limit is reached for the number of admins: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "8c8cda0b845bc384cf6e3dcbdf312525fbefa4f0",
   "created_at": "2025-05-19T21:30:54.150Z",
-  "updated_at": "2025-07-01T15:57:35.917Z",
+  "updated_at": "2025-06-30T12:20:31.149Z",
   "comment": {
     "text": "The translation key \"UserTariffLimitHeader\" displays a message indicating when the user's admin quota is approaching its limit. It appears in a quotas bar component, specifically on the header section, and is used to notify users of their remaining quota capacity.",
     "is_auto": true,
@@ -35,9 +35,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Administrator' should be translated to 'İdarəçilər'.",
-          "suggestion": "İdarəçilər limitinə çatıldı: {{currentValue}} / {{maxValue}}"
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The limit is reached' is better translated as 'Limitə çatdırılıb' or 'Limitə yollanılıb' in Azerbaijani to convey a more natural and active sense of reaching the limit. The current translation 'Administrator limitinə çatıldı' is grammatically correct but sounds less idiomatic.",
+          "suggestion": "Administrator limitinə yollanılıb: {{currentValue}} / {{maxValue}}"
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, placing the variable placeholders within the Azerbaijani text might feel less natural. Consider placing them after the translated text, mirroring English conventions where appropriate.",
+          "suggestion": "Administrator limitinə yollanılıb: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -96,8 +101,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' is more accurately translated as 'È stato superato il limite' or 'Si è raggiunto il limite' in Italian, rather than directly translating 'è stato raggiunto'. 'È stato raggiunto il limite' is grammatically correct, but lacks the immediacy and sense of having exceeded a boundary that 'superato' or 'Si è raggiunto il limite' conveys.",
-          "suggestion": "Il limite è stato superato per il numero di amministratori: {{currentValue}} / {{maxValue}}"
+          "description": "The English phrase 'The limit is reached' translates more accurately to 'È stato superato il limite' or 'Si è raggiunto il limite' in Italian, rather than 'È stato raggiunto il numero massimo'. While technically conveying the meaning, it's not the most natural or idiomatic translation for a 'limit reached' notification.",
+          "suggestion": "È stato superato il limite per il numero di amministratori: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -156,7 +161,12 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Limita maximă permisă de administratori a fost atinsă' is a bit too literal and verbose. A more natural Romanian phrasing would be closer to 'S-a atins limita maximă de administratori'.",
+          "description": "The translation 'Limita maximă permisă de administratori a fost atinsă' is a bit clunky and literal. A more natural Romanian phrasing would be 'S-a atins limita maximă de administratori'.",
+          "suggestion": "S-a atins limita maximă de administratori"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While not strictly incorrect, 'a fost atinsă' (was reached) implies a past action. Given the context of a limit, it's better to imply the limit is currently active, 'S-a atins limita maximă de administratori' is still more appropriate.",
           "suggestion": "S-a atins limita maximă de administratori"
         }
       ],
@@ -173,14 +183,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'පරිපාලකයින්' (paripaalakin) is a transliteration of 'administrators' and might be less common or less understandable than a more localized term. While technically correct, it's not the most natural phrasing.",
-          "suggestion": "Consider using a more localized term for 'administrators' that is commonly used in this context. For example, 'ලේකම්වරයන්' (leekamvarayan) might be more appropriate depending on the specific context and target audience."
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'සීමාව ඉක්මවා ඇත' (seemaawa ikkamaawa atha) translates to 'the limit is exceeded'. A more natural phrasing might be 'සීමාවට පැමිණ ඇත' (seemaawaṭa pameṇ atha) which means 'reached the limit'.",
-          "suggestion": "Replace 'සීමාව ඉක්මවා ඇත' with 'සීමාවට පැමිණ ඇත'."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'The limit is reached' is not accurately conveyed by 'සීමාව ඉක්මවා ඇත'. A more accurate translation would be 'සීමාවට ළඟා වී ඇත' or 'සීමාව ප penuh ඇත'. 'ඉක්මවා ඇත' implies the limit has been exceeded, which may not be the intended meaning. It should indicate that the allowed limit is reached.",
+          "suggestion": "පරිපාලකයින් සංඛ්‍යාව සඳහා සීමාවට ළඟා වී ඇත: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -191,7 +196,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Limit počtu administrátorov je dosiahnutý' implies the limit has already been reached, while the English conveys that the user is approaching the limit. A better translation would convey the imminent reaching of the limit.",
+          "description": "The English phrase 'The limit is reached' translates more accurately to 'Dosiahnutý limit' or 'Prekročený limit' in Slovak, rather than 'Limit počtu administrátorov je dosiahnutý'.",
           "suggestion": "Limit počtu administrátorov je prekročený: {{currentValue}} / {{maxValue}}"
         }
       ],
@@ -200,7 +205,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'skrbnikov' could be improved for clarity. While technically correct, 'administratorjev' might be a better fit depending on the context and target audience.",
+          "suggestion": "Dosežena je omejitev za število administratorjev: {{currentValue}} / {{maxValue}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -209,13 +220,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'admin' is masculine in Serbian, but the sentence construction implies a feminine subject. It should be adjusted for gender agreement.",
-          "suggestion": "Достигнут је лимит за број администратора: {{currentValue}} / {{maxValue}}"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using 'администратора' consistently provides a more formal and professional tone, aligning with a user limit message.",
-          "suggestion": "No change needed, but consider using 'администратора' throughout the application for consistency."
+          "description": "The Serbian translation 'Достигнут је лимит за број админа' is not the most natural way to express 'The limit is reached for the number of admins'. While technically correct, a more fluent translation would be 'Прекоречен је лимит за број админа' or 'Достигнут је максималан број админа'.",
+          "suggestion": "Прекоречен је лимит за број админа"
         }
       ],
       "approved_at": null
@@ -226,8 +232,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' is better translated as 'Prekomeren je broj...' or 'Puno je dostignut limit...' to better convey the meaning of reaching a limit. 'Dostignut je limit' is grammatically correct but doesn't quite capture the feeling of the English original.",
-          "suggestion": "Prekomeren je broj admina: {{currentValue}} / {{maxValue}}"
+          "description": "The translation 'Dostignut je limit za broj admina' is not the most natural or idiomatic way to express 'The limit is reached for the number of admins'. A better phrasing would convey the sense of reaching a limit, not simply that it has been achieved.",
+          "suggestion": "Prešao je limit za broj admina: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null
@@ -238,8 +244,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'The limit is reached' translates more accurately to 'Sınır aşıldı' or 'Limit aşıldı' in Turkish, rather than 'Sınıra ulaşıldı'. While 'ulaşıldı' isn't *wrong*, it implies reaching *to* the limit, not exceeding it.",
-          "suggestion": "Yönetici sayısı için limit aşıldı: {{currentValue}} / {{maxValue}}"
+          "description": "The English phrase 'The limit is reached' is better conveyed as 'Sınır aşıldı' in Turkish to be more natural. 'Sınır aşıldı' emphasizes that the limit has been exceeded. 'Sınır aşıldı' is a more commonly used phrase.",
+          "suggestion": "Yönetici sayısı için sınır aşıldı: {{currentValue}} / {{maxValue}}"
         }
       ],
       "approved_at": null

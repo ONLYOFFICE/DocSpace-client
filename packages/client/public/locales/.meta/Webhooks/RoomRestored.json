@@ -3,7 +3,7 @@
   "content": "Room restored",
   "content_en_sha1_hash": "056dcc7d185c90e55521946e4191b567be71b70a",
   "created_at": "2025-05-19T21:30:49.823Z",
-  "updated_at": "2025-05-21T00:59:23.315Z",
+  "updated_at": "2025-05-24T02:13:19.870Z",
   "comment": {
     "text": "This translation key is used to display a message when a room has been restored after being archived or deleted. It appears as a notification in the PortalSettings categories of developer tools, typically on a button or dialog to confirm restoration. Translators should provide a concise and descriptive phrase that indicates the action has been successfully reverted.",
     "is_auto": true,
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'කාමරය ප්‍රතිෂ්ඨිත කරන ලදී' while technically meaning 'room restored', is a very formal and somewhat unnatural phrasing for a webhook message.  It sounds overly technical and not conversational.",
-          "suggestion": "කාමරය නැවත සකස් කරන ලදී or කාමරය පිළබඳවා ඇත or simply කාමරය පිළබඳයි"
+          "description": "The translation \"කාමරය ප්‍රතිෂ්ඨිත කරන ලදී\" while literally meaning 'room restored', is a very formal and somewhat unnatural phrasing for a webhook event in Sinhala. A more natural and commonly used phrasing would be 'කාමරය නැවත සකස් කරන ලදී' or 'කාමරය පිළිගැනීමට හැකි විය'.",
+          "suggestion": "කාමරය නැවත සකස් කරන ලදී"
         }
       ],
       "approved_at": null
@@ -180,7 +180,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"Соба враћена\" translates to \"Room returned\" instead of \"Room restored.\"  \"Враћена\" implies a return to a previous state or location, while \"restored\" implies bringing something back to a previous condition.",
+          "description": "The Serbian translation \"Соба враћена\" translates to \"Room returned\" or \"Room back\", not \"Room restored\". The correct translation should convey the meaning of restoration, implying a previous state of disrepair or a lost state.",
           "suggestion": "Соба обновљена"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "Failed to update tariff plan. Try again later or contact the sales department.",
   "content_en_sha1_hash": "bc9b4b305a68ff27847f763ef309786faf03e5d0",
   "created_at": "2025-05-19T21:30:53.686Z",
-  "updated_at": "2025-07-01T15:57:36.286Z",
+  "updated_at": "2025-08-04T07:30:01.527Z",
   "comment": {
     "text": "This translation key is used to display an error message when a tariff plan update fails, prompting the user to try again later or contact the sales department. It appears as an error notification in a UI component that handles payment updates, such as a button click event handler.",
     "is_auto": true,

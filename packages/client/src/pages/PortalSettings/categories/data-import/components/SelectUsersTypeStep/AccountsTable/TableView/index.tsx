@@ -111,7 +111,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
     setSearchValue,
     filteredUsers,
   } = props as InjectedTypeSelectTableViewProps;
-  const tableRef = useRef(null);
+  const tableRef = useRef<HTMLDivElement>(null);
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
@@ -132,7 +132,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
       label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
       disabled: false,
       withDropDown: true,
-      options: typeOptions,
+      options: typeOptions as ContextMenuModel[],
       iconUrl: ChangeTypeReactSvgUrl,
       onClick: () => {},
       title: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
@@ -140,11 +140,13 @@ const TableView = (props: TypeSelectTableViewProps) => {
   ];
 
   return (
-    <UserSelectTableContainer forwardedRef={tableRef} useReactWindow>
+    <UserSelectTableContainer
+      forwardedRef={tableRef as React.RefObject<HTMLDivElement>}
+      useReactWindow
+    >
       {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
-            checkboxOptions={[]}
             headerMenu={headerMenu}
             withoutInfoPanelToggler
             withComboBox={false}
@@ -175,7 +177,7 @@ const TableView = (props: TypeSelectTableViewProps) => {
             filesLength={accountsData.length}
             hasMoreFiles={false}
             itemCount={accountsData.length}
-            fetchMoreFiles={() => {}}
+            fetchMoreFiles={async () => {}}
           >
             {accountsData.map((data) => (
               <UsersTableRow

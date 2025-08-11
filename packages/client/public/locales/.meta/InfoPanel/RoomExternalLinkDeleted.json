@@ -3,7 +3,7 @@
   "content": "Link <1>«{{linkTitle}}»</1> deleted.",
   "content_en_sha1_hash": "7cea2e32f802fb146ced190da8dbe579760bc862",
   "created_at": "2025-05-19T21:30:54.914Z",
-  "updated_at": "2025-05-21T09:54:33.012Z",
+  "updated_at": "2025-08-04T07:30:01.242Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that an external link has been deleted. It will appear in UI elements such as infopanel pages, typically after deleting a room's external link. Translators should focus on conveying a neutral tone and avoiding any hints at the deletion action itself.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 212,
+      "context": "oldLinkTitle: (feed.data as TFeedData).oldTitle,\n }}\n components={{ 1: <strong /> }}\n />\n );\n case FeedActionKeys.RoomExternalLinkDeleted:\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkDeleted\"",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 193,
-      "context": "oldLinkTitle: feed.data.oldTitle,\n }}\n components={{ 1: <strong /> }}\n />\n );\n case \"RoomExternalLinkDeleted\":\n return (\n <Trans\n t={t}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkDeleted\"",
+      "line_number": 202,
+      "context": "oldLinkTitle: feed.data.oldTitle,\n }}\n components={{ 1: <strong /> }}\n />\n );\n case FeedActionKeys.RoomExternalLinkDeleted:\n return (\n <Trans\n t={t as TFunction}\n ns=\"InfoPanel\"\n i18nKey=\"RoomExternalLinkDeleted\"",
       "module": "/packages/client"
     }
   ],
@@ -27,25 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The `<1>` and `</1>` tags are inconsistent with the English content. While present, their purpose and handling might need to be verified within the application or UI.",
-          "suggestion": "Verify the intended behavior of the `<1>` tags in the application's context. If they represent HTML tags, ensure consistency with the English version. If they are placeholders, ensure the application handles them correctly."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The format of the Azerbaijani translation matches the English exactly, including the angle brackets and the escaped quotes. While technically correct, it's unusual and might look odd to a native speaker. The angle brackets seem unnecessary and indicate a technical implementation detail rather than natural language.",
-          "suggestion": "Consider removing the angle brackets and escaped quotes unless they are absolutely necessary for the technical implementation. If possible, a more natural phrasing would improve readability. For example, \"Silinən link: «{{linkTitle}}»\""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -81,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The original English text includes angle brackets `<1>` and `</1>` around the link title placeholder. The Finnish translation also includes the same angle brackets. While not technically an error, maintaining consistent formatting is important for UI consistency.",
-          "suggestion": "Consider whether these angle brackets are necessary in the Finnish UI. If they're purely for technical placeholders and not visible to the user, they should be removed."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +93,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The formatting tags '<1>' and '</1>' are identical in both the English and Italian versions. This suggests a potential issue with the translation process or a misunderstanding of the intended structure. While technically not an *error* in the translation itself, it's a formatting consistency problem.",
-          "suggestion": "Verify the intended formatting tags. They might be placeholders that require different handling in the Italian implementation or are simply a bug in the process."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -125,14 +107,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Korean translation retains the HTML tags `<1>` and `</1>` from the English version. These tags should ideally be removed or adapted for Korean formatting conventions.",
-          "suggestion": "Remove the HTML tags: «{{linkTitle}}» 링크가 삭제되었습니다."
+          "type": "incorrect_translation",
+          "description": "The English word 'deleted' is translated as '삭제되었습니다', which is a passive construction. A more natural Korean translation might be '삭제되었어요' or '삭제되었습니다'. While technically correct, '삭제되었습니다' is slightly formal for a UI message and '삭제되었어요' conveys a softer tone, often preferred for notifications.",
+          "suggestion": "«{{linkTitle}}» 링크가 삭제되었어요."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, '링크가 삭제되었습니다' is a slightly formal phrasing. A more natural and conversational Korean translation might be preferred depending on the overall tone.",
-          "suggestion": "Consider using a more conversational phrasing like '«{{linkTitle}}» 링크가 삭제되었어요.' or '«{{linkTitle}}» 링크 삭제되었어요.'"
+          "type": "formatting",
+          "description": "The formatting tags `<1>` and `</1>` are duplicated in both the English and Korean, suggesting this is a marker for something that needs to be handled dynamically on the frontend and should be kept consistent across languages.",
+          "suggestion": "Ensure the frontend consistently handles the `<1>` and `</1>` tags for both languages to maintain a consistent user experience."
         }
       ],
       "approved_at": null
@@ -143,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation correctly replicates the HTML tags '<1>' and '</1>'.",
-          "suggestion": null
+          "description": "The Lao translation includes angle brackets '<1>' and '</1>' which are present in the English content.  This may not be necessary and should be evaluated for appropriateness within the Lao UI context.",
+          "suggestion": "Consider removing the '<1>' and '</1>' tags if they are not required for proper rendering in the Lao UI."
         }
       ],
       "approved_at": null
@@ -182,13 +164,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets `<1>` and `</1>` are present in the Romanian translation and should match the English.",
-          "suggestion": "No change needed, they are correctly replicated."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -203,13 +179,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"සබැඳිය මකා දමන ලදී\" is a passive construction that doesn't perfectly match the active voice and directness of \"Link ... deleted.\" A more natural and accurate translation would convey that the action was performed. \"{{linkTitle}}» ගිණුම ඉවත් කරන ලදී\" or \"{{linkTitle}}» ගිණුම මකා දමන ලදී\" would be preferable.",
-          "suggestion": "«{{linkTitle}}» ගිණුම මකා දමන ලදී."
+          "description": "The translation \"සබැඳිය මකා දමන ලදී\" is a literal translation but sounds unnatural in Sinhala. A more natural phrasing would convey the meaning of 'deleted' more accurately.",
+          "suggestion": "A better translation would be something like «{{linkTitle}}» සබැඳිය ඉවත් කරන ලදී or «{{linkTitle}}» සබැඳිය නැවතලන ලදී."
         },
         {
           "type": "formatting",
-          "description": "The XML tags <1> and </1> are replicated in the Sinhala translation. While this might be intended to match the original English structure, it's unusual and potentially unnecessary in Sinhala.",
-          "suggestion": "Remove the <1> and </1> tags in the Sinhala translation unless they serve a specific technical purpose."
+          "description": "The original English uses angle brackets `<1>` to denote a placeholder. The Sinhala translation maintains this, but it's not standard Sinhala formatting and may confuse users. It’s also potentially not needed if the system is properly handling the '{{linkTitle}}' placeholder.",
+          "suggestion": "Consider removing the angle brackets if they're not necessary for the system to function correctly. If they are necessary, ensure consistent use throughout the application."
         }
       ],
       "approved_at": null
@@ -231,14 +207,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'obrisan' (deleted) doesn't quite capture the nuance of a link being removed. A more appropriate translation might be 'uklonjen' (removed) or 'izbrisan' (erased), depending on the specific context.",
-          "suggestion": "Линк <1>«{{linkTitle}}»</1 > уклоњен."
-        },
-        {
           "type": "formatting",
-          "description": "There is an extra space before the period at the end of the sentence.",
-          "suggestion": "Линк <1>«{{linkTitle}}»</1 > уклоњен."
+          "description": "The Cyrillic text contains extra spaces around the angle brackets. The English original does not.",
+          "suggestion": "Линк <1>«{{linkTitle}}»</1>"
         }
       ],
       "approved_at": null
@@ -248,9 +219,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The English word \"deleted\" can have multiple Serbian translations depending on the context. \"Obrisan\" is a valid translation but could imply a more forceful deletion. A more neutral translation might be \"izbrisan\" or \"uklonjen\".",
-          "suggestion": "Link <1>«{{linkTitle}}»</1> izbrisan."
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are inconsistent. The opening tag is used for 'Link' and the closing tag is used for 'obrisan'.",
+          "suggestion": "Ensure consistent HTML tags. For example: Link <1>«{{linkTitle}}»</1> obrisan."
         }
       ],
       "approved_at": null
@@ -264,13 +235,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The angle brackets <1> are present in both the English and Ukrainian translations, which is consistent. However, it's worth verifying if this formatting is required in the UI context and consistent with other similar elements.",
-          "suggestion": "Confirm if the angle brackets are intentionally present and consistently used in the UI."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "Default Sign Verifying Algorithm",
   "content_en_sha1_hash": "4efdddea5f21717488ef95e4e69bbf2ef43a5df9",
   "created_at": "2025-05-19T21:30:50.101Z",
-  "updated_at": "2025-05-21T02:08:44.889Z",
+  "updated_at": "2025-05-24T03:21:29.333Z",
   "comment": {
     "text": "This translation key describes the default signing algorithm used by an Identity Provider. It is displayed as a label in a combo box used to select or configure this setting in the Single Sign-On settings page.",
     "is_auto": true,
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'الخوارزمية الافتراضية للتحقق من تسجيل الدخول' while technically accurate, is a bit literal and could be improved to sound more natural in Saudi Arabic. 'Sign Verifying Algorithm' implies a process; 'التحقق من تسجيل الدخول' (verification of login) focuses more on the *result* of the verification, not the process itself. A more natural phrasing would emphasize the signing process.",
-          "suggestion": "الخوارزمية الافتراضية لتوقيع تسجيل الدخول (Al-khwarizmiya al-iftiradiya li-tawqi' tasjeel al-dukool)"
+          "description": "The translation \"الخوارزمية الافتراضية للتحقق من تسجيل الدخول\" literally translates to 'The default algorithm for verifying login.' While understandable, it doesn't fully capture the nuance of 'Sign Verifying Algorithm'. A more accurate translation would emphasize the signing aspect, as opposed to just verification.",
+          "suggestion": "الخوارزمية الافتراضية للتحقق من التوقيع (Al-khwarizmiyah al-iftiradiyah lil-tahaqquq min al-tawqee')"
         }
       ],
       "approved_at": null
@@ -54,7 +54,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Стандартно зададен алгоритъм за проверка на подписи' is a bit too literal and doesn't quite capture the nuance of 'Default Sign Verifying Algorithm'. 'Default' implies a setting or a pre-configured option, which isn't fully conveyed.",
+          "description": "The translation \"Стандартно зададен алгоритъм за проверка на подписи\" is a bit too literal and verbose for a configuration key. While technically correct, it doesn't capture the brevity of \"Default Sign Verifying Algorithm\". A more concise option would be preferable.",
           "suggestion": "Алгоритъм за проверка на подписи по подразбиране"
         }
       ],
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Standardmäßiger Algorithmus zur Überprüfung der Unterschrift' is technically correct, it's a bit literal and clunky. 'Default' implies something more straightforward than 'Standardmäßiger'.",
-          "suggestion": "Optimale Übersetzung wäre 'Standard-Überprüfungsalgorithmus' oder 'Standard-Signatur-Verifizierungsalgorithmus'"
+          "description": "While 'Standardmäßiger Algorithmus zur Überprüfung der Unterschrift' is technically correct, it's a bit literal and clunky. 'Default' implies a pre-selected or commonly used algorithm, which isn't perfectly conveyed.",
+          "suggestion": "Bevorzugter Algorithmus zur Überprüfung der Signatur"
         }
       ],
       "approved_at": null
@@ -90,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Algoritmo de verificación de firma\" while technically correct, doesn't fully convey the nuance of 'Default'. It implies just *any* signature verification algorithm, not the one that's used by default.",
+          "description": "The translation \"Algoritmo de verificación de firma\" doesn't fully capture the meaning of \"Default Sign Verifying Algorithm.\" While it's a literal translation, it lacks the \"Default\" aspect which is a key part of the original meaning.",
           "suggestion": "Algoritmo de verificación de firma predeterminado"
         }
       ],
@@ -99,13 +99,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Oletusmerkkien varmistusalgoritmi' is not the most natural or accurate translation of 'Default Sign Verifying Algorithm'. 'Merkit' refers to 'signs' or 'characters,' while the English phrase implies a signing algorithm used for authentication.",
-          "suggestion": "A more accurate translation would be 'Oletus allekirjoitusvarmistusalgoritmi' or 'Oletus varmenteen varmistusalgoritmi'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -114,12 +108,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Algorithme de vérification du signe par défaut \" is not a direct or natural translation of \"Default Sign Verifying Algorithm\". While technically correct, it's a bit clunky. A more natural phrasing would be something like \"Algorithme de vérification de signature par défaut\".",
-          "suggestion": "Algorithme de vérification de signature par défaut"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase includes an unnecessary space before 'par défaut'.",
+          "description": "The translation \"Algorithme de vérification du signe par défaut \" is not a direct or ideal translation of \"Default Sign Verifying Algorithm\". A more accurate translation would convey the 'default' aspect more clearly. The current translation reads more like a description of the algorithm itself, rather than its default status.",
           "suggestion": "Algorithme de vérification de signature par défaut"
         }
       ],
@@ -131,8 +120,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Նախնական նշանի ստուգման ալգորիթմ\" while technically correct, is a bit literal and potentially clunky. \"Նախնական\" (Initial) doesn't perfectly capture the meaning of \"Default\" in this context. 'Default' implies a pre-selected or standard option.",
-          "suggestion": "Consider alternatives like \"Ստանդարտ նշանի ստուգման ալգորիթմ\" (Standard Sign Verifying Algorithm) or \"Նախապես ընտրված նշանի ստուգման ալգորիթմ\" (Pre-selected Sign Verifying Algorithm).  The best option will depend on the specific tone desired."
+          "description": "The Armenian translation \"Նախնական նշանի ստուգման ալգորիթմ\" while literally translating to \"Initial Sign Verification Algorithm\", doesn't fully capture the nuance of \"Default\". 'Default' implies the standard or pre-selected option, not just the first one. A more appropriate translation would convey this meaning.",
+          "suggestion": "Consider alternatives like \"Ստանդարտ նշանի ստուգման ալգորիթմ\" (Standard Sign Verification Algorithm) or \"Նախապես ընտրված նշանի ստուգման ալգորիթմ\" (Pre-selected Sign Verification Algorithm) to better reflect the meaning of 'Default'."
         }
       ],
       "approved_at": null
@@ -143,8 +132,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Algoritmo predefinito per la verifica dei segni' is not a direct or natural equivalent of 'Default Sign Verifying Algorithm.' While technically correct, it's a bit clunky and doesn't convey the meaning as smoothly.",
-          "suggestion": "Algoritmo di verifica delle firme predefinito"
+          "description": "While 'Algoritmo predefinito per la verifica dei segni' is grammatically correct, it's a slightly literal translation. 'Default Sign Verifying Algorithm' implies a more common or standard algorithm. A more natural translation might emphasize that.",
+          "suggestion": "Algoritmo di verifica dei segni predefinito"
+        },
+        {
+          "type": "formatting",
+          "description": "The Italian translation uses lowercase 'di'. While acceptable, the English 'for the' suggests a capitalized 'di' could be more aligned with official documentation style.",
+          "suggestion": "Algoritmo di verifica dei segni predefinito"
         }
       ],
       "approved_at": null
@@ -167,8 +161,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຂັ້ນຕອນການຢືນຢັນການເຊັນເລີ່ມຕົ້ນ' translates to 'Initial Sign Verification Procedure'. It doesn't accurately convey the meaning of 'Default Sign Verifying Algorithm'.  'Default' implies a pre-selected or standard algorithm, which is not captured in the Lao translation.",
-          "suggestion": "Consider translations like 'ວິທີການຢືນຢັນການເຊັນຕາມການຕັ້ງຄ່າເລີ່ມຕົ້ນ' (Initial Default Setting Verification Method) or 'ວິທີການຢືນຢັນການເຊັນເລີ່ມຕົ້ນແບບຄ່າເລີ່ມຕົ້ນ' (Default Initial Sign Verification Method)."
+          "description": "The Lao translation 'ຂັ້ນຕອນການຢືນຢັນການເຊັນເລີ່ມຕົ້ນ' translates to 'Initial Signature Verification Process'. It doesn't accurately convey the meaning of 'Default Sign Verifying Algorithm'.  'Default' implies a standard or pre-set value, which is not reflected in the translation.",
+          "suggestion": "Consider 'ວິທີການຢືນຢັນລາຍເຊັນແບບເລີ່ມຕົ້ນ' (Vithikan yuenyan laichean baep reoemton) which translates to 'Initial Signature Verification Method' or 'Default Signature Verification Method' – 'ວິທີການຢືນຢັນລາຍເຊັນແບບເລີ່ມຕົ້ນ' (Vithikan yuenyan laichean baep reoemton)."
         }
       ],
       "approved_at": null
@@ -197,13 +191,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Portuguese translation \"Algoritmo de Verificação Predefinido para a Verificação dos logins\" is overly verbose and doesn't accurately convey the meaning of \"Default Sign Verifying Algorithm.\"  The phrase \"para a Verificação dos logins\" is redundant and unnecessary.",
+          "description": "The translation \"Algoritmo de Verificação Predefinido para a Verificação dos logins\" is overly verbose and doesn't accurately convey the meaning of \"Default Sign Verifying Algorithm.\"  The phrase \"para a Verificação dos logins\" is redundant and unnecessary.",
           "suggestion": "Algoritmo de Verificação Padrão"
         },
         {
           "type": "formatting",
-          "description": "The translation uses a slightly more formal tone than the English, which might not be desirable depending on the overall style guide. 'Padrão' is a more casual synonym for 'Default' in this context than 'Predefinido'.",
-          "suggestion": "No change needed if a more formal tone is desired, but consider 'Padrão' for greater consistency."
+          "description": "The added phrase \"para a Verificação dos logins\" significantly changes the tone and complexity, introducing unnecessary verbiage.",
+          "suggestion": "Remove the redundant phrase \"para a Verificação dos logins\"."
         }
       ],
       "approved_at": null
@@ -220,13 +214,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Algoritm implicit de verificare a semnături\" doesn't accurately reflect the meaning of \"Default Sign Verifying Algorithm\". \"Implicit\" suggests the algorithm is hidden or assumed, which isn't the intended meaning of 'default'. The word 'semnături' should be 'semnătură' to agree in number.",
-          "suggestion": "Algoritm implicit de verificare a semnăturii"
+          "description": "The translation 'Algoritm implicit de verificare a semnături' doesn't accurately convey the meaning of 'Default Sign Verifying Algorithm'. 'Implicit' suggests it's hidden or automatic, while 'default' implies a pre-selected or standard option. The tone is also slightly off.",
+          "suggestion": "Algoritm de verificare a semnăturii implicit"
         },
         {
-          "type": "grammatical",
-          "description": "The phrase 'Algoritm implicit de verificare a semnături' lacks proper grammatical flow. The article 'a' is correct but the word order could be improved.",
-          "suggestion": "Algoritm implicit de verificare a semnăturii"
+          "type": "formatting",
+          "description": "The Romanian sentence 'Algoritm implicit de verificare a semnături' lacks proper punctuation; it should have a period at the end.",
+          "suggestion": "Algoritm implicit de verificare a semnăturii."
         }
       ],
       "approved_at": null
@@ -237,8 +231,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Стандартный алгоритм проверки подписи:' doesn't fully capture the nuance of 'Default Sign Verifying Algorithm'. 'Default' implies a setting or configuration, which isn't entirely conveyed by 'Стандартный'. A better translation might include 'Предпочтительный' or 'Основной' to better represent the 'Default' aspect.",
-          "suggestion": "Предпочтительный алгоритм проверки подписи:"
+          "description": "The translation \"Стандартный алгоритм проверки подписи:\" is not a direct or accurate translation of \"Default Sign Verifying Algorithm.\" \"Default\" is better translated as \"По умолчанию\" or \"Основной\". \"Sign Verifying Algorithm\" is adequately translated as \"алгоритм проверки подписи\", but the entire phrase lacks the nuance of 'Default'.",
+          "suggestion": "По умолчанию алгоритм проверки подписи:"
         }
       ],
       "approved_at": null
@@ -248,14 +242,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ඇල්ගොරිතම' (algorithm) is spelled correctly, but its usage might be slightly less common in everyday Sinhala. A more familiar term might enhance readability.",
-          "suggestion": "Consider using a more commonly used term for 'algorithm' if the target audience isn't technically inclined. Perhaps a paraphrase focusing on the concept of verification."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While 'පෙරනිමි' (peranimai) translates to 'default', the nuance of 'Default' as in a system setting or configuration might be better conveyed.",
-          "suggestion": "Consider 'සාමාන්‍ය' (samaanya - common/normal) or 'පද්ධතිsetDefault' (paddathi default - system default) to better capture the technical meaning of 'Default'."
+          "description": "The translation 'පෙරනිමි සත්‍යාපන ඇල්ගොරිතම' while containing the correct words, doesn't quite capture the meaning of 'Default Sign Verifying Algorithm.' 'පෙරනිමි' implies a pre-defined or prepared state, while 'Default' often refers to the standard or baseline setting. A more accurate translation should convey this baseline meaning.",
+          "suggestion": "නීතිගත සත්‍යාපන ඇල්ගොරිතම (Nīthigata sathyāpana ælgarithama) - 'Nīthigata' conveys 'standard' or 'regulated' which aligns better with 'Default'."
         }
       ],
       "approved_at": null
@@ -263,13 +252,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"Predvolený algoritmus na overenie podpisu\" is a literal translation but lacks the nuance of 'verifying'. A more accurate and natural translation would emphasize the validation aspect of the algorithm.",
-          "suggestion": "Predvolený algoritmus na validáciu podpisu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -278,8 +261,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Privzeti algoritem za preverjanje znakov' while technically correct, doesn't fully capture the nuance of 'Default Sign Verifying Algorithm'. 'Sign' is being used in the context of digital signatures, which isn't directly apparent in the Slovenian translation. A more accurate translation might emphasize this aspect.",
-          "suggestion": "Privzeti algoritem za preverjanje digitalnih podpisov"
+          "description": "The translation 'Privzeti algoritem za preverjanje znakov' is not a perfect match for 'Default Sign Verifying Algorithm'. 'Znakov' translates to 'characters' or 'signs,' while the English implies a cryptographic signing algorithm. A more accurate translation would convey the meaning of a default signing algorithm used for verification.",
+          "suggestion": "Privzeti algoritem za preverjanje podpisa"
         }
       ],
       "approved_at": null
@@ -290,8 +273,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Подразумевани алгоритам за проверу потписа' is understandable, it's a bit literal and not the most natural phrasing. 'Default' implies a standard or common setting, which isn't fully captured by 'Подразумевани'.",
-          "suggestion": "Consider a phrasing like 'Стандардни алгоритам за верификацију потписа' (Standard algorithm for signature verification) or 'Обични алгоритам за потврду потписа' (Common algorithm for signature confirmation)."
+          "description": "The translation \"Подразумевани алгоритам за проверу потписа\" is not the most accurate translation of \"Default Sign Verifying Algorithm\". 'Default' implies a setting or pre-selected option, which isn't perfectly conveyed by 'Подразумевани'.",
+          "suggestion": "Уобичајени алгоритам за проверу потписа"
         }
       ],
       "approved_at": null
@@ -302,8 +285,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Podrazumevani algoritam za proveru potpisa\" is a literal translation but doesn't quite capture the nuance of 'Default Sign Verifying Algorithm'. While technically correct, it sounds a bit clunky in Serbian. 'Default' implies a setting or option, which isn't clearly conveyed.",
-          "suggestion": "Algoritam za verifikaciju potpisa po defaultu"
+          "description": "The translation \"Podrazumevani algoritam za proveru potpisa\" while technically correct, doesn't fully capture the nuance of 'Default Sign Verifying Algorithm'. 'Default' implies a setting or configuration option, which isn't entirely conveyed.",
+          "suggestion": "Algoritam za proveru potpisa (podrazumevani)"
         }
       ],
       "approved_at": null
@@ -317,13 +300,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Алгоритм перевірки знаку за замовчуванням\" is a bit literal and doesn't flow as naturally as possible. 'Sign' can be interpreted as a signature.",
-          "suggestion": "Алгоритм перевірки підпису за замовчуванням"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -332,13 +309,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Thuật toán Xác minh Ký tên Mặc định\" is a literal translation and doesn't fully capture the nuance of \"Default Sign Verifying Algorithm.\" While technically correct, it sounds slightly awkward in Vietnamese.  'Sign Verifying Algorithm' could be better conveyed as something like 'Thuật toán xác minh chữ ký' or 'Thuật toán xác thực chữ ký'.",
+          "description": "The translation 'Thuật toán Xác minh Ký tên Mặc định' is a literal translation that doesn't quite capture the nuance of 'Default Sign Verifying Algorithm'. While technically correct, it sounds a bit clunky in Vietnamese. A more natural phrasing might be 'Thuật toán xác minh chữ ký mặc định'.",
           "suggestion": "Thuật toán xác minh chữ ký mặc định"
-        },
-        {
-          "type": "formatting",
-          "description": "The phrase \"Ký tên\" is a bit clunky. While it conveys the meaning of 'sign', a more natural flow is preferred.  It breaks the flow of the Vietnamese sentence.",
-          "suggestion": "Removed and integrated into surrounding text."
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2025-06-03T20:59:41.771Z",
+  "updated_at": "2025-08-11T09:02:43.813Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,
@@ -12,20 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
-      "line_number": 60,
-      "context": "if (security?.Lock && !isLoading) {\n this.setState({ isLoading: true });\n return lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .catch(\n (err) => toastr.error(err),\n this.setState({ isLoading: false }),",
+      "line_number": 56,
+      "context": "const { locked, id, security } = item;\n const { isLoading } = this.state;\n if (!security?.Lock || isLoading) return;\n this.setState({ isLoading: true });\n return lockFileAction(id, !locked)\n .then(() => toastr.success(t(\"Translations:FileUnlocked\")))\n .catch((err) => toastr.error(err))\n .finally(() => this.setState({ isLoading: false }));\n };\n \n onClickDownload = () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 104,
+      "context": "});\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (\"version\" in feed.data && feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 92,
-      "context": "});\n return t(\"InfoPanel:FileDeleted\");\n case \"FileLocked\":\n return `${t(\"Translations:FileLocked\")}.`;\n case \"FileUnlocked\":\n return `${t(\"Translations:FileUnlocked\")}.`;\n case \"FileVersionRemoved\":\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
+      "line_number": 98,
+      "context": "});\n return t(\"InfoPanel:FileDeleted\");\n case FeedActionKeys.FileLocked:\n return `${t(\"Translations:FileLocked\")}.`;\n case FeedActionKeys.FileUnlocked:\n return `${t(\"Translations:FileUnlocked\")}.`;\n case FeedActionKeys.FileVersionRemoved:\n if (feed.data.version) {\n return t(\"InfoPanel:FileVersionRemoved\", {\n version: feed.data.version,\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 452,
-      "context": "this.filesActionsStore\n .lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .then(() => setInfoPanelSelection({ ...item, locked: !locked }))\n .catch((err) => {\n toastr.error(err);",
+      "line_number": 455,
+      "context": "this.filesActionsStore\n .lockFileAction(id, !locked)\n .then(() =>\n locked\n ? toastr.success(t(\"Translations:FileUnlocked\"))\n : toastr.success(t(\"Translations:FileLocked\")),\n )\n .catch((err) => {\n toastr.error(err);\n });",
       "module": "/packages/client"
     }
   ],
@@ -42,8 +48,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ملف مفتوح' literally translates to 'file open', which isn't the most natural or accurate equivalent of 'File unlocked'. While understandable, it doesn't convey the sense of being released or accessible.",
-          "suggestion": "ملف تم فك قفله (Malaf tam fak qifluhu) - This translates to 'File has been unlocked' and is a more accurate reflection of the original meaning. Alternatively,  ملف متاح (Malaf mutah) - 'File Available' could also work, depending on the context."
+          "description": "The Arabic translation 'ملف مفتوح' literally translates to 'File opened'. While understandable, 'File unlocked' implies a state of being unlocked, not the action of opening. A more accurate translation would convey that state.",
+          "suggestion": "ملف مقفل"
         }
       ],
       "approved_at": null
@@ -72,7 +78,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Datei nicht gesperrt' literally translates to 'File not locked'. While technically correct, 'Datei entsperrt' would be the more natural and idiomatic translation for 'File unlocked' in a context suggesting a previous locked state.",
+          "description": "The German translation \"Datei nicht gesperrt\" literally translates to \"File not locked.\" While it conveys a similar meaning to \"File unlocked,\" it's not the most natural or accurate phrasing in German. A more common and accurate translation would be \"Datei entsperrt\".",
           "suggestion": "Datei entsperrt"
         }
       ],
@@ -96,8 +102,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Asiakirjat. Lukitus poistettu' includes 'Asiakirjat' (Documents), which is not present in the English original 'File unlocked'. It implies a plural and broader context.",
+          "description": "The Finnish translation 'Asiakirjat. Lukitus poistettu' is not a direct translation of 'File unlocked'. 'Asiakirjat' means 'Documents', and while 'Lukitus poistettu' means 'Lock removed', the entire phrase is more verbose than necessary for a simple 'File unlocked'.",
           "suggestion": "Tiedoston lukitus poistettu"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a period (.) between 'Asiakirjat' and 'Lukitus poistettu' feels disjointed. It creates a somewhat unnatural phrasing.",
+          "suggestion": "Remove the period, or rephrase to integrate the two parts more seamlessly."
         }
       ],
       "approved_at": null
@@ -126,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ロック削除されたファイル' literally translates to 'File deletion was performed'. While conveying a similar concept, it's not the most natural or accurate translation of 'File unlocked'.",
-          "suggestion": "ファイル解除 (Fairu kaizai) - 'File released/unlocked' or ファイルロック解除 (Fairu rokku kaizai) - 'File lock released' are more accurate and commonly used translations."
+          "description": "The Japanese translation \"ロック削除されたファイル\" is not the most natural or accurate translation of \"File unlocked.\" While it literally translates to something like \"File had the lock removed,\" it's not the idiomatic way to express the concept of a file being unlocked. It's overly literal and sounds awkward.",
+          "suggestion": "ファイル解除 (Fairu kaizai) - This translates to 'File released' or 'File unlocked' and is a more common and natural phrasing.  Alternatively,  アンロックされたファイル (Anrokku sareta fairu) which uses the borrowed English word 'unlock' is also acceptable."
         }
       ],
       "approved_at": null
@@ -135,13 +146,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '파일이 잠금 해제되었습니다' while understandable, is a more formal and literal translation of 'File unlocked'. A more natural and common Korean phrase for 'File unlocked' would be '파일 잠금 해제됨' or '파일이 열렸습니다'.",
-          "suggestion": "파일 잠금 해제됨"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -150,8 +155,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'ໄຟລ໌ ປົດລັອກ' is understandable, a more natural and accurate translation of 'File unlocked' in Lao might be 'ເອກະສານປົດລັອກ' or 'ໄຟລ໌ໄຂແລ້ວ'.  'ປົດລັອກ' directly translates to 'unlock' but it's not the most idiomatic phrasing in Lao in this context.",
-          "suggestion": "ເອກະສານປົດລັອກ"
+          "description": "While the translation uses recognizable Lao words, \"ໄຟລ໌ ປົດລັອກ\" is a direct transliteration and may not be the most natural or idiomatic way to express 'File unlocked' in Lao. It reads somewhat literal.",
+          "suggestion": "Consider alternatives like \"ເອກະສານໄຂແລ້ວ\" (Ekkasarn khai laeo - Document opened/unlocked) or \"ສາມາດໄຂເອກະສານໄດ້ແລ້ວ\" (Samart khai ekkasarn dai laeo - File can be opened/unlocked), depending on the surrounding context.  Consult with a native Lao speaker for the most appropriate phrasing."
         }
       ],
       "approved_at": null
@@ -168,8 +173,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bestand Van Slot Af\" is a literal translation but doesn't quite convey the meaning of 'File unlocked' in a natural Dutch way. It's a bit clunky.",
-          "suggestion": "A more natural translation would be \"Bestand is ontgrendeld\" or \"Bestand ontgrendeld\"."
+          "description": "The translation \"Bestand Van Slot Af\" is a literal translation and doesn't flow naturally in Dutch. A more natural and idiomatic translation would be \"Bestand ontgrendeld\" or \"Bestand is ontgrendeld\".",
+          "suggestion": "Bestand ontgrendeld"
         }
       ],
       "approved_at": null
@@ -204,7 +209,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Разблокирован файл' is technically correct but sounds unnatural. A more common and natural phrasing would be 'Файл разблокирован'.",
+          "description": "While understandable, \"Разблокирован файл\" is a less natural phrasing in Russian. A more common and idiomatic translation would be \"Файл разблокирован\" or \"Файл освобожден\".",
           "suggestion": "Файл разблокирован"
         }
       ],
@@ -219,13 +224,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Súbor odomknutý' is a literal translation and doesn't flow naturally. A more idiomatic translation would be 'Odomknutý súbor' or 'Súbor je odomknutý'.",
-          "suggestion": "Odomknutý súbor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -240,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian (Cyrillic) translation contains a spelling error. The word 'Датотека' should be 'Датотека'.",
-          "suggestion": "Датотека откључана"
+          "description": "The Serbian (Cyrillic) translation 'Датотека откључана' contains a spelling error. The correct spelling is 'Датотека откључена'.",
+          "suggestion": "Датотека откључена"
         }
       ],
       "approved_at": null
@@ -270,7 +269,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Đã mở khóa File' is not the most natural way to say 'File unlocked' in Vietnamese. While technically correct, it's a bit literal.",
+          "description": "The translation 'Đã mở khóa File' is technically correct but sounds somewhat unnatural. While 'đã mở khóa' means 'unlocked', directly including 'File' is redundant as the context already implies it.",
           "suggestion": "Tập tin đã mở"
         }
       ],

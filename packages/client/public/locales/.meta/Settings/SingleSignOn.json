@@ -3,7 +3,7 @@
   "content": "Single Sign-On",
   "content_en_sha1_hash": "9cd5b7eb1680d90f18ef828206965ff742d88dda",
   "created_at": "2025-05-19T21:30:52.736Z",
-  "updated_at": "2025-07-02T07:49:19.843Z",
+  "updated_at": "2025-08-04T07:30:01.502Z",
   "comment": {
     "text": "This translation key is used to display a custom label for a single sign-on entry button. It appears in an IDP settings page and is used as a placeholder until a custom value is set. Translators should provide a clear and concise text that will be displayed on the UI.",
     "is_auto": true,
@@ -111,7 +111,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation 'シングルサインオン' is a transliteration of 'Single Sign-On' and lacks a true translation of the meaning. While acceptable in some contexts, a more descriptive translation might be preferred.",
+          "suggestion": "シングルサインイン (Singuru Sainin) - This translates to 'Single Sign-in' and conveys a similar meaning. Alternatively, depending on the intended nuance, consider a more descriptive explanation."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation \"싱글 사인온\" is a transliteration of \"Single Sign-On\" and doesn't convey the meaning naturally in Korean. A more appropriate translation would incorporate Korean terminology for 'single' and 'sign-on'.",
-          "suggestion": "단일 로그인 (Danil Log-in)"
+          "description": "The Korean translation \"싱글 사인온\" is a direct transliteration of \"Single Sign-On\" rather than a proper Korean equivalent. While understandable, it's not idiomatic and doesn't reflect how this concept would typically be expressed in Korean. A more accurate and natural translation would involve explaining the functionality rather than simply transliterating the English terms.",
+          "suggestion": "Consider using a more descriptive translation such as \"단일 로그인\" (dan-il lo-gin) which means 'single login', or a phrase explaining the concept, depending on the context."
         }
       ],
       "approved_at": null
@@ -150,13 +156,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Logowanie jednokrotne' is a literal translation of 'Single Sign-On', it's not the most common or user-friendly term in Polish. 'Logowanie pojedyncze' or 'Logowanie przez SSO' would be better alternatives for clarity and alignment with common terminology.",
-          "suggestion": "Logowanie pojedyncze"
+          "description": "While 'Logowanie jednokrotne' is a literal translation of 'Single Sign-On', it might not be the most common or readily understood term by Polish users. A more natural and widely recognized translation could be 'Logowanie pojedyncze' or 'Połączone logowanie'.",
+          "suggestion": "Consider 'Logowanie pojedyncze' or 'Połączone logowanie' for better user understanding."
         },
         {
           "type": "formatting",
-          "description": "The inclusion of '(SSO)' in parentheses is acceptable, but it might be better to use a more integrated approach or explanatory text for users unfamiliar with the acronym.",
-          "suggestion": "Logowanie jednokrotne - SSO"
+          "description": "The inclusion of '(SSO)' is technically correct as it preserves the abbreviation, but it might feel slightly jarring in Polish text. It's more common in Polish to explain acronyms in the initial usage, rather than immediately adding the abbreviation.",
+          "suggestion": "If the abbreviation 'SSO' is important to include, consider a phrase like 'Logowanie jednokrotne (SSO - Single Sign-On)' upon the first mention. Otherwise, consider omitting it."
         }
       ],
       "approved_at": null
@@ -164,7 +170,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Início de Sessão Único' is a literal translation, a more common and natural-sounding equivalent for 'Single Sign-On' in Portuguese is 'Logon Único' or 'Acesso Único'. 'Início de Sessão Único' is grammatically correct but sounds less idiomatic.",
+          "suggestion": "Logon Único"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -206,7 +218,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"Једнократна пријава\" is a literal translation of \"Single Sign-On,\" it might not be the most natural or commonly used term in Serbian IT contexts. \"Једнократна аутентификација\" or \"Појединачна пријава\" might be more appropriate depending on the specific platform and audience. \"Једнократна пријава\" is understandable but slightly awkward.",
+          "suggestion": "Consider \"Једнократна аутентификација\" or \"Појединачна пријава\"."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -233,8 +251,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Đăng nhập một lần' is a literal translation of 'Single Sign-On', it might not be the most common or easily understood term for users.  'SSO' is already included, which is good, but the full phrase is a bit clunky.",
-          "suggestion": "Consider using a more established Vietnamese translation for 'Single Sign-On' if one exists.  Research common usage and industry standards.  Alternatively, keep 'SSO' and simplify the preceding phrase, perhaps just 'SSO' or 'Đăng nhập SSO'."
+          "description": "While 'Đăng nhập một lần (SSO)' is a common and understandable translation, a more formal and accurate translation of 'Single Sign-On' would be 'Xác thực một lần' or 'Đăng nhập duy nhất'. Using 'Đăng nhập một lần' implies only one login attempt, not the broader concept of using a single authentication for multiple applications.",
+          "suggestion": "Consider 'Xác thực một lần' or 'Đăng nhập duy nhất' for greater accuracy."
+        },
+        {
+          "type": "formatting",
+          "description": "The addition of the abbreviation '(SSO)' in parentheses is acceptable as it clarifies the English term, but ensure consistency in abbreviation usage throughout the application.",
+          "suggestion": "Maintain consistent use of abbreviations throughout the application; if used here, use it elsewhere."
         }
       ],
       "approved_at": null

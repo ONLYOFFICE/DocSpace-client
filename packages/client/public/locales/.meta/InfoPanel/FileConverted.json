@@ -3,7 +3,7 @@
   "content": "File converted.",
   "content_en_sha1_hash": "1de949499d23c1b37664d1d36e3c621d47452849",
   "created_at": "2025-05-19T21:30:54.789Z",
-  "updated_at": "2025-05-28T09:30:02.424Z",
+  "updated_at": "2025-08-04T07:30:01.219Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message when a file conversion process is complete. It appears on-screen when an action involving file conversion has been performed, such as after a file upload or update. Translators should provide a localized equivalent of \"File converted\" for this context.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 61,
+      "context": "});\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamed\");\n case FeedActionKeys.FileMoved:\n if (\"fromParentTitle\" in feed.data && feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 52,
-      "context": "});\n return t(\"InfoPanel:FileUploaded\");\n case \"UserFileUpdated\":\n return t(\"InfoPanel:UserFileUpdated\");\n case \"FileConverted\":\n return t(\"InfoPanel:FileConverted\");\n case \"FileRenamed\":\n return t(\"InfoPanel:FileRenamed\");\n case \"FileMoved\":\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {",
+      "line_number": 55,
+      "context": "});\n return t(\"InfoPanel:FileUploaded\");\n case FeedActionKeys.UserFileUpdated:\n return t(\"InfoPanel:UserFileUpdated\");\n case FeedActionKeys.FileConverted:\n return t(\"InfoPanel:FileConverted\");\n case FeedActionKeys.FileRenamed:\n return t(\"InfoPanel:FileRenamed\");\n case FeedActionKeys.FileMoved:\n if (feed.data.fromParentTitle) {\n return t(\"InfoPanel:FileMovedTo\", {",
       "module": "/packages/client"
     }
   ],
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Έγινε μετατροπή του αρχείου' is a bit formal and lengthy for a simple confirmation message like 'File converted.'. A more natural and concise translation would be better suited.",
+          "suggestion": "Αρχείο μετατράπηκε."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເອກະສານຖືກປ່ຽນແລ້ວ' literally translates to 'The document has been changed'. While not entirely wrong, it's slightly less direct and natural than 'File converted.' A more direct equivalent could improve clarity.",
+          "suggestion": "ເອກະສານປ່ຽນແລ້ວ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -114,7 +132,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Fails ir konvertēts\" is not the most natural or idiomatic way to say \"File converted.\" While grammatically correct, a better translation would be more aligned with common Latvian phrasing. \"Fails konvertēts\" is a more concise and common expression in this context.",
+          "description": "The Latvian translation 'Fails ir konvertēts' is a literal translation of 'File is converted'. A more natural and idiomatic Latvian translation would be something like 'Fails konvertēts' or 'Konvertēts fails'.",
           "suggestion": "Fails konvertēts"
         }
       ],
@@ -162,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනුව පරිවර්තනය කරන ලදී.' while technically meaning 'File converted', is a passive and somewhat formal construction. A more natural and concise translation would be better.",
-          "suggestion": "ගොනුව පරිවර්තනය විය."
+          "description": "The translation 'ගොනුව පරිවර්තනය කරන ලදී' is overly literal. While technically correct, a more natural and concise translation would improve user experience. 'පරිවර්තනය කරන ලදී' is a bit clunky.",
+          "suggestion": "ගොනුව පරිවර්තනය වී ඇත. (Gonuwa Pariwartana Vi Etha)"
         }
       ],
       "approved_at": null
@@ -174,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Súbor skonvertovaný' is understandable, it's not the most natural or accurate translation of 'File converted.' A more idiomatic translation would convey the idea of completion.",
-          "suggestion": "Súbor bol konvertovaný."
+          "description": "While 'Súbor skonvertovaný' is understandable, it sounds unnatural and overly literal. A more natural Slovak translation would be 'Prevedený súbor' or 'Súbor bol prevedený'.",
+          "suggestion": "Prevedený súbor"
         }
       ],
       "approved_at": null
@@ -189,13 +207,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Датотека је конвертована.' while technically correct, sounds somewhat formal and unnatural in many contexts. A more common and natural translation would be 'Конвертована је датотека.' or 'Датотека конвертована.'.",
-          "suggestion": "Конвертована је датотека."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

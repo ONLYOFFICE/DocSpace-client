@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
-import { classNames } from "@docspace/shared/utils";
+import { classNames } from "../../../utils";
 
 import { Button, ButtonSize } from "../../button";
 import { TextInput, InputSize, InputType } from "../../text-input";

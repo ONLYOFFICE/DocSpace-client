@@ -3,7 +3,7 @@
   "content": "Webhook history",
   "content_en_sha1_hash": "d5c876e94d902e5dbeaa0db16f985a22a99969df",
   "created_at": "2025-05-19T21:30:49.879Z",
-  "updated_at": "2025-06-18T07:34:15.128Z",
+  "updated_at": "2025-08-04T07:30:01.473Z",
   "comment": {
     "text": "This translation key is used for the label of a dropdown item that displays \"Webhook history\". It appears in a table or list where webhooks are displayed, likely as part of an interface for managing webhooks in the Portal Settings.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhooksTableRow.js",
-      "line_number": 139,
-      "context": "icon: SettingsIcon,\n onClick: onSettingsOpen,\n },\n {\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n },\n {\n key: \"Separator dropdownItem\",",
+      "line_number": 140,
+      "context": "onClick: onSettingsOpen,\n dataTestId: \"webhook_settings_item\",\n },\n {\n key: \"Webhook history dropdownItem\",\n label: t(\"WebhookHistory\"),\n icon: HistoryIcon,\n onClick: redirectToHistory,\n dataTestId: \"webhook_history_item\",\n },\n {",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"تأريخ ويب هوك\" is a literal transliteration of \"Webhook history\" rather than a true translation. 'تأريخ' primarily means 'history' or 'chronology' and doesn't fully capture the technical meaning of 'Webhook history', which refers to a log or record of webhook events.",
-          "suggestion": "Consider a translation like \"سجل ويب هوك\" (Sijill Webhook) which means 'Webhook Log' or \"تاريخ ويب هوك\" (Tareekh Webhook) which while closer, might still need further context clarification."
+          "description": "The Arabic translation \"تأريخ ويب هوك\" while understandable, isn't the most natural or accurate translation of \"Webhook history.\" \"تأريخ\" (ta'rikh) primarily refers to 'history' as in a historical account or timeline, rather than the technical history of webhook events.",
+          "suggestion": "سجل ويب هوك (Sijill Web Hook) - 'Sijill' means record or log, which is more appropriate for technical webhook history."
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"История на уеб кука\" is not the most accurate or idiomatic translation of \"Webhook history.\" While \"уеб кука\" is a literal translation of \"webhook,\" a more common and understandable term in Bulgarian would be \"уеб хук\" (web hook).",
-          "suggestion": "История на уеб хук"
+          "description": "The translation 'История на уеб кука' is not the most natural or accurate translation of 'Webhook history'. 'Уеб кука' is a literal translation of 'webhook' and sounds awkward in Bulgarian. A more appropriate translation would be 'История на уебхукове'.",
+          "suggestion": "История на уебхукове"
         }
       ],
       "approved_at": null
@@ -125,8 +125,8 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The Lao translation uses a full stop after 'Webhook'. While not strictly incorrect, it's generally omitted in Lao for this kind of compound noun.",
+          "type": "formatting",
+          "description": "The Lao translation 'ປະຫວັດ Webhook' lacks a space between 'ປະຫວັດ' and 'Webhook'.",
           "suggestion": "ປະຫວັດ Webhook"
         }
       ],
@@ -138,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Tīmekļa aizķeres vēsture\" doesn't accurately convey the meaning of \"Webhook history.\" 'Aizķere' implies a blockage or jam, which isn't the intended meaning. 'Webhook' refers to a specific technology.",
-          "suggestion": "A more accurate translation would be something like \"Webhooku vēsture\" or \"Webhook datu vēsture\"."
+          "description": "The translation \"Tīmekļa aizķeres vēsture\" doesn't accurately reflect the meaning of \"Webhook history.\" \"Aizķere\" translates to 'blockage' or 'obstacle,' which is not the intended meaning. 'Webhook' refers to a specific technical concept.",
+          "suggestion": "A more accurate translation would be something like \"Webhooku vēsture\" or \"Webhook vēstures ieraksti\"."
         }
       ],
       "approved_at": null
@@ -171,7 +171,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Istoricul Webhook' is technically correct but could be improved for naturalness in Romanian. While 'Webhook' can be directly transliterated, it's often better to use a more descriptive phrase for clarity. The article 'Istoricul' is correctly used.",
+          "suggestion": "Istoricul webhook-urilor"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

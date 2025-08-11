@@ -40,19 +40,17 @@ import { logger } from "@/../logger.mjs";
 
 import "@/styles/globals.scss";
 
-const log = logger.child({ module: "Root layout" });
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = headers();
-  const cookieStore = cookies();
+  const hdrs = await headers();
+  const cookieStore = await cookies();
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    log.info("get health check and return empty layout");
-    return <></>;
+    logger.info("get health check and return empty layout");
+    return null;
   }
 
   const [user, settings, colorTheme] = await Promise.all([
@@ -82,7 +80,12 @@ export default async function RootLayout({
     (typeof settings === "object" && settings.culture) ||
     "en";
 
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  const baseURL = await getBaseUrl();
+
+  if (settings === "access-restricted") {
+    logger.info("Root layout access-restricted");
+    redirect(`${baseURL}/${settings}`);
+  }
 
   return (
     <html lang="en" translate="no">

@@ -3,7 +3,7 @@
   "content": "Use webhooks to perform custom actions on the side of any application or website you are using based on various events in {{organizationName}} {{productName}}.\nHere, you can create and manage all your webhooks, configure them, and browse history of every webhook to audit their performance.",
   "content_en_sha1_hash": "750432e6ab1214b46a206263443e9af320afcacf",
   "created_at": "2025-05-19T21:30:49.892Z",
-  "updated_at": "2025-05-21T00:48:21.190Z",
+  "updated_at": "2025-06-08T12:02:32.788Z",
   "comment": {
     "text": "Use webhooks to perform custom actions on any application or website based on various events in {{organizationName}} {{productName}}.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookInfo.js",
-      "line_number": 58,
-      "context": "const { webhooksGuideUrl, logoText } = props;\n \n return (\n <InfoWrapper>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (",
+      "line_number": 53,
+      "context": "const { webhooksGuideUrl, logoText } = props;\n \n return (\n <div>\n <InfoText as=\"p\">\n {t(\"WebhooksInfo\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n })}\n </InfoText>\n {webhooksGuideUrl ? (",
       "module": "/packages/client"
     }
   ],
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'لتعديل أدائها' (to modify its performance) is not the most accurate translation of 'audit their performance'. 'Audit' implies reviewing and verifying, not necessarily modifying.  A better translation would convey the meaning of review or examine.",
-          "suggestion": "استعرض سجلها وتقييم أدائها"
+          "description": "The word 'تعديل' (ta'deel) in the Arabic translation implies 'modification' or 'adjustment', but the English text refers to auditing 'performance'. A more appropriate term would convey the idea of reviewing or examining the webhook's functionality.",
+          "suggestion": "استخدم ويب هوك لتنفيذ إجراءات مخصصة على جانب أي تطبيق أو موقع ويب تستخدمه بناءً على أحداث مختلفة في {{organizationName}} {{productName}}.\nهنا، يمكنك إنشاء وإدارة جميع ويب هوك الخاصة بك وتكوينها وتصفح سجل كل ويب هوك لمراجعة أدائها."
         }
       ],
       "approved_at": null
@@ -42,18 +42,18 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses hyphens in 'web-sayt' and 'web-hook'.  In Azerbaijani, these should generally be written as one word: 'vebsayt' and 'webhook'.",
-          "suggestion": "Use 'vebsayt' and 'webhook' instead of 'web-sayt' and 'web-hook'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English 'perform custom actions' is translated as 'fərdi hərəkətləri yerinə yetirmək'. While technically correct, a more natural translation might be 'xüsusi hərəkətləri yerinə yetirmək'. 'Fərdi' implies 'individual' which isn't the intended meaning here.",
-          "suggestion": "Replace 'fərdi hərəkətləri yerinə yetirmək' with 'xüsusi hərəkətləri yerinə yetirmək'."
+          "description": "The Azerbaijani translation uses a mix of Latin and Cyrillic characters (e.g., 'webhook-larınızı'). This is inconsistent and should be consistently Latin.",
+          "suggestion": "Ensure consistent use of Latin characters throughout the translation. For example, change 'webhook-larınızı' to 'webhooklarınızı'."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'performansını yoxlamaq üçün' is a bit clunky. A more fluid translation would be 'performansını izləmək' or 'performansını qiymətləndirmək'.",
-          "suggestion": "Replace 'performansını yoxlamaq üçün' with 'performansını izləmək' or 'performansını qiymətləndirmək'."
+          "description": "The phrase 'perform custom actions on the side of' is a bit awkward in Azerbaijani. While technically correct, it could be phrased more naturally.",
+          "suggestion": "Consider phrasing as 'istifadə etdiyiniz proqram və veb-saytlarda müxtəlif fərdi hərəkətləri reallaşdırın' or similar, to sound more idiomatic."
+        },
+        {
+          "type": "spelling",
+          "description": "The word 'konfiqurasiya' is a transliteration of 'configuration' and not standard Azerbaijani. It's better to use a native equivalent.",
+          "suggestion": "Replace 'konfiqurasiya' with 'tənzimləmə' or 'ayar'."
         }
       ],
       "approved_at": null
@@ -64,18 +64,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'webhooks' is consistently translated as 'уеб куки'. 'Webhooks' should be translated as 'уебкуци' to maintain accuracy and industry-standard terminology.",
-          "suggestion": "Replace 'уеб куки' with 'уебкуци'."
+          "description": "The term \"уеб куки\" is an incorrect translation of \"webhooks\". The correct translation is \"уебхуци\".",
+          "suggestion": "Replace \"уеб куки\" with \"уебхуци\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'уеб кукичка' is an overly diminutive and potentially inaccurate translation of 'webhook'. It doesn't convey the technical meaning clearly. It's important to use the established term.",
-          "suggestion": "Replace 'уеб кукичка' with 'уебкуци'."
+          "description": "The diminutive suffix \"-чка\" on \"уеб кукичка\" is unnecessary and makes the translation sound awkward. It's better to use the full term in Bulgarian.",
+          "suggestion": "Replace \"уеб кукичка\" with \"уебхук\"."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The phrase 'проверите ефективността ѝ' is somewhat awkward. While technically correct, it's not the most natural way to express 'audit their performance' in Bulgarian.",
-          "suggestion": "Replace 'проверите ефективността ѝ' with 'да проследявате тяхната работа' or 'да анализирате тяхната работа'."
+          "type": "spelling",
+          "description": "The term 'ефективността' is spelled incorrectly. It should be 'ефективността'.",
+          "suggestion": "Replace 'ефективността' with 'ефективността'."
         }
       ],
       "approved_at": null
@@ -86,13 +86,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term 'webové háčky' is an uncommon and potentially confusing translation of 'webhooks'. It's a literal translation of 'hooks' and isn't the standard terminology used in the Czech tech community.",
-          "suggestion": "Use the more common and accepted term 'webhuky' or 'webové závislosti' (although 'webhuky' is generally preferred)."
+          "description": "The term 'webové háčky' is a literal translation of 'webhooks' and is not commonly used or understood in Czech. The standard term is 'webhooky'.",
+          "suggestion": "Change 'webové háčky' to 'webhooky'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The sentence 'kontrolovat jejich výkonnost' is slightly awkward. While technically correct, it's not the most natural phrasing in Czech.",
-          "suggestion": "Replace it with 'sledovat jejich výkon' or 'ověřovat jejich fungování'."
+          "description": "The phrase 'kontrolovat jejich výkonnost' is not the most natural way to express 'audit their performance' in Czech. It's too literal. A more accurate and fluent translation would incorporate the idea of reviewing or checking.",
+          "suggestion": "Change 'kontrolovat jejich výkonnost' to 'sledovat a vyhodnocovat jejich výkonnost' or 'ověřovat jejich výkonnost'."
         }
       ],
       "approved_at": null
@@ -103,18 +103,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The sentence 'Hier können Sie alle Ihre Webhooks erstellen und verwalten, diese konfigurieren und den Verlauf jedes Webhooks durchsuchen, um seine Leistung zu überprüfen.' is a bit clunky. The repetition of 'Webhooks' is awkward. While technically correct, it could be improved for better flow.",
+          "description": "The sentence 'Hier können Sie alle Ihre Webhooks erstellen und verwalten, diese konfigurieren und den Verlauf jedes Webhooks durchsuchen, um seine Leistung zu überprüfen.' is a bit clunky. The repetition of 'Webhooks' and the sentence structure could be improved.",
           "suggestion": "Hier können Sie alle Ihre Webhooks erstellen und verwalten, konfigurieren und den Verlauf jedes Webhooks einsehen, um deren Leistung zu überprüfen."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'browse history' is translated as 'den Verlauf...durchsuchen'.  'Durchsuchen' implies a more active search. 'Einsehen' (to view) is a more accurate translation in this context.",
-          "suggestion": "den Verlauf jedes Webhooks einsehen"
+          "description": "The word 'Events' is translated as 'Events'. It's a direct transliteration and while understandable, a more appropriate term for 'events' in a technical context might be 'Ereignisse'.",
+          "suggestion": "Verwenden Sie Webhooks, um benutzerdefinierte Aktionen auf der Seite jeder von Ihnen verwendeten Anwendung oder Website basierend auf verschiedenen Ereignissen in {{organizationName}} {{productName}} durchzuführen."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'um seine Leistung zu überprüfen' is grammatically correct but could be more elegant by using the plural to align with the plural 'Webhooks'.",
-          "suggestion": "um deren Leistung zu überprüfen."
+          "description": "Using 'deren Leistung' is not necessarily wrong, but 'seine Leistung' aligns better with 'jeden Webhooks' and reads more smoothly. While technically correct, the choice of pronoun makes the sentence flow better.",
+          "suggestion": "Hier können Sie alle Ihre Webhooks erstellen und verwalten, konfigurieren und den Verlauf jedes Webhooks einsehen, um seine Leistung zu überprüfen."
         }
       ],
       "approved_at": null
@@ -125,13 +125,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"στην πλευρά οποιασδήποτε εφαρμογής ή ιστότοπου που χρησιμοποιείτε\" (on the side of any application or website you use) is not the most natural way to express the English meaning. A more natural translation would emphasize 'within' or 'with'.",
-          "suggestion": "Χρησιμοποιήστε webhooks για να εκτελέσετε προσαρμοσμένες ενέργειες σε οποιαδήποτε εφαρμογή ή ιστότοπο χρησιμοποιείτε, βασιζόμενοι σε διάφορα συμβάντα..."
+          "description": "The phrase \"στην πλευρά οποιασδήποτε εφαρμογής ή ιστότοπου που χρησιμοποιείτε\" (on the side of any application or website you are using) is awkward and doesn't directly translate the intended meaning of the English text. A more natural translation would be 'σε οποιαδήποτε εφαρμογή ή ιστότοπο χρησιμοποιείτε'.",
+          "suggestion": "σε οποιαδήποτε εφαρμογή ή ιστότοπο χρησιμοποιείτε"
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"για να ελέγξετε την απόδοσή τους\" (to check their performance) is a literal translation. A more natural Greek expression would be 'για να αξιολογήσετε την απόδοσή τους' or 'για να παρακολουθήσετε την απόδοσή τους'.",
-          "suggestion": "για να αξιολογήσετε την απόδοσή τους"
+          "description": "The phrase 'να ελέγξετε την απόδοσή τους' (to check their performance) is technically correct but could be improved to reflect a more nuanced meaning of 'audit'. While 'performance' is close, 'audit' implies a more comprehensive review.",
+          "suggestion": "να ελέγξετε τη λειτουργικότητά τους"
         }
       ],
       "approved_at": null
@@ -142,13 +142,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'en el lado de cualquier aplicación o sitio web' is awkward and doesn't accurately convey the meaning of 'on the side of any application or website'. A more natural translation would be 'en cualquier aplicación o sitio web'.",
-          "suggestion": "en cualquier aplicación o sitio web"
+          "description": "The phrase 'en el lado de cualquier aplicación o sitio web' is awkward and doesn't accurately convey the meaning of 'on the side of any application or website.' A more natural translation would be something like 'en cualquier aplicación o sitio web'.",
+          "suggestion": "Utilice webhooks para realizar acciones personalizadas en cualquier aplicación o sitio web que está utilizando basado en varios eventos en {{organizationName}} {{productName}}."
         },
         {
           "type": "grammar",
-          "description": "The use of 'usted' (formal 'you') is potentially jarring for a technical context and might not align with the target audience. While grammatically correct, 'tú' (informal 'you') or a more impersonal phrasing would be more appropriate.",
-          "suggestion": "Aquí puede crear y gestionar todos sus webhooks, configurarlos, y navegar por el historial de cada webhook para auditar su rendimiento."
+          "description": "The use of 'usted' is overly formal for most user interfaces.  'Tú' would be more appropriate for a more conversational tone.",
+          "suggestion": "Utilice webhooks para realizar acciones personalizadas en cualquier aplicación o sitio web que está utilizando basado en varios eventos en {{organizationName}} {{productName}}. Aquí puedes crear y gestionar todos tus webhooks, configurarlos, y navegar por el historial de cada webhook para auditar su rendimiento."
         }
       ],
       "approved_at": null
@@ -159,13 +159,13 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'millä tahansa sovelluksella tai verkkosivulla' is grammatically awkward. It implies that custom actions are performed *on* the application or website, which isn't the intended meaning.",
-          "suggestion": "Käytä webhookeja suorittaaksesi mukautettuja toimintoja järjestelmässäsi tai sovelluksissasi {{organizationName}} {{productName}}:n tapahtumien perusteella."
+          "description": "The phrase \"Webhookien avulla voit\" could be slightly more natural. While grammatically correct, it's a bit clunky. A more common phrasing might use a more active voice.",
+          "suggestion": "Webhookien avulla voit suorittaa... -> Webhookit mahdollistavat..."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'audit their performance' is translated as 'tarkastaaksesi niiden suoritusta'. While technically correct, 'audit' implies a more formal and detailed review. A more accurate translation for the context might be 'seurata niiden toimintaa' or 'tarkastella niiden toimintaa'.",
-          "suggestion": "tarkastella niiden toimintaa"
+          "type": "grammar",
+          "description": "The phrase \"tarkastaaksesi niiden suoritusta\" could be improved for clarity. 'Suoritus' can have multiple meanings.",
+          "suggestion": "tarkastaaksesi niiden suoritusta -> tarkastaaksesi niiden toimivuutta"
         }
       ],
       "approved_at": null
@@ -176,8 +176,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"vérifier leur efficacité\" (verify their effectiveness) doesn't accurately convey the original meaning of \"audit their performance.\"  'Audit' implies a review for accuracy and compliance, whereas 'efficacité' implies efficiency.",
-          "suggestion": "Utilisez les webhooks pour effectuer des actions personnalisées sur le côté de n'importe quelle application ou site web que vous utilisez en fonction de divers événements dans {{organizationName}} {{productName}}.\nIci, vous pouvez créer et gérer tous vos webhooks, les configurer et consulter l'historique de chaque webhook pour en auditer les performances."
+          "description": "The phrase \"vérifier leur efficacité\" doesn't accurately convey the meaning of \"audit their performance\". 'Audit' implies a more formal review and tracking of performance, while 'vérifier leur efficacité' simply means 'to check their effectiveness'.",
+          "suggestion": "Utilisez les webhooks pour effectuer des actions personnalisées sur le côté de n'importe quelle application ou site web que vous utilisez en fonction de divers événements dans {{organizationName}} {{productName}}. Ici, vous pouvez créer et gérer tous vos webhooks, les configurer et consulter l'historique de chaque webhook pour en suivre les performances."
         }
       ],
       "approved_at": null
@@ -187,14 +187,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The term \"վեբ-կեռիկներ\" is a direct transliteration of \"webhooks\" and might sound awkward to native Armenian speakers. While understandable, a more natural phrasing might be preferable.",
-          "suggestion": "Consider using a term closer to \"վեբհուկեր\" or rephrasing the sentence to avoid direct transliteration. A phrase like \"վեբհուքերի համակարգ\" or \"վեբհուքերի օգտագործում\" might be more appropriate depending on the overall context."
+          "type": "formatting",
+          "description": "The Armenian translation uses a hyphen (-) between \"վեբ\" and \"կեռիկներ\" repeatedly. It should be a more standard connecting character or none at all, depending on the desired style. Consider using an en dash (–) or no connecting character.",
+          "suggestion": "Consider replacing the hyphens with an en dash (–) or removing them entirely. For example, 'վեբկեռիկներ' or 'վեբ կեռիկներ'."
         },
         {
-          "type": "grammar",
-          "description": "The phrase “դրանց կատարողականությունը ստուգելու համար” is somewhat clunky. While grammatically correct, it's not the most natural way to express the intended meaning.",
-          "suggestion": "Consider a more concise phrasing like “դրանց արդյունավետությունը գնահատելու համար” or simply “դրանց գործունեության պատմությունը դիտելու համար”."
+          "type": "incorrect_translation",
+          "description": "The phrase 'դրանց կատարողականությունը ստուգելու համար' is a bit clunky. While technically correct, it can be improved to sound more natural.",
+          "suggestion": "Consider rewording to something like 'դրանց արդյունավետությունը գնահատելու համար' or 'դրանց գործունեությունը հետազոտելու համար'."
         }
       ],
       "approved_at": null
@@ -205,8 +205,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"controllarne le prestazioni\" is a less natural translation of \"audit their performance\".  'Audit' implies a formal review, while 'controllarne le prestazioni' implies simply checking their performance. A more accurate translation might be 'verificarne le prestazioni' or 'monitorarne le prestazioni'.",
-          "suggestion": "Utilizza i webhook per eseguire azioni personalizzate su qualsiasi applicazione o sito Web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}. Qui puoi creare e gestire tutti i tuoi webhook, configurarli e verificarne/monitorarne le prestazioni."
+          "description": "The phrase 'controllarne le prestazioni' is a slightly awkward translation of 'audit their performance'. 'Audit' implies a more formal review and 'controllarne le prestazioni' translates to 'check/control their performance'.",
+          "suggestion": "Consider a more accurate translation like 'verificarne le prestazioni' or 'monitorarne le prestazioni'."
         }
       ],
       "approved_at": null
@@ -217,18 +217,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Use webhooks...' sounds a bit too direct. A more natural Japanese phrasing would be 'ウェブフックを活用して...'. The current translation sounds like an instruction rather than an explanation of a feature.",
-          "suggestion": "ウェブフックを活用して、{{organizationName}} {{productName}}の様々なイベントに基づいて、使用しているアプリケーションやウェブサイトの側でカスタムアクションを実行することができます。"
+          "description": "The phrase \"使用しているアプリケーションやウェブサイトの側で\" is a bit awkward. It literally translates to 'on the side of the applications and websites you are using.' A more natural translation would be something like \"連携しているアプリケーションやウェブサイトで\" or simply \"アプリケーションやウェブサイトで\".",
+          "suggestion": "連携しているアプリケーションやウェブサイトで"
         },
         {
-          "type": "grammar",
-          "description": "The sentence 'ここでは、すべてのウェブフックを作成・管理し、設定し、パフォーマンスを監査するためにすべてのウェブフックの履歴を閲覧することができます。' is a bit long and complex. It can be broken down for better readability.",
-          "suggestion": "ここでは、すべてのウェブフックを作成・管理し、設定できます。また、パフォーマンス監査のために、各ウェブフックの履歴を閲覧することも可能です。"
-        },
-        {
-          "type": "formatting",
-          "description": "The use of 'すべてのウェブフック' is repetitive. A more concise phrasing is preferred.",
-          "suggestion": "各ウェブフック"
+          "type": "incorrect_translation",
+          "description": "The phrase \"パフォーマンスを監査するためにすべてのウェブフックの履歴を閲覧することができます\" is a bit convoluted. It can be simplified to convey the meaning of auditing performance.  The literal translation includes an unnecessary 'all'.",
+          "suggestion": "パフォーマンスを監査するためにウェブフックの履歴を閲覧することができます。"
         }
       ],
       "approved_at": null
@@ -238,14 +233,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase '사용 중인 응용 프로그램 또는 웹 사이트 측면에서' is a bit awkward and could be improved for flow. It's literally translating 'on the side of any application or website'.",
-          "suggestion": "사용 중인 애플리케이션 또는 웹사이트에서"
+          "type": "incorrect_translation",
+          "description": "The phrase 'use custom actions' is not accurately translated. '사용자 정의 작업 수행' is a literal translation but sounds unnatural in Korean. A more natural phrasing would convey the intent of performing actions based on events.",
+          "suggestion": "웹훅을 사용하면 {{organizationName}} {{productName}}의 다양한 이벤트를 기반으로 사용 중인 응용 프로그램 또는 웹 사이트에서 특정 작업을 실행할 수 있습니다."
         },
         {
           "type": "incorrect_translation",
-          "description": "The word '감사' translates to audit, but in this context, '확인' or '점검' might be more natural and less formal. '감사' is more akin to a formal audit.",
-          "suggestion": "모든 웹훅의 기록을 찾아 성능을 점검할 수 있습니다."
+          "description": "The phrase 'browse history' is translated as '기록을 찾아'. While technically correct, it lacks nuance. A more appropriate translation would imply reviewing or inspecting the history.",
+          "suggestion": "모든 웹훅의 기록을 확인하여 성능을 감사할 수 있습니다."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence structure is a bit long and could be broken down for better readability in Korean. Consider splitting it for more clarity.",
+          "suggestion": "여기에서 모든 웹훅을 생성 및 관리하고 구성할 수 있습니다. 또한 모든 웹훅의 기록을 확인하여 성능을 감사할 수 있습니다."
         }
       ],
       "approved_at": null
@@ -256,18 +256,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'configure' is transliterated as 'configure'. While understandable, it's better to use a more common Lao equivalent for technical terms.",
-          "suggestion": "ປັບແກ້"
+          "description": "The word 'configure' is not well-understood in Lao. While it's transliterated, a more natural term would be preferred.",
+          "suggestion": "ປັບແກ້ (pab-gae) or ຕັ້ງຄ່າ (tang-kha)"
         },
         {
           "type": "grammar",
-          "description": "The phrase 'configure ໃຫ້ເຂົາເຈົ້າ' is a bit awkward. 'configure' could be better integrated into the sentence structure.",
-          "suggestion": "ປັບແກ້ພວກມັນ"
-        },
-        {
-          "type": "spelling",
-          "description": "The word 'ປະສິດທິພາບ' is used for 'performance'. While technically correct, a more common and easily understood term might be preferred.",
-          "suggestion": "ຜົນງານ"
+          "description": "The phrase 'configure ໃຫ້ເຂົາເຈົ້າ' sounds slightly awkward. A more natural phrasing could improve readability.",
+          "suggestion": "ປັບແກ້ພວກເຂົາເຈົ້າ (pab-gae phuak-khao-jao) or ຕັ້ງຄ່າພວກເຂົາເຈົ້າ (tang-kha phuak-khao-jao)"
         }
       ],
       "approved_at": null
@@ -278,13 +273,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"tīmekļa aizķeres\" is an inaccurate translation of \"webhooks\".  \"Webhooks\" is often used directly in Latvian IT contexts, or a more accurate equivalent like \"tīmekļa funkcijas\" could be considered.",
-          "suggestion": "Consider using 'webhooks' directly or a more appropriate term like 'tīmekļa funkcijas'."
+          "description": "The term 'tīmekļa aizķeres' is a literal translation of 'webhooks' and is not commonly used or understood in Latvian.  'Webhooks' should ideally be kept as is, or a more standard Latvian equivalent used.",
+          "suggestion": "Consider using a more standard term like 'API atgriezumi' or simply 'webhooks'."
         },
         {
           "type": "grammar",
-          "description": "The phrase \"pamatojoties uz dažādiem notikumiem\" is a bit awkward. It could be more naturally worded.",
-          "suggestion": "Consider rewording to something like \"pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}\" or \"kad notiek dažādi notikumi {{organizationName}} {{productName}}\"."
+          "description": "The phrase 'pamatojoties uz dažādiem notikumiem' is a bit clunky. The flow could be improved.",
+          "suggestion": "Consider rephrasing to something like 'pēc dažādiem notikumiem' or 'reaģējot uz dažādiem notikumiem'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'pārbaudīt to veiktspēju' sounds awkward. 'Veiktspēja' specifically refers to the performance of a machine, not necessarily software.",
+          "suggestion": "Consider a phrasing such as 'novērtēt to darbību' or 'pārbaudīt to darbību'."
         }
       ],
       "approved_at": null
@@ -295,13 +295,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"aan de kant van elke toepassing of website die u gebruikt\" is a literal translation and sounds unnatural in Dutch. A more natural phrasing would be something like \"in elke applicatie of website die u gebruikt\" or \"voor elke applicatie of website die u gebruikt\".",
-          "suggestion": "Gebruik webhooks om aangepaste acties uit te voeren in/voor elke applicatie of website die u gebruikt..."
+          "description": "The phrase 'aan de kant van elke toepassing of website die u gebruikt' is a bit awkward and doesn't flow naturally in Dutch. A more natural phrasing would be 'in elke applicatie of website die u gebruikt'.",
+          "suggestion": "Gebruik webhooks om aangepaste acties uit te voeren in elke applicatie of website die u gebruikt op basis van verschillende gebeurtenissen in {{organizationName}} {{productName}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"om hun prestaties te controleren\" is a bit clunky. A more fluent translation would be \"om hun functioneren te controleren\" or simply \"om hun werking te volgen\".",
-          "suggestion": "Hier kunt u al uw webhooks aanmaken en beheren, ze configureren en door de geschiedenis van elke webhook bladeren om hun functioneren/werking te volgen."
+          "description": "The phrase 'om hun prestaties te controleren' can be improved. 'Controleren' implies checking for errors. A more appropriate term to describe auditing the performance of webhooks is 'om hun functioneren te beoordelen' or 'om hun werking te volgen'.",
+          "suggestion": "Hier kunt u al uw webhooks aanmaken en beheren, ze configureren en door de geschiedenis van elke webhook bladeren om hun functioneren te beoordelen."
         }
       ],
       "approved_at": null
@@ -312,8 +312,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'by zweryfikować ich wydajność' is grammatically awkward. A more natural phrasing would improve readability.",
-          "suggestion": "by sprawdzić ich wydajność"
+          "description": "The Polish translation lacks a comma after 'tworzyć webhooki'.",
+          "suggestion": "Używaj webhooków do wykonywania niestandardowych działań po stronie dowolnej aplikacji lub witryny internetowej, z której korzystasz na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.\nTutaj możesz tworzyć webhooki, zarządzać nimi, konfigurować je, a także przeglądać historię wszystkich webhooków, by zweryfikować ich wydajność."
         }
       ],
       "approved_at": null
@@ -336,18 +336,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"pe partea aplicației sau paginii web pe care utilizați\" is awkward and doesn't accurately convey the meaning of \"on the side of any application or website you are using.\" A more natural Romanian phrasing would be needed.",
+          "description": "The phrase \"pe partea aplicației sau paginii web pe care utilizați\" is awkward and doesn't accurately convey the meaning of \"on the side of any application or website you are using.\" It implies the webhooks are *on* the application/website, which is not the intended meaning.  A more natural Romanian phrasing is needed.",
           "suggestion": "pe partea aplicațiilor sau site-uri web pe care le utilizați"
         },
         {
           "type": "incorrect_translation",
-          "description": "“spațiu” is not the best translation for the context of organization and product. It implies a physical location rather than a platform or system.",
-          "suggestion": "platforma"
-        },
-        {
-          "type": "grammatical",
-          "description": "“Aici puteți să creați și să gestionați toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a verifica performanța acestora.” is a bit long and could be broken up for better readability. The repetition of 'webhook-urile' is also noticeable. ",
-          "suggestion": "Aici puteți crea și gestiona webhook-uri, le puteți configura și consulta istoricul fiecărui webhook pentru a monitoriza performanța lor."
+          "description": "The phrase \"pentru a verifica performanța acestora\" is slightly clunky.  While grammatically correct, it's not the most elegant way to say \"to audit their performance.\"  ",
+          "suggestion": "pentru a monitoriza performanța acestora"
         }
       ],
       "approved_at": null
@@ -358,8 +353,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'загружать' (zagruzhat') means 'to download' or 'to upload'. The intended meaning is 'view' or 'browse'. The phrase 'проверки их эффективности' (proverki ih effektivnosti) is also awkward and doesn't directly translate to 'audit their performance'.",
-          "suggestion": "Используйте вебхуки для выполнения пользовательских действий на стороне любого используемого вами приложения или веб-сайта на основе различных событий в {{organizationName}} {{productName}}.\nЗдесь вы можете создавать все ваши вебхуки и управлять ими, настраивать их и просматривать историю каждого вебхука для отслеживания их работы."
+          "description": "The phrase \"проверки их эффективности\" (checking their effectiveness) doesn't accurately convey the intended meaning of \"audit their performance.\" Auditing implies reviewing logs and activity, not just checking for effectiveness.",
+          "suggestion": "Изучать историю каждого вебхука для проверки их работы/производительности/аудита."
         }
       ],
       "approved_at": null
@@ -369,19 +364,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"අභිරුචි ක්‍රියා\" (abiruchi kriya) translates to 'custom actions' but feels a bit formal and unnatural in Sinhala. A more natural phrasing might be \"ඔබේ අවශ්‍යතාවන්ට අනුව ක්‍රියා\" (obey adariswanthava anuva kriya) or simply \"ඔබට අවශ්‍ය ක්‍රියා\" (obat rata kriya).",
+          "suggestion": "Replace \"අභිරුචි ක්‍රියා\" with \"ඔබට අවශ්‍ය ක්‍රියා\" or \"ඔබේ අවශ්‍යතාවන්ට අනුව ක්‍රියා\"."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"ක්‍රියාකාරිත්වය විගණනය කළ හැකිය\" (kriyakarithvaya viganaya kala yadi) is a literal translation of 'audit their performance', but doesn't flow naturally in Sinhala. A better translation for 'audit' in this context would be to check or review. Therefore, 'විගණනය කළ හැකිය' is an unnecessary complication. It makes the whole sentence feel awkward.",
+          "suggestion": "Replace “ක්‍රියාකාරිත්වය විගණනය කළ හැකිය” with “තොරතුරු පරීක්ෂා කළ හැකිය” or “අවසම් පරීක්ෂා කළ හැකිය”."
+        },
+        {
           "type": "formatting",
-          "description": "The repeated use of {{organizationName}} {{productName}} feels awkward in Sinhala. It's unclear if these should be replaced with actual names or kept as placeholders.",
-          "suggestion": "Consider replacing {{organizationName}} and {{productName}} with the actual names or providing clear instructions on how these placeholders should be handled."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“අභිරුචි ක්‍රියා” (abiruchi kriya) translates to 'custom actions' but can sound overly formal or technical. A more natural phrasing might be better depending on the target audience.",
-          "suggestion": "Consider using a more colloquial term for 'custom actions' depending on the target audience. For example, 'ඔබට අවශ්‍ය ක්‍රියා' (obata avashya kritha) or a more specific term depending on the context."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "“පිරික්සීමෙන් ඒවායේ ක්‍රියාකාරිත්වය විගණනය කළ හැකිය” (piriksimen evaseya kriyakarithuva viganaya kala yadi) translates to 'can audit their performance'. The term 'vigane' can imply a calculation/mathematical analysis. A simpler term for 'audit' is more appropriate.",
-          "suggestion": "Consider replacing 'vigane' with a more appropriate term like 'පහන් කිරීම' (pahan karam) which means 'to investigate' or 'to examine'."
+          "description": "The Sinhala sentence structure is a bit long and complex, making it harder to read. It might be better to split it into two sentences for clarity.",
+          "suggestion": "Consider breaking the second sentence into two shorter sentences. For example: 'මෙහිදී, ඔබට ඔබගේ සියලුම webhooks නිර්මාණය කර කළමනාකරණය කළ හැකිය. ඒවා වින්‍යාස කළ හැකිය, සහ සෑම webhook එකකම ඉතිහාසය පිරික්සීමෙන් ඒවායේ ක්‍රියාකාරිත්වය විගණනය කළ හැකිය.'"
         }
       ],
       "approved_at": null
@@ -391,14 +386,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The phrase 'na strane akejkoľvek aplikácie alebo webových stránok' is grammatically awkward. It would be more natural to say 'v akejkoľvek aplikácii alebo na webových stránkach'.",
-          "suggestion": "v akejkoľvek aplikácii alebo na webových stránkach"
+          "type": "incorrect_translation",
+          "description": "The phrase 'na strane akejkoľvek aplikácie alebo webových stránok' is awkward. While technically correct, it's not the most natural Slovak phrasing. It implies 'on the side of any application or website'.",
+          "suggestion": "Použite 'pre akúkoľvek aplikáciu alebo webovú stránku, ktorú používate' or 'v akejkoľvek aplikácii alebo na webovej stránke, ktorú používate'."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term 'operácie' (operations) doesn't fully capture the intended meaning of 'custom actions.' A better translation would convey the idea of 'vlastné funkcie' or 'vlastné akcie'.",
-          "suggestion": "vlastné funkcie"
+          "description": "The phrase 'kontrolovať ich výkon' translates literally to 'check their performance'. A more natural translation for 'audit their performance' would imply a more in-depth review.",
+          "suggestion": "Nahraďte 'kontrolovať ich výkon' s 'sledovať ich výkon' or 'analyzovať ich výkon'."
         }
       ],
       "approved_at": null
@@ -409,8 +404,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'njihovo' in 'da preverite njegovo delovanje' should be 'njegovo delovanje' to improve readability. 'Njegovo' is correct grammatically but feels slightly awkward.",
-          "suggestion": "da preverite njegovo delovanje"
+          "description": "The term 'njihovo delovanje' is slightly awkward. While technically correct, it's not the most natural way to express 'their performance' in this context.",
+          "suggestion": "njihovo delovanje -> njihovo uspešnost"
         }
       ],
       "approved_at": null
@@ -420,19 +415,19 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The possessive suffix '-у' is unnecessary after {{organizationName}} {{productName}}. It creates an awkward phrasing in Serbian.  The phrase should read as a general location, not something belonging to the organization/product.",
-          "suggestion": "Користите webhooks да бисте извршили прилагођене акције на страни било које апликације или wеб странице коју користите на основу различитих догађаја у {{organizationName}} {{productName}}."
-        },
-        {
           "type": "spelling",
-          "description": "The repeated use of 'webhook' is inconsistent. Although 'webhook' is becoming common, Serbian prefers a transliteration. The correct transliteration is 'vebhuk'.",
-          "suggestion": "Користите vebhuk-ове да бисте извршили прилагођене акције на страни било које апликације или wеб странице коју користите на основу различитих догађаја у {{organizationName}} {{productName}}-у. Овде можете креирати и управљати свим својим vebhuk-овима, конфигурисати их и прегледати историју сваког vebhuk-а како бисте проверили њихову изведбу."
+          "description": "The word 'wеб' is misspelled. It should be 'веб'.",
+          "suggestion": "веб"
         },
         {
-          "type": "incorrect_translation",
-          "description": "The English word 'audit' implies a formal review or assessment, while the Serbian word 'проверили њихову изведбу' (proverili njihovu izvedbu) translates more literally to 'verified their performance.'  While performance verification is part of an audit, a more suitable word may be needed.",
-          "suggestion": "Користите vebhuk-ове да бисте извршили прилагођене акције на страни било које апликације или wеб странице коју користите на основу различитих догађаја у {{organizationName}} {{productName}}-у. Овде можете креирати и управљати свим својим vebhuk-овима, конфигурисати их и прегледати историју сваког vebhuk-а како бисте прегледали/контролисали њихов рад."
+          "type": "grammar",
+          "description": "The phrase 'различитих догађаја у {{organizationName}} {{productName}}-у' is grammatically awkward. It would be more natural to say 'различитих догађаја у {{organizationName}} {{productName}}'.",
+          "suggestion": "различитих догађаја у {{organizationName}} {{productName}}"
+        },
+        {
+          "type": "formatting",
+          "description": "Hyphenation of 'webhook-овима' is potentially awkward and might be more readable as 'webhook-ови'.",
+          "suggestion": "webhook-ови"
         }
       ],
       "approved_at": null
@@ -443,18 +438,18 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The phrase 'na strani bilo koje aplikacije ili web stranice koju koristite' is a bit awkward. It implies the actions are performed *on* the application/website itself, rather than based on events happening within the platform.",
-          "suggestion": "Koristite webhooks da biste izvršili prilagođene akcije u bilo kojoj aplikaciji ili web stranici koju koristite na osnovu različitih događaja..."
+          "description": "The phrase \"na strani bilo koje aplikacije ili web stranice koju koristite\" is a bit awkward. A more natural phrasing would be \"za bilo koju aplikaciju ili web stranicu koju koristite\".",
+          "suggestion": "Koristite webhooks da biste izvršili prilagođene akcije za bilo koju aplikaciju ili web stranicu koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u."
         },
         {
           "type": "grammar",
-          "description": "The possessive suffix '-u' after '{{productName}}' feels slightly unnatural in this context.  It's grammatically correct but makes the sentence a bit clunky.  It suggests ownership.",
-          "suggestion": "Koristite webhooks da biste izvršili prilagođene akcije u bilo kojoj aplikaciji ili web stranici koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}."
+          "description": "The use of the preposition \"na\" before \"strani\" might be overly literal and not as natural in Serbian in this context. Removing it would flow better.",
+          "suggestion": "Koristite webhooks da biste izvršili prilagođene akcije za bilo koju aplikaciju ili web stranicu koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u."
         },
         {
-          "type": "formatting",
-          "description": "Consistency: 'webhook-ovima' uses a hyphen when 'webhook-a' does not. Maintain consistent hyphenation.",
-          "suggestion": "Koristite webhooks da biste izvršili prilagođene akcije u bilo kojoj aplikaciji ili web stranici koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}. Ovde možete kreirati i upravljati svim svojim webhookovima, konfigurisati ih i pregledati istoriju svakog webhooka kako biste proverili njihovu izvedbu."
+          "type": "spelling",
+          "description": "The repeated use of \"webhook-a\" is grammatically correct but can be simplified by using the plural form consistently.",
+          "suggestion": "Koristite webhooks da biste izvršili prilagođene akcije za bilo koju aplikaciju ili web stranicu koju koristite na osnovu različitih događaja u {{organizationName}} {{productName}}-u. Ovde možete kreirati i upravljati svim svojim webhookovima, konfigurisati ih i pregledati istoriju svakog webhooka kako biste proverili njihovu izvedbu."
         }
       ],
       "approved_at": null
@@ -465,18 +460,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase 'webhook’larını is grammatically correct but could be improved for readability. Using a hyphen might make it more natural. Also, the repetition of 'webhook' can be reduced.",
-          "suggestion": "webhook'larınızı"
+          "description": "The Turkish translation includes double quotes around {{organizationName}} and {{productName}}, which is likely unintentional and breaks the intended dynamic substitution.",
+          "suggestion": "Remove the double quotes around {{organizationName}} and {{productName}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'perform custom actions' is somewhat generic. The Turkish translation 'özel eylemler gerçekleştirmek' is accurate but lacks the nuance of what 'custom actions' implies in a technical context. A more precise translation might involve specifying the type of actions.",
-          "suggestion": "özel işlemler gerçekleştirmek"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'audit their performance' is translated as 'performanslarını denetlemek'. While accurate, a more technical and appropriate term might be 'performanslarını incelemek' or 'performanslarını izlemek' to accurately reflect auditing in a technical context.",
-          "suggestion": "performanslarını inceleyebilirsiniz"
+          "description": "While generally accurate, 'perform custom actions' is slightly awkward in Turkish. A more natural phrasing might be used.",
+          "suggestion": "Consider replacing 'özel eylemler gerçekleştirmek' with something like 'özel işlemler yapmak' or 'özel işlevler yerine getirmek'."
         }
       ],
       "approved_at": null
@@ -487,8 +477,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"для перевірки його ефективності\" translates to 'to check its effectiveness' which isn't quite the intended meaning. It implies checking if the webhook *works*, but the English implies auditing the *performance*.",
-          "suggestion": "для перевірки його продуктивності"
+          "description": "The phrase 'перевірки його ефективності' is an awkward and not the most natural translation of 'audit their performance'. 'Перевірки його ефективності' literally translates to 'checking its effectiveness', which implies a test of efficiency rather than an audit for proper functioning.",
+          "suggestion": "переглядати історію кожного вебхуку для аудиту його роботи."
         }
       ],
       "approved_at": null
@@ -499,13 +489,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"bên cạnh\" in \"thực hiện các hành động tùy chỉnh ở bên cạnh bất kỳ ứng dụng hoặc trang web nào\" is awkward and doesn't accurately convey the intended meaning of 'on the side of'. It implies being next to, not operating within or using.",
-          "suggestion": "Sử dụng webhook để thực hiện các hành động tùy chỉnh trong bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng..."
+          "description": "The phrase \"ở bên cạnh\" in \"thực hiện các hành động tùy chỉnh ở bên cạnh bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng\" is awkward and doesn't accurately convey the meaning of \"on the side of\" in this context. It literally means 'beside'.",
+          "suggestion": "Sử dụng webhook để thực hiện các hành động tùy chỉnh trong bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}."
         },
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"kiểm tra hiệu suất của chúng\" is a literal translation of 'audit their performance' and may not resonate well with Vietnamese speakers. 'Audit' has a specific meaning related to formal review and can feel heavy or technical.",
-          "suggestion": "Sử dụng webhook để thực hiện các hành động tùy chỉnh trong bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng...Tại đây, bạn có thể tạo và quản lý tất cả các webhook của mình, định cấu hình chúng và xem lại lịch sử hoạt động của mọi webhook."
+          "description": "The word 'kiểm tra' (check) is not the best translation for 'audit' in this context. 'Audit' implies a more detailed review or analysis.",
+          "suggestion": "Sử dụng webhook để thực hiện các hành động tùy chỉnh trong bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.\nTại đây, bạn có thể tạo và quản lý tất cả các webhook của mình, định cấu hình chúng và xem lại lịch sử của mọi webhook để đánh giá hiệu suất của chúng."
         }
       ],
       "approved_at": null
@@ -516,13 +506,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'perform custom actions on the side of any application or website' is awkwardly translated. '端' (duan) often refers to the 'end' or 'side' of a device or system, but it's not ideal here. It creates a slightly unnatural phrasing.",
-          "suggestion": "使用 webhook 根据 {{organizationName}}{{productName}}中的各种事件，在您正在使用的应用程序或网站中执行自定义操作。"
+          "description": "The phrase \"在您正在使用的任何应用程序或网站端执行自定义操作\" is a bit awkward and overly literal. It could be more naturally expressed.",
+          "suggestion": "在您使用的任何应用程序或网站上执行自定义操作 (Perform custom actions on any application or website you use)."
         },
         {
-          "type": "formatting",
-          "description": "The translation maintains the English sentence structure which isn't always optimal for Chinese. While understandable, a more natural flow could be achieved.",
-          "suggestion": "使用 webhook，您可以根据 {{organizationName}}{{productName}} 中的各种事件，在您使用的任何应用程序或网站中执行自定义操作。"
+          "type": "incorrect_translation",
+          "description": "The sentence structure is slightly clunky. Combining the two sentences would improve readability.",
+          "suggestion": "使用 webhook 根据 {{organizationName}}{{productName}}中的各种事件在您使用的任何应用程序或网站上执行自定义操作。在这里，您可以创建和管理所有 webhook、配置它们，并浏览每个 webhook 的历史记录以审核其性能。"
         }
       ],
       "approved_at": null

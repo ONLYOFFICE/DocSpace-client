@@ -247,7 +247,7 @@ export const uploadLogo = async (
     data.append("logotype", type);
 
     return await axios.post(
-      `${window.ClientConfig?.proxy?.url}/logoUploader.ashx`,
+      `${window.location.origin}/logoUploader.ashx`,
       data,
     );
   } catch (error) {

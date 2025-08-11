@@ -3,7 +3,7 @@
   "content": "Presentation",
   "content_en_sha1_hash": "6e875951a6f9aa1374d93572de657c12ded57355",
   "created_at": "2025-05-19T21:30:47.449Z",
-  "updated_at": "2025-08-07T11:20:05.621Z",
+  "updated_at": "2025-08-11T10:23:51.753Z",
   "comment": {
     "text": "The translation key \"Presentation\" is used as a label for buttons related to creating presentations. It appears in various UI elements, such as main buttons and links, where it is displayed alongside an icon and allows users to create new presentations.",
     "is_auto": true,
@@ -36,13 +36,13 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 436,
-      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:Presentation\") })} (\n {logoUrls[11].size.width}x{logoUrls[11].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[11].name}",
+      "line_number": 478,
+      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:Presentation\") })} (\n {logoUrls[10].size.width}x{logoUrls[10].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[10].name}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getFileType.ts",
-      "line_number": 20,
+      "line_number": 23,
       "context": "case FileType.Image:\n return t(\"Common:Image\");\n case FileType.Spreadsheet:\n return t(\"Common:Spreadsheet\");\n case FileType.Presentation:\n return t(\"Common:Presentation\");\n case FileType.Diagram:\n return t(\"Common:Diagram\");\n case FileType.Document:\n case FileType.OFormTemplate:\n case FileType.OForm:",
       "module": "/packages/shared"
     }

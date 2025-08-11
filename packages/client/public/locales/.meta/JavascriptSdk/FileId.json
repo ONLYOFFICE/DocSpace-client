@@ -3,7 +3,7 @@
   "content": "File ID",
   "content_en_sha1_hash": "5b7759ea97bf167d05790986f3b244d934fe2f9f",
   "created_at": "2025-05-19T21:30:54.496Z",
-  "updated_at": "2025-05-21T09:08:54.103Z",
+  "updated_at": "2025-05-24T09:21:10.844Z",
   "comment": {
     "text": "This translation key is used to display the file ID as a label or placeholder. It appears on various screens in the UI, such as a settings page, where users can edit the file ID and preview changes before applying them.",
     "is_auto": true,
@@ -42,7 +42,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'Fay ID' is a misspelling and does not accurately convey 'File ID'. The correct translation would incorporate the Azerbaijani word for 'file'.",
+          "description": "The translation 'Fay ID' does not accurately reflect the meaning of 'File ID'. It appears to be a phonetic approximation rather than a proper translation.",
           "suggestion": "Dosya ID"
         }
       ],
@@ -120,13 +120,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"D ໄຟລ໌\" is not an accurate translation of \"File ID\". \"D\" typically means 'of' or 'belonging to', which isn't appropriate in this context. A more accurate translation would involve combining \"file\" with an identifier term.",
-          "suggestion": "ໄອດີໄຟລ໌ (Ai Di File) or ລະຫັດໄຟລ໌ (Ra-hat File)"
+          "description": "The Lao translation \"D ໄຟລ໌\" is not an accurate translation of \"File ID\". \"D\" typically means 'of' or 'belonging to', so it’s awkwardly placed.  A more appropriate translation would be something like \"ລະຫັດໄຟລ໌\" (lahat file) which means 'file code' or simply \"ລະຫັດໄຟລ໌\" (lahat file).",
+          "suggestion": "ລະຫັດໄຟລ໌"
         },
         {
           "type": "formatting",
-          "description": "The Lao script uses a space after the classifier 'D' when it precedes a noun. While not strictly incorrect, the space might improve readability.",
-          "suggestion": "D ໄຟລ໌ -> D ໄຟລ໌ "
+          "description": "The Lao text uses a full-width character for 'D', which doesn't match the surrounding text's font style if it's intended to be a standard Lao text.",
+          "suggestion": "Remove the full-width character formatting from 'D' to align with the rest of the text."
         }
       ],
       "approved_at": null
@@ -167,8 +167,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ID fișier' is a literal translation and might not be the most natural or idiomatic way to express 'File ID' in Romanian. While technically correct, it's a bit clunky.",
-          "suggestion": "Consider 'Identificator fișier' or 'Număr identificare fișier'. Alternatively, keeping 'ID fișier' is acceptable if brevity is paramount."
+          "description": "While \"ID fișier\" is understandable, a more natural and common Romanian translation for \"File ID\" would be \"ID-ul fișierului\". The current translation is a literal word-for-word translation that doesn't flow as well in Romanian.",
+          "suggestion": "ID-ul fișierului"
         }
       ],
       "approved_at": null
@@ -185,8 +185,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනුවේ හැඳු.' while understandable, is not the most natural or accurate translation of \"File ID\". It literally translates to \"File's Identity\".  A more common and accurate translation would be \"ගොනුවෙ ඩීඅයිඩී\" (Gonuwe D.I.D.) or \"ගොනුවෙ හැඳුම් පත\" (Gonuwe hadanum pata).",
-          "suggestion": "Consider using \"ගොනුවෙ ඩීඅයිඩී\" (Gonuwe D.I.D.) or \"ගොනුවෙ හැඳුම් පත\" (Gonuwe hadanum pata)."
+          "description": "The Sinhala translation \"ගොනුවේ හැඳු.\" while containing the words for \"file\" (ගොනුවේ) and \"ID\" (හැඳු), doesn't fully convey the meaning of 'File ID'. A more accurate translation would consider phrasing like 'ගොනැファイルのID' (Gonai File ID) or 'ගොනැファイルのඅංකය' (Gonai File Number).",
+          "suggestion": "Consider 'ගොනැファイルのID' (Gonai File ID) or 'ගොනැファイルのඅංකය' (Gonai File Number)."
         }
       ],
       "approved_at": null
@@ -209,7 +209,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'ID датотеке' is not the most natural or accurate translation of 'File ID'. It literally translates to 'ID of file'. A more idiomatic and accurate translation would be 'ИД датотеке' or 'Број датотеке'.",
+          "description": "The Serbian (Cyrillic) translation 'ID датотеке' is not the most accurate translation of 'File ID'.  It literally translates to 'ID of file'. A more natural and accurate translation would be 'ИД датотеке' or 'Број датотеке'.",
           "suggestion": "ИД датотеке"
         }
       ],
@@ -218,7 +218,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"ID datoteke\" is understandable, a more idiomatic and accurate translation of \"File ID\" in Serbian (Latin) would be \"Identifikacioni broj datoteke\" or simply \"Datoteke ID\". \"ID datoteke\" feels slightly less natural.",
+          "suggestion": "Identifikacioni broj datoteke"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "There are no rooms here yet",
   "content_en_sha1_hash": "a00289e348e163164ea7a94f54699117bbd7df83",
   "created_at": "2025-05-19T21:30:56.498Z",
-  "updated_at": "2025-06-03T20:59:41.806Z",
+  "updated_at": "2025-06-02T10:20:51.034Z",
   "comment": {
     "text": "This translation key is used for the empty room header message, displayed when there are no rooms available. It appears as part of a header component in an application related to room management and organization, likely on a list or view of empty rooms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 302,
+      "line_number": 306,
       "context": "t(\"Common:EmptyRootRoomHeader\", {\n productName: t(\"Common:ProductName\"),\n }),\n )\n .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>\n t(\"EmptyView:EmptyRootRoomUserTitle\"),\n )\n .with([FolderType.RoomTemplates, P._], () =>\n t(\"EmptyView:EmptyTemplatesTitle\"),\n )\n .with([FolderType.USER, ShareAccessRights.None], () =>",
       "module": "/packages/client"
     }
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເທົ່າ​ໃດ​ນີ້​ຍັງ​ບໍ​ມີ​ຫ້ອງ' literally translates to 'What is it, there are no rooms yet?' which doesn't accurately convey the meaning of 'There are no rooms here yet.' It implies a question and a sense of uncertainty.",
+          "suggestion": "ອັນດັບນີ້​ຍັງບໍ​ມີ​ຫ້ອງ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Nicio sală deocamdată aici' is not the most natural or accurate rendering of 'There are no rooms here yet.' While technically correct, it sounds a bit awkward in Romanian. 'Deocamdată' implies a temporary state, which might not be intended. A better option would convey the lack of rooms in a more direct and common way.",
+          "suggestion": "Consider alternatives like 'Nu sunt încă camere aici' or 'Nu sunt încă spații aici' or 'Nu sunt camere aici încă'."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +183,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Још увек нема соба овде' is not the most natural or precise translation of 'There are no rooms here yet'. While understandable, it's a bit literal. A more idiomatic translation would convey the meaning more effectively.",
+          "suggestion": "Нема соба овде још."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Još uvek nema soba ovde' is overly literal and sounds awkward in Serbian. A more natural and idiomatic translation would be 'Nema soba ovde' or 'Ovde još uvek nema soba'. The 'Još uvek' adds unnecessary emphasis and formality.",
+          "suggestion": "Nema soba ovde"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -201,7 +225,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"此处暂无房间\" is understandable, a more natural and common translation would be \"这里没有房间\" or \"目前还没有房间\". \"暂无\" implies a temporary lack, which isn't necessarily the intended meaning. \"此处\" is also slightly formal for this context.",
+          "suggestion": "这里没有房间"
+        }
+      ],
       "approved_at": null
     }
   }

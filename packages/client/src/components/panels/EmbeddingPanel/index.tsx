@@ -32,7 +32,8 @@ import isEqual from "lodash/isEqual";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import pkg from "PACKAGE_FILE";
-
+import { TRoom } from "@docspace/shared/api/rooms/types";
+import { TFunction } from "i18next";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Textarea } from "@docspace/shared/components/textarea";
@@ -52,9 +53,9 @@ import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
-import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
+import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
@@ -162,6 +163,8 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
     init: true,
+    showTitle: false,
+    showFilter: false,
   };
 
   const roomConfig = {
@@ -267,14 +270,21 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   };
 
   const onEditLink = () => {
-    setLinkParams({ ...linkParams, isEdit: true, link: selectedLink ?? link });
+    setLinkParams({
+      ...linkParams,
+      isEdit: true,
+      link: selectedLink ?? link,
+    } as LinkParamsType);
     setEditLinkPanelIsVisible(true);
   };
 
-  const onChangeSharedLink = (item: TOptionType) => {
-    setSelectedLink(item);
+  const onChangeSharedLink = (item: TOption) => {
+    setSelectedLink(item as TOptionType);
     setEmbeddingConfig((config) => {
-      return { ...config, requestToken: item?.sharedTo?.requestToken };
+      return {
+        ...config,
+        requestToken: (item as TOptionType)?.sharedTo?.requestToken,
+      };
     });
   };
 
@@ -337,7 +347,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   }, [itemId, getLinks]);
 
   const usePrevious = (value: LinkParamsLinkType | null) => {
-    const ref = useRef<LinkParamsLinkType | null>();
+    const ref = useRef<LinkParamsLinkType | null>(undefined);
     useEffect(() => {
       ref.current = value;
     });
@@ -395,6 +405,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       withBodyScroll
       displayType={ModalDialogType.aside}
       withoutPadding
+      dataTestId="embedding_panel_modal"
     >
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -404,7 +415,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               <Text fontSize="12px" fontWeight={400}>
                 {isAdmin ? (
                   <Trans
-                    t={t}
+                    t={t as TFunction}
                     ns="EmbeddingPanel"
                     i18nKey="EmbeddingBarAllowList"
                     components={{
@@ -413,6 +424,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                           onClick={onOpenDevTools}
                           color={currentColorScheme?.main?.accent}
                           isHovered
+                          dataTestId="embedding_panel_dev_tools_link"
                         />
                       ),
                     }}
@@ -430,6 +442,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 size={12}
                 iconName={CrossReactSvg}
                 onClick={onCloseBar}
+                dataTestId="embedding_panel_banner_close"
               />
             </div>
           ) : null}
@@ -452,6 +465,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   displaySelectedOption
                   directionY="bottom"
                   withLabel={false}
+                  dataTestId="embedding_panel_link_selector"
                 />
               </>
             ) : null}
@@ -509,6 +523,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("JavascriptSdk:Header")}
                     description={t("JavascriptSdk:HeaderDescription")}
+                    dataTestId="show_title"
                   />
                   <CheckboxElement
                     label={t("JavascriptSdk:SearchFilterAndSort")}
@@ -516,6 +531,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     isChecked={embeddingConfig.showFilter}
                     img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     title={t("JavascriptSdk:SearchBlock")}
+                    dataTestId="show_filter"
                     description={t(
                       "JavascriptSdk:ManagerSearchBlockDescription",
                     )}
@@ -537,8 +553,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 size={16}
                 iconName={CopyReactSvgUrl}
                 onClick={onCopyLink}
+                dataTestId="embedding_panel_copy_code"
               />
-              <Textarea isReadOnly value={codeBlock} heightTextArea="150px" />
+              <Textarea
+                isReadOnly
+                value={codeBlock}
+                heightTextArea="150px"
+                dataTestId="embedding_panel_code_textarea"
+              />
             </div>
           </div>
         </StyledBody>
@@ -552,6 +574,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           onClick={onCopyAndClose}
           label={t("Common:Copy")}
           isLoading={isLoading}
+          testId="embedding_panel_copy_button"
         />
         <Button
           className="cancel-button"
@@ -560,6 +583,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           onClick={onClose}
           label={t("Common:CancelButton")}
           isLoading={isLoading}
+          testId="embedding_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -583,8 +607,8 @@ export default inject<TStore>(
       theme,
       currentColorScheme,
       visible: embeddingPanelData.visible,
-      itemId: embeddingPanelData.item?.id,
-      isRoom: embeddingPanelData.item?.isRoom,
+      itemId: (embeddingPanelData.item as unknown as TRoom)?.id,
+      isRoom: (embeddingPanelData.item as unknown as TRoom)?.isRoom,
       setEmbeddingPanelData,
       setEditLinkPanelIsVisible,
       linkParams,

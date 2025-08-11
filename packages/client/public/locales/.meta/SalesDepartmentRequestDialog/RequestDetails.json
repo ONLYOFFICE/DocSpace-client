@@ -3,7 +3,7 @@
   "content": "Please describe your request details here.",
   "content_en_sha1_hash": "e3d8ba02396cc0208836153dd6559764b59673bd",
   "created_at": "2025-05-19T21:30:53.276Z",
-  "updated_at": "2025-06-18T07:34:14.909Z",
+  "updated_at": "2025-06-18T17:11:42.381Z",
   "comment": {
     "text": "This translation key is used to display a placeholder message in a textarea field within a sales department request dialog, prompting users to enter their request details. The text will be visible when the \"request details\" input is empty or disabled due to an error check.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"ඔබගේ ඉල්ලීම මෙහි විස්තර කරන්න.\" literally translates to 'Describe your request here'. While understandable, it lacks the polite imperative 'Please' that is present in the English original. The English phrasing is considered more courteous in a request context.",
+          "suggestion": "ඔබගේ ඉල්ලීම මෙහි විස්තර කරන්න, කරුණාකර."
+        }
+      ],
       "approved_at": null
     },
     "sk": {

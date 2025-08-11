@@ -61,7 +61,7 @@ export interface ArticleItemType {
 
 export type ArticleItemProps = PickedDivProps & {
   /** Catalog item icon */
-  icon: string;
+  icon?: string;
   /** Catalog item text */
   text: string;
   /** Sets the catalog item to display text */
@@ -104,4 +104,7 @@ export type ArticleItemProps = PickedDivProps & {
   linkData: TArticleLinkData;
   /** Item data */
   item?: ArticleItemType;
+  /** Catalog item icon for SSR */
+  iconNode?: React.ReactNode;
+  withAnimation?: boolean;
 };

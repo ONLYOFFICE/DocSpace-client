@@ -26,14 +26,13 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "@docspace/shared/styles/variables/devices";
-@import "@docspace/shared/styles/mixins";
+@use "@docspace/shared/styles/mixins";
 
 .rootScrollbar {
   :global(> .scroll-wrapper > .scroller > .scroll-body) {
     display: flex;
 
-    @include not-mobile {
+    @include mixins.not-mobile {
       padding: 0 !important;
       height: 100%;
       width: 100%;

@@ -3,7 +3,7 @@
   "content": "You can disable header in the mobile version to limit access to the {{productName}} sections (just like disabling the left menu in the desktop version).",
   "content_en_sha1_hash": "8acce461de78709e974894ea33c37a29838d943c",
   "created_at": "2025-05-19T21:30:54.519Z",
-  "updated_at": "2025-05-28T09:30:02.360Z",
+  "updated_at": "2025-08-11T09:02:43.892Z",
   "comment": {
     "text": "This translation key describes the content that will be displayed when users disable the header on mobile devices, explaining its purpose as limiting access to specific sections of a product. It appears in a UI component related to panel settings and is used for accessibility purposes.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 511,
-      "context": "label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}",
+      "line_number": 525,
+      "context": "label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}\n dataTestId=\"show_title\"\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 556,
+      "line_number": 570,
       "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Header\")}\n description={t(\"HeaderDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n />\n }",
       "module": "/packages/client"
     }
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word \"ترويسة\" (tarwisa) for \"header\" is technically correct but sounds awkward and is not commonly used in this context. A more natural phrasing would be using a more general term like \"شريط الرأس\" (sharee' ar-ra's) or simply omitting it and referring to the entire top section.",
-          "suggestion": "Consider using \"شريط الرأس\" (sharee' ar-ra's) or a more descriptive phrase that conveys the meaning of 'header' in this context, or rephrasing to avoid the term entirely."
+          "description": "The term \"الترويسة\" (al-tarwisa) for 'header' is technically correct but sounds overly formal and might not be the most natural way to refer to a website header in a user-facing context. A more common and accessible term might be preferable.",
+          "suggestion": "Consider using a more colloquial term for 'header' like \"الشريط العلوي\" (al-sharee' al-'ulwi) or \"الرأس\" (ar-ra's)."
+        },
+        {
+          "type": "formatting",
+          "description": "The Arabic text uses a standard Arabic word order. While grammatically correct, for improved readability in a user interface, consider restructuring the sentence to flow more naturally for Arabic readers, possibly placing the reason at the beginning.",
+          "suggestion": "يمكنك تعطيل الشريط العلوي في إصدار الجوال لتقييد الوصول إلى أقسام {{productName}}، تمامًا مثل تعطيل القائمة اليسرى في إصدار سطح المكتب."
         }
       ],
       "approved_at": null
@@ -48,13 +53,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"söndürmək\" (to extinguish/turn off) is not the best fit for 'disable' in this context. A more accurate translation would convey deactivation or removal.",
-          "suggestion": "Mobil versiyada başlığı deaktiv edə bilərsiniz (masaüstü versiyada sol menyunu silmək kimi)."
+          "description": "The phrase \"söndürmək kimi\" (like turning off) is awkward and doesn't accurately convey the meaning of 'disabling'. It's too literal and doesn't flow naturally in Azerbaijani.",
+          "suggestion": "Consider using a phrase like \"məhdudlaşdırmaq kimi\" (like limiting) or rephrasing to something more natural like \"mobil versiyada başlığı deaktiv etmək, masaüstü versiyada sol menyunu gizlətmək kimi bir şeydir.\""
         },
         {
           "type": "formatting",
-          "description": "The structure of the comparison \"just like disabling the left menu in the desktop version\" is slightly awkward in Azerbaijani. It could be improved for flow.",
-          "suggestion": "Mobil versiyada başlığı deaktiv edə bilərsiniz, tıpkı masaüstü versiyada sol menyunu söndürmək kimi."
+          "description": "While the double curly braces for `{{productName}}` are present, it's important to ensure the backend rendering correctly handles these placeholders in the Azerbaijani version.",
+          "suggestion": "Verify that the rendering engine in the Azerbaijani locale correctly interprets and replaces `{{productName}}`."
         }
       ],
       "approved_at": null
@@ -70,9 +75,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The word 'header' is translated as 'záhlaví', which is technically correct but a bit formal and uncommon in this context. A more natural and understandable translation might be 'hlavičku'.",
-          "suggestion": "Consider translating 'header' as 'hlavičku'."
+          "type": "formatting",
+          "description": "The Czech translation uses 'zákázat záhlaví' which is a bit clunky. While technically correct, a more natural phrasing would be better.",
+          "suggestion": "V mobilní verzi můžete vypnout záhlaví..."
         }
       ],
       "approved_at": null
@@ -80,7 +85,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'genau wie' (just like) can sound a bit clunky and formal in this context. A more natural phrasing might be preferred.",
+          "suggestion": "Sie können die Kopfzeile in der mobilen Version deaktivieren, um den Zugriff auf die {{productName}}-Abschnitte einzuschränken (ähnlich wie das Deaktivieren des linken Menüs in der Desktop-Version)."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -89,8 +100,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The phrase \"όπως ακριβώς απενεργοποιείτε\" is slightly verbose and less natural in this context. A more concise phrasing would improve readability.",
-          "suggestion": "όπως απενεργοποιείτε"
+          "description": "The curly brackets around 'productName' are inconsistent. The English content uses {{productName}}, while the Greek translation doesn't. This needs to be standardized.",
+          "suggestion": "Change the Greek translation to: Μπορείτε να απενεργοποιήσετε την κεφαλίδα στην έκδοση για κινητά για να περιορίσετε την πρόσβαση στα τμήματα του {{productName}} (όπως ακριβώς απενεργοποιείτε το αριστερό μενού στην έκδοση για υπολογιστές)."
         }
       ],
       "approved_at": null
@@ -107,8 +118,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The term \"ylätunniste\" is a direct translation of \"header\" but might not be the most natural way to express it in Finnish in this context. \"Pääotsikko\" or \"otsikko\" could be more suitable depending on the specific UI element being referred to.",
-          "suggestion": "Consider using 'pääotsikko' or 'otsikko' instead of 'ylätunniste' for better readability and naturalness. The best choice would depend on the precise nature of the header being described."
+          "description": "The term \"header\" is translated as \"ylätunniste\". While technically correct, \"otsikko\" or \"pääotsikko\" might be more natural and understandable for a broader Finnish audience. \"Ylätunniste\" is a more technical term.",
+          "suggestion": "Consider using 'otsikko' or 'pääotsikko' instead of 'ylätunniste'."
+        },
+        {
+          "type": "formatting",
+          "description": "The parentheses after \"mobiiliversiossa\" are slightly awkward. The sentence flow can be improved by repositioning them.",
+          "suggestion": "Consider rephrasing to 'Voit poistaa otsikon käytöstä mobiiliversiossa, mikä rajoittaa pääsyä...' or 'Voit poistaa otsikon käytöstä mobiiliversiossa, jolloin pääsy...'."
         }
       ],
       "approved_at": null
@@ -119,7 +135,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"identique à\" (identical to) might not be the most natural way to express 'just like' in this context. It sounds a bit formal.",
+          "description": "The phrase \"identique à\" is a literal translation of \"just like\" and sounds slightly awkward in French. A more natural phrasing would be 'comme' or 'de la même manière que'.",
           "suggestion": "Vous pouvez désactiver l'en-tête dans la version mobile pour limiter l'accès aux sections de {{productName}} (comme la désactivation du menu de gauche dans la version de bureau)."
         }
       ],
@@ -131,13 +147,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"վերնագիրը\" (vernagiri) translates to 'header' but in this context, 'navigation bar' or 'navigation menu' would be more accurate and natural in Armenian.",
-          "suggestion": "Consider translating as: \"նավիգացիոն շարաբանը\" (navigatsion sharabani) or a similar equivalent for 'navigation bar/menu'."
+          "description": "The phrase \"վերնագիրը\" (vernagiry) translates to 'header' but in this context, 'header' is referring to a toolbar or navigation bar. A more accurate translation might be something like \"նավագացման պանելը\" (navagacman panely) or \"վերին մասը\" (verin masy).",
+          "suggestion": "Consider replacing \"վերնագիրը\" with \"նավագացման պանելը\" or \"վերին մասը\" for better accuracy."
         },
         {
           "type": "incorrect_translation",
-          "description": "The use of \"աշխատասեղանի տարբերակում ձախ ընտրացանկն անջատելը\" (ashkhatasghani tarberakume dzakh entratsankn anjatelum) is a bit literal. A more natural phrasing would express the idea of disabling a sidebar or similar functionality.",
-          "suggestion": "Consider a more natural phrasing like: \"աշխատասեղանի տարբերակում ձախ դրույթները ծածկելու համար\" (ashkhatasghani tarberakume dzakh drouyte nery tsadqeluy hamar) – which means 'to hide the left options on the desktop version'."
+          "description": "The phrase “ձախ ընտրացանկն” (dax entracankn) directly translates to “left menu”. While accurate, a slightly more natural phrasing in Armenian might be preferable.",
+          "suggestion": "Consider rephrasing to a more natural construction, like \"ձախ դրացորդը\" or \"ձախ կողմը\" depending on the precise meaning."
         }
       ],
       "approved_at": null
@@ -148,8 +164,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The use of parentheses in the Italian translation feels slightly awkward. While grammatically correct, it's not as fluid as it could be.",
-          "suggestion": "Puoi disabilitare l'intestazione nella versione mobile per limitare l'accesso alle sezioni {{productName}}, come puoi disabilitare il menu a sinistra nella versione desktop."
+          "description": "The phrase 'proprio come' is a bit verbose and could be more concise. While grammatically correct, it makes the sentence slightly clunky.",
+          "suggestion": "Puoi disabilitare l'intestazione nella versione mobile per limitare l'accesso alle sezioni {{productName}} (come disabilitare il menu a sinistra nella versione desktop)."
         }
       ],
       "approved_at": null
@@ -160,13 +176,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"することができます\" (suru koto ga dekimasu) implies ability, but the English suggests permission or a specific action enabled. A more accurate phrasing would convey that the user *chooses* to disable the header.",
-          "suggestion": "モバイル版でヘッダーを無効にすることで、{{productName}}セクションへのアクセスを制限できます。デスクトップ版で左メニューを無効にするのと同じです。"
-        },
-        {
-          "type": "formatting",
-          "description": "The word 'のと同じです' is a bit abrupt at the end. While not incorrect, it could be slightly improved for flow.",
-          "suggestion": "モバイル版でヘッダーを無効にすることで、{{productName}}セクションへのアクセスを制限できます。デスクトップ版で左メニューを無効にするのと同様です。"
+          "description": "The phrase \"just like disabling the left menu in the desktop version\" is a bit clunky and doesn't flow naturally in Japanese. While technically correct, it lacks elegance.",
+          "suggestion": "モバイル版でヘッダーを無効にすることで、デスクトップ版で左メニューを無効にするのと同様に、{{productName}}セクションへのアクセスを制限できます。"
         }
       ],
       "approved_at": null
@@ -174,13 +185,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The parenthesis usage is slightly awkward. While technically correct, it sounds less natural in Korean.",
-          "suggestion": "모바일 버전에서 헤더를 비활성화하여 {{productName}} 섹션에 대한 액세스를 제한할 수 있습니다. 데스크톱 버전에서 왼쪽 메뉴를 비활성화하는 것과 동일합니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -188,14 +193,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"ປິດການທໍາງານ\" (pid gaan tham ngan) is a bit literal and can be improved. While technically correct for 'disable', a more natural phrasing would be better.",
-          "suggestion": "ທ່ານສາມາດເຊົາໃຊ້ (tham saan chao) ຫຼື ປິດ (pid) header ໃນສະບັບມືຖື..."
+          "type": "formatting",
+          "description": "The use of parentheses around 'desktop' is unusual in Lao and makes the sentence slightly awkward. It's better to integrate it smoothly into the sentence structure.",
+          "suggestion": "ທ່ານ​ສາ​ມາດ​ປິດ​ການ​ທໍາ​ງານ header ໃນ​ສະ​ບັບ​ມື​ຖື​ເພື່ອ​ຈໍາ​ກັດ​ການ​ເຂົ້າ​ເຖິງ​ພາກ {{productName}} (ເຊັ່ນ​ດຽວ​ກັບ​ການ​ປິດ​ການ​ທໍາ​ງານ​ຂອງ​ເມ​ນູ​ຊ້າຍ​ໃນ​ສະບັບ desktop ທີ່​ໃຊ້​ງານ​ຢູ່​ໃນ​ຄອມພິວເຕີ້​)."
         },
         {
-          "type": "formatting",
-          "description": "The use of parentheses around \"ສະບັບ desktop\" is slightly awkward. It interrupts the flow of the sentence.",
-          "suggestion": "ທ່ານສາມາດປິດການທໍາງານ header ໃນສະບັບມືຖື ເພື່ອຈໍາກັດການເຂົ້າເຖິງພາກ {{productName}} (ເຊັ່ນດຽວກັນກັບການປິດການທໍາງານຂອງເມນູຊ້າຍໃນສະບັບ desktop)"
+          "type": "incorrect_translation",
+          "description": "The word 'ທີ່​ໃຊ້​ງານ​ຢູ່' (that is used) is an added word that isn't present in the original English. It adds unnecessary complexity and doesn't improve understanding. Consider omitting it for a more concise translation.",
+          "suggestion": "ທ່ານ​ສາ​ມາດ​ປິດ​ການ​ທໍາ​ງານ header ໃນ​ສະ​ບັບ​ມື​ຖື​ເພື່ອ​ຈໍາ​ກັດ​ການ​ເຂົ້າ​ເຖິງ​ພາກ {{productName}} (ເຊັ່ນ​ດຽວ​ກັບ​ການ​ປິດ​ການ​ທໍາ​ງານ​ຂອງ​ເມ​ນູ​ຊ້າຍ​ໃນ​ສະບັບ desktop​)​."
         }
       ],
       "approved_at": null
@@ -203,7 +208,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation uses parentheses instead of brackets for the `{{productName}}` placeholder. This is inconsistent with the English version which uses brackets.",
+          "suggestion": "Change `{{productName}}` to `[productName]`"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -215,7 +226,18 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"analogicznie do\" is a bit formal and doesn't flow as naturally as alternatives. A more colloquial and direct translation would improve readability.",
+          "suggestion": "Możesz wyłączyć nagłówek w wersji mobilnej, aby ograniczyć dostęp do sekcji {{productName}} (podobnie jak wyłączenie menu po lewej stronie w wersji na komputery)."
+        },
+        {
+          "type": "formatting",
+          "description": "While not incorrect, 'komputery stacjonarne' is slightly more formal than necessary. It's generally understood that 'komputery' refers to desktop computers in this context.",
+          "suggestion": "Możesz wyłączyć nagłówek w wersji mobilnej, aby ograniczyć dostęp do sekcji {{productName}} (podobnie jak wyłączenie menu po lewej stronie w wersji na komputery)."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -236,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'header' is translated as 'antetul'. While 'antet' is a valid translation, 'header' in this context refers to a top navigation bar. A more appropriate translation might be 'bara de navigare superioară' or simply 'bara de sus'.",
-          "suggestion": "bara de navigare superioară"
+          "description": "The word 'header' is translated as 'antetul'. While technically correct, 'header' can also be translated as 'bara de sus' or 'cap de pagină' for better clarity in this context. 'Antetul' sounds a bit formal and less natural in this scenario.",
+          "suggestion": "Consider translating 'header' as 'bara de sus' or 'cap de pagină'."
         }
       ],
       "approved_at": null
@@ -245,13 +267,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'так же, как' is a somewhat literal translation of 'just like' and might sound slightly unnatural in Russian. A more natural phrasing would better convey the intended meaning.",
-          "suggestion": "Вы можете отключить заголовок в мобильной версии, чтобы ограничить доступ к разделам {{productName}} (аналогично отключению левого меню в десктопной версии)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -260,13 +276,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"වැඩතල අනුවාදයේ වම්පස වට්ටෝරුව\" is not an accurate translation of \"the left menu in the desktop version.\" 'වට්ටෝරුව' translates to 'flap' or 'cover', not 'menu'.",
-          "suggestion": "වැඩතල අනුවාදයේ වම්පස මෙනුව"
+          "description": "The phrase \"වැඩතල අනුවාදයේ වම්පස වට්ටෝරුව\" is a literal translation of \"left menu\" and might not be the most natural or clear way to express the concept in Sinhala. It's a bit clunky and doesn't quite capture the nuance of a menu in a desktop application.",
+          "suggestion": "Consider rephrasing to something like \"ඩෙස්‍ටොප් අනුවාදයේ පේනුව\" or \"ඩෙස්‍ටොප් අනුවාදයේ මාර්ග පෙන්වීම\" to more naturally convey the meaning of 'left menu' in a desktop environment."
         },
         {
           "type": "formatting",
-          "description": "The Sinhala translation is a bit clunky and could be improved for flow. Consider reordering to match the natural flow of Sinhala.",
-          "suggestion": "ඔබට {{productName}} කොටස් වෙත ප්‍රවේශය සීමා කිරීමට, ජංගම අනුවාදයේ ශ්‍රීර්ෂකය අබල කළ හැකිය. වැඩතල අනුවාදයේ මෙන්ම, වම්පස මෙනුව අබල කිරීමේ හැකියාව මෙහි ද ඇත."
+          "description": "The use of the Sinhala script within the otherwise Sinhala sentence feels jarring. While technically correct, it might be more natural to fully integrate the variable into the sentence using the same script.",
+          "suggestion": "Consider replacing '{{productName}}' with the Sinhala equivalent of 'productName', or integrating it more seamlessly into the Sinhala flow."
         }
       ],
       "approved_at": null
@@ -276,9 +292,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The Slovak translation uses 'hlavičku' which is the accusative case. Since it's being disabled, the instrumental case ('hlavičkou') might be more grammatically correct, although 'hlavičku' is understandable.",
-          "suggestion": "Consider using 'hlavičkou' instead of 'hlavičku' for a slightly more precise grammatical construction."
+          "type": "incorrect_translation",
+          "description": "The term \"hlavičku\" (header) is technically correct but can sound a bit awkward in this context. A more natural Slovak phrasing might use a term like \"hornej lišty\" (top bar) or rephrase to avoid the direct translation.",
+          "suggestion": "Consider replacing \"hlavičku\" with \"hornej lišty\" or rephrasing to something like: \"V mobilnej verzii môžete vypnúť hornú lištu a obmedziť tak prístup...\""
         }
       ],
       "approved_at": null
@@ -289,8 +305,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Slovenian translation uses parentheses ( ) instead of curly braces { } to denote the variable replacement for 'productName'. The English uses curly braces.",
-          "suggestion": "Change '{{productName}}' to '[productName]' or use curly braces consistently."
+          "description": "The translation uses parentheses instead of brackets for the placeholder {{productName}}. The English content uses brackets.",
+          "suggestion": "V mobilni različici lahko onemogočite glavo, da omejite dostop do razdelkov {{productName}} (tako kot onemogočite levi meni v namizni različici)."
         }
       ],
       "approved_at": null
@@ -301,8 +317,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"баш као да\" (bash kao da) translates to \"just as if\" which isn't the most natural way to convey the intended meaning of \"just like\". It makes the sentence slightly awkward.",
-          "suggestion": "Можете да онемогуц́ите заглавље у мобилној верзији да бисте ограничили приступ одељцима {{productName}}-а (као и да онемогуц́ите леви мени у верзији за десктоп)."
+          "description": "The phrase \"баш као да онемогуц́ите леви мени у верзији за десктоп\" is a bit awkward and could be improved for clarity.  A more natural phrasing would emphasize the equivalence.",
+          "suggestion": "баш као што је леви мени онемогућен у десктоп верзији."
+        },
+        {
+          "type": "formatting",
+          "description": "The use of \"-а\" after {{productName}} feels slightly unnatural in this context. It would be more consistent to either omit it or use a more flexible formulation that doesn't require a possessive ending.",
+          "suggestion": "{{productName}} или {{productName}} секције"
         }
       ],
       "approved_at": null
@@ -312,14 +333,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "incorrect_translation",
-          "description": "The phrase \"baš kao da onemogućite\" is a bit awkward. A more natural phrasing would be \"poput onemogućavanja\" or \"kao da onemogućavate\".",
-          "suggestion": "Možete da onemogućite zaglavlje u mobilnoj verziji da biste ograničili pristup odeljcima {{productName}}-a (poput onemogućavanja leveg menija u verziji za desktop)."
-        },
-        {
           "type": "formatting",
-          "description": "The use of \"-a\" in \"{{productName}}-a\" feels slightly unnatural in Serbian. It's grammatically correct but less common.",
-          "suggestion": "Možete da onemogućite zaglavlje u mobilnoj verziji da biste ograničili pristup odeljcima {{productName}} (poput onemogućavanja leveg menija u verziji za desktop)."
+          "description": "The Serbian translation uses a hyphenated possessive construction ('productName-a'). In Serbian, it's more natural to use a genitive case suffix directly: 'productName-e'.",
+          "suggestion": "Možete da onemogućite zaglavlje u mobilnoj verziji da biste ograničili pristup odeljcima {{productName}}-e (baš kao da onemogućite levi meni u verziji za desktop)."
         }
       ],
       "approved_at": null
@@ -330,7 +346,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"just like disabling the left menu in the desktop version\" could be more naturally translated. A direct translation might sound awkward. A more natural phrasing would convey the comparison more effectively.",
+          "description": "The phrase \"just like disabling the left menu in the desktop version\" could be more naturally translated.  A more common phrasing in Turkish would emphasize the parallel nature of the action.",
           "suggestion": "masaüstü sürümünde sol menüyü devre dışı bırakmak gibi bir şekilde"
         }
       ],
@@ -342,13 +358,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"простору\" (prostoru) translates to \"space\" and doesn't quite fit the context of sections or areas within the product. It's clunky.",
-          "suggestion": "Ви можете вимкнути заголовок у мобільній версії, щоб обмежити доступ до розділів {{productName}} (подібно до вимкнення лівого меню у версії для настільного комп’ютера)."
+          "description": "The phrase 'простору {{productName}}' (space {{productName}}) doesn't accurately convey the meaning of 'sections' in the English context. It sounds unnatural in Ukrainian.",
+          "suggestion": "розділів {{productName}}"
         },
         {
           "type": "formatting",
-          "description": "The phrase 'подібно до' should likely be 'як' for a more natural flow.  'подібно' is less common and slightly formal.",
-          "suggestion": "Ви можете вимкнути заголовок у мобільній версії, щоб обмежити доступ до розділів {{productName}} (як вимкненню лівого меню у версії для настільного комп’ютера)."
+          "description": "The phrasing 'подібно вимкненню' is awkward. It could be phrased more elegantly.",
+          "suggestion": "як і вимкнення"
         }
       ],
       "approved_at": null
@@ -359,13 +375,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'header' is translated as 'tiêu đề'. While technically correct, 'header' in this context refers to a UI element and 'thanh tiêu đề' or 'đầu trang' might be more accurate and commonly used in Vietnamese for a UI context. Using 'tiêu đề' implies a title of a document or section, not a UI component.",
+          "description": "The term 'header' is translated as 'tiêu đề'. While technically correct, 'header' in this context refers to a specific UI element. A more precise translation might be 'thanh tiêu đề' or 'đầu trang'.",
           "suggestion": "Bạn có thể tắt thanh tiêu đề trong phiên bản dành cho thiết bị di động để hạn chế quyền truy cập vào các phần {{productName}} (giống như tắt menu bên trái trong phiên bản dành cho máy tính để bàn)."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation maintains the use of {{productName}} which is consistent with the source English. This is good. However, ensure that the translation system/implementation will correctly handle this placeholder during the translation process and that it is rendered correctly in the Vietnamese version.",
-          "suggestion": "No change needed - ensure proper rendering of {{productName}}."
         }
       ],
       "approved_at": null
@@ -373,7 +384,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"禁用标题\" (disable header) is slightly awkward. While technically correct, it doesn't convey the intended meaning as smoothly as other options.  A more natural phrasing would be something like \"禁用头部\" or \"隐藏头部\" which is more common for user interface elements.",
+          "suggestion": "您可以在移动版本中禁用头部以限制对{{productName}}部分的访问（就像在桌面版本中禁用左侧菜单一样）。 or 您可以在移动版本中隐藏头部以限制对{{productName}}部分的访问（就像在桌面版本中禁用左侧菜单一样）。"
+        }
+      ],
       "approved_at": null
     }
   }

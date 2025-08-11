@@ -28,16 +28,14 @@
 
 import React from "react";
 import { Id, toast, ToastPosition } from "react-toastify";
-import styled from "styled-components";
+import classNames from "classnames";
 
 import CheckToastReactSvg from "PUBLIC_DIR/images/check.toast.react.svg";
 import DangerToastReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
 import InfoToastReactSvg from "PUBLIC_DIR/images/info.toast.react.svg";
 import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import commonIconsStyles, {
-  IconSizeType,
-} from "../../../utils/common-icons-style";
+import { IconSizeType } from "../../../utils/common-icons-style";
 import { getCookie } from "../../../utils/cookie";
 
 import { Text } from "../../text";
@@ -49,18 +47,6 @@ import styles from "../Toast.module.scss";
 
 const DEFAULT_TIMEOUT = 5000;
 const MIN_TIMEOUT_THRESHOLD = 750;
-
-const StyledIcons = {
-  Check: styled(CheckToastReactSvg)`
-    ${commonIconsStyles}
-  `,
-  Danger: styled(DangerToastReactSvg)`
-    ${commonIconsStyles}
-  `,
-  Info: styled(InfoToastReactSvg)`
-    ${commonIconsStyles}
-  `,
-};
 
 interface NotifyConfig {
   type: ToastType;
@@ -98,16 +84,28 @@ const getTitle = (type: "Done" | "Warning" | "Alert" | "Info") => {
 const Icon = ({ type, size }: { type: ToastType; size: IconSizeType }) => {
   const iconMap = {
     [ToastType.success]: (
-      <StyledIcons.Check size={size} className="toastr_icon toastr_success" />
+      <CheckToastReactSvg
+        data-size={size}
+        className="toastr_icon toastr_success"
+      />
     ),
     [ToastType.error]: (
-      <StyledIcons.Danger size={size} className="toastr_icon toastr_error" />
+      <DangerToastReactSvg
+        data-size={size}
+        className={classNames(styles.toastrIcon, "toastr_icon toastr_error")}
+      />
     ),
     [ToastType.warning]: (
-      <StyledIcons.Danger size={size} className="toastr_icon toastr_warning" />
+      <DangerToastReactSvg
+        data-size={size}
+        className={classNames(styles.toastrIcon, "toastr_icon toastr_warning")}
+      />
     ),
     [ToastType.info]: (
-      <StyledIcons.Info size={size} className="toastr_icon toastr_info" />
+      <InfoToastReactSvg
+        data-size={size}
+        className={classNames(styles.toastrIcon, "toastr_icon toastr_info")}
+      />
     ),
   };
 

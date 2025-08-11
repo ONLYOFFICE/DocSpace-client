@@ -270,6 +270,7 @@ const ExternalLinks = ({
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
           isDisabled={isLinksToggling}
+          dataTestId="invite_panel_external_links_toggle"
         />
       </StyledSubHeader>
       <StyledDescription noSelect>
@@ -295,6 +296,7 @@ const ExternalLinks = ({
               isReadOnly
               iconName={CopyReactSvgUrl}
               onIconClick={onCopyLink}
+              dataTestId="invite_panel_external_link_input"
             />
           </StyledInviteInput>
           <AccessSelector
@@ -310,6 +312,7 @@ const ExternalLinks = ({
             selectionErrorText={<PaidQuotaLimitError />}
             filteredAccesses={filteredAccesses}
             availableAccess={availableAccess}
+            dataTestId="invite_panel_external_link_access"
           />
         </StyledInviteInputContainer>
       ) : null}

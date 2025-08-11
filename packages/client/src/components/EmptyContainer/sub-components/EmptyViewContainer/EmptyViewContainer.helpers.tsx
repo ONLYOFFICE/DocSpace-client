@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { type JSX } from "react";
 import { P, match } from "ts-pattern";
 import { isMobile } from "react-device-detect";
 
@@ -159,7 +159,7 @@ export const getIcon = (
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
-    : getRoomIcon(type, isBaseTheme, access);
+    : getRoomIcon(type, isBaseTheme, access)!;
 };
 
 export const getOptions = (

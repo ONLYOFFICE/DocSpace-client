@@ -3,7 +3,7 @@
   "content": "About",
   "content_en_sha1_hash": "6b21fb791ac05170893860c248401cd24a59b732",
   "created_at": "2025-05-19T21:30:42.789Z",
-  "updated_at": "2025-05-28T09:30:02.150Z",
+  "updated_at": "2025-05-26T07:57:32.194Z",
   "comment": {
     "text": "This translation key is used for the text \"About\" that appears on a navigation menu link in the client-side application. It serves as a label for a header element displaying the link to access information about the app or its features. The text is part of a larger UI component and will be displayed with a style indicating it's a clickable link.",
     "is_auto": true,
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation 'Informationen' while literally meaning 'information', doesn't directly translate the English word 'About'. 'About' often implies a description or overview, which 'Informationen' doesn't fully capture. A more suitable translation might depend on the context, but 'Über' or 'Was es ist' could be better alternatives.",
-          "suggestion": "Consider 'Über' or 'Was es ist' depending on the context."
+          "description": "The German translation 'Informationen' while literally meaning 'information', doesn't perfectly convey the meaning of 'About' in this context. 'Über' might be a more suitable translation, depending on the context. 'Über' could be used as a preposition meaning 'about' or 'regarding'.",
+          "suggestion": "Consider 'Über' as a possible alternative, or investigate the specific context to determine the most accurate translation.  If it refers to 'About Us' type content, 'Über uns' would be more accurate."
         }
       ],
       "approved_at": null
@@ -99,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Informazioni su' is a common and generally acceptable translation for 'About', but it's a bit verbose and less concise than other potential options. While not strictly *wrong*, it's not the most elegant or direct translation.",
-          "suggestion": "Consider a shorter alternative like 'Su' or 'Di' depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Polish translation \"O\" does not accurately convey the meaning of \"About\". \"About\" typically refers to information describing a subject or topic.",
-          "suggestion": "Consider translations like \"O\" (for a brief reference), \"Informacje o\" (About - Information about), \"Dotyczy\" (Concerns), or \"Opis\" (Description), depending on the context."
+          "description": "The Polish translation \"O\" is not an accurate translation of \"About\". \"About\" typically implies information or description, which requires a more complex translation.",
+          "suggestion": "Possible alternatives include \"O\",\"Dotyczące\",\"Informacje o\" depending on the context."
         }
       ],
       "approved_at": null
@@ -168,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'About' often translates to 'Despre' in Romanian, which is more suitable in many contexts. 'Informații' means 'Information'.",
-          "suggestion": "Consider 'Despre' as a more accurate translation of 'About'."
+          "description": "The Romanian translation 'Informații' while technically meaning 'information', doesn't accurately convey the meaning of 'About' in this context (as a section heading or label). It's too literal.",
+          "suggestion": "Consider 'Despre' or 'Prezentare' as more appropriate translations depending on the exact context. 'Despre' is a more direct equivalent and 'Prezentare' indicates an overview or introduction."
         }
       ],
       "approved_at": null
@@ -189,13 +183,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation \"O aplikácii\" translates to \"About the application.\" While potentially acceptable in some contexts, it's more literal than the English \"About.\" A more direct and commonly used equivalent could be just \"O\" or \"Prečo\".",
-          "suggestion": "Consider \"O\" or \"Prečo\" for a more concise and potentially accurate translation, depending on the specific context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -210,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation \"У вези са\" translates to \"In relation to\" or \"Regarding\". It doesn't directly translate the English word \"About\".",
-          "suggestion": "Consider a more direct translation like \"О\" (O) or \"О нама\" (O nama - About us)."
+          "description": "The Serbian (Cyrillic) translation \"У вези са\" does not accurately convey the meaning of \"About.\" \"У вези са\" translates to \"in connection with\" or \"regarding,\" which is not equivalent to \"About.\"  \"About\" typically introduces a topic or provides information.",
+          "suggestion": "A more accurate translation could be \"О\" (O) or \"У име\" (U ime), depending on the specific context."
         }
       ],
       "approved_at": null
@@ -222,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"U vezi sa\" doesn't accurately convey the simple meaning of \"About\". It translates to \"In relation to\" or \"Regarding\", which is more complex than the English word \"About\".",
-          "suggestion": "Consider alternatives like \"O\" or \"Što se tiče\" which more closely match the meaning of \"About\"."
+          "description": "The Serbian translation \"U vezi sa\" does not accurately convey the meaning of \"About.\" \"U vezi sa\" translates to \"In relation to\" or \"Regarding.\" \"About\" can have many meanings (e.g., a description, the topic of something, concerning something).",
+          "suggestion": "Consider alternative translations such as \"O\" (most direct translation for 'About' when referring to a description), or \"Više o\" (More about) depending on the specific context."
         }
       ],
       "approved_at": null
@@ -240,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Інформація\" (Informatsiya) is a literal translation of \"Information\" rather than \"About.\" While it conveys a related concept, it doesn't accurately reflect the English meaning of \"About.\" \"About\" often refers to a description or overview, which \"Інформація\" doesn't perfectly capture.",
-          "suggestion": "Consider alternatives like \"Про\" (Pro) or \"Огляд\" (Ohliad) depending on the specific context. \"Про\" is often the most suitable, being a direct equivalent to \"About\"."
+          "description": "The Ukrainian translation 'Інформація' while generally meaning 'Information', doesn't perfectly capture the nuance of 'About'. 'About' often implies a description or overview, whereas 'Інформація' is more directly 'information'. A more suitable translation might be 'Про' or 'О'.",
+          "suggestion": "Consider 'Про' or 'О' for a more accurate translation."
         }
       ],
       "approved_at": null

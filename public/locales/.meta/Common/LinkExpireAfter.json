@@ -3,7 +3,7 @@
   "content": "The link will expire after <1>{{date}}</1>",
   "content_en_sha1_hash": "f9f44c4a33ec8d0bd302053f5c321d452539b5a3",
   "created_at": "2025-05-19T21:30:46.171Z",
-  "updated_at": "2025-05-28T09:30:02.953Z",
+  "updated_at": "2025-06-02T10:20:51.583Z",
   "comment": {
     "text": "The \"LinkExpireAfter\" translation key is used to display the message \"The link will expire after <1>{{date}}</1>\" in various UI elements, such as buttons and dropdowns. This text provides context for users about how long a shareable link remains active. It appears in components like the Expired ComboBox and Share helpers.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 301,
-      "context": "const date = getDate(expirationDate);\n \n return (\n <Trans\n t={t}\n i18nKey=\"LinkExpireAfter\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong /> }}\n />\n );",
+      "line_number": 300,
+      "context": "const date = getDate(expirationDate);\n \n return (\n <Trans\n t={t}\n i18nKey=\"LinkExpireAfter\"\n ns=\"Common\"\n values={{ date }}\n components={{ 1: <strong key=\"strong-expire-after\" /> }}\n />\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/ExpiredComboBox.tsx",
-      "line_number": 134,
-      "context": "const getExpirationTrans = () => {\n if (expirationDate) {\n const date = getDate(expirationDate);\n \n return (\n <Trans t={t} i18nKey=\"LinkExpireAfter\" ns=\"Common\">\n The link will expire after\n <LinkWithDropdown\n className=\"expired-options\"\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
+      "line_number": 135,
+      "context": "const getExpirationTrans = () => {\n if (expirationDate) {\n const date = getDate(expirationDate);\n \n return (\n <Trans t={t} i18nKey=\"LinkExpireAfter\" ns=\"Common\">\n The link will expire after\n <LinkWithDropdown\n className={styles.expiredOptions}\n color={globalColors.lightBlueMain}\n dropdownType=\"alwaysDashed\"",
       "module": "/packages/shared"
     }
   ],
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'The link will expire after' is not perfectly conveyed by 'ستنتهي صلاحية الرابط بعد'. A more accurate translation would be something along the lines of 'سيصبح الرابط منتهي الصلاحية بعد' or 'سوف ينتهي срок صلاحية الرابط بعد'. The current translation is understandable, but less natural.",
-          "suggestion": "سيصبح الرابط منتهي الصلاحية بعد"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -48,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'expire' is not accurately translated. 'Başa çatacaq' implies completion or reaching an end, which isn't the best fit for 'expiration' in this context. A more accurate translation for 'expire' would be something along the lines of 'bitəcək' or 'keçərliliyi sona çatacaq'.",
-          "suggestion": "Consider 'Link <1>{{date}}</1> bitəcək' or 'Link <1>{{date}}</1>-ın keçərliliyi sona çatacaq'"
+          "description": "The translation \"Link <1>{{date}}</1> sonra başa çatacaq\" doesn't accurately convey the meaning of \"The link will expire after <1>{{date}}</1>\". It literally translates to 'Link will end after [date].'  A more accurate translation would incorporate the phrase 'will expire'.",
+          "suggestion": "Link <1>{{date}}</1> keçmişində keçəcək"
         },
         {
           "type": "formatting",
-          "description": "The formatting tags (<1> and </1>) are not properly integrated into the translated sentence. While they're present, the Azerbaijani structure feels a little unnatural with them.",
-          "suggestion": "Reconsider the placement of the tags within the natural flow of the Azerbaijani sentence. For example: '<1>{{date}}</1> linki başa çatacaq.'"
+          "description": "The Azerbaijani translation lacks equivalent formatting tags (e.g., <1> and </1>).",
+          "suggestion": "If the tags need to be preserved for some reason, include equivalent tags in Azerbaijani. Otherwise, they should be removed."
         }
       ],
       "approved_at": null
@@ -74,7 +68,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"expire\" is better translated as \"verfällt\" or \"wird ungültig\" in this context rather than \"abläuft\". \"Abläuft\" typically implies a scheduled event, whereas the link's expiration is more about becoming invalid.",
+          "suggestion": "Der Link verfällt nach dem <1>{{date}}</1>"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -95,8 +95,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'after' is not accurately reflected in the Finnish translation. 'Jälkeen' implies 'after' in the sense of 'following,' but it's better to convey that the link will expire *on* the specified date. A more accurate translation would imply expiration *on* the date, not after.",
-          "suggestion": "Linkki vanhenee <1>{{date}}</1> päivänä"
+          "description": "The English phrase 'after <1>{{date}}</1>' implies the link expires *on* the date specified, not *after* it. The Finnish translation 'Linkki vanhenee <1>{{date}}</1> jälkeen' literally translates to 'The link expires after <1>{{date}}</1> after', which is redundant and doesn't accurately convey the intended meaning. A better translation would reflect expiration *on* the date.",
+          "suggestion": "Linkki vanhenee <1>{{date}}</1>"
         }
       ],
       "approved_at": null
@@ -113,13 +113,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"The link will expire after\" is not accurately translated into Armenian. \"Հղման ժամկետը կսպառվի\" literally translates to 'The link's term will expire'. A more accurate translation would be something like \"Հղումը կավճեմք...\" or \"Հղումը գործողությունը կդադարեցնի...\"",
-          "suggestion": "Consider translating \"The link will expire after\" as \"Հղումը կավճեմք\" or \"Հղումը գործողությունը կդադարեցնի\"."
+          "description": "The Armenian translation 'Հղման ժամկետը կսպառվի <1>{{date}}</1>-ից հետո' literally translates to 'The link deadline will expire after <1>{{date}}</1>'. While understandable, it sounds awkward and less natural in Armenian. A more natural phrasing would convey the expiration *on* the date, rather than *after*.",
+          "suggestion": "Հղումը կավտանգվի <1>{{date}}</1>-ին"
         },
         {
           "type": "formatting",
-          "description": "The HTML tags `<1>` and `</1>` are inconsistent with typical XML/HTML tag conventions.  They don't match common practices like `<date>` and `</date>`.",
-          "suggestion": "Consider standardizing the tags to `<date>` and `</date>` or another consistent format."
+          "description": "The XML tags `<1>` are likely placeholders for a dynamic value. While the translation correctly preserves them, it is unclear if the Armenian output needs to mirror this precise formatting. Assuming they represent the 'LinkExpireAfter' key placeholder, ensure this is handled correctly during rendering.",
+          "suggestion": "Confirm the purpose and correct implementation of the `<1>` tags with the development team. The translation should be able to render properly with whatever tags are ultimately used."
         }
       ],
       "approved_at": null
@@ -135,9 +135,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence lacks a natural flow. While technically correct, it reads somewhat stiffly. The addition of a particle would improve readability.",
-          "suggestion": "リンクの有効期限は<1>{{date}}</1>です。"
+          "type": "formatting",
+          "description": "The Japanese translation lacks the 'です' particle at the end, which is essential for politeness and grammatical correctness when making a statement. While understandable without it, it is less natural.",
+          "suggestion": "リンクの有効期限は<1>{{date}}</1>です"
         }
       ],
       "approved_at": null
@@ -151,13 +151,30 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation 'ເຊື່ອມຕໍ່ຈະໝົດອາຍຫຼັງຈາກ' while conveying the general meaning, can be improved for better flow and naturalness. A more accurate and common phrasing would be 'ເຊື່ອມຕໍ່ຈະໝົດເວລາຫຼັງຈາກ'. 'ໝົດອາຍ' translates more literally to 'run out of air' and isn't the typical way to describe link expiration.",
+          "suggestion": "ເຊື່ອມຕໍ່ຈະໝົດເວລາຫຼັງຈາກ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Saites derīguma termiņš beigsies pēc' is a bit overly formal and verbose for the simple English 'The link will expire after'. A more natural and concise translation would be 'Saites izbeigsies pēc'.",
+          "suggestion": "Saites izbeigsies pēc"
+        },
+        {
+          "type": "formatting",
+          "description": "The HTML tags <1> and </1> are present in both the English and Latvian translations. While technically correct, they don't have a functional purpose in the context of a user interface and might be best removed to avoid unnecessary complexity.",
+          "suggestion": "Remove the <1> and </1> tags"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -190,13 +207,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Link-ul expiră după data' is a bit too literal and doesn't flow naturally in Romanian. 'Data' is redundant as 'expiră' already implies a date.",
+          "description": "The Romanian translation uses \"după data\" which literally translates to \"after the date\". It's more natural to say \"după\" alone when referring to a time period after which something expires. \"După data\" implies a specific date is the trigger, which isn't necessarily the intent.",
           "suggestion": "Link-ul expiră după <1>{{date}} </1>"
-        },
-        {
-          "type": "formatting",
-          "description": "The HTML tags <1> and </1> are placed before and after the entire phrase, which is inconsistent with the English content where they surround the placeholder variable.",
-          "suggestion": "The tags should be placed correctly around the variable only: Link-ul expiră după <1>{{date}}</1>"
         }
       ],
       "approved_at": null
@@ -213,13 +225,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සබැඳිය <1>{{date}}</1>ට පසු කල් ඉකුත් වේ' doesn't quite capture the meaning of 'The link will expire after <1>{{date}}</1>'.  'පසු' (passu) implies 'after' but creates a slightly awkward phrasing.  A more natural phrasing would be 'සබැඳිය <1>{{date}}</1> දිනාවත අවසන් වේ' or 'සබැඳිය <1>{{date}}</1> දිනදී සකසීuwen හැලුවේ'.",
-          "suggestion": "Consider using 'සබැඳිය <1>{{date}}</1> දිනාවත අවසන් වේ' or 'සබැඳිය <1>{{date}}</1> දිනදී සකසීuwen හැලුවේ'"
-        },
-        {
-          "type": "formatting",
-          "description": "The XML tags <1> and </1> are preserved in the Sinhala translation, which may not be necessary or intended. These tags should be handled during the application's rendering, not in the translation itself.",
-          "suggestion": "Remove the XML tags from the translation. The translation should be 'සබැඳිය {{date}}ට පසු කල් ඉකුත් වේ' or the suggested alternative translations."
+          "description": "The translation \"සබැඳිය <1>{{date}}</1>ට පසු කල් ඉකුත් වේ\" is a literal translation but doesn't flow naturally in Sinhala. A more natural phrasing would be something like \"සබැඳිය <1>{{date}}</1> දින අවසානයේදී වලංගුභාවය නැතිවේ\" or \"සබැඳිය <1>{{date}}</1> දිනදී සකසNULL වේ\".",
+          "suggestion": "Consider revising to \"සබැඳිය <1>{{date}}</1> දින අවසානයේදී වලංගුභාවය නැතිවේ\" or \"සබැඳිය <1>{{date}}</1> දිනදී සකසNULL වේ\"."
         }
       ],
       "approved_at": null
@@ -242,8 +249,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation \"Линк ће да истекне после <1>{{date}}</1>\" literally translates to 'The link will to expire after...' which is grammatically awkward. A more natural and accurate translation would be 'Линк истекне после...' or 'Линк ће истећи после...'",
-          "suggestion": "Линк истекне после <1>{{date}}</1>"
+          "description": "The Serbian translation 'Линк ће да истекне после <1>{{date}}</1>' translates literally to \"The link will expire after...\" which is grammatically correct, but a more natural and common phrasing in Serbian would be \"Линк важи до <1>{{date}}</1>\" (The link is valid until...).",
+          "suggestion": "Линк важи до <1>{{date}}</1>"
         }
       ],
       "approved_at": null
@@ -260,13 +267,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase \"will expire after\" is better translated as \"geçerliliği bitecek\" or \"geçerliliği dolacak\" in Turkish, rather than \"sona erecektir.\" While \"sona erecektir\" isn't *wrong*, it's less natural in this context. The translation sounds a bit formal for a link expiration message.",
-          "suggestion": "Bağlantının geçerliliği <1>{{date}}</1> tarihinden sonra bitecektir"
+          "description": "The English phrase 'expire after' is not accurately translated. 'Sona erecektir' implies the link ends *on* the date, not *after* the date. A more accurate translation would convey 'after' the specified date.",
+          "suggestion": "Bağlantı <1>{{date}}</1> tarihinden sonra geçerliliğini yitirecektir"
         },
         {
           "type": "formatting",
-          "description": "The original English has `<1>` and `</1>` tags, and these are replicated in the Turkish translation. This might need to be reviewed for consistency with the application's formatting requirements. If the application doesn't handle these tags, they should be removed.",
-          "suggestion": "If the tags are unnecessary, remove them. If they are used for some formatting purpose, verify that they function correctly in the application."
+          "description": "The format tags (<1>{{date}}</1>) are replicated in the Turkish translation. While likely intentional, it's worth confirming this is the desired formatting in the Turkish context.",
+          "suggestion": "Confirm desired formatting of tags with Turkish stakeholders."
         }
       ],
       "approved_at": null
@@ -277,8 +284,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'expire' is best translated as 'закінчиться термін дії' (zakinchytysia termin dii) or 'стане недійсним' (стане neDiisnym), not just 'буде недійсним' (bude nediisnym). While 'буде недійсним' isn't *incorrect*, it's less natural and slightly weaker in conveying the concept of a link expiring.",
-          "suggestion": "Посилання буде недійсним через <1>{{date}}</1> or Посилання закінчить термін дії через <1>{{date}}</1>"
+          "description": "The English phrase \"expire\" is better translated as \"закінчиться термін дії\" (zakinchytysia termin dii) or \"стане недійсним\" (стане ne diisnym) to accurately convey the meaning of a link becoming invalid.",
+          "suggestion": "Посилання буде недійсним після <1>{{date}}</1> -> Посилання закінчить термін дії після <1>{{date}}</1> or Посилання стане недійсним після <1>{{date}}</1>"
         }
       ],
       "approved_at": null
@@ -295,8 +302,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'expire after' is not directly translated. It implies a point in time *after* which the link is no longer valid.  '后过期' implies the expiration happens *at* the date, not after.",
-          "suggestion": "链接将在 <1>{{date}}</1> 之后失效"
+          "description": "The phrase 'expire after' is not directly equivalent to '后过期'. A more natural and accurate translation would be '将在...失效' or '将在...到期'.  '后过期' sounds slightly awkward.",
+          "suggestion": "链接将在 <1>{{date}}</1> 失效"
         }
       ],
       "approved_at": null

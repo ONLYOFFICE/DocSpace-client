@@ -3,7 +3,7 @@
   "content": "You are about to delete this file.",
   "content_en_sha1_hash": "12797f707deb7f223de1f2eebb40023119bca631",
   "created_at": "2025-05-19T21:30:44.462Z",
-  "updated_at": "2025-06-18T07:34:14.878Z",
+  "updated_at": "2025-06-30T12:20:31.224Z",
   "comment": {
     "text": "This translation key is used for a confirmation message displayed when deleting a file. It prompts the user to confirm the deletion and explains that the file will be permanently deleted. This message appears in a dialog when a user attempts to delete a file.",
     "is_auto": true,
@@ -12,26 +12,26 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 199,
+      "line_number": 203,
       "context": "return isSingle ? (\n isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 199,
+      "line_number": 203,
       "context": "return isSingle ? (\n isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 199,
+      "line_number": 203,
       "context": "return isSingle ? (\n isFolder ? (\n t(\"DeleteFolder\")\n ) : (\n <>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </>\n )\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/doceditor/src/components/DeleteFileDialog.tsx",
-      "line_number": 47,
-      "context": "return (\n <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:MoveToTrashTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n <>{t(\"Common:DeleteFile\")} </>\n <>{t(\"Common:FilePermanentlyDeleted\")} </>\n <>{t(\"Common:WantToContinue\")}</>\n </span>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "line_number": 51,
+      "context": "sectionName: t(\"Common:TrashSection\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <span>\n {t(\"Common:DeleteFile\")}\n {t(\"Common:FilePermanentlyDeleted\")}\n {t(\"Common:WantToContinue\")}\n </span>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/doceditor"
     }
   ],
@@ -101,9 +101,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "spelling",
+          "description": "The word 'ֆայլը' is a transliteration of 'file' and while understandable, 'գրաբառ' (grabarr) or a more native term for 'file' might be preferred for greater clarity and naturalness.",
+          "suggestion": "Consider using a more idiomatic Armenian word for 'file' if appropriate for the context. For example, 'ևս մեկ ֆայլ' could be considered based on context."
+        },
+        {
           "type": "incorrect_translation",
-          "description": "The translation 'Դուք պատրաստվում եք ջնջել այս ֆայլը:' is a literal translation, but 'file' is often translated as 'գրաբառ' (grabar) or sometimes transliterated as 'ֆայլ' (fayl) depending on the context. While 'ֆայլը' isn't technically *wrong*, 'գրաբառը' might sound more natural in a system message.",
-          "suggestion": "Consider using 'Դուք պատրաստվում եք ջնջել այս գրաբառը:' or 'Դուք պատրաստվում եք ջնջել այս ֆայլը:' - the latter being acceptable, the former potentially sounding slightly more natural."
+          "description": "While 'Դուք պատրաստվում եք ջնջել այս ֆայլը:' is grammatically correct, a more natural phrasing for a system message might be 'Ջնջելու եք այս ֆայլը:' or 'Պատրաստվում եք ջնջել այս ֆայլը:'.",
+          "suggestion": "Ջնջելու եք այս ֆայլը:"
         }
       ],
       "approved_at": null
@@ -120,8 +125,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'このファイルを削除しようとしています。' (Kono fairu o sakujo shiyou to shiteimasu.) is a bit too verbose and formal for a simple confirmation message like 'You are about to delete this file.'. It translates to 'You are trying to delete this file.' which implies an ongoing action instead of a confirmation.",
-          "suggestion": "よりシンプルな表現にする: 'このファイルを削除しますか？' (Kono fairu o sakujo shimasu ka?) - 'Will you delete this file?' or 'ファイルを削除します。' (Fairu o sakujo shimasu.) - 'Deleting the file.'"
+          "description": "The translation \"このファイルを削除しようとしています。\" literally translates to \"I am about to delete this file.\" While functionally similar, it's a more formal/technical phrasing than the English \"You are about to delete this file.\" A more natural and user-friendly translation would convey a sense of user action, rather than stating the system's action.",
+          "suggestion": "このファイルを削除しますか？ (Kono fairu o sakujo shimasu ka?) - 'Are you going to delete this file?' or  このファイルを削除します。(Kono fairu o sakujo shimasu.) - 'This file will be deleted.'"
         }
       ],
       "approved_at": null
@@ -132,8 +137,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Korean translation '이 파일을 삭제하려고 합니다. ' (I 파일을 삭제하려고 합니다.) is a bit formal and doesn't perfectly convey the directness of 'You are about to delete this file.'. A more natural phrasing would be closer to '이 파일을 삭제할 예정입니다.' or '이 파일을 삭제합니다.'",
-          "suggestion": "이 파일을 삭제할 예정입니다. (I 파일을 삭제할 예정입니다.) or 이 파일을 삭제합니다. (I 파일을 삭제합니다.)"
+          "description": "The Korean translation '이 파일을 삭제하려고 합니다. ' is a literal translation but sounds slightly unnatural in Korean. A more natural phrasing would be something like '이 파일을 삭제하시겠습니까?' or '이 파일을 삭제하시겠어요?'",
+          "suggestion": "이 파일을 삭제하시겠습니까? or 이 파일을 삭제하시겠어요?"
         }
       ],
       "approved_at": null
@@ -159,13 +164,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Zamierzasz usunąć ten plik.' while grammatically correct, is a bit formal for a user-facing message. A more conversational and user-friendly option would be better.",
-          "suggestion": "Rozpoczniesz usuwanie tego pliku."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -174,18 +173,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Este está prestes a apagar este ficheiro.' is not the most natural or accurate translation of 'You are about to delete this file.'  'Este está' is grammatically incorrect and doesn't convey the intended meaning. 'Apagar' is a valid verb for delete, but the phrasing feels awkward.",
-          "suggestion": "Você está prestes a excluir este ficheiro."
+          "description": "The translation \"Este está prestes a apagar este ficheiro.\" is not a natural or accurate translation of \"You are about to delete this file.\" The phrasing 'Este está' is awkward and doesn't convey the intended meaning clearly.  'Apagar' while meaning 'to delete', isn't the most common verb used in this context. 'Ficheiro' is the European Portuguese spelling; Brazilian Portuguese would use 'arquivo'.",
+          "suggestion": "A more accurate and natural translation would be something like: 'Você está prestes a apagar este ficheiro.' (Brazilian Portuguese) or 'Está prestes a apagar este ficheiro.' (European Portuguese)."
         },
         {
           "type": "grammar",
-          "description": "The phrase 'Este está prestes' contains a grammatical error. 'Este' should be conjugated to match the subject or omitted for more natural phrasing.",
-          "suggestion": "Use 'Você está prestes' or 'Está prestes'."
-        },
-        {
-          "type": "formatting",
-          "description": "The translation includes repetition of the word 'este'. While technically correct, it's stylistically less elegant.",
-          "suggestion": "Consider rephrasing to avoid repetition, for instance: 'Você está prestes a excluir o ficheiro.'"
+          "description": "The phrase 'Este está' is grammatically unusual. It lacks a clear subject and verb agreement.",
+          "suggestion": "Rephrase to clarify the subject performing the action. As suggested above, 'Está prestes a apagar...'"
         }
       ],
       "approved_at": null
@@ -214,8 +208,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ඔබ මෙම ගොනුව මැකීමට සැරසෙමින් සිටියි.' translates to 'You are about to attempt to delete this file.' It implies an attempt rather than a confirmation that the deletion is happening. A more accurate translation would be closer to 'You are deleting this file.'",
-          "suggestion": "ඔබ මෙම ගොනුව මැකමින් සිටියි."
+          "description": "The translation 'ඔබ මෙම ගොනුව මැකීමට සැරසෙමින් සිටියි.' is overly verbose and not a natural way to phrase a file deletion confirmation in Sinhala. It translates to 'You are preparing to delete this file.' which is more formal than necessary. A simpler and more common phrasing would be more appropriate.",
+          "suggestion": "ඔබ මෙම ගොනුව මැකන්න."
         }
       ],
       "approved_at": null
@@ -231,9 +225,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "grammar",
-          "description": "The sentence structure is slightly awkward. While grammatically correct, it sounds less natural in Slovenian. 'Boste' is a future tense auxiliary verb, and 'Izbrisati' (to delete) would flow better directly before the object 'to datoteko'.",
-          "suggestion": "Izbrišete to datoteko."
+          "type": "spelling",
+          "description": "The translation contains a period at the end, which isn't present in the English source.",
+          "suggestion": "Remove the period at the end: 'Izbrisali boste to datoteko'"
         }
       ],
       "approved_at": null
@@ -244,7 +238,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Спремате се да обришете ову датотеку' is a literal translation that sounds unnatural in Serbian. 'Обришете' implies a more permanent deletion, while 'delete' can sometimes refer to temporary removal.",
+          "description": "The Serbian translation \"Спремате се да обришете ову датотеку.\" while understandable, isn't the most natural or idiomatic translation of 'You are about to delete this file.' A more natural phrasing would use 'брисати' instead of 'обришете'.  'Обришете' implies erasing or destroying completely, which isn't always the intended meaning.",
           "suggestion": "Спремате се да избришете ову датотеку."
         }
       ],
@@ -256,13 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Spremate se da obrišete ovu datoteku' is not an accurate translation of 'You are about to delete this file.' It literally translates to 'Prepare yourself to delete this file.' A more accurate translation would convey the action is happening.",
-          "suggestion": "Vi ćete obrisati ovu datoteku."
-        },
-        {
-          "type": "spelling",
-          "description": "While 'datoteku' is a valid word, 'datoteu' might be more common and flow better. This is a minor stylistic point.",
-          "suggestion": "Vi ćete obrisati ovu datoteu."
+          "description": "The translation \"Spremate se da obrišete ovu datoteku\" is not a direct or accurate translation of \"You are about to delete this file.\" It literally translates to \"Prepare yourself to delete this file.\"  A more natural and accurate translation would be something like \"Izbrisat ćete ovu datoteku.\" or \"Obrišićete ovu datoteku.\" The current translation sounds overly formal and awkward.",
+          "suggestion": "Izbrisat ćete ovu datoteku."
         }
       ],
       "approved_at": null

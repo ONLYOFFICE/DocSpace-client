@@ -3,7 +3,7 @@
   "content": "New application",
   "content_en_sha1_hash": "3c9a5e52344fe5d1311b3b6f36b19391cf89eac0",
   "created_at": "2025-05-19T21:30:53.916Z",
-  "updated_at": "2025-05-21T07:09:43.001Z",
+  "updated_at": "2025-08-04T07:30:01.422Z",
   "comment": {
     "text": "This translation key is used for \"New application\" and appears as a header title when editing or accessing OAuth settings. It is displayed on a button in the portal settings UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/OAuthSectionHeader/index.tsx",
-      "line_number": 69,
-      "context": "isFill\n onClick={onBack}\n className=\"arrow-button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
+      "line_number": 70,
+      "context": "onClick={onBack}\n className=\"arrow-button\"\n dataTestId=\"arrow_back_button\"\n />\n \n {isEdit ? t(\"EditApp\") : t(\"NewApp\")}\n </div>\n </Heading>\n </HeaderContainer>\n </StyledContainer>\n );",
       "module": "/packages/client"
     }
   ],
@@ -156,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'නව අයදුම්පත්‍රය' is understandable, a more accurate translation of 'New application' would be 'නව යෙදුම' (nava yeduma). 'අයදුම්පත්‍රය' typically refers to an application *form*, while 'නව යෙදුම' refers to a new *application* (as in software).",
-          "suggestion": "නව යෙදුම"
+          "description": "While 'නව අයදුම්පත්‍රය' is a literal translation of 'new application', it's not the most natural or idiomatic way to express it in Sinhala.  'අයදුම්පත්‍රය' means 'application'. A more natural translation would be something like 'නව යෝජනා' (New proposal) or 'නව වැඩසටහන්' (New project/scheme), depending on the context of 'application'. Without further context, 'නව අයදුම්පත්' is acceptable but less common.",
+          "suggestion": "Consider 'නව යෝජනා' or 'නව වැඩසටහන්' for improved naturalness, or 'නව අයදුම්පත්' if a very literal translation is preferred."
         }
       ],
       "approved_at": null

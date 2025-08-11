@@ -3,7 +3,7 @@
   "content": "Empty archive",
   "content_en_sha1_hash": "a34ca8c2e425ac975dd4ded311c4e04ac532fd9f",
   "created_at": "2025-05-19T21:30:55.267Z",
-  "updated_at": "2025-06-03T20:59:42.290Z",
+  "updated_at": "2025-08-04T07:30:01.596Z",
   "comment": {
     "text": "The \"Empty archive\" translation key is used to display a message when an archive is emptied. It appears in a restore all dialog and indicates that all archived items have been removed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1332,
+      "line_number": 1336,
       "context": "if (isExistActiveItems) return;\n \n this.dialogsStore.setRestoreAllPanelVisible(true);\n };\n \n onRestoreAllArchiveAction = () => {\n const { activeFiles, activeFolders } = this.filesStore;\n const {\n setQuotaWarningDialogVisible,\n setRestoreAllArchive,\n setRestoreRoomDialogVisible,",
       "module": "/packages/client"
     }
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Κενό αρχείο' literally translates to 'Empty file,' while the English content refers to an 'Empty archive.' While related, 'archive' and 'file' have different meanings in this context. The translation doesn't accurately convey the intended meaning.",
+          "suggestion": "Αδειανό αρχείο (Adeiano archío) - This translates more closely to 'Empty archive.'"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -99,25 +105,49 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"아카이브 비우기\" while literally translatable, isn't the most natural or idiomatic way to say 'Empty archive' in Korean. It's understandable but sounds a bit technical. A more natural phrasing might be something like \"아카이브 삭제\" (Archive deletion) or \"아카이브 내용 삭제\" (Deletion of archive content).",
+          "suggestion": "Consider \"아카이브 삭제\" or \"아카이브 내용 삭제\"."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ແຟ້ມ' (faem) could potentially be misinterpreted as 'file' instead of 'archive'. While understandable, 'ເອກະບົກ' (ekarabok) might be a more accurate translation of 'archive' in this context, especially within a software or technical setting. However, 'ແຟ້ມ' is also acceptable and commonly used.",
+          "suggestion": "Consider 'ເອກະບົກຫວ່າງເປົ່າ' (ekarabok wang peo) as an alternative for greater precision."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation \"Vietne izņemta no arhīva\" translates to 'Website removed from archive'. This is not an accurate translation of \"Empty archive\". It implies the website was actively removed, not that the archive is empty.",
+          "suggestion": "A more accurate translation would be something like \"Pirms arhivēšanas\" (Before archiving) or \"Arhīvs ir tukšs\" (Archive is empty)."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Archief leegmaken' literally translates to 'Empty archive' but implies deleting the archive contents, not just that the archive is empty. A more accurate translation reflecting the English meaning would be 'Leeg archief'.",
+          "suggestion": "Leeg archief"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -153,13 +183,25 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'හිස්ය' (hisiya) is the archaic form of 'හුණු' (hunnu) for 'empty'. While understandable, 'හුණු' is the more common and preferred usage in modern Sinhala.",
+          "suggestion": "Replace 'හිස්ය' with 'හුණු'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation 'Vyprázdniť archív' translates to 'To empty the archive' which is an action, while the English 'Empty archive' describes the state of the archive. A more accurate translation reflecting the state would be 'Prázdny archív'.",
+          "suggestion": "Prázdny archív"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,19 +213,37 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Празна архива' is grammatically incorrect. 'Архива' is in the genitive case, which doesn't fit the context of an empty archive. It should be in the nominative case.",
+          "suggestion": "Празна архива should be changed to 'Празна архива' (correct nominative case)."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Serbian translation 'Prazna arhiva' uses the feminine singular form 'arhiva' which doesn't agree with the English 'archive' (singular, but could refer to a collection). It should be in the neuter singular form.",
+          "suggestion": "Prazna arhiv"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation \"Arşivi boşalt\" translates to \"Empty the archive\" or \"Clear the archive\". The English phrase \"Empty archive\" implies the archive is already empty, not the action of emptying it. The translation is an action, not a state.",
+          "suggestion": "Arşiv boş"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -201,7 +261,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation '清空存档' while understandable, doesn't perfectly capture the nuance of 'Empty archive'. 'Empty archive' implies removing all contents, but '清空存档' can also mean clearing out specific items. A more precise translation would depend on the specific context of 'ArchiveAction'.",
+          "suggestion": "Consider '完全清空存档' (wánquán qīngkōng zázhàng) for a more literal translation of 'Empty archive' or '清空所有存档' (qīngkōng suǒyǒu zázhàng) if emphasizing all contents are removed."
+        }
+      ],
       "approved_at": null
     }
   }

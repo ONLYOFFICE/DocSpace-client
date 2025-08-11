@@ -3,7 +3,7 @@
   "content": "Enter the distinguished name to the directory containing groups you want to add.",
   "content_en_sha1_hash": "e4d789cb73a3a124370d816d4d69d1727ac9b474",
   "created_at": "2025-05-19T21:30:54.209Z",
-  "updated_at": "2025-05-21T08:21:23.407Z",
+  "updated_at": "2025-05-24T08:34:10.539Z",
   "comment": {
     "text": "The \"LdapGroupDNTooltip\" translation key is used to display a tooltip explaining the purpose of an input field in the Group Membership settings. This tooltip appears when the user hovers over or clicks on the field and provides context for adding group memberships via LDAP. It informs users to enter the distinguished name of the directory containing the desired groups.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'أدخل الاسم المميز في الدليل الذي يحتوي على المجموعات التي تريد إضافتها.' is a literal translation but doesn't convey the intended meaning as clearly for a technical context. It's a bit verbose. A more natural phrasing might be more appropriate.",
-          "suggestion": "أدخل الاسم المميز للمجلد الذي يحتوي على المجموعات المراد إضافتها."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, using 'المجموعات المراد إضافتها' (groups to be added) can read a little stiff. Consider a more colloquial phrase if appropriate for the target audience.",
-          "suggestion": "أدخل الاسم المميز للمجلد الذي يحتوي على المجموعات التي ترغب بإضافتها."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -47,13 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Əlavə etmək istədiyiniz qrupları ehtiva edən kataloqa seçilən adı daxil edin' is a bit convoluted and doesn't accurately reflect the original meaning. It translates to something like 'Enter the selected name to the catalog containing the groups you want to add,' which isn't precise.",
-          "suggestion": "Consider a translation like 'Qrupları əlavə etmək üçün istifadə etmək istədiyiniz qrupları ehtiva edən seçilmiş direktoriyanın fərqləndirilmiş adını daxil edin.' or 'Qrupları daxil etmək üçün istifadə etməyiniz vacib olan direktoriyanın seçilən adını daxil edin.'"
+          "description": "The translation 'Əlavə etmək istədiyiniz qrupları ehtiva edən kataloqa seçilən adı daxil edin.' is not an accurate translation of 'Enter the distinguished name to the directory containing groups you want to add.' The wording is overly complex and not natural Azerbaijani. 'Seçilən adı' (selected name) doesn't quite capture the meaning of 'distinguished name'.",
+          "suggestion": "Daxil etmək istədiyiniz qrupları ehtiva edən qruplar kataloğunun fərqləndirilmiş adını daxil edin."
         },
         {
-          "type": "formatting",
-          "description": "The term 'seçilən adını' sounds awkward and repetitive. A more natural phrasing might be preferred.",
-          "suggestion": "Consider rephrasing to avoid repetition."
+          "type": "grammar",
+          "description": "The use of 'kataloqa' after 'qrupları ehtiva edən' feels a bit awkward. While grammatically correct, it could be improved for flow.",
+          "suggestion": "Daxil etmək istədiyiniz qrupları ehtiva edən qruplar kataloğunun fərqləndirilmiş adını daxil edin."
         }
       ],
       "approved_at": null
@@ -94,8 +83,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'erottuva' is a less common and potentially less clear synonym for 'distinguished' in this context. While not strictly incorrect, it might be confusing to some users.",
-          "suggestion": "Syötä ryhmätunnus hakemistolle, jossa ryhmät sijaitsevat."
+          "description": "The word 'erottuva' is a valid word but in this context, 'täydellinen' (full) or 'uniikki' (unique) might be more appropriate to convey the meaning of 'distinguished'.",
+          "suggestion": "Syötä täydellinen/uniikki nimi hakemistolle sisältäen ryhmät, jotka haluat lisätä."
         }
       ],
       "approved_at": null
@@ -112,13 +101,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Մուտքագրել տարբերվող անունը գրացուցակում, որը պարունակում է խմբեր, որոնք ցանկանում եք ավելացնել:' is a bit literal and verbose. It could be more concise and flow better in Armenian. The phrase 'գրացուցակում' is slightly awkward.",
-          "suggestion": "Մուտքագրել տարբերվող անունը, որտեղ գտնվում են ցանկալցրած խմբերը:"
+          "description": "The translation is overly literal and awkward. ' տարբերվող անունը գրացուցակում' is not the most natural way to express 'distinguished name'.",
+          "suggestion": "Մուտքագրել տեղակալման անվանումը, որտեղ պահվում են այն խմբերը, որոնք ցանկացած եք ավելացնել:"
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a colon at the end of the sentence. While grammatically acceptable, it might be preferable to omit it for consistency with other similar tooltips.",
-          "suggestion": "Remove the colon at the end of the sentence."
+          "type": "grammar",
+          "description": "The sentence structure could be improved for better flow and readability.",
+          "suggestion": "Consider restructuring the sentence to be more concise and direct."
         }
       ],
       "approved_at": null
@@ -141,13 +130,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is a bit too literal and awkward. 'DN 추가하려는' is not natural Korean. It should be rephrased to something more fluent.",
-          "suggestion": "그룹을 추가할 그룹이 포함된 디렉토리의 고유 이름을 입력하세요."
+          "description": "The translation \"그룹 DN 추가하려는 그룹이 포함된 디렉토리의 고유 이름을 입력하세요.\" is a bit literal and could be more natural. The phrase '그룹 DN' is redundant since the context already implies we're talking about group distinguished names. It can be confusing to a Korean user.",
+          "suggestion": "그룹이 포함된 디렉토리의 고유 이름을 입력하세요."
         },
         {
-          "type": "formatting",
-          "description": "While technically correct, the sentence structure could be improved for better readability. Korean often benefits from a slightly more indirect phrasing when describing technical concepts.",
-          "suggestion": "그룹을 추가할 디렉토리의 고유 이름을 입력하세요."
+          "type": "grammar",
+          "description": "While technically correct, the sentence structure is a bit stiff.  It could be improved for better flow in Korean.",
+          "suggestion": "그룹이 포함된 디렉토리의 고유 이름을 입력해주세요."
         }
       ],
       "approved_at": null
@@ -158,13 +147,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ໃສ່ຊື່ທີ່ໂດດເດັ່ນເຂົ້າໃນໂຟນເດີທີ່ມີກຸ່ມທີ່ທ່ານຕ້ອງການເພີ່ມ' is a literal translation and doesn't convey the intended meaning clearly. It translates to 'Enter the distinguished name into the folder containing groups you want to add.' A more natural translation would be something like 'ກະລຸນາໃສ່ distinguished name ຂອງໄດເລກະທໍරිທີ່ບັນຈຸບັນຊີລຸ່ມທີ່ທ່ານຕ້ອງການເພີ່ມ'.",
-          "suggestion": "ກະລຸນາໃສ່ distinguished name ຂອງໄດເລກະທໍරිທີ່ບັນຈຸບັນຊີລຸ່ມທີ່ທ່ານຕ້ອງການເພີ່ມ."
+          "description": "The Lao translation 'ໃສ່ຊື່ທີ່ໂດດເດັ່ນເຂົ້າໃນໂຟນເດີທີ່ມີກຸ່ມທີ່ທ່ານຕ້ອງການເພີ່ມ' is a literal translation that doesn't quite capture the natural phrasing for this context. 'ຊື່ທີ່ໂດດເດັ່ນ' (distinguished name) is slightly awkward. It would be more natural to phrase it as something like 'ຊື່ເຕັມຂອງໂຟນເດີ' (full directory name) or 'ຊື່ໂຟນເດີເຕັມ' (full directory name).",
+          "suggestion": "ໃສ່ຊື່ເຕັມຂອງໂຟນເດີທີ່ມີກຸ່ມທີ່ທ່ານຕ້ອງການເພີ່ມ."
         },
         {
-          "type": "formatting",
-          "description": "The Lao translation uses a mix of Lao script and the English word 'distinguished name'. While understandable, it's preferable to fully translate or consistently use English terms where appropriate, maintaining a consistent tone and style.",
-          "suggestion": "ກະລຸນາໃສ່ຊື່ທີ່ໂດດເດັ່ນຂອງໄດເລກະທໍරිທີ່ບັນຈຸບັນຊີລຸ່ມທີ່ທ່ານຕ້ອງການເພີ່ມ."
+          "type": "spelling",
+          "description": "While technically correct, the word 'ເພີ່ມ' might be better replaced with 'ລວມ' or 'ເຊີມເຂົ້າ' depending on the desired nuance of adding groups.",
+          "suggestion": "ໃສ່ຊື່ເຕັມຂອງໂຟນເດີທີ່ມີກຸ່ມທີ່ທ່ານຕ້ອງການລວມ."
         }
       ],
       "approved_at": null
@@ -175,13 +164,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ievadiet atšķirīgo nosaukumu direktorijā, kurā ir grupas, kuras vēlaties pievienot.' is a literal translation that sounds awkward in Latvian. 'Atšķirīgais nosaukums' (distinguished name) is correct, but the sentence structure is convoluted. A more natural phrasing would be something along the lines of 'Ievadiet LDAP direktorijas DN, kurā atrodas pievienojamās grupas.'",
-          "suggestion": "Ievadiet LDAP direktorijas DN, kurā atrodas pievienojamās grupas."
+          "description": "The translation 'Ievadiet atšķirīgo nosaukumu direktorijā, kurā ir grupas, kuras vēlaties pievienot.' is a literal translation and sounds awkward in Latvian. A more natural phrasing would be needed.",
+          "suggestion": "Ievadiet LDAP direktorija atšķirīgo nosaukumu, kurā atrodas pievienojamās grupas."
         },
         {
           "type": "formatting",
-          "description": "While not strictly incorrect, the use of 'direktorijā' might be improved by specifying 'LDAP direktorijā' to clarify the context of the distinguished name. It prevents potential confusion for users unfamiliar with the term 'direktorijs'.",
-          "suggestion": "Ievadiet LDAP direktorijas DN, kurā atrodas pievienojamās grupas."
+          "description": "The sentence structure is a bit long and complex, potentially making it difficult to understand.",
+          "suggestion": "Consider breaking it down into two sentences: 'Ievadiet LDAP direktorija atšķirīgo nosaukumu. Tur atrodas pievienojamās grupas.'"
         }
       ],
       "approved_at": null
@@ -216,13 +205,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Introduceți un nume distinct în repertoarul care conține grupurile pe care le doriți să adăugați' is not a natural or accurate translation of 'Enter the distinguished name to the directory containing groups you want to add.' The wording is overly literal and complex.",
+          "description": "The translation 'Introduceți un nume distinct în repertoarul care conține grupurile pe care le doriți să adăugați' is a literal translation that doesn't quite capture the meaning of 'distinguished name' in a technical context. The term 'distinguished name' in LDAP contexts refers to a specific hierarchical identifier. A more accurate translation would convey this.",
           "suggestion": "Introduceți DN-ul (Distinguished Name) al directorului care conține grupurile pe care doriți să le adăugați."
         },
         {
           "type": "formatting",
-          "description": "The translation doesn't reflect the tooltip context. 'DN' abbreviation is missing, which is common terminology in LDAP contexts.",
-          "suggestion": "Consider adding a brief explanation or abbreviation for 'Distinguished Name' (DN) to improve user understanding."
+          "description": "The term 'DN' (Distinguished Name) would be helpful to include as an abbreviation and explanation.",
+          "suggestion": "Introduceți DN-ul (Distinguished Name) al directorului care conține grupurile pe care doriți să le adăugați."
         }
       ],
       "approved_at": null
@@ -233,8 +222,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The English phrase 'Enter the distinguished name' is better translated as 'Specify the distinguished name' or 'Provide the distinguished name'. 'Введите' (Vvedite) implies a more active entry, while 'Specify' or 'Provide' is more aligned with the context of configuring a setting.",
-          "suggestion": "Укажите уникальное имя (DN) каталога, содержащего группы, которые вы хотите добавить."
+          "description": "The translation 'Введите уникальное имя (DN) каталога, содержащего группы, которые вы хотите добавить.' is not a direct or ideal translation of 'Enter the distinguished name to the directory containing groups you want to add.'. While technically correct, it's overly formal and verbose for a tooltip. The term 'уникальное имя' (unique name) isn't necessary.",
+          "suggestion": "Введите DN каталога, содержащего группы, которые вы хотите добавить."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation includes parentheses around 'DN'.  Tooltips often benefit from more concise phrasing, and explicitly spelling out 'DN' can be preferred in a tooltip, rather than assuming familiarity.",
+          "suggestion": "Remove the parentheses around 'DN' or replace with a clearer explanation if the audience is not expected to understand the abbreviation."
         }
       ],
       "approved_at": null
@@ -245,13 +239,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ප්‍රතිපත්තිගත නම ඔබ එක් කිරීමට කැමති කණ්ඩායම්වලට අඩංගු නාමාවලියට ඇතුළු කරන්න.' is not a precise translation of 'Enter the distinguished name to the directory containing groups you want to add.' It is overly formal and complex for a tooltip. 'ප්‍රතිපත්තිගත නම' (prathipathigath nama) translates to 'official name' which isn't quite right in this context.  'නාමාවලියට' (naamawaliyato) means 'to the list', which implies a list of directories, rather than just 'the directory'.",
-          "suggestion": "අවශ්‍ය කණ්ඩායම් ඇති ෆෝල්ඩර් ඩයිරෙක්ටරි නම ඇතුළත් කරන්න."
+          "description": "The translation \"ප්‍රතිපත්තිගත නම ඔබ එක් කිරීමට කැමති කණ්ඩායම්වලට අඩංගු නාමාවලියට ඇතුළු කරන්න.\" is a very literal translation and doesn't flow naturally in Sinhala. The term 'ප්‍රතිපත්තිගත නම' is quite formal and not commonly used in this context. It also conveys a sense of being 'policy-driven' rather than simply a distinguished name.",
+          "suggestion": "A more natural translation would be something like: \"ඔබ එක් කිරීමට අවශ්ය කණ්ඩායම් ඇති répertoire ට Distinguished Name ඇතුළත් කරන්න.\" or \"කණ්ඩායම් ඇතුළත් répertoire ට Distinguished Name ක් ඇතුළත් කරන්න\"."
         },
         {
-          "type": "formatting",
-          "description": "The translation uses a long sentence, which is not ideal for a tooltip that needs to be concise and easily digestible. It can be shortened for better readability.",
-          "suggestion": "Shorten the sentence to improve clarity. For example, 'කණ්ඩායම්වලට ඇති ෆෝල්ඩර් ඩයිරෙක්ටරි නම ඇතුළත් කරන්න.'"
+          "type": "spelling",
+          "description": "The word 'répertoire' ( répertoire ) isn't Sinhala. It's likely a loanword from French or English. ",
+          "suggestion": "Replace 'répertoire' with a more appropriate Sinhala word for directory, such as 'අdirname' (adirectory) or 'සමූහdirname' (groupdirectory)."
+        },
+        {
+          "type": "grammatical",
+          "description": "The sentence structure is a bit convoluted and could be simplified for better readability in Sinhala. Using multiple verbs in a sequence makes the sentence feel less natural.",
+          "suggestion": "Reorganize the sentence to improve the flow, for example, placing the action (entering the distinguished name) at the beginning."
         }
       ],
       "approved_at": null
@@ -259,7 +258,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'priečinka' could be improved. While technically correct, 'adresár' is more commonly used in this context (directory).",
+          "suggestion": "Zadajte rozlišujúci názov adresára obsahujúceho skupiny, ktoré chcete pridať."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -268,13 +273,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Vnesite enoznačno ime v imenik s skupinami, ki jih želite dodati.' is a bit too literal and doesn't flow naturally in Slovenian. 'Enoznačno' (unique) isn't the best word choice here.",
-          "suggestion": "Vnesite pot do imenika, ki vsebuje skupine, ki jih želite dodati."
+          "description": "The translation 'Vnesite enoznačno ime v imenik s skupinami, ki jih želite dodati' isn't the most natural phrasing. 'Enoznačno ime' (unique name) isn't the most accurate translation of 'distinguished name'. It feels overly literal.",
+          "suggestion": "Vnesite razločno ime v imenik, kjer so shranjene skupine, ki jih želite dodati."
         },
         {
-          "type": "incorrect_translation",
-          "description": "The word 'imenik' (directory) can be ambiguous. While technically correct, 'pot' (path) may be more appropriate and clear for a technical context.",
-          "suggestion": "Use 'pot' instead of 'imenik' to indicate the location."
+          "type": "formatting",
+          "description": "The translation is grammatically correct, but could be slightly more concise and clearer for a tooltip.",
+          "suggestion": "Vnesite razločno ime imenika, kjer so vaše skupine."
         }
       ],
       "approved_at": null
@@ -285,8 +290,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'препознатљиво' might be better replaced with 'дистинктивно' for closer correspondence to 'distinguished' in the English original. While 'препознатљиво' isn't incorrect, 'дистинктивно' more accurately conveys the technical meaning.",
-          "suggestion": "Унесите дистинктивно име у директоријум који садржи групе које желите да додате."
+          "description": "The word 'директоријум' (directory) might be slightly formal for this context. A more common and accessible term could be considered.",
+          "suggestion": "Унесите препознатљиво име у фасциклу која садржи групе које желите да додате."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, 'које желите да додате' could be slightly rephrased for smoother flow.",
+          "suggestion": "Унесите препознатљиво име у фасциклу која садржи групе које треба да додате."
         }
       ],
       "approved_at": null
@@ -297,8 +307,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation is technically correct but sounds unnatural in Serbian. \"Prepoznatljivo ime\" is a literal translation of \"distinguished name\" and isn't commonly used in this context. A more natural phrasing would be \"DN\" or \"Pun naziv\".",
-          "suggestion": "Unesite DN (pun naziv) direktorijuma koji sadrži grupe koje želite da dodate."
+          "description": "The translation 'Unesite prepoznatljivo ime u direktorijum koji sadrži grupe koje želite da dodate' is a bit literal and doesn't flow naturally in Serbian. 'Prepoznatljivo ime' translates to 'distinguished name' but can sound overly technical. A more natural phrasing might be 'Unesite DN direktorijuma koji sadrži grupe koje želite da dodate' or 'Unesite putanju do direktorijuma koji sadrži grupe koje želite da dodate.'",
+          "suggestion": "Unesite DN direktorijuma koji sadrži grupe koje želite da dodate."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, the repetition of 'koje želite da dodate' (which you want to add) could be improved for conciseness.",
+          "suggestion": "Unesite DN direktorijuma koji sadrži grupe koje želite dodati."
         }
       ],
       "approved_at": null
@@ -315,8 +330,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Введіть унікальне ім'я каталогу, що містить групи, які ви хочете додати\" is not a precise translation of \"Enter the distinguished name to the directory containing groups you want to add.\"  'Унікальне ім'я' (unique name) isn't accurate in this context. The term 'distinguished name' has a specific meaning in LDAP, and it's not well-represented here.",
+          "description": "The translation 'Введіть унікальне ім'я каталогу' is not the most accurate rendering of 'Enter the distinguished name to the directory'. 'Унікальне ім'я' implies uniqueness, which isn't a core requirement.  'Distinguished Name' is a technical term and should be translated more precisely.",
           "suggestion": "Введіть розрізнене ім'я каталогу, що містить групи, які ви хочете додати."
+        },
+        {
+          "type": "spelling",
+          "description": "The term 'розрізнене' (razriznene) can be stylistically awkward. While technically correct for 'distinguished', it might not be the most natural-sounding in this context.",
+          "suggestion": "Введіть ідентифікатор каталогу, що містить групи, які ви хочете додати."
         }
       ],
       "approved_at": null
@@ -327,8 +347,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nhập tên đặc biệt vào thư mục chứa các nhóm bạn muốn thêm.' is not a perfect translation of 'Enter the distinguished name to the directory containing groups you want to add.'. 'Distinguished name' is a technical term and 'tên đặc biệt' doesn't quite convey the meaning. A more accurate translation for 'distinguished name' would be 'tên riêng'.",
-          "suggestion": "Nhập tên riêng đến thư mục chứa các nhóm bạn muốn thêm."
+          "description": "The term 'distinguished name' is not well translated. 'Tên đặc biệt' is too literal and might not be understood by Vietnamese users familiar with LDAP. A more suitable translation would convey the meaning of a full LDAP identifier.",
+          "suggestion": "Nhập Đường dẫn LDAP đầy đủ để thư mục chứa các nhóm bạn muốn thêm."
+        },
+        {
+          "type": "formatting",
+          "description": "The sentence is a bit long and could be broken up for better readability in a tooltip.",
+          "suggestion": "Nhập Đường dẫn LDAP đầy đủ đến thư mục chứa các nhóm bạn muốn thêm."
         }
       ],
       "approved_at": null
@@ -339,13 +364,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '输入包含要添加的组的目录的可分辨名称' is technically correct but sounds unnatural and overly formal for a tooltip. It can be improved to be more user-friendly.",
-          "suggestion": "输入要添加的组所在的目录的区分名。"
+          "description": "The translation '输入包含要添加的组的目录的可分辨名称' is a literal translation and sounds unnatural in Chinese. It's overly formal and clunky. The phrase '可分辨名称' (distinguished name) is technically correct, but not commonly used in a user-facing tooltip.",
+          "suggestion": "输入要添加的组所在的目录的 DN。"
         },
         {
           "type": "formatting",
-          "description": "While not a critical error, '区分名' is a more common and understandable term for 'distinguished name' in Chinese technical contexts than '可分辨名称'.",
-          "suggestion": null
+          "description": "The sentence structure is a bit convoluted and could be simplified for better readability in a tooltip. The original English is more concise.",
+          "suggestion": "输入要添加的组的目录 DN。"
         }
       ],
       "approved_at": null

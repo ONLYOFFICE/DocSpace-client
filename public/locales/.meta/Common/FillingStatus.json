@@ -3,7 +3,7 @@
   "content": "Filling status",
   "content_en_sha1_hash": "4164fcff20d05f212fd1def98fdfe27c566dfcb2",
   "created_at": "2025-05-19T21:30:45.360Z",
-  "updated_at": "2025-06-03T20:59:42.294Z",
+  "updated_at": "2025-08-04T07:30:01.599Z",
   "comment": {
     "text": "This translation key is used for the label on a button or option that displays and controls the filling status in various UI contexts. It appears as \"Filling Status\" and is commonly found in settings or configuration panels, allowing users to enable or disable this feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1835,
+      "line_number": 1844,
       "context": "disabled: false,\n },\n {\n id: \"option_filling-status\",\n key: \"filling-status\",\n label: t(\"Common:FillingStatus\"),\n icon: FormFillRectSvgUrl,\n onClick: () => this.onFillingStatus(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -108,8 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"작성 상태\" (jak-seong sang-tae) literally translates to \"writing status\" or \"draft status,\" it doesn't accurately convey the meaning of \"filling status\" in a general context. \"Filling status\" typically refers to the progress of filling out a form or field, implying completion or partial completion.",
-          "suggestion": "Consider alternatives like \"작업 상태\" (jak-eop sang-tae) for \"work status\" or \"작성 진행 상태\" (jak-seong jin-hyeong sang-tae) for \"writing progress status\" depending on the specific context. If it's about filling out a form, \"폼 작성 상태\" (peom jak-seong sang-tae) might be more appropriate."
+          "description": "While '작성 상태' (jak-seong sang-tae) can translate to something akin to 'filling status' in some contexts, it more directly means 'writing status' or 'creation status.'  'Filling status' implies the state of a form or field being filled. A more accurate translation would depend on the specific context.",
+          "suggestion": "Consider alternatives like '작성 진행 상태' (jak-seong jin-haeng sang-tae - 'writing progress status') or '입력 상태' (ip-nyeok sang-tae - 'input status') depending on context."
         }
       ],
       "approved_at": null
@@ -171,13 +171,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Miera vyplnenia' is a possible translation for 'Filling status', it leans towards 'completion rate' or 'fill rate'. 'Filling status' implies the current state of being filled (e.g., partially filled, completely filled). A more accurate translation might be 'Stav vyplnenia'.",
-          "suggestion": "Stav vyplnenia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -216,13 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Trạng thái điền thông tin\" is understandable, it's a bit literal and clunky. \"Filling status\" generally refers to the completion state of a form or field, not the act of filling it.",
-          "suggestion": "Trạng thái hoàn thành"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "Another possible translation would be \"Độ đầy\" which focuses on the completeness of the filled data.",
-          "suggestion": "Độ đầy"
+          "description": "The translation 'Trạng thái điền thông tin' is too literal and doesn't flow naturally in Vietnamese. While technically correct, it sounds awkward. A more natural translation would be 'Tình trạng đã điền' or 'Đã điền thông tin'.",
+          "suggestion": "Tình trạng đã điền"
         }
       ],
       "approved_at": null

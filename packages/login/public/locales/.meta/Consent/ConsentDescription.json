@@ -3,7 +3,7 @@
   "content": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your {{productName}} account settings.",
   "content_en_sha1_hash": "adb9c93b661c124ad0f90e380ee2a371dc3d7df3",
   "created_at": "2025-05-19T21:30:57.323Z",
-  "updated_at": "2025-05-28T09:30:02.885Z",
+  "updated_at": "2025-06-30T12:20:31.666Z",
   "comment": {
     "text": "This translation key is used to display a consent message when a user grants permission to share their data. It explains how data will be governed and allows users to revoke consent at any time in their account settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/app/(root)/consent/page.client.tsx",
       "line_number": 249,
-      "context": "isLoading={isDenyRunning}\n />\n </StyledButtonContainer>\n <StyledDescriptionContainer>\n <Text fontWeight={400} fontSize={\"13px\"} lineHeight={\"20px\"}>\n <Trans t={t} i18nKey=\"ConsentDescription\" ns=\"Consent\">\n Data shared with {{ displayName: user.displayName }} will be\n governed by {{ nameApp: client.name }}\n <Link\n className={\"login-link\"}\n type={LinkType.page}",
+      "context": "isLoading={isDenyRunning}\n />\n </StyledButtonContainer>\n <StyledDescriptionContainer>\n <Text fontWeight={400} fontSize=\"13px\" lineHeight=\"20px\">\n <Trans t={t} i18nKey=\"ConsentDescription\" ns=\"Consent\">\n Data shared with {{ displayName: user.displayName }} will be\n governed by {{ nameApp: client.name }}\n <Link\n className=\"login-link\"\n type={LinkType.page}",
       "module": "/packages/login"
     }
   ],
@@ -27,25 +27,59 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term \"شروط الخدمة\" (shuroot al-khidma) is a generally accepted translation for \"terms of service,\" but depending on the specific context and target audience, a more nuanced translation might be preferable. Consider alternatives like \"اتفاقية الخدمة\" (ittifaqiyat al-khidma) which might be perceived as more formal or professional.",
+          "suggestion": "Consider \"اتفاقية الخدمة\" (ittifaqiyat al-khidma) or a similar term depending on the brand's tone."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tags are correctly translated, which is good, but consistency with surrounding text is crucial. Ensure other instances of similar tags are also handled correctly across all translated content.",
+          "suggestion": "Review all occurrences of strong tags to guarantee consistent formatting and presentation."
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Azerbaijani translation lacks a period (.) at the end of the first sentence.",
+          "suggestion": "<strong>{{displayName}}</strong> ilə paylaşılan məlumat <strong>{{nameApp}}</strong>-ın <6>məxfilik siyasətinə</6> və <6>xidmət şərtlərinə</6> tabe olacaq. ."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Bulgarian translation lacks the `<6>` tags around 'privacy policy' and 'terms of service' which were present in the English content. This might affect rendering.",
+          "suggestion": "Add the `<6>` tags around 'политиката за поверителност' and 'условията за ползване'."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The English term 'account' is translated as 'профил'. While functionally similar, 'account' in this context implies a more formal digital account. 'Профил' could be perceived as less secure or formal.",
+          "suggestion": "Consider using 'акаунт' (transliteration of 'account') for increased accuracy and a more formal tone."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Czech translation maintains the strong tags around `{{displayName}}` and `{{{nameApp}}}` which is correct, but the `<6>` tags used for \"privacy policy\" and \"terms of service\" in the English are not correctly translated. They are not standard Czech formatting and should be removed, or replaced with more appropriate formatting.  While the content is translated correctly, the tags are creating a formatting discrepancy.",
+          "suggestion": "Remove the `<6>` tags. Alternatively, if specific formatting is needed, use standard Czech HTML tags (e.g., `<em>`, `<b>`, `<p>`)."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,49 +91,117 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tags are applied incorrectly. They should encompass only the name of the app, not the entire phrase 'privacy policy' and 'terms of service'.",
+          "suggestion": "Ensure the strong tags around {{nameApp}} enclose only the name of the application."
+        }
+      ],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“will be governed by” is translated as “se procesarán de acuerdo con”. While not entirely wrong, “se procesarán de acuerdo con” implies processing, not governance. 'Governed by' implies adherence to a policy, not just processing.",
+          "suggestion": "Los datos compartidos con <strong>{{displayName}}</strong> se regirán por <strong>{{nameApp}}</strong> "
+        },
+        {
+          "type": "formatting",
+          "description": "The original English uses `<6>privacy policy</6>` and `<6>terms of service</6>` which appear to indicate formatting. The Spanish translation lacks this formatting.",
+          "suggestion": "Los datos compartidos con <strong>{{displayName}}</strong> se regirán por <strong>{{nameApp}}</strong> <6>la política de privacidad</6> y <6>las condiciones del servicio</6>."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'and' is unnecessary after 'käyttöehtoja'.",
+          "suggestion": "Käyttäjälle <strong>{{displayName}}</strong> jaettuihin tietoihin sovelletaan <strong>{{nameApp}}</strong>:n <6>tietosuojakäytäntöä</6> ja <6>käyttöehtoja</6>. Voit peruuttaa tämän suostumuksen milloin tahansa {{productName}} tilin asetuksissa."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'million' seems to be a typo and does not make sense in the context. It should be 'milloin'.",
+          "suggestion": "Käyttäjälle <strong>{{displayName}}</strong> jaettuihin tietoihin sovelletaan <strong>{{nameApp}}</strong>:n <6>tietosuojakäytäntöä</6> ja <6>käyttöehtoja</6>. Voit peruuttaa tämän suostumuksen milloin tahansa {{productName}} tilin asetuksissa."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'will be governed by' has been translated to 'seront traitées conformément à'. While 'traitées conformément à' isn't inherently wrong, 'governed by' implies legal jurisdiction and a certain level of control, which 'conformément à' doesn't fully convey. A more accurate translation might be 'seront régies par'.",
+          "suggestion": "seront régies par"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags (strong and sup) are correctly rendered, but it's important to ensure they are consistent with the English version's formatting to maintain visual consistency and clarity for the user.",
+          "suggestion": "Verify that the strong and sup tags are rendered identically in both the English and Armenian versions."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"համօգտագործվող տվյալները\" (used data) could be misinterpreted. It might be better to express the meaning as 'shared data' or 'data that is being used' more accurately reflects the English meaning of data sharing.",
+          "suggestion": "Consider translating to something like: \"Ձեր հաշվի հետ կիսվող տվյալները\" (data shared with your account) or \"Ձեր հաշվի կողմից օգտագործվող տվյալները\" (data being used by your account)."
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The phrase 'in qualsiasi momenti' should be 'in qualsiasi momento'. 'Momenti' is plural, while 'momento' (moment) is singular and correct in this context.",
+          "suggestion": "in qualsiasi momento"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Japanese translation maintains the use of strong tags around variables {{displayName}} and {{nameApp}} which is consistent with the English source. However, the `<6>` tags for 'privacy policy' and 'terms of service' are not standard in Japanese and might look unusual. Consider using a more common formatting style like parentheses or a different HTML tag for clarity.",
+          "suggestion": "Consider alternatives to `<6>` for formatting, such as using parentheses: (プライバシーポリシー)および(利用規約) or a more common HTML tag for emphasis."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Korean translation retains the use of strong tags for `displayName` and `nameApp`, consistent with the English. While technically correct, consider if bolding is the desired effect in Korean, or if a different emphasis is more appropriate for user experience.  It's possible a different styling might be preferable.",
+          "suggestion": "Review and potentially adjust the styling of `displayName` and `nameApp` in the Korean translation based on UI/UX best practices for the target audience."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '와/과' is used as a general connector. While grammatically correct, its usage can be too generic and might not flow naturally. Consider if a more specific connector would improve readability. It implies both `displayName` and `nameApp` are being connected which might not be the intended relationship.",
+          "suggestion": "Evaluate whether a more precise connector or phrasing would improve the flow and clarity. For instance, '데이터는 <strong>{{displayName}}</strong> 에서 공유되며, <strong>{{nameApp}}</strong>의 개인 정보 보호 정책과 서비스 약관에 따라 관리됩니다.' or similar."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -111,25 +213,54 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"attieksies\" (will apply) is not the best translation for \"governed by\" in this context. It doesn't convey the legal or policy implications as accurately.",
+          "suggestion": "Consider using something like \"regulē\" (regulates) or \"ir saistoši\" (is binding) to better reflect 'governed by'."
+        },
+        {
+          "type": "formatting",
+          "description": "The bolding for `{{displayName}}` and `{{nameApp}}` is consistent with the English content but it might be visually jarring in Latvian depending on the overall design. While technically correct, a review of the visual presentation is recommended.",
+          "suggestion": "Review the visual appearance of bolded text in the Latvian interface. It may need adjustment for optimal readability and aesthetic appeal."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“terms of service” is translated as “voorwaarden voor diensten”. While technically correct, a more common and natural Dutch translation would be “servicevoorwaarden”.",
+          "suggestion": "servicevoorwaarden"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag for {{nameApp}} is in the incorrect place. In the English version, it precedes the privacy policy and terms of service, implying it's associated with them. In the Polish translation, it follows, which makes it appear to be associated with the statement about revoking consent. It should be placed before 'polityce prywatności oraz regulaminowi'.",
+          "suggestion": "Dane udostępniane <strong>{{displayName}}</strong> będą podlegać <strong>{{nameApp}}</strong> polityce prywatności oraz regulaminowi. "
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<6>` are not standard and may not render correctly in all contexts. They seem intended to represent a hyperlink or some kind of styling but are not proper HTML.",
+          "suggestion": "Review the intended purpose of the <6> tags and replace them with appropriate HTML (e.g., <a> for links, <span> for styling)."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,43 +272,100 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The HTML tags `<6>` are not standard and appear to be a formatting placeholder. They should be removed or replaced with appropriate tags (e.g., `<br>`, `<span>`, or no tags at all).",
+          "suggestion": "Remove the `<6>` tags. The content they surround ('privacy policy' and 'terms of service') doesn't necessarily require special formatting."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The order of `<strong>{{nameApp}}</strong>` is incorrect. It should follow the privacy policy and terms of service, not precede them.",
+          "suggestion": "Данные, доступ к которым предоставлен <strong>{{displayName}}</strong>, будут регулироваться <6>политики конфиденциальности</6> и <6>условиями использования</6> <strong>{{nameApp}}</strong>."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Sinhala translation retains the HTML tags `<strong>` and `<6>` which should ideally be removed or replaced with appropriate styling for the platform where the translation will be used.",
+          "suggestion": "Remove or replace HTML tags with platform-appropriate styling. Example: Replace `<strong{{displayName}}</strong>` with standard Sinhala text formatting."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'සේවා නියම' (seva niyam) translates to 'service rules' which is a more formal and less common way to express 'terms of service'. A more natural translation would be 'සේවා කොන්දේසි' (seva kondesi).",
+          "suggestion": "Replace 'සේවා නියම' with 'සේවා කොන්දේසි'."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation reverses the order of `nameApp` and the privacy policy/terms of service. The English states the privacy policy and terms of service belong to `nameApp`. The Slovak states they belong to the shared data.",
+          "suggestion": "Údaje zdieľané s <strong>{{displayName}}</strong> sú regulované <6>zásadami ochrany osobných údajov</6> a <6>podmienkami používania</6> aplikácie <strong>{{nameApp}}</strong>. or Údaje zdieľané s <strong>{{displayName}}</strong> sú regulované zásadami ochrany osobných údajov a podmienkami používania <strong>{{nameApp}}</strong>."
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag surrounding `nameApp` is in the incorrect position in Slovak translation. It should follow the privacy policy and terms of service, not precede them.",
+          "suggestion": "Údaje zdieľané s <strong>{{displayName}}</strong> sú regulované <6>zásadami ochrany osobných údajov</6> a <6>podmienkami používania</6> <strong>{{nameApp}}</strong>."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'governed by' is not accurately translated. 'Določa' implies defines or specifies, which isn't quite the intended meaning of being governed by a policy and terms of service.",
+          "suggestion": "Consider using a phrase like 'upoštevajo' (respect) or 'urejajo' (regulate) instead of 'določa' to better convey 'governed by'."
+        },
+        {
+          "type": "formatting",
+          "description": "The `<6>` tags used for 'privacy policy' and 'terms of service' don't have a direct equivalent in Slovenian formatting conventions. It's unclear what they are intended to signify (e.g. footnotes, links).",
+          "suggestion": "Clarify the intended formatting of the tags. If they represent links, use appropriate HTML link tags. If they are intended as footnotes, implement footnote formatting."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Serbian translation retains the strong tags (`<strong>`) for displayName and nameApp which is appropriate, but lacks the `<6>` tags around 'privacy policy' and 'terms of service'.",
+          "suggestion": "Add `<6>` tags around 'политиком приватности' and ' условима коришћења'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tags are correctly placed, but the <6> tags are unusual and potentially incorrect for indicating privacy policy and terms of service. These should be reviewed for proper formatting (e.g., HTML tags like <a> or CSS classes).",
+          "suggestion": "Investigate the intended function of <6> tags and replace with appropriate formatting for links or emphasis. For example, consider using <a href=\"{privacy_policy_url}\">{privacy_policy_name}</a> and <a href=\"{terms_of_service_url}\">{terms_of_service_name}</a>."
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -189,19 +377,37 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The order of `nameApp` is incorrect. It should follow the privacy policy and terms of service, not precede them.",
+          "suggestion": "Надання даних <strong>{{displayName}}</strong> буде регулюватися <6>Політикою конфіденційності</6> та <6>Умовами обслуговування</6> <strong>{{nameApp}}</strong> should be changed to Надання даних <strong>{{displayName}}</strong> буде регулюватися <strong>{{nameApp}}</strong> <6>Політикою конфіденційності</6> та <6>Умовами обслуговування</6>."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The angle brackets (<6>) used for the privacy policy and terms of service are not standard Vietnamese formatting and may appear unusual to readers. They don't translate to anything in Vietnamese.",
+          "suggestion": "Remove the angle brackets around 'chính sách quyền riêng tư' and 'điều khoản dịch vụ'. For example: \"Dữ liệu được chia sẻ với <strong>{{displayName}}</strong> sẽ được điều chỉnh bởi <strong>{{nameApp}}</strong> chính sách quyền riêng tư và điều khoản dịch vụ.\""
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "“revoke this consent” is translated as “撤回授权”. While technically correct, a more natural and commonly used phrasing in Chinese would be “撤销同意” (chexiao tongyi) or simply “撤回” (chehui) when the context is clear.",
+          "suggestion": "与<strong>{{displayName}}</strong>共享的数据将受<strong>{{nameApp}}</strong><6>隐私政策</6>和<6>服务条款</6>的约束。您可以随时在{{productName}}账户设置中<6>撤销同意</6>。"
+        }
+      ],
       "approved_at": null
     }
   }

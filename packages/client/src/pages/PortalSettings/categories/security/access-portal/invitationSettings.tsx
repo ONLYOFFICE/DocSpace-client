@@ -187,7 +187,7 @@ const InvitationSettings = ({
       });
       setShowReminder(false);
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error as TData);
     }
@@ -233,6 +233,7 @@ const InvitationSettings = ({
           <div className={styles.checkboxContainer}>
             <Checkbox
               className={styles.checkbox}
+              dataTestId="invitation_settings_contacts_checkbox"
               isChecked={isCheckedContacts}
               onChange={onChangeContacts}
             />
@@ -242,8 +243,9 @@ const InvitationSettings = ({
               lineHeight="20px"
               onClick={onChangeContacts}
             >
-              {t("InvitationSettingsContacts", {
+              {t("InviteViaContacts", {
                 productName: t("Common:ProductName"),
+                sectionName: t("Common:Contacts"),
               })}
             </Text>
           </div>
@@ -254,8 +256,9 @@ const InvitationSettings = ({
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            {t("InvitationSettingsContactsDescription", {
+            {t("ContactsInviteNote", {
               productName: t("Common:ProductName"),
+              sectionName: t("Common:Contacts"),
             })}
           </Text>
         </div>
@@ -264,6 +267,7 @@ const InvitationSettings = ({
           <div className={styles.checkboxContainer}>
             <Checkbox
               className={styles.checkbox}
+              dataTestId="invitation_settings_guests_checkbox"
               isChecked={isCheckedGuests}
               onChange={onChangeGuests}
             />
@@ -295,12 +299,14 @@ const InvitationSettings = ({
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
+        saveButtonDataTestId="invitation_settings_save_button"
+        cancelButtonDataTestId="invitation_settings_cancel_button"
       />
     </>
   );

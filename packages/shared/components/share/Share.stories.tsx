@@ -26,33 +26,14 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import Share from "./index";
-import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
+import {
+  createGetExternalLinksHandler,
+  createGetPrimaryLinkHandler,
+  createEditExternalLinkHandler,
+} from "../../__mocks__/storybook/handlers/files/externalLinks";
+
 import type { ShareProps } from "./Share.types";
-
-const meta: Meta<typeof Share> = {
-  title: "Components/Share",
-  component: Share,
-  parameters: {
-    docs: {
-      description: {
-        component: `A component for sharing files and managing shared links.
-
-### Features
-- Display file sharing status and information
-- Create and manage sharing links
-- Control access rights for shared files
-- Support for internal and external sharing`,
-      },
-    },
-  },
-  decorators: [i18nextStoryDecorator],
-} satisfies Meta<typeof Share>;
-
-export default meta;
-type Story = StoryObj<typeof Share>;
-
-const Template = (args: ShareProps) => <Share {...args} />;
+import Share from ".";
 
 const createDefaultProps = (): ShareProps => ({
   selfId: "current-user-id",
@@ -131,27 +112,66 @@ const createDefaultProps = (): ShareProps => ({
       WebReview: true,
       WebView: true,
     },
+    availableExternalRights: {
+      Editing: true,
+      CustomFilter: true,
+      Review: false,
+      Comment: true,
+      Read: true,
+      FillForms: false,
+      Restrict: true,
+      None: true,
+    },
     viewUrl: "https://example.com/view",
     webUrl: "https://example.com/web",
+    shortWebUrl: "",
   },
 });
 
+const meta = {
+  title: "Components/Share",
+  component: Share,
+  parameters: {
+    docs: {
+      description: {
+        component: `A component for sharing files and managing shared links.
+
+### Features
+- Display file sharing status and information
+- Create and manage sharing links
+- Control access rights for shared files
+- Support for internal and external sharing`,
+      },
+    },
+  },
+  decorators: [
+    (Story) => {
+      localStorage.setItem(
+        `document-bar-${createDefaultProps().selfId}`,
+        "true",
+      );
+      return <Story />;
+    },
+  ],
+  argTypes: {
+    infoPanelSelection: { table: { disable: true } },
+    selfId: { table: { disable: true } },
+    onlyOneLink: { control: { type: "boolean" } },
+  },
+  args: createDefaultProps(),
+} satisfies Meta<typeof Share>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
 export const Default: Story = {
-  render: (args) => Template({ ...createDefaultProps(), ...args }),
-  args: {},
-};
-
-export const Hidden: Story = {
-  render: (args) => Template({ ...createDefaultProps(), ...args }),
-  args: {},
-};
-
-export const WithSharedInfo: Story = {
-  render: (args) => Template({ ...createDefaultProps(), ...args }),
-  args: {
-    infoPanelSelection: {
-      ...createDefaultProps().infoPanelSelection,
-      shared: true,
+  parameters: {
+    msw: {
+      handlers: [
+        createGetExternalLinksHandler(),
+        createGetPrimaryLinkHandler(),
+        createEditExternalLinkHandler(),
+      ],
     },
   },
 };

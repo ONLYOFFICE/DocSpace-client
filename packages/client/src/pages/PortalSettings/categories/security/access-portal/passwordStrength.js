@@ -228,7 +228,7 @@ const PasswordStrength = (props) => {
       setShowReminder(false);
       saveToSessionStorage("currentPasswordSettings", data);
       saveToSessionStorage("defaultPasswordSettings", data);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -262,6 +262,7 @@ const PasswordStrength = (props) => {
         {passwordStrengthSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="password_strength_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -277,6 +278,7 @@ const PasswordStrength = (props) => {
       <div className="slider-box">
         <Slider
           className="password-slider"
+          dataTestId="password_strength_slider"
           min="8"
           max="30"
           step="1"
@@ -297,6 +299,7 @@ const PasswordStrength = (props) => {
           label={t("UseUpperCase")}
           isChecked={useUpperCase}
           value="upperCase"
+          dataTestId="password_strength_upper_case"
         />
         <Checkbox
           className="use-digits second-checkbox"
@@ -304,6 +307,7 @@ const PasswordStrength = (props) => {
           label={t("UseDigits")}
           isChecked={useDigits}
           value="digits"
+          dataTestId="password_strength_digits"
         />
         <Checkbox
           className="use-special-char second-checkbox"
@@ -311,6 +315,7 @@ const PasswordStrength = (props) => {
           label={t("UseSpecialChar")}
           isChecked={useSpecialSymbols}
           value="special"
+          dataTestId="password_strength_special"
         />
       </div>
       <SaveCancelButtons
@@ -318,7 +323,7 @@ const PasswordStrength = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -326,6 +331,8 @@ const PasswordStrength = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="password-strength-save"
         additionalClassCancelButton="password-strength-cancel"
+        saveButtonDataTestId="password_strength_save"
+        cancelButtonDataTestId="password_strength_cancel"
       />
     </MainContainer>
   );

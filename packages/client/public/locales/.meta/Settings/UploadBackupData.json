@@ -3,7 +3,7 @@
   "content": "Upload a backup copy from a desired service below to start migration.",
   "content_en_sha1_hash": "8db98a36a6994c02a48c58e7e37ba3d33924915f",
   "created_at": "2025-05-19T21:30:53.069Z",
-  "updated_at": "2025-05-21T02:34:19.636Z",
+  "updated_at": "2025-05-24T03:41:13.787Z",
   "comment": {
     "text": "The \"UploadBackupData\" translation key is used to display a button label or prompt that instructs users to upload a backup copy from a desired service. This text appears in a UI component where users can select and configure data import options, likely as part of a portal settings page.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"desired service\" is too literal. A more natural translation would focus on the action of selecting a service. \"المطلوبة\" (al-matluba) implies a specific, pre-selected service, not a service the user chooses.",
+          "suggestion": "قم بتحميل نسخة احتياطية من إحدى الخدمات أدناه لبدء الترحيل."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -36,13 +42,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Köçürülmə prosesinə başlamaq üçün aşağıda istədiyiniz xidmətdən ehtiyat nüsxəsini yükləyin' is a bit literal and could be more natural. 'Migration' is better conveyed as 'köçürmə' but the sentence structure feels awkward.",
-          "suggestion": "Köçürməyə başlamaq üçün aşağıdakı xidmətlərdən birindən ehtiyat nüsxəsini yükləyin."
+          "description": "The phrase 'desired service' is not accurately translated. 'İstədiyiniz xidmətdən' literally translates to 'from your desired service' which is slightly awkward. A more natural phrasing would convey the idea of selecting a service.",
+          "suggestion": "Köçürülmə prosesinə başlamaq üçün aşağıda göstərilən xidmətlərdən ehtiyat nüsxəsini yükləyin."
         },
         {
           "type": "formatting",
-          "description": "The pluralization of 'xidmət' is not quite as smooth as it could be. While grammatically correct, 'xidmətlərdən birindən' could be slightly improved.",
-          "suggestion": "Consider rephrasing to avoid awkward pluralization if possible. For example, 'aşağıdakı xidmətdən birindən'."
+          "description": "The translation lacks a degree of formality that would be expected in a settings menu. While not strictly incorrect, it could be improved.",
+          "suggestion": "Köçürülməni başlamak üçün aşağıdakı xidmətlərdən ehtiyat nüsxəsinin yükləyin."
         }
       ],
       "approved_at": null
@@ -59,13 +65,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Chcete-li zahájit migraci, nahrajte záložní kopii z požadované služby níže\" is a bit clunky and not a natural way to phrase this in Czech. A more direct and user-friendly translation would be preferable.",
-          "suggestion": "Nahrajte záložní kopii z požadované služby níže pro zahájení migrace."
+          "description": "The English phrase 'Upload a backup copy' is not perfectly translated. 'Nahrajte záložní kopii' is literal but 'Upload' has a more proactive feel. A more natural phrasing might consider a more active verb.",
+          "suggestion": "Zvolte službu a nahrajte záložní kopii pro zahájení migrace."
         },
         {
-          "type": "incorrect_translation",
-          "description": "While technically correct, \"Chcete-li\" (if you want) feels slightly formal for a UI element. A more approachable alternative would be better.",
-          "suggestion": "Pro zahájení migrace nahrajte záložní kopii..."
+          "type": "formatting",
+          "description": "The phrase 'níže' (below) is a bit abrupt. It would flow better if the sentence structure were adjusted to incorporate a natural flow.",
+          "suggestion": "Zvolte službu a nahrajte záložní kopii pro zahájení migrace."
         }
       ],
       "approved_at": null
@@ -82,13 +88,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'αντίγραφο αντιγράφου ασφαλείας' is redundant. 'Αντίγραφο ασφαλείας' (backup copy) is sufficient.",
+          "description": "The translation of \"backup copy\" is awkward. \"Αντίγραφο αντιγράφου ασφαλείας\" literally translates to \"copy of a backup copy,\" which is redundant. A more natural translation would be \"αντίγραφο ασφαλείας\" (backup).",
           "suggestion": "Μεταφορτώστε ένα αντίγραφο ασφαλείας από μια επιθυμητή υπηρεσία παρακάτω για να ξεκινήσετε τη μετάβαση."
         },
         {
           "type": "formatting",
-          "description": "The translation retains the word order that is slightly awkward in Greek. A more natural order could be considered.",
-          "suggestion": "Μεταφορτώστε ένα αντίγραφο ασφαλείας από μια επιθυμητή υπηρεσία παρακάτω για να ξεκινήσετε τη μετάβαση."
+          "description": "The phrase 'from a desired service below' sounds slightly unnatural in Greek. It is better to rewrite for smoother flow.",
+          "suggestion": "Μεταφορτώστε ένα αντίγραφο ασφαλείας από μια επιθυμητή υπηρεσία παρακάτω για να ξεκινήσετε τη μετάβαση. (This suggestion is already incorporated in the previous suggestion, but reiterating the formatting concern)"
         }
       ],
       "approved_at": null
@@ -96,19 +102,19 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'desired service' is a bit awkward in Spanish. A more natural phrasing would be 'del servicio que prefieras' or 'del servicio de tu elección'.",
-          "suggestion": "Cargue una copia de seguridad del servicio que prefieras a continuación para iniciar la migración."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'desired service' is translated as 'halutusta palvelusta'. While technically correct, 'valitusta palvelusta' (from the selected service) would be a more natural and common phrasing in this context, implying user choice.",
+          "suggestion": "Lataa varmuuskopio alla olevasta valitusta palvelusta aloittaaksesi siirron."
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -123,8 +129,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Վերբեռնեք ներքևում գտնվող ցանկալի ծառայությունից կրկնօրինակը` միգրացիան սկսելու համար:' is a bit literal and could be improved for natural flow. 'Ցանկալի ծառայությունից' translates to 'from a desired service,' but it can be rephrased for better readability.",
-          "suggestion": "Վերբեռնեք կրկնօրինակը ցանկալի ծառայությունից միգրացիան սկսելու համար։ (Upload a copy from the desired service to start migration.) or Ընտրեք ծառայություն և վերբեռնեք կրկնօրինակը միգրացիան սկսելու համար։ (Select a service and upload a copy to start migration.)"
+          "description": "The translation \"Վերբեռնեք ներքևում գտնվող ցանկալի ծառայությունից կրկնօրինակը` միգրացիան սկսելու համար:\" is somewhat literal and a bit awkward. It translates to 'Upload a copy from the desired service located below to start migration.' A more natural Armenian phrasing would improve clarity.",
+          "suggestion": "Վերբեռնեք կրկնօրինակը ցանկալի ծառայությունից՝ միգրացիան սկսելու համար։ (Upload a copy from the desired service to start migration.)"
+        },
+        {
+          "type": "formatting",
+          "description": "The use of a dash (՝) instead of a more standard punctuation mark might feel unusual or unprofessional in a user interface.",
+          "suggestion": "Consider using a comma (,) or no punctuation at all depending on the overall style guide.  For example: Վերբեռնեք կրկնօրինակը ցանկալի ծառայությունից միգրացիան սկսելու համար։"
         }
       ],
       "approved_at": null
@@ -147,13 +158,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '마이그레이션을 시작하려면 아래에서 원하는 서비스의 백업 사본을 업로드하세요' is a bit literal and could be more natural. The phrase 'Upload a backup copy...' sounds awkward in Korean when directly translated.",
-          "suggestion": "마이그레이션을 시작하려면 아래 서비스에서 백업 데이터를 업로드하세요."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly incorrect, the phrasing '아래에서' (below from) is slightly clunky. Using just '아래' is more common when referring to a list.",
-          "suggestion": "마이그레이션을 시작하려면 아래 서비스에서 백업 데이터를 업로드하세요."
+          "description": "The English phrase \"Upload a backup copy\" is translated as \"백업 사본을 업로드하세요\". While technically correct, a more natural and fluent translation would be \"백업 파일을 업로드하세요\" (backup file upload). \"사본\" implies a duplicate, while \"파일\" is more accurate in a technical context.",
+          "suggestion": "백업 파일을 업로드하세요"
         }
       ],
       "approved_at": null
@@ -164,8 +170,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ບໍລິການ' (bori gan) should be 'ບໍລິການທີ່ທ່ານຕ້ອງການ' (bori gan thi tan tongkan) to better match the English 'desired service'.",
-          "suggestion": "ອັບໂຫຼດສໍາເນົາສໍາຮອງຈາກການບໍລິການທີ່ທ່ານຕ້ອງການຂ້າງລຸ່ມນີ້ເພື່ອເລີ່ມຕົ້ນການເຄື່ອນຍ້າຍ."
+          "description": "The word 'ບໍລິການ' is spelled correctly, but contextually it means 'service'. It's likely appropriate given the English phrase 'desired service', but a more literal translation of 'desired' might be considered if clarity is paramount.",
+          "suggestion": "Consider whether a more specific term for 'desired' would improve clarity. For example, 'ທີ່ຕ້ອງການຂອງເຈົ້າ' (what you want)."
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the phrasing 'ເພື່ອເລີ່ມຕົ້ນການເຄື່ອນຍ້າຍ' (to start the migration) could be slightly more natural. The word order might feel a little stiff in Lao.",
+          "suggestion": "Consider 'ເພື່ອເລີ່ມການເຄື່ອນຍ້າຍ' (to begin the migration). This sounds slightly more idiomatic."
         }
       ],
       "approved_at": null
@@ -176,13 +187,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"desired service\" is not accurately translated. \"Vēlamais pakalpojums\" translates more literally to 'desired service' but doesn't convey the meaning of 'chosen' or 'selected' as in the English context. It's a bit stiff.",
-          "suggestion": "Lai sāktu migrāciju, augšupielādējiet dublējumkopiju no izvēlētā pakalpojuma."
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly wrong, the sentence structure is a bit clunky. It reads as slightly less fluent than it could be.",
-          "suggestion": "Lai sāktu migrāciju, lūdzu, augšupielādējiet dublējumkopiju no vēlamā pakalpojuma."
+          "description": "The phrase \"desired service\" is not accurately translated. 'Vēlamais pakalpojums' is a literal translation, but a more natural phrasing in Latvian might be 'vēlamā platforma' or 'vēlamais avots'.",
+          "suggestion": "Lai sāktu migrāciju, tālāk augšupielādējiet dublējumkopiju no vēlamās platformas/avota."
         }
       ],
       "approved_at": null
@@ -193,8 +199,13 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The word 'hieronder' (below) feels a bit abrupt and less natural in this context. It interrupts the flow.",
-          "suggestion": "Consider replacing 'hieronder' with a more fluid phrase like 'van een gewenste service' or 'uit een gewenste service'."
+          "description": "The phrase 'Upload hieronder' could be improved for better flow and naturalness in Dutch. It's a bit abrupt.",
+          "suggestion": "Upload een back-up kopie van een gewenste service hieronder..."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'back-up kopie' is understandable, 'back-up' is often used directly in Dutch, especially in technical contexts. 'back-up kopie' sounds a bit clunky.",
+          "suggestion": "Upload een back-up van een gewenste service hieronder..."
         }
       ],
       "approved_at": null
@@ -208,7 +219,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Faça upload de uma cópia de backup de um serviço desejado abaixo para iniciar a migração' is technically correct but sounds slightly unnatural in Portuguese. 'Faça upload' is a direct translation of 'Upload'. A more natural phrasing would be 'Carregue' or 'Envie'.",
+          "suggestion": "Carregue uma cópia de backup de um serviço desejado abaixo para iniciar a migração."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -235,13 +252,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"desired service\" is not accurately reflected in the Sinhala translation. \"Desired\" implies a choice, but the Sinhala phrasing (\"පහත කැමති සේවාවකින්\") can be interpreted as 'from the service you want,' which is more prescriptive than the English suggests. A more neutral translation of 'desired' or omission would be preferable.",
-          "suggestion": "Consider alternatives like \"පහත සේවාවකින්\" (from the following service) or \"ඔබ තෝගත් සේවාවකින්\" (from the service you choose)."
+          "description": "The phrase 'desired service' is not accurately conveyed. 'Desired' implies a choice, but the Sinhala translation simply states 'below'.",
+          "suggestion": "Consider rephrasing to more accurately reflect the user's choice of service, such as 'ඔබට අවශ්‍ය සේවාවකින්' (obatada niyanda sewayakakin) - 'from the service you need' or 'ඔබ තෝරාගත් සේවාවකින්' (oba thoragath sewayakakin) - 'from the service you select'."
         },
         {
-          "type": "spelling",
-          "description": "The word 'උඩුගත' (udugata) is generally correct for 'upload,' but depending on the target audience (technical vs. general public), a more common or simpler term might be preferred.",
-          "suggestion": "Consider using a more familiar term for 'upload' if the target audience is less technically savvy. There might be regional variations on the most common term as well."
+          "type": "formatting",
+          "description": "The sentence structure could be slightly improved for better readability in Sinhala. While technically correct, it can be a bit clunky.",
+          "suggestion": "Consider restructuring the sentence to something like: 'සංක්‍රමණය ඇරඹීමට, පහතින් ඇති ඔබේ කැමති සේවාවකින් උපස්ථ පිටපතක් උඩුගත කරන්න.' (Sankramayanaya arambimata, pahatin athi obaya kamathi sewayakakin upastapatapek udhugath karanna.) - 'To start migration, upload a backup copy from the service you prefer below.'"
         }
       ],
       "approved_at": null
@@ -252,13 +269,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Aby ste spustili migráciu, nahrajte záložnú kópiu z požadovanej služby uvedenej nižšie' is a bit literal and less natural than it could be.  While technically correct, it lacks the fluency of a native speaker.",
-          "suggestion": "Consider a more conversational phrasing, such as 'Nahrajte záložnú kópiu z vybranej služby, aby ste mohli migráciu spustiť' or 'Spustite migráciu nahratiím záložnej kópie z vybranej služby.'"
+          "description": "The translation \"Aby ste spustili migráciu, nahrajte záložnú kópiu z požadovanej služby uvedenej nižšie.\" is a bit too formal and doesn't quite capture the tone of the English \"Upload a backup copy from a desired service below to start migration.\" A more natural Slovak phrasing would be more conversational.",
+          "suggestion": "Nahrajte záložnú kópiu z vybranej služby nižšie a začnite migráciu."
         },
         {
           "type": "formatting",
-          "description": "The phrase 'uvedenej nižšie' (listed below) doesn't quite match the implied function. It feels more like a list of services is provided *after* this instruction.",
-          "suggestion": "If a list is provided, 'uvedenej nižšie' might be appropriate. Otherwise, consider omitting or adjusting depending on the actual UI."
+          "description": "The original English uses \"below\" which is implied in the Slovak translation. While not strictly incorrect, the direct translation of \"uvedenej nižšie\" is a bit clunky.",
+          "suggestion": "Consider omitting 'nižšie' or rewording to flow more naturally."
         }
       ],
       "approved_at": null
@@ -266,18 +283,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'varnostno' is a compound word and should be checked for correct hyphenation. While technically correct, 'varnostno kopijo' might sound slightly less natural compared to alternatives.",
-          "suggestion": "Consider 'varnostno kopijo' or 'varnostna kopija' depending on desired style."
-        },
-        {
-          "type": "grammatical",
-          "description": "The sentence structure is technically correct, but it could be slightly more natural to use a slightly different phrasing. 'da začnete migracijo' is correct, but less flowing than alternative structures.",
-          "suggestion": "Consider 'za začetek migracije' or 'začetek migracije' for a more fluid feel."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -285,9 +291,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'услуге' (usluge) could be better capitalized for consistency with English 'service'.",
-          "suggestion": "Услуге"
+          "type": "incorrect_translation",
+          "description": "The phrase 'desired service' is translated as 'жељене услуге'. While technically correct, a more natural and common phrasing in Serbian might be 'понуђеној услузи' or 'изабраној услузи'. 'Жељене услуге' implies a wish or desire, which isn't the intended meaning in this context. It's more about selecting from a list.",
+          "suggestion": "Отпремите резервну копију са понуђеној/изабраној услузи у наставку да бисте започели миграцију."
         }
       ],
       "approved_at": null
@@ -298,8 +304,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Otpremite rezervnu kopiju sa željene usluge u nastavku da biste započeli migraciju' is not the most natural or precise translation. 'Upload' is often best translated as 'Učitaj'. 'U nastavku' is a bit awkward; a more direct translation would be 'da biste počeli'.",
-          "suggestion": "Učitaj rezervnu kopiju sa željene usluge da biste počeli migraciju."
+          "description": "The phrase \"da biste započeli migraciju\" is a bit wordy and less natural than a more direct translation. \"da biste počeli migraciju\" is preferred.",
+          "suggestion": "da biste počeli migraciju"
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, starting a sentence with \"da biste\" can sometimes sound slightly awkward. Consider rephrasing for smoother reading.",
+          "suggestion": "Otpremite rezervnu kopiju sa željene usluge u nastavku i počnite migraciju."
         }
       ],
       "approved_at": null
@@ -310,13 +321,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Migrasyonu başlatmak için aşağıdaki istediğiniz hizmetten bir yedek kopya yükleyin' is not a direct or natural translation of 'Upload a backup copy from a desired service below to start migration.' The word order is slightly awkward and 'istediğiniz hizmetten' (from your desired service) doesn't flow well. The translation implies the user has already selected a service.",
-          "suggestion": "Migrasyonu başlatmak için aşağıdan istediğiniz hizmetten bir yedek kopyasını yükleyin."
+          "description": "The translation 'Migrasyonu başlatmak için aşağıdaki istediğiniz hizmetten bir yedek kopya yükleyin' is a literal translation but sounds awkward and unnatural in Turkish. 'İstediğiniz hizmetten' (from your desired service) is not the best way to phrase it.  The original phrasing implies selecting a service.",
+          "suggestion": "Migrasyonu başlatmak için aşağıdan istediğiniz hizmete ait bir yedek yükleyin."
         },
         {
           "type": "formatting",
-          "description": "While not a major issue, using 'aşağıdan' (from below) makes the sentence feel a little less formal and the translation doesn't completely reflect the original English's directness. Consider a more neutral option.",
-          "suggestion": "Migrasyonu başlatmak için lütfen aşağıdaki hizmetlerden birinden yedek kopyayı yükleyin."
+          "description": "The phrase 'aşağıdaki' (below) might be better expressed as 'aşağıdan' to correctly convey the action of selecting from a list.",
+          "suggestion": "Migrasyonu başlatmak için aşağıdan istediğiniz hizmete ait bir yedek yükleyin."
         }
       ],
       "approved_at": null
@@ -333,13 +344,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'desired service' is a bit literal and doesn't flow naturally in Vietnamese. 'Mong muốn' (desired) is correct, but the phrasing is slightly awkward. A more natural phrasing would convey the idea of selecting a service.",
-          "suggestion": "Tải lên một bản sao lưu từ dịch vụ bạn chọn bên dưới để bắt đầu di chuyển."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'di chuyển' (migration) might be too formal or not the best word choice depending on the specific context of the backup process. It might be more appropriate to use a term that refers to importing or restoring the backup.",
-          "suggestion": "Tải lên một bản sao lưu từ dịch vụ bạn chọn bên dưới để bắt đầu khôi phục."
+          "description": "The phrase 'to start migration' is a bit awkward. 'Migration' in this context likely refers to moving data, not physically moving something. A more natural Vietnamese phrasing would reflect that.",
+          "suggestion": "Tải lên một bản sao lưu từ một dịch vụ mong muốn bên dưới để bắt đầu quá trình chuyển đổi dữ liệu."
         }
       ],
       "approved_at": null
@@ -350,13 +356,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'desired service' is not accurately translated. '所需的服务' (required service) implies a mandatory list, whereas the English suggests a choice.",
-          "suggestion": "从以下服务中上传备份副本，开始迁移。"
+          "description": "The phrase \"从以下所需的服务中\" (from the following required services) is overly literal and slightly awkward. It's not the most natural way to express \"from a desired service\".",
+          "suggestion": "从以下服务中"
         },
         {
-          "type": "formatting",
-          "description": "The translation includes an unnecessary comma after '副本'.",
-          "suggestion": "从以下服务中上传备份副本，开始迁移。"
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"备份副本\" (backup copy) can be simplified.  '备份' alone is often sufficient in this context.",
+          "suggestion": "备份"
         }
       ],
       "approved_at": null

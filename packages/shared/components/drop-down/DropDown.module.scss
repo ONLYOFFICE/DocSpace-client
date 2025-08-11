@@ -1,5 +1,5 @@
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/_colors";
+@use "../../styles/mixins";
+@use "../../styles/variables/colors";
 
 .dropDown {
   font-style: normal;

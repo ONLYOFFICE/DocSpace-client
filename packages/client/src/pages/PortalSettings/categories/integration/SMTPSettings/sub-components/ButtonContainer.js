@@ -110,7 +110,7 @@ const ButtonContainer = (props) => {
 
     try {
       await updateSMTPSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e);
     }
@@ -196,7 +196,7 @@ const ButtonContainer = (props) => {
 
     try {
       await resetSMTPSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e);
     }

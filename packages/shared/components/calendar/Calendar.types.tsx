@@ -48,8 +48,10 @@ export interface CalendarProps {
   /** First shown date */
   initialDate?: moment.Moment | Date;
   isMobile?: boolean;
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
   isScroll?: boolean;
+  /** Data test id for testing */
+  dataTestId?: string;
 }
 
 export interface DaysProps {

@@ -3,7 +3,7 @@
   "content": "Data import complete",
   "content_en_sha1_hash": "2a0f523d96bbf06d15492d217a4ad34d6fd0e309",
   "created_at": "2025-05-19T21:30:51.058Z",
-  "updated_at": "2025-05-28T09:30:02.506Z",
+  "updated_at": "2025-08-11T09:02:43.942Z",
   "comment": {
     "text": "The translation key \"DataImportComplete\" is used to display a confirmation message indicating that data import has been successfully completed. It typically appears on a button or dialog in the UI, providing users with visual feedback after completing data import operations for Google Workspace, Nextcloud, and Other Workspaces.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 153,
+      "line_number": 152,
       "context": "title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"GoogleWorkspace\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionGoogle\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <ImportCompleteStep t={t} />,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/NextcloudWorkspace/Stepper/index.tsx",
-      "line_number": 161,
+      "line_number": 160,
       "context": "title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"Nextcloud\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),\n description: t(\"Settings:ImportCompleteDescriptionNextcloud\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: <ImportCompleteStep t={t} />,",
       "module": "/packages/client"
     },
@@ -60,8 +60,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Входирането на данни е завършено' while understandable, doesn't perfectly capture the meaning of 'Data import complete'. 'Входиране' implies an input or entry process, which isn't the most accurate representation of 'import'.",
-          "suggestion": "Consider a more direct translation like 'Импортирането на данни е завършено' or 'Завършено е импортирането на данни'."
+          "description": "While 'Входирането на данни е завършено' is understandable, it's not the most natural or idiomatic translation for 'Data import complete'. 'Входиране' is closer to 'importing data' and sounds formal and slightly awkward in this context.",
+          "suggestion": "Попълването на данните е приключило"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "A more common and natural translation would be to use words that convey the completion of an import process. 'Входиране' sounds like an ongoing process rather than a finished one.",
+          "suggestion": "Импортирането на данните е приключило"
         }
       ],
       "approved_at": null
@@ -72,8 +77,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Import dat dokončen' is not idiomatic Czech. While technically understandable, a more natural translation would be 'Import dokončen'. The word 'dat' is redundant.",
-          "suggestion": "Import dokončen"
+          "description": "The translation \"Import dat dokončen\" is not the most natural or accurate Czech translation of \"Data import complete\". While understandable, it's a bit clunky. \"Datová import je dokončen\" or \"Import dat byl dokončen\" would be better.",
+          "suggestion": "Datová import je dokončen"
         }
       ],
       "approved_at": null
@@ -87,7 +92,18 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'Ολοκλήρωση εισαγωγής δεδομένων' is a bit formal and verbose for a user-facing message. A more natural and concise translation would improve the user experience.",
+          "suggestion": "Εισαγωγή δεδομένων ολοκληρώθηκε"
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a space before the punctuation, which might not be consistent with the rest of the UI.",
+          "suggestion": "Εισαγωγή δεδομένων ολοκληρώθηκε."
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -111,18 +127,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'Տվյալների' (Data) is misspelled. The correct spelling is 'Տվյալների'.",
-          "suggestion": "Տվյալների"
-        },
-        {
-          "type": "grammar",
-          "description": "The phrase 'ավարտված է' (is completed) is grammatically correct, but using 'ավարտվել է' (has completed) might sound more natural in this context.",
-          "suggestion": "ավարտվել է"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -158,13 +163,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Gegevens importeren voltooid' is a literal translation and sounds awkward. A more natural phrasing would be 'Importeren voltooid' or 'Data-import voltooid'.",
-          "suggestion": "Importeren voltooid"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -191,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Import date finalizat' is not the most natural Romanian equivalent of 'Data import complete'. 'Date' refers to a calendar date, not data. 'Import finalizat' or 'Importul a fost finalizat' would be more accurate.",
-          "suggestion": "Import finalizat"
+          "description": "The translation 'Import date finalizat' is not the most natural Romanian for 'Data import complete'. 'Finalizat' implies completion of a date itself, not a data import process.",
+          "suggestion": "Importul de date a fost finalizat"
         }
       ],
       "approved_at": null
@@ -251,8 +250,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nhập dữ liệu đã hoàn thành' is a literal translation and can be improved for naturalness in Vietnamese. While technically correct, it sounds slightly awkward.",
-          "suggestion": "Dữ liệu đã được nhập hoàn tất."
+          "description": "While technically correct, the translation 'Nhập dữ liệu đã hoàn thành' sounds slightly unnatural in Vietnamese. A more idiomatic translation would be preferable.",
+          "suggestion": "Dữ liệu đã nhập xong."
         }
       ],
       "approved_at": null

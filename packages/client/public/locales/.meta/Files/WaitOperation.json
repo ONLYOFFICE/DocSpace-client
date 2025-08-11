@@ -3,7 +3,7 @@
   "content": "Wait for the current operation to complete",
   "content_en_sha1_hash": "43744920068ae9c077e24f893ad58703d318a3a0",
   "created_at": "2025-05-19T21:30:56.313Z",
-  "updated_at": "2025-06-03T20:59:42.288Z",
+  "updated_at": "2025-08-04T07:30:01.591Z",
   "comment": {
     "text": "This translation key is used to display a warning message that indicates the current operation is being waited on, typically in a toast notification. It appears when the \"Files:WaitOperation\" action is triggered, informing users of a pending process. Translators should consider phrases that convey a sense of waiting or anticipation for the operation's completion.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1106,
+      "line_number": 1110,
       "context": "onShowEditingToast = (t) => {\n toastr.error(t(\"Files:DocumentEdited\"));\n };\n \n onShowWaitOperationToast = (t) => {\n toastr.warning(t(\"Files:WaitOperation\"));\n };\n \n onClickMute = (e, item, t) => {\n const data = (e.currentTarget && e.currentTarget.dataset) || e;\n const { action } = data;",
       "module": "/packages/client"
     }
@@ -96,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"現在の操作が完了するまで少々お待ちください\" is a more verbose and polite phrasing than the original English \"Wait for the current operation to complete.\" While not strictly incorrect, it adds unnecessary politeness and adds a timeframe implication (\"少々\" - for a little while). A more direct translation would be better suited.",
-          "suggestion": "現在の操作の完了までお待ちください"
+          "description": "The translation \"現在の操作が完了するまで少々お待ちください\" is overly polite and a bit verbose for a simple \"Wait for the current operation to complete.\" It conveys \"please wait a little while until the current operation is complete.\"  A more direct translation would be preferred.",
+          "suggestion": "現在の操作の完了をお待ちください"
         }
       ],
       "approved_at": null
@@ -108,13 +108,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '현재 작업이 완료될 때까지 기다려 주세요 ' is too formal for a user interface element. The '세요' ending makes it sound like a command or a very polite request, which isn't always appropriate.",
-          "suggestion": "현재 작업 완료까지 기다려주세요"
-        },
-        {
-          "type": "formatting",
-          "description": "While not strictly an error, consider shortening the translation to improve readability and fit within UI constraints. The current version is relatively long.",
-          "suggestion": "작업 완료까지 기다려주세요"
+          "description": "The translation '현재 작업이 완료될 때까지 기다려 주세요 ' is overly polite. While technically correct, it's not the most natural phrasing for a technical context. A more direct and concise translation would be more appropriate.",
+          "suggestion": "현재 작업 완료를 기다려주세요"
         }
       ],
       "approved_at": null
@@ -122,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ດໍາເນີນງານ' might be better translated to 'ປະຕິບັດງານ' for a more natural flow in this context.",
+          "suggestion": "ລໍຖ້າສໍາເລັດການປະຕິບັດງານໃນປັດຈຸບັນ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -172,14 +173,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'ක්‍රියාවලිය' (kriyawaliiya) is a valid word but can be more naturally expressed as 'කිරීම' (kerima) in this context, which means 'doing' or 'action'. While technically correct, it makes the sentence sound overly formal.",
-          "suggestion": "Replace 'ක්‍රියාවලිය' with 'කිරීම'."
+          "type": "incorrect_translation",
+          "description": "The translation \"වත්මන් ක්‍රියාවලිය සම්පූර්ණ වනතුරු රැඳී සිටින්න.\" while understandable, is a bit formal and verbose for a UI element. It translates literally to 'Wait until the current process is completed'. A more natural phrasing might be more suitable.",
+          "suggestion": "Consider a simpler translation like \"ක්‍රියාවලිය අවසාදාවකදී රැඳී සිටින්න\" (Wait until the process finishes) or \"කළු đợi කරන්න\" (Just wait)."
         },
         {
-          "type": "grammatical",
-          "description": "The sentence structure could be slightly improved for better flow. The phrase 'වත්මන්' (vathman) 'current' modifies 'ක්‍රියාවලිය' (kriyawaliiya/kerima) directly, but it reads slightly better if it modifies ' රැඳී සිටින්න' (radhee sithinna) - 'wait'.",
-          "suggestion": "Consider restructuring the sentence to be 'වත්මන් කිරීම වනතුරු රැඳී සිටින්න' (vathman kerima wena thuru radhee sithinna)."
+          "type": "formatting",
+          "description": "While not strictly incorrect, the punctuation at the end of the Sinhala sentence is appropriate for general writing, but a more common practice for UI elements is to omit it.",
+          "suggestion": "Remove the period at the end of the string: \"වත්මන් ක්‍රියාවලිය සම්පූර්ණ වනතුරු රැඳී සිටින්න\""
         }
       ],
       "approved_at": null

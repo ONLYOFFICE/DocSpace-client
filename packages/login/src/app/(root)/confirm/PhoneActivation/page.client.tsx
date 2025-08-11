@@ -26,7 +26,6 @@
 
 "use client";
 
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -37,10 +36,10 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 
+const currentNumber = "+00000000000";
+
 const ChangePhoneForm = () => {
   const { t } = useTranslation(["Confirm", "Common"]);
-
-  const [currentNumber, setCurrentNumber] = useState("+00000000000");
 
   return (
     <>
@@ -62,8 +61,8 @@ const ChangePhoneForm = () => {
         name="phone"
         type={InputType.tel}
         size={InputSize.large}
-        scale={true}
-        isAutoFocussed={true}
+        scale
+        isAutoFocussed
         tabIndex={1}
         hasError={false}
         guide={false}

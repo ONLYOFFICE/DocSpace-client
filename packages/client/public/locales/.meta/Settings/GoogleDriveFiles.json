@@ -3,7 +3,7 @@
   "content": "Google Drive's Files",
   "content_en_sha1_hash": "03293463a6f92221c71c20964b6eac4df743685f",
   "created_at": "2025-05-19T21:30:51.588Z",
-  "updated_at": "2025-05-28T09:30:02.504Z",
+  "updated_at": "2025-06-30T12:20:31.406Z",
   "comment": {
     "text": "Google Drive's Files is used to describe a setting or option related to Google Drive files, likely appearing in a settings or configuration area. This key could be used for translations of labels or descriptions about Google Drive file management or export options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/GoogleWorkspace/Stepper/index.tsx",
-      "line_number": 136,
+      "line_number": 135,
       "context": "usersExportDetails={{\n name: t(\"Common:Contacts\"),\n icon: PeopleIcon,\n }}\n personalExportDetails={{\n name: t(\"Settings:GoogleDriveFiles\"),\n }}\n sharedFilesExportDetails={{\n name: t(\"Settings:SharedFiles\"),\n }}\n sharedFoldersExportDetails={{",
       "module": "/packages/client"
     }
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Google Diskin Faylları' is not the most natural or accurate translation of 'Google Drive's Files'. 'Disk' refers to a physical disk, while 'Drive' refers to the cloud storage service. A more accurate translation would incorporate 'Drive' or a similar term.",
-          "suggestion": "Google Drive-in Faylları"
+          "description": "The translation \"Google Diskin Faylları\" is a literal translation and doesn't flow naturally in Azerbaijani. While technically correct, it sounds awkward.",
+          "suggestion": "Google Drive-dəki Fayllar"
         }
       ],
       "approved_at": null
@@ -54,8 +54,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Soubory na Disku Google\" is understandable, a more natural and accurate translation of \"Google Drive's Files\" would be \"Soubory v Disku Google\" or \"Soubory Google Disku\".  'na' implies 'on' which isn't the best fit for describing files within a drive.",
-          "suggestion": "Soubory v Disku Google"
+          "description": "While 'Soubory na Disku Google' is understandable, it's a very literal translation. A more natural and idiomatic Czech translation for 'Google Drive's Files' would be something like 'Soubory Google Disku' or 'Soubory v Google Disku'. The current translation emphasizes the physical disk, whereas the English phrase refers to files *within* Google Drive.",
+          "suggestion": "Consider 'Soubory Google Disku' or 'Soubory v Google Disku' for a more natural Czech phrasing."
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"Dateien von Google Drive\" is a very literal translation and sounds somewhat unnatural in German. A more idiomatic translation would be \"Google Drive-Dateien\" or \"Dateien in Google Drive\".",
+          "suggestion": "Google Drive-Dateien"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -84,8 +90,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Google Driven tiedostot' is understandable, a more natural and accurate translation of 'Google Drive's Files' in Finnish would be 'Google Driveen tallennetut tiedostot' or 'Google Driven tiedostot' is acceptable but less common.",
-          "suggestion": "Google Driveen tallennetut tiedostot"
+          "description": "The translation 'Google Driven tiedostot' is not the most natural or accurate translation of 'Google Drive's Files'. 'Driven' doesn't accurately convey the meaning of 'Drive' in this context. A more appropriate translation would incorporate 'Pilvet' (clouds) or rephrase the sentence.",
+          "suggestion": "Google Pilven tiedostot"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While 'tiedostot' is correct for 'files', the phrasing doesn't flow as naturally in Finnish when combined with 'Google' in this context. A more colloquial option might be preferable.",
+          "suggestion": "Google Drive -tiedostot"
         }
       ],
       "approved_at": null
@@ -123,13 +134,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While technically correct, 'ໄຟລ໌ຂອງ Google Drive' is a very literal translation. A more natural Lao phrasing would be 'ໄຟລ໌ໃນ Google Drive' (Files in Google Drive).",
-          "suggestion": "ໄຟລ໌ໃນ Google Drive"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -177,7 +182,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'Google Drive හි ගොනු' while understandable, could be more precise. 'හි' indicates possession, implying 'Google Drive's files' in a more literal sense. A more natural translation might convey 'Google Drive Files' as a general topic or a section within Google Drive.",
+          "suggestion": "Google Drive ගොණු (Google Drive Gonu)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -186,7 +197,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Súbory Google Disk' is understandable, a more natural and accurate translation of 'Google Drive's Files' would be 'Súbory na Google Disku'. 'Disk' should be in the instrumental case.",
+          "description": "While \"Súbory Google Disk\" is understandable, a more accurate and natural translation of \"Google Drive's Files\" would be \"Súbory na Google Disku\". \"Disk\" is often used as a general term, whereas \"na Google Disku\" specifies the location within Google Drive.",
           "suggestion": "Súbory na Google Disku"
         }
       ],
@@ -195,13 +206,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While \"Google Drive datoteke\" is a literal translation of \"Google Drive Files\", it lacks the possessive article. A more natural and accurate translation would include the possessive.",
-          "suggestion": "Google Driveove datoteke"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -210,7 +215,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Фајлови на Google Drive-у\" can sound slightly awkward. A more natural and idiomatic Serbian (Cyrillic) translation would be \"Datoteke Google Drive-a\". The use of 'на' isn't the most common construction for this kind of possessive relationship.",
+          "description": "The translation 'Фајлови на Google Drive-у' is not the most natural or precise translation of 'Google Drive's Files'. While technically correct, a more idiomatic translation would be 'Datoteke Google Drive-a'. The use of 'на' sounds slightly awkward.",
           "suggestion": "Datoteke Google Drive-a"
         }
       ],
@@ -222,7 +227,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Fajlovi na Google Drive-u\" is understandable, a more precise translation of \"Google Drive's Files\" would be \"Datoteke na Google Drive-u\". \"Fajlovi\" generally refers to files in a more general sense, while \"Datoteke\" is specifically used for digital files.",
+          "description": "While \"Fajlovi na Google Drive-u\" is understandable, a more natural and accurate translation of \"Google Drive's Files\" would be \"Datoteke na Google Drive-u\" or \"Google Drive datoteke\". \"Fajlovi\" more closely translates to 'files' in a general sense, whereas 'Datoteke' is more appropriate for documents/digital files.",
           "suggestion": "Datoteke na Google Drive-u"
         }
       ],
@@ -246,7 +251,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Tập tin Google Drive' is understandable, a more natural and idiomatic translation of 'Google Drive's Files' would be 'Các tệp Google Drive' or 'Tệp tin trên Google Drive'.  'Tập tin Google Drive' implies the files *belong* to Google Drive as a proper noun, rather than being located *on* Google Drive.",
+          "description": "The translation 'Tập tin Google Drive' is technically correct, but less natural than 'Các tệp Google Drive' or simply 'Tệp Google Drive'. While 'Tập tin' is acceptable, 'Các tệp' is more common when referring to a collection of files.",
           "suggestion": "Các tệp Google Drive"
         }
       ],
@@ -258,8 +263,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Google Drive 文件\" is a literal translation of \"Google Drive Files.\" While technically correct, a more natural and idiomatic Chinese translation would consider the context (likely a menu option or setting).  \"Google Drive 的文件\" would be a slightly more natural phrasing to indicate \"Files in Google Drive\".",
-          "suggestion": "Google Drive 的文件"
+          "description": "The English content 'Google Drive's Files' is best translated as 'Google 盘文件' or 'Google 云端硬盘文件' to accurately convey the meaning of files within Google Drive, rather than a more literal 'Google Drive 文件'. The latter is understandable but lacks the nuance of referring to the files *within* Google Drive.",
+          "suggestion": "Google 盘文件"
         }
       ],
       "approved_at": null

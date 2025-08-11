@@ -3,7 +3,7 @@
   "content": "If you enable these users, they will be able to log in to {{productName}} again and access their documents and data.",
   "content_en_sha1_hash": "61e8d10c36f1b30de48b0856fadfef112538af82",
   "created_at": "2025-05-19T21:30:56.975Z",
-  "updated_at": "2025-05-20T09:37:42.991Z",
+  "updated_at": "2025-08-04T07:30:01.066Z",
   "comment": {
     "text": "If you enable these users, they will be able to log in to {{productName}} again and access their documents and data. This description appears in a change user status dialog when enabling user capabilities.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 207,
+      "line_number": 203,
       "context": "? isGuests\n ? t(\"EnableGuestDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUserDescription\", { productName: t(\"Common:ProductName\") })\n : isGuests\n ? t(\"EnableGuestsDescription\", { productName: t(\"Common:ProductName\") })\n : t(\"EnableUsersDescription\", { productName: t(\"Common:ProductName\") });\n \n buttonLabelSave = t(\"Common:Enable\");\n }\n \n return (",
       "module": "/packages/client"
     }
@@ -63,7 +63,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'activa' (activate) might be too formal for this context. 'habilitar' would be a more natural and common translation for 'enable' in this setting.",
+          "suggestion": "Si habilitas a estos usuarios, podrán volver a iniciar sesión en {{productName}} y acceder a sus documentos y datos."
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -87,7 +93,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation uses 'potranno accedere' which implies a future action. The English says they *will* be able to, but the context is more about the immediate capability. 'Potranno accedere' suggests they will be able to in the future, while 'saranno in grado di accedere' would be more accurate to reflect the 'will be able to' in the English.",
+          "suggestion": "Se abiliti questi utenti, saranno in grado di accedere nuovamente a {{productName}} e accedere ai propri documenti e dati."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -99,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase '해당 사용자의 문서와 데이터에 액세스할 수 있습니다' is a bit clunky. A more natural Korean phrasing would be something like '자신의 문서 및 데이터에 접근할 수 있습니다'.",
+          "suggestion": "자신의 문서 및 데이터에 접근할 수 있습니다"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,7 +159,23 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Romanian translation uses the singular 'utilizator' (user) instead of the plural 'utilizatori' to match 'these users' in the English content. This makes the sentence grammatically incorrect.",
+          "suggestion": "Dacă activați acești utilizatori, aceștia se vor putea conecta din nou la spațiu {{productName}} și vor putea accesa documentele și datele."
+        },
+        {
+          "type": "grammar",
+          "description": "The reflexive pronoun 'se' is awkwardly placed after 'acesta' which makes it feel disjointed. While not technically incorrect, it's not idiomatic Romanian.",
+          "suggestion": "Dacă activați acești utilizatori, aceștia se vor putea conecta din nou la spațiu {{productName}} și vor putea accesa documentele și datele."
+        },
+        {
+          "type": "formatting",
+          "description": "The Romanian translation does not use the pronoun 'vor' to correspond with the plural 'utilizatori' making the verb conjugation inconsistent with the subject.",
+          "suggestion": "Dacă activați acești utilizatori, aceștia se vor putea conecta din nou la spațiu {{productName}} și vor putea accesa documentele și datele."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +187,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ඔබ' is used unnecessarily. It can be removed without affecting the meaning.",
+          "suggestion": "මෙම පරිශ්‍රීලකයින් සබල කළහොත්, නැවත {{productName}} වෙත ඇතුළු වී ඔවුන්ගේ ලේඛන සහ දත්ත වෙත ප්‍රවේශ වීමට හැකි වනු ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -171,7 +211,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'ц́е' should be 'моћи'. It's a contraction of 'ће' and 'моћи', and 'моћи' is the correct verb form here.",
+          "suggestion": "Ако омогуц́ите ове кориснике, они моћи ће поново да се пријаве на {{productName}} и приступе својим документима и подацима."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

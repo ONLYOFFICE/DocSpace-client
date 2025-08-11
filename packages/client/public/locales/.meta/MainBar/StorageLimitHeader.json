@@ -3,7 +3,7 @@
   "content": "The limit is reached for storage space: {{currentValue}} / {{maxValue}}",
   "content_en_sha1_hash": "63cc2e86a45ce54b7dd9dbcb9ead13ec897e7870",
   "created_at": "2025-05-19T21:30:54.139Z",
-  "updated_at": "2025-07-01T15:57:35.916Z",
+  "updated_at": "2025-06-30T12:20:31.148Z",
   "comment": {
     "text": "The \"StorageLimitHeader\" translation key is used to display a message indicating that storage space has been reached, showing the current and maximum values. This text appears in the QuotasBar component, specifically on the storage limit threshold. It provides context for users when they reach their allocated storage space.",
     "is_auto": true,
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Finnish translation retains the English formatting of the placeholders {{currentValue}} and {{maxValue}}. While functional, it would be more natural to consider how these would be handled in Finnish context.  For example, they might be replaced with more descriptive text or Finnish variable names.",
-          "suggestion": "Consider localizing the placeholders further, e.g., 'Käytetty tila / Maksimi tila' or 'Nykyinen käyttö / Suurin sallittu'."
+          "description": "The Finnish translation retains the English variable placeholders {{currentValue}} and {{maxValue}}.  These should ideally be integrated into the Finnish phrasing for a more natural feel. While technically correct, it looks like a direct translation.",
+          "suggestion": "Consider a more integrated phrasing like: 'Muistutilan ylityskohta: {{currentValue}} / {{maxValue}}' or 'Varastotilan ylityskohta: {{currentValue}} / {{maxValue}}'"
         }
       ],
       "approved_at": null
@@ -117,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Lao translation \"ເກນກຳນົດແມ່ນບັນເຕືອນ\" translates to \"The limit is a warning.\" This doesn't accurately convey the original meaning of \"The limit is reached.\" A more accurate translation would be something along the lines of \"ເຕືອກເຕືອນກໍານົດເຕັມໂຕ\" or \"ເຕືອກເຕືອນກໍານົດເຕັມຊົມ“.  The phrase 'ບັນເຕືອນ' is appropriate for a warning, but not for indicating the limit has been reached.",
+          "suggestion": "ເຕືອກເຕືອນກໍານົດເຕັມໂຕ"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -168,13 +174,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'හිටුවාගත්' (hituwagahat) is not the most natural or precise way to express 'reached' or 'exceeded' in this context. It implies a setup or construction, which isn't the intended meaning.",
-          "suggestion": "Consider using 'අධික වූ' (adhika vu), 'ඉක්මවා ඇත' (ikmava tha), or 'සීමාව ඉක්මවා ඇත' (seemawa ikmava tha) instead. 'ඉක්මවා ඇත' (ikmava tha) is a good option, as it directly translates to 'exceeded'."
+          "description": "The word 'හිටුවාගත්' (hituvagath) is not the most natural way to express 'limit'. It translates more literally to 'established/set'.",
+          "suggestion": "Consider using 'ඉඩකඩ' (idakada) or 'සීමාව' (seemawa) instead of 'හිටුවාගත්' to convey 'limit' more naturally."
         },
         {
-          "type": "grammar",
-          "description": "While grammatically correct, the phrasing 'හිටුවාගත් ඉඩ ප්‍රමාණය ඉක්මවා ගොස් ඇත' sounds a bit formal and less natural in conversational Sinhala.  A more common and smoother phrasing would improve readability.",
-          "suggestion": "Consider rephrasing the entire phrase. For example: 'තොගដែඩ ඉඩ ප්‍රමාණය ඉක්මවා ඇත: {{currentValue}} / {{maxValue}}' (Thogadaeda ida pramaanya ikmava tha: {{currentValue}} / {{maxValue}})"
+          "type": "incorrect_translation",
+          "description": "While technically correct, 'හිටුවාගත් ඉඩ ප්‍රමාණය ඉක්මවා ගොස් ඇත' is a bit wordy for a user interface message. The phrasing doesn't sound as clear and concise as it could be.",
+          "suggestion": "Consider a simpler phrasing like 'සීමාව ඉක්මවා ගොස් ඇත: {{currentValue}} / {{maxValue}}' (Seemawa ikmavagose atha: {{currentValue}} / {{maxValue}})"
         }
       ],
       "approved_at": null
@@ -185,8 +191,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Limit pre úložný priestor je dosiahnutý' translates to 'The limit for storage space is reached'. While technically correct, it sounds less natural than alternatives. A better phrasing would convey the information more clearly and naturally in Slovak.",
-          "suggestion": "Consider alternatives like: 'Dosiahli ste limit úložného priestoru: {{currentValue}} / {{maxValue}}' (You have reached the storage space limit: {{currentValue}} / {{maxValue}}) or 'Úložný priestor je plný: {{currentValue}} / {{maxValue}}' (Storage space is full: {{currentValue}} / {{maxValue}})."
+          "description": "The translation 'Limit pre úložný priestor je dosiahnutý' is not the most natural or accurate rendering of 'The limit is reached for storage space'. A more accurate and idiomatic translation would be 'Dosiahnutý je limit úložného priestoru' or 'Je prekročený limit úložného priestoru'.",
+          "suggestion": "Je prekročený limit úložného priestoru"
         }
       ],
       "approved_at": null

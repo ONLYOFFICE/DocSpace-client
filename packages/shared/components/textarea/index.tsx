@@ -69,6 +69,7 @@ const Textarea = ({
   isFullHeight = false,
   classNameCopyIcon,
   isChatMode = false,
+  dataTestId,
 }: TextareaProps) => {
   const { isRTL } = useInterfaceDirection();
 
@@ -220,7 +221,7 @@ const Textarea = ({
           ref={areaRef}
           dir="auto"
           data-dir={isRTL ? "rtl" : undefined}
-          data-testid="textarea"
+          data-testid={dataTestId ?? "textarea"}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
         />

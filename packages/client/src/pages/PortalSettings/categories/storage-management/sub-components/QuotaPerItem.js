@@ -30,9 +30,9 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { QuotaForm } from "@docspace/shared/components/quota-form";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import QuotaForm from "../../../../../components/QuotaForm";
 
 let timerId = null;
 const QuotaPerItemComponent = (props) => {
@@ -48,6 +48,7 @@ const QuotaPerItemComponent = (props) => {
     type,
 
     tabIndex,
+    dataTestId,
   } = props;
 
   const { t } = useTranslation("Settings");
@@ -103,6 +104,7 @@ const QuotaPerItemComponent = (props) => {
           onChange={onToggleChange}
           isChecked={isToggleChecked}
           isDisabled={isDisabled || isLoading}
+          dataTestId={dataTestId ? `${dataTestId}_button` : undefined}
         />
         <Text className="toggle_label" fontSize="12px">
           {type === "user"
@@ -125,6 +127,7 @@ const QuotaPerItemComponent = (props) => {
             onCancel={onCancel}
             initialSize={initialSize}
             tabIndex={tabIndex}
+            dataTestId={dataTestId ? `${dataTestId}_form` : undefined}
           />
         ) : null}
       </div>

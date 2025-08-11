@@ -3,7 +3,7 @@
   "content": "By authenticator app",
   "content_en_sha1_hash": "3b67ff7b02933cd6dfbd70b74628ba41aaf1425f",
   "created_at": "2025-05-19T21:30:50.850Z",
-  "updated_at": "2025-06-18T07:34:15.197Z",
+  "updated_at": "2025-08-04T07:30:01.554Z",
   "comment": {
     "text": "\"This translation key is used for 'By authenticator app' and appears on a settings page. It's likely part of an accessibility option or feature related to two-factor authentication.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 224,
-      "context": "value: \"sms\",\n disabled: !smsAvailable,\n }, */\n {\n id: \"by-app\",\n label: t(\"ByApp\"),\n value: \"app\",\n disabled: !appAvailable,\n },\n ]}\n selected={type}",
+      "line_number": 227,
+      "context": "value: \"sms\",\n disabled: !smsAvailable,\n }, */\n {\n id: \"by-app\",\n label: t(\"ByApp\"),\n value: \"app\",\n disabled: !appAvailable,\n dataTestId: \"tfa_radio_button_app\",\n },\n ]}",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Doğrulama tətbiqi vasitəsilə\" is a literal translation and not the most natural way to express \"By authenticator app\" in Azerbaijani. It translates to 'via authenticator app' or 'by means of authenticator app'. A more natural phrasing would depend on the surrounding context, but a more direct and common translation would be something like 'authentikator tətbiqi ilə'.",
-          "suggestion": "authentikator tətbiqi ilə"
+          "description": "The translation 'Doğrulama tətbiqi vasitəsilə' while understandable, is not the most natural or accurate translation of 'By authenticator app'. It translates to 'Via authenticator app'. A more idiomatic translation would be something like 'authenticator tətbiqi ilə' or 'authenticator tətbiqi vasitəsi ilə'.",
+          "suggestion": "authenticator tətbiqi ilə"
         }
       ],
       "approved_at": null
@@ -63,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Με εφαρμογή ελέγχου ταυτότητας\" while understandable, is a more literal and less natural way to say \"By authenticator app\" in Greek. A more common and fluent phrasing would be something like \"Μέσω εφαρμογής ελέγχου ταυτότητας\" or \"Χρησιμοποιώντας εφαρμογή ελέγχου ταυτότητας\".",
+          "suggestion": "Μέσω εφαρμογής ελέγχου ταυτότητας"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -72,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Con ayuda de la aplicación para autenticación\" is technically correct but sounds somewhat clunky and less natural. \"Por medio de la aplicación de autenticación\" or \"Utilizando la aplicación de autenticación\" would be more common and fluid.",
-          "suggestion": "Utilizando la aplicación de autenticación"
+          "description": "The translation 'Con ayuda de la aplicación para autenticación' is a bit literal and clunky. A more natural and fluent translation would be something like 'Mediante la aplicación de autenticación' or 'Utilizando la aplicación de autenticación'.",
+          "suggestion": "Mediante la aplicación de autenticación"
         }
       ],
       "approved_at": null
@@ -84,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Autentikointisovelluksella' translates to 'with an authenticator app' or 'by means of an authenticator app', rather than 'By authenticator app'. It doesn't accurately reflect the English phrasing.",
+          "description": "The translation \"Autentikointisovelluksella\" while technically meaning 'with an authenticator app' doesn't quite convey the intended meaning of 'By authenticator app'. It lacks the possessive/attribution aspect. A more accurate translation would indicate that the setting relates *to* an authenticator app, rather than being *used by* one.",
           "suggestion": "Autentikointisovelluksen kautta"
         }
       ],
@@ -96,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'A l'aide de l'application d'authentification' is too literal and doesn't flow naturally in French. A more idiomatic translation would be more suitable.",
-          "suggestion": "Par application d'authentification"
+          "description": "The translation 'A l'aide de l'application d'authentification' is not the most natural or precise translation of 'By authenticator app'. It translates more literally to 'With the authenticator app'. A better translation would convey the meaning of using the app to authenticate, not simply using it.",
+          "suggestion": "Par l'application d'authentification"
         }
       ],
       "approved_at": null
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Իսկորոշիչ հավելվածով \" is not a direct or accurate translation of \"By authenticator app\". It literally translates to something like \"With authenticator app\" which doesn't convey the intended meaning of 'by'.",
-          "suggestion": "A more accurate translation would be something like \"Authenticator app-ի միջոցով\" (Authenticator app through) or \"Authenticator app-ով\" (Authenticator app with) depending on the desired nuance and the overall context. Consider “Authenticator app-ի օգտագործումով” (Using authenticator app) for further clarity."
+          "description": "The Armenian translation \"Իսկորոշիչ հավելվածով \" is not an accurate translation of \"By authenticator app\". It literally translates to \"With authenticator app\" which changes the meaning. It doesn't convey the concept of 'by' or 'using'.",
+          "suggestion": "Կոնսուլիդիչ հավելվածով (Konsulidič havel'adov) - Meaning 'By/Using Authenticator App'"
         }
       ],
       "approved_at": null
@@ -126,8 +132,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"認証アプリで\" is a literal translation and lacks context. It doesn't fully convey the meaning of \"by authenticator app.\" It implies 'with an authenticator app' rather than 'through an authenticator app' or 'using an authenticator app'.",
-          "suggestion": "認証アプリ経由で (authentication app via)"
+          "description": "The translation '認証アプリで' is a literal translation but doesn't convey the full meaning of 'By authenticator app' in this context. It implies 'with an authenticator app,' not 'by an authenticator app'. The nuance of 'by' is lost.",
+          "suggestion": "「認証アプリ経由で」or「認証アプリを使用することで」would be more accurate, conveying the meaning of 'by using an authenticator app' or 'through an authenticator app'."
         }
       ],
       "approved_at": null
@@ -138,8 +144,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation '인증 앱 이용' is a literal translation that doesn't fully convey the meaning of \"By authenticator app\". It translates to 'Using an authentication app'. It's missing the 'by' aspect, which implies association or usage *with* an authenticator app, not just the act of using one.",
-          "suggestion": "Consider options like '인증 앱을 통해' (through an authenticator app) or '인증 앱 사용 시' (when using an authenticator app) to better reflect the original meaning."
+          "description": "The translation \"인증 앱 이용\" (Injeung aep 이용) doesn't fully capture the meaning of \"By authenticator app\". It translates to \"Using an authentication app\" which implies action rather than specifying the method.",
+          "suggestion": "Consider a translation like \"인증 앱을 통해\" (Injeung aep-eul tonghae) which means \"through the authenticator app\" or \"via the authenticator app\", or \"인증 앱 사용 시\" (Injeung aep sayong si) which translates to \"When using an authenticator app\"."
         }
       ],
       "approved_at": null
@@ -150,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation \"ຈາກການກວດສອບສິດ\" translates to \"From authentication\" or \"From authorization\", which doesn't accurately convey \"By authenticator app\". It lacks the nuance of indicating the setting applies *because of* an authenticator app.",
-          "suggestion": "ອັນນີ້ກ່ຽວກັບແອັບຯກວດສິດ"
+          "description": "The Lao translation \"ຈາກການກວດສອບສິດ\" translates to \"From authentication\" or \"From verification\". It doesn't accurately convey the meaning of \"By authenticator app,\" which implies an action performed *using* an authenticator app.  It lacks the nuance of 'using' or 'through'.",
+          "suggestion": "A more accurate translation might be something like \"ຜ່ານແອບພຶກັດສິດ\" (through authenticator app) or \"ໂດຍໃຊ້ແອບພຶກັດສິດ\" (by using authenticator app)."
         }
       ],
       "approved_at": null
@@ -162,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Pēc autentifikācijas lietotnes\" translates to \"After the authentication app\". A more natural and accurate translation would be \"Ar autentifikācijas lietotni\" which means \"With the authentication app\".",
-          "suggestion": "Ar autentifikācijas lietotni"
+          "description": "The Latvian translation 'Pēc autentifikācijas lietotnes' literally translates to 'After authentication app'. It doesn't accurately convey the meaning of 'By authenticator app', which implies association or usage with an authenticator app. A better translation would clarify this relationship.",
+          "suggestion": "Izmantojot autentifikācijas lietotni"
         }
       ],
       "approved_at": null
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Via authenticator app\" is functionally correct but lacks the nuance of the English \"By authenticator app\". \"By\" implies association or use, which \"Via\" does but less directly. A more precise translation might be 'Met een authenticator app' or 'Middels een authenticator app'.",
-          "suggestion": "Met een authenticator app"
+          "description": "The translation 'Via authenticator app' doesn't fully capture the nuance of 'By authenticator app'. 'By' in this context implies association or usage. 'Via' suggests a route or medium. While not incorrect, 'Via' is less precise.",
+          "suggestion": "Over authenticator app"
         }
       ],
       "approved_at": null
@@ -204,7 +210,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Prin aplicația de autentificare \" is missing the word 'with' or a similar preposition to accurately convey the meaning of 'By authenticator app'. It currently translates to 'Through authenticator app,' which isn't quite right.",
+          "description": "The translation \"Prin aplicația de autentificare \" is incomplete. It is missing the word 'authenticator' which is present in the English content \"By authenticator app\".  It should indicate that the setting applies *to* an authenticator app, not simply that it is 'through' one.",
           "suggestion": "Prin aplicația de autentificare"
         }
       ],
@@ -222,8 +228,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ද්වි-සාධක යෙදුමෙන්' (dvi-sadaka yedumen) literally translates to 'from two-factor application'. While understandable, a more natural and accurate translation of 'By authenticator app' would be something along the lines of 'authenticator app හරහා' (authenticator app harathaa) or 'authenticator app භාවිතයෙන්' (authenticator app vashthayen). The current translation implies a direction *from* the app, whereas 'By' indicates usage or association.",
-          "suggestion": "authenticator app හරහා (authenticator app harathaa) or authenticator app භාවිතයෙන් (authenticator app vashthayen)"
+          "description": "The translation \"ද්වි-සාධක යෙදුමෙන්\" (dwī-sādhaka yedumen) translates to 'by two-factor application'. While technically correct, it's not the most natural or user-friendly way to express 'by authenticator app' in Sinhala. It's overly literal.",
+          "suggestion": "Consider a more natural phrasing like \"authenticator යෙදුමෙන්\" (authenticator yedumen) or \"authenticator app භාවිතා කිරීමෙන්\" (authenticator app uttama kirimen) which means 'using the authenticator app'."
         }
       ],
       "approved_at": null
@@ -234,8 +240,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Slovak translation 'Aplikáciou na overenie totožnosti' is a literal translation that doesn't quite capture the nuance of 'By authenticator app'. It sounds overly formal and technical.  A more natural and contextually appropriate translation would be something like 'Prostredníctvom autentifikačnej aplikácie' or 'Použitím autentifikačnej aplikácie'.",
-          "suggestion": "Použitím autentifikačnej aplikácie"
+          "description": "The translation \"Aplikáciou na overenie totožnosti\" is a literal translation, but a more natural and common Slovak phrasing would be \"prostredníctvom overovacej aplikácie\" or \"pomocou overovacej aplikácie\". \"Aplikáciou na overenie totožnosti\" is grammatically correct but sounds awkward and technical in this context.",
+          "suggestion": "prostredníctvom overovacej aplikácie"
         }
       ],
       "approved_at": null
@@ -243,7 +249,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Z aplikacijo za avtentikacijo\" is a literal translation, but 'By authenticator app' implies that the setting relates to using an authenticator app. A more natural translation would be something along the lines of 'Preko aplikacije za avtentikacijo' or 'S pomočjo aplikacije za avtentikacijo'.",
+          "suggestion": "Preko aplikacije za avtentikacijo"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -255,7 +267,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While the translation is understandable, 'Preko aplikacije za autentifikaciju' literally translates to 'Through authenticator app'. A more natural and accurate translation would be 'Uz aplikaciju za autentifikaciju' or 'Kroz aplikaciju za autentifikaciju'. 'Preko' can imply a broader scope or a method of crossing over, not necessarily using the app.",
+          "suggestion": "Uz aplikaciju za autentifikaciju"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -264,7 +282,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Kimlik doğrulama uygulaması ile\" is a literal translation of \"with authenticator app.\" It doesn't convey the intended meaning, which is \"by means of an authenticator app\" or \"through an authenticator app.\"  It sounds awkward in Turkish.",
+          "description": "The translation \"Kimlik doğrulama uygulaması ile\" while technically correct, doesn't fully capture the intended meaning of \"By authenticator app\". It implies 'with' rather than 'using/through'. A more accurate translation would imply instrumentality.",
           "suggestion": "Kimlik doğrulama uygulaması aracılığıyla"
         }
       ],
@@ -282,8 +300,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Bằng ứng dụng trình xác thực\" is too literal and sounds unnatural in Vietnamese. A more natural translation would convey the meaning of 'by authenticator app' in a more fluent way.",
-          "suggestion": "Một số gợi ý dịch lại: 'Sử dụng ứng dụng xác thực', 'Thông qua ứng dụng xác thực', or 'Qua ứng dụng xác thực'."
+          "description": "The translation 'Bằng ứng dụng trình xác thực' is overly literal and doesn't flow naturally in Vietnamese. 'Bằng' implies 'by means of', which isn't the most appropriate phrasing in this context. A more natural translation would focus on indicating association or use with an authenticator app.",
+          "suggestion": "Với ứng dụng xác thực (With authenticator app)"
         }
       ],
       "approved_at": null

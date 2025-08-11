@@ -3,7 +3,7 @@
   "content": "Files moved ({{count}}).",
   "content_en_sha1_hash": "63c34a945bf73b0cfeb83951dd5f8d83de11f174",
   "created_at": "2025-05-19T21:30:54.814Z",
-  "updated_at": "2025-05-28T09:30:02.425Z",
+  "updated_at": "2025-08-04T07:30:01.220Z",
   "comment": {
     "text": "The \"FileMovedCount\" translation key displays a count of files moved in the history panel. It is used when showing related items after a file has been moved to a trash or folder, providing context to the user about how many files have been affected.",
     "is_auto": true,
@@ -11,9 +11,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 71,
+      "context": "return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 62,
-      "context": "return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FileMoved\");\n case \"FileMovedToTrash\":\n if (hasRelatedItems)",
+      "line_number": 65,
+      "context": "return t(\"InfoPanel:FileMovedTo\", {\n folderTitle: feed.data.parentTitle,\n });\n }\n if (hasRelatedItems)\n return t(\"InfoPanel:FileMovedCount\", {\n count,\n });\n return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)",
       "module": "/packages/client"
     }
   ],
@@ -84,13 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ֆայլերը տեղափոխվել են ({{count}}):' literally translates to 'The files have been moved ({{count}}):'.  While not drastically wrong, it implies the action is completed, rather than reflecting a count of files moved. A more accurate translation would indicate a count rather than a completed action.  It's also a bit formal for a user interface.",
-          "suggestion": "Consider 'Տեղափոխվել է ֆայլ {{count}}': (Telepoxvel e fayl {{count}}:) - '{{count}} files moved' or '{{count}} ֆայլ տեղափոխվեց:' ({{count}} fayl telepoxvec:) - '{{count}} file moved'."
-        },
-        {
-          "type": "formatting",
-          "description": "The colon at the end of the Armenian translation feels out of place for a typical user interface label. It's not common in such contexts.",
-          "suggestion": "Remove the colon. 'Ֆայլերը տեղափոխվել են ({{count}})'"
+          "description": "The translation \"Ֆայլերը տեղափոխվել են ({{count}}):\" is a bit literal and sounds awkward in Armenian. A more natural phrasing would be \"Տեղափոխվել է ֆայլ {{count}} հատ:\" or \"Ֆայլերը տեղափոխվել են, ընդամիշտ {{count}} հատ:\".",
+          "suggestion": "Տեղափոխվել է ֆայլ {{count}} հատ:"
         }
       ],
       "approved_at": null
@@ -101,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The translation 'File spostati' should be 'Files spostati' to match the English plural 'Files'.",
-          "suggestion": "Files spostati"
+          "description": "The Italian translation 'File spostati  ({{count}}).' uses the plural form 'File spostati' when the English says 'Files moved'.  While technically correct, it might be more natural to use the singular 'File spostato' if referring to a single file moved, or to rephrase to be more consistent with the singular form of 'Files' (e.g., 'File spostato/i  ({{count}})')",
+          "suggestion": "Consider using 'File spostato/i  ({{count}})' for greater consistency, or re-evaluate the intended meaning to best reflect 'Files moved'."
         }
       ],
       "approved_at": null
@@ -125,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ເອກະພາກຖືກຍ້າຍ ({{count}}).' is a literal translation of 'File moved ({{count}})' which doesn't quite convey the plural 'Files moved'.  It translates to 'A file was moved'.",
-          "suggestion": "ເອກະພາກຫລາຍຖືກຍ້າຍ ({{count}})."
+          "description": "The translation 'ເອກະພາກຖືກຍ້າຍ ({{count}}).' doesn't accurately convey the meaning of 'Files moved ({{count}}).' 'ເອກະພາກ' translates to 'file' in a more technical or document sense.  A more appropriate translation for 'files' in this context (referring to a general movement of files) would be something like 'ເອກະສານຖືກຍ້າຍ' or 'ໄຟລ໌ຖືກຍ້າຍ'.",
+          "suggestion": "ໄຟລ໌ຖືກຍ້າຍ ({{count}})."
         }
       ],
       "approved_at": null
@@ -167,8 +168,8 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Romanian translation 'Fişiere au fost mutate ({{count}}).' is grammatically incorrect. It uses the plural 'Fişiere' (files) with the auxiliary verb 'au fost' (have been) which doesn't agree with the singular implied by the 'count' variable.  It should use the singular 'Fişier' and the singular 'a fost'.",
-          "suggestion": "Fişier a fost mutat ({{count}})."
+          "description": "The Romanian translation 'Fişiere au fost mutate ({{count}}).' is grammatically incorrect. 'Fişiere' is plural, and the verb should agree. It should be 'Fișiere au fost mutate ({{count}}).' or 'Fișierul a fost mutat ({{count}})' if referring to a single file.",
+          "suggestion": "Fișiere au fost mutate ({{count}})."
         }
       ],
       "approved_at": null
@@ -185,13 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'ගොනු ගෙනයන ලදි ({{count}}).' implies 'files are being moved' which isn't the precise meaning of 'Files moved ({{count}}).' A more accurate translation would convey a completed action.",
-          "suggestion": "ගොනු ඇවදින ලදි ({{count}})."
-        },
-        {
-          "type": "spelling",
-          "description": "The Sinhala word 'ඇවදින' is the better choice here, 'ගෙනයන' is not accurate in this context.",
-          "suggestion": null
+          "description": "The translation \"ගොනු ගෙනයන ලදි ({{count}}).\" is not the most natural or accurate translation of \"Files moved ({{count}}).\". While it conveys the general idea, a more appropriate translation would emphasize the completion of the move, not just the action of moving. \"ගොණු ඇවදින ලදි ({{count}}).\" or \"ගොණු chuyển කරා ({{count}}).\" would be better.",
+          "suggestion": "ගොණු ඇවදින ලදි ({{count}})."
         }
       ],
       "approved_at": null
@@ -214,8 +210,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Датотеке су премештене ({{count}}).' is grammatically correct but could be more natural. 'Files moved' can also be translated as 'Премештено је ({{count}})' or 'Премештено ({{count}})' to be more concise.",
-          "suggestion": "Премештено је ({{count}})."
+          "description": "The translation 'Датотеке су премештене ({{count}}).' is not the most natural way to say \"Files moved ({{count}}).\" A more accurate and natural translation would be \"Премештене датотеке ({{count}}).\"",
+          "suggestion": "Премештене датотеке ({{count}})."
         }
       ],
       "approved_at": null
@@ -226,8 +222,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Datoteke su premeštene ({{count}}).' is not the most natural or idiomatic translation of 'Files moved ({{count}}).' A more appropriate translation would be 'Premješteno je {count} datoteka.' or 'Premešteno {count} datoteka.' The current translation sounds a bit awkward.",
-          "suggestion": "Premješteno je {count} datoteka."
+          "description": "The translation 'Datoteke su premeštene ({{count}}).' is a reasonable translation, but a more natural phrasing in Serbian would be 'Премештене датотеке ({{count}}).' or 'Премештено је {{count}} датотека.' The use of 'su' is grammatically correct but sounds less fluent in this context.",
+          "suggestion": "Премештене датотеке ({{count}})."
         }
       ],
       "approved_at": null
@@ -244,7 +240,7 @@
       "ai_spell_check_issues": [
         {
           "type": "grammar",
-          "description": "The Ukrainian translation \"Файли переміщено ({{count}}).\" uses the neuter plural past tense verb 'переміщено' which is grammatically incorrect. It should be in the plural imperfective tense to agree with 'файли'.",
+          "description": "The Ukrainian translation \"Файли переміщено ({{count}}).\" uses the neuter plural past tense \"переміщено\" which doesn't quite match the singular 'Files'. A more accurate translation would use a form consistent with the plural 'Files'.",
           "suggestion": "Файли переміщено ({{count}})."
         }
       ],

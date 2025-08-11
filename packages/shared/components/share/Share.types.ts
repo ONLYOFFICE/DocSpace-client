@@ -37,9 +37,9 @@ import { TOption } from "../combobox";
 export type ShareCalendarProps = {
   onDateSet: (formattedDate: moment.Moment) => void;
   closeCalendar: (formattedDate: moment.Moment) => void;
-  calendarRef: React.RefObject<HTMLDivElement>;
+  calendarRef: React.RefObject<HTMLDivElement | null>;
   locale: string;
-  bodyRef?: React.MutableRefObject<HTMLDivElement | null>;
+  bodyRef?: React.RefObject<HTMLDivElement | null>;
   useDropDown?: boolean;
 };
 export type DefaultCreatePropsType = {
@@ -54,15 +54,15 @@ export type TLink = TFileLink | { isLoaded: boolean };
 
 export type LinkRowProps =
   | {
-      onAddClick: () => Promise<void>;
+      onAddClick?: () => Promise<void>;
       links: TLink[] | null;
-      changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
+      changeShareOption?: (item: TOption, link: TFileLink) => Promise<void>;
+      changeAccessOption?: (item: AccessItem, link: TFileLink) => Promise<void>;
       changeExpirationOption: (
         link: TFileLink,
         expirationDate: moment.Moment | null,
       ) => Promise<void>;
-      availableExternalRights: TAvailableExternalRights;
+      availableExternalRights?: TAvailableExternalRights;
       loadingLinks: (string | number)[];
       isRoomsLink?: undefined;
       isPrimaryLink?: undefined;
@@ -76,15 +76,15 @@ export type LinkRowProps =
       removedExpiredLink?: never;
     }
   | {
-      onAddClick: () => Promise<void>;
+      onAddClick?: () => Promise<void>;
       links: TLink[] | null;
-      changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
+      changeShareOption?: (item: TOption, link: TFileLink) => Promise<void>;
+      changeAccessOption?: (item: AccessItem, link: TFileLink) => Promise<void>;
       changeExpirationOption: (
         link: TFileLink,
         expirationDate: moment.Moment | null,
       ) => Promise<void>;
-      availableExternalRights: TAvailableExternalRights;
+      availableExternalRights?: TAvailableExternalRights;
       loadingLinks: (string | number)[];
       isRoomsLink?: boolean;
       isPrimaryLink: boolean;
@@ -137,11 +137,13 @@ export type ShareProps = {
     expirationDate?: moment.Moment | null,
   ) => Promise<TFileLink>;
 
-  selfId: string;
+  selfId?: string;
   onOpenPanel?: (options: {
     visible: boolean;
     updateAccessLink: () => Promise<void>;
     fileId: string | number;
   }) => void;
   onlyOneLink?: boolean;
+
+  fileLinkProps?: TFileLink[];
 };

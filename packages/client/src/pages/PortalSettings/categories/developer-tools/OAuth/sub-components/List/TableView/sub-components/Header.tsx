@@ -80,7 +80,6 @@ const Header = (props: HeaderProps) => {
       containerRef={{ current: tableRef }}
       columns={defaultColumns}
       columnStorageName={columnStorageName}
-      tableStorageName="ouathTable"
       columnInfoPanelStorageName="oauthInfoPanelTable"
       sectionWidth={sectionWidth}
       showSettings={false}

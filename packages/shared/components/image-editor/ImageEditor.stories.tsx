@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useState, useCallback } from "react";
-import { Story, Meta } from "@storybook/react";
+import { StoryFn, Meta } from "@storybook/react";
 import { useTranslation } from "react-i18next";
 
 import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
@@ -60,7 +60,7 @@ export default {
   decorators: [i18nextStoryDecorator],
 } as Meta;
 
-const InteractiveTemplate: Story<ImageEditorProps> = (args) => {
+const InteractiveTemplate: StoryFn<ImageEditorProps> = (args) => {
   const { t } = useTranslation("Common");
 
   const [image, setImage] = useState<TImage>({

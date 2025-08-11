@@ -28,8 +28,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+import { MobileCategoryWrapper } from "@docspace/shared/components/mobile-category-wrapper";
+
 import { StyledBaseQuotaComponent } from "../StyledComponent";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileQuotasComponent = ({ isDisabled }) => {
   const { t } = useTranslation("Settings");

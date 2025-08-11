@@ -3,7 +3,7 @@
   "content": "Join",
   "content_en_sha1_hash": "e0d73143de80d17e82de2e017ac156ca3b9c4e01",
   "created_at": "2025-05-19T21:30:57.370Z",
-  "updated_at": "2025-05-20T09:47:27.036Z",
+  "updated_at": "2025-05-24T15:27:09.046Z",
   "comment": {
     "text": "This translation key \"LoginRegistryButton\" is used to display a button label that invites users to join or activate their account in a confirmation page. The translated content will be shown on a button element in a form.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Registrati' is a valid translation for 'Join', it's more accurately 'Register' or 'Sign Up'. 'Join' can also be translated as 'Unisciti' which implies joining a group or community.",
+          "suggestion": "Consider 'Unisciti' or 'Registrati' depending on the context. 'Registrati' is acceptable but less idiomatic."
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -117,7 +123,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Lid worden van\" is a literal translation of \"to become a member of\" and is less concise and less fitting for a button label like \"Join\". A more natural and user-friendly Dutch translation would be \"Word lid\" or simply \"Lid worden\".",
+          "suggestion": "Word lid"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -129,7 +141,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Juntar-se' is a valid Portuguese word, it doesn't perfectly convey the meaning of 'Join' in the context of a 'Login Registry Button.' It implies joining a group rather than registering or creating an account.  A more appropriate translation would be 'Registar', 'Criar Conta', or 'Entrar'.",
+          "suggestion": "Registar"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,7 +159,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Înregistrați-vă\" while technically correct, doesn't convey the same nuance as 'Join'. 'Join' implies a simple addition to a group or existing process. 'Înregistrați-vă' strongly suggests a formal registration process.  A better alternative would consider the specific context of the button and user flow. Options like 'Alăturați-vă' or 'Intrați' might be more appropriate depending on the user action.",
+          "suggestion": "Consider 'Alăturați-vă' or 'Intrați' depending on context."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -171,7 +195,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation \"Придружи се\" is a valid Serbian (Cyrillic) word meaning 'Join'. However, it might be too formal or wordy for a button label. Depending on the context, a shorter alternative like 'Уђи' (Uđi - meaning 'Enter') might be more suitable.",
+          "suggestion": "Consider 'Уђи' or a shorter, more concise option suitable for a button label."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

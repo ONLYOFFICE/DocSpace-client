@@ -3,7 +3,7 @@
   "content": "From template",
   "content_en_sha1_hash": "00c3e6cfbaa52740f50102742f3efa926a33d341",
   "created_at": "2025-05-19T21:30:45.596Z",
-  "updated_at": "2025-05-28T09:30:02.228Z",
+  "updated_at": "2025-08-04T07:30:01.079Z",
   "comment": {
     "text": "This translation key is used to display \"From template\" in a room creation dialogue. It appears as a header label and is related to templates for creating new rooms.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 251,
+      "line_number": 253,
       "context": "isMultiSelect={false}\n withHeader\n headerProps={{\n onBackClick: onCloseCreateFromTemplateDialog,\n onCloseClick: onCloseCreateFromTemplateDialog,\n headerLabel: t(\"Common:FromTemplate\"),\n withoutBackButton: false,\n withoutBorder: false,\n }}\n withSearch\n emptyScreenHeader={t(\"Common:EmptyTemplatesRoomsHeader\")}",
       "module": "/packages/client"
     },
@@ -105,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '템플릿에서' literally translates to 'From template' but might be overly literal depending on the context. A more natural Korean phrasing might be '템플릿을 이용하여' (using a template) or '템플릿을 기반으로' (based on a template). Without more context, it's difficult to say which is better, but '템플릿에서' sounds slightly awkward.",
-          "suggestion": "Consider '템플릿을 이용하여' or '템플릿을 기반으로' depending on the intended meaning.  If the intention is simply to indicate origin, '템플릿에서' is acceptable, but evaluate for naturalness in context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -144,8 +138,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'De template' doesn't accurately convey the meaning of 'From template'. 'De' means 'of' or 'from' in some contexts, but 'From' typically implies origin or source, and 'De' isn't the best fit here. A more accurate translation would depend on the specific context.",
-          "suggestion": "Consider alternatives like 'Criado a partir de um modelo' (Created from a template) or 'Com base em um modelo' (Based on a template), or re-evaluate the need for a direct translation, perhaps using 'Modelo' if the context allows."
+          "description": "The translation 'De template' is not an accurate translation of 'From template'. While 'De' means 'From' in Portuguese, using 'template' directly is not idiomatic.  'Template' is an English loanword and often best handled with a more descriptive term in Portuguese depending on the context. A more accurate translation would depend on what 'template' refers to.",
+          "suggestion": "Consider alternatives like 'Criado a partir de modelo' (created from a model), 'Baseado em modelo' (based on a model), or a more specific term depending on the context of the template."
         }
       ],
       "approved_at": null
@@ -162,8 +156,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Șablon de formular' is a possible translation, 'Șablon' alone would be more accurate and commonly used for 'template' in this context. 'De formular' adds unnecessary specificity.",
-          "suggestion": "Șablon"
+          "description": "While 'Șablon de formular' is a possible translation, it's quite literal and specific to forms. 'From template' is more general and could refer to templates in various contexts. A more appropriate general translation would be 'Din șablon'.",
+          "suggestion": "Din șablon"
         }
       ],
       "approved_at": null
@@ -192,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Predloga obrazca\" translates to \"Form template,\" the original English phrase \"From template\" implies derivation or creation *using* a template. \"Predloga obrazca\" focuses on the template itself, not the creation process. A better translation might consider phrases like \"Ustvarjeno na podlagi predloge\" (Created based on a template) or \"Iz predloge\" (From a template - less ideal, but closer to the literal meaning).",
-          "suggestion": "Consider \"Ustvarjeno na podlagi predloge\" or \"Iz predloge\" for a more accurate translation, depending on the context."
+          "description": "While \"Predloga obrazca\" translates literally to \"Template form,\" the English phrase \"From template\" typically implies the *source* of something. A more accurate translation might be \"Iz predloge\" or \"Na podlagi predloge\". \"Predloga obrazca\" suggests the form *is* a template.",
+          "suggestion": "Iz predloge"
         }
       ],
       "approved_at": null
@@ -222,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Ukrainian translation \"Шаблон форми\" (Shablon formy) translates to 'Form template' instead of 'From template'. It misses the 'from' aspect of the original phrase.",
-          "suggestion": "Шаблон з (Shablon z)"
+          "description": "The translation \"Шаблон форми\" (Template Form) doesn't accurately convey the meaning of \"From template\". While \"Шаблон\" is correct for \"template\", \"форми\" (form) adds an unnecessary element. \"From template\" implies something was generated or derived *using* a template, not that it *is* a form.",
+          "suggestion": "З шаблону (Z shablonu)"
         }
       ],
       "approved_at": null

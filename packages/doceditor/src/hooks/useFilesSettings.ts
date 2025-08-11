@@ -29,7 +29,7 @@ import React from "react";
 import { getSettingsFiles } from "@docspace/shared/api/files";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
 
-const useFilesSettings = ({}) => {
+const useFilesSettings = () => {
   const [settings, setSettings] = React.useState<TFilesSettings>(
     {} as TFilesSettings,
   );

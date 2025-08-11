@@ -31,7 +31,10 @@ import styled from "styled-components";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import {
+  TableGroupMenu,
+  TGroupMenuItem,
+} from "@docspace/shared/components/table";
 import { RowContainer, Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
@@ -158,7 +161,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
       onClick: () => {},
       title: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
     },
-  ];
+  ] as TGroupMenuItem[];
 
   return (
     <StyledRowContainer useReactWindow={false}>

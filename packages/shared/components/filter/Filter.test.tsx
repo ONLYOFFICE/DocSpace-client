@@ -30,7 +30,7 @@ import "@testing-library/jest-dom";
 import { DeviceType } from "../../enums";
 import { renderWithTheme } from "../../utils/render-with-theme";
 import Filter from ".";
-import { TSortDataItem } from "./Filter.types";
+import { TGetSelectedSortData, TSortDataItem } from "./Filter.types";
 import { TViewAs } from "../../types";
 
 // Mock selectors
@@ -85,7 +85,9 @@ const baseProps = {
   placeholder: "Search...",
   isIndexEditingMode: false,
   getSortData: jest.fn(() => []),
-  getSelectedSortData: jest.fn(() => ({}) as TSortDataItem),
+  getSelectedSortData: jest.fn(
+    () => ({}) as TSortDataItem,
+  ) as TGetSelectedSortData,
   onChangeViewAs: jest.fn(),
   view: "tile",
   viewAs: "tile" as TViewAs,

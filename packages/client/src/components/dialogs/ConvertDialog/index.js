@@ -34,7 +34,6 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { FolderType } from "@docspace/shared/enums";
 
 const StyledFooterContent = styled.div`
   display: flex;
@@ -98,7 +97,7 @@ const ConvertDialogComponent = (props) => {
 
   if (convertSingleFile && sortedFolder) {
     rootFolderTitle = isShareFolder
-      ? rootFoldersTitles[FolderType.USER]?.title
+      ? t("Common:MyFilesSection")
       : rootFoldersTitles[convertItem.rootFolderType]?.title;
   }
 

@@ -3,7 +3,7 @@
   "content": "Learn more about user types",
   "content_en_sha1_hash": "fe6a7e00266faa454c2c0f3d19a6d6356d430b53",
   "created_at": "2025-05-19T21:30:49.990Z",
-  "updated_at": "2025-05-28T09:30:02.276Z",
+  "updated_at": "2025-06-30T12:20:31.246Z",
   "comment": {
     "text": "This translation key is used for a link in a guest release tip dialog that directs users to learn more about different types of user access. It appears as a button in the dialog, displayed next to an icon, and is used to provide additional information to guests.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 150,
-      "context": "href={accessRightsLink}\n target={LinkTarget.blank}\n type={LinkType.page}\n isHovered\n >\n {t(\"Translations:GuestReleaseTipLink\")}\n </ColorTheme>\n ) : null}\n </StyledBody>\n \n <ReactSVG src={icon} alt=\"tip\" />",
+      "line_number": 152,
+      "context": "target={LinkTarget.blank}\n type={LinkType.page}\n isHovered\n color=\"accent\"\n >\n {t(\"Translations:GuestReleaseTipLink\")}\n </Link>\n ) : null}\n </StyledBody>\n \n <ReactSVG src={icon} />",
       "module": "/packages/client"
     }
   ],
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"ユーザーのタイプについて、さらに詳しく\" is a literal translation but doesn't quite capture the nuance of 'Learn more about user types.' It sounds a little formal and clunky. A more natural phrasing might be '利用者の種類について詳しくはこちら' or 'ユーザーの種類についてもっと知る'.",
-          "suggestion": "利用者の種類について詳しくはこちら"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -129,7 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dowiedz się więcej o różnych rodzajach użytkowników' is a reasonable translation but could be more concise and closely aligned with the original English. 'Learn more about user types' implies a more direct link to user types rather than 'different types of users'.",
+          "suggestion": "Dowiedz się więcej o typach użytkowników"
+        }
+      ],
       "approved_at": null
     },
     "pt": {

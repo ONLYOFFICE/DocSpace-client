@@ -64,7 +64,7 @@ const PasswordContainer = ({
       isVertical
       labelVisible={false}
       hasError={!passwordValid}
-      errorMessage={passwordErrorMessage} //TODO: Add wrong password server error
+      errorMessage={passwordErrorMessage} // TODO: Add wrong password server error
     >
       <PasswordInput
         className="password-input"

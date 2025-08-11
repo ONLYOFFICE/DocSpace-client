@@ -30,7 +30,7 @@ import React from "react";
 
 export type SimulatePasswordProps = {
   onChange: (value: string) => void;
-  forwardedRef: React.RefObject<HTMLInputElement>;
+  forwardedRef: React.RefObject<HTMLInputElement | null>;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   inputMaxWidth?: string;
   isDisabled?: boolean;

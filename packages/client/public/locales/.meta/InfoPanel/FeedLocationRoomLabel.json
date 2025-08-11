@@ -3,7 +3,7 @@
   "content": "Room «{{folderTitle}}»",
   "content_en_sha1_hash": "60abd312bf4a00aa9ee7d366c372357f1866c4bf",
   "created_at": "2025-05-19T21:30:54.784Z",
-  "updated_at": "2025-05-21T10:16:07.987Z",
+  "updated_at": "2025-08-04T07:30:01.217Z",
   "comment": {
     "text": "This translation key is used to display the label \"Room «{{folderTitle}}»\" in various sections of an application, likely in a folder or room information panel. It appears on a page displaying historical data and is part of a larger system for organizing and navigating content, possibly within a client-side interface.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
-      "line_number": 86,
-      "context": "? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
+      "line_number": 89,
+      "context": "? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/MainTextFolderInfo.tsx",
-      "line_number": 86,
-      "context": "? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
+      "line_number": 89,
+      "context": "? t(\"FeedLocationLabel\", {\n folderTitle: isReorderFolder ? title! : parentTitle,\n })\n : isSection\n ? t(\"FeedLocationSectionLabel\", { folderTitle: parentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });\n \n const sourceDestination = isFromFolder\n ? t(\"FeedLocationLabelFrom\", { folderTitle: fromParentTitle })\n : t(\"FeedLocationRoomLabel\", { folderTitle: parentTitle });",
       "module": "/packages/client"
     }
   ],
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Otaq' for 'Room' is acceptable, but a more natural and common translation might be 'Otağı'.",
-          "suggestion": "Otağı «{{folderTitle}}»"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -93,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses Armenian quotes («») which match the English quotes, ensuring consistency.",
-          "suggestion": null
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -111,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Japanese translation uses square brackets 「」 instead of double quotes «». While functionally similar, the original English uses double quotes. Consistency is preferred.",
-          "suggestion": "「{{folderTitle}}」ルーム"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -177,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'කාමරය «{{folderTitle}}»' is a literal translation of \"Room\". While understandable, it's a bit clunky in Sinhala. A more natural phrasing might be something like \"මාලිගය «{{folderTitle}}»\" (Maligaya) or \"បន្ទប់ «{{folderTitle}}»\" (Danthaya). The best choice depends on the context of 'folderTitle'.",
+          "suggestion": "Consider alternatives like \"මාලිගය «{{folderTitle}}»\" or \"បន្ទប់ «{{folderTitle}}»\" for a more natural sound, depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -198,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Просторија «{{folderTitle}}»\" is too literal and sounds unnatural in Serbian. A more natural translation would be \"Соба «{{folderTitle}}»\" or \"Стан «{{folderTitle}}»\", depending on the context of 'Room'.",
-          "suggestion": "Соба «{{folderTitle}}»"
+          "description": "The translation \"Просторија «{{folderTitle}}»\" is a literal translation of 'Room' as 'Просторија'. While technically correct, 'Соба' would be a more natural and commonly used word for 'Room' in this context (especially within a UI).",
+          "suggestion": "Просторија should be replaced with Соба."
         }
       ],
       "approved_at": null
@@ -207,7 +195,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Room' (English) is translated as 'Prostorija' in Serbian. While 'Prostorija' can mean room, a more natural and common translation for 'Room' in this context, especially when referring to a folder or location within a system, would be 'Soba'.",
+          "suggestion": "Soba «{{folderTitle}}»"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

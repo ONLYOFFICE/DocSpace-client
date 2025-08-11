@@ -3,7 +3,7 @@
   "content": "Sorry, this file format isn't supported",
   "content_en_sha1_hash": "44faa0a5086202b59ef30646e8573a659f5c5bc0",
   "created_at": "2025-05-19T21:30:46.955Z",
-  "updated_at": "2025-05-28T09:30:02.831Z",
+  "updated_at": "2025-08-04T07:30:01.588Z",
   "comment": {
     "text": "This translation key is used to display an error message when a file format is not supported, typically appearing as a notification in UI elements such as the Avatar Editor Dialog or File Input component. The intended message informs the user that the selected file cannot be processed due to its unsupported format.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/AvatarEditorDialogStore.js",
-      "line_number": 209,
+      "line_number": 207,
       "context": ") {\n toastr.error(t(\"Common:SizeImageLarge\"));\n }\n });\n } catch (error) {\n toastr.error(t(\"Common:NotSupportedFormat\"));\n }\n };\n }\n \n export default AvatarEditorDialogStore;",
       "module": "/packages/client"
     },
@@ -20,12 +20,6 @@
       "file_path": "/packages/shared/components/file-input/FileInput.tsx",
       "line_number": 75,
       "context": "const [fileName, setFileName] = React.useState(\"\");\n \n const onDrop = (acceptedFiles: File[]) => {\n if (acceptedFiles.length === 0) {\n toastr.error(t(\"Common:NotSupportedFormat\"));\n return;\n }\n \n setFileName(\n acceptedFiles.length > 1",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/components/image-editor/Dropzone/index.tsx",
-      "line_number": 85,
-      "context": "setLoadingFile(false);\n }\n });\n } catch (error) {\n // console.error(error);\n toastr.error(t(\"Common:NotSupportedFormat\"));\n if (timer.current) {\n clearTimeout(timer.current);\n timer.current = null;\n }\n if (mount.current) {",
       "module": "/packages/shared"
     }
   ],
@@ -45,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'dəstəklənmir' is a valid word, but it may be slightly formal for a user-facing message. Consider a more conversational alternative.",
+          "suggestion": "Consider using 'dəstəklənməyib' or 'dəstəklənilmir' for a more natural feel. However, 'dəstəklənmir' is grammatically correct."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -84,8 +84,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Tätä tiedostomuotoa ei tueta. Ei sitten niin mitenkään\" is not a direct or accurate translation of \"Sorry, this file format isn't supported.\" The second part, \"Ei sitten niin mitenkään,\" is colloquial and doesn't convey the intended meaning of apology or technical limitation. It adds unnecessary and potentially confusing wording.",
-          "suggestion": "Tätä tiedostomuotoa ei tueta."
+          "description": "The phrase \"Ei sitten niin mitenkään\" is an awkward and non-standard way to express lack of support. It's colloquial and doesn't accurately convey the meaning of 'isn't supported'.",
+          "suggestion": "Ei tueta."
         }
       ],
       "approved_at": null
@@ -157,7 +157,7 @@
         {
           "type": "grammar",
           "description": "The phrase 'este tipo arquivo' is grammatically incorrect. It should be 'este tipo de arquivo'.",
-          "suggestion": "Lamentamos, este tipo de arquivo não é suportado"
+          "suggestion": "Este tipo de arquivo"
         }
       ],
       "approved_at": null
@@ -180,8 +180,13 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'ආකෘතියට' (aakruthiyatō) is slightly awkward. While technically correct, it's not the most natural phrasing. A more common way to express 'to this format' would be 'මෙම ආකෘතියේ' (inema aakruthiyē).",
-          "suggestion": "කණගාටුයි, මෙම ආකෘතියේ සහාය නොදක්වයි"
+          "description": "The word 'කණගාටුයි' is a valid spelling, but can be replaced with 'මාෆ්' or 'දුශී' for a slightly more modern and casual tone, depending on the overall brand voice.",
+          "suggestion": "මාෆ්, දුශී"
+        },
+        {
+          "type": "grammar",
+          "description": "While grammatically correct, the sentence could be slightly rephrased for better flow. The use of 'සාහාය නොදක්වයි' is a bit formal. ",
+          "suggestion": "මෙම ගොනු ආකෘතියට අපි සහාය කරන්නේ නැහැ"
         }
       ],
       "approved_at": null
@@ -234,8 +239,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While the translation is understandable, it's a bit formal for a user-facing error message. \"系统暂不支持此文件格式\" (System currently doesn't support this file format) feels overly technical. A more user-friendly option would be better.",
-          "suggestion": "很抱歉，不支持此文件格式"
+          "description": "While technically correct, the translation '很抱歉，系统暂不支持此文件格式' is a bit formal and verbose for a simple error message. A more natural and user-friendly translation might be preferable.",
+          "suggestion": "很抱歉，文件格式暂不支持 (Hěn bàoqiàn, wénjiàn géshì zàn bù zhīchí) - 'Sorry, this file format is not supported.'"
         }
       ],
       "approved_at": null

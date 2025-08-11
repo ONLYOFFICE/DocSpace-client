@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Link } from "@docspace/shared/components/link";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -106,16 +106,16 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             />
           ) : null}
 
-          <ColorTheme
+          <Link
             textAlign="center"
-            themeId={ThemeId.Link}
             className="portal-unavailable_contact-text"
             onClick={onClickToContact}
+            color="accent"
           >
             {t("PortalUnavailable:ContactAdministrator", {
               productName: t("Common:ProductName"),
             })}
-          </ColorTheme>
+          </Link>
         </StyledBodyContent>
       </ErrorContainer>
     </StyledBody>

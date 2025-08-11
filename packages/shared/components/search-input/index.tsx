@@ -64,6 +64,7 @@ const SearchInput = ({
   onFocus,
   resetOnBlur = false,
   children,
+  dataTestId,
 }: SearchInputProps) => {
   const [inputValue, setInputValue] = useState(value);
 
@@ -156,12 +157,12 @@ const SearchInput = ({
     <div
       className={classNames(
         styles.searchInputBlock,
-        { [styles.scale]: scale },
+        { [styles.scale]: scale, [styles.isFilled]: !!inputValue },
         className,
       )}
       id={id}
       style={style}
-      data-testid="search-input"
+      data-testid={dataTestId ?? "search-input"}
     >
       <InputBlock
         className="search-input-block"

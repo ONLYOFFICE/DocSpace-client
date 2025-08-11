@@ -3,7 +3,7 @@
   "content": "Select one of the suggested modes, or use Custom to configure all the parameters manually.",
   "content_en_sha1_hash": "702a3edd62462b46a16de2c782b32b69d774fd2c",
   "created_at": "2025-05-19T21:30:54.525Z",
-  "updated_at": "2025-05-21T09:03:55.743Z",
+  "updated_at": "2025-08-04T07:30:01.384Z",
   "comment": {
     "text": "This translation key is used to display a message that explains how to select an embedding mode for the SDK. It appears as part of a user interface element that prompts users to choose between suggested modes or manually configure parameters. The purpose is to provide context and clarity for users making settings choices.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 177,
+      "line_number": 178,
       "context": "</CategoryDescription>\n <CategoryHeader>\n {t(\"SelectModeEmbedding\", { productName: t(\"Common:ProductName\") })}\n </CategoryHeader>\n <Text lineHeight=\"20px\" color={theme.sdkPresets.secondaryColor}>\n {t(\"InitializeSDK\")}\n </Text>\n <PresetsContainer className={`${isFlex ? \"presets-flex\" : \"\"}`}>\n {presetsData.map((data) => (\n <PresetTile\n t={t}",
       "module": "/packages/client"
     }
@@ -30,8 +30,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'لتشكيل جميع الإعدادات' is not the best rendering of 'to configure all the parameters'. A more accurate translation would be 'لتكوين جميع الإعدادات' or 'لضبط جميع الإعدادات'.",
-          "suggestion": "حدد أحد الأوضاع المقترحة أو استخدم مخصص لتكوين جميع الإعدادات يدويا."
+          "description": "The phrase \"لتشكيل جميع الإعدادات\" (to shape all settings) is not the most natural way to express 'to configure all the parameters'. A more accurate translation would use a verb implying configuration or adjustment.",
+          "suggestion": "حدد أحد الأوضاع المقترحة أو استخدم مخصص لتهيئة جميع الإعدادات يدويا."
+        },
+        {
+          "type": "formatting",
+          "description": "While not strictly incorrect, 'مخصص' could benefit from a definite article ('الـ') to align with standard Arabic usage when referring to a specific customization option.",
+          "suggestion": "حدد أحد الأوضاع المقترحة أو استخدم المخصص لتشكيل جميع الإعدادات يدويا."
         }
       ],
       "approved_at": null
@@ -42,8 +47,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Fərdi' should be 'Xüsusi'. 'Fərdi' translates to 'individual' which doesn't fit the context of a configuration mode.",
-          "suggestion": "Xüsusi"
+          "description": "The word 'Fərdi' is a literal translation of 'Custom' and might not be the most natural phrasing in Azerbaijani. It feels a bit robotic.",
+          "suggestion": "Consider using a more idiomatic expression for 'Custom', such as 'Xüsusi' or 'Özəl' depending on the specific nuance desired. For example: 'Tövsiyə olunan rejimlərdən birini seçin və ya bütün parametrləri əl ilə konfiqurasiya etmək üçün Xüsusi seçin.'"
         }
       ],
       "approved_at": null
@@ -72,13 +77,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"μη αυτόματα\" is an awkward translation of \"manually.\" It implies \"not automatically\" but doesn't convey the meaning of manual configuration.",
-          "suggestion": "Επιλέξτε έναν από τους προτεινόμενους τρόπους λειτουργίας ή χρησιμοποιήστε το «Προσαρμοσμένη» για να ρυθμίσετε όλες τις παραμέτρους χειροκίνητα."
+          "description": "The phrase \"μη αυτόματα\" (mi aftomata) translates to \"non-automatically\" which doesn't accurately convey the meaning of \"manually\".  It's unnecessarily complex and awkward.",
+          "suggestion": "Επιλέξτε έναν από τους προτεινόμενους τρόπους λειτουργίας ή χρησιμοποιήστε το «Προσαρμοσμένη» για να ρυθμίσετε όλες τις παραμέτρους με μη αυτόματο τρόπο."
         },
         {
           "type": "formatting",
-          "description": "The term 'Προσαρμοσμένη' should be within quotes as it appears to be a specific UI element.",
-          "suggestion": "Επιλέξτε έναν από τους προτεινόμενους τρόπους λειτουργίας ή χρησιμοποιήστε το «Προσαρμοσμένη» για να ρυθμίσετε όλες τις παραμέτρους χειροκίνητα."
+          "description": "The quotation marks around \"Προσαρμοσμένη\" are a different style than the English quotation marks.  Consistency is important.",
+          "suggestion": "Επιλέξτε έναν από τους προτεινόμενους τρόπους λειτουργίας ή χρησιμοποιήστε το «Προσαρμοσμένη» για να ρυθμίσετε όλες τις παραμέτρους με μη αυτόματο τρόπο."
         }
       ],
       "approved_at": null
@@ -101,8 +106,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'suggested modes' is better translated as 'options de mode' or 'modes proposés' to accurately reflect the English meaning. 'suggestions de mode' implies recommendations, which isn't the intent.",
-          "suggestion": "Choisissez l'une des options de mode ou utilisez le mode Personnalisé afin de configurer manuellement tous les paramètres."
+          "description": "The phrase 'Select one of the suggested modes' is not perfectly conveyed by 'Choisissez l'une des suggestions de mode.' It implies a list of modes is being presented for selection, while the English suggests a mode selection based on pre-defined options.",
+          "suggestion": "Choisissez l'un des modes proposés ou utilisez le mode Personnalisé afin de configurer manuellement tous les paramètres."
+        },
+        {
+          "type": "spelling",
+          "description": "While 'Personnalisé' is a valid word, it might be better to use 'Personnalisation' in this context to better align with the English 'Custom'.",
+          "suggestion": "Choisissez l'un des modes proposés ou utilisez le mode Personnalisation afin de configurer manuellement tous les paramètres."
         }
       ],
       "approved_at": null
@@ -110,13 +120,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase \" ձեռքով կարգավորելու համար\" is a bit clunky. While technically correct, a more natural and fluent translation for 'manually configure' would be something like 'ձեռքով ավարտելու համար' or 'ձեռքով ծրագրելու համար'.",
-          "suggestion": "Ընտրեք առաջարկվող ռեժիմներից մեկը կամ օգտագործեք Custom՝ բոլոր պարամետրերը ձեռքով ավարտելու համար:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -137,13 +141,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word '맞춤화를 이용하여' (using customization) is a bit awkward and doesn't directly translate the meaning of 'Custom'. A more natural phrasing would be '맞춤 설정' or '직접 설정'.",
-          "suggestion": "제안된 모드 중 하나를 선택하거나 직접 설정을 이용하여 모든 매개변수를 수동으로 구성하세요."
-        },
-        {
-          "type": "formatting",
-          "description": "While not incorrect, the sentence structure is a little long and could be slightly improved for readability in Korean. Consider splitting it if possible.",
-          "suggestion": "제안된 모드 중 하나를 선택하거나, 맞춤 설정을 사용하여 모든 매개변수를 수동으로 구성할 수 있습니다."
+          "description": "The phrase '맞춤화를 이용하여' (using customization) is a bit awkward in this context. It suggests an action on the customization itself rather than using a custom configuration option. A more natural phrasing would better convey the meaning of 'Custom'.",
+          "suggestion": "제안된 모드 중 하나를 선택하거나, Custom 모드를 선택하여 모든 매개변수를 수동으로 구성하세요."
         }
       ],
       "approved_at": null
@@ -160,8 +159,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation of 'Custom' as 'Pielāgots' is accurate, but it may not be the most natural phrasing in this context. 'Custom' often refers to a specific setting or mode name. A more contextually appropriate translation might be 'Manuāli' (Manually) or retaining 'Custom' as is, depending on UI consistency.",
-          "suggestion": "Consider 'Manuāli' or retaining 'Custom' for consistency and natural flow."
+          "description": "The term 'Custom' is translated as 'Pielāgots'. While technically correct, a more natural and common translation for 'Custom' in this context (referring to a configuration option) would be 'Manuāli'. 'Pielāgots' implies a customized product, not a setting.",
+          "suggestion": "Izmantojiet Manuāli, lai manuāli konfigurētu visus parametrus."
         }
       ],
       "approved_at": null
@@ -177,9 +176,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The translation uses 'Niestandardowe' which, while technically correct, is a bit formal for a user-facing interface. A more user-friendly term like 'Ręczne' or 'Zaawansowane' might be preferable.",
-          "suggestion": "Wybierz jeden z sugerowanych trybów lub użyj opcji Ręczne, aby ręcznie skonfigurować wszystkie parametry."
+          "type": "incorrect_translation",
+          "description": "The translation of \"Custom\" as \"Niestandardowe\" is technically correct but can be improved for clarity and naturalness in this context. \"Custom\" often translates more smoothly as \"Własny\" or \"Zaawansowany\" when referring to configuration options.",
+          "suggestion": "Wybierz jeden z sugerowanych trybów lub użyj opcji Własny, aby ręcznie skonfigurować wszystkie parametry."
         }
       ],
       "approved_at": null
@@ -202,7 +201,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The word 'Particularizat' is not the most natural or common translation for 'Custom' in this context. 'Personalizat' would be a better choice, as it more closely conveys the meaning of customizing or tailoring the parameters.",
+          "description": "The word 'Particularizat' doesn't quite capture the intended meaning of 'Custom' in this context. 'Personalizat' would be a more accurate translation, referring to a custom or personalized configuration.",
           "suggestion": "Selectați unul dintre modurile sugerate sau utilizați modul Personalizat pentru a configura manual toți parametrii."
         }
       ],
@@ -220,13 +219,18 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'අභිරුචි තෝරන්න' for 'Custom' doesn't accurately convey the meaning of configuring parameters manually. 'අභිරුචි' primarily means 'preference' or 'taste', not 'manual configuration'.",
-          "suggestion": "යෝජිත ප්‍රකාර වලින් එකක් තෝරන්න හෝ සියලුම පරාමිති අතින් මානුෂීයව සැකසීමට 'අභිරුචි' තෝරන්න."
+          "description": "The translation 'අභිරුචි තෝරන්න' doesn't perfectly capture the nuance of 'Custom'. While 'අභිරුචි' relates to customization, it's more about personalized preferences. 'Custom' here means manual configuration of all settings. A more accurate translation might involve terms related to manual setup or configuration.",
+          "suggestion": "Consider alternatives like 'අත්පත්ති කළමණාකරණය' (manual management) or 'අත්පොත් සැකසුම්' (manual settings) depending on the specific context."
+        },
+        {
+          "type": "grammar",
+          "description": "The phrase 'සියලුම පරාමිති අතින් වින්‍යාසයට' is slightly awkward. It could be improved for better flow in Sinhala.",
+          "suggestion": "Consider restructuring to 'සියලුම පරාමිති අත්පොතින් සැකසීමට' or 'සියලුම පරාමිති අතින්ම සැකසීමට'."
         },
         {
           "type": "formatting",
-          "description": "The sentence is a bit long and could be improved for readability in Sinhala. Splitting it into two sentences might make it easier to understand.",
-          "suggestion": "යෝජිත ප්‍රකාර වලින් එකක් තෝරන්න.  හෝ සියලුම පරාමිති අතින් මානුෂීයව සැකසීමට 'අභිරුචි' තෝරන්න."
+          "description": "While not strictly an issue, the combination of Sinhala and Romanized Sinhala (vin‍යාසයට) can look unprofessional. Ideally, consistently use either full Sinhala script or Romanized script.  For this context, full Sinhala is preferred.",
+          "suggestion": "Replace 'වින්‍යාසයට' with 'සැකසුමට' or a similar full Sinhala word."
         }
       ],
       "approved_at": null
@@ -234,13 +238,25 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "spelling",
+          "description": "The word 'Vlastný' (Custom) is correctly spelled, but the capitalization is inconsistent.  'Vlastný' should likely be lowercase 'vlastný' to match the typical capitalization of options in user interfaces.",
+          "suggestion": "vlastný"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Select one of the suggested modes' is not accurately reflected in the Slovenian translation. 'Izberite enega od predlaganih načinov' literally translates to 'Choose one of the proposed methods/ways', which is a slightly different nuance than 'Select'. While understandable, 'Select' implies a choice from a presented option, whereas 'Choose' is a more general action.",
+          "suggestion": "Razmislite o uporabi 'Izberite' za bolj natančno ujemanje s pomenom 'Select'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -255,7 +271,7 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'režima' is misspelled. It should be 'režima'.",
+          "description": "The word 'režima' should be 'režima'.",
           "suggestion": "režima"
         }
       ],
@@ -264,25 +280,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Önerilen modlardan birini seçin veya tüm parametreleri manuel olarak yapılandırmak için Özel seçeneğini kullanın.' is a bit literal and awkward in Turkish. A more natural phrasing would be 'Önerilen modlardan birini seçebilir veya tüm parametreleri manuel olarak yapılandırmak isterseniz 'Özel' seçeneğini kullanabilirsiniz.'",
-          "suggestion": "Önerilen modlardan birini seçebilir veya tüm parametreleri manuel olarak yapılandırmak isterseniz 'Özel' seçeneğini kullanabilirsiniz."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of \"Custom\" as \"користувацький режим\" is a bit awkward. While technically correct, it's a longer and less natural way to say it. A more natural translation might be \"власний режим\" or simply \"налаштування\".",
-          "suggestion": "Виберіть один із запропонованих режимів або використовуйте власний режим, щоб налаштувати всі параметри вручну."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -294,13 +298,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The phrase \"自定义\" (Custom) should be enclosed in quotes to match the English phrasing and to clearly indicate it's a button label or a specific term.",
-          "suggestion": "在建议的模式中选择一项，或使用“自定义”手动配置所有参数。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

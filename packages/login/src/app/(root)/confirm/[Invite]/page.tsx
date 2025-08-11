@@ -41,23 +41,30 @@ import {
   getInvitationSettings,
   getUserByEmail,
 } from "@/utils/actions";
+import { logger } from "logger.mjs";
 import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
-  searchParams: { [key: string]: string };
-  params: { Invite: string };
+  searchParams: Promise<{ [key: string]: string }>;
+  params: Promise<{ Invite: string }>;
 };
 
-async function Page({ searchParams, params }: LinkInviteProps) {
-  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
+async function Page(props: LinkInviteProps) {
+  logger.info("Invite page");
+  const { searchParams: sp, params: p } = props;
+  const searchParams = await sp;
+  const params = await p;
+  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite") {
+    logger.info(`Invite page notFound params.Invite: ${params.Invite}`);
     return notFound();
+  }
 
   const type = searchParams.type;
   const uid = searchParams.uid;
   const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const headersList = headers();
+  const headersList = await headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
   const [
@@ -83,37 +90,33 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = (await cookies()).get(LANGUAGE)?.value ?? settingsCulture;
 
-  return (
+  return settings && typeof settings !== "string" ? (
     <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCreateUserContainer
-            type={type}
-            displayName={user?.displayName}
-            culture={culture}
-            hostName={hostName}
-          />
-          <FormWrapper id="invite-form">
-            <CreateUserForm
-              userNameRegex={settings.userNameRegex}
-              passwordHash={settings.passwordHash}
-              displayName={user?.displayName}
-              passwordSettings={passwordSettings}
-              capabilities={capabilities}
-              thirdPartyProviders={thirdParty}
-              legalTerms={settings.externalResources?.common?.entries.legalterms}
-              licenseUrl={settings.externalResources?.common?.entries.license}
-              isStandalone={settings.standalone}
-              logoText={settings.logoText}
-              invitationSettings={invitationSettings}
-            />
-          </FormWrapper>
-        </>
-      )}
+      <GreetingCreateUserContainer
+        type={type}
+        displayName={user?.displayName}
+        culture={culture}
+        hostName={hostName}
+      />
+      <FormWrapper id="invite-form">
+        <CreateUserForm
+          userNameRegex={settings.userNameRegex}
+          passwordHash={settings.passwordHash}
+          displayName={user?.displayName}
+          passwordSettings={passwordSettings}
+          capabilities={capabilities}
+          thirdPartyProviders={thirdParty}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
+          licenseUrl={settings.externalResources?.common?.entries?.license}
+          isStandalone={settings.standalone}
+          logoText={settings.logoText}
+          invitationSettings={invitationSettings}
+        />
+      </FormWrapper>
     </>
-  );
+  ) : null;
 }
 
 export default Page;

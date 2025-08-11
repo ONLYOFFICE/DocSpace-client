@@ -3,7 +3,7 @@
   "content": "<1>{{nameApp}}</1> would like the ability to access the following data in <strong>your {{productName}} account</strong>:",
   "content_en_sha1_hash": "c957267e1716ff361bf4fba5521f23172333de4b",
   "created_at": "2025-05-19T21:30:57.325Z",
-  "updated_at": "2025-05-20T09:47:33.625Z",
+  "updated_at": "2025-06-30T12:20:31.671Z",
   "comment": {
     "text": "This translation key is used for a consent subheader that informs users about the data access requested by an application within their account. It is displayed in a screen where user consent is required, likely as part of an account settings or login process. The key allows translators to localize the text \"would like the ability to access\" and \"your {{productName}} account\".",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/components/ConsentInfo.tsx",
-      "line_number": 81,
+      "line_number": 106,
       "context": "lineHeight=\"22px\"\n >\n {isConsentScreen ? (\n <Trans\n t={t}\n i18nKey=\"ConsentSubHeader\"\n ns=\"Consent\"\n values={{ nameApp: name, productName: t(\"Common:ProductName\") }}\n components={{\n 1: (\n <Link",
       "module": "/packages/login"
     }
@@ -27,31 +27,71 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tags around 'حساب {{productName}} الخاص بك' are correctly applied, maintaining the emphasis.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"your {{productName}} account\" is translated as \"{{productName}} hesabınızda\". While technically correct, it doesn't convey the same nuance as the English original. A more accurate and natural translation would be something like \"Sizin {{productName}} hesabınızda\" (Your {{productName}} account).",
+          "suggestion": "Sizin {{productName}} hesabınızda"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"your {{productName}} account\" is translated as \"вашия профил в {{productName}}\". While \"профил\" (profile) is close, \"account\" implies a broader set of data and functionalities beyond just a profile.  A more accurate translation might consider something like \"вашия {{productName}} акаунт\" (using the transliterated word \"акаунт\") or a more descriptive phrase if a direct equivalent isn't suitable.",
+          "suggestion": "Consider alternatives like \"вашия {{productName}} акаунт\" or a phrase that best captures the meaning of 'account' in the context of the product."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vyžaduje' (requires) doesn't quite capture the nuance of 'would like the ability to access'. It implies a stronger demand than intended.",
+          "suggestion": "Consider using a more polite phrasing like 'rádi by' (would like) instead of 'vyžaduje'."
+        },
+        {
+          "type": "formatting",
+          "description": "The Czech translation maintains the strong tag which is appropriate given the English source.",
+          "suggestion": "No change needed."
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag placement seems correct, but it's important to ensure that the HTML is rendered properly in the target environment. Consider if any specific CSS or rendering rules might affect how this is displayed.",
+          "suggestion": "Verify HTML rendering in the target environment."
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "While generally accurate, the German translation uses 'haben' (to have) which can sound slightly unnatural in this context. A more natural phrasing would be 'erhalten' (to receive) or a more complex construction implying permission.",
+          "suggestion": "Consider rephrasing to '{{nameApp}} möchte die Erlaubnis, Zugriff auf die folgenden Daten in Ihrem {{productName}}-Konto zu erhalten:' or a similar construction that emphasizes permission rather than possession."
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,7 +109,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"your {{productName}} account\" is translated as \"{{productName}} tilistäsi\". While technically correct, it's a bit clunky. A more natural Finnish phrasing would be \"{{productName}} -tililläsi\".",
+          "suggestion": "{{productName}} -tililläsi"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -81,31 +127,76 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Armenian translation is missing the closing punctuation mark (period) at the end of the sentence.",
+          "suggestion": "<1>{{nameApp}}</1>-ը ցանկանում է մուտք գործել հետևյալ տվյալներ՝ <strong>ձեր {{productName}} հաշվում</strong>. "
+        }
+      ],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'would like the ability to' is overly verbose and not accurately reflected in the Italian translation. 'Desidera accedere' is a more direct and natural translation of 'would like to access'.",
+          "suggestion": "<1>{{nameApp}}</1> desidera accedere ai seguenti dati nel <strong>tuo account {{productName}}</strong>:"
+        },
+        {
+          "type": "formatting",
+          "description": "The English uses 'your {{productName}} account' which is consistent with the usage in the Italian translation 'tuo account {{productName}}'. The possessive 'your' corresponds to 'tuo' making the formatting appropriate.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"would like the ability to access\" is translated as \"アクセスを要求します (akusesu o yōkyū shimasu)\", which means 'requests access'. A more natural and accurate translation would be something like 'アクセスしたい (akusesu shitai)' meaning 'wants to access'.",
+          "suggestion": "Replace \"アクセスを要求します (akusesu o yōkyū shimasu)\" with \"アクセスしたい (akusesu shitai)\""
+        },
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly applied in the Japanese translation, preserving the emphasis on 'your {{productName}} account'.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"would like the ability to\" is overly verbose and translates to \"액세스하고자 합니다\" which is a direct but slightly awkward translation. A more natural Korean phrasing would be more direct, such as '액세스하고 싶습니다'.",
+          "suggestion": "액세스하고 싶습니다"
+        },
+        {
+          "type": "formatting",
+          "description": "The English content uses `<strong/>` tags for emphasis.  The Korean translation also uses bolding, but it's crucial to verify that the HTML tags are handled correctly in the rendering context.  In some systems, `<strong/>` might need to be updated to `<strong>`.",
+          "suggestion": "Check HTML tag correctness in rendering context. Ensure <strong> tags are used correctly."
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The Lao translation includes a closing colon after 'ທ່ານ' which doesn't match the English formatting.",
+          "suggestion": "<1>{{nameApp}}</1> ຕ້ອງການຄວາມສາມາດໃນການເຂົ້າເຖິງຂໍ້ມູນຕໍ່ໄປນີ້ໃນ <strong>ບັນຊີ {{productName}} ຂອງທ່ານ</strong>"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -117,19 +208,37 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase 'would like the ability to' is translated to 'wil'. While technically correct, a more natural and idiomatic Dutch translation would be 'heeft de mogelijkheid om' or 'zou graag'.  'Wil' translates directly to 'wants' and doesn't convey the nuance of desire for the *ability*.",
+          "suggestion": "Consider replacing 'wil' with 'heeft de mogelijkheid om' or 'zou graag'."
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is correctly placed in both the English and Polish versions. No issues.",
+          "suggestion": null
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'would like the ability' is translated as 'gostaria de ter a capacidade'. A more natural and concise translation would be 'deseja' or 'quer'.",
+          "suggestion": "<1>{{nameApp}}</1> deseja acessar os seguintes dados em <strong>your {{productName}} account</strong>:"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -141,25 +250,54 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'would like the ability to access' is translated as 'ar dori să aibă accesul'. A more natural and concise translation would be 'dorește să aibă acces la' or simply 'dorește acces la'.",
+          "suggestion": "dorește să aibă acces la"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag placement is consistent with the English content, which is good, but might need review for stylistic preference in Russian.",
+          "suggestion": "Consider if the strong tag is the most natural way to emphasize 'вашей учетной записи {{productName}}' in Russian.  Perhaps italics or a different phrasing would be more appropriate."
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase \"<strong>ඔබේ {{productName}} ගිණුමේ</strong>\" translates to \"in your {{productName}} account\" but a more natural phrasing might be \"ඔබේ {{productName}} ගිණුම තුළ\" (within your {{productName}} account) or \"ඔබේ {{productName}} ගිණුමට\" (to your {{productName}} account).",
+          "suggestion": "ඔබේ {{productName}} ගිණුම තුළ"
+        },
+        {
+          "type": "formatting",
+          "description": "The original English content uses `<strong...>` tags to highlight the phrase 'your {{productName}} account'.  The Sinhala translation maintains the strong tag.  Consider whether this aligns with Sinhala UI design conventions. It's possible a different method to emphasis the text is more appropriate.",
+          "suggestion": "Assess whether using `<strong>` tag is appropriate for Sinhala UI design. Consider alternatives if necessary."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English phrase \"would like the ability\" is translated as \"potrebuje možnosť\" which translates to \"needs the possibility\". While technically correct, it's a less natural and less user-friendly phrasing in Slovak. A more natural translation would be something like \"chcela by mať možnosť\" (would like to have the possibility) or a simpler phrasing like \"môže pristupovať\" (can access).",
+          "suggestion": "Consider rephrasing to \"{{nameApp}} chce mať možnosť prístupu\" or \"{{nameApp}} môže pristupovať\"."
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,25 +309,54 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation of 'would like the ability' is inaccurate. 'жели да приступи' literally translates to 'wants to access', which doesn't fully convey the original meaning of desiring the ability to access.",
+          "suggestion": "жели да има могућност да приступи"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'вашем налогу {{productName}}' is a literal translation of 'your {{productName}} account'. It sounds slightly unnatural in Serbian.  'Налогу {{productName}}' is better.",
+          "suggestion": "налогу {{productName}}"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word \"nalogu\" should be \"računu\". \"Nalogu\" translates to \"account (as in an authority or responsibility)\", while \"računu\" means \"account (financial or user)\". The context clearly refers to a user account.",
+          "suggestion": "<1>{{nameApp}}</1> želi da pristupi sledećim podacima u <strong>vašem računu {{productName}}</strong>:"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'your {{productName}} account' is translated as '{{productName}} hesabınızdaki'. While understandable, a more natural and commonly used Turkish translation would be '{{productName}} hesabınızda'. The current translation can feel slightly clunky.",
+          "suggestion": "{{productName}} hesabınızda"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag placement appears identical to the English version. While not strictly an error, consider if a more natural Ukrainian emphasis is desired. The emphasis might be better achieved through sentence structure or alternative phrasing.",
+          "suggestion": "Review the necessity of the strong tag and consider alternative phrasing for emphasis. Perhaps rephrase the sentence to naturally highlight 'вашому обліковому записі'."
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -201,7 +368,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The strong tag is present in both the English and Chinese versions, indicating it was likely preserved during translation. However, ensure that this styling is intended and appropriate for the Chinese context.  It might be preferable to use a different styling method or remove it entirely depending on design guidelines.",
+          "suggestion": "Review the intended styling for the 'strong' tag within the Chinese interface. Consider alternative styling or removal if not appropriate."
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Add watermarks to documents",
   "content_en_sha1_hash": "22034bd673fd6d7cd91245241c5115556634de93",
   "created_at": "2025-05-19T21:30:56.775Z",
-  "updated_at": "2025-05-20T09:38:12.477Z",
+  "updated_at": "2025-08-11T09:02:43.863Z",
   "comment": {
     "text": "Add watermarks to documents. This translation key is used to describe an action that adds a watermark to documents in a file management system, appearing on a button in a dialog component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 100,
+      "line_number": 102,
       "context": "const [watermarksChecked, setWatermarksChecked] = useState(\n !!roomParams.watermark,\n );\n \n const onChangeAddWatermarksToDocuments = () => {\n if (watermarksChecked)\n setRoomParams({\n ...roomParams,\n watermark: null,\n });",
       "module": "/packages/client"
     }
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While technically correct, \"文書に透かしの追加\" is a rather formal and verbose translation. A more natural and concise translation would be preferable for a user interface.",
+          "suggestion": "文書への透かし"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -141,13 +147,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation \"Adăugare incripționare la documente\" translates to 'Adding encryption to documents'. The English phrase 'Add watermarks to documents' refers to a visual overlay, not encryption. This is a significant mistranslation.",
+          "suggestion": "Adăugare filigran la documente"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The translation contains an unnecessary space after 'Добавьте'.",
+          "suggestion": "Добавьте водяные знаки в документы"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -165,13 +183,25 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dodaj vodni žig dokumentom' uses the dative case ('dokumentom') which implies adding watermarks *to* documents, but the English implies adding watermarks *on* documents. A more accurate translation would use the accusative case.",
+          "suggestion": "Dodaj vodni žig na dokumente"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Додајте водене жигове документима' is not the most natural or accurate translation of 'Add watermarks to documents'.  'Водене жигове' is somewhat clunky. A more natural phrasing would use a term for 'watermarks' specifically.",
+          "suggestion": "Додајте водене знакове на документе"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

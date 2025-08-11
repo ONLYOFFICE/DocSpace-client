@@ -3,7 +3,7 @@
   "content": "No plugins added",
   "content_en_sha1_hash": "54bd6767d65fe1e1a199ad74e997730f673a7108",
   "created_at": "2025-05-19T21:30:49.914Z",
-  "updated_at": "2025-05-21T00:43:21.545Z",
+  "updated_at": "2025-05-24T01:57:13.107Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that there are no plugins added, typically appearing on an empty screen or button. It provides context for users who may not have selected any plugins during setup.",
     "is_auto": true,
@@ -30,7 +30,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"لم يتم اضافة مكونات إضافية \" is a literal translation of \"No plugins added\" and while understandable, it's a bit verbose and doesn't flow naturally in Arabic.  A more natural and concise translation would be better.",
+          "description": "The translation 'لم يتم اضافة مكونات إضافية ' while conveying the general meaning of 'No plugins added,' is slightly too literal and formal. A more natural and concise Arabic equivalent would be preferable.",
           "suggestion": "لا توجد مكونات إضافية"
         }
       ],
@@ -78,8 +78,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ei liitännäisiä lisätty' is a bit literal and not the most natural way to express \"No plugins added\" in Finnish. 'Liitännäinen' refers to an add-on or extension, but a more common phrasing would be something like 'Ei asennettuja lisäosia' or 'Ei ole asennettu lisäosia'.",
-          "suggestion": "Ei ole asennettu lisäosia"
+          "description": "The translation 'Ei liitännäisiä lisätty' isn't the most natural or accurate translation of 'No plugins added'. 'Liitännäisiä' means 'add-ons' or 'extensions', and while technically correct, it's not the best phrasing. A more natural and accurate translation would emphasize the absence of plugins.",
+          "suggestion": "Ei asennettuja lisäosia"
         }
       ],
       "approved_at": null
@@ -90,7 +90,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While technically correct, \"Aucun module complémentaire n'a été ajouté\" is a bit formal and verbose for a UI message. A more natural and concise translation would be preferable.",
+          "description": "While \"Aucun module complémentaire n'a été ajouté\" is grammatically correct, it's a bit formal for a simple message like 'No plugins added'. A more natural and user-friendly translation would be 'Aucun plugin ajouté' or 'Pas de plugins ajoutés'.",
           "suggestion": "Aucun plugin ajouté"
         }
       ],
@@ -126,18 +126,18 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Lao word for 'plugins' (ປລັກອິນ) is correctly spelled.",
+          "description": "The word 'ປລັກອິນ' is the correct Lao transliteration for 'plugin'. No spelling errors found.",
           "suggestion": null
         },
         {
           "type": "grammar",
-          "description": "The sentence structure 'ບໍ່ມີການເພີ່ມປລັກອິນ' is grammatically correct and conveys the meaning 'No plugins added'.",
+          "description": "The sentence structure 'ບໍ່ມີການເພີ່ມປລັກອິນ' is grammatically correct and conveys the meaning of 'No plugins added' accurately in Lao. It uses the passive voice correctly.",
           "suggestion": null
         },
         {
           "type": "incorrect_translation",
-          "description": "While the translation is technically correct, a more natural and common phrasing might be 'ບໍ່ມີປລັກອິນໃດໆ' (no plugins at all).",
-          "suggestion": "ບໍ່ມີປລັກອິນໃດໆ"
+          "description": "While the translation is technically correct, it is quite literal. A more natural phrasing might exist depending on the specific context of the application. 'ບໍ່ມີປລັກອິນໃສ່' could be another acceptable translation, depending on the desired tone and flow.",
+          "suggestion": "ບໍມີປລັກອິນໃສ່"
         }
       ],
       "approved_at": null
@@ -190,8 +190,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Sinhala translation \"පේනු නැත\" literally translates to 'cannot see' or 'not visible'. This is an inaccurate translation of \"No plugins added\". It doesn't convey the intended meaning.",
-          "suggestion": "A more accurate translation would be something like \"ධාවන ප්ලගීනයක් లేదు\" (dhavaana plagineyak nae), which means 'No running plugins' or \"ප්ලගීනයක් එකතු නොකර ඇත\" (plagineyak ekathu nokaara athaa), which means 'No plugins have been added'."
+          "description": "The Sinhala translation \"පේනු නැත\" (penu nathe) literally translates to \"no tools\" or \"no instruments\". It doesn't accurately convey the meaning of \"No plugins added\".",
+          "suggestion": "A more accurate translation would be something like \"ආශ්‍රිත පිරවෙනි නැත\" (ashritha piraveni nathe) which means \"No plugins installed\" or \"No add-ons found\"."
         }
       ],
       "approved_at": null
@@ -214,8 +214,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Ниједан додатак није додат' is overly literal and sounds awkward in Serbian. A more natural and idiomatic translation would be 'Нема додатка' or 'Нема инсталираних додатка'.",
-          "suggestion": "Нема додатка"
+          "description": "The translation \"Ниједан додатак није додат\" is a bit overly formal and literal. A more natural and concise translation would be better.",
+          "suggestion": "Нема инсталираних ажурирања."
         }
       ],
       "approved_at": null
@@ -226,7 +226,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Nijedan dodatak nije dodat' is a bit too literal and formal. A more natural and idiomatic translation would be 'Nema dodataka' or 'Nisu dodani dodaci'.",
+          "description": "The translation 'Nijedan dodatak nije dodat' is a bit literal and sounds unnatural. A more natural and common way to say 'No plugins added' in Serbian would be 'Nema dodataka' or 'Nisu dodati dodaci'.",
           "suggestion": "Nema dodataka"
         }
       ],

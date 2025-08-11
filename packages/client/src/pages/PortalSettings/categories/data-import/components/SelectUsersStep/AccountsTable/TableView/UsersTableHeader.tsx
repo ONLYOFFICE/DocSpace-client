@@ -100,7 +100,7 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
       checkbox: {
         value: isChecked,
         isIndeterminate,
-        onChange: toggleAll,
+        onChange: toggleAll!,
       },
       onChange: onColumnChange,
     },
@@ -130,7 +130,7 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
-      sectionWidth={sectionWidth}
+      sectionWidth={sectionWidth!}
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}

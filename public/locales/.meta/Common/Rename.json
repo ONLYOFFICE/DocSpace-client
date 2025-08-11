@@ -3,7 +3,7 @@
   "content": "Rename",
   "content_en_sha1_hash": "d3f4cb898fbe0c7a7ac4f721438c4c26ad1a2513",
   "created_at": "2025-05-19T21:30:47.845Z",
-  "updated_at": "2025-06-03T20:59:41.815Z",
+  "updated_at": "2025-08-04T07:30:01.013Z",
   "comment": {
     "text": "The translation key \"Rename\" is used to display the label for renaming options on various UI elements, such as buttons and dialogs. It typically appears in contexts where user interaction with files or media items requires renaming, often alongside an icon representing a pencil or text editing action. This text helps to clearly communicate the purpose of the feature in different parts of the application.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2133,
+      "line_number": 2147,
       "context": "},\n indexOptions,\n {\n id: \"option_rename\",\n key: \"rename\",\n label: t(\"Common:Rename\"),\n icon: RenameReactSvgUrl,\n onClick: () => this.onClickRename(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Adını dəyiş' literally translates to 'Change its name'. While understandable in context, a more accurate and common translation of 'Rename' would be 'yenidən adlandırmaq'.",
-          "suggestion": "yenidən adlandırmaq"
+          "description": "While \"Adını dəyiş\" literally translates to \"Change its name,\" it doesn't fully capture the nuance of \"Rename.\" \"Rename\" implies giving something a new name, which \"Adını dəyiş\" doesn't necessarily convey.",
+          "suggestion": "Consider \"Yeni ad vermək\" (To give a new name) or \"Başqa ad qoşmaq\" (To add another name) for a more accurate translation, depending on the context."
         }
       ],
       "approved_at": null
@@ -123,7 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While \"名前の変更\" is a literal translation of 'Rename', it's not the most natural or commonly used term in Japanese for this context. It's quite formal.",
+          "suggestion": "Consider alternatives like \"変更する\" (henkou suru - to change) or a more specific term depending on what is being renamed (e.g., \"ファイル名を変更する\" for renaming a file)."
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -186,8 +192,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"නම් කරන්න\" is a literal translation of 'Rename,' it's not the most natural or idiomatic way to express the concept in Sinhala. It sounds slightly formal and cumbersome.",
-          "suggestion": "Consider using \"නම හැරීම\" (nama haerim) or \"නවතන කිරීම\" (navathanakara kiriwa) which are more commonly used for 'rename' in various contexts."
+          "description": "The Sinhala translation \"නම් කරන්න\" is a literal translation of 'to name' and doesn't quite capture the meaning of 'Rename' which implies changing an existing name. It's a bit too formal and doesn't convey the action of replacing a name.",
+          "suggestion": "පැරණ නම වෙනස් කරන්න (Parana nama venas karanna) - meaning 'change the old name' or වෙනත් නම දාන්න (Venatha nama danna) - meaning 'put another name'."
         }
       ],
       "approved_at": null

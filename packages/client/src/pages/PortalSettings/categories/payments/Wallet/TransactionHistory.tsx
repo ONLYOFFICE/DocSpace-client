@@ -202,8 +202,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
 
     try {
       const editorLink = await getTransactionHistoryReport(
-        formatDate(startDate),
-        formatDate(endDate),
+        formatDate!(startDate),
+        formatDate!(endDate),
         isCredit,
         isDebit,
       );
@@ -444,7 +444,7 @@ export default inject(
     const { openOnNewPage } = filesSettingsStore;
 
     const { currentDeviceType } = settingsStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore!;
 
     const userId = userStore.user?.id;
 

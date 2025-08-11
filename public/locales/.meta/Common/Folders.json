@@ -3,7 +3,7 @@
   "content": "Folders",
   "content_en_sha1_hash": "19adc47be34bed86af37b8e8dc882af424402561",
   "created_at": "2025-05-19T21:30:45.434Z",
-  "updated_at": "2025-08-04T07:30:01.211Z",
+  "updated_at": "2025-08-11T09:02:43.913Z",
   "comment": {
     "text": "The translation key \"Folders\" is used to display a heading or label for folders in the user interface. It appears in various places, such as tiles and filters, to provide clear identification of folder-related content. Translators should focus on conveying a consistent meaning across different contexts.",
     "is_auto": true,
@@ -12,25 +12,25 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 335,
+      "line_number": 337,
       "context": "getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/FilesTileContainer.js",
-      "line_number": 141,
+      "line_number": 143,
       "context": "<TileContainer\n isDesc={isDesc}\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n >\n {filesListNode}\n </TileContainer>\n </FileTileProvider>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 593,
+      "line_number": 595,
       "context": "switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 593,
+      "line_number": 595,
       "context": "switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():",
       "module": "/packages/client"
     },

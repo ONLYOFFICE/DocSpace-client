@@ -30,7 +30,7 @@ import { Select } from "./Select";
 import type { HoursProps } from "../Cron.types";
 
 export const Hours = memo(
-  ({ hours, setHours, unit, t, isDisabled }: HoursProps) => {
+  ({ hours, setHours, unit, t, isDisabled, dataTestId }: HoursProps) => {
     return (
       <Select
         unit={unit}
@@ -39,6 +39,7 @@ export const Hours = memo(
         dropDownMaxHeight={300}
         placeholder={t("EveryHour")}
         isDisabled={isDisabled}
+        dataTestId={dataTestId}
       />
     );
   },

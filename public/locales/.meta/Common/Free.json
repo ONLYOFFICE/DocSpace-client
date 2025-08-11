@@ -3,7 +3,7 @@
   "content": "Free",
   "content_en_sha1_hash": "75f527181b574f84568f33f67adc3b267a6fef9c",
   "created_at": "2025-05-19T21:30:45.558Z",
-  "updated_at": "2025-08-04T07:30:01.035Z",
+  "updated_at": "2025-08-11T09:02:43.836Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Free\" in various contexts across different platforms. It is commonly found on price labels and informational sections, indicating that a product or service has no cost associated with it.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/ItemTitle.tsx",
-      "line_number": 91,
-      "context": "<div className={commonStyles.title} ref={itemTitleRef}>\n <ReactSVG className=\"icon\" src={getIcon?.(32, \".pdf\") ?? \"\"} />\n <Text className=\"text\">{gallerySelected?.attributes?.name_form}</Text>\n \n <Text color={currentColorScheme?.main?.accent} className=\"free-label\">\n {t(\"Common:Free\")}\n </Text>\n {gallerySelected ? (\n <div className={styles.contextOptions}>\n <ContextMenu\n ref={contextMenuRef}",
+      "line_number": 95,
+      "context": ">\n <ReactSVG className=\"icon\" src={getIcon?.(32, \".pdf\") ?? \"\"} />\n <Text className=\"text\">{gallerySelected?.attributes?.name_form}</Text>\n \n <Text color={currentColorScheme?.main?.accent} className=\"free-label\">\n {t(\"Common:Free\")}\n </Text>\n {gallerySelected ? (\n <div\n className={styles.contextOptions}\n data-testid=\"info_panel_gallery_context_options\"",
       "module": "/packages/client"
     },
     {

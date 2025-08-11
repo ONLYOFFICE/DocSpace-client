@@ -84,12 +84,14 @@ const LoginSettings = (props: LoginSettingsProps) => {
           label={t("ShowBackupCodes")}
           onClick={() => setBackupCodesDialogVisible(true)}
           size={ButtonSize.small}
+          testId="show_backup_codes_button"
         />
         <Link
           fontWeight="600"
           isHovered
           type={LinkType.action}
           onClick={() => setResetAppDialogVisible(true)}
+          dataTestId="reset_app_link"
         >
           {t("Common:ResetApplication")}
         </Link>

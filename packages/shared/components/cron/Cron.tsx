@@ -54,6 +54,7 @@ const Cron = ({
   setValue,
   onError,
   isDisabled,
+  dataTestId,
 }: CronProps) => {
   const { t, i18n } = useTranslation("Common");
 
@@ -152,12 +153,13 @@ const Cron = ({
   const units = useMemo(() => getUnits(i18n.language), [i18n.language]);
 
   return (
-    <div data-testid="cron" className={styles.cronWrapper}>
+    <div data-testid={dataTestId ?? "cron"} className={styles.cronWrapper}>
       <Period
         t={t}
         period={period}
         setPeriod={setPeriod}
         isDisabled={isDisabled}
+        dataTestId={dataTestId ? `${dataTestId}_period` : undefined}
       />
       {isYear ? (
         <Months
@@ -166,6 +168,7 @@ const Cron = ({
           months={months}
           setMonths={setMonths}
           isDisabled={isDisabled}
+          dataTestId={dataTestId ? `${dataTestId}_months` : undefined}
         />
       ) : null}
       {isYear || isMonth ? (
@@ -176,6 +179,7 @@ const Cron = ({
           monthDays={monthDays}
           setMonthDays={setMonthDays}
           isDisabled={isDisabled}
+          dataTestId={dataTestId ? `${dataTestId}_month_days` : undefined}
         />
       ) : null}
       {isYear || isMonth || isWeek ? (
@@ -187,6 +191,7 @@ const Cron = ({
           weekDays={weekDays}
           setWeekDays={setWeekDays}
           isDisabled={isDisabled}
+          dataTestId={dataTestId ? `${dataTestId}_week_days` : undefined}
         />
       ) : null}
       <div className={styles.wrapper}>
@@ -197,6 +202,7 @@ const Cron = ({
             hours={hours}
             setHours={setHours}
             isDisabled={isDisabled}
+            dataTestId={dataTestId ? `${dataTestId}_hours` : undefined}
           />
         ) : null}
 
@@ -208,6 +214,7 @@ const Cron = ({
             minutes={minutes}
             setMinutes={setMinutes}
             isDisabled={isDisabled}
+            dataTestId={dataTestId ? `${dataTestId}_minutes` : undefined}
           />
         ) : null}
         <span className={styles.suffix}>{t("Common:UTC")}</span>

@@ -152,6 +152,7 @@ const SocialNetworks = (props: SocialNetworksProps) => {
             onClick={onClick}
             size="base"
             isConnect={item.linked}
+            dataTestId={`provider_${item.provider}_button`}
           />
         </div>
       );

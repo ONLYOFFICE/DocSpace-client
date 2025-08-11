@@ -98,6 +98,7 @@ const PortalDeactivation = (props) => {
           size={isDesktopView ? "small" : "normal"}
           onClick={onDeactivateClick}
           isDisabled={notActivatedEmail}
+          testId="request_deactivate_portal_button"
         />
         {notActivatedEmail ? (
           <Text fontSize="12px" fontWeight="600">
@@ -111,6 +112,7 @@ const PortalDeactivation = (props) => {
               fontSize="12px"
               fontWeight="400"
               onClick={requestAgain}
+              testId="request_deactivate_portal_link"
             >
               {t("MainBar:RequestActivation")}
             </Link>

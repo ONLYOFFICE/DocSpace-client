@@ -63,6 +63,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             scale
             primary
             onClick={this.onClick}
+            testId="dialog_owner_change_button"
           />
           <Button
             key="CloseBtn"
@@ -70,6 +71,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             size="normal"
             scale
             onClick={onClose}
+            testId="dialog_cancel_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

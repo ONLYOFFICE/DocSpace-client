@@ -43,6 +43,7 @@ const SsoComboBox = (props) => {
     enableSso,
     isLoadingXml,
     isDisabled,
+    dataTestId,
   } = props;
 
   const currentOption =
@@ -70,6 +71,8 @@ const SsoComboBox = (props) => {
           manualWidth="100%"
           directionY="both"
           textOverflow
+          dataTestId={dataTestId}
+          dropDownTestId={dataTestId ? `${dataTestId}_dropdown` : undefined}
         />
       </StyledInputWrapper>
     </FieldContainer>

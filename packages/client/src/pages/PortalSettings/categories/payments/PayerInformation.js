@@ -112,6 +112,7 @@ const PayerInformation = ({
           </Text>
         </>
       }
+      dataTestId="payer_info_help_button"
     />
   );
 
@@ -156,6 +157,7 @@ const PayerInformation = ({
             className="payer-info_account-link"
             color="accent"
             onClick={goToStripePortal}
+            dataTestId="stripe_customer_portal_link"
           >
             {t("ChooseNewPayer")}
           </Link>
@@ -173,11 +175,18 @@ const PayerInformation = ({
       target="_blank"
       color="accent"
       onClick={goToStripePortal}
+      dataTestId="stripe_customer_portal_link"
     >
       {t("StripeCustomerPortal")}
     </Link>
   ) : (
-    <Link fontWeight={600} href={`mailto:${email}`} tag="a" color="accent">
+    <Link
+      fontWeight={600}
+      href={`mailto:${email}`}
+      tag="a"
+      color="accent"
+      dataTestId="payer_email_link"
+    >
       {email}
     </Link>
   );

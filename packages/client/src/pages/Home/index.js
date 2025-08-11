@@ -171,12 +171,12 @@ const PureHome = (props) => {
 
   const isContactsPage =
     currentClientView === "users" || currentClientView === "groups";
-
+  const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
 
   const onDrop = (f, uploadToFolder) => {
-    if (isContactsPage) return;
+    if (isContactsPage || isProfile) return;
 
     if (
       folderSecurity &&
@@ -232,7 +232,8 @@ const PureHome = (props) => {
   });
 
   const getContextModel = () => {
-    if (isFrame) return null;
+    if (isFrame || isProfile) return null;
+
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
   };
@@ -325,10 +326,10 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage ? null : isContactsPage ? (
+      {isSettingsPage ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
-          <ContactsSelectionArea />
+          {isProfile ? null : <ContactsSelectionArea />}
         </>
       ) : (
         <>
@@ -338,7 +339,10 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps}>
-        {!isErrorRoomNotAvailable || isContactsPage || isSettingsPage ? (
+        {!isErrorRoomNotAvailable ||
+        isContactsPage ||
+        isProfile ||
+        isSettingsPage ? (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -352,7 +356,7 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldShowFilter ? (
+        {shouldShowFilter && !isProfile ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />

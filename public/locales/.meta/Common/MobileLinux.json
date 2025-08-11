@@ -3,7 +3,7 @@
   "content": "Download {{organizationName}} Desktop Editors for Linux",
   "content_en_sha1_hash": "98bd0b5fb107da6bfa3818ccecab0023295ef88d",
   "created_at": "2025-05-19T21:30:46.576Z",
-  "updated_at": "2025-06-18T17:11:42.563Z",
+  "updated_at": "2025-08-11T09:02:44.077Z",
   "comment": {
     "text": "This translation key is used to display the desktop editor download URL for the MobileLinux organization. It appears on a button component, inviting users to download the desktop editors for Linux.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/article/sub-components/Apps.tsx",
-      "line_number": 102,
-      "context": "onClick={() => window.open(downloaddesktopUrl)}\n iconName={LinuxReactSvgUrl}\n size={32}\n isFill\n hoverColor={theme.filesArticleBody.downloadAppList.linuxHoverColor}\n title={t(\"Common:MobileLinux\", {\n organizationName: logoText,\n })}\n />\n <IconButton\n onClick={() => window.open(officeforandroidUrl)}",
+      "line_number": 111,
+      "context": "size={32}\n isFill\n hoverColor={\n theme.filesArticleBody.downloadAppList.linuxHoverColor\n }\n title={t(\"Common:MobileLinux\", {\n organizationName: logoText,\n })}\n />\n ) : null}",
       "module": "/packages/shared"
     }
   ],

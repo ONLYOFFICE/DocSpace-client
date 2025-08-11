@@ -871,5 +871,7 @@
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
   "YourCurrentDomain": "Vaša trenutna domena",
   "YourLogo": "Vaš logotip",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
+  "LogoForViewer": "Logotip za {{diagramViewer}}"
 }

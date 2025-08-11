@@ -871,5 +871,7 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "LogoForEditors": "{{editorName}}编辑器 logo",
+  "LogoForViewer": "{{diagramViewer}} logo"
 }

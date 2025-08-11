@@ -871,5 +871,7 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "LogoForEditors": "Logo para o editor {{editorName}}",
+  "LogoForViewer": "Logo para {{diagramViewer}}"
 }

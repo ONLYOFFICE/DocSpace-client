@@ -158,8 +158,6 @@
   "LoginHistoryTitle": "Historial de conexiones",
   "LoginLatestText": "En está página se demuestra solo la actividad más reciente. Los propios datos se almacenan durante el periodo indicarado en el campo de abajo (180 días como máximo).",
   "LoginSubheaderTitle": "Esta subsección se utiliza para supervisar la última actividad de inicio de sesión de los usuarios, incluidos los inicios de sesión correctos y los intentos fallidos con indicación de los motivos.",
-  "LogoForEditors": "Logotipo para el editor {{editorName}}",
-  "LogoForViewer": "Logotipo para {{diagramViewer}}",
   "LogoLightSmall": "Logo para el encabezado del espacio",
   "ManagementCategoryDataManagement": "Archivo local",
   "ManagementCategoryIntegration": "Integración",

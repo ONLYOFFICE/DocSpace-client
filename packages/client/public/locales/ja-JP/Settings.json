@@ -158,8 +158,6 @@
   "LoginHistoryTitle": "ログイン履歴",
   "LoginLatestText": "このページでは最新のポータルの活動が表示されています。データは以下のフィールドに入力される期間中に保存されています。（日数、最大１８０日）",
   "LoginSubheaderTitle": "このサブセクションは、ログインの成功や失敗を含む最新のユーザーログイン活動を、理由の表示とともに監視するために使用されます。",
-  "LogoForEditors": "{{editorName}}エディタ用のロゴ",
-  "LogoForViewer": "{{diagramViewer}}用のロゴ",
   "LogoLightSmall": "スペースのヘッダー用ロゴ",
   "ManagementCategoryDataManagement": "データ管理",
   "ManagementCategoryIntegration": "統合",

@@ -164,8 +164,6 @@
   "LoginHistoryTitle": "Login History",
   "LoginLatestText": "Only the latest activity is shown on this page. The data itself is stored during the period specified in the field below (max 180 days).",
   "LoginSubheaderTitle": "This subsection is used to monitor the latest user login activity including successful logins and failed attempts with an indication of reasons.",
-  "LogoForEditors": "Logo for {{editorName}} editor",
-  "LogoForViewer": "Logo for {{diagramViewer}}",
   "LogoLightSmall": "Logo for the portal",
   "ManagementCategoryDataManagement": "Data Management",
   "ManagementCategoryIntegration": "Integration",

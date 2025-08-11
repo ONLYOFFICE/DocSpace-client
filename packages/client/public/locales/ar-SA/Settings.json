@@ -158,8 +158,6 @@
   "LoginHistoryTitle": "قم بتسجيل الدخول",
   "LoginLatestText": "يتم عرض أحدث نشاط فقط على هذه الصفحة. يتم تخزين البيانات نفسها خلال الفترة المحددة في الحقل أدناه (بحد أقصى 180 يومًا).",
   "LoginSubheaderTitle": "يستخدم هذا القسم الفرعي لمراقبة آخر نشاط لتسجيل دخول المستخدم بما في ذلك عمليات تسجيل الدخول الناجحة والمحاولات الفاشلة مع توضيح الأسباب.",
-  "LogoForEditors": "شعار محرر {{editorName}}",
-  "LogoForViewer": "شعار {{diagramViewer}}",
   "LogoLightSmall": "شعار ترويسة الاستضافة",
   "ManagementCategoryDataManagement": "إدارة البيانات",
   "ManagementCategoryIntegration": "تكامل",

@@ -871,5 +871,7 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
+  "LogoForViewer": "{{diagramViewer}} üçün loqo"
 }

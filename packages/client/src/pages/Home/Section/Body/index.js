@@ -369,8 +369,9 @@ const SectionBodyContent = (props) => {
       (folder) => folder.id == selectedFolderId,
     );
 
-    if (!isIndexEditingMode)
+    if (!isIndexEditingMode && selectedFolderId) {
       return onMoveTo(selectedFolderId, title, destFolderInfo);
+    }
     if (filesList.length === 1) return;
 
     const replaceableItemId = Number.isNaN(+selectedFolderId)

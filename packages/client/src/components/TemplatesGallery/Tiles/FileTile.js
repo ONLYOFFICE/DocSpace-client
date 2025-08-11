@@ -86,7 +86,7 @@ const Styled = styled.div`
     font-weight: 600;
     font-size: 13px;
     line-height: 20px;
-    color: #555f65;
+    color: ${globalColors.grayText};
     width: 100%;
     white-space: nowrap;
     overflow: hidden;

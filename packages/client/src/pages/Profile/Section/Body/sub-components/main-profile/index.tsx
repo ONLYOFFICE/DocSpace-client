@@ -475,12 +475,14 @@ const MainProfile = (props: MainProfileProps) => {
 
           <StyledLabel as="div" className="profile-language">
             {t("Common:Language")}
-            <HelpButton
-              size={12}
-              offsetRight={0}
-              place={dirTooltip}
-              tooltipContent={tooltipLanguage}
-            />
+            {documentationEmail ? (
+              <HelpButton
+                size={12}
+                offsetRight={0}
+                place={dirTooltip}
+                tooltipContent={tooltipLanguage}
+              />
+            ) : null}
           </StyledLabel>
           <div className="language-combo-box-wrapper" ref={comboBoxRef}>
             <ComboBox
@@ -657,12 +659,14 @@ const MainProfile = (props: MainProfileProps) => {
           <div className="mobile-language">
             <Text as="div" fontWeight={600} className="mobile-profile-label">
               {t("Common:Language")}
-              <HelpButton
-                size={12}
-                offsetRight={0}
-                place="right"
-                tooltipContent={tooltipLanguage}
-              />
+              {documentationEmail ? (
+                <HelpButton
+                  size={12}
+                  offsetRight={0}
+                  place="right"
+                  tooltipContent={tooltipLanguage}
+                />
+              ) : null}
             </Text>
             <div className="mobile-language__wrapper-combo-box">
               <ComboBox

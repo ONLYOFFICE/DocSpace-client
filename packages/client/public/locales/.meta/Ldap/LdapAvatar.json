@@ -3,7 +3,7 @@
   "content": "Profile photo",
   "content_en_sha1_hash": "33f385bb3b7f437c44f197aa3da5da8480eef36f",
   "created_at": "2025-05-19T21:30:54.178Z",
-  "updated_at": "2025-05-26T07:57:32.209Z",
+  "updated_at": "2025-08-11T09:02:43.840Z",
   "comment": {
     "text": "This translation key is used for a label that displays \"Profile photo\" and appears in an Avatar Editor Dialog. It is likely displayed as a title or legend for the profile photo section within this dialog, allowing users to understand its purpose.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 133,
+      "line_number": 134,
       "context": "const [scrollBodyHeight, setScrollBodyHeight] = useState(null);\n \n const editorBorderRadius = isProfileUpload ? 400 : 110;\n \n const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : t(\"RoomLogoCover:RoomCover\");\n \n const onResize = () => {\n const imageCropperModalHeight = IMAGE_CROPPER_HEIGHT + HEADER + BUTTONS;\n const screenHeight = document.documentElement.clientHeight;",
       "module": "/packages/client"
     },

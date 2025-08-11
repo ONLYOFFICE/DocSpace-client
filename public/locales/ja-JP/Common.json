@@ -234,6 +234,7 @@
   "DeveloperTools": "開発者ツール",
   "Diagram": "図表",
   "Diagrams": "図表",
+  "DiagramViewer": "図表ビューア",
   "Disable": "無効にする",
   "Disabled": "無効",
   "DisableQuota": "容量制限を無効にする",
@@ -442,7 +443,6 @@
   "LoginButton": "サインイン",
   "LogoAbout": "「詳細情報」ページ用のロゴマーク",
   "LogoCompact": "左側のコンパクトメニュー用のロゴマーク",
-  "LogoDocsEditor": "エディターズヘッダーのロゴ",
   "LogoFavicon": "ファビコン",
   "LogoLightSmall": "スペースのヘッダー用ロゴ",
   "LogoLogin": "用于登录页面和电子邮件的标志",
@@ -549,6 +549,7 @@
   "PasswordRequired": "パスワードが必要",
   "Path": "パス",
   "PaymentsTitle": "お支払い",
+  "PDF": "PDF",
   "People": "方々",
   "Permissions": "権限",
   "PerUserMonth": "<1>{{price}}</1> 管理者 / 月額",
@@ -870,5 +871,7 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "LogoForEditors": "{{editorName}}エディタ用のロゴ",
+  "LogoForViewer": "{{diagramViewer}}用のロゴ"
 }

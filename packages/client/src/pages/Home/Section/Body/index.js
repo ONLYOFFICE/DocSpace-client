@@ -245,7 +245,9 @@ const SectionBodyContent = (props) => {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
 
-          const documentTitle = currentDroppable.getAttribute("documentTitle");
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
           setDropTargetPreview(documentTitle);
 
           const classElements = document.getElementsByClassName(value);
@@ -261,7 +263,9 @@ const SectionBodyContent = (props) => {
             droppableSeparator.remove();
           }
         } else {
-          const documentTitle = currentDroppable.getAttribute("documentTitle");
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
           setDropTargetPreview(documentTitle);
 
           currentDroppable.classList.remove("droppable-hover");
@@ -273,7 +277,9 @@ const SectionBodyContent = (props) => {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
 
-          const documentTitle = currentDroppable.getAttribute("documentTitle");
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
           setDropTargetPreview(documentTitle);
 
           const classElements = document.getElementsByClassName(value);
@@ -293,7 +299,9 @@ const SectionBodyContent = (props) => {
           currentDroppable = droppable;
           droppableSeparator = indexSeparatorNode;
 
-          const documentTitle = currentDroppable.getAttribute("documentTitle");
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
           setDropTargetPreview(documentTitle);
         }
       } else {

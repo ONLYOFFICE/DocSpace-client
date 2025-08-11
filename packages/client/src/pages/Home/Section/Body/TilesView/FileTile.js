@@ -286,7 +286,7 @@ const FileTile = (props) => {
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         isDragDisabled={isDragDisabled}
-        documentTitle={documentTitle}
+        data-document-title={documentTitle}
       >
         {renderTile()}
       </StyledDragAndDrop>

@@ -175,7 +175,7 @@ const Item = ({
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       className={`document-catalog ${droppableClassName}`}
-      documentTitle={item.title}
+      data-document-title={item.title}
     >
       <ArticleItem
         item={item}

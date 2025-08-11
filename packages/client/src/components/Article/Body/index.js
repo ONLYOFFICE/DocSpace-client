@@ -275,7 +275,7 @@ const ArticleBodyContent = (props) => {
     (e) => {
       const wrapperElement = document.elementFromPoint(e.clientX, e.clientY);
       const droppable = wrapperElement?.closest(".droppable");
-      const documentTitle = droppable?.getAttribute("documentTitle");
+      const documentTitle = droppable?.getAttribute("data-document-title");
 
       if (droppable) setDropTargetPreview(documentTitle);
     },

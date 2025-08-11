@@ -31,11 +31,12 @@ import type { TFileLink } from "../../../api/files/types";
 import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
 import { AccessRightSelect } from "../../access-right-select";
 
+import { IconDisplay } from "./IconDisplay";
+
 export interface AccessRightSelectorProps {
   isLoaded: boolean;
   isRoomsLink: boolean;
   isFolder: boolean;
-  isFormRoom: boolean;
   isExpiredLink: boolean;
   isArchiveFolder: boolean;
   isMobileViewLink: boolean;
@@ -53,7 +54,6 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
   isLoaded,
   isRoomsLink,
   isFolder,
-  isFormRoom,
   isExpiredLink,
   isArchiveFolder,
   isMobileViewLink,
@@ -64,9 +64,14 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
   roomSelectedOptions,
   changeAccessOption,
 }) => {
-  if (isRoomsLink || isFolder) {
-    if (isFormRoom) return;
+  if (accessOptions.length === 1 || roomAccessOptions?.length === 1) {
+    const option =
+      isRoomsLink || isFolder ? roomSelectedOptions : selectedAccessOption;
 
+    return <IconDisplay option={option ?? ({} as TOption)} />;
+  }
+
+  if (isRoomsLink || isFolder) {
     return (
       <AccessRightSelect
         selectedOption={roomSelectedOptions ?? ({} as TOption)}

@@ -233,6 +233,7 @@ export type TFolder = {
   order?: string;
   isRoom?: false;
   shareSettings?: TShareSettings;
+  availableExternalRights?: TAvailableExternalRights;
 };
 
 export type TGetFolderPath = TFolder[];

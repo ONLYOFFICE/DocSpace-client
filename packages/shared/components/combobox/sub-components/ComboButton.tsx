@@ -110,6 +110,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
       [styles.isDisabled]: isDisabled,
       [styles.defaultOption]: defaultOption,
       [styles.isLoading]: isLoading,
+      [styles.onlyIcon]: type === "onlyIcon",
     },
   );
 

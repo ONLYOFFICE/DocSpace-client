@@ -134,9 +134,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
   }, [item]);
 
   const accessOptions = useMemo(() => {
-    if (isFolderOrRoom(item)) return getRoomAccessOptions(t);
-
     if (!item.availableExternalRights) return [];
+
+    if (isFolderOrRoom(item))
+      return getRoomAccessOptions(t, item.availableExternalRights);
 
     return getAccessOptions(t, item.availableExternalRights);
   }, [t, item]);

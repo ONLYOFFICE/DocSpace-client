@@ -67,6 +67,7 @@ const LinkRow = (props: LinkRowProps) => {
   } = props;
 
   const roomId = item.id;
+  const availableExternalRights = item.availableExternalRights;
 
   const isFormRoom = item.roomType === RoomsType.FormRoom;
   const isPublicRoomType = item.roomType === RoomsType.PublicRoom;
@@ -270,9 +271,9 @@ const LinkRow = (props: LinkRowProps) => {
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder!}
-      isFormRoom={isFormRoom}
       isPublicRoom={isPublicRoomType}
       changeShareOption={changeShareOption}
+      availableExternalRights={availableExternalRights}
     />
   );
 };

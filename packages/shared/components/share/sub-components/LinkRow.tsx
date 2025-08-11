@@ -29,9 +29,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
-import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
-import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
-import CopyIcon from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import LinkIcon from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
 import { useIsMobile } from "../../../hooks/useIsMobile";
@@ -53,9 +51,10 @@ import type { LinkRowProps } from "../Share.types";
 
 import styles from "../Share.module.scss";
 
+import LinkTitle from "./LinkTitle";
 import { AccessTypeIcon } from "./AccessTypeIcon";
-import { LinkTypeSelector } from "./LinkTypeSelector";
 import { LinkExpiration } from "./LinkExpiration";
+import { LinkTypeSelector } from "./LinkTypeSelector";
 import { AccessRightSelector } from "./AccessRightSelector";
 
 const LinkRow = ({
@@ -67,7 +66,6 @@ const LinkRow = ({
   availableExternalRights,
   loadingLinks,
   isFolder = false,
-  isFormRoom = false,
   isRoomsLink = false,
   isArchiveFolder = false,
   getData,
@@ -88,8 +86,11 @@ const LinkRow = ({
   }, [availableExternalRights, t]);
 
   const roomAccessOptions = useMemo(
-    () => (isRoomsLink || isFolder ? getRoomAccessOptions(t) : []),
-    [t, isFolder, isRoomsLink],
+    () =>
+      (isRoomsLink || isFolder) && availableExternalRights
+        ? getRoomAccessOptions(t, availableExternalRights)
+        : [],
+    [t, isFolder, isRoomsLink, availableExternalRights],
   );
 
   const onCopyLink = (link: TFileLink) => {
@@ -145,11 +146,9 @@ const LinkRow = ({
       (option) => option && "access" in option && option.access === link.access,
     );
 
-    const avatar = shareOption.key === "anyone" ? UniverseIcon : PeopleIcon;
-
     const isExpiredLink = link.sharedTo.isExpired;
     const isLocked = !!link.sharedTo.password;
-    const linkTitle = shareOption.label;
+    const linkTitle = link.sharedTo.title;
 
     const isLoaded = loadingLinks.includes(link.sharedTo.id);
     const canEditInternal = link.canEditInternal;
@@ -157,19 +156,18 @@ const LinkRow = ({
     return (
       <div className={className} key={link.sharedTo.id}>
         <AccessTypeIcon
-          avatar={avatar}
+          avatar={LinkIcon}
           isLoaded={isLoaded}
           isLocked={isLocked}
         />
         <div className={styles.linkOptions}>
-          <LinkTypeSelector
+          <LinkTitle
+            t={t}
             isLoaded={isLoaded}
             linkTitle={linkTitle}
-            canEditInternal={canEditInternal}
             isExpiredLink={isExpiredLink}
-            onSelect={(item) => changeShareOption(item, link)}
-            selectedOption={shareOption}
-            options={shareOptions}
+            disabledCopy={isArchiveFolder}
+            onCopyLink={() => onCopyLink(link)}
           />
           <LinkExpiration
             t={t}
@@ -182,21 +180,18 @@ const LinkRow = ({
           />
         </div>
         <div className={styles.linkActions}>
-          {!isArchiveFolder ? (
-            <IconButton
-              className={styles.linkActionsCopyIcon}
-              size={16}
-              iconName={CopyIcon}
-              onClick={() => onCopyLink(link)}
-              title={t("Common:CopySharedLink")}
-              isDisabled={isExpiredLink || isLoaded}
-            />
-          ) : null}
+          <LinkTypeSelector
+            isLoaded={isLoaded}
+            canEditInternal={canEditInternal}
+            isExpiredLink={isExpiredLink}
+            onSelect={(item) => changeShareOption(item, link)}
+            selectedOption={shareOption}
+            options={shareOptions}
+          />
           <AccessRightSelector
             link={link}
             isFolder={isFolder}
             isLoaded={isLoaded}
-            isFormRoom={isFormRoom}
             isRoomsLink={isRoomsLink}
             isExpiredLink={isExpiredLink}
             accessOptions={accessOptions}

@@ -26,6 +26,8 @@
 
 import React from "react";
 import moment from "moment";
+import type { TFunction } from "i18next";
+
 import type {
   TAvailableExternalRights,
   TFile,
@@ -73,8 +75,6 @@ export type LinkRowProps = {
 
   loadingLinks: (string | number)[];
 
-  isFormRoom?: boolean;
-  isCustomRoom?: boolean;
   isFolder?: boolean;
   isPublicRoom?: boolean;
 
@@ -146,3 +146,13 @@ export type ShareProps = {
   setLinkParams: (linkParams: LinkParamsType) => void;
   fileLinkProps?: TFileLink[];
 };
+
+export interface LinkTitleProps {
+  t: TFunction;
+  linkTitle: string;
+  isExpiredLink: boolean;
+  onCopyLink: VoidFunction;
+
+  isLoaded?: boolean;
+  disabledCopy?: boolean;
+}

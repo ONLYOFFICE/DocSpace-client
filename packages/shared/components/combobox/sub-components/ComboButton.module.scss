@@ -317,6 +317,10 @@
     fill: var(--combobox-children-button-default-disabled-color);
   }
 
+  &.onlyIcon {
+    margin-inline-end: 0;
+  }
+
   svg {
     &:not(:root) {
       width: 100%;

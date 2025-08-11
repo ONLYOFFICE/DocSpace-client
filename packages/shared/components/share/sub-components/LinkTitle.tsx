@@ -24,51 +24,53 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { type FC } from "react";
-import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
+import React, { FC } from "react";
+import classNames from "classnames";
 
-import { IconDisplay } from "./IconDisplay";
+import CopyIcon from "PUBLIC_DIR/images/icons/12/copy.svg?url";
+
+import { Text } from "../../text";
+import { IconButton } from "../../icon-button";
 
 import styles from "../Share.module.scss";
+import type { LinkTitleProps } from "../Share.types";
 
-export interface AccessOptionProps {
-  isLoaded: boolean;
-  canEditInternal: boolean;
-  isExpiredLink: boolean;
-
-  options: TOption[];
-  selectedOption: TOption;
-  onSelect: (option: TOption) => void;
-}
-
-export const LinkTypeSelector: FC<AccessOptionProps> = ({
-  options,
+const LinkTitle: FC<LinkTitleProps> = ({
+  t,
   isLoaded,
-  onSelect,
+  linkTitle,
+  disabledCopy,
   isExpiredLink,
-  selectedOption,
-  canEditInternal,
+  onCopyLink,
 }) => {
-  if (!canEditInternal) {
-    return <IconDisplay option={selectedOption} />;
-  }
-
   return (
-    <ComboBox
-      fillIcon
-      modernView
-      type="onlyIcon"
-      directionY="both"
-      manualWidth="auto"
-      scaled={false}
-      options={options}
-      scaledOptions={false}
-      className={styles.internalCombobox}
-      size={ComboBoxSize.content}
-      selectedOption={selectedOption}
-      onSelect={onSelect}
-      showDisabledItems
-      isDisabled={isLoaded || isExpiredLink}
-    />
+    <div
+      className={styles.linkTitleContainer}
+      onClick={onCopyLink}
+      title={t("Common:CopySharedLink")}
+    >
+      <Text
+        className={classNames(
+          styles.linkOptionsTitle,
+          styles.linkOptionsTitleRoom,
+          {
+            [styles.isExpired]: isExpiredLink,
+          },
+        )}
+        truncate
+      >
+        {linkTitle}
+      </Text>
+      {!disabledCopy ? (
+        <IconButton
+          className={styles.linkActionsCopyIcon}
+          size={12}
+          iconName={CopyIcon}
+          isDisabled={isExpiredLink || isLoaded}
+        />
+      ) : null}
+    </div>
   );
 };
+
+export default LinkTitle;

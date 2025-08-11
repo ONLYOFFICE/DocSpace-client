@@ -25,50 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { type FC } from "react";
-import { ComboBox, ComboBoxSize, type TOption } from "../../combobox";
-
-import { IconDisplay } from "./IconDisplay";
+import { ReactSVG } from "react-svg";
+import { type TOption } from "../../combobox";
 
 import styles from "../Share.module.scss";
 
-export interface AccessOptionProps {
-  isLoaded: boolean;
-  canEditInternal: boolean;
-  isExpiredLink: boolean;
-
-  options: TOption[];
-  selectedOption: TOption;
-  onSelect: (option: TOption) => void;
+export interface IconDisplayProps {
+  option: TOption;
 }
 
-export const LinkTypeSelector: FC<AccessOptionProps> = ({
-  options,
-  isLoaded,
-  onSelect,
-  isExpiredLink,
-  selectedOption,
-  canEditInternal,
-}) => {
-  if (!canEditInternal) {
-    return <IconDisplay option={selectedOption} />;
-  }
-
+export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
   return (
-    <ComboBox
-      fillIcon
-      modernView
-      type="onlyIcon"
-      directionY="both"
-      manualWidth="auto"
-      scaled={false}
-      options={options}
-      scaledOptions={false}
-      className={styles.internalCombobox}
-      size={ComboBoxSize.content}
-      selectedOption={selectedOption}
-      onSelect={onSelect}
-      showDisabledItems
-      isDisabled={isLoaded || isExpiredLink}
-    />
+    <div className={styles.icon} title={option.title || option.label}>
+      <ReactSVG src={option.icon as string} />
+    </div>
   );
 };

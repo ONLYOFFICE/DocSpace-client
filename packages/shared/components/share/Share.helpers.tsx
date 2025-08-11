@@ -35,6 +35,9 @@ import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?u
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import FillFormsReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
+
+import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
+import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
@@ -54,6 +57,8 @@ import type {
 import { Link } from "../link";
 import { toastr } from "../toast";
 
+type ItemValue<T> = T extends false ? never : T;
+
 export const getShareOptions = (
   t: TTranslation,
   // available: TAvailableExternalRights | undefined,
@@ -63,6 +68,7 @@ export const getShareOptions = (
       internal: false,
       key: "anyone",
       label: t("Common:AnyoneWithLink"),
+      icon: UniverseIcon,
     },
     {
       internal: true,
@@ -70,6 +76,7 @@ export const getShareOptions = (
       label: t("Common:SpaceUsersOnly", {
         productName: t("Common:ProductName"),
       }),
+      icon: PeopleIcon,
     },
   ];
 };
@@ -108,6 +115,7 @@ export const getAccessOptions = (
       key: "viewing",
       label: t("Common:ReadOnly"),
       icon: EyeReactSvgUrl,
+      title: t("Common:ReadOnly"),
     },
     available.FillForms && {
       access: ShareAccessRights.FormFilling,
@@ -133,44 +141,57 @@ export const getAccessOptions = (
     // },
   ];
 
-  type ItemValue<T> = T extends false ? never : T;
-
   return accessOptions.filter(
     (item): item is ItemValue<(typeof accessOptions)[number]> => Boolean(item),
   );
 };
 
-export const getRoomAccessOptions = (t: TTranslation) => {
-  return [
-    {
+export const getRoomAccessOptions = (
+  t: TTranslation,
+  available: TAvailableExternalRights,
+) => {
+  const accessOptions = [
+    available.Editing && {
       access: ShareAccessRights.Editing,
       description: t("Common:RoleEditorDescription"),
       key: "editing",
       label: t("Common:Editor"),
       icon: AccessEditReactSvgUrl,
     },
-    {
+    available.Review && {
       access: ShareAccessRights.Review,
       description: t("Common:RoleReviewerDescription"),
       key: "review",
       label: t("Common:RoleReviewer"),
       icon: AccessReviewReactSvgUrl,
     },
-    {
+    available.Comment && {
       access: ShareAccessRights.Comment,
       description: t("Common:RoleCommentatorDescription"),
       key: "commenting",
       label: t("Commentator"),
       icon: AccessCommentReactSvgUrl,
     },
-    {
+    available.Read && {
       access: ShareAccessRights.ReadOnly,
       description: t("Common:RoleViewerDescription"),
       key: "viewing",
       label: t("Common:Viewer"),
       icon: EyeReactSvgUrl,
     },
+    available.FillForms && {
+      access: ShareAccessRights.FormFilling,
+      description: "",
+      key: "filling",
+      label: t("Common:Filling"),
+      icon: FillFormsReactSvgUrl,
+      title: t("Common:FillingOnly"),
+    },
   ];
+
+  return accessOptions.filter(
+    (item): item is ItemValue<(typeof accessOptions)[number]> => Boolean(item),
+  );
 };
 
 export const getExpiredOptions = (

@@ -112,6 +112,8 @@
     line-height: 16px;
     margin: 6px 8px;
 
+    margin-inline-end: 0;
+
     &.isExpired {
       color: var(--info-panel-link-expired);
     }
@@ -145,7 +147,7 @@
 
   .linkActions {
     display: flex;
-    gap: 16px;
+    gap: 8px;
     align-items: center;
     margin-inline-start: auto;
 
@@ -202,5 +204,35 @@
     position: fixed;
     bottom: 0;
     inset-inline-start: 0;
+  }
+}
+
+.linkTitleContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  & > * {
+    width: 16px;
+    height: 16px;
+  }
+
+  padding: 6px 8px;
+
+  svg {
+    cursor: pointer;
+    path {
+      fill: var(--combobox-children-button-disabled-color);
+    }
   }
 }

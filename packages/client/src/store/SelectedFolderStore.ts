@@ -42,6 +42,7 @@ import type {
   // TTranslation,
 } from "@docspace/shared/types";
 import {
+  TAvailableExternalRights,
   TFolder,
   TFolderSecurity,
   TShareSettings,
@@ -177,6 +178,8 @@ class SelectedFolderStore {
 
   shareSettings: TShareSettings | null = null;
 
+  availableExternalRights: TAvailableExternalRights | null = null;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -234,6 +237,7 @@ class SelectedFolderStore {
       changeDocumentsTabs: this.changeDocumentsTabs,
       isIndexedFolder: this.isIndexedFolder,
       shareSettings: this.shareSettings,
+      availableExternalRights: this.availableExternalRights,
     };
   };
 
@@ -288,6 +292,7 @@ class SelectedFolderStore {
     this.passwordProtected = false;
     this.external = false;
     this.shareSettings = null;
+    this.availableExternalRights = null;
   };
 
   setFilesCount = (filesCount: number) => {

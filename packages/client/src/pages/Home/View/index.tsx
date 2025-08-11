@@ -34,6 +34,7 @@ import { Nullable } from "@docspace/shared/types";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
@@ -252,6 +253,9 @@ const View = ({
     if (!isLoading) {
       TopLoadingIndicator.end();
 
+      if (currentView === "profile" && prevCurrentViewRef.current === "profile")
+        return;
+
       window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
     }
   }, [isLoading]);
@@ -300,7 +304,9 @@ const View = ({
           await fetchContactsRef.current();
 
         if (isProfilePage) {
-          await getProfileInitialValue();
+          if (prevCurrentViewRef.current !== "profile") {
+            await getProfileInitialValue();
+          }
 
           view = "profile";
         } else if (!isContactsPage) {
@@ -335,17 +341,7 @@ const View = ({
   }, [location, isContactsPage, isProfilePage]);
 
   return (
-    <div
-      style={
-        !showHeaderLoader
-          ? {
-              opacity: isLoading ? 0.5 : 1,
-              pointerEvents: isLoading ? "none" : "auto",
-              transition: "opacity 0.3s ease-in-out",
-            }
-          : undefined
-      }
-    >
+    <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
         {(context) =>
           context.sectionWidth &&
@@ -361,7 +357,7 @@ const View = ({
           ))
         }
       </Consumer>
-    </div>
+    </LoaderWrapper>
   );
 };
 

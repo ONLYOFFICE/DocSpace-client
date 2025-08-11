@@ -131,7 +131,7 @@ const useProfileBody = ({
     const actions = [];
 
     try {
-      actions.push([getAuthProviders?.(), getCapabilities?.()]);
+      actions.push(getAuthProviders?.(), getCapabilities?.());
 
       if (tfaOn) {
         actions.push(getTfaBackupCodes?.());

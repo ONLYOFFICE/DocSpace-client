@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Histórico de login",
   "LoginLatestText": "Apenas a atividade mais recente é exibida nesta página. Os próprios dados são armazenados durante o período especificado no campo abaixo (máx. 180 dias).",
   "LoginSubheaderTitle": "Esta subseção é usada para monitorar a atividade de login do usuário mais recente, incluindo logins bem-sucedidos e tentativas malsucedidas com indicação dos motivos.",
+  "LogoForEditors": "Logotipo para o editor {{editorName}}",
+  "LogoForViewer": "Logotipo para {{diagramViewer}}",
   "LogoLightSmall": "Logo para o cabeçalho do espaço",
   "ManagementCategoryDataManagement": "Gerenciamento de dados",
   "ManagementCategoryIntegration": "Integração",

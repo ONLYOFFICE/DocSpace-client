@@ -3,7 +3,7 @@
   "content": "Date modified",
   "content_en_sha1_hash": "dcef8297cd84445acb4ad6b84e674163d3d9765e",
   "created_at": "2025-05-19T21:30:54.770Z",
-  "updated_at": "2025-08-04T07:30:01.208Z",
+  "updated_at": "2025-08-11T09:02:43.911Z",
   "comment": {
     "text": "This translation key is used to display the label \"Date modified\" in a file's properties section. It appears on the /packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.js page and should be translated to provide consistency across different languages.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 210,
+      "line_number": 212,
       "context": "return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");\n \n case \"Date modified\":\n return this.t(\"DateModified\");\n case \"Last modified by\":\n return this.t(\"LastModifiedBy\");\n case \"Creation date\":\n return this.t(\"CreationDate\");\n case \"Lifetime ends\":",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
-      "line_number": 128,
-      "context": "</Text>\n </div>\n \n <div className={commonStyles.properties}>\n <div className=\"property\">\n <Text className=\"property-title\">{t(\"InfoPanel:DateModified\")}</Text>\n <Text className=\"property-content\">\n {getCorrectDate(\n culture ?? \"en\",\n gallerySelected.attributes.updatedAt,\n )}",
+      "line_number": 155,
+      "context": ">\n <div\n className=\"property\"\n data-testid=\"info_panel_gallery_date_modified_property\"\n >\n <Text className=\"property-title\">{t(\"InfoPanel:DateModified\")}</Text>\n <Text className=\"property-content\">\n {getCorrectDate(\n culture ?? \"en\",\n gallerySelected.attributes.updatedAt,\n )}",
       "module": "/packages/client"
     }
   ],

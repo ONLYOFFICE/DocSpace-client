@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Istorija prijava",
   "LoginLatestText": "Na ovoj stranici se prikazuje samo najnovija aktivnost. Sami podaci se čuvaju tokom perioda navedenog u polju ispod (maksimalno 180 dana).",
   "LoginSubheaderTitle": "Ovaj pododeljak se koristi za praćenje najnovije aktivnosti korisničkog prijavljivanja, uključujući uspešne prijave i neuspele pokušaje sa indikacijom razloga.",
+  "LogoForEditors": "Logo za {{editorName}} uređivač",
+  "LogoForViewer": "Logo za {{diagramViewer}}",
   "LogoLightSmall": "Logotip za prostorno zaglavlje",
   "ManagementCategoryDataManagement": "Upravljanje podacima",
   "ManagementCategoryIntegration": "Integracija",

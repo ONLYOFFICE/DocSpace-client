@@ -3,7 +3,7 @@
   "content": "Processing of data import",
   "content_en_sha1_hash": "999734d7ec521c34831b73d0c1147ed4ca82180a",
   "created_at": "2025-05-19T21:30:51.073Z",
-  "updated_at": "2025-06-30T12:20:31.407Z",
+  "updated_at": "2025-08-11T09:02:43.941Z",
   "comment": {
     "text": "This translation key is used for the title of a data import processing step in a migration form. It appears as part of a settings or configuration section and provides a descriptive label for the user to understand the current stage of the import process.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 153,
+      "line_number": 154,
       "context": "hasProjectFiles\n />\n ),\n },\n {\n title: t(\"Settings:DataImportProcessing\"),\n description: t(\"Settings:ImportProcessingDescription\"),\n component: <ImportProcessingStep t={t} migratorName=\"Workspace\" />,\n },\n {\n title: t(\"Settings:DataImportComplete\"),",
       "module": "/packages/client"
     },

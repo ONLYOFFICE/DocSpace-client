@@ -3,7 +3,7 @@
   "content": "Internal server error. Try again later.",
   "content_en_sha1_hash": "50b64918b994b2985e494b4a494e20d58180ff95",
   "created_at": "2025-05-19T21:30:45.082Z",
-  "updated_at": "2025-08-04T07:30:01.047Z",
+  "updated_at": "2025-08-11T09:02:43.841Z",
   "comment": {
     "text": "This translation key displays an internal server error message, typically used when a server-side operation fails, and is usually shown in error dialogs or notifications. The exact location of this text may vary depending on the specific use case, but it often appears as a toast notification or within a dialog box. It aims to inform users that something went wrong and encourage them to try again later.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 177,
+      "line_number": 178,
       "context": "if (res.success) {\n res.data && updateCreatedAvatar(res.data);\n setHasAvatar(true);\n toastr.success(t(\"Common:ChangesSavedSuccessfully\"));\n } else {\n throw new Error(t(\"Common:ErrorInternalServer\"));\n }\n \n onClose();\n } catch (error) {\n console.error(error);",
       "module": "/packages/client"
     },

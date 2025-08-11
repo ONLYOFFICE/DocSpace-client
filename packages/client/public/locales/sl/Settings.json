@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Zgodovina vpisa",
   "LoginLatestText": "Na tej strani je prikazana samo zadnja aktivnost. Podatki se hranijo za obdobje, ki je navedeno v spodnjem polju (največ 180 dni).",
   "LoginSubheaderTitle": "Ta pododdelek se uporablja za spremljanje zadnje dejavnosti prijave uporabnikov, vključno z uspešnimi prijavami in neuspelimi poskusi z opisi razlogov.",
+  "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
+  "LogoForViewer": "Logotip za {{diagramViewer}}",
   "LogoLightSmall": "Logotip za glavo prostora",
   "ManagementCategoryDataManagement": "Urejanje podatkov",
   "ManagementCategoryIntegration": "Integracija",

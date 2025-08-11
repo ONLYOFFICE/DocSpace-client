@@ -3,7 +3,7 @@
   "content": "ONLYOFFICE",
   "content_en_sha1_hash": "c1cd17a947d45060963b486bba7fd3346227bbee",
   "created_at": "2025-05-19T21:30:47.141Z",
-  "updated_at": "2025-06-30T12:20:31.100Z",
+  "updated_at": "2025-08-11T09:02:43.814Z",
   "comment": {
     "text": "This translation key is used to display the organization's name, such as \"ONLYOFFICE\", when a user needs help or wants to learn more about the product. It appears in various UI elements like dialog boxes and about pages, ensuring accessibility for users who need assistance with the application.",
     "is_auto": true,
@@ -30,8 +30,8 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/page.client.tsx",
-      "line_number": 117,
-      "context": "const { linkData, roomData } = useContext(ConfirmRouteContext);\n const { t, i18n } = useTranslation([\"Confirm\", \"Common\"]);\n const router = useRouter();\n \n const organizationName = logoText || t(\"Common:OrganizationName\");\n \n const currentCultureName = i18n.language;\n \n const inputRef = useRef<HTMLInputElement>(null);",
+      "line_number": 118,
+      "context": "const { linkData, roomData } = useContext(ConfirmRouteContext);\n const { t, i18n } = useTranslation([\"Confirm\", \"Common\"]);\n \n const router = useRouter();\n \n const organizationName = logoText || t(\"Common:OrganizationName\");\n \n const currentCultureName = i18n.language;\n \n const inputRef = useRef<HTMLInputElement>(null);",
       "module": "/packages/login"
     },
     {

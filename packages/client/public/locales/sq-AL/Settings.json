@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Historia e hyrjes",
   "LoginLatestText": "Vetëm aktiviteti më i fundit shfaqet në këtë faqe. Vetë të dhënat ruhen gjatë periudhës së specifikuar në fushën më poshtë (maksimumi 180 ditë).",
   "LoginSubheaderTitle": "Ky nënseksion përdoret për të monitoruar aktivitetin më të fundit të hyrjes së përdoruesit, duke përfshirë hyrjet e suksesshme dhe përpjekjet e dështuara me një tregues të arsyeve.",
+  "LogoForEditors": "Logoja për redaktorin {{editorName}}",
+  "LogoForViewer": "Logo për {{diagramViewer}}",
   "LogoLightSmall": "Logo për kokën e hapësirës",
   "ManagementCategoryDataManagement": "Menaxhimi i të dhënave",
   "ManagementCategoryIntegration": "Integrimi",

@@ -3,7 +3,7 @@
   "content": "Share this document",
   "content_en_sha1_hash": "e221ad72445df0b9bdff3f83c62c294910835379",
   "created_at": "2025-05-19T21:30:48.642Z",
-  "updated_at": "2025-08-04T07:30:01.712Z",
+  "updated_at": "2025-08-11T09:02:44.085Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to share a document. It appears as part of a UI element containing a button or link that allows users to share a file, and its purpose is to provide context for the sharing action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/components/share/index.tsx",
       "line_number": 406,
-      "context": "return (\n <div data-testid=\"shared-links\">\n {visibleBar ? (\n <PublicRoomBar\n headerText={t(\"Common:ShareDocument\")}\n bodyText={t(\"Common:ShareDocumentDescription\")}\n iconName={InfoIcon}\n onClose={() => setVisibleBar(false)}\n />\n ) : null}",
+      "context": "return (\n <div data-testid=\"shared-links\">\n {visibleBar ? (\n <PublicRoomBar\n headerText={t(\"Common:ShareDocument\")}\n bodyText={t(\"Common:ShareDocumentDescription\")}\n iconName={InfoIcon}\n onClose={() => setVisibleBar(false)}\n dataTestId=\"info_panel_share_public_room_bar\"\n />",
       "module": "/packages/shared"
     }
   ],

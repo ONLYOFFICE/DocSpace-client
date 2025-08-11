@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Historie přihlášení",
   "LoginLatestText": "Na této stránce se zobrazují pouze nejnovější aktivity. Samotná data se ukládají po dobu uvedenou v poli níže (max. 180 dní).",
   "LoginSubheaderTitle": "Tato podsekce slouží ke sledování posledních přihlašovacích aktivit uživatelů včetně úspěšných přihlášení a neúspěšných pokusů s uvedením důvodů.",
+  "LogoForEditors": "Logo pro editor {{editorName}}",
+  "LogoForViewer": "Logo pro {{diagramViewer}}",
   "LogoLightSmall": "Logo pro záhlaví prostoru",
   "ManagementCategoryDataManagement": "Správa dat",
   "ManagementCategoryIntegration": "Integrace",

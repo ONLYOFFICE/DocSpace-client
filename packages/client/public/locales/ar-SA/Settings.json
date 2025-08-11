@@ -10,6 +10,8 @@
   "AddEmailsDescription": "تحقق من قائمة المستخدمين غير المستوردة لاستيرادها إلى {{organizationName}} {{productName}}.",
   "AddEmailsWarning": "ليس لديك مستخدمين لديهم بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية لإضافتهم.",
   "AddTrustedDomain": "إضافة مجال موثوق به",
+  "AdManagement": "إدارة الإعلانات",
+  "AdManagementDescription": "اختروا ما إذا كانت اللافتات الترويجية ستظهر في {{productName}} الخاص بكم.",
   "Admins": "المشرفون",
   "AdminsMessage": "إعدادات رسالة المسؤول",
   "AdminsMessageMobileDescription": "إعدادات رسالة المسئول هي طريقة للتواصل مع مسئول البوابة.",
@@ -156,6 +158,8 @@
   "LoginHistoryTitle": "قم بتسجيل الدخول",
   "LoginLatestText": "يتم عرض أحدث نشاط فقط على هذه الصفحة. يتم تخزين البيانات نفسها خلال الفترة المحددة في الحقل أدناه (بحد أقصى 180 يومًا).",
   "LoginSubheaderTitle": "يستخدم هذا القسم الفرعي لمراقبة آخر نشاط لتسجيل دخول المستخدم بما في ذلك عمليات تسجيل الدخول الناجحة والمحاولات الفاشلة مع توضيح الأسباب.",
+  "LogoForEditors": "شعار محرر {{editorName}}",
+  "LogoForViewer": "شعار {{diagramViewer}}",
   "LogoLightSmall": "شعار ترويسة الاستضافة",
   "ManagementCategoryDataManagement": "إدارة البيانات",
   "ManagementCategoryIntegration": "تكامل",
@@ -285,7 +289,5 @@
   "WantToCancelUpload": "هل تريد إلغاء التحميل؟",
   "WantToContinue": "هل تريد المتابعة أو تغيير حصة تخزين المستخدم؟",
   "WhiteLabelSubtitle": "أدخل اسم شركتك وقم بتحميل الشعار وخصص التصميم ليلائم علامتك التجارية.",
-  "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية.",
-  "AdManagement": "إدارة الإعلانات",
-  "AdManagementDescription": "اختروا ما إذا كانت اللافتات الترويجية ستظهر في {{productName}} الخاص بكم."
+  "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية."
 }

@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Lịch sử đăng nhập",
   "LoginLatestText": "Chỉ hoạt động mới nhất được hiển thị trên trang này. Bản thân dữ liệu được lưu trữ trong khoảng thời gian được nêu trong trường bên dưới (tối đa 180 ngày).",
   "LoginSubheaderTitle": "Phần phụ này được sử dụng để theo dõi hoạt động đăng nhập mới nhất của người dùng bao gồm đăng nhập thành công và các lần cố đăng nhập không thành công với thông tin nguyên nhân.",
+  "LogoForEditors": "Logo cho trình soạn thảo {{editorName}}",
+  "LogoForViewer": "Logo cho {{diagramViewer}}",
   "LogoLightSmall": "Logo cho tiêu đề không gian",
   "ManagementCategoryDataManagement": "Quản lý dữ liệu",
   "ManagementCategoryIntegration": "Tích hợp",

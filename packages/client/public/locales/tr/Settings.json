@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Giriş Geçmişi",
   "LoginLatestText": "Bu sayfada sadece en son etkinlik gösterilir. Verilerin kendisi, aşağıdaki alanda belirtilen süre boyunca (en fazla 180 gün) saklanır.",
   "LoginSubheaderTitle": "Bu alt bölüm, başarılı oturum açmalar ve nedenleriyle birlikte başarısız denemeler dahil olmak üzere en son kullanıcı oturum açma etkinliğini izlemek için kullanılır.",
+  "LogoForEditors": "{{editorName}} editörü için logo",
+  "LogoForViewer": "{{diagramViewer}} için logo",
   "LogoLightSmall": "Alan başlığı için logo",
   "ManagementCategoryDataManagement": "Veri Yönetimi",
   "ManagementCategoryIntegration": "Entegrasyon",

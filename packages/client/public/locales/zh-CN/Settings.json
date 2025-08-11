@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "登录历史",
   "LoginLatestText": "此页仅显示最新活动。数据本身在这段时间内存储，可以输入下面的字段（以天为单位，最多180天）：",
   "LoginSubheaderTitle": "了解最新用户登录活动，包括登录成功和失败的尝试次数及其原因说明。",
+  "LogoForEditors": "{{editorName}}编辑器 logo",
+  "LogoForViewer": "{{diagramViewer}} logo",
   "LogoLightSmall": "协作空间的标头 Logo",
   "ManagementCategoryDataManagement": "数据管理",
   "ManagementCategoryIntegration": "集成",

@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Giriş Tarixçəsi",
   "LoginLatestText": "Bu səhifədə yalnız ən son fəaliyyət göstərilir. Məlumatın özü aşağıdakı sahədə göstərilən müddət ərzində saxlanılır (maksimum 180 gün).",
   "LoginSubheaderTitle": "Bu alt bölmə uğurlu girişlər və uğursuz cəhdlər daxil olmaqla, səbəblərlə son istifadəçi giriş fəaliyyətini izləmək üçün istifadə olunur.",
+  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
+  "LogoForViewer": "{{diagramViewer}} üçün loqo",
   "LogoLightSmall": "Sahə başlığı üçün loqo",
   "ManagementCategoryDataManagement": "Məlumatların idarə olunması",
   "ManagementCategoryIntegration": "İnteqrasiya",

@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Anmeldehistorie",
   "LoginLatestText": "Nur die letzte Aktivität wird auf dieser Seite angezeigt. Die Daten selbst werden während des Zeitraums gespeichert, das im folgenden Feld eingegeben werden kann (gemessen in Tagen, maximal 180):",
   "LoginSubheaderTitle": "Dieser Unterabschnitt dient zur Überwachung der letzten Benutzeranmeldungen, einschließlich erfolgreicher Anmeldungen und fehlgeschlagener Versuche mit Angabe der Gründe.",
+  "LogoForEditors": "Logo für den {{editorName}}-Editor",
+  "LogoForViewer": "Logo für {{diagramViewer}}",
   "LogoLightSmall": "Logo für Kopfzeile des Bereichs",
   "ManagementCategoryDataManagement": "Datenmanagement",
   "ManagementCategoryIntegration": "Integration",

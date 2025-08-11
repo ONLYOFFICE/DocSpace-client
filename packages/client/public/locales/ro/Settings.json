@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Istoricul conectărilor",
   "LoginLatestText": "Pe această pagină sunt afişate doar cele mai recente activităţi. Datele sunt stocate pe o perioadă specificată în câmpul de mai jos (180 de zile maxim).",
   "LoginSubheaderTitle": "Această subsecțiune este utilizată pentru a monitoriza cea mai recentă activitate de conectare a utilizatorilor, inclusiv conectările reuşite şi încercările eşuate, cu indicarea motivelor.",
+  "LogoForEditors": "Logo pentru editorul {{editorName}}",
+  "LogoForViewer": "Logo pentru {{diagramViewer}}",
   "LogoLightSmall": "Logo-ul pentru antetul spațiului",
   "ManagementCategoryDataManagement": "Gestionarea datelor",
   "ManagementCategoryIntegration": "Integrare",

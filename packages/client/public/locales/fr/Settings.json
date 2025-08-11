@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "Histoire de connexion",
   "LoginLatestText": "Juste l'activité  la plus récente est affichée sur cette page. Les données elles-mêmes sont conservées pendant la période  que vous devez saisir dans le champ ci-dessous (mesurée en jours, 180 maximum)",
   "LoginSubheaderTitle": "Cette sous-section est utilisée pour suivre les dernières activités de connexion des utilisateurs, y compris les connexions réussies et les tentatives échouées, avec indication des raisons.",
+  "LogoForEditors": "Logo pour l'éditeur {{editorName}}",
+  "LogoForViewer": "Logo pour le {{diagramViewer}}",
   "LogoLightSmall": "Logo pour l'en-tête de l’espace",
   "ManagementCategoryDataManagement": "Gestion des données",
   "ManagementCategoryIntegration": "Intégration",
@@ -287,7 +289,5 @@
   "WantToCancelUpload": "Voulez-vous annuler le téléchargement?",
   "WantToContinue": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
   "WhiteLabelSubtitle": "Saisissez le nom de votre entreprise, téléchargez le logo et personnalisez le style pour qu’il corresponde à votre image de marque.",
-  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
-  "AdManagement": "Gestion des publicités",
-  "AdManagementDescription": "Choisissez si les bannières promotionnelles sont affichées dans votre {{productName}}."
+  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante."
 }

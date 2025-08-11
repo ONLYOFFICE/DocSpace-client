@@ -158,6 +158,8 @@
   "LoginHistoryTitle": "පිවිසීමේ ඉතිහාසය",
   "LoginLatestText": "මෙම පිටුවේ නවතම ක්‍රියාකාරකම් පමණක් පෙන්වයි. පහත ක්‍ෂේත්‍රයේ දක්වා ඇති කාල සීමාව තුළ දත්ත ගබඩා කර ඇත (උපරිමය දවස් 180 කි).",
   "LoginSubheaderTitle": "සාර්ථක පිවිසීම් සහ හේතු සහිත අසාර්ථක තැත් කිරීම් ඇතුළුව නවතම පරිශ්‍රීලක පිවිසුම් ක්‍රියාකාරකම් නිරීක්‍ෂණයට මෙම අනුකොටස භාවිතා කරයි.",
+  "LogoForEditors": "සංස්කාරක {{editorName}} සඳහා ලාංඡනය",
+  "LogoForViewer": "{{diagramViewer}} සඳහා ලාංඡනය",
   "LogoLightSmall": "අවකාශයේ ශ්‍රීර්ෂයට ලාංඡනය",
   "ManagementCategoryDataManagement": "දත්ත කළමනාකරණය",
   "ManagementCategoryIntegration": "අනුකලනය",

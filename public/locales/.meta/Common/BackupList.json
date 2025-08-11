@@ -3,7 +3,7 @@
   "content": "Backup List",
   "content_en_sha1_hash": "104eab22b64bfdd7ac57f7948dadb9a22f16bc6c",
   "created_at": "2025-05-26T07:15:40.738Z",
-  "updated_at": "2025-08-04T07:30:01.751Z",
+  "updated_at": "2025-08-11T09:02:44.097Z",
   "comment": {
     "text": "The \"BackupList\" translation key is used to display the text \"Backup List\" in the restore backup page's settings section and in a modal dialog for managing backups. It appears as an unavailable button in the restoration process and is displayed within a modal window when the backup list is visible.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 428,
-      "context": "\"restore-backup_list settings_unavailable\",\n )}\n {...onClickVersionListProp}\n noSelect\n >\n {t(\"Common:BackupList\")}\n </Text>\n \n {isVisibleBackupListDialog ? (\n <BackupListModalDialog\n isVisibleDialog={isVisibleBackupListDialog}",
+      "line_number": 432,
+      "context": ")}\n {...onClickVersionListProp}\n noSelect\n dataTestId=\"restore_backup_list_button\"\n >\n {t(\"Common:BackupList\")}\n </Text>\n \n {isVisibleBackupListDialog ? (\n <BackupListModalDialog\n isVisibleDialog={isVisibleBackupListDialog}",
       "module": "/packages/shared"
     },
     {

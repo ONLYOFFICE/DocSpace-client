@@ -104,6 +104,7 @@ const FileManagement = ({
             className="ask-again toggle-btn"
             onChange={onChangeKeepNewFileName}
             isChecked={keepNewFileName}
+            dataTestId="ask_again_toggle_button"
           />
           <Text>{t("Common:DontAskAgain")}</Text>
         </div>
@@ -113,6 +114,7 @@ const FileManagement = ({
             className="save-copy-original toggle-btn"
             onChange={onChangeOriginalCopy}
             isChecked={storeOriginalFiles}
+            dataTestId="save_copy_original_toggle_button"
           />
           <Text>{t("OriginalCopy")}</Text>
         </div>
@@ -122,6 +124,7 @@ const FileManagement = ({
             className="display-notification toggle-btn"
             onChange={onChangeDeleteConfirm}
             isChecked={confirmDelete}
+            dataTestId="display_notification_toggle_button"
           />
           <Text>
             {t("TrashMoveConfirmation", {
@@ -135,6 +138,7 @@ const FileManagement = ({
             className="open-same-tab toggle-btn"
             onChange={onChangeOpenEditorInSameTab}
             isChecked={openEditorInSameTab}
+            dataTestId="open_same_tab_toggle_button"
           />
           <Text>
             {t("OpenSameTab", {
@@ -148,6 +152,7 @@ const FileManagement = ({
             className="display-file-extension toggle-btn"
             onChange={onChangeDisplayFileExtension}
             isChecked={displayFileExtension}
+            dataTestId="display_file_extension_toggle_button"
           />
           <Text>{t("DisplayFileExtension")}</Text>
         </div>
@@ -156,6 +161,7 @@ const FileManagement = ({
             className="cancelletion-notification toggle-btn"
             onChange={onChangeCancellationNotification}
             isChecked={hideConfirmCancelOperation}
+            dataTestId="cancelletion_notification_toggle_button"
           />
           <Text>{t("CancellaionNotification")}</Text>
         </div>

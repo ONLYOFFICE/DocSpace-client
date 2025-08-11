@@ -59,6 +59,7 @@ const RoomsActivityContainer = ({
           className="rooms-activity toggle-btn"
           onChange={onChangeEmailSubscription}
           isChecked={roomsActivitySubscription}
+          dataTestId="rooms_activity_toggle_button"
         />
       </div>
       <Text {...textDescriptionsProps}>{t("RoomsActivityDescription")}</Text>

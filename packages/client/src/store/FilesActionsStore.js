@@ -98,6 +98,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import {
+  frameCallEvent,
   getConvertedSize,
   getObjectByLocation,
 } from "@docspace/shared/utils/common";
@@ -2624,7 +2625,7 @@ class FilesActionStore {
   openItemAction = async (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
       this.filesStore;
-    const { currentDeviceType } = this.settingsStore;
+    const { currentDeviceType, frameConfig, isFrame } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
 
@@ -2674,6 +2675,11 @@ class FilesActionStore {
 
       window.DocSpace.navigate(url, { state });
     } else {
+      if (isFrame && frameConfig?.events?.onFileManagerClick) {
+        frameCallEvent({ event: "onFileManagerClick", data: item });
+        return;
+      }
+
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
         setConvertDialogData({

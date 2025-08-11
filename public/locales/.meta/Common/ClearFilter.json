@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2025-08-04T07:30:00.978Z",
+  "updated_at": "2025-08-11T09:02:43.821Z",
   "comment": {
     "text": "The translation key \"ClearFilter\" is used to display a clear filter button or link that resets filters in a search or filtering interface. It appears as a prominent action item on pages like Form Gallery and Contacts Body, where it helps users remove existing filters.",
     "is_auto": true,
@@ -36,8 +36,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/RowView/index.tsx",
-      "line_number": 159,
-      "context": "type={LinkType.action}\n isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
+      "line_number": 161,
+      "context": "isHovered\n fontWeight=\"600\"\n onClick={onClearFilter}\n dataTestId=\"accounts_clear_filter_link\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n )}",
       "module": "/packages/client"
     },
     {

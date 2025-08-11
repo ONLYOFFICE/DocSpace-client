@@ -1,9 +1,9 @@
 {
+  "DeepLinkOnlyAppText": "Sənədi yalnız mobil proqramda aça bilərsiniz",
   "DeepLinkText": "Sənədi portalda və ya mobil proqramda aça bilərsiniz.",
+  "DownloadApp": "Tətbiqi yükləyin",
   "OpenInApp": "Tətbiqdə açın",
   "OpeningDocument": "Sənədin açılması",
   "RememberChoice": "Növbəti dəfə sənədləri açanda seçimi yadda saxlayın",
-  "StayInBrowser": "Brauzerdə qalın",
-  "DeepLinkOnlyAppText": "Sənədi yalnız mobil proqramda aça bilərsiniz",
-  "DownloadApp": "Tətbiqi yükləyin"
+  "StayInBrowser": "Brauzerdə qalın"
 }

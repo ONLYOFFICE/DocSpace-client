@@ -3926,6 +3926,8 @@ class FilesStore {
     const isFormRoom = this.selectedFolderStore.roomType === RoomsType.FormRoom;
     const isPublic = this.publicRoomStore.isPublicRoom;
 
+    const { isFrame, frameConfig } = this.settingsStore;
+
     const canShare =
       share && (isPublic || !isFormRoom) && !isSystemFolder(folderType);
 
@@ -3942,6 +3944,21 @@ class FilesStore {
       config.homepage,
       `/doceditor?${searchParams.toString()}`,
     );
+
+    if (isFrame && frameConfig?.events?.onEditorOpen) {
+      const item = this.files.find((f) => f.id === id);
+
+      frameCallEvent({
+        event: "onEditorOpen",
+        data: {
+          ...item,
+          share,
+          action: preview ? "view" : fillForm ? "fill" : "edit",
+        },
+      });
+
+      return;
+    }
 
     return window.open(url, openOnNewPage ? "_blank" : "_self");
   };

@@ -3,7 +3,7 @@
   "content": "Backup",
   "content_en_sha1_hash": "dd96994d01e723dd6f9b0bdb6119722dbeb9faf0",
   "created_at": "2025-05-19T21:30:50.645Z",
-  "updated_at": "2025-08-04T07:30:01.279Z",
+  "updated_at": "2025-08-11T09:02:43.934Z",
   "comment": {
     "text": "The translation key \"Backup\" is used to display the label for a backup option in the Portal Settings, likely appearing as a button or toggle. It corresponds to a specific section within the data management category.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 686,
+      "line_number": 693,
       "context": "operationsAlert={Boolean(backupProgressError)}\n operationsCompleted={operationsCompleted}\n operations={[\n {\n label: operationsCompleted\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 497,
+      "line_number": 504,
       "context": "operationsCompleted={downloadingProgress === 100}\n operations={[\n {\n label:\n downloadingProgress === 100\n ? t(\"Common:Backup\")\n : downloadingProgress === 0\n ? t(\"Common:PreparingBackup\")\n : t(\"Common:BackupProgress\", {\n progress: downloadingProgress,\n }),",
       "module": "/packages/shared"
     },

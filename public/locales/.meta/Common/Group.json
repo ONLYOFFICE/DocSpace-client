@@ -3,7 +3,7 @@
   "content": "Group",
   "content_en_sha1_hash": "171a0606f7c74580fd3982cf57c49d604104120a",
   "created_at": "2025-05-19T21:30:45.659Z",
-  "updated_at": "2025-08-04T07:30:01.216Z",
+  "updated_at": "2025-08-11T09:02:43.915Z",
   "comment": {
     "text": "This translation key is used for the label \"Group\" in various UI elements, such as buttons and information panels, to provide a consistent display of this term across the application. It appears in contexts related to user management and historical data views.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 347,
+      "line_number": 348,
       "context": "{userSelection?.groups?.length && !isGuests ? (\n <>\n <Text\n className={styles.infoFieldGroups}\n noSelect\n title={t(\"Common:Group\")}\n >\n {t(\"Common:Group\")}\n </Text>\n \n <div className={styles.groups}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 347,
+      "line_number": 348,
       "context": "{userSelection?.groups?.length && !isGuests ? (\n <>\n <Text\n className={styles.infoFieldGroups}\n noSelect\n title={t(\"Common:Group\")}\n >\n {t(\"Common:Group\")}\n </Text>\n \n <div className={styles.groups}>",
       "module": "/packages/client"
     },

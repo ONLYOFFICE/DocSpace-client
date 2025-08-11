@@ -3,7 +3,7 @@
   "content": "Copy shared link",
   "content_en_sha1_hash": "b175bcf3a07a90b8902c84d2fc6a79bcb9f7f620",
   "created_at": "2025-05-19T21:30:43.810Z",
-  "updated_at": "2025-08-04T07:30:01.255Z",
+  "updated_at": "2025-08-11T09:02:43.923Z",
   "comment": {
     "text": "The translation key \"CopySharedLink\" is used to display a button that allows users to copy a shared link in public rooms, typically found on a settings or options page within the application. The label and icon displayed will be localized for each language. It appears as a button with an icon and a tooltip that provides the label when hovered over.",
     "is_auto": true,
@@ -36,32 +36,32 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 481,
+      "line_number": 429,
       "context": "className={classNames(\n styles.iconBadge,\n \"badge row-copy-link icons-group tablet-badge\",\n )}\n onClick={onCopyPrimaryLink}\n title={t(\"Common:CopySharedLink\")}\n hoverColor=\"accent\"\n />\n ) : null}\n \n {showCopyLinkIcon ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 481,
+      "line_number": 429,
       "context": "className={classNames(\n styles.iconBadge,\n \"badge row-copy-link icons-group tablet-badge\",\n )}\n onClick={onCopyPrimaryLink}\n title={t(\"Common:CopySharedLink\")}\n hoverColor=\"accent\"\n />\n ) : null}\n \n {showCopyLinkIcon ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 174,
+      "line_number": 194,
       "context": "size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 174,
+      "line_number": 194,
       "context": "size={sizeQuickButton}\n onClick={onCopyPrimaryLink}\n color={colorLock}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CopySharedLink\")}\n />\n ) : null}\n {isAvailableShareFile ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/sub-components/LinkRow.tsx",
-      "line_number": 235,
-      "context": "<IconButton\n className={styles.linkActionsCopyIcon}\n size={16}\n iconName={CopyIcon}\n onClick={() => onCopyLink(link)}\n title={t(\"Common:CopySharedLink\")}\n isDisabled={isExpiredLink || isLoaded}\n />\n ) : null}\n {isRoomsLink ? (\n <>",
+      "line_number": 240,
+      "context": "<IconButton\n className={styles.linkActionsCopyIcon}\n size={16}\n iconName={CopyIcon}\n onClick={() => onCopyLink(link)}\n title={t(\"Common:CopySharedLink\")}\n isDisabled={isExpiredLink || isLoaded}\n dataTestId={`info_panel_share_copy_link_button_${index}`}\n />\n ) : null}\n {isRoomsLink ? (",
       "module": "/packages/shared"
     }
   ],

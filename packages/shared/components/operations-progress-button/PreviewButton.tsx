@@ -42,7 +42,6 @@ interface PreviewButtonProps {
   setShowSeveralOperationsIcon: (flag: boolean) => void;
   hasUploadOperationByDrag: () => boolean;
   clearDropPreviewLocation?: () => void;
-  isArticleExpanded?: boolean;
 }
 
 const PreviewButton: React.FC<PreviewButtonProps> = ({
@@ -53,7 +52,6 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
   setHideMainButton,
   allOperationsLength,
   setShowSeveralOperationsIcon,
-  isArticleExpanded,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -288,7 +286,6 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     <div
       className={classNames(styles.previewFloatingButtonContainer, {
         [styles.hidingUnder]: animationState === "hidingUnder",
-        [styles.articleExpanded]: !isArticleExpanded,
       })}
       style={{ zIndex: "200" }}
       ref={previewMainContainerRef}

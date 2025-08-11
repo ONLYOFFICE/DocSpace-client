@@ -326,10 +326,10 @@ const PureHome = (props) => {
 
   return (
     <>
-      {isSettingsPage || isProfile ? null : isContactsPage ? (
+      {isSettingsPage ? null : isContactsPage || isProfile ? (
         <>
           <AccountsDialogs />
-          <ContactsSelectionArea />
+          {isProfile ? null : <ContactsSelectionArea />}
         </>
       ) : (
         <>

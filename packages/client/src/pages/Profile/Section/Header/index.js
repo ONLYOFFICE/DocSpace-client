@@ -49,6 +49,7 @@ const Header = (props) => {
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeAvatarVisible,
+    setChangeNameVisible,
 
     setDialogData,
 
@@ -69,6 +70,7 @@ const Header = (props) => {
       setChangeEmailVisible,
       setChangePasswordVisible,
       setChangeAvatarVisible,
+      setChangeNameVisible,
       setIsLoading,
     });
 
@@ -140,8 +142,11 @@ export default inject(
     const { enabledHotkeys } = filesStore;
     const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
 
-    const { setChangePasswordVisible, setChangeAvatarVisible } =
-      targetUserStore;
+    const {
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setChangeNameVisible,
+    } = targetUserStore;
 
     const { setDialogData, setChangeEmailVisible } = dialogStore;
 
@@ -153,6 +158,7 @@ export default inject(
       setChangeEmailVisible,
       setChangePasswordVisible,
       setChangeAvatarVisible,
+      setChangeNameVisible,
 
       setDialogData,
 

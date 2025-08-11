@@ -72,23 +72,31 @@ export interface CronProps {
   onError?: (error?: Error) => void;
   /** Disable the cron component. */
   isDisabled?: boolean;
+  dataTestId?: string;
 }
 
-export interface HoursProps extends FieldProps, Property<"hours"> {}
+export interface HoursProps extends FieldProps, Property<"hours"> {
+  dataTestId?: string;
+}
 
 export interface MinutesProps extends FieldProps, Property<"minutes"> {
   period: PeriodType;
+  dataTestId?: string;
 }
 
 export interface MonthDaysProps extends FieldProps, Property<"monthDays"> {
   weekDays: number[];
+  dataTestId?: string;
 }
 
-export interface MonthsProps extends FieldProps, Property<"months"> {}
+export interface MonthsProps extends FieldProps, Property<"months"> {
+  dataTestId?: string;
+}
 
 export interface WeekDaysProps extends FieldProps, Property<"weekDays"> {
   isWeek: boolean;
   monthDays: number[];
+  dataTestId?: string;
 }
 
 export interface SelectProps extends Property<"value"> {
@@ -97,11 +105,13 @@ export interface SelectProps extends Property<"value"> {
   prefix?: string;
   dropDownMaxHeight?: number;
   isDisabled?: boolean;
+  dataTestId?: string;
 }
 
 export interface PeriodProps extends Property<"period", PeriodType> {
   t: TFunction<"Common", undefined>;
   isDisabled?: boolean;
+  dataTestId?: string;
 }
 
 export type PeriodOptionType = {

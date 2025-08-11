@@ -155,6 +155,8 @@ export default inject<TStore>(
       downloaddesktopUrl,
       officeforandroidUrl,
       officeforiosUrl,
+      hideAppsBlock:
+        !downloaddesktopUrl && !officeforandroidUrl && !officeforiosUrl,
     };
   },
 )(observer(ArticleWrapper));

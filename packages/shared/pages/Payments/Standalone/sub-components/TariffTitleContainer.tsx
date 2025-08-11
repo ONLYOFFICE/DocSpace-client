@@ -112,7 +112,11 @@ export const TariffTitleContainer = ({
             })}
           </Text>{" "}
           {!isLicenseDateExpired ? (
-            <Text fontSize="14px" as="span">
+            <Text
+              fontSize="14px"
+              as="span"
+              dataTestId="license_expires_date_text"
+            >
               {expiresDate()}
             </Text>
           ) : null}

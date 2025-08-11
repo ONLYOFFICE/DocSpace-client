@@ -3,7 +3,7 @@
   "content": "This image preview roughly shows how the watermark will be displayed in your files.",
   "content_en_sha1_hash": "fc6f64e2436875f68c0eba0f04d86c16cdef48e6",
   "created_at": "2025-05-19T21:30:56.862Z",
-  "updated_at": "2025-05-24T13:38:40.481Z",
+  "updated_at": "2025-08-11T09:02:43.864Z",
   "comment": {
     "text": "\"This translation key is used for the 'Watermark Preview Help' tooltip that explains the purpose of an image preview in a file's watermark settings.\"",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ImageWatermark.js",
-      "line_number": 280,
+      "line_number": 283,
       "context": "<Text fontWeight={600} className=\"image-watermark_text\">\n {t(\"WatermarkPreview\")}\n </Text>\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"WatermarkPreviewHelp\")}</Text>\n }\n offsetRight={0}\n className=\"settings_unavailable\"\n />\n </div>",
       "module": "/packages/client"
     }

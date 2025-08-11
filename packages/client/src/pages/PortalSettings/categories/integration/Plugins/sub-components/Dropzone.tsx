@@ -36,7 +36,12 @@ const StyledDropzoneComponent = styled(DropzoneComponent)`
   height: 135px;
 `;
 
-const Dropzone = ({ onDrop, isLoading, isDisabled }: PluginDropzoneProps) => {
+const Dropzone = ({
+  onDrop,
+  isLoading,
+  isDisabled,
+  dataTestId,
+}: PluginDropzoneProps) => {
   const { t } = useTranslation(["Article", "Common"]);
 
   return (
@@ -48,6 +53,7 @@ const Dropzone = ({ onDrop, isLoading, isDisabled }: PluginDropzoneProps) => {
       linkMainText={t("Article:Upload")}
       linkSecondaryText={t("Common:DropzoneTitleSecondary")}
       exstsText="(ZIP)"
+      dataTestId={dataTestId}
     />
   );
 };

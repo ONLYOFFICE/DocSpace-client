@@ -213,6 +213,7 @@ class ThirdPartyServices extends React.Component {
                 isHovered
                 target="_blank"
                 href={integrationSettingsUrl}
+                dataTestId="integration_settings_link"
               >
                 {t("Common:LearnMore")}
               </Link>
@@ -237,6 +238,7 @@ class ThirdPartyServices extends React.Component {
               minWidth="138px"
               onClick={submitRequest}
               scale={isMobile()}
+              testId="submit_request_team_button"
             />
           </div>
           {!consumers.length ? (
@@ -244,7 +246,11 @@ class ThirdPartyServices extends React.Component {
           ) : (
             <div className="consumers-list-container">
               {freeConsumers.map((consumer) => (
-                <div className="consumer-item-wrapper" key={consumer.name}>
+                <div
+                  className="consumer-item-wrapper"
+                  key={consumer.name}
+                  data-testid={`${consumer.name}_item`}
+                >
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -278,7 +284,11 @@ class ThirdPartyServices extends React.Component {
                 </div>
               ) : null}
               {paidConsumers.map((consumer) => (
-                <div className="consumer-item-wrapper" key={consumer.name}>
+                <div
+                  className="consumer-item-wrapper"
+                  key={consumer.name}
+                  data-testid={`consumer_${consumer.name}_item`}
+                >
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}

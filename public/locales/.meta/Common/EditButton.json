@@ -3,7 +3,7 @@
   "content": "Edit",
   "content_en_sha1_hash": "5301648dcf6b53cefc9ed52999aaa92d4603cae0",
   "created_at": "2025-05-19T21:30:44.738Z",
-  "updated_at": "2025-08-04T07:30:01.201Z",
+  "updated_at": "2025-08-11T09:02:43.907Z",
   "comment": {
     "text": "The translation key \"EditButton\" is used to display the label \"Edit\" in various UI elements such as buttons and toggle switches. It is intended to be used in situations where users need to make changes or edits, typically in contexts related to commenting, theme editing, or API key management.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
-      "line_number": 136,
-      "context": ") : null}\n {changeVersionHistoryAbility ? (\n <div className=\"edit_toggle\" onClick={onOpenEditor}>\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
+      "line_number": 140,
+      "context": "onClick={onOpenEditor}\n data-testid=\"info_panel_details_comment_edit_toggle\"\n >\n <ReactSVG className=\"edit_toggle-icon\" src={PencilReactSvgUrl} />\n <div className=\"property-content edit_toggle-text\">\n {comment ? t(\"Common:EditButton\") : t(\"Common:AddButton\")}\n </div>\n </div>\n ) : null}\n </div>\n ) : (",
       "module": "/packages/client"
     },
     {
@@ -72,8 +72,8 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 353,
-      "context": "\"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n color=\"accent\"\n hoverColor=\"accent\"\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n \n {locked ? (\n <>",
+      "line_number": 329,
+      "context": "\"badge icons-group is-editing tablet-badge tablet-edit\",\n )}\n onClick={onFilesClick}\n color=\"accent\"\n hoverColor=\"accent\"\n title={t(\"Common:EditButton\")}\n />\n ) : null}\n \n {item.viewAccessibility?.MustConvert &&\n security &&",
       "module": "/packages/shared"
     },
     {

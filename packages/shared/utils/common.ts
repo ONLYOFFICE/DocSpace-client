@@ -45,6 +45,14 @@ import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
 import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
 import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
 import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
+import SpreadsheetEditorSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditor.svg?url";
+import SpreadsheetEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditorembed.svg?url";
+import PresentationEditorSvgUrl from "PUBLIC_DIR/images/logo/presentationeditor.svg?url";
+import PresentationEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/presentationeditorembed.svg?url";
+import PDFEditorSvgUrl from "PUBLIC_DIR/images/logo/pdfeditor.svg?url";
+import PDFEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/pdfeditorembed.svg?url";
+import DiagramEditorSvgUrl from "PUBLIC_DIR/images/logo/diagrameditor.svg?url";
+import DiagramEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/diagrameditorembed.svg?url";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
@@ -1085,6 +1093,22 @@ export const getLogoFromPath = (path: string) => {
       return DocsEditoRembedSvgUrl;
     case "favicon.ico":
       return FaviconIco;
+    case "spreadsheeteditor.svg":
+      return SpreadsheetEditorSvgUrl;
+    case "spreadsheeteditorembed.svg":
+      return SpreadsheetEditorEmbedSvgUrl;
+    case "presentationeditor.svg":
+      return PresentationEditorSvgUrl;
+    case "presentationeditorembed.svg":
+      return PresentationEditorEmbedSvgUrl;
+    case "pdfeditor.svg":
+      return PDFEditorSvgUrl;
+    case "pdfeditorembed.svg":
+      return PDFEditorEmbedSvgUrl;
+    case "diagrameditor.svg":
+      return DiagramEditorSvgUrl;
+    case "diagrameditorembed.svg":
+      return DiagramEditorEmbedSvgUrl;
     default:
       break;
   }

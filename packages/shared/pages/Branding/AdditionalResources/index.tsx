@@ -93,7 +93,7 @@ export const AdditionalResources = ({
           "settings_unavailable",
         )}
       >
-        {t("AdditionalResourcesDescription", {
+        {t("Common:AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>

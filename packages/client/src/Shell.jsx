@@ -148,10 +148,6 @@ const Shell = ({ page = "home", ...rest }) => {
       SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
       });
-
-      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
-        roomParts: "encryption",
-      });
     }
 
     SocketHelper.emit(SocketCommands.Subscribe, {
@@ -168,6 +164,10 @@ const Shell = ({ page = "home", ...rest }) => {
     if (standalone) {
       SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "restore",
+      });
+
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "encryption",
       });
     }
   }, [standalone]);

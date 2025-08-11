@@ -65,6 +65,7 @@ const DropBox = ({
   isContextButtonVisible,
   isPublicRoom,
   isPlusButtonVisible,
+  showTitleInDropBox,
 }: TDropBoxProps) => {
   const [dropBoxHeight, setDropBoxHeight] = React.useState(0);
   const { interfaceDirection } = useInterfaceDirection();
@@ -86,22 +87,34 @@ const DropBox = ({
 
     const currentHeight = itemsHeight.reduce((a, b) => a + b);
 
-    let navHeight = 41;
+    // Reserve header height only when title is shown
+    let navHeight = showTitleInDropBox === false ? 0 : 41;
 
     if (currentDeviceType === DeviceType.tablet) {
-      navHeight = 49;
+      navHeight = showTitleInDropBox === false ? 0 : 49;
     }
 
     if (currentDeviceType === DeviceType.mobile) {
-      navHeight = 45;
+      navHeight = showTitleInDropBox === false ? 0 : 45;
     }
 
-    setDropBoxHeight(
-      currentHeight + navHeight > sectionHeight
-        ? sectionHeight - navHeight - 20
-        : currentHeight,
-    );
-  }, [sectionHeight, currentDeviceType, navigationItems, getItemSize]);
+    if (!sectionHeight || sectionHeight <= 0) {
+      // Fallback for Storybook/no layout context
+      setDropBoxHeight(Math.max(1, currentHeight));
+    } else {
+      const candidate =
+        currentHeight + navHeight > sectionHeight
+          ? sectionHeight - navHeight - 20
+          : currentHeight;
+      setDropBoxHeight(Math.max(1, candidate));
+    }
+  }, [
+    sectionHeight,
+    currentDeviceType,
+    navigationItems,
+    getItemSize,
+    showTitleInDropBox,
+  ]);
 
   const isTabletView = currentDeviceType === DeviceType.tablet;
 
@@ -115,7 +128,14 @@ const DropBox = ({
         {
           "--drop-box-width": `${dropBoxWidth}px`,
           "--drop-box-height":
-            sectionHeight < dropBoxHeight ? `${sectionHeight}px` : null,
+            sectionHeight && sectionHeight > 0 && sectionHeight < dropBoxHeight
+              ? `${sectionHeight}px`
+              : null,
+          // Explicit height when no sectionHeight provided (Storybook)
+          height:
+            (!sectionHeight || sectionHeight <= 0) && dropBoxHeight
+              ? `${dropBoxHeight}px`
+              : undefined,
         } as React.CSSProperties
       }
     >
@@ -140,7 +160,7 @@ const DropBox = ({
           onBackToParentFolder={onBackToParentFolder}
         />
 
-        {navigationTitleContainerNode}
+        {showTitleInDropBox !== false ? navigationTitleContainerNode : null}
 
         <ControlButtons
           isDesktop={isDesktop}

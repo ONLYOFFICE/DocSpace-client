@@ -192,6 +192,8 @@ export type TDropBoxProps = TArrowButtonProps &
     burgerLogo: string;
     navigationTitleContainerNode: React.ReactNode;
     onCloseDropBox: () => void;
+    /** Controls rendering of title/header inside DropBox; defaults to true */
+    showTitleInDropBox?: boolean;
   };
 
 export type TNavigationProps = Omit<

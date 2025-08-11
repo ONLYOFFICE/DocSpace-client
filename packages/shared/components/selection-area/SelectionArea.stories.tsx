@@ -8,6 +8,7 @@ import styles from "./SelectionArea.stories.module.scss";
 export default {
   title: "Layout components/SelectionArea",
   component: SelectionArea,
+  tags: ["!autodocs"],
   parameters: {
     docs: {
       disable: true,

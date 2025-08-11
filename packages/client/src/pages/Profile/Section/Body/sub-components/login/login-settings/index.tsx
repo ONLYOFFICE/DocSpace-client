@@ -45,8 +45,7 @@ import { StyledWrapper } from "./LoginSettings.styled";
 type LoginSettingsProps = {
   profile?: TUser;
 
-  backupCodes?: unknown;
-  backupCodesCount: number;
+  backupCodes?: unknown[];
   setBackupCodes?: unknown;
 };
 
@@ -57,7 +56,6 @@ const LoginSettings = (props: LoginSettingsProps) => {
     profile,
 
     backupCodes,
-    backupCodesCount,
     setBackupCodes,
   } = props;
 
@@ -110,7 +108,15 @@ const LoginSettings = (props: LoginSettingsProps) => {
           visible={backupCodesDialogVisible}
           onClose={() => setBackupCodesDialogVisible(false)}
           backupCodes={backupCodes}
-          backupCodesCount={backupCodesCount}
+          backupCodesCount={(backupCodes as { isUsed: boolean }[])?.reduce(
+            (acc: number, code: { isUsed: boolean }) => {
+              if (!code.isUsed) {
+                acc++;
+              }
+              return acc;
+            },
+            0,
+          )}
           setBackupCodes={setBackupCodes}
         />
       ) : null}

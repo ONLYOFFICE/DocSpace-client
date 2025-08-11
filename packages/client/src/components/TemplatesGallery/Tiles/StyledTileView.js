@@ -399,7 +399,7 @@ const StyledItem = styled.div`
   display: grid;
 
   /* Default: 2 FileTiles per row for screens < 600px */
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: 1fr; /* Force all rows to be the same height */
 
   width: 100%;
@@ -412,16 +412,16 @@ const StyledItem = styled.div`
   }
 
   @media (min-width: 600px) and (max-width: 839px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   @media (min-width: 840px) and (max-width: 1199px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   @media (min-width: 1200px) and (max-width: 1439px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
   @media (min-width: 1440px) {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   ${(props) =>

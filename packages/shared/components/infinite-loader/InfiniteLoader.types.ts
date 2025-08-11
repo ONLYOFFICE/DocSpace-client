@@ -54,3 +54,17 @@ export type ListComponentProps = InfiniteLoaderProps & {
 export type GridComponentProps = InfiniteLoaderProps & {
   scroll: Element | (Window & typeof globalThis);
 };
+
+export type GridDynamicHeightProps = {
+  children: React.ReactNode[];
+  hasMoreFiles: boolean;
+  loadMoreItems: (params: any) => Promise<void>;
+  listClassName?: string;
+  scroll?: Element | (Window & typeof globalThis);
+  onScroll?: () => void;
+  smallPreview?: boolean;
+  countTilesInRow?: number;
+  showSkeleton?: boolean;
+  itemCount: number;
+  filesLength: number;
+};

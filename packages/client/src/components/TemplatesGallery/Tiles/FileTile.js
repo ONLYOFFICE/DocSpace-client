@@ -29,6 +29,7 @@ import styled, { css } from "styled-components";
 const Styled = styled.div`
   width: 100%;
   height: 100%;
+  min-height: 0;
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -74,6 +75,10 @@ const Styled = styled.div`
     width: 100%;
     box-sizing: border-box;
     padding: 8px 10px 10px 10px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
   }
 
   .name-text {
@@ -81,6 +86,13 @@ const Styled = styled.div`
     font-size: 13px;
     line-height: 20px;
     color: #555f65;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    min-width: 0;
+    max-width: 100%;
   }
 `;
 

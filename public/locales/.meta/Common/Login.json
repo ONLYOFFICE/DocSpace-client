@@ -3,7 +3,7 @@
   "content": "Login",
   "content_en_sha1_hash": "4e5a2893bdcc7d239c1db72e4c4ffbe4bea73174",
   "created_at": "2025-05-19T21:30:56.904Z",
-  "updated_at": "2025-06-30T12:20:31.605Z",
+  "updated_at": "2025-08-11T09:02:44.045Z",
   "comment": {
     "text": "The translation key \"Login\" is used to display the login button or heading in a connection dialog, where users can enter their credentials. In this context, it likely appears as a button or title within the ConnectDialog component. Translators should provide a simple and straightforward equivalent phrase for users to interact with the login functionality.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 336,
+      "line_number": 338,
       "context": "</FieldContainer>\n ) : null}\n \n <FieldContainer\n labelVisible\n labelText={t(\"Common:Login\")}\n isRequired\n isVertical\n hasError={!isLoginValid}\n errorMessage={t(\"Common:RequiredField\")}\n >",
       "module": "/packages/shared"
     }

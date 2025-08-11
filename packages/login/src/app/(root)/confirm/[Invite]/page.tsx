@@ -108,8 +108,8 @@ async function Page(props: LinkInviteProps) {
           passwordSettings={passwordSettings}
           capabilities={capabilities}
           thirdPartyProviders={thirdParty}
-          legalTerms={settings.externalResources.common?.entries.legalterms}
-          licenseUrl={settings.externalResources.common?.entries.license}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
+          licenseUrl={settings.externalResources?.common?.entries?.license}
           isStandalone={settings.standalone}
           logoText={settings.logoText}
           invitationSettings={invitationSettings}

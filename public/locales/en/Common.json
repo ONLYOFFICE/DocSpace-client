@@ -237,6 +237,7 @@
   "DeveloperTools": "Developer Tools",
   "Diagram": "Diagram",
   "Diagrams": "Diagrams",
+  "DiagramViewer": "Diagram Viewer",
   "Disable": "Disable",
   "Disabled": "Disabled",
   "DisableQuota": "Disable quota",
@@ -447,7 +448,6 @@
   "LoginButton": "Sign in",
   "LogoAbout": "Logo for the About page",
   "LogoCompact": "Logo for the compact left menu",
-  "LogoDocsEditor": "Logo for the editors header",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo for the space header",
   "LogoLogin": "Logo for the Login page and emails",
@@ -555,6 +555,7 @@
   "PasswordRequired": "Password required",
   "Path": "Path",
   "PaymentsTitle": "Payments",
+  "PDF": "PDF",
   "People": "People",
   "Permissions": "Permissions",
   "PerUserMonth": "<1>{{price}}</1> per admin/month",
@@ -877,9 +878,11 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
+  "YouDontHaveEnoughPermission": "You don't have enough permission",
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
-  "YouDontHaveEnoughPermission": "You don't have enough permission"
+  "LogoForEditors": "Logo for {{editorName}} editor",
+  "LogoForViewer": "Logo for {{diagramViewer}}"
 }

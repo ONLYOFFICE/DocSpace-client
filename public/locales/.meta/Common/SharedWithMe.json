@@ -3,7 +3,7 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2025-06-30T12:20:31.411Z",
+  "updated_at": "2025-08-11T09:02:43.943Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Shared with me\" in various contexts within a workspace settings page. It likely appears as a label on buttons or sections related to shared files and folders, guiding users through the export process.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 140,
+      "line_number": 141,
       "context": "personalExportDetails={{\n name: t(\"Common:MyDocuments\"),\n icon: UserSolidIcon,\n }}\n sharedFilesExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,\n }}\n sharedFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 140,
+      "line_number": 141,
       "context": "personalExportDetails={{\n name: t(\"Common:MyDocuments\"),\n icon: UserSolidIcon,\n }}\n sharedFilesExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,\n }}\n sharedFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,",
       "module": "/packages/client"
     }

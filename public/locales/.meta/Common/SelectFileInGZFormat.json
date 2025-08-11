@@ -3,7 +3,7 @@
   "content": "Select the file in .GZ format",
   "content_en_sha1_hash": "3c29799b46e580ac62419900c034be5a8c9724b6",
   "created_at": "2025-05-26T07:15:47.576Z",
-  "updated_at": "2025-08-04T07:30:01.750Z",
+  "updated_at": "2025-08-11T09:02:44.096Z",
   "comment": {
     "text": "SelectFileInGZFormat is used to label a file input field that restricts users to select files in .GZ format. It appears as a descriptive text next to a file selection component, providing context for users in two UI components: RoomsModule and ThirdPartyResourcesModule.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 280,
+      "line_number": 281,
       "context": "\"restore-backup_input\",\n )}\n isDisabled={!isEnableRestore}\n onSelectFile={onSelectFile}\n filterParam={FilesSelectorFilterTypes.BackupOnly}\n descriptionText={t(\"Common:SelectFileInGZFormat\")}\n newPath={newPath}\n basePath={basePath}\n isErrorPath={isErrorPath}\n filesSelectorSettings={settingsFileSelector}\n setBasePath={setBasePath}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 280,
+      "line_number": 281,
       "context": "\"restore-backup_input\",\n )}\n isDisabled={!isEnableRestore}\n onSelectFile={onSelectFile}\n filterParam={FilesSelectorFilterTypes.BackupOnly}\n descriptionText={t(\"Common:SelectFileInGZFormat\")}\n newPath={newPath}\n basePath={basePath}\n isErrorPath={isErrorPath}\n filesSelectorSettings={settingsFileSelector}\n setBasePath={setBasePath}",
       "module": "/packages/shared"
     }

@@ -73,58 +73,74 @@ const ArticleApps = React.memo(
           {t("Common:DownloadApps")}
         </Text>
         <div className="download-app-list">
-          <IconButton
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={WindowsReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}
-            title={t("Common:MobileWin", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={MacOSReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}
-            title={t("Common:MobileMac", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={LinuxReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.linuxHoverColor}
-            title={t("Common:MobileLinux", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(officeforandroidUrl)}
-            iconName={AndroidReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={
-              theme.filesArticleBody.downloadAppList.androidHoverColor
-            }
-            title={t("Common:MobileAndroid", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            onClick={() => window.open(officeforiosUrl)}
-            iconName={IOSReactSvgUrl}
-            size={32}
-            isFill
-            hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
-            title={t("Common:MobileIos", {
-              organizationName: logoText,
-            })}
-          />
+          {downloaddesktopUrl ? (
+            <IconButton
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={WindowsReactSvgUrl}
+              size={32}
+              isFill
+              hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}
+              title={t("Common:MobileWin", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {downloaddesktopUrl ? (
+            <IconButton
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={MacOSReactSvgUrl}
+              size={32}
+              isFill
+              hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}
+              title={t("Common:MobileMac", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {downloaddesktopUrl ? (
+            <IconButton
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={LinuxReactSvgUrl}
+              size={32}
+              isFill
+              hoverColor={
+                theme.filesArticleBody.downloadAppList.linuxHoverColor
+              }
+              title={t("Common:MobileLinux", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {officeforandroidUrl ? (
+            <IconButton
+              onClick={() => window.open(officeforandroidUrl)}
+              iconName={AndroidReactSvgUrl}
+              size={32}
+              isFill
+              hoverColor={
+                theme.filesArticleBody.downloadAppList.androidHoverColor
+              }
+              title={t("Common:MobileAndroid", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {officeforiosUrl ? (
+            <IconButton
+              onClick={() => window.open(officeforiosUrl)}
+              iconName={IOSReactSvgUrl}
+              size={32}
+              isFill
+              hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
+              title={t("Common:MobileIos", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
         </div>
       </div>
     );

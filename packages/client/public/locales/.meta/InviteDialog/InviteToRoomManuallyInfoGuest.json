@@ -3,7 +3,7 @@
   "content": "Add existing {{productName}} contacts. Or invite new users personally via email. New users will be added to your Guests list.",
   "content_en_sha1_hash": "89d589fb8b32a29489de19a39a17f2e4722ee57f",
   "created_at": "2025-05-26T07:15:53.259Z",
-  "updated_at": "2025-08-04T07:30:01.179Z",
+  "updated_at": "2025-08-11T09:02:43.898Z",
   "comment": {
     "text": "This translation key describes a message that appears when users can't invite guests directly and need to add existing contacts or invite new users via email. The message informs users about the alternative actions they can take. It is displayed in the InvitePanel component.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 607,
+      "line_number": 608,
       "context": "})\n : !allowInvitingGuests\n ? t(\"InviteToRoomManuallyInfoMembers\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InviteToRoomManuallyInfoGuest\", {\n productName: t(\"Common:ProductName\"),\n })}\n </StyledDescription>\n {roomId === -1 || allowInvitingGuests ? (\n <StyledInviteLanguage>",
       "module": "/packages/client"
     }

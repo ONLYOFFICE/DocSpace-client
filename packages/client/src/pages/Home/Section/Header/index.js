@@ -387,7 +387,9 @@ const SectionHeaderContent = (props) => {
     !isRoot && (selectedFolder?.lifetime || infoPanelRoom?.lifetime),
   );
 
-  const navigationButtonIsVisible = !!showNavigationButton;
+  const navigationButtonIsVisible = !!(
+    showNavigationButton || location.state?.isShared
+  );
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -396,7 +398,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-  const sharedType = !isPublicRoom;
+  const sharedType = location.state?.isExternal && !isPublicRoom;
 
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;

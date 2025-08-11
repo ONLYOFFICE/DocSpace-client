@@ -509,6 +509,8 @@ class UsersStore {
       this.abortController = null;
     });
 
+    this.clientLoadingStore.setIsLoading("body", false);
+    this.clientLoadingStore.setIsLoading("header", false);
     return Promise.resolve(res.items);
   };
 

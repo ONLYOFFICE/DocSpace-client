@@ -57,6 +57,7 @@ const UsefulTipsContainer = ({
           className="useful-tips toggle-btn"
           onChange={onChangeEmailSubscription}
           isChecked={usefulTipsSubscription}
+          dataTestId="useful_tips_toggle_button"
         />
       </div>
       <Text {...textDescriptionsProps}>

@@ -69,6 +69,7 @@ const Tooltip = ({
   opacity = 1,
   imperativeModeOnly,
   noUserSelect,
+  dataTestId,
   ...rest
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -97,7 +98,7 @@ const Tooltip = ({
         ref={tooltipRef}
         className={tooltipClass}
         style={tooltipStyle}
-        data-testid="tooltip"
+        data-testid={dataTestId ?? "tooltip"}
       >
         <ReactTooltip
           ref={ref}

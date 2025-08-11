@@ -97,6 +97,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
           isDisabled={isButtonDisabled}
           onClick={onTopUp}
           isLoading={isLoading}
+          testId="top_up_button"
         />
         <Button
           key="CancelButton"
@@ -105,6 +106,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="cancel_top_up_button"
         />
       </div>
     </div>

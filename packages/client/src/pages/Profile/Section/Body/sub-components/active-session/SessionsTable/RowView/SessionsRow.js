@@ -68,6 +68,7 @@ const SessionsRow = (props) => {
       iconName={RemoveSessionSvgUrl}
       isClickable
       onClick={onRemoveClick}
+      dataTestId="session_remove_icon_button"
     />
   );
 
@@ -77,6 +78,7 @@ const SessionsRow = (props) => {
       data={item}
       sectionWidth={sectionWidth}
       contentElement={contentElement}
+      dataTestId={`session_row_${item.id}`}
     >
       <SessionsRowContent
         id={item.id}

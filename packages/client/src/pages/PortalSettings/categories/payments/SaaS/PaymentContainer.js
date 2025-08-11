@@ -154,6 +154,7 @@ const PaymentContainer = (props) => {
             <Text>{t("RoomManagerDescription")}</Text>
           </>
         }
+        dataTestId="admin_accounts_help_button"
       />
     );
   };
@@ -187,6 +188,7 @@ const PaymentContainer = (props) => {
         fontSize="16px"
         isBold
         color={theme.client.settings.payment.warningColor}
+        dataTestId="expired_subscription_text"
       >
         <Trans t={t} i18nKey="BusinessExpired" ns="Payments">
           {{ date: gracePeriodEndDate }} {{ planName: tariffPlanTitle }}

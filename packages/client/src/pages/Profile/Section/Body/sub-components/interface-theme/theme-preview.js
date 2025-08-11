@@ -53,6 +53,7 @@ const ThemePreview = (props) => {
           value={value}
           isDisabled={isDisabled}
           isChecked={isChecked}
+          testId={`theme_${theme}_radio_button`}
         />
       </div>
       <Preview

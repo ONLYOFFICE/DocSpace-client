@@ -24,8 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
+import { tablet } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.icon.react.svg?url";
 
 const Styled = styled.div`
   width: 100%;
@@ -35,7 +38,8 @@ const Styled = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
+  border: 2px solid transparent;
+  border-radius: 4px;
 
   .thumbnail-container {
     flex: 1;
@@ -95,6 +99,51 @@ const Styled = styled.div`
     min-width: 0;
     max-width: 100%;
   }
+
+  .info-icon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 32px;
+    width: 32px;
+    border-radius: 3px;
+    background: ${globalColors.white};
+    box-shadow: 0px 2px 4px 0px #040f1b29;
+    display: none;
+    cursor: pointer;
+
+    .icon {
+      height: 16px;
+      width: 16px;
+      padding: 8px 0px 0px 8px;
+    }
+  }
+
+  &:hover {
+    border-color: ${globalColors.lightBlueMain};
+
+    .info-icon {
+      display: block;
+    }
+
+    .name-text {
+      color: ${globalColors.lightBlueMain};
+    }
+  }
+
+  &:active {
+    background: ${globalColors.lightGrayHover};
+
+    .name-text {
+      color: ${globalColors.grayText};
+    }
+  }
+
+  @media ${tablet} {
+    .info-icon {
+      display: block;
+    }
+  }
 `;
 
 const FileTile = ({ item, smallPreview }) => {
@@ -114,6 +163,10 @@ const FileTile = ({ item, smallPreview }) => {
         <div className="name-text" title={item.attributes.name_form}>
           {item.attributes.name_form}
         </div>
+      </div>
+
+      <div className="info-icon">
+        <ReactSVG src={InfoReactSvgUrl} className="icon" />
       </div>
     </Styled>
   );

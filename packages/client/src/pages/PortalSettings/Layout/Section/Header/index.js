@@ -357,6 +357,7 @@ const SectionHeaderContent = (props) => {
               isFill
               onClick={onBackToParent}
               className="arrow-button"
+              dataTestId="back_parent_icon_button"
             />
           ) : null}
           <Heading type="content" truncate>

@@ -188,7 +188,7 @@ const PrimaryTabs = (props: TabsProps) => {
               if (!withAnimation) item.onClick?.();
               setSelectedItem(item, index);
             }}
-            data-testid={item.name}
+            data-testid={`${item.id}_tab`}
           >
             <span className={styles.tabText}>{item.name}</span>
             <div

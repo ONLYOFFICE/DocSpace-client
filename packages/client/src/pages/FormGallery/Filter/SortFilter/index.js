@@ -83,7 +83,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           opened={isOpen}
           onToggle={onToggleCombobox}
           className="sort-combo-box"
-          directionX="right"
+          directionX="left"
           directionY="both"
           scaled
           size="content"

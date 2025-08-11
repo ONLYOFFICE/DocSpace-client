@@ -47,6 +47,7 @@ const SsoTextInput = (props) => {
     hideError,
     className,
     onFocus,
+    dataTestId,
   } = props;
 
   const onFocusFn = (e) => {
@@ -76,6 +77,7 @@ const SsoTextInput = (props) => {
         scale
         tabIndex={tabIndex}
         value={value}
+        testId={dataTestId}
       />
     </StyledInputWrapper>
   );

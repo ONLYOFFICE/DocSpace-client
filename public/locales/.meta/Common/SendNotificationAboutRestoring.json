@@ -3,7 +3,7 @@
   "content": "Send notification about space restoring to users",
   "content_en_sha1_hash": "e040fbeb56224222df87a697364fe2553d230591",
   "created_at": "2025-05-26T07:15:47.743Z",
-  "updated_at": "2025-08-04T07:30:01.751Z",
+  "updated_at": "2025-08-11T09:02:44.098Z",
   "comment": {
     "text": "This translation key is used to display a notification message about restoring space to users. It appears on a checkbox label in a UI element where users can choose to send notifications upon restoring their space. The translated text should be concise and clear for users.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
-      "line_number": 451,
-      "context": "styles.restoreBackupCheckboxNotification,\n \"restore-backup-checkbox_notification\",\n )}\n onChange={onChangeCheckbox}\n isChecked={checkboxState.notification}\n label={t(\"Common:SendNotificationAboutRestoring\")}\n isDisabled={!isEnableRestore}\n />\n {warningContent}\n <Checkbox\n truncate",
+      "line_number": 455,
+      "context": "styles.restoreBackupCheckboxNotification,\n \"restore-backup-checkbox_notification\",\n )}\n onChange={onChangeCheckbox}\n isChecked={checkboxState.notification}\n label={t(\"Common:SendNotificationAboutRestoring\")}\n isDisabled={!isEnableRestore}\n dataTestId=\"about_restoring_checkbox\"\n />\n {warningContent}\n <Checkbox",
       "module": "/packages/shared"
     }
   ],

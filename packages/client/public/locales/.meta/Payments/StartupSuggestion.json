@@ -3,7 +3,7 @@
   "content": "Do more with {{planName}} plan",
   "content_en_sha1_hash": "e2ed747ebe643fc02022f1f0dfa21047a14d8063",
   "created_at": "2025-05-19T21:30:53.730Z",
-  "updated_at": "2025-05-24T06:42:58.997Z",
+  "updated_at": "2025-08-11T18:11:59.274Z",
   "comment": {
     "text": "This translation key is used to display a suggestion for users who have selected a payment plan. The suggested action is to \"Do more with\" the currently chosen plan, which helps guide users towards exploring further benefits of their plan. This text appears in the UI as part of a payment container element.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
-      "line_number": 207,
+      "line_number": 209,
       "context": "noSelect\n fontSize=\"16px\"\n isBold\n className=\"payment-info_suggestion\"\n >\n <Trans t={t} i18nKey=\"StartupSuggestion\" ns=\"Payments\">\n {{ planName: tariffPlanTitle }}\n </Trans>\n </Text>\n );\n }",
       "module": "/packages/client"
     }

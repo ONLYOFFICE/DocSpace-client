@@ -3,7 +3,7 @@
   "content": "An amount of <1>{{price}}</1> will be charged to your saved payment method.",
   "content_en_sha1_hash": "eabbae959a4d41e3b1036f35087858213ca741e2",
   "created_at": "2025-06-26T08:14:48.345Z",
-  "updated_at": "2025-06-26T19:00:37.304Z",
+  "updated_at": "2025-08-11T18:11:59.278Z",
   "comment": {
     "text": "This translation key is used to display a message indicating the charge amount that will be applied to a saved payment method. It appears in a UI element likely related to updating a plan or subscription, where the user's current balance and any applicable charges are shown. The {{price}} placeholder value should be replaced with the actual formatted price amount.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/UpdatePlanButtonContainer.js",
-      "line_number": 347,
+      "line_number": 351,
       "context": "}}\n />\n </Text>\n <Text>\n <Trans\n i18nKey=\"ChargeAmount\"\n ns=\"Payments\"\n t={t}\n values={{ price: formatPaymentCurrency(totalPrice) }}\n components={{\n 1: <span style={{ fontWeight: 600 }} />,",
       "module": "/packages/client"
     }

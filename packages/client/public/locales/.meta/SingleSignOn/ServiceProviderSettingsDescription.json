@@ -3,7 +3,7 @@
   "content": "Configure Service Provider settings and add SP certificates for Single Sign-On.",
   "content_en_sha1_hash": "368366022e4a1e30cbc788ad70c6a9e0b4d14b43",
   "created_at": "2025-05-19T21:30:50.130Z",
-  "updated_at": "2025-05-24T03:13:23.971Z",
+  "updated_at": "2025-08-11T18:11:59.260Z",
   "comment": {
     "text": "Configure Service Provider settings and add SP certificates for Single Sign-On. This key is used to display a brief description in the UI for configuring Single Sign-On (SSO) integration settings, likely found on a settings page or button.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/MobileView.js",
       "line_number": 55,
-      "context": "<StyledWrapper>\n <MobileCategoryWrapper\n title={t(\"ServiceProviderSettings\", {\n organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n />",
+      "context": "<StyledWrapper>\n <MobileCategoryWrapper\n title={t(\"ServiceProviderSettings\", {\n organizationName: logoText,\n })}\n subtitle={t(\"ServiceProviderSettingsDescription\")}\n url=\"/portal-settings/integration/sso/settings\"\n withPaidBadge={!isSSOAvailable}\n badgeLabel={t(\"Common:Paid\")}\n onClickLink={onClickLink}\n dataTestId=\"sp_settings\"",
       "module": "/packages/client"
     }
   ],

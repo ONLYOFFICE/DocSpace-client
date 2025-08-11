@@ -3,7 +3,7 @@
   "content": "Example: {{example}}",
   "content_en_sha1_hash": "293ca42e3dda6b344ea17733c7b72ab1a0dc1b5e",
   "created_at": "2025-05-19T21:30:45.215Z",
-  "updated_at": "2025-05-26T07:57:32.687Z",
+  "updated_at": "2025-08-11T18:11:59.232Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text that will be replaced with the actual editor URL when editing document services. It appears in the UI as a subtitle and is accessed through an integration category page in the Portal Settings application.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 273,
-      "context": "placeholder={EDITOR_URL_PLACEHOLDER}\n hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
+      "line_number": 275,
+      "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 273,
-      "context": "placeholder={EDITOR_URL_PLACEHOLDER}\n hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
+      "line_number": 275,
+      "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 273,
-      "context": "placeholder={EDITOR_URL_PLACEHOLDER}\n hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
+      "line_number": 275,
+      "context": "hasError={!docServiceUrlIsValid}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"editor_url_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Common:Example\", {\n example: EDITOR_URL_PLACEHOLDER,\n })}\n </Text>\n <Checkbox\n id=\"isDisabledCertificat\"",
       "module": "/packages/client"
     }
   ],

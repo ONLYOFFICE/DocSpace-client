@@ -3,7 +3,7 @@
   "content": "Guest",
   "content_en_sha1_hash": "face83ee3014bdc8f98203cc94e2e89222452e90",
   "created_at": "2025-05-19T21:30:45.686Z",
-  "updated_at": "2025-08-11T09:02:43.872Z",
+  "updated_at": "2025-08-11T18:11:59.144Z",
   "comment": {
     "text": "The translation key \"Common:Guest\" is used to display a text indicating that the user being referred to is a guest. This text is typically displayed in a dialog or UI element, such as an icon badge, to provide context for users.",
     "is_auto": true,
@@ -20,12 +20,6 @@
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
       "line_number": 68,
       "context": "});\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {\n userCaption: onlyOneUser\n ? t(\"Common:Guest\").toLowerCase()\n : t(\"Common:Guests\").toLowerCase(),\n })\n ) : (\n <Trans\n i18nKey=\"DeleteReassignDescriptionUser\"",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 115,
-      "context": "lineHeight=\"22px\"\n noSelect\n truncate\n className=\"accent-text\"\n >\n {t(\"Common:Guest\")}\n </Text>\n <Badge label={t(\"Common:New\")} noHover />\n </div>\n \n <IconButton",
       "module": "/packages/client"
     },
     {

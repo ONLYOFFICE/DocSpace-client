@@ -3,7 +3,7 @@
   "content": "Watermark Preview",
   "content_en_sha1_hash": "dbfb9b8a63ad0c23b973116c08bce722f4620ccf",
   "created_at": "2025-05-19T21:30:56.860Z",
-  "updated_at": "2025-05-24T13:38:54.747Z",
+  "updated_at": "2025-08-11T09:02:43.864Z",
   "comment": {
     "text": "This translation key is used to display a watermark preview in an image editing component. It appears as a textual overlay on the image and provides a brief explanation of its purpose. Translators should focus on providing a clear and concise description that is suitable for the context where this text will be displayed.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/Watermarks/ImageWatermark.js",
-      "line_number": 276,
+      "line_number": 279,
       "context": "{selectedImageUrl ? (\n <div className=\"image-wrapper\">\n <div>\n <div className=\"image-description\">\n <Text fontWeight={600} className=\"image-watermark_text\">\n {t(\"WatermarkPreview\")}\n </Text>\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"WatermarkPreviewHelp\")}</Text>\n }",
       "module": "/packages/client"
     }

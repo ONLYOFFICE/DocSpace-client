@@ -3,7 +3,7 @@
   "content": "Selected elements were successfully deleted from {{sectionName}}",
   "content_en_sha1_hash": "34001013ab8ad0b2c793c6ef5b07cc520c8c155d",
   "created_at": "2025-06-02T10:19:18.540Z",
-  "updated_at": "2025-08-04T07:30:00.956Z",
+  "updated_at": "2025-08-11T09:02:43.813Z",
   "comment": {
     "text": "Selected elements were successfully deleted from the Trash Section. This translation key is used to display a confirmation message when deleting items from the trash. It appears in a delete dialog and should be translated to indicate success in the user's preferred language.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 307,
+      "line_number": 308,
       "context": "[moveDragItems],\n );\n \n const onRemove = React.useCallback(() => {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations);",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2333,
+      "line_number": 2334,
       "context": "onClick: () => {\n if (this.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n this.deleteAction(translations).catch((err) => toastr.error(err));",
       "module": "/packages/client"
     }

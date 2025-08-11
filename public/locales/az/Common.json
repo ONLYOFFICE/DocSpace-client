@@ -234,6 +234,7 @@
   "DeveloperTools": "Tərtibatçı Alətləri",
   "Diagram": "Diaqram",
   "Diagrams": "Diaqramlar",
+  "DiagramViewer": "Diaqram Baxıcı",
   "Disable": "Deaktiv edin",
   "Disabled": "Deaktiv edildi",
   "DisableQuota": "Kvotanı deaktiv edin",
@@ -442,7 +443,6 @@
   "LoginButton": "Daxil ol",
   "LogoAbout": "Haqqımızda səhifəsi üçün loqo",
   "LogoCompact": "Kompakt sol menyu üçün loqo",
-  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Sahə başlığı üçün loqo",
   "LogoLogin": "Giriş səhifəsi və e-məktublar üçün loqo",
@@ -549,6 +549,7 @@
   "PasswordRequired": "Şifrə tələb olunur",
   "Path": "Cığır",
   "PaymentsTitle": "Ödənişlər",
+  "PDF": "PDF",
   "People": "İnsanlar",
   "Permissions": "İcazələr",
   "PerUserMonth": "Admin/aylıq <1>{{price}}</1>",
@@ -870,5 +871,7 @@
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
   "YourCurrentDomain": "Cari domen adınız",
   "YourLogo": "Loqonuz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
+  "LogoForViewer": "{{diagramViewer}} üçün loqo"
 }

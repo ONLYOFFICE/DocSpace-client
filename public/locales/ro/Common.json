@@ -234,6 +234,7 @@
   "DeveloperTools": "Instrumente pentru dezvoltatori",
   "Diagram": "Diagrama",
   "Diagrams": "Diagrame",
+  "DiagramViewer": "Vizualizator diagrame",
   "Disable": "Dezactivare",
   "Disabled": "Dezactivat",
   "DisableQuota": "Dezactivare cotă",
@@ -442,7 +443,6 @@
   "LoginButton": "Autentificare",
   "LogoAbout": "Siglă pentru pagina Despre",
   "LogoCompact": "Meniul compact din partea stângă",
-  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo-ul pentru antetul spațiului",
   "LogoLogin": "Siglă pentru pagina de conectare și mesaje de e-mail",
@@ -549,6 +549,7 @@
   "PasswordRequired": "Parola este obligatorie",
   "Path": "Cale",
   "PaymentsTitle": "Plăți",
+  "PDF": "PDF",
   "People": "Persoane",
   "Permissions": "Permisiuni",
   "PerUserMonth": "<1>{{price}}</1> per administrator/lună",
@@ -870,5 +871,7 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "LogoForEditors": "Logo pentru editorul {{editorName}}",
+  "LogoForViewer": "Logo pentru {{diagramViewer}}"
 }

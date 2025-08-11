@@ -1,0 +1,28 @@
+{
+  "key_path": "DiagramViewer",
+  "content": "Diagram Viewer",
+  "content_en_sha1_hash": "efc325eb22799039f69cef2d57bc575842e16a98",
+  "created_at": "2025-08-07T11:18:30.575Z",
+  "updated_at": "2025-08-11T09:02:44.092Z",
+  "comment": {
+    "text": "This key displays the text \"Diagram Viewer\" within a settings section, likely related to logo configuration. It's used to indicate the viewer used for displaying diagrams, alongside logo dimensions. Translators should ensure the term accurately reflects the diagram viewing functionality.",
+    "is_auto": true,
+    "updated_at": "2025-08-07T11:22:33.053Z"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 536,
+      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForViewer\", { diagramViewer: t(\"Common:DiagramViewer\") })} (\n {logoUrls[14].size.width}x{logoUrls[14].size.height})\n </Text>\n <div className=\"logos-wrapper\">\n <Logo\n name={logoUrls[14].name}",
+      "module": "/packages/shared"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

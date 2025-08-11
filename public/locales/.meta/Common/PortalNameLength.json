@@ -3,7 +3,7 @@
   "content": "The account name must be between {{minLength}} and {{maxLength}} characters long",
   "content_en_sha1_hash": "fc3643edea764dc1006d640f4f99f132b319f558",
   "created_at": "2025-05-26T07:15:46.250Z",
-  "updated_at": "2025-08-04T07:30:01.292Z",
+  "updated_at": "2025-08-11T09:02:43.937Z",
   "comment": {
     "text": "The PortalNameLength translation key is used to describe the error message when an account name's length exceeds the allowed range. It appears in UI elements that validate and restrict input field lengths, providing context for users who enter invalid characters or exceed maximum allowed characters. This key helps translators clarify the exact requirements for account names in the application.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 204,
+      "line_number": 212,
       "context": "case value === \"\":\n return setError(t(\"Common:PortalNameEmpty\"));\n case value.length < nameValidator.minLength ||\n value.length > nameValidator.maxLength:\n return setError(\n t(\"Common:PortalNameLength\", {\n minLength: nameValidator.minLength.toString(),\n maxLength: nameValidator.maxLength.toString(),\n }),\n );\n case !validName.test(value):",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Shared folders",
   "content_en_sha1_hash": "89815b84dde295d77a537a0bbb8ab594e7418560",
   "created_at": "2025-05-19T21:30:52.705Z",
-  "updated_at": "2025-06-30T12:20:31.406Z",
+  "updated_at": "2025-08-11T09:02:43.941Z",
   "comment": {
     "text": "This translation key is used to display the label \"Shared folders\" in various UI elements. It appears as a section name and description within import steps, allowing users to select shared folders for export.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 178,
-      "context": "isDisabled={false}\n />\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,",
+      "line_number": 182,
+      "context": "dataTestId=\"import_shared_files_section\"\n />\n <ImportSection\n isChecked={importOptions.importSharedFolders}\n onChange={(e) => onChange(e, \"importSharedFolders\")}\n sectionName={t(\"Settings:SharedFolders\")}\n description={t(\"Settings:FolderToRoomImportNote\", {\n sectionName: t(\"Common:Rooms\"),\n })}\n exportSection={{\n sectionName: sharedFoldersExportDetails.name,",
       "module": "/packages/client"
     }
   ],

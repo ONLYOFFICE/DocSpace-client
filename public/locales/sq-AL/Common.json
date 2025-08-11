@@ -234,6 +234,7 @@
   "DeveloperTools": "Mjetet e Zhvilluesit",
   "Diagram": "Diagram",
   "Diagrams": "Diagramet",
+  "DiagramViewer": "Redaktori i Visio-s",
   "Disable": "Çaktivizoni",
   "Disabled": "Me aftësi te kufizuara",
   "DisableQuota": "Çaktivizoni kuotën",
@@ -442,7 +443,6 @@
   "LoginButton": "Identifikohuni",
   "LogoAbout": "Logo për faqen Rreth",
   "LogoCompact": "Logo për menunë kompakte të majtë",
-  "LogoDocsEditor": "Logo për menunë kompakte të majtë",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo për kokën e hapësirës",
   "LogoLogin": "Logo për faqen e hyrjes dhe emailet",
@@ -549,6 +549,7 @@
   "PasswordRequired": "Kërkohet fjalëkalimi",
   "Path": "Rruga",
   "PaymentsTitle": "Pagesat",
+  "PDF": "PDF",
   "People": "Njerëzit",
   "Permissions": "Leje",
   "PerUserMonth": "<1>{{price}}</1> për administrator/muaj",
@@ -869,5 +870,7 @@
   "YouHaveUnsavedChanges": "Ju keni ndryshime të paruajtura",
   "YourCurrentDomain": "Domeni juaj aktual",
   "YourLogo": "Logos juaj",
-  "YourTurn": "Radha jote"
+  "YourTurn": "Radha jote",
+  "LogoForEditors": "Logoja për redaktorin {{editorName}}",
+  "LogoForViewer": "Logo për {{diagramViewer}}"
 }

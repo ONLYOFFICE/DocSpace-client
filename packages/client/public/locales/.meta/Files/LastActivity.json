@@ -3,7 +3,7 @@
   "content": "Last activity",
   "content_en_sha1_hash": "1c73b806203dadd6ca31c5839a487aa2613433e6",
   "created_at": "2025-05-19T21:30:55.727Z",
-  "updated_at": "2025-08-04T07:30:01.263Z",
+  "updated_at": "2025-08-11T09:02:43.926Z",
   "comment": {
     "text": "This translation key is used for the text \"Last activity\" in various UI elements such as table headers and dropdowns. It appears on screens related to room management and file organization, providing context about the type of activity associated with a particular item.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 127,
-      "context": "{ value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },\n ]);\n \n const [version, onSetVersion] = useState(sdkVersion[200]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
+      "context": "{ value: \"custom\", label: t(\"SetItUp\"), dataTestId: \"custom_radio_button\" },\n ];\n \n const [columnsOptions, setColumnsOptions] = useState([\n { key: \"Owner\", label: t(\"Common:Owner\") },\n { key: \"Activity\", label: t(\"Files:LastActivity\") },\n ]);\n \n const [version, onSetVersion] = useState(sdkVersion[210]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     }
   ],

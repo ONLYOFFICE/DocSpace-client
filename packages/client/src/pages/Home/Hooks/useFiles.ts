@@ -128,7 +128,7 @@ const useFiles = ({
   };
 
   const getFiles = React.useCallback(async () => {
-    const categoryType = getCategoryType(location);
+    const categoryType = getCategoryType(location) as number; // TODO: Remove "as number" when getCategoryType is rewritten to TS
 
     let filterObj = null;
     let isRooms = false;

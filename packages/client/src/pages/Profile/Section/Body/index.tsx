@@ -33,6 +33,7 @@ import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet, mobile } from "@docspace/shared/utils";
+import { zIndex } from "@docspace/shared/themes";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
@@ -72,7 +73,7 @@ const Wrapper = styled.div`
 
 const StyledTabs = styled(Tabs)`
   > .sticky {
-    z-index: 201;
+    z-index: ${zIndex.sticky};
   }
 `;
 

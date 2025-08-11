@@ -50,7 +50,7 @@ const DropDown = (props: DropDownProps) => {
     showDisabledItems = false,
     isDefaultMode = true,
     fixedDirection = false,
-    offsetLeft = 0,
+    offsetX = 0,
     enableKeyboardEvents = true,
     usePortalBackdrop = false,
     shouldShowBackdrop = false,
@@ -90,7 +90,7 @@ const DropDown = (props: DropDownProps) => {
         showDisabledItems={showDisabledItems}
         isDefaultMode={isDefaultMode}
         fixedDirection={fixedDirection}
-        offsetLeft={offsetLeft}
+        offsetX={offsetX}
         enableKeyboardEvents={enableKeyboardEvents}
         backDrop={backDrop}
         {...props}

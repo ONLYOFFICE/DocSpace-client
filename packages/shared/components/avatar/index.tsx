@@ -195,6 +195,7 @@ const AvatarPure = ({
             label={option.label}
             icon={option.icon}
             onClick={optionOnClickAction}
+            testId={option.key}
           />
         );
       })}
@@ -229,6 +230,7 @@ const AvatarPure = ({
                   iconName={PencilReactSvgUrl}
                   onClick={onToggleOpenEditLogo}
                   size={16}
+                  dataTestId="edit_avatar_icon_button"
                 />
                 {dropdownElement}{" "}
               </>
@@ -238,6 +240,7 @@ const AvatarPure = ({
                 iconName={PlusSvgUrl}
                 onClick={onUploadClick}
                 size={16}
+                dataTestId="upload_avatar_icon_button"
               />
             )}
           </div>

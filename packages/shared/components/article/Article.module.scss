@@ -412,8 +412,8 @@
   position: relative;
   overflow: hidden;
   background: var(--article-catalog-background);
-  min-width: 252px;
-  max-width: 252px;
+  min-width: var(--article-desktop-width);
+  max-width: var(--article-desktop-width);
   box-sizing: border-box;
   user-select: none;
   border-inline-end: var(--article-catalog-vertical-line);
@@ -425,15 +425,15 @@
 
   &[data-show-text="false"] {
     @include mixins.tablet {
-      min-width: 60px;
-      max-width: 60px;
+      min-width: var(--article-tablet-width-collapsed);
+      max-width: var(--article-tablet-width-collapsed);
     }
   }
 
   &[data-show-text="true"] {
     @include mixins.tablet {
-      min-width: 243px;
-      max-width: 243px;
+      min-width: var(--article-tablet-width);
+      max-width: var(--article-tablet-width);
     }
   }
 

@@ -157,12 +157,14 @@ const StoragePlanCancel: React.FC<StorageDialogProps> = ({
             primary
             onClick={handleStoragePlanChange}
             isLoading={isLoading}
+            testId="storage_plan_cancel_ok_button"
           />
           <Button
             key="CancelButton"
             label={t("Common:No")}
             size={ButtonSize.normal}
             onClick={onClose}
+            testId="storage_plan_cancel_no_button"
           />
         </ModalDialog.Footer>
       </ModalDialog>

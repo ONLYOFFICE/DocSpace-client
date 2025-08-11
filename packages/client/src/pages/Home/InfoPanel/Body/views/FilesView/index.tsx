@@ -31,14 +31,14 @@ import { useTranslation } from "react-i18next";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { TRoom } from "@docspace/shared/api/rooms/types";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
 
-import { useLoader } from "../../helpers/useLoader";
 import ItemTitle from "../../sub-components/ItemTitle";
 
 import Details from "../Details";
@@ -134,13 +134,22 @@ const FilesView = ({
     scrollToTop,
   });
 
+  const onEndAnimation = React.useCallback(() => {
+    const event = new CustomEvent(AnimationEvents.END_ANIMATION);
+
+    window.dispatchEvent(event);
+  }, []);
+
   const fetchValue = React.useCallback(
     async (v: FilesViewProps["currentView"]) => {
       abortController.current?.abort();
       membersAbortController.current?.abort();
       shareAbortController.current?.abort();
 
+      setIsLoadingSuspense(true);
+
       if (v === InfoPanelView.infoDetails) {
+        onEndAnimation();
         setIsLoadingSuspense(false);
         setIsFirstLoadingSuspense(false);
 
@@ -148,9 +157,13 @@ const FilesView = ({
       }
 
       if (v === InfoPanelView.infoHistory) {
-        if (isThirdParty) return v;
+        if (isThirdParty) {
+          setIsLoadingSuspense(false);
+          setIsFirstLoadingSuspense(false);
+          onEndAnimation();
 
-        setIsLoadingSuspense(true);
+          return v;
+        }
 
         try {
           await fetchHistory();
@@ -167,8 +180,6 @@ const FilesView = ({
       }
 
       if (v === InfoPanelView.infoMembers) {
-        setIsLoadingSuspense(true);
-
         try {
           await fetchMembers();
           scrollToTop();
@@ -185,8 +196,6 @@ const FilesView = ({
       }
 
       if (v === InfoPanelView.infoShare) {
-        setIsLoadingSuspense(true);
-
         try {
           await fetchExternalLinks();
 
@@ -203,6 +212,7 @@ const FilesView = ({
 
       setIsFirstLoadingSuspense(false);
       setIsLoadingSuspense(false);
+      onEndAnimation();
 
       return v;
     },
@@ -214,35 +224,15 @@ const FilesView = ({
       fetchMembers,
       fetchExternalLinks,
       scrollToTop,
+      onEndAnimation,
     ],
   );
 
-  const { showLoading: showLoadingSuspense } = useLoader({
-    isFirstLoading: isLoadingSuspense,
-  });
-
   React.useEffect(() => {
-    const onStartAnimation = () => {
-      const event = new CustomEvent(TabsEvent.START_ANIMATION, {
-        detail: {
-          id: "info-panel-tabs",
-        },
-      });
-      window.dispatchEvent(event);
-    };
-
-    const onEndAnimation = () => {
-      const event = new CustomEvent(TabsEvent.END_ANIMATION);
-
-      window.dispatchEvent(event);
-    };
-
-    if (showLoadingSuspense) {
-      onStartAnimation();
-    } else {
+    if (!isLoadingSuspense) {
       onEndAnimation();
     }
-  }, [showLoadingSuspense]);
+  }, [isLoadingSuspense, onEndAnimation]);
 
   React.useEffect(() => {
     if (currentView === value && selection.id?.toString() === prevSelectionId) {
@@ -319,18 +309,18 @@ const FilesView = ({
     : {};
 
   return (
-    <>
+    <div data-testid="info_panel_files_view_container">
       <ItemTitle
         infoPanelSelection={
-          isRoomMembersPanel ? infoPanelRoomSelection! : selection
+          isRoomMembersPanel
+            ? { ...infoPanelRoomSelection!, isRoom: true }!
+            : selection
         }
         {...roomMembersProps}
       />
-      <div
-        style={{
-          opacity: isLoadingSuspense ? 0.5 : 1,
-          pointerEvents: isLoadingSuspense ? "none" : "auto",
-        }}
+      <LoaderWrapper
+        isLoading={isLoadingSuspense}
+        testId="info_panel_files_view_content"
       >
         {isFirstLoadingSuspense ? (
           currentView === InfoPanelView.infoShare ? (
@@ -344,13 +334,18 @@ const FilesView = ({
                     ? "history"
                     : "details"
               }
+              data-testid="info_panel_files_view_loader"
             />
           )
         ) : (
-          getView()
+          <div
+            data-testid={`info_panel_files_view_${value?.replace("info_", "")}`}
+          >
+            {getView()}
+          </div>
         )}
-      </div>
-    </>
+      </LoaderWrapper>
+    </div>
   );
 };
 

@@ -89,8 +89,12 @@ const AdvancedSettings = (props: InjectedProps) => {
           isChecked={hideAuthPage}
           isDisabled={!enableSso || isLoadingXml}
           onChange={setCheckbox}
+          dataTestId="hide_auth_page_checkbox"
         />
-        <HelpButton tooltipContent={t("AdvancedSettingsTooltip")} />
+        <HelpButton
+          tooltipContent={t("AdvancedSettingsTooltip")}
+          dataTestId="hide_auth_page_help_button"
+        />
       </div>
 
       <div className="advanced-block">
@@ -102,12 +106,14 @@ const AdvancedSettings = (props: InjectedProps) => {
           isChecked={disableEmailVerification}
           isDisabled={!enableSso || isLoadingXml}
           onChange={setCheckbox}
+          dataTestId="disable_email_verification_checkbox"
         />
         <HelpButton
           tooltipContent={t("Settings:DisableEmailDescription", {
             sectionName: t("Common:SSO"),
             productName: t("Common:ProductName"),
           })}
+          dataTestId="disable_email_verification_help_button"
         />
       </div>
     </StyledWrapper>

@@ -102,6 +102,7 @@ const SectionBodyContent = (props) => {
     userId,
     onEnableFormFillingGuid,
     isArchiveFolderRoot,
+    setDropTargetPreview,
   } = props;
 
   useEffect(() => {
@@ -245,6 +246,12 @@ const SectionBodyContent = (props) => {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           const classElements = document.getElementsByClassName(value);
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
@@ -258,6 +265,11 @@ const SectionBodyContent = (props) => {
             droppableSeparator.remove();
           }
         } else {
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           currentDroppable.classList.remove("droppable-hover");
         }
       }
@@ -266,6 +278,12 @@ const SectionBodyContent = (props) => {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
+
           const classElements = document.getElementsByClassName(value);
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
@@ -282,7 +300,14 @@ const SectionBodyContent = (props) => {
           currentDroppable.classList.add("droppable-hover");
           currentDroppable = droppable;
           droppableSeparator = indexSeparatorNode;
+
+          const documentTitle = currentDroppable.getAttribute(
+            "data-document-title",
+          );
+          setDropTargetPreview(documentTitle);
         }
+      } else {
+        setDropTargetPreview(null);
       }
     } else if (isIndexEditingMode) {
       droppableSeparator && droppableSeparator.remove();
@@ -346,8 +371,9 @@ const SectionBodyContent = (props) => {
       (folder) => folder.id == selectedFolderId,
     );
 
-    if (!isIndexEditingMode)
+    if (!isIndexEditingMode && selectedFolderId) {
       return onMoveTo(selectedFolderId, title, destFolderInfo);
+    }
     if (filesList.length === 1) return;
 
     const replaceableItemId = Number.isNaN(+selectedFolderId)
@@ -485,6 +511,8 @@ export default inject(
       dialogsStore;
 
     const { onEnableFormFillingGuid } = contextOptionsStore;
+    const { primaryProgressDataStore, uploaded } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     return {
       dragging,
@@ -510,7 +538,7 @@ export default inject(
       scrollToItem,
       setScrollToItem,
       filesList,
-      uploaded: uploadDataStore.uploaded,
+      uploaded,
       onClickBack: filesActionsStore.onClickBack,
       movingInProgress,
       currentDeviceType: settingsStore.currentDeviceType,
@@ -522,6 +550,7 @@ export default inject(
       formFillingTipsVisible,
       userId: userStore?.user?.id,
       onEnableFormFillingGuid,
+      setDropTargetPreview,
     };
   },
 )(

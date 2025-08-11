@@ -3,7 +3,7 @@
   "content": "Terminate all sessions except the current one",
   "content_en_sha1_hash": "c059d767d7c4c6bc1ac08a5982e1fa39f7014da7",
   "created_at": "2025-05-19T21:30:53.400Z",
-  "updated_at": "2025-05-26T07:57:32.801Z",
+  "updated_at": "2025-08-11T18:11:59.299Z",
   "comment": {
     "text": "\"Used in a button within the 'Logout All' dialog to display the label for terminating all sessions except the current one.\"",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/active-session/index.js",
-      "line_number": 171,
-      "context": "className=\"terminate-all-sessions\"\n type=\"action\"\n isHovered\n onClick={() => setLogoutAllDialogVisible(true)}\n >\n {t(\"Profile:TerminateAllSessions\")}\n </Link>\n <HelpButton\n offsetRight={0}\n iconName={InfoReactSvgUrl}\n tooltipContent={tooltipContent}",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/active-session/index.js",
+      "line_number": 164,
+      "context": "type=\"action\"\n isHovered\n onClick={() => setLogoutAllDialogVisible(true)}\n dataTestId=\"terminate_all_sessions_link\"\n >\n {t(\"Profile:TerminateAllSessions\")}\n </Link>\n <HelpButton\n offsetRight={0}\n iconName={InfoReactSvgUrl}\n tooltipContent={tooltipContent}",
       "module": "/packages/client"
     }
   ],

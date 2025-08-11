@@ -3,7 +3,7 @@
   "content": "NO EMAIL",
   "content_en_sha1_hash": "0f557b7a5cc37e08743058f11c9f5c1af82a1a29",
   "created_at": "2025-05-19T21:30:52.016Z",
-  "updated_at": "2025-06-30T12:20:31.412Z",
+  "updated_at": "2025-08-11T09:02:43.943Z",
   "comment": {
     "text": "This translation key is used to display \"NO EMAIL\" in the UI. It appears in a specific table cell within a data import component and serves as a placeholder text when an email address is not set for a user.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableRow.tsx",
-      "line_number": 235,
+      "line_number": 237,
       "context": "</EmailInputWrapper>\n ) : (\n <span onClick={openEmail} className=\"user-email\" ref={emailTextRef}>\n <EditSvg />\n <Text color={globalColors.gray} className=\"user-email\" truncate>\n {prevEmail !== \"\" ? prevEmail : t(\"Settings:NoEmail\")}\n </Text>\n </span>\n )}\n </TableCell>\n </StyledTableRow>",
       "module": "/packages/client"
     }

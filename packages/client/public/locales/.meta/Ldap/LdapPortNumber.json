@@ -3,7 +3,7 @@
   "content": "Port Number",
   "content_en_sha1_hash": "36469310e52904d723dedb225ab3d5675bf823c6",
   "created_at": "2025-05-19T21:30:54.250Z",
-  "updated_at": "2025-05-24T08:24:30.167Z",
+  "updated_at": "2025-08-11T18:11:59.242Z",
   "comment": {
     "text": "The \"Port Number\" translation key is used to display a label for a field that requires an LDAP port number in a portal settings page. It appears as a required input field and is accompanied by error messaging and tooltips.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
-      "line_number": 160,
-      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.portNumber}\n labelText={t(\"LdapPortNumber\")}\n tooltipContent={t(\"LdapPortNumberTooltip\")}\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 166,
+      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.portNumber}\n labelText={t(\"LdapPortNumber\")}\n tooltipContent={t(\"LdapPortNumberTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"port_number_field_container\"\n >",
       "module": "/packages/client"
     }
   ],

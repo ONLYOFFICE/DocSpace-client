@@ -215,7 +215,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
     fixedDirection,
     withBlur,
     fillIcon,
-    offsetLeft,
+    offsetX,
     modernView,
     withBackdrop = true,
     isAside,
@@ -324,7 +324,10 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           label={label}
           icon={icon}
           isBeta={isBeta}
-          testId={option.dataTestId}
+          testId={
+            option.dataTestId ||
+            `drop_down_item_${key.toString().toLowerCase()}`
+          }
           data-focused={isOpen ? isActiveOption : undefined}
           data-is-separator={option.isSeparator || undefined}
           data-type={option.type || undefined}
@@ -358,7 +361,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       fixedDirection,
       forwardedRef: ref,
       withBlur,
-      offsetLeft,
+      offsetX,
       withBackdrop,
       isAside,
       withBackground,

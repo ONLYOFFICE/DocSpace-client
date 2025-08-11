@@ -257,6 +257,7 @@ const RoomSelectorComponent = ({
         />
       }
       isSSR={withInit}
+      dataTestId="room_selector"
     />
   );
 };

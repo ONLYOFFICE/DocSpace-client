@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
@@ -32,9 +32,7 @@ import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-
 import { TUser } from "@docspace/shared/api/people/types";
-import { Badge } from "@docspace/shared/components/badge";
 import Filter from "@docspace/shared/api/people/filter";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -53,20 +51,17 @@ type ContactsTabsProps = {
 
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
-  setContactsTab: UsersStore["setContactsTab"];
-  guestsTabVisited: UsersStore["guestsTabVisited"];
   contactsTab: UsersStore["contactsTab"];
 
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
-
-  setIsSectionBodyLoading: ClientLoadingStore["setIsSectionBodyLoading"];
 
   userId: TUser["id"];
   isVisitor: TUser["isVisitor"];
   isCollaborator: TUser["isCollaborator"];
   isRoomAdmin: TUser["isRoomAdmin"];
   showGuestsTab: boolean;
+  isChangePageRequestRunning: boolean;
 };
 
 const ContactsTabs = ({
@@ -75,52 +70,73 @@ const ContactsTabs = ({
   setGroupsSelection,
   setUsersBufferSelection,
   setGroupsBufferSelection,
-  setIsSectionBodyLoading,
   userId,
   isVisitor,
   isCollaborator,
   isRoomAdmin,
 
-  setContactsTab,
-
-  guestsTabVisited,
-
   contactsTab,
   showGuestsTab,
+  isChangePageRequestRunning,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const view = getContactsView(location);
-  const contactsView = !showGuestsTab && view === "guests" ? "people" : view;
+  const startAnimationTimerRef = React.useRef<NodeJS.Timeout>(null);
+  const prevContactsViewRef = React.useRef("");
 
-  const onPeople = () => {
+  const view = getContactsView(location);
+
+  const contactsView =
+    !showGuestsTab && (view === "guests" || contactsTab === "guests")
+      ? "people"
+      : view === "inside_group" && contactsTab !== "inside_group"
+        ? contactsTab
+        : contactsTab === "inside_group" && view !== "inside_group"
+          ? contactsTab
+          : view;
+
+  React.useEffect(() => {
+    if (contactsView) prevContactsViewRef.current = contactsView;
+  }, [contactsView]);
+
+  React.useEffect(() => {
+    if (!isChangePageRequestRunning) {
+      if (startAnimationTimerRef.current) {
+        clearTimeout(startAnimationTimerRef.current);
+        startAnimationTimerRef.current = null;
+      }
+    }
+  }, [isChangePageRequestRunning]);
+
+  const onSelect = () => {
     setUsersSelection([]);
     setUsersBufferSelection(null);
+  };
+
+  const onPeople = () => {
+    onSelect();
+
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    setIsSectionBodyLoading(true, contactsTab !== "groups");
-    setContactsTab("people");
+
     navigate(PEOPLE_ROUTE_WITH_FILTER);
   };
 
   const onGroups = () => {
-    setUsersSelection([]);
-    setUsersBufferSelection(null);
-    setIsSectionBodyLoading(true, false);
-    setContactsTab("groups");
+    onSelect();
 
     navigate(GROUPS_ROUTE_WITH_FILTER);
   };
 
   const onGuests = () => {
     if (isVisitor || isCollaborator) return;
-    setUsersSelection([]);
-    setUsersBufferSelection(null);
+
+    onSelect();
+
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    setIsSectionBodyLoading(true, contactsTab !== "groups");
 
     const filter = Filter.getDefault();
 
@@ -128,7 +144,6 @@ const ContactsTabs = ({
       filter.area = "guests";
       filter.inviterId = userId;
     }
-    setContactsTab("guests");
 
     navigate(`${GUESTS_ROUTE_WITH_FILTER}?${filter.toUrlParams()}`);
   };
@@ -158,17 +173,17 @@ const ContactsTabs = ({
       name: t("Common:Guests"),
       onClick: onGuests,
       content: null,
-      badge: !guestsTabVisited ? (
-        <Badge label={t("Common:New")} noHover />
-      ) : undefined,
     });
   }
 
   return (
     <Tabs
       className="accounts-tabs"
-      selectedItemId={contactsView as string}
+      selectedItemId={
+        !contactsView ? prevContactsViewRef.current : (contactsView as string)
+      }
       items={items}
+      withAnimation
     />
   );
 };
@@ -184,7 +199,7 @@ export default inject(
     userStore: UserStore;
     settingsStore: SettingsStore;
   }) => {
-    const { showTabsLoader, setIsSectionBodyLoading } = clientLoadingStore;
+    const { showTabsLoader, isChangePageRequestRunning } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
 
     const {
@@ -197,10 +212,6 @@ export default inject(
     const {
       setSelection: setUsersSelection,
       setBufferSelection: setUsersBufferSelection,
-
-      setContactsTab,
-
-      guestsTabVisited,
 
       contactsTab,
     } = usersStore!;
@@ -216,16 +227,12 @@ export default inject(
       setGroupsSelection,
       setGroupsBufferSelection,
 
-      setIsSectionBodyLoading,
-
       userId,
       isVisitor,
       isCollaborator,
       isRoomAdmin,
 
-      setContactsTab,
-
-      guestsTabVisited,
+      isChangePageRequestRunning,
 
       contactsTab,
     };

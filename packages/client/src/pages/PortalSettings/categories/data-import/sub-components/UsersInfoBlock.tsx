@@ -67,6 +67,7 @@ const UsersInfo = ({
             </Text>
           </Text>
           <HelpButton
+            dataTestId="license_limit_help_button"
             place="right"
             offsetRight={0}
             tooltipContent={

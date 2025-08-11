@@ -424,6 +424,10 @@
     grid-template-columns: auto 49px auto minmax(186px, 1fr);
   } */
 
+  &[data-is-show-back-button="true"][data-with-logo="false"][data-is-root-folder="true"] {
+    grid-template-columns: 34px auto 1fr;
+  }
+
   &[data-is-root-folder="true"][data-with-logo="false"] {
     grid-template-columns: auto 1fr;
   }
@@ -614,6 +618,10 @@
       }
 
       grid-template-columns: 29px auto 1fr !important;
+
+      &[data-is-show-back-button="true"][data-with-logo="false"][data-is-root-folder="true"] {
+        grid-template-columns: 34px auto 1fr !important;
+      }
 
       &[data-is-root-folder="true"] {
         grid-template-columns: auto 1fr !important;

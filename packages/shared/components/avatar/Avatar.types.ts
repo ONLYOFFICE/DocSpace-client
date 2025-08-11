@@ -29,7 +29,7 @@ import { Nullable } from "../../types";
 
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
 
-export type TAvarModel = { label: string; icon: string } & (
+export type TAvatarModel = { label: string; icon: string } & (
   | {
       key: string;
       onClick: () => void;
@@ -76,7 +76,7 @@ export type AvatarProps = {
   hasAvatar?: boolean;
   onChangeFile?: () => void;
 
-  model?: TAvarModel[];
+  model?: TAvatarModel[];
   isNotIcon?: boolean;
   imgClassName?: string;
   dataTestId?: string;

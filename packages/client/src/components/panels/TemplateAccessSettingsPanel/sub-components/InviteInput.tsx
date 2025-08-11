@@ -257,6 +257,7 @@ const InviteInput = ({
           type={LinkType.action}
           isHovered
           onClick={openUsersPanel}
+          dataTestId="template_access_settings_choose_from_list_link"
         >
           {t("Translations:ChooseFromList")}
         </StyledLink>
@@ -277,6 +278,7 @@ const InviteInput = ({
             withBorder={false}
             isDisabled={isDisabled}
             onKeyDown={onKeyDown}
+            testId="template_access_settings_search_input"
           />
 
           <div className="append" onClick={onClearInput}>

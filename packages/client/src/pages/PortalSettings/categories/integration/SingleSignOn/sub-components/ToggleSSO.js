@@ -83,6 +83,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
         isChecked={enableSso}
         onChange={onChangeToggle}
         isDisabled={!isSSOAvailable}
+        dataTestId="enable_sso_toggle_button"
       />
 
       <div className="toggle-caption">

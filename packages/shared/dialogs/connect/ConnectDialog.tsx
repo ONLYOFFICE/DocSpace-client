@@ -304,6 +304,7 @@ const ConnectDialog = ({
               onClick={onReconnect}
               scale
               isDisabled={isLoading}
+              testId="connect_dialog_reconnect_button"
             />
           </FieldContainer>
         ) : (
@@ -328,6 +329,7 @@ const ConnectDialog = ({
                   onChange={onChangeUrl}
                   type={InputType.text}
                   size={InputSize.base}
+                  testId="connect_dialog_url_input"
                 />
               </FieldContainer>
             ) : null}
@@ -351,6 +353,7 @@ const ConnectDialog = ({
                 onChange={onChangeLogin}
                 type={InputType.text}
                 size={InputSize.base}
+                testId="connect_dialog_login_input"
               />
             </FieldContainer>
             <FieldContainer
@@ -372,6 +375,7 @@ const ConnectDialog = ({
                 // value={passwordValue}
                 onChange={onChangePassword}
                 size={InputSize.base}
+                testId="connect_dialog_password_input"
               />
             </FieldContainer>
           </>
@@ -393,6 +397,7 @@ const ConnectDialog = ({
               onChange={onChangeFolderName}
               type={InputType.text}
               size={InputSize.base}
+              testId="connect_dialog_folder_title_input"
             />
           </FieldContainer>
         ) : null}
@@ -408,6 +413,7 @@ const ConnectDialog = ({
           onClick={onSave}
           isDisabled={isLoading}
           isLoading={isLoading}
+          testId="connect_dialog_save_button"
         />
         <Button
           id="cancel"
@@ -417,6 +423,7 @@ const ConnectDialog = ({
           scale={isAccount}
           onClick={onClose}
           isDisabled={isLoading}
+          testId="connect_dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

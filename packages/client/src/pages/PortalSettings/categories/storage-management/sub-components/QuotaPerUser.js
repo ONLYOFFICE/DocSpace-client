@@ -48,6 +48,7 @@ const QuotaPerUserComponent = (props) => {
       {...initialSizeProp}
       isQuotaSet={isDefaultUsersQuotaSet}
       tabIndex={2}
+      dataTestId="quota_user"
     />
   );
 };

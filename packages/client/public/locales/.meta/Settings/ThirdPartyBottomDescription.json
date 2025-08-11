@@ -3,7 +3,7 @@
   "content": "Got any problems? Contact our <2>Support Team.</2>",
   "content_en_sha1_hash": "b32f368f23a2f7b36d83a5c446ed8e499d7ca8cf",
   "created_at": "2025-05-19T21:30:52.888Z",
-  "updated_at": "2025-05-24T03:56:47.002Z",
+  "updated_at": "2025-08-11T18:11:59.269Z",
   "comment": {
     "text": "This translation key is used for a support contact message that appears on a consumer modal dialog. It provides an invitation to users who still have questions about connecting a third-party service or need technical assistance.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/sub-components/consumerModalDialog.js",
-      "line_number": 90,
+      "line_number": 91,
       "context": "</Trans>\n );\n \n this.supportTeamDescription = (\n <StyledBox>\n <Trans t={t} i18nKey=\"ThirdPartyBottomDescription\" ns=\"Settings\">\n If you still have some questions on how to connect this service or\n need technical assistance, please feel free to contact our{\" \"}\n <Link\n id=\"support-team-link\"\n color={theme.client.settings.integration.linkColor}",
       "module": "/packages/client"
     }

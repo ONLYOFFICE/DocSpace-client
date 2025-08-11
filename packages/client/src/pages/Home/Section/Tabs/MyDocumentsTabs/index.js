@@ -23,9 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
@@ -36,6 +37,8 @@ import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
 } from "@docspace/shared/utils/filterConstants";
+import { getCategoryType } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const MyDocumentsTabs = ({
   isPersonalRoom,
@@ -48,6 +51,17 @@ const MyDocumentsTabs = ({
   isPersonalReadOnly,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
+  const location = useLocation();
+
+  const [selectedTab, setSelectedTab] = React.useState("my");
+
+  React.useEffect(() => {
+    const categoryType = getCategoryType(location);
+
+    if (categoryType !== CategoryType.Personal) return;
+    const recentTab = getObjectByLocation(location)?.folder === "recent";
+    setSelectedTab(recentTab ? "recent" : "my");
+  }, [location]);
 
   if (isPersonalReadOnly) return null;
 
@@ -65,6 +79,8 @@ const MyDocumentsTabs = ({
   const onSelect = (e) => {
     const filter = FilesFilter.getDefault();
     const url = window.DocSpace.location.pathname;
+
+    setSelectedTab(e.id);
 
     const recent = e.id === "recent";
 
@@ -90,16 +106,16 @@ const MyDocumentsTabs = ({
   };
 
   const showTabs = (isPersonalRoom || isRecentTab) && isRoot;
-  const startSelectId =
-    tabs.length &&
-    getObjectByLocation(window.DocSpace.location)?.folder === "recent"
-      ? tabs[1].id
-      : tabs[0].id;
 
   if (showTabs && showTabsLoader) return <SectionSubmenuSkeleton />;
 
   return showTabs ? (
-    <Tabs items={tabs} selectedItemId={startSelectId} onSelect={onSelect} />
+    <Tabs
+      items={tabs}
+      selectedItemId={selectedTab}
+      onSelect={onSelect}
+      withAnimation
+    />
   ) : null;
 };
 

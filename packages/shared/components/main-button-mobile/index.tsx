@@ -357,7 +357,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
           open={isOpen}
           withBackdrop={false}
           directionY="top"
-          directionX="right"
+          directionX="left"
           isDefaultMode={false}
           manualWidth={manualWidth || "400px"}
           data-testid="dropdown"

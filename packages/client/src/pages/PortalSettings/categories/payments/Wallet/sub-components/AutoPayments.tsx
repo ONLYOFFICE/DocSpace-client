@@ -266,6 +266,7 @@ const AutoPayments = ({
           type={InputType.text}
           pattern="\d+"
           isDisabled={isDisabled}
+          testId="top_up_min_balance_input"
         />
         {description(5, 1000)}
       </div>
@@ -287,6 +288,7 @@ const AutoPayments = ({
           type={InputType.text}
           pattern="\d+"
           isDisabled={isDisabled}
+          testId="top_up_max_balance_input"
         />
         {description(minUpToBalance, 5000)}
       </div>
@@ -306,6 +308,7 @@ const AutoPayments = ({
               !minBalance ||
               !upToBalance
             }
+            testId="save_auto_payment_button"
           />
           <Button
             key="CancelButton"
@@ -313,6 +316,7 @@ const AutoPayments = ({
             size={ButtonSize.small}
             onClick={onClose}
             isDisabled={isDisabled || isLoading}
+            testId="cancel_auto_payment_button"
           />
         </div>
       ) : null}
@@ -336,6 +340,7 @@ const AutoPayments = ({
         size={ButtonSize.small}
         onClick={onEditClick}
         isDisabled={isDisabled}
+        testId="edit_auto_payment_button"
       />
     </div>
   );
@@ -355,6 +360,7 @@ const AutoPayments = ({
           onChange={onToggleClick}
           className={styles.toggleButton}
           isDisabled={isDisabled || !walletCustomerEmail}
+          dataTestId="auto_payments_toggle_button"
         />
       </div>
 

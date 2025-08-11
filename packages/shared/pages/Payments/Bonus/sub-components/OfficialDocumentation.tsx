@@ -56,6 +56,7 @@ export const OfficialDocumentation = ({
             href={enterpriseInstallScriptUrl}
             target={LinkTarget.blank}
             color="accent"
+            dataTestId="enterprise_install_script_docker_link"
           >
             {t("UpgradeToProBannerInstructionReadNow")}
           </Link>
@@ -70,6 +71,7 @@ export const OfficialDocumentation = ({
             href={enterpriseInstallScriptUrl}
             target={LinkTarget.blank}
             color="accent"
+            dataTestId="enterprise_install_script_linux_link"
           >
             {t("UpgradeToProBannerInstructionReadNow")}
           </Link>
@@ -84,6 +86,7 @@ export const OfficialDocumentation = ({
             href={enterpriseInstallWindowsUrl}
             target={LinkTarget.blank}
             color="accent"
+            dataTestId="enterprise_install_script_windows_link"
           >
             {t("UpgradeToProBannerInstructionReadNow")}
           </Link>
@@ -100,6 +103,7 @@ export const OfficialDocumentation = ({
             href={dataBackupUrl}
             target={LinkTarget.blank}
             color="accent"
+            dataTestId="data_backup_link"
           >
             backup your data
           </Link>

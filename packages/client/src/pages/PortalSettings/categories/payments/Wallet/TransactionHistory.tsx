@@ -89,14 +89,17 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     {
       key: "allTransactions",
       label: t("AllTransactions"),
+      dataTestId: "all_transactions_option",
     },
     {
       key: "credit",
       label: t("Credit"),
+      dataTestId: "credit_transactions_option",
     },
     {
       key: "debit",
       label: t("Debit"),
+      dataTestId: "debit_transactions_option",
     },
   ];
 
@@ -269,6 +272,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               outerDate={startDate}
               hideCross
               autoPosition={isTablet}
+              testId="transaction_start_date_picker"
             />
           ),
           2: (
@@ -283,6 +287,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               outerDate={endDate}
               hideCross
               autoPosition={isTablet}
+              testId="transaction_end_date_picker"
             />
           ),
         }}
@@ -303,6 +308,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         showDisabledItems
         size={ComboBoxSize.content}
         scaled={false}
+        testId="transaction_type_combobox"
+        dropDownTestId="transaction_type_dropdown"
       />
       {datesComponent}
     </div>
@@ -315,6 +322,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
         onClick={openFilterDialog}
         isOpen={isFilterDialogVisible}
         isShowIndicator={hasAppliedDateFilter}
+        dataTestId="transaction_filter_icon"
       />
     </div>
   );
@@ -363,6 +371,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               isLoading={isFormationHistory}
               isDisabled={isNotPaidPeriod}
               scale={isMobile}
+              testId="download_report_button"
             />
             <Text as="span" className={styles.downloadReportDescription}>
               {t("Settings:ReportSaveLocation", {
@@ -397,6 +406,8 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
                   showDisabledItems
                   size={ComboBoxSize.content}
                   scaled
+                  testId="transaction_type_combobox"
+                  dropDownTestId="transaction_type_dropdown"
                 />
               </div>
               <div className={styles.filterDialogDivider} />
@@ -416,12 +427,14 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
               isDisabled={!isChanged}
               primary
               scale
+              testId="apply_filter_button"
             />
             <Button
               onClick={closeFilterDialog}
               size={ButtonSize.medium}
               label={t("Common:CancelButton")}
               scale
+              testId="cancel_filter_button"
             />
           </ModalDialog.Footer>
         </ModalDialog>

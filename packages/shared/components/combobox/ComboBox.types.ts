@@ -140,7 +140,7 @@ export type TComboboxProps = {
   /** No border */
   noBorder?: boolean;
   /** Offset left */
-  offsetLeft?: number;
+  offsetX?: number;
   /** Opened state */
   opened?: boolean;
   /** List of options */

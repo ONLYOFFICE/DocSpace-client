@@ -294,6 +294,7 @@ const DeleteProfileEverDialogComponent = ({
           scale
           onClick={onDeleteProfileEver}
           isLoading={isRequestRunning}
+          testId="dialog_delete_profile_button"
         />
         <Button
           className="cancel-button"
@@ -302,6 +303,7 @@ const DeleteProfileEverDialogComponent = ({
           scale
           isDisabled={isRequestRunning}
           onClick={onClose}
+          testId="dialog_delete_profile_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

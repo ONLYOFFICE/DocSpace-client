@@ -77,7 +77,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   noBorder = false,
   manualWidth,
   isDisabled,
-  directionX = "right",
+  directionX = "left",
   directionY = "bottom",
   isSelectionDisabled,
   selectionErrorText,

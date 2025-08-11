@@ -65,6 +65,7 @@ const RequestButtonContainer = ({ isDisabled, isLoading }) => {
         isDisabled={isLoading || isDisabled}
         onClick={toDoRequest}
         isLoading={isLoading}
+        testId="sales_request_button"
       />
     </StyledBody>
   );

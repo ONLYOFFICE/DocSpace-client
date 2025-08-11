@@ -160,7 +160,6 @@ export default function withContent(WrappedContent) {
 
   return inject(({ settingsStore, peopleStore, userStore }, { item }) => {
     const { theme, standalone } = settingsStore;
-    const { getTargetUser } = peopleStore.targetUserStore;
     const { getModel } = peopleStore.contextOptionsStore;
     const { openGroupAction } = peopleStore.groupsStore;
     const {
@@ -185,7 +184,6 @@ export default function withContent(WrappedContent) {
       theme,
       standalone,
       currentUserId: userStore.user.id,
-      fetchProfile: getTargetUser,
       checked,
       isSeveralSelection: selection.length > 1,
       isActive,

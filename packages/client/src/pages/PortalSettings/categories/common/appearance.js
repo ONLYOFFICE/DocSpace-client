@@ -607,7 +607,7 @@ const Appearance = (props) => {
     </ModalDialog>
   ) : (
     <DropDown
-      directionX="right"
+      directionX="left"
       manualY="62px"
       withBackdrop={false}
       isDefaultMode={false}
@@ -650,7 +650,7 @@ const Appearance = (props) => {
     </ModalDialog>
   ) : (
     <DropDown
-      directionX="right"
+      directionX="left"
       manualY="62px"
       withBackdrop={false}
       isDefaultMode={false}

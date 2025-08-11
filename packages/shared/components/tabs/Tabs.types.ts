@@ -37,7 +37,7 @@ export type TTabItem = {
   /** State of tab inclusion. State only works for tabs with a secondary theme. */
   isDisabled?: boolean;
   /** Sets a callback function that is triggered when the tab is selected */
-  onClick?: () => void;
+  onClick?: () => void | Promise<void>;
   /** Badge shown after tab. Only for primary tabs type */
   badge?: React.ReactNode;
 

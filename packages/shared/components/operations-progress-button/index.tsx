@@ -370,7 +370,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
             withBackdrop={false}
             manualWidth="344px"
             directionY="top"
-            directionX="right"
+            directionX="left"
             fixedDirection
             isDefaultMode={false}
             className={classNames(styles.styledDropDown)}

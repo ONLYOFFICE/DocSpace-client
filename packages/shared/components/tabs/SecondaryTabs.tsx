@@ -262,7 +262,7 @@ const SecondaryTabs = (props: TabsProps) => {
                     minWidth: referenceTabSize ?? "unset",
                   }
             }
-            data-testid={item.name}
+            data-testid={`${item.id}_subtab`}
           >
             {item.iconName ? (
               <ReactSVG className={styles.tabIcon} src={item.iconName} />

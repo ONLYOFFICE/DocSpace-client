@@ -146,6 +146,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               lineHeight="20px"
               noSelect
               truncate
+              dataTestId="plugin_upload_date"
             >
               {t("Common:UploadDate")}
             </Text>
@@ -188,6 +189,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               target="_blank"
               noSelect
               isHovered
+              dataTestId="plugin_home_page_link"
             >
               {plugin.homePage}
             </Link>

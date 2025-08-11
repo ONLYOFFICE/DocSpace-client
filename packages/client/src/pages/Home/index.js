@@ -160,7 +160,6 @@ const PureHome = (props) => {
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
-    showText,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -354,7 +353,6 @@ const PureHome = (props) => {
   sectionProps.onDragLeaveEmpty = onDragLeaveEmpty;
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
-  sectionProps.showText = showText;
 
   const hasVisibleContent =
     !isEmptyPage ||
@@ -571,7 +569,6 @@ export const Component = inject(
       allowInvitingGuests,
       checkGuests,
       hasGuests,
-      showText,
     } = settingsStore;
 
     const {
@@ -733,7 +730,6 @@ export const Component = inject(
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
-      showText,
     };
   },
 )(observer(Home));

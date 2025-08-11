@@ -127,7 +127,6 @@ const Section = (props: SectionProps) => {
     clearDropPreviewLocation,
     dropTargetPreview,
     startDropPreview,
-    showText,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -336,7 +335,6 @@ const Section = (props: SectionProps) => {
               isInfoPanelVisible={isInfoPanelVisible}
               dropTargetFolderName={dropTargetPreview}
               isDragging={dragging}
-              isArticleExpanded={showText}
             />
           ) : null}
         </SectionContainer>

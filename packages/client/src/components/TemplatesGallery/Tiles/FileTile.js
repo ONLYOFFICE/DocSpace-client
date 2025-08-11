@@ -108,7 +108,7 @@ const Styled = styled.div`
     width: 32px;
     border-radius: 3px;
     background: ${globalColors.white};
-    box-shadow: 0px 2px 4px 0px #040f1b29;
+    box-shadow: 0px 2px 4px 0px ${globalColors.boxShadowDarkColor};
     display: none;
     cursor: pointer;
 

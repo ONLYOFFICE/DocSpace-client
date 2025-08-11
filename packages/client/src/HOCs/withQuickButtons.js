@@ -41,7 +41,6 @@ export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
     constructor(props) {
       super(props);
-
       this.state = {
         isLoading: false,
       };
@@ -51,20 +50,12 @@ export default function withQuickButtons(WrappedComponent) {
       const { item, lockFileAction, t } = this.props;
       const { locked, id, security } = item;
       const { isLoading } = this.state;
-
-      if (security?.Lock && !isLoading) {
-        this.setState({ isLoading: true });
-        return lockFileAction(id, !locked)
-          .then(() =>
-            locked
-              ? toastr.success(t("Translations:FileUnlocked"))
-              : toastr.success(t("Translations:FileLocked")),
-          )
-          .catch(
-            (err) => toastr.error(err),
-            this.setState({ isLoading: false }),
-          );
-      }
+      if (!security?.Lock || isLoading) return;
+      this.setState({ isLoading: true });
+      return lockFileAction(id, !locked)
+        .then(() => toastr.success(t("Translations:FileUnlocked")))
+        .catch((err) => toastr.error(err))
+        .finally(() => this.setState({ isLoading: false }));
     };
 
     onClickDownload = () => {
@@ -159,8 +150,6 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     render() {
-      const { isLoading } = this.state;
-
       const {
         t,
         theme,
@@ -168,12 +157,10 @@ export default function withQuickButtons(WrappedComponent) {
         isAdmin,
         sectionWidth,
         viewAs,
-        folderCategory,
         isPublicRoom,
         isPersonalRoom,
         isArchiveFolder,
         isIndexEditingMode,
-        currentDeviceType,
         roomLifetime,
         isTemplatesFolder,
       } = this.props;
@@ -191,18 +178,15 @@ export default function withQuickButtons(WrappedComponent) {
           sectionWidth={sectionWidth}
           isAdmin={isAdmin}
           viewAs={viewAs}
-          isDisabled={isLoading}
           isPublicRoom={isPublicRoom}
           isPersonalRoom={isPersonalRoom}
-          onClickLock={this.onClickLock}
           onClickDownload={this.onClickDownload}
           onClickFavorite={this.onClickFavorite}
           onClickShare={this.onClickShare}
-          folderCategory={folderCategory}
+          onClickLock={this.onClickLock}
           onCopyPrimaryLink={this.onCopyPrimaryLink}
           isArchiveFolder={isArchiveFolder}
           isIndexEditingMode={isIndexEditingMode}
-          currentDeviceType={currentDeviceType}
           showLifetimeIcon={showLifetimeIcon}
           expiredDate={expiredDate}
           roomLifetime={roomLifetime}
@@ -235,29 +219,20 @@ export default function withQuickButtons(WrappedComponent) {
       selectedFolderStore,
     }) => {
       const {
-        lockFileAction,
         setFavoriteAction,
         onSelectItem,
         onCreateRoomFromTemplate,
+        lockFileAction,
       } = filesActionsStore;
-      const {
-        isDocumentsFolder,
-        isArchiveFolderRoot,
-        isTrashFolder,
-        isPersonalRoom,
-        isArchiveFolder,
-        isTemplatesFolder,
-      } = treeFoldersStore;
+      const { isPersonalRoom, isArchiveFolder, isTemplatesFolder } =
+        treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
 
       const { setSharingPanelVisible } = dialogsStore;
 
-      const folderCategory =
-        isTrashFolder || isArchiveFolderRoot || isDocumentsFolder;
-
       const { isPublicRoom } = publicRoomStore;
-      const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
+      const { getPrimaryFileLink, setShareChanged, infoPanelRoomSelection } =
         infoPanelStore;
 
       const { getManageLinkOptions } = contextOptionsStore;
@@ -265,13 +240,10 @@ export default function withQuickButtons(WrappedComponent) {
       return {
         theme: settingsStore.theme,
         culture: settingsStore.culture,
-        currentDeviceType: settingsStore.currentDeviceType,
         isAdmin: authStore.isAdmin,
-        lockFileAction,
         setFavoriteAction,
         onSelectItem,
         setSharingPanelVisible,
-        folderCategory,
         isPublicRoom,
         isPersonalRoom,
         getPrimaryLink: filesStore.getPrimaryLink,
@@ -279,11 +251,13 @@ export default function withQuickButtons(WrappedComponent) {
         getPrimaryFileLink,
         setShareChanged,
         isIndexEditingMode,
-        roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
+        roomLifetime:
+          infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         setBufferSelection: filesStore.setBufferSelection,
+        lockFileAction,
       };
     },
   )(observer(WithQuickButtons));

@@ -42,7 +42,6 @@ import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import { TUser } from "@docspace/shared/api/people/types";
 import {
   getRoomMembers,
   getTemplateAvailable,
@@ -89,7 +88,7 @@ type TemplateAccessSettingsContainer =
       onSetAccessSettings?: undefined;
       inviteItems?: undefined;
       setInviteItems?: undefined;
-      updateInfoPanelMembers: (t: TTranslation) => void;
+      updateInfoPanelMembers: () => void;
       templateIsAvailable: undefined;
       setTemplateIsAvailable: undefined;
     };
@@ -158,6 +157,10 @@ const TemplateAccessSettingsPanel = ({
     setIsVisible(false);
   }, [setInfoPanelIsMobileHidden, setIsVisible]);
 
+  const onBackClick = () => {
+    if (addUsersPanelVisible) setAddUsersPanelVisible(false);
+  };
+
   const onCloseUsersPanel = () => {
     if (isContainer) setUsersPanelIsVisible(false);
     else setAddUsersPanelVisible(false);
@@ -187,8 +190,16 @@ const TemplateAccessSettingsPanel = ({
     };
   }, [isMobileView, onMouseDown]);
 
-  const onKeyPress = (e: KeyboardEvent) =>
-    (e.key === "Esc" || e.key === "Escape") && onClose();
+  const onKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Esc" || e.key === "Escape") onClose();
+    if (
+      e.key === "Backspace" &&
+      e.target instanceof HTMLElement &&
+      e.target.nodeName !== "INPUT" &&
+      e.target.nodeName !== "TEXTAREA"
+    )
+      onCloseAccessSettings?.();
+  };
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyPress);
@@ -204,8 +215,8 @@ const TemplateAccessSettingsPanel = ({
       getTemplateAvailable(templateId),
     ])
       .then(([members, available]) => {
-        if ((members as { items: TUser[] })?.items?.length) {
-          const convertedItems = (members as { items: TUser[] }).items.map(
+        if (members?.items?.length) {
+          const convertedItems = members.items.map(
             ({ access, isOwner, sharedTo }) => {
               return {
                 templateAccess: access,
@@ -214,7 +225,7 @@ const TemplateAccessSettingsPanel = ({
               };
             },
           );
-          setAccessItems(convertedItems as TSelectorItem[]);
+          setAccessItems(convertedItems as unknown as TSelectorItem[]);
         }
 
         prevIsAvailable.current = available as boolean;
@@ -248,7 +259,7 @@ const TemplateAccessSettingsPanel = ({
 
     if (prevIsAvailable.current !== isAvailable) {
       setTemplateAvailable?.(templateId, isAvailable)
-        ?.then(() => updateInfoPanelMembers(t))
+        ?.then(() => updateInfoPanelMembers())
         .finally(() => {
           setIsLoading(false);
           onClose();
@@ -271,7 +282,7 @@ const TemplateAccessSettingsPanel = ({
       notify: false,
       sharingMessage: "",
     })
-      .then(() => updateInfoPanelMembers(t))
+      .then(() => updateInfoPanelMembers())
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsLoading(false);
@@ -312,6 +323,7 @@ const TemplateAccessSettingsPanel = ({
           onClick={onCloseAccessSettings}
           isFill
           isClickable
+          dataTestId="template_access_settings_back_button"
         />
         <Text
           fontSize="21px"
@@ -328,6 +340,7 @@ const TemplateAccessSettingsPanel = ({
           onClick={onClosePanels}
           isClickable
           isStroke
+          dataTestId="template_access_settings_close_button"
         />
       </StyledTemplateAccessSettingsHeader>
       <Scrollbar>
@@ -340,6 +353,7 @@ const TemplateAccessSettingsPanel = ({
                 className="invite-via-link"
                 isChecked={isAvailable}
                 onChange={onAvailableChange}
+                dataTestId="template_access_settings_available"
               />
             </StyledSubHeader>
             <StyledDescription>
@@ -383,6 +397,7 @@ const TemplateAccessSettingsPanel = ({
           primary
           label={t("Common:SaveButton")}
           onClick={onSubmit}
+          testId="template_access_settings_save_button"
         />
         <Button
           className="cancel-button"
@@ -391,6 +406,7 @@ const TemplateAccessSettingsPanel = ({
           isDisabled={isLoading}
           onClick={onCloseAccessSettings}
           label={t("Common:CancelButton")}
+          testId="template_access_settings_footer_cancel_button"
         />
       </StyledTemplateAccessSettingsFooter>
     </StyledTemplateAccessSettingsContainer>
@@ -401,6 +417,7 @@ const TemplateAccessSettingsPanel = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
+      onBackClick={onBackClick}
       withBodyScroll
       isLoading={!tReady || modalIsLoading}
       onSubmit={onSubmit}
@@ -432,6 +449,7 @@ const TemplateAccessSettingsPanel = ({
                 className="invite-via-link"
                 isChecked={isAvailable}
                 onChange={onAvailableChange}
+                dataTestId="template_access_settings_modal_available"
               />
             </StyledSubHeader>
             <StyledDescription>
@@ -474,6 +492,7 @@ const TemplateAccessSettingsPanel = ({
           primary
           label={t("Common:SaveButton")}
           type="submit"
+          testId="template_access_settings_modal_save_button"
         />
         <Button
           className="cancel-button"
@@ -482,6 +501,7 @@ const TemplateAccessSettingsPanel = ({
           isDisabled={isLoading}
           onClick={onClose}
           label={t("Common:CancelButton")}
+          testId="template_access_settings_modal_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -93,7 +93,7 @@ export const AdditionalResources = ({
           "settings_unavailable",
         )}
       >
-        {t("AdditionalResourcesDescription", {
+        {t("Common:AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>
@@ -130,6 +130,8 @@ export const AdditionalResources = ({
         disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
         additionalClassSaveButton="additional-resources-save"
         additionalClassCancelButton="additional-resources-cancel"
+        saveButtonDataTestId="additional-resources-save-button"
+        cancelButtonDataTestId="additional-resources-cancel-button"
       />
     </div>
   );

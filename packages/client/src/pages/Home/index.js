@@ -37,6 +37,8 @@ import {
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
 import Section from "@docspace/shared/components/section";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { toastr } from "@docspace/shared/components/toast";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -53,36 +55,25 @@ import AccountsDialogs from "./Section/ContactsBody/Dialogs";
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
 
-import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
+import {
+  InfoPanelActions,
+  InfoPanelBodyContent,
+  InfoPanelHeaderContent,
+} from "./InfoPanel";
 
 import MediaViewer from "./MediaViewer";
 
-import {
-  useFiles,
-  useSDK,
-  useOperations,
-  useContacts,
-  useSettings,
-} from "./Hooks";
+import { useSDK, useOperations } from "./Hooks";
 
 const PureHome = (props) => {
   const {
-    fetchFiles,
-    fetchRooms,
+    currentClientView,
+    isChangePageRequestRunning,
 
-    // homepage,
-    setIsSectionHeaderLoading,
-    setIsSectionBodyLoading,
     isLoading,
 
-    setToPreviewFile,
-    playlist,
-
     folderSecurity,
-    getFileInfo,
-    gallerySelected,
-    setIsUpdatingRowItem,
-    setIsPreview,
+
     selectedFolderStore,
     t,
     startUpload,
@@ -123,10 +114,7 @@ const PureHome = (props) => {
     isEmptyPage,
 
     contactsViewAs,
-    getUsersList,
-    getGroups,
-    updateCurrentGroup,
-    setSelectedNode,
+
     onClickBack,
 
     showFilterLoader,
@@ -141,13 +129,10 @@ const PureHome = (props) => {
     userId,
     getFolderModel,
     getContactsModel,
-    scrollToTop,
     isEmptyGroups,
-    wsCreatedPDFForm,
-    setContactsTab,
+
     isUsersEmptyView,
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
+
     secondaryOperationsCompleted,
     primaryOperationsCompleted,
     secondaryActiveOperations,
@@ -168,13 +153,14 @@ const PureHome = (props) => {
 
     allowInvitingGuests,
     checkGuests,
-    hasGuests,
     sectionWithTabs,
   } = props;
 
-  // console.log(t("ComingSoon"))
+  const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
 
   const location = useLocation();
+
+  // console.log(t("Common:ComingSoon"))
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
@@ -182,88 +168,41 @@ const PureHome = (props) => {
 
   const view = getContactsView(location);
   if (allowInvitingGuests === false && view === "guests") checkGuests();
-  const contactsView = allowInvitingGuests
-    ? view
-    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
-      ? "people"
-      : view;
 
-  const isContactsPage = !!contactsView;
+  const isContactsPage =
+    currentClientView === "users" || currentClientView === "groups";
+
   const isContactsEmptyView =
-    contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
+    currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
 
-  const setIsLoading = React.useCallback(
-    (param, withoutTimer, withHeaderLoader) => {
-      if (withHeaderLoader)
-        return setIsSectionHeaderLoading(param, !withoutTimer);
+  const onDrop = (f, uploadToFolder) => {
+    if (isContactsPage) return;
 
-      setIsSectionBodyLoading(param, !withoutTimer);
-    },
-    [setIsSectionHeaderLoading, setIsSectionBodyLoading],
-  );
+    if (
+      folderSecurity &&
+      hasOwnProperty(folderSecurity, "Create") &&
+      !folderSecurity.Create
+    )
+      return;
 
-  const { onDrop } = useFiles({
-    t,
-    dragging,
-    setDragging,
-    disableDrag,
-    createFoldersTree,
-    startUpload,
-    fetchFiles,
-    fetchRooms,
-    setIsLoading,
+    dragging && setDragging(false);
 
-    isContactsPage,
-    isSettingsPage,
+    if (disableDrag) return;
 
-    location,
-
-    playlist,
-
-    getFileInfo,
-    setToPreviewFile,
-    setIsPreview,
-
-    setIsUpdatingRowItem,
-
-    gallerySelected,
-    folderSecurity,
-    userId,
-
-    scrollToTop,
-    selectedFolderStore,
-    wsCreatedPDFForm,
-  });
+    createFoldersTree(t, f, uploadToFolder)
+      .then((fItem) => {
+        if (fItem.length > 0) startUpload(fItem, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err, null, 0, true);
+      });
+  };
 
   useOperations({
     clearUploadData,
     clearUploadedFiles,
     primaryOperationsArray,
     clearConversionData,
-  });
-
-  useContacts({
-    isContactsPage,
-    contactsView,
-
-    setContactsTab,
-
-    setIsLoading,
-    scrollToTop,
-    setSelectedNode,
-
-    getUsersList,
-    getGroups,
-    updateCurrentGroup,
-
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
-  });
-
-  useSettings({
-    t,
-    isSettingsPage,
-    setIsLoading,
   });
 
   useSDK({
@@ -378,6 +317,12 @@ const PureHome = (props) => {
   const shouldRenderSectionFilter =
     (isValidMainContent || isValidContactsContent) && !isSettingsPage;
 
+  React.useEffect(() => {
+    if (isChangePageRequestRunning) return;
+
+    setShouldShowFilter(shouldRenderSectionFilter);
+  }, [shouldRenderSectionFilter, isChangePageRequestRunning]);
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -407,7 +352,7 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldRenderSectionFilter ? (
+        {shouldShowFilter ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />
@@ -417,7 +362,7 @@ const PureHome = (props) => {
           </Section.SectionFilter>
         ) : null}
 
-        <Section.SectionBody isAccounts={isContactsPage}>
+        <Section.SectionBody>
           <Outlet />
         </Section.SectionBody>
 
@@ -428,6 +373,7 @@ const PureHome = (props) => {
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
       </SectionWrapper>
+      <InfoPanelActions />
     </>
   );
 };
@@ -471,6 +417,8 @@ export const Component = inject(
       setIsSectionFilterLoading,
       isLoading,
       showFilterLoader,
+      isChangePageRequestRunning,
+      currentClientView,
     } = clientLoadingStore;
 
     const { getFolderModel } = contextOptionsStore;
@@ -601,6 +549,8 @@ export const Component = inject(
     // }
 
     return {
+      currentClientView,
+      isChangePageRequestRunning,
       // homepage: config.homepage,
       firstLoad,
       dragging,

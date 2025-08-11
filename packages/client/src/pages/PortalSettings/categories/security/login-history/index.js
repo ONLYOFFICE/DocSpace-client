@@ -47,6 +47,8 @@ const LoginHistory = (props) => {
     securityLifetime,
     isAuditAvailable,
     resetIsInit,
+    tfaEnabled,
+    currentColorScheme,
   } = props;
 
   useEffect(() => {
@@ -100,36 +102,46 @@ const LoginHistory = (props) => {
         })}
         getReport={getLoginHistoryReport}
         isSettingNotPaid={!isAuditAvailable}
+        tfaEnabled={tfaEnabled}
+        currentColorScheme={currentColorScheme}
+        withCampaign
       />
     )
   );
 };
 
-export default inject(({ setup, settingsStore, currentQuotaStore }) => {
-  const {
-    getLoginHistory,
-    security,
-    viewAs,
-    getLoginHistoryReport,
-    getLifetimeAuditSettings,
-    setLifetimeAuditSettings,
-    securityLifetime,
-    resetIsInit,
-  } = setup;
-  const { theme } = settingsStore;
+export default inject(
+  ({ setup, settingsStore, currentQuotaStore, tfaStore }) => {
+    const {
+      getLoginHistory,
+      security,
+      viewAs,
+      getLoginHistoryReport,
+      getLifetimeAuditSettings,
+      setLifetimeAuditSettings,
+      securityLifetime,
+      resetIsInit,
+    } = setup;
+    const { theme, currentColorScheme } = settingsStore;
 
-  const { isAuditAvailable } = currentQuotaStore;
+    const { isAuditAvailable } = currentQuotaStore;
 
-  return {
-    getLoginHistory,
-    getLifetimeAuditSettings,
-    setLifetimeAuditSettings,
-    securityLifetime,
-    historyUsers: security.loginHistory.users,
-    theme,
-    viewAs,
-    getLoginHistoryReport,
-    isAuditAvailable,
-    resetIsInit,
-  };
-})(withTranslation("Settings")(LoginHistory));
+    const { tfaSettings } = tfaStore || {};
+    const tfaEnabled = tfaSettings && tfaSettings !== "none";
+
+    return {
+      getLoginHistory,
+      getLifetimeAuditSettings,
+      setLifetimeAuditSettings,
+      securityLifetime,
+      historyUsers: security.loginHistory.users,
+      theme,
+      currentColorScheme,
+      viewAs,
+      getLoginHistoryReport,
+      isAuditAvailable,
+      resetIsInit,
+      tfaEnabled,
+    };
+  },
+)(withTranslation("Settings")(LoginHistory));

@@ -3,7 +3,7 @@
   "content": "Every day",
   "content_en_sha1_hash": "3b2eb5131055ad07ac1d08de2f11f900286a51b5",
   "created_at": "2025-05-19T21:30:45.130Z",
-  "updated_at": "2025-06-30T12:20:31.696Z",
+  "updated_at": "2025-08-04T07:30:01.693Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Every day\" in various contexts within the application, likely as a frequency option for automated backup schedules. It appears on a category page where users can set up data management backups.",
     "is_auto": true,
@@ -17,7 +17,7 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/hooks/index.ts",
+      "file_path": "/packages/shared/pages/backup/auto-backup/hooks/index.ts",
       "line_number": 46,
       "context": "const periodsObject = useMemo(\n () => [\n {\n key: 0,\n label: t(\"Common:EveryDay\"),\n },\n {\n key: 1,\n label: t(\"Common:EveryWeek\"),\n },",
       "module": "/packages/shared"

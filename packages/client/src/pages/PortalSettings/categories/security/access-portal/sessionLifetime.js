@@ -241,6 +241,7 @@ const SessionLifetime = (props) => {
         {lifetimeSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="session_lifetime_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -258,16 +259,19 @@ const SessionLifetime = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="session_lifetime_radio_button_group"
         options={[
           {
             id: "session-lifetime-disabled",
             label: t("Common:Disabled"),
             value: "disabled",
+            dataTestId: "session_lifetime_disabled",
           },
           {
             id: "session-lifetime-enable",
             label: t("Common:Enable"),
             value: "enable",
+            dataTestId: "session_lifetime_enabled",
           },
         ]}
         selected={type ? "enable" : "disabled"}
@@ -281,6 +285,7 @@ const SessionLifetime = (props) => {
           </Text>
           <TextInput
             className="lifetime-input"
+            testId="session_lifetime_input"
             maxLength={4}
             isAutoFocussed={false}
             value={sessionLifetime}
@@ -304,6 +309,8 @@ const SessionLifetime = (props) => {
         hasScroll={false}
         additionalClassSaveButton="session-lifetime-save"
         additionalClassCancelButton="session-lifetime-cancel"
+        saveButtonDataTestId="session_lifetime_save_button"
+        cancelButtonDataTestId="session_lifetime_cancel_button"
       />
     </MainContainer>
   );

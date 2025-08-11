@@ -66,6 +66,7 @@ const IndexRowDataComponent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isIndexedFolder,
+    index,
   } = props;
 
   const [lastColumn, setLastColumn] = useState(
@@ -121,6 +122,7 @@ const IndexRowDataComponent = (props) => {
         )}
         style={dragStyles.style}
         value={value}
+        dataTestId={`index_cell_order_${index}`}
       >
         <IndexCell
           sideColor={theme.filesSection.tableView.row.sideColor}
@@ -138,6 +140,7 @@ const IndexRowDataComponent = (props) => {
             : "",
         )}
         value={value}
+        dataTestId={`index_cell_name_${index}`}
       >
         <FileNameCell
           theme={theme}
@@ -164,6 +167,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_author_${index}`}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -186,6 +190,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_created_${index}`}
         >
           <DateCell
             create
@@ -209,6 +214,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_modified_${index}`}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -231,6 +237,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_size_${index}`}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -253,6 +260,7 @@ const IndexRowDataComponent = (props) => {
               ? "index-buttons"
               : "",
           )}
+          dataTestId={`index_cell_type_${index}`}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}

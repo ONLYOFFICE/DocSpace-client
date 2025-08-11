@@ -67,7 +67,6 @@ const ArticleBodyContent = (props) => {
     isVisitor,
     setIsLoading,
 
-    clearFiles,
     selectedFolderId,
     showArticleLoader,
     setIsBurgerLoading,
@@ -77,7 +76,6 @@ const ArticleBodyContent = (props) => {
     userId,
     isFrame,
     setContactsTab,
-    abortAllFetch,
 
     displayBanners,
   } = props;
@@ -195,14 +193,6 @@ const ArticleBodyContent = (props) => {
           !window.location.pathname.includes("groups")
         : !!selectedFolderId;
 
-      if (isAccountsClick) {
-        abortAllFetch();
-        clearFiles();
-        setContactsTab("people");
-      } else {
-        setContactsTab(false);
-      }
-
       setHashDate(getHashDate);
 
       setSelection?.([]);
@@ -314,7 +304,7 @@ export default inject(
     campaignsStore,
     peopleStore,
   }) => {
-    const { clearFiles, setSelection, roomsFilter, abortAllFetch } = filesStore;
+    const { clearFiles, setSelection, roomsFilter } = filesStore;
     const {
       showArticleLoader,
 
@@ -382,7 +372,6 @@ export default inject(
       isFrame,
       setContactsTab: peopleStore.usersStore.setContactsTab,
 
-      abortAllFetch,
       displayBanners,
     };
   },

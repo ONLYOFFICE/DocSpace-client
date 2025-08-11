@@ -3,7 +3,7 @@
   "content": "Cancel import",
   "content_en_sha1_hash": "a4b5358b5d50407c88f27bef1900ad0b73db2767",
   "created_at": "2025-05-19T21:30:50.865Z",
-  "updated_at": "2025-06-30T12:20:31.413Z",
+  "updated_at": "2025-08-11T09:02:43.944Z",
   "comment": {
     "text": "This translation key is used for a \"Cancel Import\" button in data import steps within the portal settings. It appears as a label on a save button and, when clicked, triggers cancellation of the import process.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 281,
+      "line_number": 290,
       "context": "onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />\n \n {cancelUploadDialogVisible ? (\n <CancelUploadDialog",
       "module": "/packages/client"
     },

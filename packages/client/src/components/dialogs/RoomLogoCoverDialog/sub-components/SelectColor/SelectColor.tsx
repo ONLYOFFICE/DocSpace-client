@@ -93,9 +93,13 @@ export const SelectColor = ({
     <div className="select-color-container">
       <div className="color-name">{t("Common:Color")}</div>
       <div className="colors-container">
-        {logoColors.map((color) =>
+        {logoColors.map((color, index) =>
           color === selectedColor ? (
-            <SelectedColorItem key={color} color={color}>
+            <SelectedColorItem
+              key={color}
+              color={color}
+              data-testid={`color_item_selected_${index}`}
+            >
               <div className="circle" color={color} />
             </SelectedColorItem>
           ) : (
@@ -103,6 +107,7 @@ export const SelectColor = ({
               key={color}
               color={color}
               onClick={() => onChangeColor(color)}
+              data-testid={`color_item_${index}`}
             />
           ),
         )}
@@ -111,6 +116,7 @@ export const SelectColor = ({
             isSelected={isSelectedColorPicker}
             color={pickerColor!}
             ref={iconRef}
+            data-testid="color_item_custom_selected"
           >
             {isSelectedColorPicker ? (
               <div className="color-picker-circle">
@@ -137,6 +143,7 @@ export const SelectColor = ({
             isEmptyColor
             isSelected={openColorPicker}
             ref={iconRef}
+            data-testid="color_item_add_custom"
           >
             <IconButton
               className="select-color-plus-icon"

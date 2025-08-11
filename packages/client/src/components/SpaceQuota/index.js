@@ -91,6 +91,7 @@ const SpaceQuota = (props) => {
     needResetSelection,
     setSelected,
     inRoom,
+    dataTestId,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -195,6 +196,7 @@ const SpaceQuota = (props) => {
       hideColumns={hideColumns}
       className={className}
       isLoading={isLoading}
+      data-testid={dataTestId}
     >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
@@ -243,7 +245,7 @@ export default inject(
       defaultRoomsQuota,
     } = currentQuotaStore;
 
-    const { infoPanelSelection } = infoPanelStore;
+    const { infoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
     const inRoom = !!infoPanelSelection?.navigationPath;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
@@ -270,7 +272,7 @@ export default inject(
       updateQuota,
       resetQuota,
       defaultSize,
-      needResetSelection,
+      needResetSelection: !infoPanelVisible || needResetSelection,
       inRoom,
     };
   },

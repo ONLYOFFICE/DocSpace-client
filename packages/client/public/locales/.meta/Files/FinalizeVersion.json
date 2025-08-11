@@ -3,7 +3,7 @@
   "content": "Finalize version",
   "content_en_sha1_hash": "eb5221894a10d4c42f4d9e62795544c5824ee81c",
   "created_at": "2025-05-19T21:30:55.690Z",
-  "updated_at": "2025-06-02T10:20:51.504Z",
+  "updated_at": "2025-08-04T07:30:01.597Z",
   "comment": {
     "text": "This translation key is used to display a label for a button or action that finalizes a version. The text should be translated to indicate when a version can be finalized. It appears in an editing dialog or context where options are being configured.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1581,
+      "line_number": 1583,
       "context": "icon: HistoryFinalizedReactSvgUrl,\n items: [\n {\n id: \"option_finalize-version\",\n key: \"finalize-version\",\n label: t(\"FinalizeVersion\"),\n icon: HistoryFinalizedReactSvgUrl,\n onClick: () =>\n isEditing\n ? this.onShowEditingToast(t)\n : this.finalizeVersion(item.id, item.security),",
       "module": "/packages/client"
     }

@@ -67,6 +67,8 @@ export type BaseTileProps = {
   onRoomClick?: (e: React.MouseEvent) => void;
   checkboxContainerRef?: React.RefObject<HTMLDivElement | null>;
   forwardRef?: React.RefObject<HTMLDivElement | null>;
+  /** Data test id for the tile */
+  dataTestId?: string;
 };
 
 export type TileChildProps = {

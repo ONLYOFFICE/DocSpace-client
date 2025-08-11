@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import classNames from "classnames";
 
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
@@ -59,6 +59,8 @@ const TableRow = (props: TableRowProps) => {
     onClick,
     onDoubleClick,
     contextMenuCellStyle,
+    dataTestId,
+    contextMenuTestId,
   } = props;
 
   const cm = useRef<ContextMenuRefType>(null);
@@ -103,7 +105,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid="table-row"
+      data-testid={dataTestId}
     >
       {children}
       {isIndexEditingMode ? null : (
@@ -125,6 +127,7 @@ const TableRow = (props: TableRowProps) => {
                 getContextModel={getContextModel}
                 withBackdrop
                 badgeUrl={badgeUrl}
+                dataTestId={contextMenuTestId}
               />
               {renderContext ? (
                 <ContextMenuButton

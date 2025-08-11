@@ -84,6 +84,7 @@ export type ContextMenuType = {
   badgeLabel?: string;
   isPaidBadge?: boolean;
   preventNewTab?: boolean;
+  dataTestId?: string;
 };
 
 export type SeparatorType = {
@@ -95,6 +96,7 @@ export type SeparatorType = {
   disableColor?: string;
   isLoader?: boolean;
   style?: React.CSSProperties;
+  dataTestId?: string;
 };
 
 export type HeaderType =
@@ -165,6 +167,7 @@ export interface ContextMenuProps {
   ref?: React.RefObject<ContextMenuRefType | null>;
   badgeUrl?: string;
   headerOnlyMobile?: boolean;
+  dataTestId?: string;
 }
 
 export type TContextMenuRef = {

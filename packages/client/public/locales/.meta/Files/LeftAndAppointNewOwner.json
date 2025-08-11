@@ -3,7 +3,7 @@
   "content": "You have left the room and appointed a new owner",
   "content_en_sha1_hash": "70c6513ecf2f1d31d81657e1a47a62c5179cea80",
   "created_at": "2025-05-19T21:30:55.742Z",
-  "updated_at": "2025-07-10T11:11:07.104Z",
+  "updated_at": "2025-08-11T09:02:44.057Z",
   "comment": {
     "text": "This translation key is used for a confirmation message when a user leaves a room and appoints a new owner. It appears as a success notification after the action is completed in the application's files management system.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 3066,
+      "line_number": 3072,
       "context": "} else {\n this.filesStore.setInRoomFolder(roomId, false);\n }\n \n isOwner\n ? toastr.success(t(\"Files:LeftAndAppointNewOwner\"))\n : toastr.success(t(\"Files:YouLeftTheRoom\"));\n });\n };\n \n changeRoomOwner = (t, userId, isLeaveChecked = false) => {",
       "module": "/packages/client"
     }

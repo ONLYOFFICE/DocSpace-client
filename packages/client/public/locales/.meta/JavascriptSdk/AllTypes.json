@@ -3,7 +3,7 @@
   "content": "All types",
   "content_en_sha1_hash": "30c8a0fc9c1a2d13c8f0991ce4c53c98aa41720c",
   "created_at": "2025-05-19T21:30:54.359Z",
-  "updated_at": "2025-05-24T09:44:19.865Z",
+  "updated_at": "2025-08-04T07:30:01.388Z",
   "comment": {
     "text": "This translation key is used for a generic label that encompasses all file types and options. It is displayed as part of a UI component in the \"FileSelector\" page to provide a catch-all category. Translators should ensure this text fits within their language's style guidelines.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 88,
-      "context": "const { t, fetchExternalLinks, theme, logoText } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n { value: FilesSelectorFilterTypes.ALL, label: t(\"AllTypes\") },\n {\n value: \"EditorSupportedTypes\",\n label: t(\"AllTypesSupportedByEditor\", {\n organizationName: logoText,\n }),",
+      "line_number": 90,
+      "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const fileTypeDisplay = [\n {\n value: FilesSelectorFilterTypes.ALL,\n label: t(\"AllTypes\"),\n dataTestId: \"all_types_radio_button\",\n },\n {\n value: \"EditorSupportedTypes\",\n label: t(\"AllTypesSupportedByEditor\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
       "line_number": 76,
-      "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const roomTypeOptions = [\n {\n key: \"room-type-all\",\n label: t(\"AllTypes\"),\n roomType: undefined,\n default: true,\n },\n {\n key: \"room-filling-form-collaboration\",",
+      "context": "setDocumentTitle(t(\"JavascriptSdk\"));\n \n const roomTypeOptions = [\n {\n key: \"room-type-all\",\n label: t(\"AllTypes\"),\n roomType: undefined,\n default: true,\n // dataTestId: \"room_type_all_option\",\n },\n {",
       "module": "/packages/client"
     }
   ],

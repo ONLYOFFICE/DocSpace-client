@@ -3,7 +3,7 @@
   "content": "Plugin enabled",
   "content_en_sha1_hash": "3063607d780a2074562d9247ffab948b5167f20d",
   "created_at": "2025-05-19T21:30:47.389Z",
-  "updated_at": "2025-05-26T07:57:32.835Z",
+  "updated_at": "2025-08-04T07:30:01.617Z",
   "comment": {
     "text": "This translation key is used for a success message that appears when a plugin is enabled or disabled. It provides feedback to the user about the result of an action in the Plugin Store UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/PluginStore.ts",
-      "line_number": 436,
-      "context": ");\n \n if (typeof status !== \"boolean\") return plugin;\n \n if (status) {\n toastr.success(t(\"Common:PluginEnabled\"));\n this.activatePlugin(name);\n } else {\n toastr.success(t(\"Common:PluginDisabled\"));\n this.deactivatePlugin(name);\n }",
+      "line_number": 435,
+      "context": ");\n \n if (typeof status !== \"boolean\") return plugin;\n \n if (status) {\n if (t) toastr.success(t(\"Common:PluginEnabled\"));\n this.activatePlugin(name);\n } else {\n if (t) toastr.success(t(\"Common:PluginDisabled\"));\n this.deactivatePlugin(name);\n }",
       "module": "/packages/client"
     }
   ],

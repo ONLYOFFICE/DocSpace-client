@@ -163,7 +163,7 @@ const IdpSettings = (props) => {
         tooltipClass="logout-endpoint-url-tooltip icon-button"
         value={sloBinding?.includes("POST") ? sloUrlPost : sloUrlRedirect}
         hasError={
-          ssoBinding?.includes("POST")
+          sloBinding?.includes("POST")
             ? sloUrlPostHasError
             : sloUrlRedirectHasError
         }

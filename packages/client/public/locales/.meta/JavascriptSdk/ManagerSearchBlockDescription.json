@@ -3,7 +3,7 @@
   "content": "You can disable the search, filter and sort options.",
   "content_en_sha1_hash": "ffa1350e38a35df0eb49fef9d98511c60ac9d833",
   "created_at": "2025-05-19T21:30:54.569Z",
-  "updated_at": "2025-06-30T12:20:31.287Z",
+  "updated_at": "2025-08-11T09:02:43.893Z",
   "comment": {
     "text": "\"This translation key describes the text used to inform users that they can disable search, filter and sort options in a UI component.\"",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 530,
-      "context": "onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n description={t(\n \"JavascriptSdk:ManagerSearchBlockDescription\",\n )}\n />\n </div>\n </>\n ) : null}",
+      "line_number": 536,
+      "context": "isChecked={embeddingConfig.showFilter}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n title={t(\"JavascriptSdk:SearchBlock\")}\n dataTestId=\"show_filter\"\n description={t(\n \"JavascriptSdk:ManagerSearchBlockDescription\",\n )}\n />\n </div>\n </>\n ) : null}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 535,
-      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />\n </LabelGroup>",
+      "line_number": 547,
+      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n dataTestId=\"show_filter_help_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 414,
-      "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />\n </LabelGroup>",
+      "line_number": 419,
+      "context": "size={12}\n dataTestId=\"filter_help_button\"\n tooltipContent={\n <TooltipContent\n title={t(\"SearchBlock\")}\n description={t(\"ManagerSearchBlockDescription\")}\n img={theme.isBase ? SearchUrl : SearchDarkUrl}\n />\n }\n />\n </LabelGroup>",
       "module": "/packages/client"
     }
   ],

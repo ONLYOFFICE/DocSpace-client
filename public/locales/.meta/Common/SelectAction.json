@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2025-06-30T12:20:31.136Z",
+  "updated_at": "2025-08-11T09:02:43.829Z",
   "comment": {
     "text": "This translation key is used to display a label for selecting an action, such as choosing a file or folder, in various UI elements. It appears in a placeholder position within a dialog and on a component that handles file selection. Translators should provide a descriptive text that indicates the user's ability to make a choice.",
     "is_auto": true,
@@ -36,55 +36,55 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 159,
+      "line_number": 172,
       "context": "frameId: \"ds-frame\",\n init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n withSubtitle: true,\n filterParam: FilesSelectorFilterTypes.ALL,\n isButtonMode: false,\n buttonWithLogo: true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 159,
+      "line_number": 172,
       "context": "frameId: \"ds-frame\",\n init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n withSubtitle: true,\n filterParam: FilesSelectorFilterTypes.ALL,\n isButtonMode: false,\n buttonWithLogo: true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 673,
+      "line_number": 696,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 673,
+      "line_number": 696,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
-      "line_number": 118,
+      "line_number": 123,
       "context": "frameId: \"ds-frame\",\n init: true,\n showSelectorCancel: true,\n showSelectorHeader: true,\n withSearch: true,\n acceptButtonLabel: t(\"Common:SelectAction\"),\n cancelButtonLabel: t(\"Common:CancelButton\"),\n isButtonMode: false,\n buttonWithLogo: true,\n events: {\n onSelectCallback: (items) => {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
       "line_number": 314,
-      "context": "roomType={RoomsType.PublicRoom}\n withSearch\n withCancelButton\n onSubmit={onChangeFolderId}\n withHeader\n headerProps={{ headerLabel: t(\"Common:SelectAction\") }}\n />\n </FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>",
+      "context": "roomType={RoomsType.PublicRoom}\n withSearch\n withCancelButton\n onSubmit={onChangeFolderId}\n withHeader\n headerProps={{ headerLabel: t(\"Common:SelectAction\") }}\n dataTestId=\"room_selector_input\"\n />\n </FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 190,
+      "line_number": 195,
       "context": "},\n ];\n \n const [filterBy, setFilterBy] = useState({\n key: \"filter-type-default\",\n label: t(\"Common:SelectAction\"),\n default: true,\n });\n \n const [author, setAuthor] = useState(\"\");\n const searchRef = useRef();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/SelectTextInput.js",
       "line_number": 55,
-      "context": "<>\n <Label className=\"label\" text={t(\"SelectButtonText\")} />\n <TextInput\n scale\n onChange={onChangeAcceptLabel}\n placeholder={t(\"Common:SelectAction\")}\n value={value}\n tabIndex={7}\n />\n </>\n );",
+      "context": "<>\n <Label className=\"label\" text={t(\"SelectButtonText\")} />\n <TextInput\n scale\n onChange={onChangeAcceptLabel}\n placeholder={t(\"Common:SelectAction\")}\n value={value}\n tabIndex={7}\n testId=\"select_text_input\"\n />\n </>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1718,
+      "line_number": 1724,
       "context": "const optionsModel = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => this.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
@@ -114,8 +114,8 @@
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelectorInput.tsx",
-      "line_number": 254,
-      "context": "isLoading={isLoading}\n path={newPath || basePath}\n isDisabled={isDisabled || isLoading}\n hasError={isError || isErrorPath}\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"Common:SelectAction\")}\n />\n <Portal element={<div>{selectorComponent}</div>} />\n </StyledBodyWrapper>\n );\n };",
+      "line_number": 261,
+      "context": "isLoading={isLoading}\n path={newPath || basePath}\n isDisabled={isDisabled || isLoading}\n hasError={isError || isErrorPath}\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"Common:SelectAction\")}\n />\n <Portal element={<div>{selectorComponent}</div>} />\n </div>\n );\n };",
       "module": "/packages/shared"
     },
     {
@@ -138,8 +138,8 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 638,
-      "context": "}\n className={className}\n style={style}\n renderCustomItem={renderCustomItem}\n items={itemsList}\n submitButtonLabel={submitButtonLabel || t(\"Common:SelectAction\")}\n onSubmit={onSubmit}\n disableSubmitButton={disableSubmitButton || !selectedItems.length}\n selectedItem={isMultiSelect ? null : selectedItems[0]}\n submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}",
+      "line_number": 651,
+      "context": "renderCustomItem={renderCustomItem}\n aria-label={ariaLabel || \"People Selector\"}\n data-selector-type={dataSelectorType || \"people\"}\n dataTestId={dataTestId || \"people-selector\"}\n items={itemsList}\n submitButtonLabel={submitButtonLabel || t(\"Common:SelectAction\")}\n onSubmit={onSubmit}\n disableSubmitButton={disableSubmitButton || !selectedItems.length}\n selectedItem={isMultiSelect ? null : selectedItems[0]}\n submitButtonId={submitButtonId}\n emptyScreenImage={emptyScreenImage}",
       "module": "/packages/shared"
     },
     {

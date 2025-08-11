@@ -67,6 +67,7 @@ export const BaseTile = ({
   onRoomClick,
   checkboxContainerRef,
   forwardRef,
+  dataTestId,
 }: BaseTileProps) => {
   const childrenArray = React.Children.toArray(topContent);
 
@@ -169,6 +170,7 @@ export const BaseTile = ({
       className={tileClassName}
       onClick={onRoomClick}
       onContextMenu={onContextMenu}
+      data-testid={dataTestId ?? "tile"}
     >
       <div className={styles.topContent}>
         {element && !isEdit ? (

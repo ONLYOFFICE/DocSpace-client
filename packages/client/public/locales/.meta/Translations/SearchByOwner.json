@@ -3,7 +3,7 @@
   "content": "Search by Owners",
   "content_en_sha1_hash": "871fbf34747757d5e66494981884a599ad165876",
   "created_at": "2025-05-19T21:30:50.005Z",
-  "updated_at": "2025-06-08T12:02:32.719Z",
+  "updated_at": "2025-08-11T09:02:43.929Z",
   "comment": {
     "text": "This translation key is used for the label of a checkbox filter that allows users to search by the owner in various contexts, including filtering rooms. It appears on a FilterBlock component and enables users to select this option as part of their room settings or portal preferences. Translators should provide a text equivalent of \"Search by Owners\" to facilitate user understanding.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 933,
+      "line_number": 951,
       "context": "},\n {\n id: \"filter_author-user\",\n key: FilterSubject.Owner,\n group: FilterGroups.roomFilterOwner,\n label: t(\"Translations:SearchByOwner\"),\n isCheckbox: true,\n isDisabled: false,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 506,
-      "context": "</UserInputContainer>\n )}\n \n <Checkbox\n className=\"checkbox\"\n label={t(\"Translations:SearchByOwner\")}\n onChange={toggleSubjectFilter}\n isChecked={false}\n />\n </>\n ) : null}",
+      "line_number": 520,
+      "context": "</UserInputContainer>\n )}\n \n <Checkbox\n className=\"checkbox\"\n label={t(\"Translations:SearchByOwner\")}\n onChange={toggleSubjectFilter}\n isChecked={false}\n dataTestId=\"subject_filter_checkbox\"\n />\n </>",
       "module": "/packages/client"
     }
   ],

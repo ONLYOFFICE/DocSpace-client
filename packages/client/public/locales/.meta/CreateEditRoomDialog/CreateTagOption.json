@@ -3,7 +3,7 @@
   "content": "Create tag",
   "content_en_sha1_hash": "d1f343c68b41d631ff1fd5425c84948e4da4ab7b",
   "created_at": "2025-05-19T21:30:56.790Z",
-  "updated_at": "2025-05-24T13:52:22.620Z",
+  "updated_at": "2025-08-11T09:02:43.859Z",
   "comment": {
     "text": "The \"CreateTagOption\" translation key is used to display the label for a button that allows users to create new tags in a tag input field within a room edit dialog. The text should be clear and concise, suggesting the action of adding a new tag.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/TagInput/index.js",
-      "line_number": 144,
+      "line_number": 146,
       "context": "inputRef={inputRef}\n open={isDropdownOpen}\n tagHandler={tagHandler}\n tagInputValue={tagInput}\n setTagInputValue={setTagInput}\n createTagLabel={t(\"CreateTagOption\")}\n closeDropdown={closeDropdown}\n />\n \n <TagList\n tagHandler={tagHandler}",
       "module": "/packages/client"
     }

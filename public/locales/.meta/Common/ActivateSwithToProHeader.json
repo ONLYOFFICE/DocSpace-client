@@ -3,7 +3,7 @@
   "content": "Switch to full {{license}} version",
   "content_en_sha1_hash": "10205017c424194a55840b404d24c3f602f462f3",
   "created_at": "2025-05-26T07:15:40.125Z",
-  "updated_at": "2025-05-26T08:08:39.430Z",
+  "updated_at": "2025-08-04T07:30:01.742Z",
   "comment": {
     "text": "Switch to full {{license}} version is used as a button label in a payment trial container to indicate the option to upgrade to a full license. It appears on line 55 of /packages/shared/pages/Payments/Standalone/TrialContainer.tsx and utilizes the \"ActivateSwithToProHeader\" translation key with variables for different license types.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/TrialContainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TrialContainer.tsx",
       "line_number": 55,
-      "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <StyledEnterpriseComponent>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateSwithToProHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>",
+      "context": "const { t } = useTranslation(\"Common\");\n \n return (\n <div className={styles.enterpriseComponent}>\n <Text fontWeight={700} fontSize=\"16px\">\n {t(\"ActivateSwithToProHeader\", {\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>",
       "module": "/packages/shared"
     }
   ],

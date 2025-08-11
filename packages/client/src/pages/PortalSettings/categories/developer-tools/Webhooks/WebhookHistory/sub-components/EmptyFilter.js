@@ -115,6 +115,7 @@ const EmptyFilter = (props) => {
               isHovered
               fontWeight={600}
               type="action"
+              dataTestId="clear_empty_filter_link"
             >
               {t("Common:ClearFilter")}
             </Link>

@@ -80,9 +80,11 @@ import type {
   TChangeUserStatusDialogData,
   TContactsSelected,
   TContactsTab,
+  TPeopleListItem,
 } from "SRC_DIR/helpers/contacts";
 
-import InfoPanelStore from "../InfoPanelStore";
+import { getInfoPanelOpen } from "SRC_DIR/helpers/info-panel";
+
 import AccessRightsStore from "../AccessRightsStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import TreeFoldersStore from "../TreeFoldersStore";
@@ -99,13 +101,11 @@ import SelectedFolderStore from "../SelectedFolderStore";
 class UsersStore {
   filter = Filter.getDefault();
 
-  isUsersFetched = false;
-
   users: TUser[] = [];
 
-  selection: ReturnType<typeof this.getPeopleListItem>[] = [];
+  selection: TPeopleListItem[] = [];
 
-  bufferSelection: Nullable<ReturnType<typeof this.getPeopleListItem>> = null;
+  bufferSelection: Nullable<TPeopleListItem> = null;
 
   selectionUsersRights = {
     isVisitor: 0,
@@ -120,7 +120,7 @@ class UsersStore {
 
   isUsersLoading = false;
 
-  abortController = new AbortController();
+  abortController: Nullable<AbortController> = null;
 
   requestRunning = false;
 
@@ -130,11 +130,10 @@ class UsersStore {
 
   roomParts: string = "";
 
-  activeUsers: UsersStore["getUsersToMakeEmployees"] = [];
+  activeUsers: TPeopleListItem[] = [];
 
   constructor(
     public settingsStore: SettingsStore,
-    public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
     public targetUserStore: TargetUserStore,
     public groupsStore: GroupsStore,
@@ -148,7 +147,6 @@ class UsersStore {
     public selectedFolderStore: SelectedFolderStore,
   ) {
     this.settingsStore = settingsStore;
-    this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     this.targetUserStore = targetUserStore;
     this.groupsStore = groupsStore;
@@ -197,21 +195,16 @@ class UsersStore {
 
       const user = await api.people.getUserById(data.id);
 
-      const { setInfoPanelSelection, isVisible } = this.infoPanelStore;
-
       runInAction(() => {
         this.users[idx] = user;
-
-        if (isVisible) setInfoPanelSelection(this.getPeopleListItem(user));
-
-        this.updateSelection();
       });
+
+      this.updateSelection();
     };
 
     const deleteUser = (id: string) => {
       console.log(`[WS] ${SocketEvents.DeleteUser}, id: ${id}`);
       const idx = this.users.findIndex((x) => x.id === id);
-      const { setInfoPanelSelection, isVisible } = this.infoPanelStore;
 
       if (idx === -1) return;
 
@@ -220,11 +213,9 @@ class UsersStore {
         newUsers.splice(idx, 1);
         this.users = newUsers;
         this.filter.total -= 1;
-
-        if (isVisible) setInfoPanelSelection(null);
-
-        this.updateSelection();
       });
+
+      this.updateSelection();
     };
 
     const changeMyType = async (value: {
@@ -334,10 +325,6 @@ class UsersStore {
     });
   }
 
-  setIsUsersFetched = (value: boolean) => {
-    this.isUsersFetched = value;
-  };
-
   setContactsTab = (contactsTab: TContactsTab) => {
     if (contactsTab) {
       const roomParts =
@@ -365,9 +352,10 @@ class UsersStore {
         });
     }
 
-    if (contactsTab !== this.contactsTab) {
-      this.filter = Filter.getDefault();
-    }
+    // if (contactsTab !== this.contactsTab) {
+    //   console.log("set filter here");
+    //   this.filter = Filter.getDefault();
+    // }
     this.contactsTab = contactsTab;
 
     const guestsTabVisitedStorage = window.localStorage.getItem(
@@ -398,7 +386,7 @@ class UsersStore {
 
     setContactsUsersFilterUrl(
       filter,
-      this.contactsTab,
+      getContactsView(),
       this.groupsStore.currentGroup?.id,
     );
   };
@@ -442,11 +430,11 @@ class UsersStore {
     const { currentGroup } = this.groupsStore;
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
-    if (this.requestRunning) {
-      this.abortController.abort();
+    this.abortController?.abort();
 
-      this.abortController = new AbortController();
-    }
+    this.abortController = new AbortController();
+
+    const contactsView = getContactsView(window.location);
 
     if (!(window.DocSpace?.location?.state as { user?: unknown })?.user) {
       this.setSelection([]);
@@ -454,9 +442,9 @@ class UsersStore {
     }
 
     const localStorageKey =
-      this.contactsTab === "inside_group"
+      contactsView === "inside_group"
         ? `${FILTER_INSIDE_GROUPS}=${this.userStore.user?.id}`
-        : this.contactsTab === "guests"
+        : contactsView === "guests"
           ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
           : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
@@ -476,7 +464,7 @@ class UsersStore {
       if (filterObj?.sortOrder) filterData.sortOrder = filterObj.sortOrder;
     }
 
-    if (currentGroup?.id && this.contactsTab === "inside_group") {
+    if (currentGroup?.id && contactsView === "inside_group") {
       filterData.group = currentGroup.id;
     }
 
@@ -484,7 +472,7 @@ class UsersStore {
       filterData.group = null;
     }
 
-    if (!guestsTabVisitedStorage && this.contactsTab === "guests") {
+    if (!guestsTabVisitedStorage && contactsView === "guests") {
       filterData.inviterId = null;
       window.localStorage.setItem(
         `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
@@ -493,20 +481,22 @@ class UsersStore {
       this.guestsTabVisited = true;
     }
 
-    if (this.contactsTab === "guests") {
+    if (contactsView === "guests") {
       filterData.area = "guests";
-    } else if (this.contactsTab === "people") {
+    } else if (contactsView === "people") {
       filterData.area = "people";
     }
 
-    this.requestRunning = true;
+    runInAction(() => {
+      this.requestRunning = true;
+    });
 
     const res = await api.people.getUserList(
       filterData,
       this.abortController.signal,
     );
 
-    this.setIsUsersFetched(true);
+    this.setUsers(res.items);
 
     filterData.total = res.total;
 
@@ -514,10 +504,13 @@ class UsersStore {
       this.setFilter(filterData);
     }
 
-    this.requestRunning = false;
+    runInAction(() => {
+      this.requestRunning = false;
+      this.abortController = null;
+    });
 
-    this.setUsers(res.items);
-
+    this.clientLoadingStore.setIsLoading("body", false);
+    this.clientLoadingStore.setIsLoading("header", false);
     return Promise.resolve(res.items);
   };
 
@@ -541,8 +534,10 @@ class UsersStore {
 
   updateUserStatus = async (status: EmployeeStatus, userIds: string[]) => {
     const updatedUsers = await api.people.updateUserStatus(status, userIds);
+    const isInfoPanelVisible = getInfoPanelOpen();
     if (updatedUsers) {
-      if (!this.needResetUserSelection) {
+      const needReset = this.needResetUserSelection || !isInfoPanelVisible;
+      if (!needReset) {
         this.updateSelection();
       }
     }
@@ -578,7 +573,9 @@ class UsersStore {
       throw new Error(e as string);
     }
 
-    if (updatedUsers && !this.needResetUserSelection) {
+    const needReset = this.needResetUserSelection || !getInfoPanelOpen();
+
+    if (updatedUsers && !needReset) {
       this.updateSelection();
     }
 
@@ -590,7 +587,9 @@ class UsersStore {
 
     const removedGuests = await api.people.deleteGuests(ids);
 
-    if (!!removedGuests && !this.needResetUserSelection) {
+    const needReset = this.needResetUserSelection || !getInfoPanelOpen();
+
+    if (!!removedGuests && !needReset) {
       this.updateSelection();
     }
 
@@ -804,7 +803,12 @@ class UsersStore {
 
     const newFilter = this.filter.clone();
     newFilter.page += 1;
+
     this.setFilter(newFilter);
+
+    this.abortController?.abort();
+
+    this.abortController = new AbortController();
 
     const res = await api.people.getUserList(
       newFilter,
@@ -815,9 +819,11 @@ class UsersStore {
       this.setUsers([...this.users, ...res.items]);
       this.setIsUsersLoading(false);
     });
+
+    this.abortController = null;
   };
 
-  getPeopleListItem = (user: TUser) => {
+  getPeopleListItem: (user: TUser) => TPeopleListItem = (user: TUser) => {
     const {
       id,
       displayName,
@@ -919,12 +925,7 @@ class UsersStore {
   }
 
   get needResetUserSelection() {
-    const { isVisible: infoPanelVisible } = this.infoPanelStore;
-
-    return (
-      !infoPanelVisible ||
-      (!this.isOneUserSelection && !this.isOnlyBufferSelection)
-    );
+    return !this.isOneUserSelection && !this.isOnlyBufferSelection;
   }
 
   resetUsersRight = () => {
@@ -934,9 +935,7 @@ class UsersStore {
     });
   };
 
-  incrementUsersRights = (
-    selection: ReturnType<typeof this.getPeopleListItem>,
-  ) => {
+  incrementUsersRights = (selection: TPeopleListItem) => {
     Object.keys(this.selectionUsersRights).forEach((key) => {
       if (key in selection && !selection[key as keyof typeof selection]) return;
 
@@ -947,9 +946,7 @@ class UsersStore {
     });
   };
 
-  decrementUsersRights = (
-    selection: ReturnType<typeof this.getPeopleListItem>,
-  ) => {
+  decrementUsersRights = (selection: TPeopleListItem) => {
     Object.keys(this.selectionUsersRights).forEach((key) => {
       if (key in selection && !selection[key as keyof typeof selection]) return;
 
@@ -965,7 +962,7 @@ class UsersStore {
     this.selection.forEach((u) => this.incrementUsersRights(u));
   };
 
-  setSelection = (selection: ReturnType<typeof this.getPeopleListItem>[]) => {
+  setSelection = (selection: TPeopleListItem[]) => {
     this.selection = selection;
 
     if (selection.length === 0) this.resetUsersRight();
@@ -1046,7 +1043,7 @@ class UsersStore {
     this.bufferSelection = bufferSelection;
   };
 
-  selectUser = (user: ReturnType<typeof this.getPeopleListItem>) => {
+  selectUser = (user: TPeopleListItem) => {
     const index = this.selection.findIndex((el) => el.id === user!.id);
 
     const exists = index > -1;
@@ -1059,7 +1056,7 @@ class UsersStore {
     this.incrementUsersRights(user);
   };
 
-  deselectUser = (user: ReturnType<typeof this.getPeopleListItem>) => {
+  deselectUser = (user: TPeopleListItem) => {
     const index = this.selection.findIndex((el) => el.id === user.id);
 
     const exists = index > -1;
@@ -1085,7 +1082,7 @@ class UsersStore {
     return this.setSelection([]);
   };
 
-  selectRow = (item: ReturnType<typeof this.getPeopleListItem>) => {
+  selectRow = (item: TPeopleListItem) => {
     const isItemSelected = !!this.selection.find((s) => s.id === item.id);
     const isSingleSelected = isItemSelected && this.selection.length === 1;
 
@@ -1109,9 +1106,7 @@ class UsersStore {
     this.setBufferSelection(item);
   };
 
-  multipleContextMenuAction = (
-    item: ReturnType<typeof this.getPeopleListItem>,
-  ) => {
+  multipleContextMenuAction = (item: TPeopleListItem) => {
     const isItemSelected = !!this.selection.find((s) => s.id === item.id);
     const isSingleSelected = isItemSelected && this.selection.length === 1;
 
@@ -1134,10 +1129,10 @@ class UsersStore {
   };
 
   getUsersBySelected = (
-    users: ReturnType<typeof this.getPeopleListItem>[],
+    users: TPeopleListItem[],
     selected: TContactsSelected,
   ) => {
-    const newSelection: ReturnType<typeof this.getPeopleListItem>[] = [];
+    const newSelection: TPeopleListItem[] = [];
     users.forEach((user) => {
       const checked = getUserChecked(user as unknown as TUser, selected);
 
@@ -1153,7 +1148,8 @@ class UsersStore {
     this.selected = selected;
 
     setHotkeyCaret(this.selection.at(-1) ?? hotkeyCaret);
-    this.setSelection(this.getUsersBySelected(this.peopleList, selected));
+    const selectedUser = this.getUsersBySelected(this.peopleList, selected);
+    this.setSelection(selectedUser);
 
     if (selected !== "none" && selected !== "close") {
       this.resetUsersRight();
@@ -1412,7 +1408,7 @@ class UsersStore {
     setChangeUserStatusDialogVisible(true);
   };
 
-  setActiveUsers = (users: UsersStore["getUsersToMakeEmployees"]) => {
+  setActiveUsers = (users: TPeopleListItem[]) => {
     this.activeUsers = users;
   };
 }

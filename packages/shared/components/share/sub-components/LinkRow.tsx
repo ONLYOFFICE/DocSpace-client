@@ -109,7 +109,11 @@ const LinkRow = ({
   };
 
   return !links?.length ? (
-    <div className={styles.linkRow} onClick={onAddClick}>
+    <div
+      className={styles.linkRow}
+      onClick={onAddClick}
+      data-testid="info_panel_share_create_and_copy_link"
+    >
       <div className={styles.square}>
         <IconButton size={12} iconName={PlusIcon} isDisabled />
       </div>
@@ -149,6 +153,7 @@ const LinkRow = ({
             [styles.isDisabled]: isArchiveFolder,
           })}
           key={`share-link-row-${index * 5}`}
+          data-testid={`info_panel_share_link_row_${index}`}
         >
           {isLoaded ? (
             <Loader
@@ -185,7 +190,7 @@ const LinkRow = ({
                 directionY="both"
                 options={shareOptions}
                 selectedOption={shareOption ?? ({} as TOption)}
-                onSelect={(item) => changeShareOption(item, link)}
+                onSelect={(item) => changeShareOption?.(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems
@@ -216,11 +221,11 @@ const LinkRow = ({
             ) : (
               <ExpiredComboBox
                 link={link}
-                availableExternalRights={availableExternalRights}
+                availableExternalRights={availableExternalRights!}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
-                changeAccessOption={changeAccessOption}
+                changeAccessOption={changeAccessOption!}
                 removedExpiredLink={removedExpiredLink}
               />
             )}
@@ -234,6 +239,7 @@ const LinkRow = ({
                 onClick={() => onCopyLink(link)}
                 title={t("Common:CopySharedLink")}
                 isDisabled={isExpiredLink || isLoaded}
+                dataTestId={`info_panel_share_copy_link_button_${index}`}
               />
             ) : null}
             {isRoomsLink ? (
@@ -255,6 +261,7 @@ const LinkRow = ({
                     topSpace={16}
                     usePortalBackdrop
                     shouldShowBackdrop={isMobileViewLink}
+                    dataTestId={`info_panel_share_access_right_select_${index}`}
                   />
                 ) : null}
                 {!isArchiveFolder ? (
@@ -273,7 +280,7 @@ const LinkRow = ({
                 directionY="both"
                 options={accessOptions}
                 selectedOption={accessOption ?? ({} as TOption)}
-                onSelect={(item) => changeAccessOption(item, link)}
+                onSelect={(item) => changeAccessOption?.(item, link)}
                 scaled={false}
                 scaledOptions={false}
                 showDisabledItems

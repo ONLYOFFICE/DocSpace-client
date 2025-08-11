@@ -139,6 +139,8 @@ export interface TableRowProps {
   isActive?: boolean;
   checked?: boolean;
   dragging?: boolean;
+  dataTestId?: string;
+  contextMenuTestId?: string;
 }
 
 export interface TableCellProps {
@@ -149,6 +151,7 @@ export interface TableCellProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   value?: string;
+  dataTestId?: string;
 }
 
 export type TGroupMenuItem = {

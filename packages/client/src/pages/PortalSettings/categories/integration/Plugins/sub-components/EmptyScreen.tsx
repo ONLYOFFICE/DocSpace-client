@@ -80,6 +80,7 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
             isDisabled={!withUpload}
             isLoading={false}
             onDrop={onDrop}
+            dataTestId="upload_plugin_dropzone"
           />
         ) : null
       }

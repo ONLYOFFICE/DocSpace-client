@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-08-11T09:02:43.829Z",
+  "updated_at": "2025-08-11T10:23:51.776Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -330,7 +330,7 @@
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 572,
+      "line_number": 604,
       "context": "/>\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}",
       "module": "/packages/shared"
     },

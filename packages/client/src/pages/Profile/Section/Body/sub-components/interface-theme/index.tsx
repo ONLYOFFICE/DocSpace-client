@@ -41,11 +41,11 @@ import ThemePreview from "./ThemePreview";
 import { StyledWrapperInterfaceTheme } from "./InterfaceTheme.styled";
 
 type InterfaceThemeProps = {
-  theme: ThemeKeys;
-  changeTheme: (theme: ThemeKeys) => Promise<void>;
-  currentColorScheme: TColorScheme;
-  selectedThemeId: string;
-  isDesktopClient: boolean;
+  theme?: ThemeKeys;
+  changeTheme?: (theme: ThemeKeys) => Promise<void>;
+  currentColorScheme?: TColorScheme;
+  selectedThemeId?: string;
+  isDesktopClient?: boolean;
 };
 
 const InterfaceTheme = (props: InterfaceThemeProps) => {
@@ -72,7 +72,7 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
         window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
       }
 
-      await changeTheme(newTheme);
+      await changeTheme?.(newTheme);
     } catch (error) {
       console.error(error);
       toastr.error(error as string);
@@ -129,8 +129,8 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
         <ThemePreview
           label={t("LightTheme")}
           theme="Light"
-          accentColor={currentColorScheme.main?.accent}
-          themeId={selectedThemeId}
+          accentColor={currentColorScheme!.main?.accent}
+          themeId={selectedThemeId!}
           value={ThemeKeys.BaseStr}
           isChecked={
             currentTheme === ThemeKeys.BaseStr ||
@@ -142,8 +142,8 @@ const InterfaceTheme = (props: InterfaceThemeProps) => {
         <ThemePreview
           label={t("DarkTheme")}
           theme="Dark"
-          accentColor={currentColorScheme.main?.accent}
-          themeId={selectedThemeId}
+          accentColor={currentColorScheme!.main?.accent}
+          themeId={selectedThemeId!}
           value={ThemeKeys.DarkStr}
           isChecked={
             currentTheme === ThemeKeys.DarkStr ||

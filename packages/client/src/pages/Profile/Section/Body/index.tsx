@@ -23,25 +23,27 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
+import { TFunction } from "i18next";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
-import { Tabs } from "@docspace/shared/components/tabs";
-import { NotificationsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import { tablet } from "@docspace/shared/utils";
-import {
-  getTfaBackupCodes,
-  getAuthProviders,
-  getNotificationSubscription,
-} from "@docspace/shared/api/settings";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { DeviceType } from "@docspace/shared/enums";
+import { tablet, mobile } from "@docspace/shared/utils";
 
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { TfaStore } from "@docspace/shared/store/TfaStore";
+import { AuthStore } from "@docspace/shared/store/AuthStore";
+
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/login";
@@ -49,15 +51,22 @@ import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
+import useProfileBody from "./useProfileBody";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
 
+  margin-top: -19px;
+
   @media ${tablet} {
     width: 100%;
     max-width: 100%;
+  }
+
+  @media ${mobile} {
+    margin-top: 0;
   }
 `;
 
@@ -67,7 +76,27 @@ const StyledTabs = styled(Tabs)`
   }
 `;
 
-const SectionBodyContent = (props) => {
+type SectionBodyContentProps = {
+  showProfileLoader?: boolean;
+  currentDeviceType?: DeviceType;
+  identityServerEnabled?: boolean;
+  t?: TFunction;
+  isFirstSubscriptionsLoad?: boolean;
+  tfaSettings?: TfaStore["tfaSettings"];
+  getFilesSettings?: FilesSettingsStore["getFilesSettings"];
+  setSubscriptions?: TargetUserStore["setSubscriptions"];
+  fetchConsents?: OAuthStore["fetchConsents"];
+  fetchScopes?: OAuthStore["fetchScopes"];
+  getTfaType?: TfaStore["getTfaType"];
+  setBackupCodes?: TfaStore["setBackupCodes"];
+  setProviders?: UsersStore["setProviders"];
+  getCapabilities?: AuthStore["getCapabilities"];
+  getSessions?: SettingsSetupStore["getSessions"];
+  setIsProfileLoaded?: ClientLoadingStore["setIsProfileLoaded"];
+  setIsSectionHeaderLoading?: ClientLoadingStore["setIsSectionHeaderLoading"];
+};
+
+const SectionBodyContent = (props: SectionBodyContentProps) => {
   const {
     showProfileLoader,
     currentDeviceType,
@@ -83,124 +112,46 @@ const SectionBodyContent = (props) => {
     setProviders,
     getCapabilities,
     getSessions,
-    profile,
     setIsProfileLoaded,
+    setIsSectionHeaderLoading,
     getTfaType,
   } = props;
   const navigate = useNavigate();
 
-  const [backupCodesCount, setBackupCodesCount] = React.useState(0);
-
-  const tfaOn = tfaSettings && tfaSettings !== "none";
-
-  const getNotificationsData = React.useCallback(async () => {
-    if (!isFirstSubscriptionsLoad) return;
-
-    const requests = [
-      getNotificationSubscription(NotificationsType.Badges),
-      getNotificationSubscription(NotificationsType.RoomsActivity),
-      getNotificationSubscription(NotificationsType.DailyFeed),
-      getNotificationSubscription(NotificationsType.UsefulTips),
-    ];
-
-    try {
-      const [badges, roomsActivity, dailyFeed, tips] =
-        await Promise.all(requests);
-
-      setSubscriptions(
-        badges.isEnabled,
-        roomsActivity.isEnabled,
-        dailyFeed.isEnabled,
-        tips.isEnabled,
-      );
-    } catch (e) {
-      toastr.error(e);
-    }
-  }, [setSubscriptions, isFirstSubscriptionsLoad]);
-
-  const getFileManagementData = React.useCallback(async () => {
-    const prefix =
-      window.DocSpace.location.pathname.includes("portal-settings");
-
-    if (prefix) await getFilesSettings();
-  }, []);
-
-  const getConsentList = React.useCallback(async () => {
-    try {
-      await Promise.all([fetchConsents?.(), fetchScopes?.()]);
-    } catch (e) {
-      toastr.error(e);
-    }
-  }, [fetchConsents, fetchScopes]);
-
-  const openLoginTab = React.useCallback(async () => {
-    const actions = [];
-
-    try {
-      actions.push([getAuthProviders(), getCapabilities()]);
-
-      if (tfaOn) {
-        actions.push(getTfaBackupCodes());
-      }
-
-      actions.push(getSessions());
-
-      const [newProviders, , newCodes] = await Promise.all(actions);
-
-      if (newProviders) {
-        setProviders(newProviders);
-      }
-
-      if (newCodes) {
-        setBackupCodes(newCodes);
-
-        let newBackupCodesCount = 0;
-        if (newCodes && newCodes.length > 0) {
-          newCodes.forEach((item) => {
-            if (!item.isUsed) {
-              newBackupCodesCount++;
-            }
-          });
-        }
-        setBackupCodesCount(newBackupCodesCount);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }, [tfaOn]);
-
-  const initialLoad = React.useCallback(async () => {
-    const userId = "@self";
-
-    const getProfile = () => {
-      if (!profile || profile.userName !== userId) {
-        setIsProfileLoaded(true);
-      }
-    };
-
-    await Promise.all([getProfile(), getTfaType()]);
-
-    setDocumentTitle(t("Common:Profile"));
-  }, []);
-
-  React.useEffect(() => {
-    initialLoad();
-  }, []);
+  const {
+    tfaOn,
+    getNotificationsData,
+    getFileManagementData,
+    getConsentList,
+    openLoginTab,
+  } = useProfileBody({
+    getFilesSettings: getFilesSettings!,
+    setSubscriptions: setSubscriptions!,
+    isFirstSubscriptionsLoad,
+    fetchConsents: fetchConsents!,
+    fetchScopes: fetchScopes!,
+    tfaSettings,
+    setBackupCodes: setBackupCodes!,
+    setProviders: setProviders!,
+    getCapabilities: getCapabilities!,
+    getSessions: getSessions!,
+    setIsProfileLoaded: setIsProfileLoaded!,
+    setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    getTfaType: getTfaType!,
+  });
 
   const data = [
     {
       id: "login",
-      name: t("Common:Login"),
-      content: (
-        <LoginContent tfaOn={tfaOn} backupCodesCount={backupCodesCount} />
-      ),
+      name: t?.("Common:Login"),
+      content: <LoginContent tfaOn={tfaOn || false} />,
       onClick: async () => {
         await openLoginTab();
       },
     },
     {
       id: "notifications",
-      name: t("Notifications:Notifications"),
+      name: t?.("Notifications:Notifications"),
       content: <Notifications />,
       onClick: async () => {
         await getNotificationsData();
@@ -208,7 +159,7 @@ const SectionBodyContent = (props) => {
     },
     {
       id: "file-management",
-      name: t("FileManagement"),
+      name: t?.("FileManagement"),
       content: <FileManagement />,
       onClick: async () => {
         await getFileManagementData();
@@ -216,7 +167,7 @@ const SectionBodyContent = (props) => {
     },
     {
       id: "interface-theme",
-      name: t("InterfaceTheme"),
+      name: t?.("InterfaceTheme"),
       content: <InterfaceTheme />,
       onClick: () => {},
     },
@@ -225,7 +176,7 @@ const SectionBodyContent = (props) => {
   if (identityServerEnabled) {
     data.push({
       id: "authorized-apps",
-      name: t("OAuth:AuthorizedApps"),
+      name: t?.("OAuth:AuthorizedApps"),
       content: <AuthorizedApps />,
       onClick: async () => {
         await getConsentList();
@@ -241,7 +192,7 @@ const SectionBodyContent = (props) => {
 
   const currentTabId = getCurrentTabId();
 
-  const onSelect = (e) => {
+  const onSelect = (e: TTabItem) => {
     const arrayPaths = window.location.pathname.split("/");
     arrayPaths.splice(arrayPaths.length - 1);
     const path = arrayPaths.join("/");
@@ -257,7 +208,7 @@ const SectionBodyContent = (props) => {
         items={data}
         selectedItemId={currentTabId}
         onSelect={onSelect}
-        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
         withAnimation
       />
     </Wrapper>
@@ -274,17 +225,15 @@ export default inject(
     oauthStore,
     tfaStore,
     setup,
-    userStore,
-  }) => {
-    const { showProfileLoader, setIsProfileLoaded } = clientLoadingStore;
+  }: TStore) => {
+    const { showProfileLoader, setIsProfileLoaded, setIsSectionHeaderLoading } =
+      clientLoadingStore;
 
     const identityServerEnabled =
       authStore?.capabilities?.identityServerEnabled;
 
     const { setSubscriptions, isFirstSubscriptionsLoad } =
-      peopleStore.targetUserStore;
-
-    const { user: profile } = userStore;
+      peopleStore.targetUserStore!;
 
     const { fetchConsents, fetchScopes } = oauthStore;
 
@@ -310,9 +259,9 @@ export default inject(
       getCapabilities,
       getSessions,
 
-      profile,
       getTfaType,
       setIsProfileLoaded,
+      setIsSectionHeaderLoading,
     };
   },
 )(

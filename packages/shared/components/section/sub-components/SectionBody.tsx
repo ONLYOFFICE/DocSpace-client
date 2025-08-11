@@ -40,7 +40,6 @@ const SectionBody = React.memo(
     autoFocus = false,
     children,
     onDrop,
-    uploadFiles = false,
     viewAs,
     withScroll = true,
 

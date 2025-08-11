@@ -76,7 +76,7 @@ class ClientLoadingStore {
 
   isChangePageRequestRunning = false;
 
-  currentClientView: "users" | "groups" | "files" | "" = "";
+  currentClientView: "users" | "groups" | "files" | "profile" | "" = "";
 
   constructor() {
     makeAutoObservable(this);
@@ -87,7 +87,7 @@ class ClientLoadingStore {
   };
 
   setCurrentClientView = (
-    currentClientView: "users" | "groups" | "files" | "",
+    currentClientView: "users" | "groups" | "files" | "profile" | "",
   ) => {
     this.currentClientView = currentClientView;
   };
@@ -115,7 +115,16 @@ class ClientLoadingStore {
     }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);
   };
 
-  setIsProfileLoaded = (isProfileLoaded: boolean) => {
+  setIsProfileLoaded = (
+    isProfileLoaded: boolean,
+    withTimer: boolean = true,
+  ) => {
+    if (!withTimer) {
+      this.isProfileLoaded = isProfileLoaded;
+
+      return;
+    }
+
     setTimeout(() => {
       this.isProfileLoaded = isProfileLoaded;
     }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);

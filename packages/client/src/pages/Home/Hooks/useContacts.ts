@@ -77,7 +77,7 @@ const useContacts = ({
   const { t } = useTranslation(["Common"]);
 
   const fetchContacts = React.useCallback(async () => {
-    if (!isContactsPage) return setContactsTab(false);
+    if (!isContactsPage) return;
 
     if (showGuestReleaseTip) setGuestReleaseTipDialogVisible(true);
 

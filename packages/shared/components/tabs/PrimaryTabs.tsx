@@ -32,6 +32,7 @@ import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
 import { Scrollbar } from "../scrollbar";
+import { LoaderWrapper } from "../loader-wrapper";
 
 import { useViewTab } from "./hooks/useViewTab";
 import { type TTabItem, type TabsProps } from "./Tabs.types";
@@ -262,9 +263,13 @@ const PrimaryTabs = (props: TabsProps) => {
       {withoutStickyIntend ? null : (
         <div className={classNames(styles.stickyIndent, "sticky-indent")} />
       )}
-      {selectedContent ? (
-        <div className={`${styles.tabsBody} tabs-body`}>{selectedContent}</div>
-      ) : null}
+      <LoaderWrapper isLoading={animationPhase === "progress"}>
+        {selectedContent ? (
+          <div className={`${styles.tabsBody} tabs-body`}>
+            {selectedContent}
+          </div>
+        ) : null}
+      </LoaderWrapper>
     </div>
   );
 };

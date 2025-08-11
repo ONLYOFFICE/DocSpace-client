@@ -37,25 +37,25 @@ import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import styles from "./FileManagement.module.scss";
 
 type FileManagementProps = {
-  logoText: string;
+  logoText?: string;
 
-  storeOriginalFiles: boolean;
-  setStoreOriginal: FilesSettingsStore["setStoreOriginal"];
+  storeOriginalFiles?: boolean;
+  setStoreOriginal?: FilesSettingsStore["setStoreOriginal"];
 
-  confirmDelete: boolean;
-  setConfirmDelete: FilesSettingsStore["setConfirmDelete"];
+  confirmDelete?: boolean;
+  setConfirmDelete?: FilesSettingsStore["setConfirmDelete"];
 
-  keepNewFileName: boolean;
-  setKeepNewFileName: FilesSettingsStore["setKeepNewFileName"];
+  keepNewFileName?: boolean;
+  setKeepNewFileName?: FilesSettingsStore["setKeepNewFileName"];
 
-  openEditorInSameTab: boolean;
-  setOpenEditorInSameTab: FilesSettingsStore["setOpenEditorInSameTab"];
+  openEditorInSameTab?: boolean;
+  setOpenEditorInSameTab?: FilesSettingsStore["setOpenEditorInSameTab"];
 
-  displayFileExtension: boolean;
-  setDisplayFileExtension: FilesSettingsStore["setDisplayFileExtension"];
+  displayFileExtension?: boolean;
+  setDisplayFileExtension?: FilesSettingsStore["setDisplayFileExtension"];
 
-  hideConfirmCancelOperation: boolean;
-  setHideConfirmCancelOperation: FilesSettingsStore["setHideConfirmCancelOperation"];
+  hideConfirmCancelOperation?: boolean;
+  setHideConfirmCancelOperation?: FilesSettingsStore["setHideConfirmCancelOperation"];
 };
 
 const FileManagement = ({
@@ -82,28 +82,28 @@ const FileManagement = ({
   const { t } = useTranslation(["FilesSettings", "Common"]);
 
   const onChangeOriginalCopy = React.useCallback(() => {
-    setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
+    setStoreOriginal?.(!storeOriginalFiles, "storeOriginalFiles");
   }, [setStoreOriginal, storeOriginalFiles]);
 
   const onChangeDeleteConfirm = React.useCallback(() => {
-    setConfirmDelete(!confirmDelete, "confirmDelete");
+    setConfirmDelete?.(!confirmDelete, "confirmDelete");
   }, [setConfirmDelete, confirmDelete]);
 
   const onChangeKeepNewFileName = React.useCallback(() => {
-    setKeepNewFileName(!keepNewFileName);
+    setKeepNewFileName?.(!keepNewFileName);
   }, [setKeepNewFileName, keepNewFileName]);
 
   const onChangeDisplayFileExtension = React.useCallback(() => {
-    setDisplayFileExtension(!displayFileExtension);
+    setDisplayFileExtension?.(!displayFileExtension);
     window.DocSpace.displayFileExtension = !displayFileExtension;
   }, [setDisplayFileExtension, displayFileExtension]);
 
   const onChangeCancellationNotification = React.useCallback(() => {
-    setHideConfirmCancelOperation(!hideConfirmCancelOperation);
+    setHideConfirmCancelOperation?.(!hideConfirmCancelOperation);
   }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
-    setOpenEditorInSameTab(!openEditorInSameTab);
+    setOpenEditorInSameTab?.(!openEditorInSameTab);
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
   return (

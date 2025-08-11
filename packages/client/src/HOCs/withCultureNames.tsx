@@ -40,7 +40,7 @@ interface ComponentWithCultureNamesProps {
 }
 
 interface WrappedComponentProps extends ComponentWithCultureNamesProps {
-  cultureNames: {
+  cultureNames?: {
     key: string;
     label: string;
     icon: string;

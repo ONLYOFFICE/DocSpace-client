@@ -188,6 +188,14 @@ const AvatarEditorDialog = (props) => {
     }
   };
 
+  const onSaveAction = async (img) => {
+    setIsLoading(true);
+
+    await onSave(img);
+
+    setIsLoading(false);
+  };
+
   return (
     <StyledModalDialog
       displayType="modal"
@@ -227,7 +235,7 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           primary
-          onClick={onSave ? () => onSave(image) : onSaveClick}
+          onClick={onSave ? () => onSaveAction(image) : onSaveClick}
           isLoading={isLoading}
         />
         <Button

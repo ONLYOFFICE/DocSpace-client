@@ -24,38 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
-import SecurityReactSvgUrl from "PUBLIC_DIR/images/security.react.svg?url";
-import ImageReactSvgUrl from "PUBLIC_DIR/images/image.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
-
-import { useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
-import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Heading } from "@docspace/shared/components/heading";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import {
-  DeleteSelfProfileDialog,
-  DeleteOwnerProfileDialog,
-} from "SRC_DIR/components/dialogs";
 
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { RoomSearchArea } from "@docspace/shared/enums";
+import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
+
 import TariffBar from "SRC_DIR/components/TariffBar";
+
 import { StyledHeader } from "./StyledHeader";
+import useProfileHeader from "./useProfileHeader";
 
 const Header = (props) => {
   const {
-    t,
-
     isAdmin,
     isVisitor,
     isCollaborator,
@@ -71,92 +56,21 @@ const Header = (props) => {
 
     showProfileLoader,
     setIsLoading,
-    userId,
+
     enabledHotkeys,
   } = props;
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const [deleteSelfProfileDialog, setDeleteSelfProfileDialog] = useState(false);
-  const [deleteOwnerProfileDialog, setDeleteOwnerProfileDialog] =
-    useState(false);
-
-  const onChangePasswordClick = () => {
-    const email = profile.email;
-    setDialogData({ email });
-    setChangePasswordVisible(true);
-  };
-
-  const onChangeEmailClick = () => {
-    setDialogData(profile);
-    setChangeEmailVisible(true);
-  };
-
-  const getUserContextOptions = () => {
-    const options = [
-      {
-        key: "change-email",
-        label: t("PeopleTranslations:EmailChangeButton"),
-        onClick: onChangeEmailClick,
-        disabled: false,
-        icon: EmailReactSvgUrl,
-      },
-      {
-        key: "change-password",
-        label: t("PeopleTranslations:PasswordChangeButton"),
-        onClick: onChangePasswordClick,
-        disabled: false,
-        icon: SecurityReactSvgUrl,
-      },
-      {
-        key: "edit-photo",
-        label: t("Profile:EditPhoto"),
-        onClick: () => setChangeAvatarVisible(true),
-        disabled: true,
-        icon: ImageReactSvgUrl,
-      },
-      { key: "separator", isSeparator: true },
-      {
-        key: "delete-profile",
-        label: t("PeopleTranslations:DeleteSelfProfile"),
-        onClick: () =>
-          profile?.isOwner
-            ? setDeleteOwnerProfileDialog(true)
-            : setDeleteSelfProfileDialog(true),
-        disabled: false,
-        icon: CatalogTrashReactSvgUrl,
-      },
-    ];
-
-    return options;
-  };
-
-  const onClickBack = () => {
-    if (location?.state?.fromUrl && profileClicked) {
-      return navigate(location?.state?.fromUrl);
-    }
-
-    if (location.pathname.includes("portal-settings")) {
-      return navigate("/portal-settings/customization/general");
-    }
-
-    const roomsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
-
-    roomsFilter.searchArea = RoomSearchArea.Active;
-    const urlParams = roomsFilter.toUrlParams(userId);
-    const backUrl = `/rooms/shared/filter?${urlParams}`;
-
-    setIsLoading();
-
-    navigate(backUrl);
-    // setFilter(filter);
-  };
-
-  useHotkeys("Backspace", onClickBack, {
-    filter: () => !checkDialogsOpen() && enabledHotkeys,
-    filterPreventDefault: false,
-  });
+  const { t, profileDialogs, onClickBack, getUserContextOptions } =
+    useProfileHeader({
+      profile,
+      profileClicked,
+      enabledHotkeys,
+      setDialogData,
+      setChangeEmailVisible,
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setIsLoading,
+    });
 
   if (showProfileLoader) return <SectionHeaderSkeleton />;
 
@@ -198,21 +112,7 @@ const Header = (props) => {
           <TariffBar />
         </div>
       </div>
-
-      {deleteSelfProfileDialog ? (
-        <DeleteSelfProfileDialog
-          visible={deleteSelfProfileDialog}
-          onClose={() => setDeleteSelfProfileDialog(false)}
-          email={profile?.email}
-        />
-      ) : null}
-
-      {deleteOwnerProfileDialog ? (
-        <DeleteOwnerProfileDialog
-          visible={deleteOwnerProfileDialog}
-          onClose={() => setDeleteOwnerProfileDialog(false)}
-        />
-      ) : null}
+      {profileDialogs}
     </StyledHeader>
   );
 };
@@ -229,7 +129,7 @@ export default inject(
   }) => {
     const { isAdmin } = authStore;
 
-    const { isVisitor, isCollaborator, user } = userStore.user;
+    const { isVisitor, isCollaborator } = userStore.user;
 
     const { targetUserStore, dialogStore } = peopleStore;
 
@@ -250,7 +150,6 @@ export default inject(
       isVisitor,
       isCollaborator,
 
-      userId: user?.id,
       setChangeEmailVisible,
       setChangePasswordVisible,
       setChangeAvatarVisible,
@@ -263,8 +162,4 @@ export default inject(
         enabledHotkeys && !mediaViewerIsVisible && !showProfileLoader,
     };
   },
-)(
-  observer(
-    withTranslation(["Profile", "Common", "PeopleTranslations"])(Header),
-  ),
-);
+)(observer(Header));

@@ -24,45 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
-import ArrowPathReactSvg from "PUBLIC_DIR/images/arrow.path.react.svg";
-
-import { IconButton } from "../../icon-button";
-
-import { TArrowButtonProps } from "../Navigation.types";
-
-const ArrowButton = ({
-  isRootFolder,
-  showBackButton,
-  onBackToParentFolder,
-}: TArrowButtonProps) => {
-  if (showBackButton) {
-    return (
-      <div className="navigation-arrow-container">
-        <IconButton
-          iconNode={<ArrowPathReactSvg />}
-          size={17}
-          isFill
-          onClick={onBackToParentFolder}
-          className="arrow-button"
-        />
-      </div>
-    );
-  }
-
-  return !isRootFolder ? (
-    <div className="navigation-arrow-container">
-      <IconButton
-        iconNode={<ArrowPathReactSvg />}
-        size={17}
-        isFill
-        onClick={onBackToParentFolder}
-        className="arrow-button"
-      />
-      <div className="navigation-header-separator" />
+export const LoaderWrapper = ({
+  children,
+  isLoading,
+  testId,
+}: {
+  children: React.ReactNode;
+  isLoading: boolean;
+  testId?: string;
+}) => {
+  return (
+    <div
+      style={{
+        opacity: isLoading ? 0.5 : 1,
+        pointerEvents: isLoading ? "none" : "auto",
+        transition: "opacity 0.3s ease-in-out",
+      }}
+      data-testid={testId}
+    >
+      {children}
     </div>
-  ) : null;
+  );
 };
-
-export default React.memo(ArrowButton);

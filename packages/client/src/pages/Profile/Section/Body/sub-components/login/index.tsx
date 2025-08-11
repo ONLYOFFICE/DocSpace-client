@@ -32,13 +32,12 @@ import { StyledWrapper } from "./Login.styled";
 
 type LoginContentProps = {
   tfaOn: boolean;
-  backupCodesCount: number;
 };
 
-const LoginContent = ({ tfaOn, backupCodesCount }: LoginContentProps) => {
+const LoginContent = ({ tfaOn }: LoginContentProps) => {
   return (
     <StyledWrapper>
-      {tfaOn ? <LoginSettings backupCodesCount={backupCodesCount} /> : null}
+      {tfaOn ? <LoginSettings /> : null}
       <SocialNetworks />
       <ActiveSession />
     </StyledWrapper>

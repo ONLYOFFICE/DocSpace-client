@@ -34,6 +34,7 @@ import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrol
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ShareLoader from "@docspace/shared/skeletons/share";
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
@@ -311,16 +312,15 @@ const FilesView = ({
     <div data-testid="info_panel_files_view_container">
       <ItemTitle
         infoPanelSelection={
-          isRoomMembersPanel ? infoPanelRoomSelection! : selection
+          isRoomMembersPanel
+            ? { ...infoPanelRoomSelection!, isRoom: true }!
+            : selection
         }
         {...roomMembersProps}
       />
-      <div
-        style={{
-          opacity: isLoadingSuspense ? 0.5 : 1,
-          pointerEvents: isLoadingSuspense ? "none" : "auto",
-        }}
-        data-testid="info_panel_files_view_content"
+      <LoaderWrapper
+        isLoading={isLoadingSuspense}
+        testId="info_panel_files_view_content"
       >
         {isFirstLoadingSuspense ? (
           currentView === InfoPanelView.infoShare ? (
@@ -344,7 +344,7 @@ const FilesView = ({
             {getView()}
           </div>
         )}
-      </div>
+      </LoaderWrapper>
     </div>
   );
 };

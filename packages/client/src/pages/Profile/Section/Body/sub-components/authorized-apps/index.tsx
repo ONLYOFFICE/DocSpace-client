@@ -36,9 +36,9 @@ const AuthorizedApps = ({
   const { t } = useTranslation(["OAuth"]);
 
   useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
-    currentDeviceType,
+    view: viewAs!,
+    setView: setViewAs!,
+    currentDeviceType: currentDeviceType!,
   });
 
   return (
@@ -74,12 +74,12 @@ const AuthorizedApps = ({
       {revokeDialogVisible ? (
         <RevokeDialog
           visible={revokeDialogVisible}
-          onClose={() => setRevokeDialogVisible(false)}
-          currentDeviceType={currentDeviceType}
-          onRevoke={revokeClient}
-          selection={selection}
-          bufferSelection={bufferSelection}
-          logoText={logoText}
+          onClose={() => setRevokeDialogVisible!(false)}
+          currentDeviceType={currentDeviceType!}
+          onRevoke={revokeClient!}
+          selection={selection!}
+          bufferSelection={bufferSelection!}
+          logoText={logoText!}
         />
       ) : null}
     </StyledContainer>

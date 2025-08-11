@@ -158,9 +158,6 @@
   "LoginHistoryTitle": "ログイン履歴",
   "LoginLatestText": "このページでは最新のポータルの活動が表示されています。データは以下のフィールドに入力される期間中に保存されています。（日数、最大１８０日）",
   "LoginSubheaderTitle": "このサブセクションは、ログインの成功や失敗を含む最新のユーザーログイン活動を、理由の表示とともに監視するために使用されます。",
-  "LogoAbout": "「詳細情報」ページ用のロゴマーク",
-  "LogoCompact": "左側のコンパクトメニュー用のロゴマーク",
-  "LogoFavicon": "ファビコン",
   "LogoForEditors": "{{editorName}}エディタ用のロゴ",
   "LogoForViewer": "{{diagramViewer}}用のロゴ",
   "LogoLightSmall": "スペースのヘッダー用ロゴ",
@@ -292,9 +289,5 @@
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
   "WhiteLabelSubtitle": "会社名を入力し、ロゴをアップロードし、ブランディングに合わせたスタイリングにカスタマイズをしましょう。",
-  "WhiteLabelTooltip": "サイズはRetinaディスプレイ用に表示されています。標準的な解像度のディスプレイの場合、ロゴの幅と高さはアップロード時に適宜リサイズされます。",
-  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
-  "YouHaveUnsavedChanges": "未保存変更はあります。",
-  "YourCurrentDomain": "現在お使いのドメイン",
-  "YourLogo": "あなたのロゴ"
+  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
 }

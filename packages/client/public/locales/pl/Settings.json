@@ -158,9 +158,6 @@
   "LoginHistoryTitle": "Historia logowania",
   "LoginLatestText": "Na tej stronie wyświetlana jest tylko ostatnia aktywność. Same dane są przechowywane przez okres podany w poniższym polu (maksymalnie 180 dni).",
   "LoginSubheaderTitle": "Dana podsekcja służy do monitorowania logowania przez użytkowników, w tym udanych i nieudanych prób zalogowania ze wskazaniem przyczyny.",
-  "LogoAbout": "Logo dla strony O nas",
-  "LogoCompact": "Logo dla kompaktowego menu po lewej stronie",
-  "LogoFavicon": "Favicon",
   "LogoForEditors": "Logo dla edytora {{editorName}}",
   "LogoForViewer": "Logo dla {{diagramViewer}}",
   "LogoLightSmall": "Logo dla nagłówka portalu",
@@ -292,9 +289,5 @@
   "WantToCancelUpload": "Czy chcesz anulować przesyłanie?",
   "WantToContinue": "Chcesz kontynuować czy zmienić limit pamięci użytkownika?",
   "WhiteLabelSubtitle": "Wpisz nazwę swojej firmy, wgraj logo i dostosuj stylizację, aby lepiej pasowała do Twojego brandingu.",
-  "WhiteLabelTooltip": "Rozmiary są wyświetlane dla wyświetlaczy Retina W przypadku wyświetlaczy o standardowych rozdzielczościach szerokość i wysokość logo zostaną dostosowane po wgraniu.",
-  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku.",
-  "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
-  "YourCurrentDomain": "Twoja obecna domena",
-  "YourLogo": "Twoje Logo"
+  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku."
 }

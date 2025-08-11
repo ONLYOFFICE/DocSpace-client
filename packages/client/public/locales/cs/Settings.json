@@ -158,9 +158,6 @@
   "LoginHistoryTitle": "Historie přihlášení",
   "LoginLatestText": "Na této stránce se zobrazují pouze nejnovější aktivity. Samotná data se ukládají po dobu uvedenou v poli níže (max. 180 dní).",
   "LoginSubheaderTitle": "Tato podsekce slouží ke sledování posledních přihlašovacích aktivit uživatelů včetně úspěšných přihlášení a neúspěšných pokusů s uvedením důvodů.",
-  "LogoAbout": "Logo pro stránku O nás",
-  "LogoCompact": "Logo pro kompaktní levou nabídku",
-  "LogoFavicon": "Favicon",
   "LogoForEditors": "Logo pro editor {{editorName}}",
   "LogoForViewer": "Logo pro {{diagramViewer}}",
   "LogoLightSmall": "Logo pro záhlaví prostoru",
@@ -292,9 +289,5 @@
   "WantToCancelUpload": "Chcete zrušit nahrávání?",
   "WantToContinue": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
   "WhiteLabelSubtitle": "Zadejte název společnosti, nahrajte logo a přizpůsobte styl tak, aby odpovídal vaší značce.",
-  "WhiteLabelTooltip": "Velikosti jsou uvedeny pro displeje Retina. U displejů se standardním rozlišením se šířka a výška loga při nahrávání odpovídajícím způsobem změní.",
-  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
-  "YouHaveUnsavedChanges": "Máte neuložené změny",
-  "YourCurrentDomain": "Vaše aktuální doména",
-  "YourLogo": "Vaše logo"
+  "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku."
 }

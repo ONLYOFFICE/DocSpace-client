@@ -158,9 +158,6 @@
   "LoginHistoryTitle": "Istoricul conectărilor",
   "LoginLatestText": "Pe această pagină sunt afişate doar cele mai recente activităţi. Datele sunt stocate pe o perioadă specificată în câmpul de mai jos (180 de zile maxim).",
   "LoginSubheaderTitle": "Această subsecțiune este utilizată pentru a monitoriza cea mai recentă activitate de conectare a utilizatorilor, inclusiv conectările reuşite şi încercările eşuate, cu indicarea motivelor.",
-  "LogoAbout": "Siglă pentru pagina Despre",
-  "LogoCompact": "Meniul compact din partea stângă",
-  "LogoFavicon": "Favicon",
   "LogoForEditors": "Logo pentru editorul {{editorName}}",
   "LogoForViewer": "Logo pentru {{diagramViewer}}",
   "LogoLightSmall": "Logo-ul pentru antetul spațiului",
@@ -292,9 +289,5 @@
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
   "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
-  "WhiteLabelTooltip": "Dimensiunile sunt specificate pentru ecranele Retina. Pentru rezoluţie de ecran standard, lăţimea şi înălţimea siglei se scalează corespunzător la încărcare.",
-  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
-  "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
-  "YourCurrentDomain": "Domeniul dvs. actual",
-  "YourLogo": "Logo-ul dvs"
+  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
 }

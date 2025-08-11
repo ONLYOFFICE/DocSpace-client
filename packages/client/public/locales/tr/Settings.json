@@ -158,9 +158,6 @@
   "LoginHistoryTitle": "Giriş Geçmişi",
   "LoginLatestText": "Bu sayfada sadece en son etkinlik gösterilir. Verilerin kendisi, aşağıdaki alanda belirtilen süre boyunca (en fazla 180 gün) saklanır.",
   "LoginSubheaderTitle": "Bu alt bölüm, başarılı oturum açmalar ve nedenleriyle birlikte başarısız denemeler dahil olmak üzere en son kullanıcı oturum açma etkinliğini izlemek için kullanılır.",
-  "LogoAbout": "Hakkında sayfası logosu",
-  "LogoCompact": "Kompakt sol menü logosu",
-  "LogoFavicon": "Favicon",
   "LogoForEditors": "{{editorName}} editörü için logo",
   "LogoForViewer": "{{diagramViewer}} için logo",
   "LogoLightSmall": "Alan başlığı için logo",
@@ -292,9 +289,5 @@
   "WantToCancelUpload": "Yüklemeyi iptal etmek istiyor musunuz?",
   "WantToContinue": "Devam etmek mi yoksa kullanıcı kotasını değiştirmek mi istiyorsunuz?",
   "WhiteLabelSubtitle": "Şirketinizin adını girin, logoyu yükleyin ve stili markanıza uyacak şekilde özelleştirin.",
-  "WhiteLabelTooltip": "Boyutlar Retina ekranlar için gösterilmiştir. Standart çözünürlüğe sahip ekranlar için logo genişliği ve yüksekliği yükleme sırasında uygun şekilde yeniden boyutlandırılacaktır.",
-  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
-  "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
-  "YourCurrentDomain": "Mevcut alanınız",
-  "YourLogo": "Logonuz"
+  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin."
 }

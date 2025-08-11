@@ -158,9 +158,6 @@
   "LoginHistoryTitle": "Historial de conexiones",
   "LoginLatestText": "En está página se demuestra solo la actividad más reciente. Los propios datos se almacenan durante el periodo indicarado en el campo de abajo (180 días como máximo).",
   "LoginSubheaderTitle": "Esta subsección se utiliza para supervisar la última actividad de inicio de sesión de los usuarios, incluidos los inicios de sesión correctos y los intentos fallidos con indicación de los motivos.",
-  "LogoAbout": "Logotipo para la página Acerca de",
-  "LogoCompact": "Logotipo para el menú compacto de la izquierda",
-  "LogoFavicon": "Favicono",
   "LogoForEditors": "Logotipo para el editor {{editorName}}",
   "LogoForViewer": "Logotipo para {{diagramViewer}}",
   "LogoLightSmall": "Logo para el encabezado del espacio",
@@ -292,9 +289,5 @@
   "WantToCancelUpload": "¿Desea cancelar la carga?",
   "WantToContinue": "¿Desea continuar o cambiar la cuota de almacenamiento del usuario?",
   "WhiteLabelSubtitle": "Introduzca el nombre de su empresa, cargue el logotipo y personalice el estilo para que coincida con su marca.",
-  "WhiteLabelTooltip": "Los tamaños se muestran para las pantallas Retina. Para las pantallas con resoluciones estándar, la anchura y la altura del logotipo se redimensionarán en consecuencia al cargarlo.",
-  "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso.",
-  "YouHaveUnsavedChanges": "Tiene cambios no guardados",
-  "YourCurrentDomain": "Su dominio actual",
-  "YourLogo": "Su logotipo"
+  "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso."
 }

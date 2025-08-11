@@ -158,9 +158,6 @@
   "LoginHistoryTitle": "Kirjautumishistoria",
   "LoginLatestText": "Vain viimeisin toiminta näytetään tällä sivulla. Data itsessään on tallennettu alapuolella olevassa kentässä määritetyllä aikavälillä (max.180 päivää).",
   "LoginSubheaderTitle": "Tätä aliosiota käytetään valvomaan viimeisintä käyttäjän sisäänkirjautumistoimintaa sisältäen onnistuneet sisäänkirjautumiset ja epäonnistuneet yritykset sekä niiden syyt.",
-  "LogoAbout": "Logo Sisällöstä-osioon",
-  "LogoCompact": "Logo vasempaan kompaktiin menuun",
-  "LogoFavicon": "Favicon",
   "LogoForEditors": "Editorin {{editorName}} logo",
   "LogoForViewer": "Logo kohteelle {{diagramViewer}}",
   "LogoLightSmall": "Tilan otsikon logo",
@@ -292,9 +289,5 @@
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
   "WantToContinue": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
   "WhiteLabelSubtitle": "Syötä yrityksesi nimi, lataa logo ja muokkaa tyyli brändäykseesi sopivaksi. ",
-  "WhiteLabelTooltip": "Koot näytetään Retinanäytöille. Logon leveys ja korkeus vakioresoluution näytöille muutetaan vastaavasti latauksen yhteydessä.",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
-  "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
-  "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
-  "YourLogo": "Logosi"
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
 }

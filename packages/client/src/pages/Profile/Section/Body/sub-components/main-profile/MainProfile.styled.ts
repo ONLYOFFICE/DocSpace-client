@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 
@@ -85,7 +86,7 @@ export const StyledAvatarWrapper = styled.div`
   }
 `;
 
-export const StyledInfo = styled.div`
+export const StyledInfo = styled.div<{ withActivationBar?: boolean }>`
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -190,9 +191,9 @@ export const StyledInfo = styled.div`
     .send-again-text {
       margin-inline-start: 5px;
       line-height: 15px;
-      color: ${(props) => props.currentColorScheme.main?.accent};
+      color: ${(props) => props.theme.currentColorScheme?.main?.accent};
       border-bottom: 1px solid
-        ${(props) => props.currentColorScheme.main?.accent};
+        ${(props) => props.theme.currentColorScheme?.main?.accent};
       margin-top: 2px;
     }
 
@@ -214,7 +215,7 @@ export const StyledInfo = styled.div`
         height: 12px;
 
         path {
-          fill: ${(props) => props.currentColorScheme.main?.accent};
+          fill: ${(props) => props.theme.currentColorScheme?.main?.accent};
         }
       }
     }
@@ -331,7 +332,7 @@ export const StyledInfo = styled.div`
   }
 `;
 
-export const StyledLabel = styled(Text)`
+export const StyledLabel = styled(Text)<{ marginTopProp?: string }>`
   display: block;
   align-items: center;
   gap: 4px;

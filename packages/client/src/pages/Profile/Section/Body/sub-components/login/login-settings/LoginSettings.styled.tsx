@@ -24,49 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { RadioButton } from "@docspace/shared/components/radio-button";
+import styled from "styled-components";
 
-import Preview from "SRC_DIR/pages/PortalSettings/categories/common/Appearance/preview";
-import { StyledWrapper } from "./styled-preview";
+import { mobile } from "@docspace/shared/utils";
 
-const ThemePreview = (props) => {
-  const {
-    label,
-    isDisabled,
-    isChecked,
-    onChangeTheme,
-    value,
-    theme,
-    accentColor,
-    themeId,
-  } = props;
+export const StyledWrapper = styled.div`
+  max-width: 660px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
-  return (
-    <StyledWrapper>
-      <div className="card-header">
-        <RadioButton
-          classNameInput={`theme-${theme.toLowerCase()}`}
-          name={`theme-option-${value}`}
-          label={label}
-          onClick={onChangeTheme}
-          value={value}
-          isDisabled={isDisabled}
-          isChecked={isChecked}
-          testId={`theme_${theme}_radio_button`}
-        />
-      </div>
-      <Preview
-        appliedColorAccent={accentColor}
-        floatingButtonClass="floating-btn"
-        selectThemeId={themeId}
-        previewAccent={accentColor}
-        themePreview={theme}
-        withBorder={false}
-        withTileActions={false}
-      />
-    </StyledWrapper>
-  );
-};
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 
-export default ThemePreview;
+  .description {
+    color: ${(props) => props.theme.profile.login.textColor};
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    @media ${mobile} {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+
+      .button {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+      }
+    }
+  }
+`;

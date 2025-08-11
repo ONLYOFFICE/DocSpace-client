@@ -24,56 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { inject, observer } from "mobx-react";
+import React from "react";
+import { RadioButton } from "@docspace/shared/components/radio-button";
 
-import { NotificationsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import Preview from "SRC_DIR/pages/PortalSettings/categories/common/Appearance/preview";
 
-const UsefulTipsContainer = ({
-  t,
-  changeSubscription,
-  usefulTipsSubscription,
-  textProps,
-  textDescriptionsProps,
-}) => {
-  const onChangeEmailSubscription = async (e) => {
-    const checked = e.currentTarget.checked;
-    try {
-      await changeSubscription(NotificationsType.UsefulTips, checked);
-    } catch (err) {
-      toastr.error(err);
-    }
-  };
+import { StyledWrapper } from "./InterfaceTheme.styled";
+
+type ThemePreviewProps = {
+  label: string;
+  isDisabled?: boolean;
+  isChecked: boolean;
+  onChangeTheme: (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+  ) => void;
+  value: string;
+  theme: string;
+  accentColor: string;
+  themeId: string;
+};
+
+const ThemePreview = (props: ThemePreviewProps) => {
+  const {
+    label,
+    isDisabled = false,
+    isChecked,
+    onChangeTheme,
+    value,
+    theme,
+    accentColor,
+    themeId,
+  } = props;
 
   return (
-    <div className="notification-container">
-      <div className="row">
-        <Text {...textProps} className="subscription-title">
-          {t("UsefulTips", { productName: t("Common:ProductName") })}
-        </Text>
-        <ToggleButton
-          className="useful-tips toggle-btn"
-          onChange={onChangeEmailSubscription}
-          isChecked={usefulTipsSubscription}
-          dataTestId="useful_tips_toggle_button"
+    <StyledWrapper>
+      <div className="card-header">
+        <RadioButton
+          classNameInput={`theme-${theme.toLowerCase()}`}
+          name={`theme-option-${value}`}
+          label={label}
+          onClick={onChangeTheme}
+          value={value}
+          isDisabled={isDisabled}
+          isChecked={isChecked}
+          testId={`theme_${theme}_radio_button`}
         />
       </div>
-      <Text {...textDescriptionsProps}>
-        {t("UsefulTipsDescription", { productName: t("Common:ProductName") })}
-      </Text>
-    </div>
+      <Preview
+        appliedColorAccent={accentColor}
+        floatingButtonClass="floating-btn"
+        selectThemeId={themeId}
+        previewAccent={accentColor}
+        themePreview={theme}
+        withBorder={false}
+        withTileActions={false}
+      />
+    </StyledWrapper>
   );
 };
 
-export default inject(({ peopleStore }) => {
-  const { targetUserStore } = peopleStore;
-
-  const { changeSubscription, usefulTipsSubscription } = targetUserStore;
-
-  return {
-    changeSubscription,
-    usefulTipsSubscription,
-  };
-})(observer(UsefulTipsContainer));
+export default ThemePreview;

@@ -24,33 +24,29 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { makeAutoObservable } from "mobx";
+import { TFunction } from "i18next";
+
 import api from "@docspace/shared/api";
 import { NotificationsType } from "@docspace/shared/enums";
-
-import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
-import { makeAutoObservable } from "mobx";
 import { setCookie } from "@docspace/shared/utils/cookie";
-
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import {
   changeNotificationSubscription,
   getNotificationSubscription,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { Nullable } from "@docspace/shared/types";
 
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 
 import { employeeWrapperToMemberModel } from "SRC_DIR/helpers/contacts";
+import { TUser } from "@docspace/shared/api/people/types";
 
-const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 class TargetUserStore {
-  peopleStore = null;
-
-  userStore = null;
-
-  targetUser = null;
-
-  isEditTargetUser = false;
+  userStore: Nullable<UserStore> = null;
 
   changePasswordVisible = false;
 
@@ -68,110 +64,83 @@ class TargetUserStore {
 
   isFirstSubscriptionsLoad = true;
 
-  constructor(peopleStore, userStore) {
-    this.peopleStore = peopleStore;
+  constructor(userStore: UserStore) {
     this.userStore = userStore;
     makeAutoObservable(this);
   }
 
-  get isMe() {
-    return (
-      this.targetUser &&
-      this.targetUser.userName === this.userStore.user.userName
-    );
-  }
-
-  setHasAvatar = (value) => {
-    this.targetUser.hasAvatar = value;
-    this.userStore.user.hasAvatar = value;
+  setHasAvatar = (value: boolean) => {
+    if (this.userStore?.user) this.userStore.user.hasAvatar = value;
   };
 
-  getTargetUser = async (userName) => {
-    /* if (this.userStore.user.userName === userName) {
-      return this.setTargetUser(this.userStore.user);
-    } else { */
-    const user = await api.people.getUser(userName);
-
-    this.setTargetUser(user);
-    return user;
-    // }
-  };
-
-  setTargetUser = (user) => {
-    this.targetUser = user;
-    this.userStore.setUser(user); // TODO
-  };
-
-  updateProfile = async (profile) => {
+  updateProfile = async (profile: TUser) => {
     const member = employeeWrapperToMemberModel(profile);
 
-    const res = await api.people.updateUser(member);
-    if (!res.theme) res.theme = this.userStore.user.theme;
+    const res = (await api.people.updateUser(member)) as TUser;
 
-    this.setTargetUser(res);
+    if (!res.theme && this.userStore?.user?.theme)
+      res.theme = this.userStore.user.theme;
+
+    this.userStore?.setUser(res);
+
     return Promise.resolve(res);
   };
 
-  updateCreatedAvatar = (avatar) => {
+  updateCreatedAvatar = (avatar: {
+    big: string;
+    small: string;
+    medium: string;
+    max: string;
+    main: string;
+  }) => {
     const { big, small, medium, max, main } = avatar;
 
-    this.targetUser.avatar = big;
-    this.targetUser.avatarSmall = small;
-    this.targetUser.avatarMedium = medium;
-    this.targetUser.avatarMax = max;
-    this.targetUser.avatarOriginal = main;
-
-    this.userStore.updateAvatarInfo(big, small, medium, max, main);
-
-    console.log("updateCreatedAvatar", {
-      targetUser: this.targetUser,
-      user: this.userStore.user,
-    });
+    this.userStore?.updateAvatarInfo(big, small, medium, max, main);
   };
 
-  updateProfileCulture = async (id, culture) => {
-    const res = await api.people.updateUserCulture(id, culture);
+  updateProfileCulture = async (id: string, culture: string) => {
+    const res = (await api.people.updateUserCulture(id, culture)) as TUser;
 
-    this.userStore.setUser(res);
-
-    this.setTargetUser(res);
-    // caches.delete("api-cache");
+    this.userStore?.setUser(res);
 
     setCookie(LANGUAGE, culture, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });
   };
 
-  setIsEditTargetUser = (isEditTargetUser) => {
-    this.isEditTargetUser = isEditTargetUser;
-  };
-
-  setChangePasswordVisible = (visible) =>
+  setChangePasswordVisible = (visible: boolean) =>
     (this.changePasswordVisible = visible);
 
-  setChangeNameVisible = (visible) => {
-    // console.log("setChangeNameVisible", { visible });
+  setChangeNameVisible = (visible: boolean) => {
     this.changeNameVisible = visible;
   };
 
-  setChangeAvatarVisible = (visible) => {
-    // console.log("setChangeAvatarVisible", { visible });
+  setChangeAvatarVisible = (visible: boolean) => {
     this.changeAvatarVisible = visible;
   };
 
   deleteProfileAvatar = async () => {
-    const res = await api.people.deleteAvatar(this.targetUser.id);
+    if (!this.userStore?.user) return;
+
+    const res = (await api.people.deleteAvatar(this.userStore.user.id)) as {
+      big: string;
+      small: string;
+      medium: string;
+      max: string;
+      main: string;
+    };
+
     this.updateCreatedAvatar(res);
     this.setHasAvatar(false);
   };
 
-  getProfileModel = (t) => {
+  getProfileModel = (t: TFunction) => {
     return [
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
         key: "profile_avatar_upload",
-        onClick: (ref) => ref.current.click(),
+        onClick: (ref: React.RefObject<HTMLDivElement>) => ref.current?.click(),
       },
       {
         label: t("Common:Delete"),
@@ -183,10 +152,10 @@ class TargetUserStore {
   };
 
   setSubscriptions = (
-    isEnableBadges,
-    isEnableRoomsActivity,
-    isEnableDailyFeed,
-    isEnableTips,
+    isEnableBadges: boolean,
+    isEnableRoomsActivity: boolean,
+    isEnableDailyFeed: boolean,
+    isEnableTips: boolean,
   ) => {
     this.badgesSubscription = isEnableBadges;
     this.roomsActivitySubscription = isEnableRoomsActivity;
@@ -195,19 +164,25 @@ class TargetUserStore {
     this.isFirstSubscriptionsLoad = false;
   };
 
-  changeSubscription = async (notificationType, isEnabled) => {
-    const setNotificationValue = (type, enabled) => {
+  changeSubscription = async (
+    notificationType: NotificationsType,
+    isEnabled: boolean,
+  ) => {
+    const setNotificationValue = (
+      type: NotificationsType,
+      enabled: boolean,
+    ) => {
       switch (type) {
-        case Badges:
+        case NotificationsType.Badges:
           this.badgesSubscription = enabled;
           break;
-        case DailyFeed:
+        case NotificationsType.DailyFeed:
           this.dailyFeedSubscriptions = enabled;
           break;
-        case RoomsActivity:
+        case NotificationsType.RoomsActivity:
           this.roomsActivitySubscription = enabled;
           break;
-        case UsefulTips:
+        case NotificationsType.UsefulTips:
           this.usefulTipsSubscription = enabled;
           break;
         default:
@@ -220,10 +195,13 @@ class TargetUserStore {
     try {
       await changeNotificationSubscription(notificationType, isEnabled);
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
       const notification = await getNotificationSubscription(notificationType);
 
-      setNotificationValue(notificationType, notification.isEnabled);
+      setNotificationValue(
+        notificationType,
+        (notification as { isEnabled: boolean }).isEnabled,
+      );
     }
   };
 }

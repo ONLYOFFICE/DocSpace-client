@@ -158,8 +158,6 @@
   "LoginHistoryTitle": "Cronologia accessi",
   "LoginLatestText": "Solo l'ultima attività viene mostrata in questa pagina. I dati stessi vengono memorizzati durante il periodo che può essere inserito nel campo sottostante (misurato in giorni, massimo 180):",
   "LoginSubheaderTitle": "Questa sottosezione viene utilizzata per monitorare l’attività di accesso dell’utente più recente, compresi gli accessi riusciti e i tentativi falliti con un’indicazione dei motivi.",
-  "LogoForEditors": "Logo per l'editor {{editorName}}",
-  "LogoForViewer": "Logo per {{diagramViewer}}",
   "LogoLightSmall": "Logo per l'intestazione dello spazio",
   "ManagementCategoryDataManagement": "Gestione dei dati",
   "ManagementCategoryIntegration": "Integrazione",

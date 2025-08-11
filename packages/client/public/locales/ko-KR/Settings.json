@@ -158,8 +158,6 @@
   "LoginHistoryTitle": "로그인 기록",
   "LoginLatestText": "이 페이지에는 최신 활동만 표시됩니다. 데이터 자체는 아래 필드에 지정된 기간(최대 180일) 동안 저장됩니다.",
   "LoginSubheaderTitle": "이 하위 섹션은 성공적인 로그인과 실패한 로그인 시도 및 그 이유를 포함하여 최신 사용자 로그인 활동을 모니터링하는 데 사용됩니다.",
-  "LogoForEditors": "{{editorName}} 편집기 로고",
-  "LogoForViewer": "{{diagramViewer}} 로고",
   "LogoLightSmall": "스페이스 헤더 로고",
   "ManagementCategoryDataManagement": "데이터 관리",
   "ManagementCategoryIntegration": "통합",

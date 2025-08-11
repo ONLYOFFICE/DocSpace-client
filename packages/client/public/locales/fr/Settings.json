@@ -158,8 +158,6 @@
   "LoginHistoryTitle": "Histoire de connexion",
   "LoginLatestText": "Juste l'activité  la plus récente est affichée sur cette page. Les données elles-mêmes sont conservées pendant la période  que vous devez saisir dans le champ ci-dessous (mesurée en jours, 180 maximum)",
   "LoginSubheaderTitle": "Cette sous-section est utilisée pour suivre les dernières activités de connexion des utilisateurs, y compris les connexions réussies et les tentatives échouées, avec indication des raisons.",
-  "LogoForEditors": "Logo pour l'éditeur {{editorName}}",
-  "LogoForViewer": "Logo pour le {{diagramViewer}}",
   "LogoLightSmall": "Logo pour l'en-tête de l’espace",
   "ManagementCategoryDataManagement": "Gestion des données",
   "ManagementCategoryIntegration": "Intégration",

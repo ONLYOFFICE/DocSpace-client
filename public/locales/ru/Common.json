@@ -873,5 +873,7 @@
   "YouHaveUnsavedChanges": "Имеются несохраненные изменения",
   "YourCurrentDomain": "Ваш текущий домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "LogoForEditors": "Логотип для редактора {{editorName}}",
+  "LogoForViewer": "Логотип для {{diagramViewer}}"
 }

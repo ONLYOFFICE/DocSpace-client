@@ -871,5 +871,7 @@
   "YouHaveUnsavedChanges": "Имате несачуване промене",
   "YourCurrentDomain": "Ваш тренутни домен",
   "YourLogo": "Ваш лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "LogoForEditors": "Лого за {{editorName}} уредник",
+  "LogoForViewer": "Лого за {{diagramViewer}}"
 }

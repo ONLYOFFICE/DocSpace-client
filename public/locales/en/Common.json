@@ -882,5 +882,7 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "LogoForEditors": "Logo for {{editorName}} editor",
+  "LogoForViewer": "Logo for {{diagramViewer}}"
 }

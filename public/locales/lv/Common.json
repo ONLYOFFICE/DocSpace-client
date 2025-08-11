@@ -870,5 +870,7 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "LogoForEditors": "Logotips redaktoram {{editorName}}",
+  "LogoForViewer": "Logotips priekš {{diagramViewer}}"
 }

@@ -871,5 +871,7 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "LogoForEditors": "{{editorName}} editörü için logo",
+  "LogoForViewer": "{{diagramViewer}} için logo"
 }

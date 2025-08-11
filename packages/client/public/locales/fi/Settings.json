@@ -158,8 +158,6 @@
   "LoginHistoryTitle": "Kirjautumishistoria",
   "LoginLatestText": "Vain viimeisin toiminta näytetään tällä sivulla. Data itsessään on tallennettu alapuolella olevassa kentässä määritetyllä aikavälillä (max.180 päivää).",
   "LoginSubheaderTitle": "Tätä aliosiota käytetään valvomaan viimeisintä käyttäjän sisäänkirjautumistoimintaa sisältäen onnistuneet sisäänkirjautumiset ja epäonnistuneet yritykset sekä niiden syyt.",
-  "LogoForEditors": "Editorin {{editorName}} logo",
-  "LogoForViewer": "Logo kohteelle {{diagramViewer}}",
   "LogoLightSmall": "Tilan otsikon logo",
   "ManagementCategoryDataManagement": "Tiedon hallinta",
   "ManagementCategoryIntegration": "Liittäminen",

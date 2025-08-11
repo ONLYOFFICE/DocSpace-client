@@ -121,6 +121,7 @@ const RowDataComponent = (props) => {
         {...dragStyles}
         dataTestId={`files-cell-name-${index}`}
         className={classNames(
+          selectionProp?.className,
           "table-container_file-name-cell",
           dragStyles.className,
           {

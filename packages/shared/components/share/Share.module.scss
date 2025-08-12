@@ -221,8 +221,6 @@
   align-items: center;
   justify-content: center;
 
-  cursor: pointer;
-
   & > * {
     width: 16px;
     height: 16px;
@@ -231,7 +229,8 @@
   padding: 6px 8px;
 
   svg {
-    cursor: pointer;
+    width: 16px;
+    height: 16px;
     path {
       fill: var(--combobox-children-button-disabled-color);
     }

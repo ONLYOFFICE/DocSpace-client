@@ -119,7 +119,7 @@ const SyncContainer = ({
         onClick={onSync}
         label={t("LdapSyncButton")}
         isDisabled={!isLdapEnabledOnServer || isUIDisabled}
-        dataTestId="manual_sync_button"
+        testId="manual_sync_button"
       />
 
       <ProgressContainer operation={LDAPOperation.Sync} />
@@ -165,7 +165,7 @@ const SyncContainer = ({
             isDisabled={
               !isLdapEnabledOnServer || isUIDisabled || cron === serverCron
             }
-            dataTestId="auto_sync_save_button"
+            testId="auto_sync_save_button"
           />
         </>
       ) : null}

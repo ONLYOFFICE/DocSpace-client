@@ -3,7 +3,7 @@
   "content": "Copy link",
   "content_en_sha1_hash": "2f84eea5d45da4f1ce1760b85db18a854f4e1b39",
   "created_at": "2025-05-19T21:30:43.782Z",
-  "updated_at": "2025-08-04T07:30:01.600Z",
+  "updated_at": "2025-08-12T19:46:26.285Z",
   "comment": {
     "text": "This translation key \"CopyLink\" is used to display a label that triggers the copy link functionality, appearing as a button in the Completed VDR Form component, prompting users to share or export a link. It appears on-screen when the user enables the \"Copy Link\" option, allowing them to share their file with others.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 261,
-      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill ? isEditing : false}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n />\n <Button\n className=\"secondary-button\"",
+      "line_number": 266,
+      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill ? isEditing : false}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n testId={isTurnToFill ? \"fill_form_button\" : \"copy_link_button\"}\n />\n <Button",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedVDRForm.tsx",
-      "line_number": 261,
-      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill ? isEditing : false}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n />\n <Button\n className=\"secondary-button\"",
+      "line_number": 266,
+      "context": "size={ButtonSize.medium}\n isLoading={isTurnToFill ? isEditing : false}\n label={\n isTurnToFill\n ? t(\"CompletedForm:FillOutForm\")\n : t(\"Common:CopyLink\")\n }\n onClick={isTurnToFill ? handleFillForm : copyLinkFile}\n testId={isTurnToFill ? \"fill_form_button\" : \"copy_link_button\"}\n />\n <Button",
       "module": "/packages/doceditor"
     },
     {

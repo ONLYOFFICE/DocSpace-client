@@ -3,7 +3,7 @@
   "content": "Manage storage quota",
   "content_en_sha1_hash": "0acf9963c183dbb1e5558ca61bdf05b365b77448",
   "created_at": "2025-05-19T21:30:46.354Z",
-  "updated_at": "2025-08-11T09:02:44.042Z",
+  "updated_at": "2025-08-12T19:46:26.259Z",
   "comment": {
     "text": "Manage storage quota is used as a button label and header title in a modal dialog to allow users to manage their storage space, typically when viewing usage statistics or setting up custom quotas. It appears on a portal settings page and in a change storage quota dialog.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/shared/dialogs/change-storage-quota/index.tsx",
       "line_number": 133,
-      "context": "onClose={onCloseClick}\n >\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {",
+      "context": "onClose={onCloseClick}\n >\n <ModalDialog.Header>\n {isDisableQuota\n ? t(\"Common:DisableStorageQuota\")\n : t(\"Common:ManageStorageQuota\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text>\n {isDisableQuota\n ? t(\"Common:TurnOffDiskSpaceLimit\", {",
       "module": "/packages/shared"
     },
     {

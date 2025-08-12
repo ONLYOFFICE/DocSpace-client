@@ -412,7 +412,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         imageIcon: selectedOption.icon,
         imageAlt: selectedOption.label
           ? selectedOption.label
-          : selectedOption.key,
+          : (selectedOption.key as string),
       }
     : {};
 

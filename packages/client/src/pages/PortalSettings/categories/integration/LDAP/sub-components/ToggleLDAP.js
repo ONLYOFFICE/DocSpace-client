@@ -129,7 +129,6 @@ const ToggleLDAP = ({
           fontWeight={400}
           lineHeight="16px"
           className="settings_unavailable"
-          noSelect
         >
           {t("LdapToggleDescription", {
             productName: t("Common:ProductName"),

@@ -121,6 +121,7 @@ const TariffBar = ({
         onClick={onClick}
         truncate
         dataTestId="tariff_bar_text"
+        noSelect
       >
         {tariffBar.label}
       </Text>

@@ -37,11 +37,7 @@ import { StyledSectionBodyContent, StyledTextContent } from "./StyledComponent";
 const Notifications = () => {
   const { t } = useTranslation(["Notifications", "Common"]);
 
-  const textProps = {
-    fontSize: "13px",
-    fontWeight: "600",
-    noSelect: true,
-  };
+  const textProps = { fontSize: "13px", fontWeight: "600" };
   const textDescriptionsProps = {
     fontSize: "13px",
     fontWeight: "400",

@@ -112,7 +112,7 @@ const ReportDialog = (props: ReportDialogProps) => {
       <ModalDialog.Header>{t("ErrorReport")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.bodyContent}>
-          <Text className={styles.reportDescription} noSelect>
+          <Text className={styles.reportDescription}>
             {t("ErrorReportDescription")}
           </Text>
           <Textarea
@@ -132,14 +132,9 @@ const ReportDialog = (props: ReportDialogProps) => {
               className={styles.fileIcon}
               alt="report-file"
             />
-            <Text
-              as="div"
-              fontWeight={600}
-              noSelect
-              className={styles.reportFilename}
-            >
+            <Text as="div" fontWeight={600} className={styles.reportFilename}>
               {fileTitle}
-              <Text fontWeight={600} noSelect color={globalColors.gray}>
+              <Text fontWeight={600} color={globalColors.gray}>
                 .json
               </Text>
             </Text>

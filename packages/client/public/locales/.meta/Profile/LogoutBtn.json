@@ -3,7 +3,7 @@
   "content": "Log out",
   "content_en_sha1_hash": "6e78c91f5a05fc0d4f1a787d38e3d6fe2f856d46",
   "created_at": "2025-05-19T21:30:53.366Z",
-  "updated_at": "2025-05-26T07:57:32.318Z",
+  "updated_at": "2025-08-11T18:11:59.150Z",
   "comment": {
     "text": "This translation key is used for the text \"Log out\" on a logout button in a modal dialogue, typically used to exit the application or end a user's session. It appears as part of a footer section in a dialog box and is triggered when the user clicks the button.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/LogoutAllSessionDialog/index.js",
-      "line_number": 83,
+      "line_number": 84,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"logout\"\n key=\"LogoutBtn\"\n label={t(\"Profile:LogoutBtn\")}\n size=\"normal\"\n scale\n primary\n onClick={onClickLogout}\n isLoading={isLoading}",
       "module": "/packages/client"
     },

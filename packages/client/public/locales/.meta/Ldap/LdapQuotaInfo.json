@@ -3,7 +3,7 @@
   "content": "To be able to use this attribute, enable user quota in the <0>Storage management settings</0>",
   "content_en_sha1_hash": "b74fa70749a0470fd1d26e0810e4ffe636260943",
   "created_at": "2025-05-19T21:30:54.258Z",
-  "updated_at": "2025-05-24T08:23:44.612Z",
+  "updated_at": "2025-08-11T18:11:59.238Z",
   "comment": {
     "text": "This translation key is used to display a message when enabling user quota in storage management settings. It will be displayed as part of a UI element, likely in a category or settings page, to inform users about the attribute's purpose.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 232,
+      "line_number": 245,
       "context": "/>\n {!isDefaultUsersQuotaSet ? (\n <Text as=\"span\" fontWeight={400} fontSize=\"12px\" lineHeight=\"16px\">\n <Trans\n t={t}\n i18nKey=\"LdapQuotaInfo\"\n ns=\"Ldap\"\n components={[\n <Link\n key=\"link\"\n type=\"action\"",
       "module": "/packages/client"
     }

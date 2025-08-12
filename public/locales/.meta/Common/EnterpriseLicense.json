@@ -3,7 +3,7 @@
   "content": "Enterprise",
   "content_en_sha1_hash": "b4afff317fb189b9020c5c4b47338ed3d2b0662a",
   "created_at": "2025-05-19T21:30:45.018Z",
-  "updated_at": "2025-08-04T07:30:01.283Z",
+  "updated_at": "2025-08-11T18:11:59.197Z",
   "comment": {
     "text": "The \"EnterpriseLicense\" translation key is used to display the text \"Enterprise License\" in a UI component, likely as part of a licensing or upgrade process. It appears on-screen when users need to enter their Enterprise license information, and its purpose is to clearly identify the type of license being used for activation or upgrading.",
     "is_auto": true,
@@ -37,7 +37,7 @@
     {
       "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/TariffTitleContainer.tsx",
       "line_number": 111,
-      "context": "{t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>{\" \"}\n {!isLicenseDateExpired ? (\n <Text fontSize=\"14px\" as=\"span\">\n {expiresDate()}",
+      "context": "{t(\"ActivateTariffDescr\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n license: isDeveloper\n ? t(\"Common:DeveloperLicense\")\n : t(\"Common:EnterpriseLicense\"),\n })}\n </Text>{\" \"}\n {!isLicenseDateExpired ? (\n <Text\n fontSize=\"14px\"",
       "module": "/packages/shared"
     },
     {

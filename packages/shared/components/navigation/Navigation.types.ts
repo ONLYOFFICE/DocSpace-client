@@ -76,6 +76,7 @@ export type TToggleInfoPanelButtonProps = {
 
 export type TArrowButtonProps = {
   isRootFolder: boolean;
+  showBackButton?: boolean;
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
@@ -226,4 +227,5 @@ export type TNavigationProps = Omit<
     showNavigationButton: boolean;
     titleIconTooltip?: string;
     onLogoClick?: () => void;
+    showBackButton?: boolean;
   };

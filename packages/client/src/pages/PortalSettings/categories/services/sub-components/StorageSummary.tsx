@@ -132,6 +132,7 @@ const StorageSummary: React.FC<StorageSummaryProps> = (props) => {
             textDecoration="underline dashed"
             onClick={onCancelChange}
             fontWeight={600}
+            dataTestId="storage_summary_cancel_change_link"
           >
             {t("CancelChange")}
           </Link>

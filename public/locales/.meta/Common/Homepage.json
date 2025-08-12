@@ -3,7 +3,7 @@
   "content": "Homepage",
   "content_en_sha1_hash": "ac066591edb7d47406e88eed7ba536040a82daf4",
   "created_at": "2025-05-19T21:30:45.800Z",
-  "updated_at": "2025-05-28T09:30:02.298Z",
+  "updated_at": "2025-08-11T18:11:59.156Z",
   "comment": {
     "text": "This translation key is used to display the text \"Homepage\" in a settings dialog component. It appears as the title of an info section and should be translated accordingly. The context suggests it is part of a plugin settings interface.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 180,
+      "line_number": 181,
       "context": "fontWeight={400}\n lineHeight=\"20px\"\n noSelect\n truncate\n >\n {t(\"Common:Homepage\")}\n </Text>\n <Link\n fontSize=\"13px\"\n fontWeight={600}\n lineHeight=\"20px\"",
       "module": "/packages/client"
     }

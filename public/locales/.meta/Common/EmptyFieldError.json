@@ -3,7 +3,7 @@
   "content": "Empty field",
   "content_en_sha1_hash": "9ea77181ac6a721f1181cacbc3707cd24c6a1b38",
   "created_at": "2025-05-19T21:30:44.813Z",
-  "updated_at": "2025-08-04T07:30:01.479Z",
+  "updated_at": "2025-08-11T18:11:59.236Z",
   "comment": {
     "text": "This translation key is used to display an error message when a field is empty. It appears on the \"Attribute Mapping\" page as part of a form, specifically under fields marked as required (e.g., FirstName).",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 132,
-      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 135,
+      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 132,
-      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 135,
+      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 132,
-      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 135,
+      "context": "<div className=\"ldap_attribute-mapping\">\n <FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.firstName}\n labelText={t(\"Common:FirstName\")}\n isRequired\n dataTestId=\"first_name_field_container\"\n >",
       "module": "/packages/client"
     },
     {
@@ -72,37 +72,37 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 111,
-      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n >",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 111,
-      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n >",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 111,
-      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n >",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 111,
-      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n >",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 111,
-      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n >",
+      "line_number": 113,
+      "context": "<div className=\"group_membership-container\">\n <FieldContainer\n isVertical\n labelVisible\n style={FIELD_STYLE}\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupDN\")}\n isRequired\n hasError={errors.groupDN}\n tooltipContent={t(\"LdapGroupDNTooltip\")}\n dataTestId=\"group_dn_field_container\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/SsoFormField.js",
-      "line_number": 50,
+      "line_number": 51,
       "context": "}) => {\n const { t } = useTranslation(\"Common\");\n \n return (\n <FieldContainer\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={hasError}\n inlineHelpButton\n isVertical\n labelText={labelText}\n place=\"top\"",
       "module": "/packages/client"
     },

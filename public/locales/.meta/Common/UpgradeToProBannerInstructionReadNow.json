@@ -3,7 +3,7 @@
   "content": "Read now",
   "content_en_sha1_hash": "9f762253688c402f7f083fe41a6f024509cb2b8b",
   "created_at": "2025-05-26T07:15:49.231Z",
-  "updated_at": "2025-08-04T07:30:01.737Z",
+  "updated_at": "2025-08-11T18:11:59.376Z",
   "comment": {
     "text": "This translation key is used to display a button label that reads \"Read now\" in various contexts throughout the Official Documentation, specifically on upgrade to pro banners. The text appears as an emphasized link and is used to prompt users to click or read more information.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 60,
-      "context": "fontWeight=\"600\"\n href={enterpriseInstallScriptUrl}\n target={LinkTarget.blank}\n color=\"accent\"\n >\n {t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}",
+      "line_number": 61,
+      "context": "href={enterpriseInstallScriptUrl}\n target={LinkTarget.blank}\n color=\"accent\"\n dataTestId=\"enterprise_install_script_docker_link\"\n >\n {t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 60,
-      "context": "fontWeight=\"600\"\n href={enterpriseInstallScriptUrl}\n target={LinkTarget.blank}\n color=\"accent\"\n >\n {t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}",
+      "line_number": 61,
+      "context": "href={enterpriseInstallScriptUrl}\n target={LinkTarget.blank}\n color=\"accent\"\n dataTestId=\"enterprise_install_script_docker_link\"\n >\n {t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
-      "line_number": 60,
-      "context": "fontWeight=\"600\"\n href={enterpriseInstallScriptUrl}\n target={LinkTarget.blank}\n color=\"accent\"\n >\n {t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}",
+      "line_number": 61,
+      "context": "href={enterpriseInstallScriptUrl}\n target={LinkTarget.blank}\n color=\"accent\"\n dataTestId=\"enterprise_install_script_docker_link\"\n >\n {t(\"UpgradeToProBannerInstructionReadNow\")}\n </Link>\n </Text>\n —\n <Text fontWeight={600}>\n {t(\"UpgradeToProBannerInstructionItemLinux\")}{\" \"}",
       "module": "/packages/shared"
     }
   ],

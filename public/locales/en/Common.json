@@ -261,6 +261,7 @@
   "DownloadOperationTitle": "File downloading in progress",
   "DownloadOriginalFormat": "In original format",
   "DropzoneTitleSecondary": "or drop file here",
+  "DropToLocation": "Drop to: {{folderName}}",
   "Duplicate": "Duplicate",
   "EditButton": "Edit",
   "EditIndex": "Edit index",

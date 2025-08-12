@@ -3,7 +3,7 @@
   "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
   "created_at": "2025-05-19T21:30:55.177Z",
-  "updated_at": "2025-05-24T11:02:19.674Z",
+  "updated_at": "2025-08-11T18:11:59.296Z",
   "comment": {
     "text": "\"This text is used to display a file extension next to its name. It is likely found on a file management UI component such as a file list or upload preview, where it helps users quickly identify file types.\"",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 56,
-      "context": "openEditorInSameTab,\n setOpenEditorInSameTab,\n \n displayFileExtension,\n setDisplayFileExtension,\n getFilesSettings,\n logoText,\n hideConfirmCancelOperation,\n setHideConfirmCancelOperation,\n }) => {",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 55,
+      "context": "openEditorInSameTab?: boolean;\n setOpenEditorInSameTab?: FilesSettingsStore[\"setOpenEditorInSameTab\"];\n \n displayFileExtension?: boolean;\n setDisplayFileExtension?: FilesSettingsStore[\"setDisplayFileExtension\"];\n \n hideConfirmCancelOperation?: boolean;\n setHideConfirmCancelOperation?: FilesSettingsStore[\"setHideConfirmCancelOperation\"];\n };",
       "module": "/packages/client"
     }
   ],

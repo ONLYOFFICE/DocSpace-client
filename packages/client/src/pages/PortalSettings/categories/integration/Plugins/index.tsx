@@ -109,6 +109,7 @@ const PluginPage = ({
             onDrop={onDrop}
             isDisabled={!withUpload}
             isLoading={false}
+            dataTestId="upload_plugin_dropzone"
           />
         </>
       ) : null}
@@ -118,6 +119,7 @@ const PluginPage = ({
             key={`plugin-${plugin.name}-${plugin.version}`}
             openSettingsDialog={openSettingsDialog}
             updatePlugin={updatePlugin}
+            dataTestId={`plugin_${plugin.name}`}
             {...plugin}
           />
         ))}

@@ -65,6 +65,7 @@ const HideButton = (props) => {
         isHovered
         onClick={onClick}
         type="action"
+        dataTestId="hide_show_ldap_link"
       >
         {value
           ? isAdditionalParameters

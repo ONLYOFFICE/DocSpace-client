@@ -3,7 +3,7 @@
   "content": "Provider successfully disconnected",
   "content_en_sha1_hash": "7e19e2606519e4f26445f6a151a930a854841fd1",
   "created_at": "2025-05-19T21:30:53.375Z",
-  "updated_at": "2025-05-24T06:08:40.328Z",
+  "updated_at": "2025-08-11T18:11:59.300Z",
   "comment": {
     "text": "The \"ProviderSuccessfullyDisconnected\" translation key is used to display a success message when a user disconnects from an OAuth provider. This message is shown as a toast notification in the UI, confirming that the disconnection was successful and providing feedback to the user.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/social-networks/index.js",
-      "line_number": 97,
-      "context": "const unlinkAccount = (providerName) => {\n unlinkOAuth(providerName).then(() => {\n getAuthProviders().then((providersAuth) => {\n setProviders(providersAuth);\n toastr.success(t(\"ProviderSuccessfullyDisconnected\"));\n });\n });\n };\n \n const loginCallback = (profile) => {",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/social-networks/index.tsx",
+      "line_number": 99,
+      "context": "const unlinkAccount = (providerName: string) => {\n unlinkOAuth(providerName)?.then(() => {\n getAuthProviders().then((providersAuth) => {\n setProviders?.(providersAuth);\n toastr.success(t(\"ProviderSuccessfullyDisconnected\"));\n });\n });\n };\n \n const loginCallback = (profile: unknown) => {",
       "module": "/packages/client"
     }
   ],

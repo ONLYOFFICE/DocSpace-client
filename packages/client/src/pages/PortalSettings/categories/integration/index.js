@@ -125,7 +125,7 @@ const IntegrationWrapper = (props) => {
       id: "smtp-settings",
       name: t("SMTPSettings"),
       content: <SMTPSettings />,
-      onClick: async () => await getSMTPSettingsData(),
+      onClick: getSMTPSettingsData,
     },
   ];
 

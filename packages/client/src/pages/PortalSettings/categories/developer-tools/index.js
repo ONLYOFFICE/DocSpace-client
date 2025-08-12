@@ -33,6 +33,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Tabs } from "@docspace/shared/components/tabs";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

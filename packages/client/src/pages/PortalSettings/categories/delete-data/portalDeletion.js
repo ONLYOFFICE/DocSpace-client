@@ -33,10 +33,7 @@ import { Link } from "@docspace/shared/components/link";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  getPaymentAccount,
-  sendDeletePortalEmail,
-} from "@docspace/shared/api/portal";
+import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";

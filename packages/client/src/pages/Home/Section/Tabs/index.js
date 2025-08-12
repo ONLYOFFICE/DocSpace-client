@@ -42,12 +42,15 @@ const SectionSubmenuContent = ({
 
   const isContacts =
     currentClientView === "users" || currentClientView === "groups";
+  const isProfile = currentClientView === "profile";
 
   useEffect(() => {
     if (typeof hasGuests !== "boolean") return;
     if (!hasGuests) setShowGuestsTab(hasGuests);
     setIsCheckGuests(true);
   }, [hasGuests]);
+
+  if (isProfile) return null;
 
   if (isContacts && allowInvitingGuests === false) checkGuests();
 

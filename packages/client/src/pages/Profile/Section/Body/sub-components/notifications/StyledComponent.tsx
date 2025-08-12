@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+
 import { tablet } from "@docspace/shared/utils";
 
 const StyledSectionBodyContent = styled.div`
@@ -87,4 +88,5 @@ const StyledSectionHeader = styled.div`
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
 `;
+
 export { StyledTextContent, StyledSectionBodyContent, StyledSectionHeader };

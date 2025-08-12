@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2025-08-11T09:02:43.845Z",
+  "updated_at": "2025-08-11T18:11:59.124Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a field is required when editing a connection. It appears in a vertical text input field within a connect dialog and is used as an error message if the input value is empty.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
       "line_number": 146,
-      "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n },\n {\n id: \"lastName\",",
+      "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
       "line_number": 146,
-      "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n },\n {\n id: \"lastName\",",
+      "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -37,13 +37,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
       "line_number": 176,
-      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}\n name=\"name\"",
+      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
       "line_number": 176,
-      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}\n name=\"name\"",
+      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
       "module": "/packages/client"
     },
     {

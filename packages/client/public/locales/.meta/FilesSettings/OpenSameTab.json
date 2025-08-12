@@ -3,7 +3,7 @@
   "content": "Open {{organizationName}} editor in same tab",
   "content_en_sha1_hash": "12e13651b8dd15fd738e338dc6d423420896c148",
   "created_at": "2025-05-19T21:30:55.180Z",
-  "updated_at": "2025-06-02T10:20:51.488Z",
+  "updated_at": "2025-08-11T18:11:59.296Z",
   "comment": {
     "text": "This translation key is used to display a button label that opens an editor for an organization in the same tab. When translated, it should be read as \"Open {organizationName} editor in same tab\". The translation appears on a toggle button within a UI element.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 140,
-      "context": "className=\"open-same-tab toggle-btn\"\n onChange={onChangeOpenEditorInSameTab}\n isChecked={openEditorInSameTab}\n />\n <Text>\n {t(\"OpenSameTab\", {\n organizationName: logoText,\n })}\n </Text>\n </div>",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 154,
+      "context": "onChange={onChangeOpenEditorInSameTab}\n isChecked={openEditorInSameTab}\n dataTestId=\"open_same_tab_toggle_button\"\n />\n <Text>\n {t(\"OpenSameTab\", {\n organizationName: logoText,\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     }
   ],

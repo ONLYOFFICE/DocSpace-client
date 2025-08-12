@@ -40,6 +40,7 @@ const TableCell = (props: TableCellProps) => {
     children,
     value,
     dataTestId,
+    documentTitle,
   } = props;
 
   const classes = classNames(
@@ -63,6 +64,7 @@ const TableCell = (props: TableCellProps) => {
       // @ts-expect-error: value used by DnD and maybe somewhere else;
       // TODO: Refactor logic to use data-value
       value={value}
+      data-document-title={documentTitle}
     >
       {children}
     </div>

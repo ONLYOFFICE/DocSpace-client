@@ -3,7 +3,7 @@
   "content": "Hotkeys",
   "content_en_sha1_hash": "fcc6c31859e49237e63699f1d595746a553a6a39",
   "created_at": "2025-05-19T21:30:45.809Z",
-  "updated_at": "2025-06-18T17:11:42.392Z",
+  "updated_at": "2025-08-11T18:11:59.167Z",
   "comment": {
     "text": "This translation key is used to display the label \"Hotkeys\" in various UI elements, such as a modal dialog header, navigation menu items, or buttons, primarily related to accessibility and user interface configuration. The text will appear in the HotkeysPanel component when the \"Hotkeys\" action is invoked.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 349,
+      "line_number": 346,
       "context": "!isMobile\n ) {\n hotkeys = {\n key: \"user-menu-hotkeys\",\n icon: HotkeysReactSvgUrl,\n label: t(\"Common:Hotkeys\"),\n onClick: (e) => this.onHotkeysClick(e),\n url: `${window.location.pathname}?action=hotkeys`,\n preventNewTab: true,\n };\n }",
       "module": "/packages/client"
     }

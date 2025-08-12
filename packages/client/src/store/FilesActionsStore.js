@@ -329,7 +329,7 @@ class FilesActionStore {
     return treeList;
   };
 
-  createFoldersTree = async (t, files, folderId) => {
+  createFoldersTree = async (t, files, folderId, dragged) => {
     //  console.log("createFoldersTree", files, folderId);
     const { uploaded, percent } = this.uploadDataStore;
 
@@ -346,10 +346,13 @@ class FilesActionStore {
       return !isHidden;
     });
 
+    const operationId = uniqueid("operation_");
+
     const pbData = {
       operation: OPERATIONS_NAME.upload,
       completed: false,
       percent,
+      dragged: dragged ? operationId : null,
     };
 
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {

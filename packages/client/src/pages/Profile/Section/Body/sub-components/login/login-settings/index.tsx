@@ -29,25 +29,33 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Link, LinkType } from "@docspace/shared/components/link";
 import { unlinkTfaApp } from "@docspace/shared/api/settings";
+import { TUser } from "@docspace/shared/api/people/types";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
+
 import {
   ResetApplicationDialog,
   BackupCodesDialog,
 } from "SRC_DIR/components/dialogs";
 
-import { StyledWrapper } from "./styled-login-settings";
+import { StyledWrapper } from "./LoginSettings.styled";
 
-const LoginSettings = (props) => {
+type LoginSettingsProps = {
+  profile?: TUser;
+
+  backupCodes?: unknown[];
+  setBackupCodes?: unknown;
+};
+
+const LoginSettings = (props: LoginSettingsProps) => {
   const { t } = useTranslation(["Profile", "Settings", "Common"]);
 
   const {
     profile,
 
     backupCodes,
-    backupCodesCount,
     setBackupCodes,
   } = props;
 
@@ -75,13 +83,13 @@ const LoginSettings = (props) => {
           className="button"
           label={t("ShowBackupCodes")}
           onClick={() => setBackupCodesDialogVisible(true)}
-          size="small"
+          size={ButtonSize.small}
           testId="show_backup_codes_button"
         />
         <Link
           fontWeight="600"
           isHovered
-          type="action"
+          type={LinkType.action}
           onClick={() => setResetAppDialogVisible(true)}
           dataTestId="reset_app_link"
         >
@@ -94,7 +102,7 @@ const LoginSettings = (props) => {
           visible={resetAppDialogVisible}
           onClose={() => setResetAppDialogVisible(false)}
           resetTfaApp={unlinkTfaApp}
-          id={profile.id}
+          id={(profile as TUser | null)?.id}
         />
       ) : null}
       {backupCodesDialogVisible ? (
@@ -102,7 +110,15 @@ const LoginSettings = (props) => {
           visible={backupCodesDialogVisible}
           onClose={() => setBackupCodesDialogVisible(false)}
           backupCodes={backupCodes}
-          backupCodesCount={backupCodesCount}
+          backupCodesCount={(backupCodes as { isUsed: boolean }[])?.reduce(
+            (acc: number, code: { isUsed: boolean }) => {
+              if (!code.isUsed) {
+                acc++;
+              }
+              return acc;
+            },
+            0,
+          )}
           setBackupCodes={setBackupCodes}
         />
       ) : null}
@@ -110,10 +126,8 @@ const LoginSettings = (props) => {
   );
 };
 
-export default inject(({ tfaStore, peopleStore }) => {
-  const { targetUserStore } = peopleStore;
-
-  const { targetUser: profile } = targetUserStore;
+export default inject(({ tfaStore, userStore }: TStore) => {
+  const { user: profile } = userStore!;
 
   const { backupCodes, setBackupCodes } = tfaStore;
 

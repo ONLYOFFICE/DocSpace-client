@@ -75,7 +75,6 @@ import {
   setContactsUsersFilterUrl,
   TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
-import { GUESTS_TAB_VISITED_NAME } from "SRC_DIR/helpers/contacts/constants";
 import type {
   TChangeUserStatusDialogData,
   TContactsSelected,
@@ -124,8 +123,6 @@ class UsersStore {
   requestRunning = false;
 
   contactsTab: TContactsTab = false;
-
-  guestsTabVisited: boolean = false;
 
   roomParts: string = "";
 
@@ -354,14 +351,6 @@ class UsersStore {
     //   this.filter = Filter.getDefault();
     // }
     this.contactsTab = contactsTab;
-
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
-
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
-    }
   };
 
   setFilter = (filter: Filter) => {
@@ -445,14 +434,6 @@ class UsersStore {
           ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
           : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
-
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
-    }
-
     if (withFilterLocalStorage) {
       const filterObj = getUserFilter(localStorageKey);
 
@@ -469,16 +450,7 @@ class UsersStore {
       filterData.group = null;
     }
 
-    if (!guestsTabVisitedStorage && contactsView === "guests") {
-      filterData.inviterId = null;
-      window.localStorage.setItem(
-        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-        "true",
-      );
-      this.guestsTabVisited = true;
-    }
-
-    if (contactsView === "guests") {
+    if (this.contactsTab === "guests") {
       filterData.area = "guests";
     } else if (contactsView === "people") {
       filterData.area = "people";

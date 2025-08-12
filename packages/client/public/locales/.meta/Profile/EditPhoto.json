@@ -3,7 +3,7 @@
   "content": "Edit photo",
   "content_en_sha1_hash": "482a854d97390264784ec52d8c7eeadebd39c886",
   "created_at": "2025-05-19T21:30:53.352Z",
-  "updated_at": "2025-05-26T07:57:32.810Z",
+  "updated_at": "2025-08-11T18:11:59.304Z",
   "comment": {
     "text": "This translation key is used for the \"Edit photo\" button in a profile settings section. It appears on a header and provides a clear instruction to edit a user's photo.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Header/index.js",
-      "line_number": 115,
-      "context": "disabled: false,\n icon: SecurityReactSvgUrl,\n },\n {\n key: \"edit-photo\",\n label: t(\"Profile:EditPhoto\"),\n onClick: () => setChangeAvatarVisible(true),\n disabled: true,\n icon: ImageReactSvgUrl,\n },\n { key: \"separator\", isSeparator: true },",
+      "file_path": "/packages/client/src/pages/Profile/Section/Header/useProfileHeader.tsx",
+      "line_number": 130,
+      "context": "disabled: false,\n icon: SecurityReactSvgUrl,\n },\n {\n key: \"edit-photo\",\n label: t(\"Profile:EditPhoto\"),\n onClick: () => setChangeAvatarVisible?.(true),\n disabled: true,\n icon: ImageReactSvgUrl,\n },\n { key: \"separator\", isSeparator: true },",
       "module": "/packages/client"
     }
   ],

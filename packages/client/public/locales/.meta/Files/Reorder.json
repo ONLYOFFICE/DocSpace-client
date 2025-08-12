@@ -3,7 +3,7 @@
   "content": "Reorder",
   "content_en_sha1_hash": "33d9978c44777f5262fb2dbe921b919fa3fad96c",
   "created_at": "2025-05-19T21:30:56.040Z",
-  "updated_at": "2025-08-11T09:02:43.879Z",
+  "updated_at": "2025-08-11T18:11:59.152Z",
   "comment": {
     "text": "This translation key \"Reorder\" is used to display a button label in the header section of a file page, which triggers reordering functionality when clicked. It appears on the \"Home\" page and also within a reorder index dialog for editing files.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 440,
+      "line_number": 471,
       "context": "const headerMenu = isIndexEditingMode\n ? [\n {\n id: \"reorder-index\",\n label: t(\"Files:Reorder\"),\n onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",",
       "module": "/packages/client"
     }

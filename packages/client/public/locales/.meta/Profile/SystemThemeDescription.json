@@ -3,7 +3,7 @@
   "content": "Automatically switch between light and dark themes when your system does.",
   "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
   "created_at": "2025-05-19T21:30:53.390Z",
-  "updated_at": "2025-05-24T06:07:05.498Z",
+  "updated_at": "2025-08-11T18:11:59.298Z",
   "comment": {
     "text": "The SystemThemeDescription translation key is used to display a description of automatically switching between light and dark themes when the system does. It appears in a profile section of a desktop client application. Translators should provide a clear and concise explanation of this feature to help users understand its functionality.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 142,
-      "context": "const systemThemeLabel = isDesktopClient\n ? t(\"DesktopTheme\")\n : t(\"SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"DesktopThemeDescription\")\n : t(\"SystemThemeDescription\");\n \n return (\n <StyledWrapper>\n <div>\n <Checkbox",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 112,
+      "context": "const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"Profile:SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"Profile:SystemThemeDescription\");\n \n return (\n <StyledWrapperInterfaceTheme>\n <div>\n <Checkbox",
       "module": "/packages/client"
     }
   ],

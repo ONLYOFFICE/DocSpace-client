@@ -3,7 +3,7 @@
   "content": "Upload date",
   "content_en_sha1_hash": "176ef9cf9d99c91f93d8c6ccfedafea96c16e2ca",
   "created_at": "2025-05-19T21:30:49.425Z",
-  "updated_at": "2025-05-26T07:57:32.334Z",
+  "updated_at": "2025-08-11T18:11:59.155Z",
   "comment": {
     "text": "The \"UploadDate\" translation key is used to display the upload date of a file. It appears in a settings plugin dialog and is displayed next to an uploaded file's timestamp. The translation should be provided as a plain text representation, likely in a format like \"YYYY-MM-DD\".",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Info.js",
-      "line_number": 150,
-      "context": "fontWeight={400}\n lineHeight=\"20px\"\n noSelect\n truncate\n >\n {t(\"Common:UploadDate\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\" noSelect>\n {uploadDate}\n </Text>\n </>",
+      "line_number": 151,
+      "context": "lineHeight=\"20px\"\n noSelect\n truncate\n dataTestId=\"plugin_upload_date\"\n >\n {t(\"Common:UploadDate\")}\n </Text>\n <Text fontSize=\"13px\" fontWeight={600} lineHeight=\"20px\" noSelect>\n {uploadDate}\n </Text>\n </>",
       "module": "/packages/client"
     }
   ],

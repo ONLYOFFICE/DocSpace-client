@@ -374,6 +374,7 @@ const DropDown = ({
     }
 
     return () => {
+      setState((s) => ({ ...s, isDropdownReady: false }));
       window.removeEventListener("resize", resizeListener);
 
       if (isIOS && isMobile)

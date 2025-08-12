@@ -3,7 +3,7 @@
   "content": "Hide default authentication page and automatically redirect to SSO service.",
   "content_en_sha1_hash": "c798644a2826666749452b9712f3f550f8cfe279",
   "created_at": "2025-05-19T21:30:50.061Z",
-  "updated_at": "2025-05-24T03:31:06.061Z",
+  "updated_at": "2025-08-11T18:11:59.254Z",
   "comment": {
     "text": "This translation key is used to describe a tooltip that explains the meaning of hiding the default authentication page and automatically redirecting to an SSO service. The tooltip appears when a checkbox related to Single Sign-On (SSO) integration is enabled or disabled in the Portal Settings category.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
-      "line_number": 93,
-      "context": "name=\"hideAuthPage\"\n isChecked={hideAuthPage}\n isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n />\n <HelpButton tooltipContent={t(\"AdvancedSettingsTooltip\")} />\n </div>\n \n <div className=\"advanced-block\">\n <Checkbox\n id=\"disable-email-verification\"",
+      "line_number": 95,
+      "context": "isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n dataTestId=\"hide_auth_page_checkbox\"\n />\n <HelpButton\n tooltipContent={t(\"AdvancedSettingsTooltip\")}\n dataTestId=\"hide_auth_page_help_button\"\n />\n </div>\n \n <div className=\"advanced-block\">",
       "module": "/packages/client"
     }
   ],

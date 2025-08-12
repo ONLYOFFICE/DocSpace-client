@@ -33,7 +33,6 @@ import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TUser } from "@docspace/shared/api/people/types";
-import { Badge } from "@docspace/shared/components/badge";
 import Filter from "@docspace/shared/api/people/filter";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -52,7 +51,7 @@ type ContactsTabsProps = {
 
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
-  guestsTabVisited: UsersStore["guestsTabVisited"];
+  contactsTab: UsersStore["contactsTab"];
 
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
@@ -63,8 +62,6 @@ type ContactsTabsProps = {
   isRoomAdmin: TUser["isRoomAdmin"];
   showGuestsTab: boolean;
   isChangePageRequestRunning: boolean;
-
-  contactsTab: UsersStore["contactsTab"];
 };
 
 const ContactsTabs = ({
@@ -78,12 +75,9 @@ const ContactsTabs = ({
   isCollaborator,
   isRoomAdmin,
 
-  guestsTabVisited,
-
+  contactsTab,
   showGuestsTab,
   isChangePageRequestRunning,
-
-  contactsTab,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -179,9 +173,6 @@ const ContactsTabs = ({
       name: t("Common:Guests"),
       onClick: onGuests,
       content: null,
-      badge: !guestsTabVisited ? (
-        <Badge label={t("Common:New")} noHover />
-      ) : undefined,
     });
   }
 
@@ -222,7 +213,6 @@ export default inject(
       setSelection: setUsersSelection,
       setBufferSelection: setUsersBufferSelection,
 
-      guestsTabVisited,
       contactsTab,
     } = usersStore!;
     const {
@@ -242,7 +232,6 @@ export default inject(
       isCollaborator,
       isRoomAdmin,
 
-      guestsTabVisited,
       isChangePageRequestRunning,
 
       contactsTab,

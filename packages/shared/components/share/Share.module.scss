@@ -150,12 +150,6 @@
     gap: 8px;
     align-items: center;
     margin-inline-start: auto;
-
-    .linkRowCopyIcon,
-    .linkActionsCopyIcon {
-      min-width: 16px;
-      min-height: 16px;
-    }
   }
 
   .loader {
@@ -213,6 +207,13 @@
   gap: 8px;
 
   cursor: pointer;
+
+  .linkActionsCopyIcon {
+    width: 12px;
+    height: 12px;
+
+    flex-shrink: 0;
+  }
 }
 
 .icon {

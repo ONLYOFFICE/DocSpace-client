@@ -30,5 +30,7 @@
   gap: 8px;
 
   padding-inline: 16px;
-  padding-bottom: 20px;
+  padding-block: 20px;
+
+  border-top: 1px solid var(--aside-header-border-color);
 }

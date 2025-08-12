@@ -1583,6 +1583,7 @@ export async function editExternalLink(
   primary: boolean,
   internal: boolean,
   expirationDate: moment.Moment | string | null,
+  title: string,
   password?: string,
   denyDownload?: boolean,
 ) {
@@ -1597,6 +1598,7 @@ export async function editExternalLink(
       expirationDate,
       password,
       denyDownload,
+      title,
     },
   })) as TFileLink;
 
@@ -1609,6 +1611,7 @@ export async function editExternalFolderLink(
   primary: boolean,
   internal: boolean,
   expirationDate: moment.Moment | string | null,
+  title: string,
   password?: string,
   denyDownload?: boolean,
 ) {
@@ -1623,6 +1626,7 @@ export async function editExternalFolderLink(
       expirationDate,
       password,
       denyDownload,
+      title,
     },
   })) as TFileLink;
 

@@ -35,17 +35,11 @@ const StyledEditLinkBodyContent = styled.div`
   width: calc(100% + 16px);
 
   .edit-link_link-block {
-    padding: 16px 16px 20px;
+    padding: 0px 16px 20px;
 
     .edit-link-text {
       display: inline-flex;
       margin-bottom: 8px;
-    }
-
-    .edit-link_required-icon {
-      display: inline-flex;
-      color: ${(props) => props.theme.editLink.requiredColor};
-      margin-inline-start: 2px;
     }
 
     .edit-link_link-input {

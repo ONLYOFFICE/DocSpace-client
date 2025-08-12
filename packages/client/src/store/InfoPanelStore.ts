@@ -31,13 +31,11 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { FolderType } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { getTemplateAvailable } from "@docspace/shared/api/rooms";
-import { editExternalLink, addExternalLink } from "@docspace/shared/api/files";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TLogo, TRoom } from "@docspace/shared/api/rooms/types";
 import { Nullable, TCreatedBy } from "@docspace/shared/types";
-import { ShareProps } from "@docspace/shared/components/share/Share.types";
 import { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { isFolder } from "@docspace/shared/utils/typeGuards";
 
@@ -351,48 +349,6 @@ class InfoPanelStore {
 
   //   return ShareLinkService.getFolderPrimaryLink(folder);
   // };
-
-  editFileLink: ShareProps["editFileLink"] = async (
-    fileId,
-    linkId,
-    access,
-    primary,
-    internal,
-    expirationDate,
-  ) => {
-    const { getFileInfo } = this.filesStore;
-
-    const res = await editExternalLink(
-      fileId,
-      linkId,
-      access,
-      primary,
-      internal,
-      expirationDate,
-    );
-    await getFileInfo(fileId);
-    return res;
-  };
-
-  addFileLink: ShareProps["addFileLink"] = async (
-    fileId,
-    access,
-    primary,
-    internal,
-    expirationDate,
-  ) => {
-    const { getFileInfo } = this.filesStore;
-
-    const res = await addExternalLink(
-      fileId,
-      access,
-      primary,
-      internal,
-      expirationDate,
-    );
-    await getFileInfo(fileId);
-    return res;
-  };
 
   setShareChanged = (shareChanged: boolean) => {
     this.shareChanged = shareChanged;

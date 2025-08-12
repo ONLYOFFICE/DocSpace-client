@@ -47,10 +47,6 @@ export interface InjectedEditLinkPanelProps {
   updateLink?: (link: TFileLink) => void;
   setLinkParams: (linkParams: LinkParamsType | null) => void;
 
-  editExternalLink: (
-    roomId: string | number,
-    link: TFileLink,
-  ) => Promise<TFileLink>;
   setExternalLink: (
     link: TFileLink,
     searchParams: URLSearchParams,

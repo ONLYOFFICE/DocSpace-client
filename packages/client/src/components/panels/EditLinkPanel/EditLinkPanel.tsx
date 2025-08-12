@@ -41,7 +41,6 @@ const EditLinkPanelWrapper = ({
   setIsVisible,
   updateLink,
   setLinkParams,
-  editExternalLink,
   setExternalLink,
   currentDeviceType,
   getPortalPasswordSettings,
@@ -58,7 +57,6 @@ const EditLinkPanelWrapper = ({
         setIsVisible,
         updateLink,
         setLinkParams,
-        editExternalLink,
         setExternalLink,
         passwordSettings,
         currentDeviceType,
@@ -79,8 +77,7 @@ export default inject<TStore>(
       setLinkParams,
     } = dialogsStore;
 
-    const { externalLinks, editExternalLink, setExternalLink } =
-      publicRoomStore;
+    const { externalLinks, setExternalLink } = publicRoomStore;
     const { currentDeviceType, passwordSettings, getPortalPasswordSettings } =
       settingsStore;
 
@@ -101,7 +98,6 @@ export default inject<TStore>(
       setIsVisible: setEditLinkPanelIsVisible,
       updateLink,
       setLinkParams,
-      editExternalLink,
       setExternalLink,
 
       currentDeviceType,

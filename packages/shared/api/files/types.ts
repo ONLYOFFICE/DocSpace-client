@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TCreatedBy, TPathParts } from "../../types";
+import type { TCreatedBy, TPathParts } from "../../types";
 import type {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -36,7 +36,7 @@ import type {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
-import { TUser } from "../people/types";
+import type { TUser } from "../people/types";
 import type { TRoom } from "../rooms/types";
 
 export type TFileViewAccessibility = {

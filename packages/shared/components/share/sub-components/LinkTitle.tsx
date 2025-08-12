@@ -44,11 +44,7 @@ const LinkTitle: FC<LinkTitleProps> = ({
   onCopyLink,
 }) => {
   return (
-    <div
-      className={styles.linkTitleContainer}
-      onClick={onCopyLink}
-      title={t("Common:CopySharedLink")}
-    >
+    <div className={styles.linkTitleContainer} onClick={onCopyLink}>
       <Text
         className={classNames(
           styles.linkOptionsTitle,
@@ -57,12 +53,14 @@ const LinkTitle: FC<LinkTitleProps> = ({
             [styles.isExpired]: isExpiredLink,
           },
         )}
+        title={linkTitle}
         truncate
       >
         {linkTitle}
       </Text>
       {!disabledCopy ? (
         <IconButton
+          title={t("Common:CopySharedLink")}
           className={styles.linkActionsCopyIcon}
           size={12}
           iconName={CopyIcon}

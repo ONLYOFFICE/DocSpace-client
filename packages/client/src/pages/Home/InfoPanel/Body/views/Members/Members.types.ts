@@ -161,7 +161,6 @@ export type LinkRowProps = {
   isFormRoom: boolean;
   isCustomRoom: boolean;
   setExternalLink?: PublicRoomStore["setExternalLink"];
-  editExternalLink?: PublicRoomStore["editExternalLink"];
   deleteExternalLink?: PublicRoomStore["deleteExternalLink"];
 };
 

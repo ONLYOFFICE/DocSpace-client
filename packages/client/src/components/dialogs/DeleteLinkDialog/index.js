@@ -27,14 +27,16 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { inject, observer } from "mobx-react";
+
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
+import api from "@docspace/shared/api";
 import { RoomsType } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import api from "@docspace/shared/api";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 
 import { withTranslation } from "react-i18next";
 import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
@@ -46,9 +48,8 @@ const DeleteLinkDialogComponent = (props) => {
     visible,
     setIsVisible,
     tReady,
-    roomId,
+    item,
     deleteExternalLink,
-    editExternalLink,
     isPublicRoomType,
     isFormRoom,
     isCustomRoom,
@@ -70,7 +71,7 @@ const DeleteLinkDialogComponent = (props) => {
     const newLink = JSON.parse(JSON.stringify(link));
     newLink.access = 0;
 
-    editExternalLink(roomId, newLink)
+    ShareLinkService.editLink(item, newLink)
       .then((res) => {
         deleteExternalLink(res, newLink.sharedTo.id);
 
@@ -81,10 +82,10 @@ const DeleteLinkDialogComponent = (props) => {
         const filterObj = FilesFilter.getFilter(window.location);
 
         return api.rooms
-          .getRoomMembers(roomId, { filterType: 2 })
+          .getRoomMembers(item.id, { filterType: 2 })
           .then((updatedLinks) => {
             const primaryLink = updatedLinks.items.find(
-              (item) => item.sharedTo.primary,
+              (updatedLink) => updatedLink.sharedTo.primary,
             );
 
             if (
@@ -213,12 +214,8 @@ export default inject(
       setDeleteLinkDialogVisible: setIsVisible,
       linkParams,
     } = dialogsStore;
-    const {
-      editExternalLink,
-      deleteExternalLink,
-      setPublicRoomKey,
-      updateUrlKeyForCustomRoom,
-    } = publicRoomStore;
+    const { deleteExternalLink, setPublicRoomKey, updateUrlKeyForCustomRoom } =
+      publicRoomStore;
     const { isRootFolder } = selectedFolderStore;
     const item = linkParams.item;
 
@@ -230,9 +227,8 @@ export default inject(
       linkParams,
       visible,
       setIsVisible,
-      roomId: item.id,
+      item,
       link: linkParams.link,
-      editExternalLink,
       deleteExternalLink,
       isFormRoom,
       isCustomRoom,

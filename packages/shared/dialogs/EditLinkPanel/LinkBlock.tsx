@@ -28,11 +28,11 @@ import type { FC, ChangeEvent } from "react";
 
 import { Text } from "../../components/text";
 import { InputSize, InputType, TextInput } from "../../components/text-input";
+
 import type { LinkBlockProps } from "./EditLinkPanel.types";
 
 const LinkBlock: FC<LinkBlockProps> = (props) => {
-  const { t, isEdit, isLoading, linkNameValue, setLinkNameValue, linkValue } =
-    props;
+  const { t, isLoading, linkNameValue, setLinkNameValue } = props;
 
   const onChangeLinkName = (e: ChangeEvent<HTMLInputElement>) => {
     setLinkNameValue(e.target.value);
@@ -43,8 +43,6 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
       <Text className="edit-link-text" fontSize="16px" fontWeight={600}>
         {t("Common:LinkName")}
       </Text>
-      <Text className="edit-link_required-icon">*</Text>
-
       <TextInput
         scale
         withBorder
@@ -58,21 +56,6 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
         className="edit-link_name-input"
         testId="edit_link_panel_name_input"
       />
-
-      {isEdit ? (
-        <TextInput
-          scale
-          size={InputSize.base}
-          withBorder
-          isDisabled
-          isReadOnly
-          value={linkValue}
-          type={InputType.text}
-          placeholder={t("Common:LinkName")}
-          className="edit-link_link-input"
-          testId="edit_link_panel_link_input"
-        />
-      ) : null}
     </div>
   );
 };

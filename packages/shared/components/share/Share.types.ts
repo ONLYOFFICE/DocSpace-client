@@ -117,22 +117,6 @@ export type ShareProps = {
   shareChanged?: boolean;
   setShareChanged?: (value: boolean) => void;
 
-  editFileLink?: (
-    fileId: number | string,
-    linkId: number | string,
-    access: ShareAccessRights,
-    primary: boolean,
-    internal: boolean,
-    expirationDate: moment.Moment,
-  ) => Promise<TFileLink>;
-  addFileLink?: (
-    fileId: number | string,
-    access: ShareAccessRights,
-    primary: boolean,
-    internal: boolean,
-    expirationDate?: moment.Moment | null,
-  ) => Promise<TFileLink>;
-
   selfId?: string;
   onOpenPanel?: (options: {
     visible: boolean;

@@ -64,10 +64,6 @@ export type EditLinkPanelProps = ExternalLinkType & {
   language: string;
   visible: boolean;
   setIsVisible: (visible: boolean) => void;
-  editExternalLink: (
-    itemId: string | number,
-    link: TFileLink,
-  ) => Promise<TFileLink>;
 
   setLinkParams: (linkParams: LinkParamsType | null) => void;
   currentDeviceType: DeviceType;
@@ -96,11 +92,9 @@ export interface ToggleBlockProps {
 
 export interface LinkBlockProps {
   t: TTranslation;
-  isEdit: boolean;
   isLoading: boolean;
   linkNameValue: string;
   setLinkNameValue: (value: string) => void;
-  linkValue: string;
 }
 export interface PasswordAccessBlockProps {
   t: TTranslation;

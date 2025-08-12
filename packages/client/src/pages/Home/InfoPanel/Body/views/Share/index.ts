@@ -42,8 +42,6 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   const {
     setView,
 
-    editFileLink,
-    addFileLink,
     shareChanged,
     setShareChanged,
     setIsScrollLocked,
@@ -52,8 +50,6 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   return {
     setView,
 
-    editFileLink,
-    addFileLink,
     shareChanged,
     setShareChanged,
     selfId,

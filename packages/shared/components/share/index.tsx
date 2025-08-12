@@ -39,12 +39,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
-import {
-  editExternalFolderLink,
-  editExternalLink,
-  getExternalFolderLinks,
-  getExternalLinks,
-} from "../../api/files";
+import { getExternalFolderLinks, getExternalLinks } from "../../api/files";
 import type { TFileLink } from "../../api/files/types";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import ShareLoader from "../../skeletons/share";
@@ -102,8 +97,6 @@ const Share = (props: ShareProps) => {
 
   const hideSharePanel = !infoPanelSelection?.canShare;
   const parentShared = infoPanelSelection.parentShared;
-
-  const editLinkApi = isFolder ? editExternalFolderLink : editExternalLink;
 
   useEffect(() => {
     mountedRef.current = true;
@@ -264,16 +257,13 @@ const Share = (props: ShareProps) => {
     try {
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
-      const expDate = moment(link.sharedTo.expirationDate);
-
-      const res = await editLinkApi(
-        infoPanelSelection.id,
-        link.sharedTo.id,
-        link.access,
-        link.sharedTo.primary,
-        item.internal || false,
-        expDate,
-      );
+      const res = await ShareLinkService.editLink(infoPanelSelection, {
+        ...link,
+        sharedTo: {
+          ...link.sharedTo,
+          internal: item.internal || false,
+        },
+      });
 
       updateLink(link, res);
       copyDocumentShareLink(res, t);
@@ -284,18 +274,13 @@ const Share = (props: ShareProps) => {
 
   const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
     const updateAccessLink = async () => {
-      const expDate = moment(link.sharedTo.expirationDate);
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
       try {
-        const res = await editLinkApi(
-          infoPanelSelection.id,
-          link.sharedTo.id,
-          item.access ?? ({} as ShareAccessRights),
-          link.sharedTo.primary,
-          link.sharedTo.internal || false,
-          expDate,
-        );
+        const res = await ShareLinkService.editLink(infoPanelSelection, {
+          ...link,
+          access: item.access!,
+        });
 
         if (item.access === ShareAccessRights.None) {
           deleteLink(link.sharedTo.id);
@@ -327,19 +312,12 @@ const Share = (props: ShareProps) => {
 
   const removeLink = async (link: TFileLink) => {
     try {
-      const removeLinkApi = isFolder ? editExternalFolderLink : editLinkApi;
-
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
-      const expDate = moment(link.sharedTo.expirationDate);
-      const newLink = await removeLinkApi(
-        infoPanelSelection.id,
-        link.sharedTo.id,
-        ShareAccessRights.None,
-        link.sharedTo.primary,
-        false,
-        expDate,
-      );
+      const newLink = await ShareLinkService.editLink(infoPanelSelection, {
+        ...link,
+        access: ShareAccessRights.None,
+      });
 
       if (link.canEditExpirationDate) {
         deleteLink(link.sharedTo.id);
@@ -393,14 +371,13 @@ const Share = (props: ShareProps) => {
 
       const expDate = moment(expirationDate);
 
-      const res = await editLinkApi(
-        infoPanelSelection.id,
-        link.sharedTo.id,
-        link.access,
-        link.sharedTo.primary,
-        link.sharedTo.internal || false,
-        expDate,
-      );
+      const res = await ShareLinkService.editLink(infoPanelSelection, {
+        ...link,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: expirationDate ? expDate.toISOString() : null,
+        },
+      });
 
       updateLink(link, res);
       copyDocumentShareLink(res, t);

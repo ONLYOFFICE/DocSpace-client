@@ -59,16 +59,13 @@ import { toastr } from "../toast";
 
 type ItemValue<T> = T extends false ? never : T;
 
-export const getShareOptions = (
-  t: TTranslation,
-  // available: TAvailableExternalRights | undefined,
-) => {
+export const getShareOptions = (t: TTranslation, withIcon = true) => {
   return [
     {
       internal: false,
       key: "anyone",
       label: t("Common:AnyoneWithLink"),
-      icon: UniverseIcon,
+      icon: withIcon ? UniverseIcon : undefined,
     },
     {
       internal: true,
@@ -76,7 +73,7 @@ export const getShareOptions = (
       label: t("Common:SpaceUsersOnly", {
         productName: t("Common:ProductName"),
       }),
-      icon: PeopleIcon,
+      icon: withIcon ? PeopleIcon : undefined,
     },
   ];
 };

@@ -40,6 +40,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
 
@@ -60,13 +61,11 @@ const LinkRow = (props: LinkRowProps) => {
     setEmbeddingPanelData,
     isArchiveFolder,
     setIsScrollLocked,
-    editExternalLink,
     setExternalLink,
     deleteExternalLink,
     item,
   } = props;
 
-  const roomId = item.id;
   const availableExternalRights = item.availableExternalRights;
 
   const isFormRoom = item.roomType === RoomsType.FormRoom;
@@ -186,7 +185,7 @@ const LinkRow = (props: LinkRowProps) => {
     const startLoaderTime = new Date();
 
     try {
-      const linkData = (await editExternalLink!(roomId, newLink)) as TFileLink;
+      const linkData = await ShareLinkService.editLink(item, newLink);
       setExternalLink!(linkData);
       setLinkParams!({
         link: linkData,
@@ -217,7 +216,7 @@ const LinkRow = (props: LinkRowProps) => {
     setLoadingLinks([removeLink.sharedTo.id]);
 
     try {
-      await editExternalLink!(roomId, {
+      await ShareLinkService.editLink(item, {
         ...removeLink,
         access: ShareAccessRights.None,
       });
@@ -290,8 +289,7 @@ export default inject<TStore>(
     } = dialogsStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
 
-    const { editExternalLink, setExternalLink, deleteExternalLink } =
-      publicRoomStore;
+    const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
     return {
       isArchiveFolder: isArchiveFolderRoot,
@@ -301,7 +299,6 @@ export default inject<TStore>(
       setDeleteLinkDialogVisible,
       setEmbeddingPanelData,
 
-      editExternalLink,
       setExternalLink,
       deleteExternalLink,
 

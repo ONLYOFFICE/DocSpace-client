@@ -27,14 +27,18 @@
 import {
   addExternalFolderLink,
   addExternalLink,
+  editExternalFolderLink,
   editExternalLink,
   getOrCreatePrimaryFolderLink,
   getPrimaryLinkIfNotExistCreate,
 } from "../api/files";
 
-import { getPrimaryLink as getRoomPrimaryLink } from "../api/rooms";
+import {
+  getPrimaryLink as getRoomPrimaryLink,
+  editExternalLink as editExternalRoomLink,
+} from "../api/rooms";
 
-import { FolderType, ShareAccessRights } from "../enums";
+import { FolderType, ShareAccessRights, ShareLinkType } from "../enums";
 import { isFile, isRoom } from "../utils/typeGuards";
 
 import type { TRoom } from "../api/rooms/types";
@@ -147,21 +151,37 @@ export class ShareLinkService {
       : this.getFolderPrimaryLink(item);
   };
 
-  public static editFileLink = async (
-    fileId: string | number,
-    linkId: string | number,
-    access: ShareAccessRights,
-    primary: boolean,
-    internal: boolean,
-    expirationDate: moment.Moment | string | null,
-  ) => {
-    return editExternalLink(
-      fileId,
-      linkId,
-      access,
-      primary,
-      internal,
-      expirationDate,
+  public static editLink = async (
+    item: TFile | TFolder | TRoom,
+    link: TFileLink,
+  ): Promise<TFileLink> => {
+    if (isRoom(item)) {
+      return editExternalRoomLink(
+        item.id,
+        link.sharedTo.id,
+        link.sharedTo.title,
+        link.access,
+        link.sharedTo.expirationDate ?? null,
+        ShareLinkType.External,
+        link.sharedTo.password,
+        false,
+        link.sharedTo.denyDownload,
+        link.sharedTo.internal,
+      )!;
+    }
+
+    const editApi = isFile(item) ? editExternalLink : editExternalFolderLink;
+
+    return editApi(
+      item.id,
+      link.sharedTo.id,
+      link.access,
+      link.sharedTo.primary,
+      link.sharedTo.internal,
+      link.sharedTo.expirationDate ?? null,
+      link.sharedTo.title,
+      link.sharedTo.password,
+      link.sharedTo.denyDownload,
     );
   };
 

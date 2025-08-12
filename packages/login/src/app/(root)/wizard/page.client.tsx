@@ -338,6 +338,7 @@ function WizardForm(props: WizardFormProps) {
         labelVisible={false}
         hasError={hasErrorEmail}
         errorMessage={t("ErrorEmail")}
+        dataTestId="email_field_container"
       >
         <EmailInput
           name="wizard-email"
@@ -352,6 +353,7 @@ function WizardForm(props: WizardFormProps) {
           isAutoFocussed
           onChange={onChangeEmail}
           isDisabled={isCreated}
+          testId="email_input"
         />
       </FieldContainer>
 
@@ -361,6 +363,7 @@ function WizardForm(props: WizardFormProps) {
         labelVisible={false}
         hasError={hasErrorPass}
         errorMessage={t("ErrorPassword")}
+        dataTestId="password_field_container"
       >
         <PasswordInput
           ref={refPassInput}
@@ -385,6 +388,7 @@ function WizardForm(props: WizardFormProps) {
           size={12}
           iconNode={<RefreshReactSvgUrl />}
           onClick={generatePassword}
+          dataTestId="generate_password_icon_button"
         />
         <Link
           className="generate-password-link"
@@ -392,6 +396,7 @@ function WizardForm(props: WizardFormProps) {
           fontWeight={600}
           isHovered
           onClick={generatePassword}
+          dataTestId="generate_password_link"
         >
           {t("Common:GeneratePassword")}
         </Link>
@@ -404,6 +409,7 @@ function WizardForm(props: WizardFormProps) {
           labelVisible={false}
           hasError={hasErrorInstanceId}
           errorMessage={t("ErrorInstanceId")}
+          dataTestId="instance_id_field_container"
         >
           <TextInput
             id="instance-id"
@@ -417,6 +423,7 @@ function WizardForm(props: WizardFormProps) {
             tabIndex={3}
             isDisabled={isCreated}
             onChange={onChangeInstanceId}
+            testId="instance_id_input"
           />
         </FieldContainer>
       ) : null}
@@ -430,6 +437,7 @@ function WizardForm(props: WizardFormProps) {
           errorMessage={
             invalidLicense ? t("ErrorLicenseBody") : t("ErrorUploadLicenseFile")
           }
+          dataTestId="license_field_container"
         >
           <FileInput
             scale
@@ -439,6 +447,7 @@ function WizardForm(props: WizardFormProps) {
             onInput={onLicenseFileHandler}
             hasError={hasErrorLicense}
             isDisabled={isCreated}
+            data-test-id="license_file_input"
           />
         </FieldContainer>
       ) : null}
@@ -474,6 +483,8 @@ function WizardForm(props: WizardFormProps) {
             withBlur={isMobileView}
             fillIcon={false}
             modernView
+            dataTestId="wizard_language_combobox"
+            dropDownTestId="wizard_language_dropdown"
           />
           {currentCulture &&
           "isBeta" in currentCulture &&
@@ -511,6 +522,8 @@ function WizardForm(props: WizardFormProps) {
           withBlur={isMobileView}
           fillIcon={false}
           modernView
+          dataTestId="timezone_combobox"
+          dropDownTestId="timezone_dropdown"
         />
       </StyledInfo>
 
@@ -525,6 +538,7 @@ function WizardForm(props: WizardFormProps) {
           isDisabled={isCreated}
           hasError={hasErrorAgree}
           truncate={false}
+          dataTestId="agree_terms_checkbox"
         />
         <Link
           type={LinkType.page}
@@ -536,6 +550,7 @@ function WizardForm(props: WizardFormProps) {
           fontSize="13px"
           target={LinkTarget.blank}
           href={licenseUrl}
+          dataTestId="license_agreements_link"
         >
           {t("LicenseLink")}
         </Link>
@@ -548,6 +563,7 @@ function WizardForm(props: WizardFormProps) {
         label={t("Common:ContinueButton")}
         isLoading={isCreated}
         onClick={onContinueClick}
+        testId="continue_button"
       />
     </WizardContainer>
   );

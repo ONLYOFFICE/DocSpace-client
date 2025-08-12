@@ -30,13 +30,14 @@ import { useNavigate, useLocation } from "react-router";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getPaymentAccount } from "@docspace/shared/api/portal";
 import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import config from "../../../../../package.json";
 
 const DeleteData = (props) => {
-  const { t, isNotPaidPeriod, tReady } = props;
+  const { t, isNotPaidPeriod, tReady, getPortalOwner } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,16 +45,34 @@ const DeleteData = (props) => {
   const [currentTabId, setCurrentTabId] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  const [stripeUrl, setStripeUrl] = useState(null);
+
+  const fetchPortalDeletionData = async () => {
+    await getPortalOwner();
+    const res = await getPaymentAccount();
+    setStripeUrl(res);
+  };
+
+  const fetchPortalDeactivationData = async () => {
+    await getPortalOwner();
+  };
+
   const data = [
     {
       id: "deletion",
       name: t("DeletePortal", { productName: t("Common:ProductName") }),
-      content: <PortalDeletionSection />,
+      content: <PortalDeletionSection stripeUrl={stripeUrl} />,
+      onClick: async () => {
+        await fetchPortalDeletionData();
+      },
     },
     {
       id: "deactivation",
       name: t("PortalDeactivation", { productName: t("Common:ProductName") }),
       content: <PortalDeactivationSection />,
+      onClick: async () => {
+        await fetchPortalDeactivationData();
+      },
     },
   ];
 
@@ -84,14 +103,19 @@ const DeleteData = (props) => {
       items={data}
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
+      withAnimation
     />
   );
 };
 
-export const Component = inject(({ currentTariffStatusStore }) => {
-  const { isNotPaidPeriod } = currentTariffStatusStore;
+export const Component = inject(
+  ({ currentTariffStatusStore, settingsStore }) => {
+    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { getPortalOwner } = settingsStore;
 
-  return {
-    isNotPaidPeriod,
-  };
-})(observer(withTranslation("Settings")(DeleteData)));
+    return {
+      isNotPaidPeriod,
+      getPortalOwner,
+    };
+  },
+)(observer(withTranslation("Settings")(DeleteData)));

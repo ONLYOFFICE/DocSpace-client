@@ -43,10 +43,9 @@ import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
 
 const PortalDeletion = (props) => {
-  const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
-    props;
+  const { t, owner, currentColorScheme, sendActivationLink, stripeUrl } = props;
   const [isDialogVisible, setIsDialogVisible] = useState(false);
-  const [stripeUrl, setStripeUrl] = useState(null);
+
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   const onCheckView = () => {
@@ -54,17 +53,10 @@ const PortalDeletion = (props) => {
     else setIsDesktopView(false);
   };
 
-  const fetchData = async () => {
-    await getPortalOwner();
-    const res = await getPaymentAccount();
-    setStripeUrl(res);
-  };
-
   useEffect(() => {
     setDocumentTitle(
       t("DeletePortal", { productName: t("Common:ProductName") }),
     );
-    fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
     return () => window.removeEventListener("resize", onCheckView);
@@ -136,11 +128,10 @@ const PortalDeletion = (props) => {
 };
 
 export default inject(({ settingsStore, userStore }) => {
-  const { getPortalOwner, owner, currentColorScheme } = settingsStore;
+  const { owner, currentColorScheme } = settingsStore;
   const { sendActivationLink } = userStore;
 
   return {
-    getPortalOwner,
     owner,
     currentColorScheme,
     sendActivationLink,

@@ -125,6 +125,7 @@ const HotkeysPanel = ({
             textStyles={textStyles}
             keyTextStyles={keyTextStyles}
             CtrlKey={CtrlKey}
+            AltKey={AltKey}
           />
           <Heading className="hotkeys_sub-header">{t("HotkeysMove")}</Heading>
           <MoveBlock

@@ -43,5 +43,7 @@
   "HotkeysUploadFile": "Upload file",
   "HotkeysUploadingObjects": "Uploading items",
   "HotkeysZoomIn": "Zoom in",
-  "HotkeysZoomOut": "Zoom out"
+  "HotkeysZoomOut": "Zoom out",
+  "HotkeysCopySelectedItems": "Copy the selected items text",
+  "HotkeysDisablesSelectionArea": "Disables the selection area"
 }

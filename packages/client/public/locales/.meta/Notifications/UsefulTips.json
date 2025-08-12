@@ -3,7 +3,7 @@
   "content": "Useful {{productName}} tips",
   "content_en_sha1_hash": "184f3029f854216318bae47c9d442f284b83b435",
   "created_at": "2025-05-19T21:30:54.092Z",
-  "updated_at": "2025-05-24T07:46:44.149Z",
+  "updated_at": "2025-08-11T18:11:59.303Z",
   "comment": {
     "text": "This translation key is used to display a notification title indicating useful tips for a specific product. It appears in a toast notification component, providing users with a hint about relevant information or features available for them.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.js",
-      "line_number": 34,
-      "context": "import { inject, observer } from \"mobx-react\";\n \n import { NotificationsType } from \"@docspace/shared/enums\";\n import { toastr } from \"@docspace/shared/components/toast\";\n \n const UsefulTipsContainer = ({\n t,\n changeSubscription,\n usefulTipsSubscription,\n textProps,\n textDescriptionsProps,",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.tsx",
+      "line_number": 37,
+      "context": "import { NotificationsType } from \"@docspace/shared/enums\";\n import { toastr } from \"@docspace/shared/components/toast\";\n \n import TargetUserStore from \"SRC_DIR/store/contacts/TargetUserStore\";\n \n type UsefulTipsContainerProps = {\n t: TFunction;\n changeSubscription?: TargetUserStore[\"changeSubscription\"];\n usefulTipsSubscription?: TargetUserStore[\"usefulTipsSubscription\"];\n textProps: Record<string, unknown>;\n textDescriptionsProps: Record<string, unknown>;",
       "module": "/packages/client"
     }
   ],

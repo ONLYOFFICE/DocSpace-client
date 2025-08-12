@@ -3,7 +3,7 @@
   "content": "Get tech assistance <1>{{helpUrl}}</1>",
   "content_en_sha1_hash": "653923be289053ccbdd59fa114cf2caef5bfa3c5",
   "created_at": "2025-05-26T07:15:49.153Z",
-  "updated_at": "2025-08-04T07:30:01.737Z",
+  "updated_at": "2025-08-11T18:11:59.376Z",
   "comment": {
     "text": "This translation key is used to display a help message for contacting technical support. It appears as part of a payment contact container and is linked to a URL for additional information or feedback. The user will likely click on this text to access more detailed assistance.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/ContactContainer.tsx",
-      "line_number": 124,
+      "line_number": 127,
       "context": "</div>\n <div className={styles.paymentsContact}>\n <Text className={styles.text} fontWeight={600}>\n <Trans\n t={t}\n i18nKey=\"UpgradeToProBannerInformationSupport\"\n ns=\"Common\"\n values={{ helpUrl: feedbackAndSupportUrl }}\n components={{\n 1: (\n <Link",
       "module": "/packages/shared"
     }

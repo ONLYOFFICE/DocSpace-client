@@ -3,7 +3,7 @@
   "content": "Dark theme",
   "content_en_sha1_hash": "d51c5960ec071d2f7d544efc540c4d3f56821bd5",
   "created_at": "2025-05-19T21:30:53.344Z",
-  "updated_at": "2025-08-04T07:30:01.296Z",
+  "updated_at": "2025-08-11T18:11:59.199Z",
   "comment": {
     "text": "This translation key is used for the label \"DarkTheme\" which appears as a button and theme preview in the Profile settings page, guiding users to select or enable the dark theme.",
     "is_auto": true,
@@ -17,38 +17,38 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 174,
-      "context": "}\n onChangeTheme={onChangeTheme}\n />\n <ThemePreview\n className=\"dark-theme\"\n label={t(\"DarkTheme\")}\n theme=\"Dark\"\n accentColor={currentColorScheme.main?.accent}\n themeId={selectedThemeId}\n value={ThemeKeys.DarkStr}\n isChecked={",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 144,
+      "context": "}\n onChangeTheme={onChangeTheme}\n isDisabled={false}\n />\n <ThemePreview\n label={t(\"DarkTheme\")}\n theme=\"Dark\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.DarkStr}\n isChecked={",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 174,
-      "context": "}\n onChangeTheme={onChangeTheme}\n />\n <ThemePreview\n className=\"dark-theme\"\n label={t(\"DarkTheme\")}\n theme=\"Dark\"\n accentColor={currentColorScheme.main?.accent}\n themeId={selectedThemeId}\n value={ThemeKeys.DarkStr}\n isChecked={",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 144,
+      "context": "}\n onChangeTheme={onChangeTheme}\n isDisabled={false}\n />\n <ThemePreview\n label={t(\"DarkTheme\")}\n theme=\"Dark\"\n accentColor={currentColorScheme!.main?.accent}\n themeId={selectedThemeId!}\n value={ThemeKeys.DarkStr}\n isChecked={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 213,
+      "line_number": 217,
       "context": "isSettingPaid={isSettingPaid}\n dataTestId=\"logo_uploader_light_small_light\"\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 213,
+      "line_number": 217,
       "context": "isSettingPaid={isSettingPaid}\n dataTestId=\"logo_uploader_light_small_light\"\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 213,
+      "line_number": 217,
       "context": "isSettingPaid={isSettingPaid}\n dataTestId=\"logo_uploader_light_small_light\"\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 213,
+      "line_number": 217,
       "context": "isSettingPaid={isSettingPaid}\n dataTestId=\"logo_uploader_light_small_light\"\n />\n <Logo\n name={logoUrls[0].name}\n title={t(\"DarkTheme\")}\n src={logoUrls[0].path.dark}\n imageClass={classNames(styles.logoHeader, styles.backgroundDark)}\n inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}\n linkId=\"link-space-header-dark\"\n onChangeText={t(\"ChangeLogoButton\")}",
       "module": "/packages/shared"
     }

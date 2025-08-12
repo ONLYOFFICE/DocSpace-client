@@ -98,6 +98,7 @@ import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import UsersFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
 import {
+  frameCallEvent,
   getConvertedSize,
   getObjectByLocation,
 } from "@docspace/shared/utils/common";
@@ -328,7 +329,7 @@ class FilesActionStore {
     return treeList;
   };
 
-  createFoldersTree = async (t, files, folderId) => {
+  createFoldersTree = async (t, files, folderId, dragged) => {
     //  console.log("createFoldersTree", files, folderId);
     const { uploaded, percent } = this.uploadDataStore;
 
@@ -345,10 +346,13 @@ class FilesActionStore {
       return !isHidden;
     });
 
+    const operationId = uniqueid("operation_");
+
     const pbData = {
       operation: OPERATIONS_NAME.upload,
       completed: false,
       percent,
+      dragged: dragged ? operationId : null,
     };
 
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
@@ -2624,7 +2628,7 @@ class FilesActionStore {
   openItemAction = async (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
       this.filesStore;
-    const { currentDeviceType } = this.settingsStore;
+    const { currentDeviceType, frameConfig, isFrame } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
 
@@ -2674,6 +2678,11 @@ class FilesActionStore {
 
       window.DocSpace.navigate(url, { state });
     } else {
+      if (isFrame && frameConfig?.events?.onFileManagerClick) {
+        frameCallEvent({ event: "onFileManagerClick", data: item });
+        return;
+      }
+
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
         setConvertDialogData({
@@ -2758,7 +2767,6 @@ class FilesActionStore {
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
-    const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
 
@@ -2821,7 +2829,6 @@ class FilesActionStore {
       if (insideGroupBackUrl) {
         setIsSectionBodyLoading(true, false);
 
-        setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
 
         return;
@@ -2840,13 +2847,11 @@ class FilesActionStore {
         setIsSectionBodyLoading(true, false);
 
         setSelectedNode(["accounts", "groups", "filter"]);
-        setContactsTab("groups");
 
         return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
           replace: true,
         });
       }
-      setContactsTab("people");
 
       setSelectedNode(["accounts", "people", "filter"]);
 

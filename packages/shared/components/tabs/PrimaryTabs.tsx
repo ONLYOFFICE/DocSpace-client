@@ -24,21 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useEffect, useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import classNames from "classnames";
+
+import { useAnimation, AnimationEvents } from "../../hooks/useAnimation";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
-import { type TTabItem, type TabsProps } from "./Tabs.types";
 
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
-import { useViewTab } from "./hooks/useViewTab";
 import { Scrollbar } from "../scrollbar";
+import { LoaderWrapper } from "../loader-wrapper";
+
+import { useViewTab } from "./hooks/useViewTab";
+import { type TTabItem, type TabsProps } from "./Tabs.types";
 import { OFFSET_RIGHT, OFFSET_LEFT } from "./Tabs.constants";
 import styles from "./Tabs.module.scss";
-
-export const TabsEvent = {
-  START_ANIMATION: "START_ANIMATION",
-  END_ANIMATION: "END_ANIMATION",
-};
 
 const PrimaryTabs = (props: TabsProps) => {
   const {
@@ -49,6 +48,7 @@ const PrimaryTabs = (props: TabsProps) => {
     withoutStickyIntend = false,
     layoutId,
     id,
+    withAnimation,
     ...rest
   } = props;
 
@@ -64,8 +64,20 @@ const PrimaryTabs = (props: TabsProps) => {
   const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
   const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
 
-  const [isAnimation, setIsAnimation] = useState(false);
-  const [isFinishing, setIsFinishing] = useState(false);
+  const [selectedContent, setSelectedContent] = React.useState(
+    items[selectedItemIndex]?.content,
+  );
+  const [requestRunning, setRequestRunning] = React.useState(false);
+
+  // Use same animation logic as ArticleItem
+  const {
+    animationPhase,
+    isAnimationReady,
+    animationElementRef,
+    parentElementRef,
+    endWidth,
+    triggerAnimation,
+  } = useAnimation(true); // Always active for tabs
 
   const scrollToTab = useCallback(
     (index: number): void => {
@@ -118,37 +130,33 @@ const PrimaryTabs = (props: TabsProps) => {
   );
 
   useEffect(() => {
-    const onStartAnimation = (e: Event) => {
-      const eventId = (e as CustomEvent)?.detail?.id;
-      if (id && eventId === id) {
-        setIsAnimation(true);
-        setIsFinishing(false);
-      }
-    };
-    const onEndAnimation = () => {
-      if (isAnimation) {
-        // Start finishing animation
-        setIsAnimation(false);
-        setIsFinishing(true);
-      }
-    };
-
-    window.addEventListener(TabsEvent.START_ANIMATION, onStartAnimation);
-    window.addEventListener(TabsEvent.END_ANIMATION, onEndAnimation);
-
-    return () => {
-      window.removeEventListener(TabsEvent.START_ANIMATION, onStartAnimation);
-      window.removeEventListener(TabsEvent.END_ANIMATION, onEndAnimation);
-    };
-  }, [isAnimation, id]);
+    if (!requestRunning) {
+      setSelectedContent(items[selectedItemIndex]?.content);
+    }
+  }, [selectedItemIndex, items, requestRunning]);
 
   useEffect(() => {
     scrollToTab(selectedItemIndex);
   }, [selectedItemIndex, items, scrollToTab]);
 
-  const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
+  const setSelectedItem = async (selectedTabItem: TTabItem, index: number) => {
+    // Trigger animation if withAnimation is true
+    if (withAnimation) {
+      triggerAnimation();
+    }
+
     // setCurrentItem(index);
     onSelect?.(selectedTabItem);
+
+    if (selectedTabItem.onClick && withAnimation) {
+      setRequestRunning(true);
+
+      await selectedTabItem.onClick();
+
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+
+      setRequestRunning(false);
+    }
 
     scrollToTab(index);
   };
@@ -158,9 +166,11 @@ const PrimaryTabs = (props: TabsProps) => {
   });
 
   const renderContent = (
-    <div className={classNames(styles.tabList, classes)} ref={tabsRef}>
+    <div className={classNames(styles.tabList, classes)} ref={tabsRef} id={id}>
       {items.map((item, index) => {
         const isSelected = index === selectedItemIndex;
+
+        const isAnimationProgress = isSelected && animationPhase === "progress";
 
         return (
           <div
@@ -175,7 +185,7 @@ const PrimaryTabs = (props: TabsProps) => {
             )}
             onClick={() => {
               if (index === selectedItemIndex) return;
-              item.onClick?.();
+              if (!withAnimation) item.onClick?.();
               setSelectedItem(item, index);
             }}
             data-testid={`${item.id}_tab`}
@@ -186,17 +196,29 @@ const PrimaryTabs = (props: TabsProps) => {
                 styles.tabSubLine,
                 {
                   [styles.selected]: isSelected,
-                  [styles.animated]: isAnimation && isSelected,
-                  [styles.animatedFinishing]: isFinishing && isSelected,
+                  [styles.animationReady]: isAnimationReady,
+                  [styles.animatedProgress]: isAnimationProgress,
                 },
                 classes,
               )}
-              onAnimationEnd={(e) => {
-                if (e.animationName === styles.fillWidth && isFinishing) {
-                  setIsFinishing(false);
-                }
-              }}
-            />
+              ref={isSelected ? parentElementRef : null}
+            >
+              <div
+                className={classNames(
+                  styles.tabSubLineSibling,
+                  {
+                    [styles.selected]: isSelected,
+                    [styles.animationReady]: isAnimationReady,
+                    [styles.animatedProgress]: isAnimationProgress,
+                    [styles.animatedFinish]: animationPhase === "finish",
+                  },
+                  classes,
+                )}
+                style={{ "--end-width": `${endWidth}%` } as React.CSSProperties}
+                ref={isSelected ? animationElementRef : null}
+              />
+            </div>
+
             {item.badge ? (
               <span className={styles.tabBadge}>{item.badge}</span>
             ) : null}
@@ -241,11 +263,13 @@ const PrimaryTabs = (props: TabsProps) => {
       {withoutStickyIntend ? null : (
         <div className={classNames(styles.stickyIndent, "sticky-indent")} />
       )}
-      {items[selectedItemIndex]?.content ? (
-        <div className={`${styles.tabsBody} tabs-body`}>
-          {items[selectedItemIndex].content}
-        </div>
-      ) : null}
+      <LoaderWrapper isLoading={animationPhase === "progress"}>
+        {selectedContent ? (
+          <div className={`${styles.tabsBody} tabs-body`}>
+            {selectedContent}
+          </div>
+        ) : null}
+      </LoaderWrapper>
     </div>
   );
 };

@@ -3,7 +3,7 @@
   "content": "Language",
   "content_en_sha1_hash": "89b86ab0e66f527166d98df92ddbcf5416ed58f6",
   "created_at": "2025-05-19T21:30:46.038Z",
-  "updated_at": "2025-08-04T07:30:01.289Z",
+  "updated_at": "2025-08-11T18:11:59.198Z",
   "comment": {
     "text": "This translation key is used to display the label \"Language\" in a UI component, specifically in a profile settings section. It appears as a title and has a corresponding help button, providing context for users to select their preferred language.",
     "is_auto": true,
@@ -17,20 +17,20 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 432,
-      "context": "/>\n ) : null}\n </div>\n \n <StyledLabel as=\"div\" className=\"profile-language\">\n {t(\"Common:Language\")}\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}\n tooltipContent={tooltipLanguage}",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 489,
+      "context": "/>\n ) : null}\n </div>\n \n <StyledLabel as=\"div\" className=\"profile-language\">\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 432,
-      "context": "/>\n ) : null}\n </div>\n \n <StyledLabel as=\"div\" className=\"profile-language\">\n {t(\"Common:Language\")}\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}\n tooltipContent={tooltipLanguage}",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 489,
+      "context": "/>\n ) : null}\n </div>\n \n <StyledLabel as=\"div\" className=\"profile-language\">\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 456,
+      "line_number": 457,
       "context": "</Text>\n </StyledInfo>\n \n <StyledInfo>\n <Text className=\"text\" fontWeight={400}>\n {t(\"Common:Language\")}\n </Text>\n <div className=\"wrapper__language-selector\">\n <ComboBox\n withoutPadding\n directionY=\"both\"",
       "module": "/packages/login"
     }

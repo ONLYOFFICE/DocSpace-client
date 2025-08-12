@@ -21,7 +21,11 @@
     }
   }
 
-  &:not(.dragging) {
+  &.dragDisabled {
+    opacity: 0.4;
+  }
+
+  &:not(.dragging):not(.dragDisabled) {
     background: none !important;
   }
 }

@@ -3,7 +3,7 @@
   "content": "Portal Created date: {{date}}",
   "content_en_sha1_hash": "0c0be7c4225b3b15fff1a9c616f27bd20a672258",
   "created_at": "2025-05-19T21:30:52.170Z",
-  "updated_at": "2025-05-24T04:38:01.463Z",
+  "updated_at": "2025-08-11T09:02:44.041Z",
   "comment": {
     "text": "This translation key displays the date a portal was created. It is used on a page displaying information about portal settings and appears as a label next to a specific field in the MainInfo component of the PortalSettings page.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/MainInfo.js",
       "line_number": 44,
-      "context": "const creationDate = moment(portalInfo.creationDateTime).format(\"L\");\n \n return (\n <StyledMainInfo>\n <Text fontSize=\"14px\" fontWeight={400}>\n {t(\"PortalCreatedDate\", { date: creationDate })}\n </Text>\n <Text fontSize=\"14px\" fontWeight={400}>\n {t(\"NumberOfActiveEmployees\", { count: activeUsersCount })}\n </Text>\n </StyledMainInfo>",
+      "context": "const creationDate = moment(portalInfo.creationDateTime).format(\"L\");\n \n return (\n <StyledMainInfo>\n <Text fontSize=\"14px\" fontWeight={400} dataTestId=\"portal_created_date\">\n {t(\"PortalCreatedDate\", { date: creationDate })}\n </Text>\n <Text fontSize=\"14px\" fontWeight={400}>\n {t(\"NumberOfActiveEmployees\", { count: activeUsersCount })}\n </Text>\n </StyledMainInfo>",
       "module": "/packages/client"
     }
   ],

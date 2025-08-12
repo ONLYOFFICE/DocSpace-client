@@ -3,7 +3,7 @@
   "content": "Auto sync",
   "content_en_sha1_hash": "482b21786865db1707dfd6fa335dd8c88602e4fd",
   "created_at": "2025-05-19T21:30:54.173Z",
-  "updated_at": "2025-05-24T08:40:48.369Z",
+  "updated_at": "2025-08-11T18:11:59.249Z",
   "comment": {
     "text": "The \"Auto sync\" translation key is used to display a label for an option that enables automatic synchronization of LDAP data. It appears as a toggle switch in the PortalSettings categories integration settings, indicating the availability and control of this feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleAutoSync.js",
-      "line_number": 117,
+      "line_number": 118,
       "context": "fontWeight={600}\n lineHeight=\"20px\"\n noSelect\n className=\"settings_unavailable\"\n >\n {t(\"LdapAutoSyncToggle\")}\n </Text>\n {!isLdapAvailable ? (\n <Badge\n backgroundColor={\n theme.isBase",
       "module": "/packages/client"
     }

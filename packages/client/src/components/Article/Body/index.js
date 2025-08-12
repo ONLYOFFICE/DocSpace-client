@@ -67,7 +67,6 @@ const ArticleBodyContent = (props) => {
     isVisitor,
     setIsLoading,
 
-    clearFiles,
     selectedFolderId,
     showArticleLoader,
     setIsBurgerLoading,
@@ -79,6 +78,8 @@ const ArticleBodyContent = (props) => {
     setContactsTab,
 
     displayBanners,
+    startDrag,
+    setDropTargetPreview,
   } = props;
 
   const location = useLocation();
@@ -194,13 +195,6 @@ const ArticleBodyContent = (props) => {
           !window.location.pathname.includes("groups")
         : !!selectedFolderId;
 
-      if (isAccountsClick) {
-        clearFiles();
-        setContactsTab("people");
-      } else {
-        setContactsTab(false);
-      }
-
       setHashDate(getHashDate);
 
       setSelection?.([]);
@@ -277,6 +271,25 @@ const ArticleBodyContent = (props) => {
     setIsBurgerLoading(showArticleLoader);
   }, [showArticleLoader]);
 
+  const onMouseMoveArticle = React.useCallback(
+    (e) => {
+      const wrapperElement = document.elementFromPoint(e.clientX, e.clientY);
+      const droppable = wrapperElement?.closest(".droppable");
+      const documentTitle = droppable?.getAttribute("data-document-title");
+
+      if (droppable) setDropTargetPreview(documentTitle);
+    },
+    [setDropTargetPreview],
+  );
+
+  React.useEffect(() => {
+    if (startDrag) document.addEventListener("mousemove", onMouseMoveArticle);
+
+    return () => {
+      document.removeEventListener("mousemove", onMouseMoveArticle);
+    };
+  }, [startDrag, onMouseMoveArticle]);
+
   if (showArticleLoader) return <ArticleFolderLoader />;
 
   return (
@@ -311,8 +324,11 @@ export default inject(
     userStore,
     campaignsStore,
     peopleStore,
+    uploadDataStore,
   }) => {
-    const { clearFiles, setSelection, roomsFilter } = filesStore;
+    const { clearFiles, setSelection, roomsFilter, startDrag } = filesStore;
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
     const {
       showArticleLoader,
 
@@ -381,6 +397,8 @@ export default inject(
       setContactsTab: peopleStore.usersStore.setContactsTab,
 
       displayBanners,
+      startDrag,
+      setDropTargetPreview,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

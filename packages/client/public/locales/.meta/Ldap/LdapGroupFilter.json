@@ -3,7 +3,7 @@
   "content": "Group Filter",
   "content_en_sha1_hash": "e1f78e43cf6dc41a94e534219681eca85818c211",
   "created_at": "2025-05-19T21:30:54.211Z",
-  "updated_at": "2025-05-24T08:33:13.473Z",
+  "updated_at": "2025-08-11T18:11:59.245Z",
   "comment": {
     "text": "The \"LdapGroupFilter\" translation key is used to describe a filter field for LDAP group membership in the PortalSettings page. It appears as a label above a text input field and helps users understand the purpose of this field.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 154,
+      "line_number": 160,
       "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupFilter\")}\n hasError={errors.groupFilter}\n tooltipContent={t(\"LdapGroupFilterTooltip\")}\n className=\"ldap_group-filter\"\n inlineHelpButton\n isRequired",
       "module": "/packages/client"
     }

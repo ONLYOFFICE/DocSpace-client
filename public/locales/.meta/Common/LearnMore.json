@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2025-08-04T07:30:01.082Z",
+  "updated_at": "2025-08-11T18:11:59.134Z",
   "comment": {
     "text": "The translation key \"LearnMore\" is used to display a link or button that encourages users to access more information about a particular topic, in this case, privacy limitations warnings, DNS settings, or language and time zone settings. This text appears as a clickable link or button, prompting users to learn additional details.",
     "is_auto": true,
@@ -66,32 +66,32 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 247,
-      "context": "color={currentColorScheme.main?.accent}\n isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Styled.LocationHeader>\n \n <Styled.LocationForm onSubmit={onSubmit}>",
+      "line_number": 248,
+      "context": "isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Styled.LocationHeader>\n \n <Styled.LocationForm onSubmit={onSubmit}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 121,
-      "context": "color={currentColorScheme.main.accent}\n isHovered\n target=\"_blank\"\n href={ldapSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n {isMobileView ? (",
+      "line_number": 123,
+      "context": "isHovered\n target=\"_blank\"\n href={ldapSettingsUrl}\n dataTestId=\"ldap_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n {isMobileView ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/index.js",
-      "line_number": 102,
-      "context": "color={currentColorScheme.main?.accent}\n isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <CustomSettings t={t} />",
+      "line_number": 103,
+      "context": "isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <CustomSettings t={t} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/ThirdPartyServicesSettings/index.js",
-      "line_number": 217,
-      "context": "color={currentColorScheme.main?.accent}\n isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n <div className=\"consumer-item-wrapper request-block\">\n <img",
+      "line_number": 218,
+      "context": "isHovered\n target=\"_blank\"\n href={integrationSettingsUrl}\n dataTestId=\"integration_settings_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n <div className=\"consumer-item-wrapper request-block\">\n <img",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/WalletContainer.tsx",
-      "line_number": 206,
-      "context": "textDecoration=\"underline\"\n fontWeight={600}\n href={walletHelpUrl}\n color={currentColorScheme?.main?.accent}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n {isCardLinkedToPortal ? (\n <PayerInformation",
+      "line_number": 207,
+      "context": "fontWeight={600}\n href={walletHelpUrl}\n color={currentColorScheme?.main?.accent}\n dataTestId=\"wallet_learn_more_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n {isCardLinkedToPortal ? (\n <PayerInformation",
       "module": "/packages/client"
     },
     {
@@ -185,27 +185,27 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 230,
-      "context": "isBold\n fontSize=\"13px\"\n href={becometranslatorUrl}\n target=\"_blank\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Text>\n );",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 277,
+      "context": "fontSize=\"13px\"\n href={becometranslatorUrl}\n target={LinkTarget.blank}\n dataTestId=\"language_becometranslator_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Text>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 263,
+      "line_number": 253,
       "context": "fontSize=\"13px\"\n fontWeight={600}\n href={customFilterExternalLink}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </>\n );",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 432,
-      "context": "target={LinkTarget.blank}\n fontSize=\"13px\"\n color={currentColorScheme?.main?.accent}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div",
+      "line_number": 433,
+      "context": "fontSize=\"13px\"\n color={currentColorScheme?.main?.accent}\n isHovered\n dataTestId=\"automatic_backup_learn_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 303,
-      "context": "target={LinkTarget.blank}\n fontSize=\"13px\"\n color={currentColorScheme?.main?.accent}\n isHovered\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className={styles.modules}>",
+      "line_number": 304,
+      "context": "fontSize=\"13px\"\n color={currentColorScheme?.main?.accent}\n isHovered\n dataTestId=\"creating_backup_learn_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n \n <div className={styles.modules}>",
       "module": "/packages/shared"
     }
   ],

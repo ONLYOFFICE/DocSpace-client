@@ -84,6 +84,8 @@ class GroupsStore {
 
   insideGroupTempTitle: string | null = null;
 
+  abortController: Nullable<AbortController> = null;
+
   constructor(
     public peopleStore: TStore["peopleStore"],
     public clientLoadingStore: ClientLoadingStore,
@@ -238,6 +240,10 @@ class GroupsStore {
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
+    this.abortController?.abort();
+
+    this.abortController = new AbortController();
+
     this.clientLoadingStore.setIsSectionBodyLoading(true);
     const filterData = filter ? filter.clone() : GroupsFilter.getDefault();
 
@@ -262,15 +268,23 @@ class GroupsStore {
       filterData.pageCount = 100;
     }
 
-    const res = await groupsApi.getGroups(filterData);
+    const res = await groupsApi.getGroups(
+      filterData,
+      this.abortController?.signal,
+    );
     filterData.total = res.total;
 
     this.setIsGroupsFetched(true);
 
     if (updateFilter) this.setFilterParams(filterData);
 
-    this.clientLoadingStore.setIsSectionBodyLoading(false);
-    this.groups = res.items || [];
+    this.clientLoadingStore.setIsLoading("body", false);
+    this.clientLoadingStore.setIsLoading("header", false);
+
+    runInAction(() => {
+      this.groups = res.items || [];
+      this.abortController = null;
+    });
   };
 
   fetchMoreGroups = async () => {
@@ -574,8 +588,6 @@ class GroupsStore {
     e?: React.MouseEvent<Element, MouseEvent>,
   ) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
-
-    this.peopleStore.usersStore!.setContactsTab("inside_group");
 
     const insideGroupUrl = getContactsUrl("inside_group", groupId);
 

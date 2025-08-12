@@ -85,6 +85,10 @@ const SimpleFilesRow = (props) => {
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    selectedFolderTitle,
+    setDropTargetPreview,
+    disableDrag,
+    canCreateSecurity,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -146,10 +150,12 @@ const SimpleFilesRow = (props) => {
     onDragLeave && onDragLeave(e);
 
     setIsDragActive(false);
+    setDropTargetPreview(null);
   };
+  const isDragDisabled = dragging && !isDragging;
 
   const dragStyles =
-    dragging && isDragging
+    (dragging && isDragging) || isDragDisabled
       ? {
           marginInline: "-16px",
           paddingInline: "16px",
@@ -159,6 +165,25 @@ const SimpleFilesRow = (props) => {
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
     : (item.id ?? "");
+
+  React.useEffect(() => {
+    if (dragging) {
+      if (isDragging) {
+        setDropTargetPreview(item.title);
+      } else if (!disableDrag && canCreateSecurity) {
+        setDropTargetPreview(selectedFolderTitle);
+      } else {
+        setDropTargetPreview(null);
+      }
+    }
+  }, [
+    dragging,
+    isDragging,
+    isDragActive,
+    isDragDisabled,
+    selectedFolderTitle,
+    setDropTargetPreview,
+  ]);
 
   return (
     <FilesRowWrapper
@@ -190,6 +215,7 @@ const SimpleFilesRow = (props) => {
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
+        isDragDisabled={isDragDisabled}
       >
         <FilesRow
           key={item.id}

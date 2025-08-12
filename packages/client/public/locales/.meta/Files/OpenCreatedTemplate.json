@@ -3,7 +3,7 @@
   "content": "Open created template",
   "content_en_sha1_hash": "4c005c54fe08dc88e482cd696e0dc749f889f683",
   "created_at": "2025-05-19T21:30:55.922Z",
-  "updated_at": "2025-06-30T12:20:31.218Z",
+  "updated_at": "2025-08-11T09:02:43.866Z",
   "comment": {
     "text": "The \"Open created template\" translation key is used to display a label on a checkbox in a modal dialog footer. When checked, this action opens the created template in the specified file (CreateRoomTemplate.tsx at line 222).",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateRoomTemplate/CreateRoomTemplate.tsx",
       "line_number": 248,
-      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <StyledFooter>\n <Checkbox\n label={t(\"Files:OpenCreatedTemplate\")}\n isChecked={openCreatedIsChecked}\n onChange={onChangeOpenCreated}\n />\n \n <div className=\"create-room-template_buttons\">",
+      "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <StyledFooter>\n <Checkbox\n label={t(\"Files:OpenCreatedTemplate\")}\n isChecked={openCreatedIsChecked}\n onChange={onChangeOpenCreated}\n dataTestId=\"create_room_template_open_checkbox\"\n />",
       "module": "/packages/client"
     }
   ],

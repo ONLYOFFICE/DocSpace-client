@@ -59,7 +59,6 @@ const PluginPage = ({
   updatePlugins,
 
   theme,
-  isLoading,
   isEmptyList,
 }: PluginsProps) => {
   const { t } = useTranslation(["WebPlugins", "Common"]);
@@ -79,7 +78,7 @@ const PluginPage = ({
     updatePlugins(true);
   }, [updatePlugins]);
 
-  return isLoading || (!isEmptyList && pluginList.length === 0) ? (
+  return !isEmptyList && pluginList.length === 0 ? (
     <StyledContainer>
       <ListLoader withUpload={withUpload} />
     </StyledContainer>
@@ -147,7 +146,6 @@ export default inject(
 
       addPlugin,
 
-      isLoading,
       isEmptyList,
     } = pluginStore;
 
@@ -170,7 +168,6 @@ export default inject(
 
       currentColorScheme,
       theme,
-      isLoading,
       isEmptyList,
     };
   },

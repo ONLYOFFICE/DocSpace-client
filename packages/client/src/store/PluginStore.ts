@@ -111,8 +111,6 @@ class PluginStore {
 
   deletePluginDialogProps: null | { pluginName: string } = null;
 
-  isLoading = true;
-
   isEmptyList = false;
 
   needPageReload = false;
@@ -131,10 +129,6 @@ class PluginStore {
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
-  };
-
-  setIsLoading = (value: boolean) => {
-    this.isLoading = value;
   };
 
   setIsEmptyList = (value: boolean) => {
@@ -244,8 +238,6 @@ class PluginStore {
 
     const { isAdmin, isOwner } = this.userStore.user;
 
-    this.setIsLoading(true);
-
     try {
       this.plugins = [];
 
@@ -255,10 +247,6 @@ class PluginStore {
 
       this.setIsEmptyList(plugins.length === 0);
       plugins.forEach((plugin) => this.initPlugin(plugin, undefined, fromList));
-
-      setTimeout(() => {
-        this.setIsLoading(false);
-      }, 500);
     } catch (e) {
       console.log(e);
     }

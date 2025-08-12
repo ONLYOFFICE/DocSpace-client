@@ -127,24 +127,14 @@ class ThirdPartyServices extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const { getConsumers, fetchAndSetConsumers } = this.props;
-    showLoader();
-    const urlParts = window.location.href.split("?");
-    if (urlParts.length > 1) {
-      const queryValue = urlParts[1].split("=")[1];
-      fetchAndSetConsumers(queryValue)
-        .then((isConsumerExist) => isConsumerExist && this.onModalOpen())
-        .finally(() => hideLoader());
-    } else {
-      getConsumers().finally(() => hideLoader());
-    }
-  }
-
   componentDidUpdate(prevProps) {
-    const { t, tReady } = this.props;
+    const { t, tReady, openModal } = this.props;
     if (prevProps.tReady !== tReady && tReady)
       setDocumentTitle(t("ThirdPartyAuthorization"));
+    
+    if (openModal !== prevProps.openModal && openModal) {
+      this.onModalOpen();
+    }
   }
 
   onChangeLoading = (status) => {
@@ -320,6 +310,7 @@ ThirdPartyServices.propTypes = {
   getConsumers: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
   setSelectedConsumer: PropTypes.func.isRequired,
+  openModal: PropTypes.bool,
 };
 
 export default inject(({ setup, settingsStore, currentQuotaStore }) => {

@@ -36,14 +36,8 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import CustomSettings from "./sub-components/CustomSettings";
 import { StyledComponent } from "./StyledComponent";
 
-let timerId = null;
 const SMTPSettings = (props) => {
-  const {
-    setInitSMTPSettings,
-    currentColorScheme,
-    integrationSettingsUrl,
-    logoText,
-  } = props;
+  const { currentColorScheme, integrationSettingsUrl, logoText } = props;
 
   const { t, ready } = useTranslation([
     "SMTPSettings",
@@ -51,37 +45,10 @@ const SMTPSettings = (props) => {
     "Common",
     "UploadPanel",
   ]);
-  const [isInit, setIsInit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const init = async () => {
-    await setInitSMTPSettings();
-
-    setIsLoading(false);
-    setIsInit(true);
-  };
-  useEffect(() => {
-    timerId = setTimeout(() => {
-      setIsLoading(true);
-    }, 400);
-
-    init();
-
-    () => {
-      clearTimeout(timerId);
-      timerId = null;
-    };
-  }, []);
 
   useEffect(() => {
     if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
   }, [ready]);
-
-  const isLoadingContent = isLoading || !ready;
-
-  if (!isLoading && !isInit) return null;
-
-  if (isLoadingContent && !isInit) return <SettingsSMTPSkeleton />;
 
   return (
     <StyledComponent withoutExternalLink={!integrationSettingsUrl}>

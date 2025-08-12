@@ -47,7 +47,6 @@ const SP_METADATA = "spMetadata";
 
 const SingleSignOn = (props) => {
   const {
-    init,
     serviceProviderSettings,
     spMetadata,
     isSSOAvailable,
@@ -57,10 +56,6 @@ const SingleSignOn = (props) => {
   } = props;
   const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
-
-  useEffect(() => {
-    isSSOAvailable && !isInit && init();
-  }, []);
 
   useEffect(() => {
     if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
@@ -119,10 +114,9 @@ export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
   const { isSSOAvailable } = currentQuotaStore;
   const { currentDeviceType, logoText } = settingsStore;
 
-  const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
+  const { serviceProviderSettings, spMetadata, isInit } = ssoStore;
 
   return {
-    init,
     serviceProviderSettings,
     spMetadata,
     isSSOAvailable,

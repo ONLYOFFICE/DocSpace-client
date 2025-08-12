@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -50,8 +50,19 @@ const IntegrationWrapper = (props) => {
     isSSOAvailable,
     standalone,
     enablePlugins,
+    init,
+    isInit,
+    updatePlugins,
+    getConsumers,
+    fetchAndSetConsumers,
+    setInitSMTPSettings,
+    getDocumentServiceLocation,
   } = props;
   const navigate = useNavigate();
+
+  const [openThirdPartyModal, setOpenThirdPartyModal] = useState(false);
+  const [documentServiceLocationData, setDocumentServiceLocationData] =
+    useState();
 
   useEffect(() => {
     return () => {
@@ -61,26 +72,60 @@ const IntegrationWrapper = (props) => {
     };
   }, []);
 
+  const getSSOData = () => {
+    isSSOAvailable && !isInit && init();
+  };
+
+  const getPluginsData = () => {
+    updatePlugins(true);
+  };
+
+  const getThirdPartyData = () => {
+    const urlParts = window.location.href.split("?");
+    if (urlParts.length > 1) {
+      const queryValue = urlParts[1].split("=")[1];
+      fetchAndSetConsumers(queryValue).then(
+        (isConsumerExist) => isConsumerExist && setOpenThirdPartyModal(true),
+      );
+    } else {
+      getConsumers();
+    }
+  };
+
+  const getSMTPSettingsData = async () => {
+    await setInitSMTPSettings();
+  };
+
+  const getDocumentServiceData = () => {
+    getDocumentServiceLocation().then((result) => {
+      setDocumentServiceLocationData(result);
+    });
+  };
+
   const data = [
     {
       id: "ldap",
       name: t("LDAP"),
       content: <LDAP />,
+      onClick: () => {},
     },
     {
       id: "sso",
       name: t("SingleSignOn"),
       content: <SSO />,
+      onClick: getSSOData,
     },
     {
       id: "third-party-services",
       name: t("Translations:ThirdPartyTitle"),
-      content: <ThirdParty />,
+      content: <ThirdParty openModal={openThirdPartyModal} />,
+      onClick: getThirdPartyData,
     },
     {
       id: "smtp-settings",
       name: t("SMTPSettings"),
       content: <SMTPSettings />,
+      onClick: async () => await getSMTPSettingsData(),
     },
   ];
 
@@ -88,7 +133,12 @@ const IntegrationWrapper = (props) => {
     const documentServiceData = {
       id: "document-service",
       name: t("DocumentService"),
-      content: <DocumentService />,
+      content: (
+        <DocumentService
+          initialDocumentServiceData={documentServiceLocationData}
+        />
+      ),
+      onClick: getDocumentServiceData,
     };
 
     data.push(documentServiceData);
@@ -105,6 +155,7 @@ const IntegrationWrapper = (props) => {
       id: "plugins",
       name: pluginLabel,
       content: <PluginPage />,
+      onClick: getPluginsData,
     });
   }
 
@@ -132,23 +183,44 @@ const IntegrationWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, ssoStore, currentQuotaStore }) => {
+  ({
+    settingsStore,
+    ssoStore,
+    currentQuotaStore,
+    pluginStore,
+    setup,
+    filesSettingsStore,
+  }) => {
     const { standalone, enablePlugins, currentDeviceType } = settingsStore;
-    const { load: toDefault } = ssoStore;
+    const { load: toDefault, init, isInit } = ssoStore;
 
     const { isSSOAvailable } = currentQuotaStore;
 
+    const { updatePlugins } = pluginStore;
+
+    const { getConsumers, fetchAndSetConsumers, setInitSMTPSettings } = setup;
+
+    const { getDocumentServiceLocation } = filesSettingsStore;
+
     return {
       toDefault,
+      init,
+      isInit,
       isSSOAvailable,
       standalone,
       currentDeviceType,
       enablePlugins,
+      updatePlugins,
+      getConsumers,
+      fetchAndSetConsumers,
+      setInitSMTPSettings,
+      getDocumentServiceLocation,
     };
   },
 )(

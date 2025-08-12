@@ -3,7 +3,7 @@
   "content": "Don't ask file name again on creation",
   "content_en_sha1_hash": "8e94add6c6b263663fe317dddfd29004f6cc223b",
   "created_at": "2025-05-19T21:30:44.617Z",
-  "updated_at": "2025-05-28T09:30:02.140Z",
+  "updated_at": "2025-08-11T18:11:59.110Z",
   "comment": {
     "text": "This translation key is used to display a message reminding users not to ask for file name changes on creation. It appears in two UI elements: a checkbox in a dialog and a toggle button in a file management section. Translators should provide a message that conveys this reminder in an friendly and non-intrusive tone.",
     "is_auto": true,
@@ -17,9 +17,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 108,
-      "context": "<ToggleButton\n className=\"ask-again toggle-btn\"\n onChange={onChangeKeepNewFileName}\n isChecked={keepNewFileName}\n />\n <Text>{t(\"Common:DontAskAgain\")}</Text>\n </div>\n \n <div className=\"toggle-btn-wrapper\">\n <ToggleButton\n className=\"save-copy-original toggle-btn\"",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 119,
+      "context": "className={classNames(\"ask-again\", styles.toggleBtn)}\n onChange={onChangeKeepNewFileName}\n isChecked={keepNewFileName}\n dataTestId=\"ask_again_toggle_button\"\n />\n <Text>{t(\"Common:DontAskAgain\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\"save-copy-original \", styles.toggleBtn)}",
       "module": "/packages/client"
     }
   ],

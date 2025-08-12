@@ -3,7 +3,7 @@
   "content": "Sender Display Name",
   "content_en_sha1_hash": "2eea8d166574d677a663c6e1b76fc92de06fd18d",
   "created_at": "2025-05-19T21:30:53.308Z",
-  "updated_at": "2025-05-24T02:46:43.147Z",
+  "updated_at": "2025-08-11T18:11:59.253Z",
   "comment": {
     "text": "The \"SenderDisplayName\" translation key is used to display the sender's name or identifier. It appears in a custom settings component for SMTP integration and provides context for users to enter their name, typically displayed on outgoing emails.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 198,
-      "context": "scale\n hasError={errors[PORT]}\n />\n {enableAuthComponent}\n \n <Text {...commonTextProps}>{t(\"SenderDisplayName\")}</Text>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={SENDER_DISPLAY_NAME}\n placeholder={t(\"Common:EnterName\")}",
+      "line_number": 204,
+      "context": "hasError={errors[PORT]}\n testId=\"smtp_port_input\"\n />\n {enableAuthComponent}\n \n <Text {...commonTextProps}>{t(\"SenderDisplayName\")}</Text>\n <TextInput\n isDisabled={isLoading}\n className=\"smtp-settings_input\"\n name={SENDER_DISPLAY_NAME}\n placeholder={t(\"Common:EnterName\")}",
       "module": "/packages/client"
     }
   ],

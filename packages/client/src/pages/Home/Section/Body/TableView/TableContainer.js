@@ -145,6 +145,10 @@ const Table = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  selectedFolderTitle,
+  canCreateSecurity,
+  setDropTargetPreview,
+  disableDrag,
   withContentSelection,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
@@ -229,6 +233,10 @@ const Table = ({
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        canCreateSecurity={canCreateSecurity}
+        setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
       />
     ));
   }, [
@@ -247,6 +255,7 @@ const Table = ({
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
+    disableDrag,
   ]);
 
   return (
@@ -298,6 +307,7 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
+    uploadDataStore,
     hotkeyStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
@@ -318,14 +328,24 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
+      disableDrag,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
-    const { isIndexedFolder } = selectedFolderStore;
+    const {
+      isIndexedFolder,
+      title: selectedFolderTitle,
+      security,
+    } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { withContentSelection } = hotkeyStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
+
+    const canCreateSecurity = security?.Create;
 
     return {
       viewAs,
@@ -350,6 +370,10 @@ export default inject(
       onEditIndex: changeIndex,
       setRefMap,
       deleteRefMap,
+      selectedFolderTitle,
+      canCreateSecurity,
+      setDropTargetPreview,
+      disableDrag,
       withContentSelection,
     };
   },

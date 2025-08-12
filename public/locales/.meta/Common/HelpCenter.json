@@ -3,7 +3,7 @@
   "content": "Help Center",
   "content_en_sha1_hash": "110158257eb2f2c817d5a9d691e7637cfd12a11a",
   "created_at": "2025-05-19T21:30:45.755Z",
-  "updated_at": "2025-06-18T17:11:42.498Z",
+  "updated_at": "2025-08-11T18:11:59.291Z",
   "comment": {
     "text": "The \"Help Center\" translation key is used to display a link to the help center, providing users with access to support resources. It appears in various UI elements, such as buttons and dropdowns, typically when the user needs assistance or has questions about a specific feature or process. Translators should ensure that the text accurately reflects local language equivalents of \"Help Center\".",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/Quotas.js",
-      "line_number": 89,
-      "context": "isHovered={false}\n target=\"_blank\"\n href={storageManagementUrl}\n color=\"accent\"\n >\n {t(\"Common:HelpCenter\")}\n </Link>\n ) : null}\n </Text>\n \n <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />",
+      "line_number": 90,
+      "context": "target=\"_blank\"\n href={storageManagementUrl}\n color=\"accent\"\n dataTestId=\"help_center_link\"\n >\n {t(\"Common:HelpCenter\")}\n </Link>\n ) : null}\n </Text>\n \n <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ProfileActionsStore.js",
-      "line_number": 434,
+      "line_number": 431,
       "context": "key: \"separator1\",\n },\n helpCenterEnabled && {\n key: \"user-menu-help-center\",\n icon: HelpCenterReactSvgUrl,\n label: t(\"Common:HelpCenter\"),\n onClick: this.onHelpCenterClick,\n url: this.settingsStore.helpCenterDomain || \"#\",\n preventNewTab: true,\n },\n /* videoGuidesEnabled && {",
       "module": "/packages/client"
     },

@@ -146,6 +146,7 @@ const ChangeNameDialog = (props) => {
                     ? t("Common:RequiredField")
                     : t("Common:IncorrectFirstName"),
                 className: "first-name",
+                dataTestId: "change_name_first_name_field",
               },
               {
                 id: "lastName",
@@ -159,6 +160,7 @@ const ChangeNameDialog = (props) => {
                     ? t("Common:RequiredField")
                     : t("Common:IncorrectLastName"),
                 className: "last-name",
+                dataTestId: "change_name_last_name_field",
               },
             ];
 
@@ -174,6 +176,7 @@ const ChangeNameDialog = (props) => {
                 className="field"
                 hasError={field.hasError}
                 errorMessage={field.errorMessage}
+                dataTestId={field.dataTestId}
               >
                 <TextInput
                   className={field.className}
@@ -186,6 +189,7 @@ const ChangeNameDialog = (props) => {
                   onKeyDown={onKeyDown}
                   tabIndex={index + 1}
                   hasError={field.hasError}
+                  testId={`${field.dataTestId}_input`}
                 />
               </FieldContainer>
             ));
@@ -209,6 +213,7 @@ const ChangeNameDialog = (props) => {
             firstName.trim().length === 0 ||
             lastName.trim().length === 0
           }
+          testId="dialog_change_name_save_button"
         />
         <Button
           className="cancel-button"
@@ -219,6 +224,7 @@ const ChangeNameDialog = (props) => {
           onClick={onClose}
           isDisabled={isSaving}
           tabIndex={4}
+          testId="dialog_change_name_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

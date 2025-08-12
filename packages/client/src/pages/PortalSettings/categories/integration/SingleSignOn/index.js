@@ -88,6 +88,7 @@ const SingleSignOn = (props) => {
             })}
             label={SERVICE_PROVIDER_SETTINGS}
             value={serviceProviderSettings}
+            dataTestId="sp_settings_hide_button"
             // isDisabled={!isSSOAvailable}
           />
 
@@ -101,6 +102,7 @@ const SingleSignOn = (props) => {
             })}
             label={SP_METADATA}
             value={spMetadata}
+            dataTestId="sp_metadata_hide_button"
             // isDisabled={!isSSOAvailable}
           />
 

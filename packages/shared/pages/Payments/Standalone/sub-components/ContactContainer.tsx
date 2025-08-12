@@ -45,6 +45,7 @@ export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
             fontWeight="600"
             href={`mailto:${salesEmail}`}
             color="accent"
+            dataTestId="sales_email_link"
           >
             {salesEmail}
           </Link>

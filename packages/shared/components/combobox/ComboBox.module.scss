@@ -80,7 +80,7 @@
   }
 
   &:not(.disableMobileView) {
-    &:global(.dropdown-container) {
+    :global(.dropdown-container) {
       @include mixins.mobile {
         position: fixed;
         top: unset !important;

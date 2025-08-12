@@ -246,6 +246,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             className={`${circleClass} ${styles.minusIcon}`}
             {...buttonProps}
             data-operation="minus"
+            data-testid="quantity_picker_minus_icon"
           >
             <MinusIcon className={controlButtonClass} />
           </div>
@@ -262,6 +263,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             value={displayValue}
             style={{ boxShadow: "none" }}
             {...inputProps}
+            testId="quantity_picker_input"
           />
         )}
 
@@ -270,6 +272,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             className={`${circleClass} ${styles.plusIcon}`}
             {...buttonProps}
             data-operation="plus"
+            data-testid="quantity_picker_plus_icon"
           >
             <PlusIcon className={controlButtonClass} />
           </div>
@@ -292,6 +295,7 @@ const QuantityPicker: React.FC<QuantityPickerProps> = ({
             value={value}
             {...sliderProps}
             className={styles.slider}
+            dataTestId="quantity_picker_slider"
           />
           <div className={styles.sliderTrack}>
             <Text className={styles.sliderTrackValueMin}>{minValue}</Text>

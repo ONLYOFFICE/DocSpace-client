@@ -64,6 +64,7 @@ const MetadataUrlField = ({
   placeholder,
   tooltipContent,
   tooltipClass,
+  dataTestId,
 }) => {
   const { t } = useTranslation("Translations");
 
@@ -81,6 +82,7 @@ const MetadataUrlField = ({
           offsetRight={0}
           tooltipContent={tooltipContent}
           className={tooltipClass}
+          dataTestId={dataTestId ? `${dataTestId}_help_button` : undefined}
         />
       </Text>
       <InputBlock
@@ -92,6 +94,7 @@ const MetadataUrlField = ({
         iconName={CopyReactSvgUrl}
         iconSize={16}
         onIconClick={onCopyClick}
+        testId={dataTestId ? `${dataTestId}_input` : undefined}
       />
     </StyledWrapper>
   );

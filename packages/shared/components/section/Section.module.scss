@@ -310,10 +310,10 @@
   }
 
   &.withScroll {
-    margin-inline-start: -20px;
+    margin-inline-start: var(--section-desktop-padding);
 
     @include mixins.tablet-and-below {
-      margin-inline-start: -24px;
+      margin-inline-start: var(--section-tablet-padding);
     }
   }
 }
@@ -322,10 +322,10 @@
   max-width: 100vw !important;
 
   &.withScroll {
-    margin-inline-start: -20px;
+    margin-inline-start: var(--section-desktop-padding);
 
     @include mixins.tablet-and-below {
-      margin-inline-start: -24px;
+      margin-inline-start: var(--section-tablet-padding);
     }
   }
 

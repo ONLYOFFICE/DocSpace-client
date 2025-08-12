@@ -96,7 +96,6 @@ const ColorInput = ({
       </div>
 
       <DropDown
-        directionX="left"
         manualY="48px"
         withBackdrop
         isDefaultMode={false}

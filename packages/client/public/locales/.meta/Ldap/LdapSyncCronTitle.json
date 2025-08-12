@@ -3,7 +3,7 @@
   "content": "Here you can set how often you want to auto sync LDAP users",
   "content_en_sha1_hash": "35acf0633b254a38e0963e2918875c55d920b708",
   "created_at": "2025-05-19T21:30:54.311Z",
-  "updated_at": "2025-05-24T08:16:20.012Z",
+  "updated_at": "2025-08-11T18:11:59.249Z",
   "comment": {
     "text": "This translation key defines the text that describes the setting for automatic LDAP user synchronization, appearing as a title in a UI component. It's used to provide contextual information about the sync functionality within a PortalSettings page.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
-      "line_number": 138,
+      "line_number": 139,
       "context": "fontWeight={400}\n lineHeight=\"20px\"\n className=\"ldap_cron-title\"\n noSelect\n >\n {t(\"LdapSyncCronTitle\")}\n </Text>\n <div className=\"ldap_cron-container\">\n <Cron\n value={cron}\n setValue={onChangeCron}",
       "module": "/packages/client"
     }

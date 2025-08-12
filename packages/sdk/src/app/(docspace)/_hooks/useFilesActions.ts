@@ -4,16 +4,20 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { frameCallEvent } from "@docspace/shared/utils/common";
+import type { TTranslation } from "@docspace/shared/types";
 
-import { TTranslation } from "@docspace/shared/types";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
-import { useSettingsStore } from "../_store/SettingsStore";
+
 import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
+import { useSettingsStore } from "../_store/SettingsStore";
 
 type UseFilesActionsProps = { t: TTranslation };
 
 export default function useFilesActions({ t }: UseFilesActionsProps) {
+  const { sdkConfig } = useSDKConfig();
   const { filesSettings } = useFilesSettingsStore();
   const { shareKey } = useSettingsStore();
   const { setMediaViewerData } = useMediaViewerStore();
@@ -25,6 +29,13 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
       editForm: boolean = false,
       fillForm: boolean = false,
     ) => {
+      if (sdkConfig?.events?.onFileManagerClick) {
+        frameCallEvent({
+          event: "onFileManagerClick",
+          data: file,
+        });
+        return;
+      }
       const fileId = file.id;
       const isMediaOrImage =
         file.viewAccessibility.ImageView || file.viewAccessibility.MediaView;
@@ -59,7 +70,12 @@ export default function useFilesActions({ t }: UseFilesActionsProps) {
 
       window.open(url, !isSameTab ? "_blank" : "_self");
     },
-    [filesSettings?.openEditorInSameTab, setMediaViewerData, shareKey],
+    [
+      filesSettings?.openEditorInSameTab,
+      setMediaViewerData,
+      shareKey,
+      sdkConfig?.events?.onFileManagerClick,
+    ],
   );
 
   const copyFileLink = React.useCallback(

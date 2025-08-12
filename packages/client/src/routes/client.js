@@ -35,7 +35,7 @@ import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
-import { generalRoutes } from "./general";
+import { profileClientRoutes, generalClientRoutes } from "./general";
 import { contanctsRoutes } from "./contacts";
 
 const ClientRoutes = [
@@ -236,6 +236,7 @@ const ClientRoutes = [
             ),
           },
           ...contanctsRoutes,
+          ...profileClientRoutes,
         ],
       },
       {
@@ -246,7 +247,7 @@ const ClientRoutes = [
           </PrivateRoute>
         ),
       },
-      ...generalRoutes,
+      ...generalClientRoutes,
     ],
   },
   {
@@ -348,17 +349,17 @@ const ClientRoutes = [
       {
         index: true,
         element: (
-          <PrivateRoute restricted withManager withCollaborator>
+          <PublicRoute restricted withManager withCollaborator>
             <ViewComponent />
-          </PrivateRoute>
+          </PublicRoute>
         ),
       },
       {
         path: "media/view/:id",
         element: (
-          <PrivateRoute restricted withManager withCollaborator>
+          <PublicRoute restricted withManager withCollaborator>
             <ViewComponent />
-          </PrivateRoute>
+          </PublicRoute>
         ),
       },
     ],

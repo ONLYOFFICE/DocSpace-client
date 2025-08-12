@@ -122,7 +122,13 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
 
         {!plugin.system && uploadDate ? (
           <>
-            <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
+            <Text
+              fontSize="13px"
+              fontWeight={400}
+              lineHeight="20px"
+              truncate
+              dataTestId="plugin_upload_date"
+            >
               {t("Common:UploadDate")}
             </Text>
             <Text fontSize="13px" fontWeight={600} lineHeight="20px">
@@ -151,6 +157,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }) => {
               href={plugin?.homePage}
               target="_blank"
               isHovered
+              dataTestId="plugin_home_page_link"
             >
               {plugin.homePage}
             </Link>

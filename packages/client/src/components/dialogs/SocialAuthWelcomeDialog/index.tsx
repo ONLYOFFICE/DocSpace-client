@@ -70,7 +70,7 @@ const SocialAuthWelcomeDialogComponent = ({
 
   const onProfileClick = (): void => {
     onClose();
-    navigate("/profile");
+    navigate("/profile/login");
   };
 
   const onChangeDomainClick = (): void => {

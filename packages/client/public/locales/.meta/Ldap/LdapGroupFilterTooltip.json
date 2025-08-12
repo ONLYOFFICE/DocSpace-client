@@ -3,7 +3,7 @@
   "content": "Use search LDAP filter to select groups that will be imported. Please note that only users from these groups will be added.",
   "content_en_sha1_hash": "dc6338d561e32252d4896cb60ea66b4caf7e0c0f",
   "created_at": "2025-05-19T21:30:54.213Z",
-  "updated_at": "2025-05-24T08:32:58.178Z",
+  "updated_at": "2025-08-11T18:11:59.245Z",
   "comment": {
     "text": "This translation key is used for a tooltip that provides guidance on using an LDAP filter to select groups for import. It helps users understand that only members of these groups will be added.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/GroupMembership.js",
-      "line_number": 156,
-      "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupFilter\")}\n hasError={errors.groupFilter}\n tooltipContent={t(\"LdapGroupFilterTooltip\")}\n className=\"ldap_group-filter\"\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 162,
+      "context": "isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n labelText={t(\"LdapGroupFilter\")}\n hasError={errors.groupFilter}\n tooltipContent={t(\"LdapGroupFilterTooltip\")}\n className=\"ldap_group-filter\"\n inlineHelpButton\n isRequired\n dataTestId=\"group_filter_field_container\"\n >",
       "module": "/packages/client"
     }
   ],

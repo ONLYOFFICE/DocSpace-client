@@ -175,6 +175,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 [styles.disabled]: isDisabled,
               })}
               {...(!isDisabled ? { onClick } : {})}
+              data-testid={`storage_service_${item.id}`}
             >
               <div className={styles.headerContainer}>
                 <div className={styles.iconWrapper}>
@@ -195,6 +196,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                     isChecked={hasStorageSubscription}
                     className={styles.serviceToggle}
                     isDisabled={eventDisabled}
+                    dataTestId={`storage_service_${item.id}_toggle`}
                   />
                 </div>
               </div>
@@ -234,6 +236,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                         maxWidth="300px"
                         float
                         getContent={textTooltip}
+                        dataTestId="service_change_shedule_tooltip"
                       />
                     </div>
                   ) : null}

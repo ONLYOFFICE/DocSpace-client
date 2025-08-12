@@ -34,6 +34,7 @@ export interface RowProps {
   item: IClientProps;
   isChecked: boolean;
   inProgress: boolean;
+  dataTestId?: string;
   getContextMenuItems?: (
     t: TTranslation,
     item: IClientProps,

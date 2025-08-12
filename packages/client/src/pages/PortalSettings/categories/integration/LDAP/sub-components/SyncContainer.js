@@ -117,6 +117,7 @@ const SyncContainer = ({
         onClick={onSync}
         label={t("LdapSyncButton")}
         isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+        dataTestId="manual_sync_button"
       />
 
       <ProgressContainer operation={LDAPOperation.Sync} />
@@ -139,9 +140,15 @@ const SyncContainer = ({
               value={cron}
               setValue={onChangeCron}
               isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+              dataTestId="ldap_cron"
             />
           </div>
-          <Text fontSize="12px" fontWeight={600} lineHeight="16px">
+          <Text
+            fontSize="12px"
+            fontWeight={600}
+            lineHeight="16px"
+            dataTestId="next_sync_date"
+          >
             {`${t("LdapNextSync")}: ${nextSyncDate?.toFormat("DDDD tt")} UTC`}
           </Text>
           <Button
@@ -154,6 +161,7 @@ const SyncContainer = ({
             isDisabled={
               !isLdapEnabledOnServer || isUIDisabled || cron === serverCron
             }
+            dataTestId="auto_sync_save_button"
           />
         </>
       ) : null}

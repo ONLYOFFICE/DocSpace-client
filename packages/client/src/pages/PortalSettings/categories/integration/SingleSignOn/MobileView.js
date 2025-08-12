@@ -57,6 +57,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
+        dataTestId="sp_settings"
       />
       <MobileCategoryWrapper
         title={t("SpMetadata", {
@@ -70,6 +71,7 @@ const MobileView = ({ isSSOAvailable, logoText }) => {
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
+        dataTestId="sp_metadata"
       />
     </StyledWrapper>
   );

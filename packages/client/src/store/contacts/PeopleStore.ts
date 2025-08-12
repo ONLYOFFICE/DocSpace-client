@@ -113,12 +113,11 @@ class PeopleStore {
       settingsStore,
       this.dialogStore,
     );
-    this.targetUserStore = new TargetUserStore(this, userStore);
+    this.targetUserStore = new TargetUserStore(userStore);
 
     this.usersStore = new UsersStore(
       settingsStore,
       userStore,
-      this.targetUserStore,
       this.groupsStore,
       this.contactsHotkeysStore,
       accessRightsStore,

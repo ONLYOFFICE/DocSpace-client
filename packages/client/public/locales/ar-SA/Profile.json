@@ -1,7 +1,6 @@
 {
   "ActiveSessions": "الجلسات النشطة",
   "AutoDeleteTitle": "سيتم حذف جميع الجلسات التي تزيد عن 60 يومًا تلقائيًا.",
-  "ChangeEmailSuccess": "تم تغيير البريد الإلكتروني بنجاح",
   "ChangePasswordAfterLoggingOut": "تغيير كلمة المرور بعد تسجيل الخروج",
   "ConnectSocialNetworks": "ربط حساباتك على الشبكات الاجتماعية",
   "DescriptionForSecurity": "من أجل مزيد من الأمان، يجب عليك تغيير كلمة المرور.",

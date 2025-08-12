@@ -49,6 +49,10 @@ const FilesTileContainer = ({
   list,
   isTutorialEnabled,
   isDesc,
+  selectedFolderTitle,
+  setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
   withContentSelection,
 }) => {
   const tileRef = useRef(null);
@@ -123,6 +127,11 @@ const FilesTileContainer = ({
           selectableRef={onSetTileRef}
           withRef
           dataTestId={`tile_${index}`}
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       ) : (
         <FileTile
@@ -133,6 +142,11 @@ const FilesTileContainer = ({
           item={item}
           itemIndex={index}
           dataTestId={`tile_${index}`}
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       );
     });
@@ -155,16 +169,27 @@ const FilesTileContainer = ({
   );
 };
 
-export default inject(({ filesStore, hotkeyStore }) => {
-  const { filesList } = filesStore;
-  const { filter } = filesStore;
-  const { withContentSelection } = hotkeyStore;
+export default inject(
+  ({ filesStore, uploadDataStore, selectedFolderStore, hotkeyStore }) => {
+    const { filesList, disableDrag } = filesStore;
+    const { filter } = filesStore;
+    const { withContentSelection } = hotkeyStore;
 
-  const isDesc = filter?.sortOrder === "desc";
+    const isDesc = filter?.sortOrder === "desc";
 
-  return {
-    filesList,
-    isDesc,
-    withContentSelection,
-  };
-})(withContainer(observer(FilesTileContainer)));
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
+    const { title: selectedFolderTitle, security: canCreateSecurity } =
+      selectedFolderStore;
+
+    return {
+      filesList,
+      isDesc,
+      withContentSelection,
+      setDropTargetPreview,
+      selectedFolderTitle,
+      disableDrag,
+      canCreateSecurity,
+    };
+  },
+)(withContainer(observer(FilesTileContainer)));

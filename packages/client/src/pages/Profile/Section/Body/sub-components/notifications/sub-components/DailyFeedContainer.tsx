@@ -25,11 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+
+type DailyFeedContainerProps = {
+  t: TFunction;
+  dailyFeedSubscriptions?: TargetUserStore["dailyFeedSubscriptions"];
+  changeSubscription?: TargetUserStore["changeSubscription"];
+  textProps: Record<string, unknown>;
+  textDescriptionsProps: Record<string, unknown>;
+};
 
 const DailyFeedContainer = ({
   t,
@@ -37,13 +47,15 @@ const DailyFeedContainer = ({
   changeSubscription,
   textProps,
   textDescriptionsProps,
-}) => {
-  const onChangeEmailSubscription = async (e) => {
+}: DailyFeedContainerProps) => {
+  const onChangeEmailSubscription = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const checked = e.currentTarget.checked;
     try {
-      await changeSubscription(NotificationsType.DailyFeed, checked);
+      await changeSubscription?.(NotificationsType.DailyFeed, checked);
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     }
   };
 
@@ -67,10 +79,10 @@ const DailyFeedContainer = ({
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ peopleStore }: TStore) => {
   const { targetUserStore } = peopleStore;
 
-  const { changeSubscription, dailyFeedSubscriptions } = targetUserStore;
+  const { changeSubscription, dailyFeedSubscriptions } = targetUserStore!;
 
   return {
     changeSubscription,

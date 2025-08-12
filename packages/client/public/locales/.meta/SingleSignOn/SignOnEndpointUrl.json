@@ -3,7 +3,7 @@
   "content": "IdP Single Sign-On Endpoint URL",
   "content_en_sha1_hash": "a1e3d72c09933def1425afc0eedb3892df293ce0",
   "created_at": "2025-05-19T21:30:50.145Z",
-  "updated_at": "2025-05-24T03:11:43.602Z",
+  "updated_at": "2025-08-11T18:11:59.258Z",
   "comment": {
     "text": "The SignOnEndpointUrl translation key is used to display the URL for Single Sign-On endpoint configuration, typically found in portal settings or integration settings. This value appears as a placeholder text when setting up an Identity Provider (IdP) integration, prompting users to enter their actual SSO endpoint URL.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/IdpSettings.js",
-      "line_number": 114,
-      "context": "value={entityId}\n hasError={entityIdHasError}\n />\n \n <SsoFormField\n labelText={t(\"SignOnEndpointUrl\")}\n name={ssoBinding?.includes(\"POST\") ? \"ssoUrlPost\" : \"ssoUrlRedirect\"}\n placeholder={\n ssoBinding?.includes(\"POST\")\n ? \"https://idpservice/SSO/POST\"\n : \"https://idpservice/SSO/REDIRECT\"",
+      "line_number": 116,
+      "context": "hasError={entityIdHasError}\n dataTestId=\"entity_id\"\n />\n \n <SsoFormField\n labelText={t(\"SignOnEndpointUrl\")}\n name={ssoBinding?.includes(\"POST\") ? \"ssoUrlPost\" : \"ssoUrlRedirect\"}\n placeholder={\n ssoBinding?.includes(\"POST\")\n ? \"https://idpservice/SSO/POST\"\n : \"https://idpservice/SSO/REDIRECT\"",
       "module": "/packages/client"
     }
   ],

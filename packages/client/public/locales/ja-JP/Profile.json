@@ -1,7 +1,6 @@
 {
   "ActiveSessions": "アクティブなセッション",
   "AutoDeleteTitle": "60日以上前のセッションは自動的に削除されます。",
-  "ChangeEmailSuccess": "メールの変更が完了しました 。",
   "ChangePasswordAfterLoggingOut": "ログアウト後にパスワードを変更する",
   "ConnectSocialNetworks": "SNSに接続する",
   "DescriptionForSecurity": "より安全性を高めるために、パスワードの変更をお勧めします。",

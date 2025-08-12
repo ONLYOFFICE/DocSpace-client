@@ -3,7 +3,7 @@
   "content": "Enter login",
   "content_en_sha1_hash": "14efd71c30a11df3374e3d9d55ad60a5ddeeb0b0",
   "created_at": "2025-05-19T21:30:53.298Z",
-  "updated_at": "2025-05-24T02:49:14.086Z",
+  "updated_at": "2025-08-11T18:11:59.252Z",
   "comment": {
     "text": "The translation key \"EnterLogin\" is used to display a placeholder text in a user input field within the SMTP settings page. Translators should provide a translated version of this text that users can enter when setting up email integration.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 128,
-      "context": "</Text>\n </div>\n <TextInput\n className=\"smtp-settings_input\"\n name={HOST_LOGIN}\n placeholder={t(\"EnterLogin\")}\n onChange={onChange}\n value={settings[HOST_LOGIN]}\n isDisabled={isLoading || !settings[AUTHENTICATION]}\n scale\n />",
+      "line_number": 129,
+      "context": "</Text>\n </div>\n <TextInput\n className=\"smtp-settings_input\"\n name={HOST_LOGIN}\n placeholder={t(\"EnterLogin\")}\n onChange={onChange}\n value={settings[HOST_LOGIN]}\n isDisabled={isLoading || !settings[AUTHENTICATION]}\n scale\n testId=\"smtp_host_login_imput\"",
       "module": "/packages/client"
     }
   ],

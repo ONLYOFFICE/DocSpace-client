@@ -25,11 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { TFunction } from "i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+
+import TreeFoldersStore from "SRC_DIR/store/TreeFoldersStore";
+import TargetUserStore from "SRC_DIR/store/contacts/TargetUserStore";
+
+type RoomsActionsContainerProps = {
+  t: TFunction;
+  badgesSubscription?: TargetUserStore["badgesSubscription"];
+  changeSubscription?: TargetUserStore["changeSubscription"];
+  fetchTreeFolders?: TreeFoldersStore["fetchTreeFolders"];
+  resetTreeItemCount?: TreeFoldersStore["resetTreeItemCount"];
+  textProps: Record<string, unknown>;
+  textDescriptionsProps: Record<string, unknown>;
+};
 
 const RoomsActionsContainer = ({
   t,
@@ -39,16 +53,18 @@ const RoomsActionsContainer = ({
   resetTreeItemCount,
   textProps,
   textDescriptionsProps,
-}) => {
-  const onChangeBadgeSubscription = async (e) => {
+}: RoomsActionsContainerProps) => {
+  const onChangeBadgeSubscription = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const checked = e.currentTarget.checked;
-    !checked && resetTreeItemCount();
+    !checked && resetTreeItemCount?.();
 
     try {
-      await changeSubscription(NotificationsType.Badges, checked);
-      await fetchTreeFolders();
+      await changeSubscription?.(NotificationsType.Badges, checked);
+      await fetchTreeFolders?.();
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err as string);
     }
   };
 
@@ -72,10 +88,10 @@ const RoomsActionsContainer = ({
   );
 };
 
-export default inject(({ peopleStore, treeFoldersStore }) => {
+export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
   const { targetUserStore } = peopleStore;
   const { fetchTreeFolders, resetTreeItemCount } = treeFoldersStore;
-  const { changeSubscription, badgesSubscription } = targetUserStore;
+  const { changeSubscription, badgesSubscription } = targetUserStore!;
 
   return {
     resetTreeItemCount,

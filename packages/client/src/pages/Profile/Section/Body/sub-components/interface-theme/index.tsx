@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -33,61 +32,25 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
-
 import { ThemeKeys } from "@docspace/shared/enums";
+import { getSystemTheme, getEditorTheme } from "@docspace/shared/utils";
+import { hideLoader, showLoader } from "@docspace/shared/utils/common";
+import { TColorScheme } from "@docspace/shared/themes";
 
-import { mobile, getSystemTheme, getEditorTheme } from "@docspace/shared/utils";
-import { showLoader } from "@docspace/shared/utils/common";
+import ThemePreview from "./ThemePreview";
+import { StyledWrapperInterfaceTheme } from "./InterfaceTheme.styled";
 
-import ThemePreview from "./theme-preview";
+type InterfaceThemeProps = {
+  theme?: ThemeKeys;
+  changeTheme?: (theme: ThemeKeys) => Promise<void>;
+  currentColorScheme?: TColorScheme;
+  selectedThemeId?: string;
+  isDesktopClient?: boolean;
+};
 
-const StyledWrapper = styled.div`
-  width: 100%;
-  max-width: 660px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+const InterfaceTheme = (props: InterfaceThemeProps) => {
+  const { t } = useTranslation(["Common", "Profile"]);
 
-  .system-theme-checkbox {
-    display: inline-flex;
-  }
-
-  .checkbox {
-    height: 20px;
-    margin-inline-end: 8px !important;
-  }
-
-  .system-theme-description {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
-    padding-inline-start: 24px;
-    max-width: 295px;
-    color: ${(props) => props.theme.profile.themePreview.descriptionColor};
-  }
-
-  .themes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-
-    @media ${mobile} {
-      display: none;
-    }
-  }
-
-  .mobile-themes-container {
-    display: none;
-
-    @media ${mobile} {
-      display: flex;
-      padding-inline-start: 30px;
-    }
-  }
-`;
-
-const InterfaceTheme = (props) => {
-  const { t } = useTranslation(["Common"]);
   const {
     theme,
     changeTheme,
@@ -95,9 +58,10 @@ const InterfaceTheme = (props) => {
     selectedThemeId,
     isDesktopClient,
   } = props;
+
   const [currentTheme, setCurrentTheme] = useState(theme);
 
-  const themeChange = async (newTheme) => {
+  const themeChange = async (newTheme: ThemeKeys) => {
     showLoader();
 
     try {
@@ -108,20 +72,26 @@ const InterfaceTheme = (props) => {
         window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
       }
 
-      await changeTheme(newTheme);
+      await changeTheme?.(newTheme);
     } catch (error) {
       console.error(error);
-      toastr.error(error);
+      toastr.error(error as string);
+    } finally {
+      hideLoader();
     }
   };
 
-  const onChangeTheme = (e) => {
+  const onChangeTheme = (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+  ) => {
     const target = e.currentTarget;
-    if (target.isChecked) return;
-    themeChange(target.value);
+
+    themeChange(target.value as ThemeKeys);
   };
 
-  const onChangeSystemTheme = (e) => {
+  const onChangeSystemTheme = (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+  ) => {
     const isChecked = (e.currentTarget || e.target).checked;
 
     if (!isChecked) {
@@ -135,14 +105,14 @@ const InterfaceTheme = (props) => {
   const systemThemeValue = getSystemTheme();
 
   const systemThemeLabel = isDesktopClient
-    ? t("DesktopTheme")
-    : t("SystemTheme");
+    ? t("Profile:DesktopTheme")
+    : t("Profile:SystemTheme");
   const systemThemeDescriptionLabel = isDesktopClient
-    ? t("DesktopThemeDescription")
-    : t("SystemThemeDescription");
+    ? t("Profile:DesktopThemeDescription")
+    : t("Profile:SystemThemeDescription");
 
   return (
-    <StyledWrapper>
+    <StyledWrapperInterfaceTheme>
       <div>
         <Checkbox
           className="system-theme-checkbox"
@@ -158,30 +128,30 @@ const InterfaceTheme = (props) => {
       </div>
       <div className="themes-container">
         <ThemePreview
-          className="light-theme"
           label={t("LightTheme")}
           theme="Light"
-          accentColor={currentColorScheme.main?.accent}
-          themeId={selectedThemeId}
+          accentColor={currentColorScheme!.main?.accent}
+          themeId={selectedThemeId!}
           value={ThemeKeys.BaseStr}
           isChecked={
             currentTheme === ThemeKeys.BaseStr ||
             (isSystemTheme && systemThemeValue === ThemeKeys.BaseStr)
           }
           onChangeTheme={onChangeTheme}
+          isDisabled={false}
         />
         <ThemePreview
-          className="dark-theme"
           label={t("DarkTheme")}
           theme="Dark"
-          accentColor={currentColorScheme.main?.accent}
-          themeId={selectedThemeId}
+          accentColor={currentColorScheme!.main?.accent}
+          themeId={selectedThemeId!}
           value={ThemeKeys.DarkStr}
           isChecked={
             currentTheme === ThemeKeys.DarkStr ||
             (isSystemTheme && systemThemeValue === ThemeKeys.DarkStr)
           }
           onChangeTheme={onChangeTheme}
+          isDisabled={false}
         />
       </div>
 
@@ -204,21 +174,21 @@ const InterfaceTheme = (props) => {
           onClick={onChangeTheme}
           selected={theme}
           spacing="12px"
-          isDisabled={isSystemTheme}
+          isDisabled={false}
         />
       </div>
-    </StyledWrapper>
+    </StyledWrapperInterfaceTheme>
   );
 };
 
-export default inject(({ settingsStore, userStore }) => {
+export default inject(({ settingsStore, userStore }: TStore) => {
   const { changeTheme, user } = userStore;
   const { currentColorScheme, selectedThemeId, isDesktopClient } =
     settingsStore;
 
   return {
     changeTheme,
-    theme: user.theme || "System",
+    theme: user?.theme || "System",
     currentColorScheme,
     selectedThemeId,
     isDesktopClient,

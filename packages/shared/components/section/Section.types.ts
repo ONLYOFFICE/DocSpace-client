@@ -70,6 +70,8 @@ export type SectionBodyProps = {
   getContextModel?: () => ContextMenuModel[];
   pathname?: string;
   isIndexEditingMode?: boolean;
+  onDragLeaveEmpty?: () => void;
+  onDragOverEmpty?: (isDragActive: boolean) => void;
 };
 
 export type SectionContainerProps = {
@@ -146,9 +148,12 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
-
     mainBarVisible?: boolean;
     withTabs?: boolean;
+    dragging?: boolean;
+    dropTargetPreview?: string;
+    clearDropPreviewLocation?: () => void;
+    startDropPreview?: () => void;
   };
 
 export type SectionContextMenuProps = {

@@ -65,9 +65,11 @@ export default function withFileActions(WrappedFileItem) {
       const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
+      const dragged = dragging;
+
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder)
+      createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
           if (f.length > 0) startUpload(f, null, t);
         })
@@ -338,6 +340,7 @@ export default function withFileActions(WrappedFileItem) {
           className={className}
           isDragging={isDragging}
           value={value}
+          documentTitle={item.title}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
           isIndexUpdated={isIndexUpdated}

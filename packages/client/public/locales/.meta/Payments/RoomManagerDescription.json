@@ -3,7 +3,7 @@
   "content": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
   "content_en_sha1_hash": "fcf79ad90b7d19194bb1754fbe16c0cc2c3a8dc2",
   "created_at": "2025-05-19T21:30:53.725Z",
-  "updated_at": "2025-05-24T06:44:13.121Z",
+  "updated_at": "2025-08-11T18:11:59.273Z",
   "comment": {
     "text": "This translation key is used to describe the role and responsibilities of a Room Manager, which includes administrative tasks and user management. It appears in the Portal Settings UI, likely on a category page or settings screen where admins can be assigned to rooms. Translators should focus on conveying the meaning of \"room administration\" and \"user management\".",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PaymentContainer.js",
       "line_number": 154,
-      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"Common:RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n />\n );\n };",
+      "context": "productName: t(\"Common:ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"Common:RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n dataTestId=\"admin_accounts_help_button\"\n />\n );",
       "module": "/packages/client"
     }
   ],

@@ -28,12 +28,26 @@ import React from "react";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 
 import Preview from "SRC_DIR/pages/PortalSettings/categories/common/Appearance/preview";
-import { StyledWrapper } from "./styled-preview";
 
-const ThemePreview = (props) => {
+import { StyledWrapper } from "./InterfaceTheme.styled";
+
+type ThemePreviewProps = {
+  label: string;
+  isDisabled?: boolean;
+  isChecked: boolean;
+  onChangeTheme: (
+    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLInputElement>,
+  ) => void;
+  value: string;
+  theme: string;
+  accentColor: string;
+  themeId: string;
+};
+
+const ThemePreview = (props: ThemePreviewProps) => {
   const {
     label,
-    isDisabled,
+    isDisabled = false,
     isChecked,
     onChangeTheme,
     value,

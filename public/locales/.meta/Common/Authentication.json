@@ -3,7 +3,7 @@
   "content": "Authentication",
   "content_en_sha1_hash": "ee1acfa55eb1476c86c5c4a68f256a67b25289ab",
   "created_at": "2025-05-19T21:30:43.148Z",
-  "updated_at": "2025-05-26T07:57:32.695Z",
+  "updated_at": "2025-08-11T18:11:59.238Z",
   "comment": {
     "text": "This translation key is used for the label of a toggle button that enables or disables authentication settings, typically found in SMTP settings. The text appears as a button label and is labeled as \"Authentication\" to indicate its purpose. Translators should focus on providing a clear and concise description of this setting within the context of email account management.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
       "line_number": 115,
-      "context": "<div className=\"smtp-settings_auth\">\n <ToggleButton\n className=\"smtp-settings_toggle\"\n isChecked={settings[AUTHENTICATION]}\n onChange={onChangeToggle}\n label={t(\"Common:Authentication\")}\n isDisabled={isLoading}\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">\n <Text {...commonTextProps}>{t(\"HostLogin\")}</Text>",
+      "context": "<div className=\"smtp-settings_auth\">\n <ToggleButton\n className=\"smtp-settings_toggle\"\n isChecked={settings[AUTHENTICATION]}\n onChange={onChangeToggle}\n label={t(\"Common:Authentication\")}\n isDisabled={isLoading}\n dataTestId=\"smtp_auth_toggle_button\"\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">",
       "module": "/packages/client"
     }
   ],

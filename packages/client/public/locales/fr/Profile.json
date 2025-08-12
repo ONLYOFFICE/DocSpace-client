@@ -1,7 +1,6 @@
 {
   "ActiveSessions": "Sessions actives",
   "AutoDeleteTitle": "Toutes les sessions datant de plus de 60 jours seront automatiquement supprimées.",
-  "ChangeEmailSuccess": "L'adresse E-mail a été modifiée avec succès.",
   "ChangePasswordAfterLoggingOut": "Modifier le mot de passe après la déconnexion",
   "ConnectSocialNetworks": "Connectez vos réseaux sociaux",
   "DescriptionForSecurity": "Pour plus de sécurité, vous devez modifier votre mot de passe.",

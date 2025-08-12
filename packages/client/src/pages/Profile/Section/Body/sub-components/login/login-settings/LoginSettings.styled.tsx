@@ -24,61 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "@docspace/shared/themes";
 import styled from "styled-components";
 
-const StyledContainer = styled.div`
-  padding: 16px 0 8px;
+import { mobile } from "@docspace/shared/utils";
 
+export const StyledWrapper = styled.div`
+  max-width: 660px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
-`;
 
-const StyledHeader = styled.div`
-  width: 100%;
-  height: 22px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  .main-block {
+  .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .description {
+    color: ${(props) => props.theme.profile.login.textColor};
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
     align-items: center;
-    gap: 6px;
-  }
 
-  .accent-text {
-    color: ${(props) => props.theme.currentColorScheme?.main.accent};
-  }
+    @media ${mobile} {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
 
-  .close-button {
-    cursor: pointer;
-    float: right;
-  }
-
-  .main-text {
-    color: ${(props) =>
-      props.theme.isBase ? globalColors.grayText : globalColors.darkGrayDark};
-  }
-
-  .next-step-icon {
-    path {
-      fill: ${(props) =>
-        props.theme.isBase ? globalColors.grayText : globalColors.darkGrayDark};
+      .button {
+        width: 100%;
+        height: 40px;
+        font-size: 14px;
+      }
     }
   }
 `;
-
-const StyledBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 8px;
-`;
-
-export { StyledContainer, StyledHeader, StyledBody };

@@ -3,7 +3,7 @@
   "content": "SSO",
   "content_en_sha1_hash": "5fa55a6001cc9852171849c95c4031c7b8464066",
   "created_at": "2025-05-19T21:30:49.017Z",
-  "updated_at": "2025-08-11T09:02:43.923Z",
+  "updated_at": "2025-08-11T18:11:59.187Z",
   "comment": {
     "text": "This translation key is used to display the label \"SSO\" in various places within the application, such as badges and filters, indicating that the account login type is Single Sign-On. It appears on the contacts page, specifically in a filter component, and is also used in an info panel. Translators should provide a translation for this key that describes SSO in their native language.",
     "is_auto": true,
@@ -36,20 +36,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/AdvancedSettings.tsx",
-      "line_number": 108,
-      "context": "isDisabled={!enableSso || isLoadingXml}\n onChange={setCheckbox}\n />\n <HelpButton\n tooltipContent={t(\"Settings:DisableEmailDescription\", {\n sectionName: t(\"Common:SSO\"),\n productName: t(\"Common:ProductName\"),\n })}\n />\n </div>\n </StyledWrapper>",
+      "line_number": 113,
+      "context": "onChange={setCheckbox}\n dataTestId=\"disable_email_verification_checkbox\"\n />\n <HelpButton\n tooltipContent={t(\"Settings:DisableEmailDescription\", {\n sectionName: t(\"Common:SSO\"),\n productName: t(\"Common:ProductName\"),\n })}\n dataTestId=\"disable_email_verification_help_button\"\n />\n </div>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 277,
-      "context": "/>\n {profile.isSSO ? (\n <div className=\"badges-wrapper\">\n <Badge\n className=\"sso-badge\"\n label={t(\"Common:SSO\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondGreen\n : globalColors.secondGreenDark",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 335,
+      "context": "/>\n {profile!.isSSO ? (\n <div className=\"badges-wrapper\">\n <Badge\n className=\"sso-badge\"\n label={t(\"Common:SSO\")}\n color={globalColors.white}\n backgroundColor={\n isBase ? globalColors.secondGreen : globalColors.secondGreenDark\n }\n fontSize=\"9px\"",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.js",
-      "line_number": 277,
-      "context": "/>\n {profile.isSSO ? (\n <div className=\"badges-wrapper\">\n <Badge\n className=\"sso-badge\"\n label={t(\"Common:SSO\")}\n color={globalColors.white}\n backgroundColor={\n theme.isBase\n ? globalColors.secondGreen\n : globalColors.secondGreenDark",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
+      "line_number": 335,
+      "context": "/>\n {profile!.isSSO ? (\n <div className=\"badges-wrapper\">\n <Badge\n className=\"sso-badge\"\n label={t(\"Common:SSO\")}\n color={globalColors.white}\n backgroundColor={\n isBase ? globalColors.secondGreen : globalColors.secondGreenDark\n }\n fontSize=\"9px\"",
       "module": "/packages/client"
     },
     {

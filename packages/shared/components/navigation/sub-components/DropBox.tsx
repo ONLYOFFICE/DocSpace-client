@@ -158,22 +158,6 @@ const DropBox = ({
           isPublicRoom={isPublicRoom}
           isPlusButtonVisible={isPlusButtonVisible}
         />
-
-        {/* <VariableSizeList
-          direction={interfaceDirection as Direction}
-          height={dropBoxHeight}
-          width="auto"
-          itemCount={countItems}
-          itemSize={getItemSize}
-          itemData={[
-            navigationItems,
-            onClickAvailable,
-            { withLogo: !!withLogo, currentDeviceType },
-          ]}
-          outerElementType={CustomScrollbarsVirtualList}
-        >
-          {Row}
-        </VariableSizeList> */}
       </div>
 
       <VariableSizeList

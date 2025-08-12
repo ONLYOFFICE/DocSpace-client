@@ -57,6 +57,7 @@ type GroupsRowProps = {
   openGroupAction?: GroupsStore["openGroupAction"];
   changeGroupSelection?: GroupsStore["changeGroupSelection"];
   changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
+  itemIndex?: number;
 };
 
 const GroupsRowComponent = ({
@@ -69,6 +70,7 @@ const GroupsRowComponent = ({
   openGroupAction,
   changeGroupSelection,
   changeGroupContextSelection,
+  itemIndex,
 }: GroupsRowProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
   const theme = useTheme();
@@ -121,6 +123,7 @@ const GroupsRowComponent = ({
           getContextModel={getContextModel}
           mode="modern"
           className="group-row"
+          dataTestId={`contacts_groups_row_${itemIndex}`}
         >
           <GroupsRowContent
             className="group-row-content"
@@ -137,6 +140,7 @@ const GroupsRowComponent = ({
               isTextOverflow
               onClick={onOpenGroup}
               truncate
+              dataTestId={`contacts_groups_title_link_${itemIndex}`}
             >
               {item.name}
             </Link>
@@ -151,6 +155,7 @@ const GroupsRowComponent = ({
               lineHeight="20px"
               isTextOverflow
               onClick={onOpenGroup}
+              dataTestId={`contacts_groups_members_count_link_${itemIndex}`}
             >
               {t("PeopleTranslations:MembersCount", {
                 count: item.membersCount,

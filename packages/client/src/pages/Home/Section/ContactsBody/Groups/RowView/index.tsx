@@ -84,8 +84,13 @@ const RowView = ({
       itemHeight={58}
       onScroll={() => {}}
     >
-      {groups!.map((item) => (
-        <GroupsRow key={item.id} item={item} sectionWidth={sectionWidth!} />
+      {groups!.map((item, index) => (
+        <GroupsRow
+          key={item.id}
+          item={item}
+          sectionWidth={sectionWidth!}
+          itemIndex={index}
+        />
       ))}
     </GroupsRowContainer>
   );

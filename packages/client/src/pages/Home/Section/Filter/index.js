@@ -1485,6 +1485,7 @@ const SectionFilterContent = ({
       isContactsGroupsPage={isContactsGroupsPage}
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
+      isRecentFolder={isRecentFolder}
     />
   );
 };

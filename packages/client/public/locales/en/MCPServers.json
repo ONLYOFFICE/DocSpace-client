@@ -1,4 +1,14 @@
 {
   "Description": "This section allows you to manage MCP servers that will be available in AI chats within rooms. You can add your own MCP servers here if your company requires them. Once added, other users will be able to use them in their work.",
-  "AddServer": "Add MCP server"
+  "AddServer": "Add MCP server",
+  "MCPServer": "MCP Server",
+  "IntegrationIcon": "Integration icon",
+  "IntegrationName": "Integration name",
+  "IntegrationUrl": "Integration url",
+  "IntegrationHeaders": "Integration headers",
+  "IntegrationHeaderName": "Integration header name",
+  "IntegrationHeaderValue": "Integration header value",
+  "AddMoreHeaders": "Add more headers",
+  "EnterHeaderValue": "Enter header value",
+  "EnterHeaderName": "Enter header name"
 }

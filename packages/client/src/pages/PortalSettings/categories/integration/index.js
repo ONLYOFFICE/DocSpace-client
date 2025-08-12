@@ -85,12 +85,12 @@ const IntegrationWrapper = (props) => {
     },
     {
       id: "ai-settings",
-      name: "AI settings",
+      name: t("AISettings"),
       content: <AISettngs />,
     },
     {
       id: "mcp-servers",
-      name: "MCP servers",
+      name: t("MCPServers"),
       content: <MCPServers />,
     },
   ];

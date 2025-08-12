@@ -397,6 +397,22 @@ export const settingsTree = [
         tKey: "SMTPSettings",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-ai-settings",
+        key: "4-6",
+        icon: "",
+        link: "ai-settings",
+        tKey: "AISettings",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-mcp-servers",
+        key: "4-7",
+        icon: "",
+        link: "mcp-servers",
+        tKey: "MCPSettings",
+        isCategory: true,
+      },
     ],
   },
   {

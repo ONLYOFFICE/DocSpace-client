@@ -33,10 +33,17 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TServer } from "@docspace/shared/api/ai/types";
 import { getServersList } from "@docspace/shared/api/ai";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
+import AddNewDialog from "./sub-components/add-new-dialog";
+
 import styles from "./MCPServers.module.scss";
 
 const MCPServers = () => {
-  const { t } = useTranslation(["MCPServers", "Common"]);
+  const { t } = useTranslation(["MCPServers", "Common", "Settings"]);
+
+  const [addNewDialogVisible, setAddNewDialogVisible] = React.useState(false);
+
   const [serversList, setServersList] = React.useState<TServer[]>([]);
 
   React.useEffect(() => {
@@ -47,8 +54,18 @@ const MCPServers = () => {
       }
     };
 
+    setDocumentTitle(t("Settings:MCPServers"));
+
     fetchServersList();
   }, []);
+
+  const showAddNewDialog = () => {
+    setAddNewDialogVisible(true);
+  };
+
+  const hideAddNewDialog = () => {
+    setAddNewDialogVisible(false);
+  };
 
   return (
     <div className={styles.mcpServerContainer}>
@@ -77,12 +94,14 @@ const MCPServers = () => {
         label={t("AddServer")}
         scale={false}
         className={styles.button}
+        onClick={showAddNewDialog}
       />
       <div>
         {serversList.map((server) => (
           <div key={server.id}>{server.name}</div>
         ))}
       </div>
+      {addNewDialogVisible ? <AddNewDialog onClose={hideAddNewDialog} /> : null}
     </div>
   );
 };

@@ -404,7 +404,6 @@ class FilesTableHeader extends React.Component {
         resizable: true,
         enable: nameColumnIsEnabled,
         default: true,
-        sortBy: SortByFieldName.Name,
         minWidth: 210,
       },
       {
@@ -412,7 +411,6 @@ class FilesTableHeader extends React.Component {
         title: t("ByAuthor"),
         enable: authorRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.Author,
         onChange: this.onColumnChange,
       },
       {
@@ -420,7 +418,6 @@ class FilesTableHeader extends React.Component {
         title: t("Common:Room"),
         enable: roomRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.Room,
         onChange: this.onColumnChange,
       },
       {
@@ -428,8 +425,6 @@ class FilesTableHeader extends React.Component {
         title: t("LastOpened"),
         enable: lastOpenedRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.LastOpened,
-        onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
       {
@@ -437,7 +432,6 @@ class FilesTableHeader extends React.Component {
         title: t("Common:Size"),
         enable: sizeRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.Size,
         onChange: this.onColumnChange,
       },
       {
@@ -445,7 +439,6 @@ class FilesTableHeader extends React.Component {
         title: t("Common:Type"),
         enable: typeRecentColumnIsEnabled,
         resizable: true,
-        sortBy: SortByFieldName.Type,
         onChange: this.onColumnChange,
       },
     ];

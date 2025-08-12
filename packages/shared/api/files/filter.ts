@@ -29,12 +29,7 @@
 
 import queryString from "query-string";
 
-import {
-  ApplyFilterOption,
-  FilterLocation,
-  FilterType,
-  SortByFieldName,
-} from "../../enums";
+import { ApplyFilterOption, FilterLocation, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
 import { TViewAs, TSortOrder, TSortBy } from "../../types";
 import { validateAndFixObject } from "../../utils/filterValidator";
@@ -42,8 +37,8 @@ import { validateAndFixObject } from "../../utils/filterValidator";
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
 const DEFAULT_TOTAL = 0;
-const DEFAULT_SORT_BY: TSortBy = "DateAndTime";
-const DEFAULT_SORT_ORDER: TSortOrder = "descending";
+const DEFAULT_SORT_BY: TSortBy | null = "DateAndTime";
+const DEFAULT_SORT_ORDER: TSortOrder | null = "descending";
 const DEFAULT_VIEW: TViewAs = "row";
 const DEFAULT_FILTER_TYPE: FilterType | null = null;
 const DEFAULT_SEARCH_TYPE: boolean | null = null; // withSubfolders
@@ -135,7 +130,6 @@ export const typeDefinition = {
     "Size",
     "Title",
     "Author",
-    "LastOpened",
   ] as TSortBy[], // type TSortBy
   sortOrder: ["ascending", "descending"] as TSortOrder[], // type TSortOrder
 };
@@ -145,9 +139,9 @@ class FilesFilter {
 
   pageCount: number;
 
-  sortBy: TSortBy;
+  sortBy: TSortBy | null;
 
-  sortOrder: TSortOrder;
+  sortOrder: TSortOrder | null;
 
   viewAs: TViewAs;
 
@@ -197,7 +191,8 @@ class FilesFilter {
     const filter = new FilesFilter(DEFAULT_PAGE, pageCount, total);
 
     if (isRecentFolder) {
-      filter.sortBy = SortByFieldName.LastOpened;
+      filter.sortBy = null;
+      filter.sortOrder = null;
       filter.folder = "@recent";
     }
 

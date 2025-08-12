@@ -1224,12 +1224,6 @@ const SectionFilterContent = ({
       label: t("Common:LastActivityDate"),
       default: true,
     };
-    const lastOpenedDate = {
-      id: "sort-by_last-opened",
-      key: SortByFieldName.LastOpened,
-      label: t("LastOpened"),
-      default: true,
-    };
 
     const owner = {
       id: "sort-by_owner",
@@ -1284,8 +1278,6 @@ const SectionFilterContent = ({
       commonOptions.push(erasure);
       commonOptions.push(size);
       // commonOptions.push(type);
-    } else if (isRecentFolder) {
-      return [lastOpenedDate];
     } else {
       // commonOptions.push(authorOption);
       // commonOptions.push(creationDate);
@@ -1298,7 +1290,6 @@ const SectionFilterContent = ({
   }, [
     isRooms,
     isContactsPage,
-    isRecentFolder,
 
     t,
     userId,

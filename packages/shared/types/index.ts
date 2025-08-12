@@ -89,8 +89,7 @@ export type TSortBy =
   | "Author"
   | "roomType"
   | "usedspace"
-  | "Size"
-  | "LastOpened";
+  | "Size";
 
 export type TTranslation = (
   key: string,

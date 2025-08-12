@@ -450,7 +450,7 @@ const withHotkeys = (Component) => {
 
     // Copy selected items to clipboard
     useHotkeys(
-      "Ctrl+Shift+c",
+      "Ctrl+Shift+c, command+Shift+c",
       (e) => {
         if (!selection.length) return e;
         e.preventDefault();

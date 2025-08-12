@@ -134,6 +134,7 @@ const Table = ({
     <StyledTableContainer
       useReactWindow
       forwardedRef={ref as React.RefObject<HTMLDivElement>}
+      data-testid="contacts_table_users_container"
     >
       <TableHeader
         // rewrite to component did update

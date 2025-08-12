@@ -180,6 +180,8 @@ class SelectedFolderStore {
 
   availableExternalRights: TAvailableExternalRights | null = null;
 
+  parentShared: boolean = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -238,6 +240,7 @@ class SelectedFolderStore {
       isIndexedFolder: this.isIndexedFolder,
       shareSettings: this.shareSettings,
       availableExternalRights: this.availableExternalRights,
+      parentShared: this.parentShared,
     };
   };
 
@@ -293,6 +296,7 @@ class SelectedFolderStore {
     this.external = false;
     this.shareSettings = null;
     this.availableExternalRights = null;
+    this.parentShared = false;
   };
 
   setFilesCount = (filesCount: number) => {

@@ -34,7 +34,6 @@ import { ViewComponent } from "SRC_DIR/pages/Home/View";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
-import { StartPageRedirect } from "../pages/Home/StartPageRedirect";
 
 import { generalRoutes } from "./general";
 import { contanctsRoutes } from "./contacts";
@@ -71,7 +70,7 @@ const ClientRoutes = [
             index: true,
             element: (
               <PrivateRoute>
-                <StartPageRedirect />
+                <Navigate to="/rooms/shared" replace />
               </PrivateRoute>
             ),
           },

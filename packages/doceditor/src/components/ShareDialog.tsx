@@ -37,9 +37,8 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import Share from "@docspace/shared/components/share";
 import { injectDefaultTheme } from "@docspace/shared/utils";
-import { editExternalLink } from "@docspace/shared/api/rooms";
 import { getPortalPasswordSettings } from "@docspace/shared/api/settings";
-import type { TFile, TFileLink } from "@docspace/shared/api/files/types";
+import type { TFile } from "@docspace/shared/api/files/types";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
 import EditLinkPanel, {
   type EditLinkPanelRef,
@@ -94,21 +93,6 @@ const SharingDialog = ({
     setEditLinkPanelVisible(value);
   };
 
-  const handleEditExternalLink = (roomId: string | number, link: TFileLink) => {
-    return editExternalLink(
-      roomId,
-      link.sharedTo.id,
-      link.sharedTo.title,
-      link.access,
-      link.sharedTo.expirationDate ?? null,
-      link.sharedTo.linkType,
-      link.sharedTo.password,
-      false,
-      link.sharedTo.denyDownload,
-      link.sharedTo.internal,
-    )!;
-  };
-
   const closeEditLinkPanel = () => {
     setEditLinkPanelVisible(false);
     setLinkParams(null);
@@ -144,7 +128,6 @@ const SharingDialog = ({
             visible={editLinkPanelVisible}
             setIsVisible={closeEditLinkPanel}
             updateLink={linkParams.updateLink}
-            editExternalLink={handleEditExternalLink}
             setLinkParams={setLinkParams}
             currentDeviceType={DeviceType.desktop}
             passwordSettings={passwordSettings}

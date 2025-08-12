@@ -31,7 +31,6 @@ import { useLocation, useParams } from "react-router";
 import Chat from "@docspace/shared/components/chat";
 import { Consumer } from "@docspace/shared/utils";
 import { Nullable } from "@docspace/shared/types";
-import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { TUser } from "@docspace/shared/api/people/types";
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";

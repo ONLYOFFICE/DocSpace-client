@@ -64,6 +64,7 @@ type TagInputProps = {
   tooltipLabel?: string;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  dataTestId?: string;
 };
 
 const TagInput = ({

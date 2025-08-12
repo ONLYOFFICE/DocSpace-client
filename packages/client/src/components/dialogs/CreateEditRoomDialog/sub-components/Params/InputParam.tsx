@@ -70,6 +70,7 @@ type InputParamProps = {
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   name?: string;
   tooltipLabel?: string;
+  dataTestId?: string;
 };
 
 const InputParam = ({

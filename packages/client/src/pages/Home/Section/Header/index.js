@@ -246,7 +246,6 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
-  const isFlowsPage = location.pathname.includes("/flows");
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -549,11 +548,7 @@ const SectionHeaderContent = (props) => {
         : title;
 
   const currentCanCreate =
-    isAIRoom && !isKnowledgeTab
-      ? false
-      : isLoading && hasOwnProperty(location?.state, "canCreate")
-        ? stateCanCreate
-        : security?.Create;
+    isAIRoom && !isKnowledgeTab ? false : security?.Create;
 
   const currentRootRoomTitle =
     navigationPath &&

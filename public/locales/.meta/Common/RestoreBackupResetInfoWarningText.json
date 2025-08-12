@@ -3,7 +3,7 @@
   "content": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
   "content_en_sha1_hash": "3531a741576e6d7f3c7d70f497013990e0744339",
   "created_at": "2025-05-26T07:15:46.918Z",
-  "updated_at": "2025-05-26T08:03:59.783Z",
+  "updated_at": "2025-08-11T09:02:44.097Z",
   "comment": {
     "text": "This translation key is used to display a warning message when users need to reset their passwords after restoring backup data. The message informs them that all current passwords will be reset and provides an access restoration link via email for {{productName}} users. It appears in UI components related to data recovery, such as restore backup pages.",
     "is_auto": true,
@@ -11,15 +11,15 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/restore-backup/index.tsx",
-      "line_number": 326,
-      "context": "{!standalone ? (\n <Text\n className=\"restore-backup_warning-link settings_unavailable\"\n noSelect\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n </>",
+      "file_path": "/packages/shared/pages/backup/restore-backup/index.tsx",
+      "line_number": 383,
+      "context": "styles.settingsUnavailable,\n \"restore-backup_warning-link settings_unavailable\",\n )}\n noSelect\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n </>",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 206,
-      "context": "{t(\"Common:RestoreBackupWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text as=\"span\" className=\"restore-backup_warning-link\">\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n </Text>",
+      "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
+      "line_number": 215,
+      "context": "className={classNames(\n styles.restoreBackupWarningLink,\n \"restore-backup_warning-link\",\n )}\n >\n {t(\"Common:RestoreBackupResetInfoWarningText\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>\n ) : null}\n </Text>",
       "module": "/packages/shared"
     }
   ],

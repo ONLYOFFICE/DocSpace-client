@@ -154,6 +154,7 @@ const Selector = ({
 
   isSSR,
   selectedItem: selectedItemProp,
+  dataTestId,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -634,7 +635,7 @@ const Selector = ({
       id={id}
       className={classNames(styles.selector, className)}
       style={style}
-      data-testid="selector"
+      data-testid={dataTestId || "selector"}
     >
       <Providers
         emptyScreenProps={{

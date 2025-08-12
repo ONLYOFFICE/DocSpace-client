@@ -3,7 +3,7 @@
   "content": "Open location",
   "content_en_sha1_hash": "dbcca6bc5e893598b3c23f1313c9f5d1b45c0114",
   "created_at": "2025-05-19T21:30:55.927Z",
-  "updated_at": "2025-06-30T12:20:31.333Z",
+  "updated_at": "2025-08-11T09:02:43.916Z",
   "comment": {
     "text": "This translation key is used for the text \"Open location\" in a button, which opens the selected location when clicked. It appears on the Home page's History block content and is associated with file management actions.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/HistoryBlockContent/ItemList.tsx",
-      "line_number": 219,
-      "context": "className=\"location-btn\"\n iconName={FolderLocationReactSvgUrl}\n size={16}\n isFill\n onClick={() => checkAndOpenLocationAction!(item, actionType)}\n title={t(\"Files:OpenLocation\")}\n />\n ) : null}\n </StyledHistoryBlockFile>\n \n {actionType === \"rename\" && oldItem ? (",
+      "line_number": 225,
+      "context": "className=\"location-btn\"\n iconName={FolderLocationReactSvgUrl}\n size={16}\n isFill\n onClick={() => checkAndOpenLocationAction!(item)}\n title={t(\"Files:OpenLocation\")}\n dataTestId={`history_item_location_${index}`}\n />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 373,
-      "context": "this.dialogsStore.setFormItem(item);\n this.dialogsStore.setSubmitToGalleryDialogVisible(true);\n };\n \n onOpenLocation = (item) => {\n this.filesActionsStore.checkAndOpenLocationAction(item);\n };\n \n onMoveAction = (item) => {\n const { setIsMobileHidden } = this.infoPanelStore;",
+      "line_number": 382,
+      "context": "this.dialogsStore.setFormItem(item);\n this.dialogsStore.setSubmitToGalleryDialogVisible(true);\n };\n \n onOpenLocation = (item) => {\n this.filesActionsStore.checkAndOpenLocationAction(item);\n };\n \n onMoveAction = (item) => {\n const { id, isFolder } = this.selectedFolderStore;",
       "module": "/packages/client"
     }
   ],

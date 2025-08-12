@@ -43,10 +43,12 @@ const options = (t: TFunction) => [
   {
     label: t("ViewerInfo"),
     value: viewerInfoWatermark,
+    dataTestId: "virtual_data_room_watermarks_radio_viewer_info",
   },
   {
     label: t("Common:Image"),
     value: imageWatermark,
+    dataTestId: "virtual_data_room_watermarks_radio_image",
   },
 ];
 
@@ -109,6 +111,7 @@ const Watermarks = ({
         options={typeOptions}
         selected={type}
         onClick={onSelectType}
+        dataTestId="virtual_data_room_watermarks_radio_group"
       />
       {type === imageWatermark ? (
         <ImageWatermark

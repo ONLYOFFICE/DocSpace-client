@@ -59,6 +59,7 @@ const LogoutSessionDialog = ({
           primary
           onClick={onClick}
           isLoading={isLoading}
+          testId="dialog_logout_button"
         />
         <Button
           key="CloseBtn"
@@ -67,6 +68,7 @@ const LogoutSessionDialog = ({
           scale
           onClick={onClose}
           isDisabled={isLoading}
+          testId="dialog_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

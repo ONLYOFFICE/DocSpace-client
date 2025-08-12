@@ -101,7 +101,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         </Text>
         <div />
 
-        <Text fontWeight={600} fontSize="11px">
+        <Text fontWeight={600} fontSize="11px" dataTestId="transaction_date">
           {correctDate}
         </Text>
 

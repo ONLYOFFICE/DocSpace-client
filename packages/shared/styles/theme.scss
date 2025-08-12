@@ -21,6 +21,9 @@
   --files-article-body-dev-tools-background-opacity: 0.17;
   --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
   --article-client-home-logo-color: #{$black};
@@ -367,6 +370,9 @@
   --files-article-body-dev-tools-background-opacity: 1;
   --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
   --article-client-home-logo-color: #{$white};
@@ -1032,6 +1038,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 }
 
 .light {
@@ -1075,6 +1083,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 
   --section-header-bg: #{$white};
   --info-panel-blur-color: #{$blur-light};
@@ -2053,7 +2063,8 @@
 
 .light {
   --tile-background-color: #{$white};
-  --tile-border: 1px solid #{$gray-strong};
+  --tile-room-border: 1px solid #{$gray-strong};
+  --tile-border: 1px solid #{$gray-light-mid};
   --tile-checked-background: #{$light-gray-hover};
   --tile-icon-button-color: #{$gray};
   --tile-background-badge-color: #{$white};
@@ -2071,9 +2082,12 @@
   --tile-container-hover-background: #{$gray-light};
 
   --tile-show-hotkey-border: #{$light-second-main};
-  --tile-border-radius: 6px;
+  --tile-border-radius: 12px;
   --tile-room-border-radius: 12px;
   --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-font-size: 14px;
+  --tile-line-height: 16px;
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
@@ -2081,6 +2095,7 @@
 
 .dark {
   --tile-background-color: #{$black};
+  --tile-room-border: 1px solid #{$gray-dark-strong};
   --tile-border: 1px solid #{$gray-dark-strong};
   --tile-checked-background: #{$light-dark-gray-hover};
   --tile-icon-button-color: #{$gray-dark};
@@ -2099,9 +2114,12 @@
   --tile-container-hover-background: #{$black};
 
   --tile-show-hotkey-border: #{$light-second-main};
-  --tile-border-radius: 6px;
+  --tile-border-radius: 12px;
   --tile-room-border-radius: 12px;
-  --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+  --tile-badge-shadow: 0px 2px 4px #{$badge-dark-shadow};
+
+  --tile-font-size: 14px;
+  --tile-line-height: 16px;
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};

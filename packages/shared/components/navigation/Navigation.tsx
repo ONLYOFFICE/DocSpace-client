@@ -89,6 +89,7 @@ const Navigation = ({
   setGuidAnimationVisible,
   isContextButtonVisible,
   isPlusButtonVisible,
+  showBackButton,
 
   ...rest
 }: TNavigationProps) => {
@@ -277,6 +278,7 @@ const Navigation = ({
             ref={containerRef}
             className={styles.container}
             data-is-root-folder={isRootFolder ? "true" : "false"}
+            data-is-show-back-button={showBackButton ? "true" : "false"}
             data-is-trash-folder={isTrashFolder ? "true" : "false"}
             data-is-desktop={isDesktop ? "true" : "false"}
             data-is-desktop-client={isDesktopClient ? "true" : "false"}
@@ -299,6 +301,7 @@ const Navigation = ({
             ) : null}
             <ArrowButton
               isRootFolder={isRootFolder}
+              showBackButton={showBackButton}
               onBackToParentFolder={onBackToParentFolder}
             />
 

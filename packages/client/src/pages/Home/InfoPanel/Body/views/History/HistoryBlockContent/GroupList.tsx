@@ -110,6 +110,7 @@ const HistoryGroupList = ({
             style={
               withWrapping ? { display: "inline", wordBreak: "break-all" } : {}
             }
+            data-testid={`history_group_${i}`}
           >
             {isVisitor || isCollaborator ? (
               <Text as="span" className="text" fontWeight={600}>
@@ -122,6 +123,7 @@ const HistoryGroupList = ({
                 style={
                   withWrapping ? { display: "inline", textWrap: "wrap" } : {}
                 }
+                dataTestId={`history_group_link_${i}`}
               >
                 {decode(group.name)}
               </Link>
@@ -140,6 +142,7 @@ const HistoryGroupList = ({
             styles.userListExpandLink,
           )}
           onClick={onExpand}
+          data-testid="history_groups_expand_more"
         >
           <Trans
             t={t as TFunction}

@@ -3,7 +3,7 @@
   "content": "Change name",
   "content_en_sha1_hash": "e46692e648f154006587c9c0afcf732e4e650982",
   "created_at": "2025-05-19T21:30:53.484Z",
-  "updated_at": "2025-07-10T11:11:06.792Z",
+  "updated_at": "2025-08-11T18:11:59.123Z",
   "comment": {
     "text": "The \"NameChangeButton\" translation key is used to display the text \"Change name\" on a button in a modal dialog. This button triggers a change name action and is related to editing contact information. The text appears on the header of a modal dialog component.",
     "is_auto": true,
@@ -17,8 +17,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Profile/Section/Header/useProfileHeader.tsx",
+      "line_number": 109,
+      "context": "const getUserContextOptions = () => {\n const options = [\n {\n key: \"change-name\",\n label: t(\"PeopleTranslations:NameChangeButton\"),\n onClick: onChangeNameClick,\n disabled: false,\n icon: PencilReactSvgUrl,\n },\n {",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 187,
+      "line_number": 186,
       "context": "case \"change-name\":\n return {\n id: \"option_change-name\",\n key: option,\n icon: PencilReactSvgUrl,\n label: t(\"PeopleTranslations:NameChangeButton\"),\n onClick: this.toggleChangeNameDialog,\n };\n case \"change-email\":\n return {\n id: \"option_change-email\",",
       "module": "/packages/client"
     }

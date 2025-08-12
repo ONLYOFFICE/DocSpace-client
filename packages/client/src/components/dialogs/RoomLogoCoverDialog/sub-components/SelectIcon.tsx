@@ -148,14 +148,18 @@ export const SelectIcon = ({
     <div>
       <div className="icon-container">
         <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
-        <StyledWithoutIcon onClick={toggleWithoutIcon} isSelected={withoutIcon}>
+        <StyledWithoutIcon
+          onClick={toggleWithoutIcon}
+          isSelected={withoutIcon}
+          data-testid="room_logo_cover_without_icon"
+        >
           {t("WithoutIcon")}
         </StyledWithoutIcon>
       </div>
 
       <div className="cover-icon-container">
         {covers
-          ? covers?.map((icon) => {
+          ? covers?.map((icon, index) => {
               function createMarkup() {
                 return { __html: icon.data };
               }
@@ -170,6 +174,7 @@ export const SelectIcon = ({
                   }
                   key={icon.id}
                   id={`cover-icon-${icon?.id}`}
+                  data-testid={`room_logo_cover_icon_${index}`}
                   dangerouslySetInnerHTML={createMarkup()}
                 />
               );

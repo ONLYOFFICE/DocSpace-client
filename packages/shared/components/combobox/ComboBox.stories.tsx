@@ -129,7 +129,7 @@ The ComboBox component includes the following ARIA attributes:
     manualY: { control: { type: "text" } },
     modernView: { control: { type: "boolean" } },
     noBorder: { control: { type: "boolean" } },
-    offsetLeft: { control: { type: "number" } },
+    offsetX: { control: { type: "number" } },
     opened: { control: { type: "boolean" } },
     searchPlaceholder: { control: { type: "text" } },
     scaledOptions: { control: { type: "boolean" } },

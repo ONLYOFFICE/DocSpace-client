@@ -76,7 +76,8 @@ class ClientLoadingStore {
 
   isChangePageRequestRunning = false;
 
-  currentClientView: "users" | "groups" | "files" | "chat" | "" = "";
+  currentClientView: "users" | "groups" | "files" | "chat" | "profile" | "" =
+    "";
 
   constructor() {
     makeAutoObservable(this);
@@ -115,7 +116,16 @@ class ClientLoadingStore {
     }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);
   };
 
-  setIsProfileLoaded = (isProfileLoaded: boolean) => {
+  setIsProfileLoaded = (
+    isProfileLoaded: boolean,
+    withTimer: boolean = true,
+  ) => {
+    if (!withTimer) {
+      this.isProfileLoaded = isProfileLoaded;
+
+      return;
+    }
+
     setTimeout(() => {
       this.isProfileLoaded = isProfileLoaded;
     }, window.ClientConfig?.loaders?.loaderTime ?? MIN_LOADER_TIMER);
@@ -239,10 +249,6 @@ class ClientLoadingStore {
     return this.isArticleLoading;
   }
 
-  get showProfileLoader(): boolean {
-    return !this.isProfileLoaded;
-  }
-
   get showHeaderLoader(): boolean {
     return this.loaderStates.header.isLoading || this.showArticleLoader;
   }
@@ -257,6 +263,10 @@ class ClientLoadingStore {
 
   get showBodyLoader(): boolean {
     return this.loaderStates.body.isLoading || this.showFilterLoader;
+  }
+
+  get showProfileLoader(): boolean {
+    return this.showHeaderLoader || !this.isProfileLoaded;
   }
 }
 

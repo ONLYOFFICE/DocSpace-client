@@ -40,4 +40,5 @@ export interface QuotaFormProps {
   checkboxLabel?: string;
   label?: string;
   tabIndex?: number;
+  dataTestId?: string;
 }

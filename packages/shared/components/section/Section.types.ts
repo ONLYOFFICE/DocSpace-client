@@ -73,6 +73,8 @@ export type SectionBodyProps = {
   pathname?: string;
   isIndexEditingMode?: boolean;
   withoutFooter?: boolean;
+  onDragLeaveEmpty?: () => void;
+  onDragOverEmpty?: (isDragActive: boolean) => void;
 };
 
 export type SectionContainerProps = {
@@ -163,6 +165,10 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     user?: TUser;
     withTabs?: boolean;
     withoutFooter?: boolean;
+    dragging?: boolean;
+    dropTargetPreview?: string;
+    clearDropPreviewLocation?: () => void;
+    startDropPreview?: () => void;
   };
 
 export type SectionContextMenuProps = {

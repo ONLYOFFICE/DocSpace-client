@@ -311,6 +311,7 @@ const CreateRoomDialog = ({
             isLoading={isLoading}
             type="submit"
             onClick={onCreateRoom}
+            testId="create_room_dialog_save"
           />
           <Button
             id="shared_create-room-modal_cancel"
@@ -320,6 +321,7 @@ const CreateRoomDialog = ({
             scale
             isDisabled={isLoading}
             onClick={onCloseAndDisconnectThirdparty}
+            testId="create_room_dialog_cancel"
           />
         </ModalDialog.Footer>
       ) : null}

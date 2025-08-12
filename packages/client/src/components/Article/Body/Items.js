@@ -80,6 +80,7 @@ const Item = ({
   getLinkData,
   onBadgeClick,
   roomsFolderId,
+  setDropTargetPreview,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -89,11 +90,20 @@ const Item = ({
   let value = "";
   if (isDragging) value = `${item.id} dragging`;
 
+  React.useEffect(() => {
+    if (isDragging) {
+      if (isDragActive) setDropTargetPreview(item.title);
+      else setDropTargetPreview(null);
+    }
+  }, [isDragging, isDragActive]);
+
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
+      const dragged = dragging;
+
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder)
+      createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
           if (f.length > 0) startUpload(f, null, t);
         })
@@ -154,6 +164,8 @@ const Item = ({
     item.security.Create,
   );
 
+  const droppableClassName = isDragging ? "droppable" : "";
+
   return (
     <StyledDragAndDrop
       key={item.id}
@@ -163,7 +175,8 @@ const Item = ({
       dragging={dragging ? isDragging : null}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className="document-catalog"
+      className={`document-catalog ${droppableClassName}`}
+      data-document-title={item.title}
     >
       <ArticleItem
         item={item}
@@ -186,6 +199,7 @@ const Item = ({
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
+        withAnimation
         badgeTitle={
           labelBadge
             ? ""
@@ -247,6 +261,7 @@ const Items = ({
 
   getLinkData,
   roomsFolderId,
+  setDropTargetPreview,
 }) => {
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
@@ -361,6 +376,7 @@ const Items = ({
             roomsFolderId={roomsFolderId}
             onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
+            setDropTargetPreview={setDropTargetPreview}
           />
         );
       });
@@ -468,8 +484,8 @@ export default inject(
 
     const { firstLoad } = clientLoadingStore;
 
-    const { startUpload } = uploadDataStore;
-
+    const { startUpload, primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
     const {
       treeFolders,
       myFolderId,
@@ -524,6 +540,7 @@ export default inject(
       currentColorScheme,
       roomsFolderId,
       isIndexEditingMode,
+      setDropTargetPreview,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

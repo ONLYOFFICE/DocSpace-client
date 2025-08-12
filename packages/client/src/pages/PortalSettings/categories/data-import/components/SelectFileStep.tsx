@@ -406,6 +406,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           accept={acceptedExtensions}
           size={InputSize.base}
           isMultiple={migratorName === "GoogleWorkspace"}
+          data-test-id="upload_backup_file_input"
         />
       </FileUploadContainer>
       {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
@@ -423,6 +424,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               label={t("Common:CancelButton")}
               onClick={onCancel}
               scale={isMobile()}
+              data-test-id="cancel_upload_backup_button"
             />
           </div>
         </FileUploadContainer>
@@ -443,6 +445,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
                 isHovered
                 fontWeight={600}
                 onClick={onDownloadArchives}
+                dataTestId="check_unsupported_files_link"
               >
                 {t("Settings:CheckUnsupportedFiles")}
               </Link>
@@ -471,6 +474,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
               cancelButtonLabel={t("Common:Back")}
               displaySettings
               showReminder
+              saveButtonDataTestId="upload_to_server_button"
+              cancelButtonDataTestId="back_to_providers_button"
             />
           ) : (
             <SaveCancelButtons
@@ -484,6 +489,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
                 migratingWorkspace !== migratorName || isSaveDisabled
               }
               showReminder
+              saveButtonDataTestId="next_step_button"
+              cancelButtonDataTestId="back_to_providers_button"
             />
           )}
         </ErrorBlock>

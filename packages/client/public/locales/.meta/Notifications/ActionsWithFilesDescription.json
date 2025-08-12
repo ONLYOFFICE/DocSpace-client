@@ -3,7 +3,7 @@
   "content": "Badges will notify you about actions such as upload, creation, and changes in files.",
   "content_en_sha1_hash": "cf719ca2e84feff737e5bc9e01bff5ed46d10b1d",
   "created_at": "2025-05-19T21:30:54.072Z",
-  "updated_at": "2025-06-02T10:20:51.492Z",
+  "updated_at": "2025-08-11T18:11:59.303Z",
   "comment": {
     "text": "This translation key describes notifications related to file actions, such as upload, creation, and changes. It is used to provide a clear description of the notification badges on a user's profile page, indicating specific file-related events have occurred.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.js",
-      "line_number": 69,
-      "context": "className=\"rooms-actions\"\n onChange={onChangeBadgeSubscription}\n isChecked={badgesSubscription}\n />\n </div>\n <Text {...textDescriptionsProps}>{t(\"ActionsWithFilesDescription\")}</Text>\n </div>\n );\n };\n \n export default inject(({ peopleStore, treeFoldersStore }) => {",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
+      "line_number": 86,
+      "context": "onChange={onChangeBadgeSubscription}\n isChecked={badgesSubscription}\n dataTestId=\"actions_rooms_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>{t(\"ActionsWithFilesDescription\")}</Text>\n </div>\n );\n };\n \n export default inject(({ peopleStore, treeFoldersStore }: TStore) => {",
       "module": "/packages/client"
     }
   ],

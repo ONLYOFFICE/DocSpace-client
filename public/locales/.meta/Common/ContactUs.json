@@ -3,7 +3,7 @@
   "content": "For sales questions, contact us at",
   "content_en_sha1_hash": "8d58e04a3b0884f01458cb78b69edc18104e2ca8",
   "created_at": "2025-05-26T07:15:41.542Z",
-  "updated_at": "2025-05-26T08:06:14.058Z",
+  "updated_at": "2025-08-11T18:11:59.272Z",
   "comment": {
     "text": "The translation key \"ContactUs\" is used to display a contact link in a portal settings page, guiding users to submit sales-related questions. This text appears on a button or similar element, prompting users to reach out for assistance. Translators should adapt this phrase to provide accurate and helpful contact information for the target audience.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/ContactContainer.js",
       "line_number": 45,
-      "context": "const ContactContainer = ({ t, salesEmail }) => {\n return (\n <StyledContactContainer>\n {salesEmail ? (\n <Text as=\"span\" noSelect fontWeight={600}>\n {t(\"ContactUs\")}\n <Link\n className=\"sales-email-link\"\n tag=\"a\"\n fontWeight=\"600\"\n href={`mailto:${salesEmail}`}",
+      "context": "const ContactContainer = ({ t, salesEmail }) => {\n return (\n <StyledContactContainer>\n {salesEmail ? (\n <Text as=\"span\" noSelect fontWeight={600}>\n {t(\"Common:ContactUs\")}\n <Link\n className=\"sales-email-link\"\n tag=\"a\"\n fontWeight=\"600\"\n href={`mailto:${salesEmail}`}",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/shared/pages/Payments/Standalone/ContactConrainer.tsx",
+      "file_path": "/packages/shared/pages/Payments/Standalone/sub-components/ContactContainer.tsx",
       "line_number": 41,
-      "context": "const { t } = useTranslation(\"Common\");\n return (\n <StyledContactContainer>\n {salesEmail ? (\n <Text as=\"span\" noSelect fontWeight={600}>\n {t(\"ContactUs\")}\n <Link\n className=\"sales-email-link\"\n tag=\"a\"\n fontWeight=\"600\"\n href={`mailto:${salesEmail}`}",
+      "context": "const { t } = useTranslation(\"Common\");\n return (\n <div className={styles.contactContainer}>\n {salesEmail ? (\n <Text as=\"span\" noSelect fontWeight={600}>\n {t(\"ContactUs\")}\n <Link\n className=\"sales-email-link\"\n tag=\"a\"\n fontWeight=\"600\"\n href={`mailto:${salesEmail}`}",
       "module": "/packages/shared"
     }
   ],

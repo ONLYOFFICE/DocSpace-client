@@ -100,6 +100,7 @@ const InputBlock = React.memo(
     children,
     forwardedRef,
     testId,
+    dataTestId,
   }: InputBlockProps) => {
     const [isFocus, setIsFocus] = useState(isAutoFocussed);
     const iconButtonSize = useIconSize(size, iconSize);
@@ -168,7 +169,7 @@ const InputBlock = React.memo(
       <div
         className={inputGroupClassName}
         style={style}
-        data-testid="input-block"
+        data-testid={dataTestId || "input-block"}
         data-size={size}
         data-scale={scale}
         data-error={hasError}

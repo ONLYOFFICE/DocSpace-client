@@ -240,6 +240,7 @@ const ImageWatermark = ({
           key={item.key}
           data-key={item.key}
           onClick={() => onRotateChange(item)}
+          testId={`virtual_data_room_watermark_rotate_${item.key}`}
         >
           {item.label}&deg;
         </DropDownItem>
@@ -257,6 +258,7 @@ const ImageWatermark = ({
           key={item.key}
           data-key={item.key}
           onClick={() => onScaleChange(item)}
+          testId={`virtual_data_room_watermark_scale_${item.key}`}
         >
           {item.label}&#37;
         </DropDownItem>
@@ -278,6 +280,7 @@ const ImageWatermark = ({
           scale
           isMultiple={false}
           size={InputSize.base}
+          data-testid="virtual_data_room_watermark_file_input"
         />
       ) : null}
 
@@ -318,6 +321,7 @@ const ImageWatermark = ({
                 advancedOptions={scaleItems()}
                 options={[]}
                 selectedOption={{} as TOption}
+                dataTestId="virtual_data_room_watermark_scale_combobox"
               >
                 <div className="options">{selectedScale?.label}&#37;</div>
               </ComboBox>
@@ -336,6 +340,7 @@ const ImageWatermark = ({
                 selectedOption={{} as TOption}
                 advancedOptionsCount={rotateOptions.length}
                 fillIcon={false}
+                dataTestId="virtual_data_room_watermark_rotate_combobox"
               >
                 <div className="options">{selectedRotate.label}&deg;</div>
               </ComboBox>

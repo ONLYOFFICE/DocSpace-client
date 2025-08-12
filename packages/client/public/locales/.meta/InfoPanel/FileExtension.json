@@ -3,7 +3,7 @@
   "content": "File extension",
   "content_en_sha1_hash": "3f77fbf03bc4a79bdd764b642097fb426df9d195",
   "created_at": "2025-05-19T21:30:54.810Z",
-  "updated_at": "2025-05-24T10:22:02.659Z",
+  "updated_at": "2025-08-11T09:02:43.911Z",
   "comment": {
     "text": "This translation key is used to display the label \"File extension\" in various UI elements, likely a file management system or settings page. It appears to be part of a dropdown menu or button that allows users to select and view different types of files. Translators should focus on providing a clear and concise description for this text that can be easily understood by users in various languages.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 176,
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 204,
       "context": "return this.t(\"Common:Type\");\n case \"Storage Type\":\n return this.t(\"InfoPanel:StorageType\");\n \n case \"File extension\":\n return this.t(\"FileExtension\");\n \n case \"Content\":\n return this.t(\"Common:Content\");\n case \"Size\":\n return this.t(\"Common:Size\");",
       "module": "/packages/client"
     }

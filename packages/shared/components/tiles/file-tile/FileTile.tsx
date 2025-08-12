@@ -37,7 +37,7 @@ import { HeaderType } from "../../context-menu/ContextMenu.types";
 import { Link, LinkType } from "../../link";
 import { Loader, LoaderTypes } from "../../loader";
 import { hasOwnProperty } from "../../../utils/object";
-import { isMobile, classNames } from "../../../utils";
+import { isMobile, classNames, isTablet } from "../../../utils";
 
 import { FileChildProps, FileTileProps } from "./FileTile.types";
 
@@ -74,6 +74,7 @@ const FileTile = ({
   badges,
   isEdit,
   forwardRef,
+  dataTestId,
   ...rest
 }: FileTileProps) => {
   const childrenArray = React.Children.toArray(children);
@@ -82,8 +83,17 @@ const FileTile = ({
   const { t } = useTranslation(["Translations"]);
 
   const [errorLoadSrc, setErrorLoadSrc] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const cm = useRef<ContextMenuRefType>(null);
+
+  const onHover = () => {
+    setIsHovered(true);
+  };
+
+  const onLeave = () => {
+    setIsHovered(false);
+  };
 
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&
@@ -238,6 +248,9 @@ const FileTile = ({
   const isImageOrMedia =
     item?.viewAccessibility?.ImageView || item?.viewAccessibility?.MediaView;
 
+  const isTouchDevice =
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
   const fileTileClassNames = classNames(styles.fileTile, {
     [styles.isBlocked]: isBlockingOperation,
     [styles.showHotkeyBorder]: showHotkeyBorder,
@@ -245,6 +258,7 @@ const FileTile = ({
     [styles.isActive]: isActive,
     [styles.checked]: checked,
     [styles.isEdit]: isEdit,
+    [styles.isTouchDevice]: isTouchDevice || isMobile() || isTablet(),
   });
 
   const iconClassNames = classNames(styles.icon, {
@@ -254,6 +268,7 @@ const FileTile = ({
   const iconContainerClassNames = classNames(styles.iconContainer, {
     [styles.isDragging]: isDragging,
     [styles.inProgress]: inProgress,
+    [styles.checked]: checked,
   });
 
   const checkboxClassNames = classNames(styles.checkbox, {
@@ -268,6 +283,10 @@ const FileTile = ({
     [styles.isHighlight]: isHighlight,
   });
 
+  const contentClassNames = classNames(styles.content, "content", {
+    [styles.isHovered]: isHovered,
+  });
+
   return (
     <div
       {...rest}
@@ -275,22 +294,37 @@ const FileTile = ({
       className={fileTileClassNames}
       onContextMenu={onContextMenu}
       onClick={onFileClick}
+      data-testid={dataTestId ?? "tile"}
     >
       <div className={fileTileTopClassNames} onClick={thumbnailClick}>
         {icon}
       </div>
 
-      <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
       {contentElement ? (
-        <div className={classNames(styles.icons, styles.isQuickButtons)}>
+        <div
+          className={classNames(styles.icons, styles.isQuickButtons)}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
           {contentElement}
         </div>
       ) : null}
+      <div
+        className={classNames(styles.icons, styles.isBadges)}
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+      >
+        {badges}
+      </div>
 
       <div className={fileTileBottomClassNames}>
         {element && !isEdit ? (
           !inProgress ? (
-            <div className={iconContainerClassNames}>
+            <div
+              className={iconContainerClassNames}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
               <div className={iconClassNames} onClick={onFileIconClick}>
                 {element}
               </div>
@@ -311,9 +345,13 @@ const FileTile = ({
           )
         ) : null}
 
-        <div className={styles.content}>{FilesTileContent}</div>
+        <div className={contentClassNames}>{FilesTileContent}</div>
 
-        <div className={styles.optionButton}>
+        <div
+          className={styles.optionButton}
+          onMouseEnter={onHover}
+          onMouseLeave={onLeave}
+        >
           {renderContext ? (
             <ContextMenuButton
               isFill

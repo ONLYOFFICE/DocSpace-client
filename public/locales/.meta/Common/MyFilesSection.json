@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:46.695Z",
-  "updated_at": "2025-07-10T11:11:06.757Z",
+  "updated_at": "2025-08-11T18:11:59.100Z",
   "comment": {
     "text": "This translation key is used to display the text \"Documents\" in a button within a file management component. It appears as part of a link that navigates to a personal section of documents, and its purpose is to provide a clear label for users.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 218,
+      "line_number": 220,
       "context": "iconName={PersonSvgUrl}\n isFill\n />\n <Link onClick={onGoToPersonal} {...linkStyles}>\n {t(\"Files:GoToSection\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Link>\n </div>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/RootFolderContainer.js",
-      "line_number": 218,
+      "line_number": 220,
       "context": "iconName={PersonSvgUrl}\n isFill\n />\n <Link onClick={onGoToPersonal} {...linkStyles}>\n {t(\"Files:GoToSection\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Link>\n </div>\n );",
       "module": "/packages/client"
     },
@@ -42,56 +42,92 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
-      "line_number": 118,
+      "line_number": 111,
       "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyFilesSection\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
+      "line_number": 111,
+      "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyFilesSection\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
+      "line_number": 111,
+      "context": "const isSingleUser = userNames.length === 1;\n const translationValues = {\n userName: isSingleUser ? userNames[0] : undefined,\n membersSection: t(\"Common:Members\"),\n documentsSection: t(\"Common:MyFilesSection\"),\n productName: t(\"Common:ProductName\"),\n secondType,\n };\n const translationKey = getChangeTypeKey(\n toType,",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ConvertDialog/index.js",
+      "line_number": 100,
+      "context": "const convertSingleFile = !!convertItem;\n const sortedFolder = isRecentFolder || isFavoritesFolder || isShareFolder;\n \n if (convertSingleFile && sortedFolder) {\n rootFolderTitle = isShareFolder\n ? t(\"Common:MyFilesSection\")\n : rootFoldersTitles[convertItem.rootFolderType]?.title;\n }\n \n const [hideMessage, setHideMessage] = useState(false);\n const [selectedOptionType, setSelectedOptionType] = useState(",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 60,
+      "line_number": 61,
       "context": "users,\n onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteProfileEverDialog/sub-components/BodyComponent.tsx",
-      "line_number": 60,
+      "line_number": 61,
       "context": "users,\n onlyOneUser,\n onlyGuests,\n }: BodyComponentProps) => {\n const warningMessageMyDocuments = t(\"UserFilesRemovalScope\", {\n sectionNameFirst: t(\"Common:MyFilesSection\"),\n sectionNameSecond: t(\"Common:TrashSection\"),\n });\n \n const warningMessageReassign = onlyGuests ? (\n t(\"DeleteReqassignDescriptionGuest\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
+      "line_number": 54,
+      "context": "const onClose = () => setEmptyTrashDialogVisible(false);\n \n const sectionName = isArchiveFolder\n ? t(\"Common:Archive\")\n : isPersonalReadOnly\n ? t(\"Common:MyFilesSection\")\n : t(\"Common:TrashSection\");\n \n const onEmptyTrash = () => {\n onClose();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
-      "line_number": 84,
-      "context": "scale\n />\n <Button\n key=\"RedirectButton\"\n label={t(\"Files:GoToSection\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n size={ButtonSize.normal}\n onClick={onRedirect}\n scale\n />",
+      "line_number": 61,
+      "context": "<StyledText>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: t(\"Common:MyFilesSection\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/ReducedRightsDialog/index.tsx",
+      "line_number": 61,
+      "context": "<StyledText>\n <Trans\n t={t}\n ns=\"Files\"\n i18nKey=\"PersonalContentRemovalNotice\"\n values={{ sectionName: t(\"Common:MyFilesSection\") }}\n components={{ 1: <span style={{ fontWeight: 600 }} /> }}\n />\n </StyledText>\n <StyledText>\n {t(\"Common:ForQuestionsContactPortalAdmin\", {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/helpers/toast-helpers.tsx",
       "line_number": 46,
-      "context": "const toastMessage = (\n <Trans\n t={t}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:MyFilesSection\") }}\n components={{\n 1: (\n <ColorTheme\n tag=\"a\"\n themeId={ThemeId.Link}",
+      "context": "const toastMessage = (\n <Trans\n t={t as TFunction}\n i18nKey=\"FileExportDestination\"\n ns=\"Files\"\n values={{ fileName, sectionName: t(\"Common:MyFilesSection\") }}\n components={{\n 1: (\n <Link\n tag=\"a\"\n href={fileUrl}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 325,
+      "context": "return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/useFeedTranslation.tsx",
-      "line_number": 290,
-      "context": "return t(\"InfoPanel:RoomArchived\");\n case \"RoomUnarchived\":\n return t(\"InfoPanel:RoomUnarchived\");\n case \"RoomIndexExportSaved\":\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case \"FormSubmit\":\n return t(\"InfoPanel:FilledOutForm\");\n case \"FormOpenedForFilling\":\n return t(\"InfoPanel:StartedFillingItOut\");",
+      "line_number": 303,
+      "context": "return t(\"InfoPanel:RoomFromArchiveRestore\", {\n sectionName: t(\"Common:Archive\"),\n });\n case FeedActionKeys.RoomIndexExportSaved:\n return t(\"InfoPanel:RoomIndexExportLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n });\n case FeedActionKeys.FormSubmit:\n return t(\"InfoPanel:FilledOutForm\");\n case FeedActionKeys.FormOpenedForFilling:\n return t(\"InfoPanel:StartedFillingItOut\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 141,
+      "line_number": 143,
       "context": "<ImportSection\n isChecked={importOptions.importPersonalFiles}\n onChange={(e) => onChange(e, \"importPersonalFiles\")}\n sectionName={t(\"Settings:PersonalFiles\")}\n description={t(\"Settings:ImportFilesLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n exportSection={{\n sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 141,
+      "line_number": 143,
       "context": "<ImportSection\n isChecked={importOptions.importPersonalFiles}\n onChange={(e) => onChange(e, \"importPersonalFiles\")}\n sectionName={t(\"Settings:PersonalFiles\")}\n description={t(\"Settings:ImportFilesLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n exportSection={{\n sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
-      "line_number": 369,
-      "context": "isDisabled={isNotPaidPeriod}\n scale={isMobile}\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
+      "line_number": 378,
+      "context": "scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"Settings:ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
       "module": "/packages/client"
     },
     {
@@ -102,20 +138,32 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 99,
-      "context": "securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n />\n )",
+      "line_number": 101,
+      "context": "securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}\n downloadReport={t(\"DownloadReportBtnText\")}\n downloadReportDescription={t(\"ReportSaveLocation\", {\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n getReport={getLoginHistoryReport}\n isSettingNotPaid={!isAuditAvailable}\n tfaEnabled={tfaEnabled}\n currentColorScheme={currentColorScheme}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 60,
+      "line_number": 61,
       "context": "title={t(\"QuotaPerUser\")}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-user\"\n subtitle={t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n })}\n isDisabled={isDisabled}\n />\n </StyledBaseQuotaComponent>\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerItem.js",
-      "line_number": 111,
+      "line_number": 113,
       "context": "/>\n <Text className=\"toggle_label\" fontSize=\"12px\">\n {type === \"user\"\n ? t(\"UserDefaultQuotaDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n })\n : t(\"SetDefaultRoomQuota\", {\n productName: t(\"Common:ProductName\"),\n })}\n </Text>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/ContextOptionsStore.js",
+      "line_number": 1469,
+      "context": "},\n {\n id: \"header_option_empty-section\",\n key: \"empty-section\",\n label: t(\"Files:EmptySection\", {\n sectionName: t(\"Common:MyFilesSection\"),\n }),\n onClick: this.onEmptyPersonalAction,\n icon: ClearTrashReactSvgUrl,\n disabled: false,\n },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/TreeFoldersStore.js",
+      "line_number": 67,
+      "context": "const treeFolders = await getFoldersTree();\n \n treeFolders.forEach((folder) => {\n switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:MyFilesSection\");\n break;\n case FolderType.Rooms:\n folder.title = i18n.t(\"Common:Rooms\");\n break;\n case FolderType.Archive:",
       "module": "/packages/client"
     },
     {
@@ -126,13 +174,13 @@
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1246,
+      "line_number": 1274,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 1246,
+      "line_number": 1274,
       "context": "t: TTranslation,\n ) => {\n if (isPortalAdmin)\n return t(\"Common:RolePortalAdminDescription\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:MyFilesSection\"),\n });\n \n if (isRoomAdmin)\n return t(\"Common:RoleRoomAdminDescription\", {\n sectionName: t(\"Common:MyFilesSection\"),",
       "module": "/packages/shared"
     },

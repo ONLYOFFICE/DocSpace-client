@@ -29,7 +29,7 @@ import { ButtonSize } from "./Button.enums";
 
 type BaseButtonProps = {
   /** Ref to access the DOM element or React component instance */
-  ref?: React.RefObject<HTMLButtonElement>;
+  ref?: React.Ref<HTMLButtonElement>;
   /** Button text */
   label: string;
   /** Optional title attribute */

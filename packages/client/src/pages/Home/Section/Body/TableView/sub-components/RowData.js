@@ -52,6 +52,7 @@ const RowDataComponent = (props) => {
     dragStyles,
     selectionProp,
     value,
+    documentTitle,
     theme,
     onContentFileSelect,
     checkedProps,
@@ -67,6 +68,7 @@ const RowDataComponent = (props) => {
     changeIndex,
     isIndexedFolder,
     erasureColumnIsEnabled,
+    index,
   } = props;
 
   const [lastColumn, setLastColumn] = useState(
@@ -117,14 +119,18 @@ const RowDataComponent = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`files-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
-          lastColumn === "Name" && isIndexEditingMode
-            ? "index-buttons-name"
-            : "",
+          dragStyles.className,
+          {
+            "table-container_file-name-cell-first":
+              value?.indexOf("first") > -1,
+          },
         )}
         value={value}
+        documentTitle={documentTitle}
       >
         <FileNameCell
           theme={theme}
@@ -142,8 +148,11 @@ const RowDataComponent = (props) => {
 
       {authorColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-author-${index}`}
           style={
-            !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
+            !authorColumnIsEnabled
+              ? { background: "none !important" }
+              : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
@@ -166,6 +175,7 @@ const RowDataComponent = (props) => {
 
       {createdColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-created-${index}`}
           style={
             !createdColumnIsEnabled
               ? { background: "none !important" }
@@ -193,6 +203,7 @@ const RowDataComponent = (props) => {
 
       {modifiedColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-modified-${index}`}
           style={
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -217,6 +228,7 @@ const RowDataComponent = (props) => {
 
       {erasureColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-erasure-${index}`}
           style={
             !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -237,6 +249,7 @@ const RowDataComponent = (props) => {
 
       {sizeColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-size-${index}`}
           style={
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
@@ -259,6 +272,7 @@ const RowDataComponent = (props) => {
 
       {typeColumnIsEnabled ? (
         <TableCell
+          dataTestId={`files-cell-type-${index}`}
           style={
             !typeColumnIsEnabled
               ? { background: "none !important" }

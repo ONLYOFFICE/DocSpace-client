@@ -37,6 +37,8 @@ import {
   FILTER_DOCUMENTS,
   FILTER_RECENT,
 } from "@docspace/shared/utils/filterConstants";
+import { getCategoryType } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const MyDocumentsTabs = ({
   isPersonalRoom,
@@ -54,6 +56,9 @@ const MyDocumentsTabs = ({
   const [selectedTab, setSelectedTab] = React.useState("my");
 
   React.useEffect(() => {
+    const categoryType = getCategoryType(location);
+
+    if (categoryType !== CategoryType.Personal) return;
     const recentTab = getObjectByLocation(location)?.folder === "recent";
     setSelectedTab(recentTab ? "recent" : "my");
   }, [location]);
@@ -109,7 +114,7 @@ const MyDocumentsTabs = ({
       items={tabs}
       selectedItemId={selectedTab}
       onSelect={onSelect}
-      id="files-tabs"
+      withAnimation
     />
   ) : null;
 };

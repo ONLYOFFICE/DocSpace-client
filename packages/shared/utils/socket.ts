@@ -50,6 +50,7 @@ export const enum SocketEvents {
   Restore = "restore",
   Backup = "backup",
   RestoreBackup = "restore-backup",
+  StorageEncryption = "storage-encryption",
   LogoutSession = "s:logout-session",
   ModifyFolder = "s:modify-folder",
   ModifyRoom = "s:modify-room",
@@ -89,6 +90,7 @@ export const enum SocketCommands {
   Unsubscribe = "unsubscribe",
   RefreshFolder = "refresh-folder",
   RestoreBackup = "restore-backup",
+  StorageEncryption = "storage-encryption",
   SubscribeInSpaces = "subscribeInSpaces",
   UnsubscribeInSpaces = "unsubscribeInSpaces",
 }
@@ -160,6 +162,7 @@ export type TEmitEventsDataMap = {
   [SocketCommands.UnsubscribeInSpaces]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
   [SocketCommands.RestoreBackup]: TRestoreBackupEmitData;
+  [SocketCommands.StorageEncryption]: string;
 };
 
 /**

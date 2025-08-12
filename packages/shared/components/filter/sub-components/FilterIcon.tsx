@@ -37,6 +37,7 @@ type FilterIconProps = {
   isOpen?: boolean;
   id?: string;
   title?: string;
+  dataTestId?: string;
 };
 
 const FilterIcon = ({
@@ -45,6 +46,7 @@ const FilterIcon = ({
   onClick,
   isOpen,
   isShowIndicator,
+  dataTestId,
 }: FilterIconProps) => {
   return (
     <div
@@ -55,9 +57,12 @@ const FilterIcon = ({
         [styles.button]: true,
         [styles.isOpen]: isOpen,
       })}
+      data-testid={dataTestId ?? "filter_icon_button"}
     >
       <IconButton iconNode={<FilterReactSvg />} size={16} />
-      {isShowIndicator ? <div className={styles.indicator} /> : null}
+      {isShowIndicator ? (
+        <div className={styles.indicator} data-testid="filter_icon_indicator" />
+      ) : null}
     </div>
   );
 };

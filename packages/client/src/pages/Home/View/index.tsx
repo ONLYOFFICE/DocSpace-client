@@ -34,22 +34,28 @@ import { Nullable } from "@docspace/shared/types";
 import { TabsEvent } from "@docspace/shared/components/tabs/PrimaryTabs";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
 import { TUser } from "@docspace/shared/api/people/types";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
-import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
+import ProfileSectionBodyContent from "../../Profile/Section/Body";
 
+import useProfileBody, {
+  UseProfileBodyProps,
+} from "../../Profile/Section/Body/useProfileBody";
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { UseFilesProps } from "../Hooks/useFiles";
 
 type ViewProps = UseContactsProps &
-  UseFilesProps & {
+  UseFilesProps &
+  UseProfileBodyProps & {
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
@@ -66,6 +72,8 @@ type ViewProps = UseContactsProps &
 
     filesAbortController: Nullable<AbortController>;
     roomsAbortController: Nullable<AbortController>;
+
+    showHeaderLoader: ClientLoadingStore["showHeaderLoader"];
   };
 
 const View = ({
@@ -78,9 +86,6 @@ const View = ({
 
   getGroups,
   updateCurrentGroup,
-
-  showGuestReleaseTip,
-  setGuestReleaseTipDialogVisible,
 
   setIsChangePageRequestRunning,
   setCurrentClientView,
@@ -115,16 +120,30 @@ const View = ({
   getIcon,
   chatSettings,
   showBodyLoader,
+  showHeaderLoader,
+
+  getFilesSettings,
+  setSubscriptions,
+  isFirstSubscriptionsLoad,
+  fetchConsents,
+  fetchScopes,
+  tfaSettings,
+  setBackupCodes,
+  setProviders,
+  getCapabilities,
+  getSessions,
+
+  getTfaType,
+  setIsProfileLoaded,
 }: ViewProps) => {
   const location = useLocation();
   const { room } = useParams();
 
   const isContactsPage = location.pathname.includes("accounts");
+  const isProfilePage = location.pathname.includes("profile");
 
   const [currentView, setCurrentView] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-
-  const startAnimationTimerRef = React.useRef<NodeJS.Timeout>(null);
 
   const prevCurrentViewRef = React.useRef(currentView);
   const prevCategoryType = React.useRef<number>(getCategoryType(location));
@@ -140,9 +159,6 @@ const View = ({
     getUsersList,
     getGroups,
     updateCurrentGroup,
-
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
   });
 
   const { getFiles } = useFiles({
@@ -165,8 +181,26 @@ const View = ({
     wsCreatedPDFForm,
   });
 
+  const { getProfileInitialValue } = useProfileBody({
+    getFilesSettings: getFilesSettings!,
+    setSubscriptions: setSubscriptions!,
+    isFirstSubscriptionsLoad,
+    fetchConsents: fetchConsents!,
+    fetchScopes: fetchScopes!,
+    tfaSettings,
+    setBackupCodes: setBackupCodes!,
+    setProviders: setProviders!,
+    getCapabilities: getCapabilities!,
+    getSessions: getSessions!,
+    setIsProfileLoaded: setIsProfileLoaded!,
+    setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    getTfaType: getTfaType!,
+  });
+
   const getFilesRef = React.useRef(getFiles);
   const fetchContactsRef = React.useRef(fetchContacts);
+
+  const animationStartedRef = React.useRef(false);
 
   const abortControllers = React.useRef({
     filesAbortController,
@@ -177,7 +211,7 @@ const View = ({
 
   React.useLayoutEffect(() => {
     setIsSectionHeaderLoading(true, false);
-  }, []);
+  }, [setIsSectionHeaderLoading]);
 
   React.useEffect(() => {
     prevCurrentViewRef.current = currentView;
@@ -204,49 +238,65 @@ const View = ({
   ]);
 
   React.useEffect(() => {
+    animationStartedRef.current = false;
+
+    const animationStartedAction = () => {
+      animationStartedRef.current = true;
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_STARTED,
+      animationStartedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_STARTED,
+        animationStartedAction,
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
     if (!isLoading) {
       TopLoadingIndicator.end();
-      window.dispatchEvent(new CustomEvent(TabsEvent.END_ANIMATION));
-      if (startAnimationTimerRef.current) {
-        clearTimeout(startAnimationTimerRef.current);
-      }
-      startAnimationTimerRef.current = null;
+
+      if (currentView === "profile" && prevCurrentViewRef.current === "profile")
+        return;
+
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
     }
+  }, [isLoading]);
+
+  React.useEffect(() => {
+    animationStartedRef.current = false;
+
+    const animationEndedAction = () => {
+      animationStartedRef.current = false;
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_ENDED,
+      animationEndedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_ENDED,
+        animationEndedAction,
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (showHeaderLoader) return;
 
     if (isLoading) {
-      const view = getContactsView();
-      const tab =
-        document.getElementById("contacts-tabs") ||
-        document.getElementById("files-tabs");
-
-      if (
-        !tab ||
-        view === "inside_group" ||
-        (isContactsPage && prevCurrentViewRef.current === "files") ||
-        (!isContactsPage && prevCurrentViewRef.current !== "files") ||
-        prevCategoryType.current !== getCategoryType(location)
-      ) {
+      if (!animationStartedRef.current) {
         TopLoadingIndicator.start();
-
-        return;
       }
-      if (startAnimationTimerRef.current) {
-        clearTimeout(startAnimationTimerRef.current);
-        startAnimationTimerRef.current = null;
-      }
-
-      startAnimationTimerRef.current = setTimeout(() => {
-        const event = new CustomEvent(TabsEvent.START_ANIMATION, {
-          detail: {
-            id: tab.id,
-          },
-        });
-
-        window.dispatchEvent(event);
-        startAnimationTimerRef.current = null;
-      }, 500);
     }
-  }, [isLoading, isContactsPage, location]);
+  }, [isLoading, showHeaderLoader]);
 
   React.useEffect(() => {
     const getView = async () => {
@@ -258,16 +308,26 @@ const View = ({
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
-        let view: void | "groups" | "files" | "users" | "chat" =
+        let view: void | "groups" | "files" | "users" | "profile" | "chat" =
           await fetchContactsRef.current();
 
-        if (!isContactsPage) {
+        if (isProfilePage) {
+          if (prevCurrentViewRef.current !== "profile") {
+            await getProfileInitialValue();
+          }
+
+          clearFiles();
+          setContactsTab(false);
+
+          view = "profile";
+        } else if (!isContactsPage) {
           await getFilesRef.current();
 
           prevCategoryType.current = getCategoryType(location);
 
           view =
             prevCategoryType.current === CategoryType.Chat ? "chat" : "files";
+          setContactsTab(false);
         } else {
           clearFiles();
         }
@@ -276,6 +336,7 @@ const View = ({
           setCurrentView(view);
           setCurrentClientView(view);
         }
+
         setIsChangePageRequestRunning(false);
         setIsLoading(false);
       } catch (error) {
@@ -290,16 +351,10 @@ const View = ({
     };
 
     getView();
-  }, [location, isContactsPage]);
+  }, [location, isContactsPage, isProfilePage]);
 
   return (
-    <div
-      style={{
-        opacity: isLoading ? 0.5 : 1,
-        pointerEvents: isLoading ? "none" : "auto",
-        transition: "opacity 0.3s ease-in-out",
-      }}
-    >
+    <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
         {(context) =>
           context.sectionWidth &&
@@ -316,12 +371,14 @@ const View = ({
               selectedModel={chatSettings?.modelId ?? ""}
               isLoading={showBodyLoader}
             />
+          ) : currentView === "profile" ? (
+            <ProfileSectionBodyContent />
           ) : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
           ))
         }
       </Consumer>
-    </div>
+    </LoaderWrapper>
   );
 };
 
@@ -329,16 +386,18 @@ export const ViewComponent = inject(
   ({
     peopleStore,
     treeFoldersStore,
-    settingsStore,
-    dialogsStore,
+
     filesStore,
     clientLoadingStore,
     mediaViewerDataStore,
     oformsStore,
     userStore,
     selectedFolderStore,
-
     filesSettingsStore,
+    oauthStore,
+    tfaStore,
+    setup,
+    authStore,
   }: TStore) => {
     const { usersStore, groupsStore } = peopleStore;
 
@@ -355,10 +414,6 @@ export const ViewComponent = inject(
     } = groupsStore!;
 
     const { setSelectedNode } = treeFoldersStore;
-
-    const { showGuestReleaseTip } = settingsStore;
-
-    const { setGuestReleaseTipDialogVisible } = dialogsStore;
 
     const {
       scrollToTop,
@@ -379,12 +434,28 @@ export const ViewComponent = inject(
       setIsChangePageRequestRunning,
       setCurrentClientView,
       setIsSectionHeaderLoading,
+      setIsProfileLoaded,
+
+      showHeaderLoader,
     } = clientLoadingStore;
 
     const { playlist, setToPreviewFile } = mediaViewerDataStore;
 
     const { gallerySelected } = oformsStore;
 
+    const { getFilesSettings } = filesSettingsStore;
+
+    const { setSubscriptions, isFirstSubscriptionsLoad } =
+      peopleStore.targetUserStore!;
+
+    const { fetchConsents, fetchScopes } = oauthStore;
+
+    const { tfaSettings, setBackupCodes, getTfaType } = tfaStore;
+
+    const { setProviders } = peopleStore.usersStore;
+    const { getCapabilities } = authStore;
+
+    const { getSessions } = setup;
     return {
       setContactsTab,
       getUsersList,
@@ -392,9 +463,6 @@ export const ViewComponent = inject(
       updateCurrentGroup,
 
       setSelectedNode,
-
-      showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible,
 
       scrollToTop,
       fetchFiles,
@@ -430,6 +498,21 @@ export const ViewComponent = inject(
       getIcon: filesSettingsStore.getIcon,
       chatSettings: selectedFolderStore?.chatSettings,
       showBodyLoader: clientLoadingStore.showBodyLoader,
+      showHeaderLoader,
+
+      getFilesSettings,
+      setSubscriptions,
+      isFirstSubscriptionsLoad,
+      fetchConsents,
+      fetchScopes,
+      tfaSettings,
+      setBackupCodes,
+      setProviders,
+      getCapabilities,
+      getSessions,
+
+      getTfaType,
+      setIsProfileLoaded,
     };
   },
 )(observer(View));

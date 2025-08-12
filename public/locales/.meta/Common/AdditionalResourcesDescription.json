@@ -3,7 +3,7 @@
   "content": "Choose whether you want to display links to additional resources in {{productName}} menu.",
   "content_en_sha1_hash": "ba7ac198833cace77d47f785c15e7a5c1bb730da",
   "created_at": "2025-05-26T07:15:40.229Z",
-  "updated_at": "2025-06-02T10:20:51.600Z",
+  "updated_at": "2025-08-11T09:06:56.197Z",
   "comment": {
     "text": "This translation key provides the text for a description that explains why additional resources are not currently available. It is displayed in the UI of a settings page and is translated as part of the branding options for {productName}.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
       "line_number": 96,
-      "context": "className={classNames(\n styles.additionalDescription,\n \"settings_unavailable\",\n )}\n >\n {t(\"AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox",
+      "context": "className={classNames(\n styles.additionalDescription,\n \"settings_unavailable\",\n )}\n >\n {t(\"Common:AdditionalResourcesDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n </div>\n <div className={classNames(styles.brandingCheckbox)}>\n <Checkbox",
       "module": "/packages/shared"
     }
   ],

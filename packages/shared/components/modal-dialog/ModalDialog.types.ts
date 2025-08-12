@@ -99,6 +99,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   withBodyScrollForcibly?: boolean;
 
   withBorder?: boolean;
+  /** Test id */
+  dataTestId?: string;
 };
 
 export type ModalDialogProps = Partial<
@@ -113,6 +115,8 @@ export type ModalDialogProps = Partial<
   displayType?: ModalDialogType;
   /** Detailed display type for each dimension */
   displayTypeDetailed?: ModalDialogTypeDetailed;
+  /** Test id */
+  dataTestId?: string;
 };
 
 export type ModalDialogFormWrapperProps = {

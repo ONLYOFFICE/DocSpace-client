@@ -3,7 +3,7 @@
   "content": "Sign up with LinkedIn",
   "content_en_sha1_hash": "cafda06fad6c2d6b9cfd279731174dd21f604a9b",
   "created_at": "2025-05-19T21:30:48.844Z",
-  "updated_at": "2025-06-08T12:02:32.925Z",
+  "updated_at": "2025-08-11T09:02:44.101Z",
   "comment": {
     "text": "The translation key \"SignUpWithLinkedIn\" is used to display the text \"Sign up with LinkedIn\" in a UI component, likely a sign-up or login form, where users can choose to register using their LinkedIn account. This text appears as an option for users to select when signing up for an account.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/utils/common.ts",
-      "line_number": 401,
+      "line_number": 409,
       "context": "return signUp\n ? t(\"Common:SignUpWithTwitter\")\n : t(\"Common:SignInWithTwitter\");\n case \"linkedin\":\n return signUp\n ? t(\"Common:SignUpWithLinkedIn\")\n : t(\"Common:SignInWithLinkedIn\");\n case \"microsoft\":\n return signUp\n ? t(\"Common:SignUpWithMicrosoft\")\n : t(\"Common:SignInWithMicrosoft\");",
       "module": "/packages/shared"
     }

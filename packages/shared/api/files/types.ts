@@ -135,6 +135,7 @@ export type TFile = {
   fileEntryType: number;
   hasDraft?: boolean;
   order?: string;
+  lockedBy?: string;
 };
 
 export type TOpenEditRequest = {

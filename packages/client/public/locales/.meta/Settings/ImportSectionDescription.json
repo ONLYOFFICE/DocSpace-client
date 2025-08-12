@@ -3,7 +3,7 @@
   "content": "Select sections for import. They will appear in the corresponding sections of {{productName}}.",
   "content_en_sha1_hash": "fdb4147ce80c84acaac01c116f234f42d5e0b2a7",
   "created_at": "2025-05-19T21:30:51.687Z",
-  "updated_at": "2025-06-30T12:20:31.405Z",
+  "updated_at": "2025-08-11T09:02:43.941Z",
   "comment": {
     "text": "This translation key is used to describe the action of selecting sections for import in various data import steps. It explains that selected sections will appear in corresponding sections of {{productName}} and is typically displayed as part of a button label or dialog description.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 123,
+      "line_number": 124,
       "context": "),\n component: <SelectUsersTypeStep t={t} />,\n },\n {\n title: t(\"Settings:DataImport\"),\n description: t(\"Settings:ImportSectionDescription\", {\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }),\n component: (\n <ImportStep",
       "module": "/packages/client"
     },

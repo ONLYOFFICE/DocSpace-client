@@ -3,7 +3,7 @@
   "content": "You can disable header in the mobile version to limit access to the {{productName}} sections (just like disabling the left menu in the desktop version).",
   "content_en_sha1_hash": "8acce461de78709e974894ea33c37a29838d943c",
   "created_at": "2025-05-19T21:30:54.519Z",
-  "updated_at": "2025-06-30T12:20:31.285Z",
+  "updated_at": "2025-08-11T09:02:43.892Z",
   "comment": {
     "text": "This translation key describes the content that will be displayed when users disable the header on mobile devices, explaining its purpose as limiting access to specific sections of a product. It appears in a UI component related to panel settings and is used for accessibility purposes.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
-      "line_number": 521,
-      "context": "label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}\n isChecked={embeddingConfig.showFilter}",
+      "line_number": 525,
+      "context": "label={t(\"Common:Title\")}\n onChange={onHeaderChange}\n isChecked={embeddingConfig.showTitle}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n title={t(\"JavascriptSdk:Header\")}\n description={t(\"JavascriptSdk:HeaderDescription\")}\n dataTestId=\"show_title\"\n />\n <CheckboxElement\n label={t(\"JavascriptSdk:SearchFilterAndSort\")}\n onChange={onTitleChange}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 556,
+      "line_number": 570,
       "context": "offsetRight={4}\n size={12}\n tooltipContent={\n <TooltipContent\n title={t(\"Header\")}\n description={t(\"HeaderDescription\", {\n productName: t(\"Common:ProductName\"),\n })}\n img={theme.isBase ? HeaderUrl : HeaderDarkUrl}\n />\n }",
       "module": "/packages/client"
     }

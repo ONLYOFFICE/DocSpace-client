@@ -250,6 +250,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             label={t("Files:OpenCreatedTemplate")}
             isChecked={openCreatedIsChecked}
             onChange={onChangeOpenCreated}
+            dataTestId="create_room_template_open_checkbox"
           />
 
           <div className="create-room-template_buttons">

@@ -71,9 +71,8 @@ import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-compone
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-
-import { hasOwnProperty } from "@docspace/shared/utils/object";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
+import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
 import { useContactsHeader } from "./useContacts";
 
@@ -182,6 +181,15 @@ const SectionHeaderContent = (props) => {
     isKnowledgeTab,
     contactsTab,
     currentClientView,
+    profile,
+    profileClicked,
+    enabledHotkeys,
+
+    setDialogData,
+    setChangeEmailVisible,
+    setChangePasswordVisible,
+    setChangeAvatarVisible,
+    setChangeNameVisible,
   } = props;
 
   const location = useLocation();
@@ -191,6 +199,7 @@ const SectionHeaderContent = (props) => {
   const isContactsPage = contactsView;
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsInsideGroupPage = contactsTab === "inside_group";
+  const isProfile = currentClientView === "profile";
 
   const addButtonRefCallback = React.useCallback(
     (ref) => {
@@ -218,6 +227,22 @@ const SectionHeaderContent = (props) => {
     t,
 
     isContactsGroupsPage,
+  });
+
+  const {
+    profileDialogs,
+    getUserContextOptions,
+    onClickBack: onClickBackProfile,
+  } = useProfileHeader({
+    profile,
+    profileClicked,
+    enabledHotkeys,
+
+    setDialogData,
+    setChangeEmailVisible,
+    setChangePasswordVisible,
+    setChangeAvatarVisible,
+    setChangeNameVisible,
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
@@ -268,6 +293,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const getContextOptionsFolder = () => {
+    if (isProfile) return getUserContextOptions();
+
     if (isContactsInsideGroupPage) {
       return getGroupContextOptions(t, currentGroup, false, true);
     }
@@ -315,6 +342,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onChange = (checked) => {
+    if (isProfile) return;
+
     isContactsPage
       ? onContactsChange(checked)
       : setSelected(checked ? "all" : "none");
@@ -404,31 +433,15 @@ const SectionHeaderContent = (props) => {
     setIsIndexEditingMode(false);
   };
 
-  const stateTitle = location?.state?.title;
-  const stateCanCreate = location?.state?.canCreate;
-  const stateIsRoot = location?.state?.isRoot;
-  const stateIsRoom = location?.state?.isRoom;
-  const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsShared = location?.state?.isShared;
-  const stateIsExternal = location?.state?.isExternal;
-  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
-  const stateShowTemplateBadge =
-    location?.state?.rootFolderType === FolderType.RoomTemplates &&
-    !stateIsRoot;
-
-  const isRoot =
-    isLoading && typeof stateIsRoot === "boolean"
-      ? stateIsRoot
-      : isRootFolder || isContactsPage || isSettingsPage;
+  const isRoot = isRootFolder || isContactsPage || isSettingsPage || isProfile;
 
   const isLifetimeEnabled = Boolean(
-    !isRoot &&
-      (selectedFolder?.lifetime ||
-        infoPanelRoom?.lifetime ||
-        (isLoading && stateIsLifetimeEnabled)),
+    !isRoot && (selectedFolder?.lifetime || infoPanelRoom?.lifetime),
   );
 
-  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
+  const navigationButtonIsVisible = !!(
+    showNavigationButton || location.state?.isShared
+  );
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -437,7 +450,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-  const sharedType = stateIsExternal && !isPublicRoom;
+  const sharedType = location.state?.isExternal && !isPublicRoom;
 
   const getTitleIcon = () => {
     if (sharedType) return SharedLinkSvgUrl;
@@ -525,17 +538,15 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const currentTitle = isFlowsPage
-    ? t("Common:Flows")
+  const currentTitle = isProfile
+    ? t("Profile:MyProfile")
     : isSettingsPage
       ? t("Common:Settings")
       : isContactsPage
         ? isContactsInsideGroupPage
           ? getInsideGroupTitle()
           : t("Common:Contacts")
-        : isLoading && stateTitle
-          ? stateTitle
-          : title;
+        : title;
 
   const currentCanCreate =
     isAIRoom && !isKnowledgeTab
@@ -545,11 +556,9 @@ const SectionHeaderContent = (props) => {
         : security?.Create;
 
   const currentRootRoomTitle =
-    isLoading && stateRootRoomTitle
-      ? stateRootRoomTitle
-      : navigationPath &&
-        navigationPath.length > 1 &&
-        navigationPath[navigationPath.length - 2].title;
+    navigationPath &&
+    navigationPath.length > 1 &&
+    navigationPath[navigationPath.length - 2].title;
 
   const accountsNavigationPath = isContactsInsideGroupPage && [
     {
@@ -567,8 +576,7 @@ const SectionHeaderContent = (props) => {
     };
   }, [deleteRefMap]);
 
-  const isCurrentRoom =
-    isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
+  const isCurrentRoom = isRoom;
 
   if (showHeaderLoader) return <SectionHeaderSkeleton />;
 
@@ -596,8 +604,7 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
-  const badgeLabel =
-    stateShowTemplateBadge || showTemplateBadge ? t("Files:Template") : "";
+  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
     ? t("TrashAutoDeleteWarning", {
@@ -608,6 +615,8 @@ const SectionHeaderContent = (props) => {
       : "";
 
   const isContextButtonVisible = () => {
+    if (isProfile) return true;
+
     if (isContactsPage && !isContactsInsideGroupPage) {
       return false;
     }
@@ -634,7 +643,7 @@ const SectionHeaderContent = (props) => {
         <div
           className={classnames(styles.headerContainer, {
             [styles.infoPanelVisible]: isInfoPanelVisible,
-            [styles.isExternalFolder]: stateIsExternal,
+            [styles.isExternalFolder]: location.state?.isExternal,
             [styles.isLifetimeEnabled]: isLifetimeEnabled,
           })}
         >
@@ -653,7 +662,8 @@ const SectionHeaderContent = (props) => {
                 isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
                 canCreate={
                   (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
-                  !isSettingsPage
+                  !isSettingsPage &&
+                  !isProfile
                     ? !isPublicRoom
                     : null
                 }
@@ -677,9 +687,11 @@ const SectionHeaderContent = (props) => {
                   isArchiveFolder ? isEmptyArchive : isEmptyFilesList
                 }
                 clearTrash={onEmptyTrashAction}
-                onBackToParentFolder={onClickBack}
-                toggleInfoPanel={onToggleInfoPanel}
-                isInfoPanelVisible={isInfoPanelVisible}
+                onBackToParentFolder={
+                  isProfile ? onClickBackProfile : onClickBack
+                }
+                toggleInfoPanel={isProfile ? undefined : onToggleInfoPanel}
+                isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
                 titles={{
                   warningText,
                   actions: isRoomsFolder
@@ -691,8 +703,10 @@ const SectionHeaderContent = (props) => {
                 withMenu={!isRoomsFolder}
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
-                isRoom={isCurrentRoom || isContactsPage}
-                hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
+                isRoom={isCurrentRoom || isContactsPage || isProfile}
+                hideInfoPanel={
+                  hideInfoPanel || isSettingsPage || isPublicRoom || isProfile
+                }
                 withLogo={
                   isPublicRoom || (isFrame && !showMenu && displayAbout)
                     ? logo
@@ -726,6 +740,7 @@ const SectionHeaderContent = (props) => {
                 isPlusButtonVisible={
                   !allowInvitingMembers ? isPlusButtonVisible() : true
                 }
+                showBackButton={isProfile}
               />
               {showSignInButton ? (
                 <Button
@@ -762,6 +777,7 @@ const SectionHeaderContent = (props) => {
               />
             </>
           ) : null}
+          {isProfile ? profileDialogs : null}
         </div>
       )}
     </Consumer>
@@ -786,6 +802,8 @@ export default inject(
     dialogsStore,
     guidanceStore,
     aiRoomStore,
+    profileActionsStore,
+    mediaViewerDataStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -896,7 +914,13 @@ export default inject(
 
     const isEmptyArchive = !canRestoreAll && !canDeleteAll;
 
-    const { usersStore, groupsStore, headerMenuStore } = peopleStore;
+    const {
+      usersStore,
+      groupsStore,
+      headerMenuStore,
+      dialogStore,
+      targetUserStore,
+    } = peopleStore;
 
     const {
       currentGroup,
@@ -954,6 +978,20 @@ export default inject(
       : selectedFolder.id;
 
     const { isKnowledgeTab } = aiRoomStore;
+    const { setDialogData, setChangeEmailVisible } = dialogStore;
+    const {
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setChangeNameVisible,
+    } = targetUserStore;
+
+    const { profileClicked } = profileActionsStore;
+
+    const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
+
+    const { showProfileLoader } = clientLoadingStore;
+
+    const { enabledHotkeys } = filesStore;
 
     return {
       currentClientView,
@@ -1064,6 +1102,17 @@ export default inject(
       isAIRoom,
       isKnowledgeTab,
       contactsTab,
+
+      profile: userStore.user,
+      profileClicked,
+      enabledHotkeys:
+        enabledHotkeys && !mediaViewerIsVisible && !showProfileLoader,
+
+      setDialogData,
+      setChangeEmailVisible,
+      setChangePasswordVisible,
+      setChangeAvatarVisible,
+      setChangeNameVisible,
     };
   },
 )(
@@ -1078,5 +1127,6 @@ export default inject(
     "PeopleTranslations",
     "ChangeUserTypeDialog",
     "Notifications",
+    "Profile",
   ])(observer(SectionHeaderContent)),
 );

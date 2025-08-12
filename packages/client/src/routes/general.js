@@ -27,6 +27,243 @@
 import { Navigate } from "react-router";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
+import { ViewComponent } from "SRC_DIR/pages/Home/View";
+
+import PrivateRouteWrapper from "SRC_DIR/components/PrivateRouteWrapper";
+
+export const profileClientRoutes = [
+  {
+    path: "profile",
+    element: (
+      <PrivateRouteWrapper>
+        <Navigate to="login" state={window.DocSpace?.location?.state} replace />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/login",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/notifications",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/file-management",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/interface-theme",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+  {
+    path: "profile/authorized-apps",
+    element: (
+      <PrivateRouteWrapper>
+        <ViewComponent />
+      </PrivateRouteWrapper>
+    ),
+  },
+];
+
+export const generalClientRoutes = [
+  {
+    path: "developer-tools/",
+    lazy: () =>
+      componentLoader(
+        () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/Wrapper"
+          ),
+      ),
+    children: [
+      {
+        index: true,
+        Component: () => (
+          <Navigate
+            to="javascript-sdk"
+            state={window.DocSpace?.location?.state}
+            replace
+          />
+        ),
+      },
+      {
+        path: "api",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
+          ),
+      },
+      {
+        path: "api-keys",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
+          ),
+      },
+      {
+        path: "javascript-sdk",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
+          ),
+      },
+      {
+        path: "javascript-sdk/docspace",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace"
+              ),
+          ),
+      },
+      {
+        path: "javascript-sdk/public-room",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom"
+              ),
+          ),
+      },
+      {
+        path: "javascript-sdk/custom",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager"
+              ),
+          ),
+      },
+      {
+        path: "javascript-sdk/room-selector",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector"
+              ),
+          ),
+      },
+      {
+        path: "javascript-sdk/file-selector",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector"
+              ),
+          ),
+      },
+      {
+        path: "javascript-sdk/editor",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor"
+              ),
+          ),
+      },
+      {
+        path: "javascript-sdk/viewer",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
+              ),
+          ),
+      },
+      {
+        path: "plugin-sdk",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
+          ),
+      },
+      {
+        path: "webhooks",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
+          ),
+      },
+      {
+        path: "webhooks/:id",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
+              ),
+          ),
+      },
+      {
+        path: "webhooks/:id/:eventId",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
+              ),
+          ),
+      },
+      {
+        path: "oauth",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
+          ),
+      },
+      {
+        path: "oauth/create",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+              ),
+          ),
+      },
+      {
+        path: "oauth/:id",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import(
+                "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+              ),
+          ),
+      },
+    ],
+  },
+];
 
 const generalRoutes = [
   {

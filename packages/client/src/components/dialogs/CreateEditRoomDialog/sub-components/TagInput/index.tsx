@@ -75,6 +75,7 @@ const TagInput = ({
   tooltipLabel,
   onFocus,
   onBlur,
+  dataTestId,
 }: TagInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [tagInput, setTagInput] = useState("");
@@ -145,6 +146,7 @@ const TagInput = ({
         onKeyDown={handleKeyDown}
         name="tagInput"
         tooltipLabel={tooltipLabel}
+        dataTestId={dataTestId}
       />
 
       <TagDropdown

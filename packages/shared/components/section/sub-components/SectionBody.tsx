@@ -40,7 +40,6 @@ const SectionBody = React.memo(
     autoFocus = false,
     children,
     onDrop,
-    uploadFiles = false,
     viewAs,
     withScroll = true,
 
@@ -50,6 +49,8 @@ const SectionBody = React.memo(
     isIndexEditingMode,
     pathname,
     withoutFooter,
+    onDragLeaveEmpty,
+    onDragOverEmpty,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -111,7 +112,9 @@ const SectionBody = React.memo(
           "section-body",
         )}
         onDrop={onDrop}
-        isDropZone={false}
+        onDragOver={onDragOverEmpty}
+        onDragLeave={onDragLeaveEmpty}
+        isDropZone
       >
         {withScroll ? (
           <div className="section-wrapper">

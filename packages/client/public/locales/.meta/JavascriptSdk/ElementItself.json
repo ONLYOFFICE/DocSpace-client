@@ -3,7 +3,7 @@
   "content": "The element itself",
   "content_en_sha1_hash": "9aced7d006e732132bb5f1f09abdcbdbbc8dea2e",
   "created_at": "2025-05-19T21:30:54.464Z",
-  "updated_at": "2025-05-24T09:24:41.194Z",
+  "updated_at": "2025-08-04T07:30:01.408Z",
   "comment": {
     "text": "This translation key is used to display a label for a radio button option that references a specific element in its context. It appears in the UI as a radio button within a configuration settings page, likely allowing users to select whether they want to focus on an individual element or another aspect of their project. Translators should provide a localized version of this text to describe \"The element itself\" in the user's preferred language.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/MainElementParameter.js",
-      "line_number": 52,
-      "context": "config,\n setConfig,\n isButtonMode = false,\n }) => {\n const elementDisplayOptions = [\n { value: \"element\", label: t(\"ElementItself\") },\n {\n value: \"button\",\n label: (\n <RowContainer>\n {t(\"Common:Button\")}",
+      "line_number": 54,
+      "context": "isButtonMode = false,\n }) => {\n const elementDisplayOptions = [\n {\n value: \"element\",\n label: t(\"ElementItself\"),\n dataTestId: \"element_radio_button\",\n },\n {\n value: \"button\",\n label: (",
       "module": "/packages/client"
     }
   ],

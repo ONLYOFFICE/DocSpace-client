@@ -3,7 +3,7 @@
   "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
   "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2025-05-26T08:02:22.856Z",
+  "updated_at": "2025-08-11T18:11:59.376Z",
   "comment": {
     "text": "This translation key is used to display a note informing users that editors will be unavailable during an upgrade process. The note also recommends backing up data before starting the process. It appears in the UI on the official documentation page for upgrading to a pro version, likely as part of a banner or informational message.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/pages/Payments/Bonus/OfficialDocumentation.tsx",
-      "line_number": 94,
-      "context": "</Link>\n </Text>\n </div>\n \n <Text className=\"upgrade-info\">\n <Trans i18nKey=\"UpgradeToProBannerInstructionNote\" ns=\"Common\" t={t}>\n Please note that the editors will be unavailable during the upgrade.\n We also recommend to\n <Link\n tag=\"a\"\n fontWeight=\"600\"",
+      "file_path": "/packages/shared/pages/Payments/Bonus/sub-components/OfficialDocumentation.tsx",
+      "line_number": 97,
+      "context": "</Link>\n </Text>\n </div>\n \n <Text className={styles.upgradeInfo}>\n <Trans i18nKey=\"UpgradeToProBannerInstructionNote\" ns=\"Common\" t={t}>\n Please note that the editors will be unavailable during the upgrade.\n We also recommend to\n <Link\n tag=\"a\"\n fontWeight=\"600\"",
       "module": "/packages/shared"
     }
   ],

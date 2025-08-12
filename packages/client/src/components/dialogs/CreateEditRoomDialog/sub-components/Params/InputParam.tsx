@@ -90,6 +90,7 @@ const InputParam = ({
   onKeyDown,
   name,
   tooltipLabel,
+  dataTestId,
 }: InputParamProps) => {
   return (
     <StyledInputParam>
@@ -138,6 +139,7 @@ const InputParam = ({
           maxLength={170}
           name={name}
           type={InputType.text}
+          testId={dataTestId}
         />
       </FieldContainer>
     </StyledInputParam>

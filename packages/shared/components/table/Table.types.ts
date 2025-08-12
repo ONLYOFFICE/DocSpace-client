@@ -151,6 +151,8 @@ export interface TableCellProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   value?: string;
+  dataTestId?: string;
+  documentTitle?: string;
 }
 
 export type TGroupMenuItem = {

@@ -205,7 +205,9 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location & { state: unknown };
+      displayFileExtension?: boolean;
     };
+    loginCallback?: ((profile: unknown) => void) | null;
     logs: {
       socket: string[];
     };

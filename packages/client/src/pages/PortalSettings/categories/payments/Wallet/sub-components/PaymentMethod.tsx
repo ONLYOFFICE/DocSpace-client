@@ -105,6 +105,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
               walletCustomerStatusNotActive ? goLinkCard : goStripeAccount
             }
             textDecoration="underline dashed"
+            dataTestId="payment_method_link"
           >
             {walletCustomerStatusNotActive
               ? t("AddPaymentMethod")
@@ -113,7 +114,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         </div>
       ) : (
         <div className={styles.addPaymentMethodContainer} onClick={goLinkCard}>
-          <SelectorAddButton />
+          <SelectorAddButton testId="payment_method_add_button" />
           <Text fontWeight={600}>{t("AddPaymentMethod")}</Text>
         </div>
       )}

@@ -118,6 +118,7 @@ const ItemTitle = ({
         size={AvatarSize.big}
         source={userAvatar}
         noClick
+        dataTestId="info_panel_contacts_user_avatar"
       />
       <div className={styles.infoText}>
         <div className={styles.infoWrapper}>

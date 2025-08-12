@@ -234,6 +234,7 @@
   "DeveloperTools": "Nástroje pre vývojárov",
   "Diagram": "Diagram",
   "Diagrams": "Schémy",
+  "DiagramViewer": "Zobrazenie diagramu",
   "Disable": "Deaktivovať",
   "Disabled": "Vypnuté",
   "DisableQuota": "Vypnúť kvótu",
@@ -442,7 +443,6 @@
   "LoginButton": "Prihlásiť sa",
   "LogoAbout": "Logo pre stránku Informácie",
   "LogoCompact": "Logo pre kompaktné ľavé menu",
-  "LogoDocsEditor": "Logo pre hlavičku editora",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo pre hlavičku priestoru",
   "LogoLogin": "Logo pre prihlasovaciu stránku a e-maily",
@@ -549,6 +549,7 @@
   "PasswordRequired": "Vyžaduje sa heslo",
   "Path": "Cesta",
   "PaymentsTitle": "Platby",
+  "PDF": "PDF",
   "People": "Ľudia",
   "Permissions": "Oprávnenia",
   "PerUserMonth": "<1>{{price}}</1> za administrátora/mesiac",
@@ -870,5 +871,7 @@
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
   "YourCurrentDomain": "Vaša aktuálna doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "LogoForEditors": "Logo pre editor {{editorName}}",
+  "LogoForViewer": "Logo pre {{diagramViewer}}"
 }

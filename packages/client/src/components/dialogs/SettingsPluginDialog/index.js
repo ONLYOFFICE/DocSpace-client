@@ -123,6 +123,7 @@ const SettingsPluginDialog = ({
               onClick={onDeleteAction}
               scale
               size="normal"
+              testId="settings_delete_plugin_button"
             />
           ) : null}
         </div>

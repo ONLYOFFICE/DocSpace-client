@@ -88,8 +88,13 @@ const RowView = ({
       onScroll={() => {}}
       noSelect={!withContentSelection}
     >
-      {groups!.map((item) => (
-        <GroupsRow key={item.id} item={item} sectionWidth={sectionWidth!} />
+      {groups!.map((item, index) => (
+        <GroupsRow
+          key={item.id}
+          item={item}
+          itemIndex={index}
+          sectionWidth={sectionWidth!}
+        />
       ))}
     </GroupsRowContainer>
   );

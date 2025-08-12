@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 
 import config from "PACKAGE_FILE";
@@ -36,6 +36,10 @@ import { Tabs } from "@docspace/shared/components/tabs";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import {
+  getApiKeyPermissions,
+  getApiKeys,
+} from "@docspace/shared/api/api-keys";
 
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
@@ -47,12 +51,27 @@ import SSOLoader from "./sub-components/ssoLoader";
 import ApiKeys from "./ApiKeys";
 
 const DeveloperToolsWrapper = (props) => {
-  const { currentDeviceType, identityServerEnabled } = props;
+  const {
+    currentDeviceType,
+    identityServerEnabled,
+    getCSPSettings,
+    loadWebhooks,
+    isInit,
+    setIsInit,
+    fetchClients,
+    fetchScopes,
+  } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
+
+  const [errorOAuth, setErrorOAuth] = useState(null);
+
+  const [listItems, setListItems] = useState([]);
+  const [permissions, setPermissions] = useState([]);
+  const [errorKeys, setErrorKeys] = useState(null);
 
   const { t } = useTranslation([
     "JavascriptSdk",
@@ -63,6 +82,47 @@ const DeveloperToolsWrapper = (props) => {
     "OAuth",
   ]);
   // const [, startTransition] = useTransition();
+
+  const getJavascriptSDKData = () => {
+    getCSPSettings();
+  };
+
+  const getWebhooksData = async () => {
+    await loadWebhooks();
+  };
+
+  const getOAuthData = useCallback(async () => {
+    const actions = [];
+
+    try {
+      if (!isInit) {
+        actions.push(fetchScopes());
+      }
+      actions.push(fetchClients());
+
+      await Promise.all(actions);
+    } catch (e) {
+      setErrorOAuth(e);
+    }
+
+    setIsInit(true);
+  }, [fetchClients, fetchScopes, isInit, setIsInit]);
+
+  const getKeysData = async () => {
+    setIsLoading(true);
+    try {
+      const [keys, permissionsData] = await Promise.all([
+        getApiKeys(),
+        getApiKeyPermissions(),
+      ]);
+
+      setListItems(keys);
+      setPermissions(permissionsData);
+    } catch (err) {
+      toastr.error(err);
+      setErrorKeys(err);
+    }
+  };
 
   const sdkLabel = (
     <div style={{ boxSizing: "border-box", display: "flex", gap: "8px" }}>
@@ -80,7 +140,10 @@ const DeveloperToolsWrapper = (props) => {
     ? {
         id: "oauth",
         name: t("OAuth:OAuth"),
-        content: <OAuth />,
+        content: <OAuth error={errorOAuth} />,
+        onClick: async () => {
+          await getOAuthData();
+        },
       }
     : {};
 
@@ -89,27 +152,45 @@ const DeveloperToolsWrapper = (props) => {
       id: "api",
       name: t("Settings:Api"),
       content: <Api />,
+      onClick: () => {},
     },
     {
       id: "javascript-sdk",
       name: sdkLabel,
       content: <JavascriptSDK />,
+      onClick: () => {
+        getJavascriptSDKData();
+      },
     },
     {
       id: "plugin-sdk",
       name: pluginLabel,
       content: <PluginSDK />,
+      onClick: () => {},
     },
     {
       id: "webhooks",
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
+      onClick: async () => {
+        await getWebhooksData();
+      },
     },
     { ...oauthData },
     {
       id: "api-keys",
       name: t("Settings:ApiKeys"),
-      content: <ApiKeys />,
+      content: (
+        <ApiKeys
+          listItems={listItems}
+          permissions={permissions}
+          setListItems={setListItems}
+          error={errorKeys}
+        />
+      ),
+      onClick: async () => {
+        await getKeysData();
+      },
     },
   ];
 
@@ -151,20 +232,36 @@ const DeveloperToolsWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
-export const Component = inject(({ setup, settingsStore, authStore }) => {
-  const { initSettings } = setup;
+export const Component = inject(
+  ({ setup, settingsStore, authStore, webhooksStore, oauthStore }) => {
+    const { initSettings } = setup;
 
-  const identityServerEnabled = authStore?.capabilities?.identityServerEnabled;
+    const identityServerEnabled =
+      authStore?.capabilities?.identityServerEnabled;
 
-  return {
-    currentDeviceType: settingsStore.currentDeviceType,
-    loadBaseInfo: async () => {
-      await initSettings();
-    },
-    identityServerEnabled,
-  };
-})(observer(DeveloperToolsWrapper));
+    const { getCSPSettings, currentDeviceType } = settingsStore;
+
+    const { loadWebhooks } = webhooksStore;
+
+    const { isInit, setIsInit, fetchClients, fetchScopes } = oauthStore;
+
+    return {
+      currentDeviceType,
+      getCSPSettings,
+      loadBaseInfo: async () => {
+        await initSettings();
+      },
+      identityServerEnabled,
+      loadWebhooks,
+      isInit,
+      setIsInit,
+      fetchClients,
+      fetchScopes,
+    };
+  },
+)(observer(DeveloperToolsWrapper));

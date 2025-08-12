@@ -77,7 +77,7 @@ export const CompletedFormEmpty = () => {
         />
         <TextWrapper className="completed-form__empty">
           <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
-          <Text noSelect>{t("CompletedForm:Description")}</Text>
+          <Text>{t("CompletedForm:Description")}</Text>
         </TextWrapper>
       </CompletedFormLayout>
     </ContainerCompletedForm>

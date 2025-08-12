@@ -92,4 +92,6 @@ export type TileContainerProps = {
   headingFiles?: React.ReactNode;
   /** Flag to indicate descending order */
   isDesc?: boolean;
+  /** Disables text selection */
+  noSelect?: boolean;
 };

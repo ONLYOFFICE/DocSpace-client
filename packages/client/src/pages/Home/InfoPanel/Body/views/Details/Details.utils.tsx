@@ -58,7 +58,6 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
     className="property-content"
     isHovered
     onClick={onClick}
-    enableUserSelect
     dataTestId="info_panel_details_author_link"
   >
     {txt}

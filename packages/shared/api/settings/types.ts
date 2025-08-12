@@ -518,3 +518,7 @@ export type TEncryptionSettings = {
   status: EncryptionStatus;
   notifyUsers: boolean;
 };
+
+export type TTelegramCheck = {
+  status: string;
+};

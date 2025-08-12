@@ -3,7 +3,7 @@
   "content": "Reorder",
   "content_en_sha1_hash": "33d9978c44777f5262fb2dbe921b919fa3fad96c",
   "created_at": "2025-05-19T21:30:56.040Z",
-  "updated_at": "2025-08-11T09:02:43.879Z",
+  "updated_at": "2025-08-12T19:46:25.936Z",
   "comment": {
     "text": "This translation key \"Reorder\" is used to display a button label in the header section of a file page, which triggers reordering functionality when clicked. It appears on the \"Home\" page and also within a reorder index dialog for editing files.",
     "is_auto": true,
@@ -13,12 +13,12 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ReorderIndexDialog/index.tsx",
       "line_number": 80,
-      "context": "onClose={onClose}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400} noSelect>\n {t(\"Files:ReorderIndex\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"",
+      "context": "onClose={onClose}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontSize=\"13px\" fontWeight={400}>\n {t(\"Files:ReorderIndex\")}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"create-room\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 440,
+      "line_number": 471,
       "context": "const headerMenu = isIndexEditingMode\n ? [\n {\n id: \"reorder-index\",\n label: t(\"Files:Reorder\"),\n onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",",
       "module": "/packages/client"
     }

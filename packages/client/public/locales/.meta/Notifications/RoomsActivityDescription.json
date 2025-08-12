@@ -3,7 +3,7 @@
   "content": "Hourly notifications. Stay updated about all activity in your rooms.",
   "content_en_sha1_hash": "b3d6568bc7ee244821ee54526782a44ca24a0131",
   "created_at": "2025-05-19T21:30:54.090Z",
-  "updated_at": "2025-06-02T10:20:51.493Z",
+  "updated_at": "2025-08-11T18:11:59.303Z",
   "comment": {
     "text": "This translation key is used for the description of a toggle button that controls room activity notifications. It appears in a UI component responsible for managing email subscriptions. The text informs users about the purpose of this toggle.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.js",
-      "line_number": 64,
-      "context": "className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}\n isChecked={roomsActivitySubscription}\n />\n </div>\n <Text {...textDescriptionsProps}>{t(\"RoomsActivityDescription\")}</Text>\n </div>\n );\n };\n \n export default inject(({ peopleStore }) => {",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
+      "line_number": 78,
+      "context": "onChange={onChangeEmailSubscription}\n isChecked={roomsActivitySubscription}\n dataTestId=\"rooms_activity_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>{t(\"RoomsActivityDescription\")}</Text>\n </div>\n );\n };\n \n export default inject(({ peopleStore }: TStore) => {",
       "module": "/packages/client"
     }
   ],

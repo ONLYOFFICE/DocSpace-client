@@ -3,7 +3,7 @@
   "content": "Host",
   "content_en_sha1_hash": "3960ec4ca5fb5e5d8cdb2cc1c5121c003e426517",
   "created_at": "2025-05-19T21:30:53.301Z",
-  "updated_at": "2025-05-24T02:48:21.164Z",
+  "updated_at": "2025-08-11T18:11:59.252Z",
   "comment": {
     "text": "This translation key represents the label for a \"Host\" authentication method in an SMTP settings section of a portal's login interface. It is used to display the term \"Host\" in the UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SMTPSettings/sub-components/CustomSettings.js",
-      "line_number": 120,
-      "context": "label={t(\"Common:Authentication\")}\n isDisabled={isLoading}\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">\n <Text {...commonTextProps}>{t(\"HostLogin\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <TextInput",
+      "line_number": 121,
+      "context": "isDisabled={isLoading}\n dataTestId=\"smtp_auth_toggle_button\"\n />\n \n <div className=\"smtp-settings_title smtp-settings_login\">\n <Text {...commonTextProps}>{t(\"HostLogin\")}</Text>\n <Text as=\"span\" {...requirementColor}>\n *\n </Text>\n </div>\n <TextInput",
       "module": "/packages/client"
     }
   ],

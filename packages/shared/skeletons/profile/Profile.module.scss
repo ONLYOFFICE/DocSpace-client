@@ -33,8 +33,14 @@
   flex-direction: column;
   gap: 40px;
 
+  margin-top: -19px;
+
   @include mixins.tablet-and-below {
     width: 100%;
+  }
+
+  @include mixins.mobile {
+    margin-top: 0;
   }
 }
 

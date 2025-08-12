@@ -85,6 +85,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
                 isCurrentStoragePlan
               : false
         }
+        testId="storage_plan_upgrade_ok_button"
       />
       <Button
         key="CancelButton"
@@ -93,6 +94,7 @@ const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
         scale
         onClick={onClose}
         isDisabled={isLoading}
+        testId="storage_plan_upgrade_cancel_button"
       />
     </>
   );

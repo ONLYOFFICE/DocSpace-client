@@ -43,6 +43,7 @@ export const ButtonContainer = ({ buyUrl }: { buyUrl?: string }) => {
         size={ButtonSize.small}
         primary
         onClick={onClickBuy}
+        testId="activate_purchase_button"
       />
     </div>
   );

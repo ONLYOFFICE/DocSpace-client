@@ -34,18 +34,24 @@ import { Nullable } from "@docspace/shared/types";
 
 import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 import TopLoadingIndicator from "@docspace/shared/components/top-loading-indicator";
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import FilesStore from "SRC_DIR/store/FilesStore";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 
 import { SectionBodyContent, ContactsSectionBodyContent } from "../Section";
+import ProfileSectionBodyContent from "../../Profile/Section/Body";
 
+import useProfileBody, {
+  UseProfileBodyProps,
+} from "../../Profile/Section/Body/useProfileBody";
 import useContacts, { UseContactsProps } from "../Hooks/useContacts";
 import useFiles, { UseFilesProps } from "../Hooks/useFiles";
 
 type ViewProps = UseContactsProps &
-  UseFilesProps & {
+  UseFilesProps &
+  UseProfileBodyProps & {
     setIsChangePageRequestRunning: ClientLoadingStore["setIsChangePageRequestRunning"];
     setCurrentClientView: ClientLoadingStore["setCurrentClientView"];
     setIsSectionHeaderLoading: ClientLoadingStore["setIsSectionHeaderLoading"];
@@ -71,9 +77,6 @@ const View = ({
 
   getGroups,
   updateCurrentGroup,
-
-  showGuestReleaseTip,
-  setGuestReleaseTipDialogVisible,
 
   setIsChangePageRequestRunning,
   setCurrentClientView,
@@ -105,10 +108,25 @@ const View = ({
   setIsSectionHeaderLoading,
 
   showHeaderLoader,
+
+  getFilesSettings,
+  setSubscriptions,
+  isFirstSubscriptionsLoad,
+  fetchConsents,
+  fetchScopes,
+  tfaSettings,
+  setBackupCodes,
+  setProviders,
+  getCapabilities,
+  getSessions,
+
+  getTfaType,
+  setIsProfileLoaded,
 }: ViewProps) => {
   const location = useLocation();
 
   const isContactsPage = location.pathname.includes("accounts");
+  const isProfilePage = location.pathname.includes("profile");
 
   const [currentView, setCurrentView] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -127,9 +145,6 @@ const View = ({
     getUsersList,
     getGroups,
     updateCurrentGroup,
-
-    showGuestReleaseTip,
-    setGuestReleaseTipDialogVisible,
   });
 
   const { getFiles } = useFiles({
@@ -152,6 +167,22 @@ const View = ({
     wsCreatedPDFForm,
   });
 
+  const { getProfileInitialValue } = useProfileBody({
+    getFilesSettings: getFilesSettings!,
+    setSubscriptions: setSubscriptions!,
+    isFirstSubscriptionsLoad,
+    fetchConsents: fetchConsents!,
+    fetchScopes: fetchScopes!,
+    tfaSettings,
+    setBackupCodes: setBackupCodes!,
+    setProviders: setProviders!,
+    getCapabilities: getCapabilities!,
+    getSessions: getSessions!,
+    setIsProfileLoaded: setIsProfileLoaded!,
+    setIsSectionHeaderLoading: setIsSectionHeaderLoading!,
+    getTfaType: getTfaType!,
+  });
+
   const getFilesRef = React.useRef(getFiles);
   const fetchContactsRef = React.useRef(fetchContacts);
 
@@ -166,7 +197,7 @@ const View = ({
 
   React.useLayoutEffect(() => {
     setIsSectionHeaderLoading(true, false);
-  }, []);
+  }, [setIsSectionHeaderLoading]);
 
   React.useEffect(() => {
     prevCurrentViewRef.current = currentView;
@@ -216,6 +247,9 @@ const View = ({
     if (!isLoading) {
       TopLoadingIndicator.end();
 
+      if (currentView === "profile" && prevCurrentViewRef.current === "profile")
+        return;
+
       window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
     }
   }, [isLoading]);
@@ -260,10 +294,19 @@ const View = ({
 
         setIsLoading(true);
         setIsChangePageRequestRunning(true);
-        let view: void | "groups" | "files" | "users" =
+        let view: void | "groups" | "files" | "users" | "profile" =
           await fetchContactsRef.current();
 
-        if (!isContactsPage) {
+        if (isProfilePage) {
+          if (prevCurrentViewRef.current !== "profile") {
+            await getProfileInitialValue();
+          }
+
+          clearFiles();
+          setContactsTab(false);
+
+          view = "profile";
+        } else if (!isContactsPage) {
           await getFilesRef.current();
 
           view = "files";
@@ -292,20 +335,10 @@ const View = ({
     };
 
     getView();
-  }, [location, isContactsPage]);
+  }, [location, isContactsPage, isProfilePage]);
 
   return (
-    <div
-      style={
-        !showHeaderLoader
-          ? {
-              opacity: isLoading ? 0.5 : 1,
-              pointerEvents: isLoading ? "none" : "auto",
-              transition: "opacity 0.3s ease-in-out",
-            }
-          : undefined
-      }
-    >
+    <LoaderWrapper isLoading={isLoading ? !showHeaderLoader : false}>
       <Consumer>
         {(context) =>
           context.sectionWidth &&
@@ -314,12 +347,14 @@ const View = ({
               sectionWidth={context.sectionWidth}
               currentView={currentView}
             />
+          ) : currentView === "profile" ? (
+            <ProfileSectionBodyContent />
           ) : (
             <SectionBodyContent sectionWidth={context.sectionWidth} />
           ))
         }
       </Consumer>
-    </div>
+    </LoaderWrapper>
   );
 };
 
@@ -327,14 +362,18 @@ export const ViewComponent = inject(
   ({
     peopleStore,
     treeFoldersStore,
-    settingsStore,
-    dialogsStore,
+
     filesStore,
     clientLoadingStore,
     mediaViewerDataStore,
     oformsStore,
     userStore,
     selectedFolderStore,
+    filesSettingsStore,
+    oauthStore,
+    tfaStore,
+    setup,
+    authStore,
   }: TStore) => {
     const { usersStore, groupsStore } = peopleStore;
 
@@ -351,10 +390,6 @@ export const ViewComponent = inject(
     } = groupsStore!;
 
     const { setSelectedNode } = treeFoldersStore;
-
-    const { showGuestReleaseTip } = settingsStore;
-
-    const { setGuestReleaseTipDialogVisible } = dialogsStore;
 
     const {
       scrollToTop,
@@ -375,6 +410,7 @@ export const ViewComponent = inject(
       setIsChangePageRequestRunning,
       setCurrentClientView,
       setIsSectionHeaderLoading,
+      setIsProfileLoaded,
 
       showHeaderLoader,
     } = clientLoadingStore;
@@ -383,6 +419,19 @@ export const ViewComponent = inject(
 
     const { gallerySelected } = oformsStore;
 
+    const { getFilesSettings } = filesSettingsStore;
+
+    const { setSubscriptions, isFirstSubscriptionsLoad } =
+      peopleStore.targetUserStore!;
+
+    const { fetchConsents, fetchScopes } = oauthStore;
+
+    const { tfaSettings, setBackupCodes, getTfaType } = tfaStore;
+
+    const { setProviders } = peopleStore.usersStore;
+    const { getCapabilities } = authStore;
+
+    const { getSessions } = setup;
     return {
       setContactsTab,
       getUsersList,
@@ -390,9 +439,6 @@ export const ViewComponent = inject(
       updateCurrentGroup,
 
       setSelectedNode,
-
-      showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible,
 
       scrollToTop,
       fetchFiles,
@@ -425,6 +471,20 @@ export const ViewComponent = inject(
       setIsSectionHeaderLoading,
 
       showHeaderLoader,
+
+      getFilesSettings,
+      setSubscriptions,
+      isFirstSubscriptionsLoad,
+      fetchConsents,
+      fetchScopes,
+      tfaSettings,
+      setBackupCodes,
+      setProviders,
+      getCapabilities,
+      getSessions,
+
+      getTfaType,
+      setIsProfileLoaded,
     };
   },
 )(observer(View));

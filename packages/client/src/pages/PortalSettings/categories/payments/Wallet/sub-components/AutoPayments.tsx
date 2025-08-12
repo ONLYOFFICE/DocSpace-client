@@ -234,12 +234,7 @@ const AutoPayments = ({
   };
 
   const description = (min: number, max: number) => (
-    <Text
-      fontSize="12px"
-      className={styles.inputDescription}
-      noSelect
-      fontWeight={400}
-    >
+    <Text fontSize="12px" className={styles.inputDescription} fontWeight={400}>
       {t("EnterAnIntegerAmountBetween", {
         min: formatWalletCurrency!(min, 0),
         max: formatWalletCurrency!(max, 0),
@@ -250,12 +245,7 @@ const AutoPayments = ({
   const renderInputField = () => (
     <div className={styles.inputFields}>
       <div className={styles.inputField}>
-        <Text
-          fontSize="12px"
-          className={styles.inputLabel}
-          noSelect
-          fontWeight={600}
-        >
+        <Text fontSize="12px" className={styles.inputLabel} fontWeight={600}>
           {t("WhenBalanceGoesBellow")}
         </Text>
         <TextInput
@@ -266,17 +256,13 @@ const AutoPayments = ({
           type={InputType.text}
           pattern="\d+"
           isDisabled={isDisabled}
+          testId="top_up_min_balance_input"
         />
         {description(5, 1000)}
       </div>
 
       <div className={styles.inputField}>
-        <Text
-          fontSize="12px"
-          className={styles.inputLabel}
-          noSelect
-          fontWeight={600}
-        >
+        <Text fontSize="12px" className={styles.inputLabel} fontWeight={600}>
           {t("BringCreditBackUpTo")}
         </Text>
         <TextInput
@@ -287,6 +273,7 @@ const AutoPayments = ({
           type={InputType.text}
           pattern="\d+"
           isDisabled={isDisabled}
+          testId="top_up_max_balance_input"
         />
         {description(minUpToBalance, 5000)}
       </div>
@@ -306,6 +293,7 @@ const AutoPayments = ({
               !minBalance ||
               !upToBalance
             }
+            testId="save_auto_payment_button"
           />
           <Button
             key="CancelButton"
@@ -313,6 +301,7 @@ const AutoPayments = ({
             size={ButtonSize.small}
             onClick={onClose}
             isDisabled={isDisabled || isLoading}
+            testId="cancel_auto_payment_button"
           />
         </div>
       ) : null}
@@ -336,6 +325,7 @@ const AutoPayments = ({
         size={ButtonSize.small}
         onClick={onEditClick}
         isDisabled={isDisabled}
+        testId="edit_auto_payment_button"
       />
     </div>
   );
@@ -347,7 +337,7 @@ const AutoPayments = ({
       })}
     >
       <div className={styles.autoPaymentHeader}>
-        <Text noSelect isBold fontSize="16px">
+        <Text isBold fontSize="16px">
           {t("AutomaticPayments")}
         </Text>
         <ToggleButton
@@ -355,10 +345,11 @@ const AutoPayments = ({
           onChange={onToggleClick}
           className={styles.toggleButton}
           isDisabled={isDisabled || !walletCustomerEmail}
+          dataTestId="auto_payments_toggle_button"
         />
       </div>
 
-      <Text fontSize="12px" className={styles.autoPaymentDescription} noSelect>
+      <Text fontSize="12px" className={styles.autoPaymentDescription}>
         {t("AutomaticallyTopUpCard")}
       </Text>
 

@@ -217,8 +217,6 @@ class DialogsStore {
 
   isNewQuotaItemsByCurrentUser = false;
 
-  guestReleaseTipDialogVisible = false;
-
   covers = null;
 
   cover = null;
@@ -336,10 +334,6 @@ class DialogsStore {
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
-  };
-
-  setGuestReleaseTipDialogVisible = (visible) => {
-    this.guestReleaseTipDialogVisible = visible;
   };
 
   setEditRoomDialogProps = (props) => {

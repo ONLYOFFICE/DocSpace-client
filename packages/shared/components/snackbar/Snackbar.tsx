@@ -230,7 +230,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 color={textColor}
                 fontSize={fontSize}
                 fontWeight={fontWeight}
-                noSelect
                 data-testid="snackbar-message"
               >
                 {text}

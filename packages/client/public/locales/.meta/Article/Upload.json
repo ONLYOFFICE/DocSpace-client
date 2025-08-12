@@ -3,7 +3,7 @@
   "content": "Upload",
   "content_en_sha1_hash": "8bdf057f91e76ae328b2a21d35f682daa08a0ec0",
   "created_at": "2025-05-19T21:30:57.042Z",
-  "updated_at": "2025-05-26T07:57:32.142Z",
+  "updated_at": "2025-08-11T18:11:59.096Z",
   "comment": {
     "text": "The translation key \"Upload\" is used as a label for a file upload button. It appears on a button in the article main component and also as a secondary text on a dropzone component for plugins. The purpose of this text is to provide context for users when uploading files, specifically ZIP files.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/Dropzone.tsx",
-      "line_number": 48,
-      "context": "<StyledDropzoneComponent\n isDisabled={isDisabled}\n isLoading={isLoading}\n onDrop={onDrop}\n accept={[\".zip\"]}\n linkMainText={t(\"Article:Upload\")}\n linkSecondaryText={t(\"Common:DropzoneTitleSecondary\")}\n exstsText=\"(ZIP)\"\n />\n );\n };",
+      "line_number": 53,
+      "context": "<StyledDropzoneComponent\n isDisabled={isDisabled}\n isLoading={isLoading}\n onDrop={onDrop}\n accept={[\".zip\"]}\n linkMainText={t(\"Article:Upload\")}\n linkSecondaryText={t(\"Common:DropzoneTitleSecondary\")}\n exstsText=\"(ZIP)\"\n dataTestId={dataTestId}\n />\n );",
       "module": "/packages/client"
     }
   ],

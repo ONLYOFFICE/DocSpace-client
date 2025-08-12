@@ -73,9 +73,7 @@ const SingleSignOn = (props) => {
       hideSettings={serviceProviderSettings}
       hideMetadata={spMetadata}
     >
-      <Text className="intro-text settings_unavailable" noSelect>
-        {t("SsoIntro")}
-      </Text>
+      <Text className="intro-text settings_unavailable">{t("SsoIntro")}</Text>
 
       {isMobileView ? (
         <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />
@@ -90,6 +88,7 @@ const SingleSignOn = (props) => {
             })}
             label={SERVICE_PROVIDER_SETTINGS}
             value={serviceProviderSettings}
+            dataTestId="sp_settings_hide_button"
             // isDisabled={!isSSOAvailable}
           />
 
@@ -103,6 +102,7 @@ const SingleSignOn = (props) => {
             })}
             label={SP_METADATA}
             value={spMetadata}
+            dataTestId="sp_metadata_hide_button"
             // isDisabled={!isSSOAvailable}
           />
 

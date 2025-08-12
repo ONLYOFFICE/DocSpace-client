@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -54,6 +54,8 @@ const TabsCommon = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [currentTabId, setCurrentTabId] = useState();
+
   const data = [
     {
       id: "general",
@@ -82,12 +84,14 @@ const TabsCommon = (props) => {
   };
 
   const load = async () => {
-    const currentTabId = getCurrentTabId();
+    const tabId = getCurrentTabId();
+    setCurrentTabId(tabId);
+
     await loadBaseInfo(
       !isMobileView
-        ? currentTabId === "general"
+        ? tabId === "general"
           ? "customization"
-          : currentTabId === "branding"
+          : tabId === "branding"
             ? "branding"
             : "appearance"
         : "customization",
@@ -115,6 +119,7 @@ const TabsCommon = (props) => {
         `/portal-settings/customization/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
   if (!isLoadedSubmenu) return <LoaderTabs />;
@@ -122,7 +127,7 @@ const TabsCommon = (props) => {
   return (
     <Tabs
       items={data}
-      selectedItemId={getCurrentTabId()}
+      selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />

@@ -1,7 +1,6 @@
 {
   "ActiveSessions": "Active Sessions",
   "AutoDeleteTitle": "All the sessions older than 60 days will be automatically deleted.",
-  "ChangeEmailSuccess": "Email has been changed successfully",
   "ChangePasswordAfterLoggingOut": "Change password after logging out",
   "ConnectSocialNetworks": "Connect your social networks",
   "DescriptionForSecurity": "For more security, you need to change your password.",

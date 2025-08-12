@@ -119,6 +119,7 @@ const Amount = (props: AmountProps) => {
                 isActive={selectedAmount === item.id}
                 onSelect={onSelectAmount}
                 isDisabled={item.isDisabled}
+                dataTestId={`tab_item_${item.id}`}
               />
             ))}
           </div>
@@ -137,6 +138,7 @@ const Amount = (props: AmountProps) => {
           placeholder={t("EnterAmount")}
           isDisabled={isDisabled || !walletCustomerEmail}
           maxLength={MAX_LENGTH}
+          testId="top_up_amount_input"
         />
         {reccomendedAmount ? (
           <Text className={styles.reccomendedAmount}>
@@ -154,6 +156,7 @@ const Amount = (props: AmountProps) => {
           float
           getContent={textTooltip}
           openOnClick={isMobile}
+          dataTestId="amount_tooltip"
         />
       ) : null}
     </div>

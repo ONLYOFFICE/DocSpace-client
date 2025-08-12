@@ -3,7 +3,7 @@
   "content": "Attribute Mapping",
   "content_en_sha1_hash": "3c36e2ea92c694eb893c563ee8f8242b35bfedcc",
   "created_at": "2025-05-19T21:30:50.063Z",
-  "updated_at": "2025-05-24T03:30:29.422Z",
+  "updated_at": "2025-08-12T19:46:26.203Z",
   "comment": {
     "text": "Attribute Matching is used as a label to describe a field mapping feature that allows users to map attributes between different systems. It appears in a UI component where users can configure attribute mappings, providing context for users configuring this setting.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
       "line_number": 67,
-      "context": "return (\n <StyledWrapper>\n <div className=\"attribute-matching-box\">\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600} noSelect>\n {t(\"AttributeMatching\")}\n </Text>\n \n <HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}",
+      "context": "return (\n <StyledWrapper>\n <div className=\"attribute-matching-box\">\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600}>\n {t(\"AttributeMatching\")}\n </Text>\n \n <HelpButton\n className=\"attribute-matching-tooltip icon-button\"\n offsetRight={0}",
       "module": "/packages/client"
     }
   ],

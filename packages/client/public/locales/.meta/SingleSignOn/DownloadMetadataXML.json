@@ -3,7 +3,7 @@
   "content": "Download SP metadata XML",
   "content_en_sha1_hash": "69cdbb542da10c910280c5a6dd9347606d5ba14e",
   "created_at": "2025-05-19T21:30:50.077Z",
-  "updated_at": "2025-05-24T03:26:58.323Z",
+  "updated_at": "2025-08-11T18:11:59.263Z",
   "comment": {
     "text": "This translation key is used to display the label for a button that allows users to download SP metadata XML. It appears on the \"Download\" button in a portal settings category.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
-      "line_number": 111,
+      "line_number": 114,
       "context": "/>\n \n <div className=\"button-wrapper\">\n <Button\n id=\"download-metadata-xml\"\n label={t(\"DownloadMetadataXML\")}\n primary\n scale={isMobileView}\n size={isMobileView ? \"normal\" : \"small\"}\n tabIndex={25}\n onClick={downloadMetadata}",
       "module": "/packages/client"
     }

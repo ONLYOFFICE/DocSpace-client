@@ -65,6 +65,9 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
   tabIndex = -1,
   isLoading = false,
   displayArrow: displayArrowProp,
+  noSelect,
+  imageIcon,
+  imageAlt = "",
 }) => {
   const defaultOption = selectedOption?.default;
   // const isSelected = selectedOption?.key !== 0;
@@ -88,6 +91,7 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
       [styles.type]: type,
       [styles.descriptive]: type === "descriptive",
       [styles.plusBadgeValue]: plusBadgeValue,
+      [styles.noSelect]: noSelect,
     },
   );
 
@@ -138,7 +142,13 @@ export const ComboButton: React.FC<TComboButtonProps> = ({
         <div className={iconClasses} data-test-id="combo-button-icon">
           {isIconReactElement ? React.createElement(Icon) : null}
 
-          {typeof selectedOption.icon === "string" ? (
+          {imageIcon && typeof imageIcon === "string" ? (
+            <img
+              style={{ userSelect: "text" }}
+              src={imageIcon}
+              alt={`\n${imageAlt}`}
+            />
+          ) : typeof selectedOption.icon === "string" ? (
             <ReactSVG
               src={selectedOption.icon}
               className={classNames({

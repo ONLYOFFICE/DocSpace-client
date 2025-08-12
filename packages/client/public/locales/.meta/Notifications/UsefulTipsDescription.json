@@ -3,7 +3,7 @@
   "content": "Get useful guides about {{productName}}",
   "content_en_sha1_hash": "04ac5330b45383f4fd3a8bf806312a34a2d970b3",
   "created_at": "2025-05-19T21:30:54.093Z",
-  "updated_at": "2025-05-24T07:46:25.501Z",
+  "updated_at": "2025-08-11T18:11:59.304Z",
   "comment": {
     "text": "\"This translation key is used to describe a notification section on a profile page, providing useful guides related to a specific product. It appears in a sub-component within the 'Notifications' section of a 'Profile' page.\"",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.js",
-      "line_number": 63,
-      "context": "onChange={onChangeEmailSubscription}\n isChecked={usefulTipsSubscription}\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"UsefulTipsDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </div>\n );\n };",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/UsefulTipsContainer.tsx",
+      "line_number": 77,
+      "context": "isChecked={usefulTipsSubscription}\n dataTestId=\"useful_tips_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"UsefulTipsDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     }
   ],

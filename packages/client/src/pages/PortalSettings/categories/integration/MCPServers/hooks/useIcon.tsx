@@ -24,22 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.bodyContainer {
-  padding: 16px 0;
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { Text } from "@docspace/shared/components/text";
 
-.iconContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+import styles from "../MCPServers.module.scss";
 
-.headersContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+export const useIcon = () => {
+  const { t } = useTranslation(["MCPServers"]);
+
+  const [icon, setIcon] = React.useState("");
+
+  const onAddIcon = () => {
+    setIcon("icon");
+  };
+
+  const getIcon = () => icon;
+
+  const iconComponent = (
+    <div className={styles.iconContainer}>
+      <Text fontSize="13px" lineHeight="20px" fontWeight={600}>
+        {t("MCPServers:IntegrationIcon")}
+      </Text>
+      <SelectorAddButton
+        label={t("OAuth:SelectNewImage")}
+        onClick={onAddIcon}
+      />
+    </div>
+  );
+
+  return {
+    iconComponent,
+    getIcon,
+  };
+};

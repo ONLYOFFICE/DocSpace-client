@@ -23,3 +23,110 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import {
+  TextInput,
+  InputType,
+  InputSize,
+} from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+
+import styles from "../MCPServers.module.scss";
+
+export const useHeaders = () => {
+  const { t } = useTranslation(["MCPServers"]);
+
+  const [headerCounts, setHeaderCounts] = React.useState(0);
+  const [headerNames, setHeaderNames] = React.useState<Record<string, string>>(
+    {},
+  );
+  const [headerValues, setHeaderValues] = React.useState<
+    Record<string, string>
+  >({});
+
+  const onChangeHeaderName = (index: number, value: string) => {
+    setHeaderNames((val) => ({ ...val, [index]: value }));
+  };
+
+  const onChangeHeaderValue = (index: number, value: string) => {
+    setHeaderValues((val) => ({ ...val, [index]: value }));
+  };
+
+  const onAddNewHeader = () => {
+    setHeaderCounts((val) => val + 1);
+  };
+
+  const getAPIHeaders = () => {
+    const headers: Record<string, string> = {};
+
+    Object.entries(headerNames).forEach(([index, name]) => {
+      headers[name] = headerValues[index];
+    });
+
+    return headers;
+  };
+
+  const headersComponent = (
+    <>
+      <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
+        {t("MCPServers:IntegrationHeaders")}
+      </Text>
+      <div className={styles.headersContainer}>
+        {Array.from({ length: headerCounts }).map((_, index) => (
+          <React.Fragment key={`header-${index * 2}`}>
+            <FieldContainer
+              labelText={t("MCPServers:IntegrationHeaderName")}
+              isVertical
+              removeMargin
+              labelVisible
+            >
+              <TextInput
+                type={InputType.text}
+                size={InputSize.base}
+                value={headerNames[index]}
+                onChange={(e) => onChangeHeaderName(index, e.target.value)}
+                placeholder={t("MCPServers:EnterHeaderName")}
+                scale
+              />
+            </FieldContainer>
+            <FieldContainer
+              labelText={t("MCPServers:IntegrationHeaderValue")}
+              isVertical
+              removeMargin
+              labelVisible
+            >
+              <TextInput
+                type={InputType.text}
+                size={InputSize.base}
+                value={headerValues[index]}
+                onChange={(e) => onChangeHeaderValue(index, e.target.value)}
+                placeholder={t("MCPServers:EnterHeaderValue")}
+                scale
+              />
+            </FieldContainer>
+          </React.Fragment>
+        ))}
+      </div>
+      <SelectorAddButton
+        label={t("MCPServers:AddMoreHeaders")}
+        onClick={onAddNewHeader}
+      />
+    </>
+  );
+
+  return {
+    headerCounts,
+    headerNames,
+    headerValues,
+    headersComponent,
+    onChangeHeaderName,
+    onChangeHeaderValue,
+    onAddNewHeader,
+    getAPIHeaders,
+  };
+};

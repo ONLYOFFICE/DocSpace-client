@@ -24,75 +24,76 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
-  ModalDialog,
-  ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
+  TextInput,
+  InputType,
+  InputSize,
+} from "@docspace/shared/components/text-input";
 
-import styles from "../../MCPServers.module.scss";
-
-import { useHeaders } from "../../hooks/useHeaders";
-import { useBaseParams } from "../../hooks/useBaseParams";
-import { useIcon } from "../../hooks/useIcon";
-
-type AddNewDialogProps = {
-  onClose: VoidFunction;
-};
-
-const AddNewDialog = ({ onClose }: AddNewDialogProps) => {
+export const useBaseParams = () => {
   const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
 
-  const { getBaseParams, baseParamsComponent } = useBaseParams();
-  const { headersComponent, getAPIHeaders } = useHeaders();
-  const { iconComponent, getIcon } = useIcon();
+  const [name, setName] = React.useState("");
+  const [url, setUrl] = React.useState("");
 
-  const onSubmit = () => {
-    const headers = getAPIHeaders();
-    const baseParams = getBaseParams();
-    const icon = getIcon();
-
-    console.log(headers);
-    console.log(baseParams);
-    console.log(icon);
-
-    onClose();
+  const onChangeName = (value: string) => {
+    setName(value);
   };
 
-  return (
-    <ModalDialog
-      visible
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      withBodyScroll
-    >
-      <ModalDialog.Header>{t("MCPServers:MCPServer")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <div className={styles.bodyContainer}>
-          {iconComponent}
-          {baseParamsComponent}
-          {headersComponent}
-        </div>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          primary
-          size={ButtonSize.normal}
-          label={t("Common:AddButton")}
-          scale
-          onClick={onSubmit}
-        />
-        <Button
-          size={ButtonSize.normal}
-          label={t("Common:CancelButton")}
-          scale
-          onClick={onClose}
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
-};
+  const onChangeUrl = (value: string) => {
+    setUrl(value);
+  };
 
-export default AddNewDialog;
+  const getBaseParams = () => {
+    return {
+      name,
+      url,
+    };
+  };
+
+  const baseParamsComponent = (
+    <>
+      <FieldContainer
+        labelText={t("MCPServers:IntegrationName")}
+        isRequired
+        isVertical
+        removeMargin
+        labelVisible
+      >
+        <TextInput
+          type={InputType.text}
+          size={InputSize.base}
+          value={name}
+          onChange={(e) => onChangeName(e.target.value)}
+          placeholder={t("Common:EnterName")}
+          scale
+        />
+      </FieldContainer>
+      <FieldContainer
+        labelText={t("MCPServers:IntegrationUrl")}
+        isRequired
+        isVertical
+        removeMargin
+        labelVisible
+      >
+        <TextInput
+          type={InputType.text}
+          size={InputSize.base}
+          value={url}
+          onChange={(e) => onChangeUrl(e.target.value)}
+          placeholder={t("OAuth:EnterURL")}
+          scale
+        />
+      </FieldContainer>
+    </>
+  );
+
+  return {
+    getBaseParams,
+    baseParamsComponent,
+  };
+};

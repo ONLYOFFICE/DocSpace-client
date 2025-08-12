@@ -44,3 +44,23 @@
   width: fit-content;
   margin-bottom: 12px;
 }
+
+.bodyContainer {
+  padding: 16px 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.headersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

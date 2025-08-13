@@ -56,8 +56,4 @@
     font-weight: var(--heading-font-weight);
     line-height: 50px;
   }
-
-  &.not-selectable {
-    @include mixins.no-user-select;
-  }
 }

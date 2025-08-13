@@ -3,7 +3,7 @@
   "content": "Synchronization will allow to upload all the data from the portal and update the new data after changing the settings. Sync every time you have new data on users in the portal.",
   "content_en_sha1_hash": "57a5ecb9065bfe2e09c3eb6293967e5a6539d7ac",
   "created_at": "2025-05-19T21:30:54.176Z",
-  "updated_at": "2025-08-11T18:11:59.249Z",
+  "updated_at": "2025-08-12T19:46:26.193Z",
   "comment": {
     "text": "This translation key is used to describe the functionality of the \"Synchronize\" toggle button on Portal Settings pages, indicating that it enables syncing portal data with LDAP settings. The text appears in an unavailable state (indicated by a specific class name) and is translated as part of the LdapAutoSyncToggleDescription key.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleAutoSync.js",
-      "line_number": 140,
-      "context": "fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n noSelect\n >\n {t(\"LdapAutoSyncToggleDescription\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
+      "line_number": 139,
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"LdapAutoSyncToggleDescription\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
       "module": "/packages/client"
     }
   ],

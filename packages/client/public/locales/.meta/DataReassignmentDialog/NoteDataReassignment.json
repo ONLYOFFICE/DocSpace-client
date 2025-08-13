@@ -3,7 +3,7 @@
   "content": "Note: this action cannot be undone.",
   "content_en_sha1_hash": "2de5d0246ddba06d7e45e92ee6e265cd1dfcf4be",
   "created_at": "2025-05-19T21:30:56.745Z",
-  "updated_at": "2025-05-24T13:35:33.641Z",
+  "updated_at": "2025-08-12T19:46:25.888Z",
   "comment": {
     "text": "This translation key is used to display a warning message when a user attempts to reassign data that cannot be undone. It typically appears in a dialog or alert window and indicates that the action will have irreversible consequences. The exact wording may vary based on localizations.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Description.js",
-      "line_number": 45,
-      "context": "{noRoomFilesToMove\n ? t(\"RoomsOnlyReassignment\")\n : t(\"DescriptionDataReassignment\")}\n </Text>\n <Text className=\"list-item\" noSelect>\n {t(\"NoteDataReassignment\")}\n </Text>\n \n {dataReassignmentUrl ? (\n <Link\n target=\"_blank\"",
+      "line_number": 44,
+      "context": "<Text className=\"list-item\">\n {noRoomFilesToMove\n ? t(\"RoomsOnlyReassignment\")\n : t(\"DescriptionDataReassignment\")}\n </Text>\n <Text className=\"list-item\">{t(\"NoteDataReassignment\")}</Text>\n \n {dataReassignmentUrl ? (\n <Link\n target=\"_blank\"\n isHovered",
       "module": "/packages/client"
     }
   ],

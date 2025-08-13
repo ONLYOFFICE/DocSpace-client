@@ -45,6 +45,7 @@ const RowContainer = (props: RowContainerProps) => {
     itemCount,
     fetchMoreFiles,
     hasMoreFiles,
+    noSelect,
   } = props;
 
   const containerStyle = manualHeight
@@ -57,6 +58,7 @@ const RowContainer = (props: RowContainerProps) => {
       className={classNames(styles.container, className, {
         [styles.useReactWindow]: useReactWindow,
         [styles.manualHeight]: manualHeight,
+        [styles.noSelect]: noSelect,
       })}
       style={containerStyle}
       data-testid="row-container"

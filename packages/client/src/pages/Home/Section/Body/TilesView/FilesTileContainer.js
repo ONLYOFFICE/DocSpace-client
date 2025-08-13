@@ -53,6 +53,7 @@ const FilesTileContainer = ({
   setDropTargetPreview,
   disableDrag,
   canCreateSecurity,
+  withContentSelection,
 }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
@@ -160,6 +161,7 @@ const FilesTileContainer = ({
         infiniteGrid={InfiniteGrid}
         headingFolders={t("Common:Folders")}
         headingFiles={t("Common:Files")}
+        noSelect={!withContentSelection}
       >
         {filesListNode}
       </TileContainer>
@@ -168,9 +170,10 @@ const FilesTileContainer = ({
 };
 
 export default inject(
-  ({ filesStore, uploadDataStore, selectedFolderStore }) => {
+  ({ filesStore, uploadDataStore, selectedFolderStore, hotkeyStore }) => {
     const { filesList, disableDrag } = filesStore;
     const { filter } = filesStore;
+    const { withContentSelection } = hotkeyStore;
 
     const isDesc = filter?.sortOrder === "desc";
 
@@ -182,6 +185,7 @@ export default inject(
     return {
       filesList,
       isDesc,
+      withContentSelection,
       setDropTargetPreview,
       selectedFolderTitle,
       disableDrag,

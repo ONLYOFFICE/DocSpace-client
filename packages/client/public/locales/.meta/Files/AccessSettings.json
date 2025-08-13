@@ -3,7 +3,7 @@
   "content": "Access settings",
   "content_en_sha1_hash": "7b34b38f3e6a5710c25a3765304dc0c570600dd3",
   "created_at": "2025-05-19T21:30:55.184Z",
-  "updated_at": "2025-08-11T09:02:43.860Z",
+  "updated_at": "2025-08-12T19:46:25.844Z",
   "comment": {
     "text": "This translation key is used for \"Access settings\" content that appears in a link within an edit room dialog and as a header title in a panel. It provides the label for access-related settings or configurations, likely prompting users to review or adjust their access permissions.",
     "is_auto": true,
@@ -24,14 +24,14 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 334,
-      "context": "fontSize=\"21px\"\n fontWeight={700}\n className=\"header-component\"\n noSelect\n >\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
+      "line_number": 329,
+      "context": "isFill\n isClickable\n dataTestId=\"template_access_settings_back_button\"\n />\n <Text fontSize=\"21px\" fontWeight={700} className=\"header-component\">\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 334,
-      "context": "fontSize=\"21px\"\n fontWeight={700}\n className=\"header-component\"\n noSelect\n >\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
+      "line_number": 329,
+      "context": "isFill\n isClickable\n dataTestId=\"template_access_settings_back_button\"\n />\n <Text fontSize=\"21px\" fontWeight={700} className=\"header-component\">\n {t(\"Files:AccessSettings\")}\n </Text>\n <IconButton\n size={17}\n className=\"close-button\"\n iconName={CrossReactSvgUrl}",
       "module": "/packages/client"
     },
     {

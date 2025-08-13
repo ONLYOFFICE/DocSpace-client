@@ -205,11 +205,16 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   fontWeight={600}
                   fontSize="14px"
                   className={styles.containerTitle}
+                  noSelect
                 >
                   {item.title}
                 </Text>
                 <div className={styles.middleBlock}>
-                  <Text fontSize="12px" className={styles.priceDescription}>
+                  <Text
+                    fontSize="12px"
+                    className={styles.priceDescription}
+                    noSelect
+                  >
                     {item.priceTitle}
                   </Text>
 
@@ -258,7 +263,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   ) : null}
 
                   <div className={styles.priceContainer}>
-                    <Text fontSize="12px" fontWeight={600}>
+                    <Text fontSize="12px" fontWeight={600} noSelect>
                       {t("PerStorage", {
                         currency: formatWalletCurrency!(
                           storagePriceIncrement!,

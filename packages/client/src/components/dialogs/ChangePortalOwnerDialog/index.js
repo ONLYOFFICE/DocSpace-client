@@ -169,20 +169,20 @@ const ChangePortalOwnerDialog = ({
         <StyledOwnerInfo>
           <Avatar className="avatar" role="owner" source={avatar} size="big" />
           <div className="info">
-            <Text className="display-name" noSelect title={displayName}>
+            <Text className="display-name" title={displayName}>
               {displayName}
             </Text>
-            <Text className="status" noSelect title={t("Common:Owner")}>
+            <Text className="status" title={t("Common:Owner")}>
               {t("Common:Owner")}
             </Text>
           </div>
         </StyledOwnerInfo>
 
         <StyledPeopleSelectorInfo>
-          <Text className="new-owner" noSelect title={t("NewPortalOwner")}>
+          <Text className="new-owner" title={t("NewPortalOwner")}>
             {t("NewPortalOwner", { productName: t("Common:ProductName") })}
           </Text>
-          <Text className="description" noSelect title={t("ChangeInstruction")}>
+          <Text className="description" title={t("ChangeInstruction")}>
             {t("ChangeInstruction", { productName: t("Common:ProductName") })}
           </Text>
         </StyledPeopleSelectorInfo>
@@ -223,12 +223,12 @@ const ChangePortalOwnerDialog = ({
         )}
 
         <StyledAvailableList>
-          <Text className="list-header" noSelect title={t("PortalOwnerCan")}>
+          <Text className="list-header" title={t("PortalOwnerCan")}>
             {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
           </Text>
 
           {ownerRights?.map((item) => (
-            <Text key={item} className="list-item" noSelect title={item}>
+            <Text key={item} className="list-item" title={item}>
               — {item};
             </Text>
           ))}
@@ -236,7 +236,7 @@ const ChangePortalOwnerDialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <StyledFooterWrapper>
-          <Text className="info" noSelect>
+          <Text className="info">
             {t("Settings:AccessRightsChangeOwnerConfirmText")}
           </Text>
           <div className="button-wrapper">

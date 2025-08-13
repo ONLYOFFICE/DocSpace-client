@@ -3,7 +3,7 @@
   "content": "Next synchronization",
   "content_en_sha1_hash": "7c46b7de7bce35436d1cddf897a7b461379290d9",
   "created_at": "2025-05-19T21:30:54.246Z",
-  "updated_at": "2025-08-11T18:11:59.249Z",
+  "updated_at": "2025-08-12T19:46:26.191Z",
   "comment": {
     "text": "This translation key describes the text displayed next to a synchronization date in a PortalSettings page, indicating the next scheduled synchronization time. It is used in an auto-sync button and appears on-screen when LDAP integration is enabled or allowed.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
-      "line_number": 156,
-      "context": "fontWeight={600}\n lineHeight=\"16px\"\n noSelect\n dataTestId=\"next_sync_date\"\n >\n {`${t(\"LdapNextSync\")}: ${nextSyncDate?.toFormat(\"DDDD tt\")} UTC`}\n </Text>\n <Button\n tabIndex={-1}\n className=\"auto-sync-button\"\n size={buttonSize}",
+      "line_number": 152,
+      "context": "fontSize=\"12px\"\n fontWeight={600}\n lineHeight=\"16px\"\n dataTestId=\"next_sync_date\"\n >\n {`${t(\"LdapNextSync\")}: ${nextSyncDate?.toFormat(\"DDDD tt\")} UTC`}\n </Text>\n <Button\n tabIndex={-1}\n className=\"auto-sync-button\"\n size={buttonSize}",
       "module": "/packages/client"
     }
   ],

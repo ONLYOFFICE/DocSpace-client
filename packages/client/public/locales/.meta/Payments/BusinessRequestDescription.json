@@ -3,7 +3,7 @@
   "content": "The pricing plans with more {{peopleNumber}} admins are available upon request only.",
   "content_en_sha1_hash": "55e0fa870af75f04c44b2449bd583a48a3d1adcf",
   "created_at": "2025-05-19T21:30:53.659Z",
-  "updated_at": "2025-06-26T19:00:18.240Z",
+  "updated_at": "2025-08-12T19:46:26.225Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that pricing plans with more administrators are available upon request only. It appears in the UI as a descriptive text within a payment settings category. The goal of this text is to provide clarity on what happens when selecting certain payment tiers, helping users understand the implications of choosing those options.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/sub-components/TotalTariffContainer.js",
-      "line_number": 100,
+      "line_number": 99,
       "context": "fontSize=\"14\"\n textAlign=\"center\"\n fontWeight={600}\n className=\"total-tariff_description\"\n >\n <Trans t={t} i18nKey=\"BusinessRequestDescription\" ns=\"Payments\">\n {{ peopleNumber: maxAvailableManagersCount }}\n </Trans>\n </Text>\n ) : (\n <Text fontWeight={600} fontSize=\"16px\">",
       "module": "/packages/client"
     }

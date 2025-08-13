@@ -91,7 +91,6 @@ const TotalTariffContainer = ({
       <div className="payment_price_total-price">
         {isNeedRequest ? (
           <Text
-            noSelect
             fontSize="14"
             textAlign="center"
             fontWeight={600}

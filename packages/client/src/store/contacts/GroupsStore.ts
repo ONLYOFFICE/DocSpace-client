@@ -278,7 +278,8 @@ class GroupsStore {
 
     if (updateFilter) this.setFilterParams(filterData);
 
-    this.clientLoadingStore.setIsSectionBodyLoading(false);
+    this.clientLoadingStore.setIsLoading("body", false);
+    this.clientLoadingStore.setIsLoading("header", false);
 
     runInAction(() => {
       this.groups = res.items || [];

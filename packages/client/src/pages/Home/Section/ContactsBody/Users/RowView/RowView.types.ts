@@ -28,6 +28,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
@@ -61,6 +62,7 @@ export type RowViewProps = {
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
 
   isRoomAdmin?: TUser["isRoomAdmin"];
+  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 };
 
 export type TItem = ReturnType<UsersStore["getPeopleListItem"]>;

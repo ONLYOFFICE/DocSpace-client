@@ -873,5 +873,6 @@
   "YourLogo": "شعاركم",
   "YourTurn": "دوركم الآن",
   "LogoForEditors": "شعار محرر {{editorName}}",
-  "LogoForViewer": "شعار {{diagramViewer}}"
+  "LogoForViewer": "شعار {{diagramViewer}}",
+  "LogoDocsEditor": "شعار ترويسة المحررين"
 }

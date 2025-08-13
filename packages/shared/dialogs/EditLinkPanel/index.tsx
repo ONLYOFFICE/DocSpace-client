@@ -501,7 +501,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         </ModalDialog.Header>
         <ModalDialog.Body>
           <StyledEditLinkBodyContent className="edit-link_body">
-            {!isFormRoom ? (
+            {accessOptions.length > 1 ? (
               <RoleLinkBlock
                 t={t}
                 accessOptions={accessOptions}

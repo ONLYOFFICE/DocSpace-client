@@ -36,15 +36,14 @@ import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/di
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
-import { StartFillingSelectorDialogProps } from "@/types";
-import {
-  addExternalLink,
-  editExternalLink,
-  getExternalLinks,
-} from "@docspace/shared/api/files";
+import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
 import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
+import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+
+import { StartFillingSelectorDialogProps } from "@/types";
+
 import StartFillingSelectorDialog from "./StartFillingSelectDialog";
 
 type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
@@ -122,14 +121,14 @@ const ShareFormDialog = ({
             });
           });
 
-          const updatedLink = await editExternalLink(
-            file.id,
-            link.sharedTo.id,
-            ShareAccessRights.FormFilling,
-            false,
-            false,
-            moment(null),
-          );
+          const updatedLink = await ShareLinkService.editLink(file, {
+            ...link,
+            access: ShareAccessRights.FormFilling,
+            sharedTo: {
+              ...link.sharedTo,
+              expirationDate: null,
+            },
+          });
 
           return copyDocumentShareLink(updatedLink, t);
         }

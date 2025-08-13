@@ -159,6 +159,7 @@ const PureHome = (props) => {
     clearDropPreviewLocation,
     canCreateSecurity,
     startDropPreview,
+    gallerySelected,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);

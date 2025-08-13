@@ -202,12 +202,10 @@ class FilesFilter {
   static getFilter(location: Location): FilesFilter {
     if (!location) return this.getDefault();
 
-    // TODO: Temp value. Change later
-    const isRecentFolder = location.pathname.startsWith("/recent");
+    const isRecentFolder = location.pathname?.startsWith("/recent");
 
     const urlFilter = getObjectByLocation(location);
 
-    // TODO: Temp value. Change later
     const defaultFilter = FilesFilter.getDefault({ isRecentFolder });
 
     if (!urlFilter) return defaultFilter;

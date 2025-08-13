@@ -292,7 +292,7 @@ const DeleteDialogComponent = (props) => {
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{noteText}</Text>
+        <Text>{noteText}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

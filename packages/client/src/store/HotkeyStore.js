@@ -60,6 +60,10 @@ class HotkeyStore {
 
   hotkeysClipboardAction = null;
 
+  selectionAreaIsEnabled = true;
+
+  withContentSelection = false;
+
   constructor(
     filesStore,
     dialogsStore,
@@ -136,7 +140,7 @@ class HotkeyStore {
       return e;
 
     const isDefaultKeys =
-      ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
+      ["PageUp", "PageDown", "Home", "End", "KeyV"].indexOf(e.code) > -1;
 
     if (
       ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(
@@ -547,7 +551,7 @@ class HotkeyStore {
       this.filesStore;
 
     setSelected("all");
-    if (!hotkeyCaret) {
+    if (!hotkeyCaret && filesList.length) {
       this.setCaret(filesList[0]);
       setHotkeyCaretStart(filesList[0]);
     }
@@ -736,6 +740,24 @@ class HotkeyStore {
       .catch((err) => {
         toastr.error(err, null, 0, true);
       });
+  };
+
+  setSelectionAreaIsEnabled = (selectionAreaIsEnabled) => {
+    this.selectionAreaIsEnabled = selectionAreaIsEnabled;
+  };
+
+  setWithContentSelection = (withContentSelection) => {
+    this.withContentSelection = withContentSelection;
+  };
+
+  enableSelection = (e) => {
+    if (e.type === "keydown" && this.selectionAreaIsEnabled) {
+      this.setSelectionAreaIsEnabled(false);
+      this.setWithContentSelection(true);
+    } else if (e.type === "keyup") {
+      this.setSelectionAreaIsEnabled(true);
+    }
+    e.preventDefault();
   };
 
   get countTilesInRow() {

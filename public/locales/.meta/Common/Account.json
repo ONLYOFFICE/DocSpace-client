@@ -3,7 +3,7 @@
   "content": "Account",
   "content_en_sha1_hash": "85dfa32c97d8618d1bea083609e2c8a29845abe5",
   "created_at": "2025-05-19T21:30:56.895Z",
-  "updated_at": "2025-08-04T07:30:01.259Z",
+  "updated_at": "2025-08-12T19:46:26.044Z",
   "comment": {
     "text": "This translation key is used to display the account label in a connect dialog, indicating that the user's account information should be saved. It appears as a title and header in a file upload confirmation dialog. Translators can use this context to ensure the label accurately reflects the UI's purpose.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 249,
-      "context": "<Text\n className={classNames(styles.infoField, styles.firstRow)}\n noSelect\n title={t(\"Data\")}\n >\n {t(\"Common:Account\")}\n </Text>\n <Text\n className={classNames(styles.infoData, styles.firstRow)}\n fontSize=\"13px\"\n fontWeight={600}",
+      "line_number": 241,
+      "context": "<div className={styles.body}>\n <Text\n className={classNames(styles.infoField, styles.firstRow)}\n title={t(\"Data\")}\n >\n {t(\"Common:Account\")}\n </Text>\n <Text\n className={classNames(styles.infoData, styles.firstRow)}\n fontSize=\"13px\"\n fontWeight={600}",
       "module": "/packages/client"
     },
     {

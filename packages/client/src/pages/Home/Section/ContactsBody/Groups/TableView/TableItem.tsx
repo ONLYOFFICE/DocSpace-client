@@ -40,6 +40,7 @@ import { globalColors } from "@docspace/shared/themes";
 import { TGroup } from "@docspace/shared/api/groups/types";
 
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import ContactsHotkeysStore from "SRC_DIR/store/contacts/ContactsHotkeysStore";
 
 import Badges from "../../Badges";
 
@@ -59,6 +60,7 @@ type GroupsTableItemProps = {
   selectRow?: GroupsStore["selectRow"];
   changeGroupSelection?: GroupsStore["changeGroupSelection"];
   changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
+  withContentSelection?: ContactsHotkeysStore["withContentSelection"];
 };
 
 const GroupsTableItem = ({
@@ -75,6 +77,7 @@ const GroupsTableItem = ({
   changeGroupContextSelection,
   selectRow,
   isChecked,
+  withContentSelection,
 }: GroupsTableItemProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
   const theme = useTheme();
@@ -93,6 +96,7 @@ const GroupsTableItem = ({
   };
 
   const onRowClick = (e: React.MouseEvent<Element>) => {
+    if (withContentSelection) return;
     const target = e.target as Element;
     if (
       target?.tagName === "SPAN" ||
@@ -216,4 +220,5 @@ export default inject(({ peopleStore }: TStore) => ({
   changeGroupContextSelection:
     peopleStore.groupsStore!.changeGroupContextSelection,
   selectRow: peopleStore.groupsStore!.selectRow,
+  withContentSelection: peopleStore.contactsHotkeysStore!.withContentSelection,
 }))(observer(GroupsTableItem));

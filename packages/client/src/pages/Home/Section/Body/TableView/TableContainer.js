@@ -149,6 +149,7 @@ const Table = ({
   canCreateSecurity,
   setDropTargetPreview,
   disableDrag,
+  withContentSelection,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -259,6 +260,7 @@ const Table = ({
 
   return (
     <StyledTableContainer
+      noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}
@@ -306,6 +308,7 @@ export default inject(
     filesActionsStore,
     selectedFolderStore,
     uploadDataStore,
+    hotkeyStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -337,6 +340,7 @@ export default inject(
     } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
+    const { withContentSelection } = hotkeyStore;
 
     const { primaryProgressDataStore } = uploadDataStore;
     const { setDropTargetPreview } = primaryProgressDataStore;
@@ -370,6 +374,7 @@ export default inject(
       canCreateSecurity,
       setDropTargetPreview,
       disableDrag,
+      withContentSelection,
     };
   },
 )(withContainer(observer(Table)));

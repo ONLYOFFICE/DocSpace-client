@@ -128,8 +128,6 @@
   margin-inline-start: -20px;
   padding-inline-end: 20px;
 
-  @include text-user-select;
-
   background: var(--info-panel-background-color);
 
   display: flex;
@@ -241,8 +239,6 @@
   width: 100%;
   gap: 8px;
   padding-bottom: 20px;
-
-  @include text-user-select;
 
   :global(.property) {
     width: 100%;

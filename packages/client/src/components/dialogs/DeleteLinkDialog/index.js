@@ -158,13 +158,9 @@ const DeleteLinkDialogComponent = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <DeleteLinkDialogContainer className="modal-dialog-content-body">
-          <Text lineHeight="20px" noSelect>
-            {getDescription()}
-          </Text>
+          <Text lineHeight="20px">{getDescription()}</Text>
           {link.sharedTo.primary ? (
-            <Text lineHeight="20px" noSelect>
-              {t("Files:ActionCannotUndone")}
-            </Text>
+            <Text lineHeight="20px">{t("Files:ActionCannotUndone")}</Text>
           ) : null}
         </DeleteLinkDialogContainer>
       </ModalDialog.Body>

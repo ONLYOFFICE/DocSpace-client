@@ -3,7 +3,7 @@
   "content": "Public Certificate",
   "content_en_sha1_hash": "aea63e2f05925daedf345ab7abde382b62df4287",
   "created_at": "2025-05-19T21:30:50.116Z",
-  "updated_at": "2025-05-24T03:16:53.775Z",
+  "updated_at": "2025-08-12T19:46:26.210Z",
   "comment": {
     "text": "The \"OpenCertificate\" translation key is used to display the label for a certificate-related button or dialog. It appears in the modal dialog headers and body, indicating that it corresponds to an open certificate. The translation should be displayed as \"Public Certificate\".",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddIdpCertificateModal.js",
       "line_number": 61,
-      "context": "<ModalDialog.Header>{t(\"NewCertificate\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <StyledBodyContent>\n <Text isBold className=\"text-area-label\" noSelect>\n {t(\"OpenCertificate\")}\n </Text>\n \n <Textarea\n className=\"text-area\"\n id=\"idp-certificate\"",
+      "context": "<ModalDialog.Header>{t(\"NewCertificate\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <StyledBodyContent>\n <Text isBold className=\"text-area-label\">\n {t(\"OpenCertificate\")}\n </Text>\n \n <Textarea\n className=\"text-area\"\n id=\"idp-certificate\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddSpCertificateModal.js",
       "line_number": 80,
-      "context": "type=\"action\"\n >\n {t(\"GenerateCertificate\")}\n </Link>\n <Text isBold className=\"text-area-label\" noSelect>\n {t(\"OpenCertificate\")}\n </Text>\n \n <Textarea\n id=\"sp-certificate\"\n className=\"text-area\"",
+      "context": "type=\"action\"\n >\n {t(\"GenerateCertificate\")}\n </Link>\n <Text isBold className=\"text-area-label\">\n {t(\"OpenCertificate\")}\n </Text>\n \n <Textarea\n id=\"sp-certificate\"\n className=\"text-area\"",
       "module": "/packages/client"
     }
   ],

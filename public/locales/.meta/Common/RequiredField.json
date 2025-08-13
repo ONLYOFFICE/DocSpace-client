@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2025-08-11T18:11:59.124Z",
+  "updated_at": "2025-08-12T19:46:25.803Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a field is required when editing a connection. It appears in a vertical text input field within a connect dialog and is used as an error message if the input value is empty.",
     "is_auto": true,
@@ -114,7 +114,7 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 142,
+      "line_number": 141,
       "context": "key=\"e-mail\"\n isVertical\n hasError={isShowError ? emailError : undefined}\n labelVisible={false}\n errorMessage={\n errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}\n placeholder={t(\"Common:RegistrationEmail\")}",
       "module": "/packages/login"
     },
@@ -150,13 +150,13 @@
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 150,
+      "line_number": 149,
       "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover-access-modal-email-container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 150,
+      "line_number": 149,
       "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover-access-modal-email-container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },

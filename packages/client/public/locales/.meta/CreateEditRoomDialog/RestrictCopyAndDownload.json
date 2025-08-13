@@ -3,7 +3,7 @@
   "content": "Restrict copy and download",
   "content_en_sha1_hash": "af30403c9d64f7941556ddaeb8fbb6e6cf56859e",
   "created_at": "2025-05-19T21:30:56.827Z",
-  "updated_at": "2025-08-11T09:02:43.863Z",
+  "updated_at": "2025-08-12T19:46:25.849Z",
   "comment": {
     "text": "Restrict copy and download is a setting that controls whether users can download files from a virtual data room. When enabled, users will be restricted from downloading files. This option appears as a toggle button in create/edit room dialogs.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 129,
+      "line_number": 128,
       "context": "} else {\n setFileLifetimeChecked(!fileLifetimeChecked);\n }\n };\n \n const onChangeRestrictCopyAndDownload = () => {\n setRoomParams({ ...roomParams, denyDownload: !roomParams.denyDownload });\n \n setCopyAndDownloadChecked(!copyAndDownloadChecked);\n };",
       "module": "/packages/client"
     }

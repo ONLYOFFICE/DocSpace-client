@@ -76,7 +76,7 @@ const ReorderIndexDialog = ({
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400} noSelect>
+        <Text fontSize="13px" fontWeight={400}>
           {t("Files:ReorderIndex")}
         </Text>
       </ModalDialog.Body>

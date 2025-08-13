@@ -860,5 +860,6 @@
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "LogoForEditors": "ໂລໂກ້ສຳລັບບັນນາທິການ {{editorName}}",
-  "LogoForViewer": "ໂລໂກ້ສຳລັບ {{diagramViewer}}"
+  "LogoForViewer": "ໂລໂກ້ສຳລັບ {{diagramViewer}}",
+  "LogoDocsEditor": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວ"
 }

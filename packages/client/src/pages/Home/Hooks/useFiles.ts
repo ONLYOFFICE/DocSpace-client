@@ -89,7 +89,7 @@ const useFiles = ({
 
   const fetchDefaultFiles = (isRecentFolder = false) => {
     const filter = FilesFilter.getDefault({
-      isRecentFolder, // TODO: Temp value. Change later
+      isRecentFolder,
     });
 
     const url = getCategoryUrl(

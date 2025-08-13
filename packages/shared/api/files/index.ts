@@ -76,7 +76,6 @@ import {
   TFileFillingFormStatus,
 } from "./types";
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
-import { mockRecentTreeFolder } from "../../__mocks__/recent";
 
 export async function openEdit(
   fileId: number | string,

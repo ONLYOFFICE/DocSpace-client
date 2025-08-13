@@ -31,13 +31,17 @@ import classNames from "classnames";
 
 import { Text } from "../../../components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
-import { toastr } from "../../../components/toast";
 import { WhiteLabelLogoType } from "../../../enums";
 import { globalColors } from "../../../themes";
 
 import { Logo } from "./Logo";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
-import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
+import {
+  getLogoOptions,
+  generateLogo,
+  toDataUrl,
+  hiddenEditorTypes,
+} from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
 import styles from "./WhiteLabel.module.scss";
 
@@ -122,27 +126,24 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
   const onChangeLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.id.split("_");
-    const type = id[1];
     const theme = id[2];
     const logoName = e.target.name;
 
     const file = e.target.files && e.target.files[0];
 
-    const response = await uploadLogo(file, type);
-    if (!response) return;
-    const { data } = response;
+    if (!file) return;
 
-    if (data.Success) {
-      const url = data.Message;
+    try {
+      const dataUrl = await toDataUrl(file);
       const newArr = logoUrls.map((logo, i) => {
         if (logo.name !== logoName) return logo;
-        if (theme === "light") logoUrls[i].path.light = url;
-        if (theme === "dark") logoUrls[i].path.dark = url;
+        if (theme === "light") logoUrls[i].path.light = dataUrl;
+        if (theme === "dark") logoUrls[i].path.dark = dataUrl;
         return logo;
       });
       setLogoUrls(newArr);
-    } else {
-      toastr.error(data.Message);
+    } catch (err: unknown) {
+      console.error(err);
     }
   };
 
@@ -153,18 +154,27 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       const currentLogo = logoUrls[i];
       const defaultLogo = defaultWhiteLabelLogoUrls[i];
 
-      const value: Partial<{ light: string; dark: string }> = {};
+      // TODO: temporary code for editor logo replacement
+      if (currentLogo.name.includes("Editor") && currentLogo.type) {
+        const isEmbedEditor = currentLogo.name.includes("Embed");
+        const sourceIndex = isEmbedEditor ? 4 : 3;
+        const sourceLogo = logoUrls[sourceIndex];
 
-      // TODO: temporary function for editor logo replacement
-      if (currentLogo.name.includes("Editor")) {
-        if (currentLogo.name.includes("Embed")) {
-          value.light = logoUrls[4].path.light;
-        } else {
-          value.light = logoUrls[3].path.light;
+        if (
+          sourceLogo?.path?.light &&
+          !isEqual(
+            sourceLogo.path.light,
+            defaultWhiteLabelLogoUrls[sourceIndex]?.path?.light,
+          )
+        ) {
+          if (hiddenEditorTypes.includes(currentLogo.type)) {
+            currentLogo.path.light = sourceLogo.path.light;
+          }
         }
       }
 
       if (!isEqual(currentLogo, defaultLogo)) {
+        const value: Partial<{ light: string; dark: string }> = {};
         if (!isEqual(currentLogo.path.light, defaultLogo.path.light))
           value.light = currentLogo.path.light;
         if (!isEqual(currentLogo.path.dark, defaultLogo.path.dark))

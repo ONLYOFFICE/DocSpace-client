@@ -28,6 +28,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import PluginStore from "SRC_DIR/store/PluginStore";
+import OformsStore from "SRC_DIR/store/OformsStore";
 
 type InfoPanelHeaderContentProps = {
   selection: InfoPanelStore["infoPanelSelection"];
@@ -42,6 +43,8 @@ type InfoPanelHeaderContentProps = {
   infoPanelItemsList: PluginStore["infoPanelItemsList"];
 
   enablePlugins: SettingsStore["enablePlugins"];
+
+  gallerySelected: OformsStore["gallerySelected"];
 };
 
 export default InfoPanelHeaderContentProps;

@@ -128,9 +128,7 @@ const EmptyScreen = ({
         {currentHeader}
       </Heading>
 
-      <Text className="empty-description" noSelect>
-        {currentDescription}
-      </Text>
+      <Text className="empty-description">{currentDescription}</Text>
       {createItem ? (
         <div className="buttons">
           <div

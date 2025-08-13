@@ -3,7 +3,7 @@
   "content": "To register, enter your email address and click Send request. A message with a link to activate your account will be sent to the specified address.",
   "content_en_sha1_hash": "cdd8bdf8b53883670489773a82a81b4a59176cc8",
   "created_at": "2025-05-19T21:30:57.259Z",
-  "updated_at": "2025-06-30T12:20:31.681Z",
+  "updated_at": "2025-08-12T19:46:26.329Z",
   "comment": {
     "text": "This translation key is used to display instructions on how to complete the registration process after listing domains. It appears in a modal dialog and provides guidance on sending a request and receiving activation confirmation via email.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
       "line_number": 103,
-      "context": "<ModalDialog.Header>{t(\"RegisterTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <ModalDialogContainer>\n <Text key=\"text-body\" isBold={false} fontSize=\"13px\" noSelect>\n {getDomainsBlock()}\n {t(\"RegisterTextBodyAfterDomainsList\")}\n </Text>\n \n <FieldContainer\n className=\"email-reg-field\"\n key=\"e-mail\"",
+      "context": "<ModalDialog.Header>{t(\"RegisterTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <ModalDialogContainer>\n <Text key=\"text-body\" isBold={false} fontSize=\"13px\">\n {getDomainsBlock()}\n {t(\"RegisterTextBodyAfterDomainsList\")}\n </Text>\n \n <FieldContainer\n className=\"email-reg-field\"\n key=\"e-mail\"",
       "module": "/packages/login"
     }
   ],

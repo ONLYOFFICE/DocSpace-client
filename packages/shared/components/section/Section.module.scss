@@ -43,8 +43,6 @@
   width: 100%;
   max-width: 100%;
 
-  @include mixins.no-user-select;
-
   &.form-gallery {
     @include mixins.tablet-and-below {
       height: var(--section-header-height);
@@ -108,8 +106,6 @@
   width: auto;
   background: var(--info-panel-blur-color);
   z-index: 300;
-
-  @include mixins.no-user-select;
 
   @include mixins.tablet-and-below {
     z-index: 309;
@@ -324,7 +320,6 @@
 
 .sectionBody {
   max-width: 100vw !important;
-  user-select: none;
 
   &.withScroll {
     margin-inline-start: var(--section-desktop-padding);
@@ -371,6 +366,10 @@
   }
 }
 
+.filter {
+  user-select: none;
+}
+
 .isFixed {
   position: sticky;
   top: 61px;
@@ -398,7 +397,6 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  user-select: none;
 
   width: 100%;
   max-width: 100%;

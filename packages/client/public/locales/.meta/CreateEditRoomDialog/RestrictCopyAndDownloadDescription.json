@@ -3,7 +3,7 @@
   "content": "Enable this setting to disable downloads and content copying for users with the \"{{role}}\" role.",
   "content_en_sha1_hash": "d2ad963c095604e49bab1866809e7b2772f3a3e1",
   "created_at": "2025-05-19T21:30:56.829Z",
-  "updated_at": "2025-08-11T09:02:43.863Z",
+  "updated_at": "2025-08-12T19:46:25.850Z",
   "comment": {
     "text": "This translation key is used to display a descriptive text that explains the purpose of a setting to restrict downloads and content copying, particularly for users with a specific role. It appears in a dialog box where users can adjust this setting.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 163,
+      "line_number": 162,
       "context": "/>\n </Block>\n <Block\n headerText={t(\"RestrictCopyAndDownload\")}\n bodyText={\n <Trans t={t} i18nKey=\"RestrictCopyAndDownloadDescription\">\n Enable this setting to disable downloads and content copying for\n users with the {{ role }} role.\n </Trans>\n }\n onChange={onChangeRestrictCopyAndDownload}",
       "module": "/packages/client"
     }

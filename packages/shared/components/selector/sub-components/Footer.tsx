@@ -97,7 +97,6 @@ const Footer = React.memo(
               lineHeight="20px"
               fontWeight={600}
               fontSize="13px"
-              noSelect
             >
               {footerInputHeader}
             </Text>

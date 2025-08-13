@@ -136,7 +136,7 @@ const ControlButtons = ({
   };
 
   const renderContextButton = (visible: boolean) => {
-    console.log(visible);
+    // console.log(visible);
 
     if (!visible || isFrame) return null;
 

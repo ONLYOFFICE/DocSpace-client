@@ -113,7 +113,10 @@ export default function withFileActions(WrappedFileItem) {
         canDrag,
         viewAs,
         isIndexEditingMode,
+        withContentSelection,
       } = this.props;
+
+      if (withContentSelection) return;
 
       if (isIndexEditingMode) {
         if (
@@ -171,7 +174,15 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onMouseClick = (e) => {
-      const { viewAs, withCtrlSelect, withShiftSelect, item } = this.props;
+      const {
+        viewAs,
+        withCtrlSelect,
+        withShiftSelect,
+        item,
+        withContentSelection,
+      } = this.props;
+
+      if (withContentSelection) return;
 
       if (e.ctrlKey || e.metaKey) {
         withCtrlSelect(item);
@@ -376,6 +387,7 @@ export default function withFileActions(WrappedFileItem) {
         uploadDataStore,
         contextOptionsStore,
         indexingStore,
+        hotkeyStore,
       },
       { item, t },
     ) => {
@@ -420,7 +432,7 @@ export default function withFileActions(WrappedFileItem) {
       } = filesStore;
       const { id } = selectedFolderStore;
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
-
+      const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
 
       const selectedItem = selection.find(
@@ -547,6 +559,8 @@ export default function withFileActions(WrappedFileItem) {
         canDrag: !dragIsDisabled,
         isIndexEditingMode,
         isBlockingOperation,
+
+        withContentSelection,
       };
     },
   )(observer(WithFileActions));

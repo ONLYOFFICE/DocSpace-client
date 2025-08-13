@@ -36,8 +36,12 @@ interface ExternalShareProps
 export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
   const selfId = userStore.user?.id ?? "";
 
-  const { setLinkParams, setEditLinkPanelIsVisible, setEmbeddingPanelData } =
-    dialogsStore;
+  const {
+    setLinkParams,
+    setEditLinkPanelIsVisible,
+    setEmbeddingPanelData,
+    setIsShareFormData,
+  } = dialogsStore;
 
   const {
     setView,
@@ -57,5 +61,6 @@ export default inject<TStore>(({ infoPanelStore, userStore, dialogsStore }) => {
     setLinkParams,
     setEditLinkPanelIsVisible,
     setEmbeddingPanelData,
+    onOpenPanel: setIsShareFormData,
   };
 })(observer(Share as FC<ExternalShareProps>));

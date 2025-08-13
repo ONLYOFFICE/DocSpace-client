@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { useTranslation } from "react-i18next";
-import moment from "moment";
 
 import FormDataCollectionIcon from "PUBLIC_DIR/images/icons/32/form.data.collection.svg";
 import RoleBasedFillingIcon from "PUBLIC_DIR/images/icons/32/role.based.filling.svg";

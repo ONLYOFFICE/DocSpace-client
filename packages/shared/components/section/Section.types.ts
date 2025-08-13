@@ -48,6 +48,7 @@ export type InfoPanelProps = {
   anotherDialogOpen?: boolean;
   viewAs?: TViewAs;
   currentDeviceType?: DeviceType;
+  asideInfoPanel?: boolean;
 };
 
 export type SectionBodyContentProps = {
@@ -150,6 +151,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
 
     mainBarVisible?: boolean;
     withTabs?: boolean;
+    asideInfoPanel?: boolean;
   };
 
 export type SectionContextMenuProps = {

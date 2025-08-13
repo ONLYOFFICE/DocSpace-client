@@ -79,12 +79,12 @@
   height: 100%;
 
   rect {
-    fill: var(--payment-accent-color);
+    fill: var(--color-scheme-main-buttons);
     opacity: 0.1;
   }
 
   path {
-    fill: var(--payment-accent-color);
+    fill: var(--color-scheme-main-buttons);
     opacity: 1;
   }
 }

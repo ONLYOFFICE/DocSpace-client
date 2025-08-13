@@ -51,6 +51,7 @@ const Tiles: FC<TilesProps> = ({
   // oformFilesLoaded,
   isShowOneTile,
   smallPreview,
+  setIsVisible,
 }) => {
   const onMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -78,6 +79,12 @@ const Tiles: FC<TilesProps> = ({
     setOformFilesLoaded(tReady && oformFiles.length > 0);
   }, [tReady, oformFiles]);
 
+  const onClickInfo = (item: { id: Key | null | undefined }) => {
+    if (!item) return;
+    setIsVisible(true);
+    setGallerySelected(item);
+  };
+
   return (
     <TileContainer
       className="tile-container"
@@ -86,7 +93,12 @@ const Tiles: FC<TilesProps> = ({
     >
       {oformFiles.map((item: { id: Key | null | undefined }) => {
         return (
-          <FileTile key={item.id} item={item} smallPreview={smallPreview} />
+          <FileTile
+            key={item.id}
+            item={item}
+            smallPreview={smallPreview}
+            onClickInfo={() => onClickInfo(item)}
+          />
         );
       })}
     </TileContainer>
@@ -94,7 +106,7 @@ const Tiles: FC<TilesProps> = ({
 };
 
 export default inject<TStore>(
-  ({ settingsStore, accessRightsStore, oformsStore }) => ({
+  ({ settingsStore, accessRightsStore, oformsStore, infoPanelStore }) => ({
     theme: settingsStore.theme,
     oformFiles: oformsStore.oformFiles,
     hasGalleryFiles: oformsStore.hasGalleryFiles,
@@ -106,5 +118,6 @@ export default inject<TStore>(
     categoryFilterLoaded: oformsStore.categoryFilterLoaded,
     languageFilterLoaded: oformsStore.languageFilterLoaded,
     oformFilesLoaded: oformsStore.oformFilesLoaded,
+    setIsVisible: infoPanelStore.setIsVisible,
   }),
 )(withTranslation(["Common", "FormGallery"])(observer(Tiles)));

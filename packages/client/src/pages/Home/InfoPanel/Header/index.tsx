@@ -37,6 +37,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import OformsStore from "SRC_DIR/store/OformsStore";
 
 import { TInfoPanelSelection } from "../InfoPanel.types";
 
@@ -49,7 +50,7 @@ type InfoPanelHeaderContentProps = {
   roomsView: InfoPanelStore["roomsView"];
   fileView: InfoPanelStore["fileView"];
   setView: InfoPanelStore["setView"];
-  getIsGallery: InfoPanelStore["getIsGallery"];
+  gallerySelected: OformsStore["gallerySelected"];
   getIsContacts: InfoPanelStore["getIsContacts"];
   getIsTrash: InfoPanelStore["getIsTrash"];
 
@@ -64,7 +65,7 @@ const InfoPanelHeaderContent = ({
   roomsView,
   fileView,
   setView,
-  getIsGallery,
+  gallerySelected,
   getIsContacts,
   getIsTrash,
   infoPanelItemsList,
@@ -72,7 +73,7 @@ const InfoPanelHeaderContent = ({
 }: InfoPanelHeaderContentProps) => {
   const { t } = useTranslation(["Common", "InfoPanel"]);
 
-  const isGallery = getIsGallery();
+  const isGallery = !!gallerySelected;
   const isContacts = getIsContacts();
   const isTrash = getIsTrash();
 
@@ -243,10 +244,11 @@ export default inject(
     infoPanelStore,
     pluginStore,
     selectedFolderStore,
+    oformsStore,
   }: TStore) => {
     const selectedId = selectedFolderStore.id;
     const selectedRoomType = selectedFolderStore.roomType;
-
+    const { gallerySelected } = oformsStore;
     const { infoPanelItemsList } = pluginStore;
 
     const {
@@ -255,7 +257,6 @@ export default inject(
       roomsView,
       fileView,
       setView,
-      getIsGallery,
       getIsContacts,
       getIsTrash,
     } = infoPanelStore;
@@ -268,7 +269,7 @@ export default inject(
       roomsView,
       fileView,
       setView,
-      getIsGallery,
+      gallerySelected,
       getIsContacts,
       getIsTrash,
 

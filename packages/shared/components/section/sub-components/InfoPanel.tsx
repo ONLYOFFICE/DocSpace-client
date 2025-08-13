@@ -42,6 +42,7 @@ const InfoPanel = ({
   anotherDialogOpen,
   viewAs,
   currentDeviceType,
+  asideInfoPanel,
 }: InfoPanelProps) => {
   const infoPanelRef = useRef<null | HTMLDivElement>(null);
 
@@ -64,11 +65,19 @@ const InfoPanel = ({
 
   const infoPanelComponent = (
     <div
-      className={classNames("info-panel", styles.infoPanelWrapper)}
+      className={classNames("info-panel", styles.infoPanelWrapper, {
+        [styles.asideInfoPanel]: asideInfoPanel,
+      })}
       id="InfoPanelWrapper"
       ref={infoPanelRef}
     >
-      <div className={styles.infoPanel}>{children}</div>
+      <div
+        className={classNames(styles.infoPanel, {
+          [styles.asideInfoPanel]: asideInfoPanel,
+        })}
+      >
+        {children}
+      </div>
     </div>
   );
 
@@ -93,7 +102,7 @@ const InfoPanel = ({
     (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
-    : isMobileView
+    : isMobileView || asideInfoPanel
       ? renderPortalInfoPanel()
       : infoPanelComponent;
 };

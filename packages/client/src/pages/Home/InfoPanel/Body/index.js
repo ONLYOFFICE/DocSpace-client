@@ -78,7 +78,7 @@ const InfoPanelBodyContent = ({
 
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
-  const isGallery = getIsGallery();
+  const isGallery = !!gallerySelected;
   const isGroups = contactsView === "groups";
   const isGuests = contactsView === "guests";
   const isUsers =

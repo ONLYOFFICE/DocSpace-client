@@ -43,16 +43,13 @@ export interface TilesProps {
   oformFiles: TOformFile[];
 
   /**
-   * Callback that sets selected file in global mobx store. Pass `null` to reset selection.
-   */
-  setGallerySelected: (id: Key | null) => void;
-
-  /**
    * Callback that informs mobx store whether the `oformFiles` have been fetched and can be displayed.
    */
   setOformFilesLoaded: (loaded: boolean) => void;
   isShowOneTile?: boolean;
   smallPreview: boolean;
+  setIsVisible: (isVisible: boolean) => void;
+  setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
 }
 
 export interface TileProps {

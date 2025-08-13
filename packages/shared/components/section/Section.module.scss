@@ -109,6 +109,12 @@
   background: var(--info-panel-blur-color);
   z-index: 300;
 
+  &.asideInfoPanel {
+    z-index: 309;
+    position: fixed;
+    inset: 0;
+  }
+
   @include mixins.no-user-select;
 
   @include mixins.tablet-and-below {
@@ -130,6 +136,14 @@
     .scroll-body {
       padding-bottom: 20px;
     }
+  }
+
+  &.asideInfoPanel {
+    position: absolute;
+    border: none;
+    inset-inline-end: 0;
+    width: 480px;
+    max-width: calc(100vw - 69px);
   }
 
   @include mixins.tablet-and-below {

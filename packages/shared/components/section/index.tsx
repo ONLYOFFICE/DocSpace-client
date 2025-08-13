@@ -121,6 +121,7 @@ const Section = (props: SectionProps) => {
     primaryOperationsAlert,
     needErrorChecking,
     withTabs,
+    asideInfoPanel,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -335,6 +336,7 @@ const Section = (props: SectionProps) => {
             anotherDialogOpen={anotherDialogOpen}
             viewAs={viewAs}
             currentDeviceType={currentDeviceType}
+            asideInfoPanel={asideInfoPanel}
           >
             <SubInfoPanelHeader>{infoPanelHeaderContent}</SubInfoPanelHeader>
             <SubInfoPanelBody isInfoPanelScrollLocked={isInfoPanelScrollLocked}>

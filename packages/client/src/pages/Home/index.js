@@ -365,6 +365,7 @@ const PureHome = (props) => {
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
   sectionProps.withTabs = sectionWithTabs;
+  sectionProps.asideInfoPanel = !!gallerySelected;
 
   const hasVisibleContent =
     !isEmptyPage ||

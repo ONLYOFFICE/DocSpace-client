@@ -146,7 +146,7 @@ const Styled = styled.div`
   }
 `;
 
-const FileTile = ({ item, smallPreview }) => {
+const FileTile = ({ item, smallPreview, onClickInfo }) => {
   const previewSrc = item?.attributes.card_prewiew.data?.attributes.url;
 
   return (
@@ -165,7 +165,7 @@ const FileTile = ({ item, smallPreview }) => {
         </div>
       </div>
 
-      <div className="info-icon">
+      <div className="info-icon" onClick={onClickInfo}>
         <ReactSVG src={InfoReactSvgUrl} className="icon" />
       </div>
     </Styled>

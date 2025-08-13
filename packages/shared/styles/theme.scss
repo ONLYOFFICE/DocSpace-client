@@ -2179,6 +2179,14 @@
 }
 
 .light {
+  --services-text-description: #{$gray-text};
+}
+
+.dark {
+  --services-text-description: #{$gray-dark-text};
+}
+
+.light {
   --modal-dialog-border-color: #{$gray-light-mid};
 }
 

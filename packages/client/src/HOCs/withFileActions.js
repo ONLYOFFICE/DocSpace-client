@@ -79,11 +79,17 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging, isDisabledDropItem, item } =
-        this.props;
+      const {
+        isTrashFolder,
+        dragging,
+        setDragging,
+        isDisabledDropItem,
+        item,
+        isRecentFolder,
+      } = this.props;
       const { fileExst, isFolder, id } = item;
 
-      if (isTrashFolder || isDisabledDropItem)
+      if (isTrashFolder || isRecentFolder || isDisabledDropItem)
         return dragging && setDragging(false);
       if (!fileExst && isFolder) {
         this.onDropZoneUpload(items, id);
@@ -474,6 +480,7 @@ export default function withFileActions(WrappedFileItem) {
         isRoomsFolder ||
         isArchiveFolder ||
         isTemplatesFolder ||
+        isRecentFolder ||
         settingsStore.currentDeviceType !== DeviceType.desktop ||
         inProgress;
 

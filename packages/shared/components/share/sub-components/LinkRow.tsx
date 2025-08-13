@@ -27,11 +27,15 @@
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import classNames from "classnames";
-
+import { useTheme } from "styled-components";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import CopyIconLight from "PUBLIC_DIR/images/icons/16/copy-light.react.svg?url";
+import CopyIconLightHovered from "PUBLIC_DIR/images/icons/16/copy-light-hovered.react.svg?url";
+import CopyIconDark from "PUBLIC_DIR/images/icons/16/copy-dark.react.svg?url";
+import CopyIconDarkHovered from "PUBLIC_DIR/images/icons/16/copy-dark-hovered.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
 import { isMobile } from "../../../utils";
@@ -78,8 +82,11 @@ const LinkRow = ({
   removedExpiredLink,
   isFormRoom,
 }: LinkRowProps) => {
+  const theme = useTheme();
+
   const { t } = useTranslation("Common");
   const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
+  const [copyIconIsHovered, setCopyIconIsHovered] = useState(false);
 
   const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
   const accessOptions = availableExternalRights
@@ -146,6 +153,14 @@ const LinkRow = ({
       const linkTitle = link.sharedTo.title;
 
       const isLoaded = loadingLinks.includes(link.sharedTo.id);
+
+      const copyImage = theme.isBase
+        ? copyIconIsHovered
+          ? CopyIconLightHovered
+          : CopyIconLight
+        : copyIconIsHovered
+          ? CopyIconDarkHovered
+          : CopyIconDark;
 
       return (
         <div
@@ -232,15 +247,27 @@ const LinkRow = ({
           </div>
           <div className={styles.linkActions}>
             {!isArchiveFolder ? (
-              <IconButton
-                className={styles.linkActionsCopyIcon}
-                size={16}
-                iconName={CopyIcon}
-                onClick={() => onCopyLink(link)}
-                title={t("Common:CopySharedLink")}
-                isDisabled={isExpiredLink || isLoaded}
-                dataTestId={`info_panel_share_copy_link_button_${index}`}
-              />
+              isRoomsLink ? (
+                <img
+                  className={styles.linkActionsCopyIcon}
+                  src={copyImage}
+                  onMouseEnter={() => setCopyIconIsHovered(true)}
+                  onMouseLeave={() => setCopyIconIsHovered(false)}
+                  onClick={() => onCopyLink(link)}
+                  alt={link.sharedTo.shareLink}
+                  title={t("Common:CopySharedLink")}
+                />
+              ) : (
+                <IconButton
+                  className={styles.linkActionsCopyIcon}
+                  size={16}
+                  iconName={CopyIcon}
+                  onClick={() => onCopyLink(link)}
+                  title={t("Common:CopySharedLink")}
+                  isDisabled={isExpiredLink || isLoaded}
+                  dataTestId={`info_panel_share_copy_link_button_${index}`}
+                />
+              )
             ) : null}
             {isRoomsLink ? (
               <>

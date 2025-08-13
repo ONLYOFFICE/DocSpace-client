@@ -44,7 +44,7 @@ const ResetConfirmationModal = (props) => {
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <Text noSelect>{t("Common:ConfirmationText")}</Text>
+        <Text>{t("Common:ConfirmationText")}</Text>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>

@@ -64,6 +64,10 @@ type SectionBodyContentProps = {
   openItem?: ContactsHotkeysStore["openItem"];
   onClickBack?: FilesActionStore["onClickBack"];
   getTfaType?: TfaStore["getTfaType"];
+  enableSelection: ContactsHotkeysStore["enableSelection"];
+  viewAs: PeopleStore["viewAs"];
+  membersSelection: UsersStore["selection"];
+  groupsSelection: GroupsStore["selection"];
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -87,9 +91,16 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     openItem,
     onClickBack,
     getTfaType,
+    enableSelection,
+    viewAs,
+    membersSelection,
+    groupsSelection,
   } = props;
 
   const location = useLocation();
+
+  const selection =
+    currentView !== "groups" ? membersSelection : groupsSelection;
 
   useAccountsHotkeys({
     enabledHotkeys: enabledHotkeys!,
@@ -101,6 +112,9 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     deselectAll: deselectAll!,
     openItem: openItem!,
     onClickBack: onClickBack!,
+    enableSelection,
+    viewAs,
+    selection,
   });
 
   const onMouseDown = useCallback(
@@ -178,6 +192,7 @@ export default inject(
       contactsHotkeysStore,
 
       enabledHotkeys,
+      viewAs,
     } = peopleStore;
     const {
       isFiltered,
@@ -186,11 +201,13 @@ export default inject(
       selectUser,
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
+      selection: membersSelection,
     } = usersStore!;
 
     const {
       setSelection: setGroupsSelection,
       setBufferSelection: setGroupsBufferSelection,
+      selection: groupsSelection,
     } = groupsStore!;
 
     const { setChangeOwnerDialogVisible } = dialogStore!;
@@ -205,6 +222,8 @@ export default inject(
       selectAll,
       deselectAll,
       openItem,
+
+      enableSelection,
     } = contactsHotkeysStore!;
 
     const { onClickBack } = filesActionsStore;
@@ -233,6 +252,11 @@ export default inject(
       onClickBack,
 
       getTfaType,
+
+      enableSelection,
+      viewAs,
+      membersSelection,
+      groupsSelection,
     };
   },
 )(

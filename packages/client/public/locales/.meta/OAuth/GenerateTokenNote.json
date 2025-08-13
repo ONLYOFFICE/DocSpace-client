@@ -3,7 +3,7 @@
   "content": "<strong>Note:</strong> If you generate a new token, the previous one will no longer be valid.",
   "content_en_sha1_hash": "f521006595ab27df60cadaa644588ccfca4ed058",
   "created_at": "2025-05-19T21:30:53.897Z",
-  "updated_at": "2025-08-04T07:30:01.441Z",
+  "updated_at": "2025-08-12T19:46:26.142Z",
   "comment": {
     "text": "This translation key is used to display a note that informs users about the implications of generating a new token, explaining that the previous one will become invalid. It appears in a dialog component, specifically below a button related to OAuth token generation. The goal is to provide context for translators to ensure that this message accurately communicates its meaning and purpose in different languages.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
       "line_number": 198,
-      "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text noSelect>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
+      "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/GenerateDeveloperTokenDialog.tsx",
       "line_number": 198,
-      "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }} noSelect>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text noSelect>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
+      "context": "</Text>\n <Text style={{ marginBottom: \"16px\" }}>\n {t(\"OAuth:GenerateTokenScope\")}\n </Text>{\" \"}\n <Text>\n <Trans t={t} i18nKey=\"GenerateTokenNote\" ns=\"OAuth\" />\n </Text>\n </>\n ) : (\n <>\n <Text style={{ marginBottom: \"16px\" }}>",
       "module": "/packages/client"
     }
   ],

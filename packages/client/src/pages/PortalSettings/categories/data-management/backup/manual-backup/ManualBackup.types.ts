@@ -26,7 +26,7 @@
 
 import type { TTranslation } from "@docspace/shared/types";
 import type { TFolder } from "@docspace/shared/api/files/types";
-import type { ManualBackupProps } from "@docspace/shared/pages/manual-backup/ManualBackup.types";
+import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-backup/ManualBackup.types";
 
 export interface InjectedManualBackupProps
   extends Omit<

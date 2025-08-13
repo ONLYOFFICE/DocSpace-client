@@ -183,7 +183,7 @@ export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-const SDK_VERSION = "2.0.0";
+const SDK_VERSION = "2.1.0";
 
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
@@ -243,3 +243,7 @@ export const THIRD_PARTY_SERVICES_URL =
   "/portal-settings/integration/third-party-services?service=";
 
 export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
+
+// any unicode letters are allowed, characters are prohibited
+export const BRAND_NAME_REGEX =
+  /^[^\s-]([^<>\/\\|:*?"'`~!@#$%^&()+={}[\];,.])*[^\s-]$/;

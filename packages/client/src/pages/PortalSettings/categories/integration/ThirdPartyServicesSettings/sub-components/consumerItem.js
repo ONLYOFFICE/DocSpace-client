@@ -122,6 +122,7 @@ const ConsumerItem = ({
             updateConsumerProps={updateConsumerProps}
             t={t}
             isDisabled={!isThirdPartyAvailable}
+            dataTestId="consumer_toggle_button"
           />
         </div>
       </div>

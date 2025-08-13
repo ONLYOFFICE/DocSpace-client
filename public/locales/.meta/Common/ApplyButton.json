@@ -3,7 +3,7 @@
   "content": "Apply",
   "content_en_sha1_hash": "cfea419c3b4e8b02ee586e70a28bf846e44cdda4",
   "created_at": "2025-05-19T21:30:43.032Z",
-  "updated_at": "2025-06-30T12:20:31.260Z",
+  "updated_at": "2025-08-11T18:11:59.153Z",
   "comment": {
     "text": "The \"Apply\" translation key is used to display the label for an apply button that confirms changes or applies settings in a color selection dialog. It appears as part of a larger dialog component and is also referenced as the primary action button within another variant of the same dialog. This translation can be found on buttons with the id \"applyButtonLabel\" in various dialogs.",
     "is_auto": true,
@@ -12,62 +12,68 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/index.tsx",
-      "line_number": 310,
-      "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n />\n <Button\n scale\n tabIndex={0}",
+      "line_number": 311,
+      "context": "<Button\n scale\n primary\n tabIndex={0}\n size={ButtonSize.normal}\n label={t(\"Common:ApplyButton\")}\n onClick={handleSubmit}\n testId=\"room_logo_cover_apply_button\"\n />\n <Button\n scale",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 165,
+      "line_number": 172,
       "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/RoomLogoCoverDialog/sub-components/SelectColor/SelectColor.tsx",
-      "line_number": 165,
+      "line_number": 172,
       "context": "onClose={() => setOpenColorPicker(false)}\n onApply={onApply}\n isPickerOnly\n handleChange={onApply}\n appliedColor={selectedColor!}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n />\n </ModalDialog.Body>\n </StyledModalDialog>\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 464,
+      "line_number": 477,
       "context": "onClick: onIndexReorder,\n iconUrl: RoundedArrowSvgUrl,\n },\n {\n id: \"save-index\",\n label: t(\"Common:ApplyButton\"),\n onClick: onIndexApply,\n iconUrl: CheckIcon,\n },\n ]\n : isContactsPage",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 597,
+      "line_number": 601,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 597,
+      "line_number": 601,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 597,
+      "line_number": 601,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 597,
+      "line_number": 601,
       "context": "<ColorPicker\n id=\"buttons-hex\"\n onClose={onCloseHexColorPickerButtons}\n onApply={onAppliedColorButtons}\n appliedColor={appliedColorButtons}\n applyButtonLabel={t(\"Common:ApplyButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n hexCodeLabel={t(\"Settings:HexCode\")}\n />\n </StyledBodyContent>\n </ModalDialog.Body>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory/sub-components/FilterDialog/index.js",
       "line_number": 158,
-      "context": "{!areFiltersChanged ? (\n <ModalDialog.Footer>\n <Footer>\n <Button\n className=\"apply-button\"\n label={t(\"Common:ApplyButton\")}\n size=\"normal\"\n primary\n onClick={handleApplyFilters}\n isDisabled={filters.deliveryTo <= filters.deliveryFrom}\n />",
+      "context": "{!areFiltersChanged ? (\n <ModalDialog.Footer>\n <Footer>\n <Button\n className=\"apply-button\"\n label={t(\"Common:ApplyButton\")}\n size=\"normal\"\n primary\n onClick={handleApplyFilters}\n isDisabled={filters.deliveryTo <= filters.deliveryFrom}\n testId=\"apply_filter_button\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/TransactionHistory.tsx",
+      "line_number": 426,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n onClick={onApplyFilter}\n size={ButtonSize.medium}\n label={t(\"Common:ApplyButton\")}\n isDisabled={!isChanged}\n primary\n scale\n testId=\"apply_filter_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/filter/sub-components/FilterBlock.tsx",
-      "line_number": 611,
-      "context": "<ModalDialog.Footer>\n <Button\n id=\"filter_apply-button\"\n size={ButtonSize.normal}\n primary\n label={t(\"Common:ApplyButton\")}\n scale\n onClick={onFilterAction}\n isDisabled={!showFooter}\n />\n <Button",
+      "line_number": 616,
+      "context": "<ModalDialog.Footer>\n <Button\n id=\"filter_apply-button\"\n size={ButtonSize.normal}\n primary\n label={t(\"Common:ApplyButton\")}\n scale\n onClick={onFilterAction}\n isDisabled={!showFooter}\n testId=\"filter_apply_button\"\n />",
       "module": "/packages/shared"
     }
   ],
@@ -90,8 +96,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Tətbiq et\" literally means \"Apply it\". While it can be used in some contexts, for a generic \"Apply\" button, a more appropriate translation would be \"Müraciət et\" or \"Qoşul\" depending on the context of the button.",
-          "suggestion": "Consider using \"Müraciət et\" or \"Qoşul\" for a more accurate translation of 'Apply'."
+          "description": "The provided Azerbaijani translation 'Tətbiq et' literally translates to 'Apply it'. While potentially usable, it's not the most natural or idiomatic translation of 'Apply' in the context of a button label. A more common and user-friendly translation would be 'Daha da' (meaning 'Continue') or a shorter 'Yalnaşdır' (meaning 'Proceed').",
+          "suggestion": "Consider 'Daha da' or 'Yalnaşdır' for a more natural and common translation. The best option would depend on the overall UI context."
         }
       ],
       "approved_at": null
@@ -108,8 +114,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Aplikovat\" is a valid Czech word, it's not the most natural or common translation of \"Apply\" in a user interface context (like a button). It's more formal and technical.",
-          "suggestion": "Consider \"Použít\" or \"Zapsat\" as more suitable alternatives. \"Použít\" is generally a good choice for a button label meaning 'Apply', and 'Zapsat' is good if it specifically means 'Register' or 'Enrol'."
+          "description": "While 'Aplikovat' is a valid Czech word, it's not the most natural or common translation for 'Apply' in the context of a button label, particularly in UI/UX. It can sound overly formal or technical. A more common and user-friendly translation would be 'Použít' or 'Získat'.",
+          "suggestion": "Consider 'Použít' or 'Získat' instead of 'Aplikovat'."
         }
       ],
       "approved_at": null
@@ -120,8 +126,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The German translation \"Übernehmen\" does not accurately convey the meaning of \"Apply\" in the context of a button. It generally means \"to take over\" or \"to accept\", which is not the intended action of applying for something.",
-          "suggestion": "Consider using a more appropriate translation such as \"Bewerben\" (to apply) or \"Anwenden\" (to apply/use), depending on the precise context of the button."
+          "description": "The German translation \"Übernehmen\" does not accurately convey the meaning of \"Apply\" in the context of a button. \"Übernehmen\" generally means 'to take over' or 'to accept'. A more appropriate translation would be 'Anwenden' or 'Verwenden'.",
+          "suggestion": "Consider 'Anwenden' or 'Verwenden' for a more accurate translation."
         }
       ],
       "approved_at": null
@@ -144,7 +150,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Finnish translation \"Käytä\" translates to 'Use' or 'Apply (as in apply something to something else)'. While it can sometimes be used in the context of applying for something, it's not the most natural or accurate translation of 'Apply' in a button context, which typically means 'Submit' or 'Request'.",
+          "description": "The Finnish translation \"Käytä\" is a general verb meaning \"to use\" or \"to apply\" in a broad sense. In the context of a button labeled 'Apply', a more accurate translation would be 'Hae' which specifically means 'to apply for' or 'to seek'.",
           "suggestion": "Hae"
         }
       ],
@@ -192,8 +198,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Latvian translation \"Piemērot\" is a correct word, but it doesn't accurately convey the meaning of 'Apply' in the context of a button. 'Piemērot' means 'suitable' or 'appropriate'. A more accurate translation for an 'Apply' button would be 'Pieteikties'.",
-          "suggestion": "Pieteikties"
+          "description": "The Latvian translation \"Piemērot\" while technically meaning 'suitable' or 'appropriate', is not the typical or expected translation for an 'Apply' button. It's not conveying the intended meaning of submitting an application.",
+          "suggestion": "Likumīgs/Apmeklēt/Iesniegt (depending on the application context - 'Submit', 'Visit', 'Submit Application')"
         }
       ],
       "approved_at": null
@@ -210,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Zatwierdź' can mean 'Apply' in some contexts, it more commonly translates to 'Confirm' or 'Approve'. 'Apply' in a UI element like a button often implies initiating an application process, which 'Zatwierdź' doesn't convey.",
-          "suggestion": "Consider 'Aplikuj' or 'Wniosej' for a more accurate translation of 'Apply' in this context, as they directly imply initiating an application."
+          "description": "While 'Zatwierdź' is a valid Polish word, it more accurately translates to 'Confirm' or 'Approve' rather than 'Apply' in most contexts. 'Apply' often implies a process of submission or request, which 'Zatwierdź' doesn't convey.",
+          "suggestion": "Consider 'Aplikuj' (which is a direct transliteration and is gaining usage) or 'Wniosek' (meaning 'application') depending on the context. 'Zastosuj' could also work in some situations."
         }
       ],
       "approved_at": null
@@ -234,7 +240,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation \"Aplicare\" while technically meaning 'application' or 'applying,' doesn't directly convey the meaning of 'Apply' (as in, press the button to apply). A more appropriate translation might be 'Aplică' or 'Aplică acum' to imply action.",
+          "description": "While \"Aplicare\" is a valid Romanian word, it doesn't directly translate \"Apply\" in the context of a button. It's more aligned with 'Application' or 'To Apply'. A more common and appropriate translation for an 'Apply' button would be 'Aplică'.",
           "suggestion": "Aplică"
         }
       ],
@@ -252,8 +258,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'යොදන්න' (yodanna) can mean 'apply', it's generally used for applying something *to* something else. For a button labeled 'Apply' (as in, apply *for* a job or service), a more appropriate translation would be 'ඉsubmit' (isubmit) or ' අයදුම් කරන්න' (ayadamu karanna).",
-          "suggestion": "Consider 'ඉsubmit' (isubmit) or ' අයදුම් කරන්න' (ayadamu karanna)"
+          "description": "The Sinhala translation \"යොදන්න\" (yodanna) while meaning 'to apply' or 'to attach', doesn't perfectly capture the intended meaning of 'Apply' in a button context (e.g., apply for a job, apply for a loan). A more contextually appropriate translation would be 'ඉsubmit' (isubmit) which is a transliteration of 'submit' and frequently used in Sri Lankan Sinhala for button labels, or ' අයදුම් කරන්න' (ayadum karanna) which translates to 'to apply'.",
+          "suggestion": "Consider 'ඉsubmit' (isubmit) or ' අයදුම් කරන්න' (ayadum karanna)"
         }
       ],
       "approved_at": null
@@ -264,8 +270,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Použiť' can mean 'Apply', it's more accurately translated as 'Use'. 'Apply' in the context of a button (e.g., 'Apply for a job', 'Apply changes') would be better translated as 'Prihlásiť sa' or 'Odoslať' depending on the specific button functionality. 'Použiť' is too general.",
-          "suggestion": "Consider 'Prihlásiť sa' (for application forms) or 'Odoslať' (for submitting). The best translation depends on the context."
+          "description": "The Slovak translation 'Použiť' while technically meaning 'to use', doesn't accurately convey the meaning of 'Apply' in the context of a button. It implies a general usage rather than a submission or application.",
+          "suggestion": "Consider alternatives like 'Odoslať' (Submit), 'Prijať' (Accept), or 'Zaregistrovať sa' (Register) depending on the specific function of the button."
         }
       ],
       "approved_at": null
@@ -276,8 +282,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Uporabi' while literally meaning 'Use' or 'Apply', doesn't fully convey the meaning of 'Apply' in the context of a button that submits a form or initiates an action. A more appropriate translation would be 'Prijavi' or 'Potrdi'.",
-          "suggestion": "Prijavi"
+          "description": "While 'Uporabi' is a valid Slovenian word, it doesn't perfectly capture the meaning of 'Apply' in the context of a button. 'Apply' often implies submitting or confirming an action. 'Uporabi' means 'Use' or 'Apply (something to something else).'",
+          "suggestion": "Consider 'Prijavi' (Submit), 'Potrdi' (Confirm), or 'Nanesti' (Apply) depending on the specific context of the button."
         }
       ],
       "approved_at": null
@@ -288,7 +294,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Cyrillic) translation 'Примени' doesn't accurately translate 'Apply' in the context of a button. It means 'Apply' in the sense of 'to apply something' (like a filter or setting), not 'to submit an application'. A more appropriate translation would be 'Пријави' or 'Aплицирај'.",
+          "description": "The Serbian (Cyrillic) translation \"Примени\" is the imperative form of the verb \"primijeniti\" (to apply), which translates more accurately as \"Apply it\" or \"Implement.\" The standard translation of \"Apply\" as a button label should be \"Пријави\" (Prijavi).",
           "suggestion": "Пријави"
         }
       ],
@@ -300,8 +306,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian (Latin) translation \"Primeni\" is not the correct translation for \"Apply\".  \"Apply\" in this context typically translates to \"Prijavi se\" or \"Aplikuj\" in Serbian (Latin). \"Primeni\" means 'apply' in a different sense - to apply something to something else.",
-          "suggestion": "Prijavi se"
+          "description": "The Serbian (Latin) translation \"Primeni\" is not the accurate translation of \"Apply\". It's a verb form (third person singular present tense) of \"primijeniti\" (to apply) but not the noun \"Apply\".",
+          "suggestion": "The correct translation of \"Apply\" should be \"Prijava\" or \"Prijavi\" depending on the context (noun or verb)."
         }
       ],
       "approved_at": null
@@ -330,8 +336,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "'应用' (Yingyong) generally translates to 'application' or 'apply for' rather than simply 'Apply'. While it can be used in some contexts, it’s not the most direct or natural translation for a button labeled 'Apply'. It lacks the directness implied by the English term in a user interface context.",
-          "suggestion": "考虑使用“申请” (Shenqing) or “提交” (Tijiao) depending on the function of the button. '申请' (Shenqing) is closer to 'Apply' when referring to an application. '提交' (Tijiao) is suitable if the button submits a form."
+          "description": "The translation \"应用\" (Yingyong) generally means \"application\" or \"apply for\" in the context of software or formal processes.  In this case, it likely does not accurately convey the meaning of a simple \"Apply\" button (e.g., to submit a form or request).",
+          "suggestion": "Consider using \"申请\" (Shenqing) for \"Apply\" when referring to a request or submission, or \"提交\" (Tijiao) for \"Submit\"."
         }
       ],
       "approved_at": null

@@ -40,6 +40,12 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { getUserFilter } from "@docspace/shared/utils/userFilterUtils";
+import {
+  FILTER_DOCUMENTS,
+  FILTER_TRASH,
+} from "@docspace/shared/utils/filterConstants";
+
 import Banner from "./Banner";
 import Items from "./Items";
 
@@ -61,7 +67,6 @@ const ArticleBodyContent = (props) => {
     isVisitor,
     setIsLoading,
 
-    clearFiles,
     selectedFolderId,
     showArticleLoader,
     setIsBurgerLoading,
@@ -73,6 +78,8 @@ const ArticleBodyContent = (props) => {
     setContactsTab,
 
     displayBanners,
+    startDrag,
+    setDropTargetPreview,
   } = props;
 
   const location = useLocation();
@@ -100,14 +107,11 @@ const ArticleBodyContent = (props) => {
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
 
-          const filterStorageItem =
-            userId && localStorage.getItem(`UserFilter=${userId}`);
+          if (userId) {
+            const filterObj = getUserFilter(`${FILTER_DOCUMENTS}=${userId}`);
 
-          if (filterStorageItem) {
-            const splitFilter = filterStorageItem.split(",");
-
-            myFilter.sortBy = splitFilter[0];
-            myFilter.sortOrder = splitFilter[1];
+            if (filterObj?.sortBy) myFilter.sortBy = filterObj.sortBy;
+            if (filterObj?.sortOrder) myFilter.sortOrder = filterObj.sortOrder;
           }
 
           params = myFilter.toUrlParams();
@@ -131,14 +135,13 @@ const ArticleBodyContent = (props) => {
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
 
-          const filterStorageTrash =
-            userId && localStorage.getItem(`UserFilterTrash=${userId}`);
+          if (userId) {
+            const filterTrashObj = getUserFilter(`${FILTER_TRASH}=${userId}`);
 
-          if (filterStorageTrash) {
-            const splitFilterTrash = filterStorageTrash.split(",");
-
-            recycleBinFilter.sortBy = splitFilterTrash[0];
-            recycleBinFilter.sortOrder = splitFilterTrash[1];
+            if (filterTrashObj?.sortBy)
+              recycleBinFilter.sortBy = filterTrashObj.sortBy;
+            if (filterTrashObj?.sortOrder)
+              recycleBinFilter.sortOrder = filterTrashObj.sortOrder;
           }
 
           params = recycleBinFilter.toUrlParams();
@@ -191,13 +194,6 @@ const ArticleBodyContent = (props) => {
         ? window.location.pathname.includes("accounts") &&
           !window.location.pathname.includes("groups")
         : !!selectedFolderId;
-
-      if (isAccountsClick) {
-        clearFiles();
-        setContactsTab("people");
-      } else {
-        setContactsTab(false);
-      }
 
       setHashDate(getHashDate);
 
@@ -275,6 +271,25 @@ const ArticleBodyContent = (props) => {
     setIsBurgerLoading(showArticleLoader);
   }, [showArticleLoader]);
 
+  const onMouseMoveArticle = React.useCallback(
+    (e) => {
+      const wrapperElement = document.elementFromPoint(e.clientX, e.clientY);
+      const droppable = wrapperElement?.closest(".droppable");
+      const documentTitle = droppable?.getAttribute("data-document-title");
+
+      if (droppable) setDropTargetPreview(documentTitle);
+    },
+    [setDropTargetPreview],
+  );
+
+  React.useEffect(() => {
+    if (startDrag) document.addEventListener("mousemove", onMouseMoveArticle);
+
+    return () => {
+      document.removeEventListener("mousemove", onMouseMoveArticle);
+    };
+  }, [startDrag, onMouseMoveArticle]);
+
   if (showArticleLoader) return <ArticleFolderLoader />;
 
   return (
@@ -309,8 +324,11 @@ export default inject(
     userStore,
     campaignsStore,
     peopleStore,
+    uploadDataStore,
   }) => {
-    const { clearFiles, setSelection, roomsFilter } = filesStore;
+    const { clearFiles, setSelection, roomsFilter, startDrag } = filesStore;
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
     const {
       showArticleLoader,
 
@@ -379,6 +397,8 @@ export default inject(
       setContactsTab: peopleStore.usersStore.setContactsTab,
 
       displayBanners,
+      startDrag,
+      setDropTargetPreview,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

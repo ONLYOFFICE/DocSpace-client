@@ -3,7 +3,7 @@
   "content": "Folders",
   "content_en_sha1_hash": "19adc47be34bed86af37b8e8dc882af424402561",
   "created_at": "2025-05-19T21:30:45.434Z",
-  "updated_at": "2025-06-08T12:02:32.689Z",
+  "updated_at": "2025-08-12T19:46:26.020Z",
   "comment": {
     "text": "The translation key \"Folders\" is used to display a heading or label for folders in the user interface. It appears in various places, such as tiles and filters, to provide clear identification of folder-related content. Translators should focus on conveying a consistent meaning across different contexts.",
     "is_auto": true,
@@ -11,44 +11,44 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 301,
-      "context": "return text(getProviderTranslation(this.item.providerKey, this.t));\n };\n \n getItemContent = () => {\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 336,
+      "context": "getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/FilesTileContainer.js",
-      "line_number": 141,
-      "context": "<TileContainer\n isDesc={isDesc}\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n >\n {filesListNode}\n </TileContainer>\n </FileTileProvider>",
+      "line_number": 162,
+      "context": "<TileContainer\n isDesc={isDesc}\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n noSelect={!withContentSelection}\n >\n {filesListNode}\n </TileContainer>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 590,
+      "line_number": 595,
       "context": "switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 590,
+      "line_number": 595,
       "context": "switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():\n label = t(\"Common:Spreadsheets\");\n break;\n case FilterType.ArchiveOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 101,
+      "line_number": 110,
       "context": "];\n \n const fileOptions = [\n {\n key: FilterType.FoldersOnly,\n label: t(`Common:Folders`),\n },\n {\n key: FilterType.DocumentsOnly,\n label: t(`Common:Documents`),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 148,
-      "context": "label: t(\"Common:Documents\"),\n typeKey: FilterType.DocumentsOnly,\n },\n {\n key: \"filter-type-folders\",\n label: t(\"Common:Folders\"),\n typeKey: FilterType.FoldersOnly,\n },\n {\n key: \"filter-type-spreadsheets\",\n label: t(\"Common:Spreadsheets\"),",
+      "line_number": 138,
+      "context": "];\n \n const filterOptions = [\n {\n key: \"filter-type-folders\",\n label: t(\"Common:Folders\"),\n typeKey: FilterType.FoldersOnly,\n },\n {\n key: \"filter-type-all\",\n label: t(\"Common:Files\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 345,
+      "line_number": 350,
       "context": ") => {\n switch (key) {\n case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:",
       "module": "/packages/shared"
     }
@@ -162,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While 'Foldery' is a possible pluralization of 'Folder', it's not the standard or most natural Polish translation for 'Folders' in a UI context.  'Foldery' can sound slightly informal or diminutive.",
-          "suggestion": "Foldery"
+          "description": "The Polish translation \"Foldery\" is a plural form, while the English \"Folders\" is a singular/plural noun. A more appropriate translation might depend on the context. Without further context, \"Foldery\" isn't necessarily wrong, but could be overly pluralized.",
+          "suggestion": "Consider if 'Folder' (singular) or a more contextually accurate plural is needed."
         }
       ],
       "approved_at": null
@@ -216,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Фолдери\" is a transliteration and somewhat common usage, a more accurate and natural Serbian (Cyrillic) translation for \"Folders\" would be \"Чашице\" (pronounced 'Chashice'). \"Фолдери\" sounds like a borrowed term and might not resonate with all users.",
-          "suggestion": "Чашице"
+          "description": "The Serbian (Cyrillic) translation \"Фолдери\" is a transliteration of the English word \"Folders\" and not a true translation.  A more appropriate Serbian translation would be \"Чамавци\" (Čamovci). While \"Фолдери\" might be understood in some contexts due to the influence of English, it's not standard Serbian and lacks the nuance of the original term.",
+          "suggestion": "Чамавци (Čamovci)"
         }
       ],
       "approved_at": null

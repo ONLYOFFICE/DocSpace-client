@@ -3,7 +3,7 @@
   "content": "Groups were deleted successfully",
   "content_en_sha1_hash": "583bba7040608f8de20a30e546a10a26271233d7",
   "created_at": "2025-05-19T21:30:53.526Z",
-  "updated_at": "2025-06-18T17:11:42.544Z",
+  "updated_at": "2025-08-12T19:46:26.302Z",
   "comment": {
     "text": "The \"Groups were deleted successfully\" translation key is used to display a success message after deleting groups. It will appear when the user deletes a group and is associated with a confirmation dialog or button action in the GroupsStore.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 428,
+      "line_number": 454,
       "context": "Promise.all(\n this.selection.map(async (group) => groupsApi.deleteGroup(group.id)),\n ).then(() => {\n toastr.success(\n t(\n \"PeopleTranslations:SuccessDeleteGroups\",\n ) as unknown as React.ReactNode,\n );\n this.setSelection([]);\n this.getGroups(this.groupsFilter, true);\n this.setIsLoading(false);",
       "module": "/packages/client"
     }
@@ -69,7 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "grammar",
+          "description": "The Finnish translation 'Ryhmät ovat onnistuneesti poistettu' is grammatically awkward. The passive voice is less common and sounds unnatural in this context.",
+          "suggestion": "Ryhmät poistettiin onnistuneesti"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -156,8 +162,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'සමූහ සාර්ථකව මැකිණි' is not the most natural or accurate translation of 'Groups were deleted successfully'. 'සමූහ' (samūha) translates to 'groups' but the overall phrasing is slightly awkward.  A more natural translation would convey a sense of completion and success.",
-          "suggestion": "සාර්ථකව සමූහයන් ඉවත් කරන ලදි"
+          "description": "The translation 'සමූහ සාර්ථකව මැකිණි' is not an accurate translation of 'Groups were deleted successfully'. 'සමූහ' means 'groups' but using it in this way is not idiomatic. The verb 'මැකිණි' while meaning 'vanished' or 'disappeared', doesn't quite capture the sense of deletion in this context.",
+          "suggestion": "A more accurate translation would be something like 'මණ්ඩලයන් සාර්ථකව නිලන්විත කරන ලදී' (Mandalayan saarthaka niilaniithaka karana ladi) or 'මණ්ඩලයන් සාර්ථකව ඉවත් කරන ලදී' (Mandalayan saarthaka ivaathakaraṇa ladi)."
         }
       ],
       "approved_at": null
@@ -180,8 +186,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Serbian translation 'Групе су успешно обрисане' translates literally to 'Groups were successfully deleted'. The correct plural form of 'group' in Serbian is 'групе' (grupe), but the sentence structure is slightly awkward. A more natural phrasing would be 'Успјешно су обрисане групе' or 'Обрисане су групе успешно'.",
-          "suggestion": "Успјешно су обрисане групе"
+          "description": "The Serbian translation 'Групе су успешно обрисане' translates to 'Groups were successfully deleted'. The correct wording should be in the plural form to match the English \"Groups\".",
+          "suggestion": "Grupe su uspešno obrisane"
         }
       ],
       "approved_at": null

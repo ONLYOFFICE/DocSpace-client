@@ -93,7 +93,7 @@ export const AdditionalResources = ({
           "settings_unavailable",
         )}
       >
-        {t("AdditionalResourcesDescription", {
+        {t("Common:AdditionalResourcesDescription", {
           productName: t("Common:ProductName"),
         })}
       </div>
@@ -125,11 +125,13 @@ export const AdditionalResources = ({
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:Restore")}
         displaySettings
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         showReminder={(isSettingPaid && hasChanges) || isLoading}
         disableRestoreToDefault={additionalResourcesIsDefault || isLoading}
         additionalClassSaveButton="additional-resources-save"
         additionalClassCancelButton="additional-resources-cancel"
+        saveButtonDataTestId="additional-resources-save-button"
+        cancelButtonDataTestId="additional-resources-cancel-button"
       />
     </div>
   );

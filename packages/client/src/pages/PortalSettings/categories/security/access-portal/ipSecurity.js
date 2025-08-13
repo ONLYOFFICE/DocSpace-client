@@ -247,6 +247,7 @@ const IpSecurity = (props) => {
         {ipSettingsUrl ? (
           <Link
             className="link-learn-more"
+            dataTestId="ip_security_component_learn_more"
             color={currentColorScheme.main?.accent}
             target="_blank"
             isHovered
@@ -264,16 +265,19 @@ const IpSecurity = (props) => {
         name="group"
         orientation="vertical"
         spacing="8px"
+        dataTestId="ip_security_radio_button_group"
         options={[
           {
             id: "ip-security-disabled",
             label: t("Common:Disabled"),
             value: "disabled",
+            dataTestId: "ip_security_disabled",
           },
           {
             id: "ip-security-enable",
             label: t("Common:Enable"),
             value: "enable",
+            dataTestId: "ip_security_enabled",
           },
         ]}
         selected={enable ? "enable" : "disabled"}
@@ -291,6 +295,9 @@ const IpSecurity = (props) => {
           regexp={regexp}
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
+          inputDataTestId="ip_security_ip_input"
+          deleteIconDataTestId="ip_security_delete_ip_icon"
+          addButtonDataTestId="ip_security_add_ip_button"
         />
       ) : null}
 
@@ -310,7 +317,7 @@ const IpSecurity = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
+        reminderText={t("Common:YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
@@ -318,6 +325,8 @@ const IpSecurity = (props) => {
         isSaving={isSaving}
         additionalClassSaveButton="ip-security-save"
         additionalClassCancelButton="ip-security-cancel"
+        saveButtonDataTestId="ip_security_save_button"
+        cancelButtonDataTestId="ip_security_cancel_button"
       />
     </MainContainer>
   );

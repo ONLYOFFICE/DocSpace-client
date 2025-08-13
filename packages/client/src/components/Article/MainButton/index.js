@@ -248,7 +248,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowFormRoomSelectFileDialog = React.useCallback(
     (filter = FilesSelectorFilterTypes.DOCX) => {
-      setSelectFileFormRoomDialogVisible(true, filter);
+      setSelectFileFormRoomDialogVisible(true, filter, true);
     },
     [setSelectFileFormRoomDialogVisible],
   );

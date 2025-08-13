@@ -39,6 +39,7 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
   getInvitationSettings,
+  getUserByEmail,
 } from "@/utils/actions";
 import { logger } from "logger.mjs";
 import CreateUserForm from "./page.client";
@@ -60,6 +61,7 @@ async function Page(props: LinkInviteProps) {
 
   const type = searchParams.type;
   const uid = searchParams.uid;
+  const email = searchParams.email;
   const confirmKey = getStringFromSearchParams(searchParams);
 
   const headersList = await headers();
@@ -73,7 +75,11 @@ async function Page(props: LinkInviteProps) {
     passwordSettings,
     invitationSettings,
   ] = await Promise.all([
-    getUserFromConfirm(uid, confirmKey),
+    uid
+      ? getUserFromConfirm(uid, confirmKey)
+      : email
+        ? getUserByEmail(email, confirmKey)
+        : undefined,
     getSettings(),
     getThirdPartyProviders(true),
     getCapabilities(),
@@ -102,8 +108,8 @@ async function Page(props: LinkInviteProps) {
           passwordSettings={passwordSettings}
           capabilities={capabilities}
           thirdPartyProviders={thirdParty}
-          legalTerms={settings.externalResources.common?.entries.legalterms}
-          licenseUrl={settings.externalResources.common?.entries.license}
+          legalTerms={settings.externalResources?.common?.entries?.legalterms}
+          licenseUrl={settings.externalResources?.common?.entries?.license}
           isStandalone={settings.standalone}
           logoText={settings.logoText}
           invitationSettings={invitationSettings}

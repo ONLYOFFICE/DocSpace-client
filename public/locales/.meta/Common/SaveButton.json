@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2025-06-30T12:20:31.137Z",
+  "updated_at": "2025-08-12T19:46:25.762Z",
   "comment": {
     "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
     "is_auto": true,
@@ -30,13 +30,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 224,
-      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"save\"\n key=\"AvatarEditorSaveBtn\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onSave ? () => onSave(image) : onSaveClick}\n isLoading={isLoading}",
+      "line_number": 234,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"save\"\n key=\"AvatarEditorSaveBtn\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onSave ? () => onSaveAction(image) : onSaveClick}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 182,
+      "line_number": 203,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n className=\"save\"\n key=\"ChangeNameSaveBtn\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n scale\n primary\n onClick={onSaveClick}\n isLoading={isSaving}",
       "module": "/packages/client"
     },
@@ -54,103 +54,109 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/EditRoomDialog.js",
-      "line_number": 330,
+      "line_number": 336,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onEditRoom}\n isDisabled={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EmailChangeDialog/index.tsx",
-      "line_number": 98,
+      "line_number": 99,
       "context": "/>\n </DialogBodyWrapper>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={handleSave}\n isDisabled={hasError}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SettingsPluginDialog/sub-components/Footer.js",
       "line_number": 64,
-      "context": "...saveButtonProps?.props,\n scale: true,\n isSaveButton: true,\n primary: true,\n size: \"normal\",\n label: t(\"Common:SaveButton\"),\n modalRequestRunning,\n setSettingsModalRequestRunning: setModalRequestRunning,\n onCloseAction,\n },\n }}",
+      "context": "...saveButtonProps?.props,\n scale: true,\n isSaveButton: true,\n primary: true,\n size: \"normal\",\n label: t(\"Common:SaveButton\"),\n modalRequestRunning,\n setSettingsModalRequestRunning: setModalRequestRunning,\n onCloseAction,\n testId: \"settings_plugin_save_button\",\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 355,
-      "context": "<ModalDialog.Footer>\n <Button\n scale\n primary\n size=\"normal\"\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n isDisabled={isDisabledSaveButton}\n onClick={onSave}\n />\n <Button\n scale",
+      "line_number": 359,
+      "context": "<ModalDialog.Footer>\n <Button\n scale\n primary\n size=\"normal\"\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n isDisabled={isDisabledSaveButton}\n onClick={onSave}\n testId=\"edit_link_panel_save_button\"\n />\n <Button",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 384,
-      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n />\n <Button\n className=\"cancel-button\"\n scale",
+      "line_number": 393,
+      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n testId=\"template_access_settings_save_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 384,
-      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n />\n <Button\n className=\"cancel-button\"\n scale",
+      "line_number": 393,
+      "context": "className=\"send-invitation\"\n scale\n size={ButtonSize.normal}\n isDisabled={!hasInvitedUsers || isLoading}\n primary\n label={t(\"Common:SaveButton\")}\n onClick={onSubmit}\n testId=\"template_access_settings_save_button\"\n />\n <Button\n className=\"cancel-button\"",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.js",
-      "line_number": 132,
-      "context": "fontSize={13}\n />\n <div className=\"property-comment_editor-editor-buttons\">\n <Button\n isLoading={isLoading}\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n size=\"extraSmall\"\n primary\n />\n <Button",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/CommentEditor.tsx",
+      "line_number": 160,
+      "context": "dataTestId=\"info_panel_details_comment_textarea\"\n />\n <div className=\"property-comment_editor-editor-buttons\">\n <Button\n isLoading={isLoading}\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n size={ButtonSize.extraSmall}\n primary\n testId=\"info_panel_details_comment_save_button\"\n />",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
+      "line_number": 171,
+      "context": "className={styles.saveCancelButtons}\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"ad_management_save_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 187,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n />",
+      "line_number": 191,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSave}\n onCancelClick={onCancel}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"configure_deep_link_save_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/dns-settings.js",
-      "line_number": 264,
+      "line_number": 267,
       "context": "const buttonContainer = standalone ? (\n <Button\n {...buttonProps}\n size={currentDeviceType === DeviceType.desktop ? \"small\" : \"normal\"}\n label={t(\"Common:SaveButton\")}\n onClick={onSaveSettings}\n isDisabled={isLoading || isDefaultDNS || isError || !dnsName}\n isLoading={isLoading}\n />\n ) : (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/language-and-time-zone.js",
-      "line_number": 561,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"\n additionalClassCancelButton=\"language-time-zone-cancel\"",
+      "line_number": 557,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={hasScroll}\n additionalClassSaveButton=\"language-time-zone-save\"\n additionalClassCancelButton=\"language-time-zone-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 361,
-      "context": "tabIndex={11}\n id=\"buttonsPortalRenaming\"\n className=\"save-cancel-buttons\"\n onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}",
+      "line_number": 388,
+      "context": "tabIndex={11}\n id=\"buttonsPortalRenaming\"\n className=\"save-cancel-buttons\"\n onSaveClick={onOpenModal}\n onCancelClick={onCancelPortalName}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n hasScroll={hasScroll}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/welcome-page-settings.js",
-      "line_number": 382,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n additionalClassSaveButton=\"welcome-page-save\"",
+      "line_number": 384,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveGreetingSettings}\n onCancelClick={onRestoreGreetingSettings}\n showReminder={state.showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll={state.hasScroll}\n disableRestoreToDefault={greetingSettingsIsDefault}\n additionalClassSaveButton=\"welcome-page-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/appearance.js",
-      "line_number": 812,
-      "context": "/>\n \n <div className=\"buttons-container\">\n <Button\n className=\"save button\"\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n primary\n size={buttonSize}\n isDisabled={isDisabledSaveButton}\n />",
+      "line_number": 823,
+      "context": "/>\n \n <div className=\"buttons-container\">\n <Button\n className=\"save button\"\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n primary\n size={buttonSize}\n isDisabled={isDisabledSaveButton}\n testId=\"appearance_save_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/sub-components/colorSchemeDialog.js",
-      "line_number": 182,
+      "line_number": 184,
       "context": "</ModalDialog.Body>\n \n <ModalDialog.Footer>\n <Button\n className=\"save\"\n label={t(\"Common:SaveButton\")}\n size=\"normal\"\n primary\n scale\n onClick={onSaveColorSchemeDialog}\n isDisabled={!showSaveButtonDialog}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/ClientForm/index.tsx",
-      "line_number": 452,
+      "line_number": 457,
       "context": "errorFields={errorFields}\n requiredErrorFields={requiredErrorFields}\n onBlur={onBlur}\n />\n <ButtonsBlock\n saveLabel={t(\"Common:SaveButton\")}\n cancelLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n isRequestRunning={isRequestRunning}\n saveButtonDisabled={isEdit ? !isValid : false}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
-      "line_number": 278,
+      "line_number": 281,
       "context": "<ModalDialog.Footer>\n <Footer>\n <Button\n id={isSettingsModal ? \"save-button\" : \"create-button\"}\n label={\n isSettingsModal ? t(\"Common:SaveButton\") : t(\"Common:Create\")\n }\n size=\"normal\"\n primary\n onClick={handleSubmitClick}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 409,
+      "line_number": 417,
       "context": "</div>\n \n <SaveCancelButtons\n onSaveClick={onSubmit}\n onCancelClick={onReset}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Settings:DefaultSettings\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonDisabled={saveButtonDisabled}\n disableRestoreToDefault={\n isDefaultSettings || isSaveLoading || isResetLoading",
       "module": "/packages/client"
     },
@@ -162,8 +168,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer.js",
-      "line_number": 156,
-      "context": "tabIndex={-1}\n className=\"auto-sync-button\"\n size={buttonSize}\n primary\n onClick={onSaveClick}\n label={t(\"Common:SaveButton\")}\n isDisabled={\n !isLdapEnabledOnServer || isUIDisabled || cron === serverCron\n }\n />\n </>",
+      "line_number": 160,
+      "context": "tabIndex={-1}\n className=\"auto-sync-button\"\n size={buttonSize}\n primary\n onClick={onSaveClick}\n label={t(\"Common:SaveButton\")}\n isDisabled={\n !isLdapEnabledOnServer || isUIDisabled || cron === serverCron\n }\n dataTestId=\"auto_sync_save_button\"\n />",
       "module": "/packages/client"
     },
     {
@@ -186,62 +192,62 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/AutoPayments.tsx",
-      "line_number": 297,
+      "line_number": 284,
       "context": "</div>\n {!onAdditionalSave ? (\n <div className={styles.inputButtons}>\n <Button\n key=\"OkButton\"\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.small}\n primary\n onClick={onSaveAutoPayment}\n isLoading={isLoading}\n isDisabled={",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 215,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"\n additionalClassCancelButton=\"admin-message-cancel\"",
+      "line_number": 219,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"admin-message-save\"\n additionalClassCancelButton=\"admin-message-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/bruteForceProtection.js",
-      "line_number": 336,
+      "line_number": 340,
       "context": "className=\"save-cancel-buttons\"\n tabIndex={4}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"RestoreToDefault\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"brute-force-protection-save\"\n additionalClassCancelButton=\"brute-force-protection-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 248,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"dev-tools-access-save\"",
+      "line_number": 252,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"dev-tools-access-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 301,
-      "context": "className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n />",
+      "line_number": 305,
+      "context": "className={styles.saveCancelButtons}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n saveButtonDataTestId=\"invitation_settings_save_button\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 314,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"ip-security-save\"",
+      "line_number": 321,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"ip-security-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/passwordStrength.js",
-      "line_number": 322,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"password-strength-save\"",
+      "line_number": 327,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"password-strength-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 301,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"session-lifetime-save\"\n additionalClassCancelButton=\"session-lifetime-cancel\"",
+      "line_number": 306,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n additionalClassSaveButton=\"session-lifetime-save\"\n additionalClassCancelButton=\"session-lifetime-cancel\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 239,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"two-factor-auth-save\"",
+      "line_number": 243,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"two-factor-auth-save\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/trustedMail.js",
-      "line_number": 293,
-      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"trusted-mail-save\"",
+      "line_number": 300,
+      "context": "className=\"save-cancel-buttons\"\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n showReminder={showReminder}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n displaySettings\n hasScroll={false}\n isSaving={isSaving}\n additionalClassSaveButton=\"trusted-mail-save\"",
       "module": "/packages/client"
     },
     {
@@ -252,7 +258,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/login-history/index.js",
-      "line_number": 91,
+      "line_number": 93,
       "context": "t={t}\n loginHistory\n subHeader={t(\"LoginSubheaderTitle\")}\n latestText={t(\"LoginLatestText\")}\n storagePeriod={t(\"StoragePeriod\")}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n lifetime={securityLifetime.loginHistoryLifeTime}\n securityLifetime={securityLifetime}\n setLifetimeAuditSettings={setLifetimeAuditSettings}\n content={getContent()}",
       "module": "/packages/client"
     },
@@ -288,13 +294,13 @@
     },
     {
       "file_path": "/packages/shared/components/quota-form/index.tsx",
-      "line_number": 254,
-      "context": "{isButtonsEnable ? (\n <SaveCancelButtons\n isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota}\n disableRestoreToDefault={isDefaultQuota}",
+      "line_number": 269,
+      "context": "{isButtonsEnable ? (\n <SaveCancelButtons\n isSaving={isLoading}\n onSaveClick={onSaveClick}\n onCancelClick={onCancelClick}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDefaultQuota}\n disableRestoreToDefault={isDefaultQuota}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 403,
+      "line_number": 408,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"save\"\n tabIndex={5}\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale={isAccount}\n onClick={onSave}\n isDisabled={isLoading}",
       "module": "/packages/shared"
     },
@@ -307,31 +313,31 @@
     {
       "file_path": "/packages/shared/pages/Branding/AdditionalResources/index.tsx",
       "line_number": 125,
-      "context": "/>\n </div>\n <SaveCancelButtons\n onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n reminderText={t(\"YouHaveUnsavedChanges\")}\n showReminder={(isSettingPaid && hasChanges) || isLoading}\n disableRestoreToDefault={additionalResourcesIsDefault || isLoading}",
+      "context": "/>\n </div>\n <SaveCancelButtons\n onSaveClick={onSaveAction}\n onCancelClick={onRestore}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n showReminder={(isSettingPaid && hasChanges) || isLoading}\n disableRestoreToDefault={additionalResourcesIsDefault || isLoading}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/BrandName/index.tsx",
-      "line_number": 154,
-      "context": "styles.brandNameButtons,\n \"brand-name-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onCancelAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isEqualText}\n disableRestoreToDefault={isEqualText}",
+      "line_number": 192,
+      "context": "styles.brandNameButtons,\n \"brand-name-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onCancelAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isEqualText || hasError}\n disableRestoreToDefault={isEqualText}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 305,
-      "context": "styles.saveCancelButtons,\n \"save-cancel-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll",
+      "line_number": 306,
+      "context": "styles.saveCancelButtons,\n \"save-cancel-buttons\",\n )}\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreAction}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n reminderText={t(\"Common:YouHaveUnsavedChanges\")}\n displaySettings\n saveButtonDisabled={isDisabled}\n hasScroll",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 425,
+      "line_number": 604,
       "context": "/>\n <SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onSaveAction}\n onCancelClick={onRestoreDefault}\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:Restore\")}\n displaySettings\n hasScroll\n hideBorder\n showReminder={!isEqualLogo}",
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/auto-backup/sub-components/ButtonContainer/ButtonContainer.tsx",
-      "line_number": 46,
-      "context": "if (!isChanged && !isThirdStorageChanged) return;\n \n return (\n <div className=\"auto-backup_buttons\">\n <Button\n label={t(\"Common:SaveButton\")}\n onClick={onSaveModuleSettings}\n primary\n isDisabled={isLoadingData || !(isChanged || isThirdStorageChanged)}\n size={buttonSize}\n className=\"save-button\"",
+      "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
+      "line_number": 674,
+      "context": "</div>\n ) : null}\n \n {isChanged || isThirdStorageChanged ? (\n <SaveCancelButtons\n saveButtonLabel={t(\"Common:SaveButton\")}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onSaveClick={onSaveModuleSettings}\n onCancelClick={onCancelModuleSettings}\n saveButtonDisabled={isSaveCancelDisabled}\n disableRestoreToDefault={isSaveCancelDisabled}",
       "module": "/packages/shared"
     }
   ],

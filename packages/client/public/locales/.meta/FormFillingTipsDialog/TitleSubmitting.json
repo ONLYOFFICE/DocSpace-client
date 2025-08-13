@@ -3,7 +3,7 @@
   "content": "Once the Complete & Submit button is clicked in the opened form copy, it is moved to the Complete folder.",
   "content_en_sha1_hash": "2e639013a5f7a790cf0cf520270367ff9351c4e8",
   "created_at": "2025-05-19T21:30:55.149Z",
-  "updated_at": "2025-05-24T10:53:32.527Z",
+  "updated_at": "2025-07-10T11:11:07.132Z",
   "comment": {
     "text": "This translation key is used to describe the action of submitting a form. It will be displayed as a tip or guidance message in a UI element, likely next to a \"Complete & Submit\" button. Its purpose is to inform users about what happens when they click this button, specifically moving the form copy to the \"Complete\" folder.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 49,
+      "line_number": 52,
       "context": "],\n },\n {\n id: 3,\n header: t(\"FormFillingTipsDialog:HeaderSubmitting\"),\n description: t(\"FormFillingTipsDialog:TitleSubmitting\"),\n key: \"form-filling-submitting\",\n placement: \"bottom\",\n position: [\n {\n type: GuidanceElementType.Mixed,",
       "module": "/packages/shared"
     }
@@ -30,8 +30,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The quotation marks around \"إكمال وإرسال\" are not consistently styled. They should be Arabic quotation marks ( « » ) or consistently use English quotation marks.",
-          "suggestion": "Replace English quotation marks with Arabic quotation marks ( « » ) or use English quotation marks consistently."
+          "description": "The Arabic translation includes quotation marks around \"إكمال وإرسال\" and \"مكتمل\". While quotation marks are used in Arabic, their usage here seems unnecessary and might hinder readability. It's best to align with the English style of not using quotes.",
+          "suggestion": "Remove the quotation marks around \"إكمال وإرسال\" and \"مكتمل\": بمجرد الضغط على زر إكمال وإرسال في نسخة النموذج، يتم نقلها إلى مجلد مكتمل."
         }
       ],
       "approved_at": null
@@ -41,14 +41,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'nüsxəsində' is a slightly awkward formulation. While technically correct, a more natural phrasing might be preferable.",
-          "suggestion": "Açılan formaya"
+          "type": "incorrect_translation",
+          "description": "The translation \"Tamamlanmış qovluğuna köçürülür\" doesn't perfectly capture the nuance of 'moved to the Complete folder'. It implies a transfer or migration rather than a placement within a folder.",
+          "suggestion": "Açılan forma nüsxəsində Tamamla və Göndər düyməsini sıxdıqda, 'Tamam' qovluğuna yerləşdirilir."
         },
         {
           "type": "formatting",
-          "description": "The sentence structure could be improved for better readability. It sounds a bit clunky in Azerbaijani.",
-          "suggestion": "Açılan formaya 'Tamamla və Göndər' düyməsini basdıqda, o, Tamamlanmış qovluğuna köçürülür."
+          "description": "While not a severe issue, maintaining consistency in casing might be beneficial. 'Tamam' and 'Göndər' could potentially be capitalized consistently throughout the interface or documentation.",
+          "suggestion": "Consider capitalizing 'Tamam' and 'Göndər' consistently."
         }
       ],
       "approved_at": null
@@ -68,49 +68,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The pronoun \"sie\" (she/they) is used instead of referring to the form copy. It creates ambiguity.",
-          "suggestion": "Sobald in der geöffneten Formularkopie auf die Schaltfläche \"Abschließen und senden\" geklickt wird, wird *diese* in den Ordner \"Komplett\" verschoben."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Greek translation uses quotation marks (“”) which are not the standard quotation marks in Greek. Standard Greek quotation marks are «».",
-          "suggestion": "Replace “Ολοκλήρωση και υποβολή” and “Ολοκληρωμένα” with «Ολοκλήρωση και υποβολή» and «Ολοκληρωμένα» respectively."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English phrase 'Complete & Submit' is translated as 'Completar y enviar'. While technically correct, 'Completar y enviar' is a bit clunky in Spanish. A more natural and common translation would be 'Finalizar y Enviar' or 'Enviar y Finalizar'.",
-          "suggestion": "Finalizar y Enviar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The ampersand (&) in 'Valmis & Lähetä' should be a non-breaking space (&nbsp;) to prevent line breaks within the button text. While functionally correct, it's best practice for button text.",
-          "suggestion": "Valmis &nbsp; & Lähetä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -122,13 +98,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Armenian translation uses a mix of quotation marks. While some use standard quotation marks («»), others don't. This is inconsistent.",
-          "suggestion": "Ensure consistent use of either («») or (‘’) for all quotation marks throughout the translation. I recommend using («») to match the English source."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -136,9 +106,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'Complete' in the English content is translated as 'Completa'. While technically correct, 'Completati' (plural) is more contextually accurate because it refers to a folder containing completed forms.",
-          "suggestion": "Una volta cliccato il pulsante Completa e Invia nella copia del modulo aperta, questa viene spostata nella cartella Completata."
+          "type": "incorrect_translation",
+          "description": "The English phrase 'Complete & Submit' is translated as 'Completa e Invia'. While not strictly incorrect, 'Invia' (send) might imply an action beyond simply marking the form as complete. 'Completa' alone is a more accurate representation of the intended meaning within this context.",
+          "suggestion": "Completa e Salva"
+        },
+        {
+          "type": "grammatical",
+          "description": "The phrase 'questa viene spostata' is grammatically correct but slightly awkward. It could be improved for smoother reading.",
+          "suggestion": "viene spostata nella cartella Completati"
         }
       ],
       "approved_at": null
@@ -149,8 +124,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Japanese translation uses katakana for \"Complete & Submit\" which might not be the most natural or easily understood way to represent it. Consider using a more descriptive phrase or a transliteration that flows better.",
-          "suggestion": "Consider using a phrase like 「完了して送信」 (Kanri shite sōshin) or a more descriptive explanation in Japanese."
+          "description": "The Japanese translation uses katakana for 'Complete & Submit'. While acceptable, using a more natural Japanese equivalent like 「完了送信」 might be more user-friendly and consistent with other UI elements.",
+          "suggestion": "Consider replacing 「完了＆送信」 with 「完了送信」."
         }
       ],
       "approved_at": null
@@ -161,8 +136,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Korean translation uses an ampersand (&) which doesn't fully match the English 'Complete & Submit'. While understandable, using the full word '완료 및 제출' would be more natural and consistent with Korean writing conventions for buttons/actions.",
-          "suggestion": "열린 양식 사본에서 완료 및 제출 버튼을 클릭하면 완료 폴더로 이동됩니다."
+          "description": "The Korean translation uses a direct translation of \"Complete & Submit\" which doesn't flow naturally in Korean. It would be more idiomatic to use a term that encapsulates both actions.",
+          "suggestion": "Consider using a phrase like \"제출 및 완료\" (jeomcheol mit malwo) or \"완료 제출\" (wanlyo jeomcheol) to replace \"완료 & 제출\"."
         }
       ],
       "approved_at": null
@@ -173,8 +148,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Lao translation includes quotation marks around \"Complete & Submit\" which are not present in the English original. While acceptable, consistency should be checked across all translations.",
-          "suggestion": "Consider removing the quotation marks if they are not consistently used for button labels in Lao."
+          "description": "The Lao translation uses quotation marks that may not be standard Lao. Consider using a more common Lao quotation mark style.",
+          "suggestion": "Review and potentially adjust quotation mark style to align with Lao conventions (e.g., using guillemets «»)."
         }
       ],
       "approved_at": null
@@ -185,8 +160,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Latvian translation uses quotes around \"Pabeigtas\". This might not be the standard formatting for folder names. Consider removing the quotes if the target platform does not require them.",
-          "suggestion": "Remove quotes around \"Pabeigtas\" if standard practice dictates."
+          "description": "The translation includes quotes around 'Pabeigtas'. While acceptable, it's more common in Latvian to omit the quotes for folder names in instructional text. It's not a critical error, but improves readability.",
+          "suggestion": "Remove the quotes around 'Pabeigtas'."
         }
       ],
       "approved_at": null
@@ -194,18 +169,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "formatting",
-          "description": "The Dutch translation uses 'Voltooid' which is a valid word but 'Complete' typically translates to 'Ingevuld' in this context (referring to a form being filled out). 'Voltooid' implies completion of a process, not the act of filling the form.",
-          "suggestion": "Zodra op de knop Ingevuld & Verzenden is geklikt in de geopende formulierkopie, wordt deze verplaatst naar de map 'Voltooide formulieren'."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Verzenden' is accurate for 'Submit', the flow of the sentence could be improved for better readability in Dutch.",
-          "suggestion": "Zodra op de knop Ingevuld & Verzenden is geklikt in de geopende formulierkopie, wordt deze naar de map 'Voltooide formulieren' verplaatst."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -213,9 +177,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Complete & Submit\" is not accurately reflected in the Polish translation. \"Zakończ i prześlij\" is a literal translation but may not convey the intended meaning within the context of form submission. A more natural phrasing might be needed.",
+          "suggestion": "Consider alternatives like \"Wyślij i Zakończ\" or \"Zatwierdź i Wyślij\", or research common phrasing used for submitting forms in Polish UI contexts."
+        },
+        {
           "type": "formatting",
-          "description": "The phrase 'otworzona kopia formularza' is a bit clunky and could be more concise. It literally translates to 'opened copy of the form'.",
-          "suggestion": "Po kliknięciu przycisku Zakończ i prześlij, kopia formularza zostanie przeniesiona do katalogu Gotowe."
+          "description": "The phrase \"Gotowe\" is capitalized. While technically acceptable, it might be stylistically better to be lowercase (\"gotowe\") to maintain consistency with other labels.",
+          "suggestion": "Change \"Gotowe\" to \"gotowe\"."
         }
       ],
       "approved_at": null
@@ -226,13 +195,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase 'Complete & Submit' is translated as 'Concluir & Enviar'. While technically correct, a more natural translation might be 'Finalizar & Enviar' or 'Completar & Enviar'. 'Concluir' can sometimes imply a more final or decisive completion than might be intended.",
-          "suggestion": "Consider 'Finalizar & Enviar' or 'Completar & Enviar' as alternatives to 'Concluir & Enviar'."
+          "description": "The translation 'Concluir & Enviar' is a direct translation of 'Complete & Submit' but might not be the most natural phrasing in Portuguese. A more common and natural way to express 'Complete & Submit' would be 'Finalizar & Enviar' or 'Concluir e Enviar'.",
+          "suggestion": "Finalizar & Enviar"
         },
         {
-          "type": "grammatical",
-          "description": "The sentence 'Depois de clicar no botão Concluir & Enviar na cópia do formulário aberto, este é movido para a pasta Concluir' uses 'este' to refer to the form. While understandable, it's slightly awkward. Using 'ele' would be more grammatically correct and natural.",
-          "suggestion": "Change 'este é movido' to 'ele é movido'."
+          "type": "grammar",
+          "description": "The phrase 'este é movido' is passive voice and a bit clunky in Portuguese. A more natural wording would be active.",
+          "suggestion": "ele é movido"
         }
       ],
       "approved_at": null
@@ -242,9 +211,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "formatting",
-          "description": "The phrase 'Complete & Submit' is translated as 'Concluir e Enviar'. While technically correct, it might be more natural to use a slightly more formal phrasing depending on the overall tone of the application. Consider 'Finalizar e Enviar' or 'Completar e Enviar' for better flow.",
-          "suggestion": "Consider 'Finalizar e Enviar' or 'Completar e Enviar' for improved flow."
+          "type": "spelling",
+          "description": "The word 'Concluído' is likely intended to be 'Concluir'. 'Concluído' means 'completed,' whereas the original English refers to the action of completing and submitting.",
+          "suggestion": "Depois que o botão Concluir e Enviar for clicado na cópia do formulário aberto, ele será movido para a pasta de Formulários Concluídos."
         }
       ],
       "approved_at": null
@@ -255,13 +224,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The phrase \"Complete & Submit\" is translated as \"Completare și trimitere\". While technically correct, it's a bit clunky in Romanian. A more natural phrasing would be \"Butonul Finalizare și Trimitere\" or simply \"Butonul Finalizare\".",
-          "suggestion": "Butonul Finalizare și Trimitere"
+          "description": "The English phrase \"Complete & Submit\" is directly translated to \"Completare și trimitere\". While technically correct, it's less natural in Romanian. A more common and user-friendly equivalent would be \"Finalizare și trimitere\" or \"Închidere și trimitere\".",
+          "suggestion": "Consider translating \"Complete & Submit\" as \"Finalizare și trimitere\" or \"Închidere și trimitere\"."
         },
         {
           "type": "incorrect_translation",
-          "description": "The term \"Complete folder\" is translated as \"folderul Formulare completate.\" It sounds a little unnatural. A better translation would be \"folderul Finalizate\" or a similar phrasing that implies 'completed forms'.",
-          "suggestion": "folderul Finalizate"
+          "description": "The English phrase 'moved to the Complete folder' is translated as 'mutat în folderul Formulare completate'. While understandable, 'Formulare completate' is a bit clunky. A more natural phrasing would be something like 'în folderul Completate' or 'în folderul Finalizate'.",
+          "suggestion": "Consider translating 'moved to the Complete folder' as 'în folderul Completate' or 'în folderul Finalizate'."
         }
       ],
       "approved_at": null
@@ -269,7 +238,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "formatting",
+          "description": "The quotation marks used for button names are Russian style (« ») which may not be consistent with the rest of the UI and might look out of place.",
+          "suggestion": "Consider using standard English quotation marks (\"\") or a UI consistent quotation style for button names to maintain a uniform look and feel. Alternatively, clarify whether Russian style quotes are intentionally used for localization purposes."
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -277,9 +252,14 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
+          "type": "incorrect_translation",
+          "description": "The phrase \"Complete & Submit\" is not accurately translated. \"සම්පූර්ණ කර ඉදිරිපත් කරන්න\" translates to 'complete and submit', but lacks the nuance of a button label. It could be misinterpreted as a general instruction rather than a button title.",
+          "suggestion": "Consider a more literal translation of 'Complete & Submit' that maintains the button-like feel, such as \"සම්පූර්ණකොට ඉදිරිපත් කරන්න\" or exploring alternatives that reflect the action of pressing a button in Sinhala."
+        },
+        {
           "type": "spelling",
-          "description": "The word 'ෆෝල්ඩරයට' (folderaya) is slightly unnatural in this context. While technically correct, 'ෆෝල්ඩරයට' implies movement *into* the folder. A more natural phrasing would be 'ෆෝල්ඩරයට යවනු ලැබේ' or 'ෆෝල්ඩරයට ලැබේ'.",
-          "suggestion": "විවෘත කරන ලද පෝරම පිටපතෙහි සම්පූර්ණ කර ඉදිරිපත් කරන්න බොත්තම ක්ලික් කළ පසු, එය සම්පූර්ණ ෆෝල්ඩරයට ලැබේ."
+          "description": "The word \"ෆෝල්ඩරයට\" (folderaya) appears to be a correct spelling, but the double 'l' in 'folder' is a consistent point of error. It's recommended to confirm consistency with standard Sinhala orthography. The spelling is acceptable but worth checking for consistency.",
+          "suggestion": "Double-check the correct spelling of 'folder' with a Sinhala dictionary or a native speaker to ensure it aligns with established orthographic conventions. While technically correct, consistency matters."
         }
       ],
       "approved_at": null
@@ -293,7 +273,18 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Dokončaj in oddaj' is a literal translation of 'Complete & Submit' which might not be the most natural phrasing in Slovenian. 'Dokončaj in pošljite' or 'Dokončaj in oddaj' would be more idiomatic, though the provided version isn't technically incorrect.",
+          "suggestion": "Consider 'Dokončaj in pošljite' or 'Dokončaj in oddaj' for a more natural flow."
+        },
+        {
+          "type": "formatting",
+          "description": "While technically correct, 'se ta premakne' is slightly awkward. It would be more fluid to say 'premakne se'.",
+          "suggestion": "Change 'se ta premakne' to 'premakne se'."
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -302,8 +293,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Serbian translation uses a semicolon where a period would be more common in this context. This affects the flow and readability.",
-          "suggestion": "Replace the semicolon (;) with a period (.) at the end of the sentence: 'Када се кликне на дугме Заврши и пошаљи у отвореној копији формулара, он се премешта у фолдер Завршено.'"
+          "description": "The Serbian translation uses a lowercase 'к' in 'кликане' which should be uppercase 'К' to match the capitalization of the English 'clicked'.",
+          "suggestion": "Када се Кликане на дугме Заврши и пошаљи у отвореној копији формулара, он се премешта у фолдер Завршено."
         }
       ],
       "approved_at": null
@@ -326,8 +317,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The Ukrainian translation uses quotation marks (« ») around button names, which may not be standard for UI text. Consider using single quotes (') or no quotes.",
-          "suggestion": "Consider using single quotes (') or removing the quotation marks around 'Завершити та надіслати' and 'Заповнені'."
+          "description": "The Ukrainian translation uses quotation marks (« ») for the button name, which might not be the standard practice in Ukrainian UI/UX. Consider using single quotes (').",
+          "suggestion": "Change «Завершити та надіслати» to 'Завершити та надіслати'"
         }
       ],
       "approved_at": null
@@ -338,8 +329,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The ampersand (&) in 'Complete & Submit' is not properly represented. While the Vietnamese uses 'Gửi' which implies 'Submit', the '&' symbol is absent and might confuse users.",
-          "suggestion": "Consider including a visual representation of '&' or rephrasing to clarify the combined action. For example, 'Khi nút Hoàn thành và Gửi...'"
+          "description": "The ampersand (&) in the original English content is represented as a space in the Vietnamese translation. While understandable, it's better to replace it with 'và' for consistency and clarity.",
+          "suggestion": "Khi nút Hoàn thành và Gửi trên bản sao biểu mẫu đã mở được nhấp vào, nó sẽ được chuyển đến thư mục Hoàn thành."
         }
       ],
       "approved_at": null
@@ -350,8 +341,8 @@
       "ai_spell_check_issues": [
         {
           "type": "formatting",
-          "description": "The translation uses a full stop at the end of the sentence, which might be more appropriate for written text. In a dialog, a more casual tone is preferable, and omitting the full stop would align with that.",
-          "suggestion": "点击表单副本中的“完成并提交”按钮后，副本将移至“完成”文件夹"
+          "description": "The translation uses quotation marks for 'Complete & Submit' and 'Complete' folder. The English original uses the same.",
+          "suggestion": "Consider maintaining consistency in quotation mark usage or avoiding quotation marks entirely based on the overall style guide."
         }
       ],
       "approved_at": null

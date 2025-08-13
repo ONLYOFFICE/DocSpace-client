@@ -21,6 +21,7 @@ const Row = (props: RowProps) => {
     inProgress,
     getContextMenuItems,
     setSelection,
+    dataTestId,
   } = props;
 
   const { t } = useTranslation(["OAuth", "Common", "Files"]);
@@ -41,6 +42,7 @@ const Row = (props: RowProps) => {
         getContextModel={getContextMenuModel}
         isIndexEditingMode={false}
         badgeUrl=""
+        dataTestId={dataTestId}
       >
         <TableCell className="table-container_file-name-cell">
           <NameCell
@@ -65,6 +67,7 @@ const Row = (props: RowProps) => {
               type={LinkType.action}
               target={LinkTarget.blank}
               isHovered
+              dataTestId="website_link"
             >
               {item.websiteUrl}
             </Link>
@@ -76,6 +79,7 @@ const Row = (props: RowProps) => {
             as="span"
             fontWeight={400}
             className="mr-8 textOverflow description-text"
+            dataTestId="modified_date_text"
           >
             {modifiedDate}
           </Text>

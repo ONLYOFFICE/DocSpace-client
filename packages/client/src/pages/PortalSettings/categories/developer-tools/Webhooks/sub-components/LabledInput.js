@@ -55,6 +55,7 @@ export const LabledInput = ({
   id,
   isDisabled,
   maxLength = 255,
+  dataTestId,
 }) => {
   return (
     <StyledLabel text={label} className={className}>
@@ -71,6 +72,7 @@ export const LabledInput = ({
         maxLength={maxLength}
         scale
         {...(mask ? { mask } : {})}
+        testId={dataTestId}
       />
     </StyledLabel>
   );

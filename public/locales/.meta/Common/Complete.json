@@ -3,7 +3,7 @@
   "content": "Complete",
   "content_en_sha1_hash": "1f5a1abf2f08ec18beb2664f458f86e399c233a4",
   "created_at": "2025-05-19T21:30:43.615Z",
-  "updated_at": "2025-06-08T12:02:32.885Z",
+  "updated_at": "2025-08-12T19:46:26.346Z",
   "comment": {
     "text": "This translation key is used to display a status update in the UI, indicating whether a file filling process has completed or stopped. It appears on a status indicator component and is rendered based on the current state of the file filling form status. The translation for this key should reflect the completion of the process.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 276,
+      "line_number": 279,
       "context": "case FileFillingFormStatus.InProgress:\n return t(\"Common:InProgress\");\n case FileFillingFormStatus.Stopped:\n return t(\"Common:Stopped\");\n case FileFillingFormStatus.Completed:\n return t(\"Common:Complete\");\n default:\n return \"\";\n }\n };\n export const getFillingStatusTitle = (",
       "module": "/packages/shared"
     }
@@ -60,8 +60,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Vervollständigen\" can mean 'to complete,' it primarily translates to 'to complete' in the sense of 'to finish' or 'to fill out.' The English 'Complete' has a broader meaning encompassing 'whole,' 'finished,' or 'total.'  'Fertigstellen' might be a more accurate translation depending on the context.",
-          "suggestion": "Consider 'Fertigstellen' as an alternative translation, or provide more context to determine the most suitable German equivalent."
+          "description": "While \"Vervollständigen\" can mean \"to complete\", it's more accurately \"to complete\" in the sense of 'to finish' or 'to fill out'. The English 'Complete' often implies 'whole' or 'entire'. A more accurate translation could be 'vollständig' or 'ganz'.",
+          "suggestion": "vollständig"
         }
       ],
       "approved_at": null
@@ -72,8 +72,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Greek translation \"Ολοκλήρωση\" typically refers to the *process* of completion or the result (completion/accomplishment). The English word \"Complete\" (as an adjective) means finished, whole, or entire. A more accurate translation would depend on the context.  Possible alternatives include:  \"Ολοκληρωμένος\" (completed), \"Πλήρης\" (full/entire), or \"Έτοιμος\" (ready).",
-          "suggestion": "Consider 'Ολοκληρωμένος', 'Πλήρης', or 'Έτοιμος' depending on the context."
+          "description": "The Greek translation \"Ολοκλήρωση\" (Oloklirwsi) translates to \"Completion\" rather than \"Complete\". While related, it's not a direct equivalent.  \"Ολοκληρωμένο\" (Oloκληρωμένο) would be a more accurate translation of \"Complete\", signifying a state of being complete.",
+          "suggestion": "Ολοκληρωμένο"
         }
       ],
       "approved_at": null
@@ -90,8 +90,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Täydennä\" can mean 'complete,' it more accurately translates to 'fill in' or 'supplement'. 'Complete' in the context of a task or project implies finishing it entirely, which isn't perfectly conveyed by 'Täydennä'. A better translation would depend on the specific context, but options like 'Valmis' (ready), 'Viimeistele' (finish), or 'Suorita' (execute) might be more suitable.",
-          "suggestion": "Consider 'Valmis', 'Viimeistele', or 'Suorita' depending on the intended nuance."
+          "description": "While 'Täydennä' can mean 'complete,' it more accurately translates to 'fill in' or 'complete' in the sense of finishing something incomplete. 'Complete' as in 'finished' or 'whole' would be better translated as 'Valmis' or 'Kokonainen'.",
+          "suggestion": "Consider 'Valmis' or 'Kokonainen' depending on the context of 'Complete'."
         }
       ],
       "approved_at": null
@@ -102,8 +102,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "While \"Remplir\" can mean \"to fill,\" it doesn't perfectly capture the meaning of \"Complete\" in all contexts. \"Complete\" can imply finishing, finalizing, or bringing something to an end. \"Remplir\" more directly relates to filling something up.",
-          "suggestion": "Consider alternatives like \"Compléter\", \"Finaliser\", \"Terminer\", or \"Achèvement\" depending on the specific context."
+          "description": "While \"Remplir\" can mean \"to fill\" or \"to complete,\" it's not the most accurate or commonly used translation for \"Complete\" in the context of something being finished or whole. \"Compléter\" or \"Terminer\" would be more appropriate depending on the specific nuance.",
+          "suggestion": "Consider using \"Compléter\" or \"Terminer\"."
         }
       ],
       "approved_at": null
@@ -111,7 +111,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word \"Complete\" has multiple possible Armenian translations depending on the context. \"Ավարտել\" (Avar tel) means \"to finish\" or \"to complete an action.\" \"Complete\" can also mean 'whole' or 'entire', which would require a different translation (e.g., ամբողջական - amboghjakan). Without context, it's difficult to definitively say if \"Ավարտել\" is the most appropriate translation, but it's a possibility. More context is needed to confirm.",
+          "suggestion": "Consider the context of 'Complete'. If referring to finishing something, \"Ավարտել\" is acceptable. If meaning 'whole' or 'entire', a different translation like \"ամբողջական\" would be more accurate."
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -174,8 +180,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Romanian translation \"Completare\" means \"to complete\" or \"completion\", not \"complete\" as an adjective or noun meaning whole or entire. It's a verb or a noun referring to the act of completing.",
-          "suggestion": "A more accurate translation could be \"Complet\", \"Întreg\", or \"Total\", depending on the intended meaning of \"Complete\" in the original English context."
+          "description": "The Romanian translation 'Completare' means 'to complete' or 'completing', not 'Complete' which is an adjective meaning 'finished'.",
+          "suggestion": "Consider using 'Complet' which means 'complete' as an adjective."
         }
       ],
       "approved_at": null
@@ -183,7 +189,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Завершить' can mean 'complete,' it more accurately translates to 'to finish' or 'to conclude.' 'Complete' implies a state of being fully finished and encompassing all parts, which 'Завершить' doesn't fully capture. A more nuanced translation might be needed depending on the specific context. Alternatives could include 'Полностью завершить' (completely finish) or 'Окончить' (to end/finish).",
+          "suggestion": "Consider alternatives like 'Полностью завершить' or 'Окончить' depending on the context."
+        }
+      ],
       "approved_at": null
     },
     "si": {

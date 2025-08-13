@@ -28,6 +28,7 @@
 // @ts-nocheck
 
 import { toUrlParams } from "../../utils/common";
+import { validateAndFixObject } from "../../utils/filterValidator";
 
 const PAGE = "pagination[page]";
 const PAGE_SIZE = "pagination[pageSize]";
@@ -49,6 +50,11 @@ const DEFAULT_SORT_ORDER = "";
 const DEFAULT_CATEGORIZE_BY = "";
 const DEFAULT_CATEGORY_ID = "";
 const DEFAULT_EXTENSION = "pdf";
+
+const typeDefinition = {
+  sortBy: ["name_form", "updatedAt"],
+  sortOrder: ["asc", "desc"],
+};
 
 class OformsFilter {
   constructor(
@@ -187,8 +193,10 @@ class OformsFilter {
   }
 
   toUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const { categorizeBy, categoryId, locale, search, sortBy, sortOrder } =
-      this;
+      fixedValidObject;
 
     const dtoFilter = {};
     dtoFilter[CATEGORIZE_BY] = categorizeBy;
@@ -202,6 +210,8 @@ class OformsFilter {
   };
 
   toApiUrlParams = () => {
+    const fixedValidObject = validateAndFixObject(this, typeDefinition);
+
     const {
       page,
       pageSize,
@@ -212,7 +222,7 @@ class OformsFilter {
       extension,
       sortBy,
       sortOrder,
-    } = this;
+    } = fixedValidObject;
 
     const dtoFilter = {};
     dtoFilter[PAGE] = page;

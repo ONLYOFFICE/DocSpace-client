@@ -28,19 +28,17 @@
 
 import { isTablet as isTabletDevice } from "react-device-detect";
 
-import FileActionsLockedReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg";
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
-import LockedReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
+import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
+import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
-import { useMemo } from "react";
 import { useTheme } from "styled-components";
 
-import { classNames, IconSizeType, isTablet } from "../../utils";
-import { DeviceType, RoomsType, ShareAccessRights } from "../../enums";
+import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
+import { RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
@@ -51,48 +49,37 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const {
     t,
     item,
-    onClickLock,
     onClickDownload,
     onCopyPrimaryLink,
     isDisabled,
     viewAs,
-    folderCategory,
     isPublicRoom,
     onClickShare,
     isPersonalRoom,
     isArchiveFolder,
     isIndexEditingMode,
-    currentDeviceType,
     showLifetimeIcon,
     expiredDate,
     roomLifetime,
     onCreateRoom,
     isTemplatesFolder,
+    onClickLock,
   } = props;
 
   const theme = useTheme();
 
-  const isMobile = currentDeviceType === DeviceType.mobile;
-
-  const { id, shared } = item;
-
-  const fileExst = "fileExst" in item ? item.fileExst : undefined;
-  const locked = "locked" in item ? item.locked : undefined;
+  const { id, shared, security } = item;
 
   const isTile = viewAs === "tile";
-  const isRow = viewAs === "row";
+  const desktopView = !isTile && isDesktop();
 
-  const IconLock = useMemo(() => {
-    if (isMobile) {
-      return LockedReact12Svg;
-    }
-
-    return locked ? FileActionsLockedReactSvg : LockedReactSvg;
-  }, [locked, isMobile]);
-
+  const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : undefined;
+  const locked = "locked" in item ? item.locked : undefined;
   const colorLock = locked
     ? theme.filesQuickButtons.sharedColor
     : theme.filesQuickButtons.color;
+  const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
+  const canLock = security && "Lock" in security ? security.Lock : undefined;
 
   const colorShare = shared ? "accent" : theme.filesQuickButtons.color;
 
@@ -100,19 +87,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const sizeQuickButton: IconSizeType =
     isTile || tabletViewQuickButton ? IconSizeType.medium : IconSizeType.small;
-  const displayBadges =
-    viewAs === "table" ||
-    (isRow && locked && isMobile) ||
-    isTile ||
-    tabletViewQuickButton;
-
-  const isAvailableLockFile =
-    !isPublicRoom &&
-    !folderCategory &&
-    fileExst &&
-    displayBadges &&
-    "Lock" in item.security &&
-    item.security.Lock;
 
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
@@ -147,6 +121,20 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     </Text>
   );
 
+  const getLockTooltip = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {t("Common:LockedBy", { userName: lockedBy || "" })}
+    </Text>
+  );
+
+  const onIconLockClick = () => {
+    if (!canLock) {
+      return;
+    }
+
+    if (onClickLock) onClickLock();
+  };
+
   return (
     <div className="badges additional-badges badges__quickButtons">
       {!isIndexEditingMode ? (
@@ -169,22 +157,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 maxWidth="300px"
               />
             </>
-          ) : null}
-
-          {(locked && item.access === ShareAccessRights.Collaborator) ||
-          isAvailableLockFile ? (
-            <IconButton
-              iconNode={<IconLock />}
-              className="badge lock-file icons-group"
-              size={sizeQuickButton}
-              data-id={id}
-              data-locked={!!locked}
-              onClick={onClickLock}
-              color={colorLock}
-              isDisabled={isDisabled || !isAvailableLockFile}
-              hoverColor="accent"
-              title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-            />
           ) : null}
 
           {isAvailableDownloadFile ? (
@@ -227,6 +199,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
                 "create-share-link": !item.shared,
+                "link-shared": item.shared,
               })}
               size={sizeQuickButton}
               onClick={onClickShare}
@@ -236,22 +209,33 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               title={t("Common:CopySharedLink")}
             />
           ) : null}
-          {/* {fileExst && !isTrashFolder && displayBadges && (
-        <IconButton
-          iconName={iconLock}
-          className="badge lock-file icons-group"
-          size={sizeQuickButton}
-          data-id={id}
-          data-locked={locked ? true : false}
-          onClick={onClickLock}
-          color={colorLock}
-          isDisabled={isDisabled}
-          hoverColor="accent"
-          title={locked ? t("Common:UnblockFile") : t("Common:BlockFile")}
-        />
-      )}
-
- */}
+          {locked ? (
+            <>
+              <IconButton
+                iconName={iconLock}
+                className={classNames("badge lock-file icons-group", {
+                  "file-locked": locked,
+                })}
+                size={sizeQuickButton}
+                data-id={id}
+                data-locked={!!locked}
+                onClick={onIconLockClick}
+                color={theme.filesQuickButtons.sharedColor}
+                hoverColor="accent"
+                title={t("Common:UnblockFile")}
+                data-tooltip-id={`lockTooltip${item.id}`}
+              />
+              {lockedBy && !canLock ? (
+                <Tooltip
+                  id={`lockTooltip${item.id}`}
+                  place="bottom"
+                  getContent={getLockTooltip}
+                  maxWidth="300px"
+                  openOnClick
+                />
+              ) : null}
+            </>
+          ) : null}
         </>
       ) : null}
     </div>

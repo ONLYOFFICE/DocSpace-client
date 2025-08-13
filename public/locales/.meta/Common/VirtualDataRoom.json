@@ -3,7 +3,7 @@
   "content": "Virtual Data Room",
   "content_en_sha1_hash": "29f2e3affa77388673134388754b5295d908047b",
   "created_at": "2025-05-19T21:30:49.548Z",
-  "updated_at": "2025-06-08T12:02:32.678Z",
+  "updated_at": "2025-08-12T19:46:25.993Z",
   "comment": {
     "text": "The translation key \"VirtualDataRoom\" refers to a virtual data room in a collaborative workspace, used to display a specific type of room on the UI. It appears as a filter option and a room title, guiding users to a secure space for sharing sensitive information. Its context is within the client-side application's file management system.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 830,
+      "line_number": 838,
       "context": "case RoomsType.VirtualDataRoom:\n return {\n id: \"filter_type-virtual-data\",\n key: RoomsType.VirtualDataRoom,\n group: FilterGroups.roomFilterType,\n label: t(\"Common:VirtualDataRoom\"),\n };\n case RoomsType.CustomRoom:\n default:\n return {\n id: \"filter_type-custom\",",
       "module": "/packages/client"
     },
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 372,
+      "line_number": 379,
       "context": "return t(\"Common:FormRoom\");\n \n case `room-${RoomsType.PublicRoom}`:\n return t(\"Common:PublicRoomLabel\");\n case `room-${RoomsType.VirtualDataRoom}`:\n return t(\"Common:VirtualDataRoom\");\n \n default:\n return \"\";\n }\n };",
       "module": "/packages/shared"
     }
@@ -93,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Salles de données virtuelle' is not the most natural or accurate translation of 'Virtual Data Room'. While literally correct, it sounds somewhat clunky in French. A better translation would be 'Pièce de données virtuelle' or 'Salle de données virtuelle' (with the article 'La' depending on context).",
+          "suggestion": "Consider 'Pièce de données virtuelle' or 'Salle de données virtuelle'."
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -173,14 +179,9 @@
       "ai_model": null,
       "ai_spell_check_issues": [
         {
-          "type": "spelling",
-          "description": "The word 'අතථ්‍ය' (athathya) might not be the most common or easily understood term for 'virtual' in Sinhala. While technically correct as 'unreal' or 'imaginary', it can sound overly formal or confusing.",
-          "suggestion": "Consider using a more common term for 'virtual' like 'එකතුව' (ekathuwa - meaning 'integrated' or 'unified'), or a more descriptive phrase like 'ඩිජිටල්' (digitale - digital) depending on the context and target audience."
-        },
-        {
           "type": "incorrect_translation",
-          "description": "While the individual words are technically correct, the overall translation lacks fluency and doesn't capture the full meaning of 'Virtual Data Room'. 'Data Room' implies a secure, online repository for documents, and the translation doesn't convey this specific functionality.",
-          "suggestion": "A more accurate translation might be something like 'ඩිජිටල් දත්ත ගබඩාව' (Digitale daththa gabadaawa - Digital Data Repository) or 'සබැඳි දත්ත ගබඩාව' (Sabedhi daththa gabadaawa - Online Data Repository) to better reflect the meaning."
+          "description": "The translation \"අතථ්‍ය දත්ත කාමරය\" while technically accurate, might not be the most natural or commonly understood translation of \"Virtual Data Room\" in Sinhala. \"Virtual\" can be translated in several ways, and \"අතථ්‍ය\" (athathya) can sometimes imply something unreal or imaginary in a way that might be misleading in this context. A more common and clearer translation might be better.",
+          "suggestion": "Consider alternatives such as \"විචිත්‍රිත දත්ත කාමරය\" (vichitrita data kamaraya) or \"සංඛ්‍යාත්මක දත්ත කාමරය\" (sankhyamatika data kamaraya). Research common usage within the target audience."
         }
       ],
       "approved_at": null
@@ -203,8 +204,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The term 'Виртуелна' is a transliteration and not a proper Serbian translation. The correct translation would be 'Virtuelna'.",
-          "suggestion": "Virtuelna"
+          "description": "The Serbian (Cyrillic) translation \"Виртуелна соба за податке\" has a potential spelling issue. The word \"Виртуелна\" (Virtualna) should ideally be spelled \"Виртуелна\".",
+          "suggestion": "Виртуелна соба за податке"
         }
       ],
       "approved_at": null
@@ -215,8 +216,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The Serbian translation contains a spelling error. 'Virtuelna' should be 'Virtuelna'",
-          "suggestion": "Virtuelna soba za podatke"
+          "description": "The term 'Virtuelna' is a misspelling. The correct spelling is 'Virtuelna'",
+          "suggestion": "Virtuelna"
         }
       ],
       "approved_at": null

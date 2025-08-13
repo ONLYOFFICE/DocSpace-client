@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:44.581Z",
-  "updated_at": "2025-06-08T12:02:32.633Z",
+  "updated_at": "2025-08-12T19:46:25.896Z",
   "comment": {
     "text": "This translation key \"Documents\" is used to display the label for a filter or progress section that focuses on documents in a UI application. It appears in contexts where users can select files or folders, such as filters and progress indicators in data management dialogs.",
     "is_auto": true,
@@ -12,50 +12,56 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Progress.js",
-      "line_number": 208,
-      "context": "{t(\"Common:Rooms\")}\n </Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\" noSelect>\n {t(\"Common:Documents\")}\n </Text>\n )}\n </div>\n \n <div className=\"progress-status\">",
+      "line_number": 206,
+      "context": "{!noRooms ? (\n <Text className=\"progress-section-text\">{t(\"Common:Rooms\")}</Text>\n ) : null}\n {noRoomFilesToMove ? null : (\n <Text className=\"progress-section-text\">\n {t(\"Common:Documents\")}\n </Text>\n )}\n </div>\n \n <div className=\"progress-status\">",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 587,
+      "line_number": 592,
       "context": "if (filter.filterType) {\n let label = \"\";\n \n switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 587,
+      "line_number": 592,
       "context": "if (filter.filterType) {\n let label = \"\";\n \n switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 149,
-      "context": "sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Documents\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: DocumentsIcon,\n }}\n isDisabled={false}\n />",
+      "line_number": 151,
+      "context": "sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Documents\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: DocumentsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_personal_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 149,
-      "context": "sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Documents\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: DocumentsIcon,\n }}\n isDisabled={false}\n />",
+      "line_number": 151,
+      "context": "sectionName: personalExportDetails.name,\n workspace: serviceName,\n sectionIcon: personalExportDetails.icon,\n }}\n importSection={{\n sectionName: t(\"Common:Documents\"),\n workspace: t(\"Common:ProductName\"),\n sectionIcon: DocumentsIcon,\n }}\n isDisabled={false}\n dataTestId=\"import_personal_files_section\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 105,
+      "line_number": 114,
       "context": "key: FilterType.FoldersOnly,\n label: t(`Common:Folders`),\n },\n {\n key: FilterType.DocumentsOnly,\n label: t(`Common:Documents`),\n },\n {\n key: FilterType.PresentationsOnly,\n label: t(`Common:Presentations`),\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/FilterBlock.js",
-      "line_number": 143,
-      "context": "label: t(\"Common:Files\"),\n typeKey: FilterType.FilesOnly,\n },\n {\n key: \"filter-type-documents\",\n label: t(\"Common:Documents\"),\n typeKey: FilterType.DocumentsOnly,\n },\n {\n key: \"filter-type-folders\",\n label: t(\"Common:Folders\"),",
+      "line_number": 148,
+      "context": "label: t(\"Common:Files\"),\n typeKey: FilterType.FilesOnly,\n },\n {\n key: \"filter-type-documents\",\n label: t(\"Common:Documents\"),\n typeKey: FilterType.DocumentsOnly,\n },\n {\n key: \"filter-type-spreadsheets\",\n label: t(\"Common:Spreadsheets\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 449,
-      "context": "isChecked={state.documents.isChecked}\n isIndeterminate={state.documents.isIndeterminate}\n items={state.documents.files}\n titleFormat={state.documents.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.Documents}\n title={t(\"Common:Documents\")}\n />\n ) : null}\n \n {state.spreadsheets.files.length > 0 ? (\n <DownloadContent",
+      "line_number": 460,
+      "context": "isChecked={state.documents.isChecked}\n isIndeterminate={state.documents.isIndeterminate}\n items={state.documents.files}\n titleFormat={state.documents.format || t(\"Common:OriginalFormat\")}\n type={DownloadedDocumentType.Documents}\n title={t(\"Common:Documents\")}\n />\n ) : null}\n {state.spreadsheets.files.length > 0 ? (\n <DownloadContent\n {...downloadContentProps}",
+      "module": "/packages/shared"
+    },
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
+      "line_number": 394,
+      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} (\n {logoUrls[3].size.width}x{logoUrls[3].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[4].name}",
       "module": "/packages/shared"
     },
     {
@@ -66,7 +72,7 @@
     },
     {
       "file_path": "/packages/shared/utils/index.ts",
-      "line_number": 347,
+      "line_number": 352,
       "context": "case \"all\":\n return t(\"Common:All\");\n case FilterType.FoldersOnly:\n return t(\"Common:Folders\");\n case FilterType.DocumentsOnly:\n return t(\"Common:Documents\");\n case FilterType.PresentationsOnly:\n return t(\"Common:Presentations\");\n case FilterType.SpreadsheetsOnly:\n return t(\"Common:Spreadsheets\");\n case FilterType.ImagesOnly:",
       "module": "/packages/shared"
     }

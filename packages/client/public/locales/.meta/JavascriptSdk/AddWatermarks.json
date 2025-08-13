@@ -3,7 +3,7 @@
   "content": "Add watermarks to documents",
   "content_en_sha1_hash": "22034bd673fd6d7cd91245241c5115556634de93",
   "created_at": "2025-05-19T21:30:54.353Z",
-  "updated_at": "2025-05-24T09:44:44.680Z",
+  "updated_at": "2025-08-04T07:30:01.387Z",
   "comment": {
     "text": "This translation key is used to display the text \"Add watermarks\" in a UI category header. It appears as part of a larger settings page for developer tools and allows users to toggle adding watermarks to documents.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 262,
+      "line_number": 261,
       "context": "<RowContainer>\n <Checkbox label={t(\"FeedbackAndSupport\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n </InterfaceElements>\n <CategorySubHeader>{t(\"AddWatermarks\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"SelectImage\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>",
       "module": "/packages/client"
     }

@@ -111,6 +111,7 @@ const DropDownItem = ({
   isPaidBadge,
   heightTablet,
   badgeLabel,
+  testId,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
@@ -158,7 +159,7 @@ const DropDownItem = ({
       )}
       onClick={handleClick}
       tabIndex={tabIndex}
-      data-testid="drop-down-item"
+      data-testid={testId ?? "drop-down-item"}
       data-focused={isActiveDescendant}
       role={isSeparator ? "separator" : "option"}
       aria-selected={isSelected}
@@ -168,7 +169,7 @@ const DropDownItem = ({
       }
     >
       {isHeader && withHeaderArrow ? (
-        <div className={styles.iconWrapper}>
+        <div className={styles.iconWrapper} onClick={headerArrowAction}>
           <ReactSVG src={ArrowLeftReactUrl} className="drop-down-icon_image" />
         </div>
       ) : null}

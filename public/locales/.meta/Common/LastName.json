@@ -3,7 +3,7 @@
   "content": "Last name",
   "content_en_sha1_hash": "adec36a821f81a6990b1e65d9e4ac5fb8ee2a205",
   "created_at": "2025-05-19T21:30:46.065Z",
-  "updated_at": "2025-06-30T12:20:31.172Z",
+  "updated_at": "2025-08-11T18:11:59.125Z",
   "comment": {
     "text": "The translation key \"LastName\" is used to display the label for a surname field in various UI components, such as dialogs and form fields. It appears on screens where user name information is being edited or inputted, typically on a line below or next to the first name field.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 155,
-      "context": "/>\n </FieldContainer>\n \n <FieldContainer\n isVertical\n labelText={t(\"Common:LastName\")}\n className=\"field\"\n hasError={!isSurnameValid}\n errorMessage={\n lastName.trim().length === 0\n ? t(\"Common:RequiredField\")",
+      "line_number": 153,
+      "context": "className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {\n id: \"lastName\",\n label: t(\"Common:LastName\"),\n value: lastName,\n onChange: handleSurnameChange,\n placeholder: t(\"Common:LastName\"),\n hasError: !isSurnameValid,\n errorMessage:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 155,
-      "context": "/>\n </FieldContainer>\n \n <FieldContainer\n isVertical\n labelText={t(\"Common:LastName\")}\n className=\"field\"\n hasError={!isSurnameValid}\n errorMessage={\n lastName.trim().length === 0\n ? t(\"Common:RequiredField\")",
+      "line_number": 153,
+      "context": "className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {\n id: \"lastName\",\n label: t(\"Common:LastName\"),\n value: lastName,\n onChange: handleSurnameChange,\n placeholder: t(\"Common:LastName\"),\n hasError: !isSurnameValid,\n errorMessage:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/FieldMapping.js",
-      "line_number": 89,
-      "context": "value={firstName}\n hasError={firstNameHasError}\n />\n \n <SsoFormField\n labelText={t(\"Common:LastName\")}\n name=\"lastName\"\n placeholder={SSO_SN}\n tabIndex={17}\n value={lastName}\n hasError={lastNameHasError}",
+      "line_number": 91,
+      "context": "hasError={firstNameHasError}\n dataTestId=\"first_name_field\"\n />\n \n <SsoFormField\n labelText={t(\"Common:LastName\")}\n name=\"lastName\"\n placeholder={SSO_SN}\n tabIndex={17}\n value={lastName}\n hasError={lastNameHasError}",
       "module": "/packages/client"
     },
     {

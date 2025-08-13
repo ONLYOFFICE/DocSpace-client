@@ -83,9 +83,10 @@ const PeopleTableRow = ({
   inviterColumnIsEnabled,
   storageColumnIsEnabled,
 
-  isGuests,
+  contactsTab,
   isRoomAdmin,
   inProgress,
+  withContentSelection,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -105,6 +106,8 @@ const PeopleTableRow = ({
     isLDAP,
   } = item;
 
+  const isGuests = contactsTab === "guests";
+  const isInsideGroup = contactsTab === "inside_group";
   const isPending = statusType === "pending" || statusType === "disabled";
 
   const nameColor = isPending
@@ -146,7 +149,8 @@ const PeopleTableRow = ({
   );
 
   const onOpenGroupClick = React.useCallback(
-    ({ action, title }: TOption) => onOpenGroup!(action as string, true, title),
+    ({ action, title }: TOption) =>
+      onOpenGroup!(action as string, !isInsideGroup, title),
     [onOpenGroup],
   );
 
@@ -261,7 +265,10 @@ const PeopleTableRow = ({
     [item, onUserContextClick],
   );
 
-  const onRowClick = (e: React.MouseEvent) => onContentRowClick?.(e, item);
+  const onRowClick = (e: React.MouseEvent) => {
+    if (withContentSelection) return;
+    onContentRowClick?.(e, item);
+  };
 
   const isPaidUser = !standalone && !isVisitor && !isCollaborator;
 
@@ -426,12 +433,14 @@ export default inject(
     const { showStorageInfo } = currentQuotaStore;
 
     const { getUsersChangeTypeOptions } = peopleStore.contextOptionsStore!;
+    const { withContentSelection } = peopleStore.contactsHotkeysStore!;
 
     return {
       showStorageInfo,
       getUsersChangeTypeOptions,
 
       isRoomAdmin: userStore.user?.isRoomAdmin,
+      withContentSelection,
     };
   },
 )(withContent(observer(PeopleTableRow)));

@@ -48,7 +48,6 @@ type ChangeUserStatusDialogComponentProps = {
   setSelected: UsersStore["setSelected"];
   needResetUserSelection: UsersStore["needResetUserSelection"];
 
-  setInfoPanelSelection: InfoPanelStore["setInfoPanelSelection"];
   infoPanelVisible: InfoPanelStore["isVisible"];
   setSelection: UsersStore["setSelection"];
 
@@ -62,7 +61,6 @@ const ChangeUserStatusDialogComponent = ({
   updateUserStatus,
   setSelected,
   needResetUserSelection,
-  setInfoPanelSelection,
   infoPanelVisible,
   setSelection,
   status,
@@ -89,7 +87,6 @@ const ChangeUserStatusDialogComponent = ({
         if (users.length === 1 && infoPanelVisible) {
           const user = getPeopleListItem(users[0]);
 
-          setInfoPanelSelection(user);
           setSelection([user]);
         }
 
@@ -124,7 +121,6 @@ const ChangeUserStatusDialogComponent = ({
     isRequestRunning,
     needResetUserSelection,
     onClose,
-    setInfoPanelSelection,
     setSelected,
     status,
     t,
@@ -255,17 +251,16 @@ export default inject(({ peopleStore, infoPanelStore }: TStore) => {
     setSelection,
   } = peopleStore.usersStore!;
 
-  const { setInfoPanelSelection, isVisible: infoPanelVisible } = infoPanelStore;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
 
   return {
-    needResetUserSelection,
+    needResetUserSelection: !infoPanelVisible || needResetUserSelection,
     updateUserStatus,
 
     setSelected,
 
     getPeopleListItem,
 
-    setInfoPanelSelection,
     infoPanelVisible,
     setSelection,
   };

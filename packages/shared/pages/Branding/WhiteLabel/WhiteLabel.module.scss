@@ -216,11 +216,15 @@
   }
 
   .borderImg {
+    @include mixins.no-user-select;
+
     border: var(--settings-common-white-label-border-img);
     box-sizing: content-box;
   }
 
   .logoHeader {
+    @include mixins.no-user-select;
+
     width: 211px;
     height: 24px;
     padding: 22px 20px;

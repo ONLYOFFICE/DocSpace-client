@@ -190,6 +190,7 @@ const ExpiredComboBox = ({
             fontSize="12px"
             color={globalColors.lightBlueMain}
             onClick={onRemoveLink}
+            dataTestId="expired_combo_box_remove_link"
           >
             {t("Common:RemoveLink")}
           </Link>
@@ -202,6 +203,7 @@ const ExpiredComboBox = ({
           as="div"
           fontSize="12px"
           fontWeight="400"
+          noSelect={!isRoomsLink}
         >
           {getExpirationTrans()}
         </Text>

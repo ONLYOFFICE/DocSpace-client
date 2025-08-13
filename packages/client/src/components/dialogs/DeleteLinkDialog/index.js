@@ -110,7 +110,10 @@ const DeleteLinkDialogComponent = (props) => {
             return res;
           });
       })
-      .catch((err) => toastr.error(err.response?.data?.error.message))
+      .catch((err) => {
+        console.log(err);
+        toastr.error(err.response?.data?.error.message);
+      })
       .finally(() => {
         setIsLoading(false);
         onClose();
@@ -146,11 +149,6 @@ const DeleteLinkDialogComponent = (props) => {
     return t("Files:DeleteSharedLink");
   };
 
-  console.debug({
-    primary: link.sharedTo.primary,
-    isPublicRoomType,
-  });
-
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
@@ -160,13 +158,9 @@ const DeleteLinkDialogComponent = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <DeleteLinkDialogContainer className="modal-dialog-content-body">
-          <Text lineHeight="20px" noSelect>
-            {getDescription()}
-          </Text>
+          <Text lineHeight="20px">{getDescription()}</Text>
           {link.sharedTo.primary ? (
-            <Text lineHeight="20px" noSelect>
-              {t("Files:ActionCannotUndone")}
-            </Text>
+            <Text lineHeight="20px">{t("Files:ActionCannotUndone")}</Text>
           ) : null}
         </DeleteLinkDialogContainer>
       </ModalDialog.Body>

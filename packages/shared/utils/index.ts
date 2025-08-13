@@ -70,7 +70,7 @@ import commonIconsStyles, {
 } from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect, TextUserSelect } from "./commonStyles";
+import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
 import {
@@ -99,6 +99,8 @@ import { getFromLocalStorage } from "./getFromLocalStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
 import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
+import * as userFilterUtils from "./userFilterUtils";
+import * as filterConstants from "./filterConstants";
 
 export {
   isBetaLanguage,
@@ -110,7 +112,6 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
-  TextUserSelect,
   commonInputStyles,
   commonTextStyles,
   INFO_PANEL_WIDTH,
@@ -162,6 +163,8 @@ export {
   fakeFormFillingList,
   getCountTilesInRow,
   getSelectFormatTranslation,
+  userFilterUtils,
+  filterConstants,
 };
 
 export const getModalType = () => {

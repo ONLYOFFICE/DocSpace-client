@@ -3,7 +3,7 @@
   "content": "Connect app",
   "content_en_sha1_hash": "4a7f6f5831a934a0bf6d0fe0d4cfbc86482cd92d",
   "created_at": "2025-05-19T21:30:57.386Z",
-  "updated_at": "2025-06-30T12:20:31.663Z",
+  "updated_at": "2025-08-12T19:46:26.319Z",
   "comment": {
     "text": "This translation key is used to display the label \"Connect app\" on a button that prompts the user to activate an app connection in the login flow. The button appears on-screen when a user confirms their account settings.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/TfaActivation/page.client.tsx",
-      "line_number": 240,
+      "line_number": 279,
       "context": "scale\n primary\n size={ButtonSize.medium}\n tabIndex={3}\n label={\n isLoading ? t(\"Common:LoadingProcessing\") : t(\"SetAppButton\")\n }\n isDisabled={!code.length || isLoading}\n isLoading={isLoading}\n onClick={onSubmit}\n />",
       "module": "/packages/login"
     }

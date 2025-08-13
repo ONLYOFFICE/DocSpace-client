@@ -56,7 +56,7 @@ const FieldContainer = ({
   children,
   errorMessage,
   errorColor,
-  testId = "field-container",
+  dataTestId,
 }: FieldContainerProps) => {
   const containerStyle = {
     ...style,
@@ -82,7 +82,7 @@ const FieldContainer = ({
       )}
       id={id}
       style={containerStyle}
-      data-testid={testId}
+      data-testid={dataTestId ?? "field-container"}
       data-vertical={isVertical}
       data-label-width={maxLabelWidth}
     >
@@ -102,6 +102,9 @@ const FieldContainer = ({
                 className={classNames(styles.iconButton, tooltipClass)}
                 tooltipContent={tooltipContent}
                 place={place}
+                dataTestId={
+                  dataTestId ? `${dataTestId}_help_button` : undefined
+                }
               />
             ) : null}
           </div>
@@ -121,6 +124,9 @@ const FieldContainer = ({
                   place={place}
                   style={displayInlineBlock}
                   offsetRight={0}
+                  dataTestId={
+                    dataTestId ? `${dataTestId}_help_button` : undefined
+                  }
                 />
               ) : null}
             </Label>

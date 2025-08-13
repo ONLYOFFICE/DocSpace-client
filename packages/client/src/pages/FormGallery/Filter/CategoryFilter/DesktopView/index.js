@@ -74,6 +74,7 @@ const CategoryFilterDesktop = ({
         isDisabled={false}
         showDisabledItems
         options={[]}
+        scaledOptions
         directionX="right"
         directionY="both"
         scaled

@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2025-06-30T12:20:31.171Z",
+  "updated_at": "2025-08-12T19:46:25.803Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a field is required when editing a connection. It appears in a vertical text input field within a connect dialog and is used as an error message if the input value is empty.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 135,
-      "context": "labelText={t(\"Common:FirstName\")}\n className=\"field\"\n hasError={!isNameValid}\n errorMessage={\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\")\n }\n >\n <TextInput\n className=\"first-name\"",
+      "line_number": 146,
+      "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeNameDialog/index.js",
-      "line_number": 135,
-      "context": "labelText={t(\"Common:FirstName\")}\n className=\"field\"\n hasError={!isNameValid}\n errorMessage={\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\")\n }\n >\n <TextInput\n className=\"first-name\"",
+      "line_number": 146,
+      "context": "onChange: handleNameChange,\n placeholder: t(\"Common:FirstName\"),\n hasError: !isNameValid,\n errorMessage:\n firstName.trim().length === 0\n ? t(\"Common:RequiredField\")\n : t(\"Common:IncorrectFirstName\"),\n className: \"first-name\",\n dataTestId: \"change_name_first_name_field\",\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 459,
-      "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n />\n </div>",
+      "line_number": 461,
+      "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"\n />",
       "module": "/packages/client"
     },
     {
@@ -37,13 +37,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
       "line_number": 176,
-      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}\n name=\"name\"",
+      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
       "line_number": 176,
-      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}\n name=\"name\"",
+      "context": "className=\"name_field\"\n key=\"name\"\n isVertical\n hasError={!isValidName}\n labelVisible={false}\n errorMessage={t(\"Common:RequiredField\")}\n dataTestId=\"request_name_field\"\n >\n <TextInput\n id=\"your-name\"\n hasError={!isValidName}",
       "module": "/packages/client"
     },
     {
@@ -108,13 +108,13 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 128,
-      "context": "<FieldContainer\n isVertical\n labelVisible={false}\n hasError={isEmailErrorShow}\n errorMessage={\n errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n >\n {isLdapLogin ? (\n <TextInput\n id=\"login_username\"",
+      "line_number": 130,
+      "context": "labelVisible={false}\n hasError={isEmailErrorShow}\n errorMessage={\n errorText\n ? t(`Common:${errorText}`, errorText)\n : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n >\n {isLdapLogin ? (\n <TextInput\n id=\"login_username\"",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 142,
+      "line_number": 141,
       "context": "key=\"e-mail\"\n isVertical\n hasError={isShowError ? emailError : undefined}\n labelVisible={false}\n errorMessage={\n errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}\n placeholder={t(\"Common:RegistrationEmail\")}",
       "module": "/packages/login"
     },
@@ -126,38 +126,38 @@
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 317,
+      "line_number": 318,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 317,
+      "line_number": 318,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 317,
+      "line_number": 318,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 317,
+      "line_number": 318,
       "context": "labelVisible\n isRequired\n labelText={t(\"Common:ConnectionUrl\")}\n isVertical\n hasError={!isUrlValid}\n errorMessage={t(\"Common:RequiredField\")}\n >\n <TextInput\n id=\"connection-url-input\"\n isAutoFocussed\n hasError={!isUrlValid}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 150,
-      "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n testId=\"recover-access-modal-email-container\"\n >\n <EmailInput\n scale",
+      "line_number": 149,
+      "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover-access-modal-email-container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog.tsx",
-      "line_number": 150,
-      "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n testId=\"recover-access-modal-email-container\"\n >\n <EmailInput\n scale",
+      "line_number": 149,
+      "context": "labelVisible={false}\n hasError={isShowError ? emailErr : undefined}\n errorMessage={\n emailErrorMessage\n ? t(`Common:${emailErrorMessage}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"recover-access-modal-email-container\"\n >\n <EmailInput\n scale",
       "module": "/packages/shared"
     },
     {
@@ -183,7 +183,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While 'Tələb olunan sahə' is a literal translation, a more natural and commonly used term for 'Required field' in Azerbaijani would be 'Mütləq doldurulmalı olan sahə' or a shorter 'Zəruri sahə'.",
+          "suggestion": "Consider using 'Mütləq doldurulmalı olan sahə' or 'Zəruri sahə'."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -258,8 +264,8 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The Lao translation 'ຟີວທີ່ຈຳເປັນ' translates more closely to 'necessary fee' or 'essential fee' rather than 'required field'. It doesn't accurately convey the meaning of 'required field' which implies a mandatory input.",
-          "suggestion": "Consider alternatives like 'ສູນທີ່ຕ້ອງຕື່ມ' (field that must be filled) or 'ສູນທີ່ຈຳເປັນຕ້ອງຕື່ມ' (field that is necessary to fill)."
+          "description": "The Lao translation \"ຟີວທີ່ຈຳເປັນ\" is not the most natural or accurate translation of \"Required field\".  \"ຟີວທີ່ຈຳເປັນ\" translates more closely to \"necessary fee\" or \"essential charge\".",
+          "suggestion": "Consider \"ຊື່ພື້ນຖານທີ່ຕ້ອງຕື່ມ\" (suum phuen thaan thi toem tuem) which means 'basic field to fill' or \"ຈຳນວນທີ່ຕ້ອງການ\" (jam nuan thi tongkaan) which means 'required quantity/amount'."
         }
       ],
       "approved_at": null
@@ -282,7 +288,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Pole wymagane' while understandable, is not the most natural or idiomatic way to say 'Required field' in Polish. A more common and accurate translation would be 'Wymagane pole' or 'Pole obowiązkowe'. 'Pole wymagane' sounds slightly awkward.",
+          "description": "While 'Pole wymagane' is understandable, it's not the most natural or idiomatic translation of 'Required field' in Polish. 'Pole wymagane' literally translates to 'Required field,' but a more fluent translation would be something like 'Wymagane pole' or 'Obowiązkowe pole'.",
           "suggestion": "Wymagane pole"
         }
       ],
@@ -318,8 +324,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'වුවමනා ක්‍ෂේත්‍රයකි' while understandable, isn't the most natural or accurate translation of 'Required field'. It translates more closely to 'desired field'. A more accurate and common translation would convey obligation or necessity.",
-          "suggestion": "A better translation would be something like 'අනිවාර්ය ක්ෂේත්‍රය' (anivary kshathraye) which means 'mandatory field', or 'පහසුවෙන් යුතු ක්ෂේත්‍රය' (pahusuwen nuwa kshathraye) - 'field that is necessary'."
+          "description": "The translation 'වුවමනා ක්‍ෂේත්‍රයකි' while understandable, isn't the most natural or accurate translation of 'Required field'. 'වුවමනා' implies 'desired' or 'wanted' rather than 'required'.",
+          "suggestion": "Consider alternatives like 'අත්‍යවශ්‍ය ක්‍ෂේත්‍රයකි' (atyavashya kshetrayakiki) which means 'necessary field' or 'compulsory field'."
+        },
+        {
+          "type": "formatting",
+          "description": "The translation uses a Devanagari script rendering. Ensure consistency with the project's chosen character encoding (e.g., UTF-8) to prevent display issues.",
+          "suggestion": "Confirm UTF-8 encoding or the appropriate character encoding for Sinhala text."
         }
       ],
       "approved_at": null
@@ -342,8 +353,8 @@
       "ai_spell_check_issues": [
         {
           "type": "spelling",
-          "description": "The word 'Обавезно' is misspelled. The correct spelling is 'Обавезно'.",
-          "suggestion": "Обавезно"
+          "description": "The Serbian (Cyrillic) translation contains a spelling error. The correct spelling is 'Обавезно поље', not 'Обавезно поље'.",
+          "suggestion": "Correct 'Обавезно поље' to 'Обавезно поље'."
         }
       ],
       "approved_at": null
@@ -375,7 +386,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "While '必要字段' is a possible translation, it's quite literal and not the most natural way to say 'Required field' in many Chinese contexts. A more common and user-friendly translation might be '必填字段' or '必须填写字段'.  '必要字段' emphasizes necessity, but '必填' or '必须填写' emphasize the obligation to fill.",
+          "suggestion": "Consider '必填字段' or '必须填写字段'."
+        }
+      ],
       "approved_at": null
     }
   }

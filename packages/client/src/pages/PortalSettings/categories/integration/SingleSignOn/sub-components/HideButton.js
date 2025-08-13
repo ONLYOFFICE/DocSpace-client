@@ -44,8 +44,15 @@ const StyledWrapper = styled.div`
 
 const HideButton = (props) => {
   const { t } = useTranslation("SingleSignOn");
-  const { text, label, isAdditionalParameters, value, setHideLabel, id } =
-    props;
+  const {
+    text,
+    label,
+    isAdditionalParameters,
+    value,
+    setHideLabel,
+    id,
+    dataTestId,
+  } = props;
 
   const onClick = () => {
     setHideLabel(label);
@@ -59,7 +66,6 @@ const HideButton = (props) => {
           fontSize="16px"
           fontWeight={700}
           className="settings_unavailable"
-          noSelect
         >
           {text}
         </Text>
@@ -71,6 +77,7 @@ const HideButton = (props) => {
         isHovered
         onClick={onClick}
         type="action"
+        dataTestId={dataTestId}
       >
         {value
           ? isAdditionalParameters

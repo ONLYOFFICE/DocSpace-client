@@ -3,7 +3,7 @@
   "content": "Access to template",
   "content_en_sha1_hash": "678bbfe48f2257d467715657fc03edc26cc09c72",
   "created_at": "2025-05-19T21:30:55.192Z",
-  "updated_at": "2025-06-30T12:20:31.208Z",
+  "updated_at": "2025-08-12T19:46:25.843Z",
   "comment": {
     "text": "This translation key \"AccessToTemplate\" is used to display a label indicating access permissions related to templates in a UI component. It appears as part of a template access settings panel and provides context for users regarding template availability and invited users.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 362,
+      "line_number": 371,
       "context": "isDisabled={isAvailable}\n roomId={templateId}\n />\n \n <StyledSubHeader className=\"invite-input-text\">\n {t(\"Files:AccessToTemplate\")}\n </StyledSubHeader>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/TemplateAccessSettingsPanel/index.tsx",
-      "line_number": 362,
+      "line_number": 371,
       "context": "isDisabled={isAvailable}\n roomId={templateId}\n />\n \n <StyledSubHeader className=\"invite-input-text\">\n {t(\"Files:AccessToTemplate\")}\n </StyledSubHeader>\n {hasInvitedUsers ? (\n <ItemsList\n t={t}\n inviteItems={accessItems}",
       "module": "/packages/client"
     }

@@ -70,7 +70,6 @@ import {
   DeletePluginDialog,
   ShareFolderDialog,
   RoomLogoCoverDialog,
-  GuestReleaseTipDialog,
   FormFillingTipsDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
@@ -157,7 +156,6 @@ const Panels = (props) => {
     roomLogoCoverDialogVisible,
     welcomeFormFillingTipsVisible,
     passwordEntryDialogDate,
-    guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
     conversionVisible,
     deleteVersionDialogVisible,
@@ -267,9 +265,6 @@ const Panels = (props) => {
     ),
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
-    ),
-    guestReleaseTipDialogVisible && (
-      <GuestReleaseTipDialog key="guest-release-tip-dialog" />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
@@ -506,7 +501,6 @@ export default inject(
       isNewUserByCurrentUser,
       isNewRoomByCurrentUser,
       passwordEntryDialogDate,
-      guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
 
       setStopFillingDialogVisible,
@@ -621,7 +615,6 @@ export default inject(
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,
-      guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
       conversionVisible,
       deleteVersionDialogVisible,

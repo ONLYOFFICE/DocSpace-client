@@ -3,7 +3,7 @@
   "content": "Group was deleted successfully",
   "content_en_sha1_hash": "223da5d942c90f2cc21fae089f45eeeec5a1c904",
   "created_at": "2025-05-19T21:30:53.524Z",
-  "updated_at": "2025-06-18T17:11:42.544Z",
+  "updated_at": "2025-08-12T19:46:26.301Z",
   "comment": {
     "text": "This translation key is used for a success message that indicates a group has been deleted successfully. It appears as part of a toast notification and is typically displayed after a user deletes a group through an interface such as a dialog or button action.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contacts/GroupsStore.ts",
-      "line_number": 398,
-      "context": "try {\n await groupsApi.deleteGroup(groupId);\n toastr.success(\n t(\n \"PeopleTranslations:SuccessDeleteGroup\",\n ) as unknown as React.ReactNode,\n );\n this.setSelection([]);\n this.getGroups(this.groupsFilter, true);\n this.infoPanelStore.setInfoPanelSelection(null);",
+      "line_number": 426,
+      "context": "try {\n await groupsApi.deleteGroup(groupId);\n toastr.success(\n t(\n \"PeopleTranslations:SuccessDeleteGroup\",\n ) as unknown as React.ReactNode,\n );\n this.setSelection([]);\n this.getGroups(this.groupsFilter, true);\n this.setIsLoading(false);",
       "module": "/packages/client"
     }
   ],
@@ -36,8 +36,13 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Qrup uğurlar silindi' is not an accurate translation of 'Group was deleted successfully'. It translates to something like 'Group successfully deleted', which lacks the flow and nuance of the original.",
+          "description": "The Azerbaijani translation 'Qrup uğurlar silindi' does not accurately convey the meaning of 'Group was deleted successfully'. 'Uğurlar' means 'successes' and doesn't fit the context of deleting a group. It should convey the idea of successful deletion.",
           "suggestion": "Qrup uğurla silindi"
+        },
+        {
+          "type": "grammar",
+          "description": "While 'Qrup uğurla silindi' is better, the phrasing could be slightly improved for a more natural flow in Azerbaijani.",
+          "suggestion": "Qrup silindi uğurla"
         }
       ],
       "approved_at": null

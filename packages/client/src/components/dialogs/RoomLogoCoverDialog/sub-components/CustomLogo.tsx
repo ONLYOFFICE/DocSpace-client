@@ -115,7 +115,9 @@ export const CustomLogo = ({
       ) : (
         <div
           {...((icon as ICover) && {
-            dangerouslySetInnerHTML: { __html: (icon as ICover).data },
+            dangerouslySetInnerHTML: {
+              __html: (icon as ICover).data,
+            },
           })}
           className="custom-logo-cover"
         />

@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2025-06-30T12:20:31.097Z",
+  "updated_at": "2025-08-12T19:46:25.726Z",
   "comment": {
     "text": "This translation key is used to display \"Trash\" as a label for a section in the file system and in a delete profile dialog. It appears in an empty view container and a body component of a delete profile ever dialog, providing context for users navigating file systems or managing profiles.",
     "is_auto": true,
@@ -12,20 +12,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/HOCs/withHotkeys.js",
-      "line_number": 365,
+      "line_number": 386,
       "context": "if (confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n deleteAction(translations).catch((err) => toastr.error(err));\n }\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 191,
-      "context": "onClickBadge={onBadgeClick}\n iconBadge={iconBadge}\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}",
+      "line_number": 205,
+      "context": "iconBadge={iconBadge}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/Article/Body/Items.js",
-      "line_number": 191,
-      "context": "onClickBadge={onBadgeClick}\n iconBadge={iconBadge}\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}",
+      "line_number": 205,
+      "context": "iconBadge={iconBadge}\n withAnimation\n badgeTitle={\n labelBadge\n ? \"\"\n : t(\"EmptySection\", { sectionName: t(\"Common:TrashSection\") })\n }\n badgeComponent={\n <NewFilesBadge\n newFilesCount={labelBadge}\n folderId={item.id === roomsFolderId ? \"rooms\" : item.id}",
       "module": "/packages/client"
     },
     {
@@ -42,8 +42,8 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/FileLifetime.js",
-      "line_number": 80,
-      "context": "const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n value: false,\n },\n {\n key: 2,",
+      "line_number": 83,
+      "context": "const deleteOptions = [\n {\n key: 1,\n label: t(\"Common:MoveToSection\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n value: false,\n dataTestId: \"virtual_data_room_file_lifetime_delete_move_to_trash\",\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -83,9 +83,33 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/helpers/DetailsHelper.js",
-      "line_number": 333,
-      "context": "}),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {\n date: parseAndFormatDate(this.item.expired, this.culture),\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n );\n };\n \n getItemVersions = () => {",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 372,
+      "context": "}),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {\n date: getCorrectDate(this.culture, this.item.expired as string),\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n );\n };\n \n getItemVersions = () => {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/hooks/useFeedTranslation.tsx",
+      "line_number": 79,
+      "context": "return t(\"InfoPanel:FileMoved\");\n case FeedActionKeys.FileMovedToTrash:\n if (hasRelatedItems)\n return t(\"InfoPanel:FilesTrashMoveCompletedCount\", {\n count,\n sectionName: t(\"Common:TrashSection\"),\n });\n return t(\"InfoPanel:FilesTrashMoveCompleted\", {\n sectionName: t(\"Common:TrashSection\"),\n });\n case FeedActionKeys.FileCopied:",
       "module": "/packages/client"
     },
     {
@@ -114,13 +138,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 442,
+      "line_number": 455,
       "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 442,
+      "line_number": 455,
       "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n };",
       "module": "/packages/client"
     },
@@ -131,32 +155,32 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.js",
-      "line_number": 128,
-      "context": "onChange={onChangeDeleteConfirm}\n isChecked={confirmDelete}\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className=\"toggle-btn-wrapper\">",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
+      "line_number": 141,
+      "context": "isChecked={confirmDelete}\n dataTestId=\"display_notification_toggle_button\"\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 789,
+      "line_number": 791,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 789,
+      "line_number": 791,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 789,
+      "line_number": 791,
       "context": "toastr.error(err),\n );\n } else {\n translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n deleteAction(translations, [selectedFolder], true).catch((err) =>\n toastr.error(err),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
-      "line_number": 2343,
+      "line_number": 2338,
       "context": "if (this.filesSettingsStore.confirmDelete) {\n setDeleteDialogVisible(true);\n } else {\n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n this.deleteAction(translations).catch((err) => toastr.error(err));\n }",
       "module": "/packages/client"
     },
@@ -186,7 +210,7 @@
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 144,
+      "line_number": 118,
       "context": "const getTooltipContent = () => (\n <Text fontSize=\"12px\" fontWeight={400} noSelect>\n {roomLifetime?.deletePermanently\n ? t(\"Common:FileWillBeDeletedPermanently\", { date: expiredDate || \"\" })\n : t(\"Common:SectionMoveNotification\", {\n sectionName: t(\"Common:TrashSection\"),\n date: expiredDate || \"\",\n })}\n </Text>\n );",
       "module": "/packages/shared"
     }

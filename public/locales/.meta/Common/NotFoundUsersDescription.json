@@ -3,7 +3,7 @@
   "content": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
   "content_en_sha1_hash": "e38c6445c5ffaacd4c043f8ec2d9a0484e70bae4",
   "created_at": "2025-05-19T21:30:46.936Z",
-  "updated_at": "2025-06-30T12:20:31.239Z",
+  "updated_at": "2025-08-04T07:30:01.106Z",
   "comment": {
     "text": "\"No users are found based on your search criteria. This message is displayed when a user cannot be retrieved due to an empty or invalid search result.\"",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/EmptyContainer.tsx",
-      "line_number": 53,
-      "context": "return (\n <StyledEmptyScreen\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n />\n );\n };\n \n export default EmptyContainer;",
+      "line_number": 50,
+      "context": "return (\n <EmptyScreenContainer\n imageSrc={imageSrc}\n imageAlt=\"Empty screen image\"\n headerText={t(\"NotFoundMembers\")}\n descriptionText={t(\"NotFoundUsersDescription\")}\n className={styles.emptyScreen}\n />\n );\n };",
       "module": "/packages/client"
     },
     {
@@ -66,7 +66,7 @@
     },
     {
       "file_path": "/packages/shared/selectors/People/index.tsx",
-      "line_number": 674,
+      "line_number": 687,
       "context": "}\n searchEmptyScreenDescription={\n activeTabId === GUESTS_TAB_ID\n ? t(\"Common:NotFoundFilterGuestsDescription\")\n : activeTabId === PEOPLE_TAB_ID\n ? t(\"Common:NotFoundUsersDescription\")\n : t(\"Common:GroupsNotFoundDescription\")\n }\n hasNextPage={hasNextPage}\n isNextPageLoading={isNextPageLoading}\n loadNextPage={loadNextPage}",
       "module": "/packages/shared"
     }

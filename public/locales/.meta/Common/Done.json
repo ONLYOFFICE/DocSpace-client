@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:44.608Z",
-  "updated_at": "2025-06-30T12:20:31.437Z",
+  "updated_at": "2025-08-12T19:46:26.102Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Done\" in various contexts throughout the application, typically as a confirmation message or label. It appears on buttons, such as the OK button and navigation headers, where it indicates completion or success of an action. Translators should provide a complete and accurate translation that maintains consistency across these different UI elements.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 571,
-      "context": ");\n \n const keyFooter = (\n <Button\n key=\"OKButton\"\n label={t(\"Common:Done\")}\n size={ButtonSize.normal}\n primary\n onClick={onClose}\n scale\n />",
+      "line_number": 530,
+      "context": ");\n \n const keyFooter = (\n <Button\n key=\"OKButton\"\n label={t(\"Common:Done\")}\n size={ButtonSize.normal}\n primary\n onClick={onClose}\n scale\n testId=\"secret_key_done_button\"",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Select file",
   "content_en_sha1_hash": "63f72dce85635b76fe31d3931ae500471aa30d71",
   "created_at": "2025-05-19T21:30:48.410Z",
-  "updated_at": "2025-06-30T12:20:31.136Z",
+  "updated_at": "2025-08-12T19:46:25.761Z",
   "comment": {
     "text": "This translation key is used to display the label for a file selection action, appearing as \"Select File\" in various UI elements such as buttons or dialogs. It is part of a set of translations related to file management and appears on the FilesSelector component.",
     "is_auto": true,
@@ -36,20 +36,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
-      "line_number": 204,
+      "line_number": 203,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer.js",
-      "line_number": 205,
+      "line_number": 204,
       "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"FileId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFile\")} />\n </LabelGroup>\n <FilesSelectorInputWrapper>\n <FilesSelectorInput\n onSelectFile={onChangeFileId}\n filterParam={FilesSelectorFilterTypes.ALL}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/UploadXML.js",
       "line_number": 179,
-      "context": "</Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}\n buttonLabel={t(\"Common:SelectFile\")}\n className=\"xml-upload-file\"\n isDisabled={!enableSso || isLoadingXml}\n onInput={uploadXml}\n size=\"middle\"\n tabIndex={3}",
+      "context": "<Text className=\"or-text\">{t(\"Common:Or\")}</Text>\n \n <FileInput\n idButton=\"select-file\"\n accept={[\".xml\"]}\n buttonLabel={t(\"Common:SelectFile\")}\n className=\"xml-upload-file\"\n isDisabled={!enableSso || isLoadingXml}\n onInput={uploadXml}\n size=\"middle\"\n tabIndex={3}",
       "module": "/packages/client"
     },
     {

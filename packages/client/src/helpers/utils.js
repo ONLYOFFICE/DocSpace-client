@@ -106,9 +106,9 @@ export const getCategoryType = (location) => {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("shared") > -1) {
-      const regexp = /(rooms)\/([\d])\/(shared)/;
+      const regexp = /(rooms)\/shared\/([\d])/;
 
-      categoryType = !regexp.test(location)
+      categoryType = !regexp.test(location.pathname)
         ? CategoryType.Shared
         : CategoryType.SharedRoom;
     } else if (pathname.indexOf("share") > -1) {

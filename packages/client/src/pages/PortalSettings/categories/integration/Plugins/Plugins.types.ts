@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TFunction } from "i18next";
 
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
@@ -34,6 +35,7 @@ export interface PluginDropzoneProps {
   onDrop: <T extends File>(acceptedFiles: T[]) => void;
   isLoading: boolean;
   isDisabled: boolean;
+  dataTestId?: string;
 }
 
 export interface PluginsEmptyScreen {
@@ -53,6 +55,7 @@ export interface PluginItemProps {
     name: string,
     status: boolean,
     settings?: string,
+    t?: TFunction,
   ) => Promise<unknown>;
 
   scopes: PluginScopes | PluginScopes[];
@@ -61,6 +64,8 @@ export interface PluginItemProps {
 
   image: string;
   url: string;
+
+  dataTestId?: string;
 }
 
 export interface ListLoaderProps {

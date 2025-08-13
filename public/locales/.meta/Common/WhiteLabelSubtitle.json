@@ -3,7 +3,7 @@
   "content": "Enter your company name, upload the logo, and customize the styling to match your branding.",
   "content_en_sha1_hash": "d1d6c3e6e1b80209865bc2dbb624750a33ae7061",
   "created_at": "2025-05-26T07:15:49.619Z",
-  "updated_at": "2025-06-02T10:20:51.606Z",
+  "updated_at": "2025-08-04T07:30:01.731Z",
   "comment": {
     "text": "This translation key is used to display a message that guides users on how to customize their branding settings. It appears as a subtitle in a UI element and provides an explanation of its purpose.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
       "line_number": 97,
-      "context": "styles.wlHelperLabel,\n \"wl-helper-label settings_unavailable\",\n )}\n fontSize=\"13px\"\n >\n {t(\"WhiteLabelSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"",
+      "context": "styles.wlHelperLabel,\n \"wl-helper-label settings_unavailable\",\n )}\n fontSize=\"13px\"\n >\n {t(\"WhiteLabelSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"",
       "module": "/packages/shared"
     }
   ],

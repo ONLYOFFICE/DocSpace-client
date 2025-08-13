@@ -25,6 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import copy from "copy-to-clipboard";
+import { TViewAs } from "../types";
+
+import { TRoom } from "../api/rooms/types";
+import { TFile, TFolder } from "../api/files/types";
+import { TGroup } from "../api/groups/types";
+import { TPeopleListItem } from "../api/people/types";
+
+export type TSelection = TRoom | TFile | TFolder | TPeopleListItem | TGroup;
 
 const wait = (ms: number) =>
   new Promise((resolve) => {
@@ -32,6 +40,76 @@ const wait = (ms: number) =>
   });
 
 export const copyShareLink = async (link: string) => {
-  await wait(100);
-  copy(link);
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(link);
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+    await wait(100);
+
+    copy(link);
+  }
+};
+
+const copyRowSelectedText = (e: KeyboardEvent) => {
+  const container = document.querySelector(
+    ".ReactVirtualized__Grid__innerScrollContainer",
+  );
+  if (!container) return e;
+
+  const checkedElements = container.querySelectorAll(".checked");
+
+  if (!checkedElements.length) return e;
+
+  let textToCopy = "";
+
+  checkedElements.forEach((el) => {
+    // Split the input string into lines and trim whitespace
+    if (el instanceof HTMLElement) {
+      textToCopy += el.innerText
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line !== "")
+        .join(" ");
+    }
+    // Insert a line break
+    textToCopy += "\n";
+  });
+
+  copy(textToCopy);
+};
+
+const copyTileSelectedText = (selection: TSelection[]) => {
+  let textToCopy = "";
+  selection.forEach((item) => {
+    const title =
+      "title" in item
+        ? item.title
+        : "userName" in item
+          ? item.userName
+          : item.name;
+    textToCopy += title;
+    textToCopy += "\n";
+  });
+
+  copy(textToCopy);
+};
+
+export const copySelectedText = (
+  e: KeyboardEvent,
+  viewAs: TViewAs,
+  selection: TSelection[],
+) => {
+  switch (viewAs) {
+    case "table":
+    case "row":
+      return copyRowSelectedText(e);
+
+    case "tile":
+      return copyTileSelectedText(selection);
+    default:
+      return e;
+  }
 };

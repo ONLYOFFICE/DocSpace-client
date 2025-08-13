@@ -81,6 +81,7 @@ const Table = ({
 
   columnStorageName,
   columnInfoPanelStorageName,
+  withContentSelection,
 }: TableViewProps) => {
   useViewEffect({
     view: viewAs!,
@@ -132,6 +133,7 @@ const Table = ({
 
   return !isUsersEmptyView ? (
     <StyledTableContainer
+      noSelect={!withContentSelection}
       useReactWindow
       forwardedRef={ref as React.RefObject<HTMLDivElement>}
     >
@@ -173,7 +175,7 @@ const Table = ({
             setCurrentGroup={setCurrentGroup}
             {...enabledColumns}
             infoPanelVisible={infoPanelVisible}
-            isGuests={contactsTab === "guests"}
+            contactsTab={contactsTab}
           />
         ))}
       </TableBody>
@@ -192,7 +194,8 @@ export default inject(
     userStore,
     tableStore,
   }: TableViewStores) => {
-    const { usersStore, groupsStore, viewAs, setViewAs } = peopleStore;
+    const { usersStore, groupsStore, contactsHotkeysStore, viewAs, setViewAs } =
+      peopleStore;
 
     const { setCurrentGroup } = groupsStore!;
 
@@ -238,6 +241,8 @@ export default inject(
       columnInfoPanelStorageName,
     } = tableStore;
 
+    const { withContentSelection } = contactsHotkeysStore!;
+
     return {
       peopleList,
 
@@ -281,6 +286,8 @@ export default inject(
 
       columnStorageName,
       columnInfoPanelStorageName,
+
+      withContentSelection,
     };
   },
 )(observer(Table));

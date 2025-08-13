@@ -405,6 +405,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       withBodyScroll
       displayType={ModalDialogType.aside}
       withoutPadding
+      dataTestId="embedding_panel_modal"
     >
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -423,6 +424,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                           onClick={onOpenDevTools}
                           color={currentColorScheme?.main?.accent}
                           isHovered
+                          dataTestId="embedding_panel_dev_tools_link"
                         />
                       ),
                     }}
@@ -440,6 +442,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 size={12}
                 iconName={CrossReactSvg}
                 onClick={onCloseBar}
+                dataTestId="embedding_panel_banner_close"
               />
             </div>
           ) : null}
@@ -462,6 +465,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   displaySelectedOption
                   directionY="bottom"
                   withLabel={false}
+                  dataTestId="embedding_panel_link_selector"
                 />
               </>
             ) : null}
@@ -519,6 +523,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     title={t("JavascriptSdk:Header")}
                     description={t("JavascriptSdk:HeaderDescription")}
+                    dataTestId="show_title"
                   />
                   <CheckboxElement
                     label={t("JavascriptSdk:SearchFilterAndSort")}
@@ -526,6 +531,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     isChecked={embeddingConfig.showFilter}
                     img={theme.isBase ? SearchUrl : SearchDarkUrl}
                     title={t("JavascriptSdk:SearchBlock")}
+                    dataTestId="show_filter"
                     description={t(
                       "JavascriptSdk:ManagerSearchBlockDescription",
                     )}
@@ -547,8 +553,14 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 size={16}
                 iconName={CopyReactSvgUrl}
                 onClick={onCopyLink}
+                dataTestId="embedding_panel_copy_code"
               />
-              <Textarea isReadOnly value={codeBlock} heightTextArea="150px" />
+              <Textarea
+                isReadOnly
+                value={codeBlock}
+                heightTextArea="150px"
+                dataTestId="embedding_panel_code_textarea"
+              />
             </div>
           </div>
         </StyledBody>
@@ -562,6 +574,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           onClick={onCopyAndClose}
           label={t("Common:Copy")}
           isLoading={isLoading}
+          testId="embedding_panel_copy_button"
         />
         <Button
           className="cancel-button"
@@ -570,6 +583,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           onClick={onClose}
           label={t("Common:CancelButton")}
           isLoading={isLoading}
+          testId="embedding_panel_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -329,6 +329,7 @@ const Badges = ({
           title={t("Common:EditButton")}
         />
       ) : null}
+
       {item.viewAccessibility?.MustConvert &&
       security &&
       "Convert" in security &&
@@ -364,6 +365,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       ) : null}
+
       {showNew ? (
         <BadgeWrapper onClick={onBadgeClick} isTile={isTile}>
           <Badge
@@ -479,10 +481,11 @@ const Badges = ({
           hoverColor="accent"
         />
       ) : null}
-      {showNew && !isTile && isRoom ? newFilesBadge : null}
+      {showNew && !isTile ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
       ) : null}
+      {showNew && isTile && !isRoom ? newFilesBadge : null}
     </div>
   );
 };

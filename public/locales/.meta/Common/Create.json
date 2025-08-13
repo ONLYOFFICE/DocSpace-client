@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2025-06-30T12:20:31.138Z",
+  "updated_at": "2025-08-11T09:02:43.830Z",
   "comment": {
     "text": "This translation key is used to display the label \"Create\" in a button within a modal dialog. It appears as the primary action button when creating a new group and is also shown in other contexts where creation is applicable.",
     "is_auto": true,
@@ -30,25 +30,25 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 223,
+      "line_number": 225,
       "context": "const isTemplate = !roomParams.type && !isTemplateSelected;\n \n const dialogHeader = !roomParams.type\n ? t(\"ChooseRoomType\")\n : t(\"Common:CreateRoom\");\n \n return (\n <ModalDialog\n displayType=\"aside\"\n withBodyScroll",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/EditLinkPanel/index.js",
-      "line_number": 355,
-      "context": "<ModalDialog.Footer>\n <Button\n scale\n primary\n size=\"normal\"\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n isDisabled={isDisabledSaveButton}\n onClick={onSave}\n />\n <Button\n scale",
+      "line_number": 359,
+      "context": "<ModalDialog.Footer>\n <Button\n scale\n primary\n size=\"normal\"\n label={isEdit ? t(\"Common:SaveButton\") : t(\"Common:Create\")}\n isDisabled={isDisabledSaveButton}\n onClick={onSave}\n testId=\"edit_link_panel_save_button\"\n />\n <Button",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhookDialog.js",
-      "line_number": 278,
+      "line_number": 281,
       "context": "<ModalDialog.Footer>\n <Footer>\n <Button\n id={isSettingsModal ? \"save-button\" : \"create-button\"}\n label={\n isSettingsModal ? t(\"Common:SaveButton\") : t(\"Common:Create\")\n }\n size=\"normal\"\n primary\n onClick={handleSubmitClick}\n isDisabled={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1228,
+      "line_number": 1230,
       "context": "getFormGalleryContextOptions = (item, t, navigate) => {\n return [\n {\n key: \"create\",\n label: t(\"Common:Create\"),\n onClick: () => this.onCreateOform(navigate),\n },\n {\n key: \"template-info\",\n label: t(\"FormGallery:TemplateInfo\"),",
       "module": "/packages/client"
     },
@@ -65,14 +65,14 @@
       "module": "/packages/shared"
     },
     {
-      "file_path": "/packages/shared/pages/manual-backup/index.tsx",
-      "line_number": 315,
-      "context": "</Text>\n {isCheckedTemporaryStorage ? (\n <div className=\"manual-backup_buttons\">\n <Button\n id=\"create-button\"\n label={t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={!isMaxProgress || pageIsDisabled}\n size={buttonSize}\n />",
+      "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
+      "line_number": 334,
+      "context": "\"manual-backup_buttons\",\n )}\n >\n <Button\n id=\"create-button\"\n label={t(\"Common:Create\")}\n onClick={onMakeTemporaryBackup}\n primary\n isDisabled={!isMaxProgress || pageIsDisabled}\n size={buttonSize}\n testId=\"create_temporary_backup_button\"",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/management/src/dialogs/create-portal/index.tsx",
-      "line_number": 237,
+      "line_number": 239,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n isLoading={isLoading}\n key=\"CreateButton\"\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n scale\n primary\n onClick={onHandleClick}\n />",
       "module": "/packages/management"
     }
@@ -93,13 +93,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'Yaradın' can mean 'create', it's the imperative form (you create). 'Create' in this context (as a key name) likely refers to the action of creating something, which would be better translated as a noun or a more general action form.",
-          "suggestion": "Consider alternatives like 'Yaradılma' (creation), 'Xalqa çıxarma' (to bring to life), or a more descriptive phrase depending on the context of the key."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

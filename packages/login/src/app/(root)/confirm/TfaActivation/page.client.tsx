@@ -26,6 +26,10 @@
 
 "use client";
 
+import DownloadSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import ScanSvgUrl from "PUBLIC_DIR/images/scan.react.svg?url";
+import CheckSvgUrl from "PUBLIC_DIR/images/check.toast.react.svg?url";
+
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -41,8 +45,9 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
-import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
+import { checkConfirmLink } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import { ButtonKeys } from "@docspace/shared/enums";
@@ -54,22 +59,14 @@ import {
 } from "@/utils/constants";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { GreetingContainer } from "@/components/GreetingContainer";
 import { useSearchParams } from "next/navigation";
 
 type TfaActivationFormProps = {
   secretKey: string;
   qrCode: string;
-  passwordHash: TPasswordHash;
-  userName?: string;
 };
 
-const TfaActivationForm = ({
-  secretKey,
-  qrCode,
-  passwordHash,
-  userName,
-}: TfaActivationFormProps) => {
+const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -95,11 +92,7 @@ const TfaActivationForm = ({
     try {
       setIsLoading(true);
 
-      if (userName && passwordHash) {
-        await loginWithTfaCode(userName, passwordHash, code);
-      } else {
-        await validateTfaCode(code, confirmHeader);
-      }
+      await validateTfaCode(code, confirmHeader);
 
       let confirmData = "";
       try {
@@ -152,54 +145,100 @@ const TfaActivationForm = ({
   return (
     <>
       <div className="set-app-description">
-        <GreetingContainer />
-
-        <Text isBold fontSize="14px" className="set-app-title">
-          {t("SetAppTitle")}
+        <Text isBold fontSize="18px" className="set-app-title">
+          {t("TfaTitle")}
+        </Text>
+        <Text className="set-app-subtitle">
+          {t("TfaSubTitle", { productName: t("Common:ProductName") })}
         </Text>
 
-        <Trans
-          t={t}
-          i18nKey="SetAppDescription"
-          ns="Confirm"
-          values={{ productName: t("Common:ProductName") }}
-          components={{
-            1: (
-              <Link
+        <div className="description">
+          <div className="description-item">
+            <div className="icon-container">
+              <IconButton
                 color="accent"
-                href={TFA_ANDROID_APP_URL}
-                target={LinkTarget.blank}
+                iconName={DownloadSvgUrl}
+                size={16}
+                isDisabled
+                isFill
               />
-            ),
-            4: (
-              <Link
+            </div>
+            <div className="description-text">
+              <Text fontWeight={600}>{t("GetSuitableApp")}</Text>
+              <Trans
+                t={t}
+                i18nKey="GetSuitableAppDescription"
+                ns="Confirm"
+                components={{
+                  1: (
+                    <Link
+                      key="android-link"
+                      color="accent"
+                      href={TFA_ANDROID_APP_URL}
+                      target={LinkTarget.blank}
+                    />
+                  ),
+                  4: (
+                    <Link
+                      key="ios-link"
+                      color="accent"
+                      href={TFA_IOS_APP_URL}
+                      target={LinkTarget.blank}
+                    />
+                  ),
+                  8: (
+                    <Link
+                      key="windows-link"
+                      color="accent"
+                      href={TFA_WIN_APP_URL}
+                      target={LinkTarget.blank}
+                    />
+                  ),
+                }}
+              />
+            </div>
+          </div>
+          <div className="description-item">
+            <div className="icon-container">
+              <IconButton
                 color="accent"
-                href={TFA_IOS_APP_URL}
-                target={LinkTarget.blank}
+                iconName={ScanSvgUrl}
+                size={16}
+                isDisabled
+                isFill
               />
-            ),
-            8: (
-              <Link
+            </div>
+            <div className="description-text">
+              <Text fontWeight={600}>{t("ConnectApp")}</Text>
+              <Trans
+                t={t}
+                i18nKey="ConnectAppDescription"
+                ns="Confirm"
+                values={{
+                  secretKey,
+                }}
+                components={{
+                  1: <strong />,
+                }}
+              />
+            </div>
+          </div>
+          <div className="description-item">
+            <div className="icon-container">
+              <IconButton
                 color="accent"
-                href={TFA_WIN_APP_URL}
-                target={LinkTarget.blank}
+                iconName={CheckSvgUrl}
+                size={16}
+                isDisabled
+                isFill
               />
-            ),
-          }}
-        />
-        <Text className="set-app-text">
-          <Trans
-            t={t}
-            i18nKey="SetAppInstallDescription"
-            ns="Confirm"
-            values={{
-              secretKey,
-            }}
-            components={{
-              1: <strong />,
-            }}
-          />
-        </Text>
+            </div>
+            <div className="description-text">
+              <Text fontWeight={600}>{t("VerifyConnection")}</Text>
+              <Text>{t("VerifyConnectionDescription")}</Text>
+            </div>
+          </div>
+        </div>
       </div>
       <FormWrapper id="tfa-activation-form">
         <div className="app-code-wrapper">

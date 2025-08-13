@@ -94,7 +94,7 @@
   :global {
     .combo-button {
       min-height: 40px;
-      padding-inline-start: 16px;
+      padding-inline-start: 16px !important;
     }
 
     .combo-button-label,
@@ -494,6 +494,14 @@
     cursor: pointer;
   }
 
+  &.isSystem {
+    .userAvatar {
+      svg path {
+        fill: var(--info-panel-role-color);
+      }
+    }
+  }
+
   &.disabled {
     .itemLogo,
     .userAvatar {
@@ -593,4 +601,12 @@
 
     border-radius: 6px 6px 0 0;
   }
+}
+
+.selectorSeparator {
+  cursor: default;
+  margin: 8px 16px 0px 16px;
+  line-height: 1px;
+  height: 1px;
+  width: calc(100% - 32px);
 }

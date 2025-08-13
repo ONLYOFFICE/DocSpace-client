@@ -87,11 +87,13 @@ export type BackupToPublicRoomOptionType = {
 
 export type TSortOrder = "descending" | "ascending";
 export type TSortBy =
+  | "DateAndTime"
   | "DateAndTimeCreation"
   | "Tags"
+  | "Type"
   | "AZ"
   | "Author"
-  | "Type"
+  | "roomType"
   | "usedspace"
   | "Size";
 
@@ -208,7 +210,9 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
       location: Location & { state: unknown };
+      displayFileExtension?: boolean;
     };
+    loginCallback?: ((profile: unknown) => void) | null;
     logs: {
       socket: string[];
     };

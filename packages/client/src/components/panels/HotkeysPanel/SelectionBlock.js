@@ -28,7 +28,7 @@ import React from "react";
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 
-const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
+const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey, AltKey }) => {
   return (
     <>
       <Row className="hotkeys_row">
@@ -97,6 +97,20 @@ const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
         <>
           <Text {...textStyles}>{t("HotkeysClearAll")}</Text>
           <Text {...keyTextStyles}>Shift + n {t("Common:Or")} Esc</Text>
+        </>
+      </Row>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("HotkeysDisablesSelectionArea")}</Text>
+          <Text {...keyTextStyles}>
+            {CtrlKey} + {AltKey}
+          </Text>
+        </>
+      </Row>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("HotkeysCopySelectedItems")}</Text>
+          <Text {...keyTextStyles}>{CtrlKey} + Shift + c</Text>
         </>
       </Row>
     </>

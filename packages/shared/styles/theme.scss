@@ -21,6 +21,9 @@
   --files-article-body-dev-tools-background-opacity: 0.17;
   --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
   --article-client-home-logo-color: #{$black};
@@ -296,7 +299,7 @@
 
   --view-selector-items-count: unset;
 
-  --text-font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", sans-serif, Arial;
 
   --text-input-transition: all 0.2s ease 0s;
   --text-input-box-shadow: inset 0 0 0 30px var(--input-bg);
@@ -367,6 +370,9 @@
   --files-article-body-dev-tools-background-opacity: 1;
   --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
+  --article-desktop-width: 252px;
+  --article-tablet-width: 243px;
+  --article-tablet-width-collapsed: 60px;
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
   --article-client-home-logo-color: #{$white};
@@ -1032,6 +1038,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 }
 
 .light {
@@ -1075,6 +1083,8 @@
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
   --section-header-height-mobile: 53px;
+  --section-desktop-padding: -20px;
+  --section-tablet-padding: -24px;
 
   --section-header-bg: #{$white};
   --info-panel-blur-color: #{$blur-light};
@@ -1164,12 +1174,13 @@
   --tabs-background-color-primary: #{$white};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$black};
-  --tabs-active-text-color-secondary: #{$white};
-  --tabs-background-color-secondary: #{$white};
-  --tabs-hover-background-color-secondary: #{$light-gray-hover};
+  --tabs-text-color-secondary: #{$light-gray-dark};
+  --tabs-active-text-color-secondary: #{$black};
+  --tabs-background-color-secondary: #{$light-gray-hover};
+  --tabs-hover-background-color-secondary: #{$gray-light-mid};
   --tabs-pressed-background-color-secondary: #{$gray-light-mid};
-  --tabs-active-background-color-secondary: #{$blue-light-mid};
+  --tabs-active-background-color-secondary: #{$white};
+  --tabs-hover-background-icon-color-secondary: #{$black};
 }
 
 /* Dark theme variables */
@@ -1185,12 +1196,13 @@
   --tabs-background-color-primary: #{$black};
 
   /* Secondary tabs */
-  --tabs-text-color-secondary: #{$white};
-  --tabs-active-text-color-secondary: #{$black};
-  --tabs-background-color-secondary: #{$black};
-  --tabs-hover-background-color-secondary: #{$gray-dark-strong};
+  --tabs-text-color-secondary: #{$dark-gray-dark};
+  --tabs-active-text-color-secondary: #{$white};
+  --tabs-background-color-secondary: #{$dark-gray-light};
+  --tabs-hover-background-color-secondary: #{$gray-dark-mid};
   --tabs-pressed-background-color-secondary: #{$dark-gray-light};
-  --tabs-active-background-color-secondary: #{$white};
+  --tabs-active-background-color-secondary: #{$black};
+  --tabs-hover-background-icon-color-secondary: #{$white};
 }
 
 .light {
@@ -1487,7 +1499,7 @@
 
 .light {
   --text-color: #{$black};
-  --text-font-family: "Open Sans", sans-serif, Arial;
+  --font-family: "Open Sans", sans-serif, Arial;
 }
 
 .light {
@@ -2051,7 +2063,8 @@
 
 .light {
   --tile-background-color: #{$white};
-  --tile-border: 1px solid #{$gray-strong};
+  --tile-room-border: 1px solid #{$gray-strong};
+  --tile-border: 1px solid #{$gray-light-mid};
   --tile-checked-background: #{$light-gray-hover};
   --tile-icon-button-color: #{$gray};
   --tile-background-badge-color: #{$white};
@@ -2069,9 +2082,12 @@
   --tile-container-hover-background: #{$gray-light};
 
   --tile-show-hotkey-border: #{$light-second-main};
-  --tile-border-radius: 6px;
+  --tile-border-radius: 12px;
   --tile-room-border-radius: 12px;
   --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-font-size: 14px;
+  --tile-line-height: 16px;
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
@@ -2079,6 +2095,7 @@
 
 .dark {
   --tile-background-color: #{$black};
+  --tile-room-border: 1px solid #{$gray-dark-strong};
   --tile-border: 1px solid #{$gray-dark-strong};
   --tile-checked-background: #{$light-dark-gray-hover};
   --tile-icon-button-color: #{$gray-dark};
@@ -2097,9 +2114,12 @@
   --tile-container-hover-background: #{$black};
 
   --tile-show-hotkey-border: #{$light-second-main};
-  --tile-border-radius: 6px;
+  --tile-border-radius: 12px;
   --tile-room-border-radius: 12px;
-  --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+  --tile-badge-shadow: 0px 2px 4px #{$badge-dark-shadow};
+
+  --tile-font-size: 14px;
+  --tile-line-height: 16px;
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
@@ -2133,6 +2153,9 @@
   --payment-icon-color: #{$light-gray-dark};
   --payment-dialog-text: #{$gray};
   --payment-devider-color: #{$gray-light-mid};
+  --payment-contact-container-text-color: #{$gray};
+  --payment-contact-container-link-color: #{$light-gray-dark};
+
   --warning-color: #{$light-error-status};
   --background-service-color: #{$light-gray-hover};
   --border-service-color: #{$gray-light-mid};
@@ -2146,6 +2169,9 @@
   --payment-icon-color: #{$dark-gray-dark};
   --payment-dialog-text: #{$gray-dark};
   --payment-devider-color: #{$gray-dark-mid};
+  --payment-contact-container-text-color: #{$dark-gray-dark};
+  --payment-contact-container-link-color: #{$gray-dark};
+
   --warning-color: #{$dark-error-status};
   --background-service-color: #{$light-dark-gray-hover};
   --border-service-color: #{$gray-dark-strong};
@@ -2343,12 +2369,12 @@
 }
 
 .light {
-  --settings-coommon-description-color: #{$light-gray-dark};
+  --settings-common-description-color: #{$light-gray-dark};
   --settings-common-white-label-paid-badge-bg: #{$favorites-status};
 }
 
 .dark {
-  --settings-coommon-description-color: #{$gray-dark};
+  --settings-common-description-color: #{$gray-dark};
   --settings-common-white-label-paid-badge-bg: #{$favorite-status-dark};
 }
 
@@ -2372,6 +2398,7 @@
   --settings-common-white-label-green-bg-color: 1px solid #{$gray-strong};
   --settings-common-white-label-not-available-background: #{$gray-light};
   --settings-common-white-label-text-color: #{$black};
+  --settings-common-backup-rectangle-bg-color: #{$gray-light};
 }
 
 .dark {
@@ -2381,6 +2408,7 @@
   --settings-common-white-label-border-img: 1px solid #{$gray-dark-strong};
   --settings-common-white-label-not-available-background: #{$gray-dark};
   --settings-common-white-label-text-color: #{$white};
+  --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
 }
 
 .light {
@@ -2427,11 +2455,83 @@
 }
 
 .light {
+  --encryption-portal-text: #{$gray};
+  --encryption-portal-error: #{$light-error-status};
+  --encryption-portal-body-text: #{$gray};
+}
+
+.dark {
+  --encryption-portal-text: #{$gray};
+  --encryption-portal-error: #{$dark-error-status};
+  --encryption-portal-body-text: #{$gray-dark};
+}
+
+.light {
   --modal-dialog-resolve-color: #{$gray};
 }
 
 .dark {
   --modal-dialog-resolve-color: #{$gray};
+}
+
+.light {
+  --info-panel-name-color: #{$gray-dark};
+  --info-panel-border-color: #{$gray-light-mid};
+  --info-panel-background-color: #{$white};
+  --info-panel-text-color: #{$black};
+  --info-panel-details-border-color: #{$gray-light-mid};
+  --info-panel-group-text-color: #{$gray};
+  --info-panel-group-tag-color: #{$gray-strong};
+  --info-panel-gallery-border-color: #{$gray-strong};
+  --info-panel-gallery-description-color: #{$light-gray-dark};
+  --info-panel-links-primary-color: #{$gray-text};
+  --info-panel-links-bar-color: #{$light-gray-dark};
+  --info-panel-subtitle-color: #{$gray};
+  --info-panel-expect-name-color: #{$gray};
+  --info-panel-me-label-color: #{$gray};
+  --info-panel-disable-role-color: #{$gray};
+  --info-panel-icon-color: #{$light-icons};
+  --info-panel-icon-error-color: #{$light-error-status};
+  --info-panel-members-icon-color: #{$gray};
+  --info-panel-members-icon-hover-color: #{$light-gray-dark};
+  --info-panel-icon-button-color: #{$gray};
+  --info-panel-icon-button-hover-color: #{$light-gray-dark};
+  --info-panel-box-shadow: 0px 5px 20px 0px #{$menu-shadow};
+  --info-panel-file-exst-color: #{$gray};
+  --info-panel-comment-editor-icon-color: #{$black};
+  --info-panel-role-color: #{$light-gray-dark};
+  --info-panel-item-border-color: #{$gray-light-mid};
+  --info-panel-item-selected-color: #{$light-gray-selected};
+}
+
+.dark {
+  --info-panel-name-color: #{$gray};
+  --info-panel-border-color: #{$gray-dark-strong};
+  --info-panel-background-color: #{$black};
+  --info-panel-text-color: #{$white};
+  --info-panel-details-border-color: #{$gray-dark-strong};
+  --info-panel-group-text-color: #{$gray-dark};
+  --info-panel-group-tag-color: #{$gray-dark-strong};
+  --info-panel-gallery-border-color: #{$black};
+  --info-panel-gallery-description-color: #{$white};
+  --info-panel-links-primary-color: #{$dark-gray-dark};
+  --info-panel-links-bar-color: #{$dark-gray-dark};
+  --info-panel-subtitle-color: #{$gray};
+  --info-panel-expect-name-color: #{$gray};
+  --info-panel-me-label-color: #{$gray};
+  --info-panel-disable-role-color: #{$gray};
+  --info-panel-icon-color: #{$gray-dark};
+  --info-panel-icon-error-color: #{$dark-error-status};
+  --info-panel-members-icon-color: #{$gray-dark};
+  --info-panel-members-icon-hover-color: #{$white};
+  --info-panel-icon-button-color: #{$gray-dark};
+  --info-panel-icon-button-hover-color: #{$white};
+  --info-panel-box-shadow: 0px 5px 20px 0px #{$popup-shadow};
+  --info-panel-file-exst-color: #{$gray};
+  --info-panel-comment-editor-icon-color: #{$white};
+  --info-panel-role-color: #{$gray};
+  --info-panel-item-border-color: #{$gray-dark-strong};
+  --info-panel-item-selected-color: #{$dark-gray-light};
 }
 
 .light {
@@ -2475,6 +2575,18 @@
 }
 
 .light {
+  --tab-item-selected-background-color: var(--accent-main, #{$light-blue-main});
+  --tab-item-selected-item-color: #{$white};
+  --tab-item-tag-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --tab-item-selected-background-color: #{$white};
+  --tab-item-selected-item-color: #{$black};
+  --tab-item-tag-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
   --accounts-badges-pending-color: #{$gray};
 }
 
@@ -2495,6 +2607,18 @@
 }
 .dark {
   --icon-button-color: #{$gray-dark};
+}
+
+.light {
+  --settings-backup-warning-color: #{$light-error-status};
+  --settings-backup-checked-list-item-bg: #{$light-gray-hover};
+  --settings-backup-text-color: #{$gray};
+}
+
+.dark {
+  --settings-backup-warning-color: #{$dark-error-status};
+  --settings-backup-checked-list-item-bg: #{$light-dark-gray-hover};
+  --settings-backup-text-color: #{$dark-gray-dark};
 }
 
 .light {
@@ -2571,4 +2695,104 @@
   --table-group-menu-border-right: 1px solid #{$gray-dark-strong};
   --table-group-menu-box-shadow: 0px 8px 16px #{$badge-shadow},
     0px 0px 4px #{$menu-shadow-dark};
+}
+
+.light {
+  --combobox-background: #{$light-gray-selected};
+
+  --combobox-button-bg: #{$white};
+  --combobox-button-color: #{$black};
+  --combobox-button-disabled-color: #{$gray-strong};
+  --combobox-button-border: 1px solid #{$gray-strong};
+  --combobox-button-open-border-color: var(--accent-main);
+  --combobox-button-disabled-border-color: #{$gray-light-mid};
+  --combobox-button-disabled-bg: #{$gray-light};
+  --combobox-button-focus-bg-modern-view: #{$light-gray-selected};
+  --combobox-button-icon-button-color: #{$gray};
+  --combobox-button-icon-button-hover-color: #{$light-gray-dark};
+  --combobox-button-hover-border-color: #{$gray};
+  --combobox-button-hover-border-color-open: #{$light-second-main};
+  --combobox-button-hover-disabled-border-color: #{$gray-light-mid};
+  --combobox-button-hover-bg-modern-view: #{$gray-light-mid};
+  --combobox-button-focus-open-border-color: var(--accent-main);
+
+  --combobox-label-selected-color: #{$black};
+  --combobox-label-disabled-color: #{$gray-strong};
+  --combobox-label-alternative-color: #{$gray};
+
+  --combobox-plus-badge-bg-color: #{$gray};
+  --combobox-plus-badge-selected-bg-color: #{$light-gray-dark};
+  --combobox-plus-badge-color: #{$white};
+
+  --combobox-children-button-color: #{$black};
+  --combobox-children-button-disabled-color: #{$gray-strong};
+  --combobox-children-button-default-color: #{$gray};
+  --combobox-children-button-default-disabled-color: #{$gray-strong};
+  --combobox-children-button-selected-color: #{$black};
+}
+
+.dark {
+  --combobox-background: #{$black};
+
+  --combobox-button-bg: #{$black};
+  --combobox-button-color: #{$gray-dark};
+  --combobox-button-disabled-color: #{$gray-dark};
+  --combobox-button-border: 1px solid #{$gray-dark-strong};
+  --combobox-button-open-border-color: #{$white};
+  --combobox-button-disabled-border-color: #{$gray-dark-strong};
+  --combobox-button-disabled-bg: #{$gray-dark-strong};
+  --combobox-button-focus-bg-modern-view: #{$gray-dark-mid};
+  --combobox-button-icon-button-color: #{$gray-dark};
+  --combobox-button-icon-button-hover-color: #{$white};
+  --combobox-button-hover-border-color: #{$gray-dark};
+  --combobox-button-hover-border-color-open: #{$white};
+  --combobox-button-hover-disabled-border-color: #{$gray-dark-strong};
+  --combobox-button-hover-bg-modern-view: #{$gray-dark-strong};
+  --combobox-button-focus-open-border-color: var(
+    --combobox-button-hover-border-color
+  );
+
+  --combobox-label-selected-color: #{$white};
+  --combobox-label-disabled-color: #{$gray-dark};
+  --combobox-label-alternative-color: #{$gray-dark};
+
+  --combobox-plus-badge-bg-color: #{$gray-dark};
+  --combobox-plus-badge-selected-bg-color: #{$dark-gray-dark};
+  --combobox-plus-badge-color: #{$black};
+
+  --combobox-children-button-color: #{$white};
+  --combobox-children-button-disabled-color: #{$gray-dark};
+  --combobox-children-button-default-color: #{$white};
+  --combobox-children-button-default-disabled-color: #{$gray-dark};
+  --combobox-children-button-selected-color: #{$white};
+}
+
+.light {
+  --access-right-select-description-color: #{$gray};
+}
+
+.dark {
+  --access-right-select-description-color: #{$gray-dark};
+}
+
+.light {
+  --settings-backup-separator-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --settings-backup-separator-border: 1px solid #{$gray-dark-strong};
+}
+
+.light {
+  --settings-payment-warning-color: #{$light-error-status};
+  --settings-payment-color: #{$light-status-warning};
+  --settings-payment-border: 1px solid #{$gray-light};
+  --settings-payment-bg-benefits-color: #{$gray-light};
+}
+
+.dark {
+  --settings-payment-warning-color: #{$dark-error-status};
+  --settings-payment-color: #{$dark-status-warning};
+  --settings-payment-border: 1px solid #{$gray-dark-strong};
+  --settings-payment-bg-benefits-color: #{$black};
 }

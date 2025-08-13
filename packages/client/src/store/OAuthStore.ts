@@ -465,9 +465,9 @@ class OAuthStore {
   };
 
   fetchScopes = async () => {
-    await this.setJwtToken();
-
     try {
+      await this.setJwtToken();
+
       const scopes = await getScopeList();
 
       this.scopes = scopes;
@@ -692,6 +692,7 @@ class OAuthStore {
       label: t("Files:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
       disabled: isInfo,
+      dataTestId: "oauth_files_open_option",
     };
 
     const infoOption = {
@@ -700,6 +701,7 @@ class OAuthStore {
       label: t("Common:Info"),
       onClick: onShowInfo,
       disabled: isInfo,
+      dataTestId: "oauth_info_option",
     };
 
     if (!isSettings) {
@@ -722,6 +724,7 @@ class OAuthStore {
         label: t("Revoke"),
         onClick: () => this.onRevoke(clientId),
         disabled: false,
+        dataTestId: "oauth_revoke_option",
       });
 
       return items;
@@ -732,6 +735,7 @@ class OAuthStore {
       icon: PencilReactSvgUrl,
       label: t("Common:EditButton"),
       onClick: () => this.editClient(clientId),
+      dataTestId: "oauth_edit_option",
     };
 
     const authButtonOption = {
@@ -740,6 +744,7 @@ class OAuthStore {
       label: t("AuthButton"),
       onClick: onShowPreview,
       disabled: !item.enabled,
+      dataTestId: "oauth_auth_option",
     };
 
     const enableOption = {
@@ -754,6 +759,7 @@ class OAuthStore {
       icon: RemoveReactSvgUrl,
       label: t("Common:Disable"),
       onClick: () => this.onDisable(clientId),
+      dataTestId: "oauth_disable_option",
     };
 
     const generateDeveloperTokenOption = {
@@ -762,6 +768,7 @@ class OAuthStore {
       label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
       disabled: !item.enabled,
+      dataTestId: "oauth_generate_token_option",
     };
 
     const revokeDeveloperTokenOption = {
@@ -770,6 +777,7 @@ class OAuthStore {
       label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
       disabled: !item.enabled,
+      dataTestId: "oauth_revoke_token_option",
     };
 
     const contextOptions: ContextMenuModel[] = [
@@ -778,6 +786,7 @@ class OAuthStore {
         label: t("Common:Delete"),
         icon: DeleteIconUrl,
         onClick: () => this.onDelete(clientId),
+        dataTestId: "oauth_delete_option",
       },
     ];
 
@@ -826,6 +835,7 @@ class OAuthStore {
           label: t("OAuth:Revoke"),
           onClick: this.onRevoke,
           disabled: false,
+          dataTestId: "oauth_revoke_option",
         },
       ];
 
@@ -836,6 +846,7 @@ class OAuthStore {
         label: t("Common:Enable"),
         onClick: () => this.onEnable(t, ""),
         disabled: !this.withEnabledOptions,
+        dataTestId: "oauth_enable_option",
       },
       {
         key: "disable",
@@ -843,12 +854,14 @@ class OAuthStore {
         label: t("Common:Disable"),
         onClick: this.onDisable,
         disabled: !this.withDisabledOptions,
+        dataTestId: "oauth_disable_option",
       },
       {
         key: "delete",
         label: t("Common:Delete"),
         iconUrl: DeleteIconUrl,
         onClick: this.onDelete,
+        dataTestId: "oauth_delete_option",
       },
     ];
   };

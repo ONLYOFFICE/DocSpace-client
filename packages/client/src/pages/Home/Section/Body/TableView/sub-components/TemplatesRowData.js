@@ -59,6 +59,7 @@ const TemplatesRowData = (props) => {
     badgesComponent,
     quickButtonsComponent,
     tableStorageName,
+    index,
     item,
   } = props;
 
@@ -73,6 +74,7 @@ const TemplatesRowData = (props) => {
     <>
       <TableCell
         {...dragStyles}
+        dataTestId={`templates-cell-name-${index}`}
         className={classNames(
           selectionProp?.className,
           "table-container_file-name-cell",
@@ -95,6 +97,7 @@ const TemplatesRowData = (props) => {
 
       {templatesRoomColumnTypeIsEnabled ? (
         <TableCell
+          dataTestId={`templates-cell-type-${index}`}
           style={
             !templatesRoomColumnTypeIsEnabled
               ? { background: "none !important" }
@@ -114,6 +117,7 @@ const TemplatesRowData = (props) => {
 
       {templateRoomColumnTagsIsEnabled ? (
         <TableCell
+          dataTestId={`templates-cell-tags-${index}`}
           style={
             !templateRoomColumnTagsIsEnabled
               ? { background: "none !important" }
@@ -133,6 +137,7 @@ const TemplatesRowData = (props) => {
 
       {templatesRoomColumnOwnerIsEnabled ? (
         <TableCell
+          dataTestId={`templates-cell-owner-${index}`}
           style={
             !templatesRoomColumnOwnerIsEnabled
               ? { background: "none" }

@@ -3,7 +3,7 @@
   "content": "Delete forever?",
   "content_en_sha1_hash": "0e0027aade000ea790cb5c39b96cbcc240beec7d",
   "created_at": "2025-05-19T21:30:56.571Z",
-  "updated_at": "2025-06-18T17:11:42.368Z",
+  "updated_at": "2025-08-12T19:46:25.901Z",
   "comment": {
     "text": "This translation key is used for the phrase \"Delete forever?\" which prompts a user to confirm their intention to delete a folder or file permanently. It appears in a modal dialog header when deleting a privacy folder or an empty trash.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/EmptyTrashDialog/index.js",
       "line_number": 98,
-      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeleteForeverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text noSelect>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
+      "context": "isLoading={!tReady}\n visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>{t(\"DeleteForeverTitle\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text>{description}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button",
       "module": "/packages/client"
     }
   ],

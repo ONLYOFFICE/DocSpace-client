@@ -3,7 +3,7 @@
   "content": "This room and all its contents are available to anyone with the link. Do you want to continue?",
   "content_en_sha1_hash": "c7cd74e1e3a7c4f3074d7470ce92ceeaf876ff92",
   "created_at": "2025-05-26T07:15:45.293Z",
-  "updated_at": "2025-05-26T08:04:34.534Z",
+  "updated_at": "2025-08-12T19:46:25.930Z",
   "comment": {
     "text": "This translation key is used for a confirmation message that appears when a file is moved to a public room. It asks the user if they still want to continue with the action and provides a description of what will happen to the room and its contents. It is displayed in a modal dialog.",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/MoveToPublicRoom/index.js",
       "line_number": 131,
-      "context": "<ModalDialog.Header>\n {t(\"Files:MoveToPublicRoomTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Common:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"",
+      "context": "<ModalDialog.Header>\n {t(\"Files:MoveToPublicRoomTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text>{t(\"Common:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/dialogs/backup-to-public-room-dialog/index.tsx",
       "line_number": 81,
-      "context": "return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:SaveToPublicRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text noSelect>{t(\"Common:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"",
+      "context": "return (\n <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:SaveToPublicRoom\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className=\"modal-dialog-content-body\">\n <Text>{t(\"Common:MoveToPublicRoom\")}</Text>\n </div>\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"delete-file-modal_submit\"",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "We will transfer rooms created by user and documents stored in user’s rooms.",
   "content_en_sha1_hash": "61a6b39eac15d8e2c406ce2c733f0c76567d6b9b",
   "created_at": "2025-05-19T21:30:56.738Z",
-  "updated_at": "2025-05-24T13:37:10.318Z",
+  "updated_at": "2025-08-12T19:46:25.887Z",
   "comment": {
     "text": "\"This translation key is used to describe a data reassignment process that transfers user-created rooms and their stored documents. It appears in a dialog component, indicating the action being taken by the user. Translators should focus on conveying the concept of transferring data between users.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DataReassignmentDialog/sub-components/Body/Description.js",
       "line_number": 42,
-      "context": "return (\n <StyledAvailableList className=\"list-container\">\n <Text className=\"list-item\" noSelect>\n {noRoomFilesToMove\n ? t(\"RoomsOnlyReassignment\")\n : t(\"DescriptionDataReassignment\")}\n </Text>\n <Text className=\"list-item\" noSelect>\n {t(\"NoteDataReassignment\")}\n </Text>",
+      "context": "return (\n <StyledAvailableList className=\"list-container\">\n <Text className=\"list-item\">\n {noRoomFilesToMove\n ? t(\"RoomsOnlyReassignment\")\n : t(\"DescriptionDataReassignment\")}\n </Text>\n <Text className=\"list-item\">{t(\"NoteDataReassignment\")}</Text>\n \n {dataReassignmentUrl ? (\n <Link",
       "module": "/packages/client"
     }
   ],

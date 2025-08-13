@@ -31,6 +31,7 @@ import { ContextMenuModel } from "../context-menu";
 
 export interface TableContainerProps {
   forwardedRef: React.Ref<HTMLDivElement>;
+  noSelect?: boolean;
   useReactWindow: boolean;
   children?: React.ReactNode;
   className?: string;

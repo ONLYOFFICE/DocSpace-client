@@ -355,7 +355,6 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           styles.settingsUnavailable,
           "restore-backup_warning settings_unavailable",
         )}
-        noSelect
       >
         {t("Common:Warning")}!
       </Text>
@@ -365,7 +364,6 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           styles.settingsUnavailable,
           "restore-backup_warning-description settings_unavailable",
         )}
-        noSelect
       >
         {t("Common:RestoreBackupWarningText", {
           productName: t("Common:ProductName"),
@@ -378,7 +376,6 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
             styles.settingsUnavailable,
             "restore-backup_warning-link settings_unavailable",
           )}
-          noSelect
         >
           {t("Common:RestoreBackupResetInfoWarningText", {
             productName: t("Common:ProductName"),

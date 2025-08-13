@@ -74,7 +74,7 @@ const UnsavedChangesDialogComponent = (props) => {
         {t("Common:YouHaveUnsavedChanges")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{t("Settings:UnsavedChangesBody")}</Text>
+        <Text>{t("Settings:UnsavedChangesBody")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

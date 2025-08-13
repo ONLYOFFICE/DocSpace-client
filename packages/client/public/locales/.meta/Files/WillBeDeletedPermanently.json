@@ -3,7 +3,7 @@
   "content": "{{date}} will be deleted permanently",
   "content_en_sha1_hash": "162831ed34e414405757db44537e2e3c06d77646",
   "created_at": "2025-05-19T21:30:56.350Z",
-  "updated_at": "2025-08-11T09:02:43.913Z",
+  "updated_at": "2025-08-12T19:46:26.020Z",
   "comment": {
     "text": "This translation key displays a message indicating that a file will be deleted permanently. It is used in the application's UI to provide users with information about file deletion actions, and appears in the DetailsHelper component on certain files.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 366,
+      "line_number": 365,
       "context": "getItemExpiredDate = () => {\n if (!(\"expired\" in this.item)) return null;\n return this.roomLifetime?.deletePermanently\n ? text(\n this.t(\"Files:WillBeDeletedPermanently\", {\n date: getCorrectDate(this.culture, this.item.expired as string),\n }),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {",
       "module": "/packages/client"
     }

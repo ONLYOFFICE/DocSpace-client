@@ -3,7 +3,7 @@
   "content": "Free",
   "content_en_sha1_hash": "75f527181b574f84568f33f67adc3b267a6fef9c",
   "created_at": "2025-05-19T21:30:45.558Z",
-  "updated_at": "2025-08-11T09:02:43.836Z",
+  "updated_at": "2025-08-12T19:46:25.782Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Free\" in various contexts across different platforms. It is commonly found on price labels and informational sections, indicating that a product or service has no cost associated with it.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Users/index.tsx",
-      "line_number": 221,
+      "line_number": 215,
       "context": "const typeData = renderTypeData();\n \n const { isVisitor, isCollaborator } = userSelection;\n \n const statusText =\n isVisitor || isCollaborator ? t(\"Common:Free\") : t(\"Common:Paid\");\n \n if (!ready) return <InfoPanelViewLoader view=\"users\" />;\n \n return (\n <>",
       "module": "/packages/client"
     },

@@ -200,7 +200,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
             </picture>
             <TextWrapper className="completed-form__text-wrapper">
               <Heading level={HeadingLevel.h1}>{header}</Heading>
-              <Text noSelect>{headerDescription}</Text>
+              <Text>{headerDescription}</Text>
             </TextWrapper>
           </Header>
           <VDRMainContent>

@@ -31,7 +31,20 @@
 .tileContainer {
   position: relative;
   height: 100%;
-  user-select: none;
+
+  user-select: text;
+
+  & *:not(img) {
+    user-select: text;
+  }
+
+  &.noSelect {
+    user-select: none;
+
+    & *:not(img) {
+      user-select: none;
+    }
+  }
 
   @include mixins.tablet-and-below {
     margin-top: 16px;

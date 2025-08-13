@@ -46,7 +46,7 @@ const Link: React.FC<LinkProps> = ({
   type = LinkType.page,
   isTextOverflow = false,
   noHover = false,
-  enableUserSelect = false,
+  enableUserSelect = true,
   textDecoration,
   ariaLabel,
   dataTestId,

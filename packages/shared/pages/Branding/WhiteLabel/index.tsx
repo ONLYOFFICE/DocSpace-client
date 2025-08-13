@@ -153,9 +153,18 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       const currentLogo = logoUrls[i];
       const defaultLogo = defaultWhiteLabelLogoUrls[i];
 
-      if (!isEqual(currentLogo, defaultLogo)) {
-        const value: Partial<{ light: string; dark: string }> = {};
+      const value: Partial<{ light: string; dark: string }> = {};
 
+      // TODO: temporary function for editor logo replacement
+      if (currentLogo.name.includes("Editor")) {
+        if (currentLogo.name.includes("Embed")) {
+          value.light = logoUrls[4].path.light;
+        } else {
+          value.light = logoUrls[3].path.light;
+        }
+      }
+
+      if (!isEqual(currentLogo, defaultLogo)) {
         if (!isEqual(currentLogo.path.light, defaultLogo.path.light))
           value.light = currentLogo.path.light;
         if (!isEqual(currentLogo.path.dark, defaultLogo.path.dark))
@@ -391,9 +400,11 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             fontWeight="600"
             className="settings_unavailable"
           >
-            {t("LogoForEditors", { editorName: t("Common:Documents") })} (
-            {logoUrls[3].size.width}x{logoUrls[3].size.height})
+            {/* t("LogoForEditors", { editorName: t("Common:Documents") })} */}
+            {t("LogoDocsEditor")} ({logoUrls[4].size.width}x
+            {logoUrls[4].size.height})
           </Text>
+
           <div className={styles.logosWrapper}>
             <Logo
               name={logoUrls[4].name}
@@ -428,6 +439,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           </div>
         </div>
 
+        {/* TODO: temporarily decided to hide these blocks 
         <div className={styles.logoWrapper}>
           <Text
             fontSize="15px"
@@ -591,6 +603,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
           </div>
         </div>
+        */}
       </div>
       <div
         className={classNames(styles.spacer, {

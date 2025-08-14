@@ -873,5 +873,6 @@
   "YourLogo": "Logosi",
   "YourTurn": "Sinun vuorosi",
   "LogoForEditors": "Editorin {{editorName}} logo",
-  "LogoForViewer": "Logo kohteelle {{diagramViewer}}"
+  "LogoForViewer": "Logo kohteelle {{diagramViewer}}",
+  "LogoDocsEditor": "Toimittajan otsikon logo"
 }

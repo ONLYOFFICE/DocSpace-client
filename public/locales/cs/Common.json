@@ -873,5 +873,6 @@
   "YourLogo": "Vaše logo",
   "YourTurn": "Jste na řadě",
   "LogoForEditors": "Logo pro editor {{editorName}}",
-  "LogoForViewer": "Logo pro {{diagramViewer}}"
+  "LogoForViewer": "Logo pro {{diagramViewer}}",
+  "LogoDocsEditor": "Logo pro záhlaví editorů"
 }

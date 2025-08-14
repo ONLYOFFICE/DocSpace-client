@@ -873,5 +873,6 @@
   "YourLogo": "Vaš logotip",
   "YourTurn": "Vi ste na vrsti",
   "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
-  "LogoForViewer": "Logotip za {{diagramViewer}}"
+  "LogoForViewer": "Logotip za {{diagramViewer}}",
+  "LogoDocsEditor": "Logotip za glavo urednika"
 }

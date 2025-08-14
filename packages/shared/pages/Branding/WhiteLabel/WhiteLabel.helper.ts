@@ -31,6 +31,7 @@ import {
   IUploadedDimensions,
   IUploadLogoResponse,
 } from "./WhiteLabel.types";
+import { WhiteLabelLogoType } from "../../../enums";
 
 export const generateLogo = (
   width: number,
@@ -254,3 +255,26 @@ export const uploadLogo = async (
     console.error(error);
   }
 };
+
+export const toDataUrl = (f: File) =>
+  new Promise<string>((resolve, reject) => {
+    try {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = (err) => reject(err);
+      reader.readAsDataURL(f);
+    } catch (err) {
+      reject(err);
+    }
+  });
+
+export const hiddenEditorTypes = [
+  WhiteLabelLogoType.SpreadsheetEditor,
+  WhiteLabelLogoType.SpreadsheetEditorEmbed,
+  WhiteLabelLogoType.PresentationEditor,
+  WhiteLabelLogoType.PresentationEditorEmbed,
+  WhiteLabelLogoType.PdfEditor,
+  WhiteLabelLogoType.PdfEditorEmbed,
+  WhiteLabelLogoType.DiagramEditor,
+  WhiteLabelLogoType.DiagramEditorEmbed,
+];

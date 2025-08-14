@@ -32,7 +32,6 @@ import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { SearchArea } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import AiRoomStore from "SRC_DIR/store/AiRoomStore";

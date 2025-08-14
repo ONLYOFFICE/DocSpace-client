@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Un link general a fost creat cu succes",
   "RevokeLink": "Revocare link",
   "LogoForEditors": "Logo pentru editorul {{editorName}}",
-  "LogoForViewer": "Logo pentru {{diagramViewer}}"
+  "LogoForViewer": "Logo pentru {{diagramViewer}}",
+  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare"
 }

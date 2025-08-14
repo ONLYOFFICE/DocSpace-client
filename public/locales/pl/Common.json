@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Nowy link główny został pomyślnie utworzony",
   "RevokeLink": "Unieważnij link",
   "LogoForEditors": "Logo dla edytora {{editorName}}",
-  "LogoForViewer": "Logo dla {{diagramViewer}}"
+  "LogoForViewer": "Logo dla {{diagramViewer}}",
+  "LogoDocsEditor": "Logo dla nagłówka edytorów"
 }

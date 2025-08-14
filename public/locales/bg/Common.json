@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Нов главен линк създаден успешно",
   "RevokeLink": "Отмени линк",
   "LogoForEditors": "Лого за редактора {{editorName}}",
-  "LogoForViewer": "Лого за {{diagramViewer}}"
+  "LogoForViewer": "Лого за {{diagramViewer}}",
+  "LogoDocsEditor": "Лого за редакторското заглавие"
 }

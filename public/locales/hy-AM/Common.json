@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Նոր ընդհանուր հղումը հաջողությամբ ստեղծվեց",
   "RevokeLink": "Չեղարկել հղումը",
   "LogoForEditors": "{{editorName}} խմբագրի լոգո",
-  "LogoForViewer": "{{diagramViewer}}-ի լոգո"
+  "LogoForViewer": "{{diagramViewer}}-ի լոգո",
+  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո"
 }

@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Nieuwe algemene link succesvol aangemaakt",
   "RevokeLink": "Link intrekken",
   "LogoForEditors": "Logo voor {{editorName}}-editor",
-  "LogoForViewer": "Logo voor {{diagramViewer}}"
+  "LogoForViewer": "Logo voor {{diagramViewer}}",
+  "LogoDocsEditor": "Logo voor de koptekst van de editors"
 }

@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Uusi yleinen linkki onnistuneesti luotu",
   "RevokeLink": "Peru linkki",
   "LogoForEditors": "Editorin {{editorName}} logo",
-  "LogoForViewer": "Logo kohteelle {{diagramViewer}}"
+  "LogoForViewer": "Logo kohteelle {{diagramViewer}}",
+  "LogoDocsEditor": "Toimittajan otsikon logo"
 }

@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "已成功创建新的通用链接",
   "RevokeLink": "撤销链接",
   "LogoForEditors": "{{editorName}}编辑器 logo",
-  "LogoForViewer": "{{diagramViewer}} logo"
+  "LogoForViewer": "{{diagramViewer}} logo",
+  "LogoDocsEditor": "编辑器标头Logo"
 }

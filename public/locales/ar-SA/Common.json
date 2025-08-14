@@ -871,8 +871,6 @@
   "YourCurrentDomain": "النطاق الحالي الخاص بك",
   "YourLogo": "شعاركم",
   "YourTurn": "دوركم الآن",
-  "Diagram": "مخطط",
-  "Diagrams": "مخططات",
   "Viewer": "مشاهد",
   "ManageNotifications": "إدارة",
   "LimitTimeBlockFormRoomDescription": "في غرفة تعبئة النماذج، يكون الرابط الرئيسي صالحًا لفترة غير محدودة.",
@@ -900,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "تم إنشاء الرابط العام الجديد بنجاح",
   "RevokeLink": "إبطال الرابط",
   "LogoForEditors": "شعار محرر {{editorName}}",
-  "LogoForViewer": "شعار {{diagramViewer}}"
+  "LogoForViewer": "شعار {{diagramViewer}}",
+  "LogoDocsEditor": "شعار ترويسة المحررين"
 }

@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "新しい一般リンクが正常に作成されました",
   "RevokeLink": "リンクの取り消し",
   "LogoForEditors": "{{editorName}}エディタ用のロゴ",
-  "LogoForViewer": "{{diagramViewer}}用のロゴ"
+  "LogoForViewer": "{{diagramViewer}}用のロゴ",
+  "LogoDocsEditor": "エディターズヘッダーのロゴ"
 }

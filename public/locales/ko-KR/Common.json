@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "새로운 일반 링크가 생성되었습니다",
   "RevokeLink": "링크 취소",
   "LogoForEditors": "{{editorName}} 편집기 로고",
-  "LogoForViewer": "{{diagramViewer}} 로고"
+  "LogoForViewer": "{{diagramViewer}} 로고",
+  "LogoDocsEditor": "편집기 헤더 로고"
 }

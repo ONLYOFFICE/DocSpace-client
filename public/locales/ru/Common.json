@@ -900,5 +900,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Новая общая ссылка успешно создана",
   "RevokeLink": "Отозвать ссылку",
   "LogoForEditors": "Логотип для редактора {{editorName}}",
-  "LogoForViewer": "Логотип для {{diagramViewer}}"
+  "LogoForViewer": "Логотип для {{diagramViewer}}",
+  "LogoDocsEditor": "Логотип для заголовка редакторов"
 }

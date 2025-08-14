@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Nova splošna povezava je bila uspešno ustvarjena",
   "RevokeLink": "Prekliči povezavo",
   "LogoForEditors": "Logotip za urejevalnik {{editorName}}",
-  "LogoForViewer": "Logotip za {{diagramViewer}}"
+  "LogoForViewer": "Logotip za {{diagramViewer}}",
+  "LogoDocsEditor": "Logotip za glavo urednika"
 }

@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Ο νέος γενικός σύνδεσμος δημιουργήθηκε με επιτυχία",
   "RevokeLink": "Ανάκληση συνδέσμου",
   "LogoForEditors": "Λογότυπο για τον επεξεργαστή {{editorName}}",
-  "LogoForViewer": "Λογότυπο για {{diagramViewer}}"
+  "LogoForViewer": "Λογότυπο για {{diagramViewer}}",
+  "LogoDocsEditor": "Λογότυπο για την επικεφαλίδα των προγραμμάτων επεξεργασίας"
 }

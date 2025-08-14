@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Nový hlavný odkaz úspešne vytvorený",
   "RevokeLink": "Zrušiť odkaz",
   "LogoForEditors": "Logo pre editor {{editorName}}",
-  "LogoForViewer": "Logo pre {{diagramViewer}}"
+  "LogoForViewer": "Logo pre {{diagramViewer}}",
+  "LogoDocsEditor": "Logo pre hlavičku editora"
 }

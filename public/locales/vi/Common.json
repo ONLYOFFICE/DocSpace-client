@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Đã tạo liên kết chung mới thành công",
   "RevokeLink": "Thu hồi liên kết",
   "LogoForEditors": "Logo cho trình soạn thảo {{editorName}}",
-  "LogoForViewer": "Logo cho {{diagramViewer}}"
+  "LogoForViewer": "Logo cho {{diagramViewer}}",
+  "LogoDocsEditor": "Logo cho tiêu đề trình chỉnh sửa"
 }

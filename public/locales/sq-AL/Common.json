@@ -897,5 +897,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Lidhja e re e përgjithshme u krijua me sukses",
   "RevokeLink": "Revokoni lidhjen",
   "LogoForEditors": "Logoja për redaktorin {{editorName}}",
-  "LogoForViewer": "Logo për {{diagramViewer}}"
+  "LogoForViewer": "Logo për {{diagramViewer}}",
+  "LogoDocsEditor": "Logo për menunë kompakte të majtë"
 }

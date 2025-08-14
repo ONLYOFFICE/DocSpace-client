@@ -916,7 +916,6 @@
   "CloseMenu": "Close menu",
   "LinkSettings": "Link settings",
   "Embed": "Embed",
-  "YouDontHaveEnoughPermission": "You don't have enough permission",
   "GeneralLinkRevokedAndCreatedSuccessfully": "New general link created successfully",
   "RevokeLink": "Revoke link",
   "PasswordProtectedFile": "File <1>{{fileName}}</1> is password-protected. Please enter the password",
@@ -930,5 +929,6 @@
   "FolderAvailableViaParentFolderLinkTitle": "Folder available via parent folder link",
   "FolderAvailableViaParentFolderLinkDescription": "This folder is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
   "LogoForEditors": "Logo for {{editorName}} editor",
-  "LogoForViewer": "Logo for {{diagramViewer}}"
+  "LogoForViewer": "Logo for {{diagramViewer}}",
+  "LogoDocsEditor": "Logo for the editors header"
 }

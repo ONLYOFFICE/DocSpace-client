@@ -889,5 +889,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Нове загальне посилання успішно створено",
   "RevokeLink": "Відкликати посилання",
   "LogoForEditors": "Логотип для редактора {{editorName}}",
-  "LogoForViewer": "Логотип для {{diagramViewer}}"
+  "LogoForViewer": "Логотип для {{diagramViewer}}",
+  "LogoDocsEditor": "Логотип заголовка редакторів"
 }

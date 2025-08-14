@@ -897,5 +897,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Jauna vispārīga saite ir veiksmīgi izveidota",
   "RevokeLink": "Atsaukt saiti",
   "LogoForEditors": "Logotips redaktoram {{editorName}}",
-  "LogoForViewer": "Logotips priekš {{diagramViewer}}"
+  "LogoForViewer": "Logotips priekš {{diagramViewer}}",
+  "LogoDocsEditor": "Redaktora galvenes logotips"
 }

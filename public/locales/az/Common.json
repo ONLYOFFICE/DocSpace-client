@@ -898,5 +898,6 @@
   "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni ümumi link uğurla yaradıldı",
   "RevokeLink": "Keçidi ləğv edin",
   "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
-  "LogoForViewer": "{{diagramViewer}} üçün loqo"
+  "LogoForViewer": "{{diagramViewer}} üçün loqo",
+  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo"
 }

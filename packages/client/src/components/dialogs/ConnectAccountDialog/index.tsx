@@ -26,6 +26,7 @@
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
@@ -46,15 +47,24 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 type ConnectAccountDialogProps = {
   connectAccountDialogVisible: DialogsStore["connectAccountDialogVisible"];
   setConnectAccountDialogVisible: DialogsStore["setConnectAccountDialogVisible"];
+  getTgLink: TStore["telegramStore"]["getTgLink"];
+  botUrl: TStore["telegramStore"]["botUrl"];
 };
 
 const ConnectAccountDialog = ({
   connectAccountDialogVisible,
   setConnectAccountDialogVisible,
+  getTgLink,
+  botUrl,
 }: ConnectAccountDialogProps) => {
   const { t } = useTranslation(["Profile", "Common"]);
 
+  useEffect(() => {
+    getTgLink();
+  }, []);
+
   const onClickConnect = () => {
+    window.open(botUrl, "_blank");
     setConnectAccountDialogVisible(false);
   };
 
@@ -62,14 +72,13 @@ const ConnectAccountDialog = ({
     setConnectAccountDialogVisible(false);
   };
 
-  const url = "t.me/ExampleBot";
-
   return (
     <ModalDialog
       visible={connectAccountDialogVisible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
+      isLoading={!botUrl}
     >
       <ModalDialog.Header>{t("Profile:TelegramAccount")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -77,7 +86,7 @@ const ConnectAccountDialog = ({
           {t("Profile:TelegramAccountDescription")}
         </Text>
         <InputBlock
-          value={url}
+          value={botUrl}
           type={InputType.text}
           isAutoFocussed
           isReadOnly
@@ -87,7 +96,7 @@ const ConnectAccountDialog = ({
           iconColor={globalColors.lightGrayDark}
           isIconFill
           onIconClick={() => {
-            copy(url);
+            copy(botUrl);
             toastr.success(t("Common:LinkCopySuccess"));
           }}
         />
@@ -111,12 +120,16 @@ const ConnectAccountDialog = ({
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, telegramStore }: TStore) => {
   const { connectAccountDialogVisible, setConnectAccountDialogVisible } =
     dialogsStore;
+
+  const { getTgLink, botUrl } = telegramStore;
 
   return {
     connectAccountDialogVisible,
     setConnectAccountDialogVisible,
+    getTgLink,
+    botUrl,
   };
 })(observer(ConnectAccountDialog));

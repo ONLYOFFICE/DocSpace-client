@@ -24,27 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
-import { TUser } from "@docspace/shared/api/people/types";
 
 import Channel from "./sub-components/Channel";
 
 import styles from "./Notifications.module.scss";
 
 type NotificationsChannelsProps = {
-  setConnectAccountDialogVisible: (visible: boolean) => void;
-  setDisconnectAccountDialogVisible: (visible: boolean) => void;
-  user: TUser | null;
+  setConnectAccountDialogVisible?: TStore["dialogsStore"]["setConnectAccountDialogVisible"];
+  setDisconnectAccountDialogVisible?: TStore["dialogsStore"]["setDisconnectAccountDialogVisible"];
+  user?: TStore["userStore"]["user"];
+  checkTg?: TStore["telegramStore"]["checkTg"];
+  isConnected?: TStore["telegramStore"]["isConnected"];
+  username?: TStore["telegramStore"]["username"];
 };
 
 const NotificationsChannels = ({
   setConnectAccountDialogVisible,
   setDisconnectAccountDialogVisible,
   user,
+  checkTg,
+  isConnected,
+  username,
 }: NotificationsChannelsProps) => {
   const { t } = useTranslation("Profile");
+
+  useEffect(() => {
+    checkTg?.();
+  }, []);
 
   return (
     <div className={styles.notificationsChannels}>
@@ -57,24 +67,28 @@ const NotificationsChannels = ({
         <Channel type="email" name={user?.email || ""} isConnected />
         <Channel
           type="telegram"
-          name="@test"
-          onConnect={() => setConnectAccountDialogVisible(true)}
-          onDisconnect={() => setDisconnectAccountDialogVisible(true)}
-          // isConnected
+          name={`@${username}` || ""}
+          onConnect={() => setConnectAccountDialogVisible?.(true)}
+          onDisconnect={() => setDisconnectAccountDialogVisible?.(true)}
+          isConnected={isConnected}
         />
       </div>
     </div>
   );
 };
 
-export default inject(({ dialogsStore, userStore }: TStore) => {
+export default inject(({ dialogsStore, userStore, telegramStore }: TStore) => {
   const { setConnectAccountDialogVisible, setDisconnectAccountDialogVisible } =
     dialogsStore;
   const { user } = userStore;
+  const { checkTg, isConnected, username } = telegramStore;
 
   return {
     setConnectAccountDialogVisible,
     setDisconnectAccountDialogVisible,
     user,
+    checkTg,
+    isConnected,
+    username,
   };
 })(observer(NotificationsChannels));

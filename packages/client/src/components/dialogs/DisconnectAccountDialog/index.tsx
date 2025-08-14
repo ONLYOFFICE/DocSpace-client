@@ -39,15 +39,20 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 type DisconnectAccountDialogProps = {
   disconnectAccountDialogVisible: DialogsStore["disconnectAccountDialogVisible"];
   setDisconnectAccountDialogVisible: DialogsStore["setDisconnectAccountDialogVisible"];
+  deleteTgLink: TStore["telegramStore"]["deleteTgLink"];
+  username: TStore["telegramStore"]["username"];
 };
 
 const DisconnectAccountDialog = ({
   disconnectAccountDialogVisible,
   setDisconnectAccountDialogVisible,
+  deleteTgLink,
+  username,
 }: DisconnectAccountDialogProps) => {
   const { t } = useTranslation(["Profile", "Common"]);
 
   const onClickDisconnect = () => {
+    deleteTgLink();
     setDisconnectAccountDialogVisible(false);
   };
 
@@ -68,7 +73,7 @@ const DisconnectAccountDialog = ({
       <ModalDialog.Body>
         <Text fontSize="13px" fontWeight={400} style={{ marginBottom: "16px" }}>
           {t("Profile:TelegramAccountDisconnectDescription", {
-            username: "test",
+            username,
           })}
         </Text>
       </ModalDialog.Body>
@@ -91,12 +96,16 @@ const DisconnectAccountDialog = ({
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, telegramStore }: TStore) => {
   const { disconnectAccountDialogVisible, setDisconnectAccountDialogVisible } =
     dialogsStore;
+
+  const { deleteTgLink, username } = telegramStore;
 
   return {
     disconnectAccountDialogVisible,
     setDisconnectAccountDialogVisible,
+    deleteTgLink,
+    username,
   };
 })(observer(DisconnectAccountDialog));

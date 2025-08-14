@@ -32,6 +32,7 @@ import UsefulTipsContainer from "./sub-components/UsefulTipsContainer";
 import RoomsActionsContainer from "./sub-components/RoomsActionsContainer";
 import DailyFeedContainer from "./sub-components/DailyFeedContainer";
 import RoomsActivityContainer from "./sub-components/RoomsActivityContainer";
+import NotificationsChannels from "./NotificationsChannels";
 import { StyledSectionBodyContent, StyledTextContent } from "./StyledComponent";
 
 const Notifications = () => {
@@ -91,6 +92,7 @@ const Notifications = () => {
 
   return (
     <StyledSectionBodyContent>
+      <NotificationsChannels />
       {badgesContent}
       {emailContent}
     </StyledSectionBodyContent>

@@ -69,11 +69,6 @@ const AiRoomTabs = ({
     return <SectionSubmenuSkeleton style={{ marginBottom: 0 }} />;
 
   const onSelect = (tab: TTabItem) => {
-    if (tab.id === "knowledge") {
-      toastr.info(t("Common:WorkInProgress"));
-      return;
-    }
-
     setCurrentTab(tab.id as "chat" | "knowledge" | "result");
 
     const filesFilter = FilesFilter.getDefault();
@@ -105,17 +100,17 @@ const AiRoomTabs = ({
   const items: TTabItem[] = [
     {
       id: "chat",
-      name: "AI-Chat",
+      name: t("AIChat"),
       content: null,
     },
     {
       id: "knowledge",
-      name: "Knowledge",
+      name: t("Knowledge"),
       content: null,
     },
     {
       id: "result",
-      name: "Result Storage",
+      name: t("ResultStorage"),
       content: null,
     },
   ];

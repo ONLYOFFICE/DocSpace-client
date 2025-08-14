@@ -167,7 +167,11 @@ const InputItem = ({
         {isLoading ? (
           <Loader type={LoaderTypes.track} size="16px" />
         ) : (
-          <IconButton iconName={AcceptIconSvgUrl} size={16} />
+          <IconButton
+            iconName={AcceptIconSvgUrl}
+            size={16}
+            dataTestId="selector_new_item_accept"
+          />
         )}
       </div>
       <div
@@ -180,6 +184,7 @@ const InputItem = ({
           iconName={CancelIconSvgUrl}
           size={16}
           isDisabled={isLoading}
+          dataTestId="selector_new_item_cancel"
         />
       </div>
     </div>

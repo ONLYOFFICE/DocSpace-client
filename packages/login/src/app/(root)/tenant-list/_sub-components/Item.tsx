@@ -56,7 +56,13 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     <div className="item" onClick={onClick} data-testid={portal}>
       <div className="info">
         <img className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
-        <Text fontWeight={600} fontSize="14px" lineHeight="16px" truncate dataTestId="portal_name_text">
+        <Text
+          fontWeight={600}
+          fontSize="14px"
+          lineHeight="16px"
+          truncate
+          dataTestId="portal_name_text"
+        >
           {name.replace("http://", "").replace("https://", "")}
         </Text>
       </div>

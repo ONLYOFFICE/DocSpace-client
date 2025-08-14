@@ -57,8 +57,17 @@ export const GreetingUserContainer = ({
       <div className="sign-in-container">
         {type === "LinkInvite" && !emailFromLink ? (
           <div className="back-title">
-            <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} dataTestId="greeting_back_icon_button" />
-            <Text fontWeight={600} onClick={onClickBack} dataTestId="greeting_back_text">
+            <IconButton
+              size={16}
+              iconName={ArrowIcon}
+              onClick={onClickBack}
+              dataTestId="greeting_back_icon_button"
+            />
+            <Text
+              fontWeight={600}
+              onClick={onClickBack}
+              dataTestId="greeting_back_text"
+            >
               {t("Common:Back")}
             </Text>
           </div>

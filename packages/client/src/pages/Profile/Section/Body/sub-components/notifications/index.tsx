@@ -66,7 +66,7 @@ const Notifications = () => {
     <>
       <StyledTextContent>
         <Text fontSize="14px" fontWeight={600} className="email-title">
-          {t("Common:Email")}
+          {t("SettingUpNotifications")}
         </Text>
       </StyledTextContent>
 

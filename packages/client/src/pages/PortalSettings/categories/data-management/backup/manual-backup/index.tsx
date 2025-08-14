@@ -23,20 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
-
-import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
-import { isObjectEmpty } from "@docspace/shared/utils/isObjectEmpty";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -58,11 +50,8 @@ const ManualBackupWrapper = ({
   setConnectedThirdPartyAccount,
   ...props
 }: ManualBackupWrapperProps) => {
-  const [isInitialLoading, setIsInitialLoading] = useState(false);
   const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
     useState(true);
-
-  const timerId = useRef<number>(null);
 
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -72,55 +61,10 @@ const ManualBackupWrapper = ({
 
   useEffect(() => {
     if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);
-
-    timerId.current = window.setTimeout(() => {
-      setIsInitialLoading(true);
-    }, 200);
-
-    (async () => {
-      try {
-        getProgress(t);
-
-        const baseRequests = [
-          getSettingsThirdParty(),
-          getBackupStorage(),
-          getStorageRegions(),
-        ] as const;
-
-        const optionalRequests = [];
-
-        if (isObjectEmpty(rootFoldersTitles)) {
-          optionalRequests.push(fetchTreeFolders());
-        }
-
-        const [account, backupStorage, storageRegionsS3] = await Promise.all([
-          ...baseRequests,
-          ...optionalRequests,
-        ]);
-
-        setConnectedThirdPartyAccount(account ?? null);
-        setThirdPartyStorage(backupStorage);
-        setStorageRegions(storageRegionsS3);
-      } catch (error) {
-        toastr.error(error as Error);
-      } finally {
-        if (timerId.current) {
-          window.clearTimeout(timerId.current);
-          timerId.current = null;
-        }
-
-        setIsInitialLoading(false);
-        setIsEmptyContentBeforeLoader(false);
-      }
-    })();
   }, []);
 
   useEffect(() => {
     return () => {
-      if (timerId.current) {
-        window.clearTimeout(timerId.current);
-        timerId.current = null;
-      }
       resetDownloadingProgress();
     };
   }, []);
@@ -128,7 +72,6 @@ const ManualBackupWrapper = ({
   return (
     <ManualBackup
       isNotPaidPeriod={isNotPaidPeriod}
-      isInitialLoading={isInitialLoading}
       rootFoldersTitles={rootFoldersTitles}
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}

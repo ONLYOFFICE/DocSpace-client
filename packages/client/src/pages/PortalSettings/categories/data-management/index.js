@@ -35,7 +35,17 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
+
+import { getSettingsThirdParty } from "@docspace/shared/api/files";
+import {
+  getBackupStorage,
+  getStorageRegions,
+} from "@docspace/shared/api/settings";
+import { getBackupSchedule } from "@docspace/shared/api/portal";
+
+import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -45,6 +55,7 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
+import { isObjectEmpty } from "@docspace/shared/utils/isObjectEmpty";
 
 import config from "../../../../../package.json";
 
@@ -58,16 +69,30 @@ const DataManagementWrapper = (props) => {
     buttonSize,
     t,
 
-    isNotPaidPeriod,
     currentDeviceType,
     standalone,
+
+    getProgress,
+    setStorageRegions,
+    setThirdPartyStorage,
+    setConnectedThirdPartyAccount,
+
+    setBackupSchedule,
+    setDefaultOptions,
+
+    rootFoldersTitles,
+    fetchTreeFolders,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const [currentTabId, setCurrentTabId] = useState();
-  const [isLoaded, setIsLoaded] = useState(false);
+
+  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
+    t,
+    props.language,
+  );
 
   const { interfaceDirection } = useTheme();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
@@ -108,6 +133,60 @@ const DataManagementWrapper = (props) => {
     );
   };
 
+  const getManualBackupData = async () => {
+    try {
+      getProgress(t);
+
+      const baseRequests = [
+        getSettingsThirdParty(),
+        getBackupStorage(),
+        getStorageRegions(),
+      ];
+
+      const optionalRequests = [];
+
+      if (isObjectEmpty(rootFoldersTitles)) {
+        optionalRequests.push(fetchTreeFolders());
+      }
+
+      const [account, backupStorage, storageRegionsS3] = await Promise.all([
+        ...baseRequests,
+        ...optionalRequests,
+      ]);
+
+      setConnectedThirdPartyAccount(account ?? null);
+      setThirdPartyStorage(backupStorage);
+      setStorageRegions(storageRegionsS3);
+    } catch (error) {
+      toastr.error(error);
+    }
+  };
+
+  const getAutoBackupData = async () => {
+    try {
+      if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
+
+      getProgress(t);
+      const [account, backupSchedule, backupStorage, newStorageRegions] =
+        await Promise.all([
+          getSettingsThirdParty(),
+          getBackupSchedule(),
+          getBackupStorage(),
+          getStorageRegions(),
+        ]);
+
+      if (account) setConnectedThirdPartyAccount(account);
+      if (backupStorage) setThirdPartyStorage(backupStorage);
+
+      setBackupSchedule(backupSchedule);
+      setStorageRegions(newStorageRegions);
+
+      setDefaultOptions(periodsObject, weekdaysLabelArray);
+    } catch (error) {
+      toastr.error(error);
+    }
+  };
+
   const data = [
     {
       id: "data-backup",
@@ -115,6 +194,7 @@ const DataManagementWrapper = (props) => {
       content: (
         <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
+      onClick: async () => await getManualBackupData(),
     },
     {
       id: "auto-backup",
@@ -122,6 +202,7 @@ const DataManagementWrapper = (props) => {
       content: (
         <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
+      onClick: async () => await getAutoBackupData(),
     },
   ];
 
@@ -129,8 +210,6 @@ const DataManagementWrapper = (props) => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab && data.length) setCurrentTabId(currentTab.id);
-
-    setIsLoaded(true);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -166,6 +245,7 @@ const DataManagementWrapper = (props) => {
       }
     };
   }, []);
+
   const onSelect = (e) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`
@@ -174,27 +254,41 @@ const DataManagementWrapper = (props) => {
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
-
-    setIsLoaded(false);
+    setCurrentTabId(e.id);
   };
 
-  if (!isLoaded) return null;
-
-  return isNotPaidPeriod ? (
-    <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
-  ) : (
+  return (
     <Tabs
       items={data}
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation={true}
     />
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, setup, currentTariffStatusStore }) => {
+  ({
+    settingsStore,
+    treeFoldersStore,
+    setup,
+    currentTariffStatusStore,
+    backup,
+  }) => {
     const { initSettings } = setup;
+
+    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
+
+    const {
+      getProgress,
+      setStorageRegions,
+      setThirdPartyStorage,
+      setConnectedThirdPartyAccount,
+
+      setBackupSchedule,
+      setDefaultOptions,
+    } = backup;
 
     const { isNotPaidPeriod } = currentTariffStatusStore;
 
@@ -220,6 +314,17 @@ export const Component = inject(
       currentColorScheme,
       currentDeviceType,
       standalone,
+
+      getProgress,
+      setStorageRegions,
+      setThirdPartyStorage,
+      setConnectedThirdPartyAccount,
+
+      setBackupSchedule,
+      setDefaultOptions,
+
+      rootFoldersTitles,
+      fetchTreeFolders,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

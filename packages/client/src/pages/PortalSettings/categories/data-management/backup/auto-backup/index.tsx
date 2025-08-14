@@ -24,20 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
-import { getBackupSchedule } from "@docspace/shared/api/portal";
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
-
-import { toastr } from "@docspace/shared/components/toast";
 import AutomaticBackup from "@docspace/shared/pages/backup/auto-backup";
-import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
+
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
@@ -62,63 +54,9 @@ const AutoBackupWrapper = ({
   setErrorInformation,
   ...props
 }: AutoBackupWrapperProps) => {
-  const timerIdRef = useRef<number>(null);
   const { t, ready } = useTranslation(["Settings", "Common"]);
-  const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
-    useState(true);
-  const [isInitialLoading, setIsInitialLoading] = useState(false);
-  const [isInitialError, setIsInitialError] = useState(false);
-  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
-    t,
-    props.language,
-  );
-
-  useEffect(() => {
-    (async () => {
-      try {
-        timerIdRef.current = window.setTimeout(() => {
-          setIsInitialLoading(true);
-        }, 200);
-
-        if (Object.keys(props.rootFoldersTitles).length === 0)
-          fetchTreeFolders();
-
-        getProgress(t);
-        const [account, backupSchedule, backupStorage, newStorageRegions] =
-          await Promise.all([
-            getSettingsThirdParty(),
-            getBackupSchedule(),
-            getBackupStorage(),
-            getStorageRegions(),
-          ]);
-
-        if (account) setConnectedThirdPartyAccount(account);
-        if (backupStorage) setThirdPartyStorage(backupStorage);
-
-        setBackupSchedule(backupSchedule!);
-        setStorageRegions(newStorageRegions);
-
-        setDefaultOptions(periodsObject, weekdaysLabelArray);
-      } catch (error) {
-        setErrorInformation(error, t);
-        setIsInitialError(true);
-        toastr.error(error as Error);
-      } finally {
-        if (timerIdRef.current) {
-          clearTimeout(timerIdRef.current);
-          timerIdRef.current = null;
-        }
-        setIsEmptyContentBeforeLoader(false);
-        setIsInitialLoading(false);
-      }
-    })();
-  }, []);
 
   useUnmount(() => {
-    if (timerIdRef.current) {
-      clearTimeout(timerIdRef.current);
-      timerIdRef.current = null;
-    }
     resetDownloadingProgress();
     props.setterSelectedEnableSchedule(false);
     props.toDefault();
@@ -134,10 +72,6 @@ const AutoBackupWrapper = ({
       setBackupSchedule={setBackupSchedule}
       setThirdPartyStorage={setThirdPartyStorage}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
-      isInitialLoading={isInitialLoading}
-      isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
-      setErrorInformation={setErrorInformation}
-      isInitialError={isInitialError}
       {...props}
     />
   );

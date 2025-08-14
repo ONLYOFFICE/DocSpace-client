@@ -521,4 +521,5 @@ export type TEncryptionSettings = {
 
 export type TTelegramCheck = {
   status: string;
+  username?: string;
 };

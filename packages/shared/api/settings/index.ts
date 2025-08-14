@@ -1393,7 +1393,7 @@ export async function getTelegramLink() {
     url: "/settings/telegram/link",
   });
 
-  return res;
+  return res as string;
 }
 
 export async function deleteTelegramLink() {
@@ -1402,5 +1402,5 @@ export async function deleteTelegramLink() {
     url: "/settings/telegram/link",
   });
 
-  return res;
+  return res as boolean;
 }

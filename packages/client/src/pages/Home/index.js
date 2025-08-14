@@ -180,6 +180,7 @@ const PureHome = (props) => {
   const isProfile = currentClientView === "profile";
   const isContactsEmptyView =
     currentClientView === "groups" ? isEmptyGroups : isUsersEmptyView;
+  const isChat = currentClientView === "chat";
 
   const onDrop = (f, uploadToFolder) => {
     if (isContactsPage || isProfile) return;
@@ -264,8 +265,6 @@ const PureHome = (props) => {
   }, []);
 
   let sectionProps = {};
-
-  const isChat = window.location.pathname.includes("chat");
 
   if (isSettingsPage) {
     sectionProps.isInfoPanelAvailable = false;
@@ -408,7 +407,7 @@ const PureHome = (props) => {
           <SectionWarningContent />
         </Section.SectionWarning>
 
-        {shouldShowFilter && !isProfile ? (
+        {!isChat && shouldShowFilter && !isProfile ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />

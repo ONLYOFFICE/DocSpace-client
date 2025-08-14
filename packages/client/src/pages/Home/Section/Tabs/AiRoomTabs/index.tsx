@@ -43,6 +43,7 @@ type AiRoomTabsProps = {
   id?: SelectedFolderStore["id"];
   rootRoomId?: SelectedFolderStore["rootRoomId"];
 
+  currentClientView?: ClientLoadingStore["currentClientView"];
   showTabsLoader?: ClientLoadingStore["showTabsLoader"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 
@@ -55,6 +56,7 @@ const AiRoomTabs = ({
   rootRoomId,
 
   showTabsLoader,
+  currentClientView,
   setIsSectionBodyLoading,
 
   currentTab,
@@ -117,17 +119,21 @@ const AiRoomTabs = ({
   return (
     <Tabs
       className="ai-room-tabs"
-      selectedItemId={currentTab ?? "chat"}
+      selectedItemId={
+        currentClientView === "chat" ? "chat" : (currentTab ?? "chat")
+      }
       items={items}
       onSelect={onSelect}
-      withoutStickyIntend={currentTab === "chat"}
+      withoutStickyIntend={currentClientView === "chat"}
+      withAnimation
     />
   );
 };
 
 export default inject(
   ({ clientLoadingStore, aiRoomStore, selectedFolderStore }: TStore) => {
-    const { showTabsLoader, setIsSectionBodyLoading } = clientLoadingStore;
+    const { showTabsLoader, setIsSectionBodyLoading, currentClientView } =
+      clientLoadingStore;
 
     const { currentTab, setCurrentTab } = aiRoomStore;
 
@@ -142,6 +148,8 @@ export default inject(
 
       currentTab,
       setCurrentTab,
+
+      currentClientView,
     };
   },
 )(observer(AiRoomTabs));

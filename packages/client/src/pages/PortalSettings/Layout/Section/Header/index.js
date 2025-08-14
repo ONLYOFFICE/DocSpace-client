@@ -40,8 +40,12 @@ import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
+import { DeviceType } from "@docspace/shared/enums";
+
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { IMPORT_HEADER_CONST } from "SRC_DIR/pages/PortalSettings/utils/settingsTree";
+
+import Warning from "../../WarningComponent";
 import {
   getKeyByLink,
   settingsTree,
@@ -69,6 +73,9 @@ export const HeaderContainer = styled.div`
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
     }
+  }
+  .settings-section_warning {
+    margin-inline-start: 16px;
   }
   .action-wrapper {
     flex-grow: 1;
@@ -153,6 +160,7 @@ const SectionHeaderContent = (props) => {
     selectorIsOpen,
     toggleSelector,
     removeAdmins,
+    deviceType,
   } = props;
 
   const navigate = useNavigate();
@@ -166,6 +174,7 @@ const SectionHeaderContent = (props) => {
     isCategoryOrHeader: false,
     showSelector: false,
     isHeaderVisible: false,
+    needWarning: false,
   });
 
   const getArrayOfParams = () => {
@@ -202,6 +211,15 @@ const SectionHeaderContent = (props) => {
     }
   };
 
+  const needWarningByHeader = (header) => {
+    if (header === "Backup") {
+      // if (standalone) return false;
+
+      return true;
+    }
+    return false;
+  };
+
   React.useEffect(() => {
     if (tReady) setIsLoadedSectionHeader(true);
 
@@ -233,7 +251,12 @@ const SectionHeaderContent = (props) => {
     state.isNeedPaidIcon !== isNeedPaidIcon &&
       setState((val) => ({ ...val, isNeedPaidIcon }));
 
+    const needWarning = needWarningByHeader(header);
+
     header !== state.header && setState((val) => ({ ...val, header }));
+
+    state.needWarning !== needWarning &&
+      setState((val) => ({ ...val, needWarning }));
 
     isCategoryOrHeader !== state.isCategoryOrHeader &&
       setState((val) => ({ ...val, isCategoryOrHeader }));
@@ -288,7 +311,7 @@ const SectionHeaderContent = (props) => {
     logoText,
   } = props;
 
-  const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
+  const { header, isCategoryOrHeader, isNeedPaidIcon, needWarning } = state;
   const arrayOfParams = getArrayOfParams();
 
   const menuItems = (
@@ -380,12 +403,16 @@ const SectionHeaderContent = (props) => {
               )}
             </div>
           </Heading>
+          {needWarning && deviceType === DeviceType.desktop ? (
+            <div className="settings-section_warning">
+              <Warning />
+            </div>
+          ) : null}
           {arrayOfParams[0] !== "payments" && arrayOfParams.length < 3 ? (
             <div className="tariff-bar">
               <TariffBar />
             </div>
           ) : null}
-
           {addUsers ? (
             <div className="action-wrapper">
               <IconButton
@@ -433,7 +460,7 @@ export default inject(
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
     const { workspace } = importAccountsStore;
-    const { standalone, logoText } = settingsStore;
+    const { standalone, logoText, deviceType } = settingsStore;
 
     const { getHeaderMenuItems } = oauthStore;
     return {
@@ -461,6 +488,7 @@ export default inject(
       getHeaderMenuItems,
       setSelections: oauthStore.setSelections,
       logoText,
+      deviceType,
     };
   },
 )(

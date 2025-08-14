@@ -53,6 +53,7 @@ const RecoverAccess = () => {
         isHovered
         className="login-link recover-link"
         onClick={openRecoverDialog}
+        dataTestId="recover_access_link"
       >
         {t("RecoverAccess")}
       </Link>

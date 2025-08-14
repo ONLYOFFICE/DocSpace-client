@@ -71,7 +71,7 @@ const DisconnectAccountDialog = ({
         {t("Profile:TelegramAccountDisconnect")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400} style={{ marginBottom: "16px" }}>
+        <Text fontSize="13px" fontWeight={400}>
           {t("Profile:TelegramAccountDisconnectDescription", {
             username,
           })}

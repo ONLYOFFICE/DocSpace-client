@@ -3,7 +3,7 @@
   "content": "Your price",
   "content_en_sha1_hash": "16a067af179c1f81645e2954ee05c68337fd773c",
   "created_at": "2025-05-19T21:30:53.756Z",
-  "updated_at": "2025-06-08T12:02:32.815Z",
+  "updated_at": "2025-08-12T19:46:26.224Z",
   "comment": {
     "text": "This translation key is used to display \"Your price\" in a payment calculation context, typically on a settings page or pricing information section. It appears as a title and will be shown when certain conditions are met, indicating that the user's price should be displayed instead of another option.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/PriceCalculation.js",
-      "line_number": 171,
-      "context": "fontWeight={600}\n noSelect\n className=\"payment_main-title\"\n >\n {isGracePeriod || isNotPaidPeriod\n ? t(\"YourPrice\")\n : t(\"PriceCalculation\")}\n </Text>\n {isGracePeriod || isNotPaidPeriod ? (\n <CurrentUsersCountContainer\n isNeedPlusSign={isNeedPlusSign}",
+      "line_number": 166,
+      "context": "return (\n <StyledBody className=\"price-calculation-container\" isDisabled={isDisabled}>\n <Text fontSize=\"16px\" fontWeight={600} className=\"payment_main-title\">\n {isGracePeriod || isNotPaidPeriod\n ? t(\"YourPrice\")\n : t(\"PriceCalculation\")}\n </Text>\n {isGracePeriod || isNotPaidPeriod ? (\n <CurrentUsersCountContainer\n isNeedPlusSign={isNeedPlusSign}",
       "module": "/packages/client"
     }
   ],

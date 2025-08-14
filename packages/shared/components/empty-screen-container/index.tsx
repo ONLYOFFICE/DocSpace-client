@@ -74,7 +74,6 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           fontSize="19px"
           fontWeight="700"
           className={classNames(styles.header, "ec-header")}
-          noSelect
         >
           {headerText}
         </Text>
@@ -85,7 +84,6 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           as="span"
           fontWeight="600"
           className={classNames(styles.subheading, "ec-subheading")}
-          noSelect
         >
           {subheadingText}
         </Text>
@@ -96,7 +94,6 @@ const EmptyScreenContainer = (props: EmptyScreenContainerProps) => {
           as="span"
           fontSize="12px"
           className={classNames(styles.description, "ec-desc")}
-          noSelect
         >
           {descriptionText}
         </Text>

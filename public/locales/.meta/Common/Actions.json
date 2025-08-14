@@ -3,7 +3,7 @@
   "content": "Actions",
   "content_en_sha1_hash": "c3cd636a585b20c40ac2df5ffb403e83cb2eef51",
   "created_at": "2025-05-19T21:30:42.878Z",
-  "updated_at": "2025-08-11T09:02:43.819Z",
+  "updated_at": "2025-08-11T18:11:59.096Z",
   "comment": {
     "text": "This translation key is used to display a button or label that indicates actions available in an article or profile section. It appears on a main button and in some header sections, where it shows a title such as \"Actions\" or \"Invite\", depending on the context.",
     "is_auto": true,
@@ -18,14 +18,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 635,
-      "context": "isInfoPanelVisible={isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}",
+      "line_number": 673,
+      "context": "isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}\n titles={{\n warningText,\n actions: isRoomsFolder\n ? t(\"Common:NewRoom\")\n : t(\"Common:Actions\"),\n contextMenu: t(\"Translations:TitleShowFolderActions\"),\n infoPanel: t(\"Common:InfoPanel\"),\n }}\n withMenu={!isRoomsFolder}\n onPlusClick={onCreateRoom}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Header/index.js",
-      "line_number": 190,
-      "context": "<div className=\"action-button\">\n {(isAdmin && !profile?.isOwner) ||\n (isMe && !profile?.isLDAP && !profile?.isSSO) ? (\n <ContextMenuButton\n directionX=\"left\"\n title={t(\"Common:Actions\")}\n iconName={VerticalDotsReactSvgUrl}\n size={17}\n getData={getUserContextOptions}\n isDisabled={false}\n usePortal",
+      "line_number": 105,
+      "context": "<div className=\"action-button\">\n {(isAdmin && !profile?.isOwner) ||\n (!profile?.isLDAP && !profile?.isSSO) ? (\n <ContextMenuButton\n directionX=\"right\"\n title={t(\"Common:Actions\")}\n iconName={VerticalDotsReactSvgUrl}\n size={17}\n getData={getUserContextOptions}\n isDisabled={false}\n usePortal",
       "module": "/packages/client"
     },
     {

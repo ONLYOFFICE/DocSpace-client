@@ -3,7 +3,7 @@
   "content": "Two-factor authentication via a code-generating app was enabled for all users by the admin.",
   "content_en_sha1_hash": "135c56c81388f3c625d431c75ce2a727e277b481",
   "created_at": "2025-05-19T21:30:53.402Z",
-  "updated_at": "2025-05-24T06:05:30.124Z",
+  "updated_at": "2025-08-11T18:11:59.300Z",
   "comment": {
     "text": "This translation key is used to display a description explaining two-factor authentication. It appears as a brief text in a UI element, specifically a button or section header, providing context for users about an enabled security feature, likely in a settings or profile page.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login-settings/index.js",
-      "line_number": 71,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/login-settings/index.tsx",
+      "line_number": 79,
       "context": "<StyledWrapper>\n <div className=\"header\">\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\">\n {t(\"Settings:TwoFactorAuth\")}\n </Text>\n <Text className=\"description\">{t(\"TwoFactorDescription\")}</Text>\n </div>\n <div className=\"actions\">\n <Button\n className=\"button\"\n label={t(\"ShowBackupCodes\")}",
       "module": "/packages/client"
     }

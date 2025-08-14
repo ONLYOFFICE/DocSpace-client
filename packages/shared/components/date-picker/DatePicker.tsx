@@ -165,6 +165,7 @@ const DatePicker = (props: DatePickerProps) => {
             className="add-delivery-date-button"
             iconName={CalendarIconUrl}
             label={selectDateText}
+            noSelect
           />
         </div>
       ) : null}

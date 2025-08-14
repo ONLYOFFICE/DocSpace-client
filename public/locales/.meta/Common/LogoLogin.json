@@ -3,7 +3,7 @@
   "content": "Logo for the Login page and emails",
   "content_en_sha1_hash": "bc1533807ce77b75a9be91b7ac7bc46c8a506bae",
   "created_at": "2025-05-26T07:15:44.936Z",
-  "updated_at": "2025-08-11T09:02:44.091Z",
+  "updated_at": "2025-08-13T18:28:17.990Z",
   "comment": {
     "text": "The \"LogoLogin\" translation key is used to display a logo for the login page and emails. It will appear on the login page as part of a label next to the logo image.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 281,
+      "line_number": 300,
       "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoLogin\")} ({logoUrls[1].size.width}x{logoUrls[1].size.height}\n )\n </Text>\n <div className={styles.logosLoginWrapper}>\n <Logo\n name={logoUrls[1].name}",
       "module": "/packages/shared"
     }

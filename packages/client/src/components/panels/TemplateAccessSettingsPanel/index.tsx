@@ -325,12 +325,7 @@ const TemplateAccessSettingsPanel = ({
           isClickable
           dataTestId="template_access_settings_back_button"
         />
-        <Text
-          fontSize="21px"
-          fontWeight={700}
-          className="header-component"
-          noSelect
-        >
+        <Text fontSize="21px" fontWeight={700} className="header-component">
           {t("Files:AccessSettings")}
         </Text>
         <IconButton

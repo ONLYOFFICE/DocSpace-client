@@ -873,5 +873,6 @@
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
   "LogoForEditors": "Logo voor {{editorName}}-editor",
-  "LogoForViewer": "Logo voor {{diagramViewer}}"
+  "LogoForViewer": "Logo voor {{diagramViewer}}",
+  "LogoDocsEditor": "Logo voor de koptekst van de editors"
 }

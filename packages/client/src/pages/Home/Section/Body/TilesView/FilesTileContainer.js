@@ -45,7 +45,16 @@ import { elementResizeDetector } from "./FileTile.utils";
 import InfiniteGrid from "./sub-components/InfiniteGrid";
 import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
+const FilesTileContainer = ({
+  list,
+  isTutorialEnabled,
+  isDesc,
+  selectedFolderTitle,
+  setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
+  withContentSelection,
+}) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -118,6 +127,11 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
           selectableRef={onSetTileRef}
           withRef
           dataTestId={`tile_${index}`}
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       ) : (
         <FileTile
@@ -128,6 +142,11 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
           item={item}
           itemIndex={index}
           dataTestId={`tile_${index}`}
+          selectedFolderTitle={selectedFolderTitle}
+          setDropTargetPreview={setDropTargetPreview}
+          disableDrag={disableDrag}
+          canCreateSecurity={canCreateSecurity}
+          documentTitle={item.title}
         />
       );
     });
@@ -142,6 +161,7 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
         infiniteGrid={InfiniteGrid}
         headingFolders={t("Common:Folders")}
         headingFiles={t("Common:Files")}
+        noSelect={!withContentSelection}
       >
         {filesListNode}
       </TileContainer>
@@ -149,14 +169,27 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
   );
 };
 
-export default inject(({ filesStore }) => {
-  const { filesList } = filesStore;
-  const { filter } = filesStore;
+export default inject(
+  ({ filesStore, uploadDataStore, selectedFolderStore, hotkeyStore }) => {
+    const { filesList, disableDrag } = filesStore;
+    const { filter } = filesStore;
+    const { withContentSelection } = hotkeyStore;
 
-  const isDesc = filter?.sortOrder === "desc";
+    const isDesc = filter?.sortOrder === "desc";
 
-  return {
-    filesList,
-    isDesc,
-  };
-})(withContainer(observer(FilesTileContainer)));
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
+    const { title: selectedFolderTitle, security: canCreateSecurity } =
+      selectedFolderStore;
+
+    return {
+      filesList,
+      isDesc,
+      withContentSelection,
+      setDropTargetPreview,
+      selectedFolderTitle,
+      disableDrag,
+      canCreateSecurity,
+    };
+  },
+)(withContainer(observer(FilesTileContainer)));

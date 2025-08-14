@@ -261,6 +261,7 @@
   "DownloadOperationTitle": "File downloading in progress",
   "DownloadOriginalFormat": "In original format",
   "DropzoneTitleSecondary": "or drop file here",
+  "DropToLocation": "Drop to: {{folderName}}",
   "Duplicate": "Duplicate",
   "EditButton": "Edit",
   "EditIndex": "Edit index",
@@ -884,5 +885,6 @@
   "YourLogo": "Your logo",
   "YourTurn": "Your turn",
   "LogoForEditors": "Logo for {{editorName}} editor",
-  "LogoForViewer": "Logo for {{diagramViewer}}"
+  "LogoForViewer": "Logo for {{diagramViewer}}",
+  "LogoDocsEditor": "Logo for the editors header"
 }

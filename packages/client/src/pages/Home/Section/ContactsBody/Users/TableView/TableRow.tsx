@@ -86,6 +86,7 @@ const PeopleTableRow = ({
   contactsTab,
   isRoomAdmin,
   inProgress,
+  withContentSelection,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -264,7 +265,10 @@ const PeopleTableRow = ({
     [item, onUserContextClick],
   );
 
-  const onRowClick = (e: React.MouseEvent) => onContentRowClick?.(e, item);
+  const onRowClick = (e: React.MouseEvent) => {
+    if (withContentSelection) return;
+    onContentRowClick?.(e, item);
+  };
 
   const isPaidUser = !standalone && !isVisitor && !isCollaborator;
 
@@ -429,12 +433,14 @@ export default inject(
     const { showStorageInfo } = currentQuotaStore;
 
     const { getUsersChangeTypeOptions } = peopleStore.contextOptionsStore!;
+    const { withContentSelection } = peopleStore.contactsHotkeysStore!;
 
     return {
       showStorageInfo,
       getUsersChangeTypeOptions,
 
       isRoomAdmin: userStore.user?.isRoomAdmin,
+      withContentSelection,
     };
   },
 )(withContent(observer(PeopleTableRow)));

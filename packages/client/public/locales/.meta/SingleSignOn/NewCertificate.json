@@ -3,7 +3,7 @@
   "content": "New Certificate",
   "content_en_sha1_hash": "f90a564cc3dc5f0e1b0e2896c28acb669529af25",
   "created_at": "2025-05-19T21:30:50.114Z",
-  "updated_at": "2025-05-24T03:17:01.139Z",
+  "updated_at": "2025-08-12T19:46:26.210Z",
   "comment": {
     "text": "The translation key \"NewCertificate\" is used to display the label \"New Certificate\" in a modal dialog, indicating that the user can create or generate a new certificate. This text appears as the header of two separate modals: AddIdpCertificateModal and AddSpCertificateModal, both related to Single Sign On integration settings.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/AddIdpCertificateModal.js",
       "line_number": 56,
-      "context": "autoMaxWidth\n displayType=\"modal\"\n onClose={closeIdpModal}\n visible={idpIsModalVisible}\n >\n <ModalDialog.Header>{t(\"NewCertificate\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <StyledBodyContent>\n <Text isBold className=\"text-area-label\" noSelect>\n {t(\"OpenCertificate\")}",
+      "context": "autoMaxWidth\n displayType=\"modal\"\n onClose={closeIdpModal}\n visible={idpIsModalVisible}\n >\n <ModalDialog.Header>{t(\"NewCertificate\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <StyledBodyContent>\n <Text isBold className=\"text-area-label\">\n {t(\"OpenCertificate\")}",
       "module": "/packages/client"
     },
     {

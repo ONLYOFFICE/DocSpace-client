@@ -873,5 +873,6 @@
   "YourLogo": "로고",
   "YourTurn": "고객님의 차례입니다",
   "LogoForEditors": "{{editorName}} 편집기 로고",
-  "LogoForViewer": "{{diagramViewer}} 로고"
+  "LogoForViewer": "{{diagramViewer}} 로고",
+  "LogoDocsEditor": "편집기 헤더 로고"
 }

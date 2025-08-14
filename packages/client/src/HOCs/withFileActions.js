@@ -65,9 +65,11 @@ export default function withFileActions(WrappedFileItem) {
       const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
+      const dragged = dragging;
+
       dragging && setDragging(false);
 
-      createFoldersTree(t, files, uploadToFolder)
+      createFoldersTree(t, files, uploadToFolder, dragged)
         .then((f) => {
           if (f.length > 0) startUpload(f, null, t);
         })
@@ -105,7 +107,10 @@ export default function withFileActions(WrappedFileItem) {
         canDrag,
         viewAs,
         isIndexEditingMode,
+        withContentSelection,
       } = this.props;
+
+      if (withContentSelection) return;
 
       if (isIndexEditingMode) {
         if (
@@ -163,7 +168,15 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onMouseClick = (e) => {
-      const { viewAs, withCtrlSelect, withShiftSelect, item } = this.props;
+      const {
+        viewAs,
+        withCtrlSelect,
+        withShiftSelect,
+        item,
+        withContentSelection,
+      } = this.props;
+
+      if (withContentSelection) return;
 
       if (e.ctrlKey || e.metaKey) {
         withCtrlSelect(item);
@@ -338,6 +351,7 @@ export default function withFileActions(WrappedFileItem) {
           className={className}
           isDragging={isDragging}
           value={value}
+          documentTitle={item.title}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
           isIndexUpdated={isIndexUpdated}
@@ -367,6 +381,7 @@ export default function withFileActions(WrappedFileItem) {
         uploadDataStore,
         contextOptionsStore,
         indexingStore,
+        hotkeyStore,
       },
       { item, t },
     ) => {
@@ -411,7 +426,7 @@ export default function withFileActions(WrappedFileItem) {
       } = filesStore;
       const { id } = selectedFolderStore;
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
-
+      const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
 
       const selectedItem = selection.find(
@@ -537,6 +552,8 @@ export default function withFileActions(WrappedFileItem) {
         canDrag: !dragIsDisabled,
         isIndexEditingMode,
         isBlockingOperation,
+
+        withContentSelection,
       };
     },
   )(observer(WithFileActions));

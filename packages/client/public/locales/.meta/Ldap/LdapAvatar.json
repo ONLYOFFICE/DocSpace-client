@@ -3,7 +3,7 @@
   "content": "Profile photo",
   "content_en_sha1_hash": "33f385bb3b7f437c44f197aa3da5da8480eef36f",
   "created_at": "2025-05-19T21:30:54.178Z",
-  "updated_at": "2025-08-11T09:02:43.840Z",
+  "updated_at": "2025-08-11T18:11:59.119Z",
   "comment": {
     "text": "This translation key is used for a label that displays \"Profile photo\" and appears in an Avatar Editor Dialog. It is likely displayed as a title or legend for the profile photo section within this dialog, allowing users to understand its purpose.",
     "is_auto": true,
@@ -18,8 +18,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 193,
-      "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.avatarAttribute}\n labelText={t(\"LdapAvatar\")}\n >\n <TextInput\n name={AVATAR}\n hasError={errors.avatarAttribute}\n onChange={onChangeValue}",
+      "line_number": 202,
+      "context": "<FieldContainer\n style={FIELD_STYLE}\n isVertical\n labelVisible\n hasError={errors.avatarAttribute}\n labelText={t(\"LdapAvatar\")}\n dataTestId=\"avatar_field_container\"\n >\n <TextInput\n name={AVATAR}\n hasError={errors.avatarAttribute}",
       "module": "/packages/client"
     }
   ],

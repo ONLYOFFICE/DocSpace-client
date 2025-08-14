@@ -54,6 +54,7 @@ type BodyProps = {
   fileView: InfoPanelStore["fileView"];
   getIsFiles: InfoPanelStore["getIsFiles"];
   getIsRooms: InfoPanelStore["getIsRooms"];
+  setView: InfoPanelStore["setView"];
 
   maxImageUploadSize: SettingsStore["maxImageUploadSize"];
 
@@ -80,6 +81,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
+  setView,
 
   maxImageUploadSize,
 
@@ -125,6 +127,17 @@ const InfoPanelBodyContent = ({
   React.useEffect(() => {
     setCurrentView(isRooms ? roomsView : fileView);
   }, [isRooms, roomsView, fileView]);
+
+  React.useEffect(() => {
+    if (
+      fileView === InfoPanelView.infoShare &&
+      selection &&
+      "isFolder" in selection &&
+      selection?.isFolder
+    ) {
+      setView(InfoPanelView.infoDetails);
+    }
+  }, [fileView, selection]);
 
   const getView = () => {
     if (isUsers || isGuests) return <Users isGuests={isGuests} />;
@@ -224,6 +237,7 @@ export default inject(
 
       getIsFiles,
       getIsRooms,
+      setView,
     } = infoPanelStore;
 
     const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
@@ -249,6 +263,7 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
+      setView,
 
       maxImageUploadSize: settingsStore.maxImageUploadSize,
 

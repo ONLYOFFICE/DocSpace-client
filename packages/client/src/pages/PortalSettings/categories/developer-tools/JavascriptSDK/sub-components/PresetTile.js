@@ -84,11 +84,13 @@ const PresetTile = (props) => {
   return (
     <TileContainer onClick={handleOnClick} data-testid={dataTestId}>
       <div className="tileContent">
-        <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
+        <Text fontSize="16px" lineHeight="22px" fontWeight={700} noSelect>
           {title}
         </Text>
         <ReactSVG src={image} />
-        <Text lineHeight="20px">{description}</Text>
+        <Text noSelect lineHeight="20px">
+          {description}
+        </Text>
       </div>
 
       <Button

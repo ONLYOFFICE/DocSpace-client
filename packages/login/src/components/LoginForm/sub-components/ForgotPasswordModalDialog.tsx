@@ -127,7 +127,6 @@ const ForgotPasswordModalDialog = ({
             className="text-body"
             isBold={false}
             fontSize="13px"
-            noSelect
           >
             {t("MessageSendPasswordRecoveryInstructionsOnEmail")}
           </Text>

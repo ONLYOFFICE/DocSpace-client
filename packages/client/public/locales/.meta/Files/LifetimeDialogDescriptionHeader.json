@@ -3,7 +3,7 @@
   "content": "Older files with exceeded lifetime will be deleted",
   "content_en_sha1_hash": "f6dd3b8bbf5675ac35ffd8fe14c330c05c721a05",
   "created_at": "2025-05-19T21:30:55.751Z",
-  "updated_at": "2025-05-26T07:57:32.315Z",
+  "updated_at": "2025-08-12T19:46:25.928Z",
   "comment": {
     "text": "This translation key is used for a warning message that explains what will happen to files past their lifetime limit when they are deleted. It appears in a modal dialog and serves as a notification before deleting such files.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/LifetimeDialog/index.js",
       "line_number": 62,
-      "context": "<ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent className=\"modal-dialog-content-body\">\n <Text fontWeight={600} fontSize=\"13px\" noSelect>\n {t(\"Files:LifetimeDialogDescriptionHeader\")}\n </Text>\n <Text fontSize=\"13px\" noSelect>\n {t(\"Files:LifetimeDialogDescription\")}\n </Text>\n </StyledBodyContent>",
+      "context": "<ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <StyledBodyContent className=\"modal-dialog-content-body\">\n <Text fontWeight={600} fontSize=\"13px\">\n {t(\"Files:LifetimeDialogDescriptionHeader\")}\n </Text>\n <Text fontSize=\"13px\">{t(\"Files:LifetimeDialogDescription\")}</Text>\n </StyledBodyContent>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
       "module": "/packages/client"
     }
   ],

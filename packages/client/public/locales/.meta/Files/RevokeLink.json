@@ -3,7 +3,7 @@
   "content": "Revoke link",
   "content_en_sha1_hash": "60f184b7c84ca59ba034898a93f823c5c9571552",
   "created_at": "2025-05-19T21:30:56.054Z",
-  "updated_at": "2025-08-04T07:30:01.099Z",
+  "updated_at": "2025-08-12T19:46:25.904Z",
   "comment": {
     "text": "\"This translation key is used as a label for a button that allows users to revoke a link, particularly in contexts related to deleting or managing links within files or room settings.\"",
     "is_auto": true,
@@ -13,13 +13,13 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
       "line_number": 156,
-      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>",
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\">{getDescription()}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteLinkDialog/index.js",
       "line_number": 156,
-      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\" noSelect>",
+      "context": "return (\n <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>\n <ModalDialog.Header>\n {link.sharedTo.primary && (isPublicRoomType || isFormRoom)\n ? t(\"Files:RevokeLink\")\n : t(\"Files:DeleteLink\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <DeleteLinkDialogContainer className=\"modal-dialog-content-body\">\n <Text lineHeight=\"20px\">{getDescription()}</Text>",
       "module": "/packages/client"
     },
     {

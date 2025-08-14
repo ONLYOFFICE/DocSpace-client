@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2025-08-11T09:02:43.821Z",
+  "updated_at": "2025-08-12T19:46:25.740Z",
   "comment": {
     "text": "The translation key \"ClearFilter\" is used to display a clear filter button or link that resets filters in a search or filtering interface. It appears as a prominent action item on pages like Form Gallery and Contacts Body, where it helps users remove existing filters.",
     "is_auto": true,
@@ -84,7 +84,7 @@
     },
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptyScreen.tsx",
-      "line_number": 170,
+      "line_number": 168,
       "context": "size={12}\n iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}\n isFill\n />\n <Link {...linkStyles}>\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </div>\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }

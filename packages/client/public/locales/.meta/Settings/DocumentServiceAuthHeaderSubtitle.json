@@ -3,7 +3,7 @@
   "content": "Leave blank to use default header",
   "content_en_sha1_hash": "aae1a22631ce0f516828a9dbc92850fbbd6386dd",
   "created_at": "2025-05-19T21:30:51.353Z",
-  "updated_at": "2025-05-26T07:57:32.689Z",
+  "updated_at": "2025-08-11T18:11:59.234Z",
   "comment": {
     "text": "This translation key is used to display a subtitle that explains the usage of an authentication header when leaving it blank. It is used in a UI element where users can configure document service settings, and appears as a tooltip or label for clarity. The text prompts users to leave the header blank if they wish to use the default header setting.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/DocumentService/index.js",
-      "line_number": 347,
-      "context": "value={authHeader}\n onChange={onChangeAuthHeader}\n isDisabled={isSaveLoading || isResetLoading}\n />\n <Text className=\"subtitle\">\n {t(\"Settings:DocumentServiceAuthHeaderSubtitle\")}\n </Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"internalAdress\"",
+      "line_number": 353,
+      "context": "onChange={onChangeAuthHeader}\n isDisabled={isSaveLoading || isResetLoading}\n dataTestId=\"auth_header_input_block\"\n />\n <Text className=\"subtitle\">\n {t(\"Settings:DocumentServiceAuthHeaderSubtitle\")}\n </Text>\n </div>\n <div className=\"input-wrapper\">\n <Label\n htmlFor=\"internalAdress\"",
       "module": "/packages/client"
     }
   ],

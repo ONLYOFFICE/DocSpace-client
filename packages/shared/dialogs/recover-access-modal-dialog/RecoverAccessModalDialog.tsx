@@ -134,7 +134,6 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             className={styles.textBody}
             isBold={false}
             fontSize="13px"
-            noSelect
             dataTestId="recover_access_modal_text"
           >
             {textBody}

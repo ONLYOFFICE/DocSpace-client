@@ -76,7 +76,7 @@ const AddSpCertificateModal = (props) => {
           >
             {t("GenerateCertificate")}
           </Link>
-          <Text isBold className="text-area-label" noSelect>
+          <Text isBold className="text-area-label">
             {t("OpenCertificate")}
           </Text>
 
@@ -91,7 +91,7 @@ const AddSpCertificateModal = (props) => {
             heightTextArea="72px"
           />
 
-          <Text isBold className="text-area-label" noSelect>
+          <Text isBold className="text-area-label">
             {t("PrivateKey")}
           </Text>
 

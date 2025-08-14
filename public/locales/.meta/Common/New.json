@@ -3,25 +3,13 @@
   "content": "New",
   "content_en_sha1_hash": "6403f2b7eb2aaafe6de34cbf2a029b01afebc512",
   "created_at": "2025-05-19T21:30:46.723Z",
-  "updated_at": "2025-08-11T09:02:43.875Z",
+  "updated_at": "2025-08-12T19:46:26.285Z",
   "comment": {
     "text": "This translation key is used for the text \"New\" in various UI elements to indicate new or updated content. It appears on a badge within a contact tab, and a guest release tip dialog, providing users with context about what's new.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:35:23.834Z"
   },
   "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/GuestReleaseTip/index.tsx",
-      "line_number": 117,
-      "context": "truncate\n className=\"accent-text\"\n >\n {t(\"Common:Guest\")}\n </Text>\n <Badge label={t(\"Common:New\")} noHover />\n </div>\n \n <IconButton\n iconName={CloseSvgUrl}\n size={16}",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Tabs/ContactsTabs/index.tsx",
-      "line_number": 183,
-      "context": "id: \"guests\",\n name: t(\"Common:Guests\"),\n onClick: onGuests,\n content: null,\n badge: !guestsTabVisited ? (\n <Badge label={t(\"Common:New\")} noHover />\n ) : undefined,\n });\n }\n \n return (",
-      "module": "/packages/client"
-    },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
       "line_number": 1980,
@@ -36,8 +24,8 @@
     },
     {
       "file_path": "/packages/shared/components/room-type/index.tsx",
-      "line_number": 94,
-      "context": "<Text noSelect className=\"choose_room-title-text\">\n {t(room.title)}\n </Text>\n {isTemplate ? (\n <Badge\n label={t(\"Common:New\")}\n backgroundColor={globalColors.lightBlueMain}\n fontSize=\"9px\"\n fontWeight={700}\n borderRadius=\"50px\"\n noHover",
+      "line_number": 92,
+      "context": "<div className=\"choose_room-info_wrapper\">\n <div className=\"choose_room-title\">\n <Text className=\"choose_room-title-text\">{t(room.title)}</Text>\n {isTemplate ? (\n <Badge\n label={t(\"Common:New\")}\n backgroundColor={globalColors.lightBlueMain}\n fontSize=\"9px\"\n fontWeight={700}\n borderRadius=\"50px\"\n noHover",
       "module": "/packages/shared"
     }
   ],

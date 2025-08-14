@@ -51,7 +51,7 @@ const BruteForceProtection = (props) => {
     checkPeriod,
 
     getBruteForceProtection,
-    isInit,
+
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
@@ -127,9 +127,6 @@ const BruteForceProtection = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit)
-      getBruteForceProtection().then(() => setIsGetSettingsLoaded(true));
-    else setIsGetSettingsLoaded(true);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
@@ -352,33 +349,28 @@ const BruteForceProtection = (props) => {
   );
 };
 
-export const BruteForceProtectionSection = inject(
-  ({ settingsStore, setup }) => {
-    const {
-      numberAttempt,
-      blockingTime,
-      checkPeriod,
-      isDefaultPasswordProtection,
-      getBruteForceProtection,
-      bruteForceProtectionUrl,
-      currentDeviceType,
-      currentColorScheme,
-      setBruteForceProtectionSettings,
-    } = settingsStore;
+export const BruteForceProtectionSection = inject(({ settingsStore }) => {
+  const {
+    numberAttempt,
+    blockingTime,
+    checkPeriod,
+    isDefaultPasswordProtection,
+    getBruteForceProtection,
+    bruteForceProtectionUrl,
+    currentDeviceType,
+    currentColorScheme,
+    setBruteForceProtectionSettings,
+  } = settingsStore;
 
-    const { isInit } = setup;
-
-    return {
-      numberAttempt,
-      blockingTime,
-      checkPeriod,
-      isDefaultPasswordProtection,
-      setBruteForceProtectionSettings,
-      getBruteForceProtection,
-      isInit,
-      bruteForceProtectionUrl,
-      currentDeviceType,
-      currentColorScheme,
-    };
-  },
-)(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));
+  return {
+    numberAttempt,
+    blockingTime,
+    checkPeriod,
+    isDefaultPasswordProtection,
+    setBruteForceProtectionSettings,
+    getBruteForceProtection,
+    bruteForceProtectionUrl,
+    currentDeviceType,
+    currentColorScheme,
+  };
+})(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

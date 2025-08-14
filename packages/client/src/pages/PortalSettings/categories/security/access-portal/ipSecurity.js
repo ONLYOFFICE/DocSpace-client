@@ -79,11 +79,9 @@ const IpSecurity = (props) => {
     ipRestrictionEnable,
     ipRestrictions,
     setIpRestrictions,
-    isInit,
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    loadSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -94,7 +92,7 @@ const IpSecurity = (props) => {
   const [enable, setEnable] = useState(false);
   const [ips, setIps] = useState();
   const [showReminder, setShowReminder] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  //  const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [autoFocus, setAutoFocus] = useState(false);
 
@@ -133,14 +131,10 @@ const IpSecurity = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) loadSettings().then(() => setIsLoading(true));
-    else setIsLoading(true);
-
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
     const currentSettings = getFromSessionStorage("currentIPSettings");
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
 
@@ -149,11 +143,9 @@ const IpSecurity = (props) => {
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading]);
+  }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
-
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
     const newSettings = {
       enable,
@@ -234,7 +226,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop) {
     return <IpSecurityLoader />;
   }
 
@@ -332,7 +324,7 @@ const IpSecurity = (props) => {
   );
 };
 
-export const IpSecuritySection = inject(({ settingsStore, setup }) => {
+export const IpSecuritySection = inject(({ settingsStore }) => {
   const {
     ipRestrictionEnable,
     ipRestrictions,
@@ -340,24 +332,15 @@ export const IpSecuritySection = inject(({ settingsStore, setup }) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    getIpRestrictionsEnable,
-    getIpRestrictions,
   } = settingsStore;
 
-  const { isInit } = setup;
-
-  const loadSettings = async () => {
-    await getIpRestrictionsEnable();
-    await getIpRestrictions();
-  };
   return {
     ipRestrictionEnable,
     ipRestrictions,
     setIpRestrictions,
-    isInit,
+
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    loadSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

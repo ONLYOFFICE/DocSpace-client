@@ -44,16 +44,14 @@ import InvitationLoader from "../sub-components/loaders/invitation-loader";
 
 const InvitationSettings = ({
   t,
-  isInit,
   setInvitationSettings,
   allowInvitingMembers,
   allowInvitingGuests,
   currentDeviceType,
-  getInvitationSettings,
   tReady,
 }: {
   t: TTranslation;
-  isInit: boolean;
+
   setInvitationSettings: (
     allowInvitingMembers: boolean,
     allowInvitingGuests: boolean,
@@ -66,7 +64,6 @@ const InvitationSettings = ({
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const [isCheckedContacts, setIsCheckedContacts] =
     useState(allowInvitingMembers);
@@ -79,14 +76,6 @@ const InvitationSettings = ({
     window.innerWidth > size.mobile &&
       location.pathname.includes("invitation-settings") &&
       navigate("/portal-settings/security/access-portal");
-  };
-
-  const load = async () => {
-    if (isInit) return;
-
-    setIsLoading(true);
-    getInvitationSettings();
-    setIsLoading(false);
   };
 
   const getSettingsFromDefault = () => {
@@ -119,7 +108,6 @@ const InvitationSettings = ({
   };
 
   useEffect(() => {
-    load();
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
@@ -128,7 +116,6 @@ const InvitationSettings = ({
 
   useEffect(() => {
     if (
-      isLoading ||
       typeof allowInvitingMembers !== "boolean" ||
       typeof allowInvitingGuests !== "boolean"
     )
@@ -142,11 +129,9 @@ const InvitationSettings = ({
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading, allowInvitingMembers, allowInvitingGuests]);
+  }, [allowInvitingMembers, allowInvitingGuests]);
 
   useEffect(() => {
-    if (isLoading) return;
-
     const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
 
     const newSettings = {
@@ -210,7 +195,7 @@ const InvitationSettings = ({
   };
 
   if (
-    (currentDeviceType !== DeviceType.desktop && isLoading) ||
+    currentDeviceType !== DeviceType.desktop ||
     !tReady ||
     typeof allowInvitingMembers !== "boolean" ||
     typeof allowInvitingGuests !== "boolean"
@@ -312,25 +297,18 @@ const InvitationSettings = ({
   );
 };
 
-export const InvitationSettingsSection = inject(
-  ({ settingsStore, setup }: TStore) => {
-    const {
-      getInvitationSettings,
-      setInvitationSettings,
-      allowInvitingMembers,
-      allowInvitingGuests,
-      currentDeviceType,
-    } = settingsStore;
+export const InvitationSettingsSection = inject(({ settingsStore }: TStore) => {
+  const {
+    setInvitationSettings,
+    allowInvitingMembers,
+    allowInvitingGuests,
+    currentDeviceType,
+  } = settingsStore;
 
-    const { isInit } = setup;
-
-    return {
-      isInit,
-      getInvitationSettings,
-      setInvitationSettings,
-      allowInvitingMembers,
-      allowInvitingGuests,
-      currentDeviceType,
-    };
-  },
-)(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));
+  return {
+    setInvitationSettings,
+    allowInvitingMembers,
+    allowInvitingGuests,
+    currentDeviceType,
+  };
+})(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

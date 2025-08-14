@@ -65,15 +65,12 @@ const MainContainer = styled.div`
 const SessionLifetime = (props) => {
   const {
     t,
-
     lifetime,
     enabled,
     setSessionLifetimeSettings,
-    isInit,
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    getSessionLifetime,
   } = props;
 
   const [type, setType] = useState(false);
@@ -124,9 +121,6 @@ const SessionLifetime = (props) => {
 
   useEffect(() => {
     checkWidth();
-
-    if (!isInit) getSessionLifetime().then(() => setIsLoading(true));
-    else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
@@ -316,7 +310,7 @@ const SessionLifetime = (props) => {
   );
 };
 
-export const SessionLifetimeSection = inject(({ settingsStore, setup }) => {
+export const SessionLifetimeSection = inject(({ settingsStore }) => {
   const {
     sessionLifetime,
     enabledSessionLifetime,
@@ -324,18 +318,14 @@ export const SessionLifetimeSection = inject(({ settingsStore, setup }) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    getSessionLifetime,
   } = settingsStore;
-  const { isInit } = setup;
 
   return {
     enabled: enabledSessionLifetime,
     lifetime: sessionLifetime,
     setSessionLifetimeSettings,
-    isInit,
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
-    getSessionLifetime,
   };
 })(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

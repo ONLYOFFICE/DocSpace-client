@@ -44,27 +44,74 @@ import AuditTrail from "./audit-trail";
 import { resetSessionStorage } from "../../utils";
 
 const SecurityWrapper = (props) => {
-  const { t, initSettings, isInit, resetIsInit, currentDeviceType } = props;
+  const {
+    t,
+    initSettings,
+    isInit,
+    resetIsInit,
+    currentDeviceType,
+    getPortalPasswordSettings,
+    getTfaType,
+    getInvitationSettings,
+    getIpRestrictionsEnable,
+    getIpRestrictions,
+    getBruteForceProtection,
+    getSessionLifetime,
+    getLoginHistory,
+    getLifetimeAuditSettings,
+    getAuditTrail,
+  } = props;
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const getAccessPortalData = async () => {
+    getPortalPasswordSettings();
+    getTfaType();
+    getInvitationSettings();
+
+    await getIpRestrictionsEnable();
+    await getIpRestrictions();
+
+    getBruteForceProtection();
+    getSessionLifetime();
+  };
+
+  const getLoginHistoryData = () => {
+    getLoginHistory();
+    getLifetimeAuditSettings();
+  };
+
+  const getAuditTrailData = () => {
+    getAuditTrail();
+    getLifetimeAuditSettings();
+  };
 
   const data = [
     {
       id: "access-portal",
       name: t("PortalAccess", { productName: t("Common:ProductName") }),
       content: <AccessPortal />,
+      onClick: () => {
+        getAccessPortalData();
+      },
     },
     {
       id: "login-history",
       name: t("LoginHistoryTitle"),
       content: <LoginHistory />,
+      onClick: () => {
+        getLoginHistoryData();
+      },
     },
     {
       id: "audit-trail",
       name: t("AuditTrailNav"),
       content: <AuditTrail />,
+      onClick: () => {
+        getAuditTrailData();
+      },
     },
   ];
 
@@ -118,17 +165,44 @@ const SecurityWrapper = (props) => {
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
-export const Component = inject(({ settingsStore, setup }) => {
-  const { resetIsInit, initSettings, isInit } = setup;
+export const Component = inject(({ settingsStore, setup, tfaStore }) => {
+  const {
+    resetIsInit,
+    initSettings,
+    isInit,
+    getLoginHistory,
+    getLifetimeAuditSettings,
+    getAuditTrail,
+  } = setup;
+  const {
+    getPortalPasswordSettings,
+    getInvitationSettings,
+    getIpRestrictionsEnable,
+    getIpRestrictions,
+    getBruteForceProtection,
+    getSessionLifetime,
+  } = settingsStore;
+  const { getTfaType } = tfaStore;
 
   return {
     isInit,
     initSettings,
     resetIsInit,
     currentDeviceType: settingsStore.currentDeviceType,
+    getPortalPasswordSettings,
+    getTfaType,
+    getInvitationSettings,
+    getIpRestrictionsEnable,
+    getIpRestrictions,
+    getBruteForceProtection,
+    getSessionLifetime,
+    getLoginHistory,
+    getLifetimeAuditSettings,
+    getAuditTrail,
   };
 })(withTranslation(["Settings", "Common"])(observer(SecurityWrapper)));

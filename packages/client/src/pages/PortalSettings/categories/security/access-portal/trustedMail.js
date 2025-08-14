@@ -59,7 +59,6 @@ const MainContainer = styled.div`
 const TrustedMail = (props) => {
   const {
     t,
-
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,

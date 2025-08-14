@@ -54,14 +54,12 @@ const MainContainer = styled.div`
 const TwoFactorAuth = (props) => {
   const {
     t,
-    isInit,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
     appAvailable,
     tfaSettings,
-    getTfaType,
     onSettingsSkeletonNotShown,
   } = props;
 
@@ -106,9 +104,6 @@ const TwoFactorAuth = (props) => {
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) getTfaType().then(() => setIsLoading(true));
-    else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
@@ -261,24 +256,20 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
-    getTfaType,
   } = tfaStore;
 
-  const { isInit, setIsInit } = setup;
+  const { setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
     settingsStore;
 
   return {
     setTfaSettings,
-
     tfaSettings,
     smsAvailable,
     appAvailable,
-    isInit,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    getTfaType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

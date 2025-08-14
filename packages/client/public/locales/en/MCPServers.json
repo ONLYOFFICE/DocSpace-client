@@ -5,10 +5,21 @@
   "IntegrationIcon": "Integration icon",
   "IntegrationName": "Integration name",
   "IntegrationUrl": "Integration url",
+  "IntegrationDescription": "Integration description",
   "IntegrationHeaders": "Integration headers",
   "IntegrationHeaderName": "Integration header name",
   "IntegrationHeaderValue": "Integration header value",
   "AddMoreHeaders": "Add more headers",
   "EnterHeaderValue": "Enter header value",
-  "EnterHeaderName": "Enter header name"
+  "EnterHeaderName": "Enter header name",
+  "DisableServer": "Disable server",
+  "ServerDisabledSuccess": "Server disabled successfully",
+  "ServerEnabledSuccess": "Server enabled successfully",
+  "ServerAddedSuccess": "Server added successfully",
+  "ServerRemovedSuccess": "Server removed successfully",
+  "ServerUpdatedSuccess": "Server updated successfully",
+  "DisableServerDescription": "If you disable this server, all active consents and authorization will be revoked. If necessary, you can enable the disabled server later.",
+  "DisableServerNote": "<strong>Note:</strong> That all users all again be required to complete the consent screen",
+  "DeleteServer": "Delete server",
+  "DeleteServerDescription": "If you delete this server, all active consents and authorization will be revoked. If a user tries to open the consent screen for this app, an error will occur in the document space and the user will be redirected to the specified redirect URL."
 }

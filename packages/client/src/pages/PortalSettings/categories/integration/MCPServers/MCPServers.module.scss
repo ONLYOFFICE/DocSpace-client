@@ -32,17 +32,92 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
 
-.description {
-  color: var(--settings-common-description-color);
+  .description {
+    color: var(--settings-common-description-color);
 
-  margin-bottom: 8px;
-}
+    margin-bottom: 8px;
+  }
 
-.button {
-  width: fit-content;
-  margin-bottom: 12px;
+  .button {
+    width: fit-content;
+    margin-bottom: 12px;
+  }
+
+  .serverList {
+    max-width: 700px;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    gap: 20px;
+
+    .serverItem {
+      width: 340px;
+      height: 110px;
+
+      border: 1px solid #474747;
+
+      box-sizing: border-box;
+
+      padding: 20px;
+
+      display: flex;
+      flex-direction: row;
+
+      gap: 20px;
+
+      .serverIcon {
+        width: 48px;
+        height: 48px;
+      }
+
+      .serverInfo {
+        width: 100%;
+        max-width: calc(100% - 68px);
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .serverInfoHeader {
+          width: 100%;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .serverInfoButtons {
+          position: relative;
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 8px;
+
+          .toggleButton {
+            position: relative;
+
+            display: flex;
+          }
+        }
+
+        .serverDescription {
+          max-width: 100%;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-wrap: break-word;
+        }
+      }
+    }
+  }
 }
 
 .bodyContainer {
@@ -57,6 +132,24 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  .iconBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    .icon {
+      max-width: 32px;
+      max-height: 32px;
+      width: 32px;
+      height: 32px;
+
+      object-fit: cover;
+
+      border-radius: 3px;
+    }
+  }
 }
 
 .headersContainer {

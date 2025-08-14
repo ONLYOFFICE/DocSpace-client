@@ -31,6 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { TServer } from "@docspace/shared/api/ai/types";
 
 import styles from "../../MCPServers.module.scss";
 
@@ -38,7 +39,8 @@ import { useHeaders } from "../../hooks/useHeaders";
 import { useBaseParams } from "../../hooks/useBaseParams";
 import { useIcon } from "../../hooks/useIcon";
 
-type AddNewDialogProps = {
+type EditDialogProps = {
+  server: TServer;
   onSubmit: (
     endpoint: string,
     name: string,
@@ -48,13 +50,17 @@ type AddNewDialogProps = {
   onClose: VoidFunction;
 };
 
-const AddNewDialog = ({ onSubmit, onClose }: AddNewDialogProps) => {
+const EditDialog = ({ server, onSubmit, onClose }: EditDialogProps) => {
   const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
 
   const [loading, setLoading] = React.useState(false);
 
-  const { getBaseParams, baseParamsComponent } = useBaseParams();
-  const { headersComponent, getAPIHeaders } = useHeaders();
+  const { getBaseParams, baseParamsComponent } = useBaseParams({
+    url: server?.endpoint,
+    name: server?.name,
+    description: server?.description,
+  });
+  const { headersComponent, getAPIHeaders } = useHeaders(server?.headers);
   const { iconComponent, getIcon } = useIcon();
 
   const onSubmitAction = async () => {
@@ -116,4 +122,4 @@ const AddNewDialog = ({ onSubmit, onClose }: AddNewDialogProps) => {
   );
 };
 
-export default AddNewDialog;
+export default EditDialog;

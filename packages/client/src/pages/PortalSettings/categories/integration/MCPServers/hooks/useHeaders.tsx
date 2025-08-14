@@ -38,16 +38,30 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 
 import styles from "../MCPServers.module.scss";
 
-export const useHeaders = () => {
+export const useHeaders = (initialValues?: Record<string, string>) => {
   const { t } = useTranslation(["MCPServers"]);
 
-  const [headerCounts, setHeaderCounts] = React.useState(0);
+  const [headerCounts, setHeaderCounts] = React.useState(
+    initialValues ? Object.keys(initialValues).length : 0,
+  );
   const [headerNames, setHeaderNames] = React.useState<Record<string, string>>(
-    {},
+    () => {
+      if (!initialValues) return {};
+
+      const names: Record<string, string> = {};
+      Object.keys(initialValues).map((key, index) => (names[index] = key));
+      return names;
+    },
   );
   const [headerValues, setHeaderValues] = React.useState<
     Record<string, string>
-  >({});
+  >(() => {
+    if (!initialValues) return {};
+
+    const values: Record<string, string> = {};
+    Object.values(initialValues).map((value, index) => (values[index] = value));
+    return values;
+  });
 
   const onChangeHeaderName = (index: number, value: string) => {
     setHeaderNames((val) => ({ ...val, [index]: value }));

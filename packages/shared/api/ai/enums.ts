@@ -52,6 +52,6 @@ export const enum EventType {
 }
 
 export const enum ServerType {
-  Portal,
   Custom,
+  Portal,
 }

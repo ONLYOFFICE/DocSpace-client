@@ -24,82 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
 
-import styles from "../../MCPServers.module.scss";
-
-import { useHeaders } from "../../hooks/useHeaders";
-import { useBaseParams } from "../../hooks/useBaseParams";
-import { useIcon } from "../../hooks/useIcon";
-
-type AddNewDialogProps = {
-  onSubmit: (
-    endpoint: string,
-    name: string,
-    description: string,
-    headers: Record<string, string>,
-  ) => Promise<void>;
+type DeleteDialogProps = {
+  onSubmit: () => Promise<void>;
   onClose: VoidFunction;
 };
 
-const AddNewDialog = ({ onSubmit, onClose }: AddNewDialogProps) => {
+const DeleteDialog = ({ onSubmit, onClose }: DeleteDialogProps) => {
   const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
 
   const [loading, setLoading] = React.useState(false);
 
-  const { getBaseParams, baseParamsComponent } = useBaseParams();
-  const { headersComponent, getAPIHeaders } = useHeaders();
-  const { iconComponent, getIcon } = useIcon();
-
   const onSubmitAction = async () => {
-    const headers = getAPIHeaders();
-    const baseParams = getBaseParams();
-    const icon = getIcon();
-
-    if (!baseParams) return;
-
-    console.log(icon);
-
-    setLoading(true);
-
-    await onSubmit(
-      baseParams.url,
-      baseParams.name,
-      baseParams.description,
-      headers,
-    );
-
-    setLoading(false);
-
-    onClose();
+    try {
+      await onSubmit();
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as string);
+    } finally {
+      setLoading(false);
+      onClose();
+    }
   };
 
   return (
-    <ModalDialog
-      visible
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      withBodyScroll
-    >
-      <ModalDialog.Header>{t("MCPServers:MCPServer")}</ModalDialog.Header>
+    <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
+      <ModalDialog.Header>{t("MCPServers:DeleteServer")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.bodyContainer}>
-          {iconComponent}
-          {baseParamsComponent}
-          {headersComponent}
-        </div>
+        <Text style={{ marginBottom: "16px" }}>
+          <Trans t={t} i18nKey="DeleteServerDescription" ns="MCPServers" />
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           primary
           size={ButtonSize.normal}
-          label={t("Common:AddButton")}
+          label={t("Common:OKButton")}
           scale
           onClick={onSubmitAction}
           isLoading={loading}
@@ -116,4 +85,4 @@ const AddNewDialog = ({ onSubmit, onClose }: AddNewDialogProps) => {
   );
 };
 
-export default AddNewDialog;
+export default DeleteDialog;

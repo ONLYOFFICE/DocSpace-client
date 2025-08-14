@@ -33,12 +33,24 @@ import {
   InputType,
   InputSize,
 } from "@docspace/shared/components/text-input";
+import { Textarea } from "@docspace/shared/components/textarea";
 
-export const useBaseParams = () => {
+export const useBaseParams = (initialValues?: {
+  name?: string;
+  url?: string;
+  description?: string;
+}) => {
   const { t } = useTranslation(["MCPServers", "Common", "OAuth"]);
 
-  const [name, setName] = React.useState("");
-  const [url, setUrl] = React.useState("");
+  const [name, setName] = React.useState(initialValues?.name || "");
+  const [url, setUrl] = React.useState(initialValues?.url || "");
+  const [description, setDescription] = React.useState(
+    initialValues?.description || "",
+  );
+
+  const [nameError, setNameError] = React.useState("");
+  const [urlError, setUrlError] = React.useState("");
+  const [descriptionError, setDescriptionError] = React.useState("");
 
   const onChangeName = (value: string) => {
     setName(value);
@@ -48,10 +60,31 @@ export const useBaseParams = () => {
     setUrl(value);
   };
 
+  const onChangeDescription = (value: string) => {
+    setDescription(value);
+  };
+
+  const requiredError = t("OAuth:ThisRequiredField");
+
   const getBaseParams = () => {
+    if (!name) {
+      setNameError(requiredError);
+    }
+    if (!url) {
+      setUrlError(requiredError);
+    }
+    if (!description) {
+      setDescriptionError(requiredError);
+    }
+
+    if (!name || !url || !description) {
+      return;
+    }
+
     return {
       name,
       url,
+      description,
     };
   };
 
@@ -63,6 +96,8 @@ export const useBaseParams = () => {
         isVertical
         removeMargin
         labelVisible
+        errorMessage={nameError}
+        hasError={!!nameError}
       >
         <TextInput
           type={InputType.text}
@@ -71,6 +106,7 @@ export const useBaseParams = () => {
           onChange={(e) => onChangeName(e.target.value)}
           placeholder={t("Common:EnterName")}
           scale
+          hasError={!!nameError}
         />
       </FieldContainer>
       <FieldContainer
@@ -79,6 +115,8 @@ export const useBaseParams = () => {
         isVertical
         removeMargin
         labelVisible
+        errorMessage={urlError}
+        hasError={!!urlError}
       >
         <TextInput
           type={InputType.text}
@@ -87,6 +125,23 @@ export const useBaseParams = () => {
           onChange={(e) => onChangeUrl(e.target.value)}
           placeholder={t("OAuth:EnterURL")}
           scale
+          hasError={!!urlError}
+        />
+      </FieldContainer>
+      <FieldContainer
+        labelText={t("MCPServers:IntegrationDescription")}
+        isRequired
+        isVertical
+        removeMargin
+        labelVisible
+        errorMessage={descriptionError}
+        hasError={!!descriptionError}
+      >
+        <Textarea
+          heightTextArea={64}
+          value={description}
+          onChange={(e) => onChangeDescription(e.target.value)}
+          placeholder={t("OAuth:EnterDescription")}
         />
       </FieldContainer>
     </>

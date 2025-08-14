@@ -233,6 +233,54 @@ export const getServersList = async (startIndex: number, count: number) => {
   }
 };
 
+export const addNewServer = async (
+  endpoint: string,
+  name: string,
+  description: string,
+  headers: Record<string, string>,
+) => {
+  try {
+    return (await request({
+      method: "post",
+      url: `${baseUrl}/servers`,
+      data: { endpoint, name, description, headers },
+    })) as TServer;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updateServer = async (
+  serverId: string,
+  endpoint: string,
+  name: string,
+  description: string,
+  headers: Record<string, string>,
+  enabled: boolean,
+) => {
+  try {
+    await request({
+      method: "put",
+      url: `${baseUrl}/servers/${serverId}`,
+      data: { endpoint, name, description, headers, enabled },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteServers = async (servers: string[]) => {
+  try {
+    await request({
+      method: "delete",
+      url: `${baseUrl}/servers`,
+      data: { servers },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const addServersForRoom = async (roomId: number, servers: string[]) => {
   try {
     await request({

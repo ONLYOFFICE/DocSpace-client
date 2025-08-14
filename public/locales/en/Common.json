@@ -904,5 +904,6 @@
   "WorkInProgress": "Work in progress",
   "ListMCPServers": "List MCP",
   "LogoForEditors": "Logo for {{editorName}} editor",
-  "LogoForViewer": "Logo for {{diagramViewer}}"
+  "LogoForViewer": "Logo for {{diagramViewer}}",
+  "LogoDocsEditor": "Logo for the editors header"
 }

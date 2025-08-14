@@ -873,5 +873,6 @@
   "YourLogo": "Ձեր լոգոն",
   "YourTurn": "Ձեր հերթն է",
   "LogoForEditors": "{{editorName}} խմբագրի լոգո",
-  "LogoForViewer": "{{diagramViewer}}-ի լոգո"
+  "LogoForViewer": "{{diagramViewer}}-ի լոգո",
+  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո"
 }

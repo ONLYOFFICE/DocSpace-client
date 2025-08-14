@@ -86,9 +86,7 @@ const RoomType = ({
 
       <div className="choose_room-info_wrapper">
         <div className="choose_room-title">
-          <Text noSelect className="choose_room-title-text">
-            {t(room.title)}
-          </Text>
+          <Text className="choose_room-title-text">{t(room.title)}</Text>
           {isTemplate ? (
             <Badge
               label={t("Common:New")}
@@ -101,9 +99,7 @@ const RoomType = ({
             />
           ) : null}
         </div>
-        <Text noSelect className="choose_room-description">
-          {t(room.description)}
-        </Text>
+        <Text className="choose_room-description">{t(room.description)}</Text>
       </div>
 
       <IconButton

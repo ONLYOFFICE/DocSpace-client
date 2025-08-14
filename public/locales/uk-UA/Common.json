@@ -864,5 +864,6 @@
   "YourLogo": "Ваш логотип",
   "YourTurn": "Ваша черга",
   "LogoForEditors": "Логотип для редактора {{editorName}}",
-  "LogoForViewer": "Логотип для {{diagramViewer}}"
+  "LogoForViewer": "Логотип для {{diagramViewer}}",
+  "LogoDocsEditor": "Логотип заголовка редакторів"
 }

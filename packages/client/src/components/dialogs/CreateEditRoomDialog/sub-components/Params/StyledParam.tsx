@@ -53,14 +53,12 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
     gap: ${(props) => (props.increaseGap ? 12 : 4)}px;
 
     .set_room_params-info-title {
-      user-select: none;
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 6px;
 
       .set_room_params-info-title-text {
-        user-select: none;
         font-weight: 600;
         font-size: 13px;
         line-height: 20px;
@@ -68,7 +66,6 @@ const StyledParam = styled.div.attrs(injectDefaultTheme)<{
     }
 
     .set_room_params-info-description {
-      user-select: none;
       font-weight: 400;
       font-size: 12px;
       line-height: 16px;

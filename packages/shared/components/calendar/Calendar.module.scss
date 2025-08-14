@@ -77,6 +77,8 @@
   margin: 0;
   display: inline-block;
 
+  @include mixins.no-user-select;
+
   @include mixins.mobile {
     font-size: 21px;
     line-height: 28px;
@@ -182,6 +184,8 @@
   text-align: center;
   padding: 10.7px 0;
 
+  @include mixins.no-user-select;
+
   @include mixins.mobile {
     width: 40px;
     font-size: 16px;
@@ -251,6 +255,8 @@
   justify-content: center;
   align-items: center;
   color: var(--text-color);
+
+  @include mixins.no-user-select;
 
   &.disabled {
     background: transparent;

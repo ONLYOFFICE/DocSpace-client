@@ -3,7 +3,7 @@
   "content": "Enable this option if you want to add users from SSO service to your space automatically.",
   "content_en_sha1_hash": "53b0b644d322e1cc595b46ed2bd913242f06931c",
   "created_at": "2025-05-19T21:30:50.193Z",
-  "updated_at": "2025-08-11T18:11:59.268Z",
+  "updated_at": "2025-08-12T19:46:26.213Z",
   "comment": {
     "text": "This translation key is used to display a caption that explains the purpose of enabling single sign-on (SSO) integration. It provides context for users deciding whether to enable automatic addition of SSO users to their space. The text appears as a tooltip or label in the UI, likely within a toggle switch component, such as the \"Turn On SSO\" button in Portal Settings.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ToggleSSO.js",
-      "line_number": 120,
-      "context": "fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n noSelect\n >\n {t(\"TurnOnSSOCaption\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
+      "line_number": 119,
+      "context": "fontSize=\"12px\"\n fontWeight={400}\n lineHeight=\"16px\"\n className=\"settings_unavailable\"\n >\n {t(\"TurnOnSSOCaption\")}\n </Text>\n </div>\n </StyledWrapper>\n );\n };",
       "module": "/packages/client"
     }
   ],

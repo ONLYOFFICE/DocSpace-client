@@ -64,12 +64,7 @@ const ChangeRoomOwner = ({
 
   return (
     <Styled.ChangeRoomOwner>
-      <Text
-        className="change-owner-label"
-        fontWeight={600}
-        fontSize="13px"
-        noSelect
-      >
+      <Text className="change-owner-label" fontWeight={600} fontSize="13px">
         {t("Files:RoomOwner")}
       </Text>
 
@@ -84,7 +79,7 @@ const ChangeRoomOwner = ({
             userName={userName}
           />
           <div className="change-owner-display-name">
-            <Text fontWeight={600} fontSize="13px" noSelect>
+            <Text fontWeight={600} fontSize="13px">
               {userName}
             </Text>
             {roomOwner.id === currentUserId ? (

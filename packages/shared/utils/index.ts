@@ -70,7 +70,7 @@ import commonIconsStyles, {
 } from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect, TextUserSelect } from "./commonStyles";
+import { NoUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
 import {
@@ -112,7 +112,6 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
-  TextUserSelect,
   commonInputStyles,
   commonTextStyles,
   INFO_PANEL_WIDTH,

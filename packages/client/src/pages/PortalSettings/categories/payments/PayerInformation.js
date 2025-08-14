@@ -144,7 +144,7 @@ const PayerInformation = ({
 
   const unknownPayerInformation = (
     <div>
-      <Text as="span" fontSize="13px" noSelect>
+      <Text as="span" fontSize="13px">
         {unknownPayerDescription()}
       </Text>
       <div>
@@ -197,7 +197,7 @@ const PayerInformation = ({
     if (email) emailUnfoundedUser = `«${email}»`;
 
     return (
-      <Text as="span" fontWeight={600} noSelect fontSize="14px">
+      <Text as="span" fontWeight={600} fontSize="14px">
         {payerInfo ? (
           payerInfo.displayName
         ) : (

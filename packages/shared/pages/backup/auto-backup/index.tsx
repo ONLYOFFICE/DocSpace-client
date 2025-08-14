@@ -171,7 +171,6 @@ const AutomaticBackup = ({
   isInitialLoading,
   setDownloadingProgress,
   setTemporaryLink,
-  setErrorInformation,
   isInitialError,
   errorInformation,
   isManagement = false,
@@ -276,7 +275,6 @@ const AutomaticBackup = ({
           toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
         })
         .catch((error) => {
-          setErrorInformation(error, t);
           toastr.error(error);
           console.error(error);
         })
@@ -316,7 +314,6 @@ const AutomaticBackup = ({
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e as Error);
-      setErrorInformation(e, t);
       console.error(e);
       if (isCheckedThirdParty || isCheckedDocuments) updateBaseFolderPath();
     } finally {

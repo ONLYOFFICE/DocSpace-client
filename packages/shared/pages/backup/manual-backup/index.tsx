@@ -48,7 +48,6 @@ import SocketHelper, {
 } from "../../../utils/socket";
 import { OPERATIONS_NAME } from "../../../constants";
 import OperationsProgressButton from "../../../components/operations-progress-button";
-import DataBackupLoader from "../../../skeletons/backup/DataBackup";
 import { getBackupProgressInfo } from "../../../utils/common";
 import { getFromLocalStorage } from "../../../utils";
 import { useDidMount } from "../../../hooks/useDidMount";
@@ -67,7 +66,6 @@ import {
 import styles from "./ManualBackup.module.scss";
 
 const ManualBackup = ({
-  isInitialLoading,
   buttonSize,
   temporaryLink,
   dataBackupUrl,
@@ -77,7 +75,6 @@ const ManualBackup = ({
   currentColorScheme,
   downloadingProgress,
   isBackupProgressVisible,
-  isEmptyContentBeforeLoader,
   basePath,
   isErrorPath,
   newPath,
@@ -269,10 +266,6 @@ const ManualBackup = ({
   };
 
   const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
-  if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
-
-  if (isInitialLoading) return <DataBackupLoader />;
 
   return (
     <div className={styles.manualBackup}>

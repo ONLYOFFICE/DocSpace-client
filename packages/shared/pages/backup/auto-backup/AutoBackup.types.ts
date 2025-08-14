@@ -46,13 +46,13 @@ import type { TThirdParties } from "../../../api/files/types";
 export interface AutomaticBackupProps {
   isManagement?: boolean;
 
-  isInitialLoading: boolean;
-  isEmptyContentBeforeLoader: boolean;
+  isInitialLoading?: boolean;
+  isEmptyContentBeforeLoader?: boolean;
   settingsFileSelector: FilesSelectorSettings;
   buttonSize?: ButtonSize;
   removeItem: ThirdPartyAccountType;
   isNeedFilePath?: boolean;
-  isInitialError: boolean;
+  isInitialError?: boolean;
   isEnableAuto: boolean; //  checkEnablePortalSettings(isRestoreAndAutoBackupAvailable);
 
   // authStore
@@ -70,7 +70,7 @@ export interface AutomaticBackupProps {
   setThirdPartyStorage: (list: TStorageBackup[]) => void;
   setBackupSchedule: (list: TBackupSchedule) => void;
 
-  setErrorInformation: (error: unknown, t: TTranslation) => void;
+  setErrorInformation?: (error: unknown, t: TTranslation) => void;
 
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,

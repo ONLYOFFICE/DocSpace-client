@@ -36,6 +36,7 @@ import DialogsStore from "SRC_DIR/store/DialogsStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import OformsStore from "SRC_DIR/store/OformsStore";
 
 import ItemTitle from "./sub-components/ItemTitle";
 import SeveralItems from "./sub-components/SeveralItems";
@@ -71,6 +72,8 @@ type BodyProps = {
   setImage: AvatarEditorDialogStore["setImage"];
 
   contactsTab: UsersStore["contactsTab"];
+
+  gallerySelected: OformsStore["gallerySelected"];
 };
 
 const InfoPanelBodyContent = ({
@@ -96,10 +99,11 @@ const InfoPanelBodyContent = ({
   onSaveRoomLogo,
   onChangeFile,
   setImage,
+  gallerySelected,
 }: BodyProps) => {
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
-  const isGallery = window.location.pathname.includes("form-gallery");
+  const isGallery = !!gallerySelected;
   const isGroups = contactsTab === "groups";
   const isGuests = contactsTab === "guests";
   const isUsers = contactsTab === "inside_group" || contactsTab === "people";
@@ -229,6 +233,7 @@ export default inject(
     avatarEditorDialogStore,
     dialogsStore,
     peopleStore,
+    oformsStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
     const {
@@ -239,6 +244,8 @@ export default inject(
       getIsRooms,
       setView,
     } = infoPanelStore;
+
+    const { gallerySelected } = oformsStore;
 
     const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
       dialogsStore;
@@ -278,6 +285,7 @@ export default inject(
       onSaveRoomLogo,
       onChangeFile,
       setImage,
+      gallerySelected,
     };
   },
 )(observer(InfoPanelBodyContent));

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TVectorizeOperation } from "../api/ai/types";
 import { getProgress } from "../api/files";
 import type { TOperation } from "../api/files/types";
 
@@ -31,29 +32,49 @@ export const getOperationProgress = async (
   id: string,
   errorMessage: string,
   isOneOperation: boolean = false,
+  action: Function = getProgress,
 ) => {
   const operationId = isOneOperation ? id : undefined;
 
-  const promise = new Promise<TOperation | undefined>((resolve, reject) => {
-    setTimeout(async () => {
-      try {
-        await getProgress(operationId).then((res) => {
-          if (!res || res.length === 0) {
-            reject(errorMessage);
-          }
+  const promise = new Promise<TOperation | TVectorizeOperation | undefined>(
+    (resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          await action(operationId).then(
+            (res: TOperation[] | TVectorizeOperation) => {
+              if (!res) {
+                reject(errorMessage);
+              }
 
-          const currentItem = res.find((x) => x.id === id);
+              if (!Array.isArray(res) && action) {
+                if (res.error) {
+                  reject(errorMessage);
+                }
+                resolve(res);
 
-          if (currentItem?.error) {
-            reject(currentItem);
-          }
-          resolve(currentItem);
-        });
-      } catch (error) {
-        reject(error);
-      }
-    }, 1000);
-  });
+                return;
+              }
+
+              if (Array.isArray(res) && res.length === 0) {
+                reject(errorMessage);
+              }
+
+              const currentItem = Array.isArray(res)
+                ? res.find((x) => x.id === id)
+                : undefined;
+
+              if (currentItem?.error) {
+                reject(currentItem);
+              }
+              resolve(currentItem);
+            },
+          );
+        } catch (error) {
+          reject(error);
+        }
+      }, 1000);
+    },
+  );
 
   return promise;
 };

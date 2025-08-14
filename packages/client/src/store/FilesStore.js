@@ -315,6 +315,8 @@ class FilesStore {
           ? `DIR-${data.folderId}`
           : `DIR-${data.parentId}`;
 
+        console.log(socketSubscribers);
+
         if (
           !socketSubscribers.has(pathParts) &&
           !socketSubscribers.has(`DIR-${data.id}`)
@@ -467,7 +469,11 @@ class FilesStore {
 
     if (this.files.findIndex((x) => x.id === fileInfo.id) > -1) return;
 
-    if (this.selectedFolderStore.id !== fileInfo.folderId) return;
+    if (
+      this.selectedFolderStore.id !== fileInfo.folderId &&
+      this.aiRoomStore.knowledgeId !== fileInfo.folderId
+    )
+      return;
 
     console.log("[WS] create new file", { fileInfo });
 
@@ -502,7 +508,10 @@ class FilesStore {
 
       const file = JSON.parse(opt?.data);
 
-      if (this.selectedFolderStore.id !== file.folderId) {
+      if (
+        this.selectedFolderStore.id !== file.folderId &&
+        this.aiRoomStore.knowledgeId !== file.folderId
+      ) {
         const movedToIndex = this.getFolderIndex(file.folderId);
         if (movedToIndex > -1) this.folders[movedToIndex].filesCount++;
         return;
@@ -1786,6 +1795,11 @@ class FilesStore {
           currentFolder.type === FolderType.ResultStorage ||
           currentFolder.type === FolderType.Knowledge
         ) {
+          if (currentFolder.type === FolderType.Knowledge) {
+            console.log("set");
+            this.aiRoomStore.setKnowledgeId(currentFolder.id);
+          }
+
           const aiRoom =
             room.id === currentFolder.parentId
               ? room
@@ -1802,6 +1816,9 @@ class FilesStore {
           this.aiRoomStore.setCurrentTab("chat");
         } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("result");
+        } else {
+          console.log("unset");
+          this.aiRoomStore.setKnowledgeId(null);
         }
 
         runInAction(() => {

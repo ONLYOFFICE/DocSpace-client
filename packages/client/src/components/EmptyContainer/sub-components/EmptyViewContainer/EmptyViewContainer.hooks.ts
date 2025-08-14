@@ -171,6 +171,7 @@ export const useOptions = (
     onCreateAndCopySharedLink,
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
     inviteUser: inviteRootUser,
     isVisitor,
     isFrame,
@@ -268,6 +269,10 @@ export const useOptions = (
     [setSelectFileFormRoomDialogVisible],
   );
 
+  const uploadFromDocspaceAiKnowledge = useCallback(() => {
+    setSelectFileAiKnowledgeDialogVisible?.(true);
+  }, [setSelectFileAiKnowledgeDialogVisible]);
+
   const onCreate = useCallback(
     (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
@@ -315,6 +320,7 @@ export const useOptions = (
           inviteUser,
           onCreate,
           uploadFromDocspace,
+          uploadFromDocspaceAiKnowledge,
           onUploadAction,
           createAndCopySharedLink,
           openInfoPanel,
@@ -344,6 +350,7 @@ export const useOptions = (
       t,
       inviteUser,
       uploadFromDocspace,
+      uploadFromDocspaceAiKnowledge,
       onUploadAction,
       createAndCopySharedLink,
       onCreate,

@@ -300,6 +300,8 @@ class DialogsStore {
 
   socialAuthWelcomeDialogVisible = false;
 
+  selectFileAiKnowledgeDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -680,6 +682,10 @@ class DialogsStore {
     this.selectFileFormRoomDialogVisible = visible;
     this.selectFileFormRoomFilterParam = filterParam;
     this.selectFileFormRoomOpenRoot = openRoot;
+  };
+
+  setSelectFileAiKnowledgeDialogVisible = (visible) => {
+    this.selectFileAiKnowledgeDialogVisible = visible;
   };
 
   createMasterForm = async (fileInfo, options) => {

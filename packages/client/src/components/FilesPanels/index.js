@@ -117,7 +117,10 @@ const Panels = (props) => {
     selectFileFormRoomDialogVisible,
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
+    selectFileAiKnowledgeDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
     copyFromTemplateForm,
+    copyFileToAiKnowledge,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -172,6 +175,7 @@ const Panels = (props) => {
     removeUserConfirmation,
     assignRolesDialogVisible,
     socialAuthWelcomeDialogVisible,
+    extsFilesVectorized,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -192,6 +196,10 @@ const Panels = (props) => {
 
   const onCloseFileFormRoomDialog = () => {
     setSelectFileFormRoomDialogVisible(false);
+  };
+
+  const onCloseFileFormAiKnowledgeDialog = () => {
+    setSelectFileAiKnowledgeDialogVisible(false);
   };
 
   const descriptionTextFileFormRoomDialog = useMemo(() => {
@@ -321,6 +329,19 @@ const Panels = (props) => {
       />
     ),
 
+    selectFileAiKnowledgeDialogVisible && (
+      <FilesSelector
+        isFormRoom
+        isPanelVisible
+        key="select-file-ai-knowledge-dialog"
+        onClose={onCloseFileFormAiKnowledgeDialog}
+        openRoot
+        onSelectFile={(file) => copyFileToAiKnowledge(file, t)}
+        filterParam={extsFilesVectorized.join(",")}
+        descriptionText={""}
+      />
+    ),
+
     hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
     invitePanelVisible && <InvitePanel key="invite-panel" />,
     convertPasswordDialogVisible && (
@@ -442,6 +463,7 @@ export default inject(
     filesStore,
     userStore,
     guidanceStore,
+    filesSettingsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -471,6 +493,8 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
       changeQuotaDialogVisible,
@@ -513,8 +537,10 @@ export default inject(
 
     const { viewAs } = filesStore;
 
+    const { extsFilesVectorized } = filesSettingsStore;
+
     const { preparationPortalDialogVisible } = backup;
-    const { copyFromTemplateForm } = filesActionsStore;
+    const { copyFromTemplateForm, copyFileToAiKnowledge } = filesActionsStore;
 
     const { uploadPanelVisible, conversionVisible } = uploadDataStore;
     const {
@@ -574,7 +600,10 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       copyFromTemplateForm,
+      copyFileToAiKnowledge,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
@@ -626,6 +655,7 @@ export default inject(
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
       socialAuthWelcomeDialogVisible,
+      extsFilesVectorized,
     };
   },
 )(observer(Panels));

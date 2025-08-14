@@ -567,12 +567,16 @@ export const helperOptions = (
     title: string,
     description: string,
     filterType: FilesSelectorFilterTypes | FilterType | string,
+    isKnowledge?: boolean,
   ) => ({
     title,
     description,
     icon: <UploadPDFFormIcon />,
     key: "upload-pdf-form",
-    onClick: () => actions.uploadFromDocspace(filterType),
+    onClick: () =>
+      isKnowledge
+        ? actions.uploadFromDocspaceAiKnowledge()
+        : actions.uploadFromDocspace(filterType),
     disabled: !security?.Create,
   });
 

@@ -2618,6 +2618,10 @@ class ContextOptionsStore {
     this.dialogsStore.setSelectFileFormRoomDialogVisible(true, filter, true);
   };
 
+  onShowAiKnowledgeSelectFileDialog = () => {
+    this.dialogsStore.setSelectFileAiKnowledgeDialogVisible(true);
+  };
+
   getContextOptionsPlusFormRoom = (t) => {
     const showSelectorFormRoomDocx = {
       id: "actions_form-room_template_from-file",
@@ -2860,8 +2864,7 @@ class ContextOptionsStore {
           label: t("EmptyView:UploadFromPortalTitle", {
             productName: t("Common:ProductName"),
           }),
-          onClick: () =>
-            this.onShowFormRoomSelectFileDialog(FilterType.FilesOnly, true),
+          onClick: this.onShowAiKnowledgeSelectFileDialog,
           key: "upload-files-product",
         },
         {

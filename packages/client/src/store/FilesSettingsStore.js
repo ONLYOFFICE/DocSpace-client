@@ -153,6 +153,8 @@ class FilesSettingsStore {
 
   hideConfirmCancelOperation = false;
 
+  extsFilesVectorized = [];
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,

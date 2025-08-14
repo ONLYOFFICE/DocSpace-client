@@ -77,7 +77,9 @@ export interface InjectedEmptyViewContainerProps
     Pick<ContactsConextOptionsStore, "inviteUser">,
     Pick<
       TStore["dialogsStore"],
-      "setSelectFileFormRoomDialogVisible" | "setQuotaWarningDialogVisible"
+      | "setSelectFileFormRoomDialogVisible"
+      | "setQuotaWarningDialogVisible"
+      | "setSelectFileAiKnowledgeDialogVisible"
     >,
     Pick<
       TStore["selectedFolderStore"],
@@ -117,6 +119,7 @@ export type OptionActions = {
     filterParam: FilesSelectorFilterTypes | FilterType | string,
     openRoot?: boolean,
   ) => void;
+  uploadFromDocspaceAiKnowledge: VoidFunction;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;

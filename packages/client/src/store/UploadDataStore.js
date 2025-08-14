@@ -54,6 +54,10 @@ import {
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { Link } from "@docspace/shared/components/link";
+import {
+  getVectorizationTasksById,
+  moveFilesToKnowledge,
+} from "@docspace/shared/api/ai";
 
 const removeDuplicate = (items) => {
   const obj = {};
@@ -1895,6 +1899,61 @@ class UploadDataStore {
     }, TIMEOUT);
   };
 
+  vectorizeToAction = (destFolderId, fileIds, startOperationID) => {
+    const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
+
+    let operationId = "";
+
+    const pbData = {
+      operation: OPERATIONS_NAME.copy,
+      operationId: startOperationID,
+    };
+
+    return moveFilesToKnowledge(destFolderId, fileIds)
+      .then((res) => {
+        let data = null;
+
+        const operation = res;
+
+        if (operation) {
+          if (operation?.error) {
+            return Promise.reject(operation);
+          }
+
+          data = operation ?? null;
+        }
+
+        if (!data) {
+          return Promise.reject();
+        }
+
+        operationId = operation.id;
+
+        return this.loopFilesOperations(data, pbData, true)
+          .then((result) => {
+            this.moveToCopyTo(destFolderId, pbData, true, fileIds, []);
+            return result;
+          })
+          .finally(async () => {
+            // to update the status of trashIsEmpty filesStore
+            if (this.treeFoldersStore.isRecycleBinFolder)
+              await this.filesStore.getIsEmptyTrash();
+          });
+      })
+      .catch((err) => {
+        setSecondaryProgressBarData({
+          completed: true,
+          alert: true,
+          operationId,
+          operation: pbData.operation,
+          error: err,
+        });
+        this.clearActiveOperations(fileIds, folderIds);
+
+        return Promise.reject(err);
+      });
+  };
+
   copyToAction = (
     destFolderId,
     folderIds,
@@ -2051,6 +2110,7 @@ class UploadDataStore {
       itemsCount,
       isFolder,
       toFillOut,
+      isAI,
     } = data;
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
@@ -2074,16 +2134,23 @@ class UploadDataStore {
     });
 
     return isCopy
-      ? this.copyToAction(
-          destFolderId,
-          folderIds,
-          fileIds,
-          conflictResolveType,
-          deleteAfter,
-          operationId,
-          content,
-          toFillOut,
-        )
+      ? isAI
+        ? this.vectorizeToAction(
+            destFolderId,
+
+            fileIds,
+            operationId,
+          )
+        : this.copyToAction(
+            destFolderId,
+            folderIds,
+            fileIds,
+            conflictResolveType,
+            deleteAfter,
+            operationId,
+            content,
+            toFillOut,
+          )
       : this.moveToAction(
           destFolderId,
           folderIds,
@@ -2095,7 +2162,7 @@ class UploadDataStore {
         );
   };
 
-  loopFilesOperations = async (data, pbData) => {
+  loopFilesOperations = async (data, pbData, isAI) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
     if (!data) {
@@ -2112,18 +2179,20 @@ class UploadDataStore {
     // let progress = data.progress;
 
     let operationItem = data;
-    let finished = data.finished;
+    let finished = data.finished ?? data.isCompleted;
 
     while (!finished) {
       const item = await getOperationProgress(
         data.id,
         getUnexpectedErrorText(),
         true,
+        isAI ? getVectorizationTasksById : undefined,
       );
+
       operationItem = item;
 
       // progress = item ? item.progress : 100;
-      finished = item ? item.finished : true;
+      finished = item ? item.finished || item.isCompleted : true;
 
       setSecondaryProgressBarData({
         operation: pbData.operation,

@@ -27,9 +27,12 @@
 import { makeAutoObservable } from "mobx";
 
 import { Nullable } from "@docspace/shared/types";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 class AiRoomStore {
   roomId: Nullable<number> = null;
+
+  knowledgeId: Nullable<number> = null;
 
   currentTab: "chat" | "knowledge" | "result" = "chat";
 
@@ -43,6 +46,30 @@ class AiRoomStore {
 
   setCurrentTab = (currentTab: "chat" | "knowledge" | "result") => {
     this.currentTab = currentTab;
+  };
+
+  setKnowledgeId = (knowledgeId: Nullable<number>) => {
+    if (
+      this.knowledgeId &&
+      this.knowledgeId !== knowledgeId &&
+      SocketHelper.socketSubscribers.has(`DIR-${knowledgeId}`)
+    ) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: [`DIR-${this.knowledgeId}`],
+        individual: true,
+      });
+    }
+
+    this.knowledgeId = knowledgeId;
+
+    setTimeout(() => {
+      if (knowledgeId) {
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts: [`DIR-${knowledgeId}`],
+          individual: true,
+        });
+      }
+    }, 100);
   };
 
   get isChatTab() {

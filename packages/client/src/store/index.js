@@ -258,6 +258,7 @@ const filesActionsStore = new FilesActionsStore(
   currentQuotaStore,
   indexingStore,
   versionHistoryStore,
+  aiRoomStore,
 );
 
 mediaViewerDataStore.filesActionsStore = filesActionsStore;

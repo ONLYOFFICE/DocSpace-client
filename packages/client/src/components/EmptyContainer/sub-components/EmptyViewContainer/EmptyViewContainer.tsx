@@ -99,8 +99,11 @@ const InjectedEmptyViewContainer = inject<
       setView: setViewInfoPanel,
     } = infoPanelStore;
 
-    const { setSelectFileFormRoomDialogVisible, setQuotaWarningDialogVisible } =
-      dialogsStore;
+    const {
+      setSelectFileFormRoomDialogVisible,
+      setQuotaWarningDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
+    } = dialogsStore;
 
     const { security, access, rootFolderType } = selectedFolderStore;
 
@@ -128,6 +131,7 @@ const InjectedEmptyViewContainer = inject<
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
       logoText,

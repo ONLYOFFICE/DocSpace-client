@@ -114,3 +114,11 @@ export type TServer = {
   headers: Record<string, string>;
   endpoint: string;
 };
+
+export type TVectorizeOperation = {
+  error: string;
+  id: string;
+  isCompleted: boolean;
+  percentage: number;
+  status: number;
+};

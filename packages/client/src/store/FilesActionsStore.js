@@ -150,6 +150,8 @@ class FilesActionStore {
 
   versionHistoryStore;
 
+  aiRoomStore;
+
   userStore = null;
 
   currentTariffStatusStore = null;
@@ -187,6 +189,7 @@ class FilesActionStore {
     currentQuotaStore,
     indexingStore,
     versionHistoryStore,
+    aiRoomStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -207,6 +210,7 @@ class FilesActionStore {
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
     this.versionHistoryStore = versionHistoryStore;
+    this.aiRoomStore = aiRoomStore;
   }
 
   updateCurrentFolder = async (
@@ -3172,6 +3176,29 @@ class FilesActionStore {
     if (conflicts.length) {
       return this.setConflictDialogData(conflicts, operationData);
     }
+
+    this.uploadDataStore
+      .itemOperationToFolder(operationData)
+      .catch((error) => toastr.error(error));
+  };
+
+  copyFileToAiKnowledge = async (fileInfo) => {
+    const selectedItemId = this.aiRoomStore.knowledgeId;
+    const fileIds = [fileInfo.id];
+
+    const operationData = {
+      destFolderId: selectedItemId,
+      folderIds: [],
+      fileIds,
+      deleteAfter: false,
+      isCopy: true,
+      isAI: true,
+      folderTitle: this.selectedFolderStore.title,
+    };
+
+    this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
+      fileInfo.title,
+    );
 
     this.uploadDataStore
       .itemOperationToFolder(operationData)

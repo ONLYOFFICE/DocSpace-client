@@ -76,8 +76,6 @@ const AiRoomTabs = ({
 
     filesFilter.folder = rootRoomId?.toString() ?? id?.toString() ?? "";
 
-    console.log(rootRoomId);
-
     if (tab.id === "chat") {
       const path = getCategoryUrl(CategoryType.Chat, rootRoomId ?? id);
 

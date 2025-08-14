@@ -145,6 +145,8 @@ const ArticleMainButtonContent = (props) => {
     selectFileDialogVisible,
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
+    selectFileAiKnowledgeDialogVisible,
+    setSelectFileAiKnowledgeDialogVisible,
     showArticleLoader,
     isFavoritesFolder,
     isRecentFolder,
@@ -259,6 +261,10 @@ const ArticleMainButtonContent = (props) => {
     },
     [setSelectFileFormRoomDialogVisible],
   );
+
+  const onShowAiKnowledgeSelectFileDialog = React.useCallback(() => {
+    setSelectFileAiKnowledgeDialogVisible(true);
+  }, [setSelectFileAiKnowledgeDialogVisible]);
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -505,8 +511,7 @@ const ArticleMainButtonContent = (props) => {
         label: t("EmptyView:UploadFromPortalTitle", {
           productName: t("Common:ProductName"),
         }),
-        onClick: () =>
-          onShowFormRoomSelectFileDialog(CHAT_SUPPORTED_FORMATS, true),
+        onClick: onShowAiKnowledgeSelectFileDialog,
         key: "upload-files-product",
       };
 
@@ -709,6 +714,7 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     onShowSelectFileDialog,
     onShowFormRoomSelectFileDialog,
+    onShowAiKnowledgeSelectFileDialog,
     onUploadFileClick,
     onUploadFolderClick,
     createActionsForFormRoom,
@@ -730,6 +736,7 @@ const ArticleMainButtonContent = (props) => {
         copyPanelVisible ||
         selectFileDialogVisible ||
         selectFileFormRoomDialogVisible ||
+        selectFileAiKnowledgeDialogVisible ||
         versionHistoryPanelVisible
       );
     }
@@ -894,6 +901,8 @@ export default inject(
       selectFileDialogVisible,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
     } = dialogsStore;
 
     const { enablePlugins, currentColorScheme, currentDeviceType } =
@@ -974,6 +983,8 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      selectFileAiKnowledgeDialogVisible,
+      setSelectFileAiKnowledgeDialogVisible,
       createFoldersTree,
 
       showWarningDialog,

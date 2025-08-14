@@ -98,6 +98,7 @@ const ProfileRemoveForm = ({
             {t("DeleteProfileSuccessDescription", {
               productName: t("Common:ProductName"),
             })}
+            <br />
             <Trans i18nKey="DeleteProfileSuccessMessageInfo" ns="Confirm" t={t}>
               Please check our
               <Link

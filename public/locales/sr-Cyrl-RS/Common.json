@@ -873,5 +873,6 @@
   "YourLogo": "Ваш лого",
   "YourTurn": "Ваш ред",
   "LogoForEditors": "Лого за {{editorName}} уредник",
-  "LogoForViewer": "Лого за {{diagramViewer}}"
+  "LogoForViewer": "Лого за {{diagramViewer}}",
+  "LogoDocsEditor": "Логотип за заглавље уређивача"
 }

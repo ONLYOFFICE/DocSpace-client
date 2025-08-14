@@ -1633,6 +1633,8 @@ class FilesStore {
     this.filesController = new AbortController();
     this.roomsController = null;
 
+    let room = null;
+
     return api.files
       .getFolder(folderId, filterData, this.filesController.signal)
       .then(async (data) => {
@@ -1720,9 +1722,10 @@ class FilesStore {
             let quotaLimit;
             let usedSpace;
             let external;
-            if (idx === 1) {
-              let room = data.current;
 
+            room = data.current;
+
+            if (idx === 1) {
               if (!isCurrentFolder) {
                 room = await api.files.getFolderInfo(folder.id);
 
@@ -1783,7 +1786,10 @@ class FilesStore {
           currentFolder.type === FolderType.ResultStorage ||
           currentFolder.type === FolderType.Knowledge
         ) {
-          const room = await api.files.getFolderInfo(data.pathParts[1].id);
+          const aiRoom =
+            room.id === currentFolder.parentId
+              ? room
+              : await api.files.getFolderInfo(currentFolder.parentId);
 
           this.aiRoomStore.setCurrentTab(
             currentFolder.type === FolderType.ResultStorage
@@ -1791,7 +1797,7 @@ class FilesStore {
               : "knowledge",
           );
 
-          currentFolder = room;
+          currentFolder = aiRoom;
         } else if (currentFolder.roomType === RoomsType.AIRoom) {
           this.aiRoomStore.setCurrentTab("chat");
         } else if (currentFolder.rootRoomType === RoomsType.AIRoom) {

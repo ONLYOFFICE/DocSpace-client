@@ -353,7 +353,6 @@ function WizardForm(props: WizardFormProps) {
           isAutoFocussed
           onChange={onChangeEmail}
           isDisabled={isCreated}
-          testId="email_input"
         />
       </FieldContainer>
 
@@ -563,7 +562,7 @@ function WizardForm(props: WizardFormProps) {
         label={t("Common:ContinueButton")}
         isLoading={isCreated}
         onClick={onContinueClick}
-        testId="continue_button"
+        testId="wizard_continue_button"
       />
     </WizardContainer>
   );

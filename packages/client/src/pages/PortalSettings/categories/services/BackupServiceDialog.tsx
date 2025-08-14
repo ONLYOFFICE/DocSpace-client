@@ -156,6 +156,6 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   );
 };
 
-export default inject(({}: TStore) => {
+export default inject(() => {
   return {};
 })(observer(BackupServiceDialog));

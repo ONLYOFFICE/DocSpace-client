@@ -77,6 +77,7 @@ import {
   UrlActionType,
   RecaptchaType,
   DeepLinkType,
+  StartPageRoutes,
 } from "../enums";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR, MEDIA_VIEW_URL } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
@@ -143,6 +144,9 @@ class SettingsStore {
   defaultPage = "/";
 
   homepage = "";
+
+  // TODO: Temp value. Change later. Maybe defaultPage should be used.
+  startPage = StartPageRoutes.Rooms;
 
   datePattern = "M/d/yyyy";
 
@@ -1556,6 +1560,10 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  setStartPage = (startPage: StartPageRoutes) => {
+    this.startPage = startPage;
   };
 }
 

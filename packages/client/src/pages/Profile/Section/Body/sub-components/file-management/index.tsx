@@ -34,6 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 
+import { StartPageSetting } from "./sub-components/StartPageSetting";
 import styles from "./FileManagement.module.scss";
 
 type FileManagementProps = {
@@ -108,6 +109,7 @@ const FileManagement = ({
 
   return (
     <div className={styles.styledWrapper}>
+      <StartPageSetting />
       <div className={styles.settingsSection}>
         <div className={styles.toggleBtnWrapper}>
           <ToggleButton

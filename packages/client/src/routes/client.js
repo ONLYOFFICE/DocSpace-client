@@ -30,6 +30,7 @@ import componentLoader from "@docspace/shared/utils/component-loader";
 import Error404 from "@docspace/shared/components/errors/Error404";
 
 import { ViewComponent } from "SRC_DIR/pages/Home/View";
+import { StartPageRedirect } from "SRC_DIR/pages/Home/StartPageRedirect";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
@@ -70,7 +71,7 @@ const ClientRoutes = [
             index: true,
             element: (
               <PrivateRoute>
-                <Navigate to="/rooms/shared" replace />
+                <StartPageRedirect />
               </PrivateRoute>
             ),
           },

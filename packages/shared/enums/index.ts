@@ -822,3 +822,13 @@ export enum ProvidersType {
   WebDav = "WebDav",
   Yandex = "Yandex",
 }
+
+/**
+ * Enum for start page routes.
+ * @readonly
+ */
+export enum StartPageRoutes {
+  Documents = "/rooms/personal",
+  Rooms = "/rooms/shared",
+  Recent = "/recent",
+}

@@ -234,6 +234,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
           primary
           isDisabled={isDenyRunning}
           isLoading={isAllowRunning}
+          testId="consent_allow_button"
         />
         <Button
           onClick={onDenyClick}
@@ -242,6 +243,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
           scale
           isDisabled={isAllowRunning}
           isLoading={isDenyRunning}
+          testId="consent_deny_button"
         />
       </StyledButtonContainer>
       <StyledDescriptionContainer>
@@ -256,6 +258,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
               href={client.policyUrl}
               target={LinkTarget.blank}
               noHover
+              dataTestId="privacy_policy_link"
             >
               privacy policy
             </Link>
@@ -267,6 +270,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
               href={client.termsUrl}
               target={LinkTarget.blank}
               noHover
+              dataTestId="terms_of_service_link"
             >
               terms of service
             </Link>
@@ -293,6 +297,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
               noHover
               lineHeight="20px"
               onClick={onChangeUserClick}
+              dataTestId="not_you_link"
             >
               {t("NotYou")}
             </Link>

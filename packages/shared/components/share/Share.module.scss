@@ -150,6 +150,15 @@
     gap: 8px;
     align-items: center;
     margin-inline-start: auto;
+
+    .linkRowCopyIcon,
+    .linkActionsCopyIcon {
+      min-width: 16px;
+      min-height: 16px;
+
+      user-select: all;
+      cursor: pointer;
+    }
   }
 
   .loader {

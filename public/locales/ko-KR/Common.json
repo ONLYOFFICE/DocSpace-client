@@ -234,6 +234,7 @@
   "DeveloperTools": "개발자 도구",
   "Diagram": "도식",
   "Diagrams": "도표",
+  "DiagramViewer": "다이어그램 뷰어",
   "Disable": "비활성화",
   "Disabled": "비활성화",
   "DisableQuota": "할당량 비활성화",
@@ -441,7 +442,6 @@
   "LoginButton": "로그인",
   "LogoAbout": "소개 페이지 로고",
   "LogoCompact": "컴팩트한 왼쪽 메뉴 로고",
-  "LogoDocsEditor": "편집기 헤더 로고",
   "LogoFavicon": "파비콘",
   "LogoLightSmall": "스페이스 헤더 로고",
   "LogoLogin": "로그인 페이지 및 이메일용 로고",
@@ -548,6 +548,7 @@
   "PasswordRequired": "비밀번호가 필요합니다",
   "Path": "경로",
   "PaymentsTitle": "결제",
+  "PDF": "PDF",
   "People": "사람들",
   "Permissions": "권한",
   "PerUserMonth": "<1>{{price}}</1>/관리자, 월",
@@ -895,5 +896,7 @@
   "LinkSettings": "링크 설정",
   "Embed": "임베드",
   "GeneralLinkRevokedAndCreatedSuccessfully": "새로운 일반 링크가 생성되었습니다",
-  "RevokeLink": "링크 취소"
+  "RevokeLink": "링크 취소",
+  "LogoForEditors": "{{editorName}} 편집기 로고",
+  "LogoForViewer": "{{diagramViewer}} 로고"
 }

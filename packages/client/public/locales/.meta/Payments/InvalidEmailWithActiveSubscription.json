@@ -3,7 +3,7 @@
   "content": "Your subscription remains active, but we recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "56ba8d49065a3fd83f9914a4525a568901e02a68",
   "created_at": "2025-05-19T21:30:53.693Z",
-  "updated_at": "2025-08-04T07:30:01.519Z",
+  "updated_at": "2025-08-11T18:11:59.270Z",
   "comment": {
     "text": "This translation key is used to display a message when an invalid email address is linked to an active subscription in the Payer Information container. The message informs the user that their subscription remains active but recommends choosing a new Payer for access to subscription settings in {{productName}}. It appears on a specific page related to payment settings, likely as part of the user interface for configuring payment details.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
-      "line_number": 122,
+      "line_number": 123,
       "context": "const unknownPayerDescription = () => {\n const userNotFound = `${t(\"UserNotFoundMatchingEmail\")} `;\n \n let invalidEmailDescription = user.isOwner\n ? t(\"InvalidEmailWithActiveSubscription\", {\n productName: t(\"Common:ProductName\"),\n })\n : t(\"InvalidEmailWithActiveSubscriptionForAdmin\", {\n productName: t(\"Common:ProductName\"),\n });",
       "module": "/packages/client"
     }

@@ -28,6 +28,9 @@ import { getStringFromSearchParams, encodeParams } from "@/utils";
 import { getTfaSecretKeyAndQR } from "@/utils/actions";
 
 import { logger } from "logger.mjs";
+
+import { GreetingContainer } from "@/components/GreetingContainer";
+
 import { StyledForm } from "./page.styled";
 import TfaActivationForm from "./page.client";
 
@@ -45,12 +48,15 @@ async function Page(props: TfaActivationProps) {
   const [res] = await Promise.all([getTfaSecretKeyAndQR(confirmKey)]);
 
   return (
-    <StyledForm className="set-app-container">
-      <TfaActivationForm
-        secretKey={res.manualEntryKey}
-        qrCode={res.qrCodeSetupImageUrl}
-      />
-    </StyledForm>
+    <>
+      <GreetingContainer />
+      <StyledForm className="set-app-container">
+        <TfaActivationForm
+          secretKey={res.manualEntryKey}
+          qrCode={res.qrCodeSetupImageUrl}
+        />
+      </StyledForm>
+    </>
   );
 }
 

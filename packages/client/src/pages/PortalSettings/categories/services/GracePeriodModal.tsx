@@ -76,7 +76,7 @@ const GracePeriodModal: React.FC<GracePeriodModalProps> = ({
         </Text>
         <br />
         <Text fontWeight={600}>{t("Reminder")}</Text>
-        <Text as="span">
+        <Text as="span" dataTestId="grace_period_info">
           <Trans
             i18nKey="GracePeriodActivatedInfo"
             ns="Payments"
@@ -104,12 +104,14 @@ const GracePeriodModal: React.FC<GracePeriodModalProps> = ({
           size={ButtonSize.normal}
           primary
           onClick={onClick}
+          testId="grace_period_ok_button"
         />
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
+          testId="grace_period_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

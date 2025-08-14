@@ -234,6 +234,7 @@
   "DeveloperTools": "Izstrādātāja rīki",
   "Diagram": "Diagramma",
   "Diagrams": "Diagrammas",
+  "DiagramViewer": "Diagrammu skatītājs",
   "Disable": "Atspējot",
   "Disabled": "Atspējots",
   "DisableQuota": "Atspējot kvotu",
@@ -441,7 +442,6 @@
   "LoginButton": "Ielogoties",
   "LogoAbout": "Logotips lapai Par",
   "LogoCompact": "Kompaktās kreisās izvēlnes logotips",
-  "LogoDocsEditor": "Redaktora galvenes logotips",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logotips portāla galvenei",
   "LogoLogin": "Logotips pieteikšanās lapai un e-pastiem",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Jānorāda parole",
   "Path": "Ceļš",
   "PaymentsTitle": "Maksājumi",
+  "PDF": "PDF",
   "People": "Cilvēki",
   "Permissions": "Atļaujas",
   "PerUserMonth": "<1>{{price}} </1> vienam administratoram/mēnesī",
@@ -894,5 +895,7 @@
   "LinkSettings": "Saites iestatījumi",
   "Embed": "Iegult",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Jauna vispārīga saite ir veiksmīgi izveidota",
-  "RevokeLink": "Atsaukt saiti"
+  "RevokeLink": "Atsaukt saiti",
+  "LogoForEditors": "Logotips redaktoram {{editorName}}",
+  "LogoForViewer": "Logotips priekš {{diagramViewer}}"
 }

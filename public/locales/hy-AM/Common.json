@@ -234,6 +234,7 @@
   "DeveloperTools": "Մշակողի գործիքներ",
   "Diagram": "Դիագրամ",
   "Diagrams": "Դիագրամներ",
+  "DiagramViewer": "Դիագրամի Դիտարկիչ",
   "Disable": "Անջատել",
   "Disabled": "Անջատված է",
   "DisableQuota": "Անջատել քվոտան",
@@ -441,7 +442,6 @@
   "LoginButton": "Մուտք գործել",
   "LogoAbout": "Մասին էջի լոգոն",
   "LogoCompact": "Կոմպակտ ձախ մենյուի պատկերանշան",
-  "LogoDocsEditor": "Էջագլխի խմբագրիչների լոգո",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Լոգո կայքէջի էջագլխի համար",
   "LogoLogin": "Մուտք գործելու էջի և էլ. նամակների պատկերանշան",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Պահանջվում է գաղտնաբառ",
   "Path": "Ուղի",
   "PaymentsTitle": "Վճարումներ",
+  "PDF": "PDF",
   "People": "Մարդիկ",
   "Permissions": "Թույլտվություններ",
   "PerUserMonth": "<1>{{price}}</1> մեկ ադմինիստրատորի / ամսվա համար",
@@ -895,5 +896,7 @@
   "LinkSettings": "Հղման կարգավորումներ",
   "Embed": "Տեղադրել",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Նոր ընդհանուր հղումը հաջողությամբ ստեղծվեց",
-  "RevokeLink": "Չեղարկել հղումը"
+  "RevokeLink": "Չեղարկել հղումը",
+  "LogoForEditors": "{{editorName}} խմբագրի լոգո",
+  "LogoForViewer": "{{diagramViewer}}-ի լոգո"
 }

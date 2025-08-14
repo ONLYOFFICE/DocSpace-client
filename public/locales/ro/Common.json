@@ -234,6 +234,7 @@
   "DeveloperTools": "Instrumente pentru dezvoltatori",
   "Diagram": "Diagrama",
   "Diagrams": "Diagrame",
+  "DiagramViewer": "Vizualizator diagrame",
   "Disable": "Dezactivare",
   "Disabled": "Dezactivat",
   "DisableQuota": "Dezactivare cotă",
@@ -441,7 +442,6 @@
   "LoginButton": "Autentificare",
   "LogoAbout": "Siglă pentru pagina Despre",
   "LogoCompact": "Meniul compact din partea stângă",
-  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo-ul pentru antetul spațiului",
   "LogoLogin": "Siglă pentru pagina de conectare și mesaje de e-mail",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Parola este obligatorie",
   "Path": "Cale",
   "PaymentsTitle": "Plăți",
+  "PDF": "PDF",
   "People": "Persoane",
   "Permissions": "Permisiuni",
   "PerUserMonth": "<1>{{price}}</1> per administrator/lună",
@@ -895,5 +896,7 @@
   "LinkSettings": "Setări link",
   "Embed": "Încorporare",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Un link general a fost creat cu succes",
-  "RevokeLink": "Revocare link"
+  "RevokeLink": "Revocare link",
+  "LogoForEditors": "Logo pentru editorul {{editorName}}",
+  "LogoForViewer": "Logo pentru {{diagramViewer}}"
 }

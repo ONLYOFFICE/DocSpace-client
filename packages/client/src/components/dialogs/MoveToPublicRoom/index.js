@@ -128,7 +128,7 @@ const MoveToPublicRoomComponent = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
-          <Text noSelect>{t("Common:MoveToPublicRoom")}</Text>
+          <Text>{t("Common:MoveToPublicRoom")}</Text>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

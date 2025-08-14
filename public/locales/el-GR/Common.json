@@ -234,6 +234,7 @@
   "DeveloperTools": "Εργαλεία προγραμματιστή",
   "Diagram": "Διάγραμμα",
   "Diagrams": "Διαγράμματα",
+  "DiagramViewer": "Προβολή διαγραμμάτων",
   "Disable": "Απενεργοποίηση",
   "Disabled": "Απενεργοποιημένο",
   "DisableQuota": "Απενεργοποίηση ποσόστωσης",
@@ -441,7 +442,6 @@
   "LoginButton": "Είσοδος",
   "LogoAbout": "Λογότυπο για τη σελίδα «Σχετικά»",
   "LogoCompact": "Λογότυπο για το συμπαγές αριστερό μενού",
-  "LogoDocsEditor": "Λογότυπο για την επικεφαλίδα των προγραμμάτων επεξεργασίας",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Λογότυπο για την κεφαλίδα του χώρου",
   "LogoLogin": "Λογότυπο για τα μηνύματα ηλεκτρονικού ταχυδρομείου και τη σελίδα Σύνδεσης",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Απαιτείται κωδικός πρόσβασης",
   "Path": "Μονοπάτι",
   "PaymentsTitle": "Πληρωμές",
+  "PDF": "PDF",
   "People": "Άτομα",
   "Permissions": "Δικαιώματα",
   "PerUserMonth": "<1>{{price}}</1> ανά διαχειριστή/μήνα",
@@ -895,5 +896,7 @@
   "LinkSettings": "Ρυθμίσεις συνδέσμου",
   "Embed": "Ενσωμάτωση",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Ο νέος γενικός σύνδεσμος δημιουργήθηκε με επιτυχία",
-  "RevokeLink": "Ανάκληση συνδέσμου"
+  "RevokeLink": "Ανάκληση συνδέσμου",
+  "LogoForEditors": "Λογότυπο για τον επεξεργαστή {{editorName}}",
+  "LogoForViewer": "Λογότυπο για {{diagramViewer}}"
 }

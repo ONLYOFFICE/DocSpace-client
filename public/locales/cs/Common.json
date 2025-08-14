@@ -234,6 +234,7 @@
   "DeveloperTools": "Nástroje pro vývojáře",
   "Diagram": "Diagram",
   "Diagrams": "Diagramy",
+  "DiagramViewer": "Prohlížeč schémat",
   "Disable": "Zakázat",
   "Disabled": "Deaktivováno",
   "DisableQuota": "Zakázat kvóty",
@@ -441,7 +442,6 @@
   "LoginButton": "Přihlásit se",
   "LogoAbout": "Logo pro stránku O nás",
   "LogoCompact": "Logo pro kompaktní levou nabídku",
-  "LogoDocsEditor": "Logo pro záhlaví editorů",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo pro záhlaví prostoru",
   "LogoLogin": "Logo pro přihlašovací stránku a e-maily",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Vyžadováno heslo",
   "Path": "Сesta",
   "PaymentsTitle": "Platby",
+  "PDF": "PDF",
   "People": "Lidé",
   "Permissions": "Oprávnění",
   "PerUserMonth": "<1>{{price}}</1> za administrátora/měsíc",
@@ -895,5 +896,7 @@
   "LinkSettings": "Nastavení odkazů",
   "Embed": "Vložit",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Úspěšně vytvořen nový obecný odkaz",
-  "RevokeLink": "Odvolat odkaz"
+  "RevokeLink": "Odvolat odkaz",
+  "LogoForEditors": "Logo pro editor {{editorName}}",
+  "LogoForViewer": "Logo pro {{diagramViewer}}"
 }

@@ -3,7 +3,7 @@
   "content": "The Service provider URL address where it receives and processes assertions from the Identity provider",
   "content_en_sha1_hash": "072ba9de955680a2e39b73145841fa918389b237",
   "created_at": "2025-05-19T21:30:50.151Z",
-  "updated_at": "2025-05-24T03:08:45.931Z",
+  "updated_at": "2025-08-11T18:11:59.262Z",
   "comment": {
     "text": "The translation key \"SPAssertionConsumerURLTooltip\" is used to describe the Service provider URL address field in a Single Sign-On setup. It provides a tooltip explanation for users when hovering over the field, indicating where assertions from an Identity provider are received and processed.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/ProviderMetadata.js",
-      "line_number": 93,
-      "context": "<MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}\n name=\"spAssertionConsumerUrl\"\n placeholder={`${url}/sso/acs`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPAssertionConsumerURLTooltip\")}</Text>\n }\n tooltipClass=\"sp-assertion-consumer-url-tooltip icon-button\"\n />\n \n <MetadataUrlField",
+      "line_number": 94,
+      "context": "<MetadataUrlField\n labelText={t(\"SPAssertionConsumerURL\")}\n name=\"spAssertionConsumerUrl\"\n placeholder={`${url}/sso/acs`}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SPAssertionConsumerURLTooltip\")}</Text>\n }\n tooltipClass=\"sp-assertion-consumer-url-tooltip icon-button\"\n dataTestId=\"sp_assertion_consumer_url\"\n />",
       "module": "/packages/client"
     }
   ],

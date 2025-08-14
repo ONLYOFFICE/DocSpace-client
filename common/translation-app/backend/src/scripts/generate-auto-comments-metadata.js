@@ -345,9 +345,7 @@ async function generateAutoComment(projectName) {
 async function generateAutoCommentsMetadata() {
   const projects = Object.keys(projectLocalesMap);
   console.log(
-    `Generating metadata for ${projects.length} projects: ${projects.join(
-      ", "
-    )}`
+    `Generating metadata for ${projects.length} projects: ${projects.join(", ")}`
   );
 
   const overallStats = {
@@ -412,9 +410,7 @@ async function generateAutoCommentsMetadata() {
         Object.entries(projectStats.namespaces).forEach(
           ([namespace, nsStats]) => {
             console.log(
-              `  - ${namespace}: ${nsStats.totalKeys || 0} keys (${
-                nsStats.updatedComments || 0
-              } comments generated)`
+              `  - ${namespace}: ${nsStats.totalKeys || 0} keys (${nsStats.updatedComments || 0} comments generated)`
             );
           }
         );

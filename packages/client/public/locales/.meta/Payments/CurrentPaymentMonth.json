@@ -3,7 +3,7 @@
   "content": "Current payment: {{price}}/month ({{size}})",
   "content_en_sha1_hash": "e0b56f598b09a6685c82e581985607c0b6f37582",
   "created_at": "2025-06-18T17:09:37.824Z",
-  "updated_at": "2025-06-30T12:20:31.590Z",
+  "updated_at": "2025-08-12T19:46:26.251Z",
   "comment": {
     "text": "The translation key \"CurrentPaymentMonth\" is used to display the current payment amount and size of a storage plan in a formatted manner. It appears as part of a UI component that displays financial information about a subscription or storage service. Translators should provide a concise and accurate description of this amount, including any currency symbols and unit conversions, for consistent presentation across different languages.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/services/AdditionalStorage.tsx",
-      "line_number": 243,
+      "line_number": 251,
       "context": "[styles.greenColor]: true,\n })}\n >\n <CheckIcon />\n <Text>\n {t(\"CurrentPaymentMonth\", {\n price: formatWalletCurrency!(\n calculateTotalPrice(\n currentStoragePlanSize!,\n storagePriceIncrement!,\n ),",
       "module": "/packages/client"
     }

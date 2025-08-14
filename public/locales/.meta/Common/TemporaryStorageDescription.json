@@ -3,7 +3,7 @@
   "content": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating.",
   "content_en_sha1_hash": "88ae5786931a2fc09fc6599fe91ada967589e48d",
   "created_at": "2025-05-26T07:15:48.759Z",
-  "updated_at": "2025-08-04T07:30:01.749Z",
+  "updated_at": "2025-08-11T09:02:44.096Z",
   "comment": {
     "text": "This translation key is used for a description that explains how backup files are stored and accessible. It appears in a UI component related to manual backups, informing users when they can download their backup after creating it within 24 hours.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/pages/backup/manual-backup/index.tsx",
-      "line_number": 321,
-      "context": "{...commonRadioButtonProps}\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:TemporaryStorageDescription\")}\n </Text>\n {isCheckedTemporaryStorage ? (\n <div\n className={classNames(\n styles.manualBackupButtons,",
+      "line_number": 323,
+      "context": "testId=\"temporary_storage_radio_button\"\n />\n <Text\n className={classNames(styles.backupDescription, \"backup-description\")}\n >\n {t(\"Common:TemporaryStorageDescription\")}\n </Text>\n {isCheckedTemporaryStorage ? (\n <div\n className={classNames(\n styles.manualBackupButtons,",
       "module": "/packages/shared"
     }
   ],

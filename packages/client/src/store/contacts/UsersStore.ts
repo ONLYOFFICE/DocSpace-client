@@ -26,7 +26,6 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 
-import isNil from "lodash/isNil";
 import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -76,7 +75,6 @@ import {
   setContactsUsersFilterUrl,
   TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
-import { GUESTS_TAB_VISITED_NAME } from "SRC_DIR/helpers/contacts/constants";
 import type {
   TChangeUserStatusDialogData,
   TContactsSelected,
@@ -90,7 +88,6 @@ import AccessRightsStore from "../AccessRightsStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import TreeFoldersStore from "../TreeFoldersStore";
 
-import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
@@ -127,8 +124,6 @@ class UsersStore {
 
   contactsTab: TContactsTab = false;
 
-  guestsTabVisited: boolean = false;
-
   roomParts: string = "";
 
   activeUsers: TPeopleListItem[] = [];
@@ -136,7 +131,6 @@ class UsersStore {
   constructor(
     public settingsStore: SettingsStore,
     public userStore: UserStore,
-    public targetUserStore: TargetUserStore,
     public groupsStore: GroupsStore,
     public contactsHotkeysStore: ContactsHotkeysStore,
     public accessRightsStore: AccessRightsStore,
@@ -149,7 +143,6 @@ class UsersStore {
   ) {
     this.settingsStore = settingsStore;
     this.userStore = userStore;
-    this.targetUserStore = targetUserStore;
     this.groupsStore = groupsStore;
     this.contactsHotkeysStore = contactsHotkeysStore;
     this.accessRightsStore = accessRightsStore;
@@ -358,16 +351,6 @@ class UsersStore {
     //   this.filter = Filter.getDefault();
     // }
     this.contactsTab = contactsTab;
-
-    if (!isNil(this.userStore?.user?.id)) {
-      const guestsTabVisitedStorage = window.localStorage.getItem(
-        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user.id}`,
-      );
-
-      if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-        this.guestsTabVisited = true;
-      }
-    }
   };
 
   setFilter = (filter: Filter) => {
@@ -451,14 +434,6 @@ class UsersStore {
           ? `${FILTER_GUESTS}=${this.userStore.user?.id}`
           : `${FILTER_PEOPLE}=${this.userStore.user?.id}`;
 
-    const guestsTabVisitedStorage = window.localStorage.getItem(
-      `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-    );
-
-    if (guestsTabVisitedStorage && !this.guestsTabVisited) {
-      this.guestsTabVisited = true;
-    }
-
     if (withFilterLocalStorage) {
       const filterObj = getUserFilter(localStorageKey);
 
@@ -475,16 +450,7 @@ class UsersStore {
       filterData.group = null;
     }
 
-    if (!guestsTabVisitedStorage && contactsView === "guests") {
-      filterData.inviterId = null;
-      window.localStorage.setItem(
-        `${GUESTS_TAB_VISITED_NAME}-${this.userStore.user!.id}`,
-        "true",
-      );
-      this.guestsTabVisited = true;
-    }
-
-    if (contactsView === "guests") {
+    if (this.contactsTab === "guests") {
       filterData.area = "guests";
     } else if (contactsView === "people") {
       filterData.area = "people";
@@ -600,19 +566,15 @@ class UsersStore {
   };
 
   updateProfileInUsers = async (updatedProfile?: TUser) => {
-    const updatedUser = updatedProfile ?? this.targetUserStore.targetUser;
     if (!this.users) {
       return this.getUsersList(this.filter, true);
     }
 
-    if (!updatedUser) return;
+    if (!updatedProfile) return;
 
     const updatedUsers = this.users.map((user) => {
-      if (
-        user.id === updatedUser.id ||
-        user.userName === updatedUser.userName
-      ) {
-        return { ...user, ...updatedUser };
+      if (user.id === updatedProfile.id) {
+        return { ...user, ...updatedProfile };
       }
 
       return user;
@@ -670,6 +632,7 @@ class UsersStore {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
 
+            options.push("change-name");
             options.push("change-email");
             options.push("change-password");
 

@@ -41,7 +41,9 @@
   background: var(--combobox-button-bg);
   box-sizing: border-box;
 
-  @include mixins.no-user-select;
+  &.noSelect {
+    @include mixins.no-user-select;
+  }
 
   &.type {
     gap: 4px;

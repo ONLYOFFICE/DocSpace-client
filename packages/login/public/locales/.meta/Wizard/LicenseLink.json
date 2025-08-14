@@ -3,7 +3,7 @@
   "content": "License agreements",
   "content_en_sha1_hash": "0c2142b5106f197867d2f54212f8b6cae2613465",
   "created_at": "2025-05-19T21:30:57.219Z",
-  "updated_at": "2025-05-24T14:53:20.022Z",
+  "updated_at": "2025-08-11T09:02:44.071Z",
   "comment": {
     "text": "The \"LicenseLink\" translation key represents a link to license agreements, used as a label on a button in a wizard-style login process. It appears as a clickable element on the screen and serves to direct users to access licensing information for their account.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 539,
+      "line_number": 540,
       "context": "}\n fontSize=\"13px\"\n target={LinkTarget.blank}\n href={licenseUrl}\n >\n {t(\"LicenseLink\")}\n </Link>\n </StyledAcceptTerms>\n \n <Button\n size={ButtonSize.medium}",
       "module": "/packages/login"
     }

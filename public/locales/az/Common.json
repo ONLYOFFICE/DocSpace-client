@@ -234,6 +234,7 @@
   "DeveloperTools": "Tərtibatçı Alətləri",
   "Diagram": "Diaqram",
   "Diagrams": "Diaqramlar",
+  "DiagramViewer": "Diaqram Baxıcı",
   "Disable": "Deaktiv edin",
   "Disabled": "Deaktiv edildi",
   "DisableQuota": "Kvotanı deaktiv edin",
@@ -441,7 +442,6 @@
   "LoginButton": "Daxil ol",
   "LogoAbout": "Haqqımızda səhifəsi üçün loqo",
   "LogoCompact": "Kompakt sol menyu üçün loqo",
-  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Sahə başlığı üçün loqo",
   "LogoLogin": "Giriş səhifəsi və e-məktublar üçün loqo",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Şifrə tələb olunur",
   "Path": "Cığır",
   "PaymentsTitle": "Ödənişlər",
+  "PDF": "PDF",
   "People": "İnsanlar",
   "Permissions": "İcazələr",
   "PerUserMonth": "Admin/aylıq <1>{{price}}</1>",
@@ -895,5 +896,7 @@
   "LinkSettings": "Link parametrləri",
   "Embed": "Yerləşdirin",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Yeni ümumi link uğurla yaradıldı",
-  "RevokeLink": "Keçidi ləğv edin"
+  "RevokeLink": "Keçidi ləğv edin",
+  "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
+  "LogoForViewer": "{{diagramViewer}} üçün loqo"
 }

@@ -60,7 +60,7 @@ const UnsavedChangesDialog: FC<UnsavedChangesDialogProps> = ({
         {t("Common:YouHaveUnsavedChanges")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>{t("Common:UnsavedChangesBody")}</Text>
+        <Text>{t("Common:UnsavedChangesBody")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

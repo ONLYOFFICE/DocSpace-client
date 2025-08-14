@@ -234,6 +234,7 @@
   "DeveloperTools": "Developer Tools",
   "Diagram": "Diagram",
   "Diagrams": "Diagrammen",
+  "DiagramViewer": "Diagramviewer",
   "Disable": "Uitschakelen",
   "Disabled": "Uitgeschakeld",
   "DisableQuota": "Quota uitschakelen",
@@ -441,7 +442,6 @@
   "LoginButton": "Aanmelden",
   "LogoAbout": "Logo voor de Over pagina",
   "LogoCompact": "Logo voor het compacte linkermenu",
-  "LogoDocsEditor": "Logo voor de koptekst van de editors",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo voor de koptekst van de ruimte",
   "LogoLogin": "Logo voor de inlogpagina en e-mails",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Wachtwoord vereist",
   "Path": "Pad",
   "PaymentsTitle": "Betalingen",
+  "PDF": "PDF",
   "People": "Mensen",
   "Permissions": "Rechten",
   "PerUserMonth": "<1>{{price}}</1> per beheerder/maand",
@@ -895,5 +896,7 @@
   "LinkSettings": "Link instellingen",
   "Embed": "Insluiten",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Nieuwe algemene link succesvol aangemaakt",
-  "RevokeLink": "Link intrekken"
+  "RevokeLink": "Link intrekken",
+  "LogoForEditors": "Logo voor {{editorName}}-editor",
+  "LogoForViewer": "Logo voor {{diagramViewer}}"
 }

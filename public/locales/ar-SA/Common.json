@@ -232,6 +232,9 @@
   "Description": "الوصف",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "ادوات المطورين",
+  "Diagram": "مخطط",
+  "Diagrams": "مخططات",
+  "DiagramViewer": "عارض المخططات",
   "Disable": "تعطيل",
   "Disabled": "تعطيل",
   "DisableQuota": "تعطيل الحصة",
@@ -439,7 +442,6 @@
   "LoginButton": "تسجيل الدخول",
   "LogoAbout": "شعار لصفحة \"من نحن",
   "LogoCompact": "شعار القائمة اليسرى المدمجة",
-  "LogoDocsEditor": "شعار ترويسة المحررين",
   "LogoFavicon": "الأيقونة المفضلة",
   "LogoLightSmall": "شعار ترويسة الاستضافة",
   "LogoLogin": "شعار لصفحة تسجيل الدخول ورسائل البريد الإلكتروني",
@@ -546,6 +548,7 @@
   "PasswordRequired": "مطلوب كلمة مرور",
   "Path": "مسار",
   "PaymentsTitle": "المدفوعات",
+  "PDF": "ملف PDF",
   "People": "الأشخاص",
   "Permissions": "الصلاحيات",
   "PerUserMonth": "<1>{{price}}</1> لكل مشرف /شهر",
@@ -895,5 +898,7 @@
   "LinkSettings": "إعدادات الرابط",
   "Embed": "إدراج",
   "GeneralLinkRevokedAndCreatedSuccessfully": "تم إنشاء الرابط العام الجديد بنجاح",
-  "RevokeLink": "إبطال الرابط"
+  "RevokeLink": "إبطال الرابط",
+  "LogoForEditors": "شعار محرر {{editorName}}",
+  "LogoForViewer": "شعار {{diagramViewer}}"
 }

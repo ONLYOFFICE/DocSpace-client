@@ -234,6 +234,7 @@
   "DeveloperTools": "Strumenti di sviluppo",
   "Diagram": "Diagramma",
   "Diagrams": "Diagrammi",
+  "DiagramViewer": "Visualizzatore di diagrammi",
   "Disable": "Disabilita",
   "Disabled": "Disattivata",
   "DisableQuota": "Disabilita quota",
@@ -441,7 +442,6 @@
   "LoginButton": "Accedi",
   "LogoAbout": "Logo per la pagina Informazioni",
   "LogoCompact": "Logo per il menu compatto di sinistra",
-  "LogoDocsEditor": "Logo per l'intestazione degli editor",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo per l'intestazione dello spazio",
   "LogoLogin": "Logo per la pagina di login e le email",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Password richiesta",
   "Path": "Percorso",
   "PaymentsTitle": "Pagamenti",
+  "PDF": "PDF",
   "People": "Persone",
   "Permissions": "Permessi",
   "PerUserMonth": "<1>{{price}}</1> per amministratore/mese",
@@ -895,5 +896,7 @@
   "LinkSettings": "Impostazioni di link",
   "Embed": "Incorpora",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Nuovo link generale è stato creato con successo",
-  "RevokeLink": "Revoca il link"
+  "RevokeLink": "Revoca il link",
+  "LogoForEditors": "Logo per l'editor {{editorName}}",
+  "LogoForViewer": "Logo per {{diagramViewer}}"
 }

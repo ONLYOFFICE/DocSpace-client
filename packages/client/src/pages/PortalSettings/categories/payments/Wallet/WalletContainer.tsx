@@ -202,6 +202,7 @@ const Wallet = (props: WalletProps) => {
           fontWeight={600}
           href={walletHelpUrl}
           color={currentColorScheme?.main?.accent}
+          dataTestId="wallet_learn_more_link"
         >
           {t("Common:LearnMore")}
         </Link>
@@ -251,6 +252,7 @@ const Wallet = (props: WalletProps) => {
           className={classNames(styles.topUpButton, {
             [styles.isMobileButton]: isMobile,
           })}
+          testId="top_up_balance_button"
         />
       </div>
 

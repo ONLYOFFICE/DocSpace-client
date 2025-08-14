@@ -38,6 +38,7 @@ import { isFolder, isRoom } from "@docspace/shared/utils/typeGuards";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { FolderType } from "@docspace/shared/enums";
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 
 import InfoPanelStore, { InfoPanelView } from "SRC_DIR/store/InfoPanelStore";
 import PublicRoomStore from "SRC_DIR/store/PublicRoomStore";
@@ -341,12 +342,9 @@ const FilesView = ({
         }
         {...roomMembersProps}
       />
-      <div
-        style={{
-          opacity: isLoadingSuspense ? 0.5 : 1,
-          pointerEvents: isLoadingSuspense ? "none" : "auto",
-        }}
-        data-testid="info_panel_files_view_content"
+      <LoaderWrapper
+        isLoading={isLoadingSuspense}
+        testId="info_panel_files_view_content"
       >
         {isFirstLoadingSuspense ? (
           currentView === InfoPanelView.infoShare ? (
@@ -370,7 +368,7 @@ const FilesView = ({
             {getView()}
           </div>
         )}
-      </div>
+      </LoaderWrapper>
     </div>
   );
 };

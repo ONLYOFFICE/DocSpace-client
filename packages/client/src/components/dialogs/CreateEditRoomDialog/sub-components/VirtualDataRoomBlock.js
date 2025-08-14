@@ -45,7 +45,7 @@ const Block = ({
   return (
     <div className="virtual-data-room-block" data-testid={dataTestId}>
       <div className="virtual-data-room-block_header">
-        <Text noSelect fontWeight={600} fontSize="13px">
+        <Text fontWeight={600} fontSize="13px">
           {headerText}
         </Text>
         <ToggleButton
@@ -60,7 +60,6 @@ const Block = ({
         fontWeight={400}
         fontSize="12px"
         className="virtual-data-room-block_description"
-        noSelect
       >
         {bodyText}
       </Text>

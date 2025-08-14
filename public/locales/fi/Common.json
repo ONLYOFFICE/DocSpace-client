@@ -234,6 +234,7 @@
   "DeveloperTools": "Kehittäjän työkalut",
   "Diagram": "Kaavio",
   "Diagrams": "Kaaviot",
+  "DiagramViewer": "Kaavion katseluohjelma",
   "Disable": "Poista käytöstä",
   "Disabled": "Poistettu käytöstä",
   "DisableQuota": "Poista kiintiö käytöstä",
@@ -441,7 +442,6 @@
   "LoginButton": "Kirjaudu sisään",
   "LogoAbout": "Logo Sisällöstä-osioon",
   "LogoCompact": "Logo vasempaan kompaktiin menuun",
-  "LogoDocsEditor": "Toimittajan otsikon logo",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Tilan otsikon logo",
   "LogoLogin": "Logo sisäänkirjautumissivulle ja sähköposteihin",
@@ -548,6 +548,7 @@
   "PasswordRequired": "Salasana vaaditaan",
   "Path": "Polku",
   "PaymentsTitle": "Maksut",
+  "PDF": "PDF",
   "People": "Ihmiset",
   "Permissions": "Oikeudet",
   "PerUserMonth": "<1>{{price}}</1> per ylläpitäjä/kuukausi",
@@ -895,5 +896,7 @@
   "LinkSettings": "Linkkiasetukset",
   "Embed": "Upota",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Uusi yleinen linkki onnistuneesti luotu",
-  "RevokeLink": "Peru linkki"
+  "RevokeLink": "Peru linkki",
+  "LogoForEditors": "Editorin {{editorName}} logo",
+  "LogoForViewer": "Logo kohteelle {{diagramViewer}}"
 }

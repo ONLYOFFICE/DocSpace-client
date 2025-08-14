@@ -169,7 +169,7 @@ const DropDownItem = ({
       }
     >
       {isHeader && withHeaderArrow ? (
-        <div className={styles.iconWrapper}>
+        <div className={styles.iconWrapper} onClick={headerArrowAction}>
           <ReactSVG src={ArrowLeftReactUrl} className="drop-down-icon_image" />
         </div>
       ) : null}

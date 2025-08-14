@@ -233,6 +233,7 @@
   "DeveloperTools": "Alati programera",
   "Diagram": "Dijagram",
   "Diagrams": "Dijagrami",
+  "DiagramViewer": "Pregledač dijagrama",
   "Disable": "Onemogući",
   "Disabled": "Onemogućeno",
   "DisableQuota": "Onemogući kvotu",
@@ -437,7 +438,6 @@
   "LoginButton": "Prijavi se",
   "LogoAbout": "Logotip za U vezi stranicu",
   "LogoCompact": "Logotip za kompaktni levi meni",
-  "LogoDocsEditor": "Logotip za zaglavlje uređivača",
   "LogoFavicon": "Favikona",
   "LogoLightSmall": "Logotip za prostorno zaglavlje",
   "LogoLogin": "Logotip za Prijava stranicu i email-ove",
@@ -543,6 +543,7 @@
   "PasswordRequired": "Lozinka potrebna",
   "Path": "Putanja",
   "PaymentsTitle": "Plaćanja",
+  "PDF": "PDF",
   "People": "Ljudi",
   "Permissions": "Dozvole",
   "PerUserMonth": "<1>{{price}}</1> po administratoru/mesec",
@@ -886,5 +887,7 @@
   "LinkSettings": "Podešavanja linka",
   "Embed": "Ugradi",
   "GeneralLinkRevokedAndCreatedSuccessfully": "Novi generalni link uspešno kreiran",
-  "RevokeLink": "Opozovi link"
+  "RevokeLink": "Opozovi link",
+  "LogoForEditors": "Logo za {{editorName}} uređivač",
+  "LogoForViewer": "Logo za {{diagramViewer}}"
 }

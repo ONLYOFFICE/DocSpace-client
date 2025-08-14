@@ -9,5 +9,6 @@
   "RoomsActivityDescription": "Hourly notifications. Stay updated about all activity in your rooms.",
   "RoomUpdateNotify": "{{sectionName}} activity",
   "UsefulTips": "Useful {{productName}} tips",
-  "UsefulTipsDescription": "Get useful guides about {{productName}}"
+  "UsefulTipsDescription": "Get useful guides about {{productName}}",
+  "SettingUpNotifications": "Setting up notifications"
 }

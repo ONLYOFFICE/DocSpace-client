@@ -873,5 +873,6 @@
   "YourLogo": "Loqonuz",
   "YourTurn": "Sizin növbəniz",
   "LogoForEditors": "{{editorName}} redaktoru üçün loqo",
-  "LogoForViewer": "{{diagramViewer}} üçün loqo"
+  "LogoForViewer": "{{diagramViewer}} üçün loqo",
+  "LogoDocsEditor": "Redaktorlar başlığı üçün loqo"
 }

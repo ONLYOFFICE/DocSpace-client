@@ -50,22 +50,44 @@ const TabsCommon = (props) => {
     currentDeviceType,
     isMobileView,
     isCommunity,
+    getGreetingSettingsIsDefault,
+    getBrandName,
+    initWhiteLabel,
   } = props;
   const location = useLocation();
   const navigate = useNavigate();
 
   const [currentTabId, setCurrentTabId] = useState();
 
+  const getCustomizationData = () => {
+    if (isMobileView) {
+      loadBaseInfo("language-and-time-zone");
+      loadBaseInfo("dns-settings");
+      loadBaseInfo("configure-deep-link");
+    } else {
+      loadBaseInfo("general");
+    }
+
+    getGreetingSettingsIsDefault();
+  };
+
+  const getBrandingData = () => {
+    getBrandName();
+    initWhiteLabel();
+  };
+
   const data = [
     {
       id: "general",
       name: t("Common:SettingsGeneral"),
       content: <Customization />,
+      onClick: getCustomizationData,
     },
     {
       id: "appearance",
       name: t("Appearance"),
       content: <Appearance />,
+      onClick: () => {},
     },
   ];
 
@@ -74,6 +96,7 @@ const TabsCommon = (props) => {
       id: "branding",
       name: t("Common:Branding"),
       content: <Branding />,
+      onClick: getBrandingData,
     });
   }
 
@@ -130,14 +153,22 @@ const TabsCommon = (props) => {
       selectedItemId={currentTabId}
       onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      withAnimation
     />
   );
 };
 
 export const Component = inject(
-  ({ settingsStore, common, currentTariffStatusStore }) => {
-    const { isLoaded, setIsLoadedSubmenu, initSettings, isLoadedSubmenu } =
-      common;
+  ({ settingsStore, common, currentTariffStatusStore, brandingStore }) => {
+    const {
+      isLoaded,
+      setIsLoadedSubmenu,
+      initSettings,
+      isLoadedSubmenu,
+      getGreetingSettingsIsDefault,
+    } = common;
+
+    const { getBrandName, initWhiteLabel } = brandingStore;
 
     const { isCommunity } = currentTariffStatusStore;
     const currentDeviceType = settingsStore.currentDeviceType;
@@ -153,6 +184,9 @@ export const Component = inject(
       currentDeviceType,
       isMobileView,
       isCommunity,
+      getGreetingSettingsIsDefault,
+      getBrandName,
+      initWhiteLabel,
     };
   },
 )(withLoading(withTranslation("Settings")(observer(TabsCommon))));

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -47,14 +47,9 @@ const BrandNameComponent = (props) => {
     isBrandNameLoaded,
     setBrandName,
     saveBrandName,
-    getBrandName,
   } = props;
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    getBrandName();
-  }, []);
 
   const onSave = async (data) => {
     try {
@@ -111,7 +106,6 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isBrandNameLoaded,
-      getBrandName,
       setBrandName,
       saveBrandName,
     } = brandingStore;
@@ -133,7 +127,6 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isBrandNameLoaded,
-      getBrandName,
       setBrandName,
       saveBrandName,
     };

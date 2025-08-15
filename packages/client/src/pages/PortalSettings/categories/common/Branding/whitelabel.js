@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -48,7 +48,6 @@ const WhiteLabelComponent = (props) => {
     logoUrls,
     isDefaultLogos,
     isWhiteLabelLoaded,
-    initWhiteLabel,
     setLogoUrls,
     saveWhiteLabelLogos,
     resetWhiteLabelLogos,
@@ -61,10 +60,6 @@ const WhiteLabelComponent = (props) => {
     currentLocation: "white-label",
     deviceType,
   });
-
-  useEffect(() => {
-    initWhiteLabel();
-  }, []);
 
   const onRestoreDefault = async () => {
     try {
@@ -117,7 +112,6 @@ export const WhiteLabel = inject(
       defaultBrandName,
       isDefaultLogos,
       isWhiteLabelLoaded,
-      initWhiteLabel,
       setLogoUrls,
       setBrandName,
       saveWhiteLabelLogos,
@@ -152,7 +146,6 @@ export const WhiteLabel = inject(
       defaultBrandName,
       isDefaultLogos,
       isWhiteLabelLoaded,
-      initWhiteLabel,
       setLogoUrls,
       setBrandName,
       saveWhiteLabelLogos,

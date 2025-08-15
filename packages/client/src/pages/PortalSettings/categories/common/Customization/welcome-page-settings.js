@@ -54,7 +54,6 @@ const WelcomePageSettingsComponent = (props) => {
     isLoaded,
     setIsLoadedWelcomePageSettings,
     tReady,
-    initSettings,
     setIsLoaded,
     setGreetingTitle,
     restoreGreetingTitle,
@@ -157,12 +156,6 @@ const WelcomePageSettingsComponent = (props) => {
       greetingTitleDefaultFromSessionStorage === "none"
         ? greetingSettings
         : greetingTitleDefaultFromSessionStorage;
-
-    const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) {
-      initSettings(page).then(() => setIsLoaded(true));
-      getGreetingSettingsIsDefault();
-    }
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);
@@ -408,7 +401,6 @@ export const WelcomePageSettings = inject(
     const {
       isLoaded,
       setIsLoadedWelcomePageSettings,
-      initSettings,
       setIsLoaded,
       greetingSettingsIsDefault,
       getGreetingSettingsIsDefault,
@@ -423,7 +415,6 @@ export const WelcomePageSettings = inject(
       setIsLoadedWelcomePageSettings,
       greetingSettingsIsDefault,
       getGreetingSettingsIsDefault,
-      initSettings,
       setIsLoaded,
       currentColorScheme,
       welcomePageSettingsUrl,

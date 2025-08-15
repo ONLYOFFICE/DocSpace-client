@@ -90,7 +90,6 @@ const LanguageAndTimeZoneComponent = (props) => {
     tReady,
     setIsLoadedLngTZSettings,
     t,
-    setIsLoaded,
     timezone,
     languageAndTimeZoneSettingsUrl,
     initSettings,
@@ -175,11 +174,6 @@ const LanguageAndTimeZoneComponent = (props) => {
       getFromSessionStorage("timezoneDefault");
 
     setDocumentTitle(t("StudioTimeLanguageSettings"));
-
-    if (!isLoaded) {
-      const page = isMobileView ? "language-and-time-zone" : "general";
-      initSettings(page).then(() => setIsLoaded(true));
-    }
 
     const isLoadedSetting = isLoaded && tReady && timezoneFromSessionStorage;
 
@@ -584,8 +578,7 @@ export const LanguageAndTimeZoneSettings = inject(
     const { user } = userStore;
 
     const { setLanguageAndTime } = setup;
-    const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
-      common;
+    const { isLoaded, setIsLoadedLngTZSettings, initSettings } = common;
     return {
       user,
       portalLanguage: culture,
@@ -599,7 +592,6 @@ export const LanguageAndTimeZoneSettings = inject(
       setIsLoadedLngTZSettings,
       cultures,
       initSettings,
-      setIsLoaded,
       currentColorScheme,
       languageAndTimeZoneSettingsUrl,
       deviceType,

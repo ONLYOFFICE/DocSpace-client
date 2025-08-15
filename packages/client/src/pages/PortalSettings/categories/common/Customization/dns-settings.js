@@ -75,8 +75,6 @@ const DNSSettingsComponent = (props) => {
     isLoaded,
     setIsLoadedDNSSettings,
     isLoadedPage,
-    initSettings,
-    setIsLoaded,
     isSettingPaid,
     currentColorScheme,
     standalone,
@@ -122,11 +120,6 @@ const DNSSettingsComponent = (props) => {
 
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
-
-    if (!isLoaded)
-      initSettings(isMobileView ? "dns-settings" : "general").then(() =>
-        setIsLoaded(true),
-      );
 
     const checkScroll = checkScrollSettingsBlock();
     checkInnerWidth();
@@ -342,7 +335,6 @@ export const DNSSettings = inject(
     const {
       isLoaded,
       setIsLoadedDNSSettings,
-      initSettings,
       setIsLoaded,
       dnsSettings,
       setIsEnableDNS,
@@ -362,7 +354,6 @@ export const DNSSettings = inject(
       setDNSName,
       isLoaded,
       setIsLoadedDNSSettings,
-      initSettings,
       setIsLoaded,
       isSettingPaid: isCustomizationAvailable,
       currentColorScheme,

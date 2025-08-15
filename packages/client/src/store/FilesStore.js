@@ -1790,7 +1790,8 @@ class FilesStore {
               search ||
               filter.withSubfolders ||
               filter.filterType ||
-              filter.searchInContent;
+              filter.searchInContent ||
+              filter.location;
 
             if (isFiltered) {
               this.setIsEmptyPage(false);

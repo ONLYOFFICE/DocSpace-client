@@ -146,9 +146,9 @@ const Services: React.FC<ServicesProps> = ({
     setIsStorageCancellation(false);
   };
 
-  const onToggle = (id: string, enabled: boolean) => {
+  const onToggle = (id: string, currentEnabled: boolean) => {
     if (id === TOTAL_SIZE) {
-      if (enabled) {
+      if (currentEnabled) {
         setIsStorageCancellation(true);
         return;
       }
@@ -156,10 +156,13 @@ const Services: React.FC<ServicesProps> = ({
     }
 
     if (id === "backup") {
-      if (isBackupVisible) previousDialogRef.current = true;
+      if (isBackupVisible) {
+        previousDialogRef.current = true;
+      }
 
       setConfirmActionType("backup");
-      if (!enabled) setIsConfirmDialogVisible(true);
+
+      if (!currentEnabled) setIsConfirmDialogVisible(true);
     }
   };
 

@@ -297,7 +297,7 @@ export async function getPortalPaymentQuotas() {
 export async function getServicesQuotas() {
   const res = (await request({
     method: "get",
-    url: "/portal/payment/quotas?wallet=true",
+    url: "/portal/payment/walletservices",
   })) as TPaymentQuota[];
 
   return res;

@@ -69,6 +69,13 @@ import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
 
+type TServiceFeatureWithPrice = TNumericPaymentFeature & {
+  price: {
+    value: number;
+    currencySymbol: string;
+  };
+};
+
 class PaymentStore {
   userStore: UserStore | null = null;
 
@@ -391,7 +398,10 @@ class PaymentStore {
   }
 
   get storagePriceIncrement() {
-    return this.servicesQuotas?.price.value ?? 0;
+    return (
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice)
+        ?.price?.value || 0
+    );
   }
 
   formatWalletCurrency = (
@@ -529,11 +539,19 @@ class PaymentStore {
 
     if (!res) return;
 
-    res[0].features.forEach((feature) => {
-      this.servicesQuotasFeatures.set(feature.id, feature);
+    const result = res.map((service) => {
+      const feature = service.features[0];
+      return {
+        ...feature,
+        price: service.price,
+      };
     });
 
-    this.servicesQuotas = res[0];
+    this.servicesQuotasFeatures = new Map(
+      result.map((feature) => [feature.id, feature]),
+    );
+
+    //  this.servicesQuotas = res[0];
 
     return res;
   };

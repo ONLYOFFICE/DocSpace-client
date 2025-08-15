@@ -66,11 +66,10 @@ test("portal remove delete", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.deletePortal]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Delete" }).click();
+  const deleteButton = page.getByTestId("delete_portal_button");
+  await deleteButton.click();
 
-  await page
-    .getByRole("button", { name: "Delete" })
-    .waitFor({ state: "detached" });
+  await deleteButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -78,7 +77,7 @@ test("portal remove delete", async ({ page, mockRequest }) => {
     "portal-remove-delete.png",
   ]);
 
-  await page.getByTestId("link").click();
+  await page.getByTestId("redirect_site_link").click();
 
   await page.waitForURL(new RegExp("^(http|https)://(.*)"), {
     waitUntil: "commit",
@@ -94,7 +93,7 @@ test("portal remove delete", async ({ page, mockRequest }) => {
 test("portal remove cancel", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("cancel_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 

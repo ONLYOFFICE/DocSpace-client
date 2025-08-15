@@ -163,7 +163,7 @@ export const AccessRightSelectPure = ({
       forceCloseClickOutside
       dropDownClassName={styles.accessRightSelectDropdown}
       dataTestId={dataTestId}
-      useImageIcon
+      // useImageIcon
       {...props}
     />
   );

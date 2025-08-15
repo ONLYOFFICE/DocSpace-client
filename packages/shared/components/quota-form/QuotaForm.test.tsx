@@ -157,7 +157,7 @@ describe("QuotaForm", () => {
 
   it("disables save button when values are unchanged", async () => {
     render(<QuotaForm {...defaultProps} isButtonsEnable />);
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("quota-save-button");
     expect(saveButton).toBeDisabled();
     const input = screen.getByTestId("quota-text-input");
     await act(async () => {

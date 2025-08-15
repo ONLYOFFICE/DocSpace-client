@@ -174,6 +174,7 @@ export type TItem = ReturnType<UsersStore["getPeopleListItem"]>;
 
 export type TableRowProps = {
   item: TItem;
+  itemIndex?: number;
 
   isActive?: boolean;
   inProgress?: boolean;

@@ -671,12 +671,11 @@ const SectionFilterContent = ({
         });
       }
 
-      // TODO: Temp value. Change later
       if (filter.location) {
         const locationLabels = {
           [FilterLocation.Rooms]: t("Common:Rooms"),
           [FilterLocation.Documents]: t("Common:Documents"),
-          [FilterLocation.AccessibleViaLink]: t("Common:AccessibleViaLink"),
+          [FilterLocation.Link]: t("Common:AccessibleViaLink"),
         };
 
         filterValues.push({
@@ -1156,7 +1155,7 @@ const SectionFilterContent = ({
           },
           {
             id: "filter_location-accessible-via-link",
-            key: FilterLocation.AccessibleViaLink.toString(),
+            key: FilterLocation.Link.toString(),
             group: FilterGroups.filterLocation,
             label: t("Common:AccessibleViaLink"),
           },

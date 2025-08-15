@@ -151,16 +151,14 @@ export enum FilterType {
   DiagramsOnly = 25,
 }
 
-// TODO: Temp value. Change later
 /**
  * Enum for filter location.
  * @readonly
  */
 export const enum FilterLocation {
-  All = 0,
   Rooms = 1,
   Documents = 2,
-  AccessibleViaLink = 3,
+  Link = 3,
 }
 
 /**

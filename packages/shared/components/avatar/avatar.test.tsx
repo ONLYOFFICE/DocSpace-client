@@ -75,7 +75,7 @@ describe("<Avatar />", () => {
 
   test("shows edit button when editing is true", () => {
     render(<Avatar {...baseProps} editing />);
-    const editButton = screen.getByTestId("icon-button");
+    const editButton = screen.getByTestId("edit_avatar_icon_button");
     expect(editButton).toBeInTheDocument();
   });
 

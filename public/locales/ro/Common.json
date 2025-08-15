@@ -873,5 +873,6 @@
   "YourLogo": "Logo-ul dvs",
   "YourTurn": "Acum e rândul dvs.",
   "LogoForEditors": "Logo pentru editorul {{editorName}}",
-  "LogoForViewer": "Logo pentru {{diagramViewer}}"
+  "LogoForViewer": "Logo pentru {{diagramViewer}}",
+  "LogoDocsEditor": "Logo-ul pentru antetul aplicațiilor de editare"
 }

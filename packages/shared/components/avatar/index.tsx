@@ -240,7 +240,7 @@ const AvatarPure = ({
                 iconName={PlusSvgUrl}
                 onClick={onUploadClick}
                 size={16}
-                dataTestId="upload_avatar_icon_button"
+                dataTestId="edit_avatar_icon_button"
               />
             )}
           </div>

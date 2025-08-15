@@ -106,7 +106,7 @@ const TableRow = (props: TableRowProps) => {
       style={style}
       onClick={onClick}
       onDoubleClick={onDoubleClick}
-      data-testid={dataTestId}
+      data-testid={dataTestId ?? "table-row"}
     >
       {children}
       {isIndexEditingMode ? null : (

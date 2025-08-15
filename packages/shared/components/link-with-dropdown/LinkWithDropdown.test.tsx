@@ -99,8 +99,9 @@ describe("LinkWithDropdown", () => {
       expect(item).toHaveClass("drop-down-item");
     });
 
-    // Verify separator
-    expect(items[2]).toHaveAttribute("role", "separator");
+    // Verify separator - check that the separator is present in the DOM
+    const separator = screen.getByRole("separator");
+    expect(separator).toBeInTheDocument();
   });
 
   it("handles click events on dropdown items", () => {

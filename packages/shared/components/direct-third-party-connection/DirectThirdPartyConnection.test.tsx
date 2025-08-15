@@ -49,6 +49,7 @@ jest.mock("../../utils/common", () => {
 
   return {
     ...originalModule,
+    buildDataTestId: jest.fn(),
     getOAuthToken: jest.fn().mockResolvedValue("mock-oauth-token"),
     getIconPathByFolderType: jest.fn().mockReturnValue("folder-icon-path"),
   };

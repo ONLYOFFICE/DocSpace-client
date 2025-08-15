@@ -311,7 +311,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 isChecked={hasStorageSubscription}
                 className={styles.serviceToggle}
                 // isDisabled={true}
-                dataTestId={`storage_service_backup_toggle`}
+                dataTestId="storage_service_backup_toggle"
               />
             </div>
           </div>

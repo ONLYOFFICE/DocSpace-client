@@ -284,13 +284,13 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
           );
         })}
         <div
-          key={"backup"}
+          key="backup"
           className={classNames(styles.serviceContainer, {
             [styles.disabled]: isDisabled,
           })}
           {...(!isDisabled ? { onClick: handleClick } : {})}
-          data-testid={`storage_service_backup`}
-          data-id={"backup"}
+          data-testid="storage_service_backup"
+          data-id="backup"
         >
           <div className={styles.headerContainer}>
             <div className={styles.iconWrapper}>
@@ -303,8 +303,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
             <div
               onClick={handleToggle}
               className={styles.toggleWrapper}
-              data-id={"backup"}
-              data-enabled={true}
+              data-id="backup"
+              //  data-enabled={true}
               //  data-disabled={eventDisabled}
             >
               <ToggleButton

@@ -334,7 +334,7 @@ const PeopleTableRow = ({
             className="table-cell_username"
             dir="auto"
             truncate
-            data-testid="home_contacts_users_username_text"
+            data-testid="contacts_users_username_text"
           >
             {statusType === "pending"
               ? email

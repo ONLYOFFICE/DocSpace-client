@@ -154,7 +154,7 @@ const GroupsTableItem = ({
                 isGroup
                 role={AvatarRole.user}
                 source=""
-                dataTestId={`home_contacts_table_groups_avatar_${itemIndex}`}
+                dataTestId={`contacts_table_groups_avatar_${itemIndex}`}
               />
             </div>
             <Checkbox

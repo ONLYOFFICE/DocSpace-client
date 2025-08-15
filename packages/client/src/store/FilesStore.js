@@ -3389,6 +3389,7 @@ class FilesStore {
         customFilterEnabled,
         customFilterEnabledBy,
         lockedBy,
+        location,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3571,6 +3572,7 @@ class FilesStore {
         formFillingStatus,
         customFilterEnabled,
         customFilterEnabledBy,
+        location,
       };
     });
   };

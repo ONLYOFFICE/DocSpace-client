@@ -34,7 +34,7 @@ import { globalColors } from "@docspace/shared/themes";
 import { StyledText } from "./CellStyles";
 
 const RoomCell = ({ sideColor, item, isRecentFolder }) => {
-  const { originRoomTitle, originId, originTitle } = item;
+  const { originRoomTitle, originId, originTitle, location } = item;
 
   const [path, setPath] = useState([]);
   const [isTooltipLoading, setIsTooltipLoading] = useState(false);
@@ -58,6 +58,9 @@ const RoomCell = ({ sideColor, item, isRecentFolder }) => {
   const canVisibleTitle = originRoomTitle || originTitle;
   const emptyTitle = isRecentFolder ? "—" : "";
   const showTooltip = isRecentFolder ? canVisibleTitle : true;
+  const title = isRecentFolder
+    ? location.title
+    : originRoomTitle || originTitle;
 
   return [
     <StyledText
@@ -70,7 +73,7 @@ const RoomCell = ({ sideColor, item, isRecentFolder }) => {
       data-tooltip-id={`${item.id}`}
       data-tip=""
     >
-      {originRoomTitle || originTitle || emptyTitle}
+      {title || emptyTitle}
     </StyledText>,
 
     showTooltip ? (

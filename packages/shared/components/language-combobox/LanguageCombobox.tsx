@@ -93,7 +93,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withLabel={!!withLabel}
-      dataTestId={dataTestId ?? "combobox"}
+      dataTestId={dataTestId ?? "language-combobox"}
       role="combobox"
       aria-label="Select language"
       aria-expanded="false"

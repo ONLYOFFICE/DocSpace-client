@@ -157,6 +157,7 @@ const InputItem = ({
         forwardedRef={inputRef}
         placeholder={placeholder}
         isDisabled={isLoading}
+        testId="selector_input_item"
       />
       <div
         className={classNames(styles.inputWrapper, {

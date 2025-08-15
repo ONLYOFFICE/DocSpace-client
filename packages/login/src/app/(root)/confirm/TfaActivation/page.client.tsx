@@ -176,6 +176,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
                       color="accent"
                       href={TFA_ANDROID_APP_URL}
                       target={LinkTarget.blank}
+                      dataTestId="android_app_link"
                     />
                   ),
                   4: (
@@ -184,6 +185,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
                       color="accent"
                       href={TFA_IOS_APP_URL}
                       target={LinkTarget.blank}
+                      dataTestId="ios_app_link"
                     />
                   ),
                   8: (
@@ -192,6 +194,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
                       color="accent"
                       href={TFA_WIN_APP_URL}
                       target={LinkTarget.blank}
+                      dataTestId="win_app_link"
                     />
                   ),
                 }}
@@ -250,6 +253,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
               labelVisible={false}
               hasError={!!error}
               errorMessage={error}
+              dataTestId="app_code_field"
             >
               <TextInput
                 id="code"
@@ -266,6 +270,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
                 value={code}
                 hasError={!!error}
                 onKeyDown={onKeyPress}
+                testId="app_code_input"
               />
             </FieldContainer>
           </div>
@@ -281,6 +286,7 @@ const TfaActivationForm = ({ secretKey, qrCode }: TfaActivationFormProps) => {
               isDisabled={!code.length || isLoading}
               isLoading={isLoading}
               onClick={onSubmit}
+              testId="app_connect_button"
             />
           </div>
         </div>

@@ -161,6 +161,7 @@ const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
               value={code}
               hasError={!!error}
               onKeyDown={onKeyPress}
+              testId="app_code_input"
             />
           </FieldContainer>
         </div>
@@ -178,6 +179,7 @@ const TfaAuthForm = ({ defaultPage = "/" }: TfaAuthFormProps) => {
             isDisabled={!code.length || isLoading}
             isLoading={isLoading}
             onClick={onSubmit}
+            testId="app_code_continue_button"
           />
         </div>
       </div>

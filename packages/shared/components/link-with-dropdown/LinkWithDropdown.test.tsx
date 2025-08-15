@@ -84,21 +84,28 @@ describe("LinkWithDropdown", () => {
     expect(dropdown).toHaveAttribute("role", "listbox");
 
     // Check if dropdown items are rendered
-    const items = screen.getAllByTestId("drop-down-item");
-    expect(items).toHaveLength(4); // Including separator
+    const item1 = screen.getByTestId("link_with_drop_down_key1");
+    const item2 = screen.getByTestId("link_with_drop_down_key2");
+    const item4 = screen.getByTestId("link_with_drop_down_key4");
 
-    // Verify menu items text content (excluding separator)
-    expect(items[0]).toHaveTextContent("Button 1");
-    expect(items[1]).toHaveTextContent("Button 2");
-    expect(items[3]).toHaveTextContent("Button 3");
+    // Verify menu items are in the document
+    expect(item1).toBeInTheDocument();
+    expect(item2).toBeInTheDocument();
+    expect(item4).toBeInTheDocument();
+
+    // Verify menu items text content
+    expect(item1).toHaveTextContent("Button 1");
+    expect(item2).toHaveTextContent("Button 2");
+    expect(item4).toHaveTextContent("Button 3");
 
     // Verify menu item structure
-    items.forEach((item) => {
+    [item1, item2, item4].forEach((item) => {
       expect(item).toHaveClass("drop-down-item");
     });
 
-    // Verify separator
-    expect(items[2]).toHaveAttribute("role", "separator");
+    // Verify separator - check that the separator is present in the DOM
+    const separator = screen.getByRole("separator");
+    expect(separator).toBeInTheDocument();
   });
 
   it("handles click events on dropdown items", () => {

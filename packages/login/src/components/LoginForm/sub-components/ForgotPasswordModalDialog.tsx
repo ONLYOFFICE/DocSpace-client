@@ -140,6 +140,7 @@ const ForgotPasswordModalDialog = ({
             errorMessage={
               errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
             }
+            dataTestId="email_input_field"
           >
             <EmailInput
               hasError={isShowError ? emailError : undefined}
@@ -174,6 +175,7 @@ const ForgotPasswordModalDialog = ({
           isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={2}
+          testId="forgot_password_send_button"
         />
         <Button
           id="forgot-password-modal_cancel"
@@ -187,6 +189,7 @@ const ForgotPasswordModalDialog = ({
           // isLoading={isLoading}
           isDisabled={isLoading}
           tabIndex={2}
+          testId="forgot_password_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

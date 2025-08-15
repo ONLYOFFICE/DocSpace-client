@@ -160,6 +160,7 @@ const ChangePortalOwnerDialog = ({
             currentUserId={id}
             disableDisabledUsers
             filter={filter}
+            dataTestId="change_portal_owner_people_selector"
           />
         </ModalDialog.Container>
       ) : null}
@@ -194,6 +195,7 @@ const ChangePortalOwnerDialog = ({
                 className="cross-icon"
                 onClick={onClearSelectedItem}
                 src={CrossReactSvgUrl}
+                data-testid="change_portal_owner_clear_selected_owner_button"
               />
             </StyledSelectedOwner>
 
@@ -202,6 +204,7 @@ const ChangePortalOwnerDialog = ({
               isHovered
               fontWeight={600}
               onClick={onTogglePeopleSelector}
+              dataTestId="change_portal_owner_change_user_link"
             >
               {t("ChangeUser")}
             </Link>
@@ -214,6 +217,7 @@ const ChangePortalOwnerDialog = ({
               label={t("Translations:ChooseFromList")}
               noSelect
               titleText={t("Translations:ChooseFromList")}
+              testId="change_portal_owner_choose_from_list_button"
             />
           </StyledPeopleSelector>
         )}
@@ -245,6 +249,7 @@ const ChangePortalOwnerDialog = ({
               isDisabled={!selectedUser}
               onClick={onChangeAction}
               isLoading={isLoading}
+              testId="change_portal_owner_change_button"
             />
             <Button
               tabIndex={5}
@@ -253,6 +258,7 @@ const ChangePortalOwnerDialog = ({
               scale
               onClick={onCloseAction}
               isDisabled={isLoading}
+              testId="change_portal_owner_cancel_button"
             />
           </div>
         </StyledFooterWrapper>

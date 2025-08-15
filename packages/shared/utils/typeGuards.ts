@@ -65,21 +65,23 @@ export const isNextImage = (item: unknown): item is StaticImageData => {
   return typeof item === "object" && item !== null && "src" in item;
 };
 
-export const isFolder = (item: unknown): item is TFolder => {
-  return (
-    typeof item === "object" &&
-    item !== null &&
-    "isFolder" in item &&
-    item.isFolder === true
-  );
-};
-
 export const isRoom = (item: unknown): item is TRoom => {
   return (
     typeof item === "object" &&
     item !== null &&
     (("isRoom" in item && item.isRoom === true) ||
       ("roomType" in item && !isNil(item.roomType)))
+  );
+};
+
+export const isFolder = (item: unknown): item is TFolder => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    (("isFolder" in item && item.isFolder === true) ||
+      ("filesCount" in item && !isNil(item.filesCount)) ||
+      ("foldersCount" in item && !isNil(item.foldersCount))) &&
+    !isRoom(item)
   );
 };
 

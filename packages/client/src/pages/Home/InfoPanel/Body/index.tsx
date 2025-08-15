@@ -30,7 +30,10 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+import {
+  isRoom as isRoomUtil,
+  isFolder as isFolderUtil,
+} from "@docspace/shared/utils/typeGuards";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
@@ -129,8 +132,7 @@ const InfoPanelBodyContent = ({
     if (
       fileView === InfoPanelView.infoShare &&
       selection &&
-      "isFolder" in selection &&
-      selection?.isFolder &&
+      isFolderUtil(selection) &&
       !selection?.canShare
     ) {
       setView(InfoPanelView.infoDetails);

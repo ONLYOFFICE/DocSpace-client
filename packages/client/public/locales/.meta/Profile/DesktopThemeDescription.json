@@ -3,7 +3,7 @@
   "content": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "content_en_sha1_hash": "f22c34003047b47698610a16f3357dd63749f1ba",
   "created_at": "2025-05-19T21:30:53.350Z",
-  "updated_at": "2025-05-24T06:14:37.456Z",
+  "updated_at": "2025-08-11T18:11:59.298Z",
   "comment": {
     "text": "This translation key is used to describe the automatically switching theme feature between light and dark themes on Desktop Editors. The text appears in a system settings or preferences section, likely as part of the interface that controls this feature. Translators should focus on conveying the idea of automatic theme adaptation for desktop editors.",
     "is_auto": true,
@@ -11,9 +11,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.js",
-      "line_number": 141,
-      "context": "const systemThemeLabel = isDesktopClient\n ? t(\"DesktopTheme\")\n : t(\"SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"DesktopThemeDescription\")\n : t(\"SystemThemeDescription\");\n \n return (\n <StyledWrapper>\n <div>",
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/interface-theme/index.tsx",
+      "line_number": 111,
+      "context": "const systemThemeLabel = isDesktopClient\n ? t(\"Profile:DesktopTheme\")\n : t(\"Profile:SystemTheme\");\n const systemThemeDescriptionLabel = isDesktopClient\n ? t(\"Profile:DesktopThemeDescription\")\n : t(\"Profile:SystemThemeDescription\");\n \n return (\n <StyledWrapperInterfaceTheme>\n <div>",
       "module": "/packages/client"
     }
   ],

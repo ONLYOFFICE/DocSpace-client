@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2025-08-04T07:30:01.311Z",
+  "updated_at": "2025-08-12T19:46:26.083Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -18,20 +18,20 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 278,
+      "line_number": 287,
       "context": "<MigrationButtons\n className=\"save-cancel-buttons\"\n onSaveClick={incrementStep}\n onCancelClick={decrementStep}\n saveButtonLabel={t(\"Settings:NextStep\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n migrationCancelLabel={t(\"Settings:CancelImport\")}\n onMigrationCancelClick={showCancelDialog}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 471,
-      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n />\n ) : (\n <SaveCancelButtons",
+      "line_number": 474,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"upload_to_server_button\"\n cancelButtonDataTestId=\"back_to_providers_button\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectFileStep.tsx",
-      "line_number": 471,
-      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n />\n ) : (\n <SaveCancelButtons",
+      "line_number": 474,
+      "context": "<SaveCancelButtons\n className=\"save-cancel-buttons\"\n onSaveClick={onUploadToServer}\n onCancelClick={returnToProviders}\n saveButtonLabel={t(\"Settings:UploadToServer\")}\n cancelButtonLabel={t(\"Common:Back\")}\n displaySettings\n showReminder\n saveButtonDataTestId=\"upload_to_server_button\"\n cancelButtonDataTestId=\"back_to_providers_button\"\n />",
       "module": "/packages/client"
     },
     {
@@ -72,7 +72,7 @@
     },
     {
       "file_path": "/packages/shared/components/selector/sub-components/EmptyScreen.tsx",
-      "line_number": 170,
+      "line_number": 168,
       "context": "size={12}\n iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}\n isFill\n />\n <Link {...linkStyles}>\n {withSearch ? t(\"Common:ClearFilter\") : t(\"Common:Back\")}\n </Link>\n </div>\n </div>\n ) : null}\n </div>",
       "module": "/packages/shared"
     }

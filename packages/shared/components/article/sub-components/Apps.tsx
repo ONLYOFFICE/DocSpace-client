@@ -71,56 +71,70 @@ const ArticleApps = React.memo(
           {t("Common:DownloadApps")}
         </Text>
         <div className="download-app-list">
-          <IconButton
-            className={styles.windowsIcon}
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={WindowsReactSvgUrl}
-            size={32}
-            isFill
-            title={t("Common:MobileWin", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            className={styles.macOsIcon}
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={MacOSReactSvgUrl}
-            size={32}
-            isFill
-            title={t("Common:MobileMac", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            className={styles.linuxIcon}
-            onClick={() => window.open(downloaddesktopUrl)}
-            iconName={LinuxReactSvgUrl}
-            size={32}
-            isFill
-            title={t("Common:MobileLinux", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            className={styles.androidIcon}
-            onClick={() => window.open(officeforandroidUrl)}
-            iconName={AndroidReactSvgUrl}
-            size={32}
-            isFill
-            title={t("Common:MobileAndroid", {
-              organizationName: logoText,
-            })}
-          />
-          <IconButton
-            className={styles.iosIcon}
-            onClick={() => window.open(officeforiosUrl)}
-            iconName={IOSReactSvgUrl}
-            size={32}
-            isFill
-            title={t("Common:MobileIos", {
-              organizationName: logoText,
-            })}
-          />
+          {downloaddesktopUrl ? (
+            <IconButton
+              className={styles.windowsIcon}
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={WindowsReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileWin", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {downloaddesktopUrl ? (
+            <IconButton
+              className={styles.macOsIcon}
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={MacOSReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileMac", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {downloaddesktopUrl ? (
+            <IconButton
+              className={styles.linuxIcon}
+              onClick={() => window.open(downloaddesktopUrl)}
+              iconName={LinuxReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileLinux", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {officeforandroidUrl ? (
+            <IconButton
+              className={styles.androidIcon}
+              onClick={() => window.open(officeforandroidUrl)}
+              iconName={AndroidReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileAndroid", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
+
+          {officeforiosUrl ? (
+            <IconButton
+              className={styles.iosIcon}
+              onClick={() => window.open(officeforiosUrl)}
+              iconName={IOSReactSvgUrl}
+              size={32}
+              isFill
+              title={t("Common:MobileIos", {
+                organizationName: logoText,
+              })}
+            />
+          ) : null}
         </div>
       </div>
     );

@@ -188,6 +188,14 @@ const AvatarEditorDialog = (props) => {
     }
   };
 
+  const onSaveAction = async (img) => {
+    setIsLoading(true);
+
+    await onSave(img);
+
+    setIsLoading(false);
+  };
+
   return (
     <StyledModalDialog
       displayType="modal"
@@ -227,8 +235,9 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           primary
-          onClick={onSave ? () => onSave(image) : onSaveClick}
+          onClick={onSave ? () => onSaveAction(image) : onSaveClick}
           isLoading={isLoading}
+          testId="avatar_editor_save_button"
         />
         <Button
           className="cancel-button"
@@ -237,21 +246,20 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           onClick={onCloseModal}
+          testId="avatar_editor_cancel_button"
         />
       </ModalDialog.Footer>
     </StyledModalDialog>
   );
 };
 
-export default inject(({ peopleStore, settingsStore }) => {
+export default inject(({ peopleStore, settingsStore, userStore }) => {
   const { targetUserStore } = peopleStore;
   const { maxImageUploadSize } = settingsStore;
 
-  const {
-    targetUser: profile,
-    updateCreatedAvatar,
-    setHasAvatar,
-  } = targetUserStore;
+  const { user: profile } = userStore;
+
+  const { updateCreatedAvatar, setHasAvatar } = targetUserStore;
 
   return {
     profile,

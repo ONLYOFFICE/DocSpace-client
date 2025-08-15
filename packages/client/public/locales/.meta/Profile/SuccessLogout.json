@@ -3,7 +3,7 @@
   "content": "The active connection was logged out: {{platform}}, {{browser}}",
   "content_en_sha1_hash": "c2bc7dfa3f021091fb7c6a6188474f39cbee9fee",
   "created_at": "2025-05-19T21:30:53.384Z",
-  "updated_at": "2025-05-26T07:57:32.800Z",
+  "updated_at": "2025-08-11T18:11:59.298Z",
   "comment": {
     "text": "The SuccessLogout translation key is used to display a success message when an active connection is logged out. This message informs the user that their session has been successfully ended. It appears in the application after the logout action is completed.",
     "is_auto": true,
@@ -11,8 +11,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/active-session/index.js",
-      "line_number": 134,
+      "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/login/active-session/index.js",
+      "line_number": 128,
       "context": "setIsLoading(true);\n await removeSession(foundSession.id).then(() =>\n getAllSessions().then((res) => setSessions(res.items)),\n );\n toastr.success(\n t(\"Profile:SuccessLogout\", {\n platform: foundSession.platform,\n browser: foundSession.browser,\n }),\n );\n } catch (error) {",
       "module": "/packages/client"
     }

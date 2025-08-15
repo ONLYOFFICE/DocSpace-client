@@ -48,7 +48,7 @@ const StorageInformation: React.FC<StorageInformationProps> = (props) => {
 
   return (
     <div className={styles.storageInfo}>
-      <Text isBold noSelect fontSize="14px">
+      <Text isBold fontSize="14px">
         {usedTotalStorageSizeTitle}{" "}
         <Text
           className={styles.currentTariffCount}

@@ -98,7 +98,7 @@ const RegisterModalDialog = ({
       <ModalDialog.Header>{t("RegisterTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <ModalDialogContainer>
-          <Text key="text-body" isBold={false} fontSize="13px" noSelect>
+          <Text key="text-body" isBold={false} fontSize="13px">
             {getDomainsBlock()}
             {t("RegisterTextBodyAfterDomainsList")}
           </Text>

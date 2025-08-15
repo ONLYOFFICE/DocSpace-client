@@ -51,7 +51,7 @@ import TariffBar from "SRC_DIR/components/TariffBar";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
-const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
+const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile/login");
 const SETTINGS_URL = combineUrl(PROXY_HOMEPAGE_URL, "/portal-settings");
 // const PROFILE_MY_URL = combineUrl(PROXY_HOMEPAGE_URL, "/my");
 const ABOUT_URL = combineUrl(PROXY_HOMEPAGE_URL, "/about");
@@ -141,9 +141,6 @@ class ProfileActionsStore {
   };
 
   onProfileClick = (obj) => {
-    const { isAdmin, isOwner } = this.userStore.user;
-    const { isRoomAdmin } = this.authStore;
-
     const prefix = window.DocSpace.location.pathname.includes("portal-settings")
       ? "/portal-settings"
       : "";
@@ -154,9 +151,9 @@ class ProfileActionsStore {
 
     this.profileClicked = true;
 
-    if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
-      this.selectedFolderStore.setSelectedFolder(null);
-    }
+    // if ((isAdmin || isOwner || isRoomAdmin) && !prefix) {
+    //   this.selectedFolderStore.setSelectedFolder(null);
+    // }
 
     const state = {
       fromUrl: `${window.DocSpace.location.pathname}${window.DocSpace.location.search}`,

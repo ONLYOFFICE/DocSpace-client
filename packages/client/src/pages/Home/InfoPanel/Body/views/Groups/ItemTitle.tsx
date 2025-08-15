@@ -91,7 +91,6 @@ const ItemTitle = ({
         <div className={styles.infoWrapper}>
           <Text
             className={styles.infoTextName}
-            noSelect
             title={groupName}
             truncate
             fontSize="16px"
@@ -108,7 +107,6 @@ const ItemTitle = ({
             fontSize="13px"
             fontWeight={600}
             lineHeight="20px"
-            noSelect
           >
             {t("PeopleTranslations:MembersCount", {
               count: groupSelection.membersCount,

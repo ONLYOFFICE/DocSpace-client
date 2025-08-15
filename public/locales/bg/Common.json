@@ -234,6 +234,7 @@
   "DeveloperTools": "Инструменти за разработчици",
   "Diagram": "Диаграма",
   "Diagrams": "Диаграми",
+  "DiagramViewer": "Преглед на диаграми",
   "Disable": "Деактивирай",
   "Disabled": "Деактивиран",
   "DisableQuota": "Деактивирай квота",
@@ -442,7 +443,6 @@
   "LoginButton": "Вписване",
   "LogoAbout": "Лого за страницата За нас",
   "LogoCompact": "Лого за компактното ляво меню",
-  "LogoDocsEditor": "Лого за редакторското заглавие",
   "LogoFavicon": "Фавикона",
   "LogoLightSmall": "Лого за заглавката на пространството",
   "LogoLogin": "Лого на страницата за вход и имейли",
@@ -549,6 +549,7 @@
   "PasswordRequired": "Изисква парола",
   "Path": "Път",
   "PaymentsTitle": "Плащания",
+  "PDF": "PDF",
   "People": "Хора",
   "Permissions": "Разрешения",
   "PerUserMonth": "<1>{{price}}</1> на администратор/месец",
@@ -870,5 +871,8 @@
   "YouHaveUnsavedChanges": "Имате незапазени промени",
   "YourCurrentDomain": "Вашият текущ домейн",
   "YourLogo": "Вашето лого",
-  "YourTurn": "Ваш ред"
+  "YourTurn": "Ваш ред",
+  "LogoForEditors": "Лого за редактора {{editorName}}",
+  "LogoForViewer": "Лого за {{diagramViewer}}",
+  "LogoDocsEditor": "Лого за редакторското заглавие"
 }

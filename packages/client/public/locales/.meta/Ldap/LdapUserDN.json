@@ -3,7 +3,7 @@
   "content": "User DN",
   "content_en_sha1_hash": "cd3e5d959eafef42593d538687647d5c129dbd20",
   "created_at": "2025-05-19T21:30:54.326Z",
-  "updated_at": "2025-05-24T08:13:05.209Z",
+  "updated_at": "2025-08-11T18:11:59.242Z",
   "comment": {
     "text": "The \"LdapUserDN\" translation key is used to display the user's DN in a LDAP connection settings. It is labeled as \"User DN\" and appears on a form, likely a button or input field, where users can enter their distinguished name for LDAP authentication.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ConnectionSettings.js",
-      "line_number": 116,
-      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userDN}\n labelText={t(\"LdapUserDN\")}\n tooltipContent={t(\"LdapUserDNTooltip\")}\n inlineHelpButton\n isRequired\n >\n <LdapFieldComponent",
+      "line_number": 118,
+      "context": "style={FIELD_STYLE}\n isVertical\n labelVisible\n errorMessage={t(\"Common:EmptyFieldError\")}\n hasError={errors.userDN}\n labelText={t(\"LdapUserDN\")}\n tooltipContent={t(\"LdapUserDNTooltip\")}\n inlineHelpButton\n isRequired\n dataTestId=\"user_dn_field_container\"\n >",
       "module": "/packages/client"
     }
   ],

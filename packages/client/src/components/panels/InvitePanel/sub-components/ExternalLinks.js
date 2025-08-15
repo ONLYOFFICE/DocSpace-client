@@ -273,7 +273,7 @@ const ExternalLinks = ({
           dataTestId="invite_panel_external_links_toggle"
         />
       </StyledSubHeader>
-      <StyledDescription noSelect>
+      <StyledDescription>
         {roomId === -1
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),

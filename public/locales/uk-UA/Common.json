@@ -233,6 +233,7 @@
   "DeveloperTools": "Інструменти розробника",
   "Diagram": "Діаграма",
   "Diagrams": "Діаграми",
+  "DiagramViewer": "Переглядач діаграм",
   "Disable": "Деактивувати",
   "Disabled": "Вимкнено",
   "DisableQuota": "Вимкнути квоту",
@@ -438,7 +439,6 @@
   "LoginButton": "Вхід",
   "LogoAbout": "Логотип для сторінки «Інформація».",
   "LogoCompact": "Логотип для компактного лівого меню",
-  "LogoDocsEditor": "Логотип заголовка редакторів",
   "LogoFavicon": "Фавікон",
   "LogoLightSmall": "Логотип заголовка порталу",
   "LogoLogin": "Логотип для сторінки входу та електронної пошти",
@@ -544,6 +544,7 @@
   "PasswordRequired": "Потрібен пароль",
   "Path": "Шлях",
   "PaymentsTitle": "Платежі",
+  "PDF": "PDF",
   "People": "Люди",
   "Permissions": "Дозволи",
   "PerUserMonth": "<1>{{price}}</1> за адміністратора на місяць",
@@ -861,5 +862,8 @@
   "YouHaveUnsavedChanges": "У вас є незбережені зміни",
   "YourCurrentDomain": "Ваш поточний домен",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша черга"
+  "YourTurn": "Ваша черга",
+  "LogoForEditors": "Логотип для редактора {{editorName}}",
+  "LogoForViewer": "Логотип для {{diagramViewer}}",
+  "LogoDocsEditor": "Логотип заголовка редакторів"
 }

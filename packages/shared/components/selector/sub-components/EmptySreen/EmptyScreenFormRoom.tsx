@@ -72,9 +72,7 @@ const EmptyScreenFormRoom = ({
       <Heading level={3} className="empty-header">
         {t("Common:NoRoomsFound")}
       </Heading>
-      <Text className="empty-description" noSelect>
-        {description}
-      </Text>
+      <Text className="empty-description">{description}</Text>
       <div className="empty_button-wrapper" onClick={onCreateClickAction}>
         <SelectorAddButton
           isAction

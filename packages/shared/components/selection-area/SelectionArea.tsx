@@ -45,6 +45,7 @@ const SelectionArea = ({
   arrayTypes,
   containerClass,
   itemClass,
+  onMouseDown,
 }: SelectionAreaProps) => {
   const areaLocation = React.useRef({ x1: 0, x2: 0, y1: 0, y2: 0 });
   const areaRect = React.useRef(new DOMRect());
@@ -392,6 +393,8 @@ const SelectionArea = ({
 
   const onTapStart = React.useCallback(
     (e: MouseEvent) => {
+      onMouseDown?.(e);
+
       const target = e.target as HTMLElement;
 
       if (

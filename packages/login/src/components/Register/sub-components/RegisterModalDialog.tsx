@@ -112,6 +112,7 @@ const RegisterModalDialog = ({
             errorMessage={
               errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
             }
+            dataTestId="register_email_field"
           >
             <EmailInput
               hasError={isShowError ? emailErr : undefined}
@@ -145,6 +146,7 @@ const RegisterModalDialog = ({
           isLoading={loading}
           isDisabled={loading}
           tabIndex={3}
+          testId="register_send_button"
         />
 
         <Button
@@ -159,6 +161,7 @@ const RegisterModalDialog = ({
           isLoading={loading}
           isDisabled={loading}
           tabIndex={2}
+          testId="register_cancel_button"
         />
       </ModalDialog.Footer>
     </ModalDialog>

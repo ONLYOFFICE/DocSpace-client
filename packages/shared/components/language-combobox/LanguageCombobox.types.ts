@@ -43,4 +43,5 @@ export type ComboboxProps = {
   /** Indicates that component contain border */
   withBorder?: boolean;
   isMobileView?: boolean;
+  dataTestId?: string;
 };

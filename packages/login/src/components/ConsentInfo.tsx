@@ -118,6 +118,7 @@ const OAuthClientInfo = ({
                   noHover
                   fontWeight={600}
                   fontSize="16px"
+                  dataTestId="app_link"
                 />
               ),
             }}
@@ -134,6 +135,7 @@ const OAuthClientInfo = ({
               noHover
               fontWeight={600}
               fontSize="16px"
+              dataTestId="app_link"
             >
               {name}
             </Link>

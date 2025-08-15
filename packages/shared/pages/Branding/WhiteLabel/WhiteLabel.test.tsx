@@ -190,9 +190,7 @@ describe("<WhiteLabel />", () => {
       expect(mockSetLogoUrls).toHaveBeenCalled();
       const updatedLogos = mockSetLogoUrls.mock.calls[0][0];
       expect(updatedLogos).toHaveLength(mockLogos.length);
-      expect(updatedLogos[0].path.light).toBe(
-        "https://example.com/uploaded-logo.png",
-      );
+      expect(updatedLogos[0].path.light).toBe("data:image/png;base64,dGVzdA==");
     });
   });
 });

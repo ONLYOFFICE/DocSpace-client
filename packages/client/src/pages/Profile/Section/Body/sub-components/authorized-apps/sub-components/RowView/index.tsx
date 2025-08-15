@@ -41,7 +41,7 @@ const RowView = (props: RowViewProps) => {
       useReactWindow
       onScroll={() => {}}
     >
-      {items.map((item) => (
+      {items.map((item, index) => (
         <OAuthRow
           key={item.clientId}
           item={item}
@@ -51,6 +51,7 @@ const RowView = (props: RowViewProps) => {
           changeClientStatus={changeClientStatus}
           getContextMenuItems={getContextMenuItems}
           sectionWidth={sectionWidth}
+          dataTestId={`auth_row_${index}`}
         />
       ))}
     </StyledRowContainer>

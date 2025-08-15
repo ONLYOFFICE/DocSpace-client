@@ -3,7 +3,7 @@
   "content": "Invitation language",
   "content_en_sha1_hash": "293f3a534498681bf02e7a988de2abf5ea526015",
   "created_at": "2025-05-19T21:30:54.722Z",
-  "updated_at": "2025-08-04T07:30:01.179Z",
+  "updated_at": "2025-08-12T19:46:25.986Z",
   "comment": {
     "text": "This translation key defines the text that appears on a language selection dropdown in an invite panel, specifying the label for the \"Invitation Language\" selection. It is used to display the correct language name based on the product name and should be translated accordingly.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
       "line_number": 614,
-      "context": "})}\n </StyledDescription>\n {roomId === -1 || allowInvitingGuests ? (\n <StyledInviteLanguage>\n <Text className=\"invitation-language\" noSelect>\n {t(\"InvitationLanguage\")}:\n </Text>\n <div className=\"language-combo-box-wrapper\">\n <ComboBox\n className=\"language-combo-box\"\n directionY=\"both\"",
+      "context": "})}\n </StyledDescription>\n {roomId === -1 || allowInvitingGuests ? (\n <StyledInviteLanguage>\n <Text className=\"invitation-language\">\n {t(\"InvitationLanguage\")}:\n </Text>\n <div className=\"language-combo-box-wrapper\">\n <ComboBox\n className=\"language-combo-box\"\n directionY=\"both\"",
       "module": "/packages/client"
     }
   ],

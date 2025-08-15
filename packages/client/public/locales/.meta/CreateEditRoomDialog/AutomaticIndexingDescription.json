@@ -3,7 +3,7 @@
   "content": "Enable automatic indexing to index files and folders by serial number. Sorting by number will be set as default for all users.",
   "content_en_sha1_hash": "6f5d6b18806c6e849ff261231c92aab80a0fe2d9",
   "created_at": "2025-05-19T21:30:56.781Z",
-  "updated_at": "2025-05-24T13:54:57.160Z",
+  "updated_at": "2025-08-12T19:46:25.848Z",
   "comment": {
     "text": "\"This translation key is used for the description of automatic indexing feature in a virtual data room block. It explains how this feature works and its default sorting behavior. The translated text will appear in a dialog that allows users to configure automatic indexing.\"",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/VirtualDataRoomBlock.js",
-      "line_number": 137,
-      "context": "return (\n <StyledVirtualDataRoomBlock>\n <Block\n headerText={t(\"AutomaticIndexing\")}\n bodyText={t(\"AutomaticIndexingDescription\")}\n onChange={onChangeAutomaticIndexing}\n isDisabled={false}\n isChecked={roomParams.indexing}\n />\n <Block",
+      "line_number": 138,
+      "context": "return (\n <StyledVirtualDataRoomBlock>\n <Block\n headerText={t(\"AutomaticIndexing\")}\n bodyText={t(\"AutomaticIndexingDescription\")}\n onChange={onChangeAutomaticIndexing}\n isDisabled={false}\n isChecked={roomParams.indexing}\n dataTestId=\"virtual_data_room_automatic_indexing\"\n />",
       "module": "/packages/client"
     }
   ],

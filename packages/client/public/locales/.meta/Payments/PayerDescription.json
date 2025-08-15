@@ -3,7 +3,7 @@
   "content": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
   "content_en_sha1_hash": "ae643c9dcf9e1481962468ae67c14eb82395ec04",
   "created_at": "2025-05-19T21:30:53.719Z",
-  "updated_at": "2025-08-04T07:30:01.518Z",
+  "updated_at": "2025-08-11T18:11:59.270Z",
   "comment": {
     "text": "This translation key is used to display a detailed description of access permissions for payment and quota adjustments. It appears in the UI as a tooltip when users interact with payment-related settings, providing context on who has access to these sensitive features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/PayerInformation.js",
       "line_number": 111,
-      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n />\n );",
+      "context": "style={{ height: \"15px\", margin: \"0\" }}\n tooltipContent={\n <>\n <Text isBold>{t(\"Payer\")}</Text>\n <Text>\n {t(\"PayerDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n </>\n }\n dataTestId=\"payer_info_help_button\"\n />",
       "module": "/packages/client"
     }
   ],

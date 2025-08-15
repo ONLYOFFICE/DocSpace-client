@@ -49,7 +49,7 @@ import {
 type GroupsRowProps = {
   item: TGroup;
   sectionWidth: number;
-
+  itemIndex: number;
   selection?: GroupsStore["selection"];
   bufferSelection?: GroupsStore["bufferSelection"];
   getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
@@ -61,6 +61,7 @@ type GroupsRowProps = {
 
 const GroupsRowComponent = ({
   item,
+  itemIndex,
   selection,
   bufferSelection,
   getGroupContextOptions,
@@ -91,6 +92,9 @@ const GroupsRowComponent = ({
 
   const getContextModel = () => getModel!(t, item);
 
+  // used for selection-area
+  const value = `group_${item.id}_false_index_${itemIndex}`;
+
   return (
     <GroupsRowWrapper
       isChecked={isChecked}
@@ -98,7 +102,7 @@ const GroupsRowComponent = ({
       className={`group-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
       } ${item.id}`}
-      value={item.id}
+      value={value}
     >
       <div className="group-item">
         <GroupsRow

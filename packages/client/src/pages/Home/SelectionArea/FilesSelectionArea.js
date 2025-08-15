@@ -40,6 +40,8 @@ const SelectionArea = (props) => {
     filesLength,
     isInfoPanelVisible,
     isIndexEditingMode,
+    selectionAreaIsEnabled,
+    setWithContentSelection,
   } = props;
 
   const [countTilesInRow, setCountTilesInRow] = useState();
@@ -89,7 +91,10 @@ const SelectionArea = (props) => {
     },
   ];
 
-  return isMobile || dragging || isIndexEditingMode ? null : (
+  const isEnabled =
+    selectionAreaIsEnabled && !isMobile && !dragging && !isIndexEditingMode;
+
+  return isEnabled ? (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
@@ -103,16 +108,24 @@ const SelectionArea = (props) => {
       folderHeaderHeight={35}
       defaultHeaderHeight={46}
       arrayTypes={arrayTypes}
+      onMouseDown={() => setWithContentSelection(false)}
     />
-  );
+  ) : null;
 };
 
 export default inject(
-  ({ filesStore, treeFoldersStore, infoPanelStore, indexingStore }) => {
+  ({
+    filesStore,
+    treeFoldersStore,
+    infoPanelStore,
+    indexingStore,
+    hotkeyStore,
+  }) => {
     const { dragging, viewAs, setSelections, folders, files } = filesStore;
     const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
     const { isVisible: isInfoPanelVisible } = infoPanelStore;
     const { isIndexEditingMode } = indexingStore;
+    const { selectionAreaIsEnabled, setWithContentSelection } = hotkeyStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -125,6 +138,8 @@ export default inject(
       filesLength: files.length,
       isInfoPanelVisible,
       isIndexEditingMode,
+      selectionAreaIsEnabled,
+      setWithContentSelection,
     };
   },
 )(observer(SelectionArea));

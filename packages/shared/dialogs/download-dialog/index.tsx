@@ -442,9 +442,9 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   const mainContent = (
     <>
       <div className={styles.downloadDialogBodyContent}>
-        <Text noSelect>{t("Common:ChooseFormatText")}.</Text>
+        <Text>{t("Common:ChooseFormatText")}.</Text>
         {!isSingleFile ? (
-          <Text noSelect>
+          <Text>
             <Trans t={t} ns="Common" i18nKey="ConvertToZip" />
           </Text>
         ) : null}
@@ -526,7 +526,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
         />
       ) : null}
       <div className={styles.downloadDialogConvertMessage}>
-        <Text noSelect>{t("Common:ConvertMessage")}</Text>
+        <Text>{t("Common:ConvertMessage")}</Text>
       </div>
     </>
   );

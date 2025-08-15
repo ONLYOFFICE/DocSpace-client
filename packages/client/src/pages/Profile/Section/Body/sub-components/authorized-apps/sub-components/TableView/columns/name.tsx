@@ -75,6 +75,7 @@ const NameCell = ({
               onChange={onChange}
               isChecked={isChecked}
               title={name}
+              dataTestId="row_selection_checkbox"
             />
           </StyledContainer>
         </TableCell>

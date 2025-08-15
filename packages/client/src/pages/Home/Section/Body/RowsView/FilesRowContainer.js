@@ -52,6 +52,11 @@ const FilesRowContainer = ({
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
+  selectedFolderTitle,
+  setDropTargetPreview,
+  disableDrag,
+  canCreateSecurity,
+  withContentSelection,
 }) => {
   const { sectionWidth } = use(Context);
 
@@ -83,6 +88,10 @@ const FilesRowContainer = ({
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
+        selectedFolderTitle={selectedFolderTitle}
+        setDropTargetPreview={setDropTargetPreview}
+        disableDrag={disableDrag}
+        canCreateSecurity={canCreateSecurity}
       />
     ));
   }, [
@@ -104,6 +113,7 @@ const FilesRowContainer = ({
       hasMoreFiles={hasMoreFiles}
       draggable
       useReactWindow
+      noSelect={!withContentSelection}
       itemHeight={58}
     >
       {filesListNode}
@@ -120,6 +130,9 @@ export default inject(
     indexingStore,
     filesActionsStore,
     guidanceStore,
+    selectedFolderStore,
+    uploadDataStore,
+    hotkeyStore,
   }) => {
     const {
       viewAs,
@@ -129,15 +142,22 @@ export default inject(
       hasMoreFiles,
       roomsFilter,
       highlightFile,
+      disableDrag,
     } = filesStore;
 
+    const { title: selectedFolderTitle, security } = selectedFolderStore;
     const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
+    const { withContentSelection } = hotkeyStore;
+
+    const { primaryProgressDataStore } = uploadDataStore;
+    const { setDropTargetPreview } = primaryProgressDataStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
+    const canCreateSecurity = security?.Create;
 
     return {
       viewAs,
@@ -154,6 +174,11 @@ export default inject(
       changeIndex: filesActionsStore.changeIndex,
       setRefMap,
       deleteRefMap,
+      selectedFolderTitle,
+      setDropTargetPreview,
+      disableDrag,
+      canCreateSecurity,
+      withContentSelection,
     };
   },
 )(withContainer(observer(FilesRowContainer)));

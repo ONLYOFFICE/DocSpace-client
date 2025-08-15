@@ -77,7 +77,11 @@ const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
             max: formatWalletCurrency!(upToBalance, 0),
           })}{" "}
           {isPayer ? (
-            <Link onClick={onOpen} textDecoration="underline">
+            <Link
+              onClick={onOpen}
+              textDecoration="underline"
+              dataTestId="auto_edit_button"
+            >
               {t("Common:EditButton")}
             </Link>
           ) : null}

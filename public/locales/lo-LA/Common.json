@@ -225,6 +225,7 @@
   "DeveloperTools": "ເຄື່ອງມືພັດທະນາ",
   "Diagram": "ແຜນວາດ",
   "Diagrams": "ແຜນວາດ",
+  "DiagramViewer": "ຕົວເບິ່ງແຜນວາດ",
   "Disable": "ປິດການໃຊ້ງານ",
   "Disabled": "ປິດສິດ",
   "DisableQuota": "ປິດການນຳໃຊ້ໂຄຕ້າ",
@@ -431,7 +432,6 @@
   "LoginButton": "ເຂົ້າສູ່ລະບົບ",
   "LogoAbout": "ໂລໂກ້ສຳລັບໜ້າກ່ຽວກັບ",
   "LogoCompact": "ໂລໂກ້ສໍາລັບເມນູດ້ານຊ້າຍທີ່ຫນາແຫນ້ນ",
-  "LogoDocsEditor": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວ",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວຂອງ portal ",
   "LogoLogin": "ໂລໂກ້ສຳລັບໜ້າເຂົ້າສູ່ລະບົບ ແລະອີເມວ",
@@ -537,6 +537,7 @@
   "PasswordRequired": "ຕ້ອງການລະຫາຍຊັບຊ້ອນ",
   "Path": "ເສັ້ນທາງ ",
   "PaymentsTitle": "ການຊຳລະເງິນ",
+  "PDF": "PDF",
   "People": "ຄົນ",
   "Permissions": "ສິດອະນຸຍາດ",
   "PerUserMonth": "<1>{{price}}</1> ຕໍ່ຜູ້ໃຊ້ admin/ຕໍ່ເດືອນ",
@@ -857,5 +858,8 @@
   "YouHaveUnsavedChanges": "ທ່ານມີການປ່ຽນແປງທີ່ຍັງບໍ່ໄດ້ບັນທຶກ",
   "YourCurrentDomain": "ໂດເມນປັດຈຸບັນຂອງທ່ານ",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ"
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
+  "LogoForEditors": "ໂລໂກ້ສຳລັບບັນນາທິການ {{editorName}}",
+  "LogoForViewer": "ໂລໂກ້ສຳລັບ {{diagramViewer}}",
+  "LogoDocsEditor": "ໂລໂກສຳລັບແກ້ໄຂສ່ວນຫົວ"
 }

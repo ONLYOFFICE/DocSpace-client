@@ -234,6 +234,7 @@
   "DeveloperTools": "Ferramentas de Desenvolvedor",
   "Diagram": "Diagrama",
   "Diagrams": "Diagramas",
+  "DiagramViewer": "Visualizador de Diagramas",
   "Disable": "Desativar",
   "Disabled": "Desativado",
   "DisableQuota": "Desativar cota",
@@ -442,7 +443,6 @@
   "LoginButton": "Entrar",
   "LogoAbout": "Logótipo para a página Sobre",
   "LogoCompact": "Logótipo para o menu compacto à esquerda",
-  "LogoDocsEditor": "Logotipo para o cabeçalho dos editores",
   "LogoFavicon": "Favicon",
   "LogoLightSmall": "Logo para o cabeçalho do espaço",
   "LogoLogin": "Logótipo para a Página de Início de Sessão",
@@ -549,6 +549,7 @@
   "PasswordRequired": "Senha necessária",
   "Path": "Destino",
   "PaymentsTitle": "Pagamentos",
+  "PDF": "PDF",
   "People": "Pessoas",
   "Permissions": "Permissões",
   "PerUserMonth": "<1>{{price}}</1> por administrador/mês",
@@ -870,5 +871,8 @@
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
   "YourCurrentDomain": "O seu domínio atual",
   "YourLogo": "O seu logótipo",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "LogoForEditors": "Logo para o editor {{editorName}}",
+  "LogoForViewer": "Logo para {{diagramViewer}}",
+  "LogoDocsEditor": "Logotipo para o cabeçalho dos editores"
 }

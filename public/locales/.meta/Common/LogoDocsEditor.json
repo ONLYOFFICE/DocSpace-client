@@ -2,18 +2,18 @@
   "key_path": "LogoDocsEditor",
   "content": "Logo for the editors header",
   "content_en_sha1_hash": "139b31fd58237986c24a80fd96c63f2f78bb1fbf",
-  "created_at": "2025-05-26T07:15:44.890Z",
-  "updated_at": "2025-08-04T07:30:01.734Z",
+  "created_at": "2025-08-13T18:28:02.522Z",
+  "updated_at": "2025-08-13T18:29:28.317Z",
   "comment": {
-    "text": "The translation key \"LogoDocsEditor\" is used to display the editor's logo, including its size and width. It appears in a settings unavailable text element on the white label branding page and is intended to provide context for users viewing certain settings.",
+    "text": "Text displayed as a logo label in the editors header, specifically related to documents. It appears within the WhiteLabel branding settings and includes the logo's dimensions. Translators should ensure the description accurately reflects the visual representation of the logo.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:04:55.023Z"
+    "updated_at": "2025-08-13T18:29:28.317Z"
   },
   "usage": [
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/index.tsx",
-      "line_number": 390,
-      "context": "<Text\n fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {t(\"LogoDocsEditor\")} ({logoUrls[3].size.width}x\n {logoUrls[3].size.height})\n </Text>\n <div className={styles.logosWrapper}>\n <Logo\n name={logoUrls[4].name}",
+      "line_number": 414,
+      "context": "fontSize=\"15px\"\n fontWeight=\"600\"\n className=\"settings_unavailable\"\n >\n {/* t(\"LogoForEditors\", { editorName: t(\"Common:Documents\") })} */}\n {t(\"LogoDocsEditor\")} ({logoUrls[4].size.width}x\n {logoUrls[4].size.height})\n </Text>\n \n <div className={styles.logosWrapper}>\n <Logo",
       "module": "/packages/shared"
     }
   ],
@@ -168,19 +168,13 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sr-Latn-RS": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "tr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

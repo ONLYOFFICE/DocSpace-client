@@ -3,7 +3,7 @@
   "content": "Recommended top-up amount: {{amount}}",
   "content_en_sha1_hash": "3bc43aa133ab4cdef0136ff2d1be66e019573937",
   "created_at": "2025-06-26T08:14:48.865Z",
-  "updated_at": "2025-08-04T07:30:01.534Z",
+  "updated_at": "2025-08-11T18:11:59.281Z",
   "comment": {
     "text": "The translation key \"RecommendedTopUpAmount\" is used to display a recommended top-up amount for wallet payments. It appears on a payment settings page and displays an amount in the user's local currency, if available.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/Wallet/sub-components/Amount.tsx",
-      "line_number": 143,
-      "context": "isDisabled={isDisabled || !walletCustomerEmail}\n maxLength={MAX_LENGTH}\n />\n {reccomendedAmount ? (\n <Text className={styles.reccomendedAmount}>\n {t(\"RecommendedTopUpAmount\", {\n amount: formatWalletCurrency!(+reccomendedAmount, 0),\n })}\n </Text>\n ) : null}\n </div>",
+      "line_number": 145,
+      "context": "maxLength={MAX_LENGTH}\n testId=\"top_up_amount_input\"\n />\n {reccomendedAmount ? (\n <Text className={styles.reccomendedAmount}>\n {t(\"RecommendedTopUpAmount\", {\n amount: formatWalletCurrency!(+reccomendedAmount, 0),\n })}\n </Text>\n ) : null}\n </div>",
       "module": "/packages/client"
     }
   ],

@@ -234,6 +234,7 @@
   "DeveloperTools": "开发者工具",
   "Diagram": "图表",
   "Diagrams": "图表",
+  "DiagramViewer": "图表查看器",
   "Disable": "禁用",
   "Disabled": "已禁用",
   "DisableQuota": "停用配额",
@@ -442,7 +443,6 @@
   "LoginButton": "登录",
   "LogoAbout": "关于页面徽标",
   "LogoCompact": "紧凑左菜单徽标",
-  "LogoDocsEditor": "编辑器标头Logo",
   "LogoFavicon": "网站图标",
   "LogoLightSmall": "协作空间的标头 Logo",
   "LogoLogin": "用于登录页面和电子邮件的标志",
@@ -549,6 +549,7 @@
   "PasswordRequired": "需要密码",
   "Path": "路径",
   "PaymentsTitle": "付款",
+  "PDF": "PDF",
   "People": "人员",
   "Permissions": "权限",
   "PerUserMonth": "<1>{{price}}</1> 每个管理员/月",
@@ -870,5 +871,8 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "LogoForEditors": "{{editorName}}编辑器 logo",
+  "LogoForViewer": "{{diagramViewer}} logo",
+  "LogoDocsEditor": "编辑器标头Logo"
 }

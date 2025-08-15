@@ -55,7 +55,7 @@ const ShareFolderDialog = ({
     <ModalDialog isLoading={!ready} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{t("Files:ShareFolder")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" fontWeight={400} noSelect>
+        <Text fontSize="13px" fontWeight={400}>
           {t("Files:ShareFolderDescription")}
         </Text>
       </ModalDialog.Body>

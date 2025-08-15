@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -119,22 +119,19 @@ const InfoPanelBodyContent = ({
     isLockedSharedRoom ||
     (isRoot && !isGallery);
 
-  const [currentView, setCurrentView] = React.useState(
-    isRoom ? roomsView : fileView,
-  );
+  const currentView = useMemo(() => {
+    return isRoom ? roomsView : fileView;
+  }, [isRoom, roomsView, fileView]);
 
   const deferredCurrentView = React.useDeferredValue(currentView);
-
-  React.useEffect(() => {
-    setCurrentView(isRoom ? roomsView : fileView);
-  }, [isRoom, roomsView, fileView]);
 
   React.useEffect(() => {
     if (
       fileView === InfoPanelView.infoShare &&
       selection &&
       "isFolder" in selection &&
-      selection?.isFolder
+      selection?.isFolder &&
+      !selection?.canShare
     ) {
       setView(InfoPanelView.infoDetails);
     }

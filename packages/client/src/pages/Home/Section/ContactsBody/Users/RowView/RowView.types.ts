@@ -104,6 +104,7 @@ export type SimpleUserRowProps = {
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
 
   inProgress?: boolean;
+  itemIndex?: number;
 };
 
 export type UserContentProps = {
@@ -118,4 +119,5 @@ export type UserContentProps = {
   standalone?: boolean;
 
   isRoomAdmin?: TUser["isRoomAdmin"];
+  itemIndex?: number;
 };

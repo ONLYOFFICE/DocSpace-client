@@ -25,7 +25,7 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-
+import isNil from "lodash/isNil";
 import { isTablet as isTabletDevice } from "react-device-detect";
 
 import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
@@ -42,6 +42,7 @@ import { RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
+import { isRoom } from "../../utils/typeGuards";
 
 import type { QuickButtonsProps } from "./QuickButtons.types";
 
@@ -55,7 +56,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     viewAs,
     isPublicRoom,
     onClickShare,
-    isPersonalRoom,
     isArchiveFolder,
     isIndexEditingMode,
     showLifetimeIcon,
@@ -91,7 +91,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
 
-  const isAvailableShareFile = isPersonalRoom && item.canShare;
+  const isAvailableShareFile =
+    item.canShare &&
+    !isRoom(item) &&
+    isNil(item.shareSettings?.PrimaryExternalLink) &&
+    !isNil(item.shareSettings?.ExternalLink) &&
+    item.shareSettings.ExternalLink > 0;
 
   const isPublicRoomType =
     "roomType" in item &&

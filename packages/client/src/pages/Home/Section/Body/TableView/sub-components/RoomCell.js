@@ -59,13 +59,13 @@ const RoomCell = ({ sideColor, item, isRecentFolder }) => {
   const emptyTitle = isRecentFolder ? "—" : "";
   const showTooltip = isRecentFolder ? canVisibleTitle : true;
   const title = isRecentFolder
-    ? location.title
+    ? location?.title
     : originRoomTitle || originTitle;
 
   return [
     <StyledText
       key="cell"
-      fontSize={canVisibleTitle ? "12px" : "13px"}
+      fontSize="12px"
       fontWeight={600}
       color={sideColor}
       className="row_update-text"

@@ -32,7 +32,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { saveDeposite } from "@docspace/shared/api/portal";
 import { Text } from "@docspace/shared/components/text";
 
-import { useAmountValue } from "../context";
+import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "../styles/TopUpModal.module.scss";
 
 interface TopUpButtonsProps {

@@ -41,7 +41,7 @@ import { TColorScheme } from "@docspace/shared/themes";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import TransactionHistory from "./TransactionHistory";
-import TopUpModal from "./TopUpModal";
+import TopUpModal from "../../../../../components/panels/TopUpBalance/TopUpModal";
 import WalletRefilledModal from "./WalletRefilledModal";
 import { formattedBalanceTokens } from "./utils";
 import PayerInformation from "../PayerInformation";

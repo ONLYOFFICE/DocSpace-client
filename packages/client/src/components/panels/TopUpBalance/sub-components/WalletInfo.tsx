@@ -34,7 +34,7 @@ import { Link } from "@docspace/shared/components/link";
 
 import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
 
-import styles from "../styles/Wallet.module.scss";
+import styles from "../styles/TopUpModal.module.scss";
 
 type WalletInfoProps = {
   balance?: string;

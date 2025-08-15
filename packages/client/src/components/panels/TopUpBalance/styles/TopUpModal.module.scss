@@ -42,3 +42,61 @@
   display: flex;
   width: 100%;
 }
+
+.walletInfoContainer {
+  display: flex;
+  background: var(--payment-background-color);
+  min-height: 72px;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  align-items: center;
+  position: relative;
+}
+.walletInfoIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--payment-icon-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 16px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    path {
+      fill: var(--payment-icon-color);
+    }
+  }
+}
+
+.walletInfoBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.walletInfoTitle {
+  line-height: 16px;
+}
+
+.walletInfoBalance {
+  font-size: 14px;
+  line-height: 16px;
+  &.warningColor {
+    color: var(--warning-color);
+  }
+}
+
+.walletInfoTopUp {
+  margin-left: auto;
+  color: var(--payment-link-color);
+  cursor: pointer;
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

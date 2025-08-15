@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import TopUpModal from "../../payments/Wallet/TopUpModal";
+import TopUpModal from "../../../../../components/panels/TopUpBalance/TopUpModal";
 
 type TopUpContainerTypes = {
   isVisibleContainer: boolean;

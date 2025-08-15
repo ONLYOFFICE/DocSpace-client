@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import styles from "../styles/Amount.module.scss";
-import { useAmountValue } from "../context";
+import { useAmountValue } from "../../../../pages/PortalSettings/categories/payments/Wallet/context";
 
 type AmountProps = {
   isDisabled: boolean;

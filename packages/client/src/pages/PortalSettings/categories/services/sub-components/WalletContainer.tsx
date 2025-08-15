@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { inject, observer } from "mobx-react";
 
-import WalletInfo from "../../payments/Wallet/sub-components/WalletInfo";
+import WalletInfo from "../../../../../components/panels/TopUpBalance/sub-components/WalletInfo";
 
 import styles from "../styles/StorageSummary.module.scss";
 import { usePaymentContext } from "../context/PaymentContext";

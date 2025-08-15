@@ -38,7 +38,7 @@ import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
 import TopUpButtons from "./sub-components/TopUpButtons";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
-import { AmountProvider } from "./context";
+import { AmountProvider } from "../../../pages/PortalSettings/categories/payments/Wallet/context";
 import styles from "./styles/TopUpModal.module.scss";
 
 type TopUpModalProps = {

@@ -67,6 +67,7 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   const handleToggleChange = () => {
     onToggle("backup", isBackupEnabled);
     onClose();
+    setIsBackupEnabled(!isBackupEnabled);
   };
 
   const serviceOptions: ServiceOption[] = [

@@ -23,65 +23,87 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React from "react";
 import { inject, observer } from "mobx-react";
 
-import WalletInfo from "../../../../../components/panels/TopUpBalance/sub-components/WalletInfo";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import styles from "../styles/StorageSummary.module.scss";
-import { usePaymentContext } from "../context/PaymentContext";
+import { useServicesActions } from "../../hooks/useServicesActions";
+import { usePaymentContext } from "../../context/PaymentContext";
 
-type WalletContainerProps = {
-  onTopUp: () => void;
-  isExceedingStorageLimit: boolean;
-  hasScheduledStorageChange?: boolean;
-  isPaymentBlockedByBalance: boolean;
-  isCurrentStoragePlan: boolean;
-  isDowngradeStoragePlan: boolean;
+interface ButtonContainerProps {
+  onClose: () => void;
+  onBuy: () => void;
+  onSendRequest: () => void;
+  title: string;
   isLoading: boolean;
-  formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
-};
+  isExceedingStorageLimit: boolean;
+  isNullAmount: boolean;
+  isPaymentBlockedByBalance: boolean;
+  isCurrentStoragePlan?: boolean;
+  hasStorageSubscription?: boolean;
+  isDowngradeStoragePlan?: boolean;
+  isPaymentBlocked?: boolean;
+}
 
-const WalletContainer = (props: WalletContainerProps) => {
+const ButtonContainer: React.FC<ButtonContainerProps> = (props) => {
   const {
-    onTopUp,
     isExceedingStorageLimit,
-    hasScheduledStorageChange,
+    onClose,
+    isLoading,
+    isNullAmount,
+    onBuy,
+    onSendRequest,
+    title,
     isPaymentBlockedByBalance,
     isCurrentStoragePlan,
     isDowngradeStoragePlan,
-    isLoading,
-    formatWalletCurrency,
+    hasStorageSubscription,
+    isPaymentBlocked,
   } = props;
 
+  const { t } = useServicesActions();
   const { isWaitingCalculation } = usePaymentContext();
 
-  if (hasScheduledStorageChange) return null;
-
-  const isBalanceInsufficient =
-    isPaymentBlockedByBalance &&
-    !isLoading &&
-    !isCurrentStoragePlan &&
-    !isDowngradeStoragePlan &&
-    !isExceedingStorageLimit;
-
   return (
-    <div className={styles.walletContainer}>
-      <WalletInfo
-        balance={formatWalletCurrency!()}
-        isBalanceInsufficient={isBalanceInsufficient}
-        {...(!isWaitingCalculation && { onTopUp })}
+    <>
+      <Button
+        key="OkButton"
+        label={title}
+        size={ButtonSize.normal}
+        primary
+        scale
+        onClick={isExceedingStorageLimit ? onSendRequest : onBuy}
+        isLoading={isLoading || isWaitingCalculation}
+        isDisabled={
+          isPaymentBlocked
+            ? true
+            : !isExceedingStorageLimit && !isDowngradeStoragePlan
+              ? (!hasStorageSubscription && isNullAmount) ||
+                isPaymentBlockedByBalance ||
+                isCurrentStoragePlan
+              : false
+        }
+        testId="storage_plan_upgrade_ok_button"
       />
-    </div>
+      <Button
+        key="CancelButton"
+        label={t("Common:CancelButton")}
+        size={ButtonSize.normal}
+        scale
+        onClick={onClose}
+        isDisabled={isLoading}
+        testId="storage_plan_upgrade_cancel_button"
+      />
+    </>
   );
 };
 
-export default inject(({ currentTariffStatusStore, paymentStore }: TStore) => {
-  const { hasScheduledStorageChange, currentStoragePlanSize } =
-    currentTariffStatusStore;
-  const { formatWalletCurrency } = paymentStore;
+export default inject(({ currentTariffStatusStore }: TStore) => {
+  const { hasStorageSubscription } = currentTariffStatusStore;
+
   return {
-    hasScheduledStorageChange,
-    currentStoragePlanSize,
-    formatWalletCurrency,
+    hasStorageSubscription,
   };
-})(observer(WalletContainer));
+})(observer(ButtonContainer));

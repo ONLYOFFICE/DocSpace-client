@@ -33,8 +33,8 @@ import { useInterfaceDirection } from "@docspace/shared/hooks/useInterfaceDirect
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 
-import { useServicesActions } from "../hooks/useServicesActions";
-import styles from "../styles/index.module.scss";
+import { useServicesActions } from "../../hooks/useServicesActions";
+import styles from "../../styles/index.module.scss";
 
 type SelectionAmountProps = {
   amount: number;

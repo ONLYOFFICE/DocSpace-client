@@ -31,9 +31,9 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
-import styles from "../styles/StorageSummary.module.scss";
+import styles from "../../styles/StorageSummary.module.scss";
 import PlanInfo from "./PlanInfo";
-import { useServicesActions } from "../hooks/useServicesActions";
+import { useServicesActions } from "../../hooks/useServicesActions";
 import PlanUpgradePreview from "./PlanUpgradePreview";
 
 import StorageWarning from "./StorageWarning";

@@ -45,7 +45,7 @@ import { useServicesActions } from "./hooks/useServicesActions";
 import { PaymentProvider } from "./context/PaymentContext";
 
 import styles from "./styles/index.module.scss";
-import StorageWarning from "./sub-components/StorageWarning";
+import StorageWarning from "./sub-components/AdditionalStorage/StorageWarning";
 
 type StorageDialogProps = {
   visible: boolean;

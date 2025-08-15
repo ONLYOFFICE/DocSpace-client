@@ -41,7 +41,7 @@ import MoveIcon from "PUBLIC_DIR/images/icons/32/move.icon.svg";
 import CloudsIcon from "PUBLIC_DIR/images/icons/32/clouds.icon.svg";
 import HistoryIcon from "PUBLIC_DIR/images/icons/32/history.icon.svg";
 
-import styles from "./BackupServiceDialog.module.scss";
+import styles from "../../styles/BackupServiceDialog.module.scss";
 
 interface BackupServiceDialogProps {
   visible: boolean;

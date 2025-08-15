@@ -23,47 +23,59 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import React from "react";
-
 import { inject, observer } from "mobx-react";
 
-import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg";
-
 import { Text } from "@docspace/shared/components/text";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 
-import styles from "../styles/StorageSummary.module.scss";
-import { useServicesActions } from "../hooks/useServicesActions";
+import styles from "../../styles/index.module.scss";
+import { useServicesActions } from "../../hooks/useServicesActions";
 
-type StorageWarningProps = {
-  currentStoragePlanSize?: number;
+type StorageInformationProps = {
+  usedTotalStorageSizeCount?: number;
+  maxTotalSizeByQuota?: number;
+  usedTotalStorageSizeTitle?: string;
 };
 
-const StorageWarning: React.FC<StorageWarningProps> = ({
-  currentStoragePlanSize,
-}) => {
+const StorageInformation: React.FC<StorageInformationProps> = (props) => {
+  const {
+    usedTotalStorageSizeCount = 0,
+    maxTotalSizeByQuota,
+    usedTotalStorageSizeTitle,
+  } = props;
+
   const { t } = useServicesActions();
 
   return (
-    <div className={styles.warningBlock}>
-      <div className={styles.warningTitle}>
-        <InfoIcon />
-        <Text fontWeight={600}>{t("Important")}</Text>
-      </div>
-      <Text>
-        {t("Warning", {
-          amount: `${currentStoragePlanSize} ${t("Common:Gigabyte")}`,
-          storageUnit: t("Common:Gigabyte"),
-        })}
+    <div className={styles.storageInfo}>
+      <Text isBold noSelect fontSize="14px">
+        {usedTotalStorageSizeTitle}{" "}
+        <Text
+          className={styles.currentTariffCount}
+          as="span"
+          isBold
+          fontSize="14px"
+        >
+          {getConvertedSize(t, usedTotalStorageSizeCount)}
+          {maxTotalSizeByQuota
+            ? `/${getConvertedSize(t, maxTotalSizeByQuota)}`
+            : ""}
+        </Text>
       </Text>
     </div>
   );
 };
 
-export default inject(({ currentTariffStatusStore }: TStore) => {
-  const { currentStoragePlanSize } = currentTariffStatusStore;
+export default inject(({ currentQuotaStore }: TStore) => {
+  const {
+    usedTotalStorageSizeCount,
+    usedTotalStorageSizeTitle,
+    maxTotalSizeByQuota,
+  } = currentQuotaStore;
 
   return {
-    currentStoragePlanSize,
+    usedTotalStorageSizeCount,
+    usedTotalStorageSizeTitle,
+    maxTotalSizeByQuota,
   };
-})(observer(StorageWarning));
+})(observer(StorageInformation));

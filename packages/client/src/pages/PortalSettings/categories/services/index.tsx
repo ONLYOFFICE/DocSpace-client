@@ -40,9 +40,9 @@ import StoragePlanUpgrade from "./StoragePlanUpgrade";
 import ServicesLoader from "./ServicesLoader";
 
 import StoragePlanCancel from "./StoragePlanCancel";
-import GracePeriodModal from "./GracePeriodModal";
-import BackupServiceDialog from "./BackupServiceDialog";
-import ConfirmationDialog from "./ConfirmationDialog";
+import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
+import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
+import ConfirmationDialog from "./sub-components/ConfirmationDialog";
 
 type ServicesProps = {
   servicesInit: (t: TTranslation) => void;

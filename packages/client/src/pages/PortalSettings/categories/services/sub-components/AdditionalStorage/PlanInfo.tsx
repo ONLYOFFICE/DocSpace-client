@@ -33,8 +33,8 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
 import DowngradeWalletIcon from "PUBLIC_DIR/images/icons/16/downgrade.react.svg";
 import DiskStorageIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg";
-import styles from "../styles/StorageSummary.module.scss";
-import { useServicesActions } from "../hooks/useServicesActions";
+import styles from "../../styles/StorageSummary.module.scss";
+import { useServicesActions } from "../../hooks/useServicesActions";
 
 type PlanInfoProps = {
   amount: number | string;

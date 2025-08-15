@@ -39,10 +39,10 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 
 import UpgradeWalletIcon from "PUBLIC_DIR/images/icons/16/upgrade.react.svg";
 
-import styles from "../styles/StorageSummary.module.scss";
-import { useServicesActions } from "../hooks/useServicesActions";
-import { calculateDifference } from "../hooks/resourceUtils";
-import { usePaymentContext } from "../context/PaymentContext";
+import styles from "../../styles/StorageSummary.module.scss";
+import { useServicesActions } from "../../hooks/useServicesActions";
+import { calculateDifference } from "../../hooks/resourceUtils";
+import { usePaymentContext } from "../../context/PaymentContext";
 
 let timeout: NodeJS.Timeout | null;
 let controller: AbortController;

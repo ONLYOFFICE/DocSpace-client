@@ -57,7 +57,7 @@ type AdditionalStorageProps = {
   onToggle?: (id: string, enabled: boolean) => void;
   servicesQuotasFeatures?: Map<string, ServiceQuotaFeature>;
   storageSizeIncrement?: number;
-  onClick?: () => void;
+  onClick?: (id: string) => void;
   storagePriceIncrement?: number;
   isPayer?: boolean;
   cardLinkedOnFreeTariff?: boolean;
@@ -103,7 +103,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const dataset = (e.currentTarget as HTMLElement).dataset;
     const handleDisabled = dataset.disabled?.toLowerCase() === "true";
 
-    if (handleDisabled || !hasStorageSubscription) return;
+    if (handleDisabled) return;
 
     e.preventDefault();
     e.stopPropagation();
@@ -112,6 +112,15 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     const id = dataset.id;
 
     onToggle?.(id!, !isEnabled);
+  };
+
+  const handleClick = (
+    e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const dataset = (e.currentTarget as HTMLElement).dataset;
+    const id = dataset.id;
+
+    onClick?.(id!);
   };
 
   const textTooltip = () => {
@@ -174,8 +183,9 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
               className={classNames(styles.serviceContainer, {
                 [styles.disabled]: isDisabled,
               })}
-              {...(!isDisabled ? { onClick } : {})}
+              {...(!isDisabled ? { onClick: handleClick } : {})}
               data-testid={`storage_service_${item.id}`}
+              data-id={item.id}
             >
               <div className={styles.headerContainer}>
                 <div className={styles.iconWrapper}>
@@ -190,7 +200,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                   className={styles.toggleWrapper}
                   data-id={item.id}
                   data-enabled={item.enabled}
-                  data-disabled={eventDisabled}
+                  data-disabled={eventDisabled || !hasStorageSubscription}
                 >
                   <ToggleButton
                     isChecked={hasStorageSubscription}
@@ -273,6 +283,64 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
             </div>
           );
         })}
+        <div
+          key={"backup"}
+          className={classNames(styles.serviceContainer, {
+            [styles.disabled]: isDisabled,
+          })}
+          {...(!isDisabled ? { onClick: handleClick } : {})}
+          data-testid={`storage_service_backup`}
+          data-id={"backup"}
+        >
+          <div className={styles.headerContainer}>
+            <div className={styles.iconWrapper}>
+              {/* <div
+                dangerouslySetInnerHTML={{ __html: item.image }}
+                className={styles.iconsContainer}
+              /> */}
+            </div>
+
+            <div
+              onClick={handleToggle}
+              className={styles.toggleWrapper}
+              data-id={"backup"}
+              data-enabled={true}
+              //  data-disabled={eventDisabled}
+            >
+              <ToggleButton
+                isChecked={hasStorageSubscription}
+                className={styles.serviceToggle}
+                // isDisabled={true}
+                dataTestId={`storage_service_backup_toggle`}
+              />
+            </div>
+          </div>
+          <div className={styles.contentContainer}>
+            <Text
+              fontWeight={600}
+              fontSize="14px"
+              className={styles.containerTitle}
+            >
+              {t("Common:Backup")}
+            </Text>
+            <div className={styles.middleBlock}>
+              <Text fontSize="12px" className={styles.priceDescription}>
+                {t("TurnOnBackup", {
+                  productName: t("Common:ProductName"),
+                })}
+              </Text>
+
+              <div className={styles.priceContainer}>
+                <Text fontSize="12px" fontWeight={600}>
+                  {t("PerStorage", {
+                    currency: formatWalletCurrency!(storagePriceIncrement!, 2),
+                    amount: getConvertedSize(t, storageSizeIncrement || 0),
+                  })}
+                </Text>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
@@ -41,6 +41,8 @@ import ServicesLoader from "./ServicesLoader";
 
 import StoragePlanCancel from "./StoragePlanCancel";
 import GracePeriodModal from "./GracePeriodModal";
+import BackupServiceDialog from "./BackupServiceDialog";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
@@ -61,18 +63,25 @@ const Services: React.FC<ServicesProps> = ({
   previousStoragePlanSize,
   isShowStorageTariffDeactivatedModal,
 }) => {
-  const { t, ready } = useTranslation(["Payments", "Common"]);
+  const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
+  const [isBackupVisible, setIsBackupVisible] = useState(false);
+  const [isConfirmDialogVisible, setIsConfirmDialogVisible] = useState(false);
   const [isStorageCancelattion, setIsStorageCancellation] = useState(false);
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
   const [previousValue, setPreviousValue] = useState(0);
+  const [confirmActionType, setConfirmActionType] = useState<
+    keyof typeof confirmationDialogContent | null
+  >(null);
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
   const location = useLocation();
   const navigate = useNavigate();
   const { openDialog } = location.state || {};
+
+  const previousDialogRef = useRef<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,13 +118,24 @@ const Services: React.FC<ServicesProps> = ({
     };
   }, []);
 
-  const onClick = () => {
-    if (isGracePeriod) {
+  const confirmationDialogContent = {
+    backup: {
+      title: t("Common:Backup"),
+      body: t("Services:EnableBackupConfirm", {
+        productName: t("Common:ProductName"),
+      }),
+    },
+  };
+
+  const onClick = (id: string) => {
+    if (id === TOTAL_SIZE && isGracePeriod) {
       setIsGracePeriodModalVisible(true);
       return;
     }
 
-    setIsStorageVisible(true);
+    if (id === TOTAL_SIZE) setIsStorageVisible(true);
+
+    if (id === "backup") setIsBackupVisible(true);
   };
 
   const onClose = () => {
@@ -134,10 +154,38 @@ const Services: React.FC<ServicesProps> = ({
       }
       setIsStorageVisible(true);
     }
+
+    if (id === "backup") {
+      if (isBackupVisible) previousDialogRef.current = true;
+
+      setConfirmActionType("backup");
+      if (!enabled) setIsConfirmDialogVisible(true);
+    }
   };
 
   const onCloseGracePeriodModal = () => {
     setIsGracePeriodModalVisible(false);
+  };
+
+  const onCloseBackup = () => {
+    setIsBackupVisible(false);
+  };
+
+  const onCloseConfirmDialog = () => {
+    const isDialogVisible = previousDialogRef.current;
+
+    previousDialogRef.current = false;
+
+    if (confirmActionType === "backup") {
+      if (isDialogVisible) setIsBackupVisible(true);
+      setIsConfirmDialogVisible(false);
+
+      // return;
+    }
+  };
+
+  const onConfirm = () => {
+    setIsConfirmDialogVisible(false);
   };
 
   return shouldShowLoader ? (
@@ -169,6 +217,22 @@ const Services: React.FC<ServicesProps> = ({
         <GracePeriodModal
           visible={isGracePeriodModalVisible}
           onClose={onCloseGracePeriodModal}
+        />
+      ) : null}
+      {isBackupVisible ? (
+        <BackupServiceDialog
+          visible={isBackupVisible}
+          onClose={onCloseBackup}
+          onToggle={onToggle}
+        />
+      ) : null}
+      {isConfirmDialogVisible && confirmActionType ? (
+        <ConfirmationDialog
+          visible={isConfirmDialogVisible}
+          onClose={onCloseConfirmDialog}
+          onConfirm={onConfirm}
+          title={confirmationDialogContent[confirmActionType].title}
+          bodyText={confirmationDialogContent[confirmActionType].body}
         />
       ) : null}
     </>

@@ -46,6 +46,7 @@ import styles from "./BackupServiceDialog.module.scss";
 interface BackupServiceDialogProps {
   visible: boolean;
   onClose: () => void;
+  onToggle: (id: string, enabled: boolean) => void;
 }
 
 interface ServiceOption {
@@ -58,18 +59,20 @@ interface ServiceOption {
 const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   visible,
   onClose,
+  onToggle,
 }) => {
   const { t } = useTranslation(["Services", "Common"]);
   const [isBackupEnabled, setIsBackupEnabled] = useState<boolean>(false);
 
-  const handleToggleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsBackupEnabled(e.target.checked);
+  const handleToggleChange = () => {
+    onToggle("backup", isBackupEnabled);
+    onClose();
   };
 
   const serviceOptions: ServiceOption[] = [
     {
       id: "temporary",
-      title: "Temporary",
+      title: t("Common:TemporaryStorage"),
       description: t("TemporaryDescription"),
       icon: <ClockIcon />,
     },

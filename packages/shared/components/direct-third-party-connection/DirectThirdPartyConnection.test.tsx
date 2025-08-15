@@ -46,6 +46,7 @@ jest.mock("../../api/files", () => ({
 }));
 
 jest.mock("../../utils/common", () => ({
+  buildDataTestId: jest.fn(),
   getOAuthToken: jest.fn().mockResolvedValue("mock-oauth-token"),
   getIconPathByFolderType: jest.fn().mockReturnValue("folder-icon-path"),
 }));

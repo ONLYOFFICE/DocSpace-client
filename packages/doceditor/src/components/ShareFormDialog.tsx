@@ -104,7 +104,8 @@ const ShareFormDialog = ({
           false,
           false,
         );
-        return copyShareLink(file, link, t);
+        copyShareLink(file, link, t);
+        return;
       }
 
       if (res.items.length >= 1) {
@@ -129,10 +130,11 @@ const ShareFormDialog = ({
             },
           });
 
-          return copyShareLink(file, updatedLink, t);
+          copyShareLink(file, updatedLink, t);
+          return;
         }
 
-        return copyShareLink(file, link, t);
+        copyShareLink(file, link, t);
       }
     } catch (error) {
       if (error === "canceled") {

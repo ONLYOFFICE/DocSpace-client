@@ -30,10 +30,7 @@ import moment from "moment";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
-import {
-  copyDocumentShareLink,
-  copyRoomShareLink,
-} from "@docspace/shared/components/share/Share.helpers";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
@@ -85,7 +82,7 @@ export default function withQuickButtons(WrappedComponent) {
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
       if (primaryLink) {
-        copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
+        copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
@@ -94,12 +91,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { t, item, getManageLinkOptions } = this.props;
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
-        copyRoomShareLink(
-          primaryLink,
-          t,
-          true,
-          getManageLinkOptions(item, true),
-        );
+        copyShareLink(item, primaryLink, t, getManageLinkOptions(item, true));
         // copyShareLink(primaryLink.sharedTo.shareLink);
         // toastr.success(t("Common:LinkSuccessfullyCopied"));
       }

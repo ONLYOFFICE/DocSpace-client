@@ -57,7 +57,7 @@ import PublicRoomBar from "../public-room-bar";
 import LinkRow from "./sub-components/LinkRow";
 
 import type { AccessItem, ShareProps, TLink } from "./Share.types";
-import { copyDocumentShareLink, evenPrimaryLink } from "./Share.helpers";
+import { copyShareLink, evenPrimaryLink } from "./Share.helpers";
 import styles from "./Share.module.scss";
 
 const Share = (props: ShareProps) => {
@@ -164,7 +164,7 @@ const Share = (props: ShareProps) => {
 
           return newLinks;
         });
-        copyDocumentShareLink(link, t);
+        copyShareLink(infoPanelSelection, link, t);
       } else {
         setFileLinks([]);
       }
@@ -266,7 +266,7 @@ const Share = (props: ShareProps) => {
       });
 
       updateLink(link, res);
-      copyDocumentShareLink(res, t);
+      copyShareLink(infoPanelSelection, res, t);
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -290,7 +290,7 @@ const Share = (props: ShareProps) => {
           if (item.access === ShareAccessRights.DenyAccess) {
             toastr.success(t("Common:LinkAccessDenied"));
           } else {
-            copyDocumentShareLink(res, t);
+            copyShareLink(infoPanelSelection, res, t);
           }
         }
       } catch (e) {
@@ -380,7 +380,7 @@ const Share = (props: ShareProps) => {
       });
 
       updateLink(link, res);
-      copyDocumentShareLink(res, t);
+      copyShareLink(infoPanelSelection, res, t);
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -392,6 +392,10 @@ const Share = (props: ShareProps) => {
         {t("Common:MaximumNumberOfExternalLinksCreated")}
       </Text>
     );
+  };
+
+  const onCopyLink = (link: TFileLink) => {
+    copyShareLink(infoPanelSelection, link, t);
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
@@ -406,7 +410,7 @@ const Share = (props: ShareProps) => {
         key: "copy-link-settings-key",
         label: t("Common:CopySharedLink"),
         icon: CopyToReactSvgUrl,
-        onClick: () => copyDocumentShareLink(link, t),
+        onClick: () => copyShareLink(infoPanelSelection, link, t),
       },
       {
         key: "embedding-settings-key",
@@ -533,6 +537,7 @@ const Share = (props: ShareProps) => {
             onCloseContextMenu={onCloseContextMenu}
             changeExpirationOption={changeExpirationOption}
             availableExternalRights={availableExternalRights}
+            onCopyLink={onCopyLink}
           />
         </div>
       )}

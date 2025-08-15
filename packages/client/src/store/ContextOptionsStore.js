@@ -98,11 +98,10 @@ import {
   trimSeparator,
 } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { copyShareLink } from "@docspace/shared/utils/copy";
+import { copyShareLink as copyToBuffer } from "@docspace/shared/utils/copy";
 import {
   canShowManageLink,
-  copyDocumentShareLink,
-  copyRoomShareLink,
+  copyShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { getGuidanceConfig } from "@docspace/shared/components/guidance/configs";
@@ -489,7 +488,7 @@ class ContextOptionsStore {
     const isSystemFolder = systemFolders.includes(item.type);
 
     if (this.publicRoomStore.isPublicRoom) {
-      copyShareLink(item.shortWebUrl);
+      copyToBuffer(item.shortWebUrl);
       return toastr.success(t("Common:LinkCopySuccess"));
     }
 
@@ -498,7 +497,7 @@ class ContextOptionsStore {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
-        copyShareLink(itemLink.sharedTo.shareLink);
+        copyToBuffer(itemLink.sharedTo.shareLink);
         item.customFilterEnabled
           ? toastr.success(
               <Trans t={t} i18nKey="Common:LinkCopySuccessWithCustomFilter" />,
@@ -567,10 +566,10 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copyRoomShareLink(
+      copyShareLink(
+        item,
         primaryLink,
         t,
-        true,
         this.getManageLinkOptions(item, true),
       );
       // copyShareLink(primaryLink.sharedTo.shareLink);
@@ -1476,7 +1475,7 @@ class ContextOptionsStore {
     const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
-      copyDocumentShareLink(primaryLink, t, this.getManageLinkOptions(item));
+      copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
     }
   };
@@ -1500,7 +1499,6 @@ class ContextOptionsStore {
         infoPanelRoomSelection,
         getInfoPanelOpen(),
         infoView,
-        isRoom,
       ),
       onClickLink: () => {
         this.filesStore.setSelection([]);

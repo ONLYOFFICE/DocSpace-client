@@ -41,7 +41,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
-import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
 
 import type { TFileLink } from "@docspace/shared/api/files/types";
@@ -123,7 +123,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
-    copyRoomShareLink(link, t as TFunction);
+    copyShareLink(item, link, t as TFunction);
     onCloseContextMenu();
   };
 
@@ -193,7 +193,7 @@ const LinkRow = (props: LinkRowProps) => {
       });
 
       if (linkData) {
-        copyRoomShareLink(linkData, t);
+        copyShareLink(item, linkData, t);
       }
     } catch (err: unknown) {
       console.log(err);
@@ -258,6 +258,10 @@ const LinkRow = (props: LinkRowProps) => {
     editExternalLinkAction(newLink);
   };
 
+  const onCopyLink = (linkArg: TFileLink) => {
+    copyShareLink(item, linkArg, t);
+  };
+
   return (
     <LinkRowComponent
       loadingLinks={loadingLinks}
@@ -273,6 +277,7 @@ const LinkRow = (props: LinkRowProps) => {
       isPublicRoom={isPublicRoomType}
       changeShareOption={changeShareOption}
       availableExternalRights={availableExternalRights}
+      onCopyLink={onCopyLink}
     />
   );
 };

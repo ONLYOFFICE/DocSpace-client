@@ -41,11 +41,9 @@ import { IconButton } from "../../icon-button";
 import { ContextMenuButton } from "../../context-menu-button";
 
 import {
-  getShareOptions,
-  getAccessOptions,
+  getAccessTypeOptions,
+  getAccessRightOptions,
   getRoomAccessOptions,
-  copyDocumentShareLink,
-  copyRoomShareLink,
 } from "../Share.helpers";
 import type { LinkRowProps } from "../Share.types";
 
@@ -73,15 +71,16 @@ const LinkRow = ({
   onCloseContextMenu,
   onAccessRightsSelect,
   removedExpiredLink,
+  onCopyLink,
 }: LinkRowProps) => {
   const { t } = useTranslation("Common");
 
   const isMobileViewLink = useIsMobile();
 
-  const shareOptions = useMemo(() => getShareOptions(t), [t]);
+  const shareOptions = useMemo(() => getAccessTypeOptions(t), [t]);
   const accessOptions = useMemo(() => {
     return availableExternalRights
-      ? getAccessOptions(t, availableExternalRights)
+      ? getAccessRightOptions(t, availableExternalRights)
       : [];
   }, [availableExternalRights, t]);
 
@@ -92,14 +91,6 @@ const LinkRow = ({
         : [],
     [t, isFolder, isRoomsLink, availableExternalRights],
   );
-
-  const onCopyLink = (link: TFileLink) => {
-    if (isRoomsLink) {
-      return copyRoomShareLink(link, t);
-    }
-
-    copyDocumentShareLink(link, t);
-  };
 
   const changeAccessOptionHandler = (item: TOption, link: TFileLink) => {
     if (isRoomsLink) {

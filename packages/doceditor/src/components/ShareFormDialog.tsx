@@ -36,7 +36,7 @@ import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 import { addExternalLink, getExternalLinks } from "@docspace/shared/api/files";
-import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { toastr } from "@docspace/shared/components/toast";
 import { Nullable, TResolver } from "@docspace/shared/types";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
@@ -104,7 +104,7 @@ const ShareFormDialog = ({
           false,
           false,
         );
-        return copyDocumentShareLink(link, t);
+        return copyShareLink(file, link, t);
       }
 
       if (res.items.length >= 1) {
@@ -129,10 +129,10 @@ const ShareFormDialog = ({
             },
           });
 
-          return copyDocumentShareLink(updatedLink, t);
+          return copyShareLink(file, updatedLink, t);
         }
 
-        return copyDocumentShareLink(link, t);
+        return copyShareLink(file, link, t);
       }
     } catch (error) {
       if (error === "canceled") {

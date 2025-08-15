@@ -78,6 +78,7 @@ export type LinkRowProps = {
   isFolder?: boolean;
   isPublicRoom?: boolean;
 
+  onCopyLink: (link: TFileLink) => void;
   getData: (link: TFileLink) => ContextMenuModel[];
   onOpenContextMenu: (e: React.MouseEvent) => void;
   onCloseContextMenu: () => void;
@@ -140,3 +141,8 @@ export interface LinkTitleProps {
   isLoaded?: boolean;
   disabledCopy?: boolean;
 }
+
+export type TCopyShareLinkOptions = {
+  canShowLink: boolean;
+  onClickLink: VoidFunction;
+};

@@ -45,10 +45,10 @@ import { Portal } from "../../components/portal";
 import { useEventListener } from "../../hooks/useEventListener";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import {
-  copyRoomShareLink,
-  getAccessOptions,
+  getAccessRightOptions,
   getRoomAccessOptions,
-  getShareOptions,
+  getAccessTypeOptions,
+  copyShareLink,
 } from "../../components/share/Share.helpers";
 
 import {
@@ -136,10 +136,10 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
     if (isFolderOrRoom(item))
       return getRoomAccessOptions(t, item.availableExternalRights);
 
-    return getAccessOptions(t, item.availableExternalRights);
+    return getAccessRightOptions(t, item.availableExternalRights);
   }, [t, item]);
 
-  const linkAccessOptions = useMemo(() => getShareOptions(t, false), [t]);
+  const linkAccessOptions = useMemo(() => getAccessTypeOptions(t, false), [t]);
   const [unsavedChangesDialogVisible, setUnsavedChangesDialog] =
     useState(false);
 
@@ -288,7 +288,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
             setSearchParams,
             isCustomRoom,
           );
-          copyRoomShareLink(response, t);
+          copyShareLink(item, response, t);
         } else {
           updateLink?.(response);
         }

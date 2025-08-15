@@ -25,8 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import moment from "moment";
 import { Trans } from "react-i18next";
-import isUndefined from "lodash/isUndefined";
-import isNull from "lodash/isNull";
 import type { TFunction } from "i18next";
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
@@ -42,10 +40,11 @@ import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import { globalColors } from "../../themes";
-import { FileType, ShareAccessRights } from "../../enums";
+import { ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
-import { isFolderOrRoom } from "../../utils/typeGuards";
+import { isFile, isFolderOrRoom, isRoom } from "../../utils/typeGuards";
 
+import type { TRoom } from "../../api/rooms/types";
 import type { TTranslation } from "../../types";
 import type {
   TAvailableExternalRights,
@@ -56,10 +55,11 @@ import type {
 
 import { Link } from "../link";
 import { toastr } from "../toast";
+import { TCopyShareLinkOptions } from "./Share.types";
 
 type ItemValue<T> = T extends false ? never : T;
 
-export const getShareOptions = (t: TTranslation, withIcon = true) => {
+export const getAccessTypeOptions = (t: TTranslation, withIcon = true) => {
   return [
     {
       internal: false,
@@ -78,7 +78,7 @@ export const getShareOptions = (t: TTranslation, withIcon = true) => {
   ];
 };
 
-export const getAccessOptions = (
+export const getAccessRightOptions = (
   t: TTranslation,
   available: TAvailableExternalRights,
 ) => {
@@ -254,12 +254,31 @@ export const getDate = (expirationDate: string) => {
   return moment.duration(calculatedDate + 1, "days").humanize();
 };
 
+export const getPasswordDescription = (t: TFunction, link: TFileLink) => {
+  return link.sharedTo.password ? (
+    <>&nbsp;{t("Common:RoomShareLinkPassword")}</>
+  ) : (
+    ""
+  );
+};
+
+export const getLinkRestrictionDescription = (
+  t: TFunction,
+  link: TFileLink,
+) => {
+  return link.sharedTo.denyDownload ? (
+    <>&nbsp;{t("Common:RoomShareLinkRestrictionActivated")}</>
+  ) : (
+    ""
+  );
+};
+
 export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
   switch (access) {
     case ShareAccessRights.Editing:
-      return t("Common:Editing");
+      return t("Common:EditButton");
     case ShareAccessRights.CustomFilter:
-      return t("Common:CustomFilter");
+      return t("Common:UseCustomFilter");
     case ShareAccessRights.Review:
       return t("Common:Review");
     case ShareAccessRights.Comment:
@@ -267,27 +286,27 @@ export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
     case ShareAccessRights.ReadOnly:
       return t("Common:ReadOnly");
     case ShareAccessRights.FormFilling:
-      return t("Common:FillInOut");
+      return t("Common:FillOut");
     default:
       return "";
   }
 };
 
-export const getRoleNameByAccessRight = (
+export const getNameAccessRoom = (
   access: ShareAccessRights,
   t: TTranslation,
 ) => {
   switch (access) {
     case ShareAccessRights.Editing:
-      return t("Common:Editor");
+      return t("Common:EditButton");
     case ShareAccessRights.Review:
-      return t("Common:RoleReviewer");
+      return t("Common:Review");
     case ShareAccessRights.Comment:
-      return t("Common:Commentator");
+      return t("Common:Comment");
     case ShareAccessRights.ReadOnly:
-      return t("Common:Viewer");
+      return t("Common:View");
     case ShareAccessRights.FormFilling:
-      return t("Common:RoleFormFiller");
+      return t("Common:FillOut");
     default:
       return "";
   }
@@ -303,20 +322,19 @@ export const getTranslationDate = (
     return (
       <Trans
         t={t}
-        i18nKey="LinkExpireAfter"
         ns="Common"
         values={{ date }}
+        i18nKey="LinkExpireAfter"
         components={{ 1: <strong key="strong-expire-after" /> }}
       />
     );
   }
-  const date = t("Common:Unlimited").toLowerCase();
+
   return (
     <Trans
       t={t}
-      i18nKey="LinkIsValid"
       ns="Common"
-      values={{ date }}
+      i18nKey="LinkNoExpiration"
       components={{ 1: <strong key="strong-link-valid" /> }}
     />
   );
@@ -327,7 +345,6 @@ export const canShowManageLink = (
   buffer: TFile | TFolder | null,
   infoPanelVisible: boolean,
   infoPanelView: string,
-  isRoom: boolean = false,
 ): boolean => {
   if (isFolderOrRoom(item) && !item.security.EditAccess) return false;
 
@@ -339,109 +356,92 @@ export const canShowManageLink = (
     isFolderOrRoom(item) === isFolderOrRoom(buffer);
 
   const view =
-    (isRoom && infoPanelView !== "info_members") ||
+    (isRoom(item) && infoPanelView !== "info_members") ||
     (!isRoom && infoPanelView !== "info_share");
 
   return !isEqual || view || !infoPanelVisible;
 };
 
-export const copyRoomShareLink = (
-  link: TFileLink,
+export const getAccessTypeText = (
   t: TFunction,
-  withCopy = true,
-  linkOptions?: {
-    canShowLink: boolean;
-    onClickLink: VoidFunction;
-  },
+  item: TFile | TFolder | TRoom,
+  link: TFileLink,
 ) => {
-  const { password, shareLink, expirationDate, denyDownload } = link.sharedTo;
-  const hasPassword = Boolean(password);
-  const role = getRoleNameByAccessRight(link.access, t).toLowerCase(); //
+  const accessType = link.sharedTo.internal
+    ? t("Common:SpaceUsersOnly", {
+        productName: t("Common:ProductName"),
+      })
+    : t("Common:AnyoneWithLink");
 
-  if (!role) return;
-  if (withCopy) copy(shareLink);
+  if (isFile(item)) {
+    const accessRights = getNameAccess(link.access, t).toLocaleLowerCase();
 
-  const roleText = (
+    return (
+      <Trans
+        t={t}
+        ns="Common"
+        i18nKey="LinkAccessFile"
+        values={{ accessType, accessRights }}
+        components={{
+          1: <strong key="strong-access-type" />,
+          3: <strong key="strong-access-rights" />,
+        }}
+      />
+    );
+  }
+
+  const accessRights = getNameAccessRoom(link.access, t).toLocaleLowerCase();
+
+  const shareContents =
+    link.access === ShareAccessRights.FormFilling
+      ? t("Common:ShareForm")
+      : t("Common:ShareContents");
+
+  const shareParent = isRoom(item)
+    ? t("Common:ShareTheRoom")
+    : t("Common:ShareTheFolder");
+
+  return (
     <Trans
       t={t}
       ns="Common"
-      i18nKey="RoomShareLinkRole"
-      values={{ role }}
-      components={{ 1: <strong key="strong-role" /> }}
+      i18nKey="SharePermissionsEntityAccessScope"
+      values={{ accessType, accessRights, shareContents, shareParent }}
+      components={{
+        1: <strong key="strong-access-type" />,
+        3: <strong key="strong-access-rights" />,
+      }}
     />
-  );
-
-  const passwordText = hasPassword ? t("Common:RoomShareLinkPassword") : "";
-  const restrictionText = denyDownload
-    ? t("Common:RoomShareLinkRestrictionActivated")
-    : "";
-
-  const date = expirationDate ? (
-    <Trans
-      t={t}
-      ns="Common"
-      i18nKey="LinkIsValid"
-      values={{ date: moment(expirationDate).format("lll") }}
-      components={{ 1: <strong key="strong-date" /> }}
-    />
-  ) : null;
-
-  toastr.success(
-    <span>
-      {roleText} {passwordText} {restrictionText} {date}
-      {date ? <strong>.</strong> : null}
-      {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
-        <Link
-          color={globalColors.lightBlueMain}
-          isHovered
-          onClick={linkOptions.onClickLink}
-        >
-          {t("Common:ManageNotifications")}
-        </Link>
-      ) : null}
-    </span>,
   );
 };
 
-export const copyDocumentShareLink = (
+export const copyShareLink = async (
+  item: TFile | TFolder | TRoom,
   link: TFileLink,
   t: TFunction,
-  linkOptions?: {
-    canShowLink: boolean;
-    onClickLink: VoidFunction;
-  },
+  linkOptions?: TCopyShareLinkOptions,
 ) => {
-  const { internal, expirationDate, shareLink } = link.sharedTo;
+  await copy(link.sharedTo.shareLink);
 
-  const access = getNameAccess(link.access, t).toLowerCase();
+  const { expirationDate } = link.sharedTo;
 
-  copy(shareLink);
-
-  const head = internal ? (
-    <Trans
-      t={t}
-      ns="Common"
-      i18nKey="ShareLinkTitleInternal"
-      values={{ productName: t("Common:ProductName"), access }}
-      components={{ 1: <strong key="strong-internal" /> }}
-    />
-  ) : (
-    <Trans
-      t={t}
-      ns="Common"
-      i18nKey="ShareLinkTitle"
-      values={{ access }}
-      components={{ 1: <strong key="strong-external" /> }}
-    />
-  );
   const date = getTranslationDate(expirationDate, t);
+
+  const access = getAccessTypeText(t, item, link);
+
+  const password = getPasswordDescription(t, link);
+  const restriction = getLinkRestrictionDescription(t, link);
 
   toastr.success(
     <span>
-      {head} {date}
-      <strong>.</strong>
+      {access}
+      {password}
+      {restriction}
+      &nbsp;
+      {date}
       {linkOptions?.canShowLink && linkOptions?.onClickLink ? (
         <>
+          <strong>.</strong>
           &nbsp;
           <Link
             color={globalColors.lightBlueMain}
@@ -455,20 +455,6 @@ export const copyDocumentShareLink = (
     </span>,
     t("Common:LinkCopiedToClipboard"),
   );
-};
-
-export const getExpirationDate = (
-  diffExpiredDate: number | null | undefined,
-) => {
-  if (isUndefined(diffExpiredDate)) return moment().add(7, "days");
-
-  if (isNull(diffExpiredDate)) return moment(diffExpiredDate);
-
-  return moment().add(diffExpiredDate);
-};
-
-export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
-  return `link-create-document-${fileType ?? ""}-${userId}`;
 };
 
 export const evenPrimaryLink = (fileLinks: TFileLink[]) => {

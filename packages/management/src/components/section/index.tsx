@@ -40,6 +40,7 @@ import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 
 import { getHeaderByPathname } from "@/lib";
 import { Bar } from "@/components/bar";
+import { useRouteAnimation } from "@/hooks/useRouteAnimation";
 import {
   StyledSection,
   StyledSectionHeader,
@@ -66,9 +67,10 @@ export const Section = ({
   };
 
   const { key, isSubPage } = getHeaderByPathname(pathname, t);
+  const { isNavigating } = useRouteAnimation();
 
   return (
-    <StyledSection>
+    <StyledSection aria-busy={isNavigating}>
       <StyledSectionHeader>
         <StyledHeading>
           {isSubPage ? (

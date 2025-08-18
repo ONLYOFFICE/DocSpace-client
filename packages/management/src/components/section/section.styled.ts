@@ -33,6 +33,14 @@ export const StyledSection = styled.section`
   padding-inline-start: 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+
+  &[aria-busy="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   button {
     width: fit-content;

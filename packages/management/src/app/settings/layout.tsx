@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
 import SocketHelper, {
@@ -13,13 +13,13 @@ import SocketHelper, {
 
 import { pathsWithoutTabs } from "@/lib/constants";
 import useAppState from "@/hooks/useAppState";
+import { useRouteAnimation } from "@/hooks/useRouteAnimation";
 
 import { StyledWrapper } from "./layout.styled";
 
 const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
-  const router = useRouter();
 
   const { settings } = useAppState();
 
@@ -87,8 +87,10 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
+  const { startNavigation } = useRouteAnimation({ autoEndOnPathChange: true });
+
   const onSelect = (e: TTabItem) => {
-    router.push(`/settings/${e.id}`);
+    startNavigation(`/settings/${e.id}`);
   };
 
   const hideTabs = pathsWithoutTabs.some((item) => pathname.includes(item));
@@ -100,6 +102,7 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
         items={data}
         selectedItemId={getCurrentTab()}
         onSelect={(e) => onSelect(e)}
+        withAnimation
       />
     </StyledWrapper>
   );

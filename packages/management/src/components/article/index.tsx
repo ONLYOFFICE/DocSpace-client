@@ -32,7 +32,6 @@ import PaymentIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg
 import GiftReactSvg from "PUBLIC_DIR/images/gift.react.svg";
 
 import React, { useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
@@ -43,6 +42,7 @@ import { Portal } from "@docspace/shared/components/portal";
 
 import { useStores } from "@/hooks/useStores";
 import useDeviceType from "@/hooks/useDeviceType";
+import { useRouteAnimation } from "@/hooks/useRouteAnimation";
 
 import { StyledArticle, StyledCrossIcon } from "./article.styled";
 import { ArticleHeader } from "./article-header";
@@ -52,8 +52,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
   const {
     articleStore: { showText, setShowText, articleOpen, setArticleOpen },
   } = useStores();
-  const router = useRouter();
-  const pathname = usePathname();
+
   const { t } = useTranslation("Common");
 
   const { currentDeviceType } = useDeviceType();
@@ -72,9 +71,11 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
     setShowText(true);
   }, [setShowText, currentDeviceType]);
 
-  const onItemClick = (key: string) => {
+  const { isActiveBy, startNavigation } = useRouteAnimation();
+
+  const onItemClick = async (key: string) => {
     if (currentDeviceType === DeviceType.mobile) setArticleOpen(!articleOpen);
-    router.push(`/${key}`);
+    await startNavigation(`/${key}`);
   };
 
   const articleComponent = (
@@ -87,9 +88,10 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           iconNode={<SpacesSvg />}
           showText={showText}
           onClick={() => onItemClick("spaces")}
-          isActive={pathname === "/spaces"}
+          isActive={isActiveBy((p) => p === "/spaces")}
           folderId="management_catalog-spaces"
           linkData={{ path: "/spaces", state: {} }}
+          withAnimation
         />
         <ArticleItem
           key="settings"
@@ -97,9 +99,10 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           iconNode={<SettingsReactSvg />}
           showText={showText}
           onClick={() => onItemClick("settings/branding")}
-          isActive={pathname.includes("/settings")}
+          isActive={isActiveBy((p) => p.startsWith("/settings"))}
           folderId="management_catalog-settings"
           linkData={{ path: "/settings/branding", state: {} }}
+          withAnimation
         />
         {!isCommunity ? (
           <ArticleItem
@@ -108,9 +111,10 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
             iconNode={<PaymentIcon />}
             showText={showText}
             onClick={() => onItemClick("payments")}
-            isActive={pathname === "/payments"}
+            isActive={isActiveBy((p) => p === "/payments")}
             folderId="management_catalog-payments"
             linkData={{ path: "/payments", state: {} }}
+            withAnimation
           />
         ) : (
           <ArticleItem
@@ -119,9 +123,10 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
             iconNode={<GiftReactSvg />}
             showText={showText}
             onClick={() => onItemClick("bonus")}
-            isActive={pathname === "/bonus"}
+            isActive={isActiveBy((p) => p === "/bonus")}
             folderId="management_catalog-bonus"
             linkData={{ path: "/bonus", state: {} }}
+            withAnimation
           />
         )}
       </div>

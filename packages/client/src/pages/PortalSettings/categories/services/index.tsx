@@ -35,6 +35,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
+import TopUpModal from "SRC_DIR/components/panels/TopUpBalance/TopUpModal";
 
 import ServicesItems from "./ServicesItems";
 import StoragePlanUpgrade from "./StoragePlanUpgrade";
@@ -44,7 +45,6 @@ import StoragePlanCancel from "./StoragePlanCancel";
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
-import ServicesDialogs from "./ServicesDialogs";
 
 type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
@@ -54,6 +54,7 @@ type ServicesProps = {
   isGracePeriod: boolean;
   previousStoragePlanSize: number;
   changeServiceState: (service: string) => void;
+  isCardLinkedToPortal: boolean;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -66,6 +67,7 @@ const Services: React.FC<ServicesProps> = ({
   previousStoragePlanSize,
   isShowStorageTariffDeactivatedModal,
   changeServiceState,
+  isCardLinkedToPortal,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -78,6 +80,7 @@ const Services: React.FC<ServicesProps> = ({
   const [confirmActionType, setConfirmActionType] = useState<string | null>(
     null,
   );
+  const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
@@ -178,6 +181,11 @@ const Services: React.FC<ServicesProps> = ({
 
     setConfirmActionType(id);
 
+    if (!currentEnabled && !isCardLinkedToPortal) {
+      setIsTopUpBalanceVisible(true);
+      return;
+    }
+
     if (!currentEnabled) setIsConfirmDialogVisible(true);
     else {
       const raw = {
@@ -233,6 +241,11 @@ const Services: React.FC<ServicesProps> = ({
     }
   };
 
+  const onCloseTopUpModal = () => {
+    setIsTopUpBalanceVisible(false);
+    setIsConfirmDialogVisible(true);
+  };
+
   return shouldShowLoader ? (
     showLoader ? (
       <ServicesLoader />
@@ -280,6 +293,12 @@ const Services: React.FC<ServicesProps> = ({
           bodyText={getDialogContent(confirmActionType).body}
         />
       ) : null}
+      {isTopUpBalanceVisible ? (
+        <TopUpModal
+          visible={isTopUpBalanceVisible}
+          onClose={onCloseTopUpModal}
+        />
+      ) : null}
     </>
   );
 };
@@ -289,8 +308,11 @@ export const Component = inject(
     const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
       servicesStore;
     const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
-    const { isShowStorageTariffDeactivatedModal, changeServiceState } =
-      paymentStore;
+    const {
+      isShowStorageTariffDeactivatedModal,
+      changeServiceState,
+      isCardLinkedToPortal,
+    } = paymentStore;
     return {
       servicesInit,
       isInitServicesPage,
@@ -299,6 +321,7 @@ export const Component = inject(
       isGracePeriod,
       previousStoragePlanSize,
       changeServiceState,
+      isCardLinkedToPortal,
     };
   },
 )(observer(Services));

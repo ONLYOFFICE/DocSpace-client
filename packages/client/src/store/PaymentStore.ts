@@ -454,10 +454,6 @@ class PaymentStore {
     return moment().subtract(4, "weeks").format(format);
   };
 
-  fetchMoreTransactionHistory = async () => {
-    console.log("fetchMoreTransactionHistory");
-  };
-
   formatDate = (date: moment.Moment) => {
     return date.clone().locale("en").format("YYYY-MM-DDTHH:mm:ss");
   };

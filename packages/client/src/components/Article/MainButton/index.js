@@ -68,7 +68,6 @@ import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
-import { CHAT_SUPPORTED_FORMATS } from "@docspace/shared/components/chat";
 
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
@@ -195,6 +194,7 @@ const ArticleMainButtonContent = (props) => {
     isResultTab,
     isKnowledgeTab,
     isAIRoom,
+    extsFilesVectorized,
   } = props;
 
   const navigate = useNavigate();
@@ -832,6 +832,7 @@ const ArticleMainButtonContent = (props) => {
         onClick={onInputClick}
         ref={inputFilesElement}
         style={{ display: "none" }}
+        {...(isAIRoom ? { accept: extsFilesVectorized.join(",") } : {})}
       />
       <input
         id="customPDFInput"
@@ -877,6 +878,7 @@ export default inject(
     peopleStore,
     guidanceStore,
     aiRoomStore,
+    filesSettingsStore,
   }) => {
     const { isChatTab, isResultTab, isKnowledgeTab } = aiRoomStore;
     const { showArticleLoader } = clientLoadingStore;
@@ -999,6 +1001,7 @@ export default inject(
       isResultTab,
       isKnowledgeTab,
       isAIRoom: selectedFolderStore.isAIRoom,
+      extsFilesVectorized: filesSettingsStore.extsFilesVectorized,
     };
   },
 )(

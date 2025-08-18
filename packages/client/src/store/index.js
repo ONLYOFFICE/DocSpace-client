@@ -237,6 +237,7 @@ const uploadDataStore = new UploadDataStore(
   primaryProgressDataStore,
   dialogsStore,
   filesSettingsStore,
+  aiRoomStore,
 );
 
 const filesActionsStore = new FilesActionsStore(

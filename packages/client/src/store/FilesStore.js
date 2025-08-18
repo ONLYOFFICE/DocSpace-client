@@ -1796,7 +1796,6 @@ class FilesStore {
           currentFolder.type === FolderType.Knowledge
         ) {
           if (currentFolder.type === FolderType.Knowledge) {
-            console.log("set");
             this.aiRoomStore.setKnowledgeId(currentFolder.id);
           }
 

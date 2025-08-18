@@ -431,8 +431,6 @@ class SelectedFolderStore {
     )
       socketSub.push(`DIR-${selectedFolder.id}`);
 
-    console.log(socketUnsub);
-
     if (socketUnsub.length > 0) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
         roomParts: socketUnsub.map((p) => `DIR-${p.id}`),

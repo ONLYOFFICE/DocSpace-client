@@ -663,6 +663,7 @@ const LoginForm = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}
+        testId="login_button"
       />
     </form>
   );

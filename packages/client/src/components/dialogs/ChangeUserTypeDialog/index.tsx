@@ -262,6 +262,7 @@ const ChangeUserTypeDialog = ({
           primary
           onClick={onChangeType}
           isLoading={isRequestRunning}
+          testId="change_user_type_dialog_confirm"
         />
         <Button
           id="change-user-type-modal_cancel"
@@ -270,6 +271,7 @@ const ChangeUserTypeDialog = ({
           scale
           onClick={onClose}
           isDisabled={isRequestRunning}
+          testId="change_user_type_dialog_cancel"
         />
       </ModalDialog.Footer>
     </ModalDialog>

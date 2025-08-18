@@ -106,6 +106,7 @@ const ProfileRemoveForm = ({
                 href={legalTerms}
                 color={currentColorScheme?.main?.accent}
                 target={LinkTarget.blank}
+                dataTestId="privacy_policy_link"
               >
                 Privacy policy
               </Link>
@@ -138,6 +139,7 @@ const ProfileRemoveForm = ({
                 href={legalTerms}
                 color={currentColorScheme?.main?.accent}
                 target={LinkTarget.blank}
+                dataTestId="privacy_policy_link"
               >
                 Privacy policy.
               </Link>
@@ -153,6 +155,7 @@ const ProfileRemoveForm = ({
           tabIndex={1}
           isDisabled={isLoading}
           onClick={onDeleteProfile}
+          testId="delete_profile_button"
         />
       </FormWrapper>
     </>

@@ -873,5 +873,6 @@
   "YourLogo": "您的logo",
   "YourTurn": "轮到您了",
   "LogoForEditors": "{{editorName}}编辑器 logo",
-  "LogoForViewer": "{{diagramViewer}} logo"
+  "LogoForViewer": "{{diagramViewer}} logo",
+  "LogoDocsEditor": "编辑器标头Logo"
 }

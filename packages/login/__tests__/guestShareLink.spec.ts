@@ -81,7 +81,7 @@ test("guest share link approve", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.addGuest]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Approve" }).click();
+  await page.getByTestId("approve_button").click();
 
   await page.waitForURL(`/accounts/guests/filter?**`, {
     waitUntil: "load",
@@ -100,7 +100,7 @@ test("guest share link deny", async ({ page, mockRequest }) => {
   ]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Deny" }).click();
+  await page.getByTestId("deny_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 

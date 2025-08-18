@@ -125,6 +125,7 @@ const GuestShareLinkForm = ({
           tabIndex={2}
           isDisabled={isLoading}
           onClick={onApproveInvite}
+          testId="approve_button"
         />
         <Button
           scale
@@ -133,6 +134,7 @@ const GuestShareLinkForm = ({
           tabIndex={2}
           isDisabled={isLoading}
           onClick={onDenyInvite}
+          testId="deny_button"
         />
       </ButtonsWrapper>
       <Text fontSize="12px" fontWeight="400" className="guest-info">

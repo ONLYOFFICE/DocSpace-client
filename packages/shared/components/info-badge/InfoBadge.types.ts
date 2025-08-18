@@ -37,6 +37,8 @@ type InfoBadgeProps = {
   tooltipDescription?: React.ReactNode;
   /** Space between the tooltip element and anchor element (arrow not included in calculation) */
   offset: number;
+  /** dataTestId */
+  dataTestId?: string;
 };
 
 export default InfoBadgeProps;

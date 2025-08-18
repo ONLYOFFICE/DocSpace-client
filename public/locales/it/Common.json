@@ -873,5 +873,6 @@
   "YourLogo": "Il tuo logo",
   "YourTurn": "Il tuo turno",
   "LogoForEditors": "Logo per l'editor {{editorName}}",
-  "LogoForViewer": "Logo per {{diagramViewer}}"
+  "LogoForViewer": "Logo per {{diagramViewer}}",
+  "LogoDocsEditor": "Logo per l'intestazione degli editor"
 }

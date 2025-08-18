@@ -83,7 +83,7 @@ test("tfa auth success", async ({ page, mockRequest }) => {
   ]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -91,7 +91,7 @@ test("tfa auth success", async ({ page, mockRequest }) => {
     "tfa-auth-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_code_continue_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 
@@ -109,9 +109,9 @@ test("tfa auth error not validated", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.tfaAppValidateError]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_code_continue_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -136,8 +136,8 @@ test("tfa auth redirects to room after successful submission", async ({
     sessionStorage.setItem("referenceUrl", "/rooms/shared/1");
   });
 
-  await page.getByTestId("text-input").fill("123456");
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_code_input").fill("123456");
+  await page.getByTestId("app_code_continue_button").click();
 
   await page.waitForURL("/rooms/shared/1");
 

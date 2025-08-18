@@ -47,9 +47,9 @@ test("login error authentication failed", async ({ page, mockRequest }) => {
 
   await page.getByTestId("email-input").fill("email@mail.ru");
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -63,9 +63,9 @@ test("login error not validated", async ({ page }) => {
 
   await page.getByTestId("email-input").fill("");
 
-  await page.getByTestId("text-input").fill("");
+  await page.fill("[name='password']", "");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -79,9 +79,9 @@ test("login error incorrect email", async ({ page }) => {
 
   await page.getByTestId("email-input").fill("email");
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -95,9 +95,9 @@ test("login error incorrect email domain", async ({ page }) => {
 
   await page.getByTestId("email-input").fill("email@mail.com2");
 
-  await page.getByTestId("text-input").fill("qwerty123");
+  await page.fill("[name='password']", "qwerty123");
 
-  await page.getByTestId("form-wrapper").getByTestId("button").click();
+  await page.getByTestId("login_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",

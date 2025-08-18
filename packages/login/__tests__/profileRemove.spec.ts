@@ -65,9 +65,10 @@ test("profile remove success", async ({ page, context, mockRequest }) => {
   await mockRequest.router([endpoints.removeUser]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("button").click();
+  const deleteButton = page.getByTestId("delete_profile_button");
+  await deleteButton.click();
 
-  await page.getByTestId("button").waitFor({ state: "detached" });
+  await deleteButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

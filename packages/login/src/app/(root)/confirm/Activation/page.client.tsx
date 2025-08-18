@@ -202,6 +202,7 @@ const ActivateUserForm = ({
           labelVisible={false}
           hasError={!nameValid}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="name_field"
         >
           <TextInput
             id="name"
@@ -216,6 +217,7 @@ const ActivateUserForm = ({
             autoComplete="given-name"
             onChange={onChangeName}
             onKeyDown={onKeyPress}
+            testId="name_input"
           />
         </FieldContainer>
 
@@ -225,6 +227,7 @@ const ActivateUserForm = ({
           labelVisible={false}
           hasError={!surNameValid}
           errorMessage={t("Common:RequiredField")}
+          dataTestId="surname_field"
         >
           <TextInput
             id="surname"
@@ -238,6 +241,7 @@ const ActivateUserForm = ({
             autoComplete="family-name"
             onChange={onChangeSurName}
             onKeyDown={onKeyPress}
+            testId="surname_input"
           />
         </FieldContainer>
 
@@ -247,6 +251,7 @@ const ActivateUserForm = ({
           labelVisible={false}
           hasError={isPasswordErrorShow ? !passwordValid : undefined}
           errorMessage={t("Common:IncorrectPassword")}
+          dataTestId="password_field"
         >
           <PasswordInput
             className="confirm-input"
@@ -290,6 +295,7 @@ const ActivateUserForm = ({
           tabIndex={5}
           onClick={onSubmit}
           isDisabled={isLoading}
+          testId="signup_button"
         />
       </form>
     </RegisterContainer>

@@ -1183,7 +1183,8 @@ class UploadDataStore {
       let folderInfo = null;
       const index = path.findIndex((x) => x === this.selectedFolderStore.id);
       const folderId = index !== -1 ? path[index + 1] : null;
-      if (folderId) folderInfo = await getFolderInfo(folderId);
+      if (folderId && folderId !== this.aiRoomStore.knowledgeId)
+        folderInfo = await getFolderInfo(folderId);
 
       const newPath = [];
       if (folderInfo || path[path.length - 1] === this.selectedFolderStore.id) {
@@ -1648,8 +1649,6 @@ class UploadDataStore {
     const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
     const fileName = file.name;
     const fileSize = file.size;
-
-    console.log(isAIRoom, knowledgeId);
 
     return startUploadSession(
       isAIRoom ? knowledgeId : toFolderId,

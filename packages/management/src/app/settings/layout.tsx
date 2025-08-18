@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
 import SocketHelper, {
   SocketCommands,
@@ -22,6 +23,9 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   const { settings } = useAppState();
+  const { startNavigation, isNavigating } = useRouteAnimation({
+    autoEndOnPathChange: true,
+  });
 
   const standalone = settings?.standalone;
 
@@ -29,27 +33,37 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
     {
       id: "branding",
       name: t("Common:Branding"),
-      content: children,
+      content: (
+        <LoaderWrapper isLoading={isNavigating}>{children}</LoaderWrapper>
+      ),
     },
     {
       id: "data-backup",
       name: t("Common:DataBackup"),
-      content: children,
+      content: (
+        <LoaderWrapper isLoading={isNavigating}>{children}</LoaderWrapper>
+      ),
     },
     {
       id: "auto-backup",
       name: t("Common:AutoBackup"),
-      content: children,
+      content: (
+        <LoaderWrapper isLoading={isNavigating}>{children}</LoaderWrapper>
+      ),
     },
     {
       id: "restore",
       name: t("Common:RestoreBackup"),
-      content: children,
+      content: (
+        <LoaderWrapper isLoading={isNavigating}>{children}</LoaderWrapper>
+      ),
     },
     {
       id: "encrypt-data",
       name: t("Common:Storage"),
-      content: children,
+      content: (
+        <LoaderWrapper isLoading={isNavigating}>{children}</LoaderWrapper>
+      ),
     },
   ];
 
@@ -86,8 +100,6 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
     const currentTab = data.find((item) => pathname.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
-
-  const { startNavigation } = useRouteAnimation({ autoEndOnPathChange: true });
 
   const onSelect = (e: TTabItem) => {
     startNavigation(`/settings/${e.id}`);

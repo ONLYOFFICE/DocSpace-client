@@ -30,9 +30,12 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
 import { toastr } from "@docspace/shared/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
+
+import { useRouteAnimation } from "@/hooks/useRouteAnimation";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
 
 const PaymentsPage = ({
@@ -54,7 +57,9 @@ const PaymentsPage = ({
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
-
+  const { isNavigating } = useRouteAnimation({
+    autoEndOnPathChange: true,
+  });
   const [isLicenseDateExpired, setIsLicenseDateExpired] = useState(false);
   const [paymentDate, setPaymentDate] = useState("");
   const [trialDaysLeft, setTrialDaysLeft] = useState(0);
@@ -100,20 +105,22 @@ const PaymentsPage = ({
   }, [dueDate]);
 
   return (
-    <StandalonePage
-      isTrial={isTrial}
-      setPaymentsLicense={setPaymentsLicense}
-      acceptPaymentsLicense={acceptPaymentsLicense}
-      isLicenseCorrect={isLicenseCorrect}
-      salesEmail={salesEmail}
-      isLicenseDateExpired={isLicenseDateExpired}
-      isDeveloper={isDeveloper}
-      buyUrl={buyUrl}
-      trialDaysLeft={trialDaysLeft}
-      paymentDate={paymentDate}
-      isEnterprise={isEnterprise}
-      logoText={logoText}
-    />
+    <LoaderWrapper isLoading={isNavigating}>
+      <StandalonePage
+        isTrial={isTrial}
+        setPaymentsLicense={setPaymentsLicense}
+        acceptPaymentsLicense={acceptPaymentsLicense}
+        isLicenseCorrect={isLicenseCorrect}
+        salesEmail={salesEmail}
+        isLicenseDateExpired={isLicenseDateExpired}
+        isDeveloper={isDeveloper}
+        buyUrl={buyUrl}
+        trialDaysLeft={trialDaysLeft}
+        paymentDate={paymentDate}
+        isEnterprise={isEnterprise}
+        logoText={logoText}
+      />
+    </LoaderWrapper>
   );
 };
 

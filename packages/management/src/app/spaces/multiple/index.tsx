@@ -26,7 +26,9 @@
 
 "use client";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import type { TPortals } from "@docspace/shared/api/management/types";
+import { useRouteAnimation } from "@/hooks/useRouteAnimation";
 
 import { Header } from "./header";
 import { Spaces } from "./spaces";
@@ -44,11 +46,17 @@ export const MultipleSpaces = ({
   portals,
   tenantAlias,
 }: IProps) => {
+  const { isNavigating } = useRouteAnimation({
+    autoEndOnPathChange: true,
+  });
+
   return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
+    <LoaderWrapper isLoading={isNavigating}>
+      <StyledWrapper>
+        <Header />
+        <Spaces portals={portals} tenantAlias={tenantAlias} />
+        <DomainSettings baseDomain={baseDomain} />
+      </StyledWrapper>
+    </LoaderWrapper>
   );
 };

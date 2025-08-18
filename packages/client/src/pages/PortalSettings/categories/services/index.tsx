@@ -74,9 +74,9 @@ const Services: React.FC<ServicesProps> = ({
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
   const [previousValue, setPreviousValue] = useState(0);
-  const [confirmActionType, setConfirmActionType] = useState<
-    keyof typeof confirmationDialogContent | null
-  >(null);
+  const [confirmActionType, setConfirmActionType] = useState<string | null>(
+    null,
+  );
 
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitServicesPage || !ready;
@@ -128,6 +128,15 @@ const Services: React.FC<ServicesProps> = ({
         productName: t("Common:ProductName"),
       }),
     },
+  };
+
+  const getDialogContent = (actionType: string | null) => {
+    if (!actionType || !(actionType in confirmationDialogContent)) {
+      return { title: "", body: "" };
+    }
+    return confirmationDialogContent[
+      actionType as keyof typeof confirmationDialogContent
+    ];
   };
 
   const onClick = (id: string) => {
@@ -265,8 +274,8 @@ const Services: React.FC<ServicesProps> = ({
           visible={isConfirmDialogVisible}
           onClose={onCloseConfirmDialog}
           onConfirm={onConfirm}
-          title={confirmationDialogContent[confirmActionType]?.title}
-          bodyText={confirmationDialogContent[confirmActionType]?.body}
+          title={getDialogContent(confirmActionType).title}
+          bodyText={getDialogContent(confirmActionType).body}
         />
       ) : null}
     </>

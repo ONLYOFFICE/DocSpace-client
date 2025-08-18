@@ -53,6 +53,11 @@ interface ServiceQuotaFeature {
   enabled?: boolean;
   cancellation?: boolean;
   value: boolean;
+  price: {
+    value: number;
+    currencySymbol: string;
+    isoCurrencySymbol: string;
+  };
 }
 
 type AdditionalStorageProps = {
@@ -260,6 +265,8 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
           return (
             <ServiceCard
               key={item.id}
+              isDisabled={isDisabled}
+              eventDisabled={eventDisabled || false}
               priceTitle={item.priceTitle}
               id={item.id}
               image={item.image}

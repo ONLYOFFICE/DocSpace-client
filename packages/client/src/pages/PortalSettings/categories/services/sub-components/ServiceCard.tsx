@@ -32,12 +32,11 @@ import styles from "../styles/AdditionalStorage.module.scss";
 
 interface ServiceCardProps {
   isDisabled: boolean;
-  onClick: () => void;
-  onToggle: () => void;
+  onClick: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
+  onToggle: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
   priceTitle: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   eventDisabled: boolean;
-  toggleChecked: boolean;
   id: string;
   image: string;
   isEnabled: boolean;

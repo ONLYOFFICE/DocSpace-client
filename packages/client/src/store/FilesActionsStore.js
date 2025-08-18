@@ -2607,6 +2607,15 @@ class FilesActionStore {
     }
   };
 
+  addFileToRecent = async (fileId) => {
+    try {
+      const response = await api.files.addFileToRecentlyViewed(fileId);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   openFileAction = async (item, t, e) => {
     if (
       item.external &&
@@ -2717,6 +2726,7 @@ class FilesActionStore {
 
         const url = getUrl(id);
 
+        this.addFileToRecent(id);
         window.history.pushState("", "", url);
 
         return;
@@ -2742,6 +2752,7 @@ class FilesActionStore {
         return;
       }
 
+      this.addFileToRecent(id);
       return window.open(viewUrl, "_self");
     }
   };

@@ -34,6 +34,7 @@ import type { TilesProps } from "./Tiles.types";
 import FileTile from "./FileTile";
 
 import TileContainer from "./TileContainer";
+import SubmitToGalleryTile from "./SubmitToGalleryTile";
 
 const Tiles: FC<TilesProps> = ({
   // t,
@@ -91,6 +92,8 @@ const Tiles: FC<TilesProps> = ({
       isShowOneTile={isShowOneTile}
       smallPreview={smallPreview}
     >
+      <SubmitToGalleryTile smallPreview={smallPreview} isSubmitTile />
+
       {oformFiles.map((item: { id: Key | null | undefined }) => {
         return (
           <FileTile

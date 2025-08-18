@@ -382,6 +382,13 @@ const StyledCard = styled.div`
   &.Card {
     height: 100%;
   }
+
+  /* Double width for SubmitToGalleryTile when smallPreview is true */
+  ${(props) =>
+    props.$isDoubleWidth &&
+    css`
+      grid-column: span 2;
+    `}
 `;
 
 const StyledItem = styled.div`
@@ -389,8 +396,7 @@ const StyledItem = styled.div`
 
   /* Default: 2 FileTiles per row for screens < 600px */
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: 1fr; /* Force all rows to be the same height */
-
+  grid-auto-rows: 1fr;
   width: 100%;
   box-sizing: border-box;
 

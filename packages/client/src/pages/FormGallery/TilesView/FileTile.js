@@ -29,9 +29,9 @@ import { isDesktop } from "@docspace/shared/utils";
 import Tile from "./sub-components/Tile";
 import { SimpleFilesTileContent } from "./StyledTileView";
 
-const FileTile = ({ item, selectableRef }) => {
+const FileTile = ({ item, selectableRef, dataTestId }) => {
   return (
-    <div ref={selectableRef}>
+    <div ref={selectableRef} data-test-id={dataTestId}>
       <Tile key={item.id} item={item}>
         <SimpleFilesTileContent>
           <Link

@@ -125,6 +125,7 @@ const SubmitToGalleryTile = ({
         size="small"
         label={t("Common:SubmitToFormGallery")}
         scale
+        testId="submit_to_gallery_tile"
       />
     </StyledSubmitToGalleryTile>
   );

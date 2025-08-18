@@ -27,9 +27,10 @@
 import { logger } from "logger.mjs";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
-import ProfileRemoveForm from "./page.client";
 import { TConfirmLinkParams } from "@/types";
 import { getStringFromSearchParams } from "@/utils";
+
+import ProfileRemoveForm from "./page.client";
 
 type ProfileRemoveProps = {
   searchParams: Promise<{ [key: string]: string }>;

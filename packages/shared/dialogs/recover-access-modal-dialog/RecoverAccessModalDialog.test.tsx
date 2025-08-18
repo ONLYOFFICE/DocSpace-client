@@ -59,6 +59,13 @@ describe("RecoverAccessModalDialog", () => {
     id: "test-modal",
   };
 
+  const EMAIL_INPUT = "recover_access_modal_email_input";
+  const EMAIL_CONTAINER = "recover_access_modal_email_container";
+  const DESCRIPTION_INPUT = "recover_access_modal_description_textarea";
+  const SUBMIT_BUTTON = "recover_access_modal_submit_button";
+  const CLOSE_BUTTON = "recover_access_modal_close_button";
+  const TEXT_BODY = "recover_access_modal_text";
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -66,10 +73,8 @@ describe("RecoverAccessModalDialog", () => {
   it("renders correctly with default props", () => {
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
-    expect(screen.getByTestId("recover-access-modal-text")).toHaveTextContent(
-      "Test body text",
-    );
-    expect(screen.getByTestId("email-input")).toHaveAttribute(
+    expect(screen.getByTestId(TEXT_BODY)).toHaveTextContent("Test body text");
+    expect(screen.getByTestId(EMAIL_INPUT)).toHaveAttribute(
       "placeholder",
       "Enter email",
     );
@@ -78,35 +83,33 @@ describe("RecoverAccessModalDialog", () => {
   it("validates email input", async () => {
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
-    const emailInput = screen.getByTestId("email-input");
+    const emailInput = screen.getByTestId(EMAIL_INPUT);
 
     // Test invalid email
     await userEvent.type(emailInput, "invalid-email");
     fireEvent.blur(emailInput);
 
-    expect(
-      screen.getByTestId("recover-access-modal-email-container"),
-    ).toHaveTextContent("Common:IncorrectEmail");
+    expect(screen.getByTestId(EMAIL_CONTAINER)).toHaveTextContent(
+      "Common:IncorrectEmail",
+    );
 
     // Test valid email
     await userEvent.clear(emailInput);
     await userEvent.type(emailInput, "valid@email.com");
     fireEvent.blur(emailInput);
 
-    expect(
-      screen.getByTestId("recover-access-modal-email-container"),
-    ).not.toHaveTextContent("Common:IncorrectEmail");
+    expect(screen.getByTestId(EMAIL_CONTAINER)).not.toHaveTextContent(
+      "Common:IncorrectEmail",
+    );
   });
 
   it("handles form submission successfully", async () => {
     (sendRecoverRequest as jest.Mock).mockResolvedValueOnce("Success message");
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
-    const emailInput = screen.getByTestId("email-input");
-    const descriptionInput = screen.getByTestId("textarea");
-    const submitButton = screen.getByRole("button", {
-      name: "Common:SendButton",
-    });
+    const emailInput = screen.getByTestId(EMAIL_INPUT);
+    const descriptionInput = screen.getByTestId(DESCRIPTION_INPUT);
+    const submitButton = screen.getByTestId(SUBMIT_BUTTON);
 
     await userEvent.type(emailInput, "test@email.com");
     await userEvent.type(descriptionInput, "Test description");
@@ -127,11 +130,9 @@ describe("RecoverAccessModalDialog", () => {
     (sendRecoverRequest as jest.Mock).mockRejectedValueOnce(errorMessage);
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
-    const emailInput = screen.getByTestId("email-input");
-    const descriptionInput = screen.getByTestId("textarea");
-    const submitButton = screen.getByRole("button", {
-      name: "Common:SendButton",
-    });
+    const emailInput = screen.getByTestId(EMAIL_INPUT);
+    const descriptionInput = screen.getByTestId(DESCRIPTION_INPUT);
+    const submitButton = screen.getByTestId(SUBMIT_BUTTON);
 
     await userEvent.type(emailInput, "test@email.com");
     await userEvent.type(descriptionInput, "Test description");
@@ -153,11 +154,9 @@ describe("RecoverAccessModalDialog", () => {
     ); // Never resolves
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
-    const emailInput = screen.getByTestId("email-input");
-    const descriptionInput = screen.getByTestId("textarea");
-    const submitButton = screen.getByRole("button", {
-      name: "Common:SendButton",
-    });
+    const emailInput = screen.getByTestId(EMAIL_INPUT);
+    const descriptionInput = screen.getByTestId(DESCRIPTION_INPUT);
+    const submitButton = screen.getByTestId(SUBMIT_BUTTON);
 
     await userEvent.type(emailInput, "test@email.com");
     await userEvent.type(descriptionInput, "Test description");
@@ -171,11 +170,9 @@ describe("RecoverAccessModalDialog", () => {
   it("clears form on close", () => {
     render(<RecoverAccessModalDialog {...defaultProps} />);
 
-    const emailInput = screen.getByTestId("email-input");
-    const descriptionInput = screen.getByTestId("textarea");
-    const closeButton = screen.getByRole("button", {
-      name: "Common:CancelButton",
-    });
+    const emailInput = screen.getByTestId(EMAIL_INPUT);
+    const descriptionInput = screen.getByTestId(DESCRIPTION_INPUT);
+    const closeButton = screen.getByTestId(CLOSE_BUTTON);
 
     fireEvent.change(emailInput, { target: { value: "test@email.com" } });
     fireEvent.change(descriptionInput, {

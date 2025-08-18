@@ -84,7 +84,7 @@ test("tfa activation success", async ({ page, mockRequest }) => {
   ]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -92,7 +92,7 @@ test("tfa activation success", async ({ page, mockRequest }) => {
     "tfa-activation-success.png",
   ]);
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_connect_button").click();
 
   await page.waitForURL("/profile", { waitUntil: "load" });
 
@@ -111,9 +111,9 @@ test("tfa activation success with link data", async ({ page, mockRequest }) => {
   ]);
   await page.goto(URL_WITH_LINK_DATA_PARAMS);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_connect_button").click();
 
   await page.waitForURL("/profile", { waitUntil: "load" });
 
@@ -131,9 +131,9 @@ test("tfa activation error not validated", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.tfaAppValidateError]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByTestId("text-input").fill("123456");
+  await page.getByTestId("app_code_input").fill("123456");
 
-  await page.getByTestId("button").click();
+  await page.getByTestId("app_connect_button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",

@@ -45,18 +45,18 @@ const baseProps = {
 describe("<Tag />", () => {
   it("renders without error", () => {
     const { getByTestId } = renderWithTheme(<Tag {...baseProps} />);
-    expect(getByTestId("tag")).toBeInTheDocument();
+    expect(getByTestId("tag_item")).toBeInTheDocument();
   });
 
   it("accepts id", () => {
     const { getByTestId } = renderWithTheme(<Tag {...baseProps} id="testId" />);
-    expect(getByTestId("tag")).toHaveAttribute("id", "testId");
+    expect(getByTestId("tag_item")).toHaveAttribute("id", "testId");
   });
 
   it("accepts className", () => {
     const { getByTestId } = renderWithTheme(
       <Tag {...baseProps} className="test" />,
     );
-    expect(getByTestId("tag")).toHaveClass("test");
+    expect(getByTestId("tag_item")).toHaveClass("test");
   });
 });

@@ -47,6 +47,7 @@ interface BackupServiceDialogProps {
   visible: boolean;
   onClose: () => void;
   onToggle: (id: string, enabled: boolean) => void;
+  isEnabled?: boolean;
 }
 
 interface ServiceOption {
@@ -60,14 +61,13 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   visible,
   onClose,
   onToggle,
+  isEnabled = false,
 }) => {
   const { t } = useTranslation(["Services", "Common"]);
-  const [isBackupEnabled, setIsBackupEnabled] = useState<boolean>(false);
 
   const handleToggleChange = () => {
-    onToggle("backup", isBackupEnabled);
+    onToggle("backup", isEnabled);
     onClose();
-    setIsBackupEnabled(!isBackupEnabled);
   };
 
   const serviceOptions: ServiceOption[] = [
@@ -116,10 +116,7 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
       <ModalDialog.Body>
         <div className={styles.backupToggleSection}>
           <div className={styles.toggleButton}>
-            <ToggleButton
-              isChecked={isBackupEnabled}
-              onChange={handleToggleChange}
-            />
+            <ToggleButton isChecked={isEnabled} onChange={handleToggleChange} />
           </div>
           <div className={styles.textContent}>
             <Text fontSize="12px" fontWeight={600}>
@@ -160,6 +157,8 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   );
 };
 
-export default inject(() => {
-  return {};
+export default inject(({ paymentStore }: TStore) => {
+  const { servicesQuotasFeatures } = paymentStore;
+  const feature = servicesQuotasFeatures.get("backup");
+  return { isEnabled: feature?.value };
 })(observer(BackupServiceDialog));

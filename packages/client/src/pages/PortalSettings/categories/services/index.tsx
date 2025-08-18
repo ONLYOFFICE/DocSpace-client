@@ -32,6 +32,7 @@ import { useLocation, useNavigate } from "react-router";
 import { toastr } from "@docspace/shared/components/toast";
 import { TOTAL_SIZE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
+import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
@@ -51,6 +52,7 @@ type ServicesProps = {
   isShowStorageTariffDeactivatedModal: boolean;
   isGracePeriod: boolean;
   previousStoragePlanSize: number;
+  changeServiceState: (service: string) => void;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -62,6 +64,7 @@ const Services: React.FC<ServicesProps> = ({
   isGracePeriod,
   previousStoragePlanSize,
   isShowStorageTariffDeactivatedModal,
+  changeServiceState,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -146,23 +149,40 @@ const Services: React.FC<ServicesProps> = ({
     setIsStorageCancellation(false);
   };
 
-  const onToggle = (id: string, currentEnabled: boolean) => {
+  const onToggle = async (id: string, currentEnabled: boolean) => {
     if (id === TOTAL_SIZE) {
       if (currentEnabled) {
         setIsStorageCancellation(true);
         return;
       }
       setIsStorageVisible(true);
+
+      return;
     }
 
     if (id === "backup") {
       if (isBackupVisible) {
         previousDialogRef.current = true;
       }
+    }
 
-      setConfirmActionType("backup");
+    setConfirmActionType(id);
 
-      if (!currentEnabled) setIsConfirmDialogVisible(true);
+    if (!currentEnabled) setIsConfirmDialogVisible(true);
+    else {
+      const raw = {
+        service: id,
+        enabled: false,
+      };
+
+      changeServiceState(id);
+
+      try {
+        await setServiceState(raw);
+      } catch (error) {
+        toastr.error(t("Common:UnexpectedError"));
+        changeServiceState(id);
+      }
     }
   };
 
@@ -179,16 +199,27 @@ const Services: React.FC<ServicesProps> = ({
 
     previousDialogRef.current = false;
 
-    if (confirmActionType === "backup") {
-      if (isDialogVisible) setIsBackupVisible(true);
-      setIsConfirmDialogVisible(false);
-
-      // return;
-    }
+    if (isDialogVisible) setIsBackupVisible(true);
+    setIsConfirmDialogVisible(false);
   };
 
-  const onConfirm = () => {
+  const onConfirm = async () => {
+    if (!confirmActionType) return;
+
+    const raw = {
+      service: confirmActionType,
+      enabled: true,
+    };
+
     setIsConfirmDialogVisible(false);
+    changeServiceState(confirmActionType);
+
+    try {
+      await setServiceState(raw);
+    } catch (error) {
+      toastr.error(t("Common:UnexpectedError"));
+      changeServiceState(confirmActionType);
+    }
   };
 
   return shouldShowLoader ? (
@@ -234,8 +265,8 @@ const Services: React.FC<ServicesProps> = ({
           visible={isConfirmDialogVisible}
           onClose={onCloseConfirmDialog}
           onConfirm={onConfirm}
-          title={confirmationDialogContent[confirmActionType].title}
-          bodyText={confirmationDialogContent[confirmActionType].body}
+          title={confirmationDialogContent[confirmActionType]?.title}
+          bodyText={confirmationDialogContent[confirmActionType]?.body}
         />
       ) : null}
     </>
@@ -247,7 +278,8 @@ export const Component = inject(
     const { servicesInit, isInitServicesPage, isVisibleWalletSettings } =
       servicesStore;
     const { isGracePeriod, previousStoragePlanSize } = currentTariffStatusStore;
-    const { isShowStorageTariffDeactivatedModal } = paymentStore;
+    const { isShowStorageTariffDeactivatedModal, changeServiceState } =
+      paymentStore;
     return {
       servicesInit,
       isInitServicesPage,
@@ -255,6 +287,7 @@ export const Component = inject(
       isShowStorageTariffDeactivatedModal,
       isGracePeriod,
       previousStoragePlanSize,
+      changeServiceState,
     };
   },
 )(observer(Services));

@@ -303,6 +303,18 @@ export async function getServicesQuotas() {
   return res;
 }
 
+export async function setServiceState(data: {
+  service: string;
+  enabled: boolean;
+}) {
+  const res = (await request({
+    method: "post",
+    url: "/portal/payment/servicestate",
+    data,
+  })) as TPaymentQuota;
+
+  return res;
+}
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });

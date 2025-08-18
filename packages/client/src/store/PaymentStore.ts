@@ -556,6 +556,17 @@ class PaymentStore {
     return res;
   };
 
+  changeServiceState = async (service: string) => {
+    const feature = this.servicesQuotasFeatures.get(service);
+
+    if (!feature) return;
+
+    this.servicesQuotasFeatures.set(service, {
+      ...feature,
+      value: !feature.value,
+    });
+  };
+
   isShowStorageTariffDeactivated = () => {
     const { previousStoragePlanSize } = this.currentTariffStatusStore!;
 

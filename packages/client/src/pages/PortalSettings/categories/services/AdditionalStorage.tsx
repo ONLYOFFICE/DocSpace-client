@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { TOTAL_SIZE } from "@docspace/shared/constants";
 import {
   calculateTotalPrice,
   getConvertedSize,
@@ -44,7 +44,6 @@ import styles from "./styles/AdditionalStorage.module.scss";
 import { useServicesActions } from "./hooks/useServicesActions";
 import PayerInformation from "../payments/PayerInformation";
 import ServiceCard from "./sub-components/ServiceCard";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
 
 interface ServiceQuotaFeature {
   title: string;
@@ -53,6 +52,7 @@ interface ServiceQuotaFeature {
   id: string;
   enabled?: boolean;
   cancellation?: boolean;
+  value: boolean;
 }
 
 type AdditionalStorageProps = {
@@ -89,7 +89,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   nextStoragePlanSize,
   storageExpiryDate,
   isCardLinkedToPortal,
-  hasStorageSubscription,
+  hasStorageSubscription = false,
   isGracePeriod,
   hasScheduledStorageChange,
   isTablet,
@@ -147,6 +147,22 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
     );
   };
 
+  const priceDescription = (id: string, priceValue?: number) => {
+    switch (id) {
+      case TOTAL_SIZE:
+        return t("PerStorage", {
+          currency: formatWalletCurrency!(storagePriceIncrement!, 2),
+          amount: getConvertedSize(t, storageSizeIncrement || 0),
+        });
+      case "backup":
+        return t("PerBackup", {
+          currency: formatWalletCurrency!(priceValue!, 2),
+        });
+      default:
+        return "";
+    }
+  };
+
   return (
     <div>
       <Text className={styles.storageDescription}>
@@ -188,10 +204,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
-                priceDescription={t("PerStorage", {
-                  currency: formatWalletCurrency!(storagePriceIncrement!, 2),
-                  amount: getConvertedSize(t, storageSizeIncrement || 0),
-                })}
+                priceDescription={priceDescription(item.id)}
                 priceTitle={item.priceTitle}
                 id={item.id}
                 image={item.image}
@@ -250,12 +263,11 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
               priceTitle={item.priceTitle}
               id={item.id}
               image={item.image}
-              enabled={false}
-              toggleChecked={hasStorageSubscription}
+              isEnabled={item.value}
               serviceTitle={item.title}
               onClick={handleClick}
               onToggle={handleToggle}
-              priceDescription="price_description"
+              priceDescription={priceDescription(item.id, item.price.value)}
             />
           );
         })}

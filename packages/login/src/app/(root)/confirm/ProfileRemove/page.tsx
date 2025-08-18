@@ -25,19 +25,36 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { logger } from "logger.mjs";
-import { getSettings } from "@/utils/actions";
+import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
 import ProfileRemoveForm from "./page.client";
+import { TConfirmLinkParams } from "@/types";
+import { getStringFromSearchParams } from "@/utils";
 
-async function Page() {
+type ProfileRemoveProps = {
+  searchParams: Promise<{ [key: string]: string }>;
+};
+
+async function Page(props: ProfileRemoveProps) {
   logger.info("ProfileRemove page");
 
-  const settings = await getSettings();
+  const { searchParams: sp } = props;
+  const searchParams = (await sp) as TConfirmLinkParams;
+  const uid = searchParams.uid;
+  const confirmKey = getStringFromSearchParams(searchParams);
+
+  const [settings, user] = await Promise.all([
+    getSettings(),
+    getUserFromConfirm(uid ?? "", confirmKey),
+  ]);
 
   return settings && typeof settings !== "string" ? (
     <ProfileRemoveForm
       greetingSettings={settings.greetingSettings}
       legalTerms={settings.externalResources?.common?.entries?.legalterms}
+      avatar={user?.avatarSmall}
+      displayName={user?.displayName}
+      email={user?.email}
     />
   ) : null;
 }

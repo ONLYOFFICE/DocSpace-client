@@ -40,15 +40,28 @@ import { deleteSelf } from "@docspace/shared/api/people";
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { GreetingContainer } from "@/components/GreetingContainer";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 
 type ProfileRemoveFormProps = {
   legalTerms: string;
   greetingSettings: string;
+
+  avatar?: string;
+  displayName?: string;
+  email?: string;
 };
 
 const ProfileRemoveForm = ({
   legalTerms,
   greetingSettings,
+
+  avatar,
+  displayName,
+  email,
 }: ProfileRemoveFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
@@ -130,6 +143,29 @@ const ProfileRemoveForm = ({
           >
             {t("DeleteProfileConfirmation")}
           </Text>
+
+          <div className="user-info-wrapper">
+            <Avatar
+              role={AvatarRole.user}
+              source={avatar ?? ""}
+              size={AvatarSize.min}
+              isDefaultSource
+            />
+            <div>
+              <Text fontSize="14px" fontWeight="600" lineHeight="16px">
+                {displayName}
+              </Text>
+              <Text
+                fontSize="12px"
+                fontWeight="400"
+                lineHeight="16px"
+                className="user-email"
+              >
+                {email}
+              </Text>
+            </div>
+          </div>
+
           <Text>
             <Trans i18nKey="DeleteProfileConfirmationInfo" ns="Confirm" t={t}>
               By clicking &quot;Disable my account&quot; you agree with our

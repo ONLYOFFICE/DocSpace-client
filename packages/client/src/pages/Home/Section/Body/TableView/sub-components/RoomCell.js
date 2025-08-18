@@ -33,11 +33,14 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import { globalColors } from "@docspace/shared/themes";
 import { StyledText } from "./CellStyles";
 
-const RoomCell = ({ sideColor, item, isRecentFolder }) => {
-  const { originRoomTitle, originId, originTitle, location } = item;
+const RoomCell = ({ sideColor, item }) => {
+  const { originRoomTitle, originId, originTitle } = item;
 
   const [path, setPath] = useState([]);
   const [isTooltipLoading, setIsTooltipLoading] = useState(false);
+
+  const title = originRoomTitle || originTitle;
+  const showTooltip = !!title;
 
   const getPath = async () => {
     if (path.length) return;
@@ -49,18 +52,11 @@ const RoomCell = ({ sideColor, item, isRecentFolder }) => {
       setPath(folderPath);
     } catch (e) {
       console.error(e);
-      setPath([{ id: 0, title: originRoomTitle || originTitle }]);
+      setPath([{ id: 0, title }]);
     } finally {
       setIsTooltipLoading(false);
     }
   };
-
-  const canVisibleTitle = originRoomTitle || originTitle;
-  const emptyTitle = isRecentFolder ? "—" : "";
-  const showTooltip = isRecentFolder ? canVisibleTitle : true;
-  const title = isRecentFolder
-    ? location?.title
-    : originRoomTitle || originTitle;
 
   return [
     <StyledText
@@ -73,7 +69,7 @@ const RoomCell = ({ sideColor, item, isRecentFolder }) => {
       data-tooltip-id={`${item.id}`}
       data-tip=""
     >
-      {title || emptyTitle}
+      {title || "—"}
     </StyledText>,
 
     showTooltip ? (

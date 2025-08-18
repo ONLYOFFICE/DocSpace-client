@@ -127,7 +127,6 @@ const RecentRowDataComponent = (props) => {
           <RoomCell
             item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
-            isRecentFolder
           />
         </TableCell>
       ) : (

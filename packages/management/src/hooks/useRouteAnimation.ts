@@ -48,7 +48,10 @@ export const useRouteAnimation = (options: Options = {}) => {
       const done = () =>
         requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
 
-      if (pathnameRef.current === expectedPath) return done();
+      if (pathnameRef.current === expectedPath) {
+        done();
+        return;
+      }
 
       const intervalId = setInterval(() => {
         if (pathnameRef.current === expectedPath) {
@@ -69,7 +72,9 @@ export const useRouteAnimation = (options: Options = {}) => {
       const target = targetPath.startsWith("/") ? targetPath : `/${targetPath}`;
 
       window.dispatchEvent(new CustomEvent(AnimationEvents.ANIMATION_STARTED));
-      await new Promise((r) => requestAnimationFrame(r));
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => resolve());
+      });
 
       setPendingPath(target);
 

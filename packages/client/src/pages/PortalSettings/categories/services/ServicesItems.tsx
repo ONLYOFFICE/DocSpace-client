@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
+import { BACKUP_SERVICE, TOTAL_SIZE } from "@docspace/shared/constants";
 import {
   calculateTotalPrice,
   getConvertedSize,
@@ -60,7 +60,7 @@ interface ServiceQuotaFeature {
   };
 }
 
-type AdditionalStorageProps = {
+type ServicesItemsProps = {
   onToggle?: (id: string, enabled: boolean) => void;
   servicesQuotasFeatures?: Map<string, ServiceQuotaFeature>;
   storageSizeIncrement?: number;
@@ -81,7 +81,7 @@ type AdditionalStorageProps = {
   formatWalletCurrency?: (amount: number, fractionDigits?: number) => string;
 };
 
-const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
+const ServicesItems: React.FC<ServicesItemsProps> = ({
   servicesQuotasFeatures,
   storageSizeIncrement,
   onClick,
@@ -159,7 +159,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
           currency: formatWalletCurrency!(storagePriceIncrement!, 2),
           amount: getConvertedSize(t, storageSizeIncrement || 0),
         });
-      case "backup":
+      case BACKUP_SERVICE:
         return t("PerBackup", {
           currency: formatWalletCurrency!(priceValue!, 2),
         });
@@ -334,4 +334,4 @@ export default inject(
       formatWalletCurrency,
     };
   },
-)(observer(AdditionalStorage));
+)(observer(ServicesItems));

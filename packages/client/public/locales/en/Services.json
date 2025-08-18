@@ -8,5 +8,5 @@
   "TemporaryDescription": "Create a backup stored in the \"Backup\" section. Available for download within 24 hours after creation.",
   "ThirdPartyResourceDescription": "Connect and save backups to cloud accounts like Dropbox, Box, OneDrive, or Google Drive.",
   "ThirdPartyStorageDescription": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
-  "TurnOnBackup": "Enable backups for your {{productName}}. Costs will be billed automatically."
+  "BackupServiceEnabled": "Backup service successfully enabled."
 }

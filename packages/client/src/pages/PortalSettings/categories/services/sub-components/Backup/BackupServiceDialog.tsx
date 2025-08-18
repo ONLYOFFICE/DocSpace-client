@@ -35,6 +35,8 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { BACKUP_SERVICE } from "@docspace/shared/constants";
+
 import ClockIcon from "PUBLIC_DIR/images/icons/32/clock.svg";
 import ServiceIcon from "PUBLIC_DIR/images/icons/32/service.icon.svg";
 import MoveIcon from "PUBLIC_DIR/images/icons/32/move.icon.svg";
@@ -48,6 +50,7 @@ interface BackupServiceDialogProps {
   onClose: () => void;
   onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
+  description?: string;
 }
 
 interface ServiceOption {
@@ -62,11 +65,12 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   onClose,
   onToggle,
   isEnabled = false,
+  description,
 }) => {
   const { t } = useTranslation(["Services", "Common"]);
 
   const handleToggleChange = () => {
-    onToggle("backup", isEnabled);
+    onToggle(BACKUP_SERVICE, isEnabled);
     onClose();
   };
 
@@ -123,9 +127,7 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
               {t("Common:Backup")}
             </Text>
             <Text fontSize="12px" className={styles.backupDescription}>
-              {t("TurnOnBackup", {
-                productName: t("Common:ProductName"),
-              })}
+              {description}
             </Text>
           </div>
         </div>
@@ -159,6 +161,6 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
 
 export default inject(({ paymentStore }: TStore) => {
   const { servicesQuotasFeatures } = paymentStore;
-  const feature = servicesQuotasFeatures.get("backup");
-  return { isEnabled: feature?.value };
+  const feature = servicesQuotasFeatures.get(BACKUP_SERVICE);
+  return { isEnabled: feature?.value, description: feature?.priceTitle };
 })(observer(BackupServiceDialog));

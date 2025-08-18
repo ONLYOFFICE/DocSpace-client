@@ -30,13 +30,13 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { TOTAL_SIZE } from "@docspace/shared/constants";
+import { BACKUP_SERVICE, TOTAL_SIZE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
 import { setServiceState } from "@docspace/shared/api/portal";
 
 import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 
-import AdditionalStorage from "./AdditionalStorage";
+import ServicesItems from "./ServicesItems";
 import StoragePlanUpgrade from "./StoragePlanUpgrade";
 import ServicesLoader from "./ServicesLoader";
 
@@ -44,6 +44,7 @@ import StoragePlanCancel from "./StoragePlanCancel";
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";
+import ServicesDialogs from "./ServicesDialogs";
 
 type ServicesProps = {
   servicesInit: (t: TTranslation) => void;
@@ -147,7 +148,7 @@ const Services: React.FC<ServicesProps> = ({
 
     if (id === TOTAL_SIZE) setIsStorageVisible(true);
 
-    if (id === "backup") setIsBackupVisible(true);
+    if (id === BACKUP_SERVICE) setIsBackupVisible(true);
   };
 
   const onClose = () => {
@@ -169,7 +170,7 @@ const Services: React.FC<ServicesProps> = ({
       return;
     }
 
-    if (id === "backup") {
+    if (id === BACKUP_SERVICE) {
       if (isBackupVisible) {
         previousDialogRef.current = true;
       }
@@ -225,6 +226,7 @@ const Services: React.FC<ServicesProps> = ({
 
     try {
       await setServiceState(raw);
+      toastr.success(t("Services:BackupServiceEnabled"));
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       changeServiceState(confirmActionType);
@@ -237,7 +239,7 @@ const Services: React.FC<ServicesProps> = ({
     ) : null
   ) : (
     <>
-      <AdditionalStorage onClick={onClick} onToggle={onToggle} />
+      <ServicesItems onClick={onClick} onToggle={onToggle} />
       {isShowStorageTariffDeactivatedModal ? (
         <StorageTariffDeactiveted
           visible={isShowStorageTariffDeactivatedModal}

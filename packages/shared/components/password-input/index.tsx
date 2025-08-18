@@ -364,11 +364,9 @@ const PasswordInput = ({
     const { type, value } = state;
     const iconNode =
       type === "password" ? (
-        <EyeOffReactSvg
-          data-testid={testId ? `${testId}_eye_icon` : undefined}
-        />
+        <EyeOffReactSvg data-testid="password_input_eye_off_icon" />
       ) : (
-        <EyeReactSvg data-testid={testId ? `${testId}_eye_icon` : undefined} />
+        <EyeReactSvg data-testid="password_input_eye_icon" />
       );
     const iconButtonClassName = `password_eye--${
       type === "password" ? "close" : "open"
@@ -407,7 +405,6 @@ const PasswordInput = ({
           autoComplete={autoComplete}
           forwardedRef={forwardedRef}
           isAutoFocussed={isAutoFocussed}
-          testId={testId}
         />
 
         {!isDisableTooltip && !isDisabled ? (
@@ -438,7 +435,7 @@ const PasswordInput = ({
         className,
       )}
       style={style}
-      data-testid="password-input"
+      data-testid={testId ?? "password-input"}
       data-scale={scale}
       data-warning={hasWarning}
       data-error={hasError}

@@ -51,4 +51,5 @@ export type ComboboxProps = {
   isDefaultMode?: boolean;
   /** Manual width for dropdown */
   manualWidth?: string;
+  dataTestId?: string;
 };

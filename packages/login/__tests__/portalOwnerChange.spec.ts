@@ -65,11 +65,10 @@ test("portal owner change save", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.changeOwner]);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Save" }).click();
+  const changeOwnerButton = page.getByTestId("save_change_owner_button");
+  await changeOwnerButton.click();
 
-  await page
-    .getByRole("button", { name: "Save" })
-    .waitFor({ state: "detached" });
+  await changeOwnerButton.waitFor({ state: "detached" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -81,7 +80,7 @@ test("portal owner change save", async ({ page, mockRequest }) => {
 test("portal owner change cancel", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByTestId("cancel_button").click();
 
   await page.waitForURL("/", { waitUntil: "load" });
 

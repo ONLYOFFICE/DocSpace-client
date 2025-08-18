@@ -38,4 +38,5 @@ export type BetaBadgeProps = {
   withOutFeedbackLink?: boolean;
 
   withoutTooltip?: boolean;
+  dataTestId?: string;
 };

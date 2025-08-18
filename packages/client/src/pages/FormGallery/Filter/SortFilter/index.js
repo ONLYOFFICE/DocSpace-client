@@ -97,6 +97,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           options={[]}
           selectedOption={{}}
           manualWidth="auto"
+          dataTestId="form_gallery_sort_filter"
           advancedOptions={sortData?.map((item) => (
             <Styled.SortDropdownItem
               id={item.id}

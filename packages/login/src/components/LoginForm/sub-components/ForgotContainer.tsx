@@ -86,8 +86,10 @@ const ForgotContainer = ({
                     <Text fontSize="12px">{t("RememberHelper")}</Text>
                   }
                   tooltipMaxWidth={isMobileOnly ? "240px" : "340px"}
+                  dataTestId="remember_help_button"
                 />
               }
+              dataTestId="remember_checkbox"
             />
           ) : null}
         </div>
@@ -99,6 +101,7 @@ const ForgotContainer = ({
           isHovered={false}
           onClick={onClick}
           id="login_forgot-password-link"
+          dataTestId="forgot_password_link"
         >
           {t("ForgotPassword")}
         </Link>

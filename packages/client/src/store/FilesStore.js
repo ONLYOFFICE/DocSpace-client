@@ -456,14 +456,15 @@ class FilesStore {
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
   }
 
-  onResolveNewFile = (fileInfo) => {
+  // targetFolderId needed for Recent folder. fileInfo.folderId === original folderId
+  onResolveNewFile = ({ fileInfo, targetFolderId }) => {
     if (!fileInfo) return;
 
     // console.log("onResolveNewFiles", { fileInfo });
 
     if (this.files.findIndex((x) => x.id === fileInfo.id) > -1) return;
 
-    if (this.selectedFolderStore.id !== fileInfo.folderId) return;
+    if (this.selectedFolderStore.id !== targetFolderId) return;
 
     console.log("[WS] create new file", { fileInfo });
 
@@ -534,7 +535,10 @@ class FilesStore {
             return null;
           }
 
-          return api.files.getFileInfo(file.id);
+          return api.files.getFileInfo(file.id).then((fileInfo) => ({
+            fileInfo,
+            targetFolderId: file.folderId,
+          }));
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {

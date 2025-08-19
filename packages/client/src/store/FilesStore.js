@@ -435,22 +435,23 @@ class FilesStore {
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
       if (foundIndex == -1) return;
+      const foundFile = this.files[foundIndex];
 
-      console.log(`[WS] s:stop-edit-file`, id, this.files[foundIndex].title);
+      console.log(`[WS] s:stop-edit-file`, id, foundFile.title);
 
       this.updateSelectionStatus(
         id,
-        this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
+        foundFile.fileStatus & ~FileStatus.IsEditing,
         false,
       );
 
       this.updateFileStatus(
         foundIndex,
-        this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
+        foundFile.fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id);
-      this.createThumbnail(this.files[foundIndex]);
+      this.getFileInfo(id, foundFile.requestToken);
+      this.createThumbnail(foundFile);
     });
 
     this.createNewFilesQueue.on("resolve", this.onResolveNewFile);
@@ -3906,8 +3907,8 @@ class FilesStore {
     });
   };
 
-  getFileInfo = async (id, skipRedirect) => {
-    const fileInfo = await api.files.getFileInfo(id, undefined, skipRedirect);
+  getFileInfo = async (id, share, skipRedirect) => {
+    const fileInfo = await api.files.getFileInfo(id, share, skipRedirect);
     this.setFile(fileInfo);
 
     return fileInfo;

@@ -39,7 +39,10 @@ import {
   TFolder,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TSelectorItem,
+} from "@docspace/shared/components/selector/Selector.types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -145,6 +148,7 @@ const FilesSelectorWrapper = ({
   folderIsShared,
   checkCreating,
   logoText,
+  isMultiSelect,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -154,6 +158,19 @@ const FilesSelectorWrapper = ({
 
   const [isRequestRunning, setIsRequestRunning] =
     React.useState<boolean>(false);
+
+  const [selectedFiles, setSelectedFiles] = React.useState<TSelectorItem[]>([]);
+
+  const onSelectAction = (file: TSelectorItem) => {
+    if (file.isFolder) return;
+
+    if (selectedFiles.find((f) => f.id === file.id)) {
+      setSelectedFiles(selectedFiles.filter((f) => f.id !== file.id));
+    } else {
+      console.log(file);
+      setSelectedFiles((prev) => [...prev, file]);
+    }
+  };
 
   const onCloseAction = () => {
     setInfoPanelIsMobileHidden(false);
@@ -330,6 +347,13 @@ const FilesSelectorWrapper = ({
       if (onSave && selectedItemId)
         onSave(null, selectedItemId, fileName, isChecked);
       if (onSelectTreeNode) onSelectTreeNode(selectedTreeNode);
+      if (onSelectFile && selectedFiles.length && isMultiSelect) {
+        onSelectFile(selectedFiles);
+
+        if (!embedded) onCloseAndDeselectAction();
+
+        return;
+      }
       if (onSelectFile && selectedFileInfo)
         onSelectFile(selectedFileInfo, breadCrumbs);
       if (!embedded) onCloseAndDeselectAction();
@@ -420,6 +444,7 @@ const FilesSelectorWrapper = ({
       onCancel={onCloseAction}
       onSubmit={onAccept}
       getIsDisabled={getIsDisabledAction}
+      onSelectItem={onSelectAction}
       withHeader={withHeader}
       submitButtonLabel={acceptButtonLabel || defaultAcceptButtonLabel}
       withCancelButton={withCancelButton}
@@ -458,6 +483,7 @@ const FilesSelectorWrapper = ({
       headerProps={headerProps}
       formProps={formProps}
       checkCreating={checkCreating}
+      isMultiSelect={isMultiSelect}
     />
   );
 };

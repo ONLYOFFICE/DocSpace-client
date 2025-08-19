@@ -336,9 +336,10 @@ const Panels = (props) => {
         key="select-file-ai-knowledge-dialog"
         onClose={onCloseFileFormAiKnowledgeDialog}
         openRoot
-        onSelectFile={(file) => copyFileToAiKnowledge(file, t)}
+        onSelectFile={(files) => copyFileToAiKnowledge(files, t)}
         filterParam={extsFilesVectorized.join(",")}
-        descriptionText={""}
+        descriptionText=""
+        isMultiSelect
       />
     ),
 

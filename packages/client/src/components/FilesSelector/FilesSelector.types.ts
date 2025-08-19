@@ -32,6 +32,7 @@ import {
 import {
   TBreadCrumb,
   TSelectorHeader,
+  TSelectorItem,
 } from "@docspace/shared/components/selector/Selector.types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTheme } from "@docspace/shared/themes";
@@ -116,14 +117,16 @@ export type FilesSelectorProps = TSelectorHeader & {
     openNewTab: boolean,
   ) => void;
   onSelectFile?: (
-    fileInfo: {
-      id: string | number;
-      title: string;
-      path?: string[];
-      fileExst?: string;
-      inPublic?: boolean;
-    },
-    breadCrumbs: TBreadCrumb[],
+    fileInfo:
+      | {
+          id: string | number;
+          title: string;
+          path?: string[];
+          fileExst?: string;
+          inPublic?: boolean;
+        }
+      | TSelectorItem[],
+    breadCrumbs?: TBreadCrumb[],
   ) => void;
 
   setInfoPanelIsMobileHidden: (arg: boolean) => void;
@@ -154,4 +157,6 @@ export type FilesSelectorProps = TSelectorHeader & {
   withCreate?: boolean;
   checkCreating?: boolean;
   logoText: string;
+
+  isMultiSelect?: boolean;
 };

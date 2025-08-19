@@ -3182,9 +3182,10 @@ class FilesActionStore {
       .catch((error) => toastr.error(error));
   };
 
-  copyFileToAiKnowledge = async (fileInfo) => {
+  copyFileToAiKnowledge = async (filesInfo) => {
+    console.log(filesInfo);
     const selectedItemId = this.aiRoomStore.knowledgeId;
-    const fileIds = [fileInfo.id];
+    const fileIds = filesInfo.map((f) => f.id);
 
     const operationData = {
       destFolderId: selectedItemId,
@@ -3197,7 +3198,7 @@ class FilesActionStore {
     };
 
     this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
-      fileInfo.title,
+      filesInfo[0].title,
     );
 
     this.uploadDataStore

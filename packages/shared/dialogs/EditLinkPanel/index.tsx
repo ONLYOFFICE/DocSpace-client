@@ -37,7 +37,7 @@ import {
   useDeferredValue,
 } from "react";
 
-import FillFormsReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
+import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { Button, ButtonSize } from "../../components/button";
 import { toastr } from "../../components/toast";

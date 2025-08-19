@@ -32,7 +32,7 @@ import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?u
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import FillFormsReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
+import FillFormsReactSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";

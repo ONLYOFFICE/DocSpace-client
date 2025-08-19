@@ -81,7 +81,10 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
   const canLock = security && "Lock" in security ? security.Lock : undefined;
 
-  const colorShare = shared ? "accent" : theme.filesQuickButtons.color;
+  const showShareIcon = !isNil(item.shareSettings?.PrimaryExternalLink);
+
+  const colorShare =
+    shared || showShareIcon ? "accent" : theme.filesQuickButtons.color;
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
 
@@ -91,12 +94,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const isAvailableDownloadFile =
     isPublicRoom && item.security?.Download && viewAs === "tile";
 
-  const isAvailableShareFile =
-    item.canShare &&
-    !isRoom(item) &&
-    isNil(item.shareSettings?.PrimaryExternalLink) &&
-    !isNil(item.shareSettings?.ExternalLink) &&
-    item.shareSettings.ExternalLink > 0;
+  const isAvailableShareFile = item.canShare && !isRoom(item);
 
   const isPublicRoomType =
     "roomType" in item &&
@@ -203,8 +201,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
             <IconButton
               iconName={LinkReactSvgUrl}
               className={classNames("badge copy-link icons-group", {
-                "create-share-link": !item.shared,
-                "link-shared": item.shared,
+                "create-share-link": !item.shared && !showShareIcon,
+                "link-shared": item.shared || showShareIcon,
               })}
               size={sizeQuickButton}
               onClick={onClickShare}

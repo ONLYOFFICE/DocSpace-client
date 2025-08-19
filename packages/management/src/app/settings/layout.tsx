@@ -53,22 +53,6 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 
   const standalone = settings?.standalone;
 
-  const getCurrentTab = () => {
-    const currentTab = data.find((item) => pathname.includes(item.id));
-    return currentTab && data.length ? currentTab.id : data[0].id;
-  };
-
-  useEffect(() => {
-    setSelectedId((prev) => prev || getCurrentTab());
-  }, []);
-
-  useEffect(() => {
-    setSelectedId(getCurrentTab());
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
-    }
-  }, [pathname]);
-
   const data = [
     {
       id: "branding",
@@ -96,6 +80,22 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
       content: children,
     },
   ];
+
+  const getCurrentTab = () => {
+    const currentTab = data.find((item) => pathname.includes(item.id));
+    return currentTab && data.length ? currentTab.id : data[0].id;
+  };
+
+  useEffect(() => {
+    setSelectedId((prev) => prev || getCurrentTab());
+  }, []);
+
+  useEffect(() => {
+    setSelectedId(getCurrentTab());
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const { socketSubscribers } = SocketHelper;

@@ -159,21 +159,6 @@ export const HighBadge: Story = {
   },
 };
 
-export const CompactBadge: Story = {
-  args: {
-    label: "99+",
-    compact: true,
-    maxWidth: "40px",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Compact badge with limited width, useful for number overflow.",
-      },
-    },
-  },
-};
-
 export const CustomStyledBadge: Story = {
   args: {
     label: "Custom",

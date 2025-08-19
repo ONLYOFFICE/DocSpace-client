@@ -35,7 +35,7 @@ import { StandalonePage } from "@docspace/shared/pages/Payments/Standalone";
 import { toastr } from "@docspace/shared/components/toast";
 import { setLicense, acceptLicense } from "@docspace/shared/api/settings";
 
-import { useRouteAnimation } from "@/hooks/useRouteAnimation";
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 import { getIsLicenseDateExpired, getPaymentDate, getDaysLeft } from "@/lib";
 
 const PaymentsPage = ({
@@ -57,9 +57,8 @@ const PaymentsPage = ({
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
-  const { isNavigating } = useRouteAnimation({
-    autoEndOnPathChange: true,
-  });
+  const isLoading = useEndAnimation();
+
   const [isLicenseDateExpired, setIsLicenseDateExpired] = useState(false);
   const [paymentDate, setPaymentDate] = useState("");
   const [trialDaysLeft, setTrialDaysLeft] = useState(0);
@@ -105,7 +104,7 @@ const PaymentsPage = ({
   }, [dueDate]);
 
   return (
-    <LoaderWrapper isLoading={isNavigating}>
+    <LoaderWrapper isLoading={isLoading}>
       <StandalonePage
         isTrial={isTrial}
         setPaymentsLicense={setPaymentsLicense}

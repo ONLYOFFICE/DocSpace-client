@@ -30,7 +30,7 @@ import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { Bonus } from "@docspace/shared/pages/Payments/Bonus";
 import { IBonusProps } from "@docspace/shared/pages/Payments/Bonus/Bonus.types";
 
-import { useRouteAnimation } from "@/hooks/useRouteAnimation";
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 const BonusPage = ({
   isEnterprise,
@@ -44,12 +44,10 @@ const BonusPage = ({
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
 }: IBonusProps) => {
-  const { isNavigating } = useRouteAnimation({
-    autoEndOnPathChange: true,
-  });
+  const isLoading = useEndAnimation();
 
   return (
-    <LoaderWrapper isLoading={isNavigating}>
+    <LoaderWrapper isLoading={isLoading}>
       <Bonus
         isEnterprise={isEnterprise}
         isTrial={isTrial}

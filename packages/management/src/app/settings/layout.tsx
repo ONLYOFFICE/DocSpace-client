@@ -31,15 +31,16 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
-import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 
 import { pathsWithoutTabs } from "@/lib/constants";
 import useAppState from "@/hooks/useAppState";
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 import { StyledWrapper } from "./layout.styled";
 
@@ -50,34 +51,34 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 
   const { settings } = useAppState();
   const [selectedId, setSelectedId] = useState<string>("");
-
+  const isLoading = useEndAnimation();
   const standalone = settings?.standalone;
 
   const data = [
     {
       id: "branding",
       name: t("Common:Branding"),
-      content: children,
+      content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,
     },
     {
       id: "data-backup",
       name: t("Common:DataBackup"),
-      content: children,
+      content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,
     },
     {
       id: "auto-backup",
       name: t("Common:AutoBackup"),
-      content: children,
+      content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,
     },
     {
       id: "restore",
       name: t("Common:RestoreBackup"),
-      content: children,
+      content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,
     },
     {
       id: "encrypt-data",
       name: t("Common:Storage"),
-      content: children,
+      content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,
     },
   ];
 
@@ -92,9 +93,6 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     setSelectedId(getCurrentTab());
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
-    }
   }, [pathname]);
 
   useEffect(() => {

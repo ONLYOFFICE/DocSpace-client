@@ -54,7 +54,8 @@
 
 import { LoaderWrapper } from "@docspace/shared/components/loader-wrapper";
 import { TDomainValidator } from "@docspace/shared/api/settings/types";
-import { useRouteAnimation } from "@/hooks/useRouteAnimation";
+
+import { useEndAnimation } from "@/hooks/useEndAnimation";
 
 import { Header } from "./header";
 import { Body } from "./body";
@@ -65,12 +66,10 @@ export const ConfigurationSpaces = ({
 }: {
   domainValidator: TDomainValidator;
 }) => {
-  const { isNavigating } = useRouteAnimation({
-    autoEndOnPathChange: true,
-  });
+  const isLoading = useEndAnimation();
 
   return (
-    <LoaderWrapper isLoading={isNavigating}>
+    <LoaderWrapper isLoading={isLoading}>
       <StyledWrapper>
         <Header />
         <Body domainValidator={domainValidator} />

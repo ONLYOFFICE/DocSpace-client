@@ -16,5 +16,7 @@
   "MCP": "MCP tools for this room",
   "MCPDescription": "Use MCP tools connected by the administrator to enhance chat experience with AI. These tools can assist with data extraction, summaries, smart suggestions, etc.",
   "Model": "Provider and model",
-  "ModelDescription": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants."
+  "ModelDescription": "Select the AI provider and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "UploadFilesDevice": "Upload files from your personal device"
 }

@@ -456,7 +456,7 @@ export const getOptions = (
         t("EmptyView:UploadFromPortalTitle", {
           productName: t("Common:ProductName"),
         }),
-        t("EmptyView:SectionsUploadDescription", {
+        t("AIRoom:UploadFilesPortal", {
           sectionNameFirst: t("Common:MyFilesSection"),
           sectionNameSecond: t("Common:Rooms"),
         }),
@@ -466,7 +466,7 @@ export const getOptions = (
 
       const uploadFilesFromDevice = createUploadFromDeviceOption(
         t("EmptyView:UploadDeviceOptionTitle"),
-        t("EmptyView:UploadDeviceOptionDescription"),
+        t("AIRoom:UploadFilesDevice"),
         "file",
       );
 

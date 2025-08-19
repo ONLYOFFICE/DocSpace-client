@@ -28,7 +28,7 @@ import { TRoomParams } from "@docspace/shared/utils/rooms";
 
 import ModelSettings from "./Model";
 import InstructionsSettings from "./Instructions";
-import KnowledgeSettings from "./Knowledge";
+// import KnowledgeSettings from "./Knowledge";
 import MCPSettings from "./MCP";
 
 type AiRoomSettingsProps = {
@@ -44,7 +44,7 @@ const AiRoomSettings = ({ roomParams, setRoomParams }: AiRoomSettingsProps) => {
         roomParams={roomParams}
         setRoomParams={setRoomParams}
       />
-      <KnowledgeSettings />
+      {/* <KnowledgeSettings /> */}
       <MCPSettings setRoomParams={setRoomParams} roomParams={roomParams} />
     </>
   );

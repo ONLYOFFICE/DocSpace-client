@@ -26,6 +26,7 @@
 
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { deviceDetect } from "react-device-detect";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
@@ -41,7 +42,7 @@ import {
   getAdditionalResources,
   getCompanyInfo,
 } from "@/lib/actions";
-import { getIsDefaultWhiteLabel, isMobileUA } from "@/lib";
+import { getIsDefaultWhiteLabel } from "@/lib";
 
 import BrandingPage from "./page.client";
 import { logger } from "../../../../logger.mjs";
@@ -96,7 +97,7 @@ async function Page() {
   const isDefaultWhiteLabel = getIsDefaultWhiteLabel(whiteLabelIsDefault);
 
   const ua = (await headers()).get("user-agent") || "";
-  const isMobile = isMobileUA(ua);
+  const { isMobile } = deviceDetect(ua);
 
   return (
     <BrandingPage

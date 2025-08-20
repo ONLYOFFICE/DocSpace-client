@@ -136,9 +136,3 @@ export const getDataBackupUrl = (settings?: TSettings): string => {
 
   return domain ?? "";
 };
-
-export const isMobileUA = (ua: string) => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    ua,
-  );
-};

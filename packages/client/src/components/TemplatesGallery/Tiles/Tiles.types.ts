@@ -52,6 +52,7 @@ export interface TilesProps {
   setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
   submitToGalleryTileIsVisible: boolean;
   canSubmitToFormGallery: () => boolean;
+  viewMobile: boolean;
 }
 
 export interface TileProps {

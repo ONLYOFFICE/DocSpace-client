@@ -33,7 +33,8 @@ import type { FC } from "react";
 import type { TilesProps } from "./Tiles.types";
 import FileTile from "./FileTile";
 
-import TileContainer from "./TileContainer";
+import { StyledTileContainer } from "./StyledTileView";
+import InfiniteGrid from "./InfiniteGrid";
 import SubmitToGalleryTile from "./SubmitToGalleryTile";
 
 const Tiles: FC<TilesProps> = ({
@@ -53,6 +54,7 @@ const Tiles: FC<TilesProps> = ({
   isShowOneTile,
   smallPreview,
   setIsVisible,
+  viewMobile,
 }) => {
   const onMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
@@ -86,26 +88,32 @@ const Tiles: FC<TilesProps> = ({
     setGallerySelected(item);
   };
 
+  const submitToGalleryTileNode =
+    submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
+      <SubmitToGalleryTile
+        viewMobile={viewMobile}
+        smallPreview={smallPreview}
+        isSubmitTile
+      />
+    ) : null;
+
   return (
-    <TileContainer
-      className="tile-container"
-      isShowOneTile={isShowOneTile}
-      smallPreview={smallPreview}
-    >
-      {submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
-        <SubmitToGalleryTile smallPreview={smallPreview} isSubmitTile />
-      ) : null}
-      {oformFiles.map((item: { id: Key | null | undefined }) => {
-        return (
-          <FileTile
-            key={item.id}
-            item={item}
-            smallPreview={smallPreview}
-            onClickInfo={() => onClickInfo(item)}
-          />
-        );
-      })}
-    </TileContainer>
+    <StyledTileContainer className="tile-container">
+      {viewMobile ? submitToGalleryTileNode : null}
+      <InfiniteGrid isShowOneTile={isShowOneTile} smallPreview={smallPreview}>
+        {viewMobile ? null : submitToGalleryTileNode}
+        {oformFiles.map((item: { id: Key | null | undefined }) => {
+          return (
+            <FileTile
+              key={item.id}
+              item={item}
+              smallPreview={smallPreview}
+              onClickInfo={() => onClickInfo(item)}
+            />
+          );
+        })}
+      </InfiniteGrid>
+    </StyledTileContainer>
   );
 };
 

@@ -38,11 +38,13 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
 export const StyledSubmitToGalleryTile = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
-  height: calc(100% - 51px);
+  height: ${(props) => (props.viewMobile ? `100%` : `calc(100% - 51px)`)};
 
   .content {
-    height: 100%;
-    margin: 10px;
+    height: ${(props) => (props.viewMobile ? `110px` : `100%`)};
+
+    margin: ${(props) =>
+      props.viewMobile ? `0 10px 26px 10px` : `12px 10px 10px 10px`};
 
     position: relative;
 
@@ -157,6 +159,7 @@ const SubmitToGalleryTile = ({
   smallPreview,
   isSubmitTile,
   submitToGalleryTileIsVisible,
+  viewMobile,
 }) => {
   if (!submitToGalleryTileIsVisible) return null;
 
@@ -168,6 +171,7 @@ const SubmitToGalleryTile = ({
       smallPreview={smallPreview}
       data-small-preview={smallPreview ? "true" : "false"}
       data-submit-tile={isSubmitTile ? "true" : "false"}
+      viewMobile={viewMobile}
     >
       <div className="content">
         <StyledCloseIcon

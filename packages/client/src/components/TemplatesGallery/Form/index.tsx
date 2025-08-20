@@ -132,6 +132,7 @@ const Form: FC<FormProps> = ({
           <Tiles
             isShowOneTile={isShowOneTile}
             smallPreview={tabPresentation || tabSpreadsheet}
+            viewMobile={viewMobile}
           />
         </Scrollbar>
       ) : (

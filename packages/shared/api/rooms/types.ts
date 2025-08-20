@@ -190,6 +190,7 @@ export type TValidateShareRoom = {
   entityId?: string;
   entityTitle?: string;
   entityType?: LinkSharingEntityType;
+  isRoomMember?: boolean;
 };
 
 export type RoomMember = {

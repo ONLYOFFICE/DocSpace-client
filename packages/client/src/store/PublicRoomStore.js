@@ -278,7 +278,7 @@ class PublicRoomStore {
           !needPassword &&
           (res?.shared || res?.isAuthenticated) &&
           !currentUrl.includes("/rooms/shared") &&
-          res.isRoom
+          (res.isRoom || res.isRoomMember)
         ) {
           return this.gotoFolder(res, key);
         }

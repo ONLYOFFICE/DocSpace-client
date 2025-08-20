@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 import {
@@ -39,7 +41,7 @@ import {
   getAdditionalResources,
   getCompanyInfo,
 } from "@/lib/actions";
-import { getIsDefaultWhiteLabel } from "@/lib";
+import { getIsDefaultWhiteLabel, isMobileUA } from "@/lib";
 
 import BrandingPage from "./page.client";
 import { logger } from "../../../../logger.mjs";
@@ -93,6 +95,9 @@ async function Page() {
 
   const isDefaultWhiteLabel = getIsDefaultWhiteLabel(whiteLabelIsDefault);
 
+  const ua = (await headers()).get("user-agent") || "";
+  const isMobile = isMobileUA(ua);
+
   return (
     <BrandingPage
       whiteLabelLogos={whiteLabelLogos}
@@ -108,6 +113,7 @@ async function Page() {
       licenseAgreementsUrl={licenseAgreementsUrl!}
       isEnterprise={enterprise}
       logoText={logoText}
+      isMobile={isMobile}
     />
   );
 }

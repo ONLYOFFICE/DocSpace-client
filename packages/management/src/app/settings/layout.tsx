@@ -50,7 +50,6 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   const { settings } = useAppState();
-  const [selectedId, setSelectedId] = useState<string>("");
   const isLoading = useEndAnimation();
   const standalone = settings?.standalone;
 
@@ -87,9 +86,7 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
-  useEffect(() => {
-    setSelectedId((prev) => prev || getCurrentTab());
-  }, []);
+  const [selectedId, setSelectedId] = useState<string>(getCurrentTab());
 
   useEffect(() => {
     setSelectedId(getCurrentTab());

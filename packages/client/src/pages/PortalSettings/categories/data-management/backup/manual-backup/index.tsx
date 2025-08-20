@@ -36,7 +36,6 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
-import { isObjectEmpty } from "@docspace/shared/utils/isObjectEmpty";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import { getBackupsCount, getServiceState } from "@docspace/shared/api/backup";
 

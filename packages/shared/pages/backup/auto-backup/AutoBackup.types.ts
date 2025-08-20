@@ -35,7 +35,6 @@ import type {
   TWeekdaysLabel,
 } from "../../../types";
 import type { TOption } from "../../../components/combobox";
-import type { FolderType } from "../../../enums";
 import type { ButtonSize } from "../../../components/button";
 import type { TColorScheme } from "../../../themes";
 import type { FilesSelectorSettings } from "../../../components/files-selector-input";

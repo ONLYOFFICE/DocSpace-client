@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TThirdParties } from "../../../api/files/types";
-import type { DeviceType, FolderType } from "../../../enums";
+import type { DeviceType } from "../../../enums";
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,

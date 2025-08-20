@@ -26,7 +26,6 @@
 
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { FolderType } from "../../../enums";
 
 import { createGetRoomsHandler } from "../../../__mocks__/storybook/handlers/files/rooms";
 import {
@@ -122,7 +121,6 @@ const meta: Meta<typeof ManualBackup> = {
     setConnectDialogVisible: { table: { disable: true } },
     setDeleteThirdPartyDialogVisible: { table: { disable: true } },
     isNotPaidPeriod: { table: { disable: true } },
-    rootFoldersTitles: { table: { disable: true } },
     removeItem: { table: { disable: true } },
     providers: { table: { disable: true } },
     deleteThirdParty: { table: { disable: true } },
@@ -196,11 +194,6 @@ export const Default: Story = {
     deleteThirdPartyDialogVisible: false,
     setConnectDialogVisible: () => {},
     setDeleteThirdPartyDialogVisible: () => {},
-    rootFoldersTitles: {
-      [FolderType.USER]: { title: "My Documents" },
-      [FolderType.SHARE]: { title: "Shared with me" },
-      [FolderType.COMMON]: { title: "Common Documents" },
-    },
     removeItem: mockThirdPartyAccounts[0],
     providers: mockThirdPartyProviders,
     deleteThirdParty: async () => {},

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TTranslation } from "@docspace/shared/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
 import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-backup/ManualBackup.types";
 
 export interface InjectedManualBackupProps

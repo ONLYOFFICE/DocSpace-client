@@ -65,7 +65,6 @@ import {
   THIRD_PARTY_STORAGE,
 } from "./ManualBackup.constants";
 import styles from "./ManualBackup.module.scss";
-import { isDisabled } from "@testing-library/user-event/dist/types/utils";
 
 const ManualBackup = ({
   isInitialLoading,

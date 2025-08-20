@@ -64,6 +64,7 @@ const ManualBackupWrapper = ({
   setIsInited,
   fetchPayerInfo,
   setBackupServiceOn,
+  setDownloadingProgress,
   ...props
 }: ManualBackupWrapperProps) => {
   const [isInitialLoading, setIsInitialLoading] = useState(false);
@@ -77,6 +78,8 @@ const ManualBackupWrapper = ({
   useLayoutEffect(() => {
     setDocumentTitle(t("Common:DataBackup"));
   }, [setDocumentTitle, t]);
+
+  const isNotFreeOrNonProfit = !standalone && !isFreeTariff && !isNonProfit;
 
   useEffect(() => {
     if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);
@@ -101,7 +104,7 @@ const ManualBackupWrapper = ({
           optionalRequests.push(fetchTreeFolders());
         }
 
-        if (!standalone && !isFreeTariff && !isNonProfit) {
+        if (isNotFreeOrNonProfit) {
           baseRequests.push(getBackupsCount());
           baseRequests.push(getServiceState());
           optionalRequests.push(fetchPayerInfo());
@@ -152,6 +155,15 @@ const ManualBackupWrapper = ({
     };
   }, []);
 
+  const updateDownloadingProgress = async (progress: number) => {
+    if (progress === 100 && isNotFreeOrNonProfit) {
+      const backupsCount = await getBackupsCount();
+      setBackupsCount(backupsCount);
+    }
+
+    setDownloadingProgress(progress);
+  };
+
   return (
     <ManualBackup
       isNotPaidPeriod={isNotPaidPeriod}
@@ -159,6 +171,7 @@ const ManualBackupWrapper = ({
       rootFoldersTitles={rootFoldersTitles}
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+      setDownloadingProgress={updateDownloadingProgress}
       {...props}
     />
   );

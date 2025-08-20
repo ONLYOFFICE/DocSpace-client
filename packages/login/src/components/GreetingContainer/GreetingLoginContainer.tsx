@@ -100,7 +100,14 @@ export const GreetingLoginContainer = ({
         </Text>
 
         <Text fontSize="13px" fontWeight={400} className="confirm-email-change">
-          {t("Login:ConfirmEmailChangeText")}
+          <Trans
+            t={t}
+            i18nKey="ConfirmEmailChangeText"
+            ns="Login"
+            values={{
+              productName: t("Common:ProductName"),
+            }}
+          />
         </Text>
       </div>
     );

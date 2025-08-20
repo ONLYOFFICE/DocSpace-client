@@ -64,7 +64,10 @@ import {
   TNumericPaymentFeature,
 } from "@docspace/shared/api/portal/types";
 import { formatCurrencyValue } from "@docspace/shared/utils/common";
-import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
+import {
+  BACKUP_SERVICE,
+  STORAGE_TARIFF_DEACTIVATED,
+} from "@docspace/shared/constants";
 
 // Constants for feature identifiers
 export const TOTAL_SIZE = "total_size";
@@ -401,6 +404,16 @@ class PaymentStore {
     return (
       (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TServiceFeatureWithPrice)
         ?.price?.value || 0
+    );
+  }
+
+  get backupPriceIncrement() {
+    return (
+      (
+        this.servicesQuotasFeatures.get(
+          BACKUP_SERVICE,
+        ) as TServiceFeatureWithPrice
+      )?.price?.value || 0
     );
   }
 

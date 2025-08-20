@@ -51,6 +51,11 @@ interface BackupServiceDialogProps {
   onToggle: (id: string, enabled: boolean) => void;
   isEnabled?: boolean;
   description?: string;
+  backupPriceIncrement?: number;
+  formatWalletCurrency?: (
+    item: number | null,
+    fractionDigits: number,
+  ) => string;
 }
 
 interface ServiceOption {
@@ -66,8 +71,10 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
   onToggle,
   isEnabled = false,
   description,
+  backupPriceIncrement,
+  formatWalletCurrency,
 }) => {
-  const { t } = useTranslation(["Services", "Common"]);
+  const { t } = useTranslation(["Services", "Common", "Payments"]);
 
   const handleToggleChange = () => {
     onToggle(BACKUP_SERVICE, isEnabled);
@@ -123,9 +130,16 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
             <ToggleButton isChecked={isEnabled} onChange={handleToggleChange} />
           </div>
           <div className={styles.textContent}>
-            <Text fontSize="12px" fontWeight={600}>
-              {t("Common:Backup")}
-            </Text>
+            <div>
+              <Text fontSize="12px" fontWeight={600} as="span">
+                {t("Common:Backup")}
+              </Text>{" "}
+              <Text as="span" fontSize="12px">
+                {t("Payments:PerBackupWithBracket", {
+                  currency: formatWalletCurrency!(backupPriceIncrement!, 2),
+                })}
+              </Text>
+            </div>
             <Text fontSize="12px" className={styles.backupDescription}>
               {description}
             </Text>
@@ -160,7 +174,14 @@ const BackupServiceDialog: React.FC<BackupServiceDialogProps> = ({
 };
 
 export default inject(({ paymentStore }: TStore) => {
-  const { servicesQuotasFeatures } = paymentStore;
+  const { servicesQuotasFeatures, backupPriceIncrement, formatWalletCurrency } =
+    paymentStore;
+
   const feature = servicesQuotasFeatures.get(BACKUP_SERVICE);
-  return { isEnabled: feature?.value, description: feature?.priceTitle };
+  return {
+    isEnabled: feature?.value,
+    description: feature?.priceTitle,
+    backupPriceIncrement,
+    formatWalletCurrency,
+  };
 })(observer(BackupServiceDialog));

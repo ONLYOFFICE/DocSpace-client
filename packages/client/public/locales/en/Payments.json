@@ -87,6 +87,7 @@
   "PaymentMethod": "Payment method",
   "PerStorage": "{{currency}} per {{amount}}/month",
   "PerBackup": "{{currency}} per 1 backup",
+  "PerBackupWithBracket": "({{currency}} per 1 backup)",
   "PerStorageWitnMinValue": "{{currency}} per {{amount}}/month <1>(min {{minValue}}{{storageUnit}})</1>",
   "PlanUpgrade": "Plan upgrade",
   "PreviousPlan": "<1>Previous plan:</1> {{amount}} <2>({{price}}/month)</2>",

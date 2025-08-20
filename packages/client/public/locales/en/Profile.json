@@ -25,5 +25,6 @@
   "SystemTheme": "Use system theme",
   "SystemThemeDescription": "Automatically switch between light and dark themes when your system does.",
   "TerminateAllSessions": "Terminate all sessions except the current one",
-  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin."
+  "TwoFactorDescription": "Two-factor authentication via a code-generating app was enabled for all users by the admin.",
+  "EmailChangeSuccess": "Your email has been successfully changed."
 }

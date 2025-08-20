@@ -107,7 +107,7 @@ describe("<WhiteLabel />", () => {
       <WhiteLabel {...defaultProps} logoUrls={newLogoUrls} onSave={onSave} />,
     );
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("white-label-save");
     fireEvent.click(saveButton);
 
     expect(onSave).toHaveBeenCalled();
@@ -119,7 +119,7 @@ describe("<WhiteLabel />", () => {
       <WhiteLabel {...defaultProps} onRestoreDefault={onRestoreDefault} />,
     );
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId("white-label-cancel");
     fireEvent.click(restoreButton);
 
     expect(onRestoreDefault).toHaveBeenCalled();
@@ -128,7 +128,7 @@ describe("<WhiteLabel />", () => {
   it("shows loading state when isSaving is true", () => {
     renderWithTheme(<WhiteLabel {...defaultProps} isSaving />);
 
-    const saveButton = screen.getByTestId("save-button");
+    const saveButton = screen.getByTestId("white-label-save");
     expect(saveButton).toHaveAttribute("aria-busy", "true");
   });
 
@@ -137,7 +137,7 @@ describe("<WhiteLabel />", () => {
       <WhiteLabel {...defaultProps} enableRestoreButton={false} />,
     );
 
-    const restoreButton = screen.getByTestId("cancel-button");
+    const restoreButton = screen.getByTestId("white-label-cancel");
     expect(restoreButton).toBeDisabled();
   });
 

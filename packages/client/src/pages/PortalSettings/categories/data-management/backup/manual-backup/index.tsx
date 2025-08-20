@@ -50,9 +50,7 @@ import type {
 
 const ManualBackupWrapper = ({
   isNotPaidPeriod,
-  rootFoldersTitles,
   getProgress,
-  fetchTreeFolders,
   setStorageRegions,
   setThirdPartyStorage,
   resetDownloadingProgress,
@@ -99,10 +97,6 @@ const ManualBackupWrapper = ({
         ];
 
         const optionalRequests = [];
-
-        if (isObjectEmpty(rootFoldersTitles)) {
-          optionalRequests.push(fetchTreeFolders());
-        }
 
         if (isNotFreeOrNonProfit) {
           baseRequests.push(getBackupsCount());
@@ -168,7 +162,6 @@ const ManualBackupWrapper = ({
     <ManualBackup
       isNotPaidPeriod={isNotPaidPeriod}
       isInitialLoading={isInitialLoading}
-      rootFoldersTitles={rootFoldersTitles}
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       setDownloadingProgress={updateDownloadingProgress}
@@ -188,7 +181,6 @@ export default inject<
     settingsStore,
     dialogsStore,
     currentTariffStatusStore,
-    treeFoldersStore,
     thirdPartyStore,
     filesSettingsStore,
     currentQuotaStore,
@@ -264,7 +256,7 @@ export default inject<
     } = dialogsStore;
 
     const { isNotPaidPeriod, fetchPayerInfo } = currentTariffStatusStore;
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
+
     const {
       providers,
       deleteThirdParty,
@@ -357,10 +349,6 @@ export default inject<
 
       // currentTariffStatusStore
       isNotPaidPeriod,
-
-      // treeFoldersStore
-      rootFoldersTitles,
-      fetchTreeFolders,
 
       // thirdPartyStore
       providers,

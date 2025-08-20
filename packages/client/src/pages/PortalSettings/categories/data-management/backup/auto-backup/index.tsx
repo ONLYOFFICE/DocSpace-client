@@ -58,7 +58,6 @@ const AutoBackupWrapper = ({
   setBackupSchedule,
   setThirdPartyStorage,
   setDefaultOptions,
-  fetchTreeFolders,
   resetDownloadingProgress,
   setErrorInformation,
   setBackupsCount,
@@ -87,9 +86,6 @@ const AutoBackupWrapper = ({
         timerIdRef.current = window.setTimeout(() => {
           setIsInitialLoading(true);
         }, 200);
-
-        if (Object.keys(props.rootFoldersTitles).length === 0)
-          fetchTreeFolders();
 
         getProgress(t);
 
@@ -184,7 +180,6 @@ export default inject<
     authStore,
     settingsStore,
     filesSettingsStore,
-    treeFoldersStore,
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
@@ -208,7 +203,6 @@ export default inject<
       settingsStore;
     const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
-    const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const {
       basePath,
       newPath,
@@ -382,10 +376,6 @@ export default inject<
       setIsBackupProgressVisible,
       backupProgressError,
       setBackupProgressError,
-
-      // treeFoldersStore
-      rootFoldersTitles,
-      fetchTreeFolders,
 
       // settingsStore
       automaticBackupUrl,

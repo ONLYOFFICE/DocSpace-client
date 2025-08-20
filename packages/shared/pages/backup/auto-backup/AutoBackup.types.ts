@@ -145,11 +145,6 @@ export interface AutomaticBackupProps {
   setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
   // end backup
 
-  // treeFoldersStore Store
-  rootFoldersTitles: Partial<Record<FolderType, { title: string; id: number }>>;
-
-  // end treeFoldersStore
-
   // settingsStore
   automaticBackupUrl?: string;
   currentColorScheme?: TColorScheme;

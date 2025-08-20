@@ -40,7 +40,6 @@ export interface InjectedManualBackupProps
   getProgress: (t: TTranslation) => Promise<void>;
   setStorageRegions: (regions: unknown) => void;
   setThirdPartyStorage: (list: unknown) => void;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   resetDownloadingProgress: VoidFunction;
   setConnectedThirdPartyAccount: (account: any) => void;
   setBackupsCount: (count: number) => void;

@@ -146,10 +146,6 @@ export interface ManualBackupProps {
   isNotPaidPeriod: boolean;
   // end currentTariffStatusStore
 
-  // treeFoldersStore Store
-  rootFoldersTitles: Partial<Record<FolderType, { title: string }>>;
-  // end treeFoldersStore
-
   // selectedThirdPartyAccount from backupStore
   // removeItem from dialogsStore
   removeItem: ThirdPartyAccountType; // selectedThirdPartyAccount ?? removeItem

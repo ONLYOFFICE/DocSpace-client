@@ -73,7 +73,6 @@ const ManualBackup = ({
   dataBackupUrl,
   pageIsDisabled,
   isNotPaidPeriod,
-  rootFoldersTitles,
   currentColorScheme,
   downloadingProgress,
   isBackupProgressVisible,
@@ -268,8 +267,6 @@ const ManualBackup = ({
     buttonSize,
   };
 
-  const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
   if (isEmptyContentBeforeLoader && !isInitialLoading) return null;
 
   if (isInitialLoading) return <DataBackupLoader />;
@@ -396,9 +393,9 @@ const ManualBackup = ({
             { [styles.disabled]: additionalDisabled },
           )}
         >
-          <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
-            {{ roomName }}
-          </Trans>
+          {t("Common:RoomsModuleDescription", {
+            roomName: t("Common:MyFilesSection"),
+          })}
         </Text>
         {isCheckedDocuments ? (
           <RoomsModule

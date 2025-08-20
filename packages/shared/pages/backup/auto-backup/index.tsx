@@ -93,7 +93,7 @@ const AutomaticBackup = ({
   setThirdPartyStorage,
   setBackupSchedule,
   setConnectedThirdPartyAccount,
-  rootFoldersTitles,
+
   seStorageType,
   setSelectedEnableSchedule,
   toDefault,
@@ -391,8 +391,6 @@ const AutomaticBackup = ({
 
   const operationsCompleted = downloadingProgress === 100;
 
-  const roomName = rootFoldersTitles[FolderType.USER]?.title;
-
   const isSaveCancelDisabled =
     isLoadingData || !(isChanged || isThirdStorageChanged);
 
@@ -505,9 +503,9 @@ const AutomaticBackup = ({
                 "backup-description",
               )}
             >
-              <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
-                {{ roomName }}
-              </Trans>
+              {t("Common:RoomsModuleDescription", {
+                roomName: t("Common:MyFilesSection"),
+              })}
             </Text>
             {isCheckedDocuments ? (
               <RoomsModule

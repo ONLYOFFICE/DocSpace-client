@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFolder } from "@docspace/shared/api/files/types";
 import type { AutomaticBackupProps } from "@docspace/shared/pages/backup/auto-backup/AutoBackup.types";
 import type { TTranslation } from "@docspace/shared/types";
 
@@ -44,7 +43,6 @@ export interface InjectedAutoBackupWrapperProps
   > {
   setStorageRegions: (regions: unknown) => void;
   getProgress: (t: TTranslation) => Promise<void>;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   resetDownloadingProgress: VoidFunction;
   setterSelectedEnableSchedule: (enable: boolean) => void;
   setBackupsCount: (count: number) => void;

@@ -120,10 +120,6 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   } = props;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    checkEmailChangeParam();
-  }, []);
-
   const checkEmailChangeParam = () => {
     const search = window.location.search;
     const urlParams = new URLSearchParams(search);
@@ -135,6 +131,10 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
       window.history.replaceState({}, document.title, pathname);
     }
   };
+
+  useEffect(() => {
+    checkEmailChangeParam();
+  }, []);
 
   const {
     tfaOn,

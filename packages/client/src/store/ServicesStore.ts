@@ -130,6 +130,7 @@ class ServicesStore {
       isAlreadyPaid,
       initWalletPayerAndBalance,
       handleServicesQuotas,
+      setConfirmActionType,
     } = this.paymentStore!;
 
     const { fetchPortalTariff, walletCustomerStatusNotActive } =
@@ -173,6 +174,7 @@ class ServicesStore {
 
         const amountParam = params.get("amount");
         const recommendedAmountParam = params.get("recommendedAmount");
+        const actionTypeParam = params.get("actionType");
 
         if (amountParam && recommendedAmountParam) {
           const amount = Number(amountParam);
@@ -182,13 +184,16 @@ class ServicesStore {
           this.setFeatureCountData(amount);
         }
 
+        if (actionTypeParam) {
+          setConfirmActionType(actionTypeParam);
+          this.setVisibleWalletSetting(true);
+        }
+
         window.history.replaceState(
           {},
           document.title,
           window.location.pathname,
         );
-
-        this.setVisibleWalletSetting(true);
       }
     } catch (e) {
       toastr.error(t("Common:UnexpectedError"));

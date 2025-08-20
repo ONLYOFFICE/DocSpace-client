@@ -51,15 +51,10 @@ type SelectionAmountProps = {
   walletBalance?: number;
   setReccomendedAmount?: (amount: number) => void;
   reccomendedAmount?: number;
-  fetchCardLinked?: (url: string) => Promise<any>;
   isPaymentBlockedByBalance?: boolean;
-  isCardLinkedToPortal?: boolean;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
   isUpgradeStoragePlan?: boolean;
 };
-
-let timeout: NodeJS.Timeout;
-let controller: AbortController;
 
 const MIN_VALUE = 100;
 
@@ -78,8 +73,6 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     partialUpgradeFee,
     setReccomendedAmount,
     walletBalance,
-    fetchCardLinked,
-    isCardLinkedToPortal,
     isPaymentBlockedByBalance,
     formatWalletCurrency,
     isUpgradeStoragePlan,
@@ -102,27 +95,7 @@ const SelectionAmount: React.FC<SelectionAmountProps> = (props) => {
     const difference = Math.abs(walletBalance! - amountValue!);
     const recommendedValue = Math.ceil(difference);
     setReccomendedAmount?.(recommendedValue);
-
-    const getCardLink = () => {
-      if (timeout) clearTimeout(timeout);
-
-      timeout = setTimeout(async () => {
-        if (controller) controller.abort();
-
-        controller = new AbortController();
-
-        try {
-          const url = `${window.location.href}?complete=true&amount=${amount}&recommendedAmount=${recommendedValue}`;
-          await fetchCardLinked?.(url);
-        } catch (e) {
-          console.error(e);
-        }
-      }, 1000);
-    };
-    if (!isCardLinkedToPortal) getCardLink();
   }, [
-    amount,
-    isCardLinkedToPortal,
     isPaymentBlockedByBalance,
     totalPrice,
     partialUpgradeFee,
@@ -205,8 +178,6 @@ export default inject(
 
     const {
       walletBalance,
-      fetchCardLinked,
-      isCardLinkedToPortal,
       storageSizeIncrement,
       storagePriceIncrement,
       formatWalletCurrency,
@@ -226,9 +197,7 @@ export default inject(
 
       partialUpgradeFee,
 
-      fetchCardLinked,
       setReccomendedAmount,
-      isCardLinkedToPortal,
       formatWalletCurrency,
     };
   },

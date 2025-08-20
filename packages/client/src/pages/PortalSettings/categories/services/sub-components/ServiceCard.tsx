@@ -31,17 +31,17 @@ import { Text } from "@docspace/shared/components/text";
 import styles from "../styles/AdditionalStorage.module.scss";
 
 interface ServiceCardProps {
-  isDisabled: boolean;
   onClick: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
   onToggle: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
   priceTitle: string;
-  children?: React.ReactNode;
-  eventDisabled: boolean;
   id: string;
   image: string;
-  isEnabled: boolean;
   serviceTitle: string;
   priceDescription: string;
+  children?: React.ReactNode;
+  eventDisabled?: boolean;
+  isDisabled?: boolean;
+  isEnabled?: boolean;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({

@@ -159,6 +159,8 @@ class PaymentStore {
 
   isShowStorageTariffDeactivatedModal = false;
 
+  confirmActionType: string | null = null;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -259,6 +261,10 @@ class PaymentStore {
       (!isNonProfit && !isFreeTariff)
     );
   }
+
+  setConfirmActionType = (value: string) => {
+    this.confirmActionType = value;
+  };
 
   setIsInitPaymentPage = (value: boolean) => {
     this.isInitPaymentPage = value;

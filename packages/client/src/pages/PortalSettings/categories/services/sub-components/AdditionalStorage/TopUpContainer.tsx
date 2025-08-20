@@ -32,11 +32,12 @@ type TopUpContainerTypes = {
   isVisibleContainer: boolean;
   onCloseTopUpModal: () => void;
   reccomendedAmount?: number;
+  amount?: number;
 };
 
 const TopUpContainer = (props: TopUpContainerTypes) => {
-  const { isVisibleContainer, onCloseTopUpModal, reccomendedAmount } = props;
-
+  const { isVisibleContainer, onCloseTopUpModal, reccomendedAmount, amount } =
+    props;
   return isVisibleContainer ? (
     <TopUpModal
       visible={isVisibleContainer}
@@ -48,6 +49,7 @@ const TopUpContainer = (props: TopUpContainerTypes) => {
       }}
       {...(reccomendedAmount! > 0 && {
         reccomendedAmount: reccomendedAmount!.toString(),
+        amount: amount!.toString(),
       })}
     />
   ) : null;

@@ -197,15 +197,16 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
       >
         {Array.from(servicesQuotasFeatures?.values() || []).map((item) => {
           if (!item.title || !item.image) return null;
-          const eventDisabled =
-            isGracePeriod || isDisabled || hasScheduledStorageChange;
 
           if (item.id === TOTAL_SIZE) {
+            const eventDisabled =
+              isGracePeriod || isDisabled || hasScheduledStorageChange;
+
             return (
               <ServiceCard
                 key={item.id}
                 isDisabled={isDisabled}
-                eventDisabled={eventDisabled || !hasStorageSubscription}
+                eventDisabled={!!eventDisabled}
                 onClick={handleClick}
                 onToggle={handleToggle}
                 serviceTitle={item.title}
@@ -266,7 +267,6 @@ const ServicesItems: React.FC<ServicesItemsProps> = ({
             <ServiceCard
               key={item.id}
               isDisabled={isDisabled}
-              eventDisabled={eventDisabled || false}
               priceTitle={item.priceTitle}
               id={item.id}
               image={item.image}

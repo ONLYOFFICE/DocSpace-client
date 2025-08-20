@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { inject, observer } from "mobx-react";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
@@ -38,11 +40,15 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import styles from "../styles/PaymentMethod.module.scss";
 
 type PaymentMethodProps = {
+  confirmActionType?: string | null;
+  fetchCardLinked?: (url: string) => void;
   walletCustomerEmail: boolean;
   cardLinked: string;
   accountLink: string;
   isDisabled: boolean;
   walletCustomerStatusNotActive: boolean;
+  reccomendedAmount?: string;
+  amount?: string;
 };
 
 const PaymentMethod = (props: PaymentMethodProps) => {
@@ -52,9 +58,38 @@ const PaymentMethod = (props: PaymentMethodProps) => {
     accountLink,
     isDisabled,
     walletCustomerStatusNotActive,
+    confirmActionType,
+    fetchCardLinked,
+    reccomendedAmount,
+    amount,
   } = props;
 
   const { t } = useTranslation(["Payments", "Common"]);
+
+  const [isLoading, setIsLoading] = useState(!walletCustomerEmail);
+
+  const updateCardLink = async () => {
+    if (walletCustomerEmail) return;
+
+    const basicUrl = `${window.location.href}?complete=true&actionType=${confirmActionType ?? ""}`;
+    let url = basicUrl;
+
+    if (reccomendedAmount && amount) {
+      url = `${basicUrl}&amount=${amount}&recommendedAmount=${reccomendedAmount}`;
+    }
+
+    try {
+      await fetchCardLinked!(url);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    updateCardLink();
+  }, []);
 
   const goLinkCard = () => {
     cardLinked
@@ -113,13 +148,21 @@ const PaymentMethod = (props: PaymentMethodProps) => {
           </Link>
         </div>
       ) : (
-        <div className={styles.addPaymentMethodContainer} onClick={goLinkCard}>
-          <SelectorAddButton testId="payment_method_add_button" />
-          <Text fontWeight={600}>{t("AddPaymentMethod")}</Text>
+        <div className={styles.addPaymentMethodContainer}>
+          <SelectorAddButton
+            testId="payment_method_add_button"
+            isLoading={isLoading}
+            isDisabled={isLoading}
+            label={t("AddPaymentMethod")}
+            onClick={goLinkCard}
+          />
         </div>
       )}
     </div>
   );
 };
 
-export default PaymentMethod;
+export default inject(({ paymentStore }: TStore) => {
+  const { confirmActionType, fetchCardLinked } = paymentStore;
+  return { confirmActionType, fetchCardLinked };
+})(observer(PaymentMethod));

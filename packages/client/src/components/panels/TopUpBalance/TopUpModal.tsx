@@ -48,7 +48,7 @@ type TopUpModalProps = {
   fetchTransactionHistory?: () => Promise<void>;
   walletCustomerEmail?: boolean;
   fetchBalance?: () => Promise<void>;
-  onClose: () => void;
+  onClose: (isTopUp: boolean) => void;
   language?: string;
   cardLinked?: string;
   accountLink?: string;
@@ -61,6 +61,7 @@ type TopUpModalProps = {
   walletBalance?: number;
   wasFirstTopUp?: boolean;
   reccomendedAmount?: string;
+  amount?: string;
   walletCustomerStatusNotActive?: boolean;
   formatWalletCurrency?: (item?: number, fractionDigits?: number) => string;
 };
@@ -79,6 +80,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     headerProps,
     wasFirstTopUp,
     reccomendedAmount,
+    amount,
     walletCustomerStatusNotActive,
     formatWalletCurrency,
   } = props;
@@ -93,7 +95,7 @@ const TopUpModal = (props: TopUpModalProps) => {
     <AmountProvider initialAmount={reccomendedAmount}>
       <ModalDialog
         visible={visible}
-        onClose={onClose}
+        onClose={() => onClose(false)}
         displayType={ModalDialogType.aside}
         {...headerProps}
         withBodyScroll
@@ -108,6 +110,8 @@ const TopUpModal = (props: TopUpModalProps) => {
               accountLink={accountLink!}
               isDisabled={isLoading}
               walletCustomerStatusNotActive={walletCustomerStatusNotActive!}
+              reccomendedAmount={reccomendedAmount}
+              amount={amount}
             />
 
             <Amount

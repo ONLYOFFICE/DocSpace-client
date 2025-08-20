@@ -41,7 +41,7 @@ interface TopUpButtonsProps {
   isLoading: boolean;
   fetchBalance?: () => Promise<void>;
   fetchTransactionHistory?: () => Promise<void>;
-  onClose: () => void;
+  onClose: (isTopUp: boolean) => void;
   walletCustomerEmail?: boolean;
   walletCustomerStatusNotActive?: boolean;
 }
@@ -76,7 +76,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
       await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
 
       toastr.success(t("WalletToppedUp"));
-      onClose();
+      onClose(true);
     } catch (e) {
       toastr.error(e as unknown as string);
     } finally {
@@ -104,7 +104,7 @@ const TopUpButtons: React.FC<TopUpButtonsProps> = ({
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           scale
-          onClick={onClose}
+          onClick={() => onClose(false)}
           isDisabled={isLoading}
           testId="cancel_top_up_button"
         />

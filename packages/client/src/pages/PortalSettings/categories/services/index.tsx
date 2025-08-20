@@ -54,6 +54,8 @@ type ServicesProps = {
   previousStoragePlanSize: number;
   changeServiceState: (service: string) => void;
   isCardLinkedToPortal: boolean;
+  setConfirmActionType: (value: string) => void;
+  confirmActionType: string | null;
 };
 
 let timerId: NodeJS.Timeout | null = null;
@@ -67,6 +69,8 @@ const Services: React.FC<ServicesProps> = ({
   isShowStorageTariffDeactivatedModal,
   changeServiceState,
   isCardLinkedToPortal,
+  setConfirmActionType,
+  confirmActionType,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Services", "Common"]);
   const [isStorageVisible, setIsStorageVisible] = useState(false);
@@ -76,9 +80,7 @@ const Services: React.FC<ServicesProps> = ({
   const [isGracePeriodModalVisible, setIsGracePeriodModalVisible] =
     useState(false);
   const [previousValue, setPreviousValue] = useState(0);
-  const [confirmActionType, setConfirmActionType] = useState<string | null>(
-    null,
-  );
+
   const [isTopUpBalanceVisible, setIsTopUpBalanceVisible] = useState(false);
 
   const [showLoader, setShowLoader] = useState(false);
@@ -103,8 +105,14 @@ const Services: React.FC<ServicesProps> = ({
   }, [servicesInit]);
 
   useEffect(() => {
-    if (isVisibleWalletSettings) setIsStorageVisible(isVisibleWalletSettings);
-  }, [isVisibleWalletSettings]);
+    if (!isVisibleWalletSettings) return;
+
+    if (confirmActionType === TOTAL_SIZE) {
+      setIsStorageVisible(isVisibleWalletSettings);
+    } else {
+      setIsTopUpBalanceVisible(true);
+    }
+  }, [isVisibleWalletSettings, confirmActionType]);
 
   useEffect(() => {
     if (openDialog) {
@@ -143,6 +151,8 @@ const Services: React.FC<ServicesProps> = ({
   };
 
   const onClick = (id: string) => {
+    setConfirmActionType(id);
+
     if (id === TOTAL_SIZE && isGracePeriod) {
       setIsGracePeriodModalVisible(true);
       return;
@@ -162,6 +172,8 @@ const Services: React.FC<ServicesProps> = ({
   };
 
   const onToggle = async (id: string, currentEnabled: boolean) => {
+    setConfirmActionType(id);
+
     if (id === TOTAL_SIZE) {
       if (currentEnabled) {
         setIsStorageCancellation(true);
@@ -172,17 +184,15 @@ const Services: React.FC<ServicesProps> = ({
       return;
     }
 
+    if (!currentEnabled && !isCardLinkedToPortal) {
+      setIsTopUpBalanceVisible(true);
+      return;
+    }
+
     if (id === BACKUP_SERVICE) {
       if (isBackupVisible) {
         previousDialogRef.current = true;
       }
-    }
-
-    setConfirmActionType(id);
-
-    if (!currentEnabled && !isCardLinkedToPortal) {
-      setIsTopUpBalanceVisible(true);
-      return;
     }
 
     if (!currentEnabled) setIsConfirmDialogVisible(true);
@@ -240,9 +250,12 @@ const Services: React.FC<ServicesProps> = ({
     }
   };
 
-  const onCloseTopUpModal = () => {
+  const onCloseTopUpModal = (isTopUp: boolean | Event) => {
     setIsTopUpBalanceVisible(false);
-    setIsConfirmDialogVisible(true);
+
+    if (isTopUp) {
+      setIsConfirmDialogVisible(true);
+    }
   };
 
   return shouldShowLoader ? (
@@ -311,6 +324,8 @@ export const Component = inject(
       isShowStorageTariffDeactivatedModal,
       changeServiceState,
       isCardLinkedToPortal,
+      setConfirmActionType,
+      confirmActionType,
     } = paymentStore;
     return {
       servicesInit,
@@ -321,6 +336,8 @@ export const Component = inject(
       previousStoragePlanSize,
       changeServiceState,
       isCardLinkedToPortal,
+      setConfirmActionType,
+      confirmActionType,
     };
   },
 )(observer(Services));

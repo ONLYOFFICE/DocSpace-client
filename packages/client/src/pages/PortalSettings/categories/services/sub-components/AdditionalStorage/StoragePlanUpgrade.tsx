@@ -286,6 +286,7 @@ const StoragePlanUpgrade: React.FC<StorageDialogProps> = ({
     <TopUpContainer
       isVisibleContainer={isVisibleContainer}
       onCloseTopUpModal={onCloseTopUpModal}
+      amount={amount}
     />
   ) : null;
 

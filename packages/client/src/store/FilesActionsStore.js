@@ -2678,6 +2678,21 @@ class FilesActionStore {
 
       window.DocSpace.navigate(url, { state });
     } else {
+      if (fileItemsList && enablePlugins) {
+        let currPluginItem = null;
+
+        fileItemsList.forEach((i) => {
+          if (i.key === item.fileExst) currPluginItem = i.value;
+        });
+
+        if (currPluginItem) {
+          const correctDevice = currPluginItem.devices
+            ? currPluginItem.devices.includes(currentDeviceType)
+            : true;
+          if (correctDevice) return currPluginItem.onClick(item);
+        }
+      }
+
       if (isFrame && frameConfig?.events?.onFileManagerClick) {
         frameCallEvent({ event: "onFileManagerClick", data: item });
         return;
@@ -2722,21 +2737,6 @@ class FilesActionStore {
         window.history.pushState("", "", url);
 
         return;
-      }
-
-      if (fileItemsList && enablePlugins) {
-        let currPluginItem = null;
-
-        fileItemsList.forEach((i) => {
-          if (i.key === item.fileExst) currPluginItem = i.value;
-        });
-
-        if (currPluginItem) {
-          const correctDevice = currPluginItem.devices
-            ? currPluginItem.devices.includes(currentDeviceType)
-            : true;
-          if (correctDevice) return currPluginItem.onClick(item);
-        }
       }
 
       if (!item.security.Download) {

@@ -2407,6 +2407,7 @@
   --settings-common-white-label-not-available-background: #{$gray-light};
   --settings-common-white-label-text-color: #{$black};
   --settings-common-backup-rectangle-bg-color: #{$gray-light};
+  --settings-backup-text-disabled: #{$gray};
 }
 
 .dark {
@@ -2417,6 +2418,7 @@
   --settings-common-white-label-not-available-background: #{$gray-dark};
   --settings-common-white-label-text-color: #{$white};
   --settings-common-backup-rectangle-bg-color: #{$light-dark-gray-hover};
+  --settings-backup-text-disabled: #{$gray-dark-text};
 }
 
 .light {

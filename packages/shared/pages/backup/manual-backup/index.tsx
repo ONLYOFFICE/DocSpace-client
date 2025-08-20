@@ -65,6 +65,7 @@ import {
   THIRD_PARTY_STORAGE,
 } from "./ManualBackup.constants";
 import styles from "./ManualBackup.module.scss";
+import { isDisabled } from "@testing-library/user-event/dist/types/utils";
 
 const ManualBackup = ({
   isInitialLoading,
@@ -274,6 +275,10 @@ const ManualBackup = ({
 
   if (isInitialLoading) return <DataBackupLoader />;
 
+  const mainDisabled = !isMaxProgress || pageIsDisabled;
+  const additionalDisabled =
+    !isMaxProgress || isNotPaidPeriod || pageIsDisabled;
+
   return (
     <div className={styles.manualBackup}>
       <StatusMessage message={errorInformation} />
@@ -307,63 +312,72 @@ const ManualBackup = ({
       </div>
 
       <div className={styles.modules}>
-        <RadioButton
-          key={0}
-          id="temporary-storage"
-          label={t("Common:TemporaryStorage")}
-          name={TEMPORARY_STORAGE}
-          isChecked={isCheckedTemporaryStorage}
-          isDisabled={!isMaxProgress || pageIsDisabled}
-          {...commonRadioButtonProps}
-          testId="temporary_storage_radio_button"
-        />
-        <Text
-          className={classNames(styles.backupDescription, "backup-description")}
+        <div
+          className={classNames(styles.modules, {
+            [styles.isDisabled]: mainDisabled,
+          })}
         >
-          {t("Common:TemporaryStorageDescription")}
-        </Text>
-        {isCheckedTemporaryStorage ? (
-          <div
+          <RadioButton
+            key={0}
+            id="temporary-storage"
+            label={t("Common:TemporaryStorage")}
+            name={TEMPORARY_STORAGE}
+            isChecked={isCheckedTemporaryStorage}
+            isDisabled={mainDisabled}
+            {...commonRadioButtonProps}
+            testId="temporary_storage_radio_button"
+          />
+          <Text
             className={classNames(
-              styles.manualBackupButtons,
-              "manual-backup_buttons",
+              styles.backupDescription,
+              "backup-description",
             )}
           >
-            <Button
-              id="create-button"
-              label={t("Common:Create")}
-              onClick={onMakeTemporaryBackup}
-              primary
-              isDisabled={!isMaxProgress || pageIsDisabled}
-              size={buttonSize}
-              testId="create_temporary_backup_button"
-            />
-            {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
+            {t("Common:TemporaryStorageDescription")}
+          </Text>
+          {isCheckedTemporaryStorage ? (
+            <div
+              className={classNames(
+                styles.manualBackupButtons,
+                "manual-backup_buttons",
+              )}
+            >
               <Button
-                id="download-copy"
-                label={t("Common:DownloadCopy")}
-                onClick={onClickDownloadBackup}
-                isDisabled={pageIsDisabled}
+                id="create-button"
+                label={t("Common:Create")}
+                onClick={onMakeTemporaryBackup}
+                primary
+                isDisabled={mainDisabled}
                 size={buttonSize}
-                style={{ marginInlineStart: "8px" }}
-                testId="download_temporary_copy_button"
+                testId="create_temporary_backup_button"
               />
-            ) : null}
-            {!isMaxProgress ? (
-              <Button
-                label={`${t("Common:CopyOperation")} ...`}
-                isDisabled
-                size={buttonSize}
-                style={{ marginInlineStart: "8px" }}
-                testId="copy_temporary_operation_button"
-              />
-            ) : null}
-          </div>
-        ) : null}
+              {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
+                <Button
+                  id="download-copy"
+                  label={t("Common:DownloadCopy")}
+                  onClick={onClickDownloadBackup}
+                  isDisabled={pageIsDisabled}
+                  size={buttonSize}
+                  style={{ marginInlineStart: "8px" }}
+                  testId="download_temporary_copy_button"
+                />
+              ) : null}
+              {!isMaxProgress ? (
+                <Button
+                  label={`${t("Common:CopyOperation")} ...`}
+                  isDisabled
+                  size={buttonSize}
+                  style={{ marginInlineStart: "8px" }}
+                  testId="copy_temporary_operation_button"
+                />
+              ) : null}
+            </div>
+          ) : null}
+        </div>
       </div>
       <div
         className={classNames(styles.modules, {
-          [styles.isDisabled]: isNotPaidPeriod,
+          [styles.isDisabled]: additionalDisabled,
         })}
       >
         <RadioButton
@@ -372,7 +386,7 @@ const ManualBackup = ({
           name={DOCUMENTS}
           key={1}
           isChecked={isCheckedDocuments}
-          isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
+          isDisabled={additionalDisabled}
           {...commonRadioButtonProps}
           testId="backup_room_radio_button"
         />
@@ -380,6 +394,7 @@ const ManualBackup = ({
           className={classNames(
             styles.backupDescription,
             "backup-description module-documents",
+            { [styles.disabled]: additionalDisabled },
           )}
         >
           <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
@@ -404,7 +419,7 @@ const ManualBackup = ({
 
       <div
         className={classNames(styles.modules, {
-          [styles.isDisabled]: isNotPaidPeriod,
+          [styles.isDisabled]: additionalDisabled,
         })}
       >
         <RadioButton
@@ -413,7 +428,7 @@ const ManualBackup = ({
           name={THIRD_PARTY_RESOURCE}
           key={2}
           isChecked={isCheckedThirdParty}
-          isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
+          isDisabled={additionalDisabled}
           {...commonRadioButtonProps}
           testId="third_party_resource_radio_button"
         />
@@ -454,7 +469,7 @@ const ManualBackup = ({
       </div>
       <div
         className={classNames(styles.modules, {
-          [styles.isDisabled]: isNotPaidPeriod,
+          [styles.isDisabled]: additionalDisabled,
         })}
       >
         <RadioButton
@@ -463,7 +478,7 @@ const ManualBackup = ({
           name={THIRD_PARTY_STORAGE}
           key={3}
           isChecked={isCheckedThirdPartyStorage}
-          isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
+          isDisabled={additionalDisabled}
           {...commonRadioButtonProps}
         />
         <Text

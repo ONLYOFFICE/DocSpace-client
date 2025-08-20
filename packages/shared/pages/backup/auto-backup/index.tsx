@@ -400,6 +400,8 @@ const AutomaticBackup = ({
 
   if (isInitialLoading) return <AutoBackupLoader />;
 
+  const mainDisabled = isLoadingData || !isEnableAuto || isInitialError;
+
   return (
     <div data-testid="auto-backup" className={styles.autoBackup}>
       <StatusMessage message={errorInformation} />
@@ -439,6 +441,9 @@ const AutomaticBackup = ({
         className={classNames(
           styles.backupToggleWrapper,
           "backup_toggle-wrapper",
+          {
+            [styles.isDisabled]: mainDisabled,
+          },
         )}
       >
         <ToggleButton
@@ -448,7 +453,7 @@ const AutomaticBackup = ({
           )}
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
-          isDisabled={isLoadingData || !isEnableAuto || isInitialError}
+          isDisabled={mainDisabled}
           dataTestId="enable_automatic_backup_button"
         />
 

@@ -98,7 +98,7 @@
   .modules {
     &.isDisabled {
       .backupDescription {
-        color: variables.$gray;
+        color: var(--settings-backup-text-disabled);
       }
     }
   }

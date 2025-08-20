@@ -41,11 +41,10 @@ import {
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 
-import { useServicesActions } from "./hooks/useServicesActions";
-import { PaymentProvider } from "./context/PaymentContext";
-
-import styles from "./styles/index.module.scss";
-import StorageWarning from "./sub-components/AdditionalStorage/StorageWarning";
+import { useServicesActions } from "../../hooks/useServicesActions";
+import { PaymentProvider } from "../../context/PaymentContext";
+import styles from "../../styles/index.module.scss";
+import StorageWarning from "./StorageWarning";
 
 type StorageDialogProps = {
   visible: boolean;

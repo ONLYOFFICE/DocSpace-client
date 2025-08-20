@@ -38,10 +38,9 @@ import { StorageTariffDeactiveted } from "SRC_DIR/components/dialogs";
 import TopUpModal from "SRC_DIR/components/panels/TopUpBalance/TopUpModal";
 
 import ServicesItems from "./ServicesItems";
-import StoragePlanUpgrade from "./StoragePlanUpgrade";
 import ServicesLoader from "./ServicesLoader";
-
-import StoragePlanCancel from "./StoragePlanCancel";
+import StoragePlanUpgrade from "./sub-components/AdditionalStorage/StoragePlanUpgrade";
+import StoragePlanCancel from "./sub-components/AdditionalStorage/StoragePlanCancel";
 import GracePeriodModal from "./sub-components/AdditionalStorage/GracePeriodModal";
 import BackupServiceDialog from "./sub-components/Backup/BackupServiceDialog";
 import ConfirmationDialog from "./sub-components/ConfirmationDialog";

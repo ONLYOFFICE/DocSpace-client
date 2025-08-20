@@ -35,19 +35,19 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { updateWalletPayment } from "@docspace/shared/api/portal";
 import { calculateTotalPrice } from "@docspace/shared/utils/common";
-
 import { STORAGE_TARIFF_DEACTIVATED } from "@docspace/shared/constants";
-import styles from "./styles/index.module.scss";
-import StorageSummary from "./sub-components/AdditionalStorage/StorageSummary";
-import { useServicesActions } from "./hooks/useServicesActions";
-import { PaymentProvider } from "./context/PaymentContext";
-import ButtonContainer from "./sub-components/AdditionalStorage/ButtonContainer";
 
-import StorageInformation from "./sub-components/AdditionalStorage/StorageInformation";
-import WalletContainer from "./sub-components/AdditionalStorage/WalletContainer";
-import SalesDepartmentRequestDialog from "../../../../components/dialogs/SalesDepartmentRequestDialog";
-import TopUpContainer from "./sub-components/AdditionalStorage/TopUpContainer";
-import SelectionAmount from "./sub-components/AdditionalStorage/SelectionAmount";
+import SalesDepartmentRequestDialog from "SRC_DIR/components/dialogs/SalesDepartmentRequestDialog";
+
+import styles from "../../styles/index.module.scss";
+import StorageSummary from "./StorageSummary";
+import { useServicesActions } from "../../hooks/useServicesActions";
+import { PaymentProvider } from "../../context/PaymentContext";
+import ButtonContainer from "./ButtonContainer";
+import StorageInformation from "./StorageInformation";
+import WalletContainer from "./WalletContainer";
+import TopUpContainer from "./TopUpContainer";
+import SelectionAmount from "./SelectionAmount";
 
 type StorageDialogProps = {
   visible: boolean;

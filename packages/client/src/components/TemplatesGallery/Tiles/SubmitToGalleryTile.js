@@ -25,8 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import styled from "styled-components";
-import { commonIconsStyles, injectDefaultTheme } from "@docspace/shared/utils";
+import styled, { css } from "styled-components";
+import {
+  commonIconsStyles,
+  injectDefaultTheme,
+  tablet,
+} from "@docspace/shared/utils";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import hexRgb from "hex-rgb";
@@ -45,7 +49,7 @@ export const StyledSubmitToGalleryTile = styled.div.attrs(injectDefaultTheme)`
     padding: 16px;
     box-sizing: border-box;
 
-    border: 1px solid
+    border: 2px solid
       ${({ currentColorScheme }) => currentColorScheme.main?.accent};
     border-radius: 6px;
     background-color: ${({ currentColorScheme }) =>
@@ -53,7 +57,7 @@ export const StyledSubmitToGalleryTile = styled.div.attrs(injectDefaultTheme)`
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+
     justify-content: center;
     gap: 16px;
   }
@@ -77,6 +81,58 @@ export const StyledSubmitToGalleryTile = styled.div.attrs(injectDefaultTheme)`
       color: ${({ theme }) => theme.oformGallery.submitToGalleryTile.bodyText};
     }
   }
+
+  .button-submit {
+    min-height: 28px;
+    height: 28px;
+    padding: 0;
+
+    .button-content {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      white-space: normal;
+      word-wrap: break-word;
+      text-align: center;
+    }
+  }
+
+  @media ${tablet} {
+    .content {
+      padding: 6px 16px;
+      gap: 10px;
+
+      ${(props) =>
+        props.smallPreview &&
+        css`
+          padding: 14px 16px;
+        `}
+    }
+
+    .info {
+      gap: 4px;
+
+      .title {
+        font-size: 11px;
+        line-height: 12px;
+      }
+
+      .body {
+        font-size: 10px;
+        line-height: 14px;
+      }
+    }
+
+    .button-submit {
+      min-height: 24px;
+      height: auto;
+
+      .button-content {
+        font-size: 10px;
+        line-height: 15px;
+      }
+    }
+  }
 `;
 
 const StyledCloseIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
@@ -98,10 +154,11 @@ const SubmitToGalleryTile = ({
   setSubmitToGalleryDialogVisible,
   currentColorScheme,
   logoText,
-  smallPreview, // used in styles and data-attrs
-  isSubmitTile, // used in data-attrs
+  smallPreview,
+  isSubmitTile,
+  submitToGalleryTileIsVisible,
 }) => {
-  // if (!submitToGalleryTileIsVisible) return null;
+  if (!submitToGalleryTileIsVisible) return null;
 
   const onSubmitToGallery = () => setSubmitToGalleryDialogVisible(true);
 
@@ -120,11 +177,7 @@ const SubmitToGalleryTile = ({
         />
 
         <div className="info">
-          <div className="title">
-            {t("Common:SubmitToGalleryBlockHeader", {
-              organizationName: logoText,
-            })}
-          </div>
+          <div className="title">ONLYOFFICE Template Gallery</div>
           <div className="body">
             {t("Common:SubmitToGalleryBlockBody", {
               organizationName: logoText,
@@ -136,7 +189,7 @@ const SubmitToGalleryTile = ({
           className="button-submit"
           onClick={onSubmitToGallery}
           size="small"
-          label={t("Common:SubmitToFormGallery")}
+          label="Upload in the Gallery"
           scale
         />
       </div>

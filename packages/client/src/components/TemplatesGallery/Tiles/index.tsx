@@ -44,8 +44,8 @@ const Tiles: FC<TilesProps> = ({
   // hasGalleryFiles,
   setGallerySelected,
   // resetFilters,
-  // submitToGalleryTileIsVisible,
-  // canSubmitToFormGallery,
+  submitToGalleryTileIsVisible,
+  canSubmitToFormGallery,
   setOformFilesLoaded,
   // categoryFilterLoaded,
   // languageFilterLoaded,
@@ -92,8 +92,9 @@ const Tiles: FC<TilesProps> = ({
       isShowOneTile={isShowOneTile}
       smallPreview={smallPreview}
     >
-      <SubmitToGalleryTile smallPreview={smallPreview} isSubmitTile />
-
+      {submitToGalleryTileIsVisible && canSubmitToFormGallery() ? (
+        <SubmitToGalleryTile smallPreview={smallPreview} isSubmitTile />
+      ) : null}
       {oformFiles.map((item: { id: Key | null | undefined }) => {
         return (
           <FileTile

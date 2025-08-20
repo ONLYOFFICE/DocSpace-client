@@ -104,12 +104,19 @@ const GridDynamicHeight = ({
       document.body.offsetHeight;
 
       if (smallPreview) {
-        // For smallPreview: find the global minimum height across ALL rows
+        // For smallPreview: find the global minimum height across ALL rows,
+
         let globalMinHeight = Infinity;
 
         rows.forEach((row) => {
           const cards = row.querySelectorAll(".Card");
           cards.forEach((card) => {
+            const isSubmitCard = (card as HTMLElement).querySelector(
+              '[data-submit-tile="true"]',
+            );
+
+            if (isSubmitCard) return; // skip submit tile when measuring min height
+
             const cardHeight = (card as HTMLElement).offsetHeight;
             if (cardHeight > 0 && cardHeight < globalMinHeight) {
               globalMinHeight = cardHeight;
@@ -117,9 +124,11 @@ const GridDynamicHeight = ({
           });
         });
 
-        // Apply the global minimum height to ALL cards in ALL rows
+        // If all cards were excluded (e.g., only submit tile present), fallback to a sane default
         const targetHeight =
           globalMinHeight === Infinity ? 120 : globalMinHeight;
+
+        // Apply the global minimum height to ALL cards in ALL rows (including submit tile)
         rows.forEach((row) => {
           const cards = row.querySelectorAll(".Card");
           cards.forEach((card) => {

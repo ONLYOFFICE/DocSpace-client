@@ -50,6 +50,8 @@ export interface TilesProps {
   smallPreview: boolean;
   setIsVisible: (isVisible: boolean) => void;
   setGallerySelected: (item: { id: Key | null | undefined } | null) => void;
+  submitToGalleryTileIsVisible: boolean;
+  canSubmitToFormGallery: () => boolean;
 }
 
 export interface TileProps {

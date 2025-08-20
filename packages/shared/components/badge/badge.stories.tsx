@@ -80,10 +80,6 @@ const meta = {
       description: "Maximum width of the badge",
       control: "text",
     },
-    compact: {
-      description: "Compact display mode",
-      control: "boolean",
-    },
     noHover: {
       description: "Disable hover effects",
       control: "boolean",

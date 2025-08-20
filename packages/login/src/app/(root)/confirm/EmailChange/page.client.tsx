@@ -45,7 +45,7 @@ const EmailChangeHandler = () => {
     async function emailChange() {
       try {
         await changeEmail(uid, email, encemail, key);
-        window.location.replace(`/profile?email_change=success`);
+        window.location.replace(`/profile/login?email_change=success`);
       } catch (e) {
         const knownError = e as TError;
         let errorMessage: string;

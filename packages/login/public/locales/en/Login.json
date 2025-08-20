@@ -19,5 +19,7 @@
   "RememberHelper": "The default session lifetime is 20 minutes. Check this option to set it to 1 year. To set your own value, go to Settings.",
   "SignInLDAP": "Sign in to: {{ldap_domain}}",
   "SignInLdapHelper": "Use credentials for the corporate domain",
-  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email."
+  "UserIsAlreadyRegistered": "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.",
+  "ConfirmEmailChange": "Confirm your email change",
+  "ConfirmEmailChangeText": "You requested to change the email on your DocSpace account. To continue, please sign in with your current credentials."
 }

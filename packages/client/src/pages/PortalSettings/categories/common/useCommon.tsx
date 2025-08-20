@@ -23,52 +23,65 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { t } from "i18next";
-import React, { useCallback, useState } from "react";
-import { getPaymentAccount } from "@docspace/shared/api/portal";
 
-import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
+import React, { useCallback } from "react";
 
-export type UseDeleteDataProps = {
-  getPortalOwner: SettingsSetupStore["getPortalOwner"];
+import BrandingStore from "SRC_DIR/store/portal-settings/BrandingStore";
+import CommonStore from "SRC_DIR/store/CommonStore";
+
+export type UseCommonProps = {
+  loadBaseInfo: (page: string) => Promise<void>;
+  isMobileView: boolean;
+  getGreetingSettingsIsDefault: CommonStore["getGreetingSettingsIsDefault"];
+  getBrandName: BrandingStore["getBrandName"];
+  initWhiteLabel: BrandingStore["initWhiteLabel"];
 };
 
-const useDeleteData = ({ getPortalOwner }: UseDeleteDataProps) => {
-  const [stripeUrl, setStripeUrl] = useState<string | null>(null);
+const useCommon = ({
+  loadBaseInfo,
+  isMobileView,
+  getGreetingSettingsIsDefault,
+  getBrandName,
+  initWhiteLabel,
+}: UseCommonProps) => {
+  const getCustomizationData = useCallback(() => {
+    if (isMobileView) {
+      loadBaseInfo("language-and-time-zone");
+      loadBaseInfo("dns-settings");
+      loadBaseInfo("configure-deep-link");
+    } else {
+      loadBaseInfo("general");
+    }
 
-  const fetchPortalDeletionData = useCallback(async () => {
-    await getPortalOwner();
+    getGreetingSettingsIsDefault();
+  }, [isMobileView, loadBaseInfo, getGreetingSettingsIsDefault]);
 
-    const res = await getPaymentAccount();
-    setStripeUrl(res);
-  }, [getPortalOwner]);
+  const getBrandingData = useCallback(() => {
+    getBrandName();
+    initWhiteLabel();
+  }, [getBrandName, initWhiteLabel]);
 
-  const fetchPortalDeactivationData = useCallback(async () => {
-    await getPortalOwner();
-  }, [getPortalOwner]);
-
-  const getDeleteDataInitialValue = React.useCallback(async () => {
+  const getCommonInitialValue = React.useCallback(async () => {
     const actions = [];
-    if (window.location.pathname.includes("deletion"))
-      actions.push(fetchPortalDeletionData());
+    if (window.location.pathname.includes("general"))
+      actions.push(getCustomizationData());
 
-    if (window.location.pathname.includes("deactivation"))
-      actions.push(fetchPortalDeactivationData());
+    if (window.location.pathname.includes("branding"))
+      actions.push(getBrandingData());
 
     await Promise.all(actions);
-  }, [fetchPortalDeletionData, fetchPortalDeactivationData]);
+  }, [getCustomizationData, getBrandingData]);
 
   React.useEffect(() => {
-    // if (window.location.pathname.includes("delete-data"))
-    //  getDeleteDataInitialValue();
-  }, [getDeleteDataInitialValue]);
+    if (window.location.pathname.includes("customization"))
+      getCommonInitialValue();
+  }, [getCommonInitialValue]);
 
   return {
-    stripeUrl,
-    fetchPortalDeletionData,
-    fetchPortalDeactivationData,
-    getDeleteDataInitialValue,
+    getCustomizationData,
+    getBrandingData,
+    getCommonInitialValue,
   };
 };
 
-export default useDeleteData;
+export default useCommon;

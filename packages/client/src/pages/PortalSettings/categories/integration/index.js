@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
@@ -41,6 +41,7 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
+import useIntegration from "./useIntegration";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -60,9 +61,24 @@ const IntegrationWrapper = (props) => {
   } = props;
   const navigate = useNavigate();
 
-  const [openThirdPartyModal, setOpenThirdPartyModal] = useState(false);
-  const [documentServiceLocationData, setDocumentServiceLocationData] =
-    useState();
+  const {
+    openThirdPartyModal,
+    documentServiceLocationData,
+    getSSOData,
+    getPluginsData,
+    getThirdPartyData,
+    getSMTPSettingsData,
+    getDocumentServiceData,
+  } = useIntegration({
+    isSSOAvailable,
+    init,
+    isInit,
+    updatePlugins,
+    getConsumers,
+    fetchAndSetConsumers,
+    setInitSMTPSettings,
+    getDocumentServiceLocation,
+  });
 
   useEffect(() => {
     return () => {
@@ -71,36 +87,6 @@ const IntegrationWrapper = (props) => {
         toDefault();
     };
   }, []);
-
-  const getSSOData = () => {
-    isSSOAvailable && !isInit && init();
-  };
-
-  const getPluginsData = () => {
-    updatePlugins(true);
-  };
-
-  const getThirdPartyData = () => {
-    const urlParts = window.location.href.split("?");
-    if (urlParts.length > 1) {
-      const queryValue = urlParts[1].split("=")[1];
-      fetchAndSetConsumers(queryValue).then(
-        (isConsumerExist) => isConsumerExist && setOpenThirdPartyModal(true),
-      );
-    } else {
-      getConsumers();
-    }
-  };
-
-  const getSMTPSettingsData = async () => {
-    await setInitSMTPSettings();
-  };
-
-  const getDocumentServiceData = () => {
-    getDocumentServiceLocation().then((result) => {
-      setDocumentServiceLocationData(result);
-    });
-  };
 
   const data = [
     {

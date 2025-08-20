@@ -42,6 +42,7 @@ import MobileSecurityLoader from "./sub-components/loaders/mobile-security-loade
 import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail";
 import { resetSessionStorage } from "../../utils";
+import useSecurity from "./useSecurity";
 
 const SecurityWrapper = (props) => {
   const {
@@ -66,27 +67,19 @@ const SecurityWrapper = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getAccessPortalData = async () => {
-    getPortalPasswordSettings();
-    getTfaType();
-    getInvitationSettings();
-
-    await getIpRestrictionsEnable();
-    await getIpRestrictions();
-
-    getBruteForceProtection();
-    getSessionLifetime();
-  };
-
-  const getLoginHistoryData = () => {
-    getLoginHistory();
-    getLifetimeAuditSettings();
-  };
-
-  const getAuditTrailData = () => {
-    getAuditTrail();
-    getLifetimeAuditSettings();
-  };
+  const { getAccessPortalData, getLoginHistoryData, getAuditTrailData } =
+    useSecurity({
+      getPortalPasswordSettings,
+      getTfaType,
+      getInvitationSettings,
+      getIpRestrictionsEnable,
+      getIpRestrictions,
+      getBruteForceProtection,
+      getSessionLifetime,
+      getLoginHistory,
+      getLifetimeAuditSettings,
+      getAuditTrail,
+    });
 
   const data = [
     {

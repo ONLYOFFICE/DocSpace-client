@@ -35,17 +35,7 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
-
-import { getSettingsThirdParty } from "@docspace/shared/api/files";
-import {
-  getBackupStorage,
-  getStorageRegions,
-} from "@docspace/shared/api/settings";
-import { getBackupSchedule } from "@docspace/shared/api/portal";
-
-import { useDefaultOptions } from "@docspace/shared/pages/backup/auto-backup/hooks";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -55,12 +45,12 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
-import { isObjectEmpty } from "@docspace/shared/utils/isObjectEmpty";
 
 import config from "../../../../../package.json";
 
 import ManualBackup from "./backup/manual-backup";
 import AutoBackup from "./backup/auto-backup";
+import useBackup from "./backup/useBackup";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -82,17 +72,13 @@ const DataManagementWrapper = (props) => {
 
     rootFoldersTitles,
     fetchTreeFolders,
+    language,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const [currentTabId, setCurrentTabId] = useState();
-
-  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
-    t,
-    props.language,
-  );
 
   const { interfaceDirection } = useTheme();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
@@ -101,6 +87,7 @@ const DataManagementWrapper = (props) => {
     const isAutoBackupPage = window.location.pathname.includes(
       "portal-settings/backup/auto-backup",
     );
+
     return (
       <HelpButton
         size={12}
@@ -133,59 +120,17 @@ const DataManagementWrapper = (props) => {
     );
   };
 
-  const getManualBackupData = async () => {
-    try {
-      getProgress(t);
-
-      const baseRequests = [
-        getSettingsThirdParty(),
-        getBackupStorage(),
-        getStorageRegions(),
-      ];
-
-      const optionalRequests = [];
-
-      if (isObjectEmpty(rootFoldersTitles)) {
-        optionalRequests.push(fetchTreeFolders());
-      }
-
-      const [account, backupStorage, storageRegionsS3] = await Promise.all([
-        ...baseRequests,
-        ...optionalRequests,
-      ]);
-
-      setConnectedThirdPartyAccount(account ?? null);
-      setThirdPartyStorage(backupStorage);
-      setStorageRegions(storageRegionsS3);
-    } catch (error) {
-      toastr.error(error);
-    }
-  };
-
-  const getAutoBackupData = async () => {
-    try {
-      if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
-
-      getProgress(t);
-      const [account, backupSchedule, backupStorage, newStorageRegions] =
-        await Promise.all([
-          getSettingsThirdParty(),
-          getBackupSchedule(),
-          getBackupStorage(),
-          getStorageRegions(),
-        ]);
-
-      if (account) setConnectedThirdPartyAccount(account);
-      if (backupStorage) setThirdPartyStorage(backupStorage);
-
-      setBackupSchedule(backupSchedule);
-      setStorageRegions(newStorageRegions);
-
-      setDefaultOptions(periodsObject, weekdaysLabelArray);
-    } catch (error) {
-      toastr.error(error);
-    }
-  };
+  const { getManualBackupData, getAutoBackupData } = useBackup({
+    getProgress,
+    rootFoldersTitles,
+    fetchTreeFolders,
+    setStorageRegions,
+    setThirdPartyStorage,
+    setConnectedThirdPartyAccount,
+    setBackupSchedule,
+    setDefaultOptions,
+    language,
+  });
 
   const data = [
     {
@@ -275,10 +220,13 @@ export const Component = inject(
     setup,
     currentTariffStatusStore,
     backup,
+    authStore,
   }) => {
     const { initSettings } = setup;
 
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
+
+    const language = authStore.language;
 
     const {
       getProgress,
@@ -325,6 +273,7 @@ export const Component = inject(
 
       rootFoldersTitles,
       fetchTreeFolders,
+      language,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

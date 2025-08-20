@@ -30,11 +30,11 @@ import { useNavigate, useLocation } from "react-router";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getPaymentAccount } from "@docspace/shared/api/portal";
 import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import config from "../../../../../package.json";
+import useDeleteData from "./useDeleteData";
 
 const DeleteData = (props) => {
   const { t, isNotPaidPeriod, tReady, getPortalOwner } = props;
@@ -45,17 +45,10 @@ const DeleteData = (props) => {
   const [currentTabId, setCurrentTabId] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const [stripeUrl, setStripeUrl] = useState(null);
-
-  const fetchPortalDeletionData = async () => {
-    await getPortalOwner();
-    const res = await getPaymentAccount();
-    setStripeUrl(res);
-  };
-
-  const fetchPortalDeactivationData = async () => {
-    await getPortalOwner();
-  };
+  const { stripeUrl, fetchPortalDeletionData, fetchPortalDeactivationData } =
+    useDeleteData({
+      getPortalOwner,
+    });
 
   const data = [
     {

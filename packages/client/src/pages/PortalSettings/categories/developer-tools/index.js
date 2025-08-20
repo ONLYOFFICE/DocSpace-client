@@ -33,14 +33,9 @@ import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Tabs } from "@docspace/shared/components/tabs";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  getApiKeyPermissions,
-  getApiKeys,
-} from "@docspace/shared/api/api-keys";
 
 import JavascriptSDK from "./JavascriptSDK";
 import Webhooks from "./Webhooks";
@@ -50,6 +45,7 @@ import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
 import ApiKeys from "./ApiKeys";
+import useDeveloperTools from "./useDeveloperTools";
 
 const DeveloperToolsWrapper = (props) => {
   const {
@@ -68,12 +64,6 @@ const DeveloperToolsWrapper = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
 
-  const [errorOAuth, setErrorOAuth] = useState(null);
-
-  const [listItems, setListItems] = useState([]);
-  const [permissions, setPermissions] = useState([]);
-  const [errorKeys, setErrorKeys] = useState(null);
-
   const { t } = useTranslation([
     "JavascriptSdk",
     "Webhooks",
@@ -82,48 +72,25 @@ const DeveloperToolsWrapper = (props) => {
     "Common",
     "OAuth",
   ]);
-  // const [, startTransition] = useTransition();
 
-  const getJavascriptSDKData = () => {
-    getCSPSettings();
-  };
-
-  const getWebhooksData = async () => {
-    await loadWebhooks();
-  };
-
-  const getOAuthData = useCallback(async () => {
-    const actions = [];
-
-    try {
-      if (!isInit) {
-        actions.push(fetchScopes());
-      }
-      actions.push(fetchClients());
-
-      await Promise.all(actions);
-    } catch (e) {
-      setErrorOAuth(e);
-    }
-
-    setIsInit(true);
-  }, [fetchClients, fetchScopes, isInit, setIsInit]);
-
-  const getKeysData = async () => {
-    setIsLoading(true);
-    try {
-      const [keys, permissionsData] = await Promise.all([
-        getApiKeys(),
-        getApiKeyPermissions(),
-      ]);
-
-      setListItems(keys);
-      setPermissions(permissionsData);
-    } catch (err) {
-      toastr.error(err);
-      setErrorKeys(err);
-    }
-  };
+  const {
+    getJavascriptSDKData,
+    getWebhooksData,
+    getOAuthData,
+    errorOAuth,
+    getKeysData,
+    errorKeys,
+    listItems,
+    setListItems,
+    permissions,
+  } = useDeveloperTools({
+    getCSPSettings,
+    loadWebhooks,
+    fetchClients,
+    fetchScopes,
+    isInit,
+    setIsInit,
+  });
 
   const sdkLabel = (
     <div style={{ boxSizing: "border-box", display: "flex", gap: "8px" }}>
@@ -142,9 +109,7 @@ const DeveloperToolsWrapper = (props) => {
         id: "oauth",
         name: t("OAuth:OAuth"),
         content: <OAuth error={errorOAuth} />,
-        onClick: async () => {
-          await getOAuthData();
-        },
+        onClick: getOAuthData,
       }
     : {};
 

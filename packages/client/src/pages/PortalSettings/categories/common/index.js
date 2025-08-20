@@ -39,6 +39,7 @@ import Branding from "./branding";
 import Appearance from "./appearance";
 import LoaderTabs from "./sub-components/loaderTabs";
 import { resetSessionStorage } from "../../utils";
+import useCommon from "./useCommon";
 
 const TabsCommon = (props) => {
   const {
@@ -59,22 +60,13 @@ const TabsCommon = (props) => {
 
   const [currentTabId, setCurrentTabId] = useState();
 
-  const getCustomizationData = () => {
-    if (isMobileView) {
-      loadBaseInfo("language-and-time-zone");
-      loadBaseInfo("dns-settings");
-      loadBaseInfo("configure-deep-link");
-    } else {
-      loadBaseInfo("general");
-    }
-
-    getGreetingSettingsIsDefault();
-  };
-
-  const getBrandingData = () => {
-    getBrandName();
-    initWhiteLabel();
-  };
+  const { getCustomizationData, getBrandingData } = useCommon({
+    loadBaseInfo,
+    isMobileView,
+    getGreetingSettingsIsDefault,
+    getBrandName,
+    initWhiteLabel,
+  });
 
   const data = [
     {

@@ -179,18 +179,59 @@ const Template = (args: SelectorProps) => {
   const { isMultiSelect } = args;
 
   const [rendItems, setRendItems] = React.useState(renderedItems);
+  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 
   const loadNextPage = React.useCallback(async (index: number) => {
     setRendItems((val) => [...val, ...items.slice(index, index + 100)]);
   }, []);
 
+  React.useEffect(() => {
+    // Ensure initial scroll is at top with minimal interference and no jumps.
+    const raf = requestAnimationFrame(() => {
+      const root = wrapperRef.current;
+      if (!root) return;
+
+      const setTop = (node: unknown) => {
+        try {
+          if (
+            node &&
+            typeof node.scrollTop === "number" &&
+            node.scrollTop > 0
+          ) {
+            node.scrollTo?.(0, 0);
+            node.scrollTop = 0;
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      };
+
+      const pageEl = (document.scrollingElement ||
+        document.documentElement) as unknown as HTMLElement;
+      setTop(pageEl);
+
+      // Story-local scroll containers
+      const scrollRoot = root.querySelector(
+        ".selector-body-scroll",
+      ) as HTMLElement | null;
+      const scrollContent = root.querySelector(
+        ".selector-body-scroll .scrollbar__content",
+      ) as HTMLElement | null;
+      [scrollRoot, scrollContent].forEach(setTop);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
     <div
+      ref={wrapperRef}
       style={{
         width: "480px",
         height: "485px",
         border: `1px solid ${globalColors.grayLightMid}`,
         margin: "auto",
+        overflow: "hidden",
+        boxSizing: "border-box",
       }}
     >
       {/* @ts-expect-error args is good */}
@@ -218,8 +259,8 @@ export const Default: Story = {
     onSelect: () => {},
     isMultiSelect: false,
     selectedItems,
-    acceptButtonLabel: "Add",
-    onAccept: () => {},
+    submitButtonLabel: "Add",
+    onSubmit: () => {},
     withSelectAll: false,
     selectAllLabel: "All accounts",
     selectAllIcon: ArchiveSvgUrl,
@@ -251,7 +292,7 @@ export const Default: Story = {
     withSearch: false,
     isBreadCrumbsLoading: false,
     alwaysShowFooter: false,
-    disableAcceptButton: false,
+    disableSubmitButton: false,
     descriptionText: "",
   },
 };
@@ -267,8 +308,8 @@ export const BreadCrumbs: Story = {
     onSelect: () => {},
     isMultiSelect: false,
     selectedItems,
-    acceptButtonLabel: "Add",
-    onAccept: () => {},
+    submitButtonLabel: "Add",
+    onSubmit: () => {},
     withSelectAll: false,
     selectAllLabel: "All accounts",
     selectAllIcon: ArchiveSvgUrl,
@@ -310,7 +351,7 @@ export const BreadCrumbs: Story = {
     footerCheckboxLabel: "",
     currentFooterInputValue: "",
     alwaysShowFooter: false,
-    disableAcceptButton: false,
+    disableSubmitButton: false,
     descriptionText: "",
   },
 };
@@ -326,8 +367,8 @@ export const NewName: Story = {
     onSelect: () => {},
     isMultiSelect: false,
     selectedItems,
-    acceptButtonLabel: "Add",
-    onAccept: () => {},
+    submitButtonLabel: "Add",
+    onSubmit: () => {},
     withSelectAll: false,
     selectAllLabel: "All accounts",
     selectAllIcon: ArchiveSvgUrl,
@@ -367,7 +408,7 @@ export const NewName: Story = {
     footerCheckboxLabel: "Open saved document in new tab",
     currentFooterInputValue: "OldFIleName.docx",
     alwaysShowFooter: false,
-    disableAcceptButton: false,
+    disableSubmitButton: false,
     descriptionText: "",
   },
 };

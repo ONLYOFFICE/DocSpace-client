@@ -68,7 +68,7 @@ export const Default: Story = {
     displayType: ContextMenuButtonDisplayType.dropdown,
     iconName: VerticalDotsReactSvgUrl,
     size: 16,
-    directionX: "left",
+    directionX: "right",
     directionY: "bottom",
     fixedDirection: true,
     isDisabled: false,

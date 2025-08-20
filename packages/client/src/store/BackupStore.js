@@ -62,6 +62,8 @@ class BackupStore {
 
   currentQuotaStore = null;
 
+  currentTariffStatusStore = null;
+
   settingsStore = null;
 
   /** @type {import("./ThirdPartyStore").default} */
@@ -169,12 +171,19 @@ class BackupStore {
 
   isInited = false;
 
-  constructor(authStore, thirdPartyStore, currentQuotaStore, settingsStore) {
+  constructor(
+    authStore,
+    thirdPartyStore,
+    currentQuotaStore,
+    currentTariffStatusStore,
+    settingsStore,
+  ) {
     makeAutoObservable(this);
 
     this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
   }
 
@@ -189,21 +198,20 @@ class BackupStore {
   };
 
   get backupPageEnable() {
-    const { isFreeTariff, isNonProfit } = this.currentQuotaStore;
-    const { standalone } = this.settingsStore;
+    const { maxFreeBackups, isBackupPaid } = this.currentQuotaStore;
+    const { isNotPaidPeriod } = this.currentTariffStatusStore;
 
-    if (standalone) return true;
+    if (!isBackupPaid || isNotPaidPeriod) return true;
 
-    if (isFreeTariff || isNonProfit) return false;
+    if (maxFreeBackups === 0) return this.backupServiceOn;
 
-    if (this.backupServiceOn) return true;
+    if (this.backupsCount >= maxFreeBackups) return this.backupServiceOn;
 
-    return this.backupsCount < 2;
+    return true;
   }
 
   setBackupServiceOn = (serviceOn) => {
     this.backupServiceOn = serviceOn;
-    console.log("this.backupServiceOn", this.backupServiceOn);
   };
 
   setConnectedThirdPartyAccount = (account) => {

@@ -112,6 +112,7 @@ const backupStore = new BackupStore(
   authStore,
   thirdPartyStore,
   currentQuotaStore,
+  currentTariffStatusStore,
   settingsStore,
 );
 const commonStore = new CommonStore(settingsStore);

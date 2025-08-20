@@ -55,13 +55,12 @@ const ManualBackupWrapper = ({
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
   setBackupsCount,
-  standalone,
-  isFreeTariff,
-  isNonProfit,
   setIsInited,
   fetchPayerInfo,
   setBackupServiceOn,
   setDownloadingProgress,
+  isBackupPaid,
+  maxFreeBackups,
   ...props
 }: ManualBackupWrapperProps) => {
   const [isInitialLoading, setIsInitialLoading] = useState(false);
@@ -75,8 +74,6 @@ const ManualBackupWrapper = ({
   useLayoutEffect(() => {
     setDocumentTitle(t("Common:DataBackup"));
   }, [setDocumentTitle, t]);
-
-  const isNotFreeOrNonProfit = !standalone && !isFreeTariff && !isNonProfit;
 
   useEffect(() => {
     if (isNotPaidPeriod) return setIsEmptyContentBeforeLoader(false);
@@ -97,9 +94,13 @@ const ManualBackupWrapper = ({
 
         const optionalRequests = [];
 
-        if (isNotFreeOrNonProfit) {
-          baseRequests.push(getBackupsCount());
+        if (isBackupPaid) {
           baseRequests.push(getServiceState());
+
+          if (maxFreeBackups > 0) {
+            baseRequests.push(getBackupsCount());
+          }
+
           optionalRequests.push(fetchPayerInfo());
         }
 
@@ -107,22 +108,24 @@ const ManualBackupWrapper = ({
           account,
           backupStorage,
           storageRegionsS3,
-          backupsCount,
           serviceState,
+          backupsCount,
         ] = await Promise.all([...baseRequests, ...optionalRequests]);
 
         setConnectedThirdPartyAccount(account ?? null);
         setThirdPartyStorage(backupStorage);
         setStorageRegions(storageRegionsS3);
 
-        if (typeof backupsCount === "number") setBackupsCount(backupsCount);
-        if (
-          serviceState &&
-          typeof serviceState === "object" &&
-          "enabled" in serviceState
-        )
-          setBackupServiceOn(serviceState.enabled as boolean);
+        if (isBackupPaid) {
+          if (typeof backupsCount === "number") setBackupsCount(backupsCount);
 
+          if (
+            serviceState &&
+            typeof serviceState === "object" &&
+            "enabled" in serviceState
+          )
+            setBackupServiceOn(serviceState.enabled as boolean);
+        }
         setIsInited(true);
       } catch (error) {
         toastr.error(error as Error);
@@ -145,11 +148,12 @@ const ManualBackupWrapper = ({
         timerId.current = null;
       }
       resetDownloadingProgress();
+      setIsInited(false);
     };
   }, []);
 
   const updateDownloadingProgress = async (progress: number) => {
-    if (progress === 100 && isNotFreeOrNonProfit) {
+    if (progress === 100 && isBackupPaid) {
       const backupsCount = await getBackupsCount();
       setBackupsCount(backupsCount);
     }
@@ -225,8 +229,8 @@ export default inject<
       setConnectedThirdPartyAccount,
       setBackupsCount,
       setIsInited,
-      backupPageEnable,
       setBackupServiceOn,
+      backupPageEnable,
     } = backup;
 
     const {
@@ -238,13 +242,8 @@ export default inject<
       setNewPath,
     } = filesSelectorInput;
 
-    const {
-      dataBackupUrl,
-      currentDeviceType,
-      currentColorScheme,
-      portals,
-      standalone,
-    } = settingsStore;
+    const { dataBackupUrl, currentDeviceType, currentColorScheme, portals } =
+      settingsStore;
 
     const {
       removeItem: storeItem,
@@ -262,12 +261,12 @@ export default inject<
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
-    const { isFreeTariff, isNonProfit } = currentQuotaStore;
+    const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
 
     const pageIsDisabled = isManagement()
-      ? portals?.length === 1
+      ? portals?.length === 1 || !backupPageEnable
       : !backupPageEnable;
 
     // TODO: fix may be an empty object!!!
@@ -349,6 +348,9 @@ export default inject<
       // currentTariffStatusStore
       isNotPaidPeriod,
 
+      // currentQuotaStore
+      isBackupPaid,
+
       // thirdPartyStore
       providers,
       deleteThirdParty,
@@ -356,13 +358,13 @@ export default inject<
       openConnectWindow,
       // filesSettingsStore
       settingsFileSelector,
-      standalone,
+
       setBackupsCount,
-      isFreeTariff,
-      isNonProfit,
+
       setIsInited,
       fetchPayerInfo,
       setBackupServiceOn,
+      maxFreeBackups,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

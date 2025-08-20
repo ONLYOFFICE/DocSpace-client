@@ -64,9 +64,8 @@ const AutoBackupWrapper = ({
   setBackupServiceOn,
   setIsInited,
   fetchPayerInfo,
-  standalone,
-  isFreeTariff,
-  isNonProfit,
+  isBackupPaid,
+  maxFreeBackups,
   ...props
 }: AutoBackupWrapperProps) => {
   const timerIdRef = useRef<number>(null);
@@ -98,9 +97,13 @@ const AutoBackupWrapper = ({
 
         const optionalRequests = [];
 
-        if (!standalone && !isFreeTariff && !isNonProfit) {
-          baseRequests.push(getBackupsCount());
+        if (isBackupPaid) {
           baseRequests.push(getServiceState());
+
+          if (maxFreeBackups > 0) {
+            baseRequests.push(getBackupsCount());
+          }
+
           optionalRequests.push(fetchPayerInfo());
         }
 
@@ -109,8 +112,8 @@ const AutoBackupWrapper = ({
           backupSchedule,
           backupStorage,
           newStorageRegions,
-          backupsCount,
           serviceState,
+          backupsCount,
         ] = await Promise.all([...baseRequests, ...optionalRequests]);
 
         if (account) setConnectedThirdPartyAccount(account);
@@ -120,9 +123,11 @@ const AutoBackupWrapper = ({
 
         setStorageRegions(newStorageRegions);
 
-        if (typeof backupsCount === "number") setBackupsCount(backupsCount);
-        if (typeof serviceState === "object")
-          setBackupServiceOn(serviceState?.enabled);
+        if (isBackupPaid) {
+          if (typeof backupsCount === "number") setBackupsCount(backupsCount);
+          if (typeof serviceState === "object")
+            setBackupServiceOn(serviceState?.enabled);
+        }
 
         setIsInited(true);
         setDefaultOptions(periodsObject, weekdaysLabelArray);
@@ -149,6 +154,7 @@ const AutoBackupWrapper = ({
     resetDownloadingProgress();
     props.setterSelectedEnableSchedule(false);
     props.toDefault();
+    setIsInited(false);
   });
 
   useEffect(() => {
@@ -199,9 +205,8 @@ export default inject<
       deleteThirdParty,
     } = thirdPartyStore;
 
-    const { automaticBackupUrl, currentColorScheme, standalone } =
-      settingsStore;
-    const { isFreeTariff, isNonProfit } = currentQuotaStore;
+    const { automaticBackupUrl, currentColorScheme } = settingsStore;
+    const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
 
     const {
       basePath,
@@ -405,9 +410,8 @@ export default inject<
       setBackupsCount,
       setBackupServiceOn,
       setIsInited,
-      standalone,
-      isFreeTariff,
-      isNonProfit,
+      isBackupPaid,
+      maxFreeBackups,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

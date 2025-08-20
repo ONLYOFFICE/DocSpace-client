@@ -49,9 +49,8 @@ export interface InjectedAutoBackupWrapperProps
   setBackupServiceOn: (enabled: boolean) => void;
   setIsInited: (inited: boolean) => void;
   fetchPayerInfo: () => void;
-  standalone: boolean;
-  isFreeTariff: boolean | undefined;
-  isNonProfit: boolean | undefined;
+  isBackupPaid: boolean;
+  maxFreeBackups: number;
 }
 
 export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &

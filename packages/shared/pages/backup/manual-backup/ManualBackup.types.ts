@@ -146,6 +146,9 @@ export interface ManualBackupProps {
   isNotPaidPeriod: boolean;
   // end currentTariffStatusStore
 
+  isBackupPaid?: boolean;
+  maxFreeBackups?: number;
+
   // selectedThirdPartyAccount from backupStore
   // removeItem from dialogsStore
   removeItem: ThirdPartyAccountType; // selectedThirdPartyAccount ?? removeItem

@@ -162,6 +162,7 @@ const SectionHeaderContent = (props) => {
     removeAdmins,
     deviceType,
     isNotPaidPeriod,
+    isBackupPaid,
   } = props;
 
   const navigate = useNavigate();
@@ -208,8 +209,8 @@ const SectionHeaderContent = (props) => {
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
       case "Backup":
-        if (standalone) return true;
-        return isNotPaidPeriod;
+        if (isNotPaidPeriod) return true;
+        return !isBackupPaid;
       default:
         return true;
     }
@@ -448,6 +449,7 @@ export default inject(
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
+      isBackupPaid,
     } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
@@ -496,6 +498,7 @@ export default inject(
       logoText,
       deviceType,
       isNotPaidPeriod,
+      isBackupPaid,
     };
   },
 )(

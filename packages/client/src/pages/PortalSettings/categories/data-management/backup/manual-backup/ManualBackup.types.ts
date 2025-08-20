@@ -45,10 +45,8 @@ export interface InjectedManualBackupProps
   setBackupServiceOn: (enabled: boolean) => void;
   setIsInited: (inited: boolean) => void;
   fetchPayerInfo: () => void;
-  standalone: boolean;
-  isFreeTariff: boolean | undefined;
-  isNonProfit: boolean | undefined;
-  isNotPaidPeriod: boolean;
+  isBackupPaid: boolean;
+  maxFreeBackups: number;
 }
 
 export interface ExternalManualBackupProps

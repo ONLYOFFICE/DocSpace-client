@@ -37,11 +37,11 @@ import { Text } from "@docspace/shared/components/text";
 type InjectedProps = {
   isPayer?: boolean;
   walletCustomerEmail?: string;
-  isFreeTariff?: boolean;
   cardLinkedOnNonProfit?: boolean;
   cardLinkedOnFreeTariff?: boolean;
-  isNonProfit?: boolean;
+  isBackupPaid?: boolean;
   backupsCount?: number;
+  maxFreeBackups?: number;
   isInited?: boolean;
   backupServiceOn?: boolean;
 };
@@ -49,11 +49,11 @@ type InjectedProps = {
 const Warning = ({
   isPayer,
   walletCustomerEmail,
-  isFreeTariff,
   cardLinkedOnNonProfit,
   cardLinkedOnFreeTariff,
-  isNonProfit,
+  isBackupPaid,
   backupsCount = 0,
+  maxFreeBackups = 0,
   isInited,
   backupServiceOn,
 }: InjectedProps) => {
@@ -70,91 +70,108 @@ const Warning = ({
   const isBackupRoute =
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
 
-  const setWarningTextFunc = () => {
-    const connectServiceLink = (
-      <Trans
-        t={t}
-        i18nKey="ConnectService"
-        ns="Services"
-        components={{
-          1: (
-            <Link
-              key="connect-service-link"
-              tag="a"
-              onClick={onClickServiceUrl}
-              color="accent"
-            />
-          ),
-        }}
-      />
-    );
-
-    const connectPayer = (
-      <Trans
-        t={t}
-        i18nKey="ContactToPayer"
-        ns="Services"
-        values={{ email: walletCustomerEmail }}
-        components={{
-          1: (
-            <Link
-              key="contact-payer-link"
-              tag="a"
-              color="accent"
-              href={`mailto:${walletCustomerEmail}`}
-            />
-          ),
-        }}
-      />
-    );
-    let resultText: React.ReactNode = "";
-
-    if (!isFreeTariff && !isNonProfit) {
-      try {
-        const backupText = t("Services:FreeBackupsPerMonth", {
-          value: backupsCount,
-          maxValue: 2,
-        });
-
-        resultText = backupText;
-
-        if (backupsCount >= 2 && !backupServiceOn) {
-          const additionalInfo = isPayer ? connectServiceLink : connectPayer;
-          resultText = (
-            <>
-              <Text key="backup-text" as="span" fontWeight={600}>
-                {backupText}
-              </Text>{" "}
-              <Text key="additional-info" as="span">
-                {additionalInfo}
-              </Text>
-            </>
-          );
-        }
-
-        setWarningText(resultText);
-      } catch (e) {
-        console.error(e);
-      }
-
-      return;
-    }
-
-    resultText = connectServiceLink;
-
-    if (cardLinkedOnNonProfit || cardLinkedOnFreeTariff) {
-      resultText = isPayer ? connectServiceLink : connectPayer;
-    }
-
-    setWarningText(resultText);
-  };
-
   React.useEffect(() => {
+    if (!isBackupPaid) return;
     if (!isBackupRoute || !isInited) return;
     if (!ready) return;
 
+    const setWarningTextFunc = () => {
+      const connectServiceLink = (
+        <Trans
+          t={t}
+          i18nKey="ConnectService"
+          ns="Services"
+          components={{
+            1: (
+              <Link
+                key="connect-service-link"
+                tag="a"
+                onClick={onClickServiceUrl}
+                color="accent"
+              />
+            ),
+          }}
+        />
+      );
+
+      const connectPayer = (
+        <Trans
+          t={t}
+          i18nKey="ContactToPayer"
+          ns="Services"
+          values={{ email: walletCustomerEmail }}
+          components={{
+            1: (
+              <Link
+                key="contact-payer-link"
+                tag="a"
+                color="accent"
+                href={`mailto:${walletCustomerEmail}`}
+              />
+            ),
+          }}
+        />
+      );
+      let resultText: React.ReactNode = "";
+
+      if (maxFreeBackups > 0) {
+        try {
+          const backupText = t("Services:FreeBackupsPerMonth", {
+            value: backupsCount,
+            maxValue: maxFreeBackups,
+          });
+
+          resultText = backupText;
+
+          if (backupsCount >= maxFreeBackups && !backupServiceOn) {
+            const additionalInfo = isPayer ? connectServiceLink : connectPayer;
+            resultText = (
+              <>
+                <Text key="backup-text" as="span" fontWeight={600}>
+                  {backupText}
+                </Text>{" "}
+                <Text key="additional-info" as="span">
+                  {additionalInfo}
+                </Text>
+              </>
+            );
+          }
+
+          setWarningText(resultText);
+        } catch (e) {
+          console.error(e);
+        }
+
+        return;
+      }
+
+      resultText = connectServiceLink;
+
+      if (cardLinkedOnNonProfit || cardLinkedOnFreeTariff) {
+        if (backupServiceOn) {
+          resultText = "";
+        } else {
+          resultText = isPayer ? connectServiceLink : connectPayer;
+        }
+      }
+
+      setWarningText(resultText);
+    };
+
     setWarningTextFunc();
-  }, [ready, backupsCount, isInited, backupServiceOn]);
+  }, [
+    ready,
+    backupsCount,
+    isInited,
+    backupServiceOn,
+    cardLinkedOnNonProfit,
+    cardLinkedOnFreeTariff,
+    isPayer,
+  ]);
+
+  React.useEffect(() => {
+    if (warningText) setWarningText("");
+  }, [isBackupRoute]);
 
   if (!isBackupRoute || !warningText) return null;
 
@@ -171,19 +188,19 @@ export default inject(
     const { isPayer, cardLinkedOnNonProfit, cardLinkedOnFreeTariff } =
       paymentStore;
     const { walletCustomerEmail } = currentTariffStatusStore;
-    const { isFreeTariff, isNonProfit } = currentQuotaStore;
+    const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited, backupServiceOn } = backup;
 
     return {
       isPayer,
       walletCustomerEmail,
-      isFreeTariff,
       cardLinkedOnNonProfit,
       cardLinkedOnFreeTariff,
-      isNonProfit,
+      isBackupPaid,
       backupsCount,
       isInited,
       backupServiceOn,
+      maxFreeBackups,
     };
   },
 )(observer(Warning));

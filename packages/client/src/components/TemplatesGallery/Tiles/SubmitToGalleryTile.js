@@ -193,7 +193,7 @@ const SubmitToGalleryTile = ({
           className="button-submit"
           onClick={onSubmitToGallery}
           size="small"
-          label="Upload in the Gallery"
+          label={t("FormGallery:UploadGallery")}
           scale
         />
       </div>

@@ -24,41 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TTranslation } from "@docspace/shared/types";
-import type { TFolder } from "@docspace/shared/api/files/types";
-import type { ManualBackupProps } from "@docspace/shared/pages/backup/manual-backup/ManualBackup.types";
+import { request } from "../client";
 
-export interface InjectedManualBackupProps
-  extends Omit<
-    ManualBackupProps,
-    | "maxWidth"
-    | "buttonSize"
-    | "isNeedFilePath"
-    | "isInitialLoading"
-    | "isEmptyContentBeforeLoader"
-  > {
-  getProgress: (t: TTranslation) => Promise<void>;
-  setStorageRegions: (regions: unknown) => void;
-  setThirdPartyStorage: (list: unknown) => void;
-  fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-  resetDownloadingProgress: VoidFunction;
-  setConnectedThirdPartyAccount: (account: any) => void;
-  setBackupsCount: (count: number) => void;
-  setBackupServiceOn: (enabled: boolean) => void;
-  setIsInited: (inited: boolean) => void;
-  fetchPayerInfo: () => void;
-  standalone: boolean;
-  isFreeTariff: boolean | undefined;
-  isNonProfit: boolean | undefined;
-  isNotPaidPeriod: boolean;
+export async function getBackupsCount(from?: string, to?: string) {
+  const params = new URLSearchParams();
+
+  if (from) params.append("from", from);
+  if (to) params.append("to", to);
+
+  const query = params.toString();
+  const url = `/backup/getbackupscount${query ? `?${query}` : ""}`;
+
+  const res = (await request({
+    method: "get",
+    url,
+  })) as number;
+
+  return res;
 }
 
-export interface ExternalManualBackupProps
-  extends Pick<
-    ManualBackupProps,
-    "maxWidth" | "buttonSize" | "isNeedFilePath"
-  > {}
+export async function getServiceState() {
+  const res = (await request({
+    method: "get",
+    url: "backup/getservicestate",
+  })) as { enabled: boolean };
 
-export interface ManualBackupWrapperProps
-  extends InjectedManualBackupProps,
-    ExternalManualBackupProps {}
+  return res;
+}

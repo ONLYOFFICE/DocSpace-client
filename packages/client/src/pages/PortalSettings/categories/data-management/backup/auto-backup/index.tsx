@@ -42,6 +42,7 @@ import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TColorScheme } from "@docspace/shared/themes";
+import { getBackupsCount, getServiceState } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
@@ -60,6 +61,13 @@ const AutoBackupWrapper = ({
   fetchTreeFolders,
   resetDownloadingProgress,
   setErrorInformation,
+  setBackupsCount,
+  setBackupServiceOn,
+  setIsInited,
+  fetchPayerInfo,
+  standalone,
+  isFreeTariff,
+  isNonProfit,
   ...props
 }: AutoBackupWrapperProps) => {
   const timerIdRef = useRef<number>(null);
@@ -84,20 +92,43 @@ const AutoBackupWrapper = ({
           fetchTreeFolders();
 
         getProgress(t);
-        const [account, backupSchedule, backupStorage, newStorageRegions] =
-          await Promise.all([
-            getSettingsThirdParty(),
-            getBackupSchedule(),
-            getBackupStorage(),
-            getStorageRegions(),
-          ]);
+
+        const baseRequests: (Promise<any> | undefined)[] = [
+          getSettingsThirdParty(),
+          getBackupSchedule(),
+          getBackupStorage(),
+          getStorageRegions(),
+        ];
+
+        const optionalRequests = [];
+
+        if (!standalone && !isFreeTariff && !isNonProfit) {
+          baseRequests.push(getBackupsCount());
+          baseRequests.push(getServiceState());
+          optionalRequests.push(fetchPayerInfo());
+        }
+
+        const [
+          account,
+          backupSchedule,
+          backupStorage,
+          newStorageRegions,
+          backupsCount,
+          serviceState,
+        ] = await Promise.all([...baseRequests, ...optionalRequests]);
 
         if (account) setConnectedThirdPartyAccount(account);
         if (backupStorage) setThirdPartyStorage(backupStorage);
 
         setBackupSchedule(backupSchedule!);
+
         setStorageRegions(newStorageRegions);
 
+        if (typeof backupsCount === "number") setBackupsCount(backupsCount);
+        if (typeof serviceState === "object")
+          setBackupServiceOn(serviceState?.enabled);
+
+        setIsInited(true);
         setDefaultOptions(periodsObject, weekdaysLabelArray);
       } catch (error) {
         setErrorInformation(error, t);
@@ -152,15 +183,17 @@ export default inject<
     backup,
     authStore,
     settingsStore,
-    currentQuotaStore,
     filesSettingsStore,
     treeFoldersStore,
     filesSelectorInput,
     thirdPartyStore,
     dialogsStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
   }) => {
     const language = authStore.language;
-    const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+
+    const { fetchPayerInfo } = currentTariffStatusStore;
     const { getIcon, filesSettings } = filesSettingsStore;
 
     const settingsFileSelector = { getIcon, filesSettings };
@@ -171,15 +204,9 @@ export default inject<
       deleteThirdParty,
     } = thirdPartyStore;
 
-    const {
-      checkEnablePortalSettings,
-      automaticBackupUrl,
-      currentColorScheme,
-    } = settingsStore;
-
-    const isEnableAuto = checkEnablePortalSettings(
-      Boolean(isRestoreAndAutoBackupAvailable),
-    );
+    const { automaticBackupUrl, currentColorScheme, standalone } =
+      settingsStore;
+    const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const {
@@ -267,7 +294,14 @@ export default inject<
       backupProgressError,
       setBackupProgressError,
       setterSelectedEnableSchedule,
+      backupPageEnable,
+
+      setBackupsCount,
+      setBackupServiceOn,
+      setIsInited,
     } = backup;
+
+    const isEnableAuto = backupPageEnable;
 
     const defaultRegion =
       defaultFormSettings && "region" in defaultFormSettings
@@ -377,6 +411,13 @@ export default inject<
       deleteThirdPartyDialogVisible,
       setConnectDialogVisible,
       setDeleteThirdPartyDialogVisible,
+      fetchPayerInfo,
+      setBackupsCount,
+      setBackupServiceOn,
+      setIsInited,
+      standalone,
+      isFreeTariff,
+      isNonProfit,
     };
   },
 )(observer(AutoBackupWrapper as React.FC<ExternalAutoBackupWrapperProps>));

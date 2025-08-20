@@ -47,6 +47,13 @@ export interface InjectedAutoBackupWrapperProps
   fetchTreeFolders: () => Promise<TFolder[] | undefined>;
   resetDownloadingProgress: VoidFunction;
   setterSelectedEnableSchedule: (enable: boolean) => void;
+  setBackupsCount: (count: number) => void;
+  setBackupServiceOn: (enabled: boolean) => void;
+  setIsInited: (inited: boolean) => void;
+  fetchPayerInfo: () => void;
+  standalone: boolean;
+  isFreeTariff: boolean | undefined;
+  isNonProfit: boolean | undefined;
 }
 
 export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &

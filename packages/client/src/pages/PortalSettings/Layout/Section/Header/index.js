@@ -161,6 +161,7 @@ const SectionHeaderContent = (props) => {
     toggleSelector,
     removeAdmins,
     deviceType,
+    isNotPaidPeriod,
   } = props;
 
   const navigate = useNavigate();
@@ -206,6 +207,9 @@ const SectionHeaderContent = (props) => {
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
+      case "Backup":
+        if (standalone) return true;
+        return isNotPaidPeriod;
       default:
         return true;
     }
@@ -438,12 +442,14 @@ export default inject(
     importAccountsStore,
     settingsStore,
     oauthStore,
+    currentTariffStatusStore,
   }) => {
     const {
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
     } = currentQuotaStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
     const { toggleSelector } = setup;
     const {
@@ -489,6 +495,7 @@ export default inject(
       setSelections: oauthStore.setSelections,
       logoText,
       deviceType,
+      isNotPaidPeriod,
     };
   },
 )(

@@ -128,6 +128,7 @@ const ManualBackup = ({
   backupProgressError,
   setBackupProgressError,
   setIsBackupProgressVisible,
+  setBackupServiceOn,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 

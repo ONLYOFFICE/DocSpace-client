@@ -470,22 +470,6 @@ const AutomaticBackup = ({
             >
               {t("Common:EnableAutomaticBackup")}
             </Text>
-            {!isEnableAuto && !isManagement ? (
-              <Badge
-                backgroundColor={
-                  theme.isBase
-                    ? globalColors.favoritesStatus
-                    : globalColors.favoriteStatusDark
-                }
-                label={t("Common:Paid")}
-                fontWeight="700"
-                className={classNames(
-                  styles.autoBackupBadge,
-                  "auto-backup_badge",
-                )}
-                isPaidBadge
-              />
-            ) : null}
           </div>
           <Text
             className={classNames(

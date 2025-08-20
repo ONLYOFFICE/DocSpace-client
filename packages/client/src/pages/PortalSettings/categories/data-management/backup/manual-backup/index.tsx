@@ -38,6 +38,7 @@ import { isManagement } from "@docspace/shared/utils/common";
 import ManualBackup from "@docspace/shared/pages/backup/manual-backup";
 import { isObjectEmpty } from "@docspace/shared/utils/isObjectEmpty";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
+import { getBackupsCount, getServiceState } from "@docspace/shared/api/backup";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -56,6 +57,13 @@ const ManualBackupWrapper = ({
   setThirdPartyStorage,
   resetDownloadingProgress,
   setConnectedThirdPartyAccount,
+  setBackupsCount,
+  standalone,
+  isFreeTariff,
+  isNonProfit,
+  setIsInited,
+  fetchPayerInfo,
+  setBackupServiceOn,
   ...props
 }: ManualBackupWrapperProps) => {
   const [isInitialLoading, setIsInitialLoading] = useState(false);
@@ -85,7 +93,7 @@ const ManualBackupWrapper = ({
           getSettingsThirdParty(),
           getBackupStorage(),
           getStorageRegions(),
-        ] as const;
+        ];
 
         const optionalRequests = [];
 
@@ -93,14 +101,33 @@ const ManualBackupWrapper = ({
           optionalRequests.push(fetchTreeFolders());
         }
 
-        const [account, backupStorage, storageRegionsS3] = await Promise.all([
-          ...baseRequests,
-          ...optionalRequests,
-        ]);
+        if (!standalone && !isFreeTariff && !isNonProfit) {
+          baseRequests.push(getBackupsCount());
+          baseRequests.push(getServiceState());
+          optionalRequests.push(fetchPayerInfo());
+        }
+
+        const [
+          account,
+          backupStorage,
+          storageRegionsS3,
+          backupsCount,
+          serviceState,
+        ] = await Promise.all([...baseRequests, ...optionalRequests]);
 
         setConnectedThirdPartyAccount(account ?? null);
         setThirdPartyStorage(backupStorage);
         setStorageRegions(storageRegionsS3);
+
+        if (typeof backupsCount === "number") setBackupsCount(backupsCount);
+        if (
+          serviceState &&
+          typeof serviceState === "object" &&
+          "enabled" in serviceState
+        )
+          setBackupServiceOn(serviceState.enabled as boolean);
+
+        setIsInited(true);
       } catch (error) {
         toastr.error(error as Error);
       } finally {
@@ -151,6 +178,7 @@ export default inject<
     treeFoldersStore,
     thirdPartyStore,
     filesSettingsStore,
+    currentQuotaStore,
   }) => {
     const {
       accounts,
@@ -191,6 +219,10 @@ export default inject<
       setThirdPartyAccountsInfo,
       setSelectedThirdPartyAccount,
       setConnectedThirdPartyAccount,
+      setBackupsCount,
+      setIsInited,
+      backupPageEnable,
+      setBackupServiceOn,
     } = backup;
 
     const {
@@ -202,8 +234,13 @@ export default inject<
       setNewPath,
     } = filesSelectorInput;
 
-    const { dataBackupUrl, currentDeviceType, currentColorScheme, portals } =
-      settingsStore;
+    const {
+      dataBackupUrl,
+      currentDeviceType,
+      currentColorScheme,
+      portals,
+      standalone,
+    } = settingsStore;
 
     const {
       removeItem: storeItem,
@@ -213,7 +250,7 @@ export default inject<
       setDeleteThirdPartyDialogVisible,
     } = dialogsStore;
 
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { isNotPaidPeriod, fetchPayerInfo } = currentTariffStatusStore;
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const {
       providers,
@@ -221,10 +258,13 @@ export default inject<
       setThirdPartyProviders,
       openConnectWindow,
     } = thirdPartyStore;
+    const { isFreeTariff, isNonProfit } = currentQuotaStore;
 
     const { getIcon, filesSettings } = filesSettingsStore;
 
-    const pageIsDisabled = isManagement() && portals?.length === 1;
+    const pageIsDisabled = isManagement()
+      ? portals?.length === 1
+      : !backupPageEnable;
 
     // TODO: fix may be an empty object!!!
     const removeItem = (selectedThirdPartyAccount ??
@@ -316,6 +356,13 @@ export default inject<
       openConnectWindow,
       // filesSettingsStore
       settingsFileSelector,
+      standalone,
+      setBackupsCount,
+      isFreeTariff,
+      isNonProfit,
+      setIsInited,
+      fetchPayerInfo,
+      setBackupServiceOn,
     };
   },
 )(observer(ManualBackupWrapper as React.FC<ExternalManualBackupProps>));

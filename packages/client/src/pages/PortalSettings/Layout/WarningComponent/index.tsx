@@ -32,20 +32,34 @@ import { Trans, useTranslation } from "react-i18next";
 import WarningComponent from "@docspace/shared/components/navigation/sub-components/WarningComponent";
 import { Link } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { Text } from "@docspace/shared/components/text";
 
 type InjectedProps = {
-  isCardLinkedToPortal?: boolean;
   isPayer?: boolean;
   walletCustomerEmail?: string;
+  isFreeTariff?: boolean;
+  cardLinkedOnNonProfit?: boolean;
+  cardLinkedOnFreeTariff?: boolean;
+  isNonProfit?: boolean;
+  backupsCount?: number;
+  isInited?: boolean;
+  backupServiceOn?: boolean;
 };
 
 const Warning = ({
-  isCardLinkedToPortal,
   isPayer,
   walletCustomerEmail,
+  isFreeTariff,
+  cardLinkedOnNonProfit,
+  cardLinkedOnFreeTariff,
+  isNonProfit,
+  backupsCount = 0,
+  isInited,
+  backupServiceOn,
 }: InjectedProps) => {
-  const { t } = useTranslation(["Services", "Common"]);
+  const { t, ready } = useTranslation(["Services", "Common"]);
   const { pathname } = useLocation();
+  const [warningText, setWarningText] = React.useState<React.ReactNode>("");
 
   const onClickServiceUrl = () => {
     const servicePageUrl = combineUrl("/portal-settings", "/services");
@@ -56,55 +70,120 @@ const Warning = ({
   const isBackupRoute =
     typeof pathname === "string" && pathname.includes("portal-settings/backup");
 
-  if (!isBackupRoute) return null;
+  const setWarningTextFunc = () => {
+    const connectServiceLink = (
+      <Trans
+        t={t}
+        i18nKey="ConnectService"
+        ns="Services"
+        components={{
+          1: (
+            <Link
+              key="connect-service-link"
+              tag="a"
+              onClick={onClickServiceUrl}
+              color="accent"
+            />
+          ),
+        }}
+      />
+    );
 
-  const warningText = () => {
-    if (isCardLinkedToPortal) {
-      if (isPayer) {
-        return (
-          <Trans
-            t={t}
-            i18nKey="ConnectService"
-            ns="Services"
-            components={{
-              1: <Link tag="a" onClick={onClickServiceUrl} color="accent" />,
-            }}
-          />
-        );
+    const connectPayer = (
+      <Trans
+        t={t}
+        i18nKey="ContactToPayer"
+        ns="Services"
+        values={{ email: walletCustomerEmail }}
+        components={{
+          1: (
+            <Link
+              key="contact-payer-link"
+              tag="a"
+              color="accent"
+              href={`mailto:${walletCustomerEmail}`}
+            />
+          ),
+        }}
+      />
+    );
+    let resultText: React.ReactNode = "";
+
+    if (!isFreeTariff && !isNonProfit) {
+      try {
+        const backupText = t("Services:FreeBackupsPerMonth", {
+          value: backupsCount,
+          maxValue: 2,
+        });
+
+        resultText = backupText;
+
+        if (backupsCount >= 2 && !backupServiceOn) {
+          const additionalInfo = isPayer ? connectServiceLink : connectPayer;
+          resultText = (
+            <>
+              <Text key="backup-text" as="span" fontWeight={600}>
+                {backupText}
+              </Text>{" "}
+              <Text key="additional-info" as="span">
+                {additionalInfo}
+              </Text>
+            </>
+          );
+        }
+
+        setWarningText(resultText);
+      } catch (e) {
+        console.error(e);
       }
 
-      return (
-        <Trans
-          t={t}
-          i18nKey="ContactToPayer"
-          ns="Services"
-          values={{ email: walletCustomerEmail }}
-          components={{
-            1: (
-              <Link
-                tag="a"
-                color="accent"
-                href={`mailto:${walletCustomerEmail}`}
-              />
-            ),
-          }}
-        />
-      );
+      return;
     }
 
-    return t("FreeBackups", { value: "1", maxValue: "10" });
+    resultText = connectServiceLink;
+
+    if (cardLinkedOnNonProfit || cardLinkedOnFreeTariff) {
+      resultText = isPayer ? connectServiceLink : connectPayer;
+    }
+
+    setWarningText(resultText);
   };
 
-  return <WarningComponent title={warningText()} />;
+  React.useEffect(() => {
+    if (!isBackupRoute || !isInited) return;
+    if (!ready) return;
+
+    setWarningTextFunc();
+  }, [ready, backupsCount, isInited, backupServiceOn]);
+
+  if (!isBackupRoute || !warningText) return null;
+
+  return <WarningComponent title={warningText} />;
 };
 
-export default inject(({ paymentStore, currentTariffStatusStore }: TStore) => {
-  const { isCardLinkedToPortal, isPayer } = paymentStore;
-  const { walletCustomerEmail } = currentTariffStatusStore;
+export default inject(
+  ({
+    paymentStore,
+    currentTariffStatusStore,
+    currentQuotaStore,
+    backup,
+  }: TStore) => {
+    const { isPayer, cardLinkedOnNonProfit, cardLinkedOnFreeTariff } =
+      paymentStore;
+    const { walletCustomerEmail } = currentTariffStatusStore;
+    const { isFreeTariff, isNonProfit } = currentQuotaStore;
+    const { backupsCount, isInited, backupServiceOn } = backup;
 
-  return {
-    isCardLinkedToPortal,
-    isPayer,
-    walletCustomerEmail,
-  };
-})(observer(Warning));
+    return {
+      isPayer,
+      walletCustomerEmail,
+      isFreeTariff,
+      cardLinkedOnNonProfit,
+      cardLinkedOnFreeTariff,
+      isNonProfit,
+      backupsCount,
+      isInited,
+      backupServiceOn,
+    };
+  },
+)(observer(Warning));

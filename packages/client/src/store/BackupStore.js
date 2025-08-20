@@ -60,6 +60,10 @@ async function* uploadBackupFile(requestsDataArray, url) {
 class BackupStore {
   authStore = null;
 
+  currentQuotaStore = null;
+
+  settingsStore = null;
+
   /** @type {import("./ThirdPartyStore").default} */
   thirdPartyStore = null;
 
@@ -159,12 +163,48 @@ class BackupStore {
 
   backupProgressError = "";
 
-  constructor(authStore, thirdPartyStore) {
+  backupsCount = null;
+
+  backupServiceOn = null;
+
+  isInited = false;
+
+  constructor(authStore, thirdPartyStore, currentQuotaStore, settingsStore) {
     makeAutoObservable(this);
 
     this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
+    this.currentQuotaStore = currentQuotaStore;
+    this.settingsStore = settingsStore;
   }
+
+  setBackupsCount = (counts) => {
+    if (counts === undefined || counts === null) return;
+
+    this.backupsCount = counts;
+  };
+
+  setIsInited = (isInited) => {
+    this.isInited = isInited;
+  };
+
+  get backupPageEnable() {
+    const { isFreeTariff, isNonProfit } = this.currentQuotaStore;
+    const { standalone } = this.settingsStore;
+
+    if (standalone) return true;
+
+    if (isFreeTariff || isNonProfit) return false;
+
+    if (this.backupServiceOn) return true;
+
+    return this.backupsCount < 2;
+  }
+
+  setBackupServiceOn = (serviceOn) => {
+    this.backupServiceOn = serviceOn;
+    console.log("this.backupServiceOn", this.backupServiceOn);
+  };
 
   setConnectedThirdPartyAccount = (account) => {
     this.connectedThirdPartyAccount = account;

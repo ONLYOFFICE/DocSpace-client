@@ -84,10 +84,11 @@ const PlanUpgradePreview: React.FC<PlanUpgradePreviewProps> = (props) => {
       <>
         <Text as="span">
           {daysUntilStorageExpiry === 0
-            ? t("PartialPaymentNoDate")
+            ? t("PartialPaymentNoDate", { storageUnit: t("Common:Gigabyte") })
             : t("PartialPaymentWithDate", {
                 startDate: moment().tz(window.timezone).format("LL"),
                 endDate: storageExpiryDate,
+                storageUnit: t("Common:Gigabyte"),
               })}
         </Text>{" "}
         <Text as="span">{t("PartialPaymentDescription")}</Text>

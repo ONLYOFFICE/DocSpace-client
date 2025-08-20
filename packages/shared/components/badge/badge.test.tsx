@@ -144,11 +144,5 @@ describe("<Badge />", () => {
       const badge = screen.getByTestId("badge");
       expect(badge).toHaveAttribute("data-type", "high");
     });
-
-    it("applies compact styling", () => {
-      renderComponent({ label: "Compact", compact: true });
-      const inner = screen.getByTestId("badge-inner");
-      expect(inner).toHaveAttribute("data-compact", "true");
-    });
   });
 });

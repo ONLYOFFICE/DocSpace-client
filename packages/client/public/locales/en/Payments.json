@@ -78,6 +78,7 @@
   "NoWalletTransactionDescription": "Once you start using the wallet, the payment history will be displayed here.",
   "NumberOfRoomsAccordingToTariff": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Number of admins according to your tariff plan: {{currentValue}}/{{maxValue}}",
+  "NeedMoreGoToServices": "Need more? Go to the <1>Services</1>",
   "PartialPaymentDescription": "Moving forward, the full amount will be charged once per billing cycle on your regular billing date.",
   "PartialPaymentNoDate": "Today, you're only paying for the selected amount of {{storageUnit}} for the remaining days until your billing date.",
   "PartialPaymentWithDate": "Today, you're only paying for the selected amount of {{storageUnit}} for the remaining days until your billing date ({{startDate}} to {{endDate}}).",

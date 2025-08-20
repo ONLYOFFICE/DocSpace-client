@@ -536,10 +536,12 @@ class FilesStore {
             return null;
           }
 
-          return api.files.getFileInfo(file.id).then((fileInfo) => ({
-            fileInfo,
-            targetFolderId: file.folderId,
-          }));
+          return api.files
+            .getFileInfo(file.id, file.requestToken)
+            .then((fileInfo) => ({
+              fileInfo,
+              targetFolderId: file.folderId,
+            }));
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
@@ -588,7 +590,7 @@ class FilesStore {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
-      const fileInfo = await this.getFileInfo(file.id); // this.setFile(file);
+      const fileInfo = await this.getFileInfo(file.id, file.requestToken); // this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
 
       this.checkSelection(fileInfo);

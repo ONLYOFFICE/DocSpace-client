@@ -175,30 +175,21 @@
     line-height: var(--text-input-line-height-base);
     font-size: var(--text-input-font-size-base);
     padding: var(--text-input-padding-base);
+    font-weight: var(--text-input-font-weight-base);
   }
   &[data-size="middle"] {
     width: var(--input-width-middle);
     line-height: var(--text-input-line-height-middle);
     font-size: var(--text-input-font-size-middle);
     padding: var(--text-input-padding-middle);
-  }
-  &[data-size="big"] {
-    width: var(--input-width-big);
-    line-height: var(--text-input-line-height-big);
-    font-size: var(--text-input-font-size-big);
-    padding: var(--text-input-padding-big);
-  }
-  &[data-size="huge"] {
-    width: var(--input-width-huge);
-    line-height: var(--text-input-line-height-huge);
-    font-size: var(--text-input-font-size-huge);
-    padding: var(--text-input-padding-huge);
+    font-weight: var(--text-input-font-weight-middle);
   }
   &[data-size="large"] {
     width: var(--input-width-large);
     line-height: var(--text-input-line-height-large);
     font-size: var(--text-input-font-size-large);
     padding: var(--text-input-padding-large);
+    font-weight: var(--text-input-font-weight-large);
   }
 
   &[data-scale="true"] {

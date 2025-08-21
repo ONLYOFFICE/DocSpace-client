@@ -1557,30 +1557,27 @@
   // Sizes
   --input-width-base: 173px;
   --input-width-middle: 300px;
-  --input-width-big: 350px;
-  --input-width-huge: 500px;
   --input-width-large: 550px;
 
   // Line heights
   --text-input-line-height-base: 20px;
   --text-input-line-height-middle: 20px;
-  --text-input-line-height-big: 20px;
-  --text-input-line-height-huge: 21px;
-  --text-input-line-height-large: 20px;
+  --text-input-line-height-large: 22px;
 
   // Font sizes
   --text-input-font-size-base: 13px;
-  --text-input-font-size-middle: 14px;
-  --text-input-font-size-big: 16px;
-  --text-input-font-size-huge: 18px;
+  --text-input-font-size-middle: 13px;
   --text-input-font-size-large: 16px;
 
   // Padding
-  --text-input-padding-base: 5px 6px;
+  --text-input-padding-base: 5px 8px;
   --text-input-padding-middle: 8px 12px;
-  --text-input-padding-big: 8px 16px;
-  --text-input-padding-huge: 8px 20px;
   --text-input-padding-large: 11px 12px;
+
+  // Input font weight
+  --text-input-font-weight-base: 400;
+  --text-input-font-weight-middle: 600;
+  --text-input-font-weight-large: 400;
 
   // Placeholder colors
   --text-input-placeholder-color: #{$gray};
@@ -1623,30 +1620,27 @@
   // Sizes
   --input-width-base: 173px;
   --input-width-middle: 300px;
-  --input-width-big: 350px;
-  --input-width-huge: 500px;
   --input-width-large: 550px;
 
   // Line heights
   --text-input-line-height-base: 20px;
   --text-input-line-height-middle: 20px;
-  --text-input-line-height-big: 20px;
-  --text-input-line-height-huge: 21px;
-  --text-input-line-height-large: 20px;
+  --text-input-line-height-large: 22px;
 
   // Font sizes
   --text-input-font-size-base: 13px;
-  --text-input-font-size-middle: 14px;
-  --text-input-font-size-big: 16px;
-  --text-input-font-size-huge: 18px;
+  --text-input-font-size-middle: 13px;
   --text-input-font-size-large: 16px;
 
   // Padding
-  --text-input-padding-base: 5px 6px;
+  --text-input-padding-base: 5px 8px;
   --text-input-padding-middle: 8px 12px;
-  --text-input-padding-big: 8px 16px;
-  --text-input-padding-huge: 8px 20px;
   --text-input-padding-large: 11px 12px;
+
+  // Input font weight
+  --text-input-font-weight-base: 400;
+  --text-input-font-weight-middle: 600;
+  --text-input-font-weight-large: 400;
 }
 
 .light {

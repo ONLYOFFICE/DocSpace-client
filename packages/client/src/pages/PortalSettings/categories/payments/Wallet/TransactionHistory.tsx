@@ -88,6 +88,43 @@ const filter = () => {
   return newFilter;
 };
 
+let timerId = null;
+
+const fetchTransactions = async (
+  fetchTransactionHistory: (
+    startDate: moment.Moment,
+    endDate: moment.Moment,
+    isCredit: boolean,
+    isDebit: boolean,
+    participantName?: string,
+  ) => Promise<void>,
+  setIsLoading: (loading: boolean) => void,
+  selectedType: string,
+  startDate: moment.Moment,
+  endDate: moment.Moment,
+  participantName?: string,
+) => {
+  timerId = setTimeout(() => setIsLoading(true), 500);
+
+  const { isCredit, isDebit } = getTransactionType(selectedType as string);
+
+  try {
+    await fetchTransactionHistory(
+      startDate,
+      endDate,
+      isCredit,
+      isDebit,
+      participantName,
+    );
+
+    setIsLoading(false);
+    if (timerId) clearTimeout(timerId);
+    timerId = null;
+  } catch (e) {
+    toastr.error(e as Error);
+  }
+};
+
 const TransactionHistory = (props: TransactionHistoryProps) => {
   const {
     getStartTransactionDate,
@@ -136,6 +173,22 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
   const [isFilterDialogVisible, setIsFilterDialogVisible] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
 
+  const openFilterDialog = () => {
+    setIsFilterDialogVisible(true);
+  };
+
+  const closeFilterDialog = () => {
+    setIsFilterDialogVisible(false);
+  };
+
+  const onCloseContactSelector = () => {
+    setIsSelectorVisible(false);
+  };
+
+  const onSelectorAddButtonClick = () => {
+    setIsSelectorVisible(true);
+  };
+
   const onSelectType = async (option: TOption) => {
     setSelectedType(option);
     setHasAppliedDateFilter(true);
@@ -145,17 +198,14 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(option.key as string);
-
-    try {
-      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      option.key as string,
+      startDate,
+      endDate,
+      selectedContact?.id,
+    );
   };
 
   const onStartDateChange = async (
@@ -173,19 +223,14 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
       selectedType.key as string,
+      date,
+      endDate,
+      selectedContact?.id,
     );
-
-    try {
-      await fetchTransactionHistory(date, endDate, isCredit, isDebit);
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
   };
 
   const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
@@ -201,24 +246,68 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
       return;
     }
 
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
       selectedType.key as string,
+      startDate,
+      date,
+      selectedContact?.id,
     );
+  };
 
-    try {
-      await fetchTransactionHistory(startDate, date, isCredit, isDebit);
+  const onSubmitContactSelector = async (contacts: TSelectorItem[]) => {
+    setIsSelectorVisible(false);
+    setSelectedContact(contacts[0] as unknown as TUser);
 
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
+    if (isFilterDialogVisible) {
+      setIsChanged(true);
+      return;
     }
+
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      selectedType.key as string,
+      startDate,
+      endDate,
+      contacts[0].id as string,
+    );
+  };
+
+  const onCloseSelectedContact = async () => {
+    setSelectedContact(null);
+
+    if (isFilterDialogVisible) {
+      setIsChanged(true);
+      return;
+    }
+
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      selectedType.key as string,
+      startDate,
+      endDate,
+    );
+  };
+
+  const onApplyFilter = async () => {
+    setIsFilterDialogVisible(false);
+    setIsChanged(false);
+
+    await fetchTransactions(
+      fetchTransactionHistory,
+      setIsLoading,
+      selectedType.key as string,
+      startDate,
+      endDate,
+      selectedContact?.id,
+    );
   };
 
   const getReport = async () => {
-    const timerId = setTimeout(() => setIsFormationHistory(true), 200);
+    const reportTimerId = setTimeout(() => setIsFormationHistory(true), 200);
 
     const isCredit = selectedType.key !== "debit";
     const isDebit = selectedType.key !== "credit";
@@ -242,87 +331,7 @@ const TransactionHistory = (props: TransactionHistoryProps) => {
     }
 
     setIsFormationHistory(false);
-    clearTimeout(timerId);
-  };
-
-  const openFilterDialog = () => {
-    setIsFilterDialogVisible(true);
-  };
-
-  const closeFilterDialog = () => {
-    setIsFilterDialogVisible(false);
-  };
-
-  const onApplyFilter = async () => {
-    setIsFilterDialogVisible(false);
-    setIsChanged(false);
-
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
-      selectedType.key as string,
-    );
-
-    try {
-      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
-
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
-  };
-  const onSubmitContactSelector = async (contacts: TSelectorItem[]) => {
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
-      selectedType.key as string,
-    );
-
-    setIsSelectorVisible(false);
-    setSelectedContact(contacts[0] as unknown as TUser);
-
-    try {
-      await fetchTransactionHistory(
-        startDate,
-        endDate,
-        isCredit,
-        isDebit,
-        contacts[0].id,
-      );
-
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
-  };
-
-  const onSelectorAddButtonClick = () => {
-    setIsSelectorVisible(true);
-  };
-
-  const onCloseSelectedContact = async () => {
-    setSelectedContact(null);
-
-    const timerId = setTimeout(() => setIsLoading(true), 500);
-
-    const { isCredit, isDebit } = getTransactionType(
-      selectedType.key as string,
-    );
-
-    try {
-      await fetchTransactionHistory(startDate, endDate, isCredit, isDebit);
-
-      setIsLoading(false);
-      clearTimeout(timerId);
-    } catch (e) {
-      toastr.error(e as Error);
-    }
-  };
-
-  const onCloseContactSelector = () => {
-    setIsSelectorVisible(false);
+    clearTimeout(reportTimerId);
   };
 
   const datesComponent = (

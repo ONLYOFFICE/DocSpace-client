@@ -58,16 +58,10 @@ describe("<SearchInput />", () => {
       InputSize.middle,
     );
 
-    rerender(<SearchInput {...baseProps} size={InputSize.big} />);
+    rerender(<SearchInput {...baseProps} size={InputSize.large} />);
     expect(screen.getByTestId("text-input")).toHaveAttribute(
       "data-size",
-      InputSize.big,
-    );
-
-    rerender(<SearchInput {...baseProps} size={InputSize.huge} />);
-    expect(screen.getByTestId("text-input")).toHaveAttribute(
-      "data-size",
-      InputSize.huge,
+      InputSize.large,
     );
   });
 

@@ -39,7 +39,7 @@ import SearchIconReactSvg from "PUBLIC_DIR/images/search.react.svg";
 import { useDebounce } from "../../hooks/useDebounce";
 
 import { InputBlock } from "../input-block";
-import { InputSize, InputType } from "../text-input";
+import { InputType } from "../text-input";
 
 import styles from "./SearchInput.module.scss";
 import { SearchInputProps } from "./SearchInput.types";
@@ -115,30 +115,6 @@ const SearchInput = ({
     }
   }, [value]);
 
-  const clearButtonSize = React.useMemo(() => {
-    let buttonSize = 16;
-
-    switch (size) {
-      case InputSize.base:
-        buttonSize = !!inputValue || showClearButton ? 12 : 16;
-        break;
-      case InputSize.middle:
-        buttonSize = !!inputValue || showClearButton ? 16 : 18;
-        break;
-      case InputSize.big:
-        buttonSize = !!inputValue || showClearButton ? 18 : 22;
-        break;
-      case InputSize.huge:
-        buttonSize = !!inputValue || showClearButton ? 22 : 24;
-        break;
-
-      default:
-        break;
-    }
-
-    return buttonSize;
-  }, [size, inputValue, showClearButton]);
-
   const getIconNode = () => {
     const showCrossIcon = !!inputValue || showClearButton;
 
@@ -183,7 +159,7 @@ const SearchInput = ({
           !!inputValue || showClearButton ? "search-cross" : "search-loupe"
         }
         isIconFill
-        iconSize={clearButtonSize}
+        iconSize={16}
         onIconClick={
           !!inputValue || showClearButton ? handleClearSearch : undefined
         }

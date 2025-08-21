@@ -35,8 +35,6 @@ import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import LockedIconReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import LockedIconReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
-import { useTheme } from "styled-components";
-
 import { classNames, IconSizeType, isTablet, isDesktop } from "../../utils";
 import { RoomsType, ShareAccessRights } from "../../enums";
 import { Tooltip } from "../tooltip";
@@ -66,8 +64,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     onClickLock,
   } = props;
 
-  const theme = useTheme();
-
   const { id, shared, security } = item;
 
   const isTile = viewAs === "tile";
@@ -75,16 +71,10 @@ export const QuickButtons = (props: QuickButtonsProps) => {
 
   const lockedBy = "lockedBy" in item ? (item.lockedBy as string) : undefined;
   const locked = "locked" in item ? item.locked : undefined;
-  const colorLock = locked
-    ? theme.filesQuickButtons.sharedColor
-    : theme.filesQuickButtons.color;
   const iconLock = desktopView ? LockedIconReact12Svg : LockedIconReactSvg;
   const canLock = security && "Lock" in security ? security.Lock : undefined;
 
   const showShareIcon = !isNil(item.shareSettings?.PrimaryExternalLink);
-
-  const colorShare =
-    shared || showShareIcon ? "accent" : theme.filesQuickButtons.color;
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
 
@@ -179,7 +169,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge create-room icons-group"
               size={IconSizeType.medium}
               onClick={onCreateRoom}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CreateRoom")}
@@ -191,7 +180,6 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               className="badge copy-link icons-group"
               size={sizeQuickButton}
               onClick={onCopyPrimaryLink}
-              color={colorLock}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}
@@ -206,7 +194,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               })}
               size={sizeQuickButton}
               onClick={onClickShare}
-              color={colorShare}
+              color={shared || showShareIcon ? "accent" : undefined}
               isDisabled={isDisabled}
               hoverColor="accent"
               title={t("Common:CopySharedLink")}
@@ -223,7 +211,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
                 data-id={id}
                 data-locked={!!locked}
                 onClick={onIconLockClick}
-                color={theme.filesQuickButtons.sharedColor}
+                color="--quick-buttons-shared-color"
                 hoverColor="accent"
                 title={t("Common:UnblockFile")}
                 data-tooltip-id={`lockTooltip${item.id}`}

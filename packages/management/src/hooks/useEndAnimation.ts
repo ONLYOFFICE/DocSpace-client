@@ -24,24 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { css } from "styled-components";
-import { getCorrectTextAlign } from "./rtlUtils";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { AnimationEvents } from "@docspace/shared/hooks/useAnimation";
 
-export const commonTextStyles = css<{
-  textAlign?: string;
-  colorProp?: string;
-  truncate?: boolean;
-}>`
-  font-family: ${(props) => props.theme.fontFamily};
-  text-align: ${(props) =>
-    getCorrectTextAlign(props.textAlign || "", props.theme.interfaceDirection)};
-  color: ${(props) =>
-    props.colorProp ? props.colorProp : props.theme.text.color};
-  ${(props) =>
-    props.truncate &&
-    css`
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    `}
-`;
+const useEndAnimation = () => {
+  const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const animationStartedAction = () => {
+      setIsLoading(true);
+    };
+
+    window.addEventListener(
+      AnimationEvents.ANIMATION_STARTED,
+      animationStartedAction,
+    );
+
+    return () => {
+      window.removeEventListener(
+        AnimationEvents.ANIMATION_STARTED,
+        animationStartedAction,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+    setIsLoading(false);
+  }, [pathname]);
+
+  return isLoading;
+};
+
+export { useEndAnimation };

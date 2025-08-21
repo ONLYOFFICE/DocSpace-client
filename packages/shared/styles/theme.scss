@@ -14,6 +14,7 @@
   --app-loader-background-color: #{$white};
 
   --files-article-body-download-app-list-text-color: #{$gray};
+  --files-article-body-download-app-list-mac-hover-color: #{$dark-black};
   --files-article-body-dev-tools-background-color: var(
     --accent-main,
     #{$light-blue-main}
@@ -366,6 +367,7 @@
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
+  --files-article-body-download-app-list-mac-hover-color: #{$white};
   --files-article-body-dev-tools-background-color: #{$dark-gray-dark};
   --files-article-body-dev-tools-background-opacity: 1;
   --files-article-body-dev-tools-color: #{$black};
@@ -2815,4 +2817,12 @@
   --share-selector-not-active-color: #{$dark-gray-dark};
 
   --share-bg-pressed-color: #{$dark-gray-light};
+}
+
+.light {
+  --quick-buttons-shared-color: #{$light-icons};
+}
+
+.dark {
+  --quick-buttons-shared-color: #{$white};
 }

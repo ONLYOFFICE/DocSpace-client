@@ -69,6 +69,24 @@ const config: Config = {
   //   "clover"
   // ],
 
+  reporters: [
+    "default",
+    [
+      "jest-html-reporter",
+      {
+        pageTitle: "Shared unit tests report",
+        outputPath: "./jest/reports/tests-results.html",
+        includeFailureMsg: true,
+        includeConsoleLog: false,
+        includeStackTrace: false,
+        inlineSource: true,
+        useCssFile: false,
+        sort: "status",
+        append: false,
+      },
+    ],
+  ],
+
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
 
@@ -121,6 +139,7 @@ const config: Config = {
     "react-i18next": "<rootDir>/__mocks__/reacti18nextMock.tsx",
     "PUBLIC_DIR/": "<rootDir>/__mocks__/fileMock.js",
     "hex-rgb": "<rootDir>/__mocks__/hex-rgb.js",
+    "react-svg": "<rootDir>/__mocks__/reactSvgMock.tsx",
   },
 
   testTimeout: 70000,

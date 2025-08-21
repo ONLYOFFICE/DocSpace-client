@@ -3,7 +3,7 @@
   "content": "File downloading is restricted in this room.",
   "content_en_sha1_hash": "3d65b5585fbbc952fc037fb2315d41e169589507",
   "created_at": "2025-05-19T21:30:55.671Z",
-  "updated_at": "2025-08-11T18:11:59.315Z",
+  "updated_at": "2025-08-21T11:22:39.922Z",
   "comment": {
     "text": "File downloading is restricted in this room. This translation key displays an error message when a user tries to download a file that has not been explicitly allowed. It appears in UI elements related to file sharing or management.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/store/FilesActionsStore.js",
       "line_number": 2743,
-      "context": "if (correctDevice) return currPluginItem.onClick(item);\n }\n }\n \n if (!item.security.Download) {\n toastr.error(t(\"Files:FileDownloadingIsRestricted\"));\n return;\n }\n \n return window.open(viewUrl, \"_self\");\n }",
+      "context": "return;\n }\n \n if (!item.security.Download) {\n toastr.error(t(\"Files:FileDownloadingIsRestricted\"));\n return;\n }\n \n return window.open(viewUrl, \"_self\");\n }",
       "module": "/packages/client"
     }
   ],

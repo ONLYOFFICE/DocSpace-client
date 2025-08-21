@@ -3,7 +3,7 @@
   "content": "Branding",
   "content_en_sha1_hash": "d17dc3843de8e54fc084f0b952690209018ca128",
   "created_at": "2025-05-26T07:15:40.963Z",
-  "updated_at": "2025-08-12T19:46:26.075Z",
+  "updated_at": "2025-08-21T11:22:39.862Z",
   "comment": {
     "text": "The \"Branding\" translation key is used to display the name of a portal setting category in the UI. It is shown on a settings page and appears as part of the data structure in the /packages/client/src/pages/PortalSettings/categories/common/index.js file. Translators should provide a phrase that describes this concept, commonly found in branding or marketing contexts.",
     "is_auto": true,
@@ -30,8 +30,8 @@
     },
     {
       "file_path": "/packages/management/src/app/settings/layout.tsx",
-      "line_number": 31,
-      "context": "const standalone = settings?.standalone;\n \n const data = [\n {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: children,\n },\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),",
+      "line_number": 59,
+      "context": "const standalone = settings?.standalone;\n \n const data = [\n {\n id: \"branding\",\n name: t(\"Common:Branding\"),\n content: <LoaderWrapper isLoading={isLoading}>{children}</LoaderWrapper>,\n },\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),",
       "module": "/packages/management"
     }
   ],

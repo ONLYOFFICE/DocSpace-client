@@ -28,7 +28,6 @@ import React, { useRef, useState, useEffect, type JSX } from "react";
 
 import { CSSTransition } from "react-transition-group";
 import { ReactSVG } from "react-svg";
-import { useTheme } from "styled-components";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
@@ -49,6 +48,8 @@ import {
 } from "../ContextMenu.types";
 import { Badge } from "../../badge";
 import { globalColors } from "../../../themes";
+import { useTheme } from "../../../hooks/useTheme";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 import styles from "../ContextMenu.module.scss";
 
@@ -95,7 +96,8 @@ const SubMenu = (props: SubMenuProps) => {
 
   const subMenuRef = useRef<HTMLUListElement>(null);
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
+  const { isRTL } = useInterfaceDirection();
 
   const onItemMouseEnter = (e: React.MouseEvent, item: ContextMenuType) => {
     if (isMobileDevice) {
@@ -159,8 +161,6 @@ const SubMenu = (props: SubMenuProps) => {
       parentItem?.children[0] as HTMLElement,
     );
 
-    const isRtl = theme.interfaceDirection === "rtl";
-
     if (!isMobile() && options) {
       const optionsWidth: number[] = [];
       Array.from(options).forEach((option) =>
@@ -219,7 +219,7 @@ const SubMenu = (props: SubMenuProps) => {
         viewport.width - containerOffsetLeft - itemOuterWidth;
       const freeSpaceLeft = containerOffsetLeft;
 
-      if (isRtl) {
+      if (isRTL) {
         if (
           subListWidth < containerOffsetLeft ||
           (!root && freeSpaceLeft > freeSpaceRight)
@@ -253,7 +253,7 @@ const SubMenu = (props: SubMenuProps) => {
         containerOffsetLeft + itemOuterWidth + subListWidth >
         viewport.width - DomHelpers.calculateScrollbarWidth();
 
-      if (!isRtl) {
+      if (!isRTL) {
         if (notEnoughWidthRight && freeSpaceLeft > freeSpaceRight) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;
 
@@ -419,7 +419,7 @@ const SubMenu = (props: SubMenuProps) => {
             className={`${subMenuIconClassName} p-submenu-badge`}
             backgroundColor={
               item.isPaidBadge
-                ? theme.isBase
+                ? isBase
                   ? globalColors.favoritesStatus
                   : globalColors.favoriteStatusDark
                 : globalColors.lightBlueMain

@@ -51,11 +51,14 @@ export const WithBadge = Template.bind({});
 WithBadge.args = {
   label: "Notifications",
   icon: SettingsReactSvgUrl,
+  isBeta: true,
 };
 
 export const WithToggle = Template.bind({});
 WithToggle.args = {
   label: "Toggle Feature",
+  withToggle: true,
+  checked: false,
 };
 
 export const Submenu = Template.bind({});
@@ -80,12 +83,6 @@ Modern.args = {
   label: "Modern Style",
   isModern: true,
   icon: SettingsReactSvgUrl,
-};
-
-export const WithMinWidth = Template.bind({});
-WithMinWidth.args = {
-  label: "Custom Width",
-  minWidth: "200px",
 };
 
 export const WithTextOverflow = Template.bind({});

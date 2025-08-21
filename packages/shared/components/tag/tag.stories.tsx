@@ -59,18 +59,6 @@ export const Default: Story = {
   },
 };
 
-export const WithDropDown: Story = {
-  args: {
-    tag: "script",
-    label: "Script",
-    isNewTag: false,
-    isDisabled: false,
-    onDelete: () => {},
-    onClick: () => {},
-    advancedOptions: ["Option 1", "Option 2"],
-  },
-};
-
 export const NewTag: Story = {
   args: {
     tag: "script",

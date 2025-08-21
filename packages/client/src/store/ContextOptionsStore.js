@@ -2054,7 +2054,7 @@ class ContextOptionsStore {
         label: t("OpenLocation"),
         icon: FolderLocationReactSvgUrl,
         onClick: () => this.onOpenLocation(item),
-        disabled: false,
+        disabled: !!item.requestToken,
       },
       {
         id: "option_mark-read",

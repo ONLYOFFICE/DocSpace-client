@@ -61,6 +61,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
       directionY="both"
       manualWidth="auto"
       scaled={false}
+      noSelect={false}
       options={options}
       scaledOptions={false}
       className={styles.internalCombobox}
@@ -69,6 +70,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
       onSelect={onSelect}
       showDisabledItems
       isDisabled={isLoaded || isExpiredLink}
+      useImageIcon
     />
   );
 };

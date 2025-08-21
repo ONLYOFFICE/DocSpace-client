@@ -26,6 +26,9 @@
 
 import { type FC } from "react";
 import { ReactSVG } from "react-svg";
+
+import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
+
 import { type TOption } from "../../combobox";
 
 import styles from "../Share.module.scss";
@@ -36,8 +39,15 @@ export interface IconDisplayProps {
 
 export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
   return (
-    <div className={styles.icon} title={option.title || option.label}>
-      <ReactSVG src={option.icon as string} />
+    <div className={styles.iconContainer} title={option.title || option.label}>
+      <div className={styles.wrapper}>
+        <img
+          src={EmptyIcon}
+          className={styles.iconImg}
+          alt={option.title || option.label}
+        />
+        <ReactSVG className={styles.icon} src={option.icon as string} />
+      </div>
     </div>
   );
 };

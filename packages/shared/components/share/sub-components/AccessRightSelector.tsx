@@ -78,6 +78,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
         modernView
         topSpace={16}
         type="onlyIcon"
+        noSelect={false}
         directionY="both"
         usePortalBackdrop
         manualWidth="300px"
@@ -100,6 +101,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
       modernView
       scaled={false}
       type="onlyIcon"
+      noSelect={false}
       directionY="both"
       showDisabledItems
       manualWidth="auto"
@@ -110,6 +112,7 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
       isDisabled={isExpiredLink || isLoaded}
       selectedOption={selectedAccessOption ?? ({} as TOption)}
       onSelect={(item) => changeAccessOption(item, link)}
+      useImageIcon
     />
   );
 };

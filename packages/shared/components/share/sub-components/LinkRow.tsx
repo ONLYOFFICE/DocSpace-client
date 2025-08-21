@@ -140,6 +140,7 @@ const LinkRow = ({
     const isExpiredLink = link.sharedTo.isExpired;
     const isLocked = !!link.sharedTo.password;
     const linkTitle = link.sharedTo.title;
+    const shareLink = link.sharedTo.shareLink;
 
     const isLoaded = loadingLinks.includes(link.sharedTo.id);
     const canEditInternal = link.canEditInternal;
@@ -156,6 +157,7 @@ const LinkRow = ({
             t={t}
             isLoaded={isLoaded}
             linkTitle={linkTitle}
+            shareLink={shareLink}
             isExpiredLink={isExpiredLink}
             disabledCopy={isArchiveFolder}
             onCopyLink={() => onCopyLink(link)}

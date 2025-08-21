@@ -27,6 +27,15 @@
 @use "../../styles/mixins";
 @use "../../styles/variables";
 
+@mixin icon {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  user-select: text;
+  pointer-events: none;
+}
+
 .linkRow.linkRow {
   :global(.combo-button) {
     padding-inline: 8px;
@@ -34,7 +43,9 @@
     --icon-color: var(--share-selector-default-color);
 
     @media (hover: hover) {
-      --icon-color: var(--share-selector-hover-color);
+      &:hover {
+        --icon-color: var(--share-selector-hover-color);
+      }
     }
 
     &[aria-expanded="true"] {
@@ -254,15 +265,42 @@
     cursor: pointer;
   }
 
+  .linkActionsCopyIconContainer {
+    aspect-ratio: 1;
+    width: 12px;
+    height: 12px;
+
+    position: relative;
+
+    .linkActionsCopyImgIcon {
+      @include icon;
+
+      width: 12px;
+      height: 12px;
+    }
+
+    .linkActionsCopyIcon {
+      cursor: pointer;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+  }
+
   .linkActionsCopyIcon {
     width: 12px;
     height: 12px;
 
     flex-shrink: 0;
+
+    user-select: all;
   }
 }
 
-.icon {
+.iconContainer {
+  width: 16px;
+  height: 16px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,9 +311,21 @@
     height: 16px;
   }
 
+  .wrapper {
+    position: relative;
+  }
+
+  .iconImg {
+    @include icon;
+  }
+
+  .icon {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
   svg {
-    width: 16px;
-    height: 16px;
     path {
       fill: var(--share-selector-not-active-color);
     }

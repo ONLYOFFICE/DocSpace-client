@@ -137,6 +137,7 @@ export interface LinkTitleProps {
   linkTitle: string;
   isExpiredLink: boolean;
   onCopyLink: VoidFunction;
+  shareLink: string;
 
   isLoaded?: boolean;
   disabledCopy?: boolean;

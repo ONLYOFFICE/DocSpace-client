@@ -28,6 +28,7 @@ import React, { FC } from "react";
 import classNames from "classnames";
 
 import CopyIcon from "PUBLIC_DIR/images/icons/12/copy.svg?url";
+import EmptyIcon from "PUBLIC_DIR/images/empty.svg?url";
 
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
@@ -41,6 +42,7 @@ const LinkTitle: FC<LinkTitleProps> = ({
   linkTitle,
   disabledCopy,
   isExpiredLink,
+  shareLink,
   onCopyLink,
 }) => {
   return (
@@ -59,13 +61,20 @@ const LinkTitle: FC<LinkTitleProps> = ({
         {linkTitle}
       </Text>
       {!disabledCopy ? (
-        <IconButton
-          title={t("Common:CopySharedLink")}
-          className={styles.linkActionsCopyIcon}
-          size={12}
-          iconName={CopyIcon}
-          isDisabled={isExpiredLink || isLoaded}
-        />
+        <div className={styles.linkActionsCopyIconContainer}>
+          <img
+            className={styles.linkActionsCopyImgIcon}
+            src={EmptyIcon}
+            alt={shareLink}
+          />
+          <IconButton
+            title={t("Common:CopySharedLink")}
+            className={styles.linkActionsCopyIcon}
+            size={12}
+            iconName={CopyIcon}
+            isDisabled={isExpiredLink || isLoaded}
+          />
+        </div>
       ) : null}
     </div>
   );

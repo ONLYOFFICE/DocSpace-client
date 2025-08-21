@@ -74,21 +74,22 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
   if (isRoomsLink || isFolder) {
     return (
       <AccessRightSelect
-        selectedOption={roomSelectedOptions ?? ({} as TOption)}
-        onSelect={(item) => changeAccessOption(item, link)}
-        accessOptions={roomAccessOptions ?? []}
+        fillIcon
         modernView
-        directionY="both"
+        topSpace={16}
         type="onlyIcon"
+        directionY="both"
+        usePortalBackdrop
         manualWidth="300px"
-        isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+        isAside={isMobileViewLink}
         withBlur={isMobileViewLink}
         isMobileView={isMobileViewLink}
         fixedDirection={isMobileViewLink}
-        isAside={isMobileViewLink}
-        topSpace={16}
-        usePortalBackdrop
         shouldShowBackdrop={isMobileViewLink}
+        accessOptions={roomAccessOptions ?? []}
+        onSelect={(item) => changeAccessOption(item, link)}
+        selectedOption={roomSelectedOptions ?? ({} as TOption)}
+        isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
       />
     );
   }

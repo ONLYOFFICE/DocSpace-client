@@ -154,7 +154,6 @@ export const AccessRightSelectPure = ({
       selectedOption={
         {
           icon: currentItem?.icon,
-          default: true,
           key: currentItem?.key,
           label: type === "onlyIcon" ? "" : currentItem?.label,
           description: type === "onlyIcon" ? "" : currentItem?.description,

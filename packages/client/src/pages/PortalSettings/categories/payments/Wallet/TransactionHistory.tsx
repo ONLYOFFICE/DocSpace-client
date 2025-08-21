@@ -41,7 +41,6 @@ import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   checkTransactionHistoryReport,
-  getTransactionHistoryReport,
   startTransactionHistoryReport,
 } from "@docspace/shared/api/portal";
 import {

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { createGlobalStyle } from "styled-components";
+
 import OperationContainer from "./index";
 import { OperationContainerProps } from "./OperationContainer.types";
 
@@ -52,9 +52,6 @@ jest.mock("../portal-logo/PortalLogo", () => {
   return MockPortalLogo;
 });
 
-// Setup test environment
-const GlobalStyle = createGlobalStyle``;
-
 describe("OperationContainer", () => {
   const defaultProps: OperationContainerProps = {
     authorized: false,
@@ -62,33 +59,24 @@ describe("OperationContainer", () => {
     description: "Test Description",
   };
 
-  const renderComponent = (props: OperationContainerProps = defaultProps) => {
-    return render(
-      <>
-        <GlobalStyle />
-        <OperationContainer {...props} />
-      </>,
-    );
-  };
-
   it("renders title and description", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByText("Test Description")).toBeInTheDocument();
   });
 
   it("renders OperationContainer", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByTestId("operation-container")).toBeInTheDocument();
   });
 
   it("renders portal logo", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByTestId("portal-logo")).toBeInTheDocument();
   });
 
   it("renders operation logo", () => {
-    renderComponent();
+    render(<OperationContainer {...defaultProps} />);
     expect(screen.getByTestId("operation-logo")).toBeInTheDocument();
   });
 
@@ -101,7 +89,7 @@ describe("OperationContainer", () => {
       value: { replace: mockReplace },
     });
     const testUrl = "https://test.com";
-    renderComponent({ ...defaultProps, url: testUrl, authorized: true });
+    render(<OperationContainer {...defaultProps} url={testUrl} authorized />);
     expect(mockReplace).toHaveBeenCalledWith(testUrl);
     // Restore original location
     Object.defineProperty(window, "location", {
@@ -121,7 +109,9 @@ describe("OperationContainer", () => {
     });
 
     const testUrl = "https://test.com";
-    renderComponent({ ...defaultProps, url: testUrl, authorized: false });
+    render(
+      <OperationContainer {...defaultProps} url={testUrl} authorized={false} />,
+    );
 
     expect(mockReplace).not.toHaveBeenCalled();
 

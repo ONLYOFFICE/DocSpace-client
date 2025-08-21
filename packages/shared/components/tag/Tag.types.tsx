@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TDirectionY } from "../../types";
+
 export type TagProps = {
   /** Accepts the tag id */
   tag: string;
@@ -63,6 +65,18 @@ export type TagProps = {
   providerType?: number;
   /** Data test id for the tag */
   dataTestId?: string;
+  /** Mouse enter event handler */
   onMouseEnter?: () => void;
+  /** Mouse leave event handler */
   onMouseLeave?: () => void;
+  /** Controls whether the dropdown uses portal mode or not */
+  isDefaultMode?: boolean;
+  /** Sets the opening direction relative to the parent */
+  directionY?: TDirectionY;
+  /** Disables check position. Used to set the direction explicitly */
+  fixedDirection?: boolean;
+  /** Required for specifying the exact distance from the parent component */
+  manualY?: string;
+  /** Required for specifying the exact distance from the parent component */
+  manualX?: string;
 };

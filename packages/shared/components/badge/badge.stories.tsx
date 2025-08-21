@@ -80,10 +80,6 @@ const meta = {
       description: "Maximum width of the badge",
       control: "text",
     },
-    compact: {
-      description: "Compact display mode",
-      control: "boolean",
-    },
     noHover: {
       description: "Disable hover effects",
       control: "boolean",
@@ -131,7 +127,8 @@ export const TextBadge: Story = {
 export const InteractiveBadge: Story = {
   args: {
     label: "Click me",
-    onClick: () => {},
+    // eslint-disable-next-line no-alert
+    onClick: () => alert("click"),
   },
   parameters: {
     docs: {
@@ -153,21 +150,6 @@ export const HighBadge: Story = {
     docs: {
       description: {
         story: "High priority badge with emphasis styling.",
-      },
-    },
-  },
-};
-
-export const CompactBadge: Story = {
-  args: {
-    label: "99+",
-    compact: true,
-    maxWidth: "40px",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Compact badge with limited width, useful for number overflow.",
       },
     },
   },
